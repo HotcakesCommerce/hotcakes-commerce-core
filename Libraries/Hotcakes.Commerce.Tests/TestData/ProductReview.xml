@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FakeReview>
+  <ProductReview>
+    <TotalReviewCount>1</TotalReviewCount>
+    <AddReview>
+      <Approved>true</Approved>
+      <UserID>Host</UserID>
+      <Karma>4</Karma>
+      <Rating>4</Rating>
+      <Description>test-review</Description>
+    </AddReview>
+    <EditReview>
+      <Approved>true</Approved>
+      <Karma>4</Karma>
+      <Rating>4</Rating>
+      <Description>test-review-edit</Description>
+    </EditReview>
+    <FindByProductIdPagedCount>1</FindByProductIdPagedCount>
+    <FindNotApprovedCount>2</FindNotApprovedCount>
+  </ProductReview>
+</FakeReview>

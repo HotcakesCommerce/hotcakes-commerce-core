@@ -1,0 +1,16 @@
+﻿/* Remove EventLog table*/
+IF  EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'{databaseOwner}[DF_{objectQualifier}hcc_EventLog_Severity]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_EventLog] DROP CONSTRAINT [DF_{objectQualifier}hcc_EventLog_Severity]
+END
+GO
+
+IF  EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'{databaseOwner}[DF_{objectQualifier}hcc_EventLog_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_EventLog] DROP CONSTRAINT [DF_{objectQualifier}hcc_EventLog_StoreId]
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_EventLog]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_EventLog]
+GO

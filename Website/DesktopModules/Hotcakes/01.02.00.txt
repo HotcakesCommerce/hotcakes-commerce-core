@@ -1,0 +1,3 @@
+﻿DesktopModules/Hotcakes/Core/Admin/configuration/Taxes_Delete.aspx
+DesktopModules/Hotcakes/Core/Admin/configuration/Taxes_Edit.aspx
+DesktopModules/Hotcakes/Core/Admin/Parts/TaxSchedules/Edit.ascx

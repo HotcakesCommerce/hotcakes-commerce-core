@@ -1,0 +1,4 @@
+bvin,StoreId,ParentID,SortOrder,ImageURL,BannerImageURL,SourceType,DisplaySortOrder,CustomPageURL,CustomPageNewWindow,ShowInTopMenu,Hidden,TemplateName,PostContentColumnId,PreContentColumnId,LastUpdated,RewriteUrl,ShowTitle
+"dc5720b5-8e59-40a6-aec7-257365a36951",1,,2,"","",0,1,"",0,1,0,"DetailedList","","",07/23/2015 14:19:26,"more-sample",1
+"ebc33bd6-0ec3-42f1-afef-e77ed66013aa",1,,1,"","",0,1,"",0,1,0,"Grid","","",07/23/2015 14:19:26,"sample-products",1
+"25b46944-531b-44c2-bf97-fbfc2814319d",1,,3,"","",0,1,"",0,1,0,"BulkQuantityList","","",07/23/2015 14:19:26,"demo-category",1

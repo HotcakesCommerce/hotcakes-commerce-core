@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CCE92CF0-6CAE-4C74-96BA-5757D1750633}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hotcakes.Commerce.Dnn</RootNamespace>
+    <AssemblyName>Hotcakes.Commerce.Dnn</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>bin\Release\Hotcakes.Commerce.Dnn.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BrandonHaynes.ModelAdapter.EntityFramework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Misc\BrandonHaynes.ModelAdapter.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke">
+      <HintPath>..\..\References\Dnn\DotNetNuke.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.HttpModules">
+      <HintPath>..\..\References\Dnn\DotNetNuke.HttpModules.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Instrumentation">
+      <HintPath>..\..\References\Dnn\DotNetNuke.Instrumentation.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Web">
+      <HintPath>..\..\References\Dnn\DotNetNuke.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Web.Client">
+      <HintPath>..\..\References\Dnn\DotNetNuke.Web.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.WebUtility, Version=4.2.1.783, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Dnn\DotNetNuke.WebUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Hotcakes.Common.Dnn">
+      <HintPath>..\..\References\Hcc\Hotcakes.Common.Dnn.dll</HintPath>
+    </Reference>
+    <Reference Include="Hotcakes.Licensing.Common">
+      <HintPath>..\..\References\Hcc\Hotcakes.Licensing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MiniProfiler">
+      <HintPath>..\..\packages\MiniProfiler.3.1.1.140\lib\net40\MiniProfiler.dll</HintPath>
+    </Reference>
+    <Reference Include="MiniProfiler.EntityFramework6">
+      <HintPath>..\..\packages\MiniProfiler.EF6.3.0.11\lib\net40\MiniProfiler.EntityFramework6.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpZipLib">
+      <HintPath>..\..\References\Dnn\SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Dnn\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.1.1\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Dnn\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Data\DnnUserEx.cs" />
+    <Compile Include="DnnSearchProvider.cs" />
+    <Compile Include="DnnStoreSettingsProvider.cs" />
+    <Compile Include="Data\DnnDbContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DnnDbContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DnnDbContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DnnDbContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DnnDbContextEx.cs" />
+    <Compile Include="Data\DnnDbContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DnnDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DnnProfile.cs">
+      <DependentUpon>DnnDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DnnUser.cs">
+      <DependentUpon>DnnDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DnnAccountService.cs" />
+    <Compile Include="DnnAffiliateRepository.cs" />
+    <Compile Include="DnnCatalogService.cs" />
+    <Compile Include="DnnCategoryRepository.cs" />
+    <Compile Include="DnnConfigurationManager.cs" />
+    <Compile Include="DnnContactService.cs" />
+    <Compile Include="DnnCustomerAccountRepository.cs" />
+    <Compile Include="DnnEventLog.cs" />
+    <Compile Include="DnnFactory.cs" />
+    <Compile Include="DnnGlobal.cs" />
+    <Compile Include="DnnHostSettingsProvider.cs" />
+    <Compile Include="DnnLocalizationHelper.cs" />
+    <Compile Include="DnnMembershipServices.cs" />
+    <Compile Include="DnnProductRepository.cs" />
+    <Compile Include="DnnProductReviewRepository.cs" />
+    <Compile Include="DnnModuleSettingsProvider.cs" />
+    <Compile Include="DnnUserController.cs" />
+    <Compile Include="Marketing\DnnPromotionFactory.cs" />
+    <Compile Include="Marketing\Qualifications\UserIsInRole.cs" />
+    <Compile Include="Mvc\HccWebViewPage.cs" />
+    <Compile Include="Mvc\HccMvcForm.cs" />
+    <Compile Include="Mvc\HccRazorViewEngine.cs" />
+    <Compile Include="Mvc\MvcRenderingEngine.cs" />
+    <Compile Include="Providers\HccUrlRoutingModule.cs" />
+    <Compile Include="Mvc\DnnHccFormRenderer.cs" />
+    <Compile Include="Mvc\DnnHccUrlResolver.cs" />
+    <Compile Include="Service\Application.cs" />
+    <Compile Include="Service\Context.cs" />
+    <Compile Include="Service\ContextModule.cs" />
+    <Compile Include="Social\SocialServiceBase.cs" />
+    <Compile Include="Social\SocialServiceImpl.cs" />
+    <Compile Include="Social\StubSocialItem.cs" />
+    <Compile Include="Utils\DnnPathHelper.cs" />
+    <Compile Include="Mvc\DnnUrlInfo.cs" />
+    <Compile Include="Providers\HccFriendlyUrlProvider.cs" />
+    <Compile Include="Providers\ProductsSitemapProvider.cs" />
+    <Compile Include="Providers\RewriterUtils.cs" />
+    <Compile Include="Providers\ServiceRouteMapper.cs" />
+    <Compile Include="Resources\HotcakesResources.Designer.cs">
+      <DependentUpon>HotcakesResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Utils\MvcUtils.cs" />
+    <Compile Include="Utils\PageUtils.cs" />
+    <Compile Include="Utils\ZipUtils.cs" />
+    <Compile Include="Utils\CultureSwitch.cs" />
+    <Compile Include="Web\HotcakesModuleBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\HotcakesSettingsBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\HotcakesSkinObjectBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Workflow\DnnMakePlacedOrder.cs" />
+    <Compile Include="Workflow\MembershipTask.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Workflow\DnnCreateUserAccountForNewCustomer.cs" />
+    <Compile Include="Workflow\DnnWorkflowFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hotcakes.Commerce\Hotcakes.Commerce.csproj">
+      <Project>{4eff0d3e-99d4-4a8d-a672-b88e5e47cbaa}</Project>
+      <Name>Hotcakes.Commerce</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hotcakes.Payment\Hotcakes.Payment.csproj">
+      <Project>{4c223ad8-685a-4aac-8610-1bec50636203}</Project>
+      <Name>Hotcakes.Payment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hotcakes.Web\Hotcakes.Web.csproj">
+      <Project>{a822b6b9-ce48-4717-9ec2-1c1548289315}</Project>
+      <Name>Hotcakes.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\HotcakesResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>HotcakesResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Data\DnnDbContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DnnDbContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="App.Config" />
+    <None Include="Data\DnnDbContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DnnDbContext.edmx</DependentUpon>
+      <LastGenOutput>DnnDbContext.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Data\DnnDbContext.edmx.diagram">
+      <DependentUpon>DnnDbContext.edmx</DependentUpon>
+    </None>
+    <None Include="Data\DnnDbContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DnnDbContext.edmx</DependentUpon>
+      <LastGenOutput>DnnDbContext.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

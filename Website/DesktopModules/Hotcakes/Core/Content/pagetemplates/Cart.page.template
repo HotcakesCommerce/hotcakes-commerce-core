@@ -1,0 +1,49 @@
+﻿<portal version="5.0">
+  <description>Cart page template</description>
+  <tab>
+    <visible>true</visible>
+    <name>Cart</name>
+		<skinsrc>[G]Skins/Gravity/2-Col.ascx</skinsrc>
+		<tabpermissions>
+      <permission>
+        <permissioncode>SYSTEM_TAB</permissioncode>
+        <permissionkey>VIEW</permissionkey>
+        <allowaccess>true</allowaccess>
+        <rolename>All Users</rolename>
+      </permission>
+      <permission>
+        <permissioncode>SYSTEM_TAB</permissioncode>
+        <permissionkey>VIEW</permissionkey>
+        <allowaccess>true</allowaccess>
+        <rolename>Administrators</rolename>
+      </permission>
+      <permission>
+        <permissioncode>SYSTEM_TAB</permissioncode>
+        <permissionkey>EDIT</permissionkey>
+        <allowaccess>true</allowaccess>
+        <rolename>Administrators</rolename>
+      </permission>
+    </tabpermissions>
+    <tabsettings />
+    <parent>HotcakesStore</parent>
+    <panes>
+      <pane>
+        <name>ContentPane</name>
+        <modules>
+          <module>
+            <title>Shopping Cart</title>
+            <modulesettings>
+              <modulesetting>
+                <settingname>View</settingname>
+                <settingvalue>Index</settingvalue>
+              </modulesetting>
+            </modulesettings>
+            <definition>Hotcakes.Cart</definition>
+            <moduledefinition>Hotcakes Cart</moduledefinition>
+						<inheritviewpermissions>true</inheritviewpermissions>
+					</module>
+        </modules>
+      </pane>
+    </panes>
+  </tab>
+</portal>

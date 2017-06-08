@@ -1,0 +1,2 @@
+﻿<%@ Page Language="C#" AutoEventWireup="True" Inherits="Hotcakes.Modules.Core.Admin.Catalog.ProductsEdit_TabsDelete" Codebehind="ProductsEdit_TabsDelete.aspx.cs" %>
+<asp:Literal ID="litOutput" runat="server"></asp:Literal>

@@ -1,0 +1,22 @@
+﻿@model Hotcakes.Commerce.Orders.Order
+@using Hotcakes.Commerce.Catalog;
+
+@if (ViewBag.FileDownloads != null)
+{
+    if (ViewBag.FileDownloads.Count > 0)
+    {
+    <h2>@Localization.GetString("OrderContainsDownloads")</h2>
+    <table class="dnnGrid">
+        @foreach (ProductFile f in ViewBag.FileDownloads)
+        {
+            <tr class="dnnGridItem">
+                <td>@f.ShortDescription</td>
+                <td>
+                    <a href="@Url.RouteUrl(HccRouteNames.AccountDefault, new { controller = "OrderHistory", action = "downloadfile", id = f.Bvin, oid = Model.bvin })" class="dnnPrimaryAction">
+                        @Localization.GetString("Download")</a>
+                </td>
+            </tr>
+        }
+    </table>
+    }
+}

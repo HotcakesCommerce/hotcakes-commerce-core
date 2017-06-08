@@ -1,0 +1,14 @@
+﻿/* Drop unused fields */
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_PreTransformLongDescription]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product]
+	DROP COLUMN [PreTransformLongDescription]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_Category_PreTransformDescription]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category]
+	DROP COLUMN [PreTransformDescription]
+GO

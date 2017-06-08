@@ -1,0 +1,50 @@
+﻿@model Hotcakes.Modules.Core.Models.ProductPageViewModel
+<a name="reviews"></a>
+
+@if (ViewBag.IsLoggedIn)
+{
+    <a href="#hcWriteReview" id="hcWriteReviewbtn" class="dnnSecondaryAction right hc-popup" data-min-width="400" data-min-height="350" title="@Localization.GetString("WriteReviewFor") @Model.LocalProduct.ProductName">
+        @Localization.GetString("WriteReview")
+    </a>
+}
+
+<h2>@Localization.GetString("Reviews") <span>(@Model.LocalProduct.ReviewsApproved.Count)</span></h2>
+@Html.Action("TopReviews", "ProductReviews", new { howMany = 3, reviews = Model.LocalProduct.ReviewsApproved })
+
+@if (Model.LocalProduct.ReviewsApproved.Count > 0)
+{
+    <a class="dnnSecondaryAction right" href="@Url.RouteHccUrl(HccRoute.ProductReview, new { slug = Model.LocalProduct.UrlSlug })">
+        @Localization.GetString("ReadAllReviews")
+    </a>
+}
+
+@* WRITE REVIEW DIALOG *@
+<div id="hcWriteReview" style="display: none;">
+    <div id="hcSubmitReviewMessage" class="dnnFormMessage" style="display:none"></div>
+    <div class="dnnForm">
+        @using (Html.BeginHccRouteForm(HccRouteNames.ProductReviews, new { action = "create" }, FormMethod.Post, new { id = "hcSubmitReviewForm" }))
+        {
+            <div class="dnnFormItem">
+                <label class="dnnLabel" for="rating">@Localization.GetString("Rating")</label>
+                <select id="rating" name="rating">
+                    <option value="5" selected="selected">5 @Localization.GetString("Stars")</option>
+                    <option value="4">4 @Localization.GetString("Stars")</option>
+                    <option value="3">3 @Localization.GetString("Stars")</option>
+                    <option value="2">2 @Localization.GetString("Stars")</option>
+                    <option value="1">1 @Localization.GetString("Star")</option>
+                </select>
+            </div>
+            <div class="dnnFormItem">
+                <label class="dnnLabel" for="newreview">@Localization.GetString("YourReview")</label>
+                <textarea id="newreview" name="newreview" rows="6" cols="30"></textarea>
+            </div>
+            <ul class="dnnActions">
+                <li>
+                    <input type="button" id="hcSubmitReviewBtn" value="@Localization.GetString("Submit")" class="dnnPrimaryAction" />
+                </li>
+            </ul>
+            @Html.Hidden("productbvin", @Model.LocalProduct.Bvin)
+        }
+    </div>
+</div>
+@* END WRITE REVIEW DIALOG *@

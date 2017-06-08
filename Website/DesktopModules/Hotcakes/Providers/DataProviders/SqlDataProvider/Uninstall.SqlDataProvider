@@ -1,0 +1,1655 @@
+﻿IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_AffiliatePayments_hcc_Affiliate]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AffiliatePayments]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AffiliatePayments] DROP CONSTRAINT [FK_{objectQualifier}hcc_AffiliatePayments_hcc_Affiliate]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_AuthTokens_hcc_UserAccounts]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AuthTokens]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AuthTokens] DROP CONSTRAINT [FK_{objectQualifier}hcc_AuthTokens_hcc_UserAccounts]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_BundledProducts_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_BundledProducts]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_BundledProducts] DROP CONSTRAINT [FK_{objectQualifier}hcc_BundledProducts_hcc_Product]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_CatalogRoles_hcc_Category]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CatalogRoles]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CatalogRoles] DROP CONSTRAINT [FK_{objectQualifier}hcc_CatalogRoles_hcc_Category]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_CatalogRoles_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CatalogRoles]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CatalogRoles] DROP CONSTRAINT [FK_{objectQualifier}hcc_CatalogRoles_hcc_Product]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_CatalogRoles_hcc_ProductType]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CatalogRoles]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CatalogRoles] DROP CONSTRAINT [FK_{objectQualifier}hcc_CatalogRoles_hcc_ProductType]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_CategoryTranslations_hcc_Category]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CategoryTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CategoryTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_CategoryTranslations_hcc_Category]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ContentBlock_hcc_ContentColumn]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ContentBlock]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock] DROP CONSTRAINT [FK_{objectQualifier}hcc_ContentBlock_hcc_ContentColumn]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ContentBlockTranslations_hcc_ContentBlock]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ContentBlockTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlockTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ContentBlockTranslations_hcc_ContentBlock]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_CountryTranslations_hcc_Countries]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CountryTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CountryTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_CountryTranslations_hcc_Countries]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_HtmlTemplateTranslations_hcc_HtmlTemplates]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_HtmlTemplateTranslations_hcc_HtmlTemplates]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_LineItem_hcc_LineItem]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_LineItem]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [FK_{objectQualifier}hcc_LineItem_hcc_LineItem]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_MailingListMember_hcc_MailingList]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_MailingListMember]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MailingListMember] DROP CONSTRAINT [FK_{objectQualifier}hcc_MailingListMember_hcc_MailingList]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_MembershipProductType_hcc_ProductType]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_MembershipProductType]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MembershipProductType] DROP CONSTRAINT [FK_{objectQualifier}hcc_MembershipProductType_hcc_ProductType]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderCoupon_hcc_Order]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderCoupon]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderCoupon] DROP CONSTRAINT [FK_{objectQualifier}hcc_OrderCoupon_hcc_Order]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderNote_hcc_Order]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderNote]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderNote] DROP CONSTRAINT [FK_{objectQualifier}hcc_OrderNote_hcc_Order]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderTransactions_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderTransactions]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions] DROP CONSTRAINT [FK_{objectQualifier}hcc_OrderTransactions_hcc_Stores]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderTransactions_hcc_Order]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderTransactions]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions] DROP CONSTRAINT [FK_{objectQualifier}hcc_OrderTransactions_hcc_Order]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Product_hcc_Manufacturer]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Product]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [FK_{objectQualifier}hcc_Product_hcc_Manufacturer]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Product_hcc_ProductType]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Product]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [FK_{objectQualifier}hcc_Product_hcc_ProductType]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Product_hcc_Vendor]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Product]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [FK_{objectQualifier}hcc_Product_hcc_Vendor]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductFileXProduct_hcc_ProductFile]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFileXProduct]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductFileXProduct_hcc_ProductFile]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductInventory_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductInventory]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductInventory_hcc_Product]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductOptionItemTranslations_hcc_ProductOptionsItems]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptionItemTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionItemTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductOptionItemTranslations_hcc_ProductOptionsItems]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductOptionsItems_hcc_ProductOptions]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductOptionsItems_hcc_ProductOptions]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductOptionTranslations_hcc_ProductOptions]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptionTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductOptionTranslations_hcc_ProductOptions]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductPropertyChoice_hcc_ProductProperty]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyChoice_hcc_ProductProperty]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductPropertyChoiceTranslations_hcc_ProductPropertyChoice]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyChoiceTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoiceTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyChoiceTranslations_hcc_ProductPropertyChoice]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductPropertyTranslations_hcc_ProductProperty]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyTranslations_hcc_ProductProperty]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductPropertyValue_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyValue]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyValue_hcc_Product]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductPropertyValue_hcc_ProductProperty]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyValue]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyValue_hcc_ProductProperty]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductPropertyValueTranslations_hcc_ProductPropertyValue]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyValueTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValueTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyValueTranslations_hcc_ProductPropertyValue]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductTranslations_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductTranslations_hcc_Product]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductTypeTranslations_hcc_ProductType]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductTypeTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductTypeTranslations_hcc_ProductType]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductTypeProperties_hcc_ProductType]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductTypeProperties_hcc_ProductType]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductXCategory_hcc_Category]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXCategory]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductXCategory_hcc_Category]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductXCategory_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXCategory]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductXCategory_hcc_Product]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_PromotionTranslations_hcc_Promotions]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_PromotionTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_PromotionTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_PromotionTranslations_hcc_Promotions]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Regions_hcc_Countries]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Regions]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Regions] DROP CONSTRAINT [FK_{objectQualifier}hcc_Regions_hcc_Countries]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_RegionTranslations_hcc_Regions]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RegionTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RegionTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_RegionTranslations_hcc_Regions]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_RMAItem_hcc_RMA]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMAItem]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] DROP CONSTRAINT [FK_{objectQualifier}hcc_RMAItem_hcc_RMA]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchLexicon]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchObjectWords]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjectWords] DROP CONSTRAINT [FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchLexicon]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchObjects]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchObjectWords]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjectWords] DROP CONSTRAINT [FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchObjects]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ShippingMethodTranslations_hcc_ShippingMethodTranslations]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ShippingMethodTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethodTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ShippingMethodTranslations_hcc_ShippingMethodTranslations]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ShippingZones_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ShippingZones]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingZones] DROP CONSTRAINT [FK_{objectQualifier}hcc_ShippingZones_hcc_Stores]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_StoreSettings_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreSettings]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettings] DROP CONSTRAINT [FK_{objectQualifier}hcc_StoreSettings_hcc_Stores]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_StoresXUsers_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoresXUsers]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoresXUsers] DROP CONSTRAINT [FK_{objectQualifier}hcc_StoresXUsers_hcc_Stores]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_StoresXUsers_hcc_UserAccounts]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoresXUsers]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoresXUsers] DROP CONSTRAINT [FK_{objectQualifier}hcc_StoresXUsers_hcc_UserAccounts]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Taxes_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Taxes]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Taxes] DROP CONSTRAINT [FK_{objectQualifier}hcc_Taxes_hcc_Stores]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Taxes_hcc_TaxSchedules]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Taxes]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Taxes] DROP CONSTRAINT [FK_{objectQualifier}hcc_Taxes_hcc_TaxSchedules]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_TaxSchedules_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_TaxSchedules]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_TaxSchedules] DROP CONSTRAINT [FK_{objectQualifier}hcc_TaxSchedules_hcc_Stores]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_UserXAffiliate_hcc_User]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_UserXContact]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_UserXContact] DROP CONSTRAINT [FK_{objectQualifier}hcc_UserXAffiliate_hcc_User]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductPropertyValueTranslations_hcc_ProductPropertyValue]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyValueTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValueTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyValueTranslations_hcc_ProductPropertyValue]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyValueTranslations]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValueTranslations]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductPropertyValue_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyValue]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyValue_hcc_Product]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductPropertyValue_hcc_ProductProperty]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyValue]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyValue_hcc_ProductProperty]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductPropertyValue_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductPropertyValue_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyValue]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductTranslations_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductTranslations_hcc_Product]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductTranslations]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductTranslations]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductXCategory_hcc_Category]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXCategory]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductXCategory_hcc_Category]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductXCategory_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXCategory]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductXCategory_hcc_Product]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductXCategory_SortOrder]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductXCategory_SortOrder]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductXCategory_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductXCategory_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXCategory]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_RegionTranslations_hcc_Regions]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RegionTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RegionTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_RegionTranslations_hcc_Regions]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RegionTranslations]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_RegionTranslations]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Taxes_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Taxes]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Taxes] DROP CONSTRAINT [FK_{objectQualifier}hcc_Taxes_hcc_Stores]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Taxes_hcc_TaxSchedules]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Taxes]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Taxes] DROP CONSTRAINT [FK_{objectQualifier}hcc_Taxes_hcc_TaxSchedules]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Taxes_ShippingRate]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Taxes] DROP CONSTRAINT [DF_{objectQualifier}hcc_Taxes_ShippingRate]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Taxes]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Taxes]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AddObjectIndex]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_AddObjectIndex]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_BundledProducts_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_BundledProducts]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_BundledProducts] DROP CONSTRAINT [FK_{objectQualifier}hcc_BundledProducts_hcc_Product]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_BundledProducts_SortOrder]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_BundledProducts] DROP CONSTRAINT [DF_{objectQualifier}hcc_BundledProducts_SortOrder]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_BundledProducts]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_BundledProducts]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_CatalogRoles_hcc_Category]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CatalogRoles]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CatalogRoles] DROP CONSTRAINT [FK_{objectQualifier}hcc_CatalogRoles_hcc_Category]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_CatalogRoles_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CatalogRoles]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CatalogRoles] DROP CONSTRAINT [FK_{objectQualifier}hcc_CatalogRoles_hcc_Product]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_CatalogRoles_hcc_ProductType]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CatalogRoles]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CatalogRoles] DROP CONSTRAINT [FK_{objectQualifier}hcc_CatalogRoles_hcc_ProductType]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CatalogRoles]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_CatalogRoles]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ContentBlockTranslations_hcc_ContentBlock]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ContentBlockTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlockTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ContentBlockTranslations_hcc_ContentBlock]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ContentBlockTranslations]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlockTranslations]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_FindGiftCards]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_FindGiftCards]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductInventory_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductInventory]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductInventory_hcc_Product]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductInventory_VariantId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductInventory_VariantId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductInventory_QuantityOnHand]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductInventory_QuantityOnHand]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductInventory_QuantityReserved]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductInventory_QuantityReserved]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductInventory_LowStockPoint]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductInventory_LowStockPoint]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductInventory_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductInventory_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductInventory_OutOfStockPoint]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductInventory_OutOfStockPoint]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductInventory]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductOptionItemTranslations_hcc_ProductOptionsItems]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptionItemTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionItemTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductOptionItemTranslations_hcc_ProductOptionsItems]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptionItemTranslations]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionItemTranslations]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductPropertyChoiceTranslations_hcc_ProductPropertyChoice]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyChoiceTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoiceTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyChoiceTranslations_hcc_ProductPropertyChoice]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyChoiceTranslations]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoiceTranslations]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductPropertyTranslations_hcc_ProductProperty]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyTranslations_hcc_ProductProperty]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyTranslations]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyTranslations]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductPropertyChoice_hcc_ProductProperty]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyChoice_hcc_ProductProperty]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductPropertyChoices_SortOrder]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductPropertyChoices_SortOrder]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductPropertyChoice_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductPropertyChoice_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductOptionsItems_hcc_ProductOptions]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductOptionsItems_hcc_ProductOptions]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductOptionsItems_IsDefault]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductOptionsItems_IsDefault]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductOptionTranslations_hcc_ProductOptions]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptionTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductOptionTranslations_hcc_ProductOptions]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptionTranslations]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionTranslations]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderTransactions_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderTransactions]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions] DROP CONSTRAINT [FK_{objectQualifier}hcc_OrderTransactions_hcc_Stores]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_OrderTransactions_OrderNumber]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions] DROP CONSTRAINT [DF_{objectQualifier}hcc_OrderTransactions_OrderNumber]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_OrderTransactions_Messages]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions] DROP CONSTRAINT [DF_{objectQualifier}hcc_OrderTransactions_Messages]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_OrderTransactions_CheckNumber]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions] DROP CONSTRAINT [DF_{objectQualifier}hcc_OrderTransactions_CheckNumber]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_OrderTransactions_PurchaseOrderNumber]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions] DROP CONSTRAINT [DF_{objectQualifier}hcc_OrderTransactions_PurchaseOrderNumber]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_OrderTransactions_CompanyAccountNumber]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions] DROP CONSTRAINT [DF_{objectQualifier}hcc_OrderTransactions_CompanyAccountNumber]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_OrderTransactions_AdditionalSettings]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions] DROP CONSTRAINT [DF_{objectQualifier}hcc_OrderTransactions_AdditionalSettings]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderTransactions]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductFileXProduct_hcc_ProductFile]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFileXProduct]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductFileXProduct_hcc_ProductFile]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductFileXProduct_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductFileXProduct_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFileXProduct]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_MembershipProductType_hcc_ProductType]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_MembershipProductType]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MembershipProductType] DROP CONSTRAINT [FK_{objectQualifier}hcc_MembershipProductType_hcc_ProductType]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_MembershipProductType]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_MembershipProductType]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_MailingListMember_hcc_MailingList]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_MailingListMember]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MailingListMember] DROP CONSTRAINT [FK_{objectQualifier}hcc_MailingListMember_hcc_MailingList]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_MailingListMember_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MailingListMember] DROP CONSTRAINT [DF_{objectQualifier}hcc_MailingListMember_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_MailingListMember_FirstName]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MailingListMember] DROP CONSTRAINT [DF_{objectQualifier}hcc_MailingListMember_FirstName]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_MailingListMember_LastName]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MailingListMember] DROP CONSTRAINT [DF_{objectQualifier}hcc_MailingListMember_LastName]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_MailingListMember_LastUpdatedUtc]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MailingListMember] DROP CONSTRAINT [DF_{objectQualifier}hcc_MailingListMember_LastUpdatedUtc]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_MailingListMember]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_MailingListMember]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderCoupon_hcc_Order]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderCoupon]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderCoupon] DROP CONSTRAINT [FK_{objectQualifier}hcc_OrderCoupon_hcc_Order]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_OrderCoupon_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderCoupon] DROP CONSTRAINT [DF_{objectQualifier}hcc_OrderCoupon_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_OrderCoupon_UserId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderCoupon] DROP CONSTRAINT [DF_{objectQualifier}hcc_OrderCoupon_UserId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_OrderCoupon_IsUsed]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderCoupon] DROP CONSTRAINT [DF_{objectQualifier}hcc_OrderCoupon_IsUsed]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderCoupon]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_OrderCoupon]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderNote_hcc_Order]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderNote]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderNote] DROP CONSTRAINT [FK_{objectQualifier}hcc_OrderNote_hcc_Order]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_OrderNote_IsPublic]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderNote] DROP CONSTRAINT [DF_{objectQualifier}hcc_OrderNote_IsPublic]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_OrderNote_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderNote] DROP CONSTRAINT [DF_{objectQualifier}hcc_OrderNote_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderNote]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_OrderNote]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Product_hcc_Manufacturer]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Product]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [FK_{objectQualifier}hcc_Product_hcc_Manufacturer]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Product_hcc_ProductType]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Product]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [FK_{objectQualifier}hcc_Product_hcc_ProductType]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Product_hcc_Vendor]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Product]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [FK_{objectQualifier}hcc_Product_hcc_Vendor]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Product_RewriteUrl]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_RewriteUrl]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Product_CustomProperties]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_CustomProperties]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Product_GiftWrapPrice]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_GiftWrapPrice]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Product_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Product_Featured]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_Featured]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Product_OutOfStockMode]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_OutOfStockMode]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Product_IsInStock]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_IsInStock]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Product_IsUserPrice]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_IsUserPrice]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Product_HideQty]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_HideQty]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Product_IsSearchable]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_IsSearchable]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Product_IsBundle]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_IsBundle]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Product_IsGiftCard]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_IsGiftCard]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Product_IsRecurring]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_IsRecurring]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Product_ShippingCharge]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_ShippingCharge]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Product]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Product]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_CountryTranslations_hcc_Countries]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CountryTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CountryTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_CountryTranslations_hcc_Countries]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CountryTranslations]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_CountryTranslations]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_GenerateOrderNumber]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_GenerateOrderNumber]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_HtmlTemplateTranslations_hcc_HtmlTemplates]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_HtmlTemplateTranslations_hcc_HtmlTemplates]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_LineItem_hcc_LineItem]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_LineItem]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [FK_{objectQualifier}hcc_LineItem_hcc_LineItem]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_VariantId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_VariantId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_BasePrice]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_BasePrice]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_DiscountDetails]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_DiscountDetails]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_AdjustedPrice]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_AdjustedPrice]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_ShippingPortion]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShippingPortion]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_TaxPortion]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_TaxPortion]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_LineTotal]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_LineTotal]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_CustomProperties]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_CustomProperties]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_QuantityReturned]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_QuantityReturned]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_QuantityShipped]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_QuantityShipped]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_StatusCode]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_StatusCode]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_StatusName]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_StatusName]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_SelectionData]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_SelectionData]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_IsNonShipping]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_IsNonShipping]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_TaxScheduleId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_TaxScheduleId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_ShippingWeightSingle]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShippingWeightSingle]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_ProductShippingLength]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ProductShippingLength]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_ProductShippingWidth]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ProductShippingWidth]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_ProductShippingHeight]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ProductShippingHeight]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_ShipFromAddress]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShipFromAddress]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_ShipFromMode]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShipFromMode]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_ShipFromNotificationId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShipFromNotificationId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_ShipSeparately]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShipSeparately]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_ExtraShipCharge]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ExtraShipCharge]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_IsUserSuppliedPrice]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_IsUserSuppliedPrice]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_TaxRate]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_TaxRate]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_ShippingTaxRate]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShippingTaxRate]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_IsBundle]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_IsBundle]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_QuantityReserved]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_QuantityReserved]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_IsGiftCard]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_IsGiftCard]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_IsRecurring]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_IsRecurring]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_IsRecurringCancelled]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_IsRecurringCancelled]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_LineItem_ShippingCharge]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShippingCharge]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_LineItem]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_CategoryTranslations_hcc_Category]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CategoryTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CategoryTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_CategoryTranslations_hcc_Category]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CategoryTranslations]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_CategoryTranslations]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ContentBlock_hcc_ContentColumn]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ContentBlock]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock] DROP CONSTRAINT [FK_{objectQualifier}hcc_ContentBlock_hcc_ContentColumn]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ContentBlock_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock] DROP CONSTRAINT [DF_{objectQualifier}hcc_ContentBlock_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ContentBlock_SerializedSettings]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock] DROP CONSTRAINT [DF_{objectQualifier}hcc_ContentBlock_SerializedSettings]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ContentBlock_SerializedLists]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock] DROP CONSTRAINT [DF_{objectQualifier}hcc_ContentBlock_SerializedLists]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ContentBlock]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_AffiliatePayments_hcc_Affiliate]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AffiliatePayments]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AffiliatePayments] DROP CONSTRAINT [FK_{objectQualifier}hcc_AffiliatePayments_hcc_Affiliate]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AffiliatePayments]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_AffiliatePayments]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_TaxSchedules_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_TaxSchedules]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_TaxSchedules] DROP CONSTRAINT [FK_{objectQualifier}hcc_TaxSchedules_hcc_Stores]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_TaxSchedules_DefaultRate]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_TaxSchedules] DROP CONSTRAINT [DF_{objectQualifier}hcc_TaxSchedules_DefaultRate]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_TaxSchedules_DefaultShippingRate]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_TaxSchedules] DROP CONSTRAINT [DF_{objectQualifier}hcc_TaxSchedules_DefaultShippingRate]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_TaxSchedules]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_TaxSchedules]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchLexicon]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchObjectWords]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjectWords] DROP CONSTRAINT [FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchLexicon]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchObjects]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchObjectWords]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjectWords] DROP CONSTRAINT [FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchObjects]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_SearchObjectWords_Score]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjectWords] DROP CONSTRAINT [DF_{objectQualifier}hcc_SearchObjectWords_Score]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_SearchObjectWords_SiteId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjectWords] DROP CONSTRAINT [DF_{objectQualifier}hcc_SearchObjectWords_SiteId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchObjectWords]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjectWords]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Regions_hcc_Countries]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Regions]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Regions] DROP CONSTRAINT [FK_{objectQualifier}hcc_Regions_hcc_Countries]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Regions_RegionId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Regions] DROP CONSTRAINT [DF_{objectQualifier}hcc_Regions_RegionId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Regions]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Regions]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_StoreSettings_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreSettings]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettings] DROP CONSTRAINT [FK_{objectQualifier}hcc_StoreSettings_hcc_Stores]
+GO
+
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_StoreSettingsTranslations_hcc_StoreSettings') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreSettingsTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AffiliatePayments] DROP CONSTRAINT [FK_{objectQualifier}hcc_StoreSettingsTranslations_hcc_StoreSettings]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreSettings]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettings]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_StoresXUsers_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoresXUsers]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoresXUsers] DROP CONSTRAINT [FK_{objectQualifier}hcc_StoresXUsers_hcc_Stores]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_StoresXUsers_hcc_UserAccounts]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoresXUsers]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoresXUsers] DROP CONSTRAINT [FK_{objectQualifier}hcc_StoresXUsers_hcc_UserAccounts]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_StoresXUsers_AccessMode]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoresXUsers] DROP CONSTRAINT [DF_{objectQualifier}hcc_StoresXUsers_AccessMode]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoresXUsers]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_StoresXUsers]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_UserXAffiliate_hcc_User]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_UserXContact]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_UserXContact] DROP CONSTRAINT [FK_{objectQualifier}hcc_UserXAffiliate_hcc_User]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_UserXContact_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_UserXContact] DROP CONSTRAINT [DF_{objectQualifier}hcc_UserXContact_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_UserXContact]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_UserXContact]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_AuthTokens_hcc_UserAccounts]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AuthTokens]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AuthTokens] DROP CONSTRAINT [FK_{objectQualifier}hcc_AuthTokens_hcc_UserAccounts]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AuthTokens]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_AuthTokens]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_RMAItem_hcc_RMA]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMAItem]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] DROP CONSTRAINT [FK_{objectQualifier}hcc_RMAItem_hcc_RMA]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_RMAItem_Quantity]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_Quantity]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_RMAItem_QuantityReceived]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_QuantityReceived]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_RMAItem_QuantityReturnedToInventory]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_QuantityReturnedToInventory]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_RMAItem_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_RMAItem_RefundAmount]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_RefundAmount]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_RMAItem_RefundShippingAmount]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_RefundShippingAmount]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_RMAItem_RefundTaxAmount]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_RefundTaxAmount]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_RMAItem_RefundGiftWrapAmount]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_RefundGiftWrapAmount]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_RMAItem_ProductClass]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_ProductClass]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMAItem]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ShippingMethodTranslations_hcc_ShippingMethodTranslations]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ShippingMethodTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethodTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ShippingMethodTranslations_hcc_ShippingMethodTranslations]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ShippingMethodTranslations]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethodTranslations]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ShippingZones_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ShippingZones]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingZones] DROP CONSTRAINT [FK_{objectQualifier}hcc_ShippingZones_hcc_Stores]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ShippingZones_Areas]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingZones] DROP CONSTRAINT [DF_{objectQualifier}hcc_ShippingZones_Areas]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ShippingZones]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ShippingZones]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductTypeTranslations_hcc_ProductType]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductTypeTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductTypeTranslations_hcc_ProductType]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductTypeTranslations]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeTranslations]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductTypeProperties_hcc_ProductType]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductTypeProperties_hcc_ProductType]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductTypeProperties_SortOrder]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductTypeProperties_SortOrder]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductTypeXProductProperty_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductTypeXProductProperty_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_PromotionTranslations_hcc_Promotions]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_PromotionTranslations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_PromotionTranslations] DROP CONSTRAINT [FK_{objectQualifier}hcc_PromotionTranslations_hcc_Promotions]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_PromotionTranslations]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_PromotionTranslations]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_QueuedTasks]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_QueuedTasks]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductVolumeDiscounts_Qty]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductVolumeDiscounts_Qty]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductVolumeDiscounts_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductVolumeDiscounts_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXOption]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductXOption]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Promotions_Mode]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Promotions] DROP CONSTRAINT [DF_{objectQualifier}hcc_Promotions_Mode]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Promotions_QualificationsXml]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Promotions] DROP CONSTRAINT [DF_{objectQualifier}hcc_Promotions_QualificationsXml]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Promotions_ActionsXml]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Promotions] DROP CONSTRAINT [DF_{objectQualifier}hcc_Promotions_ActionsXml]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Promotions_DoNotCombine]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Promotions] DROP CONSTRAINT [DF_{objectQualifier}hcc_Promotions_DoNotCombine]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Promotions]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Promotions]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductType_IsPermanent]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductType] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductType_IsPermanent]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductType_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductType] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductType_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductType]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductType]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductRelationships_IsSubtitute]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductRelationships] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductRelationships_IsSubtitute]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductRelationships_SortOrder]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductRelationships] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductRelationships_SortOrder]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductRelationships]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductRelationships]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductReview_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductReview] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductReview_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductReview]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductReview]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreDomains]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_StoreDomains]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Stores_CustomUrl]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Stores] DROP CONSTRAINT [DF_{objectQualifier}hcc_Stores_CustomUrl]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Stores_LastOrderNumber]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Stores] DROP CONSTRAINT [DF_{objectQualifier}hcc_Stores_LastOrderNumber]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Stores]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Stores]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchLexicon]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_SearchLexicon]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_SearchObjects_SiteId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjects] DROP CONSTRAINT [DF_{objectQualifier}hcc_SearchObjects_SiteId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_SearchObjects_LastIndexUtc]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjects] DROP CONSTRAINT [DF_{objectQualifier}hcc_SearchObjects_LastIndexUtc]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchObjects]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjects]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RewardsPoints]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_RewardsPoints]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_RMA_DateOfReturn]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMA] DROP CONSTRAINT [DF_{objectQualifier}hcc_RMA_DateOfReturn]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_RMA_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMA] DROP CONSTRAINT [DF_{objectQualifier}hcc_RMA_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMA]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_RMA]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_USGeoData]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_USGeoData]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Variants]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Variants]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Vendor_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Vendor] DROP CONSTRAINT [DF_{objectQualifier}hcc_Vendor_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Vendor]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Vendor]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_WishListItems_CustomerId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_WishListItems] DROP CONSTRAINT [DF_{objectQualifier}hcc_WishListItems_CustomerId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_WishListItems]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_WishListItems]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_SearchQuery_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_SearchQuery] DROP CONSTRAINT [DF_{objectQualifier}hcc_SearchQuery_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchQuery]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_SearchQuery]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ShippingMethod_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod] DROP CONSTRAINT [DF_{objectQualifier}hcc_ShippingMethod_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ShippingMethod_ZoneId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod] DROP CONSTRAINT [DF_{objectQualifier}hcc_ShippingMethod_ZoneId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ShippingMethod_Settings]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod] DROP CONSTRAINT [DF_{objectQualifier}hcc_ShippingMethod_Settings]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ShippingMethod]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_User_Locked]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_User] DROP CONSTRAINT [DF_{objectQualifier}hcc_User_Locked]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_User_FailedLoginCount]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_User] DROP CONSTRAINT [DF_{objectQualifier}hcc_User_FailedLoginCount]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_User_BillingAddress]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_User] DROP CONSTRAINT [DF_{objectQualifier}hcc_User_BillingAddress]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_User_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_User] DROP CONSTRAINT [DF_{objectQualifier}hcc_User_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_User_ShippingAddress]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_User] DROP CONSTRAINT [DF_{objectQualifier}hcc_User_ShippingAddress]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_User_BillingAddress_1]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_User] DROP CONSTRAINT [DF_{objectQualifier}hcc_User_BillingAddress_1]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_User]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_User]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_UserAccounts_statuscode]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_UserAccounts] DROP CONSTRAINT [DF_{objectQualifier}hcc_UserAccounts_statuscode]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_UserAccounts_Salt]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_UserAccounts] DROP CONSTRAINT [DF_{objectQualifier}hcc_UserAccounts_Salt]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_UserAccounts_ResetKey]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_UserAccounts] DROP CONSTRAINT [DF_{objectQualifier}hcc_UserAccounts_ResetKey]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_UserAccounts]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_UserAccounts]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_UserQuestions_Order]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_UserQuestions] DROP CONSTRAINT [DF_{objectQualifier}hcc_UserQuestions_Order]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_UserQuestions_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_UserQuestions] DROP CONSTRAINT [DF_{objectQualifier}hcc_UserQuestions_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_UserQuestions]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_UserQuestions]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_AffiliateReferral_AffiliateId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AffiliateReferral] DROP CONSTRAINT [DF_{objectQualifier}hcc_AffiliateReferral_AffiliateId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_AffiliateReferral_TimeOfReferralUtc]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AffiliateReferral] DROP CONSTRAINT [DF_{objectQualifier}hcc_AffiliateReferral_TimeOfReferralUtc]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_AffiliateReferral_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AffiliateReferral] DROP CONSTRAINT [DF_{objectQualifier}hcc_AffiliateReferral_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AffiliateReferral]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_AffiliateReferral]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AnalyticsEvents]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ApiKeys]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ApiKeys]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Audit_UserId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Audit] DROP CONSTRAINT [DF_{objectQualifier}hcc_Audit_UserId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Audit_UserIdTest]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Audit] DROP CONSTRAINT [DF_{objectQualifier}hcc_Audit_UserIdTest]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Audit_Severity]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Audit] DROP CONSTRAINT [DF_{objectQualifier}hcc_Audit_Severity]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Audit_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Audit] DROP CONSTRAINT [DF_{objectQualifier}hcc_Audit_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Audit]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Audit]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Address_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Address] DROP CONSTRAINT [DF_{objectQualifier}hcc_Address_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Address_AddressType]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Address] DROP CONSTRAINT [DF_{objectQualifier}hcc_Address_AddressType]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Address]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Address]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Affiliate_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Affiliate] DROP CONSTRAINT [DF_{objectQualifier}hcc_Affiliate_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Affiliate]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Affiliate]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_CategoryXProperty_AllowMultiple]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CategoryXProperty] DROP CONSTRAINT [DF_{objectQualifier}hcc_CategoryXProperty_AllowMultiple]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CategoryXProperty]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_CategoryXProperty]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Category_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category] DROP CONSTRAINT [DF_{objectQualifier}hcc_Category_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Category_ShowTitle]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category] DROP CONSTRAINT [DF_{objectQualifier}hcc_Category_ShowTitle]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Category]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Category]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_MailingList_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MailingList] DROP CONSTRAINT [DF_{objectQualifier}hcc_MailingList_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_MailingList_Name]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MailingList] DROP CONSTRAINT [DF_{objectQualifier}hcc_MailingList_Name]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_MailingList_LastUpdatedUtc]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MailingList] DROP CONSTRAINT [DF_{objectQualifier}hcc_MailingList_LastUpdatedUtc]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_MailingList]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_MailingList]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_GiftCard_Enabled]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_GiftCard] DROP CONSTRAINT [DF_{objectQualifier}hcc_GiftCard_Enabled]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_GiftCard]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_GiftCard]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_HtmlTemplates_TemplateType]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] DROP CONSTRAINT [DF_{objectQualifier}hcc_HtmlTemplates_TemplateType]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_HtmlTemplates]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_HtmlTemplates]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_CustomUrl_SystemUrl]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CustomUrl] DROP CONSTRAINT [DF_{objectQualifier}hcc_CustomUrl_SystemUrl]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_CustomUrl_SystemDataType]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CustomUrl] DROP CONSTRAINT [DF_{objectQualifier}hcc_CustomUrl_SystemDataType]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_CustomUrl_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CustomUrl] DROP CONSTRAINT [DF_{objectQualifier}hcc_CustomUrl_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CustomUrl]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_CustomUrl]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Fraud_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Fraud] DROP CONSTRAINT [DF_{objectQualifier}hcc_Fraud_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Fraud]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Fraud]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ContentColumn_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentColumn] DROP CONSTRAINT [DF_{objectQualifier}hcc_ContentColumn_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ContentColumn]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ContentColumn]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Countries_CountryId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Countries] DROP CONSTRAINT [DF_{objectQualifier}hcc_Countries_CountryId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Countries]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Countries]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductFile_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductFile] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductFile_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFile]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductFile]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_OrderPackage_LastUpdatedUtc]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderPackage] DROP CONSTRAINT [DF_{objectQualifier}hcc_OrderPackage_LastUpdatedUtc]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_OrderPackage_CustomProperties]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderPackage] DROP CONSTRAINT [DF_{objectQualifier}hcc_OrderPackage_CustomProperties]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_OrderPackage_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderPackage] DROP CONSTRAINT [DF_{objectQualifier}hcc_OrderPackage_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderPackage]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_OrderPackage]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Manufacturer_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Manufacturer] DROP CONSTRAINT [DF_{objectQualifier}hcc_Manufacturer_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Manufacturer]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Manufacturer]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_News]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_News]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_CustomProperties]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_CustomProperties]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_FraudScore]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_FraudScore]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_HandlingTotal]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_HandlingTotal]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_Instructions]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_Instructions]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_IsPlaced]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_IsPlaced]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_OrderDiscounts]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_OrderDiscounts]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_OrderDiscountDetails]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_OrderDiscountDetails]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_OrderNumber]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_OrderNumber]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_ShippingAddress]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingAddress]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_ShippingMethodId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingMethodId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_ShippingMethodDisplayName]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingMethodDisplayName]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_ShippingProviderId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingProviderId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_ShippingProviderServiceCode]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingProviderServiceCode]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_ShippingTotal]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingTotal]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_ShippingDiscounts]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingDiscounts]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_ShippingDiscountDetails]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingDiscountDetails]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_SubTotal]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_SubTotal]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_TaxTotal]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_TaxTotal]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_UserEmail]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_UserEmail]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_StatusCode]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_StatusCode]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_StatusName]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_StatusName]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_ThirdPartyOrderId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_ThirdPartyOrderId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_ItemsTax]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_ItemsTax]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_ShippingTax]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingTax]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_ShippingTaxRate]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingTaxRate]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_AdjustedShippingTotal]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_AdjustedShippingTotal]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_UserDeviceType]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_UserDeviceType]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_IsAbandonedEmailSent]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_IsAbandonedEmailSent]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Order_IsRecurring]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_IsRecurring]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Order]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Order]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductImage_SortOrder]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductImage] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductImage_SortOrder]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductImage_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductImage] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductImage_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductImage]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductImage]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_PriceGroup_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_PriceGroup] DROP CONSTRAINT [DF_{objectQualifier}hcc_PriceGroup_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_PriceGroup]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_PriceGroup]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductOptions_IsColorSwatch]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptions] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductOptions_IsColorSwatch]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptions]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptions]
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductProperty_DisplayOnSite]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductProperty] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductProperty_DisplayOnSite]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductProperty_IsRequired]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductProperty] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductProperty_IsRequired]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductProperty_TypeCode]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductProperty] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductProperty_TypeCode]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductProperty_CultureCode]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductProperty] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductProperty_CultureCode]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductProperty_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductProperty] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductProperty_StoreId]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductProperty_DisplayOnSearch]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductProperty] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductProperty_DisplayOnSearch]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_ProductProperty_IsLocalizable]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductProperty] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductProperty_IsLocalizable]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductProperty]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductProperty]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreSettingsTranslations]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettingsTranslations]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreSettings]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettings]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreSettings]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettings]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Product]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Product]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Orders_DeleteForStore]') AND type in (N'P'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_Orders_DeleteForStore]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_GetTopAffectedProducts]') AND type in (N'P'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_GetTopAffectedProducts]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_GetPromotionsActivityList]') AND type in (N'P'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_GetPromotionsActivityList]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_GetBouncedListByHour]') AND type in (N'P'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_GetBouncedListByHour]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_GetBouncedListByDay]') AND type in (N'P'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_GetBouncedListByDay]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_DeleteSampleAnalytics]') AND type in (N'P'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_DeleteSampleAnalytics]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AnalyticsEvents_DeleteForStore]') AND type in (N'P'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents_DeleteForStore]
+GO
+
+
+

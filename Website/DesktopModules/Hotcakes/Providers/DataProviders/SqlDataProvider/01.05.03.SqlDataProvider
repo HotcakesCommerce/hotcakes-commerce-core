@@ -1,0 +1,19 @@
+﻿/* Order discount taxation changes */
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_LineItem' AND  COLUMN_NAME = 'TaxablePortion')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] ADD
+		[TaxablePortion] decimal(18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_TaxablePortion] DEFAULT 0
+END
+GO
+
+update {databaseOwner}[{objectQualifier}hcc_LineItem]
+set [TaxablePortion] = [LineTotal]
+where [TaxablePortion] = 0
+GO
+
+IF EXISTS( SELECT * FROM sys.default_constraints WHERE type='D' and name = 'DF_{objectQualifier}hcc_LineItem_TaxablePortion')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_TaxablePortion]
+END
+GO

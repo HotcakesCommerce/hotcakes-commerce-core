@@ -1,0 +1,6 @@
+﻿DesktopModules/Hotcakes/Core/Content/StoreAssets.js
+DesktopModules/Hotcakes/Core/Content/StoreAssets.aspx
+DesktopModules/Hotcakes/Core/Content/StoreAssets_Delete.aspx
+DesktopModules/Hotcakes/Core/Admin/Configuration/EventLog.aspx
+DesktopModules/Hotcakes/Core/Admin/Modules
+DesktopModules/Hotcakes/Core/Admin/People/RoleAdministration.aspx

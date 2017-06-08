@@ -1,0 +1,2 @@
+<%@ Control Language="C#" AutoEventWireup="True" Inherits="Hotcakes.Modules.Core.MasterPageJavascript" Codebehind="MasterPageJavascript.ascx.cs" %>
+<asp:Literal runat="server" ID="litMain"></asp:Literal>

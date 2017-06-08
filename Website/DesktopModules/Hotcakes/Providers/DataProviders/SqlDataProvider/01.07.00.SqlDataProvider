@@ -1,0 +1,14 @@
+﻿/* Promotions changes */
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_Promotions' AND  COLUMN_NAME = 'SortOrder')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Promotions] ADD [SortOrder] int null
+END
+GO
+
+UPDATE temp
+SET SortOrder = [row] 
+FROM (select *, ROW_NUMBER() OVER(order by StartDateUtc) as [row] from {databaseOwner}[{objectQualifier}hcc_Promotions]) temp
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Promotions] ALTER COLUMN [SortOrder] int NOT NULL
+GO

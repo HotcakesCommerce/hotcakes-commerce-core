@@ -1,0 +1,1187 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hotcakes.Commerce.Fakes</name>
+    </assembly>
+    <members>
+        <member name="T:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext">
+            <summary>Shim type of Hotcakes.Commerce.Data.EF.HccDbContext</summary>
+        </member>
+        <member name="M:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.#ctor(Hotcakes.Commerce.Data.EF.HccDbContext)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.Bind(System.Data.Entity.Infrastructure.IObjectContextAdapter)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.Bind(System.IDisposable)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AddObjectIndexNullableOfInt64NullableOfGuidNullableOfInt32StringStringString">
+            <summary>Sets the shim of HccDbContext.AddObjectIndex(Nullable`1&lt;Int64&gt; siteId, Nullable`1&lt;Guid&gt; objectId, Nullable`1&lt;Int32&gt; objectType, String title, String culture, String wordScores)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.Constructor">
+            <summary>Sets the shim of HccDbContext.HccDbContext()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.ConstructorDbConnectionBoolean">
+            <summary>Sets the shim of HccDbContext.HccDbContext(DbConnection existingConnection, Boolean contextOwnsConnection)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.ConstructorDbConnectionDbCompiledModelBoolean">
+            <summary>Sets the shim of HccDbContext.HccDbContext(DbConnection existingConnection, DbCompiledModel model, Boolean contextOwnsConnection)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.ConstructorObjectContextBoolean">
+            <summary>Sets the shim of HccDbContext.HccDbContext(ObjectContext objectContext, Boolean dbContextOwnsObjectContext)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.ConstructorString">
+            <summary>Sets the shim of HccDbContext.HccDbContext(String nameOrConnectionString)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.ConstructorStringDbCompiledModel">
+            <summary>Sets the shim of HccDbContext.HccDbContext(String nameOrConnectionString, DbCompiledModel model)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.DeleteSampleAnalyticsNullableOfInt64NullableOfBoolean">
+            <summary>Sets the shim of HccDbContext.DeleteSampleAnalytics(Nullable`1&lt;Int64&gt; storeId, Nullable`1&lt;Boolean&gt; forSampleDataOnly)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.DeleteStoreAnalyticsEventsNullableOfInt64">
+            <summary>Sets the shim of HccDbContext.DeleteStoreAnalyticsEvents(Nullable`1&lt;Int64&gt; storeId)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.DeleteStoreOrdersNullableOfInt64">
+            <summary>Sets the shim of HccDbContext.DeleteStoreOrders(Nullable`1&lt;Int64&gt; storeId)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.FindGiftCardsNullableOfInt64NullableOfDateTimeNullableOfDateTimeStringNullableOfDecimalNullableOfInt32NullableOfDecimalNullableOfInt32NullableOfBooleanNullableOfBooleanNullableOfInt32NullableOfInt32ObjectParameter">
+            <summary>Sets the shim of HccDbContext.FindGiftCards(Nullable`1&lt;Int64&gt; storeId, Nullable`1&lt;DateTime&gt; startDateUtc, Nullable`1&lt;DateTime&gt; endDateUtc, String searchText, Nullable`1&lt;Decimal&gt; amount, Nullable`1&lt;Int32&gt; amountComparing, Nullable`1&lt;Decimal&gt; balance, Nullable`1&lt;Int32&gt; balanceComparing, Nullable`1&lt;Boolean&gt; includeInactive, Nullable`1&lt;Boolean&gt; includeExpired, Nullable`1&lt;Int32&gt; pageIndex, Nullable`1&lt;Int32&gt; pageSize, ObjectParameter rowCount)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.GenerateNewOrderNumberNullableOfInt64">
+            <summary>Sets the shim of HccDbContext.GenerateNewOrderNumber(Nullable`1&lt;Int64&gt; storeid)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.GetBouncedListByDayNullableOfInt64NullableOfDateTimeNullableOfDateTimeNullableOfGuidNullableOfGuid">
+            <summary>Sets the shim of HccDbContext.GetBouncedListByDay(Nullable`1&lt;Int64&gt; storeId, Nullable`1&lt;DateTime&gt; rangeStart, Nullable`1&lt;DateTime&gt; rangeEnd, Nullable`1&lt;Guid&gt; productGuid, Nullable`1&lt;Guid&gt; categoryGuid)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.GetBouncedListByHourNullableOfInt64NullableOfDateTimeNullableOfDateTimeNullableOfGuidNullableOfGuid">
+            <summary>Sets the shim of HccDbContext.GetBouncedListByHour(Nullable`1&lt;Int64&gt; storeId, Nullable`1&lt;DateTime&gt; rangeStart, Nullable`1&lt;DateTime&gt; rangeEnd, Nullable`1&lt;Guid&gt; productGuid, Nullable`1&lt;Guid&gt; categoryGuid)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.GetPromotionsActivityListNullableOfInt64NullableOfDateTimeNullableOfDateTime">
+            <summary>Sets the shim of HccDbContext.GetPromotionsActivityList(Nullable`1&lt;Int64&gt; storeId, Nullable`1&lt;DateTime&gt; startDateUtc, Nullable`1&lt;DateTime&gt; endDateUtc)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.GetTopAffectedProductsNullableOfInt64StringStringNullableOfDateTimeNullableOfDateTimeNullableOfDateTimeNullableOfDateTimeNullableOfInt32NullableOfInt32NullableOfInt32NullableOfInt32ObjectParameter">
+            <summary>Sets the shim of HccDbContext.GetTopAffectedProducts(Nullable`1&lt;Int64&gt; storeId, String mainCulture, String fallbackCulture, Nullable`1&lt;DateTime&gt; rangeStart, Nullable`1&lt;DateTime&gt; rangeEnd, Nullable`1&lt;DateTime&gt; previousRangeStart, Nullable`1&lt;DateTime&gt; previousRangeEnd, Nullable`1&lt;Int32&gt; sortBy, Nullable`1&lt;Int32&gt; sortDirection, Nullable`1&lt;Int32&gt; pageNumber, Nullable`1&lt;Int32&gt; pageSize, ObjectParameter totalCount)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.OnModelCreatingDbModelBuilder">
+            <summary>Sets the shim of HccDbContext.OnModelCreating(DbModelBuilder modelBuilder)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_AddressGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Address()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_AddressSetDbSetOfhcc_Address">
+            <summary>Sets the shim of HccDbContext.set_hcc_Address(DbSet`1&lt;hcc_Address&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_AffiliateGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Affiliate()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_AffiliatePaymentsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_AffiliatePayments()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_AffiliatePaymentsSetDbSetOfhcc_AffiliatePayments">
+            <summary>Sets the shim of HccDbContext.set_hcc_AffiliatePayments(DbSet`1&lt;hcc_AffiliatePayments&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_AffiliateReferralGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_AffiliateReferral()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_AffiliateReferralSetDbSetOfhcc_AffiliateReferral">
+            <summary>Sets the shim of HccDbContext.set_hcc_AffiliateReferral(DbSet`1&lt;hcc_AffiliateReferral&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_AffiliateSetDbSetOfhcc_Affiliate">
+            <summary>Sets the shim of HccDbContext.set_hcc_Affiliate(DbSet`1&lt;hcc_Affiliate&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_AnalyticsEventsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_AnalyticsEvents()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_AnalyticsEventsSetDbSetOfhcc_AnalyticsEvent">
+            <summary>Sets the shim of HccDbContext.set_hcc_AnalyticsEvents(DbSet`1&lt;hcc_AnalyticsEvent&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ApiKeysGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ApiKeys()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ApiKeysSetDbSetOfhcc_ApiKey">
+            <summary>Sets the shim of HccDbContext.set_hcc_ApiKeys(DbSet`1&lt;hcc_ApiKey&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_AuditGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Audit()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_AuditSetDbSetOfhcc_Audit">
+            <summary>Sets the shim of HccDbContext.set_hcc_Audit(DbSet`1&lt;hcc_Audit&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_AuthTokensGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_AuthTokens()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_AuthTokensSetDbSetOfhcc_AuthTokens">
+            <summary>Sets the shim of HccDbContext.set_hcc_AuthTokens(DbSet`1&lt;hcc_AuthTokens&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_BundledProductsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_BundledProducts()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_BundledProductsSetDbSetOfhcc_BundledProducts">
+            <summary>Sets the shim of HccDbContext.set_hcc_BundledProducts(DbSet`1&lt;hcc_BundledProducts&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_CatalogRolesGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_CatalogRoles()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_CatalogRolesSetDbSetOfhcc_CatalogRoles">
+            <summary>Sets the shim of HccDbContext.set_hcc_CatalogRoles(DbSet`1&lt;hcc_CatalogRoles&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_CategoryGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Category()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_CategorySetDbSetOfhcc_Category">
+            <summary>Sets the shim of HccDbContext.set_hcc_Category(DbSet`1&lt;hcc_Category&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_CategoryTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_CategoryTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_CategoryTranslationsSetDbSetOfhcc_CategoryTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_CategoryTranslations(DbSet`1&lt;hcc_CategoryTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_CategoryXPropertyGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_CategoryXProperty()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_CategoryXPropertySetDbSetOfhcc_CategoryXProperty">
+            <summary>Sets the shim of HccDbContext.set_hcc_CategoryXProperty(DbSet`1&lt;hcc_CategoryXProperty&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ContentBlockGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ContentBlock()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ContentBlockSetDbSetOfhcc_ContentBlock">
+            <summary>Sets the shim of HccDbContext.set_hcc_ContentBlock(DbSet`1&lt;hcc_ContentBlock&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ContentBlockTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ContentBlockTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ContentBlockTranslationsSetDbSetOfhcc_ContentBlockTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ContentBlockTranslations(DbSet`1&lt;hcc_ContentBlockTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ContentColumnGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ContentColumn()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ContentColumnSetDbSetOfhcc_ContentColumn">
+            <summary>Sets the shim of HccDbContext.set_hcc_ContentColumn(DbSet`1&lt;hcc_ContentColumn&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_CountriesGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Countries()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_CountriesSetDbSetOfhcc_Country">
+            <summary>Sets the shim of HccDbContext.set_hcc_Countries(DbSet`1&lt;hcc_Country&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_CountryTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_CountryTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_CountryTranslationsSetDbSetOfhcc_CountryTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_CountryTranslations(DbSet`1&lt;hcc_CountryTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_CustomUrlGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_CustomUrl()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_CustomUrlSetDbSetOfhcc_CustomUrl">
+            <summary>Sets the shim of HccDbContext.set_hcc_CustomUrl(DbSet`1&lt;hcc_CustomUrl&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_FraudGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Fraud()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_FraudSetDbSetOfhcc_Fraud">
+            <summary>Sets the shim of HccDbContext.set_hcc_Fraud(DbSet`1&lt;hcc_Fraud&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_GiftCardGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_GiftCard()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_GiftCardSetDbSetOfhcc_GiftCard">
+            <summary>Sets the shim of HccDbContext.set_hcc_GiftCard(DbSet`1&lt;hcc_GiftCard&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_HtmlTemplateTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_HtmlTemplateTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_HtmlTemplateTranslationsSetDbSetOfhcc_HtmlTemplateTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_HtmlTemplateTranslations(DbSet`1&lt;hcc_HtmlTemplateTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_HtmlTemplatesGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_HtmlTemplates()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_HtmlTemplatesSetDbSetOfhcc_HtmlTemplates">
+            <summary>Sets the shim of HccDbContext.set_hcc_HtmlTemplates(DbSet`1&lt;hcc_HtmlTemplates&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_LineItemGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_LineItem()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_LineItemSetDbSetOfhcc_LineItem">
+            <summary>Sets the shim of HccDbContext.set_hcc_LineItem(DbSet`1&lt;hcc_LineItem&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_MailingListGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_MailingList()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_MailingListMemberGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_MailingListMember()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_MailingListMemberSetDbSetOfhcc_MailingListMember">
+            <summary>Sets the shim of HccDbContext.set_hcc_MailingListMember(DbSet`1&lt;hcc_MailingListMember&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_MailingListSetDbSetOfhcc_MailingList">
+            <summary>Sets the shim of HccDbContext.set_hcc_MailingList(DbSet`1&lt;hcc_MailingList&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ManufacturerGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Manufacturer()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ManufacturerSetDbSetOfhcc_Manufacturer">
+            <summary>Sets the shim of HccDbContext.set_hcc_Manufacturer(DbSet`1&lt;hcc_Manufacturer&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_MembershipProductTypeGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_MembershipProductType()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_MembershipProductTypeSetDbSetOfhcc_MembershipProductType">
+            <summary>Sets the shim of HccDbContext.set_hcc_MembershipProductType(DbSet`1&lt;hcc_MembershipProductType&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_NewsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_News()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_NewsSetDbSetOfhcc_News">
+            <summary>Sets the shim of HccDbContext.set_hcc_News(DbSet`1&lt;hcc_News&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_OrderCouponGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_OrderCoupon()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_OrderCouponSetDbSetOfhcc_OrderCoupon">
+            <summary>Sets the shim of HccDbContext.set_hcc_OrderCoupon(DbSet`1&lt;hcc_OrderCoupon&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_OrderGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Order()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_OrderNoteGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_OrderNote()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_OrderNoteSetDbSetOfhcc_OrderNote">
+            <summary>Sets the shim of HccDbContext.set_hcc_OrderNote(DbSet`1&lt;hcc_OrderNote&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_OrderPackageGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_OrderPackage()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_OrderPackageSetDbSetOfhcc_OrderPackage">
+            <summary>Sets the shim of HccDbContext.set_hcc_OrderPackage(DbSet`1&lt;hcc_OrderPackage&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_OrderSetDbSetOfhcc_Order">
+            <summary>Sets the shim of HccDbContext.set_hcc_Order(DbSet`1&lt;hcc_Order&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_OrderTransactionsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_OrderTransactions()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_OrderTransactionsSetDbSetOfhcc_OrderTransactions">
+            <summary>Sets the shim of HccDbContext.set_hcc_OrderTransactions(DbSet`1&lt;hcc_OrderTransactions&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_PriceGroupGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_PriceGroup()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_PriceGroupSetDbSetOfhcc_PriceGroup">
+            <summary>Sets the shim of HccDbContext.set_hcc_PriceGroup(DbSet`1&lt;hcc_PriceGroup&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductFileGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductFile()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductFileSetDbSetOfhcc_ProductFile">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductFile(DbSet`1&lt;hcc_ProductFile&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductFileXProductGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductFileXProduct()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductFileXProductSetDbSetOfhcc_ProductFileXProduct">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductFileXProduct(DbSet`1&lt;hcc_ProductFileXProduct&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Product()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductImageGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductImage()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductImageSetDbSetOfhcc_ProductImage">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductImage(DbSet`1&lt;hcc_ProductImage&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductInventoryGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductInventory()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductInventorySetDbSetOfhcc_ProductInventory">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductInventory(DbSet`1&lt;hcc_ProductInventory&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductOptionItemTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductOptionItemTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductOptionItemTranslationsSetDbSetOfhcc_ProductOptionItemTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductOptionItemTranslations(DbSet`1&lt;hcc_ProductOptionItemTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductOptionTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductOptionTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductOptionTranslationsSetDbSetOfhcc_ProductOptionTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductOptionTranslations(DbSet`1&lt;hcc_ProductOptionTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductOptionsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductOptions()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductOptionsItemsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductOptionsItems()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductOptionsItemsSetDbSetOfhcc_ProductOptionsItems">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductOptionsItems(DbSet`1&lt;hcc_ProductOptionsItems&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductOptionsSetDbSetOfhcc_ProductOptions">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductOptions(DbSet`1&lt;hcc_ProductOptions&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductPropertyChoiceGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductPropertyChoice()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductPropertyChoiceSetDbSetOfhcc_ProductPropertyChoice">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductPropertyChoice(DbSet`1&lt;hcc_ProductPropertyChoice&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductPropertyChoiceTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductPropertyChoiceTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductPropertyChoiceTranslationsSetDbSetOfhcc_ProductPropertyChoiceTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductPropertyChoiceTranslations(DbSet`1&lt;hcc_ProductPropertyChoiceTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductPropertyGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductProperty()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductPropertySetDbSetOfhcc_ProductProperty">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductProperty(DbSet`1&lt;hcc_ProductProperty&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductPropertyTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductPropertyTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductPropertyTranslationsSetDbSetOfhcc_ProductPropertyTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductPropertyTranslations(DbSet`1&lt;hcc_ProductPropertyTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductPropertyValueGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductPropertyValue()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductPropertyValueSetDbSetOfhcc_ProductPropertyValue">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductPropertyValue(DbSet`1&lt;hcc_ProductPropertyValue&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductPropertyValueTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductPropertyValueTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductPropertyValueTranslationsSetDbSetOfhcc_ProductPropertyValueTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductPropertyValueTranslations(DbSet`1&lt;hcc_ProductPropertyValueTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductRelationshipGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductRelationship()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductRelationshipSetDbSetOfhcc_ProductRelationship">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductRelationship(DbSet`1&lt;hcc_ProductRelationship&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductReviewGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductReview()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductReviewSetDbSetOfhcc_ProductReview">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductReview(DbSet`1&lt;hcc_ProductReview&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductSetDbSetOfhcc_Product">
+            <summary>Sets the shim of HccDbContext.set_hcc_Product(DbSet`1&lt;hcc_Product&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductTranslationsSetDbSetOfhcc_ProductTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductTranslations(DbSet`1&lt;hcc_ProductTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductTypeGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductType()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductTypeSetDbSetOfhcc_ProductType">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductType(DbSet`1&lt;hcc_ProductType&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductTypeTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductTypeTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductTypeTranslationsSetDbSetOfhcc_ProductTypeTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductTypeTranslations(DbSet`1&lt;hcc_ProductTypeTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductTypeXProductPropertyGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductTypeXProductProperty()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductTypeXProductPropertySetDbSetOfhcc_ProductTypeXProductProperty">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductTypeXProductProperty(DbSet`1&lt;hcc_ProductTypeXProductProperty&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductVolumeDiscountsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductVolumeDiscounts()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductVolumeDiscountsSetDbSetOfhcc_ProductVolumeDiscounts">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductVolumeDiscounts(DbSet`1&lt;hcc_ProductVolumeDiscounts&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductXCategoryGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductXCategory()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductXCategorySetDbSetOfhcc_ProductXCategory">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductXCategory(DbSet`1&lt;hcc_ProductXCategory&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductXOptionGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductXOption()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ProductXOptionSetDbSetOfhcc_ProductXOption">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductXOption(DbSet`1&lt;hcc_ProductXOption&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_PromotionTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_PromotionTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_PromotionTranslationsSetDbSetOfhcc_PromotionTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_PromotionTranslations(DbSet`1&lt;hcc_PromotionTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_PromotionsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Promotions()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_PromotionsSetDbSetOfhcc_Promotions">
+            <summary>Sets the shim of HccDbContext.set_hcc_Promotions(DbSet`1&lt;hcc_Promotions&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_QueuedTasksGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_QueuedTasks()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_QueuedTasksSetDbSetOfhcc_QueuedTask">
+            <summary>Sets the shim of HccDbContext.set_hcc_QueuedTasks(DbSet`1&lt;hcc_QueuedTask&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_RMAGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_RMA()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_RMAItemGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_RMAItem()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_RMAItemSetDbSetOfhcc_RMAItem">
+            <summary>Sets the shim of HccDbContext.set_hcc_RMAItem(DbSet`1&lt;hcc_RMAItem&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_RMASetDbSetOfhcc_RMA">
+            <summary>Sets the shim of HccDbContext.set_hcc_RMA(DbSet`1&lt;hcc_RMA&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_RegionTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_RegionTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_RegionTranslationsSetDbSetOfhcc_RegionTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_RegionTranslations(DbSet`1&lt;hcc_RegionTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_RegionsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Regions()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_RegionsSetDbSetOfhcc_Region">
+            <summary>Sets the shim of HccDbContext.set_hcc_Regions(DbSet`1&lt;hcc_Region&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_RewardsPointsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_RewardsPoints()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_RewardsPointsSetDbSetOfhcc_RewardsPoints">
+            <summary>Sets the shim of HccDbContext.set_hcc_RewardsPoints(DbSet`1&lt;hcc_RewardsPoints&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_SearchLexiconGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_SearchLexicon()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_SearchLexiconSetDbSetOfhcc_SearchLexicon">
+            <summary>Sets the shim of HccDbContext.set_hcc_SearchLexicon(DbSet`1&lt;hcc_SearchLexicon&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_SearchObjectWordsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_SearchObjectWords()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_SearchObjectWordsSetDbSetOfhcc_SearchObjectWord">
+            <summary>Sets the shim of HccDbContext.set_hcc_SearchObjectWords(DbSet`1&lt;hcc_SearchObjectWord&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_SearchObjectsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_SearchObjects()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_SearchObjectsSetDbSetOfhcc_SearchObject">
+            <summary>Sets the shim of HccDbContext.set_hcc_SearchObjects(DbSet`1&lt;hcc_SearchObject&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_SearchQueryGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_SearchQuery()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_SearchQuerySetDbSetOfhcc_SearchQuery">
+            <summary>Sets the shim of HccDbContext.set_hcc_SearchQuery(DbSet`1&lt;hcc_SearchQuery&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ShippingMethodGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ShippingMethod()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ShippingMethodSetDbSetOfhcc_ShippingMethod">
+            <summary>Sets the shim of HccDbContext.set_hcc_ShippingMethod(DbSet`1&lt;hcc_ShippingMethod&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ShippingMethodTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ShippingMethodTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ShippingMethodTranslationsSetDbSetOfhcc_ShippingMethodTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ShippingMethodTranslations(DbSet`1&lt;hcc_ShippingMethodTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ShippingZonesGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ShippingZones()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_ShippingZonesSetDbSetOfhcc_ShippingZones">
+            <summary>Sets the shim of HccDbContext.set_hcc_ShippingZones(DbSet`1&lt;hcc_ShippingZones&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_StoreDomainsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_StoreDomains()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_StoreDomainsSetDbSetOfhcc_StoreDomains">
+            <summary>Sets the shim of HccDbContext.set_hcc_StoreDomains(DbSet`1&lt;hcc_StoreDomains&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_StoreSettingsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_StoreSettings()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_StoreSettingsSetDbSetOfhcc_StoreSettings">
+            <summary>Sets the shim of HccDbContext.set_hcc_StoreSettings(DbSet`1&lt;hcc_StoreSettings&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_StoreSettingsTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_StoreSettingsTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_StoreSettingsTranslationsSetDbSetOfhcc_StoreSettingsTranslations">
+            <summary>Sets the shim of HccDbContext.set_hcc_StoreSettingsTranslations(DbSet`1&lt;hcc_StoreSettingsTranslations&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_StoresGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Stores()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_StoresSetDbSetOfhcc_Stores">
+            <summary>Sets the shim of HccDbContext.set_hcc_Stores(DbSet`1&lt;hcc_Stores&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_StoresXUsersGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_StoresXUsers()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_StoresXUsersSetDbSetOfhcc_StoresXUsers">
+            <summary>Sets the shim of HccDbContext.set_hcc_StoresXUsers(DbSet`1&lt;hcc_StoresXUsers&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_TaxSchedulesGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_TaxSchedules()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_TaxSchedulesSetDbSetOfhcc_TaxSchedules">
+            <summary>Sets the shim of HccDbContext.set_hcc_TaxSchedules(DbSet`1&lt;hcc_TaxSchedules&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_TaxesGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Taxes()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_TaxesSetDbSetOfhcc_Taxes">
+            <summary>Sets the shim of HccDbContext.set_hcc_Taxes(DbSet`1&lt;hcc_Taxes&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_USGeoDataGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_USGeoData()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_USGeoDataSetDbSetOfhcc_USGeoData">
+            <summary>Sets the shim of HccDbContext.set_hcc_USGeoData(DbSet`1&lt;hcc_USGeoData&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_UserAccountsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_UserAccounts()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_UserAccountsSetDbSetOfhcc_UserAccounts">
+            <summary>Sets the shim of HccDbContext.set_hcc_UserAccounts(DbSet`1&lt;hcc_UserAccounts&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_UserGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_User()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_UserQuestionsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_UserQuestions()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_UserQuestionsSetDbSetOfhcc_UserQuestions">
+            <summary>Sets the shim of HccDbContext.set_hcc_UserQuestions(DbSet`1&lt;hcc_UserQuestions&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_UserSetDbSetOfhcc_User">
+            <summary>Sets the shim of HccDbContext.set_hcc_User(DbSet`1&lt;hcc_User&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_UserXContactGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_UserXContact()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_UserXContactSetDbSetOfhcc_UserXContact">
+            <summary>Sets the shim of HccDbContext.set_hcc_UserXContact(DbSet`1&lt;hcc_UserXContact&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_VariantsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Variants()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_VariantsSetDbSetOfhcc_Variants">
+            <summary>Sets the shim of HccDbContext.set_hcc_Variants(DbSet`1&lt;hcc_Variants&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_VendorGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Vendor()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_VendorSetDbSetOfhcc_Vendor">
+            <summary>Sets the shim of HccDbContext.set_hcc_Vendor(DbSet`1&lt;hcc_Vendor&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_WishListItemsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_WishListItems()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.hcc_WishListItemsSetDbSetOfhcc_WishListItem">
+            <summary>Sets the shim of HccDbContext.set_hcc_WishListItems(DbSet`1&lt;hcc_WishListItem&gt; value)</summary>
+        </member>
+        <member name="T:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.AddObjectIndexNullableOfInt64NullableOfGuidNullableOfInt32StringStringString">
+            <summary>Sets the shim of HccDbContext.AddObjectIndex(Nullable`1&lt;Int64&gt; siteId, Nullable`1&lt;Guid&gt; objectId, Nullable`1&lt;Int32&gt; objectType, String title, String culture, String wordScores)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.DeleteSampleAnalyticsNullableOfInt64NullableOfBoolean">
+            <summary>Sets the shim of HccDbContext.DeleteSampleAnalytics(Nullable`1&lt;Int64&gt; storeId, Nullable`1&lt;Boolean&gt; forSampleDataOnly)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.DeleteStoreAnalyticsEventsNullableOfInt64">
+            <summary>Sets the shim of HccDbContext.DeleteStoreAnalyticsEvents(Nullable`1&lt;Int64&gt; storeId)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.DeleteStoreOrdersNullableOfInt64">
+            <summary>Sets the shim of HccDbContext.DeleteStoreOrders(Nullable`1&lt;Int64&gt; storeId)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.FindGiftCardsNullableOfInt64NullableOfDateTimeNullableOfDateTimeStringNullableOfDecimalNullableOfInt32NullableOfDecimalNullableOfInt32NullableOfBooleanNullableOfBooleanNullableOfInt32NullableOfInt32ObjectParameter">
+            <summary>Sets the shim of HccDbContext.FindGiftCards(Nullable`1&lt;Int64&gt; storeId, Nullable`1&lt;DateTime&gt; startDateUtc, Nullable`1&lt;DateTime&gt; endDateUtc, String searchText, Nullable`1&lt;Decimal&gt; amount, Nullable`1&lt;Int32&gt; amountComparing, Nullable`1&lt;Decimal&gt; balance, Nullable`1&lt;Int32&gt; balanceComparing, Nullable`1&lt;Boolean&gt; includeInactive, Nullable`1&lt;Boolean&gt; includeExpired, Nullable`1&lt;Int32&gt; pageIndex, Nullable`1&lt;Int32&gt; pageSize, ObjectParameter rowCount)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.GenerateNewOrderNumberNullableOfInt64">
+            <summary>Sets the shim of HccDbContext.GenerateNewOrderNumber(Nullable`1&lt;Int64&gt; storeid)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.GetBouncedListByDayNullableOfInt64NullableOfDateTimeNullableOfDateTimeNullableOfGuidNullableOfGuid">
+            <summary>Sets the shim of HccDbContext.GetBouncedListByDay(Nullable`1&lt;Int64&gt; storeId, Nullable`1&lt;DateTime&gt; rangeStart, Nullable`1&lt;DateTime&gt; rangeEnd, Nullable`1&lt;Guid&gt; productGuid, Nullable`1&lt;Guid&gt; categoryGuid)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.GetBouncedListByHourNullableOfInt64NullableOfDateTimeNullableOfDateTimeNullableOfGuidNullableOfGuid">
+            <summary>Sets the shim of HccDbContext.GetBouncedListByHour(Nullable`1&lt;Int64&gt; storeId, Nullable`1&lt;DateTime&gt; rangeStart, Nullable`1&lt;DateTime&gt; rangeEnd, Nullable`1&lt;Guid&gt; productGuid, Nullable`1&lt;Guid&gt; categoryGuid)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.GetPromotionsActivityListNullableOfInt64NullableOfDateTimeNullableOfDateTime">
+            <summary>Sets the shim of HccDbContext.GetPromotionsActivityList(Nullable`1&lt;Int64&gt; storeId, Nullable`1&lt;DateTime&gt; startDateUtc, Nullable`1&lt;DateTime&gt; endDateUtc)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.GetTopAffectedProductsNullableOfInt64StringStringNullableOfDateTimeNullableOfDateTimeNullableOfDateTimeNullableOfDateTimeNullableOfInt32NullableOfInt32NullableOfInt32NullableOfInt32ObjectParameter">
+            <summary>Sets the shim of HccDbContext.GetTopAffectedProducts(Nullable`1&lt;Int64&gt; storeId, String mainCulture, String fallbackCulture, Nullable`1&lt;DateTime&gt; rangeStart, Nullable`1&lt;DateTime&gt; rangeEnd, Nullable`1&lt;DateTime&gt; previousRangeStart, Nullable`1&lt;DateTime&gt; previousRangeEnd, Nullable`1&lt;Int32&gt; sortBy, Nullable`1&lt;Int32&gt; sortDirection, Nullable`1&lt;Int32&gt; pageNumber, Nullable`1&lt;Int32&gt; pageSize, ObjectParameter totalCount)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.OnModelCreatingDbModelBuilder">
+            <summary>Sets the shim of HccDbContext.OnModelCreating(DbModelBuilder modelBuilder)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_AddressGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Address()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_AddressSetDbSetOfhcc_Address">
+            <summary>Sets the shim of HccDbContext.set_hcc_Address(DbSet`1&lt;hcc_Address&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_AffiliateGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Affiliate()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_AffiliatePaymentsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_AffiliatePayments()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_AffiliatePaymentsSetDbSetOfhcc_AffiliatePayments">
+            <summary>Sets the shim of HccDbContext.set_hcc_AffiliatePayments(DbSet`1&lt;hcc_AffiliatePayments&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_AffiliateReferralGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_AffiliateReferral()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_AffiliateReferralSetDbSetOfhcc_AffiliateReferral">
+            <summary>Sets the shim of HccDbContext.set_hcc_AffiliateReferral(DbSet`1&lt;hcc_AffiliateReferral&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_AffiliateSetDbSetOfhcc_Affiliate">
+            <summary>Sets the shim of HccDbContext.set_hcc_Affiliate(DbSet`1&lt;hcc_Affiliate&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_AnalyticsEventsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_AnalyticsEvents()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_AnalyticsEventsSetDbSetOfhcc_AnalyticsEvent">
+            <summary>Sets the shim of HccDbContext.set_hcc_AnalyticsEvents(DbSet`1&lt;hcc_AnalyticsEvent&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ApiKeysGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ApiKeys()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ApiKeysSetDbSetOfhcc_ApiKey">
+            <summary>Sets the shim of HccDbContext.set_hcc_ApiKeys(DbSet`1&lt;hcc_ApiKey&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_AuditGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Audit()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_AuditSetDbSetOfhcc_Audit">
+            <summary>Sets the shim of HccDbContext.set_hcc_Audit(DbSet`1&lt;hcc_Audit&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_AuthTokensGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_AuthTokens()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_AuthTokensSetDbSetOfhcc_AuthTokens">
+            <summary>Sets the shim of HccDbContext.set_hcc_AuthTokens(DbSet`1&lt;hcc_AuthTokens&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_BundledProductsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_BundledProducts()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_BundledProductsSetDbSetOfhcc_BundledProducts">
+            <summary>Sets the shim of HccDbContext.set_hcc_BundledProducts(DbSet`1&lt;hcc_BundledProducts&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_CatalogRolesGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_CatalogRoles()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_CatalogRolesSetDbSetOfhcc_CatalogRoles">
+            <summary>Sets the shim of HccDbContext.set_hcc_CatalogRoles(DbSet`1&lt;hcc_CatalogRoles&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_CategoryGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Category()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_CategorySetDbSetOfhcc_Category">
+            <summary>Sets the shim of HccDbContext.set_hcc_Category(DbSet`1&lt;hcc_Category&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_CategoryTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_CategoryTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_CategoryTranslationsSetDbSetOfhcc_CategoryTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_CategoryTranslations(DbSet`1&lt;hcc_CategoryTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_CategoryXPropertyGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_CategoryXProperty()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_CategoryXPropertySetDbSetOfhcc_CategoryXProperty">
+            <summary>Sets the shim of HccDbContext.set_hcc_CategoryXProperty(DbSet`1&lt;hcc_CategoryXProperty&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ContentBlockGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ContentBlock()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ContentBlockSetDbSetOfhcc_ContentBlock">
+            <summary>Sets the shim of HccDbContext.set_hcc_ContentBlock(DbSet`1&lt;hcc_ContentBlock&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ContentBlockTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ContentBlockTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ContentBlockTranslationsSetDbSetOfhcc_ContentBlockTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ContentBlockTranslations(DbSet`1&lt;hcc_ContentBlockTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ContentColumnGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ContentColumn()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ContentColumnSetDbSetOfhcc_ContentColumn">
+            <summary>Sets the shim of HccDbContext.set_hcc_ContentColumn(DbSet`1&lt;hcc_ContentColumn&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_CountriesGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Countries()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_CountriesSetDbSetOfhcc_Country">
+            <summary>Sets the shim of HccDbContext.set_hcc_Countries(DbSet`1&lt;hcc_Country&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_CountryTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_CountryTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_CountryTranslationsSetDbSetOfhcc_CountryTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_CountryTranslations(DbSet`1&lt;hcc_CountryTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_CustomUrlGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_CustomUrl()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_CustomUrlSetDbSetOfhcc_CustomUrl">
+            <summary>Sets the shim of HccDbContext.set_hcc_CustomUrl(DbSet`1&lt;hcc_CustomUrl&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_FraudGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Fraud()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_FraudSetDbSetOfhcc_Fraud">
+            <summary>Sets the shim of HccDbContext.set_hcc_Fraud(DbSet`1&lt;hcc_Fraud&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_GiftCardGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_GiftCard()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_GiftCardSetDbSetOfhcc_GiftCard">
+            <summary>Sets the shim of HccDbContext.set_hcc_GiftCard(DbSet`1&lt;hcc_GiftCard&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_HtmlTemplateTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_HtmlTemplateTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_HtmlTemplateTranslationsSetDbSetOfhcc_HtmlTemplateTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_HtmlTemplateTranslations(DbSet`1&lt;hcc_HtmlTemplateTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_HtmlTemplatesGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_HtmlTemplates()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_HtmlTemplatesSetDbSetOfhcc_HtmlTemplates">
+            <summary>Sets the shim of HccDbContext.set_hcc_HtmlTemplates(DbSet`1&lt;hcc_HtmlTemplates&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_LineItemGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_LineItem()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_LineItemSetDbSetOfhcc_LineItem">
+            <summary>Sets the shim of HccDbContext.set_hcc_LineItem(DbSet`1&lt;hcc_LineItem&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_MailingListGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_MailingList()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_MailingListMemberGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_MailingListMember()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_MailingListMemberSetDbSetOfhcc_MailingListMember">
+            <summary>Sets the shim of HccDbContext.set_hcc_MailingListMember(DbSet`1&lt;hcc_MailingListMember&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_MailingListSetDbSetOfhcc_MailingList">
+            <summary>Sets the shim of HccDbContext.set_hcc_MailingList(DbSet`1&lt;hcc_MailingList&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ManufacturerGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Manufacturer()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ManufacturerSetDbSetOfhcc_Manufacturer">
+            <summary>Sets the shim of HccDbContext.set_hcc_Manufacturer(DbSet`1&lt;hcc_Manufacturer&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_MembershipProductTypeGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_MembershipProductType()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_MembershipProductTypeSetDbSetOfhcc_MembershipProductType">
+            <summary>Sets the shim of HccDbContext.set_hcc_MembershipProductType(DbSet`1&lt;hcc_MembershipProductType&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_NewsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_News()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_NewsSetDbSetOfhcc_News">
+            <summary>Sets the shim of HccDbContext.set_hcc_News(DbSet`1&lt;hcc_News&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_OrderCouponGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_OrderCoupon()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_OrderCouponSetDbSetOfhcc_OrderCoupon">
+            <summary>Sets the shim of HccDbContext.set_hcc_OrderCoupon(DbSet`1&lt;hcc_OrderCoupon&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_OrderGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Order()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_OrderNoteGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_OrderNote()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_OrderNoteSetDbSetOfhcc_OrderNote">
+            <summary>Sets the shim of HccDbContext.set_hcc_OrderNote(DbSet`1&lt;hcc_OrderNote&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_OrderPackageGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_OrderPackage()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_OrderPackageSetDbSetOfhcc_OrderPackage">
+            <summary>Sets the shim of HccDbContext.set_hcc_OrderPackage(DbSet`1&lt;hcc_OrderPackage&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_OrderSetDbSetOfhcc_Order">
+            <summary>Sets the shim of HccDbContext.set_hcc_Order(DbSet`1&lt;hcc_Order&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_OrderTransactionsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_OrderTransactions()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_OrderTransactionsSetDbSetOfhcc_OrderTransactions">
+            <summary>Sets the shim of HccDbContext.set_hcc_OrderTransactions(DbSet`1&lt;hcc_OrderTransactions&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_PriceGroupGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_PriceGroup()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_PriceGroupSetDbSetOfhcc_PriceGroup">
+            <summary>Sets the shim of HccDbContext.set_hcc_PriceGroup(DbSet`1&lt;hcc_PriceGroup&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductFileGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductFile()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductFileSetDbSetOfhcc_ProductFile">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductFile(DbSet`1&lt;hcc_ProductFile&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductFileXProductGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductFileXProduct()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductFileXProductSetDbSetOfhcc_ProductFileXProduct">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductFileXProduct(DbSet`1&lt;hcc_ProductFileXProduct&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Product()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductImageGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductImage()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductImageSetDbSetOfhcc_ProductImage">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductImage(DbSet`1&lt;hcc_ProductImage&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductInventoryGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductInventory()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductInventorySetDbSetOfhcc_ProductInventory">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductInventory(DbSet`1&lt;hcc_ProductInventory&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductOptionItemTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductOptionItemTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductOptionItemTranslationsSetDbSetOfhcc_ProductOptionItemTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductOptionItemTranslations(DbSet`1&lt;hcc_ProductOptionItemTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductOptionTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductOptionTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductOptionTranslationsSetDbSetOfhcc_ProductOptionTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductOptionTranslations(DbSet`1&lt;hcc_ProductOptionTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductOptionsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductOptions()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductOptionsItemsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductOptionsItems()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductOptionsItemsSetDbSetOfhcc_ProductOptionsItems">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductOptionsItems(DbSet`1&lt;hcc_ProductOptionsItems&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductOptionsSetDbSetOfhcc_ProductOptions">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductOptions(DbSet`1&lt;hcc_ProductOptions&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductPropertyChoiceGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductPropertyChoice()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductPropertyChoiceSetDbSetOfhcc_ProductPropertyChoice">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductPropertyChoice(DbSet`1&lt;hcc_ProductPropertyChoice&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductPropertyChoiceTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductPropertyChoiceTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductPropertyChoiceTranslationsSetDbSetOfhcc_ProductPropertyChoiceTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductPropertyChoiceTranslations(DbSet`1&lt;hcc_ProductPropertyChoiceTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductPropertyGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductProperty()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductPropertySetDbSetOfhcc_ProductProperty">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductProperty(DbSet`1&lt;hcc_ProductProperty&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductPropertyTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductPropertyTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductPropertyTranslationsSetDbSetOfhcc_ProductPropertyTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductPropertyTranslations(DbSet`1&lt;hcc_ProductPropertyTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductPropertyValueGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductPropertyValue()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductPropertyValueSetDbSetOfhcc_ProductPropertyValue">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductPropertyValue(DbSet`1&lt;hcc_ProductPropertyValue&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductPropertyValueTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductPropertyValueTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductPropertyValueTranslationsSetDbSetOfhcc_ProductPropertyValueTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductPropertyValueTranslations(DbSet`1&lt;hcc_ProductPropertyValueTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductRelationshipGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductRelationship()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductRelationshipSetDbSetOfhcc_ProductRelationship">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductRelationship(DbSet`1&lt;hcc_ProductRelationship&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductReviewGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductReview()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductReviewSetDbSetOfhcc_ProductReview">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductReview(DbSet`1&lt;hcc_ProductReview&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductSetDbSetOfhcc_Product">
+            <summary>Sets the shim of HccDbContext.set_hcc_Product(DbSet`1&lt;hcc_Product&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductTranslationsSetDbSetOfhcc_ProductTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductTranslations(DbSet`1&lt;hcc_ProductTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductTypeGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductType()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductTypeSetDbSetOfhcc_ProductType">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductType(DbSet`1&lt;hcc_ProductType&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductTypeTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductTypeTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductTypeTranslationsSetDbSetOfhcc_ProductTypeTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductTypeTranslations(DbSet`1&lt;hcc_ProductTypeTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductTypeXProductPropertyGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductTypeXProductProperty()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductTypeXProductPropertySetDbSetOfhcc_ProductTypeXProductProperty">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductTypeXProductProperty(DbSet`1&lt;hcc_ProductTypeXProductProperty&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductVolumeDiscountsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductVolumeDiscounts()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductVolumeDiscountsSetDbSetOfhcc_ProductVolumeDiscounts">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductVolumeDiscounts(DbSet`1&lt;hcc_ProductVolumeDiscounts&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductXCategoryGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductXCategory()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductXCategorySetDbSetOfhcc_ProductXCategory">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductXCategory(DbSet`1&lt;hcc_ProductXCategory&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductXOptionGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ProductXOption()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ProductXOptionSetDbSetOfhcc_ProductXOption">
+            <summary>Sets the shim of HccDbContext.set_hcc_ProductXOption(DbSet`1&lt;hcc_ProductXOption&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_PromotionTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_PromotionTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_PromotionTranslationsSetDbSetOfhcc_PromotionTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_PromotionTranslations(DbSet`1&lt;hcc_PromotionTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_PromotionsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Promotions()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_PromotionsSetDbSetOfhcc_Promotions">
+            <summary>Sets the shim of HccDbContext.set_hcc_Promotions(DbSet`1&lt;hcc_Promotions&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_QueuedTasksGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_QueuedTasks()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_QueuedTasksSetDbSetOfhcc_QueuedTask">
+            <summary>Sets the shim of HccDbContext.set_hcc_QueuedTasks(DbSet`1&lt;hcc_QueuedTask&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_RMAGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_RMA()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_RMAItemGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_RMAItem()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_RMAItemSetDbSetOfhcc_RMAItem">
+            <summary>Sets the shim of HccDbContext.set_hcc_RMAItem(DbSet`1&lt;hcc_RMAItem&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_RMASetDbSetOfhcc_RMA">
+            <summary>Sets the shim of HccDbContext.set_hcc_RMA(DbSet`1&lt;hcc_RMA&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_RegionTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_RegionTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_RegionTranslationsSetDbSetOfhcc_RegionTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_RegionTranslations(DbSet`1&lt;hcc_RegionTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_RegionsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Regions()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_RegionsSetDbSetOfhcc_Region">
+            <summary>Sets the shim of HccDbContext.set_hcc_Regions(DbSet`1&lt;hcc_Region&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_RewardsPointsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_RewardsPoints()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_RewardsPointsSetDbSetOfhcc_RewardsPoints">
+            <summary>Sets the shim of HccDbContext.set_hcc_RewardsPoints(DbSet`1&lt;hcc_RewardsPoints&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_SearchLexiconGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_SearchLexicon()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_SearchLexiconSetDbSetOfhcc_SearchLexicon">
+            <summary>Sets the shim of HccDbContext.set_hcc_SearchLexicon(DbSet`1&lt;hcc_SearchLexicon&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_SearchObjectWordsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_SearchObjectWords()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_SearchObjectWordsSetDbSetOfhcc_SearchObjectWord">
+            <summary>Sets the shim of HccDbContext.set_hcc_SearchObjectWords(DbSet`1&lt;hcc_SearchObjectWord&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_SearchObjectsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_SearchObjects()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_SearchObjectsSetDbSetOfhcc_SearchObject">
+            <summary>Sets the shim of HccDbContext.set_hcc_SearchObjects(DbSet`1&lt;hcc_SearchObject&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_SearchQueryGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_SearchQuery()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_SearchQuerySetDbSetOfhcc_SearchQuery">
+            <summary>Sets the shim of HccDbContext.set_hcc_SearchQuery(DbSet`1&lt;hcc_SearchQuery&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ShippingMethodGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ShippingMethod()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ShippingMethodSetDbSetOfhcc_ShippingMethod">
+            <summary>Sets the shim of HccDbContext.set_hcc_ShippingMethod(DbSet`1&lt;hcc_ShippingMethod&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ShippingMethodTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ShippingMethodTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ShippingMethodTranslationsSetDbSetOfhcc_ShippingMethodTranslation">
+            <summary>Sets the shim of HccDbContext.set_hcc_ShippingMethodTranslations(DbSet`1&lt;hcc_ShippingMethodTranslation&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ShippingZonesGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_ShippingZones()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_ShippingZonesSetDbSetOfhcc_ShippingZones">
+            <summary>Sets the shim of HccDbContext.set_hcc_ShippingZones(DbSet`1&lt;hcc_ShippingZones&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_StoreDomainsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_StoreDomains()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_StoreDomainsSetDbSetOfhcc_StoreDomains">
+            <summary>Sets the shim of HccDbContext.set_hcc_StoreDomains(DbSet`1&lt;hcc_StoreDomains&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_StoreSettingsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_StoreSettings()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_StoreSettingsSetDbSetOfhcc_StoreSettings">
+            <summary>Sets the shim of HccDbContext.set_hcc_StoreSettings(DbSet`1&lt;hcc_StoreSettings&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_StoreSettingsTranslationsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_StoreSettingsTranslations()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_StoreSettingsTranslationsSetDbSetOfhcc_StoreSettingsTranslations">
+            <summary>Sets the shim of HccDbContext.set_hcc_StoreSettingsTranslations(DbSet`1&lt;hcc_StoreSettingsTranslations&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_StoresGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Stores()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_StoresSetDbSetOfhcc_Stores">
+            <summary>Sets the shim of HccDbContext.set_hcc_Stores(DbSet`1&lt;hcc_Stores&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_StoresXUsersGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_StoresXUsers()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_StoresXUsersSetDbSetOfhcc_StoresXUsers">
+            <summary>Sets the shim of HccDbContext.set_hcc_StoresXUsers(DbSet`1&lt;hcc_StoresXUsers&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_TaxSchedulesGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_TaxSchedules()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_TaxSchedulesSetDbSetOfhcc_TaxSchedules">
+            <summary>Sets the shim of HccDbContext.set_hcc_TaxSchedules(DbSet`1&lt;hcc_TaxSchedules&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_TaxesGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Taxes()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_TaxesSetDbSetOfhcc_Taxes">
+            <summary>Sets the shim of HccDbContext.set_hcc_Taxes(DbSet`1&lt;hcc_Taxes&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_USGeoDataGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_USGeoData()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_USGeoDataSetDbSetOfhcc_USGeoData">
+            <summary>Sets the shim of HccDbContext.set_hcc_USGeoData(DbSet`1&lt;hcc_USGeoData&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_UserAccountsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_UserAccounts()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_UserAccountsSetDbSetOfhcc_UserAccounts">
+            <summary>Sets the shim of HccDbContext.set_hcc_UserAccounts(DbSet`1&lt;hcc_UserAccounts&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_UserGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_User()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_UserQuestionsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_UserQuestions()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_UserQuestionsSetDbSetOfhcc_UserQuestions">
+            <summary>Sets the shim of HccDbContext.set_hcc_UserQuestions(DbSet`1&lt;hcc_UserQuestions&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_UserSetDbSetOfhcc_User">
+            <summary>Sets the shim of HccDbContext.set_hcc_User(DbSet`1&lt;hcc_User&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_UserXContactGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_UserXContact()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_UserXContactSetDbSetOfhcc_UserXContact">
+            <summary>Sets the shim of HccDbContext.set_hcc_UserXContact(DbSet`1&lt;hcc_UserXContact&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_VariantsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Variants()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_VariantsSetDbSetOfhcc_Variants">
+            <summary>Sets the shim of HccDbContext.set_hcc_Variants(DbSet`1&lt;hcc_Variants&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_VendorGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_Vendor()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_VendorSetDbSetOfhcc_Vendor">
+            <summary>Sets the shim of HccDbContext.set_hcc_Vendor(DbSet`1&lt;hcc_Vendor&gt; value)</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_WishListItemsGet">
+            <summary>Sets the shim of HccDbContext.get_hcc_WishListItems()</summary>
+        </member>
+        <member name="P:Hotcakes.Commerce.Data.EF.Fakes.ShimHccDbContext.AllInstances.hcc_WishListItemsSetDbSetOfhcc_WishListItem">
+            <summary>Sets the shim of HccDbContext.set_hcc_WishListItems(DbSet`1&lt;hcc_WishListItem&gt; value)</summary>
+        </member>
+    </members>
+</doc>

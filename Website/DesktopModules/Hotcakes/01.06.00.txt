@@ -1,0 +1,2 @@
+﻿DesktopModules/Hotcakes/Core/Admin/Parts/PaymentMethods/Credit Card
+DesktopModules/Hotcakes/Core/Admin/Parts/PaymentMethods/Paypal Express

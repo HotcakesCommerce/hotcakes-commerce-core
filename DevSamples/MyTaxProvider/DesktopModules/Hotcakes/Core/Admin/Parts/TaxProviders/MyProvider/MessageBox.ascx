@@ -1,0 +1,2 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MessageBox.ascx.cs" Inherits="MyCompany.MyTaxProvider.DesktopModules.Hotcakes.Core.Admin.Parts.TaxProviders.MyProvider.MessageBox" %>
+<asp:Label Text="" ID="lblMsg" runat="server" />

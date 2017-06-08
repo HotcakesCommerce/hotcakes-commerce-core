@@ -1,0 +1,615 @@
+﻿/* Rename ShippingScheduleId column to IsNonShipping */
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [FK_{objectQualifier}hcc_LineItem_hcc_LineItem]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_VariantId]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_BasePrice]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_DiscountDetails]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_AdjustedPrice]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShippingPortion]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_TaxPortion]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_LineTotal]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_CustomProperties]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_QuantityReturned]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_QuantityShipped]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_StatusCode]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_StatusName]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_SelectionData]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_StoreId]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShippingScheduleId]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_TaxScheduleId]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShippingWeightSingle]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ProductShippingLength]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ProductShippingWidth]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ProductShippingHeight]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShipFromAddress]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShipFromMode]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShipFromNotificationId]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShipSeparately]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ExtraShipCharge]
+GO
+CREATE TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem]
+	(
+	Id bigint NOT NULL IDENTITY (1, 1) 
+		CONSTRAINT [PK_{objectQualifier}hcc_LineItem_Id] PRIMARY KEY CLUSTERED,
+	LastUpdated datetime NOT NULL,
+	ProductId varchar(36) NOT NULL,
+	VariantId varchar(36) NOT NULL,
+	Quantity int NOT NULL,
+	OrderBvin varchar(36) NOT NULL,
+	BasePrice decimal(18, 10) NOT NULL,
+	DiscountDetails nvarchar(MAX) NOT NULL,
+	AdjustedPrice decimal(18, 10) NOT NULL,
+	ShippingPortion decimal(18, 10) NOT NULL,
+	TaxPortion decimal(18, 10) NOT NULL,
+	LineTotal decimal(18, 10) NOT NULL,
+	CustomProperties ntext NOT NULL,
+	QuantityReturned int NOT NULL,
+	QuantityShipped int NOT NULL,
+	ProductName nvarchar(255) NOT NULL,
+	ProductShortDescription nvarchar(MAX) NOT NULL,
+	ProductSku nvarchar(50) NOT NULL,
+	StatusCode varchar(36) NOT NULL,
+	StatusName nvarchar(255) NOT NULL,
+	SelectionData nvarchar(MAX) NOT NULL,
+	StoreId bigint NOT NULL,
+	IsNonShipping int NOT NULL,
+	TaxScheduleId bigint NOT NULL,
+	ProductShippingWeight numeric(10, 4) NOT NULL,
+	ProductShippingLength numeric(10, 4) NOT NULL,
+	ProductShippingWidth numeric(10, 4) NOT NULL,
+	ProductShippingHeight numeric(10, 4) NOT NULL,
+	ShipFromAddress nvarchar(MAX) NOT NULL,
+	ShipFromMode int NOT NULL,
+	ShipFromNotificationId nvarchar(50) NOT NULL,
+	ShipSeparately bit NOT NULL,
+	ExtraShipCharge numeric(10, 4) NOT NULL
+	) 
+	
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_VariantId] DEFAULT ('') FOR VariantId
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_BasePrice] DEFAULT ((0)) FOR BasePrice
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_DiscountDetails] DEFAULT ('') FOR DiscountDetails
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_AdjustedPrice] DEFAULT ((0)) FOR AdjustedPrice
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_ShippingPortion] DEFAULT ((0)) FOR ShippingPortion
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_TaxPortion] DEFAULT ((0)) FOR TaxPortion
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_LineTotal] DEFAULT ((0)) FOR LineTotal
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_CustomProperties] DEFAULT (N'') FOR CustomProperties
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_QuantityReturned] DEFAULT ((0)) FOR QuantityReturned
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_QuantityShipped] DEFAULT ((0)) FOR QuantityShipped
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_StatusCode] DEFAULT ('') FOR StatusCode
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_StatusName] DEFAULT (N'') FOR StatusName
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_SelectionData] DEFAULT ('') FOR SelectionData
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_StoreId] DEFAULT ((0)) FOR StoreId
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_ShippingScheduleId] DEFAULT ('') FOR IsNonShipping
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_TaxScheduleId] DEFAULT ('') FOR TaxScheduleId
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_ShippingWeightSingle] DEFAULT ((0)) FOR ProductShippingWeight
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_ProductShippingLength] DEFAULT ((0)) FOR ProductShippingLength
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_ProductShippingWidth] DEFAULT ((0)) FOR ProductShippingWidth
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_ProductShippingHeight] DEFAULT ((0)) FOR ProductShippingHeight
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_ShipFromAddress] DEFAULT ('') FOR ShipFromAddress
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_ShipFromMode] DEFAULT ((1)) FOR ShipFromMode
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_ShipFromNotificationId] DEFAULT ('') FOR ShipFromNotificationId
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_ShipSeparately] DEFAULT ((0)) FOR ShipSeparately
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_LineItem_ExtraShipCharge] DEFAULT ((0)) FOR ExtraShipCharge
+GO
+SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] ON
+IF EXISTS(SELECT * FROM {databaseOwner}[{objectQualifier}hcc_LineItem])
+	 EXEC('INSERT INTO {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] (Id, LastUpdated, ProductId, VariantId, Quantity, OrderBvin, BasePrice, DiscountDetails, AdjustedPrice, ShippingPortion, TaxPortion, LineTotal, CustomProperties, QuantityReturned, QuantityShipped, ProductName, ProductShortDescription, ProductSku, StatusCode, StatusName, SelectionData, StoreId, IsNonShipping, TaxScheduleId, ProductShippingWeight, ProductShippingLength, ProductShippingWidth, ProductShippingHeight, ShipFromAddress, ShipFromMode, ShipFromNotificationId, ShipSeparately, ExtraShipCharge)
+		SELECT Id, LastUpdated, ProductId, VariantId, Quantity, OrderBvin, BasePrice, DiscountDetails, AdjustedPrice, ShippingPortion, TaxPortion, LineTotal, CustomProperties, QuantityReturned, QuantityShipped, ProductName, ProductShortDescription, ProductSku, StatusCode, StatusName, SelectionData, StoreId, CONVERT(int, ShippingScheduleId), TaxScheduleId, ProductShippingWeight, ProductShippingLength, ProductShippingWidth, ProductShippingHeight, ShipFromAddress, ShipFromMode, ShipFromNotificationId, ShipSeparately, ExtraShipCharge FROM {databaseOwner}[{objectQualifier}hcc_LineItem] WITH (HOLDLOCK TABLOCKX)')
+SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}Tmp_hcc_LineItem] OFF
+GO
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+GO
+EXECUTE sp_rename N'{databaseOwner}[{objectQualifier}Tmp_hcc_LineItem]', N'{objectQualifier}hcc_LineItem', 'OBJECT' 
+GO
+
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_LineItem_1] ON {databaseOwner}[{objectQualifier}hcc_LineItem]
+	(
+	OrderBvin
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] WITH NOCHECK ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_LineItem_hcc_LineItem] FOREIGN KEY
+	(
+	[OrderBvin]
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Order]
+	(
+	[bvin]
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+
+
+/* Rename ShippingScheduleId default */
+IF  EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'{databaseOwner}[DF_{objectQualifier}hcc_LineItem_ShippingScheduleId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShippingScheduleId]
+END
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] ADD  CONSTRAINT [DF_{objectQualifier}hcc_LineItem_IsNonShipping]  DEFAULT ('') FOR [IsNonShipping]
+GO
+
+
+
+/* Cleanup of unused fields in Stores table */
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Stores]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_Stores_Status]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Stores]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_Stores_SubscriptionId]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Stores]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_Stores_StripeCustomerId]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Stores]
+	DROP COLUMN [Status], [SubscriptionId], [DateCancelled], [StripeCustomerId]
+GO
+
+
+/* Added StoreGuid field to Stores table */
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Stores]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_Stores_CustomUrl]
+GO
+CREATE TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_Stores]
+	(
+	Id bigint NOT NULL IDENTITY (1, 1),
+	StoreGuid uniqueidentifier NULL,
+	StoreName nvarchar(255) NOT NULL,
+	DateCreated datetime NOT NULL,
+	CustomUrl nvarchar(255) NOT NULL
+	) 
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_Stores] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_Stores_CustomUrl] DEFAULT ('') FOR CustomUrl
+GO
+SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}Tmp_hcc_Stores] ON
+IF EXISTS(SELECT * FROM {databaseOwner}[{objectQualifier}hcc_Stores])
+	 EXEC('INSERT INTO {databaseOwner}[{objectQualifier}Tmp_hcc_Stores] (Id, StoreName, DateCreated, CustomUrl)
+		SELECT Id, StoreName, DateCreated, CustomUrl FROM {databaseOwner}[{objectQualifier}hcc_Stores] WITH (HOLDLOCK TABLOCKX)')
+SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}Tmp_hcc_Stores] OFF
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions]
+	DROP CONSTRAINT [FK_{objectQualifier}hcc_OrderTransactions_hcc_Stores]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingZones]
+	DROP CONSTRAINT [FK_{objectQualifier}hcc_ShippingZones_hcc_Stores]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettings]
+	DROP CONSTRAINT [FK_{objectQualifier}hcc_StoreSettings_hcc_Stores]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoresXUsers]
+	DROP CONSTRAINT [FK_{objectQualifier}hcc_StoresXUsers_hcc_Stores]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Taxes]
+	DROP CONSTRAINT [FK_{objectQualifier}hcc_Taxes_hcc_Stores]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_TaxSchedules]
+	DROP CONSTRAINT [FK_{objectQualifier}hcc_TaxSchedules_hcc_Stores]
+GO
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Stores]
+GO
+EXECUTE sp_rename N'{databaseOwner}[{objectQualifier}Tmp_hcc_Stores]', N'{objectQualifier}hcc_Stores', 'OBJECT' 
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Stores] ADD CONSTRAINT
+	[PK_{objectQualifier}hcc_Stores] PRIMARY KEY CLUSTERED 
+	(
+	[Id]
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+GO
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_TaxSchedules] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_TaxSchedules_hcc_Stores] FOREIGN KEY
+	(
+	[StoreId]
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores]
+	(
+	[Id]
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Taxes] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_Taxes_hcc_Stores] FOREIGN KEY
+	(
+	[StoreId]
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores]
+	(
+	[Id]
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoresXUsers] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_StoresXUsers_hcc_Stores] FOREIGN KEY
+	(
+	[StoreId]
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores]
+	(
+	[Id]
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettings] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_StoreSettings_hcc_Stores] FOREIGN KEY
+	(
+	[StoreId]
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores]
+	(
+	[Id]
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingZones] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_ShippingZones_hcc_Stores] FOREIGN KEY
+	(
+	[StoreId]
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores]
+	(
+	[Id]
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_OrderTransactions_hcc_Stores] FOREIGN KEY
+	(
+	[StoreId]
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores]
+	(
+	[Id]
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+
+
+update {databaseOwner}[{objectQualifier}hcc_Stores]
+set StoreGuid = (select [GUID] from {databaseOwner}[{objectQualifier}Portals] where PortalId = Id - 1),
+	[CustomUrl] = ''
+GO
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Stores]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_Stores_CustomUrl]
+GO
+CREATE TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_Stores]
+	(
+	Id bigint NOT NULL IDENTITY (1, 1),
+	StoreGuid uniqueidentifier NOT NULL,
+	StoreName nvarchar(255) NOT NULL,
+	DateCreated datetime NOT NULL,
+	CustomUrl nvarchar(255) NOT NULL
+	) 
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tmp_hcc_Stores] ADD CONSTRAINT
+	[DF_{objectQualifier}hcc_Stores_CustomUrl] DEFAULT ('') FOR CustomUrl
+GO
+SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}Tmp_hcc_Stores] ON
+IF EXISTS(SELECT * FROM {databaseOwner}[{objectQualifier}hcc_Stores])
+	 EXEC('INSERT INTO {databaseOwner}[{objectQualifier}Tmp_hcc_Stores] (Id, StoreGuid, StoreName, DateCreated, CustomUrl)
+		SELECT Id, StoreGuid, StoreName, DateCreated, CustomUrl FROM {databaseOwner}[{objectQualifier}hcc_Stores] WITH (HOLDLOCK TABLOCKX)')
+SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}Tmp_hcc_Stores] OFF
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions]
+	DROP CONSTRAINT [FK_{objectQualifier}hcc_OrderTransactions_hcc_Stores]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingZones]
+	DROP CONSTRAINT [FK_{objectQualifier}hcc_ShippingZones_hcc_Stores]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettings]
+	DROP CONSTRAINT [FK_{objectQualifier}hcc_StoreSettings_hcc_Stores]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoresXUsers]
+	DROP CONSTRAINT [FK_{objectQualifier}hcc_StoresXUsers_hcc_Stores]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Taxes]
+	DROP CONSTRAINT [FK_{objectQualifier}hcc_Taxes_hcc_Stores]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_TaxSchedules]
+	DROP CONSTRAINT [FK_{objectQualifier}hcc_TaxSchedules_hcc_Stores]
+GO
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Stores]
+GO
+EXECUTE sp_rename N'{databaseOwner}[{objectQualifier}Tmp_hcc_Stores]', N'{objectQualifier}hcc_Stores', 'OBJECT' 
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Stores] ADD CONSTRAINT
+	[PK_{objectQualifier}hcc_Stores] PRIMARY KEY CLUSTERED 
+	(
+	Id
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_TaxSchedules] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_TaxSchedules_hcc_Stores] FOREIGN KEY
+	(
+	[StoreId]
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores]
+	(
+	[Id]
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Taxes] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_Taxes_hcc_Stores] FOREIGN KEY
+	(
+	[StoreId]
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores]
+	(
+	[Id]
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoresXUsers] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_StoresXUsers_hcc_Stores] FOREIGN KEY
+	(
+	[StoreId]
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores]
+	(
+	[Id]
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettings] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_StoreSettings_hcc_Stores] FOREIGN KEY
+	(
+	[StoreId]
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores]
+	(
+	[Id]
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingZones] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_ShippingZones_hcc_Stores] FOREIGN KEY
+	(
+	[StoreId]
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores]
+	(
+	[Id]
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_OrderTransactions_hcc_Stores] FOREIGN KEY
+	(
+	[StoreId]
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores]
+	(
+	[Id]
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+
+
+/* Move LastOrderNumber setting to Stores table */
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Stores] ADD
+	LastOrderNumber int NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Stores_LastOrderNumber] DEFAULT 0
+GO
+
+
+IF EXISTS(SELECT * FROM {databaseOwner}[{objectQualifier}hcc_StoreSettings] WHERE SettingName = 'LastOrderNumber')
+BEGIN
+update {databaseOwner}[{objectQualifier}hcc_Stores]
+set LastOrderNumber = (SELECT cast([SettingValue] as int) as Value FROM {databaseOwner}[{objectQualifier}hcc_StoreSettings] where SettingName = 'LastOrderNumber' )
+
+delete from {databaseOwner}[{objectQualifier}hcc_StoreSettings]
+where SettingName = 'LastOrderNumber'
+END
+GO
+
+ALTER PROCEDURE {databaseOwner}[{objectQualifier}hcc_GenerateOrderNumber]
+@storeid bigint
+AS
+	BEGIN TRY
+		BEGIN TRAN
+		
+		DECLARE @OrderNumberSeed int
+			
+		SET @OrderNumberSeed = (SELECT [LastOrderNumber]
+			FROM {databaseOwner}[{objectQualifier}hcc_Stores] WITH (UPDLOCK)
+			WHERE Id = @storeid)
+		
+		SET @OrderNumberSeed = @OrderNumberSeed + 1
+		
+		UPDATE {databaseOwner}[{objectQualifier}hcc_Stores]
+		SET [LastOrderNumber] = @OrderNumberSeed 
+		WHERE Id = @storeid
+		
+		COMMIT
+		
+		SELECT @OrderNumberSeed AS OrderNumber
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+		--EXEC [{objectQualifier}hcc_EventLog_SQL_i]
+	END CATCH
+GO
+
+/* Removed unused tables */
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ToDoItems]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ToDoItems]
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Conversations_hcc_ConversationGroups]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Conversations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Conversations] DROP CONSTRAINT [FK_{objectQualifier}hcc_Conversations_hcc_ConversationGroups]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Conversations]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_Conversations]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ConversationMessages]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ConversationMessages]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ConversationGroups]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ConversationGroups]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ConversationAuthors]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ConversationAuthors]
+GO
+
+IF  EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'{databaseOwner}[DF_{objectQualifier}hcc_BillingAccounts_BillingZipCode]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_BillingAccounts] DROP CONSTRAINT [DF_{objectQualifier}hcc_BillingAccounts_BillingZipCode]
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_BillingAccounts]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_BillingAccounts]
+GO
+
+IF  EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'{databaseOwner}[DF_{objectQualifier}hcc_AuthenticationToken_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AuthenticationToken] DROP CONSTRAINT [DF_{objectQualifier}hcc_AuthenticationToken_StoreId]
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AuthenticationToken]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_AuthenticationToken]
+GO
+
+
+/* Removed unused columns from categories table */
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_Category_CustomerChangeableSortOrder]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_Category_CustomPageLayout]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category]
+	DROP COLUMN LatestProductCount, Criteria, CustomPageId, CustomerChangeableSortOrder, CustomPageLayout
+GO
+
+
+
+/* Removed unused hcc_ProductFilter table */
+IF  EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'{databaseOwner}[DF_{objectQualifier}hcc_ProductFilter_StoreId]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductFilter] DROP CONSTRAINT [DF_{objectQualifier}hcc_ProductFilter_StoreId]
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFilter]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_ProductFilter]
+GO

@@ -1,0 +1,10 @@
+﻿@model Hotcakes.Modules.Core.Models.ProductReviewsViewModel
+@if (Model.Reviews.Count > 0)
+{
+    <div class="hc-review-list clearfix">
+        @foreach (var review in Model.Reviews)
+        {
+            @Html.Partial("_SingleReview", review)
+        }
+    </div>
+}

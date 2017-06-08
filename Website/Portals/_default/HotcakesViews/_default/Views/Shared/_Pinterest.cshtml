@@ -1,0 +1,138 @@
+﻿@model Hotcakes.Modules.Core.Models.PinterestViewModel
+@using System.Activities.Statements
+@using System.Text
+@using Hotcakes.Modules.Core.Models
+
+@functions {
+
+    private string BuildTag()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        sb.Append("<a href=\"//www.pinterest.com/pin/create/button/\" data-pin-do=\"buttonBookmark\"");
+
+        if (Model.Language == PinterestLanguage.Japanese && Model.Shape == PinterestShape.Rectangular)
+        {
+            sb.Append(" data-pin-lang=\"ja\"");
+        }
+
+        if (Model.Shape == PinterestShape.Circular)
+        {
+            sb.Append(" data-pin-shape=\"round\"");
+        }
+
+        if (Model.Size == PinterestSize.Large && Model.Shape == PinterestShape.Rectangular)
+        {
+            sb.Append(" data-pin-height=\"28\"");
+        }
+        else if (Model.Size == PinterestSize.Large && Model.Shape == PinterestShape.Circular)
+        {
+            sb.Append("  data-pin-height=\"32\"");
+        }
+
+        if (Model.Color == PinterestColor.Red && Model.Shape == PinterestShape.Rectangular)
+        {
+            sb.Append(" data-pin-color=\"red\"");
+        }
+        else if (Model.Color == PinterestColor.White && Model.Shape == PinterestShape.Rectangular)
+        {
+            sb.Append(" data-pin-color=\"white\"");
+        }
+
+        sb.Append("><img src=\"");
+
+        if (Model.Shape == PinterestShape.Circular)
+        {
+            if (Model.Size == PinterestSize.Large)
+            {
+                sb.Append("//assets.pinterest.com/images/pidgets/pinit_fg_en_round_red_32.png");
+            }
+
+            if (Model.Size == PinterestSize.Small)
+            {
+                sb.Append("//assets.pinterest.com/images/pidgets/pinit_fg_en_round_red_16.png");
+            }
+        }
+        else
+        {
+
+            if (Model.Size == PinterestSize.Large && Model.Color == PinterestColor.Red && Model.Language == PinterestLanguage.English)
+            {
+                sb.Append("//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_28.png");
+            }
+
+            if (Model.Size == PinterestSize.Large && Model.Color == PinterestColor.Gray && Model.Language == PinterestLanguage.English)
+            {
+                sb.Append("//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_28.png");
+            }
+
+            if (Model.Size == PinterestSize.Large && Model.Color == PinterestColor.White && Model.Language == PinterestLanguage.English)
+            {
+                sb.Append("//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_white_28.png");
+            }
+
+            if (Model.Size == PinterestSize.Large && Model.Color == PinterestColor.Red && Model.Language == PinterestLanguage.Japanese)
+            {
+                sb.Append("//assets.pinterest.com/images/pidgets/pinit_fg_ja_rect_red_28.png");
+            }
+
+            if (Model.Size == PinterestSize.Large && Model.Color == PinterestColor.Gray && Model.Language == PinterestLanguage.Japanese)
+            {
+                sb.Append("//assets.pinterest.com/images/pidgets/pinit_fg_ja_rect_gray_28.png");
+            }
+
+            if (Model.Size == PinterestSize.Large && Model.Color == PinterestColor.White && Model.Language == PinterestLanguage.Japanese)
+            {
+                sb.Append("//assets.pinterest.com/images/pidgets/pinit_fg_ja_rect_white_28.png");
+            }
+
+            if (Model.Size == PinterestSize.Small && Model.Color == PinterestColor.Red && Model.Language == PinterestLanguage.English)
+            {
+                sb.Append("//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png");
+            }
+
+            if (Model.Size == PinterestSize.Small && Model.Color == PinterestColor.Gray && Model.Language == PinterestLanguage.English)
+            {
+                sb.Append("//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png");
+            }
+
+            if (Model.Size == PinterestSize.Small && Model.Color == PinterestColor.White && Model.Language == PinterestLanguage.English)
+            {
+                sb.Append("//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_white_20.png");
+            }
+
+            if (Model.Size == PinterestSize.Small && Model.Color == PinterestColor.Red && Model.Language == PinterestLanguage.Japanese)
+            {
+                sb.Append("//assets.pinterest.com/images/pidgets/pinit_fg_ja_rect_red_20.png");
+            }
+
+            if (Model.Size == PinterestSize.Small && Model.Color == PinterestColor.Gray && Model.Language == PinterestLanguage.Japanese)
+            {
+                sb.Append("//assets.pinterest.com/images/pidgets/pinit_fg_ja_rect_gray_20.png");
+            }
+
+            if (Model.Size == PinterestSize.Small && Model.Color == PinterestColor.White && Model.Language == PinterestLanguage.Japanese)
+            {
+                sb.Append("//assets.pinterest.com/images/pidgets/pinit_fg_ja_rect_white_20.png");
+            }
+
+        }
+
+        sb.Append("\" alt=\"\" /></a>");
+
+        return sb.ToString();
+    }
+}
+
+<!-- Pinterest Button -->
+@if (Model.ViewModelIsValid())
+{
+    @Html.Raw(BuildTag())
+    <script type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js"></script>
+}
+else
+{
+    <div class="dnnClear">
+        @Localization.GetString("InvalidViewModel")
+    </div>
+}

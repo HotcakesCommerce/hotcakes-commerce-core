@@ -1,0 +1,3 @@
+﻿DesktopModules/Hotcakes/web.config
+DesktopModules/Hotcakes/Core/Admin/Catalog/Products_Edit_Images_Delete.aspx
+DesktopModules/Hotcakes/Core/Admin/Catalog/Products_Edit_Images_Sort.aspx

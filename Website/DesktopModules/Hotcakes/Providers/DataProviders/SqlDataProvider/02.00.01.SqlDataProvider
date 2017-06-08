@@ -1,0 +1,89 @@
+﻿/* Replace User.Comment  obsolete token with User.Notes */
+
+UPDATE {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations] SET [Subject] = REPLACE([Subject],'[[User.Comment]]','[[User.Notes]]'), Body = REPLACE(Body,'[[User.Comment]]','[[User.Notes]]'),RepeatingSection = REPLACE(RepeatingSection,'[[User.Comment]]','[[User.Notes]]')
+
+/* End changes for replace User.Comment  obsolete token with User.Notes */
+
+GO
+
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_OrderPackage' AND  COLUMN_NAME = 'ShippingMethodId')
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderPackage] ADD [ShippingMethodId] varchar(36) null
+GO
+
+/* Fixed issue related to the Violation of primary key #32451 */
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AddObjectIndex]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_AddObjectIndex]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}hcc_AddObjectIndex]
+	@siteId bigint,
+	@objectId uniqueidentifier,
+	@objectType int,
+	@title nvarchar(512),
+	@culture nvarchar(10),
+	@wordScores xml
+AS
+BEGIN
+	BEGIN TRANSACTION
+	
+	DELETE sow
+	FROM {databaseOwner}[{objectQualifier}hcc_SearchObjectWords] sow
+		JOIN {databaseOwner}[{objectQualifier}hcc_SearchObjects] so
+			ON so.Id = sow.SearchObjectId
+		JOIN {databaseOwner}[{objectQualifier}hcc_SearchLexicon] sl
+			ON sow.WordId = sl.Id
+	WHERE so.SiteId = @siteId
+		AND so.ObjectId = @objectId
+		AND so.ObjectType = @objectType
+		AND sl.Culture = @culture
+		
+	DECLARE @searchObjectId bigint
+	SELECT @searchObjectId = Id FROM {databaseOwner}[{objectQualifier}hcc_SearchObjects] WHERE SiteId = @siteId and ObjectId = @objectId and ObjectType = @objectType
+	
+	IF (@searchObjectId IS NOT NULL)
+		UPDATE {databaseOwner}[{objectQualifier}hcc_SearchObjects]
+		SET Title = @title,
+			LastIndexUtc = GETUTCDATE()
+		WHERE SiteId = @siteId
+			and ObjectId = @objectId
+			and ObjectType = @objectType
+	ELSE
+	BEGIN
+		INSERT INTO {databaseOwner}[{objectQualifier}hcc_SearchObjects] ([ObjectType], [ObjectId], [Title], [SiteId], [LastIndexUtc])
+		VALUES (@objectType, @objectId, @title, @siteId, GETUTCDATE())
+		
+		SELECT @searchObjectId = @@IDENTITY
+	END
+
+	DECLARE @scoreTable TABLE(Word nvarchar(255), Score int)
+	INSERT INTO @scoreTable
+	SELECT distinct
+		Pair.value('(word)[1]', 'nvarchar(255)') as Word,
+		Pair.value('(score)[1]', 'int') as Score
+	FROM 
+		@wordScores.nodes('/dict/pair') AS WS(Pair)
+
+	MERGE {databaseOwner}[{objectQualifier}hcc_SearchLexicon] AS T
+	USING @scoreTable AS S
+	ON T.Word = S.Word and T.Culture = @culture 
+	WHEN NOT MATCHED BY TARGET
+		THEN INSERT(Word, Culture) VALUES(S.Word, @culture);
+	
+	MERGE {databaseOwner}[{objectQualifier}hcc_SearchObjectWords] AS T
+	USING
+	(
+		SELECT sl.Id as WordId,sum(Score) as Score 
+		FROM {databaseOwner}[{objectQualifier}hcc_SearchLexicon] sl
+			join @scoreTable st
+				on sl.Word = st.Word and sl.Culture = @culture
+			group by sl.id 
+	) AS S
+	ON T.SearchObjectId = @searchObjectId and T.WordId = S.WordId and T.SiteId = @siteId
+	WHEN NOT MATCHED BY TARGET
+		THEN INSERT(SearchObjectId, WordId, SiteId, Score) VALUES(@searchObjectId, S.WordId, @siteId, Score)
+	WHEN MATCHED
+		THEN UPDATE SET T.Score = S.Score;
+
+	COMMIT TRANSACTION
+END
+GO

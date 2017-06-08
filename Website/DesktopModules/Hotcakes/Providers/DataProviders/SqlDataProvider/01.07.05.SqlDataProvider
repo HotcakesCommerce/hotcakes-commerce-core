@@ -1,0 +1,88 @@
+﻿/* Cleanup empty carts that have no subitems */
+DELETE FROM {databaseOwner}[{objectQualifier}hcc_Order]
+WHERE [bvin] NOT IN (select distinct [OrderBvin] from {databaseOwner}[{objectQualifier}hcc_LineItem])
+	AND [bvin] NOT IN (select distinct [OrderId] from {databaseOwner}[{objectQualifier}hcc_OrderNote])
+	AND [bvin] NOT IN (select distinct [OrderBvin] from {databaseOwner}[{objectQualifier}hcc_OrderCoupon])
+	AND [IsPlaced] = 0 AND [OrderNumber] = ''
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_FindGiftCards]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_FindGiftCards]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}hcc_FindGiftCards]
+	@StoreId bigint, 
+	@StartDateUtc datetime, 
+	@EndDateUtc datetime,
+	@SearchText nvarchar(1000) = '', 
+	@Amount decimal(18,10) = 0, 
+	@AmountComparing int = 0, -- 0=any 1=greater, 2=less, 3=equial 
+	@Balance decimal(18,10) = 0, 
+	@BalanceComparing int = 0,  -- 0=any 1=greater, 2=less, 3=equial
+	@IncludeInactive bit = 0,
+	@IncludeExpired bit = 0,
+	@PageIndex int = 0, 
+	@PageSize int = 10,
+	@RowCount int output 
+AS
+BEGIN
+
+declare @SearchTextL nvarchar(1000)
+set @SearchTextL = '%' + @SearchText + '%'
+
+SELECT @RowCount = COUNT(1)
+	FROM  {databaseOwner}[{objectQualifier}hcc_GiftCard] AS GC
+              INNER JOIN {databaseOwner}[{objectQualifier}hcc_LineItem] AS LI ON GC.[LineItemId] = LI.[Id]
+	          LEFT OUTER JOIN {databaseOwner}[{objectQualifier}hcc_Order] AS O ON LI.[OrderBvin] = O.[bvin]
+			  WHERE GC.[StoreId] = @StoreId AND (GC.[Enabled] = 1 OR @IncludeInactive = 1)
+				AND ([IssueDateUtc] >= @StartDateUtc) AND ([IssueDateUtc] <= @EndDateUtc) 
+				AND ((GC.[Amount] = @Amount AND @AmountComparing = 3)OR
+					 (GC.[Amount] < @Amount AND @AmountComparing = 2)OR
+					 (GC.[Amount] > @Amount AND @AmountComparing = 1)OR @AmountComparing = 0)
+				AND (((GC.[Amount] - GC.[UsedAmount]) = @Balance AND @BalanceComparing = 3)OR
+					 ((GC.[Amount] - GC.[UsedAmount]) < @Balance AND @BalanceComparing = 2)OR
+					 ((GC.[Amount] - GC.[UsedAmount]) > @Balance AND @BalanceComparing = 1)OR @BalanceComparing = 0)
+				AND (GC.[ExpirationDateUtc] > getutcdate() OR @IncludeExpired = 1)
+				AND (@SearchText = '' OR GC.CardNumber = @SearchText OR 
+					GC.RecipientEmail like @SearchTextL OR 
+					GC.RecipientName like @SearchTextL OR 
+					O.OrderNumber = @SearchText OR
+					O.UserEmail like @SearchTextL OR
+					cast(O.ShippingAddress as xml).value('(/Address/FirstName)[1]', 'nvarchar(500)') like @SearchTextL OR
+					cast(O.ShippingAddress as xml).value('(/Address/LastName)[1]', 'nvarchar(500)') like @SearchTextL OR 
+					cast(O.BillingAddress as xml).value('(/Address/FirstName)[1]', 'nvarchar(500)') like @SearchTextL OR
+					cast(O.BillingAddress as xml).value('(/Address/LastName)[1]', 'nvarchar(500)') like @SearchTextL )
+			
+
+SELECT T2.*
+    FROM ( SELECT T.*, row_number() OVER (ORDER BY T.[IssueDateUtc] ASC) AS [row_number]
+        FROM (SELECT GC.*, O.bvin, O.OrderNumber  
+              FROM  {databaseOwner}[{objectQualifier}hcc_GiftCard] AS GC
+              INNER JOIN {databaseOwner}[{objectQualifier}hcc_LineItem] AS LI ON GC.[LineItemId] = LI.[Id]
+	          LEFT OUTER JOIN {databaseOwner}[{objectQualifier}hcc_Order] AS O ON LI.[OrderBvin] = O.[bvin]
+			  WHERE GC.[StoreId] = @StoreId AND (GC.[Enabled] = 1 OR @IncludeInactive = 1)
+				AND ([IssueDateUtc] >= @StartDateUtc) AND ([IssueDateUtc] <= @EndDateUtc) 
+				AND ((GC.[Amount] = @Amount AND @AmountComparing = 3)OR
+					 (GC.[Amount] < @Amount AND @AmountComparing = 2)OR
+					 (GC.[Amount] > @Amount AND @AmountComparing = 1)OR @AmountComparing = 0)
+				AND (((GC.[Amount] - GC.[UsedAmount]) = @Balance AND @BalanceComparing = 3)OR
+					 ((GC.[Amount] - GC.[UsedAmount]) < @Balance AND @BalanceComparing = 2)OR
+					 ((GC.[Amount] - GC.[UsedAmount]) > @Balance AND @BalanceComparing = 1)OR @BalanceComparing = 0)
+				AND (GC.[ExpirationDateUtc] > getutcdate() OR @IncludeExpired = 1)
+				AND (@SearchText = '' OR GC.CardNumber = @SearchText OR 
+					GC.RecipientEmail like @SearchTextL OR 
+					GC.RecipientName like @SearchTextL OR 
+					O.OrderNumber = @SearchText OR
+					O.UserEmail like @SearchTextL OR
+					cast(O.ShippingAddress as xml).value('(/Address/FirstName)[1]', 'nvarchar(500)') like @SearchTextL OR
+					cast(O.ShippingAddress as xml).value('(/Address/LastName)[1]', 'nvarchar(500)') like @SearchTextL OR 
+					cast(O.BillingAddress as xml).value('(/Address/FirstName)[1]', 'nvarchar(500)') like @SearchTextL OR
+					cast(O.BillingAddress as xml).value('(/Address/LastName)[1]', 'nvarchar(500)') like @SearchTextL )
+			) AS T
+    )  AS T2
+    WHERE T2.[row_number] > @PageIndex*@PageSize AND T2.[row_number] <= (@PageIndex+1)*@PageSize
+    ORDER BY T2.[IssueDateUtc] ASC
+    
+END
+
+GO

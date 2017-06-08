@@ -1,0 +1,28 @@
+﻿delete from {databaseOwner}[{objectQualifier}hcc_Variants]
+where [ProductId] not in ( select bvin from {databaseOwner}[{objectQualifier}hcc_Product] )
+GO
+
+delete from {databaseOwner}[{objectQualifier}hcc_ProductReview]
+where [ProductId] not in ( select bvin from {databaseOwner}[{objectQualifier}hcc_Product] )
+GO
+
+delete from {databaseOwner}[{objectQualifier}hcc_BundledProducts]
+where [ProductId] not in ( select bvin from {databaseOwner}[{objectQualifier}hcc_Product] )
+GO
+
+delete from {databaseOwner}[{objectQualifier}hcc_ProductImage]
+where [ProductId] not in ( select bvin from {databaseOwner}[{objectQualifier}hcc_Product] )
+GO
+
+delete from {databaseOwner}[{objectQualifier}hcc_ProductXOption]
+where [ProductBvin] not in ( select bvin from {databaseOwner}[{objectQualifier}hcc_Product] )
+GO
+
+delete from {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]
+where OptionBvin not in ( select OptionBvin from {databaseOwner}[{objectQualifier}hcc_ProductXOption] )
+GO
+
+delete from {databaseOwner}[{objectQualifier}hcc_ProductOptions] 
+where IsShared = 0
+	and bvin not in ( select OptionBvin from {databaseOwner}[{objectQualifier}hcc_ProductXOption] )
+GO

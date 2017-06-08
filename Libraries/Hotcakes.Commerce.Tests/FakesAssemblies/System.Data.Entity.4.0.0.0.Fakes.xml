@@ -1,0 +1,443 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>System.Data.Entity.4.0.0.0.Fakes</name>
+    </assembly>
+    <members>
+        <member name="T:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions">
+            <summary>Shim type of System.Data.Objects.SqlClient.SqlFunctions</summary>
+        </member>
+        <member name="M:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.AcosNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Acos(Nullable`1&lt;Decimal&gt; arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.AcosNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Acos(Nullable`1&lt;Double&gt; arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.AsciiString">
+            <summary>Sets the shim of SqlFunctions.Ascii(String arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.AsinNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Asin(Nullable`1&lt;Decimal&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.AsinNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Asin(Nullable`1&lt;Double&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.Atan2NullableOfDecimalNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Atan2(Nullable`1&lt;Decimal&gt; arg1, Nullable`1&lt;Decimal&gt; arg2)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.Atan2NullableOfDoubleNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Atan2(Nullable`1&lt;Double&gt; arg1, Nullable`1&lt;Double&gt; arg2)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.AtanNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Atan(Nullable`1&lt;Decimal&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.AtanNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Atan(Nullable`1&lt;Double&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.CharIndexByteArrayByteArray">
+            <summary>Sets the shim of SqlFunctions.CharIndex(Byte[] toSearch, Byte[] target)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.CharIndexByteArrayByteArrayNullableOfInt32">
+            <summary>Sets the shim of SqlFunctions.CharIndex(Byte[] toSearch, Byte[] target, Nullable`1&lt;Int32&gt; startLocation)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.CharIndexByteArrayByteArrayNullableOfInt64">
+            <summary>Sets the shim of SqlFunctions.CharIndex(Byte[] toSearch, Byte[] target, Nullable`1&lt;Int64&gt; startLocation)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.CharIndexStringString">
+            <summary>Sets the shim of SqlFunctions.CharIndex(String toSearch, String target)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.CharIndexStringStringNullableOfInt32">
+            <summary>Sets the shim of SqlFunctions.CharIndex(String toSearch, String target, Nullable`1&lt;Int32&gt; startLocation)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.CharIndexStringStringNullableOfInt64">
+            <summary>Sets the shim of SqlFunctions.CharIndex(String toSearch, String target, Nullable`1&lt;Int64&gt; startLocation)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.CharNullableOfInt32">
+            <summary>Sets the shim of SqlFunctions.Char(Nullable`1&lt;Int32&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumAggregateIEnumerableOfInt32">
+            <summary>Sets the shim of SqlFunctions.ChecksumAggregate(IEnumerable`1&lt;Int32&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumAggregateIEnumerableOfNullableOfInt32">
+            <summary>Sets the shim of SqlFunctions.ChecksumAggregate(IEnumerable`1&lt;Nullable`1&lt;Int32&gt;&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumByteArray">
+            <summary>Sets the shim of SqlFunctions.Checksum(Byte[] arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumByteArrayByteArray">
+            <summary>Sets the shim of SqlFunctions.Checksum(Byte[] arg1, Byte[] arg2)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumByteArrayByteArrayByteArray">
+            <summary>Sets the shim of SqlFunctions.Checksum(Byte[] arg1, Byte[] arg2, Byte[] arg3)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfBoolean">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;Boolean&gt; arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfBooleanNullableOfBoolean">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;Boolean&gt; arg1, Nullable`1&lt;Boolean&gt; arg2)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfBooleanNullableOfBooleanNullableOfBoolean">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;Boolean&gt; arg1, Nullable`1&lt;Boolean&gt; arg2, Nullable`1&lt;Boolean&gt; arg3)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfDateTime">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;DateTime&gt; arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfDateTimeNullableOfDateTime">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;DateTime&gt; arg1, Nullable`1&lt;DateTime&gt; arg2)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfDateTimeNullableOfDateTimeNullableOfDateTime">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;DateTime&gt; arg1, Nullable`1&lt;DateTime&gt; arg2, Nullable`1&lt;DateTime&gt; arg3)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfDateTimeOffset">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;DateTimeOffset&gt; arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfDateTimeOffsetNullableOfDateTimeOffset">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;DateTimeOffset&gt; arg1, Nullable`1&lt;DateTimeOffset&gt; arg2)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfDateTimeOffsetNullableOfDateTimeOffsetNullableOfDateTimeOffset">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;DateTimeOffset&gt; arg1, Nullable`1&lt;DateTimeOffset&gt; arg2, Nullable`1&lt;DateTimeOffset&gt; arg3)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;Decimal&gt; arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfDecimalNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;Decimal&gt; arg1, Nullable`1&lt;Decimal&gt; arg2)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfDecimalNullableOfDecimalNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;Decimal&gt; arg1, Nullable`1&lt;Decimal&gt; arg2, Nullable`1&lt;Decimal&gt; arg3)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;Double&gt; arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfDoubleNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;Double&gt; arg1, Nullable`1&lt;Double&gt; arg2)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfDoubleNullableOfDoubleNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;Double&gt; arg1, Nullable`1&lt;Double&gt; arg2, Nullable`1&lt;Double&gt; arg3)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfGuid">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;Guid&gt; arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfGuidNullableOfGuid">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;Guid&gt; arg1, Nullable`1&lt;Guid&gt; arg2)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfGuidNullableOfGuidNullableOfGuid">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;Guid&gt; arg1, Nullable`1&lt;Guid&gt; arg2, Nullable`1&lt;Guid&gt; arg3)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfTimeSpan">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;TimeSpan&gt; arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfTimeSpanNullableOfTimeSpan">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;TimeSpan&gt; arg1, Nullable`1&lt;TimeSpan&gt; arg2)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumNullableOfTimeSpanNullableOfTimeSpanNullableOfTimeSpan">
+            <summary>Sets the shim of SqlFunctions.Checksum(Nullable`1&lt;TimeSpan&gt; arg1, Nullable`1&lt;TimeSpan&gt; arg2, Nullable`1&lt;TimeSpan&gt; arg3)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumString">
+            <summary>Sets the shim of SqlFunctions.Checksum(String arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumStringString">
+            <summary>Sets the shim of SqlFunctions.Checksum(String arg1, String arg2)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ChecksumStringStringString">
+            <summary>Sets the shim of SqlFunctions.Checksum(String arg1, String arg2, String arg3)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.CosNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Cos(Nullable`1&lt;Decimal&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.CosNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Cos(Nullable`1&lt;Double&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.CotNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Cot(Nullable`1&lt;Decimal&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.CotNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Cot(Nullable`1&lt;Double&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.CurrentTimestamp">
+            <summary>Sets the shim of SqlFunctions.CurrentTimestamp()</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.CurrentUser">
+            <summary>Sets the shim of SqlFunctions.CurrentUser()</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DataLengthByteArray">
+            <summary>Sets the shim of SqlFunctions.DataLength(Byte[] arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DataLengthNullableOfBoolean">
+            <summary>Sets the shim of SqlFunctions.DataLength(Nullable`1&lt;Boolean&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DataLengthNullableOfDateTime">
+            <summary>Sets the shim of SqlFunctions.DataLength(Nullable`1&lt;DateTime&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DataLengthNullableOfDateTimeOffset">
+            <summary>Sets the shim of SqlFunctions.DataLength(Nullable`1&lt;DateTimeOffset&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DataLengthNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.DataLength(Nullable`1&lt;Decimal&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DataLengthNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.DataLength(Nullable`1&lt;Double&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DataLengthNullableOfGuid">
+            <summary>Sets the shim of SqlFunctions.DataLength(Nullable`1&lt;Guid&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DataLengthNullableOfTimeSpan">
+            <summary>Sets the shim of SqlFunctions.DataLength(Nullable`1&lt;TimeSpan&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DataLengthString">
+            <summary>Sets the shim of SqlFunctions.DataLength(String arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateAddStringNullableOfDoubleNullableOfDateTime">
+            <summary>Sets the shim of SqlFunctions.DateAdd(String datePartArg, Nullable`1&lt;Double&gt; number, Nullable`1&lt;DateTime&gt; date)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateAddStringNullableOfDoubleNullableOfDateTimeOffset">
+            <summary>Sets the shim of SqlFunctions.DateAdd(String datePartArg, Nullable`1&lt;Double&gt; number, Nullable`1&lt;DateTimeOffset&gt; dateTimeOffsetArg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateAddStringNullableOfDoubleNullableOfTimeSpan">
+            <summary>Sets the shim of SqlFunctions.DateAdd(String datePartArg, Nullable`1&lt;Double&gt; number, Nullable`1&lt;TimeSpan&gt; time)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateAddStringNullableOfDoubleString">
+            <summary>Sets the shim of SqlFunctions.DateAdd(String datePartArg, Nullable`1&lt;Double&gt; number, String date)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateDiffStringNullableOfDateTimeNullableOfDateTime">
+            <summary>Sets the shim of SqlFunctions.DateDiff(String datePartArg, Nullable`1&lt;DateTime&gt; startDate, Nullable`1&lt;DateTime&gt; endDate)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateDiffStringNullableOfDateTimeNullableOfDateTimeOffset">
+            <summary>Sets the shim of SqlFunctions.DateDiff(String datePartArg, Nullable`1&lt;DateTime&gt; startDate, Nullable`1&lt;DateTimeOffset&gt; endDate)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateDiffStringNullableOfDateTimeNullableOfTimeSpan">
+            <summary>Sets the shim of SqlFunctions.DateDiff(String datePartArg, Nullable`1&lt;DateTime&gt; startDate, Nullable`1&lt;TimeSpan&gt; endDate)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateDiffStringNullableOfDateTimeOffsetNullableOfDateTime">
+            <summary>Sets the shim of SqlFunctions.DateDiff(String datePartArg, Nullable`1&lt;DateTimeOffset&gt; startDate, Nullable`1&lt;DateTime&gt; endDate)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateDiffStringNullableOfDateTimeOffsetNullableOfDateTimeOffset">
+            <summary>Sets the shim of SqlFunctions.DateDiff(String datePartArg, Nullable`1&lt;DateTimeOffset&gt; startDate, Nullable`1&lt;DateTimeOffset&gt; endDate)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateDiffStringNullableOfDateTimeOffsetNullableOfTimeSpan">
+            <summary>Sets the shim of SqlFunctions.DateDiff(String datePartArg, Nullable`1&lt;DateTimeOffset&gt; startDate, Nullable`1&lt;TimeSpan&gt; endDate)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateDiffStringNullableOfDateTimeOffsetString">
+            <summary>Sets the shim of SqlFunctions.DateDiff(String datePartArg, Nullable`1&lt;DateTimeOffset&gt; startDate, String endDate)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateDiffStringNullableOfDateTimeString">
+            <summary>Sets the shim of SqlFunctions.DateDiff(String datePartArg, Nullable`1&lt;DateTime&gt; startDate, String endDate)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateDiffStringNullableOfTimeSpanNullableOfDateTime">
+            <summary>Sets the shim of SqlFunctions.DateDiff(String datePartArg, Nullable`1&lt;TimeSpan&gt; startDate, Nullable`1&lt;DateTime&gt; endDate)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateDiffStringNullableOfTimeSpanNullableOfDateTimeOffset">
+            <summary>Sets the shim of SqlFunctions.DateDiff(String datePartArg, Nullable`1&lt;TimeSpan&gt; startDate, Nullable`1&lt;DateTimeOffset&gt; endDate)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateDiffStringNullableOfTimeSpanNullableOfTimeSpan">
+            <summary>Sets the shim of SqlFunctions.DateDiff(String datePartArg, Nullable`1&lt;TimeSpan&gt; startDate, Nullable`1&lt;TimeSpan&gt; endDate)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateDiffStringNullableOfTimeSpanString">
+            <summary>Sets the shim of SqlFunctions.DateDiff(String datePartArg, Nullable`1&lt;TimeSpan&gt; startDate, String endDate)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateDiffStringStringNullableOfDateTime">
+            <summary>Sets the shim of SqlFunctions.DateDiff(String datePartArg, String startDate, Nullable`1&lt;DateTime&gt; endDate)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateDiffStringStringNullableOfDateTimeOffset">
+            <summary>Sets the shim of SqlFunctions.DateDiff(String datePartArg, String startDate, Nullable`1&lt;DateTimeOffset&gt; endDate)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateDiffStringStringNullableOfTimeSpan">
+            <summary>Sets the shim of SqlFunctions.DateDiff(String datePartArg, String startDate, Nullable`1&lt;TimeSpan&gt; endDate)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateDiffStringStringString">
+            <summary>Sets the shim of SqlFunctions.DateDiff(String datePartArg, String startDate, String endDate)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateNameStringNullableOfDateTime">
+            <summary>Sets the shim of SqlFunctions.DateName(String datePartArg, Nullable`1&lt;DateTime&gt; date)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateNameStringNullableOfDateTimeOffset">
+            <summary>Sets the shim of SqlFunctions.DateName(String datePartArg, Nullable`1&lt;DateTimeOffset&gt; date)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateNameStringNullableOfTimeSpan">
+            <summary>Sets the shim of SqlFunctions.DateName(String datePartArg, Nullable`1&lt;TimeSpan&gt; date)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DateNameStringString">
+            <summary>Sets the shim of SqlFunctions.DateName(String datePartArg, String date)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DatePartStringNullableOfDateTime">
+            <summary>Sets the shim of SqlFunctions.DatePart(String datePartArg, Nullable`1&lt;DateTime&gt; date)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DatePartStringNullableOfDateTimeOffset">
+            <summary>Sets the shim of SqlFunctions.DatePart(String datePartArg, Nullable`1&lt;DateTimeOffset&gt; date)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DatePartStringNullableOfTimeSpan">
+            <summary>Sets the shim of SqlFunctions.DatePart(String datePartArg, Nullable`1&lt;TimeSpan&gt; date)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DatePartStringString">
+            <summary>Sets the shim of SqlFunctions.DatePart(String datePartArg, String date)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DegreesNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Degrees(Nullable`1&lt;Decimal&gt; arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DegreesNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Degrees(Nullable`1&lt;Double&gt; arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DegreesNullableOfInt32">
+            <summary>Sets the shim of SqlFunctions.Degrees(Nullable`1&lt;Int32&gt; arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DegreesNullableOfInt64">
+            <summary>Sets the shim of SqlFunctions.Degrees(Nullable`1&lt;Int64&gt; arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.DifferenceStringString">
+            <summary>Sets the shim of SqlFunctions.Difference(String string1, String string2)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ExpNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Exp(Nullable`1&lt;Decimal&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ExpNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Exp(Nullable`1&lt;Double&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.GetDate">
+            <summary>Sets the shim of SqlFunctions.GetDate()</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.GetUtcDate">
+            <summary>Sets the shim of SqlFunctions.GetUtcDate()</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.HostName">
+            <summary>Sets the shim of SqlFunctions.HostName()</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.IsDateString">
+            <summary>Sets the shim of SqlFunctions.IsDate(String arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.IsNumericString">
+            <summary>Sets the shim of SqlFunctions.IsNumeric(String arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.Log10NullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Log10(Nullable`1&lt;Decimal&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.Log10NullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Log10(Nullable`1&lt;Double&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.LogNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Log(Nullable`1&lt;Decimal&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.LogNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Log(Nullable`1&lt;Double&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.NCharNullableOfInt32">
+            <summary>Sets the shim of SqlFunctions.NChar(Nullable`1&lt;Int32&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.PatIndexStringString">
+            <summary>Sets the shim of SqlFunctions.PatIndex(String stringPattern, String target)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.Pi">
+            <summary>Sets the shim of SqlFunctions.Pi()</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.QuoteNameString">
+            <summary>Sets the shim of SqlFunctions.QuoteName(String stringArg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.QuoteNameStringString">
+            <summary>Sets the shim of SqlFunctions.QuoteName(String stringArg, String quoteCharacter)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.RadiansNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Radians(Nullable`1&lt;Decimal&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.RadiansNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Radians(Nullable`1&lt;Double&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.RadiansNullableOfInt32">
+            <summary>Sets the shim of SqlFunctions.Radians(Nullable`1&lt;Int32&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.RadiansNullableOfInt64">
+            <summary>Sets the shim of SqlFunctions.Radians(Nullable`1&lt;Int64&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.Rand">
+            <summary>Sets the shim of SqlFunctions.Rand()</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.RandNullableOfInt32">
+            <summary>Sets the shim of SqlFunctions.Rand(Nullable`1&lt;Int32&gt; seed)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.ReplicateStringNullableOfInt32">
+            <summary>Sets the shim of SqlFunctions.Replicate(String target, Nullable`1&lt;Int32&gt; count)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.SignNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Sign(Nullable`1&lt;Decimal&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.SignNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Sign(Nullable`1&lt;Double&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.SignNullableOfInt32">
+            <summary>Sets the shim of SqlFunctions.Sign(Nullable`1&lt;Int32&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.SignNullableOfInt64">
+            <summary>Sets the shim of SqlFunctions.Sign(Nullable`1&lt;Int64&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.SinNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Sin(Nullable`1&lt;Decimal&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.SinNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Sin(Nullable`1&lt;Double&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.SoundCodeString">
+            <summary>Sets the shim of SqlFunctions.SoundCode(String arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.SpaceNullableOfInt32">
+            <summary>Sets the shim of SqlFunctions.Space(Nullable`1&lt;Int32&gt; arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.SquareNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Square(Nullable`1&lt;Decimal&gt; arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.SquareNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Square(Nullable`1&lt;Double&gt; arg1)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.SquareRootNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.SquareRoot(Nullable`1&lt;Decimal&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.SquareRootNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.SquareRoot(Nullable`1&lt;Double&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.StringConvertNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.StringConvert(Nullable`1&lt;Decimal&gt; number)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.StringConvertNullableOfDecimalNullableOfInt32">
+            <summary>Sets the shim of SqlFunctions.StringConvert(Nullable`1&lt;Decimal&gt; number, Nullable`1&lt;Int32&gt; length)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.StringConvertNullableOfDecimalNullableOfInt32NullableOfInt32">
+            <summary>Sets the shim of SqlFunctions.StringConvert(Nullable`1&lt;Decimal&gt; number, Nullable`1&lt;Int32&gt; length, Nullable`1&lt;Int32&gt; decimalArg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.StringConvertNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.StringConvert(Nullable`1&lt;Double&gt; number)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.StringConvertNullableOfDoubleNullableOfInt32">
+            <summary>Sets the shim of SqlFunctions.StringConvert(Nullable`1&lt;Double&gt; number, Nullable`1&lt;Int32&gt; length)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.StringConvertNullableOfDoubleNullableOfInt32NullableOfInt32">
+            <summary>Sets the shim of SqlFunctions.StringConvert(Nullable`1&lt;Double&gt; number, Nullable`1&lt;Int32&gt; length, Nullable`1&lt;Int32&gt; decimalArg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.StuffStringNullableOfInt32NullableOfInt32String">
+            <summary>Sets the shim of SqlFunctions.Stuff(String stringInput, Nullable`1&lt;Int32&gt; start, Nullable`1&lt;Int32&gt; length, String stringReplacement)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.TanNullableOfDecimal">
+            <summary>Sets the shim of SqlFunctions.Tan(Nullable`1&lt;Decimal&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.TanNullableOfDouble">
+            <summary>Sets the shim of SqlFunctions.Tan(Nullable`1&lt;Double&gt; arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.UnicodeString">
+            <summary>Sets the shim of SqlFunctions.Unicode(String arg)</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.UserName">
+            <summary>Sets the shim of SqlFunctions.UserName()</summary>
+        </member>
+        <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.UserNameNullableOfInt32">
+            <summary>Sets the shim of SqlFunctions.UserName(Nullable`1&lt;Int32&gt; arg)</summary>
+        </member>
+    </members>
+</doc>

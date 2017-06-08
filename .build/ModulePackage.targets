@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Import Project="MSBuild.Community.Tasks.Targets" />
+	<Target Name="PackageModule" Condition=" '$(Configuration)' == 'Release' ">
+		<XmlRead Prefix="n"
+				Namespace="http://schemas.microsoft.com/developer/msbuild/2003"
+				XPath="dotnetnuke/packages/package[1]/@version"
+				XmlFileName="$(DNNFileName).dnn">
+			<Output TaskParameter="Value" PropertyName="Version" />
+		</XmlRead>
+
+		<PropertyGroup Condition=" '$(RootFolder)' == '' ">
+			<RootFolder>$(MSBuildProjectDirectory)\..\..\..</RootFolder>
+		</PropertyGroup>
+
+		<PropertyGroup>
+			<WebsiteBuildFolder>$(RootFolder)\_Build\_Website</WebsiteBuildFolder>
+			<CoreBuildFolder>$(RootFolder)\_Build\_Website\_Core</CoreBuildFolder>
+			<ViewSetBuildFolder>$(RootFolder)\_Build\_Website\_ViewSet</ViewSetBuildFolder>
+			<ControlPanelBuildFolder>$(RootFolder)\_Build\_Website\_ControlPanel</ControlPanelBuildFolder>
+			<ModulesBuildFolder>$(RootFolder)\_Build\_Website\_Modules</ModulesBuildFolder>
+			<DebugBuildFolder>$(RootFolder)\_Build\_Website\_Debug</DebugBuildFolder>
+			<InstallFolder>$(RootFolder)\_Install</InstallFolder>
+		</PropertyGroup>
+
+		<!--in VS $year$ we exclude the packages folder -->
+		<ItemGroup>
+			<InstallInclude Include="**\*.ascx" Exclude="ControlPanel\**" />
+			<InstallInclude Include="**\*.css" Exclude="ControlPanel\**" />
+			<InstallInclude Include="**\*.resx" Exclude="ControlPanel\**;**\*.uk-UA.resx" />
+			<InstallInclude Include="**\*.txt" />
+			<InstallInclude Include="$(DNNFileName).dnn" />
+			<InstallInclude Include="**\*.SqlDataProvider" />
+			<InstallInclude Include="hotcakes.config" />
+
+			<InstallInclude Remove="**\bin\**" />
+			<InstallInclude Remove="**\obj\**" />
+			<InstallInclude Remove="**\_ReSharper*\**" />
+
+			<InstallInclude Remove="Core\**" />
+		</ItemGroup>
+
+		<ItemGroup>
+			<CoreInclude Include="Core\**\*.ascx" />
+			<CoreInclude Include="Core\**\*.asmx" />
+			<CoreInclude Include="Core\**\*.aspx" />
+			<CoreInclude Include="Core\**\*.ashx" />
+			<CoreInclude Include="Core\**\*.master" />
+			<CoreInclude Include="Core\**\*.resx" Exclude="**\*.uk-UA.resx" />
+			<CoreInclude Include="Core\**\*.template" />
+			<CoreInclude Include="Core\**\*.html" />
+			<CoreInclude Include="Core\**\*.htm"  />
+			<CoreInclude Include="Core\**\*.xml" />
+			<CoreInclude Include="Core\**\*.js" />
+			<CoreInclude Include="Core\**\*.css" />
+			<CoreInclude Include="Core\**\*.txt" />
+			<CoreInclude Include="Core\**\*.xlsx"/>
+			<CoreInclude Include="Core\**\*.swf"/>
+			<CoreInclude Include="Core\**\*images\**\*.*" />
+			<CoreInclude Include="Core\**\tinymce\**\img\**\*.*" />
+			<CoreInclude Include="Core\**\*.swf" />
+			<CoreInclude Include="Core\**\*.xap" />
+
+			<CoreInclude Remove="**\_ReSharper*\**" />
+
+			<CoreInclude Remove="**\Admin\AdminTemplate.html" />
+			<CoreInclude Remove="**\Admin\Catalog\Categories_EditDrillDown*" />
+			<CoreInclude Remove="**\Admin\Reports\Customer List\**" />
+			<CoreInclude Remove="**\Admin\Reports\Keyword Searches\**" />
+			<CoreInclude Remove="**\Admin\Reports\Shopping Carts\**" />
+		</ItemGroup>
+
+		<ItemGroup>
+			<HotcakesViewsInclude
+				Include="..\..\Portals\_default\HotcakesViews\_default\**\*.*"
+				Exclude="..\..\**\*.uk-UA.resx;..\..\**\*.manifest"
+			/>
+			<PackageTxtInclude Include="**\License.txt;**\ReleaseNotes.txt" />
+		</ItemGroup>
+
+		<ItemGroup>
+			<ControlPanelInclude Include="ControlPanel\**\*.resx" />
+			<ControlPanelInclude Include="ControlPanel\**\*.ascx" />
+			<ControlPanelInclude Include="ControlPanel\**\*.css" />
+			<ControlPanelInclude Include="ControlPanel\**\*.js" />
+			<ControlPanelInclude Include="ControlPanel\**\controlbarimages\**" />
+		</ItemGroup>
+
+		<ItemGroup>
+			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.Ups.Keys.dll" />
+			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Commerce.Dnn.dll" />
+			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Commerce.dll" />
+			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.CommerceDTO.dll" />
+			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Payment.dll" />
+			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.PaypalWebServices.dll" />
+			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.dll" />
+			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.FedEx.dll" />
+			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.Ups.dll" />
+			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.USPostal.dll" />
+			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Web.dll" />
+			<HotcakesDlls Include="$(MSBuildDnnBinPath)\$(AssemblyName).dll" />
+			<HotcakesPdbs Include="@(HotcakesDlls->Replace('.dll', '.pdb'))" />
+		</ItemGroup>
+
+		<!-- Copy source code to Source Build Folder -->
+		<!-- <Copy SourceFiles="@(SourceInclude)" DestinationFolder="$(SourceBuildFolder)\%(RecursiveDir)" /> -->
+		
+		<!-- Copy file to Core Build Folder -->
+		<Copy SourceFiles="@(CoreInclude)" DestinationFolder="$(CoreBuildFolder)\%(RecursiveDir)" />
+
+		<!-- Copy file to ViewSet Build Folder -->
+		<Copy SourceFiles="@(HotcakesViewsInclude)" DestinationFolder="$(ViewSetBuildFolder)\%(RecursiveDir)" />
+
+		<!-- Copy file to Modules Build Folder -->
+		<Copy SourceFiles="@(InstallInclude)" DestinationFolder="$(ModulesBuildFolder)\%(RecursiveDir)" />
+
+		<!-- Copy file to Modules Build Folder -->
+		<Copy SourceFiles="@(ControlPanelInclude)" DestinationFolder="$(ControlPanelBuildFolder)\%(RecursiveDir)" />
+
+		<Copy SourceFiles="@(HotcakesDlls)" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\Hotcakes.Common.Dnn.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\Hotcakes.Licensing.Common.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\Hotcakes.Shipping.FedEx.XmlSerializers.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\Avalara.AvaTax.Adapter.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<!-- thought log4net is not used by our code directly, it have to be present since it is used by paypal_base.dll -->
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\log4net.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\paypal_base.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\Stripe.net.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\DocumentFormat.OpenXml.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\DocumentFormat.OpenXml.Extensions.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\EntityFramework.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\EntityFramework.SqlServer.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\ImageResizer.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\MiniProfiler.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\MiniProfiler.EntityFramework6.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\BrandonHaynes.ModelAdapter.EntityFramework.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\System.Web.Mvc.dll" DestinationFolder="$(ModulesBuildFolder)" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\System.Web.Abstractions.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\System.Web.Routing.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+
+		<Copy SourceFiles="@(PackageTxtInclude)" DestinationFolder="$(ModulesBuildFolder)" />
+		
+		<!-- Create Core zip -->
+		<CreateItem Include="$(CoreBuildFolder)\**\*.*">
+			<Output TaskParameter="Include" ItemName="CoreContent" />
+		</CreateItem>
+
+		<Zip Files="@(CoreContent)" WorkingDirectory="$(CoreBuildFolder)" ZipFileName="$(ModulesBuildFolder)\Core.$(Extension)" ParallelCompression="False" />
+
+		<!-- Create HotcakesViews zip -->
+		<CreateItem Include="$(ViewSetBuildFolder)\**\*.*">
+			<Output TaskParameter="Include" ItemName="HotcakesViewsContent" />
+		</CreateItem>
+
+		<Zip Files="@(HotcakesViewsContent)" WorkingDirectory="$(ViewSetBuildFolder)" ZipFileName="$(ModulesBuildFolder)\HotcakesViews.$(Extension)" ParallelCompression="False" />
+
+		<!-- Create the ControlPanel package -->
+		<CreateItem Include="$(ControlPanelBuildFolder)\**\*.*">
+			<Output TaskParameter="Include" ItemName="ControlPanelContent" />
+		</CreateItem>
+
+		<Zip Files="@(ControlPanelContent)" WorkingDirectory="$(ControlPanelBuildFolder)" ZipFileName="$(ModulesBuildFolder)\ControlPanel\ControlPanel.$(Extension)" ParallelCompression="False" />
+
+		<!-- Create the Install package -->
+		<CreateItem Include="$(ModulesBuildFolder)\**\*.*">
+			<Output TaskParameter="Include" ItemName="OutputContent" />
+		</CreateItem>
+
+		<Zip Files="@(OutputContent)" WorkingDirectory="$(ModulesBuildFolder)" ZipFileName="$(InstallFolder)\$(PackageName)_$(Version)_Install.$(Extension)" ParallelCompression="False" />
+
+		
+		<RemoveDir Directories ="$(CoreBuildFolder)" /> 
+		<RemoveDir Directories ="$(ViewSetBuildFolder)" /> 
+		<RemoveDir Directories ="$(ControlPanelBuildFolder)" /> 
+		<RemoveDir Directories ="$(ModulesBuildFolder)" />
+
+		<!-- Create packages with debug symbols -->
+		<Copy SourceFiles="@(HotcakesPdbs)" DestinationFolder="$(DebugBuildFolder)"/>
+		<CreateItem Include="$(DebugBuildFolder)\**\*.*">
+			<Output TaskParameter="Include" ItemName="DebugOutputContent" />
+		</CreateItem>
+		<Zip Files="@(DebugOutputContent)" WorkingDirectory="$(DebugBuildFolder)" ZipFileName="$(InstallFolder)\$(PackageName)_$(Version)_DebugSymbols.$(Extension)" ParallelCompression="False" />
+
+		
+		<RemoveDir Directories ="$(DebugBuildFolder)" />
+		<RemoveDir Directories ="$(WebsiteBuildFolder)" />
+
+	</Target>
+</Project>

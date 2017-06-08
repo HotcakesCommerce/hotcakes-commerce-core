@@ -1,0 +1,188 @@
+﻿/* Reviews changes */
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ALTER COLUMN [AllowReviews] bit null
+GO
+
+IF EXISTS( SELECT * FROM sys.default_constraints WHERE type='D' and name = 'DF_{objectQualifier}hcc_Product_AllowReviews')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_AllowReviews]
+END
+GO
+
+update {databaseOwner}[{objectQualifier}hcc_StoreSettings]
+set [SettingName] = 'AllowProductReviews'
+where [SettingName] = 'ProductReviewShowRating'
+
+
+/* Gift Card changes */
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_GiftCard' AND  COLUMN_NAME = 'GiftCardId')
+BEGIN
+
+DROP TABLE {databaseOwner}[{objectQualifier}hcc_GiftCard]
+
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_GiftCard](
+	[GiftCardId] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[LineItemId] [bigint] NULL,
+	[CardNumber] [nvarchar](50) NOT NULL,
+	[Amount] [decimal](18, 10) NOT NULL,
+	[UsedAmount] [decimal](18, 10) NOT NULL,
+	[IssueDateUtc] [datetime] NOT NULL,
+	[ExpirationDateUtc] [datetime] NOT NULL,
+	[RecipientEmail] [nvarchar](255) NULL,
+	[RecipientName] [nvarchar](255) NULL,
+	[GiftMessage] [nvarchar](max) NULL,
+	[Enabled] [bit] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_GiftCard] PRIMARY KEY CLUSTERED 
+(
+	[GiftCardId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_GiftCard] ADD  CONSTRAINT [DF_{objectQualifier}hcc_GiftCard_Enabled]  DEFAULT ((0)) FOR [Enabled]
+
+END
+GO
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE WHERE CONSTRAINT_NAME ='UK_{objectQualifier}hcc_GiftCard')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_GiftCard] ADD CONSTRAINT
+	[UK_{objectQualifier}hcc_GiftCard] UNIQUE NONCLUSTERED 
+	(
+	CardNumber
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+END
+GO
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_Product' AND  COLUMN_NAME = 'IsGiftCard')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD
+	[IsGiftCard] bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_IsGiftCard] DEFAULT 0
+END
+GO
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_LineItem' AND  COLUMN_NAME = 'IsGiftCard')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] ADD
+	IsGiftCard bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_IsGiftCard] DEFAULT 0
+END
+GO
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_OrderTransactions' AND  COLUMN_NAME = 'GiftCard')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions] ADD
+	[GiftCard] ntext NULL
+END
+GO
+
+IF EXISTS( SELECT * FROM sys.default_constraints WHERE type='D' and name = 'DF_{objectQualifier}hcc_OrderTransactions_GiftCardNumber')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_OrderTransactions_GiftCardNumber]
+END
+GO
+
+IF EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_OrderTransactions' AND  COLUMN_NAME = 'GiftCardNumber')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions]
+	DROP COLUMN [GiftCardNumber]
+END
+GO
+
+IF NOT EXISTS (SELECT 1 FROM {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] WHERE [DisplayName] = N'Gift Card Notification')
+BEGIN
+	INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([StoreId],[LastUpdatedUtc],[DisplayName],[FromEmail],[TemplateType])
+	VALUES (0, '20140723', N'Gift Card Notification', N'[[Store.ContactEmail]]', 503)
+
+	INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations] ([HtmlTemplateId],[Culture],[Subject],[Body],[RepeatingSection])
+	VALUES (@@IDENTITY, 'en-US', N'You received Gift Card', N'<html>
+	<head>
+		<style type="text/css">
+			A {
+				text-decoration: none;
+			}
+
+				A:link {
+					color: #3366cc;
+					text-decoration: none;
+				}
+
+				A:visited {
+					color: #663399;
+					text-decoration: none;
+				}
+
+				A:active {
+					color: #cccccc;
+					text-decoration: none;
+				}
+
+				A:Hover {
+					text-decoration: underline;
+				}
+
+			BODY, TD, CENTER, P {
+				font-family: Geneva, Verdana, Arial, Helvetica;
+				font-size: 10px;
+				color: #333333;
+			}
+
+			.body {
+				font-family: Geneva, Verdana, Arial, Helvetica;
+				font-size: 10px;
+				color: #333333;
+			}
+
+			.content {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 11px;
+				font-weight: normal;
+				color: #000000;
+			}
+
+			.title {
+				font-family: Helvetica, Arial, sans-serif;
+				font-size: 10px;
+				font-weight: normal;
+				color: #000000;
+			}
+
+			.headline {
+				font-family: Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				font-weight: bold;
+				color: #000000;
+			}
+
+			.message {
+				font-family: Geneva, Verdana, Arial, Helvetica;
+				font-size: 9px;
+			}
+		</style>
+	</head>
+	<body bgcolor="#ffffff" link="#3366cc" vlink="#3366cc" alink="#3366cc" leftmargin="0" topmargin="0">
+
+		<p>Hello [[GiftCard.RecipientName]]:</p>
+		<p>[[GiftCard.GiftMessage]]</p>
+		<hr/>
+		<p>Here is your gift card [[LineItem.ProductName]] for [[GiftCard.Amount]].</p>
+		<p>Your gift card number is: <strong>[[GiftCard.CardNumber]]</strong></p>
+		<p>Gift card expiration date is: <strong>[[GiftCard.ExpirationDate]]</strong></p>
+
+		<p>To redeem your gift card online, type in the code above at checkout.</p>
+
+		<p>Thank you,</p>
+		<p>Store Management<br />[[Store.StoreName]]</p>
+
+	</body>
+	</html>
+	', N'')
+END
+GO
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_OrderTransactions' AND  COLUMN_NAME = 'MethodId')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions] ADD
+	[MethodId] nvarchar(50) NULL
+END
+GO

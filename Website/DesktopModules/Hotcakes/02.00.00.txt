@@ -1,0 +1,3 @@
+﻿bin/Hotcakes.ExtensionUrlProvider.dll
+bin/Hotcakes.ExtensionUrlProvider.pdb
+bin/Stripe.dll

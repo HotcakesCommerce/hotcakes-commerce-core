@@ -1,0 +1,26 @@
+﻿@model Hotcakes.Modules.Core.Models.BreadCrumbViewModel
+
+<div class="hc-breadcrumb">
+    @if (!Model.HideHomeLink)
+    {
+        <a href="@Url.RouteHccUrl(HccRoute.Category)">@Localization.GetString("Home")</a>
+        <span class="hc-spacer">&raquo; </span>
+    }
+    @while (Model.Items.Count > 0)
+    {
+        var item = Model.Items.Dequeue();
+        if (string.IsNullOrEmpty(item.Link))
+        {
+        <span class="hc-current">@item.Name</span>
+        }
+        else
+        {
+        <a href="@item.Link" title="@item.Title">@item.Name</a>
+        }
+
+        if (Model.Items.Count > 0 && Model.Items.Peek() != null)
+        {
+        <span class="hc-spacer">&raquo; </span>
+        }
+    }
+</div>

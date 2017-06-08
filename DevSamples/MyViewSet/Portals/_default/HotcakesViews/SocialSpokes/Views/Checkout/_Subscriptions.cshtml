@@ -1,0 +1,43 @@
+﻿
+@model IEnumerable<Hotcakes.Commerce.Orders.LineItem>
+
+<table class="dnnGrid">
+    <tr class="dnnGridHeader">
+        <td>@Localization.GetString("Item")</td>
+        <td>@Localization.GetString("Period")</td>
+        <td>@Localization.GetString("Quantity")</td>
+        <td class="hc-right">@Localization.GetString("Total")</td>
+        <td class="hc-right">@Localization.GetString(HccApp.CurrentStore.Settings.ApplyVATRules ? "VAT" : "Tax")</td>
+    </tr>
+    @for (int i = 0; i < Model.Count(); i++)
+ {
+	 var item = Model.ElementAt(i);
+        <tr class="@(i % 2 == 1 ? "dnnGridAltItem" : "dnnGridItem")">
+            <td>
+                @item.ProductName<br />
+                <span>@item.ProductSku</span><br />
+                <div class="hidden-phone">
+                    @Html.Raw(item.ProductShortDescription)
+                </div>
+                @if (item.LineTotal != item.LineTotalWithoutDiscounts)
+				{
+                    <br />
+                    @Html.Raw(@item.DiscountDetailsAsHtml())
+				}
+            </td>
+            <td class="hc-center">@item.RecurringBilling.Interval @LocalizationUtils.GetRecurringIntervalLower(item.RecurringBilling.IntervalType)</td>
+            <td class="hc-center">@item.Quantity</td>
+            <td class="hcLineTotal hc-right">
+                <span class="hcLineTotalBase hc-strike" style='@(item.HasAnyDiscounts ? "" : "display:none")'>
+                    @item.LineTotalWithoutDiscounts.ToString("C")<br />
+                </span>
+                <span class="hcLineTotalAdjusted">
+                    @item.LineTotal.ToString("C")
+                </span>
+            </td>
+            <td class="hc-right hcLineTotalTax">
+                @item.TaxPortion.ToString("C")
+            </td>
+        </tr>
+ }
+</table>

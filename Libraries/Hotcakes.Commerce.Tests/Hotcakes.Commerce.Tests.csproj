@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{90DA5B3D-F044-4FC3-A428-56AC87724D80}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hotcakes.Commerce.Tests</RootNamespace>
+    <AssemblyName>Hotcakes.Commerce.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AuthorizeNet, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\AuthorizeNet.1.8.2\lib\AuthorizeNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke">
+      <HintPath>..\..\References\Dnn\DotNetNuke.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.7.3.1.21.Fakes">
+      <HintPath>FakesAssemblies\DotNetNuke.7.3.1.21.Fakes.dll</HintPath>
+    </Reference>
+    <Reference Include="Effort, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a46696d54971e6d, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Effort.EF6.1.1.4\lib\net45\Effort.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Hotcakes.Commerce.Dnn.Fakes">
+      <HintPath>FakesAssemblies\Hotcakes.Commerce.Dnn.Fakes.dll</HintPath>
+    </Reference>
+    <Reference Include="Hotcakes.Commerce.Fakes">
+      <HintPath>FakesAssemblies\Hotcakes.Commerce.Fakes.dll</HintPath>
+    </Reference>
+    <Reference Include="Hotcakes.Common.Dnn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Hcc\Hotcakes.Common.Dnn.dll</HintPath>
+    </Reference>
+    <Reference Include="Hotcakes.Licensing.Common, Version=1.5.2.25061, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Hcc\Hotcakes.Licensing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="NMemory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a46696d54971e6d, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NMemory.1.0.1\lib\net45\NMemory.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity.4.0.0.0.Fakes">
+      <HintPath>FakesAssemblies\System.Data.Entity.4.0.0.0.Fakes.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Dnn\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Dnn\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Dnn\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="AddressRepositoryTest.cs" />
+    <Compile Include="AuthorizeNetEx.cs" />
+    <Compile Include="BaseTest.cs" />
+    <Compile Include="CatalogService\CatalogRolesTest.cs" />
+    <Compile Include="CatalogService\GiftCardRepositoryTest.cs" />
+    <Compile Include="CatalogService\CatalogServiceTest.cs" />
+    <Compile Include="HotcakesApplicationTest.cs" />
+    <Compile Include="MarketingService\DiscountDetailTest.cs" />
+    <Compile Include="MemoryStrategy.cs" />
+    <Compile Include="OrderService\LineItemTest.cs" />
+    <Compile Include="CatalogService\OptionRepositoryTest.cs" />
+    <Compile Include="OrderService\OrderCalculatorTest.cs" />
+    <Compile Include="OrderService\OrderServiceTest.cs" />
+    <Compile Include="OrderService\OrderTest.cs" />
+    <Compile Include="MarketingService\PromotionTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ContactService\AffiliateTest.cs" />
+    <Compile Include="ReportingService\ReportingServiceTest.cs" />
+    <Compile Include="SamplesBuilder.cs" />
+    <Compile Include="TestHccFactory.cs" />
+    <Compile Include="Workflow\WorkflowTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hotcakes.Commerce.Dnn\Hotcakes.Commerce.Dnn.csproj">
+      <Project>{cce92cf0-6cae-4c74-96ba-5757d1750633}</Project>
+      <Name>Hotcakes.Commerce.Dnn_2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hotcakes.CommerceDTO\Hotcakes.CommerceDTO.csproj">
+      <Project>{C47A3A58-D11F-4D67-92FC-3E95B5DD6221}</Project>
+      <Name>Hotcakes.CommerceDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hotcakes.Commerce\Hotcakes.Commerce.csproj">
+      <Project>{4eff0d3e-99d4-4a8d-a672-b88e5e47cbaa}</Project>
+      <Name>Hotcakes.Commerce</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hotcakes.Payment\Hotcakes.Payment.csproj">
+      <Project>{4C223AD8-685A-4AAC-8610-1BEC50636203}</Project>
+      <Name>Hotcakes.Payment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hotcakes.PaypalWebServices\Hotcakes.PaypalWebServices.csproj">
+      <Project>{40FCF14A-F903-4BF1-B4E0-FC5CB623BDF2}</Project>
+      <Name>Hotcakes.PaypalWebServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hotcakes.Shipping.FedEx\Hotcakes.Shipping.FedEx.csproj">
+      <Project>{9b00258d-45d2-43bd-8178-a6f2aaff5090}</Project>
+      <Name>Hotcakes.Shipping.FedEx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hotcakes.Shipping.Ups.Keys\Hotcakes.Shipping.Ups.Keys.csproj">
+      <Project>{5b7fdf2c-98ca-4030-b35f-f0abe648e5fe}</Project>
+      <Name>Hotcakes.Shipping.Ups.Keys</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hotcakes.Shipping.Ups\Hotcakes.Shipping.Ups.csproj">
+      <Project>{68FF27BE-6296-4A8B-B20F-6480A491D092}</Project>
+      <Name>Hotcakes.Shipping.Ups</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hotcakes.Shipping.USPostal\Hotcakes.Shipping.USPostal.csproj">
+      <Project>{A7F1EBBC-53E6-43AE-902E-8B8EF5082C54}</Project>
+      <Name>Hotcakes.Shipping.USPostal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hotcakes.Shipping\Hotcakes.Shipping.csproj">
+      <Project>{99A252BB-D844-4581-B924-4E59AE19857F}</Project>
+      <Name>Hotcakes.Shipping</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hotcakes.Web\Hotcakes.Web.csproj">
+      <Project>{a822b6b9-ce48-4717-9ec2-1c1548289315}</Project>
+      <Name>Hotcakes.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Fakes Include="Fakes\Hotcakes.Commerce.Dnn.fakes" />
+    <Fakes Include="Fakes\System.Data.Entity.fakes" />
+    <Fakes Include="Fakes\DotNetNuke.fakes" />
+    <None Include="CsvData\hcc_Address.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_Category.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_CategoryTranslations.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_ContentBlock.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_ContentBlockTranslations.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_ContentColumn.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_Countries.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_HtmlTemplates.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_HtmlTemplateTranslations.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_Product.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_ProductInventory.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_ProductOptionItemTranslations.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_ProductOptions.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_ProductOptionsItems.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_ProductOptionTranslations.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_ProductReview.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_ProductTranslations.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_ProductXCategory.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_ProductXOption.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_Regions.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_SearchLexicon.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_SearchObjects.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_SearchObjectWords.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_ShippingZones.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_Stores.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_StoreSettings.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_StoreSettingsTranslations.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CsvData\hcc_Variants.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Fakes Include="Fakes\Hotcakes.Commerce.fakes" />
+    <None Include="DbBackup\HotcakesDevTest.bak">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AccountService\" />
+    <Folder Include="ContentService\" />
+    <Folder Include="MembershipService\" />
+    <Folder Include="Search\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DbBackup\Readme.txt" />
+    <Content Include="TODO.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

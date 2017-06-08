@@ -1,0 +1,42 @@
+<%@ Master Language="C#" Inherits="Hotcakes.Modules.Core.Admin.Admin_old" Codebehind="Admin_old.master.cs" AutoEventWireup="True" %>
+
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+<%@ Register Src="MasterPageJavascript.ascx" TagName="MasterPageJavascript" TagPrefix="uc3" %>
+<%@ Register Src="footer.ascx" TagName="footer" TagPrefix="uc2" %>
+<%@ Register Src="Header.ascx" TagName="Header" TagPrefix="uc1" %>
+<%@ Register src="JQueryInclude.ascx" tagname="JQueryInclude" tagprefix="uc4" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <title>My Hotcakes Commerce Store</title>
+    <link href="~/DesktopModules/Hotcakes/Core/Admin/styles.css" rel="stylesheet" type="text/css" />
+    <link href="~/DesktopModules/Hotcakes/Core/Admin/StylesPrint.css" rel="stylesheet" type="text/css" media="print" />
+
+    <uc4:JQueryInclude ID="JQueryInclude1" runat="server" />
+    <asp:ContentPlaceHolder ID="headcontent" runat="server">
+    
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <telerik:RadScriptManager runat="server"></telerik:RadScriptManager>
+        <asp:PlaceHolder ID="BodySCRIPTS" runat="server" />
+        <div id="header">
+            <uc1:Header ID="Header1" runat="server" />
+        </div>
+        <div id="wrapper">
+            <div id="content">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+        <div id="footer">
+            <uc2:footer ID="Footer1" runat="server" />
+        </div>
+        <input id="__hccVariables" runat="server" name="__hccVariables" type="hidden" />
+    </form>
+	<img src="//hotcakes.org/Portals/0/images/spacer.gif" alt="" />
+    <asp:ContentPlaceHolder ID="PreBodyCloseContent" runat="server"></asp:ContentPlaceHolder>
+</body>
+</html>

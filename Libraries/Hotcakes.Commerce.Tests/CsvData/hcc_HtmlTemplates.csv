@@ -1,0 +1,17 @@
+Id,StoreId,LastUpdatedUtc,DisplayName,FromEmail,TemplateType
+26,0,05/01/2013 00:00:00,"Contact Us Form","[[Store.ContactEmail]]",102
+27,0,05/01/2013 00:00:00,"Drop Shipper Notice","[[Store.ContactEmail]]",200
+28,0,05/01/2013 00:00:00,"Email Friend","[[Store.ContactEmail]]",101
+29,0,05/01/2013 00:00:00,"Forgot Password Template","[[Store.ContactEmail]]",100
+30,0,05/01/2013 00:00:00,"Order New Receipt","[[Store.ContactEmail]]",1
+31,0,05/01/2013 00:00:00,"Admin Order Receipt","[[Store.ContactEmail]]",2
+32,0,05/01/2013 00:00:00,"Order Shipment","[[Store.ContactEmail]]",4
+33,0,05/01/2013 00:00:00,"Order Update","[[Store.ContactEmail]]",3
+34,0,10/18/2013 00:00:00,"VAT Invoice","[[Store.ContactEmail]]",400
+35,0,11/13/2013 00:00:00,"Affiliate Approvement","[[Store.ContactEmail]]",500
+36,0,11/13/2013 00:00:00,"Affiliate Registration","[[Store.ContactEmail]]",501
+37,0,05/26/2014 00:00:00,"Product Role Assignment","[[Store.ContactEmail]]",502
+38,0,07/23/2014 00:00:00,"Gift Card Notification","[[Store.ContactEmail]]",503
+39,0,11/13/2014 00:00:00,"Abandoned Cart","[[Store.ContactEmail]]",504
+40,0,11/13/2014 00:00:00,"Contact Abandoned Cart Users","[[Store.ContactEmail]]",507
+40,0,11/13/2014 00:00:00,"Affiliate Review","[[Store.ContactEmail]]",508

@@ -1,0 +1,33 @@
+﻿<%@ Master Language="C#" AutoEventWireup="True" Inherits="Hotcakes.Modules.Core.Admin.AdminWizard" CodeBehind="AdminWizard.master.cs" %>
+
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+
+<%@ Register Src="Header.ascx" TagName="Header" TagPrefix="hcc" %>
+<%@ Register Src="Footer.ascx" TagName="Footer" TagPrefix="hcc" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>Hotcakes Setup Wizard</title>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+</head>
+<body>
+    <form runat="server">
+        <telerik:RadScriptManager runat="server"></telerik:RadScriptManager>
+        <asp:PlaceHolder ID="BodySCRIPTS" runat="server" />
+        <div id="wrapper" class="dnnClear">
+            <div id="header">
+                <hcc:Header HideMenu="True" HideAdminControlBar="True" runat="server" />
+            </div>
+            <div id="content" class="hcAdminWizard">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+            </div>
+            <div id="footer-push"></div>
+        </div>
+        <div id="footer">
+            <hcc:Footer runat="server" />
+        </div>
+        <input id="__hccVariables" runat="server" name="__hccVariables" type="hidden" />
+    </form>
+	<img src="//hotcakes.org/Portals/0/images/spacer.gif" alt="" />
+</body>
+</html>

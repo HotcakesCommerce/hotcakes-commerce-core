@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Hotcakes.Commerce.Dnn.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="HotcakesCommerceDnnStoreContainer">
+          <EntitySet Name="vw_Profile" EntityType="Hotcakes.Commerce.Dnn.Store.vw_Profile" store:Type="Views" store:Schema="dbo" store:Name="vw_Profile" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
+            <DefiningQuery>SELECT 
+      [vw_Profile].[UserID] AS [UserID], 
+      [vw_Profile].[PortalID] AS [PortalID], 
+      [vw_Profile].[PropertyName] AS [PropertyName], 
+      [vw_Profile].[PropertyValue] AS [PropertyValue], 
+      [vw_Profile].[Visibility] AS [Visibility]
+      FROM [dbo].[vw_Profile] AS [vw_Profile]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_Users" EntityType="Hotcakes.Commerce.Dnn.Store.vw_Users" store:Type="Views" store:Schema="dbo" store:Name="vw_Users" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
+            <DefiningQuery>SELECT 
+      [vw_Users].[UserID] AS [UserID], 
+      [vw_Users].[PortalId] AS [PortalId], 
+      [vw_Users].[Username] AS [Username], 
+      [vw_Users].[FirstName] AS [FirstName], 
+      [vw_Users].[LastName] AS [LastName], 
+      [vw_Users].[DisplayName] AS [DisplayName], 
+      [vw_Users].[IsSuperUser] AS [IsSuperUser], 
+      [vw_Users].[Email] AS [Email], 
+      [vw_Users].[AffiliateId] AS [AffiliateId], 
+      [vw_Users].[UpdatePassword] AS [UpdatePassword], 
+      [vw_Users].[Authorised] AS [Authorised], 
+      [vw_Users].[IsDeleted] AS [IsDeleted], 
+      [vw_Users].[RefreshRoles] AS [RefreshRoles], 
+      [vw_Users].[LastIPAddress] AS [LastIPAddress], 
+      [vw_Users].[CreatedByUserID] AS [CreatedByUserID], 
+      [vw_Users].[CreatedOnDate] AS [CreatedOnDate], 
+      [vw_Users].[LastModifiedByUserID] AS [LastModifiedByUserID], 
+      [vw_Users].[LastModifiedOnDate] AS [LastModifiedOnDate]
+      FROM [dbo].[vw_Users] AS [vw_Users]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'SocialHotcakesDemo_DNN.dbo.vw_Profile' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="vw_Profile">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="PropertyName" />
+            <PropertyRef Name="Visibility" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="PortalID" Type="int" />
+          <Property Name="PropertyName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="PropertyValue" Type="nvarchar(max)" />
+          <Property Name="Visibility" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'SocialHotcakesDemo_DNN.dbo.vw_Users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="vw_Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="DisplayName" />
+            <PropertyRef Name="IsSuperUser" />
+            <PropertyRef Name="UpdatePassword" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="PortalId" Type="int" />
+          <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DisplayName" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="IsSuperUser" Type="bit" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="AffiliateId" Type="int" />
+          <Property Name="UpdatePassword" Type="bit" Nullable="false" />
+          <Property Name="Authorised" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="RefreshRoles" Type="bit" />
+          <Property Name="LastIPAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedByUserID" Type="int" />
+          <Property Name="CreatedOnDate" Type="datetime" />
+          <Property Name="LastModifiedByUserID" Type="int" />
+          <Property Name="LastModifiedOnDate" Type="datetime" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Hotcakes.Commerce.Dnn" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DnnDbContext" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="vw_Profile" EntityType="Hotcakes.Commerce.Dnn.DnnProfile" />
+          <EntitySet Name="vw_Users" EntityType="Hotcakes.Commerce.Dnn.DnnUser" />
+        </EntityContainer>
+        <EntityType Name="DnnProfile">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="PropertyName" />
+            <PropertyRef Name="Visibility" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="PortalID" Type="Int32" />
+          <Property Name="PropertyName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="PropertyValue" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Visibility" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DnnUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="DisplayName" />
+            <PropertyRef Name="IsSuperUser" />
+            <PropertyRef Name="UpdatePassword" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="PortalId" Type="Int32" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="IsSuperUser" Type="Boolean" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="AffiliateId" Type="Int32" />
+          <Property Name="UpdatePassword" Type="Boolean" Nullable="false" />
+          <Property Name="Authorised" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="RefreshRoles" Type="Boolean" />
+          <Property Name="LastIPAddress" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedByUserID" Type="Int32" />
+          <Property Name="CreatedOnDate" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedByUserID" Type="Int32" />
+          <Property Name="LastModifiedOnDate" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HotcakesCommerceDnnStoreContainer" CdmEntityContainer="DnnDbContext">
+          <EntitySetMapping Name="vw_Profile">
+            <EntityTypeMapping TypeName="Hotcakes.Commerce.Dnn.DnnProfile">
+              <MappingFragment StoreEntitySet="vw_Profile">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropertyValue" ColumnName="PropertyValue" />
+                <ScalarProperty Name="Visibility" ColumnName="Visibility" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Users">
+            <EntityTypeMapping TypeName="Hotcakes.Commerce.Dnn.DnnUser">
+              <MappingFragment StoreEntitySet="vw_Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PortalId" ColumnName="PortalId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IsSuperUser" ColumnName="IsSuperUser" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AffiliateId" ColumnName="AffiliateId" />
+                <ScalarProperty Name="UpdatePassword" ColumnName="UpdatePassword" />
+                <ScalarProperty Name="Authorised" ColumnName="Authorised" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="RefreshRoles" ColumnName="RefreshRoles" />
+                <ScalarProperty Name="LastIPAddress" ColumnName="LastIPAddress" />
+                <ScalarProperty Name="CreatedByUserID" ColumnName="CreatedByUserID" />
+                <ScalarProperty Name="CreatedOnDate" ColumnName="CreatedOnDate" />
+                <ScalarProperty Name="LastModifiedByUserID" ColumnName="LastModifiedByUserID" />
+                <ScalarProperty Name="LastModifiedOnDate" ColumnName="LastModifiedOnDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams />
+  </Designer>
+</edmx:Edmx>

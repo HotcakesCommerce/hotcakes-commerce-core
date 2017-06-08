@@ -1,0 +1,24 @@
+﻿@model Hotcakes.Modules.Core.Models.ProductReviewViewModel
+<div class="hc-review row-fluid">
+    <div class="span3">
+        <div class="hc-rating hc-stars@((int)Model.ProductReview.Rating)"></div>
+        <div class="hc-review-user">
+            @if (!String.IsNullOrEmpty(Model.UserName))
+            {
+                var location = (String.IsNullOrEmpty(Model.City) || String.IsNullOrEmpty(Model.State)) ?
+                    String.Empty : String.Format("{0}, {1}", Model.City, Model.State);
+                <a href="@Url.RouteHccUrl(HccRoute.UserProfile, new { userId = Model.UserID })">@Model.UserName</a><br />
+                if (!String.IsNullOrEmpty(location))
+                { 
+                @location<br />
+                }
+            }
+            <span class="hc-review-date">@DateHelper.ConvertUtcToStoreTime(HccApp, Model.ProductReview.ReviewDateUtc).ToString("MMMM dd yyyy")</span>
+        </div>
+    </div>
+
+    <div class="span9">
+        @*<h2 style="display: none;">@Localization.GetString("ReviewFor") @Model.ProductReview.ProductName</h2>*@
+        @Html.Raw(Model.ProductReview.Description.Replace("\r\n", "<br/>"))
+    </div>
+</div>

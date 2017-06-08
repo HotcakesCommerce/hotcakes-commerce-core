@@ -1,0 +1,53 @@
+﻿@model Hotcakes.Modules.Core.Models.GooglePlusOneViewModel
+@using System.Text
+@functions {
+    private string BuildTag()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append("<g:plusone");
+        
+        sb.Append(" href=\"" + Model.PageUrl + "\"");
+        switch(Model.Size)
+        {
+            case Hotcakes.Modules.Core.Models.GooglePlusOneSize.Large:
+                sb.Append(" size=\"large\"");
+                break;
+            case Hotcakes.Modules.Core.Models.GooglePlusOneSize.Medium:
+                sb.Append(" size=\"medium\"");
+                break;
+            case Hotcakes.Modules.Core.Models.GooglePlusOneSize.Small:
+                sb.Append(" size=\"small\"");
+                break;
+            case Hotcakes.Modules.Core.Models.GooglePlusOneSize.Standard:
+                sb.Append(" size=\"standard\"");
+                break;
+        }
+        switch(Model.CountPosition)
+        {
+            case Hotcakes.Modules.Core.Models.GooglePlusOneCountPosition.Bubble:
+                sb.Append(" annotation=\"bubble\"");
+                break;
+            case Hotcakes.Modules.Core.Models.GooglePlusOneCountPosition.Inline:
+                sb.Append(" annotation=\"inline\"");
+                break;
+            case Hotcakes.Modules.Core.Models.GooglePlusOneCountPosition.None:
+                sb.Append(" annotation=\"none\"");
+                break;
+        }
+        sb.Append("></g:plusone>");        
+        return sb.ToString();
+    }
+}
+<!-- Google Plus One Button -->           
+@Html.Raw(BuildTag())
+    <script type="text/javascript">
+        window.___gcfg = {
+            lang: 'en-US'
+        };
+
+        (function () {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+    </script>

@@ -1,0 +1,183 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <webpiFile version="5.0.0.0"/>
+  <title>Hotcakes Commerce 5.0 Application Feed</title>
+  <link rel="self" href="d:\Work\ArrowTFS12\Hotcakes\HCC\Main\WebDeploy\Feed.xml"/>
+  <updated>2014-07-25T12:00:00Z</updated>
+  <author>
+    <name>Hotcakes Commerce</name>
+  </author>
+  <id>
+    d:\Work\ArrowTFS12\Hotcakes\HCC\Main\WebDeploy\Feed.xml
+  </id>
+
+  <!--  DotNetNuke -->
+  <entry type="application">
+    <productId>Hotcakes</productId>
+    <title resourceName="Entry_Hotcakes_Title">Hotcakes Commerce</title>
+    <id>http://www.microsoft.com/web/webpi/2.0/DotNetNuke</id>
+    <summary resourceName="Entry_Hotcakes_Summary">
+      DNN makes designing, building and managing feature-rich websites and social communities fast, easy and cost-effective. Thousands of organizations like Bank of America, Aetna, True Value Hardware, Whirlpool, the National Football League (NFL), the US Department of Defense (DoD) and Sports Direct have leveraged DNN to deploy highly engaging online experiences.
+    </summary>
+    <updated>2014-07-25T12:00:00Z</updated>
+    <published>2014-07-25T12:00:00Z</published>
+    <longSummary resourceName="Entry_Hotcakes_LongSummary">
+      DNN makes designing, building and managing feature-rich websites and social communities fast, easy and cost-effective. Thousands of organizations like Bank of America, Aetna, True Value Hardware, Whirlpool, the National Football League (NFL), the US Department of Defense (DoD) and Sports Direct have leveraged DNN to deploy highly engaging online experiences.
+    </longSummary>
+    <version>1.6.0</version>
+    <link href="https://hotcakes.org/"/>
+    <!--
+    <images>
+      <icon>
+        http://www.microsoft.com/web/handlers/webpi.ashx?command=getimage&guid=d19da4be-f4c2-444b-8197-063eaf14b53b
+      </icon>
+      <screenshot>
+        http://www.microsoft.com/web/handlers/webpi.ashx?command=getimage&guid=22ee6764-d597-4c1c-8845-85cdc3d22c61
+      </screenshot>
+      <screenshot>
+        http://www.microsoft.com/web/handlers/webpi.ashx?command=getimage&guid=c9e9f7b9-e870-4b7b-a0e3-a38252c50b6c
+      </screenshot>
+      <screenshot>
+        http://www.microsoft.com/web/handlers/webpi.ashx?command=getimage&guid=9a8727f5-d421-4117-93f6-a4f26e4736ad
+      </screenshot>
+      <screenshot>
+        http://www.microsoft.com/web/handlers/webpi.ashx?command=getimage&guid=12d3efb3-8b59-48cd-af6c-e1e150953838
+      </screenshot>
+      <screenshot>
+        http://www.microsoft.com/web/handlers/webpi.ashx?command=getimage&guid=23ce740a-f234-4d9d-b896-37fff16fe355
+      </screenshot>
+    </images>
+    -->
+    <keywords>
+      <keywordId>ContentMgmt</keywordId>
+      <keywordId>AzureReady</keywordId>
+      <keywordId>AppFrameworks</keywordId>
+      <keywordId>SQL</keywordId>
+    </keywords>
+    <author>
+      <name>Hotcakes Commerce</name>
+      <uri>http://hotcakescommerce.com/</uri>
+    </author>
+    <!--
+    <dependency idref="SQL_ASPNET4App"/>
+    -->
+    <installers>
+      <installer>
+        <id>1</id>
+        <languageId>en</languageId>
+        <osList idref="SupportedAppPlatforms"/>
+        <installerFile>
+          <fileSize>71401063</fileSize>
+          <!--
+          <trackingURL>
+            http://www.microsoft.com/web/handlers/webpi.ashx?command=incrementappdownloadcount&appid=DotNetNuke&version=7.3.1 Platform&applang=en
+          </trackingURL>
+          -->
+          <installerURL>
+            d:\Work\ArrowTFS12\Hotcakes\HCC\Main\_Install\HotcakesCommerce_01.06.00_Deploy.zip
+          </installerURL>
+          <sha1>c2d89e91a8d221fd6ad85663d317f8fe5a79e74b</sha1>
+        </installerFile>
+        <msDeploy>
+          <startPage>/Install/InstallWizard.aspx</startPage>
+        </msDeploy>
+        <helpLink>https://hotcakes.org/Community</helpLink>
+      </installer>
+    </installers>
+    <addToFeedDate>02-07-2013</addToFeedDate>
+    <pageName>DotNetNuke</pageName>
+    <productFamily resourceName="Applications">Applications</productFamily>
+  </entry>
+  <!--  DotNetNuke_IIS -->
+  <!--
+  <entry type="application">
+    <productId>DotNetNuke_IIS</productId>
+    <title resourceName="Entry_DotNetNuke_IIS_Title">DNN Platform for IIS</title>
+    <id>http://www.microsoft.com/web/webpi/2.0/DotNetNuke</id>
+    <summary resourceName="Entry_DotNetNuke_Summary">
+      DNN makes designing, building and managing feature-rich websites and social communities fast, easy and cost-effective. Thousands of organizations like Bank of America, Aetna, True Value Hardware, Whirlpool, the National Football League (NFL), the US Department of Defense (DoD) and Sports Direct have leveraged DNN to deploy highly engaging online experiences.
+    </summary>
+    <updated>2014-06-12T19:41:24Z</updated>
+    <published>2014-06-12T19:41:24Z</published>
+    <longSummary resourceName="Entry_DotNetNuke_LongSummary">
+      DNN makes designing, building and managing feature-rich websites and social communities fast, easy and cost-effective. Thousands of organizations like Bank of America, Aetna, True Value Hardware, Whirlpool, the National Football League (NFL), the US Department of Defense (DoD) and Sports Direct have leveraged DNN to deploy highly engaging online experiences.
+    </longSummary>
+    <version>7.3.1 Platform</version>
+    <link href="http://support.dotnetnuke.com"/>
+    <images>
+      <icon>
+        http://www.microsoft.com/web/handlers/webpi.ashx?command=getimage&guid=d19da4be-f4c2-444b-8197-063eaf14b53b
+      </icon>
+      <screenshot>
+        http://www.microsoft.com/web/handlers/webpi.ashx?command=getimage&guid=22ee6764-d597-4c1c-8845-85cdc3d22c61
+      </screenshot>
+      <screenshot>
+        http://www.microsoft.com/web/handlers/webpi.ashx?command=getimage&guid=c9e9f7b9-e870-4b7b-a0e3-a38252c50b6c
+      </screenshot>
+      <screenshot>
+        http://www.microsoft.com/web/handlers/webpi.ashx?command=getimage&guid=9a8727f5-d421-4117-93f6-a4f26e4736ad
+      </screenshot>
+      <screenshot>
+        http://www.microsoft.com/web/handlers/webpi.ashx?command=getimage&guid=12d3efb3-8b59-48cd-af6c-e1e150953838
+      </screenshot>
+      <screenshot>
+        http://www.microsoft.com/web/handlers/webpi.ashx?command=getimage&guid=23ce740a-f234-4d9d-b896-37fff16fe355
+      </screenshot>
+    </images>
+    <keywords>
+      <keywordId>SQL</keywordId>
+    </keywords>
+    <author>
+      <name>DNN Corp</name>
+      <uri>http://www.dnnsoftware.com</uri>
+    </author>
+    <dependency idref="SQL_ASPNET4App"/>
+    <installers>
+      <installer>
+        <id>1</id>
+        <languageId>en</languageId>
+        <osList idref="SupportedAppPlatforms"/>
+        <installerFile>
+          <fileSize>64031</fileSize>
+          <trackingURL>
+            http://www.microsoft.com/web/handlers/webpi.ashx?command=incrementappdownloadcount&appid=DotNetNuke&version=7.3.1 Platform&applang=en
+          </trackingURL>
+          <installerURL>
+            http://dotnetnuke.codeplex.com/Project/Download/FileDownload.aspx?DownloadId=868801
+          </installerURL>
+          <sha1>e08921ab019d5d9271dfb4148ba294d4d0c1f220</sha1>
+        </installerFile>
+        <msDeploy>
+          <startPage>/Install/InstallWizard.aspx</startPage>
+        </msDeploy>
+        <helpLink>http://support.dotnetnuke.com</helpLink>
+      </installer>
+    </installers>
+    <addToFeedDate>02-07-2013</addToFeedDate>
+    <pageName>DotNetNuke</pageName>
+    <productFamily resourceName="Applications">Applications</productFamily>
+  </entry>
+  -->
+  
+  <osLists>
+    <!--  support xp sp2+ (no server core)  -->
+    <osList id="SupportedAppPlatforms">
+      <os>
+        <minimumVersion>
+          <osMajorVersion>5</osMajorVersion>
+          <osMinorVersion>1</osMinorVersion>
+          <spMajorVersion>2</spMajorVersion>
+        </minimumVersion>
+        <osTypes>
+          <Server/>
+          <Client/>
+        </osTypes>
+      </os>
+      <os idref="PreVistaNoHomeBasic"/>
+      <os idref="VistaSP1PlusNoHomeBasic"/>
+    </osList>
+    <osList id="SupportedAppPlatformsExcludeXP">
+      <os idref="NoXPSupport"/>
+    </osList>
+  </osLists>
+
+</feed>

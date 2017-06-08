@@ -1,0 +1,67 @@
+﻿@model Hotcakes.Modules.Core.Models.AffiliateOrdersViewModel
+
+@using (Html.BeginHccForm(new { @class = "hcAffiliateOrders" }))
+{
+    <div class="dnnForm span9">
+        <div class="dnnFormItem">
+            <label class="dnnLabel">
+                @Localization.GetString("lblDate")
+            </label>
+            <select data-bind="value: dateRange">
+                @foreach (var t in Enum.GetValues(typeof(DateRangeType)).OfType<DateRangeType>())
+                {
+                    if (t != DateRangeType.Custom && t != DateRangeType.None)
+                    {
+                    <option value="@((int)t)">@Localization.GetString(t.ToString())</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="hc-wrap3">
+        <div class="hc-board">
+            <div class="hc-title">@Localization.GetString("OrdersCount")</div>
+            <div class="hc-amount-line" data-bind="text: totalCount"></div>
+        </div>
+    </div>	
+    <div class="hc-wrap3">
+        <div class="hc-board">
+            <div class="hc-title">@Localization.GetString("CommissionableAmount")</div>
+            <div class="hc-amount-line" data-bind="text: totalAmount"></div>
+        </div>
+    </div>
+    <div class="dnnClear">
+        <h2>@Localization.GetString("Orders")</h2>
+        <table class="dnnGrid">
+            <tbody>
+                <tr class="dnnGridHeader">
+                    <td>@Localization.GetString("OrderDate")</td>
+                    <td>@Localization.GetString("OrderNumber")</td>
+                    <td>@Localization.GetString("Total")</td>
+                    <td>@Localization.GetString("Commission")</td>
+                </tr>
+                <!-- ko foreach: orders -->
+                <tr class="dnnGridItem">
+                    <td data-bind="dateText: $data.OrderDate"></td>
+                    <td data-bind="text: $data.OrderNumber"></td>
+                    <td data-bind="text: $data.Amount"></td>
+                    <td data-bind="text: $data.Commission"></td>
+                </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+        <div class="clearfix">
+            <ul class="dnnButtonGroup">
+                <!-- ko if: pager.previousPage() > 0 -->
+                <li><a data-bind="click: function () { pager.setCurrentPage(pager.previousPage()) }">...</a></li>
+                <!-- /ko -->
+                <!-- ko foreach: pager.pagesList -->
+                <li data-bind="css: { 'current': $data == $parent.pager.pageNumber() }"><a data-bind="    text: $data, click: function () { $parent.pager.setCurrentPage($data) }"></a></li>
+                <!-- /ko -->
+                <!-- ko if: pager.nextPage() > 0 -->
+                <li><a data-bind="click: function () { pager.setCurrentPage(pager.nextPage()) }">...</a></li>
+                <!-- /ko -->
+            </ul>
+        </div>
+    </div>
+}

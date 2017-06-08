@@ -1,0 +1,13 @@
+﻿@model Hotcakes.Modules.Core.Models.ProductListViewModel
+<div class="hc-lastproducts">
+    <h2>@Model.Title</h2>
+    <div class="hc-record-grid hc-product-grid clearfix">
+        @foreach (var p in Model.Items)
+        {
+            <div class="hc-wrap4">
+                @Html.Action("RenderSingleProduct", "Products", new { Area = "", product = p })
+            </div>
+        }
+    </div>
+</div>
+

@@ -1,0 +1,2 @@
+﻿<%@ Control Language="C#" AutoEventWireup="True" Inherits="Hotcakes.Modules.Core.Admin.JQueryInclude" Codebehind="JQueryInclude.ascx.cs" %>
+<asp:Literal ID="litJQuery" runat="server" EnableViewState="false"></asp:Literal>

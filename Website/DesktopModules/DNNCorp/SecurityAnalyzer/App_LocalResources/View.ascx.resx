@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AuditChecks.Text" xml:space="preserve">
+    <value>Audit Checks</value>
+  </data>
+  <data name="SuperuserActivity.Text" xml:space="preserve">
+    <value>Superuser Activity</value>
+  </data>
+  <data name="CheckDebugFailure.Text" xml:space="preserve">
+    <value>debug is set to true - consider editing web.config and setting it to false (or use the configuration manager)</value>
+  </data>
+  <data name="CheckDebugReason.Text" xml:space="preserve">
+    <value>If the debug attribute is set to true it impacts performance and can reveal security exception details useful to hackers</value>
+  </data>
+  <data name="CheckDebugSuccess.Text" xml:space="preserve">
+    <value>Not in debug mode</value>
+  </data>
+  <data name="cmdCheck.Text" xml:space="preserve">
+    <value>Check</value>
+  </data>
+  <data name="cmdSearch.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="plSearchTerm.Text" xml:space="preserve">
+    <value>Search term</value>
+  </data>
+  <data name="ScannerChecks.Text" xml:space="preserve">
+    <value>Scanner Checks</value>
+  </data>
+  <data name="AuditExplanation.Text" xml:space="preserve">
+    <value>Below are the results of an automatic scan of security best practices.</value>
+  </data>
+  <data name="Authorized.Header" xml:space="preserve">
+    <value>Authorized</value>
+  </data>
+  <data name="CheckTracing.Text" xml:space="preserve">
+    <value>Tracing is set to true - consider editing web.config and setting it to false (or use the configuration manager)</value>
+  </data>
+  <data name="CheckTracingReason.Text" xml:space="preserve">
+    <value>If the tracing attribute is set to true it allows potential hackers to view site activity</value>
+  </data>
+  <data name="CheckTracingSuccess.Text" xml:space="preserve">
+    <value>Tracing is not enabled</value>
+  </data>
+  <data name="CreatedDate.Header" xml:space="preserve">
+    <value>Created date</value>
+  </data>
+  <data name="DisplayName.Header" xml:space="preserve">
+    <value>Display name</value>
+  </data>
+  <data name="Email.Header" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="FirstName.Header" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="LastActivityDate.Header" xml:space="preserve">
+    <value>Last Activity Date</value>
+  </data>
+  <data name="LastLogin.Header" xml:space="preserve">
+    <value>Last login</value>
+  </data>
+  <data name="LastName.Header" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="ScannerExplanation.Text" xml:space="preserve">
+    <value>This tab allows you to search the filesystem and database for any term, which is useful for the case where your site is showing unwanted content you wish to locate</value>
+  </data>
+  <data name="Username.Header" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="CheckBiographyFailure.Text" xml:space="preserve">
+    <value>The field is richtext</value>
+  </data>
+  <data name="CheckBiographyReason.Text" xml:space="preserve">
+    <value>The biography field is a common target for spammers as they can add links/html to it. In DNN 7.2.0 this was changed to a multiline textbox which removes this risk.</value>
+  </data>
+  <data name="CheckBiographySuccess.Text" xml:space="preserve">
+    <value>The field is a multiline textbox</value>
+  </data>
+  <data name="CheckRarelyUsedSuperuserFailure.Text" xml:space="preserve">
+    <value>We have found 1 or more superuser accounts that have not been logged in or had activity in six months. Consider deleting them as a best practice</value>
+  </data>
+  <data name="CheckRarelyUsedSuperuserReason.Text" xml:space="preserve">
+    <value>Superuser accounts are the most powerful DNN accounts. As a best practice these should be limited.</value>
+  </data>
+  <data name="CheckRarelyUsedSuperuserSuccess.Text" xml:space="preserve">
+    <value>All superusers are regular users of the system.</value>
+  </data>
+  <data name="CheckSiteRegistrationFailure.Text" xml:space="preserve">
+    <value>One or more portals are using public registration</value>
+  </data>
+  <data name="CheckSiteRegistrationReason.Text" xml:space="preserve">
+    <value>Sites that have public registration enabled are a prime target for spammers.</value>
+  </data>
+  <data name="CheckSiteRegistrationSuccess.Text" xml:space="preserve">
+    <value>All the portals are using non-public registration</value>
+  </data>
+  <data name="CheckSuperuserOldPasswordFailure.Text" xml:space="preserve">
+    <value>At least one superuser account has a password that has not been changed in more than 6 months.</value>
+  </data>
+  <data name="CheckSuperuserOldPasswordReason.Text" xml:space="preserve">
+    <value>Superuser accounts are the most powerful DNN accounts. As a best practice these accounts should have their passwords changed regularly.</value>
+  </data>
+  <data name="CheckSuperuserOldPasswordSuccess.Text" xml:space="preserve">
+    <value>No superuser has a password older than 6 months.</value>
+  </data>
+  <data name="CheckUnexpectedExtensionsFailure.Text" xml:space="preserve">
+    <value>An asp or php extension was found - these may be harmless, but sometimes indicate a site has been exploited and these files are tools. We recommend you evaluate these files carefully.</value>
+  </data>
+  <data name="CheckUnexpectedExtensionsReason.Text" xml:space="preserve">
+    <value>DNN is an asp.net web application. Under normal circumstances other server application extensions such as asp and php should not be in use.</value>
+  </data>
+  <data name="CheckUnexpectedExtensionsSuccess.Text" xml:space="preserve">
+    <value>No unexpected extensions found</value>
+  </data>
+  <data name="CheckViewstatemacFailure.Text" xml:space="preserve">
+    <value>viewstatemac validation is not enabled</value>
+  </data>
+  <data name="CheckViewstatemacReason.Text" xml:space="preserve">
+    <value>A view-state MAC is an encrypted version of the hidden variable that a page's view state is persisted to when the page is sent to the browser. When this property is set to true, the encrypted view state is checked to verify that it has not been tampered with on the client. 
+</value>
+  </data>
+  <data name="CheckViewstatemacSuccess.Text" xml:space="preserve">
+    <value>The viewstate is protected via the usage of a MAC</value>
+  </data>
+  <data name="CheckPurpose.Header" xml:space="preserve">
+    <value>Purpose of the check</value>
+  </data>
+  <data name="Result.Header" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="Severity.Header" xml:space="preserve">
+    <value>Severity</value>
+  </data>
+  <data name="CheckBiographyName.Text" xml:space="preserve">
+    <value>Check if public profile fields use richtext</value>
+  </data>
+  <data name="CheckDebugName.Text" xml:space="preserve">
+    <value>Check Debug status</value>
+  </data>
+  <data name="CheckRarelyUsedSuperuserName.Text" xml:space="preserve">
+    <value>Check if superuser accounts are rarely active</value>
+  </data>
+  <data name="CheckSiteRegistrationName.Text" xml:space="preserve">
+    <value>Check if site(s) use public registration</value>
+  </data>
+  <data name="CheckSuperuserOldPasswordName.Text" xml:space="preserve">
+    <value>Check if superusers are not regularly changing passwords</value>
+  </data>
+  <data name="CheckTracingName.Text" xml:space="preserve">
+    <value>Check if asp.net tracing is enabled</value>
+  </data>
+  <data name="CheckUnexpectedExtensionsName.Text" xml:space="preserve">
+    <value>Check if asp/php files are found</value>
+  </data>
+  <data name="CheckViewstatemacName.Text" xml:space="preserve">
+    <value>Check if viewstate is protected</value>
+  </data>
+  <data name="NoDatabaseResults.Text" xml:space="preserve">
+    <value>Search term was not found in the database</value>
+  </data>
+  <data name="NoFileResults.Text" xml:space="preserve">
+    <value>Search term was not found in any files</value>
+  </data>
+  <data name="SearchTermRequired.Text" xml:space="preserve">
+    <value>Search term is required</value>
+  </data>
+  <data name="CheckTracingFailure.Text" xml:space="preserve">
+    <value>Tracing is enabled - this allows potential hackers to view site activity.</value>
+  </data>
+</root>

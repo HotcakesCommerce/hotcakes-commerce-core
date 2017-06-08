@@ -1,0 +1,77 @@
+﻿<portal version="5.0">
+	<description>Search page template</description>]
+	<tab>
+		<visible>true</visible>
+		<name>Search Results</name>
+		<skinsrc>[G]Skins/Gravity/2-Col.ascx</skinsrc>
+		<tabpermissions>
+			<permission>
+				<permissioncode>SYSTEM_TAB</permissioncode>
+				<permissionkey>VIEW</permissionkey>
+				<allowaccess>true</allowaccess>
+				<rolename>All Users</rolename>
+			</permission>
+			<permission>
+				<permissioncode>SYSTEM_TAB</permissioncode>
+				<permissionkey>VIEW</permissionkey>
+				<allowaccess>true</allowaccess>
+				<rolename>Administrators</rolename>
+			</permission>
+			<permission>
+				<permissioncode>SYSTEM_TAB</permissioncode>
+				<permissionkey>EDIT</permissionkey>
+				<allowaccess>true</allowaccess>
+				<rolename>Administrators</rolename>
+			</permission>
+		</tabpermissions>
+		<tabsettings />
+		<parent>HotcakesStore</parent>
+		<panes>
+			<pane>
+				<name>ContentPane</name>
+				<modules>
+					<module>
+						<title>Search Input</title>
+						<definition>Hotcakes.Search</definition>
+						<moduledefinition>Hotcakes Search</moduledefinition>
+						<inheritviewpermissions>true</inheritviewpermissions>
+						<modulesettings>
+							<modulesetting>
+								<settingname>View</settingname>
+								<settingvalue>SearchInput</settingvalue>
+							</modulesetting>
+						</modulesettings>
+					</module>
+				</modules>
+			</pane>
+			<pane>
+				<name>leftPane</name>
+				<modules>
+					<module>
+						<title>Search Results</title>
+						<definition>Hotcakes.Search</definition>
+						<moduledefinition>Hotcakes Search</moduledefinition>
+						<inheritviewpermissions>true</inheritviewpermissions>
+					</module>
+				</modules>
+			</pane>
+			<pane>
+				<name>rightPane</name>
+				<modules>
+					<module>
+						<title>Search Facets</title>
+						<definition>Hotcakes.Search</definition>
+						<moduledefinition>Hotcakes Search</moduledefinition>
+						<inheritviewpermissions>true</inheritviewpermissions>
+						<modulesettings>
+							<modulesetting>
+								<settingname>View</settingname>
+								<settingvalue>LinksFilters</settingvalue>
+							</modulesetting>
+						</modulesettings>
+					</module>
+				</modules>
+			</pane>
+		</panes>
+	</tab>
+</portal>

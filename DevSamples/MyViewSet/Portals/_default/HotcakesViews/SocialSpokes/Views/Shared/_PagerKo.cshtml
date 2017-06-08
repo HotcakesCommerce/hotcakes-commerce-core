@@ -1,0 +1,14 @@
+﻿<!-- ko if: pager.pagesList().length > 0 -->
+<ul class="dnnButtonGroup" data-bind="">
+    <!-- ko if: pager.previousPage() > 0 -->
+    <li><a data-bind="click: function () { pager.setCurrentPage(pager.previousPage()) }">...</a></li>
+    <!-- /ko -->
+    <!-- ko foreach: pager.pagesList -->
+    <li data-bind="css: { 'current': $data == $parent.pager.pageNumber() }"><a data-bind="text: $data, click: function () { $parent.pager.setCurrentPage($data) }"></a></li>
+    <!-- /ko -->
+    <!-- ko if: pager.nextPage() > 0 -->
+    <li><a data-bind="click: function () { pager.setCurrentPage(pager.nextPage()) }">...</a></li>
+    <!-- /ko -->
+</ul>
+<!-- /ko -->
+

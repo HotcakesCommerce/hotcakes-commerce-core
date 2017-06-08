@@ -1,0 +1,14 @@
+IF NOT EXISTS(SELECT * FROM {databaseOwner}{objectQualifier}ModuleControls WHERE [ControlKey] = 'CONTROLPANEL:HOTCAKESBAR')
+BEGIN
+	INSERT INTO {databaseOwner}{objectQualifier}ModuleControls ([ControlKey],[ControlSrc],[ControlType],[SupportsPartialRendering])
+	VALUES ('CONTROLPANEL:HOTCAKESBAR','DesktopModules/Hotcakes/ControlPanel/ControlBar.ascx',-3,0)
+END
+ELSE
+BEGIN
+	UPDATE {databaseOwner}{objectQualifier}ModuleControls
+	SET [ControlSrc] = 'DesktopModules/Hotcakes/ControlPanel/ControlBar.ascx',
+		[ControlType] = -3,
+		[SupportsPartialRendering] = 0
+	WHERE [ControlKey] = 'CONTROLPANEL:HOTCAKESBAR'
+END
+GO

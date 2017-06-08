@@ -1,0 +1,325 @@
+﻿ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CatalogRoles]
+	DROP CONSTRAINT [FK_{objectQualifier}hcc_CatalogRoles_hcc_ProductType]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CatalogRoles] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_CatalogRoles_hcc_ProductType] FOREIGN KEY	( ProductTypeId ) REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductType]
+	( bvin ) ON UPDATE NO ACTION ON DELETE CASCADE 
+GO
+	
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_Order' AND  COLUMN_NAME = 'UserDeviceType')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] ADD [UserDeviceType] int NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_UserDeviceType] DEFAULT 0
+END
+GO
+
+/* Abandoned cart email */
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_Order' AND  COLUMN_NAME = 'IsAbandonedEmailSent')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] ADD [IsAbandonedEmailSent] bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_IsAbandonedEmailSent] DEFAULT 0
+END
+GO
+
+/* Convert hcc_ProductReview.ProductBvin to hcc_ProductReview.ProductId GUID column */
+
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_ProductReview' AND  COLUMN_NAME = 'ProductId')
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductReview] ADD [ProductId] uniqueidentifier null
+GO
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_ProductReview' AND  COLUMN_NAME = 'ProductBvin')
+BEGIN
+	EXEC(' DELETE FROM {databaseOwner}[{objectQualifier}hcc_ProductReview] WHERE LTRIM(RTRIM([ProductBvin])) = '''' ')
+	EXEC(' UPDATE {databaseOwner}[{objectQualifier}hcc_ProductReview] SET [ProductId] = LTRIM(RTRIM([ProductBvin])) ')
+END
+GO
+
+IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductReview]') AND name = N'IX_{objectQualifier}hcc_ProductReview_ProductBvin')
+CREATE CLUSTERED INDEX [IX_{objectQualifier}hcc_ProductReview_ProductBvin] ON {databaseOwner}[{objectQualifier}hcc_ProductReview] 
+([Id] ASC) WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = ON) 
+GO
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_ProductReview' AND  COLUMN_NAME = 'ProductBvin')
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductReview] DROP COLUMN [ProductBvin]
+GO
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ALTER COLUMN [bvin] uniqueidentifier NOT NULL
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductReview] ALTER COLUMN [ProductId] uniqueidentifier NOT NULL
+GO
+
+
+IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductReview]') AND name = N'IX_{objectQualifier}hcc_ProductReview_ProductBvin')
+CREATE CLUSTERED INDEX [IX_{objectQualifier}hcc_ProductReview_ProductBvin] ON {databaseOwner}[{objectQualifier}hcc_ProductReview] 
+([ProductId] ASC) WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = ON) 
+GO
+
+IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductReview]') AND name = N'IX_{objectQualifier}hcc_ProductReview_ProductBvin')
+EXEC sp_rename '{databaseOwner}[{objectQualifier}hcc_ProductReview].[IX_{objectQualifier}hcc_ProductReview_ProductBvin]', 'IX_{objectQualifier}hcc_ProductReview_ProductId', 'INDEX'
+GO
+
+/* Convert hcc_LineItem.bvin to GUID column */
+-------- drop constraints ---------
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_LineItem_hcc_LineItem]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_LineItem]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [FK_{objectQualifier}hcc_LineItem_hcc_LineItem]
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_LineItem]') AND name = N'IX_{objectQualifier}hcc_LineItem_1')
+DROP INDEX [IX_{objectQualifier}hcc_LineItem_1] ON {databaseOwner}[{objectQualifier}hcc_LineItem]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderNote_hcc_Order]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderNote]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderNote] DROP CONSTRAINT [FK_{objectQualifier}hcc_OrderNote_hcc_Order]
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderNote]') AND name = N'IX_{objectQualifier}hcc_OrderNote')
+DROP INDEX [IX_{objectQualifier}hcc_OrderNote] ON {databaseOwner}[{objectQualifier}hcc_OrderNote]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderCoupon_hcc_Order]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderCoupon]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderCoupon] DROP CONSTRAINT [FK_{objectQualifier}hcc_OrderCoupon_hcc_Order]
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderCoupon]') AND name = N'IX_{objectQualifier}hcc_OrderCoupon_OrderBvin')
+DROP INDEX [IX_{objectQualifier}hcc_OrderCoupon_OrderBvin] ON {databaseOwner}[{objectQualifier}hcc_OrderCoupon]
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Order]') AND name = N'PK_{objectQualifier}hcc_Order')
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] DROP CONSTRAINT [PK_{objectQualifier}hcc_Order]
+GO
+--------/ drop constraints ---------
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] ALTER COLUMN [Orderbvin] uniqueidentifier NOT NULL
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderNote] ALTER COLUMN [OrderId] uniqueidentifier NOT NULL
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderCoupon] ALTER COLUMN [Orderbvin] uniqueidentifier NOT NULL
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] ALTER COLUMN [bvin] uniqueidentifier NOT NULL
+GO
+
+-------- add constraints ---------
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Order]') AND name = N'PK_{objectQualifier}hcc_Order')
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] ADD  CONSTRAINT [PK_{objectQualifier}hcc_Order] PRIMARY KEY NONCLUSTERED 
+([bvin] ASC) WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderCoupon]') AND name = N'IX_{objectQualifier}hcc_OrderCoupon_OrderBvin')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_OrderCoupon_OrderBvin] ON {databaseOwner}[{objectQualifier}hcc_OrderCoupon] 
+([OrderBvin] ASC) WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderCoupon_hcc_Order]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderCoupon]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderCoupon]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_OrderCoupon_hcc_Order] FOREIGN KEY([OrderBvin])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Order] ([bvin])
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderCoupon] CHECK CONSTRAINT [FK_{objectQualifier}hcc_OrderCoupon_hcc_Order]
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderNote]') AND name = N'IX_{objectQualifier}hcc_OrderNote')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_OrderNote] ON {databaseOwner}[{objectQualifier}hcc_OrderNote] 
+([OrderId] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderNote_hcc_Order]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderNote]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderNote]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_OrderNote_hcc_Order] FOREIGN KEY([OrderId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Order] ([bvin])
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderNote] CHECK CONSTRAINT [FK_{objectQualifier}hcc_OrderNote_hcc_Order]
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_LineItem]') AND name = N'IX_{objectQualifier}hcc_LineItem_1')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_LineItem_1] ON {databaseOwner}[{objectQualifier}hcc_LineItem] 
+([OrderBvin] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_LineItem_hcc_LineItem]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_LineItem]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_LineItem_hcc_LineItem] FOREIGN KEY([OrderBvin])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Order] ([bvin])
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] CHECK CONSTRAINT [FK_{objectQualifier}hcc_LineItem_hcc_LineItem]
+GO
+-------- /add constraints ---------
+
+/* Recurring payments */
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_Product' AND  COLUMN_NAME = 'IsRecurring')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD
+		[IsRecurring] bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_IsRecurring] DEFAULT 0,
+		[RecurringInterval] int NULL,
+		[RecurringIntervalType] int NULL
+END
+GO
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_LineItem' AND  COLUMN_NAME = 'IsRecurring')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] ADD
+		[IsRecurring] bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_IsRecurring] DEFAULT 0,
+		[RecurringInterval] int NULL,
+		[RecurringIntervalType] int NULL,
+		[IsRecurringCancelled] bit NOT NULL CONSTRAINT DF_{objectQualifier}hcc_LineItem_IsRecurringCancelled DEFAULT 0
+END
+GO
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_OrderTransactions' AND  COLUMN_NAME = 'LineItemId')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions] ADD
+		[LineItemId] bigint NULL
+END
+GO
+
+
+/* Fix values that were stored in specific culture format */
+
+update {databaseOwner}[{objectQualifier}hcc_StoreSettings]
+set [SettingValue] = REPLACE([SettingValue], ',', '.')
+where [SettingValue] like '%,%'
+	and (SettingName = 'HandlingAmount'
+	or SettingName = 'MinimumOrderAmount'
+	or SettingName = 'AffiliateCommissionAmount'
+	or SettingName = 'MaxWeightPerOrder'
+	or SettingName = 'GCMinAmount'
+	or SettingName = 'GCMaxAmount')
+
+/* support for free-shipping items */
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_Product' AND  COLUMN_NAME = 'ShippingCharge')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD [ShippingCharge] int NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_ShippingCharge] DEFAULT 1;
+END
+GO
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_LineItem' AND  COLUMN_NAME = 'ShippingCharge')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] ADD [ShippingCharge] int NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShippingCharge] DEFAULT 1;
+END
+GO
+
+
+/* New column for quick search in the DB */
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_Order' AND  COLUMN_NAME = 'IsRecurring')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] ADD [IsRecurring] bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_IsRecurring] DEFAULT 0
+END
+GO
+
+
+/* Search index cleanup */
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchObjects]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchObjectWords]'))
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjectWords] DROP CONSTRAINT [FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchObjects]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjectWords] 
+	ADD CONSTRAINT [FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchObjects]
+	FOREIGN KEY ( SearchObjectId ) 
+	REFERENCES {databaseOwner}[{objectQualifier}hcc_SearchObjects] ( Id ) ON UPDATE  NO ACTION ON DELETE  CASCADE
+GO
+
+DELETE FROM {databaseOwner}[{objectQualifier}hcc_SearchObjects]
+WHERE [ObjectId] NOT IN (SELECT bvin FROM {databaseOwner}[{objectQualifier}hcc_Product])
+GO
+
+
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AddObjectIndex]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_AddObjectIndex]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}hcc_AddObjectIndex]
+	@siteId bigint,
+	@objectId uniqueidentifier,
+	@objectType int,
+	@title nvarchar(512),
+	@culture nvarchar(10),
+	@wordScores xml
+AS
+BEGIN
+	BEGIN TRANSACTION
+	
+	-- Turns out delete and recreate is quicker than 
+	-- determination of existance and insert or update afterwards
+	DELETE FROM {databaseOwner}[{objectQualifier}hcc_SearchObjects]
+	WHERE SiteId = @siteId
+		and ObjectId = @objectId
+		and ObjectType = @objectType
+		
+	INSERT INTO {databaseOwner}[{objectQualifier}hcc_SearchObjects] ([ObjectType], [ObjectId], [Title], [SiteId], [LastIndexUtc])
+	VALUES (@objectType, @objectId, @title, @siteId, GETUTCDATE())
+	
+	DECLARE @searchObjectId bigint = @@IDENTITY
+
+	DECLARE @scoreTable TABLE(Word nvarchar(255), Score int)
+	INSERT INTO @scoreTable
+	SELECT
+		Pair.value('(word)[1]', 'varchar(255)') as Word,
+		Pair.value('(score)[1]', 'int') as Score
+	FROM 
+		@wordScores.nodes('/dict/pair') AS WS(Pair)
+
+	MERGE {databaseOwner}[{objectQualifier}hcc_SearchLexicon] AS T
+	USING @scoreTable AS S
+	ON T.Word = S.Word and T.Culture = @culture 
+	WHEN NOT MATCHED BY TARGET
+		THEN INSERT(Word, Culture) VALUES(S.Word, @culture);
+	
+	MERGE {databaseOwner}[{objectQualifier}hcc_SearchObjectWords] AS T
+	USING
+	(
+		SELECT sl.Id as WordId, Score
+		FROM {databaseOwner}[{objectQualifier}hcc_SearchLexicon] sl
+			join @scoreTable st
+				on sl.Word = st.Word and sl.Culture = @culture
+	) AS S
+	ON T.SearchObjectId = @searchObjectId and T.WordId = S.WordId and T.SiteId = @siteId
+	WHEN NOT MATCHED BY TARGET
+		THEN INSERT(SearchObjectId, WordId, SiteId, Score) VALUES(@searchObjectId, S.WordId, @siteId, Score)
+	WHEN MATCHED
+		THEN UPDATE SET T.Score = S.Score;
+
+	COMMIT TRANSACTION
+END
+GO
+
+
+/* We need to recreate procedures that were created before 1.7.5 since they may contain non-renamed object names */
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_GenerateOrderNumber]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_GenerateOrderNumber]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}hcc_GenerateOrderNumber]
+@storeid bigint
+AS
+	BEGIN TRY
+		BEGIN TRAN
+		
+		DECLARE @OrderNumberSeed int
+			
+		SET @OrderNumberSeed = (SELECT [LastOrderNumber]
+			FROM {databaseOwner}[{objectQualifier}hcc_Stores] WITH (UPDLOCK)
+			WHERE Id = @storeid)
+		
+		SET @OrderNumberSeed = @OrderNumberSeed + 1
+		
+		UPDATE {databaseOwner}[{objectQualifier}hcc_Stores]
+		SET [LastOrderNumber] = @OrderNumberSeed 
+		WHERE Id = @storeid
+		
+		COMMIT
+		
+		SELECT @OrderNumberSeed AS OrderNumber
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+		--EXEC [{objectQualifier}hcc_EventLog_SQL_i]
+	END CATCH
+GO
+
+
+/* Next sql should fix 1 Default constraint that has bad name for Hotcakes <= 1.7.4 */
+
+/* Since name was incorrect only for Hotcakes <=1.7.4 and because it is not renamed by our custom renaming script */
+/* constraint name for drop have to be WITHOUT {objectQualifier} */
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'{databaseOwner}[DF_hccRMAItem_QuantityReturnedToInventory]') AND type = 'D')
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] DROP CONSTRAINT [DF_hccRMAItem_QuantityReturnedToInventory]
+GO
+
+/* Recreation of constraint have to be done correctly WITH {objectQualifier} */
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'{databaseOwner}[DF_{objectQualifier}hcc_RMAItem_QuantityReturnedToInventory]') AND type = 'D')
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] ADD  CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_QuantityReturnedToInventory]  DEFAULT ((0)) FOR [QuantityReturnedToInventory]
+GO

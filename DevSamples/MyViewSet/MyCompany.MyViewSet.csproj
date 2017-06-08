@@ -1,0 +1,784 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EBF80AA0-64ED-4DE8-B97B-A67764C6BD6D}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyCompany.MyViewSet</RootNamespace>
+    <AssemblyName>MyCompany.MyViewSet</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>%24/Hotcakes/HCC/Branches/2.xxOpenSource/DevSamples/MyViewSet</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <SccAuxPath>http://tfs.arrowdesigns.net:8080/tfs/defaultcollection</SccAuxPath>
+    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Hotcakes.Commerce">
+      <HintPath>..\References\Hotcakes.Commerce.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Hotcakes.Modules">
+      <HintPath>..\References\Hotcakes.Modules.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\References\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\Dnn\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\Dnn\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Dnn\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\Dnn\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\Dnn\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Images\attachment.png" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Images\bookmark.png" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Images\bookmarkSelect.png" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Images\creditcards.png" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Images\creditcards_disabled.png" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Images\delete.png" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Images\Likes.png" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Images\LikeSelect.png" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Images\minicart.png" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Images\ReviewStars.png" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Images\rss.png" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Images\rssSelect.png" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Images\search.png" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Images\spinner.gif" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Scripts\AddressBook.js" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Scripts\AddressEditor.js" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Scripts\AffiliateDashboard.js" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Scripts\AffiliateRegistration.js" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Scripts\Category.js" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Scripts\Checkout.js" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Scripts\EditBilling.js" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Scripts\EstimateShipping.js" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Scripts\ImageRotator.js" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Scripts\OrderHistory.js" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Scripts\Pager.js" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Scripts\Products.js" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Scripts\Receipt.js" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\views.css">
+      <DependentUpon>views.less</DependentUpon>
+    </Content>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\attachment.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\bookmark.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\bookmarkSelect.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\creditcards.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\creditcards_disabled.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\delete.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\event-image1.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\event-image2.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\event-image3.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\Likes.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\LikeSelect.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\minicart.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\price-tag.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\ReviewStars.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\rss.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\rssSelect.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\search.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\slider-screenshot.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\social-icons.png" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\spinner.gif" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\AddressBook.js" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\AddressEditor.js" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\AffiliateDashboard.js" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\AffiliateRegistration.js" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\Category.js" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\Checkout.js" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\EditBilling.js" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\EstimateShipping.js" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\ImageRotator.js" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\OrderHistory.js" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\Pager.js" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\Products.js" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\Receipt.js" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\views.css" />
+    <Content Include="ReadMe.txt" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.config.ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\MyCustomViewController.cs" />
+    <Compile Include="Models\MyCustomViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\AddressBook\Edit.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\AddressBook\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\OrderHistory\Details.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\OrderHistory\DownloadFileError.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\OrderHistory\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\Shared\_OrderDownloads.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\WishList\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\AdminContent\Views\FileBrowser\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\AdminContent\Views\Shared\_PopupLayout.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\ContentBlocks\Views\CategoryRotator\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\ContentBlocks\Views\FeaturedProducts\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\ContentBlocks\Views\Html\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\ContentBlocks\Views\ImageRotator\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\ContentBlocks\Views\ProductRotator\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\ContentBlocks\Views\RssFeedViewer\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\views.less" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\BreadCrumb\BreadCrumb.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Cart\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Cart\MiniCart.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\CategoryMenu\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\CategoryMenu\MenuItem.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Category\BulkOrderList.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Category\BulkQuantityList.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Category\DetailedList.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Category\Grid.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Category\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Category\SimpleList.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Category\_Header.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\PaymentError.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\Receipt - Copy.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\Receipt.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\_CheckoutAddress.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\_CreditCardInput.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\_Login.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\_SetFirstPassword.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\ContentColumn\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EstimateShipping\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\LastProductsViewed\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\PayPalExpressCheckout\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\ProductGrid\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\ProductReviews\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\ProductReviews\TopReviews.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\ProductReviews\_SingleReview.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Products\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Products\_ProductDetails.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Products\_Rating.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Products\_Reviews.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Search\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Search\LinksFilters.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Search\SearchInput.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\Error.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_AddressEditor.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_AdminLayoutWithNav.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_FaceBookLike.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_FaceBookSetup.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_GooglePlusOne.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_OrderPaymentSummary.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_Pager.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_RegisteredScripts.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_RenderSingleProduct.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_RenderSingleProductDetailed.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_RenderSingleProductSimple.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_Twitter.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_ViewOrder.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_ViewOrderItems.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Top10Products\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\TopWeeklySellers\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Web.config" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\_views_areas.less" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\_views_common.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\AddressBook\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\AddressBook\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\AddressBook\App_LocalResources\Edit.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\AddressBook\App_LocalResources\Edit.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\AddressBook\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\AddressBook\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\OrderHistory\App_LocalResources\Details.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\OrderHistory\App_LocalResources\Details.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\OrderHistory\App_LocalResources\DownloadFileError.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\OrderHistory\App_LocalResources\DownloadFileError.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\OrderHistory\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\OrderHistory\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\Shared\App_LocalResources\_OrderDownloads.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\Shared\App_LocalResources\_OrderDownloads.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\WishList\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\WishList\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\WishList\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Areas\account\Views\WishList\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\App_LocalResources\GlobalResources.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\App_LocalResources\GlobalResources.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\BreadCrumb\App_LocalResources\BreadCrumb.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\BreadCrumb\App_LocalResources\BreadCrumb.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Cart\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Cart\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Cart\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Cart\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Cart\App_LocalResources\MiniCart.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Cart\App_LocalResources\MiniCart.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\CategoryMenu\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Category\App_LocalResources\BulkOrderList.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Category\App_LocalResources\BulkOrderList.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Category\App_LocalResources\BulkQuantityList.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Category\App_LocalResources\BulkQuantityList.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Category\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Category\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Category\App_LocalResources\_Header.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\PaymentError.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\PaymentError.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\Receipt.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\Receipt.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\_CheckoutAddress.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\_CheckoutAddress.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\_CreditCardInput.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\_CreditCardInput.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\_Login.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\_SetFirstPassword.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\_SetFirstPassword.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EstimateShipping\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EstimateShipping\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\PayPalExpressCheckout\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\PayPalExpressCheckout\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\PayPalExpressCheckout\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\PayPalExpressCheckout\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\ProductReviews\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\ProductReviews\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\ProductReviews\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\ProductReviews\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\ProductReviews\App_LocalResources\_SingleReview.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\ProductReviews\App_LocalResources\_SingleReview.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Products\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Products\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Products\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Products\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Products\App_LocalResources\_ProductDetails.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Products\App_LocalResources\_Rating.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Products\App_LocalResources\_Reviews.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Search\App_LocalResources\CheckboxFilters.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Search\App_LocalResources\CheckboxFilters.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Search\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Search\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Search\App_LocalResources\LinksFilters.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Search\App_LocalResources\LinksFilters.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_AddressEditor.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_AddressEditor.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_OrderPaymentSummary.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_OrderPaymentSummary.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_Pager.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_RenderSingleProductDetailed.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_RenderSingleProductDetailed.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_ViewOrder.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_ViewOrder.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_ViewOrderItems.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_ViewOrderItems.cshtml.uk-UA.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_Error.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_ViewOrderAdditional.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\_DisplayPaymentMethods.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\_DisplayPaymentMethods.cshtml.uk-UA.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\_DisplayPaymentMethods.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_ViewOrderAdditional.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\MyCustomView\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\MyCustomView\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\MyCustomView\App_LocalResources\Index.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\AddressBook\Edit.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\AddressBook\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\OrderHistory\Details.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\OrderHistory\DownloadFileError.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\OrderHistory\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\Shared\_OrderDownloads.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\WishList\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\AdminContent\Views\FileBrowser\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\AdminContent\Views\Shared\_PopupLayout.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\ContentBlocks\Views\CategoryRotator\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\ContentBlocks\Views\FeaturedProducts\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\ContentBlocks\Views\Html\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\ContentBlocks\Views\ImageRotator\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\ContentBlocks\Views\ProductRotator\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\ContentBlocks\Views\RssFeedViewer\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\views.less" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\BreadCrumb\BreadCrumb.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Cart\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Cart\MiniCart.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\CategoryMenu\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\CategoryMenu\MenuItem.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Category\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Category\_FavoriteProducts.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Category\_Header.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\PaymentError.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\Receipt.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\_CheckoutAddress.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\_CreditCardInput.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\_DisplayPaymentMethods.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\_Login.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\_SetFirstPassword.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\ContentColumn\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EstimateShipping\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\LastProductsViewed\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\PayPalExpressCheckout\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\ProductGrid\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\ProductReviews\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\ProductReviews\TopReviews.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\ProductReviews\_SingleReview.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Products\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Products\_ProductDetails.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Products\_Rating.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Products\_Reviews.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Search\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Search\LinksFilters.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Search\SearchInput.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_AddressEditor.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_Error.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_FaceBookLike.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_FaceBookSetup.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_GooglePlusOne.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_OrderPaymentSummary.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_Pager.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_RenderFeaturedProduct.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_RenderSingleProduct.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_RenderSingleProductDetailed.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_RenderSingleProductSimple.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_Twitter.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_ViewOrder.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_ViewOrderAdditional.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_ViewOrderItems.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Top10Products\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\TopWeeklySellers\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Web.config" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\_views_areas.less" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\_views_common.less" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\_views_nobootstrap.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\AddressBook\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\AddressBook\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\AddressBook\App_LocalResources\Edit.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\AddressBook\App_LocalResources\Edit.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\AddressBook\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\AddressBook\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\OrderHistory\App_LocalResources\Details.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\OrderHistory\App_LocalResources\Details.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\OrderHistory\App_LocalResources\DownloadFileError.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\OrderHistory\App_LocalResources\DownloadFileError.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\OrderHistory\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\OrderHistory\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\Shared\App_LocalResources\_OrderDownloads.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\Shared\App_LocalResources\_OrderDownloads.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\WishList\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\WishList\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\WishList\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\WishList\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\App_LocalResources\GlobalResources.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\App_LocalResources\GlobalResources.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\BreadCrumb\App_LocalResources\BreadCrumb.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\BreadCrumb\App_LocalResources\BreadCrumb.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Cart\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Cart\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Cart\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Cart\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Cart\App_LocalResources\MiniCart.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Cart\App_LocalResources\MiniCart.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\CategoryMenu\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Category\App_LocalResources\BulkOrderList.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Category\App_LocalResources\BulkOrderList.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Category\App_LocalResources\BulkQuantityList.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Category\App_LocalResources\BulkQuantityList.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Category\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Category\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Category\App_LocalResources\_Header.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\PaymentError.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\PaymentError.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\Receipt.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\Receipt.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\_CheckoutAddress.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\_CheckoutAddress.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\_CreditCardInput.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\_CreditCardInput.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\_DisplayPaymentMethods.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\_DisplayPaymentMethods.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\_Login.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\_SetFirstPassword.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\_SetFirstPassword.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EstimateShipping\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EstimateShipping\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\PayPalExpressCheckout\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\PayPalExpressCheckout\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\PayPalExpressCheckout\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\PayPalExpressCheckout\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\ProductReviews\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\ProductReviews\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\ProductReviews\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\ProductReviews\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\ProductReviews\App_LocalResources\_SingleReview.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\ProductReviews\App_LocalResources\_SingleReview.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Products\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Products\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Products\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Products\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Products\App_LocalResources\_ProductDetails.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Products\App_LocalResources\_Rating.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Products\App_LocalResources\_Reviews.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Search\App_LocalResources\CheckboxFilters.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Search\App_LocalResources\CheckboxFilters.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Search\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Search\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Search\App_LocalResources\LinksFilters.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Search\App_LocalResources\LinksFilters.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_AddressEditor.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_AddressEditor.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_OrderPaymentSummary.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_OrderPaymentSummary.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_Pager.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_RenderSingleProduct.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_RenderSingleProductDetailed.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_RenderSingleProductDetailed.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_RenderSingleProductSimple.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_ViewOrder.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_ViewOrder.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_ViewOrderAdditional.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_ViewOrderItems.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_ViewOrderItems.cshtml.uk-UA.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\_views_nobootstrap.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\AffiliateDashboard\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\AffiliateDashboard\_AffiliateProfile.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\AffiliateDashboard\_Commissions.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\AffiliateDashboard\_Payments.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\AffiliateDashboard\_Referrals.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\AffiliateDashboard\_UrlBuilder.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\AffiliateRegistration\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\AffiliateDashboard\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\AffiliateDashboard\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\AffiliateDashboard\App_LocalResources\_AffiliateProfile.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\AffiliateDashboard\App_LocalResources\_Commissions.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\AffiliateDashboard\App_LocalResources\_Payments.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\AffiliateDashboard\App_LocalResources\_Referrals.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\AffiliateRegistration\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\AffiliateRegistration\App_LocalResources\Index.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\AffiliateDashboard\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\AffiliateDashboard\_AffiliateProfile.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\AffiliateDashboard\_Commissions.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\AffiliateDashboard\_Payments.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\AffiliateDashboard\_Referrals.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\AffiliateDashboard\_UrlBuilder.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\AffiliateRegistration\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\AffiliateDashboard\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\AffiliateDashboard\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\AffiliateDashboard\App_LocalResources\_AffiliateProfile.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\AffiliateDashboard\App_LocalResources\_Commissions.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\AffiliateDashboard\App_LocalResources\_Payments.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\AffiliateDashboard\App_LocalResources\_Referrals.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\AffiliateRegistration\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\AffiliateRegistration\App_LocalResources\Index.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Category\App_LocalResources\_DrillDownFilter.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Category\DrillDown.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Category\_DrillDownFilter.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\_NormalizeAddressDialog.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\_NormalizeAddressDialog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_PagerKo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EstimateShipping\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EstimateShipping\App_LocalResources\Controller.uk-UA.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EstimateShipping\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EstimateShipping\App_LocalResources\Controller.uk-UA.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Category\App_LocalResources\_DrillDownFilter.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Category\DrillDown.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Category\_DrillDownFilter.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\_NormalizeAddressDialog.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\_NormalizeAddressDialog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_PagerKo.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_RenderBundledProduct.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\MonerisCheckout\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\MonerisCheckout\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\MonerisCheckout\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\MonerisCheckout\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\MonerisCheckout\App_LocalResources\Index.cshtml.uk-UA.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\_GiftCards.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\_GiftCards.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\MonerisCheckout\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\MonerisCheckout\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\MonerisCheckout\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\MonerisCheckout\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\MonerisCheckout\App_LocalResources\Index.cshtml.uk-UA.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\_GiftCards.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\_GiftCards.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\OgoneCheckout\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\OgoneCheckout\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\OgoneCheckout\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\OgoneCheckout\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\OgoneCheckout\App_LocalResources\Index.cshtml.uk-UA.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_RenderBundledProduct.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\OgoneCheckout\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\OgoneCheckout\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\OgoneCheckout\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\OgoneCheckout\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\OgoneCheckout\App_LocalResources\Index.cshtml.uk-UA.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\_CreditCardForm.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\_PaymentMethods.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\App_LocalResources\_CreditCardForm.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\App_LocalResources\_PaymentMethods.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_Pinterest.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_ViewOrderSubscriptions.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_Pinterest.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_ViewOrderSubscriptions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\_CreditCardForm.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\_PaymentMethods.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\App_LocalResources\_CreditCardForm.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\App_LocalResources\_PaymentMethods.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_Pinterest.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_ViewOrderSubscriptions.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_Pinterest.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\_ViewOrderSubscriptions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\App_LocalResources\ScriptResources.resx" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\App_LocalResources\ScriptResources.uk-UA.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\App_LocalResources\_Subscriptions.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Checkout\_Subscriptions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\App_LocalResources\CreditCardViewModel.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Scripts\App_LocalResources\ScriptResources.resx" />
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Scripts\App_LocalResources\ScriptResources.uk-UA.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\_Subscriptions.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Checkout\App_LocalResources\_Subscriptions.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\App_LocalResources\CreditCardViewModel.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\MyViewSet\VS2012_Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\VS2012_Web.config" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>65025</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost.hotcakes</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost.hotcakes/</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

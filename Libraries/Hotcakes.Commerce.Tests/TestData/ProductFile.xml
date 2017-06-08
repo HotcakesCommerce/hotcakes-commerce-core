@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FakeFile>
+ <ProductFile>
+    <TotalProductFileCount>3</TotalProductFileCount>
+    <TotalFileCount>6</TotalFileCount>
+    <AddFile>
+      <File>
+        <Name>Koala.jpg</Name>
+        <Desc>Koala.jpg</Desc>
+      </File>
+      <File>
+        <Name>test.jpg</Name>
+        <Desc>test.jpg</Desc>
+      </File>
+      <File>
+        <Name>Desert.jpg</Name>
+        <Desc>Desert.jpg</Desc>
+      </File>
+    </AddFile>
+  </ProductFile>
+</FakeFile>

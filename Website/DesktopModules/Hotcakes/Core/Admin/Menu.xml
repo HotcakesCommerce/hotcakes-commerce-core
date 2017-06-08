@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menu>
+	<Item Text="Dashboard" Url="default.aspx" Permission="" HiddenInDnnMenu="True"/>
+	<Item Text="Catalog" BaseUrl="catalog/" Url="" Permission="D0201557-356F-4ee6-A24C-3C0F85E2C472">
+		<Item Text="Products" Url="catalog/default.aspx"/>
+		<Item Text="Categories" BaseUrl="catalog/category" Url="catalog/Categories.aspx">
+			<Item Text="Category Performance" Name="Roles" Url="catalog/Categories_Performance.aspx"/>
+			<Item Text="Name, Description" Name="Name" Url="catalog/Categories_Edit.aspx" />
+			<Item Text="Select Products" Name="SelectProducts" Url="catalog/Categories_ManualSelection.aspx"/>
+			<Item Text="Roles" Name="Roles" Url="catalog/Categories_Roles.aspx"/>
+		</Item>
+		<Item Text="Content Columns" Url="content/Columns.aspx"/>
+		<Item Text="Shared Choices" Url="catalog/ProductSharedChoices.aspx"/>
+		<Item Text="Product Types" Url="catalog/ProductTypes.aspx"/>
+		<Item Text="Product Type Properties" Url="catalog/ProductTypeProperties.aspx"/>
+		<Item Text="Membership Product Types" Url="catalog/MembershipProductTypes.aspx"/>
+		<Item Text="Reviews" Url="catalog/ReviewsToModerate.aspx"/>
+		<Item Text="File Vault" Url="catalog/FileVault.aspx"/>
+	</Item>
+	<Item Text="Marketing" BaseUrl="marketing/" Url="" Permission="1085A525-F084-47df-B791-65DFA148D3C5">
+		<Item Text="Promotion" Url="marketing/promotions.aspx"/>
+		<Item Text="Reward Points" Url="marketing/rewardspoints.aspx"/>
+	</Item>
+	<Item Text="People" BaseUrl="people/" Url="" Permission="5519BC97-9CE4-4549-AFF1-56B6A54D449C">
+		<Item Text="Customers" BaseUrl="people/customer" Url="people/default.aspx">
+			<Item Text="Profile" Name="Profile" Url="people/Users_edit.aspx"/>
+			<Item Text="Address Book" Name="AddressBook" Url="people/Users_AddressBook.aspx" />
+			<Item Text="Roles" Name="Roles" Url="people/Users_Roles.aspx"/>
+		</Item>
+		<Item Text="Price Groups" Url="people/PriceGroups.aspx"/>
+		<Item Text="Manufacturers" Url="people/manufacturers.aspx"/>
+		<Item Text="Vendors" Url="people/vendors.aspx"/>
+	</Item>
+	<Item Text="Orders" BaseUrl="orders/" Url="" Permission="D9900036-0794-4aa5-B662-28E99A23E9B1">
+		<Item Text="Order Manager" Url="orders/default.aspx?p=1&amp;mode=0"/>
+		<Item Text="&lt;hr/&gt;" Url="orders/default.aspx?p=1&amp;mode=0" HiddenInDnnMenu="True"/>
+		<Item Text=" + Add Order" Url="orders/createorder.aspx"/>
+		<Item Text="&lt;hr/&gt;" Url="orders/default.aspx?p=1&amp;mode=0" HiddenInDnnMenu="True"/>
+		<Item Text="  New" Url="orders/default.aspx?p=1&amp;mode=1"/>
+		<Item Text="  On Hold" Url="orders/default.aspx?p=1&amp;mode=5"/>
+		<Item Text="  Ready for Payment" Url="orders/default.aspx?p=1&amp;mode=2"/>
+		<Item Text="  Ready for Shipping" Url="orders/default.aspx?p=1&amp;mode=3"/>
+		<Item Text="  Completed" Url="orders/default.aspx?p=1&amp;mode=4"/>
+		<Item Text="  Cancelled" Url="orders/default.aspx?p=1&amp;mode=6"/>
+		<Item Text="  All Orders" Url="orders/default.aspx?p=1&amp;mode=0"/>
+	</Item>
+	<Item Text="Reports" BaseUrl="reports/" Url="" Permission="C2B41076-A952-49ff-B2E2-DE62EFC2B554">
+    <Item Text="Summary Report" Url="reports/Summary Report/view.aspx"/>
+    <Item Text="Transactions by Day" Url="reports/Daily Sales/view.aspx"/>
+    <Item Text="Product Sales" Url="reports/Daily Product Sales/view.aspx"/>
+    <Item Text="Orders by Date" Url="reports/Sales By Date/view.aspx"/>
+    <Item Text="Credit Card Activity" Url="reports/Daily CC Activity/view.aspx"/>
+		<Item Text="Affiliate Report" Url="people/affiliates.aspx"/>
+    <Item Text="Affiliate Payments" Url="people/affiliatepayments.aspx"/>
+    <Item Text="Sales by Coupon" Url="reports/Sales By Coupon/view.aspx"/>
+    <Item Text="Sales Tax Report" Url="reports/Sales Tax Report/view.aspx"/>
+    <Item Text="Top Products" Url="reports/Top Products/view.aspx"/>
+    <Item Text="Abandoned Carts" Url="reports/AbandonedCarts/view.aspx"/>
+		<Item Text="Gift Cards" Url="catalog/GiftCards.aspx"/>
+	</Item>
+	<Item Text="Admin" BaseUrl="configuration-admin/" Url="" Permission="0984762F-9E31-4f6f-A087-138A69973AE1">
+		<Item Text="Affiliates" Url="configuration/Affiliates.aspx"/>
+		<Item Text="Analytics" Url="configuration/Analytics.aspx"/>
+		<Item Text="API" Url="configuration/Api.aspx"/>
+		<Item Text="Address Validation" Url="configuration/AddressValidation.aspx"/>
+		<Item Text="E-Mail Templates" Url="content/EmailTemplates.aspx"/>
+		<Item Text="Fraud Screening" Url="configuration/Fraud.aspx"/>
+		<Item Text="Orders" Url="configuration/Orders.aspx"/>
+		<Item Text="Shipping Methods" Url="configuration/Shipping_Methods.aspx"/>
+		<Item Text="Shipping Zones" Url="configuration/Shipping_Zones.aspx"/>
+		<Item Text="Shipping &amp; Handling" Url="configuration/ShippingHandling.aspx"/>
+		<Item Text="Extensibility" Url="configuration/Extensibility.aspx"/>
+    <Item Text="Views Manager" Url="configuration/ViewsManager.aspx"/>
+    <Item Text="Role Administration" Url="configuration/RoleAdministration.aspx"/>
+		<Item Text="Gift Card Settings" Url="configuration/GiftCardConfiguration.aspx"/>
+		<Item Text="Setup Wizard" Url="SetupWizard/SetupWizard.aspx?step=1"/>
+	</Item>
+	<Item Text="Settings" BaseUrl="configuration-settings/" Url="" Permission="0984762F-9E31-4f6f-A087-138A69973AE1">
+		<Item Text="Store Name &amp; Logo" Url="configuration/General.aspx"/>
+		<Item Text="Store's Address" Url="configuration/StoreInfo.aspx"/>
+		<Item Text="Geo Location" Url="configuration/GeoLocation.aspx"/>
+		<Item Text="Countries" Url="configuration/countries.aspx"/>
+		<Item Text="E-Mail Addresses" Url="configuration/Email.aspx"/>
+		<Item Text="Payment Methods" Url="configuration/Payment.aspx"/>
+		<Item Text="Product Reviews" Url="configuration/ProductReviews.aspx"/>
+		<Item Text="Social Media" Url="configuration/SocialMedia.aspx"/>
+		<Item Text="Taxes" Url="configuration/TaxClasses.aspx"/>
+    <Item Text="Caching" Url="configuration/Caching.aspx"/>
+		<Item Text="Page Configuration" Url="configuration/PageConfiguration.aspx"/>
+	</Item>
+</Menu>

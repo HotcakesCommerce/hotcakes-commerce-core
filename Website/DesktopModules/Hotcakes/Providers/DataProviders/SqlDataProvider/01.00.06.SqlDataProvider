@@ -1,0 +1,16 @@
+﻿/* Add table field */
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductProperty] ADD
+	DisplayOnSearch bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductProperty_DisplayOnSearch] DEFAULT (0)
+GO
+
+/* Add constraint */
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_ProductPropertyValue_hcc_ProductProperty] FOREIGN KEY
+	(
+	[PropertyId]
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductProperty]
+	(
+	[Id]
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+GO

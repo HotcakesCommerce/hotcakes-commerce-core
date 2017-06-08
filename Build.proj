@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\.build</MSBuildCommunityTasksPath>
+	</PropertyGroup>
+
+	<Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>
+
+	<!-- Version Number -->
+	<PropertyGroup Condition=" '$(BUILD_NUMBER)' == '' ">
+		<Version>03.00.00</Version>
+		<FileVersion>01.00.00</FileVersion>
+		<InformationalVersion>01.00.00</InformationalVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(BUILD_NUMBER)' != '' ">
+		<!-- Build Server Number -->
+		<Version>03.00.00</Version>
+		<FileVersion>$(BUILD_NUMBER)</FileVersion>
+		<InformationalVersion>$(BUILD_NUMBER)</InformationalVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(BuildConfiguration)' == '' ">
+		<BuildConfiguration>Release</BuildConfiguration>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(BuildPlatform)' == '' ">
+		<BuildPlatform>Any CPU</BuildPlatform>
+	</PropertyGroup>
+
+	<Target Name="Clean">
+		<Message Importance="High" Text="======================================= Starting Target Clean ==========================================" />
+		<DeleteTree Directories="**\obj\**;**\bin\**" />
+	</Target>
+
+	<Target Name="Version">
+		<Message Importance="High" Text="======================================= Starting Target Version ==========================================" />
+		<Time>
+			<Output TaskParameter="Year" PropertyName="Year" />
+		</Time>
+
+		<Message Text="Version: $(Version)"/>
+
+		<Attrib Files="$(MSBuildProjectDirectory)\GlobalAssemblyInfo.cs" ReadOnly="False" />
+
+		<AssemblyInfo CodeLanguage="CS"
+				  OutputFile="$(MSBuildProjectDirectory)\GlobalAssemblyInfo.cs"
+				  GenerateClass="true"
+				  AssemblyCopyright="Copyright © $(Year). All rights reserved."
+				  AssemblyConfiguration="$(BuildConfiguration)"
+				  AssemblyVersion="$(Version)"
+				  AssemblyFileVersion="$(FileVersion)"
+				  AssemblyInformationalVersion="$(InformationalVersion)" />
+	</Target>
+
+	<Target Name="Compile" DependsOnTargets="Clean;Version">
+		<Message Importance="High" Text="======================================= Starting Target Compile ==========================================" />
+		<ItemGroup>
+			<ProjectFiles Include="$(MSBuildProjectDirectory)\Hotcakes.sln" />
+		</ItemGroup>
+
+		<MSBuild Projects="@(ProjectFiles)" Properties="Configuration=$(BuildConfiguration);Platform=$(BuildPlatform);RootFolder=$(MSBuildProjectDirectory)" />
+	</Target>
+
+	<Target Name="BuildModule" DependsOnTargets="Compile">
+		<Message Importance="High" Text="======================================= Starting Target BuildModule ==========================================" />
+		<!-- Code placeholder if we package module separately -->
+	</Target>
+	
+	
+
+	<Target Name="Build">
+		<Message Importance="High" Text="======================================= Starting Target Build ==========================================" />
+		<CallTarget Targets="BuildModule" />
+
+		<MSBuild Projects="DevSamples\Build.proj" Properties="RootFolder=$(MSBuildProjectDirectory);Version=$(Version)" />
+		<MSBuild Projects="WebDeploy\Build.proj" Properties="RootFolder=$(MSBuildProjectDirectory);Version=$(Version)" />
+
+		<!-- For Testing commented removing of _Build-->
+		<RemoveDir Directories="_Build" />
+	</Target>
+
+</Project>

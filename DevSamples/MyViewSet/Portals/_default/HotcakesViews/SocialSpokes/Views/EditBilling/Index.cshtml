@@ -1,0 +1,32 @@
+﻿@model Hotcakes.Modules.Core.Models.EditBillingViewModel
+@using Hotcakes.Commerce.Payment
+@using Hotcakes.Modules.Core.AppCode
+@using Newtonsoft.Json
+
+<script type="text/javascript">
+    hcc.editBillingViewModel = @Html.Raw(JsonConvert.SerializeObject(Model));
+</script>
+
+<div class="hc-edit-billing" id="hcEditBilling" data-type="form">
+    <div class="hc-scrollable">
+        <div class="hcValidationSummary"></div>
+        <div class="row-fluid">
+            <div class="span6 dnnForm hcAddressEditor">
+                <h2>@Localization.GetString("BillingAddress")</h2>
+                @Html.Partial("_AddressEditor", Model.AddressModel)
+            </div>
+            <div class="span6 dnnForm" data-bind="with: PaymentModel">
+                <h2>@Localization.GetString("PaymentInfo")</h2>
+                @Html.Partial("_PaymentMethods", Model.PaymentModel)
+            </div>
+        </div>
+    </div>
+    <ul class="dnnActions">
+        <li>
+            <input type="button" id="hcBillingInfoSave" value="@Localization.GetString("Update")" class="dnnPrimaryAction hcHandleNormalization" />
+        </li>
+        <li>
+            <input type="button" id="hcBillingInfoCancel" value="@Localization.GetString("Close")" class="dnnSecondaryAction" />
+        </li>
+    </ul>
+</div>

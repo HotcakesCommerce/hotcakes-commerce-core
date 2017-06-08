@@ -1,0 +1,26 @@
+﻿<portal version="5.0">
+  <description>HotcakesStore page template</description>
+  <tab>
+    <visible>true</visible>
+    <disabled>true</disabled>
+    <name>HotcakesStore</name>
+		<skinsrc>[G]Skins/Gravity/2-Col.ascx</skinsrc>
+		<tabpermissions>
+      <permission>
+        <permissioncode>SYSTEM_TAB</permissioncode>
+        <permissionkey>VIEW</permissionkey>
+        <allowaccess>true</allowaccess>
+        <rolename>Administrators</rolename>
+      </permission>
+      <permission>
+        <permissioncode>SYSTEM_TAB</permissioncode>
+        <permissionkey>EDIT</permissionkey>
+        <allowaccess>true</allowaccess>
+        <rolename>Administrators</rolename>
+      </permission>
+    </tabpermissions>
+    <tabsettings />
+    <panes>
+    </panes>
+  </tab>
+</portal>

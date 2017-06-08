@@ -1,0 +1,6 @@
+<MSDeploy.iisApp>
+  <iisapp path="Hotcakes" />
+  <setAcl path="Hotcakes" setAclAccess="Modify" />
+  <dbfullsql path="installSQL1.sql" transacted="false" />
+  <dbfullsql path="installSQL2.sql" transacted="false" />
+</MSDeploy.iisApp>

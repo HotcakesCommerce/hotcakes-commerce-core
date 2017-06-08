@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionDelegatePipeline.Text" xml:space="preserve">
+    <value>Action Delegate Pipeline</value>
+  </data>
+  <data name="ActionDelegatePipelineDescription.Text" xml:space="preserve">
+    <value>Hotcakes also provides a rich interface to add your own custom code to specific integration points within the application called the Action Delegate Pipeline. Using this interface, you can inject your own custom code to be run before the following actions are run:</value>
+  </data>
+  <data name="ActionDelegatePipelineDescription2.Text" xml:space="preserve">
+    <value>Your custom integration code will appear in the dropdown list to the left once the assembly is uploaded into your website's \bin folder.</value>
+  </data>
+  <data name="ActionDelegatePipelineSolution.Text" xml:space="preserve">
+    <value>Action Delegate Pipeline Solution</value>
+  </data>
+  <data name="ActiveOrderWorkflow.Text" xml:space="preserve">
+    <value>Active Order Workflow</value>
+  </data>
+  <data name="AddProductCart.Text" xml:space="preserve">
+    <value>Add Product to Cart (product details page)</value>
+  </data>
+  <data name="btnSave.Text" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="CartIntegration.Text" xml:space="preserve">
+    <value>Cart Integration</value>
+  </data>
+  <data name="CheckoutIntegration.Text" xml:space="preserve">
+    <value>Checkout Integration</value>
+  </data>
+  <data name="CustomOrderWorkflow.Text" xml:space="preserve">
+    <value>Custom Order Workflow</value>
+  </data>
+  <data name="CustomOrderWorkflowDescription.Text" xml:space="preserve">
+    <value>Hotcakes Commerce provides the ability to override the default order workflow by using the solution provided below. Simply download the template, make your code changes, and upload the newly built assembly to your website's \bin folder. Once this is done, the assembly will appear in the dropdown list on the left.</value>
+  </data>
+  <data name="Extensibility.Text" xml:space="preserve">
+    <value>Extensibility</value>
+  </data>
+  <data name="ForMoreInfo.Text" xml:space="preserve">
+    <value>For more information on these and other extension points, visit our website at</value>
+  </data>
+  <data name="HotcakesDefaultWorkflow.Text" xml:space="preserve">
+    <value>- Hotcakes Default Workflow -</value>
+  </data>
+  <data name="NoIntegration.Text" xml:space="preserve">
+    <value>- No Integration -</value>
+  </data>
+  <data name="ProceedCheckout.Text" xml:space="preserve">
+    <value>Proceed to Checkout (shopping cart page)</value>
+  </data>
+  <data name="ProcessPayment.Text" xml:space="preserve">
+    <value>Process Payment (checkout page)</value>
+  </data>
+  <data name="ProductIntegration.Text" xml:space="preserve">
+    <value>Product Integration</value>
+  </data>
+  <data name="SettingsSuccessful.Text" xml:space="preserve">
+    <value>Settings saved successfully.</value>
+  </data>
+  <data name="WorkflowSolution.Text" xml:space="preserve">
+    <value>Custom Order Workflow Solution</value>
+  </data>
+</root>

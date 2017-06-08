@@ -1,0 +1,7 @@
+﻿App_Code/HotcakesAppStart.cs
+DesktopModules/Hotcakes/Core/Modules
+DesktopModules/Hotcakes/Core/Content/Admin
+DesktopModules/Hotcakes/Core/Content/Images
+DesktopModules/Hotcakes/Core/Content/system.css
+DesktopModules/Hotcakes/Core/Images
+DesktopModules/Hotcakes/Core/Admin/Configuration/URLConfiguration.aspx

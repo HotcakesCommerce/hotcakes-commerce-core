@@ -1,0 +1,13 @@
+﻿DesktopModules/Hotcakes/Core/Admin/Catalog/RelatedItems_Sort.aspx
+DesktopModules/Hotcakes/Core/Admin/Catalog/RelatedItems_Delete.aspx
+DesktopModules/Hotcakes/Core/Admin/Catalog/Inventory.aspx
+DesktopModules/Hotcakes/Core/Admin/Controls/EnumeratedValueModifierField.ascx
+DesktopModules/Hotcakes/Core/Admin/Controls/IntegerModifierField.ascx
+DesktopModules/Hotcakes/Core/Admin/Controls/InventoryModifications.ascx
+DesktopModules/Hotcakes/Core/Admin/Controls/ProductFilter.ascx
+DesktopModules/Hotcakes/Core/Admin/People/Affiliates_Delete.aspx
+DesktopModules/Hotcakes/Core/Admin/Reports/Affiliate Sales
+DesktopModules/Hotcakes/Core/Scripts/views
+Portals/_default/HotcakesViews/_default/Views/Category/App_LocalResources/_Header.social.cshtml.resx
+Portals/_default/HotcakesViews/_default/Views/Products/App_LocalResources/_Rating.social.cshtml.resx
+Portals/_default/HotcakesViews/_default/Views/Products/App_LocalResources/Index.social.cshtml.resx

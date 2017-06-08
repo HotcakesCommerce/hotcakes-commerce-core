@@ -1,0 +1,402 @@
+﻿/* Drop contraints from dependent tables */
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductXCategory_hcc_Category]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductXCategory_hcc_Product]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductInventory_hcc_Product]
+GO
+DROP INDEX [IX_{objectQualifier}hcc_ProductInventory] ON {databaseOwner}[{objectQualifier}hcc_ProductInventory]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyValue_hcc_Product]
+GO
+DROP INDEX [IX_{objectQualifier}hcc_ProductPropertyValue_1] ON {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue]
+GO
+
+DROP INDEX [IX_{objectQualifier}hcc_ProductXCategory_1] ON {databaseOwner}[{objectQualifier}hcc_ProductXCategory]
+GO
+DROP INDEX [IX_{objectQualifier}hcc_ProductXCategory_2] ON {databaseOwner}[{objectQualifier}hcc_ProductXCategory]
+GO
+
+/* Drop contraints from tables that have relative data */
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductTypeProperties_hcc_ProductType]
+	GO
+	DROP INDEX [IX_{objectQualifier}hcc_ProductTypeXProductProperty_ProductTypeBvin] ON {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty] 
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MembershipProductType] DROP CONSTRAINT [FK_{objectQualifier}hcc_MembershipProductType_hcc_ProductType]
+	GO
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MembershipProductType] DROP CONSTRAINT [PK_{objectQualifier}hcc_MembershipProductType]
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MembershipProductType] ADD [TempId] INT NOT NULL IDENTITY(1, 1);
+	GO
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MembershipProductType] ADD CONSTRAINT [PK_{objectQualifier}hcc_MembershipProductType_TempId] PRIMARY KEY CLUSTERED ([TempId]);
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductType] DROP CONSTRAINT [PK_{objectQualifier}hcc_ProductType]
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductType] ADD [TempId] INT NOT NULL IDENTITY(1, 1);
+	GO
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductType] ADD CONSTRAINT [PK_{objectQualifier}hcc_ProductType_TempId] PRIMARY KEY CLUSTERED ([TempId]);
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Manufacturer] DROP CONSTRAINT [PK_{objectQualifier}hcc_Manufacturer]
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Manufacturer] ADD [TempId] INT NOT NULL IDENTITY(1, 1);
+	GO
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Manufacturer] ADD CONSTRAINT [PK_{objectQualifier}hcc_Manufacturer_TempId] PRIMARY KEY CLUSTERED ([TempId]);
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Vendor] DROP CONSTRAINT [PK_{objectQualifier}hcc_Vendor]
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Vendor] ADD [TempId] INT NOT NULL IDENTITY(1, 1);
+	GO
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Vendor] ADD CONSTRAINT [PK_{objectQualifier}hcc_Vendor_TempId] PRIMARY KEY CLUSTERED ([TempId]);
+	GO
+
+/* Drop hcc_Category and hcc_Product constraints */
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category] DROP CONSTRAINT [PK_{objectQualifier}hcc_Category]
+	GO
+	DROP INDEX [IX_{objectQualifier}hcc_Category] ON {databaseOwner}[{objectQualifier}hcc_Category]
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category] ADD [TempId] INT NOT NULL IDENTITY(1, 1);
+	GO
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category] ADD CONSTRAINT [PK_{objectQualifier}hcc_Category_TempId] PRIMARY KEY CLUSTERED ([TempId]);
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [PK_{objectQualifier}hcc_Product]
+	GO
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [IX_{objectQualifier}hcc_Product_id]
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD [TempId] INT NULL;
+	GO
+	CREATE CLUSTERED INDEX [IX_{objectQualifier}hcc_Product_TempId] ON {databaseOwner}[{objectQualifier}hcc_Product] ([TempId] ASC);
+	GO
+	UPDATE {databaseOwner}[{objectQualifier}hcc_Product]
+	SET [TempId] = [Id];
+	GO
+
+	DROP INDEX [IX_{objectQualifier}hcc_Product_ManufacturerId] ON {databaseOwner}[{objectQualifier}hcc_Product]
+	GO
+	DROP INDEX [IX_{objectQualifier}hcc_Product_VendorId] ON {databaseOwner}[{objectQualifier}hcc_Product]
+	GO
+	DROP INDEX [IX_{objectQualifier}hcc_Product_Status] ON {databaseOwner}[{objectQualifier}hcc_Product]
+	GO
+
+/* Data corrections to get prevent type convertions errors */
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category]
+	ALTER COLUMN [ParentID] nvarchar(50) null
+	GO
+
+	UPDATE {databaseOwner}[{objectQualifier}hcc_Category]
+	SET [ParentID] = null
+	WHERE LTRIM(RTRIM([ParentID])) = '0' OR LTRIM(RTRIM([ParentID])) = ''
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ALTER COLUMN [ProductTypeId] nvarchar(36) null
+	GO
+
+	UPDATE {databaseOwner}[{objectQualifier}hcc_Product]
+	SET [ProductTypeId] = null
+	WHERE LTRIM(RTRIM([ProductTypeId])) = ''
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ALTER COLUMN [ManufacturerID] nvarchar(36) null
+	GO
+
+	UPDATE {databaseOwner}[{objectQualifier}hcc_Product]
+	SET [ManufacturerID] = null
+	WHERE LTRIM(RTRIM([ManufacturerID])) = ''
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ALTER COLUMN [VendorID] nvarchar(36) null
+	GO
+
+	UPDATE {databaseOwner}[{objectQualifier}hcc_Product]
+	SET [VendorID] = null
+	WHERE LTRIM(RTRIM([VendorID])) = '' OR LTRIM(RTRIM([VendorID])) = '- No Vendor -'
+	GO
+
+/* Changing of columns data types */
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category] ALTER COLUMN [bvin] uniqueidentifier not null
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category] ALTER COLUMN [ParentID] uniqueidentifier null
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ALTER COLUMN [bvin] uniqueidentifier not null
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ALTER COLUMN [ProductTypeId] uniqueidentifier null
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ALTER COLUMN [ManufacturerID] uniqueidentifier null
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ALTER COLUMN [VendorID] uniqueidentifier null
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory] ALTER COLUMN [ProductId] uniqueidentifier not null
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory] ALTER COLUMN [CategoryId] uniqueidentifier not null
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory] ALTER COLUMN [ProductBvin] uniqueidentifier not null
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue] ALTER COLUMN [ProductBvin] uniqueidentifier not null
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductType] ALTER COLUMN [bvin] uniqueidentifier not null
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty] ALTER COLUMN [ProductTypeBvin] uniqueidentifier not null
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MembershipProductType] ALTER COLUMN [ProductTypeBvin] uniqueidentifier not null
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Manufacturer] ALTER COLUMN [bvin] uniqueidentifier not null
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Vendor] ALTER COLUMN [bvin] uniqueidentifier not null
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] ALTER COLUMN [ProductId] uniqueidentifier not null
+	GO
+
+/* Creation of hcc_Category and hcc_Product constraints */
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category] DROP CONSTRAINT [PK_{objectQualifier}hcc_Category_TempId];
+	GO
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category] DROP COLUMN [TempId];
+	GO
+
+	DROP INDEX [IX_{objectQualifier}hcc_Product_TempId] ON {databaseOwner}[{objectQualifier}hcc_Product];
+	GO
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP COLUMN [TempId];
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category] ADD  CONSTRAINT [PK_{objectQualifier}hcc_Category] PRIMARY KEY CLUSTERED 
+	(
+		[bvin] ASC
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+	GO
+
+	CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Category] ON {databaseOwner}[{objectQualifier}hcc_Category] 
+	(
+		[ParentID] ASC
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD  CONSTRAINT [PK_{objectQualifier}hcc_Product] PRIMARY KEY NONCLUSTERED 
+	(
+		[bvin] ASC
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD  CONSTRAINT [IX_{objectQualifier}hcc_Product_id] UNIQUE CLUSTERED 
+	(
+		[Id] ASC
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+	GO
+
+	CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Product_Status] ON {databaseOwner}[{objectQualifier}hcc_Product] 
+	(
+		[Status] ASC,
+		[bvin] ASC
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+	GO
+
+	CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Product_ManufacturerId] ON {databaseOwner}[{objectQualifier}hcc_Product] 
+	(
+		[ManufacturerID] ASC
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+	GO
+
+	CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Product_VendorId] ON {databaseOwner}[{objectQualifier}hcc_Product] 
+	(
+		[VendorID] ASC
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+	GO
+
+/* Creation of contraints in tables that have relative data */
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductType] DROP CONSTRAINT [PK_{objectQualifier}hcc_ProductType_TempId];
+	GO
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductType] DROP COLUMN [TempId];
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductType] ADD  CONSTRAINT [PK_{objectQualifier}hcc_ProductType] PRIMARY KEY CLUSTERED 
+	(
+		[bvin] ASC
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductTypeProperties_hcc_ProductType] FOREIGN KEY([ProductTypeBvin])
+	REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductType] ([bvin])
+	GO
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductTypeProperties_hcc_ProductType]
+	GO
+	CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductTypeXProductProperty_ProductTypeBvin] ON {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty] 
+	(
+		[ProductTypeBvin] ASC
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MembershipProductType] DROP CONSTRAINT [PK_{objectQualifier}hcc_MembershipProductType_TempId];
+	GO
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MembershipProductType] DROP COLUMN [TempId];
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MembershipProductType] ADD  CONSTRAINT [PK_{objectQualifier}hcc_MembershipProductType] PRIMARY KEY CLUSTERED 
+	(
+		[ProductTypeBvin] ASC
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+	GO
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MembershipProductType]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_MembershipProductType_hcc_ProductType] FOREIGN KEY([ProductTypeBvin])
+	REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductType] ([bvin])
+	GO
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MembershipProductType] CHECK CONSTRAINT [FK_{objectQualifier}hcc_MembershipProductType_hcc_ProductType]
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Manufacturer] DROP CONSTRAINT [PK_{objectQualifier}hcc_Manufacturer_TempId];
+	GO
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Manufacturer] DROP COLUMN [TempId];
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Manufacturer] ADD  CONSTRAINT [PK_{objectQualifier}hcc_Manufacturer] PRIMARY KEY CLUSTERED 
+	(
+		[bvin] ASC
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Vendor] DROP CONSTRAINT [PK_{objectQualifier}hcc_Vendor_TempId];
+	GO
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Vendor] DROP COLUMN [TempId];
+	GO
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Vendor] ADD  CONSTRAINT [PK_{objectQualifier}hcc_Vendor] PRIMARY KEY CLUSTERED 
+	(
+		[bvin] ASC
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+	GO
+
+/* Creation of contraints in related objects */
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductXCategory_hcc_Category] FOREIGN KEY([CategoryId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Category] ([bvin])
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductXCategory_hcc_Category]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductXCategory_hcc_Product] FOREIGN KEY([ProductId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Product] ([bvin])
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductXCategory_hcc_Product]
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductXCategory_1] ON {databaseOwner}[{objectQualifier}hcc_ProductXCategory] 
+(
+	[ProductId] ASC,
+	[CategoryId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+GO
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductXCategory_2] ON {databaseOwner}[{objectQualifier}hcc_ProductXCategory] 
+(
+	[CategoryId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductInventory_hcc_Product] FOREIGN KEY([ProductBvin])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Product] ([bvin])
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductInventory_hcc_Product]
+GO
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductInventory] ON {databaseOwner}[{objectQualifier}hcc_ProductInventory] 
+(
+	[ProductBvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyValue_hcc_Product] FOREIGN KEY([ProductBvin])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Product] ([bvin])
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyValue_hcc_Product]
+GO
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductPropertyValue_1] ON {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue] 
+(
+	[ProductBvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+
+/* Change data type in hcc_SearchObjects table*/
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjects]
+ALTER COLUMN [ObjectId] uniqueidentifier not null
+GO
+
+
+/* Create new foreign keys */
+
+update {databaseOwner}[{objectQualifier}hcc_Product]
+set ProductTypeId = null
+where ProductTypeId is not null
+	and ProductTypeId not in (select bvin from {databaseOwner}[{objectQualifier}hcc_ProductType])
+GO
+
+update {databaseOwner}[{objectQualifier}hcc_Product]
+set ManufacturerID = null
+where ManufacturerID is not null
+	and ManufacturerID not in (select bvin from {databaseOwner}[{objectQualifier}hcc_Manufacturer])
+GO
+
+update {databaseOwner}[{objectQualifier}hcc_Product]
+set [VendorID] = null
+where [VendorID] is not null
+	and [VendorID] not in (select [bvin] from {databaseOwner}[{objectQualifier}hcc_Vendor])
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_Product_hcc_ProductType] FOREIGN KEY
+	(
+	[ProductTypeId]
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductType]
+	(
+	[bvin]
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  SET NULL 
+	
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_Product_hcc_Manufacturer] FOREIGN KEY
+	(
+	[ManufacturerID]
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Manufacturer]
+	(
+	[bvin]
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  SET NULL 
+	
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_Product_hcc_Vendor] FOREIGN KEY
+	(
+	[VendorID]
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Vendor]
+	(
+	[bvin]
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  SET NULL 
+	
+GO
+	

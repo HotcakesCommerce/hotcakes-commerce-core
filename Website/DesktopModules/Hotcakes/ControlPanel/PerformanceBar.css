@@ -1,0 +1,293 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
+.hcLabelWrapper {
+  float: left;
+  width: 1100px;
+}
+/* Product & Category Performance */
+.hcProductPerformance,
+.hcCategoryPerformance {
+  /* Zone */
+  /* Set Up Wizard */
+  font-family: "Roboto", sans-serif;
+}
+.hcProductPerformance .hcProductInfo,
+.hcCategoryPerformance .hcProductInfo,
+.hcProductPerformance .hcCategoryInfo,
+.hcCategoryPerformance .hcCategoryInfo {
+  padding: 15px 0 15px;
+}
+.hcProductPerformance .hcProductInfo .hcLabel,
+.hcCategoryPerformance .hcProductInfo .hcLabel,
+.hcProductPerformance .hcCategoryInfo .hcLabel,
+.hcCategoryPerformance .hcCategoryInfo .hcLabel {
+  color: #f04f30;
+  font-size: 16px;
+  font-weight: 500;
+  display: inline;
+  font-family: "Roboto", sans-serif;
+}
+.hcProductPerformance .hcProductInfo .hcLabel:not(:first-child),
+.hcCategoryPerformance .hcProductInfo .hcLabel:not(:first-child),
+.hcProductPerformance .hcCategoryInfo .hcLabel:not(:first-child),
+.hcCategoryPerformance .hcCategoryInfo .hcLabel:not(:first-child) {
+  padding-left: 15px;
+}
+.hcProductPerformance .hcProductInfo a,
+.hcCategoryPerformance .hcProductInfo a,
+.hcProductPerformance .hcCategoryInfo a,
+.hcCategoryPerformance .hcCategoryInfo a {
+  top: -6px;
+  position: relative;
+  /*padding-right: 5px;*/
+}
+.hcProductPerformance .hcChartArea,
+.hcCategoryPerformance .hcChartArea {
+  height: 410px;
+  background-color: white;
+}
+.hcProductPerformance .hcChartArea .hcLeftChartArea,
+.hcCategoryPerformance .hcChartArea .hcLeftChartArea {
+  *zoom: 1;
+  /* For IE 6/7 (trigger hasLayout) */
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -khtml-box-sizing: border-box;
+  width: 80%;
+  height: 100%;
+  float: left;
+  padding: 0 15px 25px 15px;
+  position: relative;
+}
+.hcProductPerformance .hcChartArea .hcLeftChartArea:before,
+.hcCategoryPerformance .hcChartArea .hcLeftChartArea:before,
+.hcProductPerformance .hcChartArea .hcLeftChartArea:after,
+.hcCategoryPerformance .hcChartArea .hcLeftChartArea:after {
+  content: " ";
+  display: table;
+}
+.hcProductPerformance .hcChartArea .hcLeftChartArea:after,
+.hcCategoryPerformance .hcChartArea .hcLeftChartArea:after {
+  clear: both;
+}
+.hcProductPerformance .hcChartArea .hcSalesFunnel,
+.hcCategoryPerformance .hcChartArea .hcSalesFunnel {
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -khtml-box-sizing: border-box;
+  width: 20%;
+  height: 100%;
+  float: left;
+  border-left: solid 1px #d2d2d2;
+}
+.hcProductPerformance .hcChartArea .hcEventsInfo,
+.hcCategoryPerformance .hcChartArea .hcEventsInfo {
+  margin: 0 auto;
+  width: 130px;
+  position: absolute;
+}
+.hcProductPerformance .hcChartArea .hcEventsInfo span,
+.hcCategoryPerformance .hcChartArea .hcEventsInfo span {
+  display: block;
+  text-align: center;
+  color: #ffffff;
+  padding: 3px 7px;
+}
+.hcProductPerformance .hcChartArea .hcEventsInfo span:first-child,
+.hcCategoryPerformance .hcChartArea .hcEventsInfo span:first-child {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.hcProductPerformance .hcChartArea .hcEventsInfo span:last-child,
+.hcCategoryPerformance .hcChartArea .hcEventsInfo span:last-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.hcProductPerformance .hcProductPerformanceChart,
+.hcCategoryPerformance .hcProductPerformanceChart,
+.hcProductPerformance .hcCategoryPerformanceChart,
+.hcCategoryPerformance .hcCategoryPerformanceChart {
+  width: 100%;
+  height: 99%;
+}
+.hcProductPerformance .hcChartLegend,
+.hcCategoryPerformance .hcChartLegend {
+  float: right;
+  padding: 0 8px 0;
+  color: #232323;
+  font: 12px Arial, Helvetica, sans-serif;
+}
+.hcProductPerformance .hcChartLegend div,
+.hcCategoryPerformance .hcChartLegend div {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 0 8px 0 8px;
+}
+.hcProductPerformance .hcChartLegend .hcEventImage1,
+.hcCategoryPerformance .hcChartLegend .hcEventImage1 {
+  background-color: #73ba0d;
+}
+.hcProductPerformance .hcChartLegend .hcEventImage2,
+.hcCategoryPerformance .hcChartLegend .hcEventImage2 {
+  background-color: #ba0d6f;
+}
+.hcProductPerformance .hcChartLegend .hcEventImage3,
+.hcCategoryPerformance .hcChartLegend .hcEventImage3 {
+  background-color: #830dba;
+}
+.hcProductPerformance .hcChartLegend .hcEventImage4,
+.hcCategoryPerformance .hcChartLegend .hcEventImage4 {
+  background-color: #000000;
+}
+.hcProductPerformance .hcSalesFunnel h3,
+.hcCategoryPerformance .hcSalesFunnel h3 {
+  padding-left: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #f04f30;
+  font-size: 18px;
+  line-height: 36px;
+  margin-bottom: 10px;
+  margin-top: 8px;
+}
+.hcProductPerformance .hcSalesFunnel > div,
+.hcCategoryPerformance .hcSalesFunnel > div {
+  height: 355px;
+}
+.hcProductPerformance .hcSalesFunnel .hcSalesBlock,
+.hcCategoryPerformance .hcSalesFunnel .hcSalesBlock {
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -khtml-box-sizing: border-box;
+  height: 33.3%;
+  padding-left: 15px;
+}
+.hcProductPerformance .hcSalesFunnel .hcSalesBlock:not(:first-child),
+.hcCategoryPerformance .hcSalesFunnel .hcSalesBlock:not(:first-child) {
+  border-top: solid 1px #d2d2d2;
+}
+.hcProductPerformance .hcSalesFunnel h4,
+.hcCategoryPerformance .hcSalesFunnel h4 {
+  color: #232323;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  line-height: 36px;
+  display: block;
+}
+.hcProductPerformance .hcSalesFunnel .hcAmount,
+.hcCategoryPerformance .hcSalesFunnel .hcAmount {
+  font-size: 30px;
+  padding: 5px 0 15px 0;
+}
+.hcProductPerformance .hcAmount,
+.hcCategoryPerformance .hcAmount {
+  display: block;
+}
+.hcProductPerformance .hcGrowingTrend,
+.hcCategoryPerformance .hcGrowingTrend {
+  width: 12px;
+  height: 8px;
+  display: inline-block;
+  background: url(../Core/Admin/Images/admin_misc_sprite.png) -200px -160px no-repeat;
+  margin-right: 5px;
+}
+.hcProductPerformance .hcDroppingTrend,
+.hcCategoryPerformance .hcDroppingTrend {
+  width: 12px;
+  height: 8px;
+  display: inline-block;
+  background: url(../Core/Admin/Images/admin_misc_sprite.png) -240px -160px no-repeat;
+  margin-right: 5px;
+}
+.hcProductPerformance .hcPercentageChange,
+.hcCategoryPerformance .hcPercentageChange {
+  padding: 0 5px;
+}
+.hcProductPerformance .hcPeriodSelector,
+.hcCategoryPerformance .hcPeriodSelector {
+  padding: 3px 5px;
+  top: -390px;
+  left: 15px;
+}
+.hcProductPerformance .hcPeriodSelector:before,
+.hcCategoryPerformance .hcPeriodSelector:before {
+  content: " ";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  top: 2px;
+  position: relative;
+  background: url(../Core/Admin/Images/admin_misc_sprite.png) -80px -80px no-repeat;
+}
+/* ------------- Selection List ------------- */
+.hcSelectionList {
+  cursor: pointer;
+  padding: 5px 0;
+  position: relative;
+}
+.hcSelectionList span {
+  font-weight: bold;
+  padding-left: 8px;
+  color: #434343;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0;
+}
+.hcSelectionList ul {
+  background-color: #0c0c0c;
+  display: none;
+  margin: 0;
+  /*position: absolute;*/
+  z-index: 1000;
+  list-style: outside none square;
+  padding: 0;
+  width: 70px;
+}
+.hcSelectionList ul li {
+  border-bottom: 1px solid #d2d2d2;
+  margin: 0;
+  padding: 8px 12px;
+  width: 70px;
+}
+.hcSelectionList li {
+  color: #ffffff;
+  display: block;
+  padding: 5px 8px;
+  width: 70px;
+}
+.hcSelectionList ul li.selected,
+.hcSelectionList ul li:hover {
+  background-color: #f04f30;
+  width: 46px;
+}
+.hcPrimaryAction.hcSmall,
+.hcPrimaryAction.hcSmall:visited {
+  padding: 6px 40px;
+}
+.hcPrimaryAction,
+.hcPrimaryAction:visited {
+  background: #e85b40 none repeat scroll 0 0;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(140, 140, 140, 0.6);
+  box-sizing: border-box;
+  color: #ffffff !important;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 14px 40px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: none;
+}
+.right {
+  float: right;
+}

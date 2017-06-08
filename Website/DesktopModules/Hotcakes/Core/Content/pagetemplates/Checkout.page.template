@@ -1,0 +1,44 @@
+﻿<portal version="5.0">
+  <description>Checkout page template</description>
+  <tab>
+    <issecure>true</issecure>
+    <visible>false</visible>
+		<skinsrc>[G]Skins/Gravity/2-Col.ascx</skinsrc>
+		<name>Checkout</name>
+    <tabpermissions>
+      <permission>
+        <permissioncode>SYSTEM_TAB</permissioncode>
+        <permissionkey>VIEW</permissionkey>
+        <allowaccess>true</allowaccess>
+        <rolename>All Users</rolename>
+      </permission>
+      <permission>
+        <permissioncode>SYSTEM_TAB</permissioncode>
+        <permissionkey>VIEW</permissionkey>
+        <allowaccess>true</allowaccess>
+        <rolename>Administrators</rolename>
+      </permission>
+      <permission>
+        <permissioncode>SYSTEM_TAB</permissioncode>
+        <permissionkey>EDIT</permissionkey>
+        <allowaccess>true</allowaccess>
+        <rolename>Administrators</rolename>
+      </permission>
+    </tabpermissions>
+    <tabsettings />
+    <parent>HotcakesStore</parent>
+    <panes>
+      <pane>
+        <name>ContentPane</name>
+        <modules>
+          <module>
+            <title>Checkout</title>
+            <definition>Hotcakes.Checkout</definition>
+            <moduledefinition>Hotcakes Checkout</moduledefinition>
+						<inheritviewpermissions>true</inheritviewpermissions>
+					</module>
+        </modules>
+      </pane>
+    </panes>
+  </tab>
+</portal>

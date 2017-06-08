@@ -1,0 +1,7 @@
+﻿DesktopModules/Hotcakes/Core/Admin/Configuration/PaymentWizard.aspx
+DesktopModules/Hotcakes/Core/Admin/Marketing/Default.aspx
+DesktopModules/Hotcakes/Core/Admin/Marketing/OffersEdit.aspx
+DesktopModules/Hotcakes/Core/Admin/Marketing/Promotions_Delete.aspx
+DesktopModules/Hotcakes/Core/Modules/CreditCardGateways/Cybersource (SOAP)
+DesktopModules/Hotcakes/Core/Modules/CreditCardGateways/Payflow Pro
+bin/Payflow_dotNET.dll

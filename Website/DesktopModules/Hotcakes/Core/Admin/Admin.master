@@ -1,0 +1,37 @@
+<%@ Master Language="C#" Inherits="Hotcakes.Modules.Core.Admin.Admin" CodeBehind="Admin.master.cs" AutoEventWireup="True" %>
+
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+
+<%@ Register Src="Header.ascx" TagName="Header" TagPrefix="hcc" %>
+<%@ Register Src="Footer.ascx" TagName="Footer" TagPrefix="hcc" %>
+<%@ Register Src="Controls/NavMenu.ascx" TagName="NavMenu" TagPrefix="hcc" %>
+
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>My Hotcakes Commerce Store</title>
+    <!--[if IE]><script type="text/javascript" src="/DesktopModules/Hotcakes/Core/Scripts/excanvas.js"></script><![endif]-->
+</head>
+<body>
+    <form runat="server">
+        <telerik:RadScriptManager runat="server"></telerik:RadScriptManager>
+        <asp:PlaceHolder ID="BodySCRIPTS" runat="server" />
+        <div id="wrapper" class="dnnClear">
+            <div id="header">
+                <hcc:Header runat="server" />
+            </div>
+            <div id="content" class="dnnClear">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+            </div>
+        <div id="footer-push"></div>
+        </div>
+        <div id="footer">
+            <hcc:Footer runat="server" />
+        </div>
+        <input id="__hccVariables" runat="server" name="__hccVariables" type="hidden" />
+    </form>
+	<img src="//hotcakes.org/Portals/0/images/spacer.gif" alt="" />
+</body>
+</html>
+

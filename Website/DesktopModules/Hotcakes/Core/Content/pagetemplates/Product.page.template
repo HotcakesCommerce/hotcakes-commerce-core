@@ -1,0 +1,43 @@
+﻿<portal version="5.0">
+  <description>Category page template</description>
+  <tab>
+    <visible>true</visible>
+    <name>Product Viewer</name>
+		<skinsrc>[G]Skins/Gravity/2-Col.ascx</skinsrc>
+		<tabpermissions>
+      <permission>
+        <permissioncode>SYSTEM_TAB</permissioncode>
+        <permissionkey>VIEW</permissionkey>
+        <allowaccess>true</allowaccess>
+        <rolename>All Users</rolename>
+      </permission>
+      <permission>
+        <permissioncode>SYSTEM_TAB</permissioncode>
+        <permissionkey>VIEW</permissionkey>
+        <allowaccess>true</allowaccess>
+        <rolename>Administrators</rolename>
+      </permission>
+      <permission>
+        <permissioncode>SYSTEM_TAB</permissioncode>
+        <permissionkey>EDIT</permissionkey>
+        <allowaccess>true</allowaccess>
+        <rolename>Administrators</rolename>
+      </permission>
+    </tabpermissions>
+    <tabsettings />
+    <parent>HotcakesStore</parent>
+    <panes>
+      <pane>
+        <name>ContentPane</name>
+        <modules>
+          <module>
+            <title>Product Viewer</title>
+            <definition>Hotcakes.ProductViewer</definition>
+            <moduledefinition>Hotcakes Product Viewer</moduledefinition>
+						<inheritviewpermissions>true</inheritviewpermissions>
+					</module>
+        </modules>
+      </pane>
+    </panes>
+  </tab>
+</portal>

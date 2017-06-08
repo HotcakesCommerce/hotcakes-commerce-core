@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FakeProductRole>
+ <ProductRole>
+    <TotalRoleCount>7</TotalRoleCount>
+    <TotalProductRoleCount>1</TotalProductRoleCount>
+    <AddRole>Administrators</AddRole>
+    <DeleteRole>Administrators</DeleteRole>
+  </ProductRole>
+  </FakeProductRole>

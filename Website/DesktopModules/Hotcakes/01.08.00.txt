@@ -1,0 +1,12 @@
+﻿DesktopModules/Hotcakes/Core/Admin/People/Manufacturers_Delete.aspx
+DesktopModules/Hotcakes/Core/Admin/People/Vendors_Delete.aspx
+DesktopModules/Hotcakes/Core/Admin/Controls/DashboardOrderSummary.ascx
+DesktopModules/Hotcakes/Core/Admin/Controls/DashboardNews.ascx
+DesktopModules/Hotcakes/Core/Admin/Controls/DashboardAlerts.ascx
+DesktopModules/Hotcakes/Core/Admin/Controls/DashboardSalesSummary.ascx
+DesktopModules/Hotcakes/Core/Admin/Controls/App_LocalResources/DashboardAlerts.ascx.resx
+DesktopModules/Hotcakes/Core/Admin/Controls/App_LocalResources/DashboardOrderSummary.ascx.resx
+DesktopModules/Hotcakes/Core/Admin/Controls/App_LocalResources/DashboardSalesSummary.ascx.resx
+DesktopModules/Hotcakes/Core/Admin/Admin/Orders/ReceivePayments.aspx
+DesktopModules/Hotcakes/Core/Admin/Admin/Orders/ReceivePaymentsControl.ascx
+DesktopModules/Hotcakes/Core/Admin/Images/highlights

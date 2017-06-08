@@ -1,0 +1,3 @@
+﻿ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD
+	[IsSearchable] bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_IsSearchable] DEFAULT 1
+GO

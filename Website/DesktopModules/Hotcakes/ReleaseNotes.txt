@@ -1,0 +1,24 @@
+﻿<h5>Version 03.00.00</h5>
+<p><strong>Highlights</strong></p>
+<blockquote>
+	<p><strong>Open Source License</strong></p>
+	<p>Yada, yada...</p>
+	<p><strong>Important Notes</strong></p>
+	<ul>
+		<li>If using User Has Badges Promotions, please know that it will be removed upon upgrade. Please plan accordingly prior to upgrade.</li>
+		<li>All integrations and extension points should be tested thoroughly to update HccApp object still works as expected.</li>
+		<li>Minimum required version of DNN is now 07.04.02 or newer. (Version 8+ is supported as well.)</li>
+	</ul>
+</blockquote>
+<p><strong>Enhancements</strong></p>
+<ul>
+	<li><strong>12345 - Title</strong> - Description.</li>
+	<li><strong>12345 - Title</strong> - Description.</li>
+	<li><strong>12345 - Title</strong> - Description.</li>
+</ul>
+<p><strong>Bug Fixes</strong></p>
+<ul>
+	<li>12345 - Description</li>
+	<li>12345 - Description</li>
+	<li>12345 - Description</li>
+</ul>

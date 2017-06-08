@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Hotcakes Commerce - Client-Side REST API Example</title>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Hotcakes Commerce</h1>
+    <h2>REST API Example</h2>
+    
+    <p>This code sample must be run on the same domain as your website in order for it to work.</p>
+    
+    <p><span style="font-weight: bold;">Connection Status:</span> <span id="lblStatus">Unknown</span></p>
+    
+    <p style="font-weight: bold;">Output:</p>
+    <div id="divOutput">None</div>
+    
+    <script type="text/javascript">
+        // your domain name
+		var url = "http://localhost.hotcakes"; 
+		// the path where the API is
+		var apiPath = "/DesktopModules/Hotcakes/API/rest/v1/";  
+        // endpoint as shown in the documentation
+		var endPoint = "categories";  
+		// get this from the store admin
+        var apiKey = "1-b91c45bc-1752-4fb9-aa48-f59b68244b57";  
+
+        $(document).ready(function() {
+
+            $.ajax({
+                dataType: "json",
+                url: url + apiPath + endPoint,
+                data: { key: apiKey },
+                type: 'GET',
+                success: function (data) {
+                    $('#lblStatus').html("Success!");
+                    var json = JSON.stringify(data);
+                    $('#divOutput').html(json);
+                },
+                error: function(jqXHR, textStatus) {
+                    $('#lblStatus').html("Error!");
+                    $('#divOutput').html(textStatus);
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>

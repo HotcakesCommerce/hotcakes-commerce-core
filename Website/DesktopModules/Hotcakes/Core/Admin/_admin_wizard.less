@@ -1,0 +1,166 @@
+body {
+}
+
+@import "_admin_header.less";
+
+/* ------- Wizard Styles --------- */
+
+.hcWizardProgressNav {
+    position: relative;
+    display: block;
+    list-style: none;
+    padding: 10px;
+    margin: 10px 0px 40px 120px;
+    height: 60px;
+
+    li {
+        position: relative;
+        float: left;
+        padding: 5px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid @color-gray;
+        width: 160px;
+
+        a, a:visited {
+            position: relative;
+            left: -19px;
+            font-size: 18px;
+            text-decoration: none;
+            color: @color-gray;
+
+            i {
+                font-size: 14px;
+                display: inline-block;
+                text-align: center;
+                font-style: normal;
+                padding: 3px;
+                margin-top: -2px;
+                vertical-align: text-top;
+                width: 20px;
+                height: 20px;
+                background: @color-gray;
+                color: white;
+                border-radius: 20px;
+            }
+
+                i:after {
+                    top: 31px;
+                    left: 4px;
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    width: 17px;
+                    height: 17px;
+                    background: @color-bg;
+                    background-image: url(Images/admin_progress_points.png);
+                }
+        }
+    }
+
+        li.hcProgressActive {
+            border-bottom: 1px solid @color-disabled;
+
+            a, a:visited {
+                color: @color-red;
+
+                i {
+                    background: @color-red;
+
+                    &:after {
+                        background-position-x: 32px;
+                    }
+                }
+            }
+        }
+
+        li.hcProgressDisabled {
+            border-bottom: 1px solid @color-disabled;
+
+            a, a:visited {
+                color: @color-disabled;
+
+                i {
+                    background: @color-disabled;
+
+                    &:after {
+                        background-position: 17px;
+                    }
+                }
+            }
+        }
+
+        li.hcProgressFinish {
+            border-bottom: none;
+        }
+}
+
+.hcWizWelcome {
+    z-index: 1;
+    padding: 20px 50px 30px 50px;
+    background: @color-lavender;
+    h2{
+        color: @color-red;
+    }
+}
+
+.hcPicture { margin: 5px; position: relative; }
+.hcWizGeneral {
+	margin: 0px 0px 0px 120px;
+
+	.hcStoreName {
+		margin-top: 20px;
+
+		&.hcFormItem > input[type="text"] {
+			width: 300px !important;
+		}
+
+		.hcSetupWizardStoreNameHelp {
+			margin-left: 298px;
+			margin-top: 59px;
+		}
+	}
+}
+.hcWizPaymentLabel {
+    cursor: pointer;
+}
+.hcWizLicensing > .hcActionsRight {
+    margin-top: 100px;
+}
+.hcLicAdditional {
+    text-align: center;
+
+    h5 {
+        margin: 30px;
+    }
+
+    .hcPrimaryAction {
+        margin-bottom: 70px;
+    }
+}
+
+.hcAdminWizard {
+	margin: 0 auto !important;
+}
+
+.hcBranding {
+	background: rgba(0, 0, 0, 0) url("images/admin_logo.png") no-repeat scroll 0 0;
+	padding-left: 240px;
+}
+
+.hcWizPayment {
+	margin: 0px 0px 0px 120px;
+}
+.hcWizShipping {
+	margin: 0px 0px 0px 120px;
+}
+.hcWizTaxes {
+	margin: 0px 0px 0px 120px;
+}
+.hcWizLicensing {
+	margin: 0px 0px 0px 120px;
+}
+
+.hcHandlingFeeHelp {
+	margin-left: 128px;
+	margin-top: 32px;
+}

@@ -1,0 +1,35 @@
+﻿
+Intro
+
+Each folder should contain unit tests that related to appropriate service area.
+Folder can contain unit test that cover public function of "Service" class or "Repository" 
+class or some individual object that used there. (For example OrderServiceTest, OrderRepositoryTest, 
+OrderTest, OrderCalculatorTest)
+
+Criteria what functions should be covered by unit test and what - should not.
+
+- DO NOT WRITE unit tests for functions with simple CRUD functionality.
+- WRITE unit test for function that contain some complicated logic.
+
+---------------------------------------------
+
+List of recommended functions to cover by unit tests:
+
+= CatalogService
+ - FindProductForCategoryWithSort ???
+ - VariantsValidate
+ - VariantsGenerateAllPossible
+ - VariantsGenerateAllPossibleSelections
+ - ValidateVariantsForSharedOption
+ - ProductsAddOption
+ - ProductsRemoveOption
+ - ProductsCreateWithInventory
+ - CloneProduct
+ - UpdateProductVisibleStatusAndSave
+ - CleanUpInventory
+ - SimpleProductInventoryCheck
+ - InventoryLineItemShipQuantity
+ - Inventory...
+ - ProductTypeMovePropertyUp
+ - ProductPropertiesFindForType
+ - ...

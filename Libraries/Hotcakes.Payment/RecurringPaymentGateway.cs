@@ -1,0 +1,91 @@
+﻿#region License
+
+// Distributed under the MIT License
+// ============================================================
+// Copyright (c) 2016 Hotcakes Commerce, LLC
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
+// and associated documentation files (the "Software"), to deal in the Software without restriction, 
+// including without limitation the rights to use, copy, modify, merge, publish, distribute, 
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is 
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all copies or 
+// substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN 
+// THE SOFTWARE.
+
+#endregion
+
+using System;
+
+namespace Hotcakes.Payment
+{
+    [Serializable]
+    public abstract class RecurringPaymentGateway : GatewayBase
+    {
+        public virtual void ProcessTransaction(Transaction t)
+        {
+            try
+            {
+                switch (t.Action)
+                {
+                    case ActionType.RecurringSubscriptionCreate:
+                        CreateSubscription(t);
+                        break;
+                    case ActionType.RecurringSubscriptionUpdate:
+                        UpdateSubscription(t);
+                        break;
+                    case ActionType.RecurringSubscriptionCancel:
+                        CancelSubscription(t);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                t.Result.Messages.Add(new Message("Unknown Recurring Payment Error: " + ex.Message, "HCRP",
+                    MessageType.Error));
+                t.Result.Messages.Add(new Message("Stack Trace " + ex.StackTrace, "STACKTRACE", MessageType.Error));
+                t.Result.Succeeded = false;
+            }
+        }
+
+        public virtual Range GetRangeForIntervalType(RecurringIntervalType intervalType)
+        {
+            return new Range {Minimum = 1, Maximum = int.MaxValue};
+        }
+
+        protected virtual void CreateSubscription(Transaction t)
+        {
+            NotSupported(t);
+        }
+
+        protected virtual void UpdateSubscription(Transaction t)
+        {
+            NotSupported(t);
+        }
+
+        protected virtual void CancelSubscription(Transaction t)
+        {
+            NotSupported(t);
+        }
+
+        private void NotSupported(Transaction t)
+        {
+            t.Result.Succeeded = false;
+            t.Result.Messages.Add(new Message("This operation is not supported", "UNSUPPORTED", MessageType.Warning));
+        }
+
+        public class Range
+        {
+            public int Minimum { get; set; }
+            public int Maximum { get; set; }
+        }
+    }
+}

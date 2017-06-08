@@ -1,0 +1,73 @@
+﻿@model Hotcakes.Modules.Core.Models.CheckoutViewModel
+
+@helper ValidationMessage(string id, string message, string suffix="")
+{
+    id = id + "_error" + suffix;
+    <span id="@id" class="dnnFormMessage dnnFormError" style="display:none">@message</span>
+}
+<script type="text/javascript">
+    var HCC = HCC || {};
+    HCC.CheckoutLogin = HCC.CheckoutLogin || {};
+    HCC.CheckoutLogin.LoginTab = '@Model.LoginTabID';
+</script>
+
+<h3>@Localization.GetString("Login")</h3>
+
+<div id="loginmessage" class="dnnFormMessage Hidden">@Localization.GetString("PleaseLogin")</div>
+
+<div id="hcLoginChoose" class="hc-login-choose">
+    <label>@Html.RadioButton("loginChoose", "#hcTabNewAccount", true)@Localization.GetString("NewAccount")</label>
+    <label>@Html.RadioButton("loginChoose", "#hcTabLogin")@Localization.GetString("Login")</label>
+    <label>@Html.RadioButton("loginChoose", "#hcTabGuest")@Localization.GetString("GuestCheckout")</label>
+</div>
+
+<div id="hcTabNewAccount" class="dnnClear hcTabPane">
+    <div class="dnnFormItem dnnFormRequired">
+        <div class="dnnLabel">@Localization.GetString("Email"):</div>
+        @Html.TextBox("regemail", @Model.CurrentOrder.UserEmail)
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <div class="dnnLabel">@Localization.GetString("Username"):</div>
+        @Html.TextBox("regusername", @Model.RegUsername, new { @class="required" })
+        @ValidationMessage("regusername", @Localization.GetString("Username_Required"))
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <div class="dnnLabel">@Localization.GetString("Password"):</div>
+        @Html.Password("regpassword")
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <div class="dnnLabel">@Localization.GetString("ConfirmPassword"):</div>
+        @Html.Password("regconfirmpassword")
+        @ValidationMessage("regconfirmpassword", @Localization.GetString("ConfirmPassword_Error"))
+    </div>
+</div>
+
+<div id="hcTabLogin" class="dnnClear hcTabPane Hidden">
+    <div class="dnnFormItem dnnFormRequired">
+        <div class="dnnLabel">@Localization.GetString("Username")</div>
+        @Html.TextBox("username")
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <div class="dnnLabel">@Localization.GetString("Password")</div>
+        @Html.Password("password", "", new { title=@Localization.GetString("EnterPassword") })
+    </div>
+    <ul class="dnnActions dnnClear dnnRight">
+        <li>
+			<a href="javascript:dnnModal.show('@Url.RouteHccUrl(HccRoute.SendPassword)?popUp=true',false,350,700,false)" class="dnnSecondaryAction">
+                @Localization.GetString("ForgotPassword")
+            </a>
+        </li>
+        <li>
+            <a id="loginbutton" href="#" class="dnnPrimaryAction">
+                @Localization.GetString("Login")
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div id="hcTabGuest" class="dnnClear hcTabPane Hidden">
+    <div class="dnnFormItem dnnFormRequired">
+        <label class="dnnLabel">@Localization.GetString("EmailAddress"):</label>
+        @Html.TextBox("customeremail", @Model.CurrentOrder.UserEmail)
+    </div>
+</div>

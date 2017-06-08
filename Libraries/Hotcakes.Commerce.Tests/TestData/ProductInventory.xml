@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FakeInventory>
+  <ProductInventory>
+    <Inventory>
+      <InventoryMode>102</InventoryMode>
+      <IsAvailableForSale>true</IsAvailableForSale>
+      <OutOfStockPoint>3</OutOfStockPoint>
+      <LowStockPoint>2</LowStockPoint>
+      <QuantityReserved>0</QuantityReserved>
+      <QuantityAvailableForSale>5</QuantityAvailableForSale>
+      <QuantityOnHand>8</QuantityOnHand>
+    </Inventory>
+    <AddInventory>
+      <InventoryMode>102</InventoryMode>
+      <OutOfStockPoint>3</OutOfStockPoint>
+      <LowStockPoint>2</LowStockPoint>
+      <QuantityOnHand>8</QuantityOnHand>
+    </AddInventory>
+    <InventoryFindAllLowStockCount>356</InventoryFindAllLowStockCount>
+  </ProductInventory>
+ </FakeInventory>

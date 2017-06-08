@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C47A3A58-D11F-4D67-92FC-3E95B5DD6221}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hotcakes.CommerceDTO</RootNamespace>
+    <AssemblyName>Hotcakes.CommerceDTO</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>bin\Release\Hotcakes.CommerceDTO.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="v1\ApiError.cs" />
+    <Compile Include="v1\ApiOperation.cs" />
+    <Compile Include="v1\ApiResponse.cs" />
+    <Compile Include="v1\Catalog\CatalogRoleDTO.cs" />
+    <Compile Include="v1\Catalog\CatalogRoleTypeDTO.cs" />
+    <Compile Include="v1\Catalog\CategoryDTO.cs" />
+    <Compile Include="v1\Catalog\CategoryPeersetDTO.cs" />
+    <Compile Include="v1\Catalog\CategoryProductAssociationDTO.cs" />
+    <Compile Include="v1\Catalog\CategorySnapshotDTO.cs" />
+    <Compile Include="v1\Catalog\CategorySortOrderDTO.cs" />
+    <Compile Include="v1\Catalog\CategorySourceTypeDTO.cs" />
+    <Compile Include="v1\Catalog\ClearProductsData.cs" />
+    <Compile Include="v1\Catalog\GiftCardDTO.cs" />
+    <Compile Include="v1\Catalog\OptionDTO.cs" />
+    <Compile Include="v1\Catalog\OptionItemDTO.cs" />
+    <Compile Include="v1\Catalog\OptionSelectionDTO.cs" />
+    <Compile Include="v1\Catalog\OptionSettingDTO.cs" />
+    <Compile Include="v1\Catalog\OptionTypesDTO.cs" />
+    <Compile Include="v1\Catalog\PageOfProducts.cs" />
+    <Compile Include="v1\Catalog\ProductDescriptionTabDTO.cs" />
+    <Compile Include="v1\Catalog\ProductDTO.cs" />
+    <Compile Include="v1\Catalog\ProductFileDTO.cs" />
+    <Compile Include="v1\Catalog\ProductImageDTO.cs" />
+    <Compile Include="v1\Catalog\ProductInventoryDTO.cs" />
+    <Compile Include="v1\Catalog\ProductInventoryModeDTO.cs" />
+    <Compile Include="v1\Catalog\ProductPropertyChoiceDTO.cs" />
+    <Compile Include="v1\Catalog\ProductPropertyDTO.cs" />
+    <Compile Include="v1\Catalog\ProductPropertyTypeDTO.cs" />
+    <Compile Include="v1\Catalog\ProductRelationshipDTO.cs" />
+    <Compile Include="v1\Catalog\ProductReviewDTO.cs" />
+    <Compile Include="v1\Catalog\ProductReviewRatingDTO.cs" />
+    <Compile Include="v1\Catalog\ProductStatusDTO.cs" />
+    <Compile Include="v1\Catalog\ProductTypeDTO.cs" />
+    <Compile Include="v1\Catalog\ProductVariantSkuUpdateDTO.cs" />
+    <Compile Include="v1\Catalog\ProductVolumeDiscountDTO.cs" />
+    <Compile Include="v1\Catalog\ProductVolumeDiscountTypeDTO.cs" />
+    <Compile Include="v1\Catalog\VariantDTO.cs" />
+    <Compile Include="v1\Catalog\WishListItemDTO.cs" />
+    <Compile Include="v1\Client\Api.cs" />
+    <Compile Include="v1\Client\RestHelper.cs" />
+    <Compile Include="v1\Contacts\AddressDTO.cs" />
+    <Compile Include="v1\Contacts\AddressTypesDTO.cs" />
+    <Compile Include="v1\Contacts\AffiliateCommissionTypeDTO.cs" />
+    <Compile Include="v1\Contacts\AffiliateContactDTO.cs" />
+    <Compile Include="v1\Contacts\AffiliateDTO.cs" />
+    <Compile Include="v1\Contacts\AffiliateReferralDTO.cs" />
+    <Compile Include="v1\Contacts\PhoneNumberDTO.cs" />
+    <Compile Include="v1\Contacts\PriceGroupDTO.cs" />
+    <Compile Include="v1\Contacts\PricingTypesDTO.cs" />
+    <Compile Include="v1\Contacts\VendorManufacturerContactDTO.cs" />
+    <Compile Include="v1\Contacts\VendorManufacturerDTO.cs" />
+    <Compile Include="v1\Contacts\VendorManufacturerTypeDTO.cs" />
+    <Compile Include="v1\CustomPropertyDTO.cs" />
+    <Compile Include="v1\IApiResponse.cs" />
+    <Compile Include="v1\Marketing\DiscountDetailDTO.cs" />
+    <Compile Include="v1\Membership\CustomerAccountDTO.cs" />
+    <Compile Include="v1\Membership\UserSearchCriteriaDTO.cs" />
+    <Compile Include="v1\Orders\OrderTransactionGiftCardDataDTO.cs" />
+    <Compile Include="v1\Orders\LineItemDTO.cs" />
+    <Compile Include="v1\Orders\OrderCouponDTO.cs" />
+    <Compile Include="v1\Orders\OrderDTO.cs" />
+    <Compile Include="v1\Orders\OrderNoteDTO.cs" />
+    <Compile Include="v1\Orders\OrderPackageDTO.cs" />
+    <Compile Include="v1\Orders\OrderPackageItemDTO.cs" />
+    <Compile Include="v1\Orders\OrderPaymentStatusDTO.cs" />
+    <Compile Include="v1\Orders\OrderShippingStatusDTO.cs" />
+    <Compile Include="v1\Orders\OrderSnapshotDTO.cs" />
+    <Compile Include="v1\Orders\OrderTransactionActionDTO.cs" />
+    <Compile Include="v1\Orders\OrderTransactionCardDataDTO.cs" />
+    <Compile Include="v1\Orders\OrderTransactionDTO.cs" />
+    <Compile Include="v1\Orders\SalesSummaryDTO.cs" />
+    <Compile Include="v1\Shipping\ShippingChargeTypeDTO.cs" />
+    <Compile Include="v1\Shipping\LengthTypeDTO.cs" />
+    <Compile Include="v1\Shipping\ShippableItemDTO.cs" />
+    <Compile Include="v1\Shipping\ShippingModeDTO.cs" />
+    <Compile Include="v1\Shipping\WeightTypeDTO.cs" />
+    <Compile Include="v1\Taxes\TaxDTO.cs" />
+    <Compile Include="v1\Taxes\TaxScheduleDTO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hotcakes.Web\Hotcakes.Web.csproj">
+      <Project>{a822b6b9-ce48-4717-9ec2-1c1548289315}</Project>
+      <Name>Hotcakes.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

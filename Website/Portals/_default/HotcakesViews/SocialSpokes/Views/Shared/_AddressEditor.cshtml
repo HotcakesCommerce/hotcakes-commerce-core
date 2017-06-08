@@ -1,0 +1,104 @@
+﻿@model Hotcakes.Modules.Core.Models.AddressViewModel
+
+<div id="hcAddressValidation" class="dnnFormMessage dnnFormMessageWarning" style="display: none;"></div>
+
+<div class="dnnForm hcAddressForm" data-bind="with: AddressModel">
+    <div class="dnnFormItem">
+        <label class="dnnLabel">
+            @Localization.GetString("Country"):
+        </label>
+        @Html.DropDownListFor(model => model.CountryBvin,
+            new SelectList(Model.Countries, "Bvin", "DisplayName", Model.CountryBvin),
+            new { data_bind = "value: CountryBvin" })
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <label class="dnnLabel">
+            @Localization.GetString("FirstName"):
+        </label>
+        @Html.TextBoxFor(model => model.FirstName, new { data_bind = "value: FirstName" })
+        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "dnnFormMessage hcFormError" })
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <label class="dnnLabel">
+            @Localization.GetString("LastName"):
+        </label>
+        @Html.TextBoxFor(model => model.LastName, new { data_bind = "value: LastName" })
+        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "dnnFormMessage hcFormError" })
+    </div>
+    <div class="dnnFormItem">
+        <label class="dnnLabel">
+            @Localization.GetString("Company"):
+        </label>
+        @Html.TextBoxFor(model => model.Company, new { data_bind = "value: Company" })
+        @Html.ValidationMessageFor(model => model.Company, "", new { @class = "dnnFormMessage hcFormError" })
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <label class="dnnLabel">
+            @Localization.GetString("Address"):
+        </label>
+        @Html.TextBoxFor(model => model.Line1, new { data_bind = "value: Line1" })
+        @Html.ValidationMessageFor(model => model.Line1, "", new { @class = "dnnFormMessage hcFormError" })
+    </div>
+    <div class="dnnFormItem">
+        <label class="dnnLabel">
+            &nbsp;
+        </label>
+        @Html.TextBoxFor(model => model.Line2, new { data_bind = "value: Line2" })
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <label class="dnnLabel">
+            @Localization.GetString("City"):
+        </label>
+        @Html.TextBoxFor(model => model.City, new { data_bind = "value: City" })
+        @Html.ValidationMessageFor(model => model.City, "", new { @class = "dnnFormMessage hcFormError" })
+    </div>
+    <div class="dnnFormItem">
+        <label class="dnnLabel">
+            @Localization.GetString("State"):
+        </label>
+        @Html.DropDownListFor(model => model.RegionBvin,
+            new SelectList(Model.Regions, "Abbreviation", "DisplayName", Model.RegionBvin), 
+            new { data_bind = "value: RegionBvin" })
+        @Html.ValidationMessageFor(model => model.RegionBvin, "The State field is required", new { @class = "dnnFormMessage hcFormError" })
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <label class="dnnLabel">
+            @Localization.GetString("Zip"):
+        </label>
+        @Html.TextBoxFor(model => model.PostalCode, new { data_bind = "value: PostalCode" })
+        @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "dnnFormMessage hcFormError" })
+    </div>
+    <div class="dnnFormItem">
+        <label class="dnnLabel">
+            @Localization.GetString("Phone"):
+        </label>
+        @Html.TextBoxFor(model => model.Phone, new { data_bind = "value: Phone" })
+        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "dnnFormMessage hcFormError" })
+    </div>
+</div>
+@Html.HiddenFor(model => model.Bvin)
+@Html.HiddenFor(model => model.AddressType)
+
+<div id="hcNormalizedAddressDlg" data-title="@Localization.GetString("NortmalizedAddressTitle")" data-width="500" data-height="280" style="display: none;">
+    <br />
+    <table class="dnnGrid" style="width:100%">
+        <tr class="dnnGridHeader">
+            <th>Normalized</th>
+            <th>Original</th>
+        </tr>
+        <tr class="dnnGridRow">
+            <td class="hcNormalizedAddress"></td>
+            <td class="hcOriginalAddress"></td>
+        </tr>
+    </table>
+
+    <ul class="dnnActions">
+        <li>
+            <a id="hcSaveNormalizedAction" class="dnnPrimaryAction">@Localization.GetString("Normalize")</a>
+        </li>
+        <li>
+            <a id="hcSaveOriginalAction" class="dnnSecondaryAction">@Localization.GetString("SaveOriginal")</a>
+        </li>
+    </ul>
+
+</div>

@@ -1,0 +1,8 @@
+﻿@model Hotcakes.Modules.Core.Models.SearchPageViewModel
+<div class="hc-search clearfix" >
+    @using (Html.BeginHccRouteForm(HccRoute.Search, FormMethod.Get, new Dictionary<string, object> { { "data-skipxy", "true" } }))
+    {
+        <input type="text" class="hc-search-bar" name="search" value="@ViewBag.Search" />
+        <input type="image" class="hc-search-button" value="" />
+    }
+</div>

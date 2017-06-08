@@ -1,0 +1,46 @@
+﻿<%@ Master Language="C#" Inherits="Hotcakes.Modules.Core.Admin.AdminNav" CodeBehind="AdminNav.master.cs" AutoEventWireup="True" %>
+
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+
+<%@ Register Src="Header.ascx" TagName="Header" TagPrefix="hcc" %>
+<%@ Register Src="Footer.ascx" TagName="Footer" TagPrefix="hcc" %>
+<%@ Register Src="Controls/NavMenu.ascx" TagName="NavMenu" TagPrefix="hcc" %>
+<%@ Register Src="Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>My Hotcakes Commerce Store</title>
+</head>
+<body>
+    <form runat="server" id="Form">
+        <telerik:RadScriptManager runat="server"></telerik:RadScriptManager>
+        <asp:PlaceHolder ID="BodySCRIPTS" runat="server" />
+        <div id="wrapper" class="dnnClear">
+            <div id="header">
+                <hcc:Header runat="server" />
+            </div>
+            <div id="content" class="dnnClear">
+                <div class="hcNavContent" id="hcNavContent">
+                    <div class="hcNavContentBody">
+                        <asp:ContentPlaceHolder ID="NavContent" runat="server">
+                            <hcc:NavMenu ID="ucNavMenu" runat="server" />
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+                <div class="hcMainContent">
+                    <hcc:MessageBox runat="server" ID="ucMessageBox" AddValidationSummaries="false" />
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                </div>
+            </div>
+            <div id="footer-push"></div>
+        </div>
+        <div id="footer">
+            <hcc:Footer runat="server" />
+        </div>
+        <input id="__hccVariables" runat="server" name="__hccVariables" type="hidden" />
+    </form>
+    <img src="//hotcakes.org/Portals/0/images/spacer.gif" alt="" />
+</body>
+</html>
+

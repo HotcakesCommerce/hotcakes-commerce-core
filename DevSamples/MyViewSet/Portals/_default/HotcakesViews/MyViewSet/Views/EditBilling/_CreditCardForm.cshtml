@@ -1,0 +1,35 @@
+﻿@model Hotcakes.Modules.Core.Models.CreditCardViewModel
+
+<div class="hc-creditcard-form" data-bind="with: CreditCardForm">
+    <div class="dnnFormItem">
+        <label class="dnnLabel">&nbsp;</label>
+        <span class="hc-card-icons">
+            @foreach (var ct in Model.AcceptedCardTypes)
+            {
+                <span class="cc-@ct.ToString().ToLower()"></span>
+            }
+        </span>
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <label class="dnnLabel">@Localization.GetString("CardNumber")</label>
+        @Html.TextBoxFor(m => m.CardNumber, new { data_bind="value: CardNumber" })
+        @Html.ValidationMessageFor(m => m.CardNumber, "", new { @class = "dnnFormMessage hcFormError" })
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <label class="dnnLabel">@Localization.GetString("ExpDate")</label>
+        @Html.DropDownListFor(m => m.ExpirationMonth, Model.GetMonthesList(), new { style = "width:15%", data_bind="value: ExpirationMonth" })
+        @Html.DropDownListFor(m => m.ExpirationYear, Model.GetYearsList(), new { style = "width:20%", data_bind="value: ExpirationYear" })
+        @Html.ValidationMessageFor(m => m.ExpirationMonth, "", new { @class = "dnnFormMessage hcFormError" })
+        @Html.ValidationMessageFor(m => m.ExpirationYear, "", new { @class = "dnnFormMessage hcFormError" })
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <label class="dnnLabel">@Localization.GetString("SecurityCode")</label>
+        @Html.TextBoxFor(m => m.SecurityCode, new { style = "width:10%", data_bind="value: SecurityCode" })
+        @Html.ValidationMessageFor(m => m.SecurityCode, "", new { @class = "dnnFormMessage hcFormError" })
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <label class="dnnLabel">@Localization.GetString("NameOnCard")</label>
+        @Html.TextBoxFor(m => m.CardHolderName, new { data_bind="value: CardHolderName" })
+        @Html.ValidationMessageFor(m => m.CardHolderName, "", new { @class = "dnnFormMessage hcFormError" })
+    </div>
+</div>

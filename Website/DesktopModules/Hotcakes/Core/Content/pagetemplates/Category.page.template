@@ -1,0 +1,86 @@
+﻿<portal version="5.0">
+  <description>Category page template</description>
+  <tab>
+    <visible>true</visible>
+    <name>Category Viewer</name>
+		<skinsrc>[G]Skins/Gravity/2-Col.ascx</skinsrc>
+		<tabpermissions>
+      <permission>
+        <permissioncode>SYSTEM_TAB</permissioncode>
+        <permissionkey>VIEW</permissionkey>
+        <allowaccess>true</allowaccess>
+        <rolename>All Users</rolename>
+      </permission>
+      <permission>
+        <permissioncode>SYSTEM_TAB</permissioncode>
+        <permissionkey>VIEW</permissionkey>
+        <allowaccess>true</allowaccess>
+        <rolename>Administrators</rolename>
+      </permission>
+      <permission>
+        <permissioncode>SYSTEM_TAB</permissioncode>
+        <permissionkey>EDIT</permissionkey>
+        <allowaccess>true</allowaccess>
+        <rolename>Administrators</rolename>
+      </permission>
+    </tabpermissions>
+    <tabsettings />
+    <parent>HotcakesStore</parent>
+    <panes>
+      <pane>
+				<name>leftPane</name>
+				<modules>
+          <module>
+            <title>Category Viewer</title>
+            <modulesettings>
+              <modulesetting>
+                <settingname>Slug</settingname>
+                <settingvalue></settingvalue>
+              </modulesetting>
+              <modulesetting>
+                <settingname>ProductPageSize</settingname>
+                <settingvalue>9</settingvalue>
+              </modulesetting>
+              <modulesetting>
+                <settingname>DefaultPreContentColumnId</settingname>
+                <settingvalue>E5E5F6F4-5321-417E-8186-1D92F5265CA8</settingvalue>
+              </modulesetting>
+              <modulesetting>
+                <settingname>DefaultPostContentColumnId</settingname>
+                <settingvalue>CD3AC37F-A931-4D39-862F-5385B50329EE</settingvalue>
+              </modulesetting>
+            </modulesettings>
+            <definition>Hotcakes.CategoryViewer</definition>
+            <moduledefinition>Hotcakes Category Viewer</moduledefinition>
+						<inheritviewpermissions>true</inheritviewpermissions>
+					</module>
+        </modules>
+      </pane>
+			<pane>
+				<name>rightPane</name>
+				<modules>
+					<module>
+						<title>Category Menu</title>
+						<modulesettings>
+							<modulesetting>
+								<settingname>HomeLink</settingname>
+								<settingvalue>True</settingvalue>
+							</modulesetting>
+							<modulesetting>
+								<settingname>MaximumDepth</settingname>
+								<settingvalue>10</settingvalue>
+							</modulesetting>
+							<modulesetting>
+								<settingname>CategoryMenuMode</settingname>
+								<settingvalue>3</settingvalue>
+							</modulesetting>
+						</modulesettings>
+						<definition>Hotcakes.CategoryMenu</definition>
+						<moduledefinition>Hotcakes Category Menu</moduledefinition>
+						<inheritviewpermissions>true</inheritviewpermissions>
+					</module>
+				</modules>
+			</pane>
+		</panes>
+  </tab>
+</portal>

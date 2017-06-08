@@ -1,0 +1,3162 @@
+﻿SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_UserQuestions]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_UserQuestions](
+	[bvin] [varchar](36) NOT NULL,
+	[QuestionName] [nvarchar](50) NOT NULL,
+	[QuestionType] [int] NOT NULL,
+	[Values] [nvarchar](max) NOT NULL,
+	[Order] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_UserQuestions_Order]  DEFAULT ((0)),
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_UserQuestions_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_UserQuestions] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_UserAccounts]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_UserAccounts](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[email] [nvarchar](255) NOT NULL,
+	[password] [nvarchar](255) NOT NULL,
+	[DateCreated] [datetime] NOT NULL,
+	[statuscode] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_UserAccounts_statuscode]  DEFAULT ((1)),
+	[Salt] [nvarchar](50) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_UserAccounts_Salt]  DEFAULT (''),
+	[ResetKey] [nvarchar](50) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_UserAccounts_ResetKey]  DEFAULT (''),
+ CONSTRAINT [PK_{objectQualifier}hcc_UserAccounts] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_User]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_User](
+	[bvin] [varchar](36) NOT NULL,
+	[Email] [nvarchar](100) NOT NULL,
+	[FirstName] [nvarchar](50) NOT NULL,
+	[LastName] [nvarchar](100) NOT NULL,
+	[Password] [nvarchar](50) NOT NULL,
+	[Salt] [nvarchar](50) NOT NULL,
+	[TaxExempt] [int] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[LastLoginDate] [datetime] NOT NULL,
+	[Comment] [ntext] NOT NULL,
+	[AddressBook] [ntext] NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[Locked] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_User_Locked]  DEFAULT ((0)),
+	[LockedUntil] [datetime] NOT NULL,
+	[FailedLoginCount] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_User_FailedLoginCount]  DEFAULT ((0)),
+	[Phones] [nvarchar](max) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_User_BillingAddress]  DEFAULT (N''),
+	[PricingGroup] [varchar](36) NOT NULL,
+	[CustomQuestionAnswers] [nvarchar](max) NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_User_StoreId]  DEFAULT ((0)),
+	[ShippingAddress] [nvarchar](max) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_User_ShippingAddress]  DEFAULT (''),
+	[BillingAddress] [nvarchar](max) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_User_BillingAddress_1]  DEFAULT (''),
+ CONSTRAINT [PK_{objectQualifier}hcc_User] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+) 
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ToDoItems]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ToDoItems](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[AccountId] [bigint] NOT NULL,
+	[IsComplete] [bit] NOT NULL,
+	[SortOrder] [int] NOT NULL,
+	[Title] [nvarchar](255) NOT NULL,
+	[Details] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ToDoItems] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+) 
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ShippingMethod]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod](
+	[bvin] [varchar](36) NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[Adjustment] [decimal](18, 10) NOT NULL,
+	[AdjustmentType] [int] NOT NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[ShippingProviderId] [varchar](36) NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ShippingMethod_StoreId]  DEFAULT ((0)),
+	[ZoneId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ShippingMethod_ZoneId]  DEFAULT ((0)),
+	[Settings] [ntext] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ShippingMethod_Settings]  DEFAULT (''),
+ CONSTRAINT [PK_{objectQualifier}hcc_ShippingMethod] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+) 
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchQuery]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_SearchQuery](
+	[bvin] [varchar](36) NOT NULL,
+	[QueryPhrase] [nvarchar](max) NOT NULL,
+	[ShopperId] [varchar](36) NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_SearchQuery_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_SearchQuery] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+) 
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_WishListItems]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_WishListItems](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[CustomerId] [nvarchar](36) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_WishListItems_CustomerId]  DEFAULT ((0)),
+	[LastUpdated] [datetime] NOT NULL,
+	[ProductId] [nvarchar](36) NOT NULL,
+	[Quantity] [int] NOT NULL,
+	[SelectionData] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_WishListItems] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+) 
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_WishListItems]') AND name = N'IX_{objectQualifier}hcc_WishListItems_CustomerId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_WishListItems_CustomerId] ON {databaseOwner}[{objectQualifier}hcc_WishListItems] 
+(
+	[CustomerId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_WishListItems]') AND name = N'IX_{objectQualifier}hcc_WishListItems_StoreId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_WishListItems_StoreId] ON {databaseOwner}[{objectQualifier}hcc_WishListItems] 
+(
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Vendor]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_Vendor](
+	[bvin] [varchar](36) NOT NULL,
+	[DisplayName] [nvarchar](255) NOT NULL,
+	[EmailAddress] [nvarchar](255) NOT NULL,
+	[Address] [ntext] NOT NULL,
+	[DropShipEmailTemplateId] [varchar](36) NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Vendor_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_Vendor] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+) 
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Variants]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_Variants](
+	[bvin] [varchar](36) NOT NULL,
+	[ProductId] [varchar](36) NOT NULL,
+	[Sku] [nvarchar](255) NOT NULL,
+	[Price] [decimal](18, 10) NOT NULL,
+	[SelectionData] [nvarchar](max) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_Variant] PRIMARY KEY NONCLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+) 
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Variants]') AND name = N'IX_{objectQualifier}hcc_Variants_ProductIdClustered')
+CREATE CLUSTERED INDEX [IX_{objectQualifier}hcc_Variants_ProductIdClustered] ON {databaseOwner}[{objectQualifier}hcc_Variants] 
+(
+	[ProductId] ASC,
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Variants]') AND name = N'IX_{objectQualifier}hcc_Variants_BvinProductStore')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Variants_BvinProductStore] ON {databaseOwner}[{objectQualifier}hcc_Variants] 
+(
+	[bvin] ASC,
+	[ProductId] ASC,
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_USGeoData]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_USGeoData](
+	[Zip] [varchar](10) NOT NULL,
+	[Latitude] [decimal](18, 10) NOT NULL,
+	[Longitude] [decimal](18, 10) NOT NULL,
+	[City] [varchar](50) NOT NULL,
+	[State] [varchar](2) NOT NULL,
+	[County] [varchar](50) NOT NULL,
+	[ZipType] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_USGeoData] PRIMARY KEY CLUSTERED 
+(
+	[Zip] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+) 
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_HtmlTemplates]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_HtmlTemplates](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[LastUpdatedUtc] [datetime] NOT NULL,
+	[DisplayName] [nvarchar](255) NOT NULL,
+	[FromEmail] [nvarchar](255) NOT NULL,
+	[Subject] [nvarchar](1024) NOT NULL,
+	[Body] [nvarchar](max) NOT NULL,
+	[RepeatingSection] [nvarchar](max) NOT NULL,
+	[TemplateType] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_HtmlTemplates_TemplateType]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_HtmlTemplates] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+) 
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}.[{objectQualifier}hcc_HtmlTemplates]') AND name = N'IX_{objectQualifier}hcc_HtmlTemplates_StoreId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_HtmlTemplates_StoreId] ON {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] 
+(
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_GiftCard]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_GiftCard](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[CardNumber] [nvarchar](50) NOT NULL,
+	[Amount] [decimal](18, 10) NOT NULL,
+	[IssueDateUtc] [datetime] NOT NULL,
+	[ExpirationDateUtc] [datetime] NOT NULL,
+	[PurchaserEmail] [nvarchar](255) NOT NULL,
+	[RecipientEmail] [nvarchar](255) NOT NULL,
+	[GiftMessage] [nvarchar](max) NOT NULL,
+	[IsRedeemed] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_GiftCard_IsRedeemed]  DEFAULT ((0)),
+	[RedemptionDateUtc] [datetime] NOT NULL,
+	[RedemptionUserId] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_GiftCard] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+) 
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_MailingList]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_MailingList](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_MailingList_StoreId]  DEFAULT ((0)),
+	[Private] [bit] NOT NULL,
+	[Name] [nvarchar](255) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_MailingList_Name]  DEFAULT (''),
+	[LastUpdatedUtc] [datetime] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_MailingList_LastUpdatedUtc]  DEFAULT ('20130101'),
+ CONSTRAINT [PK_{objectQualifier}hcc_MailingList_1] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+) 
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Order]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_Order](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[bvin] [varchar](36) NOT NULL,
+	[AffiliateId] [varchar](36) NOT NULL,
+	[BillingAddress] [ntext] NOT NULL,
+	[CustomProperties] [ntext] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_CustomProperties]  DEFAULT (N''),
+	[FraudScore] [decimal](18, 2) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_FraudScore]  DEFAULT ((-1)),
+	[GrandTotal] [decimal](18, 10) NOT NULL,
+	[HandlingTotal] [decimal](18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_HandlingTotal]  DEFAULT ((0)),
+	[Instructions] [nvarchar](max) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_Instructions]  DEFAULT (N''),
+	[IsPlaced] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_IsPlaced]  DEFAULT ((0)),
+	[LastUpdated] [datetime] NOT NULL,
+	[OrderDiscounts] [decimal](18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_OrderDiscounts]  DEFAULT ((0)),
+	[OrderDiscountDetails] [nvarchar](max) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_OrderDiscountDetails]  DEFAULT (''),
+	[OrderNumber] [nvarchar](50) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_OrderNumber]  DEFAULT (N''),
+	[PaymentStatus] [int] NOT NULL,
+	[ShippingAddress] [ntext] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingAddress]  DEFAULT (N''),
+	[ShippingMethodId] [varchar](36) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingMethodId]  DEFAULT (''),
+	[ShippingMethodDisplayName] [nvarchar](255) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingMethodDisplayName]  DEFAULT (N''),
+	[ShippingProviderId] [varchar](36) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingProviderId]  DEFAULT (''),
+	[ShippingProviderServiceCode] [nvarchar](255) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingProviderServiceCode]  DEFAULT (N''),
+	[ShippingStatus] [int] NOT NULL,
+	[ShippingTotal] [decimal](18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingTotal]  DEFAULT ((0)),
+	[ShippingDiscounts] [decimal](18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingDiscounts]  DEFAULT ((0)),
+	[ShippingDiscountDetails] [nvarchar](max) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingDiscountDetails]  DEFAULT (''),
+	[SubTotal] [decimal](18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_SubTotal]  DEFAULT ((0)),
+	[TaxTotal] [decimal](18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_TaxTotal]  DEFAULT ((0)),
+	[TaxTotal2] [decimal](18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_TaxTotal2]  DEFAULT ((0)),
+	[TimeOfOrder] [datetime] NOT NULL,
+	[UserEmail] [nvarchar](100) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_UserEmail]  DEFAULT (N''),
+	[UserId] [varchar](36) NOT NULL,
+	[StatusCode] [varchar](36) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_StatusCode]  DEFAULT (''),
+	[StatusName] [nvarchar](255) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_StatusName]  DEFAULT (N''),
+	[ThirdPartyOrderId] [nvarchar](50) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_ThirdPartyOrderId]  DEFAULT (''),
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_Order] PRIMARY KEY NONCLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON),
+ CONSTRAINT [IX_{objectQualifier}hcc_Order] UNIQUE CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+) 
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Order]') AND name = N'IX_{objectQualifier}hcc_Order_OrderNumber')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Order_OrderNumber] ON {databaseOwner}[{objectQualifier}hcc_Order] 
+(
+	[OrderNumber] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Order]') AND name = N'IX_{objectQualifier}hcc_Order_StoreId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Order_StoreId] ON {databaseOwner}[{objectQualifier}hcc_Order] 
+(
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Order]') AND name = N'IX_{objectQualifier}hcc_Order_TimeOfOrder')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Order_TimeOfOrder] ON {databaseOwner}[{objectQualifier}hcc_Order] 
+(
+	[TimeOfOrder] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Order]') AND name = N'IX_{objectQualifier}hcc_Order_UserId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Order_UserId] ON {databaseOwner}[{objectQualifier}hcc_Order] 
+(
+	[UserId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_News]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_News](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[TimeStampUtc] [datetime] NOT NULL,
+	[Message] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_News] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+) 
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFile]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductFile](
+	[bvin] [varchar](36) NOT NULL,
+	[FileName] [nvarchar](100) NOT NULL,
+	[ShortDescription] [nvarchar](100) NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductFile_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductFile] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+) 
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFile]') AND name = N'IX_{objectQualifier}hcc_ProductFile')
+CREATE UNIQUE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductFile] ON {databaseOwner}[{objectQualifier}hcc_ProductFile] 
+(
+	[FileName] ASC,
+	[ShortDescription] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Product]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_Product](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[bvin] [varchar](36) NOT NULL,
+	[SKU] [nvarchar](50) NOT NULL,
+	[ProductName] [nvarchar](255) NOT NULL,
+	[ProductTypeId] [varchar](36) NOT NULL,
+	[ListPrice] [numeric](18, 10) NOT NULL,
+	[SitePrice] [numeric](18, 10) NOT NULL,
+	[SiteCost] [numeric](18, 10) NOT NULL,
+	[MetaKeywords] [nvarchar](255) NOT NULL,
+	[MetaDescription] [nvarchar](255) NOT NULL,
+	[MetaTitle] [nvarchar](512) NOT NULL,
+	[TaxExempt] [int] NOT NULL,
+	[TaxClass] [varchar](36) NOT NULL,
+	[NonShipping] [int] NOT NULL,
+	[ShipSeparately] [int] NOT NULL,
+	[ShippingMode] [int] NOT NULL,
+	[ShippingWeight] [numeric](18, 10) NOT NULL,
+	[ShippingLength] [numeric](18, 10) NOT NULL,
+	[ShippingWidth] [numeric](18, 10) NOT NULL,
+	[ShippingHeight] [numeric](18, 10) NOT NULL,
+	[Status] [int] NOT NULL,
+	[ImageFileSmall] [nvarchar](512) NOT NULL,
+	[ImageFileMedium] [nvarchar](512) NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[MinimumQty] [int] NOT NULL,
+	[ShortDescription] [nvarchar](512) NOT NULL,
+	[LongDescription] [nvarchar](max) NOT NULL,
+	[ManufacturerID] [varchar](36) NOT NULL,
+	[VendorID] [varchar](36) NOT NULL,
+	[GiftWrapAllowed] [int] NOT NULL,
+	[ExtraShipFee] [numeric](18, 10) NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[Keywords] [nvarchar](max) NOT NULL,
+	[TemplateName] [nvarchar](512) NOT NULL,
+	[PreContentColumnId] [varchar](36) NOT NULL,
+	[PostContentColumnId] [varchar](36) NOT NULL,
+	[RewriteUrl] [nvarchar](max) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_RewriteUrl]  DEFAULT (N''),
+	[SitePriceOverrideText] [nvarchar](255) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_SitePriceOverrideText]  DEFAULT (N''),
+	[PreTransformLongDescription] [nvarchar](max) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_PreTransformLongDescription]  DEFAULT (N''),
+	[SmallImageAlternateText] [nvarchar](255) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_SmallImageAlternateText]  DEFAULT (''),
+	[MediumImageAlternateText] [nvarchar](255) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_MediumImageAlternateText]  DEFAULT (''),
+	[CustomProperties] [nvarchar](max) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_CustomProperties]  DEFAULT (''),
+	[GiftWrapPrice] [numeric](18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_GiftWrapPrice]  DEFAULT ((0.00)),
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_StoreId]  DEFAULT ((0)),
+	[Featured] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_Featured]  DEFAULT ((0)),
+	[AllowReviews] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_AllowReviews]  DEFAULT ((1)),
+	[DescriptionTabs] [ntext] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_DescriptionTabs]  DEFAULT (''),
+	[OutOfStockMode] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_OutOfStockMode]  DEFAULT ((0)),
+	[IsAvailableForSale] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_IsInStock]  DEFAULT ((1)),
+	[HiddenSearchKeywords] [nvarchar](max) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_HiddenSearchKeywords]  DEFAULT (''),
+ CONSTRAINT [PK_{objectQualifier}hcc_Product] PRIMARY KEY NONCLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON),
+ CONSTRAINT [IX_{objectQualifier}hcc_Product_id] UNIQUE CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Product]') AND name = N'IX_{objectQualifier}hcc_Product')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Product] ON {databaseOwner}[{objectQualifier}hcc_Product] 
+(
+	[SKU] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Product]') AND name = N'IX_{objectQualifier}hcc_Product_ManufacturerId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Product_ManufacturerId] ON {databaseOwner}[{objectQualifier}hcc_Product] 
+(
+	[ManufacturerID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Product]') AND name = N'IX_{objectQualifier}hcc_Product_ProductName')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Product_ProductName] ON {databaseOwner}[{objectQualifier}hcc_Product] 
+(
+	[ProductName] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Product]') AND name = N'IX_{objectQualifier}hcc_Product_Status')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Product_Status] ON {databaseOwner}[{objectQualifier}hcc_Product] 
+(
+	[Status] ASC,
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Product]') AND name = N'IX_{objectQualifier}hcc_Product_VendorId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Product_VendorId] ON {databaseOwner}[{objectQualifier}hcc_Product] 
+(
+	[VendorID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_PriceGroup]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_PriceGroup](
+	[bvin] [varchar](36) NOT NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[PricingType] [int] NOT NULL,
+	[AdjustmentAmount] [numeric](18, 10) NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_PriceGroup_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_PriceGroup] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AuthenticationToken]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_AuthenticationToken](
+	[bvin] [varchar](36) NOT NULL,
+	[UserBvin] [varchar](36) NOT NULL,
+	[ExpirationDate] [datetime] NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_AuthenticationToken_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_AuthenticationToken] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Audit]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_Audit](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[TimeStampUtc] [datetime] NOT NULL,
+	[SourceModule] [int] NOT NULL,
+	[ShortName] [nvarchar](255) NOT NULL,
+	[Description] [nvarchar](max) NOT NULL,
+	[UserId] [nvarchar](50) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Audit_UserId]  DEFAULT (''),
+	[UserIdText] [nvarchar](255) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Audit_UserIdTest]  DEFAULT (''),
+	[Severity] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Audit_Severity]  DEFAULT ((0)),
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Audit_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_Audit] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ApiKeys]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ApiKeys](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[ApiKey] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ApiKeys] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ApiKeys]') AND name = N'IX_{objectQualifier}hcc_ApiKeys_StoreId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ApiKeys_StoreId] ON {databaseOwner}[{objectQualifier}hcc_ApiKeys] 
+(
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AnalyticsEvents]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents](
+	[AnalyticsEventId] [bigint] IDENTITY(1,1) NOT NULL,
+	[UserId] [nvarchar](50) NULL,
+	[SessionGuid] [uniqueidentifier] NULL,
+	[StoreId] [bigint] NOT NULL,
+	[Action] [nvarchar](50) NOT NULL,
+	[ObjectId] [nvarchar](50) NULL,
+	[AdditionalData] [nvarchar](max) NULL,
+	[DateTime] [datetime] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_AnalyticsEvents] PRIMARY KEY CLUSTERED 
+(
+	[AnalyticsEventId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AffiliateReferral]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_AffiliateReferral](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[AffiliateId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_AffiliateReferral_AffiliateId]  DEFAULT ((0)),
+	[referrerurl] [nvarchar](1000) NOT NULL,
+	[TimeOfReferralUtc] [datetime] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_AffiliateReferral_TimeOfReferralUtc]  DEFAULT ('20130101'),
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_AffiliateReferral_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_AffiliateReferral] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Affiliate]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_Affiliate](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[ReferralID] [nvarchar](50) NOT NULL,
+	[Enabled] [bit] NOT NULL,
+	[DisplayName] [nvarchar](255) NOT NULL,
+	[CommissionAmount] [numeric](18, 10) NOT NULL,
+	[CommissionType] [int] NOT NULL,
+	[ReferralDays] [int] NOT NULL,
+	[TaxID] [nvarchar](100) NOT NULL,
+	[DriversLicenseNumber] [nvarchar](100) NOT NULL,
+	[WebSiteURL] [nvarchar](1000) NOT NULL,
+	[StyleSheet] [nvarchar](1000) NOT NULL,
+	[Notes] [nvarchar](max) NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[Address] [nvarchar](max) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Affiliate_AddressId]  DEFAULT (N''),
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Affiliate_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_Affiliate] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Affiliate]') AND name = N'IX_{objectQualifier}hcc_Affiliate')
+CREATE UNIQUE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Affiliate] ON {databaseOwner}[{objectQualifier}hcc_Affiliate] 
+(
+	[ReferralID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Address]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_Address](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[bvin] [varchar](36) NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[NickName] [nvarchar](255) NOT NULL,
+	[FirstName] [nvarchar](255) NOT NULL,
+	[MiddleInitial] [nvarchar](1) NOT NULL,
+	[LastName] [nvarchar](255) NOT NULL,
+	[Company] [nvarchar](255) NOT NULL,
+	[Line1] [nvarchar](255) NOT NULL,
+	[Line2] [nvarchar](255) NOT NULL,
+	[Line3] [nvarchar](255) NOT NULL,
+	[City] [nvarchar](255) NOT NULL,
+	[RegionBvin] [varchar](36) NOT NULL,
+	[RegionName] [nvarchar](255) NOT NULL,
+	[PostalCode] [nvarchar](50) NOT NULL,
+	[CountryBvin] [varchar](36) NOT NULL,
+	[CountryName] [nvarchar](255) NOT NULL,
+	[CountyBvin] [varchar](36) NOT NULL,
+	[CountyName] [nvarchar](255) NOT NULL,
+	[Phone] [nvarchar](50) NOT NULL,
+	[Fax] [nvarchar](50) NOT NULL,
+	[WebSiteUrl] [nvarchar](255) NOT NULL,
+	[UserBvin] [varchar](36) NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Address_StoreId]  DEFAULT ((0)),
+	[AddressType] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Address_AddressType]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_Address] PRIMARY KEY NONCLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON),
+ CONSTRAINT [IX_{objectQualifier}hcc_Address] UNIQUE CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Address]') AND name = N'IX_{objectQualifier}hcc_Address_StoreId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Address_StoreId] ON {databaseOwner}[{objectQualifier}hcc_Address] 
+(
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Address]') AND name = N'IX_{objectQualifier}hcc_Address_Type')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Address_Type] ON {databaseOwner}[{objectQualifier}hcc_Address] 
+(
+	[AddressType] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CategoryXProperty]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_CategoryXProperty](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[CategoryId] [nvarchar](36) NOT NULL,
+	[PropertyId] [bigint] NOT NULL,
+	[ParentPropertyId] [bigint] NOT NULL,
+	[SortOrder] [int] NOT NULL,
+	[FilterName] [nvarchar](255) NOT NULL,
+	[DisplayMode] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_CategoryXProperty_AllowMultiple]  DEFAULT ((0)),
+	[StoreId] [bigint] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_CategoryXProperty] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Category]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_Category](
+	[bvin] [varchar](36) NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Category_StoreId]  DEFAULT ((0)),
+	[Name] [nvarchar](255) NOT NULL,
+	[Description] [ntext] NOT NULL,
+	[ParentID] [nvarchar](50) NOT NULL,
+	[SortOrder] [int] NOT NULL,
+	[MetaTitle] [nvarchar](512) NOT NULL,
+	[MetaKeywords] [nvarchar](255) NOT NULL,
+	[MetaDescription] [nvarchar](255) NOT NULL,
+	[ImageURL] [nvarchar](512) NOT NULL,
+	[BannerImageURL] [nvarchar](512) NOT NULL,
+	[SourceType] [int] NOT NULL,
+	[DisplaySortOrder] [int] NOT NULL,
+	[LatestProductCount] [int] NOT NULL,
+	[CustomPageURL] [nvarchar](512) NOT NULL,
+	[CustomPageNewWindow] [int] NOT NULL,
+	[ShowInTopMenu] [int] NOT NULL,
+	[Hidden] [int] NOT NULL,
+	[TemplateName] [nvarchar](512) NOT NULL,
+	[PostContentColumnId] [nvarchar](50) NOT NULL,
+	[PreContentColumnId] [nvarchar](50) NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[RewriteUrl] [nvarchar](max) NOT NULL,
+	[ShowTitle] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Category_ShowTitle]  DEFAULT ((1)),
+	[Criteria] [nvarchar](max) NOT NULL,
+	[CustomPageId] [varchar](36) NOT NULL,
+	[PreTransformDescription] [ntext] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Category_PreTransformDescription]  DEFAULT (N''),
+	[Keywords] [nvarchar](max) NOT NULL,
+	[CustomerChangeableSortOrder] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Category_CustomerChangeableSortOrder]  DEFAULT ((0)),
+	[CustomPageLayout] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Category_CustomPageLayout]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_Category] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Category]') AND name = N'IX_{objectQualifier}hcc_Category')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Category] ON {databaseOwner}[{objectQualifier}hcc_Category] 
+(
+	[ParentID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_BillingAccounts]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_BillingAccounts](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[Email] [nvarchar](255) NOT NULL,
+	[CreditCard] [ntext] NOT NULL,
+	[BillingZipCode] [nvarchar](50) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_BillingAccounts_BillingZipCode]  DEFAULT (''),
+ CONSTRAINT [PK_{objectQualifier}hcc_BillingAccount] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_BillingAccounts]') AND name = N'IX_{objectQualifier}hcc_BillingAccounts')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_BillingAccounts] ON {databaseOwner}[{objectQualifier}hcc_BillingAccounts] 
+(
+	[Email] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ConversationMessages]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ConversationMessages](
+	[Id] [bigint] NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[ConversationId] [bigint] NOT NULL,
+	[AuthorId] [bigint] NOT NULL,
+	[Message] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ConversationMessages] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ConversationGroups]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ConversationGroups](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[Title] [nvarchar](255) NOT NULL,
+	[Slug] [nvarchar](255) NOT NULL,
+	[SortOrder] [int] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ConversationGroups] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ConversationAuthors]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ConversationAuthors](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[DisplayName] [nvarchar](50) NOT NULL,
+	[Bio] [nvarchar](1024) NOT NULL,
+	[AuthenticationType] [int] NOT NULL,
+	[AuthenticationKey] [nvarchar](max) NOT NULL,
+	[AccessLevel] [int] NOT NULL,
+	[Avatar] [varbinary](max) NULL,
+	[Verified] [bit] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ConversationAuthors] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ContentColumn]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ContentColumn](
+	[bvin] [varchar](36) NOT NULL,
+	[DisplayName] [nvarchar](512) NOT NULL,
+	[SystemColumn] [int] NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ContentColumn_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_ContentColumn] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Fraud]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_Fraud](
+	[bvin] [varchar](36) NOT NULL,
+	[RuleType] [int] NOT NULL,
+	[RuleValue] [nvarchar](255) NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Fraud_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_Fraud] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_EventLog]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_EventLog](
+	[bvin] [varchar](36) NOT NULL,
+	[EventTime] [datetime] NOT NULL,
+	[Source] [nvarchar](250) NOT NULL,
+	[Message] [nvarchar](max) NOT NULL,
+	[Severity] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_EventLog_Severity]  DEFAULT ((0)),
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_EventLog_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_EventLog] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_EventLog]') AND name = N'IX_{objectQualifier}hcc_EventLog')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_EventLog] ON {databaseOwner}[{objectQualifier}hcc_EventLog] 
+(
+	[StoreId] ASC,
+	[Severity] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CustomUrl]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_CustomUrl](
+	[bvin] [varchar](36) NOT NULL,
+	[RequestedUrl] [nvarchar](max) NOT NULL,
+	[RedirectToUrl] [nvarchar](max) NOT NULL,
+	[IsPermanentRedirect] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_CustomUrl_SystemUrl]  DEFAULT ((1)),
+	[SystemDataType] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_CustomUrl_SystemDataType]  DEFAULT ((0)),
+	[SystemData] [nvarchar](50) NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_CustomUrl_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_CustomUrl] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CustomUrl]') AND name = N'IX_{objectQualifier}hcc_CustomUrl')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_CustomUrl] ON {databaseOwner}[{objectQualifier}hcc_CustomUrl] 
+(
+	[SystemData] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Manufacturer]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_Manufacturer](
+	[bvin] [varchar](36) NOT NULL,
+	[DisplayName] [nvarchar](255) NOT NULL,
+	[EmailAddress] [nvarchar](255) NOT NULL,
+	[Address] [ntext] NOT NULL,
+	[DropShipEmailTemplateId] [varchar](36) NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Manufacturer_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_Manufacturer] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderPackage]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_OrderPackage](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[Description] [nvarchar](max) NOT NULL,
+	[Width] [decimal](18, 4) NOT NULL,
+	[Height] [decimal](18, 4) NOT NULL,
+	[Length] [decimal](18, 4) NOT NULL,
+	[SizeUnits] [int] NOT NULL,
+	[Weight] [decimal](18, 4) NOT NULL,
+	[WeightUnits] [int] NOT NULL,
+	[OrderId] [varchar](36) NOT NULL,
+	[ShippingProviderId] [varchar](36) NOT NULL,
+	[ShippingProviderServiceCode] [nvarchar](255) NOT NULL,
+	[HasShipped] [int] NOT NULL,
+	[TrackingNumber] [nvarchar](255) NOT NULL,
+	[ShipDateUtc] [datetime] NOT NULL,
+	[EstimatedShippingCost] [decimal](18, 10) NOT NULL,
+	[Items] [nvarchar](max) NOT NULL,
+	[LastUpdatedUtc] [datetime] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_OrderPackage_LastUpdatedUtc]  DEFAULT ('20130101'),
+	[CustomProperties] [ntext] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_OrderPackage_CustomProperties]  DEFAULT (N'n'''),
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_OrderPackage_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_OrderPackage] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderPackage]') AND name = N'IX_{objectQualifier}hcc_OrderPackage_OrderId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_OrderPackage_OrderId] ON {databaseOwner}[{objectQualifier}hcc_OrderPackage] 
+(
+	[OrderId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductImage]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductImage](
+	[bvin] [varchar](36) NOT NULL,
+	[ProductID] [varchar](36) NOT NULL,
+	[FileName] [nvarchar](max) NOT NULL,
+	[Caption] [nvarchar](max) NOT NULL,
+	[AlternateText] [nvarchar](max) NOT NULL,
+	[SortOrder] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductImage_SortOrder]  DEFAULT ((-1)),
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductImage_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductImage] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductImage]') AND name = N'IX_{objectQualifier}hcc_ProductImage')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductImage] ON {databaseOwner}[{objectQualifier}hcc_ProductImage] 
+(
+	[ProductID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFilter]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductFilter](
+	[bvin] [varchar](36) NOT NULL,
+	[FilterName] [nvarchar](300) NOT NULL,
+	[Criteria] [nvarchar](max) NOT NULL,
+	[Page] [nvarchar](1000) NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductFilter_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductFilter] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptions]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptions](
+	[bvin] [varchar](50) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[OptionType] [int] NOT NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[NameIsHidden] [bit] NOT NULL,
+	[IsVariant] [bit] NOT NULL,
+	[IsShared] [bit] NOT NULL,
+	[Settings] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductOptions] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptions]') AND name = N'IX_{objectQualifier}hcc_ProductOptions_StoreID')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductOptions_StoreID] ON {databaseOwner}[{objectQualifier}hcc_ProductOptions] 
+(
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductType]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductType](
+	[bvin] [varchar](36) NOT NULL,
+	[ProductTypeName] [nvarchar](512) NOT NULL,
+	[IsPermanent] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductType_IsPermanent]  DEFAULT ((0)),
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductType_StoreId]  DEFAULT ((0)),
+	[TemplateName] [nvarchar](500) NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductType] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductReview]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductReview](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[lastUpdated] [datetime] NOT NULL,
+	[bvin] [varchar](36) NOT NULL,
+	[Approved] [int] NOT NULL,
+	[Description] [nvarchar](max) NOT NULL,
+	[Karma] [int] NOT NULL,
+	[ReviewDate] [datetime] NOT NULL,
+	[Rating] [int] NOT NULL,
+	[UserID] [varchar](36) NOT NULL,
+	[ProductBvin] [varchar](36) NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductReview_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductReview] PRIMARY KEY NONCLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductReview]') AND name = N'IX_{objectQualifier}hcc_ProductReview_ProductBvin')
+CREATE CLUSTERED INDEX [IX_{objectQualifier}hcc_ProductReview_ProductBvin] ON {databaseOwner}[{objectQualifier}hcc_ProductReview] 
+(
+	[ProductBvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductReview]') AND name = N'IX_{objectQualifier}hcc_ProductReview')
+CREATE UNIQUE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductReview] ON {databaseOwner}[{objectQualifier}hcc_ProductReview] 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductRelationships]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductRelationships](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[ProductId] [nvarchar](36) NOT NULL,
+	[RelatedProductId] [nvarchar](36) NOT NULL,
+	[IsSubstitute] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductRelationships_IsSubtitute]  DEFAULT ((0)),
+	[SortOrder] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductRelationships_SortOrder]  DEFAULT ((0)),
+	[MarketingDescription] [nvarchar](max) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductRelationships] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductRelationships]') AND name = N'IX_{objectQualifier}hcc_ProductRelationships_ProductId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductRelationships_ProductId] ON {databaseOwner}[{objectQualifier}hcc_ProductRelationships] 
+(
+	[ProductId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductRelationships]') AND name = N'IX_{objectQualifier}hcc_ProductRelationships_RelatedProductId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductRelationships_RelatedProductId] ON {databaseOwner}[{objectQualifier}hcc_ProductRelationships] 
+(
+	[RelatedProductId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductProperty]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductProperty](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[PropertyName] [nvarchar](512) NOT NULL,
+	[DisplayName] [nvarchar](512) NOT NULL,
+	[DisplayOnSite] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductProperty_DisplayOnSite]  DEFAULT ((1)),
+	[DisplayToDropShipper] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductProperty_IsRequired]  DEFAULT ((0)),
+	[TypeCode] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductProperty_TypeCode]  DEFAULT ((0)),
+	[DefaultValue] [ntext] NOT NULL,
+	[CultureCode] [varchar](10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductProperty_CultureCode]  DEFAULT ('en-US'),
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductProperty_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductProperty] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts](
+	[bvin] [varchar](36) NOT NULL,
+	[ProductID] [varchar](36) NOT NULL,
+	[Qty] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductVolumeDiscounts_Qty]  DEFAULT ((1)),
+	[DiscountType] [int] NOT NULL,
+	[Amount] [numeric](18, 10) NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductVolumeDiscounts_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductVolumeDiscounts] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts]') AND name = N'IX_{objectQualifier}hcc_ProductVolumeDiscounts')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductVolumeDiscounts] ON {databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts] 
+(
+	[ProductID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMA]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_RMA](
+	[bvin] [varchar](36) NOT NULL,
+	[OrderBvin] [varchar](36) NOT NULL,
+	[Name] [nvarchar](150) NOT NULL,
+	[Number] [int] IDENTITY(1,1) NOT NULL,
+	[EmailAddress] [nvarchar](150) NOT NULL,
+	[PhoneNumber] [nvarchar](30) NOT NULL,
+	[Comments] [nvarchar](max) NOT NULL,
+	[Status] [int] NOT NULL,
+	[DateOfReturn] [datetime] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_RMA_DateOfReturn]  DEFAULT ('01/01/2000'),
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_RMA_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_RMA] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMA]') AND name = N'IX_{objectQualifier}hcc_RMA_OrderBvin')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_RMA_OrderBvin] ON {databaseOwner}[{objectQualifier}hcc_RMA] 
+(
+	[OrderBvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RewardsPoints]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_RewardsPoints](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[UserId] [nvarchar](50) NOT NULL,
+	[Points] [int] NOT NULL,
+	[PointsHeld] [int] NOT NULL,
+	[TransactionTime] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_RewardsPoints] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RewardsPoints]') AND name = N'IX_{objectQualifier}hcc_RewardsPoints')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_RewardsPoints] ON {databaseOwner}[{objectQualifier}hcc_RewardsPoints] 
+(
+	[UserId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RewardsPoints]') AND name = N'IX_{objectQualifier}hcc_RewardsPoints_1')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_RewardsPoints_1] ON {databaseOwner}[{objectQualifier}hcc_RewardsPoints] 
+(
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_QueuedTasks]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_QueuedTasks](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[FriendlyName] [nvarchar](255) NOT NULL,
+	[TaskProcessorName] [nvarchar](255) NOT NULL,
+	[TaskProcessorId] [uniqueidentifier] NOT NULL,
+	[Payload] [nvarchar](max) NOT NULL,
+	[Status] [int] NOT NULL,
+	[StatusNotes] [nvarchar](max) NOT NULL,
+	[StartAtUtc] [datetime] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_QueuedTasks] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_QueuedTasks]') AND name = N'IX_{objectQualifier}hcc_QueuedTasks_Status')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_QueuedTasks_Status] ON {databaseOwner}[{objectQualifier}hcc_QueuedTasks] 
+(
+	[Status] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_QueuedTasks]') AND name = N'IX_{objectQualifier}hcc_QueuedTasks_StoreId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_QueuedTasks_StoreId] ON {databaseOwner}[{objectQualifier}hcc_QueuedTasks] 
+(
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Promotions]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_Promotions](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[Mode] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Promotions_Mode]  DEFAULT ((0)),
+	[LastUpdatedUtc] [datetime] NOT NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[CustomerDescription] [nvarchar](255) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Promotions_CustomerDescription]  DEFAULT (''),
+	[StartDateUtc] [datetime] NOT NULL,
+	[EndDateUtc] [datetime] NOT NULL,
+	[IsEnabled] [bit] NOT NULL,
+	[QualificationsXml] [nvarchar](max) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Promotions_QualificationsXml]  DEFAULT (''),
+	[ActionsXml] [nvarchar](max) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Promotions_ActionsXml]  DEFAULT (''),
+	[DoNotCombine] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Promotions_DoNotCombine]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_Promotions] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Promotions]') AND name = N'IX_{objectQualifier}hcc_Promotions_IsEnabled')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Promotions_IsEnabled] ON {databaseOwner}[{objectQualifier}hcc_Promotions] 
+(
+	[IsEnabled] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Promotions]') AND name = N'IX_{objectQualifier}hcc_Promotions_Mode')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Promotions_Mode] ON {databaseOwner}[{objectQualifier}hcc_Promotions] 
+(
+	[Mode] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Promotions]') AND name = N'IX_{objectQualifier}hcc_Promotions_StoreId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Promotions_StoreId] ON {databaseOwner}[{objectQualifier}hcc_Promotions] 
+(
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXOption]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductXOption](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[ProductBvin] [nvarchar](36) NOT NULL,
+	[OptionBvin] [nvarchar](36) NOT NULL,
+	[SortOrder] [int] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductXOption] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXOption]') AND name = N'IX_{objectQualifier}hcc_ProductXOption_OptionBvin')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductXOption_OptionBvin] ON {databaseOwner}[{objectQualifier}hcc_ProductXOption] 
+(
+	[OptionBvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXOption]') AND name = N'IX_{objectQualifier}hcc_ProductXOption_ProductBvin')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductXOption_ProductBvin] ON {databaseOwner}[{objectQualifier}hcc_ProductXOption] 
+(
+	[ProductBvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchObjects]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjects](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[ObjectType] [int] NOT NULL,
+	[ObjectId] [nvarchar](255) NOT NULL,
+	[Title] [nvarchar](512) NOT NULL,
+	[SiteId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_SearchObjects_SiteId]  DEFAULT ((0)),
+	[LastIndexUtc] [datetime] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_SearchObjects_LastIndexUtc]  DEFAULT (((1)/(1))/(1900)),
+ CONSTRAINT [PK_{objectQualifier}hcc_SearchObject] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchLexicon]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_SearchLexicon](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[Word] [nvarchar](255) NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_SearchLexicon] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchLexicon]') AND name = N'IX_{objectQualifier}hcc_SearchLexicon_Word')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_SearchLexicon_Word] ON {databaseOwner}[{objectQualifier}hcc_SearchLexicon] 
+(
+	[Word] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Stores]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_Stores](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreName] [nvarchar](255) NOT NULL,
+	[Status] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Stores_Status]  DEFAULT ((1)),
+	[DateCreated] [datetime] NOT NULL,
+	[SubscriptionId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Stores_SubscriptionId]  DEFAULT ((0)),
+	[CustomUrl] [nvarchar](255) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Stores_CustomUrl]  DEFAULT (''),
+	[DateCancelled] [datetime] NULL,
+	[StripeCustomerId] [nvarchar](255) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Stores_StripeCustomerId]  DEFAULT (''),
+ CONSTRAINT [PK_{objectQualifier}hcc_Stores] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreDomains]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_StoreDomains](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[DomainName] [nvarchar](255) NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_StoreDomains] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreDomains]') AND name = N'IX_{objectQualifier}hcc_StoreDomains_DomainName')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_StoreDomains_DomainName] ON {databaseOwner}[{objectQualifier}hcc_StoreDomains] 
+(
+	[DomainName] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreDomains]') AND name = N'IX_{objectQualifier}hcc_StoreDomains_StoreId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_StoreDomains_StoreId] ON {databaseOwner}[{objectQualifier}hcc_StoreDomains] 
+(
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ShippingZones]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ShippingZones](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[Areas] [ntext] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ShippingZones_Areas]  DEFAULT (''),
+ CONSTRAINT [PK_{objectQualifier}hcc_ShippingZones] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMAItem]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem](
+	[bvin] [varchar](36) NOT NULL,
+	[RMABvin] [varchar](36) NOT NULL,
+	[LineItemBvin] [varchar](36) NOT NULL,
+	[ItemName] [nvarchar](512) NOT NULL,
+	[ItemDescription] [nvarchar](max) NOT NULL,
+	[Note] [nvarchar](max) NOT NULL,
+	[Reason] [nvarchar](max) NOT NULL,
+	[Replace] [bit] NOT NULL,
+	[Quantity] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_Quantity]  DEFAULT ((0)),
+	[QuantityReceived] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_QuantityReceived]  DEFAULT ((0)),
+	[QuantityReturnedToInventory] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_QuantityReturnedToInventory]  DEFAULT ((0)),
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_StoreId]  DEFAULT ((0)),
+	[RefundAmount] [decimal](18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_RefundAmount]  DEFAULT ((0)),
+	[RefundShippingAmount] [decimal](18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_RefundShippingAmount]  DEFAULT ((0)),
+	[RefundTaxAmount] [decimal](18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_RefundTaxAmount]  DEFAULT ((0)),
+	[RefundGiftWrapAmount] [decimal](18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_RefundGiftWrapAmount]  DEFAULT ((0)),
+	[ProductClass] [nvarchar](50) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_RMAItem_ProductClass]  DEFAULT (''),
+ CONSTRAINT [PK_{objectQualifier}hcc_RMAItem] PRIMARY KEY NONCLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMAItem]') AND name = N'IX_{objectQualifier}hcc_RMAItem')
+CREATE UNIQUE CLUSTERED INDEX [IX_{objectQualifier}hcc_RMAItem] ON {databaseOwner}[{objectQualifier}hcc_RMAItem] 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMAItem]') AND name = N'IX_{objectQualifier}hcc_RMAItem_1')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_RMAItem_1] ON {databaseOwner}[{objectQualifier}hcc_RMAItem] 
+(
+	[RMABvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMAItem]') AND name = N'IX_{objectQualifier}hcc_RMAItem_LineItemBvin')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_RMAItem_LineItemBvin] ON {databaseOwner}[{objectQualifier}hcc_RMAItem] 
+(
+	[LineItemBvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXCategory]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[ProductId] [varchar](36) NOT NULL,
+	[CategoryId] [varchar](36) NOT NULL,
+	[SortOrder] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductXCategory_SortOrder]  DEFAULT ((0)),
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductXCategory_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductXCategory] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXCategory]') AND name = N'IX_{objectQualifier}hcc_ProductXCategory_1')
+CREATE UNIQUE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductXCategory_1] ON {databaseOwner}[{objectQualifier}hcc_ProductXCategory] 
+(
+	[ProductId] ASC,
+	[CategoryId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXCategory]') AND name = N'IX_{objectQualifier}hcc_ProductXCategory_2')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductXCategory_2] ON {databaseOwner}[{objectQualifier}hcc_ProductXCategory] 
+(
+	[CategoryId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty](
+	[ProductTypeBvin] [varchar](36) NOT NULL,
+	[PropertyId] [bigint] NOT NULL,
+	[SortOrder] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductTypeProperties_SortOrder]  DEFAULT ((1)),
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductTypeXProductProperty_StoreId]  DEFAULT ((0)),
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductTypeXProductProperty] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty]') AND name = N'IX_{objectQualifier}hcc_ProductTypeXProductProperty_ProductTypeBvin')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductTypeXProductProperty_ProductTypeBvin] ON {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty] 
+(
+	[ProductTypeBvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty]') AND name = N'IX_{objectQualifier}hcc_ProductTypeXProductProperty_PropertyId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductTypeXProductProperty_PropertyId] ON {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty] 
+(
+	[PropertyId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty]') AND name = N'IX_{objectQualifier}hcc_ProductTypeXProductProperty_StoreId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductTypeXProductProperty_StoreId] ON {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty] 
+(
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems](
+	[bvin] [varchar](50) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[OptionBvin] [varchar](50) NOT NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[PriceAdjustment] [decimal](18, 10) NOT NULL,
+	[WeightAdjustment] [decimal](18, 10) NOT NULL,
+	[IsLabel] [bit] NOT NULL,
+	[SortOrder] [int] NOT NULL,
+	[IsDefault] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductOptionsItems_IsDefault]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductOptionsItems] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]') AND name = N'IX_{objectQualifier}hcc_ProductOptionsItems')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductOptionsItems] ON {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems] 
+(
+	[OptionBvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]') AND name = N'IX_{objectQualifier}hcc_ProductOptionsItems_1')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductOptionsItems_1] ON {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems] 
+(
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyValue]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue](
+	[ProductBvin] [varchar](36) NOT NULL,
+	[PropertyId] [bigint] NOT NULL,
+	[PropertyValue] [nvarchar](max) NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductPropertyValue_StoreId]  DEFAULT ((0)),
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductPropertyValue] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyValue]') AND name = N'IX_{objectQualifier}hcc_ProductPropertyValue_1')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductPropertyValue_1] ON {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue] 
+(
+	[ProductBvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyValue]') AND name = N'IX_{objectQualifier}hcc_ProductPropertyValue_2')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductPropertyValue_2] ON {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue] 
+(
+	[PropertyId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[PropertyId] [bigint] NOT NULL,
+	[ChoiceName] [nvarchar](512) NOT NULL,
+	[SortOrder] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductPropertyChoices_SortOrder]  DEFAULT ((-1)),
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductPropertyChoice_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductPropertyChoice] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice]') AND name = N'IX_{objectQualifier}hcc_ProductPropertyChoice')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductPropertyChoice] ON {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice] 
+(
+	[PropertyId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductInventory]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory](
+	[bvin] [varchar](36) NOT NULL,
+	[ProductBvin] [varchar](36) NOT NULL,
+	[VariantId] [nvarchar](max) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductInventory_VariantId]  DEFAULT (''),
+	[QuantityOnHand] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductInventory_QuantityOnHand]  DEFAULT ((0)),
+	[QuantityReserved] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductInventory_QuantityReserved]  DEFAULT ((0)),
+	[QuantityAvailableForSale]  AS ([QuantityOnHand]-[QuantityReserved]) PERSISTED,
+	[LowStockPoint] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductInventory_LowStockPoint]  DEFAULT ((0)),
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductInventory_StoreId]  DEFAULT ((0)),
+	[OutOfStockPoint] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductInventory_OutOfStockPoint]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductInventory] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductInventory]') AND name = N'IX_{objectQualifier}hcc_ProductInventory')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductInventory] ON {databaseOwner}[{objectQualifier}hcc_ProductInventory] 
+(
+	[ProductBvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFileXProduct]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct](
+	[ProductFileId] [varchar](36) NOT NULL,
+	[ProductId] [varchar](36) NOT NULL,
+	[AvailableMinutes] [int] NOT NULL,
+	[MaxDownloads] [int] NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductFileXProduct_StoreId]  DEFAULT ((0)),
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductFileXProduct] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON),
+ CONSTRAINT [IX_{objectQualifier}hcc_ProductFileXProduct_1] UNIQUE NONCLUSTERED 
+(
+	[ProductFileId] ASC,
+	[ProductId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFileXProduct]') AND name = N'IX_{objectQualifier}hcc_ProductFileXProduct')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductFileXProduct] ON {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct] 
+(
+	[ProductFileId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFileXProduct]') AND name = N'IX_{objectQualifier}hcc_ProductFileXProduct_2')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductFileXProduct_2] ON {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct] 
+(
+	[ProductId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderNote]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_OrderNote](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[OrderId] [varchar](36) NOT NULL,
+	[AuditDate] [datetime] NOT NULL,
+	[Note] [nvarchar](max) NOT NULL,
+	[IsPublic] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_OrderNote_IsPublic]  DEFAULT ((0)),
+	[LastUpdatedUtc] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_OrderNote_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_OrderNote_1] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderNote]') AND name = N'IX_{objectQualifier}hcc_OrderNote')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_OrderNote] ON {databaseOwner}[{objectQualifier}hcc_OrderNote] 
+(
+	[OrderId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderCoupon]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_OrderCoupon](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[LastUpdatedUtc] [datetime] NOT NULL,
+	[CouponCode] [nvarchar](50) NOT NULL,
+	[OrderBvin] [varchar](36) NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_OrderCoupon_StoreId]  DEFAULT ((0)),
+	[UserId] [varchar](36) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_OrderCoupon_UserId]  DEFAULT (''),
+	[IsUsed] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_OrderCoupon_IsUsed]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_OrderCoupon_1] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderCoupon]') AND name = N'IX_{objectQualifier}hcc_OrderCoupon_OrderBvin')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_OrderCoupon_OrderBvin] ON {databaseOwner}[{objectQualifier}hcc_OrderCoupon] 
+(
+	[OrderBvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_MailingListMember]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_MailingListMember](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_MailingListMember_StoreId]  DEFAULT ((0)),
+	[ListID] [bigint] NOT NULL,
+	[EmailAddress] [nvarchar](255) NOT NULL,
+	[FirstName] [nvarchar](255) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_MailingListMember_FirstName]  DEFAULT (''),
+	[LastName] [nvarchar](255) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_MailingListMember_LastName]  DEFAULT (''),
+	[LastUpdatedUtc] [datetime] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_MailingListMember_LastUpdatedUtc]  DEFAULT ('20130101'),
+ CONSTRAINT [PK_{objectQualifier}hcc_MailingListMember] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Conversations]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_Conversations](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[GroupId] [bigint] NOT NULL,
+	[Topic] [nvarchar](255) NOT NULL,
+	[Description] [nvarchar](max) NOT NULL,
+	[DateCreatedUtc] [datetime] NOT NULL,
+	[AuthorId] [bigint] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_Conversations] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ContentBlock]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock](
+	[bvin] [varchar](36) NOT NULL,
+	[ColumnID] [varchar](36) NOT NULL,
+	[SortOrder] [int] NOT NULL,
+	[ControlName] [nvarchar](512) NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ContentBlock_StoreId]  DEFAULT ((0)),
+	[SerializedSettings] [ntext] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ContentBlock_SerializedSettings]  DEFAULT (''),
+	[SerializedLists] [ntext] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ContentBlock_SerializedLists]  DEFAULT (''),
+ CONSTRAINT [PK_{objectQualifier}hcc_ContentBlock] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AuthTokens]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_AuthTokens](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[TokenId] [uniqueidentifier] NOT NULL,
+	[UserId] [bigint] NOT NULL,
+	[Expires] [datetime] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_AuthTokens] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderTransactions]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions](
+	[Id] [uniqueidentifier] NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[OrderId] [varchar](36) NOT NULL,
+	[OrderNumber] [nvarchar](50) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_OrderTransactions_OrderNumber]  DEFAULT (''),
+	[Timestamp] [datetime] NOT NULL,
+	[Action] [int] NOT NULL,
+	[Amount] [decimal](18, 10) NOT NULL,
+	[CreditCard] [ntext] NOT NULL,
+	[Success] [bit] NOT NULL,
+	[Voided] [bit] NOT NULL,
+	[RefNum1] [nvarchar](255) NOT NULL,
+	[RefNum2] [nvarchar](255) NOT NULL,
+	[LinkedToTransaction] [nvarchar](50) NOT NULL,
+	[Messages] [ntext] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_OrderTransactions_Messages]  DEFAULT (''),
+	[CheckNumber] [nvarchar](50) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_OrderTransactions_CheckNumber]  DEFAULT (''),
+	[PurchaseOrderNumber] [nvarchar](50) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_OrderTransactions_PurchaseOrderNumber]  DEFAULT (''),
+	[GiftCardNumber] [nvarchar](50) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_OrderTransactions_GiftCardNumber]  DEFAULT (''),
+	[CompanyAccountNumber] [nvarchar](50) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_OrderTransactions_CompanyAccountNumber]  DEFAULT (''),
+	[AdditionalSettings] [ntext] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_OrderTransactions_AdditionalSettings]  DEFAULT (''),
+ CONSTRAINT [PK_{objectQualifier}hcc_OrderTransactions] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderTransactions]') AND name = N'IX_{objectQualifier}hcc_OrderTransactions_OrderBvin')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_OrderTransactions_OrderBvin] ON {databaseOwner}[{objectQualifier}hcc_OrderTransactions] 
+(
+	[OrderId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderTransactions]') AND name = N'IX_{objectQualifier}hcc_OrderTransactions_StoreId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_OrderTransactions_StoreId] ON {databaseOwner}[{objectQualifier}hcc_OrderTransactions] 
+(
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_MembershipProductType]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_MembershipProductType](
+	[ProductTypeBvin] [varchar](36) NOT NULL,
+	[RoleName] [nvarchar](250) NOT NULL,
+	[ExpirationPeriod] [int] NOT NULL,
+	[ExpirationPeriodType] [int] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_MembershipProductType] PRIMARY KEY CLUSTERED 
+(
+	[ProductTypeBvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_LineItem]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_LineItem](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[LastUpdated] [datetime] NOT NULL,
+	[ProductId] [varchar](36) NOT NULL,
+	[VariantId] [varchar](36) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_VariantId]  DEFAULT (''),
+	[Quantity] [int] NOT NULL,
+	[OrderBvin] [varchar](36) NOT NULL,
+	[BasePrice] [decimal](18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_BasePrice]  DEFAULT ((0)),
+	[DiscountDetails] [nvarchar](max) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_DiscountDetails]  DEFAULT (''),
+	[AdjustedPrice] [decimal](18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_AdjustedPrice]  DEFAULT ((0)),
+	[ShippingPortion] [decimal](18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShippingPortion]  DEFAULT ((0)),
+	[TaxPortion] [decimal](18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_TaxPortion]  DEFAULT ((0)),
+	[LineTotal] [decimal](18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_LineTotal]  DEFAULT ((0)),
+	[CustomProperties] [ntext] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_CustomProperties]  DEFAULT (N''),
+	[QuantityReturned] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_QuantityReturned]  DEFAULT ((0)),
+	[QuantityShipped] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_QuantityShipped]  DEFAULT ((0)),
+	[ProductName] [nvarchar](255) NOT NULL,
+	[ProductShortDescription] [nvarchar](max) NOT NULL,
+	[ProductSku] [nvarchar](50) NOT NULL,
+	[StatusCode] [varchar](36) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_StatusCode]  DEFAULT (''),
+	[StatusName] [nvarchar](255) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_StatusName]  DEFAULT (N''),
+	[SelectionData] [nvarchar](max) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_SelectionData]  DEFAULT (''),
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_StoreId]  DEFAULT ((0)),
+	[ShippingScheduleId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShippingScheduleId]  DEFAULT (''),
+	[TaxScheduleId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_TaxScheduleId]  DEFAULT (''),
+	[ProductShippingWeight] [numeric](10, 4) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShippingWeightSingle]  DEFAULT ((0)),
+	[ProductShippingLength] [numeric](10, 4) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ProductShippingLength]  DEFAULT ((0)),
+	[ProductShippingWidth] [numeric](10, 4) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ProductShippingWidth]  DEFAULT ((0)),
+	[ProductShippingHeight] [numeric](10, 4) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ProductShippingHeight]  DEFAULT ((0)),
+	[ShipFromAddress] [nvarchar](max) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShipFromAddress]  DEFAULT (''),
+	[ShipFromMode] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShipFromMode]  DEFAULT ((1)),
+	[ShipFromNotificationId] [nvarchar](50) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShipFromNotificationId]  DEFAULT (''),
+	[ShipSeparately] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShipSeparately]  DEFAULT ((0)),
+	[ExtraShipCharge] [numeric](10, 4) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ExtraShipCharge]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_LineItem] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_LineItem]') AND name = N'IX_{objectQualifier}hcc_LineItem_1')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_LineItem_1] ON {databaseOwner}[{objectQualifier}hcc_LineItem] 
+(
+	[OrderBvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_UserXContact]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_UserXContact](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[ContactId] [varchar](36) NOT NULL,
+	[UserId] [varchar](36) NOT NULL,
+	[StoreId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_UserXContact_StoreId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_UserXAffiliate] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_UserXContact]') AND name = N'IX_{objectQualifier}hcc_UserXContact_ContactId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_UserXContact_ContactId] ON {databaseOwner}[{objectQualifier}hcc_UserXContact] 
+(
+	[ContactId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_UserXContact]') AND name = N'IX_{objectQualifier}hcc_UserXContact_StoreId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_UserXContact_StoreId] ON {databaseOwner}[{objectQualifier}hcc_UserXContact] 
+(
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_UserXContact]') AND name = N'IX_{objectQualifier}hcc_UserXContact_UserId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_UserXContact_UserId] ON {databaseOwner}[{objectQualifier}hcc_UserXContact] 
+(
+	[UserId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoresXUsers]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_StoresXUsers](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[UserId] [bigint] NOT NULL,
+	[AccessMode] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_StoresXUsers_AccessMode]  DEFAULT ((1)),
+ CONSTRAINT [PK_{objectQualifier}hcc_StoresXUsers] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoresXUsers]') AND name = N'IX_{objectQualifier}hcc_StoresXUsers_StoreId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_StoresXUsers_StoreId] ON {databaseOwner}[{objectQualifier}hcc_StoresXUsers] 
+(
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoresXUsers]') AND name = N'IX_{objectQualifier}hcc_StoresXUsers_UserId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_StoresXUsers_UserId] ON {databaseOwner}[{objectQualifier}hcc_StoresXUsers] 
+(
+	[UserId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreSettings]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettings](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[SettingName] [varchar](50) NOT NULL,
+	[SettingValue] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_StoreSettings] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreSettings]') AND name = N'IX_{objectQualifier}hcc_StoreSettings_StoreId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_StoreSettings_StoreId] ON {databaseOwner}[{objectQualifier}hcc_StoreSettings] 
+(
+	[StoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchObjectWords]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjectWords](
+	[SearchObjectId] [bigint] NOT NULL,
+	[WordId] [bigint] NOT NULL,
+	[Score] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_SearchObjectWords_Score]  DEFAULT ((0)),
+	[SiteId] [bigint] NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_SearchObjectWords_SiteId]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}hcc_SearchObjectWords] PRIMARY KEY CLUSTERED 
+(
+	[SearchObjectId] ASC,
+	[WordId] ASC,
+	[SiteId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_TaxSchedules]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_TaxSchedules](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_TaxSchedules] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Taxes]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_Taxes](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[StoreId] [bigint] NOT NULL,
+	[CountryName] [nvarchar](255) NOT NULL,
+	[RegionName] [nvarchar](255) NOT NULL,
+	[PostalCode] [nvarchar](20) NOT NULL,
+	[TaxScheduleId] [bigint] NOT NULL,
+	[Rate] [numeric](18, 10) NOT NULL,
+	[ApplyToShipping] [bit] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_Taxes] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_GenerateOrderNumber]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC sp_executesql @statement = N'CREATE PROCEDURE {databaseOwner}[{objectQualifier}hcc_GenerateOrderNumber]
+
+@storeid bigint
+
+AS
+
+	BEGIN TRY		
+		BEGIN TRAN
+		
+		DECLARE @OrderNumberSeed bigint
+		DECLARE @MaxOrderNumber bigint
+			
+		SET @OrderNumberSeed = (SELECT CAST(COALESCE([SettingValue], 0) AS bigint) 
+			FROM {databaseOwner}[{objectQualifier}hcc_StoreSettings] WITH (UPDLOCK) WHERE [SettingName] = ''LastOrderNumber''
+			AND StoreId=@storeid)
+				
+		--SET @MaxOrderNumber = (SELECT COALESCE(MAX([OrderNumber]), -1) FROM {databaseOwner}[{objectQualifier}hcc_Order])
+		--IF @OrderNumberSeed < @MaxOrderNumber
+		--		SET @OrderNumberSeed = @MaxOrderNumber
+				
+		SET @OrderNumberSeed = @OrderNumberSeed + 1
+		
+		UPDATE {databaseOwner}[{objectQualifier}hcc_StoreSettings] SET [SettingValue] = @OrderNumberSeed 
+			WHERE [SettingName] = ''LastOrderNumber''
+			AND [StoreId] = @storeid
+		
+		COMMIT
+		
+		SELECT @OrderNumberSeed	AS [OrderNumber]	
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+		--EXEC {databaseOwner}[{objectQualifier}hcc_EventLog_SQL_i]
+	END CATCH
+
+' 
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_AuthTokens_hcc_UserAccounts]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AuthTokens]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AuthTokens]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_AuthTokens_hcc_UserAccounts] FOREIGN KEY([UserId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_UserAccounts] ([Id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_AuthTokens_hcc_UserAccounts]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AuthTokens]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AuthTokens] CHECK CONSTRAINT [FK_{objectQualifier}hcc_AuthTokens_hcc_UserAccounts]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ContentBlock_hcc_ContentColumn]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ContentBlock]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ContentBlock_hcc_ContentColumn] FOREIGN KEY([ColumnID])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ContentColumn] ([bvin])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ContentBlock_hcc_ContentColumn]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ContentBlock]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ContentBlock_hcc_ContentColumn]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Conversations_hcc_ConversationGroups]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Conversations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Conversations]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_Conversations_hcc_ConversationGroups] FOREIGN KEY([GroupId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ConversationGroups] ([Id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Conversations_hcc_ConversationGroups]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Conversations]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Conversations] CHECK CONSTRAINT [FK_{objectQualifier}hcc_Conversations_hcc_ConversationGroups]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_LineItem_hcc_LineItem]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_LineItem]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_LineItem_hcc_LineItem] FOREIGN KEY([OrderBvin])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Order] ([bvin])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_LineItem_hcc_LineItem]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_LineItem]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] CHECK CONSTRAINT [FK_{objectQualifier}hcc_LineItem_hcc_LineItem]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_MailingListMember_hcc_MailingList]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_MailingListMember]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MailingListMember]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_MailingListMember_hcc_MailingList] FOREIGN KEY([ListID])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_MailingList] ([Id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_MailingListMember_hcc_MailingList]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_MailingListMember]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MailingListMember] CHECK CONSTRAINT [FK_{objectQualifier}hcc_MailingListMember_hcc_MailingList]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_MembershipProductType_hcc_ProductType]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_MembershipProductType]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MembershipProductType]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_MembershipProductType_hcc_ProductType] FOREIGN KEY([ProductTypeBvin])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductType] ([bvin])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_MembershipProductType_hcc_ProductType]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_MembershipProductType]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MembershipProductType] CHECK CONSTRAINT [FK_{objectQualifier}hcc_MembershipProductType_hcc_ProductType]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderCoupon_hcc_Order]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderCoupon]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderCoupon]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_OrderCoupon_hcc_Order] FOREIGN KEY([OrderBvin])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Order] ([bvin])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderCoupon_hcc_Order]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderCoupon]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderCoupon] CHECK CONSTRAINT [FK_{objectQualifier}hcc_OrderCoupon_hcc_Order]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderNote_hcc_Order]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderNote]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderNote]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_OrderNote_hcc_Order] FOREIGN KEY([OrderId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Order] ([bvin])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderNote_hcc_Order]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderNote]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderNote] CHECK CONSTRAINT [FK_{objectQualifier}hcc_OrderNote_hcc_Order]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderTransactions_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderTransactions]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_OrderTransactions_hcc_Stores] FOREIGN KEY([StoreId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores] ([Id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderTransactions_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderTransactions]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions] CHECK CONSTRAINT [FK_{objectQualifier}hcc_OrderTransactions_hcc_Stores]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductFileXProduct_hcc_ProductFile]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFileXProduct]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductFileXProduct_hcc_ProductFile] FOREIGN KEY([ProductFileId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductFile] ([bvin])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductFileXProduct_hcc_ProductFile]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFileXProduct]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductFileXProduct_hcc_ProductFile]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductInventory_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductInventory]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductInventory_hcc_Product] FOREIGN KEY([ProductBvin])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Product] ([bvin])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductInventory_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductInventory]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductInventory_hcc_Product]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductOptionsItems_hcc_ProductOptions]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductOptionsItems_hcc_ProductOptions] FOREIGN KEY([OptionBvin])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductOptions] ([bvin])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductOptionsItems_hcc_ProductOptions]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductOptionsItems_hcc_ProductOptions]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductPropertyChoice_hcc_ProductProperty]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyChoice_hcc_ProductProperty] FOREIGN KEY([PropertyId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductProperty] ([Id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductPropertyChoice_hcc_ProductProperty]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyChoice_hcc_ProductProperty]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductPropertyValue_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyValue]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyValue_hcc_Product] FOREIGN KEY([ProductBvin])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Product] ([bvin])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductPropertyValue_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductPropertyValue]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyValue_hcc_Product]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductTypeProperties_hcc_ProductType]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductTypeProperties_hcc_ProductType] FOREIGN KEY([ProductTypeBvin])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductType] ([bvin])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductTypeProperties_hcc_ProductType]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductTypeProperties_hcc_ProductType]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductXCategory_hcc_Category]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXCategory]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductXCategory_hcc_Category] FOREIGN KEY([CategoryId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Category] ([bvin])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductXCategory_hcc_Category]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXCategory]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductXCategory_hcc_Category]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductXCategory_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXCategory]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductXCategory_hcc_Product] FOREIGN KEY([ProductId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Product] ([bvin])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductXCategory_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXCategory]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductXCategory_hcc_Product]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductXOption_hcc_ProductXOption]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXOption]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXOption]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductXOption_hcc_ProductXOption] FOREIGN KEY([Id])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductXOption] ([Id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductXOption_hcc_ProductXOption]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXOption]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXOption] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductXOption_hcc_ProductXOption]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_RMAItem_hcc_RMA]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMAItem]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_RMAItem_hcc_RMA] FOREIGN KEY([RMABvin])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_RMA] ([bvin])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_RMAItem_hcc_RMA]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMAItem]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] CHECK CONSTRAINT [FK_{objectQualifier}hcc_RMAItem_hcc_RMA]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchLexicon]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchObjectWords]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjectWords]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchLexicon] FOREIGN KEY([WordId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_SearchLexicon] ([Id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchLexicon]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchObjectWords]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjectWords] CHECK CONSTRAINT [FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchLexicon]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchObjects]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchObjectWords]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjectWords]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchObjects] FOREIGN KEY([SearchObjectId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_SearchObjects] ([Id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchObjects]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchObjectWords]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_SearchObjectWords] CHECK CONSTRAINT [FK_{objectQualifier}hcc_SearchObjectWords_hcc_SearchObjects]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ShippingZones_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ShippingZones]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingZones]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ShippingZones_hcc_Stores] FOREIGN KEY([StoreId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores] ([Id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ShippingZones_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ShippingZones]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingZones] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ShippingZones_hcc_Stores]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_StoreSettings_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreSettings]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettings]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_StoreSettings_hcc_Stores] FOREIGN KEY([StoreId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores] ([Id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_StoreSettings_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreSettings]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettings] CHECK CONSTRAINT [FK_{objectQualifier}hcc_StoreSettings_hcc_Stores]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_StoresXUsers_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoresXUsers]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoresXUsers]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_StoresXUsers_hcc_Stores] FOREIGN KEY([StoreId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores] ([Id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_StoresXUsers_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoresXUsers]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoresXUsers] CHECK CONSTRAINT [FK_{objectQualifier}hcc_StoresXUsers_hcc_Stores]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_StoresXUsers_hcc_UserAccounts]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoresXUsers]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoresXUsers]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_StoresXUsers_hcc_UserAccounts] FOREIGN KEY([UserId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_UserAccounts] ([Id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_StoresXUsers_hcc_UserAccounts]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoresXUsers]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoresXUsers] CHECK CONSTRAINT [FK_{objectQualifier}hcc_StoresXUsers_hcc_UserAccounts]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Taxes_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Taxes]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Taxes]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_Taxes_hcc_Stores] FOREIGN KEY([StoreId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores] ([Id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Taxes_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Taxes]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Taxes] CHECK CONSTRAINT [FK_{objectQualifier}hcc_Taxes_hcc_Stores]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Taxes_hcc_TaxSchedules]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Taxes]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Taxes]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_Taxes_hcc_TaxSchedules] FOREIGN KEY([TaxScheduleId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_TaxSchedules] ([Id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Taxes_hcc_TaxSchedules]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Taxes]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Taxes] CHECK CONSTRAINT [FK_{objectQualifier}hcc_Taxes_hcc_TaxSchedules]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_TaxSchedules_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_TaxSchedules]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_TaxSchedules]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_TaxSchedules_hcc_Stores] FOREIGN KEY([StoreId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores] ([Id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_TaxSchedules_hcc_Stores]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_TaxSchedules]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_TaxSchedules] CHECK CONSTRAINT [FK_{objectQualifier}hcc_TaxSchedules_hcc_Stores]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_UserXAffiliate_hcc_User]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_UserXContact]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_UserXContact]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_UserXAffiliate_hcc_User] FOREIGN KEY([UserId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_User] ([bvin])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_UserXAffiliate_hcc_User]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_UserXContact]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_UserXContact] CHECK CONSTRAINT [FK_{objectQualifier}hcc_UserXAffiliate_hcc_User]
+GO
+
+/* Populate data */
+
+SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ON
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([Id], [StoreId], [LastUpdatedUtc], [DisplayName], [FromEmail], [Subject], [Body], [RepeatingSection], [TemplateType]) VALUES (26, 0, '20130501', N'Contact Us Form', N'[[Store.ContactEmail]]', N'Contact Form From [[Store.StoreName]]', N'<h1>Contact Form from [[Store.StoreName]]</h1>', N'', 102)
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([Id], [StoreId], [LastUpdatedUtc], [DisplayName], [FromEmail], [Subject], [Body], [RepeatingSection], [TemplateType]) VALUES (27, 0, '20130501', N'Drop Shipper Notice', N'[[Store.ContactEmail]]', N'Drop Ship Request: [[Order.OrderNumber]]', N'<html>
+ <head>
+ <style type="text/css"> A { text-decoration: none; }
+	A:link { color: #3366cc; text-decoration: none; }
+	A:visited { color: #663399; text-decoration: none; }
+	A:active { color: #cccccc; text-decoration: none; }
+	A:Hover { text-decoration: underline; }
+	BODY, TD, CENTER, P { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 10px; color: #333333; }
+	.body { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 10px; color: #333333; }
+	.content { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: normal; color: #000000; }
+	.title { font-family: Helvetica, Arial, sans-serif; font-size: 10px; font-weight: normal; color: #000000; }
+	.headline { font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; color: #000000; }
+	.message { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 9px; }
+	</style>
+ </head>
+<body bgcolor="#ffffff" LINK="#3366cc" VLINK="#3366cc" ALINK="#3366cc" LEFTMARGIN="0" TOPMARGIN="0">
+	<table cellSpacing=1 cellPadding=3 width="100%" border="0" runat="server">
+	<tr>
+		<td colSpan=2>[[Store.Logo]]</td>
+	</tr>
+		<TR>
+		<TD class=FormLabel vAlign=top align=left width="50%">
+		<b>Billed To:</b><br>
+		<br>[[Order.BillingAddress]]
+		[[Order.UserName]]
+		</TD>
+		<TD class=FormLabel vAlign=top align=left width="50%">
+			<b>Order Number:</b> [[Order.OrderNumber]]<BR>
+			<b>Order Time:</b> [[Order.TimeOfOrder]]<br>
+			<b>Current Status:</b> [[Order.Status]]&nbsp;<BR>
+			<b>Special Instructions:</b> [[Order.Instructions]]&nbsp;<br>
+					</TD>		
+	</TR>
+	<tr>
+		<td colspan="2">
+			<table border="0" cellspacing="0" cellpadding="5" width="100%">
+			<tr>
+				<td colspan="3"><hr></td>
+			</tr>
+			<tr>
+                                <td><b>Qty</b></td>
+				<td><b>SKU</b></td>
+				<td><b>Product Name</b></td>
+			</tr>
+			<tr>
+				<td colspan="3"><hr></td>
+			</tr>
+			[[RepeatingSection]]
+			<tr>
+				<td colspan="3"><hr></td>
+			</tr>
+		</table>
+				
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"><b>Please retain for your records.</b></td>
+	</tr>						
+</table>
+</body>
+</html>', N'<tr><td align=left valign=top>[[LineItem.Quantity]]</td><td align=left valign=top>[[LineItem.ProductSku]]</td><td align=left valign=top>[[LineItem.ProductName]]<br />[[LineItem.ProductDescription]]<br />[[LineItem.ShippingStatus]]</td></tr>', 200)
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([Id], [StoreId], [LastUpdatedUtc], [DisplayName], [FromEmail], [Subject], [Body], [RepeatingSection], [TemplateType]) VALUES (28, 0, '20130501', N'Email Friend', N'[[Store.ContactEmail]]', N'A friend has sent you a link from [[Store.StoreName]]', N'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<style type="text/css" media="screen,print">
+	html,
+	body {
+		margin:0;
+		padding:0;
+		font-family:"Trebuchet MS", Georgia, Verdana, serif;
+		color:#000;
+		background:#fff;
+	}
+	body {
+		min-width:720px;
+		text-align:center;
+	}
+	h1 {
+		padding:0;
+		margin:0;
+		font-size:16px;
+	}
+	p {
+		margin:9px 0 0 0;
+		padding:0;
+		font-size:12px;
+		line-height:18px;
+	}
+	p+p {
+		font-style:italic;
+		font-size:11px;
+	}
+	#centerwrap {
+		background:#ccc;
+		width:720px;
+		margin:10px auto;
+		padding:10px 0;
+		text-align:left;
+	}
+	#content {
+		background:#fff;
+		margin:0 10px;
+		padding:10px;
+	}
+    .bottombox {
+	    text-align:center;
+	    padding:10px;
+	    background-color:BlanchedAlmond;
+	    border:1px solid black;
+	    font-size:10px;
+	    width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+	}
+	
+	#footer {
+		text-align:center;
+		clear:both;
+	}
+	</style>
+</head>
+<body>
+<div id="centerwrap">
+[[Store.Logo]] 
+	<div id="content">
+		<h1>Tell a Friend!</h1>
+		<p>Greetings!  Your friend has suggested you look at this great deal from [[Store.StoreName]].&nbsp;
+            Click on the image below to view this product in our store.</p>
+        <p>
+            <a href=''[[Store.StandardUrl]][[Product.ProductURL]]''>
+               <IMG src=''[[Store.StandardUrl]][[Product.ImageFileSmall]]'' width=''120'' height=''120'' border=''0''>
+            </a>
+            <br />[[Product.LongDescription]]
+            <br />[[Product.SitePrice]]
+        </p>
+        <p>
+            Don''t worry, this e-mail is the only thing you will receive from us unless you subscribe to our [[Store.StoreName]] newsletter.
+            This product, along with many others just like it can be found at our store.  These prices won''t last much longer, begin your shopping today.<br />
+        </p>
+    <div class="bottombox">
+       <a href="[[Store.StandardUrl]]">CLICK HERE TO START SHOPPING.</a>
+    </div>
+
+</div>
+<div id="footer">
+	<a href="[[Store.StandardUrl]]">[[Store.StoreName]]</a>
+</div>
+</div>
+</body>
+</html>', N'', 101)
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([Id], [StoreId], [LastUpdatedUtc], [DisplayName], [FromEmail], [Subject], [Body], [RepeatingSection], [TemplateType]) VALUES (29, 0, '20130501', N'Forgot Password Template', N'[[Store.ContactEmail]]', N'Your password has been reset.', N'[[Store.Logo]]<br />
+<font face="Arial">Your password has been reset.</font>
+<br />&nbsp;<br />
+<font face="Arial">Username: <strong>[[User.UserName]]<br />
+</strong>Password: <strong>[[NewPassword]]
+</strong>
+<br />
+<br />
+You can login with your new information here: [[Store.StoreName]]&nbsp;[[Store.CurrentLocalTime]]
+</font>', N'', 100)
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([Id], [StoreId], [LastUpdatedUtc], [DisplayName], [FromEmail], [Subject], [Body], [RepeatingSection], [TemplateType]) VALUES (30, 0, '20130501', N'Order New Receipt', N'[[Store.ContactEmail]]', N'Receipt for Order [[Order.OrderNumber]] from [[Store.StoreName]]', N'<html>
+ <head>
+ <meta name=vs_targetSchema content="http://schemas.microsoft.com/intellisense/ie5">
+<style type="text/css"> A { text-decoration: none; }
+	A:link { color: #3366cc; text-decoration: none; }
+	A:visited { color: #663399; text-decoration: none; }
+	A:active { color: #cccccc; text-decoration: none; }
+	A:Hover { text-decoration: underline; }
+	BODY, TD, CENTER, P { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 10px; color: #333333; }
+	.body { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 10px; color: #333333; }
+	.content { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: normal; color: #000000; }
+	.title { font-family: Helvetica, Arial, sans-serif; font-size: 10px; font-weight: normal; color: #000000; }
+	.headline { font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; color: #000000; }
+	.message { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 9px; }
+	</style>
+ </head>
+<body bgcolor="#ffffff" LINK="#3366cc" VLINK="#3366cc" ALINK="#3366cc" LEFTMARGIN="0" TOPMARGIN="0">
+	<table cellSpacing=1 cellPadding=3 width="100%" border="0" runat="server">
+	<tr>
+		<td colSpan=2>[[Store.Logo]]</td>
+	</tr>
+	<TR>
+		<TD class=FormLabel vAlign=top align=left width="50%">
+		<b>Billed To:</b><br>
+		[[Order.BillingAddress]]<br>
+		[[Order.UserName]]
+		</TD>
+		<TD class=FormLabel vAlign=top align=left width="50%">
+			<b>Order Number:</b> [[Order.OrderNumber]]<BR>
+			<b>Order Time:</b> [[Order.TimeOfOrder]]<br>
+			<b>Current Status:</b> [[Order.Status]]&nbsp;<BR>
+			<b>Promotional Code(s):</b> [[Order.Coupons]]&nbsp;<br>
+			<b>Special Instructions:</b> [[Order.Instructions]]&nbsp;<br>
+		</TD>
+	</TR>
+	<tr>
+		<td colspan="2">
+			<table border="0" cellspacing="0" cellpadding="5" width="100%">
+			<tr>
+				<td colspan="4"><hr></td>
+			</tr>
+			<tr>
+                                <td><b>Qty</b></td>
+				<td><b>SKU</b></td>
+				<td><b>Product Name</b></td>
+				<td align="right"><b>Unit Price</b></td>
+			</tr>
+			<tr>
+				<td colspan="4"><hr></td>
+			</tr>
+			[[RepeatingSection]]
+			<tr>
+				<td colspan="4"><hr></td>
+			</tr>
+			<tr>
+				<td colspan="4" align="right">
+[[Order.TotalsAsTable]]
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4"><hr></td>
+			</tr>
+		</table>	
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"><b>Please retain for your records.</b></td>
+	</tr>
+</table>
+</body>
+</html>', N'<tr><td align=left valign=top>[[LineItem.Quantity]]</td><td align=left valign=top>[[LineItem.ProductSku]]</td><td align=left valign=top>[[LineItem.ProductName]]<br />[[LineItem.ProductDescription]]<br />[[LineItem.ShippingStatus]]</td><td align=right valign=top>[[LineItem.AdjustedPrice]]</td></tr>', 1)
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([Id], [StoreId], [LastUpdatedUtc], [DisplayName], [FromEmail], [Subject], [Body], [RepeatingSection], [TemplateType]) VALUES (31, 0, '20130501', N'Admin Order Receipt', N'[[Store.ContactEmail]]', N'New Order [[Order.OrderNumber]] Received [[Store.StoreName]]', N'<html>
+ <head>
+ <meta name=vs_targetSchema content="http://schemas.microsoft.com/intellisense/ie5">
+<style type="text/css"> A { text-decoration: none; }
+    A:link { color: #3366cc; text-decoration: none; }
+    A:visited { color: #663399; text-decoration: none; }
+    A:active { color: #cccccc; text-decoration: none; }
+    A:Hover { text-decoration: underline; }
+    BODY, TD, CENTER, P { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 10px; color: #333333; }
+    .body { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 10px; color: #333333; }
+    .content { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: normal; color: #000000; }
+    .title { font-family: Helvetica, Arial, sans-serif; font-size: 10px; font-weight: normal; color: #000000; }
+    .headline { font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; color: #000000; }
+    .message { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 9px; }
+    </style>
+ </head>
+<body bgcolor="#ffffff" LINK="#3366cc" VLINK="#3366cc" ALINK="#3366cc" LEFTMARGIN="0" TOPMARGIN="0">
+    <table cellSpacing=1 cellPadding=3 width="100%" border="0" runat="server">
+    <tr>
+    	<td colSpan=2>[[Store.Logo]]</td>
+    </tr>
+    <tr>
+    	<td class=FormLabel colSpan=2>
+                <hr><a href=[[Order.AdminLink]]>View Order Details</a><br>
+                &nbsp;
+    	</td>
+    </tr>
+    <TR>
+    	<TD class=FormLabel vAlign=top align=left width="50%">
+    	<b>Billed To:</b><br>
+    	[[Order.BillingAddress]]<br>
+    	[[Order.UserName]]
+    	</TD>
+    	<TD class=FormLabel vAlign=top align=left width="50%">
+    		<b>Order Number:</b> [[Order.OrderNumber]]<BR>
+    		<b>Order Time:</b> [[Order.TimeOfOrder]]<br>
+    		<b>Current Status:</b> [[Order.Status]]&nbsp;<BR>
+    		<b>Promotional Code(s):</b> [[Order.Coupons]]&nbsp;<br>
+    		<b>Special Instructions:</b> [[Order.Instructions]]&nbsp;<br>
+    	</TD>
+    </TR>
+    <tr>
+    	<td colspan="2">
+    		<table border="0" cellspacing="0" cellpadding="5" width="100%">
+    		<tr>
+    			<td colspan="4"><hr></td>
+    		</tr>
+    		<tr>
+                                <td><b>Qty</b></td>
+    			<td><b>SKU</b></td>
+    			<td><b>Product Name</b></td>
+    			<td align="right"><b>Unit Price</b></td>
+    		</tr>
+    		<tr>
+    			<td colspan="4"><hr></td>
+    		</tr>
+    		[[RepeatingSection]]
+    		<tr>
+    			<td colspan="4"><hr></td>
+    		</tr>
+    		<tr>
+    			<td colspan="4" align="right">
+    				[[Order.TotalsAsTable]]
+    			</td>
+    		</tr>
+    		<tr>
+    			<td colspan="4"><hr></td>
+    		</tr>
+    	</table>
+    	</td>
+    </tr>
+    <tr>
+    	<td colspan="2"><b>Please retain for your records.</b></td>
+    </tr>
+</table>
+</body>
+</html>', N'<tr>  <td align=left valign=top>[[LineItem.Quantity]]</td>  <td align=left valign=top>[[LineItem.ProductSku]]</td>  <td align=left valign=top>[[LineItem.ProductName]]<br />[[LineItem.ProductDescription]]<br />[[LineItem.ShippingStatus]]</td><td align=right valign=top>[[LineItem.AdjustedPrice]]</td></tr>', 2)
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([Id], [StoreId], [LastUpdatedUtc], [DisplayName], [FromEmail], [Subject], [Body], [RepeatingSection], [TemplateType]) VALUES (32, 0, '20130501', N'Order Shipment', N'[[Store.ContactEmail]]', N'Shipping update for order [[Order.OrderNumber]] from [[Store.StoreName]]', N'<html>
+ <head>
+<style type="text/css"> A { text-decoration: none; }
+	A:link { color: #3366cc; text-decoration: none; }
+	A:visited { color: #663399; text-decoration: none; }
+	A:active { color: #cccccc; text-decoration: none; }
+	A:Hover { text-decoration: underline; }
+	BODY, TD, CENTER, P { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 10px; color: #333333; }
+	.body { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 10px; color: #333333; }
+	.content { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: normal; color: #000000; }
+	.title { font-family: Helvetica, Arial, sans-serif; font-size: 10px; font-weight: normal; color: #000000; }
+	.headline { font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; color: #000000; }
+	.message { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 9px; }
+        .packageitems { border-collapse: collapse; }
+        .itemnamehead { background-color: #999999; }
+        .itemquantityhead { background-color: #999999; }
+        .alt .itemname { background-color: #aaaaaa; }
+        .alt .itemquantity { background-color: #aaaaaa; }
+        .itemname { background-color: #ffffff; }
+        .itemquantity { background-color: #ffffff; text-align: right; border-left: solid 1px #aaaaaa; }
+	</style>
+ </head>
+<body bgcolor="#ffffff" LINK="#3366cc" VLINK="#3366cc" ALINK="#3366cc" LEFTMARGIN="0" TOPMARGIN="0">
+	<table cellSpacing=1 cellPadding=3 width="100%" border="0" runat="server">
+	<tr>
+		<td colSpan=2>[[Store.Logo]]</td>
+	</tr>	
+	<TR>
+		<TD class=FormLabel vAlign=top align=left width="50%">
+		<b>Billed To:</b><br>
+		[[Order.BillingAddress]]<br>
+		[[Order.UserName]]
+		</TD>
+		<TD class=FormLabel vAlign=top align=left width="50%">
+			<b>Order Number:</b> [[Order.OrderNumber]]<BR>
+			<b>Order Time:</b> [[Order.TimeOfOrder]]<br>
+			<b>Current Status:</b> [[Order.Status]]&nbsp;<BR>
+			<b>Payment Method:</b> [[Order.PaymentMethod]]&nbsp;<br>
+			<b>Promotional Code(s):</b> [[Order.Coupons]]&nbsp;<br>
+			<b>Special Instructions:</b> [[Order.Instructions]]&nbsp;<br>
+		</TD>
+	</TR>
+	<tr>
+		<td colspan="2">
+			<table border="0" cellspacing="0" cellpadding="5" width="100%">
+			<tr>
+				<td colspan="4"><hr></td>
+			</tr>
+			<tr>
+                                <td><b>Shipper</b></td>
+				<td><b>Shipping Method</b></td>
+				<td><b>Tracking Number</b></td>
+				<td><b>Ship Date</b></td>
+			</tr>
+			<tr>
+				<td colspan="4"><hr></td>
+			</tr>
+			[[RepeatingSection]]
+			<tr>
+				<td colspan="4"><hr></td>
+			</tr>
+			<tr>
+				<td colspan="4" align="right">
+					[[Order.TotalsAsTable]]
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4"><hr></td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"><b>Please retain for your records.</b></td>
+	</tr>
+</table>
+</body>
+</html>', N'<tr>
+  <td align=left valign=top>[[Package.ShipperName]]</td>
+  <td align=left valign=top>[[Package.ShipperService]]</td>
+  <td align=left valign=top><a href="[[Package.TrackingNumberLink]]">[[Package.TrackingNumber]]</a></td>    
+  <td align=left valign=top>[[Package.ShipDate]]</td>
+</tr>
+<tr>
+  <td></td>
+  <td colspan="3" align=left valign=top>[[Package.Items]]</td>
+</tr>', 4)
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([Id], [StoreId], [LastUpdatedUtc], [DisplayName], [FromEmail], [Subject], [Body], [RepeatingSection], [TemplateType]) VALUES (33, 0, '20130501', N'Order Update', N'[[Store.ContactEmail]]', N'Order [[Order.OrderNumber]] Update from [[Store.StoreName]]', N'<html>
+ <head>
+ <meta name=vs_targetSchema content="http://schemas.microsoft.com/intellisense/ie5">
+<style type="text/css"> A { text-decoration: none; }
+	A:link { color: #3366cc; text-decoration: none; }
+	A:visited { color: #663399; text-decoration: none; }
+	A:active { color: #cccccc; text-decoration: none; }
+	A:Hover { text-decoration: underline; }
+	BODY, TD, CENTER, P { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 10px; color: #333333; }
+	.body { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 10px; color: #333333; }
+	.content { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: normal; color: #000000; }
+	.title { font-family: Helvetica, Arial, sans-serif; font-size: 10px; font-weight: normal; color: #000000; }
+	.headline { font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; color: #000000; }
+	.message { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 9px; }
+        .trackingnumberlist {list-style:none;}
+        .trackingnumberlinklist {list-style:none;}
+	</style>
+ </head>
+<body bgcolor="#ffffff" LINK="#3366cc" VLINK="#3366cc" ALINK="#3366cc" LEFTMARGIN="0" TOPMARGIN="0">
+	<table cellSpacing=1 cellPadding=3 width="100%" border="0" runat="server">
+	<tr>
+		<td colSpan=2>[[Store.Logo]]</td>
+	</tr>	
+	<TR>
+		<TD class=FormLabel vAlign=top align=left width="50%">
+		<b>Billed To:</b><br>
+		[[Order.BillingAddress]]<br>
+		[[Order.UserName]]
+		</TD>
+		<TD class=FormLabel vAlign=top align=left width="50%">
+			<b>Order Number:</b> [[Order.OrderNumber]]<BR>
+			<b>Order Time:</b> [[Order.TimeOfOrder]]<br>
+			<b>Current Status:</b> [[Order.Status]]&nbsp;<BR>
+			<b>Promotional Code(s):</b> [[Order.Coupons]]&nbsp;<br>
+			<b>Special Instructions:</b> [[Order.Instructions]]&nbsp;<br>
+		</TD>
+	</TR>
+	<tr>
+		<td colspan="2">
+			<table border="0" cellspacing="0" cellpadding="5" width="100%">
+			<tr>
+				<td colspan="4"><hr></td>
+			</tr>
+			<tr>
+                                <td><b>Qty</b></td>
+				<td><b>SKU</b></td>
+				<td><b>Product Name</b></td>
+				<td align="right"><b>Unit Price</b></td>
+			</tr>
+			<tr>
+				<td colspan="4"><hr></td>
+			</tr>
+			[[RepeatingSection]]
+			<tr>
+				<td colspan="4"><hr></td>
+			</tr>
+                        <tr>
+				<td colspan="4">Tracking Numbers:</td>
+			</tr>
+                        <tr>
+				<td colspan="4">[[Order.TrackingNumberLinks]]</td>
+			</tr>
+			<tr>
+				<td colspan="4" align="right">
+					[[Order.TotalsAsTable]]
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4"><hr></td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"><b>Please retain for your records.</b></td>
+	</tr>
+</table>
+</body>
+</html>', N'<tr><td align=left valign=top>[[LineItem.Quantity]]</td><td align=left valign=top>[[LineItem.ProductSku]]</td><td align=left valign=top>[[LineItem.ProductName]]<br />[[LineItem.ProductDescription]]<br />[[LineItem.ShippingStatus]]</td><td align=right valign=top>[[LineItem.AdjustedPrice]]</td></tr>', 3)
+GO
+
+SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] OFF
+GO

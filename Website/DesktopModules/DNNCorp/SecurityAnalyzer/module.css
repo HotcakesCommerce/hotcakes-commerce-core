@@ -1,0 +1,17 @@
+.severityblock {
+    border-color: rgba(0, 0, 0, .2);
+    border-style: solid;
+    border-width: 1px;
+    float: left;
+    height: 20px;
+    margin: 5px 5px 5px 5px;
+    width: 20px;
+}
+
+.redblock { background-color: #FF0000; }
+
+.yellowblock { background-color: #FFFF00; }
+
+.greenblock { background-color: #00FF00; }
+
+@font-face { src: url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"); }

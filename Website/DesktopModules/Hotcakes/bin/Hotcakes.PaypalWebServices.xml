@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hotcakes.PaypalWebServices</name>
+    </assembly>
+    <members>
+        <member name="T:Hotcakes.PaypalWebServices.PayPalAPI">
+            <summary>
+                Summary description for PayPalAPI.
+            </summary>
+        </member>
+    </members>
+</doc>

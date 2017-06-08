@@ -1,0 +1,13 @@
+﻿IF EXISTS( SELECT * FROM sys.default_constraints WHERE type='D' and name = 'DF_{objectQualifier}hcc_LineItem_TaxablePortion')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_LineItem_TaxablePortion]
+END
+GO
+
+IF EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_LineItem' AND  COLUMN_NAME = 'TaxablePortion')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+	DROP COLUMN [TaxablePortion]
+END
+GO

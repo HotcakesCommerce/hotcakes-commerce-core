@@ -1,0 +1,145 @@
+﻿update {databaseOwner}[{objectQualifier}ModuleSettings] set SettingValue = 'd9fbfb5d-8f90-4706-a6c1-46e1fc7a1810' where SettingName = 'DefaultPostContentColumnId'
+update {databaseOwner}[{objectQualifier}ModuleSettings] set SettingValue = '683a3efc-b8ec-4115-9a25-613ef8a67a4b' where SettingName = 'DefaultPreContentColumnId'
+update {databaseOwner}[{objectQualifier}hcc_Product] set  PostContentColumnId = '' where PostContentColumnId = ' - None -'
+update {databaseOwner}[{objectQualifier}hcc_Product] set  PreContentColumnId = '' where PreContentColumnId = ' - None -'
+GO
+
+IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_CatalogRoles]') AND type in (N'U'))
+BEGIN
+	CREATE TABLE {databaseOwner}[{objectQualifier}hcc_CatalogRoles](
+		[CatalogRoleId] [bigint] IDENTITY(1,1) NOT NULL,
+		[RoleName] [nvarchar](250) NULL,
+		[ProductId] [uniqueidentifier] NULL,
+		[CategoryId] [uniqueidentifier] NULL,
+		[ProductTypeId] [uniqueidentifier] NULL,
+		[StoreId] [bigint] NOT NULL,
+		 CONSTRAINT [PK_{objectQualifier}hcc_CatalogRoles] PRIMARY KEY CLUSTERED 
+		(
+			[CatalogRoleId] ASC
+		)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+	)
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS WHERE CONSTRAINT_NAME ='FK_{objectQualifier}hcc_CatalogRoles_hcc_Category')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CatalogRoles] WITH CHECK ADD CONSTRAINT [FK_{objectQualifier}hcc_CatalogRoles_hcc_Category] FOREIGN KEY([CategoryId])
+	REFERENCES {databaseOwner}[{objectQualifier}hcc_Category] ([bvin])
+	ON DELETE CASCADE
+END
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CatalogRoles] CHECK CONSTRAINT [FK_{objectQualifier}hcc_CatalogRoles_hcc_Category]
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS WHERE CONSTRAINT_NAME ='FK_{objectQualifier}hcc_CatalogRoles_hcc_Product')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CatalogRoles] WITH CHECK ADD CONSTRAINT [FK_{objectQualifier}hcc_CatalogRoles_hcc_Product] FOREIGN KEY([ProductId])
+	REFERENCES {databaseOwner}[{objectQualifier}hcc_Product] ([bvin])
+	ON DELETE CASCADE
+END
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CatalogRoles] CHECK CONSTRAINT [FK_{objectQualifier}hcc_CatalogRoles_hcc_Product]
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS WHERE CONSTRAINT_NAME ='FK_{objectQualifier}hcc_CatalogRoles_hcc_ProductType')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CatalogRoles] WITH CHECK ADD CONSTRAINT [FK_{objectQualifier}hcc_CatalogRoles_hcc_ProductType] FOREIGN KEY([ProductTypeId])
+	REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductType] ([bvin])
+END
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CatalogRoles] CHECK CONSTRAINT [FK_{objectQualifier}hcc_CatalogRoles_hcc_ProductType]
+GO
+
+-- Cleanup of shared html option settings due to bug
+UPDATE {databaseOwner}[{objectQualifier}hcc_ProductOptions]
+SET [Settings] = '{}'
+WHERE [OptionType] = 400 AND [IsShared] = 1
+GO
+
+IF NOT EXISTS (SELECT 1 FROM {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] WHERE [DisplayName] = N'Product Role Assignment')
+BEGIN
+	INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([StoreId],[LastUpdatedUtc],[DisplayName],[FromEmail],[TemplateType])
+	VALUES (0, '20140526', N'Product Role Assignment', N'[[Store.ContactEmail]]', 502)
+
+	INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations] ([HtmlTemplateId],[Culture],[Subject],[Body],[RepeatingSection])
+	VALUES (@@IDENTITY, 'en-US', N'User Added to Product Role', N'<html>
+	<head>
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<style type="text/css">
+			A {
+				text-decoration: none;
+			}
+
+				A:link {
+					color: #3366cc;
+					text-decoration: none;
+				}
+
+				A:visited {
+					color: #663399;
+					text-decoration: none;
+				}
+
+				A:active {
+					color: #cccccc;
+					text-decoration: none;
+				}
+
+				A:Hover {
+					text-decoration: underline;
+				}
+
+			BODY, TD, CENTER, P {
+				font-family: Geneva, Verdana, Arial, Helvetica;
+				font-size: 10px;
+				color: #333333;
+			}
+
+			.body {
+				font-family: Geneva, Verdana, Arial, Helvetica;
+				font-size: 10px;
+				color: #333333;
+			}
+
+			.content {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 11px;
+				font-weight: normal;
+				color: #000000;
+			}
+
+			.title {
+				font-family: Helvetica, Arial, sans-serif;
+				font-size: 10px;
+				font-weight: normal;
+				color: #000000;
+			}
+
+			.headline {
+				font-family: Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				font-weight: bold;
+				color: #000000;
+			}
+
+			.message {
+				font-family: Geneva, Verdana, Arial, Helvetica;
+				font-size: 9px;
+			}
+		</style>
+	</head>
+	<body bgcolor="#ffffff" link="#3366cc" vlink="#3366cc" alink="#3366cc" leftmargin="0" topmargin="0">
+
+		<p>Hello [[User.FirstName]]:</p>
+		<p>The following product roles were assigned to you: [[User.NewRoles]].</p>
+		<p>Thank you,</p>
+		<p>Store Management<br />[[Store.StoreName]]</p>
+
+	</body>
+	</html>
+	', N'')
+END
+GO

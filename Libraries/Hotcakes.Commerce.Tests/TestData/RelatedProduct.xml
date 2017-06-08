@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FakeRelatedProduct>
+  <RelatedProduct>
+    <TotalRelatedProductCount>3</TotalRelatedProductCount>
+    <TotalProductSearchCount>
+      <Count>5</Count>
+      <CategoryId></CategoryId>
+      <VendorId></VendorId>
+      <ManufacturerId>CycleOps</ManufacturerId>
+      <Keyword>CYCLEOPS</Keyword>
+    </TotalProductSearchCount>
+    <AddProduct>
+      <Sku>2008 QUINTANA ROO LUCERO FRAMESET</Sku>
+      <Sku>2009 CERVELO P3 FRAMESET</Sku>
+      <Sku>2009 CERVELO P3 WORLD CHAMPION FRAMESET</Sku>
+    </AddProduct>
+    <DeleteProduct>
+      <Sku>2009 CERVELO P3 FRAMESET</Sku>
+      <Sku>2009 CERVELO P3 WORLD CHAMPION FRAMESET</Sku>
+    </DeleteProduct>
+  </RelatedProduct>
+  </FakeRelatedProduct>

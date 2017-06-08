@@ -1,0 +1,8 @@
+﻿/* Add table fields */
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD
+	[IsUserPrice] bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_IsUserPrice] DEFAULT (0)
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] ADD
+	[IsUserSuppliedPrice] bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_IsUserSuppliedPrice] DEFAULT (0)
+GO

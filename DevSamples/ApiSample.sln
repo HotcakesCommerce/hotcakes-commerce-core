@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiSample", "ApiSample\ApiSample.csproj", "{43311DBA-1ABB-4DC3-B7B9-45FC8831BE9D}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs12.arrowdesigns.net:8080/tfs/defaultcollection
+		SccLocalPath0 = ApiSample
+		SccProjectFilePathRelativizedFromConnection0 = ..\\
+		SccProjectUniqueName1 = ApiSample\\ApiSample.csproj
+		SccLocalPath1 = ApiSample
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43311DBA-1ABB-4DC3-B7B9-45FC8831BE9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43311DBA-1ABB-4DC3-B7B9-45FC8831BE9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43311DBA-1ABB-4DC3-B7B9-45FC8831BE9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43311DBA-1ABB-4DC3-B7B9-45FC8831BE9D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

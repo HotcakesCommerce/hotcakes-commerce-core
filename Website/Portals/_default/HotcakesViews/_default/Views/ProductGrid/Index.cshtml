@@ -1,0 +1,18 @@
+﻿@model List<Hotcakes.Modules.Core.Models.SingleProductViewModel>
+@functions
+{
+    string wrapWidth()
+    {
+        return string.Format("width:{0}%", 100 / ViewBag.MaxColumns);
+    }
+ }
+<div class="hc-product-grid hc-record-grid clearfix">
+    @foreach (var item in Model)
+    {
+        <div class="hc-wrap" style="@wrapWidth()">
+            @Html.Partial("_RenderSingleProduct", item)
+        </div>
+    }
+</div>
+
+

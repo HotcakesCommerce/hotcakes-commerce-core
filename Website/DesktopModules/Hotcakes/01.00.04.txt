@@ -1,0 +1,10 @@
+﻿DesktopModules/Hotcakes/Core/Admin/WeeklySalesChart.aspx
+DesktopModules/Hotcakes/Core/Admin/Configuration/GeneralRemoveDomain.aspx
+DesktopModules/Hotcakes/Core/Admin/Controls/ProductModifications.ascx
+DesktopModules/Hotcakes/Core/Admin/Controls/PaymentMethodList.ascx
+DesktopModules/Hotcakes/Core/Content/images/system/ajax-loader-small.gif
+DesktopModules/Hotcakes/Core/Modules/Reports
+DesktopModules/Hotcakes/Core/Scripts/Checkout.js
+DesktopModules/Hotcakes/Core/Scripts/ImageRotator.js
+DesktopModules/Hotcakes/Core/Scripts/receipt.js
+DesktopModules/Hotcakes/Core/Scripts/tinymce/bvinit.js

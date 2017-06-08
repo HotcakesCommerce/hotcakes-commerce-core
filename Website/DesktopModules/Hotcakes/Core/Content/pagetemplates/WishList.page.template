@@ -1,0 +1,43 @@
+﻿<portal version="5.0">
+  <description>WishList page template</description>
+  <tab>
+    <visible>true</visible>
+    <name>Wish List</name>
+		<skinsrc>[G]Skins/Gravity/2-Col.ascx</skinsrc>
+		<tabpermissions>
+      <permission>
+        <permissioncode>SYSTEM_TAB</permissioncode>
+        <permissionkey>VIEW</permissionkey>
+        <allowaccess>true</allowaccess>
+				<rolename>Registered Users</rolename>
+			</permission>
+      <permission>
+        <permissioncode>SYSTEM_TAB</permissioncode>
+        <permissionkey>VIEW</permissionkey>
+        <allowaccess>true</allowaccess>
+        <rolename>Administrators</rolename>
+      </permission>
+      <permission>
+        <permissioncode>SYSTEM_TAB</permissioncode>
+        <permissionkey>EDIT</permissionkey>
+        <allowaccess>true</allowaccess>
+        <rolename>Administrators</rolename>
+      </permission>
+    </tabpermissions>
+    <tabsettings />
+    <parent>HotcakesStore</parent>
+    <panes>
+      <pane>
+        <name>ContentPane</name>
+        <modules>
+          <module>
+            <title>Wish List</title>
+            <definition>Hotcakes.WishList</definition>
+            <moduledefinition>Hotcakes Wish List</moduledefinition>
+						<inheritviewpermissions>true</inheritviewpermissions>
+					</module>
+        </modules>
+      </pane>
+    </panes>
+  </tab>
+</portal>

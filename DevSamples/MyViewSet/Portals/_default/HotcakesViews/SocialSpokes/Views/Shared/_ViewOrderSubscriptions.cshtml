@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Hotcakes.Commerce.Orders.LineItem>
+<h2 class="dnnClear">Subscriptions</h2>
+<table id="hcSubscriptionGrid" class="dnnGrid">
+    <tr class="dnnGridHeader">
+        <td>@Localization.GetString("Item")</td>
+        <td>@Localization.GetString("Quantity")</td>
+        <td>@Localization.GetString("FeePerPeriod")</td>
+        <td class="hc-right">@Localization.GetString(HccApp.CurrentStore.Settings.ApplyVATRules ? "VAT" : "Tax")</td>
+        <td class="hc-right">@Localization.GetString("NextPaymentDate")</td>
+        @if (ViewContext.RouteData.Values["action"].ToString() != "receipt")
+        {
+            <td class="hc-right">@Localization.GetString("TotalPayed")</td>
+            <td>&nbsp;</td>
+        }
+    </tr>
+    @for (int i = 0; i < Model.Count(); i++)
+    {
+        var item = Model.ElementAt(i);
+        <tr class="@(i % 2 == 1 ? "dnnGridAltItem" : "dnnGridItem")">
+            <td>
+                @item.ProductName<br />
+                <span>@item.ProductSku</span><br />
+                <div class="hidden-phone">
+                    @Html.Raw(item.ProductShortDescription)
+
+                    @if (!string.IsNullOrEmpty(item.CustomPropGiftCardNumber))
+                    {
+                        @Html.Raw(Localization.GetString("GiftCardNumber") + item.CustomPropGiftCardNumber)
+                    }
+                </div>
+                @if (item.LineTotal != item.LineTotalWithoutDiscounts)
+                {
+                    <br />
+                    @Html.Raw(@item.DiscountDetailsAsHtml())
+                }
+            </td>
+            <td class="hc-center">@item.Quantity</td>
+            <td>
+                @if (item.HasAnyDiscounts)
+                {
+                    <span class="hcLineTotalBase hc-strike">@item.LineTotalWithoutDiscounts.ToString("C")</span><br />
+                }
+                <span class="hcLineTotalAdjusted">
+                    @item.LineTotal.ToString("C")
+                </span>
+                @Localization.GetFormattedString("Every", item.RecurringBilling.Interval, LocalizationUtils.GetRecurringIntervalLower(item.RecurringBilling.IntervalType))
+            </td>
+            <td class="hc-right">
+                @item.TaxPortion.ToString("C")
+            </td>
+            <td class="hc-right">
+                @if (!item.RecurringBilling.IsCancelled)
+                {
+                    <text>@item.RecurringBilling.NextPaymentDate.ToShortDateString()</text>
+                }
+            </td>
+            @if (ViewContext.RouteData.Values["action"].ToString() != "receipt")
+            {
+                <td class="hc-right">
+                    @item.RecurringBilling.TotalPayed.ToString("C")
+                </td>
+                <td class="hc-actions">
+                    
+                    <b class="hcSubCancelled" style='display:@(item.RecurringBilling.IsCancelled ? "inline":"none")'>@Localization.GetString("Cancelled")</b>
+                    @if (HccApp.CurrentStore.Settings.AllowCancelSubscription && !item.RecurringBilling.IsCancelled)
+                    {
+                        <a href="#" data-itemid="@item.Id" class="dnnSecondaryAction hcSubCancel">
+                            @Localization.GetString("Cancel")
+                        </a>
+                    }
+                </td>
+            }
+        </tr>
+    }
+</table>
+
+<div id="hcSubscriptionDetail" style="display: none;" data-width="800" data-height="500" data-title="Subscription Details">
+    test ...
+</div>
+
+

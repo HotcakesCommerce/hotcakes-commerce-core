@@ -1,0 +1,3 @@
+﻿DesktopModules/Hotcakes/Core/Scripts/jquery.url.js
+DesktopModules/Hotcakes/Core/Scripts/jquery.ajaxloader.js
+DesktopModules/Hotcakes/Core/Admin/AdminSplit.master

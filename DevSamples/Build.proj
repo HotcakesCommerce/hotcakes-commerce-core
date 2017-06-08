@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project
+   xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+   ToolsVersion="4.0"
+   DefaultTargets="Build">
+  <Import Project="..\.build\MSBuild.Community.Tasks.targets" />
+  
+  <PropertyGroup Condition=" '$(RootFolder)' == '' ">
+    <RootFolder>$(MSBuildProjectDirectory)\..</RootFolder>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Version)' == '' ">
+    <Version>1.00.00</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DevSamplesBuildFolder>$(RootFolder)\_Build\_DevSamples</DevSamplesBuildFolder>
+    <InstallFolder>$(RootFolder)\_Install</InstallFolder>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(BuildConfiguration)' == '' ">
+    <BuildConfiguration>Release</BuildConfiguration>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(BuildPlatform)' == '' ">
+    <BuildPlatform>Any CPU</BuildPlatform>
+  </PropertyGroup>
+
+  <Target Name="Clean">
+    <DeleteTree Directories="$(DevSamplesBuildFolder)\**\obj\**;$(DevSamplesBuildFolder)\**\bin\**" />
+  </Target>
+
+  <Target Name="Compile">
+
+    <!-- Projects to Build -->
+    <ItemGroup>
+      <ProjectFiles Include="$(DevSamplesBuildFolder)\*.sln" />
+    </ItemGroup>
+
+    <MSBuild Projects="@(ProjectFiles)" Properties="Configuration=$(BuildConfiguration);Platform=$(BuildPlatform);OutputPath=bin\Release\" />
+  </Target>
+
+  <Target Name="Build">
+    <CallTarget Targets="CopyDevSamples" />
+    <CallTarget Targets="RemoveTFSBindings" />
+    <CallTarget Targets="Compile" />
+    <CallTarget Targets="Clean" />
+    <CallTarget Targets="Package" />
+
+    <RemoveDir Directories="$(DevSamplesBuildFolder)" />
+  </Target>
+
+  <Target Name="CopyDevSamples">
+    <ItemGroup>
+      <DevSamples Include="**" />
+      <DevSamples Remove="Build.proj" />
+      <DevSamples Remove="*.suo" />
+      <DevSamples Remove="*.cache" />
+      <DevSamples Remove="*.vssscc" />
+      <DevSamples Remove="**\bin\**" />
+      <DevSamples Remove="**\obj\**" />
+      <DevSamples Remove="**\*.user" />
+      <DevSamples Remove="**\*.user" />
+      <DevSamples Remove="**\*.vspscc" />
+    </ItemGroup>
+
+    <Attrib Files="@(DevSamples)" ReadOnly="false" />
+
+    <RemoveDir Directories="$(DevSamplesBuildFolder)" />
+    <Copy SourceFiles="@(DevSamples)" DestinationFolder="$(DevSamplesBuildFolder)\%(RecursiveDir)" />
+  </Target>
+
+  <Target Name="RemoveTFSBindings">
+    <ItemGroup>
+      <SolutionFiles Include="$(DevSamplesBuildFolder)\*.sln" />
+    </ItemGroup>
+    <FileUpdate
+      Files="@(SolutionFiles)"
+      IgnoreCase="true"
+      Regex="^\s+GlobalSection\(TeamFoundationVersionControl\).+\n(\s*Scc.*\n)+\s+EndGlobalSection"
+      ReplacementText=" "
+      Multiline="true"
+      Singleline="false" />
+    
+    <ItemGroup>
+      <ProjectFiles Include="$(DevSamplesBuildFolder)\**\*.*proj" />
+    </ItemGroup>
+    <FileUpdate
+      Files="@(ProjectFiles)"
+      Regex="&lt;Scc[A-z]+&gt;.+&lt;/Scc[A-z]+&gt;"
+      ReplacementText=" " />
+  </Target>
+
+  <Target Name="Package">
+    <ItemGroup>
+      <ApiSample Include="$(DevSamplesBuildFolder)\ApiSample\**" />
+      <ApiSample Include="$(DevSamplesBuildFolder)\ApiSample.*" />
+      <ApiSample Include="$(DevSamplesBuildFolder)\References" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AuthorizeNetEmulator Include="$(DevSamplesBuildFolder)\AuthorizeNetEmulator\**" />
+      <AuthorizeNetEmulator Include="$(DevSamplesBuildFolder)\AuthorizeNetEmulator.*" />
+      <AuthorizeNetEmulator Include="$(DevSamplesBuildFolder)\References" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <MyCreditCardGateway Include="$(DevSamplesBuildFolder)\MyCreditCardGateway\**" />
+      <MyCreditCardGateway Include="$(DevSamplesBuildFolder)\MyCreditCardGateway.*" />
+      <MyCreditCardGateway Include="$(DevSamplesBuildFolder)\References" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <MyGiftCardGateway Include="$(DevSamplesBuildFolder)\MyGiftCardGateway\**" />
+      <MyGiftCardGateway Include="$(DevSamplesBuildFolder)\MyGiftCardGateway.*" />
+      <MyGiftCardGateway Include="$(DevSamplesBuildFolder)\References" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <MyIntegration Include="$(DevSamplesBuildFolder)\MyIntegration\**" />
+      <MyIntegration Include="$(DevSamplesBuildFolder)\MyIntegration.*" />
+      <MyIntegration Include="$(DevSamplesBuildFolder)\References" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <MyPaymentMethod Include="$(DevSamplesBuildFolder)\MyPaymentMethod\**" />
+      <MyPaymentMethod Include="$(DevSamplesBuildFolder)\MyPaymentMethod.*" />
+      <MyPaymentMethod Include="$(DevSamplesBuildFolder)\References" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <MyWorkflow Include="$(DevSamplesBuildFolder)\MyWorkflow\**" />
+      <MyWorkflow Include="$(DevSamplesBuildFolder)\MyWorkflow.*" />
+      <MyWorkflow Include="$(DevSamplesBuildFolder)\References" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <MyViewSet Include="$(DevSamplesBuildFolder)\MyViewSet\**" />
+      <MyViewSet Remove="$(DevSamplesBuildFolder)\MyViewSet\Web.config" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <MyTaxProvider Include="$(DevSamplesBuildFolder)\MyTaxProvider\**" />
+      <MyTaxProvider Include="$(DevSamplesBuildFolder)\References" />
+      <MyTaxProvider Include="$(DevSamplesBuildFolder)\MyTaxProvider.*" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <SocialSpokesViewSet Include="$(DevSamplesBuildFolder)\MyViewSet\Portals\_default\HotcakesViews\SocialSpokes\**" />
+    </ItemGroup>
+
+    <FileUpdate
+      Files="$(DevSamplesBuildFolder)\MyViewSet\Portals\_default\HotcakesViews\MyViewSet\views.less"
+      IgnoreCase="true"
+      Regex="@import &quot;_views_nobootstrap.less&quot;;"
+      ReplacementText=" "
+      Multiline="false"
+      Singleline="true" />
+
+    <FileUpdate
+      Files="$(DevSamplesBuildFolder)\MyViewSet\Portals\_default\HotcakesViews\MyViewSet\views.css"
+      IgnoreCase="true"
+      Regex="\/\* Nobootstrap Start \*\/[\s\S]*\/\* Nobootstrap End \*\/"
+      ReplacementText=" "
+      Multiline="true"
+      Singleline="false" />
+
+    <ItemGroup>
+      <BootstrapViewSet Include="$(DevSamplesBuildFolder)\MyViewSet\Portals\_default\HotcakesViews\MyViewSet\**" />
+      <BootstrapViewSet Remove="$(DevSamplesBuildFolder)\MyViewSet\Portals\_default\HotcakesViews\MyViewSet\_views_nobootstrap.less" />
+    </ItemGroup>
+
+    <Zip Files="@(ApiSample)" WorkingDirectory="$(DevSamplesBuildFolder)" ZipFileName="$(InstallFolder)\ApiSample_$(Version).zip" ParallelCompression="False" />
+    <Zip Files="@(AuthorizeNetEmulator)" WorkingDirectory="$(DevSamplesBuildFolder)" ZipFileName="$(InstallFolder)\AuthorizeNetEmulator_$(Version).zip" ParallelCompression="False" />
+    <Zip Files="@(MyCreditCardGateway)" WorkingDirectory="$(DevSamplesBuildFolder)" ZipFileName="$(InstallFolder)\MyCreditCardGateway_$(Version).zip" ParallelCompression="False" />
+    <Zip Files="@(MyGiftCardGateway)" WorkingDirectory="$(DevSamplesBuildFolder)" ZipFileName="$(InstallFolder)\MyGiftCardGateway_$(Version).zip" ParallelCompression="False" />
+    <Zip Files="@(MyIntegration)" WorkingDirectory="$(DevSamplesBuildFolder)" ZipFileName="$(InstallFolder)\MyIntegration_$(Version).zip" ParallelCompression="False" />
+    <Zip Files="@(MyPaymentMethod)" WorkingDirectory="$(DevSamplesBuildFolder)" ZipFileName="$(InstallFolder)\MyPaymentMethod_$(Version).zip" ParallelCompression="False" />
+    <Zip Files="@(MyWorkflow)" WorkingDirectory="$(DevSamplesBuildFolder)" ZipFileName="$(InstallFolder)\MyWorkflow_$(Version).zip" ParallelCompression="False" />
+
+    <Zip Files="@(MyViewSet)" WorkingDirectory="$(DevSamplesBuildFolder)\MyViewSet" ZipFileName="$(InstallFolder)\MyViewSet_$(Version).zip" ParallelCompression="False" />
+    <Zip Files="@(SocialSpokesViewSet)" WorkingDirectory="$(DevSamplesBuildFolder)\MyViewSet\Portals\_default\HotcakesViews\SocialSpokes" ZipFileName="$(InstallFolder)\SocialSpokesViewSet_$(Version).zip" ParallelCompression="False" />
+    
+    <Zip Files="@(BootstrapViewSet)" WorkingDirectory="$(DevSamplesBuildFolder)\MyViewSet\Portals\_default\HotcakesViews\MyViewSet" ZipFileName="$(InstallFolder)\BootstrapViewSet_$(Version).zip" ParallelCompression="False" />
+
+    <Zip Files="@(MyTaxProvider)" WorkingDirectory="$(DevSamplesBuildFolder)" ZipFileName="$(InstallFolder)\MyTaxProvider_$(Version).zip" ParallelCompression="False" />
+  </Target>
+
+</Project>

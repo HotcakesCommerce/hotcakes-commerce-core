@@ -1,0 +1,1087 @@
+﻿/* Add table fields */
+TRUNCATE TABLE {databaseOwner}[{objectQualifier}hcc_Affiliate]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Affiliate] ADD
+	[UserId] int NOT NULL,
+	[AffiliateID] nvarchar(50) NOT NULL,
+	[Approved] bit NOT NULL,
+	[CreationDate] datetime NOT NULL
+GO
+
+IF EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = N'IX_{objectQualifier}hcc_Affiliate' AND [OBJECT_ID] = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Affiliate]'))
+BEGIN
+	DROP INDEX [IX_{objectQualifier}hcc_Affiliate] ON {databaseOwner}[{objectQualifier}hcc_Affiliate];
+END
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Affiliate] ON {databaseOwner}[{objectQualifier}hcc_Affiliate] ([AffiliateID] ASC)
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Affiliate] DROP COLUMN [DisplayName]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Affiliate] DROP COLUMN [StyleSheet]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Affiliate] DROP CONSTRAINT [DF_{objectQualifier}hcc_Affiliate_AddressId]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Affiliate] DROP COLUMN [Address]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Affiliate] ALTER COLUMN [ReferralID] nvarchar(50) NULL
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] ALTER COLUMN [AffiliateID] bigint NULL
+GO
+	
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([StoreId], [LastUpdatedUtc], [DisplayName], [FromEmail], [Subject], [Body], [RepeatingSection], [TemplateType]) VALUES (0, '20131113', N'Affiliate Approvement', N'[[Store.ContactEmail]]', N'Affiliate Register Confirmation', N'<html>
+<head>
+    <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+    <style type="text/css">
+        A {
+            text-decoration: none;
+        }
+
+            A:link {
+                color: #3366cc;
+                text-decoration: none;
+            }
+
+            A:visited {
+                color: #663399;
+                text-decoration: none;
+            }
+
+            A:active {
+                color: #cccccc;
+                text-decoration: none;
+            }
+
+            A:Hover {
+                text-decoration: underline;
+            }
+
+        BODY, TD, CENTER, P {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 10px;
+            color: #333333;
+        }
+
+        .body {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 10px;
+            color: #333333;
+        }
+
+        .content {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            font-weight: normal;
+            color: #000000;
+        }
+
+        .title {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 10px;
+            font-weight: normal;
+            color: #000000;
+        }
+
+        .headline {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            color: #000000;
+        }
+
+        .message {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 9px;
+        }
+    </style>
+</head>
+<body bgcolor="#ffffff" link="#3366cc" vlink="#3366cc" alink="#3366cc" leftmargin="0" topmargin="0">
+
+	Affiliate Was Registered
+
+</body>
+</html>
+', N'', 500)
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([StoreId], [LastUpdatedUtc], [DisplayName], [FromEmail], [Subject], [Body], [RepeatingSection], [TemplateType]) VALUES (0, '20131113', N'Affiliate Registration', N'[[Store.ContactEmail]]', N'Affiliate Was Approved', N'<html>
+<head>
+    <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+    <style type="text/css">
+        A {
+            text-decoration: none;
+        }
+
+            A:link {
+                color: #3366cc;
+                text-decoration: none;
+            }
+
+            A:visited {
+                color: #663399;
+                text-decoration: none;
+            }
+
+            A:active {
+                color: #cccccc;
+                text-decoration: none;
+            }
+
+            A:Hover {
+                text-decoration: underline;
+            }
+
+        BODY, TD, CENTER, P {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 10px;
+            color: #333333;
+        }
+
+        .body {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 10px;
+            color: #333333;
+        }
+
+        .content {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            font-weight: normal;
+            color: #000000;
+        }
+
+        .title {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 10px;
+            font-weight: normal;
+            color: #000000;
+        }
+
+        .headline {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            color: #000000;
+        }
+
+        .message {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 9px;
+        }
+    </style>
+</head>
+<body bgcolor="#ffffff" link="#3366cc" vlink="#3366cc" alink="#3366cc" leftmargin="0" topmargin="0">
+
+	Affiliate Was Approved
+
+</body>
+</html>
+', N'', 501)
+
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_AffiliatePayments](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[AffiliateId] [bigint] NOT NULL,
+	[PaymentAmount] [decimal](18, 10) NOT NULL,
+	[Notes] [nvarchar](max) NULL,
+	[FileName] [nvarchar](500) NULL,
+	[PaymentDate] [datetime] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_AffiliatePayments] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AffiliatePayments]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_AffiliatePayments_hcc_Affiliate] FOREIGN KEY([AffiliateId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Affiliate] ([Id])
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AffiliatePayments] CHECK CONSTRAINT [FK_{objectQualifier}hcc_AffiliatePayments_hcc_Affiliate]
+GO
+
+
+/* Bundled Products */
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_BundledProducts](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[ProductId] [uniqueidentifier] NOT NULL,
+	[BundledProductId] [uniqueidentifier] NOT NULL,
+	[Quantity] [int] NOT NULL,
+	[SelectionData] [nvarchar](max) NULL,
+	[SortOrder] [int] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_BundledProducts] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_BundledProducts]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_BundledProducts_hcc_Product] FOREIGN KEY([ProductId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Product] ([bvin])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_BundledProducts] CHECK CONSTRAINT [FK_{objectQualifier}hcc_BundledProducts_hcc_Product]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_BundledProducts] ADD  CONSTRAINT [DF_{objectQualifier}hcc_BundledProducts_SortOrder]  DEFAULT ((0)) FOR [SortOrder]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD
+	[IsBundle] bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_IsBundle] DEFAULT 0
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] ADD
+	[IsBundle] bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_IsBundle] DEFAULT 0
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] ADD
+	[QuantityReserved] int NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_QuantityReserved] DEFAULT 0
+GO
+
+update {databaseOwner}[{objectQualifier}hcc_LineItem]
+set QuantityReserved = li.Quantity
+from {databaseOwner}[{objectQualifier}hcc_LineItem] li join {databaseOwner}[{objectQualifier}hcc_Order] o
+	on li.OrderBvin = o.bvin
+where o.ShippingStatus in (0, 1)
+
+/* Cleanup */
+delete from {databaseOwner}[{objectQualifier}hcc_StoreSettings]
+where SettingName = 'MaxOrderMessage'
+GO
+
+
+
+
+/* Content localization */
+
+/* Categories */
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_CategoryTranslations](
+	[CategoryTranslationId] [bigint] IDENTITY(1,1) NOT NULL,
+	[CategoryId] [uniqueidentifier] NOT NULL,
+	[Culture] [nvarchar](10) NOT NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[Description] [ntext] NULL,
+	[MetaTitle] [nvarchar](512) NULL,
+	[MetaKeywords] [nvarchar](255) NULL,
+	[MetaDescription] [nvarchar](255) NULL,
+	[Keywords] [nvarchar](max) NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_CategoryTranslations] PRIMARY KEY CLUSTERED 
+(
+	[CategoryTranslationId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CategoryTranslations]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_CategoryTranslations_hcc_Category] FOREIGN KEY([CategoryId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Category] ([bvin])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CategoryTranslations] CHECK CONSTRAINT [FK_{objectQualifier}hcc_CategoryTranslations_hcc_Category]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_CategoryTranslations] ADD CONSTRAINT
+	[UK_{objectQualifier}hcc_CategoryTranslations] UNIQUE NONCLUSTERED 
+	(
+	CategoryId,
+	Culture
+	) WITH ( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+
+GO
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_CategoryTranslations]
+    ([CategoryId]
+    ,[Culture]
+    ,[Name]
+    ,[Description]
+    ,[MetaTitle]
+    ,[MetaKeywords]
+    ,[MetaDescription]
+    ,[Keywords])
+select
+	[bvin]
+    ,'en-US'
+    ,[Name]
+    ,[Description]
+    ,[MetaTitle]
+    ,[MetaKeywords]
+    ,[MetaDescription]
+    ,[Keywords]
+from {databaseOwner}[{objectQualifier}hcc_Category]
+GO
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category]
+	DROP COLUMN [Name], [Description], [MetaTitle], [MetaKeywords], [MetaDescription], [Keywords]
+GO
+
+
+/* Products */
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductTranslations](
+	[ProductTranslationId] [bigint] IDENTITY(1,1) NOT NULL,
+	[ProductId] [uniqueidentifier] NOT NULL,
+	[Culture] [nvarchar](10) NOT NULL,
+	[ProductName] [nvarchar](255) NOT NULL,
+	[MetaKeywords] [nvarchar](255) NULL,
+	[MetaDescription] [nvarchar](255) NULL,
+	[MetaTitle] [nvarchar](512) NULL,
+	[ShortDescription] [nvarchar](512) NULL,
+	[LongDescription] [nvarchar](max) NULL,
+	[Keywords] [nvarchar](max) NULL,
+	[SitePriceOverrideText] [nvarchar](255) NULL,
+	[SmallImageAlternateText] [nvarchar](255) NULL,
+	[MediumImageAlternateText] [nvarchar](255) NULL,
+	[DescriptionTabs] [ntext] NULL,
+	[HiddenSearchKeywords] [nvarchar](max) NULL,
+	[UserPriceLabel] [nvarchar](4000) NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductTranslations] PRIMARY KEY CLUSTERED 
+(
+	[ProductTranslationId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTranslations] ADD CONSTRAINT
+	[FK_{objectQualifier}hcc_ProductTranslations_hcc_Product] FOREIGN KEY
+	(
+	ProductId
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Product]
+	(
+	bvin
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  CASCADE 
+GO
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTranslations] ADD CONSTRAINT
+	[UK_{objectQualifier}hcc_ProductTranslations] UNIQUE NONCLUSTERED 
+	(
+	ProductId,
+	Culture
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+GO
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_ProductTranslations]
+	([ProductId],
+	[Culture],
+	[ProductName],
+	[MetaKeywords],
+	[MetaDescription],
+	[MetaTitle],
+	[ShortDescription],
+	[LongDescription],
+	[Keywords],
+	[SitePriceOverrideText],
+	[SmallImageAlternateText],
+	[MediumImageAlternateText],
+	[DescriptionTabs],
+	[HiddenSearchKeywords],
+	[UserPriceLabel])
+select
+	[bvin]
+	,'en-US'
+	,[ProductName]
+	,[MetaKeywords]
+	,[MetaDescription]
+	,[MetaTitle]
+	,[ShortDescription]
+	,[LongDescription]
+	,[Keywords]
+	,[SitePriceOverrideText]
+	,[SmallImageAlternateText]
+	,[MediumImageAlternateText]
+	,[DescriptionTabs]
+	,[HiddenSearchKeywords]
+	,[UserPriceLabel]
+from {databaseOwner}[{objectQualifier}hcc_Product]
+GO
+
+IF EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = N'IX_{objectQualifier}hcc_Product_ProductName' AND [OBJECT_ID] = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Product]'))
+BEGIN
+	DROP INDEX [IX_{objectQualifier}hcc_Product_ProductName] ON {databaseOwner}[{objectQualifier}hcc_Product];
+END
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_SitePriceOverrideText]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_SmallImageAlternateText]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_MediumImageAlternateText]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_DescriptionTabs]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_HiddenSearchKeywords]
+GO
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product]
+	DROP COLUMN
+	[ProductName]
+	,[MetaKeywords]
+	,[MetaDescription]
+	,[MetaTitle]
+	,[ShortDescription]
+	,[LongDescription]
+	,[Keywords]
+	,[SitePriceOverrideText]
+	,[SmallImageAlternateText]
+	,[MediumImageAlternateText]
+	,[DescriptionTabs]
+	,[HiddenSearchKeywords]
+	,[UserPriceLabel]
+GO
+
+
+
+/* Product Types */
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeTranslations](
+	[ProductTypeTranslationId] [bigint] IDENTITY(1,1) NOT NULL,
+	[ProductTypeId] [uniqueidentifier] NOT NULL,
+	[Culture] [nchar](10) NOT NULL,
+	[ProductTypeName] [nvarchar](512) NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductTypeTranslations] PRIMARY KEY CLUSTERED 
+(
+	[ProductTypeTranslationId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON),
+ CONSTRAINT [UK_{objectQualifier}hcc_ProductTypeTranslations] UNIQUE NONCLUSTERED 
+(
+	[ProductTypeId] ASC,
+	[Culture] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeTranslations]  WITH CHECK ADD CONSTRAINT [FK_{objectQualifier}hcc_ProductTypeTranslations_hcc_ProductType] FOREIGN KEY([ProductTypeId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductType] ([bvin])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeTranslations] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductTypeTranslations_hcc_ProductType]
+GO
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_ProductTypeTranslations]
+	([ProductTypeId],
+	[Culture],
+	[ProductTypeName])
+select
+	[bvin]
+	,'en-US'
+	,[ProductTypeName]
+from {databaseOwner}[{objectQualifier}hcc_ProductType]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductType]
+	DROP COLUMN [ProductTypeName]
+GO
+
+
+
+/* Product Properties */
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyTranslations](
+	[ProductPropertyTranslationId] [bigint] IDENTITY(1,1) NOT NULL,
+	[ProductPropertyId] [bigint] NOT NULL,
+	[Culture] [nvarchar](10) NOT NULL,
+	[DisplayName] [nvarchar](512) NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductPropertyTranslations] PRIMARY KEY CLUSTERED 
+(
+	[ProductPropertyTranslationId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON),
+ CONSTRAINT [UK_{objectQualifier}hcc_ProductPropertyTranslations] UNIQUE NONCLUSTERED 
+(
+	[ProductPropertyId] ASC,
+	[Culture] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyTranslations]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyTranslations_hcc_ProductProperty] FOREIGN KEY([ProductPropertyId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductProperty] ([Id])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyTranslations] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyTranslations_hcc_ProductProperty]
+GO
+
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_ProductPropertyTranslations]
+	([ProductPropertyId],
+	[Culture],
+	[DisplayName])
+select
+	[Id]
+	,'en-US'
+	,[DisplayName]
+from {databaseOwner}[{objectQualifier}hcc_ProductProperty]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductProperty]
+	DROP COLUMN [DisplayName]
+GO
+
+/* Promotions */
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_PromotionTranslations](
+	[PromotionTranslationId] [bigint] IDENTITY(1,1) NOT NULL,
+	[PromotionId] [bigint] NOT NULL,
+	[Culture] [nvarchar](10) NOT NULL,
+	[CustomerDescription] [nvarchar](255) NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_PromotionTranslations] PRIMARY KEY CLUSTERED 
+(
+	[PromotionTranslationId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON),
+ CONSTRAINT [UK_{objectQualifier}hcc_PromotionTranslations] UNIQUE NONCLUSTERED 
+(
+	[PromotionId] ASC,
+	[Culture] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_PromotionTranslations]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_PromotionTranslations_hcc_Promotions] FOREIGN KEY([PromotionId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Promotions] ([Id])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_PromotionTranslations] CHECK CONSTRAINT [FK_{objectQualifier}hcc_PromotionTranslations_hcc_Promotions]
+GO
+
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_PromotionTranslations]
+	([PromotionId],
+	[Culture],
+	[CustomerDescription])
+select
+	[Id]
+	,'en-US'
+	,[CustomerDescription]
+from {databaseOwner}[{objectQualifier}hcc_Promotions]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Promotions]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_Promotions_CustomerDescription]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Promotions]
+	DROP COLUMN [CustomerDescription]
+GO
+
+
+/* Shipping Methods */
+
+/* Change type of key types */
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod] DROP CONSTRAINT [PK_{objectQualifier}hcc_ShippingMethod]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod] ADD [TempId] INT NOT NULL IDENTITY(1, 1);
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod] ADD CONSTRAINT [PK_{objectQualifier}hcc_ShippingMethod_TempId] PRIMARY KEY CLUSTERED ([TempId]);
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod]
+ALTER COLUMN [bvin] uniqueidentifier not null
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod] DROP CONSTRAINT [PK_{objectQualifier}hcc_ShippingMethod_TempId];
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod] DROP COLUMN [TempId];
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod] ADD CONSTRAINT [PK_{objectQualifier}hcc_ShippingMethod] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+
+/* Localization */
+
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethodTranslations](
+	[ShippingMethodTranslationId] [bigint] IDENTITY(1,1) NOT NULL,
+	[ShippingMethodId] [uniqueidentifier] NOT NULL,
+	[Culture] [nvarchar](10) NOT NULL,
+	[Name] [nvarchar](255) NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ShippingMethodTranslations] PRIMARY KEY CLUSTERED 
+(
+	[ShippingMethodTranslationId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethodTranslations]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ShippingMethodTranslations_hcc_ShippingMethodTranslations] FOREIGN KEY([ShippingMethodId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ShippingMethod] ([bvin])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethodTranslations] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ShippingMethodTranslations_hcc_ShippingMethodTranslations]
+GO
+
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_ShippingMethodTranslations]
+	([ShippingMethodId],
+	[Culture],
+	[Name])
+select
+	[bvin]
+	,'en-US'
+	,[Name]
+from {databaseOwner}[{objectQualifier}hcc_ShippingMethod]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod]
+	DROP COLUMN [Name]
+GO
+
+/* Product Options */
+
+/* Change type of key types */
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXOption] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductXOption_hcc_ProductXOption]
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductOptionsItems_hcc_ProductOptions]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptions] DROP CONSTRAINT [PK_{objectQualifier}hcc_ProductOptions]
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems] DROP CONSTRAINT [PK_{objectQualifier}hcc_ProductOptionsItems]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptions] ADD [TempId] INT NOT NULL IDENTITY(1, 1);
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptions] ADD CONSTRAINT [PK_{objectQualifier}hcc_ProductOptions_TempId] PRIMARY KEY CLUSTERED ([TempId]);
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems] ADD [TempId] INT NOT NULL IDENTITY(1, 1);
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems] ADD CONSTRAINT [PK_{objectQualifier}hcc_ProductOptionsItems_TempId] PRIMARY KEY CLUSTERED ([TempId]);
+GO
+
+IF EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = N'IX_{objectQualifier}hcc_ProductOptionsItems' AND [OBJECT_ID] = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]'))
+BEGIN
+	DROP INDEX [IX_{objectQualifier}hcc_ProductOptionsItems] ON {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems];
+END
+GO
+
+IF EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = N'IX_{objectQualifier}hcc_ProductXOption_OptionBvin' AND [OBJECT_ID] = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXOption]'))
+BEGIN
+	DROP INDEX [IX_{objectQualifier}hcc_ProductXOption_OptionBvin] ON {databaseOwner}[{objectQualifier}hcc_ProductXOption];
+END
+GO
+
+IF EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = N'IX_{objectQualifier}hcc_ProductXOption_ProductBvin' AND [OBJECT_ID] = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXOption]'))
+BEGIN
+	DROP INDEX [IX_{objectQualifier}hcc_ProductXOption_ProductBvin] ON {databaseOwner}[{objectQualifier}hcc_ProductXOption];
+END
+GO
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptions]
+ALTER COLUMN [bvin] uniqueidentifier not null
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]
+ALTER COLUMN [bvin] uniqueidentifier not null
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]
+ALTER COLUMN [OptionBvin] uniqueidentifier not null
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXOption]
+ALTER COLUMN [ProductBvin] uniqueidentifier not null
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXOption]
+ALTER COLUMN [OptionBvin] uniqueidentifier not null
+GO
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptions] DROP CONSTRAINT [PK_{objectQualifier}hcc_ProductOptions_TempId];
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptions] DROP COLUMN [TempId];
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems] DROP CONSTRAINT [PK_{objectQualifier}hcc_ProductOptionsItems_TempId];
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems] DROP COLUMN [TempId];
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptions] ADD  CONSTRAINT [PK_{objectQualifier}hcc_ProductOptions] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems] ADD  CONSTRAINT [PK_{objectQualifier}hcc_ProductOptionsItems] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductOptionsItems_hcc_ProductOptions] FOREIGN KEY([OptionBvin])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductOptions] ([bvin])
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductOptionsItems_hcc_ProductOptions]
+GO
+
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductOptionsItems] ON {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems] 
+(
+	[OptionBvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+
+
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductXOption_OptionBvin] ON {databaseOwner}[{objectQualifier}hcc_ProductXOption] 
+(
+	[OptionBvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductXOption_ProductBvin] ON {databaseOwner}[{objectQualifier}hcc_ProductXOption] 
+(
+	[ProductBvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+
+/* Swatch logic changes */
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptions] ADD
+	[IsColorSwatch] bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_ProductOptions_IsColorSwatch] DEFAULT 0
+GO
+
+/* Localization */
+
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionTranslations](
+	[ProductOptionTranslationId] [bigint] IDENTITY(1,1) NOT NULL,
+	[ProductOptionId] [uniqueidentifier] NOT NULL,
+	[Culture] [nvarchar](10) NOT NULL,
+	[Name] [nvarchar](255) NULL,
+	[TextSettings] [nvarchar](max) NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductOptionTranslations] PRIMARY KEY CLUSTERED 
+(
+	[ProductOptionTranslationId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON),
+ CONSTRAINT [UK_{objectQualifier}hcc_ProductOptionTranslations] UNIQUE NONCLUSTERED 
+(
+	[ProductOptionId] ASC,
+	[Culture] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionTranslations]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductOptionTranslations_hcc_ProductOptions] FOREIGN KEY([ProductOptionId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductOptions] ([bvin])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionTranslations] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductOptionTranslations_hcc_ProductOptions]
+GO
+
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_ProductOptionTranslations]
+	([ProductOptionId],
+	[Culture],
+	[Name])
+select
+	[bvin]
+	,'en-US'
+	,[Name]
+from {databaseOwner}[{objectQualifier}hcc_ProductOptions]
+GO
+
+update {databaseOwner}[{objectQualifier}hcc_ProductOptionTranslations]
+set [TextSettings] = [Settings]
+from {databaseOwner}[{objectQualifier}hcc_ProductOptions] po
+	join {databaseOwner}[{objectQualifier}hcc_ProductOptionTranslations] pot
+		on po.[bvin] = pot.[ProductOptionId]
+where [OptionType] = 400
+GO
+
+update {databaseOwner}[{objectQualifier}hcc_ProductOptions]
+set [Settings] = '{}'
+where [OptionType] = 400
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptions]
+	DROP COLUMN [Name]
+GO
+
+
+
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionItemTranslations](
+	[ProductOptionItemTranslationId] [bigint] IDENTITY(1,1) NOT NULL,
+	[ProductOptionItemId] [uniqueidentifier] NOT NULL,
+	[Culture] [nvarchar](10) NOT NULL,
+	[Name] [nvarchar](255) NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductOptionItemTranslations] PRIMARY KEY CLUSTERED 
+(
+	[ProductOptionItemTranslationId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON),
+ CONSTRAINT [UK_{objectQualifier}hcc_ProductOptionItemTranslations] UNIQUE NONCLUSTERED 
+(
+	[ProductOptionItemId] ASC,
+	[Culture] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionItemTranslations]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductOptionItemTranslations_hcc_ProductOptionsItems] FOREIGN KEY([ProductOptionItemId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems] ([bvin])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionItemTranslations] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductOptionItemTranslations_hcc_ProductOptionsItems]
+GO
+
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_ProductOptionItemTranslations]
+	([ProductOptionItemId],
+	[Culture],
+	[Name])
+select
+	[bvin]
+	,'en-US'
+	,[Name]
+from {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]
+	DROP COLUMN [Name]
+GO
+
+
+/* Html Templates */
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations](
+	[HtmlTemplateTranslationId] [bigint] IDENTITY(1,1) NOT NULL,
+	[HtmlTemplateId] [bigint] NOT NULL,
+	[Culture] [nvarchar](10) NOT NULL,
+	[Subject] [nvarchar](1024) NULL,
+	[Body] [nvarchar](max) NULL,
+	[RepeatingSection] [nvarchar](max) NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_HtmlTemplateTranslations] PRIMARY KEY CLUSTERED 
+(
+	[HtmlTemplateTranslationId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON),
+ CONSTRAINT [UK_{objectQualifier}hcc_HtmlTemplateTranslations] UNIQUE NONCLUSTERED 
+(
+	[HtmlTemplateId] ASC,
+	[Culture] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_HtmlTemplateTranslations_hcc_HtmlTemplates] FOREIGN KEY([HtmlTemplateId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations] CHECK CONSTRAINT [FK_{objectQualifier}hcc_HtmlTemplateTranslations_hcc_HtmlTemplates]
+GO
+
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations]
+	([HtmlTemplateId],
+	[Culture],
+	[Subject],
+	[Body],
+	[RepeatingSection])
+select
+	[Id]
+	,'en-US'
+	,[Subject]
+	,[Body]
+	,[RepeatingSection]
+from {databaseOwner}[{objectQualifier}hcc_HtmlTemplates]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_HtmlTemplates]
+	DROP COLUMN [Subject], [Body], [RepeatingSection]
+GO
+
+
+
+/* Html Content Blocks*/
+
+/* Change type of key types */
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock] DROP CONSTRAINT [FK_{objectQualifier}hcc_ContentBlock_hcc_ContentColumn]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock] DROP CONSTRAINT [PK_{objectQualifier}hcc_ContentBlock]
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentColumn] DROP CONSTRAINT [PK_{objectQualifier}hcc_ContentColumn]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock] ADD [TempId] INT NOT NULL IDENTITY(1, 1);
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock] ADD CONSTRAINT [PK_{objectQualifier}hcc_ContentBlock_TempId] PRIMARY KEY CLUSTERED ([TempId]);
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentColumn] ADD [TempId] INT NOT NULL IDENTITY(1, 1);
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentColumn] ADD CONSTRAINT [PK_{objectQualifier}hcc_ContentColumn_TempId] PRIMARY KEY CLUSTERED ([TempId]);
+GO
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock]
+ALTER COLUMN [bvin] uniqueidentifier not null
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock]
+ALTER COLUMN [ColumnID] uniqueidentifier not null
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentColumn]
+ALTER COLUMN [bvin] uniqueidentifier not null
+GO
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock] DROP CONSTRAINT [PK_{objectQualifier}hcc_ContentBlock_TempId];
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock] DROP COLUMN [TempId];
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentColumn] DROP CONSTRAINT [PK_{objectQualifier}hcc_ContentColumn_TempId];
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentColumn] DROP COLUMN [TempId];
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentColumn] ADD  CONSTRAINT [PK_{objectQualifier}hcc_ContentColumn] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock] ADD  CONSTRAINT [PK_{objectQualifier}hcc_ContentBlock] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ContentBlock_hcc_ContentColumn] FOREIGN KEY([ColumnID])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ContentColumn] ([bvin])
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ContentBlock_hcc_ContentColumn]
+GO
+
+
+/* Localization */
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlockTranslations](
+	[ContentBlockTranslationId] [bigint] IDENTITY(1,1) NOT NULL,
+	[ContentBlockId] [uniqueidentifier] NOT NULL,
+	[Culture] [nvarchar](10) NOT NULL,
+	[TextSettings] [ntext] NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ContentBlockTranslations] PRIMARY KEY CLUSTERED 
+(
+	[ContentBlockTranslationId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON),
+ CONSTRAINT [UK_{objectQualifier}hcc_ContentBlockTranslations] UNIQUE NONCLUSTERED 
+(
+	[ContentBlockId] ASC,
+	[Culture] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlockTranslations]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ContentBlockTranslations_hcc_ContentBlock] FOREIGN KEY([ContentBlockId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ContentBlock] ([bvin])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlockTranslations] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ContentBlockTranslations_hcc_ContentBlock]
+GO
+
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_ContentBlockTranslations]
+	([ContentBlockId],
+	[Culture],
+	[TextSettings])
+select
+	cb.[bvin]
+	,'en-US'
+	,cb.[SerializedSettings]
+from {databaseOwner}[{objectQualifier}hcc_ContentBlock] cb
+where cb.[ControlName] = 'Html'
+GO
+
+update {databaseOwner}[{objectQualifier}hcc_ContentBlock]
+set [SerializedSettings] = '{}'
+where [ControlName] = 'Html'
+GO
+
+
+/* Search objects */
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_SearchLexicon] ADD
+	Culture nvarchar(10) NULL
+GO
+
+update {databaseOwner}[{objectQualifier}hcc_SearchLexicon]
+set Culture = 'en-US'
+GO
+
+IF EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = N'IX_{objectQualifier}hcc_SearchLexicon_Word' AND [OBJECT_ID] = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_SearchLexicon]'))
+BEGIN
+	DROP INDEX [IX_{objectQualifier}hcc_SearchLexicon_Word] ON {databaseOwner}[{objectQualifier}hcc_SearchLexicon];
+END
+GO
+
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_SearchLexicon] ON {databaseOwner}[{objectQualifier}hcc_SearchLexicon]
+	(
+	Word,
+	Culture
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+GO
+
+
+/* Prevent creation of products with same SKU */
+
+IF EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = N'IX_{objectQualifier}hcc_Product' AND [OBJECT_ID] = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Product]'))
+BEGIN
+	DROP INDEX [IX_{objectQualifier}hcc_Product] ON {databaseOwner}[{objectQualifier}hcc_Product];
+END
+GO
+
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_NAME = 'UK_{objectQualifier}hcc_Product') 
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product]
+	DROP CONSTRAINT [UK_{objectQualifier}hcc_Product];
+END
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD CONSTRAINT
+	[UK_{objectQualifier}hcc_Product] UNIQUE NONCLUSTERED 
+	(
+	StoreId,
+	SKU
+	) WITH ( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+GO
+
+
+/* Fixed email template tags */
+update {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations]
+set [Subject] = Replace([Subject], '[[Site.SiteName]]', '[[Store.StoreName]]'),
+	[Body] = Replace([Body], '[[Site.SiteName]]', '[[Store.StoreName]]')
+
+
+/* Product Property Choices */
+
+CREATE TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoiceTranslations](
+	[ProductPropertyChoiceTranslationId] [bigint] IDENTITY(1,1) NOT NULL,
+	[ProductPropertyChoiceId] [bigint] NOT NULL,
+	[Culture] [nvarchar](10) NOT NULL,
+	[DisplayName] [nvarchar](512) NULL,
+ CONSTRAINT [PK_{objectQualifier}hcc_ProductPropertyChoiceTranslations] PRIMARY KEY CLUSTERED 
+(
+	[ProductPropertyChoiceTranslationId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON),
+ CONSTRAINT [IX_{objectQualifier}hcc_ProductPropertyChoiceTranslations] UNIQUE NONCLUSTERED 
+(
+	[ProductPropertyChoiceId] ASC,
+	[Culture] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoiceTranslations]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyChoiceTranslations_hcc_ProductPropertyChoice] FOREIGN KEY([ProductPropertyChoiceId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice] ([Id])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoiceTranslations] CHECK CONSTRAINT [FK_{objectQualifier}hcc_ProductPropertyChoiceTranslations_hcc_ProductPropertyChoice]
+GO
+
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoiceTranslations]
+	([ProductPropertyChoiceId],
+	[Culture],
+	[DisplayName])
+select
+	[Id]
+	,'en-US'
+	,[ChoiceName]
+from {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice]
+GO

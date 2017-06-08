@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FakeProductCategory>
+  <ProductCategory>
+    <FindAllCount>386</FindAllCount>
+    <FindAllForAllStoreCount>386</FindAllForAllStoreCount>
+    <FindAllPagedCount>386</FindAllPagedCount>
+    <TotalAllProductCategoryCount>2</TotalAllProductCategoryCount>
+    <TotalProductCategoryCount>2</TotalProductCategoryCount>
+    <TotalCategoryCount>56</TotalCategoryCount>
+    <AddCategory>
+      <Name>Triathlon Bikes</Name>
+      <Name>Wheels</Name>
+    </AddCategory>
+    <DeleteCategory>
+      <Name>Triathlon Bikes</Name>
+      <Name>Wheels</Name>
+    </DeleteCategory>
+  </ProductCategory>
+</FakeProductCategory>

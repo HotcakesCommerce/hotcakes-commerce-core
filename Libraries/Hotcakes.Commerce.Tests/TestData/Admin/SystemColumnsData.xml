@@ -1,0 +1,28 @@
+﻿<ColumnData>
+  <ContentColumn>
+    <Bvin>E5E5F6F4-5321-417E-8186-1D92F5265CA8</Bvin>
+    <DisplayName>Default Category Viewer Header</DisplayName>
+    <SystemColumn>true</SystemColumn>
+    <Blocks>
+      <ContentBlock>
+        <ControlName>Html</ControlName>
+        <SortOrder>0</SortOrder>
+        <TextSettings>{"HtmlData":""}</TextSettings>
+        <Lists>{"Items":[]}</Lists>
+      </ContentBlock>
+    </Blocks>
+  </ContentColumn>
+  <ContentColumn>
+    <Bvin>CD3AC37F-A931-4D39-862F-5385B50329EE</Bvin>
+    <DisplayName>Default Category Viewer Footer</DisplayName>
+    <SystemColumn>true</SystemColumn>
+    <Blocks>
+      <ContentBlock>
+        <ControlName>Html</ControlName>
+        <SortOrder>0</SortOrder>
+        <TextSettings>{"HtmlData":""}</TextSettings>
+        <Lists>{"Items":[]}</Lists>
+      </ContentBlock>
+    </Blocks>
+  </ContentColumn>
+</ColumnData>

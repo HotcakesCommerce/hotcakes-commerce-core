@@ -1,0 +1,47 @@
+<parameters>
+  <parameter name="AppPath"  tags="iisapp">
+  <parameterValidation type="AllowEmpty" />
+    <parameterEntry type="ProviderPath" scope="iisapp" match="Hotcakes" />
+  </parameter>
+  <!--
+  <parameter name="DNN Application URL" description="The URL of the application on the target box such as http://www.myserver.com/myapp ." defaultValue="" tags="AppURL">
+    <parameterEntry type="TextFile" scope="dbFullSql " match="localhost:?[0-9]+/?" />
+  </parameter>
+  -->
+  <parameter name="SetAclParameter" defaultValue="{AppPath}" tags="Hidden">
+    <parameterEntry type="ProviderPath" scope="setAcl" match="Hotcakes" />
+  </parameter>
+
+  <parameter name="DbServer"  tags="SQL, DbServer" >
+    <parameterEntry type="XmlFile" scope="Hotcakes\\Install\\DotNetNuke\.install\.config$" match="//dotnetnuke/connection/server/text()" />
+  </parameter>
+
+  <parameter name="DbName"  tags="SQL,DbName">
+    <parameterEntry type="XmlFile" scope="Hotcakes\\Install\\DotNetNuke\.install\.config$" match="//dotnetnuke/connection/database/text()" />
+  </parameter>
+  
+  <parameter name="DbAdminUsername"  tags="SQL, DbAdminUsername" />
+  <parameter name="DbAdminPassword"  tags="SQL,DbAdminPassword,Password" />
+
+  <parameter name="DbUsername"  tags="SQL, DbUsername">
+	    <parameterEntry type="TextFile" scope="installSQL1.sql" match="PlaceHolderForUser" />
+    <parameterEntry type="TextFile" scope="installSQL2.sql" match="PlaceHolderForUser" />
+    <parameterEntry type="XmlFile" scope="Hotcakes\\Install\\DotNetNuke\.install\.config$" match="//dotnetnuke/connection/user/text()" />
+  </parameter>
+  <parameter name="DbUserPassword"  tags="SQL,DbUserPassword,Password">
+    <parameterEntry type="TextFile" scope="installSQL1.sql" match="PlaceHolderForPassword" />
+    <parameterEntry type="TextFile" scope="installSQL2.sql" match="PlaceHolderForPassword" />
+    <parameterEntry type="XmlFile" scope="Hotcakes\\Install\\DotNetNuke\.install\.config$" match="//dotnetnuke/connection/password/text()" />
+  </parameter>
+
+  <!-- This is the hidden admin connection string used to run the database scripts -->
+  <parameter name="Connection String Master" description="Automatically sets the connection string for the connection request." defaultValue="Server={DbServer};Database=master;uid={DbAdminUsername};Pwd={DbAdminPassword};" tags="Hidden,SQL,SQLConnectionString,NoStore">
+    <parameterEntry type="ProviderPath" scope="dbfullsql" match="installSQL1.sql" />
+  </parameter>
+
+  <!-- This is the hidden connection string with the newly created db account that is used in the web.config -->
+  <parameter name="Connection String" description="Connection string to enter into config" defaultValue="server={DbServer};database={DbName};uid={DbAdminUsername};Pwd={DbAdminPassword};" tags="Hidden,SQL,SQLConnectionString,NoStore">
+    <parameterEntry type="ProviderPath" scope="dbfullsql" match="installSQL2.sql" />
+  </parameter>
+  
+</parameters>

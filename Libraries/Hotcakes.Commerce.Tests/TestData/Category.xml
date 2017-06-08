@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FakeCategory>
+  <Category>
+    <RootCatName>Test Category</RootCatName>
+    <TotalDisplayTemplateCount>6</TotalDisplayTemplateCount>
+    <TotalPopulateColumnsCount>21</TotalPopulateColumnsCount>
+    <TotalCategoryCount>56</TotalCategoryCount>
+    <TotalCategoryChildCount>
+      <Name>Equipment</Name>
+      <Count>9</Count>
+    </TotalCategoryChildCount>
+    <Taxonomy>Category1</Taxonomy>
+    <Add>
+      <Name>Cat-Test</Name>
+      <Description>Cat-Desc</Description>
+      <MetaDescription>Category Description</MetaDescription>
+      <MetaTitle>Cat-Test</MetaTitle>
+      <MetaKeywords>Cat-Test</MetaKeywords>
+      <ShowInTopMenu>true</ShowInTopMenu>
+      <Hidden>false</Hidden>
+      <TemplateName>DetailedList</TemplateName>
+      <PreContentColumnId>Default Category Viewer Header</PreContentColumnId>
+      <PostContentColumnId>Default Category Viewer Footer</PostContentColumnId>
+      <DisplaySortOrder>2</DisplaySortOrder>
+      <ShowTitle>false</ShowTitle>
+      <Keywords>Category Test</Keywords>
+      <ParentId></ParentId>
+      <PageName>TestCategory007</PageName>
+    </Add>
+    <AddChild>
+      <Name>Cat-Test1</Name>
+      <Description>Cat-Desc1</Description>
+      <MetaDescription>Category Description1</MetaDescription>
+      <MetaTitle>Cat-Test1</MetaTitle>
+      <MetaKeywords>Cat-Test1</MetaKeywords>
+      <ShowInTopMenu>true</ShowInTopMenu>
+      <Hidden>false</Hidden>
+      <TemplateName>DetailedList</TemplateName>
+      <PreContentColumnId>Default Category Viewer Header</PreContentColumnId>
+      <PostContentColumnId>Default Category Viewer Footer</PostContentColumnId>
+      <DisplaySortOrder>1</DisplaySortOrder>
+      <ShowTitle>false</ShowTitle>
+      <Keywords>Category Test1</Keywords>
+      <ParentId></ParentId>
+      <PageName>TestCategory009</PageName>
+    </AddChild>
+    <Edit>
+      <OldName>Cat-Test</OldName>
+      <Name>Cat-TestEdit</Name>
+      <Description>Cat-Desc</Description>
+      <MetaDescription>Category Description</MetaDescription>
+      <MetaTitle>Cat-Test</MetaTitle>
+      <MetaKeywords>Cat-Test</MetaKeywords>
+      <ShowInTopMenu>true</ShowInTopMenu>
+      <Hidden>false</Hidden>
+      <TemplateName>DetailedList</TemplateName>
+      <PreContentColumnId>Default Category Viewer Header</PreContentColumnId>
+      <PostContentColumnId>Default Category Viewer Footer</PostContentColumnId>
+      <DisplaySortOrder></DisplaySortOrder>
+      <ShowTitle>false</ShowTitle>
+      <Keywords>Category Test</Keywords>
+      <ParentId></ParentId>
+      <PageName>TestCategory008</PageName>
+    </Edit>
+    <Delete>Cat-TestEdit</Delete>
+  </Category>
+  <CategoryProduct>
+    <CategoryProductCount>
+      <CategoryName>Cat-Test</CategoryName>
+      <ProductCount>3</ProductCount>
+    </CategoryProductCount>
+    <AddProductToCategory>
+      <CategoryName>Cat-Test</CategoryName>
+      <Name>2011 CYCLEOPS CERVO 2.4 PRO CYCLING COMPUTER</Name>
+      <Name>2012 CYCLEOPS POWERTAP G3 HUB</Name>
+      <Name>2012 CYCLEOPS POWERCAL HEART RATE MONITOR STRAP</Name>
+    </AddProductToCategory>
+    <DeleteProductToCategory>
+      <CategoryName>Cat-Test</CategoryName>
+      <Name>2012 CYCLEOPS POWERTAP G3 HUB</Name>
+      <Name>2012 CYCLEOPS POWERCAL HEART RATE MONITOR STRAP</Name>
+    </DeleteProductToCategory>
+    <TotalProductSearchCount>
+      <Count>5</Count>
+      <CategoryId></CategoryId>
+      <VendorId></VendorId>
+      <ManufacturerId>CycleOps</ManufacturerId>
+      <Keyword>CYCLEOPS</Keyword>
+    </TotalProductSearchCount>
+    <TotalVendorCount>19</TotalVendorCount>
+    <TotalManufacturerCount>66</TotalManufacturerCount>
+  </CategoryProduct>
+  <CategoryRole>
+    <TotalRoleCount>7</TotalRoleCount>
+    <TotalCategoryRoleCount>1</TotalCategoryRoleCount>
+    <AddRole>
+      <Name>Administrators</Name>
+      <ReferenceId>Cat-Test</ReferenceId>
+    </AddRole>
+    <DeleteRole>
+      <Name>Administrators</Name>
+      <ReferenceId>Cat-Test</ReferenceId>
+    </DeleteRole>
+  </CategoryRole>
+  <CategoryLink>
+    <AddLink>
+      <Name>CatLink-Test</Name>
+      <LinkTo>http://localhost.hotcakes/</LinkTo>
+      <MetaTitle>Custom Link</MetaTitle>
+      <ShowInTopMenu>true</ShowInTopMenu>
+      <Hidden>false</Hidden>
+    </AddLink>
+    <AddChildLink>
+      <Name>CatLink-Test1</Name>
+      <LinkTo>http://localhost.hotcakes/</LinkTo>
+      <MetaTitle>Custom Link1</MetaTitle>
+      <ShowInTopMenu>true</ShowInTopMenu>
+      <Hidden>false</Hidden>
+    </AddChildLink>
+    <EditLink>
+      <OldName>CatLink-Test</OldName>
+      <Name>CatLink-TestEdit</Name>
+      <LinkTo>http://localhost.hotcakes/</LinkTo>
+      <MetaTitle>Custom LinkEdit</MetaTitle>
+      <ShowInTopMenu>true</ShowInTopMenu>
+      <Hidden>false</Hidden>
+    </EditLink>
+    <DeleteLink>CatLink-TestEdit</DeleteLink>
+  </CategoryLink>
+  <CatRepoFunction>
+    <CatSlug>test-category-from-unit-tests</CatSlug>
+    <StoreCatSnapCount>56</StoreCatSnapCount>
+    <TotalCatSnapCount>56</TotalCatSnapCount>
+    <TotalCatPages>56</TotalCatPages>
+    <TotalVisibleChildCatCount>0</TotalVisibleChildCatCount>
+    <TotalChildCatCount>0</TotalChildCatCount>
+    <FindMany>
+      <Id>59f0c185-97d0-485f-a44b-e93a12a5348f</Id>
+      <Id>d4cbae99-46bf-43f0-94a6-399a6551590c</Id>
+      <Id>f8e3e27b-c074-4ca8-8a4c-121d8cbc96ab</Id>
+    </FindMany>
+  </CatRepoFunction>
+</FakeCategory>

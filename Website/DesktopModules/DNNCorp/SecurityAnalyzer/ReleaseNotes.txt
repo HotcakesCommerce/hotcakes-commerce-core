@@ -1,0 +1,12 @@
+﻿<h3>Security Analyzer</h3>
+<p class="Contributor">
+	Cathal Connolly <br />
+</p>
+<hr/>
+<div class="License">
+	<h3>About the Security Analyzer module</h3>
+	<p class="Owner">
+		<b>Version 1.0.0</b><br /><br />
+	</p>
+	<p>Initial release.</p>
+	</div>

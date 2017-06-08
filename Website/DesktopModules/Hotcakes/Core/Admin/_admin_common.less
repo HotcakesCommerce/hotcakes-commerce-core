@@ -1,0 +1,1872 @@
+body {
+    background: @color-white;
+}
+
+
+@color-gray: #797c7c;
+@color-lightgray: #d2d2d2;
+@color-bg: #f1f1f1;
+
+@color-disabled: @color-lightgray;
+@color-white-dark2: #e4eaeb;
+@color-red: #f94c2b;
+
+@color-status-green: #44991C;
+@color-status-red: #f00;
+@color-status-gray: #999;
+
+//Main Colors
+@color-orange: #f04f30;
+@color-orange-dark1: #d4462a;
+@color-orange-dark2: #b73c25;
+@color-blue: #0db2ba;
+@color-blue-dark1: #0b949b;
+@color-blue-dark2: #097c82;
+@color-white: #ffffff;
+@color-white-dark1: #f4f4f4;
+@color-white-dark2: #e7e7e7;
+@color-lavender: @color-white-dark2;
+
+//Button Colors
+@color-orange-light1: #e85b40;
+@color-orange-light2: #ee8470;
+@color-blue-light: #4ac5cb;
+@color-gray-light1: #f8fafc;
+@color-gray-light2: #f1f3f5;
+@color-gray-light3: #e6eaed;
+@color-gray-dark1: #93979a;
+@color-gray-dark2: #63696f;
+@color-gray-dark3: #434343;
+
+//Graph Colors
+@color-yellow-orange: #f09730;
+
+//Navigation Bar Color
+@color-black: #0c0c0c;
+@color-black-light: #222222;
+
+//Input Colors
+@color-gray-light: #b3c5cb;
+@color-gray-blue: #c0dee7;
+
+//Other Colors
+@color-green: #73ba0d;
+@color-violet: #ba0d6f;
+@color-purple: #830dba;
+
+
+//Font
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
+@bodyFont: 'Roboto', sans-serif;
+
+.row {
+    margin-left: -5px;
+    margin-right: -5px;
+    -ms-zoom: 1;
+    zoom: 1;
+}
+
+// simple mixins to simplify changing display to block or display-block
+.block() {
+    display: block;
+}
+
+.inline-block() {
+    display: inline-block;
+}
+
+
+.inline() {
+    display: inline;
+}
+
+.none() {
+    display: none;
+}
+
+.clearfix {
+    &:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+}
+
+// simple mixins to simplify positioning
+.left() {
+    float: left;
+}
+
+.right() {
+    float: right;
+}
+
+.relative() {
+    position: relative;
+}
+
+.absolute() {
+    position: absolute;
+}
+
+.static() {
+    position: static;
+}
+
+.p-top() {
+    top: 0;
+}
+
+.p-bottom() {
+    bottom: 0;
+}
+
+.p-left() {
+    left: 0;
+}
+
+.p-right() {
+    right: 0;
+}
+
+.img-responsive() {
+    max-width: 100%;
+    height: auto;
+}
+
+// From Mixins
+.search-mixin(@color) {
+    .hcFieldOuter {
+        height: 53px;
+        .relative;
+
+        input {
+            .absolute;
+            color: @color;
+            padding-right: 20px;
+            padding-top: 0;
+            z-index: 0;
+            width: 90% !important;
+        }
+
+        .hcIconRight {
+            .absolute;
+            background-position: -240px -120px;
+            height: 15px;
+            margin-top: 2px;
+            right: 0;
+            top: 0;
+            width: 15px;
+            z-index: 1;
+        }
+    }
+}
+
+.placeholder(@color) {
+    :-moz-placeholder {
+        color: @color;
+    }
+
+    ::-webkit-input-placeholder {
+        color: @color;
+    }
+}
+
+.transform-rotate-mixin(@degrees) {
+    -webkit-transform: rotate(@degrees);
+    -moz-transform: rotate(@degrees);
+    -ms-transform: rotate(@degrees);
+    -o-transform: rotate(@degrees);
+    transform: rotate(@degrees);
+}
+
+.select-mixin() {
+    ._hcBoxSizing;
+    padding: 3px 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url(Images/admin_form_sprite.png) 156px -230px no-repeat @color-black-light;
+    border: 1px solid @color-gray-dark2;
+    font-family: @bodyFont;
+    font-size: 12px;
+    color: @color-white;
+}
+
+._hcInputCheckRadio(@x @y) {
+    content: " ";
+    .inline-block;
+    width: 17px;
+    height: 17px;
+    .relative;
+    background-image: url(Images/admin_form_sprite.png);
+    background-position: @x @y;
+    background-repeat: no-repeat;
+}
+
+
+input[type='checkbox'] {
+    display: block !important;
+    cursor: pointer;
+    background: none;
+    height: 17px;
+    margin: 7px 5px;
+    .left;
+    width: 17px;
+
+    + label {
+        .block;
+        .left;
+        margin: 7px 10px 0 0;
+    }
+
+    &:before {
+        ._hcInputCheckRadio(0, 0);
+    }
+
+    &:checked {
+
+        &:before {
+            ._hcInputCheckRadio(0, -40px);
+        }
+    }
+
+    &:disabled {
+
+        &:before {
+            ._hcInputCheckRadio(0, -80px);
+        }
+    }
+}
+
+
+input[type='radio'] {
+    display: block !important;
+    cursor: pointer;
+    background: none;
+    height: 17px;
+    margin: 7px 5px;
+    .left;
+    width: 17px;
+
+    + label {
+        .block;
+        .left;
+        margin: 7px 10px 0 0;
+    }
+
+    &:before {
+        ._hcInputCheckRadio(0, -120px);
+    }
+
+    &:checked {
+
+        &:before {
+            ._hcInputCheckRadio(0, -160px);
+        }
+    }
+
+    &:disabled {
+
+        &:before {
+            ._hcInputCheckRadio(0, -200px);
+        }
+    }
+}
+
+.hcCheckboxOuter {
+    height: 17px;
+    .left;
+    margin: 7px 5px;
+    .relative;
+    width: 17px;
+    z-index: 1;
+
+    input[type='checkbox'], input[type='radio'] {
+        display: block !important;
+        cursor: pointer;
+        background: none;
+        height: 17px;
+        margin: 0;
+        opacity: 0;
+        .relative;
+        width: 17px;
+        z-index: 10;
+    }
+
+        input[type='checkbox'] + span, input[type='radio'] + span {
+            .absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url(Images/admin_form_sprite.png);
+            background-position: 0 0;
+            background-repeat: no-repeat;
+        }
+
+        input[type='checkbox']:checked + span {
+            background-position: 0 -40px;
+        }
+
+        input[type='checkbox']:disabled + span {
+            background-position: 0 -80px;
+        }
+
+        input[type='radio'] + span {
+            background-position: 0 -120px;
+        }
+
+        input[type='radio']:checked + span {
+            background-position: 0 -160px;
+        }
+
+        input[type='radio']:disabled + span {
+            background-position: 0 -200px;
+        }
+}
+
+.button-mixin(@color-bg, @color-font, @color-bg-hover, @color-font-hover) {
+    .inline-block;
+    background: @color-bg;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    color: @color-font;
+    cursor: pointer;
+    padding: 14px 40px;
+    text-decoration: none;
+    -webkit-box-shadow: 0 1px 2px rgba(140, 140, 140, 0.6);
+    -moz-box-shadow: 0 1px 2px rgba(140, 140, 140, 0.6);
+    box-shadow: 0 1px 2px rgba(140, 140, 140, 0.6);
+    text-shadow: none;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+
+    &:hover {
+        background: @color-bg-hover;
+        color: @color-font;
+    }
+
+    &:focus,
+    &:active {
+        background: @color-bg;
+        -webkit-box-shadow: inset 0 4px 3px 0 rgba(0,0,0,0.15);
+        -moz-box-shadow: inset 0 4px 3px 0 rgba(0,0,0,0.15);
+        box-shadow: inset 0 4px 3px 0 rgba(0,0,0,0.15);
+        color: @color-font;
+    }
+
+    &.hcSmall {
+        padding: 6px 40px;
+    }
+}
+
+.input-mixin() {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid @color-lightgray;
+    color: @color-gray-dark3;
+    font-size: 14px;
+    padding: 8px 0 4px 0;
+
+    &:focus,
+    &:active {
+        border-bottom: 2px solid @color-orange;
+        outline: none;
+    }
+}
+
+input[type="text"] {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid @color-lightgray;
+    color: @color-gray-dark3;
+    font-size: 14px;
+    padding: 8px 0 4px 0;
+
+    &:focus,
+    &:active {
+        border-bottom: 2px solid @color-orange;
+        outline: none;
+    }
+}
+
+.aspNetDisabled, a.aspNetDisabled, .dnnDisabled, a.dnnDisabled {
+    input {
+        .input-mixin();
+    }
+
+        input[type="checkbox"]:disabled + label {
+            margin: 7px 10px 0 0;
+            float: left;
+            display: block;
+        }
+
+        input[type='checkbox'] {
+            float: left;
+            .inline-block;
+            margin: 7px 5px auto;
+
+            &:before {
+                content: " ";
+                display: inline-block;
+                width: 17px;
+                height: 17px;
+                .relative;
+                background-image: url(Images/admin_form_sprite.png);
+                background-position: 0 -280px;
+                background-repeat: no-repeat;
+            }
+        }
+}
+
+body, h1, h2, h3, h4, h5, td, th, div {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: @color-gray-dark3;
+    letter-spacing: 0;
+}
+
+input, select, textarea, .riSingle,
+html body .hcFormItem .RadInput_Default .riTextBox,
+.hcFormItem .RadComboBox_Default .rcbInput,
+.RadComboBoxDropDown ul.rcbList li {
+    font-family: @bodyFont;
+    font-weight: 400;
+    font-size: 13px;
+    color: @color-black;
+}
+
+html body .hcFormItem .RadInput_Default .riEmpty {
+    color: @color-disabled;
+}
+
+h1 {
+    font-size: 30px;
+    color: @color-orange;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+h3 {
+    font-size: 18px;
+    color: @color-orange;
+}
+
+h4 {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+h5 {
+    font-size: 12px;
+}
+
+h3 a, h3 a:visited {
+    color: @color-orange;
+}
+
+h1, h2, h4, h5 {
+    a, a:visited {
+        color: @color-black;
+    }
+}
+
+a {
+    color: @color-orange;
+}
+
+    a:visited {
+        color: @color-orange*0.8;
+    }
+
+    a:hover {
+        color: @color-orange*1.2;
+    }
+
+ul, ol {
+    margin: 10px 0 10px 18px;
+
+    li {
+        margin-bottom: 4px;
+    }
+}
+
+ul {
+    list-style: square outside;
+}
+
+ol {
+    list-style: decimal;
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+// -------- Forms --------
+input[type="file"] {
+    opacity: 1 !important;
+    font-size: 12px !important;
+    position: static !important;
+    border: 0px solid !important;
+}
+
+input[type="checkbox"] {
+    //vertical-align: top;
+}
+
+select {
+    padding: 3px 5px;
+}
+
+.hcRight {
+    text-align: right !important;
+}
+
+.hcCenter {
+    text-align: center !important;
+}
+
+.hcClear {
+    clear: both !important;
+}
+
+.hcClearfix {
+    &:before, &:after {
+        content: " ";
+        display: table;
+    }
+
+    &:after {
+        clear: both;
+    }
+
+    *zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+}
+
+.hcForm {
+    margin: 0 0 10px 0;
+
+    &.hcPaymentForm {
+
+        .hcLabel {
+            /*padding-top: 15px;*/
+        }
+
+        .formfield {
+            input {
+                width: 100%;
+            }
+        }
+    }
+
+    &.hcProductPicker {
+        .hcFormItem {
+            .search-mixin(@color-gray-dark3);
+
+            .hcFieldOuter {
+                width: 376px;
+
+                input {
+                    width: 95% !important;
+                }
+            }
+
+            > select {
+                width: 376px;
+            }
+        }
+    }
+
+    .hcTableIframe {
+        border: 1px solid @color-lightgray;
+        height: 450px;
+        margin-bottom: 15px;
+        overflow: auto;
+    }
+
+    .hcFormItemHor {
+        &:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+        }
+    }
+}
+
+._hcLabel {
+    .block;
+    color: @color-orange;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.formlabel {
+    ._hcLabel();
+}
+
+.hcLabelWrapper {
+    .left;
+    width: 1100px;
+}
+
+._hcBoxSizing {
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -khtml-box-sizing: border-box;
+    //display: block;
+}
+
+.hcFormItem,
+.hcFormItemHor,
+.hcFormItemInline {
+    padding: 5px 2px 20px 2px;
+    clear: both;
+    position: relative;
+    ._hcBoxSizing;
+    color: @color-gray-dark2;
+
+    td {
+        color: @color-gray;
+    }
+
+    > input[type="text"],
+    > input[type="password"] {
+        .input-mixin();
+    }
+
+    > .hcFieldOuter {
+        .clearfix;
+
+        input[type="text"] {
+            .input-mixin();
+            width: 75%;
+        }
+    }
+
+    .riSingle input.riTextBox {
+        .input-mixin();
+        ._hcBoxSizing;
+        color: @color-gray-dark3 !important;
+        font-family: @bodyFont !important;
+        font-size: 14px !important;
+        line-height: 18px !important;
+        padding: 0 0 8px 0 !important;
+        width: 100% !important;
+    }
+
+    select.hcSelectList {
+        height: 10.0em;
+        background: none !important;
+    }
+
+        select.hcSelectList.hcLong {
+            height: 20.0em;
+            background: none !important;
+        }
+
+    > input[type="checkbox"] {
+        margin: 7px 5px;
+    }
+
+    > textarea {
+        padding: 5px;
+        border: 1px solid @color-disabled;
+        margin: 0;
+        ._hcBoxSizing;
+    }
+
+    > .hcButton, > .hcButton:visited, > .hcButton.hcSmall, > .hcButton.hcSmall:visited {
+        margin-left: 0.5em;
+        text-align: center;
+        ._hcBoxSizing;
+    }
+
+    span.hcFormError,
+    span.hcFormInfo {
+        display: block;
+        position: absolute;
+        overflow: visible;
+        /*top:-95%; right: 12%;*/
+        width: 200px;
+        margin-bottom: 0;
+        padding: 5px 10px;
+        border: none;
+        //border-radius: 3px;
+        opacity: 0.8;
+        font-size: 12px;
+        text-align: left;
+        z-index: 50;
+
+        &:after {
+            position: absolute;
+            bottom: -7px;
+            left: 15px;
+            content: "";
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-top: 7px solid #fbbbbb;
+            opacity: 0.8;
+        }
+    }
+
+    span.hcFormError {
+        left: 0;
+        bottom: 70px;
+        font-weight: bold;
+        color: red;
+        background: #fbbbbb;
+    }
+
+    span.hcFormInfo {
+        color: @color-gray;
+        background: @color-disabled;
+        font-style: normal;
+        font-weight: normal;
+        text-indent: 0;
+        left: 30px;
+        top: -6px;
+
+        &.Hidden {
+            display: none;
+        }
+
+        &:after {
+            border-style: solid;
+            border-width: 7px 7px 7px 0;
+            border-color: transparent @color-lightgray transparent transparent;
+            left: -7px;
+            top: 10px;
+            opacity: 0.8;
+        }
+    }
+
+    span > label {
+        margin-right: 10px;
+    }
+
+    span > input {
+        margin: 7px 5px;
+    }
+
+    hr {
+        .none;
+    }
+}
+
+.hcFormItemNoPadding {
+    padding-bottom: 0;
+}
+
+.hcForm span.hcFormError {
+    width: 200px;
+    margin-bottom: 0;
+    padding: 5px 10px;
+    border: none;
+    opacity: 0.8;
+    font-size: 12px;
+    text-align: left;
+    font-weight: bold;
+    color: red;
+    background: #fbbbbb;
+}
+
+td span.hcFormError {
+    width: 200px;
+    margin-bottom: 0;
+    padding: 5px 10px;
+    border: none;
+    opacity: 0.8;
+    font-size: 12px;
+    text-align: left;
+    font-weight: bold;
+    color: red;
+    background: #fbbbbb;
+    position: absolute;
+}
+
+.hcFormItem {
+
+    .RadInput,
+    .RadComboBox,
+    .RadPicker {
+        width: 100% !important;
+
+        &.DatePickerNav {
+            width: 160px !important;
+        }
+    }
+
+    .RadComboBox_Default td.rcbInputCellRight,
+    .RadComboBox_Default td.rcbArrowCellRight,
+    .RadComboBox_Default td.rcbArrowCell {
+        border: 1px solid @color-disabled;
+        border-left: none;
+        background: white !important;
+        background-image: url(Images/admin_misc_sprite.png) !important;
+        background-position: -120px 11px !important;
+    }
+}
+
+.hcFormItemHor {
+    span.hcFormError {
+        left: 250px;
+    }
+
+    .hcLabel {
+        width: 250px;
+        float: left;
+        padding-top: 6px;
+
+        &.hcBlockContent20p {
+            width: 21%;
+        }
+    }
+
+    .hcLabelShort {
+        width: 120px;
+        float: left;
+        padding-top: 6px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    textarea,
+    select {
+        width: 350px;
+    }
+
+    .hcFormItemValue {
+        display: block;
+        padding-top: 6px;
+    }
+}
+
+.hcFormItemInline {
+    .hcLabel {
+        float: left;
+        padding-top: 13px;
+        padding-right: 6px;
+    }
+}
+
+.hcLabel, .hcLabelShort {
+    ._hcLabel;
+    padding: 30px 0 10px 0;
+}
+
+.hcInset {
+    position: absolute;
+    right: 0;
+    padding: 5px 7px;
+    color: @color-lightgray;
+}
+
+.hcFormItemLabel {
+    padding: 0 2px;
+}
+
+    .hcFormItemLabel > .hcLabel {
+        padding-top: 6px;
+    }
+
+.hcFormItem50p {
+    width: 50%;
+    float: left;
+    clear: none;
+}
+
+.hcFormItem66p {
+    width: 66.6%;
+    float: left;
+    clear: none;
+}
+
+.hcFormItem33p {
+    width: 33.3%;
+    float: left;
+    clear: none;
+}
+
+    .hcFormItem33p > .hcSecondaryAction {
+        margin-top: -0.25em;
+    }
+
+.hcFormItemLeft {
+    width: 50%;
+    float: left;
+    clear: left;
+    padding-right: 40px;
+}
+
+.hcFormItemRight {
+    width: 50%;
+    float: left;
+    clear: none;
+    padding-left: 40px;
+}
+
+ul.hcActions {
+    clear: both;
+    padding: 15px 0 0 0;
+    margin: 0;
+    overflow: auto;
+}
+
+    ul.hcActions li {
+        float: left;
+        padding: 3px;
+        list-style: none;
+    }
+
+.hcActionsRight {
+    clear: both;
+    overflow: hidden;
+
+    > ul.hcActions {
+        float: right;
+    }
+}
+
+.hcFormMessage {
+    display: block;
+    padding: 15px 15px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(2,139,255,0.2); /* blue */
+    background: rgba(2,139,255,0.15); /* blue */
+    max-width: 1600px;
+}
+
+    .hcFormMessage.hcFormError,
+    .hcFormMessage.hcFormValidationSummary {
+        background-color: rgba(255,0,0,0.15); /* red */
+        border-color: rgba(255,0,0,0.2); /* red */
+    }
+
+    .hcFormMessage.hcFormWarning {
+        background-color: rgba(255,255,0,0.15); /* yellow */
+        border-color: #CDB21F; /* yellow */
+    }
+
+    .hcFormMessage.hcFormSuccess {
+        background-color: rgba(0,255,0,0.15); /* green */
+        border-color: rgba(0,255,0,0.5); /* green */
+    }
+
+// -------- Dialog window --------
+.hcFormPopup {
+    background: @color-white;
+    padding-bottom: 15px;
+    -webkit-box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.75);
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.75);
+
+    .ui-dialog-titlebar {
+        padding: 25px;
+
+        span {
+            &.ui-dialog-title {
+                color: @color-gray-dark3;
+                font-size: 20px;
+                letter-spacing: 0;
+                .left;
+            }
+        }
+
+        .ui-dialog-titlebar-close {
+            background: url(Images/admin_misc_sprite.png) -40px -40px no-repeat !important;
+            border: none !important;
+            border-radius: 0;
+            height: 14px;
+            margin: 0 !important;
+            padding: 0;
+            .static;
+            .right;
+            width: 14px;
+        }
+    }
+
+    .ui-dialog-content {
+        padding: 20px 30px;
+    }
+
+    .ui-dialog-titlebar-close {
+        top: 7px !important;
+        right: 7px !important;
+        border: 3px solid @color-disabled !important;
+        -webkit-border-radius: 12px;
+        border-radius: 12px;
+        cursor: pointer;
+    }
+
+    .hcFormItem > input[type="text"],
+    .hcFormItem > input[type="password"],
+    span.riSingle, .RadComboBox {
+        width: 100% !important;
+    }
+
+    .hcActions {
+        padding-right: 20px;
+    }
+
+    .hcGrid .hcGridRow td {
+        border: 1px solid @color-lightgray !important;
+    }
+}
+// -------- Buttons --------
+
+.hcPrimaryAction, .hcPrimaryAction:visited {
+    .button-mixin(@color-orange-light1, @color-white, @color-orange-light2, @color-white);
+}
+
+.hcSecondaryAction, .hcSecondaryAction:visited {
+    .button-mixin(@color-blue, @color-white, @color-blue-light, @color-white);
+}
+
+.hcTertiaryAction, .hcTertiaryAction:visited {
+    .button-mixin(@color-gray-light1, @color-gray-dark2, @color-gray-light2, @color-gray-dark1);
+}
+
+.hcButton, .hcButton:visited {
+    .button-mixin(@color-orange-light1, @color-white, @color-orange-light2, @color-white);
+}
+
+
+
+// -------- Icons --------
+.hcIconView,
+.hcIconEdit,
+.hcIconDelete,
+.hcIconInfo,
+.hcIconMove,
+.hcIconAdd,
+.hcIconAttachment,
+.hcLocalizable,
+.hcDatePicker,
+.hcIconArrowDown,
+.hcIconArrowUp,
+.hcIconLeft,
+.hcIconRight,
+.hcIconClose,
+.hcIconApprove,
+.hcIconRestore {
+    background: url(Images/admin_misc_sprite.png);
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    vertical-align: top;
+    display: inline-block;
+    overflow: hidden;
+    text-indent: 100px;
+}
+
+.hcIconView {
+    background-position: 0 0;
+    height: 15px;
+    width: 14px;
+}
+
+.hcIconEdit {
+    background-position: -40px 0;
+    height: 14px;
+    width: 14px;
+}
+
+.hcIconApprove {
+    background-position: 0 -240px;
+    height: 14px;
+    width: 14px;
+}
+
+.hcIconDelete {
+    background-position: -80px 0;
+    height: 16px;
+    width: 16px;
+}
+
+.hcIconInfo {
+    background-position: -160px 0;
+    /*position: relative;
+    overflow: visible;
+    cursor: pointer;*/
+    height: 15px;
+    width: 16px;
+}
+
+.hcLocalizable {
+    margin-left: 5px;
+    background-position: -80px -120px;
+    height: 15px;
+    width: 15px;
+    position: relative;
+    overflow: visible;
+}
+
+.hcIconMove {
+    background-position: -200px 0;
+    height: 15px;
+    width: 10px;
+}
+
+.hcIconAdd {
+    background-position: -240px 0;
+    height: 15px;
+    width: 16px;
+}
+
+.hcIconArrowDown {
+    background-position: -120px 0;
+    height: 8px;
+    width: 12px;
+}
+
+.hcIconArrowUp {
+    background-position: 0 -80px;
+    height: 8px;
+    width: 12px;
+}
+
+.hcIconAttachment {
+    background-position: 0 -40px;
+    height: 16px;
+    width: 9px;
+}
+
+.hcDatePicker {
+    background-position: -80px -80px;
+    height: 14px;
+    width: 14px;
+}
+
+.hcDatePicker() {
+    .hcDatePicker {
+        background-position: -80px -80px;
+    }
+}
+
+.hcIconLeft {
+    background-position: -80px -40px;
+    height: 12px;
+    width: 8px;
+}
+
+.hcIconRight {
+    background-position: -120px -40px;
+    height: 12px;
+    width: 8px;
+}
+
+.hcIconClose {
+    background-position: -40px -40px;
+    height: 13px;
+    width: 13px;
+}
+
+.hcIconRestore {
+    background-position: -160px -40px;
+    height: 15px;
+    width: 16px;
+}
+
+.hcInfoLabel, .hcInfoLabelLeft {
+    display: block;
+    text-align: right;
+    font-weight: bold;
+    color: @color-gray;
+    padding: 10px 0;
+}
+
+.hcInfoLabelLeft {
+    text-align: left;
+}
+
+.hcBtnEdit {
+    .block;
+    height: 14px;
+    overflow: hidden;
+    width: 14px;
+}
+
+// -------- Rad ComboBox --------
+.RadComboBox_Default .rcbInputCellLeft, .RadComboBox_Default .rcbInputCellRight, .RadComboBox_Default .rcbArrowCellLeft, .RadComboBox_Default .rcbArrowCellRight {
+    /*background-image: url('ComboBox/rcbSprite.png');*/
+}
+
+.RadComboBox_Default table {
+    border-collapse: separate !important;
+    border-spacing: 0;
+}
+
+div.RadComboBox_Default .rcbArrowCell a {
+    /* 	line-height: 16px; 	height: 22px;     */
+}
+
+.RadComboBox_Default td.rcbInputCellLeft, .RadComboBox_Default td.rcbInputCellRight {
+    padding: 3px !important;
+    background: #fff;
+    text-decoration: none;
+    margin: 0 !important;
+    line-height: 16px;
+}
+
+.RadComboBox_Default td.rcbInputCellLeft {
+    border: 1px solid @color-disabled;
+    border-right: none;
+}
+
+.RadComboBox_Default .rcbDisabled td.rcbInputCellLeft {
+    color: #ccc;
+    background: rgb(235, 235, 228);
+}
+
+.RadComboBox_Default .rcbHovered td.rcbArrowCell {
+    opacity: 0.7 !important;
+    filter: alpha(opacity=70) !important;
+}
+
+.RadComboBox_Default td.rcbInputCellLeft input[readonly], .RadComboBox_Default td.rcbInputCellRight input[readonly] {
+    cursor: auto;
+}
+
+html body .RadComboBoxDropDown_Default {
+    border-color: @color-lightgray;
+}
+
+.RadComboBoxDropDown_Default ul li.rcbSeparator {
+    height: 1px;
+    min-height: 1px;
+    padding: 0;
+    margin: 7px;
+    background-color: @color-lightgray;
+}
+
+// -------- Rad Editor ------
+.Metro.reWrapper, .Metro.RadEditor .reContentCell {
+    border: 1px solid @color-lightgray !important;
+}
+
+.Metro.RadEditor .reContentCell {
+    background: @color-bg !important;
+    padding: 5px;
+}
+
+// -------- Rad Grid --------
+.hcForm .RadGrid, .RadGrid.hcGrid {
+    border: none;
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td, th {
+        border: 1px solid @color-white-dark2 !important;
+    }
+
+    td {
+        font-size: 12px;
+        color: @color-gray;
+        padding: 0;
+
+        .hcIconApprove,
+        .hcIconEdit,
+        .hcIconDelete,
+        .hcIconInfo,
+        .hcIconAdd {
+            margin: 0 8px;
+        }
+    }
+
+    .rgHeader {
+        background: @color-white;
+        border: 1px solid @color-lightgray !important;
+        color: @color-gray-dark1;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 20px 17px;
+        text-align: left;
+    }
+
+    .rgAltRow {
+        background: @color-white-dark2;
+    }
+
+        .rgRow a,
+        .rgAltRow a,
+        .rgEditRow a,
+        tr.rgEditRow a,
+        tr.rgHoveredRow a,
+        tr.rgActiveRow a,
+        .rgFooter a,
+        .rgEditForm a {
+            color: @color-orange;
+            font-weight: bold;
+        }
+
+    .rgEditRow {
+        background-image: none;
+    }
+
+    .rgRow,
+    .rgAltRow {
+        td {
+            border: 1px solid @color-lightgray !important;
+            color: @color-black;
+            font-size: 14px;
+            padding: 20px 17px;
+        }
+    }
+}
+
+.hcGrid {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 10px;
+    clear: both;
+
+
+    td, th {
+        border: 1px solid @color-lightgray !important;
+        padding: 20px 17px;
+    }
+
+    td {
+        font-size: 14px;
+        color: @color-black;
+        background: white;
+
+        &.hcIconWrapper {
+            line-height: 0;
+            text-align: center;
+        }
+
+        .hcIconApprove,
+        .hcIconEdit,
+        .hcIconDelete,
+        .hcIconInfo,
+        .hcIconAdd {
+            margin: 0 8px;
+        }
+    }
+
+    tr:nth-child(odd) td {
+        background: @color-white-dark1;
+    }
+
+    th, tr.hcGridHeader td {
+        background: @color-white;
+        color: @color-gray-dark1;
+        font-size: 14px;
+        font-weight: 500;
+        text-align: left;
+    }
+
+    tr.hcDisabled td {
+        background: @color-bg !important;
+    }
+
+    tr.hcEmptyRow td {
+        background: white !important;
+        border: 1px @color-lightgray solid !important;
+        font-weight: bold;
+        color: #797c7c;
+        padding: 10px 5px;
+    }
+
+    .hcFormItem > input[type="text"],
+    .hcFormItem > input[type="password"],
+    span.riSingle, .RadComboBox,
+    .hcButton, .hcButton:visited {
+        width: 100% !important;
+    }
+
+    .ui-sortable {
+        td .hcIconMove {
+            cursor: move;
+        }
+
+        tr:nth-child(odd) td {
+            background: white !important;
+        }
+    }
+
+    tr.ui-state-highlight {
+        height: 40px;
+    }
+
+    tr.ui-sortable-helper td {
+        border: 1px solid @color-lightgray !important;
+    }
+
+    .hcNoPadding {
+        padding: 0;
+    }
+}
+
+.hcPager {
+    float: left;
+    margin-bottom: 10px;
+}
+
+.hcPagerSetup {
+    float: right;
+}
+
+    .hcPagerSetup > ul,
+    .hcPager > ul {
+        list-style-type: none;
+        margin: 0;
+
+        li {
+            float: left;
+            padding: 0;
+            margin: 3px;
+            background-color: @color-white-dark2;
+
+            &.hcCurrent {
+                background-color: @color-red;
+
+                a {
+                    color: white;
+                }
+            }
+
+            &:hover {
+                background-color: @color-lightgray;
+            }
+
+            a {
+                display: block;
+                width: 15px;
+                height: 15px;
+                margin: 0;
+                padding: 5px;
+                text-align: center;
+                text-decoration: none;
+                font-size: 11px;
+                font-weight: bold;
+                color: @color-gray;
+
+                &:hover {
+                    color: white;
+                }
+            }
+        }
+    }
+// -------- Columns --------
+
+.hcColumn,
+.hcColumnLeft,
+.hcColumnRight {
+    float: left;
+    margin-bottom: 20px;
+
+    > .hcForm {
+        margin: 0 40px;
+
+        p {
+            margin: 10px 0;
+        }
+    }
+
+    &.hcLeftBorder {
+        border-left: 2px solid @color-white-dark2;
+    }
+
+    &.hcRightBorder {
+        border-right: 2px solid @color-white-dark2;
+    }
+}
+
+.hcColumnLeft {
+    > .hcForm {
+        margin-left: 0;
+    }
+}
+
+.hcColumnRight {
+    > .hcForm {
+        margin-right: 0;
+    }
+}
+
+.hcBlock {
+
+    .hcForm {
+
+        .hcSmall {
+            font-size: 90%;
+        }
+
+        img {
+            .img-responsive;
+        }
+    }
+}
+
+.hcBigTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+
+    th {
+        background: @color-white-dark2;
+        color: @color-red;
+        font-weight: bold;
+        padding: 10px 20px;
+    }
+
+    th, td {
+        border: solid 1px @color-lightgray;
+        text-align: center;
+    }
+
+    td {
+        padding: 15px 20px;
+        font-size: 24px;
+        color: @color-gray;
+        background: white;
+    }
+}
+/* ---------- Core styles ---------- */
+.hcAjaxLoader {
+    background: url(Images/spinner.gif) no-repeat center center transparent;
+    width: 100%;
+    height: 100%;
+}
+
+#popup-wrapper #main-content {
+    background: #fff;
+    color: #666;
+    padding: 10px;
+}
+
+/* -------- Image Upload -------- */
+.hcImageUpload {
+    ._hcBoxSizing;
+    float: left;
+
+    .hcImageBox {
+        height: 150px;
+        border: 1px solid @color-lightgray;
+        background: @color-white-dark2;
+        margin-bottom: 5px;
+        text-align: center;
+        color: @color-lightgray;
+        font-weight: bold;
+
+        img {
+            max-height: 100%;
+            max-width: 100%;
+        }
+    }
+
+    .hcButton {
+        ._hcBoxSizing;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        width: 100%;
+
+        input[type="file"] {
+            position: absolute !important;
+            cursor: pointer !important;
+            top: 0;
+            right: 0;
+            height: auto;
+            width: 500px;
+            opacity: 0 !important;
+        }
+    }
+
+    .hcIconClose {
+        position: absolute;
+        display: none;
+    }
+}
+/* -------- Selection Ribbon -------- */
+ul.hcSelectionRibbon {
+    list-style-type: none;
+    margin: 0;
+
+    li {
+        display: block;
+        float: left;
+        margin: 3px;
+        padding: 5px 8px;
+        cursor: pointer;
+        color: @color-gray;
+        background-color: @color-white-dark2;
+        text-align: center;
+        text-decoration: none;
+        font-size: 11px;
+        font-weight: bold;
+
+        &.selected {
+            background-color: @color-red;
+            color: white;
+        }
+
+        &:hover {
+            background-color: @color-lightgray;
+        }
+    }
+}
+
+select.hcSelectionRibbon {
+    display: none;
+}
+
+.hcSorting {
+    .hcLabel {
+        width: inherit;
+        padding-right: 8px;
+        font-size: 12px;
+    }
+
+    ul.hcSelectionRibbon {
+        position: relative;
+        top: -2px;
+    }
+
+    &.hcForm {
+        margin-bottom: 5px;
+        width: 70%;
+        float: left;
+    }
+}
+
+/* ------------- Selection List ------------- */
+.hcSelectionList {
+    cursor: pointer;
+    padding: 5px 0;
+    position: relative;
+    /*
+    select { display: none; }
+        */
+    span {
+        font-weight: bold;
+        padding-left: 8px;
+    }
+
+    ul {
+        display: none;
+        z-index: 1000;
+        position: absolute;
+        margin: 0;
+        background-color: @color-black;
+
+        li {
+            margin: 0;
+            padding: 8px 12px;
+            border-bottom: 1px solid @color-lightgray;
+
+            &.selected, &:hover {
+                background-color: @color-orange;
+            }
+        }
+    }
+
+    li {
+        display: block;
+        padding: 5px 8px;
+        color: @color-white;
+    }
+}
+
+.hcPeriodSelector:before {
+    content: " ";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    top: 2px;
+    position: relative;
+    background: url(Images/admin_misc_sprite.png) -80px -80px no-repeat;
+}
+
+
+select.hcSelectionList {
+    display: none !important;
+}
+
+.hcContentWrapper {
+    .hcBlock {
+        .hcForm {
+
+            .formlabel {
+                padding-top: 15px;
+            }
+
+            .formfield {
+                input {
+                    width: 100%;
+                }
+
+                span {
+                    .block;
+                    padding-top: 15px;
+
+                    &.cc-amex,
+                    &.cc-visa,
+                    &.cc-mastercard,
+                    &.cc-discover {
+                        .inline-block;
+                        padding: 0;
+                    }
+                }
+
+                select {
+                    margin-top: 8px;
+                }
+            }
+
+            .hcLabel {
+                padding-top: 15px;
+            }
+        }
+    }
+}
+
+.hcTransactionLink {
+    padding-top: 15px;
+
+    a {
+        &:first-child {
+            padding-right: 15px;
+        }
+    }
+}
+
+/* ------------- Ribbon Tabs ------------- */
+.hcRibbonTabs {
+    list-style-type: none;
+    margin: 22px 0 30px 0;
+    .hcClearfix;
+
+    a {
+        display: block;
+        font-size: 12px;
+        padding: 15px 10px;
+        color: @color-gray;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    li {
+        display: block;
+        float: left;
+        margin: 0;
+        background: white;
+        color: @color-lightgray;
+        border-left: 1px solid @color-lightgray;
+        border-top: 1px solid @color-lightgray;
+        border-bottom: 1px solid @color-lightgray;
+        font-weight: normal;
+        font-size: 12px;
+        width: 12.3%;
+
+        &.selected {
+            background: @color-red;
+            color: white;
+            border: 1px solid @color-red !important;
+        }
+
+        &:last-child {
+            border-right: 1px solid @color-lightgray;
+        }
+
+        &:hover {
+            background: @color-red;
+
+            a {
+                color: white;
+            }
+        }
+    }
+}
+
+//---------- To Prevent long Summaries to break the page
+#MainContent_pnlInstructions {
+    .hcFormItem {
+        max-width: 562px;
+    }
+}
+
+//---------- Overwriting Websource Date Picker
+#ctl00_MainContent_radDateStart_popupButton,
+#ctl00_MainContent_radDateEnd_popupButton,
+#ctl00_MainContent_ucDatePickerNav_radDatePicker_popupButton,
+#ctl00_MainContent_ucDateRangePicker_radStartDate_popupButton,
+#ctl00_MainContent_ucDateRangePicker_radEndDate_popupButton,
+#ctl00_MainContent_DateRangeField_radStartDate_popupButton,
+#ctl00_MainContent_DateRangeField_radEndDate_popupButton {
+    .hcDatePicker();
+}
+
+.hcActionColumnHeader {
+    text-align: center !important;
+    vertical-align: central !important;
+}
+
+.hcActionColumnItem {
+    text-align: center;
+    vertical-align: central;
+}
+
+.hcSecondaryAction.disabled, .hcSecondaryAction[disabled] {
+    cursor: default;
+    background-image: none;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    color: #333;
+    background-color: #E6E6E6;
+}
+
+.hcButton.disabled, .hcButton[disabled] {
+    cursor: default;
+    background-image: none;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    color: #333;
+    background-color: #E6E6E6;
+}
+
+
+.hcCheckboxUser {
+    text-align:left;
+    line-height:2.27;   
+}
+
+.hcPrimaryAction.disabled,
+.hcPrimaryAction[disabled] {
+  cursor: default;
+  background-image: none;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  color: #333;
+  background-color: #E6E6E6;
+}

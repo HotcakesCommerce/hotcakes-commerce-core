@@ -1,0 +1,19 @@
+﻿@model Hotcakes.Modules.Core.Models.PaymentViewModel
+@using Hotcakes.Commerce.Payment
+
+<!-- Temporary hidden because only one PaymentMethod is supported-->
+<div class="dnnFormItem" style="display:none">
+    <label class="dnnLabel">@Localization.GetString("PaymentMethod")</label>
+    @Html.DropDownListFor(
+        model => model.SelectedMethodId,
+        Model.PaymentMethods.Select(m => new SelectListItem { Value = m.MethodId, Text = @Localization.GetString("Method" + m.MethodName) }),
+        new { disabled = "disabled", data_bind="value: SelectedMethodId" })
+</div>
+
+@foreach (var method in Model.PaymentMethods)
+{
+    if (method.MethodId == PaymentMethods.CreditCardId)
+    {
+    @Html.Partial("_CreditCardForm", Model.CreditCardForm)
+    }
+}

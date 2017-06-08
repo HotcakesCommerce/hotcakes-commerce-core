@@ -1,0 +1,1755 @@
+﻿/* Fix OrderTrasactions column datatype */
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderTransactions]') AND name = N'IX_{objectQualifier}hcc_OrderTransactions_OrderBvin')
+DROP INDEX [IX_{objectQualifier}hcc_OrderTransactions_OrderBvin] ON {databaseOwner}[{objectQualifier}hcc_OrderTransactions]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions] ALTER COLUMN [OrderId] uniqueidentifier NOT NULL
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[hcc_OrderTransactions]') AND name = N'IX_{objectQualifier}hcc_OrderTransactions_OrderId')
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_OrderTransactions_OrderId] ON {databaseOwner}[{objectQualifier}hcc_OrderTransactions] 
+([OrderId] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)
+GO
+
+delete from {databaseOwner}[{objectQualifier}hcc_OrderTransactions]
+where OrderId not in (select bvin from {databaseOwner}[{objectQualifier}hcc_Order])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderTransactions_hcc_Order]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderTransactions]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderTransactions] ADD CONSTRAINT [FK_{objectQualifier}hcc_OrderTransactions_hcc_Order] FOREIGN KEY
+(OrderId) REFERENCES {databaseOwner}[{objectQualifier}hcc_Order](bvin) ON UPDATE  NO ACTION ON DELETE  CASCADE 
+GO
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_GetPromotionsActivityList]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_GetPromotionsActivityList]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}hcc_GetPromotionsActivityList]
+	@StoreId bigint,
+	@StartDateUtc datetime,
+	@EndDateUtc datetime
+AS
+BEGIN
+
+	select top 5 PromotionId, OrderCount
+	from
+	(select PromotionId, COUNT(OrderBvin) OrderCount
+	from
+	(
+		SELECT DD.D.value('(PromotionId)[1]', 'bigint') PromotionId, OrderBvin
+		FROM 
+		(select l.OrderBvin, cast(DiscountDetails as xml) as DiscountDetailsXML 
+			from {databaseOwner}[{objectQualifier}hcc_LineItem] l
+			join {databaseOwner}[{objectQualifier}hcc_Order] o on o.bvin = l.OrderBvin
+			where o.StoreId = @StoreId and o.TimeOfOrder > @StartDateUtc and o.TimeOfOrder < @EndDateUtc ) LI
+		CROSS APPLY LI.DiscountDetailsXML.nodes('/DiscountDetails/DiscountDetail') as DD (D)
+
+		union all
+
+		SELECT DD.D.value('(PromotionId)[1]', 'bigint') PromotionId, OrderBvin
+		FROM 
+		(select bvin as OrderBvin, cast(OrderDiscountDetails as xml) as DiscountDetailsXML 
+			from {databaseOwner}[{objectQualifier}hcc_Order]
+			where StoreId = @StoreId and TimeOfOrder > @StartDateUtc and TimeOfOrder < @EndDateUtc ) O
+		CROSS APPLY O.DiscountDetailsXML.nodes('/DiscountDetails/DiscountDetail') as DD (D)
+
+		union all
+
+		SELECT DD.D.value('(PromotionId)[1]', 'bigint') PromotionId, OrderBvin
+		FROM 
+		(select bvin as OrderBvin, cast(ShippingDiscountDetails as xml) as DiscountDetailsXML 
+			from {databaseOwner}[{objectQualifier}hcc_Order]
+			where StoreId = @StoreId and TimeOfOrder > @StartDateUtc and TimeOfOrder < @EndDateUtc ) O
+		CROSS APPLY O.DiscountDetailsXML.nodes('/DiscountDetails/DiscountDetail') as DD (D)
+	) O2
+	group by PromotionId) P
+	where PromotionId is not null
+	order by OrderCount desc
+
+END
+GO
+
+IF NOT EXISTS (SELECT 1 FROM {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] WHERE [DisplayName] = N'Abandoned Cart')
+BEGIN
+	INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([StoreId],[LastUpdatedUtc],[DisplayName],[FromEmail],[TemplateType])
+	VALUES (0, '20141113', N'Abandoned Cart', N'[[Store.ContactEmail]]', 504)
+
+	INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations] ([HtmlTemplateId],[Culture],[Subject],[Body],[RepeatingSection])
+	VALUES (@@IDENTITY, 'en-US', N'You haven''t finished your purchase', N'<html>
+	<head>
+	<meta name=vs_targetSchema content="http://schemas.microsoft.com/intellisense/ie5">
+		<style type="text/css"> A { text-decoration: none; }
+		A:link { color: #3366cc; text-decoration: none; }
+		A:visited { color: #663399; text-decoration: none; }
+		A:active { color: #cccccc; text-decoration: none; }
+		A:Hover { text-decoration: underline; }
+		BODY, TD, CENTER, P { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 10px; color: #333333; }
+		.body { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 10px; color: #333333; }
+		.content { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: normal; color: #000000; }
+		.title { font-family: Helvetica, Arial, sans-serif; font-size: 10px; font-weight: normal; color: #000000; }
+		.headline { font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; color: #000000; }
+		.message { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 9px; }
+		</style>
+	</head>
+	<body bgcolor="#ffffff" LINK="#3366cc" VLINK="#3366cc" ALINK="#3366cc" LEFTMARGIN="0" TOPMARGIN="0">
+		<table cellSpacing=1 cellPadding=3 width="100%" border="0" runat="server">
+		<tr>
+			<td colSpan=2>[[Store.Logo]]</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				You left the store leaving at least one product in your cart.
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<table border="0" cellspacing="0" cellpadding="5" width="100%">
+					<tr>
+						<td colspan="4"><hr></td>
+					</tr>
+					<tr>
+						<td><b>Qty</b></td>
+						<td><b>SKU</b></td>
+						<td><b>Product Name</b></td>
+						<td align="right"><b>Unit Price</b></td>
+					</tr>
+					<tr>
+						<td colspan="4"><hr></td>
+					</tr>
+					[[RepeatingSection]]
+					<tr>
+						<td colspan="4"><hr></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				You can always return to our store and finish your purchase.
+			</td>
+		</tr>
+	</table>
+	</body>
+	</html>'
+	, N'<tr><td align=left valign=top>[[LineItem.Quantity]]</td><td align=left valign=top>[[LineItem.ProductSku]]</td><td align=left valign=top>[[LineItem.ProductName]]<br />[[LineItem.ProductDescription]]</td><td align=right valign=top>[[LineItem.AdjustedPrice]]</td></tr>')
+END
+GO
+
+
+IF NOT EXISTS (SELECT 1 FROM {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] WHERE [DisplayName] = N'Contact Abandoned Cart Users')
+BEGIN
+	INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([StoreId],[LastUpdatedUtc],[DisplayName],[FromEmail],[TemplateType])
+	VALUES (0, '20141113', N'Contact Abandoned Cart Users', N'[[Store.ContactEmail]]', 507)
+
+	INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations] ([HtmlTemplateId],[Culture],[Subject],[Body],[RepeatingSection])
+	VALUES (@@IDENTITY, 'en-US', N'You haven''t finished your purchase', N'<html>
+	<head>
+	<meta name=vs_targetSchema content="http://schemas.microsoft.com/intellisense/ie5">
+		<style type="text/css"> A { text-decoration: none; }
+		A:link { color: #3366cc; text-decoration: none; }
+		A:visited { color: #663399; text-decoration: none; }
+		A:active { color: #cccccc; text-decoration: none; }
+		A:Hover { text-decoration: underline; }
+		BODY, TD, CENTER, P { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 10px; color: #333333; }
+		.body { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 10px; color: #333333; }
+		.content { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: normal; color: #000000; }
+		.title { font-family: Helvetica, Arial, sans-serif; font-size: 10px; font-weight: normal; color: #000000; }
+		.headline { font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; color: #000000; }
+		.message { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 9px; }
+		</style>
+	</head>
+	<body bgcolor="#ffffff" LINK="#3366cc" VLINK="#3366cc" ALINK="#3366cc" LEFTMARGIN="0" TOPMARGIN="0">
+		<table cellSpacing=1 cellPadding=3 width="100%" border="0" runat="server">
+		<tr>
+			<td colSpan=2>[[Store.Logo]]</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				You left the store leaving at least one product in your cart.
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				[[CustomMessage]]
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				You can always return to our store and finish your purchase.
+			</td>
+		</tr>
+	</table>
+	</body>
+	</html>'
+	, N'')
+END
+GO
+
+/* Column data type conversion because we need to do join query on this field */
+update {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents]
+set ObjectId = null
+where LTRIM(RTRIM(ObjectId)) = ''
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents]
+ALTER COLUMN ObjectId uniqueidentifier null
+GO
+
+/*
+Perform cleanup of old provider. Existance of provider is determined by 'ProviderType'.
+And since that field was changed we need to remove old one from database.
+*/
+delete from {databaseOwner}[{objectQualifier}ExtensionUrlProviders]
+where [ProviderType] = 'Hotcakes.ExtensionUrlProvider.HccExtensionUrlProvider'
+GO
+
+/* New analytics column */
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_AnalyticsEvents' AND  COLUMN_NAME = 'ShoppingSessionGuid')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents] ADD
+		ShoppingSessionGuid uniqueidentifier NULL
+END
+GO
+
+
+update {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents]
+set ShoppingSessionGuid = SessionGuid
+where ShoppingSessionGuid is null
+GO
+
+/* Stored procedure for dashboard */
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_GetTopAffectedProducts]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_GetTopAffectedProducts]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}hcc_GetTopAffectedProducts]
+	@storeId bigint,
+	@mainCulture nvarchar(10),
+	@fallbackCulture varchar(10),
+	@rangeStart datetime2,
+	@rangeEnd datetime2,
+	@previousRangeStart datetime2,
+	@previousRangeEnd datetime2,
+	@sortBy int,
+	@sortDirection int,
+	@pageNumber int,
+	@pageSize int,
+	@TotalCount int output
+AS
+BEGIN
+	select @TotalCount = COUNT(*)
+	from {databaseOwner}[{objectQualifier}hcc_Product] p
+	where p.StoreId = @storeId
+	
+	declare @cancelledOrderStatus varchar(36)
+	set @cancelledOrderStatus = 'A7FFDB90-C566-4cf2-93F4-D42367F359D5'
+
+	select ProductId,
+		ProductName,
+		BouncesChange,
+		AbandomentsChange,
+		PurchasesChange,
+		Change
+	from
+	(
+		select *,
+		-1 * BouncesChange - AbandomentsChange + PurchasesChange as Change,
+		ROW_NUMBER() OVER(
+			ORDER BY
+				CASE WHEN @sortBy = 0 and @sortDirection = 1 THEN abs(-1 * BouncesChange - AbandomentsChange + PurchasesChange) END DESC,
+				CASE WHEN @sortBy = 0 and @sortDirection = -1 THEN abs(-1 * BouncesChange - AbandomentsChange + PurchasesChange) END ASC,
+				CASE WHEN @sortBy = 1 and @sortDirection = 1 THEN abs(BouncesChange) END DESC,
+				CASE WHEN @sortBy = 1 and @sortDirection = -1 THEN abs(BouncesChange) END ASC,
+				CASE WHEN @sortBy = 2 and @sortDirection = 1 THEN abs(AbandomentsChange) END DESC,
+				CASE WHEN @sortBy = 2 and @sortDirection = -1 THEN abs(AbandomentsChange) END ASC,
+				CASE WHEN @sortBy = 3 and @sortDirection = 1 THEN abs(PurchasesChange) END DESC,
+				CASE WHEN @sortBy = 4 and @sortDirection = -1 THEN abs(PurchasesChange) END ASC
+		) as RowNumber
+		from
+		(
+			select *,
+			(
+				case when (PrevBounces <> 0)
+				then (Bounces - PrevBounces)/CAST(PrevBounces as decimal)
+				else 
+					case when (Bounces <> 0)
+					then 1
+					else 0
+					end
+				end
+			) as BouncesChange,
+			(
+				case when (PrevAbandoments <> 0)
+				then (Abandoments - PrevAbandoments)/CAST(PrevAbandoments as decimal)
+				else 
+					case when (Abandoments <> 0)
+					then 1
+					else 0
+					end
+				end
+			) as AbandomentsChange,
+			(
+				case when (PrevPurchases <> 0)
+				then (Purchases - PrevPurchases)/CAST(PrevPurchases as decimal)
+				else 
+					case when (Purchases <> 0)
+					then 1
+					else 0
+					end
+				end
+			) as PurchasesChange
+			from (
+				select p.bvin as ProductId,
+				pt.ProductName as ProductName,
+				(
+					select COUNT(*)
+					from
+					(
+						select distinct ShoppingSessionGuid, ObjectId
+						from {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents] ae
+						where ae.StoreId = @storeId
+							and ae.[Action] = 'ProductViewed'
+							and ae.[DateTime] >= @rangeStart
+							and ae.[DateTime] <= @rangeEnd
+							and ae.[ObjectId] = p.bvin
+							and (
+								select COUNT(*)
+								from {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents] ae2
+								where ae2.ShoppingSessionGuid = ae.ShoppingSessionGuid
+									and ae2.[ObjectId] = ae.[ObjectId]
+									and ae2.[Action] = 'ProductAddedToCart'
+								) = 0
+					) b
+				) as Bounces,
+				(
+					select COUNT(*)
+					from
+					(
+						select distinct ShoppingSessionGuid, ObjectId
+						from {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents] ae
+						where ae.StoreId = @storeId
+							and ae.[Action] = 'ProductViewed'
+							and ae.[DateTime] >= @previousRangeStart
+							and ae.[DateTime] <= @previousRangeEnd
+							and ae.[ObjectId] = p.bvin
+							and (
+								select COUNT(*)
+								from {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents] ae2
+								where ae2.ShoppingSessionGuid = ae.ShoppingSessionGuid
+									and ae2.[ObjectId] = ae.[ObjectId]
+									and ae2.[Action] = 'ProductAddedToCart'
+								) = 0
+					) pb
+				) as PrevBounces,
+				(
+					select ISNULL(SUM(li.Quantity),0)
+					from {databaseOwner}[{objectQualifier}hcc_LineItem] li
+						join {databaseOwner}[{objectQualifier}hcc_Order] o
+							on li.OrderBvin = o.bvin
+					where o.IsPlaced = 0
+						and o.StatusCode <> @cancelledOrderStatus
+						and o.TimeOfOrder >= @rangeStart
+						and o.TimeOfOrder <= @rangeEnd
+						and li.[ProductId] = p.bvin
+				) as Abandoments,
+				(
+					select ISNULL(SUM(li.Quantity),0)
+					from {databaseOwner}[{objectQualifier}hcc_LineItem] li
+						join {databaseOwner}[{objectQualifier}hcc_Order] o
+							on li.OrderBvin = o.bvin
+					where o.IsPlaced = 0
+						and o.StatusCode <> @cancelledOrderStatus
+						and o.TimeOfOrder >= @previousRangeStart
+						and o.TimeOfOrder <= @previousRangeEnd
+						and li.[ProductId] = p.bvin
+				) as PrevAbandoments,
+				(
+					select ISNULL(SUM(li.Quantity),0)
+					from {databaseOwner}[{objectQualifier}hcc_LineItem] li
+						join {databaseOwner}[{objectQualifier}hcc_Order] o
+							on li.OrderBvin = o.bvin
+					where o.IsPlaced = 1
+						and o.StatusCode <> @cancelledOrderStatus
+						and o.TimeOfOrder >= @rangeStart
+						and o.TimeOfOrder <= @rangeEnd
+						and o.PaymentStatus in (3, 4)
+						and li.[ProductId] = p.bvin
+				) as Purchases,
+				(
+					select ISNULL(SUM(li.Quantity),0)
+					from {databaseOwner}[{objectQualifier}hcc_LineItem] li
+						join {databaseOwner}[{objectQualifier}hcc_Order] o
+							on li.OrderBvin = o.bvin
+					where o.IsPlaced = 1
+						and o.StatusCode <> @cancelledOrderStatus
+						and o.TimeOfOrder >= @previousRangeStart
+						and o.TimeOfOrder <= @previousRangeEnd
+						and o.PaymentStatus in (3, 4)
+						and li.[ProductId] = p.bvin
+				) as PrevPurchases
+			from
+				(
+					select *
+					from {databaseOwner}[{objectQualifier}hcc_Product] p
+					where p.StoreId = @storeId
+				) p
+				OUTER APPLY
+				(
+					select top 1 *,
+						CASE WHEN (pt.[Culture] = @mainCulture)
+						THEN 1
+						ELSE 2 END AS [CultureOrder]
+					from {databaseOwner}[{objectQualifier}hcc_ProductTranslations] pt
+					where pt.Culture in (@mainCulture, @fallbackCulture) and pt.ProductId = p.bvin
+					order by [CultureOrder]
+				) pt
+			) as innerStat1
+		) as innerStat2
+	) as outerStat
+	WHERE RowNumber > (@pageNumber - 1 ) * @pageSize AND RowNumber <= @pageNumber * @pageSize
+	order by RowNumber
+END
+GO
+
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AnalyticsEvents]') AND name = N'IX_{objectQualifier}hcc_AnalyticsEvents')
+DROP INDEX [IX_{objectQualifier}hcc_AnalyticsEvents] ON {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents]
+GO
+
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_AnalyticsEvents] ON {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents] 
+(
+	[StoreId] ASC,
+	[ObjectId] ASC,
+	[ShoppingSessionGuid] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF)
+GO
+
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_Category' AND  COLUMN_NAME = 'CreationDate')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category] ADD CreationDate datetime NOT NULL CONSTRAINT DF_{objectQualifier}hcc_Category_CreationDate DEFAULT GetDate()
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Category] DROP CONSTRAINT DF_{objectQualifier}hcc_Category_CreationDate
+END
+GO
+
+/* Try to best guess creation date */
+update {databaseOwner}[{objectQualifier}hcc_Category]
+set [CreationDate] = [LastUpdated]
+GO
+
+update {databaseOwner}[{objectQualifier}hcc_Category]
+set [CreationDate] =
+(
+	select MIN([DateTime])
+	from
+	(
+		select [DateTime]
+		from {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents]
+		where [ObjectId] = bvin
+		union
+		select [CreationDate] as [DateTime]
+	) as ae
+)
+GO
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_GetBouncedListByDay]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_GetBouncedListByDay]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}hcc_GetBouncedListByDay]
+	@storeId bigint,
+	@rangeStart datetime2,
+	@rangeEnd datetime2,
+	@productGuid uniqueidentifier = null,
+	@categoryGuid uniqueidentifier = null
+AS
+BEGIN
+	declare @startDate datetime = 0
+	if (@categoryGuid is not null)
+		select @startDate = CreationDate from {databaseOwner}[{objectQualifier}hcc_Category] where bvin = @categoryGuid
+
+	select [Year], [Month], [Day], COUNT(distinct ShopObjKey) as [Count]
+	from (
+	select
+		DATEPART(year, [DateTime]) as [Year],
+		DATEPART(month, [DateTime]) as [Month],
+		DATEPART(day, [DateTime]) as [Day],
+		CONVERT (nvarchar(64), [ShoppingSessionGuid], 1) + CONVERT (nvarchar(64), [ObjectId], 1) as  [ShopObjKey]
+		--CHECKSUM([ShoppingSessionGuid], [ObjectId]) as  [ShopObjKey]
+	from {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents] ae
+	where 
+		ae.ObjectId IN (select ProductId
+			from {databaseOwner}[{objectQualifier}hcc_ProductXCategory]
+			where (@productGuid is not null and ProductId = @productGuid)
+				or (@categoryGuid is not null and CategoryId = @categoryGuid)
+				or (@productGuid is null and @categoryGuid is null))
+		and ae.[StoreId] = @storeId
+		and ae.[Action] = 'ProductViewed'
+		and ae.[DateTime] >= @rangeStart
+		and ae.[DateTime] <= @rangeEnd
+		and ae.[DateTime] >= @startDate
+		and (
+			select COUNT(*)
+			from {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents] ae2
+			where ae2.[StoreId] = @storeId
+				and ae2.[ShoppingSessionGuid] = ae.[ShoppingSessionGuid]
+				and ae2.[ObjectId] = ae.[ObjectId]
+				and ae2.[Action] = 'ProductAddedToCart'
+			) = 0
+	) a
+	group by [Year], [Month], [Day]
+	order by [Year], [Month], [Day]
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_GetBouncedListByHour]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_GetBouncedListByHour]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}hcc_GetBouncedListByHour]
+	@storeId bigint,
+	@rangeStart datetime2,
+	@rangeEnd datetime2,
+	@productGuid uniqueidentifier = null,
+	@categoryGuid uniqueidentifier = null
+AS
+BEGIN
+	declare @startDate datetime = 0
+	if (@categoryGuid is not null)
+		select @startDate = CreationDate from {databaseOwner}[{objectQualifier}hcc_Category] where bvin = @categoryGuid
+
+	select [Day], [Hour], COUNT(distinct ShopObjKey) as [Count]
+	from (
+	select
+		DATEPART(day, [DateTime]) as [Day],
+		DATEPART(hour, [DateTime]) as [Hour],
+		CONVERT (nvarchar(64), [ShoppingSessionGuid], 1) + CONVERT (nvarchar(64), [ObjectId], 1) as  [ShopObjKey]
+		--CHECKSUM([ShoppingSessionGuid], [ObjectId]) as  [ShopObjKey]
+	from {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents] ae
+	where 
+		ae.ObjectId IN (select productId
+			from {databaseOwner}[{objectQualifier}hcc_ProductXCategory]
+			where (@productGuid is not null and ProductId = @productGuid)
+				or (@categoryGuid is not null and CategoryId = @categoryGuid)
+				or (@productGuid is null and @categoryGuid is null))
+		and ae.[StoreId] = @storeId
+		and ae.[Action] = 'ProductViewed'
+		and ae.[DateTime] >= @rangeStart
+		and ae.[DateTime] <= @rangeEnd
+		and ae.[DateTime] >= @startDate
+		and (
+			select COUNT(*)
+			from {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents] ae2
+			where ae2.[StoreId] = @storeId
+				and ae2.[ShoppingSessionGuid] = ae.[ShoppingSessionGuid]
+				and ae2.[ObjectId] = ae.[ObjectId]
+				and ae2.[Action] = 'ProductAddedToCart'
+			) = 0
+	) a
+	group by [Day], [Hour]
+	order by [Day], [Hour]
+END
+GO
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_DeleteSampleAnalytics]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_DeleteSampleAnalytics]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}hcc_DeleteSampleAnalytics]
+	@storeId bigint,
+	@forSampleDataOnly bit
+AS
+BEGIN
+	delete from {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents]
+	where [StoreId] = @storeId
+		and (@forSampleDataOnly = 0 or [ObjectId] IN (
+					select bvin from {databaseOwner}[{objectQualifier}hcc_Category]
+					where RewriteUrl IN ('sample-products', 'more-sample', 'demo-category')
+					AND StoreId = @storeId
+					UNION ALL
+					select bvin from {databaseOwner}[{objectQualifier}hcc_Product]
+					where SKU IN ('SAMPLE001', 'SAMPLE002', 'SAMPLE003', 'SAMPLE004', 'SAMPLE005', 'SAMPLE006')
+					AND StoreId = @storeId
+				)
+			)
+
+	delete from {databaseOwner}[{objectQualifier}hcc_Order]
+	where [StoreId] = @storeId
+		and [OrderNumber] = 'Sample Order'
+END
+GO
+
+
+/* Start of FK updates */
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettings]
+DROP CONSTRAINT FK_{objectQualifier}hcc_StoreSettings_hcc_Stores
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettings]
+ADD CONSTRAINT FK_{objectQualifier}hcc_StoreSettings_hcc_Stores FOREIGN KEY (StoreId)
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Stores] (Id)
+ON DELETE  CASCADE
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MailingListMember]
+DROP CONSTRAINT FK_{objectQualifier}hcc_MailingListMember_hcc_MailingList
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MailingListMember]
+ADD CONSTRAINT FK_{objectQualifier}hcc_MailingListMember_hcc_MailingList FOREIGN KEY (ListID)
+REFERENCES {databaseOwner}[{objectQualifier}hcc_MailingList] (Id)
+ON DELETE  CASCADE
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock]
+DROP CONSTRAINT FK_{objectQualifier}hcc_ContentBlock_hcc_ContentColumn
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ContentBlock]
+WITH NOCHECK ADD CONSTRAINT FK_{objectQualifier}hcc_ContentBlock_hcc_ContentColumn FOREIGN KEY (ColumnID)
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ContentColumn] (bvin)
+ON DELETE  CASCADE
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice]
+DROP CONSTRAINT FK_{objectQualifier}hcc_ProductPropertyChoice_hcc_ProductProperty
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyChoice]
+ADD CONSTRAINT FK_{objectQualifier}hcc_ProductPropertyChoice_hcc_ProductProperty FOREIGN KEY (PropertyId)
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductProperty] (Id)
+ON DELETE  CASCADE 	
+GO
+
+/* End of FK updates */
+
+
+/* Start of Orders FK updates */
+
+-- LineItem, OrderCoupon, OrderNote
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderCoupon]
+DROP CONSTRAINT FK_{objectQualifier}hcc_OrderCoupon_hcc_Order
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderNote]
+DROP CONSTRAINT FK_{objectQualifier}hcc_OrderNote_hcc_Order
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+DROP CONSTRAINT FK_{objectQualifier}hcc_LineItem_hcc_LineItem
+GO
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+WITH NOCHECK ADD CONSTRAINT FK_{objectQualifier}hcc_LineItem_hcc_LineItem FOREIGN KEY (OrderBvin)
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Order] (bvin )
+ON DELETE CASCADE
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderNote]
+WITH NOCHECK ADD CONSTRAINT FK_{objectQualifier}hcc_OrderNote_hcc_Order FOREIGN KEY (OrderId)
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Order] (bvin)
+ON DELETE CASCADE
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderCoupon]
+WITH NOCHECK ADD CONSTRAINT FK_{objectQualifier}hcc_OrderCoupon_hcc_Order FOREIGN KEY (OrderBvin)
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Order] (bvin)
+ON DELETE CASCADE
+GO
+
+-- OrderPackage
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderPackage]') AND name = N'IX_{objectQualifier}hcc_OrderPackage_OrderId')
+DROP INDEX [IX_{objectQualifier}hcc_OrderPackage_OrderId] ON {databaseOwner}[{objectQualifier}hcc_OrderPackage] WITH ( ONLINE = OFF )
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderPackage] ALTER COLUMN [OrderId] uniqueidentifier NOT NULL
+GO
+
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_OrderPackage_OrderId] ON {databaseOwner}[{objectQualifier}hcc_OrderPackage] 
+(
+	[OrderId] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)
+GO
+
+
+delete from {databaseOwner}[{objectQualifier}hcc_OrderPackage]
+where OrderId not in (select bvin from {databaseOwner}[{objectQualifier}hcc_Order])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_OrderPackage_hcc_Order]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_OrderPackage]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_OrderPackage]
+ADD CONSTRAINT FK_{objectQualifier}hcc_OrderPackage_hcc_Order FOREIGN KEY (OrderId)
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Order] (bvin)
+ON DELETE  CASCADE
+GO
+
+-- RMA, RMAItem
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMAItem]') AND name = N'IX_{objectQualifier}hcc_RMAItem')
+DROP INDEX [IX_{objectQualifier}hcc_RMAItem] ON {databaseOwner}[{objectQualifier}hcc_RMAItem] WITH ( ONLINE = OFF )
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMAItem]') AND name = N'IX_{objectQualifier}hcc_RMAItem_1')
+DROP INDEX [IX_{objectQualifier}hcc_RMAItem_1] ON {databaseOwner}[{objectQualifier}hcc_RMAItem] WITH ( ONLINE = OFF )
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMAItem]') AND name = N'IX_{objectQualifier}hcc_RMAItem_LineItemBvin')
+DROP INDEX [IX_{objectQualifier}hcc_RMAItem_LineItemBvin] ON {databaseOwner}[{objectQualifier}hcc_RMAItem] WITH ( ONLINE = OFF )
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMA]') AND name = N'IX_{objectQualifier}hcc_RMA_OrderBvin')
+DROP INDEX [IX_{objectQualifier}hcc_RMA_OrderBvin] ON {databaseOwner}[{objectQualifier}hcc_RMA] WITH ( ONLINE = OFF )
+GO
+
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_RMAItem_hcc_RMA]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMAItem]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] DROP CONSTRAINT [FK_{objectQualifier}hcc_RMAItem_hcc_RMA]
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMAItem]') AND name = N'PK_{objectQualifier}hcc_RMAItem')
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] DROP CONSTRAINT [PK_{objectQualifier}hcc_RMAItem]
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMA]') AND name = N'PK_{objectQualifier}hcc_RMA')
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMA] DROP CONSTRAINT [PK_{objectQualifier}hcc_RMA]
+GO
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMA] ALTER COLUMN [bvin] uniqueidentifier NOT NULL
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMA] ALTER COLUMN [OrderBvin] uniqueidentifier NOT NULL
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] ALTER COLUMN [bvin] uniqueidentifier NOT NULL
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] ALTER COLUMN [RMABvin] uniqueidentifier NOT NULL
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] ALTER COLUMN [LineItemBvin] bigint NOT NULL
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem] ADD  CONSTRAINT [PK_{objectQualifier}hcc_RMAItem] PRIMARY KEY NONCLUSTERED 
+(
+	[bvin] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF)
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMA] ADD  CONSTRAINT [PK_{objectQualifier}hcc_RMA] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF)
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_RMAItem_hcc_RMA]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMAItem]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMAItem]
+WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_RMAItem_hcc_RMA] FOREIGN KEY([RMABvin])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_RMA] ([bvin])
+ON DELETE  CASCADE
+GO
+
+
+CREATE UNIQUE CLUSTERED INDEX [IX_{objectQualifier}hcc_RMAItem] ON {databaseOwner}[{objectQualifier}hcc_RMAItem] 
+(
+	[bvin] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)
+GO
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_RMAItem_1] ON {databaseOwner}[{objectQualifier}hcc_RMAItem] 
+(
+	[RMABvin] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)
+GO
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_RMAItem_LineItemBvin] ON {databaseOwner}[{objectQualifier}hcc_RMAItem] 
+(
+	[LineItemBvin] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)
+GO
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_RMA_OrderBvin] ON {databaseOwner}[{objectQualifier}hcc_RMA] 
+(
+	[OrderBvin] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)
+GO
+
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_RMA_hcc_Order]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RMA]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_RMA]
+ADD CONSTRAINT FK_{objectQualifier}hcc_RMA_hcc_Order FOREIGN KEY (OrderBvin)
+REFERENCES {databaseOwner}[{objectQualifier}hcc_Order] (bvin)
+ON DELETE  CASCADE
+GO
+
+
+/* End of Orders FK updates */
+
+/* Start of Products FK updates */
+
+
+-- ProductImage
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductImage]') AND name = N'PK_{objectQualifier}hcc_ProductImage')
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductImage] DROP CONSTRAINT [PK_{objectQualifier}hcc_ProductImage]
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductImage]') AND name = N'IX_{objectQualifier}hcc_ProductImage')
+DROP INDEX [IX_{objectQualifier}hcc_ProductImage] ON {databaseOwner}[{objectQualifier}hcc_ProductImage] WITH ( ONLINE = OFF )
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductImage] ALTER COLUMN [bvin] uniqueidentifier NOT NULL
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductImage] ALTER COLUMN [ProductID] uniqueidentifier NOT NULL
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductImage] ADD  CONSTRAINT [PK_{objectQualifier}hcc_ProductImage] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF)
+GO
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductImage] ON {databaseOwner}[{objectQualifier}hcc_ProductImage] 
+(
+	[ProductID] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)
+GO
+
+
+-- ProductReview
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductReview]') AND name = N'PK_{objectQualifier}hcc_ProductReview')
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductReview] DROP CONSTRAINT [PK_{objectQualifier}hcc_ProductReview]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductReview] ALTER COLUMN [bvin] uniqueidentifier NOT NULL
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductReview] ADD  CONSTRAINT [PK_{objectQualifier}hcc_ProductReview] PRIMARY KEY NONCLUSTERED 
+(
+	[bvin] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF)
+GO
+
+
+-- Variants
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Variants]') AND name = N'PK_{objectQualifier}hcc_Variant')
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Variants] DROP CONSTRAINT [PK_{objectQualifier}hcc_Variant]
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Variants]') AND name = N'IX_{objectQualifier}hcc_Variants_ProductIdClustered')
+DROP INDEX [IX_{objectQualifier}hcc_Variants_ProductIdClustered] ON {databaseOwner}[{objectQualifier}hcc_Variants] WITH ( ONLINE = OFF )
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Variants]') AND name = N'IX_{objectQualifier}hcc_Variants_BvinProductStore')
+DROP INDEX [IX_{objectQualifier}hcc_Variants_BvinProductStore] ON {databaseOwner}[{objectQualifier}hcc_Variants] WITH ( ONLINE = OFF )
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Variants] ALTER COLUMN [bvin] uniqueidentifier NOT NULL
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Variants] ALTER COLUMN [ProductId] uniqueidentifier NOT NULL
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Variants] ADD  CONSTRAINT [PK_{objectQualifier}hcc_Variant] PRIMARY KEY NONCLUSTERED 
+(
+	[bvin] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF)
+GO
+CREATE CLUSTERED INDEX [IX_{objectQualifier}hcc_Variants_ProductIdClustered] ON {databaseOwner}[{objectQualifier}hcc_Variants] 
+(
+	[ProductId] ASC,
+	[StoreId] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)
+GO
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_Variants_BvinProductStore] ON {databaseOwner}[{objectQualifier}hcc_Variants] 
+(
+	[bvin] ASC,
+	[ProductId] ASC,
+	[StoreId] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)
+GO
+
+
+-- WishListItems
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_WishListItems] ALTER COLUMN [ProductId] uniqueidentifier NOT NULL
+GO
+
+
+-- ProductVolumeDiscounts
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts]') AND name = N'PK_{objectQualifier}hcc_ProductVolumeDiscounts')
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts] DROP CONSTRAINT [PK_{objectQualifier}hcc_ProductVolumeDiscounts]
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts]') AND name = N'IX_{objectQualifier}hcc_ProductVolumeDiscounts')
+DROP INDEX [IX_{objectQualifier}hcc_ProductVolumeDiscounts] ON {databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts] WITH ( ONLINE = OFF )
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts] ALTER COLUMN [bvin] uniqueidentifier NOT NULL
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts] ALTER COLUMN [ProductID] uniqueidentifier NOT NULL
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts] ADD  CONSTRAINT [PK_{objectQualifier}hcc_ProductVolumeDiscounts] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF)
+GO
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductVolumeDiscounts] ON {databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts] 
+(
+	[ProductID] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)
+GO
+
+
+-- ProductFile, ProductFileXProduct
+
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductFileXProduct_hcc_ProductFile]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFileXProduct]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct] DROP CONSTRAINT [FK_{objectQualifier}hcc_ProductFileXProduct_hcc_ProductFile]
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFileXProduct]') AND name = N'IX_{objectQualifier}hcc_ProductFileXProduct')
+DROP INDEX [IX_{objectQualifier}hcc_ProductFileXProduct] ON {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct] WITH ( ONLINE = OFF )
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFileXProduct]') AND name = N'IX_{objectQualifier}hcc_ProductFileXProduct_1')
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct] DROP CONSTRAINT [IX_{objectQualifier}hcc_ProductFileXProduct_1]
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFileXProduct]') AND name = N'IX_{objectQualifier}hcc_ProductFileXProduct_2')
+DROP INDEX [IX_{objectQualifier}hcc_ProductFileXProduct_2] ON {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct] WITH ( ONLINE = OFF )
+GO
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFile]') AND name = N'PK_{objectQualifier}hcc_ProductFile')
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductFile] DROP CONSTRAINT [PK_{objectQualifier}hcc_ProductFile]
+GO
+
+delete from {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct]
+where LTRIM(RTRIM([ProductId])) = ''
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct] ALTER COLUMN [ProductFileId] uniqueidentifier NOT NULL
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct] ALTER COLUMN [ProductId] uniqueidentifier NOT NULL
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductFile] ALTER COLUMN [bvin] uniqueidentifier NOT NULL
+GO
+
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductFileXProduct] ON {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct] 
+(
+	[ProductFileId] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct] ADD  CONSTRAINT [IX_{objectQualifier}hcc_ProductFileXProduct_1] UNIQUE NONCLUSTERED 
+(
+	[ProductFileId] ASC,
+	[ProductId] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF)
+GO
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductFileXProduct_2] ON {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct] 
+(
+	[ProductId] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductFile] ADD  CONSTRAINT [PK_{objectQualifier}hcc_ProductFile] PRIMARY KEY CLUSTERED 
+(
+	[bvin] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF)
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}hcc_ProductFileXProduct_hcc_ProductFile] FOREIGN KEY([ProductFileId])
+REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductFile] ([bvin])
+ON DELETE CASCADE
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductFileXProduct_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductFileXProduct]'))
+  ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductFileXProduct] ADD CONSTRAINT
+	FK_{objectQualifier}hcc_ProductFileXProduct_hcc_Product FOREIGN KEY
+	(
+	ProductId
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Product]
+	(
+	bvin
+	) ON UPDATE  NO ACTION
+	 ON DELETE  CASCADE
+GO
+
+
+-- Adding new foreign keys
+
+delete from {databaseOwner}[{objectQualifier}hcc_ProductReview]
+where ProductId not in (select bvin from {databaseOwner}[{objectQualifier}hcc_Product])
+GO
+delete from {databaseOwner}[{objectQualifier}hcc_ProductImage]
+where ProductID not in (select bvin from {databaseOwner}[{objectQualifier}hcc_Product])
+GO
+delete from {databaseOwner}[{objectQualifier}hcc_Variants]
+where ProductId not in (select bvin from {databaseOwner}[{objectQualifier}hcc_Product])
+GO
+delete from {databaseOwner}[{objectQualifier}hcc_WishListItems]
+where ProductId not in (select bvin from {databaseOwner}[{objectQualifier}hcc_Product])
+GO
+delete from {databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts]
+where ProductID not in (select bvin from {databaseOwner}[{objectQualifier}hcc_Product])
+GO
+delete from {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty]
+where PropertyId not in (select Id from {databaseOwner}[{objectQualifier}hcc_ProductProperty])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductReview_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductReview]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductReview] ADD CONSTRAINT
+	FK_{objectQualifier}hcc_ProductReview_hcc_Product FOREIGN KEY
+	(
+	ProductId
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Product]
+	(
+	bvin
+	) ON UPDATE  NO ACTION
+	 ON DELETE  CASCADE
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductImage_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductImage]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductImage] ADD CONSTRAINT
+	FK_{objectQualifier}hcc_ProductImage_hcc_Product FOREIGN KEY
+	(
+	ProductID
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Product]
+	(
+	bvin
+	) ON UPDATE  NO ACTION
+	 ON DELETE  CASCADE
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_Variants_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Variants]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Variants] ADD CONSTRAINT
+	FK_{objectQualifier}hcc_Variants_hcc_Product FOREIGN KEY
+	(
+	ProductId
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Product]
+	(
+	bvin
+	) ON UPDATE  NO ACTION
+	 ON DELETE  CASCADE
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_WishListItems_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_WishListItems]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_WishListItems] ADD CONSTRAINT
+	FK_{objectQualifier}hcc_WishListItems_hcc_Product FOREIGN KEY
+	(
+	ProductId
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Product]
+	(
+	bvin
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  CASCADE
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductVolumeDiscounts_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductVolumeDiscounts] ADD CONSTRAINT
+	FK_{objectQualifier}hcc_ProductVolumeDiscounts_hcc_Product FOREIGN KEY
+	(
+	ProductID
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Product]
+	(
+	bvin
+	) ON UPDATE  NO ACTION
+	 ON DELETE  CASCADE
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductTypeXProductProperty_hcc_ProductProperty]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty] ADD CONSTRAINT
+	FK_{objectQualifier}hcc_ProductTypeXProductProperty_hcc_ProductProperty FOREIGN KEY
+	(
+	PropertyId
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductProperty]
+	(
+	Id
+	) ON UPDATE  NO ACTION
+	 ON DELETE  CASCADE
+GO
+
+
+-- Updating existing foreign keys with cascade deletes
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory]
+	DROP CONSTRAINT FK_{objectQualifier}hcc_ProductInventory_hcc_Product
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductInventory] WITH NOCHECK ADD CONSTRAINT
+	FK_{objectQualifier}hcc_ProductInventory_hcc_Product FOREIGN KEY
+	(
+	ProductBvin
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Product]
+	(
+	bvin
+	) ON UPDATE  NO ACTION
+	 ON DELETE  CASCADE
+GO
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue]
+	DROP CONSTRAINT FK_{objectQualifier}hcc_ProductPropertyValue_hcc_Product
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue]
+	DROP CONSTRAINT FK_{objectQualifier}hcc_ProductPropertyValue_hcc_ProductProperty
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue] WITH NOCHECK ADD CONSTRAINT
+	FK_{objectQualifier}hcc_ProductPropertyValue_hcc_Product FOREIGN KEY
+	(
+	ProductBvin
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Product]
+	(
+	bvin
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  CASCADE 
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductPropertyValue] ADD CONSTRAINT
+	FK_{objectQualifier}hcc_ProductPropertyValue_hcc_ProductProperty FOREIGN KEY
+	(
+	PropertyId
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductProperty]
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  CASCADE 
+GO
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory]
+	DROP CONSTRAINT FK_{objectQualifier}hcc_ProductXCategory_hcc_Product
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory]
+	DROP CONSTRAINT FK_{objectQualifier}hcc_ProductXCategory_hcc_Category
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory] WITH NOCHECK ADD CONSTRAINT
+	FK_{objectQualifier}hcc_ProductXCategory_hcc_Category FOREIGN KEY
+	(
+	CategoryId
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Category]
+	(
+	bvin
+	) ON UPDATE  NO ACTION
+	 ON DELETE  CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXCategory] WITH NOCHECK ADD CONSTRAINT
+	FK_{objectQualifier}hcc_ProductXCategory_hcc_Product FOREIGN KEY
+	(
+	ProductId
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Product]
+	(
+	bvin
+	) ON UPDATE  NO ACTION
+	 ON DELETE  CASCADE	
+GO
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty]
+	DROP CONSTRAINT FK_{objectQualifier}hcc_ProductTypeProperties_hcc_ProductType
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductTypeXProductProperty] WITH NOCHECK ADD CONSTRAINT
+	FK_{objectQualifier}hcc_ProductTypeProperties_hcc_ProductType FOREIGN KEY
+	(
+	ProductTypeBvin
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductType]
+	(
+	bvin
+	) ON UPDATE  NO ACTION
+	 ON DELETE  CASCADE
+GO
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems]
+	DROP CONSTRAINT FK_{objectQualifier}hcc_ProductOptionsItems_hcc_ProductOptions
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductOptionsItems] ADD CONSTRAINT
+	FK_{objectQualifier}hcc_ProductOptionsItems_hcc_ProductOptions FOREIGN KEY
+	(
+	OptionBvin
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductOptions]
+	(
+	bvin
+	) ON UPDATE  NO ACTION
+	 ON DELETE  CASCADE	
+GO
+
+/* End of Products FK updates */
+
+
+/* Start of Affiliate FK updates */
+
+delete from {databaseOwner}[{objectQualifier}hcc_AffiliateReferral]
+where AffiliateId not in (select Id from {databaseOwner}[{objectQualifier}hcc_Affiliate])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_AffiliateReferral_hcc_Affiliate]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AffiliateReferral]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AffiliateReferral] ADD CONSTRAINT
+	FK_{objectQualifier}hcc_AffiliateReferral_hcc_Affiliate FOREIGN KEY
+	(
+	AffiliateId
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Affiliate]
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  CASCADE 
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AffiliatePayments]
+	DROP CONSTRAINT FK_{objectQualifier}hcc_AffiliatePayments_hcc_Affiliate
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_AffiliatePayments] ADD CONSTRAINT
+	FK_{objectQualifier}hcc_AffiliatePayments_hcc_Affiliate FOREIGN KEY
+	(
+	AffiliateId
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Affiliate]
+	(
+	Id
+	) ON UPDATE  NO ACTION
+	 ON DELETE  CASCADE
+GO
+
+/* End of Affiliate FK updates */
+
+/* Start update of contraints that were created without 'objectQualifier' */
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreSettingsTranslations]') AND name = N'PK_hcc_StoreSettingsTranslations')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettingsTranslations] DROP CONSTRAINT [PK_hcc_StoreSettingsTranslations]
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettingsTranslations] ADD  CONSTRAINT [PK_{objectQualifier}hcc_StoreSettingsTranslations] PRIMARY KEY CLUSTERED 
+	(
+		[StoreSettingsTranslationId] ASC
+	)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF)
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreSettingsTranslations]') AND name = N'UK_hcc_StoreSettingsTranslations')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettingsTranslations] DROP CONSTRAINT [UK_hcc_StoreSettingsTranslations]
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettingsTranslations] ADD  CONSTRAINT [UK_{objectQualifier}hcc_StoreSettingsTranslations] UNIQUE NONCLUSTERED 
+	(
+		[StoreSettingsId] ASC,
+		[Culture] ASC
+	)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF)
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[DF_hcc_LineItem_FreeQuantity]') AND type = 'D')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] DROP CONSTRAINT [DF_hcc_LineItem_FreeQuantity]
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] ADD  CONSTRAINT [DF_{objectQualifier}hcc_LineItem_FreeQuantity]  DEFAULT ((0)) FOR [FreeQuantity]
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[DF_hcc_ShippingMethod_VisibilityMode]') AND type = 'D')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod] DROP CONSTRAINT [DF_hcc_ShippingMethod_VisibilityMode]
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod] ADD  CONSTRAINT [DF_{objectQualifier}hcc_ShippingMethod_VisibilityMode]  DEFAULT ((0)) FOR [VisibilityMode]
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[DF_hcc_ShippingMethod_SortOrder]') AND type = 'D')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod] DROP CONSTRAINT [DF_hcc_ShippingMethod_SortOrder]
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod] ADD  CONSTRAINT [DF_{objectQualifier}hcc_ShippingMethod_SortOrder]  DEFAULT ((0)) FOR [SortOrder]
+END
+GO
+
+/* End update of contraints that were created without 'objectQualifier' */
+
+
+/* Delete store data from Superuser Administration page */
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Orders_DeleteForStore]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_Orders_DeleteForStore]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}hcc_Orders_DeleteForStore]
+	@StoreId bigint
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	delete from {databaseOwner}[{objectQualifier}hcc_Order] where StoreId = @StoreId
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AnalyticsEvents_DeleteForStore]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents_DeleteForStore]
+GO
+
+CREATE PROCEDURE  {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents_DeleteForStore]
+	@StoreId bigint
+AS 
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	-- Remove analytics data
+	delete from {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents] where StoreId = @StoreId
+END
+GO
+
+/*  End Delete store data from Superuser Administration page */
+
+
+/* Start of ProductRelationships FK updates */
+
+delete from {databaseOwner}[{objectQualifier}hcc_ProductRelationships]
+where [ProductId] not in (select bvin from {databaseOwner}[{objectQualifier}hcc_Product])
+	or [RelatedProductId] not in (select bvin from {databaseOwner}[{objectQualifier}hcc_Product])
+GO
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductRelationships]') AND name = N'IX_{objectQualifier}hcc_ProductRelationships_ProductId')
+DROP INDEX [IX_{objectQualifier}hcc_ProductRelationships_ProductId] ON {databaseOwner}[{objectQualifier}hcc_ProductRelationships]
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductRelationships]') AND name = N'IX_{objectQualifier}hcc_ProductRelationships_RelatedProductId')
+DROP INDEX [IX_{objectQualifier}hcc_ProductRelationships_RelatedProductId] ON {databaseOwner}[{objectQualifier}hcc_ProductRelationships]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductRelationships] ALTER COLUMN [ProductId] uniqueidentifier NOT NULL
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductRelationships] ALTER COLUMN [RelatedProductId] uniqueidentifier NOT NULL
+GO
+
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductRelationships_ProductId] ON {databaseOwner}[{objectQualifier}hcc_ProductRelationships] 
+(
+	[ProductId] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)
+GO
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}hcc_ProductRelationships_RelatedProductId] ON {databaseOwner}[{objectQualifier}hcc_ProductRelationships] 
+(
+	[RelatedProductId] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductRelationships_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductRelationships]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductRelationships] ADD CONSTRAINT
+	FK_{objectQualifier}hcc_ProductRelationships_hcc_Product FOREIGN KEY
+	(
+	ProductId
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Product]
+	(
+	bvin
+	) ON UPDATE  NO ACTION
+	 ON DELETE  CASCADE
+GO
+
+/* End of ProductRelationships FK updates */
+
+
+/* Start of ProductXOption FK updates */
+
+delete from {databaseOwner}[{objectQualifier}hcc_ProductXOption]
+where ProductBvin not in (select bvin from {databaseOwner}[{objectQualifier}hcc_Product])
+	or OptionBvin not in (select bvin from {databaseOwner}[{objectQualifier}hcc_ProductOptions])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductXOption_hcc_Product]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXOption]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXOption] ADD CONSTRAINT
+	FK_{objectQualifier}hcc_ProductXOption_hcc_Product FOREIGN KEY
+	(
+	ProductBvin
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_Product]
+	(
+	bvin
+	) ON UPDATE  NO ACTION
+	 ON DELETE  NO ACTION
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}hcc_ProductXOption_hcc_ProductOptions]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_ProductXOption]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ProductXOption] ADD CONSTRAINT
+	FK_{objectQualifier}hcc_ProductXOption_hcc_ProductOptions FOREIGN KEY
+	(
+	OptionBvin
+	) REFERENCES {databaseOwner}[{objectQualifier}hcc_ProductOptions]
+	(
+	bvin
+	) ON UPDATE  NO ACTION
+	 ON DELETE  NO ACTION
+GO
+
+/* End of ProductXOption FK updates */
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_Order' AND  COLUMN_NAME = 'UsedCulture')
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] ADD
+	UsedCulture nvarchar(10) NULL
+GO
+
+update {databaseOwner}[{objectQualifier}hcc_Order]
+set UsedCulture = 'en-US'
+where UsedCulture is null
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order]
+ALTER COLUMN UsedCulture nvarchar(10) NOT NULL
+GO
+
+/* Gift card stored procedure change to include purchaser on search results */
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_FindGiftCards]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_FindGiftCards]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}hcc_FindGiftCards]
+	@StoreId bigint, 
+	@StartDateUtc datetime, 
+	@EndDateUtc datetime,
+	@SearchText nvarchar(1000) = '', 
+	@Amount decimal(18,10) = 0, 
+	@AmountComparing int = 0, -- 0=any 1=greater, 2=less, 3=equial 
+	@Balance decimal(18,10) = 0, 
+	@BalanceComparing int = 0,  -- 0=any 1=greater, 2=less, 3=equial
+	@IncludeInactive bit = 0,
+	@IncludeExpired bit = 0,
+	@PageIndex int = 0, 
+	@PageSize int = 10,
+	@RowCount int output 
+AS
+BEGIN
+
+declare @SearchTextL nvarchar(1000)
+set @SearchTextL = '%' + @SearchText + '%'
+
+SELECT @RowCount = COUNT(1)
+	FROM  {databaseOwner}[{objectQualifier}hcc_GiftCard] AS GC
+              INNER JOIN {databaseOwner}[{objectQualifier}hcc_LineItem] AS LI ON GC.[LineItemId] = LI.[Id]
+	          LEFT OUTER JOIN {databaseOwner}[{objectQualifier}hcc_Order] AS O ON LI.[OrderBvin] = O.[bvin]
+			  left outer join {databaseOwner}[{objectQualifier}Users] as u on o.UserId = u.UserID
+			  WHERE GC.[StoreId] = @StoreId AND (GC.[Enabled] = 1 OR @IncludeInactive = 1)
+				AND ([IssueDateUtc] >= @StartDateUtc) AND ([IssueDateUtc] <= @EndDateUtc) 
+				AND ((GC.[Amount] = @Amount AND @AmountComparing = 3)OR
+					 (GC.[Amount] < @Amount AND @AmountComparing = 2)OR
+					 (GC.[Amount] > @Amount AND @AmountComparing = 1)OR @AmountComparing = 0)
+				AND (((GC.[Amount] - GC.[UsedAmount]) = @Balance AND @BalanceComparing = 3)OR
+					 ((GC.[Amount] - GC.[UsedAmount]) < @Balance AND @BalanceComparing = 2)OR
+					 ((GC.[Amount] - GC.[UsedAmount]) > @Balance AND @BalanceComparing = 1)OR @BalanceComparing = 0)
+				AND (GC.[ExpirationDateUtc] > getutcdate() OR @IncludeExpired = 1)
+				AND (@SearchText = '' OR GC.CardNumber = @SearchText OR 
+					GC.RecipientEmail like @SearchTextL OR 
+					GC.RecipientName like @SearchTextL OR 
+					O.OrderNumber = @SearchText OR
+					O.UserEmail like @SearchTextL OR
+					u.FirstName like @SearchTextL OR
+					u.LastName like @SearchTextL OR
+					u.Email  like @SearchTextL OR
+					u.DisplayName like @SearchTextL OR
+					cast(O.ShippingAddress as xml).value('(/Address/FirstName)[1]', 'nvarchar(500)') like @SearchTextL OR
+					cast(O.ShippingAddress as xml).value('(/Address/LastName)[1]', 'nvarchar(500)') like @SearchTextL OR 
+					cast(O.BillingAddress as xml).value('(/Address/FirstName)[1]', 'nvarchar(500)') like @SearchTextL OR
+					cast(O.BillingAddress as xml).value('(/Address/LastName)[1]', 'nvarchar(500)') like @SearchTextL )
+			
+
+SELECT T2.*
+    FROM ( SELECT T.*, row_number() OVER (ORDER BY T.[IssueDateUtc] ASC) AS [row_number]
+        FROM (SELECT GC.*, O.bvin, O.OrderNumber  
+              FROM  {databaseOwner}[{objectQualifier}hcc_GiftCard] AS GC
+              INNER JOIN {databaseOwner}[{objectQualifier}hcc_LineItem] AS LI ON GC.[LineItemId] = LI.[Id]
+	          LEFT OUTER JOIN {databaseOwner}[{objectQualifier}hcc_Order] AS O ON LI.[OrderBvin] = O.[bvin]
+			  left outer join {databaseOwner}[{objectQualifier}Users] as u on o.UserId = u.UserID
+			  WHERE GC.[StoreId] = @StoreId AND (GC.[Enabled] = 1 OR @IncludeInactive = 1)
+				AND ([IssueDateUtc] >= @StartDateUtc) AND ([IssueDateUtc] <= @EndDateUtc) 
+				AND ((GC.[Amount] = @Amount AND @AmountComparing = 3)OR
+					 (GC.[Amount] < @Amount AND @AmountComparing = 2)OR
+					 (GC.[Amount] > @Amount AND @AmountComparing = 1)OR @AmountComparing = 0)
+				AND (((GC.[Amount] - GC.[UsedAmount]) = @Balance AND @BalanceComparing = 3)OR
+					 ((GC.[Amount] - GC.[UsedAmount]) < @Balance AND @BalanceComparing = 2)OR
+					 ((GC.[Amount] - GC.[UsedAmount]) > @Balance AND @BalanceComparing = 1)OR @BalanceComparing = 0)
+				AND (GC.[ExpirationDateUtc] > getutcdate() OR @IncludeExpired = 1)
+				AND (@SearchText = '' OR GC.CardNumber = @SearchText OR 
+					GC.RecipientEmail like @SearchTextL OR 
+					GC.RecipientName like @SearchTextL OR 
+					O.OrderNumber = @SearchText OR
+					O.UserEmail like @SearchTextL OR
+					u.FirstName like @SearchTextL OR
+					u.LastName like @SearchTextL OR
+					u.Email  like @SearchTextL OR
+					u.DisplayName like @SearchTextL OR
+					cast(O.ShippingAddress as xml).value('(/Address/FirstName)[1]', 'nvarchar(500)') like @SearchTextL OR
+					cast(O.ShippingAddress as xml).value('(/Address/LastName)[1]', 'nvarchar(500)') like @SearchTextL OR 
+					cast(O.BillingAddress as xml).value('(/Address/FirstName)[1]', 'nvarchar(500)') like @SearchTextL OR
+					cast(O.BillingAddress as xml).value('(/Address/LastName)[1]', 'nvarchar(500)') like @SearchTextL )
+			) AS T
+    )  AS T2
+    WHERE T2.[row_number] > @PageIndex*@PageSize AND T2.[row_number] <= (@PageIndex+1)*@PageSize
+    ORDER BY T2.[IssueDateUtc] ASC
+    
+END
+
+GO
+
+/* end of gift card changes */
+
+
+/* Start Affiliate Email Templates */
+
+	/* Delete Installed Affiliate Templates */
+	DELETE FROM {databaseOwner}[{objectQualifier}hcc_HtmlTemplates]
+	WHERE [TemplateType] IN (500,501,508)
+
+IF NOT EXISTS (SELECT 1 FROM {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] WHERE [DisplayName] = N' Affiliate Approved Confirmation')
+BEGIN
+	INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([StoreId],[LastUpdatedUtc],[DisplayName],[FromEmail],[TemplateType])
+	VALUES (0, '20141113', N' Affiliate Approved Confirmation', N'[[Store.ContactEmail]]', 501)
+
+	INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations] ([HtmlTemplateId],[Culture],[Subject],[Body],[RepeatingSection])
+	VALUES (@@IDENTITY, 'en-US', N'Affiliate Approved Confirmation', N'<html>
+<head>
+    <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+    <style type="text/css">
+        A {
+            text-decoration: none;
+        }
+
+            A:link {
+                color: #3366cc;
+                text-decoration: none;
+            }
+
+            A:visited {
+                color: #663399;
+                text-decoration: none;
+            }
+
+            A:active {
+                color: #cccccc;
+                text-decoration: none;
+            }
+
+            A:Hover {
+                text-decoration: underline;
+            }
+
+        BODY, TD, CENTER, P {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 10px;
+            color: #333333;
+        }
+
+        .body {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 10px;
+            color: #333333;
+        }
+
+        .content {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            font-weight: normal;
+            color: #000000;
+        }
+
+        .title {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 10px;
+            font-weight: normal;
+            color: #000000;
+        }
+
+        .headline {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            color: #000000;
+        }
+
+        .message {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 9px;
+        }
+    </style>
+</head>
+<body bgcolor="#ffffff" link="#3366cc" vlink="#3366cc" alink="#3366cc" leftmargin="0" topmargin="0">
+
+	Hello [[Affiliate.AffiliateName]]:
+	<br/>
+
+Thank you for registering to become an affiliate on our website. We approved your application.  
+
+<br/>
+<br/>
+Sincerely,
+<br/>
+Store Management
+<br/>
+[[Store.StoreName]]
+
+</body>
+</html>'
+	, N'')
+END
+GO
+
+
+IF NOT EXISTS (SELECT 1 FROM {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] WHERE [DisplayName] = N' Admin Affiliate Approvement')
+BEGIN
+	INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([StoreId],[LastUpdatedUtc],[DisplayName],[FromEmail],[TemplateType])
+	VALUES (0, '20141113', N' Admin Affiliate Approvement', N'[[Store.ContactEmail]]', 508)
+
+	INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations] ([HtmlTemplateId],[Culture],[Subject],[Body],[RepeatingSection])
+	VALUES (@@IDENTITY, 'en-US', N'Admin Affiliate Approvement', N'<html>
+<head>
+    <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+    <style type="text/css">
+        A {
+            text-decoration: none;
+        }
+
+            A:link {
+                color: #3366cc;
+                text-decoration: none;
+            }
+
+            A:visited {
+                color: #663399;
+                text-decoration: none;
+            }
+
+            A:active {
+                color: #cccccc;
+                text-decoration: none;
+            }
+
+            A:Hover {
+                text-decoration: underline;
+            }
+
+        BODY, TD, CENTER, P {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 10px;
+            color: #333333;
+        }
+
+        .body {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 10px;
+            color: #333333;
+        }
+
+        .content {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            font-weight: normal;
+            color: #000000;
+        }
+
+        .title {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 10px;
+            font-weight: normal;
+            color: #000000;
+        }
+
+        .headline {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            color: #000000;
+        }
+
+        .message {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 9px;
+        }
+    </style>
+</head>
+<body bgcolor="#ffffff" link="#3366cc" vlink="#3366cc" alink="#3366cc" leftmargin="0" topmargin="0">
+
+Hello:
+
+<br/>
+A new affiliate registration has been submitted. Please use the link below to review the affiliate''s application.
+<br/>
+
+<a href="[[Affiliate.Approve.Url]]">Approved</a>
+
+<br/>
+
+</body>
+</html>'
+	, N'')
+END
+GO
+
+
+IF NOT EXISTS (SELECT 1 FROM {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] WHERE [DisplayName] = N' Affiliate Registration Confirmation')
+BEGIN
+	INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([StoreId],[LastUpdatedUtc],[DisplayName],[FromEmail],[TemplateType])
+	VALUES (0, '20141113', N' Affiliate Registration Confirmation', N'[[Store.ContactEmail]]', 500)
+
+	INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations] ([HtmlTemplateId],[Culture],[Subject],[Body],[RepeatingSection])
+	VALUES (@@IDENTITY, 'en-US', N'Affiliate Registration Confirmation', N'<html>
+<head>
+    <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+    <style type="text/css">
+        A {
+            text-decoration: none;
+        }
+
+            A:link {
+                color: #3366cc;
+                text-decoration: none;
+            }
+
+            A:visited {
+                color: #663399;
+                text-decoration: none;
+            }
+
+            A:active {
+                color: #cccccc;
+                text-decoration: none;
+            }
+
+            A:Hover {
+                text-decoration: underline;
+            }
+
+        BODY, TD, CENTER, P {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 10px;
+            color: #333333;
+        }
+
+        .body {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 10px;
+            color: #333333;
+        }
+
+        .content {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            font-weight: normal;
+            color: #000000;
+        }
+
+        .title {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 10px;
+            font-weight: normal;
+            color: #000000;
+        }
+
+        .headline {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            color: #000000;
+        }
+
+        .message {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 9px;
+        }
+    </style>
+</head>
+<body bgcolor="#ffffff" link="#3366cc" vlink="#3366cc" alink="#3366cc" leftmargin="0" topmargin="0">
+
+	Hello [[Affiliate.AffiliateName]]:<br/>
+	<br/>
+Thank you for registering to become an affiliate on our website.  We''ll be reviewing your application within the next few days and notify you if we have any questions.  
+<br/>
+<br/>
+<br/>
+Sincerely,
+<br/>
+Store Management
+<br/>
+[[Store.StoreName]]
+
+</body>
+</html>'
+	, N'')
+END
+GO
+
+/* End Affiliate Email Templates */

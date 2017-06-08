@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FakeProductImage>
+  <ProductImage>
+    <TotalProductImageCount>2</TotalProductImageCount>
+    <Image>
+      <IMG>
+        <Caption>TestImg1</Caption>
+        <FileName>fakeimg1.png</FileName>
+        <AlternateText>Product-Test1</AlternateText>
+      </IMG>
+      <IMG>
+        <Caption>TestImg2</Caption>
+        <FileName>fakeimg2.png</FileName>
+        <AlternateText>Product-Test2</AlternateText>
+      </IMG>
+    </Image>
+    <ProductImageRepo>
+      <Image>
+        <IMG>
+          <Caption>TestImg2</Caption>
+          <FileName>fakeimg2.png</FileName>
+          <AlternateText>Product-Test2</AlternateText>
+        </IMG>
+        <IMG>
+          <Caption>TestImg1edit</Caption>
+          <FileName>fakeimg1edit.png</FileName>
+          <AlternateText>Product-Test1-edit</AlternateText>
+        </IMG>
+      </Image>
+    </ProductImageRepo>
+  </ProductImage>
+</FakeProductImage>

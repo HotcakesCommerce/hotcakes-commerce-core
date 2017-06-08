@@ -1,0 +1,204 @@
+﻿IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_ShippingMethod' AND  COLUMN_NAME = 'VisibilityMode')
+BEGIN
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod]
+    ADD [VisibilityMode]   INT             CONSTRAINT [DF_{objectQualifier}hcc_ShippingMethod_VisibilityMode] DEFAULT ((0)) NOT NULL
+
+END
+GO
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_ShippingMethod' AND  COLUMN_NAME = 'VisibilityAmount')
+BEGIN
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod]
+    ADD [VisibilityAmount] DECIMAL (18, 2) NULL
+
+END
+GO
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_ShippingMethod' AND  COLUMN_NAME = 'SortOrder')
+BEGIN
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_ShippingMethod]
+    ADD [SortOrder]        INT             CONSTRAINT [DF_{objectQualifier}hcc_ShippingMethod_SortOrder] DEFAULT ((0)) NOT NULL
+
+END
+GO
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_LineItem' AND  COLUMN_NAME = 'FreeQuantity')
+BEGIN
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+    ADD [FreeQuantity]            INT              CONSTRAINT [DF_{objectQualifier}hcc_LineItem_FreeQuantity] DEFAULT ((0)) NOT NULL
+
+END
+GO
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_LineItem' AND  COLUMN_NAME = 'PromotionIds')
+BEGIN
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem]
+    ADD [PromotionIds]     NVARCHAR(500)   NULL
+
+END
+GO
+
+
+IF NOT EXISTS (SELECT 1 FROM {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] WHERE [DisplayName] = N'Product Is Out Of Stock')
+BEGIN
+	INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([StoreId],[LastUpdatedUtc],[DisplayName],[FromEmail],[TemplateType])
+	VALUES (0, '20150707', N'Product Is Out Of Stock', N'[[Store.ContactEmail]]', 510)
+
+	INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations] ([HtmlTemplateId],[Culture],[Subject],[Body],[RepeatingSection])
+	VALUES (@@IDENTITY, 'en-US', N'Product Is Out Of Stock', N'<html>
+	<head>
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<style type="text/css">
+			A {
+				text-decoration: none;
+			}
+
+				A:link {
+					color: #3366cc;
+					text-decoration: none;
+				}
+
+				A:visited {
+					color: #663399;
+					text-decoration: none;
+				}
+
+				A:active {
+					color: #cccccc;
+					text-decoration: none;
+				}
+
+				A:Hover {
+					text-decoration: underline;
+				}
+
+			BODY, TD, CENTER, P {
+				font-family: Geneva, Verdana, Arial, Helvetica;
+				font-size: 10px;
+				color: #333333;
+			}
+
+			.body {
+				font-family: Geneva, Verdana, Arial, Helvetica;
+				font-size: 10px;
+				color: #333333;
+			}
+
+			.content {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 11px;
+				font-weight: normal;
+				color: #000000;
+			}
+
+			.title {
+				font-family: Helvetica, Arial, sans-serif;
+				font-size: 10px;
+				font-weight: normal;
+				color: #000000;
+			}
+
+			.headline {
+				font-family: Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				font-weight: bold;
+				color: #000000;
+			}
+
+			.message {
+				font-family: Geneva, Verdana, Arial, Helvetica;
+				font-size: 9px;
+			}
+		</style>
+	</head>
+	<body bgcolor="#ffffff" link="#3366cc" vlink="#3366cc" alink="#3366cc" leftmargin="0" topmargin="0">
+		<p>The product is out of stock.</p>
+		<p>Thank you,</p>
+	</body>
+	</html>
+	', N'')
+END
+GO
+
+
+/* Fixed index issues for multilanguage sites */
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AddObjectIndex]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_AddObjectIndex]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}hcc_AddObjectIndex]
+	@siteId bigint,
+	@objectId uniqueidentifier,
+	@objectType int,
+	@title nvarchar(512),
+	@culture nvarchar(10),
+	@wordScores xml
+AS
+BEGIN
+	BEGIN TRANSACTION
+	
+	DELETE sow
+	FROM {databaseOwner}[{objectQualifier}hcc_SearchObjectWords] sow
+		JOIN {databaseOwner}[{objectQualifier}hcc_SearchObjects] so
+			ON so.Id = sow.SearchObjectId
+		JOIN {databaseOwner}[{objectQualifier}hcc_SearchLexicon] sl
+			ON sow.WordId = sl.Id
+	WHERE so.SiteId = @siteId
+		AND so.ObjectId = @objectId
+		AND so.ObjectType = @objectType
+		AND sl.Culture = @culture
+		
+	DECLARE @searchObjectId bigint
+	SELECT @searchObjectId = Id FROM {databaseOwner}[{objectQualifier}hcc_SearchObjects] WHERE SiteId = @siteId and ObjectId = @objectId and ObjectType = @objectType
+	
+	IF (@searchObjectId IS NOT NULL)
+		UPDATE {databaseOwner}[{objectQualifier}hcc_SearchObjects]
+		SET Title = @title,
+			LastIndexUtc = GETUTCDATE()
+		WHERE SiteId = @siteId
+			and ObjectId = @objectId
+			and ObjectType = @objectType
+	ELSE
+	BEGIN
+		INSERT INTO {databaseOwner}[{objectQualifier}hcc_SearchObjects] ([ObjectType], [ObjectId], [Title], [SiteId], [LastIndexUtc])
+		VALUES (@objectType, @objectId, @title, @siteId, GETUTCDATE())
+		
+		SELECT @searchObjectId = @@IDENTITY
+	END
+
+	DECLARE @scoreTable TABLE(Word nvarchar(255), Score int)
+	INSERT INTO @scoreTable
+	SELECT
+		Pair.value('(word)[1]', 'nvarchar(255)') as Word,
+		Pair.value('(score)[1]', 'int') as Score
+	FROM 
+		@wordScores.nodes('/dict/pair') AS WS(Pair)
+
+	MERGE {databaseOwner}[{objectQualifier}hcc_SearchLexicon] AS T
+	USING @scoreTable AS S
+	ON T.Word = S.Word and T.Culture = @culture 
+	WHEN NOT MATCHED BY TARGET
+		THEN INSERT(Word, Culture) VALUES(S.Word, @culture);
+	
+	MERGE {databaseOwner}[{objectQualifier}hcc_SearchObjectWords] AS T
+	USING
+	(
+		SELECT sl.Id as WordId, Score
+		FROM {databaseOwner}[{objectQualifier}hcc_SearchLexicon] sl
+			join @scoreTable st
+				on sl.Word = st.Word and sl.Culture = @culture
+	) AS S
+	ON T.SearchObjectId = @searchObjectId and T.WordId = S.WordId and T.SiteId = @siteId
+	WHEN NOT MATCHED BY TARGET
+		THEN INSERT(SearchObjectId, WordId, SiteId, Score) VALUES(@searchObjectId, S.WordId, @siteId, Score)
+	WHEN MATCHED
+		THEN UPDATE SET T.Score = S.Score;
+
+	COMMIT TRANSACTION
+END
+GO

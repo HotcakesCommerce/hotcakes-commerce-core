@@ -1,0 +1,17 @@
+﻿/* Remove any promotions that use the discontinued User Has Badges qualification */
+
+IF ((SELECT COUNT([Id]) 
+	FROM {databaseOwner}[{objectQualifier}hcc_Promotions] 
+	WHERE [QualificationsXml] LIKE N'%E1DB03D2-3119-45B3-9CDC-FD4CA07D8324%') > 0)
+BEGIN
+	/* delete any translations first */
+	DELETE FROM {databaseOwner}[{objectQualifier}hcc_PromotionTranslations] 
+	WHERE [PromotionId] IN (
+		SELECT [Id] 
+		FROM {databaseOwner}[{objectQualifier}hcc_Promotions] 
+		WHERE [QualificationsXml] LIKE N'%E1DB03D2-3119-45B3-9CDC-FD4CA07D8324%'
+	);
+
+	DELETE FROM {databaseOwner}[{objectQualifier}hcc_Promotions] 
+	WHERE [QualificationsXml] LIKE N'%E1DB03D2-3119-45B3-9CDC-FD4CA07D8324%';
+END

@@ -1,0 +1,9 @@
+﻿DesktopModules/Hotcakes/Core/Admin/Catalog/ProductVariants_List.aspx
+DesktopModules/Hotcakes/Core/Admin/Catalog/ProductVariants_Delete.aspx
+DesktopModules/Hotcakes/Core/Admin/Catalog/ProductVariants_Get.aspx
+DesktopModules/Hotcakes/Core/Admin/Catalog/ProductVariants_Update.aspx
+DesktopModules/Hotcakes/Core/Admin/Catalog/OptionItems_Delete.aspx
+DesktopModules/Hotcakes/Core/Admin/Catalog/OptionItems_Get.aspx
+DesktopModules/Hotcakes/Core/Admin/Catalog/OptionItems_Sort.aspx
+DesktopModules/Hotcakes/Core/Admin/Catalog/OptionItems_Update.aspx
+

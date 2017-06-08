@@ -1,0 +1,588 @@
+body {
+}
+
+@import "_admin_common.less";
+
+@pagewidth: 1600px;
+@footerheight: 100px;
+
+#header {
+    z-index: 10;
+    position: relative;
+    background-color: @color-white-dark1;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 19.05mm 13.20mm 36.60mm 19.05mm;
+}
+
+@media print {
+    #header {
+        display: none;
+    }
+	#hcNavContent {
+		display: none;
+	}
+	#EmailTemplates {
+		display: none;
+    }
+	#EmailSend {
+		display: none;
+    }
+	#MainContent_NewPublicNoteField {
+		display: none;
+	}
+	#MainContent_btnNewPublicNote {
+		display: none;
+	}
+	#MainContent_NewPrivateNoteField {
+		display: none;
+	}
+	#MainContent_btnNewPrivateNote {
+		display: none;
+	}
+
+  html, body {
+    width: 100%;
+    height: 100%;
+  }
+
+}
+
+#branding {
+    width: @pagewidth;
+    height: 70px;
+    margin: 0 auto;
+    background: url(images/admin_logo.png) no-repeat 0px 0px;
+
+    .hcQuickLinks {
+        padding: 20px 10px 0 0;
+        text-align: right;
+
+        a, a:visited {
+            margin-left: 20px;
+            color: black;
+            font-size: 12px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    }
+
+    .hcLanguageBar {
+        display: inline;
+    }
+}
+
+
+#mainmenu {
+    background: @color-gray;
+    // horizontal menu
+    > ul {
+        height: 44px;
+        width: @pagewidth;
+        margin: 0 auto;
+        padding: 0 60px;
+        list-style-type: none;
+
+        > li {
+            float: left;
+            text-align: center;
+            padding: 10px 20px;
+        }
+
+        > li:hover {
+            background: @color-gray*0.7;
+        }
+
+        a, a:visited {
+            font-size: 18px;
+            text-decoration: none;
+            color: white;
+        }
+        // popup vertical menu
+        li:hover ul, a:hover ul {
+            display: block;
+        }
+
+        ul {
+            display: none;
+            position: absolute;
+            z-index: 100;
+            list-style-type: none;
+            padding: 10px 0;
+            background-color: @color-gray*0.7;
+            -webkit-box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.25);
+            box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.25);
+            margin-left: -20px;
+            margin-top: 10px;
+
+            li {
+                text-align: left;
+            }
+
+            a {
+                display: block;
+                padding: 5px 15px;
+                font-size: 16px;
+            }
+
+            a:hover {
+                background: @color-gray;
+            }
+
+            hr {
+                margin: 0;
+            }
+        }
+    }
+}
+
+.hcIconPlus,
+.hcIconHelp,
+.hcMenuIcon0,
+.hcMenuIcon1,
+.hcMenuIcon2,
+.hcMenuIcon3,
+.hcMenuIcon4,
+.hcMenuIcon5,
+.hcMenuIcon6 {
+    display: inline-block;
+    line-height: 25px;
+    vertical-align: text-top;
+    margin-top: -1px;
+    width: 25px;
+    height: 25px;
+    background-image: url(Images/admin_menu_icons.png);
+}
+
+.hcIconPlus {
+    background-image: url(Images/admin_plus.png);
+    margin-top: -4px;
+}
+
+.hcMenuIcon0 {
+    background-position: 0 0;
+}
+
+.hcMenuIcon1 {
+    background-position: -25px 0;
+}
+
+.hcMenuIcon2 {
+    background-position: -50px 0;
+}
+
+.hcMenuIcon3 {
+    background-position: -75px 0;
+}
+
+.hcMenuIcon4 {
+    background-position: -100px 0;
+}
+
+.hcMenuIcon5 {
+    background-position: -125px 0;
+}
+
+.hcMenuIcon6 {
+    background-position: -25px 0;
+}
+
+.hcIconHelp {
+    background-position: -150px 0;
+}
+
+// ------- Content placeholder -------------
+
+#wrapper {
+    background-color: @color-white-dark1;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -@footerheight;
+}
+
+#content, #navwrapper {
+    display: table;
+    height: 100%;
+    margin: 54px auto 0;
+    width: @pagewidth;
+
+    @media(max-width:1600px) {
+        width: 100%;
+
+        .hcNavContent {
+            width: 20%;
+        }
+
+        .hcMainContent {
+            width: 80%;
+        }
+    }
+
+    @media (max-width: 1220px) {
+        .hcNavContent {
+            width: 240px;
+        }
+
+        .hcMainContent {
+            .left;
+            width: 70%;
+        }
+    }
+}
+
+html, body, body > form {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#navwrapper {
+    width: 960px;
+    padding: 0;
+}
+
+.hcNavContent {
+    display: table-cell;
+    float: left;
+    height: 100%;
+    width: 15%;
+
+    .hcNavContentBody {
+        height: 100%;
+        background: @color-black;
+        margin: 0 15px 0 0;
+
+        .hcNavMenu {
+            border: none;
+            margin: 0;
+            padding-top: 40px;
+        }
+
+        .hcBlock {
+            padding-top: 20px;
+
+            &.hcBlockLight {
+                background: @color-black-light;
+
+                .hcForm {
+                    .hcFormItem:first-child {
+                        h2 {
+                            margin-top: 0;
+                        }
+
+                        .hcLabel {
+                            padding-top: 0;
+                        }
+                    }
+                }
+
+                &.hcPaddingBottom {
+                    padding-bottom: 20px;
+                }
+            }
+
+            .hcForm {
+                margin: 0 20px 0 20px;
+
+                h2 {
+                    color: @color-white;
+                    line-height: 30px;
+                }
+
+                span {
+                    color: @color-white-dark2;
+                }
+
+                .hcFormItem {
+                    color: @color-white;
+                    padding: 0;
+
+                    .hcTertiaryAction {
+                        margin: 5px 0 20px 0;
+                    }
+
+                    input [type="text"],
+                    input[type="password"]
+                    textarea,
+                    select,
+                    .hcButton {
+                        margin-bottom:30px;
+                        width: 100%;
+                    }
+                    
+                    input[type="text"],
+                    input[type="password"]{
+                        color: @color-white;
+                        
+                    }
+
+                    input[type="checkbox"],
+                    input[type="radio"]{
+                        margin-left:0;
+                        margin-right:12px;
+                    }
+
+                    input[type="checkbox"]{
+                        &:before{
+                            ._hcInputCheckRadio(0, -360px);
+                        }
+                            &:checked{
+
+                            &:before{
+                                ._hcInputCheckRadio(0, -40px);
+                            }
+                        }
+
+                        &:disabled{
+
+                            &:before{
+                                ._hcInputCheckRadio(0, -80px);
+                            }
+                        }
+                    }
+
+                    input[type="radio"]{
+                        &:before{
+                            ._hcInputCheckRadio(0, -400px);
+                        }
+                        
+                        &:checked{
+
+                            &:before{
+                                ._hcInputCheckRadio(0, -160px);
+                            }
+                        }
+
+                        &:disabled{
+
+                            &:before{
+                                ._hcInputCheckRadio(0, -200px);
+                            }
+                        }
+                    }
+
+                    input[type="checkbox"] + label,
+                    input[type="radio"] + label{
+                        padding-right:0;
+                    }
+
+                    select {
+                        .select-mixin();
+                    }
+
+                    .RadComboBox.RadComboBox_Default {
+                        border: 1px solid @color-gray-dark2;
+                    }
+
+                    .RadComboBox_Default .rcbReadOnly .rcbInputCellLeft {
+                        background: none;
+                        padding: 0 0 0 8px !important;
+                        >input{
+                            margin-bottom:0;
+                            &:focus{
+                                border:none;
+                            }
+                        }
+                    }
+
+                    .RadComboBox_Default .rcbReadOnly .rcbInput {
+                        color: @color-white;
+                    }
+
+                    .RadComboBox_Default td.rcbInputCellLeft {
+                        border: none;
+                    }
+
+                    .RadComboBox_Default td.rcbArrowCellRight,
+                    .RadComboBox_Default td.rcbArrowCell {
+                        border: none;
+                        background: url(Images/admin_form_sprite.png) 0 -230px no-repeat transparent !important;
+                    }
+
+                    .RadComboBox .rcbArrowCell a {
+                        width: 26px;
+                    }
+
+                    table {
+                        tbody {
+                            tr {
+                                td {
+                                    color: @color-white;
+                                }
+                            }
+                        }
+                    }
+                    // ------- New Search Field -------------
+                    &.hcGo {
+                        label{
+                            padding-top:15px;
+                        }
+                        .search-mixin(@color-white);
+
+                        // ------- Smaller Select -------------
+                        .hcSelectOuter{
+                            select{
+                                background-position-x:134px;
+                                padding-right:20px;
+                                width: 84%;
+                            }
+                            .hcIconRight{
+                                background-position: -232px -194px;
+                            }
+                        }
+                    };
+                }
+            }
+
+            &.hcNavContentBottom {
+                background: @color-black;
+                padding-bottom: 20px;
+                padding-top: 20px;
+
+                .hcFormItem {
+                    > select {
+                        .select-mixin();
+                    }
+                }
+            }
+
+            &.hcBlockNotTopPadding {
+                padding-top: 0;
+            }
+
+            &.hcBlockNotBottomPadding {
+                .hcForm {
+                    .hcFormItem {
+                        padding-bottom: 0;
+                    }
+                }
+            }
+        }
+
+        .hcPrimaryAction,
+        .hcSecondaryAction,
+        .hcTertiaryAction {
+            font-size: 12px;
+            padding-left: 0;
+            padding-right: 0;
+            width: 100%;
+        }
+    }
+
+    .hcBlock {
+
+        .hcForm {
+            .hcFormItem.hcGo {
+                input, select {
+                    width: 100%;
+                }
+
+                .hcLabel {
+                    color: @color-orange;
+                    font-weight: 500;
+                }
+
+                .hcFieldOuter {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .hcBlockNoBorder {
+        margin: 0 15px 15px 0;
+
+        > .hcPrimaryAction,
+        > .hcSecondaryAction {
+            ._hcBoxSizing;
+            width: 100%;
+            text-align: center;
+        }
+
+        > .hcFormMessage {
+            color: #ffffff;
+            margin-left: 1em;
+        }
+    }
+}
+
+.hcMainContent {
+    float: right;
+    height: 100%;
+    margin-top: 6px;
+    width: 85%;
+
+    h1 {
+        line-height: 30px;
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+}
+// ------- Navigation Menu -------------
+.hcNavMenu {
+    list-style-type: none;
+    margin: 0 15px 15px 0;
+    border: 1px solid @color-lightgray;
+
+    li {
+        background: @color-black;
+        border-bottom: 1px solid @color-lightgray;
+        margin: 0;
+
+        &.hcCurrent {
+            background: @color-orange;
+
+            a, a:hover {
+                color: @color-white;
+            }
+        }
+
+        &.hcDisabled {
+            a, a:hover {
+                color: @color-disabled;
+                cursor: no-drop;
+            }
+        }
+
+        a, a:hover {
+            color: @color-white;
+            display: block;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            font-size: 12px;
+            line-height: 12px;
+            padding: 18px 20px;
+            text-decoration: none;
+        }
+
+        &:hover {
+            background: @color-orange;
+        }
+    }
+}
+// ------- Footer -------------
+
+#footer {
+    background-color: @color-white-dark1;
+    height: @footerheight;
+    text-align: center;
+    font-size: 12px;
+    color: @color-gray;
+}
+
+#footer-push {
+    height: @footerheight;
+}
+
+#footer #footer {
+    height: auto;
+    padding-top: 40px;
+
+    #copyright {
+        font-size: 12px;
+        color: @color-gray;
+    }
+}

@@ -1,0 +1,5 @@
+﻿/* Rename AnalyticsEvents */
+update {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents]
+set [Action] = 'ChekoutCompleted'
+where [Action] = 'OrderCompleted'
+GO

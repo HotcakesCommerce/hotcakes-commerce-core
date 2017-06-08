@@ -1,0 +1,193 @@
+﻿/* Add table fields */
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD
+	HideQty bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_HideQty] DEFAULT (0),
+	UserPriceLabel nvarchar(4000) NULL
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] ADD
+	ItemsTax decimal(18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_ItemsTax] DEFAULT 0,
+	ShippingTax decimal(18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingTax] DEFAULT 0,
+	ShippingTaxRate decimal(18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_ShippingTaxRate] DEFAULT 0
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order]
+	DROP CONSTRAINT [DF_{objectQualifier}hcc_Order_TaxTotal2]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order]
+	DROP COLUMN [TaxTotal2]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] ADD
+	TaxRate decimal(18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_TaxRate] DEFAULT 0,
+	ShippingTaxRate decimal(18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_ShippingTaxRate] DEFAULT 0
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Taxes] ADD
+	ShippingRate numeric(18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Taxes_ShippingRate] DEFAULT 0
+GO
+
+update {databaseOwner}[{objectQualifier}hcc_Taxes]
+set ShippingRate = Rate
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_TaxSchedules] ADD
+	DefaultRate decimal(18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_TaxSchedules_DefaultRate] DEFAULT 0,
+	DefaultShippingRate decimal(18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_TaxSchedules_DefaultShippingRate] DEFAULT 0
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Order] ADD
+	AdjustedShippingTotal decimal(18, 10) NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Order_AdjustedShippingTotal] DEFAULT 0
+GO
+
+update {databaseOwner}[{objectQualifier}hcc_Order]
+set AdjustedShippingTotal = ShippingTotal
+GO
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([StoreId], [LastUpdatedUtc], [DisplayName], [FromEmail], [Subject], [Body], [RepeatingSection], [TemplateType]) VALUES (0, '20131018', N'VAT Invoice', N'[[Store.ContactEmail]]', N'Order [[Order.OrderNumber]] Payed [[Store.StoreName]]', N'<html>
+<head>
+    <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+    <style type="text/css">
+        A {
+            text-decoration: none;
+        }
+
+            A:link {
+                color: #3366cc;
+                text-decoration: none;
+            }
+
+            A:visited {
+                color: #663399;
+                text-decoration: none;
+            }
+
+            A:active {
+                color: #cccccc;
+                text-decoration: none;
+            }
+
+            A:Hover {
+                text-decoration: underline;
+            }
+
+        BODY, TD, CENTER, P {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 10px;
+            color: #333333;
+        }
+
+        .body {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 10px;
+            color: #333333;
+        }
+
+        .content {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            font-weight: normal;
+            color: #000000;
+        }
+
+        .title {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 10px;
+            font-weight: normal;
+            color: #000000;
+        }
+
+        .headline {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            color: #000000;
+        }
+
+        .message {
+            font-family: Geneva, Verdana, Arial, Helvetica;
+            font-size: 9px;
+        }
+    </style>
+</head>
+<body bgcolor="#ffffff" link="#3366cc" vlink="#3366cc" alink="#3366cc" leftmargin="0" topmargin="0">
+    <table cellspacing="1" cellpadding="3" width="100%" border="0" runat="server">
+        <tr>
+            <td colspan="3">[[Store.Logo]]</td>
+        </tr>
+        <tr>
+            <td class="FormLabel" valign="top" align="left" width="33%"><b>Billed To:</b><br>
+                [[Order.BillingAddress]]<br>
+                [[Order.UserName]]
+			</td>
+			<td class="FormLabel" valign="top" align="left" width="33%"><b>Billed By:</b><br>
+                [[Order.StoreAddress]]
+			</td>
+            <td class="FormLabel" valign="top" align="left" width="33%">
+				<b>Order Number:</b> [[Order.OrderNumber]]<br>
+                <b>Order Time:</b> [[Order.TimeOfOrder]]<br>
+				<b>VAT Registration Number:</b> [[Order.VATRegistrationNumber]]<br>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <table border="0" cellspacing="0" cellpadding="5" width="100%">
+                    <tr>
+                        <td colspan="6">
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Qty</b></td>
+                        <td><b>SKU</b></td>
+                        <td><b>Product Name</b></td>
+                        <td align="right"><b>Line Total</b></td>
+						<td align="right"><b>Tax Rate</b></td>
+						<td align="right"><b>Tax</b></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <hr>
+                        </td>
+                    </tr>
+                    [[RepeatingSection]]
+					<tr>
+						<td align="left" valign="top"></td>
+						<td align="left" valign="top"></td>
+						<td align="left" valign="top">
+							Shipping
+						</td>
+						<td align="right" valign="top">[[Order.TotalShippingAfterDiscounts]]</td>
+						<td align="right" valign="top">[[Order.ShippingTaxRate]]</td>
+						<td align="right" valign="top">[[Order.ShippingTax]]</td>
+					</tr>
+                    <tr>
+                        <td colspan="6">
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" align="right">[[Order.TotalsAsTable]]</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <hr>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+', N'<tr>
+    <td align="left" valign="top">[[LineItem.Quantity]]</td>
+    <td align="left" valign="top">[[LineItem.ProductSku]]</td>
+    <td align="left" valign="top">[[LineItem.ProductName]]<br />
+        [[LineItem.ProductDescription]]<br />
+    </td>
+	<td align="right" valign="top">[[LineItem.LineTotal]]</td>
+	<td align="right" valign="top">[[LineItem.TaxRate]]</td>
+    <td align="right" valign="top">[[LineItem.TaxPortion]]</td>
+</tr>
+', 400)
+GO
