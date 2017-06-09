@@ -10,24 +10,23 @@
 
 [assembly: System.Reflection.AssemblyCopyright("Copyright © 2017. All rights reserved.")]
 [assembly: System.Reflection.AssemblyConfiguration("Release")]
-[assembly: System.Reflection.AssemblyVersion("03.00.01")]
+[assembly: System.Reflection.AssemblyVersion("03.00.00")]
 [assembly: System.Reflection.AssemblyFileVersion("01.00.00")]
 [assembly: System.Reflection.AssemblyInformationalVersion("01.00.00")]
 
-
-
-internal sealed partial class ThisAssembly {
-    
+internal sealed partial class ThisAssembly
+{
     internal const string AssemblyCopyright = "Copyright © 2017. All rights reserved.";
-    
+
     internal const string AssemblyConfiguration = "Release";
-    
-    internal const string AssemblyVersion = "03.00.01";
-    
+
+    internal const string AssemblyVersion = "03.00.00";
+
     internal const string AssemblyFileVersion = "01.00.00";
-    
+
     internal const string AssemblyInformationalVersion = "01.00.00";
-    
-    private ThisAssembly() {
+
+    private ThisAssembly()
+    {
     }
 }
