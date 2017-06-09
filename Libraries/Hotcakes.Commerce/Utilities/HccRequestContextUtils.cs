@@ -60,10 +60,10 @@ namespace Hotcakes.Commerce.Utilities
 			if (requestContext != null)
 			{
 				var storeSettingsProvider = Factory.Instance.CreateStoreSettingsProvider();
-				var contentCulture = storeSettingsProvider.GetPageLocale().Name;
+			    var contentCulture = storeSettingsProvider.GetPageLocale().Name;
 				var locale = storeSettingsProvider.GetLocale(contentCulture);
 
-				requestContext.MainContentCulture = locale.Code;
+                requestContext.MainContentCulture = locale.Code;
 				requestContext.FallbackContentCulture = locale.Fallback;
 
 				UpdateContextStore(requestContext);

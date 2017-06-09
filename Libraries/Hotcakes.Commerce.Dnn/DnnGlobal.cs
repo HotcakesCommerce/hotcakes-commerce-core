@@ -27,6 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Data;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Framework;
 using DotNetNuke.Services.Localization;
@@ -94,7 +95,15 @@ namespace Hotcakes.Commerce.Dnn
 
             public Locale GetLocale(string code)
             {
-                return LocaleController.Instance.GetLocale(GetPortalId(), code);
+                var locale = LocaleController.Instance.GetLocale(GetPortalId(), code);
+                if (locale == null)
+                {
+                    // workaround to explicitly fill and retrieve the locales under some conditions
+                    // under these (unknown) conditions, the CMS API doesn't aways fill the locale collection
+                    var locales = CBO.FillDictionary("CultureCode", DataProvider.Instance().GetLanguages(), new Dictionary<string, Locale>(StringComparer.OrdinalIgnoreCase));
+                    locales.TryGetValue(code, out locale);
+                }
+                return locale;
             }
 
             public CultureInfo GetPageLocale()

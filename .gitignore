@@ -83,6 +83,13 @@ _[Ii]nstall
 
 *.zip.manifest
 
+# ignore development builds
+**/[Bb]in/[Dd]ebug
+**/[Bb]in/[Rr]elease
+**/[Ff]akes[Aa]ssemblies/[Hh]otcakes*
+[Ww]ebsite/[Bb]in/[Hh]otcakes.*
+[Ww]ebsite/[Dd]esktop[Mm]odules/[Hh]otcakes/[Bb]in/
+
 ############
 ## Windows
 ############
