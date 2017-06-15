@@ -32,11 +32,17 @@ namespace Hotcakes.Commerce.Dnn.Utils
     {
         public static void RegisterViewEngines()
         {
-            var viewEngineCollection = ViewEngines.Engines;
+            // check if HccRazorViewEngine has already been registered
+            foreach (var engine in ViewEngines.Engines)
+            {
+                if (engine is HccRazorViewEngine)
+                {
+                    return;
+                }
+            }
 
             IViewEngine razorViewEngine = new HccRazorViewEngine();
-
-            viewEngineCollection.Insert(0, razorViewEngine);
+            ViewEngines.Engines.Insert(0, razorViewEngine);
         }
     }
 }
