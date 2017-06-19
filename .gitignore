@@ -41,6 +41,7 @@
 .builds
 *.dotCover
 *.ldf
+MSBuildLog.txt
 
 # git merge artifacts
 *.orig
