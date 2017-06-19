@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portals", "Portals", "{F4EBAEA6-F4F5-4215-9B84-F11EE8298E7F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_default", "_default", "{3CBE5616-E32C-4C85-B1AF-C581A574B9FC}"
@@ -34,6 +36,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotcakes.Web", "Libraries\Hotcakes.Web\Hotcakes.Web.csproj", "{A822B6B9-CE48-4717-9EC2-1C1548289315}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F008FB3A-586D-4339-98D1-00A990006429}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		CONTRIBUTING.md = CONTRIBUTING.md
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotcakes.Modules", "Website\DesktopModules\Hotcakes\Hotcakes.Modules.csproj", "{AA89B33A-2A62-4919-B15F-FF3685947622}"
 EndProject
@@ -81,69 +90,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotcakes.Commerce.NoCms", "Libraries\Hotcakes.Commerce.NoCms\Hotcakes.Commerce.NoCms.csproj", "{CB21DFDA-99A5-4E97-92F8-A6C8689F9341}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 20
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs.arrowdesigns.net:8080/tfs/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Website\\Hotcakes.Views.csproj
-		SccProjectName1 = Website
-		SccLocalPath1 = Website
-		SccProjectUniqueName2 = Libraries\\Hotcakes.Shipping.Ups.Keys\\Hotcakes.Shipping.Ups.Keys.csproj
-		SccProjectName2 = Libraries/Hotcakes.Shipping.Ups.Keys
-		SccLocalPath2 = Libraries\\Hotcakes.Shipping.Ups.Keys
-		SccProjectUniqueName3 = Libraries\\Hotcakes.CommerceDTO\\Hotcakes.CommerceDTO.csproj
-		SccProjectName3 = Libraries/Hotcakes.CommerceDTO
-		SccLocalPath3 = Libraries\\Hotcakes.CommerceDTO
-		SccProjectUniqueName4 = Libraries\\Hotcakes.Payment\\Hotcakes.Payment.csproj
-		SccProjectName4 = Libraries/Hotcakes.Payment
-		SccLocalPath4 = Libraries\\Hotcakes.Payment
-		SccProjectUniqueName5 = Libraries\\Hotcakes.Shipping\\Hotcakes.Shipping.csproj
-		SccProjectName5 = Libraries/Hotcakes.Shipping
-		SccLocalPath5 = Libraries\\Hotcakes.Shipping
-		SccProjectUniqueName6 = Libraries\\Hotcakes.Payment.Tests\\Hotcakes.Payment.Tests.csproj
-		SccProjectName6 = Libraries/Hotcakes.Payment.Tests
-		SccLocalPath6 = Libraries\\Hotcakes.Payment.Tests
-		SccProjectUniqueName7 = Libraries\\Hotcakes.PaypalWebServices\\Hotcakes.PaypalWebServices.csproj
-		SccProjectName7 = Libraries/Hotcakes.PaypalWebServices
-		SccLocalPath7 = Libraries\\Hotcakes.PaypalWebServices
-		SccProjectUniqueName8 = Libraries\\Hotcakes.Shipping.FedEx\\Hotcakes.Shipping.FedEx.csproj
-		SccProjectName8 = Libraries/Hotcakes.Shipping.FedEx
-		SccLocalPath8 = Libraries\\Hotcakes.Shipping.FedEx
-		SccProjectUniqueName9 = Libraries\\Hotcakes.Shipping.Ups\\Hotcakes.Shipping.Ups.csproj
-		SccProjectName9 = Libraries/Hotcakes.Shipping.Ups
-		SccLocalPath9 = Libraries\\Hotcakes.Shipping.Ups
-		SccProjectUniqueName10 = Libraries\\Hotcakes.Shipping.USPostal\\Hotcakes.Shipping.USPostal.csproj
-		SccProjectName10 = Libraries/Hotcakes.Shipping.USPostal
-		SccLocalPath10 = Libraries\\Hotcakes.Shipping.USPostal
-		SccProjectUniqueName11 = Libraries\\Hotcakes.Web\\Hotcakes.Web.csproj
-		SccProjectName11 = Libraries/Hotcakes.Web
-		SccLocalPath11 = Libraries\\Hotcakes.Web
-		SccProjectUniqueName12 = Libraries\\Hotcakes.Commerce.Tests\\Hotcakes.Commerce.Tests.csproj
-		SccProjectName12 = Libraries/Hotcakes.Commerce.Tests
-		SccLocalPath12 = Libraries\\Hotcakes.Commerce.Tests
-		SccProjectUniqueName13 = Libraries\\Hotcakes.Commerce\\Hotcakes.Commerce.csproj
-		SccProjectName13 = Libraries/Hotcakes.Commerce
-		SccLocalPath13 = Libraries\\Hotcakes.Commerce
-		SccProjectUniqueName14 = Libraries\\Hotcakes.Commerce.Dnn\\Hotcakes.Commerce.Dnn.csproj
-		SccProjectName14 = Libraries/Hotcakes.Commerce.Dnn
-		SccLocalPath14 = Libraries\\Hotcakes.Commerce.Dnn
-		SccProjectUniqueName15 = Website\\DesktopModules\\Hotcakes\\Hotcakes.Modules.csproj
-		SccProjectName15 = Website/DesktopModules/Hotcakes
-		SccLocalPath15 = Website\\DesktopModules\\Hotcakes
-		SccProjectUniqueName16 = Libraries\\Hotcakes.Web.Test\\Hotcakes.Web.Test.csproj
-		SccProjectName16 = Libraries/Hotcakes.Web.Test
-		SccLocalPath16 = Libraries\\Hotcakes.Web.Test
-		SccProjectUniqueName17 = Libraries\\Hotcakes.Web.TestStubs\\Hotcakes.Web.TestStubs.csproj
-		SccProjectName17 = Libraries/Hotcakes.Web.TestStubs
-		SccLocalPath17 = Libraries\\Hotcakes.Web.TestStubs
-		SccProjectUniqueName18 = Libraries\\Hotcakes.CommerceDTO.Tests\\Hotcakes.CommerceDTO.Tests.csproj
-		SccProjectName18 = Libraries/Hotcakes.CommerceDTO.Tests
-		SccLocalPath18 = Libraries\\Hotcakes.CommerceDTO.Tests
-		SccProjectUniqueName19 = Libraries\\Hotcakes.Commerce.NoCms\\Hotcakes.Commerce.NoCms.csproj
-		SccProjectName19 = Libraries/Hotcakes.Commerce.NoCms
-		SccLocalPath19 = Libraries\\Hotcakes.Commerce.NoCms
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
 		Debug|Any CPU = Debug|Any CPU
@@ -346,12 +292,12 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1EDD16FA-4A6D-44CB-813E-04F36354A959} = {F008FB3A-586D-4339-98D1-00A990006429}
-		{B564E37A-B553-4073-801F-5CE93C217FF9} = {F008FB3A-586D-4339-98D1-00A990006429}
 		{F4EBAEA6-F4F5-4215-9B84-F11EE8298E7F} = {1EDD16FA-4A6D-44CB-813E-04F36354A959}
 		{3CBE5616-E32C-4C85-B1AF-C581A574B9FC} = {F4EBAEA6-F4F5-4215-9B84-F11EE8298E7F}
 		{DFCDD07F-8F2E-4D88-A3C3-E4E2554816B5} = {3CBE5616-E32C-4C85-B1AF-C581A574B9FC}
 		{6F53F15B-6573-4E46-8A00-8C02521365EF} = {DFCDD07F-8F2E-4D88-A3C3-E4E2554816B5}
+		{B564E37A-B553-4073-801F-5CE93C217FF9} = {F008FB3A-586D-4339-98D1-00A990006429}
+		{1EDD16FA-4A6D-44CB-813E-04F36354A959} = {F008FB3A-586D-4339-98D1-00A990006429}
 		{F30E7ACF-674E-465A-B1A8-BB6E80428CDF} = {DFCDD07F-8F2E-4D88-A3C3-E4E2554816B5}
 		{F8E776BA-042B-48EB-B7BA-C6BB0E101542} = {DFCDD07F-8F2E-4D88-A3C3-E4E2554816B5}
 	EndGlobalSection
