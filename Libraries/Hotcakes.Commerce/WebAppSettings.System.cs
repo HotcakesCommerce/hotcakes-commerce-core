@@ -46,7 +46,7 @@ namespace Hotcakes.Commerce
 
         public static string SKU
         {
-            get { return "PRO"; }
+            get { return string.Empty; }
         }
 
         public static string FriendlyAppVersion
