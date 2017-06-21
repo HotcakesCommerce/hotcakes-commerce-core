@@ -73,6 +73,7 @@ Generated_Code #added for RIA/Silverlight projects
 _UpgradeReport_Files/
 Backup*/
 UpgradeLog*.XML
+[Uu]pgrade[Ll]og.htm
 
 ############
 ## CMS
@@ -88,8 +89,10 @@ _[Ii]nstall
 **/[Bb]in/[Dd]ebug
 **/[Bb]in/[Rr]elease
 **/[Ff]akes[Aa]ssemblies/[Hh]otcakes*
+[Ww]ebsite/[Bb]in
 [Ww]ebsite/[Bb]in/[Hh]otcakes.*
 [Ww]ebsite/[Dd]esktop[Mm]odules/[Hh]otcakes/[Bb]in
+**/[Ff]akes[Aa]ssemblies
 
 ############
 ## Windows
@@ -100,9 +103,9 @@ Thumbs.db
 
 # Folder config file
 Desktop.ini
-Website/Install/Temp/
-Website/Providers/HtmlEditorProviders/
-Website/Portals/_default/CK*.xml
-Website/Portals/_default/Install/CK*.xml
-Website/Portals/_default/Skins/Xcillion/
-Website/Portals/_default/Containers/Xcillion/
+[Ww]bsite/[Ii]nstall/[Tt]emp/
+[Ww]ebsite/[Pp]roviders/[Hh]tml[Ee]ditor[Pp]roviders/
+[Ww]ebsite/[Pp]ortals/_default/CK*.xml
+[Ww]ebsite/[Pp]ortals/_default/[Ii]nstall/CK*.xml
+[Ww]ebsite/[Pp]ortals/_default/[Ss]kins/[Xx]cillion/
+[Ww]ebsite/[Pp]ortals/_default/[Cc]ontainers/[Xx]cillion/
