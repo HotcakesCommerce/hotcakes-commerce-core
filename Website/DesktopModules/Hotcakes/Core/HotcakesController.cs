@@ -108,6 +108,10 @@ namespace Hotcakes.Modules.Core
                         MakeHccControlPanelDefault();
                         break;
 
+                    case "03.00.01":
+                        RevertHotcakesCloudConfig();
+                        break;
+
                     default:
                         break;
                 }
@@ -171,7 +175,7 @@ namespace Hotcakes.Modules.Core
         }
 
         /// <summary>
-        ///     Update config file. This settings needs to be changed for Azure environment
+        ///     Update config file. This settings needs to be changed for Windows Azure Pack environment
         ///     where trial sites created. Trial sites not working without MVC dll's binding redirect
         ///     setting.
         /// </summary>
@@ -181,6 +185,16 @@ namespace Hotcakes.Modules.Core
             {
                 var intallFolderPath = "~/DesktopModules/Hotcakes/Core/Install/";
                 var configPath = HttpContext.Current.Server.MapPath(intallFolderPath + "02.00.00.config");
+                ExecuteXmlMerge(configPath);
+            }
+        }
+
+        private void RevertHotcakesCloudConfig()
+        {
+            if (Environment.MachineName.ToUpper().Contains("CSITES-"))
+            {
+                var intallFolderPath = "~/DesktopModules/Hotcakes/Core/Install/";
+                var configPath = HttpContext.Current.Server.MapPath(intallFolderPath + "03.00.01.config");
                 ExecuteXmlMerge(configPath);
             }
         }
