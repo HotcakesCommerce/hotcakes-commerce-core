@@ -11,6 +11,7 @@
 		    <div class="ControlContainer">
 			    <div class="ServiceIcon">
 				    <asp:Image ID="conrolbar_logo" runat="server" AlternateText="HCClogo" ViewStateMode="Disabled" />
+				    <asp:Image ID="updateService" runat="server" AlternateText="" ViewStateMode="Disabled" />
 			    </div>
 			    <% if (UserController.Instance.GetCurrentUserInfo().IsInRole(PortalSettings.AdministratorRoleName)) {%>
 				    <ul id="ControlNav" >
