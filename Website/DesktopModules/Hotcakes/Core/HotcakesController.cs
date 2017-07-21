@@ -131,9 +131,6 @@ namespace Hotcakes.Modules.Core
                     InstallApplication();
 
                     IsGenericCodeExecuted = true;
-
-                    // update service change for 3.0 and newer
-                    UpdateConfigForService();
                 }
 
                 return "Success";
@@ -636,14 +633,6 @@ namespace Hotcakes.Modules.Core
                 if (!File.Exists(destFile))
                     File.Copy(sourceFile, destFile);
             }
-        }
-
-        private void UpdateConfigForService()
-        {
-            var intallFolderPath = "~/DesktopModules/Hotcakes/Core/Install/";
-            var configPath = HttpContext.Current.Server.MapPath(intallFolderPath + "03.00.00.config");
-
-            ExecuteXmlMerge(configPath);
         }
 
         private void ExecuteXmlMerge(string path)
