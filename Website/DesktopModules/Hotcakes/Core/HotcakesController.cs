@@ -104,10 +104,6 @@ namespace Hotcakes.Modules.Core
                         UpdateConfigFile();
                         break;
 
-                    case "03.00.00":
-                        MakeHccControlPanelDefault();
-                        break;
-
                     case "03.00.01":
                         RevertHotcakesCloudConfig();
                         break;
@@ -646,11 +642,6 @@ namespace Hotcakes.Modules.Core
             var merge = new XmlMerge(doc, Globals.FormatVersion(app.Version), app.Description);
 
             merge.UpdateConfigs();
-        }
-
-        private void MakeHccControlPanelDefault()
-        {
-            HostController.Instance.Update("ControlPanel", "DesktopModules/Hotcakes/ControlPanel/ControlBar.ascx", true);
         }
 
         #region Constants
