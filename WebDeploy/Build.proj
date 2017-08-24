@@ -122,8 +122,11 @@
 		<Copy SourceFiles="$(RootFolder)\References\Dnn\System.Web.Abstractions.dll" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\bin" />
 		<Copy SourceFiles="$(RootFolder)\References\Dnn\System.Web.Routing.dll" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\bin" />
 
+    <!--
+    Removing this from the build for the 03.00.01 release. Will need to formally address this again later.
 		<Copy SourceFiles="$(InstallFolderForConfigFolder)\02.00.00.config" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\DesktopModules\Hotcakes\Core\Install" />
     <Copy SourceFiles="$(InstallFolderForConfigFolder)\03.00.00.config" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\DesktopModules\Hotcakes\Core\Install" />
+    -->
 
 		<!-- Automatic store setup and configuration is disabled for now -->
 		<!--
