@@ -1,24 +1,18 @@
-﻿<h5>Version 03.00.00</h5>
+﻿<h5>Version 03.00.01</h5>
 <p><strong>Highlights</strong></p>
 <blockquote>
-	<p><strong>Open Source License</strong></p>
-	<p>Yada, yada...</p>
 	<p><strong>Important Notes</strong></p>
 	<ul>
 		<li>If using User Has Badges Promotions, please know that it will be removed upon upgrade. Please plan accordingly prior to upgrade.</li>
 		<li>All integrations and extension points should be tested thoroughly to update HccApp object still works as expected.</li>
-		<li>Minimum required version of DNN is now 07.04.02 or newer. (Version 8+ is supported as well.)</li>
+		<li>Minimum required version of DNN is now 07.04.02 or newer. (Version 8 is supported but not Version 9.)</li>
 	</ul>
 </blockquote>
 <p><strong>Enhancements</strong></p>
 <ul>
-	<li><strong>12345 - Title</strong> - Description.</li>
-	<li><strong>12345 - Title</strong> - Description.</li>
-	<li><strong>12345 - Title</strong> - Description.</li>
+	<li><strong>#16 - Remove SKU from admin views</strong> - removed "Pro" SKU in the footer of the admin views. https://github.com/HotcakesCommerce/core/issues/16</li>
 </ul>
 <p><strong>Bug Fixes</strong></p>
 <ul>
-	<li>12345 - Description</li>
-	<li>12345 - Description</li>
-	<li>12345 - Description</li>
+	<li><strong>#7 - Source array was not long enough. Check srcIndex and length, and the array's lower bounds</strong> - Added logic to prevent Hotcakes view engine from being added to the collection multiple times. This logic addresses a memory leak and a race condition which can cause a site to crash. https://github.com/HotcakesCommerce/core/issues/7</li>
 </ul>

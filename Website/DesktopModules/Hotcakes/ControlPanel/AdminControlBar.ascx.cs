@@ -83,7 +83,7 @@ namespace Hotcakes.Modules.ControlPanel
             if (objUser != null && objUser.IsSuperUser)
             {
                 Version version = Assembly.LoadFrom(AppDomain.CurrentDomain.BaseDirectory + "bin\\Hotcakes.Commerce.dll").GetName().Version;                
-                updateService.ImageUrl = "https://hotcakes.org/DesktopModules/HCC/UpdateService/update.aspx?version=" + version.Major.ToString("00") + version.Minor.ToString("00") + version.Revision.ToString("00") + "&type=Module&name=Hotcakes&no=1&id=" + HostController.Instance.GetString("GUID");
+                updateService.ImageUrl = "https://hotcakes.org/DesktopModules/HCC/UpdateService/update.aspx?version=" + version.Major.ToString("00") + version.Minor.ToString("00") + version.Build.ToString("00") + "&type=Module&name=Hotcakes&no=1&id=" + HostController.Instance.GetString("GUID");
             }
         }
 
