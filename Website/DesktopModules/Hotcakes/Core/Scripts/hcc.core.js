@@ -4,10 +4,9 @@
     hcc.vars = null;
     hcc.config = hcc.config || {};
 
-    hcc.getVars = function () {
+	hcc.getVars = function () {
         if (hcc.vars == null) {
-            var jsonValue = $('#__hccVariables').val();
-
+        	var jsonValue = $('#__hccVariables').val();
             if (jsonValue)
                 hcc.vars = jQuery.parseJSON(jsonValue);
             else
@@ -24,10 +23,11 @@
     },
 
     hcc.getSiteRoot = function () {
-        if (dnn && dnn.getVar)
-            return dnn.getVar("hc_siteRoot", "/");
-        else
-            return hcc.getVar("hc_siteRoot", "/");
+    	if (dnn && dnn.getVar) {
+    		return dnn.getVar("hc_siteRoot", "/");
+    	} else {
+    		return hcc.getVar("hc_siteRoot", "/");
+    	}
     };
     hcc.getResourceUrl = function (path) {
         var resourceUrl = hcc.getSiteRoot();
