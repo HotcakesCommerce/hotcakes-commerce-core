@@ -24,59 +24,68 @@
 #endregion
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
-    public abstract class HasProductsQualificationBase : PromotionQualificationBase
-    {
-        #region Constructor
+	public abstract class HasProductsQualificationBase : PromotionQualificationBase
+	{
+		#region Constructor
 
-        public HasProductsQualificationBase()
-        {
-            ProcessingCost = RelativeProcessingCost.Lower;
-        }
+		public HasProductsQualificationBase()
+		{
+			ProcessingCost = RelativeProcessingCost.Lower;
+		}
 
-        #endregion
+		#endregion
 
-        #region Public methods
+		#region Public methods
 
-        public List<string> GetProductIds()
-        {
-            return GetSettingArr("products");
-        }
+		public List<string> GetProductIds()
+		{
+			return GetSettingArr("products");
+		}
 
-        public void AddProductIds(IEnumerable<string> bvins)
-        {
-            AddSettingItems("products", bvins);
-        }
+		public void AddProductIds(IEnumerable<string> bvins)
+		{
+			AddSettingItems("products", bvins);
+		}
 
-        public void RemoveProductId(string bvin)
-        {
-            RemoveSettingItem("products", bvin);
-        }
+		public void RemoveProductId(string bvin)
+		{
+			RemoveSettingItem("products", bvin);
+		}
 
-        public override string FriendlyDescription(HotcakesApplication app)
-        {
+		public override string FriendlyDescription(HotcakesApplication app)
+		{
             var result = "When Line Item is:<ul>";
 
-            foreach (var id in GetProductIds())
-            {
-                var p = app.CatalogServices.Products.FindWithCache(id);
-                if (p != null)
-                {
-                    result += "<li>[" + p.Sku + "] " + p.ProductName + "</li>";
-                }
-            }
+			foreach (var bvin in GetProductIds())
+			{
+				string pBvin = bvin;
+				string[] aBvin = bvin.Split('#');
+				if (aBvin.Count() > 1)
+				{
+					pBvin = aBvin[0];
+				}
 
-            result += "</ul>";
-            return result;
-        }
 
-        #endregion
-    }
+				var p = app.CatalogServices.Products.FindWithCache(pBvin);
+				if (p != null)
+				{
+					result += "<li>[" + p.Sku + "] " + p.ProductName + "</li>";
+				}
+			}
 
-    public class ProductBvin : HasProductsQualificationBase
+			result += "</ul>";
+			return result;
+		}
+
+		#endregion
+	}
+
+	public class ProductBvin : HasProductsQualificationBase
     {
         public ProductBvin()
         {
@@ -104,7 +113,14 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             var result = "When Product is:<ul>";
             foreach (var bvin in GetProductIds())
             {
-                var p = app.CatalogServices.Products.FindWithCache(bvin);
+				string pBvin = bvin;
+				string[] aBvin = bvin.Split('#');
+				if (aBvin.Count() > 1)
+				{
+					pBvin = aBvin[0];
+				}
+
+				Catalog.Product p = app.CatalogServices.Products.FindWithCache(pBvin);
                 if (p != null)
                 {
                     result += "<li>[" + p.Sku + "] " + p.ProductName + "</li>";
@@ -121,9 +137,65 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             if (context.Product == null) return false;
             if (context.UserPrice == null) return false;
 
-            var match = context.Product.Bvin.Trim().ToLowerInvariant();
+			List<string> ids = GetProductIds();
+			List<string> match = new List<string>();
+			match.Add(context.Product.Bvin.Trim().ToLowerInvariant());
 
-            return GetProductIds().Contains(match);
+			if (context.Product.IsBundle)
+			{
+				//All Variants
+				if (ids.Contains(context.Product.Bvin))
+				{
+					return true;
+				}
+
+				List<Tuple<string, string>> itemsToFind = new List<Tuple<string, string>>();
+				foreach (string bvin in ids)
+				{
+					string productId = bvin;
+					string variantId = string.Empty;
+
+					if (bvin.Contains("#"))
+					{
+						productId = bvin.Split('#')[0];
+						variantId = bvin.Split('#')[1];
+					}
+					var pr = Tuple.Create<string, string>(productId, variantId);
+					itemsToFind.Add(pr);
+				}
+
+				List<Tuple<string, string>> pv = new List<Tuple<string, string>>();
+			
+				context.Product.BundledProducts.ForEach(b =>
+				{
+					b.BundledProduct.Variants.ForEach(x =>
+					{
+						pv.Add(Tuple.Create<string, string>(context.Product.Bvin, x.Bvin));
+					});
+				});
+				pv = pv.Distinct().ToList();
+
+				int matchCount = 0;
+				foreach (var item in pv)
+				{
+					Tuple<string, string> lidKey = itemsToFind.Where(x => x.Item1.Trim().ToLowerInvariant() == item.Item1.ToLowerInvariant() && x.Item2.ToLowerInvariant() == item.Item2.ToLowerInvariant()).FirstOrDefault();
+					if (lidKey != null)
+					{
+						matchCount++;
+					}
+				}
+				return matchCount > 0;
+			}
+			else
+			{
+				if (context.Product.HasVariants())
+				{
+					match.AddRange(context.Product.Variants.Select(x => x.Bvin.Trim().ToLowerInvariant()));
+				}
+				return ids.Intersect(match).Count() > 0;
+			}
+
+
         }
     }
 }

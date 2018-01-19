@@ -7,90 +7,99 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications {
+namespace Hotcakes.Modules.Core.Admin.Controls {
     
     
-    public partial class ProductIsEditor {
+    public partial class ProductsPickerWithVariant {
         
         /// <summary>
-        /// upProductPicker control.
+        /// FilterField control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upProductPicker;
+        protected global::System.Web.UI.WebControls.TextBox FilterField;
         
         /// <summary>
-        /// ucProductPicker control.
+        /// btnGo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Hotcakes.Modules.Core.Admin.Controls.ProductsPickerWithVariant ucProductPicker;
+        protected global::System.Web.UI.WebControls.LinkButton btnGo;
         
         /// <summary>
-        /// btnAddProduct control.
+        /// ManufacturerFilter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnAddProduct;
+        protected global::System.Web.UI.WebControls.DropDownList ManufacturerFilter;
         
         /// <summary>
-        /// gvProductBvins control.
+        /// VendorFilter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvProductBvins;
+        protected global::System.Web.UI.WebControls.DropDownList VendorFilter;
         
         /// <summary>
-        /// upPanel1 control.
+        /// CategoryFilter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upPanel1;
+        protected global::System.Web.UI.WebControls.DropDownList CategoryFilter;
         
         /// <summary>
-        /// pnlSelectProductVariants control.
+        /// lstPage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlSelectProductVariants;
+        protected global::System.Web.UI.WebControls.DropDownList lstPage;
         
         /// <summary>
-        /// ProductVariantsPicker control.
+        /// DropDownList1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Hotcakes.Modules.Core.Admin.Controls.ProductVariantsPicker ProductVariantsPicker;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
         
         /// <summary>
-        /// btnSaveProductVariantsSelection control.
+        /// GridView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSaveProductVariantsSelection;
+        protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
-        /// btnCloseProductVariantsSelectionEditor control.
+        /// ExcludeCategoryBvinField control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnCloseProductVariantsSelectionEditor;
+        protected global::System.Web.UI.WebControls.HiddenField ExcludeCategoryBvinField;
+        
+        /// <summary>
+        /// currentpagefield control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField currentpagefield;
     }
 }
