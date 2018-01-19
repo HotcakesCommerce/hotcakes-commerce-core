@@ -24,6 +24,8 @@
 #endregion
 
 using System;
+using System.Web.UI.WebControls;
+using DocumentFormat.OpenXml.CustomProperties;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Security.Permissions;
@@ -33,14 +35,14 @@ namespace Hotcakes.Modules.ProductViewer
 {
     public partial class ProductViewerView : HotcakesModuleBase
     {
+        public int ProductId;
         protected override string RenderView()
         {
             RegisterScript("plupload/plupload.full.js");
-
             RegisterScript("plupload/FileUpload.js");
             RegisterUnobtrusiveValidateScripts();
             RegisterViewScript("Products.js");
-
+            
             var isConcreteItemModule = false;
             var slug = (string) Settings["Slug"];
             if (!string.IsNullOrEmpty(slug))
@@ -51,6 +53,7 @@ namespace Hotcakes.Modules.ProductViewer
 
             if (!string.IsNullOrEmpty(slug))
             {
+                hfProductSlug.Value = slug;
                 return MvcRenderingEngine.Render("Products", "Index", new {slug, isConcreteItemModule});
             }
             if (!TabPermissionController.CanManagePage())
