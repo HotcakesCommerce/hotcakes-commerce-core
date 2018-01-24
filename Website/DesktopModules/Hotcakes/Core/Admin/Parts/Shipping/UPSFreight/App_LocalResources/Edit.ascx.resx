@@ -123,9 +123,7 @@
   <data name="AdjustPriceBy.Text" xml:space="preserve">
     <value>Adjust Price By</value>
   </data>
-  <data name="AllAvailable.Text" xml:space="preserve">
-    <value>Try all available UPS Services</value>
-  </data>
+  
   <data name="AlreadyRegistered.Text" xml:space="preserve">
     <value>Already Registered with UPS (click to register again)</value>
   </data>
@@ -141,17 +139,8 @@
   <data name="btnSave.Text" xml:space="preserve">
     <value>Save Changes</value>
   </data>
-  <data name="CustomerCounter.Text" xml:space="preserve">
-    <value>Customer Counter</value>
-  </data>
-  <data name="CustomerSupplied.Text" xml:space="preserve">
-    <value>Customer Supplied</value>
-  </data>
   <data name="cvAdjustmentTextBox.ErrorMessage" xml:space="preserve">
     <value>Adjustment price must be numeric (decimals are okay).</value>
-  </data>
-  <data name="DailyPickup.Text" xml:space="preserve">
-    <value>Daily Pick-Up</value>
   </data>
   <data name="DefaultPackaging.Text" xml:space="preserve">
     <value>Default Packaging</value>
@@ -177,14 +166,8 @@
   <data name="Name.Text" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="OnlySelected.Text" xml:space="preserve">
-    <value>Try only the UPS Services I select</value>
-  </data>
   <data name="Percentage.Text" xml:space="preserve">
     <value>Percentage</value>
-  </data>
-  <data name="PickupType.Text" xml:space="preserve">
-    <value>Pick-Up Type</value>
   </data>
   <data name="RegisterWithUPS.Text" xml:space="preserve">
     <value>Register with UPS to use their online tools</value>
@@ -195,71 +178,14 @@
   <data name="rfvAdjustmentTextBox.ErrorMessage" xml:space="preserve">
     <value>Adjustment price is required.</value>
   </data>
-  <data name="ServicesToUse.Text" xml:space="preserve">
-    <value>Service(s) to Use</value>
-  </data>
   <data name="ShippingZone.Text" xml:space="preserve">
     <value>Shipping Zone</value>
-  </data>
-  <data name="UPS10KgBox.Text" xml:space="preserve">
-    <value>UPS 10Kg Box</value>
-  </data>
-  <data name="UPS25KgBox.Text" xml:space="preserve">
-    <value>UPS 25Kg Box</value>
-  </data>
-  <data name="UPS2ndDayAir.Text" xml:space="preserve">
-    <value>UPS 2nd Day Air®</value>
-  </data>
-  <data name="UPS2ndDayAirAM.Text" xml:space="preserve">
-    <value>UPS 2nd Day Air A.M.®</value>
-  </data>
-  <data name="UPS3DaySelect.Text" xml:space="preserve">
-    <value>UPS 3 Day Select (sm)</value>
-  </data>
-  <data name="UPSExpressBox.Text" xml:space="preserve">
-    <value>UPS Express Box</value>
-  </data>
-  <data name="UPSExpressSaver.Text" xml:space="preserve">
-    <value>UPS Express Saver (sm)</value>
-  </data>
-  <data name="UPSGround.Text" xml:space="preserve">
-    <value>UPS Ground</value>
-  </data>
-  <data name="UPSLetter.Text" xml:space="preserve">
-    <value>UPS Letter</value>
-  </data>
-  <data name="UPSNextDayAir.Text" xml:space="preserve">
-    <value>UPS Next Day Air®</value>
-  </data>
-  <data name="UPSNextDayAirEarlyAM.Text" xml:space="preserve">
-    <value>UPS Next Day Air® Early A.M.®</value>
-  </data>
-  <data name="UPSNextDayAirSaver.Text" xml:space="preserve">
-    <value>UPS Next Day Air Saver®</value>
-  </data>
-  <data name="UPSPak.Text" xml:space="preserve">
-    <value>UPS Pak</value>
   </data>
   <data name="UPSSettings.Text" xml:space="preserve">
     <value>UPS Global Settings</value>
   </data>
   <data name="UPSShipping.Text" xml:space="preserve">
     <value>UPS Shipping</value>
-  </data>
-  <data name="UPSStandard.Text" xml:space="preserve">
-    <value>UPS Standard</value>
-  </data>
-  <data name="UPSTube.Text" xml:space="preserve">
-    <value>UPS Tube</value>
-  </data>
-  <data name="UPSWorldwideExpedited.Text" xml:space="preserve">
-    <value>UPS Worldwide Expedited (sm)</value>
-  </data>
-  <data name="UPSWorldwideExpress.Text" xml:space="preserve">
-    <value>UPS Worldwide Express (sm)</value>
-  </data>
-  <data name="UPSWorldwideExpressPlus.Text" xml:space="preserve">
-    <value>UPS Worldwide Express Plus (sm)</value>
   </data>
   <data name="BilltoThirdParty.Text" xml:space="preserve">
     <value>Bill to Third Party</value>

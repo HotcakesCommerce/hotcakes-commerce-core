@@ -46,8 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BillingOption.cs" />
-    <Compile Include="CODFundsCode.cs" />
-    <Compile Include="ConfirmationType.cs" />
     <Compile Include="CurrencyCode.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityType.cs" />
