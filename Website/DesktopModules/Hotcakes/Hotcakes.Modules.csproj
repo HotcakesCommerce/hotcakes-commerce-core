@@ -29,6 +29,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -310,6 +311,7 @@
     <Content Include="Core\Admin\Parts\GiftCardGateways\Hotcakes\Edit.ascx" />
     <Content Include="Core\Admin\Parts\PaymentMethods\Moneris\Edit.ascx" />
     <Content Include="Core\Admin\Parts\PaymentMethods\Ogone\Edit.ascx" />
+    <Content Include="Core\Admin\Parts\Shipping\UPSFreight\Edit.ascx" />
     <Content Include="Core\Admin\Parts\TaxProviders\Avalara\Edit.ascx" />
     <Content Include="Core\Admin\People\Affiliates_Profile.aspx" />
     <Content Include="Core\Admin\People\AffiliatePayments.aspx" />
@@ -1275,6 +1277,10 @@
     <ProjectReference Include="..\..\..\Libraries\Hotcakes.Shipping.FedEx\Hotcakes.Shipping.FedEx.csproj">
       <Project>{9b00258d-45d2-43bd-8178-a6f2aaff5090}</Project>
       <Name>Hotcakes.Shipping.FedEx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Libraries\Hotcakes.Shipping.UpsFreight\Hotcakes.Shipping.UpsFreight.csproj">
+      <Project>{24fd7b03-1d9b-4d14-9657-236e520c2192}</Project>
+      <Name>Hotcakes.Shipping.UpsFreight</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Libraries\Hotcakes.Shipping.Ups\Hotcakes.Shipping.Ups.csproj">
       <Project>{68ff27be-6296-4a8b-b20f-6480a491d092}</Project>
@@ -2761,6 +2767,13 @@
     <Compile Include="Core\Admin\Parts\PaymentMethods\Ogone\Edit.ascx.designer.cs">
       <DependentUpon>Edit.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Core\Admin\Parts\Shipping\UPSFreight\Edit.ascx.cs">
+      <DependentUpon>Edit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Core\Admin\Parts\Shipping\UPSFreight\Edit.ascx.designer.cs">
+      <DependentUpon>Edit.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Core\Admin\Parts\TaxProviders\Avalara\Edit.ascx.cs">
       <DependentUpon>Edit.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3218,9 +3231,7 @@
     <Compile Include="Core\Admin\AppCode\HccCreditCardGatewayPart.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Core\Admin\AppCode\HccPart.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="Core\Admin\AppCode\HccPart.cs" />
     <Compile Include="Core\Admin\AppCode\HccShippingPart.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -4325,6 +4336,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\Admin\Catalog\App_LocalResources\Products_Import.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Parts\Shipping\UPSFreight\App_LocalResources\Edit.ascx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
