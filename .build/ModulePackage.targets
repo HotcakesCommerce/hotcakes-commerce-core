@@ -96,6 +96,7 @@
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.FedEx.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.Ups.dll" />
+      <HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.UpsFreight.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.USPostal.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Web.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\$(AssemblyName).dll" />

@@ -60,7 +60,7 @@ namespace Hotcakes.Shipping.UpsFreight
 
         public string Name
         {
-            get { return "UPSFreight"; }
+            get { return "UPS Freight"; }
         }
 
         public string Id

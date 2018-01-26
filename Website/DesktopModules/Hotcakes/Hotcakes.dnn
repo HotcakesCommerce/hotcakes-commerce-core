@@ -325,6 +325,11 @@
             </assembly>
             <assembly>
               <path>bin</path>
+              <name>Hotcakes.Shipping.Ups.dll</name>
+              <sourceFileName>bin\Hotcakes.Shipping.UpsFreight.dll</sourceFileName>
+            </assembly>
+            <assembly>
+              <path>bin</path>
               <name>Hotcakes.Shipping.USPostal.dll</name>
               <sourceFileName>bin\Hotcakes.Shipping.USPostal.dll</sourceFileName>
             </assembly>
