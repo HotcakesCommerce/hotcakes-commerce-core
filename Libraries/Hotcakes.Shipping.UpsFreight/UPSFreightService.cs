@@ -510,14 +510,18 @@ namespace Hotcakes.Shipping.UpsFreight
             {
                 if (dLength > 0 | dHeight > 0 | dwidth > 0)
                 {
-                    commodity.Dimensions.Height = Math.Round(dHeight, 2).ToString(CultureInfo.InvariantCulture);
-                    commodity.Dimensions.Width = Math.Round(dwidth, 2).ToString(CultureInfo.InvariantCulture);
-                    commodity.Dimensions.Length= Math.Round(dLength, 2).ToString(CultureInfo.InvariantCulture);
+                    DimensionsType commondityDimensions = new DimensionsType();
+
+                    commondityDimensions.Height = Math.Round(dHeight, 2).ToString(CultureInfo.InvariantCulture);
+                    commondityDimensions.Width = Math.Round(dwidth, 2).ToString(CultureInfo.InvariantCulture);
+                    commondityDimensions.Length = Math.Round(dLength, 2).ToString(CultureInfo.InvariantCulture);
 
                     UnitOfMeasurementType unitOfMeasurementDimention = new UnitOfMeasurementType();
                     unitOfMeasurementDimention.Code = "IN";
                     unitOfMeasurementDimention.Description = "Inch";
-                    commodity.Dimensions.UnitOfMeasurement = unitOfMeasurementDimention;
+                    commondityDimensions.UnitOfMeasurement = unitOfMeasurementDimention;
+
+                    commodity.Dimensions = commondityDimensions;
                 }
             }
             return commodity;
