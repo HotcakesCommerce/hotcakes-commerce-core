@@ -1,4 +1,15 @@
-﻿<h5>Version 03.00.01</h5>
+﻿<h5>Version 03.01.00</h5>
+<p><strong>Highlights</strong></p>
+<p><strong>Enhancements</strong></p>
+<ul>
+	<li><strong>Promotion Support for Product Variants</strong> - You can now specify a variant for a promotion to run against when creating sales/offers.</li>
+	<li><strong>Virtual Directory Support</strong> - Hotcakes can now run in a virtual directory instance.</li>
+</ul>
+<p><strong>Bug Fixes</strong></p>
+<ul>
+	<li>None</li>
+</ul>
+<h5>Version 03.00.01</h5>
 <p><strong>Highlights</strong></p>
 <blockquote>
 	<p><strong>Important Notes</strong></p>
