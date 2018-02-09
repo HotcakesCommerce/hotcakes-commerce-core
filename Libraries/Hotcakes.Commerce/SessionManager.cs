@@ -474,11 +474,8 @@ namespace Hotcakes.Commerce
             {
                 if (Factory.HttpContext != null)
                 {
-                    if (Factory.HttpContext.Request.Browser.Cookies)
-                    {
-                        var cookies = Factory.HttpContext.Request.Cookies;
-                        return GetCookieString(cookieName, cookies);
-                    }
+                    var cookies = Factory.HttpContext.Request.Cookies;
+                    return GetCookieString(cookieName, cookies);
                 }
             }
             catch
@@ -533,27 +530,24 @@ namespace Hotcakes.Commerce
 
         public static void SetCookieString(string cookieName, string value, DateTime? expirationDate, bool secure)
         {
-            if (Factory.HttpContext != null)
-            {
-                if (Factory.HttpContext.Request.Browser.Cookies)
-                {
-                    try
-                    {
-                        var saveCookie = new HttpCookie(cookieName, value);
-                        if (expirationDate.HasValue)
-                            saveCookie.Expires = expirationDate.Value;
-                        else
-                            saveCookie.Expires = DateTime.Now.AddYears(50);
-                        saveCookie.Secure = secure;
-                        Factory.HttpContext.Request.Cookies.Remove(cookieName);
-                        Factory.HttpContext.Response.Cookies.Add(saveCookie);
-                    }
-                    catch (Exception Ex)
-                    {
-                        EventLog.LogEvent(Ex);
-                    }
-                }
-            }
+	        if (Factory.HttpContext != null)
+	        {
+		        try
+		        {
+			        var saveCookie = new HttpCookie(cookieName, value);
+			        if (expirationDate.HasValue)
+				        saveCookie.Expires = expirationDate.Value;
+			        else
+				        saveCookie.Expires = DateTime.Now.AddYears(50);
+			        saveCookie.Secure = secure;
+			        Factory.HttpContext.Request.Cookies.Remove(cookieName);
+			        Factory.HttpContext.Response.Cookies.Add(saveCookie);
+		        }
+		        catch (Exception Ex)
+		        {
+			        EventLog.LogEvent(Ex);
+		        }
+	        }
         }
 
         #endregion

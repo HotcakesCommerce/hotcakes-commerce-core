@@ -168,9 +168,6 @@
     <Compile Include="Providers\HccUrlRoutingModule.cs" />
     <Compile Include="Mvc\DnnHccFormRenderer.cs" />
     <Compile Include="Mvc\DnnHccUrlResolver.cs" />
-    <Compile Include="Service\Application.cs" />
-    <Compile Include="Service\Context.cs" />
-    <Compile Include="Service\ContextModule.cs" />
     <Compile Include="Social\SocialServiceBase.cs" />
     <Compile Include="Social\SocialServiceImpl.cs" />
     <Compile Include="Social\StubSocialItem.cs" />
