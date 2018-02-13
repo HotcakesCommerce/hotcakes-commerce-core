@@ -43,7 +43,7 @@ namespace Hotcakes.Web
                 {
                     if (context.Request != null)
                     {
-                        if (context.Request.Browser.Cookies && context.Request.Cookies.AllKeys.Contains(cookieName))
+                        if (context.Request.Cookies.AllKeys.Contains(cookieName))
                         {
                             var checkCookie = context.Request.Cookies[cookieName];
                             if (checkCookie != null)
@@ -119,29 +119,23 @@ namespace Hotcakes.Web
             {
                 if (context != null)
                 {
-                    if (context.Request != null)
+                    var saveCookie = new HttpCookie(cookieName, value);
+                    if (!temporary)
                     {
-                        if (context.Request.Browser.Cookies)
+                        if (expirationDate.HasValue)
                         {
-                            var saveCookie = new HttpCookie(cookieName, value);
-                            if (!temporary)
-                            {
-                                if (expirationDate.HasValue)
-                                {
-                                    saveCookie.Expires = expirationDate.Value;
-                                }
-                                else
-                                {
-                                    saveCookie.Expires = DateTime.Now.AddYears(50);
-                                }
-                            }
-                            if (domain.Trim().Length > 0)
-                            {
-                                saveCookie.Domain = domain;
-                            }
-                            context.Response.Cookies.Add(saveCookie);
+                            saveCookie.Expires = expirationDate.Value;
+                        }
+                        else
+                        {
+                            saveCookie.Expires = DateTime.Now.AddYears(50);
                         }
                     }
+                    if (domain.Trim().Length > 0)
+                    {
+                        saveCookie.Domain = domain;
+                    }
+                    context.Response.Cookies.Add(saveCookie);
                 }
             }
             catch (Exception ex)
