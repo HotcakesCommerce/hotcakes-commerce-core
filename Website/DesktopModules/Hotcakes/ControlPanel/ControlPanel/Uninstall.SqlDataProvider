@@ -1,0 +1,6 @@
+IF EXISTS(SELECT * FROM {databaseOwner}{objectQualifier}HostSettings WHERE [SettingName] = 'ControlPanel' AND [SettingValue] = 'DesktopModules/Hotcakes/ControlPanel/ControlBar.ascx')
+	UPDATE {databaseOwner}{objectQualifier}HostSettings SET [SettingValue] = 'Admin/ControlPanel/ControlBar.ascx' WHERE [SettingName] = 'ControlPanel'
+GO
+
+DELETE FROM {databaseOwner}{objectQualifier}ModuleControls WHERE [ControlKey] = 'CONTROLPANEL:HOTCAKESBAR'
+GO

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddNew.Text">
+    <value xml:space="preserve">Skript-Datei hinzufügen</value>
+  </data>
+  <data name="cmdSave.Text">
+    <value xml:space="preserve">Skript speichern </value>
+  </data>
+  <data name="cmdSaveClose.Text">
+    <value xml:space="preserve">Skript speichern und beenden</value>
+  </data>
+  <data name="ControlTitle_edit.Text">
+    <value xml:space="preserve">Skript bearbeiten</value>
+  </data>
+  <data name="currentScriptLabel.Help">
+    <value xml:space="preserve">Aktivieren Sie diese Option, um das aktuelle Skript als Standardskript für die Anzeige zu verwenden.</value>
+  </data>
+  <data name="currentScriptLabel.Text">
+    <value xml:space="preserve">ist aktiv:</value>
+  </data>
+  <data name="plSource.Text">
+    <value xml:space="preserve">Skript-Quelldatei:</value>
+  </data>
+  <data name="scriptListLabel.Help">
+    <value xml:space="preserve">Wählen Sie hier das in diesem Modul zu verwendende Skript.</value>
+  </data>
+  <data name="scriptListLabel.Text">
+    <value xml:space="preserve">Skript:</value>
+  </data>
+  <data name="scriptsLabel.Help">
+    <value xml:space="preserve">Wählen Sie aus der Liste das Skript, das Sie bearbeiten möchten.</value>
+  </data>
+  <data name="scriptsLabel.Text">
+    <value xml:space="preserve">Skript wählen:</value>
+  </data>
+  <data name="SourceFile.Text">
+    <value xml:space="preserve">Quellcode-Datei - {0}</value>
+  </data>
+</root>

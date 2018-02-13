@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+	This file is localized by K e r m a n i / dnnsoftware . ir
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ProfileProperties_FirstName.Text" xml:space="preserve">
+    <value>نام:</value>
+  </data>
+  <data name="ProfileProperties_LastName.Text" xml:space="preserve">
+    <value>نام خانوادگی:</value>
+  </data>
+  <data name="ProfileProperties_MiddleName.Text" xml:space="preserve">
+    <value>نام میانی:</value>
+  </data>
+  <data name="ProfileProperties_Prefix.Text" xml:space="preserve">
+    <value>پیشوند:</value>
+  </data>
+  <data name="ProfileProperties_FirstName.Help" xml:space="preserve">
+    <value>نام را وارد نمایید</value>
+  </data>
+  <data name="ProfileProperties_LastName.Help" xml:space="preserve">
+    <value>نام خانوادگی را وارد نمایید</value>
+  </data>
+  <data name="ProfileProperties_MiddleName.Help" xml:space="preserve">
+    <value>نام میانی</value>
+  </data>
+  <data name="ProfileProperties_Prefix.Help" xml:space="preserve">
+    <value>پیشوندی را وارد نمایید (مثلا: آقا، دکتر)</value>
+  </data>
+  <data name="ProfileProperties_Suffix.Text" xml:space="preserve">
+    <value>پسوند:</value>
+  </data>
+  <data name="ProfileProperties_Suffix.Help" xml:space="preserve">
+    <value>پسوندی را وارد نمایید (مانند Phd و ...)</value>
+  </data>
+  <data name="ProfileProperties_Unit.Text" xml:space="preserve">
+    <value>واحد آپارتمان:</value>
+  </data>
+  <data name="ProfileProperties_Unit.Help" xml:space="preserve">
+    <value>شماره آپارتمان/واحد را وارد نمایید</value>
+  </data>
+  <data name="ProfileProperties_Street.Text" xml:space="preserve">
+    <value>نشانی:</value>
+  </data>
+  <data name="ProfileProperties_Street.Help" xml:space="preserve">
+    <value>نشانی خود را وارد نمایید (مثلا: پونک، سردار جنگل)</value>
+  </data>
+  <data name="ProfileProperties_City.Text" xml:space="preserve">
+    <value>شهر:</value>
+  </data>
+  <data name="ProfileProperties_City.Help" xml:space="preserve">
+    <value>نام شهر را وارد نمایید</value>
+  </data>
+  <data name="ProfileProperties_Region.Text" xml:space="preserve">
+    <value>استان:</value>
+  </data>
+  <data name="ProfileProperties_Region.Help" xml:space="preserve">
+    <value>نام استان را وارد نمایید.</value>
+  </data>
+  <data name="ProfileProperties_Country.Text" xml:space="preserve">
+    <value>کشور:</value>
+  </data>
+  <data name="ProfileProperties_Country.Help" xml:space="preserve">
+    <value>کشور را انتخاب نمایید</value>
+  </data>
+  <data name="ProfileProperties_PostalCode.Text" xml:space="preserve">
+    <value>کد پستی:</value>
+  </data>
+  <data name="ProfileProperties_PostalCode.Help" xml:space="preserve">
+    <value>کد پستی را وارد نمایید</value>
+  </data>
+  <data name="ProfileProperties_Telephone.Text" xml:space="preserve">
+    <value>شماره تلفن:</value>
+  </data>
+  <data name="ProfileProperties_Telephone.Help" xml:space="preserve">
+    <value>شماره تلفن را وارد نمایید</value>
+  </data>
+  <data name="ProfileProperties_Cell.Text" xml:space="preserve">
+    <value>شماره موبایل:</value>
+  </data>
+  <data name="ProfileProperties_Cell.Help" xml:space="preserve">
+    <value>شماره موبایل را وارد نمایید</value>
+  </data>
+  <data name="ProfileProperties_Fax.Text" xml:space="preserve">
+    <value>فکس:</value>
+  </data>
+  <data name="ProfileProperties_Fax.Help" xml:space="preserve">
+    <value>شماره فکس را وارد نمایید</value>
+  </data>
+  <data name="ProfileProperties_Website.Text" xml:space="preserve">
+    <value>وب سایت:</value>
+  </data>
+  <data name="ProfileProperties_Website.Help" xml:space="preserve">
+    <value>آدرس وب سایت را وارد نمایید</value>
+  </data>
+  <data name="ProfileProperties_IM.Text" xml:space="preserve">
+    <value>مسنجر:</value>
+  </data>
+  <data name="ProfileProperties_IM.Help" xml:space="preserve">
+    <value>شناسه Messenger را وارد نمایید (AOL, MSN, Yahoo etc)</value>
+  </data>
+  <data name="ProfileProperties_TimeZone.Text" xml:space="preserve">
+    <value>زمان محلی:</value>
+  </data>
+  <data name="ProfileProperties_TimeZone.Help" xml:space="preserve">
+    <value>زمان محلی خود را از منوی بازشونده انتخاب نمایید </value>
+  </data>
+  <data name="ProfileProperties_PreferredLocale.Text" xml:space="preserve">
+    <value>زبان دلخواه:</value>
+  </data>
+  <data name="ProfileProperties_PreferredLocale.Help" xml:space="preserve">
+    <value>زبان دلخواه خود را انتخاب نمایید.</value>
+  </data>
+  <data name="ProfileTitle.Text" xml:space="preserve">
+    <value>ویرایش پروفایل  - {0} (شماره : {1})</value>
+  </data>
+  <data name="ProfileProperties_Cell.Required" xml:space="preserve">
+    <value>شماره موبایل الزامی است</value>
+  </data>
+  <data name="ProfileProperties_City.Required" xml:space="preserve">
+    <value>شهر الزامی می باشد</value>
+  </data>
+  <data name="ProfileProperties_Country.Not Specified" xml:space="preserve">
+    <value>نامشخص</value>
+  </data>
+  <data name="ProfileProperties_Country.Required" xml:space="preserve">
+    <value>کشور الزامی می باشد</value>
+  </data>
+  <data name="ProfileProperties_Fax.Required" xml:space="preserve">
+    <value>شماره فکس الزامی می باشد</value>
+  </data>
+  <data name="ProfileProperties_FirstName.Required" xml:space="preserve">
+    <value>نام الزامی می باشد</value>
+  </data>
+  <data name="ProfileProperties_IM.Required" xml:space="preserve">
+    <value>شناسه Messenger الزامی است </value>
+  </data>
+  <data name="ProfileProperties_LastName.Required" xml:space="preserve">
+    <value>نام خانوادگی الزامی است</value>
+  </data>
+  <data name="ProfileProperties_MiddleName.Required" xml:space="preserve">
+    <value>نام میانی الزامی می باشد</value>
+  </data>
+  <data name="ProfileProperties_PostalCode.Required" xml:space="preserve">
+    <value>کد پستی الزامی می باشد</value>
+  </data>
+  <data name="ProfileProperties_PreferredLocale.Required" xml:space="preserve">
+    <value>انتخاب زبان الزامی است.</value>
+  </data>
+  <data name="ProfileProperties_Prefix.Required" xml:space="preserve">
+    <value>پیشوند الزامی می باشد</value>
+  </data>
+  <data name="ProfileProperties_Region.Required" xml:space="preserve">
+    <value>استان الزامی می باشد</value>
+  </data>
+  <data name="ProfileProperties_Street.Required" xml:space="preserve">
+    <value>وارد کردن نشانی الزامی می باشد</value>
+  </data>
+  <data name="ProfileProperties_Suffix.Required" xml:space="preserve">
+    <value>پسوند الزامی می باشد</value>
+  </data>
+  <data name="ProfileProperties_Telephone.Required" xml:space="preserve">
+    <value>شماره تلفن الزامی می باشد</value>
+  </data>
+  <data name="ProfileProperties_TimeZone.Required" xml:space="preserve">
+    <value>زمان محلی الزامی می باشد</value>
+  </data>
+  <data name="ProfileProperties_Unit.Required" xml:space="preserve">
+    <value>واحد آپارتمان الزامی است </value>
+  </data>
+  <data name="ProfileProperties_Website.Required" xml:space="preserve">
+    <value>وب سایت الزامی است </value>
+  </data>
+  <data name="ProfileProperties_Biography.Text" xml:space="preserve">
+    <value>زندگینامه:</value>
+  </data>
+  <data name="ProfileProperties_Biography.Help" xml:space="preserve">
+    <value>برای وارد کردن شرح مختصری از زندگینامه خود از ویرایشگر متن استفاده نمایید.</value>
+  </data>
+  <data name="ProfileProperties_Biography.Required" xml:space="preserve">
+    <value>زندگینامه الزامی است</value>
+  </data>
+  <data name="ProfileProperties_Address.Header" xml:space="preserve">
+    <value>آدرس</value>
+  </data>
+  <data name="ProfileProperties_Contact Info.Header" xml:space="preserve">
+    <value>اطلاعات تماس</value>
+  </data>
+  <data name="ProfileProperties_Name.Header" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="ProfileProperties_Preferences.Header" xml:space="preserve">
+    <value>اولویت ها</value>
+  </data>
+  <data name="ProfileProperties_Photo.Help" xml:space="preserve">
+    <value>یک تصویر را انتخاب نمایید یا از فایل های سیستم خود بارگذاری نمایید</value>
+  </data>
+  <data name="ProfileProperties_Photo.Required" xml:space="preserve">
+    <value>تصویر الزامی می باشد</value>
+  </data>
+  <data name="ProfileProperties_Photo.Text" xml:space="preserve">
+    <value>تصویر:</value>
+  </data>
+  <data name="ProfileProperties_PreferredTimeZone.Help" xml:space="preserve">
+    <value>وقت محلی مورد نظر خود را وارد نمایید</value>
+  </data>
+  <data name="ProfileProperties_PreferredTimeZone.Required" xml:space="preserve">
+    <value>وقت محلی  مورد نظر الزامی می باشد</value>
+  </data>
+  <data name="ProfileProperties_PreferredTimeZone.Text" xml:space="preserve">
+    <value>وقت محلی دلخواه:</value>
+  </data>
+  <data name="RequireProfile.Text" xml:space="preserve">
+    <value>پروفایل شما</value>
+  </data>
+  <data name="ProfileProperties_DisplayName.Text" xml:space="preserve">
+    <value>نام نمایشی:</value>
+  </data>
+  <data name="ProfileProperties_Email.Text" xml:space="preserve">
+    <value>آدرس ایمیل:</value>
+  </data>
+  <data name="ProfileProperties_Username.Text" xml:space="preserve">
+    <value>نام کاربری:</value>
+  </data>
+  <data name="Address.Text">
+    <value>جزئیات آدرس</value>
+  </data>
+  <data name="Contact Info.Text">
+    <value>اطلاعات تماس</value>
+  </data>
+  <data name="Name.Text">
+    <value>نام</value>
+  </data>
+  <data name="Preferences.Text">
+    <value>تنظیمات</value>
+  </data>
+  <data name="ProfileProperties_Facebook.Help">
+    <value>لینکی به پروفایل شما در سایت Facebook که فرمت آن با  facebook.com/ شروع شود.</value>
+  </data>
+  <data name="ProfileProperties_Facebook.Required">
+    <value>Facebook الزامی است</value>
+  </data>
+  <data name="ProfileProperties_Facebook.Text">
+    <value>Facebook</value>
+  </data>
+  <data name="ProfileProperties_GooglePlus.Help">
+    <value>لینکی به پروفایل شما در سایت Google+ که فرمت آن با  plus.google.com/ شروع شود.</value>
+  </data>
+  <data name="ProfileProperties_GooglePlus.Required">
+    <value>Google+ الزامی است</value>
+  </data>
+  <data name="ProfileProperties_GooglePlus.Text">
+    <value>Google+</value>
+  </data>
+  <data name="ProfileProperties_LinkedIn.Help">
+    <value>لینکی به پروفایل شما در سایت linkedin که فرمت آن با  www.linkedin.com/ یا [country].linkedin.com/ شروع شود.</value>
+  </data>
+  <data name="ProfileProperties_LinkedIn.Required">
+    <value>LinkedIn الزامی است</value>
+  </data>
+  <data name="ProfileProperties_LinkedIn.Text">
+    <value>LinkedIn</value>
+  </data>
+  <data name="ProfileProperties_Twitter.Help">
+    <value>لینکی به پروفایل شما در سایت twitter که فرمت آن با  facebook.com/ شروع شود.</value>
+  </data>
+  <data name="ProfileProperties_Twitter.Required">
+    <value>Twitter الزامی است</value>
+  </data>
+  <data name="ProfileProperties_Twitter.Text">
+    <value>Twitter</value>
+  </data>
+  <data name="ProfileProperties_Skype.Help">
+    <value>A link to your call you on Skype via your username</value>
+  </data>
+  <data name="ProfileProperties_Skype.Required">
+    <value>Skype ID is required</value>
+  </data>
+  <data name="ProfileProperties_Skype.Text">
+    <value>Skype ID</value>
+  </data>
+</root>

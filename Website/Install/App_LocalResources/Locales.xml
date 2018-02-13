@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <root>
   <language name="English" key="en-US" fallback="" />
+  <language name="فارسی" key="fa-IR" fallback="en-US" />
   <language name="Français" key="fr-FR" fallback="en-US" />
   <language name="Deutsch" key="de-DE" fallback="en-US" />
   <language name="Español" key="es-ES" fallback="en-US" />

@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+	This file is localized by K e r m a n i / dnnsoftware . ir
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BasicSettings.Text" xml:space="preserve">
+    <value>تنظیمات پایه</value>
+  </data>
+  <data name="BasicSettingsDescription.Text" xml:space="preserve">
+    <value>در این بخش شما می توانید تنظیمات پایه را برای نقش انجام دهید.</value>
+  </data>
+  <data name="RoleName.Text" xml:space="preserve">
+    <value>نام نقش </value>
+  </data>
+  <data name="RoleName.Help" xml:space="preserve">
+    <value>نام نقش را وارد نمایید. </value>
+  </data>
+  <data name="Description.Text" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Description.Help" xml:space="preserve">
+    <value>توضیحی برای این نقش وارد نمایید</value>
+  </data>
+  <data name="PublicRole.Text" xml:space="preserve">
+    <value>نقش عمومی:</value>
+  </data>
+  <data name="PublicRole.Help" xml:space="preserve">
+    <value>آیا این یک نقش عمومی است؟</value>
+  </data>
+  <data name="AutoAssignment.Text" xml:space="preserve">
+    <value>اعطای خودکار:</value>
+  </data>
+  <data name="AutoAssignment.Help" xml:space="preserve">
+    <value>آیا این نقش به صورت خودکار به کاربرها داده شود؟</value>
+  </data>
+  <data name="AdvancedSettings.Text" xml:space="preserve">
+    <value>تنظیمات پیشرفته</value>
+  </data>
+  <data name="AdvancedSettingsHelp.Text" xml:space="preserve">
+    <value>در این بخش شما می توانید تنظیمات پیشرفته‌تری را برای این نقش تنظیم نمایید.</value>
+  </data>
+  <data name="ServiceFee.Text" xml:space="preserve">
+    <value>هزینه سرویس</value>
+  </data>
+  <data name="ServiceFee.Help" xml:space="preserve">
+    <value>هزینه شارژ برای این نقش را وارد نمایید.</value>
+  </data>
+  <data name="BillingPeriod.Text" xml:space="preserve">
+    <value>دوره صورت‌حساب (هر)</value>
+  </data>
+  <data name="BillingPeriod.Help" xml:space="preserve">
+    <value>این دو فیلد برای ارتباط دوره صورتحساب استفاده می شوند. مانند 2 هفته یا 1 ماه</value>
+  </data>
+  <data name="TrialFee.Text" xml:space="preserve">
+    <value>هزینه‌ی نسخه آزمایشی </value>
+  </data>
+  <data name="TrialFee.Help" xml:space="preserve">
+    <value>هزینه‌ی نسخه آ.زمایشی را برای این نقش وارد نمایید</value>
+  </data>
+  <data name="TrialPeriod.Text" xml:space="preserve">
+    <value>دوره آزمایشی (هر)</value>
+  </data>
+  <data name="TrialPeriod.Help" xml:space="preserve">
+    <value>این دو فیلد به صورت ترکیبی مورد استفاده قرار می گیرند، مانند 2 هفته یا 3 روز و ... </value>
+  </data>
+  <data name="cmdManage.Text" xml:space="preserve">
+    <value>مدیریت کاربران این نقش</value>
+  </data>
+  <data name="valRoleName.Text" xml:space="preserve">
+    <value>&lt;br&gt;شما می‌بایست نام معتبری وارد نمایید</value>
+  </data>
+  <data name="valServiceFee1.Text" xml:space="preserve">
+    <value>&lt;br&gt;هزینه سرویس وارد شده معتبر نمی باشد</value>
+  </data>
+  <data name="valServiceFee2.Text" xml:space="preserve">
+    <value>&lt;br&gt;هزینه سرویس می بایست بزرگتر یا مساوی صفر باشد</value>
+  </data>
+  <data name="valBillingPeriod1.Text" xml:space="preserve">
+    <value>&lt;br&gt;دوره صورت‌حساب وارد شده معتبر نمی باشد</value>
+  </data>
+  <data name="valBillingPeriod2.Text" xml:space="preserve">
+    <value>&lt;br&gt;دوره صورت‌حساب می بایست بزرگتر یا مساوی صفر باشد</value>
+  </data>
+  <data name="valTrialFee1.Text" xml:space="preserve">
+    <value>&lt;br&gt;هزینه نسخه آزمایشی وارد شده معتبر نمی باشد</value>
+  </data>
+  <data name="valTrialFee2.Text" xml:space="preserve">
+    <value>&lt;br&gt;هزینه نسخه آزمایشی می بایست مساوی یا بزرگتر از صفر باشد</value>
+  </data>
+  <data name="valTrialPeriod1.Text" xml:space="preserve">
+    <value>&lt;br&gt;دوره نسخه آزمایشی وارد شده معتبر نمی باشد</value>
+  </data>
+  <data name="valTrialPeriod2.Text" xml:space="preserve">
+    <value>&lt;br&gt;دوره نسخه آزمایشی می بایست مساوی یا بزرگتر از صفر باشد</value>
+  </data>
+  <data name="ControlTitle_edit.Text" xml:space="preserve">
+    <value>ویرایش نقش‌های امنیتی</value>
+  </data>
+  <data name="ModuleHelp.Text" xml:space="preserve">
+    <value>&lt;h1&gt;درباره ویرایش نقش های امنیتی &lt;/h1&gt;&lt;p&gt;مدیران می توانند نقش های امنیتی که در این پورتال تعریف شده است را مدیریت نمایند. این ماژول امکان افزودن نقش های جدید، ویرایش و حذف نقش های موجود و انتساب کاربران به نقش ها راممکن می سازد.&lt;/p&gt;</value>
+  </data>
+  <data name="plRoleGroups.Text" xml:space="preserve">
+    <value>گروه نقش:</value>
+  </data>
+  <data name="plRoleGroups.Help" xml:space="preserve">
+    <value>گروه نقشی که این نقش به آن تعلق دارد را انتخاب نمایید.</value>
+  </data>
+  <data name="plRSVPCode.Text" xml:space="preserve">
+    <value>کد RSVP:</value>
+  </data>
+  <data name="plRSVPCode.Help" xml:space="preserve">
+    <value>برای این نقش کد RSVP را وارد نمایید. این کد برای ایجاد امکان آسان اشتراک در چندین نقش توسط کاربر می تواند مورد استفاده قرار گیرد.</value>
+  </data>
+  <data name="plRSVPLink.Text" xml:space="preserve">
+    <value>لینک RSVP:</value>
+  </data>
+  <data name="plRSVPLink.Help" xml:space="preserve">
+    <value>اگر کد RSVP ایجاد شده باشد شما می توانید این آدرس را به اشتراک بگذارید.</value>
+  </data>
+  <data name="plIcon.Text" xml:space="preserve">
+    <value>آیکون:</value>
+  </data>
+  <data name="plIcon.Help" xml:space="preserve">
+    <value>آیکون‌ای را برای این نقش انتخاب نمایید.</value>
+  </data>
+  <data name="DuplicateRole.Text" xml:space="preserve">
+    <value>یک نقش با این نام وجود دارد، این نقش اضافه نشد.</value>
+  </data>
+  <data name="ProcessorWarning.Text" xml:space="preserve">
+    <value>&lt;b&gt;نکته : &lt;/b&gt;شما می‌بایست به‌جای فعال نمودن هزینه محور بودن نقش‌ها یا خدمات، فرآیند پرداخت را در تنظمات سایت انجام دهید </value>
+  </data>
+  <data name="IncompatibleFee.Text" xml:space="preserve">
+    <value>اگر می‌خواهید این نقش پولی باشد، می‌بایست دوره پرداخت را مشخص نمایید.</value>
+  </data>
+  <data name="valRoleName2.Text" xml:space="preserve">
+    <value>&lt;br&gt;این نام نامعتبر است - نقش ها می توانند تنها شامل کاراکترها، اعداد و _ و - فاصله باشد.</value>
+  </data>
+  <data name="securityModeListLabel.Help">
+    <value>حالت امنیتی را برای این نقش/گروه انتخاب نمایید.</value>
+  </data>
+  <data name="securityModeListLabel.Text">
+    <value>حالت امنیتی:</value>
+  </data>
+  <data name="statusListLabel.Help">
+    <value>وضعیتی را برای این نقش/گروه انتخاب نمایید.</value>
+  </data>
+  <data name="statusListLabel.Text">
+    <value>وضعیت:</value>
+  </data>
+  <data name="SystemRoleWarning.Text">
+    <value>این نقش یک نقش سیستمی است و فقط ویرایش های محدودی روی آن مجاز است.</value>
+  </data>
+  <data name="AssignToExistUsers.Help">
+    <value>اعطای این نقش به تمام اعضاء سایت.</value>
+  </data>
+  <data name="AssignToExistUsers.Text">
+    <value>اعطا به اعضاء سایت:</value>
+  </data>
+</root>

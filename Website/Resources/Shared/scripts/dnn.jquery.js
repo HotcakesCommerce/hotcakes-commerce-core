@@ -89,6 +89,7 @@
 
             if (defaultAction || opts.isButton) {
                 $dnnDialog = $("<div class='dnnDialog'></div>").html(opts.text).dialog(opts);
+                $dnnDialog.parent().find('.ui-dialog-titlebar-close').html('Close');
                 $this.click(function (e, isTrigger) {
                     if (isTrigger) {
                         return true;
@@ -134,6 +135,7 @@
                         }
                         ]
                     });
+
                     $dnnDialog.dialog('open');
                     e.preventDefault();
                     return false;
@@ -337,11 +339,11 @@
                 var skin, container;
 
                 if (opts.useComboBox) {
-                    var skinComboBox = $find(opts.skinSelector);
-                    var containerComboBox = $find(opts.containerSelector);
+                    var skinComboBox = $('#' + opts.skinSelector);
+                    var containerComboBox = $('#' + opts.containerSelector);;
 
-                    skin = skinComboBox ? skinComboBox.get_value() : '';
-                    container = containerComboBox ? containerComboBox.get_value() : '';
+                    skin = skinComboBox.length ? skinComboBox[0].selectize.getValue() : '';
+                    container = containerComboBox.length ? containerComboBox[0].selectize.getValue() : '';
                 }
                 else {
                     skin = $this.find(opts.skinSelector).val();
@@ -440,7 +442,11 @@
             });
             var helpSelector = $this.find(opts.helpSelector);
             $this.parent().css({ position: 'relative' });
-            $this.css({ position: 'absolute', right: '-29%' });
+            if ($('body').hasClass('r' + 't' + 'l')) {
+                $this.css({ position: 'absolute', left: '-29%' });
+            } else {
+                $this.css({ position: 'absolute', right: '-29%' });
+            }
             var hoverOnToolTip = false, hoverOnPd = false;
 
             dnnFormHelp.hoverIntent({
@@ -482,9 +488,15 @@
             pinHelper.on('click', function (e) {
                 e.preventDefault();
                 if ($this.hasClass(opts.pinnedClass)) {
-                    helpSelector.css({ "left": '0', "top": '0' })
+                    if ($('body').hasClass('r' + 't' + 'l')) {
+                        helpSelector.css({ "right": '0', "top": '0' })
                         .css('visibility', 'hidden')
                         .draggable('destroy');
+                    } else {
+                        helpSelector.css({ "left": '0', "top": '0' })
+                        .css('visibility', 'hidden')
+                        .draggable('destroy');
+                    }
                     $this.removeClass(opts.pinnedClass);
                 }
                 else {
@@ -609,6 +621,9 @@
             }
 
             function clickHandler(e) {
+                if (ch.disabled) {
+                    return;
+                }
                 $ch.triggerHandler('focus');
                 var previousChecked = ch.checked;
                 ch.click();
@@ -660,7 +675,11 @@
             pd.tooltipWrapperInner = $('.dnnFormHelpContent', pd.tooltipWrapper);
 
             var tooltipHeight = pd.tooltipWrapperInner.height();
-            pd.tooltipWrapperInner.css({ left: '-10px', top: -(tooltipHeight + 30) + 'px' });
+            if ($('body').hasClass('r' + 't' + 'l')) {
+                pd.tooltipWrapperInner.css({ right: '-10px', top: -(tooltipHeight + 30) + 'px' });
+            } else {
+                pd.tooltipWrapperInner.css({ left: '-10px', top: -(tooltipHeight + 30) + 'px' });
+            }
             var hoverOnPd = false;
             $pd.hover(
                 function () {
@@ -1820,7 +1839,7 @@
             if (value != '' && skipTag != true) {
                 $('<span>').addClass('tag').append(
                     $('<span>').text(value).append('&nbsp;&nbsp;'),
-                    $('<a>', {
+                    $('<a aria-label="remove">', {
                         href: '#',
                         title: 'Removing tag'
                     }).click(function () {
@@ -1966,7 +1985,7 @@
             markup += '<div id="' + id + '_addTag">';
 
             if (settings.interactive) {
-                markup += '<input id="' + id + '_tag" value="" data-default="' + settings.defaultText + '" autocomplete="off" />';
+                markup += '<input id="' + id + '_tag" value="" data-default="' + settings.defaultText + '" autocomplete="off" aria-label="Search" />';
             }
 
             markup += '</div>';
@@ -2107,7 +2126,8 @@
                     if ((currValLength >= settings.maxChars) && !(event.which == event.data.delimiter.charCodeAt(0) || event.which == 13 || event.which == 9)) {
                         tagTooLongErrMsg.insertAfter($(this)).show().delay(1500).fadeOut(1000);
                     }
-                    if (event.which == event.data.delimiter.charCodeAt(0) || event.which == 13 || event.which == 9 || event.type == "blur") {
+                    //if (event.which == event.data.delimiter.charCodeAt(0) || event.which == 13 || event.which == 9 || event.type == "blur") {
+                    if (event.which == event.data.delimiter.charCodeAt(0) || event.which == 13 || event.which == 9 || event.type == "blur" || event.which == 1548 || event.which == 1563) {
                         event.preventDefault();
                         if (!clickedOnAutoComplete) {
                             tagItems(data, event);
@@ -2628,6 +2648,7 @@
                 url: url,
                 beforeSend: service.setModuleHeaders,
                 dropZone: $('#' + settings.dropZoneId),
+                pasteZone: null,
                 replaceFileInput: false,
                 submit: function (e, data) {
                     data.formData = { folder: settings.folder, filter: settings.fileFilter, overwrite: 'true' };
@@ -4266,6 +4287,10 @@
             var script = /return confirm\((['"])([\s\S]*?)\1\)/g.exec(instance.attr("onclick"));
             if (script != null) {
                 var confirmContent = script[2].split("\\" + script[1]).join(script[1]);
+                //restore unicode chars.
+                confirmContent = confirmContent.replace(/\\u([\d\w]{4})/gi, function(match, charCode) {
+                    return String.fromCharCode(parseInt(charCode, 16));
+                });
                 instance.attr("onclick", instance.attr("onclick").replace(script[0], "void(0)")).dnnConfirm({
                     text: confirmContent,
                     isButton: isButton

@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="plPublish.Text" xml:space="preserve">
+    <value>انتشار</value>
+  </data>
+  <data name="plPublish.Help" xml:space="preserve">
+    <value>مشخص می‌کند که محتوا آماده انتشار است یا خیر</value>
+  </data>
+  <data name="dshHistory.Text" xml:space="preserve">
+    <value>تاریخچه مورد</value>
+  </data>
+  <data name="plPreviewVersion.Text" xml:space="preserve">
+    <value>نسخه</value>
+  </data>
+  <data name="plPreviewVersion.Help" xml:space="preserve">
+    <value>شماره نسخه محتوا را نمایش میدهد</value>
+  </data>
+  <data name="plPreviewWorkflowInUse.Text" xml:space="preserve">
+    <value>گردش‌کار استفاده شد</value>
+  </data>
+  <data name="plPreviewWorkflowInUse.Help" xml:space="preserve">
+    <value>نام تنظیمات گردش‌کاری که این ماژول هم اکنون درحال استفاده از آن می‌باشد.</value>
+  </data>
+  <data name="lblPreviewWorkflowState.Text" xml:space="preserve">
+    <value>مرحله</value>
+  </data>
+  <data name="plWorkflowState.Help" xml:space="preserve">
+    <value>مرحله کنونی محتوا را نمایش می‌دهد</value>
+  </data>
+  <data name="Date.Header" xml:space="preserve">
+    <value>تاریخ</value>
+  </data>
+  <data name="State.Header" xml:space="preserve">
+    <value>مرحله</value>
+  </data>
+  <data name="Version.Header" xml:space="preserve">
+    <value>نسخه</value>
+  </data>
+  <data name="Item.Text" xml:space="preserve">
+    <value>پیش‌نمایش محتوا</value>
+  </data>
+  <data name="Edit.Text" xml:space="preserve">
+    <value>بازگرداندن محتوا به این نسخه</value>
+  </data>
+  <data name="ModuleHelp.Text" xml:space="preserve">
+    <value>&lt;P&gt;The Text/HTML Module renders plain text, rich text or HTML. Five different editing views are available: &lt;/P&gt;
+&lt;OL&gt;
+&lt;LI&gt;&lt;STRONG&gt;Basic Text Box / Text&lt;/STRONG&gt;: Renders basic text and HTML tags.  Text entered on a new line is rendered as a line break. The text style is the Normal style, as set in your style sheet. 
+&lt;LI&gt;&lt;STRONG&gt;Basic Text Box / HTML&lt;/STRONG&gt;: Displays basic text in HTML format.
+&lt;LI&gt;&lt;STRONG&gt;Basic Text Box / Raw&lt;/STRONG&gt;: Displays basic text in HTML format. Text entered on a new line is not rendered as a line break.
+&lt;LI&gt;&lt;STRONG&gt;Rich Text Editor / HTML&lt;/STRONG&gt;: Allows you to paste HTML from other sources.
+&lt;LI&gt;&lt;STRONG&gt;Rich Text Editor / Design&lt;/STRONG&gt;: A full word processor or WYSIWYG (What You See is What You Get) editor with functionality such as hyperlinks, email links, File  Manager image gallery, bullet points, spell check and more.</value>
+  </data>
+  <data name="ControlTitle_edit.Text" xml:space="preserve">
+    <value>ویرایش محتوا</value>
+  </data>
+  <data name="AddContent.Text" xml:space="preserve">
+    <value>افزودن محتوا...</value>
+  </data>
+  <data name="cmdPreview.Text" xml:space="preserve">
+    <value>پیش‌نمایش</value>
+  </data>
+  <data name="cmdSave.Text" xml:space="preserve">
+    <value>ذخیره</value>
+  </data>
+  <data name="User.Header" xml:space="preserve">
+    <value>کاربر</value>
+  </data>
+  <data name="Content Staging.Text" xml:space="preserve">
+    <value>مرحله‌بندی محتوا</value>
+  </data>
+  <data name="Direct Publish.Text" xml:space="preserve">
+    <value>انتشار مستقیم</value>
+  </data>
+  <data name="Draft.Text" xml:space="preserve">
+    <value>پیش‌نویس</value>
+  </data>
+  <data name="Published.Text" xml:space="preserve">
+    <value>منتشر شده</value>
+  </data>
+  <data name="False.Text" xml:space="preserve">
+    <value>غلط</value>
+  </data>
+  <data name="True.Text" xml:space="preserve">
+    <value>صحیح</value>
+  </data>
+  <data name="dshMaster.Text" xml:space="preserve">
+    <value>نسخه زبان اصلی</value>
+  </data>
+  <data name="chkPublish.Text" xml:space="preserve">
+    <value>انتشار تغییرات؟</value>
+  </data>
+  <data name="plActionOnSave.Help" xml:space="preserve">
+    <value>عملیاتی که سیستم علاوه بر ذخیره ماژول هنگام کلیک بر روی دکمه "ذخیره" باید انجام دهد.</value>
+  </data>
+  <data name="plCurrentWorkflowInUse.Help" xml:space="preserve">
+    <value>گردش‌کاری کنونی توسط این ماژول استفاده شده است.</value>
+  </data>
+  <data name="plCurrentWorkflowState.Help" xml:space="preserve">
+    <value>مرحله گردش‌کار استفاده شده بوسیله این ماژول.</value>
+  </data>
+  <data name="plMaxVersions.Help" xml:space="preserve">
+    <value>حداکثر تعداد نسخه‌هایی که برای هر محتوای HTML نگهداری خواهد شد.</value>
+  </data>
+  <data name="plPreviewWorkflowState.Help" xml:space="preserve">
+    <value>مرحله گردش‌کار محتوای نمایش‌داده شده.</value>
+  </data>
+  <data name="Delete.Text" xml:space="preserve">
+    <value>حذف این نسخه</value>
+  </data>
+  <data name="cmdCancelSubmit.Text" xml:space="preserve">
+    <value>لغو</value>
+  </data>
+  <data name="cmdCancel.Text" xml:space="preserve">
+    <value>لغو</value>
+  </data>
+  <data name="EditPreviewState.Text" xml:space="preserve">
+    <value>پیش‌نمایش ویرایش</value>
+  </data>
+  <data name="plActionOnSave.Text" xml:space="preserve">
+    <value>هنگام ذخیره</value>
+  </data>
+  <data name="plCurrentWorkflowInUse.Text" xml:space="preserve">
+    <value>گردش‌کار در حال استفاده</value>
+  </data>
+  <data name="plCurrentWorkflowState.Text" xml:space="preserve">
+    <value>مرحله گردش‌کاری</value>
+  </data>
+  <data name="plMaxVersions.Text" xml:space="preserve">
+    <value>حداکثر تعداد نسخه‌ها</value>
+  </data>
+  <data name="plPreviewWorkflowState.Text" xml:space="preserve">
+    <value>مرحله گردش‌کار</value>
+  </data>
+  <data name="dshCurrentContent.Text" xml:space="preserve">
+    <value>محتوای کنونی</value>
+  </data>
+  <data name="DeleteVersion.Confirm" xml:space="preserve">
+    <value>آیا از حذف دائمی نسخه [VERSION] ([STATE]) که در تاریخ [DATECREATED] توسط [USERNAME] ایجاد شده است اطمینان دارید؟</value>
+  </data>
+  <data name="plCurrentWorkVersion.Help" xml:space="preserve">
+    <value>شماره نسخه محتوا را نمایش می‌دهد</value>
+  </data>
+  <data name="plCurrentWorkVersion.Text" xml:space="preserve">
+    <value>نسخه</value>
+  </data>
+  <data name="lblNoRecords.Text" xml:space="preserve">
+    <value>تاریخچه ای برای این محتوا وجود ندارد</value>
+  </data>
+  <data name="VersionsPreview.Text" xml:space="preserve">
+    <value>پیش‌نمایش</value>
+  </data>
+  <data name="VersionsRemove.Text" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="VersionsRollback.Text" xml:space="preserve">
+    <value>بازگرداندن</value>
+  </data>
+  <data name="NoVersions.Text" xml:space="preserve">
+    <value>هیچ تاریخچه نسخه‌ای برای این محتوا وجود ندارد.</value>
+  </data>
+  <data name="cmdHideMasterContent.Text">
+    <value>مخفی‌سازی زبان پیش‌فرض</value>
+  </data>
+  <data name="cmdHistory.Text">
+    <value>تاریخچه نسخه</value>
+  </data>
+  <data name="cmdShowMasterContent.Text">
+    <value>نمایش زبان پیش‌فرض</value>
+  </data>
+  <data name="liBasicText.Text">
+    <value>جعبه متن ساده</value>
+  </data>
+  <data name="liRichText.Text">
+    <value>ویرایشگر متن پیشرفته</value>
+  </data>
+</root>

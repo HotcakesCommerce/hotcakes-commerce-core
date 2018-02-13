@@ -166,7 +166,21 @@ dnnModule.digitalAssets = function ($, $find, $telerik, dnnModal) {
             var label = labels.eq(i);
             currentTool.is(':visible') ? label.show() : label.hide();
             if (nextTool.length > 0) {
-                label.width(nextTool.position().left - currentTool.position().left);
+                //START dnnsoftware.ir
+                if ($('body').hasClass('r' + 't' + 'l')) {
+                    label.width(currentTool.position().left - nextTool.position().left);
+                } else {
+                    label.width(nextTool.position().left - currentTool.position().left);
+                }
+                //END dnnsoftware.ir
+
+                //START dnnsoftware.ir // Added by M.Kermani to set buttom default image
+                if ($('body').hasClass('r' + 't' + 'l')) {
+                    var toggleButton = $("#DigitalAssetsToggleLeftPaneBtnId span", "#" + controls.scopeWrapperId);
+                    toggleButton.css("background-image", "url(" + settings.toggleLeftPaneShowImageUrl + ")");
+                }
+                //END dnnsoftware.ir
+
             }
         }
     }
@@ -341,18 +355,33 @@ dnnModule.digitalAssets = function ($, $find, $telerik, dnnModal) {
         var loadingPanel = $(".dnnModuleDigitalAssetsMainLoading", "#" + controls.scopeWrapperId);
         var left;
 
-        if (!leftPane.is(":visible")) {
-            toggleButton.css("background-image", "url(" + settings.toggleLeftPaneHideImageUrl + ")");
-            leftPane.animate({ width: 'toggle' }, 500, treeViewRefreshScrollbars);
-            left = 220;
+        //START dnnsoftware.ir
+        if ($('body').hasClass('r' + 't' + 'l')) {
+            if (!leftPane.is(":visible")) {
+                toggleButton.css("background-image", "url(" + settings.toggleLeftPaneShowImageUrl + ")");
+                leftPane.animate({ width: 'toggle' }, 500, treeViewRefreshScrollbars);
+                left = 220;
+            } else {
+                toggleButton.css("background-image", "url(" + settings.toggleLeftPaneHideImageUrl + ")");
+                leftPane.animate({ width: 'toggle' }, 500);
+                left = 0;
+            }
+            contentPane.animate({ 'margin-right': left }, 500, 'swing', moreItemsHint);
+            loadingPanel.css({ 'right': left });
         } else {
-            toggleButton.css("background-image", "url(" + settings.toggleLeftPaneShowImageUrl + ")");
-            leftPane.animate({ width: 'toggle' }, 500);
-            left = 0;
+            if (!leftPane.is(":visible")) {
+                toggleButton.css("background-image", "url(" + settings.toggleLeftPaneHideImageUrl + ")");
+                leftPane.animate({ width: 'toggle' }, 500, treeViewRefreshScrollbars);
+                left = 220;
+            } else {
+                toggleButton.css("background-image", "url(" + settings.toggleLeftPaneShowImageUrl + ")");
+                leftPane.animate({ width: 'toggle' }, 500);
+                left = 0;
+            }
+            contentPane.animate({ 'margin-left': left }, 500, 'swing', moreItemsHint);
+            loadingPanel.css({ 'left': left });
         }
-
-        contentPane.animate({ 'margin-left': left }, 500, 'swing', moreItemsHint);
-        loadingPanel.css({ 'left': left });
+        //END dnnsoftware.ir
     }
 
     function moreItemsHint() {
@@ -580,8 +609,7 @@ dnnModule.digitalAssets = function ($, $find, $telerik, dnnModal) {
                 deleteItems([{
                     ItemId: node.get_value(),
                     IsFolder: true,
-                    UnlinkAllowedStatus: node.get_attributes().getAttribute("UnlinkAllowedStatus"),
-                    ItemName: node.get_text()
+                    UnlinkAllowedStatus: node.get_attributes().getAttribute("UnlinkAllowedStatus")
                 }], node.get_parent().get_value());
                 break;
             case "UnlinkFolder":
@@ -2542,8 +2570,7 @@ dnnModule.digitalAssets = function ($, $find, $telerik, dnnModal) {
                     ItemId: item.ItemID,
                     IsFolder: item.IsFolder,
                     ParentFolderId: item.ParentFolderID,
-                    UnlinkAllowedStatus: item.UnlinkAllowedStatus,
-                    ItemName: item.ItemName
+                    UnlinkAllowedStatus: item.UnlinkAllowedStatus
                 });
             }
         }
@@ -2574,52 +2601,21 @@ dnnModule.digitalAssets = function ($, $find, $telerik, dnnModal) {
         }
     }
 
-    function getDeletionDialogText(items, dialogText, dialogNote) {
-        var foldersToDelete = [];
-        var filesToDelete = [];
-
-        for (var x = 0; x < items.length; x++) {
-            if (items[x].IsFolder) {
-                foldersToDelete.push(items[x]);
-            } else {
-                filesToDelete.push(items[x]);
-            }
-        }
-
-        var folderLabel = (foldersToDelete.length == 1 ? resources.folderLabel : resources.folderMultLabel) + ": ";
-        var fileLabel = (filesToDelete.length == 1 ? resources.fileLabel : resources.fileMultLabel) + ": ";
-
-        var foldersString = (foldersToDelete.length > 0 ? folderLabel : "");
-        var filesString = (filesToDelete.length > 0 ? fileLabel : "");
-
-        foldersString += foldersToDelete.map(function (elem) {
-            return elem.ItemName;
-        }).join(", ");
-        filesString += filesToDelete.map(function (elem) {
-            return elem.ItemName;
-        }).join(", ");
-
-        var dialogTextFinal = dialogText + dialogNote + "<br/><br/> " + foldersString + (foldersString != "" ? "<br/>" : "") + filesString;
-
-        return dialogTextFinal;
-    }
-
     function confirmDeleteItems(items, parentFolderId, mappedSubfoldersCount) {
         var folderAndFileText = selectionText(items);
         var dialogTitle = resources.deleteTitle.replace('[ITEMS]', folderAndFileText);
         var dialogText = resources.deleteConfirmText.replace('[ITEMS]', folderAndFileText);
 
         var dialogNote = "";
-        var dialogHeight = "auto";
+        var dialogHeight = 190;
         if (mappedSubfoldersCount > 0) {
             dialogNote = mappedSubfoldersCount == 1 ? resources.deleteConfirmWithMappedSubfolderText.replace('[COUNT]', mappedSubfoldersCount)
                                                     : resources.deleteConfirmWithMappedSubfoldersText.replace('[COUNT]', mappedSubfoldersCount);
             dialogNote = "<p class='dialogNote'>" + dialogNote + "</p>";
-            dialogHeight = "auto";
+            dialogHeight = 230;
         }
 
-        var dialogTextFinal = getDeletionDialogText(items, dialogText, dialogNote);
-        $("<div class='dnnDialog'></div>").html(dialogTextFinal).dialog({
+        $("<div class='dnnDialog'></div>").html(dialogText+dialogNote).dialog({
             modal: true,
             autoOpen: true,
             dialogClass: "dnnFormPopup",
@@ -3053,9 +3049,10 @@ dnnModule.digitalAssets = function ($, $find, $telerik, dnnModal) {
     }
 
     function getUrl() {
-        var items = convertToItemsFromGridItems(grid.get_selectedItems());        
+        var items = convertToItemsFromGridItems(grid.get_selectedItems());
+        var itemId = items[0].ItemId;
         if (!items[0].IsFolder) {
-            getUrlFromFileId(items[0]);
+            getUrlFromFileId(itemId);
         }
     }
 
@@ -3070,22 +3067,16 @@ dnnModule.digitalAssets = function ($, $find, $telerik, dnnModal) {
         }
     }
 
-    function getFullUrl(relativePath, includePathname) {
-        var urlPathName = "";
-
-        if (includePathname) {
-            urlPathName = location.pathname;
-        }
-
-        return location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + urlPathName + relativePath;
+    function getFullUrl(relativePath) {
+        return location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + relativePath;
     }
 
-    function getUrlFromFileId(item) {
+    function getUrlFromFileId(fileId) {
         $.ajax({
             type: 'POST',
             url: getContentServiceUrl() + 'GetUrl',
             data: {
-                fileId: item.ItemId
+                fileId: fileId
             },
             beforeSend: servicesFramework.setModuleHeaders
         }).done(function(data) {
@@ -3095,15 +3086,15 @@ dnnModule.digitalAssets = function ($, $find, $telerik, dnnModal) {
             } else {
                 url = getFullUrl(data);
             }
-            openGetUrlModal(url, resources.getFileUrlTitle, item.ItemName);
-        }).fail(function (xhr) {
+            openGetUrlModal(url, resources.getFileUrlLabel);
+        }).fail(function(xhr) {
             handledXhrError(xhr, resources.getUrlErrorTitle);
         });
     }
 
-    function openGetUrlModal(url, title, fileName) {
+    function openGetUrlModal(url, label) {
         $('#dnnModuleDigitalAssetsGetUrlModal input').val(url).select();
-        $('#dnnModuleDigitalAssetsGetUrlModal span').text(resources.getUrlLabel);
+        $('#dnnModuleDigitalAssetsGetUrlModal span').text(label);
         $('#dnnModuleDigitalAssetsGetUrlModal').dialog({
             modal: true,
             autoOpen: true,
@@ -3111,7 +3102,7 @@ dnnModule.digitalAssets = function ($, $find, $telerik, dnnModal) {
             width: 500,
             height: 250,
             resizable: false,
-            title: title + " " + fileName,
+            title: resources.getUrlTitle,
             buttons:
                 [
                     {

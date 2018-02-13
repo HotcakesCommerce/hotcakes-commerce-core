@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Activate.Text" xml:space="preserve">
+    <value>فعال سازی</value>
+  </data>
+  <data name="ActivateButtonText.Text" xml:space="preserve">
+    <value>فعال سازی</value>
+  </data>
+  <data name="ActivatedMessageHtml.Text" xml:space="preserve">
+    <value>&lt;p class="{0}"&gt;با تشکر. داده های  Premium فعال شد.&lt;/p&gt;</value>
+  </data>
+  <data name="ActivateInstructionsHtml.Text" xml:space="preserve">
+    <value>&lt;p&gt;شماره لایسنس داده های Premium را در قسمت پایین وارد کنید. سپس از دکمه "فعال سازی" جهت استفاده از این لایسنس کلیک کنید.&lt;/p&gt;</value>
+  </data>
+  <data name="ActivationDataInvalidHtml.Text" xml:space="preserve">
+    <value>&lt;div class="{0}"&gt;&lt;p&gt; منبع داده مشخص شده شامل اطلاعات صحیح نمی باشد.&lt;/p&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="ActivationFailureCouldNotUpdateConfigHtml.Text" xml:space="preserve">
+    <value>&lt;div class="{0}"&gt;&lt;p&gt;آیتم fiftyOne/detection فایل پیکربندی  '{1}' قابل درج نیست. لطفا از وجود متن زیر در تگ  fiftyOneاطمینان حاصل کنید و دوباره جهت فعال سازی لایسنس تلاش کنید. &lt;/p&gt;
+&lt;br/&gt;
+&lt;span style="margin-left: 0px !important;"&gt;&lt;code style="color: #000000;"&gt;&amp;lt;&lt;/code&gt;&lt;code&gt;&lt;span style="color: #006699;"&gt;&lt;strong&gt;detection&lt;/strong&gt;&lt;/span&gt;&lt;/code&gt;&amp;nbsp;&lt;code style="color: #808080;"&gt;binaryFilePath&lt;/code&gt;&lt;code style="color: #000000;"&gt;=&lt;/code&gt;&lt;code style="color: blue;"&gt;"~/App_Data/51Degrees-Premium.dat"&lt;/code&gt;&lt;code&gt;&lt;span style="color: #000000;"&gt;/&amp;gt;&lt;/span&gt;&lt;/div&gt;</value>
+    <comment>آیتم </comment>
+  </data>
+  <data name="ActivationFailureCouldNotWriteDataFileHtml.Text" xml:space="preserve">
+    <value>&lt;div class="{0}"&gt;
+&lt;p&gt;فایل داده های دستگاه  '{1}' قابل ذخیره سازی نیست. از مجوز دسترسی کاربر '{2}' جهت تغییر و نوشتن در این فولدر اطمینان حاصل کنید.&lt;/p&gt;
+&lt;/div&gt;</value>
+  </data>
+  <data name="ActivationFailureCouldNotWriteLicenceFileHtml.Text" xml:space="preserve">
+    <value>&lt;div class="{0}"&gt;&lt;p&gt;فایل لایسنی '{1}' قابل ذخیره در فولدر  bin وبسایت  '{2}' نیست. فایلی با پسوند .lic و کد لایسنس را در آن paste کنید. سپس این فایل را در فولدر  bin ذخیره کنید.&lt;/p&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="ActivationFailureGenericHtml.Text" xml:space="preserve">
+    <value>&lt;div class="{0}"&gt;&lt;p&gt;مشکلی در فعال سازی لایسنس رخ داده است. دلیل مشخصی برای این مشکل وجود ندارد. لطفا &lt;a href="http://51degrees.mobi/AboutUs/ContactUs.aspx"&gt;با ما تماس بگیرید&lt;/a&gt; جزئیات پیاده سازی وبسایت را بیان کنید تا ما به شما در حل مشکل کمک کنیم.&lt;/p&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="ActivationFailureHttpHtml.Text" xml:space="preserve">
+    <value>&lt;div class="{0}"&gt;&lt;p&gt;امکان بررسی لایسنس در 51Degrees.mobi در هاست  '{1}' وجود ندارد. این مشکل مکن است به دلایل زیر رخ داده باشد.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+این سایت در medium trust mode اجرا شده است و خاصیت 
+&lt;a href="http://msdn.microsoft.com/en-us/library/system.web.configuration.trustsection.originurl(v=VS.80).aspx"&gt;originUrl&lt;/a&gt; 
+در فایل web.config به هاست  '{1}' دسترسی ندارد. خاصیت  originUrl را طوری تغییر دهید که شامل '{1}' باشد. نام های هاست را می توانید با  | از هم جدا کنید.&lt;/li&gt;
+&lt;li&gt;
+فایروال وب سرور یا یک فایروال دیگردسترسی هاست یا پورت 443 SSL را محدود کرده است.تنظیمات فایروال را بررسی کنید.
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When you've completed these checks try activating the licence key again.&lt;/p&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="ActivationFailureInvalidHtml.Text" xml:space="preserve">
+    <value>&lt;div class="{0}"&gt;&lt;p&gt; کد لایسنس مشخص شده معتبر نیست. لطفا از معتبر بودن آن اطمینان حاصل کنید.&lt;/p&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="ActivationStreamFailureHtml.Text" xml:space="preserve">
+    <value>&lt;div class="{0}"&gt;&lt;p&gt;منبع داده مشخص شده قابل خواندن نیست&lt;/p&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="ActivationSuccessHtml.Text" xml:space="preserve">
+    <value>&lt;div class="{0}"&gt;&lt;p&gt;عملیات با موفقیت انجام شد. دکمه "Refresh"را برای لود دوباره صفحه و شروع استفاده از داده های  Premium کلیک کنید. توجه" ممکن است تاخیری در بازسازی سایت رخ دهد.&lt;/p&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="BackToExplorer.Text" xml:space="preserve">
+    <value>بازگشت به مرورگر دستگاه</value>
+  </data>
+  <data name="BrowserList.Header" xml:space="preserve">
+    <value>مرورگر</value>
+  </data>
+  <data name="ContentList.Header" xml:space="preserve">
+    <value>محتوا</value>
+  </data>
+  <data name="DeviceExplorer.Header" xml:space="preserve">
+    <value>مرورگر دستگاه</value>
+  </data>
+  <data name="GetLatestData.Text" xml:space="preserve">
+    <value>دریافت آخرین اطلاعات</value>
+  </data>
+  <data name="Glossary.Header" xml:space="preserve">
+    <value>راهنما&gt;واژه نامه</value>
+  </data>
+  <data name="Glossary.Text" xml:space="preserve">
+    <value>* این ویژگی فقط در مجموعه داده های اضافی وجود دارد.</value>
+  </data>
+  <data name="HardwareList.Header" xml:space="preserve">
+    <value>سخت افزار</value>
+  </data>
+  <data name="Help.Text" xml:space="preserve">
+    <value>راهنما</value>
+  </data>
+  <data name="HelpLink.Text" xml:space="preserve">
+    <value>راهنما</value>
+  </data>
+  <data name="Introduction.Header" xml:space="preserve">
+    <value>مرور دستگاه</value>
+  </data>
+  <data name="Introduction.Text" xml:space="preserve">
+    <value>در ادامه واژه نامه مشخصات قابل استفاده به صورت طبقه بندی شده را، می بینید.</value>
+  </data>
+  <data name="Lite.Header" xml:space="preserve">
+    <value>از شما بابت استفاده از داده های دستگاه لایت متشکریم</value>
+    <comment>لایت  متشکریم.جهت استفاده از داده های دستگاه</comment>
+  </data>
+  <data name="LiteSearchResults.Header" xml:space="preserve">
+    <value>نتایج جستجو</value>
+  </data>
+  <data name="LiteSearchResults.Text" xml:space="preserve">
+    <value>یک فروشنده سخت افزار را برای نمایش مدل های دستگاه های  تولید  شده اش انتخاب کنید</value>
+  </data>
+  <data name="LiteUpgrade.Label" xml:space="preserve">
+    <value>آپگرید به داده هایPremium</value>
+  </data>
+  <data name="NoResultsFound.Text" xml:space="preserve">
+    <value>هیچ نتیجه ای برای جستجوی شما یافت نشد.</value>
+  </data>
+  <data name="Premium.Header" xml:space="preserve">
+    <value>Premium  متشکریم.جهت استفاده از داده های دستگاه</value>
+  </data>
+  <data name="PremiumIntro.Text" xml:space="preserve">
+    <value>این داده ها شامل اطلاعات هزاران دستگاه از جمله بازی ها، کنسول ها، خواننده های eBook ، تبلت ها، گوشی های هوشمند و گوشی های ویژه است. هر دستگاه مرتبط با طیف گسترده ای از مشخصات مثل اندازه صفحه، روش های ورود اطلاعات تا نوع سیستم عامل، مرورگر و سخت افزار است.</value>
+  </data>
+  <data name="PurchaseInfo.Text" xml:space="preserve">
+    <value>می توانید liscnence  را از اینجا تهیه کنید</value>
+  </data>
+  <data name="PurchaseInfoEnd.Text" xml:space="preserve">
+    <value>.</value>
+  </data>
+  <data name="PurchaseInfoLink.Href" xml:space="preserve">
+    <value>http://store.dotnetnuke.com/home/product-details/premium-mobile-device-data---51degreesmobi</value>
+  </data>
+  <data name="PurchaseInfoLink.Text" xml:space="preserve">
+    <value>فروشگاه دات نت نیوک</value>
+  </data>
+  <data name="RefreshButtonText.Text" xml:space="preserve">
+    <value>تازه سازی</value>
+    <comment>Used to reload page after upgrade to premium.</comment>
+  </data>
+  <data name="SearchButton.Text" xml:space="preserve">
+    <value>جستجوی دستگاه</value>
+  </data>
+  <data name="SearchLite.Header" xml:space="preserve">
+    <value>جستجوی نماینده کاربری</value>
+  </data>
+  <data name="SearchLite.Text" xml:space="preserve">
+    <value>نماینده کاربری را که قصد تست آن را دارید مشخص نموده و دکمه جستجوی دستگاه را کلیک کنید.</value>
+  </data>
+  <data name="SearchPremium.Header" xml:space="preserve">
+    <value>جستجوی دستگاه</value>
+  </data>
+  <data name="SearchPremium.Text" xml:space="preserve">
+    <value>عبارت جستجو را وارد نموده و دکمه "جستجوی دستگاه" را برای آغاز جستجو کلیک کنید. فروشنده سخت افزار، مدل، نام دستگاه،مرورگر و سیستم عامل نیز قابل جستجو هستند.</value>
+  </data>
+  <data name="SoftwareList.Header" xml:space="preserve">
+    <value>نرم افزار</value>
+  </data>
+  <data name="UpgradePoint1.Text" xml:space="preserve">
+    <value>کاربران به طور خودکار جهت بهینه سازی صفحات وب redirect می شوند، با استفاده از این ویژگی می توانید سایت های مجزا برای تبلت ها، گوشی های ویژه و گوشی های هوشمند تولید کنید.</value>
+  </data>
+  <data name="UpgradePoint2.Text" xml:space="preserve">
+    <value>تسهیل مشخصات اندازه صفحه و isMobile در داده های Lite با استفاده از مشخصات بیش از 50 دستگاه شامل چک تبلت بودن، اندازه صفحه به میلیمتر، تولید کننده، مدل، جزئیات پلتفرم، روش های ورود اطلاعات و میزان پشتیبانی از جاوا اسکریپت</value>
+  </data>
+  <data name="UpgradePoint3.Text" xml:space="preserve">
+    <value>به روز رسانی هفتگی اطلاعات دستگاه</value>
+  </data>
+  <data name="UpgradePoint4.Text" xml:space="preserve">
+    <value>گزینه ای برای نصب خودکار آپدیت ها</value>
+  </data>
+  <data name="UploadButtonText.Text" xml:space="preserve">
+    <value>آپلود</value>
+  </data>
+  <data name="UploadData.Text" xml:space="preserve">
+    <value>آپلود داده ها</value>
+  </data>
+  <data name="UploadInstructionsHtml.Text" xml:space="preserve">
+    <value>می توانید با استفاده از دکمه های "Browse" و "Upload" فایل های داده های Premium را آپلود کنید.</value>
+  </data>
+  <data name="ValidationFileErrorText.Text" xml:space="preserve">
+    <value>از دکمه  Browse برای انتخاب فایل داده Premium جهت آپلود استفاده کنید.</value>
+  </data>
+  <data name="ValidationRequiredErrorText.Text" xml:space="preserve">
+    <value>وارد کردن شماره لایسنس ضروری است.</value>
+  </data>
+  <data name="ViewLicenseAgreement.Text" xml:space="preserve">
+    <value>نمایش موافقت نامه</value>
+  </data>
+  <data name="WhyUpgrade.Text" xml:space="preserve">
+    <value>دلایل آپگرید به داده های  premium </value>
+  </data>
+  <data name="StatsHtml.Text" xml:space="preserve">
+    <value>&lt;div class="{0}"&gt;&lt;span&gt;نسخه داده: &lt;b&gt;{1}&lt;/b&gt;&lt;/span&gt; &lt;span&gt;منتشر شده: &lt;b&gt;{2:d}&lt;/b&gt;&lt;/span&gt; &lt;span&gt;مشخصات: &lt;b&gt;{3}&lt;/b&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="ValidationRegExErrorText.Text" xml:space="preserve">
+    <value>شماره لایسنس فقط باید شامل حروف بزرگ یا اعداد باشد.</value>
+  </data>
+  <data name="BackButtonDevicesText.Text" xml:space="preserve">
+    <value>دیگر فروشندگان</value>
+  </data>
+  <data name="DeviceExplorerDeviceInstructionsHtml.Text" xml:space="preserve">
+    <value>&lt;p&gt;جهت دستیابی به اطلاعات بیشتر در مورد مشخصات یا مقادیر روی آیکن راهنما کلیک کنید.&lt;/p&gt;</value>
+  </data>
+  <data name="DeviceExplorerModelsInstructionsHtml.Text" xml:space="preserve">
+    <value>&lt;p&gt;مدلی را جهت نمایش قابلیت های آن، مرورگر و ترکیبات نرم افزاری انتخاب کنید. .&lt;/p&gt;</value>
+  </data>
+  <data name="DeviceExplorerVendorsHtml.Text" xml:space="preserve">
+    <value>&lt;p&gt;یک فروشنده سخت افزار را برای نمایش مدل های دستگاه های  تولید  شده اش انتخاب کنید.&lt;/p&gt;</value>
+  </data>
+  <data name="DeviceSearchRequired.Text" xml:space="preserve">
+    <value>الزامی </value>
+  </data>
+  <data name="StatsRefreshButton.Text" xml:space="preserve">
+    <value>تازه سازی</value>
+  </data>
+  <data name="BackButtonDeviceText.Text" xml:space="preserve">
+    <value>سایر دستگاه ها{0} </value>
+  </data>
+  <data name="PremiumUploadError.Text" xml:space="preserve">
+    <value>مشکلی در آپلود داده پیش آمده است.</value>
+  </data>
+  <data name="PremiumUploadSuccess.Text" xml:space="preserve">
+    <value>داده با موفقیت آپلود شد.</value>
+  </data>
+</root>

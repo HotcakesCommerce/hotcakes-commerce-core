@@ -1,0 +1,1 @@
+{"progress":100,"details":"انجام شد","check0":"Done","check1":"Done","check2":"Done","check3":"Done","check4":"Done","check5":"NotStarted"}

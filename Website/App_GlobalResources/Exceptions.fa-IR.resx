@@ -1,0 +1,497 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    This translation has been done by Morteza Kermani
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+	This file is localized by K e r m a n i / dnnsoftware . ir
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddFileExtensionNotAllowed.Text" xml:space="preserve">
+    <value>پسوند '{0}' مجاز نمی باشد. فایل اضافه نشد. </value>
+  </data>
+  <data name="AddFileNoSpaceAvailable.Text" xml:space="preserve">
+    <value>وب‌سایت فضای کافی برای ذخیره فایل را ندارد. فایل اضافه نشد.</value>
+  </data>
+  <data name="AddFilePermissionsNotMet.Text" xml:space="preserve">
+    <value>مجوز لازم وجود ندارد. فایل اضافه نشد.</value>
+  </data>
+  <data name="AddFileUnderlyingSystemError.Text" xml:space="preserve">
+    <value>خطایی در سیستم رخ داده است. فایل اضافه نشد.</value>
+  </data>
+  <data name="AddFolderAlreadyExists.Text" xml:space="preserve">
+    <value>آدرس ارائه شده برای پوشه از قبل وجود دارد. پوشه اضافه نشد.</value>
+  </data>
+  <data name="AddFolderParentCannotBeFound.Text" xml:space="preserve">
+    <value>پوشه والد یافت نشد.</value>
+  </data>
+  <data name="AddFolderUnderlyingSystemError.Text" xml:space="preserve">
+    <value>سیستم دچار خطا شده است. پوشه اضافه نشد. </value>
+  </data>
+  <data name="AmbiguousController.Text" xml:space="preserve">
+    <value>چندین 'نوع' که با نام کنترلر '{0}' در فضای نامی {1} مطابقت دارد یافت شد.</value>
+  </data>
+  <data name="ArgumentCannotBeNullOrEmpty.Text" xml:space="preserve">
+    <value>متغیر '{0}' نمی تواند null یا خالی باشد. </value>
+  </data>
+  <data name="ControllerNotFound.Text" xml:space="preserve">
+    <value>امکان جانمایی کنترلر برای {0} وجود ندارد.  جستجو شده در فضای نامی: {1}.</value>
+  </data>
+  <data name="CopyFileNoSpaceAvailable.Text" xml:space="preserve">
+    <value>وب‌سایت فضای کافی برای ذخیره فایل مشخص شده ندارد. فایل کپی نشد.</value>
+  </data>
+  <data name="CopyFilePermissionsNotMet.Text" xml:space="preserve">
+    <value>مجوز لازم وجود ندارد. فایل کپی نشد.</value>
+  </data>
+  <data name="CopyFileUnderlyingSystemError.Text" xml:space="preserve">
+    <value>در سیستم خطایی رخ داد. فایل کپی نشد.</value>
+  </data>
+  <data name="DeleteFileUnderlyingSystemError.Text" xml:space="preserve">
+    <value>سیستم دچار خطا شده است. فایل حذف نشد.</value>
+  </data>
+  <data name="DeleteFolderUnderlyingSystemError.Text" xml:space="preserve">
+    <value>سیستم دچار خطا شده است. پوشه اضافه نشد.</value>
+  </data>
+  <data name="InvalidZipFile.Text" xml:space="preserve">
+    <value>فایل مشخص شده فایل فشرده شده zip نمی باشد.</value>
+  </data>
+  <data name="MoveFolderCannotComplete.Text" xml:space="preserve">
+    <value>این عملیات نمی تواند کامل شود.</value>
+  </data>
+  <data name="MoveFolderUnderlyingSystemError.Text" xml:space="preserve">
+    <value>خطایی در سیستم رخ داد. عملیات انتقال قابل انجام نمی‌باشد. ممکن است عملیات همسان‌سازی پوشه‌ها به صورت دستی لازم باشد.</value>
+  </data>
+  <data name="MsgAttachmentsNotAllowed.Text" xml:space="preserve">
+    <value>فایل های ضمیمه مجاز نیستند.</value>
+  </data>
+  <data name="MsgBodyRequiredError.Text" xml:space="preserve">
+    <value>قسمت اصلی نمی تواند پوچ یا خالی باشد.</value>
+  </data>
+  <data name="MsgEmptyToListFoundError.Text" xml:space="preserve">
+    <value>هنگام تحلیل لیست کاربر و نقش‌ها، لیست خالی یافت شد.</value>
+  </data>
+  <data name="MsgMessageOrRecipientNotFound.Text" xml:space="preserve">
+    <value>یا پیام وجود ندارد و یا گیرنده پیام حاضر به دریافت این پیام نیست.</value>
+  </data>
+  <data name="MsgMessageRequiredError.Text" xml:space="preserve">
+    <value>پیام نمی تواند خالی باشد.</value>
+  </data>
+  <data name="MsgRecipientLimitExceeded.Text" xml:space="preserve">
+    <value>تعداد گیرندگان از حد مجاز بیشتر شده است. برای ارسال پیامف لطفا برخی از گیرندگان را از لیست حذف نمایید.</value>
+  </data>
+  <data name="MsgRolesOrUsersRequiredError.Text" xml:space="preserve">
+    <value>نقش ها و کاربران نمی توانند دارای لیست خالی باشند.</value>
+  </data>
+  <data name="MsgSenderRequiredError.Text" xml:space="preserve">
+    <value>یا ارسال کننده خالی است و یا  Sender.UserID منفی است.</value>
+  </data>
+  <data name="MsgSubjectOrBodyRequiredError.Text" xml:space="preserve">
+    <value>عنوان و متن نمی تواند خالی باشد.</value>
+  </data>
+  <data name="MsgSubjectTooBigError.Text" xml:space="preserve">
+    <value>عنوان ارائه شده بسیار طولانی است. حداکثر {0} کاراکتر و در حال حاضر {1} استفاده شده.</value>
+  </data>
+  <data name="MsgThrottlingIntervalNotMet.Text" xml:space="preserve">
+    <value>اکنون پیام را نمی توان ارسال نمود، مانند مدیر سایت حداقل {0} دقیقه مابین ارسال پیام به یک کاربر زمان نیاز دارید.</value>
+  </data>
+  <data name="MsgToListTooBigError.Text" xml:space="preserve">
+    <value>لیست ارائه داده شده بسیار طولانی است. بیشترین مقدار {0} و در حال حاضر {1} استفاده شده است.</value>
+  </data>
+  <data name="NoNetworkAvailableError.Text" xml:space="preserve">
+    <value>اتصال به شبکه نیاز است و الان هیچ شبکه ای در دسترس نیست.</value>
+  </data>
+  <data name="PropertyCannotBeNegative.Text" xml:space="preserve">
+    <value>خصوصیت '{1}' در شیء '{0}' نمی تواند منفی باشد.</value>
+  </data>
+  <data name="PropertyCannotBeNull.Text" xml:space="preserve">
+    <value>خصوصیت '{1}' در شی ء'{0}' نمی تواند خالی باشد.</value>
+  </data>
+  <data name="PropertyCannotBeNullOrEmpty.Text" xml:space="preserve">
+    <value>خصوصیت '{1}' در شی ء'{0}' نمی تواند خالی یا null باشد.</value>
+  </data>
+  <data name="RenameFileAlreadyExists.Text" xml:space="preserve">
+    <value>در این پوشه فایلی با همین نام موجود است. امکان تغییر نام فایل وجود ندارد. </value>
+  </data>
+  <data name="RenameFileUnderlyingSystemError.Text" xml:space="preserve">
+    <value>سیستم دچار خطا شده است. فایل تغییر نام داده نشد..</value>
+  </data>
+  <data name="RenameFolderAlreadyExists.Text" xml:space="preserve">
+    <value>این فایل از قبل موجود است. نام پوشه عوض نشد.</value>
+  </data>
+  <data name="RenameFolderUnderlyingSystemError.Text" xml:space="preserve">
+    <value>سیستم دچار خطا شده است. پوشه تغییر نام داده نشد..</value>
+  </data>
+  <data name="TabModuleNotExist.Text" xml:space="preserve">
+    <value>ماژول مشخص شده وجود ندارد.</value>
+  </data>
+  <data name="UnderlyingSystemError.Text" xml:space="preserve">
+    <value>سیستم دچار خطا شده است. </value>
+  </data>
+  <data name="UserRelationshipBlockedError.Text" xml:space="preserve">
+    <value>درخواست کاربر '{0}' برای رابطه ی '{1}' از طرف کاربر '{2}' رد شد.</value>
+  </data>
+  <data name="UserRelationshipDoesNotExistError.Text" xml:space="preserve">
+    <value>UserRelationshipID '{0}' وجود ندارد.</value>
+  </data>
+  <data name="UserRelationshipExistsError.Text" xml:space="preserve">
+    <value>Relationship already exists for Initiating User '{0}' Target User '{1}' RelationshipID '{2}'.</value>
+  </data>
+  <data name="UserRelationshipForDifferentPortalError.Text" xml:space="preserve">
+    <value>شناسه وب‌سایت '{0}' کاربر مبدأ با شناسه وب‌سایت '{1}' کاربر مقصد یکی نمی‌باشد.</value>
+  </data>
+  <data name="UserRelationshipForSameUsersError.Text" xml:space="preserve">
+    <value>کاربر شروع کننده و پایانی نمی تواند از شناسه کاربر یکسانی برخوردار باشد '{0}'.</value>
+  </data>
+  <data name="ValueCannotBeNegative.Text" xml:space="preserve">
+    <value>متغیر '{0}' نمی تواند منفی باشد.</value>
+  </data>
+  <data name="ValueMustBeOfType.Text" xml:space="preserve">
+    <value>متغیر '{0}' می بایست از نوع '{1}' باشد.</value>
+  </data>
+  <data name="WriteFileToResponsePermissionsNotMet.Text" xml:space="preserve">
+    <value>مجوزهای دسترسی معتبر نیست. امکان دانلود فایل وجود ندارد. </value>
+  </data>
+  <data name="TabNotInPortal.Text">
+    <value>صفحه مشخص شده در سایت وجود ندارد.</value>
+  </data>
+  <data name="CannotMoveFolderAlreadyExists.Text">
+    <value>پوشه '{0}' قابل انتقال نمی باشد. پوشه ای با همین نام از قبل زیر پوشه '{1}' موجود می باشد.</value>
+  </data>
+  <data name="CannotMoveFolderBetweenFolderType.Text">
+    <value>پوشه '{0}' قابل انتقال نمی باشد. فرآیند انتقال پوشه بین دو نوع مختلف پوشه مجاز نمی باشد.</value>
+  </data>
+  <data name="FileLockedOutOfPublishPeriodError.Text">
+    <value>فایل قفل شده است. با توجه به اینکه این فایل در یک بازه زمانی معتبر شروع و پایان انتشار وجود ندارد، امکان به‌روزرسانی آن وجود ندارد.</value>
+  </data>
+  <data name="FileLockedRunningWorkflowError.Text">
+    <value>فایل قفل شده است. با توجه به اینکه این فایل در یک گردش کار استفاده شده است، امکان به‌روزرسانی آن وجود ندارد.</value>
+  </data>
+  <data name="InstallPackageError.Text">
+    <value>نصب بسته {0} به دلیل زیر با شکست روبرو شد:
+'{1}'</value>
+  </data>
+  <data name="InvalidPublishPeriod.Text">
+    <value>تاریخ پایان می بایست بعد از تاریخ شروع باشد.</value>
+  </data>
+  <data name="MaxLengthExceeded.Text">
+    <value>حداکثر طول فیلد مجاز {0} تجاوز پیدا کرد.</value>
+  </data>
+  <data name="MsgOnlyHostOrAdminOrUserInGroupCanSendToRoleError.Text">
+    <value>تنها مدیران ارشد، مدیران سایت یا کاربران موجود در گروه می توانند به نقش ها ایمیل بفرستند.</value>
+  </data>
+  <data name="ProfileService_UpdateVanityUrl.Error">
+    <value>در به‌روزرسانی آدرس پروفایل خطایی رخ داد. اگر همچنان خطا وجود دارد، این موضوع را به مدیر سایت اطلاع دهید.</value>
+  </data>
+  <data name="StartDateMustNotBeInThePast.Text">
+    <value>تاریخ شروع نمی تواند مربوط به زمان قبل باشد.</value>
+  </data>
+  <data name="StartDateRequired.Text">
+    <value>تاریخ شروع الزامی است.</value>
+  </data>
+  <data name="ContentTypeDoesNotExist.Text">
+    <value>نوع محتوای مشخص شده معتبر نمی‌باشد.</value>
+  </data>
+  <data name="ContentTypeFieldDefinitionDoesNotExist.Text">
+    <value>نوع محتوایی که متعلق به تعریف فیلد است معتبر نمی‌باشد.</value>
+  </data>
+  <data name="CreateValidatorException.Text">
+    <value>Could not instantiate Validator - {0}.</value>
+  </data>
+  <data name="DynamicContentEntityInUse.Text">
+    <value>{0} با شناسه {1} در حال استفاده بوده و قابل حذف نمی‌باشد.</value>
+  </data>
+  <data name="EntityIsNotValid.Text">
+    <value>موجودیت نوع '{0}' معتبر نمی‌باشد.</value>
+  </data>
+  <data name="ErrorCreatingBusinessControllerClass.Text">
+    <value>Error Creating BusinessControllerClass '{0}' of module({1}) id=({2}) in tab({3}) and portal({4})</value>
+  </data>
+  <data name="ErrorMessageCannotBeNullOrEmpty.Text">
+    <value>ErorrKey و ErrorMessage نمی‌توانند خالی یا تهی باشند.</value>
+  </data>
+  <data name="FieldDefinitionInvalidDeadLoop.Text">
+    <value>امکان ساخت فیلدی با نام {0} وجود ندارد زیرا انجام این کار باعث ساخت یک حلقه بی‌تکرار خواهد شد.</value>
+  </data>
+  <data name="FileNameInvalid.Text">
+    <value>نام ({0}) مشخص شده معتبر نمی‌باشد</value>
+  </data>
+  <data name="FolderAlreadyExists.Text">
+    <value>امکان ساخت پوشه ({0}) وجود ندارد. این پوشه از قبل در این مکان موجود می‌باشد</value>
+  </data>
+  <data name="FolderDoesNotExists.Text">
+    <value>پوشه موجود نمی‌باشد</value>
+  </data>
+  <data name="FolderFileNameHasInvalidcharacters.Text">
+    <value>نام شامل کاراکترهای غیر مجاز می‌باشد. لطفا نامی بدون {0} وارد کنید.</value>
+  </data>
+  <data name="FolderFileNameIsReserved.Text">
+    <value>این نام رزرو است. لطفا نام دیگری را امتحان کنید.</value>
+  </data>
+  <data name="InvalidAnalyzerClass.Text">
+    <value>با توجه به اینکه کلاس '{0}' معتبر نبوده یا یک کلاس آنالیزر نیست، قابل ساخت نمی‌باشد. ما از آنالیزر پیش‌فرض استفاده می‌کنیم.</value>
+  </data>
+  <data name="InvalidMappedPath.Text">
+    <value>مسیر مشخص شده معبتر نمی‌باشد</value>
+  </data>
+  <data name="InvalidValidatorException.Text">
+    <value>Could not create ValidatorType - - {0}.</value>
+  </data>
+  <data name="JsonContentTypeInvalid.Text">
+    <value>The contentTypeId specified in the json document - {0} - does not exist.</value>
+  </data>
+  <data name="JsonInvalidField.Text">
+    <value>نوع محتوا فیلد را مشخص نمی‌کند - {0}.</value>
+  </data>
+  <data name="JsonMissingContent.Text">
+    <value>There is no content node in the json document.</value>
+  </data>
+  <data name="LuceneControllerIsDisposed.Text">
+    <value>LuceneController is disposed and cannot be used anymore</value>
+  </data>
+  <data name="ModuleDefIdMustBeGreaterThanZero.Text">
+    <value>ModuleDefId must be greater than zero when SearchTypeId is for a module</value>
+  </data>
+  <data name="ModuleDefIdWhenSearchTypeForModule.Text">
+    <value>ModuleDefId is needed only when SearchTypeId is for a module</value>
+  </data>
+  <data name="ModuleDoesNotBelongToPage.Text">
+    <value>این ماژول متعلق به این صفحه نمی‌باشد. لطفا برای تغییر ماژول، آن را به صفحه اصلی خود منتقل کنید.</value>
+  </data>
+  <data name="ModuleIdMustBeGreaterThanZero.Text">
+    <value>مقدار ModuleId باید بزرگتر از 0 باشد هنگامیکه SearchTypeId برای یک ماژول است.</value>
+  </data>
+  <data name="ModuleIdMustHaveSearchTypeIdForModule.Text">
+    <value>ModuleId based search must have SearchTypeId for a module only</value>
+  </data>
+  <data name="ModuleIdWhenSearchTypeForModule.Text">
+    <value>مقدار ModuleId تنها زمانی نیاز است که SearchTypeId برای یک ماژول باشد.</value>
+  </data>
+  <data name="PrivateMessageDisabledError.Text">
+    <value>در تنظیمات پیام کنونی، کاربر مجاز به ارسال پیام به کاربر یا گروه دیگری نمی‌باشد.</value>
+  </data>
+  <data name="PropertyCannotBeEmpty.Text">
+    <value>خصوصیت '{1}' در شیء '{0}' نمی‌تواند خالی باشد (تعداد = 0)</value>
+  </data>
+  <data name="PublishPagePermissionsNotMet">
+    <value>مجوز کافی وجود ندارد. صفحه منتشر نشد.</value>
+  </data>
+  <data name="SearchAnalyzerMinWordLength.Text">
+    <value>تحلیل‌گر جستجو: مقدار حداقل طول کلمه ({0}) بزرگتر از مقدار حداکثر طول کلمه ({1}) است.</value>
+  </data>
+  <data name="SearchIndexingDirectoryNoValid.Text">
+    <value>پوشه نشانه‌گذاری جستجو خالی است یا وجود ندارد</value>
+  </data>
+  <data name="SitemapProviderError.Text">
+    <value>URL sitemap provider '{0}' failed with error: {1}</value>
+  </data>
+  <data name="SitemapUrlGenerationError.Text">
+    <value>تولید نقشه سایت آدرس برای صفحه '{0} - {1}' باعث بروز خطا شد: {2}</value>
+  </data>
+  <data name="SystemContentTypesSecurityException.Text">
+    <value>نوع محتواهای سیستمی تنها توسط مدیران ارشد قابل ساخت، ویرایش یا حذف می‌باشند.</value>
+  </data>
+  <data name="SystemDataTypesSecurityException.Text">
+    <value>نوع داده‌های سیستمی تنها توسط مدیران ارشد قابل ساخت، ویرایش یا حذف می‌باشند.</value>
+  </data>
+  <data name="SystemWorkflowDeletionException.Text">
+    <value>گردش‌کار سیستمی قابل حذف نمی‌باشد</value>
+  </data>
+  <data name="TabHasNotAnUnpublishedVersion.Text">
+    <value>صفحه {0} فاقد نسخه منتشر نشده است</value>
+  </data>
+  <data name="TabVersionAlreadyPublished.Text">
+    <value>نسخه {1} برای صفحه {0} قبلا منتشر شده است.</value>
+  </data>
+  <data name="TabVersionCannotBeCreated_UnpublishedVersionAlreadyExists.Text">
+    <value>امکان ساخت نسخه منتشر نشده به دلیل وجود داشتن یک نسخه منتشر نشده دیگر برای صفحه {0} وجود ندارد.</value>
+  </data>
+  <data name="TabVersionCannotBeCreated_UnpublishedVersionAlreadyExistsConcurrencyProblem.Text">
+    <value>امکان ساخت نسخه منتشر نشده به دلیل وجود داشتن یک نسخه منتشر نشده دیگر برای صفحه {0} وجود ندارد. ممکن است کاربری دیگر فعالیتی روی این صفحه انجام داده باشد و مرحله این صفحه تغییر کرده باشد. لطفا برای مشاهده مرحله کنونی، صفحه را بازخوانی کنید.</value>
+  </data>
+  <data name="TabVersionCannotBeDeleted_UnpublishedVersion.Text">
+    <value>با توجه به موجود بودن یک نسخه منتشر نشده، امکان حذف نسخه {1} برای صفحه {0} وجود ندارد.</value>
+  </data>
+  <data name="TabVersionCannotBeDiscarded_OnlyOneVersion.Text">
+    <value>تنها یک نسخه از صفحه {0} وجود دارد و امکان رد کردن آن وجود ندارد.</value>
+  </data>
+  <data name="TabVersionCannotBeRolledBack_LastVersion.Text">
+    <value>با توجه به اینکه نسخه کنونی آخرین نسخه است، امکان برگرداندن نسخه {1} برای صفحه {0} وجود ندارد.</value>
+  </data>
+  <data name="TabVersionCannotBeRolledBack_UnpublishedVersionExists.Text">
+    <value>با توجه به موجود بودن یک نسخه منتشر نشده، امکان برگرداندن نسخه {1} برای صفحه {0} وجود ندارد.</value>
+  </data>
+  <data name="TabVersioningNotEnabled.Text">
+    <value>نسخه‌بندی صفحه فعال نمی‌باشد</value>
+  </data>
+  <data name="UnableToCreateLuceneWriter.Text">
+    <value>امکان ساخت Lucene writer وجود ندارد (فایل قفل شده در حال استفاده می‌باشد). لطفا برای آزاد شدن فایل، AppPool را از داخل IIS بازنشانی کنید.</value>
+  </data>
+  <data name="UpdateUserMembershipFailed.Text">
+    <value>Asp.net membership update user failed. Possible Reason(s): you enabled requiresUniqueEmail in membership config, but there have different user(s) used same email address with current user.</value>
+  </data>
+  <data name="UserCannotReviewWorkflowState.Text">
+    <value>کاربر نمی‌تواند مرحله گردش‌کار را بازبینی کند</value>
+  </data>
+  <data name="UserHasNoPermissionToAdd.Text">
+    <value>کاربر مجوز افزودن پوشه به این مکان را ندارد</value>
+  </data>
+  <data name="UserHasNoPermissionToBrowseFolder.Text">
+    <value>کاربر مجوز مشاهده این پوشه را ندارد</value>
+  </data>
+  <data name="UserHasNoPermissionToEditFile.Text">
+    <value>کاربر مجوز ویرایش این فایل را ندارد</value>
+  </data>
+  <data name="UserHasNoPermissionToEditFolder.Text">
+    <value>کاربر مجوز ویرایش این پوشه را ندارد</value>
+  </data>
+  <data name="WorkflowAlreadyStarted.Text">
+    <value>گردش‌کار برای این مورد محتوا شروع نخواهد شد. این مورد از قبل یک گردش‌کار شروع شده دارد.</value>
+  </data>
+  <data name="WorkflowAuthorNotFound.Text">
+    <value>مولف پیدا نشد. پیام آگاه‌سازی ارسال نخواهد شد.</value>
+  </data>
+  <data name="WorkflowCannotDiscard.Text">
+    <value>امکان رد کردن در مرحله گردش‌کار قبلی وجود ندارد</value>
+  </data>
+  <data name="WorkflowConcurrencyException.Text">
+    <value>مرحله کنونی گردش‌کار با مرحله کنونی مشخص شده در پارامتر ورودی یکی نمی‌باشد</value>
+  </data>
+  <data name="WorkflowDoesNotExistException.Text">
+    <value>گردش‌کار موجود نمی‌باشد</value>
+  </data>
+  <data name="WorkflowInUsageException.Text">
+    <value>شما نمی‌توانید یک گردش‌کار در حال استفاده را حذف نمایید</value>
+  </data>
+  <data name="WorkflowNameAlreadyExistsException.Text">
+    <value>یک گردش‌کار با این نام از قبل موجود می‌باشد.</value>
+  </data>
+  <data name="WorkflowNewStateCannotBeAddedToSystemWorkflows.Text">
+    <value>امکان افزودن مرحله جدید به گردش‌کار سیستمی وجود ندارد</value>
+  </data>
+  <data name="WorkflowStateCannotBeMoved.Text">
+    <value>امکان جابه‌جایی مرحله گردش‌کار وجود ندارد</value>
+  </data>
+  <data name="WorkflowStateInUsageException.Text">
+    <value>شما نمی‌توانید یک مرحله در حال استفاده را حذف نمایید.</value>
+  </data>
+  <data name="WorkflowStateNameAlreadyExistsException.Text">
+    <value>یک مرحله گردش‌کار با این نام از قبل موجود می‌باشد.</value>
+  </data>
+  <data name="WorkflowSystemWorkflowStateCannotBeDeleted.Text">
+    <value>امکان حذف مرحله گردش‌کار سیستمی وجود ندارد.</value>
+  </data>
+  <data name="WorkflowSystemWorkflowStateCannotComplete.Text">
+    <value>امکان تکمیل مرحله گردش‌کار سیستمی وجود ندارد.</value>
+  </data>
+</root>

@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+	This file is localized by K e r m a n i / dnnsoftware . ir
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="cmdAdd.Text" xml:space="preserve">
+    <value>افزودن کاربر جدید</value>
+  </data>
+  <data name="plAuthorize.Text" xml:space="preserve">
+    <value>تأیید عضویت:</value>
+  </data>
+  <data name="plAuthorize.Help" xml:space="preserve">
+    <value>تأیید عضویت این کاربر</value>
+  </data>
+  <data name="plNotify.Text" xml:space="preserve">
+    <value>آگاهسازی:</value>
+  </data>
+  <data name="plNotify.Help" xml:space="preserve">
+    <value>یک ایمیل آگاهسازی به آدرس ایمیل کاربر ارسال شود.</value>
+  </data>
+  <data name="CreateUser.Text" xml:space="preserve">
+    <value>ساخت کاربر</value>
+  </data>
+  <data name="plPassword.Text" xml:space="preserve">
+    <value>کلمه‌عبور:</value>
+  </data>
+  <data name="plPassword.Help" xml:space="preserve">
+    <value>کلمه‌عبوری را برای این کاربر وارد نمایی</value>
+  </data>
+  <data name="plConfirm.Text" xml:space="preserve">
+    <value>تکرار کلمه‌عبور: </value>
+  </data>
+  <data name="plConfirm.Help" xml:space="preserve">
+    <value>به منظور اطمینان از تایپ صحیح کلمه‌عبور، آن را مجددا وارد نمایید.</value>
+  </data>
+  <data name="Password.Text" xml:space="preserve">
+    <value>کلمه‌عبور</value>
+  </data>
+  <data name="PasswordHelpUser.Text" xml:space="preserve">
+    <value>کلمه‌عبور را وارد نمایید</value>
+  </data>
+  <data name="PasswordHelpAdmin.Text" xml:space="preserve">
+    <value>در صورت تمایل کلمه‌عبوری را برای این کاربر وارد کنید، یا به برنامه اجازه دهید تا به صورت تصادفی کلمه‌عبوری را تولید کند.</value>
+  </data>
+  <data name="plRandom.Text" xml:space="preserve">
+    <value>کلمه‌عبور تصادفی</value>
+  </data>
+  <data name="plRandom.Help" xml:space="preserve">
+    <value>برای تولید یک کلمه‌عبور تصادفی این گزینه را انتخاب نمایید.</value>
+  </data>
+  <data name="InvalidCaptcha.Text" xml:space="preserve">
+    <value>کد امنیتی نادرست است</value>
+  </data>
+  <data name="CaptchaText.Text" xml:space="preserve">
+    <value>کد نمایش داده شده را در فیلد زیر وارد نمایید</value>
+  </data>
+  <data name="UnRegister.Text" xml:space="preserve">
+    <value>لغو عضویت</value>
+  </data>
+  <data name="Delete.Text" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="cmdRemove.Text" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="cmdRestore.Text" xml:space="preserve">
+    <value>بازیابی</value>
+  </data>
+  <data name="ConfirmUnRegister.Text" xml:space="preserve">
+    <value>آیا از لغو اشتراک کاربر اطمینان دارید؟</value>
+  </data>
+  <data name="plQuestion.Text" xml:space="preserve">
+    <value>سوال کلمه‌عبور:</value>
+  </data>
+  <data name="plQuestion.Help" xml:space="preserve">
+    <value>سوالی را جهت استفاده هنگام بازیابی کلمه‌عبور وارد نمایید</value>
+  </data>
+  <data name="plAnswer.Text" xml:space="preserve">
+    <value>پاسخ سوال:</value>
+  </data>
+  <data name="plAnswer.Help" xml:space="preserve">
+    <value>پاسخ سوال کلمه‌عبور را وارد نمایید.</value>
+  </data>
+  <data name="ComparePasswordsValidator.ErrorMessage" xml:space="preserve">
+    <value>کلمه‌عبور و تکرار آن باید یکسان باشد.</value>
+  </data>
+  <data name="HideSiteList.Text">
+    <value>مخفی‌سازی لیست سایت‌ها</value>
+  </data>
+  <data name="UpdateUserName.Text">
+    <value>توجه: این کاربر عضو {0} سایت‌ می‌باشد.</value>
+  </data>
+  <data name="ViewSiteList.Text">
+    <value>مشاهده لیست سایت‌ها</value>
+  </data>
+</root>

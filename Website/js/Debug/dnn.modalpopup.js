@@ -171,7 +171,7 @@
 				$modal[0].src = url;
 
                 if (typeof $.ui.dialog.prototype.options.open === 'function')
-                    $.ui.dialog.prototype.options.open();
+                    $.ui.dialog.prototype.options.open.apply(this, arguments);
             };
 			
             if (!isMobile) {
@@ -241,6 +241,7 @@
                     refresh: refresh,
                     showReturn: showReturn,
                     closingUrl: closingUrl,
+                    minHeight: height,
                     position: { my: "top", at: "top" },
                     draggable: false,
 					open: function() { 

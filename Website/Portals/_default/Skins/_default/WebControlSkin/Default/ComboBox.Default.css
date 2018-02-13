@@ -1,6 +1,12 @@
 /* RadComboBox Default skin */
 /*global*/
 
+.dnnFormItem select {
+    width: 47%;
+    margin-bottom: 18px;
+    max-width: 445px;
+}
+
 .RadComboBox_Default, .RadComboBox_Default .rcbInput, .RadComboBoxDropDown_Default {
     font-size: 12px; /*font-family:Verdana, Arial, Helvetica, sans-serif;*/
     color: #999; /*padding: 8px; 	border: 1px solid #c9c9c9;*/
@@ -269,3 +275,7 @@ div.RadComboBoxDropDown_Default .rcbHeader {
 /* START Telerik.Web.UI.Skins.Default.TreeView.Default.css */
 .RadTreeView_Default,.RadTreeView_Default a.rtIn,.RadTreeView_Default .rtEdit .rtIn input{color:#000;font:12px/18px "Segoe UI",Arial,sans-serif}.RadTreeView_Default .rtPlus,.RadTreeView_Default .rtMinus{background-image:url('Images/PlusMinus.png')}.RadTreeView_Default .rtChecked,.RadTreeView_Default .rtUnchecked,.RadTreeView_Default .rtIndeterminate{background-image:url('Images/radFormToggleSprite.png')}.RadTreeView_Default .rtHover .rtIn{color:#000;border-color:#b5b5b5 #b5b5b5 #9e9e9e;background-color:#C5C5C5;background-image:url('Images/ItemHoveredBg.png')}.RadTreeView_Default .rtSelected .rtIn{color:#fff;border-color:#8d8d8d #7e7e7e #6c6c6c;background-color:#828282;background-image:url('Images/ItemSelectedBg.png')}.RadTreeView_Default .rtSelected .rtLoadingBefore,.RadTreeView_Default .rtSelected .rtLoadingAfter,.RadTreeView_Default .rtSelected .rtLoadingBelow{color:#333}.RadTreeView_Default .rtLoadingIcon{background-image:url('Images/LoadingIcon.gif')}.RadTreeView_Default .rtLI .rtEdit .rtIn{border-color:#6c6c6c;background:#fff}.RadTreeView_Default_disabled .rtIn,.RadTreeView_Default .rtDisabled .rtIn{color:#ccc}.RadTreeView_Default .rtLines .rtLI,.RadTreeView_Default .rtLines .rtFirst .rtUL{background-image:url('Images/rtvFirstNodeSpan.png')}.RadTreeView_Default_rtl .rtLines .rtLI,.RadTreeView_Default_rtl .rtLines .rtFirst .rtUL{background-image:url('Images/rtvFirstNodeSpan_rtl.png')}.RadTreeView_Default .rtLines .rtFirst,.RadTreeView_Default .rtLines .rtFirst .rtUL{background-image:url('Images/rtvFirstNodeSpan.png')}.RadTreeView_Default_rtl .rtLines .rtFirst,.RadTreeView_Default_rtl .rtLines .rtFirst .rtUL{background-image:url('Images/rtvFirstNodeSpan.png')}.RadTreeView_Default .rtLines .rtLast,.RadTreeView_Default .rtLines .rtLast .rtUL{background-image:none}.RadTreeView_Default .rtLines .rtTop{background-image:url('Images/rtvTopLine.png')}.RadTreeView_Default_rtl .rtLines .rtTop{background-image:url('Images/rtvTopLine_rtl.png')}.RadTreeView_Default .rtLines .rtMid{background-image:url('Images/rtvMiddleLine.png')}.RadTreeView_Default_rtl .rtLines .rtMid{background-image:url('Images/rtvMiddleLine_rtl.png')}.RadTreeView_Default .rtLines .rtBot{background-image:url('Images/rtvBottomLine.png')}.RadTreeView_Default_rtl .rtLines .rtBot{background-image:url('Images/rtvBottomLine_rtl.png')}.RadTreeView_Default .rtLines .rtLast .rtTop{background-image:url('Images/rtvSingleLine.png')}.RadTreeView_Default_rtl .rtLines .rtLast .rtTop{background-image:url('Images/rtvSingleLine_rtl.png')}
 /* END Telerik.Web.UI.Skins.Default.TreeView.Default.css */
+
+/* ===========   dnnsoftware.ir   =========== */
+
+.rtl .RadComboBoxDropDown_Default_rtl .jspScrollable .jspContainer .rcbList{ margin: 0 !important;}

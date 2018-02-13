@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portals", "Portals", "{F4EBAEA6-F4F5-4215-9B84-F11EE8298E7F}"
 EndProject
@@ -300,5 +300,8 @@ Global
 		{1EDD16FA-4A6D-44CB-813E-04F36354A959} = {F008FB3A-586D-4339-98D1-00A990006429}
 		{F30E7ACF-674E-465A-B1A8-BB6E80428CDF} = {DFCDD07F-8F2E-4D88-A3C3-E4E2554816B5}
 		{F8E776BA-042B-48EB-B7BA-C6BB0E101542} = {DFCDD07F-8F2E-4D88-A3C3-E4E2554816B5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DF3F6B36-EF03-489C-BEC5-0BDC97E513C9}
 	EndGlobalSection
 EndGlobal

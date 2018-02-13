@@ -115,3 +115,14 @@ Desktop.ini
 [Ww]ebsite/[Pp]ortals/_default/[Ll]ogs
 [Ww]ebsite/[Pp]ortals/_default/[Ss]kins/[Xx]cillion/
 [Ww]ebsite/[Pp]ortals/_default/[Cc]ontainers/[Xx]cillion/
+/DevSamples/MyPaymentMethod/bin
+/DevSamples/MyViewSet/bin
+/Website/admin/Portal/App_LocalResources
+/Website/admin/Menus/ModuleActions/fonts
+/Website/admin/Menus/ModuleActions
+/Website/admin/Modules
+/Website/admin/Security
+/Website/admin/Skins/App_LocalResources
+/Website/admin/Tabs/App_LocalResources
+/Website/admin/Tabs/module.rtl.css
+/Website/admin/Skins

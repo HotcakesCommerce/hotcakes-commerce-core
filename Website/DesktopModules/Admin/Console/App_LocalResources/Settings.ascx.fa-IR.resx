@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ControlTitle_settings.Text" xml:space="preserve">
+    <value>تنظیمات کنسول</value>
+  </data>
+  <data name="ModuleHelp.Text" xml:space="preserve">
+    <value>&lt;p&gt;The console module displays child pages as icons and links, or categories to assist in navigation. The console module has 4 different display modes:
+&lt;ul&gt;&lt;li&gt;small icons with details as tooltip (Small Icons, Simple View)&lt;/li&gt;
+&lt;li&gt;large icons details as tooltips (Large Icons, Simple View)&lt;/li&gt;
+&lt;li&gt;small icons list with details (Small Icons, Detailed View)&lt;/li&gt;
+&lt;li&gt;large icon list with details (Large Icons, Detailed View)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/P&gt;
+&lt;h3&gt;Page Settings the console module depends on:&lt;/h3&gt;
+&lt;table cellpadding="4" border="1" style="border:solid 1px #dcdcdc;border-collapse:collapse;"&gt;
+&lt;tr&gt;&lt;td nowrap="nowrap"&gt;Page Name&lt;/td&gt;&lt;td&gt;The Page Name is shown as the link title.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td nowrap="nowrap"&gt;Page Description&lt;/td&gt;&lt;td&gt;The Page Description is shown as the tooltip or detail.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td nowrap="nowrap"&gt;Disabled&lt;/td&gt;&lt;td&gt;Category titles are shown if the page has 'Disabled' checked. Child pages of the disabled page will be shown under the title.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td nowrap="nowrap"&gt;Icon File&lt;/td&gt;&lt;td&gt;This icon is used in small icon views.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td nowrap="nowrap"&gt;Large Icon File&lt;/td&gt;&lt;td&gt;This icon is used in large icon views.&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;i&gt;Tip: 'Include in menu' setting will hide pages from the menu but not the console.&lt;/i&gt;
+&lt;br /&gt;&lt;br /&gt;
+&lt;h3&gt;Console Module Settings&lt;/h3&gt;
+&lt;table cellpadding="4" border="1" style="border:solid 1px #dcdcdc;border-collapse:collapse;"&gt;
+&lt;tr&gt;&lt;td nowrap="nowrap"&gt;Show children of&lt;/td&gt;&lt;td&gt;Selecting a page will display all child pages of that page. Leave this field blank to display all child pages for the current page.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td nowrap="nowrap"&gt;Default icon size&lt;/td&gt;&lt;td&gt;Determines the icon size.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td nowrap="nowrap"&gt;Allow icon resize&lt;/td&gt;&lt;td&gt;Allow the user to resize the icons.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td nowrap="nowrap"&gt;Default view&lt;/td&gt;&lt;td&gt;Determines the default view. Simple view will show icons with page descriptions as tooltips. Detailed view will show a list with descriptions for each item.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td nowrap="nowrap"&gt;Allow view change&lt;/td&gt;&lt;td&gt;Allow the user to switch between detailed and simple views.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td nowrap="nowrap"&gt;Show tooltip&lt;/td&gt;&lt;td&gt;Show a tooltip with detailed description when hovering over icons in Simple View.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td nowrap="nowrap"&gt;Width&lt;/td&gt;&lt;td&gt;Leave this value empty to allow the icons to expand horizontally. Set this value to minimize the width of the console. For example, set this value to 400 for 2 columns of icons.&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;i&gt;Tip: You can prevent users from changing the layout of the page by un-checking 'Allow icon resize' and 'Allow view change'.&lt;/i&gt;</value>
+  </data>
+  <data name="AllowResize.Help" xml:space="preserve">
+    <value>مجوز برای تغییر سایز آیکون ها</value>
+  </data>
+  <data name="AllowResize.Text" xml:space="preserve">
+    <value>امکان تغییر اندازه آیکون</value>
+  </data>
+  <data name="AllowViewChange.Help" xml:space="preserve">
+    <value>مجوز تغییر حالت نمایش از نمایش ساده به نمایش جزییات.</value>
+  </data>
+  <data name="AllowViewChange.Text" xml:space="preserve">
+    <value>اجازه تغییر نمایش</value>
+  </data>
+  <data name="DefaultSize.Help" xml:space="preserve">
+    <value>سایز آیکون ها را تعریف نمایید.</value>
+  </data>
+  <data name="DefaultSize.Text" xml:space="preserve">
+    <value>اندازه پیش‌فرض آیکون</value>
+  </data>
+  <data name="DefaultView.Help" xml:space="preserve">
+    <value>نوع نمایش پیش فرض را مشخص نمایید. نمایش ساده آیکون ها را به همراه tooltipی از شرح صفحه نمایش می دهد. نمایش جزییات لیستی را به همراه توضیحات برای هر آیتم نمایش می دهد. </value>
+  </data>
+  <data name="DefaultView.Text" xml:space="preserve">
+    <value>نمایش پیش‌فرض</value>
+  </data>
+  <data name="ParentTab.Help" xml:space="preserve">
+    <value>انتخاب یک صفحه باعث نمایش تمام فرزندان آن می شود. برای نمایش فرزندان صفحه جاری این گزینه را خالی بگذارید. </value>
+  </data>
+  <data name="ParentTab.Text" xml:space="preserve">
+    <value>نمایش فرزندان</value>
+  </data>
+  <data name="Hide.Text" xml:space="preserve">
+    <value>نمایش ساده</value>
+  </data>
+  <data name="IconFile.Text" xml:space="preserve">
+    <value>آیکون کوچک (16px)</value>
+  </data>
+  <data name="IconFileLarge.Text" xml:space="preserve">
+    <value>آیکون بزرگ (32px)</value>
+  </data>
+  <data name="Show.Text" xml:space="preserve">
+    <value>نمایش جزییات</value>
+  </data>
+  <data name="ShowTooltip.Help" xml:space="preserve">
+    <value>درزمانی که در نمایش ساده موس بر روی آیکون می رود یک tooltip از توضیحات آیتم نمایش دهد. </value>
+  </data>
+  <data name="ShowTooltip.Text" xml:space="preserve">
+    <value>نمایش راهنما</value>
+  </data>
+  <data name="ConsoleWidth.Help" xml:space="preserve">
+    <value>در صورت خالی گذاشتن این گزینه امکان گسترش افقی آیکون موجود می باشد. برای Minimize شدن عرض کنسول مقدار مورد نظر را برای این گزینه قرار دهید، برای نمونه مقدار این گزینه را 400 قرار دهید.</value>
+  </data>
+  <data name="ConsoleWidth.Text" xml:space="preserve">
+    <value>عرض</value>
+  </data>
+  <data name="Friends.Text">
+    <value>دوستان</value>
+  </data>
+  <data name="Group.Text">
+    <value>گروه</value>
+  </data>
+  <data name="IconNone.Text">
+    <value>بدون آیکن</value>
+  </data>
+  <data name="IncludeParent.Help">
+    <value>برای گنجاندن صفحه والد در نمایه این گزینه را انتخاب نمایید.</value>
+  </data>
+  <data name="IncludeParent.Text">
+    <value>نمایش صفحه والد</value>
+  </data>
+  <data name="Mode.Help">
+    <value>حالت این ماژول را انتخاب نمایید</value>
+  </data>
+  <data name="Mode.Text">
+    <value>حالت</value>
+  </data>
+  <data name="Normal.Text">
+    <value>طبیعی</value>
+  </data>
+  <data name="Profile.Text">
+    <value>پروفایل</value>
+  </data>
+  <data name="tabsLabel.Help">
+    <value>می‌توانید نمایان بودن صفحات مستقل را مدیریت نمایید</value>
+  </data>
+  <data name="tabsLabel.Text">
+    <value>تنظیمات قابلیت نمایش صفحه</value>
+  </data>
+  <data name="User.Text">
+    <value>کاربر</value>
+  </data>
+  <data name="IncludeHiddenPages.Help">
+    <value>برای گنجاندن صفحه‌های مخفی در نمایه این گزینه را انتخاب نمایید.</value>
+  </data>
+  <data name="IncludeHiddenPages.Text">
+    <value>نمایش صفحه‌های مخفی</value>
+  </data>
+  <data name="Members.Text">
+    <value>اعضا</value>
+  </data>
+  <data name="OrderTabsByHierarchy.Help">
+    <value>When set to true the page list will be reordered to move pages which have child pages to the end of list.  This is done so that pages with the same level will display in same area of the console module.</value>
+  </data>
+  <data name="OrderTabsByHierarchy.Text">
+    <value>مرتب‌سازی وراثتی موارد</value>
+  </data>
+  <data name="Owner.Text">
+    <value>مالک</value>
+  </data>
+</root>

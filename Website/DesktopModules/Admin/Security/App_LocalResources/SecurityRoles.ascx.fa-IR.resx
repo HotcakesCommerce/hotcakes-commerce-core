@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+	This file is localized by K e r m a n i / dnnsoftware . ir
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="UserName.Header" xml:space="preserve">
+    <value>نام‌کاربری</value>
+  </data>
+  <data name="SecurityRole.Header" xml:space="preserve">
+    <value>نقش امنیتی</value>
+  </data>
+  <data name="ExpiryDate.Header" xml:space="preserve">
+    <value>تاریخ انقضاء</value>
+  </data>
+  <data name="plUsers.Text" xml:space="preserve">
+    <value>نام‌کاربری</value>
+  </data>
+  <data name="plUsers.Help" xml:space="preserve">
+    <value>برای ثبت نام کاربری را انتخاب نمایید و تصدیق را انتخاب نمایید</value>
+  </data>
+  <data name="cmdValidate.Text" xml:space="preserve">
+    <value>تصدیق</value>
+  </data>
+  <data name="plRoles.Text" xml:space="preserve">
+    <value>نقش امنیتی</value>
+  </data>
+  <data name="plRoles.Help" xml:space="preserve">
+    <value>نقش امنیتی را انتخاب نمایید</value>
+  </data>
+  <data name="plExpiryDate.Text" xml:space="preserve">
+    <value>تاریخ انقضاء</value>
+  </data>
+  <data name="plExpiryDate.Help" xml:space="preserve">
+    <value>زمانی که می خواهید کاربر از این نقش خلع شود، را  وارد نمایید (انتخابی) درصورتی که نمی خواهید این نقش منقضی گردد این گزینه را خالی بگذارید.</value>
+  </data>
+  <data name="SendNotification.Text" xml:space="preserve">
+    <value>ارسال پیام آگاهسازی؟</value>
+  </data>
+  <data name="cmdAdd.Text" xml:space="preserve">
+    <value>افزودن نقش</value>
+  </data>
+  <data name="valExpiryDate.Text" xml:space="preserve">
+    <value>تاریخ انقضاء نامعتبر است</value>
+  </data>
+  <data name="RoleRemoveError.Text" xml:space="preserve">
+    <value>شما نمی توانید مدیریت پورتال یا نقش کاربر ثبت نام شده (Registered User) را حذف نمایید.</value>
+  </data>
+  <data name="ControlTitle_user roles.Text" xml:space="preserve">
+    <value>نقش‌های کاربر</value>
+  </data>
+  <data name="UserTitle.Text" xml:space="preserve">
+    <value>مدیریت نقش‌های کاربر: {0}</value>
+  </data>
+  <data name="RoleTitle.Text" xml:space="preserve">
+    <value>مدیریت کاربران موجود در نقش : {0}</value>
+  </data>
+  <data name="ModuleHelp.Text" xml:space="preserve">
+    <value>&lt;h1&gt;درباره مدیریت نقش های امنیتی &lt;/h1&gt;&lt;p&gt;مدیران می توانند نقش های امنیتی تعریف شده در پورتال خود را مدیریت نمایند. این ماژول امکان مدیریت کاربرانی که به نقش ها نسبت داده شده اند را نیز می دهد.&lt;/p&gt;</value>
+  </data>
+  <data name="AddUser.Text" xml:space="preserve">
+    <value>افزودن کاربر به نقش</value>
+  </data>
+  <data name="AddRole.Text" xml:space="preserve">
+    <value>افزودن نقش به کاربر</value>
+  </data>
+  <data name="EffectiveDate.Header" xml:space="preserve">
+    <value>تاریخ موثر</value>
+  </data>
+  <data name="plEffectiveDate.Text" xml:space="preserve">
+    <value>تاریخ موثر</value>
+  </data>
+  <data name="plEffectiveDate.Help" xml:space="preserve">
+    <value>زمانی که می خواهید این نقش به کاربران نسبت داده شود را وارد نمایید (انتخابی) جهت اختصاص بلافاصله نقش به کاربر، این گزینه را خالی بگذارید.</value>
+  </data>
+  <data name="valEffectiveDate.Text" xml:space="preserve">
+    <value>تاریخ موثر نامعتبر است</value>
+  </data>
+  <data name="valDates.Text" xml:space="preserve">
+    <value>تاریخ انقضاء می‌بایست بزرگتر از تاریخ موثر باشد</value>
+  </data>
+  <data name="UpdateRole.Text" xml:space="preserve">
+    <value>به‌روزرسانی نقش کاربر</value>
+  </data>
+  <data name="NotAuthorized.Text" xml:space="preserve">
+    <value>شما مجوز ویرایش این نقش را ندارید</value>
+  </data>
+  <data name="DeleteUsersFromRole.Text" xml:space="preserve">
+    <value>آیا مطمئنید که می خواهید کاربر '{0}' از نقش '{1}' حذف نمایید؟</value>
+  </data>
+  <data name="DeleteRoleFromUser.Text" xml:space="preserve">
+    <value>آیا مطمئنید که می خواهید نقش '{1}' را از '{0}' حذف نمایید؟ </value>
+  </data>
+  <data name="IsOwner.Header" xml:space="preserve">
+    <value>مالک است</value>
+  </data>
+  <data name="lblIsOwner.Text" xml:space="preserve">
+    <value>مالک است</value>
+  </data>
+  <data name="lblIsOwner.Help" xml:space="preserve">
+    <value>افزودن این کاربر به عنوان مالک گروه</value>
+  </data>
+</root>

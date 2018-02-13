@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="cmdAdd.Text">
+    <value xml:space="preserve">Skript hinzufügen</value>
+  </data>
+  <data name="createNewScript.Text">
+    <value xml:space="preserve">Um ein neues Razor-Skript zu erstellen, wählen Sie den Dateityp und geben Sie einen neuen Dateinamen ein. Die  Datei wird im Ordner Scripts erstellt.</value>
+  </data>
+  <data name="CSHTML.Text">
+    <value xml:space="preserve">CSHtml-Datei (C#)</value>
+  </data>
+  <data name="fileNameLabel.Help">
+    <value xml:space="preserve">Geben Sie einen Dateinamen für das Skript an. Der Dateinamen wird durch einen vorangestellten Unterstrich '_' ergänzt.</value>
+  </data>
+  <data name="fileNameLabel.Text">
+    <value xml:space="preserve">Dateiname:</value>
+  </data>
+  <data name="fileTypeLabel.Help">
+    <value xml:space="preserve">Wählen Sie, welchen Typ von Razor Skript Sie erstellen wollen (CSHtml für C# oder VBHtml für VB.Net)</value>
+  </data>
+  <data name="fileTypeLabel.Text">
+    <value xml:space="preserve">Dateityp:</value>
+  </data>
+  <data name="NewScript.Text">
+    <value xml:space="preserve">&lt;h2&gt;Neues Razor-Skript&lt;/h2&gt;</value>
+  </data>
+  <data name="VBHTML.Text">
+    <value xml:space="preserve">VBHtml-Datei (VB)</value>
+  </data>
+</root>

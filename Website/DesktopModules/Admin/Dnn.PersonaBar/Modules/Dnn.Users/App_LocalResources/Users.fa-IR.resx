@@ -1,0 +1,543 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+   Microsoft ResX Schema
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="All.Text" xml:space="preserve">
+    <value>همه</value>
+  </data>
+  <data name="Deleted.Text" xml:space="preserve">
+    <value>حذف شده</value>
+  </data>
+  <data name="nav_Users.Text" xml:space="preserve">
+    <value>کاربران</value>
+  </data>
+  <data name="RegisteredUsers.Text" xml:space="preserve">
+    <value>کاربران ثبت نام شده</value>
+  </data>
+  <data name="SuperUsers.Text" xml:space="preserve">
+    <value>مدیر ارشد</value>
+  </data>
+  <data name="UnAuthorized.Text" xml:space="preserve">
+    <value>غیر مجاز</value>
+  </data>
+  <data name="SearchPlaceHolder.Text" xml:space="preserve">
+    <value>جستجو ...</value>
+  </data>
+  <data name="AccountSettings.Text" xml:space="preserve">
+    <value>تنظیمات حساب کاربری</value>
+  </data>
+  <data name="Add.Text" xml:space="preserve">
+    <value>افزودن</value>
+  </data>
+  <data name="AddRolePlaceHolder.Text" xml:space="preserve">
+    <value>برای افزودن نقش مدیریتی به کاربر ، نقش مورد نظر را وارد کنید.</value>
+  </data>
+  <data name="Approved.Help" xml:space="preserve">
+    <value>آیا کاربر برای این سایت تأیید شده است.</value>
+  </data>
+  <data name="Approved.Text" xml:space="preserve">
+    <value>تأیید شده است:</value>
+  </data>
+  <data name="Authorized.Header" xml:space="preserve">
+    <value>تأیید شده</value>
+  </data>
+  <data name="Authorized.Text" xml:space="preserve">
+    <value>مجاز</value>
+  </data>
+  <data name="btnApply.Text" xml:space="preserve">
+    <value>اعمال کردن</value>
+  </data>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>لغو کردن</value>
+  </data>
+  <data name="btnCreate.Text" xml:space="preserve">
+    <value>ایجاد</value>
+  </data>
+  <data name="btnSave.Text" xml:space="preserve">
+    <value>ذخیره</value>
+  </data>
+  <data name="Cancel.Text" xml:space="preserve">
+    <value>لغو کردن</value>
+  </data>
+  <data name="CannotAddUser.Text" xml:space="preserve">
+    <value>تنظیمات شما کاربر را ملزم به تعیین یک سوال و جواب برای بازیابی کلمه‌عبور می‌نماید. با توجه به اینکه این ویژگی با افزودن کاربر توسط مدیر سایت در تضاد است، در این سایت غیرفعال می‌باشد.</value>
+  </data>
+  <data name="CannotChangePassword.Text" xml:space="preserve">
+    <value>تنظیمات شما کاربر را ملزم به وارد کردن سوال و جواب برای یادآوری کلمه‌عبور می‌نماید. پس از اعمال این تنظیم، مدیران سایت دیگر قادر به تغییر کلمه‌عبور کاربر نخواهند بود. به همین دلیل این امکان در حال حاضر در این وب‌سایت غیرفعال می‌باشد.</value>
+  </data>
+  <data name="ChangePassword.Text" xml:space="preserve">
+    <value>تغییر رمز عبور</value>
+  </data>
+  <data name="ChangeSuccessful.Text" xml:space="preserve">
+    <value>رمز عبور با موفقیت تغییر کرد.</value>
+  </data>
+  <data name="cmdAuthorize.Text" xml:space="preserve">
+    <value>تأیید کاربر</value>
+  </data>
+  <data name="cmdPassword.Text" xml:space="preserve">
+    <value>اجبار به تغییر رمز عبور</value>
+  </data>
+  <data name="cmdUnAuthorize.Text" xml:space="preserve">
+    <value>غیرفعال نمودن</value>
+  </data>
+  <data name="cmdUnLock.Text" xml:space="preserve">
+    <value>بازکردن حساب</value>
+  </data>
+  <data name="Created.Header" xml:space="preserve">
+    <value>تاریخ ایجاد</value>
+  </data>
+  <data name="CreatedDate.Help" xml:space="preserve">
+    <value>تاریخ ایجاد حساب کاربری</value>
+  </data>
+  <data name="CreatedDate.Text" xml:space="preserve">
+    <value>تاریخ عضویت:</value>
+  </data>
+  <data name="Delete.Text" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="DeleteRole.Confirm" xml:space="preserve">
+    <value>آیا نقش '{0}' از  '{1}' حذف شود؟</value>
+  </data>
+  <data name="DeleteUser.Confirm" xml:space="preserve">
+    <value>آیا از حذف این کاربر مطمئن هستید؟ </value>
+  </data>
+  <data name="DeleteUser.Text" xml:space="preserve">
+    <value>حذف کاربر</value>
+  </data>
+  <data name="DemoteFromSuperUser.Text" xml:space="preserve">
+    <value>تبدیل به کاربر عادی</value>
+  </data>
+  <data name="DisplayName.Help" xml:space="preserve">
+    <value>نامی که می خواهید در سایت نمایش داده شود را وارد نمایید.</value>
+  </data>
+  <data name="DisplayName.Text" xml:space="preserve">
+    <value>نام نمایشی:</value>
+  </data>
+  <data name="Email.Header" xml:space="preserve">
+    <value>ایمیل:</value>
+  </data>
+  <data name="Email.Help" xml:space="preserve">
+    <value>آدرس ایمیل معتبری را وارد نمایید</value>
+  </data>
+  <data name="Email.Text" xml:space="preserve">
+    <value>آدرس ایمیل:</value>
+  </data>
+  <data name="Expires.Header" xml:space="preserve">
+    <value>تاریخ انقضا</value>
+  </data>
+  <data name="FirstName.Help" xml:space="preserve">
+    <value>نام را وارد نمایید</value>
+  </data>
+  <data name="FirstName.Text" xml:space="preserve">
+    <value>نام:</value>
+  </data>
+  <data name="ForceChangePassword.Text" xml:space="preserve">
+    <value>اجبار به تغییر رمز عبور</value>
+  </data>
+  <data name="IsDeleted.Help" xml:space="preserve">
+    <value>آیا این کاربر حذف شده</value>
+  </data>
+  <data name="IsDeleted.Text" xml:space="preserve">
+    <value>حذف شده است:</value>
+  </data>
+  <data name="IsOnLine.Help" xml:space="preserve">
+    <value>آیا کاربر درحال حاضر آنلاین است</value>
+  </data>
+  <data name="IsOnLine.Text" xml:space="preserve">
+    <value>کاربر آنلاین است:</value>
+  </data>
+  <data name="IsOwner.Text" xml:space="preserve">
+    <value>مالک است</value>
+  </data>
+  <data name="LastActivityDate.Help" xml:space="preserve">
+    <value>تاریخ آخرین فعالیت این کاربر</value>
+  </data>
+  <data name="LastActivityDate.Text" xml:space="preserve">
+    <value>تاریخ آخرین فعالیت:</value>
+  </data>
+  <data name="LastLockoutDate.Help" xml:space="preserve">
+    <value>تاریخ آخرین باری که کاربر به دلیل چندین ورود به سایت ناموفق قفل شده است</value>
+  </data>
+  <data name="LastLockoutDate.Text" xml:space="preserve">
+    <value>تاریخ آخرین زمان قفل:</value>
+  </data>
+  <data name="LastLoginDate.Help" xml:space="preserve">
+    <value>تاریخ آخرین باری که کاربر وارد شده است</value>
+  </data>
+  <data name="LastLoginDate.Text" xml:space="preserve">
+    <value>تاریخ آخرین ورود:</value>
+  </data>
+  <data name="LastPasswordChangeDate.Help" xml:space="preserve">
+    <value>تاریخ آخرین باری که کاربر کلمه‌عبور خود را تغییر داد</value>
+  </data>
+  <data name="LastPasswordChangeDate.Text" xml:space="preserve">
+    <value>تاریخ آخرین تغییر کلمه‌عبور:</value>
+  </data>
+  <data name="LockedOut.Help" xml:space="preserve">
+    <value>آیا کاربر به دلیل تعداد زیاد ورود ناموفق قفل شده است</value>
+  </data>
+  <data name="LockedOut.Text" xml:space="preserve">
+    <value>قفل شده است:</value>
+  </data>
+  <data name="ManageProfile.title" xml:space="preserve">
+    <value>تنظیمات پروفایل</value>
+  </data>
+  <data name="ManageRoles.title" xml:space="preserve">
+    <value>نقش کاربر</value>
+  </data>
+  <data name="ManageSettings.title" xml:space="preserve">
+    <value>تنظیمات حساب کاربری</value>
+  </data>
+  <data name="Name.Header" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="Never.Text" xml:space="preserve">
+    <value>هیچوقت قفل نشده</value>
+  </data>
+  <data name="NoRoles.Text" xml:space="preserve">
+    <value>نقش مدیریتی یافت نشد!</value>
+  </data>
+  <data name="OptionUnavailable.Text" xml:space="preserve">
+    <value>بازیابی کلمه‌عبور در حال حاضر ممکن نمی‌باشد.</value>
+  </data>
+  <data name="PasswordInvalid.Text" xml:space="preserve">
+    <value>شما باید یک رمز عبور معتبر وارد کنید. در صورت نیاز با مدیر سایت تماس بگیرید.</value>
+  </data>
+  <data name="PasswordManagement.Text" xml:space="preserve">
+    <value>مدیریت رمز عبور</value>
+  </data>
+  <data name="PasswordResetFailed.Text" xml:space="preserve">
+    <value>رمز عبور جدید به دلایل امنیتی پذیرفته نشد. لطفا رمز جدیدی که طولانی و به اندازه کافی پیچیده باشد را انتخاب نمایید.</value>
+  </data>
+  <data name="PasswordResetFailed_PasswordInHistory.Text" xml:space="preserve">
+    <value>رمز عبور جدید به دلایل امنیتی پذیرفته نشد. لطفا رمز جدیدی را انتخاب نمایید.</value>
+  </data>
+  <data name="PasswordSent.Text" xml:space="preserve">
+    <value>درصورتیکه نام‌کاربری وارد شده صحیح باشید، بزودی ایمیلی حاوی لینک بازنشانی کلمه‌عبور برای شما ارسال خواهد شد.</value>
+  </data>
+  <data name="NewConfirmMismatch.ErrorMessage" xml:space="preserve">
+    <value>رمز عبور جدید و تایید رمز عبور باید یکسان باشند.</value>
+  </data>
+  <data name="NewConfirm.Help" xml:space="preserve">
+    <value>رمز عبور جدید خود را دوباره وارد کنید.</value>
+  </data>
+  <data name="NewConfirm.Text" xml:space="preserve">
+    <value>تکرار رمز عبور:</value>
+  </data>
+  <data name="NewPassword.Help" xml:space="preserve">
+    <value>رمز عبور جدید را وارد نمایید.</value>
+  </data>
+  <data name="NewPassword.Text" xml:space="preserve">
+    <value>شما باید کلمه‌عبور جدیدی را وارد نمایید.</value>
+  </data>
+  <data name="PromoteToSuperUser.Text" xml:space="preserve">
+    <value>مدیر ارشد کردن</value>
+  </data>
+  <data name="RemoveUser.Confirm" xml:space="preserve">
+    <value>مطمئن هستید که میخواهید این کاربر به طور دائم حذف شود؟</value>
+  </data>
+  <data name="RemoveUser.Text" xml:space="preserve">
+    <value>حذف کاربر به صورت دائم</value>
+  </data>
+  <data name="ResetPassword.Text" xml:space="preserve">
+    <value>ارسال لینک بازنشانی رمز عبور</value>
+  </data>
+  <data name="RestoreUser.Text" xml:space="preserve">
+    <value>بازگرداندن کاربر</value>
+  </data>
+  <data name="Role.Header" xml:space="preserve">
+    <value>نقش مدیریتی</value>
+  </data>
+  <data name="Roles.Title" xml:space="preserve">
+    <value>نقش مدیریتی</value>
+  </data>
+  <data name="rolesPageInfoText.Text" xml:space="preserve">
+    <value>صفحه {0} از {1}</value>
+  </data>
+  <data name="rolesSummaryText.Text" xml:space="preserve">
+    <value>نمایش {0}-{1} از {2}</value>
+  </data>
+  <data name="SendEmail.Text" xml:space="preserve">
+    <value>ارسال ایمیل</value>
+  </data>
+  <data name="Start.Header" xml:space="preserve">
+    <value>شروع</value>
+  </data>
+  <data name="UpdatePassword.Help" xml:space="preserve">
+    <value>ملزم ساختن کاربر به تغییر کلمه‌عبور</value>
+  </data>
+  <data name="UpdatePassword.Text" xml:space="preserve">
+    <value>نیازمند بروز رسانی کلمه‌عبور است:</value>
+  </data>
+  <data name="UserAuthorized.Text" xml:space="preserve">
+    <value>کاربر با موفقیت تأیید شد</value>
+  </data>
+  <data name="UserDeleted.Text" xml:space="preserve">
+    <value>کاربر با موفقیت حذف شد</value>
+  </data>
+  <data name="UserFolder.Help" xml:space="preserve">
+    <value>پوشه ای که فایل های این کاربر ذخیره می شود.</value>
+  </data>
+  <data name="UserFolder.Text" xml:space="preserve">
+    <value>پوشه کاربر:</value>
+  </data>
+  <data name="Username.Help" xml:space="preserve">
+    <value>نام‌کاربری را وارد نمایید. نام کاربری باید حداقل 5 کاراکتر و شامل حروف یا اعداد باشد.</value>
+  </data>
+  <data name="Username.Text" xml:space="preserve">
+    <value>نام‌کاربری:</value>
+  </data>
+  <data name="UserPasswordUpdateChanged.Text" xml:space="preserve">
+    <value>کاربر می بایست در ورود بعدی کلمه‌عبور خود را تغییر دهد.</value>
+  </data>
+  <data name="UserRestored.Text" xml:space="preserve">
+    <value>کاربر با موفقیت بازنشانی شد.</value>
+  </data>
+  <data name="usersPageSizeOptionText.Text" xml:space="preserve">
+    <value>{0} کاربران در هر صفحه</value>
+  </data>
+  <data name="usersSummaryText.Text" xml:space="preserve">
+    <value>نمایش {0}-{1} از {2}</value>
+  </data>
+  <data name="UserUnAuthorized.Text" xml:space="preserve">
+    <value>کاربر با موفقیت به حالت تأیید نشده درآمد.</value>
+  </data>
+  <data name="UserUpdated.Text" xml:space="preserve">
+    <value>بروز رسانی حساب با موفقیت انجام شد.</value>
+  </data>
+  <data name="ViewProfile.Text" xml:space="preserve">
+    <value>مشاهده پروفایل</value>
+  </data>
+  <data name="btnCreateUser.Text" xml:space="preserve">
+    <value>افزودن کاربر جدید</value>
+  </data>
+  <data name="Confirm.Help" xml:space="preserve">
+    <value>برای تایید کردن ، رمز عبور را دوباره وارد کنید.</value>
+  </data>
+  <data name="Confirm.Text" xml:space="preserve">
+    <value>تکرار رمز عبور:</value>
+  </data>
+  <data name="ConfirmMismatch.ErrorMessage" xml:space="preserve">
+    <value>رمز عبور و تکرار رمز عبور باید یکسان باشند.</value>
+  </data>
+  <data name="LastName.Help" xml:space="preserve">
+    <value>نام خانوادگی را وارد کنید.</value>
+  </data>
+  <data name="LastName.Text" xml:space="preserve">
+    <value>نام خانوادگی:</value>
+  </data>
+  <data name="Notify.Text" xml:space="preserve">
+    <value>ارسال ایمیل به کاربر جدید.</value>
+  </data>
+  <data name="Password.Help" xml:space="preserve">
+    <value>کلمه‌عبور را وارد نمایید</value>
+  </data>
+  <data name="Password.Text" xml:space="preserve">
+    <value>کلمه‌عبور</value>
+  </data>
+  <data name="Random.Help" xml:space="preserve">
+    <value>برای تولید رمز عبور تصادفی کلیک کنید.</value>
+  </data>
+  <data name="Random.Text" xml:space="preserve">
+    <value>رمز عبور تصادفی</value>
+  </data>
+  <data name="UserCreated.Text" xml:space="preserve">
+    <value>کاربر جدید با موفقیت ایجاد شد.</value>
+  </data>
+  <data name="Confirm.Required" xml:space="preserve">
+    <value>تکرار رمز عبور ضروری می باشد!</value>
+  </data>
+  <data name="DisplayName.RegExError" xml:space="preserve">
+    <value>نام نمایشی معتبر نمی باشد</value>
+  </data>
+  <data name="DisplayName.Required" xml:space="preserve">
+    <value>وارد کردن نام نمایشی الزامی است</value>
+  </data>
+  <data name="Email.RegExError" xml:space="preserve">
+    <value>شما باید ایمیل معتبری را وارد نمایید</value>
+  </data>
+  <data name="Email.Required" xml:space="preserve">
+    <value>وارد کردن ایمیل الزامی است</value>
+  </data>
+  <data name="FirstName.RegExError" xml:space="preserve">
+    <value>نام وارد شده معتبر نمی‌باشد</value>
+  </data>
+  <data name="FirstName.Required" xml:space="preserve">
+    <value>وارد کردن نام الزامی است</value>
+  </data>
+  <data name="LastName.RegExError" xml:space="preserve">
+    <value>نام خانوادگی نامعتبر است.</value>
+  </data>
+  <data name="LastName.Required" xml:space="preserve">
+    <value>نام خانوادگی الزامی است</value>
+  </data>
+  <data name="NewConfirm.Required" xml:space="preserve">
+    <value>رمز عبور جدید خود را دوباره وارد کنید.</value>
+  </data>
+  <data name="NewPassword.Required" xml:space="preserve">
+    <value>رمز عبور را وارد نمایید.</value>
+  </data>
+  <data name="Password.Required" xml:space="preserve">
+    <value>شما باید کلمه‌عبوری را وارد نمایید</value>
+  </data>
+  <data name="Username.RegExError" xml:space="preserve">
+    <value>نام‌کاربری وارد شده نامعتبر است.</value>
+  </data>
+  <data name="Username.Required" xml:space="preserve">
+    <value>وارد کردن نام‌کاربری الزامی است</value>
+  </data>
+  <data name="noUsers.Text" xml:space="preserve">
+    <value>کاربری یافت نشد.</value>
+  </data>
+  <data name="ShowLabel.Text" xml:space="preserve">
+    <value>نمایش :</value>
+  </data>
+  <data name="DemoteToRegularUser.Text" xml:space="preserve">
+    <value>تغییر به کاربر عادی</value>
+  </data>
+  <data name="InSufficientPermissions.Text" xml:space="preserve">
+    <value>شما سطح دسترسی لازم برای این عمل را ندارید!</value>
+  </data>
+  <data name="InvalidPasswordAnswer.Text" xml:space="preserve">
+    <value>پاسخ رمز عبور نامعتبر است.</value>
+  </data>
+  <data name="RegisterationFailed.Text" xml:space="preserve">
+    <value>ثبت نام انجام نشد. لطفا دوباره امتحان کنید.</value>
+  </data>
+  <data name="UserDeleteError.Text" xml:space="preserve">
+    <value>کاربر حذف نشد.</value>
+  </data>
+  <data name="UsernameNotUnique.Text" xml:space="preserve">
+    <value>نام کاربری باید منحصر به فرد باشد.</value>
+  </data>
+  <data name="UserNotFound.Text" xml:space="preserve">
+    <value>کاربر یافت نشد.</value>
+  </data>
+  <data name="UserRemoveError.Text" xml:space="preserve">
+    <value>نمیتوان این کاربر را حذف کرد!</value>
+  </data>
+  <data name="UserRestoreError.Text" xml:space="preserve">
+    <value>امکان بازنشانی وجود ندارد.</value>
+  </data>
+  <data name="RoleIsNotApproved.Text" xml:space="preserve">
+    <value>نقش مدیریتی انتخاب شده مورد تایید نمی باشد!</value>
+  </data>
+  <data name="LastName.Text2" xml:space="preserve">
+    <value>نام خانوادگی:</value>
+  </data>
+</root>

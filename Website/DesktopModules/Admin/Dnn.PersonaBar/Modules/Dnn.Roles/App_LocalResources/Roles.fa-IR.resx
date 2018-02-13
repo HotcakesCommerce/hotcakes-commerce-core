@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+   Microsoft ResX Schema
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Create.Text" xml:space="preserve">
+    <value>ایجاد یک نقش امنیتی</value>
+  </data>
+  <data name="DuplicateRole.Text" xml:space="preserve">
+    <value>نقش امنیتی با این نام وجود دارد.</value>
+  </data>
+  <data name="nav_Roles.Text" xml:space="preserve">
+    <value>نقش‌های امنیتی</value>
+  </data>
+  <data name="SearchPlaceHolder.Text" xml:space="preserve">
+    <value>جستجوی نقش امنیتی با کلمات کلیدی</value>
+  </data>
+  <data name="Actions.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AllGroups.Text" xml:space="preserve">
+    <value>[همه گروه ها]</value>
+  </data>
+  <data name="Auto.Header" xml:space="preserve">
+    <value>خودکار</value>
+  </data>
+  <data name="GlobalRolesGroup.Text" xml:space="preserve">
+    <value>[نقش‌های سراسری]</value>
+  </data>
+  <data name="GroupName.Header" xml:space="preserve">
+    <value>نام گروه امنیتی</value>
+  </data>
+  <data name="LoadMore.Text" xml:space="preserve">
+    <value>بارگذاری بیشتر</value>
+  </data>
+  <data name="RoleName.Header" xml:space="preserve">
+    <value>نام نقش</value>
+  </data>
+  <data name="Users.Header" xml:space="preserve">
+    <value>کاربران</value>
+  </data>
+  <data name="AutoAssignment.Text" xml:space="preserve">
+    <value>اعطای خودکار</value>
+  </data>
+  <data name="Cancel.Text" xml:space="preserve">
+    <value>لغو</value>
+  </data>
+  <data name="Delete.Text" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="Description.Text" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="NewGroup.Text" xml:space="preserve">
+    <value>گروه جدید</value>
+  </data>
+  <data name="Public.Text" xml:space="preserve">
+    <value>عمومی</value>
+  </data>
+  <data name="plRoleGroups.Text" xml:space="preserve">
+    <value>گروه امنیتی</value>
+  </data>
+  <data name="Save.Text" xml:space="preserve">
+    <value>ذخیره</value>
+  </data>
+  <data name="DuplicateRoleGroup.Text" xml:space="preserve">
+    <value>گروه امنیتی وجود دارد.</value>
+  </data>
+  <data name="GroupName.Required" xml:space="preserve">
+    <value>این فیلد ضروری است.</value>
+  </data>
+  <data name="GroupName.Text" xml:space="preserve">
+    <value>گروه امنیتی</value>
+  </data>
+  <data name="RoleName.Text" xml:space="preserve">
+    <value>نام نقش امنیتی</value>
+  </data>
+  <data name="securityModeListLabel.Text" xml:space="preserve">
+    <value>حالت امنیتی</value>
+  </data>
+  <data name="statusListLabel.Text" xml:space="preserve">
+    <value>وضعیت</value>
+  </data>
+  <data name="DeleteRole.Confirm" xml:space="preserve">
+    <value>آیا از حذف این گروه امنیتی اطمینان دارید؟</value>
+  </data>
+  <data name="NoData.Text" xml:space="preserve">
+    <value>هیچ نقش امنیتی در این گروه وجود ندارد.</value>
+  </data>
+  <data name="RoleName.Required" xml:space="preserve">
+    <value>این فیلد الزامی است.</value>
+  </data>
+  <data name="UpdateGroup.Text" xml:space="preserve">
+    <value>گروه بروز رسانی شد</value>
+  </data>
+  <data name="Add.Text" xml:space="preserve">
+    <value>افزودن</value>
+  </data>
+  <data name="AddUserPlaceHolder.Text" xml:space="preserve">
+    <value>نامی را جهت افزودن کاربری به این نقش وارد کنید</value>
+  </data>
+  <data name="Expires.Header" xml:space="preserve">
+    <value>انقضا</value>
+  </data>
+  <data name="Members.Header" xml:space="preserve">
+    <value>اعضا</value>
+  </data>
+  <data name="PageInfo.Text" xml:space="preserve">
+    <value>صفحه {0} از {1}</value>
+  </data>
+  <data name="PageSummary.Text" xml:space="preserve">
+    <value>نمایش {0} تا {1} از {2}</value>
+  </data>
+  <data name="Start.Header" xml:space="preserve">
+    <value>شروع</value>
+  </data>
+  <data name="Users.Text" xml:space="preserve">
+    <value>کاربران</value>
+  </data>
+  <data name="NoUsers.Text" xml:space="preserve">
+    <value>هیچ کاربری در این نقش امنیتی وجود ندارد.</value>
+  </data>
+  <data name="Search.Text" xml:space="preserve">
+    <value>جستجو</value>
+  </data>
+  <data name="DeleteUser.Confirm" xml:space="preserve">
+    <value>آیا از حذف کاربر از این نقش امنیتی اطمینان دارید؟</value>
+  </data>
+  <data name="DeleteRoleGroup.Confirm" xml:space="preserve">
+    <value>آیا از حذف این گروه امنیتی اطمینان دارید؟</value>
+  </data>
+  <data name="Approved.Text" xml:space="preserve">
+    <value>تایید شده</value>
+  </data>
+  <data name="Both.Text" xml:space="preserve">
+    <value>هردو</value>
+  </data>
+  <data name="Disabled.Text" xml:space="preserve">
+    <value>غیرفعال</value>
+  </data>
+  <data name="Pending.Text" xml:space="preserve">
+    <value>در حال انتظار</value>
+  </data>
+  <data name="SecurityRole.Text" xml:space="preserve">
+    <value>نقش امنیتی</value>
+  </data>
+  <data name="SocialGroup.Text" xml:space="preserve">
+    <value>گروه شبکه اجتماعی</value>
+  </data>
+  <data name="AssignToExistUsers.Text" xml:space="preserve">
+    <value>اعطا به کاربران موجود</value>
+  </data>
+  <data name="ActionCancelled.Message" xml:space="preserve">
+    <value>لغو شده.</value>
+  </data>
+  <data name="AssignToExistUsers.Help" xml:space="preserve">
+    <value>اعطای این نقش به تمام کاربران موجود.</value>
+  </data>
+  <data name="DeleteInconsistency.Error" xml:space="preserve">
+    <value>خطا رخ داده است. لطفا صفحه را رفرش کنید و دوباره امتحان کنید.</value>
+  </data>
+  <data name="DeleteRole.Error" xml:space="preserve">
+    <value>حذف نقش امنیتی با شکست مواجه شد. لطفا بعدا تلاش کنید</value>
+  </data>
+  <data name="DeleteRole.Message" xml:space="preserve">
+    <value>نقش امنیتی با موفقیت حذف شد.</value>
+  </data>
+  <data name="DeleteRoleGroup.Error" xml:space="preserve">
+    <value>حذف گروه امنیتی با شکست مواجه شد. لطفا بعدا تلاش کنید.</value>
+  </data>
+  <data name="DeleteRoleGroup.Message" xml:space="preserve">
+    <value>گروه امنیتی با موفقیت حذف شد.</value>
+  </data>
+  <data name="Description.Help" xml:space="preserve">
+    <value>لطفا یک توضیح برای نقش امنیتی وارد کنید.</value>
+  </data>
+  <data name="lblNewGroup.Text" xml:space="preserve">
+    <value>[گروه جدید]</value>
+  </data>
+  <data name="plRoleGroups.Help" xml:space="preserve">
+    <value>گروهی که این نقش به آن تعلق دارد را انتخاب کنید.</value>
+  </data>
+  <data name="PublicRole.Help" xml:space="preserve">
+    <value>در صورتی که  کاربران می توانند به این نقش امنیتی از طریق صفحه مدیریت حساب کاربری خود مشترک شوند این گزینه را انتخاب کنید</value>
+  </data>
+  <data name="RoleAdded.Error" xml:space="preserve">
+    <value>ایجاد نقش امنیتی با شکست مواجه شد. لطفا بعدا تلاش کنید.</value>
+  </data>
+  <data name="RoleAdded.Message" xml:space="preserve">
+    <value>نقش امنیتی با موفقیت ایجاد شد.</value>
+  </data>
+  <data name="RoleName.Help" xml:space="preserve">
+    <value>لطفا یک نام برای نقش امنیتی وارد کنید.</value>
+  </data>
+  <data name="RoleUpdated.Error" xml:space="preserve">
+    <value>بروز رسانی نقش امنیتی با شکست مواجه شد. لطفا بعدا تلاش کنید.</value>
+  </data>
+  <data name="RoleUpdated.Message" xml:space="preserve">
+    <value>نقش امنیتی با موفقیت بروز رسانی شد.</value>
+  </data>
+  <data name="securityModeListLabel.Help" xml:space="preserve">
+    <value>حالت امنیتی برای این نقش / گروه را انتخاب نمایید.</value>
+  </data>
+  <data name="statusListLabel.Help" xml:space="preserve">
+    <value>یک وضعیت برای این گروه/نقش امنیتی انتخاب کنید.</value>
+  </data>
+  <data name="RoleGroupUpdated.Error" xml:space="preserve">
+    <value>به‌روزرسانی گروه امنیتی با شکست مواجه شد. لطفا بعدا تلاش کنید.</value>
+  </data>
+  <data name="RoleGroupUpdated.Message" xml:space="preserve">
+    <value>گروه امنیتی با موفقیت به‌روز شد</value>
+  </data>
+  <data name="AutoAssignment.Help" xml:space="preserve">
+    <value>آیا می‌خواهید کاربران به صورت خودکار به این نقش اضافه گردند؟</value>
+  </data>
+  <data name="GroupDescription.Help" xml:space="preserve">
+    <value>لطفا یک توضیح برای گروه امنیتی وارد کنید.</value>
+  </data>
+  <data name="GroupDescription.Text" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="GroupName.Help" xml:space="preserve">
+    <value>لطفا یک نام برای گروه امنیتی وارد کنید.</value>
+  </data>
+  <data name="PermissionsByRole.Text" xml:space="preserve">
+    <value>کاربران موجود در نقش</value>
+  </data>
+  <data name="SendEmail.Text" xml:space="preserve">
+    <value>ارسال ایمیل</value>
+  </data>
+  <data name="isOwner.Text" xml:space="preserve">
+    <value>مالک است</value>
+  </data>
+  <data name="InSufficientPermissions.Text" xml:space="preserve">
+    <value>شما مجوز کافی برای انجام این اقدام  را ندارید.</value>
+  </data>
+  <data name="UserNotFound.Text" xml:space="preserve">
+    <value>کاربری یافت نشد.</value>
+  </data>
+  <data name="InvalidRequest.Text" xml:space="preserve">
+    <value>درخواست نامعتبر است.</value>
+  </data>
+  <data name="SecurityRoleDeleteNotAllowed.Text" xml:space="preserve">
+    <value>نقش های امنیتی سیستم را نمیتوانید حذف کنید.</value>
+  </data>
+  <data name="CannotAssginUserToUnApprovedRole.Text" xml:space="preserve">
+    <value>امکان اعطای نقش "تأیید نشده" به کاربر وجود ندارد.</value>
+  </data>
+  <data name="EditRole.Text" xml:space="preserve">
+    <value>ویرایش نقش</value>
+  </data>
+  <data name="UsersInRole.Text" xml:space="preserve">
+    <value>کاربران موجود در نقش امنیتی</value>
+  </data>
+</root>
