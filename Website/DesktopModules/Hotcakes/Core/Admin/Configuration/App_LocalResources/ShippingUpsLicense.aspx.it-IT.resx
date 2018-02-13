@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddressLine1.Text" xml:space="preserve">
+    <value>Indirizzo Linea 1</value>
+  </data>
+  <data name="AddressLine2.Text" xml:space="preserve">
+    <value>Indirizzo Linea 2</value>
+  </data>
+  <data name="AddressLine3.Text" xml:space="preserve">
+    <value>Indirizzo Linea 3</value>
+  </data>
+  <data name="btnAccept.Text" xml:space="preserve">
+    <value>Accetta i Termini</value>
+  </data>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="City.Text" xml:space="preserve">
+    <value>Città</value>
+  </data>
+  <data name="CompanyName.Text" xml:space="preserve">
+    <value>Nome Azienda</value>
+  </data>
+  <data name="CompanyWebsite.Text" xml:space="preserve">
+    <value>Sito web Azienda</value>
+  </data>
+  <data name="ContactEmail.Text" xml:space="preserve">
+    <value>Contattare l'indirizzo e-mail</value>
+  </data>
+  <data name="ContactTitle.Text" xml:space="preserve">
+    <value>Titolo del contatto</value>
+  </data>
+  <data name="ContactWarning.Text" xml:space="preserve">
+    <value>Selezionare si o no come risposta alla domanda di contatto in fondo a questa pagina.</value>
+  </data>
+  <data name="Country.Text" xml:space="preserve">
+    <value>Nazione</value>
+  </data>
+  <data name="ErrorCode.Text" xml:space="preserve">
+    <value>Codice Errore</value>
+  </data>
+  <data name="LicenseAgreement.Text" xml:space="preserve">
+    <value>Contratto di licenza</value>
+  </data>
+  <data name="LicenseError.Text" xml:space="preserve">
+    <value>Si è verificato un errore durante il recupero del contratto di licenza</value>
+  </data>
+  <data name="NotSelected.Text" xml:space="preserve">
+    <value>- Non Selezionato -</value>
+  </data>
+  <data name="OpenAccount.Text" xml:space="preserve">
+    <value>Per aprire un account UPS, fai clic su &lt;a href="https://www.ups.com/myups/login?returnto=https%3a//www.ups.com/account/us/start%3floc%3den_US&amp;amp;reasonCode=-1&amp;amp;appid=OPENACCT" target="_blank"&gt;qui&lt;/a&gt; o chiama 1-800-PICK-UPS.</value>
+  </data>
+  <data name="PhoneNumber.Text" xml:space="preserve">
+    <value>Numero di Telefono</value>
+  </data>
+  <data name="PostalCode.Text" xml:space="preserve">
+    <value>CAP</value>
+  </data>
+  <data name="PrimaryContactName.Text" xml:space="preserve">
+    <value>Nome contatto principale</value>
+  </data>
+  <data name="Print.Text" xml:space="preserve">
+    <value>Stampa</value>
+  </data>
+  <data name="PrintAlert.Text" xml:space="preserve">
+    <value>Si prega di scegliere il pulsante di stampa dal browser. Solitamente si trova nei menu a discesa in File&gt; Stampa</value>
+  </data>
+  <data name="rbContactNo.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="rbContactYes.Text" xml:space="preserve">
+    <value>Si</value>
+  </data>
+  <data name="Region.Text" xml:space="preserve">
+    <value>Regione</value>
+  </data>
+  <data name="RegionHelp.Text" xml:space="preserve">
+    <value>Solo Stati Uniti e Canada</value>
+  </data>
+  <data name="RegistrationIncompleteError.Text" xml:space="preserve">
+    <value>La procedura di registrazione non può essere completata in questo momento. Per favore riprova più tardi.</value>
+  </data>
+  <data name="rfvEmail.ErrorMessage" xml:space="preserve">
+    <value>L'indirizzo E-Mail è richiesto.</value>
+  </data>
+  <data name="rfvPhoneNumber.ErrorMessage" xml:space="preserve">
+    <value>Numero di Telefono è richiesto.</value>
+  </data>
+  <data name="UPSAccountNumber.Text" xml:space="preserve">
+    <value>Numero di conto UPS</value>
+  </data>
+  <data name="UPSAccountNumberHelp.Text" xml:space="preserve">
+    <value>Richiesto per la spedizione UPS</value>
+  </data>
+  <data name="UPSOnlineApplication.Text" xml:space="preserve">
+    <value>Applicazione di licenza UPS OnLine® Tools</value>
+  </data>
+  <data name="UPSOnlineToolsLicense.Text" xml:space="preserve">
+    <value>Licenza UPS Online Tools</value>
+  </data>
+  <data name="UPSRepContactMe.Text" xml:space="preserve">
+    <value>Vorrei che un rappresentante di vendita UPS mi contattasse per aprire un account di spedizione UPS o per rispondere a domande sui servizi UPS.</value>
+  </data>
+</root>

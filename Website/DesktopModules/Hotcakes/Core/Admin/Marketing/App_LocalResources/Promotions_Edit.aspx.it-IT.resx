@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions.Text" xml:space="preserve">
+    <value>Azioni</value>
+  </data>
+  <data name="AdjustOrderTotal.Text" xml:space="preserve">
+    <value>Sconto totale dell'ordine</value>
+  </data>
+  <data name="AdjustProductPrice.Text" xml:space="preserve">
+    <value>Prezzo del prodotto scontato</value>
+  </data>
+  <data name="AdjustQualifyingItems.Text" xml:space="preserve">
+    <value>Regola gli articoli validi</value>
+  </data>
+  <data name="AdjustShippingBy.Text" xml:space="preserve">
+    <value>Sconto spedizione per...</value>
+  </data>
+  <data name="AnyOrder.Text" xml:space="preserve">
+    <value>Qualsiasi ordine...</value>
+  </data>
+  <data name="AnyProduct.Text" xml:space="preserve">
+    <value>Qualsiasi prodotto ...</value>
+  </data>
+  <data name="AnyShippingMethod.Text" xml:space="preserve">
+    <value>Qualsiasi metodo di spedizione ...</value>
+  </data>
+  <data name="btnClose.Text" xml:space="preserve">
+    <value>Chiudi</value>
+  </data>
+  <data name="btnNewAction.Text" xml:space="preserve">
+    <value>Crea</value>
+  </data>
+  <data name="btnNewQualification.Text" xml:space="preserve">
+    <value>Crea</value>
+  </data>
+  <data name="btnSave.Text" xml:space="preserve">
+    <value>Salva Modifiche</value>
+  </data>
+  <data name="chkDoNotCombine.Text" xml:space="preserve">
+    <value>Non combinare con altre offerte (le vendite continueranno a essere valide)</value>
+  </data>
+  <data name="chkEnabled.Text" xml:space="preserve">
+    <value>Abilitato</value>
+  </data>
+  <data name="ConfirmDelete.Text" xml:space="preserve">
+    <value>Sei sicuro di voler eliminare questo articolo?</value>
+  </data>
+  <data name="CustomerDescription.Text" xml:space="preserve">
+    <value>Descrizione del Cliente</value>
+  </data>
+  <data name="Delete.Text" xml:space="preserve">
+    <value>Eliminare</value>
+  </data>
+  <data name="Edit.Text" xml:space="preserve">
+    <value>Edita</value>
+  </data>
+  <data name="EditAction.Text" xml:space="preserve">
+    <value>Modifica Azione</value>
+  </data>
+  <data name="EditPromotion.Text" xml:space="preserve">
+    <value>Modifica Promozione</value>
+  </data>
+  <data name="EditQualification.Text" xml:space="preserve">
+    <value>Modifica Qualificazione</value>
+  </data>
+  <data name="EndDate.Text" xml:space="preserve">
+    <value>Data di fine</value>
+  </data>
+  <data name="IssueRewardPoints.Text" xml:space="preserve">
+    <value>Emissione di punti premio</value>
+  </data>
+  <data name="lnkBack.Text" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="MakeQualifyingItemsFreeShipping.Text" xml:space="preserve">
+    <value>Fai la spedizione gratuita degli articoli validi ...</value>
+  </data>
+  <data name="OrderHasCouponCode.Text" xml:space="preserve">
+    <value>L'ordine ha codice coupon ...</value>
+  </data>
+  <data name="PromotionName.Text" xml:space="preserve">
+    <value>Nome della promozione</value>
+  </data>
+  <data name="ReceiveFreeProduct.Text" xml:space="preserve">
+    <value>Ricevi prodotti gratuiti</value>
+  </data>
+  <data name="DiscountCategory.Text" xml:space="preserve">
+    <value>Categoria di sconto</value>
+  </data>
+  <data name="Qualifications.Text" xml:space="preserve">
+    <value>Titoli di studio</value>
+  </data>
+  <data name="SavePromotionError.Text" xml:space="preserve">
+    <value>Impossibile salvare la promozione. Errore sconosciuto.</value>
+  </data>
+  <data name="ShippingMethodIs.Text" xml:space="preserve">
+    <value>Il metodo di spedizione è ...</value>
+  </data>
+  <data name="SlowMessage.Text" xml:space="preserve">
+    <value>&lt;br /&gt; &lt;span class = \ "hcFormMessage hcFormWarning \"&gt; Può essere eseguito lentamente! &lt;/ span&gt;</value>
+  </data>
+  <data name="StartDate.Text" xml:space="preserve">
+    <value>Data d'inizio</value>
+  </data>
+  <data name="valDateCompare.Text" xml:space="preserve">
+    <value>La data di fine deve essere maggiore della data di inizio</value>
+  </data>
+  <data name="valDateEndRequired.Text" xml:space="preserve">
+    <value>La data di fine è obbligatoria</value>
+  </data>
+  <data name="valDateStartRequired.Text" xml:space="preserve">
+    <value>La data di inizio è obbligatoria</value>
+  </data>
+  <data name="valDescriptionRequired.Text" xml:space="preserve">
+    <value>La descrizione del cliente è richiesta</value>
+  </data>
+  <data name="valNameRequired.Text" xml:space="preserve">
+    <value>Il nome promozionale è obbligatorio</value>
+  </data>
+  <data name="WhenAffiliateIsApproved.Text" xml:space="preserve">
+    <value>L'affiliazione è stata approvata ...</value>
+  </data>
+  <data name="WhenItemCategoryIsIsNot.Text" xml:space="preserve">
+    <value>La categoria di prodotto è / non è ...</value>
+  </data>
+  <data name="WhenLineItemIs.Text" xml:space="preserve">
+    <value>La riga dell'ordine è ...</value>
+  </data>
+  <data name="WhenOrderHasProducts.Text" xml:space="preserve">
+    <value>Ordine ha prodotti ...</value>
+  </data>
+  <data name="WhenOrderDoesNotHaveProducts.Text" xml:space="preserve">
+    <value>Quando l'ordine non ha prodotti (s) ...</value>
+  </data>
+  <data name="WhenOrderTotal.Text" xml:space="preserve">
+    <value>Subtotale ordine prima dello sconto &gt;=</value>
+  </data>
+  <data name="WhenProductCategoryIs.Text" xml:space="preserve">
+    <value>La categoria di prodotto è ...</value>
+  </data>
+  <data name="WhenVendorManufacturerIs.Text" xml:space="preserve">
+    <value>Quando fornitore / produttore è / non è ...</value>
+  </data>
+  <data name="WhenProductIs.Text" xml:space="preserve">
+    <value>Il prodotto è ...</value>
+  </data>
+  <data name="WhenProductTypeIs.Text" xml:space="preserve">
+    <value>Quando il tipo di prodotto è / non è ...</value>
+  </data>
+  <data name="WhenUserIs.Text" xml:space="preserve">
+    <value>L'utente è ...</value>
+  </data>
+  <data name="WhenUserIsInRole.Text" xml:space="preserve">
+    <value>L'utente è nel ruolo ...</value>
+  </data>
+  <data name="WhenUserPriceGroupIs.Text" xml:space="preserve">
+    <value>Il gruppo prezzi utente è ...</value>
+  </data>
+  <data name="EditPromotion_Affiliate.Text" xml:space="preserve">
+    <value>Modifica promozione affiliati</value>
+  </data>
+  <data name="EditPromotion_OfferForLineItems.Text" xml:space="preserve">
+    <value>Modifica offerta per gli articoli dell'ordine</value>
+  </data>
+  <data name="EditPromotion_OfferForOrder.Text" xml:space="preserve">
+    <value>Modifica offerta per totale parziale dell'ordine</value>
+  </data>
+  <data name="EditPromotion_OfferForShipping.Text" xml:space="preserve">
+    <value>Modifica offerta per la spedizione</value>
+  </data>
+  <data name="EditPromotion_Sale.Text" xml:space="preserve">
+    <value>Modifica vendita</value>
+  </data>
+  <data name="SumOrCountOfProducts.Text" xml:space="preserve">
+    <value>Quando i prodotti all'interno di categorie specificate sono ...</value>
+  </data>
+  <data name="ActionHelp.Text" xml:space="preserve">
+    <value>Questo succede.</value>
+  </data>
+  <data name="QualificationHelp.Text" xml:space="preserve">
+    <value>Quando questi sono veri ...</value>
+  </data>
+  <data name="EditPromotion_OfferForFreeItems.Text" xml:space="preserve">
+    <value>Modifica offerta per articoli gratuiti</value>
+  </data>
+</root>

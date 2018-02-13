@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BrowserCookies.Text" xml:space="preserve">
+    <value>Cookie del browser</value>
+  </data>
+  <data name="BrowserSession.Text" xml:space="preserve">
+    <value>Sessione Browser</value>
+  </data>
+  <data name="btnSave.Text" xml:space="preserve">
+    <value>Salva Modifiche</value>
+  </data>
+  <data name="Cart.Text" xml:space="preserve">
+    <value>Carrello della spesa</value>
+  </data>
+  <data name="chkForceSiteTerms.Text" xml:space="preserve">
+    <value>Richiedere l'accettazione dei Termini durante il Pagamento</value>
+  </data>
+  <data name="chkSwatches.Text" xml:space="preserve">
+    <value>Mostra campioni di colore per le scelte contrassegnate</value>
+  </data>
+  <data name="chkUseChildChoicesAdjustmentsForBundles.Text" xml:space="preserve">
+    <value>Utilizza le regolazioni delle scelte secondarie per i pacchetti</value>
+  </data>
+  <data name="chkZeroDollarOrders.Text" xml:space="preserve">
+    <value>Consenti ordini di importo pari a 0</value>
+  </data>
+  <data name="LastOrderNumber.Text" xml:space="preserve">
+    <value>Ultimo numero d'ordine</value>
+  </data>
+  <data name="MaximumOrderQuantity.Text" xml:space="preserve">
+    <value>Quantità di ordini massimo</value>
+  </data>
+  <data name="MaximumOrderWeight.Text" xml:space="preserve">
+    <value>Peso massimo ordinabile</value>
+  </data>
+  <data name="Orders.Text" xml:space="preserve">
+    <value>Ordini</value>
+  </data>
+  <data name="Products.Text" xml:space="preserve">
+    <value>Prodotti</value>
+  </data>
+  <data name="cvLastOrderNumber.ErrorMessage" xml:space="preserve">
+    <value>L'ultimo numero di ordine deve essere un valore numerico maggiore o uguale a 0</value>
+  </data>
+  <data name="rfvLastOrderNumber.ErrorMessage" xml:space="preserve">
+    <value>L'ultimo numero d'ordine è richiesto</value>
+  </data>
+  <data name="SettingsSuccess.Text" xml:space="preserve">
+    <value>Impostazioni salvate correttamente.</value>
+  </data>
+  <data name="ShoppingCartStorage.Text" xml:space="preserve">
+    <value>Salva carrello a</value>
+  </data>
+  <data name="ShoppingCartStorageHelp.Text" xml:space="preserve">
+    <value>Se scegli i cookie del browser, gli utenti possono chiudere il browser o possono bloccarsi e il carrello sarà ancora disponibile. Con Sessione del Browser, il carrello acquisti verrà perso in uno di questi scenari.</value>
+  </data>
+  <data name="OrderAccount.Text" xml:space="preserve">
+    <value>Conto Ordine</value>
+  </data>
+  <data name="QuickBooks.Text" xml:space="preserve">
+    <value>QuickBooks</value>
+  </data>
+  <data name="ShippingAccount.Text" xml:space="preserve">
+    <value>Conto di spedizione</value>
+  </data>
+  <data name="chkSendAbandonedCartEmails.Text" xml:space="preserve">
+    <value>Invia e-mail se il carrello è stato abbandonato</value>
+  </data>
+  <data name="cvSendAbandonedEmailIn.ErrorMessage" xml:space="preserve">
+    <value>Invia e-mail abbandonate in (giorni) deve essere intero e compreso tra 1 e 365.</value>
+  </data>
+  <data name="rfvSendAbandonedEmailIn.ErrorMessage" xml:space="preserve">
+    <value>Invia e-mail Carrelli Abbandonati in (giorni) è richiesto</value>
+  </data>
+  <data name="SendAbandonedEmailIn.Text" xml:space="preserve">
+    <value>Invia e-mail Carrelli Abbandonati in (giorni)</value>
+  </data>
+  <data name="cvOrderLimitQuantity.ErrorMessage" xml:space="preserve">
+    <value>La quantità di ordine minimo deve essere un valore numerico maggiore di 0</value>
+  </data>
+  <data name="cvOrderLimitWeight.ErrorMessage" xml:space="preserve">
+    <value>Il peso massimo dell'ordine deve essere un valore numerico maggiore di 0</value>
+  </data>
+  <data name="rfvOrderLimitWeight.ErrorMessage" xml:space="preserve">
+    <value>È richiesto il peso massimo dell'ordine</value>
+  </data>
+</root>

@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddCategories.Text" xml:space="preserve">
+    <value>Aggiungi&amp;nbsp;Categorie</value>
+  </data>
+  <data name="AddProducts.Text" xml:space="preserve">
+    <value>Aggiungi Prodotti</value>
+  </data>
+  <data name="Desktop.Text" xml:space="preserve">
+    <value>Desktop</value>
+  </data>
+  <data name="GetStarted.Text" xml:space="preserve">
+    <value>Inizia aggiungendo un nuovo prodotto o una nuova categoria</value>
+  </data>
+  <data name="NewOrders.Text" xml:space="preserve">
+    <value>Nuovi Ordini</value>
+  </data>
+  <data name="OnHold.Text" xml:space="preserve">
+    <value>In attesa</value>
+  </data>
+  <data name="Phone.Text" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="Range_Month.Text" xml:space="preserve">
+    <value>Mese</value>
+  </data>
+  <data name="Range_Quarter.Text" xml:space="preserve">
+    <value>Trimestre</value>
+  </data>
+  <data name="Range_Week.Text" xml:space="preserve">
+    <value>Settimana</value>
+  </data>
+  <data name="Range_Year.Text" xml:space="preserve">
+    <value>Anno</value>
+  </data>
+  <data name="ReadyForPayment.Text" xml:space="preserve">
+    <value>Pronto per il pagamento</value>
+  </data>
+  <data name="ReadyForShipping.Text" xml:space="preserve">
+    <value>Pronto per la spedizione</value>
+  </data>
+  <data name="Revenue.Text" xml:space="preserve">
+    <value>Reddito</value>
+  </data>
+  <data name="ReviewsToModerate.Text" xml:space="preserve">
+    <value>{0} Recensione(i) da moderare</value>
+  </data>
+  <data name="SalesTotal.Text" xml:space="preserve">
+    <value>Vendite totali</value>
+  </data>
+  <data name="SalesByDevice.Text" xml:space="preserve">
+    <value>Vendite per dispositivo</value>
+  </data>
+  <data name="SalesOverTime.Text" xml:space="preserve">
+    <value>Vendite nel tempo</value>
+  </data>
+  <data name="Tablet.Text" xml:space="preserve">
+    <value>Tablet</value>
+  </data>
+  <data name="Transactions.Text" xml:space="preserve">
+    <value>Transazioni</value>
+  </data>
+  <data name="AddSamples.Text" xml:space="preserve">
+    <value>Aggiungi Prodotti &amp; Categorie di esempio</value>
+  </data>
+  <data name="Or.Text" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="ProductPerformance.Text" xml:space="preserve">
+    <value>Prestazioni del prodotto</value>
+  </data>
+  <data name="AddedToCart.Text" xml:space="preserve">
+    <value>Aggiunto al carrello</value>
+  </data>
+  <data name="Purchased.Text" xml:space="preserve">
+    <value>Acquistato</value>
+  </data>
+  <data name="SalesFunnel.Text" xml:space="preserve">
+    <value>Canali di vendita</value>
+  </data>
+  <data name="Views.Text" xml:space="preserve">
+    <value>Viste</value>
+  </data>
+  <data name="TopBouncedProducts.Text" xml:space="preserve">
+    <value>Top prodotti rimbalzati</value>
+  </data>
+  <data name="Change.Text" xml:space="preserve">
+    <value>Cambio (%)</value>
+  </data>
+  <data name="MostAffectedProducts.Text" xml:space="preserve">
+    <value>Prodotti più interessati</value>
+  </data>
+  <data name="Product.Text" xml:space="preserve">
+    <value>Prodotto</value>
+  </data>
+  <data name="TopAbandonedProducts.Text" xml:space="preserve">
+    <value>Top prodotti abbandonati</value>
+  </data>
+  <data name="TopPurchasedProducts.Text" xml:space="preserve">
+    <value>Top prodotti acquistati</value>
+  </data>
+  <data name="Abandon.Text" xml:space="preserve">
+    <value>Abbandono (%)</value>
+  </data>
+  <data name="Bounce.Text" xml:space="preserve">
+    <value>Rimbalzo (%)</value>
+  </data>
+  <data name="Complete.Text" xml:space="preserve">
+    <value>Completo (%)</value>
+  </data>
+  <data name="Of.Text" xml:space="preserve">
+    <value>di</value>
+  </data>
+  <data name="FindOutMore.Text" xml:space="preserve">
+    <value>Scopri di più&gt;</value>
+  </data>
+  <data name="ViewingSampleData.Text" xml:space="preserve">
+    <value>Stai visualizzando i dati di esempio. I dati reali saranno mostrati una volta generati nel tuo negozio.</value>
+  </data>
+  <data name="ViewingSampleDataInfo.Text" xml:space="preserve">
+    <value>Hai appena iniziato a usare Hotcakes Commerce. Siamo entusiasti che tu sia qui, ma fino a quando non aggiungerai alcuni prodotti e una manciata di ordini, la dashboard sarà abbastanza noiosa per te. Nel frattempo, abbiamo aggiunto alcuni dati di esempio in modo che tu possa vedere come potrebbe apparire il tuo negozio poche settimane dopo il lancio su Hotcakes.</value>
+  </data>
+  <data name="ViewingSampleDataInfoTitle.Text" xml:space="preserve">
+    <value>Dati di Esempio</value>
+  </data>
+  <data name="CreationSamplesInfoTitle.Text" xml:space="preserve">
+    <value>Dati di Esempio</value>
+  </data>
+  <data name="CreationSamplesInfo.Text" xml:space="preserve">
+    <value>L'aggiunta di prodotti / categorie di campioni aggiungerà anche ordini di esempio, clienti e analisi per aiutarti a visualizzare la gestione del negozio in un negozio popolato. Questi dati verranno rimossi quando si rimuovono i prodotti / categorie di esempio in seguito. &lt;br/&gt; &lt;br/&gt; &lt;p&gt;
+Questo processo richiederà alcuni momenti, quindi lo faremo in background. Vedrai le tue statistiche caricarsi lentamente nel tempo. &lt;/ P&gt;</value>
+  </data>
+  <data name="Cancel.Text" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="Ok.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+</root>

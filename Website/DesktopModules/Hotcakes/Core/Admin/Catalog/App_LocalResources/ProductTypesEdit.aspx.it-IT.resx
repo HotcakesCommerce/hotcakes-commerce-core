@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Add.Text" xml:space="preserve">
+    <value>Aggiungi</value>
+  </data>
+  <data name="AvailableProperties.Text" xml:space="preserve">
+    <value>Proprietà disponibili</value>
+  </data>
+  <data name="Cancel.Text" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="FriendlyTypeName.HeaderText" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="GeneralSettings.Text" xml:space="preserve">
+    <value>Settaggi Generali</value>
+  </data>
+  <data name="LoadTypeError.Text" xml:space="preserve">
+    <value>Impossibile caricare l'ID del tipo di prodotto ({0}). Se continua a verificarsi, contatta l'amministratore del sito.</value>
+  </data>
+  <data name="MultipleTypeWarning.Text" xml:space="preserve">
+    <value>&lt;strong&gt; Questo tipo di prodotto è attualmente utilizzato da uno o più prodotti nello store. &lt;/ strong&gt; &lt;br/&gt; La modifica di questo tipo influirà su tutti i prodotti esistenti di questo tipo. Qualsiasi valore predefinito impostato qui NON sovrascriverà i prodotti esistenti, ma eventuali proprietà aggiunte o rimosse incideranno sui prodotti esistenti.</value>
+  </data>
+  <data name="NoPropertiesAdded.Text" xml:space="preserve">
+    <value>Nessuna proprietà aggiunta.</value>
+  </data>
+  <data name="NoPropertySelected.Text" xml:space="preserve">
+    <value>Ops! È necessario selezionare prima una proprietà del tipo di prodotto.</value>
+  </data>
+  <data name="NoRolesAdded.Text" xml:space="preserve">
+    <value>Nessun ruolo aggiunto. Il tipo di prodotto è pubblico.</value>
+  </data>
+  <data name="NotSet.Text" xml:space="preserve">
+    <value>- Non impostato -</value>
+  </data>
+  <data name="ProductsViewTemplate.Text" xml:space="preserve">
+    <value>Template di Visualizzazione Prodotti</value>
+  </data>
+  <data name="ProductTypeName.Text" xml:space="preserve">
+    <value>Nome del tipo di prodotto</value>
+  </data>
+  <data name="ProductTypeNotFound.Text" xml:space="preserve">
+    <value>Uh oh ... Non siamo riusciti a trovare il tipo di prodotto che hai selezionato. Per favore torna indietro e riprova. Se continua a verificarsi, contatta l'amministratore del sito.</value>
+  </data>
+  <data name="ProductTypeProperties.Text" xml:space="preserve">
+    <value>Proprietà del Tipo di prodotto</value>
+  </data>
+  <data name="ProductTypesEdit.Text" xml:space="preserve">
+    <value>Edita Tipo Prodotto</value>
+  </data>
+  <data name="PropertyName.HeaderText" xml:space="preserve">
+    <value>Nome Proprietà</value>
+  </data>
+  <data name="rfvProductTypeNameField.ErrorMessage" xml:space="preserve">
+    <value>È richiesto il nome del tipo di prodotto.</value>
+  </data>
+  <data name="Role.HeaderText" xml:space="preserve">
+    <value>Nome Ruolo</value>
+  </data>
+  <data name="Roles.Text" xml:space="preserve">
+    <value>Ruoli</value>
+  </data>
+  <data name="SaveChanges.Text" xml:space="preserve">
+    <value>Salva i Cambiamenti</value>
+  </data>
+  <data name="SaveError.Text" xml:space="preserve">
+    <value>Si è verificato un errore durante il salvataggio del tipo di prodotto. Si prega di riprovare, o contattare l'amministratore del sito.</value>
+  </data>
+  <data name="SecurityRole.Text" xml:space="preserve">
+    <value>Ruolo di Sicurezza</value>
+  </data>
+</root>

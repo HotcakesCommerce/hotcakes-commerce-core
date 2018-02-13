@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Tool.AdvancedSettings.Text" xml:space="preserve">
+    <value>Impostazioni Avanzate</value>
+  </data>
+  <data name="Tool.BookmarkedSettings.Text" xml:space="preserve">
+    <value>Impostazioni Segnalibro</value>
+  </data>
+  <data name="Tool.CommonSettings.Text" xml:space="preserve">
+    <value>Impostazioni Comuni</value>
+  </data>
+  <data name="Tool.SwitchLanguages.Text" xml:space="preserve">
+    <value>Cambia lingua dell'interfaccia utente:</value>
+  </data>
+  <data name="Cancel.Text" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="Upgrade.ToolTip" xml:space="preserve">
+    <value>Clicca qui per ottenere la versione più recente</value>
+  </data>
+  <data name="LoadingTabModuleCE.Text" xml:space="preserve">
+    <value>&lt;b style = "color: #fff"&gt; Per iniziare &lt;/ b&gt;, per favore &lt;b style = "color: #fff"&gt; Seleziona pagina &lt;/ b&gt; prima</value>
+  </data>
+  <data name="NoModule.Text" xml:space="preserve">
+    <value>Nessun modulo disponibile</value>
+  </data>
+  <data name="Tool.ManageLocalization.Text" xml:space="preserve">
+    <value>Localizzazione Pagina</value>
+  </data>
+  <data name="Tool.CreateModule.Text" xml:space="preserve">
+    <value>Crea Modulo</value>
+  </data>
+  <data name="Tool.PublishPage.ConfirmText" xml:space="preserve">
+    <value>Pubblicare questa pagina la renderà visibile a tutti i visitatori di questo sito Web, compresi i visitatori che non sono registrati al sito. &lt;br&gt; Desideri continuare?</value>
+  </data>
+  <data name="Tool.PublishPage.Text" xml:space="preserve">
+    <value>Pubblica Pagina</value>
+  </data>
+  <data name="ClearSearchModules.Text" xml:space="preserve">
+    <value>Pulisci</value>
+  </data>
+  <data name="SearchModules.Text" xml:space="preserve">
+    <value>Cerca</value>
+  </data>
+  <data name="LoadingModuleOnNoDefaultCategory.Text" xml:space="preserve">
+    <value>Nessun modulo disponibile in '{0}', Ricerca in 'Tutti'</value>
+  </data>
+  <data name="Tool.PublishPage.ConfirmHeader" xml:space="preserve">
+    <value>Rendi la pagina visibile a tutti i visitatori?</value>
+  </data>
+  <data name="Tool.UnpublishPage.ConfirmHeader" xml:space="preserve">
+    <value>Rendi la pagina visibile solo agli amministratori?</value>
+  </data>
+  <data name="Tool.UnpublishPage.ConfirmText" xml:space="preserve">
+    <value>Cambiare questa pagina in non pubblicata significa che sarà visibile solo agli amministratori del sito. Tutti gli altri utenti non potranno vedere la pagina e riceveranno una richiesta di Login. &lt;br&gt; Vuoi annullare la pubblicazione di questa pagina?</value>
+  </data>
+  <data name="Tool.UnpublishPage.Text" xml:space="preserve">
+    <value>Revoca la pubblicazione della pagina</value>
+  </data>
+  <data name="Tool.Commerce.Text" xml:space="preserve">
+    <value>Commercio</value>
+  </data>
+  <data name="Tool.Content.Text" xml:space="preserve">
+    <value>Contenuto</value>
+  </data>
+  <data name="Tool.Catalog.Text" xml:space="preserve">
+    <value>Catalogo</value>
+  </data>
+  <data name="MyTestChange.Text" xml:space="preserve">
+    <value>MioTest</value>
+  </data>
+  <data name="AllCategories.Text" xml:space="preserve">
+    <value>Tutte le categorie</value>
+  </data>
+  <data name="Category.Text" xml:space="preserve">
+    <value>Categoria</value>
+  </data>
+  <data name="cmdCancelAdd.Text" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="cmdConfirmAdd.Text" xml:space="preserve">
+    <value>Procedere</value>
+  </data>
+  <data name="PermissionEdit.Text" xml:space="preserve">
+    <value>Solo Editori di pagine</value>
+  </data>
+  <data name="PermissionView.Text" xml:space="preserve">
+    <value>Stessi della pagina</value>
+  </data>
+  <data name="ShareableWarningAlternate.Text" xml:space="preserve">
+    <value>Se sei confuso da questo messaggio o stai lavorando su un sito che non può tollerare interruzioni, dovresti fare clic su Annulla e contattare il &lt;a href="mailto:support@hotcakescommerce.com"&gt; team di supporto di Hotcakes Commerce &lt;/a&gt;.</value>
+  </data>
+  <data name="ShareableWarningContent.Text" xml:space="preserve">
+    <value>Stai tentando di aggiungere un riferimento a questo modulo che esiste su un altro sito in questo gruppo. Questo modulo potrebbe o no supportare la condivisione su più siti - non dichiara esplicitamente in alcun modo se lo fa. &lt;br/&gt; &lt;br/&gt; Se sei sicuro che lo faccia, o se il tuo intento è quello di testare la sua capacità di farlo, quindi procedere con cautela e essere consapevoli del fatto che alcune funzionalità nel modulo - o anche l'intero modulo - potrebbe non funzionare correttamente in questa configurazione.</value>
+  </data>
+  <data name="ShareableWarningHeader.Text" xml:space="preserve">
+    <value>&lt;span style = "color: red;"&gt; Avviso &lt;/ span&gt;: questo modulo potrebbe non supportare la condivisione tra siti</value>
+  </data>
+  <data name="ShareableWarningTitle.Text" xml:space="preserve">
+    <value>Questo potrebbe non funzionare</value>
+  </data>
+  <data name="Tool.ClearCache.Text" xml:space="preserve">
+    <value>Pulisci la Cache</value>
+  </data>
+  <data name="Tool.DeletePage.ConfirmText" xml:space="preserve">
+    <value>Sei sicuro di voler eliminare questa pagina e le sue pagine figlio?</value>
+  </data>
+  <data name="Tool.DeletePage.Special.ToolTip" xml:space="preserve">
+    <value>Impossibile eliminare questa pagina perché è una pagina di sistema o la pagina è in uso. Consulta Impostazioni sito&gt; Impostazioni avanzate&gt; Gestione pagine o contatta l'amministratore di sistema.</value>
+  </data>
+  <data name="Tool.Help.Text" xml:space="preserve">
+    <value>Aiuto</value>
+  </data>
+  <data name="Tool.Help.ToolTip" xml:space="preserve">
+    <value>Aiuto Online</value>
+  </data>
+  <data name="Tool.RecycleApp.Text" xml:space="preserve">
+    <value>Ricicla l'AppPool</value>
+  </data>
+  <data name="Tool.UploadFile.Text" xml:space="preserve">
+    <value>Caricare un file</value>
+  </data>
+  <data name="Pane.AddBottom.Text" xml:space="preserve">
+    <value>Aggiungi a {0} in basso</value>
+  </data>
+  <data name="Pane.AddTop.Text" xml:space="preserve">
+    <value>Aggiungi a {0} in Alto</value>
+  </data>
+  <data name="Tool.AddExistingModule.Text" xml:space="preserve">
+    <value>Aggiungi un modulo esistente</value>
+  </data>
+  <data name="Tool.AddNewModule.Text" xml:space="preserve">
+    <value>Aggiungi un nuovo modulo</value>
+  </data>
+  <data name="Tool.AddNewPage.Text" xml:space="preserve">
+    <value>Aggiungi una nuova Pagina</value>
+  </data>
+  <data name="Tool.AddToBookmarks.ToolTip" xml:space="preserve">
+    <value>Aggiungi ai segnalibri</value>
+  </data>
+  <data name="Tool.Admin.Text" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="Tool.CopyPage.Text" xml:space="preserve">
+    <value>Copia la Pagina</value>
+  </data>
+  <data name="Tool.DeletePage.Text" xml:space="preserve">
+    <value>Elimina la Pagina</value>
+  </data>
+  <data name="Tool.EditPage.Text" xml:space="preserve">
+    <value>Edita la Pagina</value>
+  </data>
+  <data name="Tool.EditThisPage.Text" xml:space="preserve">
+    <value>Edita questa Pagina</value>
+  </data>
+  <data name="Tool.ExportPage.Text" xml:space="preserve">
+    <value>Esporta la Pagina</value>
+  </data>
+  <data name="Tool.FindModules.Text" xml:space="preserve">
+    <value>Trova più moduli</value>
+  </data>
+  <data name="Tool.Host.Text" xml:space="preserve">
+    <value>Host</value>
+  </data>
+  <data name="Tool.ImportPage.Text" xml:space="preserve">
+    <value>Importa una Pagina</value>
+  </data>
+  <data name="Tool.LayoutMode.Text" xml:space="preserve">
+    <value>Vista in modalità Layout</value>
+  </data>
+  <data name="Tool.MakeCopy.Text" xml:space="preserve">
+    <value>Fai una Copia</value>
+  </data>
+  <data name="Tool.ManageRoles.Text" xml:space="preserve">
+    <value>Gestisci i Ruoli</value>
+  </data>
+  <data name="Tool.ManageTemplate.Text" xml:space="preserve">
+    <value>Aspetto della pagina</value>
+  </data>
+  <data name="Tool.ManageUsers.Text" xml:space="preserve">
+    <value>Gestisci gli Utenti</value>
+  </data>
+  <data name="Tool.MobilePreview.Text" xml:space="preserve">
+    <value>Anteprima Mobile</value>
+  </data>
+  <data name="Tool.Modules.Text" xml:space="preserve">
+    <value>Moduli</value>
+  </data>
+  <data name="Tool.NewUser.Text" xml:space="preserve">
+    <value>Aggiungi un nuovo Utente</value>
+  </data>
+  <data name="Tool.PagePermissions.Text" xml:space="preserve">
+    <value>Permessi della Pagina</value>
+  </data>
+  <data name="Tool.Pages.Text" xml:space="preserve">
+    <value>Pagine</value>
+  </data>
+  <data name="Tool.PageSettings.Text" xml:space="preserve">
+    <value>Settaggi della Pagina</value>
+  </data>
+  <data name="Tool.RemoveFromBookmarks.ToolTip" xml:space="preserve">
+    <value>Rimuovi dai segnalibri</value>
+  </data>
+  <data name="Tool.SwitchSites.Button" xml:space="preserve">
+    <value>Vai</value>
+  </data>
+  <data name="Tool.SwitchSites.Text" xml:space="preserve">
+    <value>Cambia siti:</value>
+  </data>
+  <data name="Tool.Tools.Text" xml:space="preserve">
+    <value>Strumenti</value>
+  </data>
+  <data name="Tool.Users.Text" xml:space="preserve">
+    <value>Utenti</value>
+  </data>
+  <data name="Tool.CloseEditMode.Text" xml:space="preserve">
+    <value>Chiudi la modalità di modifica</value>
+  </data>
+  <data name="LoadingModule.Text" xml:space="preserve">
+    <value>Caricamento del/i modulo/i</value>
+  </data>
+  <data name="LoadingTabModule.Text" xml:space="preserve">
+    <value>&lt;b style = "color: #fff"&gt; Per iniziare &lt;/ b&gt;, per favore &lt;b style = "color: #fff"&gt; Seleziona sito e pagina &lt;/ b&gt; Prima</value>
+  </data>
+  <data name="SelectPage.Text" xml:space="preserve">
+    <value>Seleziona Pagina</value>
+  </data>
+  <data name="SelectSite.Text" xml:space="preserve">
+    <value>Seleziona Sito</value>
+  </data>
+  <data name="Pane.Add.Text" xml:space="preserve">
+    <value>Aggiungi a {0}</value>
+  </data>
+  <data name="Tool.CopyPermissionsToChildren.Text" xml:space="preserve">
+    <value>Copia autorizzazioni ai figli</value>
+  </data>
+  <data name="Tool.StayInEditMode.Text" xml:space="preserve">
+    <value>Rimani in modalità Modifica</value>
+  </data>
+  <data name="DragModuleToolTip.Text" xml:space="preserve">
+    <value>Trascina per aggiungere questo modulo alla pagina sotto</value>
+  </data>
+  <data name="Upgrade.Text" xml:space="preserve">
+    <value>Aggiornamento</value>
+  </data>
+  <data name="Tool.CopyPermissionsToChildrenPageEditor.Confirm" xml:space="preserve">
+    <value>Le autorizzazioni verranno sostituite per tutti i figli di questa pagina. &lt;br /&gt; &lt;br /&gt; Sei sicuro di voler continuare?</value>
+  </data>
+</root>

@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AutoSelectedPackaging.Text" xml:space="preserve">
+    <value>Imballaggio selezionato automaticamente</value>
+  </data>
+  <data name="btnGetRates.Text" xml:space="preserve">
+    <value>Ottieni tariffe</value>
+  </data>
+  <data name="Diagnostics.Text" xml:space="preserve">
+    <value>DIAGNOSTICA</value>
+  </data>
+  <data name="Dimensions.Text" xml:space="preserve">
+    <value>Dimensioni (pollici)</value>
+  </data>
+  <data name="Error.Text" xml:space="preserve">
+    <value>Errore</value>
+  </data>
+  <data name="FirstClassLargeEnvelope.Text" xml:space="preserve">
+    <value>Busta grande di prima classe</value>
+  </data>
+  <data name="FirstClassLetter.Text" xml:space="preserve">
+    <value>Lettera di prima classe</value>
+  </data>
+  <data name="FirstClassParcel.Text" xml:space="preserve">
+    <value>Pacco di prima classe</value>
+  </data>
+  <data name="FirstClassPostCard.Text" xml:space="preserve">
+    <value>Cartolina di prima classe</value>
+  </data>
+  <data name="FlatRateBox.Text" xml:space="preserve">
+    <value>Scatola a prezzo fisso</value>
+  </data>
+  <data name="FlatRateBoxLarge.Text" xml:space="preserve">
+    <value>Scatola Larga a prezzo fisso</value>
+  </data>
+  <data name="FlatRateBoxMedium.Text" xml:space="preserve">
+    <value>Scatola Media a prezzo fisso</value>
+  </data>
+  <data name="FlatRateBoxSmall.Text" xml:space="preserve">
+    <value>Scatola Piccola a prezzo fisso</value>
+  </data>
+  <data name="FlatRateEnvelope.Text" xml:space="preserve">
+    <value>Busta a tariffa fissa</value>
+  </data>
+  <data name="FlatRateEnvelopeGiftCard.Text" xml:space="preserve">
+    <value>Busta Carta Regalo a tariffa fissa</value>
+  </data>
+  <data name="FlatRateEnvelopeLegal.Text" xml:space="preserve">
+    <value>Busta Legal a tariffa fissa</value>
+  </data>
+  <data name="FlatRateEnvelopePadded.Text" xml:space="preserve">
+    <value>Busta Imbottita a tariffa fissa</value>
+  </data>
+  <data name="FlatRateEnvelopeSmall.Text" xml:space="preserve">
+    <value>Busta piccola a tariffa fissa</value>
+  </data>
+  <data name="FlatRateEnvelopeWindow.Text" xml:space="preserve">
+    <value>Busta con finestra a tariffa fissa</value>
+  </data>
+  <data name="FromZipCode.Text" xml:space="preserve">
+    <value>Da codice postale</value>
+  </data>
+  <data name="Height.Text" xml:space="preserve">
+    <value>H</value>
+  </data>
+  <data name="Info.Text" xml:space="preserve">
+    <value>Informazioni</value>
+  </data>
+  <data name="Length.Text" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="NonRectangular.Text" xml:space="preserve">
+    <value>Non-Rettangolare</value>
+  </data>
+  <data name="Ounces.Text" xml:space="preserve">
+    <value>Oncie</value>
+  </data>
+  <data name="PackagingType.Text" xml:space="preserve">
+    <value>Tipo Imballaggio</value>
+  </data>
+  <data name="Pounds.Text" xml:space="preserve">
+    <value>Sterline</value>
+  </data>
+  <data name="Rectangular.Text" xml:space="preserve">
+    <value>Rettangolare</value>
+  </data>
+  <data name="RegionalBoxRateA.Text" xml:space="preserve">
+    <value>Tasso di consegna regionale A</value>
+  </data>
+  <data name="RegionalBoxRateB.Text" xml:space="preserve">
+    <value>Tasso di consegna regionale B</value>
+  </data>
+  <data name="Results.Text" xml:space="preserve">
+    <value>Risultati</value>
+  </data>
+  <data name="ToZipCode.Text" xml:space="preserve">
+    <value>A CAP</value>
+  </data>
+  <data name="USPSDomesticRatesTester.Text" xml:space="preserve">
+    <value>Tester delle tariffe nazionali dei servizi postali degli Stati Uniti</value>
+  </data>
+  <data name="Variable.Text" xml:space="preserve">
+    <value>Variabile</value>
+  </data>
+  <data name="Weight.Text" xml:space="preserve">
+    <value>Peso</value>
+  </data>
+  <data name="Width.Text" xml:space="preserve">
+    <value>W</value>
+  </data>
+  <data name="ServiceType.Text" xml:space="preserve">
+    <value>Tipo Servizio</value>
+  </data>
+</root>
