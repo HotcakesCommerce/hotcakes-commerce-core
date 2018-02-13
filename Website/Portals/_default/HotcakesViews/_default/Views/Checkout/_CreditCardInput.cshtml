@@ -54,7 +54,7 @@
     <div class="dnnFormItem dnnFormRequired">
         <label class="dnnLabel">@Localization.GetString("CardNumber")</label>
         <input type="text" name="cccardnumber" id="cccardnumber" size="20" maxlength="20"
-                tabindex="501"
+               
                 value="@Model.PaymentViewModel.DataCreditCard.CardNumber"                    
                 class="@Model.IsErr("cccardnumber")" />
 
@@ -62,12 +62,12 @@
     <div class="dnnFormItem">
         <label class="dnnLabel">@Localization.GetString("ExpDate")</label>
 
-        <select name="ccexpmonth" class="hc-cc-expmonth" tabindex="502">
+        <select name="ccexpmonth" class="hc-cc-expmonth" >
             <option value="0">--</option>
             @Months()
         </select>
 
-        <select name="ccexpyear" class="hc-cc-expyear" tabindex="503">
+        <select name="ccexpyear" class="hc-cc-expyear">
             <option value="0">----</option>
             @Years()
         </select>
@@ -76,14 +76,14 @@
     <div class="dnnFormItem">
         <label class="dnnLabel">@Localization.GetString("SecurityCode")</label>
 
-        <input type="text" name="ccsecuritycode" size="5" tabindex="504"
+        <input type="text" name="ccsecuritycode" size="5" 
                 maxlength="4" class="hc-cc-seccode @Model.IsErr("ccsecuritycode")" />
 
     </div>
     <div class="dnnFormItem">
         <label class="dnnLabel">@Localization.GetString("NameOnCard")</label>
 
-        <input type="text" name="cccardholder" size="20" tabindex="505"
+        <input type="text" name="cccardholder" size="20" 
                 value="@Model.PaymentViewModel.DataCreditCard.CardHolderName"
                 class="@Model.IsErr("cccardholder")" />
 
