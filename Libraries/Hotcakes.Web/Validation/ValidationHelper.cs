@@ -32,9 +32,9 @@ namespace Hotcakes.Web.Validation
     [Serializable]
     public class ValidationHelper
     {
-        public const string EmailValidationRegex = @"^[\w!#$%&'+\-/=?\^_`{|}~]+(\.[\w!#$%&'+\-/=?\^_`{|}~]+)*"
-                                                   + "@"
-                                                   + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$";
+        public const string EmailValidationRegex =
+                @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
 
         public static void Required(string errorMessage, string propertyValue, List<RuleViolation> violations,
             string controlName)
