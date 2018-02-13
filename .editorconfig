@@ -1,0 +1,5 @@
+# Project-specific editor settings
+
+[*.cs]
+indent_style = space
+indent_size = 4
