@@ -32,6 +32,9 @@ using DotNetNuke.UI.ControlPanels;
 using Hotcakes.Commerce;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using MenuItem = Hotcakes.Modules.Core.Admin.AppCode.MenuItem;
+using DotNetNuke.Entities.Users;
+using DotNetNuke.Entities.Controllers;
+using System.Reflection;
 
 namespace Hotcakes.Modules.ControlPanel
 {

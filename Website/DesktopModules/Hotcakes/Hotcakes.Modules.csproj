@@ -260,6 +260,8 @@
     <Content Include="Core\Admin\Controls\ImageUploader.ascx" />
     <Content Include="Core\Admin\Controls\Languages.ascx" />
     <Content Include="Core\Admin\Controls\PaymentMethodEditor.ascx" />
+    <Content Include="Core\Admin\Controls\ProductsPickerWithVariant.ascx" />
+    <Content Include="Core\Admin\Controls\ProductVariantsPicker.ascx" />
     <Content Include="Core\Admin\Controls\TaxProviderEditor.ascx" />
     <Content Include="Core\Admin\Controls\TaxScheduleEditor.ascx" />
     <Content Include="Core\Admin\Dashboard\Dashboard.ascx" />
@@ -2439,6 +2441,20 @@
     </Compile>
     <Compile Include="Core\Admin\Controls\ProductReviewEditor.ascx.designer.cs">
       <DependentUpon>ProductReviewEditor.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Admin\Controls\ProductsPickerWithVariant.ascx.cs">
+      <DependentUpon>ProductsPickerWithVariant.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Core\Admin\Controls\ProductsPickerWithVariant.ascx.designer.cs">
+      <DependentUpon>ProductsPickerWithVariant.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Admin\Controls\ProductVariantsPicker.ascx.cs">
+      <DependentUpon>ProductVariantsPicker.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Core\Admin\Controls\ProductVariantsPicker.ascx.designer.cs">
+      <DependentUpon>ProductVariantsPicker.ascx</DependentUpon>
     </Compile>
     <Compile Include="Core\Admin\Controls\SimpleProductFilter.ascx.cs">
       <DependentUpon>SimpleProductFilter.ascx</DependentUpon>

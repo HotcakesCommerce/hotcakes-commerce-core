@@ -41,6 +41,7 @@
 .builds
 *.dotCover
 *.ldf
+MSBuildLog.txt
 
 # git merge artifacts
 *.orig
@@ -100,13 +101,16 @@ Thumbs.db
 # Folder config file
 Desktop.ini
 
-[Ww]ebsite/[Aa]pp_[Cc]ode
 [Ww]ebsite/[Aa]pp_[Dd]ata
-![Ww]ebsite/[Aa]pp_[Dd]ata/[Pp]lace[Hh]older.txt
 [Ww]ebsite/[Bb]in
 [Ww]ebsite/[Bb]in/[Hh]otcakes.*
 [Ww]ebsite/[Dd]esktop[Mm]odules/[Hh]otcakes/[Bb]in
-[Ww]bsite/[Ii]nstall/[Tt]emp/
+[Ww]ebsite/[Ii]nstall/[Tt]emp/
+[Ww]ebsite/[Ii]nstall/*/*.zip
+[Ww]ebsite/[Ii]nstall/*/*.resources
+[Ww]ebsite/[Ii]nstall/[Cc]leanup
+[Ww]ebsite/[Ii]nstall/[Cc]onfig
+[Ww]ebsite/[Ii]nstall/installstat.log.resources.txt
 [Ww]ebsite/[Ii]nstall/upgradestat.log.resources.txt
 [Ww]ebsite/[Pp]roviders/[Hh]tml[Ee]ditor[Pp]roviders/
 [Ww]ebsite/[Pp]ortals/**/[Cc]ache
@@ -115,3 +119,4 @@ Desktop.ini
 [Ww]ebsite/[Pp]ortals/_default/[Ll]ogs
 [Ww]ebsite/[Pp]ortals/_default/[Ss]kins/[Xx]cillion/
 [Ww]ebsite/[Pp]ortals/_default/[Cc]ontainers/[Xx]cillion/
+[Ww]ebsite/[Pp]ortals/**/Cache
