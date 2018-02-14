@@ -82,6 +82,7 @@ UpgradeLog*.XML
 # Ignore artifacts from deployed/installed site
 
 _[Ii]nstall
+_[Bb]uild
 
 *.zip.manifest
 
