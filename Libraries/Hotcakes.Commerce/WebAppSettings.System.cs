@@ -46,7 +46,7 @@ namespace Hotcakes.Commerce
 
         public static string SKU
         {
-            get { return "PRO"; }
+            get { return "Pro"; }
         }
 
         public static string FriendlyAppVersion
@@ -56,7 +56,7 @@ namespace Hotcakes.Commerce
 
         public static string FriendlySKU
         {
-            get { return "PRO"; }
+            get { return "Pro"; }
         }
 
         public static string CookieNameCartIdPaymentPending(long storeId)
