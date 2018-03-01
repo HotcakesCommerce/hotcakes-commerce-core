@@ -528,7 +528,7 @@ namespace Hotcakes.Commerce.Orders
 
         private void TaxOrder(Order order)
         {
-            TaxItems(order.ItemsAsITaxable(), order.BillingAddress, order.ShippingAddress);
+            TaxItems(order.ItemsAsITaxable(), order.BillingAddress, order.ShippingAddress, order.TotalOrderDiscounts);
 
             var isTaxRateSame = true;
             decimal taxRate = -1;
@@ -586,9 +586,15 @@ namespace Hotcakes.Commerce.Orders
             order.TotalTax = order.ItemsTax + order.ShippingTax;
         }
 
-        private void TaxItems(List<ITaxable> items, IAddress billingAddress, IAddress shippingAddress)
+        private void TaxItems(List<ITaxable> items, IAddress billingAddress, IAddress shippingAddress,decimal totalOrderDiscounts)
         {
             var applyVATRules = _app.CurrentStore.Settings.ApplyVATRules;
+            decimal discount = 0;
+            if (totalOrderDiscounts != 0)
+            {
+                var qty = items.Where(i => i.IsTaxExempt == false && i.TaxSchedule != -1 && _app.OrderServices.TaxSchedules.FindForThisStore(i.TaxSchedule) != null).Sum(i => i.Quantity);
+                discount = totalOrderDiscounts / qty;
+            }
 
             foreach (var item in items)
             {
@@ -630,6 +636,7 @@ namespace Hotcakes.Commerce.Orders
                 item.SetTaxRate(rate);
 
                 item.SetShippingTaxRate(shippingRate);
+                var lineItemTotalDiscount = item.Quantity * discount;
 
                 if (tax != null)
                 {
@@ -678,7 +685,7 @@ namespace Hotcakes.Commerce.Orders
                     }
                     else
                     {
-                        var lineTotalTax = Money.RoundCurrency(item.LineTotal*rate);
+                        var lineTotalTax = Money.RoundCurrency((item.LineTotal + lineItemTotalDiscount) * rate);
 
                         item.TaxPortion = lineTotalTax;
 
