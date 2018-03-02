@@ -29,6 +29,8 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -2842,6 +2844,7 @@
     <Compile Include="Core\Controls\StoreNotFound.ascx.designer.cs">
       <DependentUpon>StoreNotFound.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Core\Models\MiniCartViewModel.cs" />
     <Compile Include="Core\Models\PinterestViewModel.cs" />
     <Compile Include="Core\Performance.ashx.cs">
       <DependentUpon>Performance.ashx</DependentUpon>
@@ -3234,9 +3237,7 @@
     <Compile Include="Core\Admin\AppCode\HccCreditCardGatewayPart.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Core\Admin\AppCode\HccPart.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="Core\Admin\AppCode\HccPart.cs" />
     <Compile Include="Core\Admin\AppCode\HccShippingPart.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
