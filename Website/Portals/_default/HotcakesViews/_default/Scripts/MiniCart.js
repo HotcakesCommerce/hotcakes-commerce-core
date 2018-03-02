@@ -30,8 +30,8 @@
         if (itemsRendered)
             return;
 
+        itemsRendered = true;
         $.post(hcc.getServiceUrl("Cart/MiniCartItems"), {}, function (data) {
-            itemsRendered = true;
             RenderMiniCartItems(data);
             if ($cartActions.length) {
                 $cartActions.show();
