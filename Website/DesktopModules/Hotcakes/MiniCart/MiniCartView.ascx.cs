@@ -36,8 +36,8 @@ namespace Hotcakes.Modules.MiniCart
 
             var viewName = Convert.ToString(Settings["View"]);
             if (!string.IsNullOrEmpty(viewName))
-                return MvcRenderingEngine.Render("Cart", "Index");
-            return MvcRenderingEngine.Render("Cart", "Index", "MiniCart", new {MiniCart = true});
+                return MvcRenderingEngine.Render("Cart", "MiniCart", viewName);
+            return MvcRenderingEngine.Render("Cart", "MiniCart", "MiniCart", new {MiniCart = true});
         }
     }
 }

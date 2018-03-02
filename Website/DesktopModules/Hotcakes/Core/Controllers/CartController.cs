@@ -336,6 +336,34 @@ namespace Hotcakes.Modules.Core.Controllers
             return View(model);
         }
 
+        // GET: /MiniCart/
+        [NonCacheableResponseFilter]
+        public ActionResult MiniCart()
+        {
+            var model = new MiniCartViewModel
+            {
+                TotalQuantity = (CurrentCart != null && CurrentCart.Items != null) ? CurrentCart.Items.Count : 0
+            };
+
+            return View(model);
+        }
+
+        // POST: /MiniCartItems
+        [ActionName("MiniCartItems")]
+        [HccHttpPost]
+        public JsonResult GetMiniCartItems()
+        {
+            var model = IndexSetup();
+            HandleActionParams();
+            CheckForQuickAdd();
+            LoadCart(model);
+            ValidateOrderCoupons();
+            CheckFreeItems(model);
+            CheckForStockOnItems(model);
+
+            return Json(model);
+        }
+
         // POST: /Cart/
         [ActionName("Index")]
         [HccHttpPost]
