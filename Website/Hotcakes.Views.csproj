@@ -26,6 +26,7 @@
     <SccProvider>SAK</SccProvider>
     <TargetFrameworkProfile />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -177,6 +178,7 @@
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\EditBilling.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\EstimateShipping.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\ImageRotator.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\MiniCart.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\OrderHistory.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Pager.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Products.js" />

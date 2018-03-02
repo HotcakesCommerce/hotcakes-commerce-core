@@ -1,25 +1,4 @@
 ﻿@model Hotcakes.Modules.Core.Models.CartViewModel
-<script type="text/javascript">
-    $(function () {
-        var $target = $('#hcMiniCartTooltip');
-        var $minicart = $('#hcMiniCart');
-        var $iconbox = $minicart.find(".hc-iconbox");
-
-        if ($target.length) {
-            $minicart.hover(function () {
-                $iconbox.css("background-color", "#FFF");
-                $target.slideDown().position(
-                    'right'
-                );
-            }, function () {
-                $target.slideUp(function () {
-                    $iconbox.css("background-color", "");
-                });
-            });
-        }
-    });
-</script>
-
 <div id="hcMiniCart" class="hc-minicart">
     <div class="hc-iconbox">
         <a href="@Url.RouteHccUrl(HccRoute.Cart)">
