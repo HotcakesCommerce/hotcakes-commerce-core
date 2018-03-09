@@ -325,7 +325,7 @@
             </assembly>
             <assembly>
               <path>bin</path>
-              <name>Hotcakes.Shipping.Ups.dll</name>
+              <name>Hotcakes.Shipping.UpsFreight.dll</name>
               <sourceFileName>bin\Hotcakes.Shipping.UpsFreight.dll</sourceFileName>
             </assembly>
             <assembly>
