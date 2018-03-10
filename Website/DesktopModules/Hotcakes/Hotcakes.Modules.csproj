@@ -311,7 +311,7 @@
     <Content Include="Core\Admin\Parts\GiftCardGateways\Hotcakes\Edit.ascx" />
     <Content Include="Core\Admin\Parts\PaymentMethods\Moneris\Edit.ascx" />
     <Content Include="Core\Admin\Parts\PaymentMethods\Ogone\Edit.ascx" />
-    <Content Include="Core\Admin\Parts\Shipping\UPSFreight\Edit.ascx" />
+    <Content Include="Core\Admin\Parts\Shipping\UPS Freight\Edit.ascx" />
     <Content Include="Core\Admin\Parts\TaxProviders\Avalara\Edit.ascx" />
     <Content Include="Core\Admin\People\Affiliates_Profile.aspx" />
     <Content Include="Core\Admin\People\AffiliatePayments.aspx" />
@@ -2767,11 +2767,11 @@
     <Compile Include="Core\Admin\Parts\PaymentMethods\Ogone\Edit.ascx.designer.cs">
       <DependentUpon>Edit.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Core\Admin\Parts\Shipping\UPSFreight\Edit.ascx.cs">
+    <Compile Include="Core\Admin\Parts\Shipping\UPS Freight\Edit.ascx.cs">
       <DependentUpon>Edit.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Core\Admin\Parts\Shipping\UPSFreight\Edit.ascx.designer.cs">
+    <Compile Include="Core\Admin\Parts\Shipping\UPS Freight\Edit.ascx.designer.cs">
       <DependentUpon>Edit.ascx</DependentUpon>
     </Compile>
     <Compile Include="Core\Admin\Parts\TaxProviders\Avalara\Edit.ascx.cs">
@@ -4338,7 +4338,7 @@
     <Content Include="Core\Admin\Catalog\App_LocalResources\Products_Import.aspx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Core\Admin\Parts\Shipping\UPSFreight\App_LocalResources\Edit.ascx.resx" />
+    <Content Include="Core\Admin\Parts\Shipping\UPS Freight\App_LocalResources\Edit.ascx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
