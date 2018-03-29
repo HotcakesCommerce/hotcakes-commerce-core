@@ -19,7 +19,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Hotcakes.Modules.Core.Admin.Controls.ProductsPickerWithVariant ProductPickerOrderProducts;
+        protected global::Hotcakes.Modules.Core.Admin.Controls.ProductPicker ProductPickerOrderProducts;
         
         /// <summary>
         /// btnAddProduct control.

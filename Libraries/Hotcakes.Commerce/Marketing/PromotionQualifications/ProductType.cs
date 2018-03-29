@@ -23,11 +23,8 @@
 
 #endregion
 
-using Hotcakes.Commerce.Orders;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
@@ -37,32 +34,29 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         public override Guid TypeId
         {
-            get { return new Guid(PromotionQualificationBase.TypeIdProductType); }
+            get { return new Guid(TypeIdProductType); }
         }
 
-		public bool IsNotMode
-		{
-			get
-			{
-				string all = GetSetting("PrTIsNotMode");
+        public bool IsNotMode
+        {
+            get
+            {
+                var all = GetSetting("PrTIsNotMode");
 
-				return all == "1";
-			}
-			set
-			{
-				SetSetting("PrTIsNotMode", value);
-			}
-		}
+                return all == "1";
+            }
+            set { SetSetting("PrTIsNotMode", value); }
+        }
 
         public override string FriendlyDescription(HotcakesApplication app)
         {
-            List<Catalog.ProductType> allTypes = app.CatalogServices.ProductTypes.FindAll();
-            allTypes.Insert(0, new Catalog.ProductType() { Bvin = "0", ProductTypeName = "Generic" });
+            var allTypes = app.CatalogServices.ProductTypes.FindAll();
+            allTypes.Insert(0, new Catalog.ProductType {Bvin = "0", ProductTypeName = "Generic"});
 
-			string result = "When Product Type is" + (IsNotMode ? " not" : string.Empty) + " :<ul>";
-            foreach (string bvin in this.CurrentIds())
+            var result = "When Product Type is" + (IsNotMode ? " not" : string.Empty) + " :<ul>";
+            foreach (var bvin in CurrentIds())
             {
-                Catalog.ProductType p = allTypes.Where(y => y.Bvin == bvin).FirstOrDefault();
+                var p = allTypes.Where(y => y.Bvin == bvin).FirstOrDefault();
                 if (p != null)
                 {
                     result += "<li>" + p.ProductTypeName + "</li>";
@@ -74,7 +68,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         protected override void OnInit()
         {
-            this.ProcessingCost = RelativeProcessingCost.Lowest;
+            ProcessingCost = RelativeProcessingCost.Lowest;
         }
 
         public override string IdSettingName
@@ -89,18 +83,18 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             if (context.Product == null) return false;
             if (context.UserPrice == null) return false;
 
-			var ids = this.CurrentIds();
-			string match = context.Product.ProductTypeId.Trim().ToLowerInvariant();
+            var ids = CurrentIds();
+            var match = context.Product.ProductTypeId.Trim().ToLowerInvariant();
 
-			// for "generic" type we need to match 0 instead of empty string
-			if (match == string.Empty) match = "0";
+            // for "generic" type we need to match 0 instead of empty string
+            if (match == string.Empty) match = "0";
 
-			if (IsNotMode)
-			{
-				return !ids.Contains(match);
-			}
-				return ids.Contains(match);
-			}
+            if (IsNotMode)
+            {
+                return !ids.Contains(match);
+            }
+            return ids.Contains(match);
+        }
 
         #endregion
 
@@ -109,10 +103,10 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
         public ProductType()
         {
         }
- 
+
         public ProductType(string id)
             : base(id)
-        { 
+        {
         }
 
         #endregion

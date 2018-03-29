@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ReceiveFreeProductEditor.ascx.cs" Inherits="Hotcakes.Modules.Core.Admin.Marketing.Actions.ReceiveFreeProduct" %>
-<%@ Register Src="../../Controls/ProductsPickerWithVariant.ascx" TagName="ProductPicker" TagPrefix="hcc" %>
+<%@ Register Src="../../Controls/ProductPicker.ascx" TagName="ProductPicker" TagPrefix="hcc" %>
 <h1><%=Localization.GetString("ReceiveTheseProducts") %></h1>
 <table class="hc-popup-table" hc-popup-width="700" border="0">
     <tr>

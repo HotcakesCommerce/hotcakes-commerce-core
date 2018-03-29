@@ -128,7 +128,6 @@
   display: inline-flex !important;
   display: -webkit-inline-flex !important;
   display: -ms-inline-flexbox !important;
-  width:50%;
 }
 #ControlNavQuickLink > li {
   position: relative;
