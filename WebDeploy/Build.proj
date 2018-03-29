@@ -118,7 +118,7 @@
 		<Copy SourceFiles="Tropical_Container_01.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Container" />
 
 
-		<Copy SourceFiles="$(InstallFolder)\HotcakesCommerce_Core_$(Version)_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Module\" />
+		<Copy SourceFiles="$(InstallFolder)\HotcakesCommerce_$(Version)_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Module\" />
 		<Copy SourceFiles="$(RootFolder)\References\Dnn\System.Web.Abstractions.dll" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\bin" />
 		<Copy SourceFiles="$(RootFolder)\References\Dnn\System.Web.Routing.dll" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\bin" />
 
@@ -147,7 +147,7 @@
 		<ItemGroup>
 			<WebDeploy Include="$(WebDeployBuildFolder)\**" />
 		</ItemGroup>
-		<Zip Files="@(WebDeploy)" WorkingDirectory="$(WebDeployBuildFolder)" ZipFileName="$(InstallFolder)\HotcakesCommerce_CMS_$(Version)_Deploy.zip" ParallelCompression="False" />
+		<Zip Files="@(WebDeploy)" WorkingDirectory="$(WebDeployBuildFolder)" ZipFileName="$(InstallFolder)\HotcakesCommerce_$(Version)_Deploy.zip" ParallelCompression="False" />
 	</Target>
 
 	<Target Name="CreateWPIFeed">
@@ -157,10 +157,10 @@
 		<PropertyGroup>
 			<FileHash />
 			<FileSize />
-			<FileUrl>https://upendoventures.com/Portals/0/Downloads/$(Version)/HotcakesCommerce_CMS_$(Version)_Deploy.zip</FileUrl>
+			<FileUrl>https://hotcakes.org/Portals/0/Downloads/$(Version)/HotcakesCommerce_$(Version)_Deploy.zip</FileUrl>
 		</PropertyGroup>
 
-		<GenerateSha1Hash InputFile="$(InstallFolder)\HotcakesCommerce_CMS_$(Version)_Deploy.zip" >
+		<GenerateSha1Hash InputFile="$(InstallFolder)\HotcakesCommerce_$(Version)_Deploy.zip" >
 			<Output TaskParameter="FileHash" PropertyName="FileHash"/>
 		</GenerateSha1Hash>
 
@@ -170,7 +170,7 @@
 		  XPath="//ns:feed/ns:entry[ns:productId/text()='Hotcakes']/ns:installers/ns:installer[ns:id='1']/ns:installerFile/ns:sha1"
 		  Value="$(FileHash)" />
 
-		<GetFileSize InputFile="$(InstallFolder)\HotcakesCommerce_CMS_$(Version)_Deploy.zip" >
+		<GetFileSize InputFile="$(InstallFolder)\HotcakesCommerce_$(Version)_Deploy.zip" >
 			<Output TaskParameter="FileSize" PropertyName="FileSize"/>
 		</GetFileSize>
 
@@ -282,7 +282,7 @@
 		<!-- Duplicate WebDeploy Package for customization -->
 		<CallTarget Targets="CleanSource" />
 		<Unzip ZipFileName="$(DnnPackage)" TargetDirectory="$(SourceBuildFolder)\Website" />
-		<Copy SourceFiles="$(InstallFolder)\HotcakesCommerce_Core_$(Version)_Install.zip" DestinationFolder="$(SourceBuildFolder)\Website\Install\Module\" />
+		<Copy SourceFiles="$(InstallFolder)\HotcakesCommerce_$(Version)_Install.zip" DestinationFolder="$(SourceBuildFolder)\Website\Install\Module\" />
 		<CallTarget Targets="BrandSourcePackage" />
 		<CallTarget Targets="PackageSource" />
 	</Target>
@@ -292,7 +292,7 @@
 		<ItemGroup>
 			<SourceFiles Include="$(SourceBuildFolder)\**" />
 		</ItemGroup>
-		<Zip Files="@(SourceFiles)" WorkingDirectory="$(SourceBuildFolder)" ZipFileName="$(InstallFolder)\HotcakesCommerce_Core_$(Version)_Source.zip" ParallelCompression="False" />
+		<Zip Files="@(SourceFiles)" WorkingDirectory="$(SourceBuildFolder)" ZipFileName="$(InstallFolder)\HotcakesCommerce_$(Version)_Source.zip" ParallelCompression="False" />
 	</Target>
 
 </Project>

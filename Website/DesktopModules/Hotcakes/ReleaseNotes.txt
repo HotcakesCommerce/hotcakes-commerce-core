@@ -1,19 +1,4 @@
-﻿<h5>Version 03.01.00</h5>
-<p><strong>Highlights</strong></p>
-<p><strong>Enhancements</strong></p>
-<ul>
-	<li><strong>Promotion Support for Product Variants</strong> - You can now specify a variant for a promotion to run against when creating sales/offers.</li>
-	<li><strong>Virtual Directory Support</strong> - Hotcakes can now run in a virtual directory instance.</li>
-</ul>
-<p><strong>Bug Fixes</strong></p>
-<ul>
-	<li>Issue #59 - Removed cookie compatibility checks to resolve cross-browser cookie support. https://github.com/HotcakesCommerce/core/compare/Issues/Issue-59</li>
-</ul>
-<h5>Thank you to the following community members for participating in this release!</h5>
-<ul>
-	<li>MarkXA</li>
-</ul>
-<h5>Version 03.00.01</h5>
+﻿<h5>Version 03.00.01</h5>
 <p><strong>Highlights</strong></p>
 <blockquote>
 	<p><strong>Important Notes</strong></p>

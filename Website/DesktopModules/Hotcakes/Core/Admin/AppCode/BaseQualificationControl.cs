@@ -24,9 +24,6 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Hotcakes.Commerce.Marketing;
 using Hotcakes.Commerce.Marketing.PromotionQualifications;
 
@@ -34,26 +31,22 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
 {
     [Serializable]
     public abstract class BaseQualificationControl : HccUserControl
-	{
-		public Promotion Promotion { get; set; }
-		public IPromotionQualification Qualification { get; set; }
+    {
+        public Promotion Promotion { get; set; }
+        public IPromotionQualification Qualification { get; set; }
 
-		public abstract void LoadQualification();
-		public abstract bool SaveQualification();
+        public abstract void LoadQualification();
+        public abstract bool SaveQualification();
 
-		protected bool UpdatePromotion()
-		{
-			return HccApp.MarketingServices.Promotions.Update(Promotion);
-		}
+        protected bool UpdatePromotion()
+        {
+            return HccApp.MarketingServices.Promotions.Update(Promotion);
+        }
 
-		protected class FriendlyBvinDisplay
-		{
-			public string bvin { get; set; }
-			public string Sku { get; set; }
-			public string DisplayName { get; set; }
-			public bool HasVariants { get; set; }
-			public int AvailableVariants { get; set; }
-			public List<string> SelectedVariants { get; set; }
-		}
-	}
+        protected class FriendlyBvinDisplay
+        {
+            public string bvin { get; set; }
+            public string DisplayName { get; set; }
+        }
+    }
 }
