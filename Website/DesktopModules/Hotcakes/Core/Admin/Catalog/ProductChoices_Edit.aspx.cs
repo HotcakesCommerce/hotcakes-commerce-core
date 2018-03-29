@@ -41,7 +41,10 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
         protected string OptionId
         {
-            get { return Request.QueryString["cid"]; }
+            get
+            {
+                return Request.QueryString["cid"];
+            }
         }
 
         #endregion
@@ -56,10 +59,10 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
 
             _localProduct = HccApp.CatalogServices.Products.Find(ProductId);
-            _option = _localProduct.Options.FirstOrDefault(y => y.Bvin == OptionId);
+            _option = _localProduct.Options.Where(y => y.Bvin == OptionId).FirstOrDefault();
             ItemsEditor.OptionId = _option.Bvin;
-            trVariant.Visible = _option.OptionType == OptionTypes.DropDownList ||
-                                _option.OptionType == OptionTypes.RadioButtonList;
+            trVariant.Visible = _option.OptionType == OptionTypes.DropDownList || 
+                                _option.OptionType == OptionTypes.RadioButtonList ;
             trRequired.Visible = _option.OptionType == OptionTypes.DropDownList ||
                                  _option.OptionType == OptionTypes.RadioButtonList ||
                                  _option.OptionType == OptionTypes.CheckBoxes;

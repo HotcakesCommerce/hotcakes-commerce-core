@@ -56,7 +56,7 @@ namespace Hotcakes.Commerce
 
         public static string FriendlySKU
         {
-            get { return "Pro"; }
+            get { return string.Empty; }
         }
 
         public static string CookieNameCartIdPaymentPending(long storeId)
