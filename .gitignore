@@ -105,7 +105,7 @@ Desktop.ini
 [Ww]ebsite/[Bb]in
 [Ww]ebsite/[Bb]in/[Hh]otcakes.*
 [Ww]ebsite/[Dd]esktop[Mm]odules/[Hh]otcakes/[Bb]in
-[Ww]bsite/[Ii]nstall/[Tt]emp/
+[Ww]ebsite/[Ii]nstall/[Tt]emp/
 [Ww]ebsite/[Ii]nstall/*/*.zip
 [Ww]ebsite/[Ii]nstall/*/*.resources
 [Ww]ebsite/[Ii]nstall/[Cc]leanup
@@ -113,6 +113,7 @@ Desktop.ini
 [Ww]ebsite/[Ii]nstall/installstat.log.resources.txt
 [Ww]ebsite/[Ii]nstall/upgradestat.log.resources.txt
 [Ww]ebsite/[Pp]roviders/[Hh]tml[Ee]ditor[Pp]roviders/
+[Ww]ebsite/[Pp]ortals/**/[Cc]ache
 [Ww]ebsite/[Pp]ortals/_default/CK*.xml
 [Ww]ebsite/[Pp]ortals/_default/[Ii]nstall/CK*.xml
 [Ww]ebsite/[Pp]ortals/_default/[Ll]ogs
