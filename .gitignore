@@ -82,7 +82,6 @@ UpgradeLog*.XML
 # Ignore artifacts from deployed/installed site
 
 _[Ii]nstall
-_[Bb]uild
 
 *.zip.manifest
 
@@ -102,25 +101,19 @@ Thumbs.db
 # Folder config file
 Desktop.ini
 
-<<<<<<< HEAD
 [Ww]ebsite/[Aa]pp_[Cc]ode
 [Ww]ebsite/[Aa]pp_[Dd]ata
 ![Ww]ebsite/[Aa]pp_[Dd]ata/[Pp]lace[Hh]older.txt
-=======
 [Ww]ebsite/[Aa]pp_[Dd]ata
->>>>>>> upstream/development
 [Ww]ebsite/[Bb]in
 [Ww]ebsite/[Bb]in/[Hh]otcakes.*
 [Ww]ebsite/[Dd]esktop[Mm]odules/[Hh]otcakes/[Bb]in
 [Ww]bsite/[Ii]nstall/[Tt]emp/
-<<<<<<< HEAD
-=======
 [Ww]ebsite/[Ii]nstall/*/*.zip
 [Ww]ebsite/[Ii]nstall/*/*.resources
 [Ww]ebsite/[Ii]nstall/[Cc]leanup
 [Ww]ebsite/[Ii]nstall/[Cc]onfig
 [Ww]ebsite/[Ii]nstall/installstat.log.resources.txt
->>>>>>> upstream/development
 [Ww]ebsite/[Ii]nstall/upgradestat.log.resources.txt
 [Ww]ebsite/[Pp]roviders/[Hh]tml[Ee]ditor[Pp]roviders/
 [Ww]ebsite/[Pp]ortals/**/[Cc]ache

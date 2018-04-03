@@ -78,6 +78,13 @@ namespace Hotcakes.Modules.ControlPanel
             conrolbar_logo.ImageUrl = "~/DesktopModules/Hotcakes/ControlPanel/controlbarimages/admin_logo.png";
             aHostAdmin.Visible = HccApp.MembershipServices.IsSuperUserLoggedIn();
             aHostAdmin.HRef = VirtualPathUtility.ToAbsolute("~/DesktopModules/Hotcakes/Core/Admin/HostAdmin.aspx");
+
+            UserInfo objUser = UserController.Instance.GetCurrentUserInfo();
+            if (objUser != null && objUser.IsSuperUser)
+            {
+                Version version = Assembly.LoadFrom(AppDomain.CurrentDomain.BaseDirectory + "bin\\Hotcakes.Commerce.dll").GetName().Version;                
+                updateService.ImageUrl = "https://hotcakes.org/DesktopModules/HCC/UpdateService/update.aspx?version=" + version.Major.ToString("00") + version.Minor.ToString("00") + version.Build.ToString("00") + "&type=Module&name=Hotcakes&no=1&id=" + HostController.Instance.GetString("GUID");
+            }
         }
 
         protected override void OnInit(EventArgs e)

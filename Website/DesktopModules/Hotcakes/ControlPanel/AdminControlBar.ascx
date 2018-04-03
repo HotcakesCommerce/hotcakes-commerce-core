@@ -3,7 +3,7 @@
 <%@ Import namespace="System.Data" %>
 <%@ Import Namespace="DotNetNuke.Security.Permissions" %>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web" %>
-<%@ Register Src="~/DesktopModules/Hotcakes/Core/Admin/Controls/Languages.ascx" TagPrefix="hcc" TagName="Languages" %>
+<%@ Register Src="/DesktopModules/Hotcakes/Core/Admin/Controls/Languages.ascx" TagPrefix="hcc" TagName="Languages" %>
 
 <div id="ControlBar_ControlPanel">
     <asp:Panel ID="ControlPanel" runat="server">
@@ -11,6 +11,7 @@
 		    <div class="ControlContainer">
 			    <div class="ServiceIcon">
 				    <asp:Image ID="conrolbar_logo" runat="server" AlternateText="HCClogo" ViewStateMode="Disabled" />
+				    <asp:Image ID="updateService" runat="server" AlternateText="" ViewStateMode="Disabled" />
 			    </div>
 			    <% if (UserController.Instance.GetCurrentUserInfo().IsInRole(PortalSettings.AdministratorRoleName)) {%>
 				    <ul id="ControlNav" >
@@ -38,7 +39,7 @@
 
 				    <ul id="ControlNavQuickLink">
 					    <li>
-						    <a id="GoToStore" href="<%=Hotcakes.Commerce.Urls.HccUrlBuilder.RouteHccUrl(Hotcakes.Commerce.Urls.HccRoute.Home) %>"> <img src="<%= Request.IsSecureConnection ? "https://" : "http://" %><%=PortalSettings.PortalAlias.HTTPAlias %>/DesktopModules/Hotcakes/ControlPanel/controlbarimages/Store-icon.png"/> Go To Store</a>
+						    <a id="GoToStore" href="<%=Hotcakes.Commerce.Urls.HccUrlBuilder.RouteHccUrl(Hotcakes.Commerce.Urls.HccRoute.Home) %>"> <img src="/DesktopModules/Hotcakes/ControlPanel/controlbarimages/Store-icon.png"/> Go To Store</a>
 					    </li>
 					    <li>
 						    <hcc:Languages runat="server" ID="ucLanguages" />

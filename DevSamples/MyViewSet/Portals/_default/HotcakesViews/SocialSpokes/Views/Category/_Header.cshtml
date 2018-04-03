@@ -19,3 +19,37 @@
         </div>
     </div>
 }
+@if (WebAppSettings.IsSocial && !string.IsNullOrWhiteSpace(Model.LocalCategory.Bvin))
+{
+    <div class="clearfix" data-bind="stopBinding: true">
+        <ul class="hc-social-actions">
+            <!-- ko if: liked -->
+            <li><a href="javascript:void(0)" data-bind="click: unlike" class="hc-social-like-liked" title="@Localization.GetString("UnlikeThis")"></a></li>
+            <!-- /ko -->
+            <!-- ko ifnot: liked -->
+            <li><a href="javascript:void(0)" data-bind="click: like" class="hc-social-like" title="@Localization.GetString("LikeThis")"></a></li>
+            <!-- /ko -->
+            <!-- ko if: bookmarked -->
+            <li><a href="javascript:void(0)" data-bind="click: unbookmark" class="hc-social-bookmark on" title="@Localization.GetString("RemoveBookmark")"></a></li>
+            <!-- /ko -->
+            <!-- ko ifnot: bookmarked -->
+            <li><a href="javascript:void(0)" data-bind="click: bookmark" class="hc-social-bookmark" title="@Localization.GetString("AddBookmark")"></a></li>
+            <!-- /ko -->
+            <!-- ko if: false -->
+            <!-- ko if: subscribed -->
+            <li><a href="javascript:void(0)" data-bind="click: unsubscribe" class="hc-social-rss-subscribed" title="@Localization.GetString("Unsubscribe")"></a></li>
+            <!-- /ko -->
+            <!-- ko ifnot: subscribed -->
+            <li><a href="javascript:void(0)" data-bind="click: subscribe" class="hc-social-rss" title="@Localization.GetString("Subscribe")"></a></li>
+            <!-- /ko -->
+            <!-- /ko -->
+        </ul>
+    </div>
+    <script type='text/javascript'>
+        function viewCategoryInit(settings) {
+            var model = @Html.Raw(Model.SocialItem.ToJson());
+
+            ko.applyBindings(new hcc.social.ActionView($, ko, settings, model), $(".hc-social-actions")[0]);
+        }
+    </script>
+}

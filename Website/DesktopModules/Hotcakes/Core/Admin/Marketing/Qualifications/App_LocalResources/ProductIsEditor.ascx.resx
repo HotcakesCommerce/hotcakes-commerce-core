@@ -117,23 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btnSave.Text" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="btnClose.Text" xml:space="preserve">
-    <value>Close</value>
-  </data>
   <data name="Delete.Text" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="None.Text" xml:space="preserve">
-    <value>None</value>
-  </data>
   <data name="NoProductsAdded.Text" xml:space="preserve">
     <value>No products added. Please choose products from left column and add here...</value>
-  </data>
-  <data name="Of.Text" xml:space="preserve">
-    <value>of</value>
   </data>
   <data name="WhenLineItemIs.Text" xml:space="preserve">
     <value>When Line Item Is...</value>
