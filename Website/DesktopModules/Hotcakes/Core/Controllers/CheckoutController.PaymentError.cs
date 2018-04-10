@@ -42,11 +42,6 @@ namespace Hotcakes.Modules.Core.Controllers
 		[NonCacheableResponseFilter]
 		public ActionResult PaymentError()
 		{
-			if (CurrentCart == null || CurrentCart.Items == null || CurrentCart.Items.Count == 0)
-			{
-				Response.Redirect(Url.RouteHccUrl(HccRoute.Cart));
-			}
-
 			CheckoutViewModel model = PaymentErrorSetup();
 			if (ValidateSession(model))
 			{
