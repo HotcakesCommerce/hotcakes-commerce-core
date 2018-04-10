@@ -11,6 +11,7 @@
 *.sln.docstates
 *.local.sln
 *.GhostDoc.xml
+._*.*
 
 ## Ignore VS2015/Roslyn artifacts
 *.sln.ide/
