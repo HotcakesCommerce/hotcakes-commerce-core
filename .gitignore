@@ -43,6 +43,7 @@
 *.dotCover
 *.ldf
 MSBuildLog.txt
+_[Bb]uild/
 
 # git merge artifacts
 *.orig
@@ -82,7 +83,7 @@ UpgradeLog*.XML
 
 # Ignore artifacts from deployed/installed site
 
-_[Ii]nstall
+_[Ii]nstall/
 
 *.zip.manifest
 
