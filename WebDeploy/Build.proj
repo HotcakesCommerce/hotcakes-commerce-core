@@ -231,6 +231,7 @@
 		<Copy SourceFiles="Rural_Container_01.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Container" />
 		<Copy SourceFiles="Warm_Container_01.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Container" />
 		<Copy SourceFiles="Tropical_Container_01.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Container" />
+		<Copy SourceFiles="HCC.Application_03.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Module" />
 
 		
 		<Copy SourceFiles="$(RootFolder)\References\Dnn\System.Web.Abstractions.dll" DestinationFolder="$(SourceBuildFolder)\Website\bin" />
