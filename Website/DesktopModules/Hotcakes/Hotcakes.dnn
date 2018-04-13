@@ -382,6 +382,7 @@
               <path>bin</path>
               <name>ImageResizer.dll</name>
               <sourceFileName>bin\ImageResizer.dll</sourceFileName>
+              <version>03.04.02.549</version>
             </assembly>
             <assembly>
               <path>bin</path>
