@@ -96,6 +96,7 @@
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.FedEx.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.Ups.dll" />
+      <HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.UpsFreight.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.USPostal.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Web.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\$(AssemblyName).dll" />
@@ -166,7 +167,7 @@
 			<Output TaskParameter="Include" ItemName="OutputContent" />
 		</CreateItem>
 
-		<Zip Files="@(OutputContent)" WorkingDirectory="$(ModulesBuildFolder)" ZipFileName="$(InstallFolder)\$(PackageName)_$(Version)_Install.$(Extension)" ParallelCompression="False" />
+		<Zip Files="@(OutputContent)" WorkingDirectory="$(ModulesBuildFolder)" ZipFileName="$(InstallFolder)\$(PackageName)_$(Version)_Core_Install.$(Extension)" ParallelCompression="False" />
 
 		
 		<RemoveDir Directories ="$(CoreBuildFolder)" /> 
@@ -179,7 +180,7 @@
 		<CreateItem Include="$(DebugBuildFolder)\**\*.*">
 			<Output TaskParameter="Include" ItemName="DebugOutputContent" />
 		</CreateItem>
-		<Zip Files="@(DebugOutputContent)" WorkingDirectory="$(DebugBuildFolder)" ZipFileName="$(InstallFolder)\$(PackageName)_$(Version)_DebugSymbols.$(Extension)" ParallelCompression="False" />
+		<Zip Files="@(DebugOutputContent)" WorkingDirectory="$(DebugBuildFolder)" ZipFileName="$(InstallFolder)\$(PackageName)_$(Version)_Core_DebugSymbols.$(Extension)" ParallelCompression="False" />
 
 		
 		<RemoveDir Directories ="$(DebugBuildFolder)" />

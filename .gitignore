@@ -11,6 +11,7 @@
 *.sln.docstates
 *.local.sln
 *.GhostDoc.xml
+._*.*
 
 ## Ignore VS2015/Roslyn artifacts
 *.sln.ide/
@@ -42,6 +43,7 @@
 *.dotCover
 *.ldf
 MSBuildLog.txt
+_[Bb]uild/
 
 # git merge artifacts
 *.orig
@@ -81,8 +83,7 @@ UpgradeLog*.XML
 
 # Ignore artifacts from deployed/installed site
 
-_[Ii]nstall
-_[Bb]uild
+_[Ii]nstall/
 
 *.zip.manifest
 

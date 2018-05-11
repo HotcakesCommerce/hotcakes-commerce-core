@@ -1,4 +1,24 @@
-﻿<h5>Version 03.01.00</h5>
+﻿<h5>Version 03.02.00</h5>
+<p><strong>Highlights</strong></p>
+<p><strong>Enhancements</strong></p>
+<ul>
+	<li><strong>SE: UPS Freight Shipping Provider</strong> - UPS Freight is now supported as a built-in shipping method. <a href="https://github.com/HotcakesCommerce/core/issues/59" target="_blank">Issue 59</a></li>
+</ul>
+<p><strong>Bug Fixes</strong></p>
+<ul>
+	<li><a href="https://github.com/HotcakesCommerce/core/issues/91" target="_blank">Issue 91</a> - Resolved issue where tax calculation may be perform in the wrong order.</li>
+	<li><a href="https://github.com/HotcakesCommerce/core/issues/55" target="_blank">Issue 55</a> - Removed the unsupported IsSocial reference from viewsets.</li>
+	<li><a href="https://github.com/HotcakesCommerce/core/issues/16" target="_blank">Issue 16</a> - Removed the commercial SKU from administration views.</li>
+	<li><a href="https://github.com/HotcakesCommerce/core/issues/120" target="_blank">Issue 120</a> - Declined payments may not be reported to customers.</li>
+</ul>
+<h5>Thank you to the following community members for participating in this release!</h5>
+<ul>
+	<li>Will Strohl, <a href="https://upendoventures.com" target="_blank">Upendo Ventures</a></li>
+	<li>Josh Slaughter, <a href="https://www.clicksandmortarwebsites.com/" target="_blank">Clicks &amp; Mortar Websites</a></li>
+	<li>Matt Rutledge, <a href="http://www.believegroup.com/" target="_blank">Believe Group</a></li>
+</ul>
+
+<h5>Version 03.01.00</h5>
 <p><strong>Highlights</strong></p>
 <p><strong>Enhancements</strong></p>
 <ul>
@@ -13,6 +33,7 @@
 <ul>
 	<li>MarkXA</li>
 </ul>
+
 <h5>Version 03.00.01</h5>
 <p><strong>Highlights</strong></p>
 <blockquote>

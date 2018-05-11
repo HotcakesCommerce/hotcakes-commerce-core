@@ -118,7 +118,7 @@
 		<Copy SourceFiles="Tropical_Container_01.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Container" />
 
 
-		<Copy SourceFiles="$(InstallFolder)\HotcakesCommerce_$(Version)_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Module\" />
+		<Copy SourceFiles="$(InstallFolder)\HotcakesCommerce_$(Version)_Core_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Module\" />
 		<Copy SourceFiles="$(RootFolder)\References\Dnn\System.Web.Abstractions.dll" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\bin" />
 		<Copy SourceFiles="$(RootFolder)\References\Dnn\System.Web.Routing.dll" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\bin" />
 
@@ -231,6 +231,7 @@
 		<Copy SourceFiles="Rural_Container_01.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Container" />
 		<Copy SourceFiles="Warm_Container_01.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Container" />
 		<Copy SourceFiles="Tropical_Container_01.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Container" />
+		<Copy SourceFiles="HCC.Application_03.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Module" />
 
 		
 		<Copy SourceFiles="$(RootFolder)\References\Dnn\System.Web.Abstractions.dll" DestinationFolder="$(SourceBuildFolder)\Website\bin" />
@@ -282,7 +283,7 @@
 		<!-- Duplicate WebDeploy Package for customization -->
 		<CallTarget Targets="CleanSource" />
 		<Unzip ZipFileName="$(DnnPackage)" TargetDirectory="$(SourceBuildFolder)\Website" />
-		<Copy SourceFiles="$(InstallFolder)\HotcakesCommerce_$(Version)_Install.zip" DestinationFolder="$(SourceBuildFolder)\Website\Install\Module\" />
+		<Copy SourceFiles="$(InstallFolder)\HotcakesCommerce_$(Version)_Core_Install.zip" DestinationFolder="$(SourceBuildFolder)\Website\Install\Module\" />
 		<CallTarget Targets="BrandSourcePackage" />
 		<CallTarget Targets="PackageSource" />
 	</Target>
