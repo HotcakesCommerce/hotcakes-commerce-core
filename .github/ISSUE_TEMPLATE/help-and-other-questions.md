@@ -1,6 +1,6 @@
 ---
-name: Help and other questions
-about: Use
+name: Help and Other Questions
+about: Use this to ask questions that don't relate to features and bug reports
 
 ---
 
