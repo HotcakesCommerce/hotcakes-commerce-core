@@ -153,19 +153,4 @@
   <data name="WhenOrderHasNotProducts.Text" xml:space="preserve">
     <value>When Order Does Not Have Product(s)...</value>
   </data>
-  <data name="None.Text" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="btnCloseProductVariantsSelectionEditor.Text" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="btnSaveProductVariantsSelection.Text" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="btnClose.Text" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="btnSave.Text" xml:space="preserve">
-    <value>Save</value>
-  </data>
 </root>

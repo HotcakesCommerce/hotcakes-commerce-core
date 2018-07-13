@@ -24,28 +24,18 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using DotNetNuke.UI.Modules;
-using DotNetNuke.Services.Exceptions;
-using DotNetNuke.UI.Skins.Controls;
-using DotNetNuke.Services.Localization;
-using DotNetNuke.UI.Skins;
 using System.Web.UI.WebControls;
-using DotNetNuke.Web.Client.ClientResourceManagement;
-using DotNetNuke.Web.Client;
-using DotNetNuke.Framework;
 using DotNetNuke.Entities.Modules;
-using Hotcakes.Commerce.Dnn.Mvc;
+using DotNetNuke.Framework.JavaScriptLibraries;
+using DotNetNuke.Services.Exceptions;
 using DotNetNuke.UI.Utilities;
+using DotNetNuke.Web.Client;
+using DotNetNuke.Web.Client.ClientResourceManagement;
+using Hotcakes.Commerce.Dnn.Mvc;
+using Hotcakes.Commerce.Utilities;
 using Hotcakes.Web;
 using StackExchange.Profiling;
-using Hotcakes.Commerce.Globalization;
-using Hotcakes.Commerce.Utilities;
-using DotNetNuke.Framework.JavaScriptLibraries;
-
 
 namespace Hotcakes.Commerce.Dnn.Web
 {
@@ -69,13 +59,10 @@ namespace Hotcakes.Commerce.Dnn.Web
 
         public MvcRenderingEngine MvcRenderingEngine { get; set; }
 
-		protected HotcakesApplication HccApp
-		{
-			get
-			{
-				return HotcakesApplication.Current;
-			}
-		}
+        protected HotcakesApplication HccApp
+        {
+            get { return HotcakesApplication.Current; }
+        }
 
         protected override void OnInit(EventArgs e)
         {
@@ -112,13 +99,13 @@ namespace Hotcakes.Commerce.Dnn.Web
 
                 JavaScript.RequestRegistration(CommonJs.DnnPlugins);
 
-                Panel panel = new Panel();
+                var panel = new Panel();
 
                 using (MiniProfiler.Current.Step(ModuleConfiguration.DesktopModule.FriendlyName))
                 {
                     var view = RenderView();
 
-                    LiteralControl literal = new LiteralControl(view);
+                    var literal = new LiteralControl(view);
 
                     panel.CssClass = "hcMvcView";
                     literal.EnableViewState = false;
@@ -208,10 +195,11 @@ namespace Hotcakes.Commerce.Dnn.Web
 
         protected void RegisterScriptVariables()
         {
-			string httpAlias = string.IsNullOrEmpty(PortalSettings.PortalAlias.HTTPAlias) ? PortalSettings.DefaultPortalAlias : PortalSettings.PortalAlias.HTTPAlias;
-            int startIndex = httpAlias.IndexOf('/');
-            string str = startIndex <= 0 ? "/" : httpAlias.Substring(startIndex);
-            string strValue = str.EndsWith("/") ? str : str + "/";
+            var httpAlias = PortalSettings.DefaultPortalAlias;
+            var startIndex = httpAlias.IndexOf('/');
+            var str = startIndex <= 0 ? "/" : httpAlias.Substring(startIndex);
+            var strValue = str.EndsWith("/") ? str : str + "/";
+
             ClientAPI.RegisterClientVariable(Page, "hc_siteRoot", strValue, /*overwrite*/ true);
         }
 

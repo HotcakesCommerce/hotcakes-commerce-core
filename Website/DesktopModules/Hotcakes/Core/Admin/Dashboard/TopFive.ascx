@@ -25,7 +25,7 @@
                 var self = Top5;
                 scope.ajaxLoader("start");
 
-                $.post('~/Dashboard/DashboardHandler.ashx',
+                $.post('Dashboard/DashboardHandler.ashx',
                     {
                         "method": "GetTop5Data",
                         "mode": mode,
@@ -37,35 +37,35 @@
                     .done(function (data) {
                         if (data.Products) {
                             $.each(data.Products, function (i, v) {
-                                v.Url = "~/DesktopModules/Hotcakes/Core/Admin/catalog/Products_Performance.aspx?id=" + v.Id;
+                                v.Url = "/DesktopModules/Hotcakes/Core/Admin/catalog/Products_Performance.aspx?id=" + v.Id;
                             });
                             if (self.model)
                                 ko.mapping.fromJS(data.Products, self.model.Products);
                         }
                         if (data.AbandonedProducts) {
                             $.each(data.AbandonedProducts, function (i, v) {
-                                v.Url = "~/DesktopModules/Hotcakes/Core/Admin/catalog/Products_Performance.aspx?id=" + v.Id;
+                                v.Url = "/DesktopModules/Hotcakes/Core/Admin/catalog/Products_Performance.aspx?id=" + v.Id;
                             });
                             if (self.model)
                                 ko.mapping.fromJS(data.AbandonedProducts, self.model.AbandonedProducts);
                         }
                         if (data.Customers) {
                             $.each(data.Customers, function (i, v) {
-                                v.Url = "~/DesktopModules/Hotcakes/Core/Admin/people/Users_Edit.aspx?id=" + v.Id;
+                                v.Url = "/DesktopModules/Hotcakes/Core/Admin/people/Users_Edit.aspx?id=" + v.Id;
                             });
                             if (self.model)
                                 ko.mapping.fromJS(data.Customers, self.model.Customers);
                         }
                         if (data.Vendors) {
                             $.each(data.Vendors, function (i, v) {
-                                v.Url = "~/DesktopModules/Hotcakes/Core/Admin/people/Vendors_edit.aspx?id=" + v.Id;
+                                v.Url = "/DesktopModules/Hotcakes/Core/Admin/people/Vendors_edit.aspx?id=" + v.Id;
                             });
                             if (self.model)
                                 ko.mapping.fromJS(data.Vendors, self.model.Vendors);
                         }
                         if (data.Affiliates) {
                             $.each(data.Affiliates, function (i, v) {
-                                v.Url = "~/DesktopModules/Hotcakes/Core/Admin/people/Affiliates_Profile.aspx?id=" + v.Id;
+                                v.Url = "/DesktopModules/Hotcakes/Core/Admin/people/Affiliates_Profile.aspx?id=" + v.Id;
                             });
                             if (self.model)
                                 ko.mapping.fromJS(data.Affiliates, self.model.Affiliates);

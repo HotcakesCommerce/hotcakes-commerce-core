@@ -30,6 +30,8 @@ using Hotcakes.Shipping;
 using Hotcakes.Shipping.FedEx;
 using Hotcakes.Shipping.Ups;
 using Hotcakes.Shipping.USPostal;
+using Hotcakes.Shipping.UpsFreight;
+using System;
 
 namespace Hotcakes.Commerce.Shipping
 {
@@ -78,6 +80,23 @@ namespace Hotcakes.Commerce.Shipping
             };
             result.Add(new UPSService(upsglobal, Factory.CreateEventLogger()));
 
+            
+            // Load UPS Freight
+            var upsFreightGlobal = new UPSFreightServiceGlobalSettings
+            {
+                AccountNumber = currentStore.Settings.ShippingUpsAccountNumber,
+                LicenseNumber = currentStore.Settings.ShippingUpsLicense,
+                Username = currentStore.Settings.ShippingUpsUsername,
+                Password = currentStore.Settings.ShippingUpsPassword,
+                DefaultPackaging = (Hotcakes.Shipping.UpsFreight.PackingTypes)currentStore.Settings.ShippingUpsFreightDefaultPackaging,
+                DiagnosticsMode = currentStore.Settings.ShippingUPSFreightDiagnostics,
+                ForceResidential = currentStore.Settings.ShippingUpsFreightForceResidential,
+                IgnoreDimensions = currentStore.Settings.ShippingUpsFreightSkipDimensions,
+                BillingOption = (Hotcakes.Shipping.UpsFreight.BillingOption)currentStore.Settings.ShippingUpsFreightBillingOption,
+                HandleOneUnitType = (currentStore.Settings.ShippingUpsFreightHandleOneUnitType != string.Empty ? (HandlineOneUnitType)Enum.Parse(typeof(HandlineOneUnitType),currentStore.Settings.ShippingUpsFreightHandleOneUnitType) : HandlineOneUnitType.CBY),
+                FreightClass = currentStore.Settings.ShippingUpsFreightFreightClass
+            };
+            result.Add(new UPSFreightService(upsFreightGlobal, Factory.CreateEventLogger()));
             return result;
         }
 

@@ -1,7 +1,7 @@
 <%@ Control Language="C#" AutoEventWireup="True" Inherits="Hotcakes.Modules.Core.Admin.Header" CodeBehind="Header.ascx.cs" %>
 <%@ Register Src="Controls/Menu.ascx" TagName="Menu" TagPrefix="hcc" %>
 <%@ Register Src="Controls/Languages.ascx" TagPrefix="hcc" TagName="Languages" %>
-<%@ Register Src="~/DesktopModules/Hotcakes/ControlPanel/AdminControlBar.ascx" TagPrefix="hcc" TagName="AdminControlBar" %>
+<%@ Register Src="/DesktopModules/Hotcakes/ControlPanel/AdminControlBar.ascx" TagPrefix="hcc" TagName="AdminControlBar" %>
 
 <%@ Import Namespace="Hotcakes.Commerce.Urls" %>
 

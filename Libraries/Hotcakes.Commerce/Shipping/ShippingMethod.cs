@@ -137,6 +137,7 @@ namespace Hotcakes.Commerce.Shipping
 
             if (p != null)
             {
+                Settings.Add("PayerName", (o.ShippingAddress.FirstName + " " + o.ShippingAddress.LastName));
                 p.BaseSettings.Clear();
                 p.BaseSettings.Merge(Settings);
 

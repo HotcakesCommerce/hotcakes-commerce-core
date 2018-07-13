@@ -8,14 +8,14 @@
 
 	<!-- Version Number -->
 	<PropertyGroup Condition=" '$(BUILD_NUMBER)' == '' ">
-		<Version>03.01.00</Version>
+		<Version>03.02.00</Version>
 		<FileVersion>01.00.00</FileVersion>
 		<InformationalVersion>01.00.00</InformationalVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(BUILD_NUMBER)' != '' ">
 		<!-- Build Server Number -->
-		<Version>03.01.00</Version>
+		<Version>03.02.00</Version>
 		<FileVersion>$(BUILD_NUMBER)</FileVersion>
 		<InformationalVersion>$(BUILD_NUMBER)</InformationalVersion>
 	</PropertyGroup>

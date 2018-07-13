@@ -4,7 +4,6 @@
 <%@ Register Src="../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
 <%@ Register Src="Promotions_Edit_Qualification.ascx" TagName="Promotions_Edit_Qualification" TagPrefix="hcc" %>
 <%@ Register Src="Promotions_Edit_Actions.ascx" TagName="Promotions_Edit_Actions" TagPrefix="hcc" %>
-<%@ Register Src="../Controls/ProductVariantsPicker.ascx" TagName="ProductVariantsPicker" TagPrefix="hcc" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
@@ -32,39 +31,18 @@
         var hcShowQualificationDialog = function () {
             $("#hcQualificationDialog").hcDialog({
                 title: "<%=Localization.GetString("EditQualification.Text")%>",
-                width: 900,
+                width: 800,
                 height: 'auto',
                 maxHeight: 'auto',
                 resizable: true,
-                open: function (event, ui) {
-                	$("a[id*='btnProductVariants']").click(function () {
-                	});
-                },
                 parentElement: '#<%=pnlEditQualification.ClientID%>',
                 close: function () {
                     <%= ClientScript.GetPostBackEventReference(btnCloseQualificationEditor, "") %>
                 }
             });
         };
-
-    	function hcSelectVariantDialog(productId, parentElement, closeEvent) {
-			$("#hcShowProductVariantsSelectionDialog").hcDialog({
-				title: $("#hcShowProductVariantsSelectionDialog h1").text(),
-				width: 1100,
-				height: 'auto',
-				minHeight: 20,
-				parentElement: '#' + parentElement,
-				open: function () {
-					hcBindSelectionToggle();
-				},
-				close: function () {
-					__doPostBack(closeEvent,'')
-				}
-			});
-		}
-
-
         var hcShowActionDialog = function (curwidth) {
+
             var target = $('#hcActionDialog table.hc-popup-table');
             var width = 500;
             if (curwidth == undefined || curwidth == null) {
@@ -92,29 +70,6 @@
                 }
             });
         };
-
-    	
-    	function hcBindSelectionToggle() {
-    		hcUpdatePanelReady(function () {
-    			if ($(".hcVariantPicker input[type='checkbox']").not(':checked').length == 0) {
-    				$(".hcVariantPicker .hcCheckAll").text('Unselect All');
-    			}
-    			$(document).on('click', ".hcVariantPicker .hcCheckAll", function (e) {
-    				e.preventDefault();
-    				var $checkAll = $(this);
-    				if ($checkAll.text() == 'All') {
-    					$(".hcVariantPicker input[type='checkbox']").attr('checked', true);
-    					$checkAll.text('Unselect All');
-    				} else {
-    					$(".hcVariantPicker input[type='checkbox']").attr('checked', false);
-    					$checkAll.text('All');
-    				}
-    				return false;
-    			});
-    			//$(".hcVariantPicker .hcCheckAll").click(function (e) {
-    			//});
-    		});
-    	}
     </script>
     <h1><%=PageTitle %></h1>
     <hcc:MessageBox ID="ucMessageBox" runat="server" AddValidationSummaries="false" />
