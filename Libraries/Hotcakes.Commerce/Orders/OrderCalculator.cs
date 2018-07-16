@@ -528,7 +528,7 @@ namespace Hotcakes.Commerce.Orders
 
         private void TaxOrder(Order order)
         {
-            TaxItems(order.ItemsAsITaxable(), order.BillingAddress, order.ShippingAddress, order.TotalOrderDiscounts);
+            TaxItems(order.ItemsAsITaxable(), order.BillingAddress, order.ShippingAddress, order.TotalOrderDiscounts,order.UserID);
 
             var isTaxRateSame = true;
             decimal taxRate = -1;
@@ -586,7 +586,7 @@ namespace Hotcakes.Commerce.Orders
             order.TotalTax = order.ItemsTax + order.ShippingTax;
         }
 
-        private void TaxItems(List<ITaxable> items, IAddress billingAddress, IAddress shippingAddress,decimal totalOrderDiscounts)
+        private void TaxItems(List<ITaxable> items, IAddress billingAddress, IAddress shippingAddress,decimal totalOrderDiscounts,string userId)
         {
             var applyVATRules = _app.CurrentStore.Settings.ApplyVATRules;
             decimal discount = 0;
@@ -622,7 +622,7 @@ namespace Hotcakes.Commerce.Orders
 
                 if (tax != null)
                 {
-                    var user = _app.CurrentCustomer;
+                    var user = _app.MembershipServices.Customers.Find(userId);
                     var taxExemptUser = user != null ? user.TaxExempt : false;
 
                     if (!taxExemptUser)
