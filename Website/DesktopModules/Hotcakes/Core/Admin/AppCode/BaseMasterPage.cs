@@ -29,17 +29,12 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using ClientDependency.Core.Config;
+using DotNetNuke.Application;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Web.Client;
 using DotNetNuke.Web.Client.ClientResourceManagement;
 using Hotcakes.Web;
 using StackExchange.Profiling;
-
-using Json = Hotcakes.Web.Json;
-using DotNetNuke.Framework.JavaScriptLibraries;
-using DotNetNuke.Application;
-using DotNetNuke.UI.Utilities;
-
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
@@ -156,14 +151,15 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
 
         protected void RegisterScriptVariables(HtmlInputHidden input)
         {
-			string httpAlias = string.IsNullOrEmpty(PortalSettings.Current.PortalAlias.HTTPAlias) ? PortalSettings.Current.DefaultPortalAlias : PortalSettings.Current.PortalAlias.HTTPAlias;
-            int startIndex = httpAlias.IndexOf('/');
-            string str = startIndex <= 0 ? "/" : httpAlias.Substring(startIndex);
-            string strValue = str.EndsWith("/") ? str : str + "/";
+            var httpAlias = PortalSettings.Current.DefaultPortalAlias;
+            var startIndex = httpAlias.IndexOf('/');
+            var str = startIndex <= 0 ? "/" : httpAlias.Substring(startIndex);
+            var strValue = str.EndsWith("/") ? str : str + "/";
+
             var vars = new Dictionary<string, string>();
             vars.Add("hc_siteRoot", strValue);
-            input.Value = Json.ObjectToJson(vars);
-			ClientAPI.RegisterClientVariable(Page, "hc_siteRoot", strValue, true);
+
+            input.Value = vars.ObjectToJson();
         }
     }
 }

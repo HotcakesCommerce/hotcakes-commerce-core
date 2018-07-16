@@ -128,6 +128,10 @@ namespace Hotcakes.Shipping
             AddOrUpdate(name, value.ToString(CultureInfo.InvariantCulture));
         }
 
+        public void SetSetting(string name, string value)
+        {
+            AddOrUpdate(name, value.ToString(CultureInfo.InvariantCulture));
+        }
         public void Merge(ServiceSettings otherSettings)
         {
             if (otherSettings == null) return;
