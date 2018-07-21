@@ -590,10 +590,24 @@ namespace Hotcakes.Commerce.Orders
         {
             var applyVATRules = _app.CurrentStore.Settings.ApplyVATRules;
             decimal discount = 0;
+            decimal qty = 0;
             if (totalOrderDiscounts != 0)
             {
-                var qty = items.Where(i => i.IsTaxExempt == false && i.TaxSchedule != -1 && _app.OrderServices.TaxSchedules.FindForThisStore(i.TaxSchedule) != null).Sum(i => i.Quantity);
-                discount = totalOrderDiscounts / qty;
+                foreach (var i in items)
+                {
+                    if (i.IsTaxExempt == false && i.TaxSchedule != -1)
+                    {
+                        if (_app.OrderServices.TaxSchedules.FindForThisStore(i.TaxSchedule) != null)
+                        {
+                            qty += i.Quantity;
+                        }
+                    }
+                }
+
+                if (qty != 0)
+                {
+                    discount = totalOrderDiscounts / qty;
+                }
             }
 
             foreach (var item in items)
