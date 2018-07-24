@@ -420,7 +420,7 @@ namespace Hotcakes.Modules.Core.Controllers
             };
 
             var cat = HccApp.CatalogServices.Categories.Find(filter.CategoryId);
-            queryAdv.SortOrder = filter.SortOrder != CategorySortOrder.None ? filter.SortOrder : cat.DisplaySortOrder;
+            queryAdv.SortOrder = filter.SortOrder != CategorySortOrder.None ? filter.SortOrder : cat != null ? cat.DisplaySortOrder : CategorySortOrder.None;
             return queryAdv;
         }
 
