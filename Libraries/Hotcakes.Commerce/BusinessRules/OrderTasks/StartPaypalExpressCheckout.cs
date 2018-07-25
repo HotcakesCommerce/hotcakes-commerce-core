@@ -63,14 +63,10 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
                     EventLog.LogEvent("PayPal Express Checkout", "CartReturnUrl=" + cartReturnUrl, EventLogSeverity.Information);
 
                     PaymentActionCodeType mode = PaymentActionCodeType.Authorization;
-                    if (context.HccApp.CurrentStore.Settings.PayPal.ExpressAuthorizeOnly)
-					{
-						mode = PaymentActionCodeType.Order;
-					}
-                    else
+                    if (!context.HccApp.CurrentStore.Settings.PayPal.ExpressAuthorizeOnly)
 					{
                         mode = PaymentActionCodeType.Sale;
-					}
+                    }
 
                     // Accelerated boarding
                     if (string.IsNullOrWhiteSpace(context.HccApp.CurrentStore.Settings.PayPal.UserName))
