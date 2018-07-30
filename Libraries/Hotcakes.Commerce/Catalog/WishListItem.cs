@@ -75,6 +75,12 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         public OptionSelections SelectionData { get; set; }
 
+
+        /// <summary>
+        /// Show Additional Product Variant/Selection
+        /// </summary>
+        public string ProductShortDescription { get; set; }
+
         private void Init()
         {
             Id = 0;
@@ -84,6 +90,7 @@ namespace Hotcakes.Commerce.Catalog
             ProductId = string.Empty;
             Quantity = 1;
             SelectionData = new OptionSelections();
+            ProductShortDescription = string.Empty;
         }
 
         /// <summary>
