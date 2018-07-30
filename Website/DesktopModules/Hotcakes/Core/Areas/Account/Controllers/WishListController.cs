@@ -118,7 +118,7 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
                     var m = new SavedItemViewModel
                     {
                         SavedItem = item,
-                        FullProduct = new SingleProductViewModel(p, HccApp),
+                        FullProduct = new SingleProductViewModel(p, HccApp)
                     };
                     result.Add(m);
                 }
