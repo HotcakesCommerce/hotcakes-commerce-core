@@ -112,7 +112,10 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
             foreach (var item in items)
             {
                 var p = HccApp.CatalogServices.Products.FindWithCache(item.ProductId);
-
+                if (item.SelectionData.OptionSelectionList!=null && item.SelectionData.OptionSelectionList.Count>0)
+                {
+                    item.ProductShortDescription = p.Options.CartDescription(item.SelectionData.OptionSelectionList);
+                }
                 if (p != null)
                 {
                     var m = new SavedItemViewModel
