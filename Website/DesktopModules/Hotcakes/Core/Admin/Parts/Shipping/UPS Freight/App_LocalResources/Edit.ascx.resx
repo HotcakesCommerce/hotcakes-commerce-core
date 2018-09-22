@@ -123,7 +123,6 @@
   <data name="AdjustPriceBy.Text" xml:space="preserve">
     <value>Adjust Price By</value>
   </data>
-  
   <data name="AlreadyRegistered.Text" xml:space="preserve">
     <value>Already Registered with UPS (click to register again)</value>
   </data>
@@ -188,31 +187,31 @@
     <value>UPS Shipping</value>
   </data>
   <data name="BilltoThirdParty.Text" xml:space="preserve">
-    <value>Bill to Third Party</value>
+    <value>Bill to Third-Party</value>
   </data>
-  <data name="CARBOY.Text" xml:space="preserve">
-    <value>CARBOY</value>
+  <data name="Carboy.Text" xml:space="preserve">
+    <value>Carboy</value>
   </data>
   <data name="FreightCollect.Text" xml:space="preserve">
     <value>Freight Collect</value>
   </data>
-  <data name="PALLET.Text" xml:space="preserve">
-    <value>PALLET</value>
+  <data name="Pallet.Text" xml:space="preserve">
+    <value>Pallet</value>
   </data>
   <data name="Prepaid.Text" xml:space="preserve">
     <value>Prepaid</value>
   </data>
-  <data name="SKID.Text" xml:space="preserve">
-    <value>SKID</value>
+  <data name="Skid.Text" xml:space="preserve">
+    <value>Skid</value>
   </data>
-  <data name="TOTES.Text" xml:space="preserve">
-    <value>TOTES</value>
+  <data name="Totes.Text" xml:space="preserve">
+    <value>Totes</value>
   </data>
   <data name="DefaultFreightClass.Text" xml:space="preserve">
     <value>Default Freight Class</value>
   </data>
   <data name="HandlineOneUnitType.Text" xml:space="preserve">
-    <value>HandlineOne Unit Type</value>
+    <value>Handling Unit Type</value>
   </data>
   <data name="PayerShipmentBillingOption.Text" xml:space="preserve">
     <value>Payer Shipment Billing Option</value>
@@ -229,10 +228,10 @@
   <data name="UPSStandardLTL.Text" xml:space="preserve">
     <value>UPS Standard LTL</value>
   </data>
-    <data name="Bag.Text" xml:space="preserve">
+  <data name="Bag.Text" xml:space="preserve">
     <value>Bag</value>
   </data>
-   <data name="Bale.Text" xml:space="preserve">
+  <data name="Bale.Text" xml:space="preserve">
     <value>Bale</value>
   </data>
   <data name="Barrel.Text" xml:space="preserve">
@@ -241,94 +240,91 @@
   <data name="Basket.Text" xml:space="preserve">
     <value>Basket</value>
   </data>
-   <data name="Bin.Text" xml:space="preserve">
+  <data name="Bin.Text" xml:space="preserve">
     <value>Bin</value>
   </data>
-   <data name="Box.Text" xml:space="preserve">
+  <data name="Box.Text" xml:space="preserve">
     <value>Box</value>
   </data>
-    <data name="Bunch.Text" xml:space="preserve">
+  <data name="Bunch.Text" xml:space="preserve">
     <value>Bunch</value>
   </data>
-    <data name="Bundle.Text" xml:space="preserve">
+  <data name="Bundle.Text" xml:space="preserve">
     <value>Bundle</value>
   </data>
-   <data name="Cabinet.Text" xml:space="preserve">
+  <data name="Cabinet.Text" xml:space="preserve">
     <value>Cabinet</value>
   </data>
-   <data name="Can.Text" xml:space="preserve">
+  <data name="Can.Text" xml:space="preserve">
     <value>Can</value>
   </data>
-   <data name="Carrier.Text" xml:space="preserve">
+  <data name="Carrier.Text" xml:space="preserve">
     <value>Carrier</value>
   </data>
-     <data name="Carton.Text" xml:space="preserve">
+  <data name="Carton.Text" xml:space="preserve">
     <value>Carton</value>
   </data>
-     <data name="Carrier.Text" xml:space="preserve">
-    <value>Carrier</value>
-  </data>
-     <data name="Case.Text" xml:space="preserve">
+  <data name="Case.Text" xml:space="preserve">
     <value>Case</value>
   </data>
-     <data name="Cask.Text" xml:space="preserve">
+  <data name="Cask.Text" xml:space="preserve">
     <value>Cask</value>
   </data>
   <data name="Container.Text" xml:space="preserve">
     <value>Container</value>
   </data>
-     <data name="Crate.Text" xml:space="preserve">
+  <data name="Crate.Text" xml:space="preserve">
     <value>Crate</value>
   </data>
-     <data name="Cylinder.Text" xml:space="preserve">
+  <data name="Cylinder.Text" xml:space="preserve">
     <value>Cylinder</value>
   </data>
-     <data name="Drum.Text" xml:space="preserve">
+  <data name="Drum.Text" xml:space="preserve">
     <value>Drum</value>
   </data>
-   <data name="Loose.Text" xml:space="preserve">
+  <data name="Loose.Text" xml:space="preserve">
     <value>Loose</value>
   </data>
-   <data name="Other.Text" xml:space="preserve">
+  <data name="Other.Text" xml:space="preserve">
     <value>Other</value>
   </data>
-   <data name="Package.Text" xml:space="preserve">
+  <data name="Package.Text" xml:space="preserve">
     <value>Package</value>
   </data>
-   <data name="Pail.Text" xml:space="preserve">
+  <data name="Pail.Text" xml:space="preserve">
     <value>Pail</value>
   </data>
-   <data name="Pieces.Text" xml:space="preserve">
+  <data name="Pieces.Text" xml:space="preserve">
     <value>Pieces</value>
   </data>
-    <data name="PipeLine.Text" xml:space="preserve">
+  <data name="PipeLine.Text" xml:space="preserve">
     <value>Pipe Line</value>
   </data>
-    <data name="Rack.Text" xml:space="preserve">
+  <data name="Rack.Text" xml:space="preserve">
     <value>Rack</value>
   </data>
-   <data name="Reel.Text" xml:space="preserve">
+  <data name="Reel.Text" xml:space="preserve">
     <value>Reel</value>
   </data>
-   <data name="Roll.Text" xml:space="preserve">
+  <data name="Roll.Text" xml:space="preserve">
     <value>Roll</value>
   </data>
   <data name="Spool.Text" xml:space="preserve">
     <value>Spool</value>
   </data>
-   <data name="Tank.Text" xml:space="preserve">
+  <data name="Tank.Text" xml:space="preserve">
     <value>Tank</value>
   </data>
-   <data name="Tube.Text" xml:space="preserve">
+  <data name="Tube.Text" xml:space="preserve">
     <value>Tube</value>
   </data>
-   <data name="Unit.Text" xml:space="preserve">
+  <data name="Unit.Text" xml:space="preserve">
     <value>Unit</value>
   </data>
   <data name="VanPack.Text" xml:space="preserve">
     <value>Van Pack</value>
   </data>
-   <data name="Wrapped.Text" xml:space="preserve">
+  <data name="Wrapped.Text" xml:space="preserve">
     <value>Wrapped</value>
   </data>
 </root>

@@ -141,12 +141,13 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             var id = Request.QueryString["id"];
             id = id.TrimEnd(',');
             var os = id.Split(',');
-            DataList1.DataSource = os;
-            DataList1.DataBind();
+            rpOrder.DataSource = os;
+            rpOrder.DataBind();
         }
 
-        protected void DataList1_ItemDataBound(object sender, DataListItemEventArgs e)
+        protected void rpOrder_ItemDataBound(Object Sender, RepeaterItemEventArgs e)
         {
+
             if (e.Item.ItemType == ListItemType.AlternatingItem | e.Item.ItemType == ListItemType.Item)
             {
                 long templateId = 0;
@@ -154,15 +155,27 @@ namespace Hotcakes.Modules.Core.Admin.Orders
                 var t = HccApp.ContentServices.HtmlTemplates.Find(templateId);
                 if (t != null)
                 {
-                    var orderId = (string) e.Item.DataItem;
+                    var orderId = (string)e.Item.DataItem;
                     var o = HccApp.OrderServices.Orders.FindForCurrentStore(orderId);
-                    var litTemplate = (Literal) e.Item.FindControl("litTemplate");
+                    var litTemplate = (Literal)e.Item.FindControl("litTemplate");
                     if (litTemplate != null)
                     {
                         t = t.ReplaceTagsInTemplateForOrder(HccApp.CurrentRequestContext, o);
                         litTemplate.Text = t.Body;
                     }
                 }
+
+                var id = Request.QueryString["id"];
+                if (!string.IsNullOrEmpty(id))
+                {
+                    var count = id.TrimEnd(',').Split(',').Length;
+                    if (e.Item.ItemIndex != count - 1)
+                    {
+                        System.Web.UI.HtmlControls.HtmlGenericControl div = (System.Web.UI.HtmlControls.HtmlGenericControl)e.Item.FindControl("pagebreak");
+                        div.Attributes.Add("style", "page-break-after: always;");
+                    }
+                }
+
             }
         }
     }

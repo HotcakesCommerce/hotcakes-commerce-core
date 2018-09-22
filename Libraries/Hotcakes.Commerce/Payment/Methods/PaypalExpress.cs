@@ -70,10 +70,16 @@ namespace Hotcakes.Commerce.Payment.Methods
                 {
                     var OrderNumber = t.MerchantInvoiceNumber + Guid.NewGuid();
 
+                    PaymentActionCodeType mode = PaymentActionCodeType.Authorization;
+                    if (!app.CurrentStore.Settings.PayPal.ExpressAuthorizeOnly)
+                    {
+                        mode = PaymentActionCodeType.Sale;
+                    }
+
                     var paymentResponse = ppAPI.DoExpressCheckoutPayment(t.PreviousTransactionNumber,
                         t.PreviousTransactionAuthCode,
                         t.Amount.ToString("N", CultureInfo.InvariantCulture),
-                        PaymentActionCodeType.Order,
+                        mode,
                         PayPalAPI.GetCurrencyCodeType(app.CurrentStore.Settings.PayPal.Currency),
                         OrderNumber);
 

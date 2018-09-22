@@ -204,7 +204,7 @@ namespace Hotcakes.Shipping.Ups
                 sXML = XmlTools.BuildAccessKey(settings);
                 sXML += "\n";
 
-                sXML += BuildUPSRateRequestForShipment(shipment);
+                sXML += BuildUPSRateRequestForShipment(shipment, settings);
 
                 var sResponse = string.Empty;
                 sResponse = XmlTools.ReadHtmlPage_POST(sURL, sXML);
@@ -429,7 +429,7 @@ namespace Hotcakes.Shipping.Ups
             return "UPS";
         }
 
-        private string BuildUPSRateRequestForShipment(IShipment shipment)
+        private string BuildUPSRateRequestForShipment(IShipment shipment, UpsSettings settings)
         {
             var sXML = string.Empty;
             var strWriter = new StringWriter();
@@ -497,7 +497,15 @@ namespace Hotcakes.Shipping.Ups
                     xw.WriteElementString("City", XmlTools.TrimToLength(shipment.SourceAddress.City.Trim(), 30));
                 }
 
+                if (shipment.SourceAddress.RegionData != null)
+                {
+                    xw.WriteElementString("StateProvinceCode", shipment.SourceAddress.RegionData.Abbreviation);
+                }
+
                 xw.WriteElementString("CountryCode", shipment.SourceAddress.CountryData.IsoCode);
+
+                xw.WriteElementString("ShipperNumber", settings.License);
+
                 xw.WriteEndElement();
                 xw.WriteEndElement();
 
@@ -515,6 +523,11 @@ namespace Hotcakes.Shipping.Ups
                     {
                         xw.WriteElementString("City", shipment.DestinationAddress.City);
                     }
+                }
+
+                if (shipment.DestinationAddress.RegionData != null)
+                {
+                    xw.WriteElementString("StateProvinceCode", shipment.DestinationAddress.RegionData.Abbreviation);
                 }
 
                 if (shipment.DestinationAddress.CountryData.Bvin.Length > 0)

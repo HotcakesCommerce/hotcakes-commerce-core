@@ -31,6 +31,7 @@ using Hotcakes.Commerce.Controls;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Web;
+using System.Linq;
 
 namespace Hotcakes.Modules.Core.Admin.Controls
 {
@@ -211,8 +212,8 @@ namespace Hotcakes.Modules.Core.Admin.Controls
 
         private void ValidateUser()
         {
-            var u
-                = HccApp.MembershipServices.Customers.FindByUsername(UserNameField.Text.Trim());
+            var users = HccApp.MembershipServices.Customers.FindByEmail(UserNameField.Text.Trim());
+            var u = users != null ? users.FirstOrDefault() : null;
             if (u != null)
             {
                 if (u.Bvin != string.Empty)
