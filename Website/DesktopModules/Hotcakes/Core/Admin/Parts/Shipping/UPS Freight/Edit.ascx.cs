@@ -24,6 +24,7 @@
 #endregion
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Web.UI.WebControls;
@@ -38,6 +39,19 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
 
     partial class Edit : HccShippingPart
     {
+        #region Private Members
+
+        private bool IsNew
+        {
+            get
+            {
+                return (string.IsNullOrEmpty(ShippingMethod.Name));
+            }
+        }
+
+        #endregion
+
+        #region Events
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
@@ -61,8 +75,26 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
             NotifyFinishedEditing(NameField.Text.Trim());
         }
 
+        protected void cvAdjustmentTextBox_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            var val = 0m;
+
+            if (decimal.TryParse(AdjustmentTextBox.Text, NumberStyles.Currency, CultureInfo.CurrentCulture, out val))
+            {
+                args.IsValid = true;
+            }
+            else
+            {
+                args.IsValid = false;
+            }
+        }
+        #endregion
+
+        #region Helper Methods
         private void LoadZones()
         {
+            lstZones.Items.Clear();
+
             lstZones.DataSource = HccApp.OrderServices.ShippingZones.FindForStore(HccApp.CurrentStore.Id);
             lstZones.DataTextField = "Name";
             lstZones.DataValueField = "id";
@@ -71,11 +103,18 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
 
         private void LoadServiceCodes()
         {
+            ShippingTypesRadioButtonList.Items.Clear();
+
             var ups = AvailableServices.FindById(ShippingMethod.ShippingProviderId, HccApp.CurrentStore);
             ShippingTypesRadioButtonList.DataSource = ups.ListAllServiceCodes();
             ShippingTypesRadioButtonList.DataTextField = "DisplayName";
             ShippingTypesRadioButtonList.DataValueField = "Code";
             ShippingTypesRadioButtonList.DataBind();
+
+            if (IsNew || ShippingTypesRadioButtonList.SelectedIndex == -1)
+            {
+                ShippingTypesRadioButtonList.Items[0].Selected = true;
+            }
         }
 
         private void LoadData()
@@ -113,8 +152,6 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
             PayerShipmentBillingOptionDropDownList.SelectedValue = HccApp.CurrentStore.Settings.ShippingUpsFreightBillingOption.ToString();
             HandlineOneUnitTypeDropDownList.SelectedValue = HccApp.CurrentStore.Settings.ShippingUpsFreightHandleOneUnitType;
 
-
-            
             DefaultPackagingField.SelectedValue = HccApp.CurrentStore.Settings.ShippingUpsFreightDefaultPackaging.ToString();
             DefaultServiceField.SelectedValue = HccApp.CurrentStore.Settings.ShippingUpsDefaultService.ToString();
             DefaultFreightClassField.SelectedValue = HccApp.CurrentStore.Settings.ShippingUpsFreightFreightClass.ToString();
@@ -140,8 +177,6 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
                 Settings.ServiceCodeFilter = new List<IServiceCode>();
             }
 
-
-
             foreach (ServiceCode code in Settings.ServiceCodeFilter)
             {
                 foreach (ListItem item in ShippingTypesRadioButtonList.Items)
@@ -153,7 +188,6 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
                     }
                 }
             }
-
 
             // Select Hightlights
             var highlight = Settings.GetSettingOrEmpty("highlight");
@@ -178,7 +212,6 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
                 ShippingMethod.Adjustment = Money.RoundCurrency(ShippingMethod.Adjustment);
             }
 
-
             // Global Settings
             HccApp.CurrentStore.Settings.ShippingUpsAccountNumber = AccountNumberField.Text.Trim();
             HccApp.CurrentStore.Settings.ShippingUpsFreightForceResidential = ResidentialAddressCheckBox.Checked;
@@ -187,7 +220,6 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
             HccApp.CurrentStore.Settings.ShippingUpsFreightDefaultPackaging = int.Parse(DefaultPackagingField.SelectedValue);
             HccApp.CurrentStore.Settings.ShippingUpsFreightSkipDimensions = SkipDimensionsCheckBox.Checked;
             HccApp.CurrentStore.Settings.ShippingUPSFreightDiagnostics = chkDiagnostics.Checked;
-
 
             HccApp.CurrentStore.Settings.ShippingUpsFreightBillingOption = Convert.ToInt32(PayerShipmentBillingOptionDropDownList.SelectedValue);
             HccApp.CurrentStore.Settings.ShippingUpsFreightHandleOneUnitType =PayerShipmentBillingOptionDropDownList.SelectedValue;
@@ -215,23 +247,8 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
             HccApp.AccountServices.Stores.Update(HccApp.CurrentStore);
         }
 
-        protected void cvAdjustmentTextBox_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            var val = 0m;
-
-            if (decimal.TryParse(AdjustmentTextBox.Text, NumberStyles.Currency, CultureInfo.CurrentCulture, out val))
-            {
-                args.IsValid = true;
-            }
-            else
-            {
-                args.IsValid = false;
-            }
-        }
-
         private void LocalizeView()
         {
-           
             rfvAdjustmentTextBox.ErrorMessage = Localization.GetString("rfvAdjustmentTextBox.ErrorMessage");
             cvAdjustmentTextBox.ErrorMessage = Localization.GetString("cvAdjustmentTextBox.ErrorMessage");
 
@@ -245,24 +262,32 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
 
             if (PayerShipmentBillingOptionDropDownList.Items.Count == 0)
             {
-                PayerShipmentBillingOptionDropDownList.Items.Add(new ListItem("Prepaid", "10"));
-                PayerShipmentBillingOptionDropDownList.Items.Add(new ListItem("BilltoThirdParty", "30"));
-                PayerShipmentBillingOptionDropDownList.Items.Add(new ListItem("FreightCollect", "40"));
+                PayerShipmentBillingOptionDropDownList.Items.Add(new ListItem(Localization.GetString("Prepaid"), "10"));
+                PayerShipmentBillingOptionDropDownList.Items.Add(new ListItem(Localization.GetString("BilltoThirdParty"), "30"));
+                PayerShipmentBillingOptionDropDownList.Items.Add(new ListItem(Localization.GetString("FreightCollect"), "40"));
 
                 PayerShipmentBillingOptionDropDownList.Items[0].Selected = true;
             }
 
             if (HandlineOneUnitTypeDropDownList.Items.Count == 0)
             {
-                HandlineOneUnitTypeDropDownList.Items.Add(new ListItem(Localization.GetString("SKID"), "SKD"));
-                HandlineOneUnitTypeDropDownList.Items.Add(new ListItem(Localization.GetString("CARBOY"), "CBY"));
-                HandlineOneUnitTypeDropDownList.Items.Add(new ListItem(Localization.GetString("PALLET"), "PLT"));
-                HandlineOneUnitTypeDropDownList.Items.Add(new ListItem(Localization.GetString("TOTES"), "TOT"));
+                var items = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string,string>(Localization.GetString("Skid"), "SKD"),
+                    new KeyValuePair<string,string>(Localization.GetString("Carboy"), "CBY"),
+                    new KeyValuePair<string,string>(Localization.GetString("Pallet"), "PLT"),
+                    new KeyValuePair<string,string>(Localization.GetString("Totes"), "TOT")
+                };
+
+                HandlineOneUnitTypeDropDownList.DataSource = items.OrderBy(i => i.Key);
+                HandlineOneUnitTypeDropDownList.DataTextField = "Key";
+                HandlineOneUnitTypeDropDownList.DataValueField = "Value";
+                HandlineOneUnitTypeDropDownList.DataBind();
 
                 HandlineOneUnitTypeDropDownList.Items[0].Selected = true;
             }
 
-            
+
             if (DefaultServiceField.Items.Count == 0)
             {
                 DefaultServiceField.Items.Add(new ListItem(Localization.GetString("UPSFreightLTL"), "308"));
@@ -273,68 +298,80 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
 
             if (DefaultPackagingField.Items.Count == 0)
             {
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Bag"), "7"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Bale"), "31"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Barrel"), "8"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Basket"), "32"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Bin"), "33"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Box"), "34"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Bunch"), "35"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Bundle"), "10"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Cabinet"), "36"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Can"), "11"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Carboy"), "37"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Carrier"), "38"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Carton"), "39"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Case"), "40"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Cask"), "54"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Container"), "41"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Crate"), "14"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Cylinder"), "15"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Drum"), "16"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Loose"), "42"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Other"), "99"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Package"), "43"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Pail"), "44"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Pallet"), "18"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Pieces"), "45"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("PipeLine"), "46"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Rack"), "53"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Reel"), "47"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Roll"), "20"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Skid"), "48"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Spool"), "19"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Tank"), "49"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Tube"), "3"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Unit"), "50"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("VanPack"), "51"));
-                DefaultPackagingField.Items.Add(new ListItem(Localization.GetString("Wrapped"), "52"));
+                var items = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string,string>(Localization.GetString("Bag"), "7"),
+                    new KeyValuePair<string,string>(Localization.GetString("Bale"), "31"),
+                    new KeyValuePair<string,string>(Localization.GetString("Barrel"), "8"),
+                    new KeyValuePair<string,string>(Localization.GetString("Basket"), "32"),
+                    new KeyValuePair<string,string>(Localization.GetString("Bin"), "33"),
+                    new KeyValuePair<string,string>(Localization.GetString("Box"), "34"),
+                    new KeyValuePair<string,string>(Localization.GetString("Bunch"), "35"),
+                    new KeyValuePair<string,string>(Localization.GetString("Bundle"), "10"),
+                    new KeyValuePair<string,string>(Localization.GetString("Cabinet"), "36"),
+                    new KeyValuePair<string,string>(Localization.GetString("Can"), "11"),
+                    new KeyValuePair<string,string>(Localization.GetString("Carboy"), "37"),
+                    new KeyValuePair<string,string>(Localization.GetString("Carrier"), "38"),
+                    new KeyValuePair<string,string>(Localization.GetString("Carton"), "39"),
+                    new KeyValuePair<string,string>(Localization.GetString("Case"), "40"),
+                    new KeyValuePair<string,string>(Localization.GetString("Cask"), "54"),
+                    new KeyValuePair<string,string>(Localization.GetString("Container"), "41"),
+                    new KeyValuePair<string,string>(Localization.GetString("Crate"), "14"),
+                    new KeyValuePair<string,string>(Localization.GetString("Cylinder"), "15"),
+                    new KeyValuePair<string,string>(Localization.GetString("Drum"), "16"),
+                    new KeyValuePair<string,string>(Localization.GetString("Loose"), "42"),
+                    new KeyValuePair<string,string>(Localization.GetString("Other"), "99"),
+                    new KeyValuePair<string,string>(Localization.GetString("Package"), "43"),
+                    new KeyValuePair<string,string>(Localization.GetString("Pail"), "44"),
+                    new KeyValuePair<string,string>(Localization.GetString("Pallet"), "18"),
+                    new KeyValuePair<string,string>(Localization.GetString("Pieces"), "45"),
+                    new KeyValuePair<string,string>(Localization.GetString("PipeLine"), "46"),
+                    new KeyValuePair<string,string>(Localization.GetString("Rack"), "53"),
+                    new KeyValuePair<string,string>(Localization.GetString("Reel"), "47"),
+                    new KeyValuePair<string,string>(Localization.GetString("Roll"), "20"),
+                    new KeyValuePair<string,string>(Localization.GetString("Skid"), "48"),
+                    new KeyValuePair<string,string>(Localization.GetString("Spool"), "19"),
+                    new KeyValuePair<string,string>(Localization.GetString("Tank"), "49"),
+                    new KeyValuePair<string,string>(Localization.GetString("Tube"), "3"),
+                    new KeyValuePair<string,string>(Localization.GetString("Unit"), "50"),
+                    new KeyValuePair<string,string>(Localization.GetString("VanPack"), "51"),
+                    new KeyValuePair<string,string>(Localization.GetString("Wrapped"), "52")
+                };
+
+                DefaultPackagingField.DataSource = items.OrderBy(i => i.Key);
+                DefaultPackagingField.DataTextField = "Key";
+                DefaultPackagingField.DataValueField = "Value";
+                DefaultPackagingField.DataBind();
             }
 
             if (DefaultFreightClassField.Items.Count == 0)
             {
-                DefaultFreightClassField.Items.Add(new ListItem("50", "50"));
-                DefaultFreightClassField.Items.Add(new ListItem("55", "55"));
-                DefaultFreightClassField.Items.Add(new ListItem("60", "60"));
-                DefaultFreightClassField.Items.Add(new ListItem("65", "65"));
+                var items = new List<KeyValuePair<string, double>>
+                {
+                    new KeyValuePair<string,double>("50", 50),
+                    new KeyValuePair<string,double>("55", 55),
+                    new KeyValuePair<string,double>("60", 60),
+                    new KeyValuePair<string,double>("65", 65),
+                    new KeyValuePair<string,double>("70", 70),
+                    new KeyValuePair<string,double>("77.5", 77.5),
+                    new KeyValuePair<string,double>("92.5", 92.5),
+                    new KeyValuePair<string,double>("100", 100),
+                    new KeyValuePair<string,double>("125", 125),
+                    new KeyValuePair<string,double>("150", 150),
+                    new KeyValuePair<string,double>("175", 175),
+                    new KeyValuePair<string,double>("200", 200),
+                    new KeyValuePair<string,double>("250", 250),
+                    new KeyValuePair<string,double>("300", 300),
+                    new KeyValuePair<string,double>("400", 400),
+                    new KeyValuePair<string,double>("500", 500)
+                };
 
-                DefaultFreightClassField.Items.Add(new ListItem("70", "70"));
-                DefaultFreightClassField.Items.Add(new ListItem("77.5", "77.5"));
-                DefaultFreightClassField.Items.Add(new ListItem("92.5", "92.5"));
-                DefaultFreightClassField.Items.Add(new ListItem("100", "110"));
-                DefaultFreightClassField.Items.Add(new ListItem("125", "125"));
-                DefaultFreightClassField.Items.Add(new ListItem("150", "150"));
-                DefaultFreightClassField.Items.Add(new ListItem("175", "175"));
-                DefaultFreightClassField.Items.Add(new ListItem("200", "200"));
-
-                DefaultFreightClassField.Items.Add(new ListItem("200", "200"));
-                DefaultFreightClassField.Items.Add(new ListItem("250", "250"));
-
-                DefaultFreightClassField.Items.Add(new ListItem("300", "300"));
-                DefaultFreightClassField.Items.Add(new ListItem("400", "400"));
-
-                DefaultFreightClassField.Items.Add(new ListItem("500", "500"));
+                DefaultFreightClassField.DataSource = items.OrderBy(i => i.Value);
+                DefaultFreightClassField.DataTextField = "Key";
+                DefaultFreightClassField.DataValueField = "Value";
+                DefaultFreightClassField.DataBind();
             }
         }
+        #endregion
     }
 }
