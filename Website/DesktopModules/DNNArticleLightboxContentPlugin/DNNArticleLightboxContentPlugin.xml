@@ -1,0 +1,1315 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DNNArticleLightboxContentPlugin</name>
+    </assembly>
+    <members>
+        <member name="T:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin">
+            -----------------------------------------------------------------------------
+            <summary>
+            The EditDNNArticleLightboxContentPlugin class is used to manage content
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.trCode">
+            <summary>
+            trCode 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.lbCode">
+            <summary>
+            lbCode 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.txtCode">
+            <summary>
+            txtCode 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.lbMediaType">
+            <summary>
+            lbMediaType 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.cboMediaType">
+            <summary>
+            cboMediaType 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.trMedia">
+            <summary>
+            trMedia 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.lbMediaURL">
+            <summary>
+            lbMediaURL 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.trContent">
+            <summary>
+            trContent 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.lbContent">
+            <summary>
+            lbContent 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.trURL">
+            <summary>
+            trURL 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.lbURL">
+            <summary>
+            lbURL 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.txtURL">
+            <summary>
+            txtURL 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.trEmbedResource">
+            <summary>
+            trEmbedResource 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.lbEmbedResource">
+            <summary>
+            lbEmbedResource 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.txtEmbedResource">
+            <summary>
+            txtEmbedResource 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.trModuleTab">
+            <summary>
+            trModuleTab 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.lbTab">
+            <summary>
+            lbTab 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.cboTabs">
+            <summary>
+            cboTabs 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.trModule">
+            <summary>
+            trModule 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.lbModule">
+            <summary>
+            lbModule 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.cboModule">
+            <summary>
+            cboModule 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.lbTitle">
+            <summary>
+            lbTitle 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.txtTitle">
+            <summary>
+            txtTitle 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.trThumb">
+            <summary>
+            trThumb 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.lbThumbURL">
+            <summary>
+            lbThumbURL 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.lbDescription">
+            <summary>
+            lbDescription 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.txtDescription">
+            <summary>
+            txtDescription 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.lbViewOrder">
+            <summary>
+            lbViewOrder 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.txtViewOrder">
+            <summary>
+            txtViewOrder 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.CompareValidator3">
+            <summary>
+            CompareValidator3 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.trWidth">
+            <summary>
+            trWidth 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.lbMediaWidth">
+            <summary>
+            lbMediaWidth 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.txtMediaWidth">
+            <summary>
+            txtMediaWidth 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.CompareValidator2">
+            <summary>
+            CompareValidator2 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.trHeight">
+            <summary>
+            trHeight 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.lbMediaHeight">
+            <summary>
+            lbMediaHeight 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.txtMediaHeight">
+            <summary>
+            txtMediaHeight 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.CompareValidator4">
+            <summary>
+            CompareValidator4 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.cmdUpdate">
+            <summary>
+            cmdUpdate 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.cmdCancel">
+            <summary>
+            cmdCancel 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.cmdDelete">
+            <summary>
+            cmdDelete 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.Page_Load(System.Object,System.EventArgs)">
+            -----------------------------------------------------------------------------
+            <summary>
+            Page_Load runs when the control is loaded
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.cmdCancel_Click(System.Object,System.EventArgs)">
+            -----------------------------------------------------------------------------
+            <summary>
+            cmdCancel_Click runs when the cancel button is clicked
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.cmdUpdate_Click(System.Object,System.EventArgs)">
+            -----------------------------------------------------------------------------
+            <summary>
+            cmdUpdate_Click runs when the update button is clicked
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticleLightboxContentPlugin.EditDNNArticleLightboxContentPlugin.cmdDelete_Click(System.Object,System.EventArgs)">
+            -----------------------------------------------------------------------------
+            <summary>
+            cmdDelete_Click runs when the delete button is clicked
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lst_OnItemDataBound(System.Object,System.Web.UI.WebControls.DataListItemEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.cmdReset_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.cmdUpdate_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.cmdAdd_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.tbFiles">
+            <summary>
+            tbFiles 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lbNoItems">
+            <summary>
+            lbNoItems 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lstLinks">
+            <summary>
+            lstLinks 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.cmdAdd">
+            <summary>
+            cmdAdd 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.cmdUpload">
+            <summary>
+            cmdUpload 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.trAdd">
+            <summary>
+            trAdd 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.trCode">
+            <summary>
+            trCode 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lbCode">
+            <summary>
+            lbCode 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.txtCode">
+            <summary>
+            txtCode 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lbMediaType">
+            <summary>
+            lbMediaType 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.cboMediaType">
+            <summary>
+            cboMediaType 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.trMedia">
+            <summary>
+            trMedia 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lbMediaURL">
+            <summary>
+            lbMediaURL 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.ctlMediaURL">
+            <summary>
+            ctlMediaURL 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.trContent">
+            <summary>
+            trContent 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lbContent">
+            <summary>
+            lbContent 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.txtContent">
+            <summary>
+            txtContent 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.trURL">
+            <summary>
+            trURL 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lbURL">
+            <summary>
+            lbURL 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.txtURL">
+            <summary>
+            txtURL 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.trEmbedResource">
+            <summary>
+            trEmbedResource 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lbEmbedResource">
+            <summary>
+            lbEmbedResource 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.txtEmbedResource">
+            <summary>
+            txtEmbedResource 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.trModuleTab">
+            <summary>
+            trModuleTab 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lbTab">
+            <summary>
+            lbTab 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.cboTabs">
+            <summary>
+            cboTabs 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.trModule">
+            <summary>
+            trModule 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lbModule">
+            <summary>
+            lbModule 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.cboModule">
+            <summary>
+            cboModule 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lbTitle">
+            <summary>
+            lbTitle 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.txtTitle">
+            <summary>
+            txtTitle 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.trThumb">
+            <summary>
+            trThumb 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lbThumbURL">
+            <summary>
+            lbThumbURL 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.ctlThumbURL">
+            <summary>
+            ctlThumbURL 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lbDescription">
+            <summary>
+            lbDescription 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.txtDescription">
+            <summary>
+            txtDescription 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lbViewOrder">
+            <summary>
+            lbViewOrder 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.txtViewOrder">
+            <summary>
+            txtViewOrder 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.CompareValidator3">
+            <summary>
+            CompareValidator3 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.trWidth">
+            <summary>
+            trWidth 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lbMediaWidth">
+            <summary>
+            lbMediaWidth 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.txtMediaWidth">
+            <summary>
+            txtMediaWidth 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.CompareValidator2">
+            <summary>
+            CompareValidator2 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.trHeight">
+            <summary>
+            trHeight 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lbMediaHeight">
+            <summary>
+            lbMediaHeight 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.txtMediaHeight">
+            <summary>
+            txtMediaHeight 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.CompareValidator4">
+            <summary>
+            CompareValidator4 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.cmdUpdate">
+            <summary>
+            cmdUpdate 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.cmdReset">
+            <summary>
+            cmdReset 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.trUpload">
+            <summary>
+            trUpload 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.FileUpload1">
+            <summary>
+            FileUpload1 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.lbResult">
+            <summary>
+            lbResult 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.LightboxContentEdit.cmdCancel">
+            <summary>
+            cmdCancel 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="T:ZLDNN.Modules.DNNArticleLightboxContentPlugin.SaveImage">
+            <summary>
+            SaveImage 的摘要说明
+            </summary>
+        </member>
+        <member name="T:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings">
+            -----------------------------------------------------------------------------
+            <summary>
+            The Settings class manages Module Settings
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.lbToken">
+            <summary>
+            lbToken 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.txtToken">
+            <summary>
+            txtToken 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.lbTokenForContentSlider">
+            <summary>
+            lbTokenForContentSlider 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.txtTokenForContentSlider">
+            <summary>
+            txtTokenForContentSlider 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.lbContentDisplayNumber">
+            <summary>
+            lbContentDisplayNumber 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.txtContentDisplayNumber">
+            <summary>
+            txtContentDisplayNumber 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.lblTemplate">
+            <summary>
+            lblTemplate 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.txtTemplate">
+            <summary>
+            txtTemplate 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.lbRepeatLayout">
+            <summary>
+            lbRepeatLayout 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.cboRepeatLayout">
+            <summary>
+            cboRepeatLayout 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.lbRepeatColumn">
+            <summary>
+            lbRepeatColumn 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.txtRepeatColumn">
+            <summary>
+            txtRepeatColumn 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.RangeValidator4">
+            <summary>
+            RangeValidator4 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.lbRepeatDirection">
+            <summary>
+            lbRepeatDirection 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.cboRepeatDirection">
+            <summary>
+            cboRepeatDirection 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.lbAnimationSpeed">
+            <summary>
+            lbAnimationSpeed 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.cboAnimationSpeed">
+            <summary>
+            cboAnimationSpeed 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.lbtheme">
+            <summary>
+            lbtheme 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.cbotheme">
+            <summary>
+            cbotheme 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.lbAutoplay">
+            <summary>
+            lbAutoplay 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.cboAutoPlay">
+            <summary>
+            cboAutoPlay 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.lbOverlayGallery">
+            <summary>
+            lbOverlayGallery 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.cboOverlayGallery">
+            <summary>
+            cboOverlayGallery 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.lbSlideShow">
+            <summary>
+            lbSlideShow 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.txtSlideShow">
+            <summary>
+            txtSlideShow 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.RangeValidator1">
+            <summary>
+            RangeValidator1 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.lblNextButtonText">
+            <summary>
+            lblNextButtonText 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.txtNextButtonText">
+            <summary>
+            txtNextButtonText 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.lblContentSliderCSS">
+            <summary>
+            lblContentSliderCSS 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.txtContentSliderCSS">
+            <summary>
+            txtContentSliderCSS 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.lbContentWidth">
+            <summary>
+            lbContentWidth 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.txtContentWidth">
+            <summary>
+            txtContentWidth 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.lbContentHeight">
+            <summary>
+            lbContentHeight 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.txtContentHeight">
+            <summary>
+            txtContentHeight 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.LoadSettings">
+            -----------------------------------------------------------------------------
+            <summary>
+            LoadSettings loads the settings from the Database and displays them
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticleLightboxContentPlugin.Settings.UpdateSettings">
+            -----------------------------------------------------------------------------
+            <summary>
+            UpdateSettings saves the modified settings to the Database
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="T:ZLDNN.Modules.DNNArticleLightboxContentPlugin.ViewDNNArticleLightboxContentPlugin">
+            -----------------------------------------------------------------------------
+            <summary>
+            The ViewDNNArticleLightboxContentPlugin class displays the content
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticleLightboxContentPlugin.ViewDNNArticleLightboxContentPlugin.Page_Load(System.Object,System.EventArgs)">
+            -----------------------------------------------------------------------------
+            <summary>
+            Page_Load runs when the control is loaded
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="P:ZLDNN.Modules.DNNArticleLightboxContentPlugin.ViewDNNArticleLightboxContentPlugin.ModuleActions">
+            -----------------------------------------------------------------------------
+            <summary>
+            Registers the module actions required for interfacing with the portal framework
+            </summary>
+            <value></value>
+            <returns></returns>
+            <remarks></remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+    </members>
+</doc>

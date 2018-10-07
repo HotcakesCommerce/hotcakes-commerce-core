@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ControlTitle_settings.Text" xml:space="preserve">
+    <value>DNNArticle Settings</value>
+  </data>
+  <data name="ModuleHelp.Text" xml:space="preserve">
+    <value>About DNNArticle Settings</value>
+  </data>
+  <data name="lbRatingImageHeight.Help" xml:space="preserve">
+    <value>Rating Image  Height</value>
+  </data>
+  <data name="lbRatingImageHeight.Text" xml:space="preserve">
+    <value>Rating Image  Height</value>
+  </data>
+  <data name="lbRatingImageWidth.Help" xml:space="preserve">
+    <value>Rating Image  Width</value>
+  </data>
+  <data name="lbRatingImageWidth.Text" xml:space="preserve">
+    <value>Rating Image  Width</value>
+  </data>
+  <data name="lbAddRoles.Help" xml:space="preserve">
+    <value>Roles can add new items.</value>
+  </data>
+  <data name="lbAddRoles.Text" xml:space="preserve">
+    <value>Roles can add new items.</value>
+  </data>
+  <data name="lbApprovedRoles.Help" xml:space="preserve">
+    <value>Roles can approve items.</value>
+  </data>
+  <data name="lbApprovedRoles.Text" xml:space="preserve">
+    <value>Roles can approve items.</value>
+  </data>
+  <data name="DefaultDisplayTemplate.Text" xml:space="preserve">
+    <value>&lt;a href="[VIEWURL]" class="Head"&gt;[TITLE]&lt;/a&gt; &lt;br&gt; &lt;span class="SubSubHead"&gt; Created by [CREATEDBYUSERNAME] in [CREATEDDATE]&lt;span&gt; &lt;p&gt;&lt;span class="Normal"&gt;[SHORTENDESCRIPTION:100] &lt;/span&gt; &lt;a class="CommandButton" href="[VIEWURL]"&gt;Read More..&lt;/a&gt;&lt;/p&gt; &lt;hr /&gt;</value>
+  </data>
+  <data name="DefaultViewDisplayTemplate.Text" xml:space="preserve">
+    <value>&lt;span class="Head"&gt;[TITLE]&lt;/span&gt; &lt;br&gt; &lt;span class="SubSubHead"&gt; Created by [CREATEDBYUSERNAME] in [CREATEDDATE]&lt;span&gt; &lt;p&gt; &lt;span class="Normal"&gt;[DESCRIPTION]&lt;/span&gt; &lt;/p&gt; &lt;hr /&gt;[PAGECONTENT]</value>
+  </data>
+  <data name="lblTokens.Text" xml:space="preserve">
+    <value>Available Tokens</value>
+  </data>
+  <data name="lblTokens.Help" xml:space="preserve">
+    <value>Available Tokens. &lt;br&gt; The [URL] token is the url of article image. You can display the image by using: &amp;lt;img src='[URL]' border=0/&amp;gt;. &lt;br&gt; The [VIEWURL] token is the url of detail view page of the article. You can use &amp;lt;a href='[VIEWURL]' &amp;gt;More&amp;lt;/a&amp;gt; to create a link to the detail page. &lt;br&gt; The [RATINGIMAGE] token will create a five star rating image to represent rating of the atricle.</value>
+  </data>
+  <data name="lbViewAttachedFile.Help" xml:space="preserve">
+    <value>Roles can view attached files</value>
+  </data>
+  <data name="lbViewAttachedFile.Text" xml:space="preserve">
+    <value>Roles can view attached files</value>
+  </data>
+  <data name="lbDateFormat.Help" xml:space="preserve">
+    <value>dd:Day,MM:month,yyyy:year.For example, dd/MM/yyyy</value>
+  </data>
+  <data name="lbDateFormat.Text" xml:space="preserve">
+    <value>Date Format(dd/MM/yyyy)</value>
+  </data>
+  <data name="lbCommentEmailAddress.Help" xml:space="preserve">
+    <value>The email address will receive notification email.</value>
+  </data>
+  <data name="lbCommentEmailAddress.Text" xml:space="preserve">
+    <value>Comment Notification Email Address</value>
+  </data>
+  <data name="lbCommentEmailSubject.Help" xml:space="preserve">
+    <value>Comment Email Subject</value>
+  </data>
+  <data name="lbCommentEmailSubject.Text" xml:space="preserve">
+    <value>Comment Email Subject</value>
+  </data>
+  <data name="lbCommentEmailTemplate.Help" xml:space="preserve">
+    <value>Comment Email Template</value>
+  </data>
+  <data name="lbCommentEmailTemplate.Text" xml:space="preserve">
+    <value>Comment Email Template</value>
+  </data>
+  <data name="lbCommentRoles.Help" xml:space="preserve">
+    <value>Roles can make rating and comment.</value>
+  </data>
+  <data name="lbCommentRoles.Text" xml:space="preserve">
+    <value>Roles can make rating and comment</value>
+  </data>
+  <data name="lbEnableCommentEmailAlert.Help" xml:space="preserve">
+    <value>When new comment is added, an email will be sent to below address.</value>
+  </data>
+  <data name="lbEnableCommentEmailAlert.Text" xml:space="preserve">
+    <value>Comment Email Notification</value>
+  </data>
+  <data name="dshComment.Text" xml:space="preserve">
+    <value>Comment Settings</value>
+  </data>
+  <data name="dshGeneral.Text" xml:space="preserve">
+    <value>General Settings</value>
+  </data>
+  <data name="dshTemplate.Text" xml:space="preserve">
+    <value>Template Settings</value>
+  </data>
+  <data name="dshSecurity.Text" xml:space="preserve">
+    <value>Security Settings</value>
+  </data>
+  <data name="lbAddUsers.Help" xml:space="preserve">
+    <value>Select users who can add new content.</value>
+  </data>
+  <data name="lbAddUsers.Text" xml:space="preserve">
+    <value>Users can add new content</value>
+  </data>
+  <data name="lbApproveUsers.Help" xml:space="preserve">
+    <value>Select users who can approve new content.</value>
+  </data>
+  <data name="lbApproveUsers.Text" xml:space="preserve">
+    <value>Users can approve content</value>
+  </data>
+  <data name="lbViewRoles.Help" xml:space="preserve">
+    <value>Roles can view articles</value>
+  </data>
+  <data name="lbViewRoles.Text" xml:space="preserve">
+    <value>Roles can view articles</value>
+  </data>
+  <data name="lbApproveCommentRoles.Help" xml:space="preserve">
+    <value>Roles can manage comment</value>
+  </data>
+  <data name="lbApproveCommentRoles.Text" xml:space="preserve">
+    <value>Roles can manage comment</value>
+  </data>
+  <data name="cmdReassigncategory.Text" xml:space="preserve">
+    <value>Re-assign categories of articles</value>
+  </data>
+  <data name="RelatedArticlesDisplayTemplate.Text" xml:space="preserve">
+    <value>&lt;a href='[VIEWURL]' class="CommandButton"&gt;[TITLE]&lt;/a&gt;</value>
+  </data>
+  <data name="lbRSSTemplate.Help" xml:space="preserve">
+    <value>The template of rss feed</value>
+  </data>
+  <data name="lbRSSTemplate.Text" xml:space="preserve">
+    <value>RSS Template</value>
+  </data>
+  <data name="CommentTemplate.Text" xml:space="preserve">
+    <value>&lt;div class="CommentBubble"&gt;
+    &lt;blockquote&gt;
+        &lt;div class="CommentGravatar"&gt;
+            [USERPHOTO:48]
+    
+        &lt;/div&gt;
+        &lt;p&gt;[COMMENT]&lt;/p&gt;
+        &lt;p&gt;&lt;span class="NormalBold"&gt;[TITLE]&lt;/span&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+    &lt;cite&gt;
+        By &lt;span class="NormalBold"&gt;[CREATEDBYUSER]&lt;/span&gt; on &lt;span class="NormalBold"&gt;[CREATEDDATE]&lt;/span&gt; 
+    &lt;/cite&gt;
+&lt;/div&gt;</value>
+  </data>
+  <data name="EmailTemplate.Text" xml:space="preserve">
+    <value>
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;User&lt;/td&gt;&lt;td&gt;[CREATEDBYUSER]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Date&lt;/td&gt;&lt;td&gt;[CREATEDDATE]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Title&lt;/td&gt;&lt;td&gt;[TITLE]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Content&lt;/td&gt;&lt;td&gt;[COMMENT]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Portal&lt;/td&gt;&lt;td&gt;[PORTALNAME]&lt;/td&gt;
+&lt;tr&gt;
+&lt;td&gt;Tab&lt;/td&gt;&lt;td&gt;[TABNAME]&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;</value>
+  </data>
+  <data name="NewComment.Text" xml:space="preserve">
+    <value>New Comment</value>
+  </data>
+  <data name="dshEdit.Text" xml:space="preserve">
+    <value>Edit Settings</value>
+  </data>
+  <data name="AttachmentTemplate.Text" xml:space="preserve">
+    <value>&lt;table width="300px"&gt;&lt;tr&gt;&lt;td&gt;[FILETYPEICON]&lt;/td&gt;&lt;td width="100%"&gt;[FILELINK]&lt;/td&gt;&lt;td&gt;[DOWNLOADICON]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</value>
+  </data>
+  <data name="DefaultApprovedArticleEmailSubjectToAuthor.Text" xml:space="preserve">
+    <value>Your article is approved</value>
+  </data>
+  <data name="DefaultApprovedArticleEmailTemplateToAuthor.Text" xml:space="preserve">
+    <value>Hello, [CREATEDBYUSERNAME]&lt;br/&gt; Thanks for your article [TITLE]. It is approved and published. &lt;br/&gt;Regards&lt;br/&gt;[PORTAL:PORTALNAME] team</value>
+  </data>
+  <data name="DefaultNewArticleEmailSubjectToAuthor.Text" xml:space="preserve">
+    <value>Thanks for your article</value>
+  </data>
+  <data name="DefaultNewArticleEmailTemplateToAuthor.Text" xml:space="preserve">
+    <value>Hello, [CREATEDBYUSERNAME]&lt;br/&gt; Thanks for your article [TITLE]. It will be published after approved. &lt;br/&gt;Regards&lt;br/&gt;[PORTAL:PORTALNAME] team</value>
+  </data>
+  <data name="dshEmailNotification.Text" xml:space="preserve">
+    <value>Email Notification</value>
+  </data>
+  <data name="DefaultEmailSubject.Text" xml:space="preserve">
+    <value>A new article is submitted</value>
+  </data>
+  <data name="DefaultEmailTemplate.Text" xml:space="preserve">
+    <value>Hello,&lt;br/&gt;There is a new article &lt;a href='[VIEWURL]' class="CommandButton"&gt;[TITLE]&lt;/a&gt; is submitted.&lt;br/&gt;Regards&lt;br/&gt;[PORTAL:PORTALNAME] team</value>
+  </data>
+  <data name="dshDetailView.Text" xml:space="preserve">
+    <value>Article Viewer Settings</value>
+  </data>
+  <data name="ItFromCheckList.Text" xml:space="preserve">
+    <value>Select from existing tags</value>
+  </data>
+  <data name="ItFromText.Text" xml:space="preserve">
+    <value>Enter tags into text box</value>
+  </data>
+  <data name="lbContentManagementRoles.Help" xml:space="preserve">
+    <value>Roles can manage content including articles, categories, tags and comments.</value>
+  </data>
+  <data name="lbContentManagementRoles.Text" xml:space="preserve">
+    <value>Content manager</value>
+  </data>
+  <data name="lbLayoutDesignerRoles.Text" xml:space="preserve">
+    <value>Layout Designer</value>
+  </data>
+  <data name="dshMultiLanguage.Text" xml:space="preserve">
+    <value> Multi Languages </value>
+  </data>
+  <data name="PageDropDownList.Text" xml:space="preserve">
+    <value>Drop Down List</value>
+  </data>
+  <data name="PageNumberList.Text" xml:space="preserve">
+    <value>Number List</value>
+  </data>
+  <data name="Itcomma.Text" xml:space="preserve">
+    <value>Comma</value>
+  </data>
+  <data name="Itsemicolon.Text" xml:space="preserve">
+    <value>Semicolon</value>
+  </data>
+  <data name="lbShowExpiredArticle.Help" xml:space="preserve">
+    <value>Allow show expired article</value>
+  </data>
+  <data name="lbShowExpiredArticle.Text" xml:space="preserve">
+    <value>Allow show expired article</value>
+  </data>
+  <data name="PageNumberListWithoutPostBack.Text" xml:space="preserve">
+    <value>Page NumberList Without PostBack</value>
+  </data>
+  <data name="dshActiveSocial.Text" xml:space="preserve">
+    <value>Integrate with Active Social</value>
+  </data>
+  <data name="lbSubScribeRole.Help" xml:space="preserve">
+    <value>Send approved new articles to users of this role</value>
+  </data>
+  <data name="lbSubScribeRole.Text" xml:space="preserve">
+    <value>Subscribe role</value>
+  </data>
+  <data name="lbEnableCommentEmailAlertToAuthor.Help" xml:space="preserve">
+    <value>Comment Email Notification to Author</value>
+  </data>
+  <data name="lbEnableCommentEmailAlertToAuthor.Text" xml:space="preserve">
+    <value>Comment Email Notification to Author</value>
+  </data>
+  <data name="NoSpecified.Text" xml:space="preserve">
+    <value>--Not Specified--</value>
+  </data>
+  <data name="dshS3.Text" xml:space="preserve">
+    <value>Amazon S3 Integration</value>
+  </data>
+  <data name="lbLayoutDesignerRoles.Help" xml:space="preserve">
+    <value>Layout Designer</value>
+  </data>
+  <data name="dshlightboxContent.Text" xml:space="preserve">
+    <value>Light Box Content</value>
+  </data>
+  <data name="lbEnableLightBoxContent.Help" xml:space="preserve">
+    <value>Allow users to add light box content</value>
+  </data>
+  <data name="lbEnableLightBoxContent.Text" xml:space="preserve">
+    <value>Enable Light Box Content</value>
+  </data>
+  <data name="lbFullTrustEnvironment.Help" xml:space="preserve">
+    <value>Full Trust Environment</value>
+  </data>
+  <data name="lbFullTrustEnvironment.Text" xml:space="preserve">
+    <value>Full Trust Environment</value>
+  </data>
+  <data name="cmdUpgradeViewPermission.Text" xml:space="preserve">
+    <value>Upgrade View Permission</value>
+  </data>
+  <data name="cmdSetDNNArticleCategory.Text" xml:space="preserve">
+    <value>Set category of all modules of DNNArticle to "DNNArticle"</value>
+  </data>
+</root>

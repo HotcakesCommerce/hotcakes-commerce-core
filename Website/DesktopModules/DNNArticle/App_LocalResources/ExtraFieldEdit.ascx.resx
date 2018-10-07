@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="plType.Text" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="plType.Help" xml:space="preserve">
+    <value>Select a type</value>
+  </data>
+  <data name="plContent.Text" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="plContent.Help" xml:space="preserve">
+    <value>Enter content</value>
+  </data>
+  <data name="plTitle.Text" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="plTitle.Help" xml:space="preserve">
+    <value>Enter the title</value>
+  </data>
+  <data name="plHelpText.Text" xml:space="preserve">
+    <value>HelpText</value>
+  </data>
+  <data name="plHelpText.Help" xml:space="preserve">
+    <value>Enter the help text for the title</value>
+  </data>
+  <data name="plDefaultValue.Text" xml:space="preserve">
+    <value>Default Value</value>
+  </data>
+  <data name="plDefaultValue.Help" xml:space="preserve">
+    <value>Enter default value</value>
+  </data>
+  <data name="plMaxValue.Text" xml:space="preserve">
+    <value>Max Value</value>
+  </data>
+  <data name="plMaxValue.Help" xml:space="preserve">
+    <value>Enter the max value</value>
+  </data>
+  <data name="plMinValue.Text" xml:space="preserve">
+    <value>Min Value</value>
+  </data>
+  <data name="plMinValue.Help" xml:space="preserve">
+    <value>Enter the min value</value>
+  </data>
+  <data name="plExpression.Text" xml:space="preserve">
+    <value>Expression</value>
+  </data>
+  <data name="plExpression.Help" xml:space="preserve">
+    <value>Enter the expression. The expression supports operators such as: +,-,*,/,^.And it supports functions such as: sin, cos, sqrt,tan, asin, acos, atan. It also supports logical function IIF.</value>
+  </data>
+  <data name="plViewOrder.Text" xml:space="preserve">
+    <value>View Order</value>
+  </data>
+  <data name="plViewOrder.Help" xml:space="preserve">
+    <value>Enter the view order of the item</value>
+  </data>
+  <data name="plTag.Text" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="plExpTag.Text" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="plTag.Help" xml:space="preserve">
+    <value>Enter a tag for the field. Tags are not case sensitive.The tag will be token in template and should be upper case.   </value>
+  </data>
+  <data name="plExpTag.Help" xml:space="preserve">
+    <value>Enter a tag for the expression</value>
+  </data>
+  <data name="plTags.Text" xml:space="preserve">
+    <value>Already existing tags</value>
+  </data>
+  <data name="plTags.Help" xml:space="preserve">
+    <value>Add available tags you can set in expression</value>
+  </data>
+  <data name="lbExistingError.Text" xml:space="preserve">
+    <value>There is already a tag named</value>
+  </data>
+  <data name="lbCircleError.Text" xml:space="preserve">
+    <value>Circle Calculate!!!</value>
+  </data>
+  <data name="plOutputFormat.Text" xml:space="preserve">
+    <value>Output Format</value>
+  </data>
+  <data name="plOutputFormat.Help" xml:space="preserve">
+    <value>For example ####.##</value>
+  </data>
+  <data name="lbRangeError.Text" xml:space="preserve">
+    <value>Min cannot be greater than max.</value>
+  </data>
+  <data name="lbDefaultError.Text" xml:space="preserve">
+    <value>Default value must be greater than min and less than max.</value>
+  </data>
+  <data name="plSelectorValue.Text" xml:space="preserve">
+    <value>Enter dropdown list value</value>
+  </data>
+  <data name="plSelectorValue.Help" xml:space="preserve">
+    <value>Using ";" to split items. Using "," to split display text and value. </value>
+  </data>
+  <data name="lbTextBoxLength.Text" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="lbTextBoxLength.Help" xml:space="preserve">
+    <value>Enter the width of TextBox</value>
+  </data>
+  <data name="ControlTitle_extrafieldedit.Text" xml:space="preserve">
+    <value>Extra Field Edit</value>
+  </data>
+  <data name="lbIsMultiLine.Help" xml:space="preserve">
+    <value>Multi lines</value>
+  </data>
+  <data name="lbIsMultiLine.Text" xml:space="preserve">
+    <value>Multi lines</value>
+  </data>
+  <data name="lbIsRequire.Help" xml:space="preserve">
+    <value>Is Require</value>
+  </data>
+  <data name="lbIsRequire.Text" xml:space="preserve">
+    <value>Is Require</value>
+  </data>
+  <data name="lbTextBoxHeight.Help" xml:space="preserve">
+    <value>Enter the height of text box</value>
+  </data>
+  <data name="lbTextBoxHeight.Text" xml:space="preserve">
+    <value>Height </value>
+  </data>
+</root>

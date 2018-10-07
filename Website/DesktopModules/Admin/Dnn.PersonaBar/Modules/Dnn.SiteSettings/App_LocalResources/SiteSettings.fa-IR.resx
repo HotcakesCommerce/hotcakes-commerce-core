@@ -1,0 +1,1330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="nav_SiteSettings.Text" xml:space="preserve">
+    <value>تنظیمات سایت</value>
+  </data>
+  <data name="TabSiteInfo.Text" xml:space="preserve">
+    <value>اطلاعات سایت</value>
+  </data>
+  <data name="TabSiteBehavior.Text" xml:space="preserve">
+    <value>تنظیمات پیشرفته</value>
+  </data>
+  <data name="TabLanguage.Text" xml:space="preserve">
+    <value>زبان</value>
+  </data>
+  <data name="TabSearch.Text" xml:space="preserve">
+    <value>جستجو</value>
+  </data>
+  <data name="TabDefaultPages.Text" xml:space="preserve">
+    <value>صفحه پیش فرض</value>
+  </data>
+  <data name="TabMessaging.Text" xml:space="preserve">
+    <value>پیام</value>
+  </data>
+  <data name="TabUserProfiles.Text" xml:space="preserve">
+    <value>پروفایل کاربر</value>
+  </data>
+  <data name="TabSiteAliases.Text" xml:space="preserve">
+    <value>آدرس سایت</value>
+  </data>
+  <data name="TabMore.Text" xml:space="preserve">
+    <value>بیشتر</value>
+  </data>
+  <data name="TabBasicSettings.Text" xml:space="preserve">
+    <value>تنطیمات پایه</value>
+  </data>
+  <data name="TabSynonyms.Text" xml:space="preserve">
+    <value>مترادف</value>
+  </data>
+  <data name="TabIgnoreWords.Text" xml:space="preserve">
+    <value>نادیده گرفتن کلمات</value>
+  </data>
+  <data name="TabCrawling.Text" xml:space="preserve">
+    <value>Crawling</value>
+  </data>
+  <data name="TabFileExtensions.Text" xml:space="preserve">
+    <value>پسوند فایل</value>
+  </data>
+  <data name="plPortalName.Text" xml:space="preserve">
+    <value>نام پورتال :</value>
+  </data>
+  <data name="plPortalName.Help" xml:space="preserve">
+    <value>نام سایت/پورتال را وارد نمایید</value>
+  </data>
+  <data name="plDescription.Text" xml:space="preserve">
+    <value>شرح :</value>
+  </data>
+  <data name="plDescription.Help" xml:space="preserve">
+    <value>برای سایت خود شرحی را وارد نمایید</value>
+  </data>
+  <data name="plKeyWords.Text" xml:space="preserve">
+    <value>کلیمات کلیدی :</value>
+  </data>
+  <data name="plKeyWords.Help" xml:space="preserve">
+    <value>کلیمات کلیدی موردنظر را به وسیله ی کاما از هم جدا نموده و وارد نمایید. این کلیمات در ابتدای صفحه قرار می گیرند و به موتورهای جستجو برای ایندکس نمودن سایت کمک می نمایند.</value>
+  </data>
+  <data name="plTimeZone.Text" xml:space="preserve">
+    <value>وقت محلی سایت:</value>
+  </data>
+  <data name="plTimeZone.Help" xml:space="preserve">
+    <value>منطقه زمانی سایت خود را انتخاب کنید.</value>
+  </data>
+  <data name="plGUID.Text" xml:space="preserve">
+    <value>شناسه سایت (GUID):</value>
+  </data>
+  <data name="plGUID.Help" xml:space="preserve">
+    <value>شناسه عمومی منحصر به فرد که برای شناسایی این برنامه استفاده می شود را وارد نمایید</value>
+  </data>
+  <data name="plFooterText.Text" xml:space="preserve">
+    <value>حق انتشار:</value>
+  </data>
+  <data name="plFooterText.Help" xml:space="preserve">
+    <value>در صورت پیشتبانی تم، متن حق انتشار در سایت شما نمایش‌داده خواهد شد.</value>
+  </data>
+  <data name="plHomeDirectory.Text" xml:space="preserve">
+    <value>پوشه اصلی :</value>
+  </data>
+  <data name="plHomeDirectory.Help" xml:space="preserve">
+    <value>پوشه اصلی این پورتال را وارد نمایید</value>
+  </data>
+  <data name="plLogoIcon.Text" xml:space="preserve">
+    <value>لوگو و آیکون </value>
+  </data>
+  <data name="plLogo.Text" xml:space="preserve">
+    <value>لوگو:</value>
+  </data>
+  <data name="plLogo.Help" xml:space="preserve">
+    <value>با توجه به پوسته انتخاب شده، این عکس معمولا در بالا سمت راست یا چپ سایت شما نمایش‌داده خواهد شد.</value>
+  </data>
+  <data name="plFavIcon.Text" xml:space="preserve">
+    <value>Favicon.ico:</value>
+  </data>
+  <data name="plFavIcon.Help" xml:space="preserve">
+    <value>favicon انتخاب شده بر روی تمام صفحات سایت اعمال خواهد شد.</value>
+  </data>
+  <data name="plIconSet.Text" xml:space="preserve">
+    <value>مجموعه آیکون:</value>
+  </data>
+  <data name="plIconSet.Help" xml:space="preserve">
+    <value>مجموعه آیکون انتخاب شده برای تمام آیکون‌های این سایت استفاده خواهد شد.</value>
+  </data>
+  <data name="Save.Text" xml:space="preserve">
+    <value>ذخیره</value>
+  </data>
+  <data name="Cancel.Text" xml:space="preserve">
+    <value>لغو</value>
+  </data>
+  <data name="Yes.Text" xml:space="preserve">
+    <value>بله</value>
+  </data>
+  <data name="No.Text" xml:space="preserve">
+    <value>خیر</value>
+  </data>
+  <data name="SettingsUpdateSuccess" xml:space="preserve">
+    <value>تنظیمات بروز رسانی شد.</value>
+  </data>
+  <data name="SettingsError" xml:space="preserve">
+    <value>بروز رسانی تنظیمات انجام نشد!</value>
+  </data>
+  <data name="SettingsRestoreWarning.Text" xml:space="preserve">
+    <value>آیا ذخیره تنظیمات لغو شود؟</value>
+  </data>
+  <data name="valPortalName.ErrorMessage" xml:space="preserve">
+    <value>نام پورتال الزامی می باشد</value>
+  </data>
+  <data name="PageOutputSettings.Text" xml:space="preserve">
+    <value>تنظیمات صفحه OUTPUT</value>
+  </data>
+  <data name="plPageHeadText.Help" xml:space="preserve">
+    <value>هر تگی (مثلا: تگ‌ها Meta) که تمایل دارید در تگ "HEAD" این صفحه نمایش‌داده شود را وارد کنید.</value>
+  </data>
+  <data name="plPageHeadText.Text" xml:space="preserve">
+    <value>تگ‌های Header صفحه:</value>
+  </data>
+  <data name="plSplashTabId.Text" xml:space="preserve">
+    <value>صفحه آغازین:</value>
+  </data>
+  <data name="plSplashTabId.Help" xml:space="preserve">
+    <value>صفحه‌ای که هنگام اولین ورود به سایت نمایش‌داده خواهد شد.</value>
+  </data>
+  <data name="plHomeTabId.Text" xml:space="preserve">
+    <value>صفحه خانه:</value>
+  </data>
+  <data name="plHomeTabId.Help" xml:space="preserve">
+    <value>صفحه اصلی سایت شما.</value>
+  </data>
+  <data name="plLoginTabId.Text" xml:space="preserve">
+    <value>صفحه ورود:</value>
+  </data>
+  <data name="plLoginTabId.Help" xml:space="preserve">
+    <value>صفحه ورود به سایت. تنها صفحه‌هایی که ماژول ورود به سایت در آن‌ها قرار داشته باشد نمایش‌داده خواهند شد.</value>
+  </data>
+  <data name="plUserTabId.Text" xml:space="preserve">
+    <value>صفحه پروفایل کاربر:</value>
+  </data>
+  <data name="plUserTabId.Help" xml:space="preserve">
+    <value>صفحه پروفایل کاربر سایت شما.</value>
+  </data>
+  <data name="plRegisterTabId.Help" xml:space="preserve">
+    <value>صفحه ثبت نام کاربر سایت شما.</value>
+  </data>
+  <data name="plRegisterTabId.Text" xml:space="preserve">
+    <value>صفحه ثبت‌نام:</value>
+  </data>
+  <data name="plSearchTabId.Help" xml:space="preserve">
+    <value>صفحه‌ی نتایج جستجوی سایت شما.</value>
+  </data>
+  <data name="plSearchTabId.Text" xml:space="preserve">
+    <value>صفحه نتایج جستجو:</value>
+  </data>
+  <data name="pl404TabId.Help" xml:space="preserve">
+    <value>صفحه خطای 404 سایت شما. درصورتیکه کاربر آدرس صفحه‌ای را وارد کند که آن صفحه وجود نداشته باشد، به این صفحه هدایت خواهد شد.</value>
+  </data>
+  <data name="pl404TabId.Text" xml:space="preserve">
+    <value>صفحه خطای 404:</value>
+  </data>
+  <data name="pl500TabId.Help" xml:space="preserve">
+    <value>صفحه خطای 500 سایت شما. درصورتیکه کاربر آدرس صفحه‌ای را وارد کند که آن صفحه دارای خطای ناخواسته‌ای باشد، به این صفحه هدایت خواهد شد.</value>
+  </data>
+  <data name="pl500TabId.Text" xml:space="preserve">
+    <value>صفحه خطای 500:</value>
+  </data>
+  <data name="NoneSpecified.Text" xml:space="preserve">
+    <value>مشخص نشده</value>
+  </data>
+  <data name="plDisablePrivateMessage.Help" xml:space="preserve">
+    <value>جهت جلوگیری اعضای سایت از ارسال پیام خصوصی به سایر اعضا یا گروه‌ها، این گزینه را انتخاب کنید. این محدودیت به مدیران و مدیران ارشد اعمال نخواهد شد.</value>
+  </data>
+  <data name="plDisablePrivateMessage.Text" xml:space="preserve">
+    <value>غیرفعال‌سازی پیام خصوصی:</value>
+  </data>
+  <data name="plMsgThrottlingInterval.Text" xml:space="preserve">
+    <value>بازه زمانی بین ارسال (دقیقه):</value>
+  </data>
+  <data name="plMsgThrottlingInterval.Help" xml:space="preserve">
+    <value>تعداد دقیقه هایی که پس از آن کاربر می‌تواند پیام بعدی را ارسال نماید. صفر نمایانگر بدون محدودیت بودن ارسال پیام می‌باشد. این محدودیت برای مدیر سایت یا میزبان اعمال نمی‌شود.</value>
+  </data>
+  <data name="plMsgRecipientLimit.Text" xml:space="preserve">
+    <value>محدودیت گیرندگان:</value>
+  </data>
+  <data name="plMsgRecipientLimit.Help" xml:space="preserve">
+    <value>حداکثر تعداد مجاز گیرنده‌ها در فیلد "به". پیام ارسالی به یک نقش خاص به عنوان یک گیرنده در نظر گرفته می‌شود.</value>
+  </data>
+  <data name="plMsgProfanityFilters.Text" xml:space="preserve">
+    <value>فعالسازی فیلتر کلمات ناشایست:</value>
+  </data>
+  <data name="plMsgProfanityFilters.Help" xml:space="preserve">
+    <value>فعالسازی این تنظیم  باعث تبدیل خودکار کلمات نامناسب به کلماتی معادل آنها میشود. این لیست در مسیر زیر مدیریت می‌شود:
+میزبان-&gt; لیست-&gt; فیلتر کلمات نامناسب  یا در مدیر-&gt; لیست-&gt; فیلتر کلمات نامناسب.</value>
+  </data>
+  <data name="plMsgAllowAttachments.Text" xml:space="preserve">
+    <value>اجازه پیوست فایل:</value>
+  </data>
+  <data name="plMsgAllowAttachments.Help" xml:space="preserve">
+    <value>مشخص کنید که آیا پیوست فایل در پیام‌ها مجاز است یا خیر.</value>
+  </data>
+  <data name="plIncludeAttachments.Text" xml:space="preserve">
+    <value>شامل پیوست‌ها:</value>
+  </data>
+  <data name="plIncludeAttachments.Help" xml:space="preserve">
+    <value>مشخص کنید که آیا پیوست فایل در ایمیل‌های خروجی مجاز باشد یا خیر.</value>
+  </data>
+  <data name="plMsgSendEmail.Text" xml:space="preserve">
+    <value>ارسال ایمیل:</value>
+  </data>
+  <data name="plMsgSendEmail.Help" xml:space="preserve">
+    <value>مشخص کنید که آیا برای هر پیام یا اعلانی به کاربر ایمیل ارسال شود یا خیر.</value>
+  </data>
+  <data name="UserProfileSettings.Text" xml:space="preserve">
+    <value>تنظیمات پروفایل کاربر</value>
+  </data>
+  <data name="UserProfileFields.Text" xml:space="preserve">
+    <value>فیلدهای پروفایل کاربر</value>
+  </data>
+  <data name="Profile_DefaultVisibility.Help" xml:space="preserve">
+    <value>حالت نمایانی پیش‌فرض پروفایل اعضاء را انتخاب نمایید.</value>
+  </data>
+  <data name="Profile_DefaultVisibility.Text" xml:space="preserve">
+    <value>حالت نمایانی پیش‌فرض پروفایل:</value>
+  </data>
+  <data name="Profile_DisplayVisibility.Help" xml:space="preserve">
+    <value>برای نمایش کنترل "نمایانی مشاهده پروفایل" در پروفایل کاربران، این گزینه را انتخاب نمایید.</value>
+  </data>
+  <data name="Profile_DisplayVisibility.Text" xml:space="preserve">
+    <value>نمایانی نمایش پروفایل:</value>
+  </data>
+  <data name="redirectOldProfileUrlsLabel.Help" xml:space="preserve">
+    <value>جهت ملزم ساختن هدایت آدرس‌های مشخصات قدیمی به آدرس‌های سفارشی این گزینه را انتخاب نمایید.</value>
+  </data>
+  <data name="redirectOldProfileUrlsLabel.Text" xml:space="preserve">
+    <value>هدایت آدرس‌های پروفایل قدیمی:</value>
+  </data>
+  <data name="vanilyUrlPrefixLabel.Help" xml:space="preserve">
+    <value>عبارتی را جهت استفاده به عنوان پیشوند در آدرس وارد کنید.</value>
+  </data>
+  <data name="vanilyUrlPrefixLabel.Text" xml:space="preserve">
+    <value>پیشوند آدرس:</value>
+  </data>
+  <data name="AllUsers.Text" xml:space="preserve">
+    <value>همه کاربران</value>
+  </data>
+  <data name="MembersOnly.Text" xml:space="preserve">
+    <value>فقط اعضا</value>
+  </data>
+  <data name="AdminOnly.Text" xml:space="preserve">
+    <value>فقط مدیر</value>
+  </data>
+  <data name="FriendsAndGroups.Text" xml:space="preserve">
+    <value>دوستان و گروه</value>
+  </data>
+  <data name="VanityUrlExample.Text" xml:space="preserve">
+    <value>myVanityURL</value>
+  </data>
+  <data name="Name.Header" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="DataType.Header" xml:space="preserve">
+    <value>نوع داده</value>
+  </data>
+  <data name="DefaultVisibility.Header" xml:space="preserve">
+    <value>نمایانی پیش‌فرض</value>
+  </data>
+  <data name="Required.Header" xml:space="preserve">
+    <value>ضروری</value>
+  </data>
+  <data name="Visible.Header" xml:space="preserve">
+    <value>قابل مشاهده</value>
+  </data>
+  <data name="ProfilePropertyDefinition_PropertyName.Text" xml:space="preserve">
+    <value>نام خصوصیت:</value>
+  </data>
+  <data name="ProfilePropertyDefinition_PropertyName.Help" xml:space="preserve">
+    <value>نامی را برای این خصوصیت وارد نمایید</value>
+  </data>
+  <data name="ProfilePropertyDefinition_DataType.Text" xml:space="preserve">
+    <value>نوع داده</value>
+  </data>
+  <data name="ProfilePropertyDefinition_DataType.Help" xml:space="preserve">
+    <value>Select the data type for this field.</value>
+  </data>
+  <data name="ProfilePropertyDefinition_PropertyCategory.Text" xml:space="preserve">
+    <value>دسته‌بندی خصوصیت:</value>
+  </data>
+  <data name="ProfilePropertyDefinition_PropertyCategory.Help" xml:space="preserve">
+    <value>دسته‌بندی مورد نظر برای این خصوصیت را وارد نمایید. این امکان باعث گروه‌ندی شدن خصوصیات مرتبط در نمای کاربری می شود.</value>
+  </data>
+  <data name="ProfilePropertyDefinition_Length.Text" xml:space="preserve">
+    <value>طول:</value>
+  </data>
+  <data name="ProfilePropertyDefinition_Length.Help" xml:space="preserve">
+    <value>حداکثر طول این خصوصیت را وارد نمایید. این گزینه تنها برای برخی از انواع داده ها قابل استفاده است.</value>
+  </data>
+  <data name="ProfilePropertyDefinition_DefaultValue.Text" xml:space="preserve">
+    <value>مقدار پیش‌فرض:</value>
+  </data>
+  <data name="ProfilePropertyDefinition_DefaultValue.Help" xml:space="preserve">
+    <value>شما می توانید برای این خصوصیت مقدار پیش فرض تعیین نمایید</value>
+  </data>
+  <data name="ProfilePropertyDefinition_ValidationExpression.Text" xml:space="preserve">
+    <value>عبارت اعتبارسنجی:</value>
+  </data>
+  <data name="ProfilePropertyDefinition_ValidationExpression.Help" xml:space="preserve">
+    <value>شما می توانید عبارت با قاعده ای را برای بررسی معتبر بودن داده ی وارد شده مشخص نمایید.</value>
+  </data>
+  <data name="ProfilePropertyDefinition_Required.Text" xml:space="preserve">
+    <value>الزامی:</value>
+  </data>
+  <data name="ProfilePropertyDefinition_Required.Help" xml:space="preserve">
+    <value>الزامی بودن فیلد را مشخص نمایید</value>
+  </data>
+  <data name="ProfilePropertyDefinition_ReadOnly.Help" xml:space="preserve">
+    <value>میتوانید خصوصیت پروفایل را "فقط خواندنی" نمایید. یک خصوصیت فقط خواندنی میتواند توسط مدیر سایت ویرایش شود، اما برای کاربر قابل ویرایش نیست.</value>
+  </data>
+  <data name="ProfilePropertyDefinition_ReadOnly.Text" xml:space="preserve">
+    <value>فقط خواندنی</value>
+  </data>
+  <data name="ProfilePropertyDefinition_Visible.Text" xml:space="preserve">
+    <value>نمایان:</value>
+  </data>
+  <data name="ProfilePropertyDefinition_Visible.Help" xml:space="preserve">
+    <value>شما می توانید به صورت انتخابی گزینه ها را به کاربر نمایش دهید</value>
+  </data>
+  <data name="ProfilePropertyDefinition_ViewOrder.Text" xml:space="preserve">
+    <value>ترتیب نمایش:</value>
+  </data>
+  <data name="ProfilePropertyDefinition_ViewOrder.Help" xml:space="preserve">
+    <value>برای این خصوصیت ترتیب نمایش را وارد نمایید</value>
+  </data>
+  <data name="ProfilePropertyDefinition_DefaultVisibility.Help" xml:space="preserve">
+    <value>می‌توانید نمایانی پیش‌فرض فیلدهای مشخصات را تعیین نمایید. این تنظیم اولیه بوده و تنها زمانیکه کاربر این تنظیم را ویرایش نکند اعمال خواهد شد.</value>
+  </data>
+  <data name="ProfilePropertyDefinition_DefaultVisibility.Text" xml:space="preserve">
+    <value>نمایانی پیش‌فرض:</value>
+  </data>
+  <data name="ProfilePropertyDefinition_PropertyCategory.Required" xml:space="preserve">
+    <value>انتخاب دسته الزامی است</value>
+  </data>
+  <data name="ProfilePropertyDefinition_PropertyName.Required" xml:space="preserve">
+    <value>نام خصوصیت الزامی است</value>
+  </data>
+  <data name="ProfilePropertyDefinition_DataType.Required" xml:space="preserve">
+    <value>نوع داده ضروری می باشد.</value>
+  </data>
+  <data name="Next.Text" xml:space="preserve">
+    <value>بعدی</value>
+  </data>
+  <data name="Localization.Help" xml:space="preserve">
+    <value>گام بعدی مدیریت بومی سازی خصوصیت می‌باشد. زبان موردنظر برای بروز رسانی را انتخاب نمایید و متن مورد نظر را وارد نمایید و بر روی گزینه ی "ذخیره متن بومی" کلیک نمایید.</value>
+  </data>
+  <data name="plLocales.Help" xml:space="preserve">
+    <value>انتخاب زبان موردنظر</value>
+  </data>
+  <data name="plLocales.Text" xml:space="preserve">
+    <value>زبان های دردسترس :</value>
+  </data>
+  <data name="plPropertyHelp.Help" xml:space="preserve">
+    <value>راهنما برای این فیلد در زبان انتخاب شده را وارد کنید.</value>
+  </data>
+  <data name="plPropertyHelp.Text" xml:space="preserve">
+    <value>راهنمای خصوصیت:</value>
+  </data>
+  <data name="plPropertyName.Help" xml:space="preserve">
+    <value>متن موردنظر برای نام خصوصیت در زبان انتخاب شده را وارد نمایید.</value>
+  </data>
+  <data name="plPropertyName.Text" xml:space="preserve">
+    <value>نام خصوصیت:</value>
+  </data>
+  <data name="plCategoryName.Help" xml:space="preserve">
+    <value>متن مورد نظر برای گروه مشخص شده در زبان انتخاب شده را وارد نمایید.</value>
+  </data>
+  <data name="plCategoryName.Text" xml:space="preserve">
+    <value>نام دسته‌بندی:</value>
+  </data>
+  <data name="plPropertyRequired.Help" xml:space="preserve">
+    <value>متن خطای موردنظر جهت نمایش در زمان عدم ورود اطلاعات برای خصوصیت الزامی را وارد نمایید.</value>
+  </data>
+  <data name="plPropertyRequired.Text" xml:space="preserve">
+    <value>پیام خطا برای فیلدهای الزامی:</value>
+  </data>
+  <data name="plPropertyValidation.Help" xml:space="preserve">
+    <value>متن خطای مورد نظر جهت نمایش در زمان عدم رعایت قوانین ورود اطلاعات برای خصوصیت را وارد نمایید.</value>
+  </data>
+  <data name="plPropertyValidation.Text" xml:space="preserve">
+    <value>پیام خطای اعتبارسنجی:</value>
+  </data>
+  <data name="valPropertyName.ErrorMessage" xml:space="preserve">
+    <value>برای ان فیلد یک نام وارد کنید!</value>
+  </data>
+  <data name="PropertyDefinitionDeletedWarning.Text" xml:space="preserve">
+    <value>Are you sure you want to delete this profile field?</value>
+  </data>
+  <data name="DeleteSuccess.Text" xml:space="preserve">
+    <value>فیلد پروفایل با موفقیت حذف شد.</value>
+  </data>
+  <data name="DeleteError.Text" xml:space="preserve">
+    <value>نمی توانید فیل پرفایل را حذف کنید. بعدا تلاش کنید .</value>
+  </data>
+  <data name="DuplicateName.Text" xml:space="preserve">
+    <value>This property already exists.  Property names must be unique.  Please select a different name for this property.</value>
+  </data>
+  <data name="RequiredTextBox.Text" xml:space="preserve">
+    <value>درصورتی که فیلد Tectbox می باشد، طول آن می بایست از 0 بزرگتر باشد</value>
+  </data>
+  <data name="portalAliasModeButtonListLabel.Help" xml:space="preserve">
+    <value>این تنظیم مشخص می نماید که سایت به  آدرس هایی که به عنوان مستعار معرفی شده اند ولی پیش فرض نمی باشند، چگونه پاسخ دهد. هیچ کدام - هیچ فعالیت بیشتری انجام ندهد. متعارف - آدرس مستعار به عنوان یک آدرس متعارف در نظر گرفته شود. انتقال - انتقال به آدرس پیش‌فرض.</value>
+  </data>
+  <data name="portalAliasModeButtonListLabel.Text" xml:space="preserve">
+    <value>حالت نگاشت آدرس‌های سایت:</value>
+  </data>
+  <data name="plAutoAddPortalAlias.Help" xml:space="preserve">
+    <value>این تنظیمات مشخص می‌نماید  که سایت به آدرس‌هایی که به آن map شده‌اند ولی در لیست نام های مستعار وجود ندارند، چگونه پاسخ گوید. این تنظیمات تنها در پیکربندی پورتال های تک تاثیر گذار می باشد. برای تاثیر این گزینه را بر روی map نمودن خودکار آدرس های جدید تنظیم نمایید.</value>
+  </data>
+  <data name="plAutoAddPortalAlias.Text" xml:space="preserve">
+    <value>افزودن خودکار آدرس سایت:</value>
+  </data>
+  <data name="InvalidAlias.Text" xml:space="preserve">
+    <value>آدرس سایت وارد شده نامعتبر است لطفا یک آدرس سایت دیگری وارد کنید.</value>
+  </data>
+  <data name="DuplicateAlias.Text" xml:space="preserve">
+    <value>آدرس سایت وارد شده موجود است . لطفا یک آدرس سایت دیگری وارد کنید.</value>
+  </data>
+  <data name="SetPrimary.Text" xml:space="preserve">
+    <value>تنظیم به عنوان اصلی</value>
+  </data>
+  <data name="UnassignPrimary.Text" xml:space="preserve">
+    <value>عدم تخصیص اولیه</value>
+  </data>
+  <data name="UrlMappingSettings.Text" xml:space="preserve">
+    <value>آدرس های نگاشت</value>
+  </data>
+  <data name="Alias.Header" xml:space="preserve">
+    <value>ALIAS</value>
+  </data>
+  <data name="Browser.Header" xml:space="preserve">
+    <value>مرورگر</value>
+  </data>
+  <data name="Theme.Header" xml:space="preserve">
+    <value>پوسته</value>
+  </data>
+  <data name="Language.Header" xml:space="preserve">
+    <value>زبان</value>
+  </data>
+  <data name="Primary.Header" xml:space="preserve">
+    <value>اصلی</value>
+  </data>
+  <data name="Canonical.Text" xml:space="preserve">
+    <value>با دامنه جاری باز شود</value>
+  </data>
+  <data name="Redirect.Text" xml:space="preserve">
+    <value>به دامنه اصلی منتقل شود</value>
+  </data>
+  <data name="None.Text" xml:space="preserve">
+    <value>غیرفعال</value>
+  </data>
+  <data name="SiteAliases.Text" xml:space="preserve">
+    <value>آدرس سایت</value>
+  </data>
+  <data name="SiteAlias.Text" xml:space="preserve">
+    <value>آدرس سایت</value>
+  </data>
+  <data name="Language.Text" xml:space="preserve">
+    <value>زیان</value>
+  </data>
+  <data name="Browser.Text" xml:space="preserve">
+    <value>مرورگر</value>
+  </data>
+  <data name="Theme.Text" xml:space="preserve">
+    <value>پوسته</value>
+  </data>
+  <data name="SiteAliasUpdateSuccess.Text" xml:space="preserve">
+    <value>آدرس سایت بروز رسانی شد</value>
+  </data>
+  <data name="SiteAliasCreateSuccess.Text" xml:space="preserve">
+    <value>یک آدرس سایت افزوده شد.</value>
+  </data>
+  <data name="SiteAliasDeletedWarning.Text" xml:space="preserve">
+    <value>آیا از حذف آدرس سایت مطمئن هستید ؟</value>
+  </data>
+  <data name="SiteAliasDeleteSuccess.Text" xml:space="preserve">
+    <value>آدرس سایت حذف شد.</value>
+  </data>
+  <data name="SiteAliasDeleteError.Text" xml:space="preserve">
+    <value>امکان حذف آدرس سایت وجود ندارد. بعدا تلاش کنید.</value>
+  </data>
+  <data name="lblIndexWordMaxLength.Help" xml:space="preserve">
+    <value>مشخص کنید حداکثر طول کلمه برای اینکه نشانه‌گذاری گردد چقدر می‌تواند باشد؟</value>
+  </data>
+  <data name="lblIndexWordMaxLength.Text" xml:space="preserve">
+    <value>حداکثر طول کلمه:</value>
+  </data>
+  <data name="lblIndexWordMinLength.Help" xml:space="preserve">
+    <value>مشخص کنید حداقل طول کلمه برای اینکه نشانه‌گذاری گردد چقدر می‌تواند باشد؟</value>
+  </data>
+  <data name="lblIndexWordMinLength.Text" xml:space="preserve">
+    <value>حداقل طول کلمه:</value>
+  </data>
+  <data name="valIndexWordMaxLengthRequired.Error" xml:space="preserve">
+    <value>وارد کردن حداکثر طول کلمه برای نشانه‌گذاری الزامی می‌باشد</value>
+  </data>
+  <data name="valIndexWordMinLengthRequired.Error" xml:space="preserve">
+    <value>وارد کردن حداقل طول کلمه برای نشانه‌گذاری الزامی می‌باشد</value>
+  </data>
+  <data name="lblCustomAnalyzer.Help" xml:space="preserve">
+    <value>اگر گزینه‌ای انتخاب نشده باشد، نرم‌افزار از تحلیل‌گر استاندارد خود جهت نشانه‌گذاری محتوا استفاده خواهد کرد. اگر شما می‌خواهید از تحلیل‌گر سفارشی استفاده نمایید، گزینه دلخواه خود را از لیست مقابل انتخاب نمایید. نکته: اگر می‌خواهید محتوای کنونی بر اساس تحلیل‌گر جدید نشانه‌گذاری گردد، از بخش اقدام کنید.</value>
+  </data>
+  <data name="lblCustomAnalyzer.Text" xml:space="preserve">
+    <value>نوع تحلیل‌گر سفارشی:</value>
+  </data>
+  <data name="lblAllowLeadingWildcard.Help" xml:space="preserve">
+    <value>Enable this setting to allow search within words. For example: by default, searching "dnn" will match "dnn8" but not "powerfuldnn" - it only searches words that begin with the keyword. If you want to return "powerfuldnn" in search result, you need to enable this setting. Note: this may cause performance issues, so make sure to only enable this setting when really needed.</value>
+  </data>
+  <data name="lblAllowLeadingWildcard.Text" xml:space="preserve">
+    <value>فعال کردن جستجوی کلمه جزئی (آهسته):</value>
+  </data>
+  <data name="SearchPriorities.Text" xml:space="preserve">
+    <value>اولویت جستجو</value>
+  </data>
+  <data name="SearchIndex.Text" xml:space="preserve">
+    <value>تنظیمات جستجو</value>
+  </data>
+  <data name="lblAuthorBoost.Help" xml:space="preserve">
+    <value>مقدار اولویت ایجادکننده هنگام نشانه‌گذاری به آن ایجادکننده اختصاص داده می‌شود. هر چه این عدد بزرگتر باشد، مطالب مرتبط در رتبه بالاتری از نتایج جستجو نمایش‌داده خواهند شد.</value>
+  </data>
+  <data name="lblAuthorBoost.Text" xml:space="preserve">
+    <value>اولویت ایجاد کننده:</value>
+  </data>
+  <data name="lblContentBoost.Help" xml:space="preserve">
+    <value>مقدار اولویت محتوا هنگام نشانه‌گذاری به آن محتوا اختصاص داده می‌شود. هر چه این عدد بزرگتر باشد، مطالب مرتبط در رتبه بالاتری از نتایج جستجو نمایش‌داده خواهند شد.</value>
+  </data>
+  <data name="lblContentBoost.Text" xml:space="preserve">
+    <value>اولویت محتوا:</value>
+  </data>
+  <data name="lblDescriptionBoost.Help" xml:space="preserve">
+    <value>مقدار اولویت توضیحات هنگام نشانه‌گذاری به آن توضیحات اختصاص داده می‌شود. هر چه این عدد بزرگتر باشد، مطالب مرتبط در رتبه بالاتری از نتایج جستجو نمایش‌داده خواهند شد.</value>
+  </data>
+  <data name="lblDescriptionBoost.Text" xml:space="preserve">
+    <value>اولویت توضیحات:</value>
+  </data>
+  <data name="lblTagBoost.Help" xml:space="preserve">
+    <value>مقدار اولویت برچسب هنگام نشانه‌گذاری به آن برچسب اختصاص داده می‌شود. هر چه این عدد بزرگتر باشد، مطالب مرتبط در رتبه بالاتری از نتایج جستجو نمایش‌داده خواهند شد.</value>
+  </data>
+  <data name="lblTagBoost.Text" xml:space="preserve">
+    <value>اولویت برچسب:</value>
+  </data>
+  <data name="lblTitleBoost.Help" xml:space="preserve">
+    <value>مقدار اولویت عنوان هنگام نشانه‌گذاری به آن عنوان اختصاص داده می‌شود. هر چه این عدد بزرگتر باشد، مطالب مرتبط در رتبه بالاتری از نتایج جستجو نمایش‌داده خواهند شد.</value>
+  </data>
+  <data name="lblTitleBoost.Text" xml:space="preserve">
+    <value>اولویت عنوان:</value>
+  </data>
+  <data name="lblSearchIndexPath.Help" xml:space="preserve">
+    <value>مکان نگهداری نشانه‌گذاری‌های جستجو. این مکان با ایجاد تنظیم هاست "Search_IndexFolder" در پایگاه‌داده به صورت دستی قابل تغییر است. توصیه می‌شود قبل از اعمال این تغییر App Pool سایت را متوقف نمایید. شما همچنین باید محتوای پوشه قدیمی را به پوشه جدید منتقل کنید یا به صورت دستی بر روی دکمه نشانه‌گذاری مجدد کلیک نمایید.</value>
+  </data>
+  <data name="lblSearchIndexPath.Text" xml:space="preserve">
+    <value>مسیر نشانه‌گذاری جستجو:</value>
+  </data>
+  <data name="lblSearchIndexDbSize.Help" xml:space="preserve">
+    <value>حجم نهایی فایل‌های پایگاه‌داده نشانه‌گذاری جستجو</value>
+  </data>
+  <data name="lblSearchIndexDbSize.Text" xml:space="preserve">
+    <value>حجم نشانه‌گذاری جستجو:</value>
+  </data>
+  <data name="lblSearchIndexActiveDocuments.Help" xml:space="preserve">
+    <value>تعداد اسناد فعال در فایل‌های نشانه‌گذاری جستجو</value>
+  </data>
+  <data name="lblSearchIndexActiveDocuments.Text" xml:space="preserve">
+    <value>اسناد فعال:</value>
+  </data>
+  <data name="lblSearchIndexDeletedDocuments.Help" xml:space="preserve">
+    <value>تعداد اسناد حذف شده در فایل‌های نشانه‌گذاری جستجو</value>
+  </data>
+  <data name="lblSearchIndexDeletedDocuments.Text" xml:space="preserve">
+    <value>اسناد حذف شده:</value>
+  </data>
+  <data name="lblSearchIndexLastModifiedOn.Help" xml:space="preserve">
+    <value>تاریخ آخرین ویرایش فایل‌ها نشانه‌گذاری جستجو</value>
+  </data>
+  <data name="lblSearchIndexLastModifiedOn.Text" xml:space="preserve">
+    <value>تاریخ آخرین ویرایش:</value>
+  </data>
+  <data name="MessageIndexWarning.Text" xml:space="preserve">
+    <value>هشدار: با توجه به پردازش بالای این عملیات، این کار را در ساعات خارج از پیک بازدید انجام دهید.</value>
+  </data>
+  <data name="CompactIndex.Text" xml:space="preserve">
+    <value>شاخص فشرده</value>
+  </data>
+  <data name="ReindexContent.Text" xml:space="preserve">
+    <value>نشانه گذاری مجدد محتوا</value>
+  </data>
+  <data name="ReindexHostContent.Text" xml:space="preserve">
+    <value>نشانه گذاری مجدد محتوای هاست</value>
+  </data>
+  <data name="ReIndexConfirmationMessage.Text" xml:space="preserve">
+    <value>نشانه‌گذاری مجدد باعث پاک شدن تمام محتوای نشانه‌گذاری در مخزن نشانه‌ها خواهد شد. فرآیند نشانه‌گذاری در حالت طبیعی بوسیله خزنده‌های جستجو و در دوره زمان‌بندی شده انجام می‌گردد. آیا مطمئن هستید می‌خواهید ادامه دهید؟</value>
+  </data>
+  <data name="CompactIndexConfirmationMessage.Text" xml:space="preserve">
+    <value>متراکم‌سازی نشانه‌های جستجو می‌تواند مصرف پردازشگر را بالا برده و ممکن است دو برابر فضای کنونی مخزن نشانه‌گذاری به پردازش نیاز داشته باشد. متراکم‌سازی رویه‌ای که است به طور معمول توسط خزنده جستجو و بر اساس بازه زمان‌بندی شده انجام می‌گردد. آیا مطمئن هستید می‌خواهید ادامه دهید؟</value>
+  </data>
+  <data name="SynonymsTagDuplicated.Text" xml:space="preserve">
+    <value>قبلا در یک گروهِ مترادفی دیگر استفاده شده است.</value>
+  </data>
+  <data name="Synonyms.Text" xml:space="preserve">
+    <value>مترادف‌ها</value>
+  </data>
+  <data name="SynonymsGroup.Header" xml:space="preserve">
+    <value>Synonyms Group</value>
+  </data>
+  <data name="SynonymsGroupUpdateSuccess.Text" xml:space="preserve">
+    <value>The synonyms group has been updated.</value>
+  </data>
+  <data name="SynonymsGroupCreateSuccess.Text" xml:space="preserve">
+    <value>The synonyms group has been added.</value>
+  </data>
+  <data name="SynonymsGroupDeletedWarning.Text" xml:space="preserve">
+    <value>Are you sure you want to delete this synonyms group?</value>
+  </data>
+  <data name="SynonymsGroupDeleteSuccess.Text" xml:space="preserve">
+    <value>The synonyms group has been deleted.</value>
+  </data>
+  <data name="SynonymsGroupDeleteError.Text" xml:space="preserve">
+    <value>Could not delete the synonyms group. Please try later.</value>
+  </data>
+  <data name="IgnoreWords.Text" xml:space="preserve">
+    <value>نادیده گرفتن کلمات</value>
+  </data>
+  <data name="IgnoreWordsUpdateSuccess.Text" xml:space="preserve">
+    <value>The ignore words has been updated.</value>
+  </data>
+  <data name="IgnoreWordsCreateSuccess.Text" xml:space="preserve">
+    <value>The ignore words has been added.</value>
+  </data>
+  <data name="IgnoreWordsDeletedWarning.Text" xml:space="preserve">
+    <value>Are you sure you want to delete the ignore words?</value>
+  </data>
+  <data name="IgnoreWordsDeleteSuccess.Text" xml:space="preserve">
+    <value>The ignore words has been deleted.</value>
+  </data>
+  <data name="IgnoreWordsDeleteError.Text" xml:space="preserve">
+    <value>Could not delete the ignore words. Please try later.</value>
+  </data>
+  <data name="HtmlEditor.Text" xml:space="preserve">
+    <value>مدیریت ویرایشگر HTML</value>
+  </data>
+  <data name="OpenHtmlEditor.Text" xml:space="preserve">
+    <value>باز کردن مدیریت ویرایشگر HTML</value>
+  </data>
+  <data name="HtmlEditorWarning.Text" xml:space="preserve">
+    <value>مدیریت ویرایشگر HTML به شما امکان تغییر ویرایشگر Html استفاده شده در سایت یا ویرایش پیکربندی را می دهد.</value>
+  </data>
+  <data name="BackToSiteBehavior.Text" xml:space="preserve">
+    <value>&lt; بازگشت به تنظیمات پیشرفته</value>
+  </data>
+  <data name="BackToLanguages.Text" xml:space="preserve">
+    <value>&lt; بازگشت به بخش زیان ها</value>
+  </data>
+  <data name="NativeName.Text" xml:space="preserve">
+    <value>نام بومی</value>
+  </data>
+  <data name="EnglishName.Text" xml:space="preserve">
+    <value>نام انگلیسی</value>
+  </data>
+  <data name="LanguageSettings.Text" xml:space="preserve">
+    <value>تنظیمات زبان</value>
+  </data>
+  <data name="Languages.Text" xml:space="preserve">
+    <value>زبان ها</value>
+  </data>
+  <data name="systemDefaultLabel.Help" xml:space="preserve">
+    <value>زبان پیش فرض سیستم،  زبانی است که در زمانی که دیگر زبان ها در دسترس نیستند مورد استفاده قرار می گیرد.</value>
+  </data>
+  <data name="systemDefaultLabel.Text" xml:space="preserve">
+    <value>پیش فرض سیستم :</value>
+  </data>
+  <data name="siteDefaultLabel.Help" xml:space="preserve">
+    <value>شما در این بخش می توانید زبان پیش فرض سایت را انتخاب نمایید. در صورتی که زبان هنوز فعال نشده است، بعد از انتخاب در این بخش به صورت خودکار فعال می گردد. همچنین زمانی که یکبار بومی سازی محتوا فعال گردد امکان تغییر وجود ندارد.</value>
+  </data>
+  <data name="siteDefaultLabel.Text" xml:space="preserve">
+    <value>پیش فرض جاری سایت</value>
+  </data>
+  <data name="plUrl.Help" xml:space="preserve">
+    <value>برای فعالسازی پارامترهای زبان در URL این گزینه را فعال نمایید.</value>
+  </data>
+  <data name="plUrl.Text" xml:space="preserve">
+    <value>فعال بودن پارامتر زبان در URL</value>
+  </data>
+  <data name="detectBrowserLable.Help" xml:space="preserve">
+    <value>آیا می خواهید زبان براساس زبان مشخص شده در مرورگر کاربر انتخاب شود؟</value>
+  </data>
+  <data name="detectBrowserLable.Text" xml:space="preserve">
+    <value>فعال نمودن تشخیص زبان مرورگر</value>
+  </data>
+  <data name="allowUserCulture.Help" xml:space="preserve">
+    <value>وقتی فعال باشد به کابر امکان انتخاب زبان دیگری غیر از زبان محتوا، برای اینترفیس را میدهد.</value>
+  </data>
+  <data name="allowUserCulture.Text" xml:space="preserve">
+    <value>اجازه به کاربران برای انتخاب زبان اینترفیس?</value>
+  </data>
+  <data name="NeutralCulture.Text" xml:space="preserve">
+    <value>Neutral Culture</value>
+  </data>
+  <data name="Culture.Header" xml:space="preserve">
+    <value>زبان</value>
+  </data>
+  <data name="Enabled.Header.Text" xml:space="preserve">
+    <value>فعال</value>
+  </data>
+  <data name="fallBackLabel.Help" xml:space="preserve">
+    <value>انتخاب زبان جایگزین</value>
+  </data>
+  <data name="fallBackLabel.Text" xml:space="preserve">
+    <value>زبان جایگزین:</value>
+  </data>
+  <data name="enableLanguageLabel.Text" xml:space="preserve">
+    <value>فعال کردن زبان</value>
+  </data>
+  <data name="languageLabel.Help" xml:space="preserve">
+    <value>زبان موردنظر را انتخاب نمایید</value>
+  </data>
+  <data name="languageLabel.Text" xml:space="preserve">
+    <value>زبان :</value>
+  </data>
+  <data name="LanguageUpdateSuccess.Text" xml:space="preserve">
+    <value>بروز رسانی انجام شد.</value>
+  </data>
+  <data name="LanguageCreateSuccess.Text" xml:space="preserve">
+    <value>زبان افزوده شد.</value>
+  </data>
+  <data name="DefaultLanguage.Text" xml:space="preserve">
+    <value>* توجه: این زبان پیش فرض سیستم است</value>
+  </data>
+  <data name="plEnableContentLocalization.Help" xml:space="preserve">
+    <value>در صورتی که می خواهید مدیران امکان فعال نمودن بومی سازی را برای وب سایت های خود داشته باشند؛ این گزینه را انتخاب کنید.</value>
+  </data>
+  <data name="plEnableContentLocalization.Text" xml:space="preserve">
+    <value>امکان بومی سازی محتوا</value>
+  </data>
+  <data name="GlobalSetting.Text" xml:space="preserve">
+    <value>این یک تنظیم سراسری است. تغییر در این تنظیمات برای تمامی پرتال ها تاثیر گذار خواهد بود.</value>
+  </data>
+  <data name="CreateLanguagePack.Text" xml:space="preserve">
+    <value>ایجاد بسته زبان</value>
+  </data>
+  <data name="ResourceFileVerifier.Text" xml:space="preserve">
+    <value>Resource File Verifier</value>
+  </data>
+  <data name="VerifyLanguageResources.Text" xml:space="preserve">
+    <value>بررسی زبان فایل های منبع</value>
+  </data>
+  <data name="MissingFiles.Text" xml:space="preserve">
+    <value>فایل های ریسورس از قلم افتاده:&amp;nbsp;</value>
+  </data>
+  <data name="MissingEntries.Text" xml:space="preserve">
+    <value>فایل با داده های از قلم افتاده :&amp;nbsp;</value>
+  </data>
+  <data name="ObsoleteEntries.Text" xml:space="preserve">
+    <value>فایل ها با داده های منسوخ :&amp;nbsp;</value>
+  </data>
+  <data name="ControlTitle_verify.Text" xml:space="preserve">
+    <value>تصدیق کننده فایل منبع</value>
+  </data>
+  <data name="OldFiles.Text" xml:space="preserve">
+    <value>فایل های قدیمی تر از فایل های پیش فرض سیستم :&amp;nbsp;</value>
+  </data>
+  <data name="DuplicateEntries.Text" xml:space="preserve">
+    <value>فایل با داده های تکراری :&amp;nbsp;</value>
+  </data>
+  <data name="ErrorFiles.Text" xml:space="preserve">
+    <value>فایل های ریسورس ناقص :&amp;nbsp;</value>
+  </data>
+  <data name="LanguagePackCreateSuccess.Text" xml:space="preserve">
+    <value>The Language Pack(s) were created and can be found in the {0}/Install/Language folder.</value>
+  </data>
+  <data name="LanguagePackCreateFailure.Text" xml:space="preserve">
+    <value>You must create resource files before you can create a language pack.</value>
+  </data>
+  <data name="lbLocale.Text" xml:space="preserve">
+    <value>زبان ریسورس:</value>
+  </data>
+  <data name="lbLocale.Help" xml:space="preserve">
+    <value>زبانی که مایل هستید بسته زبانی برای آن ایجاد شود را انتخاب نمایید.</value>
+  </data>
+  <data name="lblType.Text" xml:space="preserve">
+    <value>نوع بسته ریسورس:</value>
+  </data>
+  <data name="lblType.Help" xml:space="preserve">
+    <value>نوع بسته ای که می خواهید ایجاد شود را انتخاب نمایید</value>
+  </data>
+  <data name="lblName.Text" xml:space="preserve">
+    <value>نام بسته زبانی :</value>
+  </data>
+  <data name="lblName.Help" xml:space="preserve">
+    <value>شما می توانید نام بسته ایجاد شده را تغییر دهید. توجه نمایید که بخشی از نام ثابت و بدون تغییر است.</value>
+  </data>
+  <data name="valName.ErrorMessage" xml:space="preserve">
+    <value>وارد کردن نام صفحه الزامی است</value>
+  </data>
+  <data name="SelectModules.Text" xml:space="preserve">
+    <value>انتخاب ماژول(هایی) که می خواهید در بسته ریسورس باشند :</value>
+  </data>
+  <data name="Core.LangPackType" xml:space="preserve">
+    <value>هسته</value>
+  </data>
+  <data name="Module.LangPackType" xml:space="preserve">
+    <value>ماژول</value>
+  </data>
+  <data name="Provider.LangPackType" xml:space="preserve">
+    <value>پروایدر</value>
+  </data>
+  <data name="Full.LangPackType" xml:space="preserve">
+    <value>کامل</value>
+  </data>
+  <data name="AuthSystem.LangPackType" xml:space="preserve">
+    <value>سیستم احراز هویت</value>
+  </data>
+  <data name="ModuleRequired.Error" xml:space="preserve">
+    <value>لطفا حداقل یک ماژول از لیست انتخاب کنید.</value>
+  </data>
+  <data name="BackToSiteSettings.Text" xml:space="preserve">
+    <value>&lt;بازگشت به تنظیمات سایت</value>
+  </data>
+  <data name="DefaultValue.Text" xml:space="preserve">
+    <value>مقدار پیش فرض</value>
+  </data>
+  <data name="Global.Text" xml:space="preserve">
+    <value>عمومی</value>
+  </data>
+  <data name="HighlightPendingTranslations.Text" xml:space="preserve">
+    <value>Highlight Pending Translations</value>
+  </data>
+  <data name="LanguageEditor.Header" xml:space="preserve">
+    <value>ترجمه ریسورس فایل ها</value>
+  </data>
+  <data name="LocalizedValue.Text" xml:space="preserve">
+    <value>Localized Value</value>
+  </data>
+  <data name="ResourceFile.Text" xml:space="preserve">
+    <value>Resource File</value>
+  </data>
+  <data name="ResourceFolder.Text" xml:space="preserve">
+    <value>Resource Folder</value>
+  </data>
+  <data name="ResourceName.Text" xml:space="preserve">
+    <value>نام ریسورس :</value>
+  </data>
+  <data name="SaveTranslationsToFile.Text" xml:space="preserve">
+    <value>ذخیره ترجمه در فایل</value>
+  </data>
+  <data name="GlobalRoles.Text" xml:space="preserve">
+    <value>نقش های عمومی</value>
+  </data>
+  <data name="AllRoles.Text" xml:space="preserve">
+    <value>همه نقش ها</value>
+  </data>
+  <data name="RoleName.Header" xml:space="preserve">
+    <value>نقش</value>
+  </data>
+  <data name="Select.Header" xml:space="preserve">
+    <value>انتخاب</value>
+  </data>
+  <data name="Translators.Text" xml:space="preserve">
+    <value>مترجم ها</value>
+  </data>
+  <data name="translatorsLabel.Help" xml:space="preserve">
+    <value>نقش انتخاب شده امکان دسترسی به صفحات جدید و بومی سازی ماژول ها را برای این زبان دارد.</value>
+  </data>
+  <data name="GlobalResources.Text" xml:space="preserve">
+    <value>منابع عمومی</value>
+  </data>
+  <data name="LocalResources.Text" xml:space="preserve">
+    <value>Local Resources</value>
+  </data>
+  <data name="SiteTemplates.Text" xml:space="preserve">
+    <value>قالب سایت</value>
+  </data>
+  <data name="Exceptions.Text" xml:space="preserve">
+    <value>استثنا</value>
+  </data>
+  <data name="HostSkins.Text" xml:space="preserve">
+    <value>پوسنه میزبان</value>
+  </data>
+  <data name="PortalSkins.Text" xml:space="preserve">
+    <value>پوسته سایت</value>
+  </data>
+  <data name="Template.Text" xml:space="preserve">
+    <value>قالب</value>
+  </data>
+  <data name="Updated.Text" xml:space="preserve">
+    <value>فایل {0} ذخیره شد.</value>
+  </data>
+  <data name="ResourceUpdated.Text" xml:space="preserve">
+    <value>Resource file has been updated.</value>
+  </data>
+  <data name="InvalidLocale.ErrorMessage" xml:space="preserve">
+    <value>این زبان در حال حاضر پشتیبانی نمی وشد ({0}).</value>
+  </data>
+  <data name="MicroServices.Text" xml:space="preserve">
+    <value>MicroServices</value>
+  </data>
+  <data name="MicroServicesDescription.Text" xml:space="preserve">
+    <value>Warning: once you enable a microservice, you will need contact support yo disable it.</value>
+  </data>
+  <data name="SaveConfirm.Text" xml:space="preserve">
+    <value>آیا تنظیمات ذخیره شود؟</value>
+  </data>
+  <data name="MessageReIndexWarning.Text" xml:space="preserve">
+    <value>نشانه‌گذاری مجدد : باعث حذف شدن تمام محتوای نشانه‌گذاری شده کنونی شده و همه چیز مجددا نشانه‌گذاری خواهد شد. نشانه‌گذاری مجدد بر اساس زمانبندی مشخص کاوشگر جستجو انجام خواهد شد.</value>
+  </data>
+  <data name="CurrentSiteDefault.Text" xml:space="preserve">
+    <value>پیش فرض سایت کنونی:</value>
+  </data>
+  <data name="CurrentSiteDefault.Help" xml:space="preserve">
+    <value>Once localized content is enabled, the default site culture will be permanently set and cannot be changed. Click Cancel now if you want to change the current site default.</value>
+  </data>
+  <data name="AllPagesTranslatable.Text" xml:space="preserve">
+    <value>همه صفحات قابل ترجمه باشد:</value>
+  </data>
+  <data name="AllPagesTranslatable.Help" xml:space="preserve">
+    <value>Check this box to make all pages within the default language translatable and created a copy of all translatable pages for each enabled language.</value>
+  </data>
+  <data name="EnableLocalizedContent.Text" xml:space="preserve">
+    <value>فعال کردن محتوای بومی</value>
+  </data>
+  <data name="EnableLocalizedContentHelpText.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EnableLocalizedContentClickCancel.Text" xml:space="preserve">
+    <value>Click Cancel now if you want to change the current site default.</value>
+  </data>
+  <data name="TranslationProgressBarText.Text" xml:space="preserve">
+    <value>[number] new pages are beign created for each language. Please wait as you localized pages are generated...</value>
+  </data>
+  <data name="TotalProgress.Text" xml:space="preserve">
+    <value>کل پردازش ها [number]%</value>
+  </data>
+  <data name="TotalLanguages.Text" xml:space="preserve">
+    <value>همه زبان ها</value>
+  </data>
+  <data name="Progress.Text" xml:space="preserve">
+    <value>پیش روی</value>
+  </data>
+  <data name="ElapsedTime.Text" xml:space="preserve">
+    <value>زمان سپری شده:</value>
+  </data>
+  <data name="ProcessingPage.Text" xml:space="preserve">
+    <value>{0}: صفحه{1} از {2} - {3}</value>
+  </data>
+  <data name="MessageCompactIndexWarning.Text" xml:space="preserve">
+    <value>Compacting of Index reclaims space from deleted items in the Index Store. Compacting is recommended only when there are many 'Deleted Documents' in Index Store. Compacting may require twice the size of current Index Store during processing.</value>
+  </data>
+  <data name="cmdCreateLanguage.Text" xml:space="preserve">
+    <value>افزودن زبان جدید</value>
+  </data>
+  <data name="cmdAddWord.Text" xml:space="preserve">
+    <value>افزودن واژه</value>
+  </data>
+  <data name="cmdAddField.Text" xml:space="preserve">
+    <value>افزودن فیلد</value>
+  </data>
+  <data name="cmdAddAlias.Text" xml:space="preserve">
+    <value>افزودن آدرس سایت</value>
+  </data>
+  <data name="cmdAddGroup.Text" xml:space="preserve">
+    <value>افزودن گروه</value>
+  </data>
+  <data name="DisableLocalizedContent.Text" xml:space="preserve">
+    <value>غیر فعال کردن محتوای ترجمه شده</value>
+  </data>
+  <data name="TranslatePageContent.Text" xml:space="preserve">
+    <value>ترجمه محتوای صفحه</value>
+  </data>
+  <data name="AddAllUnlocalizedPages.Text" xml:space="preserve">
+    <value>افزودن تمامی صفحات لوکالیز نشده</value>
+  </data>
+  <data name="ViewPage.Text" xml:space="preserve">
+    <value>[ نمایش صفحه ]</value>
+  </data>
+  <data name="EditPageSettings.Text" xml:space="preserve">
+    <value>[ Edit Page Settings ]</value>
+  </data>
+  <data name="ActivatePages.Text" xml:space="preserve">
+    <value>فعال شدن صفحه در این زبان:</value>
+  </data>
+  <data name="ActivatePages.Help" xml:space="preserve">
+    <value>A language must be enabled before it can be activated and it must be deactivated before it can be disabled.</value>
+  </data>
+  <data name="MarkAllPagesAsTranslated.Text" xml:space="preserve">
+    <value>Mark All Pages As Translated</value>
+  </data>
+  <data name="EraseAllLocalizedPages.Text" xml:space="preserve">
+    <value>پاک کردن همه صفحات بومی</value>
+  </data>
+  <data name="PublishTranslatedPages.Text" xml:space="preserve">
+    <value>انتشار صفحاتی که به عنوان ترجمه شده در این زبان علامتگذاری شده اند</value>
+  </data>
+  <data name="UnpublishTranslatedPages.Text" xml:space="preserve">
+    <value>عدم انتشار همه صفحات</value>
+  </data>
+  <data name="PagesToTranslate.Text" xml:space="preserve">
+    <value>Pages To Translate:</value>
+  </data>
+  <data name="plImprovementProgram.Help" xml:space="preserve">
+    <value>این برنامه به ما درک بهتری از چگونگی بهبود دی ان ان می دهد . تمام داده به صورت ناشناس و فقط برای استفاده داخلی برای شرکت رسمی دی ان ان جمع آوری خواهد شد تا با تحلیل و انالیز به بهبود روند این نرم افزار کمک بشود</value>
+  </data>
+  <data name="plImprovementProgram.Text" xml:space="preserve">
+    <value>برنامه جهت بهبود دی ان ان:</value>
+  </data>
+  <data name="plUpgrade.Text" xml:space="preserve">
+    <value>بررسی وجود نسخه جدید؟</value>
+  </data>
+  <data name="plUpgrade.Help" xml:space="preserve">
+    <value>اگر می‌خواهید نرم‌افزار وجود نسخه جدید را بررسی کند این گزینه را انتخاب کنید.</value>
+  </data>
+  <data name="Pages.Header" xml:space="preserve">
+    <value>صفحات</value>
+  </data>
+  <data name="Translated.Header" xml:space="preserve">
+    <value>ترجمه شده؟</value>
+  </data>
+  <data name="Active.Header" xml:space="preserve">
+    <value>فعال</value>
+  </data>
+  <data name="PropertyDefinitionUpdateSuccess.Text" xml:space="preserve">
+    <value>Property Definitions have been updated.</value>
+  </data>
+  <data name="ViewOrderUpdateSuccess.Text" xml:space="preserve">
+    <value>.به روز رسانی انجام شد</value>
+  </data>
+  <data name="SaveOrCancelWarning.Text" xml:space="preserve">
+    <value>You have unsaved changes. Please save or cancel your changes first.</value>
+  </data>
+  <data name="DeactivateLanguageWarning.Text" xml:space="preserve">
+    <value>غیر فعال شود {0}?</value>
+  </data>
+  <data name="DeletedAllLocalizedPages.Text" xml:space="preserve">
+    <value>صفحه های ترجمه شده  با موفقیت حذف شد.</value>
+  </data>
+  <data name="EraseTranslatedPagesWarning.Text" xml:space="preserve">
+    <value>You are about to permanently remove all translations for the '{0}' language. Are you sure you want to continue?</value>
+  </data>
+  <data name="Mode.HelpText" xml:space="preserve">
+    <value>Select System to edit the base file for a given language; Host will create a custom version of the localized file for this installation.</value>
+  </data>
+  <data name="Mode.Label" xml:space="preserve">
+    <value>حالت</value>
+  </data>
+  <data name="PagesSuccessfullyLocalized.Text" xml:space="preserve">
+    <value>Pages successfully localized.</value>
+  </data>
+  <data name="PublishedAllTranslatedPages.Text" xml:space="preserve">
+    <value>صفحه با موفقیت انتشار یافت.</value>
+  </data>
+  <data name="SelectResourcePlaceholder.Text" xml:space="preserve">
+    <value>-- انتخاب کنید --</value>
+  </data>
+  <data name="PagesSuccessfullyTranslated.Text" xml:space="preserve">
+    <value>Pages successfully translated.</value>
+  </data>
+  <data name="DisableLanguageWarning.Text" xml:space="preserve">
+    <value>آیا مطمئن هستید برای غیر فعال سازی این زبان {0}</value>
+  </data>
+  <data name="MakeNeutralWarning.Text" xml:space="preserve">
+    <value>This will delete all translated version of the page. Only the default culture version of the page will remain. Are you sure you want to do this?</value>
+  </data>
+  <data name="lblCustomAnalyzer.Text1" xml:space="preserve">
+    <value>نوع تحلیل‌گر سفارشی:</value>
+  </data>
+  <data name="SearchIndex.Text1" xml:space="preserve">
+    <value>تنظیمات جستجو</value>
+  </data>
+  <data name="RequiredTextBox.Text1" xml:space="preserve">
+    <value>درصورتی که فیلد Tectbox می باشد، طول آن می بایست از 0 بزرگتر باشد</value>
+  </data>
+  <data name="LanguageSelectionLabel.Text" xml:space="preserve">
+    <value>زبان</value>
+  </data>
+  <data name="ListEntryText.Text" xml:space="preserve">
+    <value>متن</value>
+  </data>
+  <data name="ListEntryValue.Text" xml:space="preserve">
+    <value>مقدار</value>
+  </data>
+  <data name="NoData.Text" xml:space="preserve">
+    <value>رکوردی برای نمایش وجود ندارد</value>
+  </data>
+  <data name="cmdAddEntry.Text" xml:space="preserve">
+    <value>افزودن</value>
+  </data>
+  <data name="ListEntries.Text" xml:space="preserve">
+    <value>افزودن لیست</value>
+  </data>
+  <data name="ListEntries.Help" xml:space="preserve">
+    <value>MANAGE LIST ENTRIES: The property details have been updated. This property is a List type property. The next step is to define the list entries.</value>
+  </data>
+  <data name="ListEntryCreateSuccess.Text" xml:space="preserve">
+    <value>لیست با موفقیت ایجاد شد.</value>
+  </data>
+  <data name="ListEntryUpdateSuccess.Text" xml:space="preserve">
+    <value>لیست با موفقیت بروز رسانی شد</value>
+  </data>
+  <data name="ListEntryDeleteSuccess.Text" xml:space="preserve">
+    <value>لیست با موفقیت حذف شد.</value>
+  </data>
+  <data name="ListEntryDeleteError.Text" xml:space="preserve">
+    <value>امکان حذف لیست وجود ندارد . لطفا بعدا تلاش  کنید</value>
+  </data>
+  <data name="ListEntryDeletedWarning.Text" xml:space="preserve">
+    <value>آیا مطمئن هستید که میخواهید این لیست را حذف کنید ؟?</value>
+  </data>
+  <data name="InvalidEntryText.Text" xml:space="preserve">
+    <value>وارد کردن متن الزامی است.</value>
+  </data>
+  <data name="InvalidEntryValue.Text" xml:space="preserve">
+    <value>وارد کردن مقدار الزامی است.</value>
+  </data>
+  <data name="EnableSortOrder.Text" xml:space="preserve">
+    <value>فعال سازی ترتیب</value>
+  </data>
+  <data name="EnableSortOrder.Help" xml:space="preserve">
+    <value>این گزینه برای فعال سازی گزینه ترتیب سفاری می باشد.</value>
+  </data>
+  <data name="BrowseAction.Text" xml:space="preserve">
+    <value>برای ذخیره {[ENTER]} و برای لغو {[ESC]} را فشار دهید.</value>
+  </data>
+  <data name="BrowseButton.Text" xml:space="preserve">
+    <value>مرور فایل سیستم</value>
+  </data>
+  <data name="DefaultImageTitle.Text" xml:space="preserve">
+    <value>تصویر</value>
+  </data>
+  <data name="DragDefault.Text" xml:space="preserve">
+    <value>فایل را بکشید و رها کنید یا انتخاب کنید.</value>
+  </data>
+  <data name="DragOver.Text" xml:space="preserve">
+    <value>فایل را بکشید و رها کنید.</value>
+  </data>
+  <data name="File.Text" xml:space="preserve">
+    <value>فایل</value>
+  </data>
+  <data name="Folder.Text" xml:space="preserve">
+    <value>پوشه</value>
+  </data>
+  <data name="LinkButton.Text" xml:space="preserve">
+    <value>لینک آدرس را وارد کنید</value>
+  </data>
+  <data name="LinkInputAction.Text" xml:space="preserve">
+    <value>برای ذخیره {[ENTER]} و برای لغو {[ESC]} را فشار دهید.</value>
+  </data>
+  <data name="LinkInputPlaceholder.Text" xml:space="preserve">
+    <value>http://example.com/imagename.jpg</value>
+  </data>
+  <data name="LinkInputTitle.Text" xml:space="preserve">
+    <value>لینک آدرس</value>
+  </data>
+  <data name="NotSpecified.Text" xml:space="preserve">
+    <value>&lt;مشخص نشده&gt;</value>
+  </data>
+  <data name="SearchFilesPlaceHolder.Text" xml:space="preserve">
+    <value>جستجوی فایل ها...</value>
+  </data>
+  <data name="SearchFoldersPlaceHolder.Text" xml:space="preserve">
+    <value>جستجوی پوشه ها...</value>
+  </data>
+  <data name="UploadButton.Text" xml:space="preserve">
+    <value>بارگذاری یک فایل</value>
+  </data>
+  <data name="UploadComplete.Text" xml:space="preserve">
+    <value>بارگذاری موفق</value>
+  </data>
+  <data name="UploadDefault.Text" xml:space="preserve">
+    <value>myImage.jpg</value>
+  </data>
+  <data name="UploadFailed.Text" xml:space="preserve">
+    <value>بارگذاری ناموفق</value>
+  </data>
+  <data name="Uploading.Text" xml:space="preserve">
+    <value>بارگذاری...</value>
+  </data>
+  <data name="WrongFormat.Text" xml:space="preserve">
+    <value>فرمت ناصحیح</value>
+  </data>
+  <data name="Host.Text" xml:space="preserve">
+    <value>هاست</value>
+  </data>
+</root>

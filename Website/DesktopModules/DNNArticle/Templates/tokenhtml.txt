@@ -1,0 +1,156 @@
+<h1>Article Object Tokens</h1>
+[TITLE]: The title of the article.<br>
+[DESCRIPTION]: The summary of the article.<br>
+[SHORTENDESCRIPTION:length]: This token can remove HTML tags in
+description and shorten it to the specified length.<br>
+[CONTENT]: The content of the article.<br>
+[URL]: The image URL of the article. <br>
+[IMAGE]: Image of the article.<br>
+[IMAGE:width,height]: Displays an image in specified width and height.
+For example, [IMAGE:100,100].<br>
+[IMAGEURL]: Get the image URL.<br>
+[THUMBNAILIMAGE: width,height,quality]: Displays a thumbnail image in
+specified width and height. The quality can be h(high), d(default) or
+l(low).<br>
+[THUMBNAILIMAGEURL: width,height,quality]: Get the URL of the thumbnail
+image. <br>
+[RELATEDURL]: You can set a related URL, for example, the URL of a demo
+page of a product, for each article.<br>
+[RELATEDURL:text,class,target]: This token can create a link of a related URL.<br>
+
+[VIEWURL]: The link URL to detail view. <br>
+[VIEWURL:text,class,target]: If the article has content, it will generate a
+link to the Detail View page. If the content is blank, it will generate
+a link to a related URL. If there is no content and no related URL, it
+will generate a link to <br>
+the Detail View page.<br>
+[CLICKS]: The view account of the article.<br>
+[RATINGIMAGE]: A five-star image of rating.<br>
+[RATINGIMAGE:width,height]: Show a five-star image of rating in
+specified width and height.<br>
+[CREATEDDATE:format]: Show created date in the specified format.<br>
+[UPDATEDATE:format]: Show update date in the specified format.<br>
+[PUBLISHDATE:format]: Show publish date in the specified format.<br>
+[EXPIREDATE:format]: Show expire date in the specified format.<br>
+[LASTVIEDATE:format]: Show last viewed date in the specified format.<br>
+[CREATEDBYUSER]: The user ID of the author. <br>
+[CREATEDBYUSERNAME]: The name of the author.<br>
+[COMMENTNUMBER]: Null of Comments<br>
+[USERDISPLAYNAME]: The display name of the author.<br>
+[USEREMAIL]: The email of the author.<br>
+[CATEGORIES]: Generate links of categories for the article. The
+categories are separated by commas. Each category is linked to the page
+of main DNNArticle.<br>
+[CATEGORIES]&hellip;[/CATEGORIES]: Generate list of categories. You
+can use tokens of category in the block. For example [CATEGORIES]
+&lt;a
+href=&rdquo;[CATEGORYLINK]&rdquo;&gt;[TITLE]&lt;/a&gt;[/CATEGORIES].
+<br>
+[CATEGORYNAME]: This token will generate category names without a link.
+The categories are separated by commas.<br>
+[TAGS]: Show tags of the article.<br>
+[CSSTAGS]: Show tags by using CSS defined in the Tag Cloud module. Then
+the tags can be shown as in the tag cloud.<br>
+[RELATEDARTILCE:orderfield,categoryid,title]: It can show related
+articles from one category.<br>
+[EDIT]: Show the edit icon of the article.<br>
+[PUBLISHDATEICON:]: Show an icon of publish date.<br>
+[CATEGORYBREADCRUMB]: Show category breadcrumb in template.<br>
+[RELATEDARTICLES:[displayorder],[categoryid],[label],[displaynumber]]:
+It will generate related articles. You can set sort field in the
+token.&nbsp;<br>
+[ATTACHMENT]: It will generate attached file list.<br>
+[IFEXIST:ATTACHMENT]&hellip;[/IFEXIST:ATTACHMENT]: It can show the
+enclosed HTML if there are attachments.<br>
+[IFEXIST: RELATEDARTICLES]&hellip;[/IFEXIST: RELATEDARTICLES]: It
+can show the enclosed HTML if there are related articles.<br>
+[ODDEVENROW] token for DNNArticle List: It will generate
+&ldquo;odd&rdquo; or &ldquo;even&rdquo; for odd and
+even rows. You can use them to generate different CSS classes for odd
+and even rows.<br>
+[GOOGLEMAP:ExtraField,MAPWidth,MAPHeight,ZoomLevel]: Generate static
+Google Map by an extra field that should store the address. <br>
+[DGOOGLEMAP:ExtraField,MAPWidth,MAPHeight,ZoomLevel]: Generate dynamic
+Google Map by an extra field that should store the address. <br>
+[MODULE:moduleid]: You can add an existing module into DNNArticle List
+or DNNArticle View. <br>
+<br>
+<h1>Block Tokens for Article Object</h1>
+Its format is [TOKENNAME] content [/TOKENNAME]. The content blocked by
+a block token will be shown with some conditions. Currently there are
+four such tokens.<br>
+[ISFEATURED]...[/ISFEATURED]: If the article is featured, the content
+blocked by the token will be shown.<br>
+[NOTAPPROVED]...[/NOTAPPROVED]: If the article is not approved, the
+content blocked by the token will be shown.<br>
+[CANVIEW]...[/CANVIEW]: If the current user has view permission of the
+article, the content blocked by the token will be shown.<br>
+[CANNOTVIEW]...[/CANNOTVIEW]: If the current user has no view
+permission of the article, the content blocked by the token will be
+shown.<br>
+An example of using block tokens is to show an icon for a featured
+article. You can add the following code in the template:<br>
+[ISFEATURED] &lt;img src="featuredicon" alt="featured" /&gt;
+[/ISFEATURED]<br>
+[ISINROLES:role1;role2]...[/ISINROLES]: It will show the text in the
+block if the current user belongs to roles defined in the token. The
+roles should be separated by semi-colons.<br>
+[IFEXIST:TOKEN]...[/IFEXIST:TOKEN] and
+[IFNOTEXIST:TOKEN]...[/IFNOTEXIST:TOKEN]:You can use
+[IFEXIST:TOKEN]...[/IFEXIST:TOKEN] to REMOVE HTML code from a template
+if a field is NULL. And, you can use
+[IFNOTEXIST:TOKEN]...[/IFNOTEXIST:TOKEN] to ADD HTML code to a template
+if a field is NULL.<br>
+<br>
+<br>
+<h1>Tokens for DNNArticle View</h1>
+[CTLCOMMENT]: It will generate a comment control.<br>
+[CTLRATING]: It will generate a rating control.<br>
+[MAKERATING]: It will generate a rating control based on Telerik rating
+control.<br>
+[PRINTICON]: It will generate a print icon.<br>
+[BACK:Text,CSSClass,Target]: It will generate a back link to the
+pervious page. <br>
+[BACKTOTAB:TabId,Text,CSSClass,Target]: It will generate a link to a
+tab that has tabid in the token.<br>
+[EDIT]: It will generate an edit icon.<br>
+[PAGECONTENT] - Show pages of the article.<br>
+[NEXTARTICLE:categoryid,vieworder]...[/NEXTARTICLE]: It means that the
+article tokens in the block should be translated to the article next to
+the current article that is in the defined category by the category ID
+and view order in the token. If category ID is -1, it will show the
+next article in the module with the current article. This is used to
+generate the link to next article in DNNArticle View.<br>
+[PREVARTICLE:categoryid,vieworder]...[/PREVARTICLE]<br>
+<br>
+<h1>Category Tokens</h1>
+The Category Tokens can be used in the template for the Category
+Article List sub module.You can use the following tokens in a category
+template.<br>
+[CATEGORYARTILCES]: Show the articles that belong to the current
+category. The template for the articles can be set in module settings.<br>
+[VIEWURL]: The URL link to the main DNNArticle or defined DNNArticle
+List to show all articles in the current category.<br>
+[MORE:text,CSS]: It generates a link to the main DNNArticle to show all
+articles in the current category.<br>
+[CATEGORYIMAGE:width,height]: It shows the image of the category.<br>
+[ITEMID]: The ID of the category.<br>
+[TITLE]: The title of the category.<br>
+[DESCRIPTION]: The description of the category.<br>
+[CATEGORYLINK]: You can define a link related to the category.<br>
+<br>
+<h1>Comment Tokens</h1>
+Comment Template: The display template for a comment. Tokens include:<br>
+[COMMENTID]: The ID of the comment.<br>
+[TITLE]: The title of the comment.<br>
+[DATE:format]: The date of the comment.<br>
+[COMMENT]: Content of the comment.<br>
+[SHORTENCOMMENT:length]: The shortened comment.<br>
+[CREATEDBYUSER]: If the user leaving the comment is a registered user,
+it is the display name, or the name the user enters when he/she makes
+the comment.<br>
+[ARTICLETITLE]: The article title.<br>
+[VIEWURL]: The URL of the view article detail page.<br>
+[EMAIL]: The email of the user who made the comment.<br>
+[WEBSITE]: The web site of the user who made the comment.<br>
+<br>

@@ -352,25 +352,29 @@
 
 <script type="text/javascript">
     var AllowPostBack = true;
-    $('body').on('click', 'a.disabled', function (event) {
-        if (AllowPostBack == true) {
-            AllowPostBack = false;
+  
+        $('body').on('click', 'a.disabled', function (event) {
+            if (AllowPostBack == true) {
+                AllowPostBack = false;
+            }
+            else {
+                event.preventDefault();
+            }
+        });
+    
+    
+        jQuery.fn.extend({
+            disable: function (state) {
+                return this.each(function () {
+                    var $this = $(this);
+                    $this.toggleClass('disabled', state);
+                });
+            }
+        });
+        function DisableButton() {
+            var lnkBtnAdd = $("#<%= lnkAddSamples.ClientID %>");
+            lnkBtnAdd.disable(true);
         }
-        else {
-            event.preventDefault();
-        }
-    });
-    jQuery.fn.extend({
-        disable: function (state) {
-            return this.each(function () {
-                var $this = $(this);
-                $this.toggleClass('disabled', state);
-            });
-        }
-    });
-    function DisableButton() {
-        var lnkBtnAdd = $("#<%= lnkAddSamples.ClientID %>");
-        lnkBtnAdd.disable(true);
-    }
+    
 </script>
 

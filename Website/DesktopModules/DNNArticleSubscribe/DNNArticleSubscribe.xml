@@ -1,0 +1,329 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DNNArticleSubscribe</name>
+    </assembly>
+    <members>
+        <member name="T:ZLDNN.Modules.DNNArticleSubscribe.Settings">
+            -----------------------------------------------------------------------------
+            <summary>
+            The Settings class manages Module Settings
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.lbModule">
+            <summary>
+            lbModule 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.cboModule">
+            <summary>
+            cboModule 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.lbWarning">
+            <summary>
+            lbWarning 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.lbEmailSubject">
+            <summary>
+            lbEmailSubject 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.txtEmailSubject">
+            <summary>
+            txtEmailSubject 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.lbEmailTemplate">
+            <summary>
+            lbEmailTemplate 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.txtEmailTemplate">
+            <summary>
+            txtEmailTemplate 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.lbExpandNode">
+            <summary>
+            lbExpandNode 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.chkExpandNode">
+            <summary>
+            chkExpandNode 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.lbShowLines">
+            <summary>
+            lbShowLines 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.chkShowLines">
+            <summary>
+            chkShowLines 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.lbIndent">
+            <summary>
+            lbIndent 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.txtIndent">
+            <summary>
+            txtIndent 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.RangeValidator1">
+            <summary>
+            RangeValidator1 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.lbTreeNodeImage">
+            <summary>
+            lbTreeNodeImage 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.ctlTreeNodeImage">
+            <summary>
+            ctlTreeNodeImage 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.lbCollapseImageURL">
+            <summary>
+            lbCollapseImageURL 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.ctlCollapseImageURL">
+            <summary>
+            ctlCollapseImageURL 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.lbExpandImageURL">
+            <summary>
+            lbExpandImageURL 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.ctlExpandImageURL">
+            <summary>
+            ctlExpandImageURL 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.lbSelectedNodeStyle">
+            <summary>
+            lbSelectedNodeStyle 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.txtSelectedNodeStyle">
+            <summary>
+            txtSelectedNodeStyle 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.lbNodeStyle">
+            <summary>
+            lbNodeStyle 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.Settings.txtNodeStyle">
+            <summary>
+            txtNodeStyle 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticleSubscribe.Settings.LoadSettings">
+            -----------------------------------------------------------------------------
+            <summary>
+            LoadSettings loads the settings from the Database and displays them
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticleSubscribe.Settings.UpdateSettings">
+            -----------------------------------------------------------------------------
+            <summary>
+            UpdateSettings saves the modified settings to the Database
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="T:ZLDNN.Modules.DNNArticleSubscribe.ViewDNNArticleSubscribe">
+            -----------------------------------------------------------------------------
+            <summary>
+            The ViewDNNArticleSubscribe class displays the content
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.ViewDNNArticleSubscribe.lbNote">
+            <summary>
+            lbNote 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.ViewDNNArticleSubscribe.tvCategory">
+            <summary>
+            tvCategory 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.ViewDNNArticleSubscribe.cmdSaveSettings">
+            <summary>
+            cmdSaveSettings 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.ViewDNNArticleSubscribe.cmdRegister">
+            <summary>
+            cmdRegister 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSubscribe.ViewDNNArticleSubscribe.cmdLogin">
+            <summary>
+            cmdLogin 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticleSubscribe.ViewDNNArticleSubscribe.Page_Load(System.Object,System.EventArgs)">
+            -----------------------------------------------------------------------------
+            <summary>
+            Page_Load runs when the control is loaded
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="P:ZLDNN.Modules.DNNArticleSubscribe.ViewDNNArticleSubscribe.RTLStyle">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

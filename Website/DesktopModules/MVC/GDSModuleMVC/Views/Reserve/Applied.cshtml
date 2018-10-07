@@ -1,0 +1,215 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<Moslem.Modules.GDS.GDSModuleMVC.Models.VoucherModel>
+@using System.Text.RegularExpressions
+@using DotNetNuke.Web.Mvc.Helpers
+<link type="text/css" rel="stylesheet" href="/Portals/_default/skins/bd009-brown/bootstrap/css/bootstrap.rtl.css" />
+<link type="text/css" rel="stylesheet" href="/Portals/_default/Skins/BD009-Brown/Skin.rtl.css" />
+
+@using DotNetNuke.Web.Client.ClientResourceManagement
+@using Moslem.Modules.GDSApi.GDSModule
+
+
+@Html.Raw(ViewBag.BankScript)
+@if (Model.PaymentModel != null)
+{
+    if (Model.PaymentModel.Successful)
+    {
+        <div style="margin:0 auto;width: 21cm;" class=" dontdisplayeinprint alert alert-success">
+            <div style="margin:0 auto;text-align:center;">
+                <strong>پرداخت شد.</strong> پرداخت اینترنتی شما با موفقیت انجام گردید.
+            </div>
+
+        </div>
+		
+            	
+
+        <page size="A4">
+            <div style=" margin:10px;padding:10px;">
+
+                <div class="row" style="border:0px solid #000;padding:5px;background-color:white;margin:0 auto;text-align:center;">
+                    <div class="col-sm-12 col-md-12"><img src="http://www.ittic.com/Portals/0/Images/logo.png" /></div>
+                </div>
+
+
+                <table class="table" dir="rtl">
+                    <thead class="blue-grey lighten-4">
+                    </thead>
+                    <tbody>
+                        <tr class="table-active" style="border-bottom:3px Solid #000;background-color:#E4CDA6">
+                            <th scope="col">رزرو از طریق</th>
+                            <th scope="col">هتل</th>
+                            <th scope="col">شماره رزرو هتل</th>
+							<th scope="col"> </th>
+                            
+
+                        </tr>
+                        <tr class="table-info">
+                            <td>وب سایت ایرانگردی و جهانگردی</td>
+                            <td>@Dnn.LocalizeString(Model.ReserveInfo.response.hotel)</td>
+							<td>@Model.ReserveInfo.response.id</td>
+                            <td>@Model.ReserveInfo.response.hotelTelForPassenger</td>
+                           
+                            
+
+                        </tr>
+                        <tr class="table-active" style="border-bottom:3px Solid #000;background-color:#E4CDA6">
+                            
+                            <th scope="col">تاریخ ورود</th>
+                            <th scope="col">شب اقامت</th>
+                            <th scope="col">مبلغ پرداختی</th>
+							<th scope="col"></th>
+                        </tr>
+                        <tr class="table-info">
+                            <td>@Utility.MiladiToShamsi( Model.ReserveInfo.response.passenger[0].checkin)</td>
+                            <td>@Model.ReserveInfo.response.passenger[0].night</td>
+                            <td>@Model.PaymentModel.Amount</td>
+							 <td></td>
+                        </tr>
+                        <tr class="table-active" style="border-bottom:3px Solid #000;background-color:#E4CDA6">
+                            <th scope="col">رزرو کننده</th>
+                            <th scope="col">شماره موبایل</th>
+                            <th scope="col">ایمیل</th>
+							 <th scope="col"> </th>
+                        </tr>
+                        <tr class="table-info">
+                            <td>@Model.ReserveInfo.response.firstname @Model.ReserveInfo.response.lastname</td>
+                            <td>@Model.ReserveInfo.response.mobile</td>
+                            <td>@Model.ReserveInfo.response.email</td>
+							 <td> </td>
+                        </tr>
+
+
+                        <tr class="table-active" style="border-bottom:3px Solid #000;background-color:#E4CDA6">
+                            <th scope="col">طرف حساب</th>
+                            <th scope="col">نوع پرداخت</th>
+                            <th scope="col">کد پیگیری بانکی</th>
+							<th scope="col">شماره خرید</th>
+                        </tr>
+                        <tr class="table-info">
+                            <td> @Model.ReserveInfo.response.agency</td>
+                            <td>نقدی - اینترنتی</td>
+                            <td>@Model.PaymentModel.TRACENO</td>
+                            <td>@Model.PaymentModel.ResNum</td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+
+                <table class="table table-bordered" dir="rtl">
+
+                    <thead class="blue-grey lighten-4">
+                        <tr class="table-active" style="box-shadow: 0px 0px 30px rgba(0,0,0, .2) inset;">
+                            <th scope="col">نوع اتاق</th>
+                            <th scope="col">تعداد اتاق</th>
+                            <th scope="col">مبلغ پرداختی</th>
+                            <th scope="col">تخفیف</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model.lstRooms)
+                        {
+                            <tr class="table-info">
+                                <td> @item.Title</td>
+                                <td> @item.Count</td>
+                                <td> @item.Price</td>
+                                <td> @{var takhfif = 100 -(100 * item.Price) / item.RackPrice ;} % @Convert.ToInt32(takhfif)</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+                <table class="table table-striped" dir="rtl">
+                    <thead class="blue-grey lighten-4">
+                        <tr>
+                            <th scope="col">لیست مسافرین</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+
+
+                                @foreach (var item in Model.lstPassangers)
+                                {
+                                    <div class="row" style="border-bottom:1px solid #000;padding:5px;margin:0 auto;">
+                                        <div class="col-sm-4 col-md-4">نام :  @item.fname @item.lname</div>
+                                        <div class="col-sm-4 col-md-4"> کد ملی : @item.Codemelli</div>
+                                        <div class="col-sm-4 col-md-4">ایمیل : @item.email</div>
+                                    </div>
+                                }
+
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+
+                <div class="row col-sm-12 col-md-12" style="font-size:12px;">
+                    <br />
+                    <b>مقررات و جرایم ابطال رزرو:</b><br />
+                    1 - وجه دریافتی از بابت این ذخیره اقامت به عنوان پیش پرداخت؛ بهصورت علی الحساب و معادل تقریبی قیمت هر شب اتاق دریافت گردیده که پس از حضور میهمان در مرکز اقامتی، بر اساس مدت قطعی اقامت و
+                    سایر هزینه های انجام شده، مطابق صورتحساب صادره در محل مرکز اقامتی مربوطه تسویه نهائی انجام خواهد گردید.<br />
+                    2 - ذخیره های بدون پیش پرداخت و کد شناسایی ذخیره جا فاقد اعتبار می باشند.<br />
+                    3 - صدور این حواله ذخیره جا به منزله قبول مقررات سامانه فروش و رزرواسیون اقامتی مراکز گردشگری کشور و مرکز اقامتی تعیین شده از سوی میهمان می باشد.<br />
+                    4 - کد شناسایی فروش ذخیره جا می بایستی بههنگام مراجعه میهمانان به مرکز اقامتی ارائه شود در غیر اینصورت امكان استفاده از اماکن اقامتی مقدور نبوده و ذخیره جا فاقد اعتبار خواهد بود.<br />
+                    5 - ذخیره اقامت بنا بر درخواست متقاضی و به نام میهمان استفاده کننده صادر و غیر قابل انتقال می باشد.<br />
+                    6 - زمان تحویل اتاق به مسافران در روز ورود ساعت 14 و تخلیه اتاق در روز خروج ساعت 12 ظهر می باشد. مسافر ملزم به رعایت دقیق ساعات یادشده بوده و درصورت امكان بر حضور بیشتر مسافر در اتاق، مستلزم
+                    پرداخت هزینه اقامت اضافه خواهد بود.<br />
+                    7 - همراه داشتن شناسنامه عكسدار میهمانان و همراهان در زمان ورود و اقامت و رعایت شئونات اسلامی در مراکز اقامتی الزامی است.<br />
+                    8 - همراه داشتن و استفاده هرگونه وسائل گازسوز ممنوع می باشد و طبخ غذا فقط در واحدهای ویلایی محدود به قوانین مرکز اقامتی میسر خواهد بود.<br /><br /><br /><br /><br />
+                    9 - چنانچه میهمانان در موعد مقرر به هتل مراجعه ننماید مكان ذخیره شده فقط به مدت یك شب خالی نگه داشته شده و ضمن دریافت هزینه شب اول، حواله ذخیره جا از روز بعد باطل خواهد شد.<br />
+                    10 - انصراف حواله هایی که از طریق دفاتر فروش صادر شده فقط در همان دفتر و یا از طریق سامانه رزرواسیون ممكن می باشد، بازپرداخت وجوه دریافتی، از طریق دفتر ذخیره کننده میسر می باشد.<br />
+                    11 - درصد و زمان انصراف حواله ذخیره جا : الف- در محدوده زمانی بین صدور این حواله تا 3 روز قبل از روز ورود میهمان به مرکز اقامتی مبلغ 20 %یك شب بهازا هر اتاق ب - تا روز قبل از ورود مهمان، مبلغ 50%<br />
+                    یك شب بهازا هر اتاق ت از روز ورود به بعد، معادل یك شب به ازا هر اتاق، کسر خواهد شد.<br />
+                    12 - از روز 28 اسفند لغایت روز 14 فروردین مقررات ویژه ایام نوروز حاکم بوده و انصراف ذخیره جا از زمان دریافت حواله حداکثر تا 15 اسفند ماه با کسر هزینه معادل 50 می باشد و پس از آن تاریخ استرداد وجه به
+                    ذخیره کننده امكان پذیر نمی باشد.<br />
+                    13 - در ایام نوروز مبلغ دریافتی بابت این حواله ذخیره جا بطور علی الحساب و بر اساس رشد منطقی بر نرخ های سال جاری محاسبه شده و مبلغ واقعی هزینه اقامت مطابق نرخ های مصوبه در صورتحساب نهایی
+                    صادره در محل واحد اقامتی تعیین و دریافت خواهد شد.<br />
+                    14 - چنانچه به علت بروز قوای قهریه (رخداد و بلایای طبیعی و حوادثی خارج از اختیار و اراده شرکت) ذخیره انجام شده توسط مرکز اقامتی یا دفاتر مراکز ذخیره اقامت لغو گردد، وجوه دریافتی عیناً به مسافر مسترد
+                    خواهد شد.<br />
+                    15 - تغییر محل اقامت، تغییر تاریخ، انصراف ذخیره جا و باز پرداخت مبلغ دریافتی (بعد از کسر هزینه های انصراف) صرفاً توسط صاحب حواله و فقط با کارت شناسایی قابل انجام بوده و پرداخت از طریق دفتر انجام
+                    دهنده ذخیره اقامت صورت می باشد.<br />
+                    16 - مدت اعتبار این ذخیره اقامت از تاریخ صدور تا شب اول اقامت میباشد.<br />
+                    17 - هرگونه موارد پیشنهادی یا انتقادی مشتریان گرامی از طریق مدیریت امور مشتریان با مسیرهای ارتباطی درج شده در وب سایت شرکت   قابل پیگیری می باشد
+
+                </div>
+
+                <div class="dontdisplayeinprint row col-sm-12 col-md-12" style="margin:0 auto;text-align:center;">
+                    <button type="button" class="btn btn-warning" value="" onclick="window.print(); return false;">
+                        چاپ
+                    </button>
+                    <button type="button" class="btn btn-warning" value="" onclick="window.location.href='http://www.ittic.com'">
+                        بازگشت به سایت
+                    </button>					
+                </div>
+
+            </div>
+<br />
+<div style="clear:both;">
+        </div>
+        </page>
+
+    }
+    else
+    {
+        <div style="margin:0 auto;width: 21cm;" class="alert alert-warning">
+
+            <div style="margin:0 auto;text-align:center;">
+                <strong>پرداخت انجام نشد.</strong> عملیات پرداخت یا رزرو نا معتبر بود. @Model.PaymentModel.Message
+            </div>
+			<button type="button" class="btn btn-warning" value="" onclick="window.location.href='http://www.ittic.com'">
+                        بازگشت به سایت
+            </button>
+			
+
+        </div><br/>
+    }
+
+}
+
+

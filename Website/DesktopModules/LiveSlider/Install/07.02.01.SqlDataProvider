@@ -1,0 +1,7 @@
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='LiveSlider_SlideLayer'and COLUMN_NAME='AltText')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}LiveSlider_SlideLayer]
+ADD AltText nvarchar(50) NULL CONSTRAINT {objectQualifier}DF_LiveSlider_SlideLayer_AltText DEFAULT ''
+END
+
+GO

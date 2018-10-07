@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="ResMimeType">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="Version">
+		<value>1.0.0.0</value>
+	</resheader>
+	<resheader name="Reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="Writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="Type.Text">
+		<value>Link Type:</value>
+	</data>
+	<data name="URLType.Text">
+		<value>URL ( A Link To An External Resource )</value>
+	</data>
+	<data name="TabType.Text">
+		<value>Page ( A Page On Your Site )</value>
+	</data>
+	<data name="FileType.Text">
+		<value>File ( A File On Your Site )</value>
+	</data>
+	<data name="UserType.Text">
+		<value>User ( A Member Of Your Site )</value>
+	</data>
+	<data name="NoneType.Text">
+		<value>None</value>
+	</data>
+	<data name="URL.Text">
+		<value>Location: ( Enter The Address Of The Link )&lt;BR&gt;</value>
+	</data>
+	<data name="Select.Text">
+		<value>Select An Existing URL</value>
+	</data>
+	<data name="Add.Text">
+		<value>Add A New URL</value>
+	</data>
+	<data name="Delete.Text">
+		<value>Delete Selected URL From The List&lt;BR&gt;</value>
+	</data>
+	<data name="Tab.Text">
+		<value>Select A Web Page From Your Site:&lt;BR&gt;</value>
+	</data>
+	<data name="Folder.Text">
+		<value>File Location:&lt;BR&gt;</value>
+	</data>
+	<data name="File.Text">
+		<value>File Name:&lt;BR&gt;</value>
+	</data>
+	<data name="Upload.Text">
+		<value>Upload New File</value>
+	</data>
+	<data name="Save.Text">
+		<value>Upload Selected File&lt;BR&gt;</value>
+	</data>
+	<data name="Cancel.Text">
+		<value>Select An Existing File</value>
+	</data>
+	<data name="Track.Text">
+		<value>Track Number Of Times This Link Is Clicked?&lt;BR&gt;</value>
+	</data>
+	<data name="Log.Text">
+		<value>Log The User, Date, And Time For Every Link Click?&lt;BR&gt;</value>
+	</data>
+	<data name="NewWindow.Text">
+		<value>Open Link In New Browser Window?&lt;BR&gt;</value>
+	</data>
+	<data name="UploadError.Text">
+		<value>File type {1} is not valid in this context. Valid File Types Include: {0}</value>
+	</data>
+	<data name="NoPermission.Text">
+		<value>You don't have permission to see the files on the site</value>
+	</data>
+	<data name="Root.Text">
+		<value>Root</value>
+	</data>
+	<data name="User.Text">
+		<value>Enter The Username Of A Member Of Your Site:&lt;BR&gt;</value>
+	</data>
+</root>

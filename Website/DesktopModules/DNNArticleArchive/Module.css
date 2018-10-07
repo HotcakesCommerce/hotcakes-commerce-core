@@ -1,0 +1,173 @@
+.ZLDNN_TreeNode
+{
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+.ZLDNN_TreeNodeSelected
+{
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 11px;
+    font-weight: normal;
+    background-color: #dcdcdc; 
+	 
+}
+
+.TempTD
+{
+    padding-right: 6px;
+    padding-left: 6px;
+    font-weight: bold;
+    padding-bottom: 6px;
+    color: white;
+    padding-top: 6px;
+    height: 25px;
+    background-color: #cccccc
+}
+
+.TempTD1
+{
+    padding-right: 6px;
+    padding-left: 6px;
+    padding-bottom: 6px;
+    color: black;
+    padding-top: 6px;
+    background-color: #fefefe;
+	
+	
+}
+
+.tablabel
+{
+    background-color: dimgray;
+    color: Silver;
+    font-weight: bold;
+    border: outset 2px silver;
+    margin: 1px;
+    padding-right: 10px;
+    cursor: hand;
+ 
+}
+
+.tablabel_v
+{
+    /*-- Following line needed to make each tab render below the previous (vertical) --*/
+    clear: left;
+    float: left;
+}
+
+.tabcontainer
+{
+    border: outset 3px silver;
+    background-color: Silver;
+    width: 200px;
+    height: 100px;
+}
+
+.tablabelcontainer_r
+{
+    /*-- Following line needed to make tabs show up on right --*/
+    float: left;
+}
+
+.tabcontentcontainer_r
+{
+    /*-- Following line needed to make tabs show up on right --*/
+    float: left;
+}
+
+.tablabelhover
+{
+    background-color: silver;
+    color: black;
+    cursor: hand;
+}
+
+.tablabelselected
+{
+    background-color: silver;
+    color: White;
+}
+
+.dateText {
+    FONT-SIZE: 0.8em;
+    COLOR: white
+}
+
+.tableBorder {
+    BORDER-RIGHT: 1px outset;
+    BORDER-TOP: 1px outset;
+    BORDER-LEFT: 1px outset;
+    BORDER-BOTTOM: 1px outset;
+    BACKGROUND-COLOR: #eeeeee
+}
+
+TABLE.fh {
+    FONT-SIZE: 1em;
+    VERTICAL-ALIGN: top;
+    COLOR: #246398;
+    BACKGROUND-REPEAT: repeat-x;
+    BACKGROUND-COLOR: #eeeeee
+}
+
+
+TD.f {
+    FONT-SIZE: 0.8em;
+    BACKGROUND-COLOR: #bdcfdf
+}
+
+TR.f TD {
+    FONT-SIZE: 0.8em;
+    BACKGROUND-COLOR: #bdcfdf
+}
+
+TD.f2 {
+    FONT-SIZE: 0.9em;
+    BACKGROUND-COLOR: #ddeeff
+}
+
+TD.fh {
+    FONT-SIZE: 0.9em;
+    BACKGROUND-COLOR: #ffffff
+}
+
+TD.fh3 {
+    BORDER-TOP: #cadbec 1px solid;
+    FONT-SIZE: 0.8em;
+    BORDER-LEFT: #cadbec 1px solid
+}
+
+TD.fh3a {
+    BORDER-TOP: #ddeeff 1px solid;
+    FONT-SIZE: 0.8em;
+    BORDER-LEFT: #ddeeff 1px solid;
+    BACKGROUND-COLOR: #f6fbff
+}
+
+.UserCss {
+    COLOR: #555555
+}
+
+TD.Separator {
+    BACKGROUND-COLOR: #6798c7
+}
+
+.ArchiveCategoryLabel {
+    
+}
+
+.ArchiveCategorySelection {
+    
+}
+
+.ArchiveYearLabel {
+    
+}
+
+.ArchiveYearSelection {
+    
+}
+
+
+ 

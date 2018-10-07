@@ -1,0 +1,14 @@
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='{objectQualifier}LiveSlider'and COLUMN_NAME='CbInit')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}LiveSlider]
+ADD CbInit nvarchar(4000) NULL,
+CbStart nvarchar(4000) NULL,
+CbStop nvarchar(4000) NULL,
+CbPause nvarchar(4000) NULL,
+CbAnimStart nvarchar(4000) NULL,
+CbAnimStop nvarchar(4000) NULL,
+CbPrev nvarchar(4000) NULL,
+CbNext nvarchar(4000) NULL
+END
+
+GO

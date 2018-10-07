@@ -1,0 +1,971 @@
+﻿.S_Result_Back
+{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #CEF0D2;
+    font-family: 'IRANSans';
+    font-style: normal;
+    font-weight: normal;
+}
+.S_Result_Back .SSpan_Middle_Sign
+{
+    font-family: 'AtrinSign_Reserve';
+}
+.S_Result_Items
+{
+    position: relative;
+    float: right;
+    display: table;
+    width: auto;
+    height: 90px;
+    min-width: 140px;
+    margin-right: 10px;
+    padding-right: 10px;
+    border-right: dotted 1px #0AB21B;
+    text-align: right;
+    direction: rtl;
+}
+.S_Result_Rooms
+{
+    position: relative;
+    display: block;
+    width: auto;
+    height: auto;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: dotted 1px #0AB21B;
+    font-weight: 500;
+    text-align: right;
+    color: #0AB21B;
+    direction: rtl;
+    clear: both;
+}
+.S_Result_Rooms_Res
+{
+    position: relative;
+    display: block;
+    width: auto;
+    height: auto;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 5px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top: dotted 1px #0AB21B;
+    font-weight: normal;
+    font-size: 0.9em;
+    text-align: right;
+    color: #CCCCCC;
+    direction: rtl;
+    clear: both;
+}
+.S_Result_Titles
+{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 7px;
+    font-size: 0.9em;
+    text-align: right;
+    color: black;
+    clear: both;
+}
+.S_Result_Text
+{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    font-size: 1.1em;
+    font-weight: 500;
+    text-align: right;
+    color: #0AB21B;
+    clear: both;
+}
+.S_Result_Key
+{
+    position: relative;
+    display: table;
+    width: 100px;
+    height: 40px;
+    margin: 25px 0 25px 0;
+    background-color: #F6861F;
+    border: solid 2px white;
+    border-radius: 4px;
+    font-family: 'IRANSans';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.0em;
+    color: white;
+    text-align: center;
+    direction: rtl;
+    cursor: pointer;
+    -moz-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+.S_Result_Key:hover
+{
+    background-color: #FF9421;
+}
+/*-----------------------------------------------------------------*/
+.S_Reserve_Back_Body
+{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    z-index: 1000;
+}
+.S_Reserve_Back
+{
+    position: absolute;
+    width: auto;
+    height: 50px;
+    left: 0px;
+    right: 0px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: rgba(0,0,0,0.9);
+    overflow: hidden;
+    z-index: 1000;
+    -moz-transition: background 0.2s ease-in-out;
+	-ms-transition: background 0.2s ease-in-out;
+	-o-transition: background 0.2s ease-in-out;
+	-webkit-transition: background 0.2s ease-in-out;
+	transition: background 0.2s ease-in-out;
+}
+.S_Reserve_Back_Fix
+{
+    position: fixed;
+    width: auto;
+    height: 50px;
+    left: 0px;
+    right: 0px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: rgba(0,0,0,0.8);
+    /*background-color: rgba(0,0,0,0.7);
+    background: -webkit-linear-gradient(left, rgba(0,0,0,0.9), rgba(0,0,0,0.9), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.9), rgba(0,0,0,0.9), rgba(0,0,0,0.9));
+    background: -o-linear-gradient(right, rgba(0,0,0,0.9), rgba(0,0,0,0.9), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.9), rgba(0,0,0,0.9), rgba(0,0,0,0.9));
+    background: -moz-linear-gradient(right, rgba(0,0,0,0.9), rgba(0,0,0,0.9), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.9), rgba(0,0,0,0.9), rgba(0,0,0,0.9));
+    background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.9), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.9), rgba(0,0,0,0.9), rgba(0,0,0,0.9));
+    */
+    overflow: hidden;
+    z-index: 1000;
+    -moz-transition: background 0.2s ease-in-out;
+	-ms-transition: background 0.2s ease-in-out;
+	-o-transition: background 0.2s ease-in-out;
+	-webkit-transition: background 0.2s ease-in-out;
+	transition: background 0.2s ease-in-out;
+}
+.S_Reserve_Back_Rooms
+{
+    position: absolute;
+    width: auto;
+    height: 0px;
+    left: 0px;
+    right: 0px;
+    top: 50px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: rgba(0,0,0,0.9);
+    overflow: hidden;
+    z-index: 1010;
+    -moz-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+.S_Reserve_Back_Rooms_Fix
+{
+    position: fixed;
+    width: auto;
+    height: 0px;
+    left: 0px;
+    right: 0px;
+    top: 50px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: rgba(0,0,0,0.8);
+    overflow: hidden;
+    z-index: 1000;
+    -moz-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+.S_Reserve_Title
+{
+    position: absolute;
+    display: table;
+    width: auto;
+    height: auto;
+    right: 100px;
+    top: 5px;
+    font-family: 'IRANSans';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 0.8em;
+    color: #CCCCCC;
+    text-align: right;
+    direction: rtl;
+}
+.S_Reserve_Text
+{
+    position: absolute;
+    width: auto;
+    height: auto;
+    left: 150px;
+    right: 100px;
+    top: 20px;
+    font-family: 'IRANSans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.0em;
+    color: #FFFFFF;
+    text-align: right;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    direction: rtl;
+    -moz-transform-origin: 95% 50%;
+    -ms-transform-origin: 95% 50%;
+    -o-transform-origin: 95% 50%;
+    -webkit-transform-origin: 95% 50%;
+    transform-origin: 95% 50%;
+    -moz-transform: scale(1.0,1.0);
+    -ms-transform: scale(1.0,1.0);
+    -o-transform: scale(1.0,1.0);
+    -webkit-transform: scale(1.0,1.0);
+    transform: scale(1.0,1.0);
+    -moz-transition: all 0.1s cubic-bezier(0.000, 0.580, 0.320, 0.995);
+	-ms-transition: all 0.1s cubic-bezier(0.000, 0.580, 0.320, 0.995);
+	-o-transition: all 0.1s cubic-bezier(0.000, 0.580, 0.320, 0.995);
+	-webkit-transition: all 0.1s cubic-bezier(0.000, 0.580, 0.320, 0.995);
+	transition: all 0.1s cubic-bezier(0.000, 0.580, 0.320, 0.995);
+}
+.S_Reserve_More_Key
+{
+    position: relative;
+    display: table;
+    float: right;
+    width: 40px;
+    height: 40px;
+    margin: 5px 10px 5px 10px;
+    background-color: rgba(255,255,255,0.25);
+    border-radius: 4px;
+    font-family: 'AtrinSign_Reserve';
+    text-align: center;
+    font-size: 1.7em;
+    color: white;
+    cursor: pointer;
+    -moz-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+.S_Reserve_More_Key:hover
+{
+    background-color: rgba(255,255,255,0.40);
+}
+.S_Reserve_Key
+{
+    position: relative;
+    display: table;
+    float: left;
+    width: auto;
+    height: 40px;
+    margin: 5px 10px 5px 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #0AB21B;
+    border-radius: 4px;
+    font-family: 'IRANSans';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.0em;
+    color: white;
+    text-align: center;
+    direction: rtl;
+    cursor: pointer;
+    -moz-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+.S_Reserve_Key:hover
+{
+    background-color: #0AC51D;
+}
+.S_Reserve_Key .SSpan_Middle_Sign
+{
+    font-family: 'AtrinSign_Reserve';
+    font-size: 2.0em;
+}
+/*-----------------------------------------------------------------*/
+.S_Panel_Error
+{
+    position: fixed;
+    width: 100%;
+    height: auto;
+    left: 0px;
+    top: 50%;
+    margin-top: -25px;
+    text-align: center;
+    z-index: 100000;
+    -moz-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+.S_Panel_Error_Text
+{
+    position: relative;
+    display: table;
+    width: auto;
+    height: auto;
+    padding: 10px 15px 10px 15px;
+    background-color: #C80000;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.6);
+    font-family: 'IRANSans';
+    font-weight: 500;
+    font-size: 1.0em;
+    text-align: center;
+    color: white;
+    direction: rtl;
+}
+.S_Panel_Wait
+{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background-color: rgba(0,0,0,0.7);
+    text-align: center;
+    z-index: 100000;
+    -moz-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+.S_Panel_Wait_Text
+{
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    margin-top: -50px;
+    text-shadow: 1px 1px 1px #000000;
+    font-family: 'IRANSans';
+    font-weight: 500;
+    font-size: 1.0em;
+    text-align: center;
+    color: #00A550;
+    direction: rtl;
+    z-index: 10;
+}
+.S_Message_Back
+{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #FFF0F0;
+    border: solid 1px #C80000;
+    border-radius: 4px;
+    font-family: 'IRANSans';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.0em;
+    text-align: center;
+    color: #C80000;
+    direction: rtl;
+}
+/*-----------------------------------------------------------------*/
+.S_Rooms_Back
+{
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+.S_Rooms_Rows
+{
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: dotted 1px #999999;
+}
+.S_Rooms_Rows .SSpan_Middle_Sign
+{
+    font-family: 'AtrinSign_Reserve';
+}
+.S_Rooms_Image_Main
+{
+    position: relative;
+    float: right;
+    width: 250px;
+    height: auto;
+}
+.S_Rooms_Image
+{
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.S_Rooms_Image_File
+{
+    width: 100%;
+    height: auto;
+    z-index: 10;
+}
+.S_Rooms_Image_Click
+{
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left: 50%;
+    top: 45%;
+    margin-left: -40px;
+    margin-top: -40px;
+    border-radius: 50px;
+    background-color: #000000;
+    box-shadow: 0px 0px 0px 10px rgba(0,0,0,0.5);
+    filter: alpha(opacity=0);
+    opacity: 0;
+    cursor: pointer;
+    font-family: 'IRANSans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    color: #FFFFFF;
+    direction: rtl;
+    z-index: 1000;
+    -moz-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+.S_Rooms_Image:hover .S_Rooms_Image_Click
+{
+    filter: alpha(opacity=100);
+    opacity: 1;
+    top: 50%;
+}
+.S_Rooms_OtherLink_Main
+{
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    text-align: right;
+    direction: rtl;
+}
+.S_Rooms_OtherLink
+{
+    float: right;
+    text-decoration: none;
+    font-size: 0.9em;
+    color: #547ABB;
+    direction: rtl;
+}
+.S_Rooms_OtherLink:hover
+{
+    text-decoration: underline;
+}
+.S_Rooms_OtherSep
+{
+    display: inline;
+    float: right;
+    width: 20px;
+    height: 15px;
+    background-image: url('../ImagesFA/Linke_Sep.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.S_Rooms_Text
+{
+    position: relative;
+    display: table;
+    float: right;
+    width: auto;
+    height: auto;
+    margin-right: 15px;
+    font-family: 'IRANSans';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: right;
+    color: #000000;
+    direction: rtl;
+}
+.S_Rooms_Text_Title
+{
+    width: auto;
+    height: auto;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 1.1em;
+    color: #000000;
+    clear: left;
+}
+.S_Rooms_Text_Title .SSpan_Middle_Sign
+{
+    padding-left: 5px;
+    font-size: 1.4em;
+    color: #0AB21B;
+}
+.S_Rooms_Text_Title_Package
+{
+    width: auto;
+    height: auto;
+    min-height: 42px;
+    margin-bottom: 5px;
+    padding-right: 50px;
+    background-image: url('../../ImagesFA/Sign_Package_Nowruz.png');
+    background-position: right top;
+    background-repeat: no-repeat;
+    font-weight: 500;
+    font-size: 1.1em;
+    color: #000000;
+    clear: left;
+}
+.S_Rooms_Text_Beds
+{
+    display: table;
+    width: auto;
+    height: auto;
+    margin-bottom: 5px;
+    background-color: #E9F0FA;
+    border-radius: 4px;
+    padding: 10px;
+    font-weight: 500;
+    font-size: 0.9em;
+    color: #003399;
+    clear: left;
+}
+.S_Rooms_Text_Beds .SSpan_Middle_Sign
+{
+    padding-right: 5px;
+    letter-spacing: 2px;
+}
+.S_Rooms_Text_Facility
+{
+    font-weight: normal;
+    font-size: 0.9em;
+    color: #0AB21B;
+    clear: left;
+}
+.S_Rooms_Text_Facility .SSpan_Middle_Sign
+{
+    padding-left: 5px;
+}
+.S_Rooms_MoreInfo
+{
+    font-weight: normal;
+    font-size: 0.8em;
+    text-decoration: none;
+    color: #0AB21B;
+    clear: left;
+}
+.S_Rooms_MoreInfo:hover
+{
+    text-decoration: underline;
+}
+.S_Rooms_Price
+{
+    position: relative;
+    float: left;
+    width: 180px;
+    height: auto;
+    margin-left: 10px;
+    padding-right: 10px;
+    margin-right: 10px;
+    border-right: solid 1px #003399;
+    font-family: 'IRANSans';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: right;
+    color: #000000;
+    direction: rtl;
+}
+.S_Rooms_Price_Extra
+{
+    position: relative;
+    float: right;
+    width: 80px;
+    height: auto;
+    margin-left: 10px;
+    border-left: dotted 1px #003399;
+}
+.S_Rooms_Price_Title, .S_Rooms_Price_Message
+{
+    width: auto;
+    height: auto;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: #666666;
+    clear: left;
+}
+.S_Rooms_Price_Message
+{
+    color: #C80000;
+}
+.S_Rooms_Price_Amount
+{
+    width: auto;
+    height: auto;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 1.5em;
+    color: #003399;
+    clear: left;
+}
+.S_Rooms_Price_Amount::after
+{
+    padding-right: 3px;
+    font-weight: normal;
+    font-size: 0.7em;
+    content: 'ریال';
+}
+.S_Rooms_Price_Count
+{
+    height: 33px;
+    padding-right: 5%;
+    text-align: right;
+    vertical-align: middle;
+    color: Black;
+    font-family: 'Tahoma';
+    font-size: 14px;
+    background-color: White;
+    border: solid 1px #CCCCCC;
+    border-radius: 5px;
+}
+.S_Rooms_Price_Sep
+{
+    display: block;
+    width: 100%;
+    height: 10px;
+    margin-top: 10px;
+    border-top: dotted 1px #003399;
+}
+.S_Room_Add_Key
+{
+    position: relative;
+    display: table;
+    float: right;
+    width: auto;
+    height: 30px;
+    margin-top: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #0AB21B;
+    border-radius: 4px;
+    font-family: 'IRANSans';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 0.9em;
+    color: white;
+    text-align: center;
+    direction: rtl;
+    cursor: pointer;
+    -moz-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+.S_Room_Add_Key:hover
+{
+    background-color: #0AC51D;
+}
+.S_Room_Add_Key .SSpan_Middle_Sign
+{
+    font-family: 'AtrinSign_Reserve';
+    font-size: 1.5em;
+    padding-right: 7px;
+}
+.S_Rooms_Count_Anim
+{
+    position: fixed;
+    display: table;
+    width: auto;
+    height: auto;
+    font-family: 'HelveticaLt';
+    font-size: 5em;
+    color: #0AB21B;
+    z-index: 20000;
+}
+.S_Rooms_Option
+{
+    position: relative;
+    float: left;
+    width: auto;
+    height: auto;
+    font-family: 'IRANSans';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: left;
+    color: #000000;
+    direction: rtl;
+}
+.S_Rooms_Option_Person
+{
+    float: left;
+    font-size: 1.0em;
+    clear: left;
+}
+.S_Rooms_Option_Meal
+{
+    float: left;
+    margin-top: 10px;
+    color: #0AB21B;
+    text-align: left;
+    font-size: 0.9em;
+    clear: left;
+}
+.S_Rooms_Option_Meal .SSpan_Middle_Sign
+{
+    font-size: 1.5em;
+    padding-left: 5px;
+}
+.SPanelPardakht
+{
+    width: 100%;
+    height: auto;
+    max-width: 800px;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    background-color: #F0F0F0;
+    border: solid 2px #147D8C;
+    border-radius: 6px;
+    font-family: 'IRANSans';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1em;
+}
+@media screen and (min-width:0px) and (max-width:1050px)
+{
+    .S_Reserve_Back, .S_Reserve_Back_Fix
+    {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .S_Reserve_Back_Fix
+    {
+        background: none;
+        background-color: rgba(0,0,0,0.8);
+    }
+    .S_Reserve_Back_Rooms, .S_Reserve_Back_Rooms_Fix
+    {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .S_Reserve_Back_Rooms_Fix
+    {
+        background: none;
+        background-color: rgba(0,0,0,0.8);
+    }
+    .S_Reserve_Title
+    {
+        right: 70px;
+    }
+    .S_Reserve_Text
+    {
+        left: 120px;
+        right: 70px;
+    }
+}
+@media screen and (min-width:0px) and (max-width:900px)
+{
+    .S_Result_Items
+    {
+        display: block;
+        width: 16%;
+        min-width: 1px;
+    }
+    .S_Result_Key
+    {
+        width: 100px;
+        height: 30px;
+        margin: 5px 0 5px 0;
+    }
+}
+@media screen and (min-width:0px) and (max-width:700px)
+{
+    .S_Result_Titles
+    {
+        display: table;
+        float: right;
+        width: auto;
+        margin-bottom: 0px;
+        font-size: 0.8em;
+        clear: none;
+    }
+    .S_Result_Text
+    {
+        display: table;
+        float: right;
+        width: auto;
+        margin-right: 5px;
+        font-size: 0.9em;
+        clear: left;
+    }
+    .S_Reserve_Title
+    {
+        right: 55px;
+        font-size: 0.6em;
+    }
+    .S_Reserve_Text
+    {
+        left: 110px;
+        right: 55px;
+        font-size: 0.8em;
+    }
+    .S_Reserve_More_Key
+    {
+        width: 30px;
+        height: 30px;
+        margin: 10px 5px 10px 5px;
+        font-size: 1.5em;
+    }
+    .S_Reserve_Key
+    {
+        font-size: 0.9em;
+    }
+    .S_Reserve_Key .SSpan_Middle_Sign
+    {
+        font-size: 1.7em;
+    }
+}
+@media screen and (min-width:0px) and (max-width:600px)
+{
+    .S_Result_Back
+    {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .S_Result_Items
+    {
+        float: none;
+        display: block;
+        width: auto;
+        height: auto;
+        min-width: unset;
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-right: 10px;
+        padding-left: 10px;
+        border-right: none;
+        border-bottom: dotted 1px #0AB21B;
+        clear: both;
+    }
+    .S_Result_Key
+    {
+        width: 100px;
+        height: 30px;
+        margin: 5px 0 5px 0;
+    }
+}
+@media screen and (min-width:0px) and (max-width:500px)
+{
+    .S_Result_Text
+    {
+        font-weight: normal;
+    }
+    .S_Result_Key
+    {
+        width: 80px;
+        height: 25px;
+        margin: 5px 0 5px 0;
+        border-radius: 3px;
+        font-size: 0.8em;
+    }
+    .S_Reserve_Back_Body
+    {
+        height: 40px;
+    }
+    .S_Reserve_Back, .S_Reserve_Back_Fix
+    {
+        height: 40px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .S_Reserve_Back_Rooms, .S_Reserve_Back_Rooms_Fix
+    {
+        top: 40px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .S_Reserve_Title
+    {
+        right: 30px;
+        top: 5px;
+        font-size: 0.6em;
+    }
+    .S_Reserve_Text
+    {
+        left: 60px;
+        right: 30px;
+        top: 15px;
+        font-weight: normal;
+        font-size: 0.8em;
+    }
+    .S_Reserve_More_Key
+    {
+        width: 20px;
+        height: 20px;
+        margin: 10px 5px 10px 5px;
+        border-radius: 3px;
+        font-size: 1.1em;
+    }
+    .S_Reserve_Key
+    {
+        height: 40px;
+        margin: 0px 0px 0px 0px;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 0px;
+        font-size: 0.7em;
+    }
+    .S_Reserve_Key .SSpan_Middle_Sign
+    {
+        font-size: 1.4em;
+    }
+}

@@ -1,0 +1,39 @@
+﻿<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.19/angular-ui-router.min.js"></script>
+
+
+@using System.Text.RegularExpressions
+@using DotNetNuke.Web.Mvc.Helpers
+
+<body ng-app="angularFormsApp">
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-inverse" style="margin-top:20px;" role="navigation">
+        <div class="navbar-header">
+            <span class="navbar-brand">کارت هدیه</span>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a ui-sref="Cards">مدیریت کارت ها </a></li>
+            <li><a ui-sref="Hotels">پکیج هتل ها</a></li>
+            <li><a ui-sref="Rooms">پکیج اتاق ها</a></li>
+        </ul>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+
+        <div ui-view></div>
+
+
+    @*<div class="text-center">
+        <p>A tutorial by <a href="http://scotch.io" target="_blank">scotch.io</a></p>
+        <p>View the tutorial: <a href="http://scotch.io/tutorials/javascript/angular-routing-using-ui-router" target="_blank">AngularJS Routing using UI-Router</a></p>
+    </div>*@
+
+</body>
+<script>
+     var rvtoken = $("input[name='__RequestVerificationToken']").val();
+                var ModuleId = @Dnn.ModuleContext.ModuleId;
+                var TabId = @Dnn.ModuleContext.TabId;
+                var siteRoot = dnn.getVar("sf_siteRoot", "/");
+</script>
+<script src="/DesktopModules/MVC/GDSModuleMVC/content/js/AngularFormAppadmin.js"></script>

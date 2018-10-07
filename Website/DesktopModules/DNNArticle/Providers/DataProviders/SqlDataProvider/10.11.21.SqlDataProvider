@@ -1,0 +1,4 @@
+﻿Delete
+FROM {objectQualifier}ZLDNN_DNNArticle_TokenProvider
+
+GO

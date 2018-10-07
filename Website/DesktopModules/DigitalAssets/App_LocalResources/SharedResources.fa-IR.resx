@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CreateFolderToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>ساخت پوشه جدید</value>
+  </data>
+  <data name="CreateFolderToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>ساخت پوشه جدید</value>
+  </data>
+  <data name="DownloadToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>دانلود</value>
+  </data>
+  <data name="DownloadToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>دانلود</value>
+  </data>
+  <data name="DeleteToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="DeleteToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="FolderAlreadyExists.Error" xml:space="preserve">
+    <value>پوشه ای با همین نام از قبل موجود می باشد. لطفا نام دیگری را انتخاب نمایید.</value>
+  </data>
+  <data name="FolderFileNameHasInvalidcharacters.Error" xml:space="preserve">
+    <value>نام انتخابی شما شامل کاراکترهای نامعتبر می باشد. لطفا نامی که فاقد {0} باشد را وارد نمایید.</value>
+  </data>
+  <data name="RefreshFolderToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>بازخوانی</value>
+  </data>
+  <data name="RefreshFolderToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>بازخوانی پوشه</value>
+  </data>
+  <data name="RootFolder.Text" xml:space="preserve">
+    <value>ریشه</value>
+  </data>
+  <data name="UploadFilesToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>آپلود فایل</value>
+  </data>
+  <data name="UploadFilesToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>آپلود فایل</value>
+  </data>
+  <data name="UserHasNoPermissionToDeleteFiles.Error" xml:space="preserve">
+    <value>کاربر مجاز به حذف فایل های موجود در این پوشه نمی باشد.</value>
+  </data>
+  <data name="UserHasNoPermissionToDeleteFolder.Error" xml:space="preserve">
+    <value>کاربر مجوز حذف این پوشه را ندارد.</value>
+  </data>
+  <data name="UserHasNoPermissionToDownload.Error" xml:space="preserve">
+    <value>کاربر مجوز دانلود این فایل را ندارد.</value>
+  </data>
+  <data name="RenameToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>تغییر نام</value>
+  </data>
+  <data name="RenameToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>تغییر نام</value>
+  </data>
+  <data name="CopyToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>کپی</value>
+  </data>
+  <data name="CopyToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>کپی</value>
+  </data>
+  <data name="FileAlreadyExists.Error" xml:space="preserve">
+    <value>فایل از قبل در مقصد موجود می باشد.</value>
+  </data>
+  <data name="MoveToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>انتقال</value>
+  </data>
+  <data name="MoveToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>انتقال</value>
+  </data>
+  <data name="ToggleLeftPaneToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>باز / بسته</value>
+  </data>
+  <data name="ToggleLeftPaneToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>باز / بسته</value>
+  </data>
+  <data name="DestinationFolderCannotMatchSourceFolder.Error" xml:space="preserve">
+    <value>پوشه مقصد با پوشه مبدا تطابق ندارد.</value>
+  </data>
+  <data name="UserHasNoPermissionToCopyFolder.Error" xml:space="preserve">
+    <value>کاربر مجاز به کپی فایل از این پوشه نمی باشد.</value>
+  </data>
+  <data name="UserHasNoPermissionToMoveFolder.Error" xml:space="preserve">
+    <value>کاربر مجوز انتقال از این پوشه را ندارد.</value>
+  </data>
+  <data name="GetUrlToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>گرفتن آدرس</value>
+  </data>
+  <data name="GetUrlToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>گرفتن آدرس</value>
+  </data>
+  <data name="ViewPropertiesToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>مشاهده مشخصات پوشه</value>
+  </data>
+  <data name="ViewPropertiesToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>مشاهده مشخصات پوشه</value>
+  </data>
+  <data name="GridViewToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>نمایش فهرستی</value>
+  </data>
+  <data name="GridViewToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>فهرست</value>
+  </data>
+  <data name="ListViewToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>نمایش آیکونی</value>
+  </data>
+  <data name="ListViewToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>آیکون</value>
+  </data>
+  <data name="ViewPropertiesSelectionToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>مشاهده مشخصات</value>
+  </data>
+  <data name="ViewPropertiesSelectionToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>مشاهده مشخصات</value>
+  </data>
+  <data name="FieldType.DisplayName" xml:space="preserve">
+    <value>نوع</value>
+  </data>
+  <data name="FieldSize.DisplayName" xml:space="preserve">
+    <value>حجم</value>
+  </data>
+  <data name="FieldTotalFiles.DisplayName" xml:space="preserve">
+    <value>تعداد کل فایل ها</value>
+  </data>
+  <data name="PreviewPanelTitle.Text" xml:space="preserve">
+    <value>پیش نمایش</value>
+  </data>
+  <data name="FolderNameRequired.ErrorMessage" xml:space="preserve">
+    <value>نام پوشه الزامی می باشد.</value>
+  </data>
+  <data name="ZoomImage.AltText" xml:space="preserve">
+    <value>باز کردن فایل در تب جدید</value>
+  </data>
+  <data name="UserHasNoPermissionToReadFile.Error" xml:space="preserve">
+    <value>کاربر مجوز خواندن این فایل را ندارد.</value>
+  </data>
+  <data name="UserHasNoPermissionToReadFolder.Error" xml:space="preserve">
+    <value>کاربر مجوز خواندن محتویات این پوشه را ندارد.</value>
+  </data>
+  <data name="FieldCreated.DisplayName" xml:space="preserve">
+    <value>ساخته شد</value>
+  </data>
+  <data name="FieldCreatedBy.DisplayName" xml:space="preserve">
+    <value>ساخته شده بوسیله</value>
+  </data>
+  <data name="FieldModified.DisplayName" xml:space="preserve">
+    <value>ویرایش شده</value>
+  </data>
+  <data name="FieldModifiedBy.DisplayName" xml:space="preserve">
+    <value>ویرایش شده بوسیله</value>
+  </data>
+  <data name="UserHasNoPermissionToBrowseFolder.Error" xml:space="preserve">
+    <value>کاربر اجازه دسترسی به فهرست این پوشه را ندارد.</value>
+  </data>
+  <data name="RefreshMenuItemExtensionPoint.Text" xml:space="preserve">
+    <value>بازخوانی</value>
+  </data>
+  <data name="SyncMenuItemExtensionPoint.Text" xml:space="preserve">
+    <value>همسانسازی این پوشه</value>
+  </data>
+  <data name="SyncRecursivelyMenuItemExtensionPoint.Text" xml:space="preserve">
+    <value>همسانسازی این پوشه و زیر پوشه هایش</value>
+  </data>
+  <data name="SyncToolBarMenuButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>همسانسازی</value>
+  </data>
+  <data name="SyncToolBarMenuButtonExtensionPoint.Text" xml:space="preserve">
+    <value>همسانسازی</value>
+  </data>
+  <data name="Published.Text" xml:space="preserve">
+    <value>منتشر شده</value>
+  </data>
+  <data name="Unpublished.Text" xml:space="preserve">
+    <value>منتشر نشده</value>
+  </data>
+  <data name="UnzipFileToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>خارج کردن از حالت فشرده</value>
+  </data>
+  <data name="UnzipFileToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>خارج کردن از حالت فشرده</value>
+  </data>
+  <data name="MappedPathRegExValidator.ErrorMessage" xml:space="preserve">
+    <value>مسیر اتصال نمی تواند یک مسر مطلق باشد.</value>
+  </data>
+  <data name="MoveNotAllowedBetweenFolderTypes.Error" xml:space="preserve">
+    <value>عملیات انتقال پوشه بین دو نوع متفاوت از پوشه ممکن نمی باشد.</value>
+  </data>
+  <data name="FolderDoesNotExists.Error" xml:space="preserve">
+    <value>پوشه وجود ندارد.</value>
+  </data>
+  <data name="FileDoesNotExists.Error">
+    <value>فایل وجود ندارد</value>
+  </data>
+  <data name="MyFolder.Text">
+    <value>پوشه من</value>
+  </data>
+  <data name="ManageFolderTypesToolBarButtonExtensionPoint.AltText">
+    <value>مدیریت نوع پوشه</value>
+  </data>
+  <data name="ManageFolderTypesToolBarButtonExtensionPoint.Text">
+    <value>مدیریت نوع پوشه</value>
+  </data>
+  <data name="UnlinkToolBarButtonExtensionPoint.AltText">
+    <value>برداشتن لینک</value>
+  </data>
+  <data name="UnlinkToolBarButtonExtensionPoint.Text">
+    <value>برداشتن لینک</value>
+  </data>
+  <data name="UserHasNoPermissionToUnlinkFolder.Error">
+    <value>کاربر مجوز برداشتن لینک این پوشه را ندارد</value>
+  </data>
+</root>

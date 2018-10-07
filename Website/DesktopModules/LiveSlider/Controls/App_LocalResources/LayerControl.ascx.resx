@@ -1,0 +1,639 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="lbLayoutPositionHeight.Text" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="lbLayoutPositionLeft.Text" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="lbLayoutPositionTop.Text" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="lbLayoutPositionWidth.Text" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="lLayoutPosition.Text" xml:space="preserve">
+    <value>Layout &amp; Positions</value>
+  </data>
+  <data name="lBackGround.Text" xml:space="preserve">
+    <value>Background</value>
+  </data>
+  <data name="lBorder.Text" xml:space="preserve">
+    <value>Border</value>
+  </data>
+  <data name="lBottom.Text" xml:space="preserve">
+    <value>Bottom</value>
+  </data>
+  <data name="lColor.Text" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="lFamily.Text" xml:space="preserve">
+    <value>Family</value>
+  </data>
+  <data name="lFont.Text" xml:space="preserve">
+    <value>Font</value>
+  </data>
+  <data name="lLeft.Text" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="lLineHeight.Text" xml:space="preserve">
+    <value>Line-height</value>
+  </data>
+  <data name="lMisc.Text" xml:space="preserve">
+    <value>Misc</value>
+  </data>
+  <data name="lPadding.Text" xml:space="preserve">
+    <value>Padding</value>
+  </data>
+  <data name="lRight.Text" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="lRoundedCorner.Text" xml:space="preserve">
+    <value>Rounded corners</value>
+  </data>
+  <data name="lSize.Text" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="lTop.Text" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="lWordwrap.Text" xml:space="preserve">
+    <value>Word-wrap</value>
+  </data>
+  <data name="lCustomCss.Text" xml:space="preserve">
+    <value>Custom CSS</value>
+  </data>
+  <data name="lbLayoutPositionHeightRequiresgreater.Text" xml:space="preserve">
+    <value>Please enter a value greater than 0 in layout Height</value>
+  </data>
+  <data name="lbLayoutPositionHeightRequiresInteger.Text" xml:space="preserve">
+    <value>Please enter a valid positive number in layout Height</value>
+  </data>
+  <data name="lbLayoutPositionLeftRequiresgreater.Text" xml:space="preserve">
+    <value>Please enter a value greater than 0 in layout Left</value>
+  </data>
+  <data name="lbLayoutPositionLeftRequiresInteger.Text" xml:space="preserve">
+    <value>Please enter a valid positive number in layout Left</value>
+  </data>
+  <data name="lbLayoutPositionTopRequiresgreater.Text" xml:space="preserve">
+    <value>Please enter a value greater than 0 in layout Top</value>
+  </data>
+  <data name="lbLayoutPositionTopRequiresInteger.Text" xml:space="preserve">
+    <value>Please enter a valid positive number in layout Top</value>
+  </data>
+  <data name="lbLayoutPositionWidthRequiresgreater.Text" xml:space="preserve">
+    <value>Please enter a value greater than 0 in layout width</value>
+  </data>
+  <data name="lbLayoutPositionWidthRequiresInteger.Text" xml:space="preserve">
+    <value>Please enter a valid positive number in layout width</value>
+  </data>
+  <data name="lBorderBottomRequiresInteger.Text" xml:space="preserve">
+    <value>Please enter a valid positive number in Border Bottom</value>
+  </data>
+  <data name="lBorderLeftRequiresInteger.Text" xml:space="preserve">
+    <value>Please enter a valid positive number in Border Left</value>
+  </data>
+  <data name="lBorderRightRequiresInteger.Text" xml:space="preserve">
+    <value>Please enter a valid positive number in Border Right</value>
+  </data>
+  <data name="lBorderTopRequiresInteger.Text" xml:space="preserve">
+    <value>Please enter a valid positive number in Border Top</value>
+  </data>
+  <data name="lBottomRequiresInteger.Text" xml:space="preserve">
+    <value>Please enter a valid positive number in Padding Bottom</value>
+  </data>
+  <data name="lLeftRequiresInteger.Text" xml:space="preserve">
+    <value>Please enter a valid positive number in Padding Left</value>
+  </data>
+  <data name="lLineHeightRequiresgreater.Text" xml:space="preserve">
+    <value>Please enter a value greater than 0 in Font Line-height</value>
+  </data>
+  <data name="lLineHeightRequiresInteger.Text" xml:space="preserve">
+    <value>Please enter a valid positive number in Font Line-height</value>
+  </data>
+  <data name="lRightRequiresInteger.Text" xml:space="preserve">
+    <value>Please enter a valid positive number in Padding Right</value>
+  </data>
+  <data name="lRoundedCornerRequiresgreater.Text" xml:space="preserve">
+    <value>Please enter a value greater than 0 in Rounded Corners</value>
+  </data>
+  <data name="lRoundedCornerRequiresInteger.Text" xml:space="preserve">
+    <value>Please enter a valid positive number in Rounded Corners</value>
+  </data>
+  <data name="lSizeRequiresgreater.Text" xml:space="preserve">
+    <value>Please enter a value greater than 0 in Font Size</value>
+  </data>
+  <data name="lSizeRequiresInteger.Text" xml:space="preserve">
+    <value>Please enter a valid positive number in Font Size</value>
+  </data>
+  <data name="lTopRequiresInteger.Text" xml:space="preserve">
+    <value>Please enter a valid positive number in Padding Top</value>
+  </data>
+  <data name="ValidcpBackGround.Text" xml:space="preserve">
+    <value>Please enter a valid Background Color</value>
+  </data>
+  <data name="ValidcpColor.Text" xml:space="preserve">
+    <value>Please enter a valid Color</value>
+  </data>
+  <data name="lEasingOut.Text" xml:space="preserve">
+    <value>Easing</value>
+  </data>
+  <data name="lHidden.Text" xml:space="preserve">
+    <value>Hidden</value>
+  </data>
+  <data name="lInDelay.Text" xml:space="preserve">
+    <value>Delay</value>
+  </data>
+  <data name="lInDuration.Text" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="lInFade.Text" xml:space="preserve">
+    <value>Fade</value>
+  </data>
+  <data name="lInRotate.Text" xml:space="preserve">
+    <value>Rotate</value>
+  </data>
+  <data name="lInRotateX.Text" xml:space="preserve">
+    <value>RotateX</value>
+  </data>
+  <data name="lInRotateY.Text" xml:space="preserve">
+    <value>RotateY</value>
+  </data>
+  <data name="lInScaleX.Text" xml:space="preserve">
+    <value>ScaleX</value>
+  </data>
+  <data name="lInScaleY.Text" xml:space="preserve">
+    <value>ScaleY</value>
+  </data>
+  <data name="lInSkewX.Text" xml:space="preserve">
+    <value>SkewX</value>
+  </data>
+  <data name="lInSkewY.Text" xml:space="preserve">
+    <value>SkewY</value>
+  </data>
+  <data name="lInTransformOrigin.Text" xml:space="preserve">
+    <value>Transform Origin</value>
+  </data>
+  <data name="lOutDuration.Text" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="lOutFade.Text" xml:space="preserve">
+    <value>Fade</value>
+  </data>
+  <data name="lOutRotate.Text" xml:space="preserve">
+    <value>Rotate</value>
+  </data>
+  <data name="lOutRotateX.Text" xml:space="preserve">
+    <value>RotateX</value>
+  </data>
+  <data name="lOutRotateY.Text" xml:space="preserve">
+    <value>RotateY</value>
+  </data>
+  <data name="lOutScaleX.Text" xml:space="preserve">
+    <value>ScaleX</value>
+  </data>
+  <data name="lOutScaleY.Text" xml:space="preserve">
+    <value>ScaleY</value>
+  </data>
+  <data name="lOutShowUntil.Text" xml:space="preserve">
+    <value>Show Until</value>
+  </data>
+  <data name="lOutSkewX.Text" xml:space="preserve">
+    <value>SkewX</value>
+  </data>
+  <data name="lOutSkewY.Text" xml:space="preserve">
+    <value>SkewY</value>
+  </data>
+  <data name="lOutTransformOrigin.Text" xml:space="preserve">
+    <value>Transform Origin</value>
+  </data>
+  <data name="lParallaxLevel.Text" xml:space="preserve">
+    <value>Parallax Level</value>
+  </data>
+  <data name="lTransitionInOffsetX.Text" xml:space="preserve">
+    <value>OffsetX</value>
+  </data>
+  <data name="lTransitionInOffsetY.Text" xml:space="preserve">
+    <value>OffsetY</value>
+  </data>
+  <data name="lTransitionOutOffsetX.Text" xml:space="preserve">
+    <value>OffsetX</value>
+  </data>
+  <data name="lTransitionOutOffsetY.Text" xml:space="preserve">
+    <value>OffsetY</value>
+  </data>
+  <data name="lOtherOptions.Text" xml:space="preserve">
+    <value>Other Options</value>
+  </data>
+  <data name="lTransitionIn.Text" xml:space="preserve">
+    <value>Transition In</value>
+  </data>
+  <data name="TransitionOut.Text" xml:space="preserve">
+    <value>Transition Out</value>
+  </data>
+  <data name="lEasingIn.Help" xml:space="preserve">
+    <value>The timing function of the animation to manipualte the layer's movement. Click on the link next to this field to open easings.net for examples and more information</value>
+  </data>
+  <data name="lEasingOut.Help" xml:space="preserve">
+    <value>The timing function of the animation to manipualte the layer's movement. Click on the link next to this field to open easings.net for examples and more information</value>
+  </data>
+  <data name="lInDelay.Help" xml:space="preserve">
+    <value>Delays the transition with the given amount of milliseconds before the layer entering into the slide. A second is equal to 1000 milliseconds.</value>
+  </data>
+  <data name="lInDuration.Help" xml:space="preserve">
+    <value>The transition duration in milliseconds when the layer entering into the slide. A second is equal to 1000 milliseconds.</value>
+  </data>
+  <data name="lInRotate.Help" xml:space="preserve">
+    <value>Rotates the layer clockwise from the given angle to zero degree. Negative values are allowed for anticlockwise rotation.</value>
+  </data>
+  <data name="lInRotateX.Help" xml:space="preserve">
+    <value>Rotates the layer along the X (horizontal) axis from the given angle to zero degree. Negative values are allowed for reverse direction.</value>
+  </data>
+  <data name="lInRotateY.Help" xml:space="preserve">
+    <value>Rotates the layer along the Y (vertical) axis from the given angle to zero degree. Negative values are allowed for reverse direction.</value>
+  </data>
+  <data name="lInScaleX.Help" xml:space="preserve">
+    <value>Scales the layer's width from the given value to its original size.</value>
+  </data>
+  <data name="lInScaleY.Help" xml:space="preserve">
+    <value>Scales the layer's height from the given value to its original size.</value>
+  </data>
+  <data name="lInSkewX.Help" xml:space="preserve">
+    <value>Skews the layer along the X (horizontal) axis from the given angle to 0 degree. Negative values are allowed for reverse direction.</value>
+  </data>
+  <data name="lInSkewY.Help" xml:space="preserve">
+    <value>Skews the layer along the Y (vertical) axis from the given angle to 0 degree. Negative values are allowed for reverse direction.</value>
+  </data>
+  <data name="lInTransformOrigin.Help" xml:space="preserve">
+    <value>This option allows you to modify the origin for transformations of the layer according to its position. The three values represent the X, Y and Z axis in 3D space. OriginX can be left, center, right, a number or a percentage value. OriginY can be top, center, bottom, a number or a percentage value. OriginZ can be a number and corresponds the depth in 3D space.</value>
+  </data>
+  <data name="lOutDuration.Help" xml:space="preserve">
+    <value>The transition duration in milliseconds when the layer leaving the slide. A second is equal to 1000 milliseconds.</value>
+  </data>
+  <data name="lOutRotate.Help" xml:space="preserve">
+    <value>Rotates the layer clockwise by the given angle from its original position. Negative values are allowed for anticlockwise rotation.</value>
+  </data>
+  <data name="lOutRotateX.Help" xml:space="preserve">
+    <value>Rotates the layer along the X (horizontal) axis by the given angle from its original state. Negative values are allowed for reverse direction.</value>
+  </data>
+  <data name="lOutRotateY.Help" xml:space="preserve">
+    <value>Rotates the layer along the Y (vertical) axis by the given angle from its orignal state. Negative values are allowed for reverse direction.</value>
+  </data>
+  <data name="lOutScaleX.Help" xml:space="preserve">
+    <value>Scales the layer's width by the given value from its original size.</value>
+  </data>
+  <data name="lOutScaleY.Help" xml:space="preserve">
+    <value>Scales the layer's height by the given value from its original size.</value>
+  </data>
+  <data name="lOutShowUntil.Help" xml:space="preserve">
+    <value>The layer will be visible for the time you specify here, then it will slide out. You can use this setting for layers to leave the slide before the slide itself animates out, or for example before other layers will slide in. This value in millisecs, so the value 1000 means 1 second.</value>
+  </data>
+  <data name="lOutSkewX.Help" xml:space="preserve">
+    <value>Skews the layer along the X (horizontal) axis by the given angle from its orignal state. Negative values are allowed for reverse direction.</value>
+  </data>
+  <data name="lOutSkewY.Help" xml:space="preserve">
+    <value>Skews the layer along the Y (vertical) axis by the given angle from its original state. Negative values are allowed for reverse direction.</value>
+  </data>
+  <data name="lOutTransformOrigin.Help" xml:space="preserve">
+    <value>This option allows you to modify the origin for transformations of the layer according to its position. The three values represent the X, Y and Z axis in 3D space. OriginX can be left, center, right, a number or a percentage value. OriginY can be top, center, bottom, a number or a percentage value. OriginZ can be a number and corresponds the depth in 3D space.</value>
+  </data>
+  <data name="lParallaxLevel.Help" xml:space="preserve">
+    <value>Applies a parallax effect on layers when you move your mouse over the slider. Higher values makes the layer more sensitive to mouse move. Negative values are allowed.</value>
+  </data>
+  <data name="lTransitionInOffsetX.Help" xml:space="preserve">
+    <value>The horizontal offset to align the starting position of layers. Positive and negative numbers are allowed or enter left / right to position the layer out of the frame.</value>
+  </data>
+  <data name="lTransitionInOffsetY.Help" xml:space="preserve">
+    <value>The vertical offset to align the starting position of layers. Positive and negative numbers are allowed or enter top / bottom to position the layer out of the frame.</value>
+  </data>
+  <data name="lTransitionOutOffsetX.Help" xml:space="preserve">
+    <value>The horizontal offset to align the ending position of layers. Positive and negative numbers are allowed or write left / right to position the layer out of the frame.</value>
+  </data>
+  <data name="lTransitionOutOffsetY.Help" xml:space="preserve">
+    <value>The vertical offset to align the starting position of layers. Positive and negative numbers are allowed or write top / bottom to position the layer out of the frame.</value>
+  </data>
+  <data name="InDelayRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionIn delay</value>
+  </data>
+  <data name="InDurationRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionIn duration</value>
+  </data>
+  <data name="InRotateRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionIn Rotate</value>
+  </data>
+  <data name="InRotateXRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionIn RotateX</value>
+  </data>
+  <data name="InRotateYRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionIn RotateY</value>
+  </data>
+  <data name="InScaleXRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionIn ScaleX</value>
+  </data>
+  <data name="InScaleYRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionIn ScaleY</value>
+  </data>
+  <data name="InSkewXRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionIn SkewX</value>
+  </data>
+  <data name="InSkewYRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionIn SkewY</value>
+  </data>
+  <data name="InTransformOriginRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionIn TransformOrigin</value>
+  </data>
+  <data name="InvalidInDelay.Text" xml:space="preserve">
+    <value>Please specify valid TransitionIn delay</value>
+  </data>
+  <data name="InvalidInDuration.Text" xml:space="preserve">
+    <value>Please specify valid TransitionIn duration</value>
+  </data>
+  <data name="InvalidInRotate.Text" xml:space="preserve">
+    <value>Please specify valid TransitionIn Rotate</value>
+  </data>
+  <data name="InvalidInRotateX.Text" xml:space="preserve">
+    <value>Please specify valid TransitionIn RotateX</value>
+  </data>
+  <data name="InvalidInRotateY.Text" xml:space="preserve">
+    <value>Please specify valid TransitionIn RotateY</value>
+  </data>
+  <data name="InvalidInScaleX.Text" xml:space="preserve">
+    <value>Please specify valid TransitionIn ScaleX</value>
+  </data>
+  <data name="InvalidInScaleY.Text" xml:space="preserve">
+    <value>Please specify valid TransitionIn ScaleY</value>
+  </data>
+  <data name="InvalidInSkewX.Text" xml:space="preserve">
+    <value>Please specify valid TransitionIn SkewX</value>
+  </data>
+  <data name="InvalidInSkewY.Text" xml:space="preserve">
+    <value>Please specify valid TransitionIn SkewY</value>
+  </data>
+  <data name="InvalidInTransformOrigin.Text" xml:space="preserve">
+    <value>Please specify valid TransitionIn TransformOrigin</value>
+  </data>
+  <data name="InvalidOutDuration.Text" xml:space="preserve">
+    <value>Please specify valid TransitionOut Duration</value>
+  </data>
+  <data name="InvalidOutRotate.Text" xml:space="preserve">
+    <value>Please specify valid TransitionOut Rotate</value>
+  </data>
+  <data name="InvalidOutRotateX.Text" xml:space="preserve">
+    <value>Please specify valid TransitionOut RotateX</value>
+  </data>
+  <data name="InvalidOutRotateY.Text" xml:space="preserve">
+    <value>Please specify valid TransitionOut RotateY</value>
+  </data>
+  <data name="InvalidOutScaleX.Text" xml:space="preserve">
+    <value>Please specify valid TransitionOut ScaleX</value>
+  </data>
+  <data name="InvalidOutScaleY.Text" xml:space="preserve">
+    <value>Please specify valid TransitionOut ScaleY</value>
+  </data>
+  <data name="InvalidOutShowUntil.Text" xml:space="preserve">
+    <value>Please specify valid TransitionOut ShowUntil</value>
+  </data>
+  <data name="InvalidOutSkewX.Text" xml:space="preserve">
+    <value>Please specify valid TransitionOut SkewX</value>
+  </data>
+  <data name="InvalidOutSkewY.Text" xml:space="preserve">
+    <value>Please specify valid TransitionOut SkewY</value>
+  </data>
+  <data name="InvalidOutTransformOrigin.Text" xml:space="preserve">
+    <value>Please specify valid TransitionOut TransformOrigin</value>
+  </data>
+  <data name="InvalidParallaxLevel.Text" xml:space="preserve">
+    <value>Please specify valid TransitionOut ParallaxLevel</value>
+  </data>
+  <data name="InvalidTransitionInOffsetX.Text" xml:space="preserve">
+    <value>Please specify valid TransitionIn OffsetX</value>
+  </data>
+  <data name="InvalidTransitionInOffsetY.Text" xml:space="preserve">
+    <value>Please specify valid TransitionIn OffsetY</value>
+  </data>
+  <data name="InvalidTransitionOutOffsetX.Text" xml:space="preserve">
+    <value>Please specify valid TransitionOut OffsetX</value>
+  </data>
+  <data name="InvalidTransitionOutOffsetY.Text" xml:space="preserve">
+    <value>Please specify valid TransitionOut OffsetY</value>
+  </data>
+  <data name="lLinkUrl.Text" xml:space="preserve">
+    <value>Enter Link Url</value>
+  </data>
+  <data name="lLinkUrlOption.Text" xml:space="preserve">
+    <value>Link Options</value>
+  </data>
+  <data name="MilliSecond.Text" xml:space="preserve">
+    <value>ms</value>
+  </data>
+  <data name="OutDurationRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionOut Duration</value>
+  </data>
+  <data name="OutRotateRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionOut Rotate</value>
+  </data>
+  <data name="OutRotateXRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionOut RotateX</value>
+  </data>
+  <data name="OutRotateYRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionOut RotateY</value>
+  </data>
+  <data name="OutScaleXRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionOut ScaleX</value>
+  </data>
+  <data name="OutScaleYRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionOut ScaleY</value>
+  </data>
+  <data name="OutShowUntilRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionOut ShowUntil</value>
+  </data>
+  <data name="OutSkewXRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionOut SkewX</value>
+  </data>
+  <data name="OutSkewYRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionOut SkewY</value>
+  </data>
+  <data name="OutTransformOriginRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionOut TransformOrigin</value>
+  </data>
+  <data name="ParallaxLevelRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionOut ParallaxLevel</value>
+  </data>
+  <data name="TransitionInOffsetXRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionIn OffsetX</value>
+  </data>
+  <data name="TransitionInOffsetYRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionIn OffsetY</value>
+  </data>
+  <data name="TransitionOutOffsetXRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionOut OffsetX</value>
+  </data>
+  <data name="TransitionOutOffsetYRequired.Text" xml:space="preserve">
+    <value>Please specify TransitionOut OffsetY</value>
+  </data>
+  <data name="InvalidLinkUrl.Text" xml:space="preserve">
+    <value>Please specify valid link url</value>
+  </data>
+  <data name="lOpenInNewWindow.Text" xml:space="preserve">
+    <value>Open in new window</value>
+  </data>
+  <data name="InDelayLess.Text" xml:space="preserve">
+    <value>Please specify delay time more than 500 milliseconds</value>
+  </data>
+  <data name="InDurationLess.Text" xml:space="preserve">
+    <value>Please specify duration more than 500 milliseconds</value>
+  </data>
+  <data name="OutDurationLess.Text" xml:space="preserve">
+    <value>Please specify duration more than 500 milliseconds</value>
+  </data>
+  <data name="OutShowUntilLess.Text" xml:space="preserve">
+    <value>Please specify show untill more than 500 milliseconds</value>
+  </data>
+  <data name="lEasingIn.Text" xml:space="preserve">
+    <value>Easing</value>
+  </data>
+  <data name="lBasic.Text" xml:space="preserve">
+    <value>Basic</value>
+  </data>
+  <data name="lLayerContentSource.Text" xml:space="preserve">
+    <value>Content Source</value>
+  </data>
+  <data name="lLayerContentType.Text" xml:space="preserve">
+    <value>Content Type</value>
+  </data>
+  <data name="lLink.Text" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="lOptions.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="lStyle.Text" xml:space="preserve">
+    <value>Style</value>
+  </data>
+  <data name="lTransitionOut.Text" xml:space="preserve">
+    <value>Transition Out</value>
+  </data>
+  <data name="ValidContentSource.Text" xml:space="preserve">
+    <value>Content Source is required</value>
+  </data>
+  <data name="lLayerAltText.Text" xml:space="preserve">
+    <value>Image Alt Text</value>
+  </data>
+</root>

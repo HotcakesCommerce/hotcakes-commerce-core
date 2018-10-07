@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ThemeInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ArticleListCSSFile />
+  <ShowEditIcon>false</ShowEditIcon>
+  <RepeatLayout>1</RepeatLayout>
+  <Template>&lt;div id="Article[ITEMID]"&gt;
+[EDIT][PUBLISHDATEICON] &lt;span class="SubSubHead clear"&gt; Created by [USERDISPLAYNAME] on [PUBLISHDATE]&lt;/span&gt; &lt;p&gt;&lt;div class="Normal"&gt;[SHORTENDESCRIPTION:100] &lt;/div&gt; &lt;a class="CommandButton" href="[VIEWURL]"&gt;Read More..&lt;/a&gt;&lt;/p&gt; &lt;/div&gt; </Template>
+  <TemplateTypeSetting>2</TemplateTypeSetting>
+  <TemplateFileSetting />
+  <HeaderTemplate>&lt;div class="dnnForm" id="tabs-[MODULEID]"&gt;
+ &lt;ul class="dnnAdminTabNav"&gt;[ARTICLES]&lt;li&gt;&lt;a href="#Article[ITEMID]"&gt;[TITLE:40]&lt;/a&gt;&lt;/li&gt;[/ARTICLES]&lt;/ul&gt;</HeaderTemplate>
+  <HeaderTemplateTypeSetting>2</HeaderTemplateTypeSetting>
+  <HeaderTemplateFileSetting>/dnn700/DesktopModules/DNNArticle/Templates/ArticleListHeaderTemplate/CategoryList-Accordion.html</HeaderTemplateFileSetting>
+  <FooterTemplate>&lt;/div&gt;&lt;script type="text/javascript"&gt;
+ jQuery(function ($) {
+ $('#tabs-[MODULEID]').dnnTabs();
+ });
+&lt;/script&gt; 
+ 		</FooterTemplate>
+  <FooterTemplateTypeSetting>2</FooterTemplateTypeSetting>
+  <FooterTemplateFileSetting>/dnn700/DesktopModules/DNNArticle/Templates/ArticleListFooterTemplate/CategoryAccordion.html</FooterTemplateFileSetting>
+</ThemeInfo>

@@ -1,0 +1,1007 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="reservationDurationLabel.Help" xml:space="preserve">
+    <value>The minimum duration of a reservation.</value>
+  </data>
+  <data name="reservationDurationLabel.Text" xml:space="preserve">
+    <value>Min. Reservation Duration:</value>
+  </data>
+  <data name="ControlTitle_settings.Text" xml:space="preserve">
+    <value>Reservations Settings</value>
+  </data>
+  <data name="daysAheadLabel.Help" xml:space="preserve">
+    <value>The maximum number of days in advance users can schedule reservations. Minimum is 1. Maximum is 365.</value>
+  </data>
+  <data name="daysAheadLabel.Text" xml:space="preserve">
+    <value>Max. Time Ahead:</value>
+  </data>
+  <data name="eventsModuleLabel.Help" xml:space="preserve">
+    <value>The module in which reservations will be created. The list displays the Module Title, so if you have more than one instance of the module, rename them accordingly to be able to identify them.</value>
+  </data>
+  <data name="eventsModuleLabel.Text" xml:space="preserve">
+    <value>Calendar Module:</value>
+  </data>
+  <data name="fridayLabel.Help" xml:space="preserve">
+    <value>Friday.</value>
+  </data>
+  <data name="fridayLabel.Text" xml:space="preserve">
+    <value>Friday:</value>
+  </data>
+  <data name="ModuleHelp.Text" xml:space="preserve">
+    <value>About Reservations Settings</value>
+  </data>
+  <data name="mondayLabel.Help" xml:space="preserve">
+    <value>Monday.</value>
+  </data>
+  <data name="mondayLabel.Text" xml:space="preserve">
+    <value>Monday:</value>
+  </data>
+  <data name="pageSizeLabel.Help" xml:space="preserve">
+    <value>The maximim number of  days, times of day, and reservation times to display horizontally.</value>
+  </data>
+  <data name="pageSizeLabel.Text" xml:space="preserve">
+    <value>Page Size:</value>
+  </data>
+  <data name="saturdayLabel.Help" xml:space="preserve">
+    <value>Saturday.</value>
+  </data>
+  <data name="saturdayLabel.Text" xml:space="preserve">
+    <value>Saturday:</value>
+  </data>
+  <data name="sundayLabel.Help" xml:space="preserve">
+    <value>Sunday.</value>
+  </data>
+  <data name="sundayLabel.Text" xml:space="preserve">
+    <value>Sunday:</value>
+  </data>
+  <data name="thursdayLabel.Help" xml:space="preserve">
+    <value>Thursday.</value>
+  </data>
+  <data name="thursdayLabel.Text" xml:space="preserve">
+    <value>Thursday:</value>
+  </data>
+  <data name="timeOfDayDurationLabel.Help" xml:space="preserve">
+    <value>Allows you to specify the time of day duration to be used when rendering the wizard (e.g. specify 120 minutes for 1:00pm to 3:00pm). Minimum is 60 minutes. Maximum is 480 minutes.</value>
+  </data>
+  <data name="timeOfDayDurationLabel.Text" xml:space="preserve">
+    <value>Time of Day Duration:</value>
+  </data>
+  <data name="tuesdayLabel.Help" xml:space="preserve">
+    <value>Tuesday.</value>
+  </data>
+  <data name="tuesdayLabel.Text" xml:space="preserve">
+    <value>Tuesday:</value>
+  </data>
+  <data name="wednesdayLabel.Help" xml:space="preserve">
+    <value>Wednesday.</value>
+  </data>
+  <data name="wednesdayLabel.Text" xml:space="preserve">
+    <value>Wednesday:</value>
+  </data>
+  <data name="addCommandButton.Text" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="daysAheadTextBoxRangeValidator.Text" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="deleteCommandButton.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="workingHoursExceptionNoWorkingHoursRadioButton.Text" xml:space="preserve">
+    <value>No working hours scheduled.</value>
+  </data>
+  <data name="workingHoursExceptionsNoWorkingHoursLabel.Text" xml:space="preserve">
+    <value>No single occurrences/overrides scheduled.</value>
+  </data>
+  <data name="ExceptionsSettings.Text" xml:space="preserve">
+    <value>Working Hours - Single Occurrences/Overrides</value>
+  </data>
+  <data name="fromLabel.Text" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="GeneralSettings.Text" xml:space="preserve">
+    <value>General Settings</value>
+  </data>
+  <data name="NoneSpecified.Text" xml:space="preserve">
+    <value>&lt;None Specified&gt;</value>
+  </data>
+  <data name="noWorkingHoursLabel.Text" xml:space="preserve">
+    <value>No working hours scheduled.</value>
+  </data>
+  <data name="starLabel.Text" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="toLabel.Text" xml:space="preserve">
+    <value>to</value>
+  </data>
+  <data name="WorkingHoursSettings.Text" xml:space="preserve">
+    <value>Working Hours - Recurrent</value>
+  </data>
+  <data name="allowCategorySelectionLabel.Help" xml:space="preserve">
+    <value>Select this option if you want end users to be able to specify the category associated with the reservation, or the resource to handle the reservation. You must configure the categories using the Edit Categories setting in the associated Calendar Module.</value>
+  </data>
+  <data name="allowCategorySelectionLabel.Text" xml:space="preserve">
+    <value>Resource/Category Selection:</value>
+  </data>
+  <data name="selectCategoryLastLabel.Help" xml:space="preserve">
+    <value>Specify whether you want end users to select the category before or after selecting the reservation time.</value>
+  </data>
+  <data name="selectCategoryLastLabel.Text" xml:space="preserve">
+    <value>Select Category Last:</value>
+  </data>
+  <data name="minutesLabel.Text" xml:space="preserve">
+    <value>minutes.</value>
+  </data>
+  <data name="itemsLabel.Text" xml:space="preserve">
+    <value>items.</value>
+  </data>
+  <data name="daysLabel.Text" xml:space="preserve">
+    <value>days.</value>
+  </data>
+  <data name="bccListLabel.Help" xml:space="preserve">
+    <value>The list of users that will get notified when reservations are scheduled, re-scheduled/modified, or cancelled. Either select from the list of registered users (if your site has less than 100 registered users) or type a valid username.</value>
+  </data>
+  <data name="bccListLabel.Text" xml:space="preserve">
+    <value>Notification List:</value>
+  </data>
+  <data name="noUsersLabel.Text" xml:space="preserve">
+    <value>Notification List is empty.</value>
+  </data>
+  <data name="allowCancellationsLabel.Help" xml:space="preserve">
+    <value>Specify whether you want to allow users to cancel previously scheduled reservations.</value>
+  </data>
+  <data name="allowCancellationsLabel.Text" xml:space="preserve">
+    <value>Allow Cancellations:</value>
+  </data>
+  <data name="allowReschedulingLabel.Help" xml:space="preserve">
+    <value>Specify whether you want to allow users to reschedule previously scheduled reservations.</value>
+  </data>
+  <data name="allowReschedulingLabel.Text" xml:space="preserve">
+    <value>Allow Rescheduling:</value>
+  </data>
+  <data name="displayCalendar.Help" xml:space="preserve">
+    <value>Specify whether you want end users to select the day in calendar or list mode.</value>
+  </data>
+  <data name="displayCalendar.Text" xml:space="preserve">
+    <value>Day Selection Mode:</value>
+  </data>
+  <data name="displayCalendarRadioButton.Text" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
+  <data name="displayListRadioButton.Text" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="allowCrossCategoryConflictsLabel.Help" xml:space="preserve">
+    <value>Select this option if you want to prevent users from scheduling a reservation at a time that has been already scheduled by another (or the same) user but under a different category.</value>
+  </data>
+  <data name="allowCrossCategoryConflictsLabel.Text" xml:space="preserve">
+    <value>Prevent Cross-Category Conflicts:</value>
+  </data>
+  <data name="allowDescription.Help" xml:space="preserve">
+    <value>Use this option to enable or disable the Comments fields</value>
+  </data>
+  <data name="allowDescription.Text" xml:space="preserve">
+    <value>Enable Comments:</value>
+  </data>
+  <data name="displayTimeOfDay.Help" xml:space="preserve">
+    <value>Specify whether to make users select a time of day before listing all the available reservation times. Useful when Reservation Duration is relatively small compared to the Working Hours.</value>
+  </data>
+  <data name="displayTimeOfDay.Text" xml:space="preserve">
+    <value>Display Time Of Day List:</value>
+  </data>
+  <data name="cancellationFeeLabel.Help" xml:space="preserve">
+    <value>Enter the amount to charge for cancelling a reservation. Must be less than or equal to the Reservation Fee, because it will be substracted from the amount to refund upon cancellation.</value>
+  </data>
+  <data name="cancellationFeeLabel.Text" xml:space="preserve">
+    <value>Cancellation Fee:</value>
+  </data>
+  <data name="FeesSettings.Text" xml:space="preserve">
+    <value>Reservation Fees</value>
+  </data>
+  <data name="payPalAccountLabel.Help" xml:space="preserve">
+    <value>PayPal Account to use for reservation fees.</value>
+  </data>
+  <data name="payPalAccountLabel.Text" xml:space="preserve">
+    <value>PayPal Account:</value>
+  </data>
+  <data name="payPalUrlLabel.Help" xml:space="preserve">
+    <value>https://www.paypal.com (Test site that can be substituted for testing the interface: https://www.sandbox.paypal.com)</value>
+  </data>
+  <data name="payPalUrlLabel.Text" xml:space="preserve">
+    <value>PayPal URL:</value>
+  </data>
+  <data name="reschedulingFeeLabel.Help" xml:space="preserve">
+    <value>Enter the amount to charge for rescheduling a reservation.</value>
+  </data>
+  <data name="reschedulingFeeLabel.Text" xml:space="preserve">
+    <value>Reschedule Fee:</value>
+  </data>
+  <data name="schedulingFeeLabel.Help" xml:space="preserve">
+    <value>Enter the amount to charge for scheduling a reservation.</value>
+  </data>
+  <data name="schedulingFeeLabel.Text" xml:space="preserve">
+    <value>Reservation Fee:</value>
+  </data>
+  <data name="usdLabel.Text" xml:space="preserve">
+    <value>USD.</value>
+  </data>
+  <data name="pendingPaymentExpirationLabel.Help" xml:space="preserve">
+    <value>Specify the time to wait for Instant Payment Notification to arrive from PayPal. If the time expires and the user hasn't completed the payment, or the user navigated away from the PayPal without paying, the reservation slot will be made available for other users to schedule it.</value>
+  </data>
+  <data name="pendingPaymentExpirationLabel.Text" xml:space="preserve">
+    <value>Pending Payment Timeout:</value>
+  </data>
+  <data name="moderateLabel.Help" xml:space="preserve">
+    <value>Select whether you want to moderate reservations. If checked, you need to configure Moderation Settings in the associated Calendar Module, since moderation is performed through that module.</value>
+  </data>
+  <data name="moderateLabel.Text" xml:space="preserve">
+    <value>Moderate Reservations:</value>
+  </data>
+  <data name="Cancellation.Text" xml:space="preserve">
+    <value>Reservation Cancellation</value>
+  </data>
+  <data name="Confirmation.Text" xml:space="preserve">
+    <value>Reservation Confirmation</value>
+  </data>
+  <data name="mailTemplateBodyLabel.Help" xml:space="preserve">
+    <value>Email Template Body (2000 characters max.) and Body Type.
+
+Valid Tokens are:
+
+{Recipient}, {StartDateTime}, {EndDateTime}, {DurationHours}, {DurationMinutes}, {DurationTotalHours}, {DurationTotalMinutes}, {Category}, {Name}, {Email}, {Phone}, {Description}.
+
+Moderation tokens:
+
+{Url}
+
+Pending Refung tokens:
+
+{Amount}
+
+Note: Both {StartDateTime} and {EndDateTime} can have a format parameter in the following form: {StartDateTime|[format]}.
+
+For more information regarding Date and Time Format Strings, please visit:
+
+http://msdn.microsoft.com/en-us/library/az4se3k1.aspx</value>
+  </data>
+  <data name="mailTemplateBodyLabel.Text" xml:space="preserve">
+    <value>Body:</value>
+  </data>
+  <data name="mailTemplateBodyTypeHtmlRadioButton.Text" xml:space="preserve">
+    <value>HTML</value>
+  </data>
+  <data name="mailTemplateBodyTypeTextRadioButton.Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="mailTemplateLabel.Help" xml:space="preserve">
+    <value>Select the email template to edit from the list.</value>
+  </data>
+  <data name="mailTemplateLabel.Text" xml:space="preserve">
+    <value>Template:</value>
+  </data>
+  <data name="mailTemplatesSettings.Text" xml:space="preserve">
+    <value>Email Settings &amp; Templates</value>
+  </data>
+  <data name="mailTemplateSubjectLabel.Help" xml:space="preserve">
+    <value>Email Template Subject.</value>
+  </data>
+  <data name="mailTemplateSubjectLabel.Text" xml:space="preserve">
+    <value>Subject:</value>
+  </data>
+  <data name="Modification.Text" xml:space="preserve">
+    <value>Reservation Modification</value>
+  </data>
+  <data name="Rescheduled.Text" xml:space="preserve">
+    <value>Reservation Reschedule</value>
+  </data>
+  <data name="resetMailTemplateCommandButton.Text" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="updateMailTemplateCommandButton.Text" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="displayEndTimeLabel.Help" xml:space="preserve">
+    <value>Specify whether to display the reservation end time when presenting the list of available reservations to the user.</value>
+  </data>
+  <data name="displayEndTimeLabel.Text" xml:space="preserve">
+    <value>Display End Time:</value>
+  </data>
+  <data name="Days.Text" xml:space="preserve">
+    <value>day(s)</value>
+  </data>
+  <data name="Hours.Text" xml:space="preserve">
+    <value>hour(s)</value>
+  </data>
+  <data name="Minutes.Text" xml:space="preserve">
+    <value>minute(s)</value>
+  </data>
+  <data name="moderationNotSupportedLabel.Text" xml:space="preserve">
+    <value>Moderation is not supported via the selected Calendar Module.</value>
+  </data>
+  <data name="ModerationSettings.Text" xml:space="preserve">
+    <value>Moderation</value>
+  </data>
+  <data name="remindersNotSupportedLabel.Text" xml:space="preserve">
+    <value>Reminders are not supported via the selected Calendar Module.</value>
+  </data>
+  <data name="RemindersSettings.Text" xml:space="preserve">
+    <value>Reminders</value>
+  </data>
+  <data name="sendRemindersLabel.Help" xml:space="preserve">
+    <value>Select this option if you want to send a reminder to the user scheduling the reservation.
+&lt;ul&gt;
+    &lt;li&gt;Settings this option on will only affect newly scheduled reservations.&lt;/li&gt;
+    &lt;li&gt;Settings this option off will disable reminders for reservations already scheduled.&lt;/li&gt;
+    &lt;li&gt;For reminders to be sent on time, we recommend setting the "Scheduler Mode" setting under "Host Settings" to "Timer Method", and make sure IIS in not set to recycle/shut down the worker process of your DotNetNuke application.&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="sendRemindersLabel.Text" xml:space="preserve">
+    <value>Send Reminder:</value>
+  </data>
+  <data name="sendRemindersWhenLabel.Help" xml:space="preserve">
+    <value>Specify when to send the reminder.</value>
+  </data>
+  <data name="sendRemindersWhenLabel.Text" xml:space="preserve">
+    <value>Time Before Reservation:</value>
+  </data>
+  <data name="iCalendarAttachmentFileNameLabel.Help" xml:space="preserve">
+    <value>Enter the text you want to display as the Reservation Subject in the user's calendar when importing the attached iCalendar file. You can use the same tokens used in the Body.</value>
+  </data>
+  <data name="iCalendarAttachmentFileNameLabel.Text" xml:space="preserve">
+    <value>iCal Subject:</value>
+  </data>
+  <data name="itemDescriptionLabel.Help" xml:space="preserve">
+    <value>Enter the description to display as the item being paid for. You can use the same tokens used in the Email Templates.</value>
+  </data>
+  <data name="itemDescriptionLabel.Text" xml:space="preserve">
+    <value>Item Description:</value>
+  </data>
+  <data name="minTimeAheadLabel.Help" xml:space="preserve">
+    <value>Specify the minimum time ahead for scheduling reservations. If set to one hour, users will be able to schedule reservations starting one hour from the current time, giving you time to prepare for the reservation.</value>
+  </data>
+  <data name="minTimeAheadLabel.Text" xml:space="preserve">
+    <value>Min. Time Ahead:</value>
+  </data>
+  <data name="themeLabel.Help" xml:space="preserve">
+    <value>Select a theme to apply to the module. You can create your own themes by adding a folder [ThemeName] to the Themes directory and adding a [ThemeName].css file to it.</value>
+  </data>
+  <data name="themeLabel.Text" xml:space="preserve">
+    <value>Theme:</value>
+  </data>
+  <data name="moderationListSettingsAddCommandButton.Text" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="moderationListSettingsAllowPagingLabel.Help" xml:space="preserve">
+    <value>Controls whether to allow paging.</value>
+  </data>
+  <data name="moderationListSettingsAllowPagingLabel.Text" xml:space="preserve">
+    <value>Allow paging:</value>
+  </data>
+  <data name="moderationListSettingsAllowUsersToSortLabel.Help" xml:space="preserve">
+    <value>Controls whether to allow users to sort by clicking column headers.</value>
+  </data>
+  <data name="moderationListSettingsAllowUsersToSortLabel.Text" xml:space="preserve">
+    <value>Allow users to sort?</value>
+  </data>
+  <data name="moderationListSettingsDeleteCommandButton.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="moderationListSettingsDisplayColumnLabel.Help" xml:space="preserve">
+    <value>Use the visible checkboxes to switch display of columns on and off. You can set the display order of columns using the up and down arrows.</value>
+  </data>
+  <data name="moderationListSettingsDisplayColumnLabel.Text" xml:space="preserve">
+    <value>Display Columns:</value>
+  </data>
+  <data name="moderationListSettingsMaxTextLengthLabel.Help" xml:space="preserve">
+    <value>Text longer that this value in length will be cut off and ... will be appended.</value>
+  </data>
+  <data name="moderationListSettingsMaxTextLengthLabel.Text" xml:space="preserve">
+    <value>Max Text Length:</value>
+  </data>
+  <data name="moderationListSettingsNoSortColumnsLabel.Text" xml:space="preserve">
+    <value>No sort columns defined.</value>
+  </data>
+  <data name="moderationListSettingsPagerModeLabel.Help" xml:space="preserve">
+    <value>Specifies whether the pager element displays buttons that link to the next and previous page, or numeric buttons that link directly to a page.</value>
+  </data>
+  <data name="moderationListSettingsPagerModeLabel.Text" xml:space="preserve">
+    <value>Pager Mode:</value>
+  </data>
+  <data name="moderationListSettingsPagerPositionLabel.Help" xml:space="preserve">
+    <value>Position of the pager.</value>
+  </data>
+  <data name="moderationListSettingsPagerPositionLabel.Text" xml:space="preserve">
+    <value>Pager Position:</value>
+  </data>
+  <data name="moderationListSettingsPageSizeLabel.Help" xml:space="preserve">
+    <value>Controls the page size when paging is enabled.</value>
+  </data>
+  <data name="moderationListSettingsPageSizeLabel.Text" xml:space="preserve">
+    <value>Page Size:</value>
+  </data>
+  <data name="moderationListSettingsSortColumnLabel.Help" xml:space="preserve">
+    <value>Add/remove sort columns to the list to sort the reservations list by the selected columns.</value>
+  </data>
+  <data name="moderationListSettingsSortColumnLabel.Text" xml:space="preserve">
+    <value>Sorting:</value>
+  </data>
+  <data name="Name.Header" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Visible.Header" xml:space="preserve">
+    <value>Visible</value>
+  </data>
+  <data name="globalModeratorListLabel.Help" xml:space="preserve">
+    <value>Specify the list of users you want to be give Moderator access to. Moderators will be sent email notifications to when a reservation is scheduled and awaiting approval. Either select from the list of registered users (if your site has less than 100 registered users) or type a valid username.</value>
+  </data>
+  <data name="globalModeratorListLabel.Text" xml:space="preserve">
+    <value>Moderators:</value>
+  </data>
+  <data name="noGlobalModeratorsLabel.Text" xml:space="preserve">
+    <value>Moderator List is empty.</value>
+  </data>
+  <data name="Declined.Text" xml:space="preserve">
+    <value>Reservation Denied</value>
+  </data>
+  <data name="Moderator.Text" xml:space="preserve">
+    <value>Reservation Pending Approval</value>
+  </data>
+  <data name="ReservationSettings.Text" xml:space="preserve">
+    <value>Reservation Settings</value>
+  </data>
+  <data name="CategoriesSettings.Text" xml:space="preserve">
+    <value>Resources/Categories</value>
+  </data>
+  <data name="NotificationsSettings.Text" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="All.Text" xml:space="preserve">
+    <value>[All Categories]</value>
+  </data>
+  <data name="categoryLabel.Help" xml:space="preserve">
+    <value>You can specify the Resource or Category for which you want to configure the settings below by using the Resource/Category list. Select &amp;lt;All&amp;gt; to configure the settings for all Resources or Categories. Configuring settings for a specific Resource or Category will override the &amp;lt;All&amp;gt; settings.</value>
+  </data>
+  <data name="categoryLabel.Text" xml:space="preserve">
+    <value>Resource/Category:</value>
+  </data>
+  <data name="ExceptionsSettings.Help" xml:space="preserve">
+    <value>In this section you can set working hours for specific days. Entries here will override those under the Working Hours - Recurrent section if they fall on the same date, and will add working hours to days not under Working Hours - Recurrent.</value>
+  </data>
+  <data name="ModerationListSettings.Text" xml:space="preserve">
+    <value>Moderation Page View Settings</value>
+  </data>
+  <data name="resetCommandButton.Text" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="updateCommandButton.Text" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="redirectUrlLabel.Help" xml:space="preserve">
+    <value>Enter the URL to redirect users to when they are done scheduling the reservation (click Done button).</value>
+  </data>
+  <data name="redirectUrlLabel.Text" xml:space="preserve">
+    <value>Redirect when Done to:</value>
+  </data>
+  <data name="requirePhoneLabel.Help" xml:space="preserve">
+    <value>Specify whether you want the Phone field to be required or optional.</value>
+  </data>
+  <data name="requirePhoneLabel.Text" xml:space="preserve">
+    <value>Require Phone Number:</value>
+  </data>
+  <data name="cancelCommandButton.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="maxConflictingReservationsLabel.Help" xml:space="preserve">
+    <value>Enter the maximum number of reservations at a time that you will be accepting. Minimum is 1, meaning that no conflicts are to be allowed. Note: If you enable Resource/Category selection and Prevent Cross-Category Conflicts, this setting applies to [All Categories] only and will limit the number for conflicting reservations regardless of the category selected.</value>
+  </data>
+  <data name="maxConflictingReservationsLabel.Text" xml:space="preserve">
+    <value>Max. Reservations at a Time:</value>
+  </data>
+  <data name="workingHoursAllDayRadioButton.Text" xml:space="preserve">
+    <value>All Day (24 hours)</value>
+  </data>
+  <data name="currencyLabel.Help" xml:space="preserve">
+    <value>The currency used for reservation fees.</value>
+  </data>
+  <data name="currencyLabel.Text" xml:space="preserve">
+    <value>Currency:</value>
+  </data>
+  <data name="noTimeOfDayLabel.Text" xml:space="preserve">
+    <value>No Times Of Day defined.</value>
+  </data>
+  <data name="TimeOfDaySettings.Text" xml:space="preserve">
+    <value>Time Of Day List</value>
+  </data>
+  <data name="TimeOfDayListError.Text" xml:space="preserve">
+    <value>Time of Day List must add up to 24 hours.&lt;br /&gt;&lt;br /&gt;</value>
+  </data>
+  <data name="reservationDurationMaxLabel.Help" xml:space="preserve">
+    <value>The maximum duration of a reservation.</value>
+  </data>
+  <data name="reservationDurationMaxLabel.Text" xml:space="preserve">
+    <value>Max. Reservation Duration:</value>
+  </data>
+  <data name="reservationIntervalLabel.Help" xml:space="preserve">
+    <value>The start time increment interval for reservations. Maximum is 24 hours.</value>
+  </data>
+  <data name="reservationIntervalLabel.Text" xml:space="preserve">
+    <value>Start Time Increment Interval</value>
+  </data>
+  <data name="reschedulingFeeTypeLabel.Text" xml:space="preserve">
+    <value>per reservation.</value>
+  </data>
+  <data name="SchedulingFeeType.Text" xml:space="preserve">
+    <value>for every</value>
+  </data>
+  <data name="PendingCancellationRefund.Text" xml:space="preserve">
+    <value>Pending Cancellation Refund</value>
+  </data>
+  <data name="PendingRescheduleRefund.Text" xml:space="preserve">
+    <value>Pending Reschedule Refund</value>
+  </data>
+  <data name="cancellationFeeTypeLabel.Text" xml:space="preserve">
+    <value>per reservation.</value>
+  </data>
+  <data name="displayUnavailableTimeOfDay.Help" xml:space="preserve">
+    <value>Check this box if you would like to display unavailable times of day. Users will not be able to click on them.</value>
+  </data>
+  <data name="displayUnavailableTimeOfDay.Text" xml:space="preserve">
+    <value>Display Unavailable:</value>
+  </data>
+  <data name="AllUsers.Text" xml:space="preserve">
+    <value>All Users</value>
+  </data>
+  <data name="categoryPermissionsLabel.Help" xml:space="preserve">
+    <value>Specify the roles to be allowed to schedule reservations for the selected category,</value>
+  </data>
+  <data name="categoryPermissionsLabel.Text" xml:space="preserve">
+    <value>Category Permissions:</value>
+  </data>
+  <data name="UnauthenticatedUsers.Text" xml:space="preserve">
+    <value>Unauthenticated Users</value>
+  </data>
+  <data name="PendingDeclinationRefund.Text" xml:space="preserve">
+    <value>Pendind Declination Refund</value>
+  </data>
+  <data name="DropDownList.Text" xml:space="preserve">
+    <value>Drop Down List</value>
+  </data>
+  <data name="categorySelectionModeLabel.Help" xml:space="preserve">
+    <value>Specify whether you want end users to select the category from a horizontal list, a drop down list, or a list box. Horizontal list requires jQuery 1.7 or higher.</value>
+  </data>
+  <data name="categorySelectionModeLabel.Text" xml:space="preserve">
+    <value>Category Selection Mode:</value>
+  </data>
+  <data name="List.Text" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="ListBox.Text" xml:space="preserve">
+    <value>List Box</value>
+  </data>
+  <data name="allowPayLaterLabel.Help" xml:space="preserve">
+    <value>Select this option if you want to allow users to schedule/reschedule reservations without paying upfront.</value>
+  </data>
+  <data name="allowPayLaterLabel.Text" xml:space="preserve">
+    <value>Allow Paying Later:</value>
+  </data>
+  <data name="CashierList.Text" xml:space="preserve">
+    <value>Cashier List</value>
+  </data>
+  <data name="cashierListLabel.Help" xml:space="preserve">
+    <value>Specify the list of users you want to be give Cashier access to. Cashiers will be sent email notifications to when a reservation is rescheduled or cancelled and is awaiting a refund. In addition, Cashiers have access to the Cashier screen, where they can manage payments and refunds. Either select from the list of registered users (if your site has less than 100 registered users) or type a valid username.</value>
+  </data>
+  <data name="cashierListLabel.Text" xml:space="preserve">
+    <value>Cashiers:</value>
+  </data>
+  <data name="noCashiersLabel.Text" xml:space="preserve">
+    <value>Cashier List is empty</value>
+  </data>
+  <data name="requireVerificationCodeLabel.Help" xml:space="preserve">
+    <value>Select this option if you want to issue a verification code upon scheduling a reservation. This code will be sent to the user scheduling the reservation and will be required for viewing/editing reservations. Verification Codes are random and unique for each email address.</value>
+  </data>
+  <data name="requireVerificationCodeLabel.Text" xml:space="preserve">
+    <value>Require Verification Code:</value>
+  </data>
+  <data name="VerificationCode.Text" xml:space="preserve">
+    <value>Verification Code</value>
+  </data>
+  <data name="allowLookupByPhoneLabel.Help" xml:space="preserve">
+    <value>Allow to View/Edit a Reservation by Phone in addition to Email.</value>
+  </data>
+  <data name="allowLookupByPhoneLabel.Text" xml:space="preserve">
+    <value>Allow Lookup by Phone:</value>
+  </data>
+  <data name="reservationDurationIntervalLabel.Help" xml:space="preserve">
+    <value>The interval by which to increase duration selection. Only applicable when Min. Reservation Duration and Max. Reservation Duration are different.</value>
+  </data>
+  <data name="reservationDurationIntervalLabel.Text" xml:space="preserve">
+    <value>Duration Increment Interval:</value>
+  </data>
+  <data name="requireEmailLabel.Help" xml:space="preserve">
+    <value>Specify whether you want the Email field to be required or optional. If unchecked, "Require Verification Code" will de disabled. Consider requiring either Email or Phone to allow Viewing/Editing Reservations.</value>
+  </data>
+  <data name="requireEmailLabel.Text" xml:space="preserve">
+    <value>Require Email Address:</value>
+  </data>
+  <data name="displayRemainingReservationsLabel.Help" xml:space="preserve">
+    <value>Check this box if you want to display the number of remaining reservations next to the Category (if enabled) and Time of Day (if enabled.)</value>
+  </data>
+  <data name="displayRemainingReservationsLabel.Text" xml:space="preserve">
+    <value>Display # of Remaining:</value>
+  </data>
+  <data name="displayUnavailableCategoriesLabel.Help" xml:space="preserve">
+    <value>Check this box if you would like to display unavailable categories. Users will not be able to click on them.</value>
+  </data>
+  <data name="displayUnavailableCategoriesLabel.Text" xml:space="preserve">
+    <value>Display Unavailable:</value>
+  </data>
+  <data name="allowSchedulingAnotherReservationLabel.Help" xml:space="preserve">
+    <value>Select whether to display a button on the confirmation page to schedule another reservation using the contact information of the scheduled reservation.</value>
+  </data>
+  <data name="allowSchedulingAnotherReservationLabel.Text" xml:space="preserve">
+    <value>Display "Schedule Another":</value>
+  </data>
+  <data name="duplicateReservationsListLabel.Help" xml:space="preserve">
+    <value>The list of users that will have access to the Duplicate Reservations Report. Either select from the list of registered users (if your site has less than 100 registered users) or type a valid username.</value>
+  </data>
+  <data name="duplicateReservationsListLabel.Text" xml:space="preserve">
+    <value>Duplicate Reservations:</value>
+  </data>
+  <data name="noDuplicateReservationsLabel.Text" xml:space="preserve">
+    <value>Report Viewer List is empty.</value>
+  </data>
+  <data name="ReportsSettings.Text" xml:space="preserve">
+    <value>Report Viewers</value>
+  </data>
+  <data name="DuplicateReservation.Text" xml:space="preserve">
+    <value>Duplicate Reservation</value>
+  </data>
+  <data name="allowEmergencyRequestLabel.Help" xml:space="preserve">
+    <value>Select this option if you want to give users the option to fill out an form that will send an email to the notification list when there are no reservations available within the time frame required by the user.</value>
+  </data>
+  <data name="allowEmergencyRequestLabel.Text" xml:space="preserve">
+    <value>Allow Emergency Request:</value>
+  </data>
+  <data name="bindUponSelectionLabel.Help" xml:space="preserve">
+    <value>Select this option to have the module load the open time slots after the user selects the category. Selecting this will improve performance.</value>
+  </data>
+  <data name="bindUponSelectionLabel.Text" xml:space="preserve">
+    <value>Bind Upon Selection:</value>
+  </data>
+  <data name="requireConfirmationLabel.Help" xml:space="preserve">
+    <value>Select this feature if you want to have users confirm their reservation. If the reservation is not confirmed within the time frame specified below, the reservation will be automatically cancelled by the system. *Does not apply to paid reservations*</value>
+  </data>
+  <data name="requireConfirmationLabel.Text" xml:space="preserve">
+    <value>Require Confirmation:</value>
+  </data>
+  <data name="requireConfirmationWhenLabel.Help" xml:space="preserve">
+    <value>Specify when should the reservation be cancelled if the user does not confirm it by clicking on the confirmation link included in the reminder email. This value must be less than the Send Reminder When value by a considerable amount, so users have time to confirm after they receive the reminder email.</value>
+  </data>
+  <data name="requireConfirmationWhenLabel.Text" xml:space="preserve">
+    <value>Time Before Reservation:</value>
+  </data>
+  <data name="requireConfirmationInstructionsLabel.Text" xml:space="preserve">
+    <value>&lt;ul&gt;
+&lt;li&gt;You need to modify the Reservation Reminder template(s) to include the instructions on how to confirm the reservation. Instructions should read:&lt;ul&gt;&lt;li&gt;&lt;i&gt;You need to confirm your reservation within  [X] days or it will be automatically cancelled by the system. To confirm your reservation, please navigate to [type module's URL here], select View/Edit Reservation and follow the on-screen instructions.&lt;/i&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="allowEmergencyRequestsLabel.Help" xml:space="preserve">
+    <value>Select this option if you would like users to be able to submit a reservation request form when the next available reservation is not in the time-frame required by the user, or there is no next available reservation. Once submitted, an email is sent to the person assigned to the category for their attention.</value>
+  </data>
+  <data name="allowEmergencyRequestsLabel.Text" xml:space="preserve">
+    <value>Allow Emergency Requests:</value>
+  </data>
+  <data name="noViewReservationsLabel.Text" xml:space="preserve">
+    <value>Report Viewer List is empty.</value>
+  </data>
+  <data name="viewReservationsListLabel.Help" xml:space="preserve">
+    <value>The list of users that will have access to the Reservations Report. Either select from the list of registered users (if your site has less than 100 registered users) or type a valid username.</value>
+  </data>
+  <data name="viewReservationsListLabel.Text" xml:space="preserve">
+    <value>Reservations Report:</value>
+  </data>
+  <data name="moderationHoursAllDayRadioButton.Text" xml:space="preserve">
+    <value>All Day (24 hours)</value>
+  </data>
+  <data name="moderationHoursHelp.Text" xml:space="preserve">
+    <value>Specify the days and hours to moderate by adding them to the list below. By default, reservations are moderated at all times.</value>
+  </data>
+  <data name="noModerationHoursLabel.Text" xml:space="preserve">
+    <value>All days/hours moderated.</value>
+  </data>
+  <data name="contactInfoFirstLabel.Help" xml:space="preserve">
+    <value>Specify whether to collect the contact information before or after collecting the reservation time.</value>
+  </data>
+  <data name="contactInfoFirstLabel.Text" xml:space="preserve">
+    <value>Collect Contact Info First:</value>
+  </data>
+  <data name="timeOfDaySelectionModeLabel.Help" xml:space="preserve">
+    <value>Specify whether you want end users to select the time of day from a horizontal list, a drop down list, or a list box. Horizontal list requires jQuery 1.7 or higher.</value>
+  </data>
+  <data name="timeOfDaySelectionModeLabel.Text" xml:space="preserve">
+    <value>Time of Day Selection Mode:</value>
+  </data>
+  <data name="timeSelectionModeLabel.Help" xml:space="preserve">
+    <value>Specify whether you want end users to select the time from a horizontal list, a drop down list, or a list box. Horizontal list requires jQuery 1.7 or higher.</value>
+  </data>
+  <data name="timeSelectionModeLabel.Text" xml:space="preserve">
+    <value>Time Selection Mode:</value>
+  </data>
+  <data name="durationSelectionModeLabel.Help" xml:space="preserve">
+    <value>Specify whether you want end users to select the duration from a horizontal list, a drop down list, or a list box. Horizontal list requires jQuery 1.7 or higher.</value>
+  </data>
+  <data name="durationSelectionModeLabel.Text" xml:space="preserve">
+    <value>Duration Selection Mode:</value>
+  </data>
+  <data name="mailFromLabel.Help" xml:space="preserve">
+    <value>Specify the address to use as the sender for all email notifications.</value>
+  </data>
+  <data name="mailFromLabel.Text" xml:space="preserve">
+    <value>Email Sender:</value>
+  </data>
+  <data name="bodyTypeLabel.Help" xml:space="preserve">
+    <value>Specify whether the body of the email is in HTML or text format.</value>
+  </data>
+  <data name="bodyTypeLabel.Text" xml:space="preserve">
+    <value>Body Type:</value>
+  </data>
+  <data name="Internal.Text" xml:space="preserve">
+    <value>[Internal]</value>
+  </data>
+  <data name="categoryListLabel.Help" xml:space="preserve">
+    <value>Enter the list of resources/categories to use.</value>
+  </data>
+  <data name="categoryListLabel.Text" xml:space="preserve">
+    <value>Resources/Categories</value>
+  </data>
+  <data name="ConfirmDelete.Text" xml:space="preserve">
+    <value>Are you sure you want to delete this item? This action cannot be undone.</value>
+  </data>
+  <data name="noCategoriesLabel.Text" xml:space="preserve">
+    <value>List is empty.</value>
+  </data>
+  <data name="timeZoneLabel.Help" xml:space="preserve">
+    <value>Select the time zone where reservations will take place. This setting is of particular importance if your clients are located on different time zones.</value>
+  </data>
+  <data name="timeZoneLabel.Text" xml:space="preserve">
+    <value>Time Zone:</value>
+  </data>
+  <data name="Reminder.Text" xml:space="preserve">
+    <value>Reservation Reminder</value>
+  </data>
+  <data name="attachICalendarLabel.Help" xml:space="preserve">
+    <value>Select this option to attach an ICALENDAR file on email notifications, allowing users to import into their calendar application of choice.</value>
+  </data>
+  <data name="attachICalendarLabel.Text" xml:space="preserve">
+    <value>Attach iCal file:</value>
+  </data>
+  <data name="maxReservationsPerUserLabel.Help" xml:space="preserve">
+    <value>Specify the max. number of reservations per user (email address). Leave blank for unlimited.</value>
+  </data>
+  <data name="maxReservationsPerUserLabel.Text" xml:space="preserve">
+    <value>Max. Reservations per User:</value>
+  </data>
+  <data name="skipContactInfoLabel.Help" xml:space="preserve">
+    <value>Select this option to skip the contact info screen for authenticated users.</value>
+  </data>
+  <data name="skipContactInfoLabel.Text" xml:space="preserve">
+    <value>Skip Contact Info for Logged In Users:</value>
+  </data>
+  <data name="addWorkingHoursCommandButton.Text" xml:space="preserve">
+    <value>Add Working Hours...</value>
+  </data>
+  <data name="Save.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="sendRemindersViaLabel.Help" xml:space="preserve">
+    <value>Select the method(s) of sending reservation reminders. If you select SMS, you must configure your SMS settings in the SMS Settings &amp; Templates section below.</value>
+  </data>
+  <data name="sendRemindersViaLabel.Text" xml:space="preserve">
+    <value>Send Reminders Via:</value>
+  </data>
+  <data name="smsTemplateBodyLabel.Help" xml:space="preserve">
+    <value>SMS Template (2000 characters max.)
+
+Valid Tokens are:
+
+{Recipient}, {StartDateTime}, {EndDateTime}, {DurationHours}, {DurationMinutes}, {DurationTotalHours}, {DurationTotalMinutes}, {Category}, {Name}, {Email}, {Phone}, {Description}.
+
+Note: Both {StartDateTime} and {EndDateTime} can have a format parameter in the following form: {StartDateTime|[format]}.
+
+For more information regarding Date and Time Format Strings, please visit:
+
+http://msdn.microsoft.com/en-us/library/az4se3k1.aspx</value>
+  </data>
+  <data name="smsTemplateBodyLabel.Text" xml:space="preserve">
+    <value>SMS:</value>
+  </data>
+  <data name="smsTemplateLabel.Help" xml:space="preserve">
+    <value>Select the SMS template to edit from the list.</value>
+  </data>
+  <data name="smsTemplateLabel.Text" xml:space="preserve">
+    <value>Template:</value>
+  </data>
+  <data name="smsTemplatesSettings.Text" xml:space="preserve">
+    <value>SMS Settings &amp; Templates</value>
+  </data>
+  <data name="twilioAccountSIDLabel.Help" xml:space="preserve">
+    <value>Enter the Account SID of your Twilio account.</value>
+  </data>
+  <data name="twilioAccountSIDLabel.Text" xml:space="preserve">
+    <value>Twilio Account SID:</value>
+  </data>
+  <data name="twilioAuthTokenLabel.Help" xml:space="preserve">
+    <value>Enter the Auth Token of your Twilio account.</value>
+  </data>
+  <data name="twilioAuthTokenLabel.Text" xml:space="preserve">
+    <value>Twilio Auth Token:</value>
+  </data>
+  <data name="twilioFromLabel.Help" xml:space="preserve">
+    <value>Enter the Twilio phone number to use as the sender of the SMS.</value>
+  </data>
+  <data name="twilioFromLabel.Text" xml:space="preserve">
+    <value>Twilio Number:</value>
+  </data>
+  <data name="addFeeScheduleCommandButton.Text" xml:space="preserve">
+    <value>Add Fee Schedule...</value>
+  </data>
+  <data name="noFeeScheduleLabel.Text" xml:space="preserve">
+    <value>No fee schedule configured. Reservations are free.</value>
+  </data>
+  <data name="authorizeNetApiLoginLabel.Help" xml:space="preserve">
+    <value>Authorize.Net API Login ID. Refer to http://www.authorize.net/support/SIM_guide.pdf for more information</value>
+  </data>
+  <data name="authorizeNetApiLoginLabel.Text" xml:space="preserve">
+    <value>Authorize.Net API Login ID:</value>
+  </data>
+  <data name="authorizeNetMerchantHashLabel.Help" xml:space="preserve">
+    <value>Authorize.Net MD5-Hash. Must match your Authorize.Net entry, otherwise, payments will get processed but reservations will not get posted. Refer to http://www.authorize.net/support/SIM_guide.pdf for more information</value>
+  </data>
+  <data name="authorizeNetMerchantHashLabel.Text" xml:space="preserve">
+    <value>Authorize.Net MD5-Hash:</value>
+  </data>
+  <data name="AuthorizeNetSIM.Text" xml:space="preserve">
+    <value>Authorize.Net SIM (Server Intergration Method)</value>
+  </data>
+  <data name="authorizeNetTestModeLabel.Help" xml:space="preserve">
+    <value>Select this option if you want to use an Authorize.Net developer/sandbox account to test transactions. If enabled, the above settings (API Login, Transaction Key, and MD5-Hash) must belong to your sandbox account. You can sign-up or sign-in to you sanbox account at https://sandbox.authorize.net</value>
+  </data>
+  <data name="authorizeNetTestModeLabel.Text" xml:space="preserve">
+    <value>Use Authorize.Net Sandbox:</value>
+  </data>
+  <data name="authorizeNetTransactionKeyLabel.Help" xml:space="preserve">
+    <value>Authorize.Net Transaction Key. Refer to http://www.authorize.net/support/SIM_guide.pdf for more information</value>
+  </data>
+  <data name="authorizeNetTransactionKeyLabel.Text" xml:space="preserve">
+    <value>Authorize.Net Transaction Key:</value>
+  </data>
+  <data name="paymentMethodLabel.Help" xml:space="preserve">
+    <value>Select the payment processor/method to use. For Authorize.Net, make sure to customize your hosted payment page (Payment Form) and set your MD5-Hash accordingly (Refer to http://www.authorize.net/support/SIM_guide.pdf for more information)</value>
+  </data>
+  <data name="paymentMethodLabel.Text" xml:space="preserve">
+    <value>Payment Method:</value>
+  </data>
+  <data name="PayPalPaymentsStandard.Text" xml:space="preserve">
+    <value>PayPal Payments Standard</value>
+  </data>
+</root>

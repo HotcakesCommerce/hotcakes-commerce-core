@@ -1,0 +1,163 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_Reservation] ADD
+	SendReminderVia int NULL
+COMMIT
+GO
+
+UPDATE	{databaseOwner}[{objectQualifier}Reservations_Reservation]
+SET		SendReminderVia = 1
+WHERE	SendReminder = 1
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddReservation]
+    @TabModuleID INT,
+    @CategoryID INT,
+    @StartDateTime DATETIME,
+    @Duration INT,
+    @FirstName NVARCHAR(100),
+    @LastName NVARCHAR(100),
+    @Email NVARCHAR(100),
+    @Phone NVARCHAR(100),
+    @Description NTEXT,
+    @SendReminder BIT,
+    @SendReminderWhen INT,
+    @ReminderSent BIT,
+    @RequireConfirmation BIT,
+    @RequireConfirmationWhen INT,
+    @Confirmed BIT,
+    @CreatedByUserID INT,
+    @CreatedOnDate DATETIME,
+    @LastModifiedByUserID INT,
+    @LastModifiedOnDate DATETIME,
+    @SendReminderVia INT
+AS 
+    BEGIN
+        INSERT  INTO {databaseOwner}[{objectQualifier}Reservations_Reservation]
+                (
+                  [TabModuleID],
+                  [CategoryID],
+                  [StartDateTime],
+                  [Duration],
+                  [FirstName],
+                  [LastName],
+                  [Email],
+                  [Phone],
+                  [Description],
+                  [SendReminder],
+                  [SendReminderWhen],
+                  [ReminderSent],
+                  [RequireConfirmation],
+                  [RequireConfirmationWhen],
+                  [Confirmed],
+                  [CreatedByUserID],
+                  [CreatedOnDate],
+                  [LastModifiedByUserID],
+                  [LastModifiedOnDate],
+                  [SendReminderVia]
+                )
+        VALUES  (
+                  @TabModuleID,
+                  @CategoryID,
+                  @StartDateTime,
+                  @Duration,
+                  @FirstName,
+                  @LastName,
+                  @Email,
+                  @Phone,
+                  @Description,
+                  @SendReminder,
+                  @SendReminderWhen,
+                  @ReminderSent,
+                  @RequireConfirmation,
+                  @RequireConfirmationWhen,
+                  @Confirmed,
+                  @CreatedByUserID,
+                  @CreatedOnDate,
+                  @LastModifiedByUserID,
+                  @LastModifiedOnDate,
+                  @SendReminderVia
+                )
+
+        SELECT  SCOPE_IDENTITY()
+    END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdateReservation]
+    @TabModuleID INT,
+    @ReservationID INT,
+    @CategoryID INT,
+    @StartDateTime DATETIME,
+    @Duration INT,
+    @FirstName NVARCHAR(100),
+    @LastName NVARCHAR(100),
+    @Email NVARCHAR(100),
+    @Phone NVARCHAR(100),
+    @Description NTEXT,
+    @SendReminder BIT,
+    @SendReminderWhen INT,
+    @ReminderSent BIT,
+    @RequireConfirmation BIT,
+    @RequireConfirmationWhen INT,
+    @Confirmed BIT,
+    @CreatedByUserID INT,
+    @CreatedOnDate DATETIME,
+    @LastModifiedByUserID INT,
+    @LastModifiedOnDate DATETIME,
+	@SendReminderVia INT
+AS 
+    BEGIN
+        UPDATE  {databaseOwner}[{objectQualifier}Reservations_Reservation]
+        SET     [TabModuleID] = @TabModuleID,
+                [CategoryID] = @CategoryID,
+                [StartDateTime] = @StartDateTime,
+                [Duration] = @Duration,
+                [FirstName] = @FirstName,
+                [LastName] = @LastName,
+                [Email] = @Email,
+                [Phone] = @Phone,
+                [Description] = @Description,
+                [SendReminder] = @SendReminder,
+                [SendReminderWhen] = @SendReminderWhen,
+                [ReminderSent] = @ReminderSent,
+                [RequireConfirmation] = @RequireConfirmation,
+                [RequireConfirmationWhen] = @RequireConfirmationWhen,
+                [Confirmed] = @Confirmed,
+                [CreatedByUserID] = @CreatedByUserID,
+                [CreatedOnDate] = @CreatedOnDate,
+                [LastModifiedByUserID] = @LastModifiedByUserID,
+                [LastModifiedOnDate] = @LastModifiedOnDate,
+                [SendReminderVia] = @SendReminderVia
+        WHERE   [ReservationID] = @ReservationID
+    END
+GO
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

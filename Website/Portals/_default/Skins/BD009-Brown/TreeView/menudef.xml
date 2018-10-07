@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <template>Template.xslt</template>
+  <templateHead>TemplateHead.txt</templateHead>
+  <scripts>
+    <script jsObject="jQuery" />
+    <script jsObject="jQuery.fn.treeview">jquery.treeview.js</script>
+  </scripts>
+  <defaultClientOptions>
+    <clientOption name="animated" type="number" value="100" />
+  </defaultClientOptions>
+</manifest>

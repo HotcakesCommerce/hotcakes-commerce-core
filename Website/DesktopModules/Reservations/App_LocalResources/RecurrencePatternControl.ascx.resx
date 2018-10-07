@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AM.Text" xml:space="preserve">
+    <value>AM</value>
+  </data>
+  <data name="Daily.Text" xml:space="preserve">
+    <value>Daily</value>
+  </data>
+  <data name="dailyEveryDayTextBoxValidator.Text" xml:space="preserve">
+    <value>Number of days cannot be empty.</value>
+  </data>
+  <data name="dailyEveryDayTextBoxValidator2.Text" xml:space="preserve">
+    <value>Number of days must contain a valid numeric value.</value>
+  </data>
+  <data name="day.Text" xml:space="preserve">
+    <value>day</value>
+  </data>
+  <data name="daysLabel.Text" xml:space="preserve">
+    <value>day(s)</value>
+  </data>
+  <data name="ddhhmmLabel.Text" xml:space="preserve">
+    <value>(dd:hh:mm)</value>
+  </data>
+  <data name="EndAfter.Text" xml:space="preserve">
+    <value>End after:</value>
+  </data>
+  <data name="EndBy.Text" xml:space="preserve">
+    <value>End by:</value>
+  </data>
+  <data name="Every.Text" xml:space="preserve">
+    <value>Every</value>
+  </data>
+  <data name="EveryWeekday.Text" xml:space="preserve">
+    <value>Every weekday</value>
+  </data>
+  <data name="Monthly.Text" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="monthlyDayTextBoxValidator.Text" xml:space="preserve">
+    <value>Day cannot be empty.</value>
+  </data>
+  <data name="monthlyDayTextBoxValidator2.Text" xml:space="preserve">
+    <value>Day must contain a valid numeric value.</value>
+  </data>
+  <data name="monthlyMonthTextBox2Validator.Text" xml:space="preserve">
+    <value>Number of months cannot be empty.</value>
+  </data>
+  <data name="monthlyMonthTextBox2Validator2.Text" xml:space="preserve">
+    <value>Number of months must contain a valid numeric value.</value>
+  </data>
+  <data name="monthlyMonthTextBoxValidator.Text" xml:space="preserve">
+    <value>Number of months cannot be empty.</value>
+  </data>
+  <data name="monthlyMonthTextBoxValidator2.Text" xml:space="preserve">
+    <value>Number of months must contain a valid numeric value.</value>
+  </data>
+  <data name="months.Text" xml:space="preserve">
+    <value>month(s)</value>
+  </data>
+  <data name="NoEndDate.Text" xml:space="preserve">
+    <value>No end date</value>
+  </data>
+  <data name="occurrences.Text" xml:space="preserve">
+    <value>occurrences</value>
+  </data>
+  <data name="ofEvery.Text" xml:space="preserve">
+    <value>of every</value>
+  </data>
+  <data name="patternLabel.Text" xml:space="preserve">
+    <value>Pattern:</value>
+  </data>
+  <data name="PM.Text" xml:space="preserve">
+    <value>PM</value>
+  </data>
+  <data name="Range.Text" xml:space="preserve">
+    <value>Range:</value>
+  </data>
+  <data name="recurrenceAllDayEvent.Text" xml:space="preserve">
+    <value>All Day</value>
+  </data>
+  <data name="recurrenceDurationDaysValidator.Text" xml:space="preserve">
+    <value>Duration (Days) must contain a valid value.</value>
+  </data>
+  <data name="recurrenceDurationHoursValidator.Text" xml:space="preserve">
+    <value>Duration (Hours) must contain a valid value.</value>
+  </data>
+  <data name="recurrenceDurationLabel.Text" xml:space="preserve">
+    <value>Duration:</value>
+  </data>
+  <data name="recurrenceDurationMinutesValidator.Text" xml:space="preserve">
+    <value>Duration (Minutes) must contain a valid value.</value>
+  </data>
+  <data name="recurrenceDurationMinutesValidator2.Text" xml:space="preserve">
+    <value>Duration cannot be empty.</value>
+  </data>
+  <data name="recurrenceEndAfterTextBoxValidator.Text" xml:space="preserve">
+    <value>End after must contain a valid numeric value.</value>
+  </data>
+  <data name="recurrenceEndAfterTextBoxValidator2.Text" xml:space="preserve">
+    <value>End after cannot be empty.</value>
+  </data>
+  <data name="recurrenceEndDateValidator.Text" xml:space="preserve">
+    <value>End Date cannot be empty.</value>
+  </data>
+  <data name="recurrenceEndDateValidator2.Text" xml:space="preserve">
+    <value>End Date must contain a valid Date value.</value>
+  </data>
+  <data name="recurrenceEndDateValidator3.Text" xml:space="preserve">
+    <value>End Date must occur after the Start Date.</value>
+  </data>
+  <data name="recurrenceEndTimeHourValidator.Text" xml:space="preserve">
+    <value>End Time (Hour) cannot be empty.</value>
+  </data>
+  <data name="recurrenceEndTimeHourValidator2.Text" xml:space="preserve">
+    <value>End Time (Hour) must contain a valid value.</value>
+  </data>
+  <data name="recurrenceEndTimeLabel.Text" xml:space="preserve">
+    <value>End:</value>
+  </data>
+  <data name="recurrenceEndTimeMinutesValidator.Text" xml:space="preserve">
+    <value>End Time (Minutes) cannot be empty.</value>
+  </data>
+  <data name="recurrenceEndTimeMinutesValidator2.Text" xml:space="preserve">
+    <value>End Time (Minutes) must contain a valid value.</value>
+  </data>
+  <data name="recurrenceStartDateValidator.Text" xml:space="preserve">
+    <value>Start Date cannot be empty.</value>
+  </data>
+  <data name="recurrenceStartDateValidator2.Text" xml:space="preserve">
+    <value>Start Date must contain a valid DateTime value.</value>
+  </data>
+  <data name="recurrenceStartTimeHourValidator.Text" xml:space="preserve">
+    <value>Start Time (Hour) cannot be empty.</value>
+  </data>
+  <data name="recurrenceStartTimeHourValidator2.Text" xml:space="preserve">
+    <value>Start Time (Hour) must contain a valid value.</value>
+  </data>
+  <data name="recurrenceStartTimeLabel.Text" xml:space="preserve">
+    <value>Start:</value>
+  </data>
+  <data name="recurrenceStartTimeMinutesValidator.Text" xml:space="preserve">
+    <value>Start Time (Minutes) cannot be empty.</value>
+  </data>
+  <data name="recurrenceStartTimeMinutesValidator2.Text" xml:space="preserve">
+    <value>Start Time (Minutes) must contain a valid value.</value>
+  </data>
+  <data name="StartOn.Text" xml:space="preserve">
+    <value>Start on:</value>
+  </data>
+  <data name="Submit.Text" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="The.Text" xml:space="preserve">
+    <value>The</value>
+  </data>
+  <data name="timeLabel.Text" xml:space="preserve">
+    <value>Time:</value>
+  </data>
+  <data name="Weekly.Text" xml:space="preserve">
+    <value>Weekly</value>
+  </data>
+  <data name="weeklyEveryWeekTextBoxValidator.Text" xml:space="preserve">
+    <value>Number of weeks cannot be empty.</value>
+  </data>
+  <data name="weeklyEveryWeekTextBoxValidator2.Text" xml:space="preserve">
+    <value>Number of weeks must contain a valid numeric value.</value>
+  </data>
+  <data name="weeklyEveryWeekTextBoxValidator3.Text" xml:space="preserve">
+    <value>You must select at least one day for weekly recurrence.</value>
+  </data>
+  <data name="weeksLabel.Text" xml:space="preserve">
+    <value>week(s) on:</value>
+  </data>
+  <data name="Yearly.Text" xml:space="preserve">
+    <value>Yearly</value>
+  </data>
+  <data name="yearlyDayTextBoxValidator.Text" xml:space="preserve">
+    <value>Day cannot be empty.</value>
+  </data>
+  <data name="yearlyDayTextBoxValidator2.Text" xml:space="preserve">
+    <value>Day must contain a valid numeric value.</value>
+  </data>
+  <data name="dayRadioButton.Text" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="days.Text" xml:space="preserve">
+    <value>days</value>
+  </data>
+  <data name="First.Text" xml:space="preserve">
+    <value>first</value>
+  </data>
+  <data name="Fourth.Text" xml:space="preserve">
+    <value>fourth</value>
+  </data>
+  <data name="Friday.Text" xml:space="preserve">
+    <value>Friday</value>
+  </data>
+  <data name="Last.Text" xml:space="preserve">
+    <value>last</value>
+  </data>
+  <data name="Monday.Text" xml:space="preserve">
+    <value>Monday</value>
+  </data>
+  <data name="Saturday.Text" xml:space="preserve">
+    <value>Saturday</value>
+  </data>
+  <data name="Second.Text" xml:space="preserve">
+    <value>second</value>
+  </data>
+  <data name="Sunday.Text" xml:space="preserve">
+    <value>Sunday</value>
+  </data>
+  <data name="Third.Text" xml:space="preserve">
+    <value>third</value>
+  </data>
+  <data name="Thursday.Text" xml:space="preserve">
+    <value>Thursday</value>
+  </data>
+  <data name="Tuesday.Text" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
+  <data name="Wednesday.Text" xml:space="preserve">
+    <value>Wednesday</value>
+  </data>
+  <data name="WeekDay.Text" xml:space="preserve">
+    <value>weekday</value>
+  </data>
+  <data name="WeekendDay.Text" xml:space="preserve">
+    <value>weekend day</value>
+  </data>
+</root>

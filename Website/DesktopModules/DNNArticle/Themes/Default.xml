@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ThemeInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ArticleListCSSFile />
+  <ShowEditIcon>false</ShowEditIcon>
+  <RepeatLayout>1</RepeatLayout>
+  <Template>[EDIT][PUBLISHDATEICON]&lt;a href="[VIEWURL]" class="Head articletitle"&gt;[TITLE]&lt;/a&gt; &lt;br&gt; &lt;span class="SubSubHead clear"&gt; Created by [USERDISPLAYNAME] on [PUBLISHDATE]&lt;/span&gt; &lt;p&gt;&lt;div class="Normal"&gt;[SHORTENDESCRIPTION:100] &lt;/div&gt; &lt;a class="CommandButton" href="[VIEWURL]"&gt;Read More..&lt;/a&gt;&lt;/p&gt; &lt;hr /&gt;</Template>
+  <TemplateTypeSetting>2</TemplateTypeSetting>
+  <TemplateFileSetting>/dnn540dev/DesktopModules/DNNArticle/Templates/Table.html</TemplateFileSetting>
+  <HeaderTemplate>&lt;div class="article[MODULEID]"&gt;</HeaderTemplate>
+  <HeaderTemplateTypeSetting>2</HeaderTemplateTypeSetting>
+  <HeaderTemplateFileSetting>/dnn540dev/DesktopModules/DNNArticle/Templates/ArticleListHeaderTemplate/TableHeader.htm</HeaderTemplateFileSetting>
+  <FooterTemplate>&lt;/div&gt;</FooterTemplate>
+  <FooterTemplateTypeSetting>2</FooterTemplateTypeSetting>
+  <FooterTemplateFileSetting>/dnn540dev/DesktopModules/DNNArticle/Templates/ArticleListFooterTemplate/TableFooter.htm</FooterTemplateFileSetting>
+</ThemeInfo>

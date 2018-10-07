@@ -1,0 +1,20 @@
+﻿<script src="~/desktopmodules/mvc/GDSModuleMVC/content/js/angular.min.js"></script>
+<script src="~/desktopmodules/mvc/GDSModuleMVC/content/js/AngularFormApp.js"></script>
+<script src="~/desktopmodules/mvc/GDSModuleMVC/content/js/angular-ui-router.min.js"></script>
+<div ng-app="angularFormsApp">
+    <div ng-controller="GiftCard" class="row">
+        @if (Session["GiftCardValue"] == null)
+        {
+
+
+            <div class="form-group">
+                <label for="giftInput" class="control-label">رمز کارت هدیه</label>
+                <input placeholder="رمز کارت هدیه را وارد نمایید" type="text" id="giftInput" name="giftInput" class="form-control" ng-model="giftInput" />
+                <a class="btn btn-primary" ng-click="GiftButton()">ثبت کارت هدیه</a>
+            </div>}
+        else
+        {
+            <p>کارت هدیه شما موجود و رمز آن @Convert.ToString(Session["GiftCardValue"])</p>
+        }
+    </div>
+</div>

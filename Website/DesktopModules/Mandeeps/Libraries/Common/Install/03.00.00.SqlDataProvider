@@ -1,0 +1,38 @@
+/****** Object:  Table {databaseOwner}[Mandeeps_Common_HTMLEditor]    Script Date: 1/4/2018 10:34:12 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[Mandeeps_Common_HTMLEditor]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[Mandeeps_Common_HTMLEditor](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[UID] [nvarchar](max) NOT NULL,
+	[ProfileID] [int] NOT NULL,
+	[Settings] [nvarchar](max) NOT NULL
+ CONSTRAINT [PK_Mandeeps_Common_HTMLEditor] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO
+/****** Object:  Table {databaseOwner}[Mandeeps_Common_HTMLEditor_Profile]    Script Date: 1/4/2018 10:34:12 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[Mandeeps_Common_HTMLEditor_Profile]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[Mandeeps_Common_HTMLEditor_Profile](
+	[ProfileID] [int] IDENTITY(1,1) NOT NULL,
+	[PortalID] [int] NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+	[Value] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_Mandeeps_Common_HTMLEditor_Profile] PRIMARY KEY CLUSTERED 
+(
+	[ProfileID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO

@@ -1,0 +1,184 @@
+.zldnnpop #facebox .b
+{
+    background: url("../source/a.png");
+}
+
+.zldnnpop #facebox .tl
+{
+    background: url("../source/a.png");
+}
+
+.zldnnpop #facebox .tr
+{
+    background: url("../source/a.png");
+}
+
+.zldnnpop #facebox .bl
+{
+    background: url("../source/a.png");
+}
+
+.zldnnpop #facebox .br
+{
+    background: url("../source/a.png");
+}
+
+.zldnnpop #facebox
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    text-align: left;
+}
+
+.zldnnpop #facebox .popup
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.zldnnpop #facebox table
+{
+    border-collapse: collapse;
+}
+
+.zldnnpop #facebox td
+{
+    border-bottom: 0;
+    padding: 0;
+}
+
+.zldnnpop #facebox .body
+{
+    padding: 10px;
+    background-color: #fff;
+    height: 100%;
+}
+
+.zldnnpop #facebox .loading
+{
+    text-align: center;
+    background-image:url(../source/loading.gif);
+    background-position:center ;
+    background-repeat:no-repeat ;
+}
+
+.zldnnpop #facebox .image
+{
+    text-align: center;
+}
+
+.zldnnpop #facebox iframe
+{
+    /*overflow: hidden;*/
+}
+
+.zldnnpop #facebox img
+{
+    border: 0;
+    margin: 0;
+}
+.zldnnpop #facebox .content
+{
+    height: 100%;
+}
+.zldnnpop #facebox .action
+{
+    background-color: white;
+    border-top: 1px solid #CCCCCC;
+    padding-top: 5px;
+    margin-top: 10px;
+    text-align: right;
+}
+
+.zldnnpop #facebox .functionbutton
+{
+    display:inline-block;
+    float:right;
+    background-position:center ;
+    background-repeat:no-repeat ;
+}
+
+.zldnnpop #facebox .closespan
+{
+    display:inline-block;
+    cursor:hand;
+    padding: 0 10px 0 10px;
+    margin: 3px;
+    width: 30px;
+    height: 20px;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-image: url("../source/dialogclose.png");
+}
+
+.zldnnpop #facebox .submitspan
+{
+    display:inline-block;
+    cursor:hand;
+    padding: 0 10px 0 10px;
+    margin: 3px;
+    width: 30px;
+    height: 20px;
+    background-position:center ;
+    background-repeat:no-repeat ;
+    background-image: url("../source/save.png");
+}
+.zldnnpop #facebox .changesizespan
+{
+    display:inline-block;
+    cursor:hand;
+    padding: 0 10px 0 10px;
+    margin: 3px;
+    width: 30px;
+    height: 20px;
+    background-position:center ;
+    background-repeat:no-repeat ;
+    background-image: url("../source/refresh.gif");
+}
+.zldnnpop #facebox .deselectspan
+{
+    display:inline-block;
+    cursor:hand;
+    background-position:center ;
+    background-repeat:no-repeat ;
+    /*background-image: url("../source/save.png");*/
+}
+
+.zldnnpop #facebox .tl, #facebox .tr, #facebox .bl, #facebox .br
+{
+    height: 10px;
+    width: 10px;
+    overflow: hidden;
+    padding: 0;
+}
+
+.zldnnpop #facebox_overlay
+{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+.facebox_hide
+{
+    z-index: -100;
+}
+
+.facebox_overlayBG
+{
+    background-color: #000;
+    z-index: 999;
+}
+
+* html #facebox_overlay
+{
+    /* ie6 hack */
+    position: absolute;
+    height: expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + 'px');
+}
+

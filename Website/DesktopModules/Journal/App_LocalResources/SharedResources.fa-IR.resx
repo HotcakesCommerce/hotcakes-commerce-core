@@ -1,0 +1,1085 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="comment.Text" xml:space="preserve">
+    <value>دیدگاه</value>
+  </data>
+  <data name="Comments.Text" xml:space="preserve">
+    <value>نظرات</value>
+  </data>
+  <data name="journal_status.Text" xml:space="preserve">
+    <value>&lt;div class="Tg Sb" &gt;
+    &lt;div class="qf"&gt;
+        &lt;div class="ii"&gt;
+            &lt;span class="a-n Hw Ph"&gt;&lt;/span&gt;
+            &lt;span class="g-s-n-aa Wk" &gt;
+                &lt;img src="[BaseUrl]/profilepic.ashx?userId=[JournalAuthor:Id]&amp;w=60" class="Ol Rf Ep"/&gt;
+            &lt;/span&gt;
+            &lt;div class="Jst8Q MI"&gt;
+                &lt;header&gt;
+                    &lt;h3 class="cK"&gt;
+                        &lt;span  class="Sg Ob Tc"&gt;
+                            &lt;span dir="ltr"&gt;
+                                [JournalControl:AUTHORNAMELINK]
+                            &lt;/span&gt;
+                            &amp;rlm;
+                        &lt;/span&gt;
+                    &lt;/h3&gt;
+                    &lt;span class="Wp mc"&gt;
+                        &lt;span class="Ri lu"&gt;
+                            &lt;abbr title="[journalItem:DateCreated]" class="g-M-n g-s-n-aa ik Bf"&gt;[journalitem:TimeFrame]&lt;/abbr&gt;
+                        &lt;/span&gt; 
+                    &lt;/span&gt;
+                &lt;/header&gt;
+            &lt;/div&gt;
+            &lt;div class="ze ie"&gt;
+            &lt;/div&gt;
+            &lt;div class="ci gv"&gt;
+                &lt;div class="eE Fp"&gt;
+                    &lt;div class="wm VC"&gt;
+                        [JournalItem:Summary]
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="LI"&gt;
+                {CanComment} [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;nbsp;·&amp;nbsp;&lt;/span&gt;{/CanComment}
+                &lt;div class="rE PJ" &gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="Lj FE"&gt;
+            &lt;div class="fC YQ"&gt;
+            &lt;/div&gt;
+            &lt;div class="Se Eu"&gt;
+                &lt;div class="O7 mP"&gt;
+                    &lt;div class="Hq uz"&gt;
+                        &lt;div class="Gq"&gt;
+                            &lt;div class="Ho gx" &gt;
+                                [JOURNALCONTROL:LIKELIST]
+                                &lt;div class="mydnnPostCommentList"&gt;
+                                    [JOURNALCONTROL:COMMENTAREA]
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div style="clear:both;"&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="{resx:like}.Text" xml:space="preserve">
+    <value>خوشم آمد</value>
+  </data>
+  <data name="{resx:unlike}.Text" xml:space="preserve">
+    <value>خوشم نیامد</value>
+  </data>
+  <data name="{resx:and}.Text" xml:space="preserve">
+    <value>و</value>
+  </data>
+  <data name="{resx:likesthis}.Text" xml:space="preserve">
+    <value>این را می پسندد.</value>
+  </data>
+  <data name="{resx:likethis}.Text" xml:space="preserve">
+    <value>از این خوشتان آمده است.</value>
+  </data>
+  <data name="{resx:other}.Text" xml:space="preserve">
+    <value>دیگر</value>
+  </data>
+  <data name="{resx:others}.Text" xml:space="preserve">
+    <value>دیگران</value>
+  </data>
+  <data name="{resx:you}.Text" xml:space="preserve">
+    <value>شما</value>
+  </data>
+  <data name="{resx:youlikethis}.Text" xml:space="preserve">
+    <value>شما از این خوشتان آمد.</value>
+  </data>
+  <data name="{resx:comment}.Text" xml:space="preserve">
+    <value>ثبت</value>
+  </data>
+  <data name="{resx:leavecomment}.Text" xml:space="preserve">
+    <value>دیدگاه خود را بنویسید</value>
+  </data>
+  <data name="journal_link.Text" xml:space="preserve">
+    <value>&lt;div class="Tg Sb" &gt;
+    &lt;div class="qf"&gt;
+        &lt;div class="ii"&gt;
+            &lt;span class="a-n Hw Ph"&gt;&lt;/span&gt;
+            &lt;span class="g-s-n-aa Wk" &gt;
+                &lt;img src="[BaseUrl]/profilepic.ashx?userId=[JournalAuthor:Id]&amp;w=60" class="Ol Rf Ep"/&gt;
+            &lt;/span&gt;
+            &lt;div class="Jst8Q MI"&gt;
+                &lt;header&gt;
+                    &lt;h3 class="cK"&gt;
+                        &lt;span  class="Sg Ob Tc"&gt;
+                            &lt;span dir="ltr"&gt;
+                                [JournalControl:AUTHORNAMELINK]
+                            &lt;/span&gt;
+                            &amp;rlm;
+                        &lt;/span&gt;
+                    &lt;/h3&gt;
+                    &lt;span class="Wp mc"&gt;
+                        &lt;span class="Ri lu"&gt;
+                            &lt;abbr title="[journalItem:DateCreated]" class="g-M-n g-s-n-aa ik Bf"&gt;[journalitem:TimeFrame]&lt;/abbr&gt;
+                        &lt;/span&gt; 
+                    &lt;/span&gt;
+                &lt;/header&gt;
+            &lt;/div&gt;
+            &lt;div class="ze ie"&gt;
+            &lt;/div&gt;
+            &lt;div class="ci gv"&gt;
+                &lt;div class="eE Fp"&gt;
+                    &lt;div class="wm VC"&gt;
+                        [JournalItem:Summary]
+                    &lt;/div&gt;
+		            &lt;div class="jlink dnnClear"&gt;
+			            &lt;img src="[journaldata:ImageUrl]" /&gt;
+			            &lt;div&gt;&lt;a href="[journaldata:Url]"&gt;[journaldata:Title]&lt;/a&gt;&lt;br /&gt;[journaldata:Description]&lt;/div&gt;
+		            &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="kt"&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="LI"&gt;
+                {CanComment} [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;nbsp;·&amp;nbsp;&lt;/span&gt;{/CanComment}
+                &lt;div class="rE PJ" &gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="Lj FE"&gt;
+            &lt;div class="fC YQ"&gt;
+            &lt;/div&gt;
+            &lt;div class="Se Eu"&gt;
+                &lt;div class="O7 mP"&gt;
+                    &lt;div class="Hq uz"&gt;
+                        &lt;div class="Gq"&gt;
+                            &lt;div class="Ho gx" &gt;
+                                [JOURNALCONTROL:LIKELIST]
+                                &lt;div class="mydnnPostCommentList"&gt;
+                                    [JOURNALCONTROL:COMMENTAREA]
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div style="clear:both;"&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="journal_photo.Text" xml:space="preserve">
+    <value>&lt;div class="Tg Sb" &gt;
+    &lt;div class="qf"&gt;
+        &lt;div class="ii"&gt;
+            &lt;span class="a-n Hw Ph"&gt;&lt;/span&gt;
+            &lt;span class="g-s-n-aa Wk" &gt;
+                &lt;img src="[BaseUrl]/profilepic.ashx?userId=[JournalAuthor:Id]&amp;w=60" class="Ol Rf Ep"/&gt;
+            &lt;/span&gt;
+            &lt;div class="Jst8Q MI"&gt;
+                &lt;header&gt;
+                    &lt;h3 class="cK"&gt;
+                        &lt;span  class="Sg Ob Tc"&gt;
+                            &lt;span dir="ltr"&gt;
+                                [JournalControl:AUTHORNAMELINK]
+                            &lt;/span&gt;
+                            &amp;rlm;
+                        &lt;/span&gt;
+                    &lt;/h3&gt;
+                    &lt;span class="Wp mc"&gt;
+                        &lt;span class="Ri lu"&gt;
+                            &lt;abbr title="[journalItem:DateCreated]" class="g-M-n g-s-n-aa ik Bf" &gt;[journalitem:TimeFrame]&lt;/abbr&gt;
+                        &lt;/span&gt; 
+                    &lt;/span&gt;
+                &lt;/header&gt;
+            &lt;/div&gt;
+            &lt;div class="ze ie"&gt;
+            &lt;/div&gt;
+            &lt;div class="ci gv"&gt;
+                &lt;div class="eE Fp"&gt;
+                    &lt;div class="wm VC"&gt;
+                        [JournalItem:Summary]
+                    &lt;/div&gt;
+                    &lt;div class="jphoto dnnClear"&gt;
+			            &lt;img src="[journaldata:ImageUrl]" style="max-width:350px;cursor:pointer;" onclick="mydnnPopupPhoto('pnl[JournalItem:journalid]')" /&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="kt"&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="LI"&gt;
+                {CanComment} [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;nbsp;·&amp;nbsp;&lt;/span&gt;{/CanComment}
+                &lt;div class="rE PJ" &gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="Lj FE"&gt;
+            &lt;div class="fC YQ"&gt;
+            &lt;/div&gt;
+            &lt;div class="Se Eu"&gt;
+                &lt;div class="O7 mP"&gt;
+                    &lt;div class="Hq uz"&gt;
+                        &lt;div class="Gq"&gt;
+                            &lt;div class="Ho gx" &gt;
+                                [JOURNALCONTROL:LIKELIST]
+                                &lt;div class="mydnnPostCommentList"&gt;
+                                    [JOURNALCONTROL:COMMENTAREA]
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div style="clear:both;"&gt;&lt;/div&gt;
+&lt;div class="mydnnmain-popup-bg" id="pnl[JournalItem:journalid]" onclick="mydnnClosePopupPhoto('pnl[JournalItem:journalid]')"&gt;
+    &lt;div class="mydnnmain-phto-pnl" onmouseover="setFirstClick(false)" onmouseout="setFirstClick(true)"&gt;
+        &lt;div class="right-phto-pnl"&gt;
+            &lt;img src="[journaldata:ImageUrl]" style="max-width:600px;" alt="" class="mydnn-post-img"/&gt;
+        &lt;/div&gt;
+        &lt;div class="left-phto-pnl"&gt;
+            &lt;div class="top-close-icon"&gt;
+                &lt;a href="javascript:void(0)" class="closeTheater" onclick="mydnnClosePopupPhoto('pnl[JournalItem:journalid]',true)"&gt;&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;div dir="rtl" class="popup-mydnnPostPanel"  &gt;
+                &lt;div class="mydnnPostrightSide"&gt;
+                    &lt;span&gt;
+                        &lt;img src="[BaseUrl]/profilepic.ashx?userId=[JournalAuthor:Id]&amp;w=60" /&gt;
+                    &lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div class="popup-mydnnPostleftSide journalitem"&gt;
+                    &lt;div class="mydnnPostTop"&gt;
+                        [JournalControl:AUTHORNAMELINK]
+                    &lt;/div&gt;
+                    &lt;span class="mydnnPostBody"&gt;
+                        [JournalItem:Summary]
+                    &lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div class="mydnnPostFooter"&gt;
+                    {CanComment} [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;nbsp;·&amp;nbsp;&lt;/span&gt; {/CanComment}
+                    &lt;abbr title="[journalItem:DateCreated]"&gt;[journalitem:TimeFrame]&lt;/abbr&gt;&lt;span&gt;&amp;nbsp;·&amp;nbsp;&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div style="clear:both;"&gt;&lt;/div&gt;
+                &lt;div class="mydnnPostCommentPanel journalitem"&gt;
+                    &lt;div class="mydnnPostCommentPanelTop"&gt;
+                    &lt;/div&gt;
+                    &lt;div class="mydnnPostCommentBody" &gt;
+                        [JOURNALCONTROL:LIKELIST]
+                        &lt;div class="mydnnPostCommentList"&gt;
+                            [JOURNALCONTROL:MYDNNCOMMENTAREA]
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div style="clear:both;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+
+    $('#pnl[JournalItem:journalid]').moveTo('#Body');
+
+    var firstClick = true;
+
+    function mydnnPopupPhoto(id) {
+        $("#" + id).fadeIn(200)
+    }
+    function mydnnClosePopupPhoto(id, b) {
+        if (b || firstClick) {
+            $("#" + id).fadeOut(300)
+            firstClick = true;
+        }
+    }
+
+    function setFirstClick(b) {
+        firstClick = b;
+    }
+
+    $(document).keydown(function (e) {
+        // ESCAPE key pressed
+        if (e.keyCode == 27) {
+            $(".mydnnmain-popup-bg").fadeOut(300);
+        }
+    });
+    
+&lt;/script&gt;</value>
+  </data>
+  <data name="UserFolderTitle.Text" xml:space="preserve">
+    <value>فایل های من</value>
+  </data>
+  <data name="journal_file.Text" xml:space="preserve">
+    <value>&lt;div class="Tg Sb" &gt;
+    &lt;div class="qf"&gt;
+        &lt;div class="ii"&gt;
+            &lt;span class="a-n Hw Ph"&gt;&lt;/span&gt;
+            &lt;span class="g-s-n-aa Wk" &gt;
+                &lt;img src="[BaseUrl]/profilepic.ashx?userId=[JournalAuthor:Id]&amp;w=60" class="Ol Rf Ep"/&gt;
+            &lt;/span&gt;
+            &lt;div class="Jst8Q MI"&gt;
+                &lt;header&gt;
+                    &lt;h3 class="cK"&gt;
+                        &lt;span  class="Sg Ob Tc"&gt;
+                            &lt;span dir="ltr"&gt;
+                                [JournalControl:AUTHORNAMELINK]
+                            &lt;/span&gt;
+                            &amp;rlm;
+                        &lt;/span&gt;
+                    &lt;/h3&gt;
+                    &lt;span class="Wp mc"&gt;
+                        &lt;span class="Ri lu"&gt;
+                            &lt;abbr title="[journalItem:DateCreated]" class="g-M-n g-s-n-aa ik Bf"&gt;[journalitem:TimeFrame]&lt;/abbr&gt;
+                        &lt;/span&gt; 
+                    &lt;/span&gt;
+                &lt;/header&gt;
+            &lt;/div&gt;
+            &lt;div class="ze ie"&gt;
+            &lt;/div&gt;
+            &lt;div class="ci gv"&gt;
+                &lt;div class="eE Fp"&gt;
+                    &lt;div class="wm VC"&gt;
+                        [JournalItem:Summary]
+                    &lt;/div&gt;
+		            &lt;div class="jfile dnnClear"&gt;
+			            &lt;img src="[journaldata:ImageUrl]" /&gt;
+			            &lt;div&gt;&lt;a href="[journaldata:Url]" target="_blank"&gt;[journaldata:Title]&lt;/a&gt;&lt;br /&gt;[journaldata:Description]&lt;/div&gt;
+		            &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="kt"&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="LI"&gt;
+                {CanComment} [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;nbsp;·&amp;nbsp;&lt;/span&gt;{/CanComment}
+                &lt;div class="rE PJ" &gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="Lj FE"&gt;
+            &lt;div class="fC YQ"&gt;
+            &lt;/div&gt;
+            &lt;div class="Se Eu"&gt;
+                &lt;div class="O7 mP"&gt;
+                    &lt;div class="Hq uz"&gt;
+                        &lt;div class="Gq"&gt;
+                            &lt;div class="Ho gx" &gt;
+                                [JOURNALCONTROL:LIKELIST]
+                                &lt;div class="mydnnPostCommentList"&gt;
+                                    [JOURNALCONTROL:COMMENTAREA]
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div style="clear:both;"&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="file.Text" xml:space="preserve">
+    <value>فایل ها</value>
+  </data>
+  <data name="link.Text" xml:space="preserve">
+    <value>لینک ها</value>
+  </data>
+  <data name="photo.Text" xml:space="preserve">
+    <value>تصاویر</value>
+  </data>
+  <data name="status.Text" xml:space="preserve">
+    <value>مطالب دیوار</value>
+  </data>
+  <data name="forum_reply.Text" xml:space="preserve">
+    <value>پاسخ های انجمن</value>
+  </data>
+  <data name="forum_topic.Text" xml:space="preserve">
+    <value>موضوعات انجمن</value>
+  </data>
+  <data name="journal_forum_reply.Text" xml:space="preserve">
+    <value>&lt;div class="Tg Sb" &gt;
+    &lt;div class="qf"&gt;
+        &lt;div class="ii"&gt;
+            &lt;span class="a-n Hw Ph"&gt;&lt;/span&gt;
+            &lt;span class="g-s-n-aa Wk" &gt;
+                &lt;img src="[BaseUrl]/profilepic.ashx?userId=[JournalAuthor:Id]&amp;w=60" class="Ol Rf Ep"/&gt;
+            &lt;/span&gt;
+            &lt;div class="Jst8Q MI"&gt;
+                &lt;header&gt;
+                    &lt;h3 class="cK"&gt;
+                        &lt;span  class="Sg Ob Tc"&gt;
+                            &lt;span dir="ltr"&gt;
+                                [JournalControl:AUTHORNAMELINK] در انجمن به موضوع &lt;a href="[journaldata:Url]"&gt;[journalitem:Title]&lt;/a&gt; پاسخ داد! 
+                            &lt;/span&gt;
+                            &amp;rlm;
+                        &lt;/span&gt;
+                    &lt;/h3&gt;
+                    &lt;span class="Wp mc"&gt;
+                        &lt;span class="Ri lu"&gt;
+                            {CanComment} [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;nbsp;·&amp;nbsp;&lt;/span&gt;&lt;a href="[journaldata:Url]"&gt;... مشاهده جزئیات ...&lt;/a&gt;{/CanComment}
+                            &lt;abbr title="[journalItem:DateCreated]" class="g-M-n g-s-n-aa ik Bf"&gt;[journalitem:TimeFrame]&lt;/abbr&gt;
+                        &lt;/span&gt; 
+                    &lt;/span&gt;
+                &lt;/header&gt;
+            &lt;/div&gt;
+            &lt;div class="ze ie"&gt;
+            &lt;/div&gt;
+            &lt;div class="ci gv"&gt;
+                &lt;div class="eE Fp"&gt;
+                    &lt;div class="wm VC"&gt;
+                        [JournalItem:Summary]
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="LI"&gt;
+                {CanComment} [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;nbsp;·&amp;nbsp;&lt;/span&gt;{/CanComment}
+                &lt;div class="rE PJ" &gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="Lj FE"&gt;
+            &lt;div class="fC YQ"&gt;
+            &lt;/div&gt;
+            &lt;div class="Se Eu"&gt;
+                &lt;div class="O7 mP"&gt;
+                    &lt;div class="Hq uz"&gt;
+                        &lt;div class="Gq"&gt;
+                            &lt;div class="Ho gx" &gt;
+                                [JOURNALCONTROL:LIKELIST]
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div style="clear:both;"&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="journal_forum_topic.Text" xml:space="preserve">
+    <value>&lt;div class="Tg Sb" &gt;
+    &lt;div class="qf"&gt;
+        &lt;div class="ii"&gt;
+            &lt;span class="a-n Hw Ph"&gt;&lt;/span&gt;
+            &lt;span class="g-s-n-aa Wk" &gt;
+                &lt;img src="[BaseUrl]/profilepic.ashx?userId=[JournalAuthor:Id]&amp;w=60" class="Ol Rf Ep"/&gt;
+            &lt;/span&gt;
+            &lt;div class="Jst8Q MI"&gt;
+                &lt;header&gt;
+                    &lt;h3 class="cK"&gt;
+                        &lt;span  class="Sg Ob Tc"&gt;
+                            &lt;span dir="ltr"&gt;
+                                [JournalControl:AUTHORNAMELINK] یک موضوع جدید در انجمن با عنوان &lt;a href="[journaldata:Url]"&gt;[journalitem:Title]&lt;/a&gt; ایجاد نمود!
+                            &lt;/span&gt;
+                            &amp;rlm;
+                        &lt;/span&gt;
+                    &lt;/h3&gt;
+                    &lt;span class="Wp mc"&gt;
+                        &lt;span class="Ri lu"&gt;
+                            {CanComment} [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;nbsp;·&amp;nbsp;&lt;/span&gt;&lt;a href="[journaldata:Url]"&gt;... مشاهده جزئیات ...&lt;/a&gt;{/CanComment}
+                            &lt;abbr title="[journalItem:DateCreated]" class="g-M-n g-s-n-aa ik Bf"&gt;[journalitem:TimeFrame]&lt;/abbr&gt;
+                        &lt;/span&gt; 
+                    &lt;/span&gt;
+                &lt;/header&gt;
+            &lt;/div&gt;
+            &lt;div class="ze ie"&gt;
+            &lt;/div&gt;
+            &lt;div class="ci gv"&gt;
+                &lt;div class="eE Fp"&gt;
+                    &lt;div class="wm VC"&gt;
+                        [JournalItem:Summary]
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="LI"&gt;
+                {CanComment} [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;nbsp;·&amp;nbsp;&lt;/span&gt;{/CanComment}
+                &lt;div class="rE PJ" &gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="Lj FE"&gt;
+            &lt;div class="fC YQ"&gt;
+            &lt;/div&gt;
+            &lt;div class="Se Eu"&gt;
+                &lt;div class="O7 mP"&gt;
+                    &lt;div class="Hq uz"&gt;
+                        &lt;div class="Gq"&gt;
+                            &lt;div class="Ho gx" &gt;
+                                [JOURNALCONTROL:LIKELIST]
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div style="clear:both;"&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="blog.Text" xml:space="preserve">
+    <value>مطالب بلاگ</value>
+  </data>
+  <data name="journal_blog.Text" xml:space="preserve">
+    <value>&lt;div class="Tg Sb" &gt;
+    &lt;div class="qf"&gt;
+        &lt;div class="ii"&gt;
+            &lt;span class="a-n Hw Ph"&gt;&lt;/span&gt;
+            &lt;span class="g-s-n-aa Wk" &gt;
+                &lt;img src="[BaseUrl]/profilepic.ashx?userId=[JournalAuthor:Id]&amp;w=60" class="Ol Rf Ep"/&gt;
+            &lt;/span&gt;
+            &lt;div class="Jst8Q MI"&gt;
+                &lt;header&gt;
+                    &lt;h3 class="cK"&gt;
+                        &lt;span  class="Sg Ob Tc"&gt;
+                            &lt;span dir="ltr"&gt;
+                                [JournalControl:AUTHORNAMELINK] در بلاگ خود مطلب جدیدی با عنوان &lt;a href="[journaldata:Url]"&gt;[journalitem:Title]&lt;/a&gt;  منتشر نمود! 
+                            &lt;/span&gt;
+                            &amp;rlm;
+                        &lt;/span&gt;
+                    &lt;/h3&gt;
+                    &lt;span class="Wp mc"&gt;
+                        &lt;span class="Ri lu"&gt;
+                            {CanComment} [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;nbsp;·&amp;nbsp;&lt;/span&gt;&lt;a href="[journaldata:Url]"&gt;... مشاهده جزئیات ...&lt;/a&gt;{/CanComment}
+                            &lt;abbr title="[journalItem:DateCreated]" class="g-M-n g-s-n-aa ik Bf"&gt;[journalitem:TimeFrame]&lt;/abbr&gt;
+                        &lt;/span&gt; 
+                    &lt;/span&gt;
+                &lt;/header&gt;
+            &lt;/div&gt;
+            &lt;div class="ze ie"&gt;
+            &lt;/div&gt;
+            &lt;div class="ci gv"&gt;
+                &lt;div class="eE Fp"&gt;
+                    &lt;div class="wm VC"&gt;
+                        [JournalItem:Summary]
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="LI"&gt;
+                {CanComment} [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;nbsp;·&amp;nbsp;&lt;/span&gt;{/CanComment}
+                &lt;div class="rE PJ" &gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="Lj FE"&gt;
+            &lt;div class="fC YQ"&gt;
+            &lt;/div&gt;
+            &lt;div class="Se Eu"&gt;
+                &lt;div class="O7 mP"&gt;
+                    &lt;div class="Hq uz"&gt;
+                        &lt;div class="Gq"&gt;
+                            &lt;div class="Ho gx" &gt;
+                                [JOURNALCONTROL:LIKELIST]
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div style="clear:both;"&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="groupcreate.Text" xml:space="preserve">
+    <value>گروه جدید</value>
+  </data>
+  <data name="groupjoin.Text" xml:space="preserve">
+    <value>پیوستن به گروه</value>
+  </data>
+  <data name="journal_groupcreate.Text" xml:space="preserve">
+    <value>&lt;div class="Tg Sb" &gt;
+    &lt;div class="qf"&gt;
+        &lt;div class="ii"&gt;
+            &lt;span class="a-n Hw Ph"&gt;&lt;/span&gt;
+            &lt;span class="g-s-n-aa Wk" &gt;
+                &lt;img src="[BaseUrl]/profilepic.ashx?userId=[JournalAuthor:Id]&amp;w=60" class="Ol Rf Ep"/&gt;
+            &lt;/span&gt;
+            &lt;div class="Jst8Q MI"&gt;
+                &lt;header&gt;
+                    &lt;h3 class="cK"&gt;
+                        &lt;span  class="Sg Ob Tc"&gt;
+                            &lt;span dir="ltr"&gt;
+                                [JournalControl:AUTHORNAMELINK] به گروه &lt;a href="[journaldata:Url]"&gt;[JournalItem:Title]&lt;/a&gt; پیوست!
+                            &lt;/span&gt;
+                            &amp;rlm;
+                        &lt;/span&gt;
+                    &lt;/h3&gt;
+                    &lt;span class="Wp mc"&gt;
+                        &lt;span class="Ri lu"&gt;
+                            &lt;abbr title="[journalItem:DateCreated]" class="g-M-n g-s-n-aa ik Bf"&gt;[journalitem:TimeFrame]&lt;/abbr&gt;
+                        &lt;/span&gt; 
+                    &lt;/span&gt;
+                &lt;/header&gt;
+            &lt;/div&gt;
+            &lt;div class="ze ie"&gt;
+            &lt;/div&gt;
+            &lt;div class="ci gv"&gt;
+                &lt;div class="eE Fp"&gt;
+                    &lt;div class="wm VC"&gt;
+                        [JournalItem:Summary]
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="LI"&gt;
+                {CanComment} [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;nbsp;·&amp;nbsp;&lt;/span&gt;{/CanComment}
+                &lt;div class="rE PJ" &gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="Lj FE"&gt;
+            &lt;div class="fC YQ"&gt;
+            &lt;/div&gt;
+            &lt;div class="Se Eu"&gt;
+                &lt;div class="O7 mP"&gt;
+                    &lt;div class="Hq uz"&gt;
+                        &lt;div class="Gq"&gt;
+                            &lt;div class="Ho gx" &gt;
+                                [JOURNALCONTROL:LIKELIST]
+                                &lt;div class="mydnnPostCommentList"&gt;
+                                    [JOURNALCONTROL:COMMENTAREA]
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div style="clear:both;"&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="journal_groupjoin.Text" xml:space="preserve">
+    <value>&lt;div class="Tg Sb" &gt;
+    &lt;div class="qf"&gt;
+        &lt;div class="ii"&gt;
+            &lt;span class="a-n Hw Ph"&gt;&lt;/span&gt;
+            &lt;span class="g-s-n-aa Wk" &gt;
+                &lt;img src="[BaseUrl]/profilepic.ashx?userId=[JournalAuthor:Id]&amp;w=60" class="Ol Rf Ep"/&gt;
+            &lt;/span&gt;
+            &lt;div class="Jst8Q MI"&gt;
+                &lt;header&gt;
+                    &lt;h3 class="cK"&gt;
+                        &lt;span  class="Sg Ob Tc"&gt;
+                            &lt;span dir="ltr"&gt;
+                                [JournalControl:AUTHORNAMELINK] به گروه &lt;a href="[journaldata:Url]"&gt;[JournalItem:Title]&lt;/a&gt; پیوست!
+                            &lt;/span&gt;
+                            &amp;rlm;
+                        &lt;/span&gt;
+                    &lt;/h3&gt;
+                    &lt;span class="Wp mc"&gt;
+                        &lt;span class="Ri lu"&gt;
+                            &lt;abbr title="[journalItem:DateCreated]" class="g-M-n g-s-n-aa ik Bf"&gt;[journalitem:TimeFrame]&lt;/abbr&gt;
+                        &lt;/span&gt; 
+                    &lt;/span&gt;
+                &lt;/header&gt;
+            &lt;/div&gt;
+            &lt;div class="ze ie"&gt;
+            &lt;/div&gt;
+            &lt;div class="ci gv"&gt;
+                &lt;div class="eE Fp"&gt;
+                    &lt;div class="wm VC"&gt;
+                        [JournalItem:Summary]
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="LI"&gt;
+                {CanComment} [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;nbsp;·&amp;nbsp;&lt;/span&gt;{/CanComment}
+                &lt;div class="rE PJ" &gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="Lj FE"&gt;
+            &lt;div class="fC YQ"&gt;
+            &lt;/div&gt;
+            &lt;div class="Se Eu"&gt;
+                &lt;div class="O7 mP"&gt;
+                    &lt;div class="Hq uz"&gt;
+                        &lt;div class="Gq"&gt;
+                            &lt;div class="Ho gx" &gt;
+                                [JOURNALCONTROL:LIKELIST]
+                                &lt;div class="mydnnPostCommentList"&gt;
+                                    [JOURNALCONTROL:COMMENTAREA]
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div style="clear:both;"&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="achievement.Action" xml:space="preserve">
+    <value>کسب موفقیت</value>
+  </data>
+  <data name="achievement.Text" xml:space="preserve">
+    <value>کسب موفقیت</value>
+  </data>
+  <data name="answer.Action" xml:space="preserve">
+    <value>پاسخ ها</value>
+  </data>
+  <data name="answer.Text" xml:space="preserve">
+    <value>پاسخ ها</value>
+  </data>
+  <data name="articleadd.Action" xml:space="preserve">
+    <value>مقاله جدید</value>
+  </data>
+  <data name="articleadd.Text" xml:space="preserve">
+    <value>مقاله جدید</value>
+  </data>
+  <data name="comment.Action" xml:space="preserve">
+    <value>دیدگاه های بلاگ</value>
+  </data>
+  <data name="documentadd.Action" xml:space="preserve">
+    <value>داکیومنت جدید</value>
+  </data>
+  <data name="documentadd.Text" xml:space="preserve">
+    <value>داکیومنت جدید</value>
+  </data>
+  <data name="documentupdate.Action" xml:space="preserve">
+    <value>به‌روزرسانی داکیومنت</value>
+  </data>
+  <data name="documentupdate.Text" xml:space="preserve">
+    <value>به‌روزرسانی داکیومنت</value>
+  </data>
+  <data name="eventattend.Action" xml:space="preserve">
+    <value>شرکت در رویداد</value>
+  </data>
+  <data name="eventattend.Text" xml:space="preserve">
+    <value>شرکت در رویداد</value>
+  </data>
+  <data name="eventcreate.Action" xml:space="preserve">
+    <value>رویداد جدید</value>
+  </data>
+  <data name="eventcreate.Text" xml:space="preserve">
+    <value>رویداد جدید</value>
+  </data>
+  <data name="friend.Text" xml:space="preserve">
+    <value>دوستان</value>
+  </data>
+  <data name="ideaadd.Action" xml:space="preserve">
+    <value>ایده جدید</value>
+  </data>
+  <data name="ideaadd.Text" xml:space="preserve">
+    <value>ایده جدید</value>
+  </data>
+  <data name="ideaupdate.Action" xml:space="preserve">
+    <value>به‌روزرسانی ایده</value>
+  </data>
+  <data name="ideaupdate.Text" xml:space="preserve">
+    <value>به‌روزرسانی ایده</value>
+  </data>
+  <data name="journal_generic.Text" xml:space="preserve">
+    <value>&lt;div class="mydnnPostPanel"  &gt;
+    &lt;div class="mydnnPostrightSide"&gt;
+        &lt;span&gt;
+            &lt;img src="[BaseUrl]/profilepic.ashx?userId=[JournalAuthor:Id]&amp;w=60"  /&gt;
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="mydnnPostleftSide journalitem"&gt;
+        &lt;div class="mydnnPostTop"&gt;
+            [JournalControl:AUTHORNAMELINK] &amp;nbsp; [journalitem:action] &lt;a href="[journaldata:Url]"&gt;[journalitem:Title]&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;span class="mydnnPostBody"&gt;
+            [JournalItem:Summary]
+        &lt;/span&gt;
+        &lt;div class="mydnnPostFooter"&gt;
+            {CanComment} [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;nbsp;·&amp;nbsp;&lt;/span&gt; [JOURNALCONTROL:COMMENTLINK]&lt;span&gt;&amp;nbsp;·&amp;nbsp;&lt;/span&gt;{/CanComment}
+            &lt;abbr title="[journalItem:DateCreated]"&gt;[journalitem:TimeFrame]&lt;/abbr&gt;&lt;span&gt;&amp;nbsp;·&amp;nbsp;&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="mydnnPostCommentPanel" &gt;
+            &lt;div class="mydnnPostCommentPanelTop"&gt;
+            &lt;/div&gt;
+            &lt;div class="mydnnPostCommentBody" &gt;
+                [JOURNALCONTROL:LIKELIST]
+                &lt;div class="mydnnPostCommentList"&gt;
+                    [JOURNALCONTROL:COMMENTAREA]
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div style="clear:both;"&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="privilege.Action" xml:space="preserve">
+    <value>کسب امتیاز</value>
+  </data>
+  <data name="privilege.Text" xml:space="preserve">
+    <value>کسب امتیاز</value>
+  </data>
+  <data name="projectcreated.Action" xml:space="preserve">
+    <value>پروژه جدید</value>
+  </data>
+  <data name="projectcreated.Text" xml:space="preserve">
+    <value>پروژه جدید</value>
+  </data>
+  <data name="projectupdate.Action" xml:space="preserve">
+    <value>به‌روزرسانی پروژه</value>
+  </data>
+  <data name="projectupdated.Text" xml:space="preserve">
+    <value>به‌روزرسانی پروژه</value>
+  </data>
+  <data name="question.Action" xml:space="preserve">
+    <value>سوال جدید</value>
+  </data>
+  <data name="question.Text" xml:space="preserve">
+    <value>سوالات</value>
+  </data>
+  <data name="reviewadd.Action" xml:space="preserve">
+    <value>بازبینی جدید</value>
+  </data>
+  <data name="reviewadd.Text" xml:space="preserve">
+    <value>بازبینی جدید</value>
+  </data>
+  <data name="reviewupdate.Action" xml:space="preserve">
+    <value>به‌روزرسانی بازبینی</value>
+  </data>
+  <data name="reviewupdate.Text" xml:space="preserve">
+    <value>به‌روزرسانی بازبینی</value>
+  </data>
+  <data name="survey.Action" xml:space="preserve">
+    <value>شرکت در نظرسنجی</value>
+  </data>
+  <data name="survey.Text" xml:space="preserve">
+    <value>شرکت در نظرسنجی</value>
+  </data>
+  <data name="taskadd.Action" xml:space="preserve">
+    <value>وظیفه جدید</value>
+  </data>
+  <data name="taskadd.Text" xml:space="preserve">
+    <value>وظیفه جدید</value>
+  </data>
+  <data name="taskupdate.Action" xml:space="preserve">
+    <value>به‌روزرسانی وطیفه</value>
+  </data>
+  <data name="taskupdate.Text" xml:space="preserve">
+    <value>به‌روزرسانی وطیفه</value>
+  </data>
+  <data name="videoadd.Action" xml:space="preserve">
+    <value>ویدئو جدید</value>
+  </data>
+  <data name="videoadd.Text" xml:space="preserve">
+    <value>ویدئو جدید</value>
+  </data>
+  <data name="vote.Action" xml:space="preserve">
+    <value>رای جدید در پرسش و پاسخ</value>
+  </data>
+  <data name="vote.Text" xml:space="preserve">
+    <value>رای جدید در پرسش و پاسخ</value>
+  </data>
+  <data name="wikiadd.Action" xml:space="preserve">
+    <value>ایجاد مطلب جدید در ویکی دات نت نیوک</value>
+  </data>
+  <data name="wikiadd.Text" xml:space="preserve">
+    <value>ایجاد مطلب جدید در ویکی دات نت نیوک</value>
+  </data>
+  <data name="wikiupdate.Action" xml:space="preserve">
+    <value>به‌روزرسانی ویکی</value>
+  </data>
+  <data name="wikiupdate.Text" xml:space="preserve">
+    <value>به‌روزرسانی ویکی</value>
+  </data>
+  <data name="badge.Action">
+    <value>received the badge</value>
+  </data>
+  <data name="badge.Text">
+    <value>badge</value>
+  </data>
+  <data name="journal_badge.Text">
+    <value>&lt;div class="author"&gt;&lt;img src="[BaseUrl]/profilepic.ashx?userId=[JournalAuthor:Id]&amp;h=32&amp;w=32" /&gt;&lt;/div&gt;
+&lt;div class="journalitem"&gt;
+	&lt;p&gt;
+		&lt;span class="authorname"&gt;[JournalControl:AUTHORNAMELINK]&lt;/span&gt; [journalitem:action] &lt;a href="[journaldata:Url]"&gt;[journalitem:Title]&lt;/a&gt;
+&lt;div class="dnnClear"&gt;&lt;i&gt;[journalitem:Summary]&lt;/i&gt;&lt;/div&gt;
+&lt;/p&gt;
+		&lt;p class="journalfooter"&gt;
+		&lt;abbr title="[journalItem:DateCreated]"&gt;[journalitem:TimeFrame]&lt;/abbr&gt; {CanComment}&lt;span&gt;&amp;#149;&lt;/span&gt; [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;#149;&lt;/span&gt; &lt;a href="[journaldata:Url]"&gt;Read More&lt;/a&gt;{/CanComment}
+	&lt;/p&gt;
+	[JOURNALCONTROL:LIKELIST]
+&lt;/div&gt;</value>
+  </data>
+  <data name="journal_comment.Text">
+    <value>&lt;div class="author"&gt;&lt;img src="[BaseUrl]/profilepic.ashx?userId=[JournalAuthor:Id]&amp;h=32&amp;w=32" /&gt;&lt;/div&gt;
+&lt;div class="journalitem"&gt;
+	&lt;p&gt;
+		&lt;span class="authorname"&gt;[JournalControl:AUTHORNAMELINK]&lt;/span&gt; [journalitem:action] &lt;a href="[journaldata:Url]"&gt;[journalitem:Title]&lt;/a&gt;
+&lt;div class="dnnClear"&gt;&lt;i&gt;[journalitem:Summary]&lt;/i&gt;&lt;/div&gt;
+&lt;/p&gt;
+		&lt;p class="journalfooter"&gt;
+		&lt;abbr title="[journalItem:DateCreated]"&gt;[journalitem:TimeFrame]&lt;/abbr&gt; {CanComment}&lt;span&gt;&amp;#149;&lt;/span&gt; [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;#149;&lt;/span&gt; &lt;a href="[journaldata:Url]"&gt;Read More&lt;/a&gt;{/CanComment}
+	&lt;/p&gt;
+	[JOURNALCONTROL:LIKELIST]
+&lt;/div&gt;</value>
+  </data>
+  <data name="journal_ideaadd.Text">
+    <value>&lt;div class="author"&gt;&lt;img src="[BaseUrl]/profilepic.ashx?userId=[JournalAuthor:Id]&amp;h=32&amp;w=32" /&gt;&lt;/div&gt;
+&lt;div class="journalitem"&gt;
+	&lt;p&gt;
+		&lt;span class="authorname"&gt;[JournalControl:AUTHORNAMELINK]&lt;/span&gt; [journalitem:action] &lt;a href="[journaldata:Url]"&gt;[journalitem:Title]&lt;/a&gt;
+&lt;div class="dnnClear"&gt;&lt;i&gt;[journalitem:Summary]&lt;/i&gt;&lt;/div&gt;
+&lt;/p&gt;
+		&lt;p class="journalfooter"&gt;
+		&lt;abbr title="[journalItem:DateCreated]"&gt;[journalitem:TimeFrame]&lt;/abbr&gt; {CanComment}&lt;span&gt;&amp;#149;&lt;/span&gt; [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;#149;&lt;/span&gt; &lt;a href="[journaldata:Url]"&gt;Read More&lt;/a&gt;{/CanComment}
+	&lt;/p&gt;
+	[JOURNALCONTROL:LIKELIST]
+&lt;/div&gt;</value>
+  </data>
+  <data name="journal_ideaupdate.Text">
+    <value>&lt;div class="author"&gt;&lt;img src="[BaseUrl]/profilepic.ashx?userId=[JournalAuthor:Id]&amp;h=32&amp;w=32" /&gt;&lt;/div&gt;
+&lt;div class="journalitem"&gt;
+	&lt;p&gt;
+		&lt;span class="authorname"&gt;[JournalControl:AUTHORNAMELINK]&lt;/span&gt; [journalitem:action] &lt;a href="[journaldata:Url]"&gt;[journalitem:Title]&lt;/a&gt;
+&lt;div class="dnnClear"&gt;&lt;i&gt;[journalitem:Summary]&lt;/i&gt;&lt;/div&gt;
+&lt;/p&gt;
+		&lt;p class="journalfooter"&gt;
+		&lt;abbr title="[journalItem:DateCreated]"&gt;[journalitem:TimeFrame]&lt;/abbr&gt; {CanComment}&lt;span&gt;&amp;#149;&lt;/span&gt; [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;#149;&lt;/span&gt; &lt;a href="[journaldata:Url]"&gt;Read More&lt;/a&gt;{/CanComment}
+	&lt;/p&gt;
+	[JOURNALCONTROL:LIKELIST]
+&lt;/div&gt;</value>
+  </data>
+  <data name="journal_vote.Text">
+    <value>&lt;div class="author"&gt;&lt;img src="[BaseUrl]/profilepic.ashx?userId=[JournalAuthor:Id]&amp;h=32&amp;w=32" /&gt;&lt;/div&gt;
+&lt;div class="journalitem"&gt;
+	&lt;p&gt;
+		&lt;span class="authorname"&gt;[JournalControl:AUTHORNAMELINK]&lt;/span&gt; [journalitem:action] &lt;a href="[journaldata:Url]"&gt;[journalitem:Title]&lt;/a&gt;
+&lt;div class="dnnClear"&gt;&lt;i&gt;[journalitem:Summary]&lt;/i&gt;&lt;/div&gt;
+&lt;/p&gt;
+		&lt;p class="journalfooter"&gt;
+		&lt;abbr title="[journalItem:DateCreated]"&gt;[journalitem:TimeFrame]&lt;/abbr&gt; {CanComment}&lt;span&gt;&amp;#149;&lt;/span&gt; [JOURNALCONTROL:LIKELINK] &lt;span&gt;&amp;#149;&lt;/span&gt; &lt;a href="[journaldata:Url]"&gt;Read More&lt;/a&gt;{/CanComment}
+	&lt;/p&gt;
+	[JOURNALCONTROL:LIKELIST]
+&lt;/div&gt;</value>
+  </data>
+  <data name="Notification_Mention.Body">
+    <value>{0}</value>
+  </data>
+  <data name="Notification_Mention.Subject">
+    <value>{0} mentioned you in a {1}</value>
+  </data>
+  <data name="Notification_MentionType_Comment.Text">
+    <value>Comment</value>
+  </data>
+  <data name="Notification_MentionType_Post.Text">
+    <value>Post</value>
+  </data>
+  <data name="product.Text">
+    <value>Product Updated</value>
+  </data>
+</root>

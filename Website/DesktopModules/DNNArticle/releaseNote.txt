@@ -1,0 +1,2 @@
+﻿DNNArticle version 11.01.00 supports DotNetNuke 07.01.02+ including DNN 7.x, DNN 8.x and DNN 9.x including DNN 9.2 .
+

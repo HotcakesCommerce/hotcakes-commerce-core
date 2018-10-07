@@ -1,0 +1,338 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<Moslem.Modules.GDS.GDSModuleMVC.Controllers.ReserveObject>
+
+@using System.Text.RegularExpressions
+@using DotNetNuke.Web.Mvc.Helpers
+
+@using DotNetNuke.Web.Client.ClientResourceManagement
+
+<div class="S_Result_Back">
+
+    <div class="S_Result_Items" style="margin-right: 0px; border-right: none;">
+        <center>
+            <div class="S_Result_Key" onclick="window.history.go(-1); return false;">
+                <span class="SSpan_Middle">
+                    بازگشت
+                </span>
+            </div>
+            </a>
+        </center>
+    </div>
+    <div id="ContentPlaceHolder1_d_result_hotel" class="S_Result_Items">
+
+        <span class="S_Result_Titles">نام هتل :</span><span class="S_Result_Text">@Model.HotelTitle</span><div style="width:100%;clear:both;"></div>
+    </div>
+    <div id="ContentPlaceHolder1_d_result_date_from" class="S_Result_Items">
+
+        <span class="S_Result_Titles">تاریخ ورود:</span><span class="S_Result_Text">@Model.CheckinDate</span><div style="width:100%;clear:both;"></div>
+    </div>
+    <div id="ContentPlaceHolder1_d_result_date_to" class="S_Result_Items">
+
+        <span class="S_Result_Titles">تاریخ خروج:</span><span class="S_Result_Text">@Model.ChecoutDate</span><span class="S_Result_Text" style="color:#000000;font-weight:normal;">(@Model.night شب اقامت)</span><div style="width:100%;clear:both;"></div>
+    </div>
+    <div id="ContentPlaceHolder1_d_result_passenger" class="S_Result_Items">
+
+        <span class="S_Result_Titles">تعداد مسافرین:</span><span class="S_Result_Text">@Model.count نفر</span><div style="width:100%;clear:both;"></div>
+    </div>
+    <div id="ContentPlaceHolder1_d_result_passenger" class="S_Result_Items">
+
+        <span class="S_Result_Titles">تعداد اتاق ها :</span><span class="S_Result_Text">@ViewBag.RoomCount اتاق</span><div style="width:100%;clear:both;"></div>
+    </div>
+    <div id="ContentPlaceHolder1_d_result_passenger" class="S_Result_Items">
+
+        <span class="S_Result_Titles">مبلغ کلی  :</span><span class="S_Result_Text">@Html.Raw(Model.amount) </span><div style="width:100%;clear:both;"></div>
+    </div>
+    <div style="clear:both;"></div>
+</div>
+
+<div id="persondetails">
+    <div id="ContentPlaceHolder1_d_pass" class="SPass_Panel">
+        <div class="SPass_Panel_Title">لطفا اطلاعات مسافرین خود را وارد نمایید</div>
+        @for (int i = 0; i < Int32.Parse(Model.count); i++)
+        {
+            <div id="d_g_TPass_A_@Html.Raw(i + 1)" class="SPass_Group">
+                <div class="SPass_Group_Title">
+                    <span style="direction: rtl;"> بزرگسال @Html.Raw(i + 1)</span>
+                </div>
+                <div style="width:100%;clear:both;"></div>
+                <div class="SPass_Items">
+                    <input @*id="fname"*@ name="fname" placeholder="نام" type="text"  class="SPass_Text_FA">
+                </div>
+                <div class="SPass_Items">
+                    <input name="lname" @*id="lname"*@ placeholder="نام خانوادگی" type="text" maxlength="100"  class="SPass_Text_FA">
+                </div>
+                <div class="SPass_Items">
+                    <input name="email" @*id="email"*@ placeholder="پست الکترونیکی" type="text" maxlength="100"  class="SPass_Text_FA">
+                </div>
+                <div class="SPass_Items">
+                    <input name="codemelli" @*id="codemelli"*@ placeholder="کد ملی" type="text" maxlength="100"  class="SPass_Text_FA">
+                </div>
+                <div style="width:100%;clear:both;"></div>
+            </div>
+        }
+        <br />
+        <div id="ContentPlaceHolder1_d_reserve_main_info" class="SSearch_BackMain">
+            <div class="SSearch_TitleFA">
+                لطفا پس از بررسی اطلاعات درخواستی،<br>نام مسافرین را وارد نموده و بر روی دکمه پرداخت کلیک نمائید.
+            </div>
+            <div id="d_panel_kharidarinfo" class="SKharidar_Panel">
+                <div class="SKharidar_Panel_Title">
+                    <span style="direction: rtl;">
+                        لطفا مشخصات خریدار را جهت ارسال واچر وارد نمایید
+                    </span>
+                </div>
+
+                <div class="SKharidar_Panel_Items">
+
+                    <div class="SKharidar_Items">
+
+                        <div class="SKharidar_Items_Title">
+                            <span style="direction: rtl;">
+                                نام  خریدار
+                            </span>
+                        </div>
+                        <div class="SKharidar_Items_TextD">
+                            <input name="ctl00$ContentPlaceHolder1$TKharidar_Name" type="text" value="" maxlength="100" id="ContentPlaceHolder1_TKharidar_Name" class="SKharidar_Items_TextFA" lang="fa">
+                        </div>
+                        <div class="SKharidar_Items_Title">
+                            <span style="direction: rtl;">
+                                نام خانوادگی خریدار
+                            </span>
+                        </div>
+                        <div class="SKharidar_Items_TextD">
+                            <input name="ctl00$ContentPlaceHolder1$TKharidar_Family" type="text" value="" maxlength="100" id="ContentPlaceHolder1_TKharidar_Family" class="SKharidar_Items_TextFA" lang="fa">
+                        </div>
+
+
+                        <div class="SKharidar_Items_Title">
+                            <span style="direction: rtl;">
+                                کد ملی خریدار
+                            </span>
+                        </div>
+                        <div class="SKharidar_Items_TextD">
+                            <input name="ctl00$ContentPlaceHolder1$TKharidar_NationalID" type="text" value="" maxlength="10" id="ContentPlaceHolder1_TKharidar_NationalID" class="SKharidar_Items_TextEN" onkeypress="if (navigator.appName == 'Microsoft Internet Explorer') { event.returnValue = InputNumericValuesOnly(event); } else { return InputNumericValuesOnly(event); }" lang="en">
+                        </div>
+
+                        <div class="SKharidar_Items_Title">
+                            <span style="direction: rtl;">
+                                تلفن همراه خریدار
+                            </span>
+                        </div>
+                        <div class="SKharidar_Items_TextD">
+                            <input name="ctl00$ContentPlaceHolder1$TKharidar_Mobile" type="text" value="" maxlength="11" id="ContentPlaceHolder1_TKharidar_Mobile" class="SKharidar_Items_TextEN" onkeypress="if (navigator.appName == 'Microsoft Internet Explorer') { event.returnValue = InputNumericValuesOnly(event); } else { return InputNumericValuesOnly(event); }" lang="en">
+                        </div>
+                        <div class="SKharidar_Items_Title">
+                            <span style="direction: rtl;">
+                                تلفن ثابت خریدار
+                            </span>
+                        </div>
+                        <div class="SKharidar_Items_TextD">
+                            <input name="ctl00$ContentPlaceHolder1$TKharidar_Tel" type="text" value="" maxlength="11" id="ContentPlaceHolder1_TKharidar_Tel" class="SKharidar_Items_TextEN" onkeypress="if (navigator.appName == 'Microsoft Internet Explorer') { event.returnValue = InputNumericValuesOnly(event); } else { return InputNumericValuesOnly(event); }" lang="en">
+                        </div>
+                        <div class="SKharidar_Items_Title">
+                            <span style="direction: rtl;">
+                                آدرس ایمیل خریدار
+                            </span>
+                        </div>
+                        <div class="SKharidar_Items_TextD">
+                            <input name="ctl00$ContentPlaceHolder1$TKharidar_Email" type="text" value="" maxlength="100" id="ContentPlaceHolder1_TKharidar_Email" class="SKharidar_Items_TextEN" lang="en">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+            <div class="SKharidar_Panel">
+
+                <div class="SKharidar_Panel_Title">
+                    <span style="direction: rtl;">
+                        توضیحات بیشتر
+                    </span>
+                </div>
+
+                <div class="SKharidar_Panel_Items">
+
+                    <div class="SKharidar_Items">
+
+                        <div class="SKharidar_Items_Title">
+                            <span style="direction: rtl;">
+                                امکانات مورد نیاز هنگام ورود به هتل
+                            </span>
+                        </div>
+                        <div class="SKharidar_Items_TextD">
+                            <textarea name="ctl00$ContentPlaceHolder1$TDesc_Customer" rows="2" cols="20" id="ContentPlaceHolder1_TDesc_Customer" class="SKharidar_Items_Text_DescFA" lang="fa"></textarea>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+
+            <div id="d_panel_policy" class="SBank_Panel">
+
+                <div class="SPolicyFA">
+
+                    <input id="ContentPlaceHolder1_CPolicy" type="checkbox" name="ctl00$ContentPlaceHolder1$CPolicy" checked="checked">
+                    <span>
+                        <a href="../../../policy" target="_blank">
+                            شرایط و قوانین
+                        </a>
+                    </span>
+                    <span>
+                        استفاده از خدمات این وب سایت را مطالعه نموده و با کلیه موارد آن موافقم
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+
+
+            <div class="SBank_Panel">
+
+                <div class="SBank_Panel_Title">
+                    <span style="direction: rtl;">
+                        لطفا درگاه بانک دلخواه خود را جهت پرداخت انتخاب نمایید
+                    </span>
+                </div>
+
+                <div id="d_panel_banksel" class="SBank_Panel_Items">
+
+                    <center>
+                        <table cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <td align="center" style="padding-top: 5px; padding-bottom: 5px; " valign="bottom">
+                                        <img src="~/desktopmodules/mvc/GDSModuleMVC/content/SignBank5.gif" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="padding-top: 10px; padding-bottom: 10px; " valign="bottom">
+                                        <input id="ContentPlaceHolder1_RadioButton1" type="radio" name="ctl00$ContentPlaceHolder1$RadioButton1" value="RadioButton1" checked="checked"><label for="ContentPlaceHolder1_RadioButton1">بانک سینا</label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </center>
+
+                </div>
+
+            </div>
+
+
+            <center>
+
+                <div id="ContentPlaceHolder1_UpdatePanel1">
+
+                    <center>
+                        <div style="display: table; width: auto; margin-top: 30px; text-align: center; direction: rtl;">
+                            <div class="SPanel_OKCancel_Keys">
+                                <input type="button" name="ctl00$ContentPlaceHolder1$Btn_Login" value="تایید و پرداخت" onclick="reserveandpau('/DesktopModules/GDSModuleMVC/api/GDS/reserveandpay');" id="ContentPlaceHolder1_Btn_Login" class="SBox_KeyFA_Green" style="border-style:None;height:40px;width:150px;">
+                            </div>
+                            <div class="SPanel_OKCancel_Keys">
+                                <input type="button" name="ctl00$ContentPlaceHolder1$Btn_Cancel" value="انصراف" onclick="javascript:__doPostBack('ctl00$ContentPlaceHolder1$Btn_Cancel','')" id="ContentPlaceHolder1_Btn_Cancel" class="SBox_KeyFA_Gray" style="border-style:None;height:40px;width:150px;">
+                            </div>
+                            <div style="width: 100%; clear: both;"></div>
+                        </div>
+                    </center>
+
+                </div>
+
+            </center>
+
+        </div>
+    </div>
+
+
+</div>
+<input type="hidden" id="hotelId" value="@Model.hotelID." />
+<input id="checkin" type="hidden" value="@Model.CheckinDate" />
+<input id="night" type="hidden" value="@Model.night" />
+<input id="count" type="hidden" value="@Model.count" />
+<input id="roomid" type="hidden" value="@Model.roomID" />
+<input id="roomCount" type="hidden" value="@Model.roomCount" />
+<input id="amount" type="hidden" value="@Html.Raw(Model.amount)" />
+<script>
+    function reserveandpau(url) {
+        $('[name="ctl00$ContentPlaceHolder1$Btn_Login"]').hide();
+        var arr = {};
+        arr["firstName"] = $("#ContentPlaceHolder1_TKharidar_Name").val();
+        arr["lastname"] = $("#ContentPlaceHolder1_TKharidar_Family").val();
+        arr["email"] = $("#ContentPlaceHolder1_TKharidar_Email").val();
+        arr["tel"] = $("#ContentPlaceHolder1_TKharidar_Tel").val();
+        arr["mobile"] = $("#ContentPlaceHolder1_TKharidar_Mobile").val();
+        arr["hotelId"] = $("#hotelId").val();
+        arr["checkin"] = $("#checkin").val();
+        arr["night"] = $("#night").val();
+        arr["roomid"] = $("#roomid").val();
+        arr["roomCount"] = $("#roomCount").val();
+        arr["discritption"] = $("#ContentPlaceHolder1_TDesc_Customer").val();
+        arr["amount"] = $("#amount").val();
+
+
+        var person = Array();
+        $("#persondetails .SPass_Group").each(function () {
+            $(this).each(function () {
+                var obj = {};
+
+                obj["name"] = $(this).find('input[name=fname]').val();
+                obj["lname"] = $(this).find('input[name=lname]').val();
+                obj["email"] = $(this).find('input[name=email]').val();
+                obj["codemelli"] = $(this).find('input[name=codemelli]').val();
+                person.push(obj);
+            })
+        })
+        arr["Passengers"] = person;
+        var op = JSON.stringify(arr);
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: JSON.stringify(arr),
+            contentType: "application/json",
+            success: function (data) {
+               
+            },
+            statusCode: {
+                404: function (data) {
+                    alert("page not found");
+                    $('[name="ctl00$ContentPlaceHolder1$Btn_Login"]').show();
+                },
+                403: function (data) {
+                    alert("Forbidden");
+                    $('[name="ctl00$ContentPlaceHolder1$Btn_Login"]').show();
+                },
+                400: function (data) {
+                    alert(data.aaData.description);
+                    $('[name="ctl00$ContentPlaceHolder1$Btn_Login"]').show();
+                },
+                200: function (data) {
+                    $('[name="ctl00$ContentPlaceHolder1$Btn_Login"]').show();
+                    window.location.replace("@Html.Raw(ViewBag.ApplyUrl)");
+                },
+                500:
+                function (data) {
+                    $('[name="ctl00$ContentPlaceHolder1$Btn_Login"]').show();
+                    alert(data.responseText);
+                },
+            },
+
+
+
+            /*,*/
+            //complete: callback
+        });
+    };
+</script>

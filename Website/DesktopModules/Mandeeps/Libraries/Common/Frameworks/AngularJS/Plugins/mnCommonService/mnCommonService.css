@@ -1,0 +1,402 @@
+﻿/*
+    This is needed to hide the UIEngine on initial page load to prevent FOUC
+    UIEngine is forced to display:block !important using inline style after ../render/ui returns new markup
+*/
+uiengine {
+    display: none !important;
+}
+
+.validationGroup label.error {
+    font-size: 12px;
+    color: red;
+}
+
+.control-background {
+    background-color: #fff !important;
+}
+
+.MNormal {
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+.MNormalBold {
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.MNormalRed {
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 12px;
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.MHead {
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 20px;
+    font-weight: normal;
+    color: #333333;
+}
+
+.MSubHead {
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 11px;
+    font-weight: bold;
+    color: #003366;
+}
+
+.MNormalTextBox {
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+@media (max-width: 768px) {
+
+    .ms-input-group {
+        width: 100%;
+    }
+}
+
+.uploadinput-button input {
+    background-color: #999;
+    padding: 8px;
+    border: 1px solid #ccc;
+    color: #fff !important;
+    border-radius: 5px;
+    display: block;
+}
+
+#ImportCsv .cta {
+    width: 14%;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    height: 38px;
+    background-color: !important;
+    color: transparent !important;
+    display: flex !important;
+    filter: alpha(opacity=0);
+    padding: 6px 12px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+
+    #ImportCsv .cta::before {
+        content: 'Upload File';
+        display: inline-block;
+        background-image: linear-gradient(to top,#f9f9f9 0,#f9f9f9 50%,#e3e3e3 50%,#e3e3e3 100%);
+        color: #444;
+        border: 1px solid #999;
+        border-radius: 3px;
+        padding: 5px 8px;
+        outline: 0;
+        white-space: nowrap;
+        -webkit-user-select: none;
+        cursor: pointer;
+        text-shadow: 1px 1px #fff;
+        font-weight: 700;
+        font-size: 14px;
+        text-align: center;
+    }
+
+.angular-ui-tree-placeholder {
+    background: #f0f9ff;
+    border: 2px dashed #bed2db;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-left: 10px;
+}
+
+.angular-ui-tree-handle {
+    background: #f8faff;
+    border: 1px solid #dae2ea;
+    color: #7c9eb2;
+    padding: 10px 10px;
+    margin: 10px;
+}
+
+.angular-ui-tree-handle-nodrag {
+    background: #f8faff;
+    border: 1px solid #dae2ea;
+    color: #7c9eb2;
+    padding: 10px 10px;
+    margin: 10px;
+    cursor: default;
+}
+
+.treeedit {
+    margin-right: 5px !important;
+}
+
+.gridimages {
+    max-width: 70px;
+    max-height: 70px;
+    cursor: pointer;
+}
+
+.modalimage {
+    padding: 0.8em 0em;
+}
+
+
+a.ms-btn.ms-btn-default.button-left {
+    text-decoration: none;
+    background: #eee;
+    color: #23527c;
+    border-color: #ccc;
+}
+
+    a.ms-btn.ms-btn-default.button-left:hover {
+        background: #e6e6e6;
+        border-color: #adadad;
+    }
+
+a.ms-btn.ms-btn-primary.button-left {
+    text-decoration: none;
+    background-color: #337ab7;
+    color: #fff;
+}
+
+    a.ms-btn.ms-btn-primary.button-left:hover {
+        background-color: #286090;
+        border-color: #204d74;
+    }
+
+.ms-form-group .angular-ui-tree-node .ms-chevron {
+    background: transparent;
+}
+
+    .ms-form-group .angular-ui-tree-node .ms-chevron:focus {
+        outline: none;
+    }
+
+    .ms-form-group .angular-ui-tree-node .ms-chevron:active {
+        box-shadow: none;
+    }
+
+.editor-config-Fields {
+    display: block;
+    -webkit-column-count: 4; /*Chrome, Safari, Opera*/
+    -moz-column-count: 4; /*Firefox*/
+    column-count: 4;
+}
+
+.ms-uploaddefault.uploadinput-button .upld {
+    min-height: 140px;
+    /*width: 60%;
+    margin: 0 auto;*/
+}
+
+    .ms-uploaddefault.uploadinput-button .upld span {
+        position: relative;
+        font-size: large;
+    }
+
+.ms-uploaddefault input[type=file].inpt_sty {
+    display: none;
+    cursor: pointer;
+    opacity: 0;
+    background-color: transparent;
+}
+
+.ms-uploaddefault.uploadinput-button .upld text {
+    margin-top: 10px;
+    display: inline-block;
+    color: #ccc;
+}
+
+.ms-uploaddefault.uploadinput-button .upld .ms-glyphicon {
+    padding: 10px 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.ms-uploaddefault.uploadinput-button span:hover span.ng-binding {
+    color: #fff;
+}
+
+.ms-uploaddefault .btnmargin {
+    margin: 2px 0 10px 0;
+}
+
+.ms-uploaddefault td.r_file {
+    list-style: none;
+    border-bottom: 1px solid #ddd;
+    padding: 5px 0;
+    line-height: 23px;
+}
+
+    .ms-uploaddefault td.r_file:hover {
+        color: #000;
+    }
+
+.ms-uploaddefault .r_file span.ng-binding {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.ms-uploaddefault .l_folder,
+.ms-uploaddefault .l_folder ul li {
+    list-style: none;
+    margin: 10px 0;
+}
+
+    .ms-uploaddefault .l_folder span {
+        margin-left: 5px;
+        cursor: pointer;
+    }
+
+    .ms-uploaddefault .l_folder ul {
+        margin-left: 10px;
+    }
+
+.ms-uploaddefault .ovrflow .ms-col-sm-4,
+.ms-uploaddefault .ovrflow .ms-col-sm-8 {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+
+.ms-uploaddefault .third_link input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 10px;
+    box-sizing: border-box;
+    resize: none;
+    background: #eee;
+    box-shadow: none;
+    color: #777 !important;
+}
+
+.ms-uploaddefault .third_link .esc {
+    display: inline-block;
+    width: 100%;
+    margin: 15px 0 5px 0;
+    color: #337ab7;
+}
+
+    .ms-uploaddefault .third_link .esc > span {
+        margin-right: 15px;
+    }
+
+.ms-uploaddefault .l_folder .rootfolder:not(.show) {
+    display: none;
+    transition-duration: 5s;
+}
+
+.ms-uploaddefault .entr_url {
+    margin: 0px auto 5px;
+    /*width: 60%;*/
+}
+
+.ms-uploaddefault .ms-well.ovrflow {
+    border: none;
+    padding: 19px 0;
+}
+
+.ms-uploaddefault .upld .buttons {
+    display: inline-block;
+}
+
+.ms-uploaddefault .upld:hover {
+    background-color: rgba(30,136,195,0.6);
+    transition: background-color 0.2s ease;
+    color: #fff;
+}
+
+    .ms-uploaddefault .upld:hover .buttons:hover .ms-glyphicon {
+        color: #c8c8c8;
+    }
+
+        .ms-uploaddefault .upld:hover .buttons,
+        .ms-uploaddefault .upld:hover .buttons:hover,
+        .ms-uploaddefault .upld:hover .buttons:hover .ms-glyphicon:hover,
+        .ms-uploaddefault .upld:hover .f_clr {
+            color: #fff;
+            transition: color 0.2s ease;
+        }
+
+.permission .ui-inlineblock {
+    display: inline-block;
+}
+
+.permission .ui-element-width {
+    width: 150px;
+}
+
+
+.permission .ui-inlineblock.addroleUI a {
+    background: #f3f3f3;
+    border: 1px solid #bfbfbf;
+    border-radius: 0px;
+    -webkit-box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    color: #666;
+    text-decoration: none;
+    border-left: none;
+}
+
+    .permission .ui-inlineblock.addroleUI a:hover {
+        background: #dedede;
+    }
+
+.permission .ms-form-group.addroleUI a {
+    background: #f3f3f3;
+    border: 1px solid #bfbfbf;
+    border-radius: 0px;
+    -webkit-box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    color: #666;
+    text-decoration: none;
+    border-left: none;
+}
+
+    .permission .ms-form-group.addroleUI a:hover {
+        background: #dedede;
+    }
+
+span.choosefile.ms-glyphicon.ms-glyphicon-plus:before, span.choosefile.ms-glyphicon.ms-glyphicon-cog:before {
+    margin-right: 3px;
+    vertical-align: text-bottom;
+}
+
+.ms-btn-success.manageslug:hover {
+    color: #fff;
+    background-color: #398439;
+    text-decoration: none;
+}
+
+.manageslug {
+    float: right;
+    margin-top: 0px !important;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 15%;
+}
+
+.editorconfig-delete-hidden {
+    visibility: hidden;
+}
+
+.ms-table .selectqueueimg {
+    max-height: 40px;
+    vertical-align: text-top;
+    max-width: 40px;
+    margin-right: 10px;
+}
+
+.ud_stfooter {
+    cursor: pointer;
+}
+
+    .ud_stfooter .active a {
+        color: #fff;
+        background-color: #999;
+        border-color: #999;
+    }

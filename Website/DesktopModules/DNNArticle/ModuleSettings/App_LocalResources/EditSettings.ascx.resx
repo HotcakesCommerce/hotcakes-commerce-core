@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="lbAllowAddResource.Help" xml:space="preserve">
+    <value>Allow to add resoureces</value>
+  </data>
+  <data name="lbAllowAddResource.Text" xml:space="preserve">
+    <value>Allow to add resoureces</value>
+  </data>
+  <data name="lbAllowAttachment.Help" xml:space="preserve">
+    <value>Allow users to add attachment</value>
+  </data>
+  <data name="lbAllowAttachment.Text" xml:space="preserve">
+    <value>Enable Adding Attachment</value>
+  </data>
+  <data name="lbAllowAuthorEnableDisableComment.Help" xml:space="preserve">
+    <value>Allow author to enable/disable comment</value>
+  </data>
+  <data name="lbAllowAuthorEnableDisableComment.Text" xml:space="preserve">
+    <value>Allow author to enable/disable comment</value>
+  </data>
+  <data name="lbAllowExtraField.Help" xml:space="preserve">
+    <value>Allow users to edit extra fields.</value>
+  </data>
+  <data name="lbAllowExtraField.Text" xml:space="preserve">
+    <value>Allow users to edit extra fields</value>
+  </data>
+  <data name="lbAllowImage.Help" xml:space="preserve">
+    <value>Allow users to select an image for an article.</value>
+  </data>
+  <data name="lbAllowImage.Text" xml:space="preserve">
+    <value>Allow users to set cover image</value>
+  </data>
+  <data name="lbAllowPage.Help" xml:space="preserve">
+    <value>Allow users to add pages to an article</value>
+  </data>
+  <data name="lbAllowPage.Text" xml:space="preserve">
+    <value>Allow users to add pages to an article</value>
+  </data>
+  <data name="lbAllowRelatedArticle.Help" xml:space="preserve">
+    <value>Allow user to add related articles</value>
+  </data>
+  <data name="lbAllowRelatedArticle.Text" xml:space="preserve">
+    <value>Allow users to Add Related Articles</value>
+  </data>
+  <data name="lbAllowRelatedURL.Help" xml:space="preserve">
+    <value>Allow users to select a related URL for an article.</value>
+  </data>
+  <data name="lbAllowRelatedURL.Text" xml:space="preserve">
+    <value>Allow users to set related URL </value>
+  </data>
+  <data name="lbAllowSEO.Help" xml:space="preserve">
+    <value>Allow users to set SEO fields</value>
+  </data>
+  <data name="lbAllowSEO.Text" xml:space="preserve">
+    <value>Allow users to set SEO fields</value>
+  </data>
+  <data name="lbAllowSetCategory.Help" xml:space="preserve">
+    <value>Allow Set Category</value>
+  </data>
+  <data name="lbAllowSetCategory.Text" xml:space="preserve">
+    <value>Allow Set Category</value>
+  </data>
+  <data name="lbAllowSetPermission.Help" xml:space="preserve">
+    <value>Allow user to set view permission of articles</value>
+  </data>
+  <data name="lbAllowSetPermission.Text" xml:space="preserve">
+    <value>Enable Setting View Permission</value>
+  </data>
+  <data name="lbAllowSetTags.Help" xml:space="preserve">
+    <value>Allow Set Tags</value>
+  </data>
+  <data name="lbAllowSetTags.Text" xml:space="preserve">
+    <value>Allow Set Tags</value>
+  </data>
+  <data name="lbAllowUploadImageOnly.Help" xml:space="preserve">
+    <value>Do not allow to select existing image as cover image</value>
+  </data>
+  <data name="lbAllowUploadImageOnly.Text" xml:space="preserve">
+    <value>Do not allow to select existing image as cover image</value>
+  </data>
+  <data name="lbAllowVersion.Help" xml:space="preserve">
+    <value>Enable Saving Versions</value>
+  </data>
+  <data name="lbAllowVersion.Text" xml:space="preserve">
+    <value>Enable Saving Version</value>
+  </data>
+  <data name="lbAllUserSelecteFile.Help" xml:space="preserve">
+    <value>Allow Users to select existing files as attached files</value>
+  </data>
+  <data name="lbAllUserSelecteFile.Text" xml:space="preserve">
+    <value>Allow Users to select existing files as attached files</value>
+  </data>
+  <data name="lbAutoFillSEOField.Help" xml:space="preserve">
+    <value>Fill SEO fields automatically</value>
+  </data>
+  <data name="lbAutoFillSEOField.Text" xml:space="preserve">
+    <value>Fill SEO fields automatically</value>
+  </data>
+  <data name="lbAutoUpdateSEOField.Help" xml:space="preserve">
+    <value>Auto update SEO field</value>
+  </data>
+  <data name="lbAutoUpdateSEOField.Text" xml:space="preserve">
+    <value>Auto update SEO field</value>
+  </data>
+  <data name="lbDefaultCategories.Help" xml:space="preserve">
+    <value>If allow set category is disabled, it will set default categories to article</value>
+  </data>
+  <data name="lbDefaultCategories.Text" xml:space="preserve">
+    <value>Default Categories (when "Set Category" disabled)</value>
+  </data>
+  <data name="lbDefaultContentTemplate.Help" xml:space="preserve">
+    <value>Default Content Template</value>
+  </data>
+  <data name="lbDefaultContentTemplate.Text" xml:space="preserve">
+    <value>Default Content Template</value>
+  </data>
+  <data name="lbDisableTheBrowserFileInRelatedURL.Help" xml:space="preserve">
+    <value>Disable file selection for Related URL</value>
+  </data>
+  <data name="lbDisableTheBrowserFileInRelatedURL.Text" xml:space="preserve">
+    <value>Disable file selection for Related URL</value>
+  </data>
+  <data name="lbMaxVersionNumber.Help" xml:space="preserve">
+    <value>The version number you can save.</value>
+  </data>
+  <data name="lbMaxVersionNumber.Text" xml:space="preserve">
+    <value>Max Number of Versions</value>
+  </data>
+  <data name="lbRelatedArticleModules.Help" xml:space="preserve">
+    <value>You can select related articles from modules</value>
+  </data>
+  <data name="lbRelatedArticleModules.Text" xml:space="preserve">
+    <value>You can select related articles from modules</value>
+  </data>
+  <data name="lbRelatedArticleType.Help" xml:space="preserve">
+    <value>Related Article Type</value>
+  </data>
+  <data name="lbRelatedArticleType.Text" xml:space="preserve">
+    <value>Related Article Type</value>
+  </data>
+  <data name="lbRTLStyle.Help" xml:space="preserve">
+    <value>RTL Style</value>
+  </data>
+  <data name="lbRTLStyle.Text" xml:space="preserve">
+    <value>RTL Style</value>
+  </data>
+  <data name="lbSEODescriptionTemplate.Help" xml:space="preserve">
+    <value>Using this template fills the SEO description field.</value>
+  </data>
+  <data name="lbSEODescriptionTemplate.Text" xml:space="preserve">
+    <value>SEO Description Template</value>
+  </data>
+  <data name="lbSEOTitleTemplate.Help" xml:space="preserve">
+    <value>Using this template fills the SEO title field.</value>
+  </data>
+  <data name="lbSEOTitleTemplate.Text" xml:space="preserve">
+    <value>SEO Title Template</value>
+  </data>
+  <data name="lbShowUserFolderOnlyInImage.Help" xml:space="preserve">
+    <value>Show user folder only when selecting image</value>
+  </data>
+  <data name="lbShowUserFolderOnlyInImage.Text" xml:space="preserve">
+    <value>Show user folder only when selecting image</value>
+  </data>
+  <data name="lbTagEnter.Help" xml:space="preserve">
+    <value>Tag Enter Type</value>
+  </data>
+  <data name="lbTagEnter.Text" xml:space="preserve">
+    <value>Tag Enter Type</value>
+  </data>
+  <data name="lbTagNumber.Help" xml:space="preserve">
+    <value>The numbers of tag that can be entered</value>
+  </data>
+  <data name="lbTagNumber.Text" xml:space="preserve">
+    <value>Tag number of an article</value>
+  </data>
+  <data name="lbTagSpliter.Help" xml:space="preserve">
+    <value>Tag spliter</value>
+  </data>
+  <data name="lbTagSpliter.Text" xml:space="preserve">
+    <value>Tag spliter</value>
+  </data>
+  <data name="lbTemplateArticleID.Help" xml:space="preserve">
+    <value>The ID of the article which you want to use it as template for new articles.</value>
+  </data>
+  <data name="lbTemplateArticleID.Text" xml:space="preserve">
+    <value>Template Article ID</value>
+  </data>
+  <data name="lbUseHTMLEditorAsTemplateEditor.Help" xml:space="preserve">
+    <value>Use HTML Editor as Template Editor</value>
+  </data>
+  <data name="lbUseHTMLEditorAsTemplateEditor.Text" xml:space="preserve">
+    <value>Use HTML Editor as Template Editor</value>
+  </data>
+  <data name="lbUsingAdminSkin.Help" xml:space="preserve">
+    <value>Using Admin Skin when loading controls such as "Template Editor", "Unapproved articles", "My Articles", "Category List" etc.</value>
+  </data>
+  <data name="lbUsingAdminSkin.Text" xml:space="preserve">
+    <value>Using Admin Skin</value>
+  </data>
+  <data name="lbAccessKey.Help" xml:space="preserve">
+    <value>Enter Access Key</value>
+  </data>
+  <data name="lbAccessKey.Text" xml:space="preserve">
+    <value>Enter Access Key</value>
+  </data>
+  <data name="lbBulk.Help" xml:space="preserve">
+    <value>Bucket Name</value>
+  </data>
+  <data name="lbBulk.Text" xml:space="preserve">
+    <value>Bucket Name</value>
+  </data>
+  <data name="lbEnableS3.Help" xml:space="preserve">
+    <value>Enable Amazon S3 storage</value>
+  </data>
+  <data name="lbEnableS3.Text" xml:space="preserve">
+    <value>Enable Amazon S3 storage</value>
+  </data>
+  <data name="lbSecurityKey.Help" xml:space="preserve">
+    <value>Enter Security Key</value>
+  </data>
+  <data name="lbSecurityKey.Text" xml:space="preserve">
+    <value>Enter Security Key</value>
+  </data>
+  <data name="lbAllowSetAttachmentViewPermission.Help" xml:space="preserve">
+    <value>Allow to set attachment view permission</value>
+  </data>
+  <data name="lbAllowSetAttachmentViewPermission.Text" xml:space="preserve">
+    <value>Allow to set attachment view permission</value>
+  </data>
+  <data name="Itcomma.Text" xml:space="preserve">
+    <value>Comma</value>
+  </data>
+  <data name="ItFromCheckList.Text" xml:space="preserve">
+    <value>Select from existing tags</value>
+  </data>
+  <data name="ItFromText.Text" xml:space="preserve">
+    <value>Enter tags into text box</value>
+  </data>
+  <data name="Itsemicolon.Text" xml:space="preserve">
+    <value>Semicolon</value>
+  </data>
+  <data name="lbAllowContent.Help" xml:space="preserve">
+    <value>Allow Editing Content</value>
+  </data>
+  <data name="lbAllowContent.Text" xml:space="preserve">
+    <value>Allow Editing Content</value>
+  </data>
+  <data name="lbAllowDescription.Help" xml:space="preserve">
+    <value>Allow Editing Description</value>
+  </data>
+  <data name="lbAllowDescription.Text" xml:space="preserve">
+    <value>Allow Editing Description</value>
+  </data>
+  <data name="lbDefaultTags.Help" xml:space="preserve">
+    <value>Default Tags</value>
+  </data>
+  <data name="lbDefaultTags.Text" xml:space="preserve">
+    <value>Default Tags</value>
+  </data>
+  <data name="lbAllowUserControlPostToTwitter.Help" xml:space="preserve">
+    <value>Allow user to enable posting update to twitter and facebook</value>
+  </data>
+  <data name="lbAllowUserControlPostToTwitter.Text" xml:space="preserve">
+    <value>Allow user to enable posting update to twitter and facebook</value>
+  </data>
+  <data name="ItApprovers.Text" xml:space="preserve">
+    <value>Approvers Only</value>
+  </data>
+  <data name="ItBoth.Text" xml:space="preserve">
+    <value>Authors &amp; Approvers</value>
+  </data>
+  <data name="ItNone.Text" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="lbAllowAddCategoryWhenEdit.Help" xml:space="preserve">
+    <value>Allow adding categories when editing article</value>
+  </data>
+  <data name="lbAllowAddCategoryWhenEdit.Text" xml:space="preserve">
+    <value>Allow adding categories when editing article</value>
+  </data>
+  <data name="lbSelectAtLeastOneCategory.Help" xml:space="preserve">
+    <value>Assign at least one category</value>
+  </data>
+  <data name="lbSelectAtLeastOneCategory.Text" xml:space="preserve">
+    <value>Assign at least one category</value>
+  </data>
+  <data name="lbSelectAtLeastOneTag.Help" xml:space="preserve">
+    <value>Assign at least one tag</value>
+  </data>
+  <data name="lbSelectAtLeastOneTag.Text" xml:space="preserve">
+    <value>Assign at least one tag</value>
+  </data>
+  <data name="lbSetImageIfNoImage.Help" xml:space="preserve">
+    <value>Assign tag image if no image</value>
+  </data>
+  <data name="lbSetImageIfNoImage.Text" xml:space="preserve">
+    <value>Assign tag image if no image</value>
+  </data>
+  <data name="lbDebug.Help" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="lbDebug.Text" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="lbUseTreeViewCategory.Help" xml:space="preserve">
+    <value>Use Tree View Category Selector</value>
+  </data>
+  <data name="lbUseTreeViewCategory.Text" xml:space="preserve">
+    <value>Use Tree View Category Selector</value>
+  </data>
+  <data name="lbDisablePermission.Help" xml:space="preserve">
+    <value>Disable Permssion Check</value>
+  </data>
+  <data name="lbDisablePermission.Text" xml:space="preserve">
+    <value>Disable Permssion Check</value>
+  </data>
+</root>

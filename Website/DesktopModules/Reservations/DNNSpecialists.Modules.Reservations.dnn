@@ -1,0 +1,446 @@
+﻿<dotnetnuke type="Package" version="5.0">
+  <packages><package name="DNNSpecialists.Modules.Reservations" type="Module" version="7.3.4">
+  <friendlyName>Reservations</friendlyName>
+  <description>This module allows users to make online reservations.</description>
+  <iconFile />
+  <owner>
+    <name>DNN Specialists</name>
+    <organization>DNN Specialists</organization>
+    <url>www.dnnspecialists.com</url>
+    <email>contact@dnnspecialists.com</email>
+  </owner>
+  <license>&lt;p&gt;DNN Specialists END USER LICENSE AGREEMENT (EULA)&lt;/p&gt;
+&lt;p&gt;This is a CONTRACT between you (either an individual or a single entity) and DNN Specialists, which covers your use of "The Reservations Module" and related software components. All such software is referred to herein as the "Software Product." A software license issued to a designated user only by DNN Specialists or its authorized agents is required for each user of the Software Product. If you do not agree to the terms of this EULA, then do not install or use the Software Product or the Software Product License. By explicitly accepting this End-User License Agreement (EULA) you are acknowledging and agreeing to be bound by the following terms:&lt;/p&gt;
+&lt;p&gt;1. GRANT OF NON-EXCLUSIVE LICENSE&lt;/p&gt;
+&lt;p&gt;DNN Specialists grants you a non-exclusive, non-transferable right to use the Software Product on your DotNetNuke(DNN) installation based on your purchase history. One Production License is required to install and use the Software Product on each DotNetNuke installation, A DNN installation is defined as a single DNN database which can host multiple child portals. These portals may have their own unique web addresses, but they are managed from a single DNN host, you must purchase additional Production License for each extra DNN installation.&lt;/p&gt;
+&lt;p&gt;When the source code is provided with the Software Product, DNN Specialists grants you the right to modify, alter, improve, or enhance the Software Product without limitation, except as described in this EULA.&lt;/p&gt;
+&lt;p&gt;Although rights to modification of the Software Product are granted by this EULA, you may not tamper with, alter, or use the Software Product in a way that disables, circumvents, or otherwise defeats its built-in licensing verification and enforcement capabilities. The right to modification of the Software Product also does not include the right to remove or alter any trademark, logo, copyright or other proprietary notice, legend, symbol or label in the Software Product.&lt;/p&gt;
+&lt;p&gt;Any modifications made to the Software Product will render it non-supportable by DNN Specialists.&amp;#160; You may, at your discretion, contact DNN Specialists about distribution of the altered Software Product, and if agreeable terms can be determined, the software product may be distributed according to the agreement. The altered Software Product will become supported by the party designated in the agreement between DNN Specialists and the user. Ownership of the altered SOFTWARE PRODUCT is transferred to the party designated in the agreement between DNN Specialists and the user. You may not distribute or redistribute changes made to the Software Product to anyone other than groups designated by the agreement between DNN Specialists and the user.&amp;#160; Contact DNN Specialists using the information included at the end of this document.&lt;/p&gt;
+&lt;p&gt;Although the source code for the Software Product may be included, you may not share, use, or reuse the knowledge or technologies in other applications without explicit approval from DNN Specialists.&lt;/p&gt;
+&lt;p&gt;You may make copies of the Software Product as is reasonably necessary for its use. Each copy must reproduce all copyright and other proprietary rights notices on or in the Software Product.&lt;/p&gt;
+&lt;p&gt;Each copy must reproduce all copyright and other proprietary rights notices on or in the Software Product License. You may not modify or create derivative copies of the Software Product License.&lt;/p&gt;
+&lt;p&gt;All rights not expressly granted to you are retained by DNN Specialists.&lt;/p&gt;
+&lt;p&gt;2. INTELLECTUAL PROPERTY RIGHTS RESERVED BY DNN Specialists.&lt;/p&gt;
+&lt;p&gt;The Software Product is owned by DNN Specialists and is protected by the United States of America and international copyright laws and treaties, as well as other intellectual property laws and treaties. You must not remove or alter any copyright notices on any copies of the Software Product. This Software Product copy is licensed, not sold. You may not use, copy, or distribute the Software Product, except as granted by this EULA, without written authorization from DNN Specialists or its designated agents. Furthermore, this EULA does not grant you any rights in connection with any trademarks or service marks of DNN Specialists. DNN Specialists reserves all intellectual property rights, including copyrights, and trademark rights.&lt;/p&gt;
+&lt;p&gt;3. NO RIGHT TO TRANSFER&lt;/p&gt;
+&lt;p&gt;You may not rent, lease, lend, or in any way distribute or transfer any rights in this EULA or the Software Product to third parties without DNN Specialists's written approval, and subject to written agreement by the recipient of the terms of this EULA.&lt;/p&gt;
+&lt;p&gt;4. INDEMNIFICATION&lt;/p&gt;
+&lt;p&gt;You hereby agree to indemnify DNN Specialists against and hold harmless DNN Specialists&amp;#160; from any claims, lawsuits or other losses that arise out of your breach of any provision of this EULA.&lt;/p&gt;
+&lt;p&gt;5. THIRD PARTY RIGHTS&lt;/p&gt;
+&lt;p&gt;Any software provided along with the Software Product that is associated with a separate license agreement is licensed to you under the terms of that license agreement. This license does not apply to those portions of the Software Product. Copies of these third party licenses are included in all copies of the Software Product.&lt;/p&gt;
+&lt;p&gt;6. SUPPORT SERVICES&lt;/p&gt;
+&lt;p&gt;DNN Specialists may provide you with support services related to the Software Product. Use of any such support services is governed by&lt;br /&gt;
+DNN Specialists policies and programs described in online documentation and/or other DNN Specialists-provided materials.&lt;/p&gt;
+&lt;p&gt;As part of these support services, DNN Specialists may make available bug lists, planned feature lists, and other supplemental informational materials. DNN Specialists MAKES NO WARRANTY OF ANY KIND FOR THESE MATERIALS AND ASSUMES NO LIABILITY WHATSOEVER FOR DAMAGES RESULTING FROM ANY USE OF THESE MATERIALS.&amp;#160; FURTHERMORE, YOU MAY NOT USE ANY MATERIALS PROVIDED IN THIS WAY TO SUPPORT ANY CLAIM MADE AGAINST DNN Specialists.&lt;/p&gt;
+&lt;p&gt;Any supplemental software code or related materials that DNN Specialists provides to you as part of the support services, in periodic updates to the Software Product or otherwise, is to be considered part of the Software Product and is subject to the terms and conditions of this EULA.&lt;/p&gt;
+&lt;p&gt;With respect to any technical information you provide to DNN Specialists as part of the support services, DNN Specialists may use such information for its business purposes without restriction, including product support and development. DNN Specialists will not use such technical information in a form that personally identifies you without first obtaining your permission.&lt;/p&gt;
+&lt;p&gt;7. TERMINATION WITHOUT PREJUDICE TO ANY OTHER RIGHTS&lt;/p&gt;
+&lt;p&gt;DNN Specialists may terminate this EULA if you fail to comply with any term or condition of this EULA. In such event, you must destroy all copies of the Software Product and Software Product Licenses.&lt;/p&gt;
+&lt;p&gt;8. NO WARRANTIES&lt;/p&gt;
+&lt;p&gt;YOU ACCEPT THE SOFTWARE PRODUCT AND SOFTWARE PRODUCT LICENSE "AS IS," AND DNN Specialists AND ITS THIRD PARTY SUPPLIERS AND LICENSORS MAKE NO WARRANTY AS TO ITS USE, PERFORMANCE, OR OTHERWISE. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, DNN Specialists AND ITS THIRD PARTY SUPPLIERS AND LICENSORS DISCLAIM ALL OTHER REPRESENTATIONS, WARRANTIES, AND CONDITIONS, EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OR CONDITIONS OF MERCHANTABILITY, SATISFACTORY QUALITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. THE ENTIRE RISK ARISING OUT OF USE OR PERFORMANCE OF THE SOFTWARE PRODUCT REMAINS WITH YOU.&lt;/p&gt;
+&lt;p&gt;9. LIMITATION OF LIABILITY&lt;/p&gt;
+&lt;p&gt;THIS LIMITATION OF LIABILITY IS TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW. IN NO EVENT SHALL DNN Specialists OR ITS THIRD PARTY SUPPLIERS AND LICENSORS BE LIABLE FOR ANY COSTS OF SUBSTITUTE PRODUCTS OR SERVICES, OR FOR ANY SPECIAL, INCIDENTAL, INDIRECT, OR CONSEQUENTIAL DAMAGES WHATSOEVER (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF BUSINESS PROFITS, BUSINESS INTERRUPTION, OR LOSS OF BUSINESS INFORMATION) ARISING OUT OF THIS EULA OR THE USE OF OR INABILITY TO USE THE SOFTWARE PRODUCT OR THE FAILURE TO PROVIDE SUPPORT SERVICES, EVEN IF DNN Specialists HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. IN ANY CASE, DNN Specialists'S, AND ITS THIRD PARTY SUPPLIERS' AND LICENSORS', ENTIRE LIABILITY ARISING OUT OF THIS EULA SHALL BE LIMITED TO THE LESSER OF THE AMOUNT ACTUALLY PAID BY YOU FOR THE SOFTWARE PRODUCT OR THE PRODUCT LIST PRICE; PROVIDED, HOWEVER, THAT IF YOU HAVE ENTERED INTO A DNN Specialists SUPPORT SERVICES AGREEMENT, DNN Specialists'S ENTIRE LIABILITY REGARDING SUPPORT SERVICES SHALL BE GOVERNED BY THE TERMS OF THAT AGREEMENT.&lt;/p&gt;
+&lt;p&gt;10. HIGH RISK ACTIVITIES&lt;/p&gt;
+&lt;p&gt;The Software Product is not fault-tolerant and is not designed, manufactured or intended for use or resale as on-line control equipment in hazardous environments requiring fail-safe performance, such as in the operation of nuclear facilities, aircraft navigation or communication systems, air traffic control, direct life support machines, or weapons systems, in which the failure of the Software Product, or any software, tool, process, or service that was developed using the Software Product, could lead directly to death, personal injury, or severe physical or environmental damage ("High Risk Activities").&amp;#160; Accordingly, DNN Specialists and its suppliers and licensors specifically disclaim any express or implied warranty of fitness for High Risk Activities. You agree that DNN Specialists and its suppliers and licensors will not be liable for any claims or damages arising from the use of the Software Product, or any software, tool, process, or service that was developed using the Software Product, in such applications.&lt;/p&gt;
+&lt;p&gt;11. GOVERNING LAW; ENTIRE AGREEMENT; DISPUTE RESOLUTION&lt;/p&gt;
+&lt;p&gt;This EULA is governed by the laws of the United States of America, excluding the application of any conflict of law rules. The United Nations Convention on Contracts for the International Sale of Goods shall not apply.&lt;/p&gt;
+&lt;p&gt;This EULA is the entire agreement between DNN Specialists and you, and supersedes any other communications or advertising with respect to the Software Product. This EULA may be modified only by written agreement signed by authorized representatives of you and DNN Specialists.&lt;/p&gt;
+&lt;p&gt;Unless otherwise agreed in writing, all disputes relating to this EULA (except any dispute relating to intellectual property rights) shall be subject to final and binding arbitration in the State of Florida, in accordance with the Licensing Agreement Arbitration Rules of the American Arbitration Association, with the losing party paying all costs of arbitration. Arbitration must be by a member of the American arbitration Association. If any dispute arises under this EULA, the prevailing party shall be reimbursed by the other party for any and all legal fees and costs associated therewith.&lt;/p&gt;
+&lt;p&gt;12. GENERAL&lt;/p&gt;
+&lt;p&gt;If any provision of this EULA is held invalid, the remainder of this EULA shall continue in full force and effect.&lt;/p&gt;
+&lt;p&gt;A waiver by either party of any term or condition of this EULA or any breach thereof, in any one instance, shall not waive such term or condition or any subsequent breach thereof.&lt;/p&gt;
+&lt;p&gt;13. CONTACT INFORMATION&lt;/p&gt;
+&lt;p&gt;If you have any questions about this EULA, or if you want to contact DNN Specialists for any reason, please direct all correspondence to: &lt;a href="mailto:contact@dnnspecialists.com"&gt;contact@dnnspecialists.com&lt;/a&gt;&lt;/p&gt;</license>
+  <releaseNotes>&lt;ul&gt;
+&lt;li&gt;New Export to CSV feature while in a report.&lt;/li&gt;
+&lt;li&gt;New setting to allow category selection either before or after the date/time/duration.&lt;/li&gt;
+&lt;li&gt;Custom Fields can now be added to the Reservations Report.&lt;/li&gt;
+&lt;li&gt;Reservation duration can now be set to more than 24 hours.&lt;/li&gt;
+&lt;li&gt;New custom field type of Date.&lt;/li&gt;
+&lt;/ul&gt;</releaseNotes>
+  <components>
+    <component type="Script">
+      <scripts>
+        <basePath>DesktopModules\Reservations</basePath>
+        <script type="Install">
+          <name>01.00.00.SqlDataProvider</name>
+          <version>01.00.00</version>
+        </script>
+        <script type="Install">
+          <name>07.00.00.SqlDataProvider</name>
+          <version>07.00.00</version>
+        </script>
+        <script type="Install">
+          <name>07.03.00.SqlDataProvider</name>
+          <version>07.03.00</version>
+        </script>
+        <script type="UnInstall">
+          <name>Uninstall.SqlDataProvider</name>
+          <version>7.3.3</version>
+        </script>
+        <script type="Install">
+          <name>07.03.02.SqlDataProvider</name>
+          <version>07.03.02</version>
+        </script>
+      </scripts>
+    </component>
+    <component type="Module">
+      <desktopModule>
+        <moduleName>DNNSpecialists.Modules.Reservations</moduleName>
+        <foldername>Reservations</foldername>
+        <businessControllerClass>DNNSpecialists.Modules.Reservations.Controller</businessControllerClass>
+        <supportedFeatures>
+          <supportedFeature type="Upgradeable" />
+        </supportedFeatures>
+        <moduleDefinitions>
+          <moduleDefinition>
+            <friendlyName>Reservations</friendlyName>
+            <defaultCacheTime>0</defaultCacheTime>
+            <moduleControls>
+              <moduleControl>
+                <controlKey />
+                <controlSrc>DesktopModules/Reservations/MakeReservation.ascx</controlSrc>
+                <supportsPartialRendering>True</supportsPartialRendering>
+                <controlTitle />
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>0</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>Activate</controlKey>
+                <controlSrc>DesktopModules/Reservations/Activate.ascx</controlSrc>
+                <supportsPartialRendering>True</supportsPartialRendering>
+                <controlTitle>Activate Module</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>True</supportsPopUps>
+                <viewOrder>0</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>Cashier</controlKey>
+                <controlSrc>DesktopModules/Reservations/Cashier.ascx</controlSrc>
+                <supportsPartialRendering>True</supportsPartialRendering>
+                <controlTitle>Cashier</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>0</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>DuplicateReservations</controlKey>
+                <controlSrc>DesktopModules/Reservations/ViewList.ascx</controlSrc>
+                <supportsPartialRendering>True</supportsPartialRendering>
+                <controlTitle>Duplicate Reservations</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>0</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>EditCustomFieldDefinition</controlKey>
+                <controlSrc>DesktopModules/Reservations/EditCustomFieldDefinition.ascx</controlSrc>
+                <supportsPartialRendering>True</supportsPartialRendering>
+                <controlTitle>Add/Edit Custom Field</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>True</supportsPopUps>
+                <viewOrder>0</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>EditReservation</controlKey>
+                <controlSrc>DesktopModules/Reservations/EditReservation.ascx</controlSrc>
+                <supportsPartialRendering>False</supportsPartialRendering>
+                <controlTitle>Edit Reservation</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>True</supportsPopUps>
+                <viewOrder>0</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>EditSettings</controlKey>
+                <controlSrc>DesktopModules/Reservations/Settings.ascx</controlSrc>
+                <supportsPartialRendering>True</supportsPartialRendering>
+                <controlTitle>Reservations Settings</controlTitle>
+                <controlType>Edit</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>True</supportsPopUps>
+                <viewOrder>0</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>ListSettings</controlKey>
+                <controlSrc>DesktopModules/Reservations/ViewListSettings.ascx</controlSrc>
+                <supportsPartialRendering>True</supportsPartialRendering>
+                <controlTitle>List Settings</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>0</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>Moderate</controlKey>
+                <controlSrc>DesktopModules/Reservations/Moderate.ascx</controlSrc>
+                <supportsPartialRendering>True</supportsPartialRendering>
+                <controlTitle>Reservation Moderation</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>0</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>Settings</controlKey>
+                <controlSrc>DesktopModules/Reservations/Settings.ascx</controlSrc>
+                <supportsPartialRendering>False</supportsPartialRendering>
+                <controlTitle>Reservations Settings</controlTitle>
+                <controlType>Edit</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>0</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>ViewCustomFieldDefinitionList</controlKey>
+                <controlSrc>DesktopModules/Reservations/ViewCustomFieldDefinitionList.ascx</controlSrc>
+                <supportsPartialRendering>True</supportsPartialRendering>
+                <controlTitle>Custom Field Definitions</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>0</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>ViewReservations</controlKey>
+                <controlSrc>DesktopModules/Reservations/ViewList.ascx</controlSrc>
+                <supportsPartialRendering>True</supportsPartialRendering>
+                <controlTitle>Reservations</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>0</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>ViewReservationsCalendar</controlKey>
+                <controlSrc>DesktopModules/Reservations/ViewCalendar.ascx</controlSrc>
+                <supportsPartialRendering>True</supportsPartialRendering>
+                <controlTitle>Reservations Calendar</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>0</viewOrder>
+              </moduleControl>
+            </moduleControls>
+          </moduleDefinition>
+        </moduleDefinitions>
+      </desktopModule>
+      <eventMessage>
+        <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
+        <processorCommand>UpgradeModule</processorCommand>
+        <attributes>
+          <businessControllerClass>DNNSpecialists.Modules.Reservations.Controller</businessControllerClass>
+          <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
+          <upgradeVersionsList>01.00.00,07.00.00,07.03.00,07.03.02</upgradeVersionsList>
+        </attributes>
+      </eventMessage>
+    </component>
+    <component type="Assembly">
+      <assemblies>
+        <basePath>bin</basePath>
+        <assembly>
+          <name>DNNSpecialists.Modules.Reservations.dll</name>
+        </assembly>
+        <assembly>
+          <name>AuthorizeNet.dll</name>
+        </assembly>
+        <assembly>
+          <name>RestSharp.dll</name>
+        </assembly>
+        <assembly>
+          <name>Twilio.Api.dll</name>
+        </assembly>
+      </assemblies>
+    </component>
+    <component type="File">
+      <files>
+        <basePath>DesktopModules\Reservations</basePath>
+        <file>
+          <name>DNNSpecialists.Modules.Reservations.dnn</name>
+        </file>
+        <file>
+          <name>Activate.ascx</name>
+        </file>
+        <file>
+          <path>App_LocalResources</path>
+          <name>Settings.ascx.resx</name>
+        </file>
+        <file>
+          <name>Cashier.ascx</name>
+        </file>
+        <file>
+          <name>AuthorizeNetSIMRelayResponse.aspx</name>
+        </file>
+        <file>
+          <path>Images</path>
+          <name>csv.png</name>
+        </file>
+        <file>
+          <name>jquery.authorize.net.js</name>
+        </file>
+        <file>
+          <name>FeeScheduleControl.ascx</name>
+        </file>
+        <file>
+          <name>ViewList.ascx</name>
+        </file>
+        <file>
+          <path>Images</path>
+          <name>back.png</name>
+        </file>
+        <file>
+          <path>Images</path>
+          <name>next.png</name>
+        </file>
+        <file>
+          <name>jquery.responsive.js</name>
+        </file>
+        <file>
+          <name>jquery.sly.js</name>
+        </file>
+        <file>
+          <name>jquery.placeholder.js</name>
+        </file>
+        <file>
+          <name>EditCustomFieldDefinition.ascx</name>
+        </file>
+        <file>
+          <name>RecurrencePatternControl.ascx</name>
+        </file>
+        <file>
+          <name>sly.min.js</name>
+        </file>
+        <file>
+          <path>Themes\Responsive</path>
+          <name>Responsive - lighter gray.css</name>
+        </file>
+        <file>
+          <path>Themes\Responsive</path>
+          <name>Responsive-hover.png</name>
+        </file>
+        <file>
+          <path>Themes\Responsive</path>
+          <name>Responsive-LTIE8.css</name>
+        </file>
+        <file>
+          <path>Themes\Responsive</path>
+          <name>Responsive.css</name>
+        </file>
+        <file>
+          <path>Themes\Responsive</path>
+          <name>Responsive-selected.png</name>
+        </file>
+        <file>
+          <path>Themes\Responsive</path>
+          <name>Responsive-unselected.png</name>
+        </file>
+        <file>
+          <name>ViewCustomFieldDefinitionList.ascx</name>
+        </file>
+        <file>
+          <name>ViewListSettings.ascx</name>
+        </file>
+        <file>
+          <name>ViewReservations.ascx</name>
+        </file>
+        <file>
+          <name>DuplicateReservations.ascx</name>
+        </file>
+        <file>
+          <name>grant.gif</name>
+        </file>
+        <file>
+          <name>IPN.aspx</name>
+        </file>
+        <file>
+          <name>Module.css</name>
+        </file>
+        <file>
+          <name>Settings.ascx</name>
+        </file>
+        <file>
+          <name>MakeReservation.ascx</name>
+        </file>
+        <file>
+          <path>App_LocalResources</path>
+          <name>SharedResources.resx</name>
+        </file>
+        <file>
+          <name>Moderate.ascx</name>
+        </file>
+        <file>
+          <path>App_LocalResources</path>
+          <name>Moderate.ascx.resx</name>
+        </file>
+        <file>
+          <path>App_LocalResources</path>
+          <name>Cashier.ascx.resx</name>
+        </file>
+        <file>
+          <path>App_LocalResources</path>
+          <name>Activate.ascx.resx</name>
+        </file>
+        <file>
+          <path>App_LocalResources</path>
+          <name>ViewCustomFieldDefinitionList.ascx.resx</name>
+        </file>
+        <file>
+          <path>App_LocalResources</path>
+          <name>EditCustomFieldDefinition.ascx.resx</name>
+        </file>
+        <file>
+          <path>App_LocalResources</path>
+          <name>DuplicateReservations.ascx.resx</name>
+        </file>
+        <file>
+          <path>App_LocalResources</path>
+          <name>MakeReservation.ascx.resx</name>
+        </file>
+        <file>
+          <path>App_LocalResources</path>
+          <name>ViewReservations.ascx.resx</name>
+        </file>
+        <file>
+          <path>App_LocalResources</path>
+          <name>RecurrencePatternControl.ascx.resx</name>
+        </file>
+        <file>
+          <path>App_LocalResources</path>
+          <name>RecurrencePatternText.ascx.resx</name>
+        </file>
+        <file>
+          <path>App_LocalResources</path>
+          <name>ViewListSettings.ascx.resx</name>
+        </file>
+        <file>
+          <path>App_LocalResources</path>
+          <name>ViewList.ascx.resx</name>
+        </file>
+        <file>
+          <path>App_LocalResources</path>
+          <name>FeeScheduleControl.ascx.resx</name>
+        </file>
+      </files>
+    </component>
+  </components>
+</package></packages>
+</dotnetnuke>

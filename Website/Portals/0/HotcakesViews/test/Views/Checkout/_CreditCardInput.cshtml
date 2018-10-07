@@ -1,0 +1,91 @@
+﻿@model Hotcakes.Modules.Core.Models.CheckoutViewModel
+@using Hotcakes.Payment
+
+@helper Years()
+{
+    int baseYear = DateTime.Now.Year;
+    for (int i = 0; i < 10; i++)
+    {
+    <option value="@(baseYear + i)" 
+            @if (Model.PaymentViewModel.DataCreditCard.ExpirationYear == (baseYear + i))
+            {<text>selected="selected"</text>} 
+        >@(baseYear + i)</option>
+    }
+}
+@helper Months()
+{
+    for (int i = 1; i <= 12; i++)
+    {
+    <option value="@i" 
+            @if (Model.PaymentViewModel.DataCreditCard.ExpirationMonth == i)
+            { <text>selected="selected"</text>} 
+        >@i</option>
+    }
+}
+@functions 
+{
+    public bool IsAccepted(CardType ctype)
+    {
+        if (Model.PaymentViewModel.AcceptedCardTypes.Contains(ctype))
+        {
+            return true;
+        }
+        return false;
+    }  
+}
+<div class="hc-creditcard-form">
+    <div class="dnnFormItem">
+        <label class="dnnLabel">&nbsp;</label>
+        <span class="hc-card-icons">
+            @if (IsAccepted(CardType.Visa))
+            { <span class="cc-visa"></span> }
+            @if (IsAccepted(CardType.MasterCard))
+            { <span class="cc-mastercard"></span> }
+            @if (IsAccepted(CardType.Amex))
+            { <span class="cc-amex"></span> }
+            @if (IsAccepted(CardType.Discover))
+            { <span class="cc-discover"></span> }
+            @if (IsAccepted(CardType.DinersClub))
+            { <span class="cc-diners"></span> }
+            @if (IsAccepted(CardType.JCB))
+            { <span class="cc-jcb"></span> }
+        </span>
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <label class="dnnLabel">@Localization.GetString("CardNumber")</label>
+        <input type="text" name="cccardnumber" id="cccardnumber" size="20" maxlength="20"
+               
+                value="@Model.PaymentViewModel.DataCreditCard.CardNumber"                    
+                class="@Model.IsErr("cccardnumber")" />
+
+    </div>
+    <div class="dnnFormItem">
+        <label class="dnnLabel">@Localization.GetString("ExpDate")</label>
+
+        <select name="ccexpmonth" class="hc-cc-expmonth" >
+            <option value="0">--</option>
+            @Months()
+        </select>
+
+        <select name="ccexpyear" class="hc-cc-expyear" >
+            <option value="0">----</option>
+            @Years()
+        </select>
+
+    </div>
+    <div class="dnnFormItem">
+        <label class="dnnLabel">@Localization.GetString("SecurityCode")</label>
+
+        <input type="text" name="ccsecuritycode" size="5" 
+                maxlength="4" class="hc-cc-seccode @Model.IsErr("ccsecuritycode")" />
+
+    </div>
+    <div class="dnnFormItem">
+        <label class="dnnLabel">@Localization.GetString("NameOnCard")</label>
+
+        <input type="text" name="cccardholder" size="20" 
+                value="@Model.PaymentViewModel.DataCreditCard.CardHolderName"
+                class="@Model.IsErr("cccardholder")" />
+
+    </div>
+</div>

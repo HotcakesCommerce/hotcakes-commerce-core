@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DNNArticleSearch</name>
+    </assembly>
+    <members>
+        <member name="T:ZLDNN.Modules.DNNArticle.DNNArticleSearch.ArticleList">
+            -----------------------------------------------------------------------------
+            <summary>
+            The ViewDNNArticleArchive class displays the content
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticle.DNNArticleSearch.ArticleList.myArticleList">
+            <summary>
+            myArticleList 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticle.DNNArticleSearch.ArticleList.cmdArchiveList">
+            <summary>
+            cmdArchiveList 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticle.DNNArticleSearch.ArticleList.lbNoResult">
+            <summary>
+            lbNoResult 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticle.DNNArticleSearch.DNNArticleSearch.divSearch">
+            <summary>
+            divSearch 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticle.DNNArticleSearch.DNNArticleSearch.txtSearch">
+            <summary>
+            txtSearch 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticle.DNNArticleSearch.DNNArticleSearch.cmdSearch">
+            <summary>
+            cmdSearch 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticle.DNNArticleSearch.DNNArticleSearch.ArticleList">
+            <summary>
+            ArticleList 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticle.DNNArticleSearch.DNNArticleSearch.lbError">
+            <summary>
+            lbError 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticle.DNNArticleSearch.DNNArticleSearch.lbNoResult">
+            <summary>
+            lbNoResult 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticle.DNNArticleSearch.Settings.lbShowInDNNArticleList">
+            <summary>
+            lbShowInDNNArticleList 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticle.DNNArticleSearch.Settings.chkShowInDNNArticleList">
+            <summary>
+            chkShowInDNNArticleList 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticle.DNNArticleSearch.Settings.divDNNArticleList">
+            <summary>
+            divDNNArticleList 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticle.DNNArticleSearch.Settings.lbDNNArticleList">
+            <summary>
+            lbDNNArticleList 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticle.DNNArticleSearch.Settings.cboDNNArticleList">
+            <summary>
+            cboDNNArticleList 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticle.DNNArticleSearch.Settings.divList">
+            <summary>
+            divList 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticle.DNNArticleSearch.Settings.LoadSettings">
+            -----------------------------------------------------------------------------
+            <summary>
+            LoadSettings loads the settings from the Database and displays them
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            	[cnurse]	11/30/2004	converted to SettingsBase
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticle.DNNArticleSearch.Settings.UpdateSettings">
+            -----------------------------------------------------------------------------
+            <summary>
+            UpdateSettings saves the modified settings to the Database
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            	[cnurse]	11/30/2004	converted to SettingsBase
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+    </members>
+</doc>

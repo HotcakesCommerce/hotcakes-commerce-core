@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ThemeInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ArticleListCSSFile />
+  <ShowEditIcon>false</ShowEditIcon>
+  <RepeatLayout>1</RepeatLayout>
+  <Template />
+  <TemplateTypeSetting>1</TemplateTypeSetting>
+  <TemplateFileSetting>/dnn540dev/DesktopModules/DNNArticle/Templates/TabbedArticles.html</TemplateFileSetting>
+  <HeaderTemplate />
+  <HeaderTemplateTypeSetting>1</HeaderTemplateTypeSetting>
+  <HeaderTemplateFileSetting>/dnn540dev/DesktopModules/DNNArticle/Templates/ArticleListHeaderTemplate/TabbedArticles.html</HeaderTemplateFileSetting>
+  <FooterTemplate />
+  <FooterTemplateTypeSetting>1</FooterTemplateTypeSetting>
+  <FooterTemplateFileSetting>/dnn540dev/DesktopModules/DNNArticle/Templates/ArticleListFooterTemplate/TabbedArticles.html</FooterTemplateFileSetting>
+</ThemeInfo>

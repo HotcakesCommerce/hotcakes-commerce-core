@@ -1,0 +1,417 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CategoryArticleList</name>
+    </assembly>
+    <members>
+        <member name="T:ZLDNN.Modules.CategoryArticleList.Settings">
+            -----------------------------------------------------------------------------
+            <summary>
+            The Settings class manages Module Settings
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.CategorySelection">
+            <summary>
+            CategorySelection 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.lbRecent">
+            <summary>
+            lbRecent 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.txtRecent">
+            <summary>
+            txtRecent 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.CompareValidator3">
+            <summary>
+            CompareValidator3 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.lbRepeatColumn">
+            <summary>
+            lbRepeatColumn 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.txtRepeatColumn">
+            <summary>
+            txtRepeatColumn 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.RangeValidator4">
+            <summary>
+            RangeValidator4 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.lblRepeatLayout">
+            <summary>
+            lblRepeatLayout 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.cboRepeatLayout">
+            <summary>
+            cboRepeatLayout 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.lbCategoryTemplate">
+            <summary>
+            lbCategoryTemplate 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.ctlCategoryTemplateSelector">
+            <summary>
+            ctlCategoryTemplateSelector 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.lbHeaderTemplate">
+            <summary>
+            lbHeaderTemplate 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.ctlHeaderTemplateSelector">
+            <summary>
+            ctlHeaderTemplateSelector 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.lbFooterTemplate">
+            <summary>
+            lbFooterTemplate 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.ctlFooterTemplateSelector">
+            <summary>
+            ctlFooterTemplateSelector 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.lblCSS">
+            <summary>
+            lblCSS 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.ddlCSS">
+            <summary>
+            ddlCSS 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.lbShowMessageIfNoRecord">
+            <summary>
+            lbShowMessageIfNoRecord 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.chkShowMessageIfNoRecord">
+            <summary>
+            chkShowMessageIfNoRecord 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.lbMessageofNoRecord">
+            <summary>
+            lbMessageofNoRecord 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.txtMessageofNoRecord">
+            <summary>
+            txtMessageofNoRecord 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.RelatedArticlesSettings">
+            <summary>
+            RelatedArticlesSettings 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.lbPageSize">
+            <summary>
+            lbPageSize 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.txtPageSize">
+            <summary>
+            txtPageSize 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.RangeValidator2">
+            <summary>
+            RangeValidator2 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.lbEnablePage">
+            <summary>
+            lbEnablePage 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.chkEnablePage">
+            <summary>
+            chkEnablePage 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.lbPageControlType">
+            <summary>
+            lbPageControlType 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.Settings.cboPageControlType">
+            <summary>
+            cboPageControlType 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="M:ZLDNN.Modules.CategoryArticleList.Settings.LoadSettings">
+            -----------------------------------------------------------------------------
+            <summary>
+            LoadSettings loads the settings from the Database and displays them
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="M:ZLDNN.Modules.CategoryArticleList.Settings.UpdateSettings">
+            -----------------------------------------------------------------------------
+            <summary>
+            UpdateSettings saves the modified settings to the Database
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="T:ZLDNN.Modules.CategoryArticleList.ViewCategoryArticleList">
+            -----------------------------------------------------------------------------
+            <summary>
+            The ViewCategoryArticleList class displays the content
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.ViewCategoryArticleList.ltHeader">
+            <summary>
+            ltHeader 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.ViewCategoryArticleList.rptContent">
+            <summary>
+            rptContent 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.ViewCategoryArticleList.lstCategory">
+            <summary>
+            lstCategory 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.ViewCategoryArticleList.ltFooter">
+            <summary>
+            ltFooter 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.CategoryArticleList.ViewCategoryArticleList.MyPageNav">
+            <summary>
+            MyPageNav 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="P:ZLDNN.Modules.CategoryArticleList.ViewCategoryArticleList.ViewTabID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ZLDNN.Modules.CategoryArticleList.ViewCategoryArticleList.SelectedModule">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ZLDNN.Modules.CategoryArticleList.ViewCategoryArticleList.ShowExistingCatgory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ZLDNN.Modules.CategoryArticleList.ViewCategoryArticleList.ShowTopLevelOnly">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ZLDNN.Modules.CategoryArticleList.ViewCategoryArticleList.ShowHasArticleOnly">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ZLDNN.Modules.CategoryArticleList.ViewCategoryArticleList.CheckPermission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ZLDNN.Modules.CategoryArticleList.ViewCategoryArticleList.Page_Load(System.Object,System.EventArgs)">
+            -----------------------------------------------------------------------------
+            <summary>
+            Page_Load runs when the control is loaded
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="P:ZLDNN.Modules.CategoryArticleList.ViewCategoryArticleList.PageSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ZLDNN.Modules.CategoryArticleList.ViewCategoryArticleList.TotalRecord">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ZLDNN.Modules.CategoryArticleList.ViewCategoryArticleList.CurPage">
+            <summary>
+            Current page
+            </summary>
+            <value></value>
+            <returns>Current page</returns>
+            <remarks></remarks>
+        </member>
+    </members>
+</doc>

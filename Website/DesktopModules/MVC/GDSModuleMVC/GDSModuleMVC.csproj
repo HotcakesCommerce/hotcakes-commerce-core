@@ -1,0 +1,474 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4130D773-4930-4C21-9BCF-0C5244F585D0}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Moslem.Modules.GDSModuleMVC</RootNamespace>
+    <AssemblyName>GDSModuleMVC</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>3</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\..\..\inetpub\wwwroot\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetNuke">
+      <HintPath>..\..\..\..\..\..\inetpub\wwwroot\bin\DotNetNuke.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.HttpModules, Version=9.2.0.366, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\bin\DotNetNuke.HttpModules.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Web.Client">
+      <HintPath>..\..\..\..\..\..\inetpub\wwwroot\bin\DotNetNuke.Web.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Web.Deprecated">
+      <HintPath>..\..\..\..\..\..\inetpub\wwwroot\bin\DotNetNuke.Web.Deprecated.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Web.Mvc">
+      <HintPath>..\..\..\..\..\..\inetpub\wwwroot\bin\DotNetNuke.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.WebUtility, Version=4.2.1.783, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\bin\DotNetNuke.WebUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Base, Version=2016.3.0.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\bin\Stimulsoft.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report, Version=2016.3.0.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\bin\Stimulsoft.Report.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\bin\System.Web.Helpers.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\bin\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\inetpub\wwwroot\bin\System.Web.Mvc.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\bin\System.Web.Razor.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\bin\System.Web.WebPages.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\bin\System.Web.WebPages.Deployment.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\bin\System.Web.WebPages.Razor.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_LocalResources\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Settings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Cards.cs" />
+    <Compile Include="Components\FeatureController.cs" />
+    <Compile Include="Components\IItemManager.cs" />
+    <Compile Include="Components\ItemManager.cs" />
+    <Compile Include="Components\PersianDate.cs" />
+    <Compile Include="Components\RoutConfig.cs" />
+    <Compile Include="Components\Utility.cs" />
+    <Compile Include="Controllers\GDSController.cs" />
+    <Compile Include="Controllers\GiftCardController.cs" />
+    <Compile Include="Controllers\HotelsController.cs" />
+    <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\MoslemController.cs" />
+    <Compile Include="Controllers\NewFolder1\Api.cs" />
+    <Compile Include="Controllers\NewFolder1\CapacityEarlyLateCapacity.cs" />
+    <Compile Include="Controllers\NewFolder1\city.cs" />
+    <Compile Include="Controllers\NewFolder1\DayPricereserve.cs" />
+    <Compile Include="Controllers\NewFolder1\DayPriceReserveInfo.cs" />
+    <Compile Include="Controllers\NewFolder1\DetailEarlyLateCapacity.cs" />
+    <Compile Include="Controllers\NewFolder1\DetailExtraPricesesearchHotel.cs" />
+    <Compile Include="Controllers\NewFolder1\DetailFreeCapacitysesearchHotel.cs" />
+    <Compile Include="Controllers\NewFolder1\DetailPricesesearchHotel.cs" />
+    <Compile Include="Controllers\NewFolder1\ExtraRackRatesesearchHotel.cs" />
+    <Compile Include="Controllers\NewFolder1\gethotelImage.cs" />
+    <Compile Include="Controllers\NewFolder1\gethotelImages.cs" />
+    <Compile Include="Controllers\NewFolder1\Inforeserve.cs" />
+    <Compile Include="Controllers\NewFolder1\Passengerreserve.cs" />
+    <Compile Include="Controllers\NewFolder1\PassengerReserveInfo.cs" />
+    <Compile Include="Controllers\NewFolder1\Passengerreserveres.cs" />
+    <Compile Include="Controllers\NewFolder1\reqgetCity.cs" />
+    <Compile Include="Controllers\NewFolder1\reqgetEarlyLateCapacity.cs" />
+    <Compile Include="Controllers\NewFolder1\reqgetHotel.cs" />
+    <Compile Include="Controllers\NewFolder1\reqgetprovince.cs" />
+    <Compile Include="Controllers\NewFolder1\reqisFinalize.cs" />
+    <Compile Include="Controllers\NewFolder1\reqlogin.cs" />
+    <Compile Include="Controllers\NewFolder1\reqreserve.cs" />
+    <Compile Include="Controllers\NewFolder1\reqReserveInfo.cs" />
+    <Compile Include="Controllers\NewFolder1\reqsearchHotel.cs" />
+    <Compile Include="Controllers\NewFolder1\reqsessionIsValid.cs" />
+    <Compile Include="Controllers\NewFolder1\reqsessionlogout.cs" />
+    <Compile Include="Controllers\NewFolder1\ReserveObject.cs" />
+    <Compile Include="Controllers\NewFolder1\Reservereserve.cs" />
+    <Compile Include="Controllers\NewFolder1\resfinalize.cs" />
+    <Compile Include="Controllers\NewFolder1\resgetCity.cs" />
+    <Compile Include="Controllers\NewFolder1\resgetEarlyLateCapacity.cs" />
+    <Compile Include="Controllers\NewFolder1\resgetHotel.cs" />
+    <Compile Include="Controllers\NewFolder1\resgetprovince.cs" />
+    <Compile Include="Controllers\NewFolder1\resisFinalize.cs" />
+    <Compile Include="Controllers\NewFolder1\reslogout.cs" />
+    <Compile Include="Controllers\NewFolder1\respgetReserveInfo.cs" />
+    <Compile Include="Controllers\NewFolder1\resplogin.cs" />
+    <Compile Include="Controllers\NewFolder1\ResponseEarlyLateCapacity.cs" />
+    <Compile Include="Controllers\NewFolder1\Responsefinalize.cs" />
+    <Compile Include="Controllers\NewFolder1\ResponsegetCity.cs" />
+    <Compile Include="Controllers\NewFolder1\ResponsegetHotel.cs" />
+    <Compile Include="Controllers\NewFolder1\Responsegetprovince.cs" />
+    <Compile Include="Controllers\NewFolder1\ResponsegetReserveInfo.cs" />
+    <Compile Include="Controllers\NewFolder1\ResponseisFinalize.cs" />
+    <Compile Include="Controllers\NewFolder1\Responselogin.cs" />
+    <Compile Include="Controllers\NewFolder1\Responsereserve.cs" />
+    <Compile Include="Controllers\NewFolder1\ResponsesearchHotel.cs" />
+    <Compile Include="Controllers\NewFolder1\resprepareForBank.cs" />
+    <Compile Include="Controllers\NewFolder1\resreserve.cs" />
+    <Compile Include="Controllers\NewFolder1\ressearchHotel.cs" />
+    <Compile Include="Controllers\NewFolder1\ressessionIsValid.cs" />
+    <Compile Include="Controllers\NewFolder1\RoomgetHotel.cs" />
+    <Compile Include="Controllers\NewFolder1\RoomsesearchHotel.cs" />
+    <Compile Include="Controllers\NewFolder1\searchObject.cs" />
+    <Compile Include="Controllers\NewFolder1\SearchViewModel.cs" />
+    <Compile Include="Controllers\PackageController.cs" />
+    <Compile Include="Controllers\ReserveController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Models\GiftCard.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Passenger.cs" />
+    <Compile Include="Models\PaymentModel.cs" />
+    <Compile Include="Models\reserveandpay.cs" />
+    <Compile Include="Models\ReservedRoom.cs" />
+    <Compile Include="Models\ReservePassanger.cs" />
+    <Compile Include="Models\RetiredCreditUsed.cs" />
+    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\VoucherModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web References\com.payamsms.beta\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ir.retirement\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ir.shaparak.sep\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="content\Angular\Home.html" />
+    <Content Include="content\Angular\Cards.html" />
+    <Content Include="content\Angular\RoomsPackageDetails.html" />
+    <Content Include="content\Angular\PackageDetails.html" />
+    <Content Include="content\Angular\RoomsLists.html" />
+    <Content Include="content\Angular\PackageLists.html" />
+    <Content Include="content\jqueries\jquery-header_other.js" />
+    <Content Include="content\jqueries\jquery-home-ad.js" />
+    <Content Include="content\jqueries\jquery-lang.js" />
+    <Content Include="content\jqueries\jquery-menuul-fix.js" />
+    <Content Include="content\jqueries\jquery-menuul.js" />
+    <Content Include="content\jqueries\jquery-scroll.js" />
+    <Content Include="content\jqueries\jquery-textblur-fa.js" />
+    <Content Include="content\jqueries\jquery.keys.js" />
+    <Content Include="content\jquery-reserve_rooms_v1_3.js" />
+    <Content Include="content\js\angular-ui-router.min.js" />
+    <Content Include="content\js\angular.min.js" />
+    <Content Include="content\js\AngularFormAppadmin.js" />
+    <Content Include="content\js\AngularFormApp.js" />
+    <Content Include="content\SignBank5.gif" />
+    <Content Include="content\stimule\New Text Document.txt" />
+    <Content Include="content\stripes_5_b.png" />
+    <Content Include="Documentation\Documentation.css" />
+    <Content Include="Documentation\Documentation.html" />
+    <Content Include="kamadatepicker.min - Copy.js" />
+    <Content Include="kamadatepicker.min.css" />
+    <Content Include="kamadatepicker.min.js" />
+    <Content Include="kamadatepicker2.min.js" />
+    <Content Include="License.txt" />
+    <Content Include="module.css" />
+    <Content Include="ReleaseNotes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GDSModuleMVC.dnn">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BuildScripts\ModulePackage.targets" />
+    <Content Include="BuildScripts\MSBuild.Community.Tasks.Targets" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\Api.resx" />
+    <Content Include="App_LocalResources\Hotels.bak.resx" />
+    <Content Include="App_LocalResources\Hotels.resx" />
+    <Content Include="App_LocalResources\Item1.resx" />
+    <Content Include="App_LocalResources\Itemxxx.resx" />
+    <Content Include="App_LocalResources\Reserve.fa-ir.resx" />
+    <Content Include="App_LocalResources\Reserve.resx" />
+    <Content Include="App_LocalResources\search.resx" />
+    <Content Include="App_LocalResources\Settings.fa-ir.resx" />
+    <Content Include="App_LocalResources\city.fa-ir.resx" />
+    <Content Include="App_LocalResources\Hotels.fa-ir.resx" />
+    <Content Include="App_LocalResources\GiftCard.resx" />
+    <Content Include="App_LocalResources\GiftCard.fa-ir.resx" />
+    <EmbeddedResource Include="App_LocalResources\Settings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Providers\DataProviders\SqlDataProvider\00.00.01.SqlDataProvider" />
+    <Content Include="Providers\DataProviders\SqlDataProvider\Uninstall.SqlDataProvider" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="stylefonts.css" />
+    <Content Include="StyleReserve.css" />
+    <Content Include="Views\Item\Edit.cshtml" />
+    <Content Include="Views\Item\Index.cshtml" />
+    <Content Include="Views\Settings\Settings.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Hotels\Index.cshtml" />
+    <Content Include="Views\Hotels\_DemoPartial.cshtml" />
+    <Content Include="Views\Item\bk\Index.cshtml" />
+    <Content Include="Views\Item\Edit2.cshtml" />
+    <Content Include="Views\Item\Error.cshtml" />
+    <Content Include="Views\Item\Flat Moudule Template\Index.cshtml" />
+    <Content Include="Views\Item\Index - Copy.cshtml" />
+    <Content Include="Views\Item\Index2.cshtml" />
+    <Content Include="Views\Item\Transparent Box Template\Index.cshtml" />
+    <Content Include="Views\Moslem\Index.cshtml" />
+    <Content Include="Views\Package\Index.cshtml" />
+    <Content Include="Views\Reserve\Applied.cshtml" />
+    <Content Include="Views\Reserve\Index.cshtml" />
+    <Content Include="Views\Reserve\Indexok.cshtml" />
+    <Content Include="Views\Search\bk\Index.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Search\Index2.cshtml" />
+    <Content Include="Views\Search\Indexsdf.cshtml" />
+    <Content Include="Views\Search\SaveReserveData.cshtml" />
+    <Content Include="content\stimule\BTitrBold.ttf" />
+    <Content Include="content\stimule\BYekan.ttf" />
+    <Content Include="content\stimule\Report - Copy.mrt" />
+    <Content Include="content\stimule\Report.mrt" />
+    <Content Include="Fonts\atringroupsigns_ittic.eot" />
+    <Content Include="Fonts\atringroupsigns_ittic.ttf" />
+    <Content Include="Fonts\atringroupsigns_ittic.woff" />
+    <Content Include="Fonts\atringroupsigns_reservation.eot" />
+    <Content Include="Fonts\atringroupsigns_reservation.ttf" />
+    <Content Include="Fonts\atringroupsigns_reservation.woff" />
+    <Content Include="Fonts\iransans\IRANSansWeb%28FaNum%29.eot" />
+    <Content Include="Fonts\iransans\IRANSansWeb%28FaNum%29.ttf" />
+    <Content Include="Fonts\iransans\IRANSansWeb%28FaNum%29.woff" />
+    <Content Include="Fonts\iransans\IRANSansWeb%28FaNum%29.woff2" />
+    <None Include="Properties\Settings.settings" />
+    <Content Include="Web References\com.payamsms.beta\BalanceResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\com.payamsms.beta\ReceiveResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\com.payamsms.beta\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\com.payamsms.beta\ReportResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\com.payamsms.beta\SendResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\com.payamsms.beta\StatusReportResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Views\Search\Error.cshtml" />
+    <Content Include="Views\Reserve\Error.cshtml" />
+    <Content Include="Views\GDS\CreditSummary.cshtml" />
+    <Content Include="Views\GiftCard\Index.cshtml" />
+    <None Include="Web References\com.payamsms.beta\wsdl.wsdl" />
+    <Content Include="Web References\ir.shaparak.sep\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\ir.retirement\cspfservice.wsdl" />
+    <Content Include="Web References\ir.retirement\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\ir.shaparak.sep\referencepayment1.wsdl" />
+    <Content Include="Web References\ir.shaparak.sep\ReverseResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\Item.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://beta.payamsms.com/wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\com.payamsms.beta\</RelPath>
+      <UpdateFromURL>http://beta.payamsms.com/wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www1.retirement.ir/cspfwebservice/cspfservice.asmx%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ir.retirement\</RelPath>
+      <UpdateFromURL>http://www1.retirement.ir/cspfwebservice/cspfservice.asmx%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://sep.shaparak.ir/payments/referencepayment1.asmx%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ir.shaparak.sep\</RelPath>
+      <UpdateFromURL>https://sep.shaparak.ir/payments/referencepayment1.asmx%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>
+          </DevelopmentServerVPath>
+          <IISUrl>http://127.0.0.1/desktopmodules/mvc/GDSModuleMVC</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://127.0.0.1</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <Extension>zip</Extension>
+    <DNNFileName>GDSModuleMVC</DNNFileName>
+    <PackageName>GDSModuleMVC</PackageName>
+  </PropertyGroup>
+  <Import Project="BuildScripts\ModulePackage.Targets" />
+  <Target Name="AfterBuild" DependsOnTargets="PackageModule">
+  </Target>
+</Project>

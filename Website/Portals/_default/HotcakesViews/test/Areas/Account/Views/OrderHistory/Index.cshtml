@@ -1,0 +1,59 @@
+﻿@model Hotcakes.Modules.Core.Areas.Account.Models.OrderHistoryViewModel
+@functions
+{
+    string OrderLink(Hotcakes.Commerce.Orders.OrderSnapshot o)
+    {
+        if (o == null)
+            return string.Empty;
+        
+        return Url.RouteHccUrl(HccRoute.OrderHistory, new { action = "details", id = o.bvin });
+    }
+}
+<h2>@Localization.GetString("OrderHistory")</h2>
+@if (HccApp.CurrentStore.Settings.RewardsPointsEnabled)
+{
+    <h3>@Localization.GetString("YouRewardsPoints") @Model.RewardPoints</h3>
+}
+@Html.Raw((string)TempData["messages"])
+<table class="dnnGrid hc-orderhistory">
+    <thead>
+        <tr class="dnnGridHeader">
+            <td class="hidden-phone">
+                @Localization.GetString("TimeOfOrder")
+            </td>
+            <td>
+                @Localization.GetString("OrderNumber")
+            </td>
+            <td>
+                @Localization.GetString("Amount")
+            </td>
+            <td>
+                @Localization.GetString("Status")
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+    </thead>
+    @{ var i = 0; }
+    @foreach (var o in Model.Orders)
+    {
+        <tr class="@(i++ % 2 == 1 ? "dnnGridAltItem" : "dnnGridItem")">
+            <td class="hidden-phone">@DateHelper.ConvertUtcToStoreTime(HccApp, o.TimeOfOrderUtc)
+            </td>
+            <td class="hc-right">@o.OrderNumber
+            </td>
+            <td class="hc-right">@o.TotalGrand.ToString("C")
+            </td>
+            <td>@LocalizationUtils.GetOrderStatus(o.StatusName)
+            </td>
+            <td class="hc-actions">
+                <a href="@OrderLink(o)" class="dnnSecondaryAction">
+                    @Localization.GetString("ViewDetails")
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.Partial("_Pager", Model.PagerData)

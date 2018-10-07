@@ -1,0 +1,1001 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+
+/*======================== Drop Procedure ===================== */
+--  Proc 1 Article 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticles]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticles
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetAllDNNArticles]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetAllDNNArticles
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticlesByCategoryID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticlesByCategoryID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetAllDNNArticlesByCategoryID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetAllDNNArticlesByCategoryID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetApprovedDNNArticlesByCategoryID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetApprovedDNNArticlesByCategoryID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetAllApprovedDNNArticlesByCategoryID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetAllApprovedDNNArticlesByCategoryID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetApprovedDNNArticles]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetApprovedDNNArticles
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetAllApprovedDNNArticles]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetAllApprovedDNNArticles
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleByTitle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleByTitle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticle
+GO
+
+
+
+--  Proc 2 Categories 
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryDelete
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryList') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryList
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetByModules') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetByModules
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetByParent') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetByParent
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleCategoriesByArticleID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleCategoriesByArticleID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleMoveCategory') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleMoveCategory
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleFirstLevelCategory') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleFirstLevelCategory
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetById') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetById
+GO
+
+--  Proc 3 Comment
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByModuleID') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByModuleID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentList') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentList
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByDNNArticle') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByDNNArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentDelete
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByModuleIDUserID') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByModuleIDUserID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByModuleIDAuthorID') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByModuleIDAuthorID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByParentId') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByParentId
+GO
+
+
+
+--  Proc 4 File
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleFileByArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleFileByArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleFile]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleFile
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleFile]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleFile
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleFile]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleFile
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleFile]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleFile
+GO
+
+
+
+
+--   Proc 5 Tag 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleTag]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleTag
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleTag]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleTag
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleTag]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleTag
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTags]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTags
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTag]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTag
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagsNumberByArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagsNumberByArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagsNumber]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagsNumber
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagByName]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagByName
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagsNumberMinNumber]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagsNumberMinNumber
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagsNumberMinNumberByCategory]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagsNumberMinNumberByCategory
+GO
+
+
+--  Proc 6 Tag in article
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagsByArticleID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagsByArticleID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagInArticleByTagID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagInArticleByTagID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleTagInArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleTagInArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleTagInArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleTagInArticle
+GO
+
+
+
+--  Proc 7 Article Assigned Categories
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleCategories]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleCategories
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleCategories]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleCategories
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetArticleAssignedCategories]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetArticleAssignedCategories
+GO
+
+
+
+--  Proc 8 Extra Fields
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_ExtraFieldGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_ExtraFieldList') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldList
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_ExtraFieldGetByModules') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldGetByModules
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_ExtraFieldAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_ExtraFieldUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_ExtraFieldDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldDelete
+GO
+
+
+
+-- Proc 9 DNNArticleUserRating 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleUserRatingByArticleID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleUserRatingByArticleID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleUserRatingByUserID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleUserRatingByUserID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleUserRating]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleUserRating
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleUserRating]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleUserRating
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleUserRating]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleUserRating
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleUserRating]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleUserRating
+GO
+
+
+
+--  Proc 10 Page
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticlePageByArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticlePageByArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticlePage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticlePage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticlePageByNumber]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticlePageByNumber
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticlePage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticlePage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticlePage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticlePage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticlePage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticlePage
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticlePageByModule]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticlePageByModule
+GO
+
+
+
+--  Proc 11 TagCSS
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagCSSs]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagCSSs
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagCSS]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagCSS
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleTagCSS]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleTagCSS
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleTagCSS]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleTagCSS
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleTagCSS]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleTagCSS
+GO
+
+
+
+--  Proc 12 Subscribe 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleSubscribes]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleSubscribes
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleSubscribe]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleSubscribe
+GO
+	
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleSubscribeByUser]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleSubscribeByUser
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleSubscribe]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleSubscribe
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleSubscribe]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleSubscribe
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleSubscribeByModule]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleSubscribeByModule
+GO
+
+
+
+--  Proc 13 Version 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleVersions]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleVersions
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleVersion]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleVersion
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleVersion]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleVersion
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleVersion]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleVersion
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleVersion]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleVersion
+GO
+
+
+
+--  Proc 14 Language 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLanguages]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguages
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLanguage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleLanguage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleLanguage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleLanguage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleLanguage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleLanguage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleLanguage
+GO
+
+
+-- Proc 15 Language Version 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLanguageVersions]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguageVersions
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLanguageVersion]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguageVersion
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleLanguageVersion]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleLanguageVersion
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleLanguageVersion]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleLanguageVersion
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleLanguageVersion]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleLanguageVersion
+GO
+
+
+
+-- Proc 16 Language Page
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLanguagePageByArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguagePageByArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLanguagePage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguagePage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLanguagePageByNumber]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguagePageByNumber
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleLanguagePage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleLanguagePage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleLanguagePage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleLanguagePage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleLanguagePage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleLanguagePage
+GO
+
+
+
+-- Proc 17 Related Article
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddRelatedDNNArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddRelatedDNNArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteRelatedDNNArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteRelatedDNNArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetRelatedDNNArticleByArticleID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetRelatedDNNArticleByArticleID
+GO
+
+
+-- Proc 18 CategoryLanguage
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageGet
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageGetByLanguage') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageGetByLanguage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageGetByCategory') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageGetByCategory
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageDelete
+GO
+
+
+
+-- Proc 19 DNNArticle_TokenProvider
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderDelete
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderGetAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderGetAll
+GO
+
+
+
+-- Proc 20 DNNArticle_Editor
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorDelete
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorGetAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorGetAll
+GO
+
+
+
+-- Proc 21 ArticleResource
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleResource]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleResource
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleResource]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleResource
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleResource]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleResource
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleResourceByModuleId]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleResourceByModuleId
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleResource]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleResource
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleResourceByArticleId]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleResourceByArticleId
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleRelatedResource]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleRelatedResource
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleRelatedResource]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleRelatedResource
+GO
+
+
+
+-- Proc 22 ArticleAgree
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleAgree]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleAgree
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleAgree]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleAgree
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleAgree]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleAgree
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleAgreeListByArticleId]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleAgreeListByArticleId
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleAgree]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleAgree
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleAgreeByArticleId]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTotalAgreeByArticleId
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleAgreeByArticleId]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleAgreeByArticleId
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleDisAgreeByArticleId]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleDisAgreeByArticleId
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleAgreeById]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleAgreeById
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleAgreeById]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleAgreeById
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleAgreeById]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleAgreeById
+GO
+
+
+
+-- Proc 23 ArticleExtraFieldValue
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueGetByDNNArticleId') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueGetByDNNArticleId
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueDelete
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueGetByModuleId') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueGetByModuleId
+GO
+
+
+
+-- Proc 24 ArticleLightboxContentPlugin
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleLightboxContentPlugin]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleLightboxContentPlugin
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleLightboxContentPlugin]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleLightboxContentPlugin
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPlugins]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPlugins
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPluginsByEntryID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPluginsByEntryID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPluginsByEntryIDWithCatalog]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPluginsByEntryIDWithCatalog
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPlugin]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPlugin
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleLightboxContentPlugin]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleLightboxContentPlugin
+GO
+
+
+
+-- DNNUserArticle 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNUserArticleCountByModuleAndUser]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNUserArticleCountByModuleAndUser
+GO
+ 
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNUserArticleCountByModule]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNUserArticleCountByModule
+GO
+
+
+
+-- other
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQL') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQL
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQLDate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQLDate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQLDateAndCategories') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQLDateAndCategories
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleUnSubscribes]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleUnSubscribes
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleUnSubscribe]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleUnSubscribe
+GO
+	
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleUnSubscribeByUser]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleUnSubscribeByUser
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleUnSubscribe]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleUnSubscribe
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleUnSubscribe]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleUnSubscribe
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleUnSubscribeByModule]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleUnSubscribeByModule
+GO
+
+-- Tag Image
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageDelete
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageGetByTag') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageGetByTag
+
+-- ExtraFieldValueLanguage
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageGetByDNNArticleId') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageGetByDNNArticleId
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageDelete
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageGetByModuleId') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageGetByModuleId
+GO
+
+
+-- Permission
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionDelete
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionGetByArticle') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionGetByArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionDelete
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionGetByCategory') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionGetByCategory
+GO
+
+
+
+/*======================== Drop View ===================== */
+
+if  exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}vw_ZLDNNFiles]') and OBJECTPROPERTY(id, N'IsView') = 1)
+Drop View {databaseOwner}[{objectQualifier}vw_ZLDNNFiles]
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticle]') and OBJECTPROPERTY(id, N'IsView') = 1)
+	DROP VIEW {databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticle]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticlePermission]') and OBJECTPROPERTY(id, N'IsView') = 1)
+	DROP VIEW {databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticlePermission]
+GO
+
+
+
+/*======================== Drop Table ===================== */
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage
+GO
+
+drop table  {databaseOwner}{objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin 
+GO
+
+drop table  {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValue 
+GO
+
+drop table  {databaseOwner}{objectQualifier}ZLDNN_DNNArticleAgree 
+GO
+
+drop table  {databaseOwner}{objectQualifier}ZLDNN_DNNArticleResourceInArticle 
+GO
+
+drop table  {databaseOwner}{objectQualifier}ZLDNN_DNNArticleResource 
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_Editor
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProvider
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguage
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleRelate
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleLanguagePage
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleLanguageVersion
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleLanguage
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleVersion
+GO
+
+drop table {objectQualifier}ZLDNN_DNNArticleUnSubscribe
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleSubscribe
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagCSS
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticlePage
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleUserRating
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_ExtraField
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleAssignedCategories
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagInArticle 
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImage
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTag
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleFile
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment 
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermission 
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory 
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermission 
+GO
+
+drop table {databaseOwner}{objectQualifier}ZLDNN_DNNArticle 
+GO
+
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

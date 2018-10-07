@@ -1,0 +1,67 @@
+﻿
+<script type="text/javascript">
+    $(document).ready(function() {
+        // Create jqxRating
+        $("#"+"@Model.ClientID").jqxRating({
+            width: 350,
+            height: 35,
+            theme: 'classic',
+            value: @Model.RatingValue,
+            precision: 1,
+            singleVote:true
+        });
+         var en = $.jqx.cookie.cookie("@Model.CookieKey");
+        //console.log("@Model.CookieKey" + ":" + en);
+        @if (Model.CanMakeRating == "true")
+        {
+           <text>
+
+        if (en != "True") {
+            $("#" + "@Model.ClientID").jqxRating('enable');
+            var changed = false;
+            $("#" + "@Model.ClientID").on('change',
+                function (event) {
+                    if (changed) return;
+                    var sf = $.ServicesFramework(@Model.ModuleID);
+                    //var urlbase = sf.getServiceRoot('DNNArticle') + "DNNArticleWebApi/RateArticle";
+                     
+                   var urlbase = "@DotNetNuke.Common.Globals.ResolveUrl("~/desktopmodules/dnnarticle/services/MakeRating.ashx")" ;
+                    
+                    $.ajax(
+                        {
+                            type: "POST",
+                            url: urlbase,
+                            data: { ModuleId: @Model.ModuleID, ItemId: @Model.ItemID, RatingValue: event.value * 2 },
+                            success: function (res) {
+                    changed = true;
+                                //$("#" + "@Model.ClientID").jqxRating('disable');
+                                $("#" + "@Model.ClientID").hide();
+                                //console.log(res);
+                                //$("#" + "@Model.ClientID").jqxRating({ value: res });
+                                $.jqx.cookie.cookie("@Model.CookieKey", 'True',{ path:"/"});
+                    //alert();
+                    var msg = "@DotNetNuke.Services.Localization.Localization.GetString("RatingFinish.Text",ZLDNN.Modules.DNNArticle.pubModule.GetSharedResourceFile())";
+                    msg = msg.replace("{0}", event.value);
+                msg = msg.replace("{1}", res);
+                                $("#msg_" + "@Model.ClientID").html(msg);
+
+            }
+        }
+                    );
+                });
+        } else {
+            $("#" + "@Model.ClientID").jqxRating('disable');
+        }
+        </text>
+        }
+        else
+        {
+            @: $("#" + "@Model.ClientID").jqxRating('disable');
+        }
+
+    });
+</script>
+
+
+<div id='@Model.ClientID'></div>
+<div id='msg_@Model.ClientID'></div>

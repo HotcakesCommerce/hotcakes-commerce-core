@@ -1,0 +1,11 @@
+﻿<div ng-controller="common_controls_url">
+    <uiengine provider="AngularBootstrap" identifier="common_controls_url" layout="default">
+        <uilayout name="default">
+            <uielement name="UploadFile" control="upload" mode="file" attr-class="url-add" autoupload="true" label="false" container-attr-ng-show="(ui.data.FilebrowserBrowseUrl.Value && ui.data.Settings.Options.UploadFiles)||(!ui.data.FilebrowserBrowseUrl.Value && ui.data.Settings.Options.UploadImages)" maxsize="$scope.ui.data.FilebrowserBrowseUrl.Value?$scope.ui.data.Settings.Options.UploadFilesMaxFileSize* 1000000:$scope.ui.data.Settings.Options.UploadImagesMaxFileSize* 1000000" filetypes="$scope.ui.data.FilebrowserBrowseUrl.Value?$scope.ui.data.Settings.Options.UploadFilesAllowedAttachmentFileExtensions:$scope.ui.data.Settings.Options.UploadImagesAllowedAttachmentFileExtensions"></uielement>
+            <uielement name="Attachment" control="upload" mode="advance" autoupload="true" label="false" attr-controlmodes="browse" folders="$scope.ui.data.Folders.Options" files="$scope.ui.data.Files.Options"></uielement>
+            <uielement name="Types" control="radiobuttonlist"></uielement>
+            <uielement name="Cancel" control="button" label="false" attr-ng-click="CancelBrowser()" attr-class="ms-btn-link ms-pull-right" container="false"></uielement>
+            <uielement name="Update" attr-id="Update" control="button" attr-class="ms-pull-right" attr-ng-click="UpdateBrowser('Update')" label="false"></uielement>
+        </uilayout>
+    </uiengine>
+</div>

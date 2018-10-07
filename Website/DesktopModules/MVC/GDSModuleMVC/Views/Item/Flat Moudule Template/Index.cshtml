@@ -1,0 +1,174 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<Moslem7026.Modules.GDSApi.GDSModule.resgetCity>
+
+
+@using System.Text.RegularExpressions
+@using DotNetNuke.Web.Mvc.Helpers
+@using DotNetNuke.Framework.JavaScriptLibraries
+@using DotNetNuke.Web.Client.ClientResourceManagement
+
+@{
+    ClientResourceManager.RegisterStyleSheet(Dnn.DnnPage, "~/desktopmodules/mvc/GDSModuleMVC/kamadatepicker.min.css");
+    ClientResourceManager.RegisterScript(Dnn.DnnPage, "~/desktopmodules/mvc/GDSModuleMVC/kamadatepicker.min.js", 20);
+    JavaScript.RequestRegistration("AngularJS");
+    //ClientResourceManager.RegisterStyleSheet(Dnn.DnnPage, "~/DesktopModules/MVC/DotNetNuclear/RestaurantMenu/Resources/module.css");
+}
+
+<style>
+    .form-group {
+        padding: 0 10px;
+    }
+</style>
+<div>
+    <div class="row booking">
+        <div class="col-md-1">
+            <div class="form-group">
+                <h4>رزرو</h4>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <input type="text" id="dateStart" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <input type="text" id="dateEnd" />
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <select id="city">
+                    <option value="null">شهر</option>
+                    @foreach (var item in Model.response)
+                    {
+                        if (!string.IsNullOrEmpty(Dnn.LocalizeString(item.description)))
+                        {
+                            <option value="@item.id">@Dnn.LocalizeString(item.description)</option>
+                        }
+
+                    }
+                </select>
+
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <select id="hotel" disabled="true">
+                    <option value="null">نام هتل</option>
+                </select>
+
+            </div>
+        </div>
+        <div class="col-md-1" style="padding:0;">
+            <div class="form-group">
+                <select id="count">
+                    <option value="null">نفرات</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="5+">5+</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <a id="asdf" class="btn btn-pimary btn-submit" onclick="myfunction()">جستجو</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+
+
+
+
+    function isBlank(data) {
+        return ($.trim(data).length == 0 || data == 'null');
+    }
+    function myfunction() {
+        if (isBlank($("#dateStart").val()) || isBlank($("#count").val()) || isBlank($("#count").val()) || isBlank($("#dateStart").val()) || isBlank($("#dateEnd").val()) || $("#city").val() == 'null' || $("#hotel").val() == 'null' || isBlank( $("#hotel").val())) {
+            alert("لطفا اطلاعات را کامل نمایید");
+            return;
+        }
+        redirectPost("@ViewBag.Url", { sdate: $("#dateStart").val(), edate: $("#dateEnd").val(), cityid: $("#city").val(), count: $("#count").val(), citytitle: $("#city option:selected").text(), hotelID : $("#hotel").val() })
+    }
+    function redirectPost(url, data) {
+        var form = document.createElement('form');
+        document.body.appendChild(form);
+        form.method = 'post';
+        form.action = url;
+        for (var name in data) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = name;
+            input.value = data[name];
+            form.appendChild(input);
+        }
+        form.submit();
+    }
+
+    $("#city").change(function () {
+        $("#hotel").prop("disabled", true);
+        $("#hotel").empty()
+        $('<option value="null">لطفا صبر کنید</option>').appendTo("#hotel");
+        $.getJSON("/desktopmodules/GDSModulemvc/API/GDS/gethotel?cityid=" + $("#city").val()
+            , function (data) {
+                data = JSON.parse(data);
+                var items = [];
+                $("#hotel").empty();
+                $('<option value="null">نام هتل</option>').appendTo("#hotel");
+                $.each(data.aaData, function (key, val) {
+                    var div_data = '<option value="' + val.value + '">' + val.text + "</option>";
+                    $(div_data).appendTo('#hotel');
+                    $("#hotel").prop("disabled", false);
+                });
+            });
+    });
+
+
+
+
+
+
+
+
+
+    var customOptionsin = {
+    placeholder: "تاریخ ورود"
+    , twodigit: true
+    , closeAfterSelect: true
+    , nextButtonIcon: "fa fa-arrow-circle-right"
+    , previousButtonIcon: "fa fa-arrow-circle-left"
+    , buttonsColor: "blue"
+    , forceFarsiDigits: true
+    , markToday: true
+    , markHolidays: true
+    , highlightSelectedDay: true
+    , sync: true
+    , gotoToday: true
+    }
+    var customOptionsinout = {
+    placeholder: "تاریخ خروج"
+    , twodigit: true
+    , closeAfterSelect: true
+    , nextButtonIcon: "fa fa-arrow-circle-right"
+    , previousButtonIcon: "fa fa-arrow-circle-left"
+    , buttonsColor: "blue"
+    , forceFarsiDigits: true
+    , markToday: true
+    , markHolidays: true
+    , highlightSelectedDay: true
+    , sync: true
+    , gotoToday: true
+    }
+    kamaDatepicker('dateStart', customOptionsin);
+    kamaDatepicker('dateEnd', customOptionsinout);
+</script>

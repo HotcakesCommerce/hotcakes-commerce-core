@@ -1,0 +1,53 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetReservationListByDateRangeAndCategoryID]
+    @TabModuleID INT,
+    @From DATETIME,
+    @To DATETIME,
+    @CategoryID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_Reservation]
+        WHERE   ( @TabModuleID IS NULL OR [TabModuleID] = @TabModuleID )
+        AND		DATEADD(mi, [Duration], [StartDateTime]) >= @From
+        AND		[StartDateTime] < @To
+        AND		( @CategoryID IS NULL OR [CategoryID] = @CategoryID )
+    END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetReservationListByDateRange]
+    @TabModuleID INT,
+    @From DATETIME,
+    @To DATETIME
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_Reservation]
+        WHERE   ( @TabModuleID IS NULL OR [TabModuleID] = @TabModuleID )
+        AND		DATEADD(mi, [Duration], [StartDateTime]) >= @From
+        AND		[StartDateTime] < @To
+    END
+GO
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

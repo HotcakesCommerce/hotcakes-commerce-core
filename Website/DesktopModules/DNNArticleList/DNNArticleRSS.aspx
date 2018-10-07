@@ -1,0 +1,1 @@
+<%@ Page Language="C#" CodeBehind="DNNArticleRSS.aspx.cs" AutoEventWireup="true" Explicit="True" Inherits="ZLDNN.Modules.DNNArticle_List.DNNArticleRSS" %>

@@ -1,0 +1,56 @@
+﻿
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQL') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQL
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQLDate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQLDate
+GO
+
+--  ZLDNN_GetDNNArticleBySQL
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQL
+	@SqlStatment  nvarchar(max)
+	
+AS
+
+exec sp_executesql @SqlStatment
+
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--  -ZLDNN_GetDNNArticleBySQLDate
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQLDate
+	@SqlStatment  nvarchar(max),
+	@bt datetime, 
+	@et datetime
+AS
+
+declare @ParmDefinition  nvarchar(4000)
+set @ParmDefinition = '@BeginDate DateTime, @EndDate DateTime'
+
+EXECUTE sp_executesql   @SqlStatment ,@ParmDefinition, @BeginDate=@bt,@EndDate=@et
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO

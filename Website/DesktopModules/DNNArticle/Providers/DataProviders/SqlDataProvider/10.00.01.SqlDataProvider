@@ -1,0 +1,268 @@
+﻿
+-- Table 23 ZLDNN_DNNArticleExtraFieldValueLanguage
+-- 09.08.07
+   
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+
+		create table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage (
+		   ID int                  not null IDENTITY(1, 1),
+		   DNNArticleID       int                  not null,
+		   ExtraFieldID           int                  not null,
+		   FieldValue                nvarchar(max)       null,
+		   Language nvarchar (255) NULL
+		)
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage] PRIMARY KEY CLUSTERED  ([ID])
+    CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage] ([DNNArticleID])
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage_{objectQualifier}ZLDNN_ExtraField] FOREIGN KEY ([ExtraFieldID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_ExtraField] ([ItemID])  ON DELETE NO ACTION 
+	ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage_{objectQualifier}ZLDNN_DNNArticle] FOREIGN KEY ([DNNArticleID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle] ([ItemID]) ON DELETE CASCADE 
+
+		
+	END
+GO
+
+
+/* =====================================================================================
+/   TABLE: ZLDNN_BusinessProperty
+/  ===================================================================================== */
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageGetByDNNArticleId') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageGetByDNNArticleId
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageDelete
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageGetByModuleId') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageGetByModuleId
+GO
+
+/* -------------------------------------------------------------------------------------
+/   ZLDNN_DNNArticleExtraFieldValueLanguageGet
+/  ------------------------------------------------------------------------------------- */
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageGet
+	@ExtraFieldID int,
+	@DNNArticleId int,
+	@Language nvarchar(255)
+	
+AS
+
+SELECT
+	a.[ExtraFieldID],
+	a.[DNNArticleId],
+	a.[FieldValue],
+	b.[ItemID],
+	b.[ModuleID],
+	b.[Content] as FieldContent,
+	b.[Type],
+	b.[ViewOrder]
+	
+FROM [{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage] as a
+inner join [{objectQualifier}ZLDNN_ExtraField] as b on a.[ExtraFieldID] = b.[ItemId]
+
+WHERE
+	a.[ExtraFieldID] = @ExtraFieldID and a.[DNNArticleId]=@DNNArticleId and a.Language=@Language
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+/* -------------------------------------------------------------------------------------
+/   ZLDNN_DNNArticleExtraFieldValueLanguageGetByDNNArticleId
+/  ------------------------------------------------------------------------------------- */
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageGetByDNNArticleId
+	@DNNArticleID int,
+	@Language nvarchar (255)
+AS
+
+SELECT
+	a.[ExtraFieldID],
+	a.[DNNArticleId],
+	a.[FieldValue],
+	b.[ItemID],
+	b.[ModuleID],
+	b.[Content] as FieldContent,
+	b.[Type],
+	b.[ViewOrder]
+FROM [{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage] as a
+inner join [{objectQualifier}ZLDNN_ExtraField] as b on a.[ExtraFieldID] = b.[ItemId]
+
+WHERE
+	a.[DNNArticleId]=@DNNArticleId
+	and a.Language=@Language
+ORDER BY b.[ViewOrder]
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+/* -------------------------------------------------------------------------------------
+/   ZLDNN_DNNArticleExtraFieldValueLanguageAdd
+/  ------------------------------------------------------------------------------------- */
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageAdd
+	@DNNArticleID int
+	,@ExtraFieldID int
+	,@Language nvarchar(255)
+	,@FieldValue nvarchar(max)
+AS
+DECLARE @myERROR int -- Local @@ERROR
+       , @myRowCount int -- Local @@ROWCOUNT
+
+INSERT INTO {objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage (
+	[DNNArticleID]
+		,[ExtraFieldID]
+		,[Language]
+		,[FieldValue]
+	
+) VALUES (
+	@DNNArticleID
+		,@ExtraFieldID
+		,@Language
+		,@FieldValue
+	
+)
+
+select SCOPE_IDENTITY()
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+/* -------------------------------------------------------------------------------------
+/   ZLDNN_DNNArticleExtraFieldValueLanguageUpdate
+/  ------------------------------------------------------------------------------------- */
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageUpdate
+	@ID int, 
+	@DNNArticleID int, 
+	@ExtraFieldID int, 
+	@Language nvarchar(255),
+	@FieldValue nvarchar(max) 
+
+AS
+DECLARE @myERROR int -- Local @@ERROR
+       , @myRowCount int -- Local @@ROWCOUNT
+
+UPDATE {objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage SET
+	   [FieldValue] = @FieldValue
+WHERE
+    
+	[{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage].[DNNArticleID] = @DNNArticleID
+	and  [{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage].[ExtraFieldID] = @ExtraFieldID 
+	and [{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage].[Language] = @Language 
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+/* -------------------------------------------------------------------------------------
+/   ZLDNN_DNNArticleExtraFieldDelete
+/  ------------------------------------------------------------------------------------- */
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+	
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageDelete
+	
+	@ExtraFieldID int,
+	@DNNArticleID int,
+	@Language nvarchar(255)
+    
+	AS
+DECLARE @myERROR int -- Local @@ERROR
+       , @myRowCount int -- Local @@ROWCOUNT
+
+DELETE FROM {objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage
+WHERE 
+	[{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage].[DNNArticleID] = @DNNArticleID
+	AND [{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage].[ExtraFieldID] = @ExtraFieldID
+	AND [{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage].[Language] = @Language
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+/* -------------------------------------------------------------------------------------
+/   ZLDNN_DNNArticleExtraFieldValueLanguageGetByModuleId
+/  ------------------------------------------------------------------------------------- */
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguageGetByModuleId
+	@ModuleId int,
+	@Language nvarchar(255)
+AS
+
+SELECT
+	a.[ExtraFieldID],
+	a.[DNNArticleId],
+	a.[FieldValue],
+	b.[ItemID],
+	b.[ModuleID],
+	b.[Content] as FieldContent,
+	b.[Type],
+	b.[ViewOrder]
+FROM [{objectQualifier}ZLDNN_DNNArticleExtraFieldValueLanguage] as a
+inner join [{objectQualifier}ZLDNN_ExtraField] as b on a.[ExtraFieldID] = b.[ItemId]
+
+WHERE
+	b.[ModuleId]=@ModuleId and a.[Language]=@Language
+ORDER BY b.[ViewOrder]
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+

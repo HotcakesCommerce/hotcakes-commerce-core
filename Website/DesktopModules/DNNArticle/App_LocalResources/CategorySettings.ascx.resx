@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="lbTreeNodeImage.Help" xml:space="preserve">
+    <value>Tree Node Image</value>
+  </data>
+  <data name="lbTreeNodeImage.Text" xml:space="preserve">
+    <value>Tree Node Image</value>
+  </data>
+  <data name="lbEnableIMC.Help" xml:space="preserve">
+    <value>When the setting is enabled, the module will use Module Communication to control the change of category. Otherwise, it will generate url for each category node.</value>
+  </data>
+  <data name="lbEnableIMC.Text" xml:space="preserve">
+    <value>Enable IMC</value>
+  </data>
+  <data name="lbCollapseImageURL.Help" xml:space="preserve">
+    <value>Image of Collapsed Node</value>
+  </data>
+  <data name="lbCollapseImageURL.Text" xml:space="preserve">
+    <value>Image of Collapsed Node</value>
+  </data>
+  <data name="lbExpandImageURL.Help" xml:space="preserve">
+    <value>Image of Expanded Node</value>
+  </data>
+  <data name="lbExpandImageURL.Text" xml:space="preserve">
+    <value>Image of Expanded Node</value>
+  </data>
+  <data name="lbExpandNode.Help" xml:space="preserve">
+    <value>Expand Categories Nodes</value>
+  </data>
+  <data name="lbExpandNode.Text" xml:space="preserve">
+    <value>Expand Categories Nodes</value>
+  </data>
+  <data name="lbIndent.Help" xml:space="preserve">
+    <value>Space between node and sub node. By default the number is 15.</value>
+  </data>
+  <data name="lbIndent.Text" xml:space="preserve">
+    <value>Indent</value>
+  </data>
+  <data name="lbNodeStyle.Help" xml:space="preserve">
+    <value>CSS class name of node style</value>
+  </data>
+  <data name="lbNodeStyle.Text" xml:space="preserve">
+    <value>Node Style</value>
+  </data>
+  <data name="lbSelectedNodeStyle.Help" xml:space="preserve">
+    <value>CSS class name of selected node style</value>
+  </data>
+  <data name="lbSelectedNodeStyle.Text" xml:space="preserve">
+    <value>Selected Node Style</value>
+  </data>
+  <data name="lbShowLines.Help" xml:space="preserve">
+    <value>Show lines between node and sub node.</value>
+  </data>
+  <data name="lbShowLines.Text" xml:space="preserve">
+    <value>Show lines</value>
+  </data>
+  <data name="lbArticleImageURL.Help" xml:space="preserve">
+    <value>Select an image for article icon</value>
+  </data>
+  <data name="lbArticleImageURL.Text" xml:space="preserve">
+    <value>Article Icon</value>
+  </data>
+  <data name="lbArticleTitleLength.Help" xml:space="preserve">
+    <value>If length of article title is larger than this number, it will be shorten.</value>
+  </data>
+  <data name="lbArticleTitleLength.Text" xml:space="preserve">
+    <value>Article Title Length</value>
+  </data>
+  <data name="lbDisplayArticle.Help" xml:space="preserve">
+    <value>Display Articles in category tree</value>
+  </data>
+  <data name="lbDisplayArticle.Text" xml:space="preserve">
+    <value>Display Articles</value>
+  </data>
+  <data name="lblShowMeToAdminOnly.Help" xml:space="preserve">
+    <value>Show this module to admin only</value>
+  </data>
+  <data name="lblShowMeToAdminOnly.Text" xml:space="preserve">
+    <value>Show this module to admin only</value>
+  </data>
+  <data name="lblCategory.Help" xml:space="preserve">
+    <value>Select a category</value>
+  </data>
+  <data name="lblCategory.Text" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="lbModules.Help" xml:space="preserve">
+    <value>Select DNNArticle Module</value>
+  </data>
+  <data name="lbModules.Text" xml:space="preserve">
+    <value>Select DNNArticle Module</value>
+  </data>
+  <data name="lbCategoryNodeTemplate.Text" xml:space="preserve">
+    <value>Category Node Template</value>
+  </data>
+  <data name="lbCategoryNodeTemplate.Help" xml:space="preserve">
+    <value>Token:[TITLE] and [NUMBER]</value>
+  </data>
+  <data name="lbEnableCategoryLink.Help" xml:space="preserve">
+    <value>Enable Category Link</value>
+  </data>
+  <data name="lbEnableCategoryLink.Text" xml:space="preserve">
+    <value>Enable Category Link</value>
+  </data>
+  <data name="lbTabs.Help" xml:space="preserve">
+    <value>View Tab</value>
+  </data>
+  <data name="lbTabs.Text" xml:space="preserve">
+    <value>View Tab</value>
+  </data>
+  <data name="lbShowAllCategory.Help" xml:space="preserve">
+    <value>Show "All Categories"</value>
+  </data>
+  <data name="lbShowAllCategory.Text" xml:space="preserve">
+    <value>Show "All Categories" in the category tree</value>
+  </data>
+  <data name="lbOrderField.Help" xml:space="preserve">
+    <value>Order Field of Articles</value>
+  </data>
+  <data name="lbOrderField.Text" xml:space="preserve">
+    <value>Order Field of Articles</value>
+  </data>
+  <data name="lbPopularonDemand.Help" xml:space="preserve">
+    <value>Populate tree nodes on demand</value>
+  </data>
+  <data name="lbPopularonDemand.Text" xml:space="preserve">
+    <value>Populate On Demand</value>
+  </data>
+  <data name="lbArticleList.Help" xml:space="preserve">
+    <value>Select an Article List to show the articles of the selected category</value>
+  </data>
+  <data name="lbArticleList.Text" xml:space="preserve">
+    <value>Select an Article List</value>
+  </data>
+  <data name="lbCategoryViewOrder.Help" xml:space="preserve">
+    <value>Category View Order</value>
+  </data>
+  <data name="lbCategoryViewOrder.Text" xml:space="preserve">
+    <value>Category View Order</value>
+  </data>
+  <data name="lbShowCategoryImage.Help" xml:space="preserve">
+    <value>Show Category Image</value>
+  </data>
+  <data name="lbShowCategoryImage.Text" xml:space="preserve">
+    <value>Show Category Image</value>
+  </data>
+  <data name="ControlTitle_settings.Text" xml:space="preserve">
+    <value>Category Settings</value>
+  </data>
+  <data name="lbPortal.Help" xml:space="preserve">
+    <value>Select Portal</value>
+  </data>
+  <data name="lbPortal.Text" xml:space="preserve">
+    <value>Select Portal</value>
+  </data>
+  <data name="lbEditPageStyle.Help" xml:space="preserve">
+    <value>Rad Tree View Skin</value>
+  </data>
+  <data name="lbEditPageStyle.Text" xml:space="preserve">
+    <value>Rad Tree View Skin</value>
+  </data>
+  <data name="lbTreeViewStyle.Help" xml:space="preserve">
+    <value>Tree View</value>
+  </data>
+  <data name="lbTreeViewStyle.Text" xml:space="preserve">
+    <value>Tree View</value>
+  </data>
+  <data name="lbCustomSkin.Help" xml:space="preserve">
+    <value>Select Custom Skin</value>
+  </data>
+  <data name="lbCustomSkin.Text" xml:space="preserve">
+    <value>Select Custom Skin</value>
+  </data>
+  <data name="lbSkinType.Help" xml:space="preserve">
+    <value>Skin type</value>
+  </data>
+  <data name="lbSkinType.Text" xml:space="preserve">
+    <value>Skin type</value>
+  </data>
+  <data name="lbMenuDirection.Help" xml:space="preserve">
+    <value>Menu Direction</value>
+  </data>
+  <data name="lbMenuDirection.Text" xml:space="preserve">
+    <value>Menu Direction</value>
+  </data>
+  <data name="lbDoNotAddCategoryURL.Help" xml:space="preserve">
+    <value>Not Link Category to Aritcle List or Extrenal URL</value>
+  </data>
+  <data name="lbDoNotAddCategoryURL.Text" xml:space="preserve">
+    <value>Not Link Category to Aritcle List or Extrenal URL</value>
+  </data>
+</root>

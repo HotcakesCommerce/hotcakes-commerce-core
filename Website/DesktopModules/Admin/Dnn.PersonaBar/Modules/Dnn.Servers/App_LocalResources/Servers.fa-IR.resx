@@ -1,0 +1,626 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="nav_Servers.Text" xml:space="preserve">
+    <value>سرور</value>
+  </data>
+  <data name="Servers.Text" xml:space="preserve">
+    <value>سرور</value>
+  </data>
+  <data name="tabApplicationTitle.Text" xml:space="preserve">
+    <value>برنامه</value>
+  </data>
+  <data name="tabDatabaseTitle.Text" xml:space="preserve">
+    <value>پایگاه داده</value>
+  </data>
+  <data name="tabLogsTitle.Text" xml:space="preserve">
+    <value>رویداد</value>
+  </data>
+  <data name="tabPerformanceTitle.Text" xml:space="preserve">
+    <value>عملکرد</value>
+  </data>
+  <data name="tabServerSettingsTitle.Text" xml:space="preserve">
+    <value>تنظیمات سرور</value>
+  </data>
+  <data name="tabSmtpServerTitle.Text" xml:space="preserve">
+    <value>SMTP سرور</value>
+  </data>
+  <data name="tabSystemInfoTitle.Text" xml:space="preserve">
+    <value>اطلاعات سیستم</value>
+  </data>
+  <data name="tabWebTitle.Text" xml:space="preserve">
+    <value>وب</value>
+  </data>
+  <data name="ServerInfo_Framework.Help" xml:space="preserve">
+    <value>نسخه .Net</value>
+  </data>
+  <data name="ServerInfo_Framework.Text" xml:space="preserve">
+    <value>نسخه .Net Framework</value>
+  </data>
+  <data name="ServerInfo_HostName.Help" xml:space="preserve">
+    <value>نام کامپیوتر میزبان</value>
+  </data>
+  <data name="ServerInfo_HostName.Text" xml:space="preserve">
+    <value>نام میزبان:</value>
+  </data>
+  <data name="ServerInfo_Identity.Help" xml:space="preserve">
+    <value>کاربر ویندوزی که اپلیکیشن شما با آن اجرا می گردد. کاربری است که می بایست بر روی پوشه ی سرور دسترسی داشته باشد.</value>
+  </data>
+  <data name="ServerInfo_Identity.Text" xml:space="preserve">
+    <value>شناسه ASP.NET:</value>
+  </data>
+  <data name="ServerInfo_IISVersion.Help" xml:space="preserve">
+    <value>نسخه Internet Information System (IIS)</value>
+  </data>
+  <data name="ServerInfo_IISVersion.Text" xml:space="preserve">
+    <value>نسخه وب سرور:</value>
+  </data>
+  <data name="ServerInfo_OSVersion.Help" xml:space="preserve">
+    <value>نسخه ویندوز سرور</value>
+  </data>
+  <data name="ServerInfo_OSVersion.Text" xml:space="preserve">
+    <value>نسخه OS:</value>
+  </data>
+  <data name="ServerInfo_PhysicalPath.Help" xml:space="preserve">
+    <value>مسیر فیزیکی پوشه اصلی سایت در سرور</value>
+  </data>
+  <data name="ServerInfo_PhysicalPath.Text" xml:space="preserve">
+    <value>مسیر فیزیکی:</value>
+  </data>
+  <data name="ServerInfo_RelativePath.Help" xml:space="preserve">
+    <value>آدرس نسبی اپلیکیشن مرتبط به ریشه اصلی سایت.</value>
+  </data>
+  <data name="ServerInfo_RelativePath.Text" xml:space="preserve">
+    <value>مسیر نسبی:</value>
+  </data>
+  <data name="ServerInfo_ServerTime.Help" xml:space="preserve">
+    <value>تاریخ و زمان جاری برای وب سرور</value>
+  </data>
+  <data name="ServerInfo_ServerTime.Text" xml:space="preserve">
+    <value>زمان سرور:</value>
+  </data>
+  <data name="ServerInfo_Url.Help" xml:space="preserve">
+    <value>آدرس URL اصلی برای وب سایت</value>
+  </data>
+  <data name="ServerInfo_Url.Text" xml:space="preserve">
+    <value>آدرس سایت:</value>
+  </data>
+  <data name="errorMessageLoadingWebTab.Text" xml:space="preserve">
+    <value>خطا در بارگذاری بخش وب</value>
+  </data>
+  <data name="clearCacheButtonLabel.Text" xml:space="preserve">
+    <value>پاک کردن حافظه موقت</value>
+  </data>
+  <data name="errorMessageClearingCache.Text" xml:space="preserve">
+    <value>خطا در هنگام پاک کردن کش</value>
+  </data>
+  <data name="errorMessageLoadingApplicationTab.Text" xml:space="preserve">
+    <value>خطا در بارگذاری بخش برنامه</value>
+  </data>
+  <data name="errorMessageRestartingApplication.Text" xml:space="preserve">
+    <value>خطا در هنگام راه اندازی مجدد برنامه</value>
+  </data>
+  <data name="HostInfo_CachingProvider.Help" xml:space="preserve">
+    <value>پروایدر کش پیش‌فرض این سایت.</value>
+  </data>
+  <data name="HostInfo_CachingProvider.Text" xml:space="preserve">
+    <value>پروایدر کش:</value>
+  </data>
+  <data name="HostInfo_FriendlyUrlEnabled.Help" xml:space="preserve">
+    <value>وضعیت فعال یا غیرفعال بودن آدرس های کاربرپسند در این سایت را نمایش میدهد</value>
+  </data>
+  <data name="HostInfo_FriendlyUrlEnabled.Text" xml:space="preserve">
+    <value>فعالسازی آدرس های کاربرپسند :</value>
+  </data>
+  <data name="HostInfo_FriendlyUrlProvider.Help" xml:space="preserve">
+    <value>پروایدر پیش فرض برای آدرس های کاربرپسند در این سایت</value>
+  </data>
+  <data name="HostInfo_FriendlyUrlProvider.Text" xml:space="preserve">
+    <value>پروایدر آدرس های کاربرپسند:</value>
+  </data>
+  <data name="HostInfo_FriendlyUrlType.Help" xml:space="preserve">
+    <value>نوع آدرس های کاربرپسند برای این سایت را نمایش میدهد</value>
+  </data>
+  <data name="HostInfo_FriendlyUrlType.Text" xml:space="preserve">
+    <value>نوع آدرس های کاربرپسند:</value>
+  </data>
+  <data name="HostInfo_HtmlEditorProvider.Help" xml:space="preserve">
+    <value>پروایدر پیش فرض ویرایشگر HTML در این سایت</value>
+  </data>
+  <data name="HostInfo_HtmlEditorProvider.Text" xml:space="preserve">
+    <value>پروایدر ویرایشگر HTML:</value>
+  </data>
+  <data name="HostInfo_LoggingProvider.Help" xml:space="preserve">
+    <value>پروایدر پیش فرض ثبت وقایع برای این سایت</value>
+  </data>
+  <data name="HostInfo_LoggingProvider.Text" xml:space="preserve">
+    <value>پروایدر ثبت وقایع:</value>
+  </data>
+  <data name="HostInfo_Permissions.Help" xml:space="preserve">
+    <value>کد دسترسی امنیتی (CAS) در این سایت وجود دارد.</value>
+  </data>
+  <data name="HostInfo_Permissions.Text" xml:space="preserve">
+    <value>مجوزهای CAS:</value>
+  </data>
+  <data name="HostInfo_SchedulerMode.Help" xml:space="preserve">
+    <value>استفاده از روش زمانبندی باعث ایجاد فعالیت های جداگانه برای وظایف برنامه ریزی شده می گردد.متناوبا روش درخواست زمانی که درخواست های HTTP ساخته می شوند، اجرا می گردند. همچنین می توانید برنامه را با استفاده از گزینه غیرفعال، غیرفعال نمایید.</value>
+  </data>
+  <data name="HostInfo_SchedulerMode.Text" xml:space="preserve">
+    <value>حالت زمانبندی:</value>
+  </data>
+  <data name="HostInfo_WebFarmEnabled.Help" xml:space="preserve">
+    <value>این تنظیمات تعیین می نماید که آیا سایت در وضعیت Farm اجرا گردد.</value>
+  </data>
+  <data name="HostInfo_WebFarmEnabled.Text" xml:space="preserve">
+    <value>فعال بودن Web Farm:</value>
+  </data>
+  <data name="infoMessageClearingCache.Text" xml:space="preserve">
+    <value>پاک کردن حافظه موقت</value>
+  </data>
+  <data name="infoMessageRestartingApplication.Text" xml:space="preserve">
+    <value>راه اندازی مجدد نرم افزار</value>
+  </data>
+  <data name="plDataProvider.Help" xml:space="preserve">
+    <value>نام provider مشخص شده به عنوان data provider پیش فرض در فایل web.config</value>
+  </data>
+  <data name="plDataProvider.Text" xml:space="preserve">
+    <value>پروایدر داده:</value>
+  </data>
+  <data name="plGUID.Help" xml:space="preserve">
+    <value>شناسه عمومی منحصر به فرد که برای شناسایی این برنامه استفاده می شود را وارد نمایید</value>
+  </data>
+  <data name="plGUID.Text" xml:space="preserve">
+    <value>شناسه سایت (GUID):</value>
+  </data>
+  <data name="plProduct.Help" xml:space="preserve">
+    <value>برنامه در حال اجرا می باشد.</value>
+  </data>
+  <data name="plProduct.Text" xml:space="preserve">
+    <value>محصول:</value>
+  </data>
+  <data name="plVersion.Help" xml:space="preserve">
+    <value>نسخه پلت‌فرم دی‌ان‌ان شما</value>
+  </data>
+  <data name="plVersion.Text" xml:space="preserve">
+    <value>نسخه:</value>
+  </data>
+  <data name="restartApplicationButtonLabel.Text" xml:space="preserve">
+    <value>راه اندازی مجدد سرویس</value>
+  </data>
+  <data name="UserRestart.Text" xml:space="preserve">
+    <value>کاربر باعث راه‌اندازی مجدد سرویس شده است</value>
+  </data>
+  <data name="DbInfo_ProductEdition.Help" xml:space="preserve">
+    <value>ویرایش SQL Server نصب شده</value>
+  </data>
+  <data name="DbInfo_ProductEdition.Text" xml:space="preserve">
+    <value>نسخه محصول:</value>
+  </data>
+  <data name="DbInfo_ProductVersion.Help" xml:space="preserve">
+    <value>نسخه SQL Server</value>
+  </data>
+  <data name="DbInfo_ProductVersion.Text" xml:space="preserve">
+    <value>نسخه پایگاه داده:</value>
+  </data>
+  <data name="DbInfo_ServicePack.Help" xml:space="preserve">
+    <value>سرویس پک های نصب شده</value>
+  </data>
+  <data name="DbInfo_ServicePack.Text" xml:space="preserve">
+    <value>سرویس پک:</value>
+  </data>
+  <data name="DbInfo_SoftwarePlatform.Help" xml:space="preserve">
+    <value>شرح کامل از نرم افزار SQL Server نصب شده</value>
+  </data>
+  <data name="DbInfo_SoftwarePlatform.Text" xml:space="preserve">
+    <value>پلت فرم نرم افزار:</value>
+  </data>
+  <data name="errorMessageLoadingDatabaseTab.Text" xml:space="preserve">
+    <value>خطا در بارگذاری بخش پایگاه داده</value>
+  </data>
+  <data name="BackupFinished.Text" xml:space="preserve">
+    <value>پایان</value>
+  </data>
+  <data name="BackupName.Text" xml:space="preserve">
+    <value>نام پشتیبان گیری</value>
+  </data>
+  <data name="BackupSize.Text" xml:space="preserve">
+    <value>اندازه (Kb)</value>
+  </data>
+  <data name="BackupStarted.Text" xml:space="preserve">
+    <value>شروع</value>
+  </data>
+  <data name="BackupType.Text" xml:space="preserve">
+    <value>نوع پشتیبان گیری</value>
+  </data>
+  <data name="FileName.Text" xml:space="preserve">
+    <value>نام فایل</value>
+  </data>
+  <data name="FileType.Text" xml:space="preserve">
+    <value>نوع فایل</value>
+  </data>
+  <data name="Name.Text" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="NoBackups.Text" xml:space="preserve">
+    <value>این پایگاه داده Backup ندارد</value>
+  </data>
+  <data name="plBackups.Text" xml:space="preserve">
+    <value>تاریخچه Backup پایگاه داده :</value>
+  </data>
+  <data name="plFiles.Text" xml:space="preserve">
+    <value>فایل‌های پایگاه داده:</value>
+  </data>
+  <data name="Size.Text" xml:space="preserve">
+    <value>اندازه</value>
+  </data>
+  <data name="EmailTest.Text" xml:space="preserve">
+    <value>آزمایش تنظیمات SMTP</value>
+  </data>
+  <data name="errorMessageLoadingSmtpServerTab.Text" xml:space="preserve">
+    <value>خطا در بارگذاری بخش تنظیمات SMTP</value>
+  </data>
+  <data name="GlobalSettings.Text" xml:space="preserve">
+    <value>از نوع تنظیمات عمومی است.تغییر آن در همه وب سایت ها تاثیر خواهد گذاشت.</value>
+  </data>
+  <data name="GlobalSmtpHostSetting.Text" xml:space="preserve">
+    <value>عمومی</value>
+  </data>
+  <data name="plBatch.Help" xml:space="preserve">
+    <value>تعداد پیام های گروهی ارسالی توسط زمان بند پیام.</value>
+  </data>
+  <data name="plBatch.Text" xml:space="preserve">
+    <value>تعداد پیام در هر ارسال:</value>
+  </data>
+  <data name="plConnectionLimit.Help" xml:space="preserve">
+    <value>The maximum number of connections allowed on this ServicePoint object. Max value is 2147483647. Default is 1.</value>
+  </data>
+  <data name="plConnectionLimit.Text" xml:space="preserve">
+    <value>محدودیت اتصال:</value>
+  </data>
+  <data name="plMaxIdleTime.Help" xml:space="preserve">
+    <value>The length of time, in milliseconds, that a connection associated with the ServicePoint object can remain idle before it is closed and reused for another connection. Max value is 2147483647. Default is 0.</value>
+  </data>
+  <data name="plMaxIdleTime.Text" xml:space="preserve">
+    <value>Max Idle Time:</value>
+  </data>
+  <data name="plSMTPAuthentication.Help" xml:space="preserve">
+    <value>روش اعتبارسنجی سرور SMTP را مشخص نمایید (پیش فرض= ناشناس)</value>
+  </data>
+  <data name="plSMTPAuthentication.Text" xml:space="preserve">
+    <value>اعتبارسنجی SMTP:</value>
+  </data>
+  <data name="plSMTPEnableSSL.Help" xml:space="preserve">
+    <value>این تنظیم برای سرویس‌های SMTP که به ارتباط امن SSL نیاز دارند استفاده می‌شود. (معمولا نیاز نمی‌باشد)</value>
+  </data>
+  <data name="plSMTPEnableSSL.Text" xml:space="preserve">
+    <value>فعال نمودن SSL در SMTP:</value>
+  </data>
+  <data name="plSMTPMode.Help" xml:space="preserve">
+    <value>حالت میزبان از تمام تنظیمات SMTP در سطح نرم‌افزار استفاده خواهد کرد. تنظیمات سطح سایت این امکان را به شما می‌دهد که سرور SMTP، پورت و روش احراز هویت دلخواه خود را انتخاب کنید.</value>
+  </data>
+  <data name="plSMTPMode.Text" xml:space="preserve">
+    <value>حالت SMTP:</value>
+  </data>
+  <data name="plSMTPPassword.Help" xml:space="preserve">
+    <value>کلمه‌عبور SMTP که همان کلمه‌عبور ایمیل است را وارد نمایید</value>
+  </data>
+  <data name="plSMTPPassword.Text" xml:space="preserve">
+    <value>کلمه‌عبور SMTP:</value>
+  </data>
+  <data name="plSMTPServer.Help" xml:space="preserve">
+    <value>آدرس SMTP سرور را وارد نمایید. شما همچنین می‌توانید یک پورت جایگزین را با استفاده از : اضافه کنید. (مثلا: smtp.googlemail.com:587).برای استفاده از پورت پیش‌فرض تنها نام سرور SMTP را وارد نمایید.</value>
+  </data>
+  <data name="plSMTPServer.Text" xml:space="preserve">
+    <value>آدرس و پورت SMTP:</value>
+  </data>
+  <data name="plSMTPUsername.Help" xml:space="preserve">
+    <value>نام کاربری سرور SMTP که همان آدرس ایمیل است را وارد نمایید</value>
+  </data>
+  <data name="plSMTPUsername.Text" xml:space="preserve">
+    <value>نام کاربری SMTP (ایمیل):</value>
+  </data>
+  <data name="SaveButtonText.Text" xml:space="preserve">
+    <value>ذخیره</value>
+  </data>
+  <data name="SiteSmtpHostSetting.Text" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="SMTPAnonymous.Text" xml:space="preserve">
+    <value>ناشناس</value>
+  </data>
+  <data name="SMTPBasic.Text" xml:space="preserve">
+    <value>پایه</value>
+  </data>
+  <data name="SMTPNTLM.Text" xml:space="preserve">
+    <value>NTLM</value>
+  </data>
+  <data name="errorMessageLoadingLog.Text" xml:space="preserve">
+    <value>خطا در بارگذاری رویداد</value>
+  </data>
+  <data name="errorMessageLoadingLogsTab.Text" xml:space="preserve">
+    <value>خطا در بارگذاری بخش رویدادها</value>
+  </data>
+  <data name="Logs_LogFiles.Text" xml:space="preserve">
+    <value>فایل های رویداد:</value>
+  </data>
+  <data name="Logs_LogFilesDefaultOption.Text" xml:space="preserve">
+    <value>انتخاب کنید</value>
+  </data>
+  <data name="Logs_LogFilesTooltip.Text" xml:space="preserve">
+    <value>لیستی از فایل های رویداد </value>
+  </data>
+  <data name="errorMessageUpdatingSmtpServerTab.Text" xml:space="preserve">
+    <value>خطا در به روز رسانی تنظیمات سرور SMTP</value>
+  </data>
+  <data name="errorMessageLoadingPerformanceTab.Text" xml:space="preserve">
+    <value>خطا در بارگذاری بخش عملکرد</value>
+  </data>
+  <data name="PerformanceTab_CacheSetting.Help" xml:space="preserve">
+    <value>روش بهینه سازی کارایی را انتخاب نمایید</value>
+  </data>
+  <data name="PerformanceTab_CacheSetting.Text" xml:space="preserve">
+    <value>تنظیمات کش</value>
+  </data>
+  <data name="PerformanceTab_Heavy.Text" xml:space="preserve">
+    <value>سنگین</value>
+  </data>
+  <data name="PerformanceTab_Light.Text" xml:space="preserve">
+    <value>سبک</value>
+  </data>
+  <data name="PerformanceTab_Memory.Text" xml:space="preserve">
+    <value>حافظه</value>
+  </data>
+  <data name="PerformanceTab_Moderate.Text" xml:space="preserve">
+    <value>مدیریت شده</value>
+  </data>
+  <data name="PerformanceTab_None.Text" xml:space="preserve">
+    <value>هیچ کدام</value>
+  </data>
+  <data name="PerformanceTab_Page.Text" xml:space="preserve">
+    <value>صفحه</value>
+  </data>
+  <data name="PerformanceTab_PageStatePersistenceMode.Help" xml:space="preserve">
+    <value>روش ذخیره وضعیت صفحه را انتخاب نمایید. این گزینه می تواند فیلد مخفی در صفحه (حالت پیش فرض) یا در حافظه (کش) باشد. **** توجه : ذخیره سازی وضعیت صفحه در حافظه ممکن است ایجاد مشکل در AJAX نماید*****</value>
+  </data>
+  <data name="PerformanceTab_PageStatePersistenceMode.Text" xml:space="preserve">
+    <value>نگهداری وضعیت صفحه</value>
+  </data>
+  <data name="PerformanceTab_AuthCacheability.Help" xml:space="preserve">
+    <value>مقدار Cache-Control HTTP header را برای کاربران معتبر وارد نمایید.</value>
+  </data>
+  <data name="PerformanceTab_AuthCacheability.Text" xml:space="preserve">
+    <value>توانایی تأیید اعتبار کش</value>
+  </data>
+  <data name="PerformanceTab_CachingProvider.Help" xml:space="preserve">
+    <value>پروایدر کش</value>
+  </data>
+  <data name="PerformanceTab_CachingProvider.Text" xml:space="preserve">
+    <value>پروایدر کش</value>
+  </data>
+  <data name="PerformanceTab_ClientResourceManagementInfo.Text" xml:space="preserve">
+    <value>مدیرارشد می توانید اقدامات پیش فرض برای مدیریت منابع کلاینت را بدون تغییر ادامه دهد، اما اگر بخواهید این پیکربندی و تنظیمات را تغییر دهید منابع کلاینتی در سطح کلاینت رفتار دیگری خواهند داشت. جزئیات به شرح زیر :</value>
+  </data>
+  <data name="PerformanceTab_ClientResourceManagementTitle.Text" xml:space="preserve">
+    <value>مدیریت منابع سمت کاربر</value>
+  </data>
+  <data name="PerformanceTab_ClientResourcesManagementMode.Help" xml:space="preserve">
+    <value>Host mode utilizes all Client Resources Management settings set at the application level. Site level allows you to select your own Client Resources Management settings.</value>
+  </data>
+  <data name="PerformanceTab_ClientResourcesManagementMode.Text" xml:space="preserve">
+    <value>حالت مدیریت منابع کلاینت</value>
+  </data>
+  <data name="PerformanceTab_CurrentHostVersion.Text" xml:space="preserve">
+    <value>نسخه کنونی میزبان</value>
+  </data>
+  <data name="PerformanceTab_EnableCompositeFiles.Help" xml:space="preserve">
+    <value>ترکیب فایل ها باعث یکی شدن ریسورس ها (JavaScript و CSS) می شود که تعداد درخواست ها را از طرف مرورگر کاهش داده و کمک قابل توجهی در افزایش سرعت بارگذاری صفحات می کند.</value>
+  </data>
+  <data name="PerformanceTab_EnableCompositeFiles.Text" xml:space="preserve">
+    <value>فعال‌سازی ادغام فایل‌ها</value>
+  </data>
+  <data name="PerformanceTab_GlobalClientResourcesManagementMode.Text" xml:space="preserve">
+    <value>عمومی</value>
+  </data>
+  <data name="PerformanceTab_IncrementVersion.Text" xml:space="preserve">
+    <value>افزایش نسخه</value>
+  </data>
+  <data name="PerformanceTab_MinifyCss.Help" xml:space="preserve">
+    <value>فشرده سازی CSS حجم کدهای سی اس اس را با استفاده از RegEx ها و حذف Comment ها، whitespace ها و کدهای زائد Css کاهش می دهد و این فقط زمانی فعال است که گزینه ی فعال سازی ترکیب فایل ها فعال باشد.</value>
+  </data>
+  <data name="PerformanceTab_MinifyCss.Text" xml:space="preserve">
+    <value>کوچک‌سازی CSS</value>
+  </data>
+  <data name="PerformanceTab_MinifyJs.Help" xml:space="preserve">
+    <value>فشرده سازی JS با استفاده از JSMIN حجم فایل های جاوا اسکریپت را کاهش می دهد. و این زمانی در دسترس است که گزینه ترکیب فایل ها فعال باشد</value>
+  </data>
+  <data name="PerformanceTab_MinifyJs.Text" xml:space="preserve">
+    <value>کوچک‌سازی JS</value>
+  </data>
+  <data name="PerformanceTab_ModuleCacheProviders.Help" xml:space="preserve">
+    <value>پروایدر پیش‌فرض حافظه موقت ماژول را انتخاب نمایید. این تنظیم می‌تواند در تنظیمات هر ماژول‌ بازنویسی گردد.</value>
+  </data>
+  <data name="PerformanceTab_ModuleCacheProviders.Text" xml:space="preserve">
+    <value>پروایدر حافظه موقت ماژول</value>
+  </data>
+  <data name="PerformanceTab_PageCacheProviders.Help" xml:space="preserve">
+    <value>پروایدر حافظه موقت صفحه را انتخاب کنید. جهت استفاده از سرویس دهنده کش گزینه متناظر با آن در هر صفحه به صورت مجزا باید فعال شود.</value>
+  </data>
+  <data name="PerformanceTab_PageCacheProviders.Text" xml:space="preserve">
+    <value>پروایدر حافظه موقت صفحه</value>
+  </data>
+  <data name="PerformanceTab_SiteClientResourcesManagementMode.Text" xml:space="preserve">
+    <value>وب سایت من {0}</value>
+  </data>
+  <data name="PerformanceTab_SslForCacheSyncrhonization.Help" xml:space="preserve">
+    <value>By default, cache synchronization will happen over http. To use SSL for cache synchronization messages, please check this.</value>
+  </data>
+  <data name="PerformanceTab_SslForCacheSyncrhonization.Text" xml:space="preserve">
+    <value>همگام سازی کش برای حالت SSL</value>
+  </data>
+  <data name="PerformanceTab_UnauthCacheability.Help" xml:space="preserve">
+    <value>Sets the Cache-Control HTTP header value for unauthenticated users.</value>
+  </data>
+  <data name="PerformanceTab_UnauthCacheability.Text" xml:space="preserve">
+    <value>سیستم کش برای کاربران احراز نشده</value>
+  </data>
+  <data name="EmailSentMessage.Text" xml:space="preserve">
+    <value>ایمیل با موفقیت از {0} به {1} ارسال شد</value>
+  </data>
+  <data name="errorMessageSendingTestEmail.Text" xml:space="preserve">
+    <value>خطا در ارسال ایمیل تستی</value>
+  </data>
+  <data name="NoIntegerValueError.Text" xml:space="preserve">
+    <value>مقدار باید یک عدد صحیح مثبت باشد.</value>
+  </data>
+  <data name="PerformanceTab_CurrentPortalVersion.Text" xml:space="preserve">
+    <value>نسخه سایت:</value>
+  </data>
+  <data name="errorMessageIncrementingVersion.Text" xml:space="preserve">
+    <value>خطا در افزایش شماره نسخه.</value>
+  </data>
+  <data name="errorMessageSavingPerformanceSettingsTab.Text" xml:space="preserve">
+    <value>خطا در ذخیره تنظیمات عملکرد</value>
+  </data>
+  <data name="PerformanceTab_AjaxWarning.Text" xml:space="preserve">
+    <value>توجه : وضعیت ماندگاری صفحه در حافظه می تواند در عملکرد AJAX ایجاد اختلال نماید.</value>
+  </data>
+  <data name="PerformanceTab_MinifactionWarning.Text" xml:space="preserve">
+    <value>نکته مهم در مورد تنظیمات کوچک‌سازی.&lt;br/&gt;در صورتیکه تنظیمات کوچک سازی هنگام فعالسازی فایل های ترکیبی, تغییراتی داشته اند, باید ابتدا تنظیمات کوچک سازی با کلیک به روز رسانی ذخیره نموده و سپس شماره نسخه را افزایش دهید. این کار باعث ایجاد فایل های ترکیبی جدید با استفاده از تنظیمات کوچک سازی جدید میشود.</value>
+  </data>
+  <data name="PerformanceTab_PortalVersionConfirmMessage.Text" xml:space="preserve">
+    <value>This action will force all site visitors to download new versions of CSS and JavaScript files. You should only do this if you are certain that the files have changed and you want those changes to be reflected on the client's browser.
+
+Are you sure you want to increment the version number for your site?</value>
+  </data>
+  <data name="PerformanceTab_PortalVersionConfirmNo.Text" xml:space="preserve">
+    <value>خیر</value>
+  </data>
+  <data name="PerformanceTab_PortalVersionConfirmYes.Text" xml:space="preserve">
+    <value>بله</value>
+  </data>
+  <data name="SaveConfirmationMessage.Text" xml:space="preserve">
+    <value>با موفقیت ذخیره شد</value>
+  </data>
+  <data name="VersionIncrementedConfirmation.Text" xml:space="preserve">
+    <value>نسخه با موفقیت افزایش یافت.</value>
+  </data>
+  <data name="Servers.header" xml:space="preserve">
+    <value>سرور</value>
+  </data>
+</root>

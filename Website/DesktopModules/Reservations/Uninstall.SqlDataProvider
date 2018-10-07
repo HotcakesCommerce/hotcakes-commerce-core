@@ -1,0 +1,158 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddCustomFieldDefinitionListItem]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddCustomFieldValue]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddICalendar]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeleteCustomFieldDefinitionListItem]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeleteCustomFieldValue]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeleteICalendar]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldDefinitionListItem]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldDefinitionListItemList]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldValue]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldValueList]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldValueListByReservationID]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldValueListByPendingApprovalID]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldValueListByPendingPaymentID]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetICalendar]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetICalendarList]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddCategorySetting]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCategorySetting]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCategorySettingList]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdateCustomFieldDefinitionListItem]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdateCustomFieldValue]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdateICalendar]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeleteCategorySetting]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdateCategorySetting]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdateCustomFieldDefinition]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeleteCustomFieldDefinition]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdateReservation]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdateCategory]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdatePendingApproval]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdatePendingPayment]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldDefinition]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldDefinitionList]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddCustomFieldDefinition]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddReservation]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddCategory]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetPendingApproval]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetPendingApprovalList]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetPendingPayment]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetPendingPaymentList]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_ICalendar] DROP CONSTRAINT [{objectQualifier}FK_Reservations_ICalendar_Reservations_Reservation]
+GO
+DROP TABLE {databaseOwner}[{objectQualifier}Reservations_ICalendar]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeletePendingApproval]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeletePendingPayment]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DisableRequireConfirmation]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DisableSendReminder]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetActiveCustomFieldDefinitionList]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetReservation]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetReservationList]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetReservationListByDateRange]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetReservationListByDateRangeAndCategoryID]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetReservationListToSendReminders]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCategory]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCategoryList]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_CategorySetting] DROP CONSTRAINT [{objectQualifier}FK_Reservations_CategorySetting_Reservations_Category]
+GO
+DROP TABLE {databaseOwner}[{objectQualifier}Reservations_CategorySetting]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddPendingApproval]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddPendingPayment]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinitionListItem] DROP CONSTRAINT [{objectQualifier}FK_Reservations_CustomFieldDefinitionListItem_Reservations_CustomFieldDefinition]
+GO
+DROP TABLE {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinitionListItem]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_CustomFieldValue] DROP CONSTRAINT [{objectQualifier}FK_Reservations_CustomFieldValue_Reservations_CustomFieldDefinition]
+GO
+DROP TABLE {databaseOwner}[{objectQualifier}Reservations_CustomFieldValue]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeleteReservation]
+GO
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeleteCategory]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_Reservation] DROP CONSTRAINT [{objectQualifier}FK_Reservations_Reservation_TabModules]
+GO
+DROP TABLE {databaseOwner}[{objectQualifier}Reservations_Reservation]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_Category] DROP CONSTRAINT [{objectQualifier}FK_Reservations_Category_TabModules]
+GO
+DROP TABLE {databaseOwner}[{objectQualifier}Reservations_Category]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinition] DROP CONSTRAINT [{objectQualifier}FK_Reservations_CustomFieldDefinition_TabModules]
+GO
+DROP TABLE {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinition]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_PendingApproval] DROP CONSTRAINT [{objectQualifier}FK_Reservations_PendingApproval_TabModules]
+GO
+DROP TABLE {databaseOwner}[{objectQualifier}Reservations_PendingApproval]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_PendingPayment] DROP CONSTRAINT [{objectQualifier}FK_Reservations_PendingPayment_TabModules]
+GO
+DROP TABLE {databaseOwner}[{objectQualifier}Reservations_PendingPayment]
+GO
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

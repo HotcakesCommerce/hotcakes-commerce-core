@@ -1,0 +1,123 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<Moslem.Modules.GDS.GDSModuleMVC.Controllers.resgetCity>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="col-md-6">
+    <div class="Reserve_Title">شهر  </div>
+    <div class="input-container">
+        <div class="icon-ph"><i class="fa fa-globe"></i></div>
+        <select id="cityed" class="form-control">
+            <option value="null">شهر را انتخاب نمایید</option>
+            @foreach (var item in Model.response)
+            {
+               /* if (!string.IsNullOrEmpty(Dnn.LocalizeString(item.description)))
+                {*/
+                    <option value="@item.id">@item.description</option>
+             //   }
+
+            }
+        </select>
+    </div>
+</div>
+
+
+
+
+<div class="col-md-5">
+    <div class="Reserve_Title">هتل</div>
+    <div class="input-container" typeitem="main_item">
+        <div class="icon-ph"><i class="fa fa-building"></i></div>
+        <select id="hoteled" disabled="true" class="form-control">
+            <option value="null">هتل مورد نظر را انتخاب نمائید</option>
+        </select>
+    </div>
+</div>
+
+
+
+<br />
+<div id="result" style="margin-top: 26px;" class="col-md-12"></div>
+<script>
+    sf = $.ServicesFramework(@Dnn.ActiveModule.ModuleID);
+    $(document).ready(function () {
+        $("#cityed").change(function () {
+            $("#hoteled").prop("disabled", true);
+            $("#hoteled").empty()
+            $('<option value="null">لطفا صبر کنید</option>').appendTo("#hoteled");
+            console.log('I am called');
+            
+
+            $.ajax({
+                url: "/DesktopModules/MVC/GDSModuleMVC/GDS/gethotel?cityid=" + $("#cityed").val(),
+                method: "Get",
+                beforeSend: sf.setModuleHeaders
+            })
+                .done(function (data) {
+                    data = JSON.parse(data);
+                    var items = [];
+                    $("#hoteled").empty();
+                    $('<option value="null">نام هتل</option>').appendTo("#hoteled");
+                    $.each(data.aaData, function (key, val) {
+                        var div_data = '<option value="' + val.value + '">' + val.text + "</option>";
+                        $(div_data).appendTo('#hoteled');
+                        $("#hoteled").prop("disabled", false);
+                    });
+
+                })
+                .error(function () {
+                    $("#hoteled").empty();
+                    $('<option value="null">شهر دیگری را انتخاب نمایید</option>').appendTo("#hoteled");
+                });
+        });
+    
+
+
+    $("#hoteled").change(function () {
+        if ($("#hoteled").val() == "null") {
+            return;
+        }
+        $("#result").html(' <center><br/> <h3>در حال بارگزاری...</h3><br/> لطفا صبر کنید <center>');
+
+        $.ajax({
+            url: "/DesktopModules/MVC/GDSModuleMVC/GDS/gethotelsRoom?cityid=" + $("#cityed").val() + "&HotelID=" + $("#hoteled").val(),
+            method: "Get",
+            beforeSend: sf.setModuleHeaders
+        })
+            .done(function (data) {
+                //data = JSON.parse(data);
+                $("#result").html(data);
+
+            });
+    });
+      
+    });
+    function myFunction(id) {
+            $("#img" + id).attr("src", "/Portals/0/Loading_icon.gif");
+            var data = new FormData();
+            var files = $("#file" + id).get(0).files;
+            // Add the uploaded image content to the form data collection
+            if (files.length > 0) {
+                data.append("UploadedImage", files[0]);
+            }
+             var rvtoken = $("input[name='__RequestVerificationToken']").val();
+       
+            // Make Ajax request with the contentType = false, and procesDate = false
+            $.ajax({
+                type: "POST",
+                url: "/DesktopModules/MVC/GDSModuleMVC/GDS/uploadfile?HotelID=" + $("#hoteled").val() + "&RoomID=" + id,
+                contentType: false,
+                beforeSend: sf.setModuleHeaders,
+                processData: false,
+                data: data
+            }).success(function () {
+                $("#img" + id).attr("src", "/Portals/0/Images/Hotel/" + $("#hoteled").val() + "/" + id + "/001s.jpg?" + $.now());
+            }).done(function () {
+                $("#img" + id).attr("src", "/Portals/0/Images/Hotel/" + $("#hoteled").val() + "/" + id + "/001s.jpg?" + $.now());
+            });
+        };
+
+</script>
+
+
+

@@ -1,0 +1,12 @@
+/****** Object:  Table {databaseOwner}[{objectQualifier}LiveSlider]    Script Date: 05/22/2014 13:14:24 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}LiveSlider]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}LiveSlider]
+GO
+/****** Object:  Table {databaseOwner}[{objectQualifier}LiveSlider_Slide]    Script Date: 05/22/2014 13:14:24 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}LiveSlider_Slide]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}LiveSlider_Slide]
+GO
+/****** Object:  Table {databaseOwner}[{objectQualifier}LiveSlider_SlideLayer]    Script Date: 05/22/2014 13:14:24 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}LiveSlider_SlideLayer]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}LiveSlider_SlideLayer]
+GO

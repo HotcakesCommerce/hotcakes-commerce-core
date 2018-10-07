@@ -1,0 +1,45 @@
+﻿<div class="form-horizontal" role="form">
+    <fieldset>
+        <legend>مشخصات پکیج انتخابی</legend>
+        <div class="col-md-8">
+            <label for="mdlHotel" class="col-md-5 control-label">نام پکیج اتاق</label>
+            <div class="input-container" typeitem="main_item  col-md-5 control-label">
+                <div class="icon-ph"><i class="fa fa-building"></i></div>
+                <select ng-model="mdlRoomsPackage"
+                        ng-options="elt.ID as elt.Name for elt in lstRoomsPackage" name="mdlRoomsPackage">
+                    <option value="" ng-model="default">لطفا پکیج اتاق را انتخاب نمایید</option>
+                </select>
+            </div>
+        </div>
+        <a class="btn btn-primary" ng-click="AddRoomPackageintoPackage()">افزودن</a>
+    </fieldset>
+
+    <fieldset>
+        <legend>لیست پکیج اتاق های موجود </legend>
+        <table>
+            <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام پکیج</th>
+                    <th>تعداد شب اعتبار</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tr ng-repeat="x in Packages">
+                <td>{{$index + 1 }}</td>
+                <td>{{ x.Name }}</td>
+                <td>{{ x.Count }}</td>
+                <td>{{ x.DateOfInserted }} <a ng-click="RemovePackage(x.ID)">حذف</a> <a ui-sref="ShowRoomsPackage({id:x.ID})">نمایش پکیج </a></td>
+            </tr>
+        </table>
+    </fieldset>
+</div>
+<style>
+    table {
+        width: 100%;
+    }
+
+    th, td, tr {
+        text-align: center;
+    }
+</style>

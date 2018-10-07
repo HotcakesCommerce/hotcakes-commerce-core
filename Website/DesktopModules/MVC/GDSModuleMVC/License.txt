@@ -1,0 +1,12 @@
+﻿<div class="License">
+	<h3>License</h3>
+	<p class="Owner">
+		Moslem Pasokh  <a href=http:
+		Copyright (c) 2018</br>	
+		by Moslem Pasokh</br>
+	</p>
+    <p>
+	First Released After labtop Stolen.
+	* Added Cache Ablility for Better performance
+        </p>
+</div>

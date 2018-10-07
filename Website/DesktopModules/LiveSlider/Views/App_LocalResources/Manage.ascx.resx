@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AnimateFirstSlide.Text" xml:space="preserve">
+    <value>Animate starting slide</value>
+  </data>
+  <data name="AutoPauseSlideshow.Text" xml:space="preserve">
+    <value>Pause slideshow</value>
+  </data>
+  <data name="AutoPlayVideos.Text" xml:space="preserve">
+    <value>Automatically play videos</value>
+  </data>
+  <data name="AutoStart.Text" xml:space="preserve">
+    <value>Start slideshow</value>
+  </data>
+  <data name="BarTimer.Text" xml:space="preserve">
+    <value>Show bar timer</value>
+  </data>
+  <data name="NavButtons.Text" xml:space="preserve">
+    <value>Show slide navigation buttons</value>
+  </data>
+  <data name="CircleTimer.Text" xml:space="preserve">
+    <value>Show circle timer</value>
+  </data>
+  <data name="GlobalBackgroundColor.Text" xml:space="preserve">
+    <value>Background color</value>
+  </data>
+  <data name="GlobalBackgroundImage.Text" xml:space="preserve">
+    <value>Background image</value>
+  </data>
+  <data name="HoverBottomNav.Text" xml:space="preserve">
+    <value>Slide navigation on hover</value>
+  </data>
+  <data name="HoverPrevNext.Text" xml:space="preserve">
+    <value>Show Prev &amp; Next buttons on hover</value>
+  </data>
+  <data name="ImagePreload.Text" xml:space="preserve">
+    <value>Images preload</value>
+  </data>
+  <data name="KeyboardNav.Text" xml:space="preserve">
+    <value>Keyboard Navigation</value>
+  </data>
+  <data name="lAppearance.Text" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="LayersContainerPixels.Text" xml:space="preserve">
+    <value>px</value>
+  </data>
+  <data name="LazyLoad.Text" xml:space="preserve">
+    <value>Lazy load images</value>
+  </data>
+  <data name="lHeight.Text" xml:space="preserve">
+    <value>Slider height</value>
+  </data>
+  <data name="lImagePreload.Text" xml:space="preserve">
+    <value>Image Preload</value>
+  </data>
+  <data name="lLayersContainer.Text" xml:space="preserve">
+    <value>Layers container</value>
+  </data>
+  <data name="lLayout.Text" xml:space="preserve">
+    <value>Layout</value>
+  </data>
+  <data name="lNavigation.Text" xml:space="preserve">
+    <value>Navigation</value>
+  </data>
+  <data name="Loops.Text" xml:space="preserve">
+    <value>Loops</value>
+  </data>
+  <data name="lPreview.Text" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="lResponsive.Text" xml:space="preserve">
+    <value>Responsive</value>
+  </data>
+  <data name="lResponsiveUnder.Text" xml:space="preserve">
+    <value>Responsive under</value>
+  </data>
+  <data name="lSlideshow.Text" xml:space="preserve">
+    <value>Slideshow</value>
+  </data>
+  <data name="lVideos.Text" xml:space="preserve">
+    <value>Videos</value>
+  </data>
+  <data name="lWidth.Text" xml:space="preserve">
+    <value>Slider width</value>
+  </data>
+  <data name="lYourLogo.Text" xml:space="preserve">
+    <value>Your logo</value>
+  </data>
+  <data name="PauseOnHover.Text" xml:space="preserve">
+    <value>Pause On Hover</value>
+  </data>
+  <data name="Pixels.Text" xml:space="preserve">
+    <value>px</value>
+  </data>
+  <data name="PixelsOrPercentage.Text" xml:space="preserve">
+    <value>px or %</value>
+  </data>
+  <data name="NavPrevNext.Text" xml:space="preserve">
+    <value>Show Prev &amp; Next buttons</value>
+  </data>
+  <data name="RandomSlideshow.Text" xml:space="preserve">
+    <value>Shuffle mode</value>
+  </data>
+  <data name="NavStartStop.Text" xml:space="preserve">
+    <value>Show Start &amp; Stop buttons</value>
+  </data>
+  <data name="Theme.Text" xml:space="preserve">
+    <value>Skin</value>
+  </data>
+  <data name="ThumbnailActiveOpacity.Text" xml:space="preserve">
+    <value>Active thumbnail opacity</value>
+  </data>
+  <data name="ThumbnailContainerWidth.Text" xml:space="preserve">
+    <value>Thumbnail container width</value>
+  </data>
+  <data name="ThumbnailHeight.Text" xml:space="preserve">
+    <value>Thumbnail height</value>
+  </data>
+  <data name="ThumbnailInactiveOpacity.Text" xml:space="preserve">
+    <value>Inactive thumbnail opacity</value>
+  </data>
+  <data name="ThumbnailNavigation.Text" xml:space="preserve">
+    <value>Thumbnail navigation</value>
+  </data>
+  <data name="ThumbnailWidth.Text" xml:space="preserve">
+    <value>Thumbnail width</value>
+  </data>
+  <data name="TouchNav.Text" xml:space="preserve">
+    <value>Touch Navigation</value>
+  </data>
+  <data name="TwoWaySlideshow.Text" xml:space="preserve">
+    <value>Two way slideshow</value>
+  </data>
+  <data name="YourLogoLink.Text" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="YourLogoLinkNewWindow.Text" xml:space="preserve">
+    <value>Open in new window</value>
+  </data>
+  <data name="YourLogoStyle.Text" xml:space="preserve">
+    <value>Style</value>
+  </data>
+  <data name="HeightMessage.Text" xml:space="preserve">
+    <value>Please Enter Height</value>
+  </data>
+  <data name="InvalidHeightEnd.Text" xml:space="preserve">
+    <value>Height must ends with px</value>
+  </data>
+  <data name="InvalidHeightLength.Text" xml:space="preserve">
+    <value>Please Enter a Height Greater than 0</value>
+  </data>
+  <data name="InvalidHeightMessage.Text" xml:space="preserve">
+    <value>Please Enter Valid Height</value>
+  </data>
+  <data name="InvalidLayerContainer.Text" xml:space="preserve">
+    <value>Please Enter a Valid number in Layer Container</value>
+  </data>
+  <data name="InvalidLoops.Text" xml:space="preserve">
+    <value>Please Enter a Valid number in Loops</value>
+  </data>
+  <data name="InvalidResponsiveUnder.Text" xml:space="preserve">
+    <value>Please Enter a Valid number in Responsive Under</value>
+  </data>
+  <data name="InvalidThumbnailActiveOpacity.Text" xml:space="preserve">
+    <value>Please Enter a Valid number in Thumbnail Active Opacity</value>
+  </data>
+  <data name="InvalidThumbnailContainerWidth.Text" xml:space="preserve">
+    <value>Please Enter a Valid number in Thumbnail Container Width</value>
+  </data>
+  <data name="InvalidThumbnailHeight.Text" xml:space="preserve">
+    <value>Please Enter a Valid number in Thumbnail Height</value>
+  </data>
+  <data name="InvalidThumbnailInActiveOpacity.Text" xml:space="preserve">
+    <value>Please Enter a Valid number in Thumbnail Inactive Opacity</value>
+  </data>
+  <data name="InvalidThumbnailWidth.Text" xml:space="preserve">
+    <value>Please Enter a Valid number in Thumbnail Width</value>
+  </data>
+  <data name="InvalidWidthEnd.Text" xml:space="preserve">
+    <value>Width must ends with px</value>
+  </data>
+  <data name="InvalidWidthLength.Text" xml:space="preserve">
+    <value>Please Enter a Width Greater than 0</value>
+  </data>
+  <data name="InvalidWidthMessage.Text" xml:space="preserve">
+    <value>Please Enter Valid Width</value>
+  </data>
+  <data name="LayerContainerRequired.Text" xml:space="preserve">
+    <value>Please Enter Value in Layer Container</value>
+  </data>
+  <data name="LoopsRequired.Text" xml:space="preserve">
+    <value>Please Enter Value in Loops</value>
+  </data>
+  <data name="ResponsiveUnderRequired.Text" xml:space="preserve">
+    <value>Please Enter Value in  Responsive Under</value>
+  </data>
+  <data name="ThumbnailActiveOpacityRequired.Text" xml:space="preserve">
+    <value>Thumbnail Active Opacity is Required</value>
+  </data>
+  <data name="ThumbnailContainerWidthRequired.Text" xml:space="preserve">
+    <value>Thumbnail Container Width is Required</value>
+  </data>
+  <data name="ThumbnailHeightRequired.Text" xml:space="preserve">
+    <value>Thumbnail Height is Required</value>
+  </data>
+  <data name="ThumbnailInActiveOpacityRequired.Text" xml:space="preserve">
+    <value>Thumbnail Inactive Opacity is Required</value>
+  </data>
+  <data name="ThumbnailWidthRequired.Text" xml:space="preserve">
+    <value>Thumbnail Width is Required</value>
+  </data>
+  <data name="WidthMessage.Text" xml:space="preserve">
+    <value>Please Enter Width</value>
+  </data>
+  <data name="ValidBackColor.Text" xml:space="preserve">
+    <value>Please Enter Valid Global Background Color</value>
+  </data>
+  <data name="lDnnSearchable.Text" xml:space="preserve">
+    <value>DNN Searchable</value>
+  </data>
+  <data name="lOther.Text" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Slide2DTransition.Text" xml:space="preserve">
+    <value>2D Transition:</value>
+  </data>
+  <data name="Slide3DTransition.Text" xml:space="preserve">
+    <value>3D Transition:</value>
+  </data>
+  <data name="SlideBackgroundImage.Text" xml:space="preserve">
+    <value>Background Image</value>
+  </data>
+  <data name="SlideBackgroundImageAltText.Text" xml:space="preserve">
+    <value>Background Image Alt Text</value>
+  </data>
+  <data name="SlideDelay.Text" xml:space="preserve">
+    <value>Duration:</value>
+  </data>
+  <data name="SlideLink.Text" xml:space="preserve">
+    <value>Link:</value>
+  </data>
+  <data name="SlideLinkNewWindow.Text" xml:space="preserve">
+    <value>Open In New Window:</value>
+  </data>
+  <data name="SlideThumbnail.Text" xml:space="preserve">
+    <value>Thumbnail</value>
+  </data>
+  <data name="SlideThumbnailImageAltText.Text" xml:space="preserve">
+    <value>Thumbnail Alt Text</value>
+  </data>
+  <data name="SlideTimeShift.Text" xml:space="preserve">
+    <value>Time Shift:</value>
+  </data>
+  <data name="AddSlide.Text" xml:space="preserve">
+    <value>Add Slide</value>
+  </data>
+  <data name="Cancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="lAddSlide.Text" xml:space="preserve">
+    <value>Add Slide</value>
+  </data>
+  <data name="lNavigationArea.Text" xml:space="preserve">
+    <value>Navigation Area</value>
+  </data>
+  <data name="lSliderSettings.Text" xml:space="preserve">
+    <value>Slider Settings</value>
+  </data>
+  <data name="lSlides.Text" xml:space="preserve">
+    <value>Slides</value>
+  </data>
+  <data name="lThumbnailNavigation.Text" xml:space="preserve">
+    <value>Thumbnail Navigation</value>
+  </data>
+  <data name="Save.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="lFullWidth.Text" xml:space="preserve">
+    <value>Full Width</value>
+  </data>
+  <data name="CbAnimStart.Text" xml:space="preserve">
+    <value>AnimStart</value>
+  </data>
+  <data name="CbAnimStop.Text" xml:space="preserve">
+    <value>AnimStop</value>
+  </data>
+  <data name="CbInit.Text" xml:space="preserve">
+    <value>Init</value>
+  </data>
+  <data name="CbNext.Text" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="CbPause.Text" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="CbPrev.Text" xml:space="preserve">
+    <value>Prev</value>
+  </data>
+  <data name="CbStart.Text" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="CbStop.Text" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="levents.Text" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="lHiddenSlide.Text" xml:space="preserve">
+    <value>Hidden: </value>
+  </data>
+  <data name="lVisiblity.Text" xml:space="preserve">
+    <value>Visibility:</value>
+  </data>
+</root>

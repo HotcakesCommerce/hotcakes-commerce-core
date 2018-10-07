@@ -1,0 +1,359 @@
+﻿
+
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and name='FileNumber'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle ADD  
+[FileNumber] [int]  NULL,
+[ContentId] [int]  NULL
+GO
+
+
+ 
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticle
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticle
+
+	@ModuleId       int,
+	@Content        nvarchar (max),
+	@UserID         int,
+	@CreatedDate    datetime,
+	@CategoryID     int,
+	@URL            nvarchar (250),
+	@Title          nvarchar (2000)  ,
+	@Description    nvarchar (max),
+	@ViewOrder      int,
+	@ViewRoles      nvarchar(2000) ,
+	@Clicks         int ,
+	@VoteTotal      int ,
+	@VoteNumber     int ,
+	@CommentNumber  int ,
+	@ApprovedByUser int ,
+	@ApprovedDate   datetime ,
+	@IsApproved     bit,
+	@Tags           nvarchar (200),
+	@ExpireDate     datetime,
+    @SEOTitle       nvarchar (250),
+    @SEODescription nvarchar (250),
+    @SEOTags        nvarchar (250),
+    @Featured       bit,
+    @ReleatedURL    nvarchar (250),
+    @ExtraFields    nvarchar (max),
+    @PublishDate     datetime,
+    @UpdateDate     datetime,
+    @PageNumber     int,
+    @RelatedEntryID int,
+	@RelatedEntryKey nvarchar(500),
+	@LastViewDate datetime,
+	@IsPublished bit,
+	@AllowComment bit,
+	@IsAllUser int,
+	@FileNumber int,
+	@ContentId int
+    
+
+as
+
+insert into {objectQualifier}ZLDNN_DNNArticle (
+	ModuleId,
+	Content,
+	CreatedByUser,
+	CreatedDate,
+	CategoryID,
+	URL,
+	Title,
+	Description,
+	ViewOrder,
+	ViewRoles,
+	Clicks,
+	VoteTotal,
+	VoteNumber,
+	CommentNumber,
+	ApprovedByUser,
+	ApprovedDate,
+	IsApproved,
+	Tags,
+	ExpireDate,
+       SEOTitle ,
+       SEODescription ,
+       SEOTags,
+       Featured,
+       ReleatedURL,
+       ExtraFields,
+       PublishDate,
+       UpdateDate,
+       PageNumber,
+       RelatedEntryID,
+	   RelatedEntryKey,
+	   LastViewDate,
+	   IsPublished,
+	AllowComment,
+	IsAllUser,
+	FileNumber,
+	ContentId
+	
+) 
+values (
+	@ModuleId,
+	@Content,
+	@UserID,
+	GetDate() ,
+	@CategoryID,
+	@URL,
+	@Title,
+	@Description,
+	@ViewOrder,
+	@ViewRoles,
+	@Clicks,
+	@VoteTotal,
+	@VoteNumber,
+	@CommentNumber,
+	@ApprovedByUser,
+	@ApprovedDate,
+	@IsApproved,
+	@Tags,
+	@ExpireDate,
+    @SEOTitle ,
+    @SEODescription ,
+    @SEOTags,
+    @Featured,
+    @ReleatedURL,
+    @ExtraFields,
+    @PublishDate,
+    @UpdateDate,
+    @PageNumber,
+    @RelatedEntryID,
+	@RelatedEntryKey,
+	@LastViewDate,
+	@IsPublished,
+	@AllowComment,
+	@IsAllUser,
+	@FileNumber,
+	@ContentId
+	
+)
+
+select SCOPE_IDENTITY()
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticle
+
+	@ModuleId       int,
+    @ItemId         int,
+	@Content        nvarchar (max),
+	@UserID         int,
+	@CreatedDate    datetime,
+	@CategoryID     int,
+	@URL            nvarchar (250),
+	@Title          nvarchar (2000)  ,
+	@Description    nvarchar (max),
+	@ViewOrder      int,
+	@ViewRoles      nvarchar(2000) ,
+	@Clicks         int ,
+	@VoteTotal      int ,
+	@VoteNumber     int ,
+	@CommentNumber  int ,
+	@ApprovedByUser int ,
+	@ApprovedDate   datetime ,
+	@IsApproved     bit,
+	@Tags           nvarchar (200),
+	@ExpireDate     datetime,
+    @SEOTitle       nvarchar (250),
+    @SEODescription nvarchar (250),
+    @SEOTags        nvarchar (250),
+    @Featured       bit,
+    @ReleatedURL    nvarchar (250),
+    @ExtraFields    nvarchar (max),
+    @PublishDate    datetime,
+    @UpdateDate     datetime,
+    @PageNumber     int,
+    @RelatedEntryID int,
+	@RelatedEntryKey nvarchar(500),
+	@LastViewDate datetime,
+	@IsPublished bit,
+	@AllowComment bit,
+	@IsAllUser int,
+	@FileNumber int,
+	@ContentId int
+
+as
+
+update {objectQualifier}ZLDNN_DNNArticle
+set    Content       = @Content,
+       CreatedByUser = @UserID,
+       
+       CategoryID   =@CategoryID,
+       URL     = @URL,
+       Title =@Title,
+       Description = @Description,
+       ViewOrder=@ViewOrder,
+       ViewRoles=@ViewRoles,
+       Clicks=@Clicks,
+       VoteTotal=@VoteTotal,
+       VoteNumber=@VoteNumber,
+       CommentNumber=@CommentNumber,
+       ApprovedByUser=@ApprovedByUser,
+       ApprovedDate=@ApprovedDate,
+       IsApproved=@IsApproved,
+       Tags=@Tags,
+       ExpireDate=@Expiredate,
+       SEOTitle=@SEOTitle,
+       SEODescription=@SEODescription,
+       SEOTags=@SEOTags,
+       Featured=@Featured,
+       ReleatedURL=@ReleatedURL,
+       ExtraFields=@ExtraFields,
+       PublishDate=@PublishDate,
+       UpdateDate=@UpdateDate,
+       PageNumber=@PageNumber,
+       RelatedEntryID=@RelatedEntryID,
+       RelatedEntryKey=@RelatedEntryKey,
+       LastViewDate=@LastViewDate,
+	   IsPublished=@IsPublished,
+	   AllowComment=@AllowComment,
+	   IsAllUser = @IsAllUser ,
+	   FileNumber=@FileNumber,
+	   ContentId=@ContentId
+       
+where  ModuleId = @ModuleId
+and    ItemId = @ItemId
+
+GO
+
+
+
+
+Update {objectQualifier}ZLDNN_DNNArticle
+ set CommentNumber= (select count(*) from {objectQualifier}ZLDNN_DNNArticleComment as a where a.dnnarticleid=itemid  )
+
+
+ --   View 1 vw_ZLDNN_DNNArticle  
+--   09.07.00 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticle]') and OBJECTPROPERTY(id, N'IsView') = 1)
+	DROP VIEW {databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticle]
+GO
+
+
+CREATE VIEW {databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticle]
+AS
+select {objectQualifier}ZLDNN_DNNArticle.ModuleId,
+       {objectQualifier}ZLDNN_DNNArticle.ItemId,
+       {objectQualifier}ZLDNN_DNNArticle.Content,
+       {objectQualifier}ZLDNN_DNNArticle.CreatedByUser,
+       {objectQualifier}ZLDNN_DNNArticle.CreatedDate,
+       {objectQualifier}Users.UserName as CreatedByUserName,
+       {objectQualifier}Users.DisplayName as UserDisplayName,
+       {objectQualifier}Users.Email as UserEmail,
+       {objectQualifier}ZLDNN_DNNArticle.CategoryID,
+       case when a.FileName is null then {objectQualifier}ZLDNN_DNNArticle.URL else a.Folder + a.FileName end as URL,
+	   {objectQualifier}ZLDNN_DNNArticle.Title,
+	   {objectQualifier}ZLDNN_DNNArticle.Description,
+	   {objectQualifier}ZLDNN_DNNArticle.ViewOrder,
+	   {objectQualifier}ZLDNN_DNNArticle.ViewRoles,
+	   Clicks,
+	   VoteTotal,
+	   VoteNumber,
+	   {objectQualifier}ZLDNN_DNNArticle.CommentNumber as CommentNumber2,
+	   {objectQualifier}ZLDNN_DNNArticle.CommentNumber as  CommentNumber,
+	   ApprovedByUser,
+	   ApprovedDate,
+	   IsApproved,
+	   Tags,
+	   ExpireDate,
+       SEOTitle ,
+       SEODescription ,
+       SEOTags,
+       Featured,
+       case when b.FileName is null then {objectQualifier}ZLDNN_DNNArticle.ReleatedURL else b.Folder + b.FileName end as ReleatedURL,
+       ExtraFields,
+ CASE WHEN NOT VoteNumber IS NULL AND 
+      VoteNumber > 0 THEN VoteTotal / VoteNumber ELSE 0 END AS Rating,
+	  {objectQualifier}ZLDNN_DNNArticle.PublishDate,
+	   c.PortalID,
+        UpdateDate,
+        PageNumber,
+        RelatedEntryID,
+		RelatedEntryKey,
+		LastViewDate,
+		FileNumber,
+		IsPublished,
+		AllowComment,
+		IsAllUser,
+		ContentId
+       
+from {objectQualifier}ZLDNN_DNNArticle
+left outer join {objectQualifier}Users on {objectQualifier}ZLDNN_DNNArticle.CreatedByUser = {objectQualifier}Users.UserId
+left outer join {objectQualifier}vw_ZLDNNFiles as a on {objectQualifier}ZLDNN_DNNArticle.URL = 'fileid=' + convert(varchar,a.FileID)
+left outer join {objectQualifier}vw_ZLDNNFiles as b on {objectQualifier}ZLDNN_DNNArticle.ReleatedURL = 'fileid=' + convert(varchar,b.FileID)
+inner join {objectQualifier}Modules as c on {objectQualifier}ZLDNN_DNNArticle.ModuleID = c.ModuleID
+where c.isdeleted=0
+GO
+
+
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticlePermission]') and OBJECTPROPERTY(id, N'IsView') = 1)
+	DROP VIEW {databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticlePermission]
+GO
+
+
+CREATE VIEW {databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticlePermission]
+AS
+select {objectQualifier}ZLDNN_DNNArticle.ModuleId,
+       {objectQualifier}ZLDNN_DNNArticle.ItemId,
+       {objectQualifier}ZLDNN_DNNArticle.Content,
+       {objectQualifier}ZLDNN_DNNArticle.CreatedByUser,
+       {objectQualifier}ZLDNN_DNNArticle.CreatedDate,
+       {objectQualifier}ZLDNN_DNNArticle.URL,
+	   {objectQualifier}ZLDNN_DNNArticle.Title,
+	   {objectQualifier}ZLDNN_DNNArticle.Description,
+	   {objectQualifier}ZLDNN_DNNArticle.ViewOrder,
+	   {objectQualifier}ZLDNN_DNNArticle.ViewRoles,
+	   Clicks,
+	   VoteTotal,
+	   VoteNumber,
+	   CommentNumber,
+	   ApprovedByUser,
+	   ApprovedDate,
+	   IsApproved,
+	   Tags,
+	   ExpireDate,
+       SEOTitle ,
+       SEODescription ,
+	   c.PortalId,
+       SEOTags,
+       Featured,
+       {objectQualifier}ZLDNN_DNNArticle.ReleatedURL,
+       ExtraFields,
+       CASE WHEN NOT VoteNumber IS NULL AND  VoteNumber > 0 THEN VoteTotal / VoteNumber ELSE 0 END AS Rating,
+	  {objectQualifier}ZLDNN_DNNArticle.PublishDate	,
+	   {objectQualifier}ZLDNN_DNNArticleCategory.ViewRoles as CategoryViewRoles,
+       {objectQualifier}ZLDNN_DNNArticleCategory.ItemID as CategoryID,
+        {objectQualifier}ZLDNN_DNNArticleCategory.Title as CategoryName,
+        UpdateDate,
+        PageNumber,
+        RelatedEntryID ,
+		RelatedEntryKey,
+		LastViewDate,
+		FileNumber,
+		IsPublished,
+		AllowComment,
+		{objectQualifier}ZLDNN_DNNArticle.IsAllUser,
+        {objectQualifier}ZLDNN_DNNArticleCategory.IsAllUser as cIsAllUser
+
+from {objectQualifier}ZLDNN_DNNArticleAssignedCategories
+left outer join {objectQualifier}ZLDNN_DNNArticleCategory  on  {objectQualifier}ZLDNN_DNNArticleCategory.ItemID ={objectQualifier}ZLDNN_DNNArticleAssignedCategories.CategoryID
+full outer join {objectQualifier}ZLDNN_DNNArticle on {objectQualifier}ZLDNN_DNNArticle.ItemID = {objectQualifier}ZLDNN_DNNArticleAssignedCategories.ArticleID
+inner join {objectQualifier}Modules as c on {objectQualifier}ZLDNN_DNNArticle.ModuleID = c.ModuleID
+where c.isdeleted=0
+
+
+GO
+
+
+

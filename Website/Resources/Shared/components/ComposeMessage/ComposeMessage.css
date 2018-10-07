@@ -31,3 +31,26 @@ div.token-input-dropdown-facebook ul li img{padding-right:10px;vertical-align:mi
 .composeMessageDialog .messageAttachments a.removeAttachment:hover{
 	opacity:1;
 }
+
+/* ===========   dnnsoftware.ir   =========== */
+
+.rtl .composeMessageDialog .dnnLeft .dnnFormItem img{vertical-align:middle;float:left;}
+.rtl div.token-input-dropdown-facebook ul li img{padding-left:10px;vertical-align:middle;}
+/* MESSAGE ATTACHMENTS */
+.rtl .composeMessageDialog .messageAttachments {
+    width:300px;
+    float:left;
+}
+.rtl .composeMessageDialog .messageAttachments ul li a{
+	float:right;
+	font-size:12px;
+	text-decoration:none;
+}
+.rtl .composeMessageDialog .messageAttachments a.removeAttachment{
+	float:left;
+	display:block;
+	padding:3px;
+	width:10px; height:10px;
+	background:url(images/delete.png) no-repeat 3px 3px;
+	opacity:0.75; 
+}

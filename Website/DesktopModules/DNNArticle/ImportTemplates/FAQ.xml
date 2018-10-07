@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ImportTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FileName>DNNFAQs</FileName>
+  <RootName>faqs</RootName>
+  <ItemNodeName>faq</ItemNodeName>
+  <TitleField>question</TitleField>
+  <ContentField>answer</ContentField>
+  <SummaryField />
+  <ImageURLField />
+  <ExpireDateField />
+</ImportTemplate>

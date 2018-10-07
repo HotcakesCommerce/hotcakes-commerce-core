@@ -1,0 +1,962 @@
+/* CSS Document */
+/* ********** Main ************** */
+.wrapper {
+    position: relative;
+}
+
+.SkinWidth{
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1170px;
+}
+.SkinWidth2{
+    max-width: 1140px;
+	margin:0 auto;
+}
+.SkinWidth:before,
+.SkinWidth:after,
+.SkinWidth2:before,
+.SkinWidth2:after
+ {
+  display: table;
+  content: "";
+  clear: both;
+}
+.left { float:right;}
+.right { float:left;}
+
+.w26 { width:26%;}
+.w71 { width:71%;}
+.skinwidth {
+    margin: 0 auto;
+    max-width: 1140px;
+    min-width: 730px;
+}
+.wrapper .TopBar { background:#41332a; padding:10px 0;}
+.wrapper .header {
+    min-height: 100px;
+    background-color: #fff;
+}
+
+
+.top-right { text-align:left; color:#fff;}
+.top-right em {
+    font-size: 16px;
+    vertical-align: middle;
+    margin: 0  0 0 5px;
+}
+.GrayColor {
+    background: #F1F0EC;
+    margin: 0 0 60px 0;
+}
+
+
+.skin-header {
+    min-height: 40px;
+    background: none repeat scroll 0% 0% #1D2225;
+    line-height: 40px;
+}
+.NavMenu { text-align:center;}
+
+
+.DefaultBackground { background:#C6A062;}
+.DefaultBorderColor{ border-color:#C6A062;}
+.DefaultColor  { color:#C6A062;}
+.MultiColor-bg { background:#C6A062; }
+
+.MobileBar {
+	display:none;
+}
+.innerbanner-position {
+	position: relative;
+	background: url(images/default-innerbg.jpg) no-repeat 50% 0;
+	background-size: cover;
+	min-height:300px;
+	z-index:4;
+}
+
+/* ********** Breadcrumb Style ************** */
+.breadcrumb-header {
+    background-image: url(../images/breadcrumb-header.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 150px;
+    padding: 60px 0 0 0;
+    background-position: 50% 50%;
+}
+
+.BreadcrumbPane .Normal {
+    color: #333;
+    font-size: 14px;
+    text-align: center;
+    letter-spacing: .5px;
+}
+.page-name {
+  text-transform: capitalize;
+  color: #333;
+  font-size: 28px;
+  font-weight: 400;
+}
+
+
+.skin-breadcrumb {
+	color: #333;
+	font-size: 14px;
+	text-transform: capitalize;
+	padding: 8px 0 0 0;
+	font-weight:400;
+}
+
+.skin-breadcrumb a,
+.skin-breadcrumb a:link, 
+.skin-breadcrumb a:active,
+.skin-breadcrumb a:visited { color:#333;}
+.skin-breadcrumb a:hover { text-decoration:underline; color:#C6A062;}
+.skin-breadcrumb .fa-home { font-size:18px;}
+
+.dnn-menu {
+    margin: 7px 0 0 0;
+	float:left;
+}
+.mycontent {
+    min-height: 500px;
+    margin: 40px auto;
+}
+.ParallaxBg {
+  background-image: url('../images/ParallaxBg.jpg');
+  background-position: 0 0;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  margin:0;
+  background-size: cover;
+}
+
+
+.menu_box { display:none;}
+.skin-footer {
+	background: #41332A;
+	position: relative;
+	z-index: 1;
+}
+.footer-main { padding:30px 0 20px;}
+
+.footer-bar { min-height:60px; background:#2D221C;}
+.display-none { display:none;}
+
+
+/* ********** CurrentDate Style ************** */
+.CurrentDate { color:#fff;margin:0  0 0 10px;}
+.CurrentDate em {
+    font-size: 18px;
+    margin: 0  0 0 5px;
+    vertical-align: middle;
+}
+.datecss { vertical-align: middle;}
+/* ********** Logo Style ************** */
+.dnn-logo {
+    margin: 20px 15px 20px 0px;
+    text-align: center;
+}
+.dnn-logo a { 
+	display:inline-block;	
+	position:relative;
+}
+
+/* sticky */
+
+.StickyNav  { background:#41332A;}
+.sticky-wrapper { min-height:52px!important;}
+.is-sticky .StickyNav{ 
+	z-index:905;    
+}
+
+.is-sticky .loginstatus {
+    top: 37px !important;
+}
+.showControlBar .is-sticky .loginstatus {
+    top: 55px !important;
+}
+
+/* ********** Login Style ************** */
+.login-style {
+    color: #ddd;
+    float: left;
+}
+
+.login-style em { padding:0  0 0 5px;}
+.login, 
+a.login:link, 
+a.login:active, 
+a.login:visited { color:#fff;vertical-align: middle; }
+a.login:hover { text-decoration: underline!important; }
+
+.user, 
+a.user:link, 
+a.user:active, 
+a.user:visited { color:#ddd; margin:0  0 0 10px;}
+a.user:hover { text-decoration: underline; }
+
+/* ********** Language Style ************** */
+.language-object { display:inline-block; vertical-align:middle;}
+.language-object .Language img {
+    border: medium none;
+    width: 22px;
+	margin:0 2px;
+}
+.language-object .Language.selected img {
+    border: 1px solid #FFFFFF;
+}
+
+/* ********** Links Style ************** */
+.footlins { 
+	text-align: left; 
+	padding:27px 0 10px 0; 
+}
+.footlins A, .footlins A:link, .footlins A:visited, .footlins A:active {
+    color:#fff;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+.footlins A:hover {
+    color: #333;
+    text-decoration: none;
+}
+/* ********** Copyright ************** */
+.copyright {
+  padding: 24px 0px 10px 0;
+  color: #eee;
+  text-transform: capitalize;
+  font-weight: 400;
+}
+.TermsCss,
+.TermsCss:link,
+.TermsCss:active,
+.TermsCss:visited { color:#eee;}
+.TermsCss:hover {
+  color:#C6A062;
+}
+/* ********** Search Style ************** */
+.skin-search .icon-search {
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    vertical-align: middle;
+	width: 20px;
+}
+
+.skin_search {
+    position: relative;
+    width: 20px;
+	display:inline-block;
+}
+.skin_search .fa-search {
+    color: #fff;
+    font-size:17px;
+	position:relative;
+	z-index:999;
+	-moz-transition:none;
+	-webkit-transition:none;
+	-o-transition:none;
+}
+.skin_search a.active { 
+	background:url("images/close.png") no-repeat scroll 0 50% transparent; 
+	text-indent:-9999em; 
+	display:block;
+	height:25px;
+}
+.skin_search .icon-search:hover { 
+	color: #666666; 
+	text-decoration:none;
+}
+.skin-search {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  position: relative;
+}
+.MobileBar .icon-search {
+  font-size: 18px;
+  color: #fff;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  float: left;
+  width: 50px;
+  padding: 15px 0 0 0;
+  cursor:pointer;
+}
+.icon-search:hover { text-decoration:none;}
+.fa-search.active:before {
+  content: "x";
+  /*font-family: Verdana, Arial, Helvetica, sans-serif;*/
+  font-size:20px;
+  vertical-align:top;
+}
+.shortline {
+    color: #555;
+    display: inline-block;
+    font-size: 16px;
+    background: none repeat scroll 0% 0% #fff;
+    width: 1px;
+    height: 20px;
+    vertical-align: middle;
+    opacity: 0.3;
+	margin: 0 5px;
+}
+.search_bg 
+.searchInputContainer { display:block!important;}
+.search_bg ul.searchSkinObjectPreview,
+.search_bg .searchInputContainer a.dnnSearchBoxClearText { display:none!important;}
+
+.search_bg {
+    height: 56px;
+    position: absolute;
+    left: 0px;
+    vertical-align: middle;
+    margin: 0px;
+    background: #FFF none repeat scroll 0% 0%;
+    width: 250px;
+    display: inline-block;
+    z-index: 903;
+    text-align: right;
+    top: 32px;
+    overflow: hidden;
+    display: none;
+    border: 8px solid #eee;
+}
+.search_bg input[type="text"] {
+    background: none repeat scroll 0px 0px transparent;
+    color: #999;
+    height: 40px;
+    line-height: 40px;
+    outline: medium none;
+    text-align: right;
+    vertical-align: top;
+    width: 190px;
+    transition: all 0.8s ease 0s;
+    border: medium none;
+    margin: 0;
+    padding: 0 10px 0 5px;
+    text-transform: capitalize;
+    border: 1px solid #ddd;
+	    border-radius: 0;
+}
+.search_bg .NormalTextBox {
+    /*font-family: arial;*/
+    font-size: 14px;
+    font-weight: normal;
+}
+.search_bg a, .search_bg a:link, .search_bg a:active, .search_bg a:visited {
+    display: block;
+    height: 40px;
+    width: 45px;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    top: 0;
+    background:#C6A062;
+    text-indent: -9999em;
+    color: rgb(255, 255, 255);
+	font-size:0;
+	line-height:40px;
+}
+
+.search_bg a:hover { text-decoration:none;}
+.search_bg a:before {
+  content: "\f002";
+  font-family:fontawesome;
+  text-indent: 9999em;
+  font-size:16px;
+}
+
+/* ********** Back to top Style ************** */
+
+element.style {
+    display: inline;
+}
+#goup {
+    /*background: none repeat scroll 0 0 #0DB9CC;
+    border-radius: 50% 50% 50% 50%;
+    bottom: 40px;
+    color: #ffffff;
+    cursor: pointer;
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    opacity: 0.5;
+	 filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+    padding: 0;
+    position: fixed;
+    left: 15px;
+    text-align: center;
+    text-decoration: none;
+    width: 40px;
+    z-index: 903;
+	*/
+	bottom:43px;
+	
+}
+
+.goup a img {
+    border-radius: 5px;
+    background:#41332A;
+    border: 2px solid#C6A062;
+}
+
+#top-link:hover { opacity:1;}
+#top-link .icon-up-open { font-size:16px;}
+
+/* ********** Pane Style ************** */
+.HeaderPane2 { float:left;}
+.HeaderPane .SubHead {
+    color: #ccc;
+}
+.TopGrid6A,
+.TopGrid6B,
+.TopGrid4A,
+.TopGrid4B,
+.TopGrid4C,
+.TopGrid3A,
+.TopGrid3B,
+.TopGrid3C,
+.TopGrid3D,
+.TopGrid8Left,
+.TopGrid4Right,
+.TopGrid4Left,
+.TopGrid8Right,
+.TopGrid9Left,
+.TopGrid3Right,
+.TopGrid3Left,
+.TopGrid9Right,
+.MiddleGrid6A,
+.MiddleGrid6B,
+.MiddleGrid4Left,
+.MiddleGrid4Center,
+.MiddleGrid4Right,
+.MiddleGrid3Left,
+.MiddleGrid3CenterA,
+.MiddleGrid3CenterB,
+.MiddleGrid3Right,
+.MiddleGrid8A,
+.MiddleGrid4B,
+.MiddleGrid4A,
+.MiddleGrid8B,
+.MiddleGrid9A,
+.MiddleGrid3B,
+.MiddleGrid3A,
+.MiddleGrid9B,
+.MiddleGrid12,
+.BottomGrid12,
+.BottomGrid6A,
+.BottomGrid6B,
+.BottomGrid4Left,
+.BottomGrid4Center,
+.BottomGrid4Right,
+.BottomGrid3Left,
+.BottomGrid3CenterA,
+.BottomGrid3CenterB,
+.BottomGrid3Right,
+.BottomGrid8A,
+.BottomGrid4B,
+.BottomGrid4A,
+.BottomGrid8B,
+.BottomGrid9A,
+.BottomGrid3B,
+.BottomGrid3A,
+.BottomGrid9B,
+.BottomContent {
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+.PaneLayoutMid { margin:10px 0;}
+.TopShowPane { padding:0;}
+.TopContentPane { 
+	padding:20px 0 0px 0; 
+	margin:0;
+}
+.TopGrayPane {
+  padding: 40px 0;
+}
+
+.BannerPane { 
+	padding:0; 
+	margin:0;
+}
+.InnerBannerPane{ 
+	padding:0; 
+	margin:0;
+	position:relative; 
+	z-index:1;
+}
+.InnerBannerPane .Normal img { width:100%;}
+.ParallaxPane {
+    padding:60px 0;
+}
+.FullWidthPane .CommandButton, .FullWidthPane A.CommandButton:link, .FullWidthPane A.CommandButton:visited, .FullWidthPane A.CommandButton:active {
+    color: #FFFFFF;
+}
+.no-margin { margin:0 !important;}
+.ContentPaneHome {
+    padding: 10px 0 30px;
+}
+.ContentPane {
+    margin: 10px 0;
+    padding: 5px 0 0;
+    text-align: right;
+    vertical-align: top;
+}
+.ContentPaneInner {
+	margin:0 0 10px 0;
+	padding:0;
+}
+.MultiColor-bg .ColorContentPane {
+    padding: 0;
+	min-height:inherit;
+}
+.FooterColorPane {
+	padding:0;
+}
+.FooterPane1 {
+    margin: 20px 0;
+    padding: 0;
+}
+.FooterPane2 {
+    margin:20px 0;
+    padding: 0;
+}
+.FooterPane3 {
+    margin: 20px 0;
+    padding: 0;
+}
+.FooterPane4 {
+    margin: 20px 0;
+    padding: 0;
+}
+.LeftSideBar {
+    margin: 10px 0 0;
+    padding: 5px 0 0;
+}
+.RightSideBar {     
+    margin: 0;
+    padding:0;
+}
+.RightPadding {
+    margin: 10px 0 0;
+    padding: 5px 0 0;
+}
+
+
+.ColorContentPane .CommandButton, 
+.ColorContentPane A.CommandButton:link, 
+.ColorContentPane A.CommandButton:visited, 
+.ColorContentPane A.CommandButton:active { 
+	color:#FFFFFF;
+}
+.FooterSocialPane { margin:10px 0 0 0;}
+.TopColor { background:#C6A062;}
+.GrayPane { padding:50px 0;}
+.MobileMenu,
+.TreeMenu { display:none }
+.menu_hidden { display:none!important; }
+
+
+/*Responsive layout*/
+@media handheld, only screen and (max-width:1000px) {
+
+
+
+}
+@media handheld, only screen and (max-width:960px) {
+
+
+.col-sm-3.FooterPane1,
+.col-sm-3.FooterPane2,
+.col-sm-3.FooterPane3,
+.col-sm-3.FooterPane4 { width:50%;}
+
+
+.stick .dnn_logo {
+	display:none;
+}
+.stick .dnn_menu {
+	float: none;
+}
+
+}
+@media handheld, only screen and (max-width:900px) {
+
+
+
+
+
+.isStuck .dnn-logo {
+  padding: 0;
+  margin: 10px 0;
+}
+.StickHeight {
+  min-height: 130px;
+}
+.breadcrumb-position { top:40px;}
+}
+
+
+@media handheld, only screen and (max-width:767px) {
+Body {-webkit-text-size-adjust:none;}
+.skinwidth, body {
+    min-width: 0;
+    width: 100%;
+	padding:0;
+	margin:0;
+}
+.fl, .fr{ float:none;}
+.stick {
+    box-shadow: none;
+    height: auto;
+    padding: 0;
+    position: static;
+    width: auto;
+}
+.stick .dnn_menu { float:none;}
+.sticky-wrapper { display:none;}
+.dnn_menu { display:none;}
+.footer-bar {
+	min-height: 60px;
+}
+.header-bg { padding:0; position:relative;}
+.header-mid { position:relative!important; margin:0; min-height:55px;}
+.skin-search { height:auto;}
+
+#dnn_LayoutStyle_plDisplay { display:none;}
+.stuck-top { padding:5px 0 0 0; background:#202830;}
+/* ********** Logo Style ************** */
+.dnn-logo.left {
+	padding:10px 0;
+	float:none;
+	text-align:center;
+}
+.dnn-logo img {
+  max-width: 300px;
+}
+
+.isStuck .dnn-logo img {
+  max-height: none;
+}
+.dnn-logo {
+  text-align: center;
+  margin:20px 0;
+  float: none;
+}
+/* ********** Search Style ************** */
+.skin_search { display: inline-block; float:none;}
+
+/* ********** Breadcrumb Style ************** */
+.Breadcrumb {
+    min-height:30px;
+    line-height:30px;
+}
+.footlins { text-align:center; padding:15px 0; }
+
+.MobileBar {
+    background: #2D221C none repeat scroll 0% 0%;
+    height: 50px;
+    display: block;
+    text-align: center;
+    border-bottom: 1px solid #3A2C24;
+}
+
+.top-right {
+    text-align: center;
+}
+.logo-row {
+    position: relative;
+    min-height: 100px;
+}
+.menu_box, .menu_box:link, .menu_box:active, .menu_box:visited {
+    display: inline-block;
+    margin: 0px;
+    font-size: 21px;
+    text-align: center;
+    color: #FFF;
+    padding: 10px 12px;
+    background: #41332A;
+    border-radius: 3px;
+    position: absolute;
+    top: 40px;
+    left: 25px;
+}
+.menu_box span {
+    font-size: 16px;
+    padding: 0 10px 0 0 ;
+    vertical-align: middle;
+    display: inline-block;
+    line-height: 1;
+}
+
+.isStuck .menu_box, .isStuck .menu_box:link, .isStuck .menu_box:active, .isStuck .menu_box:visited {
+	margin: 0;
+}
+.StandardMenu,
+.MegaMenu { display:none;}
+.menu_hidden { display:inherit!important; }
+.Breadcrumb h4 { font-size:20px; }
+
+.footer-bar .col-sm-6 { width:auto; float:none; text-align:center;padding: 15px 0 10px;}
+
+/* ********** Login Style ************** */
+.login_style { text-align:center;}
+
+/* ********** Copyright Style ************** */
+
+.copyright {
+	padding: 0px 0px 10px 0;
+	text-align:center;
+}
+
+/* ********** Pane Style ************** */
+.TopContentPane {
+    width: auto;
+}
+
+.PortfolioPane {
+    padding:0;
+}
+.BannerPane {
+    margin: 0;
+    padding: 0;
+}
+.ShowPane1 {
+    margin: 10px 0;
+    width: auto;
+}
+.ShowPane2 {
+    margin: 10px 0;
+    width: auto;
+}
+.ShowPane3 {
+    margin: 10px 0;
+    width: auto;
+}
+.ShowPane4 {
+    margin: 10px 0;
+    width: auto;
+}
+.UpperRightSidebarContent {
+    margin: 10px 0;
+    width: auto;
+}
+.UpperRightSideBar {
+    margin: 10px 0;
+    width: auto;
+}
+.UpperLeftSidebar {
+    margin: 10px 0;
+    width: auto;
+}
+.UpperLeftSidebarContent {
+    margin: 10px 0;
+    width: auto;
+}
+.UpperHalfLeft {
+    margin: 10px 0;
+    width: auto;
+}
+.UpperHalfRight {
+    margin: 10px 0;
+    width: auto;
+}
+.UpperThirdLeft {
+    margin: 10px 0;
+    width: auto;
+}
+.UpperThirdCenter {
+    margin: 10px 0;
+    width: auto;
+}
+.UpperThirdRight {
+    margin: 10px 0;
+    width: auto;
+}
+.UpperQuartleft {
+    margin: 10px 0;
+    width: auto;
+}
+.UpperQuartCenterLeft {
+    margin: 10px 0;
+    width: auto;
+}
+.UpperQuartCenterRight {
+    margin: 10px 0;
+    width: auto;
+}
+.UpperQuartRight {
+    margin: 10px 0;
+    width: auto;
+}
+.ContentPaneHome {
+    padding: 10px 0 30px;
+}
+.ContentPane {
+    margin: 10px 0;
+    padding: 5px 0;
+    text-align: right;
+    vertical-align: top;
+}
+.MiddleContent {
+    margin: 10px 0;
+}
+.BottomContent {
+    margin: 10px 0;
+}
+.ColorContentPane {
+    width: auto;
+}
+.FullWidthPane {
+	padding: 40px 0 10px 0;
+}
+
+.col-sm-3.FooterPane1,
+.col-sm-3.FooterPane2,
+.col-sm-3.FooterPane3,
+.col-sm-3.FooterPane4 { width:auto; float:none;}
+.GrayColor {
+  margin: 30px 0;
+}
+.GrayPane {
+  padding: 30px 0;
+}
+.CurrentDate { display:none;}
+
+.CurrentDate.left {
+    float: none;
+    width: 100%;
+	text-align:center;
+}
+.HeaderPane.left {
+    float: none;
+    width: 100%;
+}
+.HeaderPane2 {
+  float: none;
+  width: 100%;
+}
+.LeftBar.left {
+    float: none;
+    width: 100%;
+}
+.RightBar.right {
+    float: none;
+    width: 100%;
+}
+
+.isStuck {
+  position: inherit!important;
+  box-shadow: none;
+}
+
+.StickHeight {
+  min-height: 1px;
+}
+.ParallaxBg{
+  background-attachment: scroll;
+}
+.search_bg a, .search_bg a:link, .search_bg a:active, .search_bg a:visited {
+  border-radius:0;
+}
+.page-name {
+    font-size: 24px;
+}
+.BreadcrumbPane .Normal {
+	font-size: 13px;
+}
+.skin-breadcrumb {
+	font-size: 13px;
+}
+.skin-breadcrumb.right {
+  float: none;
+  padding: 0;
+  text-align:center;
+}
+
+.page-name.left {
+  float: none;
+  text-align: center;
+}
+
+.breadcrumb-header {
+  min-height: 120px;
+  padding: 30px 0 0 0;
+}
+.login-style {
+  float: none;
+  text-align: center;
+}
+.wrapper .header { min-height: inherit;}
+.ParallaxPane {
+    padding: 30px 0px;
+}
+}
+@media handheld, only screen and (max-width:640px) {
+
+.footlins { display:none;}
+
+}
+@media handheld, only screen and (max-width:600px) {
+.skin-header .container .row .left,
+.skin-header .container .row .right{ float:none; text-align:center;}
+
+.TopBar .col-sm-6 { width:auto; float:none;}
+.login-style {
+  text-align: center;
+  float: none;
+}
+
+
+}
+@media handheld, only screen and (max-width:520px) {
+.dnn-logo img {
+	max-width: 300px;
+}
+.page-name {
+    font-size: 20px;
+}
+}
+@media handheld, only screen and (max-width:480px) {
+.breadcrumb1 { display:none;}
+.dnn-logo img {
+	max-width: 200px;
+}
+}
+
+
+@media handheld, only screen and (max-width:375px) {
+.dnn-logo img {
+	max-width: 150px;
+}
+
+.menu_box, .menu_box:link, .menu_box:active, .menu_box:visited {
+    top: 30px;
+}
+}
+
+
+@media handheld, only screen and (max-width:320px) {
+.dnn-logo img {
+	max-width: 120px;
+}
+
+}
+
+@media handheld, only screen and (max-width:280px) {
+
+.dnn-logo { text-align:right; padding:0 10px 0 0 ;}
+
+}
+
+
+
+
+

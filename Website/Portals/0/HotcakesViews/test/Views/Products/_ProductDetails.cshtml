@@ -1,0 +1,212 @@
+﻿@model Hotcakes.Modules.Core.Models.ProductPageViewModel
+@using Hotcakes.Modules.Core.Models
+
+<div id="hcProductDetails" class="hc-product-details">
+    <h3>@Localization.GetString("ProductDetails")</h3>
+
+    @Html.Partial("_Rating", Model)
+
+    <div class="hc-product-form dnnForm">
+        @using (Html.BeginHccForm())
+        {
+            <div class="dnnFormItem hc-sku">
+                <label class="dnnLabel">@Localization.GetString("SKU")</label>
+                <span id="hcSku">@Model.LocalProduct.Sku</span>
+                <span id="hcStockDisplay" class="hc-stockdisplay">@Html.Raw(Model.StockMessage)</span>
+            </div>
+            if(!Model.LocalProduct.HideQty)
+            {
+                <div class="dnnFormItem">
+                    <label class="dnnLabel" for="qty">@Localization.GetString("Quantity")</label>
+                    <input type="text" id="qty" name="qty" value="@Model.InitialQuantity" class="hc-input-mini"/>
+                </div>
+            }
+            if (!Model.LocalProduct.IsBundle)
+            {
+                @*@Html.Raw(Model.PreRenderedOptions)*@
+                foreach (var opt in Model.LocalProduct.Options)
+                {
+                <div class="dnnFormItem clearfix">
+                    @if(!opt.NameIsHidden){<label class="dnnLabel">@opt.Name</label>}
+                    <div class="hc-option">
+                        @Html.Raw(opt.RenderWithSelection(Model.Selections.OptionSelectionList))
+                    </div>
+                </div>
+                }
+            }
+            else
+            {
+                foreach (var bundledItem in Model.BundledItems)
+                {
+                    if (bundledItem.Item.Options.Count > 0)
+                    {
+                        <h4>@bundledItem.Item.ProductName</h4>
+                        foreach (var opt in bundledItem.Item.Options)
+                        {
+                        <div class="dnnFormItem clearfix">
+                            @if(!opt.NameIsHidden){<label class="dnnLabel">@opt.Name</label>}
+                            <div class="hc-option">
+                                @Html.Raw(opt.RenderWithSelection(Model.Selections.GetSelections(bundledItem.BundledProductAdv.Id), bundledItem.BundledProductAdv.Id.ToString()))
+                            </div>
+                        </div>
+                        }
+                    }
+                }
+            }
+            
+            <div id="hcValidationMessage" style="display: none">
+                @* Placeholder rebuilds by AJAX request! *@
+                <div class="dnnFormMessage dnnFormWarning">@Html.Raw(Model.ValidationMessage)</div>
+                @* END Placeholder rebuilds by AJAX request! *@
+            </div>
+                    
+            if (Model.LocalProduct.IsUserSuppliedPrice)
+            {
+                <div class="dnnFormItem hc-userprice">
+                    <label class="dnnLabel">
+                        @if(string.IsNullOrWhiteSpace(Model.LocalProduct.UserSuppliedPriceLabel)) { @Localization.GetString("UserPrice") }
+                        else { @Model.LocalProduct.UserSuppliedPriceLabel }
+                        :
+                    </label>
+                    <span>@Html.TextBox("userprice")</span>
+                </div>
+            }
+            else if(Model.IsGiftCard)
+            {
+                <div class="dnnFormItem">
+                    <label class="dnnLabel">
+                        @Localization.GetString("GiftCardAmount")
+                    </label>
+                    <div class="hc-option">
+                        <select id="giftcardpredefined" style="width:55%">
+                            <option value="">Set my own</option>
+                            @foreach (var am in Model.GiftCardPredefinedAmounts)
+                            {
+                                <option value="@am">@am.ToString("c")</option>
+                            }
+                        </select>
+                        @* Note: Unobtrusive validation disabled for "GiftCardAmount" because it doesnt support different cultures *@
+                        @Html.TextBoxFor(m => m.GiftCardAmount, new { style = "width:40%;", @data_val = "false" })
+                        @Html.ValidationMessageFor(m => m.GiftCardAmount, Localization.GetString("ValMessage_GiftCardAmount"), new { @class = "dnnFormMessage hcFormError" })
+                    </div>
+                </div>
+                <div class="dnnFormItem">
+                    <label class="dnnLabel">
+                        @Localization.GetString("GiftCardEmail")
+                    </label>
+                    <div class="hc-option">
+                        @Html.TextBoxFor(m => m.GiftCardRecEmail)
+                        @Html.ValidationMessageFor(m => m.GiftCardRecEmail, Localization.GetString("ValMessage_GiftCardEmailInvalid"), new { @class = "dnnFormMessage hcFormError" })
+                    </div>
+                </div>
+                <div class="dnnFormItem">
+                    <label class="dnnLabel">
+                        @Localization.GetString("GiftCardName")
+                    </label>
+                    <div class="hc-option">
+                        @Html.TextBox("giftcardrecname")
+                    </div>
+                </div>
+                <div class="dnnFormItem">
+                    <label class="dnnLabel">
+                        Message:
+                    </label>
+                    <div class="hc-option">
+                        @Html.TextArea("giftcardmessage")
+                    </div>
+                </div>
+            }
+            else 
+            {
+                <div id="hcPriceWrapper">
+                    @* Placeholder rebuilds by AJAX request! *@
+                    <div class="dnnFormItem hc-listprice">
+                        <label class="dnnLabel">@Localization.GetString("ListPrice")</label>
+                        <span>
+                            @if (Model.Prices.ListPrice != null)
+                            {
+                                @Html.Raw(Model.Prices.ListPrice.Text)
+                            }
+                        </span>
+                    </div>
+                    <div class="dnnFormItem hc-siteprice">
+                        <label class="dnnLabel">@Localization.GetString("SitePrice")</label>
+                        <span>@Html.Raw(Model.Prices.SitePrice.Text)</span>
+                    </div>
+                    <div class="dnnFormItem hc-yousave">
+                        <label class="dnnLabel">@Localization.GetString("YouSave")</label>
+                        <span>
+                            @if (Model.Prices.YouSave != null)
+                            {
+                                @Html.Raw(Model.Prices.YouSave.Text)
+                            }
+                        </span>
+                    </div>
+                    @* END Placeholder rebuilds by AJAX request! *@
+                </div>
+            }
+
+            if (Model.IsAvailableForSale)
+            {
+                <ul id="hcProductActions" class="hc-actions dnnActions dnnClear">
+                    <li>
+                        <input type="submit" id="addtocartbutton" value="@Localization.GetString("AddToCart")" class="dnnPrimaryAction" />
+                    </li>
+                    @if (Model.IsAvailableForWishList)
+                    {
+                        <li>
+                            <input id="savelaterbutton" name="savelaterbutton" type="submit" value="@Localization.GetString("AddToWishlist")" class="dnnSecondaryAction"/>
+                        </li>
+                    }
+                </ul>
+            }
+                
+            @Html.Hidden("productbvin", @Model.LocalProduct.Bvin)
+
+            if (ViewBag.UseFaceBook)
+            {
+            @Html.Partial("_FaceBookSetup")
+            @Html.Partial("_FaceBookLike", new FaceBookLikeModel()
+           {
+               PageUrl = ViewBag.CurrentUrl
+           })
+            }
+
+            if (ViewBag.UsePinterest)
+            {
+            @Html.Partial("_Pinterest", new PinterestViewModel()
+           {
+               Size = PinterestSize.Small,
+               Color = PinterestColor.Red,
+               Shape = PinterestShape.Rectangular, 
+               Language = PinterestLanguage.English
+           })
+            }
+
+            if (ViewBag.UseTwitter)
+            {
+            @Html.Partial("_Twitter", new TwitterViewModel()
+           {
+               DisplayUrl = ViewBag.CurrentUrl,
+               LinkUrl = ViewBag.CurrentUrl,
+               ViaTwitterName = ViewBag.TwitterHandle,
+               DefaultText = String.Format(ViewBag.TwitterDefaultTweetText, Model.LocalProduct.ProductName + " " + Model.LocalProduct.Sku)
+           })
+            }
+
+            if (ViewBag.UseGooglePlus)
+            {
+            @Html.Partial("_GooglePlusOne", new GooglePlusOneViewModel()
+           {
+               PageUrl = ViewBag.CurrentUrl,
+               CountPosition = GooglePlusOneCountPosition.Inline,
+               Size = GooglePlusOneSize.Standard
+           })
+            }
+        }
+    </div>
+
+   
+
+    @Html.Raw(Model.PreRenderedTypeValues)
+</div>

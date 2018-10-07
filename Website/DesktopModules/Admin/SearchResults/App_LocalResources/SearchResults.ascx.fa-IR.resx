@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+	This file is localized by K e r m a n i / dnnsoftware . ir
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Relevance.Text" xml:space="preserve">
+    <value>ارتباط</value>
+  </data>
+  <data name="NoResults.Text" xml:space="preserve">
+    <value>نتیجه‌ای یافت نشد</value>
+  </data>
+  <data name="AddTag.Text">
+    <value>برچسبی را اضافه نمایید</value>
+  </data>
+  <data name="Advanced.Text">
+    <value>پیشرفته</value>
+  </data>
+  <data name="AdvancedSearchHint.Text">
+    <value>&lt;table class="dnnSearchResult-hint-tbl dnnTableDisplay"&gt;
+
+
+    &lt;tr&gt;
+        &lt;th style="width: 150px"&gt;
+            &lt;span&gt;نوع&lt;/span&gt;
+        &lt;/th&gt;
+        &lt;th style="width: 250px"&gt;
+            &lt;span&gt;مثال&lt;/span&gt;
+        &lt;/th&gt;
+        &lt;th&gt;
+            &lt;span&gt;نکات&lt;/span&gt;
+        &lt;/th&gt;
+    &lt;/tr&gt;
+
+
+    &lt;tr&gt;
+        &lt;td&gt;مبهم&lt;/td&gt;
+        &lt;td&gt;ابتکار&lt;b&gt;~&lt;/b&gt;&lt;/td&gt;
+        &lt;td&gt;از نظر گفتاری شامل عبارتی نزدیک به &lt;i&gt;ابتکار&lt;/i&gt; مثل &lt;i&gt;افتخار&lt;/i&gt;.&lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+        &lt;td&gt;خلاصه&lt;/td&gt;
+        &lt;td&gt;دسته*&lt;/td&gt;
+        &lt;td&gt;شامل عبارتی که با &lt;i&gt;دسته&lt;/i&gt;شروع می‌شود مثل &lt;i&gt;دسته بندی&lt;/i&gt; و عین خود عبارت &lt;i&gt;دسته&lt;/i&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+        &lt;td&gt;عین عبارت&lt;/td&gt;
+        &lt;td&gt;نارنجی&lt;/td&gt;
+        &lt;td&gt;شامل عبارت &lt;i&gt;نارنجی&lt;/i&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+        &lt;td&gt;عین جلمه&lt;/td&gt;
+        &lt;td&gt;"پرتال عالی است"&lt;/td&gt;
+        &lt;td&gt;شامل جمله &lt;i&gt;پرتال عالی است&lt;/i&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+        &lt;td&gt;OR&lt;/td&gt;
+        &lt;td&gt;دوچرخه قرمز&lt;/td&gt;
+        &lt;td&gt;شامل عبارت &lt;i&gt;نارنجی&lt;/i&gt; یا &lt;i&gt;دوچرخه&lt;/i&gt; یا هر دو. &lt;B&gt;عبارت OR باید با حروف بزرگ نوشته شود&lt;/B&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+        &lt;td&gt;&lt;/td&gt;
+        &lt;td&gt;دوچرخه &lt;b&gt;OR&lt;/b&gt; نارنجی&lt;/td&gt;
+        &lt;td&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+        &lt;td&gt;AND&lt;/td&gt;
+        &lt;td&gt;+نارنجی +دوچرخه&lt;/td&gt;
+        &lt;td&gt;شامل هر دو عبارت &lt;i&gt;نارنجی&lt;/i&gt; و &lt;i&gt;دوچرخه&lt;/i&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+        &lt;td&gt;&lt;/td&gt;
+        &lt;td&gt;دوچرخه &lt;b&gt;AND&lt;/b&gt; نارنجی&lt;/td&gt;
+        &lt;td&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+        &lt;td&gt;ترکیبی&lt;/td&gt;
+        &lt;td&gt;(سریع &lt;b&gt;OR&lt;/b&gt; مفرط) &lt;b&gt;AND&lt;/b&gt; روش‌شناسی&lt;/td&gt;
+        &lt;td&gt;شامل &lt;i&gt;روش‌شناسی&lt;/i&gt; و همچنین لازم است شامل &lt;i&gt;سریع&lt;/i&gt; و/یا &lt;i&gt;مفرط&lt;/i&gt; باشد.&lt;B&gt;عبارت AND باید با حروف بزرگ نوشته شود&lt;/B&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</value>
+  </data>
+  <data name="AllFeaturesSelected.Text">
+    <value>همه</value>
+  </data>
+  <data name="Author.Text">
+    <value>مولف:</value>
+  </data>
+  <data name="btnClear.Text">
+    <value>پاکسازی تنظیمات پیشرفته</value>
+  </data>
+  <data name="btnSearch.Text">
+    <value>جستجو</value>
+  </data>
+  <data name="Comments.Text">
+    <value>نظرات:</value>
+  </data>
+  <data name="CurrentPageIndex.Text">
+    <value>صفحه:</value>
+  </data>
+  <data name="Date.Text">
+    <value>تاریخ</value>
+  </data>
+  <data name="LastModified.Text">
+    <value>تاریخ به‌روزرسانی:</value>
+  </data>
+  <data name="lblAdvancedDates.Help">
+    <value>محدودسازی نتایج جستجو به بازه زمانی مشخص شده</value>
+  </data>
+  <data name="lblAdvancedDates.Text">
+    <value>تاریخ آخرین ویرایش:</value>
+  </data>
+  <data name="lblAdvancedExactSearch.Help">
+    <value>نتایج جستجو می‌بایست دقیقا شامل کلمات‌کلیدی باشد</value>
+  </data>
+  <data name="lblAdvancedExactSearch.Text">
+    <value>جستجوی دقیق:</value>
+  </data>
+  <data name="lblAdvancedScope.Help">
+    <value>محدودسازی نتایج جستجو به منبع مشخص</value>
+  </data>
+  <data name="lblAdvancedScope.Text">
+    <value>فیلتر:</value>
+  </data>
+  <data name="lblAdvancedTags.Help">
+    <value>محدودسازی نتایج جستجو به برچسب‌های مشخص شده</value>
+  </data>
+  <data name="lblAdvancedTags.Text">
+    <value>فیلتر براساس برچسب:</value>
+  </data>
+  <data name="Likes.Text">
+    <value>پسندها:</value>
+  </data>
+  <data name="linkAdvancedTip.Text">
+    <value>نکات پیشرفته</value>
+  </data>
+  <data name="optionAll.Text">
+    <value>همه</value>
+  </data>
+  <data name="optionDay.Text">
+    <value>1 روز</value>
+  </data>
+  <data name="optionMonth.Text">
+    <value>30 روز</value>
+  </data>
+  <data name="optionQuarter.Text">
+    <value>90 روز</value>
+  </data>
+  <data name="optionWeek.Text">
+    <value>7 روز</value>
+  </data>
+  <data name="optionYear.Text">
+    <value>1 سال</value>
+  </data>
+  <data name="ResultPerPage.Text">
+    <value>تعداد نتیجه در صفحه:</value>
+  </data>
+  <data name="ResultsCount.Text">
+    <value>حدود {0} نتیجه</value>
+  </data>
+  <data name="Source.Text">
+    <value>منبع:</value>
+  </data>
+  <data name="Tags.Text">
+    <value>برچسب‌ها:</value>
+  </data>
+  <data name="Views.Text">
+    <value>مشاهده‌ها:</value>
+  </data>
+  <data name="DefaultText.Text">
+    <value>عبارتی را برای جستجو وارد کنید</value>
+  </data>
+</root>

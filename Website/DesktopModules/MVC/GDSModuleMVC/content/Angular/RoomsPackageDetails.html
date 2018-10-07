@@ -1,0 +1,64 @@
+﻿<div class="form-horizontal" role="form">
+    <fieldset>
+        <legend>افزودن اتاق به این پکیج</legend>
+        <div class="col-md-3">
+            <label for="mdlCity" class="col-md-5 control-label">شهر</label>
+            <div class="input-container col-md-5 control-label">
+                <div class="icon-ph"><i class="fa fa-globe"></i></div>
+                <select ng-model="mdlCity"
+                        ng-change="CityChanged()"
+                        ng-options="elt.text for elt in lstCity" name="mdlCity">
+                    <option value="">لطفا شهر را انتخاب نمایید</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="mdlHotel" class="col-md-5 control-label">هتل</label>
+            <div class="input-container" typeitem="main_item  col-md-5 control-label">
+                <div class="icon-ph"><i class="fa fa-building"></i></div>
+                <select ng-model="mdlHotel"
+                        ng-change="HotelChanged()"
+                        ng-options="elt.text for elt in lstHotel" name="mdlHotel">
+                    <option value="" ng-model="default">لطفا هتل را انتخاب نمایید</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="mdlRoom" class="col-md-5 control-label">اتاق</label>
+            <div class="input-container" typeitem="main_item  col-md-5 control-label">
+                <div class="icon-ph"><i class="fa fa-building"></i></div>
+                <select ng-model="mdlRoom"
+                        ng-options="elt.text for elt in lstRoom" name="mdlRoom">
+                    <option value="" ng-model="default">لطفا اتاق را انتخاب نمایید</option>
+                </select>
+            </div>
+        </div>
+        <a class="btn btn-primary" ng-click="AddRoominRoomPackage()">افزودن</a>
+    </fieldset>
+
+    <fieldset>
+        <legend>لیست پکیج اتاق های موجود </legend>
+        <table>
+            <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>شهر-هتل-اتاق</th>
+                   
+                    <th>عملیات</th>
+
+                </tr>
+            </thead>
+            <tr ng-repeat="x in Packages">
+                <td>{{$index + 1 }}</td>
+                <td>{{ x.Description }}</td>
+                <td><a ng-click="RemoveRoominRoomsPackage(x.ID)">حذف</a> </td>
+            </tr>
+        </table>
+    </fieldset>
+</div>
+<style>
+    table{
+        width:100%;
+    }
+    th,td,tr{text-align:center;}
+</style>

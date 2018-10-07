@@ -1,0 +1,62 @@
+﻿@font-face{
+    font-family: 'AtrinSign';
+    src: url('Fonts/atringroupsigns_ittic.eot');
+    src: url('Fonts/atringroupsigns_ittic.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+    url('Fonts/atringroupsigns_ittic.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('Fonts/atringroupsigns_ittic.ttf') format('truetype');
+}
+[data-icon]:before {
+  font-family: 'AtrinSign';
+  content: attr(data-icon);
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: 'AtrinSign';
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+@font-face{
+    font-family: 'AtrinSign_Reserve';
+    src: url('Fonts/atringroupsigns_reservation.eot');
+    src: url('Fonts/atringroupsigns_reservation.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+    url('Fonts/atringroupsigns_reservation.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('Fonts/atringroupsigns_reservation.ttf') format('truetype');
+}
+[data-icon]:before {
+  font-family: 'AtrinSign_Reserve';
+  content: attr(data-icon);
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: 'AtrinSign_Reserve';
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

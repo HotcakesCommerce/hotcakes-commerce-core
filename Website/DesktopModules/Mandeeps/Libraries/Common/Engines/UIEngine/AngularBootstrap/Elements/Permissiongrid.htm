@@ -1,0 +1,87 @@
+﻿<div class="permission">
+    <div>
+        <div class="ui-inlineblock">
+            <label class="ui-element-width"><strong>[L:Group]</strong></label>
+            <select class="ui-inlineblock ui-element-width" id="FilterByGroup" ng-model="[name]RoleGroupsValue">
+                <option ng-repeat="option in [name]RoleGroupsOptions" value="{{option.Id}}">{{option.Name}}</option>
+            </select>
+        </div>
+        <div class="ui-inlineblock addroleUI ms-pull-right">
+            <a class="ms-btn ms-btn-default" role="button" ng-click="[name]Click_AddRole('[name]')"><span>[L:AddRole]</span></a>
+        </div>
+        <div class="ui-inlineblock ms-pull-right">
+            <angucomplete-alt id="Role"
+                              placeholder="[L:SearchByRole]"
+                              pause="400"
+                              selected-object="[name]SelectedRole"
+                              remote-api-handler="[name]RoleremoteAPI"
+                              title-field="Label"
+                              minlength="1"
+                              input-class="ms-form-control"
+                              override-suggestions="true"
+                              ng-click="Click_Clear()" />
+        </div>
+    </div>
+    <table st-table="[name]Roles" class="ms-table ms-table-striped" id="[id]" [attributes]>
+        <thead>
+            <tr>
+                <th style="width: 85%;">Name</th>
+                <th style="width: 15%;"> {{[name]PermissionName}}</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in [name]Roles" class="ng-scope">
+                <td style="width: 85%;">{{row.RoleName}}</td>
+                <td style="width: 15%;">
+                    <button type="button" ng-disabled="row.Locked" ng-click="[name]CheckIsReview(row)" class="ms-btn ms-btn-sm ms-btn-default">
+                        <i class="ms-glyphicon ms-glyphicon-{{[name]ReviewContent(row)}}"></i>
+                    </button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+    <hr />
+
+    <div class="ms-form-group addroleUI ms-pull-right ">
+        <a class="ms-btn ms-btn-default" role="button" ng-click="[name]Click_AddUser('[name]')"><span>[L:AddUser]</span></a>
+    </div>
+    <div class="ms-pull-right">
+        <div>
+            <angucomplete-alt id="User"
+                              placeholder="[L:SearchByUser]"
+                              pause="400"
+                              selected-object="[name]SelectedUser"
+                              remote-api-handler="UserremoteAPI"
+                              title-field="Label"
+                              minlength="1"
+                              input-class="ms-form-control"
+                              override-suggestions="true"
+                              ng-click="Click_Clear()" />
+        </div>
+    </div>
+    <table st-table="[name]Users" class="ms-table ms-table-striped" id="[id]" [attributes]>
+        <thead>
+            <tr ng-show="[name]Users.length>0">
+                <th style="width: 85%;">Name</th>
+                <th style="width: 15%;">{{[name]PermissionName}}</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in [name]Users"  class="ng-scope">
+                <td style="width: 85%;">{{row.DisplayName}}</td>
+                <td style="width: 15%;">
+                    <button type="button" ng-disabled="[name]Inherit" ng-click="[name]CheckIsReview(row)" class="ms-btn ms-btn-sm ms-btn-default">
+                        <i class="ms-glyphicon ms-glyphicon-{{[name]ReviewContent(row)}}"></i>
+                    </button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+    <input type="checkbox" id="[name]InheritChk" ng-model="[name]Inherit" ng-click="[name]InheritPermission_Click()" ng-show="[name]IsInheritedCheckBoxShow" ng-checked="[name]Inherit" /> <strong ng-show="[name]IsInheritedCheckBoxShow">[L:[name]InheritPermission]</strong>
+</div>
+
+

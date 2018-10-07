@@ -1,0 +1,109 @@
+﻿<div ng-controller="common_controls_editorconfig">
+    <uiengine provider="AngularBootstrap" identifier="common_controls_editorconfig" layout="default">
+        <uilayout name="default">
+            <uitemplate>
+                <div class="ms-alert ms-alert-info" role="alert">
+                    [L:Information]
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="SelectEditorProfile">
+            <uitemplate>
+                <div>
+                    <label>[L:SelectEditorProfile]</label>
+                    <div class="ms-form-group">
+                        <a class="ms-btn ms-btn-default manageslug" mn-ng-show="ui.data.Profiles.Options.length>4" ng-click="ManageProfile()" role="button"><span style='font-family:Arial, Helvetica, sans-serif;'>[L:Manage]</span></a>
+                        <a class="ms-btn ms-btn-default manageslug" mn-ng-hide="ui.data.Profiles.Options.length>4" ng-click="ManageProfile()" role="button"><span style='font-family:Arial, Helvetica, sans-serif;'>[L:New]</span></a>
+                        <select class="ms-form-control control-background" ng-change="changeProfile()" ng-model="ui.data.Profiles.Value" ng-options="option.ProfileID as option.Name for option in ui.data.Profiles.Options" style="width:85%;"></select>
+                    </div>
+                </div>
+            </uitemplate>
+            <uitemplate>
+                <br />
+                <ul class="ms-nav ms-nav-tabs" ng-show="ui.data.Profiles.Value!=-3">
+                    <li class="ms-active"><a href="#" showtab="" mn-ng-click="ShowLink=true">[L:Link]</a></li>
+                    <li><a href="#" showtab="" mn-ng-click="ShowLink=false">[L:Image]</a></li>
+                </ul>
+            </uitemplate>
+            <uielement name="UploadFilesRootFolder" ngmodel="ui.data.Settings.Options.UploadFilesRootFolder" ngoptions="ui.data.Folders.Options" attr-required="true" control="dropdownlist" container-attr-ng-show="ShowLink && ui.data.Profiles.Value!=-3"></uielement>
+            <uielement name="Line" control="line" container-attr-ng-show="ShowLink && ui.data.Profiles.Value!=-3"></uielement>
+            <uielement name="UploadFiles" ngmodel="ui.data.Settings.Options.UploadFiles" container-attr-style="margin-bottom: 35px;" attr-style="display:block;float:right;" control="toggle" container-attr-ng-show="ShowLink && ui.data.Profiles.Value!=-3"></uielement>
+            <uielement name="Line" control="line" container-attr-ng-show="ShowLink && ui.data.Settings.Options.UploadFiles && ui.data.Profiles.Value!=-3"></uielement>
+            <uielement name="UploadFilesAllowedAttachmentFileExtensions" ngmodel="ui.data.Settings.Options.UploadFilesAllowedAttachmentFileExtensions" attr-required="true" control="textarea" container-attr-ng-show="ShowLink && ui.data.Settings.Options.UploadFiles && ui.data.Profiles.Value!=-3"></uielement>
+            <uielement name="UploadFilesMaxFileSize" ngmodel="ui.data.Settings.Options.UploadFilesMaxFileSize" control="textbox" attr-required="true" attr-numeric="true" suffix="true" help="true" container-attr-ng-show="ShowLink && ui.data.Settings.Options.UploadFiles && ui.data.Profiles.Value!=-3"></uielement>
+            <uielement name="UploadImagesRootFolder" ngmodel="ui.data.Settings.Options.UploadImagesRootFolder" ngoptions="ui.data.Folders.Options" attr-required="true" control="dropdownlist" container-attr-ng-show="!ShowLink && ui.data.Profiles.Value!=-3"></uielement>
+            <uielement name="Line" control="line" container-attr-ng-show="!ShowLink && ui.data.Profiles.Value!=-3"></uielement>
+            <uielement name="UploadImages" ngmodel="ui.data.Settings.Options.UploadImages" container-attr-style="margin-bottom: 35px;" attr-style="display:block;float:right;" control="toggle" container-attr-ng-show="!ShowLink && ui.data.Profiles.Value!=-3"></uielement>
+            <uielement name="Line" control="line" container-attr-ng-show="!ShowLink && ui.data.Settings.Options.UploadImages && ui.data.Profiles.Value!=-3"></uielement>
+            <uielement name="UploadImagesAllowedAttachmentFileExtensions" ngmodel="ui.data.Settings.Options.UploadImagesAllowedAttachmentFileExtensions" attr-required="true" control="textarea" container-attr-ng-show="!ShowLink && ui.data.Settings.Options.UploadImages && ui.data.Profiles.Value!=-3"></uielement>
+            <uielement name="UploadImagesMaxFileSize" ngmodel="ui.data.Settings.Options.UploadImagesMaxFileSize" control="textbox" attr-required="true" attr-numeric="true" suffix="true" help="true" container-attr-ng-show="!ShowLink && ui.data.Settings.Options.UploadImages && ui.data.Profiles.Value!=-3"></uielement>
+            <uielement name="Line" control="line"></uielement>
+            <uitemplate>
+                <div style="text-align:center;">
+                    <a class="ms-btn ms-btn-default" role="button" mn-ng-click="SaveEditorProfile()">
+                        <span class="ms-glyphicon ms-glyphicon-" style="float: left;margin-right: 5px;"></span>[L:Update]
+                    </a>
+                    <a class="ms-btn ms-btn-default ms-btn-link " role="button" mn-ng-click="CloseWindow()">
+                        <span class="ms-glyphicon ms-glyphicon-" style="float: left;margin-right: 5px;"></span>[L:Cancel]
+                    </a>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default" attr-ng-hide="SelectEditorProfile">
+            <uitemplate>
+                <div class="ms-form-group">
+                    <label mn-ng-hide="ui.data.Profiles.Options.length==0 || ProfileName==''">[L:Profile]</label>
+                    <div mn-ng-hide="ui.data.Profiles.Options.length==0 || ProfileName==''" class="ms-form-group">
+                        <a class="ms-btn ms-btn-default manageslug" ng-click="CreateNewProfile()" role="button"><span style='font-family:Arial, Helvetica, sans-serif;'>[L:New]</span></a>
+                        <select class="ms-form-control control-background" ng-model="ui.data.Profiles.Value" ng-change="changeProfile()" ng-options="option.ProfileID as option.Name for option in ui.data.Profiles.Options" style="width:85%;"></select>
+                    </div>
+                    <div class="ms-form-group" mn-ng-if="NewProfile">
+                        <label class="">[L:NewProfile]</label>
+                        <div class="ms-input-group ms-col-sm-12">
+                            <input type="text" class="ms-form-control control-background" mn-ng-disabled="ui.data.Profiles.Value<0?true:false" ng-model="ProfileName" id="txtEditorConfigNewProfile" required="true" />
+                        </div>
+                    </div>
+                </div>
+                <div class="ms-form-group editor-config-Fields">
+                    <div mn-ng-repeat="(key, value) in inputTextFields">
+                        <label style="padding: 5px 0px 0px 0px;">{{getLocalizedValue(key)}}</label>
+                        <input id="{{key}}" mn-ng-disabled="ui.data.Profiles.Value<0?true:false" required="true" mn-ng-model="value" type="text" name="key" value="value" style="margin: 0px;" mn-ng-change="EditorOptions_ngClick(false,key,value)" class="ms-form-control control-background">
+                    </div>
+                    <div ng-class="{'editorconfig-delete-hidden': ui.data.Profiles.Options.length==0 || ProfileName==''}">
+                        <label style="padding: 5px 0px 0px 0px;color:white;">NA</label>
+                        <input type="button" ng-click="DeleteProfile()" value="[L:DeleteProfile]" class="ms-form-control ms-btn ms-btn-default" style="margin: 0px;color:#337ab7;" />
+                    </div>
+                </div>
+                <!--<hr />
+        <label>[L:Toolbar]</label>
+        <div class="ms-form-group editor-config-Fields">
+            <div mn-ng-repeat="(key, value) in ui.data.EditorOptions.Options">
+                <input mn-ng-disabled="ProfileName=='Default'?true:false" mn-ng-if="key !='Plugins' && key !='ToolbarDependencies' && key !='UiColor' && key !='Height' && key !='Width'" mn-ng-model="value" type="checkbox" name="key" value="value" style="margin: 0px;" mn-ng-click="EditorOptions_ngClick(false,key,value)"> <span mn-ng-if="key !='Plugins' && key !='ToolbarDependencies' && key !='UiColor' && key !='Height' && key !='Width'" style="padding: 5px;">{{getLocalizedValue(key)}}</span>
+            </div>
+        </div>-->
+                <hr mn-ng-if="PluginsCount>0" />
+                <input type="checkbox" mn-ng-if="PluginsCount>0" mn-ng-disabled="ui.data.Profiles.Value<0?true:false" style="margin: 0px;" mn-ng-click="EditorOptions_ngAllClick()" id="EditorOptionsAllPlugins" /><label mn-ng-if="PluginsCount>0">[L:Plugins]</label>
+                <div class="ms-form-group editor-config-Fields" mn-ng-if="PluginsCount>0">
+                    <div mn-ng-repeat="(key, value) in ui.data.EditorOptions.Options.Plugins">
+                        <input type="checkbox" mn-ng-disabled="ui.data.Profiles.Value<0?true:false" mn-ng-model="value" name="key" value="value" style="margin: 0px;" mn-ng-click="EditorOptions_ngClick(true,key,value)"> <a href="https://ckeditor.com/cke4/addon/{{key}}" target="_blank"><span style="padding: 5px;">{{key}}</span></a>
+                    </div>
+                </div>
+                <br />
+            </uitemplate>
+            <uielement name="Line" control="line"></uielement>
+            <uitemplate>
+                <div style="text-align:center;">
+                    <a class="ms-btn ms-btn-default" role="button" mn-ng-disabled="ui.data.Profiles.Value<0?true:false" id="Update" mn-ng-click="Update('Update',ProfileName,false)">
+                        <span class="ms-glyphicon ms-glyphicon-" style="float: left;margin-right: 5px;"></span>[L:Update]
+                    </a>
+                    <a class="ms-btn ms-btn-default" role="button" style="margin-left: 5px;" mn-ng-disabled="ui.data.Profiles.Value<0?true:false" id="Update" mn-ng-click="Update('Update',ProfileName,true)">
+                        <span class="ms-glyphicon ms-glyphicon-" style="float: left;margin-right: 5px;"></span>[L:UpdateApply]
+                    </a>
+                    <a class="ms-btn ms-btn-default ms-btn-link " role="button" mn-ng-click="showSelectEditorProfile()">
+                        <span class="ms-glyphicon ms-glyphicon-" style="float: left;margin-right: 5px;"></span>[L:Cancel]
+                    </a>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

@@ -1,0 +1,75 @@
+/* ######### CSS for Inverted Modern Bricks II Tabs. Remove if not using ######### */
+
+.modernbricksmenu2 {
+    padding: 0;
+    width: 362px;
+    border-top: 5px solid #D25A0B;
+    /*Brown color theme*/
+    background: transparent;
+    voice-family: "\"}\"";
+    voice-family: inherit;
+}
+
+.modernbricksmenu2 ul {
+    margin: 0;
+    margin-left: 10px;
+    /*margin between first menu item and left browser edge*/
+    padding: 0;
+    list-style: none;
+}
+
+.modernbricksmenu2 li {
+    display: inline;
+    margin: 0 2px 0 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+.modernbricksmenu2 a {
+    float: left;
+    display: block;
+    font: bold 11px Arial;
+    color: white;
+    text-decoration: none;
+    margin: 0 1px 0 0;
+    /*Margin between each menu item*/
+    padding: 5px 10px;
+    background-color: black;
+    /*Brown color theme*/
+    border-top: 1px solid white;
+}
+
+.modernbricksmenu2 a:hover {
+    background-color: #D25A0B;
+    /*Brown color theme*/
+    color: white;
+}
+
+.modernbricksmenu2 a.selected {
+    /*currently selected tab*/
+    background-color: #D25A0B;
+    /*Brown color theme*/
+    color: white;
+    border-color: #D25A0B;
+    /*Brown color theme*/
+}
+
+.modernbricksmenu2tabcontent {
+    display: none;
+}
+
+@media print {
+    .modernbricksmenu2tabcontent {
+        display: block !important;
+    }
+}
+
+.modernbricksmenu2tabcontentstyle {
+    /*style of tab content oontainer*/
+    border: 1px solid gray;
+    width: 362px;
+    height: 250px;
+    background-color: #EAEAEA;
+    padding: 5px;
+    overflow:hidden
+}

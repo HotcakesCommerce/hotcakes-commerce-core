@@ -1,0 +1,1513 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE {databaseOwner}[{objectQualifier}Reservations_PendingPayment](
+	[TabModuleID] [int] NOT NULL,
+	[PendingPaymentID] [int] IDENTITY(1,1) NOT NULL,
+	[PortalID] [int] NOT NULL,
+	[ReservationID] [int] NULL,
+	[PendingApprovalID] [int] NULL,
+	[CategoryID] [int] NULL,
+	[StartDateTime] [datetime] NOT NULL,
+	[Duration] [int] NOT NULL,
+	[FirstName] [nvarchar](100) NOT NULL,
+	[LastName] [nvarchar](100) NOT NULL,
+	[Email] [nvarchar](100) NOT NULL,
+	[Phone] [nvarchar](100) NULL,
+	[Description] [ntext] NULL,
+	[Amount] [money] NOT NULL,
+	[RefundableAmount] [money] NULL,
+	[Currency] [nvarchar](100) NOT NULL,
+	[Status] [int] NOT NULL,
+	[CreatedByUserID] [int] NULL,
+	[CreatedOnDate] [datetime] NOT NULL,
+	[LastModifiedByUserID] [int] NULL,
+	[LastModifiedOnDate] [datetime] NULL,
+ CONSTRAINT [{objectQualifier}FK_Reservations_EventPendingPayment] PRIMARY KEY CLUSTERED 
+(
+	[PendingPaymentID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE {databaseOwner}[{objectQualifier}Reservations_PendingApproval](
+	[TabModuleID] [int] NOT NULL,
+	[PendingApprovalID] [int] IDENTITY(1,1) NOT NULL,
+	[PortalID] [int] NOT NULL,
+	[ReservationID] [int] NULL,
+	[CategoryID] [int] NULL,
+	[StartDateTime] [datetime] NOT NULL,
+	[Duration] [int] NOT NULL,
+	[FirstName] [nvarchar](100) NOT NULL,
+	[LastName] [nvarchar](100) NOT NULL,
+	[Email] [nvarchar](100) NOT NULL,
+	[Phone] [nvarchar](100) NULL,
+	[Description] [ntext] NULL,
+	[Status] [int] NOT NULL,
+	[CreatedByUserID] [int] NULL,
+	[CreatedOnDate] [datetime] NOT NULL,
+	[LastModifiedByUserID] [int] NULL,
+	[LastModifiedOnDate] [datetime] NULL,
+ CONSTRAINT [{objectQualifier}FK_Reservations_PendingApproval] PRIMARY KEY CLUSTERED 
+(
+	[PendingApprovalID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinition](
+	[TabModuleID] [int] NOT NULL,
+	[CustomFieldDefinitionID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[Label] [nvarchar](255) NULL,
+	[Type] [nvarchar](255) NOT NULL,
+	[OptionType] [nvarchar](255) NOT NULL,
+	[Title] [nvarchar](255) NULL,
+	[AddToPreviousRow] [bit] NOT NULL,
+	[IsRequired] [bit] NOT NULL,
+	[IsActive] [bit] NOT NULL,
+	[DefaultValue] [nvarchar](255) NULL,
+	[MaxLength] [int] NULL,
+	[SortOrder] [int] NOT NULL,
+	[CreatedByUserID] [int] NOT NULL,
+	[CreatedOnDate] [datetime] NOT NULL,
+	[LastModifiedByUserID] [int] NULL,
+	[LastModifiedOnDate] [datetime] NULL,
+	[HideLabel] [bit] NULL,
+ CONSTRAINT [{objectQualifier}FK_Reservations_CustomFieldDefinition] PRIMARY KEY CLUSTERED 
+(
+	[CustomFieldDefinitionID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE {databaseOwner}[{objectQualifier}Reservations_Category](
+	[TabModuleID] [int] NOT NULL,
+	[CategoryID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[CreatedByUserID] [int] NOT NULL,
+	[CreatedOnDate] [datetime] NOT NULL,
+	[LastModifiedByUserID] [int] NULL,
+	[LastModifiedOnDate] [datetime] NULL,
+ CONSTRAINT [{objectQualifier}FK_Reservations_Category] PRIMARY KEY CLUSTERED 
+(
+	[CategoryID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE {databaseOwner}[{objectQualifier}Reservations_Reservation](
+	[TabModuleID] [int] NOT NULL,
+	[ReservationID] [int] IDENTITY(1,1) NOT NULL,
+	[CategoryID] [int] NULL,
+	[StartDateTime] [datetime] NOT NULL,
+	[Duration] [int] NOT NULL,
+	[FirstName] [nvarchar](100) NOT NULL,
+	[LastName] [nvarchar](100) NOT NULL,
+	[Email] [nvarchar](100) NOT NULL,
+	[Phone] [nvarchar](100) NULL,
+	[Description] [ntext] NULL,
+	[SendReminder] [bit] NOT NULL,
+	[SendReminderWhen] [int] NULL,
+	[ReminderSent] [bit] NOT NULL,
+	[RequireConfirmation] [bit] NOT NULL,
+	[RequireConfirmationWhen] [int] NULL,
+	[Confirmed] [bit] NOT NULL,
+	[CreatedByUserID] [int] NOT NULL,
+	[CreatedOnDate] [datetime] NOT NULL,
+	[LastModifiedByUserID] [int] NULL,
+	[LastModifiedOnDate] [datetime] NULL,
+ CONSTRAINT [{objectQualifier}FK_Reservations_Reservation] PRIMARY KEY CLUSTERED 
+(
+	[ReservationID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeleteCategory]
+    @CategoryID INT
+AS 
+    BEGIN
+        DELETE  FROM {databaseOwner}[{objectQualifier}Reservations_Category]
+        WHERE   [CategoryID] = @CategoryID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeleteReservation]
+    @ReservationID INT
+AS 
+    BEGIN
+        DELETE  FROM {databaseOwner}[{objectQualifier}Reservations_Reservation]
+        WHERE   [ReservationID] = @ReservationID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE {databaseOwner}[{objectQualifier}Reservations_CustomFieldValue](
+	[CustomFieldDefinitionID] [int] NOT NULL,
+	[CustomFieldValueID] [int] IDENTITY(1,1) NOT NULL,
+	[ReservationID] [int] NULL,
+	[PendingPaymentID] [int] NULL,
+	[PendingApprovalID] [int] NULL,
+	[Value] [nvarchar](255) NOT NULL,
+	[CreatedByUserID] [int] NOT NULL,
+	[CreatedOnDate] [datetime] NOT NULL,
+	[LastModifiedByUserID] [int] NULL,
+	[LastModifiedOnDate] [datetime] NULL,
+ CONSTRAINT [{objectQualifier}FK_Reservations_CustomFieldValue] PRIMARY KEY CLUSTERED 
+(
+	[CustomFieldValueID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinitionListItem](
+	[CustomFieldDefinitionID] [int] NOT NULL,
+	[CustomFieldDefinitionListItemID] [int] IDENTITY(1,1) NOT NULL,
+	[Text] [nvarchar](255) NOT NULL,
+	[Value] [nvarchar](255) NOT NULL,
+	[SortOrder] [int] NOT NULL,
+	[CreatedByUserID] [int] NOT NULL,
+	[CreatedOnDate] [datetime] NOT NULL,
+	[LastModifiedByUserID] [int] NULL,
+	[LastModifiedOnDate] [datetime] NULL,
+ CONSTRAINT [{objectQualifier}FK_Reservations_CustomFieldDefinitionListItem] PRIMARY KEY CLUSTERED 
+(
+	[CustomFieldDefinitionListItemID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddPendingPayment]
+    @TabModuleID INT,
+    @PortalID INT,
+    @ReservationID INT,
+    @PendingApprovalID INT,
+    @CategoryID INT,
+    @StartDateTime DATETIME,
+    @Duration INT,
+    @FirstName NVARCHAR(100),
+    @LastName NVARCHAR(100),
+    @Email NVARCHAR(100),
+    @Phone NVARCHAR(100),
+    @Description NTEXT,
+    @Amount MONEY,
+    @RefundableAmount MONEY,
+    @Currency NVARCHAR(100),
+    @Status INT,
+    @CreatedByUserID INT,
+    @CreatedOnDate DATETIME,
+    @LastModifiedByUserID INT,
+    @LastModifiedOnDate DATETIME
+AS 
+    BEGIN
+        INSERT  INTO {databaseOwner}[{objectQualifier}Reservations_PendingPayment]
+                (
+                  [TabModuleID],
+                  [PortalID],
+                  [ReservationID],
+                  [PendingApprovalID],
+                  [CategoryID],
+                  [StartDateTime],
+                  [Duration],
+                  [FirstName],
+                  [LastName],
+                  [Email],
+                  [Phone],
+                  [Description],
+                  [Amount],
+                  [RefundableAmount],
+                  [Currency],
+                  [Status],
+                  [CreatedByUserID],
+                  [CreatedOnDate],
+                  [LastModifiedByUserID],
+                  [LastModifiedOnDate]
+                )
+        VALUES  (
+                  @TabModuleID,
+                  @PortalID,
+                  @ReservationID,
+                  @PendingApprovalID,
+                  @CategoryID,
+                  @StartDateTime,
+                  @Duration,
+                  @FirstName,
+                  @LastName,
+                  @Email,
+                  @Phone,
+                  @Description,
+                  @Amount,
+                  @RefundableAmount,
+                  @Currency,
+                  @Status,
+                  @CreatedByUserID,
+                  @CreatedOnDate,
+                  @LastModifiedByUserID,
+                  @LastModifiedOnDate
+                )
+
+        SELECT  SCOPE_IDENTITY()
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddPendingApproval]
+    @TabModuleID INT,
+    @PortalID INT,
+    @ReservationID INT,
+    @CategoryID INT,
+    @StartDateTime DATETIME,
+    @Duration INT,
+    @FirstName NVARCHAR(100),
+    @LastName NVARCHAR(100),
+    @Email NVARCHAR(100),
+    @Phone NVARCHAR(100),
+    @Description NTEXT,
+    @Status INT,
+    @CreatedByUserID INT,
+    @CreatedOnDate DATETIME,
+    @LastModifiedByUserID INT,
+    @LastModifiedOnDate DATETIME
+AS 
+    BEGIN
+        INSERT  INTO {databaseOwner}[{objectQualifier}Reservations_PendingApproval]
+                (
+                  [TabModuleID],
+                  [PortalID],
+                  [ReservationID],
+                  [CategoryID],
+                  [StartDateTime],
+                  [Duration],
+                  [FirstName],
+                  [LastName],
+                  [Email],
+                  [Phone],
+                  [Description],
+                  [Status],
+                  [CreatedByUserID],
+                  [CreatedOnDate],
+                  [LastModifiedByUserID],
+                  [LastModifiedOnDate]
+                )
+        VALUES  (
+                  @TabModuleID,
+                  @PortalID,
+                  @ReservationID,
+                  @CategoryID,
+                  @StartDateTime,
+                  @Duration,
+                  @FirstName,
+                  @LastName,
+                  @Email,
+                  @Phone,
+                  @Description,
+                  @Status,
+                  @CreatedByUserID,
+                  @CreatedOnDate,
+                  @LastModifiedByUserID,
+                  @LastModifiedOnDate
+                )
+
+        SELECT  SCOPE_IDENTITY()
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE {databaseOwner}[{objectQualifier}Reservations_CategorySetting](
+	[CategoryID] [int] NOT NULL,
+	[SettingName] [nvarchar](50) NOT NULL,
+	[SettingValue] [nvarchar](2000) NOT NULL,
+ CONSTRAINT [{objectQualifier}FK_Reservations_CategorySetting] PRIMARY KEY CLUSTERED 
+(
+	[CategoryID] ASC,
+	[SettingName] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCategoryList]
+    @TabModuleID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_Category]
+        WHERE   ( @TabModuleID IS NULL OR [TabModuleID] = @TabModuleID )
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCategory]
+    @CategoryID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_Category]
+        WHERE   [CategoryID] = @CategoryID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetReservationListToSendReminders]
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_Reservation]
+        WHERE   ReminderSent = 0
+        AND		SendReminder = 1
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetReservationListByDateRangeAndCategoryID]
+    @TabModuleID INT,
+    @From DATETIME,
+    @To DATETIME,
+    @CategoryID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_Reservation]
+        WHERE   ( @TabModuleID IS NULL OR [TabModuleID] = @TabModuleID )
+        AND		[StartDateTime] >= @From
+        AND		[StartDateTime] < @To
+        AND		( @CategoryID IS NULL OR [CategoryID] = @CategoryID )
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetReservationListByDateRange]
+    @TabModuleID INT,
+    @From DATETIME,
+    @To DATETIME
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_Reservation]
+        WHERE   ( @TabModuleID IS NULL OR [TabModuleID] = @TabModuleID )
+        AND		[StartDateTime] >= @From
+        AND		[StartDateTime] < @To
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetReservationList]
+    @TabModuleID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_Reservation]
+        WHERE   ( @TabModuleID IS NULL OR [TabModuleID] = @TabModuleID )
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetReservation]
+    @ReservationID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_Reservation]
+        WHERE   [ReservationID] = @ReservationID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetActiveCustomFieldDefinitionList]
+    @TabModuleID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinition]
+        WHERE   ( @TabModuleID IS NULL OR [TabModuleID] = @TabModuleID )
+        AND		IsActive = 1
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DisableSendReminder]
+    @TabModuleID INT
+AS 
+    BEGIN
+        UPDATE	{databaseOwner}[{objectQualifier}Reservations_Reservation]
+        SET		[SendReminder] = 0
+        WHERE   [TabModuleID] = @TabModuleID
+        AND		[SendReminder] = 1
+        AND		[ReminderSent] = 0
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DisableRequireConfirmation]
+    @TabModuleID INT
+AS 
+    BEGIN
+        UPDATE	{databaseOwner}[{objectQualifier}Reservations_Reservation]
+        SET		[RequireConfirmation] = 0
+        WHERE   [TabModuleID] = @TabModuleID
+        AND		[RequireConfirmation] = 1
+        AND		[Confirmed] = 0
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeletePendingPayment]
+    @PendingPaymentID INT
+AS 
+    BEGIN
+        DELETE  FROM {databaseOwner}[{objectQualifier}Reservations_PendingPayment]
+        WHERE   [PendingPaymentID] = @PendingPaymentID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeletePendingApproval]
+    @PendingApprovalID INT
+AS 
+    BEGIN
+        DELETE  FROM {databaseOwner}[{objectQualifier}Reservations_PendingApproval]
+        WHERE   [PendingApprovalID] = @PendingApprovalID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE {databaseOwner}[{objectQualifier}Reservations_ICalendar](
+	[ReservationID] [int] NOT NULL,
+	[UID] [nvarchar](255) NOT NULL,
+	[Sequence] [int] NOT NULL,
+	[Organizer] [nvarchar](255) NOT NULL,
+ CONSTRAINT [{objectQualifier}FK_Reservations_ICalendar] PRIMARY KEY CLUSTERED 
+(
+	[ReservationID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetPendingPaymentList]
+    @TabModuleID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_PendingPayment]
+        WHERE   ( @TabModuleID IS NULL OR [TabModuleID] = @TabModuleID )
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetPendingPayment]
+    @PendingPaymentID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_PendingPayment]
+        WHERE   [PendingPaymentID] = @PendingPaymentID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetPendingApprovalList]
+    @TabModuleID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_PendingApproval]
+        WHERE   ( @TabModuleID IS NULL OR [TabModuleID] = @TabModuleID )
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetPendingApproval]
+    @PendingApprovalID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_PendingApproval]
+        WHERE   [PendingApprovalID] = @PendingApprovalID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddCategory]
+    @TabModuleID INT,
+    @Name NVARCHAR(100),
+    @CreatedByUserID INT,
+    @CreatedOnDate DATETIME,
+    @LastModifiedByUserID INT,
+    @LastModifiedOnDate DATETIME
+AS 
+    BEGIN
+        INSERT  INTO {databaseOwner}[{objectQualifier}Reservations_Category]
+                (
+                  [TabModuleID],
+                  [Name],
+                  [CreatedByUserID],
+                  [CreatedOnDate],
+                  [LastModifiedByUserID],
+                  [LastModifiedOnDate]
+                )
+        VALUES  (
+                  @TabModuleID,
+                  @Name,
+                  @CreatedByUserID,
+                  @CreatedOnDate,
+                  @LastModifiedByUserID,
+                  @LastModifiedOnDate
+                )
+
+        SELECT  SCOPE_IDENTITY()
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddReservation]
+    @TabModuleID INT,
+    @CategoryID INT,
+    @StartDateTime DATETIME,
+    @Duration INT,
+    @FirstName NVARCHAR(100),
+    @LastName NVARCHAR(100),
+    @Email NVARCHAR(100),
+    @Phone NVARCHAR(100),
+    @Description NTEXT,
+    @SendReminder BIT,
+    @SendReminderWhen INT,
+    @ReminderSent BIT,
+    @RequireConfirmation BIT,
+    @RequireConfirmationWhen INT,
+    @Confirmed BIT,
+    @CreatedByUserID INT,
+    @CreatedOnDate DATETIME,
+    @LastModifiedByUserID INT,
+    @LastModifiedOnDate DATETIME
+AS 
+    BEGIN
+        INSERT  INTO {databaseOwner}[{objectQualifier}Reservations_Reservation]
+                (
+                  [TabModuleID],
+                  [CategoryID],
+                  [StartDateTime],
+                  [Duration],
+                  [FirstName],
+                  [LastName],
+                  [Email],
+                  [Phone],
+                  [Description],
+                  [SendReminder],
+                  [SendReminderWhen],
+                  [ReminderSent],
+                  [RequireConfirmation],
+                  [RequireConfirmationWhen],
+                  [Confirmed],
+                  [CreatedByUserID],
+                  [CreatedOnDate],
+                  [LastModifiedByUserID],
+                  [LastModifiedOnDate]
+                )
+        VALUES  (
+                  @TabModuleID,
+                  @CategoryID,
+                  @StartDateTime,
+                  @Duration,
+                  @FirstName,
+                  @LastName,
+                  @Email,
+                  @Phone,
+                  @Description,
+                  @SendReminder,
+                  @SendReminderWhen,
+                  @ReminderSent,
+                  @RequireConfirmation,
+                  @RequireConfirmationWhen,
+                  @Confirmed,
+                  @CreatedByUserID,
+                  @CreatedOnDate,
+                  @LastModifiedByUserID,
+                  @LastModifiedOnDate
+                )
+
+        SELECT  SCOPE_IDENTITY()
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddCustomFieldDefinition]
+    @TabModuleID INT,
+    @Name NVARCHAR(255),
+    @Label NVARCHAR(255),
+    @Type NVARCHAR(255),
+    @OptionType NVARCHAR(255),
+    @Title NVARCHAR(255),
+    @AddToPreviousRow BIT,
+    @IsRequired BIT,
+    @IsActive BIT,
+    @DefaultValue NVARCHAR(255),
+    @MaxLength INT,
+    @SortOrder INT,
+    @CreatedByUserID INT,
+    @CreatedOnDate DATETIME,
+    @LastModifiedByUserID INT,
+    @LastModifiedOnDate DATETIME,
+    @HideLabel BIT
+AS 
+    BEGIN
+        INSERT  INTO {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinition]
+                (
+                  [TabModuleID],
+                  [Name],
+                  [Label],
+                  [Type],
+                  [OptionType],
+                  [Title],
+                  [AddToPreviousRow],
+                  [IsRequired],
+                  [IsActive],
+                  [DefaultValue],
+                  [MaxLength],
+                  [SortOrder],
+                  [CreatedByUserID],
+                  [CreatedOnDate],
+                  [LastModifiedByUserID],
+                  [LastModifiedOnDate],
+                  [HideLabel]
+                )
+        VALUES  (
+                  @TabModuleID,
+                  @Name,
+                  @Label,
+                  @Type,
+                  @OptionType,
+                  @Title,
+                  @AddToPreviousRow,
+                  @IsRequired,
+                  @IsActive,
+                  @DefaultValue,
+                  @MaxLength,
+                  @SortOrder,
+                  @CreatedByUserID,
+                  @CreatedOnDate,
+                  @LastModifiedByUserID,
+                  @LastModifiedOnDate,
+                  @HideLabel
+                )
+
+        SELECT  SCOPE_IDENTITY()
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldDefinitionList]
+    @TabModuleID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinition]
+        WHERE   ( @TabModuleID IS NULL OR [TabModuleID] = @TabModuleID )
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldDefinition]
+    @CustomFieldDefinitionID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinition]
+        WHERE   [CustomFieldDefinitionID] = @CustomFieldDefinitionID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdatePendingPayment]
+    @TabModuleID INT,
+    @PendingPaymentID INT,
+    @PortalID INT,
+    @ReservationID INT,
+    @PendingApprovalID INT,
+    @CategoryID INT,
+    @StartDateTime DATETIME,
+    @Duration INT,
+    @FirstName NVARCHAR(100),
+    @LastName NVARCHAR(100),
+    @Email NVARCHAR(100),
+    @Phone NVARCHAR(100),
+    @Description NTEXT,
+    @Amount MONEY,
+    @RefundableAmount MONEY,
+    @Currency NVARCHAR(100),
+    @Status INT,
+    @CreatedByUserID INT,
+    @CreatedOnDate DATETIME,
+    @LastModifiedByUserID INT,
+    @LastModifiedOnDate DATETIME
+AS 
+    BEGIN
+        UPDATE  {databaseOwner}[{objectQualifier}Reservations_PendingPayment]
+        SET     [TabModuleID] = @TabModuleID,
+                [PortalID] = @PortalID,
+                [ReservationID] = @ReservationID,
+                [PendingApprovalID] = @PendingApprovalID,
+                [CategoryID] = @CategoryID,
+                [StartDateTime] = @StartDateTime,
+                [Duration] = @Duration,
+                [FirstName] = @FirstName,
+                [LastName] = @LastName,
+                [Email] = @Email,
+                [Phone] = @Phone,
+                [Description] = @Description,
+                [Amount] = @Amount,
+                [RefundableAmount] = @RefundableAmount,
+                [Currency] = @Currency,
+                [Status] = @Status,
+                [CreatedByUserID] = @CreatedByUserID,
+                [CreatedOnDate] = @CreatedOnDate,
+                [LastModifiedByUserID] = @LastModifiedByUserID,
+                [LastModifiedOnDate] = @LastModifiedOnDate
+        WHERE   [PendingPaymentID] = @PendingPaymentID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdatePendingApproval]
+    @TabModuleID INT,
+    @PendingApprovalID INT,
+    @PortalID INT,
+    @ReservationID INT,
+    @CategoryID INT,
+    @StartDateTime DATETIME,
+    @Duration INT,
+    @FirstName NVARCHAR(100),
+    @LastName NVARCHAR(100),
+    @Email NVARCHAR(100),
+    @Phone NVARCHAR(100),
+    @Description NTEXT,
+    @Status INT,
+    @CreatedByUserID INT,
+    @CreatedOnDate DATETIME,
+    @LastModifiedByUserID INT,
+    @LastModifiedOnDate DATETIME
+AS 
+    BEGIN
+        UPDATE  {databaseOwner}[{objectQualifier}Reservations_PendingApproval]
+        SET     [TabModuleID] = @TabModuleID,
+                [PortalID] = @PortalID,
+                [ReservationID] = @ReservationID,
+                [CategoryID] = @CategoryID,
+                [StartDateTime] = @StartDateTime,
+                [Duration] = @Duration,
+                [FirstName] = @FirstName,
+                [LastName] = @LastName,
+                [Email] = @Email,
+                [Phone] = @Phone,
+                [Description] = @Description,
+                [Status] = @Status,
+                [CreatedByUserID] = @CreatedByUserID,
+                [CreatedOnDate] = @CreatedOnDate,
+                [LastModifiedByUserID] = @LastModifiedByUserID,
+                [LastModifiedOnDate] = @LastModifiedOnDate
+        WHERE   [PendingApprovalID] = @PendingApprovalID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdateCategory]
+    @TabModuleID INT,
+    @CategoryID INT,
+    @Name NVARCHAR(100),
+    @CreatedByUserID INT,
+    @CreatedOnDate DATETIME,
+    @LastModifiedByUserID INT,
+    @LastModifiedOnDate DATETIME
+AS 
+    BEGIN
+        UPDATE  {databaseOwner}[{objectQualifier}Reservations_Category]
+        SET     [TabModuleID] = @TabModuleID,
+                [Name] = @Name,
+                [CreatedByUserID] = @CreatedByUserID,
+                [CreatedOnDate] = @CreatedOnDate,
+                [LastModifiedByUserID] = @LastModifiedByUserID,
+                [LastModifiedOnDate] = @LastModifiedOnDate
+        WHERE   [CategoryID] = @CategoryID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdateReservation]
+    @TabModuleID INT,
+    @ReservationID INT,
+    @CategoryID INT,
+    @StartDateTime DATETIME,
+    @Duration INT,
+    @FirstName NVARCHAR(100),
+    @LastName NVARCHAR(100),
+    @Email NVARCHAR(100),
+    @Phone NVARCHAR(100),
+    @Description NTEXT,
+    @SendReminder BIT,
+    @SendReminderWhen INT,
+    @ReminderSent BIT,
+    @RequireConfirmation BIT,
+    @RequireConfirmationWhen INT,
+    @Confirmed BIT,
+    @CreatedByUserID INT,
+    @CreatedOnDate DATETIME,
+    @LastModifiedByUserID INT,
+    @LastModifiedOnDate DATETIME
+AS 
+    BEGIN
+        UPDATE  {databaseOwner}[{objectQualifier}Reservations_Reservation]
+        SET     [TabModuleID] = @TabModuleID,
+                [CategoryID] = @CategoryID,
+                [StartDateTime] = @StartDateTime,
+                [Duration] = @Duration,
+                [FirstName] = @FirstName,
+                [LastName] = @LastName,
+                [Email] = @Email,
+                [Phone] = @Phone,
+                [Description] = @Description,
+                [SendReminder] = @SendReminder,
+                [SendReminderWhen] = @SendReminderWhen,
+                [ReminderSent] = @ReminderSent,
+                [RequireConfirmation] = @RequireConfirmation,
+                [RequireConfirmationWhen] = @RequireConfirmationWhen,
+                [Confirmed] = @Confirmed,
+                [CreatedByUserID] = @CreatedByUserID,
+                [CreatedOnDate] = @CreatedOnDate,
+                [LastModifiedByUserID] = @LastModifiedByUserID,
+                [LastModifiedOnDate] = @LastModifiedOnDate
+        WHERE   [ReservationID] = @ReservationID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeleteCustomFieldDefinition]
+    @CustomFieldDefinitionID INT
+AS 
+    BEGIN
+        DELETE  FROM {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinition]
+        WHERE   [CustomFieldDefinitionID] = @CustomFieldDefinitionID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdateCustomFieldDefinition]
+    @TabModuleID INT,
+    @CustomFieldDefinitionID INT,
+    @Name NVARCHAR(255),
+    @Label NVARCHAR(255),
+    @Type NVARCHAR(255),
+    @OptionType NVARCHAR(255),
+    @Title NVARCHAR(255),
+    @AddToPreviousRow BIT,
+    @IsRequired BIT,
+    @IsActive BIT,
+    @DefaultValue NVARCHAR(255),
+    @MaxLength INT,
+    @SortOrder INT,
+    @CreatedByUserID INT,
+    @CreatedOnDate DATETIME,
+    @LastModifiedByUserID INT,
+    @LastModifiedOnDate DATETIME,
+    @HideLabel BIT
+AS 
+    BEGIN
+        UPDATE  {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinition]
+        SET     [TabModuleID] = @TabModuleID,
+                [Name] = @Name,
+                [Label] = @Label,
+                [Type] = @Type,
+                [OptionType] = @OptionType,
+                [Title] = @Title,
+                [AddToPreviousRow] = @AddToPreviousRow,
+                [IsRequired] = @IsRequired,
+                [IsActive] = @IsActive,
+                [DefaultValue] = @DefaultValue,
+                [MaxLength] = @MaxLength,
+                [SortOrder] = @SortOrder,
+                [CreatedByUserID] = @CreatedByUserID,
+                [CreatedOnDate] = @CreatedOnDate,
+                [LastModifiedByUserID] = @LastModifiedByUserID,
+                [LastModifiedOnDate] = @LastModifiedOnDate,
+                [HideLabel] = @HideLabel
+        WHERE   [CustomFieldDefinitionID] = @CustomFieldDefinitionID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdateCategorySetting]
+    @CategoryID INT,
+    @SettingName NVARCHAR(50),
+    @SettingValue NVARCHAR(2000)
+AS 
+    BEGIN
+        UPDATE  {databaseOwner}[{objectQualifier}Reservations_CategorySetting]
+        SET     [SettingValue] = @SettingValue
+        WHERE   [CategoryID] = @CategoryID
+                AND [SettingName] = @SettingName
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeleteCategorySetting]
+    @CategoryID INT,
+    @SettingName NVARCHAR(50)
+AS 
+    BEGIN
+        DELETE  FROM {databaseOwner}[{objectQualifier}Reservations_CategorySetting]
+        WHERE   [CategoryID] = @CategoryID
+                AND [SettingName] = @SettingName
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdateICalendar]
+    @ReservationID INT,
+    @UID NVARCHAR(255),
+    @Sequence INT,
+    @Organizer NVARCHAR(255)
+AS 
+    BEGIN
+        UPDATE  {databaseOwner}[{objectQualifier}Reservations_ICalendar]
+        SET     [UID] = @UID,
+                [Sequence] = @Sequence,
+                [Organizer] = @Organizer
+        WHERE   [ReservationID] = @ReservationID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdateCustomFieldValue]
+    @CustomFieldDefinitionID INT,
+    @CustomFieldValueID INT,
+    @ReservationID INT,
+    @PendingPaymentID INT,
+    @PendingApprovalID INT,
+    @Value NVARCHAR(255),
+    @CreatedByUserID INT,
+    @CreatedOnDate DATETIME,
+    @LastModifiedByUserID INT,
+    @LastModifiedOnDate DATETIME
+AS 
+    BEGIN
+        UPDATE  {databaseOwner}[{objectQualifier}Reservations_CustomFieldValue]
+        SET     [CustomFieldDefinitionID] = @CustomFieldDefinitionID,
+                [ReservationID] = @ReservationID,
+                [PendingPaymentID] = @PendingPaymentID,
+                [PendingApprovalID] = @PendingApprovalID,
+                [Value] = @Value,
+                [CreatedByUserID] = @CreatedByUserID,
+                [CreatedOnDate] = @CreatedOnDate,
+                [LastModifiedByUserID] = @LastModifiedByUserID,
+                [LastModifiedOnDate] = @LastModifiedOnDate
+        WHERE   [CustomFieldValueID] = @CustomFieldValueID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_UpdateCustomFieldDefinitionListItem]
+    @CustomFieldDefinitionID INT,
+    @CustomFieldDefinitionListItemID INT,
+    @Text NVARCHAR(255),
+    @Value NVARCHAR(255),
+    @SortOrder INT,
+    @CreatedByUserID INT,
+    @CreatedOnDate DATETIME,
+    @LastModifiedByUserID INT,
+    @LastModifiedOnDate DATETIME
+AS 
+    BEGIN
+        UPDATE  {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinitionListItem]
+        SET     [CustomFieldDefinitionID] = @CustomFieldDefinitionID,
+                [Text] = @Text,
+                [Value] = @Value,
+                [SortOrder] = @SortOrder,
+                [CreatedByUserID] = @CreatedByUserID,
+                [CreatedOnDate] = @CreatedOnDate,
+                [LastModifiedByUserID] = @LastModifiedByUserID,
+                [LastModifiedOnDate] = @LastModifiedOnDate
+        WHERE   [CustomFieldDefinitionListItemID] = @CustomFieldDefinitionListItemID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCategorySettingList]
+    @CategoryID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_CategorySetting]
+        WHERE   ( @CategoryID IS NULL OR [CategoryID] = @CategoryID )
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCategorySetting]
+    @CategoryID INT,
+    @SettingName NVARCHAR(50)
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_CategorySetting]
+        WHERE   [CategoryID] = @CategoryID
+                AND [SettingName] = @SettingName
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddCategorySetting]
+    @CategoryID INT,
+    @SettingName NVARCHAR(50),
+    @SettingValue NVARCHAR(2000)
+AS 
+    BEGIN
+        INSERT  INTO {databaseOwner}[{objectQualifier}Reservations_CategorySetting]
+                (
+                  [CategoryID],
+                  [SettingName],
+                  [SettingValue]
+                )
+        VALUES  (
+                  @CategoryID,
+                  @SettingName,
+                  @SettingValue
+                )
+
+        SELECT  SCOPE_IDENTITY()
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetICalendarList]
+    @ReservationID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_ICalendar]
+        WHERE   ( @ReservationID IS NULL OR [ReservationID] = @ReservationID )
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetICalendar]
+    @ReservationID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_ICalendar]
+        WHERE   [ReservationID] = @ReservationID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldValueListByPendingPaymentID]
+    @PendingPaymentID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_CustomFieldValue]
+        WHERE   PendingPaymentID = @PendingPaymentID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldValueListByPendingApprovalID]
+    @PendingApprovalID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_CustomFieldValue]
+        WHERE   PendingApprovalID = @PendingApprovalID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldValueListByReservationID]
+    @ReservationID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_CustomFieldValue]
+        WHERE   ReservationID = @ReservationID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldValueList]
+    @CustomFieldDefinitionID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_CustomFieldValue]
+        WHERE   ( @CustomFieldDefinitionID IS NULL OR [CustomFieldDefinitionID] = @CustomFieldDefinitionID )
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldValue]
+    @CustomFieldValueID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_CustomFieldValue]
+        WHERE   [CustomFieldValueID] = @CustomFieldValueID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldDefinitionListItemList]
+    @CustomFieldDefinitionID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinitionListItem]
+        WHERE   ( @CustomFieldDefinitionID IS NULL OR [CustomFieldDefinitionID] = @CustomFieldDefinitionID )
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_GetCustomFieldDefinitionListItem]
+    @CustomFieldDefinitionListItemID INT
+AS 
+    BEGIN
+        SELECT  *
+        FROM    {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinitionListItem]
+        WHERE   [CustomFieldDefinitionListItemID] = @CustomFieldDefinitionListItemID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeleteICalendar]
+    @ReservationID INT
+AS 
+    BEGIN
+        DELETE  FROM {databaseOwner}[{objectQualifier}Reservations_ICalendar]
+        WHERE   [ReservationID] = @ReservationID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeleteCustomFieldValue]
+    @CustomFieldValueID INT
+AS 
+    BEGIN
+        DELETE  FROM {databaseOwner}[{objectQualifier}Reservations_CustomFieldValue]
+        WHERE   [CustomFieldValueID] = @CustomFieldValueID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_DeleteCustomFieldDefinitionListItem]
+    @CustomFieldDefinitionListItemID INT
+AS 
+    BEGIN
+        DELETE  FROM {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinitionListItem]
+        WHERE   [CustomFieldDefinitionListItemID] = @CustomFieldDefinitionListItemID
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddICalendar]
+    @ReservationID INT,
+    @UID NVARCHAR(255),
+    @Sequence INT,
+    @Organizer NVARCHAR(255)
+AS 
+    BEGIN
+        INSERT  INTO {databaseOwner}[{objectQualifier}Reservations_ICalendar]
+                (
+                  [ReservationID],
+                  [UID],
+                  [Sequence],
+                  [Organizer]
+                )
+        VALUES  (
+                  @ReservationID,
+                  @UID,
+                  @Sequence,
+                  @Organizer
+                )
+
+        SELECT  SCOPE_IDENTITY()
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddCustomFieldValue]
+    @CustomFieldDefinitionID INT,
+    @ReservationID INT,
+    @PendingPaymentID INT,
+    @PendingApprovalID INT,
+    @Value NVARCHAR(255),
+    @CreatedByUserID INT,
+    @CreatedOnDate DATETIME,
+    @LastModifiedByUserID INT,
+    @LastModifiedOnDate DATETIME
+AS 
+    BEGIN
+        INSERT  INTO {databaseOwner}[{objectQualifier}Reservations_CustomFieldValue]
+                (
+                  [CustomFieldDefinitionID],
+                  [ReservationID],
+                  [PendingPaymentID],
+                  [PendingApprovalID],
+                  [Value],
+                  [CreatedByUserID],
+                  [CreatedOnDate],
+                  [LastModifiedByUserID],
+                  [LastModifiedOnDate]
+                )
+        VALUES  (
+                  @CustomFieldDefinitionID,
+                  @ReservationID,
+                  @PendingPaymentID,
+                  @PendingApprovalID,
+                  @Value,
+                  @CreatedByUserID,
+                  @CreatedOnDate,
+                  @LastModifiedByUserID,
+                  @LastModifiedOnDate
+                )
+
+        SELECT  SCOPE_IDENTITY()
+    END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Reservations_AddCustomFieldDefinitionListItem]
+    @CustomFieldDefinitionID INT,
+    @Text NVARCHAR(255),
+    @Value NVARCHAR(255),
+    @SortOrder INT,
+    @CreatedByUserID INT,
+    @CreatedOnDate DATETIME,
+    @LastModifiedByUserID INT,
+    @LastModifiedOnDate DATETIME
+AS 
+    BEGIN
+        INSERT  INTO {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinitionListItem]
+                (
+                  [CustomFieldDefinitionID],
+                  [Text],
+                  [Value],
+                  [SortOrder],
+                  [CreatedByUserID],
+                  [CreatedOnDate],
+                  [LastModifiedByUserID],
+                  [LastModifiedOnDate]
+                )
+        VALUES  (
+                  @CustomFieldDefinitionID,
+                  @Text,
+                  @Value,
+                  @SortOrder,
+                  @CreatedByUserID,
+                  @CreatedOnDate,
+                  @LastModifiedByUserID,
+                  @LastModifiedOnDate
+                )
+
+        SELECT  SCOPE_IDENTITY()
+    END
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_Reservation]  WITH CHECK ADD  CONSTRAINT [{objectQualifier}FK_Reservations_Reservation_TabModules] FOREIGN KEY([TabModuleID])
+REFERENCES {databaseOwner}[{objectQualifier}TabModules] ([TabModuleID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_Reservation] CHECK CONSTRAINT [{objectQualifier}FK_Reservations_Reservation_TabModules]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_Category]  WITH CHECK ADD  CONSTRAINT [{objectQualifier}FK_Reservations_Category_TabModules] FOREIGN KEY([TabModuleID])
+REFERENCES {databaseOwner}[{objectQualifier}TabModules] ([TabModuleID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_Category] CHECK CONSTRAINT [{objectQualifier}FK_Reservations_Category_TabModules]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_CategorySetting]  WITH CHECK ADD  CONSTRAINT [{objectQualifier}FK_Reservations_CategorySetting_Reservations_Category] FOREIGN KEY([CategoryID])
+REFERENCES {databaseOwner}[{objectQualifier}Reservations_Category] ([CategoryID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_CategorySetting] CHECK CONSTRAINT [{objectQualifier}FK_Reservations_CategorySetting_Reservations_Category]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinition]  WITH CHECK ADD  CONSTRAINT [{objectQualifier}FK_Reservations_CustomFieldDefinition_TabModules] FOREIGN KEY([TabModuleID])
+REFERENCES {databaseOwner}[{objectQualifier}TabModules] ([TabModuleID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinition] CHECK CONSTRAINT [{objectQualifier}FK_Reservations_CustomFieldDefinition_TabModules]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinitionListItem]  WITH CHECK ADD  CONSTRAINT [{objectQualifier}FK_Reservations_CustomFieldDefinitionListItem_Reservations_CustomFieldDefinition] FOREIGN KEY([CustomFieldDefinitionID])
+REFERENCES {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinition] ([CustomFieldDefinitionID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinitionListItem] CHECK CONSTRAINT [{objectQualifier}FK_Reservations_CustomFieldDefinitionListItem_Reservations_CustomFieldDefinition]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_CustomFieldValue]  WITH CHECK ADD  CONSTRAINT [{objectQualifier}FK_Reservations_CustomFieldValue_Reservations_CustomFieldDefinition] FOREIGN KEY([CustomFieldDefinitionID])
+REFERENCES {databaseOwner}[{objectQualifier}Reservations_CustomFieldDefinition] ([CustomFieldDefinitionID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_CustomFieldValue] CHECK CONSTRAINT [{objectQualifier}FK_Reservations_CustomFieldValue_Reservations_CustomFieldDefinition]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_ICalendar]  WITH CHECK ADD  CONSTRAINT [{objectQualifier}FK_Reservations_ICalendar_Reservations_Reservation] FOREIGN KEY([ReservationID])
+REFERENCES {databaseOwner}[{objectQualifier}Reservations_Reservation] ([ReservationID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_ICalendar] CHECK CONSTRAINT [{objectQualifier}FK_Reservations_ICalendar_Reservations_Reservation]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_PendingApproval]  WITH CHECK ADD  CONSTRAINT [{objectQualifier}FK_Reservations_PendingApproval_TabModules] FOREIGN KEY([TabModuleID])
+REFERENCES {databaseOwner}[{objectQualifier}TabModules] ([TabModuleID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_PendingApproval] CHECK CONSTRAINT [{objectQualifier}FK_Reservations_PendingApproval_TabModules]
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_PendingPayment]  WITH CHECK ADD  CONSTRAINT [{objectQualifier}FK_Reservations_PendingPayment_TabModules] FOREIGN KEY([TabModuleID])
+REFERENCES {databaseOwner}[{objectQualifier}TabModules] ([TabModuleID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Reservations_PendingPayment] CHECK CONSTRAINT [{objectQualifier}FK_Reservations_PendingPayment_TabModules]
+GO
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

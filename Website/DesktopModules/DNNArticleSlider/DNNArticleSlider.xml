@@ -1,0 +1,333 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DNNArticleSlider</name>
+    </assembly>
+    <members>
+        <member name="T:ZLDNN.Modules.DNNArticleSlider.Settings">
+            -----------------------------------------------------------------------------
+            <summary>
+            The Settings class manages Module Settings
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.ctlSource">
+            <summary>
+            ctlSource 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.lbNumber">
+            <summary>
+            lbNumber 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.txtNumber">
+            <summary>
+            txtNumber 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.Rangevalidator11">
+            <summary>
+            Rangevalidator11 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.lbRecent">
+            <summary>
+            lbRecent 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.txtRecent">
+            <summary>
+            txtRecent 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.CompareValidator3">
+            <summary>
+            CompareValidator3 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.lbFeaturedDisplayType">
+            <summary>
+            lbFeaturedDisplayType 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.cboFeaturedDisplayType">
+            <summary>
+            cboFeaturedDisplayType 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.lbTabs">
+            <summary>
+            lbTabs 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.cboTabs">
+            <summary>
+            cboTabs 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.lbDisplayRandom">
+            <summary>
+            lbDisplayRandom 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.chkDisplayRandom">
+            <summary>
+            chkDisplayRandom 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.lbCheckPermission">
+            <summary>
+            lbCheckPermission 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.chkCheckPermission">
+            <summary>
+            chkCheckPermission 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.lblNextButtonText">
+            <summary>
+            lblNextButtonText 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.txtNextButtonText">
+            <summary>
+            txtNextButtonText 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.lblautorotate_time">
+            <summary>
+            lblautorotate_time 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.txtautorotate_time">
+            <summary>
+            txtautorotate_time 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.RangeValidator1">
+            <summary>
+            RangeValidator1 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.lblCSS">
+            <summary>
+            lblCSS 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.txtCSS">
+            <summary>
+            txtCSS 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.lbOrderField">
+            <summary>
+            lbOrderField 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.cboOrderField">
+            <summary>
+            cboOrderField 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.cboOrder">
+            <summary>
+            cboOrder 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.lbShowFeaturedFirst">
+            <summary>
+            lbShowFeaturedFirst 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.chkShowFeaturedFirst">
+            <summary>
+            chkShowFeaturedFirst 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.lblTemplate">
+            <summary>
+            lblTemplate 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.Settings.ctlTemplateSelector">
+            <summary>
+            ctlTemplateSelector 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticleSlider.Settings.LoadSettings">
+            -----------------------------------------------------------------------------
+            <summary>
+            LoadSettings loads the settings from the Database and displays them
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticleSlider.Settings.UpdateSettings">
+            -----------------------------------------------------------------------------
+            <summary>
+            UpdateSettings saves the modified settings to the Database
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="T:ZLDNN.Modules.DNNArticleSlider.ViewDNNArticleSlider">
+            -----------------------------------------------------------------------------
+            <summary>
+            The ViewDNNArticleSlider class displays the content
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="F:ZLDNN.Modules.DNNArticleSlider.ViewDNNArticleSlider.lblContent">
+            <summary>
+            lblContent 控件。
+            </summary>
+            <remarks>
+            自动生成的字段。
+            若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+            </remarks>
+        </member>
+        <member name="M:ZLDNN.Modules.DNNArticleSlider.ViewDNNArticleSlider.Page_Load(System.Object,System.EventArgs)">
+            -----------------------------------------------------------------------------
+            <summary>
+            Page_Load runs when the control is loaded
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+    </members>
+</doc>

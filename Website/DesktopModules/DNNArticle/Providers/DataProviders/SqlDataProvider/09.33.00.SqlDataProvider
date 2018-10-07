@@ -1,0 +1,6039 @@
+
+if  exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}vw_ZLDNNFiles]') and OBJECTPROPERTY(id, N'IsView') = 1)
+Drop View {databaseOwner}[{objectQualifier}vw_ZLDNNFiles]
+
+GO
+
+ CREATE VIEW {databaseOwner}[{objectQualifier}vw_ZLDNNFiles]
+  AS
+    select b.FolderPath as Folder,a.FileName,a.FileID from {databaseOwner}{objectQualifier}Files as a left join {databaseOwner}{objectQualifier}Folders as b on a.FolderId=b.FolderId
+  
+GO
+
+--  Table 1 DNNArticle 
+
+-- 01.00.00 
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticle]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle]
+		(
+			[ModuleID] [int] NOT NULL,
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[Content] [ntext]  NULL,
+			[CreatedByUser] [int]  NULL,
+			[CreatedDate] [datetime]  NULL,
+			[CategoryID] [int] NULL,
+			[URL] [nvarchar] (255) NULL,
+			[Title] [nvarchar] (150)  NULL ,
+			[Description] [ntext]   NULL,
+			[ViewOrder] [int] NULL,
+			[ViewRoles] [varchar](200) NULL,
+			[Clicks] [int] NULL,
+			[VoteTotal] [int] NULL,
+			[VoteNumber] [int] NULL,
+			[CommentNumber] [int] NULL,
+			[ApprovedByUser] [int] NULL,
+			[ApprovedDate] [datetime] NULL,
+			[IsApproved] [bit],
+			[Tags] [nvarchar] (200) NULL
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticle] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticle] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle] ([ModuleID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticle_{objectQualifier}Modules] FOREIGN KEY ([ModuleID]) REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID]) ON DELETE CASCADE 
+	END
+GO
+
+
+-- 04.04.00 
+
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and name='ExpireDate'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle ADD  
+[ExpireDate] [datetime]  NULL,
+[SEOTitle] [nvarchar] (255)  NULL ,
+[SEODescription] [nvarchar] (255)  NULL ,
+[SEOTags] [nvarchar] (255) NULL
+
+GO
+
+
+-- 04.09.00 
+
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and name='Featured'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle ADD  
+[Featured] [bit]  NULL,
+[ReleatedURL] nvarchar(250) NULL,
+[ExtraFields] ntext NULL
+
+GO
+
+--  05.09.06 
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and name='PublishDate'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle ADD  
+[PublishDate] [datetime]  NULL
+
+GO
+
+
+--  06.03.00 
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and name='UpdateDate'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle ADD  
+[UpdateDate] [datetime]  NULL,
+[PageNumber] [int] NULL
+
+GO
+
+--  06.05.00
+
+update {databaseOwner}{objectQualifier}ZLDNN_DNNArticle
+set PublishDate=CreatedDate 
+where PublishDate is null
+GO
+
+Update {databaseOwner}{objectQualifier}ZLDNN_DNNArticle
+set [UpdateDate]=[CreatedDate] where [UpdateDate] is null
+
+GO
+
+-- 08.08.02
+
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle
+ALTER COLUMN [ViewRoles] [nvarchar](2000) NULL
+
+GO
+
+-- 08.08.08
+
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and name='RelatedEntryID'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle ADD  
+[RelatedEntryID] [int] NULL
+
+GO
+
+-- 09.01.06
+
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle
+ALTER COLUMN [Title] [nvarchar](2000) NULL
+
+GO
+
+-- 09.04.01
+
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and name='RelatedEntryKey'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle ADD  
+[RelatedEntryKey] [nvarchar](500) NULL,
+[LastViewDate] datetime NULL
+
+GO
+
+-- 09.06.06
+
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and name='IsPublished'))
+BEGIN
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle ADD  
+		[IsPublished] bit NULL,
+		[AllowComment] bit NULL DEFAULT 1
+
+END
+GO
+
+Update  {databaseOwner}{objectQualifier}ZLDNN_DNNArticle Set [IsPublished]=1 where PublishDate<getdate()
+GO
+
+-- 09.08.05
+
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle 
+alter column [Content] nvarchar(max)
+
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle 
+alter column [Description]  nvarchar(max)
+
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle 
+alter column [ExtraFields] nvarchar(max)
+
+GO
+
+Update  {databaseOwner}{objectQualifier}ZLDNN_DNNArticle Set [Content]=[Content],[Description]=[Description], [ExtraFields]=[ExtraFields]
+
+GO
+
+
+
+
+--   Table 2  Category 
+--  01.00.00
+
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory (
+			[ItemID] [int] IDENTITY (1, 1)   NOT NULL ,
+			[ModuleID] [int] NOT NULL ,
+			[ImagePath] [nvarchar] (255) NOT NULL ,
+			[Title] [nvarchar] (150)  NULL ,
+			[Description] [nvarchar] (255)  NULL,
+			[ViewOrder] [int] NULL,
+			[CreatedDate] [datetime] NULL,
+			[CreatedByUser] [nvarchar] (100) NULL,
+			[ParentID] [int] NULL,
+			[Level] [int] NULL
+		) 
+
+		ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory ADD 
+			CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleCategory] PRIMARY KEY  CLUSTERED 
+			(
+				[ItemID]
+			)  
+
+		ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory ADD 
+			CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleCategory_{objectQualifier}Modules] FOREIGN KEY 
+			(
+				[ModuleID]
+			) REFERENCES {databaseOwner}{objectQualifier}Modules (
+				[ModuleID]
+			) ON DELETE CASCADE 
+	END
+GO
+
+--  02.00.00 
+
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory') and name='Moderator'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory ADD  
+[Moderator] [nvarchar] (100) NULL,
+[IsAutoApprove] [bit] NULL,
+[IsEmailNotification] [bit] NULL,
+[EmailAddress] [nvarchar] (255) NULL
+
+
+GO
+
+--  05.09.00 
+
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory') and name='ViewRoles'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory ADD  
+[ViewRoles] [nvarchar] (100) NULL
+
+
+GO
+
+--  07.08.01
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory') and OBJECTPROPERTY(id, N'IsTable') = 1)) 
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory 
+ALTER COLUMN [ViewRoles] [nvarchar] (2000) NULL
+
+GO
+
+--  08.05.00
+
+
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory') and name='AddRoles'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory ADD  
+[AddRoles] [nvarchar] (2000) NULL
+
+
+GO
+
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory') and name='CategoryLink'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory ADD  
+[CategoryLink] [nvarchar] (2000) NULL
+
+
+GO
+
+
+
+
+--  Table 3 Comment   
+--  01.00.00 
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment (
+		[CommentID] [int] IDENTITY (1, 1) NOT NULL,
+		[DNNArticleID] [int] NULL,
+		[CreatedByUser] [nvarchar] (100) NULL ,
+		[CreatedDate] [datetime] NULL ,
+		[Title] [nvarchar] (100) NULL ,
+		[Comment] [nvarchar] (2000) NULL ,
+		[Rating] [int] NULL,
+		[CreatedUserIP] [nvarchar] (24) NULL
+		) 
+
+
+
+		ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment ADD CONSTRAINT 
+			PK_{objectQualifier}ZLDNN_DNNArticleComment PRIMARY KEY CLUSTERED (
+			[CommentID]
+		) 
+
+
+
+		ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment ADD CONSTRAINT 
+		FK_{objectQualifier}ZLDNN_DNNArticleComment{objectQualifier}DNNArticle FOREIGN KEY (
+			[DNNArticleID]
+		) REFERENCES {databaseOwner}{objectQualifier}ZLDNN_DNNArticle (
+			[ItemID]
+		) ON DELETE CASCADE 
+	END
+GO
+
+-- 04.07.00
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment') and name='Hidden'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment ADD  
+[Hidden] [bit]  NULL
+
+GO
+
+--  05.09.01
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment') and name='CreatedByUserID'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment ADD  
+[CreatedByUserID] [int]  NULL
+
+GO
+
+-- 09.00.09
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment') and name='Email'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment ADD  
+[Email] [nvarchar](200)  NULL,
+[Website] [nvarchar](200)  NULL
+
+GO
+
+-- 09.07.07
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment') and name='ParentCommentID'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment ADD  
+[ParentCommentID] int  NULL,
+[Level] int  NULL,
+[ReportTimes] int  NULL,
+[IsDelete] bit  NULL,
+[IsLocked] bit  NULL,
+[UpdateDate] [datetime] NULL ,
+[SendEmailWhenReply] [bit] NULL
+
+GO
+
+
+-- 09.07.08
+
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment') and name='LikeNumber'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment ADD  
+[LikeNumber] int  NULL,
+[DisLikeNumber] int  NULL
+
+GO
+
+
+
+--  Table 4 File
+--  03.00.00
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleFile]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleFile]
+		(
+			[ArticleID] [int] NOT NULL,
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[URL] [nvarchar] (500) NULL,
+			[Title] [nvarchar] (150)  NULL 
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleFile] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleFile] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleFile] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleFile] ([ArticleID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleFile] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleFile_{objectQualifier}ZLDNN_DNNArticle] FOREIGN KEY ([ArticleID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle] ([ItemID]) ON DELETE CASCADE 
+	END
+GO
+
+-- 05.09.09
+
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleFile') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleFile') and name='ViewOrder'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleFile ADD  
+[ViewOrder] [int]  NULL,
+[ViewRoles] [nvarchar](200) NULL
+GO
+
+-- 09.04.01
+
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleFile') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleFile') and name='DownloadCount'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleFile ADD  
+[DownloadCount] [int]  NULL
+GO
+
+-- 09.04.03
+
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleFile') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleFile') and name='Size'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleFile ADD  
+[Size] [int]  NULL
+GO
+
+
+
+
+--  Table 5 Tag 
+--  04.00.01
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTag]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTag]
+		(
+			[ModuleID] [int] NOT NULL,
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[Tag] [nvarchar] (150)  NOT NULL 
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTag] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleTag] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleTag] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTag] ([ModuleID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTag] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleTag_{objectQualifier}Modules] FOREIGN KEY ([ModuleID]) REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID]) ON DELETE CASCADE 
+	END
+GO
+
+
+
+--  table 6 TagInArticle 
+--  04.00.01
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTagInArticle]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTagInArticle]
+		(
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[TagID] [int]  NOT NULL ,
+			[ArticleID] [int] NOT NULL
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTagInArticle] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleTagInArticle] PRIMARY KEY CLUSTERED  ([ItemID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTagInArticle] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleTagInArticle_{objectQualifier}ZLDNN_DNNArticleTag] FOREIGN KEY ([TagID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTag] ([ItemID])  ON DELETE NO ACTION 
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTagInArticle] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleTagInArticle_{objectQualifier}ZLDNN_DNNArticle] FOREIGN KEY ([ArticleID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle] ([ItemID]) ON DELETE CASCADE 
+
+	END
+GO
+
+
+
+
+--  table 7 ArticleAssignedCategories
+--  04.09.03
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleAssignedCategories]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleAssignedCategories]
+		(
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[CategoryID] [int]  NOT NULL ,
+			[ArticleID] [int] NOT NULL
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleAssignedCategories] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleAssignedCategories] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleAssignedCategories] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleAssignedCategories] ([ItemID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleAssignedCategories] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleAssignedCategories_{objectQualifier}ZLDNN_DNNArticleCategory] FOREIGN KEY ([CategoryID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleCategory] ([ItemID])  ON DELETE NO ACTION 
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleAssignedCategories] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleAssignedCategories_{objectQualifier}ZLDNN_DNNArticle] FOREIGN KEY ([ArticleID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle] ([ItemID]) ON DELETE CASCADE 
+
+	END
+GO
+
+
+
+
+
+--  table 8 ExtraField   
+-- 05.06.00
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_ExtraField]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_ExtraField]
+		(
+			[ItemID] [int] NOT NULL IDENTITY(0, 1),
+			[ModuleID] [int] NOT NULL,
+			[Content] [ntext] NULL,
+			[Type] [nvarchar](100)NULL,
+			[ViewOrder] [int] NULL
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_ExtraField] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_ExtraField] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_ExtraField] ON {databaseOwner}[{objectQualifier}ZLDNN_ExtraField] ([ModuleID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_ExtraField] WITH NOCHECK ADD
+		CONSTRAINT [FK_{objectQualifier}ZLDNN_ExtraField_{objectQualifier}Modules] FOREIGN KEY ([ModuleID]) REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID]) ON DELETE CASCADE 
+	END
+GO
+
+
+-- 09.08.06
+
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_ExtraField 
+alter column [Content] nvarchar(max)
+
+GO
+
+Update  {databaseOwner}{objectQualifier}ZLDNN_ExtraField Set [Content]=[Content]
+
+GO
+
+
+
+
+-- table 9 User Rating
+
+-- 06.00.00 
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleUserRating]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleUserRating]
+		(
+			[ArticleID] [int] NOT NULL,
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[UserID] [int] NOT NULL,
+			[Rating] [int] NOT  NULL 
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleUserRating] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleUserRating] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleUserRating] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleUserRating] ([ArticleID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleUserRating] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleUserRating_{objectQualifier}ZLDNN_DNNArticle] FOREIGN KEY ([ArticleID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle] ([ItemID]) ON DELETE CASCADE 
+	END
+GO
+
+
+
+--   table 10 Page  
+--   06.07.00 
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticlePage]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticlePage]
+		(
+			[ArticleID] [int] NOT NULL,
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[Content] [ntext] NULL,
+			[Page] [int] ,
+			[Title] [nvarchar] (200)  NULL
+
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticlePage] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticlePage] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticlePage] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticlePage] ([ArticleID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticlePage] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticlePage_{objectQualifier}ZLDNN_DNNArticle] FOREIGN KEY ([ArticleID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle] ([ItemID]) ON DELETE CASCADE 
+	END
+GO
+
+
+-- 09.08.06
+
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticlePage 
+alter column [Content]  nvarchar(max)
+
+GO
+
+Update  {databaseOwner}{objectQualifier}ZLDNN_DNNArticlePage Set [Content]=[Content]
+
+GO
+
+
+
+--   Table 11 TagCSS  
+--   07.03.00 
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTagCSS]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTagCSS]
+		(
+			[ModuleID] [int] NOT NULL,
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[MinNumber] [int] NULL,
+			[MaxNumber] [int] NULL,
+			[TagCSS] [nvarchar] (500)  NULL 
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTagCSS] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleTagCSS] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleTagCSS] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTagCSS] ([ModuleID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTagCSS] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleTagCSS_{objectQualifier}Modules] FOREIGN KEY ([ModuleID]) REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID]) ON DELETE CASCADE 
+	END
+GO
+
+
+
+
+
+--   table 12 Subscribe  
+--   07.08.09 
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleSubscribe]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleSubscribe]
+		(
+			[ModuleID] [int] NOT NULL,
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[UserID] [int] NOT NULL,
+			[CategoryID] [int] NOT NULL
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleSubscribe] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleSubscribe] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleSubscribe] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleSubscribe] ([ModuleID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleSubscribe] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleSubscribe_{objectQualifier}Modules] FOREIGN KEY ([ModuleID]) REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID]) ON DELETE CASCADE 
+	END
+GO
+
+
+
+
+--  table 13 Version 
+--  07.09.08 
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleVersion]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleVersion]
+		(
+			[ArticleID] [int] NOT NULL,
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[ArticleContent] [ntext]  NULL,
+			[VersionNumber] [int]  NULL,
+			[CreatedDate] [datetime]  NULL
+			
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleVersion] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleVersion] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleVersion] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleVersion] ([ArticleID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleVersion] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleVersion_{objectQualifier}ZLDNN_DNNArticle] FOREIGN KEY ([ArticleID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle] ([ItemID]) ON DELETE CASCADE 
+	END
+GO
+
+
+-- 09.08.06
+
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleVersion 
+alter column [ArticleContent] nvarchar(max)
+
+GO
+
+Update  {databaseOwner}{objectQualifier}ZLDNN_DNNArticleVersion Set [ArticleContent]=[ArticleContent]
+
+GO
+
+
+
+
+--   table 14 Language  
+--  07.09.09 
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLanguage]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLanguage]
+		(
+			[ArticleID] [int] NOT NULL,
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[Content] [ntext]  NULL,
+			[CreatedByUser] [int]  NULL,
+			[CreatedDate] [datetime]  NULL,
+			[Title] [nvarchar] (150)  NULL ,
+			[Description] [ntext]   NULL,
+			[Tags] [nvarchar] (200) NULL,
+			[SEOTitle] [nvarchar] (255)  NULL ,
+			[SEODescription] [nvarchar] (255)  NULL ,
+			[SEOTags] [nvarchar] (255) NULL,
+			[Language] [nvarchar] (255) NULL,
+			[PageNumber] [int] NULL
+
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLanguage] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleLanguage] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleLanguage] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLanguage] ([ArticleID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLanguage] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleLanguage_{objectQualifier}ZLDNN_DNNArticle] FOREIGN KEY ([ArticleID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle] ([ItemID]) ON DELETE CASCADE 
+	END
+GO
+
+
+
+
+
+--   table 15 Language Version  
+--   07.09.09 
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLanguageVersion]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLanguageVersion]
+		(
+			[LanguageArticleID] [int] NOT NULL,
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[ArticleContent] [ntext]  NULL,
+			[VersionNumber] [int]  NULL,
+			[CreatedDate] [datetime]  NULL
+			
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLanguageVersion] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleLanguageVersion] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleLanguageVersion] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLanguageVersion] ([LanguageArticleID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLanguageVersion] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleLanguageVersion_{objectQualifier}ZLDNN_DNNArticleLanguage] FOREIGN KEY ([LanguageArticleID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLanguage] ([ItemID]) ON DELETE CASCADE 
+	END
+GO
+
+
+-- 09.08.06
+
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleLanguageVersion 
+alter column [ArticleContent] nvarchar(max)
+
+GO
+
+Update  {databaseOwner}{objectQualifier}ZLDNN_DNNArticleLanguageVersion Set [ArticleContent]=[ArticleContent]
+
+GO
+
+
+
+
+--  Table 16 language page 
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLanguagePage]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLanguagePage]
+		(
+			[LanguageArticleID] [int] NOT NULL,
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[Content] [ntext] NULL,
+			[Page] [int] ,
+			[Title] [nvarchar] (200)  NULL
+
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLanguagePage] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleLanguagePage] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleLanguagePage] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLanguagePage] ([LanguageArticleID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLanguagePage] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleLanguagePage_{objectQualifier}ZLDNN_DNNArticleLanguage] FOREIGN KEY ([LanguageArticleID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLanguage] ([ItemID]) ON DELETE CASCADE 
+	END
+GO
+
+-- 09.08.06
+
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleLanguagePage 
+alter column [Content] nvarchar(max)
+
+GO
+
+Update  {databaseOwner}{objectQualifier}ZLDNN_DNNArticleLanguagePage Set [Content]=[Content]
+
+GO
+
+
+
+
+--  Table 17 Related Article  
+--  06.00.00 
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleRelate]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleRelate]
+		(
+			[ID] [int] NOT NULL IDENTITY(1, 1),
+			[ArticleID] [int] NOT NULL,
+			[RArticleID] [int] NOT NULL 
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleRelate] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleRelate] PRIMARY KEY CLUSTERED  ([ID])
+	END
+GO
+
+
+
+
+--   View 1 vw_ZLDNN_DNNArticle  
+--   09.07.00 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticle]') and OBJECTPROPERTY(id, N'IsView') = 1)
+	DROP VIEW {databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticle]
+GO
+
+
+CREATE VIEW {databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticle]
+AS
+select {objectQualifier}ZLDNN_DNNArticle.ModuleId,
+       {objectQualifier}ZLDNN_DNNArticle.ItemId,
+       {objectQualifier}ZLDNN_DNNArticle.Content,
+       {objectQualifier}ZLDNN_DNNArticle.CreatedByUser,
+       {objectQualifier}ZLDNN_DNNArticle.CreatedDate,
+       {objectQualifier}Users.UserName as CreatedByUserName,
+       {objectQualifier}Users.DisplayName as UserDisplayName,
+       {objectQualifier}Users.Email as UserEmail,
+       {objectQualifier}ZLDNN_DNNArticle.CategoryID,
+       {objectQualifier}ZLDNN_DNNArticleCategory.Title as CategoryName,
+       case when a.FileName is null then {objectQualifier}ZLDNN_DNNArticle.URL else a.Folder + a.FileName end as URL,
+	   {objectQualifier}ZLDNN_DNNArticle.Title,
+	   {objectQualifier}ZLDNN_DNNArticle.Description,
+	   {objectQualifier}ZLDNN_DNNArticle.ViewOrder,
+	   {objectQualifier}ZLDNN_DNNArticle.ViewRoles,
+	   Clicks,
+	   VoteTotal,
+	   VoteNumber,
+	   {objectQualifier}ZLDNN_DNNArticle.CommentNumber as CommentNumber2,
+	   case when com.comn is null then 0 else com.comn end as CommentNumber,
+	   ApprovedByUser,
+	   ApprovedDate,
+	   IsApproved,
+	   Tags,
+	   ExpireDate,
+       SEOTitle ,
+       SEODescription ,
+       SEOTags,
+       Featured,
+       case when b.FileName is null then {objectQualifier}ZLDNN_DNNArticle.ReleatedURL else b.Folder + b.FileName end as ReleatedURL,
+       ExtraFields,
+ CASE WHEN NOT VoteNumber IS NULL AND 
+      VoteNumber > 0 THEN VoteTotal / VoteNumber ELSE 0 END AS Rating,
+	  {objectQualifier}ZLDNN_DNNArticle.PublishDate,
+	   c.PortalID,
+        UpdateDate,
+        PageNumber,
+        RelatedEntryID,
+		RelatedEntryKey,
+		LastViewDate,
+		case when attach.filenumber is null then 0 else attach.filenumber end as FileNumber,
+		IsPublished,
+		AllowComment
+       
+from {objectQualifier}ZLDNN_DNNArticle
+left outer join {objectQualifier}Users on {objectQualifier}ZLDNN_DNNArticle.CreatedByUser = {objectQualifier}Users.UserId
+left outer join {objectQualifier}ZLDNN_DNNArticleCategory on {objectQualifier}ZLDNN_DNNArticle.CategoryID = {objectQualifier}ZLDNN_DNNArticleCategory.ItemID
+left outer join {objectQualifier}vw_ZLDNNFiles as a on {objectQualifier}ZLDNN_DNNArticle.URL = 'fileid=' + convert(varchar,a.FileID)
+left outer join {objectQualifier}vw_ZLDNNFiles as b on {objectQualifier}ZLDNN_DNNArticle.ReleatedURL = 'fileid=' + convert(varchar,b.FileID)
+left outer join {objectQualifier}Modules as c on {objectQualifier}ZLDNN_DNNArticle.ModuleID = c.ModuleID
+left outer join (select count(*) as comn ,DNNArticleID from {objectQualifier}ZLDNN_DNNArticleComment group by DNNArticleID) as com on {objectQualifier}ZLDNN_DNNArticle.ItemID=com.DNNArticleID
+left outer join (select count(*) as filenumber, ArticleId from {objectQualifier}ZLDNN_DNNArticleFile group by ArticleId) as attach on {objectQualifier}ZLDNN_DNNArticle.ItemID=attach.ArticleID
+where c.isdeleted=0
+GO
+
+
+
+--  View 2 vw_ZLDNN_DNNArticlePermission 
+--  09.07.00
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticlePermission]') and OBJECTPROPERTY(id, N'IsView') = 1)
+	DROP VIEW {databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticlePermission]
+GO
+
+
+CREATE VIEW {databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticlePermission]
+AS
+select {objectQualifier}ZLDNN_DNNArticle.ModuleId,
+       {objectQualifier}ZLDNN_DNNArticle.ItemId,
+       {objectQualifier}ZLDNN_DNNArticle.Content,
+       {objectQualifier}ZLDNN_DNNArticle.CreatedByUser,
+       {objectQualifier}ZLDNN_DNNArticle.CreatedDate,
+       {objectQualifier}Users.UserName as CreatedByUserName,
+       {objectQualifier}Users.DisplayName as UserDisplayName,
+       {objectQualifier}Users.Email as 'UserEmail',
+	    case when a.FileName is null then {objectQualifier}ZLDNN_DNNArticle.URL else a.Folder + a.FileName end as URL,
+	   {objectQualifier}ZLDNN_DNNArticle.Title,
+	   {objectQualifier}ZLDNN_DNNArticle.Description,
+	   {objectQualifier}ZLDNN_DNNArticle.ViewOrder,
+	   {objectQualifier}ZLDNN_DNNArticle.ViewRoles,
+	   Clicks,
+	   VoteTotal,
+	   VoteNumber,
+	   CommentNumber,
+	   ApprovedByUser,
+	   ApprovedDate,
+	   IsApproved,
+	   Tags,
+	   ExpireDate,
+       SEOTitle ,
+       SEODescription ,
+       SEOTags,
+       Featured,
+       case when b.FileName is null then {objectQualifier}ZLDNN_DNNArticle.ReleatedURL else b.Folder + b.FileName end as ReleatedURL,
+       ExtraFields,
+ CASE WHEN NOT VoteNumber IS NULL AND 
+      VoteNumber > 0 THEN VoteTotal / VoteNumber ELSE 0 END AS Rating,
+	  {objectQualifier}ZLDNN_DNNArticle.PublishDate	,
+	   {objectQualifier}ZLDNN_DNNArticleCategory.ViewRoles as CategoryViewRoles,
+       {objectQualifier}ZLDNN_DNNArticleCategory.ItemID as CategoryID,
+        {objectQualifier}ZLDNN_DNNArticleCategory.Title as CategoryName,
+        UpdateDate,
+        PageNumber,
+        RelatedEntryID ,
+		RelatedEntryKey,
+		LastViewDate,
+		case when attach.filenumber is null then 0 else attach.filenumber end as FileNumber,
+		IsPublished,
+		AllowComment
+        
+from {objectQualifier}ZLDNN_DNNArticleAssignedCategories
+left outer join {objectQualifier}ZLDNN_DNNArticleCategory  on  {objectQualifier}ZLDNN_DNNArticleCategory.ItemID ={objectQualifier}ZLDNN_DNNArticleAssignedCategories.CategoryID
+full outer join {objectQualifier}ZLDNN_DNNArticle on {objectQualifier}ZLDNN_DNNArticle.ItemID = {objectQualifier}ZLDNN_DNNArticleAssignedCategories.ArticleID
+left outer join {objectQualifier}Users on {objectQualifier}ZLDNN_DNNArticle.CreatedByUser = {objectQualifier}Users.UserId
+left outer join {objectQualifier}vw_ZLDNNFiles as a on {objectQualifier}ZLDNN_DNNArticle.URL = 'fileid=' + convert(varchar,a.FileID)
+left outer join {objectQualifier}vw_ZLDNNFiles as b on {objectQualifier}ZLDNN_DNNArticle.ReleatedURL = 'fileid=' + convert(varchar,b.FileID)
+left outer join {objectQualifier}Modules as c on {objectQualifier}ZLDNN_DNNArticle.ModuleID = c.ModuleID
+left outer join (select count(*) as comn ,DNNArticleID from {objectQualifier}ZLDNN_DNNArticleComment group by DNNArticleID) as com on {objectQualifier}ZLDNN_DNNArticle.ItemID=com.DNNArticleID
+left outer join (select count(*) as filenumber, ArticleId from {objectQualifier}ZLDNN_DNNArticleFile group by ArticleId) as attach on {objectQualifier}ZLDNN_DNNArticle.ItemID=attach.ArticleID
+where c.isdeleted=0
+
+
+GO
+
+
+--  Proc 1 Article 
+
+--  05.09.09 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticles]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticles
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetAllDNNArticles]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetAllDNNArticles
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticlesByCategoryID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticlesByCategoryID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetAllDNNArticlesByCategoryID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetAllDNNArticlesByCategoryID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetApprovedDNNArticlesByCategoryID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetApprovedDNNArticlesByCategoryID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetAllApprovedDNNArticlesByCategoryID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetAllApprovedDNNArticlesByCategoryID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetApprovedDNNArticles]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetApprovedDNNArticles
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetAllApprovedDNNArticles]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetAllApprovedDNNArticles
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleByTitle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleByTitle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticle
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleByTitle
+
+	@ModuleId int,
+	@Title nvarchar(2000)
+as
+
+ select  * from {databaseOwner}{objectQualifier}vw_ZLDNN_DNNArticle 
+ where moduleid=@ModuleID and title=@Title
+
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticle
+
+	@ModuleId       int,
+        @ItemId         int
+
+as
+
+delete
+from   {objectQualifier}ZLDNN_DNNArticle
+where  ModuleId = @ModuleId
+and    ItemId = @ItemId
+
+GO
+
+
+--  09.08.05
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticle
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticle
+
+	@ModuleId       int,
+	@Content        nvarchar (max),
+	@UserID         int,
+	@CreatedDate    datetime,
+	@CategoryID     int,
+	@URL            nvarchar (250),
+	@Title          nvarchar (2000)  ,
+	@Description    nvarchar (max),
+	@ViewOrder      int,
+	@ViewRoles      nvarchar(2000) ,
+	@Clicks         int ,
+	@VoteTotal      int ,
+	@VoteNumber     int ,
+	@CommentNumber  int ,
+	@ApprovedByUser int ,
+	@ApprovedDate   datetime ,
+	@IsApproved     bit,
+	@Tags           nvarchar (200),
+	@ExpireDate     datetime,
+    @SEOTitle       nvarchar (250),
+    @SEODescription nvarchar (250),
+    @SEOTags        nvarchar (250),
+    @Featured       bit,
+    @ReleatedURL    nvarchar (250),
+    @ExtraFields    nvarchar (max),
+    @PublishDate     datetime,
+    @UpdateDate     datetime,
+    @PageNumber     int,
+    @RelatedEntryID int,
+	@RelatedEntryKey nvarchar(500),
+	@LastViewDate datetime,
+	@IsPublished bit,
+	@AllowComment bit
+    
+
+as
+
+insert into {objectQualifier}ZLDNN_DNNArticle (
+	ModuleId,
+	Content,
+	CreatedByUser,
+	CreatedDate,
+	CategoryID,
+	URL,
+	Title,
+	Description,
+	ViewOrder,
+	ViewRoles,
+	Clicks,
+	VoteTotal,
+	VoteNumber,
+	CommentNumber,
+	ApprovedByUser,
+	ApprovedDate,
+	IsApproved,
+	Tags,
+	ExpireDate,
+       SEOTitle ,
+       SEODescription ,
+       SEOTags,
+       Featured,
+       ReleatedURL,
+       ExtraFields,
+       PublishDate,
+       UpdateDate,
+       PageNumber,
+       RelatedEntryID,
+	   RelatedEntryKey,
+	   LastViewDate,
+	   IsPublished,
+	AllowComment
+	
+) 
+values (
+	@ModuleId,
+	@Content,
+	@UserID,
+	GetDate() ,
+	@CategoryID,
+	@URL,
+	@Title,
+	@Description,
+	@ViewOrder,
+	@ViewRoles,
+	@Clicks,
+	@VoteTotal,
+	@VoteNumber,
+	@CommentNumber,
+	@ApprovedByUser,
+	@ApprovedDate,
+	@IsApproved,
+	@Tags,
+	@ExpireDate,
+    @SEOTitle ,
+    @SEODescription ,
+    @SEOTags,
+    @Featured,
+    @ReleatedURL,
+    @ExtraFields,
+    @PublishDate,
+    @UpdateDate,
+    @PageNumber,
+    @RelatedEntryID,
+	@RelatedEntryKey,
+	@LastViewDate,
+	@IsPublished,
+	@AllowComment
+	
+)
+
+select SCOPE_IDENTITY()
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticle
+
+	@ModuleId       int,
+    @ItemId         int,
+	@Content        nvarchar (max),
+	@UserID         int,
+	@CreatedDate    datetime,
+	@CategoryID     int,
+	@URL            nvarchar (250),
+	@Title          nvarchar (2000)  ,
+	@Description    nvarchar (max),
+	@ViewOrder      int,
+	@ViewRoles      nvarchar(2000) ,
+	@Clicks         int ,
+	@VoteTotal      int ,
+	@VoteNumber     int ,
+	@CommentNumber  int ,
+	@ApprovedByUser int ,
+	@ApprovedDate   datetime ,
+	@IsApproved     bit,
+	@Tags           nvarchar (200),
+	@ExpireDate     datetime,
+    @SEOTitle       nvarchar (250),
+    @SEODescription nvarchar (250),
+    @SEOTags        nvarchar (250),
+    @Featured       bit,
+    @ReleatedURL    nvarchar (250),
+    @ExtraFields    nvarchar (max),
+    @PublishDate    datetime,
+    @UpdateDate     datetime,
+    @PageNumber     int,
+    @RelatedEntryID int,
+	@RelatedEntryKey nvarchar(500),
+	@LastViewDate datetime,
+	@IsPublished bit,
+	@AllowComment bit
+
+
+as
+
+update {objectQualifier}ZLDNN_DNNArticle
+set    Content       = @Content,
+       CreatedByUser = @UserID,
+       
+       CategoryID   =@CategoryID,
+       URL     = @URL,
+       Title =@Title,
+       Description = @Description,
+       ViewOrder=@ViewOrder,
+       ViewRoles=@ViewRoles,
+       Clicks=@Clicks,
+       VoteTotal=@VoteTotal,
+       VoteNumber=@VoteNumber,
+       CommentNumber=@CommentNumber,
+       ApprovedByUser=@ApprovedByUser,
+       ApprovedDate=@ApprovedDate,
+       IsApproved=@IsApproved,
+       Tags=@Tags,
+       ExpireDate=@Expiredate,
+       SEOTitle=@SEOTitle,
+       SEODescription=@SEODescription,
+       SEOTags=@SEOTags,
+       Featured=@Featured,
+       ReleatedURL=@ReleatedURL,
+       ExtraFields=@ExtraFields,
+       PublishDate=@PublishDate,
+       UpdateDate=@UpdateDate,
+       PageNumber=@PageNumber,
+       RelatedEntryID=@RelatedEntryID,
+       RelatedEntryKey=@RelatedEntryKey,
+       LastViewDate=@LastViewDate,
+	   IsPublished=@IsPublished,
+	   AllowComment=@AllowComment
+       
+where  ModuleId = @ModuleId
+and    ItemId = @ItemId
+
+GO
+
+
+
+--  Proc 2 Categories 
+
+----------------08.03.09-------------
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryDelete
+GO
+
+--  CatalogDelete
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryDelete
+	@ItemID int
+AS
+
+DELETE FROM {objectQualifier}ZLDNN_DNNArticleCategory
+WHERE
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--  08.00.05
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryUpdate
+GO
+
+--    CatalogAdd
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryAdd
+	@ModuleID int,
+	@ImagePath nvarchar(255),
+	@Title nvarchar(150),
+	@Description nvarchar(255),
+	@ViewOrder int,
+	@CreatedDate datetime,
+	@CreatedByUser nvarchar(100),
+	@ParentID int,
+	@Level int,
+	@Moderator  nvarchar(100),
+	@IsAutoApprove bit,
+	@IsEmailNotification bit,
+	@EmailAddress nvarchar(255),
+	@ViewRoles nvarchar(2000),
+	@AddRoles nvarchar(2000),
+	@CategoryLink nvarchar(2000)
+AS
+
+INSERT INTO {objectQualifier}ZLDNN_DNNArticleCategory (
+	[ModuleID],
+	[ImagePath],
+	[Title],
+	[Description],
+	[ViewOrder],
+	[CreatedDate],
+	[CreatedByUser],
+	[ParentID],
+	[Level],
+	[Moderator],
+	[IsAutoApprove],
+	[IsEmailNotification],
+	[EmailAddress],
+	[ViewRoles],
+	[AddRoles],
+	[CategoryLink]
+) VALUES (
+	@ModuleID,
+	@ImagePath,
+	@Title,
+	@Description,
+	@ViewOrder,
+	@CreatedDate,
+	@CreatedByUser,
+	@ParentID,
+	@Level,
+	@Moderator,
+	@IsAutoApprove,
+	@IsEmailNotification,
+	@EmailAddress,
+	@ViewRoles,
+	@AddRoles,
+	@CategoryLink
+)
+
+select SCOPE_IDENTITY()
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--    CatalogUpdate
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryUpdate
+	@ItemID int, 
+	@ModuleID int, 
+	@ImagePath nvarchar(255), 
+	@Title nvarchar(150), 
+	@Description nvarchar(255), 
+	@ViewOrder int, 
+	@CreatedDate datetime, 
+	@CreatedByUser nvarchar(100) ,
+	@ParentID int,
+	@Level int,
+	@Moderator  nvarchar(100),
+	@IsAutoApprove bit,
+	@IsEmailNotification bit,
+	@EmailAddress nvarchar(255),
+	@ViewRoles nvarchar(2000),
+	@AddRoles nvarchar(2000),
+	@CategoryLink nvarchar(2000)
+AS
+
+UPDATE {objectQualifier}ZLDNN_DNNArticleCategory SET
+	[ModuleID] = @ModuleID,
+	[ImagePath] = @ImagePath,
+	[Title] = @Title,
+	[Description] = @Description,
+	[ViewOrder] = @ViewOrder,
+	[CreatedDate] = @CreatedDate,
+	[CreatedByUser] = @CreatedByUser,
+	[ParentID]=@ParentID,
+	[Level]=@Level,
+	[Moderator]=@Moderator,
+	[IsAutoApprove]=@IsAutoApprove,
+	[IsEmailNotification]=@IsEmailNotification,
+	[EmailAddress]=@EmailAddress,
+	[ViewRoles]=@ViewRoles,
+	[AddRoles]=@AddRoles,
+	[CategoryLink]=@CategoryLink
+	
+WHERE
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+-- 09.07.13
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryList') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryList
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetByModules') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetByModules
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetByParent') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetByParent
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleCategoriesByArticleID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleCategoriesByArticleID
+GO
+
+
+-- CategoryGet
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGet
+	@ItemID int
+	,@moduleId int 
+AS
+
+SELECT
+	c.*,
+	a.number,
+	d.subcategoriesnumber
+	
+FROM {objectQualifier}ZLDNN_DNNArticleCategory as c
+left outer join ( select categoryid, count(*) as number FROM {objectQualifier}ZLDNN_DNNArticleAssignedCategories group by CategoryID) as a on 
+c.ItemID=a.CategoryID
+left outer join ( select parentid, count(*) as subcategoriesnumber FROM {objectQualifier}ZLDNN_DNNArticleCategory group by parentid) as d on 
+c.ItemId=d.parentid
+WHERE
+	c.[ItemID] = @ItemID
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+-- CategoryList
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryList
+AS
+
+SELECT
+	c.*,
+	a.number,
+	d.subcategoriesnumber
+	
+FROM {objectQualifier}ZLDNN_DNNArticleCategory as c
+left outer join ( select categoryid, count(*) as number FROM {objectQualifier}ZLDNN_DNNArticleAssignedCategories group by CategoryID) as a on 
+c.ItemID=a.CategoryID
+left outer join ( select parentid, count(*) as subcategoriesnumber FROM {objectQualifier}ZLDNN_DNNArticleCategory group by parentid) as d on 
+c.ItemId=d.parentid
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+-- CategoryGetByModules
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetByModules
+	@ModuleID int,
+	@SortOrder nvarchar(200)
+AS
+
+SELECT
+	c.*,
+	a.number,
+	d.subcategoriesnumber
+	
+FROM {objectQualifier}ZLDNN_DNNArticleCategory as c
+left outer join ( select categoryid, count(*) as number FROM {objectQualifier}ZLDNN_DNNArticleAssignedCategories group by CategoryID) as a on 
+c.ItemID=a.CategoryID
+left outer join ( select parentid, count(*) as subcategoriesnumber FROM {objectQualifier}ZLDNN_DNNArticleCategory group by parentid) as d on 
+c.ItemId=d.parentid
+WHERE
+	[ModuleID]=@ModuleID
+	Order by [Level], 
+	CASE WHEN @SortOrder='VIEWORDER ASC' THEN [VIEWORDER] END ASC,
+  CASE WHEN @SortOrder='VIEWORDER DESC' THEN [VIEWORDER] END DESC,
+  CASE WHEN @SortOrder='TITLE DESC' THEN [TITLE] END DESC, 
+  CASE WHEN @SortOrder='TITLE ASC' THEN [TITLE] END ASC
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--   CatalogGetByParent
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetByParent
+@ModuleID int,
+@ParentID int,
+@SortOrder nvarchar(200)
+
+AS
+
+SELECT
+	c.*,
+	a.number,
+	d.subcategoriesnumber
+	
+FROM {objectQualifier}ZLDNN_DNNArticleCategory as c
+left outer join ( select categoryid, count(*) as number FROM {objectQualifier}ZLDNN_DNNArticleAssignedCategories group by CategoryID) as a on 
+c.ItemID=a.CategoryID
+left outer join ( select parentid, count(*) as subcategoriesnumber FROM {objectQualifier}ZLDNN_DNNArticleCategory  group by parentid) as d on 
+c.ItemId=d.parentid
+WHERE
+	[ModuleID]=@Moduleid
+	And
+	c.[ParentID]=@ParentID
+	Order by 
+	 CASE WHEN @SortOrder='VIEWORDER ASC' THEN [VIEWORDER] END ASC,
+  CASE WHEN @SortOrder='VIEWORDER DESC' THEN [VIEWORDER] END DESC,
+  CASE WHEN @SortOrder='TITLE DESC' THEN [TITLE] END DESC, 
+  CASE WHEN @SortOrder='TITLE ASC' THEN [TITLE] END ASC
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+-- CategoriesByArticleID
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleCategoriesByArticleID
+
+	@ArticleId int
+
+as
+
+select c.*,
+a1.number,
+d.subcategoriesnumber
+
+FROM {objectQualifier}ZLDNN_DNNArticleCategory as c
+left outer join {objectQualifier}ZLDNN_DNNArticleAssignedCategories as a on c.ItemID = a.CategoryID
+left outer join ( select categoryid, count(*) as number FROM {objectQualifier}ZLDNN_DNNArticleAssignedCategories group by CategoryID) as a1 on 
+c.ItemID=a1.CategoryID
+left outer join ( select parentid, count(*) as subcategoriesnumber FROM {objectQualifier}ZLDNN_DNNArticleCategory group by parentid) as d on 
+c.ItemId=d.parentid
+where  a.ArticleId = @ArticleId
+GO
+
+
+-- 08.06.06
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleMoveCategory') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleMoveCategory
+GO
+
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleMoveCategory
+	@FromCategory int,
+	@ToCategory int
+	
+AS
+
+Update {objectQualifier}ZLDNN_DNNArticleAssignedCategories
+Set CategoryID=@ToCategory where CategoryID= @FromCategory
+
+GO
+
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+-- ZLDNN_DNNArticleFirstLevelCategory
+-- 09.07.16
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleFirstLevelCategory') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleFirstLevelCategory
+GO
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleFirstLevelCategory
+@ModuleID int,
+@SortOrder nvarchar(200)
+
+AS
+
+SELECT
+	c.*,
+	a.number,
+	d.subcategoriesnumber
+	
+FROM {objectQualifier}ZLDNN_DNNArticleCategory as c
+left outer join ( select categoryid, count(*) as number FROM {objectQualifier}ZLDNN_DNNArticleAssignedCategories group by CategoryID) as a on 
+c.ItemID=a.CategoryID
+left outer join ( select parentid, count(*) as subcategoriesnumber FROM {objectQualifier}ZLDNN_DNNArticleCategory  group by parentid) as d on 
+c.ItemId=d.parentid
+WHERE
+	[ModuleID]=@Moduleid
+	And
+	c.[ParentID] is null
+	Order by 
+	 CASE WHEN @SortOrder='VIEWORDER ASC' THEN [VIEWORDER] END ASC,
+  CASE WHEN @SortOrder='VIEWORDER DESC' THEN [VIEWORDER] END DESC,
+  CASE WHEN @SortOrder='TITLE DESC' THEN [TITLE] END DESC, 
+  CASE WHEN @SortOrder='TITLE ASC' THEN [TITLE] END ASC
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+
+
+
+--  Proc 3 Comment
+
+-- 09.07.08
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByModuleID') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByModuleID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentList') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentList
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByDNNArticle') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByDNNArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentDelete
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByModuleIDUserID') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByModuleIDUserID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByModuleIDAuthorID') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByModuleIDAuthorID
+GO
+
+
+--   ZLDNN_DNNArticleCommentGetByModuleID
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByModuleID
+	@ModuleID int,
+	@OrderType int
+AS
+
+SELECT
+	
+            a.title as ArticleTitle,
+	b.*
+FROM {objectQualifier}ZLDNN_DNNArticleComment as b
+left outer join {objectQualifier}ZLDNN_DNNArticle as a on b.DNNArticleID = a.ItemID
+
+WHERE
+	a.ModuleID=@ModuleID
+	Order By  b.[CreatedDate]  DESC
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+
+
+
+--   DNNArticleCommentGet
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGet
+	@CommentID int
+	
+AS
+
+SELECT
+	
+	a.title as ArticleTitle,
+	b.*
+FROM {objectQualifier}ZLDNN_DNNArticleComment as b
+left outer join {objectQualifier}ZLDNN_DNNArticle as a on b.DNNArticleID = a.ItemID
+WHERE
+	b.[CommentID] = @CommentID
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--   DNNArticleCommentList
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentList
+AS
+
+
+SELECT
+	
+	a.title as ArticleTitle,
+	b.*
+FROM {objectQualifier}ZLDNN_DNNArticleComment as b
+left outer join {objectQualifier}ZLDNN_DNNArticle as a on b.DNNArticleID = a.ItemID
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--  DNNArticleCommentGetByDNNArticle
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByDNNArticle
+	@DNNArticleID int,
+	@OrderType int
+AS
+
+SELECT
+	
+	a.title as ArticleTitle,
+	b.*
+FROM {objectQualifier}ZLDNN_DNNArticleComment as b
+left outer join {objectQualifier}ZLDNN_DNNArticle as a on b.DNNArticleID = a.ItemID
+WHERE
+	b.[DNNArticleID]=@DNNArticleID
+	Order By 
+   b.[CreatedDate]  DESC
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--   DNNArticleCommentAdd
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentAdd
+	@DNNArticleID int,
+	@CreatedByUser nvarchar(100),
+	@CreatedDate datetime,
+	@Title nvarchar(100),
+	@Comment nvarchar(2000),
+	@Rating int,
+	@CreatedUserIP nvarchar(24),
+	@Hidden bit,
+	@CreatedByUserID int,
+	@Email nvarchar(200),
+	@Website nvarchar(200),
+	@ParentCommentID int  ,
+    @Level int  ,
+    @ReportTimes int  ,
+    @IsDelete bit  ,
+    @IsLocked bit  ,
+    @UpdateDate [datetime]  ,
+    @SendEmailWhenReply [bit] ,
+	@LikeNumber int,
+	@DisLikeNumber int
+AS
+
+INSERT INTO {objectQualifier}ZLDNN_DNNArticleComment (
+	[DNNArticleID],
+	[CreatedByUser],
+	[CreatedDate],
+	[Title],
+	[Comment],
+	[Rating],
+	[CreatedUserIP],
+	[Hidden],
+	[CreatedByUserID],
+	[Email],
+	[Website],
+	[ParentCommentID],
+	[Level],
+	[ReportTimes],
+	[IsDelete],
+	[IsLocked],
+	[UpdateDate],
+	[SendEmailWhenReply],
+	[LikeNumber],
+	[DisLikeNumber]
+) VALUES (
+	@DNNArticleID,
+	@CreatedByUser,
+	@CreatedDate,
+	@Title,
+	@Comment,
+	@Rating,
+	@CreatedUserIP,
+	@Hidden,
+	@CreatedByUserID,
+	@Email,
+	@Website,
+	@ParentCommentID  ,
+    @Level  ,
+    @ReportTimes  ,
+    @IsDelete  ,
+    @IsLocked  ,
+    @UpdateDate ,
+    @SendEmailWhenReply ,
+	@LikeNumber,
+	@DisLikeNumber
+)
+
+select SCOPE_IDENTITY()
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--   DNNArticleCommentUpdate
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentUpdate
+	@CommentID int, 
+	@DNNArticleID int, 
+	@CreatedByUser nvarchar(100), 
+	@CreatedDate datetime, 
+	@Title nvarchar(100), 
+	@Comment nvarchar(2000), 
+	@Rating int, 
+	@CreatedUserIP nvarchar(24) ,
+	@Hidden bit,
+	@CreatedByUserID int,
+	@Email nvarchar(200),
+	@Website nvarchar(200),
+	@ParentCommentID int  ,
+    @Level int  ,
+    @ReportTimes int  ,
+    @IsDelete bit  ,
+    @IsLocked bit  ,
+    @UpdateDate [datetime]  ,
+    @SendEmailWhenReply [bit] ,
+	@LikeNumber int,
+	@DisLikeNumber int
+AS
+
+UPDATE {objectQualifier}ZLDNN_DNNArticleComment SET
+	[DNNArticleID] = @DNNArticleID,
+	[CreatedByUser] = @CreatedByUser,
+	[CreatedDate] = @CreatedDate,
+	[Title] = @Title,
+	[Comment] = @Comment,
+	[Rating] = @Rating,
+	[CreatedUserIP] = @CreatedUserIP,
+	[Hidden]=@Hidden,
+	[CreatedByUserID]=@CreatedByUserID,
+	[Email]=@Email,
+	[Website]=@Website,
+	[ParentCommentID]=@ParentCommentID,
+	[Level]=@Level,
+	[ReportTimes]=@ReportTimes,
+	[IsDelete]=@IsDelete,
+	[IsLocked]=@IsLocked,
+	[UpdateDate]=@UpdateDate,
+	[SendEmailWhenReply]=@SendEmailWhenReply,
+	[LikeNumber]=@LikeNumber,
+	[DisLikeNumber]=@DisLikeNumber
+WHERE
+	[CommentID] = @CommentID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--   DNNArticleCommentDelete
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentDelete
+	@CommentID int
+AS
+
+DELETE FROM {objectQualifier}ZLDNN_DNNArticleComment
+WHERE
+	[CommentID] = @CommentID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+--   ZLDNN_DNNArticleCommentGetByModuleIDUserID
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByModuleIDUserID
+	@ModuleID int,
+	@UserID int
+AS
+
+SELECT
+	
+	a.title as ArticleTitle,
+	b.*
+FROM {objectQualifier}ZLDNN_DNNArticleComment as b
+left outer join {objectQualifier}ZLDNN_DNNArticle as a on b.DNNArticleID = a.ItemID
+
+WHERE
+	a.ModuleID=@ModuleID and b.CreatedByUserID=@UserID
+	Order By b.CreatedDate desc
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--   ZLDNN_DNNArticleCommentGetByModuleIDUserID
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByModuleIDAuthorID
+	@ModuleID int,
+	@AuthorID int
+AS
+
+SELECT
+	
+	a.title as ArticleTitle,
+	b.*
+FROM {objectQualifier}ZLDNN_DNNArticleComment as b
+left outer join {objectQualifier}ZLDNN_DNNArticle as a on b.DNNArticleID = a.ItemID
+
+WHERE
+	a.ModuleID=@ModuleID and a.CreatedByUser=@AuthorID
+	Order By b.CreatedDate desc
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+Update  {databaseOwner}{objectQualifier}ZLDNN_DNNArticleComment Set [Level]=0
+
+GO
+
+
+
+-- 09.07.09
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByParentId') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByParentId
+GO
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCommentGetByParentId
+	@ParentId int
+AS
+
+SELECT
+	
+	a.title as ArticleTitle,
+	b.*
+FROM {objectQualifier}ZLDNN_DNNArticleComment as b
+left outer join {objectQualifier}ZLDNN_DNNArticle as a on b.DNNArticleID = a.ItemID
+WHERE
+	b.[ParentCommentID]=@ParentId
+	Order By 
+   b.[CreatedDate]  DESC
+	
+GO
+
+
+--  Proc 4 File
+
+-- 05.09.09 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleFileByArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleFileByArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleFile]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleFile
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleFile]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleFile
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleFile]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleFile
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleFile]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleFile
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleFileByArticle
+
+	@ArticleId int
+	
+as
+
+select {objectQualifier}ZLDNN_DNNArticleFile.ArticleId,
+       {objectQualifier}ZLDNN_DNNArticleFile.ItemId,
+       	case when {objectQualifier}vw_ZLDNNFiles.FileName is null then {objectQualifier}ZLDNN_DNNArticleFile.URL else {objectQualifier}vw_ZLDNNFiles.Folder + {objectQualifier}vw_ZLDNNFiles.FileName end as URL,
+	   {objectQualifier}ZLDNN_DNNArticleFile.Title,
+	   {objectQualifier}ZLDNN_DNNArticleFile.ViewOrder,
+	   {objectQualifier}ZLDNN_DNNArticleFile.ViewRoles,
+	   {objectQualifier}ZLDNN_DNNArticleFile.DownloadCount,
+	   {objectQualifier}ZLDNN_DNNArticleFile.Size
+	          
+from {objectQualifier}ZLDNN_DNNArticleFile
+left outer join {objectQualifier}vw_ZLDNNFiles on {objectQualifier}ZLDNN_DNNArticleFile.URL = 'fileid=' + convert(varchar,{objectQualifier}vw_ZLDNNFiles.FileID)
+where  {objectQualifier}ZLDNN_DNNArticleFile.ArticleId = @ArticleId order by  {objectQualifier}ZLDNN_DNNArticleFile.ViewOrder
+
+
+
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleFile
+
+	@ItemID int
+	
+as
+
+select {objectQualifier}ZLDNN_DNNArticleFile.ArticleId,
+       {objectQualifier}ZLDNN_DNNArticleFile.ItemId,
+       	case when {objectQualifier}vw_ZLDNNFiles.FileName is null then {objectQualifier}ZLDNN_DNNArticleFile.URL else {objectQualifier}vw_ZLDNNFiles.Folder + {objectQualifier}vw_ZLDNNFiles.FileName end as URL,
+	   {objectQualifier}ZLDNN_DNNArticleFile.Title,
+	   {objectQualifier}ZLDNN_DNNArticleFile.ViewOrder,
+	   {objectQualifier}ZLDNN_DNNArticleFile.ViewRoles,
+	   {objectQualifier}ZLDNN_DNNArticleFile.DownloadCount,
+	   {objectQualifier}ZLDNN_DNNArticleFile.Size
+	          
+	          
+from {objectQualifier}ZLDNN_DNNArticleFile
+left outer join {objectQualifier}vw_ZLDNNFiles on {objectQualifier}ZLDNN_DNNArticleFile.URL = 'fileid=' + convert(varchar,{objectQualifier}vw_ZLDNNFiles.FileID)
+where  {objectQualifier}ZLDNN_DNNArticleFile.ItemID = @ItemID
+
+GO
+
+--   ZLDNN_AddDNNArticleFile
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleFile
+	@ArticleID int,
+	@URL nvarchar(500),
+	@Title nvarchar(150),
+	@ViewOrder int,
+	@ViewRoles nvarchar(200),
+	@DownloadCount int,
+	@Size int
+AS
+
+INSERT INTO {objectQualifier}ZLDNN_DNNArticleFile (
+	[ArticleID],
+	[URL],
+	[Title],
+	[ViewOrder],
+	[ViewRoles],
+	[DownloadCount],
+	[Size]
+) VALUES (
+	@ArticleID,
+	@URL,
+	@Title,
+	@ViewOrder,
+	@ViewRoles,
+	@DownloadCount,
+	@Size
+)
+
+select SCOPE_IDENTITY()
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--   ZLDNN_UpdateDNNArticleFile
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleFile
+	@ArticleID int,
+	@ItemID int,
+	@URL nvarchar(500),
+	@Title nvarchar(150),
+	@ViewOrder int,
+	@ViewRoles nvarchar(200),
+	@DownloadCount int,
+	@Size int
+AS
+
+UPDATE {objectQualifier}ZLDNN_DNNArticleFile SET
+	[ArticleID] = @ArticleID,
+		[URL] = @URL,
+	[Title] = @Title,
+	[ViewOrder]=@ViewOrder,
+	[ViewRoles]=@ViewRoles	,
+	[DownloadCount]=@DownloadCount,
+	[Size]=@Size
+WHERE
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--  ZLDNN_DeleteDNNArticleFile
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleFile
+	@ItemID int
+AS
+
+DELETE FROM {objectQualifier}ZLDNN_DNNArticleFile
+WHERE
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+
+
+ 
+
+--   Proc 5 Tag 
+
+--  04.09.02
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleTag]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleTag
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleTag]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleTag
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleTag
+
+	@ModuleId       int,
+    @ItemId         int,
+	@Tag        nvarchar (200)
+
+as
+
+update {objectQualifier}ZLDNN_DNNArticleTag
+set    Tag       = @Tag
+where  ModuleId = @ModuleId
+and    ItemId = @ItemId
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleTag
+
+	@ModuleId       int,
+        @ItemId         int
+
+as
+
+delete
+from   {objectQualifier}ZLDNN_DNNArticleTag
+where  ModuleId = @ModuleId
+and    ItemId = @ItemId
+
+GO
+
+
+
+-- 07.03.00
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTag]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTag
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTag
+
+	@ModuleId int,
+        @ItemId int
+
+as
+
+select ModuleId,
+       ItemId,
+       Tag
+       
+from {objectQualifier}ZLDNN_DNNArticleTag
+where  ModuleId = @ModuleId
+and ItemId = @ItemId
+GO
+
+
+
+-- 07.03.00
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagsNumberByArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagsNumberByArticle
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagsNumberByArticle
+
+	@ModuleId int,
+	@ArticleID int
+
+as
+
+
+
+select 
+       a.*
+from 
+(select 
+       {objectQualifier}ZLDNN_DNNArticleTag.ItemId as ItemID,
+       max ({objectQualifier}ZLDNN_DNNArticleTag.Tag) as Tag,
+       count({objectQualifier}ZLDNN_DNNArticleTag.ItemID) as Number
+from {objectQualifier}ZLDNN_DNNArticleTag 
+inner join {objectQualifier}ZLDNN_DNNArticleTagInArticle on {objectQualifier}ZLDNN_DNNArticleTag.ItemID ={objectQualifier}ZLDNN_DNNArticleTagInArticle.TagID
+group by {objectQualifier}ZLDNN_DNNArticleTag.ItemId) as a inner join {objectQualifier}ZLDNN_DNNArticleTagInArticle on a.ItemID ={objectQualifier}ZLDNN_DNNArticleTagInArticle.TagID
+
+where  {objectQualifier}ZLDNN_DNNArticleTagInArticle.ArticleID=@ArticleID
+
+GO
+
+
+
+
+--  07.06.00
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleTag]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleTag
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagsNumber]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagsNumber
+GO
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleTag
+
+	@ModuleId       int,
+	@Tag        nvarchar (200)
+	
+
+as
+
+insert into {objectQualifier}ZLDNN_DNNArticleTag (
+	ModuleId,
+	Tag
+) 
+values (
+	@ModuleId,
+	@Tag
+)
+
+select SCOPE_IDENTITY()
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagsNumber
+
+	@ModuleId int
+
+as
+
+select 
+       {objectQualifier}ZLDNN_DNNArticleTag.ItemId as ItemID,
+       max ({objectQualifier}ZLDNN_DNNArticleTag.Tag) as Tag,
+       count({objectQualifier}ZLDNN_DNNArticleTag.ItemID) as Number
+from {objectQualifier}ZLDNN_DNNArticleTag 
+inner join {objectQualifier}ZLDNN_DNNArticleTagInArticle on {objectQualifier}ZLDNN_DNNArticleTag.ItemID ={objectQualifier}ZLDNN_DNNArticleTagInArticle.TagID
+inner join {objectQualifier}ZLDNN_DNNArticle on {objectQualifier}ZLDNN_DNNArticle.ItemID ={objectQualifier}ZLDNN_DNNArticleTagInArticle.ArticleID
+where  {objectQualifier}ZLDNN_DNNArticleTag.ModuleId = @ModuleId and {objectQualifier}ZLDNN_DNNArticle.IsApproved=1
+group by {objectQualifier}ZLDNN_DNNArticleTag.ItemId
+GO
+
+
+
+-- 07.06.04 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagByName]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagByName
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagByName
+
+	@ModuleId int,
+        @Name nvarchar(150)
+
+as
+
+select ModuleId,
+       ItemId,
+       Tag
+       
+from {objectQualifier}ZLDNN_DNNArticleTag
+where  ModuleId = @ModuleId
+and Tag = @Name
+GO
+
+
+
+-- 08.08.14
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTags]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTags
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTags
+
+	@ModuleId int
+
+as
+
+select ModuleId,
+       ItemId,
+       Tag
+from {objectQualifier}ZLDNN_DNNArticleTag 
+
+where  ModuleId = @ModuleId
+order by ltrim(Tag)
+GO
+
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagsNumberMinNumberByCategory]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagsNumberMinNumberByCategory
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagsNumberMinNumberByCategory
+
+	@CategoryID int,
+	@minNumber int
+
+as
+
+select 
+       {objectQualifier}ZLDNN_DNNArticleTag.ItemId as ItemID,
+       max ({objectQualifier}ZLDNN_DNNArticleTag.Tag) as Tag,
+       count({objectQualifier}ZLDNN_DNNArticleTag.ItemID) as Number
+from {objectQualifier}ZLDNN_DNNArticleTag 
+inner join {objectQualifier}ZLDNN_DNNArticleTagInArticle on {objectQualifier}ZLDNN_DNNArticleTag.ItemID ={objectQualifier}ZLDNN_DNNArticleTagInArticle.TagID
+inner join {objectQualifier}ZLDNN_DNNArticle on {objectQualifier}ZLDNN_DNNArticle.ItemID ={objectQualifier}ZLDNN_DNNArticleTagInArticle.ArticleID
+left outer join {objectQualifier}ZLDNN_DNNArticleAssignedCategories on {objectQualifier}ZLDNN_DNNArticle.ItemID = {objectQualifier}ZLDNN_DNNArticleAssignedCategories.ArticleID
+where  {objectQualifier}ZLDNN_DNNArticleAssignedCategories.CategoryID = @CategoryID and {objectQualifier}ZLDNN_DNNArticle.IsApproved=1 
+group by {objectQualifier}ZLDNN_DNNArticleTag.ItemId
+having  count({objectQualifier}ZLDNN_DNNArticleTag.ItemID )>=@minNumber
+order by max ({objectQualifier}ZLDNN_DNNArticleTag.Tag)
+GO
+
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagsNumberMinNumber]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagsNumberMinNumber
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagsNumberMinNumber
+
+	@ModuleId int,
+	@minNumber int
+
+as
+
+select 
+       {objectQualifier}ZLDNN_DNNArticleTag.ItemId as ItemID,
+       max ({objectQualifier}ZLDNN_DNNArticleTag.Tag) as Tag,
+       count({objectQualifier}ZLDNN_DNNArticleTag.ItemID) as Number
+from {objectQualifier}ZLDNN_DNNArticleTag 
+inner join {objectQualifier}ZLDNN_DNNArticleTagInArticle on {objectQualifier}ZLDNN_DNNArticleTag.ItemID ={objectQualifier}ZLDNN_DNNArticleTagInArticle.TagID
+inner join {objectQualifier}ZLDNN_DNNArticle on {objectQualifier}ZLDNN_DNNArticle.ItemID ={objectQualifier}ZLDNN_DNNArticleTagInArticle.ArticleID
+where  {objectQualifier}ZLDNN_DNNArticleTag.ModuleId = @ModuleId and {objectQualifier}ZLDNN_DNNArticle.IsApproved=1 
+group by {objectQualifier}ZLDNN_DNNArticleTag.ItemId
+having  count({objectQualifier}ZLDNN_DNNArticleTag.ItemID )>=@minNumber
+order by max ({objectQualifier}ZLDNN_DNNArticleTag.Tag)
+GO
+
+
+
+
+
+
+--  Proc 6 Tag in article
+--  04.09.02
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagsByArticleID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagsByArticleID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagInArticleByTagID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagInArticleByTagID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleTagInArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleTagInArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleTagInArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleTagInArticle
+GO
+
+--  Create Stored Procedures 
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagsByArticleID
+
+	@ArticleId int
+
+as
+
+select {objectQualifier}ZLDNN_DNNArticleTag.ModuleId,
+       {objectQualifier}ZLDNN_DNNArticleTag.ItemId,
+       {objectQualifier}ZLDNN_DNNArticleTag.Tag
+from {objectQualifier}ZLDNN_DNNArticleTag 
+left outer join {objectQualifier}ZLDNN_DNNArticleTagInArticle as a on {objectQualifier}ZLDNN_DNNArticleTag.ItemID = a.TagID
+
+where  a.ArticleId = @ArticleId
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagInArticleByTagID
+
+	@ModuleId int,
+	@TagID int,
+	@OrderBy [nvarchar] (200),
+	@Approved bit
+
+as
+
+select {objectQualifier}ZLDNN_DNNArticle.ModuleId,
+       {objectQualifier}ZLDNN_DNNArticle.ItemId,
+       {objectQualifier}ZLDNN_DNNArticle.Content,
+       {objectQualifier}ZLDNN_DNNArticle.CreatedByUser,
+       {objectQualifier}ZLDNN_DNNArticle.CreatedDate,
+       {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName as CreatedByUserName,
+       {objectQualifier}ZLDNN_DNNArticle.CategoryID,
+       {objectQualifier}ZLDNN_DNNArticleCategory.Title as CategoryName,
+	   case when {objectQualifier}vw_ZLDNNFiles.FileName is null then {objectQualifier}ZLDNN_DNNArticle.URL else {objectQualifier}vw_ZLDNNFiles.Folder + {objectQualifier}vw_ZLDNNFiles.FileName end as URL,
+	   {objectQualifier}ZLDNN_DNNArticle.Title,
+	   {objectQualifier}ZLDNN_DNNArticle.Description,
+	   {objectQualifier}ZLDNN_DNNArticle.ViewOrder,
+	   {objectQualifier}ZLDNN_DNNArticle.ViewRoles,
+	   Clicks,
+	   VoteTotal,
+	   VoteNumber,
+	   CommentNumber,
+	   ApprovedByUser,
+	   ApprovedDate,
+	   IsApproved,
+	   Tags
+       
+from {objectQualifier}ZLDNN_DNNArticle
+left outer join {objectQualifier}Users on {objectQualifier}ZLDNN_DNNArticle.CreatedByUser = {objectQualifier}Users.UserId
+left outer join {objectQualifier}ZLDNN_DNNArticleCategory on {objectQualifier}ZLDNN_DNNArticle.CategoryID = {objectQualifier}ZLDNN_DNNArticleCategory.ItemID
+left outer join {objectQualifier}vw_ZLDNNFiles on {objectQualifier}ZLDNN_DNNArticle.URL = 'fileid=' + convert(varchar,{objectQualifier}vw_ZLDNNFiles.FileID)
+left outer join {objectQualifier}ZLDNN_DNNArticleTagInArticle on {objectQualifier}ZLDNN_DNNArticle.ItemID ={objectQualifier}ZLDNN_DNNArticleTagInArticle.ArticleID
+where  {objectQualifier}ZLDNN_DNNArticle.ModuleId = @ModuleId and {objectQualifier}ZLDNN_DNNArticle.IsApproved=@Approved and {objectQualifier}ZLDNN_DNNArticleTagInArticle.TagID=@TagID
+
+
+ORDER BY
+  CASE WHEN @OrderBy='VIEWORDER ASC' THEN {objectQualifier}ZLDNN_DNNArticle.[VIEWORDER] END ASC,
+  CASE WHEN @OrderBy='VIEWORDER DESC' THEN {objectQualifier}ZLDNN_DNNArticle.[VIEWORDER] END DESC,
+  CASE WHEN @OrderBy='TITLE DESC' THEN {objectQualifier}ZLDNN_DNNArticle.[TITLE] END DESC, 
+  CASE WHEN @OrderBy='TITLE ASC' THEN {objectQualifier}ZLDNN_DNNArticle.[TITLE] END ASC, 
+  CASE WHEN @OrderBy='CLICKS DESC' THEN [CLICKS] END DESC,
+  CASE WHEN @OrderBy='CLICKS ASC' THEN [CLICKS] END ASC,
+  CASE WHEN @OrderBy='CREATEDDATE DESC' THEN {objectQualifier}ZLDNN_DNNArticle.[CREATEDDATE] END DESC,
+  CASE WHEN @OrderBy='CREATEDDATE ASC' THEN {objectQualifier}ZLDNN_DNNArticle.[CREATEDDATE] END ASC,
+  CASE WHEN @OrderBy='COMMENTNUMBER DESC' THEN [COMMENTNUMBER] END DESC,
+  CASE WHEN @OrderBy='COMMENTNUMBER ASC' THEN [COMMENTNUMBER] END ASC,
+  CASE WHEN @OrderBy='' THEN {objectQualifier}ZLDNN_DNNArticle.[VIEWORDER] END ASC
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleTagInArticle
+
+	@TagID       int,
+	@ArticleID int
+
+as
+
+insert into {objectQualifier}ZLDNN_DNNArticleTagInArticle (
+	TagID,
+	ArticleID
+) 
+values (
+	@TagID,
+	@ArticleID
+)
+
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleTagInArticle
+
+	@TagID       int,
+        @ArticleID         int
+
+as
+
+delete
+from   {objectQualifier}ZLDNN_DNNArticleTagInArticle
+where  TagID = @TagID
+and    ArticleID = @ArticleID
+
+GO
+
+
+
+
+
+--  Proc 7 Article Assigned Categories
+--  04.09.03
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleCategories]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleCategories
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleCategories]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleCategories
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetArticleAssignedCategories]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetArticleAssignedCategories
+GO
+
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleCategories
+
+	@CategoryID       int,
+	@ArticleID int
+
+as
+
+insert into {objectQualifier}ZLDNN_DNNArticleAssignedCategories (
+	CategoryID,
+	ArticleID
+) 
+values (
+	@CategoryID,
+	@ArticleID
+)
+
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleCategories
+
+	@CategoryID       int,
+        @ArticleID         int
+
+as
+
+delete
+from   {objectQualifier}ZLDNN_DNNArticleAssignedCategories
+where  CategoryID = @CategoryID
+and    ArticleID = @ArticleID
+
+GO
+
+
+--  05.08.03
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetArticleAssignedCategories
+    @CategoryID int,
+	@ArticleId int
+
+as
+
+select ItemID,
+	   CategoryID,
+	   ArticleID
+	
+FROM {objectQualifier}ZLDNN_DNNArticleAssignedCategories
+where  CategoryID=@CategoryID and ArticleId = @ArticleId
+GO
+
+
+
+
+
+--  Proc 8 Extra Fields
+
+--  05.06.00
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_ExtraFieldGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_ExtraFieldList') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldList
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_ExtraFieldGetByModules') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldGetByModules
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_ExtraFieldAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_ExtraFieldUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_ExtraFieldDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldDelete
+GO
+
+
+--   ExtraFieldGet
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldGet
+	@ItemID int
+	,@moduleId int 
+AS
+
+SELECT
+	[ItemID],
+	[ModuleID],
+	[Content],
+	[Type],
+	[ViewOrder]
+FROM {objectQualifier}ZLDNN_ExtraField
+WHERE
+	[ItemID] = @ItemID
+	AND [moduleid]=@moduleId 
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--   ExtraFieldList 
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldList
+AS
+
+SELECT
+	[ItemID],
+	[ModuleID],
+	[Content],
+	[Type],
+	[ViewOrder]
+FROM {objectQualifier}ZLDNN_ExtraField
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--   ExtraFieldGetByModules
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldGetByModules
+	@ModuleID int
+AS
+
+SELECT
+	[ItemID],
+	[ModuleID],
+	[Content],
+	[Type],
+	[ViewOrder]
+FROM {objectQualifier}ZLDNN_ExtraField
+WHERE
+	[ModuleID]=@ModuleID
+ORDER BY [ViewOrder]
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+--  ExtraFieldDelete
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_ExtraFieldDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldDelete
+GO
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldDelete
+	@ItemID int
+AS
+
+DELETE FROM {objectQualifier}ZLDNN_DNNArticleExtraFieldValue
+WHERE 
+	[{objectQualifier}ZLDNN_DNNArticleExtraFieldValue].[ExtraFieldID] = @ItemID
+
+DELETE FROM {objectQualifier}ZLDNN_ExtraField
+WHERE
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+-- 09.08.06
+-- ExtraFieldAdd
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldAdd
+	@ModuleID int,
+	@Content  nvarchar(max),
+	@Type nvarchar(100),
+	@ViewOrder int
+AS
+
+INSERT INTO {objectQualifier}ZLDNN_ExtraField (
+	[ModuleID],
+	[Content],
+	[Type],
+	[ViewOrder]
+) VALUES (
+	@ModuleID,
+	@Content,
+	@Type,
+	@ViewOrder
+)
+
+select SCOPE_IDENTITY()
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+-- ExtraFieldUpdate
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_ExtraFieldUpdate
+	@ItemID int, 
+	@ModuleID int, 
+	@Content  nvarchar(max), 
+	@Type nvarchar(100), 
+	@ViewOrder int 
+AS
+
+UPDATE {objectQualifier}ZLDNN_ExtraField SET
+	[ModuleID] = @ModuleID,
+	[Content] = @Content,
+	[Type] = @Type,
+	[ViewOrder] = @ViewOrder
+WHERE
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+
+
+
+-- Proc 9 DNNArticleUserRating 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleUserRatingByArticleID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleUserRatingByArticleID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleUserRatingByUserID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleUserRatingByUserID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleUserRating]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleUserRating
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleUserRating]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleUserRating
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleUserRating]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleUserRating
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleUserRating]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleUserRating
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleUserRatingByArticleID
+
+	@ArticleId int
+	
+as
+
+select * from {objectQualifier}ZLDNN_DNNArticleUserRating
+where  ArticleId = @ArticleId
+
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleUserRatingByUserID
+
+	@UserID int
+	
+as
+
+select * from {objectQualifier}ZLDNN_DNNArticleUserRating
+where  UserId = @UserId
+
+
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleUserRating
+    @ArticleID int,
+	@UserID int
+	
+as
+
+select * from {objectQualifier}ZLDNN_DNNArticleUserRating
+where  UserId = @UserId and ArticleID=@ArticleID
+
+
+GO
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleUserRating
+	@ArticleID int,
+	@UserID int,
+	@Rating int
+
+AS
+
+INSERT INTO {objectQualifier}ZLDNN_DNNArticleUserRating (
+	[ArticleID],
+	[UserID],
+	[Rating]
+) VALUES (
+	@ArticleID,
+	@UserID,
+	@Rating
+)
+
+select SCOPE_IDENTITY()
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--   ZLDNN_UpdateDNNArticleUserRating
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleUserRating
+	@ArticleID int,
+	@ItemID int,
+	@UserID int,
+	@Rating int
+AS
+
+UPDATE {objectQualifier}ZLDNN_DNNArticleUserRating SET
+	[ArticleID] = @ArticleID,
+		[UserID] = @UserID,
+	[Rating] = @Rating	
+WHERE
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+-- ZLDNN_DeleteDNNArticleUserRating
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleUserRating
+	@ItemID int
+AS
+
+DELETE FROM {objectQualifier}ZLDNN_DNNArticleUserRating
+WHERE
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+
+
+
+
+
+--  Proc 10 Page
+--  06.07.00
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticlePageByArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticlePageByArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticlePage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticlePage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticlePageByNumber]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticlePageByNumber
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticlePage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticlePage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticlePage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticlePage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticlePage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticlePage
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticlePageByModule]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticlePageByModule
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticlePageByArticle
+
+	@ArticleId int
+	
+as
+
+select ArticleId,
+       ItemId,
+       Content, 
+  	   Page,
+  	   Title
+	          
+from {objectQualifier}ZLDNN_DNNArticlePage
+where  ArticleId = @ArticleId
+Order By Page
+
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticlePageByModule
+
+	@ModuleId int,
+	@UserID int
+	
+	
+as
+
+select p.ArticleId,
+       p.ItemId,
+       p.Content, 
+  	   p.Page,
+  	   p.Title
+	          
+from {objectQualifier}ZLDNN_DNNArticlePage p
+inner join {objectQualifier}ZLDNN_DNNArticle a on a.ItemID= p.ArticleID 
+where  a.ModuleID = @ModuleId and a.CreatedByUser=@UserID
+Order By a.CreatedDate desc, p.Page
+
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticlePage
+
+	@ItemID int
+	
+as
+
+select ArticleId,
+       ItemId,
+       Content, 
+  	   Page,
+  	   Title
+	          
+from {objectQualifier}ZLDNN_DNNArticlePage
+where  ItemID = @ItemID
+
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticlePageByNumber
+
+	@ArticleId int,
+	@Page int
+	
+as
+
+select ArticleId,
+       ItemId,
+       Content, 
+  	   Page,
+  	   Title
+	          
+from {objectQualifier}ZLDNN_DNNArticlePage
+where  ArticleId = @ArticleId and Page=@Page
+
+
+GO
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticlePage
+	@ItemID int
+AS
+
+DELETE FROM {objectQualifier}ZLDNN_DNNArticlePage
+WHERE
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+
+
+-- 09.08.06
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticlePage
+	@ArticleID int,
+	@Content  nvarchar(max),
+	@Page int,
+	@Title nvarchar (200)
+AS
+
+INSERT INTO {objectQualifier}ZLDNN_DNNArticlePage (
+	[ArticleID],
+	[Content],
+	[Page],
+	[Title]
+) VALUES (
+	@ArticleID,
+	@Content,
+	@Page,
+	@Title
+)
+
+select SCOPE_IDENTITY()
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticlePage
+	@ArticleID int,
+	@ItemID int,
+	@Content  nvarchar(max),
+	@Page int,
+	@Title nvarchar(200)
+AS
+
+UPDATE {objectQualifier}ZLDNN_DNNArticlePage SET
+	
+		[Content] = @Content,
+	[Page] = @Page	,
+	[Title]=@Title
+WHERE
+[ArticleID] = @ArticleID and 
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+
+--  Proc 11 TagCSS
+--  07.03.00
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagCSSs]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagCSSs
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTagCSS]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagCSS
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleTagCSS]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleTagCSS
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleTagCSS]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleTagCSS
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleTagCSS]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleTagCSS
+GO
+
+
+--  Create Stored Procedures
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagCSSs
+
+	@ModuleId int
+
+as
+
+select ModuleId,
+       ItemId,
+       MinNumber,
+       MaxNumber,       
+       TagCSS
+from {objectQualifier}ZLDNN_DNNArticleTagCSS 
+
+where  ModuleId = @ModuleId
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTagCSS
+
+	@ModuleId int,
+        @ItemId int
+
+as
+
+select ModuleId,
+       ItemId,
+       MinNumber,
+       MaxNumber,       
+       TagCSS
+       
+from {objectQualifier}ZLDNN_DNNArticleTagCSS
+where  ModuleId = @ModuleId
+and ItemId = @ItemId
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleTagCSS
+
+	@ModuleId       int,
+	@MinNumber int,
+	@MaxNumber int,
+	@TagCSS        nvarchar (200)
+	
+
+as
+
+insert into {objectQualifier}ZLDNN_DNNArticleTagCSS (
+	ModuleId,
+	MinNumber,
+	MaxNumber,
+	TagCSS
+) 
+values (
+	@ModuleId,
+	@MinNumber,
+	@MaxNumber,
+	@TagCSS
+)
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleTagCSS
+
+	@ModuleId       int,
+	@ItemID int,
+	@MinNumber int,
+	@MaxNumber int,
+	@TagCSS        nvarchar (200)
+
+as
+
+update {objectQualifier}ZLDNN_DNNArticleTagCSS
+set    TagCSS     = @TagCSS,
+		MinNumber=@MinNumber,
+		MaxNumber=@MaxNumber
+where  ModuleId = @ModuleId
+and    ItemId = @ItemId
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleTagCSS
+
+	@ModuleId       int,
+        @ItemId         int
+
+as
+
+delete
+from   {objectQualifier}ZLDNN_DNNArticleTagCSS
+where  ModuleId = @ModuleId
+and    ItemId = @ItemId
+
+GO
+
+--  Proc 12 Subscribe 
+--  07.08.09
+--  Drop Existing Stored Procedures 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleSubscribes]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleSubscribes
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleSubscribe]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleSubscribe
+GO
+	
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleSubscribeByUser]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleSubscribeByUser
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleSubscribe]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleSubscribe
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleSubscribe]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleSubscribe
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleSubscribeByModule]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleSubscribeByModule
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleSubscribes
+
+	@ModuleId int
+
+as
+
+select ModuleId,
+       ItemId,
+       UserID,
+       CategoryID
+from {objectQualifier}ZLDNN_DNNArticleSubscribe
+where  ModuleId = @ModuleId
+
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleSubscribeByUser
+
+	@ModuleId int,
+	@UserID int
+
+as
+
+select ModuleId,
+       ItemId,
+       UserID,
+       CategoryID
+from {objectQualifier}ZLDNN_DNNArticleSubscribe
+where  ModuleId = @ModuleId and UserID=@UserID
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleSubscribe
+@ModuleId int,
+	@UserID int,
+    @CategoryID int
+
+as
+
+select  ModuleId,
+       ItemId,
+       UserID,
+       CategoryID
+from {objectQualifier}ZLDNN_DNNArticleSubscribe
+where ModuleId=@ModuleId and  UserID = @UserID
+and CategoryID = @CategoryID
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleSubscribe
+
+	@ModuleId       int,
+	@UserID         int,
+	@CategoryID int
+
+as
+
+insert into {objectQualifier}ZLDNN_DNNArticleSubscribe (
+	ModuleId,
+	UserID,
+	CategoryID
+) 
+values (
+	@ModuleId,
+	@UserID,
+	@CategoryID
+)
+
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleSubscribe
+
+	@ModuleId       int,
+    @UserID         int,
+    @CategoryID int
+
+as
+
+delete
+from   {objectQualifier}ZLDNN_DNNArticleSubscribe
+where  ModuleId = @ModuleId
+and    UserID = @UserID and
+CategoryID =@CategoryID 
+
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleSubscribeByModule
+
+	@ModuleId       int
+
+as
+
+delete
+from   {objectQualifier}ZLDNN_DNNArticleSubscribe
+where  ModuleId = @ModuleId
+
+
+GO
+
+
+--  Proc 13 Version 
+--  07.09.08
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleVersions]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleVersions
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleVersion]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleVersion
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleVersion]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleVersion
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleVersion]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleVersion
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleVersion]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleVersion
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleVersions
+
+	@ArticleID int
+
+as
+
+select * from {objectQualifier}ZLDNN_DNNArticleVersion
+       
+where  {objectQualifier}ZLDNN_DNNArticleVersion.ArticleID = @ArticleID
+
+
+ORDER BY
+ CreatedDate desc
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleVersion
+
+	@Itemid int
+as
+
+select * from {objectQualifier}ZLDNN_DNNArticleVersion
+       
+where  {objectQualifier}ZLDNN_DNNArticleVersion.Itemid = @Itemid
+
+
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleVersion
+
+	@ArticleID       int,
+        @ItemId         int
+
+as
+
+delete
+from   {objectQualifier}ZLDNN_DNNArticleVersion
+where  ArticleID = @ArticleID
+and    ItemId = @ItemId
+
+GO
+
+
+-- 09.08.06
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleVersion
+
+	@ArticleID       int,
+	@ArticleContent         nvarchar(max),
+	@VersionNumber         int,
+	@CreatedDate    datetime
+
+as
+
+insert into {objectQualifier}ZLDNN_DNNArticleVersion (
+	ArticleID,
+	ArticleContent,
+	VersionNumber,
+	CreatedDate	
+) 
+values (
+	@ArticleID,
+	@ArticleContent,
+	@VersionNumber,
+	@CreatedDate	
+)
+select SCOPE_IDENTITY()
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleVersion
+
+	@ArticleID       int,
+    @ItemId         int,
+	@ArticleContent         nvarchar(max),
+	@VersionNumber         int,
+	@CreatedDate    datetime
+as
+
+update {objectQualifier}ZLDNN_DNNArticleVersion
+set    ArticleContent       = @ArticleContent,
+       VersionNumber = @VersionNumber,
+       CreatedDate   = @CreatedDate
+where  ArticleID = @ArticleID
+and    ItemId = @ItemId
+
+GO
+
+
+
+
+
+--  Proc 14 Language 
+--  07.09.09
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLanguages]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguages
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLanguage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleLanguage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleLanguage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleLanguage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleLanguage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleLanguage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleLanguage
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguages
+
+	@ArticleID int
+
+as
+
+select * from {objectQualifier}ZLDNN_DNNArticleLanguage
+       
+where  ArticleID = @ArticleID
+
+
+ORDER BY
+ Language
+ 
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguage
+
+	@ArticleID int,
+	@Language [nvarchar] (255)
+as
+
+select * from {objectQualifier}ZLDNN_DNNArticleLanguage
+       
+where  {objectQualifier}ZLDNN_DNNArticleLanguage.ArticleID = @ArticleID 
+and {objectQualifier}ZLDNN_DNNArticleLanguage.Language = @Language 
+
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleLanguage
+
+	@ArticleID [int],
+	@Content [ntext]  ,
+	@CreatedByUser [int]  ,
+	@CreatedDate [datetime]  ,
+	@Title [nvarchar] (150)   ,
+	@Description [ntext]   ,
+	@Tags [nvarchar] (200) ,
+	@SEOTitle [nvarchar] (255)   ,
+	@SEODescription [nvarchar] (255)   ,
+	@SEOTags [nvarchar] (255) ,
+	@Language [nvarchar] (255) ,
+	@PageNumber [int] 
+
+as
+
+insert into {objectQualifier}ZLDNN_DNNArticleLanguage (
+	ArticleID,
+    Content ,
+	CreatedByUser,
+	CreatedDate,
+	Title ,
+	Description,
+	Tags ,
+	SEOTitle,
+	SEODescription,
+	SEOTags,
+	Language,
+	PageNumber
+) 
+values (
+	@ArticleID,
+    @Content ,
+	@CreatedByUser,
+	@CreatedDate,
+	@Title ,
+	@Description,
+	@Tags ,
+	@SEOTitle,
+	@SEODescription,
+	@SEOTags,
+	@Language,
+	@PageNumber
+)
+select SCOPE_IDENTITY()
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleLanguage
+
+	@ArticleID [int],
+	@ItemID [int],
+	@Content [ntext],
+	@CreatedByUser [int],
+	@CreatedDate [datetime],
+	@Title [nvarchar] (150),
+	@Description [ntext] ,
+	@Tags [nvarchar] (200),
+	@SEOTitle [nvarchar] (255),
+	@SEODescription [nvarchar] (255),
+	@SEOTags [nvarchar] (255) ,
+	@Language [nvarchar] (255) ,
+	@PageNumber [int]
+
+
+as
+
+update {objectQualifier}ZLDNN_DNNArticleLanguage
+set    Content       = @Content,
+       CreatedByUser = @CreatedByUser,
+       CreatedDate   = @CreatedDate,
+       Title=@Title,
+       Description=@Description,
+       Tags=@Tags,
+       SEOTitle=@SEOTitle,
+       SEODescription=@SEODescription,
+       SEOTags=@SEOTags,
+       PageNumber=@PageNumber
+where  ArticleID = @ArticleID and language=@Language
+
+
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleLanguage
+
+	  @ItemId         int
+
+as
+
+delete
+from   {objectQualifier}ZLDNN_DNNArticleLanguage
+where  ItemId = @ItemId
+
+GO
+
+
+
+
+
+-- Proc 15 Language Version 
+-- 07.09.09
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLanguageVersions]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguageVersions
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLanguageVersion]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguageVersion
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleLanguageVersion]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleLanguageVersion
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleLanguageVersion]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleLanguageVersion
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleLanguageVersion]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleLanguageVersion
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguageVersions
+
+	@LanguageArticleID int
+
+as
+
+select * from {objectQualifier}ZLDNN_DNNArticleLanguageVersion
+       
+where  {objectQualifier}ZLDNN_DNNArticleLanguageVersion.LanguageArticleID = @LanguageArticleID
+
+
+ORDER BY
+ CreatedDate desc
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguageVersion
+
+	@Itemid int
+as
+
+select * from {objectQualifier}ZLDNN_DNNArticleLanguageVersion
+       
+where  {objectQualifier}ZLDNN_DNNArticleLanguageVersion.Itemid = @Itemid
+
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleLanguageVersion
+
+	@LanguageArticleID       int,
+        @ItemId         int
+
+as
+
+delete
+from   {objectQualifier}ZLDNN_DNNArticleLanguageVersion
+where  LanguageArticleID = @LanguageArticleID
+and    ItemId = @ItemId
+
+GO
+
+
+-- 09.08.06
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleLanguageVersion
+
+	@LanguageArticleID       int,
+	@ArticleContent         nvarchar(max),
+	@VersionNumber         int,
+	@CreatedDate    datetime
+
+as
+
+insert into {objectQualifier}ZLDNN_DNNArticleLanguageVersion (
+	LanguageArticleID,
+	ArticleContent,
+	VersionNumber,
+	CreatedDate	
+) 
+values (
+	@LanguageArticleID,
+	@ArticleContent,
+	@VersionNumber,
+	@CreatedDate	
+)
+select SCOPE_IDENTITY()
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleLanguageVersion
+
+	@LanguageArticleID       int,
+        @ItemId         int,
+	@ArticleContent         nvarchar(max),
+	@VersionNumber         int,
+	@CreatedDate    datetime
+
+
+as
+
+update {objectQualifier}ZLDNN_DNNArticleLanguageVersion
+set    ArticleContent       = @ArticleContent,
+       VersionNumber = @VersionNumber,
+       CreatedDate   = @CreatedDate
+where  LanguageArticleID = @LanguageArticleID
+and    ItemId = @ItemId
+
+GO
+
+
+
+
+-- Proc 16 Language Page
+-- 07.09.09
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLanguagePageByArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguagePageByArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLanguagePage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguagePage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLanguagePageByNumber]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguagePageByNumber
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleLanguagePage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleLanguagePage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleLanguagePage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleLanguagePage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleLanguagePage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleLanguagePage
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguagePageByArticle
+
+	@LanguageArticleID int
+	
+as
+
+select LanguageArticleID,
+       ItemId,
+       Content, 
+  	   Page,
+  	   Title
+	          
+from {objectQualifier}ZLDNN_DNNArticleLanguagePage
+where  LanguageArticleID = @LanguageArticleID
+Order By Page
+
+
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguagePage
+
+	@ItemID int
+	
+as
+
+select LanguageArticleId,
+       ItemId,
+       Content, 
+  	   Page,
+  	   Title
+	          
+from {objectQualifier}ZLDNN_DNNArticleLanguagePage
+where  ItemID = @ItemID
+
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguagePageByNumber
+
+	@LanguageArticleId int,
+	@Page int
+	
+as
+
+select LanguageArticleId,
+       ItemId,
+       Content, 
+  	   Page,
+  	   Title
+	          
+from {objectQualifier}ZLDNN_DNNArticleLanguagePage
+where  LanguageArticleId = @LanguageArticleId and Page=@Page
+
+
+GO
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleLanguagePage
+	@ItemID int
+AS
+
+DELETE FROM {objectQualifier}ZLDNN_DNNArticleLanguagePage
+WHERE
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+
+
+-- 09.08.06
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleLanguagePage
+	@LanguageArticleId int,
+	@Content  nvarchar(max),
+	@Page int,
+	@Title nvarchar (200)
+AS
+
+INSERT INTO {objectQualifier}ZLDNN_DNNArticleLanguagePage (
+	[LanguageArticleId],
+	[Content],
+	[Page],
+	[Title]
+) VALUES (
+	@LanguageArticleId,
+	@Content,
+	@Page,
+	@Title
+)
+
+select SCOPE_IDENTITY()
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleLanguagePage
+	@LanguageArticleId int,
+	@ItemID int,
+	@Content  nvarchar(max),
+	@Page int,
+	@Title nvarchar(200)
+AS
+
+UPDATE {objectQualifier}ZLDNN_DNNArticleLanguagePage SET
+	
+		[Content] = @Content,
+	[Page] = @Page	,
+	[Title]=@Title
+WHERE
+[LanguageArticleId] = @LanguageArticleId and 
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+
+-- Proc 17 Related Article
+
+-- 06.00.00
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddRelatedDNNArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddRelatedDNNArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteRelatedDNNArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteRelatedDNNArticle
+GO
+
+
+
+--  ZLDNN_AddRelatedDNNArticle
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_AddRelatedDNNArticle
+	@ArticleID int,
+	@RArticleID int
+AS
+
+INSERT INTO {objectQualifier}ZLDNN_DNNArticleRelate (
+	[ArticleID],
+	[RArticleID]
+	
+) VALUES (
+	@ArticleID,
+	@RArticleID
+)
+
+GO
+
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+
+
+
+
+
+-- ZLDNN_DeleteRelatedDNNArticle
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DeleteRelatedDNNArticle
+	@ArticleID int,
+	@RArticleID int
+AS
+
+DELETE FROM {objectQualifier}ZLDNN_DNNArticleRelate
+WHERE
+	[ArticleID] = @ArticleID and [RArticleID]=@RArticleID
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+
+--  06.05.00
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetRelatedDNNArticleByArticleID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetRelatedDNNArticleByArticleID
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetRelatedDNNArticleByArticleID
+
+	@ArticleId int
+	
+as
+
+select *     
+from {objectQualifier}vw_ZLDNN_DNNArticle 
+inner join {objectQualifier}ZLDNN_DNNArticleRelate on {objectQualifier}vw_ZLDNN_DNNArticle.itemid={objectQualifier}ZLDNN_DNNArticleRelate.rarticleid
+where  {objectQualifier}ZLDNN_DNNArticleRelate.ArticleId = @ArticleId 
+order by title
+
+
+GO
+
+
+
+-- Table 18 DNNArticleCategoryLanguage
+
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguage') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguage (
+			[ItemID] [int] IDENTITY (1, 1)   NOT NULL ,
+			[CategoryID] [int] NOT NULL ,
+			[Title] [nvarchar] (150)  NULL ,
+			[Description] [nvarchar] (255)  NULL,
+			[Language] [nvarchar] (255) NULL
+		) 
+
+		ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguage ADD 
+			CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleCategoryLanguage] PRIMARY KEY  CLUSTERED 
+			(
+				[ItemID]
+			)   
+
+		ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguage ADD 
+			CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleCategory_{objectQualifier}ZLDNN_DNNArticleCategoryLanguage] FOREIGN KEY 
+			(
+				[CategoryID]
+			) REFERENCES {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory (
+				[ItemID]
+			) ON DELETE CASCADE 
+    END
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageGet
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageGetByLanguage') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageGetByLanguage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageGetByCategory') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageGetByCategory
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageDelete
+GO
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageAdd
+	@CategoryID int,
+	@Title nvarchar(150),
+	@Description nvarchar(255),
+	@Language nvarchar(255)
+AS
+
+INSERT INTO {objectQualifier}ZLDNN_DNNArticleCategoryLanguage (
+	[CategoryID],
+	[Title],
+	[Description],
+	[Language]
+) VALUES (
+	@CategoryID,
+	@Title,
+	@Description,
+	@Language
+)
+
+select SCOPE_IDENTITY()
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--  Update
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageUpdate
+	@ItemID int, 
+	@CategoryID int,
+	@Title nvarchar(150),
+	@Description nvarchar(255),
+	@Language nvarchar(255)
+AS
+
+UPDATE {objectQualifier}ZLDNN_DNNArticleCategoryLanguage SET
+	[CategoryID] = @CategoryID,
+	[Title] = @Title,
+	[Description] = @Description,
+	[Language] = @Language
+	
+WHERE
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+--  Get
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageGet
+	@ItemID int
+	
+AS
+
+SELECT
+	*
+FROM {objectQualifier}ZLDNN_DNNArticleCategoryLanguage
+WHERE
+	[ItemID] = @ItemID
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+--   GetByLanguage
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageGetByLanguage
+	@CategoryID int,
+	@Language nvarchar(255)
+	
+AS
+
+SELECT
+	*
+FROM {objectQualifier}ZLDNN_DNNArticleCategoryLanguage
+WHERE
+	[CategoryID] = @CategoryID and [Language]=@Language
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+--   GetByCategory
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageGetByCategory
+	@CategoryID int
+	
+AS
+
+SELECT
+	*
+FROM {objectQualifier}ZLDNN_DNNArticleCategoryLanguage
+WHERE
+	[CategoryID] = @CategoryID 
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--   Delete
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryLanguageDelete
+	@ItemID int
+	
+AS
+
+Delete
+FROM {objectQualifier}ZLDNN_DNNArticleCategoryLanguage
+WHERE
+	[ItemID] = @ItemID
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+
+
+--  other 
+
+
+--  07.08.05 - SQL 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQL') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQL
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQLDate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQLDate
+GO
+
+--  ZLDNN_GetDNNArticleBySQL
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQL
+	@SqlStatment  nvarchar(4000)
+	
+AS
+
+exec sp_executesql @SqlStatment
+
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--  -ZLDNN_GetDNNArticleBySQLDate
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQLDate
+	@SqlStatment  nvarchar(4000),
+	@bt datetime, 
+	@et datetime
+AS
+
+declare @ParmDefinition  nvarchar(4000)
+set @ParmDefinition = '@BeginDate DateTime, @EndDate DateTime'
+
+EXECUTE sp_executesql   @SqlStatment ,@ParmDefinition, @BeginDate=@bt,@EndDate=@et
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+
+
+--  fix the issue of Artice View 
+--  07.08.09 
+
+
+update {databaseOwner}{objectQualifier}ModuleDefinitions set FriendlyName='DNNArticle - Article View' where FriendlyName='DNNArticle - Artice View'
+
+GO
+
+
+update {databaseOwner}{objectQualifier}DeskTopModules set FriendlyName='DNNArticle - Article View', ModuleName='DNNArticle - Article View' where FriendlyName='DNNArticle - Artice View'
+
+GO
+
+
+
+Update {databaseOwner}{objectQualifier}ModuleControls
+Set ControlSrc='DesktopModules/DNNArticle/Category.ascx' where ControlSrc='DesktopModules/ArticleCategory/ViewArticleCategory.ascx'
+
+GO
+
+Update {databaseOwner}{objectQualifier}ModuleControls
+Set ControlSrc='DesktopModules/DNNArticle/CategorySettings.ascx' where ControlSrc='DesktopModules/ArticleCategory/Settings.ascx'
+
+GO
+
+
+
+
+-- DNNUserArticle 07.08.06
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNUserArticleCountByModuleAndUser]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNUserArticleCountByModuleAndUser
+GO
+ 
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNUserArticleCountByModule]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNUserArticleCountByModule
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNUserArticleCountByModuleAndUser
+
+	@ModuleId int,
+	@RequestUserID int
+
+as
+
+select 
+   DATEPART(yy,publishdate) as year ,
+   DATEPART(mm, publishdate) as month, 
+   count(*) as articlecount 
+   from  {databaseOwner}{objectQualifier}vw_ZLDNN_DNNArticle 
+   where moduleid=@ModuleID and createdbyuser=@RequestUserID and isapproved=1 
+    group by DATEPART(yy, publishdate) ,DATEPART(mm, publishdate) 
+    order by DATEPART(yy,publishdate) desc,DATEPART(mm, publishdate) desc
+
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNUserArticleCountByModule
+
+	@ModuleId int
+as
+
+  select max(CreatedByUserName) as username,max({objectQualifier}Users.displayname) as displayname, createdbyuser as userid, count(*) as articlecount 
+  from  {databaseOwner}{objectQualifier}vw_ZLDNN_DNNArticle
+  inner join {objectQualifier}Users on {objectQualifier}vw_ZLDNN_DNNArticle.CreatedByUser = {objectQualifier}Users.UserId
+   where moduleid=@ModuleID group by createdbyuser order by articlecount desc
+   
+   GO
+
+
+
+-- Table 19 ZLDNN_DNNArticle_TokenProvider
+-- 09.05.01
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticle_TokenProvider]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle_TokenProvider]
+		(
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[Name] [nvarchar] (1000) NULL,
+			[Key] [nvarchar] (1000) NULL,
+			[Value] [nvarchar] (1000) NULL,
+			[ProviderType] int NULL,
+			[Enabled] [bit]
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle_TokenProvider] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticle_TokenProvider] PRIMARY KEY CLUSTERED  ([ItemID])
+	END
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderDelete
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderGetAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderGetAll
+GO
+
+
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderAdd
+	@Name nvarchar(1000),
+	@Key nvarchar(1000),
+	@Value nvarchar(1000),
+	@ProviderType int,
+	@Enabled bit
+AS
+
+INSERT INTO {objectQualifier}ZLDNN_DNNArticle_TokenProvider (
+	[Name],
+	[Key],
+	[Value],
+	[ProviderType],
+	[Enabled]
+) VALUES (
+	@Name,
+	@Key,
+	@Value,
+	@ProviderType,
+	@Enabled
+)
+
+select SCOPE_IDENTITY()
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+--  Update
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderUpdate
+	@ItemID int, 
+	@Name nvarchar(1000),
+	@Key nvarchar(1000),
+	@Value nvarchar(1000),
+	@ProviderType int,
+	@Enabled bit
+AS
+
+UPDATE {objectQualifier}ZLDNN_DNNArticle_TokenProvider SET
+	[Name] = @Name,
+	[Key] = @Key,
+	[Value] = @Value,
+	[ProviderType] = @ProviderType,
+	[Enabled]=@Enabled
+	
+WHERE
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+--   Delete
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderDelete
+	@ItemID int
+	
+AS
+
+Delete
+FROM {objectQualifier}ZLDNN_DNNArticle_TokenProvider
+WHERE
+	[ItemID] = @ItemID
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--  Get
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderGet
+	@ItemID int
+	
+AS
+
+SELECT
+	*
+FROM {objectQualifier}ZLDNN_DNNArticle_TokenProvider
+WHERE
+	[ItemID] = @ItemID
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--  GetAll
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_TokenProviderGetAll
+	
+	
+AS
+
+SELECT
+	*
+FROM {objectQualifier}ZLDNN_DNNArticle_TokenProvider
+
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+
+
+
+
+
+-- Table 20 ZLDNN_DNNArticle_Editor
+-- 09.05.02
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticle_Editor]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle_Editor]
+		(
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[Name] [nvarchar] (1000) NULL,
+			[Enabled] [bit]
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle_Editor] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticle_Editor] PRIMARY KEY CLUSTERED  ([ItemID])
+	END
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorDelete
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorGetAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorGetAll
+GO
+
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorAdd
+	@Name nvarchar(1000),
+	@Enabled bit
+AS
+
+INSERT INTO {objectQualifier}ZLDNN_DNNArticle_Editor (
+	[Name],
+	[Enabled]
+) VALUES (
+	@Name,
+	@Enabled
+)
+
+select SCOPE_IDENTITY()
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+--  Update
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorUpdate
+	@ItemID int, 
+	@Name nvarchar(1000),
+	@Enabled bit
+AS
+
+UPDATE {objectQualifier}ZLDNN_DNNArticle_Editor SET
+	[Name] = @Name,
+	[Enabled]=@Enabled
+	
+WHERE
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+--   Delete
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorDelete
+	@ItemID int
+	
+AS
+
+Delete
+FROM {objectQualifier}ZLDNN_DNNArticle_Editor
+WHERE
+	[ItemID] = @ItemID
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--  Get
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorGet
+	@ItemID int
+	
+AS
+
+SELECT
+	*
+FROM {objectQualifier}ZLDNN_DNNArticle_Editor
+WHERE
+	[ItemID] = @ItemID
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--  GetAll
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle_EditorGetAll
+	
+	
+AS
+
+SELECT
+	*
+FROM {objectQualifier}ZLDNN_DNNArticle_Editor
+
+	
+GO
+
+
+
+-- Procedure:ZLDNN_GetDNNArticleBySQLDateAndCategories
+-- 09.07.12
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQLDateAndCategories') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQLDateAndCategories
+GO
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleBySQLDateAndCategories
+	@SqlStatment  nvarchar(4000),
+	@CategorySqlStatment  nvarchar(4000),
+	@bt datetime, 
+	@et datetime
+AS
+
+declare @ParmDefinition  nvarchar(4000)
+set @ParmDefinition = '@BeginDate DateTime, @EndDate DateTime'
+
+create table #TmpArticleId11
+(
+    ArticleId int 
+);
+
+create table #TmpArticleId
+(
+    ArticleId int,
+    catecount int   
+);
+
+
+
+EXECUTE sp_executesql   @CategorySqlStatment
+
+EXECUTE sp_executesql   @SqlStatment ,@ParmDefinition, @BeginDate=@bt,@EndDate=@et
+
+drop table #TmpArticleId11
+
+drop table #TmpArticleId
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+-- Table 21 ZLDNN_DNNArticleResource
+-- 09.07.07
+
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleResource]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleResource]
+		(
+			[ModuleID] [int] NOT NULL,
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[Subject] [nvarchar] (500)  NOT NULL, 
+			[Image] [nvarchar] (500)   NULL, 
+			[Link] [nvarchar] (500)   NULL 
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleResource] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleResource] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleResource] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleResource] ([ModuleID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleResource] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleResource_{objectQualifier}Modules] FOREIGN KEY ([ModuleID]) REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID]) ON DELETE CASCADE 
+	END
+GO
+
+
+
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleResourceInArticle]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleResourceInArticle]
+		(
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[ResourceID] [int]  NOT NULL ,
+			[ArticleID] [int] NOT NULL
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleResourceInArticle] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleResourceInArticle] PRIMARY KEY CLUSTERED  ([ItemID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleResourceInArticle] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleResourceInArticle_{objectQualifier}ZLDNN_DNNArticleResource] FOREIGN KEY ([ResourceID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleResource] ([ItemID])  ON DELETE NO ACTION 
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleResourceInArticle] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleResourceInArticle_{objectQualifier}ZLDNN_DNNArticle] FOREIGN KEY ([ArticleID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle] ([ItemID]) ON DELETE CASCADE 
+
+	END
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleResource]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleResource
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleResource]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleResource
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleResource]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleResource
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleResourceByModuleId]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleResourceByModuleId
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleResource]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleResource
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleResourceByArticleId]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleResourceByArticleId
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleRelatedResource]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleRelatedResource
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleRelatedResource]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleRelatedResource
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleResource
+
+	@ItemId         int,
+	@ModuleId       int,
+   	@Subject        nvarchar (500),
+	@Image        nvarchar (500),
+	@Link        nvarchar (500)
+
+as
+
+update {objectQualifier}ZLDNN_DNNArticleResource
+set    Subject       = @Subject,
+Image=@Image,
+Link=@Link
+where  ItemId = @ItemId
+
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleResource
+
+	@ItemId         int
+
+as
+
+delete
+from   {objectQualifier}ZLDNN_DNNArticleResource
+where  ItemId = @ItemId
+
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleResourceByModuleId
+
+	@ModuleId int
+
+as
+
+select *
+from {objectQualifier}ZLDNN_DNNArticleResource 
+
+where  ModuleId = @ModuleId
+order by Subject
+
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleResource
+
+	 @ItemId int
+
+as
+
+select *
+       
+from {objectQualifier}ZLDNN_DNNArticleResource
+where   ItemId = @ItemId
+
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleRelatedResource
+
+	@ItemId       int,
+	@ArticleId       int
+as
+
+insert into {objectQualifier}ZLDNN_DNNArticleResourceInArticle (
+	ResourceId,
+	ArticleId
+) 
+values (
+	@ItemId,
+	@ArticleId
+)
+
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleRelatedResource
+
+	@ItemId       int,
+	@ArticleId       int
+
+as
+
+delete
+from   {objectQualifier}ZLDNN_DNNArticleResourceInArticle
+where  ResourceId = @ItemId and ArticleId=@ArticleId
+
+GO
+
+
+-- 09.08.08
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleResource
+
+	@ModuleId       int,
+	@Subject        nvarchar (500),
+	@Image        nvarchar (500),
+	@Link        nvarchar (500)
+as
+
+insert into {objectQualifier}ZLDNN_DNNArticleResource (
+	ModuleId,
+	Subject,
+	Image,
+	Link
+) 
+values (
+	@ModuleId,
+	@Subject,
+	@Image,
+	@Link
+)
+
+select SCOPE_IDENTITY()
+
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleResourceByArticleId
+
+	@ArticleId int
+
+as
+
+select s.*, ra.ArticleId
+from {objectQualifier}ZLDNN_DNNArticleResource as s 
+inner join {objectQualifier}ZLDNN_DNNArticleResourceInArticle as ra on s.ItemID = ra.ResourceID
+
+where  ra.ArticleId = @ArticleId
+order by Subject
+
+GO
+
+
+
+
+-- Table 22 ZLDNN_DNNArticleAgree
+-- 09.07.07
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleAgree]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleAgree]
+		(
+			[ArticleId] [int] NOT NULL,
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[UserId] [int]  NOT NULL, 
+			[CreatedDate] [datetime]  NULL, 
+			[AgreeValue] [int]   NULL 
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleAgree] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleAgree] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleAgree] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleAgree] ([ArticleId])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleAgree] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleAgree_{objectQualifier}ZLDNN_DNNArticle] FOREIGN KEY ([ArticleId]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle] ([ItemId]) ON DELETE CASCADE 
+	END
+GO
+
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleAgree]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleAgree
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleAgree]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleAgree
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleAgree]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleAgree
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleAgreeListByArticleId]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleAgreeListByArticleId
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleAgree]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleAgree
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleAgreeByArticleId]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTotalAgreeByArticleId
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleAgreeByArticleId]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleAgreeByArticleId
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleDisAgreeByArticleId]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleDisAgreeByArticleId
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleAgree
+
+	@ArticleId       int,
+	@UserId        int,
+	@AgreeValue    int
+as
+
+insert into {objectQualifier}ZLDNN_DNNArticleAgree (
+	ArticleId,
+	UserId,
+	CreatedDate,
+	AgreeValue
+) 
+values (
+	@ArticleId,
+	@UserId,
+	getdate(),
+	@AgreeValue
+)
+
+select SCOPE_IDENTITY()
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleAgree
+
+	@ArticleId       int,
+	@UserId        int,
+	@AgreeValue    int
+
+as
+
+update {objectQualifier}ZLDNN_DNNArticleAgree
+set    AgreeValue       = @AgreeValue,
+CreatedDate=getdate()
+where  ArticleId = @ArticleId and UserId=@UserId
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleAgree
+
+	
+	@ArticleId       int,
+	@UserId        int
+
+as
+
+delete
+from   {objectQualifier}ZLDNN_DNNArticleAgree
+where  ArticleId = @ArticleId and UserId=@UserId
+
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleAgreeListByArticleId
+
+	@ArticleId int
+
+as
+
+select *
+from {objectQualifier}ZLDNN_DNNArticleAgree
+
+where  ArticleId = @ArticleId
+order by CreatedDate Desc
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTotalAgreeByArticleId
+
+	@ArticleId int
+
+as
+
+select sum(AgreeValue)
+from {objectQualifier}ZLDNN_DNNArticleAgree
+
+where  ArticleId = @ArticleId group by articleid
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleAgreeByArticleId
+
+	@ArticleId int
+
+as
+
+select count(*)
+from {objectQualifier}ZLDNN_DNNArticleAgree
+
+where  ArticleId = @ArticleId and AgreeValue=1 group by articleid
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleDisAgreeByArticleId
+
+	@ArticleId int
+
+as
+
+select count(*)
+from {objectQualifier}ZLDNN_DNNArticleAgree
+
+where  ArticleId = @ArticleId and AgreeValue=-1 group by articleid
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleAgree
+
+	 @ArticleId int,
+	 @UserId int
+
+as
+
+select *
+       
+from {objectQualifier}ZLDNN_DNNArticleAgree
+where   ArticleId = @ArticleId and UserId=@UserId
+GO
+
+
+
+-- 09.07.20
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleAgreeById]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleAgreeById
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleAgreeById]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleAgreeById
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleAgreeById]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleAgreeById
+GO
+
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleAgreeById
+
+	@ItemID int,
+	@ArticleId       int,
+	@UserId        int,
+	@AgreeValue    int
+
+as
+
+update {objectQualifier}ZLDNN_DNNArticleAgree
+set    AgreeValue       = @AgreeValue,
+CreatedDate=getdate()
+where  ItemID=@ItemID
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleAgreeById
+
+	
+	@ItemID int    
+
+as
+
+delete
+from   {objectQualifier}ZLDNN_DNNArticleAgree
+where  ItemID = @ItemID 
+
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleAgreeById
+
+	 @ItemId int
+
+as
+
+select *
+       
+from {objectQualifier}ZLDNN_DNNArticleAgree
+where   ItemId = @ItemId 
+GO
+
+
+
+-- Table 23 ZLDNN_DNNArticleExtraFieldValue
+-- 09.08.07
+   
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleExtraFieldValue]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+
+		create table {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValue (
+		   ID int                  not null IDENTITY(1, 1),
+		   DNNArticleID       int                  not null,
+		   ExtraFieldID           int                  not null,
+		   FieldValue                nvarchar(max)       null
+		)
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleExtraFieldValue] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleExtraFieldValue] PRIMARY KEY CLUSTERED  ([ID])
+    CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleExtraFieldValue] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleExtraFieldValue] ([DNNArticleID])
+
+	ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleExtraFieldValue] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleExtraFieldValue_{objectQualifier}ZLDNN_ExtraField] FOREIGN KEY ([ExtraFieldID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_ExtraField] ([ItemID])  ON DELETE NO ACTION 
+	ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleExtraFieldValue] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleExtraFieldValue_{objectQualifier}ZLDNN_DNNArticle] FOREIGN KEY ([DNNArticleID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle] ([ItemID]) ON DELETE CASCADE 
+
+		
+	END
+GO
+
+
+/* =====================================================================================
+/   TABLE: ZLDNN_BusinessProperty
+/  ===================================================================================== */
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueGetByDNNArticleId') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueGetByDNNArticleId
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueDelete
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueGetByModuleId') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueGetByModuleId
+GO
+
+/* -------------------------------------------------------------------------------------
+/   ZLDNN_DNNArticleExtraFieldValueGet
+/  ------------------------------------------------------------------------------------- */
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueGet
+	@ExtraFieldID int,
+	@DNNArticleId int
+	
+AS
+
+SELECT
+	a.[ExtraFieldID],
+	a.[DNNArticleId],
+	a.[FieldValue],
+	b.[ItemID],
+	b.[ModuleID],
+	b.[Content] as FieldContent,
+	b.[Type],
+	b.[ViewOrder]
+	
+FROM [{objectQualifier}ZLDNN_DNNArticleExtraFieldValue] as a
+inner join [{objectQualifier}ZLDNN_ExtraField] as b on a.[ExtraFieldID] = b.[ItemId]
+
+WHERE
+	a.[ExtraFieldID] = @ExtraFieldID and a.[DNNArticleId]=@DNNArticleId
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+/* -------------------------------------------------------------------------------------
+/   ZLDNN_DNNArticleExtraFieldValueGetByDNNArticleId
+/  ------------------------------------------------------------------------------------- */
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueGetByDNNArticleId
+	@DNNArticleID int
+AS
+
+SELECT
+	a.[ExtraFieldID],
+	a.[DNNArticleId],
+	a.[FieldValue],
+	b.[ItemID],
+	b.[ModuleID],
+	b.[Content] as FieldContent,
+	b.[Type],
+	b.[ViewOrder]
+FROM [{objectQualifier}ZLDNN_DNNArticleExtraFieldValue] as a
+inner join [{objectQualifier}ZLDNN_ExtraField] as b on a.[ExtraFieldID] = b.[ItemId]
+
+WHERE
+	a.[DNNArticleId]=@DNNArticleId
+ORDER BY b.[ViewOrder]
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+/* -------------------------------------------------------------------------------------
+/   ZLDNN_DNNArticleExtraFieldValueAdd
+/  ------------------------------------------------------------------------------------- */
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueAdd
+	@DNNArticleID int
+	,@ExtraFieldID int
+	,@FieldValue nvarchar(max)
+AS
+DECLARE @myERROR int -- Local @@ERROR
+       , @myRowCount int -- Local @@ROWCOUNT
+
+INSERT INTO {objectQualifier}ZLDNN_DNNArticleExtraFieldValue (
+	[DNNArticleID]
+		,[ExtraFieldID]
+		,[FieldValue]
+	
+) VALUES (
+	@DNNArticleID
+		,@ExtraFieldID
+		,@FieldValue
+	
+)
+
+select SCOPE_IDENTITY()
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+/* -------------------------------------------------------------------------------------
+/   ZLDNN_DNNArticleExtraFieldValueUpdate
+/  ------------------------------------------------------------------------------------- */
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueUpdate
+	@ID int, 
+	@DNNArticleID int, 
+	@ExtraFieldID int, 
+	@FieldValue nvarchar(max) 
+
+AS
+DECLARE @myERROR int -- Local @@ERROR
+       , @myRowCount int -- Local @@ROWCOUNT
+
+UPDATE {objectQualifier}ZLDNN_DNNArticleExtraFieldValue SET
+	   [FieldValue] = @FieldValue
+WHERE
+    
+	[{objectQualifier}ZLDNN_DNNArticleExtraFieldValue].[DNNArticleID] = @DNNArticleID
+	and  [{objectQualifier}ZLDNN_DNNArticleExtraFieldValue].[ExtraFieldID] = @ExtraFieldID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+/* -------------------------------------------------------------------------------------
+/   ZLDNN_DNNArticleExtraFieldDelete
+/  ------------------------------------------------------------------------------------- */
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+	
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueDelete
+	
+	@ExtraFieldID int,
+	@DNNArticleID int
+    
+	AS
+DECLARE @myERROR int -- Local @@ERROR
+       , @myRowCount int -- Local @@ROWCOUNT
+
+DELETE FROM {objectQualifier}ZLDNN_DNNArticleExtraFieldValue
+WHERE 
+	[{objectQualifier}ZLDNN_DNNArticleExtraFieldValue].[DNNArticleID] = @DNNArticleID
+	AND [{objectQualifier}ZLDNN_DNNArticleExtraFieldValue].[ExtraFieldID] = @ExtraFieldID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+/* -------------------------------------------------------------------------------------
+/   ZLDNN_DNNArticleExtraFieldValueGetByModuleId
+/  ------------------------------------------------------------------------------------- */
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleExtraFieldValueGetByModuleId
+	@ModuleId int
+AS
+
+SELECT
+	a.[ExtraFieldID],
+	a.[DNNArticleId],
+	a.[FieldValue],
+	b.[ItemID],
+	b.[ModuleID],
+	b.[Content] as FieldContent,
+	b.[Type],
+	b.[ViewOrder]
+FROM [{objectQualifier}ZLDNN_DNNArticleExtraFieldValue] as a
+inner join [{objectQualifier}ZLDNN_ExtraField] as b on a.[ExtraFieldID] = b.[ItemId]
+
+WHERE
+	b.[ModuleId]=@ModuleId
+ORDER BY b.[ViewOrder]
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+-- Table 24 ZLDNN_DNNArticleLightboxContentPlugin
+-- 09.08.09
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin]
+		(
+			[ItemID]  [int] IDENTITY (1, 1)   NOT NULL ,
+			[ModuleID] [int] NOT NULL,
+			[CatalogID] [int]  NULL,
+			[MediaPath] [nvarchar] (1000) NOT NULL,
+			[ThumbnailPath] [nvarchar] (1000) NULL,
+			[Title] [nvarchar] (2000)  NULL ,
+			[Description] [ntext]   NULL,
+			[MediaDate] [datetime] NULL, 
+			[MediaType] [nvarchar] (30) NULL,
+			[MediaWidth] [int] NULL,
+			[MediaHeight] [int] NULL,
+			[ViewOrder] [int] NULL,
+			[ViewRoles] [varchar](200) NULL,
+			[Clicks] [int] NULL,
+			[VoteTotal] [int] NULL,
+			[VoteNumber] [int] NULL,
+			[CommentNumber] [int] NULL,
+			[CreatedByUser] [int] NULL,
+			[CreatedDate] [datetime] NULL,
+			[ApprovedByUser] [int] NULL,
+			[ApprovedDate] [datetime] NULL,
+			[IsApproved] [bit],
+			[EmbedResource] [nvarchar] (2000)  NULL ,
+			[Tags]  [nvarchar] (200)  NULL,
+			[Content] [ntext]   NULL,
+			[EntryId] [int] NOT NULL
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin] ([ModuleID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin_{objectQualifier}Modules] FOREIGN KEY ([ModuleID]) REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID]) ON DELETE CASCADE 
+	END
+GO
+
+
+
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin 
+alter column [Content]  nvarchar(max)
+
+GO
+
+
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin 
+alter column [Description]  nvarchar(max)
+
+GO
+
+
+Update  {databaseOwner}{objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin Set [Content]=[Content],[Description]=[Description]
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleLightboxContentPlugin]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleLightboxContentPlugin
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleLightboxContentPlugin]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleLightboxContentPlugin
+GO
+
+
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleLightboxContentPlugin
+
+	@ModuleID int,
+	@CatalogID int,
+	@MediaPath nvarchar(1000),
+	@ThumbnailPath nvarchar(1000),
+	@Title nvarchar(2000),
+	@Description  nvarchar(max),
+	@MediaDate datetime,
+	@MediaType nvarchar(30),
+	@MediaWidth int,
+	@MediaHeight int,
+	@ViewOrder int,
+	@ViewRoles varchar(200),
+	@Clicks int,
+	@VoteTotal int,
+	@VoteNumber int,
+	@CommentNumber int,
+	@CreatedByUser int,
+	@CreatedDate datetime,
+	@ApprovedByUser int,
+	@ApprovedDate datetime,
+	@IsApproved bit,
+	@EmbedResource nvarchar (2000),
+	@Tags nvarchar (200),
+	@Content  nvarchar(max),
+	@EntryID int
+AS
+
+INSERT INTO {objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin (
+	[ModuleID],
+	[CatalogID],
+	[MediaPath],
+	[ThumbnailPath],
+	[Title],
+	[Description],
+	[MediaDate],
+	[MediaType],
+    [MediaWidth],
+    [MediaHeight],
+	[ViewOrder],
+	[ViewRoles],
+	[Clicks],
+	[VoteTotal],
+	[VoteNumber],
+	[CommentNumber],
+	[CreatedByUser],
+	[CreatedDate],
+	[ApprovedByUser],
+	[ApprovedDate] ,
+	[IsApproved],
+	[EmbedResource],
+	[Tags],
+	[Content],
+	[EntryID]
+) VALUES (
+	@ModuleID,
+	@CatalogID,
+	@MediaPath,
+	@ThumbnailPath,
+	@Title,
+	@Description,
+	@MediaDate,
+	@MediaType,
+	@MediaWidth,
+	@MediaHeight,
+	@ViewOrder,
+	@ViewRoles,
+	@Clicks,
+	@VoteTotal,
+	@VoteNumber,
+	@CommentNumber,
+	@CreatedByUser,
+	@CreatedDate,
+	@ApprovedByUser,
+	@ApprovedDate,
+	@IsApproved,
+	@EmbedResource,
+	@Tags,
+	@Content,
+	@EntryID
+)
+
+select SCOPE_IDENTITY()
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleLightboxContentPlugin
+
+	@ItemID int, 
+	@ModuleID int, 
+	@CatalogID int, 
+	@MediaPath nvarchar(1000), 
+	@ThumbnailPath nvarchar(1000), 
+	@Title nvarchar(2000), 
+	@Description  nvarchar(max), 
+	@MediaDate datetime, 
+	@MediaType nvarchar(30), 
+	@MediaWidth int,
+	@MediaHeight int,
+	@ViewOrder int, 
+	@ViewRoles varchar(200), 
+	@Clicks int, 
+	@VoteTotal int, 
+	@VoteNumber int, 
+	@CommentNumber int, 
+	@CreatedByUser int, 
+	@CreatedDate datetime ,
+	@ApprovedByUser int,
+	@ApprovedDate datetime,
+	@IsApproved bit,
+	@EmbedResource nvarchar (2000),
+	@Tags nvarchar (200),
+	@Content  nvarchar(max),
+	@EntryID int
+AS
+
+UPDATE {objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin SET
+	[ModuleID] = @ModuleID,
+	[CatalogID] = @CatalogID,
+	[MediaPath] = @MediaPath,
+	[ThumbnailPath] = @ThumbnailPath,
+	[Title] = @Title,
+	[Description] = @Description,
+	[MediaDate] = @MediaDate,
+	[MediaType] = @MediaType,
+	[MediaWidth] = @MediaWidth,
+	[MediaHeight] = @MediaHeight,
+	[ViewOrder] = @ViewOrder,
+	[ViewRoles] = @ViewRoles,
+	[Clicks] = @Clicks,
+	[VoteTotal] = @VoteTotal,
+	[VoteNumber] = @VoteNumber,
+	[CommentNumber] = @CommentNumber,
+	[CreatedByUser] = @CreatedByUser,
+	[CreatedDate] = @CreatedDate,
+	[ApprovedByUser]=@ApprovedByUser,
+	[ApprovedDate]=@ApprovedDate ,
+	[IsApproved]=@IsApproved,
+	[EmbedResource]=@EmbedResource,
+	[Tags]=@Tags,
+	[Content]=@Content,
+	[EntryID]=@EntryID
+WHERE
+	[ItemID] = @ItemID
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+-- 09.08.10
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPlugins]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPlugins
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPluginsByEntryID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPluginsByEntryID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPluginsByEntryIDWithCatalog]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPluginsByEntryIDWithCatalog
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPlugin]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPlugin
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleLightboxContentPlugin]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleLightboxContentPlugin
+GO
+
+
+/** Create Stored Procedures **/
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPlugins
+
+	@ModuleId int
+
+as
+
+select *
+from {objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin
+where  ModuleId = @ModuleId
+order by [ViewOrder]
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPluginsByEntryID
+
+	@EntryID int
+
+as
+
+select *
+from {objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin
+where  EntryID = @EntryID
+order by [ViewOrder]
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPluginsByEntryIDWithCatalog
+
+	
+	@CatalogID int,
+	@EntryID int
+
+as
+
+select *
+from {objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin
+where  EntryID = @EntryID and CatalogID=@CatalogID 
+order by [ViewOrder]
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLightboxContentPlugin
+
+
+        @ItemId int
+
+as
+
+select *
+from {objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin
+where   ItemId = @ItemId
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleLightboxContentPlugin
+
+	        @ItemId         int
+
+as
+
+delete
+from   {objectQualifier}ZLDNN_DNNArticleLightboxContentPlugin
+where   ItemId = @ItemId
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleTag]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTag
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleTag
+
+	@ModuleId int,
+        @ItemId int
+
+as
+
+select ModuleId,
+       ItemId,
+       Tag
+       
+from {objectQualifier}ZLDNN_DNNArticleTag
+where  ItemId = @ItemId
+GO

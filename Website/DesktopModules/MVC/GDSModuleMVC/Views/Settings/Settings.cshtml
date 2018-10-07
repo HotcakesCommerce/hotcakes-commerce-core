@@ -1,0 +1,38 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<Moslem.Modules.GDS.GDSModuleMVC.Models.Settings>
+
+@using DotNetNuke.Web.Mvc.Helpers
+
+<h2 id="dnnSitePanel-BasicSettings" class="dnnFormSectionHead"><a href="" class="dnnSectionExpanded">@Dnn.LocalizeString("BasicSettings")</a></h2>
+<fieldset>
+    <div class="dnnFormItem">
+        <div class="dnnLabel" style="position: relative;">
+            @Html.LabelFor(m => Model.Username, new { @class = "col-md-2 control-label" })
+        </div>
+        @Html.TextBoxFor(m => Model.Username)
+    </div>
+    <div class="dnnFormItem">
+        <div class="dnnLabel" style="position: relative;">
+            @Html.LabelFor(m => Model.Password, new { @class = "col-md-2 control-label" })
+        </div>
+        @Html.TextBoxFor(m => Model.Password)
+    </div>
+    <div class="dnnFormItem">
+        <div class="dnnLabel" style="position: relative;">
+            @Html.LabelFor(m => Model.ApiKey, new { @class = "col-md-2 control-label" })
+        </div>
+        @Html.TextBoxFor(m => Model.ApiKey)
+    </div>
+    <div class="dnnFormItem">
+        <div class="dnnLabel" style="position: relative;">
+            @Html.LabelFor(m => Model.SessionID, new { @class = "col-md-2 control-label" })
+        </div>
+        @Html.TextBoxFor(m => Model.SessionID)
+    </div>
+    <div class="dnnFormItem">
+        <div class="dnnLabel" style="position: relative;">
+            @Html.LabelFor(m => Model.WCURL, new { @class = "col-md-2 control-label" })
+        </div>
+        @Html.TextBoxFor(m => Model.WCURL)
+    </div>
+</fieldset>
+

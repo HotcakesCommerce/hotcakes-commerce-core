@@ -1,0 +1,1161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="nav_Security.Text" xml:space="preserve">
+    <value>امنیت</value>
+  </data>
+  <data name="cmdAdd.Text" xml:space="preserve">
+    <value>افزودن فیلتر جدید</value>
+  </data>
+  <data name="cmdCancel.Text" xml:space="preserve">
+    <value>لغو ویرایش</value>
+  </data>
+  <data name="Delete.Text" xml:space="preserve">
+    <value>حذف فیلتر</value>
+  </data>
+  <data name="Edit.Text" xml:space="preserve">
+    <value>ویرایش فیلتر</value>
+  </data>
+  <data name="saveRule.Text" xml:space="preserve">
+    <value>بروز رسانی فیلتر</value>
+  </data>
+  <data name="Actions.Header" xml:space="preserve">
+    <value>عملیات</value>
+  </data>
+  <data name="IPFilter.Header" xml:space="preserve">
+    <value>فیلتر IP</value>
+  </data>
+  <data name="AllowIP.Text" xml:space="preserve">
+    <value>مجاز کردن IP</value>
+  </data>
+  <data name="DenyIP.Text" xml:space="preserve">
+    <value>محروم کردن IP</value>
+  </data>
+  <data name="CannotDelete.Text" xml:space="preserve">
+    <value>شما نمی‌توانید فیلتری که ممکن است آدرس IP کنونی را مسدود کند حذف کنید.</value>
+  </data>
+  <data name="TabLoginSettings.Text" xml:space="preserve">
+    <value>تنظیمات ورود</value>
+  </data>
+  <data name="TabMoreSecuritySettings.Text" xml:space="preserve">
+    <value>تنظیمات امنیتی بیشتر</value>
+  </data>
+  <data name="TabMore.Text" xml:space="preserve">
+    <value>بیشتر</value>
+  </data>
+  <data name="TabSecurityBulletins.Text" xml:space="preserve">
+    <value>بولتن امنیتی</value>
+  </data>
+  <data name="TabSecurityAnalyzer.Text" xml:space="preserve">
+    <value>بررسی امنیت</value>
+  </data>
+  <data name="TabSslSettings.Text" xml:space="preserve">
+    <value>تنظیمات SSL</value>
+  </data>
+  <data name="TabMemberAccounts.Text" xml:space="preserve">
+    <value>حساب کاربران</value>
+  </data>
+  <data name="TabBasicLoginSettings.Text" xml:space="preserve">
+    <value>تنظیمات پایه ورود</value>
+  </data>
+  <data name="TabMemberSettings.Text" xml:space="preserve">
+    <value>مدیریت اعضا</value>
+  </data>
+  <data name="TabRegistrationSettings.Text" xml:space="preserve">
+    <value>تنظیمات ثبت نام</value>
+  </data>
+  <data name="TabIpFilters.Text" xml:space="preserve">
+    <value>فیلتر IP ورود</value>
+  </data>
+  <data name="DefaultAuthProvider.Text" xml:space="preserve">
+    <value>سامانه احراز هویت پیش‌فرض</value>
+  </data>
+  <data name="DefaultAuthProvider.Help" xml:space="preserve">
+    <value>شما می‌توانید سامانه احراز هویت برای ورود کاربران را انتخاب کنید. تنها پروایدرهایی که از احراز هویت فرمی پشتیبانی کنند قابل انتخاب می‌باشند.</value>
+  </data>
+  <data name="plAdministrator.Text" xml:space="preserve">
+    <value>مدیر:</value>
+  </data>
+  <data name="plAdministrator.Help" xml:space="preserve">
+    <value>مدیر اصلی سایت که تمام ایمیل‌های آگاهساز از فعالیت‌های کاربر به ایشان ارسال خواهد شد.</value>
+  </data>
+  <data name="Redirect_AfterLogin.Help" xml:space="preserve">
+    <value>می‌توانید صفحه‌ای را انتخاب کنید تا کاربر پس از ورود به سایت به آن صفحه منتقل شود.</value>
+  </data>
+  <data name="Redirect_AfterLogin.Text" xml:space="preserve">
+    <value>انتقال به صفحه‌ای دیگر پس از ورود:</value>
+  </data>
+  <data name="Redirect_AfterLogout.Help" xml:space="preserve">
+    <value>می‌توانید صفحه ای را انتخاب کنید تا کاربر پس از خروج از سایت به آن صفحه منتقل شود.</value>
+  </data>
+  <data name="Redirect_AfterLogout.Text" xml:space="preserve">
+    <value>انتقال به صفحه‌ای دیگر پس از خروج:</value>
+  </data>
+  <data name="Security_RequireValidProfileAtLogin.Help" xml:space="preserve">
+    <value>اگر می‌خواهید کاربر ملزم به تکمیل اطلاعات الزامی پروفایل خود قبل از ورود به سایت شود، این گزینه را انتخاب کنید.</value>
+  </data>
+  <data name="Security_RequireValidProfileAtLogin.Text" xml:space="preserve">
+    <value>الزام پروفایل معتبر برای ورود به سایت:</value>
+  </data>
+  <data name="Security_CaptchaLogin.Help" xml:space="preserve">
+    <value>اگر می‌خواهید از کد امنیتی برای ورود به سایت در سیستم‌هایی نظیر OpenID, LiveID و CardSpace استفاده شود، این گزینه را انتخاب کنید.</value>
+  </data>
+  <data name="Security_CaptchaLogin.Text" xml:space="preserve">
+    <value>کد امنیتی در ورود به سایت:</value>
+  </data>
+  <data name="Security_CaptchaRetrivePassword.Help" xml:space="preserve">
+    <value>اگر می‌خواهید هنگام بازیابی کلمه‌عبور کد امنیتی نمایش‌داده شود این گزینه را انتخاب کنید.</value>
+  </data>
+  <data name="Security_CaptchaRetrivePassword.Text" xml:space="preserve">
+    <value>کد امنیتی در بازیابی کلمه‌عبور:</value>
+  </data>
+  <data name="Security_CaptchaChangePassword.Help" xml:space="preserve">
+    <value>جهت افزودن کد امنیتی هنگام تغییر کلمه‌عبور این گزینه را انتخاب کنید.</value>
+  </data>
+  <data name="Security_CaptchaChangePassword.Text" xml:space="preserve">
+    <value>کد امنیتی در تغییر کلمه‌عبور:</value>
+  </data>
+  <data name="plHideLoginControl.Help" xml:space="preserve">
+    <value>اگر می‌خواهید لینک ورود به سایت مخفی شود این گزینه را انتخاب نمایید.</value>
+  </data>
+  <data name="plHideLoginControl.Text" xml:space="preserve">
+    <value>مخفی‌سازی دکمه ورود:</value>
+  </data>
+  <data name="BasicLoginSettingsUpdateSuccess" xml:space="preserve">
+    <value>تنظیمات ورود بروز رسانی شد.</value>
+  </data>
+  <data name="BasicLoginSettingsError" xml:space="preserve">
+    <value>به روز رسانی تنظیمات ورود انجام نشد. لطفا بعدا تلاش کنید.</value>
+  </data>
+  <data name="Save.Text" xml:space="preserve">
+    <value>ذخیره</value>
+  </data>
+  <data name="Cancel.Text" xml:space="preserve">
+    <value>لغو</value>
+  </data>
+  <data name="FilterType.Header" xml:space="preserve">
+    <value>نوع فیلتر</value>
+  </data>
+  <data name="IpAddress.Header" xml:space="preserve">
+    <value>آدرس IP</value>
+  </data>
+  <data name="DeleteSuccess.Text" xml:space="preserve">
+    <value>فیلتر IP حذف شد.</value>
+  </data>
+  <data name="DeleteError.Text" xml:space="preserve">
+    <value>فیلتر IP حذف نشد!لطفا دوباره تلاش کنید</value>
+  </data>
+  <data name="IpFilterDeletedWarning.Text" xml:space="preserve">
+    <value>آیا این فیلتر IP حذف شود؟</value>
+  </data>
+  <data name="Yes.Text" xml:space="preserve">
+    <value>بله</value>
+  </data>
+  <data name="No.Text" xml:space="preserve">
+    <value>خیر</value>
+  </data>
+  <data name="plRuleSpecifity.Help" xml:space="preserve">
+    <value>افزودن فیلتر به یک IP یا محدوده ای از IP</value>
+  </data>
+  <data name="plRuleSpecifity.Text" xml:space="preserve">
+    <value>نوع فیلتر کردن IP</value>
+  </data>
+  <data name="plRuleType.Help" xml:space="preserve">
+    <value>مشخص می‌کند که این قانون دسترسی را مجاز یا غیرمجاز می‌کند</value>
+  </data>
+  <data name="plRuleType.Text" xml:space="preserve">
+    <value>نوع قانون</value>
+  </data>
+  <data name="SingleIP.Text" xml:space="preserve">
+    <value>یک IP</value>
+  </data>
+  <data name="IPRange.Text" xml:space="preserve">
+    <value>بازه IP</value>
+  </data>
+  <data name="plFirstIP.Text" xml:space="preserve">
+    <value>اولین IP</value>
+  </data>
+  <data name="plFirstIP.Help" xml:space="preserve">
+    <value>This will either be the single IP to filter, or else will be used with the subnet mask to calculate a range of IP addresses.</value>
+  </data>
+  <data name="plSubnet.Text" xml:space="preserve">
+    <value>ماسک</value>
+  </data>
+  <data name="plSubnet.Help" xml:space="preserve">
+    <value>subnet mask با اولین IP ترکیب شده تا بازه آدرس‌های IP قابل فیلتر را محاسبه کند.</value>
+  </data>
+  <data name="IpFilterUpdateSuccess.Text" xml:space="preserve">
+    <value>به روز رسانی فیلتر IP انجام شد.</value>
+  </data>
+  <data name="IpFilterUpdateError.Text" xml:space="preserve">
+    <value>به روز رسانی فیلتر IP انجام نشد!لطفا دوباره تکرار کنید.</value>
+  </data>
+  <data name="IPFiltersDisabled.Text" xml:space="preserve">
+    <value>فیلتر IP ورود در حال حاضر غیر فعال می باشد.از بخش حساب کاربران آن را فعال کنید.</value>
+  </data>
+  <data name="IPValidation.ErrorMessage" xml:space="preserve">
+    <value>لطفا از یک آدرس یا ماسک IP معتبر استفاده کنید</value>
+  </data>
+  <data name="LoginSettingsRestoreWarning.Text" xml:space="preserve">
+    <value>آیا ذخیره تنظیمات لغو شود؟</value>
+  </data>
+  <data name="SslSettingsRestoreWarning.Text" xml:space="preserve">
+    <value>آیا از لغو ذخیره تغییرات مطمئن هستید؟</value>
+  </data>
+  <data name="plResetLinkValidity.Text" xml:space="preserve">
+    <value>اعتبار لینک بازنشانی (دقیقه)</value>
+  </data>
+  <data name="plResetLinkValidity.Help" xml:space="preserve">
+    <value>مدت اعتبار لینک‌های بازنشانی کلمه‌عبور بر حسب دقیقه.</value>
+  </data>
+  <data name="plAdminResetLinkValidity.Text" xml:space="preserve">
+    <value>اعتبار لینک بازنشانی مدیر (دقیقه)</value>
+  </data>
+  <data name="plAdminResetLinkValidity.Help" xml:space="preserve">
+    <value>مدت اعتبار لینک بازنشانی کلمه‌عبور مدیر (بر حسب دقیقه).</value>
+  </data>
+  <data name="plEnablePasswordHistory.Help" xml:space="preserve">
+    <value>Sets whether a list of recently used passwords is maintained and checked to prevent re-use.</value>
+  </data>
+  <data name="plEnablePasswordHistory.Text" xml:space="preserve">
+    <value>تاریخچه کلمه‌عبور فعال گردد؟</value>
+  </data>
+  <data name="plNumberPasswords.Text" xml:space="preserve">
+    <value>تعداد نگهداری کلمه‌عبور</value>
+  </data>
+  <data name="plNumberPasswords.Help" xml:space="preserve">
+    <value>تعداد نگهداری کلمه‌عبور</value>
+  </data>
+  <data name="plEnableBannedList.Text" xml:space="preserve">
+    <value>فعال‌سازی لیست کلمه‌های عبور ممنوع</value>
+  </data>
+  <data name="plEnableBannedList.Help" xml:space="preserve">
+    <value>با انتخاب این گزینه کلمه‌عبور براساس لیست کلمات ممنوع بررسی خواهد شد.</value>
+  </data>
+  <data name="plEnableStrengthMeter.Text" xml:space="preserve">
+    <value>فعال‌سازی سنجش قوت کلمه‌عبور</value>
+  </data>
+  <data name="plEnableStrengthMeter.Help" xml:space="preserve">
+    <value>نمایش سنجش قوت کلمه‌عبور</value>
+  </data>
+  <data name="plEnableIPChecking.Text" xml:space="preserve">
+    <value>فعال‌سازی بررسی آدرس IP</value>
+  </data>
+  <data name="plEnableIPChecking.Help" xml:space="preserve">
+    <value>با انتخاب این گزینه آدرس IP اعضاء هنگام ورود به سایت بررسی خواهد شد</value>
+  </data>
+  <data name="PasswordConfig_PasswordExpiry.Help" xml:space="preserve">
+    <value>مدت اعتبار کلمه‌عبور کاربر (مقدار 0 به این معناست که کلمه‌عبور هیچ‌وقت منقضی نمی‌گردد)</value>
+  </data>
+  <data name="PasswordConfig_PasswordExpiry.Text" xml:space="preserve">
+    <value>انقضاء کلمه‌عبور (روز)</value>
+  </data>
+  <data name="PasswordConfig_PasswordExpiryReminder.Help" xml:space="preserve">
+    <value>تعداد روزهایی که کاربر هشدار انقضاء کلمه‌عبور را دریافت خواهد کرد.</value>
+  </data>
+  <data name="PasswordConfig_PasswordExpiryReminder.Text" xml:space="preserve">
+    <value>یادآوری انقضاء کلمه‌عبور (روز):</value>
+  </data>
+  <data name="MemberSettingsUpdateSuccess.Text" xml:space="preserve">
+    <value>تنظیمات بروز رسانی شد.</value>
+  </data>
+  <data name="MemberSettingsError.Text" xml:space="preserve">
+    <value>بروز رسانی انجام نشد!</value>
+  </data>
+  <data name="SslSettingsUpdateSuccess.Text" xml:space="preserve">
+    <value>تنظیمات SSL به روز رسانی شد.</value>
+  </data>
+  <data name="SslSettingsError.Text" xml:space="preserve">
+    <value>بروز رسانی تنظیمات SSL انجام نشد!لطفا بعدا تکرار کنید.</value>
+  </data>
+  <data name="MemberSettingsRestoreWarning.Text" xml:space="preserve">
+    <value>آیا ذخیره تنظیمات لغو شود؟</value>
+  </data>
+  <data name="MembershipResetLinkValidity.ErrorMessage" xml:space="preserve">
+    <value>Reset link timeouts must be an integer greater than 0 and less than 10000</value>
+  </data>
+  <data name="AdminMembershipResetLinkValidity.ErrorMessage" xml:space="preserve">
+    <value>مدت زمان لینک بازنشانی مدیر باید از 0 بزرگتر و از 10000 کوچکتر باشد!</value>
+  </data>
+  <data name="MembershipNumberPasswords.ErrorMessage" xml:space="preserve">
+    <value>Number of passwords to store must be an integer greater than or equal to 0 and less than 10000.</value>
+  </data>
+  <data name="AutoAccountUnlockDuration.ErrorMessage" xml:space="preserve">
+    <value>مدت زمان قفل گشایی خودکار حساب کاربری باید یک عدد صحیح بزرگتر یا برابر 0 و کمتر از 1000 باشد.</value>
+  </data>
+  <data name="AsyncTimeout.ErrorMessage" xml:space="preserve">
+    <value>زمان Timeout باید عدد صحیح بزرگتر یا مساوی 90 و یا کمتر از 10000 باشد!</value>
+  </data>
+  <data name="PasswordExpiry.ErrorMessage" xml:space="preserve">
+    <value>انقضای کلمه عبور باید از 0 بزرگتر و از 10000 کوچکتر باشد.</value>
+  </data>
+  <data name="PasswordExpiryReminder.ErrorMessage" xml:space="preserve">
+    <value>یادآوری انقضای کلمه عبور باید از صفر بزرگتر و از 10000 کوچکتر باشد!</value>
+  </data>
+  <data name="None.Text" xml:space="preserve">
+    <value>هیچ کدام</value>
+  </data>
+  <data name="Private.Text" xml:space="preserve">
+    <value>خصوصی</value>
+  </data>
+  <data name="Public.Text" xml:space="preserve">
+    <value>عمومی</value>
+  </data>
+  <data name="Verified.Text" xml:space="preserve">
+    <value>نیازمند تایید ایمیل</value>
+  </data>
+  <data name="Standard.Text" xml:space="preserve">
+    <value>استاندارد</value>
+  </data>
+  <data name="Custom.Text" xml:space="preserve">
+    <value>سفارشی</value>
+  </data>
+  <data name="plUserRegistration.Text" xml:space="preserve">
+    <value>ثبت‌نام کاربر:</value>
+  </data>
+  <data name="plUserRegistration.Help" xml:space="preserve">
+    <value>نوع ثبت‌نام کاربران در سایت را مشخص کنید. ثبت‌نام خصوصی کاربران را ملزم به تأیید ایشان قبل از اینکه نقش "اعضای سایت" را داشته باشند، می‌کند. ثبت‌نام عمومی عضویت آنی را برای کاربر فراهم می‌کند و ثبت‌نام نیازمند اعتبارسنجی کاربر را ملزم به تأیید ایمیل ایشان می‌کند.</value>
+  </data>
+  <data name="NoEmail.Text" xml:space="preserve">
+    <value>The "Email" field, at minimum, must be included.</value>
+  </data>
+  <data name="NoDisplayName.Text" xml:space="preserve">
+    <value>شما گزینه الزامی بودن نام‌نمایش یکتا را انتخاب نموده‌اید در حالیکه فیلد نام‌نمایشی در فرم ثبت نام وجود ندارد.</value>
+  </data>
+  <data name="ContainsDuplicateAddresses.Text" xml:space="preserve">
+    <value>یک یا چند کاربر این سایت دارای ایمیل مشابه می‌باشند. اگر می‌خواهید از آدرس ایمیل به عنوان نام‌کاربری استفاده کنید، لازم است که ابتدا مشکل ایمیل‌های تکرار را حل کنید.</value>
+  </data>
+  <data name="registrationFormTypeLabel.Help" xml:space="preserve">
+    <value>نوع فرم ثبت نام را انتخاب نمایید.</value>
+  </data>
+  <data name="registrationFormTypeLabel.Text" xml:space="preserve">
+    <value>نوع فرم ثبت‌نام:</value>
+  </data>
+  <data name="Security_DisplayNameFormat.Help" xml:space="preserve">
+    <value>در صورت تمایل فرمتی را برای نام نمایش کاربران مشخص کنید. این فرمت میتواند شامل توکن هایی مانند [FIRSTNAME] [LASTNAME] باشد. اگر فرمتی برای نام نمایشی انتخاب شود، نام نمایشی دیگر توسط کاربر قابل ویرایش نخواهد بود.</value>
+  </data>
+  <data name="Security_DisplayNameFormat.Text" xml:space="preserve">
+    <value>فرمت نام نمایشی:</value>
+  </data>
+  <data name="Security_UserNameValidation.Help" xml:space="preserve">
+    <value>عبارت منظیم مورد نظر خود را برای اعتبارسنجی نام کاربری وارد نمایید. اگر این عبارت را از حالت پیشفرض تغییر دهید باید پیامی را که کاربر پس از وارد کرد نام کاربری نامعتبر میبیند را نیز ویرایش نمایید. (SharedResources.resx - Username.RegExError)</value>
+  </data>
+  <data name="Security_UserNameValidation.Text" xml:space="preserve">
+    <value>اعتبارسنجی نام کاربری:</value>
+  </data>
+  <data name="Security_EmailValidation.Help" xml:space="preserve">
+    <value>در صورت تمایل عبارت منظمی که برای بررسی آدرس ایمیل استفاده خواهد شد را ویرایش کنید.</value>
+  </data>
+  <data name="Security_EmailValidation.Text" xml:space="preserve">
+    <value>اعتبارسنجی آدرس ایمیل:</value>
+  </data>
+  <data name="Registration_ExcludeTerms.Help" xml:space="preserve">
+    <value>می‌توانید لیستی از عباراتی که کاربران نمی‌توانند در نام کاربری و نام مستعارشان انتخاب کنند را تعیین کنید (با کاما از هم جدا شوند).</value>
+  </data>
+  <data name="Registration_ExcludeTerms.Text" xml:space="preserve">
+    <value>عبارات استثنا:</value>
+  </data>
+  <data name="Redirect_AfterRegistration.Help" xml:space="preserve">
+    <value>می‌توانید صفحه ای را انتخاب کنید تا کاربر پس از ثبت نام موفق، به آن صفحه منتقل شود.</value>
+  </data>
+  <data name="Redirect_AfterRegistration.Text" xml:space="preserve">
+    <value>انتقال به صفحه‌‌ای دیگر پس از ثبت‌نام:</value>
+  </data>
+  <data name="plEnableRegisterNotification.Help" xml:space="preserve">
+    <value>این گزینه مشخص می‌کند که هنگام ثبت‌نام کاربر جدید در سایت، مدیر آگاهسازی شود یا خیر.</value>
+  </data>
+  <data name="plEnableRegisterNotification.Text" xml:space="preserve">
+    <value>دریافت پیام آگاهسازی عضویت کاربر:</value>
+  </data>
+  <data name="Registration_UseAuthProviders.Help" xml:space="preserve">
+    <value>این گزینه را برای استفاده از سیستم های احراز هویت در ثبت نام انتخاب نمایید. نکته اینکه تمام سیستم ها از این گزینه پشتیبانی نمیکنند.</value>
+  </data>
+  <data name="Registration_UseAuthProviders.Text" xml:space="preserve">
+    <value>استفاده از سیستم‌های احراز هویت:</value>
+  </data>
+  <data name="Registration_UseProfanityFilter.Help" xml:space="preserve">
+    <value>انتخاب این گزینه باعث استفاده از فیلتر کلمات نامناسب برای نام کاربری و نام نمایش می‌شود.</value>
+  </data>
+  <data name="Registration_UseProfanityFilter.Text" xml:space="preserve">
+    <value>استفاده از فیلتر کلمات نامناسب:</value>
+  </data>
+  <data name="Registration_UseEmailAsUserName.Help" xml:space="preserve">
+    <value>این گزینه را برای استفاده از ایمیل به جای نام کاربری انتخاب نمایید. در اینصورت فیلد نام کاربری در فرم ثبت نام نمایش داده نخواهد شد.</value>
+  </data>
+  <data name="Registration_UseEmailAsUserName.Text" xml:space="preserve">
+    <value>استفاده از ایمیل به جای نام کاربری:</value>
+  </data>
+  <data name="Registration_RequireUniqueDisplayName.Help" xml:space="preserve">
+    <value>میتوانید کاربران را ملزم نمایید تا از نام نمایش یکتا استفاده نمایند. اگر کاربری نام تکرار انتخاب کرد، نام دیگری به وی پیشنهاد داده خواهد شد.</value>
+  </data>
+  <data name="Registration_RequireUniqueDisplayName.Text" xml:space="preserve">
+    <value>الزام یکتایی نام نمایشی:</value>
+  </data>
+  <data name="Registration_RandomPassword.Help" xml:space="preserve">
+    <value>این گزینه را برای ایجاد کلمه عبور تصادفی در هنگام ثبت نام انتخاب کنید. در غیر اینصورت کاربر خودش کلمه عبور را تعیین خواهد کرد.</value>
+  </data>
+  <data name="Registration_RandomPassword.Text" xml:space="preserve">
+    <value>استفاده از کلمه‌عبور تصادفی:</value>
+  </data>
+  <data name="Registration_RequireConfirmPassword.Help" xml:space="preserve">
+    <value>این گزینه را برای نمایش فیلد تأیید کلمه‌عبور در فرم ثبت نام انتخاب نمایید.</value>
+  </data>
+  <data name="Registration_RequireConfirmPassword.Text" xml:space="preserve">
+    <value>الزام تأیید کلمه عبور:</value>
+  </data>
+  <data name="Security_RequireValidProfile.Help" xml:space="preserve">
+    <value>اگر می‌خواهید کاربر هنگام ثبت‌نام تمام فیلدهای الزامی نظیر نام‌کاربری، نام، نام خانوادگی، نام نمایشی و آدرس ایمیل را پر کند، این گزینه را انتخاب کنید.</value>
+  </data>
+  <data name="Security_RequireValidProfile.Text" xml:space="preserve">
+    <value>الزام به داشتن پروفایل معتبر هنگام ثبت‌نام:</value>
+  </data>
+  <data name="Security_CaptchaRegister.Help" xml:space="preserve">
+    <value>مشخص کنید که آیا هنکام ثبت‌نام کد امنیتی استفاده شود یا خیر.</value>
+  </data>
+  <data name="Security_CaptchaRegister.Text" xml:space="preserve">
+    <value>کد امنیتی در ثبت‌نام:</value>
+  </data>
+  <data name="RequiresUniqueEmail.Help" xml:space="preserve">
+    <value>با انتخاب این گزینه هر کاربر باید از ایمیلی غیر تکراری استفاده نماید. یعنی کاربر نمی‌تواند با یک ایمیل چندین بار ثبت نام نماید.</value>
+  </data>
+  <data name="RequiresUniqueEmail.Text" xml:space="preserve">
+    <value>الزام یکتایی ایمیل:</value>
+  </data>
+  <data name="PasswordFormat.Help" xml:space="preserve">
+    <value>فرمت کلمه‌عبور</value>
+  </data>
+  <data name="PasswordFormat.Text" xml:space="preserve">
+    <value>فرمت کلمه‌عبور:</value>
+  </data>
+  <data name="PasswordRetrievalEnabled.Help" xml:space="preserve">
+    <value>آیا کلمه‌عبور کاربر قابل بازیابی باشد؟</value>
+  </data>
+  <data name="PasswordRetrievalEnabled.Text" xml:space="preserve">
+    <value>فعال بودن بازیابی کلمه‌عبور:</value>
+  </data>
+  <data name="PasswordResetEnabledTitle.Help" xml:space="preserve">
+    <value>مشخص می‌کند که کاربر می تواند درخواست بازنشانی کلمه‌عبور نمایند یا خیر. این مقدار تنها از طریق فایل web.config قابل تغییر می‌باشد.</value>
+  </data>
+  <data name="PasswordResetEnabledTitle.Text" xml:space="preserve">
+    <value>فعال بودن بازنشانی کلمه‌عبور:</value>
+  </data>
+  <data name="MinNonAlphanumericCharactersTitle.Help" xml:space="preserve">
+    <value>حداقل تعداد کاراکترهای خاص کلمه‌عبور را مشخص می‌کند. این مقدار تنها از طریق فایل web.config قابل تغییر می‌باشد.</value>
+  </data>
+  <data name="MinNonAlphanumericCharactersTitle.Text" xml:space="preserve">
+    <value>حداقل تعداد کاراکتر غیرالفبایی عددی:</value>
+  </data>
+  <data name="RequiresQuestionAndAnswerTitle.Help" xml:space="preserve">
+    <value>مشخص می‌کند که سیستم پرسش و پاسخ به عنوان بخشی از ثبت‌نام استفاده شود یا خیر. این تنظیم تنها از طریق فایل web.config قابل تغییر است.</value>
+  </data>
+  <data name="RequiresQuestionAndAnswerTitle.Text" xml:space="preserve">
+    <value>الزامی ساختن پرسش و پاسخ:</value>
+  </data>
+  <data name="PasswordStrengthRegularExpressionTitle.Help" xml:space="preserve">
+    <value>استفاده از عبارات منطقی (RegEx) برای پیچیده کردن کلمه‌عبور توسط پرووایدر در خصوصیات پرووایدر مشخص شده است. این مقدار تنها از طریق فایل web.config قابل تغییر می‌باشد.</value>
+  </data>
+  <data name="PasswordStrengthRegularExpressionTitle.Text" xml:space="preserve">
+    <value>عبارت منطقی سنجش قوت کلمه‌عبور:</value>
+  </data>
+  <data name="MaxInvalidPasswordAttemptsTitle.Help" xml:space="preserve">
+    <value>تعداد تلاش برای ورود با کلمه‌عبور اشتباه تا قبل از قفل شدن حساب کاربری. این مقدار تنها از فایل web.config قابل تغییر می‌باشد.</value>
+  </data>
+  <data name="MaxInvalidPasswordAttemptsTitle.Text" xml:space="preserve">
+    <value>حداکثر تعداد تلاش ورود ناموفق:</value>
+  </data>
+  <data name="PasswordAttemptWindowTitle.Help" xml:space="preserve">
+    <value>مدت زمانی (برحسب دقیقه) که کاربر در صورت چندین بار ورود به سایت ناموفق باید منتظر بماند را مشخص می‌کند. این مقدار تنها از طریق فایل web.config قابل تغییر می‌باشد.</value>
+  </data>
+  <data name="PasswordAttemptWindowTitle.Text" xml:space="preserve">
+    <value>مدت انتظار ورود ناموفق:</value>
+  </data>
+  <data name="RegistrationSettingsUpdateSuccess.Text" xml:space="preserve">
+    <value>تنظیمات ثبت نام بروز رسانی شد.</value>
+  </data>
+  <data name="RegistrationSettingsError.Text" xml:space="preserve">
+    <value>به روز رسانی تنظیمات ثبت نام انجام نشد!</value>
+  </data>
+  <data name="RegistrationSettingsRestoreWarning.Text" xml:space="preserve">
+    <value>آیا تغییرات اعمال شده لغو شود؟</value>
+  </data>
+  <data name="registrationFieldsLabel.Help" xml:space="preserve">
+    <value>میتوانید لیستی از فیلد های مورد نظر خود که با کاما از هم جدا شده اند را تعیین نمایید. در صورت استفاده از این گزینه، این تنظیم دارای اولویت بالاتری نسبت به سایر تنظیمات خواهد شد. فیلدهای ممکن شامل نام کاربری، ایمیل، کلمه عبور، تائید کلمه عبور، نام مستعار و تمام خصوصیات پروفایل میشود.</value>
+  </data>
+  <data name="registrationFieldsLabel.Text" xml:space="preserve">
+    <value>فیلدهای ثبت‌نام:</value>
+  </data>
+  <data name="GlobalSettingsTab.Text" xml:space="preserve">
+    <value>تنظیمات این تب سراسری است. تغییرات در این تب برای تمامی پرتال ها(وب سایت) تاثیر گذار خواهد بود.</value>
+  </data>
+  <data name="GlobalSetting.Text" xml:space="preserve">
+    <value>این یک تنظیم سراسری است. تغییر در این تنظیمات برای تمامی پرتال ها تاثیر گذار خواهد بود.</value>
+  </data>
+  <data name="plSSLEnabled.Text" xml:space="preserve">
+    <value>فعال‌سازی SSL:</value>
+  </data>
+  <data name="plSSLEnabled.Help" xml:space="preserve">
+    <value>مشخص کنید که آیا گواهینامه SSL برای این سایت نصب شده است.</value>
+  </data>
+  <data name="plSSLEnforced.Text" xml:space="preserve">
+    <value>اجبار برای SSL:</value>
+  </data>
+  <data name="plSSLEnforced.Help" xml:space="preserve">
+    <value>درصورتی که این گزینه فعال گردد صفحاتی که به عنوان صفحات امن شناخته نشده باشند قابل دسترسی از طریق SSL نمی باشند. (HTTPS)</value>
+  </data>
+  <data name="plSSLURL.Text" xml:space="preserve">
+    <value>آدرس SSL:</value>
+  </data>
+  <data name="plSSLURL.Help" xml:space="preserve">
+    <value>به صورت انتخابی URL که برای ارتباطات امن این سایت استفاده می شود را مشخص نمایید. این گزینه تنها درصورتی که گواهینامه SSL را برای مسیر اصلی وب سایت خود نصب نموده باشید لازم می باشد. برای مثال یک حساب کاربری میزبانی مشترک</value>
+  </data>
+  <data name="plSTDURL.Text" xml:space="preserve">
+    <value>آدرس استاندارد:</value>
+  </data>
+  <data name="plSTDURL.Help" xml:space="preserve">
+    <value>درصورتی که یک لینک SSL در گزینه بالا مشخص شده باشد، شما می بایست یک مسیر استاندارد برای ارتباط های غیرامن نیز مشخص نمایید.</value>
+  </data>
+  <data name="plShowCriticalErrors.Help" xml:space="preserve">
+    <value>این تنظیم مشخص می‌کند که آیا پیام‌های خطای ارسال شده از طریق پارامترهای querystring درون صفحه نمایش داده شوند یا خیر.</value>
+  </data>
+  <data name="plShowCriticalErrors.Text" xml:space="preserve">
+    <value>آیا خطاهای مهم نمایش‌داده شوند؟</value>
+  </data>
+  <data name="plDebugMode.Help" xml:space="preserve">
+    <value>Check this box to run the installation in "debug mode". This causes various parts of the application to write more verbose error logs etc. Note: This may lead to performance degradation.</value>
+  </data>
+  <data name="plDebugMode.Text" xml:space="preserve">
+    <value>حالت عیب‌یابی</value>
+  </data>
+  <data name="plRememberMe.Text" xml:space="preserve">
+    <value>گزینه به‌خاطرسپاری کاربر هنگام ورود فعال باشد؟</value>
+  </data>
+  <data name="plRememberMe.Help" xml:space="preserve">
+    <value>با فعال‌سازی این گزینه امکان بخاطر سپردن ورود برای کاربران مهیا می‌گردد. در اینصورت کاربران می توانند با انتخاب گزینه "مرا به خاطر بسپار"  کوکی لازم را برای ورودهای آتی خود ایجاد نمایند.</value>
+  </data>
+  <data name="plAutoAccountUnlock.Text" xml:space="preserve">
+    <value>زمان بازکردن خودکار حساب کاربری:</value>
+  </data>
+  <data name="plAutoAccountUnlock.Help" xml:space="preserve">
+    <value>بعداز اینکه حساب کاربری به دلیل وارد نمودن اطلاعات نادرست برای چندین بار متمادی قفل گردید، امکان فعال شدن آن به صورت خودکار بعد از یک دوره زمانی خاص موجود می‌باشد. مقدار زمان مورد نظر برای فعال شدن خودکار حساب کاربری را در این آیتم وارد نمایید و برای غیرفعال نمودن این امکان مقدار این گزینه را "0" قرار دهید.</value>
+  </data>
+  <data name="plAsyncTimeout.Help" xml:space="preserve">
+    <value>Set a value that indicates the time, in seconds, before asynchronous postbacks time out if no response is received, the value should between 90-9999 seconds.</value>
+  </data>
+  <data name="plAsyncTimeout.Text" xml:space="preserve">
+    <value>زمان قبل از Timeout شدن:</value>
+  </data>
+  <data name="plMaxUploadSize.Help" xml:space="preserve">
+    <value>کمترین مقدار 12 مگابایت می باشد.</value>
+  </data>
+  <data name="plMaxUploadSize.Text" xml:space="preserve">
+    <value>حداکثر حجم بارگذاری</value>
+  </data>
+  <data name="maxUploadSize.Error" xml:space="preserve">
+    <value>حداکثر حجم آپلود باید بین 12 و {0} باشد</value>
+  </data>
+  <data name="plFileExtensions.Help" xml:space="preserve">
+    <value>پسوند فایل‌های مجاز را وارد نمایید (آنها را با کاما از هم جدا نمایید)</value>
+  </data>
+  <data name="plFileExtensions.Text" xml:space="preserve">
+    <value>پسوند فایل‌های مجاز:</value>
+  </data>
+  <data name="OtherSettingsUpdateSuccess.Text" xml:space="preserve">
+    <value>تنظیمات بروز رسانی شد.</value>
+  </data>
+  <data name="OtherSettingsError.Text" xml:space="preserve">
+    <value>بروز رسانی تنظیمات انجام نشد!لطفا دوباره تلاش کنید.</value>
+  </data>
+  <data name="OtherSettingsRestoreWarning.Text" xml:space="preserve">
+    <value>آیا ذخیره تنظیمات لغو شود؟</value>
+  </data>
+  <data name="Bulletins.Text" xml:space="preserve">
+    <value>بولتین ها</value>
+  </data>
+  <data name="BulletinsDoNotExist.Text" xml:space="preserve">
+    <value>در حال حاضر هیچ بولتین امنیتی برای دی ان ان نسخه {0} وجود ندارد.</value>
+  </data>
+  <data name="BulletinsExist.Text" xml:space="preserve">
+    <value>There are currently {0} Security Bulletins for DotNetNuke Platform version {1}:</value>
+  </data>
+  <data name="RequestFailed_Admin.Text" xml:space="preserve">
+    <value>Could Not Connect To {0}. You Should Verify The Source Address Is Valid And That Your Hosting Provider Has Configured Their Proxy Server Settings Correctly.</value>
+  </data>
+  <data name="RequestFailed_User.Text" xml:space="preserve">
+    <value>بخش اخبار در دسترس نمی باشد ! پیام خطا:</value>
+  </data>
+  <data name="TabAuditChecks.Text" xml:space="preserve">
+    <value>نتیجه اسکن امنیت</value>
+  </data>
+  <data name="TabScannerCheck.Text" xml:space="preserve">
+    <value>بررسی اسکنر</value>
+  </data>
+  <data name="TabSuperuserActivity.Text" xml:space="preserve">
+    <value>فعالیت کاربر مدیر</value>
+  </data>
+  <data name="SuperUserActivityExplaination.Text" xml:space="preserve">
+    <value>در این قسمت لیست فعالیت های مدیر را مشاهده میکنید.به زمان ایجاد و تاریخ ورود توجه کنید.</value>
+  </data>
+  <data name="Username.Text" xml:space="preserve">
+    <value>نام‌کاربری</value>
+  </data>
+  <data name="CreatedDate.Text" xml:space="preserve">
+    <value>تاریخ ایجاد</value>
+  </data>
+  <data name="LastLogin.Text" xml:space="preserve">
+    <value>تاریخ آخرین ورود</value>
+  </data>
+  <data name="LastActivityDate.Text" xml:space="preserve">
+    <value>تاریخ آخرین فعالیت</value>
+  </data>
+  <data name="SecurityCheck.Text" xml:space="preserve">
+    <value>بررسی امنیت</value>
+  </data>
+  <data name="Result.Text" xml:space="preserve">
+    <value>نتیجه</value>
+  </data>
+  <data name="Notes.Text" xml:space="preserve">
+    <value>نکته</value>
+  </data>
+  <data name="AuditChecks.Text" xml:space="preserve">
+    <value>ممیزی</value>
+  </data>
+  <data name="SuperuserActivity.Text" xml:space="preserve">
+    <value>فعالیت مدیر ارشد</value>
+  </data>
+  <data name="CheckDebugFailure.Text" xml:space="preserve">
+    <value>وضعیت عیب‌یابی فعال است - ویرایش فایل web.config و تغییر وضعیت آن به false در نظر داشته باشید (می‌توانید این کار را با مدیرپیکربندی نیز انجام دهید)</value>
+  </data>
+  <data name="CheckDebugReason.Text" xml:space="preserve">
+    <value>فعال بودن حالت عیب‌یابی به سرعت عملکرد سایت ضربه زده و ممکن است جزئیات مشکلات امنیتی را برای هکرها آشکار سازد.</value>
+  </data>
+  <data name="CheckDebugSuccess.Text" xml:space="preserve">
+    <value>در حالت عیب‌یابی نیست</value>
+  </data>
+  <data name="cmdCheck.Text" xml:space="preserve">
+    <value>بررسی</value>
+  </data>
+  <data name="cmdSearch.Text" xml:space="preserve">
+    <value>جستجو</value>
+  </data>
+  <data name="plSearchTerm.Text" xml:space="preserve">
+    <value>عبارت جستجو</value>
+  </data>
+  <data name="cmdModifiedFiles.Text" xml:space="preserve">
+    <value>پیدا کردن فایل های اخیرا اصلاح شده</value>
+  </data>
+  <data name="ScannerChecks.Text" xml:space="preserve">
+    <value>جستجو در فایل های سیستم و پایگاه داده</value>
+  </data>
+  <data name="AuditExplanation.Text" xml:space="preserve">
+    <value>نتیجه اسکن به شرح زیر می‌باشد.</value>
+  </data>
+  <data name="Authorized.Header" xml:space="preserve">
+    <value>مجاز</value>
+  </data>
+  <data name="CheckTracing.Text" xml:space="preserve">
+    <value>tracing فعال است - ویرایش فایل web.config و تغییر مقدار آن به false را در نظر داشته باشید (یا از مدیر پیکربندی استفاده کنید)</value>
+  </data>
+  <data name="CheckTracingReason.Text" xml:space="preserve">
+    <value>فعال بودن مشخصه tracing به هکرهای بالقوه اجازه می‌دهد تا فعالیت سایت را مشاهده کنند.</value>
+  </data>
+  <data name="CheckTracingSuccess.Text" xml:space="preserve">
+    <value>Tracing فعال نیست</value>
+  </data>
+  <data name="CreatedDate.Header" xml:space="preserve">
+    <value>تاریخ ساخت</value>
+  </data>
+  <data name="DisplayName.Header" xml:space="preserve">
+    <value>نام نمایشی</value>
+  </data>
+  <data name="Email.Header" xml:space="preserve">
+    <value>ایمیل</value>
+  </data>
+  <data name="FirstName.Header" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="LastActivityDate.Header" xml:space="preserve">
+    <value>تاریخ آخرین فعالیت</value>
+  </data>
+  <data name="LastLogin.Header" xml:space="preserve">
+    <value>تاریخ آخرین ورود</value>
+  </data>
+  <data name="LastName.Header" xml:space="preserve">
+    <value>نام خانوادگی</value>
+  </data>
+  <data name="ScannerExplanation.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Username.Header" xml:space="preserve">
+    <value>نام‌کاربری</value>
+  </data>
+  <data name="CheckBiographyFailure.Text" xml:space="preserve">
+    <value>فیلد ویرایشگر متن </value>
+  </data>
+  <data name="CheckBiographyReason.Text" xml:space="preserve">
+    <value>فیلد زندگینامه یک هدف مشترک برای هرزنگاران جهت افزودن لینک و کد در آن می‌باشد. در دی‌ان‌ان نگارش 7.2.0 برای کاهش ریسک نوع این فیلد از ویرایشگر متن به جعبه متن چند خطی تغییر پیدا کرد.</value>
+  </data>
+  <data name="CheckBiographySuccess.Text" xml:space="preserve">
+    <value>فیلد جعبه متن چندخطی می‌باشد</value>
+  </data>
+  <data name="CheckRarelyUsedSuperuserFailure.Text" xml:space="preserve">
+    <value>ما بیشتر از یک حساب کاربری مدیرارشد که برای مدت 6 ماه وارد سایت نشده یا هیچ فعالیتی انجام نداده پیدا کردیم. حذف این حساب‌های کاربری را به عنوان بهترین شیوه پیشنهادی در نظر داشته باشد.</value>
+  </data>
+  <data name="CheckRarelyUsedSuperuserReason.Text" xml:space="preserve">
+    <value>حساب‌های مدیرارشد قدرتمندترین حساب کابری در دی‌ان‌ان می‌باشد. به عنوان بهترین شیوه این حساب‌ها باید محدود گردند.</value>
+  </data>
+  <data name="CheckRarelyUsedSuperuserSuccess.Text" xml:space="preserve">
+    <value>All superusers are regular users of the system.</value>
+  </data>
+  <data name="CheckSiteRegistrationFailure.Text" xml:space="preserve">
+    <value>یک یا چند پرتال از شیوه ثبت‌نام عمومی استفاده می‌کند</value>
+  </data>
+  <data name="CheckSiteRegistrationReason.Text" xml:space="preserve">
+    <value>سایت‌هایی با ثبت‌نام عمومی هدف اولیه هرزنگاران می‌باشد.</value>
+  </data>
+  <data name="CheckSiteRegistrationSuccess.Text" xml:space="preserve">
+    <value>تمام پرتال‌ها از ثبت‌نام غیرعمومی استفاده می‌کنند</value>
+  </data>
+  <data name="CheckSuperuserOldPasswordFailure.Text" xml:space="preserve">
+    <value>حداقل یک حساب کاربری مدیرارشد وجود دارد که کلمه‌عبور خود را به مدت 6 ماه یا بیشتر تغییر نداده است.</value>
+  </data>
+  <data name="CheckSuperuserOldPasswordReason.Text" xml:space="preserve">
+    <value>حساب‌های مدیرارشد قدرتمندترین حساب کابری در دی‌ان‌ان می‌باشد. به عنوان بهترین شیوه این حساب‌ها باید به طور منظم کلمه‌عبور خود را تغییر دهند.</value>
+  </data>
+  <data name="CheckSuperuserOldPasswordSuccess.Text" xml:space="preserve">
+    <value>هیچ مدیرارشدی کلمه‌عبور قدیمی‌تر از 6 ماه ندارد</value>
+  </data>
+  <data name="CheckUnexpectedExtensionsFailure.Text" xml:space="preserve">
+    <value>یک فایل asp یا php یافت شد - ممکن است این فایل‌ها بی‌خطر باشد، اما گاهی اوقات بدین معناست که سایت شما قبلا هک شده و این فایل ابزار دسترسی به سایت شماست. ما توصیه می‌کنیم که این فایل‌ها را با دقت ارزیابی نمایید.</value>
+  </data>
+  <data name="CheckUnexpectedExtensionsReason.Text" xml:space="preserve">
+    <value>دی‌ان‌ان یک اپلیکیشن asp.net است. در حالت عادی نباید فایل‌های php یا asp در سایت شما وجود داشته باشد.</value>
+  </data>
+  <data name="CheckUnexpectedExtensionsSuccess.Text" xml:space="preserve">
+    <value>فایل غیر مجازی یافت نشد.</value>
+  </data>
+  <data name="CheckViewstatemacFailure.Text" xml:space="preserve">
+    <value>viewstatemac برابر با enabled failure نیست</value>
+  </data>
+  <data name="CheckViewstatemacReason.Text" xml:space="preserve">
+    <value>یک view-state MAC یک نسخه کدگذاری شده از متغییر مخفی است که view state صفحه هنگام ارسال صفحه به مروگر از آن استفاده می‌کند. با فعال بودن این مشخصه، کدگذاری view state صفحه بررسی شده تا مطمئن شویم که توسط یک بازدیدکننده قابل دستکاری نیست.</value>
+  </data>
+  <data name="CheckViewstatemacSuccess.Text" xml:space="preserve">
+    <value>viewstate از طریق استفاده از یک MAC محافظت شده است</value>
+  </data>
+  <data name="CheckPurpose.Header" xml:space="preserve">
+    <value>هدف از بررسی</value>
+  </data>
+  <data name="Result.Header" xml:space="preserve">
+    <value>نتیجه</value>
+  </data>
+  <data name="Severity.Header" xml:space="preserve">
+    <value>شدت</value>
+  </data>
+  <data name="CheckBiographyName.Text" xml:space="preserve">
+    <value>بررسی استفاده فیلدهای پروفایل عمومی از ویرایشگر متن</value>
+  </data>
+  <data name="CheckDebugName.Text" xml:space="preserve">
+    <value>بررسی وضعیت عیب‌یابی</value>
+  </data>
+  <data name="CheckRarelyUsedSuperuserName.Text" xml:space="preserve">
+    <value>بررسی فعال بودن حساب‌های کاربری مدیرارشد که به ندرت فعال هستند</value>
+  </data>
+  <data name="CheckSiteRegistrationName.Text" xml:space="preserve">
+    <value>بررسی استفاده سایت‌ها از ثبت‌نام عمومی</value>
+  </data>
+  <data name="CheckSuperuserOldPasswordName.Text" xml:space="preserve">
+    <value>بررسی تغییر کلمه‌عبور مدیران ارشد</value>
+  </data>
+  <data name="CheckTracingName.Text" xml:space="preserve">
+    <value>بررسی فعال بودن asp.net tracing</value>
+  </data>
+  <data name="CheckUnexpectedExtensionsName.Text" xml:space="preserve">
+    <value>بررسی پیدا شدن فایل‌های asp یا php</value>
+  </data>
+  <data name="CheckDefaultPageName.Text" xml:space="preserve">
+    <value>بررسی فایل های  default.aspx و default.aspx.cs</value>
+  </data>
+  <data name="CheckDefaultPageFailure.Text" xml:space="preserve">
+    <value>صفحه پیش فرض (default.aspx)دی ان ان ویرایش شده است!لطفا با فایل موجود در پکیج اصلی مقایسه کنید.</value>
+  </data>
+  <data name="CheckDefaultPageReason.Text" xml:space="preserve">
+    <value>برای بارگزاری ماژول ها و صفحات در دی ان ان از Default.aspx استفاده می شود و ویرایش آن کار خطرناکی می باشد!</value>
+  </data>
+  <data name="CheckDefaultPageSuccess.Text" xml:space="preserve">
+    <value>Default.aspx و Default.aspx.cs دستکاری نشده است.</value>
+  </data>
+  <data name="CheckViewstatemacName.Text" xml:space="preserve">
+    <value>بررسی محافظت شدن viewstate</value>
+  </data>
+  <data name="NoDatabaseResults.Text" xml:space="preserve">
+    <value>عبارت جستجو در پایگاه‌داده یافت نشد</value>
+  </data>
+  <data name="NoFileResults.Text" xml:space="preserve">
+    <value>عبارت جستجو در هیچ فایلی یافت نشد</value>
+  </data>
+  <data name="SearchTermRequired.Text" xml:space="preserve">
+    <value>عبارت جستجو الزامی است</value>
+  </data>
+  <data name="CheckTracingFailure.Text" xml:space="preserve">
+    <value>tracing فعال است - این موضوع به هکرهای بالقوه اجازه می‌دهد تا فعالیت سایت را مشاهده کنند.</value>
+  </data>
+  <data name="Filename.Header" xml:space="preserve">
+    <value>نام فایل</value>
+  </data>
+  <data name="LastModifiedDate.Header" xml:space="preserve">
+    <value>آخرین تاریخ اصلاح</value>
+  </data>
+  <data name="ModifiedFiles.Text" xml:space="preserve">
+    <value>آخرین فایل های ویرایش شده</value>
+  </data>
+  <data name="CheckModuleHeaderAndFooterFailure.Text" xml:space="preserve">
+    <value>There are modules in your system that have header and footer settings, please review them to make sure no phishing code is present.</value>
+  </data>
+  <data name="CheckModuleHeaderAndFooterName.Text" xml:space="preserve">
+    <value>Check Modules have Header or Footer settings</value>
+  </data>
+  <data name="CheckModuleHeaderAndFooterReason.Text" xml:space="preserve">
+    <value>Hackers may use module's header or footer settings to inject content for phishing attacks.</value>
+  </data>
+  <data name="CheckModuleHeaderAndFooterSuccess.Text" xml:space="preserve">
+    <value>No modules were found that had header or footer values configured.</value>
+  </data>
+  <data name="CheckDiskAccessName.Text" xml:space="preserve">
+    <value>بررسی سطح دسترسی پوشه ها</value>
+  </data>
+  <data name="CheckDiskAccessFailure.Text" xml:space="preserve">
+    <value>هکر می تواند به پوشه های پورتال،دسترسی داشته باشد!</value>
+  </data>
+  <data name="CheckDiskAccessReason.Text" xml:space="preserve">
+    <value>The user which your website is running under has access to drives and folders outside the website location. A hacker could access these files and either read, write, or do both activities.</value>
+  </data>
+  <data name="CheckDiskAccessSuccess.Text" xml:space="preserve">
+    <value>Hackers cannot access drives/folders outside the website</value>
+  </data>
+  <data name="HostSettings.Text" xml:space="preserve">
+    <value>تنظیمات میزبان</value>
+  </data>
+  <data name="ModifiedSettings.Text" xml:space="preserve">
+    <value>تنظیمات به تازگی ویرایش شده</value>
+  </data>
+  <data name="ModuleSettings.Text" xml:space="preserve">
+    <value>تنظیمات ماژول</value>
+  </data>
+  <data name="PortalSettings.Text" xml:space="preserve">
+    <value>تنظیمات پورتال</value>
+  </data>
+  <data name="TabSettings.Text" xml:space="preserve">
+    <value>تنظیمات تب</value>
+  </data>
+  <data name="ModifiedSettingsExplaination.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ModifiedFilesExplaination.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ModifiedFilesLoadWarning.Text" xml:space="preserve">
+    <value>Tool will enumerate all files in your system to show the recently changed files. It may take a while on a site with lots of files.</value>
+  </data>
+  <data name="CheckPasswordFormatName.Text" xml:space="preserve">
+    <value>Check Password Format Setting</value>
+  </data>
+  <data name="CheckPasswordFormatFailure.Text" xml:space="preserve">
+    <value>The setting passwordFormat is not set to Hashed in web.config - consider editing web.config and setting it to Hashed (or use the configuration manager)</value>
+  </data>
+  <data name="CheckPasswordFormatReason.Text" xml:space="preserve">
+    <value>If the value is Clear or Encrypters, hacker can retrieve password from user's password from database.</value>
+  </data>
+  <data name="CheckPasswordFormatSuccess.Text" xml:space="preserve">
+    <value>The passwordFormat is set as Hashed in web.config</value>
+  </data>
+  <data name="CheckAllowableFileExtensionsFailure.Text" xml:space="preserve">
+    <value>در تنظیمات فایل های مجاز،پسوندهای ASPX، ASP یا PHPیافت شد و این قابلیت را به هکر ها میدهد که این فایل ها را آپلود کنند!</value>
+  </data>
+  <data name="CheckAllowableFileExtensionsName.Text" xml:space="preserve">
+    <value>بررسی پسوند فایل هایی که کاربر اجازه آپلود دارد.</value>
+  </data>
+  <data name="CheckAllowableFileExtensionsReason.Text" xml:space="preserve">
+    <value>در تنظیمات فایل های مجاز،پسوندهای ASPX، ASP یا PHPیافت شد و این قابلیت را به هکر ها میدهد که این فایل ها را آپلود کنند!</value>
+  </data>
+  <data name="CheckAllowableFileExtensionsSuccess.Text" xml:space="preserve">
+    <value>پسوند فایلهای مجاز به درستی راه اندازی شده است.</value>
+  </data>
+  <data name="CheckFileExists.Error" xml:space="preserve">
+    <value>Current SQL Server account can execute xp_fileexist which can detect whether files exist on server.</value>
+  </data>
+  <data name="CheckSqlRiskFailure.Text" xml:space="preserve">
+    <value>The current SQL connection can execute dangerous command(s) on your SQL Server.</value>
+  </data>
+  <data name="CheckSqlRiskName.Text" xml:space="preserve">
+    <value>Check Current SQL Account Permission</value>
+  </data>
+  <data name="CheckSqlRiskReason.Text" xml:space="preserve">
+    <value>If the SQL Server account isn't configured properly, it may leave risk and hackers can exploit the server by running special script.</value>
+  </data>
+  <data name="CheckSqlRiskSuccess.Text" xml:space="preserve">
+    <value>The SQL Server account configured correctly.</value>
+  </data>
+  <data name="ExecuteCommand.Error" xml:space="preserve">
+    <value>Current SQL Server account can execute xp_cmdshell which will running command line in sql server system.</value>
+  </data>
+  <data name="GetFolderTree.Error" xml:space="preserve">
+    <value>Current SQL Server account can execute xp_dirtree which can see the server's folders structure.</value>
+  </data>
+  <data name="RegRead.Error" xml:space="preserve">
+    <value>Current SQL Server account can read registry values. You need to check the permissions of xp_regread, xp_regwrite, xp_regenumkeys, xp_regenumvalues, xp_regdeletekey, xp_regdeletekey, xp_regdeletevalue, xp_instance_regread, xp_instance_regwrite, xp_instance_regenumkeys, xp_instance_regenumvalues, xp_instance_regdeletekey, xp_instance_regdeletekey, xp_instance_regdeletevalue stored procedures.</value>
+  </data>
+  <data name="SysAdmin.Error" xml:space="preserve">
+    <value>اکانت پایگاه داده جاری : 'sysadmin'.</value>
+  </data>
+  <data name="HighRiskFiles.Text" xml:space="preserve">
+    <value>فایل های خطرناک</value>
+  </data>
+  <data name="LowRiskFiles.Text" xml:space="preserve">
+    <value>فایل های کم خطر</value>
+  </data>
+  <data name="Pass.Text" xml:space="preserve">
+    <value>قبول</value>
+  </data>
+  <data name="Fail.Text" xml:space="preserve">
+    <value>رد</value>
+  </data>
+  <data name="Alert.Text" xml:space="preserve">
+    <value>هشدار</value>
+  </data>
+  <data name="FileName.Text" xml:space="preserve">
+    <value>نام فایل</value>
+  </data>
+  <data name="LastWriteTime.Text" xml:space="preserve">
+    <value>آخرین تاریخ اصلاح</value>
+  </data>
+  <data name="PortalId.Text" xml:space="preserve">
+    <value>شناسه پرتال</value>
+  </data>
+  <data name="TabId.Text" xml:space="preserve">
+    <value>شناسه تب</value>
+  </data>
+  <data name="ModuleId.Text" xml:space="preserve">
+    <value>شناسه ماژول</value>
+  </data>
+  <data name="SettingName.Text" xml:space="preserve">
+    <value>نام تنظیمات</value>
+  </data>
+  <data name="SettingValue.Text" xml:space="preserve">
+    <value>مقدار تنظیمات</value>
+  </data>
+  <data name="UserId.Text" xml:space="preserve">
+    <value>شناسه کاربری</value>
+  </data>
+  <data name="SearchPlaceHolder.Text" xml:space="preserve">
+    <value>جستجو</value>
+  </data>
+  <data name="SearchFileSystemResult.Text" xml:space="preserve">
+    <value>فایل های سیستم: {0} فایل یافت شد.</value>
+  </data>
+  <data name="SearchDatabaseResult.Text" xml:space="preserve">
+    <value>پایگاه داده: {0} نمونه یافت شد.</value>
+  </data>
+  <data name="DatabaseInstance.Text" xml:space="preserve">
+    <value>DATABASE INSTANCE</value>
+  </data>
+  <data name="DatabaseValue.Text" xml:space="preserve">
+    <value>مقدار</value>
+  </data>
+  <data name="plSSLOffload.Text" xml:space="preserve">
+    <value>SSL Offload Header Value</value>
+  </data>
+  <data name="plSSLOffload.Help" xml:space="preserve">
+    <value>Set the name of the HTTP header that will be checked to see if a network balancer has used SSL Offloading</value>
+  </data>
+  <data name="BulletinDescription.Text" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="BulletinLink.Text" xml:space="preserve">
+    <value>لینک</value>
+  </data>
+  <data name="NoneSpecified.Text" xml:space="preserve">
+    <value>مشخص نشده</value>
+  </data>
+  <data name="MinPasswordLengthTitle.Help" xml:space="preserve">
+    <value>حداقل تعداد کاراکتر کلمه‌عبور را مشخص می‌کند. این مقدار تنها از طریق فایل  web.config قابل تغییر می‌باشد.</value>
+  </data>
+  <data name="MinPasswordLengthTitle.Text" xml:space="preserve">
+    <value>حداقل طول کلمه‌عبور:</value>
+  </data>
+  <data name="CheckHiddenSystemFilesFailure.Text" xml:space="preserve">
+    <value>There are files marked as system file or hidden in the website folder.</value>
+  </data>
+  <data name="CheckHiddenSystemFilesName.Text" xml:space="preserve">
+    <value>بررسی فایل های مخفی</value>
+  </data>
+  <data name="CheckHiddenSystemFilesReason.Text" xml:space="preserve">
+    <value>Hackers may upload rootkits into the website, they marked them as system file or hidden in file system, then you can not see these files in file explorer.</value>
+  </data>
+  <data name="CheckHiddenSystemFilesSuccess.Text" xml:space="preserve">
+    <value>فایل های مخصوص سیستم و مخفی یافت نشد.</value>
+  </data>
+  <data name="Redirect.Text" xml:space="preserve">
+    <value>به دامنه اصلی منتقل شود</value>
+  </data>
+  <data name="plDisplayCopyright.Help" xml:space="preserve">
+    <value>برای اضافه کردن کپی رایت دی ان ان به سورس صفحه ها این گزینه را فعال کنید</value>
+  </data>
+  <data name="plDisplayCopyright.Text" xml:space="preserve">
+    <value>نمایش کپی رایت</value>
+  </data>
+  <data name="CheckTelerikVulnerabilityFailure.Text" xml:space="preserve">
+    <value>The Telerik component vulnerability has not been patched, please go to http://www.dnnsoftware.com/services/customer-support/success-network/security-fix-june-2017 for detailed information. You also can download a patch from that page or directly from http://dnn.ly/SecurityFix201701 and apply it.</value>
+  </data>
+  <data name="CheckTelerikVulnerabilityName.Text" xml:space="preserve">
+    <value>بررسی کنید آیا کامپوننت Telerik آسیب پذیر است یا خیر.</value>
+  </data>
+  <data name="CheckTelerikVulnerabilityReason.Text" xml:space="preserve">
+    <value>Third party components referenced in core may have vulnerability in old versions and need to be patched.</value>
+  </data>
+  <data name="CheckTelerikVulnerabilitySuccess.Text" xml:space="preserve">
+    <value>کامپوننت تلریک قبلا پچ شده است.</value>
+  </data>
+  <data name="plPasswordDays.Text" xml:space="preserve">
+    <value>تعداد روزها قبل از استفاده مجدد از رمز عبور</value>
+  </data>
+  <data name="plPasswordDays.Help" xml:space="preserve">
+    <value>مقدار روز را وارد کنید که باید چه مقداری بگذرد تا یک رمز عبور امکان استفاده مجدد پیدا کند.</value>
+  </data>
+  <data name="MembershipDaysBeforePasswordReuse.ErrorMessage" xml:space="preserve">
+    <value>تعداد روزها قبل از استفاده مجدد از رمز عبور باید یک عدد صحیح بزرگتر یا برابر 0 و کمتر از 10000 باشد.</value>
+  </data>
+  <data name="UserNotMemberOfRole.Text" xml:space="preserve">
+    <value>کاربرعضو این نقش امنیتی {0} نیست.</value>
+  </data>
+  <data name="NotValid.Text" xml:space="preserve">
+    <value>{0} {1} معتبر نمی باشد.</value>
+  </data>
+  <data name="Empty.Text" xml:space="preserve">
+    <value>{0} نباید خالی باشد.</value>
+  </data>
+  <data name="DeletedTab.Text" xml:space="preserve">
+    <value>تب با این شناسه {0} حذف شده است.</value>
+  </data>
+  <data name="Disabled.Text" xml:space="preserve">
+    <value>تب با این شناسه {0} غیرفعال است.</value>
+  </data>
+  <data name="Check.Text" xml:space="preserve">
+    <value>[ چک کنید ]</value>
+  </data>
+</root>

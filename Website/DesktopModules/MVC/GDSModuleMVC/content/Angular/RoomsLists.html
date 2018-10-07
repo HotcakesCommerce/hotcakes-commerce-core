@@ -1,0 +1,55 @@
+﻿<div class="form-horizontal" role="form">
+    <fieldset>
+        <legend> افزودن یک پکیج اتاق</legend>
+        <div class="row">
+            <div class="form-group form-group-sm col-sm-4">
+                <label for="pkgName" class="col-sm-3 control-label">نام پکیج</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="pkgName" id="pkgName" name="pkgName" />
+                </div>
+            </div>
+            <div class="form-group form-group-sm col-sm-5">
+                <label for="pkgDescription" class="col-sm-3 control-label">توضیحات</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="pkgDescription" id="pkgDescription" name="pkgDescription" />
+                </div>
+            </div>
+            <div class="form-group form-group-sm col-sm-3">
+                <label for="pkgCount" class="col-sm-6 control-label">تعداد شب اقامت</label>
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" ng-model="pkgCount" id="pkgCount" name="pkgCount" />
+                </div>
+            </div>
+            <div class="col-sm-1"><a class="btn btn-primary" ng-click="AddRoomsPackage()">ثبت پکیج</a></div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>لیست پکیج ها </legend>
+        <table>
+            <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام پکیج</th>
+                    <th>توضیحات</th>
+                    <th>اعتبار(روز)</th>
+                    <th>عملیات</th>
+
+                </tr>
+            </thead>
+            <tr ng-repeat="x in Packages">
+                <td>{{$index + 1 }}</td>
+                <td>{{ x.Name }}</td>
+                <td>{{ x.Description }}</td>
+                <td>{{ x.Count }}</td>
+                <td><a ng-click="RemoveRoomsPackage(x.ID)">حذف</a> <a ui-sref="ShowRoomsPackage({id:x.ID})">نمایش پکیج </a></td>
+            </tr>
+        </table>
+    </fieldset>
+</div>
+<style>
+    table{
+        width:100%;
+    }
+    th,td,tr{text-align:center;}
+</style>

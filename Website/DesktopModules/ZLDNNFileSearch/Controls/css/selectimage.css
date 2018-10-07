@@ -1,0 +1,135 @@
+﻿body {
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 12px;
+}
+.divHeader {
+    display: block;
+    height: 20px;
+    padding: 5px;
+}
+
+.divLeft {
+    margin-right: 10px;
+    float: left;
+    text-align: right;
+    vertical-align:middle;
+}
+
+.divRight {
+    margin-right: 10px;
+    float: right;
+    text-align: right;
+    vertical-align:middle;
+}
+.NormalGreen {
+    color: green;
+    font-size: 14px;
+}
+.NormalRed {
+    color: red;
+    font-size: 14px;
+}
+.normalText {
+    width: 200px;
+}
+.longText {
+    width: 500px;
+}
+.PagingTable {
+    background-color: #FFFFFF;
+    border: 1px solid #003366;
+    width: 98%;
+    height: 33px;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 12px;
+}
+.divFileList {
+    display: block;
+    padding: 10px 0 10px 0;
+}
+
+
+.divFile {
+    display: inline-block;
+    padding: 5px 3px 5px 3px;
+    position: relative;
+}
+.attachment 
+{
+    -moz-user-select: none;
+    color: #464646;
+    float: left;
+    list-style: none outside none;
+    margin: 0 10px 20px;
+    padding: 0;
+    position:absolute;
+    bottom: 0px;
+    text-align: center;
+    table-layout: fixed;
+}
+.selected.attachment {
+    box-shadow: 0 0 0 1px #FFFFFF, 0 0 0 3px #CCCCCC;
+}
+.details.attachment {
+    box-shadow: 0 0 0 1px #FFFFFF, 0 0 0 5px #1E8CBE;
+}
+
+.attachment .thumbnail img {
+    left: 0;
+    top: 0;
+}
+.attachment span {
+    background-color:#DDD; 
+    display:block;
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+    min-width: 50px;
+    width: 100%;
+    overflow: hidden;
+    word-break: break-all; 
+    word-wrap:break-word;
+}
+
+.attachment .thumbnail .centered img {
+    transform: translate(-50%, -50%);
+}
+
+.attachment .thumbnail img {
+    position: absolute;
+}
+.attachment .check {
+    background: linear-gradient(to bottom, #F1F1F1, #E1E1E1) repeat scroll 0 0 #F1F1F1;
+    border: 1px solid #FFFFFF;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+    display: none;
+    height: 24px;
+    outline: 0 none;
+    position: absolute;
+    right: -7px;
+    top: -7px;
+    width: 24px;
+}
+.attachment .check div {
+    background-position: -1px 0;
+    height: 15px;
+    margin: 5px;
+    width: 15px;
+}
+.attachment.selected .check {
+    display: block;
+}
+.attachment.details .check {
+    background: linear-gradient(to bottom, #1E8CBE, #0074A2) repeat scroll 0 0 #1E8CBE;
+    box-shadow: 0 0 0 1px #1E8CBE;
+}
+.attachment.details .check div {
+    background-position: -19px -3px;
+}
+.attachment.details .check:hover div {
+    background-position: -19px -3px;
+}
+.media-modal-icon {
+    background-image: url("source/success-icn.png");
+}

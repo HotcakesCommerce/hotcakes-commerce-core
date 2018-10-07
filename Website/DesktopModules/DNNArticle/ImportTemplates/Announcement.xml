@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ImportTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FileName>DNNAnnouncements</FileName>
+  <RootName>Announcements</RootName>
+  <ItemNodeName>Announcement</ItemNodeName>
+  <TitleField>Title</TitleField>
+  <ContentField>Description</ContentField>
+  <SummaryField>Description</SummaryField>
+  <ImageURLField>ImageSource</ImageURLField>
+  <ExpireDateField>ExpireDate</ExpireDateField>
+  <PublishDateField>PublishDate</PublishDateField>
+  <RelatedURLField>Url</RelatedURLField>
+  <CreatedByUser>CreatedByUser</CreatedByUser>
+</ImportTemplate>

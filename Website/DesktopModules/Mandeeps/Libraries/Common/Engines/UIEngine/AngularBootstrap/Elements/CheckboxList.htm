@@ -1,0 +1,5 @@
+﻿<div class="ms-input-group">
+    <div ng-repeat="option in ui.data.[name].Options">
+        <input type="checkbox" name="ui.data.[name].Name" value="option.[options-value]" ng-click="cmpCheckboxlist_ngClick(option,ui.data.[name].OptionsValue,ui.data.[name].Value)" ng-checked="cmpCheckboxlist_ngChecked(option,ui.data.[name].OptionsValue,ui.data.[name].Value)" [attributes]> {{option.[options-text]}}
+    </div>
+</div>

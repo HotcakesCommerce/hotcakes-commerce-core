@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="NoModulesForUser.Text" xml:space="preserve">
+    <value>There are no FAQ modules which the current user can edit.  Please enter a user account which has edit access to one or more FAQ modules in the site.</value>
+  </data>
+  <data name="FeatureNotImplemented.Text" xml:space="preserve">
+    <value>This feature is currently not implemented. </value>
+  </data>
+  <data name="AuthenticationError.Text" xml:space="preserve">
+    <value>An error occurred while trying to authenticate the user.</value>
+  </data>
+  <data name="CreateError.Text" xml:space="preserve">
+    <value>There was an error creating this entry.</value>
+  </data>
+  <data name="DeletePageError.Text" xml:space="preserve">
+    <value>There was an error deleting this item.</value>
+  </data>
+  <data name="DeletePostError.Text" xml:space="preserve">
+    <value>There was an error deleting this item.</value>
+  </data>
+  <data name="Disabled.Text" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="EditError.Text" xml:space="preserve">
+    <value>There was an error editing this entry.</value>
+  </data>
+  <data name="GetCategoriesError.Text" xml:space="preserve">
+    <value>There was an error retrieving the list of categories for this entry.</value>
+  </data>
+  <data name="GetPageError.Text" xml:space="preserve">
+    <value>There was an error retrieving this item.</value>
+  </data>
+  <data name="GetPagesError.Text" xml:space="preserve">
+    <value>There was an error retrieving the items.</value>
+  </data>
+  <data name="GetPostError.Text" xml:space="preserve">
+    <value>There was an error retrieving this item.</value>
+  </data>
+  <data name="GetUsersModulesError.Text" xml:space="preserve">
+    <value>There was an error retrieving the list of modules.</value>
+  </data>
+  <data name="ImageSaveError.Text" xml:space="preserve">
+    <value>An error occurred while saving an image related to this entry.</value>
+  </data>
+  <data name="NoPostAvailable.Text" xml:space="preserve">
+    <value>There was en error retrieving the entry.  Try closing and restarting the software you're using to edit this article.</value>
+  </data>
+  <data name="PortalLoadError.Text" xml:space="preserve">
+    <value>We tried everything, but we weren't able to identify a valid DotNetNuke portal based on the URL provided.  If you are referencing a child portal, please include the child portal in the URL (eg. http://www.mainportal.com/childportal/metapost.ashx).</value>
+  </data>
+  <data name="RecentPostsError.Text" xml:space="preserve">
+    <value>There was an error retrieving the list of recent FAQs.</value>
+  </data>
+  <data name="ShowInMenu.Text" xml:space="preserve">
+    <value>Show in menu</value>
+  </data>
+  <data name="UserInvalid.Text" xml:space="preserve">
+    <value>Either the username or the password is invalid.</value>
+  </data>
+  <data name="TitleContainsHtml.Text" xml:space="preserve">
+    <value>Titles which contain HTML are managed as a split post.</value>
+  </data>
+</root>

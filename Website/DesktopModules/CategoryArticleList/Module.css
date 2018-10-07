@@ -1,0 +1,39 @@
+﻿.ZLDNN_CategoryList
+{
+    width: 100%;
+    padding: 4px;
+    vertical-align: top;
+}
+
+.ZLDNN_CategoryArtilceList
+{
+    width: 95%;
+    padding: 4px;
+    vertical-align: top;
+}
+.PageNav {
+    vertical-align: middle;
+}
+
+.PageNavLabel {
+    display: inline-block;
+    
+}
+
+.imgPrevious
+{
+    display: inline-block;
+    background-image: url("prevbutton.gif");
+    width: 25px;
+    height: 25px;
+}
+
+.imgNext
+{
+    display: inline-block;
+    background-image: url("nextbutton.gif");
+    
+    width: 25px;
+    height: 25px;
+}
+ 

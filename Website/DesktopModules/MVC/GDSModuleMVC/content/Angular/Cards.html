@@ -1,0 +1,56 @@
+﻿<div class="form-horizontal" role="form">
+    <fieldset>
+        <legend>افزودن کارت هدیه تکی</legend>
+        <div class="row">
+            <div class="form-group form-group-sm col-sm-4">
+                <label for="PassKey" class="col-sm-3 control-label">گذرواژه کارت </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="PassKey" id="PassKey" name="PassKey" />
+                </div>
+            </div>
+            <div class="form-group form-group-sm col-sm-3">
+                <label for="Package" class="col-sm-3 control-label">پکیج</label>
+                <select ng-model="Package" class="form-control"
+                        ng-options="elt.Name for elt in lstPackages" name="Package">
+                    <option value="" ng-model="default">لطفا پکیج اتاق را انتخاب نمایید</option>
+                </select>
+            </div>
+            <div class="form-group form-group-sm col-sm-4">
+                <label for="Description" class="col-sm-3 control-label">توضیحات </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="Description" id="Description" name="Description" />
+                </div>
+            </div>
+            <div class="col-sm-1"><a class="btn btn-primary" ng-click="AddCard()">ثبت کارت</a></div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>لیست پکیج ها </legend>
+        <table>
+            <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>گذرواژه</th>
+                    <th>نام پکیج</th>
+                    <th>توضیحات</th>
+                    <th>عملیات</th>
+
+                </tr>
+            </thead>
+            <tr ng-repeat="x in Packages">
+                <td>{{$index + 1 }}</td>
+                <td>{{ x.PassKey }}</td>
+                <td>{{ x.Name }}</td>
+                <td>{{ x.Description }}</td>
+                <td>{{ x.DateOfInserted }}</td>
+            </tr>
+        </table>
+    </fieldset>
+</div>
+<style>
+    table{
+        width:100%;
+    }
+    th,td,tr{text-align:center;}
+</style>

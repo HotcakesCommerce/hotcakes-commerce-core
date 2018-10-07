@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutAbout.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="BasicStylesBold.Text" xml:space="preserve">
+    <value>Bold</value>
+  </data>
+  <data name="BasicStylesCopyFormatting.Text" xml:space="preserve">
+    <value>Copy Formatting</value>
+  </data>
+  <data name="BasicStylesItalic.Text" xml:space="preserve">
+    <value>Italic</value>
+  </data>
+  <data name="BasicStylesRemoveFormat.Text" xml:space="preserve">
+    <value>Remove Format</value>
+  </data>
+  <data name="BasicStylesStrike.Text" xml:space="preserve">
+    <value>Strike</value>
+  </data>
+  <data name="BasicStylesSubscript.Text" xml:space="preserve">
+    <value>Subscript</value>
+  </data>
+  <data name="BasicStylesSuperscript.Text" xml:space="preserve">
+    <value>Superscript</value>
+  </data>
+  <data name="BasicStylesUnderline.Text" xml:space="preserve">
+    <value>Underline</value>
+  </data>
+  <data name="ClipboardCopy.Text" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="ClipboardCut.Text" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="ClipboardPaste.Text" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="ClipboardPasteFromWord.Text" xml:space="preserve">
+    <value>Paste from Word</value>
+  </data>
+  <data name="ClipboardPasteText.Text" xml:space="preserve">
+    <value>Paste As Plain Text</value>
+  </data>
+  <data name="ClipboardRedo.Text" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="ClipboardUndo.Text" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="ColorsBGColor.Text" xml:space="preserve">
+    <value>Background Color</value>
+  </data>
+  <data name="ColorsTextColor.Text" xml:space="preserve">
+    <value>Text Color</value>
+  </data>
+  <data name="DeleteProfile.Text" xml:space="preserve">
+    <value>Delete Profile</value>
+  </data>
+  <data name="DeleteProfileText.Text" xml:space="preserve">
+    <value>You will not be able to recover this profile!</value>
+  </data>
+  <data name="DeleteProfileTitle.Text" xml:space="preserve">
+    <value>Are You Sure?</value>
+  </data>
+  <data name="DocumentPreview.Text" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="DocumentPrint.Text" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="DocumentSource.Text" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="DocumentTemplates.Text" xml:space="preserve">
+    <value>Templates</value>
+  </data>
+  <data name="EditingFind.Text" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="EditingReplace.Text" xml:space="preserve">
+    <value>Replace</value>
+  </data>
+  <data name="EditingScayt.Text" xml:space="preserve">
+    <value>Scayt</value>
+  </data>
+  <data name="EditingSelectAll.Text" xml:space="preserve">
+    <value>SelectAll</value>
+  </data>
+  <data name="FilebrowserBrowseUrl.Text" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="FilebrowserImageBrowseUrl.Text" xml:space="preserve">
+    <value>Browse Image</value>
+  </data>
+  <data name="Height.Text" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="Image.Text" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="Information.Text" xml:space="preserve">
+    <value>Select from an available profile or create a custom one using the new profile option. Admin may allow uploads via link and image plugin with file type restrictions and max file size. &lt;br /&gt;&lt;br /&gt;
+Note: You must refresh the original page with the editor to see any new changes.</value>
+  </data>
+  <data name="InsertFlash.Text" xml:space="preserve">
+    <value>Flash</value>
+  </data>
+  <data name="InsertHorizontalRule.Text" xml:space="preserve">
+    <value>Horizontal Rule</value>
+  </data>
+  <data name="InsertIframe.Text" xml:space="preserve">
+    <value>Iframe</value>
+  </data>
+  <data name="InsertImage.Text" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="InsertPageBreak.Text" xml:space="preserve">
+    <value>PageBreak</value>
+  </data>
+  <data name="InsertSmiley.Text" xml:space="preserve">
+    <value>Smiley</value>
+  </data>
+  <data name="InsertSpecialChar.Text" xml:space="preserve">
+    <value>SpecialChar</value>
+  </data>
+  <data name="InsertTable.Text" xml:space="preserve">
+    <value>Table</value>
+  </data>
+  <data name="Link.Text" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="LinksAnchor.Text" xml:space="preserve">
+    <value>Anchor</value>
+  </data>
+  <data name="LinksLink.Text" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="LinksUnlink.Text" xml:space="preserve">
+    <value>Unlink</value>
+  </data>
+  <data name="Manage.Text" xml:space="preserve">
+    <value>Manage Profile</value>
+  </data>
+  <data name="New.Text" xml:space="preserve">
+    <value>New Profile</value>
+  </data>
+  <data name="NewProfile.Text" xml:space="preserve">
+    <value>Profile Name</value>
+  </data>
+  <data name="NotDeleted.Text" xml:space="preserve">
+    <value>Cannot delete a profile that's in use</value>
+  </data>
+  <data name="ParagraphBidiLtr.Text" xml:space="preserve">
+    <value>Bidi Left</value>
+  </data>
+  <data name="ParagraphBidiRtl.Text" xml:space="preserve">
+    <value>Bidi Right</value>
+  </data>
+  <data name="ParagraphBlockquote.Text" xml:space="preserve">
+    <value>Blockquote</value>
+  </data>
+  <data name="ParagraphBulletedList.Text" xml:space="preserve">
+    <value>BulletedList</value>
+  </data>
+  <data name="ParagraphCreateDiv.Text" xml:space="preserve">
+    <value>Div</value>
+  </data>
+  <data name="ParagraphIndent.Text" xml:space="preserve">
+    <value>Indent</value>
+  </data>
+  <data name="ParagraphJustifyBlock.Text" xml:space="preserve">
+    <value>Justify Block</value>
+  </data>
+  <data name="ParagraphJustifyCenter.Text" xml:space="preserve">
+    <value>Justify Center</value>
+  </data>
+  <data name="ParagraphJustifyLeft.Text" xml:space="preserve">
+    <value>Justify Left</value>
+  </data>
+  <data name="ParagraphJustifyRight.Text" xml:space="preserve">
+    <value>Justify Right</value>
+  </data>
+  <data name="ParagraphNumberedList.Text" xml:space="preserve">
+    <value>NumberedList</value>
+  </data>
+  <data name="ParagraphOutdent.Text" xml:space="preserve">
+    <value>Outdent</value>
+  </data>
+  <data name="Plugins.Text" xml:space="preserve">
+    <value>Plugins</value>
+  </data>
+  <data name="Profile.Text" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="SelectEditorProfile.Text" xml:space="preserve">
+    <value>Editor Profile</value>
+  </data>
+  <data name="StylesFont.Text" xml:space="preserve">
+    <value>Font</value>
+  </data>
+  <data name="StylesFontSize.Text" xml:space="preserve">
+    <value>FontSize</value>
+  </data>
+  <data name="StylesFormat.Text" xml:space="preserve">
+    <value>Format</value>
+  </data>
+  <data name="StylesStyles.Text" xml:space="preserve">
+    <value>Styles</value>
+  </data>
+  <data name="Toolbar.Text" xml:space="preserve">
+    <value>Toolbar</value>
+  </data>
+  <data name="ToolsMaximize.Text" xml:space="preserve">
+    <value>Maximize</value>
+  </data>
+  <data name="ToolsShowBlocks.Text" xml:space="preserve">
+    <value>ShowBlocks</value>
+  </data>
+  <data name="UiColor.Text" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="Update.Text" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="UpdateApply.Text" xml:space="preserve">
+    <value>Update &amp; Apply</value>
+  </data>
+  <data name="UploadFiles.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="UploadFiles.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="UploadFiles.Text" xml:space="preserve">
+    <value>Allow users to upload files</value>
+  </data>
+  <data name="UploadFilesAllowedAttachmentFileExtensions.Text" xml:space="preserve">
+    <value>Allowed Extensions</value>
+  </data>
+  <data name="UploadFilesMaxFileSize.Help" xml:space="preserve">
+    <value>Maximum size of each file that can be uploaded</value>
+  </data>
+  <data name="UploadFilesMaxFileSize.Suffix" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="UploadFilesMaxFileSize.Text" xml:space="preserve">
+    <value>Max File Size</value>
+  </data>
+  <data name="UploadFilesRootFolder.Text" xml:space="preserve">
+    <value>Root Folder</value>
+  </data>
+  <data name="UploadImages.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="UploadImages.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="UploadImages.Text" xml:space="preserve">
+    <value>Allow users to upload images</value>
+  </data>
+  <data name="UploadImagesAllowedAttachmentFileExtensions.Text" xml:space="preserve">
+    <value>Allowed Extensions</value>
+  </data>
+  <data name="UploadImagesMaxFileSize.Help" xml:space="preserve">
+    <value>Maximum size of each file that can be uploaded</value>
+  </data>
+  <data name="UploadImagesMaxFileSize.Suffix" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="UploadImagesMaxFileSize.Text" xml:space="preserve">
+    <value>Max File Size</value>
+  </data>
+  <data name="UploadImagesRootFolder.Text" xml:space="preserve">
+    <value>Root Folder</value>
+  </data>
+  <data name="Width.Text" xml:space="preserve">
+    <value>Width</value>
+  </data>
+</root>

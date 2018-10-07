@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Authorized Author.Permission" xml:space="preserve">
+    <value>Authorized Author</value>
+  </data>
+  <data name="Edit Aritcle.Permission" xml:space="preserve">
+    <value>Edit Article</value>
+  </data>
+  <data name="View Attachment.Permission" xml:space="preserve">
+    <value>View Attachment</value>
+  </data>
+  <data name="Add Attachment.Permission" xml:space="preserve">
+    <value>Add Attachment</value>
+  </data>
+  <data name="Add Aritcle.Permission" xml:space="preserve">
+    <value>Add Article</value>
+  </data>
+  <data name="Approve Aritcle.Permission" xml:space="preserve">
+    <value>Approve Article</value>
+  </data>
+  <data name="View Aritcle.Permission" xml:space="preserve">
+    <value>View Article</value>
+  </data>
+  <data name="DefaultDisplayTemplate.Text" xml:space="preserve">
+    <value>&lt;p style='margin-top:5px;margin-bottom:0px;'&gt;[PUBLISHDATEICON][EDIT] &lt;a href="[VIEWURL]" class="Head articletitle" style='float:none;margin-bottom:0px;margin-top:5px;display:inline' &gt;[TITLE]&lt;/a&gt;&lt;br /&gt;&lt;span class="SubSubHead clear" style='font-size:x-small;vertical-align:top;'&gt; Created by [USERDISPLAYNAME] on [PUBLISHDATE]&lt;/span&gt;&lt;/p&gt; &lt;div class="Normal"&gt;[SHORTENDESCRIPTION:100] &lt;/div&gt; &lt;a class="CommandButton" href="[VIEWURL]"&gt;Read More..&lt;/a&gt; &lt;hr /&gt;</value>
+  </data>
+  <data name="AttachmentLabelCSS.Text" xml:space="preserve">
+    <value>SubHead</value>
+  </data>
+  <data name="AttachmentLabelText.Text" xml:space="preserve">
+    <value>Attached Files</value>
+  </data>
+  <data name="AttachmentListCSS.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RelatedArticleLabelCSS.Text" xml:space="preserve">
+    <value>SubHead</value>
+  </data>
+  <data name="RelatedArticleLabelText.Text" xml:space="preserve">
+    <value>Related Articles</value>
+  </data>
+  <data name="RelatedArticlelistCSS.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DefaultViewDisplayTemplate.Text" xml:space="preserve">
+    <value>[EDIT]&lt;span class="Head"&gt;[TITLE]&lt;/span&gt; &lt;br&gt; &lt;span class="SubSubHead"&gt; Created by [CREATEDBYUSERNAME] on [CREATEDDATE]&lt;/span&gt; &lt;p&gt; &lt;span class="Normal"&gt;[DESCRIPTION]&lt;/span&gt; &lt;/p&gt; &lt;hr /&gt;[PAGECONTENT][PRINTICON][ATTACHMENT][RELATEDARTICLES][MAKERATING][MAKECOMMENT][COMMENTLIST][BACK]</value>
+  </data>
+  <data name="AttachmentTemplate.Text" xml:space="preserve">
+    <value>&lt;div class='div-table'&gt;&lt;div class='div-table-row'&gt;&lt;div class='div-table-col-icon'&gt; [FILETYPEICON]&lt;/div&gt;&lt;div  class='div-table-col'&gt; [FILELINK] &lt;/div&gt;&lt;div class='div-table-col-icon'&gt;[DOWNLOADICON]&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="DefaultUserName.Text" xml:space="preserve">
+    <value>Anonymous</value>
+  </data>
+  <data name="RelatedArticlesDisplayTemplate.Text" xml:space="preserve">
+    <value>&lt;div class='relatedarticle'&gt;&lt;a href='[VIEWURL]' class="CommandButton"&gt;[TITLE]&lt;/a&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="More.Text" xml:space="preserve">
+    <value>More</value>
+  </data>
+  <data name="AddArticle.Permission" xml:space="preserve">
+    <value>Add Articles</value>
+  </data>
+  <data name="ViewArticle.Permission" xml:space="preserve">
+    <value>View Articles</value>
+  </data>
+  <data name="CommentTemplate.Text" xml:space="preserve">
+    <value>&lt;div class="CommentBubble"&gt;
+    &lt;blockquote&gt;
+        &lt;div class="CommentGravatar"&gt;
+            [USERPHOTO:48]
+    
+        &lt;/div&gt;
+        &lt;p&gt;[COMMENT]&lt;/p&gt;
+        &lt;p&gt;&lt;span class="NormalBold"&gt;[TITLE]&lt;/span&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+    &lt;cite&gt;
+        By &lt;span class="NormalBold"&gt;[CREATEDBYUSER]&lt;/span&gt; on &lt;span class="NormalBold"&gt;[CREATEDDATE]&lt;/span&gt; 
+    &lt;/cite&gt;
+&lt;/div&gt;</value>
+  </data>
+  <data name="DateTimeFormat.Text" xml:space="preserve">
+    <value>on [DATE]</value>
+  </data>
+  <data name="Days.Text" xml:space="preserve">
+    <value>[DAYS] days</value>
+  </data>
+  <data name="Hours.Text" xml:space="preserve">
+    <value>[HOURS] hours</value>
+  </data>
+  <data name="Minutes.Text" xml:space="preserve">
+    <value>[MINUTES] minutes</value>
+  </data>
+  <data name="Months.Text" xml:space="preserve">
+    <value>[MONTHS] months</value>
+  </data>
+  <data name="OneDay.Text" xml:space="preserve">
+    <value>one day</value>
+  </data>
+  <data name="OneHour.Text" xml:space="preserve">
+    <value>one hour</value>
+  </data>
+  <data name="OneMinute.Text" xml:space="preserve">
+    <value>one minute</value>
+  </data>
+  <data name="OneMonth.Text" xml:space="preserve">
+    <value>one month</value>
+  </data>
+  <data name="OneSecond.Text" xml:space="preserve">
+    <value>one second</value>
+  </data>
+  <data name="PassTimeFormat.Text" xml:space="preserve">
+    <value>[DATE] ago</value>
+  </data>
+  <data name="Seconds.Text" xml:space="preserve">
+    <value>[SECONDS] seconds</value>
+  </data>
+  <data name="AddArticle.Text" xml:space="preserve">
+    <value>{0} adds a new article "{1}". </value>
+  </data>
+  <data name="NoSpecified.Text" xml:space="preserve">
+    <value>--Not Specified--</value>
+  </data>
+  <data name="DefaultCategoryTemplate.Text" xml:space="preserve">
+    <value>&lt;div style="width:100%;background:#cccccc"&gt;&lt;span class="Head"&gt;[TITLE]&lt;/span&gt;&lt;/div&gt;[CATEGORYARTICLES]&lt;br /&gt;[MORE:More,CommandButton]</value>
+  </data>
+  <data name="ModuleSettings.Text" xml:space="preserve">
+    <value>Please go to Module Settings to set up it.</value>
+  </data>
+  <data name="AddRate.Text" xml:space="preserve">
+    <value>{0} adds a rate on "{1}".</value>
+  </data>
+  <data name="Setup.Text" xml:space="preserve">
+    <value>Please go to module settings to set up it.</value>
+  </data>
+  <data name="AddArticleTemplate.Text" xml:space="preserve">
+    <value>&lt;a href="[ADDARTICLEURL]"&gt;Add New Article &lt;/a&gt;</value>
+  </data>
+  <data name="CannotCommentText.Text" xml:space="preserve">
+    <value>The comment feature is locked by administrator.</value>
+  </data>
+  <data name="CommentLockedText.Text" xml:space="preserve">
+    <value>The article author disables the comment feature.</value>
+  </data>
+  <data name="ThankApproveComment.Text" xml:space="preserve">
+    <value>Thanks for your comment. It will be published after moderated.</value>
+  </data>
+  <data name="ThankComment.Text" xml:space="preserve">
+    <value>Thanks for your comment.</value>
+  </data>
+  <data name="CommentEmailSubjectToModerator.Text" xml:space="preserve">
+    <value>There is a new comment</value>
+  </data>
+  <data name="CommentEmailTemplateToModerator.Text" xml:space="preserve">
+    <value>There is a new comment for [ARTICLETITLE]</value>
+  </data>
+  <data name="EmailSubjectTempalteToCommentAuthorApprove.Text" xml:space="preserve">
+    <value>Your comment is approved </value>
+  </data>
+  <data name="EmailSubjectTemplateToArticleAuthor.Text" xml:space="preserve">
+    <value>There is a new comment for your article</value>
+  </data>
+  <data name="EmailSubjectTemplateToCommentAuthorReject.Text" xml:space="preserve">
+    <value>Your comment is rejected </value>
+  </data>
+  <data name="EmailSubjectToParentCommentAuthor.Text" xml:space="preserve">
+    <value>There is a reply to your comment </value>
+  </data>
+  <data name="EmailSubjectWhenCommentFlagged.Text" xml:space="preserve">
+    <value>A comment is flagged</value>
+  </data>
+  <data name="EmailTemplateToArticleAuthor.Text" xml:space="preserve">
+    <value>There is a new comment for [ARTICLETITLE]</value>
+  </data>
+  <data name="EmailTemplateToParentCommentAuthor.Text" xml:space="preserve">
+    <value>There is a reply to your comment</value>
+  </data>
+  <data name="EmailTemplateWhenCommentFlagged.Text" xml:space="preserve">
+    <value>The comment for [ARTICLETITLE] is flagged.</value>
+  </data>
+  <data name="EmailTempalteToCommentAuthorApprove.Text" xml:space="preserve">
+    <value>Your comment is approved.</value>
+  </data>
+  <data name="EmailTemplateToCommentAuthorReject.Text" xml:space="preserve">
+    <value>Your comment is rejected.</value>
+  </data>
+  <data name="CommentTemplateFlat.Text" xml:space="preserve">
+    <value>&lt;div class="CommentBubble" &gt;
+ &lt;blockquote&gt;
+ &lt;div class="CommentGravatar"&gt;
+ [USERPHOTO:48]
+ 
+ &lt;/div&gt;
+ &lt;div class="CommentContent"&gt;[COMMENT]
+ &lt;div&gt;&lt;span class="NormalBold"&gt;[TITLE]&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+ &lt;/blockquote&gt; 
+ &lt;cite&gt;
+ By &lt;span class="NormalBold"&gt;[CREATEDBYUSER]&lt;/span&gt; on &lt;span class="NormalBold"&gt;[CREATEDDATE] &lt;/span&gt; &lt;span class="NormalBold"&gt;Like:[LIKENUMBER] Dislike:[DISLIKENUMBER]&lt;/span&gt; 
+
+ &lt;/cite&gt; &lt;div class="CommentCommand"&gt;[DELETE:Delete,CommentLink] [APPROVE: Approve,CommentLink] [UNAPPROVE:UnApprove,CommentLink] [MARKSPAM:Spam,CommentLink] [FLAG:Flag,CommentLink] [LIKE:Like,CommentLink] 
+[DISLIKE:Dislike,CommentLink] 
+&lt;/div&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="CommentTemplateThread.Text" xml:space="preserve">
+    <value>&lt;div class="CommentBubble" style="padding-left: [LEVEL:15,0]px"&gt;
+ &lt;blockquote&gt;
+ &lt;div class="CommentGravatar"&gt;
+ [USERPHOTO:48]
+ 
+ &lt;/div&gt;
+ &lt;div class="CommentContent"&gt;[COMMENT]
+ &lt;div&gt;&lt;span class="NormalBold"&gt;[TITLE]&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+ &lt;/blockquote&gt; 
+ &lt;cite&gt;
+ By &lt;span class="NormalBold"&gt;[CREATEDBYUSER]&lt;/span&gt; on &lt;span class="NormalBold"&gt;[CREATEDDATE]&lt;/span&gt; &lt;span class="NormalBold"&gt;Like:[LIKENUMBER] Dislike:[DISLIKENUMBER]&lt;/span&gt; 
+ &lt;/cite&gt; &lt;div class="CommentCommand"&gt;[DELETE:Delete,CommentLink] 
+[REPLY:Reply,CommentLink] [APPROVE: Approve,CommentLink] [UNAPPROVE:UnApprove,CommentLink] [MARKSPAM:Spam,CommentLink] [FLAG:Flag,CommentLink] [LIKE:Like,CommentLink] [DISLIKE:Dislike,CommentLink] 
+&lt;/div&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="NoComment.Text" xml:space="preserve">
+    <value>There is no comment.</value>
+  </data>
+  <data name="AllPortals.Text" xml:space="preserve">
+    <value>All Portals</value>
+  </data>
+  <data name="Content Manager.Permission" xml:space="preserve">
+    <value>Content Manager</value>
+  </data>
+  <data name="Layout Manager.Permission" xml:space="preserve">
+    <value>Layout Manager</value>
+  </data>
+  <data name="All.Text" xml:space="preserve">
+    <value>--All--</value>
+  </data>
+  <data name="AddComment.Text" xml:space="preserve">
+    <value>New Comment ...</value>
+  </data>
+  <data name="EmailSubjectTemplateToCommentAuthorDelete.Text" xml:space="preserve">
+    <value>Your comment is deleted</value>
+  </data>
+  <data name="EmailTemplateToCommentAuthorDelete.Text" xml:space="preserve">
+    <value>Your comment is deleted</value>
+  </data>
+  <data name="CopyOf.Text" xml:space="preserve">
+    <value>Copy of </value>
+  </data>
+  <data name="SelectAnArticle.Text" xml:space="preserve">
+    <value>Select an article</value>
+  </data>
+  <data name="None.Text" xml:space="preserve">
+    <value>--Not Specified--</value>
+  </data>
+  <data name="CategoryBreadCrumbBreak.Text" xml:space="preserve">
+    <value> &gt; </value>
+  </data>
+  <data name="DefaultViewDisplayTemplateAjax.Text" xml:space="preserve">
+    <value>&lt;span class="Head"&gt;[TITLE]&lt;/span&gt; &lt;br&gt; &lt;span class="SubSubHead"&gt; Created by [CREATEDBYUSERNAME] on [CREATEDDATE]&lt;/span&gt; &lt;p&gt; &lt;span class="Normal"&gt;[DESCRIPTION]&lt;/span&gt; &lt;/p&gt; &lt;hr /&gt;[CONTENT]</value>
+  </data>
+  <data name="CategoryBreak.Text" xml:space="preserve">
+    <value>, </value>
+  </data>
+  <data name="NoRecord.Text" xml:space="preserve">
+    <value>There is no item......</value>
+  </data>
+  <data name="ArticleLocked.Text" xml:space="preserve">
+    <value>This article was approved and cannot be edited. Please contact admin to unapprove it.</value>
+  </data>
+  <data name="DropDownMessage.Text" xml:space="preserve">
+    <value>"Items &lt;b&gt;1&lt;/b&gt;-&lt;b&gt;{0}&lt;/b&gt; out of &lt;b&gt;{1}&lt;/b&gt;"</value>
+  </data>
+  <data name="NoMatches.Text" xml:space="preserve">
+    <value>No matches</value>
+  </data>
+  <data name="Lightboxcontent.Text" xml:space="preserve">
+    <value>&lt;div style='float:left;margin:5px'&gt;&lt;div&gt;&lt;a id="media[ITEMID]" title="[TITLE]" rel="prettyPhoto[[ENTRYID]]" href="[LIGHTBOXCONTENT]"&gt;[THUMBNAILIMAGE:150]&lt;/a&gt;&lt;/div&gt;&lt;span class="Normal"&gt;[TITLE]&lt;/span&gt; &lt;/div&gt;</value>
+  </data>
+  <data name="Options.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="RatingFinish.Text" xml:space="preserve">
+    <value>Vote successfully!Your vote:{0}. Avage Rate:{1}</value>
+  </data>
+</root>

@@ -1,0 +1,1094 @@
+﻿
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticle') and name='IsAllUser'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticle ADD  
+[IsAllUser] [int]  NULL
+GO
+
+Update {databaseOwner}{objectQualifier}ZLDNN_DNNArticle set [IsAllUser]=1 where ViewRoles is null or CHARINDEX(';All Users;',';'+ViewRoles)>0
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticle
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticle
+
+	@ModuleId       int,
+	@Content        nvarchar (max),
+	@UserID         int,
+	@CreatedDate    datetime,
+	@CategoryID     int,
+	@URL            nvarchar (250),
+	@Title          nvarchar (2000)  ,
+	@Description    nvarchar (max),
+	@ViewOrder      int,
+	@ViewRoles      nvarchar(2000) ,
+	@Clicks         int ,
+	@VoteTotal      int ,
+	@VoteNumber     int ,
+	@CommentNumber  int ,
+	@ApprovedByUser int ,
+	@ApprovedDate   datetime ,
+	@IsApproved     bit,
+	@Tags           nvarchar (200),
+	@ExpireDate     datetime,
+    @SEOTitle       nvarchar (250),
+    @SEODescription nvarchar (250),
+    @SEOTags        nvarchar (250),
+    @Featured       bit,
+    @ReleatedURL    nvarchar (250),
+    @ExtraFields    nvarchar (max),
+    @PublishDate     datetime,
+    @UpdateDate     datetime,
+    @PageNumber     int,
+    @RelatedEntryID int,
+	@RelatedEntryKey nvarchar(500),
+	@LastViewDate datetime,
+	@IsPublished bit,
+	@AllowComment bit,
+	@IsAllUser int
+    
+
+as
+
+insert into {objectQualifier}ZLDNN_DNNArticle (
+	ModuleId,
+	Content,
+	CreatedByUser,
+	CreatedDate,
+	CategoryID,
+	URL,
+	Title,
+	Description,
+	ViewOrder,
+	ViewRoles,
+	Clicks,
+	VoteTotal,
+	VoteNumber,
+	CommentNumber,
+	ApprovedByUser,
+	ApprovedDate,
+	IsApproved,
+	Tags,
+	ExpireDate,
+       SEOTitle ,
+       SEODescription ,
+       SEOTags,
+       Featured,
+       ReleatedURL,
+       ExtraFields,
+       PublishDate,
+       UpdateDate,
+       PageNumber,
+       RelatedEntryID,
+	   RelatedEntryKey,
+	   LastViewDate,
+	   IsPublished,
+	AllowComment,
+	IsAllUser
+	
+) 
+values (
+	@ModuleId,
+	@Content,
+	@UserID,
+	GetDate() ,
+	@CategoryID,
+	@URL,
+	@Title,
+	@Description,
+	@ViewOrder,
+	@ViewRoles,
+	@Clicks,
+	@VoteTotal,
+	@VoteNumber,
+	@CommentNumber,
+	@ApprovedByUser,
+	@ApprovedDate,
+	@IsApproved,
+	@Tags,
+	@ExpireDate,
+    @SEOTitle ,
+    @SEODescription ,
+    @SEOTags,
+    @Featured,
+    @ReleatedURL,
+    @ExtraFields,
+    @PublishDate,
+    @UpdateDate,
+    @PageNumber,
+    @RelatedEntryID,
+	@RelatedEntryKey,
+	@LastViewDate,
+	@IsPublished,
+	@AllowComment,
+	@IsAllUser
+	
+)
+
+select SCOPE_IDENTITY()
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticle
+
+	@ModuleId       int,
+    @ItemId         int,
+	@Content        nvarchar (max),
+	@UserID         int,
+	@CreatedDate    datetime,
+	@CategoryID     int,
+	@URL            nvarchar (250),
+	@Title          nvarchar (2000)  ,
+	@Description    nvarchar (max),
+	@ViewOrder      int,
+	@ViewRoles      nvarchar(2000) ,
+	@Clicks         int ,
+	@VoteTotal      int ,
+	@VoteNumber     int ,
+	@CommentNumber  int ,
+	@ApprovedByUser int ,
+	@ApprovedDate   datetime ,
+	@IsApproved     bit,
+	@Tags           nvarchar (200),
+	@ExpireDate     datetime,
+    @SEOTitle       nvarchar (250),
+    @SEODescription nvarchar (250),
+    @SEOTags        nvarchar (250),
+    @Featured       bit,
+    @ReleatedURL    nvarchar (250),
+    @ExtraFields    nvarchar (max),
+    @PublishDate    datetime,
+    @UpdateDate     datetime,
+    @PageNumber     int,
+    @RelatedEntryID int,
+	@RelatedEntryKey nvarchar(500),
+	@LastViewDate datetime,
+	@IsPublished bit,
+	@AllowComment bit,
+	@IsAllUser int
+
+as
+
+update {objectQualifier}ZLDNN_DNNArticle
+set    Content       = @Content,
+       CreatedByUser = @UserID,
+       
+       CategoryID   =@CategoryID,
+       URL     = @URL,
+       Title =@Title,
+       Description = @Description,
+       ViewOrder=@ViewOrder,
+       ViewRoles=@ViewRoles,
+       Clicks=@Clicks,
+       VoteTotal=@VoteTotal,
+       VoteNumber=@VoteNumber,
+       CommentNumber=@CommentNumber,
+       ApprovedByUser=@ApprovedByUser,
+       ApprovedDate=@ApprovedDate,
+       IsApproved=@IsApproved,
+       Tags=@Tags,
+       ExpireDate=@Expiredate,
+       SEOTitle=@SEOTitle,
+       SEODescription=@SEODescription,
+       SEOTags=@SEOTags,
+       Featured=@Featured,
+       ReleatedURL=@ReleatedURL,
+       ExtraFields=@ExtraFields,
+       PublishDate=@PublishDate,
+       UpdateDate=@UpdateDate,
+       PageNumber=@PageNumber,
+       RelatedEntryID=@RelatedEntryID,
+       RelatedEntryKey=@RelatedEntryKey,
+       LastViewDate=@LastViewDate,
+	   IsPublished=@IsPublished,
+	   AllowComment=@AllowComment,
+	   IsAllUser = @IsAllUser 
+       
+where  ModuleId = @ModuleId
+and    ItemId = @ItemId
+
+GO
+
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory') and name='IsAllUser'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory ADD  
+[IsAllUser] [int]  NULL
+GO
+
+Update {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategory set [IsAllUser]=1 where ViewRoles is null or CHARINDEX(';All Users;',';'+ViewRoles)>0
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryUpdate
+GO
+
+--    CatalogAdd
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryAdd
+	@ModuleID int,
+	@ImagePath nvarchar(255),
+	@Title nvarchar(150),
+	@Description nvarchar(255),
+	@ViewOrder int,
+	@CreatedDate datetime,
+	@CreatedByUser nvarchar(100),
+	@ParentID int,
+	@Level int,
+	@Moderator  nvarchar(100),
+	@IsAutoApprove bit,
+	@IsEmailNotification bit,
+	@EmailAddress nvarchar(255),
+	@ViewRoles nvarchar(2000),
+	@AddRoles nvarchar(2000),
+	@CategoryLink nvarchar(2000),
+	@IsAllUser int
+AS
+
+INSERT INTO {objectQualifier}ZLDNN_DNNArticleCategory (
+	[ModuleID],
+	[ImagePath],
+	[Title],
+	[Description],
+	[ViewOrder],
+	[CreatedDate],
+	[CreatedByUser],
+	[ParentID],
+	[Level],
+	[Moderator],
+	[IsAutoApprove],
+	[IsEmailNotification],
+	[EmailAddress],
+	[ViewRoles],
+	[AddRoles],
+	[CategoryLink],
+	[IsAllUser]
+) VALUES (
+	@ModuleID,
+	@ImagePath,
+	@Title,
+	@Description,
+	@ViewOrder,
+	@CreatedDate,
+	@CreatedByUser,
+	@ParentID,
+	@Level,
+	@Moderator,
+	@IsAutoApprove,
+	@IsEmailNotification,
+	@EmailAddress,
+	@ViewRoles,
+	@AddRoles,
+	@CategoryLink,
+	@IsAllUser
+)
+
+select SCOPE_IDENTITY()
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--    CatalogUpdate
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryUpdate
+	@ItemID int, 
+	@ModuleID int, 
+	@ImagePath nvarchar(255), 
+	@Title nvarchar(150), 
+	@Description nvarchar(255), 
+	@ViewOrder int, 
+	@CreatedDate datetime, 
+	@CreatedByUser nvarchar(100) ,
+	@ParentID int,
+	@Level int,
+	@Moderator  nvarchar(100),
+	@IsAutoApprove bit,
+	@IsEmailNotification bit,
+	@EmailAddress nvarchar(255),
+	@ViewRoles nvarchar(2000),
+	@AddRoles nvarchar(2000),
+	@CategoryLink nvarchar(2000),
+	@IsAllUser int
+AS
+
+UPDATE {objectQualifier}ZLDNN_DNNArticleCategory SET
+	[ModuleID] = @ModuleID,
+	[ImagePath] = @ImagePath,
+	[Title] = @Title,
+	[Description] = @Description,
+	[ViewOrder] = @ViewOrder,
+	[CreatedDate] = @CreatedDate,
+	[CreatedByUser] = @CreatedByUser,
+	[ParentID]=@ParentID,
+	[Level]=@Level,
+	[Moderator]=@Moderator,
+	[IsAutoApprove]=@IsAutoApprove,
+	[IsEmailNotification]=@IsEmailNotification,
+	[EmailAddress]=@EmailAddress,
+	[ViewRoles]=@ViewRoles,
+	[AddRoles]=@AddRoles,
+	[CategoryLink]=@CategoryLink,
+	[IsAllUser]=@IsAllUser
+	
+WHERE
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+-- 09.07.13
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryList') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryList
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetByModules') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetByModules
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetByParent') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetByParent
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleCategoriesByArticleID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleCategoriesByArticleID
+GO
+
+
+-- CategoryGet
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGet
+	@ItemID int
+	,@moduleId int 
+AS
+
+SELECT
+	c.*,
+	a.number,
+	d.subcategoriesnumber
+	
+FROM {objectQualifier}ZLDNN_DNNArticleCategory as c
+left outer join ( select categoryid, count(*) as number FROM {objectQualifier}ZLDNN_DNNArticleAssignedCategories group by CategoryID) as a on 
+c.ItemID=a.CategoryID
+left outer join ( select parentid, count(*) as subcategoriesnumber FROM {objectQualifier}ZLDNN_DNNArticleCategory group by parentid) as d on 
+c.ItemId=d.parentid
+WHERE
+	c.[ItemID] = @ItemID
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+-- CategoryList
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryList
+AS
+
+SELECT
+	c.*,
+	a.number,
+	d.subcategoriesnumber
+	
+FROM {objectQualifier}ZLDNN_DNNArticleCategory as c
+left outer join ( select categoryid, count(*) as number FROM {objectQualifier}ZLDNN_DNNArticleAssignedCategories group by CategoryID) as a on 
+c.ItemID=a.CategoryID
+left outer join ( select parentid, count(*) as subcategoriesnumber FROM {objectQualifier}ZLDNN_DNNArticleCategory group by parentid) as d on 
+c.ItemId=d.parentid
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+-- CategoryGetByModules
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetByModules
+	@ModuleID int,
+	@SortOrder nvarchar(200)
+AS
+
+SELECT
+	c.*,
+	a.number,
+	d.subcategoriesnumber
+	
+FROM {objectQualifier}ZLDNN_DNNArticleCategory as c
+left outer join ( select categoryid, count(*) as number FROM {objectQualifier}ZLDNN_DNNArticleAssignedCategories group by CategoryID) as a on 
+c.ItemID=a.CategoryID
+left outer join ( select parentid, count(*) as subcategoriesnumber FROM {objectQualifier}ZLDNN_DNNArticleCategory group by parentid) as d on 
+c.ItemId=d.parentid
+WHERE
+	[ModuleID]=@ModuleID
+	Order by [Level], 
+	CASE WHEN @SortOrder='VIEWORDER ASC' THEN [VIEWORDER] END ASC,
+  CASE WHEN @SortOrder='VIEWORDER DESC' THEN [VIEWORDER] END DESC,
+  CASE WHEN @SortOrder='TITLE DESC' THEN [TITLE] END DESC, 
+  CASE WHEN @SortOrder='TITLE ASC' THEN [TITLE] END ASC
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--   CatalogGetByParent
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryGetByParent
+@ModuleID int,
+@ParentID int,
+@SortOrder nvarchar(200)
+
+AS
+
+SELECT
+	c.*,
+	a.number,
+	d.subcategoriesnumber
+	
+FROM {objectQualifier}ZLDNN_DNNArticleCategory as c
+left outer join ( select categoryid, count(*) as number FROM {objectQualifier}ZLDNN_DNNArticleAssignedCategories group by CategoryID) as a on 
+c.ItemID=a.CategoryID
+left outer join ( select parentid, count(*) as subcategoriesnumber FROM {objectQualifier}ZLDNN_DNNArticleCategory  group by parentid) as d on 
+c.ItemId=d.parentid
+WHERE
+	[ModuleID]=@Moduleid
+	And
+	c.[ParentID]=@ParentID
+	Order by 
+	 CASE WHEN @SortOrder='VIEWORDER ASC' THEN [VIEWORDER] END ASC,
+  CASE WHEN @SortOrder='VIEWORDER DESC' THEN [VIEWORDER] END DESC,
+  CASE WHEN @SortOrder='TITLE DESC' THEN [TITLE] END DESC, 
+  CASE WHEN @SortOrder='TITLE ASC' THEN [TITLE] END ASC
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+-- CategoriesByArticleID
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleCategoriesByArticleID
+
+	@ArticleId int
+
+as
+
+select c.*,
+a1.number,
+d.subcategoriesnumber
+
+FROM {objectQualifier}ZLDNN_DNNArticleCategory as c
+left outer join {objectQualifier}ZLDNN_DNNArticleAssignedCategories as a on c.ItemID = a.CategoryID
+left outer join ( select categoryid, count(*) as number FROM {objectQualifier}ZLDNN_DNNArticleAssignedCategories group by CategoryID) as a1 on 
+c.ItemID=a1.CategoryID
+left outer join ( select parentid, count(*) as subcategoriesnumber FROM {objectQualifier}ZLDNN_DNNArticleCategory group by parentid) as d on 
+c.ItemId=d.parentid
+where  a.ArticleId = @ArticleId
+GO
+
+
+-- 08.06.06
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleMoveCategory') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleMoveCategory
+GO
+
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleMoveCategory
+	@FromCategory int,
+	@ToCategory int
+	
+AS
+
+Update {objectQualifier}ZLDNN_DNNArticleAssignedCategories
+Set CategoryID=@ToCategory where CategoryID= @FromCategory
+
+GO
+
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+-- ZLDNN_DNNArticleFirstLevelCategory
+-- 09.07.16
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleFirstLevelCategory') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleFirstLevelCategory
+GO
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleFirstLevelCategory
+@ModuleID int,
+@SortOrder nvarchar(200)
+
+AS
+
+SELECT
+	c.*,
+	a.number,
+	d.subcategoriesnumber
+	
+FROM {objectQualifier}ZLDNN_DNNArticleCategory as c
+left outer join ( select categoryid, count(*) as number FROM {objectQualifier}ZLDNN_DNNArticleAssignedCategories group by CategoryID) as a on 
+c.ItemID=a.CategoryID
+left outer join ( select parentid, count(*) as subcategoriesnumber FROM {objectQualifier}ZLDNN_DNNArticleCategory  group by parentid) as d on 
+c.ItemId=d.parentid
+WHERE
+	[ModuleID]=@Moduleid
+	And
+	c.[ParentID] is null
+	Order by 
+	 CASE WHEN @SortOrder='VIEWORDER ASC' THEN [VIEWORDER] END ASC,
+  CASE WHEN @SortOrder='VIEWORDER DESC' THEN [VIEWORDER] END DESC,
+  CASE WHEN @SortOrder='TITLE DESC' THEN [TITLE] END DESC, 
+  CASE WHEN @SortOrder='TITLE ASC' THEN [TITLE] END ASC
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--   View 1 vw_ZLDNN_DNNArticle  
+--   09.07.00 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticle]') and OBJECTPROPERTY(id, N'IsView') = 1)
+	DROP VIEW {databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticle]
+GO
+
+
+CREATE VIEW {databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticle]
+AS
+select {objectQualifier}ZLDNN_DNNArticle.ModuleId,
+       {objectQualifier}ZLDNN_DNNArticle.ItemId,
+       {objectQualifier}ZLDNN_DNNArticle.Content,
+       {objectQualifier}ZLDNN_DNNArticle.CreatedByUser,
+       {objectQualifier}ZLDNN_DNNArticle.CreatedDate,
+       {objectQualifier}Users.UserName as CreatedByUserName,
+       {objectQualifier}Users.DisplayName as UserDisplayName,
+       {objectQualifier}Users.Email as UserEmail,
+       {objectQualifier}ZLDNN_DNNArticle.CategoryID,
+       case when a.FileName is null then {objectQualifier}ZLDNN_DNNArticle.URL else a.Folder + a.FileName end as URL,
+	   {objectQualifier}ZLDNN_DNNArticle.Title,
+	   {objectQualifier}ZLDNN_DNNArticle.Description,
+	   {objectQualifier}ZLDNN_DNNArticle.ViewOrder,
+	   {objectQualifier}ZLDNN_DNNArticle.ViewRoles,
+	   Clicks,
+	   VoteTotal,
+	   VoteNumber,
+	   {objectQualifier}ZLDNN_DNNArticle.CommentNumber as CommentNumber2,
+	   case when com.comn is null then 0 else com.comn end as CommentNumber,
+	   ApprovedByUser,
+	   ApprovedDate,
+	   IsApproved,
+	   Tags,
+	   ExpireDate,
+       SEOTitle ,
+       SEODescription ,
+       SEOTags,
+       Featured,
+       case when b.FileName is null then {objectQualifier}ZLDNN_DNNArticle.ReleatedURL else b.Folder + b.FileName end as ReleatedURL,
+       ExtraFields,
+ CASE WHEN NOT VoteNumber IS NULL AND 
+      VoteNumber > 0 THEN VoteTotal / VoteNumber ELSE 0 END AS Rating,
+	  {objectQualifier}ZLDNN_DNNArticle.PublishDate,
+	   c.PortalID,
+        UpdateDate,
+        PageNumber,
+        RelatedEntryID,
+		RelatedEntryKey,
+		LastViewDate,
+		case when attach.filenumber is null then 0 else attach.filenumber end as FileNumber,
+		IsPublished,
+		AllowComment,
+		IsAllUser
+       
+from {objectQualifier}ZLDNN_DNNArticle
+left outer join {objectQualifier}Users on {objectQualifier}ZLDNN_DNNArticle.CreatedByUser = {objectQualifier}Users.UserId
+left outer join {objectQualifier}vw_ZLDNNFiles as a on {objectQualifier}ZLDNN_DNNArticle.URL = 'fileid=' + convert(varchar,a.FileID)
+left outer join {objectQualifier}vw_ZLDNNFiles as b on {objectQualifier}ZLDNN_DNNArticle.ReleatedURL = 'fileid=' + convert(varchar,b.FileID)
+inner join {objectQualifier}Modules as c on {objectQualifier}ZLDNN_DNNArticle.ModuleID = c.ModuleID
+left outer join (select count(*) as comn ,DNNArticleID from {objectQualifier}ZLDNN_DNNArticleComment group by DNNArticleID) as com on {objectQualifier}ZLDNN_DNNArticle.ItemID=com.DNNArticleID
+left outer join (select count(*) as filenumber, ArticleId from {objectQualifier}ZLDNN_DNNArticleFile group by ArticleId) as attach on {objectQualifier}ZLDNN_DNNArticle.ItemID=attach.ArticleID
+where c.isdeleted=0
+GO
+
+
+
+--  View 2 vw_ZLDNN_DNNArticlePermission 
+--  09.07.00
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticlePermission]') and OBJECTPROPERTY(id, N'IsView') = 1)
+	DROP VIEW {databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticlePermission]
+GO
+
+
+CREATE VIEW {databaseOwner}[{objectQualifier}vw_ZLDNN_DNNArticlePermission]
+AS
+select {objectQualifier}ZLDNN_DNNArticle.ModuleId,
+       {objectQualifier}ZLDNN_DNNArticle.ItemId,
+       {objectQualifier}ZLDNN_DNNArticle.Content,
+       {objectQualifier}ZLDNN_DNNArticle.CreatedByUser,
+       {objectQualifier}ZLDNN_DNNArticle.CreatedDate,
+       {objectQualifier}Users.UserName as CreatedByUserName,
+       {objectQualifier}Users.DisplayName as UserDisplayName,
+       {objectQualifier}Users.Email as 'UserEmail',
+	    case when a.FileName is null then {objectQualifier}ZLDNN_DNNArticle.URL else a.Folder + a.FileName end as URL,
+	   {objectQualifier}ZLDNN_DNNArticle.Title,
+	   {objectQualifier}ZLDNN_DNNArticle.Description,
+	   {objectQualifier}ZLDNN_DNNArticle.ViewOrder,
+	   {objectQualifier}ZLDNN_DNNArticle.ViewRoles,
+	   Clicks,
+	   VoteTotal,
+	   VoteNumber,
+	   CommentNumber,
+	   ApprovedByUser,
+	   ApprovedDate,
+	   IsApproved,
+	   Tags,
+	   ExpireDate,
+       SEOTitle ,
+       SEODescription ,
+       SEOTags,
+       Featured,
+       case when b.FileName is null then {objectQualifier}ZLDNN_DNNArticle.ReleatedURL else b.Folder + b.FileName end as ReleatedURL,
+       ExtraFields,
+ CASE WHEN NOT VoteNumber IS NULL AND 
+      VoteNumber > 0 THEN VoteTotal / VoteNumber ELSE 0 END AS Rating,
+	  {objectQualifier}ZLDNN_DNNArticle.PublishDate	,
+	   {objectQualifier}ZLDNN_DNNArticleCategory.ViewRoles as CategoryViewRoles,
+       {objectQualifier}ZLDNN_DNNArticleCategory.ItemID as CategoryID,
+        {objectQualifier}ZLDNN_DNNArticleCategory.Title as CategoryName,
+        UpdateDate,
+        PageNumber,
+        RelatedEntryID ,
+		RelatedEntryKey,
+		LastViewDate,
+		case when attach.filenumber is null then 0 else attach.filenumber end as FileNumber,
+		IsPublished,
+		AllowComment,
+		{objectQualifier}ZLDNN_DNNArticle.IsAllUser,
+        {objectQualifier}ZLDNN_DNNArticleCategory.IsAllUser as cIsAllUser
+from {objectQualifier}ZLDNN_DNNArticleAssignedCategories
+left outer join {objectQualifier}ZLDNN_DNNArticleCategory  on  {objectQualifier}ZLDNN_DNNArticleCategory.ItemID ={objectQualifier}ZLDNN_DNNArticleAssignedCategories.CategoryID
+full outer join {objectQualifier}ZLDNN_DNNArticle on {objectQualifier}ZLDNN_DNNArticle.ItemID = {objectQualifier}ZLDNN_DNNArticleAssignedCategories.ArticleID
+left outer join {objectQualifier}Users on {objectQualifier}ZLDNN_DNNArticle.CreatedByUser = {objectQualifier}Users.UserId
+left outer join {objectQualifier}vw_ZLDNNFiles as a on {objectQualifier}ZLDNN_DNNArticle.URL = 'fileid=' + convert(varchar,a.FileID)
+left outer join {objectQualifier}vw_ZLDNNFiles as b on {objectQualifier}ZLDNN_DNNArticle.ReleatedURL = 'fileid=' + convert(varchar,b.FileID)
+inner join {objectQualifier}Modules as c on {objectQualifier}ZLDNN_DNNArticle.ModuleID = c.ModuleID
+left outer join (select count(*) as comn ,DNNArticleID from {objectQualifier}ZLDNN_DNNArticleComment group by DNNArticleID) as com on {objectQualifier}ZLDNN_DNNArticle.ItemID=com.DNNArticleID
+left outer join (select count(*) as filenumber, ArticleId from {objectQualifier}ZLDNN_DNNArticleFile group by ArticleId) as attach on {objectQualifier}ZLDNN_DNNArticle.ItemID=attach.ArticleID
+where c.isdeleted=0
+
+
+GO
+
+
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleViewPermission]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleViewPermission]
+		(
+			
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[ArticleId] [int]  NOT NULL, 
+			[RoleName] [nvarchar] (500)   NULL
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleViewPermission] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleViewPermission] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleViewPermission] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleViewPermission] ([ArticleId])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleViewPermission] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleViewPermission_{objectQualifier}ZLDNN_DNNArticle] FOREIGN KEY ([ArticleId]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticle] ([ItemId]) ON DELETE CASCADE 
+	END
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionDelete
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionGetByArticle') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionGetByArticle
+GO
+
+--    ZLDNN_DNNArticleViewPermissionAdd
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionAdd
+	@ArticleId int,
+	@RoleName nvarchar(500)
+AS
+
+INSERT INTO {objectQualifier}ZLDNN_DNNArticleViewPermission (
+	[ArticleId],
+	[RoleName]
+) VALUES (
+	@ArticleId,
+	@RoleName
+)
+
+select SCOPE_IDENTITY()
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--    ZLDNN_DNNArticleViewPermissionUpdate
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionUpdate
+	@ItemID int, 
+	@ArticleId int, 
+	@RoleName nvarchar(500)
+AS
+
+UPDATE {objectQualifier}ZLDNN_DNNArticleViewPermission SET
+	[ArticleId] = @ArticleId,
+	[RoleName] = @RoleName
+	
+WHERE
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--    ZLDNN_DNNArticleViewPermissionDelete
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionDelete
+	 
+	@ArticleId int, 
+	@RoleName nvarchar(500)
+AS
+
+Delete from {objectQualifier}ZLDNN_DNNArticleViewPermission where
+	[ArticleId] = @ArticleId and
+	[RoleName] = @RoleName
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+-- Get
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionGet
+	@ItemID int
+	
+AS
+
+SELECT
+	*
+	
+FROM {objectQualifier}ZLDNN_DNNArticleViewPermission 
+WHERE
+	[ItemID] = @ItemID
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+-- ZLDNN_DNNArticleViewPermissionGetByArticle
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleViewPermissionGetByArticle
+	@ArticleId int
+	
+AS
+
+SELECT
+	*
+	
+FROM {objectQualifier}ZLDNN_DNNArticleViewPermission 
+WHERE
+	[ArticleId] = @ArticleId
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleCategoryViewPermission]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleCategoryViewPermission]
+		(
+			
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[CategoryId] [int]  NOT NULL, 
+			[RoleName] [nvarchar] (500)   NULL
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleCategoryViewPermission] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleCategoryViewPermission] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleCategoryViewPermission] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleCategoryViewPermission] ([CategoryId])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleCategoryViewPermission] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleCategoryViewPermission_{objectQualifier}ZLDNN_DNNArticleCategory] FOREIGN KEY ([CategoryId]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleCategory] ([ItemId]) ON DELETE CASCADE 
+	END
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionDelete
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionGetByCategory') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionGetByCategory
+GO
+
+--    ZLDNN_DNNArticleCategoryViewPermissionAdd
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionAdd
+	@CategoryId int,
+	@RoleName nvarchar(500)
+AS
+
+INSERT INTO {objectQualifier}ZLDNN_DNNArticleCategoryViewPermission (
+	[CategoryId],
+	[RoleName]
+) VALUES (
+	@CategoryId,
+	@RoleName
+)
+
+select SCOPE_IDENTITY()
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--    ZLDNN_DNNArticleCategoryViewPermissionUpdate
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionUpdate
+	@ItemID int, 
+	@CategoryId int, 
+	@RoleName nvarchar(500)
+AS
+
+UPDATE {objectQualifier}ZLDNN_DNNArticleCategoryViewPermission SET
+	[CategoryId] = @CategoryId,
+	[RoleName] = @RoleName
+	
+WHERE
+	[ItemID] = @ItemID
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--    ZLDNN_DNNArticleCategoryViewPermissionDelete
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionDelete
+	 
+	@CategoryId int, 
+	@RoleName nvarchar(500)
+AS
+
+Delete from {objectQualifier}ZLDNN_DNNArticleCategoryViewPermission where
+	[CategoryId] = @CategoryId and
+	[RoleName] = @RoleName
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+-- Get
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionGet
+	@ItemID int
+	
+AS
+
+SELECT
+	*
+	
+FROM {objectQualifier}ZLDNN_DNNArticleCategoryViewPermission 
+WHERE
+	[ItemID] = @ItemID
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+-- ZLDNN_DNNArticleCategoryViewPermissionGetByCategory
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleCategoryViewPermissionGetByCategory
+	@CategoryId int
+	
+AS
+
+SELECT
+	*
+	
+FROM {objectQualifier}ZLDNN_DNNArticleCategoryViewPermission
+WHERE
+	[CategoryId] = @CategoryId
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO

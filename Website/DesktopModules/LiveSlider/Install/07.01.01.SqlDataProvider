@@ -1,0 +1,7 @@
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='LiveSlider_Slide'and COLUMN_NAME='Hidden')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}LiveSlider_Slide]
+ADD Hidden bit NOT NULL CONSTRAINT {objectQualifier}DF_LiveSlider_Slide_Hidden DEFAULT 0
+END
+
+GO

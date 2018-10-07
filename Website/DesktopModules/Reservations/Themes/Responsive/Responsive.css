@@ -1,0 +1,1427 @@
+/* ================================
+    CSS STYLES FOR Reservations Module 
+   ================================
+*/
+
+.DNNSpecialists_Modules_Reservations_Head
+{
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 24px;
+    padding: 0px;
+    text-shadow: #FAFAFA 1px 1px 1px;
+    text-transform: none;
+}
+
+.DNNSpecialists_Modules_Reservations_SubHead
+{
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.DNNSpecialists_Modules_Reservations_Normal
+{
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 16px;
+}
+
+.DNNSpecialists_Modules_Reservations_Input
+{
+    background-color: white !important;
+    border: solid 1px #cccccc;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: black;
+    display: inline-block;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px !important;
+    font-weight: normal;
+    height: 29px;
+    letter-spacing: normal;
+    line-height: normal;
+    margin: 0px !important;
+    padding: 6px;
+    text-align: start;
+    text-indent: 0px;
+    text-shadow: none;
+    text-transform: none;
+    word-spacing: 0px;
+}
+
+.DNNSpecialists_Modules_Reservations_Input:disabled
+{
+    background-color:#eee;
+    color: #ccc;
+}
+
+SELECT.DNNSpecialists_Modules_Reservations_Input
+{
+    padding: 5px;
+}
+
+SELECT.DNNSpecialists_Modules_Reservations_Input[size], TEXTAREA.DNNSpecialists_Modules_Reservations_Input
+{
+    height: auto;
+}
+
+.DNNSpecialists_Modules_Reservations_Input .riTextBox
+{
+    border-width: 0px !important;
+    outline: none !important;
+    font-family: Helvetica, Arial, sans-serif !important;
+    font-size: 13px !important;
+}
+
+.DNNSpecialists_Modules_Reservations_DateFilter_TitleStyle
+{
+    background-color: #f5f5f5;
+}
+
+.DNNSpecialists_Modules_Reservations_DateFilter_TitleStyle td
+{
+    padding: 5px !important;
+}
+
+.DNNSpecialists_Modules_Reservations_DateFilter_SelectedRangeStyle
+{
+    background-color: #EDF8FF !important;
+}
+
+.DNNSpecialists_Modules_Reservations_DateFilter_DataGrid2_ItemStyle TD
+{
+    padding: 8px;
+}
+
+.DNNSpecialists_Modules_Reservations_DateFilter_DayStyle
+{
+    background-color: #ffffff;
+}
+
+.DNNSpecialists_Modules_Reservations_DateFilter_DayStyle A
+{
+    display: block;
+    padding: 10px;
+    text-transform: none !important;
+    text-decoration: none !important;
+    border: solid 1px transparent !important;
+}
+
+.DNNSpecialists_Modules_Reservations_DateFilter_DayStyle A:hover
+{
+    border: solid 1px #999999 !important;
+    background-color: #bfbfbf !important;
+    background-image: url(Responsive-hover.png);
+    background-repeat: repeat-x;
+}
+
+.DNNSpecialists_Modules_Reservations_DateFilter_SelectedDayStyle
+{
+    background-color: transparent !important;
+}
+
+.DNNSpecialists_Modules_Reservations_DateFilter_SelectedDayStyle A
+{
+    color: #000000 !important;
+    border: solid 1px #999999 !important;
+    background-color: #d0d0d0 !important;
+    background-image: url(Responsive-unselected.png);
+    background-repeat: repeat-x;
+}
+
+.DNNSpecialists_Modules_Reservations_DateFilter_TodayDayStyle A
+{
+    border: solid 1px #999999 !important;
+}
+
+.DNNSpecialists_Modules_Reservations_DateFilter_WeekendDayStyle
+{
+    background-color: #f5f5f5;
+}
+
+.DNNSpecialists_Modules_Reservations_DateFilter_OtherMonthDayStyle
+{
+    background-color: #f5f5f5;
+}
+
+.DNNSpecialists_Modules_Reservations_DateFilter_OtherMonthDayStyle A
+{
+}
+
+.DNNSpecialists_Modules_Reservations_DateFilter_Calendar
+{
+    border: solid 1px #999999 !important;
+}
+
+.DNNSpecialists_Modules_Reservations_DateFilter_Calendar TD
+{
+    border: solid 0px transparent !important;
+}
+
+.DNNSpecialists_Modules_Reservations_DateFilter_DayHeaderStyle
+{
+    background-color: #ffffff;
+    border-bottom: solid 1px #999999;
+    padding: 5px;
+}
+
+.DNNSpecialists_Modules_Reservations_SettingsTable
+{
+     border: solid 1px #dddddd;
+}
+
+.DNNSpecialists_Modules_Reservations_CategoryTableCell
+{
+     background-color: #dddddd;
+}
+
+.DNNSpecialists_Modules_Reservations_PaymentMethodTableCell
+{
+     background-color: #eeeeee;
+}
+
+A.DNNSpecialists_Modules_Reservations_Item, A.DNNSpecialists_Modules_Reservations_Item:link, A.DNNSpecialists_Modules_Reservations_Item:visited, A.DNNSpecialists_Modules_Reservations_Item:hover, A.DNNSpecialists_Modules_Reservations_Item:active
+{
+    display: block;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 11px;
+    color: #333333;
+    text-transform: none;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: #d0d0d0;
+    background-image: url(Responsive-unselected.png);
+    background-repeat: repeat-x;
+    overflow: hidden;
+}
+
+A.DNNSpecialists_Modules_Reservations_Item:hover
+{
+    background-color: #bfbfbf;
+    background-image: url(Responsive-hover.png);
+    background-repeat: repeat-x;
+}
+
+.DNNSpecialists_Modules_Reservations_Item_Selected
+{
+    display: block;
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-align: center;
+    white-space: nowrap;
+    font-weight: bold !important;
+    color: #ffffff !important;
+    background-color: #888888;
+    background-image: url(Responsive-selected.png);
+    background-repeat: repeat-x;
+    cursor: default;
+    overflow: hidden;
+}
+
+.DNNSpecialists_Modules_Reservations_Item_Unavailable
+{
+    display: block;
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-align: center;
+    white-space: nowrap;
+    font-weight: bold !important;
+    color: #999999 !important;
+    text-decoration: line-through !important;
+    background-color: #d0d0d0;
+    background-image: url(Responsive-unselected.png);
+    background-repeat: repeat-x;
+    cursor: default;
+}
+
+.DNNSpecialists_Modules_Reservations_Item_TableCell
+{
+    border: solid 1px #999999;
+    background-color: #d0d0d0;
+    background-image: url(Responsive-unselected.png);
+    background-repeat: repeat-x;
+}
+
+.DNNSpecialists_Modules_Reservations_Item_Selected_TableCell
+{
+}
+
+.DNNSpecialists_Modules_Reservations_Item_Unavailable_TableCell
+{
+}
+
+A.DNNSpecialists_Modules_Reservations_CommandButton, A.DNNSpecialists_Modules_Reservations_CommandButton:link, A.DNNSpecialists_Modules_Reservations_CommandButton:visited, A.DNNSpecialists_Modules_Reservations_CommandButton:hover, A.DNNSpecialists_Modules_Reservations_CommandButton:active
+{
+    display: inline-block;
+    padding: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 11px;
+    color: #333333;
+    text-transform: none;
+    text-decoration: none;
+    white-space: nowrap;
+    border: solid 1px #999999;
+    background-color: #d0d0d0;
+    background-image: url(Responsive-unselected.png);
+    background-repeat: repeat-x;
+}
+
+A.DNNSpecialists_Modules_Reservations_CommandButton:hover
+{
+    color: #333333;
+    background-color: #bfbfbf;
+    background-image: url(Responsive-hover.png);
+    background-repeat: repeat-x;
+}
+
+A.DNNSpecialists_Modules_Reservations_CommandButton IMG, A.DNNSpecialists_Modules_Reservations_CommandButton SPAN
+{
+    vertical-align: middle;
+}
+
+A.DNNSpecialists_Modules_Reservations_CommandButton SPAN
+{
+    padding-left: 5px;
+}
+
+
+.DNNSpecialists_Modules_Reservations_VerticalListItem_TableCell
+{
+    /*
+    border: solid 1px #999999;
+    background-color: #d0d0d0;
+    background-image: url(Responsive-unselected.png);
+    background-repeat: repeat-x;
+    */ 
+}
+
+A.DNNSpecialists_Modules_Reservations_VerticalListItem, A.DNNSpecialists_Modules_Reservations_VerticalListItem:link, A.DNNSpecialists_Modules_Reservations_VerticalListItem:visited, A.DNNSpecialists_Modules_Reservations_VerticalListItem:hover, A.DNNSpecialists_Modules_Reservations_VerticalListItem:active
+{
+    display: block;
+    padding: 8px;
+    text-align: left;
+    vertical-align: middle;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    color: #333333;
+    text-transform: none;
+    text-decoration: none;
+    white-space: nowrap;
+    border: solid 1px #999999;
+    background-color: #d0d0d0;
+    background-image: url(Responsive-unselected.png);
+    background-repeat: repeat-x;
+}
+
+A.DNNSpecialists_Modules_Reservations_VerticalListItem:hover
+{
+    background-color: #bfbfbf;
+    background-image: url(Responsive-hover.png);
+    background-repeat: repeat-x;
+}
+
+A.DNNSpecialists_Modules_Reservations_VerticalListItem IMG, A.DNNSpecialists_Modules_Reservations_VerticalListItem SPAN
+{
+    vertical-align: middle;
+}
+
+A.DNNSpecialists_Modules_Reservations_VerticalListItem SPAN
+{
+    padding-left: 5px;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid
+{
+    table-layout: fixed;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_FilterStyle
+{
+    padding: 5px !important;
+    border: solid 0px transparent !important;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_FilterStyle TD
+{
+    border: solid 0px transparent !important;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_FilterStyle input, .DNNSpecialists_Modules_Reservations_DataGrid_FilterStyle select
+{
+    width: 100%;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_HeaderStyle TD
+{
+    padding: 0px;
+    white-space: nowrap;
+    border: solid 1px #999999;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_HeaderStyle_Button
+{
+    border: solid 0px black !important;
+    text-align: right;
+    width: 75px;
+    padding-right: 5px !important;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_HeaderStyle TD DIV
+{
+    width: 100%;
+    height: 25px;
+    overflow: hidden;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_HeaderStyle TD DIV A
+{
+    display: block;
+    padding: 5px;
+    font-weight: bold;
+    color: #333333 !important;
+    background-color: #d0d0d0;
+    background-image: url(Responsive-unselected.png);
+    background-repeat: repeat-x;
+    height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_HeaderStyle TD DIV SPAN
+{
+    display: block;
+    padding: 5px;
+    font-weight: bold !important;
+    color: #333333 !important;
+    background-color: #d0d0d0;
+    background-image: url(Responsive-unselected.png);
+    background-repeat: repeat-x;
+    height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: default;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_HeaderStyle TD DIV A IMG, .DNNSpecialists_Modules_Reservations_DataGrid_HeaderStyle TD DIV SPAN IMG
+{
+    padding-top: 3px;
+    margin-left: 5px;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_HeaderStyle TD DIV A:hover, .DNNSpecialists_Modules_Reservations_DataGrid_HeaderStyle TD DIV A:active
+{
+    font-weight: bold !important;
+    text-decoration: none !important;
+    background-color: #bfbfbf;
+    background-image: url(Responsive-hover.png);
+    background-repeat: repeat-x;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_HeaderStyle TD INPUT[type=text]
+{
+    width: 100%;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_ItemStyle TD
+{
+    padding: 5px;
+    white-space: nowrap;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_ItemStyle TD DIV
+{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: default;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_ItemStyle_Sorted
+{
+    background-color: #F7F7F7;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_ItemStyle_Button
+{
+    text-align: right;
+    width: 75px;
+    padding-right: 5px !important;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_AlternatingItemStyle TD
+{
+    padding: 5px;
+    white-space: nowrap;
+    background-color: #F7F7F7;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_AlternatingItemStyle TD DIV
+{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: default;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_AlternatingItemStyle .DNNSpecialists_Modules_Reservations_DataGrid_ItemStyle_Sorted
+{
+    background-color: #EAEAEA;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_PagerStyle TD
+{
+    padding: 10px;
+    text-align: center;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_TopPagerStyle
+{
+    padding-bottom: 10px;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_BottomPagerStyle
+{
+    padding-top: 10px;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_PagerStyle A
+{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_PagerStyle SPAN
+{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_Highlight
+{
+    background-color: yellow;
+}
+
+.DNNSpecialists_Modules_Reservations_DataGrid_NumberOfRecordsFound
+{
+    display: block;
+    padding-left: 30px;
+    padding-top: 10px;
+    font-style: italic;
+}
+
+.DNNSpecialists_Modules_Reservations_UnavailableListItem
+{
+    color: rgb(119, 119, 119);
+    text-decoration: line-through;
+}
+
+.DNNSpecialists_Modules_Reservations_Settings_DataGrid_ItemStyle td
+{
+	padding-right: 5px;
+}
+
+.DNNSpecialists_Modules_Reservations_StepTable
+{
+	width: 100%;
+}
+
+.DNNSpecialists_Modules_Reservations_StepContentTableCell
+{
+	width: 100%;
+	height: 150px;
+}
+
+A.DNNSpecialists_Modules_Reservations_LinkCommandButton IMG, A.DNNSpecialists_Modules_Reservations_LinkCommandButton SPAN
+{
+    vertical-align: middle;
+}
+
+A.DNNSpecialists_Modules_Reservations_LinkCommandButton SPAN
+{
+    padding-left: 5px;
+}
+
+SPAN.DNNSpecialists_Modules_Reservations_LinkCommandButton A
+{
+    vertical-align: middle;
+}
+
+SPAN.DNNSpecialists_Modules_Reservations_LinkCommandButton INPUT
+{
+    vertical-align: middle;
+}
+
+.DNNSpecialists_Modules_Reservations_Invalid
+{
+    display: inline-block;
+    background-color: #F7EAEA !important;
+    border: solid 1px #FF6969 !important;
+}
+
+.DNNSpecialists_Modules_Reservations_Invalid .riTextBox
+{
+    background-color: #F7EAEA !important;
+}
+
+
+.DNNSpecialists_Modules_Reservations_Label_TableCell
+{
+    text-align: right;
+    /* vertical-align: top;
+    padding-top: 7px; */
+    white-space: nowrap;
+}
+
+/***************************************************************************************************/
+/* Responsive - End User                                                                           */
+/***************************************************************************************************/
+.DNNSpecialists_Modules_Reservations, .DNNSpecialists_Modules_Reservations *
+{
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    vertical-align: middle;
+    
+    -webkit-text-size-adjust: none;
+}
+
+.DNNSpecialists_Modules_Reservations
+{
+    width: 100%;
+    position: relative;
+}
+
+.DNNSpecialists_Modules_Reservations .DNNSpecialists_Modules_Reservations_Head
+{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 24px;
+}
+
+.DNNSpecialists_Modules_Reservations .DNNSpecialists_Modules_Reservations_Instructions .DNNSpecialists_Modules_Reservations_Head
+{
+    display: block;
+}
+
+.DNNSpecialists_Modules_Reservations .DNNSpecialists_Modules_Reservations_SubHead
+{
+    color: rgb(119, 119, 119);
+    font-weight: 400 !important;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.DNNSpecialists_Modules_Reservations .DNNSpecialists_Modules_Reservations_Instructions .DNNSpecialists_Modules_Reservations_Normal
+{
+    display: block;
+    margin-top: 15px;
+}
+
+.DNNSpecialists_Modules_Reservations .DNNSpecialists_Modules_Reservations_Normal
+{
+    color: rgb(119, 119, 119);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.DNNSpecialists_Modules_Reservations_Instructions
+{
+    width: 300px;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 15px 0 0;
+}
+
+.DNNSpecialists_Modules_Reservations_FormContainer
+{
+    width: 600px;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+}
+
+.DNNSpecialists_Modules_Reservations_Step_900 .DNNSpecialists_Modules_Reservations_Instructions
+{
+    width: 100%;
+    max-width: 600px;
+    padding-right: 0px;
+    padding-bottom: 20px;
+}
+
+.DNNSpecialists_Modules_Reservations_Step_900 .DNNSpecialists_Modules_Reservations_FormContainer
+{
+    width: 100%;
+    max-width: 600px;
+}
+
+.DNNSpecialists_Modules_Reservations_Step_900 .DNNSpecialists_Modules_Reservations_FormContainer .DNNSpecialists_Modules_Reservations_Form
+{
+    width: 100%;
+    margin: 0 0 0 0;
+}
+
+.DNNSpecialists_Modules_Reservations_Form
+{
+    display: block;
+    margin: 0 auto 0 0;
+    padding: 0 15px 15px 15px;
+    border: solid 1px #ccc;
+}
+
+.DNNSpecialists_Modules_Reservations_FormItem
+{
+    width: 100%;
+    margin-top: 15px;
+    position: relative;
+    white-space: nowrap;
+}
+
+.DNNSpecialists_Modules_Reservations_FormItem > .DNNSpecialists_Modules_Reservations_SubHead
+{
+    display: inline-block;
+    width: 25%;
+    text-align: right;
+    padding-right: 10px;
+    vertical-align: middle;
+}
+
+.DNNSpecialists_Modules_Reservations_FormItem > .DNNSpecialists_Modules_Reservations_CommandButton_Link
+{
+    display: inline-block;
+    margin: 0 0 0 auto;
+}
+
+.DNNSpecialists_Modules_Reservations_Step_480 .DNNSpecialists_Modules_Reservations_FormItem > .DNNSpecialists_Modules_Reservations_SubHead
+{
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.DNNSpecialists_Modules_Reservations_FormItem > input,
+.DNNSpecialists_Modules_Reservations_FormItem > textarea,
+.DNNSpecialists_Modules_Reservations_FormItem > select
+{
+    display: inline-block;
+    width: 75%;
+    vertical-align: middle;
+    font-weight: 400;
+}
+
+.DNNSpecialists_Modules_Reservations_Step_480 .DNNSpecialists_Modules_Reservations_FormItem > input,
+.DNNSpecialists_Modules_Reservations_Step_480 .DNNSpecialists_Modules_Reservations_FormItem > textarea,
+.DNNSpecialists_Modules_Reservations_Step_480 .DNNSpecialists_Modules_Reservations_FormItem > select
+{
+    display: block;
+    width: 100%;
+}
+
+.DNNSpecialists_Modules_Reservations_FormItem .DNNSpecialists_Modules_Reservations_CustomFields
+{
+    display: inline-block;
+    width: 75%;
+    vertical-align: middle;
+    font-size: 0;
+}
+
+.DNNSpecialists_Modules_Reservations_Step_480 .DNNSpecialists_Modules_Reservations_FormItem .DNNSpecialists_Modules_Reservations_CustomFields
+{
+    display: block;
+    width: 100%;
+}
+
+.DNNSpecialists_Modules_Reservations_FormItem .DNNSpecialists_Modules_Reservations_CustomFields > div
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.DNNSpecialists_Modules_Reservations_Step_480 .DNNSpecialists_Modules_Reservations_FormItem .DNNSpecialists_Modules_Reservations_CustomFields > div
+{
+    display: block;
+    width: 100% !important;
+}
+
+.DNNSpecialists_Modules_Reservations_FormItem .DNNSpecialists_Modules_Reservations_CustomFields_Label
+{
+    text-align: right;
+    padding: 0 10px 0 10px;
+}
+
+.DNNSpecialists_Modules_Reservations_Step_480 .DNNSpecialists_Modules_Reservations_FormItem .DNNSpecialists_Modules_Reservations_CustomFields_Label
+{
+    text-align: left;
+    padding: 10px 0 0 0;
+}
+
+.DNNSpecialists_Modules_Reservations_FormItem .DNNSpecialists_Modules_Reservations_CustomFields input[type=checkbox],
+.DNNSpecialists_Modules_Reservations_FormItem .DNNSpecialists_Modules_Reservations_CustomFields input[type=radio]
+{
+    margin: 0 5px 0 5px;
+}
+
+.DNNSpecialists_Modules_Reservations_FormItem .DNNSpecialists_Modules_Reservations_CustomFields label
+{
+    margin: 0 5px 0 0;
+}
+
+
+.DNNSpecialists_Modules_Reservations .DNNSpecialists_Modules_Reservations_CustomFields div
+{
+    padding-left: 5px;
+}
+
+.DNNSpecialists_Modules_Reservations_Step_480 .DNNSpecialists_Modules_Reservations_FormItem .DNNSpecialists_Modules_Reservations_CustomFields div
+{
+    padding-left: 0px;
+    padding-top: 10px;
+}
+
+.DNNSpecialists_Modules_Reservations .DNNSpecialists_Modules_Reservations_CustomFields>:first-child
+{
+    padding-left: 0px;
+}
+
+.DNNSpecialists_Modules_Reservations_Step_480 .DNNSpecialists_Modules_Reservations_FormItem .DNNSpecialists_Modules_Reservations_CustomFields>:first-child
+{
+    padding-left: 0px;
+    padding-top: 0px;
+}
+
+.DNNSpecialists_Modules_Reservations_Buttons
+{
+    display: block;
+    width: 100%;
+    margin: 0 0 0 0;
+    position: relative;
+    margin-top: 15px;
+}
+
+.DNNSpecialists_Modules_Reservations_LastAction
+{
+    display: block;
+    width: 100%;
+    margin: 0 0 0 0;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.DNNSpecialists_Modules_Reservations_Step_900 .DNNSpecialists_Modules_Reservations_Buttons
+{
+}
+
+.DNNSpecialists_Modules_Reservations_ReservationInfo .DNNSpecialists_Modules_Reservations_Buttons
+{
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.DNNSpecialists_Modules_Reservations_ReservationInfo .DNNSpecialists_Modules_Reservations_Buttons > a
+{
+    margin: 0 8px 0 8px;
+}
+
+.DNNSpecialists_Modules_Reservations_ReservationInfo .DNNSpecialists_Modules_Reservations_Buttons>:last-child
+{
+    float: none;
+}
+
+.DNNSpecialists_Modules_Reservations .placeholder
+{
+    color: #A9A9A9;
+}
+
+.DNNSpecialists_Modules_Reservations select.placeholder option
+{
+    color: black;
+}
+
+.DNNSpecialists_Modules_Reservations select.placeholder>:first-child
+{
+    color: #A9A9A9;
+}
+
+A.DNNSpecialists_Modules_Reservations_CommandButton_Red
+{
+	border-radius: 8px;
+	moz-border-radius: 8px;
+	webkit-border-radius: 8px;
+	
+	background: red;
+
+	color: #FFF !important;
+	cursor: pointer;
+	display: inline-block;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 36px;
+	outline: none;
+	padding: 0 20px;
+	text-align: center;
+	text-decoration: none;
+}
+
+A.DNNSpecialists_Modules_Reservations_CommandButton_Red:hover
+{
+    color: #FFF !important;
+	outline: none;
+	text-decoration: none;
+	
+    background: #cc0000;
+}
+
+A.DNNSpecialists_Modules_Reservations_CommandButton_Blue
+{
+	border-radius: 8px;
+	moz-border-radius: 8px;
+	webkit-border-radius: 8px;
+	
+	color: #FFF !important;
+	cursor: pointer;
+	display: inline-block;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 36px;
+	outline: none;
+	padding: 0 20px;
+	text-align: center;
+	text-decoration: none;
+	
+	background: #138AFE;
+	
+	white-space: nowrap;
+}
+
+A.DNNSpecialists_Modules_Reservations_CommandButton_Blue:hover
+{
+    color: #FFF !important;
+	outline: none;
+	text-decoration: none;
+	
+    background: #1378FE;
+}
+
+A.DNNSpecialists_Modules_Reservations_CommandButton_Green
+{
+	border-radius: 8px;
+	moz-border-radius: 8px;
+	webkit-border-radius: 8px;
+	
+	color: #FFF !important;
+	cursor: pointer;
+	display: inline-block;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 36px;
+	outline: none;
+	padding: 0 20px;
+	text-align: center;
+	text-decoration: none;
+	
+	background: #2EB83F;
+
+    margin-left: 5px;
+}
+
+A.DNNSpecialists_Modules_Reservations_CommandButton_Green:hover
+{
+    color: #FFF !important;
+	outline: none;
+	text-decoration: none;
+	
+    background: #0A7F16;
+}
+
+A.DNNSpecialists_Modules_Reservations_CommandButton_Gray
+{
+	border-radius: 8px;
+	moz-border-radius: 8px;
+	webkit-border-radius: 8px;
+	
+	ccolor: rgb(119, 119, 119) !important;
+	color: #000;
+	cursor: pointer;
+	display: inline-block;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	outline: none;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	
+	background: #E5E5EA;
+}
+
+A.DNNSpecialists_Modules_Reservations_CommandButton_Gray:hover
+{
+    /*color: #fff !important;*/
+	outline: none;
+	text-decoration: none;
+	
+    background: #C7C7CC;
+}
+
+.DNNSpecialists_Modules_Reservations_Lookup_2 A.DNNSpecialists_Modules_Reservations_CommandButton_Gray
+{
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    white-space: normal;
+}
+
+A.DNNSpecialists_Modules_Reservations_CommandButton_Gray > img
+{
+    margin-right: 5px;
+}
+
+A.DNNSpecialists_Modules_Reservations_CommandButton_Link
+{
+    color: #007AFF !important;
+    text-decoration: none !important;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    font-size: 15px !important;
+	font-weight: 500 !important;
+	line-height: 36px;
+}
+
+A.DNNSpecialists_Modules_Reservations_CommandButton_Link:hover
+{
+    color: #0042FF !important;
+}
+
+.DNNSpecialists_Modules_Reservations .DNNSpecialists_Modules_Reservations_Input
+{
+    font-size: 13px !important;
+    padding: 10px !important;
+    height: auto;
+}
+
+.DNNSpecialists_Modules_Reservations_Time .DNNSpecialists_Modules_Reservations_Input
+{
+    width: 100%;
+}
+
+.DNNSpecialists_Modules_Reservations_Time .DNNSpecialists_Modules_Reservations_Form > div > span
+{
+    display: block;
+    padding: 10px 0 10px 0;
+}
+
+.DNNSpecialists_Modules_Reservations_HorizontalScroll > A.disabled:hover,
+A.DNNSpecialists_Modules_Reservations_LessCommandButton,
+A.DNNSpecialists_Modules_Reservations_MoreCommandButton
+{
+    width: 36px;
+    /*line-height: 30px;*/
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    
+    background: #E5E5EA;
+    /*background: #CECED2;*/
+}
+
+A.DNNSpecialists_Modules_Reservations_LessCommandButton
+{
+    float: left;
+    
+	border-top-left-radius: 12px;
+	border-bottom-left-radius: 12px;
+	moz-border-top-left-radius: 12px;
+	moz-border-bottom-left-radius: 12px;
+	webkit-border-top-left-radius: 12px;
+	webkit-border-bottom-left-radius: 12px;
+}
+
+A.DNNSpecialists_Modules_Reservations_MoreCommandButton
+{
+    float: right;
+    
+    border-top-right-radius: 12px;
+	border-bottom-right-radius: 12px;
+	moz-border-top-right-radius: 12px;
+	moz-border-bottom-right-radius: 12px;
+	webkit-border-top-right-radius: 12px;
+	webkit-border-bottom-right-radius: 12px;
+}
+
+A.DNNSpecialists_Modules_Reservations_LessCommandButton:hover,
+A.DNNSpecialists_Modules_Reservations_MoreCommandButton:hover
+{
+    background: #CECED2;
+    bbackground: #C7C7CC;
+}
+
+.DNNSpecialists_Modules_Reservations_HorizontalScroll
+{
+    width: 100%;
+    white-space: nowrap;
+    font-size: 0px;
+}
+
+.DNNSpecialists_Modules_Reservations_HorizontalScroll > .disabled
+{
+    pointer-events: none;
+    cursor: default;
+}
+
+.DNNSpecialists_Modules_Reservations_HorizontalScroll > .disabled > img
+{
+    opacity: 0.25;
+    filter: alpha(opacity=25);
+}
+
+.DNNSpecialists_Modules_Reservations_HorizontalScroll_Items
+{
+    overflow: hidden;
+    background: #E5E5EA;
+}
+
+.DNNSpecialists_Modules_Reservations_HorizontalScroll_Items > div
+{
+    margin: 0 auto 0 auto;
+}
+
+.DNNSpecialists_Modules_Reservations_HorizontalScroll_Items A,
+.DNNSpecialists_Modules_Reservations_HorizontalScroll_Item_Selected,
+.DNNSpecialists_Modules_Reservations_HorizontalScroll_Item_Unavailable
+{
+    text-align: center;
+    text-decoration: none;
+    
+    color: #000000;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+
+    display: inline-block;
+    line-height: 30px;
+    white-space: nowrap;
+    padding: 5px 10px 5px 10px;
+    min-width: 100px;
+	
+	background: #E5E5EA;
+    bbackground: #CECED2;
+}
+
+.DNNSpecialists_Modules_Reservations_HorizontalScroll_Items A:hover
+{
+    background: #CECED2;
+}
+
+.DNNSpecialists_Modules_Reservations_HorizontalScroll_Item_Selected
+{
+    color: #FFF;
+    background: #138AFE;
+    cursor: default;
+}
+
+.DNNSpecialists_Modules_Reservations_HorizontalScroll_Item_Unavailable
+{
+    color: #A9A9AA;
+    text-decoration: line-through;
+    cursor: default;
+}
+
+.DNNSpecialists_Modules_Reservations_Calendar
+{
+    width: 100%;
+    border-style: none !important;
+}
+
+/*
+.DNNSpecialists_Modules_Reservations_Calendar > tbody > tr:last-child > td:first-child
+{
+    border-bottom-left-radius: 12px;
+    moz-border-top-left-radius: 12px;
+    webkit--border-top-left-radius: 12px;
+}
+
+.DNNSpecialists_Modules_Reservations_Calendar > tbody > tr:last-child > td:last-child
+{
+    border-bottom-right-radius: 12px;
+    moz-border-top-right-radius: 12px;
+    webkit--border-top-right-radius: 12px;
+}
+*/
+
+.DNNSpecialists_Modules_Reservations_TitleStyle
+{
+    /*line-height: 30px;*/
+    /*margin-bottom: 10px;*/
+    
+    background-color: #E5E5EA;
+    
+    border-top-left-radius: 12px;
+    moz-border-top-left-radius: 12px;
+    webkit--border-top-left-radius: 12px;
+    
+    border-top-right-radius: 12px;
+    moz-border-top-right-radius: 12px;
+    webkit--border-top-right-radius: 12px;
+    
+    border-bottom-left-radius: 12px;
+    moz-border-bottom-left-radius: 12px;
+    webkit--border-bottom-left-radius: 12px;
+    
+    border-bottom-right-radius: 12px;
+    moz-border-bottom-right-radius: 12px;
+    webkit--border-bottom-right-radius: 12px;
+}
+
+.DNNSpecialists_Modules_Reservations_TitleStyle td
+{
+    color: #000;
+    font-size: 13px;
+}
+
+
+.DNNSpecialists_Modules_Reservations_TitleStyle > tbody > tr > td:first-child > a
+{
+    border-top-left-radius: 12px;
+    moz-border-top-left-radius: 12px;
+    webkit--border-top-left-radius: 12px;
+    
+    border-bottom-left-radius: 12px;
+    moz-border-bottom-left-radius: 12px;
+    webkit--border-bottom-left-radius: 12px;
+}
+
+.DNNSpecialists_Modules_Reservations_TitleStyle > tbody > tr > td:last-child > a
+{
+    border-top-right-radius: 12px;
+    moz-border-top-right-radius: 12px;
+    webkit--border-top-right-radius: 12px;
+    
+    border-bottom-right-radius: 12px;
+    moz-border-bottom-right-radius: 12px;
+    webkit--border-bottom-right-radius: 12px;
+}
+
+.DNNSpecialists_Modules_Reservations_NextPrevStyle > a
+{
+    display: inline-block;
+    width: 36px;
+    /*line-height: 30px;*/
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.DNNSpecialists_Modules_Reservations_NextPrevStyle > a:hover
+{
+    background: #CECED2;
+}
+
+.DNNSpecialists_Modules_Reservations_NextPrevStyle > a > img
+{
+    vertical-align: middle;
+}
+
+.DNNSpecialists_Modules_Reservations_DayHeaderStyle
+{
+    bbackground-color: #ffffff;
+    font-size: 13px !important;
+    color: #000 !important;
+    padding: 5px;
+}
+
+.DNNSpecialists_Modules_Reservations_UnavailableDayStyle
+{
+    background-color: #E5E5EA !important;
+    
+    padding: 9px !important;
+    color: #A9A9AA !important;
+    text-decoration: line-through !important;
+    cursor: default;
+    font-size: 13px !important;
+}
+
+.DNNSpecialists_Modules_Reservations_DayStyle
+{
+    background-color: #ffffff;
+}
+
+.DNNSpecialists_Modules_Reservations_DayStyle A
+{
+    display: block;
+    padding: 8px;
+    color: #333333 !important;
+    text-decoration: none !important;
+    border: solid 1px transparent !important;
+    font-size: 13px;
+}
+
+.DNNSpecialists_Modules_Reservations_DayStyle A:hover
+{
+    text-decoration: none !important;
+    border: solid 1px #CECED2 !important;
+    background-color: #CECED2;
+    color: #000 !important;
+}
+
+.DNNSpecialists_Modules_Reservations_SelectedDayStyle
+{
+    border: solid 1px #138AFE !important;
+    background-color: #138AFE !important;
+    color: #ffffff !important;
+    cursor: default;
+}
+
+.DNNSpecialists_Modules_Reservations_WeekendDayStyle
+{
+}
+
+.DNNSpecialists_Modules_Reservations_OtherMonthDayStyle
+{
+    background-color: #E5E5EA !important;
+}
+
+.DNNSpecialists_Modules_Reservations_SelectorStyle
+{
+}
+
+.DNNSpecialists_Modules_Reservations_HiddenDayStyle
+{
+    background-color: #E5E5EA !important;
+    border: none !important;
+}
+
+.DNNSpecialists_Modules_Reservations_ReservationInfo .DNNSpecialists_Modules_Reservations_FormItem
+{
+    display: table;
+}
+
+.DNNSpecialists_Modules_Reservations_ReservationInfo .DNNSpecialists_Modules_Reservations_FormItem > .DNNSpecialists_Modules_Reservations_SubHead
+{
+    display: table-cell;
+    width: 40%;
+    font-weight: bold !important;
+}
+
+.DNNSpecialists_Modules_Reservations_ReservationInfo .DNNSpecialists_Modules_Reservations_FormItem > .DNNSpecialists_Modules_Reservations_Normal
+{
+    display: table-cell;
+    white-space: normal !important;
+}
+
+.DNNSpecialists_Modules_Reservations_ReservationInfo .DNNSpecialists_Modules_Reservations_Step_480 .DNNSpecialists_Modules_Reservations_FormItem
+{
+    display: block;
+}
+
+.DNNSpecialists_Modules_Reservations_ReservationInfo .DNNSpecialists_Modules_Reservations_Step_480 .DNNSpecialists_Modules_Reservations_FormItem > .DNNSpecialists_Modules_Reservations_SubHead
+{
+    display: block;
+}
+
+.DNNSpecialists_Modules_Reservations_ReservationInfo .DNNSpecialists_Modules_Reservations_Step_480 .DNNSpecialists_Modules_Reservations_FormItem > .DNNSpecialists_Modules_Reservations_Normal
+{
+    display: inline;
+}
+
+.DNNSpecialists_Modules_Reservations_ReservationInfo .DNNSpecialists_Modules_Reservations_Step_480 .DNNSpecialists_Modules_Reservations_Buttons > a
+{
+    display: block;
+    margin: 0 auto 15px auto;
+    max-width: 250px;
+    white-space: nowrap;
+}
+
+.DNNSpecialists_Modules_Reservations_ReservationInfo .DNNSpecialists_Modules_Reservations_Step_480 .DNNSpecialists_Modules_Reservations_Buttons > a:last-child
+{
+    margin: 0 auto 0 auto;
+}
+
+.DNNSpecialists_Modules_Reservations_Pre
+{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    display: inline-block;
+}
+
+.DNNSpecialists_Modules_Reservations .DNNSpecialists_Modules_Reservations_Actions
+{
+    display: block;
+    width: 100%;
+    border-top: solid 1px #ccc;
+    margin-top: 15px;
+}
+
+.DNNSpecialists_Modules_Reservations .DNNSpecialists_Modules_Reservations_Actions > a
+{
+    margin: 15px 15px 0 0;
+}
+
+/***************************************************************************************************/
+/* End of Responsive - End User                                                                    */
+/***************************************************************************************************/
+
+/***************************************************************************************************/
+/* List controls                                                                                   */
+/***************************************************************************************************/
+.DNNSpecialists_Modules_Reservations_ViewReservations .DNNSpecialists_Modules_Reservations_DataGrid_HeaderStyle_Button,
+.DNNSpecialists_Modules_Reservations_ViewReservations .DNNSpecialists_Modules_Reservations_DataGrid_ItemStyle_Button
+{
+    width: 21px;
+}
+
+.DNNSpecialists_Modules_Reservations_ViewReservations .DNNSpecialists_Modules_Reservations_DataGrid_NumberOfRecordsFound
+{
+    padding-left: 30px;
+}
+/***************************************************************************************************/
+/* End of List controls                                                                                   */
+/***************************************************************************************************/
+
+.DNNSpecialists_Modules_Reservations_ViewCalendar_Calendar
+{
+    width: 100%;
+}
+
+.DNNSpecialists_Modules_Reservations_ViewCalendar_Category
+{
+    width: 200px;
+    display: block;
+    margin-bottom: 10px !important;
+}
+
+.DNNSpecialists_Modules_Reservations_Settings_DataGrid_SeasonalFees
+{
+	background-color: #eee;
+}

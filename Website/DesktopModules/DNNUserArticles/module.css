@@ -1,0 +1,381 @@
+/* ================================
+    CSS STYLES FOR Module Blog
+   ================================
+*/
+.BlogInfo
+{
+    padding-bottom: 10px;
+}
+
+.SearchOptions
+{
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 10pt;
+}
+
+.CreateFrom
+{
+    font-size: 10px;
+    color: #003366;
+}
+
+.blog_body {
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 10pt;
+}
+
+.blog_head
+{
+}
+
+.blog_Description_Heavy
+{
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+.blog_Description
+{
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 10pt;
+}
+
+.blog_published {
+    display: block;
+    text-align: center;
+    float: left;
+    font-family: Arial, Helvetica, sans-serif;
+    border-bottom: 2px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    border-top: 1px solid #cccccc;
+    background: url(images/clip-bottom.png) right top no-repeat;
+    width: 2.5em;
+    margin-right: 5px;
+}
+
+.blog_pub-month {
+    display: block;
+    font-size: 10px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    padding-top: 1px;
+    background: url(images/clip-top.png) center top repeat-x;
+    text-transform: uppercase;
+}
+
+.blog_pub-date {
+    display: block;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+
+.blog_pub-year {
+    display: block;
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+.blog_comments {
+    background-image: url(images/blog_comments.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.blog_comments_normal {
+    background-image: url(images/blog_comments.png);
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.blog_topics
+{
+    background-image: url(images/blog_topic.png);
+    font-size: 11px;
+}
+
+.blog_more_link
+{
+    font-size: 11px;
+    /*padding-left: 3px;*/
+    font-weight: bold;
+}
+
+.blog_gravatar
+{
+    float: left;
+    padding: 2px;
+    margin: 5px;
+    border: solid 1px #ddd;
+    background-color: #fff;
+    margin-left: expression("4px");
+    margin-bottom: expression("-5px");
+}
+
+.blog_gravatar_preview
+{
+    padding: 2px;
+    margin: 0px;
+    border: solid 1px #ddd;
+    background-color: #fff;
+    float: right;
+}
+
+
+.blog_lefttd
+{
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+.blog_tags
+{
+    display: none;
+    visibility: hidden;
+    background-image: url(images/blog_tag_blue.png);
+    font-size: 11px;
+}
+
+.blog_trackback {
+    background-image: url(images/blog_trackback.png);
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    font-size: 11px;
+}
+
+.blog_permalink
+{
+    background-image: url(images/blog_permalink.png);
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    font-size: 11px;
+}
+
+.blog_print
+{
+    background-image: url(images/blog_print.png);
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    margin-left: 8px;
+    font-size: 11px;
+}
+
+.blog_edit_link
+{
+    background-image: url(images/blog_edit_link.png);
+    margin-left: 8px;
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    font-size: 11px;
+}
+/*.blog_tags,*/
+
+.blog_topics, .blog_permalink {
+    background-position: left;
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    display: block;
+    clear: both;
+    float: none;
+}
+
+.blog_date {
+    color: #666666;
+}
+
+h2.blog_title
+{
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 16pt;
+    margin-bottom: 3px;
+    margin-top: 15px;
+    line-height: 16pt;
+}
+
+h1, .horizontalline
+{
+    border-bottom-width: 1px;
+    border-bottom-style: dotted;
+    border-bottom-color: #aaaaaa;
+}
+
+
+.blog_subhead
+{
+    margin-top: 0pt;
+    margin-right: 0pt;
+    margin-bottom: 0pt;
+    margin-left: 0pt;
+    padding-top: 0pt;
+    padding-right: 0pt;
+    padding-bottom: 8px;
+    padding-left: 42px;
+    position: relative;
+}
+
+.blog_subhead .blog_comments
+{
+    position: absolute;
+    top: 0pt;
+    right: 0pt;
+}
+
+.blog_footer_right {
+
+    float: right;
+    display: inline;
+    position: relative;
+}
+
+.blog_footer_left {
+    float: left;
+    display: inline;
+}
+
+.blog_footer {
+    width: 100%;
+    display: block;
+    border-bottom-width: 1px;
+    border-bottom-style: dotted;
+    border-bottom-color: #aaaaaa;
+    padding-bottom: 30px;
+}
+
+.clear {
+    clear: both;
+}
+
+.blog_copyright {
+    font-size: 10px;
+}
+
+.blog_entry_description
+{
+}
+
+/* Normal Bubble */
+
+div.blog_bubble, div.blog_bubble_owner {
+    width: auto;
+    font-size: 10pt;
+    margin-bottom: 24px;
+}
+
+div.blog_bubble blockquote {
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid #c9c2c1;
+    background-color: #fff;
+    zoom: 1;
+    min-height: 64px;
+}
+
+div.blog_bubble_owner blockquote
+{
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid #aaa;
+    background-color: #e0e0e0;
+    zoom: 1;
+    min-height: 64px;
+}
+
+div.blog_bubble blockquote p, div.blog_bubble_owner blockquote p {
+    margin: 10px;
+    padding: 0px;
+}
+
+div.blog_bubble cite, div.blog_bubble_owner cite {
+    position: relative;
+    margin: 0px;
+    padding: 7px 0px 0px 15px;
+    top: 6px;
+    background: transparent url(images/blog_comment_tip.gif) no-repeat 20px 0;
+    font-style: normal;
+}
+
+div.blog_bubble_owner cite
+{
+    background: transparent url(images/blog_comment_tip_owner.gif) no-repeat 20px 0;
+}
+/* Calendar Styles */
+
+.Blog_Archive_DayHeader {
+    font-size: 11px;
+    background-color: #ccddff;
+}
+
+.Blog_Archive_Day {
+    font-size: 11px;
+    background-color: #fff;
+}
+
+.Blog_Archive_Day a, .Blog_Archive_SelectedDay a, .Blog_Archive_WeekendDay a, .Blog_Archive_TodayDay a
+{
+    width: 100%;
+}
+
+.Blog_Archive_NextPrev {
+    font-size: 11px;
+}
+
+.Blog_Archive_OtherMonth {
+    font-size: 11px;
+    background-color: #f4f4f4;
+}
+
+.Blog_Archive_SelectedDay {
+    border: 1px solid #cccccc;
+    background-color: #FFCC00;
+}
+
+.Blog_Archive_Selector {
+    font-size: 11px;
+}
+
+.Blog_Archive_Title {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.Blog_Archive_TodayDay {
+    border: 1px solid #cccccc;
+    background-color: #FFCC00;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.Blog_Archive_WeekendDay {
+    font-size: 11px;
+    background-color: #fffff0;
+}
+
+.blog_image_list {
+    line-height: 20px;
+    vertical-align: middle;
+}
+
+.blog_dateline
+{
+    font-family: Verdana, Tahoma, Arial, sans-serif;
+    font-size: 8pt;
+}
+
+div.blog_bubble p
+{
+    color: black;
+}
+
+ 

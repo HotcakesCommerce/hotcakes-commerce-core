@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="lblContent.Text" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="lblContent.Help" xml:space="preserve">
+    <value>Enter the Content</value>
+  </data>
+  <data name="valContent.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;Content is required</value>
+  </data>
+  <data name="ModuleHelp.Text" xml:space="preserve">
+    <value>&lt;P&gt;A DNNArticle module</value>
+  </data>
+  <data name="ControlTitle_edit.Text" xml:space="preserve">
+    <value>Edit DNNArticle</value>
+  </data>
+  <data name="EmailSubject.Text" xml:space="preserve">
+    <value>New item</value>
+  </data>
+  <data name="EmailTemplate.Text" xml:space="preserve">
+    <value>[TITLE]&lt;br&gt;[CONTENT]&lt;br&gt;[CREATEDBYUSERNAME]</value>
+  </data>
+  <data name="lblCategory.Help" xml:space="preserve">
+    <value>Select a category</value>
+  </data>
+  <data name="lblCategory.Text" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="lblIsApproved.Help" xml:space="preserve">
+    <value>IsApproved</value>
+  </data>
+  <data name="lblIsApproved.Text" xml:space="preserve">
+    <value>IsApproved</value>
+  </data>
+  <data name="lblSummary.Help" xml:space="preserve">
+    <value>Enter the description(less than 500 words)</value>
+  </data>
+  <data name="lblSummary.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="lblTitle.Help" xml:space="preserve">
+    <value>Enter the title</value>
+  </data>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="lblURL.Help" xml:space="preserve">
+    <value>Select an image</value>
+  </data>
+  <data name="lblURL.Text" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="lblViewOrder.Help" xml:space="preserve">
+    <value>View Order</value>
+  </data>
+  <data name="lblViewOrder.Text" xml:space="preserve">
+    <value>View Order</value>
+  </data>
+  <data name="AddNewFile.Text" xml:space="preserve">
+    <value>Add New File</value>
+  </data>
+  <data name="FileList.Text" xml:space="preserve">
+    <value>Attached Files</value>
+  </data>
+  <data name="lbKeyWords.Help" xml:space="preserve">
+    <value>Using comma to separate keywords.</value>
+  </data>
+  <data name="lbKeyWords.Text" xml:space="preserve">
+    <value>Keywords</value>
+  </data>
+  <data name="lbTags.Text" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="ExpireDate.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;You have entered an invalid date!</value>
+  </data>
+  <data name="lblSEODescription.Help" xml:space="preserve">
+    <value>The description for search engine.</value>
+  </data>
+  <data name="lblSEODescription.Text" xml:space="preserve">
+    <value>SEO Description</value>
+  </data>
+  <data name="lblSEOKeywords.Help" xml:space="preserve">
+    <value>The key words for search engine.</value>
+  </data>
+  <data name="lblSEOKeywords.Text" xml:space="preserve">
+    <value>SEO Keywords</value>
+  </data>
+  <data name="lblSEOTitle.Help" xml:space="preserve">
+    <value>The title for search engine.</value>
+  </data>
+  <data name="lblSEOTitle.Text" xml:space="preserve">
+    <value>SEO Title</value>
+  </data>
+  <data name="plExpireDate.Help" xml:space="preserve">
+    <value>Enter an expiration date. </value>
+  </data>
+  <data name="plExpireDate.Text" xml:space="preserve">
+    <value>Expire Date</value>
+  </data>
+  <data name="plPublishDate.Help" xml:space="preserve">
+    <value>Enter an Publish Date for the article.  The article will only display from this date.</value>
+  </data>
+  <data name="plPublishDate.Text" xml:space="preserve">
+    <value>Publish Date</value>
+  </data>
+  <data name="PublishDate.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;You have entered an invalid date!</value>
+  </data>
+  <data name="PublishDateRequired.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;You must enter a date</value>
+  </data>
+  <data name="lblFeatured.Help" xml:space="preserve">
+    <value>Featured</value>
+  </data>
+  <data name="lblFeatured.Text" xml:space="preserve">
+    <value>Featured</value>
+  </data>
+  <data name="lblReleatedURL.Help" xml:space="preserve">
+    <value>Related URL</value>
+  </data>
+  <data name="lblReleatedURL.Text" xml:space="preserve">
+    <value>Related URL</value>
+  </data>
+  <data name="lbCategories.Text" xml:space="preserve">
+    <value>Assign with Categories</value>
+  </data>
+  <data name="cmdExtraField.Text" xml:space="preserve">
+    <value>Edit extra field</value>
+  </data>
+  <data name="lbViewRoles.Help" xml:space="preserve">
+    <value>Roles can view articles</value>
+  </data>
+  <data name="lbViewRoles.Text" xml:space="preserve">
+    <value>Roles can view articles</value>
+  </data>
+  <data name="cmdReturn.Text" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="dshCategories.Text" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="dshExtraFields.Text" xml:space="preserve">
+    <value>Extra Fields</value>
+  </data>
+  <data name="dshFile.Text" xml:space="preserve">
+    <value>Attached Files</value>
+  </data>
+  <data name="dshSecurity.Text" xml:space="preserve">
+    <value>Permission</value>
+  </data>
+  <data name="dshSEO.Text" xml:space="preserve">
+    <value>SEO</value>
+  </data>
+  <data name="dshURL.Text" xml:space="preserve">
+    <value>Image and related url</value>
+  </data>
+  <data name="cmdRelate.Text" xml:space="preserve">
+    <value>Relate Articles...</value>
+  </data>
+  <data name="AddArticle.Text" xml:space="preserve">
+    <value>{0} adds a new article "{1}". </value>
+  </data>
+  <data name="BasicInfo.Text" xml:space="preserve">
+    <value>Article</value>
+  </data>
+  <data name="Content.Text" xml:space="preserve">
+    <value>Pages</value>
+  </data>
+  <data name="RelatedArticles.Text" xml:space="preserve">
+    <value>Related Articles</value>
+  </data>
+  <data name="cmdSave.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="cmdUpdate.Text" xml:space="preserve">
+    <value>Save&amp;Return</value>
+  </data>
+  <data name="cmdAddPage.Text" xml:space="preserve">
+    <value>Add Page</value>
+  </data>
+  <data name="cmdDeletePage.Text" xml:space="preserve">
+    <value>Delete Page</value>
+  </data>
+  <data name="cmdSavePage.Text" xml:space="preserve">
+    <value>Save Page</value>
+  </data>
+  <data name="lbTime.Text" xml:space="preserve">
+    <value>Time:</value>
+  </data>
+  <data name="Page.Text" xml:space="preserve">
+    <value>Page </value>
+  </data>
+  <data name="InvalidInteger.ErrorMessage" xml:space="preserve">
+    <value>Invalid Integer </value>
+  </data>
+  <data name="lbPageOrder.Help" xml:space="preserve">
+    <value>Page Order</value>
+  </data>
+  <data name="lbPageOrder.Text" xml:space="preserve">
+    <value>Page Order</value>
+  </data>
+  <data name="lbPageTitle.Help" xml:space="preserve">
+    <value>Page Title</value>
+  </data>
+  <data name="lbPageTitle.Text" xml:space="preserve">
+    <value>Page Title</value>
+  </data>
+  <data name="NoPage.Text" xml:space="preserve">
+    <value>No Page</value>
+  </data>
+  <data name="Title.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;Title is required</value>
+  </data>
+  <data name="DefaultApprovedArticleEmailSubjectToAuthor.Text" xml:space="preserve">
+    <value>Your article is approved</value>
+  </data>
+  <data name="DefaultApprovedArticleEmailTemplateToAuthor.Text" xml:space="preserve">
+    <value>Hello, [CREATEDBYUSERNAME]&lt;br/&gt; Thanks for your article [TITLE]. It is approved and published. &lt;br/&gt;Regards&lt;br/&gt;[PORTAL:PORTALNAME] team</value>
+  </data>
+  <data name="DefaultEmailSubject.Text" xml:space="preserve">
+    <value>A new article is submitted</value>
+  </data>
+  <data name="DefaultEmailTemplate.Text" xml:space="preserve">
+    <value>Hello,&lt;br/&gt;There is a new article &lt;a href='[VIEWURL]' class="CommandButton"&gt;[TITLE]&lt;/a&gt; is submitted.&lt;br/&gt;Regards&lt;br/&gt;[PORTAL:PORTALNAME] team</value>
+  </data>
+  <data name="DefaultNewArticleEmailSubjectToAuthor.Text" xml:space="preserve">
+    <value>Thanks for your article</value>
+  </data>
+  <data name="DefaultNewArticleEmailTemplateToAuthor.Text" xml:space="preserve">
+    <value>Hello, [CREATEDBYUSERNAME]&lt;br/&gt; Thanks for your article [TITLE]. It will be published after approved. &lt;br/&gt;Regards&lt;br/&gt;[PORTAL:PORTALNAME] team</value>
+  </data>
+  <data name="lbCopyrightnote.Text" xml:space="preserve">
+    <value>
+I certify that I have the right to distribute the picture and that is does not violate the Terms of Use. 
+	</value>
+  </data>
+  <data name="lbEnterTags.Help" xml:space="preserve">
+    <value>Tags: please use comma(,) to split tags.</value>
+  </data>
+  <data name="Versions.Text" xml:space="preserve">
+    <value>Versions</value>
+  </data>
+  <data name="DeleteVersion.Text" xml:space="preserve">
+    <value>Do you want to delete this version?</value>
+  </data>
+  <data name="lblPageContent.Text" xml:space="preserve">
+    <value>Page Content:</value>
+  </data>
+  <data name="lblPages.Text" xml:space="preserve">
+    <value>Pages</value>
+  </data>
+  <data name="lblPageTitle.Text" xml:space="preserve">
+    <value>Page Title:</value>
+  </data>
+  <data name="RollBackVersion.Text" xml:space="preserve">
+    <value>Do you want to roll back to this version?</value>
+  </data>
+  <data name="lblVersion.Text" xml:space="preserve">
+    <value>Version </value>
+  </data>
+  <data name="cmdMultiLanguage.Text" xml:space="preserve">
+    <value>Edit content of other Languages</value>
+  </data>
+  <data name="lblID.Help" xml:space="preserve">
+    <value>ArticleID</value>
+  </data>
+  <data name="lblID.Text" xml:space="preserve">
+    <value>ArticleID</value>
+  </data>
+  <data name="lblAuthorID.Help" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="lblAuthorID.Text" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="Add.Text" xml:space="preserve">
+    <value>Add A New URL</value>
+  </data>
+  <data name="Cancel.Text" xml:space="preserve">
+    <value>Select An Existing File</value>
+  </data>
+  <data name="Delete.Text" xml:space="preserve">
+    <value>Delete Selected URL From The List&lt;BR&gt;</value>
+  </data>
+  <data name="File.Text" xml:space="preserve">
+    <value>File Name:&lt;BR&gt;</value>
+  </data>
+  <data name="FileType.Text" xml:space="preserve">
+    <value>File ( A File On Your Site )</value>
+  </data>
+  <data name="Folder.Text" xml:space="preserve">
+    <value>File Location:&lt;BR&gt;</value>
+  </data>
+  <data name="Log.Text" xml:space="preserve">
+    <value>Log The User, Date, And Time For Every Link Click?&lt;BR&gt;</value>
+  </data>
+  <data name="NewWindow.Text" xml:space="preserve">
+    <value>Open Link In New Browser Window?&lt;BR&gt;</value>
+  </data>
+  <data name="NoneType.Text" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="NoPermission.Text" xml:space="preserve">
+    <value>You don't have permission to see the files on the site</value>
+  </data>
+  <data name="Root.Text" xml:space="preserve">
+    <value>Root</value>
+  </data>
+  <data name="Save.Text" xml:space="preserve">
+    <value>Upload Selected File&lt;BR&gt;</value>
+  </data>
+  <data name="Select.Text" xml:space="preserve">
+    <value>Select An Existing URL</value>
+  </data>
+  <data name="Tab.Text" xml:space="preserve">
+    <value>Select A Web Page From Your Site:&lt;BR&gt;</value>
+  </data>
+  <data name="TabType.Text" xml:space="preserve">
+    <value>Page ( A Page On Your Site )</value>
+  </data>
+  <data name="Track.Text" xml:space="preserve">
+    <value>Track Number Of Times This Link Is Clicked?&lt;BR&gt;</value>
+  </data>
+  <data name="Type.Text" xml:space="preserve">
+    <value>Link Type:</value>
+  </data>
+  <data name="Upload.Text" xml:space="preserve">
+    <value>Upload New File</value>
+  </data>
+  <data name="UploadError.Text" xml:space="preserve">
+    <value>File type {1} is not valid in this context. Valid File Types Include: {0}</value>
+  </data>
+  <data name="URL.Text" xml:space="preserve">
+    <value>Location: ( Enter The Address Of The Link )&lt;BR&gt;</value>
+  </data>
+  <data name="URLType.Text" xml:space="preserve">
+    <value>URL ( A Link To An External Resource )</value>
+  </data>
+  <data name="User.Text" xml:space="preserve">
+    <value>Enter The Username Of A Member Of Your Site:&lt;BR&gt;</value>
+  </data>
+  <data name="UserType.Text" xml:space="preserve">
+    <value>User ( A Member Of Your Site )</value>
+  </data>
+  <data name="Lightbox.Text" xml:space="preserve">
+    <value>Lightbox Content</value>
+  </data>
+  <data name="dshlightboxContent.Text" xml:space="preserve">
+    <value>Lightbox Content</value>
+  </data>
+  <data name="lbEnableLightBoxContent.Help" xml:space="preserve">
+    <value>Allow users to add light box content</value>
+  </data>
+  <data name="lbEnableLightBoxContent.Text" xml:space="preserve">
+    <value>Enable Light Box Content</value>
+  </data>
+  <data name="dshResource.Text" xml:space="preserve">
+    <value>Resource</value>
+  </data>
+  <data name="lblAllComment.Help" xml:space="preserve">
+    <value>Allow Comment</value>
+  </data>
+  <data name="lblAllComment.Text" xml:space="preserve">
+    <value>Allow Comment</value>
+  </data>
+  <data name="lbEnterTags.Text" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="Saved.Text" xml:space="preserve">
+    <value>The article is saved. </value>
+  </data>
+  <data name="lbURLTitle.Help" xml:space="preserve">
+    <value>Article Title In URL</value>
+  </data>
+  <data name="lbURLTitle.Text" xml:space="preserve">
+    <value>Article Title In URL</value>
+  </data>
+  <data name="cmdPostTwitter.Text" xml:space="preserve">
+    <value>Post To Twitter</value>
+  </data>
+  <data name="lbPostToTwitter.Help" xml:space="preserve">
+    <value>Post to Twitter and/or Facebook</value>
+  </data>
+  <data name="lbPostToTwitter.Text" xml:space="preserve">
+    <value>Post to Twitter and/or Facebook</value>
+  </data>
+  <data name="AddAtLeastOneCategory.Text" xml:space="preserve">
+    <value>Please add at least one category.</value>
+  </data>
+  <data name="AddAtLeastOneTag.Text" xml:space="preserve">
+    <value>Please add at least one tag.</value>
+  </data>
+</root>

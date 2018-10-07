@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="cancelCreate.Text" xml:space="preserve">
+    <value>لغو</value>
+  </data>
+  <data name="ControlTitle_createvocabulary.Text" xml:space="preserve">
+    <value>ایجاد واژه جدید</value>
+  </data>
+  <data name="ControlTitle_editvocabulary.Text" xml:space="preserve">
+    <value>ویرایش واژه</value>
+  </data>
+  <data name="SaveVocabulary.Text" xml:space="preserve">
+    <value>بروز رسانی</value>
+  </data>
+  <data name="CurrentTerm.Text" xml:space="preserve">
+    <value>ویرایش شرط</value>
+  </data>
+  <data name="DeleteVocabulary.Text" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="Terms.Text" xml:space="preserve">
+    <value>شرایط</value>
+  </data>
+  <data name="Title.Text" xml:space="preserve">
+    <value>ویرایش واژه</value>
+  </data>
+  <data name="DeleteTerm.Text" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="SaveTerm.Text" xml:space="preserve">
+    <value>بروز رسانی</value>
+  </data>
+  <data name="AddTerm.Text" xml:space="preserve">
+    <value>افزودن شرط</value>
+  </data>
+  <data name="CreateTerm.Text" xml:space="preserve">
+    <value>ذخیره</value>
+  </data>
+  <data name="NewTerm.Text" xml:space="preserve">
+    <value>ایجاد شرط جدید</value>
+  </data>
+  <data name="TermValidationError.Message" xml:space="preserve">
+    <value>در اعتبارسنجی شرط خطایی وجود دارد. شرط می بایست دارای نام باشد.</value>
+  </data>
+  <data name="TermValidationError.MessageHeader" xml:space="preserve">
+    <value>خطای اعتبارسنجی شرط</value>
+  </data>
+  <data name="ControlTitle_edit.Text" xml:space="preserve">
+    <value>ویرایش واژه</value>
+  </data>
+  <data name="ParentTerm.Text" xml:space="preserve">
+    <value>شرط والد</value>
+  </data>
+  <data name="ParentTerm.ToolTip" xml:space="preserve">
+    <value>شرط والد برای شرط های سلسله مراتبی</value>
+  </data>
+  <data name="TermName.Text" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="TermName.ToolTip" xml:space="preserve">
+    <value>نام موردنظر برای شرط</value>
+  </data>
+  <data name="TermName.Required" xml:space="preserve">
+    <value>نام شرط الزامی است</value>
+  </data>
+  <data name="Application.Text" xml:space="preserve">
+    <value>برنامه کاربردی</value>
+  </data>
+  <data name="Description.Text" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Description.ToolTip" xml:space="preserve">
+    <value>توضیحات برای واژه</value>
+  </data>
+  <data name="Hierarchy.Text" xml:space="preserve">
+    <value>سلسله مراتب</value>
+  </data>
+  <data name="Name.Required" xml:space="preserve">
+    <value>وارد کردن نام واژه الزامی است</value>
+  </data>
+  <data name="Name.Text" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="Name.ToolTip" xml:space="preserve">
+    <value>نام مربوط به واژه</value>
+  </data>
+  <data name="Portal.Text" xml:space="preserve">
+    <value>پرتال</value>
+  </data>
+  <data name="Scope.Text" xml:space="preserve">
+    <value>محدوده</value>
+  </data>
+  <data name="Scope.ToolTip" xml:space="preserve">
+    <value>محدوده این واژه application-wide  یا portal-specific.</value>
+  </data>
+  <data name="Simple.Text" xml:space="preserve">
+    <value>ساده</value>
+  </data>
+  <data name="Type.Text" xml:space="preserve">
+    <value>نوع</value>
+  </data>
+  <data name="Type.ToolTip" xml:space="preserve">
+    <value>نوع واژه، ساده یا سلسله مراتبی </value>
+  </data>
+  <data name="VocabularyExists.Error" xml:space="preserve">
+    <value>واژه"{0}" در لیست وجود دارد!</value>
+  </data>
+  <data name="Create.Text" xml:space="preserve">
+    <value>ایجاد واژه جدید</value>
+  </data>
+  <data name="Description.Header" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Name.Header" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="Scope.Header" xml:space="preserve">
+    <value>محدوده</value>
+  </data>
+  <data name="Type.Header" xml:space="preserve">
+    <value>نوع</value>
+  </data>
+  <data name="Create.ToolTip" xml:space="preserve">
+    <value>برای ایجاد واژه بر روی این دکمه کلیک نمایید</value>
+  </data>
+  <data name="Edit.Text" xml:space="preserve">
+    <value>ویرایش</value>
+  </data>
+  <data name="Confirm.Text" xml:space="preserve">
+    <value>آیا از افزودن واژه جدید مطمئن هستید؟</value>
+  </data>
+  <data name="ControlTitle_.Text" xml:space="preserve">
+    <value>واژگان</value>
+  </data>
+  <data name="nav_Vocabularies.Text" xml:space="preserve">
+    <value>واژگان</value>
+  </data>
+  <data name="TermExists.Error" xml:space="preserve">
+    <value>شرط "{0}" در لیست وجود دارد.</value>
+  </data>
+  <data name="ConfirmDeletion_Vocabulary.Text" xml:space="preserve">
+    <value>آیا از حذف  "{0}" مطمئن هستید؟</value>
+  </data>
+  <data name="ConfirmDeletion_Term.Text" xml:space="preserve">
+    <value>آیا از حذف این  "{0}" واژه مطمئن هستید؟</value>
+  </data>
+  <data name="LoadMore.Text" xml:space="preserve">
+    <value>بارگذاری بیشتر</value>
+  </data>
+  <data name="RequiredField.Text" xml:space="preserve">
+    <value>فیلد ضروری</value>
+  </data>
+  <data name="CreateVocabulary.Text" xml:space="preserve">
+    <value>ایجاد</value>
+  </data>
+  <data name="NoVocabularyTerms.Error" xml:space="preserve">
+    <value>واژه ای یافت نشد!</value>
+  </data>
+  <data name="Close.Text" xml:space="preserve">
+    <value>بازگشت</value>
+  </data>
+</root>

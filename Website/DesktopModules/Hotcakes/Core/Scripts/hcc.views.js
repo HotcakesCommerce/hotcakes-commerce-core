@@ -35,13 +35,13 @@
 
         var action = form.data("action");
         var method = form.data("method");
-        var moduleid = form.data("moduleid");
+        var moduleidjs = form.data("moduleid");
         var skipxy = form.data("skipxy");
 
         var elements = form.find("select, input, textarea").serializeArray();
 
-        if (moduleid && method != "get")
-            elements.push({ "name": "moduleid", "value": moduleid });
+        if (moduleidjs && method != "get")
+            elements.push({ "name": "moduleid", "value": moduleidjs });
 
         if (submitEl.attr("name")) {
             elements.push({ "name": submitEl.attr("name"), "value": submitEl.val() });

@@ -1,0 +1,168 @@
+﻿<div ng-controller="common_licensing">
+    <uiengine provider="AngularBootstrap" identifier="common_licensing" layout="Licensing">
+        <uilayout name="Single" attr-ng-show="ui.data.lStatus.Value=='REVOKED'">
+            <uitemplate>
+                <p mn-ng-bind-html="ui.data.Setting.Options.Status | unsafe"></p>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="Single" attr-ng-hide="ui.data.lStatus.Value=='REVOKED'">
+            <uitemplate>
+                <div mn-ng-show="!ui.data.WarningMessage.Options.length">
+                    <b>License Manager</b>
+                    <br /><br />
+                    <p mn-ng-bind-html="ui.data.Setting.Options.Status | unsafe"></p>
+                    <div class="ms-form-group">
+                        <label>Selected Edition</label>
+                        <select class="ms-form-control" mn-ng-model="ui.data.Editions.Value" mn-ng-options="option as option for option in ui.data.Editions.Options"></select>
+                    </div><br />
+                    <button mn-ng-if="ui.data.Setting.Options.Activate" type="button" class="ms-btn ms-btn-primary" mn-ng-click="Activate()" style="margin-right:5px">Activate</button>
+                    <button type="button" class="ms-btn ms-btn-warning" mn-ng-click="Finish(ui.data.Setting.Options.FinishType)">{{ui.data.Setting.Options.FinishType}}</button>
+                </div>
+                <div mn-ng-show="ui.data.WarningMessage.Options.length">
+                    <b>License Manager</b>
+                    <br /><br />
+                    <div mn-ng-repeat="item in ui.data.WarningMessage.Options">
+                        <p style="color:red;" mn-ng-bind-html="item | unsafe"></p>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="Multiple" attr-ng-show="!IsActivated">
+            <uitemplate>
+                <div mn-ng-show="IsActivation">
+                    <div class="ms-form-group" data-datatype="toggle" data-label="[L] Enable Slideshow" data-name="EnableSlideshow">
+                        <label class="">License Manager</label>
+                        <div style="float: right;">
+                            <label class="">Show Licensed: </label>
+                            <div class="ms-btn-group" role="group" aria-label="...">
+                                <button type="button" class="ms-btn ms-btn-default" style="margin-right: 0;" ng-click="Activated = !Activated" ng-class="Activated ? 'ms-btn-primary' : 'ms-btn-default'">Yes</button>
+                                <button type="button" class="ms-btn ms-btn-default" ng-click="Activated = !Activated" ng-class="!Activated ? 'ms-btn-primary' : 'ms-btn-default'">NO</button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="ms-form-group ms-table-responsive ms-table-responsive" data-datatype="grid" data-name="Products">
+                        <table class="ms-table ms-table-striped" id="Products">
+                            <thead>
+                                <tr>
+                                    <th st-ratio="5" class="hdtableth" style="width: 5%;"><input mn-ng-disabled="row.Status=='REVOKED'" mn-ng-show="!Activated" type="checkbox" mn-ng-click="CheckAll()" ng-model="IsChecked"></th>
+                                    <th st-ratio="25" class="hdtableth" style="width: 25%;">Product</th>
+                                    <th st-ratio="20" class="hdtableth" style="width: 20%;">Version</th>
+                                    <th st-ratio="20" class="hdtableth" style="width: 20%;">Edition</th>
+                                    <th st-ratio="15" class="hdtableth" style="width: 15%;">Status</th>
+                                    <th st-ratio="15" class="hdtableth" style="width: 15%;">Days Remainings</th>
+                                </tr>
+                                <tr></tr>
+                            </thead>
+                            <tbody>
+                                <tr mn-ng-repeat="row in ui.data.Products.Options | filter: myFilter" class="ng-scope">
+                                    <td st-ratio="5" style="width: 5%;">
+                                        <input mn-ng-disabled="row.Status=='REVOKED'" mn-ng-show="!Activated" type="checkbox" ng-model="row.IsChecked">
+                                    </td>
+                                    <td st-ratio="25" style="width: 25%;">
+                                        <a target="_blank" href="http://www.mandeeps.com/store.aspx?addcart={{row.AppID}}&Edition={{row.Edition}}">{{row.FriendlyName}}</a>
+                                    </td>
+                                    <td st-ratio="20" style="width: 20%;">
+                                        {{row.RuntimeVersion}}
+                                    </td>
+                                    <td st-ratio="20" style="width: 20%;">
+                                        <select mn-ng-model="row.Edition" mn-ng-show="!row.IsEdition" mn-ng-options="se as se for se in row.SupportedEditions"></select>
+                                        <span mn-ng-show="row.IsEdition">{{row.Edition}}</span>
+                                    </td>
+                                    <td st-ratio="15" style="width: 15%;">
+                                        {{row.Status}}
+                                    </td>
+                                    <td st-ratio="15" style="width: 15%;">
+                                        <span mn-ng-show="ShowDaysRemainings(row)">{{row.DaysRemainings}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr />
+                    <div>
+                        <button type="button" mn-ng-show="!Activated" class="ms-btn ms-btn-primary ms-pull-right" style="margin-left:4px;margin-bottom:20px;" mn-ng-click="Click_Finish()">Continue Trial</button>
+                        <button type="button" mn-ng-show="!Activated" class="ms-btn ms-btn-success ms-pull-right" ng-click="Click_Activate()"><span>Activate</span></button>
+                    </div>
+                    <div mn-ng-show="!Activated">
+                        <hr />
+                        <a class="ms-btn ms-btn-default ms-btn-link ms-pull-left" style="text-decoration:none!important;" ng-click="Click_ApplyActivation()"><span style="color: #ccc;">manually apply activation data</span></a>
+                    </div>
+                    <a class="ms-btn ms-btn-default ms-pull-right" ng-click="Click_Cancel()"><span>Return</span></a>
+                </div>
+                <div mn-ng-show="IsRequestActivation">
+                    <span class="MHead">Activate Product(s)</span>
+                    <br /><br />
+                    <span class="MNormal">
+                        If you have not yet purchased a license for the following product(s) then click cancel and click on individual product link to purchase a license.
+                    </span>
+                    <br />
+                    <br />
+                    <div class="ms-form-group">
+                        <strong>Enter your licensed email address to activate following product(s):</strong>
+                        <input type="email" class="ms-form-control control-background" id="RequestEmail" mn-ng-model="RequestEmail" required="true" />
+                    </div>
+                    <a class="ms-btn ms-btn-default ms-btn-link ms-pull-right" role="button" mn-ng-click="Click_CancelActivation()">Cancel</a>
+                    <button type="button" mn-id="RequestKey" class="ms-btn ms-btn-success ms-pull-right" mn-ng-click="RequestKey('RequestKey')" style="margin-right:5px; margin-bottom:15px;">Activate</button>
+                    <hr />
+                    <span style="color: #ccc;">Installation ID: {{ui.data.InstallationID.Value}}</span><br />
+                    <span style="color: #ccc;">Site ID: {{ui.data.SiteID.Value}}</span><br />
+                    <span style="color: #ccc;">Domain: {{ui.data.Domain.Value}}</span><br /><br />
+                    <strong>Following product(s) will be activated:</strong><hr />
+                    <div mn-ng-repeat="row in ui.data.Products.Options">
+                        <div mn-ng-if="row.IsChecked">{{row.FriendlyName}} v{{row.RuntimeVersion}} | {{row.Edition}} Edition</div>
+                    </div>
+                </div>
+                <div mn-ng-show="IsApplyActivation">
+                    <span class="MHead">Apply Activation Data</span>
+                    <br /><br />
+                    <span class="MNormal"><span>Enter the activation data and click submit.</span></span>
+                    <br /><br />
+                    <div class="ms-form-group">
+                        <strong>Activation Data:</strong>
+                        <textarea rows="10" class="ms-form-control control-background" mn-ng-model="ActivationKeys" required="true" />
+                    </div>
+                    <a class="ms-btn ms-btn-default ms-btn-link ms-pull-right" role="button" mn-ng-click="Click_CancelActivation()">Cancel</a>
+                    <button type="button" mn-id="ApplyKey" class="ms-btn ms-btn-success ms-pull-right" mn-ng-click="ApplyKey('ApplyKey')" style="margin-right:5px">Activate</button>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="Multiple" attr-ng-show="IsActivated">
+            <uitemplate>
+                <div ng-show="IsSucess">
+                    <strong>Following product(s) have been activated:</strong><br /><br />
+                    <div mn-ng-repeat="x in ApplySuccess">
+                        <p style="margin-bottom: 0;" mn-ng-bind-html="x.Status | unsafe" class="ms-alert ms-alert-success"></p><br />
+                    </div>
+                    <hr />
+                </div>
+                <div ng-show="IsError">
+                    <div mn-ng-repeat="x in ApplyError">
+                        <p mn-ng-bind-html="x.Status | unsafe" class="ms-alert ms-alert-danger"></p>
+                    </div>
+                </div>
+                <a class="ms-btn ms-btn-default ms-btn-link ms-pull-right" role="button" mn-ng-click="Click_Cancel()">Return</a>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>
+<style>
+    .ms-container .ms-form-group label:first-child {
+        margin-bottom: 20px;
+        margin-right: 10px;
+    }
+
+    .ms-container {
+        padding: 20px;
+        border-radius: 5px;
+        background: #fff;
+    }
+
+        .ms-container .ms-table > tbody > tr > td select {
+            padding: 5px;
+        }
+
+        .ms-container .ms-table > tbody > tr > td {
+            vertical-align: middle;
+        }
+</style>

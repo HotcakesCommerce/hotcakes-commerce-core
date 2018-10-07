@@ -1,0 +1,29 @@
+<div id="Page[MODULEID]" class="paginationstyle">
+<a href="#" rel="previous">Prev</a> <span class="flatview"></span> <a href="#" rel="next">Next</a>
+</div>
+
+<div>
+[REPEATPAGE:BEGIN]
+	<div class="virtualpage hidepiece">
+		<span class="Subhead">[TITLE]</span><br/>[CONTENT]
+	</div>
+[REPEATPAGE:END]
+</div>
+<div id="Page1[MODULEID]" class="paginationstyle">
+<a href="#" rel="previous">Prev</a> <span class="flatview"></span> <a href="#" rel="next">Next</a>
+</div>
+
+
+<script type="text/javascript">
+
+var article[MODULEID]=new virtualpaginate({
+	piececlass: "virtualpage", 
+	piececontainer: 'div',
+	pieces_per_page: 1,
+	defaultpage: 0, 
+	persist: false 
+});
+
+ article[MODULEID].buildpagination(["Page[MODULEID]","Page1[MODULEID]"]);
+
+</script>

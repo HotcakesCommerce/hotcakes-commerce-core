@@ -1,0 +1,111 @@
+﻿<div class="ms-uploaddefault uploadinput-button">
+    <div nv-file-drop="" uploader="[name]" [attributes] [validation] uploadername="[name]">
+        <div nv-file-over="" class="upld ms-well my-drop-zone" uploader="[name]" over-class="another-file-over-class" style="text-align: center;" ng-show="[name]ShowFileUpload">
+            <div class="buttons">
+                <span ng-show="[name]ControlEnable('browse')" ng-click="[name]Click_FileUpoad('browse')" ng-mouseenter="[name]Mouse_FileHover('browse')" ng-mouseleave="[name]Mouse_FileHover()">
+                    <i class="ms-glyphicon ms-glyphicon-th-list"></i>
+                </span>
+                <span ng-show="[name]ControlEnable('upload')" ng-click="[name]Click_FileUpoad('upload')" ng-mouseenter="[name]Mouse_FileHover('upload')" ng-mouseleave="[name]Mouse_FileHover()">
+                    <i class="ms-glyphicon ms-glyphicon-upload" onclick="$('.inpt_sty[name]').trigger('click');">
+                    </i>
+                    <input type="file" class="inpt_sty inpt_sty[name]" nv-file-select="" uploader="[name]" [attributes] />
+                </span>
+                <span ng-show="[name]ControlEnable('link')" ng-click="[name]Click_FileUpoad('link')" ng-mouseenter="[name]Mouse_FileHover('link')" ng-mouseleave="[name]Mouse_FileHover()">
+                    <i class="ms-glyphicon ms-glyphicon-link"></i>
+                </span>
+            </div>
+            <br />
+            <text ng-bind-html="[name]FileUploadText | unsafe"></text>
+        </div>
+        <div class="ms-col-sm-12 ms-well ovrflow" ng-show="[name]ShowFileBrowse">
+            <div class="ms-col-sm-12" style="padding: 0px 0px 10px 0px;">
+                <div class="ms-col-sm-4">
+                    <span><strong>[LS:SelectFolder]</strong></span>
+                </div>
+                <div class="ms-col-sm-8">
+                    <span><strong>[LS:SelectFile]</strong></span>
+                </div>
+            </div>
+            <script type="text/ng-template" id="[name]folders_renderer.html">
+                <span ng-if="folder.childrenCount>0" ng-class="{'ms-glyphicon ms-glyphicon-triangle-bottom': [name]Folders[0].Value==folder.Value,'ms-glyphicon ms-glyphicon-triangle-right': [name]Folders[0].Value!=folder.Value}" style="visibility: inherit" ng-click="[name]Click_GetSubFolders($event,folder)"></span>
+                <span ng-if="folder.childrenCount<1" ng-class="{'ms-glyphicon ms-glyphicon-triangle-bottom': [name]Folders[0].Value==folder.Value,'ms-glyphicon ms-glyphicon-triangle-right': [name]Folders[0].Value!=folder.Value}" style="visibility: hidden" ng-click="[name]Click_GetSubFolders($event,folder)"></span>
+                <span class="ms-glyphicon ms-glyphicon-folder-close" ng-click="[name]Click_GetFiles(folder.Value)"></span>
+                <span class="folders" style="font-weight: bold;" ng-if="[name]Folders[0].Value==folder.Value" id="folders{{folder.Value}}" ng-click="[name]Click_GetFiles(folder.Value)">{{folder.Text}}</span>
+                <span class="folders" ng-if="[name]Folders[0].Value!=folder.Value" id="folders{{folder.Value}}" ng-click="[name]Click_GetFiles(folder.Value)">{{folder.Text}}</span>
+                <ul class="rootfolder" ng-class="{show: [name]Folders[0].Value==folder.Value}">
+                    <li ng-repeat="folder in folder.children" ui-tree-node ng-include="'[name]folders_renderer.html'">
+                    </li>
+                </ul>
+            </script>
+            <div class="ms-col-sm-4">
+                <ul>
+                    <li class="l_folder" ng-repeat="folder in [name]Folders" ng-include="'[name]folders_renderer.html'"></li>
+                </ul>
+            </div>
+            <div class="ms-col-sm-8" style="border-left: 1px solid #ccc;">
+                <table st-table="[name]Files" class="table table-striped" st-pipe="Pipe_[name]Pagging" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input st-search placeholder="[LS:Search]" class="input-sm ms-form-control" type="search" style="background-color: #fff!important;color: #000!important;font-weight: normal;" />
+                                <br ng-show="[name]Files.length<=0" />
+                                <span style="color: #999!important;font-weight: normal;" ng-show="[name]Files.length<=0">[LS:NoFiles]</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in [name]Files">
+                            <td class="r_file">
+                                <span class="ms-glyphicon ms-glyphicon-file"></span>
+                                <span ng-click="[name]Click_SelectFile($event,row.Value)">{{row.Text}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td class="ms-text-center ud_stfooter">
+                                <div st-pagination="" st-items-by-page="50"></div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="ms-col-sm-12 esc">
+                <span class="ms-pull-right">
+                    <strong>[SELECT]</strong> a file to save, or <strong style="cursor:pointer;" id="[name]ShowFileBrowseSpan" ng-click="[name]Click_FileUpoad()">[ESC]</strong><span> to cancel</span>
+                </span>
+            </div>
+        </div>
+        <div class="ms-col-sm-12 ms-well ovrflow" ng-show="[name]ShowFileLink" style="padding:10px;">
+            <div class="entr_url"><strong>[LS:EnterURLLink]</strong></div>
+            <div class="third_link">
+                <input type="text" id="[name]AddLink" ng-model="[value]" ng-keypress="enterLink($event)" />
+                <div class="esc">
+                    <span class="ms-pull-right">
+                        Press <strong style="cursor:pointer;" id="[name]ShowFileLinkStrong" ng-click="[name]Click_AddLink('[name]')">[ENTER]</strong> to save, or <strong style="cursor:pointer;" id="[name]ShowFileLinkSpan" ng-click="[name]Click_FileUpoad()">[ESC]</strong><span> to cancel</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        [Upload:Queue]
+        <div class="ms-table-responsive" style="clear:both;" ng-show="([name].selectqueue.length>0)&&([name].queue.length<=0)">
+            <br />
+            <table class="ms-table">
+                <thead>
+                    <tr>
+                        <th>[LS:UploadName]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in [name].selectqueue">
+                        <td><img ng-if="item.fileurl.substring(item.fileurl.lastIndexOf('.') + 1, item.fileurl.length).toLowerCase()=='jpg' || item.fileurl.substring(item.fileurl.lastIndexOf('.') + 1, item.fileurl.length).toLowerCase()=='jpeg' || item.fileurl.substring(item.fileurl.lastIndexOf('.') + 1, item.fileurl.length).toLowerCase()=='png' || item.fileurl.substring(item.fileurl.lastIndexOf('.') + 1, item.fileurl.length).toLowerCase()=='gif'" src="{{item.fileurl}}" class="selectqueueimg" /><strong>{{ item.filename }}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

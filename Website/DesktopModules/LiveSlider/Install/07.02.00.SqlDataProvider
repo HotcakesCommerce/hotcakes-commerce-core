@@ -1,0 +1,7 @@
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='LiveSlider_Slide'and COLUMN_NAME='ShowOn')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}LiveSlider_Slide]
+ADD ShowOn nvarchar(50) NOT NULL CONSTRAINT {objectQualifier}DF_LiveSlider_Slide_ShowOn DEFAULT 'both'
+END
+
+GO

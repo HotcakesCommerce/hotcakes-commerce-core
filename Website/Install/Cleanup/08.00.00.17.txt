@@ -1,2 +1,0 @@
-'remove the iframe sql provider file.
-App_Code\IFrame\Providers\DataProviders\SqlDataProvider\SqlDataProvider.vb

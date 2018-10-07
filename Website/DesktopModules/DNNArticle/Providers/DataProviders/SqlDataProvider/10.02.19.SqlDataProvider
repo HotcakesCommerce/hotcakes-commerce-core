@@ -1,0 +1,84 @@
+﻿
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetRelatedDNNArticleByArticleID]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetRelatedDNNArticleByArticleID
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetRelatedDNNArticleByArticleID
+
+	@ArticleId int
+	
+as
+
+select *     
+from {objectQualifier}ZLDNN_DNNArticle 
+inner join {objectQualifier}ZLDNN_DNNArticleRelate on {objectQualifier}ZLDNN_DNNArticle.itemid={objectQualifier}ZLDNN_DNNArticleRelate.rarticleid
+where  {objectQualifier}ZLDNN_DNNArticleRelate.ArticleId = @ArticleId 
+order by title
+
+
+GO
+
+-- DNNUserArticle 07.08.06
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNUserArticleCountByModuleAndUser]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNUserArticleCountByModuleAndUser
+GO
+ 
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNUserArticleCountByModule]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNUserArticleCountByModule
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNUserArticleCountByModuleAndUser
+
+	@ModuleId int,
+	@RequestUserID int
+
+as
+
+select 
+   DATEPART(yy,publishdate) as year ,
+   DATEPART(mm, publishdate) as month, 
+   count(*) as articlecount 
+   from  {databaseOwner}{objectQualifier}ZLDNN_DNNArticle 
+   where moduleid=@ModuleID and createdbyuser=@RequestUserID and isapproved=1 
+    group by DATEPART(yy, publishdate) ,DATEPART(mm, publishdate) 
+    order by DATEPART(yy,publishdate) desc,DATEPART(mm, publishdate) desc
+
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNUserArticleCountByModule
+
+	@ModuleId int
+as
+
+  select max(CreatedByUserName) as username,max({objectQualifier}Users.displayname) as displayname, createdbyuser as userid, count(*) as articlecount 
+  from  {databaseOwner}{objectQualifier}ZLDNN_DNNArticle
+  inner join {objectQualifier}Users on {objectQualifier}ZLDNN_DNNArticle.CreatedByUser = {objectQualifier}Users.UserId
+   where moduleid=@ModuleID group by createdbyuser order by articlecount desc
+   
+   GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleByTitle]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleByTitle
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleByTitle
+
+	@ModuleId int,
+	@Title nvarchar(2000)
+as
+
+ select  * from {databaseOwner}{objectQualifier}ZLDNN_DNNArticle 
+ where moduleid=@ModuleID and title=@Title
+
+GO
+
+

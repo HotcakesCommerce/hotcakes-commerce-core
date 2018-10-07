@@ -1,0 +1,162 @@
+﻿
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTagImage]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTagImage]
+		(
+			[TagID] [int] NOT NULL,
+			[ItemID] [int] NOT NULL IDENTITY(1, 1),
+			[Image] [nvarchar] (500)   NULL
+		)
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTagImage] ADD CONSTRAINT [PK_{objectQualifier}ZLDNN_DNNArticleTagImage] PRIMARY KEY CLUSTERED  ([ItemID])
+		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ZLDNN_DNNArticleTagImage] ON {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTagImage] ([TagID])
+
+		ALTER TABLE {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTagImage] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}ZLDNN_DNNArticleTagImage_{objectQualifier}ZLDNN_DNNArticleTag] FOREIGN KEY ([TagID]) REFERENCES {databaseOwner}[{objectQualifier}ZLDNN_DNNArticleTag] ([ItemId]) ON DELETE CASCADE 
+	END
+GO
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageAdd
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageUpdate
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageDelete
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageGet
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageGetByTag') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageGetByTag
+GO
+
+--   ZLDNN_DNNArticleTagImageAdd
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageAdd
+	@TagID int,
+	@Image nvarchar(500)
+AS
+
+INSERT INTO {objectQualifier}ZLDNN_DNNArticleTagImage (
+	[TagID],
+	[Image]
+) VALUES (
+	@TagID,
+	@Image
+)
+
+select SCOPE_IDENTITY()
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--   ZLDNN_DNNArticleTagImageUpdate
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageUpdate
+	@ItemId int, 
+	@TagId int,
+	@Image nvarchar(500)
+AS
+
+UPDATE {objectQualifier}ZLDNN_DNNArticleTagImage SET
+	[TagId] = @TagId,
+	[Image] = @Image
+WHERE
+	[ItemId] = @ItemId
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+--   ZLDNN_DNNArticleTagImageDelete
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageDelete
+	@ItemId int
+AS
+
+DELETE FROM {objectQualifier}ZLDNN_DNNArticleTagImage
+WHERE
+	[ItemId] = @ItemId
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageGet
+	@ItemId int
+AS
+
+SELECT
+	*
+FROM {objectQualifier}ZLDNN_DNNArticleTagImage 
+
+WHERE
+	ItemId=@ItemId
+	
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleTagImageGetByTag
+	@TagId int
+AS
+
+SELECT
+	*
+FROM {objectQualifier}ZLDNN_DNNArticleTagImage 
+
+WHERE
+	TagId=@TagId
+	
+	
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO

@@ -1,0 +1,52 @@
+﻿<div class="ms-table-responsive" ng-show="[name].queue.length">
+    <br />
+    <table class="ms-table">
+        <thead>
+            <tr>
+                <th width="50%">[LS:UploadName]</th>
+                <th ng-show="[name].isHTML5">[LS:UploadSize]</th>
+                <th ng-show="[name].isHTML5">[LS:UploadProgress]</th>
+                <th>[LS:UploadStatus]</th>
+                <th>[LS:UploadActions]</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in [name].queue">
+                <td><strong>{{item.file.name.includes('fileid') ? item.file.name.split('fileid')[0] : item.file.name}}</strong></td>
+                <td ng-show="[name].isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                <td ng-show="[name].isHTML5">
+                    <div class="ms-progress" style="margin-bottom: 0;width: 75%;">
+                        <div class="ms-progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                    </div>
+                </td>
+                <td>
+                    <span ng-show="item.isSuccess"><i class="ms-glyphicon ms-glyphicon-ok"></i></span>
+                    <span ng-show="item.isCancel"><i class="ms-glyphicon ms-glyphicon-ban-circle"></i></span>
+                    <span ng-show="item.isError"><i class="ms-glyphicon ms-glyphicon-remove"></i></span>
+                </td>
+                <td nowrap>
+                    <button type="button" class="ms-btn ms-btn-success ms-btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                        <span class="ms-glyphicon ms-glyphicon-upload"></span>
+                    </button>
+                    <button type="button" class="ms-btn ms-btn-danger ms-btn-xs" ng-click="item.remove()" [removedelete]>
+                        <span class="ms-glyphicon ms-glyphicon-trash"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!--<div>
+        <div>
+            [LS:QueueProgress]
+            <div class="ms-progress" style="">
+                <div class="ms-progress-bar" role="progressbar" ng-style="{ 'width': [name].progress + '%' }"></div>
+            </div>
+        </div>
+        <button type="button" class="ms-btn ms-btn-success ms-btn-s" ng-click="[name].uploadAll()" ng-disabled="![name].getNotUploadedItems().length">
+            <span class="ms-glyphicon ms-glyphicon-upload"></span> [LS:UploadAll]
+        </button>
+        <button type="button" class="ms-btn ms-btn-danger ms-btn-s" ng-click="[name].clearQueue()" ng-disabled="![name].queue.length">
+            <span class="ms-glyphicon ms-glyphicon-trash"></span> [LS:RemoveAll]
+        </button>
+    </div>-->
+</div>

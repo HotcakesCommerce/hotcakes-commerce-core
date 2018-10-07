@@ -1,0 +1,70 @@
+﻿<div ng-controller="common_activation">
+    <uiengine provider="AngularBootstrap" identifier="common_activation" layout="default">
+        <uilayout name="default" attr-ng-show="ui.data.lStatus.Value=='REVOKED'">
+            <uitemplate>
+                <p mn-ng-bind-html="ui.data.Setting.Options.Status | unsafe"></p>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default" attr-ng-hide="ui.data.lStatus.Value=='REVOKED'">
+            <uitemplate>
+                <div mn-ng-show="!ui.data.WarningMessage.Options.length">
+                    <b>Activation Manager</b>
+                    <br /><br />
+                    <div mn-ng-show="IsPurchaseKey">
+                        <p mn-ng-bind-html="ui.data.Setting.Options.Status | unsafe"></p>
+                        <div style="text-align: center">
+                            <button type="button" class="ms-btn ms-btn-primary" mn-ng-click="PurchaseActivationKey()" style="margin-right:5px">Step 1: Purchase License</button>
+                            <button type="button" class="ms-btn ms-btn-info" mn-ng-click="RequestActivationKey()" style="margin-right:5px">Step 2: Request Activation Key</button>
+                            <button type="button" class="ms-btn ms-btn-success" mn-ng-click="ApplyActivationKey()" style="margin-right:5px">Step 3: Apply Activation Key</button>
+                            <br />
+                            <br />
+                            <p mn-ng-bind-html="ui.data.Edition.Value | unsafe"></p>
+                            <a class="ms-btn ms-btn-default ms-btn-link " role="button" mn-ng-click="CancelActivation()">Cancel</a>
+                        </div>
+                    </div>
+                    <div mn-ng-show="IsRequestActivation">
+                        <span class="MHead">Request Activation Key</span>
+                        <br /><br />
+                        <span class="MNormal"><p mn-ng-bind-html="Status | unsafe"></p></span>
+                        <div class="ms-form-group" mn-ng-show="AvailableEditions.length">
+                            <label>Select Edition</label>
+                            <select class="ms-form-control" mn-ng-model="Edition" mn-ng-options="option as option for option in AvailableEditions"></select>
+                        </div>
+                        <br />
+                        <div class="ms-form-group">
+                            <label class="" for="email">Email:</label>
+                            <input type="email" class="ms-form-control control-background" id="RequestEmail" mn-ng-model="RequestEmail" required="true" />
+                        </div>
+                        <button type="button" mn-id="RequestKey" class="ms-btn ms-btn-primary" mn-ng-click="RequestKey('RequestKey')" style="margin-right:5px">Request Activation Key</button>
+                        <a class="ms-btn ms-btn-default ms-btn-link " role="button" mn-ng-click="CancelRequest()">Cancel</a>
+                        <br />
+                        <br />
+                        <span>Activation Information</span>
+                        <hr />
+                        <p mn-ng-bind-html="ui.data.Edition.Value | unsafe"></p>
+                        <span>Installation ID: {{ui.data.InstallationID.Value}}</span>
+                    </div>
+                    <div mn-ng-show="IsApplyActivation">
+                        <span class="MHead">Apply Activation Key</span>
+                        <br /><br />
+                        <span class="MNormal"><p mn-ng-bind-html="Status | unsafe"></p></span>
+                        <br />
+                        <div class="ms-form-group">
+                            <label class="" for="activationKey">Activation Key:</label>
+                            <input type="text" class="ms-form-control control-background" id="activationKey" mn-ng-model="ActivationKey" required="true" />
+                        </div>
+                        <button type="button" mn-id="ApplyKey" class="ms-btn ms-btn-primary" mn-ng-click="ApplyKey('ApplyKey')" style="margin-right:5px">Apply Activation Key</button>
+                        <a class="ms-btn ms-btn-default ms-btn-link " role="button" mn-ng-click="CancelApplyKey()">Cancel</a>
+                    </div>
+                </div>
+                <div mn-ng-show="ui.data.WarningMessage.Options.length">
+                    <b>Activation Manager</b>
+                    <br /><br />
+                    <div mn-ng-repeat="item in ui.data.WarningMessage.Options">
+                        <p style="color:red;" mn-ng-bind-html="item | unsafe"></p>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

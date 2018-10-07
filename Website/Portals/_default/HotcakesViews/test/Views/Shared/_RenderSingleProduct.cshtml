@@ -1,0 +1,15 @@
+﻿@model Hotcakes.Modules.Core.Models.SingleProductViewModel
+
+<div class="hc-record">
+    <div class="hc-recimage">
+        <a href="@Model.ProductLink">
+            <img class="hc-autosize" src="@Model.ImageUrls.SmallUrl" alt="@Model.ImageUrls.SmallAltText" />
+        </a>
+    </div>
+    <h2 class="hc-recname">
+        <a href="@Model.ProductLink">@Model.Item.ProductName</a>
+    </h2>
+    <div class="hc-recprice">
+        &nbsp;@Html.Raw(Model.UserPrice.DisplayPrice(true,false))
+    </div>
+</div>

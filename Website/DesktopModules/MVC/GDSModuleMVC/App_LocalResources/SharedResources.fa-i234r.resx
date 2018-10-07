@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+<data name="Jahangardi Shahroud.Text" xml:space="preserve">
+<value>هتل جهانگردی شاهرود</value>
+</data>
+<data name="Jahangardi shiraz.Text" xml:space="preserve">
+<value>هتل جهانگردی شیراز</value>
+</data>
+<data name="Jahangardi Sanandaj.Text" xml:space="preserve">
+<value>هتل جهانگردی سنندج</value>
+</data>
+<data name="Jahangardi Yazd.Text" xml:space="preserve">
+<value>هتل جهانگردی یزد</value>
+</data>
+<data name="Jahangardi Sirjan.Text" xml:space="preserve">
+<value>هتل جهانگردی سیرجان</value>
+</data>
+<data name="Jahangardi Chalandar.Text" xml:space="preserve">
+<value>هتل جهانگردی چلندر</value>
+</data>
+<data name="Jahangardi Takhte Jamshid.Text" xml:space="preserve">
+<value>هتل جهانگردی تخت جمشید</value>
+</data>
+<data name="Jahangardi Birjand.Text" xml:space="preserve">
+<value>هتل جهانگردی بیرجند</value>
+</data>
+<data name="Jahangardi Naien.Text" xml:space="preserve">
+<value>هتل جهانگردی نائین</value>
+</data>
+<data name="Jahangardi FiroozAbad.Text" xml:space="preserve">
+<value>هتل جهانگردی فیروزآباد</value>
+</data>
+<data name="Jahangardi Yasuj.Text" xml:space="preserve">
+<value>هتل جهانگردی یاسوج</value>
+</data>
+<data name="Jahangardi Alisadr.Text" xml:space="preserve">
+<value>هتل جهانگردی علیصدر</value>
+</data>
+<data name="Jahangardi Fasa.Text" xml:space="preserve">
+<value>هتل جهانگردی فسا</value>
+</data>
+<data name="Jahangardi Bam.Text" xml:space="preserve">
+<value>هتل جهانگردی بم</value>
+</data>
+<data name="Jahangardi Nahar Khoran Gorgan.Text" xml:space="preserve">
+<value>هتل جهانگردی ناهارخوران گرگان</value>
+</data>
+<data name="Mehmansaraye Jahangardi Lahijan.Text" xml:space="preserve">
+<value>مهمانسرای جهانگردی لاهیجان </value>
+</data>
+<data name="Mehmansaraye Jahangardi Chalous.Text" xml:space="preserve">
+<value>مهمانسرای جهانگردی چالوس </value>
+</data>
+<data name="Jahangardi Zahedan.Text" xml:space="preserve">
+<value>هتل جهانگردی زاهدان</value>
+</data>
+<data name="Jahangardi Marivan.Text" xml:space="preserve">
+<value>هتل جهانگردی مریوان</value>
+</data>
+<data name="Jahangardi Anzali.Text" xml:space="preserve">
+<value>هتل جهانگردی انزلی</value>
+</data>
+<data name="Jahangardi Golpayegan.Text" xml:space="preserve">
+<value>هتل جهانگردی گلپایگان</value>
+</data>
+<data name="Jahangardi Khorramabad.Text" xml:space="preserve">
+<value>هتل جهانگردی خرم آباد</value>
+</data>
+<data name="Jahangardi khezer shahr.Text" xml:space="preserve">
+<value>هتل جهانگردی خزرشهر</value>
+</data>
+<data name="Jahangardi Shahrekord.Text" xml:space="preserve">
+<value>هتل جهانگردی شهرکرد</value>
+</data>
+<data name="Jahangardi Aligudarz.Text" xml:space="preserve">
+<value>هتل جهانگردی الیگودرز</value>
+</data>
+<data name="Jahangardi Delvar Booshehr.Text" xml:space="preserve">
+<value>هتل جهانگردی دلوار بوشهر</value>
+</data>
+<data name="Jahangardi Minab.Text" xml:space="preserve">
+<value>هتل جهانگردی میناب</value>
+</data>
+<data name="Mehmaansaraye Jahangardi Astara.Text" xml:space="preserve">
+<value>مهمانسرای جهانگردی آستارا </value>
+</data>
+<data name="Jahangardi Lar.Text" xml:space="preserve">
+<value>هتل جهانگردی لار</value>
+</data>
+<data name="Jahangardi Rafsanjan.Text" xml:space="preserve">
+<value>هتل جهانگردی رفسنجان</value>
+</data>
+<data name="Jahangardi Urmia.Text" xml:space="preserve">
+<value>هتل جهانگردی ارومیه</value>
+</data>
+<data name="Mojtama-e-Jahangardi Kerman.Text" xml:space="preserve">
+<value>مجتمع جهانگردی کرمان </value>
+</data>
+<data name="Jahangardi Makoo.Text" xml:space="preserve">
+<value>هتل جهانگردی ماکو</value>
+</data>
+<data name="Jahangardi Jolfa.Text" xml:space="preserve">
+<value>هتل جهانگردی جلفا</value>
+</data>
+<data name="Jahangardi Tabriz.Text" xml:space="preserve">
+<value>هتل جهانگردی </value>
+</data>
+<data name="Jahangardi Marand.Text" xml:space="preserve">
+<value>هتل جهانگردی مرند</value>
+</data>
+<data name="Jahangardi Mahan Isfahan.Text" xml:space="preserve">
+<value>هتل جهانگردی ماهان اصفهان</value>
+</data>
+<data name="Jahangardi Semnan.Text" xml:space="preserve">
+<value>هتل جهانگردی سمنان</value>
+</data>
+<data name="Jahangardi Bastam.Text" xml:space="preserve">
+<value>هتل جهانگردی بسطام</value>
+</data>
+<data name="Jahangardi Mahan Kerman.Text" xml:space="preserve">
+<value>هتل جهانگردی ماهان کرمان</value>
+</data>
+<data name="Jahangardi Kerman.Text" xml:space="preserve">
+<value>هتل جهانگردی کرمان</value>
+</data>
+<data name="Jahangardi Khoy.Text" xml:space="preserve">
+<value>هتل جهانگردی خوی</value>
+</data>
+<data name="Jahangardi Sarab.Text" xml:space="preserve">
+<value>هتل جهانگردی سراب</value>
+</data>
+<data name="Jahangardi Damghan.Text" xml:space="preserve">
+<value>هتل جهانگردی دامغان</value>
+</data>
+<data name="Jahangardi Zanjan.Text" xml:space="preserve">
+<value>هتل جهانگردی زنجان</value>
+</data>
+<data name="Jahangardi  Shemshak.Text" xml:space="preserve">
+<value>هتل جهانگردی شمشک</value>
+</data>
+<data name="Jahangardi Dizin.Text" xml:space="preserve">
+<value>هتل جهانگردی دیزین</value>
+</data>
+</root>

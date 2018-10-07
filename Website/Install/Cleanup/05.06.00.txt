@@ -1,3 +1,0 @@
-﻿' Remove files which are no longer required in version 5.6.0
-SiteMap.aspx
-SiteMap.aspx.vb

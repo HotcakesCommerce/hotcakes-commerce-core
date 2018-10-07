@@ -1,0 +1,30 @@
+<div id="Page[MODULEID]" class="paginationstyle" style="width: 400px"></div>
+
+<div style="width: 450px; border: 1px dashed gray; padding: 10px; background-color: #EEFFAA">
+[REPEATPAGE:BEGIN]
+<div class="virtualpage2 hidepiece">
+<b>[TITLE]</b> <br/>
+[CONTENT]
+</div>
+[REPEATPAGE:END]
+</div>
+
+<!-- Pagination DIV for Demo 2 -->
+<div id="Page2[MODULEID]" class="paginationstyle" style="width: 400px">
+<a href="#" rel="first">F</a> <a href="#" rel="previous">Prev</a> <span class="paginateinfo" style="margin: 0 30px; font-weight: bold"></span> <a href="#" rel="next">Next</a> <a href="#" rel="last">L</a>
+</div>
+
+<!-- Initialize Demo 2 -->
+<script type="text/javascript">
+
+var pagemodule[MODULEID]=new virtualpaginate({
+	piececlass: "virtualpage2",
+	piececontainer: 'div', 
+	pieces_per_page: 1,
+	defaultpage: 0,
+	persist: true
+});
+
+pagemodule[MODULEID].buildpagination(["Page2[MODULEID]", "Page[MODULEID]"]);
+
+</script>

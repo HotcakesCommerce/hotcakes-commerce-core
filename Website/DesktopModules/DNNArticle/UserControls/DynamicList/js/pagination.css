@@ -1,0 +1,26 @@
+@charset "utf-8";      
+.mypagination a {
+    text-decoration: none;
+	border: 1px solid #AAE;
+	color: #15B;
+}
+
+.mypagination a, .mypagination span {
+    display: inline-block;
+    padding: 0.1em 0.4em;
+    margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+.mypagination .current {
+    background: #26B;
+    color: #fff;
+	border: 1px solid #AAE;
+}
+
+.mypagination .current.prev, .mypagination .current.next{
+	color:#999;
+	border-color:#999;
+	background:#fff;
+}
+

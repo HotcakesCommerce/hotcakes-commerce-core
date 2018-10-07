@@ -1,0 +1,100 @@
+.RadTreeView_MyCustomSkin,
+.RadTreeView_MyCustomSkin a.rtIn,
+.RadTreeView_MyCustomSkin .rtEdit .rtIn input
+{
+	color: #000;
+	font: 12px/18px "Segoe UI", Arial, sans-serif;
+    width: 400px;
+     word-wrap: break-word;
+     word-break: normal;
+    overflow: hidden;
+}
+
+.RadTreeView_MyCustomSkin .rtPlus, 
+.RadTreeView_MyCustomSkin .rtMinus
+{
+	background-image: url('TreeView/PlusMinus.png');
+}
+
+.RadTreeView_MyCustomSkin .rtChecked,
+.RadTreeView_MyCustomSkin .rtUnchecked,
+.RadTreeView_MyCustomSkin .rtIndeterminate
+{
+	background-image: url('TreeView/TriState.png');
+}
+
+.RadTreeView_MyCustomSkin .rtHover .rtIn
+{
+	color: #000;
+	border-color: #b5b5b5 #b5b5b5 #9e9e9e;
+	background-color: #C5C5C5;
+	background-image: url('TreeView/ItemHoveredBg.png');
+	
+}
+
+.RadTreeView_MyCustomSkin .rtSelected .rtIn
+{
+	color: #fff;
+	border-color: #8d8d8d #7e7e7e #6c6c6c;
+	background-color: #828282;
+	background-image: url('TreeView/ItemSelectedBg.png');
+}
+
+.RadTreeView_MyCustomSkin .rtSelected .rtLoadingBefore,
+.RadTreeView_MyCustomSkin .rtSelected .rtLoadingAfter,
+.RadTreeView_MyCustomSkin .rtSelected .rtLoadingBelow
+{
+	color: #333;
+}
+
+.RadTreeView_MyCustomSkin .rtLoadingIcon
+{
+	background-image: url('TreeView/LoadingIcon.gif');
+}
+
+.RadTreeView_MyCustomSkin .rtLI .rtEdit .rtIn
+{
+	border-color: #6c6c6c;
+	background: #fff;
+	
+}
+
+.RadTreeView_MyCustomSkin_disabled .rtIn,
+.RadTreeView_MyCustomSkin .rtDisabled .rtIn
+{
+	color: #ccc;
+}
+
+
+/* <node lines> */
+
+.RadTreeView_MyCustomSkin .rtLines .rtLI,
+.RadTreeView_MyCustomSkin .rtLines .rtFirst .rtUL { background-image: url('TreeView/NodeSpan.png'); }
+.RadTreeView_MyCustomSkin_rtl .rtLines .rtLI,
+.RadTreeView_MyCustomSkin_rtl .rtLines .rtFirst .rtUL { background-image:url('TreeView/NodeSpan_rtl.png'); }
+
+.RadTreeView_MyCustomSkin .rtLines .rtFirst,
+.RadTreeView_MyCustomSkin .rtLines .rtFirst .rtUL { background-image: url('TreeView/FirstNodeSpan.png'); }
+.RadTreeView_MyCustomSkin_rtl .rtLines .rtFirst,
+.RadTreeView_MyCustomSkin_rtl .rtLines .rtFirst .rtUL { background-image: url('TreeView/FirstNodeSpan_rtl.png'); }
+.RadTreeView_MyCustomSkin .rtLines .rtLast,
+.RadTreeView_MyCustomSkin .rtLines .rtLast .rtUL { background-image: none; }
+
+.RadTreeView_MyCustomSkin .rtLines .rtTop { background-image:url('TreeView/TopLine.png'); }
+.RadTreeView_MyCustomSkin_rtl .rtLines .rtTop { background-image:url('TreeView/TopLine_rtl.png'); }
+.RadTreeView_MyCustomSkin .rtLines .rtMid { background-image:url('TreeView/MiddleLine.png'); }
+.RadTreeView_MyCustomSkin_rtl .rtLines .rtMid { background-image:url('TreeView/MiddleLine_rtl.png'); }
+.RadTreeView_MyCustomSkin .rtLines .rtBot { background-image:url('TreeView/BottomLine.png'); }
+.RadTreeView_MyCustomSkin_rtl .rtLines .rtBot { background-image: url('TreeView/BottomLine_rtl.png'); }
+.RadTreeView_MyCustomSkin .rtLines .rtLast .rtTop { background-image:url('TreeView/SingleLine.png'); }
+.RadTreeView_MyCustomSkin_rtl .rtLines .rtLast .rtTop { background-image:url('TreeView/SingleLine_rtl.png'); }
+
+/* </node lines> */
+
+
+ DIV.RadTreeView_MyCustomSkin .rtIn {
+
+	FONT-SIZE: 14px;
+    
+}
+

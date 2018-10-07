@@ -1,0 +1,7 @@
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='{objectQualifier}LiveSlider_Slide'and COLUMN_NAME='Permissions')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}LiveSlider_Slide] ADD
+	Permissions nvarchar(MAX) NULL CONSTRAINT {objectQualifier}DF_LiveSlider_Slide_Permissions DEFAULT ''
+END
+
+GO

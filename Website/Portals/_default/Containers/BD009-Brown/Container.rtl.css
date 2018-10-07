@@ -1,0 +1,292 @@
+/* 
+================================
+ Container Styles for DotNetNuke
+================================
+.
+
+
+/*-------------------------------------------------------------------------------*/
+.Normal { color:#555;}
+.actions{ width:10px;}
+.clear									 { clear:both; line-height:0; font-size:0; height:0;}
+.left 									 { float:right;}
+.right 									 { float:left;}
+.c_footer							    { padding-left:10px; text-align:right; margin:0 0 10px 0;}
+.c_contentpane 							 { text-align:right; }
+.dnntitle {
+    text-transform: capitalize;
+    font-size: 24px;
+    line-height:1.8;
+	font-weight: 400;
+	/*font-family: 'Playfair Display', serif;*/
+
+}
+
+/*Container001*/
+.Container001 .dnntitle{ color:#444; }
+.Container001 .contentpane { padding:15px 0px 10px 0px;}
+/*Container002*/
+.Container002 .dnntitle{ color:#444; border-bottom:1px solid #ddd; }
+.Container002 .titleline { float:right; margin:0 0 -1px 0; border-bottom:2px solid #6C6C6C;}
+.Container002 .contentpane { padding:25px 0px 10px 0px;}
+
+/*Container003*/
+.Container003 .dnntitle {
+    background:#41332A;
+    color: #fff;
+    border-radius: 3px;
+}
+.Container003 .title1 { padding:0 10px 0 0 ;}
+.Container003 .contentpane { padding:25px 0px 10px 10px;}
+
+/*Container004*/
+.Container004 {
+  background: #41332A;
+}
+
+.Container004 .dnntitle{ color:#ffffff; padding:10px 0 0 0; margin:0 15px; }
+
+.Container004 .contentpane { padding:10px 15px 25px 15px;}
+.Container004 .contentpane .Normal { color:#FFFFFF;}
+.Container004 .CommandButton, 
+.Container004 A.CommandButton:link, 
+.Container004 A.CommandButton:visited,
+.Container004 A.CommandButton:active { color:#FFFFFF;}
+/*Container005*/
+.Container005 .contentpane { padding:15px 0px 10px 10px;}
+
+/*Container006*/
+.Container006 .dnntitle{ border-bottom:1px solid #ddd; }
+.Container006 .titleline { float:right; margin:0 0 -1px 0; border-bottom:2px solid;}
+.Container006 .contentpane { padding:25px 0px 10px 10px;}
+
+/*Container007*/
+
+.Container007 .dnntitle {
+  padding: 0px;
+  text-transform: capitalize;
+  text-align: right;
+  color: #FFF;
+  font-weight: 400;
+  line-height: 40px;
+  border-bottom: 2px solid #C6A062;
+}
+.Container007 .dnntitle .title-bg {
+    background:#C6A062;
+    display: inline-block;
+    padding:0px 15px 0 10px;
+	position:relative;
+}
+.Container007 .dnntitle .title-bg:after {
+  content: '';
+  position: absolute;
+  border-right: 0px solid transparent;
+  border-left: 35px solid transparent;
+  border-bottom: 40px solid #C6A062;
+  bottom: 0;
+  right: 50%;
+  margin-right: 0px;
+  right: 100%;
+}
+.Container007 .dnntitle .title { 
+	display: block;
+}
+.Container007 .contentpane { padding:20px 20px 15px ;border:1px solid #ddd;}
+
+/*Container008*/
+.Container008 {
+  border: 1px solid #ddd;
+  margin: 0 0 20px;
+  background:#fff;
+}
+
+.Container008 .dnntitle {
+  padding: 0 15px 0 0 ;
+  background-color: #C6A062;
+  color: #fff;
+}
+.Container008 .contentpane { padding:20px;}
+
+/*Container009*/
+.Container009 .dnntitle{ overflow:hidden;}
+.Container009 .title1{ float:right; margin:0  0 0 10px;}
+.Container009 .titleline { height:1px; width:100%; margin:20px  0 0 -100%; float:right;}
+.Container009 .contentpane { padding:15px 0px 10px 10px;}
+
+
+/*Container010*/
+.Container010 .dnntitle {
+    background: none repeat scroll 0 0 #fff;
+	border-right:4px solid;
+}
+.Container010 .title1 { padding:0 10px 0 0 ; }
+.Container010 .contentpane { padding:25px 0 10px; border-top:none;}
+/*Container011*/
+
+.Container011 .dnntitle {
+    color: #FFFFFF;
+    padding: 0 10px 0 0 ;
+	border-radius: 5px;
+}
+.Container011 .contentpane { padding:20px 10px;}
+
+/*Container012*/
+.Container012 {
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 -4px rgba(0, 0, 0, 0.1) inset;
+}
+.Container012 .dnntitle{ color:#ffffff; padding:10px 0 0 0; margin:0 15px; }
+.Container012 .contentpane { padding:10px 15px 25px 15px;}
+.Container012 .contentpane .Normal { color:#FFFFFF;}
+.Container012 .CommandButton, 
+.Container012 A.CommandButton:link, 
+.Container012 A.CommandButton:visited,
+.Container012 A.CommandButton:active { color:#FFFFFF;}
+
+/*Container013*/
+.Container013 h2 {
+    text-align: center;
+    color: #FFF;
+    text-transform: capitalize;
+}
+.Container013 .title-icon { text-align:center;}
+.Container013 .titleline {
+    background: none repeat scroll 0 0 #C6A062;
+    display: inline-block;
+    height: 1px;
+    margin: 0 auto;
+    text-align: center;
+    width: 50px;
+    vertical-align: middle;
+}
+.Container013 .contentpane { padding:30px 0px 10px 0px;}
+.icon-flower {
+    background: url(images/flower.png) no-repeat;
+    height: 10px;
+    width: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 5px;
+}
+
+
+
+
+/*Container014*/
+.Container014 .dnntitle {
+    color: #FFF;
+    line-height: 1;
+    font-size: 18px;
+}
+
+.Container014 .title1 { padding:8px 0; display:block;}
+.Container014 .titleline {
+	display: block;
+	height: 2px;
+	margin: 0;
+	text-align: center;
+	width: 60px;
+	background:#C6A062;
+}
+
+.Container014 .contentpane { padding:25px 0px 10px 0px;}
+.Container014 .contentpane .Normal { color:#ddd;}
+
+
+/*Container015*/
+.Container015 h2 {
+    text-align: center;
+    color: #333;
+    text-transform: capitalize;
+}
+.Container015 .title-icon { text-align:center;}
+.Container015 .titleline {
+    background: none repeat scroll 0 0 #C6A062;
+    display: inline-block;
+    height: 1px;
+    margin: 0 auto;
+    text-align: center;
+    width: 50px;
+    vertical-align: middle;
+}
+.Container015 .contentpane { padding:30px 0px 10px 0px;}
+.icon-flower {
+    background: url(images/flower.png) no-repeat;
+    height: 10px;
+    width: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 5px;
+}
+
+
+/*Container016*/
+.Container016 .dnntitle {
+    padding: 0;
+    font-size:32px;
+    text-transform: uppercase;
+    text-align: center;
+	color:#555;
+	font-weight:300;
+}
+
+.Container016 .contentpane { padding:30px 0 10px;}
+
+/*NoTitle*/
+.NoTitle .contentpane 					 { text-align:right; padding:0px;}
+.NoTitle .cbot							 { float:left;}
+
+
+@media handheld, only screen and (max-width:767px) {
+.dnntitle { font-size:20px; }
+.Container013 .dnntitle,
+.Container015 .dnntitle,
+.Container016 .dnntitle {
+	font-size: 24px;
+}
+
+}
+
+@media handheld, only screen and (max-width:520px) {
+.dnntitle { font-size:18px; }
+.Container014 .title1 { font-size:16px;}
+.Container013 .dnntitle,
+.Container015 .dnntitle,
+.Container016 .dnntitle {
+	font-size: 20px;
+}
+
+}
+@media handheld, only screen and (max-width:480px) {
+.Container016 .contentpane {
+	padding: 10px 0 10px;
+}
+}
+@media handheld, only screen and (max-width:375px) {
+
+.Container013 .dnntitle,
+.Container015 .dnntitle,
+.Container016 .dnntitle {
+	font-size: 18px;
+}
+
+}
+
+@media handheld, only screen and (max-width:360px) {
+.dnntitle { font-size:16px; }
+.Container013 .dnntitle,
+.Container015 .dnntitle,
+.Container016 .dnntitle {
+	font-size: 18px;
+}
+
+}
+
+
+
+
+
+
+
+
+

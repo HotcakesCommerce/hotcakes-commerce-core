@@ -1,0 +1,476 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="plPortalID.Text" xml:space="preserve">
+    <value>پرتال</value>
+  </data>
+  <data name="plPortalID.Help" xml:space="preserve">
+    <value>انتخاب یک سایت برای نمایش رویداد ها</value>
+  </data>
+  <data name="plLogType.Text" xml:space="preserve">
+    <value>نوع</value>
+  </data>
+  <data name="plLogType.Help" xml:space="preserve">
+    <value>لاگ های نمایش داده شده در فیلتر رویداد ها</value>
+  </data>
+  <data name="plShowRecords.Text" xml:space="preserve">
+    <value>نمایش رکورد ها</value>
+  </data>
+  <data name="plShowRecords.Help" xml:space="preserve">
+    <value>انتخاب رکورد ها برای نمایش</value>
+  </data>
+  <data name="ColorCoding.Text" xml:space="preserve">
+    <value>اختصارات کدینگ رنگ</value>
+  </data>
+  <data name="Settings.Text" xml:space="preserve">
+    <value>تنظیمات لاگ ها</value>
+  </data>
+  <data name="Legend.Text" xml:space="preserve">
+    <value>راهنمای رنگ برنامه نویسی</value>
+  </data>
+  <data name="Date.Text" xml:space="preserve">
+    <value>تاریخ</value>
+  </data>
+  <data name="Type.Text" xml:space="preserve">
+    <value>نوع لاگ</value>
+  </data>
+  <data name="Username.Text" xml:space="preserve">
+    <value>نام کاربری</value>
+  </data>
+  <data name="Portal.Text" xml:space="preserve">
+    <value>پرتال</value>
+  </data>
+  <data name="Summary.Text" xml:space="preserve">
+    <value>خلاصه</value>
+  </data>
+  <data name="btnDelete.Text" xml:space="preserve">
+    <value>حذف انتخاب شده ها</value>
+  </data>
+  <data name="btnClear.Text" xml:space="preserve">
+    <value>پاکسازی لاگ </value>
+  </data>
+  <data name="SendExceptions.Text" xml:space="preserve">
+    <value>ارسال لاگ های موجود</value>
+  </data>
+  <data name="ExceptionsWarning.Text" xml:space="preserve">
+    <value>&lt;B&gt; لطفا توجه داشته باشید &lt;/B&gt;: با استفاده از این ویژگی ها
+             زیر، شما &lt;i&gt; ممکن است &lt;/i&gt; را به ارسال اطلاعات حساس بر روی اینترنت در روشن
+             متن (&lt;i&gt; نمیشود &lt;/i&gt; رمزگذاری شده). قبل از ارسال این استثنا،
+             لطفا محتویات ورود ورود به سیستم خود را به منظور بررسی که هیچ
+             اطلاعات حساس است که در داخل آن موجود است. تنها مدخل ورود به سیستم بالا بررسی
+             ارسال خواهد شد.</value>
+  </data>
+  <data name="SendExceptionsEmail.Text" xml:space="preserve">
+    <value>ارسال لاگ های موجود با ایمیل</value>
+  </data>
+  <data name="plEmailAddress.Text" xml:space="preserve">
+    <value>آدرس ایمیل</value>
+  </data>
+  <data name="plEmailAddress.Help" xml:space="preserve">
+    <value>لطفا یک ادرس ایمیل جهت دریافت لاگ های موجود وارد کنید.</value>
+  </data>
+  <data name="SendMessage.Text" xml:space="preserve">
+    <value>پیام (اختیاری)</value>
+  </data>
+  <data name="SendMessage.Help" xml:space="preserve">
+    <value>یک پیام (اختیاری) برای لاگ ها انتخاب کنید</value>
+  </data>
+  <data name="btnEmail.Text" xml:space="preserve">
+    <value>ایمیل انتخاب شده</value>
+  </data>
+  <data name="AddContent.Action" xml:space="preserve">
+    <value>افزودن تنظیمات لاگ</value>
+  </data>
+  <data name="NoEntries.Text" xml:space="preserve">
+    <value>لاگی وجود ندارد.</value>
+  </data>
+  <data name="Showing.Text" xml:space="preserve">
+    <value>نمایش  {0} به {1} از {2}</value>
+  </data>
+  <data name="DeleteSuccess.Text" xml:space="preserve">
+    <value>لاگ های انتخابی موجود با موفقیت حذف گردید.</value>
+  </data>
+  <data name="EmailSuccess.Text" xml:space="preserve">
+    <value>ایمیل برای شما با موفقیت ارسال گردید</value>
+  </data>
+  <data name="EmailFailure.Text" xml:space="preserve">
+    <value>ایمیل برای شما ارسال&lt;b&gt;نگردید&lt;/b&gt;.</value>
+  </data>
+  <data name="ServiceUnavailable.Text" xml:space="preserve">
+    <value>وب سرویس DotNetNuke.com در حال حاضر در دسترس نیست</value>
+  </data>
+  <data name="ServerName.Text" xml:space="preserve">
+    <value>&lt;b&gt;نام سرور &lt;/b&gt;: </value>
+  </data>
+  <data name="LogCleared.Text" xml:space="preserve">
+    <value>لاگ ها پاک شده است</value>
+  </data>
+  <data name="ClickRow.Text" xml:space="preserve">
+    <value>کلیک بر روی جزیتات بیشتر</value>
+  </data>
+  <data name="ExceptionCode.Text" xml:space="preserve">
+    <value>استثنا</value>
+  </data>
+  <data name="ItemCreatedCode.Text" xml:space="preserve">
+    <value>آیتم ایجاد شد</value>
+  </data>
+  <data name="ItemUpdatedCode.Text" xml:space="preserve">
+    <value>آیتم بروز رسانی شد</value>
+  </data>
+  <data name="ItemDeletedCode.Text" xml:space="preserve">
+    <value>آیتم حذف شد</value>
+  </data>
+  <data name="SuccessCode.Text" xml:space="preserve">
+    <value>عملیات موفقیت آمیز بود</value>
+  </data>
+  <data name="FailureCode.Text" xml:space="preserve">
+    <value>عملیات با شکست مواجه شد</value>
+  </data>
+  <data name="AdminOpCode.Text" xml:space="preserve">
+    <value>عملیات عمومی مدیر</value>
+  </data>
+  <data name="AdminAlertCode.Text" xml:space="preserve">
+    <value>هشدار مدیر</value>
+  </data>
+  <data name="HostAlertCode.Text" xml:space="preserve">
+    <value>هشدار میزبان</value>
+  </data>
+  <data name="ToEmail.Text" xml:space="preserve">
+    <value>به آدرس ایمیل مشخص</value>
+  </data>
+  <data name="ControlTitle_.Text" xml:space="preserve">
+    <value>نمایشگر رویداد</value>
+  </data>
+  <data name="ModuleHelp.Text" xml:space="preserve">
+    <value>&lt;h1&gt;درباره نمایشگر رویداد ها&lt;/h1&gt;&lt;p&gt;شما اجازه دارید برای ویرایش لاگ های وب سایت&lt;/p&gt;</value>
+  </data>
+  <data name="SecurityException.Text" xml:space="preserve">
+    <value>استثنا امنیتی</value>
+  </data>
+  <data name="plSubject.Help" xml:space="preserve">
+    <value>لطفا یک موضوع برای این ایمیل انتخاب کنید.</value>
+  </data>
+  <data name="plSubject.Text" xml:space="preserve">
+    <value>موضوع</value>
+  </data>
+  <data name="InavlidEmailAddress.Text" xml:space="preserve">
+    <value>'{0}' این ادرس ایمیل معتبر نیست</value>
+  </data>
+  <data name="Viewer.Text" xml:space="preserve">
+    <value>نمایشگر</value>
+  </data>
+  <data name="ClearLog.Text" xml:space="preserve">
+    <value>آیا مطمئن هستید که میخواهد تمام لاگ های وارد شده را پاک سازی کنید؟</value>
+  </data>
+  <data name="SelectException.Text" xml:space="preserve">
+    <value>لطفا یکی از آخرین لاگ های موجود را انتخاب کنید</value>
+  </data>
+  <data name="LogEntryDefaultMsg.Text" xml:space="preserve">
+    <value>Attached are my error log entries.</value>
+  </data>
+  <data name="LogEntryDefaultSubject.Text" xml:space="preserve">
+    <value>لاگ خطا ها</value>
+  </data>
+  <data name="LogType.Header" xml:space="preserve">
+    <value>نوع لاگ</value>
+  </data>
+  <data name="Portal.Header" xml:space="preserve">
+    <value>پرتال</value>
+  </data>
+  <data name="Active.Header" xml:space="preserve">
+    <value>فعال</value>
+  </data>
+  <data name="FileName.Header" xml:space="preserve">
+    <value>نام فایل</value>
+  </data>
+  <data name="Edit.EditText" xml:space="preserve">
+    <value>ویرایش</value>
+  </data>
+  <data name="plIsActive.Text" xml:space="preserve">
+    <value>ثبت وقایع</value>
+  </data>
+  <data name="plIsActive.Help" xml:space="preserve">
+    <value>آیا مایل هستید ثبت لاگ ها فعال شود؟</value>
+  </data>
+  <data name="plLogTypeKey.Text" xml:space="preserve">
+    <value>نوع لاگ</value>
+  </data>
+  <data name="plLogTypeKey.Help" xml:space="preserve">
+    <value>نوع رویداد در سیستم ثبت.</value>
+  </data>
+  <data name="plLogTypePortalID.Text" xml:space="preserve">
+    <value>پرتال</value>
+  </data>
+  <data name="plLogTypePortalID.Help" xml:space="preserve">
+    <value>این لاگ وقایع مرتبط با کدام پرتال است؟</value>
+  </data>
+  <data name="plKeepMostRecent.Text" xml:space="preserve">
+    <value>نگهداری جدیدترین ها</value>
+  </data>
+  <data name="plFileName.Text" xml:space="preserve">
+    <value>نام فایل</value>
+  </data>
+  <data name="plFileName.Help" xml:space="preserve">
+    <value>نام فایل برای لاگ فایل</value>
+  </data>
+  <data name="plEmailNotificationStatus.Text" xml:space="preserve">
+    <value>ایمیل اطلاع رسانی</value>
+  </data>
+  <data name="plEmailNotificationStatus.Help" xml:space="preserve">
+    <value>آیا مایل هستید در هنگام رخ دادن این رویداد ایمیلی ارسال گردد؟</value>
+  </data>
+  <data name="plThreshold.Text" xml:space="preserve">
+    <value>آستانه رخداد</value>
+  </data>
+  <data name="plMailFromAddress.Text" xml:space="preserve">
+    <value>ایمیل از آدرس</value>
+  </data>
+  <data name="plMailFromAddress.Help" xml:space="preserve">
+    <value>آدرس ایمیلی که پیام اطلاع رسانی از آن ارسال خواهد شد.</value>
+  </data>
+  <data name="plMailToAddress.Text" xml:space="preserve">
+    <value>ایمیل به آدرس</value>
+  </data>
+  <data name="plMailToAddress.Help" xml:space="preserve">
+    <value>آدرس ایمیل که پیام اطلاع رسانی به آن ارسال خواهد شد</value>
+  </data>
+  <data name="EmailSettings.Text" xml:space="preserve">
+    <value>تنظیمات اطلاع رسانی ایمیل</value>
+  </data>
+  <data name="ConfigDeleted.Text" xml:space="preserve">
+    <value>تنظیمات لاگ حذف شده است</value>
+  </data>
+  <data name="ConfigUpdated.Text" xml:space="preserve">
+    <value>تنظیمات لاگ بروز رسانی شده است.</value>
+  </data>
+  <data name="ConfigAdded.Text" xml:space="preserve">
+    <value>تنظیمات لاگ افزوده شده است</value>
+  </data>
+  <data name="LogEntry.Text" xml:space="preserve">
+    <value>لاگ موجود</value>
+  </data>
+  <data name="LogEntries.Text" xml:space="preserve">
+    <value>لاگ های موجود</value>
+  </data>
+  <data name="Occurence.Text" xml:space="preserve">
+    <value>رخداد</value>
+  </data>
+  <data name="Occurences.Text" xml:space="preserve">
+    <value>رخداد</value>
+  </data>
+  <data name="In.Text" xml:space="preserve">
+    <value>in</value>
+  </data>
+  <data name="ControlTitle_edit.Text" xml:space="preserve">
+    <value>ویرایش تنظیمات لاگ.</value>
+  </data>
+  <data name="DeleteError.Text" xml:space="preserve">
+    <value>تنظیمات لاگ انتخاب شده قابل حذف نیست ! جهت حذف نوع لاگ انتخابی باید تمامی لاگ های موجود برای این نوع را ابتدا حذف کنید و سپس به حذف تنظیمات لاگ اقدام کنید.</value>
+  </data>
+  <data name="TimeType_1.Text" xml:space="preserve">
+    <value>ثانیه</value>
+  </data>
+  <data name="TimeType_2.Text" xml:space="preserve">
+    <value>دقیقه</value>
+  </data>
+  <data name="TimeType_3.Text" xml:space="preserve">
+    <value>ساعت</value>
+  </data>
+  <data name="TimeType_4.Text" xml:space="preserve">
+    <value>روز</value>
+  </data>
+  <data name="nav_AdminLogs.Text" xml:space="preserve">
+    <value>لاگ ها</value>
+  </data>
+  <data name="AdminLogs.Header" xml:space="preserve">
+    <value>مدیریت لاگ ها</value>
+  </data>
+  <data name="ConfigAddError.Text" xml:space="preserve">
+    <value>تنظیمات لاگ افزوده نشد! لطفا دوباره تلاش کنید .</value>
+  </data>
+  <data name="ConfigBtnCancel.Text" xml:space="preserve">
+    <value>لغو</value>
+  </data>
+  <data name="ConfigBtnDelete.Text" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="ConfigBtnSave.Text" xml:space="preserve">
+    <value>ذخیره</value>
+  </data>
+  <data name="ConfigDeleteCancelled.Text" xml:space="preserve">
+    <value>عملیات حذف لغو شود</value>
+  </data>
+  <data name="ConfigDeletedWarning.Text" xml:space="preserve">
+    <value>آیا مطمئنید می خواهید تنظیمات لاگ انتخابی را حذف کنید؟</value>
+  </data>
+  <data name="ConfigDeleteInconsistency.Text" xml:space="preserve">
+    <value>خطای تناقض رخداده است.لطفا رفرش کنید</value>
+  </data>
+  <data name="ConfigUpdateError.Text" xml:space="preserve">
+    <value>تنظیمات لاگ بروز رسانی نشده است.لطفا دوباره تلاش کنید..</value>
+  </data>
+  <data name="False.Text" xml:space="preserve">
+    <value>نادرست</value>
+  </data>
+  <data name="LogSettings.Header" xml:space="preserve">
+    <value>تنظیمات لاگ</value>
+  </data>
+  <data name="no.Text" xml:space="preserve">
+    <value>خیر</value>
+  </data>
+  <data name="True.Text" xml:space="preserve">
+    <value>صحیح</value>
+  </data>
+  <data name="yes.Text" xml:space="preserve">
+    <value>بله</value>
+  </data>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>لغو</value>
+  </data>
+  <data name="btnSend.Text" xml:space="preserve">
+    <value>ارسال</value>
+  </data>
+  <data name="EntriesPerPage.Text" xml:space="preserve">
+    <value>موجودی در صفحه</value>
+  </data>
+  <data name="LogDeleteWarning.Text" xml:space="preserve">
+    <value>آیا مطمئن هستید از حذف لاگ های انتخابی ؟</value>
+  </data>
+  <data name="ShowingOne.Text" xml:space="preserve">
+    <value>نمایش 1 موجودی</value>
+  </data>
+  <data name="ShowingTotal.Text" xml:space="preserve">
+    <value>نمایش {0} موجودی</value>
+  </data>
+  <data name="MailToAddress.Message" xml:space="preserve">
+    <value>آدرس ایمیل معتبر الزامی است</value>
+  </data>
+  <data name="Email.Message" xml:space="preserve">
+    <value>ایمیل معتبر الزامیست</value>
+  </data>
+  <data name="UnAuthorizedToSendLog.Text" xml:space="preserve">
+    <value>شما مجوزی برای ارسال لاگ ها ندارید</value>
+  </data>
+  <data name="AdminLogs.Text" xml:space="preserve">
+    <value>مدیریت لاگ ها</value>
+  </data>
+  <data name="AllTypes.Text" xml:space="preserve">
+    <value>تمامی نوع ها</value>
+  </data>
+</root>

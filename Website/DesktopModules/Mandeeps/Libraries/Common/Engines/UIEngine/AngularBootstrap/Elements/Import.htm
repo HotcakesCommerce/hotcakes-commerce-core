@@ -1,0 +1,15 @@
+﻿<div ng-show="!csv.result && PreviewImportResult==''">
+    <ng-csv-import content="csv.content" accept="csv.accept='.csv'" header="csv.header='true'" header-visible="csv.headerVisible" separator="csv.separator=','" separator-visible="csv.separatorVisible" result="csv.result" encoding="csv.encoding='ISO-8859-1'" encoding-visible="csv.encodingVisible"></ng-csv-import>
+</div>
+<div ng-show="csv.result && PreviewImportResult==''">
+    <div><a class="ms-btn ms-btn-default" role="button" style="float: right;" ng-click="MapFields()">[LS:MapFields]</a></div>
+    <div><a class="ms-btn ms-btn-default" role="button" style="float: right;margin-right:5px;" ng-click="SaveMapping()">[LS:SaveMapping]</a></div>
+    <br />
+</div>
+<div class="block row ng-scope preview-import" ng-bind-html="GetFields() | unsafe" ng-show="csv.result && PreviewImportResult==''" style="width: 100%;margin-left: 3px;margin-top: 15px;">
+</div>
+<div ng-bind-html="PreviewImportResult | unsafe" style="width: 100%;margin-left: 3px;margin-top: 15px;">
+</div>
+<a class="ms-btn ms-btn-default" role="button" ng-show="PreviewImportResult!=''" ng-click="PreviewImport(true)" style="margin-top: 15px;">[LS:Save]</a>
+<a class="ms-btn ms-btn-default" role="button" ng-show="csv.result && PreviewImportResult==''" ng-click="PreviewImport(false)" style="margin-top: 15px;">[LS:PreviewImport]</a>
+<a class="ms-btn ms-btn-link" role="button" ng-click="CancelImport()" style="margin-top: 15px;">[LS:Cancel]</a>

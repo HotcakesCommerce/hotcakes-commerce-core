@@ -1,0 +1,2 @@
+<%@ Control Language="C#" Inherits="ZLDNN.Modules.DNNArticleSlider.ViewDNNArticleSlider" AutoEventWireup="true" Explicit="True" Codebehind="ViewDNNArticleSlider.ascx.cs" %>
+<asp:Literal ID="lblContent" runat="server" />

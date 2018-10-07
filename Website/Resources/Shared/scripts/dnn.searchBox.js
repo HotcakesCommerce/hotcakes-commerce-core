@@ -40,7 +40,7 @@
             if (advancedEnabled) {
                 markup += '<span class="dnnSearchBox_advanced_query" /><a class="dnnSearchBoxClearAdvanced"></a>';
             }
-            markup += '<input id="' + this.options.id + '_input" type="text" value="' + originalVal + '" autocomplete="off" />' +
+            markup += '<input id="' + this.options.id + '_input" type="text" autocomplete="off" aria-label="Search" />' +
                             '<a class="dnnSearchBoxClearText"></a>';
 
             markup += '<a class="dnnSearchButton"></a>';
@@ -60,21 +60,38 @@
             var wrapWidth = this.$wrap.width();
             this.realInput = $('#' + this.options.id + '_input');
 
-            var realInputRight = 50;
-            var advancedDropdown = $('.dnnSearchBox_advanced_dropdown', this.$wrap);
-            var advancedForm = $('#' + this.options.advancedId);
-            if (advancedEnabled) {
-                advancedForm.appendTo(advancedDropdown);
-                var w = $('.dnnSearchBox_advanced', this.$wrap).width();
-                var w2 = $('.dnnSearchBox_advanced_query', this.$wrap).width();
-                realInputRight = w + w2 + 50;
-                $('.dnnSearchBox_advanced_query', this.$wrap).hide();
-                //$('.dnnSearchBox_advanced_query', this.$wrap).hide().css({ marginRight: w + 30 });
-                //$('.dnnSearchBoxClearAdvanced', this.$wrap).css({ right: w + 38, top: 0 });
-            }
-            this.realInput.css({ right: realInputRight, width: wrapWidth - realInputRight - 8 });
-            if (originalVal) {
-                this.realInput.next().addClass('dnnShow').css({ right: realInputRight - 15});
+            this.realInput.val(originalVal);
+
+            if ($('body').hasClass('r' + 't' + 'l')) {
+                var realInputLeft = 50;
+                var advancedDropdown = $('.dnnSearchBox_advanced_dropdown', this.$wrap);
+                var advancedForm = $('#' + this.options.advancedId);
+                if (advancedEnabled) {
+                    advancedForm.appendTo(advancedDropdown);
+                    var w = $('.dnnSearchBox_advanced', this.$wrap).width();
+                    var w2 = $('.dnnSearchBox_advanced_query', this.$wrap).width();
+                    realInputLeft = w + w2 + 50;
+                    $('.dnnSearchBox_advanced_query', this.$wrap).hide();
+                }
+                this.realInput.css({ left: realInputLeft, width: wrapWidth - realInputLeft - 8 });
+                if (originalVal) {
+                    this.realInput.next().addClass('dnnShow').css({ left: realInputLeft - 15 });
+                }
+            } else {
+                var realInputRight = 50;
+                var advancedDropdown = $('.dnnSearchBox_advanced_dropdown', this.$wrap);
+                var advancedForm = $('#' + this.options.advancedId);
+                if (advancedEnabled) {
+                    advancedForm.appendTo(advancedDropdown);
+                    var w = $('.dnnSearchBox_advanced', this.$wrap).width();
+                    var w2 = $('.dnnSearchBox_advanced_query', this.$wrap).width();
+                    realInputRight = w + w2 + 50;
+                    $('.dnnSearchBox_advanced_query', this.$wrap).hide();
+                }
+                this.realInput.css({ right: realInputRight, width: wrapWidth - realInputRight - 8 });
+                if (originalVal) {
+                    this.realInput.next().addClass('dnnShow').css({ right: realInputRight - 15 });
+                }
             }
         },    
 
@@ -198,16 +215,27 @@
                 if ($.inArray(k, self._ignoreKeyCodes) > -1) return;
 
                 var val = realInput.val();
-                var right = parseInt(realInput.css('right').replace('px', '')) - 15;
+                var right;
+                if ($('body').hasClass('r' + 't' + 'l')) {
+                    right = parseInt(realInput.css('left').replace('px', '')) - 15;
+                } else {
+                    right = parseInt(realInput.css('right').replace('px', '')) - 15;
+                }
                 if (!val) {
                     clearTextBtn.removeClass('dnnShow');
                     // hide preview
                     $('.dnnSearchBox_preview', this.$wrap).remove();
                 }
                 else {
-                    clearTextBtn.css({
-                    	right: right
-                    }).addClass('dnnShow');
+                    if ($('body').hasClass('r' + 't' + 'l')) {
+                        clearTextBtn.css({
+                            left: right
+                        }).addClass('dnnShow');
+                    } else {
+                        clearTextBtn.css({
+                            right: right
+                        }).addClass('dnnShow');
+                    }
                     if (self.options.enablePreview &&
                         val.length >= self.options.previewMinChars) {
                         // enable preview

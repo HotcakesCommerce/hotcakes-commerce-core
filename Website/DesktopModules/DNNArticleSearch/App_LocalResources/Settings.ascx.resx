@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MyControl.Text" xml:space="preserve">
+    <value>This is my value.</value>
+  </data>
+  <data name="plGoCheck.Text" xml:space="preserve">
+    <value>Show Go Image:</value>
+  </data>
+  <data name="plGoCheck.Help" xml:space="preserve">
+    <value>Check whether you want to use a "Go" image</value>
+  </data>
+  <data name="plSearchCheck.Text" xml:space="preserve">
+    <value>Show Search Image:</value>
+  </data>
+  <data name="plSearchCheck.Help" xml:space="preserve">
+    <value>Check whether you want to use a "Search" image</value>
+  </data>
+  <data name="lbModule.Text" xml:space="preserve">
+    <value>Select modules</value>
+  </data>
+  <data name="lbModule.Help" xml:space="preserve">
+    <value>Select modules.</value>
+  </data>
+  <data name="lbListTitle.Text" xml:space="preserve">
+    <value>Display Template</value>
+  </data>
+  <data name="lbListTitle.Help" xml:space="preserve">
+    <value>Allows you to provide a custom template for displaying the items. Use parameters for dynamic substitution (see available tokens.).</value>
+  </data>
+  <data name="DefaultDisplayTemplate.Text" xml:space="preserve">
+    <value>&lt;a href="[VIEWURL]" class="Head"&gt;[TITLE]&lt;/a&gt; &lt;br&gt; &lt;span class="SubSubHead"&gt; Created by [CREATEDBYUSERNAME] in [CREATEDDATE]&lt;span&gt; &lt;p&gt;&lt;span class="Normal"&gt;[SHORTENDESCRIPTION:100] &lt;/span&gt; &lt;a class="CommandButton" href="[VIEWURL]"&gt;Read More..&lt;/a&gt;&lt;/p&gt; &lt;hr /&gt;</value>
+  </data>
+  <data name="lblTokens.Help" xml:space="preserve">
+    <value>Available Tokens. &lt;br&gt; The [URL] token is the url of article image. You can display the image by using: &amp;lt;img src='[URL]' border=0/&amp;gt;. &lt;br&gt; The [VIEWURL] token is the url of detail view page of the article. You can use &amp;lt;a href='[VIEWURL]' &amp;gt;More&amp;lt;/a&amp;gt; to create a link to the detail page. &lt;br&gt; The [RATINGIMAGE] token will create a five star rating image to represent rating of the atricle.</value>
+  </data>
+  <data name="lblTokens.Text" xml:space="preserve">
+    <value>Available Tokens</value>
+  </data>
+  <data name="lbRatingImageHeight.Help" xml:space="preserve">
+    <value>Rating Image  Height</value>
+  </data>
+  <data name="lbRatingImageHeight.Text" xml:space="preserve">
+    <value>Rating Image  Height</value>
+  </data>
+  <data name="lbRatingImageWidth.Help" xml:space="preserve">
+    <value>Rating Image  Width</value>
+  </data>
+  <data name="lbRatingImageWidth.Text" xml:space="preserve">
+    <value>Rating Image  Width</value>
+  </data>
+  <data name="lbTabs.Help" xml:space="preserve">
+    <value>Select a page to display content</value>
+  </data>
+  <data name="lbTabs.Text" xml:space="preserve">
+    <value>Select a page to display content</value>
+  </data>
+  <data name="cmdClearAndReindex.Text" xml:space="preserve">
+    <value>Clear existing search items and reindex.</value>
+  </data>
+  <data name="cmdReindex.Text" xml:space="preserve">
+    <value>Reindex content</value>
+  </data>
+  <data name="lbDisplayListInAnotherPage.Help" xml:space="preserve">
+    <value>Display List In Search Result</value>
+  </data>
+  <data name="lbDisplayListInAnotherPage.Text" xml:space="preserve">
+    <value>Display List In Search Result</value>
+  </data>
+  <data name="lbEnablePage.Help" xml:space="preserve">
+    <value>Enable Page</value>
+  </data>
+  <data name="lbEnablePage.Text" xml:space="preserve">
+    <value>Enable Page</value>
+  </data>
+  <data name="lbPageSize.Help" xml:space="preserve">
+    <value>Page Size</value>
+  </data>
+  <data name="lbPageSize.Text" xml:space="preserve">
+    <value>Page Size</value>
+  </data>
+  <data name="lblRepeatLayout.Help" xml:space="preserve">
+    <value>Repeat Layout</value>
+  </data>
+  <data name="lblRepeatLayout.Text" xml:space="preserve">
+    <value>Repeat Layout</value>
+  </data>
+  <data name="lbCheckPermission.Help" xml:space="preserve">
+    <value>List articles of which user has view permission only.</value>
+  </data>
+  <data name="lbCheckPermission.Text" xml:space="preserve">
+    <value>Check Permission</value>
+  </data>
+  <data name="lbSearchListPage.Help" xml:space="preserve">
+    <value>Select a page to show search result.</value>
+  </data>
+  <data name="lbSearchListPage.Text" xml:space="preserve">
+    <value>Search result page</value>
+  </data>
+  <data name="lbBasedOnCoreSearchEngin.Help" xml:space="preserve">
+    <value>Based on DNN core search</value>
+  </data>
+  <data name="lbBasedOnCoreSearchEngin.Text" xml:space="preserve">
+    <value>Based on DNN core search</value>
+  </data>
+  <data name="ControlTitle_settings.Text" xml:space="preserve">
+    <value>Search Settings</value>
+  </data>
+  <data name="lbPageControlType.Help" xml:space="preserve">
+    <value>Page Control Type</value>
+  </data>
+  <data name="lbPageControlType.Text" xml:space="preserve">
+    <value>Page Control Type</value>
+  </data>
+  <data name="PageDropDownList.Text" xml:space="preserve">
+    <value>Drop Down List</value>
+  </data>
+  <data name="PageNumberList.Text" xml:space="preserve">
+    <value>Number List</value>
+  </data>
+  <data name="lbFooterTemplate.Help" xml:space="preserve">
+    <value>Template after the list</value>
+  </data>
+  <data name="lbFooterTemplate.Text" xml:space="preserve">
+    <value>Footer Template</value>
+  </data>
+  <data name="lbHeaderTemplate.Help" xml:space="preserve">
+    <value>Template before the list</value>
+  </data>
+  <data name="lbHeaderTemplate.Text" xml:space="preserve">
+    <value>Header Template</value>
+  </data>
+  <data name="lblCSS.Help" xml:space="preserve">
+    <value>You can select a css file for the article list.</value>
+  </data>
+  <data name="lblCSS.Text" xml:space="preserve">
+    <value>CSS File</value>
+  </data>
+  <data name="lbOrderField.Help" xml:space="preserve">
+    <value>Select a field.</value>
+  </data>
+  <data name="lbOrderField.Text" xml:space="preserve">
+    <value>Display by </value>
+  </data>
+  <data name="lbDNNArticleList.Help" xml:space="preserve">
+    <value>Select Result Page</value>
+  </data>
+  <data name="lbDNNArticleList.Text" xml:space="preserve">
+    <value>Select Result Page</value>
+  </data>
+  <data name="lbShowInDNNArticleList.Help" xml:space="preserve">
+    <value>Use DNNArticle List to show result</value>
+  </data>
+  <data name="lbShowInDNNArticleList.Text" xml:space="preserve">
+    <value>Use DNNArticle List to show result</value>
+  </data>
+</root>

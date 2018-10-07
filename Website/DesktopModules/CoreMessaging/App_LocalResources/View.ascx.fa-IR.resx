@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions.Text" xml:space="preserve">
+    <value>عملیات‌ها</value>
+  </data>
+  <data name="All.Text" xml:space="preserve">
+    <value>همه</value>
+  </data>
+  <data name="ArrangeConversation.Text" xml:space="preserve">
+    <value>مکاتبه</value>
+  </data>
+  <data name="ArrangeDate.Text" xml:space="preserve">
+    <value>تاریخ</value>
+  </data>
+  <data name="ArrangeFrom.Text" xml:space="preserve">
+    <value>از</value>
+  </data>
+  <data name="ArrangeMessages.Text" xml:space="preserve">
+    <value>مرتب‌سازی</value>
+  </data>
+  <data name="Attach.Text" xml:space="preserve">
+    <value>پیوست</value>
+  </data>
+  <data name="Attachments.Text" xml:space="preserve">
+    <value>پیوست(ها)</value>
+  </data>
+  <data name="Browse.Text" xml:space="preserve">
+    <value>انتخاب از سایت</value>
+  </data>
+  <data name="Cancel.Text" xml:space="preserve">
+    <value>لغو</value>
+  </data>
+  <data name="ComposeNewMessage.Text" xml:space="preserve">
+    <value>نگارش پیام جدید</value>
+  </data>
+  <data name="DismissThis.Text" xml:space="preserve">
+    <value>از لیست پاک گردد</value>
+  </data>
+  <data name="EditModule.Text" xml:space="preserve">
+    <value>ویرایش ماژول</value>
+  </data>
+  <data name="FileSize.Header" xml:space="preserve">
+    <value>حجم فایل:</value>
+  </data>
+  <data name="Filter.Text" xml:space="preserve">
+    <value>فیلتر</value>
+  </data>
+  <data name="FilterCategory.Text" xml:space="preserve">
+    <value>دسته‌بندی</value>
+  </data>
+  <data name="FilterFriends.Text" xml:space="preserve">
+    <value>دوستان</value>
+  </data>
+  <data name="FilterFrom.Text" xml:space="preserve">
+    <value>از</value>
+  </data>
+  <data name="FilterGroups.Text" xml:space="preserve">
+    <value>گروه‌ها</value>
+  </data>
+  <data name="FilterUnread.Text" xml:space="preserve">
+    <value>خوانده نشده</value>
+  </data>
+  <data name="FilterViewAll.Text" xml:space="preserve">
+    <value>مشاهده همه</value>
+  </data>
+  <data name="LastModified.Header" xml:space="preserve">
+    <value>تاریخ آخرین ویرایش</value>
+  </data>
+  <data name="LoadMore.Text" xml:space="preserve">
+    <value>نمایش بیشتر</value>
+  </data>
+  <data name="MarkArchive.Text" xml:space="preserve">
+    <value>بایگانی</value>
+  </data>
+  <data name="MarkRead.Text" xml:space="preserve">
+    <value>علامت‌گذاری به عنوان خوانده شده</value>
+  </data>
+  <data name="MarkUnread.Text" xml:space="preserve">
+    <value>علامت‌گذاری به عنوان خوانده نشده</value>
+  </data>
+  <data name="Message.Text" xml:space="preserve">
+    <value>پیام شما</value>
+  </data>
+  <data name="MessageSent.Text" xml:space="preserve">
+    <value>پیام شما با موفقیت ارسال شد.</value>
+  </data>
+  <data name="MessageSentTitle.Text" xml:space="preserve">
+    <value>پیام ارسال شد</value>
+  </data>
+  <data name="Name.Header" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="None.Text" xml:space="preserve">
+    <value>هیچ‌کدام</value>
+  </data>
+  <data name="NoResults.Text" xml:space="preserve">
+    <value>نتیجه‌ای یافت نشد</value>
+  </data>
+  <data name="Read.Text" xml:space="preserve">
+    <value>خوانده شده</value>
+  </data>
+  <data name="ReadStatusToggle.Text" xml:space="preserve">
+    <value>علامت‌گذاری به عنوان خوانده شده یا خوانده نشده</value>
+  </data>
+  <data name="Remove.Text" xml:space="preserve">
+    <value>حذف پیوست</value>
+  </data>
+  <data name="Reply.Text" xml:space="preserve">
+    <value>پاسخ</value>
+  </data>
+  <data name="Searching.Text" xml:space="preserve">
+    <value>در حال جستجو...</value>
+  </data>
+  <data name="Select.Text" xml:space="preserve">
+    <value>انتخاب</value>
+  </data>
+  <data name="Send.Text" xml:space="preserve">
+    <value>ارسال</value>
+  </data>
+  <data name="Subject.Text" xml:space="preserve">
+    <value>موضوع</value>
+  </data>
+  <data name="Throttling.Text" xml:space="preserve">
+    <value>لطفا قبل از ارسال پیام جدید منتظر بمانید.</value>
+  </data>
+  <data name="Title.Text" xml:space="preserve">
+    <value>نگارش پیام</value>
+  </data>
+  <data name="To.Text" xml:space="preserve">
+    <value>ارسال به</value>
+  </data>
+  <data name="Type.Header" xml:space="preserve">
+    <value>نوع</value>
+  </data>
+  <data name="Unread.Text" xml:space="preserve">
+    <value>خوانده نشده</value>
+  </data>
+  <data name="UserFileManagerTitle.Text" xml:space="preserve">
+    <value>انتخاب فایل</value>
+  </data>
+  <data name="ApplyActionToMessages.Text" xml:space="preserve">
+    <value>عملیاتی را بر روی پیام‌های خود اعمال کنید</value>
+  </data>
+  <data name="Archived.Text" xml:space="preserve">
+    <value>بایگانی‌شده</value>
+  </data>
+  <data name="ArchivedMessages.Text" xml:space="preserve">
+    <value>پیام‌های بایگانی‌شده</value>
+  </data>
+  <data name="ArchiveMessages.Text" xml:space="preserve">
+    <value>پیام‌های بایگانی‌شده</value>
+  </data>
+  <data name="BackToMessages.Text" xml:space="preserve">
+    <value>بازگشت به پیام‌ها</value>
+  </data>
+  <data name="ConversationArchived.Text" xml:space="preserve">
+    <value>مکاتبه بایگانی شد</value>
+  </data>
+  <data name="ConversationSetAsRead.Text" xml:space="preserve">
+    <value>گفتگو به عنوان "خوانده شده" علامت‌گذاری شد</value>
+  </data>
+  <data name="ConversationSetAsUnread.Text" xml:space="preserve">
+    <value>گفتگو به عنوان "خوانده نشده" علامت‌گذاری شد</value>
+  </data>
+  <data name="ConversationUnarchived.Text" xml:space="preserve">
+    <value>گفتگو از بایگانی خارج شد</value>
+  </data>
+  <data name="Conversations.Text" xml:space="preserve">
+    <value>مکاتبات</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>در حال بارگذاری...</value>
+  </data>
+  <data name="LoadingContent.Text" xml:space="preserve">
+    <value>فراخوانی محتوا...</value>
+  </data>
+  <data name="MarkUnarchive.Text" xml:space="preserve">
+    <value>از بایگانی درآوردن</value>
+  </data>
+  <data name="Messages.Text" xml:space="preserve">
+    <value>پیام</value>
+  </data>
+  <data name="NewUnreadMessages.Text" xml:space="preserve">
+    <value>پیام‌های خوانده نشده جدید</value>
+  </data>
+  <data name="SelectMessages.Text" xml:space="preserve">
+    <value>انتخاب پیام‌ها</value>
+  </data>
+  <data name="Sent.Text" xml:space="preserve">
+    <value>ارسال شده</value>
+  </data>
+  <data name="SentMessages.Text" xml:space="preserve">
+    <value>پیام‌های ارسال شده </value>
+  </data>
+  <data name="ShowPreviousReplies.Text" xml:space="preserve">
+    <value>نمایش پاسخ‌های قبلی</value>
+  </data>
+  <data name="PermissionsNotProperlySet.Text" xml:space="preserve">
+    <value>مجوزهای ماژول به درستی تنظیم نشده‌اند. این ماژول نباید برای کاربران غیر عضو قابل مشاهده باشد. لطفا اشکال را برطرف کنید.</value>
+  </data>
+  <data name="ContentNotAvailable.Text" xml:space="preserve">
+    <value>محتوای این ماژول برای کاربران ناشناس قابل رویت نمی‌باشد. لطفا جهت مشاهده محتوا با نام‌کاربری خود وارد سایت شوید.</value>
+  </data>
+  <data name="Notifications.Text" xml:space="preserve">
+    <value>اعلان</value>
+  </data>
+  <data name="Of.Text" xml:space="preserve">
+    <value> از </value>
+  </data>
+  <data name="TotalNotifications.Text" xml:space="preserve">
+    <value>مجموع اعلان‌ها</value>
+  </data>
+  <data name="From.Text" xml:space="preserve">
+    <value>از</value>
+  </data>
+  <data name="SentTo.Text" xml:space="preserve">
+    <value>ارسال به</value>
+  </data>
+  <data name="NotificationConfirmNo.Text" xml:space="preserve">
+    <value>خیر</value>
+  </data>
+  <data name="NotificationConfirmTitle.Text" xml:space="preserve">
+    <value>تأیید</value>
+  </data>
+  <data name="NotificationConfirmYes.Text" xml:space="preserve">
+    <value>بله</value>
+  </data>
+  <data name="ActionNotPerformed.Text" xml:space="preserve">
+    <value>هنگام اجرای عملیات خطایی رخ داد. لطفا در زمانی دیگر تلاش کنید.</value>
+  </data>
+  <data name="ActionPerformed.Text" xml:space="preserve">
+    <value>عملیات با موفقیت انجام گردید.</value>
+  </data>
+  <data name="ServerError.Text" xml:space="preserve">
+    <value>هنگام پردازش درخواست شما خطایی رخ داد. لطفا بعدا دوباره امتحان کنید.</value>
+  </data>
+  <data name="ServerErrorWithDescription.Text" xml:space="preserve">
+    <value>هنگام پردازش درخواست شما خطایی رخ داد:</value>
+  </data>
+  <data name="CreateMessageError.Text" xml:space="preserve">
+    <value>خطایی هنگام ایجاد پیام رخ داده است. لطفا بعداد دوباره امتحان کنید.</value>
+  </data>
+  <data name="CreateMessageErrorWithDescription.Text" xml:space="preserve">
+    <value>خطایی هنگام ایجاد پیام رخ داده است.</value>
+  </data>
+  <data name="AutoSuggestError.Text" xml:space="preserve">
+    <value>امکان دریافت پیشنهادها وجود ندارد:</value>
+  </data>
+  <data name="Action.Text">
+    <value>عملیات</value>
+  </data>
+  <data name="Activity.Text">
+    <value>فعالیت</value>
+  </data>
+  <data name="EmailDeliverySchedule.Text">
+    <value>زمان‌بندی ارسال ایمیل</value>
+  </data>
+  <data name="Frequency.Text">
+    <value>بازه تکرار</value>
+  </data>
+  <data name="lblMessageFreq.Help">
+    <value>هر چند وقت به چند وقت ایمیل‌های آگاه‌سازی از وجود پیام جدید در سایت برای شما ارسال گردد.</value>
+  </data>
+  <data name="lblMessageFreq.Text">
+    <value>بازه آگاه‌سازی از وجود پیام:</value>
+  </data>
+  <data name="lblNotificationFreq.Help">
+    <value>هر چند وقت به چند وقت ایمیل‌های آگاه‌سازی از وجود اعلان جدید در سایت برای شما ارسال گردد.</value>
+  </data>
+  <data name="lblNotificationFreq.Text">
+    <value>بازه آگاه‌سازی از وجود اعلان:</value>
+  </data>
+  <data name="lblSubscriptions.Help">
+    <value>مشاهده و مدیریت مواردی که کاربر در آن‌ها مشترک شده است.</value>
+  </data>
+  <data name="lblSubscriptions.Text">
+    <value>اشتراک‌ها:</value>
+  </data>
+  <data name="ManageSubscriptions.Text">
+    <value>اشتراک‌های پیام</value>
+  </data>
+  <data name="PrefSaved.Text">
+    <value>ترجیحات شما به‌روز شد</value>
+  </data>
+  <data name="ReplyHasNoRecipients.Text">
+    <value>این پیام دیگر هیچ دریافت‌کننده معتبری ندارد از اینرو پاسخ غیرفعال شده است.</value>
+  </data>
+  <data name="SearchFilter.Text">
+    <value>فیلتر جستجو</value>
+  </data>
+  <data name="SubscribedDescription.Text">
+    <value>مورد</value>
+  </data>
+  <data name="Subscriptions.Text">
+    <value>اشتراک‌ها</value>
+  </data>
+  <data name="SubscriptionType.Text">
+    <value>نوع اشتراک</value>
+  </data>
+  <data name="Unsubscribe.Text">
+    <value>لغو اشتراک</value>
+  </data>
+  <data name="Unsubscribed.Text">
+    <value>اشتراک شما با موفقیت لغو شد.</value>
+  </data>
+  <data name="Upload.Text">
+    <value>بارگذاری از کامپیوتر</value>
+  </data>
+</root>

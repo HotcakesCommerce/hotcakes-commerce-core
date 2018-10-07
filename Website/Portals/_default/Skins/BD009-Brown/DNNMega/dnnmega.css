@@ -1,0 +1,228 @@
+/* Mega Menu Styles */
+ul.dnnmega {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+ul.dnnmega ul {
+    padding: 5px 0;
+	margin:0;
+}
+
+/*WAM - removed z-index*/
+.dnnmega .breadcrumb { background:none;}
+ul.dnnmega li{float:left;list-style:none;position: relative;}
+
+ul.dnnmega li.root {
+	float: left;
+	list-style-type: none;
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+	border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+ul.dnnmega li.mmFirst {
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+ul.dnnmega li.root span{
+    padding: 0px 25px;
+    display: block;
+}
+
+
+
+
+ul.dnnmega li.root>span{color:White;}
+
+ul.dnnmega li.root a{
+    display: block;
+    color: #FFF;
+    line-height: 52px;
+    font-size: 14px;
+    text-transform: capitalize;
+    font-family: open sans;
+    margin: 0px;
+}
+ul.dnnmega li.root a:hover {
+    background-color: #C6A062;
+    
+}
+
+
+ul.dnnmega li.mmItemHover a { 
+    background-color: #C6A062;
+    
+}
+ul.dnnmega li.mmItemHover a:hover{ position:relative;z-index:1230; }
+
+ul.dnnmega li a {display:inline-block;}
+
+ul.dnnmega li:hover a, ul.dnnmega li a:hover { background-position: left bottom; }
+
+ul.dnnmega li .megaborder {
+    position: absolute;
+    left: 0;
+    z-index: 1200;
+    float: left;
+    display: none;
+    background: #FFF none repeat scroll 0% 0%;
+    text-align: left;
+    min-height: 180px;
+    background-color: #2D221C;
+}
+/*
+ul.dnnmega li.mmLast .megaborder {
+    right: 0px;
+    left: inherit;
+}
+ul.dnnmega li.mmFirst .megaborder {
+    right:inherit;
+    left: 0;
+}
+ul.dnnmega li.child-2 .megaborder {
+    right:inherit;
+    left: 0;
+}
+
+ul.dnnmega li:nth-last-child(3) .megaborder {
+    right: -150px;
+    left: inherit;
+}
+*/
+ul.dnnmega li:nth-last-child(2) .megaborder {
+    right:0;
+}
+ul.dnnmega .megaborder .M {
+    display: block;
+    border-top: 0px none;
+    border-bottom: 0px none;
+    min-height: 135px;
+    padding: 10px 0 20px 10px;
+	margin:0;
+}
+
+
+/*--Sub nav heading style--*/
+ul.dnnmega .megaborder ul li.mmLast{background:none;}
+ul.dnnmega .megaborder ul li.mmRightColumn{background:none;}
+
+
+ul.dnnmega li.category {display:block;width:180px;float:left;    border: none;}
+ul.dnnmega li.category a {
+  display: block;
+  padding: 10px 0px;
+  line-height: 1.5;
+  margin: 0px 10px;
+  text-transform: capitalize;
+  background:none;
+  font-weight:400;
+  border-radius:0;
+  border-bottom: 1px solid #544034;
+}
+ul.dnnmega li.category a:hover { background:none; color: #fff;}
+ul.dnnmega li.category li a {
+    border: medium none;
+    font-weight: 400;
+    margin: 0px!important;
+    padding: 0px 0px 0px 10px;
+	position:relative;
+	text-transform: capitalize;
+}
+
+ul.dnnmega li.category li a span:before { content: "\f105"; font-family:FontAwesome; display:inline-block; font-size:12px; position:absolute; left:0; vertical-align:top;}
+ul.dnnmega li.category a span {
+    display: block;
+    color:#fff;
+    padding: 0px;
+}
+ul.dnnmega li.category li a span {
+    color: #fff;
+    text-transform: capitalize;
+    padding: 8px 0 8px 5px;
+    line-height: 1;
+	font-weight: 300;
+}
+
+ul.dnnmega li.category a:hover span{color:#C6A062;}
+
+
+ul.dnnmega li.category li.leaf, ul.dnnmega li.category li.mmLast {
+    clear: left;
+    float: none;
+    position: static;
+    padding: 0px 0px 0px 15px;
+	    border: none;
+}
+
+ul.dnnmega li.category li.leaf a span{font-size:12px; border:0;}
+
+ul.dnnmega img.mmIcon {max-height: 24px; margin-right: 5px; vertical-align: middle;}
+ul.dnnmega li.root > a > span img.mmIcon {height: 16px;}
+
+/*---selected---*/
+.dnnmega li.selected a {
+    color: #C6A062;
+}
+ 
+.dnnmega li.selected .subLevel li a{
+	border:none;
+}
+
+.dnnmega li.selected .subLevel li a{
+	border:none;
+}
+
+ul.dnnmega li.mmSelected li a span{ color:#fff;}
+
+ul.dnnmega .megaborder li.mmSelected a span{ color:#C6A062;}
+ul.dnnmega .megaborder li.mmSelected li a span{ color:#fff;}
+ul.dnnmega .megaborder li.mmSelected li a span:hover { color:#C6A062;}
+/*---Current---*/
+.dnnmega .root.mmBreadcrumb a  {
+    background-color: #C6A062;
+    
+}
+.dnnmega .root.mmBreadcrumb li a {
+  background: none;
+  border-top: none!important;
+  border-bottom:1px solid #544034;
+  border-radius:0;
+}
+.dnnmega .root.mmBreadcrumb li li a { border:none;}
+.dnnmega .root li a {
+  background: none;
+  border: none;
+  border-bottom:1px solid #eee;
+  border-radius:0;
+}
+.dnnmega .root li li a { border:none; }
+
+/*---isStuck---*/
+
+/*---lampback---*/
+.dnnmega li.lampback {
+    position: absolute;
+    top: 0px;
+    z-index: 8;
+    border-top: 3px solid #C6A062;
+    margin: 0px;
+}
+
+@media handheld, only screen and (max-width:860px) {
+
+ul.dnnmega li.root span {
+    padding: 0px 20px;
+}
+
+
+}
+
+
+
+
+

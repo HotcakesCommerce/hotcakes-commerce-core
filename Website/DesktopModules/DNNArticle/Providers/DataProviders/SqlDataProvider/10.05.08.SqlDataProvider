@@ -1,0 +1,174 @@
+﻿
+
+
+
+
+if (exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleLanguage') and OBJECTPROPERTY(id, N'IsTable') = 1)) and (not exists (select * from dbo.syscolumns where id = object_id(N'{databaseOwner}{objectQualifier}ZLDNN_DNNArticleLanguage') and name='ArticleTitleInUrl'))
+ALTER TABLE {databaseOwner}{objectQualifier}ZLDNN_DNNArticleLanguage ADD  
+[ArticleTitleInUrl] nvarchar(1000)  NULL
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLanguages]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguages
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_GetDNNArticleLanguage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_AddDNNArticleLanguage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleLanguage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_UpdateDNNArticleLanguage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleLanguage
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}ZLDNN_DeleteDNNArticleLanguage]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleLanguage
+GO
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguages
+
+	@ArticleID int
+
+as
+
+select * from {objectQualifier}ZLDNN_DNNArticleLanguage
+       
+where  ArticleID = @ArticleID
+
+
+ORDER BY
+ Language
+ 
+GO
+
+
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_GetDNNArticleLanguage
+
+	@ArticleID int,
+	@Language [nvarchar] (255)
+as
+
+select * from {objectQualifier}ZLDNN_DNNArticleLanguage
+       
+where  {objectQualifier}ZLDNN_DNNArticleLanguage.ArticleID = @ArticleID 
+and {objectQualifier}ZLDNN_DNNArticleLanguage.Language = @Language 
+
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_AddDNNArticleLanguage
+
+	@ArticleID [int],
+	@Content [ntext]  ,
+	@CreatedByUser [int]  ,
+	@CreatedDate [datetime]  ,
+	@Title [nvarchar] (150)   ,
+	@Description [ntext]   ,
+	@Tags [nvarchar] (200) ,
+	@SEOTitle [nvarchar] (255)   ,
+	@SEODescription [nvarchar] (255)   ,
+	@SEOTags [nvarchar] (255) ,
+	@ArticleTitleInUrl  [nvarchar] (1000) ,
+	@Language [nvarchar] (255) ,
+	@PageNumber [int] ,
+	@Image [nvarchar] (1000) ,
+	@RelatedURL [nvarchar] (1000) 
+
+as
+
+insert into {objectQualifier}ZLDNN_DNNArticleLanguage (
+	ArticleID,
+    Content ,
+	CreatedByUser,
+	CreatedDate,
+	Title ,
+	Description,
+	Tags ,
+	SEOTitle,
+	SEODescription,
+	SEOTags,
+	ArticleTitleInUrl,
+	Language,
+	PageNumber,
+	Image,
+	RelatedURL
+) 
+values (
+	@ArticleID,
+    @Content ,
+	@CreatedByUser,
+	@CreatedDate,
+	@Title ,
+	@Description,
+	@Tags ,
+	@SEOTitle,
+	@SEODescription,
+	@SEOTags,
+	@ArticleTitleInUrl,
+	@Language,
+	@PageNumber,
+	@Image,
+	@RelatedURL
+)
+select SCOPE_IDENTITY()
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_UpdateDNNArticleLanguage
+
+	@ArticleID [int],
+	@ItemID [int],
+	@Content [ntext],
+	@CreatedByUser [int],
+	@CreatedDate [datetime],
+	@Title [nvarchar] (150),
+	@Description [ntext] ,
+	@Tags [nvarchar] (200),
+	@SEOTitle [nvarchar] (255),
+	@SEODescription [nvarchar] (255),
+	@SEOTags [nvarchar] (255) ,
+	@ArticleTitleInUrl  [nvarchar] (1000) ,
+	@Language [nvarchar] (255) ,
+	@PageNumber [int],
+	@Image [nvarchar] (1000) ,
+	@RelatedURL [nvarchar] (1000) 
+
+
+as
+
+update {objectQualifier}ZLDNN_DNNArticleLanguage
+set    Content       = @Content,
+       CreatedByUser = @CreatedByUser,
+       CreatedDate   = @CreatedDate,
+       Title=@Title,
+       Description=@Description,
+       Tags=@Tags,
+       SEOTitle=@SEOTitle,
+       SEODescription=@SEODescription,
+       SEOTags=@SEOTags,
+	   ArticleTitleInUrl=@ArticleTitleInUrl ,
+       PageNumber=@PageNumber,
+	   Image=@Image,
+	   RelatedURL=@RelatedURL
+where  ArticleID = @ArticleID and language=@Language
+
+
+
+GO
+
+create procedure {databaseOwner}{objectQualifier}ZLDNN_DeleteDNNArticleLanguage
+
+	  @ItemId         int
+
+as
+
+delete
+from   {objectQualifier}ZLDNN_DNNArticleLanguage
+where  ItemId = @ItemId
+
+GO

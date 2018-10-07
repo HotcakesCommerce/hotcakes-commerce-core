@@ -1,0 +1,160 @@
+/****** Object:  Table {databaseOwner}[{objectQualifier}LiveSlider_SlideLayer]    Script Date: 05/22/2014 14:20:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}LiveSlider_SlideLayer]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}LiveSlider_SlideLayer](
+	[LayerID] [int] IDENTITY(1,1) NOT NULL,
+	[SlideID] [int] NOT NULL,
+	[Name] [nvarchar](4000) NULL,
+	[HTMLElement] [nvarchar](4000) NOT NULL,
+	[Content] [ntext] NULL,
+	[Top] [nvarchar](4000) NULL,
+	[Left] [nvarchar](4000) NULL,
+	[Link] [nvarchar](4000) NULL,
+	[Style] [nvarchar](4000) NULL,
+	[OffsetXIn] [nvarchar](4000) NULL,
+	[OffsetXOut] [nvarchar](4000) NULL,
+	[OffsetYIn] [nvarchar](4000) NULL,
+	[OffsetYOut] [nvarchar](4000) NULL,
+	[DelayIn] [int] NULL,
+	[ShowUntil] [int] NULL,
+	[LinkUrl] [nvarchar](max) NULL,
+	[OpenInNewWindow] [bit] NULL,
+	[DurationIn] [int] NULL,
+	[DurationOut] [int] NULL,
+	[EasingIn] [nvarchar](4000) NULL,
+	[EasingOut] [nvarchar](4000) NULL,
+	[FadeIn] [bit] NOT NULL,
+	[FadeOut] [bit] NOT NULL,
+	[RotateIn] [int] NULL,
+	[RotateOut] [int] NULL,
+	[RotateXIn] [int] NULL,
+	[RotateXOut] [int] NULL,
+	[RotateYIn] [int] NULL,
+	[RotateYOut] [int] NULL,
+	[ScaleXIn] [float] NULL,
+	[ScaleXOut] [float] NULL,
+	[ScaleYIn] [float] NULL,
+	[ScaleYOut] [float] NULL,
+	[SkewXIn] [int] NULL,
+	[SkewXOut] [int] NULL,
+	[SkewYIn] [int] NULL,
+	[SkewYOut] [int] NULL,
+	[TransformOriginIn] [nvarchar](4000) NULL,
+	[TransformOriginOut] [nvarchar](4000) NULL,
+	[ParallaxLevel] [int] NULL,
+	[Hidden] [bit] NULL,
+	[SortOrder] [int] NOT NULL,
+	[Style_Width] [nvarchar](4000) NULL,
+	[Style_Height] [nvarchar](4000) NULL,
+	[Style_Top] [nvarchar](4000) NULL,
+	[Style_Left] [nvarchar](4000) NULL,
+	[Style_Padding_Top] [nvarchar](4000) NULL,
+	[Style_Padding_Right] [nvarchar](4000) NULL,
+	[Style_Padding_Bottom] [nvarchar](4000) NULL,
+	[Style_Padding_Left] [nvarchar](4000) NULL,
+	[Style_Border_Top] [nvarchar](4000) NULL,
+	[Style_Border_Right] [nvarchar](4000) NULL,
+	[Style_Border_Bottom] [nvarchar](4000) NULL,
+	[Style_Border_Left] [nvarchar](4000) NULL,
+	[Style_Font_Family] [nvarchar](4000) NULL,
+	[Style_Font_Size] [nvarchar](4000) NULL,
+	[Style_Font_Line-height] [nvarchar](4000) NULL,
+	[Style_Font_Color] [nvarchar](4000) NULL,
+	[Style_BackGround] [nvarchar](4000) NULL,
+	[Style_Rounded_Corners] [nvarchar](4000) NULL,
+	[Style_Word_Wrap] [bit] NOT NULL,
+	[Style_Custom_Css] [nvarchar](max) NULL,
+ CONSTRAINT [PK_{objectQualifier}LiveSlider_Slide_Layer] PRIMARY KEY CLUSTERED 
+(
+	[LayerID] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO
+/****** Object:  Table {databaseOwner}[{objectQualifier}LiveSlider_Slide]    Script Date: 05/22/2014 14:20:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}LiveSlider_Slide]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}LiveSlider_Slide](
+	[SlideID] [int] IDENTITY(1,1) NOT NULL,
+	[ModuleID] [int] NOT NULL,
+	[Delay] [int] NOT NULL,
+	[Transition2D] [int] NOT NULL,
+	[Transition3D] [int] NOT NULL,
+	[TimeShift] [int] NULL,
+	[BackgroundImage] [nvarchar](2000) NULL,
+	[BackgroundAltText] [nvarchar](50) NULL,
+	[Thumbnail] [nvarchar](2000) NULL,
+	[ThumbnailAltText] [nvarchar](50) NULL,
+	[Link] [nvarchar](2000) NULL,
+	[OpenInNewWindow] [bit] NOT NULL,
+	[SortOrder] [int] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}LiveSlider_Slide] PRIMARY KEY CLUSTERED 
+(
+	[SlideID] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO
+/****** Object:  Table {databaseOwner}[{objectQualifier}LiveSlider]    Script Date: 05/22/2014 14:20:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}LiveSlider]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[{objectQualifier}LiveSlider](
+	[ModuleID] [int] NOT NULL,
+	[Width] [nvarchar](4000) NOT NULL,
+	[Height] [nvarchar](4000) NOT NULL,
+	[Responsive] [bit] NOT NULL,
+	[ResponsiveUnderWidth] [int] NOT NULL,
+	[LayersContainerWidth] [int] NOT NULL,
+	[AutoStart] [bit] NOT NULL,
+	[PauseOnHover] [bit] NOT NULL,
+	[AnimateFirstSlide] [bit] NOT NULL,
+	[Loops] [int] NOT NULL,
+	[TwoWaySlideshow] [bit] NOT NULL,
+	[RandomSlideShow] [bit] NOT NULL,
+	[Theme] [nvarchar](4000) NOT NULL,
+	[GlobalBackgroundColor] [nvarchar](4000) NOT NULL,
+	[GlobalBackgroundImage] [nvarchar](4000) NOT NULL,
+	[NavPrevNext] [bit] NOT NULL,
+	[NavStartStop] [bit] NOT NULL,
+	[NavButtons] [bit] NOT NULL,
+	[HoverPrevNext] [bit] NOT NULL,
+	[HoverBottomNav] [bit] NOT NULL,
+	[KeyboardNav] [bit] NOT NULL,
+	[TouchNav] [bit] NOT NULL,
+	[ShowBarTimer] [bit] NOT NULL,
+	[ShowCircleTimer] [bit] NOT NULL,
+	[ThumbnailNavigation] [nvarchar](4000) NOT NULL,
+	[ThumbnailContainerWidth] [int] NOT NULL,
+	[ThumbnailWidth] [int] NOT NULL,
+	[ThumbnailHeight] [int] NOT NULL,
+	[ThumbnailActiveOpacity] [int] NOT NULL,
+	[ThumbnailInactiveOpacity] [int] NOT NULL,
+	[AutoPlayVideos] [bit] NOT NULL,
+	[AutoPauseSlideshow] [nvarchar](50) NOT NULL,
+	[ImagePreload] [bit] NOT NULL,
+	[LazyLoad] [bit] NOT NULL,
+	[YourLogo] [nvarchar](4000) NOT NULL,
+	[YourLogoStyle] [nvarchar](4000) NOT NULL,
+	[YourLogoLink] [nvarchar](4000) NOT NULL,
+	[YourLogoLinkNewWindow] [bit] NOT NULL,
+	[DnnSearchable] [bit] NOT NULL,
+	[Fullwidth] [bit] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}LiveSlider] PRIMARY KEY CLUSTERED 
+(
+	[ModuleID] ASC
+)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO

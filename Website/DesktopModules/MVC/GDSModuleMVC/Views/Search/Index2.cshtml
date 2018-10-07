@@ -1,0 +1,244 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<List<Moslem.Modules.GDS.GDSModuleMVC.Models.SearchViewModel>>
+
+@using System.Text.RegularExpressions
+@using DotNetNuke.Web.Mvc.Helpers
+
+@using DotNetNuke.Web.Client.ClientResourceManagement
+
+@{
+    ClientResourceManager.RegisterScript(Dnn.DnnPage, "~/desktopmodules/mvc/GDSModuleMVC/content/jquery-reserve_rooms_v1_3.js", 22);
+
+    ClientResourceManager.RegisterScript(Dnn.DnnPage, "~/desktopmodules/mvc/GDSModuleMVC/content/jqueries/jquery-menuul.js", 15);
+    ClientResourceManager.RegisterScript(Dnn.DnnPage, "~/desktopmodules/mvc/GDSModuleMVC/content/jqueries/jquery-menuul-fix.js", 16);
+    ClientResourceManager.RegisterScript(Dnn.DnnPage, "~/desktopmodules/mvc/GDSModuleMVC/content/jqueries/jquery-textblur-fa.js", 17);
+    ClientResourceManager.RegisterScript(Dnn.DnnPage, "~/desktopmodules/mvc/GDSModuleMVC/content/jqueries/jquery-scroll.js", 18);
+    ClientResourceManager.RegisterScript(Dnn.DnnPage, "~/desktopmodules/mvc/GDSModuleMVC/content/jqueries/jquery-lang.js", 19);
+    ClientResourceManager.RegisterScript(Dnn.DnnPage, "~/desktopmodules/mvc/GDSModuleMVC/content/jqueries/jquery.keys.js", 20);
+    ClientResourceManager.RegisterScript(Dnn.DnnPage, "~/desktopmodules/mvc/GDSModuleMVC/content/jqueries/jquery-header_other.js", 21);
+    ClientResourceManager.RegisterScript(Dnn.DnnPage, "~/desktopmodules/mvc/GDSModuleMVC/content/jqueries/jquery-home-ad.js", 22);
+
+
+
+}
+
+<input type="hidden" name="ctl00$ContentPlaceHolder1$HF_Hotel_Number" id="ContentPlaceHolder1_HF_Hotel_Number" value="@Model[0].responsesearchHotel.hotelId" />
+<input type="hidden" name="ctl00$ContentPlaceHolder1$HF_Hotel_Number_System" id="ContentPlaceHolder1_HF_Hotel_Number_System" value="00" />
+<input type="hidden" name="ctl00$ContentPlaceHolder1$HF_Hotel_Stars" id="ContentPlaceHolder1_HF_Hotel_Stars" value="00" />
+<input type="hidden" name="ctl00$ContentPlaceHolder1$HF_Search_Type" id="ContentPlaceHolder1_HF_Search_Type" value="normal" />
+<input type="hidden" name="ctl00$ContentPlaceHolder1$HF_CheckIn" id="ContentPlaceHolder1_HF_CheckIn" value="@ViewBag.sdate" />
+<input type="hidden" name="ctl00$ContentPlaceHolder1$HF_CheckOut" id="ContentPlaceHolder1_HF_CheckOut" value="@ViewBag.edate" />
+<input type="hidden" name="ctl00$ContentPlaceHolder1$HF_Pass_Adult" id="ContentPlaceHolder1_HF_Pass_Adult" value="@ViewBag.Count" />
+<input type="hidden" name="ctl00$ContentPlaceHolder1$HF_Pass_Child" id="ContentPlaceHolder1_HF_Pass_Child" value="00" />
+<input type="hidden" name="ctl00$ContentPlaceHolder1$HF_Count_Type" id="ContentPlaceHolder1_HF_Count_Type" value="customer" />
+<input type="hidden" name="totalAmount" id="totalAmount" value="customer" />
+<input type="hidden" name="url" id="url" value="@ViewBag.Url" />
+<input type="hidden" name="person" id="person" value="@ViewBag.Count" />
+<input type="hidden" name="night" id="night" value="@ViewBag.night" />
+<input type="hidden" name="HotelTitle" id="HotelTitle" value="@Model[0].responsegetHotel.description" />
+
+
+<center>
+    <div id="d_message" class="S_Message_Back" style="display: none;"></div>
+</center>
+
+
+<div id="d_panel_error" class="S_Panel_Error" style="display: none;">
+    <center>
+        <div id="d_panel_error_text" class="S_Panel_Error_Text">
+
+        </div>
+    </center>
+</div>
+
+
+<div class="S_Result_Back">
+
+    <div class="S_Result_Items" style="margin-right: 0px; border-right: none;">
+        <center>
+            <div class="S_Result_Key">
+                <span class="SSpan_Middle">
+                    بازگشت
+                </span>
+            </div>
+
+        </center>
+    </div>
+    <div id="ContentPlaceHolder1_d_result_hotel" class="S_Result_Items">
+
+        <span class="S_Result_Titles">شهر:</span><span class="S_Result_Text">@ViewBag.CityText</span><div style="width:100%;clear:both;">
+        </div>
+    </div>
+    <div id="ContentPlaceHolder1_d_result_date_from" class="S_Result_Items">
+
+        <span class="S_Result_Titles">تاریخ ورود:</span><span class="S_Result_Text">@ViewBag.sdate</span><div style="width:100%;clear:both;">
+        </div>
+    </div>
+    <div id="ContentPlaceHolder1_d_result_date_to" class="S_Result_Items">
+
+        <span class="S_Result_Titles">تاریخ خروج:</span><span class="S_Result_Text">@ViewBag.edate</span><span class="S_Result_Text" style="color:#000000;font-weight:normal;">(@ViewBag.night شب اقامت)</span><div style="width:100%;clear:both;">
+        </div>
+    </div>
+    <div id="ContentPlaceHolder1_d_result_passenger" class="S_Result_Items">
+
+        <span class="S_Result_Titles">تعداد مسافرین:</span><span class="S_Result_Text">@ViewBag.Count نفر</span><div style="width:100%;clear:both;">
+        </div>
+    </div>
+
+    <div style="width: 100%; clear: both;">
+        </ div >
+        <div id="d_reserve_rooms_summary_body" class="S_Reserve_Back_Body">
+            <div id="d_reserve_rooms_summary" class="S_Reserve_Back" style="position: absolute; top: 0px;">
+
+                <div class="S_Reserve_More_Key" onclick="show_hide_summary_rooms();">
+                    <span id="d_reserve_rooms_summary_more" class="SSpan_Middle">H</span>
+                </div>
+
+                <div class="S_Reserve_Title">
+                    اتاقهای انتخابی:
+                </div>
+
+                <div id="d_rooms_selected" class="S_Reserve_Text">
+                    هیچ اتاقی انتخاب نگردیده
+                </div>
+
+                <div class="S_Reserve_Key" onclick="final_room_sel();">
+                    <span class="SSpan_Middle">
+                        تایید/رزرو
+                    </span>
+                    <span class="SSpan_Middle_Sign">
+                        q
+                    </span>
+                </div>
+
+                <input type="hidden" name="ctl00$ContentPlaceHolder1$HF_RoomSelected" id="ContentPlaceHolder1_HF_RoomSelected">
+            </div>
+
+            <div id="d_result_rooms" class="S_Reserve_Back_Rooms" style="position: absolute; top: 50px; height: 0px;">
+
+            </div>
+        </div>
+        @{ int m = 0;
+        }
+        @foreach (var item in Model)
+        {
+            foreach (var item2 in item.responsesearchHotel.room)
+            {
+                <div id="ContentPlaceHolder1_d_rooms" style="position: relative; width: 100%; height: auto;">
+
+                    <div class="S_Rooms_Rows" style="background-color:#F7F6F3;">
+                        <input type="hidden" id="hotelid" value="@item.responsesearchHotel.hotelId" />
+                        <input type="hidden" id="roomid" value="@item2.roomId" />
+                        <div class="S_Rooms_Image_Main">
+                            <center>
+                                <div class="S_Rooms_Image">
+                                    <img class="S_Rooms_Image_File" src="/HotelImages/350X256/@Html.Raw(item.responsegetHotel.id + ".jpg")">
+                                </div>
+                            </center>
+                        </div>
+                        <div class="S_Rooms_Text">
+                            <div class="S_Rooms_Text_Title">
+                                <span class="SSpan_Middle_Sign">w</span>
+
+                                <span class="SSpan_Middle">اتاق @item2.capacity نفره</span>
+                            </div><div class="S_Rooms_Text_Beds">
+                            </div><div class="S_Rooms_Text_Facility">
+                                <span class="SSpan_Middle_Sign">U</span>
+                                <input type="hidden" name="hotelid" value="@item.responsesearchHotel.hotelId" />
+                                <span class="HotelTitle">@item.responsegetHotel.description</span>
+                            </div>
+                            @*<a class="S_Rooms_MoreInfo">اطلاعات بیشتر...</a>*@
+                        </div><div class="S_Rooms_Price">
+                            <div class="S_Rooms_Price_Title">قیمت برای @ViewBag.night شب</div><div class="S_Rooms_Price_Amount">@item2.price</div><div class="S_Rooms_Price_Sep"></div>
+                            @if (item2.extraBed != "0")
+                            {
+                                <div class="S_Rooms_Price_Title">تخت(نفر) اضافه برای  @ViewBag.night شب</div>
+                                <div class="S_Rooms_Price_Amoun"></div>
+                                <div class="S_Rooms_Price_Sep"></div>
+                            }
+                            @if (item2.freeCapacity == "0")
+                            {
+                                <p>ظرفیت تکمیل شده است</p>
+                                m++;
+                            }
+                            else
+                            {
+                                <div class="S_Rooms_Price_Extra">
+                                    <div class="S_Rooms_Price_Title">انتخاب اتاق:</div>
+                                    <select name="ctl00$ContentPlaceHolder1$ctl32" class="S_Rooms_Price_Count" id="d_c_@Html.Raw(m)" onchange="extra_calc('@Html.Raw(m)','1'); room_sel('@Html.Raw(m)','@item2.roomId','@item2.roomId','@item2.price','1','26852','@item2.capacity','@item2.capacity نفره','@item.responsegetHotel.id','');">
+                                        <option value="0">0</option>
+                                        @for (int i = 0; i < Int32.Parse(item2.freeCapacity); i++)
+                                        {
+                                            <option value="@Html.Raw(i+1)">@Html.Raw(i + 1)</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="S_Rooms_Price_Extra" style="width:88px;border-left:none;margin-left:0px;">
+                                    <div class="S_Rooms_Price_Title">تخت(نفر) اضافه:</div>
+                                    <select name="ctl00$ContentPlaceHolder1$ct1" class="S_Rooms_Price_Count" id="d_e_@Html.Raw(m)" onchange="extra_calc('@Html.Raw(m)','1'); room_sel('@Html.Raw(m++)','@item2.roomId','@item2.roomId','@item2.price','1','1918','@item2.capacity','@item2.capacity نفره','','');">
+                                        <option value="0">0</option>
+                                        @for (int i = 0; i < Int32.Parse(item2.extraBed); i++)
+                                        {
+                                            <option value="@Html.Raw(i+1)">@Html.Raw(i + 1)</option>
+                                        }
+                                    </select>
+
+
+                                </div>
+
+                                //if (item2.extraBed != "0")
+                                //{
+
+                                //}
+                                <p class="clear">
+
+                                </p>
+
+                            }
+                            <div style="width:100%;clear:both;"></div><div style="width:100%;clear:both;"></div>
+                        </div><div class="S_Rooms_Option">
+                            <div class="S_Rooms_Option_Person">ظرفیت استاندارد: 2 نفر<br>حداکثر ظرفیت: 3 نفر</div>
+                            @if (item2.breakfast == 1)
+                            {
+                                <div class="S_Rooms_Option_Meal">
+                                    شامل:<br><span class="SSpan_Middle_Sign">R</span>
+                                    <span class="SSpan_Middle">صبحانه</span>
+                                </div>
+                            }
+                        </div><div style="width:100%;clear:both;"></div>
+                    </div>
+                </div>
+            }
+
+        }
+
+    </div>
+</div>
+@if (Model.Count < 1)
+{
+    <p>هتلی با مشخصات ارسالی شما دریافت نشد</p>
+}
+<script type="text/javascript">
+    function myfunction() {
+        //redirectPost("@ViewBag.Url", { hotelID: })
+    }
+    function redirectPost(url, data) {
+        var form = document.createElement('form');
+        document.body.appendChild(form);
+        form.method = 'post';
+        form.action = url;
+        for (var name in data) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = name;
+            input.value = data[name];
+            form.appendChild(input);
+        }
+        form.submit();
+    }
+    function moslem(obj) {
+        var x = $(obj).parents(".S_Rooms_Rows");
+        redirectPost("@ViewBag.Url", {
+            amount: x.find(".S_Rooms_Price_Amount").text(), count: @ViewBag.Count, HotelTitle: x.find(".HotelTitle").text() , hotelID: x.find("#hotelid").val(), roomID: x.find("#roomid").val() ,CheckinDate: "@ViewBag.sdate", night: @ViewBag.night ,roomCount: x.find('.S_Rooms_Price_Count').val() })
+    }
+
+</script>

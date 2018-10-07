@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ThemeInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ArticleListCSSFile />
+  <ShowEditIcon>false</ShowEditIcon>
+  <RepeatLayout>1</RepeatLayout>
+  <Template> &lt;h2 id="article[ITEMID]" class="dnnFormSectionHead"&gt;&lt;a href="#"&gt;[TITLE]&lt;/a&gt;&lt;/h2&gt;
+ &lt;fieldset class="dnnClear"&gt;&lt;div&gt;
+&lt;div style="float:left"&gt;[IMAGE:50]&lt;/div&gt;
+&lt;a href="[VIEWURL]" class="Head articletitle"&gt;[TITLE]&lt;/a&gt; &lt;br&gt; &lt;span class="SubSubHead clear"&gt; Created by [USERDISPLAYNAME] on [PUBLISHDATE]&lt;/span&gt; &lt;p&gt;
+&lt;div class="Normal"&gt;[CONTENT:100] &lt;/div&gt; &lt;a class="CommandButton" href="[VIEWURL]"&gt;Read More..&lt;/a&gt;
+&lt;/p&gt; &lt;hr /&gt; &lt;/div&gt; &lt;/fieldset&gt;</Template>
+  <TemplateTypeSetting>2</TemplateTypeSetting>
+  <TemplateFileSetting />
+  <HeaderTemplate>&lt;div class="dnnForm" id="panels[MODULEID]"&gt;
+ &lt;div class="dnnFormExpandContent"&gt;&lt;a href=""&gt;Expand All&lt;/a&gt;&lt;/div&gt;</HeaderTemplate>
+  <HeaderTemplateTypeSetting>2</HeaderTemplateTypeSetting>
+  <HeaderTemplateFileSetting />
+  <FooterTemplate>&lt;/div&gt;&lt;script type="text/javascript"&gt;
+ jQuery(function ($) {
+ var setupModule = function () {
+ $('#panels[MODULEID]').dnnPanels();
+ $('#panels[MODULEID] .dnnFormExpandContent a').dnnExpandAll({
+ targetArea: '#panels[MODULEID]'
+ });
+ };
+ setupModule();
+ Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
+ // note that this will fire when _any_ UpdatePanel is triggered,
+ // which may or may not cause an issue
+ setupModule();
+ });
+ });
+&lt;/script&gt; </FooterTemplate>
+  <FooterTemplateTypeSetting>2</FooterTemplateTypeSetting>
+  <FooterTemplateFileSetting />
+</ThemeInfo>

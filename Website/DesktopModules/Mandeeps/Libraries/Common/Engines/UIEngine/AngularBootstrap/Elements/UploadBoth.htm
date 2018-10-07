@@ -1,0 +1,13 @@
+﻿<div class="uploadinput-button">
+    <div nv-file-drop="" uploader="[name]" [attributes] [validation]>
+        <div nv-file-over="" uploader="[name]" over-class="another-file-over-class" class="ms-well my-drop-zone" style="text-align: center;">
+            <span class='ms-btn ms-btn-primary' style="position:relative;">
+                [LS:ChooseFiles]
+                <input type="file" style='position:absolute;z-index:2;top:0;left:0;opacity:0;background-color:transparent;color:transparent;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";' nv-file-select="" uploader="[name]" [attributes] />
+            </span>
+            <br />
+            <span>[LS:ClickDropZone]</span>
+        </div>
+    </div>
+    [Upload:Queue]
+</div>

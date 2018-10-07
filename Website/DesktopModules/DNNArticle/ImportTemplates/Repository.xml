@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ImportTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FileName>Repository</FileName>
+  <RootName>repository</RootName>
+  <ItemNodeName>item</ItemNodeName>
+  <TitleField>name</TitleField>
+  <ContentField>description</ContentField>
+  <SummaryField>description</SummaryField>
+  <ImageURLField>image</ImageURLField>
+  <ExpireDateField />
+  <PublishDateField>createddate</PublishDateField>
+  <RelatedURLField>filename</RelatedURLField>
+</ImportTemplate>

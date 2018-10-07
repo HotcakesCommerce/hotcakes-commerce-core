@@ -1,0 +1,60 @@
+/****** Object:  Table {databaseOwner}[Mandeeps_Common_MailQueue]    Script Date: 8/10/2017 7:10:03 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[Mandeeps_Common_MailQueue]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[Mandeeps_Common_MailQueue](
+	[MailQueueID] [int] IDENTITY(1,1) NOT NULL,
+	[ToEmail] [nvarchar](255) NOT NULL,
+	[Subject] [nvarchar](255) NOT NULL,
+	[Content] [nvarchar](max) NOT NULL,
+	[FromName] [nvarchar](255) NOT NULL,
+	[FromEmail] [nvarchar](255) NOT NULL,
+	[ReplyEmail] [nvarchar](255) NULL,
+	[SmtpUniqueId] [int] NULL,
+	[ModuleID] [int] NOT NULL,
+	[Attachment] [nvarchar](max) NULL,
+	[Status] [nvarchar](255) NOT NULL,
+	[RetryDateTime] [datetime] NULL,
+	[RetryAttempt] [int] NOT NULL,
+ CONSTRAINT [PK_Mandeeps_Common_MailQueue] PRIMARY KEY CLUSTERED 
+(
+	[MailQueueID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO
+/****** Object:  Table {databaseOwner}[Mandeeps_Common_Setting]    Script Date: 8/10/2017 7:10:03 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[Mandeeps_Common_Setting]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[Mandeeps_Common_Setting](
+	[SettingID] [int] IDENTITY(1,1) NOT NULL,
+	[ModuleID] [int] NOT NULL,
+	[Identifier] [nvarchar](50) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[Value] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_Mandeeps_Common_Setting] PRIMARY KEY CLUSTERED 
+(
+	[SettingID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[DF_Mandeeps_Common_MailQueue_Status]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[Mandeeps_Common_MailQueue] ADD  CONSTRAINT [DF_Mandeeps_Common_MailQueue_Status]  DEFAULT ('Queue') FOR [Status]
+END
+
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[DF_Mandeeps_Common_MailQueue_RetryAttempt]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[Mandeeps_Common_MailQueue] ADD  CONSTRAINT [DF_Mandeeps_Common_MailQueue_RetryAttempt]  DEFAULT ((0)) FOR [RetryAttempt]
+END
+
+GO

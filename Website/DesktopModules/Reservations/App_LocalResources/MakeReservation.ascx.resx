@@ -1,0 +1,485 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ReservationCancelled.Text" xml:space="preserve">
+    <value>Your reservation has been cancelled.</value>
+  </data>
+  <data name="ReservationScheduled.Text" xml:space="preserve">
+    <value>Thank you. Your reservation has been scheduled and an email confirmation has been sent you the address provided.</value>
+  </data>
+  <data name="reservationTimeLabel.Text" xml:space="preserve">
+    <value>Please choose a reservation time:</value>
+  </data>
+  <data name="availableDayLabel.Text" xml:space="preserve">
+    <value>Please choose an available day:</value>
+  </data>
+  <data name="cancelReservationCommandButton.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ConfigureModule.Text" xml:space="preserve">
+    <value>We are sorry but this module has not been configured yet. Please check back later.</value>
+  </data>
+  <data name="DayNotAvailable.Text" xml:space="preserve">
+    <value>The day you have selected is no longer available. Please select another day.</value>
+  </data>
+  <data name="emailLabel.Text" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="emailTextBoxRegularExpressionValidator.Text" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="emailTextBoxRequiredFieldValidator.Text" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="firstNameLabel.Text" xml:space="preserve">
+    <value>First name:</value>
+  </data>
+  <data name="firstNameTextBoxRequiredFieldValidator.Text" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="guestCommandButton.Text" xml:space="preserve">
+    <value>Guest</value>
+  </data>
+  <data name="lastNameLabel.Text" xml:space="preserve">
+    <value>Last name:</value>
+  </data>
+  <data name="lastNameTextBoxRequiredFieldValidator.Text" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="NoReservations.Text" xml:space="preserve">
+    <value>We are sorry but no reservations are available at this time. Please try again later.</value>
+  </data>
+  <data name="phoneLabel.Text" xml:space="preserve">
+    <value>Phone:</value>
+  </data>
+  <data name="contactInfoBackCommandButton.Text" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="contactInfoNextCommandButton.Text" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="contactInfoSubTitleLabel.Text" xml:space="preserve">
+    <value>Please sign in with your name and email address. An email confirmation will be sent to this address.
+&lt;br/&gt;&lt;br/&gt;
+Also please include a phone number where you may be reached regarding your reservation.</value>
+  </data>
+  <data name="step3BackCommandButton.Text" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Confirm.Text" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="step4TitleLabel.Text" xml:space="preserve">
+    <value>Reservation details.</value>
+  </data>
+  <data name="step4SubTitleLabel.Text" xml:space="preserve">
+    <value>The details of your reservation are as follow.</value>
+  </data>
+  <data name="step4EmailLabel.Text" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="step4NameLabel.Text" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="step4PhoneLabel.Text" xml:space="preserve">
+    <value>Phone:</value>
+  </data>
+  <data name="TimeNotAvailable.Text" xml:space="preserve">
+    <value>The reservation time you have selected is no longer available. Please select another reservation time.</value>
+  </data>
+  <data name="timeOfDayLabel.Text" xml:space="preserve">
+    <value>Please choose the time of day:</value>
+  </data>
+  <data name="TimeOfDayNotAvailable.Text" xml:space="preserve">
+    <value>The time of day you have selected is no longer available. Please select another time of day.</value>
+  </data>
+  <data name="TrialEnded.Text" xml:space="preserve">
+    <value>Thank you for evaluating The Reservations Module. The trial period has ended.</value>
+  </data>
+  <data name="categoryLabel.Text" xml:space="preserve">
+    <value>Please select a category:</value>
+  </data>
+  <data name="CategoryNotAvailable.Text" xml:space="preserve">
+    <value>There are no reservations available under the selected category. Please select another category.</value>
+  </data>
+  <data name="descriptionLabel.Text" xml:space="preserve">
+    <value>Comments:</value>
+  </data>
+  <data name="doneCommandButton.Text" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="step4CategoryLabel.Text" xml:space="preserve">
+    <value>Category:</value>
+  </data>
+  <data name="Email.Text" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Phone.Text" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="rescheduleAnReservationCommandButton.Text" xml:space="preserve">
+    <value>Reschedule a Reservation</value>
+  </data>
+  <data name="viewEditStep1BackCommandButton.Text" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="viewEditStep1NextCommandButton.Text" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="viewEditStep1TitleLabel.Text" xml:space="preserve">
+    <value>Sign in.</value>
+  </data>
+  <data name="viewEditStep1TitleSubLabel.Text" xml:space="preserve">
+    <value>Please sign in with the information you used when making your reservation.</value>
+  </data>
+  <data name="NoReservation.Text" xml:space="preserve">
+    <value>We couldn't find a reservation scheduled using the information provided. Please revise your input and try again.</value>
+  </data>
+  <data name="rescheduleReservationCommandButton.Text" xml:space="preserve">
+    <value>Reschedule</value>
+  </data>
+  <data name="viewEditAReservationCommandButton.Text" xml:space="preserve">
+    <value>Lookup your Reservation</value>
+  </data>
+  <data name="viewEditStep2BackCommandButton.Text" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="viewEditStep2NextCommandButton.Text" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="NoCategories.Text" xml:space="preserve">
+    <value>You have chosen to Allow Categories, but no categories have been configured.</value>
+  </data>
+  <data name="ConfirmAndPay.Text" xml:space="preserve">
+    <value>Confirm &amp; Pay</value>
+  </data>
+  <data name="PayPalItemName.Text" xml:space="preserve">
+    <value>Apointment Fee: </value>
+  </data>
+  <data name="PendingPaymentTimeout.Text" xml:space="preserve">
+    <value>We are sorry, but your reservation could not be scheduled because your session expired. Please contact the site administrator to request a refund.</value>
+  </data>
+  <data name="ReservationPendingPayment.Text" xml:space="preserve">
+    <value>Your reservation has been scheduled and is awaiting Instant Payment Notification from PayPal. You will receive an email confirmation once the notification arrives.</value>
+  </data>
+  <data name="requestActivationCodeCommandButton.Text" xml:space="preserve">
+    <value>Request Activation Code</value>
+  </data>
+  <data name="starLabel.Text" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="InvalidActivationCode.Text" xml:space="preserve">
+    <value>The Activation Code provided is not valid. Please activate the Reservations module with a different Activation Code.</value>
+  </data>
+  <data name="ModuleActivated.Text" xml:space="preserve">
+    <value>The Reservations Module has been activated and is now ready to use.</value>
+  </data>
+  <data name="ReservationPendingApproval.Text" xml:space="preserve">
+    <value>Your reservation has been scheduled and is awaiting approval. You will receive an email confirmation once it is approved.</value>
+  </data>
+  <data name="moderateCommandButton.Text" xml:space="preserve">
+    <value>Moderate Reservations</value>
+  </data>
+  <data name="Settings.Text" xml:space="preserve">
+    <value>Main Settings</value>
+  </data>
+  <data name="approveCommandButton.Text" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="ApprovedBy.Text" xml:space="preserve">
+    <value>Approved by</value>
+  </data>
+  <data name="CreatedBy.Text" xml:space="preserve">
+    <value>Created by</value>
+  </data>
+  <data name="declineCommandButton.Text" xml:space="preserve">
+    <value>Deny</value>
+  </data>
+  <data name="DeclinedBy.Text" xml:space="preserve">
+    <value>Denied by</value>
+  </data>
+  <data name="lastActionOnLabel.Text" xml:space="preserve">
+    <value>on</value>
+  </data>
+  <data name="returnCommandButton.Text" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="viewEditStep2TitleLabel.Text" xml:space="preserve">
+    <value>Select a reservation.</value>
+  </data>
+  <data name="viewEditStep2SubTitleLabel.Text" xml:space="preserve">
+    <value>We've found more than one reservation scheduled using the email address provided. Please select the reservation to work with from the list below.</value>
+  </data>
+  <data name="reservationDurationLabel.Text" xml:space="preserve">
+    <value>Please specify the desired duration:</value>
+  </data>
+  <data name="Day.Text" xml:space="preserve">
+    <value> day</value>
+  </data>
+  <data name="Days.Text" xml:space="preserve">
+    <value> days</value>
+  </data>
+  <data name="DurationNotAvailable.Text" xml:space="preserve">
+    <value>The duration you have specified for your reservation is no longer available. Please specify a different duration.</value>
+  </data>
+  <data name="Hour.Text" xml:space="preserve">
+    <value> hour</value>
+  </data>
+  <data name="Hours.Text" xml:space="preserve">
+    <value> hours</value>
+  </data>
+  <data name="Minute.Text" xml:space="preserve">
+    <value>minute</value>
+  </data>
+  <data name="Minutes.Text" xml:space="preserve">
+    <value> minutes</value>
+  </data>
+  <data name="Week.Text" xml:space="preserve">
+    <value> week</value>
+  </data>
+  <data name="Weeks.Text" xml:space="preserve">
+    <value> weeks</value>
+  </data>
+  <data name="step3SubTitleLabel.Text" xml:space="preserve">
+    <value>Please select the day and time for your reservation. You can scroll through the lists of available days and times to find the most suitable time for your reservation.</value>
+  </data>
+  <data name="CancelAndRequestRefund.Text" xml:space="preserve">
+    <value>Cancel &amp; Request {0} Refund</value>
+  </data>
+  <data name="ConfirmAndRequestRefund.Text" xml:space="preserve">
+    <value>Confirm &amp; Request {0} Refund</value>
+  </data>
+  <data name="QuickConfiguration.Text" xml:space="preserve">
+    <value>Before you can start using The Reservations Module, please select which calendar module you would like to post reservations to.</value>
+  </data>
+  <data name="ConfirmAndPayLater.Text" xml:space="preserve">
+    <value>Confirm &amp; Pay Later</value>
+  </data>
+  <data name="cashierCommandButton.Text" xml:space="preserve">
+    <value>Cashier</value>
+  </data>
+  <data name="IncorrectVerificationCode.Text" xml:space="preserve">
+    <value>The Email Address or Verification Code you have entered is not valid. Please revise your input and try again.</value>
+  </data>
+  <data name="verificationCodeLabel.Text" xml:space="preserve">
+    <value>Verification Code:</value>
+  </data>
+  <data name="VerificationCodeSent.Text" xml:space="preserve">
+    <value>Your verification code has been sent to the email address specified below.</value>
+  </data>
+  <data name="verificationCodeTextBoxRequiredFieldValidator.Text" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="viewEditVerificationCodeLabel.Text" xml:space="preserve">
+    <value>Need Verification Code?</value>
+  </data>
+  <data name="ReservationPendingPaymentDue.Text" xml:space="preserve">
+    <value>Thank you. Your payment has been processed</value>
+  </data>
+  <data name="payCommandButton.Text" xml:space="preserve">
+    <value>Pay Balance of {0}</value>
+  </data>
+  <data name="DueProcessing.Text" xml:space="preserve">
+    <value>Thank you. Your payment is being processed. Please allow a few minutes for the payment to be reflected on your account.</value>
+  </data>
+  <data name="IncorrectVerificationCode2.Text" xml:space="preserve">
+    <value>The Phone or Verification Code you have entered is not valid. Please revise your input and try again.</value>
+  </data>
+  <data name="orPhoneLabel.Text" xml:space="preserve">
+    <value>or Phone:</value>
+  </data>
+  <data name="scheduleAnotherReservationCommandButton.Text" xml:space="preserve">
+    <value>Schedule Another Reservation</value>
+  </data>
+  <data name="duplicateReservationsCommandButton.Text" xml:space="preserve">
+    <value>Duplicate Reservations Report</value>
+  </data>
+  <data name="ReservationConfirmed.Text" xml:space="preserve">
+    <value>Thank you. Your reservation has been confirmed.</value>
+  </data>
+  <data name="emergencyRequestCommandButton.Text" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="emergencyRequestLabel.Text" xml:space="preserve">
+    <value>If there are no reservations available, or you need your reservation sooner, please fill out the form below with the reason of your emergency and we will review it and try to accomodate you as soon as possible.</value>
+  </data>
+  <data name="EmergencyRequestSent.Text" xml:space="preserve">
+    <value>Thank you. Your request has been submitted and will be processed in the order it was received.</value>
+  </data>
+  <data name="needItSoonerCommandButton.Text" xml:space="preserve">
+    <value>Need it sooner?</value>
+  </data>
+  <data name="viewReservationsCommandButton.Text" xml:space="preserve">
+    <value>Reservations Report</value>
+  </data>
+  <data name="ActivationSuccessful.Text" xml:space="preserve">
+    <value>Thank you. Your copy of The Reservations Module has been activated and is now ready to be used.</value>
+  </data>
+  <data name="contactInfoTitleLabel.Text" xml:space="preserve">
+    <value>Tell us how to reach you.</value>
+  </data>
+  <data name="step3TitleLabel.Text" xml:space="preserve">
+    <value>When do you want to come in?</value>
+  </data>
+  <data name="Activate.Text" xml:space="preserve">
+    <value>Activate</value>
+  </data>
+  <data name="ManageCustomFields.Text" xml:space="preserve">
+    <value>Manage Custom Fields</value>
+  </data>
+  <data name="MissingRequiredFields.Text" xml:space="preserve">
+    <value>Please complete the form by filling in the highlighted fields.</value>
+  </data>
+  <data name="InvalidEmail.Text" xml:space="preserve">
+    <value>Please enter a valid email address.</value>
+  </data>
+  <data name="Optional.Text" xml:space="preserve">
+    <value>(optional)</value>
+  </data>
+  <data name="When.Text" xml:space="preserve">
+    <value>When:</value>
+  </data>
+  <data name="MaxReservationsPerUserReached.Text" xml:space="preserve">
+    <value>You reservation cannot be scheduled: You have reached the maximum number of reservations allowed per user.</value>
+  </data>
+  <data name="Comments.Text" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="FirstName.Text" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="LastName.Text" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="step3NextCommandButton.Text" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="emailOrPhoneLabel.Text" xml:space="preserve">
+    <value>Email or Phone:</value>
+  </data>
+  <data name="VerificationCode.Text" xml:space="preserve">
+    <value>Verification Code</value>
+  </data>
+  <data name="viewReservationsCalendarCommandButton.Text" xml:space="preserve">
+    <value>Reservations Calendar</value>
+  </data>
+  <data name="TLS12.Text" xml:space="preserve">
+    <value>You have configured the module to collect reservation fees via PayPal, but TLS 1.2 is not supported by your environment. Either upgrade your environment or use another payment provider.</value>
+  </data>
+</root>
