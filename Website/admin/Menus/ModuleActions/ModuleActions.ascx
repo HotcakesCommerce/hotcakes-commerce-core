@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" Inherits="DotNetNuke.Admin.Containers.ModuleActions" Codebehind="ModuleActions.ascx.cs" %>
-<asp:LinkButton runat="server" ID="actionButton" aria-label="Actions" />
+<asp:LinkButton runat="server" ID="actionButton" />
 
 <%
     if (SupportsQuickSettings)
@@ -53,7 +53,6 @@
                     yesText: '<%= Localization.GetSafeJSString("Yes.Text", Localization.SharedResourceFile) %>',
                     noText: '<%= Localization.GetSafeJSString("No.Text", Localization.SharedResourceFile) %>',
                     confirmTitle: '<%= Localization.GetSafeJSString("Confirm.Text", Localization.SharedResourceFile) %>',
-                    sharedText: '<%= Localization.GetSafeJSString("ModuleShared.Text", Localization.SharedResourceFile) %>',
                     rootFolder: '<%= Page.ResolveClientUrl("~/") %>',
                     supportsMove: <% = SupportsMove.ToString().ToLower() %>,
                     supportsQuickSettings: supportsQuickSettings,
@@ -87,16 +86,12 @@
 
                                 var rootMenuWidth = (supportsQuickSettings) ? 85 : 65;
 
-                                var $body = $(document.body);
-                                var positionCss = $body.css('position');
-                                var marginLeft = parseInt($body.css('margin-left'));
-
                                 root.css({
                                     position: "absolute",
                                     marginLeft: 0,
                                     marginTop: 0,
                                     top: containerPosition.top,
-                                    left: containerPosition.left + containerWidth - rootMenuWidth - (positionCss === "relative" ? marginLeft : 0)
+                                    left: containerPosition.left + containerWidth - rootMenuWidth
                                 });
 
                                 if (displayQuickSettings) {
@@ -142,7 +137,7 @@
 
         // Webkit based browsers (like Chrome and Safari) can access images width and height properties only after images have been fully loaded. 
         // It will cause menu action out of scope, TO fix this, use $(window).load instead of $(document).ready
-        $(window).on('load', function () {
+        $(window).load(function () {
             setUpActions();
 
             $(document).ajaxComplete(function () {

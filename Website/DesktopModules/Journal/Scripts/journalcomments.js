@@ -20,12 +20,12 @@
             }, 400, function () {
 
                 $textarea.focus();
-                $textarea.on('keypress', isDirtyHandler);
+                $textarea.bind('keypress', isDirtyHandler);
             });
         });
-        $delete.on('click', deleteComment);
+        $delete.bind('click', deleteComment);
 
-        $textarea.on('paste', function (e) {
+        $textarea.bind('paste', function (e) {
             setTimeout(function () {
                 $textarea.val($textarea.val());
                 if ($textarea.val().length > $maxLength) {
@@ -54,7 +54,7 @@
         }
         var isDirtyHandler = function (event) {
             $button.removeClass('disabled');
-            $textarea.off('keypress', isDirtyHandler);
+            $textarea.unbind('keypress', isDirtyHandler);
         };
 
         $button.click(function (event) {
@@ -85,7 +85,7 @@
             });
             var li = $(data);
             li.insertBefore('#' + $id + ' .cmteditarea');
-            $(li).find('.miniclose').on('click', deleteComment);
+            $(li).find('.miniclose').bind('click', deleteComment);
             bindConfirm();
         }
         function Post(method, data, callback, journalId) {

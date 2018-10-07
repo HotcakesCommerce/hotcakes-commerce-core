@@ -91,9 +91,9 @@
 	            return data;
 	        };
 
-	        $this.on("click", function () {
+	        $this.bind("click", function() {
 	            $this.autocomplete("search");
-	        }).on("keydown", function (event) {
+	        }).bind("keydown", function (event) {
 	            var keyCode = $.ui.keyCode;
 	            if (event.keyCode == keyCode.ENTER) {
 	                var ac = $this.data('ui-autocomplete');
@@ -101,7 +101,7 @@
 	                    return false;
 	                }
 	            }
-	        }).on("keyup", function (event) {
+	        }).bind("keyup", function(event) {
 	            var keyCode = $.ui.keyCode;
 	            switch (event.keyCode) {
 	            case keyCode.PAGE_UP:
@@ -114,7 +114,7 @@
 	            default:
 	                $this.autocomplete("search");
 	            }
-	        }).on("input change", function (e) {
+	        }).bind("input change", function (e) {
 	            rebuildMentions();
 	        }).autocomplete({
 	            autoFocus: true,

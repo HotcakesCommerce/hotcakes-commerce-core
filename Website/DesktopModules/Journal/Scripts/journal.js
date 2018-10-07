@@ -35,7 +35,7 @@ function attachPhoto(fileId, path, isImage) {
         journalItem.ItemData.Url = 'fileid=' + fileId;
     }
     $("#btnShare").removeClass('disabled');
-    $("#btnShare").off('keypress', 'isDirtyHandler');
+    $("#btnShare").unbind('keypress', 'isDirtyHandler');
 
 }
 
@@ -59,14 +59,13 @@ function bindConfirm() {
             if (typeof $._data($this[0], "events") != "undefined") {
                 for (var i = 0; i < $._data($this[0], "events").click.length; i++) {
                     var handler = $._data($this[0], "events").click[i].handler;
-                    var functionName = handler.name || handler.toString().match(/^function\s*([^\s(]+)/)[1]; 
-                    if (typeof functionName != "undefined" && functionName.length > 0) {
+                    if (typeof handler.name != "undefined" && handler.name.length > 0) {
                         clickFuncs.push(handler);
                         break;
                     }
                 }
             }
-            $this.off("click");
+            $this.unbind("click");
         }
 
         $this.dnnConfirm({
@@ -309,7 +308,7 @@ function pluginInit() {
 
         var isDirtyHandler = function (event) {
             $shareButton.removeClass('disabled');
-            $shareButton.off('keypress', isDirtyHandler);
+            $shareButton.unbind('keypress', isDirtyHandler);
         };
         $permTool.click(function () {
             $securityMenu.toggle();
@@ -335,7 +334,7 @@ function pluginInit() {
         $closeButton.click(function () {
             closeEditor();
         });
-        $content.on('keypress', function (event) {
+        $content.bind('keypress', function(event) {
             if (event.keyCode == 8 || event.keyCode == 46) {
                 return;
             }
@@ -343,7 +342,7 @@ function pluginInit() {
                 return false;
             }
         });
-        $content.on('paste', function (e) {
+        $content.bind('paste', function (e) {
             setTimeout(function () {
                 $content.val($content.val());
                 if ($content.val().length>=$maxLength && $maxLength > 0) {
@@ -371,8 +370,8 @@ function pluginInit() {
             linkArea.hide();
             linkArea.data('url','');
 
-            $attachTool.off('click');
-            $photoTool.off('click');
+            $attachTool.unbind('click');
+            $photoTool.unbind('click');
             $photoTool.click(function () {
                 photoToolClick();
             });
@@ -380,7 +379,7 @@ function pluginInit() {
                 attachToolClick();
             });
             $(".filePreviewArea").empty();
-            $content.off('keypress', isDirtyHandler);
+            $content.unbind('keypress', isDirtyHandler);
             $content.animate({
                 height: '0'
             }, 400, function () {
@@ -397,7 +396,7 @@ function pluginInit() {
             }, 400, function () {
                 $contentShow = true;
                 $content.focus();
-                $content.on('keypress', isDirtyHandler);
+                $content.bind('keypress', isDirtyHandler);
                 $closeButton.show();
 
 
@@ -409,7 +408,7 @@ function pluginInit() {
                 $photoTool.removeClass('selected');
                 $optionsArea.hide();
                 $attachArea.hide();
-                $attachTool.off('click');
+                $attachTool.unbind('click');
                  $('.filePreviewArea').empty();
                 resetJournalItem();
                 $attachTool.click(function() {
@@ -421,8 +420,8 @@ function pluginInit() {
                 }
                 $userFileManager.userFileManager.setFileExtensions(journalOptions.imageTypes);
                 $photoTool.addClass('selected');
-                $attachTool.off('click');
-                $attachTool.on('click', clickDisable);
+                $attachTool.unbind('click');
+                $attachTool.bind('click', clickDisable);
                 $optionsArea.show();
                 $attachArea.show();
                 $fileText.hide();
@@ -433,7 +432,7 @@ function pluginInit() {
             $('#tbar-attach-Area').show();
             if ($attachTool.hasClass('selected')) {
                 $attachTool.removeClass('selected');
-                $photoTool.off('click');
+                $photoTool.unbind('click');
                 $photoTool.click(function () {
                     photoToolClick();
                 });
@@ -447,8 +446,8 @@ function pluginInit() {
                 };
                 $userFileManager.userFileManager.setFileExtensions('');
                 $attachTool.addClass('selected');
-                $photoTool.off('click');
-                $photoTool.on('click', clickDisable);
+                $photoTool.unbind('click');
+                $photoTool.bind('click', clickDisable);
                 $attachArea.show();
                 $optionsArea.show();
                 $fileText.show();
@@ -615,8 +614,8 @@ function pluginInit() {
                 images = link.Images;
                 journalItem.ItemData.ImageUrl = link.Images[0].URL;
                 $previewArea.find('#image img').attr('src', link.Images[0].URL);
-                $(opts.previewSelector + ' #imgPrev').on('click', prevImg);
-                $(opts.previewSelector + ' #imgNext').on('click', nextImg);
+                $(opts.previewSelector + ' #imgPrev').bind('click', prevImg);
+                $(opts.previewSelector + ' #imgNext').bind('click', nextImg);
                 $(opts.previewSelector + ' #imgCount').text(currImage + 1 + ' of ' + images.length);
                 $(opts.previewSelector + ' #imagePreviewer').show();
             } else {
@@ -695,7 +694,7 @@ function pluginInit() {
         });
 
         // paste event
-        $textArea.on('paste', function (e) {
+        $textArea.bind('paste', function (e) {
 
             setTimeout(function () {
                 $textArea.val($textArea.val());

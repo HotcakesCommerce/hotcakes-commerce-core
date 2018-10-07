@@ -1,1 +1,0 @@
-<%@ Page CodeBehind="ThumbnailImage.aspx.cs" Language="C#" AutoEventWireup="true" Inherits="ZLDNN.Modules.DNNArticle.ThumbnailImage" %>

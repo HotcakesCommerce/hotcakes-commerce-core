@@ -9,7 +9,7 @@ Type.registerNamespace('dnn.controls');
 dnn.extend(dnn.controls, {
     initTextSuggest: function (ctl) 
     {    	
-        if (ctl && dnn.controls.controls[ctl.id] == null)
+	    if (ctl)
 	    {
 		    var ts = new dnn.controls.DNNTextSuggest(ctl);
 		    ts.initialize();

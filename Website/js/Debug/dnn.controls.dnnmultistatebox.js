@@ -9,7 +9,7 @@ Type.registerNamespace('dnn.controls');
 dnn.extend(dnn.controls, {
     initMultiStateBox: function (ctl) 
     {    	
-        if (ctl && dnn.controls.controls[ctl.id] == null)
+	    if (ctl)
 	    {
 		    var ts = new dnn.controls.DNNMultiStateBox(ctl);
 		    ts.initialize();

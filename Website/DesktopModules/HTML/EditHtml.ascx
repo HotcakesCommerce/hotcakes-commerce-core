@@ -2,8 +2,8 @@
 <%@ Register TagPrefix="dnn" TagName="label" Src="~/controls/LabelControl.ascx" %>
 <%@ Register TagPrefix="dnn" TagName="texteditor" Src="~/controls/texteditor.ascx" %>
 <%@ Register TagPrefix="dnnweb" Assembly="DotNetNuke.Web" Namespace="DotNetNuke.Web.UI.WebControls" %>
-<%@ Register TagPrefix="dnnweb" Assembly="DotNetNuke.Web" Namespace="DotNetNuke.Web.UI.WebControls.Internal" %>
-<%@ Register TagPrefix="dnncl" Assembly="DotNetNuke.Web.Client" Namespace="DotNetNuke.Web.Client.ClientResourceManagement" %>
+<%@ Register TagPrefix="dnnweb" Assembly="DotNetNuke.Web.Deprecated" Namespace="DotNetNuke.Web.UI.WebControls"%>
+<%@ Register TagPrefix="dnncl" Namespace="DotNetNuke.Web.Client.ClientResourceManagement" Assembly="DotNetNuke.Web.Client" %>
 
 <dnncl:DnnCssInclude ID="customJS" runat="server" FilePath="DesktopModules/HTML/edit.css" AddTag="false" />
 
@@ -20,7 +20,7 @@
                                 </div>
                             </div>
                         </asp:PlaceHolder>
-                        <dnn:textEditor id="txtContent" runat="server" height="400" width="100%" ChooseMode="false" ></dnn:textEditor>
+                        <dnn:texteditor id="txtContent" runat="server" height="400" width="100%" ChooseMode="false" ></dnn:texteditor>
                     </div>
                     <div class="dnnFormItem" id="divSubmittedContent" runat="server">
                         <div id="Div3" class="html_preview" runat="server">
@@ -67,6 +67,7 @@
                 <h2 id="dnnSitePanelEditHTMLHistory" class="dnnFormSectionHead" runat="server"><a href=""><%=LocalizeString("dshHistory")%></a></h2>
                 <fieldset id="fsEditHtmlHistory" runat="server">
                     <dnnweb:DnnGrid ID="dgHistory" runat="server" AutoGenerateColumns="false">
+                        <mastertableview>
 						<Columns>
 								<dnnweb:DnnGridBoundColumn HeaderText="Date" DataField="CreatedOnDate" />
 								<dnnweb:DnnGridBoundColumn HeaderText="User" DataField="DisplayName"/>
@@ -74,9 +75,10 @@
 								<dnnweb:DnnGridBoundColumn HeaderText="Approved" DataField="Approved" />
 								<dnnweb:DnnGridBoundColumn HeaderText="Comment" DataField="Comment"/>
 						</Columns>
-						<EmptyDataTemplate>
+						<NoRecordsTemplate>
 							<asp:Label ID="lblNoRecords" runat="server" resourcekey="NoHistory" />
-						</EmptyDataTemplate>
+						</NoRecordsTemplate>
+					</mastertableview>
                     </dnnweb:DnnGrid>
                 </fieldset>
             </asp:PlaceHolder>
@@ -88,7 +90,8 @@
                             <asp:Label ID="lblMaxVersions" runat="server" />
                         </div>
                         <dnnweb:DnnGrid ID="dgVersions" runat="server" AutoGenerateColumns="false" AllowPaging="True" PageSize="5">
-                            <PagerSettings Mode="NumericFirstLast"></PagerSettings>
+                            <pagerstyle mode="NextPrevAndNumeric"></pagerstyle>
+                            <mastertableview>
 					        <Columns>
 						        <dnnweb:DnnGridBoundColumn HeaderText="Version" DataField="Version" />
 						        <dnnweb:DnnGridBoundColumn HeaderText="Date" DataField="LastModifiedOnDate"  />
@@ -115,9 +118,10 @@
 							        </ItemTemplate>
 						        </dnnweb:DnnGridTemplateColumn>
 					        </Columns>
-					        <EmptyDataTemplate>
+					        <NoRecordsTemplate>
 						        <asp:Label ID="lblNoRecords1" runat="server" resourcekey="NoVersions" />
-					        </EmptyDataTemplate>
+					        </NoRecordsTemplate>
+				        </mastertableview>
                         </dnnweb:DnnGrid>
                     </div>
                 </fieldset>
@@ -194,12 +198,10 @@
             if ($('.ehccContent.EditView').length)
             {
                 // RadEditor
-                if (typeof $find === "function") {
-                    var editor = $find($(".RadEditor").attr('id'));
-                    if (editor) {
-                        editor.setSize($('.ehCurrentContent').width(), $('.ehCurrentContent').height() - $('.divCurrentVersion').height() - $('.ehmContent').height());
-                        $('.ehCurrentContent').css('overflow', 'hidden');
-                    }
+                var editor = $find($(".RadEditor").attr('id'));
+                if (editor) {
+                    editor.setSize($('.ehCurrentContent').width(), $('.ehCurrentContent').height() - $('.divCurrentVersion').height() - $('.ehmContent').height());
+                    $('.ehCurrentContent').css('overflow', 'hidden');
                 }
                 // CK Editor
                 var editorid = $(".ehCurrentContent textarea.editor").attr('id');
@@ -228,6 +230,3 @@
         });
     }(jQuery, window.Sys));
 </script>
-
-
-

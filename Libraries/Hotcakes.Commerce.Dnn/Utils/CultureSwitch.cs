@@ -60,12 +60,7 @@ namespace Hotcakes.Commerce.Dnn.Utils
                 var currencyCulture = new CultureInfo(store.Settings.CurrencyCultureCode);
                 portalCulture.NumberFormat = currencyCulture.NumberFormat;
             }
-            if (portalCulture.TwoLetterISOLanguageName.ToLower() == "fa")
-            {
-                portalCulture.NumberFormat.CurrencyDecimalDigits = 0;
-                portalCulture.NumberFormat.CurrencySymbol = "تومان";
-                portalCulture.NumberFormat.CurrencyPositivePattern =3;
-            }
+
             Thread.CurrentThread.CurrentCulture = portalCulture;
             Thread.CurrentThread.CurrentUICulture = portalCulture;
         }

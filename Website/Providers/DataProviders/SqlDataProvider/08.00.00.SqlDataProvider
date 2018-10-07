@@ -10,27 +10,22 @@
 
 /* Update Version table for increment column */
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME='{objectQualifier}Version' AND COLUMN_NAME='Increment')
-	ALTER TABLE {databaseOwner}[{objectQualifier}Version]
-		ADD	Increment int NULL;
+	BEGIN
+		ALTER TABLE {databaseOwner}{objectQualifier}Version
+			ADD	Increment int NULL
+	END
 GO
 
 /* Drop existing constraint */
-IF EXISTS (SELECT * FROM Sys.Check_Constraints WHERE parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Version]') AND name = N'IX_{objectQualifier}Version')
-	ALTER TABLE {databaseOwner}[{objectQualifier}Version] DROP CONSTRAINT [IX_{objectQualifier}Version]
+BEGIN
+	ALTER TABLE {databaseOwner}{objectQualifier}Version DROP CONSTRAINT [IX_{objectQualifier}Version]
+END
 GO
-
-IF EXISTS (SELECT * FROM Sys.Indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Version]') AND name = N'IX_{objectQualifier}Version')
-	ALTER TABLE {databaseOwner}[{objectQualifier}Version] DROP CONSTRAINT [IX_{objectQualifier}Version]
-GO
-
-IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Version]') AND name = N'IX_{objectQualifier}Version')
-	DROP INDEX [IX_{objectQualifier}Version] ON {databaseOwner}[{objectQualifier}Version]
-GO 
 
 /* Add new  constraint */
-ALTER TABLE {databaseOwner}[{objectQualifier}Version]
-	ADD CONSTRAINT [IX_{objectQualifier}Version] UNIQUE NONCLUSTERED  
-		([Major], [Minor], [Build],[Increment]);
+BEGIN
+	ALTER TABLE {databaseOwner}{objectQualifier}Version ADD CONSTRAINT [IX_{objectQualifier}Version] UNIQUE NONCLUSTERED  ([Major], [Minor], [Build],[Increment])
+END
 GO
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}UpdateDatabaseVersionIncrement]') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)

@@ -108,7 +108,7 @@
         self.ConversationId = data.ConversationId;
         self.ReplyAllAllowed = data.ReplyAllAllowed;
         self.SenderUserID = data.SenderUserID;
-        self.SenderDisplayName = data.SenderDisplayName || data.From;
+        self.SenderDisplayName = data.SenderDisplayName;
         self.RowNumber = data.RowNumber;
         self.AttachmentCount = ko.observable(data.AttachmentCount);
         self.NewThreadCount = ko.observable(data.NewThreadCount);
@@ -140,7 +140,7 @@
         self.ConversationId = data.Conversation.ConversationId;
         self.ReplyAllAllowed = data.Conversation.ReplyAllAllowed;
         self.SenderUserID = data.Conversation.SenderUserID;
-        self.SenderDisplayName = data.Conversation.SenderDisplayName || data.Conversation.From;
+        self.SenderDisplayName = data.SenderDisplayName;
         self.RowNumber = data.Conversation.RowNumber;
         self.AttachmentCount = data.Conversation.AttachmentCount;
         self.NewThreadCount = ko.observable(data.Conversation.NewThreadCount);
@@ -246,7 +246,7 @@
             }
         };
 
-        $('body').on('click.coremessaging', function (event) {
+        $('body').bind('click.coremessaging', function (event) {
             if (!$(event.target).closest('#SelectMenu').length) {
                 self.selectMenuOn(false);
             };

@@ -130,18 +130,18 @@
                 }
             };
 
-            toastWrapAll.on('mousedown', function (e) {
+            toastWrapAll.bind('mousedown', function (e) {
                 var x = e.pageX;
                 var y = e.pageY;
                 originalPos = {
                     x: x,
                     y: y
                 };
-                $(document).on('mousemove', mouseMove);
+                $(document).bind('mousemove', mouseMove);
 
-            }).on('mouseup', function (e) {
+            }).bind('mouseup', function (e) {
                 originalPos = null;
-                $(document).off('mousemove', mouseMove);
+                $(document).unbind('mousemove', mouseMove);
 
                 var cValue = top + '|' + right;
                 dnn.dom.setCookie(cookieId, cValue, 20 * 365); // never expire - set 20 years...

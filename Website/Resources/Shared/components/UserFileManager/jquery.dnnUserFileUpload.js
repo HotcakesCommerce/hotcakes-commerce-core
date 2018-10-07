@@ -20,13 +20,13 @@
         }
 
         // error response 
-        $fileUploadWrapperSelector.on('fileuploadfail', function (e, data) {
+        $fileUploadWrapperSelector.bind('fileuploadfail', function (e, data) {
             opts.complete(data);
             displayError(opts.serverErrorMessage);
         });
 
         // success response
-        $fileUploadWrapperSelector.on('fileuploaddone', function (e, data) {
+        $fileUploadWrapperSelector.bind('fileuploaddone', function (e, data) {
             opts.complete(data);
             var result;
             if (data.result[0].body) {
@@ -58,7 +58,6 @@
                 url: url,
                 maxFileSize: opts.maxFileSize,
                 beforeSend: opts.beforeSend,
-                pasteZone: null,
                 add: function (e, data) {
                     data.context = $(opts.progressContextSelector);
                     data.context.find($(opts.progressFileNameSelector)).html(data.files[0].name);
@@ -87,7 +86,7 @@
 
     $.fn.dnnUserFileUpload.defaultOptions = {
         fileUploadWrapperSelector: '.fileUploadArea', // wrapper element for the main file upload content area
-        addImageServiceUrl: '/API/Journal/FileUpload/UploadFile', // post files here
+        addImageServiceUrl: '/DesktopModules/Journal/API/FileUpload/UploadFile', // post files here
         progressContextSelector: '.progress_context', // wrapper element for the progress area
         progressFileNameSelector: '.upload_file_name', // element to update file name text w/ during upload
         progressBarSelector: '.progress-bar div', // the actual progress bar element itself, its width will be expanded dynamically

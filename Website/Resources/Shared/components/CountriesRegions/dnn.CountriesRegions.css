@@ -28,10 +28,7 @@
  *border-bottom-width: 2px;
  cursor:pointer;
 }
-.ui-autocomplete .ui-menu-item {
-    list-style: none;
-    padding-left: 8px;
-}
+
 .ui-autocomplete .ui-menu-item > a.ui-corner-all {
  display: block;
  padding: 3px 15px;
@@ -55,7 +52,4 @@
 .ui-autocomplete li a.ui-corner-all:hover {
  background-color: #0088cc;
  color: #fff;
-}
-.ui-helper-hidden-accessible {
-    display: none;
 }

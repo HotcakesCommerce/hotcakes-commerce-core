@@ -65,8 +65,6 @@ if ($ && $.ui && $.ui.dialog) {
                     });
                 }
             }
-
-            uiDialog.find('.ui-dialog-titlebar-close').attr('aria-label', 'Close');
         },
 
         beforeClose: function () {

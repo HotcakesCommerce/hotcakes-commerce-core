@@ -112,7 +112,7 @@ span.labelCacheInherited{
     float: left;
 }
 
-.dnnContainerPreview .selectize-control{
+.dnnContainerPreview .RadComboBox_Default{
     float: left;
     margin-right: 15px;
 }

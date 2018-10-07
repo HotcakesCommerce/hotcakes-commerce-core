@@ -1,2 +1,0 @@
-﻿A optional module of DNNArticle,manage article content by lightbox.
-DNNArticleLightboxContentPlugin supports DotNetNuke 5.5.0+.

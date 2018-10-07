@@ -201,7 +201,7 @@
             hide_dropdown();
             $(this).val("");
         })
-        .on("keyup keydown blur update", resize_input)
+        .bind("keyup keydown blur update", resize_input)
         .keydown(function (event) {
             var previous_token;
             var next_token;

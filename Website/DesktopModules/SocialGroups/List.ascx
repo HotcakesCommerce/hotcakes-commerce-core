@@ -64,7 +64,7 @@
                 $('#groupJoin-' + id).text('<%=LocalizeString("Pending")%>')
                     .removeClass('dnnTertiaryAction')
                     .addClass('dnnDisabled')
-                    .off('click')
+                    .unbind('click')
                     .click(function (event) { event.preventDefault });
             }
         }

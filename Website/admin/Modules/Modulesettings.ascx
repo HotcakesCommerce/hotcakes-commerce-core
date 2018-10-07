@@ -4,8 +4,9 @@
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Security.Permissions.Controls" Assembly="DotNetNuke" %>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.UI.WebControls" Assembly="DotNetNuke" %>
 
-<%@ Register TagPrefix="dnnweb" Namespace="DotNetNuke.Web.UI.WebControls.Internal" Assembly="DotNetNuke.Web" %>
+<%@ Register TagPrefix="dnnweb" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web.Deprecated" %>
 <%@ Register TagPrefix="dnn" TagName="Audit" Src="~/controls/ModuleAuditControl.ascx" %>
+<%@ Register TagPrefix="dnn" TagName="ModuleLocalization" Src="~/Admin/Modules/ModuleLocalization.ascx" %>
 <%@ Register TagPrefix="dnnweb" Assembly="DotNetNuke.Web" Namespace="DotNetNuke.Web.UI.WebControls" %>
 <div class="dnnForm dnnModuleSettings dnnClear" id="dnnModuleSettings">
     <ul class="dnnAdminTabNav dnnClear">
@@ -100,6 +101,7 @@
                 <div>
                     <div class="dnnFormItem">
                         <dnnweb:DnnGrid ID="dgOnTabs" runat="server" AutoGenerateColumns="False" AllowPaging="true" PageSize="20" ViewStateMode="Disabled">
+                            <MasterTableView>
                                 <Columns>
                                     <dnnweb:DnnGridTemplateColumn HeaderText="Site" HeaderStyle-Width="150px">
                                         <ItemTemplate>
@@ -112,11 +114,12 @@
                                         </ItemTemplate>
                                     </dnnweb:DnnGridTemplateColumn>
                                 </Columns>
-                                <EmptyDataTemplate>
+                                <NoRecordsTemplate>
                                     <div class="dnnFormMessage dnnFormWarning">
                                         <asp:Label ID="lblNoRecords" runat="server" resourcekey="lblNoRecords" />
                                     </div>
-                                </EmptyDataTemplate>
+                                </NoRecordsTemplate>
+                            </MasterTableView>
                         </dnnweb:DnnGrid>
                     </div>   
                 </div>
@@ -218,7 +221,7 @@
                 </div>
                 <div class="dnnFormItem dnnContainerPreview">
                     <dnn:label id="plModuleContainer" runat="server" controlname="ctlModuleContainer" />
-                    <dnnweb:DnnSkinComboBox ID="moduleContainerCombo" runat="server" />
+                    <dnnweb:DnnSkinComboBox ID="moduleContainerCombo" runat="server" ViewStateMode="Disabled" />
                     <a href="#" class="dnnSecondaryAction">
                         <%=LocalizeString("ContainerPreview")%></a>
                 </div>
@@ -261,7 +264,7 @@
                     <dnn:label id="plTab" runat="server" controlname="cboTab" />
                     <%--<asp:DropDownList ID="cboTab" DataTextField="IndentedTabName" DataValueField="TabId"
                         runat="server" />--%>
-                    <dnnweb:DnnComboBox ID="cboTab" DataTextField="IndentedTabName" DataValueField="TabId" runat="server" />
+                    <dnnweb:DnnComboBox ID="cboTab" DataTextField="IndentedTabName" DataValueField="TabId" runat="server"  ViewStateMode="Disabled"/>
                 </div>
             </fieldset>
         </div>
@@ -344,8 +347,8 @@
             window.compareDate = function (source, arg) {
             	var id = source.controltovalidate;
             	var compareId = source.getAttribute("CompareControl");
-            	var time = $('#' + id).val();
-            	var compareTime = $('#' + id.substr(0, id.lastIndexOf("_") + 1) + compareId).val();
+            	var time = $find(id).get_timeView().getTime();
+            	var compareTime = $find(id.substr(0, id.lastIndexOf("_") + 1) + compareId).get_timeView().getTime();
             	arg.IsValid = compareTime == null || time > compareTime;
             };
         });

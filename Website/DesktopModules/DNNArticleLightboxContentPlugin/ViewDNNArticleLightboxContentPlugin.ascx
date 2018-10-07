@@ -1,1 +1,0 @@
-<%@ Control Language="C#" Inherits="ZLDNN.Modules.DNNArticleLightboxContentPlugin.ViewDNNArticleLightboxContentPlugin" AutoEventWireup="true" Explicit="True" Codebehind="ViewDNNArticleLightboxContentPlugin.ascx.cs" %>
