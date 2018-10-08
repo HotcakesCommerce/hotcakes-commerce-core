@@ -45,7 +45,7 @@ namespace Hotcakes.Modules.Core.Models.Json
             Bvin = product.Bvin;
 
             var up = app.PriceProduct(product, app.CurrentCustomer, null, app.CurrentlyActiveSales);
-            UserPrice = up.DisplayPrice();
+            UserPrice = up.DisplayPrice(true,false);
         }
 
         public string ProductLink { get; set; }
