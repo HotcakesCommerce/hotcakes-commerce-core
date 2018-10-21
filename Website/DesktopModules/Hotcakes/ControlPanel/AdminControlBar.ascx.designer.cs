@@ -40,15 +40,6 @@ namespace Hotcakes.Modules.ControlPanel {
         protected global::System.Web.UI.WebControls.Image updateService;
         
         /// <summary>
-        /// rpMenuTabs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rpMenuTabs;
-        
-        /// <summary>
         /// ucLanguages control.
         /// </summary>
         /// <remarks>

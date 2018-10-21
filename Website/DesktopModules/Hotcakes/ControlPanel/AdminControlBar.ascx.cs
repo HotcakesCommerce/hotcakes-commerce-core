@@ -35,6 +35,7 @@ using MenuItem = Hotcakes.Modules.Core.Admin.AppCode.MenuItem;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Entities.Controllers;
 using System.Reflection;
+using DotNetNuke.Services.Localization;
 
 namespace Hotcakes.Modules.ControlPanel
 {
@@ -70,10 +71,7 @@ namespace Hotcakes.Modules.ControlPanel
         {
             base.OnLoad(e);
 
-            if (!IsPostBack)
-            {
-                BindMenu();
-            }
+
 
             conrolbar_logo.ImageUrl = "~/DesktopModules/Hotcakes/ControlPanel/controlbarimages/admin_logo.png";
             aHostAdmin.Visible = HccApp.MembershipServices.IsSuperUserLoggedIn();
@@ -96,13 +94,12 @@ namespace Hotcakes.Modules.ControlPanel
 
         #region Private Method
 
-        private void BindMenu()
+
+
+        protected string GetString(string key)
         {
-            rpMenuTabs.DataSource = MenuProvider.GetFilteredMenuItems(HccApp);
-            rpMenuTabs.DataBind();
+            return Localization.GetString(key, LocalResourceFile);
         }
-
-
         //Binding the data
         protected void rpMenuTabs_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
