@@ -1,0 +1,1258 @@
+﻿body {
+}
+
+@import "_admin_wizard.less";
+
+/* ------------- Dashboard ------------- */
+.hcDashboard {
+    padding-top: 9px;
+
+    .hcFormMessage {
+        z-index: 1;
+        position: relative;
+    }
+
+    ul {
+        margin: 0;
+        list-style-type: none;
+    }
+
+    .hcBlockRow {
+        .hcClearfix;
+        margin-bottom: 9px;
+        background: white;
+        position: relative;
+    }
+
+    .hcBlock {
+        border: solid 1px @color-lightgray;
+        .hcClearfix;
+
+        h3 {
+            color: @color-gray;
+        }
+
+        .hcBlockContent,
+        .hcBlockContent25p,
+        .hcBlockContent33p,
+        .hcBlockContent50p,
+        .hcBlockContent75p {
+            padding: 20px;
+            font-size: 12px;
+            ._hcBoxSizing;
+            border-right: solid 1px @color-lightgray;
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+
+        .hcBlockContent25p {
+            width: 25%;
+        float: left;
+        }
+
+        .hcBlockContent33p {
+            width: 33.3%;
+            float: left;
+        }
+
+        .hcBlockContent50p {
+            width: 50%;
+            float: left;
+            }
+
+        .hcBlockContent75p {
+            width: 75%;
+            float: left;
+        }
+    }
+
+    .hcGetStarted,
+    .hcSampleData {
+        &.hcBlockContent {
+            padding-top: 25px;
+            padding-bottom: 25px;
+        }
+
+        span {
+            font-size: 16px;
+            font-weight: bold;
+            color: @color-black;
+    }
+
+        .hcActions {
+        float: right;
+            padding: 0;
+            margin-top: -5px;
+
+            span {
+                font-weight: bold;
+                padding: 8px;
+                display: block;
+    }
+        }
+
+        .hcFindOutMore {
+            float: right;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            color: @color-black;
+            text-decoration: none;
+        }
+    }
+
+    .hcOrderSummary {
+
+        &.hcBlockContent {
+            padding: 0;
+        }
+
+        ul {
+            height: 70px;
+
+            li {
+                ._hcBoxSizing;
+                color: @color-gray;
+                text-align: left;
+                font-size: 18px;
+                padding: 24px 20px;
+            margin: 0;
+                width: 25%;
+                float: left;
+                border-right: 1px solid @color-lightgray;
+
+                a {
+                    font-size: 18px;
+                    color: @color-gray;
+                    text-decoration: none;
+
+                    &:hover {
+            color: @color-red;
+        }
+                }
+
+                span {
+                    color: @color-black;
+                    font-size: 18px;
+                    display: inline-block;
+                    float: right;
+                    font-weight: bold;
+                }
+
+                &:last-child {
+                    border-right: none;
+                }
+            }
+        }
+    }
+
+    .hcGetStartedRow,
+    .hcSampleDataRow {
+        z-index: 1;
+    }
+
+    .hcSampleDataOverlay {
+        top: 0;
+        left: 0;
+        position: fixed;
+        opacity: 0.5;
+        width: 100%;
+        height: 100%;
+        background-color: grey;
+    }
+
+    .hcModerateReviews {
+        a {
+            font-size: 18px;
+            color: @color-gray;
+            text-decoration: none;
+
+            &:hover {
+                color: @color-red;
+            }
+        }
+    }
+
+    .hcSalesTotal {
+        .hcAmountA, .hcAmountB {
+            text-align: center;
+        }
+
+        .hcAmountA {
+            font-size: 70px;
+            line-height: 55px;
+            padding-top: 80px;
+            padding-bottom: 150px;
+
+            label {
+                font-size: 40px;
+                line-height: 28px;
+                color: @color-gray;
+                vertical-align: super;
+
+                &.hcRight {
+                    float: right;
+        }
+    }
+        }
+
+        .hcAmountB {
+            font-size: 18px;
+            font-weight: bold;
+
+            label {
+            display: block;
+                font-weight: normal;
+                font-size: 16px;
+            }
+        }
+    }
+
+    .hcSalesByDevice ul {
+        li {
+            color: @color-gray;
+            text-align: left;
+            padding: 25px 15px;
+            margin: 0;
+            height: 70px;
+
+            .hcAmount {
+                float: left;
+                width: 65%;
+                height: 42px;
+                padding-left: 50px;
+                padding-top: 3px;
+                font-size: 30px;
+
+                label {
+                    display: block;
+                    font-size: 12px;
+                    color: @color-gray;
+                    padding-top: 10px;
+                }
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+
+    .hcSalesChart,
+    .hcSalesTotal,
+    .hcSalesByDevice,
+    .hcLeftChartArea,
+    .hcSalesFunnel {
+        height: 420px;
+    }
+
+    .hcSalesChart,
+    .hcChartArea {
+        h3, .hcPeriodSelector {
+                display: inline-block;
+            }
+
+        .hcPeriodSelector {
+            font-size: 14px;
+            padding-left: 5px;
+        }
+    }
+
+    .hcChartArea {
+        .hcSalesFunnel {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .hcProductPerformanceChart {
+        width: 100%;
+            height: 330px;
+        }
+    }
+
+    .hcTopChangeBlock,
+    .hcTopChangeJointBlock {
+
+        .hcBlockContent,
+        .hcBlockContent25p,
+        .hcBlockContent33p,
+        .hcBlockContent50p,
+        .hcBlockContent75p {
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-spacing: 0;
+        }
+
+        h3 {
+            padding: 0 20px;
+        }
+
+        td, th {
+            height: 50px;
+            padding: 0 20px;
+            text-align: right;
+            border-bottom: 1px solid @color-lightgray;
+
+            &:first-child {
+                width: 75%;
+                text-align: left;
+        }
+
+            a {
+                white-space: nowrap;
+                color: @color-gray-dark3;
+                text-decoration: none;
+                cursor: pointer;
+
+                &:hover {
+                    color: @color-red;
+        }
+            }
+        }
+
+            td > a {
+                width: 360px;
+                display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+        }
+
+        tfoot td {
+            text-align: right;
+            border-bottom: none;
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        .hcChange {
+            font-weight: bold;
+    }
+
+        .hcPageInfo {
+            float: left;
+        }
+
+        .hcPageNav {
+            float: right;
+
+            a {
+                margin: 5px;
+            }
+        }
+
+        .hcChangeOrder {
+            i {
+                margin: 5px 0;
+            }
+        }
+    }
+
+    .hcTopChangeJointBlock {
+        td, th {
+            &:first-child {
+                width: 65%;
+            }
+        }
+
+            td > a {
+                width: 995px;
+            }
+    }
+}
+
+.hcCreateSampleDataPopup,
+.hcFindOutMorePopup {
+    font-size: 16px;
+    line-height: 22px;
+    text-align: justify;
+}
+
+.hcDIconNew,
+.hcDIconHold,
+.hcDIconPayment,
+.hcDIconShipping,
+.hcDIconReview,
+.hcDIconTop5 {
+    //background: url(Images/dashboard_icons.png);
+    background: url(Images/admin_misc_sprite.png);
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    vertical-align: top;
+    display: inline-block;
+    overflow: hidden;
+    text-indent: 100px;
+    margin-right: 5px;
+}
+
+.hcDIconTop5 {
+    background-position: -110px 0;
+    vertical-align: middle;
+    margin-right: 5px;
+    background: url(Images/dashboard_icons.png);
+}
+
+.hcDIconNew {
+    background-position: -160px -120px;
+}
+
+.hcDIconHold {
+    background-position: -200px -120px;
+}
+
+.hcDIconPayment {
+    background-position: -40px -120px;
+}
+
+.hcDIconShipping {
+    background-position: -240px -40px;
+}
+
+.hcDIconReview {
+    background-position: -40px -80px;
+}
+
+.hcDIconPlus,
+.hcDIconDesktop,
+.hcDIconTablet,
+.hcDIconPhone {
+    //background: url(Images/dashboard_icons.png);
+    background: url(Images/admin_misc_sprite.png);
+    background-repeat: no-repeat;
+    vertical-align: top;
+    display: inline-block;
+}
+
+
+.hcDIconPlus {
+    background-position: 0 -22px;
+    width: 11px;
+    height: 11px;
+}
+
+.hcDIconDesktop {
+    background-position: 0 -160px;
+    height: 46px;
+    width: 56px;
+}
+
+.hcDIconTablet {
+    background-position: -80px -160px;
+    width: 40px;
+    height: 50px;
+    margin: 0 8px;
+}
+
+.hcDIconPhone {
+    background-position: -160px -160px;
+    width: 28px;
+    height: 46px;
+    margin: 0 14px;
+    }
+
+.hcDIconDesktop,
+.hcDIconTablet,
+.hcDIconPhone {
+    float: left;
+}
+/* ------------- Reports ------------- */
+.hcReport {
+    .hcNoGrid {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 10px;
+
+        th, td {
+            font-size: 12px;
+            text-align: right;
+            font-weight: bold;
+            padding: 3px 7px;
+            color: @color-gray;
+        }
+    }
+
+    tr.hcGridFooter td {
+        background: none;
+        border: 1px solid @color-bg !important;
+        font-size: 12px;
+        text-align: right;
+        font-weight: 500;
+        padding: 10px 7px;
+        color: @color-gray;
+    }
+
+    .hcEmptyCell {
+        padding: 0;
+
+        table th {
+            font-weight: normal;
+        }
+    }
+}
+/* ------------- Content Blocks ------------- */
+.hcContentBlock {
+    .hcBlockInfo {
+        float: left;
+        width: 150px;
+        font-size: 12px;
+
+        h4 {
+            font-weight: bold;
+            color: @color-gray;
+        }
+    }
+
+    .hcBlock {
+        float: left;
+        width: 150px;
+        border: solid 1px @color-lightgray;
+        background: white;
+        text-align: center;
+
+        img {
+            width: 100%;
+        }
+
+        .hcBlockContent {
+            background: @color-lightgray;
+            padding: 10px;
+            font-size: 12px;
+        }
+    }
+}
+/* ---------- Credit Card Logos ---------- */
+.cc-visa, .cc-mastercard, .cc-amex, .cc-discover, .cc-diners, .cc-dinersclub, .cc-jcb {
+    width: 47px;
+    height: 30px;
+    display: inline-block;
+    background: url('Images/creditcards.png') no-repeat 0px 0px;
+    border: solid 1px #999;
+}
+
+.cc-disabled {
+    width: 47px;
+    height: 30px;
+    display: inline-block;
+    background: url('Images/creditcards_disabled.png') no-repeat 0px 0px;
+    border: solid 1px #999;
+}
+
+.cc-visa {
+    background-position: 0 0;
+}
+
+.cc-mastercard {
+    background-position: -47px 0;
+}
+
+.cc-amex {
+    background-position: -94px 0;
+}
+
+.cc-discover {
+    background-position: -141px 0;
+}
+
+.cc-diners, .cc-dinersclub {
+    background-position: -188px 0;
+}
+
+.cc-jcb {
+    background-position: -235px 0;
+}
+/* ---------- Products Import ---------- */
+#hcImportLog {
+    background: white;
+    padding: 5px;
+    width: 100%;
+    overflow: auto;
+    max-height: 400px;
+}
+/* ---------- Shipping Rates ---------- */
+.hc-shipping-discount {
+    text-decoration: line-through;
+}
+/* ---------- Marketing ---------- */
+.hcPromotionBlock {
+    clear: both;
+    padding-bottom: 20px;
+
+    .hcInfoLabel {
+        float: right;
+        padding-top: 18px;
+    }
+
+    .hcPager {
+        margin-bottom: 20px;
+    }
+}
+
+.hcQualificationsGrid ul li {
+    width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    list-style-position: inside;
+}
+
+.hcGrid.hcPromoItemGrid .hcGridRow td:first-child,
+.hcGrid.hcQualificationsGrid .hcGridRow td:first-child {
+    max-width: 181px;
+}
+
+.hcGrid.hcPromoItemGrid .hcGridRow td:last-child,
+.hcGrid.hcQualificationsGrid .hcGridRow td:last-child {
+    max-width: 80px;
+}
+
+.logo-image-controls .hcImageBox {
+    width: 250px;
+}
+
+/* ---------- Order Manager ---------- */
+.hcOrderStatus {
+    &.hcForm {
+        width: 320px;
+        float: right;
+        text-align: right;
+
+        select {
+            width: 110px;
+        }
+    }
+
+    .hcLabel {
+        width: 200px;
+    }
+}
+
+.hcTextInfo.hcRecurringInfo {
+    span.hcFormInfo {
+        left: 90px;
+    }
+}
+
+.hcOrderHighlight {
+    .hcBlue, tr.hcBlue td {
+        background-color: #8AA5CE;
+    }
+
+    .hcYellow, tr.hcYellow td {
+        background-color: #FFF958;
+    }
+
+    .hcLime, tr.hcLime td {
+        background-color: #5EFF69;
+    }
+
+    .hcOrange, tr.hcOrange td {
+        background-color: #F19E32;
+    }
+
+    .hcPurple, tr.hcPurple td {
+        background-color: #D377D2;
+    }
+
+    .hcTan, tr.hcTan td {
+        background-color: #C9B193;
+    }
+}
+
+/* ---------- Product Choices ---------- */
+.hcFormOptions {
+    margin: 10px 0;
+
+    label {
+        display: block;
+        width: 150px;
+        float: left;
+        clear: both;
+        text-align: right;
+        font-weight: bold;
+        margin: 0 0 5px 0;
+    }
+
+    .choice {
+        display: block;
+        width: 270px;
+        float: left;
+        margin: 0 0 5px 20px;
+        text-align: left;
+
+		.CreateOrderChoicelabel {
+			font-weight: unset !important;
+			text-align: unset !important;
+		}
+    }
+
+    .product {
+        display: block;
+        width: 420px;
+        float: left;
+        clear: both;
+        margin: 0 0 5px 20px;
+        text-align: left;
+    }
+}
+
+/* Order Fraud Score Display */
+.fraud-low, .fraud-medium, .fraud-high {
+    display: inline-block;
+    line-height: 19px;
+    font-weight: bold;
+    color: #fff;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+
+    .fraud-low b, .fraud-medium b, .fraud-high b {
+        display: inline-block;
+        padding: 3px;
+    }
+
+.fraud-low {
+    background-color: #44991C;
+    color: #fff;
+    border: solid 1px #36C;
+}
+
+.fraud-medium {
+    background-color: #F9F900;
+    color: #3E3E00;
+}
+
+.fraud-high {
+    background-color: #C10000;
+    border-color: #C10000;
+    color: #ff0;
+} 
+/* Order Transaction Styles */
+.controlarea1 {
+  background-color: #e5e5e5;
+  color: #333;
+  border: solid 1px #b4b4b4;
+  padding: 10px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.transactionsuccess {
+  background-color: #efe;
+  color: #030;
+  border-color: #696;
+  border-width: 3px;
+}
+
+.transactionfailed {
+  background-color: #f99;
+  color: #300;
+  border-color: #966;
+  border-width: 3px;
+}
+
+.transactionvoided {
+  background-color: #ccc;
+  color: #999;
+}
+
+/* Order Items */
+.hcItemDiscount {
+    text-decoration: line-through;
+}
+
+/* Create Order */
+.hcPaymentForm {
+    .hcCreditCard {
+        padding-left: 30px;
+    }
+}
+
+/* View Order */
+.hcCouponCodes {
+    padding: 0 0 4px 4px;
+    overflow: hidden;
+    ms-text-overflow: ellipsis;
+    o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.hcInstructions {
+    overflow-wrap: break-word;
+}
+
+.hcError {
+	 color: #f94c2b;
+}
+
+/*  Switch Button CSS */
+
+.switch-button-label {
+    float: left;
+
+    font-size: 10pt;
+    cursor: pointer;
+}
+
+.switch-button-label.off {
+    color: #adadad;
+}
+
+.switch-button-label.on {
+    color: #0088CC;
+}
+
+.switch-button-background {
+    float: left;
+    position: relative;
+
+    background: #ccc;
+    border: 1px solid #aaa;
+
+    margin: 1px 10px;
+
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+
+    cursor: pointer;
+}
+
+.switch-button-button {
+    position: absolute;
+
+    left: -1px;
+    top : -1px;
+
+    background: #FAFAFA;
+    border: 1px solid #aaa;
+
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+
+/* End Switch Button CSS */
+
+/* Product & Category Performance */
+.hcProductPerformance, .hcCategoryPerformance {
+    .hcProductInfo, .hcCategoryInfo {
+        padding: 15px 0 15px;
+
+        .hcLabel {
+            color: @color-orange;
+            font-size: 16px;
+            font-weight: 500;
+            .inline;
+
+            &:not(:first-child) {
+                padding-left: 15px;
+            }
+        }
+
+        a {
+            top: -6px;
+            position: relative;
+        }
+    }
+
+    .hcChartArea {
+        height: 410px;
+
+        .hcLeftChartArea {
+            .hcClearfix;
+            ._hcBoxSizing;
+            width: 80%;
+            height: 100%;
+            float: left;
+            padding: 0 15px 25px 15px;
+            position: relative;
+        }
+
+        .hcSalesFunnel {
+            ._hcBoxSizing;
+            width: 20%;
+            height: 100%;
+            float: left;
+            border-left: solid 1px @color-lightgray;
+        }
+
+        .hcEventsInfo {
+            margin: 0 auto;
+            width: 130px;
+            position: absolute;
+
+            span {
+                display: block;
+                text-align: center;
+                color: @color-white;
+                padding: 3px 7px;
+
+                &:first-child {
+                    border-top-left-radius: 4px;
+                    border-top-right-radius: 4px;
+                }
+
+                &:last-child {
+                    border-bottom-left-radius: 4px;
+                    border-bottom-right-radius: 4px;
+                }
+            }
+        }
+    }
+
+    .hcProductPerformanceChart,
+    .hcCategoryPerformanceChart {
+        width: 100%;
+        height: 99%;
+    }
+
+    .hcChartLegend {
+        float: right;
+        padding: 0 8px 0;
+        color: #232323;
+        font: 12px Arial,Helvetica,sans-serif;
+
+        div {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin: 0 8px 0 8px;
+        }
+
+        .hcEventImage1 {
+            background-color: #73ba0d;
+        }
+
+        .hcEventImage2 {
+            background-color: #ba0d6f;
+        }
+
+        .hcEventImage3 {
+            background-color: #830dba;
+        }
+
+        .hcEventImage4 {
+            background-color: #000000;
+        }
+    }
+
+    .hcProductPurchasedWith {
+        clear: both;
+        .hcClearfix;
+
+        .hcHeader {
+            .hcClearfix;
+            padding: 10px 0;
+
+            > h3 {
+                float: left;
+            }
+
+            > a {
+                float: right;
+            }
+        }
+
+        .hcProductsBlock {
+            .hcClearfix;
+        }
+
+        .hcProductBlock {
+            ._hcBoxSizing;
+            float: left;
+            width: 25%;
+            background: white;
+
+            &:not(:nth-child(4)) {
+                border-right: 7px solid @color-white-dark1;
+            }
+
+            input[type="checkbox"] {
+                float: right;
+            }
+
+            .hcLabel {
+                font-weight: normal;
+                padding-top: 3px;
+            }
+
+            .hcTextValue {
+                font-size: 14px;
+                font-weight: bold;
+            }
+        }
+
+        .hcSection {
+            > div {
+                padding: 10px 40px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            &:not(:first-child) {
+                border-top: solid 1px @color-lightgray;
+            }
+
+            img {
+                height: 169px;
+            }
+
+            .hcAmount {
+                font-size: 14px;
+                font-weight: bold;
+                padding: 5px 0 5px 0;
+            }
+        }
+
+        .hcCreateBundle {
+            top: 12px;
+            position: relative;
+        }
+    }
+
+    .hcPeriodSelector {
+        /*top: -370px;*/
+        left: 15px;
+		margin-top: -390px !important;
+		position: absolute !important;
+    }
+}
+
+.hcChartArea {
+    .hcSalesFunnel {
+        h3, .hcSalesBlock {
+            padding-left: 15px;
+        }
+
+        > div {
+            height: 355px;
+        }
+
+        .hcSalesBlock {
+            ._hcBoxSizing;
+            height: 33.3%;
+
+            &:not(:first-child) {
+                border-top: solid 1px @color-lightgray;
+            }
+        }
+
+        h4 {
+            color: #232323;
+            font-weight: bold;
+        }
+
+        .hcAmount {
+            font-size: 30px;
+            padding: 5px 0 15px 0;
+        }
+    }
+}
+
+.hcProductPerformance,
+.hcCategoryPerformance,
+.hcProductPurchasedWith,
+.hcDashboard {
+    .hcAmount {
+        display: block;
+    }
+
+    .hcTrendNoChange {
+        width: 12px;
+        height: 8px;
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    .hcGrowingTrend {
+        width: 12px;
+        height: 8px;
+        display: inline-block;
+        background: url(Images/admin_misc_sprite.png) -200px -160px no-repeat;
+        margin-right: 5px;
+    }
+
+    .hcDroppingTrend {
+        width: 12px;
+        height: 8px;
+        display: inline-block;
+        background: url(Images/admin_misc_sprite.png) -240px -160px no-repeat;
+        margin-right: 5px;
+    }
+
+    .hcPercentageChange {
+        padding: 0 5px;
+    }
+
+    .hcReverseTrend {
+        .hcGrowingTrend {
+            .transform-rotate-mixin(180deg);
+            background: url(Images/admin_misc_sprite.png) -240px -160px no-repeat;
+        }
+
+        .hcDroppingTrend {
+            .transform-rotate-mixin(180deg);
+            background: url(Images/admin_misc_sprite.png) -200px -160px no-repeat;
+        }
+    }
+}
+
+/* Zone */
+.hcAddZone {
+    width: 50%;
+}
+/* Set Up Wizard */
+.hcWizGeneral {
+    .hcFormItem {
+        &.hcFormItem50p {
+            .riTextBox.riEnabled.hcInput33p {
+                height: 30px !important;
+                padding-top: 10px !important;
+            }
+        }
+    }
+}
+
+/* ------------- Volume Discount ------------- */
+.hcVolumeDiscountForm {
+    width: 625px;
+
+    .hcFormItem {
+        clear: none;
+        .left;
+        width: 38%;
+
+        &.hcButtonWrapper {
+            padding-top: 64px;
+            width: 150px;
+        }
+    }
+}
+
+.hcChoiceVariants {
+    .hcFormItem {
+        >select {
+            margin-right: 15px;
+        }
+    }
+}
+
+.hcPaymentTransaction {
+    width: 1020px;
+}
+
+.hcUserPrice > label {
+    float: none !important;
+}
+
+.hcPromotionsStartDate,
+.hcPromotionsEndDate {
+    padding: 9px 0px 0px !important;
+}
+
+.hcPromotionProductTypePopup {
+    width: 700px !important;
+}
+
+.hcGiftCardAmount {
+    width: 134px !important;
+	padding-top: 7px !important;
+}
+
+.hcOrderViewNotes {
+    width: 100% !important;
+}
+
+.hcProductEditChoice {
+    label {
+        input[type="radio"], input[type="checkbox"] {
+            float: none !important;
+            display: unset !important;
+            vertical-align: middle;
+        }
+    }
+}
+.hcGiftCardExpirationDateAlign {
+	padding-top: 8px;
+	
+}
+
+.hcCategoryManualSelection {
+	table-layout: fixed;
+
+	td{
+		overflow: hidden;
+		word-wrap:break-word;
+	}
+}
+
+.hcMembershipExpirationDate {
+	padding-top: 11px;
+}
+
+.hcProductReviewTable {
+	table-layout: fixed;
+	width: 100% !important;
+
+	td > span,
+	div > span ,
+	td{
+		overflow: hidden;
+		word-wrap: break-word;
+	}
+}
+
+.hcDatePickerNavigation {
+	margin-top: 4px !important;
+}
+
+.hcEmail {
+	width: 350px;
+}
+
+.hcDropdownAlign {
+	margin-top: 7px
+}
+
+.hcFileVaultHelp {
+	margin-right: 150px;
+}
+
+.hcSelectionArea {
+	background-color: #e5e5e5;
+    margin-left: 25px;
+    margin-right: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+    .hcSelectionArea .hcActions {
+        margin-bottom: 1em;
+    }
+
+.hcAlignRight {
+	float: right !important;
+}
+
+.hcFloatForIE {
+	float: none !important;
+
+	label {
+		float: none !important;
+		display:inline-flex !important;
+		display:-webkit-inline-flex !important;
+		display:-ms-inline-flexbox !important;
+	}
+}

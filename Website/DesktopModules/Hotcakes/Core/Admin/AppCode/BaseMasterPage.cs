@@ -71,19 +71,35 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
 
             var versionofDNN = typeof (DotNetNukeContext).Assembly.GetName().Version;
 
+
+
+
             if (versionofDNN >= new Version("8.0"))
             {
-                RegisterCssInclude(FileOrder.Css.DefaultCss, "~/DesktopModules/Hotcakes/Core/Admin/default.css");
+                if (!System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft)
+                    RegisterCssInclude(FileOrder.Css.DefaultCss, "~/DesktopModules/Hotcakes/Core/Admin/default.css");
+                else
+                    RegisterCssInclude(FileOrder.Css.DefaultCss, "~/DesktopModules/Hotcakes/Core/Admin/default.rtl.css");
             }
             else
             {
-                RegisterCssInclude(FileOrder.Css.DefaultCss, "~/Portals/_default/default.css");
+                if (!System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft)
+                    RegisterCssInclude(FileOrder.Css.DefaultCss, "~/Portals/_default/default.css");
+                else
+                    RegisterCssInclude(FileOrder.Css.DefaultCss, "~/Portals/_default/default.rtl.css");
             }
-            RegisterCssInclude(FileOrder.Css.DefaultPriority, "~/DesktopModules/Hotcakes/Core/Admin/admin.css");
+            if (!System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft)
+                RegisterCssInclude(FileOrder.Css.DefaultPriority, "~/DesktopModules/Hotcakes/Core/Admin/admin.css");
+            else
+                RegisterCssInclude(FileOrder.Css.DefaultPriority, "~/DesktopModules/Hotcakes/Core/Admin/admin.rtl.css");
             if (!HideAdminControlBar)
             {
-                RegisterCssInclude(FileOrder.Css.DefaultPriority,
+                if (!System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft)
+                    RegisterCssInclude(FileOrder.Css.DefaultPriority,
                     "~/DesktopModules/Hotcakes/ControlPanel/ControlBar.css");
+                else
+                    RegisterCssInclude(FileOrder.Css.DefaultPriority,
+                   "~/DesktopModules/Hotcakes/ControlPanel/ControlBar.rtl.css");
             }
 
             RegisterJsInclude(FileOrder.Js.jQuery, "~/Resources/Shared/Scripts/jquery/jquery.min.js");

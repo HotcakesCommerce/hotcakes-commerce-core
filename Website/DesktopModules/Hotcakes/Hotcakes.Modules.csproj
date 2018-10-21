@@ -30,6 +30,7 @@
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -188,6 +189,8 @@
     <Content Include="ControlPanel\ControlBar.css">
       <DependentUpon>ControlBar.less</DependentUpon>
     </Content>
+    <Content Include="ControlPanel\ControlBar.rtl.css" />
+    <None Include="ControlPanel\ControlBar.rtl.less" />
     <Content Include="ControlPanel\controlbarimages\admin_logo.png" />
     <Content Include="ControlPanel\controlbarimages\admin_menu_icons.png" />
     <Content Include="ControlPanel\controlbarimages\AdvancedSettings.png" />
@@ -224,6 +227,7 @@
     <Content Include="Core\Admin\admin.min.css">
       <DependentUpon>admin.css</DependentUpon>
     </Content>
+    <Content Include="Core\Admin\admin.rtl.css" />
     <Content Include="Core\Admin\Catalog\BundledProducts.aspx" />
     <Content Include="Core\Admin\Catalog\Categories_Roles.aspx" />
     <Content Include="Core\Admin\Catalog\Categories_Performance.aspx" />
@@ -4011,6 +4015,7 @@
     <Content Include="Providers\DataProviders\SqlDataProvider\01.09.01.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\02.00.01.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\03.00.00.SqlDataProvider" />
+    <Content Include="Core\Admin\admin.rtl.less" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
