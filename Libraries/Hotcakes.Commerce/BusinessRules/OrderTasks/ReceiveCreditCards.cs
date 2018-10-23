@@ -112,6 +112,7 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 				t.Card = p.CreditCard;
 				t.Card.SecurityCode = context.Inputs.GetProperty("hcc", "CardSecurityCode");
 				t.Amount = p.Amount;
+                t.Items = GetLineItemsForTransaction(context, p.OrderNumber);
 
 				if (context.HccApp.CurrentStore.Settings.PaymentCreditCardAuthorizeOnly)
 				{
@@ -155,7 +156,33 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 			return result;
 		}
 
-		public override bool Rollback(OrderTaskContext context)
+        private List<TransactionItem> GetLineItemsForTransaction(OrderTaskContext context, string orderNumber)
+        {
+            var repo = new OrderRepository(context.HccApp.CurrentRequestContext);
+            var order = repo.FindByOrderNumber(orderNumber);
+
+            if (order != null && order.OrderNumber == orderNumber)
+            {
+                var items = new List<TransactionItem>();
+
+                foreach (var item in order.Items)
+                {
+                    items.Add(new TransactionItem
+                    {
+                        Sku = item.ProductSku,
+                        LineTotal = item.LineTotal,
+                        Description = item.ProductShortDescription,
+                        IsNonShipping = item.IsNonShipping
+                    });
+                }
+
+                return items;
+            }
+
+            return null;
+        }
+
+        public override bool Rollback(OrderTaskContext context)
 		{
 			return true;
 		}

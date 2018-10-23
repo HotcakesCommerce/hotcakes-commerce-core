@@ -144,7 +144,7 @@ namespace Hotcakes.Payment.Gateways
 			parameters.Add("x_Phone", t.Customer.Phone);
 
 			// only add the shipping attributes if there is at least one shippable line item
-			if (t.Items.Any(li => !li.IsNonShipping))
+			if (t.Items != null && t.Items.Any(li => !li.IsNonShipping))
 			{
 				parameters.Add("x_Ship_To_First_Name", t.Customer.ShipFirstName);
 				parameters.Add("x_Ship_To_Last_Name", t.Customer.ShipLastName);
