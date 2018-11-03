@@ -34,15 +34,15 @@
 	<Item Text="Orders" BaseUrl="orders/" Url="" Permission="D9900036-0794-4aa5-B662-28E99A23E9B1">
 		<Item Text="Order Manager" Url="orders/default.aspx?p=1&amp;mode=0"/>
 		<Item Text="&lt;hr/&gt;" Url="orders/default.aspx?p=1&amp;mode=0" HiddenInDnnMenu="True"/>
-		<Item Text=" + Add Order" Url="orders/createorder.aspx"/>
+		<Item Text="Add Order" Url="orders/createorder.aspx"/>
 		<Item Text="&lt;hr/&gt;" Url="orders/default.aspx?p=1&amp;mode=0" HiddenInDnnMenu="True"/>
-		<Item Text="  New" Url="orders/default.aspx?p=1&amp;mode=1"/>
-		<Item Text="  On Hold" Url="orders/default.aspx?p=1&amp;mode=5"/>
-		<Item Text="  Ready for Payment" Url="orders/default.aspx?p=1&amp;mode=2"/>
-		<Item Text="  Ready for Shipping" Url="orders/default.aspx?p=1&amp;mode=3"/>
-		<Item Text="  Completed" Url="orders/default.aspx?p=1&amp;mode=4"/>
-		<Item Text="  Cancelled" Url="orders/default.aspx?p=1&amp;mode=6"/>
-		<Item Text="  All Orders" Url="orders/default.aspx?p=1&amp;mode=0"/>
+		<Item Text="New" Url="orders/default.aspx?p=1&amp;mode=1"/>
+		<Item Text="On Hold" Url="orders/default.aspx?p=1&amp;mode=5"/>
+		<Item Text="Ready for Payment" Url="orders/default.aspx?p=1&amp;mode=2"/>
+		<Item Text="Ready for Shipping" Url="orders/default.aspx?p=1&amp;mode=3"/>
+		<Item Text="Completed" Url="orders/default.aspx?p=1&amp;mode=4"/>
+		<Item Text="Cancelled" Url="orders/default.aspx?p=1&amp;mode=6"/>
+		<Item Text="All Orders" Url="orders/default.aspx?p=1&amp;mode=0"/>
 	</Item>
 	<Item Text="Reports" BaseUrl="reports/" Url="" Permission="C2B41076-A952-49ff-B2E2-DE62EFC2B554">
     <Item Text="Summary Report" Url="reports/Summary Report/view.aspx"/>
