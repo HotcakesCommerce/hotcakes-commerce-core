@@ -104,7 +104,23 @@ namespace Hotcakes.Payment.Gateways
 		private NameValueCollection BuildRequestData(Transaction t)
 		{
             var parameters = new NameValueCollection();
-			parameters.Add("x_version", "3.1");
+
+            /*
+             * Added to get support from Authorize.net
+             * https://developer.authorize.net/api/solution_id/
+             */
+            if (Settings.DeveloperMode)
+            {
+                //parameters.Add("x_solution_id", "AAA100302"); // sandbox
+                parameters.Add("x_solution_id", "AAA100303"); // sandbox
+                //parameters.Add("x_solution_id", "AAA100304"); // sandbox
+            }
+            else
+            {
+                parameters.Add("x_solution_id", "AAA175312"); // production
+            }
+
+            parameters.Add("x_version", "3.1");
 			parameters.Add("x_login", Settings.MerchantLoginId);
 			parameters.Add("x_tran_key", Settings.TransactionKey);
 			parameters.Add("x_Amount", t.Amount.ToString(CultureInfo.InvariantCulture));
