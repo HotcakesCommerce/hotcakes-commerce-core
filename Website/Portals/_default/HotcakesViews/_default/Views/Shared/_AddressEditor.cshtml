@@ -10,6 +10,7 @@
         @Html.DropDownListFor(model => model.CountryBvin,
             new SelectList(Model.Countries, "Bvin", "DisplayName", Model.CountryBvin),
             new { data_bind = "value: CountryBvin" })
+		@Html.ValidationMessageFor(model => model.CountryBvin, "", new { @class = "dnnFormMessage hcFormError" })
     </div>
     <div class="dnnFormItem dnnFormRequired">
         <label class="dnnLabel">
