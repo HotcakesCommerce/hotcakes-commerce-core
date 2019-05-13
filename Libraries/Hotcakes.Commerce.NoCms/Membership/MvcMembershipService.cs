@@ -309,5 +309,10 @@ namespace Hotcakes.Commerce.NoCms.Membership
         {
             throw new NotImplementedException();
         }
+
+        public override void AssignMembershipRole(string userId, MembershipProductType membershipType, TimeSpan timeSpan, bool notifyUser)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
