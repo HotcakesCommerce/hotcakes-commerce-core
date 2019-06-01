@@ -3,7 +3,7 @@
   <tab>
     <issecure>true</issecure>
     <visible>false</visible>
-		<skinsrc>[G]Skins/Gravity/2-Col.ascx</skinsrc>
+		<skinsrc>[G]Skins/Xcillion/Home.ascx</skinsrc>
 		<name>Checkout</name>
     <tabpermissions>
       <permission>

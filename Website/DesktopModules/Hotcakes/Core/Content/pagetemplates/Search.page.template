@@ -3,7 +3,7 @@
 	<tab>
 		<visible>true</visible>
 		<name>Search Results</name>
-		<skinsrc>[G]Skins/Gravity/2-Col.ascx</skinsrc>
+		<skinsrc>[G]Skins/Xcillion/Home.ascx</skinsrc>
 		<tabpermissions>
 			<permission>
 				<permissioncode>SYSTEM_TAB</permissioncode>
