@@ -185,17 +185,7 @@ namespace Hotcakes.Commerce.Dnn
             DnnCustomerAccountRepository.UpdateUserSettings(userId, settings, getCached);
         }
 
-        public override void AssignMembershipRole(string userId, MembershipProductType membershipType, TimeSpan timeSpan)
-        {
-            AddMembershipRole(userId, membershipType, timeSpan, false);
-        }
-
-        public override void AssignMembershipRole(string userId, MembershipProductType membershipType, TimeSpan timeSpan, bool notifyUser)
-        {
-            AddMembershipRole(userId, membershipType, timeSpan, notifyUser);
-        }
-
-        private void AddMembershipRole(string userId, MembershipProductType membershipType, TimeSpan timeSpan, bool notifyUser)
+        private void AddMembershipRole(string userId, MembershipProductType membershipType, TimeSpan timeSpan)
         {
             var portalId = PortalSettings.Current.PortalId;
             var userInfo = UserController.GetUserById(portalId, Convert.ToInt32(userId));
@@ -221,7 +211,7 @@ namespace Hotcakes.Commerce.Dnn
                 RoleStatus.Approved,
                 DateTime.Now, // effective date
                 DateTime.Now + lastExpirationTime + timeSpan, // expiration date
-                notifyUser, // notify user
+                membershipType.Notify, // notify user
                 false); // is owner
         }
     }

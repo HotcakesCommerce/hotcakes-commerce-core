@@ -33,6 +33,10 @@
         </Items>
     </telerik:RadComboBox>
 </div>
+<div class="hcFormItem">
+	<asp:Label ID="lblNotify" resourcekey="lblNotify" Text="Notify Customers?" AssociatedControlID="chkNotify" runat="server" CssClass="hcLabel" />
+	<asp:CheckBox ID="chkNotify" runat="server"></asp:CheckBox>
+</div>
 <ul class="hcActions">
     <li>
         <asp:LinkButton ID="btnAdd" Text="Create" CssClass="hcPrimaryAction" runat="server" />
@@ -41,4 +45,3 @@
         <asp:LinkButton ID="btnCancel" Text="Cancel" CssClass="hcSecondaryAction" runat="server" />
     </li>
 </ul>
-
