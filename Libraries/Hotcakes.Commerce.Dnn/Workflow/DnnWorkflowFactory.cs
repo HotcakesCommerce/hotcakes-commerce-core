@@ -37,6 +37,9 @@ namespace Hotcakes.Commerce.Dnn.Workflow
             return new Task[]
             {
                 new UpdateOrder(),
+#pragma warning disable 0612, 0618
+                new AvalaraCommitTaxes(),
+#pragma warning restore 0612, 0618
                 new TaxProviderCommitTaxes(),
                 new UpdateOrder(),
                 new EmailVATInvoice(),
