@@ -30,6 +30,7 @@
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -4011,6 +4012,7 @@
     <Content Include="Providers\DataProviders\SqlDataProvider\01.09.01.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\02.00.01.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\03.00.00.SqlDataProvider" />
+    <Content Include="Providers\DataProviders\SqlDataProvider\03.02.02.SqlDataProvider" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -4339,6 +4341,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\Admin\Parts\Shipping\UPS Freight\App_LocalResources\Edit.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\MembershipTypeEdit.ascx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

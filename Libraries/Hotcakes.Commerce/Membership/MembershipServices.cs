@@ -164,5 +164,6 @@ namespace Hotcakes.Commerce.Membership
         }
 
         public abstract void AssignMembershipRole(string userId, MembershipProductType membershipType, TimeSpan timeSpan);
+
     }
 }

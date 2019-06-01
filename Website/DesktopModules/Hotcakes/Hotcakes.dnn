@@ -190,6 +190,11 @@
               <name>03.00.00.SqlDataProvider</name>
               <version>03.00.00</version>
             </script>
+            <script type="Install">
+              <path>Providers\DataProviders\SqlDataProvider</path>
+              <name>03.02.02.SqlDataProvider</name>
+              <version>03.02.02</version>
+            </script>
             <script type="UnInstall">
               <path>Providers\DataProviders\SqlDataProvider</path>
               <name>Uninstall.SqlDataProvider</name>

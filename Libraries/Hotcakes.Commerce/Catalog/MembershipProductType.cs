@@ -36,6 +36,7 @@ namespace Hotcakes.Commerce.Catalog
         public string RoleName { get; set; }
         public int ExpirationPeriod { get; set; }
         public ExpirationPeriodType ExpirationPeriodType { get; set; }
+        public bool Notify { get; set; }
 
         public TimeSpan GetTimeSpan(DateTime startDate, int quantity)
         {
@@ -61,6 +62,7 @@ namespace Hotcakes.Commerce.Catalog
         public string RoleName { get; set; }
         public int ExpirationPeriod { get; set; }
         public ExpirationPeriodType ExpirationPeriodType { get; set; }
+        public bool Notify { get; set; }
 
         public MembershipProductType Convert()
         {
@@ -71,7 +73,8 @@ namespace Hotcakes.Commerce.Catalog
                 ProductTypeName = ProductTypeName,
                 RoleName = RoleName,
                 ExpirationPeriod = ExpirationPeriod,
-                ExpirationPeriodType = ExpirationPeriodType
+                ExpirationPeriodType = ExpirationPeriodType,
+                Notify = Notify
             };
         }
     }
