@@ -62,10 +62,23 @@ namespace Hotcakes.Commerce.Dnn.Workflow
                 new UpdateOrder(),
                 new DnnMakePlacedOrder(),
                 new WorkflowNote("Finished Process Order Workflow"),
-                new UpdateOrder(),
+                new UpdateOrder()
+            };
+        }
 
-                // Added to handle "membership" products
-                new MembershipTask()
+        protected override Task[] LoadProcessNewOrderAfterPaymentsTasks()
+        {
+            return new Task[]
+            {
+                new WorkflowNote("Starting Order After Payment Workflow"),
+                new UpdateOrder(),
+                new LocalFraudCheck(),
+                new MarkCompletedWhenShippedAndPaid(),
+                new EmailOrder("Customer"),
+                new EmailOrder("Admin"),
+                new MembershipTask(),
+                new WorkflowNote("Finished Order After Payment Workflow"),
+                new UpdateOrder()
             };
         }
     }
