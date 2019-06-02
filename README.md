@@ -27,6 +27,7 @@ Quick Links
 * [Hotcakes on Facebook](http://www.facebook.com/HotcakesCommerce)
 * [Community](https://hotcakes.org/Community)
 * [Resources](https://hotcakes.org/Resources)
+* [Support](https://upendoventures.com/Support)
 
 How to Contribute
 -----------------
