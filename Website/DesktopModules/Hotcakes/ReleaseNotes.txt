@@ -4,7 +4,7 @@
 <ul>
 	<li><strong>Choose to Notify Membership Subscribers</strong> - SI: You are now able to choose whether new customers receive the DNN role assignment e-mail for membership product types (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/184" target="_blank">Issue </a>)</li>
 	<li><strong>Updated E-Mail Address Validation</strong> - CI: E-mail address validation now supports newer top-level domain names (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/63" target="_blank">Issue 63</a>)</li>
-	<li><strong>DNN 9.xx compatibility - Raised minimum install version of DNN to 09.01.01</strong>
+	<li><strong>DNN 9.xx compatibility updates (more coming in the 03.03.00 release)</strong>
 		<ul>
 			<li><strong>Replaced Gravity Theme References</strong> - (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/185" target="_blank">Issue 185</a>)</li>
 			<li><strong>Drilldown View DNN 9+ JS Error Resolved</strong> - (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/169" target="_blank">Issue 169</a>)</li>
