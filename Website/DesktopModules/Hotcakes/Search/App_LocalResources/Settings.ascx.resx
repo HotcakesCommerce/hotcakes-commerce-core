@@ -130,10 +130,10 @@
     <value>Select the view to display the search's contents</value>
   </data>
   <data name="ShowManufactures.Help" xml:space="preserve">
-    <value>Shows Manufactures facet</value>
+    <value>Shows Manufacturers facet</value>
   </data>
   <data name="ShowManufactures.Text" xml:space="preserve">
-    <value>Show Manufactures</value>
+    <value>Show Manufacturers</value>
   </data>
   <data name="ShowVendors.Help" xml:space="preserve">
     <value>Shows Vendors facet</value>
