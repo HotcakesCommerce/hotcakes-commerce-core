@@ -1034,7 +1034,8 @@ namespace Hotcakes.Commerce.Orders
 
         public bool PayPalExpressHold(OrderTransaction infoTransaction, decimal amount)
         {
-            if (infoTransaction == null) return false;
+            var txnSuccess = false;
+            if (infoTransaction == null) return txnSuccess;
 
             var t = CreateEmptyTransaction();
             t.Card = infoTransaction.CreditCard;
@@ -1053,12 +1054,14 @@ namespace Hotcakes.Commerce.Orders
             var processor = new PaypalExpress();
             if (processor != null)
             {
-                processor.Authorize(t, _app);
+                var paymentAuthorized = processor.Authorize(t, _app);
                 ot = new OrderTransaction(t);
+                ot.Success = ot.Success && paymentAuthorized;
                 ot.LinkedToTransaction = infoTransaction.IdAsString;
             }
 
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            txnSuccess = ot.Success && svc.AddPaymentTransactionToOrder(o, ot);
+            return txnSuccess;
         }
 
         public bool PayPalExpressCapture(string holdTransactionId, decimal amount)
