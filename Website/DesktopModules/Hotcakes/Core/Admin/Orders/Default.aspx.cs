@@ -182,9 +182,16 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 			{
                 criteria.ShippingStatus = (OrderShippingStatus) int.Parse(lstShippingStatus.SelectedValue);
 			}
-			criteria.StartDateUtc = DateRangePicker1.StartDate.ToUniversalTime();
+		    if (chkFilterIsOrderNum.Checked)
+		    {
+                criteria.OrderNumber = FilterField.Text.Trim();
+            }
+		    else
+		    {
+		        criteria.Keyword = FilterField.Text.Trim();
+            }
+            criteria.StartDateUtc = DateRangePicker1.StartDate.ToUniversalTime();
 			criteria.EndDateUtc = DateRangePicker1.EndDate.ToUniversalTime();
-			criteria.Keyword = FilterField.Text.Trim();
 			criteria.SortDescending = chkNewestFirst.Checked;
 			criteria.IsIncludeCanceledOrder = true;
 			criteria.IncludeUnplaced = false;

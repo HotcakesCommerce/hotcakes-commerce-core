@@ -2166,6 +2166,16 @@ body > form {
   height: 53px;
   position: relative;
 }
+.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem.hcUnderCheck {
+    top: -15px;
+    padding-bottom: 15px;
+}
+.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem.hcUnderCheck input {
+    width: inherit;
+}
+.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem.hcUnderCheck label {
+    display: contents;
+}
 .hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem.hcGo .hcFieldOuter input {
   position: absolute;
   color: #ffffff;

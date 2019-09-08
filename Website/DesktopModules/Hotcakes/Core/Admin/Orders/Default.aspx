@@ -68,6 +68,9 @@
                     <asp:TextBox ID="FilterField" runat="server" />
                     <asp:LinkButton ID="btnGo" runat="server" Text="Filter Results" CssClass="hcIconRight" OnClick="btnGo_Click" />
                 </div>
+                <div class="hcFormItem hcUnderCheck">
+                    <asp:CheckBox ID="chkFilterIsOrderNum" runat="server" Checked="True" Text="Search criteria is an Order # (fast lookup)" AutoPostBack="False" />
+                </div>
             </div>
             <div class="hcFormItem">
                 <asp:DropDownList ID="lstStatus" runat="server" OnSelectedIndexChanged="lstStatus_SelectedIndexChanged" AutoPostBack="True">
