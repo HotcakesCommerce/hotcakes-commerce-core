@@ -182,10 +182,10 @@ namespace Hotcakes.Commerce.Dnn.Web
                 var analyticsScript = string.Empty;
                 if (HccApp.CurrentStore.Settings.Analytics.UseGoogleEcommerce)
                 {
-                    analyticsScript = " ga('require', 'ecommerce'); ";
+                    analyticsScript = "try { ga('require', 'ecommerce'); }\n catch(err) {}";
                 }
 
-                var scriptResource = string.Format(" {1} var hcc = hcc || {{}}; hcc.l10n = {0};", json, analyticsScript);
+                var scriptResource = string.Format(" {1}\n var hcc = hcc || {{}};\n hcc.l10n = {0};\n", json, analyticsScript);
                 ScriptManager.RegisterClientScriptBlock(this, typeof (HotcakesModuleBase), "ScriptResources",
                     scriptResource, true);
 
