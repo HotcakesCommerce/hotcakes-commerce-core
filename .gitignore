@@ -43,7 +43,6 @@
 *.dotCover
 *.ldf
 MSBuildLog.txt
-_[Bb]uild/
 
 # git merge artifacts
 *.orig
@@ -83,7 +82,7 @@ UpgradeLog*.XML
 
 # Ignore artifacts from deployed/installed site
 
-_[Ii]nstall/
+_[Ii]nstall
 
 *.zip.manifest
 
@@ -103,11 +102,14 @@ Thumbs.db
 # Folder config file
 Desktop.ini
 
+[Ww]ebsite/[Aa]pp_[Cc]ode
+[Ww]ebsite/[Aa]pp_[Dd]ata
+![Ww]ebsite/[Aa]pp_[Dd]ata/[Pp]lace[Hh]older.txt
 [Ww]ebsite/[Aa]pp_[Dd]ata
 [Ww]ebsite/[Bb]in
 [Ww]ebsite/[Bb]in/[Hh]otcakes.*
 [Ww]ebsite/[Dd]esktop[Mm]odules/[Hh]otcakes/[Bb]in
-[Ww]ebsite/[Ii]nstall/[Tt]emp/
+[Ww]bsite/[Ii]nstall/[Tt]emp/
 [Ww]ebsite/[Ii]nstall/*/*.zip
 [Ww]ebsite/[Ii]nstall/*/*.resources
 [Ww]ebsite/[Ii]nstall/[Cc]leanup
@@ -122,3 +124,10 @@ Desktop.ini
 [Ww]ebsite/[Pp]ortals/_default/[Ss]kins/[Xx]cillion/
 [Ww]ebsite/[Pp]ortals/_default/[Cc]ontainers/[Xx]cillion/
 [Ww]ebsite/[Pp]ortals/**/Cache
+/Website/DesktopModules/Hotcakes/Hotcakes.Modules.csproj.bak
+/Website/web.config.bak
+/Website/Hotcakes.Views.csproj.bak
+/Website/DesktopModules/Hotcakes/Core/Controllers/CartController.cs.bak
+/Website/DesktopModules/Hotcakes/MiniCart/MiniCartView.ascx.cs.bak
+/Website/Portals/_default/HotcakesViews/_default/Scripts/App_LocalResources/ScriptResources.resx.bak
+/Website/Portals/_default/HotcakesViews/_default/Views/Cart/MiniCart.cshtml.bak

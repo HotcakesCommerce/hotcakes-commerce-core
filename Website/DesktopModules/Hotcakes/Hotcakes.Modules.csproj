@@ -2840,6 +2840,7 @@
       <DependentUpon>StoreNotFound.ascx</DependentUpon>
     </Compile>
     <Compile Include="Core\Models\PinterestViewModel.cs" />
+	<Compile Include="Core\Models\MiniCartViewModel.cs" />
     <Compile Include="Core\Performance.ashx.cs">
       <DependentUpon>Performance.ashx</DependentUpon>
     </Compile>
