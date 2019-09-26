@@ -40,7 +40,6 @@
 
   <Target Name="Build">
     <CallTarget Targets="CopyDevSamples" />
-    <CallTarget Targets="RemoveTFSBindings" />
     <CallTarget Targets="Compile" />
     <CallTarget Targets="Clean" />
     <CallTarget Targets="Package" />
@@ -60,33 +59,13 @@
       <DevSamples Remove="**\*.user" />
       <DevSamples Remove="**\*.user" />
       <DevSamples Remove="**\*.vspscc" />
+      <DevSamples Remove="**\*.bak" />
     </ItemGroup>
 
     <Attrib Files="@(DevSamples)" ReadOnly="false" />
 
     <RemoveDir Directories="$(DevSamplesBuildFolder)" />
     <Copy SourceFiles="@(DevSamples)" DestinationFolder="$(DevSamplesBuildFolder)\%(RecursiveDir)" />
-  </Target>
-
-  <Target Name="RemoveTFSBindings">
-    <ItemGroup>
-      <SolutionFiles Include="$(DevSamplesBuildFolder)\*.sln" />
-    </ItemGroup>
-    <FileUpdate
-      Files="@(SolutionFiles)"
-      IgnoreCase="true"
-      Regex="^\s+GlobalSection\(TeamFoundationVersionControl\).+\n(\s*Scc.*\n)+\s+EndGlobalSection"
-      ReplacementText=" "
-      Multiline="true"
-      Singleline="false" />
-    
-    <ItemGroup>
-      <ProjectFiles Include="$(DevSamplesBuildFolder)\**\*.*proj" />
-    </ItemGroup>
-    <FileUpdate
-      Files="@(ProjectFiles)"
-      Regex="&lt;Scc[A-z]+&gt;.+&lt;/Scc[A-z]+&gt;"
-      ReplacementText=" " />
   </Target>
 
   <Target Name="Package">

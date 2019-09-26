@@ -33,12 +33,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Hotcakes.Commerce, Version=1.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Hotcakes.Commerce">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\Hotcakes.Commerce.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Hotcakes.Modules, Version=1.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Hotcakes.Modules">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\Hotcakes.Modules.dll</HintPath>
       <Private>False</Private>
