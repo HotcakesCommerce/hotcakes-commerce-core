@@ -46,18 +46,18 @@
   <ItemGroup>
     <Reference Include="Hotcakes.Commerce">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\Hotcakes.Commerce.dll</HintPath>
+      <HintPath>..\References\Hotcakes.Commerce.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Hotcakes.Modules">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\Hotcakes.Modules.dll</HintPath>
+      <HintPath>..\References\Hotcakes.Modules.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\References\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -71,7 +71,7 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mvc">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\References\System.Web.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Web" />
