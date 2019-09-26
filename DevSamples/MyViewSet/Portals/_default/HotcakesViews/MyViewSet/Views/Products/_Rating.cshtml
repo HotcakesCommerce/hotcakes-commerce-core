@@ -3,7 +3,7 @@
 <div class="hc-product-rating">
     @if (Model.AllowReviews)
     {
-		<div class="hc-rating hc-stars@(ViewBag.Avg)"></div>
+        <div class="hc-rating hc-stars@(ViewBag.Avg)"></div>
         <text>-</text>
         <a href="#reviews">@Localization.GetString("Reviews")<span>(@Model.LocalProduct.ReviewsApproved.Count)</span></a>
     }

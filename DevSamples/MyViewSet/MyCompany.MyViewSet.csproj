@@ -677,32 +677,11 @@
     <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\OgoneCheckout\App_LocalResources\Index.cshtml.uk-UA.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\Index.cshtml" />
-    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\_CreditCardForm.cshtml" />
-    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\_PaymentMethods.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\App_LocalResources\Index.cshtml.resx" />
-    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\App_LocalResources\_CreditCardForm.cshtml.resx" />
-    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\App_LocalResources\_PaymentMethods.cshtml.resx" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_Pinterest.cshtml.resx" />
     <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_ViewOrderSubscriptions.cshtml.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_Pinterest.cshtml" />
-    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_ViewOrderSubscriptions.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\Index.cshtml" />
-    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\_CreditCardForm.cshtml" />
-    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\_PaymentMethods.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\App_LocalResources\Index.cshtml.resx" />
-    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\App_LocalResources\_CreditCardForm.cshtml.resx" />
-    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\App_LocalResources\_PaymentMethods.cshtml.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_Pinterest.cshtml.resx" />
