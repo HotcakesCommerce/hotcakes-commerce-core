@@ -80,7 +80,7 @@ namespace MyCompany.MyPaymentMethod
             HccApp.OrderServices.Orders.Update(model.CurrentOrder);
 
             // Save as Order
-            var c = new OrderTaskContext(HccApp)
+            var c = new OrderTaskContext
             {
                 UserId = HccApp.CurrentCustomerId,
                 Order = model.CurrentOrder
@@ -137,7 +137,7 @@ namespace MyCompany.MyPaymentMethod
                 RefNum2 = string.Empty
             };
 
-            HccApp.OrderServices.AddPaymentTransactionToOrder(model.CurrentOrder, orderTransaction, HccApp);
+            HccApp.OrderServices.AddPaymentTransactionToOrder(model.CurrentOrder, orderTransaction);
         }
     }
 }
