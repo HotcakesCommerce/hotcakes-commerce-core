@@ -78,8 +78,9 @@ namespace Hotcakes.Commerce.Dnn.Workflow
                 context.HccApp.MembershipServices.AssignMembershipRole(
                     context.Order.UserID,
                     membershipType,
-                    membershipType.GetTimeSpan(now, quantity)
-                   );
+                    membershipType.GetTimeSpan(now, quantity), 
+                    membershipType.Notify
+                    );
             }
         }
 

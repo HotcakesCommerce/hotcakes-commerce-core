@@ -514,6 +514,7 @@ namespace Hotcakes.Commerce.Orders
             t.Amount = EnsurePositiveAmount(amount);
             t.PreviousTransactionNumber = holdTransaction.RefNum1;
             t.PreviousTransactionAuthCode = holdTransaction.RefNum2;
+            t.Items = GetLineItemsForTransaction(holdTransaction.OrderNumber);
             var ot = new OrderTransaction(t);
 
             if (holdTransaction.Action != ActionType.CreditCardHold)
@@ -549,6 +550,7 @@ namespace Hotcakes.Commerce.Orders
             t.Card.SecurityCode = securityCode;
             t.Action = ActionType.CreditCardCharge;
             t.Amount = EnsurePositiveAmount(amount);
+            t.Items = GetLineItemsForTransaction(infoTransaction.OrderNumber);
             var ot = new OrderTransaction(t);
 
             if (infoTransaction.Action != ActionType.CreditCardInfo)
@@ -588,6 +590,7 @@ namespace Hotcakes.Commerce.Orders
             t.Amount = EnsurePositiveAmount(amount);
             t.PreviousTransactionNumber = previousTransaction.RefNum1;
             t.PreviousTransactionAuthCode = previousTransaction.RefNum2;
+            t.Items = GetLineItemsForTransaction(previousTransaction.OrderNumber);
             var ot = new OrderTransaction(t) {RMABvin = rmaBvin};
 
             if (previousTransaction.Action != ActionType.CreditCardCapture
@@ -630,6 +633,7 @@ namespace Hotcakes.Commerce.Orders
             t.Amount = EnsurePositiveAmount(amount);
             t.PreviousTransactionNumber = previousTransaction.RefNum1;
             t.PreviousTransactionAuthCode = previousTransaction.RefNum2;
+            t.Items = GetLineItemsForTransaction(previousTransaction.OrderNumber);
             var ot = new OrderTransaction(t);
 
             if (!previousTransaction.IsVoidable)
@@ -692,6 +696,7 @@ namespace Hotcakes.Commerce.Orders
                         {
                             t.Action = ActionType.CreditCardCharge;
                         }
+                        t.Items = GetLineItemsForTransaction(p.OrderNumber);
 
                         var proc = PaymentGateways.CurrentPaymentProcessor(currentContext.CurrentStore);
                         proc.ProcessTransaction(t);
@@ -2069,6 +2074,32 @@ namespace Hotcakes.Commerce.Orders
             response.CurrentValue = t.Result.BalanceAvailable;
 
             return response;
+        }
+
+        private List<TransactionItem> GetLineItemsForTransaction(string orderNumber)
+        {
+            var repo = new OrderRepository(_app.CurrentRequestContext);
+            var order = repo.FindByOrderNumber(orderNumber);
+
+            if (order != null && order.OrderNumber == orderNumber)
+            {
+                var items = new List<TransactionItem>();
+
+                foreach(var item in order.Items)
+                {
+                    items.Add(new TransactionItem
+                    {
+                        Sku = item.ProductSku,
+                        LineTotal = item.LineTotal,
+                        Description = item.ProductShortDescription,
+                        IsNonShipping = item.IsNonShipping
+                    });
+                }
+
+                return items;
+            }
+
+            return null;
         }
 
         #endregion

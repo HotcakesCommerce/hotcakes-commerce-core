@@ -185,7 +185,7 @@ namespace Hotcakes.Commerce.Dnn
             DnnCustomerAccountRepository.UpdateUserSettings(userId, settings, getCached);
         }
 
-        public override void AssignMembershipRole(string userId, MembershipProductType membershipType, TimeSpan timeSpan)
+        private void AddMembershipRole(string userId, MembershipProductType membershipType, TimeSpan timeSpan)
         {
             var portalId = PortalSettings.Current.PortalId;
             var userInfo = UserController.GetUserById(portalId, Convert.ToInt32(userId));

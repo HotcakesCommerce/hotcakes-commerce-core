@@ -1,0 +1,13 @@
+﻿/* 
+	Issue #184 
+	SI: Don't notify customers in AssignMembershipRole method of DnnMembershipServices class
+	https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/184
+*/
+
+IF NOT EXISTS (SELECT 1 FROM {databaseOwner}[{objectQualifier}syscolumns] c JOIN {databaseOwner}[{objectQualifier}sysobjects] o ON c.[id] = o.[id] WHERE c.[name] = N'Notify' AND o.[name] = '{objectQualifier}hcc_MembershipProductType')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_MembershipProductType] ADD [Notify] BIT NOT NULL DEFAULT(0);
+END 
+GO
+
+/* END OF FILE*/

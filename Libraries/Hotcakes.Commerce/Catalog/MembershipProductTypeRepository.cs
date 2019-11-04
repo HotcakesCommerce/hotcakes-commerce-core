@@ -66,6 +66,7 @@ namespace Hotcakes.Commerce.Catalog
             data.RoleName = model.RoleName;
             data.ExpirationPeriod = model.ExpirationPeriod;
             data.ExpirationPeriodType = (int) model.ExpirationPeriodType;
+            data.Notify = model.Notify;
         }
 
         /// <summary>
@@ -79,10 +80,11 @@ namespace Hotcakes.Commerce.Catalog
             model.RoleName = data.RoleName;
             model.ExpirationPeriod = data.ExpirationPeriod;
             model.ExpirationPeriodType = (ExpirationPeriodType) data.ExpirationPeriodType;
+            model.Notify = data.Notify;
         }
 
         /// <summary>
-        ///     GEt list of the Membership product type.
+        ///     Get list of the Membership product type.
         /// </summary>
         /// <param name="storeId">Unique store identifier</param>
         /// <returns>Returns list of <see cref="MembershipProductType" /></returns>
