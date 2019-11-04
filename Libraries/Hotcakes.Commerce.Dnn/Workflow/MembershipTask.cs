@@ -79,7 +79,7 @@ namespace Hotcakes.Commerce.Dnn.Workflow
                     context.Order.UserID,
                     membershipType,
                     membershipType.GetTimeSpan(now, quantity)
-                    );
+                   );
             }
         }
 

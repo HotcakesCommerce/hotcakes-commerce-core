@@ -211,7 +211,7 @@ namespace Hotcakes.Commerce.Dnn
                 RoleStatus.Approved,
                 DateTime.Now, // effective date
                 DateTime.Now + lastExpirationTime + timeSpan, // expiration date
-                true, // notify user
+                membershipType.Notify, // notify user
                 false); // is owner
         }
     }
