@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -185,7 +185,7 @@ namespace Hotcakes.Commerce.Dnn
             DnnCustomerAccountRepository.UpdateUserSettings(userId, settings, getCached);
         }
 
-        private void AddMembershipRole(string userId, MembershipProductType membershipType, TimeSpan timeSpan)
+        public override void AssignMembershipRole(string userId, MembershipProductType membershipType, TimeSpan timeSpan)
         {
             var portalId = PortalSettings.Current.PortalId;
             var userInfo = UserController.GetUserById(portalId, Convert.ToInt32(userId));

@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -80,7 +80,7 @@ namespace MyCompany.MyTaxProvider
                     }
 
                     var note = "Avalara - Cancel Tax Request Failed:";
-                    
+
                     foreach (var m in result.Messages)
                     {
                         note += "\n" + m;
@@ -91,7 +91,7 @@ namespace MyCompany.MyTaxProvider
                         IsPublic = false,
                         Note = note
                     });
-                    
+
                     orderService.Orders.Update(order);
                 }
             }
@@ -131,7 +131,7 @@ namespace MyCompany.MyTaxProvider
                     customer = memberShipService.Customers.Find(order.UserID);
                 else if (!string.IsNullOrEmpty(order.UserEmail))
                     customer = memberShipService.Customers.FindByEmail(order.UserEmail).FirstOrDefault();
-                
+
                 if (customer != null && customer.TaxExempt)
                 {
                     taxExemptUser = true;
@@ -178,7 +178,7 @@ namespace MyCompany.MyTaxProvider
                     else
                     {
                         var note = "MyTaxProvider - Commit Tax Failed (POST):";
-                        
+
                         foreach (var m in result.Messages)
                         {
                             note += "\n" + m;
@@ -189,7 +189,7 @@ namespace MyCompany.MyTaxProvider
                             IsPublic = false,
                             Note = note
                         });
-                        
+
                         orderService.Orders.Update(order);
 
                         EventLog.LogEvent("MyTaxProvider", note, EventLogSeverity.Error);
@@ -244,7 +244,7 @@ namespace MyCompany.MyTaxProvider
                     destination = order.ShippingAddress;
                 else
                     destination = order.BillingAddress;
-                
+
                 var destinationAddress = ConvertAddressToTaxProvider(destination);
 
                 var applyVATRules = hccContext.CurrentStore.Settings.ApplyVATRules;

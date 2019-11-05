@@ -8,3 +8,5 @@ We spent a lot of time on it. It would make us all feel really good about it - a
 All you have to do then is insert your new task in any position between the default existing ones
 5) Once you've done your custom work, you can deploy your compiled library to the production website's bin folder
 6) Once that's done, you can select your new workflow on the Admin -> Extensibility page in the Admin UI
+
+Documentation:  https://hotcakescommerce.zendesk.com/hc/en-us/articles/204725929--Example-Custom-Order-Workflow-Solution-

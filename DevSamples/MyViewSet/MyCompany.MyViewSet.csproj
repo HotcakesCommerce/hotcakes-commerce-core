@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -8,23 +8,21 @@
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{EBF80AA0-64ED-4DE8-B97B-A67764C6BD6D}</ProjectGuid>
-    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MyCompany.MyViewSet</RootNamespace>
     <AssemblyName>MyCompany.MyViewSet</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <SccProjectName>%24/Hotcakes/HCC/Branches/2.xxOpenSource/DevSamples/MyViewSet</SccProjectName>
-    <SccLocalPath>.</SccLocalPath>
-    <SccAuxPath>http://tfs.arrowdesigns.net:8080/tfs/defaultcollection</SccAuxPath>
-    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,15 +45,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Hotcakes.Commerce">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\Hotcakes.Commerce.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Hotcakes.Modules">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\Hotcakes.Modules.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
@@ -68,9 +69,10 @@
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Mvc">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\References\System.Web.Mvc.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -90,9 +92,10 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Helpers">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\Dnn\System.Web.Helpers.dll</HintPath>
+      <HintPath>..\References\System.Web.Helpers.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
@@ -100,21 +103,25 @@
     <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Razor">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\Dnn\System.Web.Razor.dll</HintPath>
+      <HintPath>..\References\System.Web.Razor.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.WebPages">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Dnn\System.Web.WebPages.dll</HintPath>
+      <HintPath>..\References\System.Web.WebPages.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.WebPages.Deployment">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\Dnn\System.Web.WebPages.Deployment.dll</HintPath>
+      <HintPath>..\References\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.WebPages.Razor">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\Dnn\System.Web.WebPages.Razor.dll</HintPath>
+      <HintPath>..\References\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
@@ -679,32 +686,11 @@
     <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\OgoneCheckout\App_LocalResources\Index.cshtml.uk-UA.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\Index.cshtml" />
-    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\_CreditCardForm.cshtml" />
-    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\_PaymentMethods.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\App_LocalResources\Index.cshtml.resx" />
-    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\App_LocalResources\_CreditCardForm.cshtml.resx" />
-    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\EditBilling\App_LocalResources\_PaymentMethods.cshtml.resx" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_Pinterest.cshtml.resx" />
     <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\App_LocalResources\_ViewOrderSubscriptions.cshtml.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_Pinterest.cshtml" />
-    <Content Include="Portals\_default\HotcakesViews\MyViewSet\Views\Shared\_ViewOrderSubscriptions.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\Index.cshtml" />
-    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\_CreditCardForm.cshtml" />
-    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\_PaymentMethods.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\App_LocalResources\Index.cshtml.resx" />
-    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\App_LocalResources\_CreditCardForm.cshtml.resx" />
-    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\EditBilling\App_LocalResources\_PaymentMethods.cshtml.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_Pinterest.cshtml.resx" />
@@ -762,15 +748,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>65025</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost.hotcakes</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>True</UseCustomServer>
-          <CustomServerUrl>http://localhost.hotcakes/</CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

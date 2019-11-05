@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -80,7 +80,7 @@ namespace MyCompany.MyPaymentMethod
             HccApp.OrderServices.Orders.Update(model.CurrentOrder);
 
             // Save as Order
-            var c = new OrderTaskContext(HccApp)
+            var c = new OrderTaskContext
             {
                 UserId = HccApp.CurrentCustomerId,
                 Order = model.CurrentOrder
@@ -137,7 +137,7 @@ namespace MyCompany.MyPaymentMethod
                 RefNum2 = string.Empty
             };
 
-            HccApp.OrderServices.AddPaymentTransactionToOrder(model.CurrentOrder, orderTransaction, HccApp);
+            HccApp.OrderServices.AddPaymentTransactionToOrder(model.CurrentOrder, orderTransaction);
         }
     }
 }

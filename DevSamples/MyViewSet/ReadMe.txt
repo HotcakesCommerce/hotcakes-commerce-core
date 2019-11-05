@@ -19,3 +19,5 @@ Extra Steps For Visual Studio 2015 (Get MVC Intelligence)
 3) Select reference Path
 4) Add reference path $\Website\Reference\ folder
 5) Update the the web.config with the strongly-typed Razor section as outlined in the web.config.readme.txt file for visual studio 2015. 
+
+Documentation:  https://hotcakescommerce.zendesk.com/hc/en-us/articles/205426325-Creating-Custom-Viewsets

@@ -4,15 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCompany.MyWorkflow", "MyWorkflow\MyCompany.MyWorkflow.csproj", "{C125CD1F-0BB2-4521-B5DB-E74E2F590A4D}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs12.arrowdesigns.net:8080/tfs/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = MyWorkflow\\MyCompany.MyWorkflow.csproj
-		SccProjectName1 = MyWorkflow
-		SccLocalPath1 = MyWorkflow
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
