@@ -285,15 +285,6 @@
 		<Unzip ZipFileName="$(DnnPackage)" TargetDirectory="$(SourceBuildFolder)\Website" />
 		<Copy SourceFiles="$(InstallFolder)\HotcakesCommerce_$(Version)_Core_Install.zip" DestinationFolder="$(SourceBuildFolder)\Website\Install\Module\" />
 		<CallTarget Targets="BrandSourcePackage" />
-		<CallTarget Targets="PackageSource" />
-	</Target>
-	
-	
-	<Target Name="PackageSource">
-		<ItemGroup>
-			<SourceFiles Include="$(SourceBuildFolder)\**" />
-		</ItemGroup>
-		<Zip Files="@(SourceFiles)" WorkingDirectory="$(SourceBuildFolder)" ZipFileName="$(InstallFolder)\HotcakesCommerce_$(Version)_Source.zip" ParallelCompression="False" />
 	</Target>
 
 </Project>

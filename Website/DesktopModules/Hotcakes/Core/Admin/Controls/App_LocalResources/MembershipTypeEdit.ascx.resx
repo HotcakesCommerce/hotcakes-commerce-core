@@ -117,16 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BillingAddress.Text" xml:space="preserve">
-    <value>Billing Address</value>
-  </data>
-  <data name="Close.Text" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="PaymentInfo.Text" xml:space="preserve">
-    <value>Payment Info</value>
-  </data>
-  <data name="Update.Text" xml:space="preserve">
-    <value>Update Billing Info</value>
+  <data name="lblNotify.Text" xml:space="preserve">
+    <value>Notify Customer?</value>
   </data>
 </root>

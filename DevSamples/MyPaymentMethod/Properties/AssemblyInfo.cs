@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Hotcakes Commerce")]
-[assembly: AssemblyCopyright("Copyright © 2016 Hotcakes Commerce, LLC")]
+[assembly: AssemblyCopyright("Copyright © 2019 Hotcakes Commerce, LLC")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

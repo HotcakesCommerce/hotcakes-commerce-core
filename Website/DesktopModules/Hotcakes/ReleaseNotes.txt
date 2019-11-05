@@ -1,4 +1,41 @@
-﻿<h5>Version 03.02.01</h5>
+﻿<h5>Version 03.02.02</h5>
+<p><strong>Highlights</strong></p>
+<p><strong>Enhancements</strong></p>
+<ul>
+	<li><strong>Choose to Notify Membership Subscribers</strong> - SI: You are now able to choose whether new customers receive the DNN role assignment e-mail for membership product types (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/184" target="_blank">Issue </a>)</li>
+	<li><strong>Updated E-Mail Address Validation</strong> - CI: E-mail address validation now supports newer top-level domain names (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/63" target="_blank">Issue 63</a>)</li>
+	<li><strong>DNN 9.xx compatibility updates (more coming in the 03.03.00 release)</strong>
+		<ul>
+			<li><strong>Replaced Gravity Theme References</strong> - (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/185" target="_blank">Issue 185</a>)</li>
+			<li><strong>Drilldown View DNN 9+ JS Error Resolved</strong> - (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/169" target="_blank">Issue 169</a>)</li>
+		</ul>
+	</li>
+</ul>
+<p><strong>Bug Fixes</strong></p>
+<ul>
+	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/175" target="_blank">Issue 175</a> - SI: Checkout membership task in workflow fails when memberships are bundled.</li>
+	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/189" target="_blank">Issue 189</a> - SI: Membership products still assigned when payment is declined.</li>
+	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/160" target="_blank">Issue 160</a> - SI: Payments made through Authorize.Net was missing the shipping address after declined payments.</li>
+	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/168" target="_blank">Issue 168</a> - SI: Removed stray comma from addresses in the order details for non-shipping products.</li>
+	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/31" target="_blank">Issue 31</a> - CI: Category security roles not always enforced</li>
+	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/112" target="_blank">Issue 112</a> - CI: Resolved the &quot;Server Cannot Append Headers&quot; exception during checkout.</li>
+	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/30" target="_blank">Issue 30</a> - CI: Unable to create or edit addresses in the address book.</li>
+	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/200" target="_blank">Issue 200</a> - Disabling the reviews/ratings still shows ratings in product details view.</li>
+	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/173" target="_blank">Issue 173</a> - Pricing was not properly formatted in the drilldown category view.</li>
+	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/180" target="_blank">Issue 180</a> - Removed remaining bits of Shift4 from the code base.</li>
+	<li><a href="" target="_blank">Issue </a> - </li>
+</ul>
+<h5>Thank you to the following community members for participating in this release!</h5>
+<ul>
+	<li>Will Strohl, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
+	<li>Nirav Sanghvi, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
+	<li>Moslem Pasokh Shiraz, <a href="https://github.com/moslem7026" target="_blank">Moslem Pasokh Shiraz</a></li>
+	<li>Paras Daryanani, <a href="https://www.celestialsites.com/" target="_blank">Celestial Sites</a></li>
+	<li>Scippy One, <a href="https://github.com/Scippy" target="_blank">Scippy One</a></li>
+	<li>Adrian Anon, <a href="https://github.com/AnonDevelopment" target="_blank">Adrian Anon</a></li>
+</ul>
+
+<h5>Version 03.02.01</h5>
 <p><strong>Highlights</strong></p>
 <p><strong>Enhancements</strong></p>
 <ul>

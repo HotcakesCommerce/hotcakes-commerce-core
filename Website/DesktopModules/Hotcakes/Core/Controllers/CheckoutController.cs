@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -70,12 +70,12 @@ namespace Hotcakes.Modules.Core.Controllers
         protected bool ShowConfirmation
         {
             get { return false; }
-            }
+        }
 
         protected bool IsOrderConfirmed
         {
             get { return Request.Params["hcOrderConfirmed"] == "true"; }
-            }
+        }
 
         #endregion
 
@@ -87,9 +87,9 @@ namespace Hotcakes.Modules.Core.Controllers
         {
             var model = LoadCheckoutModel();
             HccApp.AnalyticsService.RegisterEvent(HccApp.CurrentCustomerId, ActionTypes.GoToChekout, null);
-			VerifySessionError(model);
+            VerifySessionError(model);
             RenderErrorSummary(model);
-            CheckFreeItems(model); 
+            CheckFreeItems(model);
 
             return View(model);
         }
@@ -109,10 +109,14 @@ namespace Hotcakes.Modules.Core.Controllers
             {
                 if (ValidateOrder(model))
                 {
-					AddPaymentInfoTransaction(model);
-					HccApp.OrderServices.Orders.Update(model.CurrentOrder);
+                    AddPaymentInfoTransaction(model);
+                    HccApp.OrderServices.Orders.Update(model.CurrentOrder);
 
-                    ProcessOrder(model);
+                    var redirectUrl = ProcessOrder(model);
+                    if (redirectUrl != null)
+                    {
+                        return Redirect(redirectUrl.RouteValues.Values.First().ToString());
+                    }
                 }
             }
             else
@@ -318,7 +322,7 @@ namespace Hotcakes.Modules.Core.Controllers
                     if (gcBalance.CurrentValue > 0 && gcBalance.Success)
                     {
                         var toApply = Math.Min(gcBalance.CurrentValue, totalDue);
-                        payManager.GiftCardAddInfo(new GiftCardData {CardNumber = cardNumber}, toApply);
+                        payManager.GiftCardAddInfo(new GiftCardData { CardNumber = cardNumber }, toApply);
                     }
                     else
                     {
@@ -390,7 +394,7 @@ namespace Hotcakes.Modules.Core.Controllers
             if (CurrentCart == null || CurrentCart.Items == null || CurrentCart.Items.Count == 0)
                 Response.Redirect(Url.RouteHccUrl(HccRoute.Cart));
 
-            var model = new CheckoutViewModel {CurrentOrder = CurrentCart};
+            var model = new CheckoutViewModel { CurrentOrder = CurrentCart };
 
             LoadCurrentCustomer(model);
             LoadGiftCards(model);
@@ -411,15 +415,15 @@ namespace Hotcakes.Modules.Core.Controllers
             return model;
         }
 
-		private void VerifySessionError(CheckoutViewModel model)
-		{
-			var sessionError = SessionManager.GetSessionObject("SessionError_" + model.CurrentOrder.bvin);
-			if (sessionError != null  && sessionError.ToString() == bool.TrueString)
-			{
-				model.Violations.Add(new RuleViolation("", "", "Whoops! Your previous session expired. We're sorry, but your previous order can't be placed, and you'll need to checkout again."));
-				SessionManager.SetSessionObject("SessionError_" + model.CurrentOrder.bvin, "");
-			}
-		}
+        private void VerifySessionError(CheckoutViewModel model)
+        {
+            var sessionError = SessionManager.GetSessionObject("SessionError_" + model.CurrentOrder.bvin);
+            if (sessionError != null && sessionError.ToString() == bool.TrueString)
+            {
+                model.Violations.Add(new RuleViolation("", "", "Whoops! Your previous session expired. We're sorry, but your previous order can't be placed, and you'll need to checkout again."));
+                SessionManager.SetSessionObject("SessionError_" + model.CurrentOrder.bvin, "");
+            }
+        }
 
         private void LoadCurrentCustomer(CheckoutViewModel model)
         {
@@ -794,10 +798,10 @@ namespace Hotcakes.Modules.Core.Controllers
             }
             else
             {
-				if (ShowConfirmation)
-				{
-					SessionManager.CardSecurityCode = cardSecurityCode;
-				}
+                if (ShowConfirmation)
+                {
+                    SessionManager.CardSecurityCode = cardSecurityCode;
+                }
             }
             payModel.DataCreditCard.SecurityCode = cardSecurityCode;
 
@@ -805,7 +809,7 @@ namespace Hotcakes.Modules.Core.Controllers
                                        !order.IsRecurring;
 
             //Add Payment info only if form is valid and order needs to be processed
-			//AddPaymentInfoTransaction(model);
+            //AddPaymentInfoTransaction(model);
         }
 
         private void AddPaymentInfoTransaction(CheckoutViewModel model)
@@ -1045,13 +1049,13 @@ namespace Hotcakes.Modules.Core.Controllers
                         return violations;
                 }
             }
-                // We haven't return anything so nothing is selected.
-                // Try CC as default payment method        
-                if (model.PaymentViewModel.DataCreditCard.CardNumber.Length > 12)
-                {
-                    model.PaymentViewModel.SelectedMethodId = PaymentMethods.CreditCardId;
-                    return ValidateCreditCard(model);
-                }
+            // We haven't return anything so nothing is selected.
+            // Try CC as default payment method        
+            if (model.PaymentViewModel.DataCreditCard.CardNumber.Length > 12)
+            {
+                model.PaymentViewModel.SelectedMethodId = PaymentMethods.CreditCardId;
+                return ValidateCreditCard(model);
+            }
 
             // nothing selected, trial of cc failed
             violations.Add(new RuleViolation("Payment Method", string.Empty, Localization.GetString("SelectPaymentMethod"), string.Empty));
@@ -1101,7 +1105,7 @@ namespace Hotcakes.Modules.Core.Controllers
             return violations;
         }
 
-        private void ProcessOrder(CheckoutViewModel model)
+        private RedirectToRouteResult ProcessOrder(CheckoutViewModel model)
         {
             // Save as Order
             var c = new OrderTaskContext
@@ -1143,14 +1147,14 @@ namespace Hotcakes.Modules.Core.Controllers
                         var tempOrder = HccApp.OrderServices.Orders.FindForCurrentStore(model.CurrentOrder.bvin);
                         HccApp.CurrentRequestContext.IntegrationEvents.OrderReceived(tempOrder, HccApp);
                         SessionManager.AnalyticsOrderId = model.CurrentOrder.bvin;
-                        Response.Redirect(Url.RouteHccUrl(HccRoute.Checkout,
-                            new {action = "receipt", id = model.CurrentOrder.bvin}));
+                        return RedirectToAction(Url.RouteHccUrl(HccRoute.Checkout,
+                            new { action = "receipt", id = model.CurrentOrder.bvin }));
                     }
                     else
                     {
                         // Redirect to Payment Error
                         SessionManager.SetCurrentPaymentPendingCartId(HccApp.CurrentStore, model.CurrentOrder.bvin);
-                        Response.Redirect(Url.RouteHccUrl(HccRoute.Checkout, new {action = "paymenterror"}));
+                        return RedirectToAction(Url.RouteHccUrl(HccRoute.Checkout, new { action = "paymenterror" }));
                     }
                 }
                 else
@@ -1170,6 +1174,7 @@ namespace Hotcakes.Modules.Core.Controllers
                     }
                 }
             }
+            return null;
         }
 
         private void RenderAnalytics(Order o)
@@ -1262,7 +1267,7 @@ namespace Hotcakes.Modules.Core.Controllers
                     address.RegionBvin = region.Abbreviation;
             }
         }
-		
+
         private void RenderErrorSummary(CheckoutViewModel model)
         {
             foreach (var v in model.Violations)
@@ -1281,7 +1286,7 @@ namespace Hotcakes.Modules.Core.Controllers
 
                 if (freeItem != null)
                 {
-                    var ids = freeItem.Value.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
+                    var ids = freeItem.Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
                     if (ids.Any())
                     {

@@ -18,6 +18,7 @@ namespace Hotcakes.Commerce.Data.EF
         public string RoleName { get; set; }
         public int ExpirationPeriod { get; set; }
         public int ExpirationPeriodType { get; set; }
+        public bool Notify { get; set; }
     
         public virtual hcc_ProductType hcc_ProductType { get; set; }
     }

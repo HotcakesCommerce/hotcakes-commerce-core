@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -467,14 +467,21 @@ namespace Hotcakes.Commerce.Contacts
             lines.Add(Line2);
             lines.Add(Line3);
 
+            var cityLine = City;
+
             if (RegionData != null)
             {
-                lines.Add(City + ", " + RegionData.Abbreviation + " " + _postalCode);
+                cityLine = string.Concat(cityLine, ", ", RegionData.Abbreviation, " ", _postalCode);
             }
             else
             {
-                lines.Add(City + ", " + _postalCode);
+                if (!string.IsNullOrEmpty(_postalCode))
+                {
+                    cityLine = string.Concat(cityLine, ", ", _postalCode);
+                }
             }
+
+            if (cityLine.Trim() != ",") lines.Add(cityLine);
 
             if (CountryData != null && !string.IsNullOrEmpty(CountryData.DisplayName))
             {
@@ -492,7 +499,7 @@ namespace Hotcakes.Commerce.Contacts
                 lines.Add(WebSiteUrl);
             }
 
-            // Remove emtpy lines
+            // Remove empty lines
             var i = 0;
             while (i < lines.Count)
             {

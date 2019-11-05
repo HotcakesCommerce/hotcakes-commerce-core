@@ -4,7 +4,7 @@
     <visible>true</visible>
     <disabled>true</disabled>
     <name>HotcakesStore</name>
-		<skinsrc>[G]Skins/Gravity/2-Col.ascx</skinsrc>
+		<skinsrc>[G]Skins/Xcillion/Home.ascx</skinsrc>
 		<tabpermissions>
       <permission>
         <permissioncode>SYSTEM_TAB</permissioncode>

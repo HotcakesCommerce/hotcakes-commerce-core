@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -84,8 +84,9 @@ namespace Hotcakes.Modules.Core.Admin.Controls
                     StoreId = HccApp.CurrentStore.Id,
                     ProductTypeName = txtProductTypeName.Text.Trim(),
                     RoleName = ddlMembershipRole.SelectedValue,
-                    ExpirationPeriod = (int) txtExpirationNum.Value,
-                    ExpirationPeriodType = (ExpirationPeriodType) Convert.ToInt32(ddlPeriodType.SelectedValue)
+                    ExpirationPeriod = (int)txtExpirationNum.Value,
+                    ExpirationPeriodType = (ExpirationPeriodType)Convert.ToInt32(ddlPeriodType.SelectedValue),
+                    Notify = chkNotify.Checked
                 };
 
                 if (SaveData != null)
@@ -122,6 +123,8 @@ namespace Hotcakes.Modules.Core.Admin.Controls
                     cvRoleName.IsValid = false;
                 }
                 ddlPeriodType.SelectedValue = ((int) Model.ExpirationPeriodType).ToString();
+
+                chkNotify.Checked = Model.Notify;
 
                 btnAdd.Text = string.IsNullOrEmpty(TypeId) ? "Add" : "Update";
             }

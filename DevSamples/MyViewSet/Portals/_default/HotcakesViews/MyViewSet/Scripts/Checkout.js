@@ -584,8 +584,7 @@
         }
     };
 
-    function RefreshShippingRates() {
-
+    function RefreshShippingRates() {        
         $('#hcShippingRates').html('');
         $('#hcDeliverySection').ajaxLoader('start');
         $('#hcShippingNotValid').hide();
@@ -611,6 +610,7 @@
                 $('#hcShippingRates').show();
                 $('#hcShippingRates input').attr("tabindex", "300");
                 BindShippingRadioButtons();
+                ApplyCurrentShippingRate();
             },
             error: function (data) {
                 $('#hcDeliverySection').ajaxLoader('stop');
