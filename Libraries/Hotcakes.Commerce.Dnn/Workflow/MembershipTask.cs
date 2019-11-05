@@ -26,12 +26,28 @@
 using System;
 using Hotcakes.Commerce.BusinessRules;
 using Hotcakes.Commerce.Catalog;
+using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.Dnn.Workflow
 {
     [Serializable]
     public class MembershipTask : OrderTask
     {
+        private TextLogger _logger;
+
+        protected TextLogger ExceptionLogger
+        {
+            get
+            {
+                if (_logger == null)
+                {
+                    _logger = new TextLogger();
+                }
+
+                return _logger;
+            }
+        }
+
         public override bool Execute(OrderTaskContext context)
         {
             var result = true;
@@ -52,6 +68,16 @@ namespace Hotcakes.Commerce.Dnn.Workflow
                     }
                     else
                     {
+                        foreach (var bundledProduct in product.BundledProducts)
+                        {
+                            if (bundledProduct.BundledProduct == null)
+                            {
+                                // reload the bundled product objects if any are missing
+                                EnsureBundledProducts(context, ref product);
+                                break;
+                            }
+                        }
+
                         foreach (var bundledProduct in product.BundledProducts)
                         {
                             ProcessSingleProduct(context, bundledProduct.Quantity, bundledProduct.BundledProduct);
@@ -116,6 +142,33 @@ namespace Hotcakes.Commerce.Dnn.Workflow
         public override Task Clone()
         {
             return new MembershipTask();
+        }
+
+        /// <summary>
+        /// This method is probably only a workaround. It resolves Issue #175, but the root cause and fix probably should be in the DAL.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="product"></param>
+        private void EnsureBundledProducts(OrderTaskContext context, ref Product product)
+        {
+            // repo references
+            var productRepo = new ProductRepository(context.HccApp.CurrentRequestContext);
+
+            // iterate through each bundled product in the list
+            foreach (var bundledProduct in product.BundledProducts)
+            {
+                try
+                {
+                    if (!string.IsNullOrEmpty(bundledProduct.BundledProductId))
+                    {
+                        bundledProduct.BundledProduct = productRepo.Find(bundledProduct.BundledProductId);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ExceptionLogger.LogException(ex);
+                }
+            }
         }
     }
 }
