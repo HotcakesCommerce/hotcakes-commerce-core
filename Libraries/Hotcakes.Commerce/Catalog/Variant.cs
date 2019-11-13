@@ -44,6 +44,7 @@ namespace Hotcakes.Commerce.Catalog
             Sku = string.Empty;
             Price = -1;
             Selections = new OptionSelectionList();
+            CustomProperty = string.Empty;
         }
 
         /// <summary>
@@ -132,7 +133,8 @@ namespace Hotcakes.Commerce.Catalog
                 ProductId = ProductId,
                 Sku = Sku,
                 Price = Price,
-                Selections = selDto
+                Selections = selDto,
+                CustomProperty = CustomProperty
             };
         }
     }
