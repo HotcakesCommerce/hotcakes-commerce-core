@@ -19,7 +19,7 @@
                 title: "Edit Variant",
                 width: 500,
                 height: 'auto',
-                maxHeight: 500,
+                maxHeight: 600,
                 parentElement: '#<%=pnlEditVariant.ClientID%>',
                 close: function () {
                     <%= ClientScript.GetPostBackEventReference(lnkCancel, "") %>
@@ -120,8 +120,17 @@
                         <label class="hcLabel">Price</label>
                         <asp:TextBox ID="txtVariantPrice" runat="server" />
                     </div>
+                   
                 </div>
             </div>
+			<div class="hcColumnLeft" style="width:100%">
+				<div class="hcForm">
+				 <div class="hcFormItem">
+                        <label class="hcLabel">Custom Property</label>
+                        <asp:TextBox ID="txtVariantCustomProperty" runat="server" Width="400" Height="90" TextMode="MultiLine" />
+                 </div>
+				</div>
+			</div>
             <ul class="hcActions">
                 <li>
                     <asp:LinkButton ID="lnkSaveVariant" CssClass="hcPrimaryAction" Text="Save" OnClick="btnSave_Click" runat="server" />

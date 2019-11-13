@@ -44,6 +44,7 @@ namespace Hotcakes.Commerce.Catalog
             Sku = string.Empty;
             Price = -1;
             Selections = new OptionSelectionList();
+            CustomProperty = string.Empty;
         }
 
         /// <summary>
@@ -70,6 +71,11 @@ namespace Hotcakes.Commerce.Catalog
         ///     The price that the product should use when this variant is chosen. Otherwise, 0.00 should be used.
         /// </summary>
         public decimal Price { get; set; }
+
+        /// <summary>
+        ///     The Custom Property to add further variant details
+        /// </summary>
+        public string CustomProperty { get; set; }
 
         /// <summary>
         ///     These are the options that define the variant.
@@ -127,7 +133,8 @@ namespace Hotcakes.Commerce.Catalog
                 ProductId = ProductId,
                 Sku = Sku,
                 Price = Price,
-                Selections = selDto
+                Selections = selDto,
+                CustomProperty = CustomProperty
             };
         }
     }

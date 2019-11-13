@@ -1,8 +1,25 @@
-﻿<h5>Version 03.02.02</h5>
+﻿<h5>Version 03.02.03</h5>
 <p><strong>Highlights</strong></p>
 <p><strong>Enhancements</strong></p>
 <ul>
-	<li><strong>Choose to Notify Membership Subscribers</strong> - SI: You are now able to choose whether new customers receive the DNN role assignment e-mail for membership product types (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/184" target="_blank">Issue </a>)</li>
+	<li><strong>Added Special Properties to Variants</strong> - SI: You're now able to add special properties to variants for even more flexibility for your unique e-commerce implementations (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/221" target="_blank">Issue 221</a>)</li>
+</ul>
+<p><strong>Bug Fixes</strong></p>
+<ul>
+	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/193" target="_blank">Issue 193</a> - Administration category sort not working</li>
+</ul>
+<h5>Thank you to the following community members for participating in this release!</h5>
+<ul>
+	<li>Will Strohl, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
+	<li>Nirav Sanghvi, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
+	<li>Ryan Jagdfeld, <a href="https://github.com/yog-it" target="_blank">Yog-IT</a></li>
+</ul>
+
+<h5>Version 03.02.02</h5>
+<p><strong>Highlights</strong></p>
+<p><strong>Enhancements</strong></p>
+<ul>
+	<li><strong>Choose to Notify Membership Subscribers</strong> - SI: You are now able to choose whether new customers receive the DNN role assignment e-mail for membership product types (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/184" target="_blank">Issue 184</a>)</li>
 	<li><strong>Updated E-Mail Address Validation</strong> - CI: E-mail address validation now supports newer top-level domain names (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/63" target="_blank">Issue 63</a>)</li>
 	<li><strong>DNN 9.xx compatibility updates (more coming in the 03.03.00 release)</strong>
 		<ul>
@@ -23,7 +40,6 @@
 	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/200" target="_blank">Issue 200</a> - Disabling the reviews/ratings still shows ratings in product details view.</li>
 	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/173" target="_blank">Issue 173</a> - Pricing was not properly formatted in the drilldown category view.</li>
 	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/180" target="_blank">Issue 180</a> - Removed remaining bits of Shift4 from the code base.</li>
-	<li><a href="" target="_blank">Issue </a> - </li>
 </ul>
 <h5>Thank you to the following community members for participating in this release!</h5>
 <ul>

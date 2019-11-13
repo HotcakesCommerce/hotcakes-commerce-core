@@ -46,6 +46,7 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
             Selections = new List<OptionSelectionDTO>();
             Sku = string.Empty;
             Price = -1;
+            CustomProperty = string.Empty;
         }
 
         /// <summary>
@@ -78,5 +79,11 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
         /// </summary>
         [DataMember]
         public List<OptionSelectionDTO> Selections { get; set; }
+
+        /// <summary>
+        ///     The Custom Property to add further variant details
+        /// </summary>
+        [DataMember]
+        public string CustomProperty { get; set; }
     }
 }
