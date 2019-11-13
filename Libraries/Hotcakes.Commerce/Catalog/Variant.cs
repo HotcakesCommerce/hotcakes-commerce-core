@@ -72,6 +72,11 @@ namespace Hotcakes.Commerce.Catalog
         public decimal Price { get; set; }
 
         /// <summary>
+        ///     The Custom Property to add further variant details
+        /// </summary>
+        public string CustomProperty { get; set; }
+
+        /// <summary>
         ///     These are the options that define the variant.
         /// </summary>
         public OptionSelectionList Selections { get; private set; }
