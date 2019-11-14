@@ -171,7 +171,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                     item.Price = Money.RoundCurrency(p);
                 }
 
-                item.CustomProperty = txtVariantCustomProperty.Text;
+                item.CustomProperty = txtVariantCustomProperty.Text.Trim();
 
                 if (ucVariantImage.HasFile)
                 {
