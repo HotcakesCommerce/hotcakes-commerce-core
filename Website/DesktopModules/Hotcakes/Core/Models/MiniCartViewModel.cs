@@ -25,5 +25,10 @@ namespace Hotcakes.Modules.Core.Models
         ///     Upon hover of the mini cart it will load the items in the cart.
         /// </summary>
         public int TotalQuantity { get; set; }
+
+        /// <summary>
+        ///     The current Cart ID (Order bvin)
+        /// </summary>
+        public string CartBvin { get; set; }
     }
 }

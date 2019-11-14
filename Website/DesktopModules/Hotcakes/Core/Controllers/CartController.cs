@@ -342,7 +342,8 @@ namespace Hotcakes.Modules.Core.Controllers
         {
             var model = new MiniCartViewModel
             {
-                TotalQuantity = (CurrentCart != null && CurrentCart.Items != null) ? CurrentCart.Items.Count : 0
+                CartBvin = (CurrentCart != null && string.IsNullOrEmpty(CurrentCart.bvin)) ? CurrentCart.bvin : string.Empty,
+                TotalQuantity = CurrentCart?.Items?.Sum(x => x.Quantity) ?? 0
             };
 
             return View(model);
