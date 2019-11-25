@@ -29,6 +29,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Hotcakes.Commerce.Contacts;
+using Hotcakes.Commerce.Data.EF;
 using Hotcakes.Commerce.Extensions;
 using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Shipping;
@@ -149,7 +150,8 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
             }
             else if (model.Countries != null && model.Countries.Any())
             {
-                countryCode = model.Countries.FirstOrDefault().Bvin;
+                countryCode = model.Countries.FirstOrDefault(c => c.CultureCode == "en-US").Bvin;
+                model.CountryBvin = countryCode;
             }
 
             if (!string.IsNullOrEmpty(countryCode))
@@ -213,22 +215,23 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
         {
             var user = HccApp.CurrentCustomer;
             var ret = new Address();
+            if (user == null) return ret;
 
-            if (user != null)
+            if (bvin.ToLower() == "new")
             {
-                if (bvin.ToLower() == "new")
+                ret = new Address
                 {
-                    ret = new Address
-                    {
-                        Bvin = Guid.NewGuid().ToString(),
-                        RegionBvin = string.Empty
-                    };
-                }
-                else
+                    Bvin = Guid.NewGuid().ToString(),
+                    RegionBvin = string.Empty
+                };
+            }
+            else
+            {
+                foreach (var a2 in user.Addresses)
                 {
-                    foreach (var a2 in user.Addresses)
+                    if (a2.Bvin == bvin)
                     {
-                        if (a2.Bvin == bvin) { ret = a2; }
+                        ret = a2;
                         break;
                     }
                 }
