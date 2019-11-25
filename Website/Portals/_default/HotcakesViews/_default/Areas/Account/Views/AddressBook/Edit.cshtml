@@ -8,14 +8,18 @@
     @Html.ValidationSummary(true)
     @Html.Partial("_AddressEditor", Model)
  
-    <ul class="dnnActions">
-        <li>
-            <input type="submit" id="hcSaveAddress" value="@Localization.GetString("SaveChanges")" class="dnnPrimaryAction hcHandleNormalization"/>
-        </li>
-        <li>
-            <a href="@Url.RouteHccUrl(HccRoute.AddressBook)" class="dnnSecondaryAction">@Localization.GetString("Close")</a>
-        </li>
-    </ul>
-    
+    using (Html.BeginHccRouteForm(HccRoute.AddressBook, new {action = "edit", id = Model.Bvin }, FormMethod.Post))
+    {
+        <input type="hidden" id="hidUpdates" name="hidUpdates" />
+        <ul class="dnnActions">
+            <li>
+                <input type="submit" id="hcSaveAddress" value="@Localization.GetString("SaveChanges")" class="dnnPrimaryAction hcHandleNormalization"/>
+            </li>
+            <li>
+                <a href="@Url.RouteHccUrl(HccRoute.AddressBook)" class="dnnSecondaryAction">@Localization.GetString("Close")</a>
+            </li>
+        </ul>
+    }
+
 }
 </div>

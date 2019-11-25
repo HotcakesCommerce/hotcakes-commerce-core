@@ -20,6 +20,7 @@
             this.$dialog = $form.find("#hcNormalizedAddressDlg");
             this.$dialogNormalizedAddr = this.$dialog.find(".hcNormalizedAddress");
             this.$dialogOriginalAddr = this.$dialog.find(".hcOriginalAddress");
+            this.$hidUpdates = $form.find("#hidUpdates");
 
             this.bindEvents();
             this.validateAddress();
@@ -36,7 +37,7 @@
             var self = this;
             var countryid = this.$formCountry.find(":selected").val();
 
-            $.post(API_GETREGIONS + "/"+ countryid, { "regionid": '' }, null, "json")
+            $.post(API_GETREGIONS + "/" + countryid, { "regionid": '' }, null, "json")
                 .done(function (data) { self.populateRegions(data.Regions); })
                 .fail(function () { })
                 .always(function () { });
@@ -49,6 +50,16 @@
         },
         addressChanged: function (e) {
             this.validateAddress();
+            var frmUpdateFlds = [];
+            const frmAll = $(this.$form).serializeArray();
+            $.each(frmAll, function (i, fld) {
+                switch (fld.name) {
+                case "hidUpdates": break; // don't add
+                default: frmUpdateFlds.push(fld.name + "=" + encodeURIComponent(fld.value));
+                }
+            });
+            const result = frmUpdateFlds.join("&");
+            $(this.$hidUpdates).val(result);
         },
         validateAddress: function (callback) {
             var self = this;
@@ -85,12 +96,12 @@
         },
         saveNormalized: function (e) {
             this.$formAddress.val(this.normalizedAddress.Line1),
-            this.$formAddress2.val(this.normalizedAddress.Line2),
-            this.$formCity.val(this.normalizedAddress.City),
-            this.$formZip.val(this.normalizedAddress.PostalCode),
-            this.$formState.val(this.normalizedAddress.RegionBvin),
+                this.$formAddress2.val(this.normalizedAddress.Line2),
+                this.$formCity.val(this.normalizedAddress.City),
+                this.$formZip.val(this.normalizedAddress.PostalCode),
+                this.$formState.val(this.normalizedAddress.RegionBvin),
 
-            this.$dialog.hcDialog("close");
+                this.$dialog.hcDialog("close");
             this.saveForm();
         },
         saveOriginal: function (e) {

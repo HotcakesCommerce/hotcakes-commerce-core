@@ -26,6 +26,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web.Mvc;
 using Hotcakes.Commerce.Contacts;
 using Hotcakes.Commerce.Extensions;
@@ -69,29 +70,31 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
         public ActionResult EditPosted(string id, FormCollection posted)
         {
             var model = new AddressViewModel();
-            if (TryUpdateModel(model))
+            try
             {
+                var formValues = posted["hidUpdates"];
+
                 var u = HccApp.MembershipServices.Customers.Find(HccApp.CurrentCustomerId);
                 if (u == null) return View(model);
 
                 if (model.RegionBvin == "_") model.RegionBvin = string.Empty;
 
                 var addr = LoadAddress(id);
+                UpdateAddressVm(ref model, formValues);
                 model.CopyTo(addr);
 
                 var slug = id;
-                switch (slug.ToLower())
+                if (!u.UpdateAddress(addr))
                 {
-                    case "new":
-                        HccApp.MembershipServices.CheckIfNewAddressAndAddWithUpdate(u, addr);
-                        HccApp.MembershipServices.UpdateCustomer(u);
-                        break;
-                    default:
-                        u.UpdateAddress(addr);
-                        HccApp.MembershipServices.UpdateCustomer(u);
-                        break;
+                    HccApp.MembershipServices.CheckIfNewAddressAndAddWithUpdate(u, addr);
                 }
+                HccApp.MembershipServices.UpdateCustomer(u);
+
                 return Redirect(Url.RouteHccUrl(HccRoute.AddressBook));
+            }
+            catch (Exception ex)
+            {
+
             }
 
             model.Countries = HccApp.GlobalizationServices.Countries.FindActiveCountries();
@@ -135,6 +138,7 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
             var a = LoadAddress(id);
             var model = new AddressViewModel(a)
             {
+                Bvin = a.Bvin,
                 Countries = HccApp.GlobalizationServices.Countries.FindActiveCountries()
             };
 
@@ -182,34 +186,55 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
             return new List<Address>();
         }
 
+        private void UpdateAddressVm(ref AddressViewModel model, string formUpdates)
+        {
+            if (!string.IsNullOrEmpty(formUpdates))
+            {
+                var addrModelType = typeof(AddressViewModel);
+                var formKvPairs = formUpdates.Split('&')
+                    .Select(value => value.Split('='))
+                    .ToDictionary(pair => pair[0], pair => pair[1]);
+
+                foreach (PropertyInfo propInfo in (addrModelType.GetProperties()))
+                {
+                    if (formKvPairs.ContainsKey(propInfo.Name))
+                    {
+                        try
+                        {
+                            propInfo.SetValue(model, Server.UrlDecode(formKvPairs[propInfo.Name]), null);
+                        }
+                        catch { }
+                    }
+                }
+            }
+        }
+
         private Address LoadAddress(string bvin)
         {
             var user = HccApp.CurrentCustomer;
+            var ret = new Address();
 
             if (user != null)
             {
-                switch (bvin.ToLower())
+                if (bvin.ToLower() == "new")
                 {
-                    case "new":
-                        var a = new Address
-                        {
-                            Bvin = Guid.NewGuid().ToString(),
-                            RegionBvin = string.Empty
-                        };
-                        return a;
-                    default:
-                        foreach (var a2 in user.Addresses)
-                        {
-                            if (a2.Bvin == bvin)
-                            {
-                                return a2;
-                            }
-                        }
+                    ret = new Address
+                    {
+                        Bvin = Guid.NewGuid().ToString(),
+                        RegionBvin = string.Empty
+                    };
+                }
+                else
+                {
+                    foreach (var a2 in user.Addresses)
+                    {
+                        if (a2.Bvin == bvin) { ret = a2; }
                         break;
+                    }
                 }
             }
 
-            return new Address();
+            return ret;
         }
     }
 }
