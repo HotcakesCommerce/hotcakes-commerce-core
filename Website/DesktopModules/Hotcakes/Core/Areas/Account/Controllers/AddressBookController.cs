@@ -82,9 +82,17 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
 
                 var addr = LoadAddress(id);
                 UpdateAddressVm(ref model, formValues);
+
+                if (!TryValidateModel(model))
+                {
+                    model.Countries = HccApp.GlobalizationServices.Countries.FindActiveCountries();
+                    var country = HccApp.GlobalizationServices.Countries.Find(model.CountryBvin);
+                    model.Regions = country.Regions;
+
+                    return View(model);
+                }
                 model.CopyTo(addr);
 
-                var slug = id;
                 if (!u.UpdateAddress(addr))
                 {
                     HccApp.MembershipServices.CheckIfNewAddressAndAddWithUpdate(u, addr);
@@ -95,14 +103,9 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
             }
             catch (Exception ex)
             {
-
+                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                return View(model);
             }
-
-            model.Countries = HccApp.GlobalizationServices.Countries.FindActiveCountries();
-            var country = HccApp.GlobalizationServices.Countries.Find(model.CountryBvin);
-            model.Regions = country.Regions;
-
-            return View(model);
         }
 
         [HttpPost]
