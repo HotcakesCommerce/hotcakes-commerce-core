@@ -226,7 +226,7 @@ namespace Hotcakes.Modules.Core.Api.Rest
                     }
                 }
 
-                if (HccApp.CatalogServices.ProductsCreateWithInventory(item, false))
+                if (HccApp.CatalogServices.ProductsCreateWithInventory(item, item.IsSearchable))
                 {
                     bvin = item.Bvin;
                 }
