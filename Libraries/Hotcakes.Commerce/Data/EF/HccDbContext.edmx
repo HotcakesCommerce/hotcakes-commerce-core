@@ -756,6 +756,7 @@
           <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="250" />
           <Property Name="ExpirationPeriod" Type="int" Nullable="false" />
           <Property Name="ExpirationPeriodType" Type="int" Nullable="false" />
+		  <Property Name="Notify" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="hcc_News">
           <Key>
@@ -1550,7 +1551,8 @@
           <Property Name="Sku" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="Price" Type="decimal" Nullable="false" Scale="10" />
           <Property Name="SelectionData" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="StoreId" Type="bigint" Nullable="false" />
+		  <Property Name="StoreId" Type="bigint" Nullable="false" />
+		  <Property Name="CustomProperty" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="hcc_Vendor">
           <Key>
@@ -3541,6 +3543,7 @@
           <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="10" />
           <Property Type="String" Name="SelectionData" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Int64" Name="StoreId" Nullable="false" />
+		  <Property Type="String" Name="CustomProperty" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="hcc_Product" Relationship="EfModels.FK_hcc_Variants_hcc_Product" FromRole="hcc_Variants" ToRole="hcc_Product" />
         </EntityType>
         <EntityType Name="hcc_Vendor">
@@ -4363,6 +4366,7 @@
           <NavigationProperty Name="hcc_ProductType" Relationship="EfModels.FK_hcc_MembershipProductType_hcc_ProductType" FromRole="hcc_MembershipProductType" ToRole="hcc_ProductType" />
           <Property Type="Int32" Name="ExpirationPeriod" Nullable="false" />
           <Property Type="Int32" Name="ExpirationPeriodType" Nullable="false" />
+		  <Property Type="Boolean" Name="Notify" Nullable="false" />
         </EntityType>
         <Association Name="FK_hcc_MembershipProductType_hcc_ProductType">
           <End Type="EfModels.hcc_ProductType" Role="hcc_ProductType" Multiplicity="1" />
@@ -5761,6 +5765,7 @@
                 <ScalarProperty Name="Sku" ColumnName="Sku" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="bvin" ColumnName="bvin" />
+				<ScalarProperty Name="CustomProperty" ColumnName="CustomProperty" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6249,6 +6254,7 @@
           <EntitySetMapping Name="hcc_MembershipProductType">
             <EntityTypeMapping TypeName="EfModels.hcc_MembershipProductType">
               <MappingFragment StoreEntitySet="hcc_MembershipProductType">
+			    <ScalarProperty Name="Notify" ColumnName="Notify" />
                 <ScalarProperty Name="ExpirationPeriodType" ColumnName="ExpirationPeriodType" />
                 <ScalarProperty Name="ExpirationPeriod" ColumnName="ExpirationPeriod" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />

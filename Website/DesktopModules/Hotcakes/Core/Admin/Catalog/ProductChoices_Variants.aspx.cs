@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -171,6 +171,8 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                     item.Price = Money.RoundCurrency(p);
                 }
 
+                item.CustomProperty = txtVariantCustomProperty.Text.Trim();
+
                 if (ucVariantImage.HasFile)
                 {
                     DiskStorage.CopyProductVariantImage(HccApp.CurrentStore.Id, ProductId, item.Bvin,
@@ -194,6 +196,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             lblVariantDescription.Text = GetVariantDescription(variant);
             txtVariantSku.Text = string.IsNullOrEmpty(variant.Sku) ? _currentProduct.Sku : variant.Sku;
             txtVariantPrice.Text = (variant.Price < 0 ? _currentProduct.SitePrice : variant.Price).ToString("c");
+            txtVariantCustomProperty.Text = variant.CustomProperty;
 
             ucVariantImage.ImageUrl = DiskStorage.ProductVariantImageUrlMedium(HccApp, _currentProduct.Bvin,
                 _currentProduct.ImageFileSmall, variant.Bvin, HccApp.IsCurrentRequestSecure());

@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -66,6 +66,7 @@ namespace Hotcakes.Commerce.Catalog
             }
             model.Sku = data.Sku ?? string.Empty;
             model.StoreId = data.StoreId;
+            model.CustomProperty = data.CustomProperty;
         }
 
         protected override void CopyModelToData(hcc_Variants data, Variant model)
@@ -76,6 +77,7 @@ namespace Hotcakes.Commerce.Catalog
             data.SelectionData = Json.ObjectToJson(model.Selections);
             data.Sku = model.Sku;
             data.StoreId = model.StoreId;
+            data.CustomProperty = model.CustomProperty;
         }
 
 

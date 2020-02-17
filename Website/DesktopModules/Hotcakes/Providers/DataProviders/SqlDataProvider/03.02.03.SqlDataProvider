@@ -1,0 +1,12 @@
+﻿/* 
+	Issue #221 
+	SI: SI: Add Special Properties to Variants
+	https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/221
+*/
+/* Add property to Product Choice Variants */
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_Variants' AND  COLUMN_NAME = 'CustomProperty')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Variants] ADD
+		[CustomProperty] [nvarchar](max) NOT NULL DEFAULT ''
+END
+GO

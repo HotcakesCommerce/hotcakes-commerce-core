@@ -4,16 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCompany.MyPaymentMethod", "MyPaymentMethod\MyCompany.MyPaymentMethod.csproj", "{A359DD5C-FBD3-48A0-90DA-C3269B0C284A}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 1
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs.arrowdesigns.net:8080/tfs/defaultcollection
-		SccProjectUniqueName0 = MyPaymentMethod\\MyCompany.MyPaymentMethod.csproj
-		SccProjectName0 = MyPaymentMethod
-		SccAuxPath0 = http://tfs.arrowdesigns.net:8080/tfs/defaultcollection
-		SccLocalPath0 = MyPaymentMethod
-		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
