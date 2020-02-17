@@ -1491,7 +1491,7 @@ namespace Hotcakes.Commerce.Orders
                 result.Add(new HtmlTemplateTag("[[Order.UserEmail]]", user.Email));
 
                 var taxExemptionNumber = "-";
-                if (user.TaxExempt && !string.IsNullOrEmpty(user.TaxExemptionNumber))
+                if (!string.IsNullOrEmpty(user.TaxExemptionNumber))
                     taxExemptionNumber = user.TaxExemptionNumber;
 
                 result.Add(new HtmlTemplateTag("[[Order.VATRegistrationNumber]]", taxExemptionNumber));
