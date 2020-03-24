@@ -33,22 +33,22 @@
 					    </asp:Repeater>
 
 					    <li class="controlBar_ArrowMenu">
-						    <a style="color:white !important;" href="https://hotcakes.org/community" target="_blank">Help</a>
+						    <a style="color:white !important;" href="https://hotcakes.org/community" target="_blank"><%=GetString("Help")  %></a>
 					    </li>
 				    </ul>
 
 				    <ul id="ControlNavQuickLink">
 					    <li>
-						    <a id="GoToStore" href="<%=Hotcakes.Commerce.Urls.HccUrlBuilder.RouteHccUrl(Hotcakes.Commerce.Urls.HccRoute.Home) %>"> <img src="/DesktopModules/Hotcakes/ControlPanel/controlbarimages/Store-icon.png"/> Go To Store</a>
+						    <a id="GoToStore" href="<%=Hotcakes.Commerce.Urls.HccUrlBuilder.RouteHccUrl(Hotcakes.Commerce.Urls.HccRoute.Home) %>"> <img src="/DesktopModules/Hotcakes/ControlPanel/controlbarimages/Store-icon.png"/> <%=GetString("ViewShop.Text")  %></a>
 					    </li>
 					    <li>
 						    <hcc:Languages runat="server" ID="ucLanguages" />
 					    </li>
 					    <li>
-						    <a runat="server" id="aHostAdmin">Superuser Admin</a>
+						    <a runat="server" id="aHostAdmin"><%=GetString("Admin.Text")  %></a>
 					    </li>
 					    <li>
-						    <a href="<%=Hotcakes.Commerce.Urls.HccUrlBuilder.RouteHccUrl(Hotcakes.Commerce.Urls.HccRoute.Logoff) %>">Log Out</a>
+						    <a href="<%=Hotcakes.Commerce.Urls.HccUrlBuilder.RouteHccUrl(Hotcakes.Commerce.Urls.HccRoute.Logoff) %>"><%= GetString("LogOut.Text")  %></a>
 					    </li>
 				    </ul>
 			
