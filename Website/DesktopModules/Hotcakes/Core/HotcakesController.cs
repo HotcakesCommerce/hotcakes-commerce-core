@@ -41,6 +41,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Framework;
+using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Installer;
 using DotNetNuke.Services.Installer.Packages;
@@ -65,6 +66,8 @@ namespace Hotcakes.Modules.Core
     [Serializable]
     public class HotcakesController : IUpgradeable
     {
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(HotcakesController));
+
         private bool IsGenericCodeExecuted { get; set; }
         
         public string UpgradeModule(string Version)
@@ -75,7 +78,6 @@ namespace Hotcakes.Modules.Core
                 {
                     case "01.00.00":
                         DnnEventLog.InstallLogTypes();
-                        AddHostPage();
                         break;
 
                     case "01.00.07":
@@ -106,6 +108,10 @@ namespace Hotcakes.Modules.Core
 
                     case "03.00.01":
                         RevertHotcakesCloudConfig();
+                        break;
+
+                    case "03.03.00":
+                        DeleteHostPage();
                         break;
 
                     default:
@@ -400,17 +406,17 @@ namespace Hotcakes.Modules.Core
             tabCtl.UpdateTab(tab);
         }
 
-        private void AddHostPage()
+        private void DeleteHostPage()
         {
-            var hostTab = Upgrade.AddHostPage(
-                "Hotcakes Administration",
-                "Hotcakes Administration",
-                "~/Icons/Sigma/Configuration_16X16_Standard.png",
-                "~/Icons/Sigma/Configuration_32X32_Standard.png",
-                true);
-
-            hostTab.Url = VirtualPathUtility.ToAbsolute("~/DesktopModules/Hotcakes/Core/Admin/Default.aspx");
-            new TabController().UpdateTab(hostTab);
+            try
+            {
+                // this will only be the case if this is an upgrade 
+                Upgrade.RemoveHostPage("Hotcakes Administration");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message, ex);
+            }
         }
 
         private void CategorizeModules()
