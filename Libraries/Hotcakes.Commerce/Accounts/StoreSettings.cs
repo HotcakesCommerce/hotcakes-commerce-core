@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -939,6 +939,58 @@ namespace Hotcakes.Commerce.Accounts
             set { SetProp("ShippingUSPostalDiagnostics", value); }
         }
 
+
+        #region "UPS Freight"
+
+        public int ShippingUpsFreightDefaultPackaging
+        {
+            get { return GetPropInt("ShippingUpsFreightDefaultPackaging"); }
+            set { SetProp("ShippingUpsFreightDefaultPackaging", value); }
+        }
+
+        public int ShippingUpsFreightDefaultPayment
+        {
+            get { return GetPropInt("ShippingUpsFreightDefaultPayment"); }
+            set { SetProp("ShippingUpsFreightDefaultPayment", value); }
+        }
+
+        public bool ShippingUPSFreightDiagnostics
+        {
+            get { return GetPropBool("ShippingUPSFreightDiagnostics"); }
+            set { SetProp("ShippingUPSFreightDiagnostics", value); }
+        }
+
+        public bool ShippingUpsFreightForceResidential
+        {
+            get { return GetPropBool("ShippingUpsFreightForceResidential"); }
+            set { SetProp("ShippingUpsFreightForceResidential", value); }
+        }
+
+        public bool ShippingUpsFreightSkipDimensions
+        {
+            get { return GetPropBool("ShippingUpsFreightSkipDimensions"); }
+            set { SetProp("ShippingUpsFreightSkipDimensions", value); }
+        }
+
+        public int ShippingUpsFreightBillingOption
+        {
+            get { return GetPropInt("ShippingUpsFreightBillingOption"); }
+            set { SetProp("ShippingUpsFreightBillingOption", value); }
+        }
+
+        public string ShippingUpsFreightHandleOneUnitType
+        {
+            get { return GetProp("ShippingUpsFreightHandleOneUnitType"); }
+            set { SetProp("ShippingUpsFreightHandleOneUnitType", value); }
+        }
+
+        public string ShippingUpsFreightFreightClass
+        {
+            get { return GetProp("ShippingUpsFreightFreightClass"); }
+            set { SetProp("ShippingUpsFreightFreightClass", value); }
+        }
+
+        #endregion
         #endregion
 
         #region Affiliates

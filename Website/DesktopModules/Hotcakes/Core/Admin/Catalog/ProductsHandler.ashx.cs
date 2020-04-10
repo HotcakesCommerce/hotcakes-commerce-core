@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -37,6 +37,14 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
     {
         protected override object HandleAction(HttpContext context, HotcakesApplication hccApp)
         {
+            if (context.User.Identity.IsAuthenticated == false)
+            {
+                // not found
+                context.Response.StatusCode = 404;
+                context.Response.End();
+                return null;
+            }
+
             var method = context.Request.Params["method"];
 
             switch (method)

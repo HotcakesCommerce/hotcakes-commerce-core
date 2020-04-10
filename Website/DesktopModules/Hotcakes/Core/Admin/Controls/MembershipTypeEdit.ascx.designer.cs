@@ -94,6 +94,24 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         protected global::Telerik.Web.UI.RadComboBox ddlPeriodType;
         
         /// <summary>
+        /// lblNotify control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNotify;
+        
+        /// <summary>
+        /// chkNotify control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkNotify;
+        
+        /// <summary>
         /// btnAdd control.
         /// </summary>
         /// <remarks>

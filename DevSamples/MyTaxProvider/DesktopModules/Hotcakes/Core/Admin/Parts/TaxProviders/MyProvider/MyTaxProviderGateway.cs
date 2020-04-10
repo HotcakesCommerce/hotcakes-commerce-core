@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -71,7 +71,7 @@ namespace MyCompany.MyTaxProvider
             {
                 result.Success = false;
                 result.Messages.Add("CancelTax Failed");
-                    // end user can add more messages whatever returned from tax provider as messages variable is list of string           
+                // end user can add more messages whatever returned from tax provider as messages variable is list of string           
             }
             else
             {
@@ -92,7 +92,7 @@ namespace MyCompany.MyTaxProvider
             {
                 result.Success = false;
                 result.Messages.Add("CommitTax Failed");
-                    // end user can add more messages whatever returned from tax provider as messages variable is list of string
+                // end user can add more messages whatever returned from tax provider as messages variable is list of string
             }
             else
             {
@@ -115,7 +115,7 @@ namespace MyCompany.MyTaxProvider
             {
                 result.Success = false;
                 result.Messages.Add("Get Tax Failed");
-                    // end user can add more messages whatever returned from tax provider as messages variable is list of string
+                // end user can add more messages whatever returned from tax provider as messages variable is list of string
             }
             else
             {
@@ -162,7 +162,7 @@ namespace MyCompany.MyTaxProvider
             {
                 result.Success = false;
                 result.Messages.Add("Post Tax Failed");
-                    // end user can add more messages whatever returned from tax provider as messages variable is list of string
+                // end user can add more messages whatever returned from tax provider as messages variable is list of string
             }
             else
             {
@@ -184,7 +184,7 @@ namespace MyCompany.MyTaxProvider
             {
                 result.Success = false;
                 result.Messages.Add("Test connection Failed");
-                    // end user can add more messages whatever returned from tax provider as messages variable is list of string
+                // end user can add more messages whatever returned from tax provider as messages variable is list of string
             }
             else
             {

@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -145,14 +145,17 @@ namespace MyCompany.MyWorkflow
         //    };
         //}
 
-        /// <summary>
-        /// This workflow is run after payment has been applied. This is a great place to run workflow tasks that should not run until after a valid payment has been applied to the order. 
-        /// </summary>
-        /// <returns></returns>
+        ///// <summary>
+        ///// This workflow is run after payment has been applied. This is a great place to run workflow tasks that should not run until after a valid payment has been applied to the order. 
+        ///// </summary>
+        ///// <returns></returns>
         //protected override Task[] LoadPaymentCompleteTasks()
         //{
         //    return new Task[]{
-        //        new UpdateOrder(),                
+        //        new UpdateOrder(),
+        //#pragma warning disable 0612, 0618
+        //        new AvalaraCommitTaxes(),
+        //#pragma warning restore 0612, 0618
         //        new TaxProviderCommitTaxes(),
         //        new UpdateOrder(),
         //        new EmailVATInvoice(),

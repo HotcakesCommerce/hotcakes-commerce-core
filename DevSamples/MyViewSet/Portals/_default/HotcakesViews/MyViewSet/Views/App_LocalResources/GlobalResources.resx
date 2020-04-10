@@ -231,6 +231,9 @@
   <data name="TotalGrand.Text" xml:space="preserve">
     <value>Grand Total</value>
   </data>
+  <data name="UserCommentObsolete.Text" xml:space="preserve">
+    <value>Obsolete E-Mail Token. Please use [[User.Notes]] instead.</value>
+  </data>
   <data name="VAT.Text" xml:space="preserve">
     <value>VAT</value>
   </data>

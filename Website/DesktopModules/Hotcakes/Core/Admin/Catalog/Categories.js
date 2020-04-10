@@ -27,6 +27,8 @@ $(document).ready(function () {
             containment: 'parent',
             opacity: '0.75',
             cursor: 'move',
+            forcePlaceholderSize: true,
+            tolerance: 'pointer',
             update: function (event, ui) {
                 var sorted = $(this).sortable('toArray');
                 sorted += '';

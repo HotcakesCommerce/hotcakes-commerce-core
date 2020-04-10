@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -63,14 +63,10 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
                     EventLog.LogEvent("PayPal Express Checkout", "CartReturnUrl=" + cartReturnUrl, EventLogSeverity.Information);
 
                     PaymentActionCodeType mode = PaymentActionCodeType.Authorization;
-                    if (context.HccApp.CurrentStore.Settings.PayPal.ExpressAuthorizeOnly)
-					{
-						mode = PaymentActionCodeType.Order;
-					}
-                    else
+                    if (!context.HccApp.CurrentStore.Settings.PayPal.ExpressAuthorizeOnly)
 					{
                         mode = PaymentActionCodeType.Sale;
-					}
+                    }
 
                     // Accelerated boarding
                     if (string.IsNullOrWhiteSpace(context.HccApp.CurrentStore.Settings.PayPal.UserName))

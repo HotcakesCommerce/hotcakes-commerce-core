@@ -9,6 +9,6 @@ using System.Runtime.InteropServices;
 [assembly: Guid("aae3b256-65cb-4ca4-9195-8f41abc585f4")]
 [assembly: AssemblyCompanyAttribute("Hotcakes Commerce, LLC")]
 [assembly: AssemblyProductAttribute("Hotcakes Commerce")]
-[assembly: AssemblyCopyrightAttribute("Copyright (c) 2016 Hotcakes Commerce, LLC")]
+[assembly: AssemblyCopyrightAttribute("Copyright (c) 2019 Hotcakes Commerce, LLC")]
 [assembly: AssemblyVersionAttribute("01.00.00")]
 [assembly: AssemblyFileVersionAttribute("01.00.00")]

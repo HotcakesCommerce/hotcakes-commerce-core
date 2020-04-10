@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -70,10 +70,16 @@ namespace Hotcakes.Commerce.Payment.Methods
                 {
                     var OrderNumber = t.MerchantInvoiceNumber + Guid.NewGuid();
 
+                    PaymentActionCodeType mode = PaymentActionCodeType.Authorization;
+                    if (!app.CurrentStore.Settings.PayPal.ExpressAuthorizeOnly)
+                    {
+                        mode = PaymentActionCodeType.Sale;
+                    }
+
                     var paymentResponse = ppAPI.DoExpressCheckoutPayment(t.PreviousTransactionNumber,
                         t.PreviousTransactionAuthCode,
                         t.Amount.ToString("N", CultureInfo.InvariantCulture),
-                        PaymentActionCodeType.Order,
+                        mode,
                         PayPalAPI.GetCurrencyCodeType(app.CurrentStore.Settings.PayPal.Currency),
                         OrderNumber);
 

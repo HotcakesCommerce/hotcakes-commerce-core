@@ -46,7 +46,7 @@
                     {
                 <div class="hc-shipping-section">
                     <h3>@Localization.GetString("ShippingAddress")</h3>
-                    <div id="hcShippingValidation" class="dnnFormMessage dnnFormWarning">
+                    <div id="hcShippingValidation" class="dnnFormMessage dnnFormWarning" style="display:none;">
                         @Localization.GetString("ShippingAddressInvalid")
                     </div>
                     @Html.Partial("_CheckoutAddress", new CheckoutAddressViewModel()
@@ -72,7 +72,7 @@
                 
                 <div class="hc-billing-section">
                     <h3>@Localization.GetString("BillingAddress")</h3>
-                    <div id="hcBillingValidation" class="dnnFormMessage dnnFormWarning">
+                    <div id="hcBillingValidation" class="dnnFormMessage dnnFormWarning" style="display:none;">
                         @Localization.GetString("BillingAddressInvalid")
                     </div>
                     @if (Model.CurrentOrder.HasShippingItems)

@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -31,6 +31,7 @@ using Hotcakes.Commerce.Controls;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Web;
+using System.Linq;
 
 namespace Hotcakes.Modules.Core.Admin.Controls
 {
@@ -211,8 +212,8 @@ namespace Hotcakes.Modules.Core.Admin.Controls
 
         private void ValidateUser()
         {
-            var u
-                = HccApp.MembershipServices.Customers.FindByUsername(UserNameField.Text.Trim());
+            var users = HccApp.MembershipServices.Customers.FindByEmail(UserNameField.Text.Trim());
+            var u = users != null ? users.FirstOrDefault() : null;
             if (u != null)
             {
                 if (u.Bvin != string.Empty)

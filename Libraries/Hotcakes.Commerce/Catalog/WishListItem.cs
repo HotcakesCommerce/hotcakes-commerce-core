@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -75,6 +75,12 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         public OptionSelections SelectionData { get; set; }
 
+
+        /// <summary>
+        /// Show Additional Product Variant/Selection
+        /// </summary>
+        public string ProductShortDescription { get; set; }
+
         private void Init()
         {
             Id = 0;
@@ -84,6 +90,7 @@ namespace Hotcakes.Commerce.Catalog
             ProductId = string.Empty;
             Quantity = 1;
             SelectionData = new OptionSelections();
+            ProductShortDescription = string.Empty;
         }
 
         /// <summary>

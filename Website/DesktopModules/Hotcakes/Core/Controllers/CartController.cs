@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -88,7 +88,7 @@ namespace Hotcakes.Modules.Core.Controllers
 
                 if (freeItem != null)
                 {
-                    var ids = freeItem.Value.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
+                    var ids = freeItem.Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
                     if (ids.Any())
                     {
@@ -121,7 +121,7 @@ namespace Hotcakes.Modules.Core.Controllers
                 if (flag != null)
                 {
                     freePromotions =
-                        flag.Value.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
+                        flag.Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                             .Select(s => long.Parse(s))
                             .ToList();
                 }
@@ -222,12 +222,12 @@ namespace Hotcakes.Modules.Core.Controllers
             return false;
         }
 
-        public void ForwardToCheckout(CartViewModel model)
+        public RedirectResult ForwardToCheckout(CartViewModel model)
         {
             if (Request["paypalexpress"] != null && Request["paypalexpress"] == "true")
             {
                 ForwardToPayPalExpress(model);
-                return;
+                return null;
             }
 
             var c = new OrderTaskContext
@@ -238,7 +238,7 @@ namespace Hotcakes.Modules.Core.Controllers
 
             if (Workflow.RunByName(c, WorkflowNames.VerifyOrderSize))
             {
-                Response.Redirect(Url.RouteHccUrl(HccRoute.Checkout, null, Uri.UriSchemeHttps));
+                return Redirect(Url.RouteHccUrl(HccRoute.Checkout, null, Uri.UriSchemeHttps));
             }
             else
             {
@@ -259,6 +259,7 @@ namespace Hotcakes.Modules.Core.Controllers
                     FlashFailure(Localization.GetString("CheckoutFailed"));
                 }
             }
+            return null;
         }
 
         public void ForwardToPayPalExpress(CartViewModel model)
@@ -271,7 +272,7 @@ namespace Hotcakes.Modules.Core.Controllers
             };
 
             var checkoutFailed = false;
-            
+
             if (!Workflow.RunByName(c, WorkflowNames.VerifyOrderSize))
             {
                 checkoutFailed = true;
@@ -350,7 +351,11 @@ namespace Hotcakes.Modules.Core.Controllers
             {
                 if (CheckForStockOnItems(model))
                 {
-                    ForwardToCheckout(model);
+                    var redirectUrl = ForwardToCheckout(model);
+                    if (redirectUrl != null)
+                    {
+                        return Redirect(redirectUrl.Url);
+                    }
                 }
             }
             else
@@ -472,7 +477,7 @@ namespace Hotcakes.Modules.Core.Controllers
 
         private CartViewModel IndexSetup()
         {
-            var model = new CartViewModel {KeepShoppingUrl = GetKeepShoppingLocation()};
+            var model = new CartViewModel { KeepShoppingUrl = GetKeepShoppingLocation() };
             SetPayPalVisibility(model);
             return model;
         }
@@ -494,20 +499,20 @@ namespace Hotcakes.Modules.Core.Controllers
             model.PayPalExpressAvailable = enabledMethods.Any(m => m.MethodId == PaymentMethods.PaypalExpressId);
         }
 
-        private void HandleActionParams()
+        private RedirectResult HandleActionParams()
         {
             //1. AddSKU - this is the sku that should be added to the cart automatically
             //2. AddSKUQTY - this is the quantity of the provided sku that should be added.
             //3. CouponCode - the coupon that should automatically be applied, if valid.
             //4. RedirectToCheckout=True - redirects the user automatically to the checkout.
             if (ModuleContext == null || ModuleContext.Configuration.DesktopModule.ModuleName != "Hotcakes.Cart")
-                return;
+                return null;
 
-            var clearCart = (string) RouteData.Values["ClearCart"];
-            var addSKU = (string) RouteData.Values["AddSKU"];
-            var addSKUQTY = (string) RouteData.Values["AddSKUQTY"];
-            var CouponCode = (string) RouteData.Values["CouponCode"];
-            var RedirectToCheckout = (string) RouteData.Values["RedirectToCheckout"];
+            var clearCart = (string)RouteData.Values["ClearCart"];
+            var addSKU = (string)RouteData.Values["AddSKU"];
+            var addSKUQTY = (string)RouteData.Values["AddSKUQTY"];
+            var CouponCode = (string)RouteData.Values["CouponCode"];
+            var RedirectToCheckout = (string)RouteData.Values["RedirectToCheckout"];
 
             if (!string.IsNullOrWhiteSpace(addSKU)
                 || !string.IsNullOrWhiteSpace(addSKUQTY)
@@ -528,13 +533,13 @@ namespace Hotcakes.Modules.Core.Controllers
             if (!string.IsNullOrWhiteSpace(addSKUQTY))
                 SKUQTYs = addSKUQTY.Split(',');
             if (addSKU == null)
-                return;
+                return null;
             if (SKUQTYs == null)
                 SKUQTYs = new string[SKUs.Length];
             if (SKUQTYs != null && SKUs.Length != SKUQTYs.Length)
             {
                 FlashFailure(Localization.GetString("ParamsCountMismatch"));
-                return;
+                return null;
             }
 
             var errorsPresent = false;
@@ -579,15 +584,17 @@ namespace Hotcakes.Modules.Core.Controllers
                     if (redirect)
                         Response.Redirect(Url.RouteHccUrl(HccRoute.Checkout));
                 }
-                Response.Redirect(Url.RouteHccUrl(HccRoute.Cart));
+                return Redirect(Url.RouteHccUrl(HccRoute.Cart));
+
             }
+            return null;
         }
 
-        private void CheckForQuickAdd()
+        private RedirectResult CheckForQuickAdd()
         {
-            if ((bool) (RouteData.Values["MiniCart"] ?? false))
+            if ((bool)(RouteData.Values["MiniCart"] ?? false))
             {
-                return;
+                return null;
             }
 
             if (Request.QueryString["quickaddid"] != null
@@ -612,7 +619,7 @@ namespace Hotcakes.Modules.Core.Controllers
                     }
                     AddSingleProduct(prod, quantity);
                 }
-                Response.Redirect(Url.RouteHccUrl(HccRoute.Cart));
+                return Redirect(Url.RouteHccUrl(HccRoute.Cart));
             }
             else if (Request.QueryString["quickaddsku"] != null)
             {
@@ -631,7 +638,7 @@ namespace Hotcakes.Modules.Core.Controllers
                     }
                     AddSingleProduct(prod, quantity);
                 }
-                Response.Redirect(Url.RouteHccUrl(HccRoute.Cart));
+                return Redirect(Url.RouteHccUrl(HccRoute.Cart));
             }
             else if (Request.QueryString["multi"] != null)
             {
@@ -660,8 +667,9 @@ namespace Hotcakes.Modules.Core.Controllers
                         }
                     }
                 }
-                Response.Redirect(Url.RouteHccUrl(HccRoute.Cart));
+                return Redirect(Url.RouteHccUrl(HccRoute.Cart));
             }
+            return null;
         }
 
         private void LoadCart(CartViewModel model)
@@ -691,10 +699,10 @@ namespace Hotcakes.Modules.Core.Controllers
                             product.ImageFileSmall,
                             lineItem.VariantId, Request.IsSecureConnection),
                         LinkUrl = UrlRewriter.BuildUrlForProduct(product,
-                            new {lineItem.OrderBvin, LineItemId = lineItem.Id}),
+                            new { lineItem.OrderBvin, LineItemId = lineItem.Id }),
                         HasDiscounts = lineItem.HasAnyDiscounts
                     };
-                    
+
                     model.LineItems.Add(ci);
                 }
                 else
@@ -729,7 +737,7 @@ namespace Hotcakes.Modules.Core.Controllers
                         .ToList();
 
                     var promotionCoupons =
-                        couponQulifications.SelectMany(q => ((OrderHasCoupon) q).CurrentCoupons()).ToList();
+                        couponQulifications.SelectMany(q => ((OrderHasCoupon)q).CurrentCoupons()).ToList();
                     var isMet = promotionCoupons.Contains(coupon);
                     if (!bestMatchIsMet && isMet)
                     {

@@ -13,22 +13,13 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications {
     public partial class ProductIsEditor {
         
         /// <summary>
-        /// upProductPicker control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upProductPicker;
-        
-        /// <summary>
         /// ucProductPicker control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Hotcakes.Modules.Core.Admin.Controls.ProductsPickerWithVariant ucProductPicker;
+        protected global::Hotcakes.Modules.Core.Admin.Controls.ProductPicker ucProductPicker;
         
         /// <summary>
         /// btnAddProduct control.
@@ -47,50 +38,5 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvProductBvins;
-        
-        /// <summary>
-        /// upPanel1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upPanel1;
-        
-        /// <summary>
-        /// pnlSelectProductVariants control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlSelectProductVariants;
-        
-        /// <summary>
-        /// ProductVariantsPicker control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Hotcakes.Modules.Core.Admin.Controls.ProductVariantsPicker ProductVariantsPicker;
-        
-        /// <summary>
-        /// btnSaveProductVariantsSelection control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSaveProductVariantsSelection;
-        
-        /// <summary>
-        /// btnCloseProductVariantsSelectionEditor control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnCloseProductVariantsSelectionEditor;
     }
 }

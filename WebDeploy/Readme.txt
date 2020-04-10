@@ -14,6 +14,8 @@ Option 1 (using Web Platform Installer)
 9) Navigate to http://hostedtrialwebdeploy/Install/Install.aspx?mode=install
 10) Navigate to http://hostedtrialwebdeploy/
 
+Docs:
+	https://docs.microsoft.com/en-us/iis/install/web-platform-installer/web-platform-installer-v4-command-line-webpicmdexe-rtw-release
 
 Option 2 (using MSDeploy) ( Shouldn't be used. This way doesn't allow specify parameters on a fly )
 1) Create website hostedtrialwebdeploy

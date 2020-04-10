@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -420,7 +420,7 @@ namespace Hotcakes.Modules.Core.Controllers
             };
 
             var cat = HccApp.CatalogServices.Categories.Find(filter.CategoryId);
-            queryAdv.SortOrder = filter.SortOrder != CategorySortOrder.None ? filter.SortOrder : cat.DisplaySortOrder;
+            queryAdv.SortOrder = filter.SortOrder != CategorySortOrder.None ? filter.SortOrder : cat != null ? cat.DisplaySortOrder : CategorySortOrder.None;
             return queryAdv;
         }
 

@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -1386,6 +1386,15 @@ namespace Hotcakes.Commerce.Orders
 
             var orderService = Factory.CreateService<OrderService>(context);
             result.Add(new HtmlTemplateTag("[[Order.PaymentMethod]]", orderService.OrdersListPaymentMethods(this)));
+            var PurchaseOrderNumber = string.Empty;
+            foreach (var orderdetail in orderService.Transactions.FindForOrder(bvin))
+            {
+                if (!string.IsNullOrEmpty(orderdetail.PurchaseOrderNumber))
+                {
+                    PurchaseOrderNumber += orderdetail.PurchaseOrderNumber + ",";
+                }
+            }
+            result.Add(new HtmlTemplateTag("[[Order.Payment.PoNumber]]", PurchaseOrderNumber.Trim().TrimEnd(',')));
 
             result.Add(new HtmlTemplateTag("[[Order.PaymentStatus]]",
                 LocalizationUtils.GetOrderPaymentStatus(PaymentStatus, culture)));

@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2016 Hotcakes Commerce, LLC
+// Copyright (c) 2019 Hotcakes Commerce, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -408,7 +408,7 @@ namespace Hotcakes.Commerce.Catalog
             if (crosses == null) return new List<CategorySnapshot>();
 
             var bvins = (from x in crosses
-                select x.CategoryId).ToList();
+                         select x.CategoryId).ToList();
 
             return Categories.FindManySnapshots(bvins);
         }
@@ -1719,10 +1719,13 @@ namespace Hotcakes.Commerce.Catalog
 
             if (roles.Count == 0)
             {
-                var catIds = FindCategoriesForProduct(p.Bvin)
-                    .Select(c => DataTypeHelper.BvinToGuid(c.Bvin)).ToList();
+                var crosses = CategoriesXProducts.FindForProduct(p.Bvin, 1, int.MaxValue);
 
-                roles = CatalogRoles.FindByCategoryIds(catIds);
+                if (crosses != null && crosses.Count > 0)
+                {
+                    var catIds = crosses.Select(c => DataTypeHelper.BvinToGuid(c.CategoryId)).ToList();
+                    roles = CatalogRoles.FindByCategoryIds(catIds);
+                }
 
                 if (roles.Count == 0 && !string.IsNullOrEmpty(p.ProductTypeId))
                 {

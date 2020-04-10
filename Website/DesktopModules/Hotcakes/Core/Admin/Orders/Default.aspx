@@ -45,7 +45,7 @@
                 if (ids.length > 0) {
                     var templateId = $lstPrintTemplate.val();
                     var redirectUrl = "PrintOrder.aspx?templateid=" + templateId + "&autoprint=1&id=" + ids.join(",");
-                    window.location.replace(redirectUrl);
+                    window.open(redirectUrl, "_blank");
                 } else {
                     hcAlert(event, "Please select at least one order to print first.");
                 }
