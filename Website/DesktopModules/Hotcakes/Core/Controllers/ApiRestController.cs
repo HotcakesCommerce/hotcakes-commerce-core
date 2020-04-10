@@ -113,6 +113,7 @@ namespace Hotcakes.Modules.Core.Controllers
                 var inputStream = Request.InputStream;
                 if (inputStream != null)
                 {
+                    Request.InputStream.Position = 0;
                     var rdr = new StreamReader(inputStream);
                     postedString = rdr.ReadToEnd();
                 }
