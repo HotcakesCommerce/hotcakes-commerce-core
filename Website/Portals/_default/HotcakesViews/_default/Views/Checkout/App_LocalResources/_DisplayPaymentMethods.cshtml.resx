@@ -133,7 +133,7 @@
     <value>No Payment Required.</value>
   </data>
   <data name="PaymentPayPalExpress.Text" xml:space="preserve">
-    <value>Pay Pal Express</value>
+    <value>PayPal Express</value>
   </data>
   <data name="PaymentPurchaseOrder.Text" xml:space="preserve">
     <value>Purchase Order</value>
