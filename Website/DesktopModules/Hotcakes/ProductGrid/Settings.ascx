@@ -2,7 +2,6 @@
 <%@ Register Src="../Core/Controls/ProductPicker.ascx" TagName="ProductPicker" TagPrefix="uc" %>
 <%@ Register Src="../../../controls/labelcontrol.ascx" TagName="labelcontrol" TagPrefix="dnn" %>
 <%@ Import Namespace="DotNetNuke.Services.Localization" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <div class="dnnForm dnnClear" id="hcProductGridSettings" style="width:98%">
     <div class="dnnClear">
@@ -16,8 +15,7 @@
         </div>
 		<div class="dnnFormItem">
 			<dnn:LabelControl ID="ViewSelectionLabel" ControlName="ViewComboBox" Suffix=":" runat="server" />
-			<telerik:RadComboBox ID="ViewComboBox" runat="server" Width="250px" Height="150px"
-				EnableLoadOnDemand="False" ShowMoreResultsBox="false" EnableVirtualScrolling="false"/>
+			<asp:DropDownList ID="ViewComboBox" runat="server" Width="250px" Height="150px"/>
 		</div>
     </fieldset>
     <h2 id="hcProductPicker" class="dnnFormSectionHead"><a href="" class="dnnLabelExpanded"><%=LocalizeString("AddProducts")%></a></h2>
@@ -31,40 +29,41 @@
     <h2 id="hcProductsDisplay" class="dnnFormSectionHead"><a href="" class=""><%=LocalizeString("ProductsDisplay")%></a></h2>
     <fieldset>
         <div class="dnnFormItem">
-            <telerik:RadGrid ID="rgProducts" CssClass="dnnGrid"
+            <asp:GridView ID="rgProducts" CssClass="dnnGrid"
                 OnDeleteCommand="rgProducts_OnDeleteCommand"
                 OnItemCommand="rgProducts_OnItemCommand" runat="server"
                 AutoGenerateColumns="False"
-                GridLines="None">
-                <MasterTableView DataKeyNames="Key">
-                    <Columns>
-                        <telerik:GridTemplateColumn HeaderText="Product Image" HeaderStyle-Width="15%">
-                            <ItemTemplate>
-                                <img style="width: 50px;" src="<%#Eval("Value.ImageUrl") %>" />
-                            </ItemTemplate>
-                        </telerik:GridTemplateColumn>
-                        <telerik:GridBoundColumn DataField="Value.Item.ProductName" HeaderText="Product Name" HeaderStyle-Width="55%" />
-                        <telerik:GridTemplateColumn HeaderStyle-Width="10%">
-                            <ItemTemplate>
-                                <asp:LinkButton ID="btnUp" runat="server" CommandName="Up" Text="Up" />
-                            </ItemTemplate>
-                            <ItemStyle HorizontalAlign="Center" Width="30px" />
-                        </telerik:GridTemplateColumn>
-                        <telerik:GridTemplateColumn HeaderStyle-Width="10%">
-                            <ItemTemplate>
-                                <asp:LinkButton ID="btnDown" runat="server" CommandName="Down" Text="Down" />
-                            </ItemTemplate>
-                            <ItemStyle HorizontalAlign="Center" Width="30px" />
-                        </telerik:GridTemplateColumn>
-                        <telerik:GridTemplateColumn HeaderStyle-Width="10%">
-                            <ItemTemplate>
-                                <asp:LinkButton ID="btnDel" runat="server" CommandName="Delete" Text="Remove" />
-                            </ItemTemplate>
-                            <ItemStyle HorizontalAlign="Center" Width="30px" />
-                        </telerik:GridTemplateColumn>
-                    </Columns>
-                </MasterTableView>
-            </telerik:RadGrid>
+                GridLines="None" DataKeyField="Key">
+                <Columns>
+                    <asp:TemplateColumn HeaderText="Product Image">
+                        <ItemStyle Width="15%"/>
+                        <ItemTemplate>
+                            <img style="width: 50px;" src="<%#Eval("Value.ImageUrl") %>" />
+                        </ItemTemplate>
+                    </asp:TemplateColumn>
+                    <asp:BoundColumn DataField="Value.Item.ProductName" HeaderText="Product Name">
+                        <ItemStyle Width="55%"/>
+                    </asp:BoundColumn>
+                    <asp:TemplateColumn>
+                        <ItemTemplate>
+                            <asp:LinkButton ID="btnUp" runat="server" CommandName="Up" Text="Up" />
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" Width="30px" />
+                    </asp:TemplateColumn>
+                    <asp:TemplateColumn>
+                        <ItemTemplate>
+                            <asp:LinkButton ID="btnDown" runat="server" CommandName="Down" Text="Down" />
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" Width="30px" />
+                    </asp:TemplateColumn>
+                    <asp:TemplateColumn>
+                        <ItemTemplate>
+                            <asp:LinkButton ID="btnDel" runat="server" CommandName="Delete" Text="Remove" />
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" Width="30px" />
+                    </asp:TemplateColumn>
+                </Columns>
+            </asp:GridView>
             <br />
         </div>
         <div class="dnnFormItem">

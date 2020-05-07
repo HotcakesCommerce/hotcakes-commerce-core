@@ -27,7 +27,7 @@ using System;
 using DotNetNuke.Entities.Modules;
 using Hotcakes.Commerce.Dnn.Utils;
 using Hotcakes.Commerce.Dnn.Web;
-using Telerik.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Hotcakes.Modules.Checkout
 {
@@ -44,22 +44,22 @@ namespace Hotcakes.Modules.Checkout
             var payPalCheckoutViews = DnnPathHelper.GetViewNames("PayPalExpressCheckout");
             var notSetText = LocalizeString("NoneSelectedText");
 
-            ViewComboBox.Items.Add(new RadComboBoxItem(notSetText, string.Empty));
+            ViewComboBox.Items.Add(new ListItem(notSetText, string.Empty));
             ViewComboBox.AppendDataBoundItems = true;
             ViewComboBox.DataSource = checkoutViews;
             ViewComboBox.DataBind();
 
-            ReceiptViewComboBox.Items.Add(new RadComboBoxItem(notSetText, string.Empty));
+            ReceiptViewComboBox.Items.Add(new ListItem(notSetText, string.Empty));
             ReceiptViewComboBox.AppendDataBoundItems = true;
             ReceiptViewComboBox.DataSource = checkoutViews;
             ReceiptViewComboBox.DataBind();
 
-            PaymentErrorViewComboBox.Items.Add(new RadComboBoxItem(notSetText, string.Empty));
+            PaymentErrorViewComboBox.Items.Add(new ListItem(notSetText, string.Empty));
             PaymentErrorViewComboBox.AppendDataBoundItems = true;
             PaymentErrorViewComboBox.DataSource = checkoutViews;
             PaymentErrorViewComboBox.DataBind();
 
-            PayPalViewComboBox.Items.Add(new RadComboBoxItem(notSetText, string.Empty));
+            PayPalViewComboBox.Items.Add(new ListItem(notSetText, string.Empty));
             PayPalViewComboBox.AppendDataBoundItems = true;
             PayPalViewComboBox.DataSource = payPalCheckoutViews;
             PayPalViewComboBox.DataBind();

@@ -24,12 +24,12 @@
 #endregion
 
 using System;
+using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Modules;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Content;
 using Hotcakes.Commerce.Dnn.Utils;
 using Hotcakes.Commerce.Dnn.Web;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.ProductViewer
 {
@@ -80,12 +80,17 @@ namespace Hotcakes.Modules.ProductViewer
             controller.UpdateModuleSetting(ModuleId, "View", viewText);
         }
 
-        protected void ProductComboBox_ItemsRequested(object sender, RadComboBoxItemsRequestedEventArgs e)
+        protected void BindProducts()
         {
+            //TODO: Restore auto-complete functionality 
+            /*
             var criteria = new ProductSearchCriteria();
             criteria.Keyword = e.Text;
 
             var products = HccApp.CatalogServices.Products.FindByCriteria(criteria);
+            */
+            // only getting the first 500 for now (until the TODO above is done)
+            var products = HccApp.CatalogServices.Products.FindAllPaged(0, 500);
 
             ProductComboBox.Items.Clear();
 
@@ -94,7 +99,7 @@ namespace Hotcakes.Modules.ProductViewer
             ProductComboBox.DataValueField = "UrlSlug";
             ProductComboBox.DataBind();
 
-            ProductComboBox.Items.Insert(0, new RadComboBoxItem(LocalizeString("NoneSelectedText"), string.Empty));
+            ProductComboBox.Items.Insert(0, new ListItem(LocalizeString("NoneSelectedText"), string.Empty));
         }
 
         #region Implementation
@@ -104,10 +109,12 @@ namespace Hotcakes.Modules.ProductViewer
         /// </summary>
         private void FillForm()
         {
-            ViewComboBox.Items.Add(new RadComboBoxItem(LocalizeString("NoneSelectedText"), string.Empty));
+            ViewComboBox.Items.Add(new ListItem(LocalizeString("NoneSelectedText"), string.Empty));
             ViewComboBox.AppendDataBoundItems = true;
             ViewComboBox.DataSource = DnnPathHelper.GetViewNames("Products");
             ViewComboBox.DataBind();
+
+            BindProducts();
         }
 
         private string LookupProduct(string slugText)
