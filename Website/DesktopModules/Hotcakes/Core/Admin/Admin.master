@@ -1,7 +1,4 @@
 <%@ Master Language="C#" Inherits="Hotcakes.Modules.Core.Admin.Admin" CodeBehind="Admin.master.cs" AutoEventWireup="True" %>
-
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
-
 <%@ Register Src="Header.ascx" TagName="Header" TagPrefix="hcc" %>
 <%@ Register Src="Footer.ascx" TagName="Footer" TagPrefix="hcc" %>
 <%@ Register Src="Controls/NavMenu.ascx" TagName="NavMenu" TagPrefix="hcc" %>
@@ -15,7 +12,6 @@
 </head>
 <body>
     <form runat="server">
-        <telerik:RadScriptManager runat="server"></telerik:RadScriptManager>
         <asp:PlaceHolder ID="BodySCRIPTS" runat="server" />
         <div id="wrapper" class="dnnClear">
             <div id="header">

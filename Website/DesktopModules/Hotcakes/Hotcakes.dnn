@@ -469,10 +469,6 @@
                     <add name="UrlRoutingModule-4.0" type="Hotcakes.Commerce.Dnn.Providers.HccUrlRoutingModule, Hotcakes.Commerce.Dnn" preCondition="managedHandler,runtimeVersionv4.0" />
                   </node>
 
-                  <node path="/configuration/system.webServer/handlers" action="update" key="path" collision="overwrite">
-                    <add name="Telerik.Web.UI.DialogHandler" verb="*" path="Telerik.Web.UI.DialogHandler.aspx" type="Telerik.Web.UI.DialogHandler" preCondition="integratedMode" />
-                  </node>
-
                   <node path="/configuration/system.webServer/handlers/add[@name = 'Stylesheets']" action="remove" collision="overwrite" />
                   <node path="/configuration/system.webServer/handlers/add[@name = 'Javascripts']" action="remove" collision="overwrite" />
                   <node path="/configuration/system.webServer/handlers/add[@name = 'Xmls']" action="remove" collision="overwrite" />
@@ -506,7 +502,6 @@
                     <add name="UrlRoutingModule-4.0" type="System.Web.Routing.UrlRoutingModule" preCondition="" />
                   </node>
 
-                  <node path="/configuration/system.webServer/handlers/add[@name = 'Telerik.Web.UI.DialogHandler']" action="remove" collision="overwrite" />
                   <node path="/configuration/system.webServer/handlers/remove[@name = 'ExtensionlessUrlHandler-ISAPI-4.0_32bit']" action="remove" collision="overwrite" />
                   <node path="/configuration/system.webServer/handlers/remove[@name = 'ExtensionlessUrlHandler-ISAPI-4.0_64bit']" action="remove" collision="overwrite" />
                   <node path="/configuration/system.webServer/handlers/add[@name = 'ExtensionlessUrlHandler-ISAPI-4.0_32bit']" action="remove" collision="overwrite" />
