@@ -64,7 +64,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtCategoryUrl;
+        protected global::System.Web.UI.WebControls.TextBox txtCategoryUrl;
         
         /// <summary>
         /// lblProducts control.
@@ -82,7 +82,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtProductsUrl;
+        protected global::System.Web.UI.WebControls.TextBox txtProductsUrl;
         
         /// <summary>
         /// lblCheckout control.
@@ -100,7 +100,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtCheckoutUrl;
+        protected global::System.Web.UI.WebControls.TextBox txtCheckoutUrl;
         
         /// <summary>
         /// btnCreate control.

@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Step3Shipping.ascx.cs" Inherits="Hotcakes.Modules.Core.Admin.SetupWizard.Step3Shipping" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <script type="text/javascript">
     hcAttachUpdatePanelLoader();
@@ -29,28 +28,25 @@
             <asp:UpdatePanel ID="upnlMethodsgrid" UpdateMode="Always" runat="server">
                 <ContentTemplate>
                     <div class="hcFormItem hcFormItem66p">
-                        <telerik:RadComboBox ID="ddlProviders" AutoPostBack="False" CssClass="hcInput50p" runat="server" />
+                        <asp:DropDownList ID="ddlProviders" AutoPostBack="False" CssClass="hcInput50p" runat="server" />
                     </div>
                     <div class="hcFormItem hcFormItem33p">
                         <asp:LinkButton ID="btnNewMethod" resourcekey="Create" CssClass="hcButton hcSmall" OnClick="btnCreateMethod_Click" runat="server" />
                     </div>
                     <div class="hcFormItem">
-                        <telerik:RadGrid runat="server" ID="gridMethods" AutoGenerateColumns="False" GridLines="None" Width="100%"
-                            OnDeleteCommand="gridMethods_ItemDelete" OnEditCommand="gridMethods_ItemEdit" OnItemCreated="gridMethods_ItemCreated">
-
-                            <MasterTableView DataKeyNames="Bvin" HorizontalAlign="NotSet" AutoGenerateColumns="False" GridLines="None">
-                                <Columns>
-                                    <telerik:GridBoundColumn DataField="Name" UniqueName="Name" />
-                                    <telerik:GridTemplateColumn>
-                                        <ItemStyle Width="80px" />
-                                        <ItemTemplate>
-                                            <asp:LinkButton ID="btnEdit" CssClass="hcIconEdit" runat="server" CausesValidation="False" CommandName="Edit" OnPreRender="btnEdit_OnPreRender" />
-                                            <asp:LinkButton ID="btnDelete" CssClass="hcIconDelete" runat="server" CausesValidation="False" CommandName="Delete" OnPreRender="btnDeleteMethod_OnPreRender" />
-                                        </ItemTemplate>
-                                    </telerik:GridTemplateColumn>
-                                </Columns>
-                            </MasterTableView>
-                        </telerik:RadGrid>
+                        <asp:GridView runat="server" ID="gridMethods" AutoGenerateColumns="False" GridLines="None" Width="100%"
+                            OnDeleteCommand="gridMethods_RowDeleting" OnEditCommand="gridMethods_RowEditing" OnItemCreated="gridMethods_RowCreated" DataKeyNames="Bvin">
+                            <Columns>
+                                <asp:BoundColumn DataField="Name" UniqueName="Name" />
+                                <asp:TemplateColumn>
+                                    <ItemStyle Width="80px" />
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="btnEdit" CssClass="hcIconEdit" runat="server" CausesValidation="False" CommandName="Edit" OnPreRender="btnEdit_OnPreRender" />
+                                        <asp:LinkButton ID="btnDelete" CssClass="hcIconDelete" runat="server" CausesValidation="False" CommandName="Delete" OnPreRender="btnDeleteMethod_OnPreRender" />
+                                    </ItemTemplate>
+                                </asp:TemplateColumn>
+                            </Columns>
+                        </asp:GridView>
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
@@ -62,7 +58,7 @@
             <asp:UpdatePanel ID="upnlZonesGrid" UpdateMode="Always" runat="server">
                 <ContentTemplate>
                     <div class="hcFormItem hcFormItem66p">
-                        <telerik:RadTextBox ID="txtShippingZoneName" CssClass="hcInput50p" runat="server" />
+                        <asp:TextBox ID="txtShippingZoneName" CssClass="hcInput50p" runat="server" MaxLength="50" />
                         <asp:RequiredFieldValidator ID="rfvShippingZoneName" runat="server"
                             ControlToValidate="txtShippingZoneName" ValidationGroup="ShippingZone"
                             Display="Dynamic" CssClass="hcFormError" />
@@ -71,25 +67,21 @@
                         <asp:LinkButton ID="btnNewZone" resourcekey="Create" CssClass="hcButton hcSmall" OnClick="btnCreateZone_Click" runat="server" ValidationGroup="ShippingZone" />
                     </div>
                     <div class="hcFormItem">
-                        <telerik:RadGrid runat="server" ID="gridZones" AutoGenerateColumns="False" Width="100%"
+                        <asp:GridView runat="server" ID="gridZones" AutoGenerateColumns="False" Width="100%"
                             OnItemDataBound="gridZones_ItemDataBound"
-                            OnDeleteCommand="gridZones_ItemDelete"
-                            OnEditCommand="gridZones_ItemEdit" OnItemCreated="gridZones_OnItemCreated">
-
-                            <MasterTableView Width="100%" DataKeyNames="Id" HorizontalAlign="NotSet" AutoGenerateColumns="False" GridLines="None">
-                                <Columns>
-                                    <telerik:GridBoundColumn DataField="Name" UniqueName="Name" />
-                                    <telerik:GridTemplateColumn>
-                                        <ItemStyle Width="80px" />
-                                        <ItemTemplate>
-                                            <asp:LinkButton ID="btnEdit" CssClass="hcIconEdit" runat="server" CausesValidation="False" CommandName="Edit" OnPreRender="btnEdit_OnPreRender" />
-                                            <asp:LinkButton ID="btnDelete" CssClass="hcIconDelete" runat="server" CausesValidation="False" CommandName="Delete" OnPreRender="btnDeleteZone_OnPreRender" />
-                                        </ItemTemplate>
-                                    </telerik:GridTemplateColumn>
-                                </Columns>
-
-                            </MasterTableView>
-                        </telerik:RadGrid>
+                            OnDeleteCommand="gridZones_RowDeleting"
+                            OnEditCommand="gridZones_RowEditing" OnItemCreated="gridZones_RowCreated" DataKeyNames="Id">
+                            <Columns>
+                                <asp:BoundColumn DataField="Name" UniqueName="Name" />
+                                <asp:TemplateColumn>
+                                    <ItemStyle Width="80px" />
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="btnEdit" CssClass="hcIconEdit" runat="server" CausesValidation="False" CommandName="Edit" OnPreRender="btnEdit_OnPreRender" />
+                                        <asp:LinkButton ID="btnDelete" CssClass="hcIconDelete" runat="server" CausesValidation="False" CommandName="Delete" OnPreRender="btnDeleteZone_OnPreRender" />
+                                    </ItemTemplate>
+                                </asp:TemplateColumn>
+                            </Columns>
+                        </asp:GridView>
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
@@ -100,7 +92,7 @@
             <h2><%=Localization.GetString("Handling") %></h2>
             <div class="hcFormItem">
                 <asp:Label runat="server" CssClass="hcLabel"><%=Localization.GetString("HandlingFeeAmount") %> <i class="hcIconInfo"><span class="hcFormInfo hcHandlingFeeHelp"><%=Localization.GetString("HandlingFeeAmountHelp") %></span></i></asp:Label>
-                <telerik:RadTextBox ID="txtHandlingFeeAmount" runat="server" />
+                <asp:TextBox ID="txtHandlingFeeAmount" runat="server" MaxLength="10" />
                 <asp:CustomValidator ID="HandlingFeeAmountCustomValidator" runat="server" CssClass="hcFormError" 
                     ControlToValidate="txtHandlingFeeAmount" Display="Dynamic" OnServerValidate="HandlingFeeAmountCustomValidator_ServerValidate" />
             </div>

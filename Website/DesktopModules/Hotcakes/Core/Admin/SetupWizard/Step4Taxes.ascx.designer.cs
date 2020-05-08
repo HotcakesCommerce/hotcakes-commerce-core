@@ -46,7 +46,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtDisplayName;
+        protected global::System.Web.UI.WebControls.TextBox txtDisplayName;
         
         /// <summary>
         /// DisplayNameValidator control.
@@ -73,7 +73,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid gridTaxes;
+        protected global::System.Web.UI.WebControls.GridView gridTaxes;
         
         /// <summary>
         /// hcEditTaxScheduleDialog control.
@@ -119,15 +119,6 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnSave;
-        
-        /// <summary>
-        /// btnLater control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnLater;
         
         /// <summary>
         /// btnExit control.

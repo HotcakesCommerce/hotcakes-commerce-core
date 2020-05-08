@@ -28,7 +28,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Hotcakes.Commerce.Taxes;
 using Hotcakes.Modules.Core.Admin.AppCode;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.SetupWizard
 {
@@ -52,6 +51,10 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
 
             btnTaxScheduleSave.Click += btnTaxScheduleSave_Click;
             btnTaxScheduleCancel.Click += btnTaxScheduleCancel_Click;
+
+            gridTaxes.RowEditing += gridTaxes_RowEditing;
+            gridTaxes.RowDeleting += gridTaxes_RowDeleting;
+            gridTaxes.RowCreated += gridTaxes_RowCreated;
 
             LocalizeView();
 
@@ -87,18 +90,16 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
             LoadTaxScheduleEditor();
         }
 
-        protected void gridTaxes_ItemDelete(object sender, GridCommandEventArgs e)
+        protected void gridTaxes_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            var itemId = ((TaxSchedule) e.Item.DataItem).Id;
+            var itemId = ((TaxSchedule) gridTaxes.Rows[e.RowIndex].DataItem).Id;
             HccApp.OrderServices.TaxSchedulesDestroy(itemId);
             LoadSchedules();
         }
 
-        protected void gridTaxes_ItemEdit(object sender, GridCommandEventArgs e)
+        protected void gridTaxes_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            var taxSchedule = (TaxSchedule) e.Item.DataItem;
-            e.Canceled = true;
-            e.Item.Edit = false;
+            var taxSchedule = (TaxSchedule) gridTaxes.Rows[e.NewEditIndex].DataItem;
 
             EditedTaxScheduleId = taxSchedule.Id;
             LoadTaxScheduleEditor();
@@ -157,14 +158,12 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
             }
         }
 
-        protected void gridTaxes_OnItemCreated(object sender, GridItemEventArgs e)
+        protected void gridTaxes_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            var headerItem = e.Item as GridHeaderItem;
-            if (headerItem != null)
+            var headerItem = e.Row;
+            if (headerItem != null && headerItem.RowType == DataControlRowType.Header)
             {
-                var header = headerItem;
-
-                header["Name"].Text = Localization.GetString("ScheduleName");
+                headerItem.Cells[0].Text = Localization.GetString("ScheduleName");
             }
         }
 
@@ -230,7 +229,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
 
         private void LocalizeView()
         {
-            txtDisplayName.EmptyMessage = Localization.GetString("txtDisplayName.EmptyMessage");
+            txtDisplayName.Attributes["placeholder"] = Localization.GetString("txtDisplayName.EmptyMessage");
             DisplayNameValidator.ErrorMessage = Localization.GetString("DisplayNameValidator.ErrorMessage");
         }
 

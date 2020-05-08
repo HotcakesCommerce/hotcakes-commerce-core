@@ -31,7 +31,6 @@ using System.Web.UI.WebControls;
 using Hotcakes.Commerce.Shipping;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Modules.Core.Admin.Parts.ShippingZones;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.SetupWizard
 {
@@ -40,6 +39,15 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
+
+            gridMethods.RowDeleting += gridMethods_RowDeleting;
+            gridMethods.RowCreated += gridMethods_RowCreating;
+            gridMethods.RowEditing += gridMethods_RowEditing;
+
+            gridZones.RowDeleting += gridZones_RowDeleting;
+            gridZones.RowCreated += gridZones_RowCreated;
+            gridZones.RowEditing += gridZones_RowEditing;
+            gridZones.RowDataBound += gridZones_RowDataBound;
 
             LocalizeView();
 
@@ -82,25 +90,21 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
             NotifyFinishedEditing("EXIT");
         }
 
-        protected void gridMethods_ItemCreated(object sender, GridItemEventArgs e)
+        protected void gridMethods_RowCreating(object sender, GridViewRowEventArgs e)
         {
-            var headerItem = e.Item as GridHeaderItem;
-            if (headerItem != null)
+            var headerItem = e.Row;
+            if (headerItem != null && headerItem.RowType == DataControlRowType.Header)
             {
-                var header = headerItem;
-
-                header["Name"].Text = Localization.GetString("ShippingMethod");
+                headerItem.Cells[0].Text = Localization.GetString("ShippingMethod");
             }
         }
 
-        protected void gridZones_OnItemCreated(object sender, GridItemEventArgs e)
+        protected void gridZones_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            var headerItem = e.Item as GridHeaderItem;
+            var headerItem = e.Row;
             if (headerItem != null)
             {
-                var header = headerItem;
-
-                header["Name"].Text = Localization.GetString("ShippingZones");
+                headerItem.Cells[0].Text = Localization.GetString("ShippingZones");
             }
         }
 
@@ -126,7 +130,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
 
         private void LocalizeView()
         {
-            txtShippingZoneName.EmptyMessage = Localization.GetString("NewZoneField.EmptyMessage");
+            txtShippingZoneName.Attributes["placeholder"] = Localization.GetString("NewZoneField.EmptyMessage");
             rfvShippingZoneName.ErrorMessage = Localization.GetString("NewZoneFieldValidator.ErrorMessage");
             HandlingFeeAmountCustomValidator.ErrorMessage =
                 Localization.GetString("HandlingFeeAmountCustomValidator.ErrorMessage");
@@ -233,7 +237,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
             ddlProviders.ClearSelection();
             foreach (var shippingService in AvailableServices.FindAll(HccApp.CurrentStore))
             {
-                ddlProviders.Items.Add(new RadComboBoxItem(shippingService.Name, shippingService.Id));
+                ddlProviders.Items.Add(new ListItem(shippingService.Name, shippingService.Id));
             }
         }
 
@@ -246,9 +250,9 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
             RegisterOpenDialogScript();
         }
 
-        protected void gridMethods_ItemDelete(object sender, GridCommandEventArgs e)
+        protected void gridMethods_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            var method = (ShippingMethod) e.Item.DataItem;
+            var method = (ShippingMethod) gridMethods.Rows[e.RowIndex].DataItem;
             HccApp.OrderServices.ShippingMethods.Delete(method.Bvin);
             LoadShippingMethods();
 
@@ -256,19 +260,14 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
             ClearEditorsInfo();
         }
 
-        protected void gridMethods_ItemEdit(object sender, GridCommandEventArgs e)
+        protected void gridMethods_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            e.Canceled = true;
-            e.Item.Edit = false;
-            e.Item.Selected = false;
-
-            var method = (ShippingMethod) e.Item.DataItem;
+            var method = (ShippingMethod) gridMethods.Rows[e.NewEditIndex].DataItem;
 
             NewShippingMethod = null;
             //Open Method Edit dialog
             LoadShippingMethodEditor(method.Bvin);
             RegisterOpenDialogScript();
-            e.Canceled = true;
         }
 
         private void LoadShippingMethodEditor(string shippingMethodId)
@@ -352,43 +351,38 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
             gridZones.DataBind();
         }
 
-        protected void gridZones_ItemDataBound(object sender, GridItemEventArgs e)
+        protected void gridZones_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            var zone = (Zone) e.Item.DataItem;
+            var zone = (Zone) e.Row.DataItem;
             if (zone != null && zone.IsBuiltInZone)
             {
-                var btnEdit = (LinkButton) e.Item.FindControl("btnEdit");
+                var btnEdit = (LinkButton) e.Row.FindControl("btnEdit");
                 if (btnEdit != null)
                     btnEdit.Visible = false;
 
-                var btnDelete = (LinkButton) e.Item.FindControl("btnDelete");
+                var btnDelete = (LinkButton) e.Row.FindControl("btnDelete");
                 if (btnDelete != null)
                     btnDelete.Visible = false;
             }
         }
 
-        protected void gridZones_ItemDelete(object sender, GridCommandEventArgs e)
+        protected void gridZones_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            var zone = (Zone) e.Item.DataItem;
+            var zone = (Zone) gridZones.Rows[e.RowIndex].DataItem;
             HccApp.OrderServices.ShippingZones.Delete(zone.Id);
             ClearEditorsInfo();
             LoadShippingZones();
         }
 
-        protected void gridZones_ItemEdit(object sender, GridCommandEventArgs e)
+        protected void gridZones_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            e.Canceled = true;
-            e.Item.Edit = false;
-            e.Item.Selected = false;
-
             //Open Zone Edit dialog
-            var zone = (Zone) e.Item.DataItem;
+            var zone = (Zone) gridZones.Rows[e.NewEditIndex].DataItem;
             if (zone != null)
             {
                 LoadShippingZoneEditor(zone.Id);
                 RegisterOpenDialogScript();
             }
-            e.Canceled = true;
         }
 
         private void LoadShippingZoneEditor(long shippingZoneId)
