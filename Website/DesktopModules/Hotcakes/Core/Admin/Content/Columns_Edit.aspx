@@ -1,6 +1,4 @@
 <%@ Page ValidateRequest="false" Language="C#" MasterPageFile="../AdminNav.master" AutoEventWireup="True" Inherits="Hotcakes.Modules.Core.Admin.Content.Columns_Edit" Title="Untitled Page" CodeBehind="Columns_Edit.aspx.cs" %>
-
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register Src="../Controls/NavMenu.ascx" TagName="NavMenu" TagPrefix="hcc" %>
 <%@ Register Src="../Controls/ContentColumnEditor.ascx" TagName="ContentColumnEditor" TagPrefix="hcc" %>
 <%@ Register Src="../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
@@ -15,8 +13,7 @@
                 <div class="hcFormItem hcGo">
                     <label class="hcLabel">Copy From</label>
                     <div class="hcSelectOuter">
-						<telerik:RadComboBox runat="server" ID="CopyToList">
-						</telerik:RadComboBox>
+                        <asp:DropDownList runat="server" ID="CopyToList"/>
 
                         <asp:LinkButton ID="btnCopyBlocks" runat="server" CssClass="hcIconRight" OnClick="btnCopyBlocks_Click" />
                     </div>
