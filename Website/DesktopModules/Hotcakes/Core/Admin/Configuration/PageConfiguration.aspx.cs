@@ -26,12 +26,12 @@
 using System;
 using System.Collections.Generic;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using Hotcakes.Commerce.Dnn.Utils;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Modules.Core.Admin.AppCode;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.Configuration
 {
@@ -123,7 +123,7 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
             }
         }
 
-        private void PopulateTabsDropDown(RadComboBox ddlTabs, List<TabInfo> list, int defaultValue)
+        private void PopulateTabsDropDown(DropDownList ddlTabs, List<TabInfo> list, int defaultValue)
         {
             ddlTabs.Items.Clear();
             ddlTabs.ClearSelection();
@@ -132,7 +132,7 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
             ddlTabs.DataValueField = "TabID";
             ddlTabs.DataBind();
 
-            var li = new RadComboBoxItem
+            var li = new ListItem
             {
                 Value = Convert.ToString(-1),
                 Text = Localization.GetString("CreateNewPage")

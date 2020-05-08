@@ -27,11 +27,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Web.UI.WebControls;
 using Hotcakes.Commerce.Dnn.Workflow;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Modules.Core.Integration;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.Configuration
 {
@@ -83,7 +83,7 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
             }
         }
 
-        private static void BindAssemblyNames(Type baseType, RadComboBox ddl, string selectedValue)
+        private static void BindAssemblyNames(Type baseType, DropDownList ddl, string selectedValue)
         {
             var types = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(a =>
@@ -114,11 +114,11 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
 
         private void LocalizeView()
         {
-            ddlWorkflowAssemblies.Items.Add(new RadComboBoxItem(Localization.GetString("HotcakesDefaultWorkflow"),
+            ddlWorkflowAssemblies.Items.Add(new ListItem(Localization.GetString("HotcakesDefaultWorkflow"),
                 string.Empty));
-            ddlProductAssemblies.Items.Add(new RadComboBoxItem(Localization.GetString("NoIntegration"), string.Empty));
-            ddlCartAssemblies.Items.Add(new RadComboBoxItem(Localization.GetString("NoIntegration"), string.Empty));
-            ddlCheckoutAssemblies.Items.Add(new RadComboBoxItem(Localization.GetString("NoIntegration"), string.Empty));
+            ddlProductAssemblies.Items.Add(new ListItem(Localization.GetString("NoIntegration"), string.Empty));
+            ddlCartAssemblies.Items.Add(new ListItem(Localization.GetString("NoIntegration"), string.Empty));
+            ddlCheckoutAssemblies.Items.Add(new ListItem(Localization.GetString("NoIntegration"), string.Empty));
         }
     }
 }

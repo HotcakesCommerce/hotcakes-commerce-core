@@ -1,6 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="../AdminNav.master" AutoEventWireup="true" CodeBehind="Extensibility.aspx.cs" Inherits="Hotcakes.Modules.Core.Admin.Configuration.Extensibility" %>
-
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register Src="../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
 <%@ Register Src="../Controls/NavMenu.ascx" TagName="NavMenu" TagPrefix="hcc" %>
 
@@ -15,20 +13,20 @@
         <div class="hcForm">
             <div class="hcFormItem">
                 <label class="hcLabel"><%=Localization.GetString("ActiveOrderWorkflow") %></label>
-                <telerik:RadComboBox ID="ddlWorkflowAssemblies" runat="server"/>
+                <asp:DropDownList ID="ddlWorkflowAssemblies" runat="server"/>
             </div>
             <div class="hcFormItem">
                 <label class="hcLabel"><%=Localization.GetString("ProductIntegration") %></label>
-                <telerik:RadComboBox ID="ddlProductAssemblies" runat="server"/>
+                <asp:DropDownList ID="ddlProductAssemblies" runat="server"/>
             </div>
             <div class="hcFormItem">
                 <label class="hcLabel"><%=Localization.GetString("CartIntegration") %></label>
-                <telerik:RadComboBox ID="ddlCartAssemblies" runat="server"/>
+                <asp:DropDownList ID="ddlCartAssemblies" runat="server"/>
 
             </div>
             <div class="hcFormItem">
                 <label class="hcLabel"><%=Localization.GetString("CheckoutIntegration") %></label>
-                <telerik:RadComboBox ID="ddlCheckoutAssemblies" runat="server"/>
+                <asp:DropDownList ID="ddlCheckoutAssemblies" runat="server"/>
             </div>
             <ul class="hcActions">
                 <li>
