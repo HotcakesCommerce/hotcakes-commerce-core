@@ -1,7 +1,5 @@
 <%@ Page MasterPageFile="../AdminNav.master" ValidateRequest="False" Language="C#"
     AutoEventWireup="True" Inherits="Hotcakes.Modules.Core.Admin.Catalog.ProductTypePropertiesEdit" CodeBehind="ProductTypePropertiesEdit.aspx.cs" %>
-
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register Src="../Controls/NavMenu.ascx" TagName="NavMenu" TagPrefix="hcc" %>
 <%@ Register Src="../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
 
@@ -110,7 +108,7 @@
             <asp:View runat="server" ID="vDate">
                 <div class="hcFormItemHor" runat="server">
                     <asp:Label runat="server" Text="Default Value" CssClass="hcLabel" />
-                    <telerik:RadDatePicker ID="radDefaultDate" runat="server" />
+                    <asp:TextBox ID="radDefaultDate" runat="server" TextMode="Date" />
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="radDefaultDate" CssClass="hcFormError" Text="Default Date is Required" />
                 </div>
             </asp:View>
@@ -134,36 +132,34 @@
                         <asp:LinkButton ID="btnNewChoice" runat="server" Text="New Choice" CssClass="hcSecondaryAction hcSmall" OnClick="btnNewChoice_Click" />
                     </div>
                     <div class="hcFormItem hcFormItem66p">
-                        <telerik:RadGrid ID="rgChoices" CssClass="hcGrid" runat="server">
-                            <MasterTableView AutoGenerateColumns="false" DataKeyNames="Id">
-                                <HeaderStyle CssClass="hcGridHeader" />
-                                <ItemStyle CssClass="hcGridRow" />
-                                <AlternatingItemStyle CssClass="hcGridRow" />
-                                <Columns>
-                                    <telerik:GridTemplateColumn>
-                                        <ItemStyle Width="22px" />
-                                        <ItemTemplate>
-                                            <span class='hcIconMove'></span>
-                                        </ItemTemplate>
-                                    </telerik:GridTemplateColumn>
-                                    <telerik:GridTemplateColumn UniqueName="Default" HeaderText="Default">
-                                        <ItemTemplate>
-                                            <asp:CheckBox runat="server" ID="chbDefault" CssClass="hcDefaultChoice" />
-                                        </ItemTemplate>
-                                    </telerik:GridTemplateColumn>
-                                    <telerik:GridBoundColumn DataField="ChoiceName" HeaderText="Choice Name" />
-                                    <telerik:GridBoundColumn DataField="DisplayName" HeaderText="Display Name" />
-                                    <telerik:GridTemplateColumn>
-                                        <ItemStyle Width="80px" />
-                                        <ItemTemplate>
-                                            <asp:LinkButton Text="Edit" CssClass="hcIconEdit" CommandName="Edit" runat="server" />
-                                            <asp:LinkButton Text="Delete" CssClass="hcIconDelete" CommandName="Delete"
-                                                OnClientClick="return hcConfirm(event,'Are you sure you want to delete this item?');" runat="server" />
-                                        </ItemTemplate>
-                                    </telerik:GridTemplateColumn>
-                                </Columns>
-                            </MasterTableView>
-                        </telerik:RadGrid>
+                        <asp:GridView ID="rgChoices" CssClass="hcGrid" runat="server" DataKeyNames="Id">
+                            <HeaderStyle CssClass="hcGridHeader" />
+                            <RowStyle CssClass="hcGridRow" />
+                            <AlternatingRowStyle CssClass="hcGridRow" />
+                            <Columns>
+                                <asp:TemplateColumn>
+                                    <ItemStyle Width="22px" />
+                                    <ItemTemplate>
+                                        <span class='hcIconMove'></span>
+                                    </ItemTemplate>
+                                </asp:TemplateColumn>
+                                <asp:TemplateColumn UniqueName="Default" HeaderText="Default">
+                                    <ItemTemplate>
+                                        <asp:CheckBox runat="server" ID="chbDefault" CssClass="hcDefaultChoice" />
+                                    </ItemTemplate>
+                                </asp:TemplateColumn>
+                                <asp:BoundColumn DataField="ChoiceName" HeaderText="Choice Name" />
+                                <asp:BoundColumn DataField="DisplayName" HeaderText="Display Name" />
+                                <asp:TemplateColumn>
+                                    <ItemStyle Width="80px" />
+                                    <ItemTemplate>
+                                        <asp:LinkButton Text="Edit" CssClass="hcIconEdit" CommandName="Edit" runat="server" />
+                                        <asp:LinkButton Text="Delete" CssClass="hcIconDelete" CommandName="Delete"
+                                            OnClientClick="return hcConfirm(event,'Are you sure you want to delete this item?');" runat="server" />
+                                    </ItemTemplate>
+                                </asp:TemplateColumn>
+                            </Columns>
+                        </asp:GridView>
                         <asp:Panel ID="pnlEditChoice" runat="server" Visible="false">
                             <div id="hcEditChoiceDialog" class="dnnClear">
                                 <div class="hcForm">

@@ -136,7 +136,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox lstProductType;
+        protected global::System.Web.UI.WebControls.DropDownList lstProductType;
         
         /// <summary>
         /// ProductTypeCustomValidator control.
@@ -289,7 +289,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox lstManufacturers;
+        protected global::System.Web.UI.WebControls.DropDownList lstManufacturers;
         
         /// <summary>
         /// lstVendors control.
@@ -298,7 +298,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox lstVendors;
+        protected global::System.Web.UI.WebControls.DropDownList lstVendors;
         
         /// <summary>
         /// chkActive control.
@@ -334,7 +334,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlTemplateList;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTemplateList;
         
         /// <summary>
         /// ucImageUploadLarge control.

@@ -1,7 +1,5 @@
 <%@ Page Language="C#" MasterPageFile="../AdminNav.master" AutoEventWireup="True" Inherits="Hotcakes.Modules.Core.Admin.Catalog.ProductSharedChoices"
 	Title="Untitled Page" CodeBehind="ProductSharedChoices.aspx.cs" %>
-
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register Src="../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="uc1" %>
 <%@ Register Src="../Controls/NavMenu.ascx" TagName="NavMenu" TagPrefix="hcc" %>
 
@@ -12,16 +10,16 @@
 		<div class="hcForm">
 			<div class="hcFormItem">
 				<label class="hcLabel">+ New Shared Choice</label>
-				<telerik:RadComboBox runat="server" ID="SharedChoiceTypes">
+				<asp:DropDownList runat="server" ID="SharedChoiceTypes">
 					<Items>
-						<telerik:RadComboBoxItem Value="100" Text="Drop Down List" />
-						<telerik:RadComboBoxItem Value="200" Text="Radio Button List" />
-						<telerik:RadComboBoxItem Value="300" Text="Checkboxes" />
-						<telerik:RadComboBoxItem Value="400" Text="Html Description" />
-						<telerik:RadComboBoxItem Value="500" Text="Text Input" />
-						<telerik:RadComboBoxItem Value="600" Text="File Upload" />
+						<asp:ListItem Value="100" Text="Drop Down List" />
+						<asp:ListItem Value="200" Text="Radio Button List" />
+						<asp:ListItem Value="300" Text="Checkboxes" />
+						<asp:ListItem Value="400" Text="Html Description" />
+						<asp:ListItem Value="500" Text="Text Input" />
+						<asp:ListItem Value="600" Text="File Upload" />
 					</Items>
-				</telerik:RadComboBox>
+				</asp:DropDownList>
 			</div>
 		</div>
 	</div>

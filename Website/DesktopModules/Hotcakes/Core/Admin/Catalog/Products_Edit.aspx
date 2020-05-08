@@ -1,8 +1,5 @@
 <%@ Page ValidateRequest="false" Language="C#" MasterPageFile="../AdminNav.master" AutoEventWireup="True" Inherits="Hotcakes.Modules.Core.Admin.Catalog.Products_Edit" CodeBehind="Products_Edit.aspx.cs" %>
-
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register Assembly="Hotcakes.Modules" Namespace="Hotcakes.Modules.Core.Admin.AppCode" TagPrefix="hcc" %>
-
 <%@ Register Src="../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
 <%@ Register Src="../Controls/HtmlEditor.ascx" TagName="HtmlEditor" TagPrefix="hcc" %>
 <%@ Register Src="../Controls/UrlsAssociated.ascx" TagName="UrlsAssociated" TagPrefix="hcc" %>
@@ -144,7 +141,7 @@
             </div>
             <div class="hcFormItem hcFormItem50p hcAlignRight">
                 <label class="hcLabel">Product Type</label>
-                <telerik:RadComboBox ID="lstProductType" runat="server" AutoPostBack="True" CausesValidation="false" Width="95%" />
+                <asp:DropDownList ID="lstProductType" runat="server" AutoPostBack="True" CausesValidation="false" Width="95%" />
                 <asp:CustomValidator ID="ProductTypeCustomValidator" runat="server" Display="Dynamic" ErrorMessage="Test"
                     OnServerValidate="ProductTypeCustomValidator_ServerValidate" />
             </div>
@@ -197,11 +194,11 @@
             <h2 class="hcClear">Properties</h2>
             <div class="hcFormItem hcFormItem50p">
                 <label class="hcLabel">Manufacturer</label>
-                <telerik:RadComboBox ID="lstManufacturers" runat="server" />
+                <asp:DropDownList ID="lstManufacturers" runat="server" />
             </div>
             <div class="hcFormItem hcFormItem50p">
                 <label class="hcLabel">Vendor</label>
-                <telerik:RadComboBox ID="lstVendors" runat="server" />
+                <asp:DropDownList ID="lstVendors" runat="server" />
             </div>
 
         </div>
@@ -220,7 +217,7 @@
             </div>
             <div class="hcFormItem">
                 <label class="hcLabel">Template</label>
-                <telerik:RadComboBox ID="ddlTemplateList" runat="server" AutoPostBack="False" />
+                <asp:DropDownList ID="ddlTemplateList" runat="server" AutoPostBack="False" />
             </div>
             <div class="hcFormItem hcFormItem33p hcClear">
                 <label class="hcLabel">Large Image</label>

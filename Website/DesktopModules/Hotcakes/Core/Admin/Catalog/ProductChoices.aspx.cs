@@ -27,12 +27,12 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using System.Web.UI.WebControls;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Web.Logging;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
@@ -80,17 +80,17 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
                 foreach (var opt in items)
                 {
-                    ChoiceTypes.Items.Add(new RadComboBoxItem(opt.Name, opt.Bvin));
+                    ChoiceTypes.Items.Add(new ListItem(opt.Name, opt.Bvin));
                 }
             }
         }
 
-        private RadComboBoxItem CreateDisableListItem(string text)
+        private ListItem CreateDisableListItem(string text)
         {
-            var item = new RadComboBoxItem(text, string.Empty);
+            var item = new ListItem(text, string.Empty);
             item.Attributes["disabled"] = "disabled";
             item.Enabled = false;
-            item.BackColor = Color.DarkGray;
+            item.Attributes["style"] = "background-color: #a9a9a9 !important;";
             return item;
         }
 
