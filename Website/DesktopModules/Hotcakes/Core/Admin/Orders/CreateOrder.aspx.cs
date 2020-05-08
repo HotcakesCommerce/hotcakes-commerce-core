@@ -38,7 +38,6 @@ using Hotcakes.Commerce.Payment;
 using Hotcakes.Commerce.Shipping;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Web;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.Orders
 {
@@ -55,6 +54,8 @@ namespace Hotcakes.Modules.Core.Admin.Orders
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
+
+            gridSelectUser.RowEditing += gridSelectUser_RowEditing;
 
             ucOrderItems.CurrentOrder = CurrentOrder;
             ucOrderItems.OrderEdited += ucOrderItems_OrderEdited;
@@ -535,17 +536,16 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             LoadOrder();
         }
 
-        protected void gridSelectUser_OnEditCommand(object sender, GridCommandEventArgs e)
+        protected void gridSelectUser_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            var bvin = gridSelectUser.Items[e.Item.ItemIndex].GetDataKeyValue("Bvin").ToString();
+            var bvin = gridSelectUser.DataKeys[e.NewEditIndex]["Bvin"].ToString();
             var u = HccApp.MembershipServices.Customers.Find(bvin);
             var args = new UserSelectedEventArgs();
             args.UserAccount = u;
             UserSelected(args);
-            e.Canceled = true;
         }
 
-        protected void gridSelectUser_OnNeedDataSource(object sender, GridNeedDataSourceEventArgs e)
+        protected void BindUserGrid()
         {
             lblNewUserMessage.Text = string.Empty;
             gridSelectUser.Visible = false;
@@ -553,7 +553,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             var totalCount = 0;
             var found = false;
             var users = HccApp.MembershipServices.Customers.FindByFilter(FilterUserField.Text.Trim(),
-                gridSelectUser.CurrentPageIndex, gridSelectUser.PageSize, ref totalCount);
+                gridSelectUser.PageIndex, gridSelectUser.PageSize, ref totalCount);
             if (users != null)
             {
                 if (totalCount > 0)
@@ -657,7 +657,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 
         protected void btnFindUser_Click(object sender, EventArgs e)
         {
-            gridSelectUser.Rebind();
+            BindUserGrid();
         }
 
         #endregion

@@ -1,6 +1,4 @@
 ﻿<%@ Page Title="Create New Order" Language="C#" MasterPageFile="../AdminNav.master" AutoEventWireup="true" CodeBehind="CreateOrder.aspx.cs" Inherits="Hotcakes.Modules.Core.Admin.Orders.CreateOrder" %>
-
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register Src="../Controls/CreditCardInput.ascx" TagName="CreditCardInput" TagPrefix="hcc" %>
 <%@ Register Src="../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
 <%@ Register Src="../Controls/AddressEditor.ascx" TagName="AddressEditor" TagPrefix="hcc" %>
@@ -158,27 +156,25 @@
                                     </tr>
                                 </table>
                             </asp:Panel>
-                            <telerik:RadGrid ShowHeader="false" ID="gridSelectUser" runat="server" PageSize="10" AutoGenerateColumns="False" AllowCustomPaging="True" AllowPaging="True"
-                                BorderColor="#CCCCCC" CellPadding="3" GridLines="None" OnEditCommand="gridSelectUser_OnEditCommand" OnNeedDataSource="gridSelectUser_OnNeedDataSource">
-                                <MasterTableView DataKeyNames="Bvin">
-                                    <Columns>
-                                        <telerik:GridTemplateColumn>
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblUsername" runat="server" Text='<%# Bind("Email") %>'>'></asp:Label><br />
-                                                <span class="smalltext">
-                                                    <asp:Label ID="lblFirstName" runat="server" Text='<%# Bind("FirstName") %>'>'></asp:Label>
-                                                    <asp:Label ID="lblLastName" runat="server" Text='<%# Bind("LastName") %>'>'></asp:Label></span>
-                                            </ItemTemplate>
-                                        </telerik:GridTemplateColumn>
-                                        <telerik:GridTemplateColumn>
-                                            <ItemTemplate>
-                                                <asp:ImageButton ID="SelectUserButton" runat="server" CausesValidation="false" CommandName="Edit"
-                                                    ImageUrl="~/DesktopModules/Hotcakes/Core/Admin/Images/Buttons/Select.png" AlternateText="Select Customer"></asp:ImageButton>
-                                            </ItemTemplate>
-                                        </telerik:GridTemplateColumn>
-                                    </Columns>
-                                </MasterTableView>
-                            </telerik:RadGrid>
+                            <asp:GridView ShowHeader="false" ID="gridSelectUser" runat="server" PageSize="10" AutoGenerateColumns="False" AllowCustomPaging="True" AllowPaging="True"
+                                BorderColor="#CCCCCC" CellPadding="3" GridLines="None" OnEditCommand="gridSelectUser_RowEditing" DataKeyNames="Bvin">
+                                <Columns>
+                                    <asp:TemplateColumn>
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblUsername" runat="server" Text='<%# Bind("Email") %>'>'></asp:Label><br />
+                                            <span class="smalltext">
+                                                <asp:Label ID="lblFirstName" runat="server" Text='<%# Bind("FirstName") %>'>'></asp:Label>
+                                                <asp:Label ID="lblLastName" runat="server" Text='<%# Bind("LastName") %>'>'></asp:Label></span>
+                                        </ItemTemplate>
+                                    </asp:TemplateColumn>
+                                    <asp:TemplateColumn>
+                                        <ItemTemplate>
+                                            <asp:ImageButton ID="SelectUserButton" runat="server" CausesValidation="false" CommandName="Edit"
+                                                ImageUrl="~/DesktopModules/Hotcakes/Core/Admin/Images/Buttons/Select.png" AlternateText="Select Customer"></asp:ImageButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateColumn>
+                                </Columns>
+                            </asp:GridView>
                         </asp:View>
                         <asp:View ID="ViewNew" runat="server">
                             <strong>Add New Customer</strong><br />
