@@ -78,13 +78,15 @@ namespace Hotcakes.Modules.Core.Admin.Controls
         {
             if (Page.IsValid)
             {
+
+
                 Model = new MembershipProductType
                 {
                     ProductTypeId = TypeId,
                     StoreId = HccApp.CurrentStore.Id,
                     ProductTypeName = txtProductTypeName.Text.Trim(),
                     RoleName = ddlMembershipRole.SelectedValue,
-                    ExpirationPeriod = (int)txtExpirationNum.Value,
+                    ExpirationPeriod = int.Parse(txtExpirationNum.Text.Trim()),
                     ExpirationPeriodType = (ExpirationPeriodType)Convert.ToInt32(ddlPeriodType.SelectedValue),
                     Notify = chkNotify.Checked
                 };
@@ -112,7 +114,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             {
                 TypeId = Model.ProductTypeId;
                 txtProductTypeName.Text = Model.ProductTypeName;
-                txtExpirationNum.Value = Model.ExpirationPeriod;
+                txtExpirationNum.Text = Model.ExpirationPeriod.ToString();
 
                 if (roles.Any(r => r.RoleName == Model.RoleName))
                 {

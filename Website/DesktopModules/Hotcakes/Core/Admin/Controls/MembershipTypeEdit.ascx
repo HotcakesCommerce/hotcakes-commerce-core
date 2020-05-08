@@ -1,16 +1,14 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MembershipTypeEdit.ascx.cs" Inherits="Hotcakes.Modules.Core.Admin.Controls.MembershipTypeEdit" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <div class="hcFormItem">
     <asp:Label AssociatedControlID="txtProductTypeName" runat="server" CssClass="hcLabel">Name<i class="hcLocalizable"></i></asp:Label>
-    <telerik:RadTextBox ID="txtProductTypeName" runat="server" />
+    <asp:TextBox ID="txtProductTypeName" runat="server" MaxLength="250" />
     <asp:RequiredFieldValidator ID="rfvProductTypeName" ErrorMessage="Please enter name"
         ControlToValidate="txtProductTypeName" CssClass="hcFormError" runat="server" />
 </div>
 <div class="hcFormItem">
     <asp:Label ID="Label2" Text="Membership Role" AssociatedControlID="ddlMembershipRole" runat="server" CssClass="hcLabel" />
-    <telerik:RadComboBox ID="ddlMembershipRole" runat="server">
-    </telerik:RadComboBox>
+    <asp:DropDownList ID="ddlMembershipRole" runat="server" />
     <asp:CustomValidator ID="cvRoleName" ControlToValidate="ddlMembershipRole" CssClass="hcFormError" runat="server"
         ErrorMessage="Role was changed. Please choose another role." />
 </div>
@@ -18,20 +16,20 @@
     <asp:Label ID="Label3" Text="Expiration Period" AssociatedControlID="txtExpirationNum" runat="server" CssClass="hcLabel" />
 </div>
 <div class="hcFormItem hcFormItem50p hcMembershipExpirationDate">
-    <telerik:RadNumericTextBox ID="txtExpirationNum" CssClass="hcInput50p" runat="server">
-        <NumberFormat DecimalDigits="0" />
-    </telerik:RadNumericTextBox>
+    <asp:TextBox ID="txtExpirationNum" runat="server" MaxLength="50" CssClass="hcInput50p"/>
     <asp:RequiredFieldValidator ID="rfvExpiration" ErrorMessage="Please enter expiration period"
-        ControlToValidate="txtExpirationNum" CssClass="hcFormError" runat="server" />
+                                ControlToValidate="txtExpirationNum" CssClass="hcFormError" runat="server" />
+    <asp:CompareValidator runat="server" Operator="DataTypeCheck" Type="Integer" 
+                          ControlToValidate="txtExpirationNum" ErrorMessage="Expiration period must be a whole number" CssClass="hcFormError" />
 </div>
 <div class="hcFormItem hcFormItem50p">
-    <telerik:RadComboBox ID="ddlPeriodType" CssClass="hcInput50p" runat="server">
+    <asp:DropDownList ID="ddlPeriodType" CssClass="hcInput50p" runat="server">
         <Items>
-            <telerik:RadComboBoxItem Text="Days" Value="0" />
-            <telerik:RadComboBoxItem Text="Months" Value="1" />
-            <telerik:RadComboBoxItem Text="Years" Value="2" />
+            <asp:ListItem Text="Days" Value="0" />
+            <asp:ListItem Text="Months" Value="1" />
+            <asp:ListItem Text="Years" Value="2" />
         </Items>
-    </telerik:RadComboBox>
+    </asp:DropDownList>
 </div>
 <div class="hcFormItem">
 	<asp:Label ID="lblNotify" resourcekey="lblNotify" Text="Notify Customers?" AssociatedControlID="chkNotify" runat="server" CssClass="hcLabel" />

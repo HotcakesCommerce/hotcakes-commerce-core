@@ -25,11 +25,11 @@
 
 using System;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Modules.Core.Admin.AppCode;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
@@ -66,14 +66,11 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             CurrentTab = AdminTabType.Catalog;
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
 
-            rgProductTypes.NeedDataSource += rgProductTypes_NeedDataSource;
-            rgProductTypes.DeleteCommand += rgProductTypes_DeleteCommand;
-            rgProductTypes.EditCommand += rgProductTypes_EditCommand;
             btnCreate.Click += btnCreate_Click;
             ucMembershipTypeEdit.SaveData += ucMembershipTypeEdit_SaveData;
             ucMembershipTypeEdit.CancelButton.Click += CancelButton_Click;
 
-            LocalizationUtils.LocalizeRadGrid(rgProductTypes, Localization);
+            LocalizationUtils.LocalizeGridView(rgProductTypes, Localization);
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
@@ -85,33 +82,29 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            rgProductTypes.EditIndexes.Clear();
-            rgProductTypes.Rebind();
+            BindGrid();
             ShowEditor(false);
         }
 
-        private void rgProductTypes_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
+        private void BindGrid()
         {
             rgProductTypes.DataSource = _repository.GetList(HccApp.CurrentStore.Id);
+            rgProductTypes.DataBind();
         }
 
-        private void rgProductTypes_EditCommand(object sender, GridCommandEventArgs e)
+        protected void rgProductTypes_OnRowEditing(object sender, GridViewEditEventArgs e)
         {
-            e.Canceled = true;
-            e.Item.Edit = false;
-            e.Item.Selected = false;
-
-            var productTypeId = (string) (e.Item as GridDataItem).GetDataKeyValue("ProductTypeId");
+            var productTypeId = (string) rgProductTypes.DataKeys[e.NewEditIndex]["ProductTypeId"];
             ucMembershipTypeEdit.Model = _repository.Find(productTypeId);
             ucMembershipTypeEdit.DataBind();
             ShowEditor(true);
         }
 
-        private void rgProductTypes_DeleteCommand(object sender, GridCommandEventArgs e)
+        protected void rgProductTypes_OnRowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            var productTypeId = (string) (e.Item as GridDataItem).GetDataKeyValue("ProductTypeId");
+            var productTypeId = (string)rgProductTypes.DataKeys[e.RowIndex]["ProductTypeId"];
             _repository.Delete(productTypeId);
-            rgProductTypes.Rebind();
+            BindGrid();
             ShowEditor(false);
         }
 
@@ -128,8 +121,8 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 _repository.Update(model);
             }
 
-            rgProductTypes.EditIndexes.Clear();
-            rgProductTypes.Rebind();
+            BindGrid();
+
             ShowEditor(false);
         }
 
