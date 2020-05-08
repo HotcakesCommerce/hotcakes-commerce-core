@@ -1,6 +1,4 @@
 ﻿<%@ Page Language="C#" MasterPageFile="../../AdminNav.master" AutoEventWireup="true" CodeBehind="View.aspx.cs" Inherits="Hotcakes.Modules.Core.Admin.Reports.Sales_By_Coupon.View" %>
-
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register Src="../../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
 <%@ Register Src="../../Controls/DateRangePicker.ascx" TagName="DateRangePicker" TagPrefix="hcc" %>
 
@@ -14,7 +12,7 @@
         <div class="hcForm">
             <div class="hcFormItemHor">
                 <label class="hcLabelShort"><%=Localization.GetString("CouponCode") %></label>
-                <telerik:RadComboBox ID="lstCouponCode" AllowCustomText="true" MarkFirstMatch="true" Width="200px" AutoPostBack="true" runat="server" />
+                <asp:DropDownList ID="lstCouponCode" AllowCustomText="true" MarkFirstMatch="true" Width="200px" AutoPostBack="true" runat="server" />
             </div>
             <hcc:DateRangePicker ID="ucDateRangePicker" runat="server" RangeType="ThisMonth" />
         </div>

@@ -28,7 +28,6 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using Hotcakes.Commerce.Utilities;
 using Hotcakes.Modules.Core.Admin.AppCode;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.Reports.Sales_By_Coupon
 {
@@ -88,7 +87,7 @@ namespace Hotcakes.Modules.Core.Admin.Reports.Sales_By_Coupon
             else
             {
                 ShowMessage(Localization.GetString("NoCouponCodes"), ErrorTypes.Info);
-                lstCouponCode.Items.Add(new RadComboBoxItem(Localization.GetString("NoCouponCodes")));
+                lstCouponCode.Items.Add(new ListItem(Localization.GetString("NoCouponCodes")));
             }
         }
 

@@ -143,7 +143,6 @@
         var AddressValidationInputs = createAddressValidationInputs();
         AddressValidationInputs.init(".hcAddress", ".hcAddressMessage");
 
-        /* As long as we use telerik controls we should use specific getters and setters */
         AddressValidationInputs.getCountry = function () {
             return $find("<%= ddlCountries.ClientID %>").get_value();
         };
