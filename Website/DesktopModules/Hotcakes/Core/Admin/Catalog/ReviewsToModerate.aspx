@@ -1,8 +1,7 @@
 <%@ Page MasterPageFile="../AdminNav.master" Language="C#" AutoEventWireup="True"
 	Inherits="Hotcakes.Modules.Core.Admin.Catalog.ReviewsToModerate" CodeBehind="ReviewsToModerate.aspx.cs" %>
-
 <%@ Register Src="../Controls/NavMenu.ascx" TagName="NavMenu" TagPrefix="hcc" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+
 <asp:Content ID="nav" ContentPlaceHolderID="NavContent" runat="server">
 	<hcc:NavMenu runat="server" ID="NavMenu" />
 

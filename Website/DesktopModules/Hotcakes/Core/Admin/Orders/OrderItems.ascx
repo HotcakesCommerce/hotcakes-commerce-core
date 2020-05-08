@@ -1,6 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="OrderItems.ascx.cs" Inherits="Hotcakes.Modules.Core.Admin.Orders.OrderItems" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
-
 <%@ Register Src="OrderAddProduct.ascx" TagPrefix="hcc" TagName="OrderAddProduct" %>
 <%@ Register Src="../Controls/MessageBox.ascx" TagPrefix="hcc" TagName="MessageBox" %>
 
