@@ -30,7 +30,7 @@ using System.Text;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Modules.Core.Admin.AppCode;
-using Telerik.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
@@ -74,11 +74,11 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
             lstParents.Items.Clear();
             
-            lstParents.Items.Add(new RadComboBoxItem("(Root)", string.Empty));
+            lstParents.Items.Add(new ListItem("(Root)", string.Empty));
             var parents = CategoriesHelper.ListFullTreeWithIndents(allCats, true);
             foreach (var li in parents)
             {
-                lstParents.Items.Add(new RadComboBoxItem(li.Text, li.Value));
+                lstParents.Items.Add(new ListItem(li.Text, li.Value));
             }
 
             RenderChildren(string.Empty, allCats, sb);
