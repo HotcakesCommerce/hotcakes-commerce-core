@@ -186,6 +186,9 @@
     <Content Include="ControlPanel\ControlBar.css">
       <DependentUpon>ControlBar.less</DependentUpon>
     </Content>
+    <Content Include="ControlPanel\ControlBar.min.css">
+      <DependentUpon>ControlBar.css</DependentUpon>
+    </Content>
     <Content Include="ControlPanel\controlbarimages\admin_logo.png" />
     <Content Include="ControlPanel\controlbarimages\admin_menu_icons.png" />
     <Content Include="ControlPanel\controlbarimages\AdvancedSettings.png" />
@@ -305,7 +308,6 @@
     <Content Include="Core\Admin\Parts\CreditCardGateways\Beanstream\Edit.ascx" />
     <Content Include="Core\Admin\Parts\CreditCardGateways\Test Recurring Gateway\Edit.ascx" />
     <Content Include="Core\Admin\Parts\CreditCardGateways\Ogone\Edit.ascx" />
-    <Content Include="Core\Admin\Parts\Editors\RadEditorAdvanced\Editor.ascx" />
     <Content Include="Core\Admin\Parts\GiftCardGateways\Hotcakes\Edit.ascx" />
     <Content Include="Core\Admin\Parts\PaymentMethods\Moneris\Edit.ascx" />
     <Content Include="Core\Admin\Parts\PaymentMethods\Ogone\Edit.ascx" />
@@ -832,7 +834,6 @@
     <Content Include="Core\Admin\Parts\CreditCardGateways\Stripe\Edit.ascx" />
     <Content Include="Core\Admin\Parts\CreditCardGateways\Test Gateway\Edit.ascx" />
     <Content Include="Core\Admin\Parts\Editors\None\Editor.ascx" />
-    <Content Include="Core\Admin\Parts\Editors\RadEditor\Editor.ascx" />
     <Content Include="Core\Admin\Parts\Editors\TinyMCE\Editor.ascx" />
     <Content Include="Core\Admin\Parts\PaymentMethods\CreditCard\Edit.ascx" />
     <Content Include="Core\Admin\Parts\PaymentMethods\PaypalExpress\Edit.ascx" />
@@ -3569,13 +3570,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Core\Admin\Parts\Editors\None\Editor.ascx.designer.cs">
-      <DependentUpon>Editor.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Core\Admin\Parts\Editors\RadEditor\Editor.ascx.cs">
-      <DependentUpon>Editor.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Core\Admin\Parts\Editors\RadEditor\Editor.ascx.designer.cs">
       <DependentUpon>Editor.ascx</DependentUpon>
     </Compile>
     <Compile Include="Core\Admin\Parts\Editors\TinyMCE\Editor.ascx.cs">
