@@ -33,6 +33,8 @@ namespace Hotcakes.Modules.Core.Admin.Controls
 {
     partial class DateRangePicker : HccUserControl
     {
+        private const string DATEFORMAT = "MM/dd/yyyyy";
+
         #region Fields
 
         private readonly DateRange _range = new DateRange();
@@ -87,18 +89,18 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             {
                 if (RangeType == DateRangeType.Custom)
                 {
-                    var date = radStartDate.SelectedDate;
-                    return (date ?? radStartDate.MinDate).ZeroOutTime();
+                    var date = DateTime.Parse(radStartDate.Text.Trim());
+                    return date.ZeroOutTime();
                 }
                 _range.RangeType = RangeType;
 
                 if (RangeType != DateRangeType.AllDates)
                     return _range.StartDate;
-                return radStartDate.MinDate;
+                return DateTime.MinValue;
             }
             set
             {
-                radStartDate.SelectedDate = value;
+                radStartDate.Text = value.ToString(DATEFORMAT);
                 RangeType = DateRangeType.Custom;
             }
         }
@@ -109,17 +111,17 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             {
                 if (RangeType == DateRangeType.Custom)
                 {
-                    var date = radEndDate.SelectedDate;
-                    return (date ?? radEndDate.MaxDate).MaxOutTime();
+                    var date = DateTime.Parse(radStartDate.Text.Trim());
+                    return date.MaxOutTime();
                 }
                 _range.RangeType = RangeType;
                 if (RangeType != DateRangeType.AllDates)
                     return _range.EndDate;
-                return radEndDate.MaxDate;
+                return DateTime.MaxValue;
             }
             set
             {
-                radEndDate.SelectedDate = value;
+                radEndDate.Text = value.ToString(DATEFORMAT);
                 RangeType = DateRangeType.Custom;
             }
         }
@@ -171,8 +173,8 @@ namespace Hotcakes.Modules.Core.Admin.Controls
 
             if (RangeType != DateRangeType.Custom)
             {
-                radStartDate.SelectedDate = StartDate;
-                radEndDate.SelectedDate = EndDate;
+                radStartDate.Text = StartDate.ToString(DATEFORMAT);
+                radEndDate.Text = EndDate.ToString(DATEFORMAT);
             }
 
             pnlCustom.Visible = lstRangeType.SelectedValue == ((int) DateRangeType.Custom).ToString();
@@ -188,8 +190,8 @@ namespace Hotcakes.Modules.Core.Admin.Controls
 
             if (RangeType == DateRangeType.Custom)
             {
-                var date = radStartDate.SelectedDate;
-                result = (date ?? radStartDate.MinDate).ZeroOutTime();
+                var date = DateTime.Parse(radStartDate.Text.Trim());
+                result = date.ZeroOutTime();
             }
             else
             {
@@ -207,8 +209,8 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             DateTime result;
             if (RangeType == DateRangeType.Custom)
             {
-                var date = radEndDate.SelectedDate;
-                result = (date ?? radEndDate.MaxDate).MaxOutTime();
+                var date = DateTime.Parse(radStartDate.Text.Trim());
+                result = date.MaxOutTime();
             }
             else
             {

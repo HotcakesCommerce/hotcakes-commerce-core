@@ -37,7 +37,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlProductTypeFilter;
+        protected global::System.Web.UI.WebControls.DropDownList ddlProductTypeFilter;
         
         /// <summary>
         /// ddlCategoryFilter control.
@@ -46,7 +46,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlCategoryFilter;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCategoryFilter;
         
         /// <summary>
         /// ddlManufacturerFilter control.
@@ -55,7 +55,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlManufacturerFilter;
+        protected global::System.Web.UI.WebControls.DropDownList ddlManufacturerFilter;
         
         /// <summary>
         /// ddlVendorFilter control.
@@ -64,7 +64,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlVendorFilter;
+        protected global::System.Web.UI.WebControls.DropDownList ddlVendorFilter;
         
         /// <summary>
         /// ddlStatusFilter control.
@@ -73,7 +73,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlStatusFilter;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatusFilter;
         
         /// <summary>
         /// ddlInventoryStatusFilter control.
@@ -82,6 +82,6 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlInventoryStatusFilter;
+        protected global::System.Web.UI.WebControls.DropDownList ddlInventoryStatusFilter;
     }
 }

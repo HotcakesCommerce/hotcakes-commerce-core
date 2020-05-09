@@ -1,8 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DatePickerNavigation.ascx.cs" Inherits="Hotcakes.Modules.Core.Admin.Controls.DatePickerNavigation" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
-<telerik:RadDatePicker ID="radDatePicker" CssClass="DatePickerNav" AutoPostBack="true" runat="server">
-</telerik:RadDatePicker>
+<asp:TextBox ID="radDatePicker" CssClass="DatePickerNav" AutoPostBack="true" runat="server" TextMode="Date"/>
 &nbsp;
 <asp:LinkButton ID="lnkPrev" Text="Prev" CssClass="hcIconLeft hcDatePickerNavigation" runat="server" />
 &nbsp;

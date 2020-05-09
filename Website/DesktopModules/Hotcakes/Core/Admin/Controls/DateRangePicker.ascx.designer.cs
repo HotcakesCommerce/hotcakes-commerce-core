@@ -46,7 +46,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadDatePicker radStartDate;
+        protected global::System.Web.UI.WebControls.TextBox radStartDate;
         
         /// <summary>
         /// radEndDate control.
@@ -55,7 +55,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadDatePicker radEndDate;
+        protected global::System.Web.UI.WebControls.TextBox radEndDate;
         
         /// <summary>
         /// btnShow control.

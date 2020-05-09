@@ -1,5 +1,4 @@
 <%@ Control Language="C#" AutoEventWireup="True" Inherits="Hotcakes.Modules.Core.Admin.Controls.DateRangePicker" CodeBehind="DateRangePicker.ascx.cs" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <div class="<%=FormItemCssClass %>">
     <asp:Label CssClass="hcLabelShort" ID="lblDateRangeLabel" resourcekey="DateRange" AssociatedControlID="lstRangeType" runat="server" />
@@ -24,11 +23,11 @@
 <asp:Panel runat="server" ID="pnlCustom" Visible="false">
     <div class="<%=FormItemCssClass %>">
         <label class="hcLabelShort"><%=Localization.GetString("Start") %></label>
-        <telerik:RadDatePicker ID="radStartDate"  runat="server"/>
+        <asp:TextBox ID="radStartDate"  runat="server" TextMode="Date"/>
     </div>
     <div class="<%=FormItemCssClass %>">
         <label class="hcLabelShort"><%=Localization.GetString("End") %></label>
-        <telerik:RadDatePicker ID="radEndDate" runat="server" />
+        <asp:TextBox ID="radEndDate" runat="server" TextMode="Date" />
         <asp:LinkButton ID="btnShow" CssClass="hcButton hcDatePickerButton" resourcekey="Show" runat="server" />
     </div>
 </asp:Panel>
