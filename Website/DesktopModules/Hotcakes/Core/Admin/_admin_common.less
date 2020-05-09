@@ -433,18 +433,11 @@ body, h1, h2, h3, h4, h5, td, th, div {
     letter-spacing: 0;
 }
 
-input, select, textarea, .riSingle,
-html body .hcFormItem .RadInput_Default .riTextBox,
-.hcFormItem .RadComboBox_Default .rcbInput,
-.RadComboBoxDropDown ul.rcbList li {
+input, select, textarea, .riSingle {
     font-family: @bodyFont;
     font-weight: 400;
     font-size: 13px;
     color: @color-black;
-}
-
-html body .hcFormItem .RadInput_Default .riEmpty {
-    color: @color-disabled;
 }
 
 h1 {
@@ -702,12 +695,10 @@ select {
         display: block;
         position: absolute;
         overflow: visible;
-        /*top:-95%; right: 12%;*/
         width: 200px;
         margin-bottom: 0;
         padding: 5px 10px;
         border: none;
-        //border-radius: 3px;
         opacity: 0.8;
         font-size: 12px;
         text-align: left;
@@ -800,29 +791,6 @@ td span.hcFormError {
     color: red;
     background: #fbbbbb;
     position: absolute;
-}
-
-.hcFormItem {
-
-    .RadInput,
-    .RadComboBox,
-    .RadPicker {
-        width: 100% !important;
-
-        &.DatePickerNav {
-            width: 160px !important;
-        }
-    }
-
-    .RadComboBox_Default td.rcbInputCellRight,
-    .RadComboBox_Default td.rcbArrowCellRight,
-    .RadComboBox_Default td.rcbArrowCell {
-        border: 1px solid @color-disabled;
-        border-left: none;
-        background: white !important;
-        background-image: url(Images/admin_misc_sprite.png) !important;
-        background-position: -120px 11px !important;
-    }
 }
 
 .hcFormItemHor {
@@ -1017,7 +985,7 @@ ul.hcActions {
 
     .hcFormItem > input[type="text"],
     .hcFormItem > input[type="password"],
-    span.riSingle, .RadComboBox {
+    span.riSingle {
         width: 100% !important;
     }
 
@@ -1203,136 +1171,6 @@ ul.hcActions {
     width: 14px;
 }
 
-// -------- Rad ComboBox --------
-.RadComboBox_Default .rcbInputCellLeft, .RadComboBox_Default .rcbInputCellRight, .RadComboBox_Default .rcbArrowCellLeft, .RadComboBox_Default .rcbArrowCellRight {
-    /*background-image: url('ComboBox/rcbSprite.png');*/
-}
-
-.RadComboBox_Default table {
-    border-collapse: separate !important;
-    border-spacing: 0;
-}
-
-div.RadComboBox_Default .rcbArrowCell a {
-    /* 	line-height: 16px; 	height: 22px;     */
-}
-
-.RadComboBox_Default td.rcbInputCellLeft, .RadComboBox_Default td.rcbInputCellRight {
-    padding: 3px !important;
-    background: #fff;
-    text-decoration: none;
-    margin: 0 !important;
-    line-height: 16px;
-}
-
-.RadComboBox_Default td.rcbInputCellLeft {
-    border: 1px solid @color-disabled;
-    border-right: none;
-}
-
-.RadComboBox_Default .rcbDisabled td.rcbInputCellLeft {
-    color: #ccc;
-    background: rgb(235, 235, 228);
-}
-
-.RadComboBox_Default .rcbHovered td.rcbArrowCell {
-    opacity: 0.7 !important;
-    filter: alpha(opacity=70) !important;
-}
-
-.RadComboBox_Default td.rcbInputCellLeft input[readonly], .RadComboBox_Default td.rcbInputCellRight input[readonly] {
-    cursor: auto;
-}
-
-html body .RadComboBoxDropDown_Default {
-    border-color: @color-lightgray;
-}
-
-.RadComboBoxDropDown_Default ul li.rcbSeparator {
-    height: 1px;
-    min-height: 1px;
-    padding: 0;
-    margin: 7px;
-    background-color: @color-lightgray;
-}
-
-// -------- Rad Editor ------
-.Metro.reWrapper, .Metro.RadEditor .reContentCell {
-    border: 1px solid @color-lightgray !important;
-}
-
-.Metro.RadEditor .reContentCell {
-    background: @color-bg !important;
-    padding: 5px;
-}
-
-// -------- Rad Grid --------
-.hcForm .RadGrid, .RadGrid.hcGrid {
-    border: none;
-
-    table {
-        border-collapse: collapse;
-    }
-
-    td, th {
-        border: 1px solid @color-white-dark2 !important;
-    }
-
-    td {
-        font-size: 12px;
-        color: @color-gray;
-        padding: 0;
-
-        .hcIconApprove,
-        .hcIconEdit,
-        .hcIconDelete,
-        .hcIconInfo,
-        .hcIconAdd {
-            margin: 0 8px;
-        }
-    }
-
-    .rgHeader {
-        background: @color-white;
-        border: 1px solid @color-lightgray !important;
-        color: @color-gray-dark1;
-        font-size: 14px;
-        font-weight: 500;
-        padding: 20px 17px;
-        text-align: left;
-    }
-
-    .rgAltRow {
-        background: @color-white-dark2;
-    }
-
-        .rgRow a,
-        .rgAltRow a,
-        .rgEditRow a,
-        tr.rgEditRow a,
-        tr.rgHoveredRow a,
-        tr.rgActiveRow a,
-        .rgFooter a,
-        .rgEditForm a {
-            color: @color-orange;
-            font-weight: bold;
-        }
-
-    .rgEditRow {
-        background-image: none;
-    }
-
-    .rgRow,
-    .rgAltRow {
-        td {
-            border: 1px solid @color-lightgray !important;
-            color: @color-black;
-            font-size: 14px;
-            padding: 20px 17px;
-        }
-    }
-}
-
 .hcGrid {
     border-collapse: collapse;
     width: 100%;
@@ -1390,7 +1228,7 @@ html body .RadComboBoxDropDown_Default {
 
     .hcFormItem > input[type="text"],
     .hcFormItem > input[type="password"],
-    span.riSingle, .RadComboBox,
+    span.riSingle,
     .hcButton, .hcButton:visited {
         width: 100% !important;
     }
