@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="../AdminNav.master" AutoEventWireup="true" CodeBehind="GiftCards.aspx.cs" Inherits="Hotcakes.Modules.Core.Admin.Catalog.GiftCards" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register Src="../Controls/NavMenu.ascx" TagName="NavMenu" TagPrefix="hcc" %>
 <%@ Register Src="../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
 <%@ Register Src="../Controls/Pager.ascx" TagName="Pager" TagPrefix="hcc" %>
@@ -114,7 +113,7 @@
                 </div>
                 <div class="hcFormItemHor">
                     <label class="hcLabel"><%=Localization.GetString("Expiration") %></label>
-                    <telerik:RadDatePicker ID="dpExpiration" runat="server" CssClass="hcGiftCardExpirationDateAlign" />
+                    <asp:TextBox ID="dpExpiration" runat="server" CssClass="hcGiftCardExpirationDateAlign" TextMode="Date" />
                 </div>
                 <div class="hcFormItemHor">
                     <label class="hcLabel"><%=Localization.GetString("Amount") %></label>
