@@ -1,6 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="../AdminNav.master" AutoEventWireup="true" CodeBehind="Promotions.aspx.cs" Inherits="Hotcakes.Modules.Core.Admin.Marketing.Promotions" %>
-
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register Src="../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
 <%@ Register Src="../Controls/NavMenu.ascx" TagName="NavMenu" TagPrefix="hcc" %>
 <%@ Register Src="Promotions_List.ascx" TagPrefix="hcc" TagName="Promotions_List" %>
@@ -27,7 +25,7 @@
         <div class="hcForm">
             <div class="hcFormItem">
                 <label class="hcLabel"><%=Localization.GetString("NewPromotion") %></label>
-                <telerik:RadComboBox ID="lstNewType" runat="server" />
+                <asp:DropDownList ID="lstNewType" runat="server" />
             </div>
         </div>
     </div>
