@@ -1,0 +1,3 @@
+﻿DesktopModules/Hotcakes/Core/Admin/Parts/Editors/RadEditor/Editor.ascx
+DesktopModules/Hotcakes/Core/Admin/Parts/Editors/RadEditor/AdvancedEditor.ascx
+DesktopModules/Hotcakes/Core/Admin/Parts/Editors/RadEditor/

@@ -158,6 +158,7 @@
     <Content Include="01.00.04.txt" />
     <Content Include="01.00.06.txt" />
     <Content Include="01.08.00.txt" />
+    <Content Include="03.03.00.txt" />
     <Content Include="AddressBook\AddressBookView.ascx" />
     <Content Include="AffiliateDashboard\AffiliateDashboardView.ascx" />
     <Content Include="AffiliateRegistration\AffiliateRegistrationView.ascx" />
@@ -182,45 +183,7 @@
     <Content Include="01.05.00.txt" />
     <Content Include="01.06.00.txt" />
     <Content Include="01.07.00.txt" />
-    <Content Include="ControlPanel\ControlBar.ascx" />
-    <Content Include="ControlPanel\ControlBar.css">
-      <DependentUpon>ControlBar.less</DependentUpon>
-    </Content>
-    <Content Include="ControlPanel\ControlBar.min.css">
-      <DependentUpon>ControlBar.css</DependentUpon>
-    </Content>
-    <Content Include="ControlPanel\controlbarimages\admin_logo.png" />
-    <Content Include="ControlPanel\controlbarimages\admin_menu_icons.png" />
-    <Content Include="ControlPanel\controlbarimages\AdvancedSettings.png" />
-    <Content Include="ControlPanel\controlbarimages\basic.png" />
-    <Content Include="ControlPanel\controlbarimages\BasicSettings.png" />
-    <Content Include="ControlPanel\controlbarimages\Bookmarks.png" />
-    <Content Include="ControlPanel\controlbarimages\bookmarkThis.png" />
-    <Content Include="ControlPanel\controlbarimages\bookmarkThisModule.png" />
-    <Content Include="ControlPanel\controlbarimages\bookmarkThisModule_white.png" />
-    <Content Include="ControlPanel\controlbarimages\closeAddModule.png" />
-    <Content Include="ControlPanel\controlbarimages\ControlBar_bg.jpg" />
-    <Content Include="ControlPanel\controlbarimages\Dropping.png" />
-    <Content Include="ControlPanel\controlbarimages\EditIcons.png" />
-    <Content Include="ControlPanel\controlbarimages\Growing.png" />
-    <Content Include="ControlPanel\controlbarimages\hccLogo.png" />
-    <Content Include="ControlPanel\controlbarimages\hide.png" />
-    <Content Include="ControlPanel\controlbarimages\icons.png" />
-    <Content Include="ControlPanel\controlbarimages\menuArrow.png" />
-    <Content Include="ControlPanel\controlbarimages\service-criticalUpdate.png" />
-    <Content Include="ControlPanel\controlbarimages\service-update.png" />
-    <Content Include="ControlPanel\controlbarimages\show.png" />
-    <Content Include="ControlPanel\controlbarimages\Store-icon.png" />
-    <Content Include="ControlPanel\CategoryPerformanceBar.ascx" />
-    <Content Include="ControlPanel\AdminControlBar.ascx" />
-    <Content Include="ControlPanel\PerformanceBar.css">
-      <DependentUpon>PerformanceBar.less</DependentUpon>
-    </Content>
-    <Content Include="ControlPanel\ProductPerformanceBar.ascx" />
-    <Content Include="ControlPanel\scripts\dnn.controlBar.js" />
     <Content Include="02.00.00.txt" />
-    <Content Include="ControlPanel\scripts\dnn.controlBar_DNN742.js" />
-    <Content Include="ControlPanel\scripts\hcc.category.performanceBar.js" />
     <Content Include="03.00.00.txt" />
     <Content Include="Core\Admin\admin.min.css">
       <DependentUpon>admin.css</DependentUpon>
@@ -334,7 +297,6 @@
     <Content Include="Core\Scripts\hcc.category.performance.js" />
     <Content Include="Core\Scripts\excanvas.js" />
     <Content Include="Core\Scripts\hcc.product.performance.js" />
-    <Content Include="ControlPanel\scripts\hcc.product.performanceBar.js" />
     <Content Include="Core\Scripts\hcc.views.js" />
     <Content Include="Core\Scripts\jquery.fileupload.js" />
     <Content Include="Core\Scripts\jquery.switchButton.js" />
@@ -1405,34 +1367,6 @@
     </Compile>
     <Compile Include="ContentBlocks\Settings.ascx.designer.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="ControlPanel\ControlBar.ascx.cs">
-      <DependentUpon>ControlBar.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ControlPanel\ControlBar.ascx.designer.cs">
-      <DependentUpon>ControlBar.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="ControlPanel\CategoryPerformanceBar.ascx.cs">
-      <DependentUpon>CategoryPerformanceBar.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ControlPanel\CategoryPerformanceBar.ascx.designer.cs">
-      <DependentUpon>CategoryPerformanceBar.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="ControlPanel\AdminControlBar.ascx.cs">
-      <DependentUpon>AdminControlBar.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ControlPanel\AdminControlBar.ascx.designer.cs">
-      <DependentUpon>AdminControlBar.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="ControlPanel\ProductPerformanceBar.ascx.cs">
-      <DependentUpon>ProductPerformanceBar.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ControlPanel\ProductPerformanceBar.ascx.designer.cs">
-      <DependentUpon>ProductPerformanceBar.ascx</DependentUpon>
     </Compile>
     <Compile Include="Core\AbandonedCartEmailJob.cs" />
     <Compile Include="Core\Admin\AdminWizard.master.cs">
@@ -3988,8 +3922,6 @@
     <Content Include="Providers\DataProviders\SqlDataProvider\01.07.05.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\02.00.00.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\01.08.01.SqlDataProvider" />
-    <Content Include="ControlPanel\01.00.00.SqlDataProvider" />
-    <Content Include="ControlPanel\Uninstall.SqlDataProvider" />
     <Content Include="Core\Admin\admin.css.map">
       <DependentUpon>admin.css</DependentUpon>
     </Content>
@@ -3997,8 +3929,6 @@
       <DependentUpon>styles.css</DependentUpon>
     </Content>
     <Content Include="Core\Performance.ashx" />
-    <Content Include="ControlPanel\PerformanceBar.less" />
-    <Content Include="ControlPanel\ControlBar.less" />
     <Content Include="Providers\DataProviders\SqlDataProvider\01.09.00.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\01.09.01.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\02.00.01.SqlDataProvider" />
@@ -4263,11 +4193,6 @@
     <Content Include="Core\Admin\Configuration\App_LocalResources\ShippingUSPSTester.aspx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ControlPanel\App_LocalResources\ControlBar.ascx.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Core\Admin\Catalog\App_LocalResources\Products_Performance.aspx.resx" />
   </ItemGroup>
   <ItemGroup>
@@ -4282,19 +4207,10 @@
     <Content Include="Core\App_LocalResources\SalesPeriods.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ControlPanel\App_LocalResources\AdminControlBar.ascx.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ControlPanel\App_LocalResources\ProductPerformanceBar.ascx.resx" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Core\Controls\App_LocalResources\CategoryPerformance.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\App_LocalResources\OrderStatuses.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ControlPanel\App_LocalResources\CategoryPerformanceBar.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\Admin\Dashboard\App_LocalResources\DashboardHandler.ashx.resx" />

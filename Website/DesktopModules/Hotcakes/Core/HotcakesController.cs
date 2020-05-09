@@ -112,6 +112,7 @@ namespace Hotcakes.Modules.Core
 
                     case "03.03.00":
                         DeleteHostPage();
+                        UninstallControlPanel();
                         break;
 
                     default:
@@ -611,7 +612,7 @@ namespace Hotcakes.Modules.Core
                 {
                     FriendlyName = friendlyName,
                     TypeFullName = typeFullName,
-                    Enabled = true,
+                    Enabled = false,
                     CatchUpEnabled = false,
                     RetainHistoryNum = 0,
                     TimeLapse = 8,
@@ -648,6 +649,18 @@ namespace Hotcakes.Modules.Core
             var merge = new XmlMerge(doc, Globals.FormatVersion(app.Version), app.Description);
 
             merge.UpdateConfigs();
+        }
+
+        private void UninstallControlPanel()
+        {
+            try
+            {
+                UninstallPackage("Hotcakes.ControlPanel");
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message, e);
+            }
         }
 
         #region Constants
@@ -706,9 +719,7 @@ namespace Hotcakes.Modules.Core
             "Hotcakes.AffiliateDashboard",
             //SkinObjects
             "Hotcakes.SkinAffiliate",
-            "Hotcakes.SkinSearch",
-            //Providers
-            "Hotcakes.ControlPanel"
+            "Hotcakes.SkinSearch"
         };
 
         #endregion
