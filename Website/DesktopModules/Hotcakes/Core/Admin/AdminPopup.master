@@ -9,6 +9,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnableCdn="true" />
         <asp:PlaceHolder ID="BodySCRIPTS" runat="server" />
         <input id="__hccVariables" runat="server" name="__hccVariables" type="hidden" />
         <asp:ContentPlaceHolder ID="HccAdminPopupConent" runat="server"/>

@@ -1610,7 +1610,7 @@ select.hcSelectionList {
   }
 }
 #branding {
-  width: 1600px;
+  width: 1500px;
   height: 70px;
   margin: 0 auto;
   background: url(images/admin_logo.png) no-repeat 0px 0px;
@@ -1631,11 +1631,11 @@ select.hcSelectionList {
   display: inline;
 }
 #mainmenu {
-  background: #797c7c;
+  background: #0c0c0c;
 }
 #mainmenu > ul {
   height: 44px;
-  width: 1600px;
+  width: 1500px;
   margin: 0 auto;
   padding: 0 60px;
   list-style-type: none;
@@ -1691,7 +1691,8 @@ select.hcSelectionList {
 .hcMenuIcon3,
 .hcMenuIcon4,
 .hcMenuIcon5,
-.hcMenuIcon6 {
+.hcMenuIcon6,
+.hcMenuIcon7 {
   display: inline-block;
   line-height: 25px;
   vertical-align: text-top;
@@ -1725,6 +1726,9 @@ select.hcSelectionList {
 .hcMenuIcon6 {
   background-position: -25px 0;
 }
+.hcMenuIcon7 {
+  background-position: -175px 0;
+}
 .hcIconHelp {
   background-position: -150px 0;
 }
@@ -1739,8 +1743,10 @@ select.hcSelectionList {
 #navwrapper {
   display: table;
   height: 100%;
-  margin: 54px auto 0;
-  width: 1600px;
+  margin: 0 auto 54px auto;
+  width: 1500px;
+  position: relative;
+  top: -10px;
 }
 @media (max-width: 1600px) {
   #content,

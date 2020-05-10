@@ -17,6 +17,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnableCdn="true" />
         <asp:PlaceHolder ID="BodySCRIPTS" runat="server" />
         <div id="header">
             <uc1:Header ID="Header1" runat="server" />

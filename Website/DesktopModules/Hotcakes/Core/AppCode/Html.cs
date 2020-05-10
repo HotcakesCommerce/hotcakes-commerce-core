@@ -40,16 +40,14 @@ namespace Hotcakes.Modules.Core.AppCode
             }
 
             // Local JQuery
-            sb.AppendLine("<script src='" + baseScriptFolder + "jquery-1.5.1.min.js' type=\"text/javascript\"></script>");
-            sb.AppendLine("<script src='" + baseScriptFolder +
-                          "jquery-ui-1.8.7.custom/js/jquery-ui-1.8.7.custom.min.js' type=\"text/javascript\"></script>");
+            sb.AppendLine("<script src=\"" + baseScriptFolder + "jquery-3.5.1.min.js\" type=\"text/javascript\"></script>");
+            sb.AppendLine("<script src=\"" + baseScriptFolder + "jquery-ui-1.12.1/js/jquery-ui-1.12.1.min.js\" type=\"text/javascript\"></script>");
             return sb.ToString();
         }
 
         public static string AdminFooter()
         {
-            return "<div id=\"footer\"><div id=\"copyright\">&copy; Copyright 2013-" + DateTime.UtcNow.Year +
-                   " Hotcakes Commerce, LLC</div></div>";
+            return "<div id=\"footer\"><div id=\"copyright\">&copy; Copyright 2013-2018 Hotcakes Commerce, LLC<br />&copy; Copyright 2019-" + DateTime.UtcNow.Year + " Upendo Ventures, LLC </div></div>";
         }
     }
 }

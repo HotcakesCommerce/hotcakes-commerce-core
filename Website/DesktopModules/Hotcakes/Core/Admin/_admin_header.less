@@ -3,7 +3,7 @@ body {
 
 @import "_admin_common.less";
 
-@pagewidth: 1600px;
+@pagewidth: 1500px;
 @footerheight: 100px;
 
 #header {
@@ -76,7 +76,7 @@ body {
 
 
 #mainmenu {
-    background: @color-gray;
+    background: @color-black;
     // horizontal menu
     > ul {
         height: 44px;
@@ -146,7 +146,8 @@ body {
 .hcMenuIcon3,
 .hcMenuIcon4,
 .hcMenuIcon5,
-.hcMenuIcon6 {
+.hcMenuIcon6,
+.hcMenuIcon7 {
     display: inline-block;
     line-height: 25px;
     vertical-align: text-top;
@@ -189,6 +190,10 @@ body {
     background-position: -25px 0;
 }
 
+.hcMenuIcon7 {
+    background-position: -175px 0;
+}
+
 .hcIconHelp {
     background-position: -150px 0;
 }
@@ -206,8 +211,10 @@ body {
 #content, #navwrapper {
     display: table;
     height: 100%;
-    margin: 54px auto 0;
+    margin:  0 auto 54px auto;
     width: @pagewidth;
+    position: relative;
+    top: -10px;
 
     @media(max-width:1600px) {
         width: 100%;

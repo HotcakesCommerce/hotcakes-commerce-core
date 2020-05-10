@@ -25,6 +25,7 @@
 
 using System;
 using System.Web;
+using Hotcakes.Commerce;
 using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin
@@ -37,18 +38,15 @@ namespace Hotcakes.Modules.Core.Admin
             set { ucMenu.Visible = !value; }
         }
 
-        public bool HideAdminControlBar
-        {
-            get { return !AdminControlBar.Visible; }
-            set { AdminControlBar.Visible = !value; }
-        }
-
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
             aHostAdmin.Visible = HccApp.MembershipServices.IsSuperUserLoggedIn();
             aHostAdmin.HRef = VirtualPathUtility.ToAbsolute("~/DesktopModules/Hotcakes/Core/Admin/HostAdmin.aspx");
+
+            var locales = Factory.Instance.CreateStoreSettingsProvider().GetLocales();
+            ucLanguages.Visible = locales != null && locales.Count > 1;
         }
     }
 }
