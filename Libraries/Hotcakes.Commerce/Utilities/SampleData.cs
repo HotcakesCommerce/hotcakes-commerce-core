@@ -261,15 +261,15 @@ namespace Hotcakes.Commerce.Utilities
             var ordersList = new List<Order>();
             var address = new Address
             {
-                FirstName = "Ryan",
-                LastName = "Morgan",
-                Line1 = "319 CLEMATIS ST",
-                Line2 = "Suite 500",
-                City = "WEST PALM BCH",
-                RegionBvin = "FL",
-                PostalCode = "44301",
+                FirstName = "Jane",
+                LastName = "Doe",
+                Line1 = "548 Market St.",
+                Line2 = "Suite 65401",
+                City = "San Francisco",
+                RegionBvin = "CA",
+                PostalCode = "94104",
                 CountryBvin = Country.UnitedStatesCountryBvin,
-                Phone = "(561) 714-7926"
+                Phone = "(650) 381-9160"
             };
 
             while (currDate < now)
@@ -283,7 +283,7 @@ namespace Hotcakes.Commerce.Utilities
                         BillingAddress = address,
                         ShippingAddress = address,
                         UserID = "1",
-                        UserEmail = "info@hotcakescommerce.com",
+                        UserEmail = "solutions@upendoventures.com",
                         OrderNumber = "Sample Order",
                         ShippingMethodId = "TOBEDETERMINED",
                         ShippingProviderId = string.Empty,
@@ -326,7 +326,7 @@ namespace Hotcakes.Commerce.Utilities
                         BillingAddress = address,
                         ShippingAddress = address,
                         UserID = "1",
-                        UserEmail = "info@hotcakescommerce.com",
+                        UserEmail = "solutions@upendoventures.com",
                         OrderNumber = "Sample Order",
                         ShippingMethodId = "TOBEDETERMINED",
                         ShippingProviderId = string.Empty,

@@ -144,64 +144,64 @@
         AddressValidationInputs.init(".hcAddress", ".hcAddressMessage");
 
         AddressValidationInputs.getCountry = function () {
-            return $find("<%= ddlCountries.ClientID %>").get_value();
+            return $("#<%= ddlCountries.ClientID %>").val();
         };
         AddressValidationInputs.setCountry = function (value) {
-            $find("<%= ddlCountries.ClientID %>").set_value(value);
+            $find("#<%= ddlCountries.ClientID %>").val(value);
         };
         AddressValidationInputs.getFirstName = function () {
-            return $find("<%= txtFirstName.ClientID %>").get_value();
+            return $("#<%= txtFirstName.ClientID %>").val();
         };
         AddressValidationInputs.setFirstName = function (value) {
-            $find("<%= txtFirstName.ClientID %>").set_value(value);
+            $("#<%= txtFirstName.ClientID %>").val(value);
         };
         AddressValidationInputs.getLastName = function () {
-            return $find("<%= txtLastName.ClientID %>").get_value();
+            return $("#<%= txtLastName.ClientID %>").val();
         };
         AddressValidationInputs.setLastName = function (value) {
-            $find("<%= txtLastName.ClientID %>").set_value(value);
+            $("#<%= txtLastName.ClientID %>").val(value);
         };
         AddressValidationInputs.getCompany = function () {
-            return $find("<%= txtCompany.ClientID %>").get_value();
+            return $("#<%= txtCompany.ClientID %>").val();
         };
         AddressValidationInputs.setCompany = function (value) {
-            $find("<%= txtCompany.ClientID %>").set_value(value);
+            $("#<%= txtCompany.ClientID %>").val(value);
         };
         AddressValidationInputs.getAddressLine1 = function () {
-            return $find("<%= txtAddressLine1.ClientID %>").get_value();
+            return $("#<%= txtAddressLine1.ClientID %>").val();
         };
         AddressValidationInputs.setAddressLine1 = function (value) {
-            $find("<%= txtAddressLine1.ClientID %>").set_value(value);
+            $("#<%= txtAddressLine1.ClientID %>").val(value);
         };
         AddressValidationInputs.getAddressLine2 = function () {
-            return $find("<%= txtAddressLine2.ClientID %>").get_value();
+            return $("#<%= txtAddressLine2.ClientID %>").val();
         };
         AddressValidationInputs.setAddressLine2 = function (value) {
-            $find("<%= txtAddressLine2.ClientID %>").set_value(value);
+            $("#<%= txtAddressLine2.ClientID %>").val(value);
         };
         AddressValidationInputs.getCity = function () {
-            return $find("<%= txtCity.ClientID %>").get_value();
+            return $("#<%= txtCity.ClientID %>").val();
         };
         AddressValidationInputs.setCity = function (value) {
-            $find("<%= txtCity.ClientID %>").set_value(value);
+            $("#<%= txtCity.ClientID %>").val(value);
         };
         AddressValidationInputs.getRegion = function () {
-            return $find("<%= ddlRegions.ClientID %>").get_value();
+            return $("#<%= ddlRegions.ClientID %>").val();
         };
         AddressValidationInputs.setRegion = function (value) {
-            $find("<%= ddlRegions.ClientID %>").set_value(value);
+            $("#<%= ddlRegions.ClientID %>").val(value);
         };
         AddressValidationInputs.getPostalCode = function () {
-            return $find("<%= txtZip.ClientID %>").get_value();
+            return $("#<%= txtZip.ClientID %>").val();
         };
         AddressValidationInputs.setPostalCode = function (value) {
-            $find("<%= txtZip.ClientID %>").set_value(value);
+            $("#<%= txtZip.ClientID %>").val(value);
         };
         AddressValidationInputs.getPhone = function () {
-            return $find("<%= txtPhone.ClientID %>").get_value();
+            return $("#<%= txtPhone.ClientID %>").val();
         };
         AddressValidationInputs.setPhone = function (value) {
-            $find("<%= txtPhone.ClientID %>").set_value(value);
+            $("#<%= txtPhone.ClientID %>").val(value);
         };
 
         /* Create and init address validator */

@@ -26,6 +26,8 @@
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Hotcakes.Commerce;
+using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Taxes;
 using Hotcakes.Modules.Core.Admin.AppCode;
 
@@ -54,11 +56,6 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
 
             gridTaxes.RowEditing += gridTaxes_RowEditing;
             gridTaxes.RowDeleting += gridTaxes_RowDeleting;
-            gridTaxes.RowCreated += gridTaxes_RowCreated;
-
-            LocalizeView();
-
-            LoadSchedules();
         }
 
         protected override void OnLoad(EventArgs e)
@@ -67,6 +64,10 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
 
             if (!Page.IsPostBack)
             {
+                LocalizeView();
+
+                LoadSchedules();
+
                 LoadTaxationSettings();
             }
 
@@ -92,16 +93,18 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
 
         protected void gridTaxes_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            var itemId = ((TaxSchedule) gridTaxes.Rows[e.RowIndex].DataItem).Id;
-            HccApp.OrderServices.TaxSchedulesDestroy(itemId);
+            var itemId = gridTaxes.DataKeys[e.RowIndex];
+            HccApp.OrderServices.TaxSchedulesDestroy(long.Parse(itemId.Value.ToString()));
             LoadSchedules();
         }
 
         protected void gridTaxes_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            var taxSchedule = (TaxSchedule) gridTaxes.Rows[e.NewEditIndex].DataItem;
+            e.Cancel = true;
 
-            EditedTaxScheduleId = taxSchedule.Id;
+            var taxSchedule = gridTaxes.DataKeys[e.NewEditIndex];
+
+            EditedTaxScheduleId = long.Parse(taxSchedule.Value.ToString());
             LoadTaxScheduleEditor();
         }
 
@@ -155,15 +158,6 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
             {
                 msg.ShowInformation(
                     "Product Catalog selling price excludes VAT. All store selling prices will be shown exclusive of Sales Tax/VAT. Sales Tax/VAT will be added during checkout");
-            }
-        }
-
-        protected void gridTaxes_RowCreated(object sender, GridViewRowEventArgs e)
-        {
-            var headerItem = e.Row;
-            if (headerItem != null && headerItem.RowType == DataControlRowType.Header)
-            {
-                headerItem.Cells[0].Text = Localization.GetString("ScheduleName");
             }
         }
 
@@ -231,6 +225,9 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
         {
             txtDisplayName.Attributes["placeholder"] = Localization.GetString("txtDisplayName.EmptyMessage");
             DisplayNameValidator.ErrorMessage = Localization.GetString("DisplayNameValidator.ErrorMessage");
+
+            var localization = Factory.Instance.CreateLocalizationHelper(LocalResourceFile);
+            LocalizationUtils.LocalizeGridView(gridTaxes, localization);
         }
 
         #endregion

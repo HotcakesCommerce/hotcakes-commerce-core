@@ -51,8 +51,7 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
                     language = "." + HttpContext.Current.Request.Cookies["language"].Value;
                 }
 
-                if ((language == ".en-us") || (language == ".en-US") || (language == ".EN-us") ||
-                    (language == ".EN-US"))
+                if (language.ToLower() == ".en-us")
                 {
                     language = string.Empty;
                 }

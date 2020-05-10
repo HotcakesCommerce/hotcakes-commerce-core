@@ -58,15 +58,6 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         protected global::System.Web.UI.WebControls.HyperLink hlStep4;
         
         /// <summary>
-        /// hlStep5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlStep5;
-        
-        /// <summary>
         /// MultiView control.
         /// </summary>
         /// <remarks>
@@ -164,23 +155,5 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder phStep4;
-        
-        /// <summary>
-        /// Step5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.View Step5;
-        
-        /// <summary>
-        /// phStep5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phStep5;
     }
 }

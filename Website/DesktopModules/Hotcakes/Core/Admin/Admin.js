@@ -1,6 +1,4 @@
-﻿// JScript File
-
-//To prevent "Uncaught TypeError: Cannot read property 'analytics' of undefined" in older DNN versions
+﻿/* To prevent "Uncaught TypeError: Cannot read property 'analytics' of undefined" in older DNN versions */
 var dnn = dnn || {};
 
 (function ($) {

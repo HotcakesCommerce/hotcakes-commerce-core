@@ -41,7 +41,7 @@ namespace Hotcakes.Modules.Core.AppCode
 
             // Local JQuery
             sb.AppendLine("<script src=\"" + baseScriptFolder + "jquery-3.5.1.min.js\" type=\"text/javascript\"></script>");
-            sb.AppendLine("<script src=\"" + baseScriptFolder + "jquery-ui-1.12.1/js/jquery-ui-1.12.1.min.js\" type=\"text/javascript\"></script>");
+            sb.AppendLine("<script src=\"" + baseScriptFolder + "jquery-ui-1.12.1/js/jquery-ui.min.js\" type=\"text/javascript\"></script>");
             return sb.ToString();
         }
 

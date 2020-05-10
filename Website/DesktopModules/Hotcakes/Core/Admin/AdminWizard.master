@@ -1,6 +1,7 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="True" Inherits="Hotcakes.Modules.Core.Admin.AdminWizard" CodeBehind="AdminWizard.master.cs" %>
 <%@ Register Src="Header.ascx" TagName="Header" TagPrefix="hcc" %>
 <%@ Register Src="Footer.ascx" TagName="Footer" TagPrefix="hcc" %>
+<%@ Register Src="JQueryInclude.ascx" TagName="jQuery" TagPrefix="hcc" %>
 <!DOCTYPE html>
 <html>
 <head runat="server">
@@ -10,11 +11,9 @@
 <body>
     <form runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnableCdn="true" />
+        <hcc:jQuery runat="server"/>
         <asp:PlaceHolder ID="BodySCRIPTS" runat="server" />
         <div id="wrapper" class="dnnClear">
-            <div id="header">
-                <hcc:Header HideMenu="True" HideAdminControlBar="True" runat="server" />
-            </div>
             <div id="content" class="hcAdminWizard">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server" />
             </div>

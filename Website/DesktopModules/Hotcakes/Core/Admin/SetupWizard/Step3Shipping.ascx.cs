@@ -28,6 +28,9 @@ using System.Globalization;
 using System.Threading;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Hotcakes.Commerce;
+using Hotcakes.Commerce.Dnn;
+using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Shipping;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Modules.Core.Admin.Parts.ShippingZones;
@@ -41,25 +44,26 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
             base.OnInit(e);
 
             gridMethods.RowDeleting += gridMethods_RowDeleting;
-            gridMethods.RowCreated += gridMethods_RowCreating;
             gridMethods.RowEditing += gridMethods_RowEditing;
 
             gridZones.RowDeleting += gridZones_RowDeleting;
-            gridZones.RowCreated += gridZones_RowCreated;
             gridZones.RowEditing += gridZones_RowEditing;
             gridZones.RowDataBound += gridZones_RowDataBound;
-
-            LocalizeView();
-
-            LoadShippingMethods();
-            LoadProviders();
-            LoadShippingZones();
-            LoadHandlingSettings();
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+
+            if (!Page.IsPostBack)
+            {
+                LocalizeView();
+
+                LoadShippingMethods();
+                LoadProviders();
+                LoadShippingZones();
+                LoadHandlingSettings();
+            }
 
             // Load previous used module
             if (!string.IsNullOrEmpty(EditedShippingMethodId))
@@ -88,24 +92,6 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
         protected void btnExit_Click(object sender, EventArgs e)
         {
             NotifyFinishedEditing("EXIT");
-        }
-
-        protected void gridMethods_RowCreating(object sender, GridViewRowEventArgs e)
-        {
-            var headerItem = e.Row;
-            if (headerItem != null && headerItem.RowType == DataControlRowType.Header)
-            {
-                headerItem.Cells[0].Text = Localization.GetString("ShippingMethod");
-            }
-        }
-
-        protected void gridZones_RowCreated(object sender, GridViewRowEventArgs e)
-        {
-            var headerItem = e.Row;
-            if (headerItem != null)
-            {
-                headerItem.Cells[0].Text = Localization.GetString("ShippingZones");
-            }
         }
 
         protected void btnEdit_OnPreRender(object sender, EventArgs e)
@@ -140,6 +126,10 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
                 rbtnHandlingMethod.Items.Add(new ListItem(Localization.GetString("PerItem"), "0"));
                 rbtnHandlingMethod.Items.Add(new ListItem(Localization.GetString("PerOrder"), "1"));
             }
+
+            var localization = Factory.Instance.CreateLocalizationHelper(LocalResourceFile);
+            LocalizationUtils.LocalizeGridView(gridZones, localization);
+            LocalizationUtils.LocalizeGridView(gridMethods, localization);
         }
 
         #region Properties
@@ -252,8 +242,8 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
 
         protected void gridMethods_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            var method = (ShippingMethod) gridMethods.Rows[e.RowIndex].DataItem;
-            HccApp.OrderServices.ShippingMethods.Delete(method.Bvin);
+            var bvin = gridMethods.DataKeys[e.RowIndex];
+            HccApp.OrderServices.ShippingMethods.Delete(bvin.Value.ToString());
             LoadShippingMethods();
 
             //Clear this values to avoid issues with viewstate
@@ -262,11 +252,12 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
 
         protected void gridMethods_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            var method = (ShippingMethod) gridMethods.Rows[e.NewEditIndex].DataItem;
+            e.Cancel = true;
+            var bvin = gridMethods.DataKeys[e.NewEditIndex];
 
             NewShippingMethod = null;
             //Open Method Edit dialog
-            LoadShippingMethodEditor(method.Bvin);
+            LoadShippingMethodEditor(bvin.Value.ToString());
             RegisterOpenDialogScript();
         }
 
@@ -368,19 +359,20 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
 
         protected void gridZones_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            var zone = (Zone) gridZones.Rows[e.RowIndex].DataItem;
-            HccApp.OrderServices.ShippingZones.Delete(zone.Id);
+            var zoneId = gridZones.DataKeys[e.RowIndex];
+            HccApp.OrderServices.ShippingZones.Delete(long.Parse(zoneId.Value.ToString()));
             ClearEditorsInfo();
             LoadShippingZones();
         }
 
         protected void gridZones_RowEditing(object sender, GridViewEditEventArgs e)
         {
+            e.Cancel = true;
             //Open Zone Edit dialog
-            var zone = (Zone) gridZones.Rows[e.NewEditIndex].DataItem;
-            if (zone != null)
+            var zoneId = gridZones.DataKeys[e.NewEditIndex];
+            if (zoneId != null)
             {
-                LoadShippingZoneEditor(zone.Id);
+                LoadShippingZoneEditor(long.Parse(zoneId.Value.ToString()));
                 RegisterOpenDialogScript();
             }
         }

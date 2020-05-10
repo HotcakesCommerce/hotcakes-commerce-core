@@ -34,17 +34,20 @@
                         <asp:LinkButton ID="btnNewMethod" resourcekey="Create" CssClass="hcButton hcSmall" OnClick="btnCreateMethod_Click" runat="server" />
                     </div>
                     <div class="hcFormItem">
-                        <asp:GridView runat="server" ID="gridMethods" AutoGenerateColumns="False" GridLines="None" Width="100%"
-                            OnDeleteCommand="gridMethods_RowDeleting" OnEditCommand="gridMethods_RowEditing" OnItemCreated="gridMethods_RowCreated" DataKeyNames="Bvin">
+                        <asp:GridView runat="server" ID="gridMethods" AutoGenerateColumns="False" GridLines="None" Width="100%" CssClass="dnnGrid"  
+                            OnDeleteCommand="gridMethods_RowDeleting" OnEditCommand="gridMethods_RowEditing" DataKeyNames="Bvin">
+                            <HeaderStyle CssClass="dnnGridHeader"/>
+                            <RowStyle CssClass="dnnGridItem"/>
+                            <AlternatingRowStyle CssClass="dnnGridAltItem"/>
                             <Columns>
-                                <asp:BoundColumn DataField="Name" UniqueName="Name" />
-                                <asp:TemplateColumn>
+                                <asp:BoundField DataField="Name" HeaderText="ShippingMethods" />
+                                <asp:TemplateField>
                                     <ItemStyle Width="80px" />
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnEdit" CssClass="hcIconEdit" runat="server" CausesValidation="False" CommandName="Edit" OnPreRender="btnEdit_OnPreRender" />
                                         <asp:LinkButton ID="btnDelete" CssClass="hcIconDelete" runat="server" CausesValidation="False" CommandName="Delete" OnPreRender="btnDeleteMethod_OnPreRender" />
                                     </ItemTemplate>
-                                </asp:TemplateColumn>
+                                </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
                     </div>
@@ -58,28 +61,31 @@
             <asp:UpdatePanel ID="upnlZonesGrid" UpdateMode="Always" runat="server">
                 <ContentTemplate>
                     <div class="hcFormItem hcFormItem66p">
-                        <asp:TextBox ID="txtShippingZoneName" CssClass="hcInput50p" runat="server" MaxLength="50" />
+                        <asp:TextBox ID="txtShippingZoneName" CssClass="hcInput50p" runat="server" MaxLength="50" ValidationGroup="ShippingZoneWizard" />
                         <asp:RequiredFieldValidator ID="rfvShippingZoneName" runat="server"
-                            ControlToValidate="txtShippingZoneName" ValidationGroup="ShippingZone"
+                            ControlToValidate="txtShippingZoneName" ValidationGroup="ShippingZoneWizard"
                             Display="Dynamic" CssClass="hcFormError" />
                     </div>
                     <div class="hcFormItem hcFormItem33p">
-                        <asp:LinkButton ID="btnNewZone" resourcekey="Create" CssClass="hcButton hcSmall" OnClick="btnCreateZone_Click" runat="server" ValidationGroup="ShippingZone" />
+                        <asp:LinkButton ID="btnNewZone" resourcekey="Create" CssClass="hcButton hcSmall" OnClick="btnCreateZone_Click" runat="server" ValidationGroup="ShippingZoneWizard" />
                     </div>
                     <div class="hcFormItem">
-                        <asp:GridView runat="server" ID="gridZones" AutoGenerateColumns="False" Width="100%"
+                        <asp:GridView runat="server" ID="gridZones" AutoGenerateColumns="False" Width="100%" CssClass="dnnGrid" 
                             OnItemDataBound="gridZones_ItemDataBound"
                             OnDeleteCommand="gridZones_RowDeleting"
                             OnEditCommand="gridZones_RowEditing" OnItemCreated="gridZones_RowCreated" DataKeyNames="Id">
+                            <HeaderStyle CssClass="dnnGridHeader"/>
+                            <RowStyle CssClass="dnnGridItem"/>
+                            <AlternatingRowStyle CssClass="dnnGridAltItem"/>
                             <Columns>
-                                <asp:BoundColumn DataField="Name" UniqueName="Name" />
-                                <asp:TemplateColumn>
+                                <asp:BoundField DataField="Name" HeaderText="ShippingZones" />
+                                <asp:TemplateField>
                                     <ItemStyle Width="80px" />
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnEdit" CssClass="hcIconEdit" runat="server" CausesValidation="False" CommandName="Edit" OnPreRender="btnEdit_OnPreRender" />
                                         <asp:LinkButton ID="btnDelete" CssClass="hcIconDelete" runat="server" CausesValidation="False" CommandName="Delete" OnPreRender="btnDeleteZone_OnPreRender" />
                                     </ItemTemplate>
-                                </asp:TemplateColumn>
+                                </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
                     </div>

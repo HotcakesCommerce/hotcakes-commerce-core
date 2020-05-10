@@ -165,8 +165,8 @@
   <data name="NewZoneFieldValidator.ErrorMessage" xml:space="preserve">
     <value>Name is required</value>
   </data>
-  <data name="ShippingMethod.Text" xml:space="preserve">
-    <value>Shipping Method</value>
+  <data name="ShippingMethods.HeaderText" xml:space="preserve">
+    <value>Shipping Methods</value>
   </data>
   <data name="ShippingMethodDelete.Text" xml:space="preserve">
     <value>Delete this Shipping Method?</value>
@@ -174,7 +174,7 @@
   <data name="ShippingZoneDelete.Text" xml:space="preserve">
     <value>Delete this Shipping Zone?</value>
   </data>
-  <data name="ShippingZones.Text" xml:space="preserve">
+  <data name="ShippingZones.HeaderText" xml:space="preserve">
     <value>Shipping Zones</value>
   </data>
   <data name="PerItem.Text" xml:space="preserve">
@@ -182,5 +182,11 @@
   </data>
   <data name="PerOrder.Text" xml:space="preserve">
     <value>Per Order</value>
+  </data>
+  <data name="ShippingMethods.Text" xml:space="preserve">
+    <value>Shipping Methods</value>
+  </data>
+  <data name="ShippingZones.Text" xml:space="preserve">
+    <value>Shipping Zones</value>
   </data>
 </root>

@@ -42,17 +42,20 @@
 						</div>
                     </div>
                     <div class="hcFormItem">
-                        <asp:GridView runat="server" ID="gridTaxes" AutoGenerateColumns="False" GridLines="None" 
-                            OnDeleteCommand="gridTaxes_ItemDelete" OnEditCommand="gridTaxes_ItemEdit" OnItemCreated="gridTaxes_OnItemCreated" DataKeyNames="Id">
+                        <asp:GridView runat="server" ID="gridTaxes" AutoGenerateColumns="False" GridLines="None" CssClass="dnnGrid" 
+                            OnDeleteCommand="gridTaxes_ItemDelete" OnEditCommand="gridTaxes_ItemEdit" DataKeyNames="Id">
+                            <HeaderStyle CssClass="dnnGridHeader"/>
+                            <RowStyle CssClass="dnnGridItem"/>
+                            <AlternatingRowStyle CssClass="dnnGridAltItem"/>
                             <Columns>
-                                <asp:BoundColumn DataField="Name" UniqueName="Name" />
-                                <asp:TemplateColumn>
+                                <asp:BoundField DataField="Name" HeaderText="ScheduleName" />
+                                <asp:TemplateField>
                                     <ItemStyle Width="80px" />
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnEdit" CssClass="hcIconEdit" runat="server" CausesValidation="False" CommandName="Edit" OnPreRender="btnEdit_OnPreRender" />
                                         <asp:LinkButton ID="btnDelete" CssClass="hcIconDelete" runat="server" CausesValidation="False" CommandName="Delete" OnPreRender="btnDelete_OnPreRender" />
                                     </ItemTemplate>
-                                </asp:TemplateColumn>
+                                </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
                     </div>
