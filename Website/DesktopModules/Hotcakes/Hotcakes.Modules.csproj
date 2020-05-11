@@ -4054,6 +4054,9 @@
   <ItemGroup>
     <Content Include="Core\Admin\Catalog\App_LocalResources\ProductChoices.aspx.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\Categories_Roles.aspx.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

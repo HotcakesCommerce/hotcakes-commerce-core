@@ -64,7 +64,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             btnAdd.Click += btnAdd_Click;
             gvRoles.RowDeleting += gvRoles_RowDeleting;
 
-            PageTitle = "Category Roles";
+            PageTitle = Localization.GetString("PageTitle");
             InitNavMenu(ucNavMenu);
         }
 
