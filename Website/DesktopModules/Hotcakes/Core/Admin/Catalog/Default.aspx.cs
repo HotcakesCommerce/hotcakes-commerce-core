@@ -170,8 +170,9 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 var lnkImage = e.Row.FindControl("lnkImage") as HyperLink;
                 var lnkEdit = e.Row.FindControl("lnkEdit") as HyperLink;
 
-                var editUrl = string.Format("Products_Performance.aspx?id={0}", prod.Bvin);
-                lnkImage.NavigateUrl = editUrl;
+                var editUrl = string.Format("Products_Edit.aspx?id={0}", prod.Bvin);
+                var perfUrl = string.Format("Products_Performance.aspx?id={0}", prod.Bvin);
+                lnkImage.NavigateUrl = perfUrl;
                 lnkImage.ToolTip = prod.ImageFileSmallAlternateText;
                 lnkImage.Style["display"] = "block";
                 lnkImage.Style["max-height"] = "80px";
