@@ -78,7 +78,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            PageTitle = "Edit Products for Category";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Catalog;
         }
 
@@ -140,8 +140,8 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             sb.Append("<td width=\"25%\">" + p.Sku + "</td>");
             sb.Append("<td width=\"42%\">" + p.ProductName + "</td>");
             sb.AppendFormat(
-                "<td align=\"center\"><a class=\"trash hcIconDelete\" href=\"javascript:void(0);\" title=\"Remove Product\" id=\"rem{0}\" alt=\"Delete\" onclick=\"return hcConfirm(event,'Are you sure you want to delete this item?');\"></a></td>",
-                p.Bvin);
+                "<td align=\"center\"><a class=\"trash hcIconDelete\" href=\"javascript:void(0);\" title=\"{1}\" id=\"rem{0}\" data-id=\"{0}\" alt=\"{2}\"></a></td>",
+                p.Bvin, Localization.GetString("RemoveProduct"), Localization.GetString("Delete"));
             sb.Append("</tr>");
             sb.Append("</tbody>");
             sb.Append("</table>");
@@ -153,7 +153,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             msg.ClearMessage();
             if (ProductPicker1.SelectedProducts.Count == 0)
             {
-                msg.ShowInformation("Please select products to add first.");
+                msg.ShowInformation(Localization.GetString("NoProducts"));
             }
             foreach (var s in ProductPicker1.SelectedProducts)
             {

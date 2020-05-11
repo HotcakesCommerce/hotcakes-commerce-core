@@ -3618,7 +3618,9 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\Categories_ManualSelection.aspx.resx" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Core\App_LocalResources\Global.resx">
       <SubType>Designer</SubType>
