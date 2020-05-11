@@ -3,11 +3,12 @@
 <%@ Register Src="Footer.ascx" TagName="Footer" TagPrefix="hcc" %>
 <%@ Register Src="Controls/NavMenu.ascx" TagName="NavMenu" TagPrefix="hcc" %>
 <%@ Register Src="Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
-
+<%@ Register Src="JQueryInclude.ascx" TagName="jQuery" TagPrefix="hcc" %>
 <!DOCTYPE html>
 <html>
 <head runat="server">
     <title>My Hotcakes Commerce Store</title>
+    <hcc:jQuery runat="server"/>
 </head>
 <body>
     <form runat="server" id="Form">

@@ -97,10 +97,10 @@
 	</script>
 	<h1>Choices - Edit</h1>
 	<uc1:MessageBox ID="MessageBox1" runat="server" />
-	    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
-			<ContentTemplate>
-				<asp:Literal ID="litResults" ClientIDMode="Static" runat="server" EnableViewState="false"></asp:Literal>
-			</ContentTemplate>
-		</asp:UpdatePanel>
+	<asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
+		<ContentTemplate>
+			<asp:Literal ID="litResults" ClientIDMode="Static" runat="server" EnableViewState="false"></asp:Literal>
+		</ContentTemplate>
+	</asp:UpdatePanel>
 </asp:Content>
 

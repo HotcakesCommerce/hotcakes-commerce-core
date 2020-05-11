@@ -103,12 +103,21 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         {
             var sb = new StringBuilder();
 
-            sb.Append("<div id=\"dragitem-list\">");
-            foreach (var opt in items)
+            if (items != null && items.Count > 0)
             {
-                RenderSingleItem(sb, opt);
+                sb.Append("<div id=\"dragitem-list\">");
+                foreach (var opt in items)
+                {
+                    RenderSingleItem(sb, opt);
+                }
+
+                sb.Append("</div>");
             }
-            sb.Append("</div>");
+            else
+            {
+                sb.AppendFormat("<div class=\"hcClearfix\"><p>{0}</p></div>", Localization.GetString("NoOptions"));
+            }
+
             litResults.Text = sb.ToString();
         }
 
