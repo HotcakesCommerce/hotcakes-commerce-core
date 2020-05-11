@@ -1960,6 +1960,8 @@ body > form {
 }
 .hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem.hcGo .hcSelectOuter .hcIconRight {
   background-position: -232px -194px;
+  width: 20px;
+  height: 20px;
 }
 .hcNavContent .hcNavContentBody .hcBlock.hcNavContentBottom {
   background: #0c0c0c;
