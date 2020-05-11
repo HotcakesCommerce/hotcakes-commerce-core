@@ -9,7 +9,7 @@
 	<div class="hcBlock hcBlockLight hcPaddingBottom">
 		<div class="hcForm">
 			<div class="hcFormItem">
-				<label class="hcLabel">+ New Shared Choice</label>
+				<label class="hcLabel"><%=Localization.GetString("NewSharedChoiceImageButton") %></label>
 				<asp:DropDownList runat="server" ID="SharedChoiceTypes">
 					<Items>
 						<asp:ListItem Value="100" Text="Drop Down List" />
@@ -27,7 +27,7 @@
 	<div class="hcBlock">
 		<div class="hcForm">
 			<div class="hcFormItem">
-				<asp:LinkButton ID="NewSharedChoiceImageButton" AlternateText="+ Add New Shared Choice" Text="+ Add New Shared Choice" runat="server" CssClass="hcTertiaryAction" EnableViewState="False" OnClick="NewSharedChoiceImageButton_Click" />
+				<asp:LinkButton ID="NewSharedChoiceImageButton" resourcekey="NewSharedChoiceImageButton" runat="server" CssClass="hcTertiaryAction" EnableViewState="False" OnClick="NewSharedChoiceImageButton_Click" />
 			</div>
 		</div>
 	</div>
@@ -43,26 +43,27 @@
 	function Remove(lnk) {
 		var id = $(lnk).attr('id');
 		$.post('ProductSharedChoices_Delete.aspx',
-											{ "id": id.replace('rem', '') },
-											function () {
-												lnk.parent().parent().slideUp('slow');
-												lnk.parent().parent().remove();
-											}
-											);
+			{ "id": id.replace('rem', '') },
+			function () {
+				lnk.parent().parent().slideUp('slow');
+                lnk.parent().parent().remove();
+                if ($(".hcGrid tr").length == 0) {
+                    location.reload();
+                }
+            }
+		);
 	}
 
 	// Jquery Setup
 	$(document).ready(function () {
 		$('.trash').bind("click", function (event) {
 			$("#deleteLinkId").val($(this).attr("id"));
-			return hcConfirm(event, 'Deleting this shared choice will affect ALL products that are \nassociated with this shared choice and will result in loss of inventory for \nthose products. Are you sure you want to continue?', callBackFunRemoveItem)
+			return hcConfirm(event, "<%=Localization.GetJsEncodedString("Confirm")%>", callBackFunRemoveItem)
 		});
 	});
-
-
 </script>
+    <h1><%=PageTitle %></h1>
 	<uc1:MessageBox ID="MessageBox1" runat="server" />
-	<h1>Shared Choices</h1>
-	<asp:Literal ID="litResults" ClientIDMode="Static" runat="server" EnableViewState="false"></asp:Literal>
+    <asp:Literal ID="litResults" ClientIDMode="Static" runat="server" EnableViewState="false" />
 	<input id="deleteLinkId" type="hidden" value="" />
 </asp:Content>

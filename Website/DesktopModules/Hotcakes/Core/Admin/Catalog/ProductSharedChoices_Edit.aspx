@@ -12,27 +12,27 @@
 	<div class="hcBlock">
 		<div class="hcForm">
 			<div class="hcFormItem">
-				<asp:HyperLink ID="hypClose" runat="server" Text="Close" CssClass="hcTertiaryAction" NavigateUrl="ProductSharedChoices.aspx" />
+				<asp:HyperLink ID="hypClose" resourcekey="hypClose" runat="server" Text="Close" CssClass="hcTertiaryAction" NavigateUrl="ProductSharedChoices.aspx" />
 			</div>
 		</div>
 	</div>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
+	<h1><%=PageTitle %></h1>
 	<uc2:MessageBox ID="MessageBox1" runat="server" />
-	<h1>Edit Shared Choice</h1>
 
 	<div class="controlarea1">
 		<div class="hcForm">
 			<div class="hcFormItem">
-				<label class="hcLabel">Name<i class="hcLocalizable"></i>:</label>
+				<label class="hcLabel"><%=Localization.GetString("lblName") %><i class="hcLocalizable"></i></label>
 				<asp:TextBox ID="txtName" runat="server" Width="300px"></asp:TextBox>
 			</div>
 			<div class="hcFormItem">
-				<asp:CheckBox ID="chkHideName" CssClass="hcFloatForIE" runat="server" Text="Hide name on store" />
+				<asp:CheckBox ID="chkHideName" resourcekey="chkHideName" CssClass="hcFloatForIE" runat="server" />
 			</div>
 			<div class="hcFormItem" id="trVariant" runat="server" visible="false">
-				<asp:CheckBox ID="chkVariant" CssClass="hcFloatForIE" runat="server" Text="This choice changes <i>Inventory</i>, <i>Pictures</i>, <i>Prices</i> and/or <i>SKU</i>" />
+				<asp:CheckBox ID="chkVariant" resourcekey="chkVariant" CssClass="hcFloatForIE" runat="server" />
 			</div>
 		</div>
 	</div>
@@ -41,7 +41,7 @@
 			<div class="controlarea1">
 				<div class="hcForm">
 					<div class="hcFormItem">
-						<asp:Label runat="server" class="hcLabel">Description<i class="hcLocalizable"></i>:</asp:Label>
+						<asp:Label runat="server" class="hcLabel"><%=Localization.GetString("lblDescription") %><i class="hcLocalizable"></i></asp:Label>
 						<uc1:HtmlEditor ID="HtmlEditor1" runat="server" EditorWidth="910" EditorHeight="220" EditorWrap="true" />
 					</div>
 				</div>
@@ -51,15 +51,15 @@
 			<div class="controlarea1">
 				<div class="hcForm">
 					<div class="hcFormItem">
-						<label class="hcLabel">Columns:</label>
+						<label class="hcLabel"><%=Localization.GetString("lblColumns") %></label>
 						<asp:TextBox ID="ColumnsField" runat="server" Columns="10" />
 					</div>
 					<div class="hcFormItem">
-						<label class="hcLabel">Rows:</label>
+						<label class="hcLabel"><%=Localization.GetString("lblRows") %></label>
 						<asp:TextBox ID="RowsField" runat="server" Columns="10" />
 					</div>
 					<div class="hcFormItem">
-						<label class="hcLabel">Max Length:</label>
+						<label class="hcLabel"><%=Localization.GetString("lblMaxLength") %></label>
 						<asp:TextBox ID="MaxLengthField" runat="server" Columns="10" />
 					</div>
 				</div>
@@ -70,23 +70,24 @@
 			<div class="controlarea1">
 				<div class="hcForm">
 					<div class="hcFormItem">
-						<asp:CheckBox ID="MultipleFilesField" runat="server" Checked="true" Text="Allow Multiple Files" />
+						<asp:CheckBox ID="MultipleFilesField" resourcekey="MultipleFilesField" runat="server" Checked="true" />
 					</div>
 				</div>
 			</div>
 		</asp:View>
 		<asp:View ID="viewItems" runat="server">
 			<div class="padded">
-				<h2>Choice Items</h2>
+				<h2><%=Localization.GetString("Header") %></h2>
 				<uc3:OptionItemEditor ID="ItemsEditor" runat="server" />
 			</div>
 		</asp:View>
 	</asp:MultiView>
 	<ul class="hcActions editorcontrols">
 		<li>
-			<asp:ImageButton ID="btnSaveOption" CssClass="hcPrimaryAction" ClientIDMode="Static" runat="server"
-				AlternateText="Save Changes"
-				OnClick="btnSaveOption_Click" />
+			<asp:LinkButton ID="btnSaveOption" resourcekey="btnSaveOption" CssClass="hcPrimaryAction" ClientIDMode="Static" runat="server" OnClick="btnSaveOption_Click" />
 		</li>
+        <li>
+            <asp:LinkButton ID="btnSaveOptionAndClose" resourcekey="btnSaveOptionAndClose" CssClass="hcSecondaryAction" ClientIDMode="Static" runat="server" OnClick="btnSaveAndCloseOption_Click" />
+        </li>
 	</ul>
 </asp:Content>

@@ -4063,6 +4063,15 @@
   <ItemGroup>
     <Content Include="Core\Admin\Content\App_LocalResources\Columns_Edit.aspx.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\ProductSharedChoices.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\ProductSharedChoices_Edit.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\OptionItemEditor.ascx.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
