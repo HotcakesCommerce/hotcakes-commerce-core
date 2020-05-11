@@ -71,7 +71,9 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Editors.TinyMCE
         {
             base.OnLoad(e);
             Page.ClientScript.RegisterClientScriptInclude("tinymcejquery",
-                ResolveUrl("~/DesktopModules/Hotcakes/Core/Scripts/tinymce/jquery.tinymce.js"));
+                ResolveUrl("~/DesktopModules/Hotcakes/Core/Scripts/tinymce/tinymce.min.js"));
+            Page.ClientScript.RegisterClientScriptInclude("tinymcejquery",
+                ResolveUrl("~/DesktopModules/Hotcakes/Core/Scripts/tinymce/jquery.tinymce.min.js"));
             Page.ClientScript.RegisterClientScriptInclude("tinymceinit",
                 ResolveUrl("~/DesktopModules/Hotcakes/Core/Scripts/tinymce/init.js"));
         }
