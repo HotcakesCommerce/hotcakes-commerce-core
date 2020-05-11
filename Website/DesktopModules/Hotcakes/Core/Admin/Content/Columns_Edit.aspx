@@ -8,20 +8,19 @@
 
     <div class="hcBlock hcBlockLight">
         <div class="hcForm">
-            <h2>Advanced Options</h2>
+            <h2><%=Localization.GetString("lblAdvancedOptions") %></h2>
             <asp:Panel ID="pnlAdvanced" runat="server" DefaultButton="btnClone">
                 <div class="hcFormItem hcGo">
-                    <label class="hcLabel">Copy From</label>
+                    <label class="hcLabel"><%=Localization.GetString("lblCopy") %></label>
                     <div class="hcSelectOuter">
                         <asp:DropDownList runat="server" ID="CopyToList"/>
-
-                        <asp:LinkButton ID="btnCopyBlocks" runat="server" CssClass="hcIconRight" OnClick="btnCopyBlocks_Click" />
+                        <asp:LinkButton ID="btnCopyBlocks" resourcekey="btnCopyBlocks" runat="server" CssClass="hcIconRight" OnClick="btnCopyBlocks_Click" />
                     </div>
                 </div>
                 <div class="hcFormItem hcGo">
-                    <label class="hcLabel">Clone As</label>
+                    <label class="hcLabel"><%=Localization.GetString("lblClone") %></label>
                     <asp:TextBox ID="CloneNameField" runat="server"/>
-                    <asp:LinkButton ID="btnClone" runat="server" CssClass="hcTertiaryAction" Text="Clone" OnClick="btnClone_Click" />
+                    <asp:LinkButton ID="btnClone" resourcekey="btnClone" runat="server" CssClass="hcTertiaryAction" OnClick="btnClone_Click" />
                 </div>
             </asp:Panel>
         </div>
@@ -30,14 +29,13 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Edit Content Column</h1>
+    <h1><%=PageTitle %></h1>
     <hcc:MessageBox ID="msg" runat="server" EnableViewState="false" />
     <hcc:ContentColumnEditor ID="ContentColumnEditor" runat="server" />
 
     <ul class="hcActions">
         <li>
-            <asp:LinkButton ID="btnOk" runat="server" Text="< Back" CssClass="hcPrimaryAction"
-                OnClick="btnOk_Click" />
+            <asp:LinkButton ID="btnOk" resourcekey="btnOk" runat="server" CssClass="hcPrimaryAction" OnClick="btnOk_Click" />
         </li>
     </ul>
 </asp:Content>

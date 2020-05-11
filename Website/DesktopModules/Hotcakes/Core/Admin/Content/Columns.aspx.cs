@@ -28,6 +28,7 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Content;
+using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Web.Logging;
@@ -41,7 +42,7 @@ namespace Hotcakes.Modules.Core.Admin.Content
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            PageTitle = "Content Columns";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Content;
             ValidateCurrentUserHasPermission(SystemPermissions.ContentView);
         }
@@ -52,8 +53,15 @@ namespace Hotcakes.Modules.Core.Admin.Content
 
             if (!Page.IsPostBack)
             {
+                LocalizeView();
                 LoadColumns();
             }
+        }
+
+        private void LocalizeView()
+        {
+            var localization = Factory.Instance.CreateLocalizationHelper(LocalResourceFile);
+            LocalizationUtils.LocalizeGridView(gvBlocks, localization);
         }
 
         private void LoadColumns()
@@ -71,7 +79,7 @@ namespace Hotcakes.Modules.Core.Admin.Content
             var bvin = (string) gvBlocks.DataKeys[e.RowIndex].Value;
             if (HccApp.ContentServices.Columns.Delete(bvin) == false)
             {
-                msg.ShowWarning("Unable to delete this content column. System content column can not be deleted.");
+                msg.ShowWarning(Localization.GetString("SystemColumnError"));
             }
 
             LoadColumns();
@@ -83,7 +91,7 @@ namespace Hotcakes.Modules.Core.Admin.Content
 
             if (NewNameField.Text.Trim().Length < 1)
             {
-                msg.ShowWarning("Please enter a name for the new content column.");
+                msg.ShowWarning(Localization.GetString("NoNameError"));
             }
             else
             {
@@ -96,7 +104,7 @@ namespace Hotcakes.Modules.Core.Admin.Content
                 }
                 else
                 {
-                    msg.ShowError("Unable to create content column. Please see event log for details");
+                    msg.ShowError(Localization.GetString("DeleteError"));
                     EventLog.LogEvent("Create Content column Button", "Unable to create content column",
                         EventLogSeverity.Error);
                 }
