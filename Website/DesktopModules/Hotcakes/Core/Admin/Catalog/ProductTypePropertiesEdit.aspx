@@ -49,10 +49,10 @@
                     var ids = $(this).sortable('toArray', { attribute: "productPropertyChoiceId" });
                     ids += '';
                     $.post('CatalogHandler.ashx',
-                    {
-                        "method": "ResortProductPropertyChoices",
-                        "productPropertyChoiceIds": ids,
-                    });
+                        {
+                            "method": "ResortProductPropertyChoices",
+                            "productPropertyChoiceIds": ids,
+                        });
                 }
             });
 
@@ -63,31 +63,31 @@
     <hcc:MessageBox ID="msg" runat="server" AddValidationSummaries="false" />
     <div class="hcForm">
         <div class="hcFormItemHor">
-            <asp:Label runat="server" Text="Property Name" CssClass="hcLabel" />
+            <asp:Label runat="server" resourcekey="lblPropertyName" CssClass="hcLabel" />
             <asp:TextBox ID="txtPropertyName" runat="server" />
             <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPropertyName" CssClass="hcFormError"
                 Text="Property Name is Required" />
         </div>
         <div class="hcFormItemHor">
-            <asp:Label runat="server" Text="" CssClass="hcLabel">Display Name<i class="hcLocalizable"></i></asp:Label>
+            <asp:Label runat="server" CssClass="hcLabel"><%=Localization.GetString("lblDisplayName") %><i class="hcLocalizable"></i></asp:Label>
             <asp:TextBox ID="txtDisplayName" runat="server" />
         </div>
         <div class="hcFormItemHor">
-            <asp:Label runat="server" Text="Display On Site?" CssClass="hcLabel" />
+            <asp:Label runat="server" resourcekey="lblDisplaySite" CssClass="hcLabel" />
             <div class="hcCheckboxOuter">
                 <asp:CheckBox ID="chkDisplayOnSite" runat="server" />
                 <span></span>
             </div>
         </div>
         <div class="hcFormItemHor">
-            <asp:Label runat="server" Text="Display To Drop Shipper?" CssClass="hcLabel" />
+            <asp:Label runat="server" resourcekey="lblDisplayShipper" CssClass="hcLabel" />
             <div class="hcCheckboxOuter">
                 <asp:CheckBox ID="chkDisplayToDropShipper" runat="server" />
                 <span></span>
             </div>
         </div>
         <div class="hcFormItemHor">
-            <asp:Label runat="server" Text="Display On Search?" CssClass="hcLabel" />
+            <asp:Label runat="server" resourcekey="lblDisplaySearch" CssClass="hcLabel" />
             <div class="hcCheckboxOuter">
                 <asp:CheckBox ID="chkDisplayOnSearch" runat="server" />
                 <span></span>
@@ -97,31 +97,31 @@
         <asp:MultiView runat="server" ID="mvTypeSettings">
             <asp:View runat="server" ID="vCurrency">
                 <div class="hcFormItemHor">
-                    <asp:Label runat="server" Text="Currency Symbol" CssClass="hcLabel" />
+                    <asp:Label runat="server" resourcekey="lblCultureCode" CssClass="hcLabel" />
                     <asp:DropDownList ID="lstCultureCode" runat="server" />
                 </div>
                 <div class="hcFormItemHor">
-                    <asp:Label runat="server" Text="Default Value" CssClass="hcLabel" />
+                    <asp:Label runat="server" resourcekey="lblDefaultCurrencyValue" CssClass="hcLabel" />
                     <asp:TextBox ID="txtDefaultCurrencyValue" runat="server" />
                 </div>
             </asp:View>
             <asp:View runat="server" ID="vDate">
                 <div class="hcFormItemHor" runat="server">
-                    <asp:Label runat="server" Text="Default Value" CssClass="hcLabel" />
+                    <asp:Label runat="server" resourcekey="lblDefaultDate" CssClass="hcLabel" />
                     <asp:TextBox ID="radDefaultDate" runat="server" TextMode="Date" />
-                    <asp:RequiredFieldValidator runat="server" ControlToValidate="radDefaultDate" CssClass="hcFormError" Text="Default Date is Required" />
+                    <asp:RequiredFieldValidator runat="server" ControlToValidate="radDefaultDate" resourcekey="rfvDefaultDate" CssClass="hcFormError" />
                 </div>
             </asp:View>
             <asp:View runat="server" ID="vText">
                 <div class="hcFormItemHor">
-                    <asp:Label runat="server" Text="Is Localizable" CssClass="hcLabel" />
+                    <asp:Label runat="server" resourcekey="lblIsLocalizable" CssClass="hcLabel" />
                     <div class="hcCheckboxOuter">
                             <asp:CheckBox ID="chkIsLocalizable" runat="server" />
                         <span></span>
                     </div>
                 </div>
                 <div class="hcFormItemHor hcConditionalLocalizable">
-                    <asp:Label runat="server" CssClass="hcLabel">Default Value<i class="hcLocalizable"></i></asp:Label>
+                    <asp:Label runat="server" CssClass="hcLabel"><%=Localization.GetString("lblDefaultTextValue") %><i class="hcLocalizable"></i></asp:Label>
                     <asp:TextBox ID="txtDefaultTextValue" runat="server" TextMode="MultiLine" />
                 </div>
             </asp:View>
@@ -129,55 +129,55 @@
                 <div class="hcFormItemHor">
                     <div class="hcFormItem hcFormItem66p">
                         <asp:TextBox ID="txtNewChoice" runat="server" />
-                        <asp:LinkButton ID="btnNewChoice" runat="server" Text="New Choice" CssClass="hcSecondaryAction hcSmall" OnClick="btnNewChoice_Click" />
+                        <asp:RequiredFieldValidator runat="server" ControlToValidate="txtNewChoice" resourcekey="rfvNewChoice" CssClass="hcFormError" />
+                        <asp:LinkButton ID="btnNewChoice" resourcekey="btnNewChoice" runat="server" CssClass="hcSecondaryAction hcSmall" OnClick="btnNewChoice_Click" />
                     </div>
                     <div class="hcFormItem hcFormItem66p">
-                        <asp:GridView ID="rgChoices" CssClass="hcGrid" runat="server" DataKeyNames="Id">
+                        <asp:GridView ID="rgChoices" CssClass="hcGrid" runat="server" DataKeyNames="Id" AutoGenerateColumns="False">
                             <HeaderStyle CssClass="hcGridHeader" />
                             <RowStyle CssClass="hcGridRow" />
                             <AlternatingRowStyle CssClass="hcGridRow" />
                             <Columns>
-                                <asp:TemplateColumn>
+                                <asp:TemplateField>
                                     <ItemStyle Width="22px" />
                                     <ItemTemplate>
                                         <span class='hcIconMove'></span>
                                     </ItemTemplate>
-                                </asp:TemplateColumn>
-                                <asp:TemplateColumn UniqueName="Default" HeaderText="Default">
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Default">
                                     <ItemTemplate>
                                         <asp:CheckBox runat="server" ID="chbDefault" CssClass="hcDefaultChoice" />
                                     </ItemTemplate>
-                                </asp:TemplateColumn>
-                                <asp:BoundColumn DataField="ChoiceName" HeaderText="Choice Name" />
-                                <asp:BoundColumn DataField="DisplayName" HeaderText="Display Name" />
-                                <asp:TemplateColumn>
+                                </asp:TemplateField>
+                                <asp:BoundField DataField="ChoiceName" HeaderText="ChoiceName" />
+                                <asp:BoundField DataField="DisplayName" HeaderText="DisplayName" />
+                                <asp:TemplateField>
                                     <ItemStyle Width="80px" />
                                     <ItemTemplate>
-                                        <asp:LinkButton Text="Edit" CssClass="hcIconEdit" CommandName="Edit" runat="server" />
-                                        <asp:LinkButton Text="Delete" CssClass="hcIconDelete" CommandName="Delete"
-                                            OnClientClick="return hcConfirm(event,'Are you sure you want to delete this item?');" runat="server" />
+                                        <asp:LinkButton resourcekey="btnEdit" CssClass="hcIconEdit" CommandName="Edit" runat="server" />
+                                        <asp:LinkButton resourcekey="btnDelete" CssClass="hcIconDelete hcDeleteColumn" CommandName="Delete" runat="server" />
                                     </ItemTemplate>
-                                </asp:TemplateColumn>
+                                </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
                         <asp:Panel ID="pnlEditChoice" runat="server" Visible="false">
                             <div id="hcEditChoiceDialog" class="dnnClear">
                                 <div class="hcForm">
                                     <div class="hcFormItem">
-                                        <asp:Label runat="server" Text="Choice Name" CssClass="hcLabel" />
+                                        <asp:Label runat="server" resourcekey="lblChoiceName" CssClass="hcLabel" />
                                         <asp:TextBox runat="server" ID="txtChoiceName" />
                                     </div>
                                     <div class="hcFormItem">
-                                        <asp:Label runat="server" CssClass="hcLabel">Display Name<i class="hcLocalizable"></i></asp:Label>
+                                        <asp:Label runat="server" CssClass="hcLabel"><%=Localization.GetString("lblDisplayName") %><i class="hcLocalizable"></i></asp:Label>
                                         <asp:TextBox runat="server" ID="txtChoiceDisplayName" />
                                     </div>
                                 </div>
                                 <ul class="hcActions">
                                     <li>
-                                        <asp:LinkButton ID="btnUpdateChoice" Text="Update" CssClass="hcPrimaryAction" runat="server" />
+                                        <asp:LinkButton ID="btnUpdateChoice" resourcekey="btnUpdateChoice" CssClass="hcPrimaryAction" runat="server" />
                                     </li>
                                     <li>
-                                        <asp:LinkButton ID="btnCancelUpdateChoice" Text="Cancel" CssClass="hcSecondaryAction" runat="server" />
+                                        <asp:LinkButton ID="btnCancelUpdateChoice" resourcekey="btnCancelUpdateChoice" CssClass="hcSecondaryAction" runat="server" />
                                     </li>
                                 </ul>
                             </div>
@@ -189,12 +189,17 @@
     </div>
     <ul class="hcActions">
         <li>
-            <asp:LinkButton runat="server" ID="btnSave" Text="Save Changes" CssClass="hcPrimaryAction"
-                OnClick="btnSave_Click" />
+            <asp:LinkButton runat="server" ID="btnSave" resourcekey="btnSave" CssClass="hcPrimaryAction" OnClick="btnSave_Click" />
         </li>
         <li>
-            <asp:LinkButton runat="server" ID="btnCancel" Text="Cancel" CssClass="hcSecondaryAction"
-                CausesValidation="false" OnClick="btnCancel_Click" />
+            <asp:LinkButton runat="server" ID="btnCancel" resourcekey="btnCancel" CssClass="hcSecondaryAction" CausesValidation="false" OnClick="btnCancel_Click" />
         </li>
     </ul>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".hcDeleteColumn").click(function (e) {
+                return hcConfirm(e, "<%=Localization.GetJsEncodedString("Confirm")%>");
+            });
+        });
+    </script>
 </asp:Content>

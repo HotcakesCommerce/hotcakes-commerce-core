@@ -36,7 +36,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            PageTitle = "Product Type Properties";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Catalog;
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
         }
@@ -46,20 +46,30 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             base.OnLoad(e);
             if (!Page.IsPostBack)
             {
-                FillList();
+                LoadItems();
             }
         }
 
-        private void FillList()
+        private void LoadItems()
         {
-            dgList.DataSource = HccApp.CatalogServices.ProductProperties.FindAll();
-            dgList.DataBind();
+            var typeProperties = HccApp.CatalogServices.ProductProperties.FindAll();
+            if (typeProperties != null && typeProperties.Count > 0)
+            {
+                dgList.Visible = true;
+                dgList.DataSource = typeProperties;
+                dgList.DataBind();
+            }
+            else
+            {
+                dgList.Visible = false;
+                msg.ShowWarning(Localization.GetString("NoTypeProperties"));
+            }
         }
 
         protected void btnNew_Click(object sender, EventArgs e)
         {
             var p = new ProductProperty();
-            p.DisplayName = "New Property";
+            p.DisplayName = Localization.GetString("NewProperty");
             p.TypeCode = (ProductPropertyType) int.Parse(lstPropertyType.SelectedValue);
             var success = HccApp.CatalogServices.ProductProperties.Create(p);
             if (success)
@@ -68,7 +78,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             }
             else
             {
-                msg.ShowError("Error while attempting to create new property.");
+                msg.ShowError(Localization.GetString("CreateError"));
             }
         }
 
@@ -82,7 +92,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         {
             var deleteID = (long) dgList.DataKeys[e.Item.ItemIndex];
             HccApp.CatalogServices.ProductPropertiesDestroy(deleteID);
-            FillList();
+            LoadItems();
         }
     }
 }

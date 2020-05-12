@@ -117,76 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Add.Text" xml:space="preserve">
-    <value>Add</value>
+  <data name="btnDelete.Text" xml:space="preserve">
+    <value>Delete</value>
   </data>
-  <data name="AvailableProperties.Text" xml:space="preserve">
-    <value>Available Properties</value>
+  <data name="btnEdit.Text" xml:space="preserve">
+    <value>Edit</value>
   </data>
-  <data name="Cancel.Text" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="btnNew.Text" xml:space="preserve">
+    <value>+ Add New Property</value>
   </data>
-  <data name="FriendlyTypeName.HeaderText" xml:space="preserve">
-    <value>Type</value>
+  <data name="Confirm.Text" xml:space="preserve">
+    <value>Are you sure you want to delete this product type property?</value>
   </data>
-  <data name="GeneralSettings.Text" xml:space="preserve">
-    <value>General Settings</value>
+  <data name="CreateError.Text" xml:space="preserve">
+    <value>Error while attempting to create new property. Please check the event log.</value>
   </data>
-  <data name="LoadTypeError.Text" xml:space="preserve">
-    <value>Unable to load Product Type ID ({0}). If this continues to occur, please contact the site administrator.</value>
+  <data name="DisplayName.HeaderText" xml:space="preserve">
+    <value>Display Name</value>
   </data>
-  <data name="MultipleTypeWarning.Text" xml:space="preserve">
-    <value>&lt;strong&gt;This product type is currently being used by one or more products in the store.&lt;/strong&gt;&lt;br/&gt;Editing this type will affect all existing products of this type. Any default values you set here will NOT overwrite existing products but any properties that you add or remove will affect existing products.</value>
+  <data name="lblPropertyType.Text" xml:space="preserve">
+    <value>Property Type</value>
   </data>
-  <data name="NoPropertiesAdded.Text" xml:space="preserve">
-    <value>No properties added.</value>
+  <data name="NewProperty.Text" xml:space="preserve">
+    <value>New Property</value>
   </data>
-  <data name="NoPropertySelected.Text" xml:space="preserve">
-    <value>Whoops! You need to select a product type property first.</value>
+  <data name="NoTypeProperties.Text" xml:space="preserve">
+    <value>No product type properties were found. Please use the left admin bar to create one.</value>
   </data>
-  <data name="NoRolesAdded.Text" xml:space="preserve">
-    <value>No roles added. Product type is public.</value>
-  </data>
-  <data name="NotSet.Text" xml:space="preserve">
-    <value>- Not Set -</value>
-  </data>
-  <data name="ProductsViewTemplate.Text" xml:space="preserve">
-    <value>Products View Template</value>
-  </data>
-  <data name="ProductTypeName.Text" xml:space="preserve">
-    <value>Product Type Name</value>
-  </data>
-  <data name="ProductTypeNotFound.Text" xml:space="preserve">
-    <value>Uh oh... We couldn't find the product type you selected. Please go back and try again. If this continues to occur, please contact the site administrator.</value>
-  </data>
-  <data name="ProductTypeProperties.Text" xml:space="preserve">
+  <data name="PageTitle.Text" xml:space="preserve">
     <value>Product Type Properties</value>
-  </data>
-  <data name="ProductTypesEdit.Text" xml:space="preserve">
-    <value>Edit Product Type</value>
   </data>
   <data name="PropertyName.HeaderText" xml:space="preserve">
     <value>Property Name</value>
   </data>
-  <data name="rfvProductTypeNameField.ErrorMessage" xml:space="preserve">
-    <value>Product type name is required.</value>
-  </data>
-  <data name="Role.HeaderText" xml:space="preserve">
-    <value>Role Name</value>
-  </data>
-  <data name="Roles.Text" xml:space="preserve">
-    <value>Roles</value>
-  </data>
-  <data name="SaveChanges.Text" xml:space="preserve">
-    <value>Save Changes</value>
-  </data>
-  <data name="SaveError.Text" xml:space="preserve">
-    <value>There was an error saving the product type. Please try again, or contact the site administrator.</value>
-  </data>
-  <data name="SecurityRole.Text" xml:space="preserve">
-    <value>Security Role</value>
-  </data>
-  <data name="Confirm.Text" xml:space="preserve">
-    <value>Are you sure you want to delete this item?</value>
+  <data name="Type.HeaderText" xml:space="preserve">
+    <value>Type</value>
   </data>
 </root>

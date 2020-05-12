@@ -28,7 +28,9 @@ using System.Globalization;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Hotcakes.Commerce;
 using Hotcakes.Commerce.Catalog;
+using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Modules.Core.Admin.AppCode;
 
@@ -59,7 +61,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            PageTitle = "Edit Product Type Property";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Catalog;
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
         }
@@ -86,9 +88,17 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 {
                     Response.Redirect("ProductTypeProperties.aspx");
                 }
+
+                LocalizeView();
                 PopulateCultureCodeList();
                 LoadProperty(property);
             }
+        }
+
+        private void LocalizeView()
+        {
+            var localization = Factory.Instance.CreateLocalizationHelper(LocalResourceFile);
+            LocalizationUtils.LocalizeGridView(rgChoices, localization);
         }
 
         private void PopulateCultureCodeList()
@@ -134,9 +144,9 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                             !DateTime.TryParse(property.DefaultValue, CultureInfo.InvariantCulture, DateTimeStyles.None,
                                 out selectedDate))
                         {
-                            selectedDate = DateTime.Now;
+                            selectedDate = DateTime.UtcNow;
                         }
-                        radDefaultDate.Text = selectedDate.ToString("MM/dd/yyyy");
+                        radDefaultDate.Text = selectedDate.ToString("yyyy-MM-dd");
                     }
                     break;
                 case ProductPropertyType.MultipleChoiceField:
@@ -174,12 +184,12 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         {
             var property = HccApp.CatalogServices.ProductProperties.Find(ProductPropertyId.Value);
 
-            if (property.Choices != null)
+            if (property != null && property.Choices != null && property.Choices.Count > 0)
             {
                 property.Choices = property.Choices.OrderBy(y => y.SortOrder).ToList();
+                rgChoices.DataSource = property.Choices;
+                rgChoices.DataBind();
             }
-
-            rgChoices.DataSource = property.Choices;
         }
 
         private void rgChoices_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -232,7 +242,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 }
                 else
                 {
-                    msg.ShowError("Couldn't add choice!");
+                    msg.ShowError(Localization.GetString("AddChoiceFailure"));
                 }
 
                 BindGridView();
@@ -300,7 +310,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 }
                 else
                 {
-                    msg.ShowError("Error: Couldn't Save Property!");
+                    msg.ShowError(Localization.GetString("SavePropertyFailure"));
                 }
             }
         }
@@ -325,7 +335,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 }
                 else
                 {
-                    msg.ShowError("Couldn't add choice!");
+                    msg.ShowError(Localization.GetString("AddChoiceFailure"));
                 }
                 txtNewChoice.Text = string.Empty;
 
