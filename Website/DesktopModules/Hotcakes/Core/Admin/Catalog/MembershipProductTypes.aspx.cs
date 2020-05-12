@@ -26,6 +26,7 @@
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Hotcakes.Commerce;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Membership;
@@ -62,15 +63,24 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         {
             base.OnInit(e);
             _repository = HccApp.CatalogServices.MembershipTypes;
-            PageTitle = "Membership Product Types";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Catalog;
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
 
             btnCreate.Click += btnCreate_Click;
             ucMembershipTypeEdit.SaveData += ucMembershipTypeEdit_SaveData;
             ucMembershipTypeEdit.CancelButton.Click += CancelButton_Click;
+        }
 
-            LocalizationUtils.LocalizeGridView(rgProductTypes, Localization);
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            if (!Page.IsPostBack)
+            {
+                LocalizeView();
+                BindGrid();
+            }
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
@@ -86,17 +96,35 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             ShowEditor(false);
         }
 
+        private void LocalizeView()
+        {
+            var localization = Factory.Instance.CreateLocalizationHelper(LocalResourceFile);
+            LocalizationUtils.LocalizeGridView(rgProductTypes, localization);
+        }
+
         private void BindGrid()
         {
-            rgProductTypes.DataSource = _repository.GetList(HccApp.CurrentStore.Id);
-            rgProductTypes.DataBind();
+            var items = _repository.GetList(HccApp.CurrentStore.Id);
+            if (items != null && items.Count > 0)
+            {
+                rgProductTypes.DataSource = items;
+                rgProductTypes.DataBind();
+            }
+            else
+            {
+                msg.ShowWarning(Localization.GetString("NoProductTypes"));
+            }
         }
 
         protected void rgProductTypes_OnRowEditing(object sender, GridViewEditEventArgs e)
         {
+            e.Cancel = true;
+
             var productTypeId = (string) rgProductTypes.DataKeys[e.NewEditIndex]["ProductTypeId"];
+
             ucMembershipTypeEdit.Model = _repository.Find(productTypeId);
             ucMembershipTypeEdit.DataBind();
+
             ShowEditor(true);
         }
 
