@@ -129,6 +129,9 @@
   <data name="Header.Text" xml:space="preserve">
     <value>Select Products for Category</value>
   </data>
+  <data name="hypClose.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
   <data name="NoProducts.Text" xml:space="preserve">
     <value>Please select one or more products.</value>
   </data>

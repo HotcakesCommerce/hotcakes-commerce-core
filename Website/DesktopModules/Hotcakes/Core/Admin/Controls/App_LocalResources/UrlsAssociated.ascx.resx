@@ -117,37 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NoChoices.Text" xml:space="preserve">
-    <value>No product choices found. Use the left admin bar to add a choice.</value>
-  </data>
   <data name="Confirm.Text" xml:space="preserve">
-    <value>Deleting this shared choice will affect ALL products that are \nassociated with this shared choice and will result in loss of inventory for \nthose products. Are you sure you want to continue?</value>
+    <value>Are you sure you want to remove this URL? Redirects will no longer work for it if you do.</value>
   </data>
-  <data name="CreateError.Text" xml:space="preserve">
-    <value>Unable to create shared choice. Please check the event log for more information.</value>
-  </data>
-  <data name="NewSharedChoiceImageButton.Text" xml:space="preserve">
-    <value>+ Add New Shared Choice</value>
-  </data>
-  <data name="PageTitle.Text" xml:space="preserve">
-    <value>Shared Product Choices</value>
-  </data>
-  <data name="Choice.HtmlDescription.Text" xml:space="preserve">
-    <value>HTML Description</value>
-  </data>
-  <data name="Choice_Checkboxes.Text" xml:space="preserve">
-    <value>Checkboxes</value>
-  </data>
-  <data name="Choice_DropDownList.Text" xml:space="preserve">
-    <value>Drop Down List</value>
-  </data>
-  <data name="Choice_FileUpload.Text" xml:space="preserve">
-    <value>File Upload</value>
-  </data>
-  <data name="Choice_RadioButtons.Text" xml:space="preserve">
-    <value>Radio Button List</value>
-  </data>
-  <data name="Choice_TextInput.Text" xml:space="preserve">
-    <value>Text Input</value>
+  <data name="Remove.Text" xml:space="preserve">
+    <value>Remove</value>
   </data>
 </root>

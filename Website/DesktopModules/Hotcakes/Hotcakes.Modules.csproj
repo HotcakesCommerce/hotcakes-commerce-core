@@ -4099,6 +4099,18 @@
   <ItemGroup>
     <Content Include="Core\Admin\Controls\App_LocalResources\FilePicker.ascx.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\Categories.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\Categories_Performance.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\Categories_Edit.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\UrlsAssociated.ascx.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

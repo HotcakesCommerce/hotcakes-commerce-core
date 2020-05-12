@@ -60,7 +60,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            PageTitle = "Categories";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Catalog;
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
         }

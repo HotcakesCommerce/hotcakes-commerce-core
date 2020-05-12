@@ -45,9 +45,6 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         #region Private Members
 
         private const string EMPTY_CATEGORY_PATTERN = @"(^$)|(^\.+$)";
-        private const string NO_NAME_TEXT = "(category has no name)";
-        private const string CURRENT_CATEGORY_TEXT = " ** CURRENT CATEGORY ** ";
-        private const string TOP_LEVEL_CATEGORY_TEXT = " - Top Level Category (no parent) -";
 
         #endregion
 
@@ -57,7 +54,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         {
             base.OnInit(e);
 
-            PageTitle = "Edit Category";
+            PageTitle = Localization.GetString("PageTitle");
             InitNavMenu(ucNavMenu);
         }
 
@@ -116,7 +113,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         {
             if (Save())
             {
-                ucMessageBox.ShowOk("Category Updated Successfully.");
+                ucMessageBox.ShowOk(Localization.GetString("SaveSuccess"));
                 Response.Redirect(HccApp.CatalogServices.EditorRouteForCategory(CategorySourceType.Manual, CategoryId,
                     null));
             }
@@ -129,7 +126,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         private void PopulateTemplates()
         {
             TemplateList.Items.Clear();
-            TemplateList.Items.Add(new ListItem("- Not Selected -", string.Empty));
+            TemplateList.Items.Add(new ListItem(Localization.GetString("NotSelected"), string.Empty));
             TemplateList.AppendDataBoundItems = true;
             TemplateList.DataSource = DnnPathHelper.GetViewNames("Category");
             TemplateList.DataBind();
@@ -160,14 +157,14 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             {
                 // update the category name if it's empty
                 category.Text = Regex.IsMatch(category.Text, EMPTY_CATEGORY_PATTERN)
-                    ? string.Concat(category.Text, NO_NAME_TEXT)
+                    ? string.Concat(category.Text, Localization.GetString("NoName"))
                     : category.Text;
 
                 // let the merchant know visually that this is the current category they're editing
                 if (category.Value == currentBvin)
                 {
                     // change the name to reflect this
-                    category.Text = string.Concat(CURRENT_CATEGORY_TEXT, category.Text);
+                    category.Text = string.Concat(Localization.GetString("CurrentCategory"), category.Text);
                 }
 
                 // create a new DLL item
@@ -175,7 +172,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             }
 
             // add a default option for making the category a top-level category
-            ParentCategoryDropDownList.Items.Insert(0, new ListItem(TOP_LEVEL_CATEGORY_TEXT, string.Empty));
+            ParentCategoryDropDownList.Items.Insert(0, new ListItem(Localization.GetString("Parent_Default"), string.Empty));
         }
 
         private void LoadCategory(Category c)
@@ -265,7 +262,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             }
             else
             {
-                ucMessageBox.ShowWarning("A category cannot be a parent to itself.");
+                ucMessageBox.ShowWarning(Localization.GetString("SelfSaveError"));
                 return false;
             }
 
@@ -299,7 +296,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
             if (UrlRewriter.IsCategorySlugInUse(c.RewriteUrl, c.Bvin, HccApp))
             {
-                ucMessageBox.ShowWarning("The requested URL is already in use by another item.");
+                ucMessageBox.ShowWarning(Localization.GetString("DuplicateUrlError"));
                 return false;
             }
 
@@ -336,7 +333,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             }
             else
             {
-                ucMessageBox.ShowError("Unable to save category. Unknown error.");
+                ucMessageBox.ShowError(Localization.GetString("CategorySaveFailure"));
             }
 
             return result;
@@ -358,7 +355,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 else
                 {
                     result = false;
-                    ucMessageBox.ShowError("Only .PNG, .JPG, .GIF file types are allowed for icon images");
+                    ucMessageBox.ShowError(Localization.GetString("ImageSaveFailure"));
                 }
             }
             else if (ucIconImage.Removed)
@@ -378,7 +375,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 else
                 {
                     result = false;
-                    ucMessageBox.ShowError("Only .PNG, .JPG, .GIF file types are allowed for banner images");
+                    ucMessageBox.ShowError(Localization.GetString("ImageSaveFailure"));
                 }
             }
             else if (ucBannerImage.Removed)

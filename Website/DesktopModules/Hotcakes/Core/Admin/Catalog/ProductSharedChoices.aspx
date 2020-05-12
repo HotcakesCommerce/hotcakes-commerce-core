@@ -12,12 +12,12 @@
 				<label class="hcLabel"><%=Localization.GetString("NewSharedChoiceImageButton") %></label>
 				<asp:DropDownList runat="server" ID="SharedChoiceTypes">
 					<Items>
-						<asp:ListItem Value="100" Text="Drop Down List" />
-						<asp:ListItem Value="200" Text="Radio Button List" />
-						<asp:ListItem Value="300" Text="Checkboxes" />
-						<asp:ListItem Value="400" Text="Html Description" />
-						<asp:ListItem Value="500" Text="Text Input" />
-						<asp:ListItem Value="600" Text="File Upload" />
+						<asp:ListItem Value="100" resourcekey="Choice_DropDownList" />
+						<asp:ListItem Value="200" resourcekey="Choice_RadioButtons" />
+						<asp:ListItem Value="300" resourcekey="Choice_Checkboxes" />
+						<asp:ListItem Value="400" resourcekey="Choice_HtmlDescription" />
+						<asp:ListItem Value="500" resourcekey="Choice_TextInput" />
+						<asp:ListItem Value="600" resourcekey="Choice_FileUpload" Text="" />
 					</Items>
 				</asp:DropDownList>
 			</div>
@@ -58,8 +58,8 @@
 	$(document).ready(function () {
 		$('.trash').bind("click", function (event) {
 			$("#deleteLinkId").val($(this).attr("id"));
-			return hcConfirm(event, "<%=Localization.GetJsEncodedString("Confirm")%>", callBackFunRemoveItem)
-		});
+            return hcConfirm(event, "<%=Localization.GetJsEncodedString("Confirm")%>", callBackFunRemoveItem);
+        });
 	});
 </script>
     <h1><%=PageTitle %></h1>

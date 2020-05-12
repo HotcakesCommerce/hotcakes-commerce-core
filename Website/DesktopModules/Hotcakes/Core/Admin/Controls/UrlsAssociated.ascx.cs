@@ -52,10 +52,8 @@ namespace Hotcakes.Modules.Core.Admin.Controls
                 sb.Append("<ul class=\"redirects301\">");
                 foreach (var c in all)
                 {
-                    sb.Append("<li>");
-                    sb.Append(HttpUtility.HtmlEncode(c.RequestedUrl));
-                    sb.Append(" <a href=\"#\" class=\"remove301\" id=\"remove" + c.Bvin + "\">Remove");
-                    sb.Append("</a></li>");
+                    sb.AppendFormat("<li>{0}", HttpUtility.HtmlEncode(c.RequestedUrl));
+                    sb.AppendFormat(" <a href=\"#\" class=\"remove301 hcListItemDelete\" id=\"remove{0}\">{1}</a></li>", c.Bvin, Localization.GetString("Remove"));
                 }
                 sb.Append("</ul>");
                 litMain.Text = sb.ToString();

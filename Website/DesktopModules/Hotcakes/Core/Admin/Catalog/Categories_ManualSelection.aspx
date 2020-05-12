@@ -9,7 +9,7 @@
 	 <div class="hcBlock">
         <div class="hcForm">
             <div class="hcFormItem">
-                <asp:HyperLink ID="hypClose" runat="server" Text="Close" CssClass="hcTertiaryAction" NavigateUrl="Categories.aspx"/>
+                <asp:HyperLink ID="hypClose" resourcekey="hypClose" runat="server" CssClass="hcTertiaryAction" NavigateUrl="Categories.aspx"/>
             </div>
         </div>
     </div>

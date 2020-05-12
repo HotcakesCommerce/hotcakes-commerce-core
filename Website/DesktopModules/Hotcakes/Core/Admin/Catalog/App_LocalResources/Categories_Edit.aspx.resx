@@ -117,37 +117,133 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NoChoices.Text" xml:space="preserve">
-    <value>No product choices found. Use the left admin bar to add a choice.</value>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
   </data>
-  <data name="Confirm.Text" xml:space="preserve">
-    <value>Deleting this shared choice will affect ALL products that are \nassociated with this shared choice and will result in loss of inventory for \nthose products. Are you sure you want to continue?</value>
+  <data name="btnSaveChanges.Text" xml:space="preserve">
+    <value>Save &amp; Close</value>
   </data>
-  <data name="CreateError.Text" xml:space="preserve">
-    <value>Unable to create shared choice. Please check the event log for more information.</value>
+  <data name="CategorySaveFailure.Text" xml:space="preserve">
+    <value>There was an error saving the category. Please check the event log.</value>
   </data>
-  <data name="NewSharedChoiceImageButton.Text" xml:space="preserve">
-    <value>+ Add New Shared Choice</value>
+  <data name="chkHidden.Text" xml:space="preserve">
+    <value>Hide Category</value>
+  </data>
+  <data name="chkShowTitle.Text" xml:space="preserve">
+    <value>Category Name is Visible</value>
+  </data>
+  <data name="CurrentCategory.Text" xml:space="preserve">
+    <value>** CURRENT CATEGORY **</value>
+  </data>
+  <data name="DuplicateUrlError.Text" xml:space="preserve">
+    <value>The requested URL is already in use by another category.</value>
+  </data>
+  <data name="hypClose.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="ImageSaveFailure.Text" xml:space="preserve">
+    <value>Only image file types are allowed (e.g., .PNG, .JPG, .GIF).</value>
+  </data>
+  <data name="lblAdvanced.Text" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="lblBanner.Text" xml:space="preserve">
+    <value>Banner</value>
+  </data>
+  <data name="lblDescription.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="lblDisplay.Text" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="lblFooterContentColumn.Text" xml:space="preserve">
+    <value>Footer Content Column</value>
+  </data>
+  <data name="lblHeaderContentColumn.Text" xml:space="preserve">
+    <value>Header Content Column</value>
+  </data>
+  <data name="lblIcon.Text" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="lblMetaDescription.Text" xml:space="preserve">
+    <value>Meta Description</value>
+  </data>
+  <data name="lblMetaKeywords.Text" xml:space="preserve">
+    <value>Meta Keywords</value>
+  </data>
+  <data name="lblName.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="lblPageSlug.Text" xml:space="preserve">
+    <value>Page Slug (URL)</value>
+  </data>
+  <data name="lblPageTitle.Text" xml:space="preserve">
+    <value>Page Title</value>
+  </data>
+  <data name="lblParentCategory.Text" xml:space="preserve">
+    <value>Parent Category</value>
+  </data>
+  <data name="lblSearchKeywords.Text" xml:space="preserve">
+    <value>Search Keywords</value>
+  </data>
+  <data name="lblTaxonomyTags.Text" xml:space="preserve">
+    <value>Taxonomy Tags</value>
+  </data>
+  <data name="lblTemplate.Text" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="lnkViewInStore.Text" xml:space="preserve">
+    <value>View in Store</value>
+  </data>
+  <data name="Main.Text" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="NoName.Text" xml:space="preserve">
+    <value>(category has no name)</value>
+  </data>
+  <data name="None.Text" xml:space="preserve">
+    <value>- None -</value>
+  </data>
+  <data name="NotSelected.Text" xml:space="preserve">
+    <value>- Not Selected -</value>
   </data>
   <data name="PageTitle.Text" xml:space="preserve">
-    <value>Shared Product Choices</value>
+    <value>Edit Category</value>
   </data>
-  <data name="Choice.HtmlDescription.Text" xml:space="preserve">
-    <value>HTML Description</value>
+  <data name="Parent_Default.Text" xml:space="preserve">
+    <value>- Top Level Category (no parent) -</value>
   </data>
-  <data name="Choice_Checkboxes.Text" xml:space="preserve">
-    <value>Checkboxes</value>
+  <data name="SaveSuccess.Text" xml:space="preserve">
+    <value>Category updated successfully.</value>
   </data>
-  <data name="Choice_DropDownList.Text" xml:space="preserve">
-    <value>Drop Down List</value>
+  <data name="SelfSaveError.Text" xml:space="preserve">
+    <value>A category cannot be a parent to itself.</value>
   </data>
-  <data name="Choice_FileUpload.Text" xml:space="preserve">
-    <value>File Upload</value>
+  <data name="Sort_Manual.Text" xml:space="preserve">
+    <value>Manual Order</value>
   </data>
-  <data name="Choice_RadioButtons.Text" xml:space="preserve">
-    <value>Radio Button List</value>
+  <data name="Sort_NameAsc.Text" xml:space="preserve">
+    <value>Product Name (a-z)</value>
   </data>
-  <data name="Choice_TextInput.Text" xml:space="preserve">
-    <value>Text Input</value>
+  <data name="Sort_NameDesc.Text" xml:space="preserve">
+    <value>Product Name (z-a)</value>
+  </data>
+  <data name="Sort_PriceAsc.Text" xml:space="preserve">
+    <value>Product Price Ascending</value>
+  </data>
+  <data name="Sort_PriceDesc.Text" xml:space="preserve">
+    <value>Product Price Descending</value>
+  </data>
+  <data name="Sort_SkuAsc.Text" xml:space="preserve">
+    <value>Product SKU (a-z)</value>
+  </data>
+  <data name="Sort_SkuDesc.Text" xml:space="preserve">
+    <value>Product SKU (z-a)</value>
+  </data>
+  <data name="UpdateButton.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="valName.ErrorMessage" xml:space="preserve">
+    <value>Name is required</value>
   </data>
 </root>

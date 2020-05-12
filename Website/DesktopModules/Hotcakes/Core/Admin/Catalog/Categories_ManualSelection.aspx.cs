@@ -127,18 +127,15 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
         private void RenderSingleProduct(Product p, StringBuilder sb)
         {
-            var trashcanImageUrl = ResolveUrl("~/DesktopModules/Hotcakes/Core/Admin/Images/trashcan.png");
-            var draghandleImageUrl = ResolveUrl("~/DesktopModules/Hotcakes/Core/Admin/Images/draghandle.png");
-
-            sb.Append("<div class=\"dragitem list-item\" id=\"" + p.Bvin + "\">");
+            sb.AppendFormat("<div class=\"dragitem list-item\" id=\"{0}\">", p.Bvin);
             sb.Append(
                 "<table border=\"0\" cellspacing=\"0\" cellpadding=\"2\" width=\"100%\" class=\"formtable hcGrid hcCategoryManualSelection\" >");
             sb.Append("<tbody class=\"ui-sortable\">");
             sb.Append("<tr>");
             sb.AppendFormat(
                 "<td class=\"handle\" align=\"center\"><a class=\"hcIconMove\" href=\"#\" alt=\"Move\"></a></td>");
-            sb.Append("<td width=\"25%\">" + p.Sku + "</td>");
-            sb.Append("<td width=\"42%\">" + p.ProductName + "</td>");
+            sb.AppendFormat("<td width=\"25%\">{0}</td>", p.Sku);
+            sb.AppendFormat("<td width=\"42%\">{0}</td>", p.ProductName);
             sb.AppendFormat(
                 "<td align=\"center\"><a class=\"trash hcIconDelete\" href=\"javascript:void(0);\" title=\"{1}\" id=\"rem{0}\" data-id=\"{0}\" alt=\"{2}\"></a></td>",
                 p.Bvin, Localization.GetString("RemoveProduct"), Localization.GetString("Delete"));

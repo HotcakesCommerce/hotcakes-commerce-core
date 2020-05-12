@@ -15,6 +15,9 @@
         .hcFileDetailsWidth hcForm {
             width: 90%; 
         }
+        input.hcSmall {
+            max-width: 50px;
+        }
     </style>
     <h1><%=PageTitle %></h1>
     <hcc:MessageBox ID="MessageBox1" runat="server" EnableViewState="false" />
@@ -61,7 +64,7 @@
                         <asp:BoundField HeaderText="ProductSku" DataField="Sku" HeaderStyle-Width="75px" />
                         <asp:TemplateField HeaderText="MaxDownloads">
                             <ItemTemplate>
-                                <asp:TextBox ID="MaxDownloadsTextBox" runat="server" />
+                                <asp:TextBox ID="MaxDownloadsTextBox" runat="server" CssClass="hcSmall" />
                                 <asp:RegularExpressionValidator ID="MaxDownloadsRegularExpressionValidator" resourcekey="rfvMaxDownloadsTextBox" runat="server"
                                                                 ControlToValidate="MaxDownLoadsTextBox" ValidationExpression="\d{1,5}" Display="Dynamic" CssClass="hcFormError"/>
                             </ItemTemplate>
@@ -71,7 +74,7 @@
                                 <hcc:TimespanPicker ID="TimespanPicker" runat="server" />
                             </ItemTemplate>
                         </asp:TemplateField>            
-                        <asp:TemplateField HeaderStyle-Width="50px">
+                        <asp:TemplateField HeaderStyle-Width="68px">
                             <ItemTemplate>
                                 <asp:LinkButton ID="UpdateImageButton" resourcekey="UpdateImageButton" runat="server" CommandName="Update" CssClass="hcIconEdit" />
                                 <asp:LinkButton ID="RemoveImageButton" resourcekey="RemoveImageButton" runat="server" CommandName="Delete" CssClass="hcIconDelete hcDeleteColumn" />
