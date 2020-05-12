@@ -53,18 +53,18 @@ namespace Hotcakes.Modules.Core.Admin.Controls
                     }
                     else
                     {
-                        lblProductName.Text = "Unknown";
+                        lblProductName.Text = Localization.GetString("UnknownValue");
                     }
                     if (r.UserID != string.Empty)
                     {
                         var u = HccApp.MembershipServices.Customers.Find(r.UserID);
                         if (u == null)
                         {
-                            lblUserName.Text = "Anonymous";
+                            lblUserName.Text = Localization.GetString("UnknownValue");
                         }
                         else
                         {
-                            lblUserName.Text = u.LastName + ", " + u.FirstName + " " + u.Email;
+                            lblUserName.Text = string.Format("{0} {1} &lt;<a href=\"mailto:{2}\" class=\"\">{2}</a>&gt;", u.FirstName, u.LastName, u.Email);
                         }
                     }
                     lblReviewDate.Text = r.ReviewDateForTimeZone(HccApp.CurrentStore.Settings.TimeZone).ToString();
