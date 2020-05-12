@@ -17,12 +17,12 @@
 	<div class="hcFormItem">
 		<label class="hcLabel">Rating</label>
 		 <asp:DropDownList ID="lstRating" runat="server" CssClass="rcbInput radPreventDecorate" ValidationGroup="EditReview">
-                <asp:ListItem Value="5">5 Stars</asp:ListItem>
-                <asp:ListItem Value="4">4 Stars</asp:ListItem>
-                <asp:ListItem Value="3">3 Stars</asp:ListItem>
-                <asp:ListItem Value="2">2 Stars</asp:ListItem>
-                <asp:ListItem Value="1">1 Stars</asp:ListItem>
-            </asp:DropDownList>
+             <asp:ListItem Value="5" resourcekey="Rating_5Stars"/>
+             <asp:ListItem Value="4" resourcekey="Rating_4Stars"/>
+             <asp:ListItem Value="3" resourcekey="Rating_3Stars"/>
+             <asp:ListItem Value="2" resourcekey="Rating_2Stars"/>
+             <asp:ListItem Value="1" resourcekey="Rating_1Stars"/>
+        </asp:DropDownList>
 	</div>
 	<div class="hcFormItem">
 		<label class="hcLabel"><%=Localization.GetString("lblKarmaScore") %></label>

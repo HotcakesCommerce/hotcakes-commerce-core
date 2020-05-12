@@ -25,6 +25,18 @@
         };
 
         $(function () {
+            $(".hcDatePickerTextBox").datepicker({
+                dateFormat: "mm/dd/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "<%=DateTime.Now.Year%>:<%=DateTime.Now.AddYears(10).Year%>",
+                beforeShow: function() {
+                    setTimeout(function(){
+                        $('.ui-datepicker').css('z-index', 99999999999999);
+                    }, 0);
+                }
+            });
+
             $(".hcDefaultChoice input").on("change", function () {
                 var $this = $(this);
                 if ($this.prop('checked')) {
@@ -108,7 +120,7 @@
             <asp:View runat="server" ID="vDate">
                 <div class="hcFormItemHor" runat="server">
                     <asp:Label runat="server" resourcekey="lblDefaultDate" CssClass="hcLabel" />
-                    <asp:TextBox ID="radDefaultDate" runat="server" TextMode="Date" />
+                    <asp:TextBox ID="radDefaultDate" runat="server" CssClass="hcDatePickerTextBox" />
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="radDefaultDate" resourcekey="rfvDefaultDate" CssClass="hcFormError" />
                 </div>
             </asp:View>

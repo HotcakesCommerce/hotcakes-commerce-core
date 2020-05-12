@@ -58,7 +58,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
             HccApp.MarketingServices.MigrateOldPromotions();
             ucMessageBox.ClearMessage();
             lnkMigrate.Visible = false;
-            ucMessageBox.ShowOk("Promotions were migrated successfull.");
+            ucMessageBox.ShowOk(Localization.GetString("MigrateSuccess"));
         }
 
         private void ResetAllPageNumbers()
@@ -110,7 +110,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
             if (!chkShowDisabled.Checked)
             {
-                ucMessageBox.ShowInformation("Promotions will be applied in the order that they appear in this list.");
+                ucMessageBox.ShowInformation(Localization.GetString("PromotionsOrder"));
             }
         }
 
@@ -127,7 +127,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
             if (rowCount > 0)
             {
-                ucMessageBox.ShowWarning(string.Format("<b>{0}</b> old type offer detected.<br/>", rowCount));
+                ucMessageBox.ShowWarning(string.Format("<b>{0}</b> {1}.<br/>", rowCount, Localization.GetString("LegacyTypes")));
                 var sb = new StringBuilder();
                 sb.Append("<ul>");
                 foreach (var p in items)

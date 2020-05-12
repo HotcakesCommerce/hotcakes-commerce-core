@@ -5,6 +5,19 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
+        $(document).ready(function() {
+            $(".hcDatePickerTextBox").datepicker({
+                dateFormat: "mm/dd/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "<%=DateTime.Now.Year%>:<%=DateTime.Now.AddYears(10).Year%>",
+                beforeShow: function() {
+                    setTimeout(function(){
+                        $('.ui-datepicker').css('z-index', 99999999999999);
+                    }, 0);
+                }
+            });
+        });
 
         hcAttachUpdatePanelLoader();
 
@@ -99,13 +112,13 @@
         <div class="hcForm">
             <div class="hcFormItem" style="width: 20%">
                 <label class="hcLabel"><%=Localization.GetString("StartDate") %></label>
-                <asp:TextBox ID="radDateStart" runat="server" CssClass="hcPromotionsStartDate" ValidationGroup="SavePromotion" TextMode="Date" />
+                <asp:TextBox ID="radDateStart" runat="server" CssClass="hcPromotionsStartDate hcDatePickerTextBox" ValidationGroup="SavePromotion" />
                 <asp:RequiredFieldValidator ID="valDateStartRequired" runat="server" Display="Dynamic"
                     ControlToValidate="radDateStart" resourcekey="valDateStartRequired" CssClass="hcFormError"  ValidationGroup="SavePromotion"/>
             </div>
             <div class="hcFormItem" style="width: 20%">
                 <label class="hcLabel"><%=Localization.GetString("EndDate") %></label>
-                <asp:TextBox ID="radDateEnd" runat="server" CssClass="hcPromotionsEndDate" ValidationGroup="SavePromotion" TextMode="Date"/>
+                <asp:TextBox ID="radDateEnd" runat="server" CssClass="hcPromotionsEndDate hcDatePickerTextBox" ValidationGroup="SavePromotion" />
                 <asp:RequiredFieldValidator ID="valDateEndRequired" runat="server" Display="Dynamic"
                     ControlToValidate="radDateEnd" resourcekey="valDateEndRequired" CssClass="hcFormError" ValidationGroup="SavePromotion" />
                 <asp:CompareValidator ID="valDateCompare" runat="server" Display="Dynamic" ControlToValidate="radDateEnd" ControlToCompare="radDateStart"

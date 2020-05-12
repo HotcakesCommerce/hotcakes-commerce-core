@@ -13,7 +13,7 @@
 // The above copyright notice and this permission notice shall be included in all copies or 
 // substantial portions of the Software.
 // 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY daOF ANY KIND, EXPRESS OR 
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
@@ -39,6 +39,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
     partial class ProductTypePropertiesEdit : BaseAdminPage
     {
         public long? _productPropertyId;
+        private const string DATEFORMAT = "MM/dd/yyyy";
 
         public long? ProductPropertyId
         {
@@ -146,7 +147,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                         {
                             selectedDate = DateTime.UtcNow;
                         }
-                        radDefaultDate.Text = selectedDate.ToString("yyyy-MM-dd");
+                        radDefaultDate.Text = selectedDate.ToString(DATEFORMAT);
                     }
                     break;
                 case ProductPropertyType.MultipleChoiceField:

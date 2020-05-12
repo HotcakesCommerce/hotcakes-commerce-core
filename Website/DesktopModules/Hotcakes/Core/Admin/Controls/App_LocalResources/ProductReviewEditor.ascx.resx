@@ -147,4 +147,19 @@
   <data name="UnknownValue.Text" xml:space="preserve">
     <value>Unknown or invalid value</value>
   </data>
+  <data name="Rating_!Stars.Text" xml:space="preserve">
+    <value>1 Star</value>
+  </data>
+  <data name="Rating_2Stars.Text" xml:space="preserve">
+    <value>2 Stars</value>
+  </data>
+  <data name="Rating_3Stars.Text" xml:space="preserve">
+    <value>3 Stars</value>
+  </data>
+  <data name="Rating_4Stars.Text" xml:space="preserve">
+    <value>4 Stars</value>
+  </data>
+  <data name="Rating_5Stars.Text" xml:space="preserve">
+    <value>5 Stars</value>
+  </data>
 </root>
