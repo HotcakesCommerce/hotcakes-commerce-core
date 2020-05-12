@@ -4090,6 +4090,15 @@
   <ItemGroup>
     <Content Include="Core\Admin\Controls\App_LocalResources\ProductReviewEditor.ascx.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\FileVault.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\FileVaultDetailsView.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\FilePicker.ascx.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

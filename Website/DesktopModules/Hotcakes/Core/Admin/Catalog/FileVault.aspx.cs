@@ -49,7 +49,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            PageTitle = "File Vault";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Catalog;
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
         }
@@ -67,14 +67,13 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             foreach (var f in files)
             {
                 var productCount = HccApp.CatalogServices.ProductFiles.CountOfProductsUsingFile(f.Bvin);
+
                 sb.Append("<tr class=\"hcGridRow\">");
-                sb.Append("<td>" + HttpUtility.HtmlEncode(f.FileName) + "</td>");
-                sb.Append("<td>" + HttpUtility.HtmlEncode(f.ShortDescription) + "</td>");
-                sb.Append("<td>" + productCount + "</td>");
-                sb.Append("<td><a href=\"FileVaultDetailsView.aspx?id=" + HttpUtility.UrlEncode(f.Bvin) +
-                          "\" class=\"hcIconEdit\" alt=\"Edit\"></td>");
-                sb.Append("<td><a href=\"FileVaultDelete.aspx?id=" + HttpUtility.UrlEncode(f.Bvin) +
-                          "\" onclick=\"return window.confirm('Delete this file?');\" class=\"hcIconDelete\">Delete</a></td>");
+                sb.AppendFormat("<td>{0}</td>", HttpUtility.HtmlEncode(f.FileName));
+                sb.AppendFormat("<td>{0}</td>", HttpUtility.HtmlEncode(f.ShortDescription));
+                sb.AppendFormat("<td>{0}</td>", productCount);
+                sb.AppendFormat("<td><a href=\"FileVaultDetailsView.aspx?id={0}\" class=\"hcIconEdit\">{1}</a> &nbsp;", HttpUtility.UrlEncode(f.Bvin), Localization.GetString("btnEdit"));
+                sb.AppendFormat("<a href=\"FileVaultDelete.aspx?id={0}\" class=\"hcIconDelete hcDeleteColumn\">{1}</a></td>", HttpUtility.UrlEncode(f.Bvin), Localization.GetString("btnDelete"));
                 sb.Append("</tr>");
             }
 
@@ -125,16 +124,16 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 }
                 if (errorOccurred)
                 {
-                    MessageBox1.ShowError("An error occurred during import. Please check the event log.");
+                    MessageBox1.ShowError(Localization.GetString("ImportFilesFailure"));
                 }
                 else
                 {
-                    MessageBox1.ShowOk("Files Imported Successfully.");
+                    MessageBox1.ShowOk(Localization.GetString("ImportFilesSuccess"));
                 }
             }
             else
             {
-                MessageBox1.ShowInformation("Files folder doesn't exist");
+                MessageBox1.ShowWarning(Localization.GetString("ImportFilesNoFolder"));
             }
 
             BindFileGridView();
@@ -146,6 +145,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             {
                 FilePicker.DownloadOrLinkFile(null, MessageBox1);
             }
+
             BindFileGridView();
         }
     }

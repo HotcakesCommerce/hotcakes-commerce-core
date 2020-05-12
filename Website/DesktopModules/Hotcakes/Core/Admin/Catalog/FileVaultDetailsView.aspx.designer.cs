@@ -13,6 +13,15 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
     public partial class FileVaultDetailsView {
         
         /// <summary>
+        /// ucNavMenu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Hotcakes.Modules.Core.Admin.Controls.NavMenu ucNavMenu;
+        
+        /// <summary>
         /// MessageBox1 control.
         /// </summary>
         /// <remarks>
@@ -22,13 +31,13 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         protected global::Hotcakes.Modules.Core.Admin.Controls.MessageBox MessageBox1;
         
         /// <summary>
-        /// NameLabel control.
+        /// lblFileName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NameLabel;
+        protected global::System.Web.UI.WebControls.Label lblFileName;
         
         /// <summary>
         /// ReplaceImageButton control.
@@ -37,7 +46,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ReplaceImageButton;
+        protected global::System.Web.UI.WebControls.LinkButton ReplaceImageButton;
         
         /// <summary>
         /// ReplacePanel control.
@@ -46,7 +55,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel ReplacePanel;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ReplacePanel;
         
         /// <summary>
         /// FilePicker1 control.
@@ -64,7 +73,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton FileReplaceSaveImageButton;
+        protected global::System.Web.UI.WebControls.LinkButton FileReplaceSaveImageButton;
         
         /// <summary>
         /// FileReplaceCancelImageButton control.
@@ -73,7 +82,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton FileReplaceCancelImageButton;
+        protected global::System.Web.UI.WebControls.LinkButton FileReplaceCancelImageButton;
         
         /// <summary>
         /// DescriptionTextBox control.
@@ -85,22 +94,13 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         protected global::System.Web.UI.WebControls.TextBox DescriptionTextBox;
         
         /// <summary>
-        /// RequiredFieldValidator1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
-        
-        /// <summary>
         /// SaveImageButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton SaveImageButton;
+        protected global::System.Web.UI.WebControls.LinkButton SaveImageButton;
         
         /// <summary>
         /// CancelImageButton control.
@@ -109,7 +109,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton CancelImageButton;
+        protected global::System.Web.UI.WebControls.LinkButton CancelImageButton;
         
         /// <summary>
         /// ProductsGridView control.
@@ -119,15 +119,6 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView ProductsGridView;
-        
-        /// <summary>
-        /// pnlAdd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlAdd;
         
         /// <summary>
         /// NewSkuField control.
@@ -145,7 +136,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnBrowseProducts;
+        protected global::System.Web.UI.WebControls.LinkButton btnBrowseProducts;
         
         /// <summary>
         /// btnAddProductBySku control.
@@ -154,7 +145,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnAddProductBySku;
+        protected global::System.Web.UI.WebControls.LinkButton btnAddProductBySku;
         
         /// <summary>
         /// pnlProductPicker control.
@@ -163,7 +154,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlProductPicker;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pnlProductPicker;
         
         /// <summary>
         /// ProductPicker1 control.
@@ -181,7 +172,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnProductPickerCancel;
+        protected global::System.Web.UI.WebControls.LinkButton btnProductPickerCancel;
         
         /// <summary>
         /// btnProductPickerOkay control.
@@ -190,7 +181,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnProductPickerOkay;
+        protected global::System.Web.UI.WebControls.LinkButton btnProductPickerOkay;
         
         /// <summary>
         /// pnlProductChoices control.
@@ -199,7 +190,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlProductChoices;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pnlProductChoices;
         
         /// <summary>
         /// btnCloseVariants control.
@@ -208,7 +199,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnCloseVariants;
+        protected global::System.Web.UI.WebControls.LinkButton btnCloseVariants;
         
         /// <summary>
         /// btnAddVariant control.
@@ -217,6 +208,6 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnAddVariant;
+        protected global::System.Web.UI.WebControls.LinkButton btnAddVariant;
     }
 }
