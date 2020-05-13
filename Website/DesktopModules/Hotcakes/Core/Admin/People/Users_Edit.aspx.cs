@@ -174,13 +174,24 @@ namespace Hotcakes.Modules.Core.Admin.People
 
         private void BindPricingGroups()
         {
-            PricingGroupDropDownList.Items.Clear();
-            PricingGroupDropDownList.DataSource = HccApp.ContactServices.PriceGroups.FindAll();
-            PricingGroupDropDownList.DataTextField = "Name";
-            PricingGroupDropDownList.DataValueField = "bvin";
-            PricingGroupDropDownList.DataBind();
+            var priceGroups = HccApp.ContactServices.PriceGroups.FindAll();
 
-            PricingGroupDropDownList.Items.Insert(0, new ListItem(Localization.GetString("None"), string.Empty));
+            if (priceGroups != null && priceGroups.Count > 0)
+            {
+                PricingGroupDropDownList.Items.Clear();
+                PricingGroupDropDownList.DataSource = priceGroups;
+                PricingGroupDropDownList.DataTextField = "Name";
+                PricingGroupDropDownList.DataValueField = "bvin";
+                PricingGroupDropDownList.DataBind();
+
+                PricingGroupDropDownList.Items.Insert(0, new ListItem(Localization.GetString("None"), string.Empty));
+
+                divPriceGroup.Visible = true;
+            }
+            else
+            {
+                divPriceGroup.Visible = false;
+            }
         }
 
         private void LoadOrders()
