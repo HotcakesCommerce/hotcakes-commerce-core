@@ -43,7 +43,7 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 	<asp:UpdatePanel ID="uplPromotionsList" runat="server" UpdateMode="Always">
 		<ContentTemplate>
-			<h1>Promotions</h1>
+			<h1><%=Localization.GetString("Promotions") %></h1>
 			<asp:LinkButton ID="lnkMigrate" Text="Migrate" runat="server" Visible="false" CssClass="hcSecondaryAction" />
 			<hcc:MessageBox ID="ucMessageBox" runat="server" />
 			<hcc:Promotions_List runat="server" ID="ucSalesList" Mode="Sale" />
