@@ -3,7 +3,7 @@ body {
 
 @import "_admin_common.less";
 
-@pagewidth: 1500px;
+@pagewidth: 1400px;
 @footerheight: 100px;
 
 #header {
@@ -211,7 +211,7 @@ body {
 #content, #navwrapper {
     display: table;
     height: 100%;
-    margin:  0 auto 54px auto;
+    margin: 0 auto 54px auto;
     width: @pagewidth;
     position: relative;
     top: -10px;
@@ -220,17 +220,28 @@ body {
         width: 100%;
 
         .hcNavContent {
-            width: 20%;
+            width: 18%;
         }
 
         .hcMainContent {
-            width: 80%;
+            width: 82%;
         }
     }
 
     @media (max-width: 1220px) {
         .hcNavContent {
             width: 240px;
+        }
+
+        .hcMainContent {
+            .left;
+            width: 70%;
+        }
+    }
+
+    @media (max-width: 1028px) {
+        .hcNavContent {
+            width: 224px;
         }
 
         .hcMainContent {
