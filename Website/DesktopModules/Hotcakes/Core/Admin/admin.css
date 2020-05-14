@@ -1,5 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
 body {
+  height: 100%;
+}
+body {
   background: #ffffff;
 }
 .row {
@@ -795,6 +798,9 @@ ul.hcActions li {
   background: #ffffff;
   padding-bottom: 15px;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.75);
+}
+.hcFormPopup .ui-dialog {
+  position: fixed;
 }
 .hcFormPopup .ui-dialog-titlebar {
   padding: 25px;

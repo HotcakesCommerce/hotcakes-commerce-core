@@ -7,6 +7,7 @@ var dnn = dnn || {};
 
     // Global functions
     hcConfirm = function (event, msg, callback) {
+        event.preventDefault();
         var $ok = $("<a href='#' class='hcPrimaryAction'>OK</a>");
         var $cancel = $("<a href='#' class='hcSecondaryAction'>Cancel</a>");
         var $dlg = $("<div class='hcConfirmDialog'><p><span class='msg'></span></p><div class='hcActionsRight'><ul class='hcActions'><li><a class='ok'></a></li><li><a class='cancel'></a></li></ul></div></div>");
