@@ -6,16 +6,9 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
         $(document).ready(function() {
-            $(".hcDatePickerTextBox").datepicker({
-                dateFormat: "mm/dd/yy",
-                changeMonth: true,
-                changeYear: true,
-                yearRange: "<%=DateTime.Now.Year%>:<%=DateTime.Now.AddYears(10).Year%>",
-                beforeShow: function() {
-                    setTimeout(function(){
-                        $('.ui-datepicker').css('z-index', 99999999999999);
-                    }, 0);
-                }
+            $(".hcDatePickerTextBox").flatpickr({
+                dateFormat: "m/d/Y",
+                minDate: "today"
             });
         });
 

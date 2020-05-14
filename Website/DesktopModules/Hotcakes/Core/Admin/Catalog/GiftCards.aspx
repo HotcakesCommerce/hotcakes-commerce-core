@@ -31,6 +31,13 @@
                 }
             });
         };
+
+        $(function() {
+            $(".hcDatePickerTextBox").flatpickr({
+                dateFormat: "m/d/Y",
+                minDate: "today"
+            });
+        });
     </script>
     <h1><%=PageTitle %></h1>
     <hcc:MessageBox ID="ucMessageBox" runat="server" />
@@ -113,7 +120,7 @@
                 </div>
                 <div class="hcFormItemHor">
                     <label class="hcLabel"><%=Localization.GetString("Expiration") %></label>
-                    <asp:TextBox ID="dpExpiration" runat="server" CssClass="hcGiftCardExpirationDateAlign" TextMode="Date" />
+                    <asp:TextBox ID="dpExpiration" runat="server" CssClass="hcGiftCardExpirationDateAlign hcDatePickerTextBox" />
                 </div>
                 <div class="hcFormItemHor">
                     <label class="hcLabel"><%=Localization.GetString("Amount") %></label>

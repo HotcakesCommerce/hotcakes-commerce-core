@@ -25,16 +25,9 @@
         };
 
         $(function () {
-            $(".hcDatePickerTextBox").datepicker({
-                dateFormat: "mm/dd/yy",
-                changeMonth: true,
-                changeYear: true,
-                yearRange: "<%=DateTime.Now.Year%>:<%=DateTime.Now.AddYears(10).Year%>",
-                beforeShow: function() {
-                    setTimeout(function(){
-                        $('.ui-datepicker').css('z-index', 99999999999999);
-                    }, 0);
-                }
+            $(".hcDatePickerTextBox").flatpickr({
+                dateFormat: "m/d/Y",
+                minDate: "today"
             });
 
             $(".hcDefaultChoice input").on("change", function () {
@@ -66,6 +59,11 @@
                             "productPropertyChoiceIds": ids,
                         });
                 }
+            });
+
+            $(".hcDeleteColumn").click(function (e) {
+                e.preventDefault();
+                return hcConfirm(e, "<%=Localization.GetJsEncodedString("Confirm")%>");
             });
 
             chkIsLocalizable.change();
@@ -207,11 +205,4 @@
             <asp:LinkButton runat="server" ID="btnCancel" resourcekey="btnCancel" CssClass="hcSecondaryAction" CausesValidation="false" OnClick="btnCancel_Click" />
         </li>
     </ul>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $(".hcDeleteColumn").click(function (e) {
-                return hcConfirm(e, "<%=Localization.GetJsEncodedString("Confirm")%>");
-            });
-        });
-    </script>
 </asp:Content>
