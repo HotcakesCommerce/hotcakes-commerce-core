@@ -117,145 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="All.Text" xml:space="preserve">
-    <value>All</value>
+  <data name="lblAuthorized.Text" xml:space="preserve">
+    <value>Authorized</value>
   </data>
-  <data name="Amount.HeaderText" xml:space="preserve">
-    <value>Amount</value>
+  <data name="lblCharged.Text" xml:space="preserve">
+    <value>Charged</value>
   </data>
-  <data name="btnAcceptAll.Text" xml:space="preserve">
-    <value>Accept All New Orders</value>
+  <data name="lblPaymentInformation.Text" xml:space="preserve">
+    <value>Payment Information</value>
   </data>
-  <data name="btnBatchPrint.Text" xml:space="preserve">
-    <value>Print</value>
+  <data name="lblRefunded.Text" xml:space="preserve">
+    <value>Refunded</value>
   </data>
-  <data name="btnChargeAll.Text" xml:space="preserve">
-    <value>Charge All &amp; Mark for Shipping</value>
+  <data name="lblReturnedItems.Text" xml:space="preserve">
+    <value>Returned Items</value>
   </data>
-  <data name="btnDetails.Text" xml:space="preserve">
-    <value>Details</value>
-  </data>
-  <data name="btnExportExcel.Text" xml:space="preserve">
-    <value>Export to Excel</value>
-  </data>
-  <data name="btnExportQuickBooks.Text" xml:space="preserve">
-    <value>Export to QuickBooks</value>
-  </data>
-  <data name="btnFilterResults.Text" xml:space="preserve">
-    <value>Filter Results</value>
-  </data>
-  <data name="btnPayment.Text" xml:space="preserve">
-    <value>Payment</value>
-  </data>
-  <data name="btnPrintAll.Text" xml:space="preserve">
-    <value>Print Packing Slips &amp; Ship All</value>
-  </data>
-  <data name="btnShipAll.Text" xml:space="preserve">
-    <value>Ship All Orders</value>
-  </data>
-  <data name="btnShipping.Text" xml:space="preserve">
-    <value>Shipping</value>
-  </data>
-  <data name="chkNewestItemsFirst.Text" xml:space="preserve">
-    <value>Newest Items First</value>
-  </data>
-  <data name="Customer.HeaderText" xml:space="preserve">
-    <value>Customer</value>
-  </data>
-  <data name="Date.HeaderText" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="Every.Text" xml:space="preserve">
-    <value>{0} every {1} {2}</value>
-  </data>
-  <data name="lblCanceledOrders.Text" xml:space="preserve">
-    <value>Canceled Orders</value>
-  </data>
-  <data name="lblCompletedOrders.Text" xml:space="preserve">
-    <value>Completed Orders</value>
-  </data>
-  <data name="lblNewOrders.Text" xml:space="preserve">
-    <value>New Orders</value>
-  </data>
-  <data name="lblOrdersOnHold.Text" xml:space="preserve">
-    <value>Orders On Hold</value>
-  </data>
-  <data name="lblOrdersReady.Text" xml:space="preserve">
-    <value>Orders Ready for Payment</value>
-  </data>
-  <data name="lblPrintSelected.Text" xml:space="preserve">
-    <value>Print Selected Orders</value>
-  </data>
-  <data name="lblSearch.Text" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="lblShippingReady.Text" xml:space="preserve">
-    <value>Orders Ready for Shipping</value>
-  </data>
-  <data name="NoOrders.Text" xml:space="preserve">
-    <value>No orders found.</value>
-  </data>
-  <data name="OrderNumber.HeaderText" xml:space="preserve">
-    <value>Order #</value>
-  </data>
-  <data name="OrderSubject.Text" xml:space="preserve">
-    <value>Order {0}</value>
-  </data>
-  <data name="PageTitle.Text" xml:space="preserve">
-    <value>Order Manager</value>
-  </data>
-  <data name="Payment_AnyPayment.Text" xml:space="preserve">
-    <value>- Any Payment -</value>
-  </data>
-  <data name="Payment_OverPaid.Text" xml:space="preserve">
-    <value>Over Paid</value>
-  </data>
-  <data name="Payment_Paid.Text" xml:space="preserve">
-    <value>Paid</value>
-  </data>
-  <data name="Payment_PartiallyPaid.Text" xml:space="preserve">
-    <value>Partially Paid</value>
-  </data>
-  <data name="Payment_Unpaid.Text" xml:space="preserve">
-    <value>Unpaid</value>
-  </data>
-  <data name="Recurring.Text" xml:space="preserve">
-    <value>RECURRING</value>
-  </data>
-  <data name="Shipping_AnyShipping.Text" xml:space="preserve">
-    <value>- Any Shipping -</value>
-  </data>
-  <data name="Shipping_PartiallyShipped.Text" xml:space="preserve">
-    <value>Partially Shipped</value>
-  </data>
-  <data name="Shipping_Shipped.Text" xml:space="preserve">
-    <value>Shipped</value>
-  </data>
-  <data name="Shipping_Unshipped.Text" xml:space="preserve">
-    <value>Unshipped</value>
-  </data>
-  <data name="Status.HeaderText" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="Status_AllOrders.Text" xml:space="preserve">
-    <value>- All Orders -</value>
-  </data>
-  <data name="Status_Canceled.Text" xml:space="preserve">
-    <value>Canceled</value>
-  </data>
-  <data name="Status_Completed.Text" xml:space="preserve">
-    <value>Completed</value>
-  </data>
-  <data name="Status_NewOrders.Text" xml:space="preserve">
-    <value>New Orders</value>
-  </data>
-  <data name="Status_OnHold.Text" xml:space="preserve">
-    <value>On Hold</value>
-  </data>
-  <data name="Status_ReadyForPayment.Text" xml:space="preserve">
-    <value>Ready for Payment</value>
-  </data>
-  <data name="Status_ReadyForShipping.Text" xml:space="preserve">
-    <value>Ready for Shipping</value>
+  <data name="NotApplicable.Text" xml:space="preserve">
+    <value>N/A</value>
   </data>
 </root>

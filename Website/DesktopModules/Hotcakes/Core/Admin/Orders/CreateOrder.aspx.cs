@@ -43,10 +43,13 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 {
     public partial class CreateOrder : BaseOrderPage
     {
+        private const string ERRORFORMAT = "<span class=\"errormessage\">{0}</span>";
+        private const string SUCCESSFORMAT = "<span class=\"successmessage\">{0}</span>";
+
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            PageTitle = "New Order";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Orders;
             ValidateCurrentUserHasPermission(SystemPermissions.OrdersEdit);
         }
@@ -249,21 +252,20 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             }
         }
 
-        private void ProcessWorkflowErrors(OrderTaskContext orderConttext)
+        private void ProcessWorkflowErrors(OrderTaskContext orderContext)
         {
             // Show Errors
-            var errors = orderConttext.GetCustomerVisibleErrors();
+            var errors = orderContext.GetCustomerVisibleErrors();
             if (errors.Count > 0)
             {
-                foreach (var item in orderConttext.GetCustomerVisibleErrors())
+                foreach (var item in orderContext.GetCustomerVisibleErrors())
                 {
                     ucMessageBox.ShowWarning(item.Description);
                 }
             }
             else
             {
-                ucMessageBox.ShowWarning(
-                    "An error occurred while attempting to process your order. Please contact the store for assistance.");
+                ucMessageBox.ShowWarning(Localization.GetString("OrderProcessErrors"));
             }
         }
 
@@ -273,13 +275,13 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 
             if (string.IsNullOrEmpty(EmailAddressTextBox.Text))
             {
-                ucMessageBox.ShowError("Email field is required");
+                ucMessageBox.ShowError(Localization.GetString("rfvEmailAddress"));
                 result = false;
             }
 
             if (string.IsNullOrEmpty(ShippingRatesList.SelectedValue))
             {
-                ucMessageBox.ShowError("Please Select a Shipping Method");
+                ucMessageBox.ShowError(Localization.GetString("rfvShippingRate"));
                 result = false;
             }
 
@@ -311,7 +313,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 
             if (!paymentFound)
             {
-                ucMessageBox.ShowError("Please select a Payment Method");
+                ucMessageBox.ShowError(Localization.GetString("rfvPaymentMethod"));
                 result = false;
             }
 
@@ -376,15 +378,15 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             }
             else if (rbCheck.Checked)
             {
-                payManager.OfflinePaymentAddInfo(total, "Customer will pay by check.");
+                payManager.OfflinePaymentAddInfo(total, Localization.GetFormattedString("CustomerPayByCheck"));
             }
             else if (rbTelephone.Checked)
             {
-                payManager.OfflinePaymentAddInfo(total, "Customer will call with payment info.");
+                payManager.OfflinePaymentAddInfo(total, Localization.GetString("CustomerPayByPhone"));
             }
             else if (rbCashOnDelivery.Checked)
             {
-                payManager.OfflinePaymentAddInfo(total, "Customer will pay cash on delivery.");
+                payManager.OfflinePaymentAddInfo(total, Localization.GetString("CustomerPayCod"));
             }
         }
 
@@ -460,7 +462,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
                 var couponResult = CurrentOrder.AddCouponCode(txtCoupon.Text.Trim());
                 if (couponResult == false)
                 {
-                    ucMessageBox.ShowError("Coupon does not apply or already exists.");
+                    ucMessageBox.ShowError(Localization.GetString("InvalidCoupon"));
                 }
                 else
                 {
@@ -562,16 +564,16 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 
                     if (totalCount == 1)
                     {
-                        lblFindUserMessage.Text = "<span class=\"successmessage\">User " + users[0].Email +
-                                                  " Found and Selected</span>";
+                        var message = string.Format(Localization.GetString("UserFound"), users[0].Email);
+                        lblFindUserMessage.Text = string.Format(SUCCESSFORMAT, message);
                         var args = new UserSelectedEventArgs();
                         args.UserAccount = users[0];
                         UserSelected(args);
                     }
                     else
                     {
-                        lblFindUserMessage.Text = "<span class=\"successmessage\">Found " + totalCount +
-                                                  " matching users.</span>";
+                        var message = string.Format(Localization.GetString("UsersFound"), totalCount);
+                        lblFindUserMessage.Text = string.Format(SUCCESSFORMAT, message);
                         gridSelectUser.Visible = true;
                         gridSelectUser.VirtualItemCount = totalCount;
                         gridSelectUser.DataSource = users;
@@ -581,7 +583,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 
             if (!found)
             {
-                lblFindUserMessage.Text = "<span class=\"errormessage\">No matching users were found.</span>";
+                lblFindUserMessage.Text = string.Format(ERRORFORMAT, Localization.GetString("NoUsers"));
             }
         }
 
@@ -629,7 +631,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 
             if (!found)
             {
-                lblFindOrderMessage.Text = "<span class=\"errormessage\">That order was not found</span>";
+                lblFindOrderMessage.Text = string.Format(ERRORFORMAT, Localization.GetString("NoOrder"));
             }
         }
 
@@ -650,8 +652,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             }
             else
             {
-                lblNewUserMessage.Text =
-                    "<span class=\"errormessage\">Unable to create this account at this time. Unknown Error.</span>";
+                lblNewUserMessage.Text = string.Format(ERRORFORMAT, Localization.GetString("CreateUserError"));
             }
         }
 

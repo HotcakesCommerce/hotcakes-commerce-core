@@ -158,7 +158,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls
                 Payments = new List<AffiliatePayment> {payment};
                 return true;
             }
-            ucMessageBox.ShowError("Affiliate ID is invalid.");
+            ucMessageBox.ShowError(Localization.GetString("InvalidAffiliateId"));
             return false;
         }
 
@@ -199,12 +199,12 @@ namespace Hotcakes.Modules.Core.Admin.Controls
 
             if (aff == null)
             {
-                ucMessageBox.ShowError("Affiliate ID is invalid.");
+                ucMessageBox.ShowError(Localization.GetString("InvalidAffiliateId"));
                 return false;
             }
             if (!aff.Approved)
             {
-                ucMessageBox.ShowError("Affiliate is not approved.");
+                ucMessageBox.ShowError(Localization.GetString("AffiliateIdNotVerified"));
                 return false;
             }
             var payment = new AffiliatePayment

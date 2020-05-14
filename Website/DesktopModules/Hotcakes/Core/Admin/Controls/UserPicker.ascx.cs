@@ -25,7 +25,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using Hotcakes.Commerce.Controls;
 using Hotcakes.Commerce.Membership;
@@ -91,7 +90,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             }
         }
 
-        protected void btnBrowseUsers_Click(object sender, ImageClickEventArgs e)
+        protected void btnBrowseUsers_Click(object sender, EventArgs e)
         {
             if (MessageBox != null) MessageBox.ClearMessage();
 
@@ -107,21 +106,21 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             }
         }
 
-        protected void btnBrowserUserCancel_Click(object sender, ImageClickEventArgs e)
+        protected void btnBrowserUserCancel_Click(object sender, EventArgs e)
         {
             if (MessageBox != null) MessageBox.ClearMessage();
 
             pnlUserBrowser.Visible = false;
         }
 
-        protected void btnNewUserCancel_Click(object sender, ImageClickEventArgs e)
+        protected void btnNewUserCancel_Click(object sender, EventArgs e)
         {
             if (MessageBox != null) MessageBox.ClearMessage();
 
             pnlNewUser.Visible = false;
         }
 
-        protected void btnNewUser_Click(object sender, ImageClickEventArgs e)
+        protected void btnNewUser_Click(object sender, EventArgs e)
         {
             if (MessageBox != null) MessageBox.ClearMessage();
 
@@ -136,7 +135,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             }
         }
 
-        protected void btnGoUserSearch_Click(object sender, ImageClickEventArgs e)
+        protected void btnGoUserSearch_Click(object sender, EventArgs e)
         {
             if (MessageBox != null) MessageBox.ClearMessage();
 
@@ -153,7 +152,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             GridView1.DataBind();
         }
 
-        protected void btnNewUserSave_Click(object sender, ImageClickEventArgs e)
+        protected void btnNewUserSave_Click(object sender, EventArgs e)
         {
             if (MessageBox != null) MessageBox.ClearMessage();
 
@@ -176,15 +175,20 @@ namespace Hotcakes.Modules.Core.Admin.Controls
                 {
                     case CreateUserStatus.DuplicateUsername:
                         if (MessageBox != null)
-                            MessageBox.ShowWarning("The username " + NewUserEmailField.Text.Trim() +
-                                                   " already exists. Please select another username.");
+                            MessageBox.ShowWarning(string.Format(Localization.GetString("UsernameInvalid"), NewUserEmailField.Text.Trim()));
                         break;
                     case CreateUserStatus.InvalidPassword:
                         if (MessageBox != null)
-                            MessageBox.ShowWarning("Unable to create this account. Invalid Password");
+                        {
+                            MessageBox.ShowWarning(Localization.GetString("InvalidPassword"));
+                        }
+
                         break;
                     default:
-                        if (MessageBox != null) MessageBox.ShowWarning("Unable to create this account. Unknown Error.");
+                        if (MessageBox != null)
+                        {
+                            MessageBox.ShowWarning(Localization.GetString("AccountCreateError"));
+                        }
                         break;
                 }
             }
@@ -203,7 +207,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             pnlUserBrowser.Visible = false;
         }
 
-        protected void btnValidateUser_Click(object sender, ImageClickEventArgs e)
+        protected void btnValidateUser_Click(object sender, EventArgs e)
         {
             if (MessageBox != null) MessageBox.ClearMessage();
 
@@ -228,8 +232,9 @@ namespace Hotcakes.Modules.Core.Admin.Controls
                 else
                 {
                     if (MessageBox != null)
-                        MessageBox.ShowWarning("User account " + UserNameField.Text.Trim() +
-                                               " wasn't found. Please try again or create a new account.");
+                    {
+                        MessageBox.ShowWarning(string.Format(Localization.GetString("UserNotFound"), UserNameField.Text.Trim()));
+                    }
                 }
             }
         }

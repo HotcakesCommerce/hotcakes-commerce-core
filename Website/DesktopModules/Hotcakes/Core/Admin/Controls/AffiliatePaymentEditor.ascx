@@ -5,34 +5,31 @@
 
 <div class="hcForm">
     <div id="divAffiliateIDRow" class="hcFormItemHor" runat="server">
-        <label class="hcLabel">Affiliate ID</label>
+        <label class="hcLabel"><%=Localization.GetString("lblAffiliateId") %></label>
         <asp:TextBox ID="txtAffiliateID" runat="server" />
-        <asp:RequiredFieldValidator ErrorMessage="Please enter Affiliate ID." ControlToValidate="txtAffiliateID" CssClass="hcFormError"
-            ValidationGroup="AffiliatePayment" runat="server" />
+        <asp:RequiredFieldValidator resourcekey="rfvAffiliateId" ControlToValidate="txtAffiliateID" CssClass="hcFormError" ValidationGroup="AffiliatePayment" runat="server" />
     </div>
     <div id="divAmountRow" class="hcFormItemHor" runat="server">
-        <label class="hcLabel">Amount</label>
+        <label class="hcLabel"><%=Localization.GetString("lblAmount") %></label>
         <asp:TextBox ID="txtAmount" runat="server" />
-        <asp:RequiredFieldValidator ErrorMessage="Please enter amount." ControlToValidate="txtAmount" CssClass="hcFormError"
-            ValidationGroup="AffiliatePayment" runat="server" />
-        <asp:CompareValidator ErrorMessage="Please enter correct currency value." ControlToValidate="txtAmount"
-            Operator="DataTypeCheck" Type="Currency" CssClass="hcFormError" ValidationGroup="AffiliatePayment" runat="server" />
+        <asp:RequiredFieldValidator resourcekey="rfvAmount" ControlToValidate="txtAmount" CssClass="hcFormError" ValidationGroup="AffiliatePayment" runat="server" />
+        <asp:CompareValidator resourcekey="cvAmount" ControlToValidate="txtAmount" Operator="DataTypeCheck" Type="Currency" CssClass="hcFormError" ValidationGroup="AffiliatePayment" runat="server" />
     </div>
     <div class="hcFormItemHor">
-        <label class="hcLabel">Memo</label>
+        <label class="hcLabel"><%=Localization.GetString("lblMemo") %></label>
         <asp:TextBox ID="txtMemo" runat="server" />
     </div>
     <div class="hcFormItemHor">
-        <label class="hcLabel">Attachment</label>
+        <label class="hcLabel"><%=Localization.GetString("lblAttachment") %></label>
         <asp:FileUpload ID="fuAttachment" runat="server" />
     </div>
 </div>
 
 <ul class="hcActions">
     <li>
-        <asp:LinkButton ID="btnSave" Text="Save Changes" CssClass="hcPrimaryAction" ValidationGroup="AffiliatePayment" runat="server" />
+        <asp:LinkButton ID="btnSave" resourcekey="btnSave" CssClass="hcPrimaryAction" ValidationGroup="AffiliatePayment" runat="server" />
     </li>
     <li>
-        <asp:LinkButton ID="btnCancel" Text="Cancel" CssClass="hcSecondaryAction" CausesValidation="false" runat="server" />
+        <asp:LinkButton ID="btnCancel" resourcekey="btnCancel" CssClass="hcSecondaryAction" CausesValidation="false" runat="server" />
     </li>
 </ul>

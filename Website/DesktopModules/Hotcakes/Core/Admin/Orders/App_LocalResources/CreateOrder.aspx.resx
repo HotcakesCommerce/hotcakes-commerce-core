@@ -117,145 +117,142 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="All.Text" xml:space="preserve">
-    <value>All</value>
+  <data name="btnAddCoupon.Text" xml:space="preserve">
+    <value>Add</value>
   </data>
-  <data name="Amount.HeaderText" xml:space="preserve">
-    <value>Amount</value>
+  <data name="btnCalculateShipping.Text" xml:space="preserve">
+    <value>Get Shipping Rates</value>
   </data>
-  <data name="btnAcceptAll.Text" xml:space="preserve">
-    <value>Accept All New Orders</value>
+  <data name="btnDeleteCoupon.Text" xml:space="preserve">
+    <value>Delete Coupon</value>
   </data>
-  <data name="btnBatchPrint.Text" xml:space="preserve">
-    <value>Print</value>
+  <data name="btnFindOrders.Text" xml:space="preserve">
+    <value>Find Orders</value>
   </data>
-  <data name="btnChargeAll.Text" xml:space="preserve">
-    <value>Charge All &amp; Mark for Shipping</value>
+  <data name="btnFindUser.Text" xml:space="preserve">
+    <value>Find Customer</value>
   </data>
-  <data name="btnDetails.Text" xml:space="preserve">
-    <value>Details</value>
+  <data name="btnFindUsers.Text" xml:space="preserve">
+    <value>Find Customer</value>
   </data>
-  <data name="btnExportExcel.Text" xml:space="preserve">
-    <value>Export to Excel</value>
+  <data name="btnGoFindOrder.Text" xml:space="preserve">
+    <value>Find this Order</value>
   </data>
-  <data name="btnExportQuickBooks.Text" xml:space="preserve">
-    <value>Export to QuickBooks</value>
+  <data name="btnNewUsers.Text" xml:space="preserve">
+    <value>New Customer</value>
   </data>
-  <data name="btnFilterResults.Text" xml:space="preserve">
-    <value>Filter Results</value>
+  <data name="btnNewUserSave.Text" xml:space="preserve">
+    <value>Add New Customer</value>
   </data>
-  <data name="btnPayment.Text" xml:space="preserve">
+  <data name="btnSelectCustomer.Text" xml:space="preserve">
+    <value>Select Customer</value>
+  </data>
+  <data name="btnSubmit.Text" xml:space="preserve">
+    <value>Place Order</value>
+  </data>
+  <data name="btnUpdateShipping.Text" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="chkBillToSame.Text" xml:space="preserve">
+    <value>Bill to Same Address</value>
+  </data>
+  <data name="CreateUserError.Text" xml:space="preserve">
+    <value>Unable to create account for the customer, Please check the event log.</value>
+  </data>
+  <data name="CustomerPayByCheck.Text" xml:space="preserve">
+    <value>Customer will pay by check.</value>
+  </data>
+  <data name="CustomerPayByPhone.Text" xml:space="preserve">
+    <value>Customer will call with payment info.</value>
+  </data>
+  <data name="CustomerPayCod.Text" xml:space="preserve">
+    <value>Customer will pay cash on delivery.</value>
+  </data>
+  <data name="InvalidCoupon.Text" xml:space="preserve">
+    <value>Coupon code is invalid or is already added.</value>
+  </data>
+  <data name="lblAddCustomer.Text" xml:space="preserve">
+    <value>Add New Customer</value>
+  </data>
+  <data name="lblAddPromoCode.Text" xml:space="preserve">
+    <value>Add Promotional Code</value>
+  </data>
+  <data name="lblBillTo.Text" xml:space="preserve">
+    <value>Bill To</value>
+  </data>
+  <data name="lblCodesUsed.Text" xml:space="preserve">
+    <value>Codes Used</value>
+  </data>
+  <data name="lblCustomerInstructions.Text" xml:space="preserve">
+    <value>Customer's Instructions</value>
+  </data>
+  <data name="lblEmail.Text" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="lblFindCustomerByOrder.Text" xml:space="preserve">
+    <value>Find Customer By Order</value>
+  </data>
+  <data name="lblFirstName.Text" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="lblKeyword.Text" xml:space="preserve">
+    <value>Keyword</value>
+  </data>
+  <data name="lblLastName.Text" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="lblOrderItems.Text" xml:space="preserve">
+    <value>Order Items</value>
+  </data>
+  <data name="lblOrderNumber.Text" xml:space="preserve">
+    <value>Order Number</value>
+  </data>
+  <data name="lblPayment.Text" xml:space="preserve">
     <value>Payment</value>
   </data>
-  <data name="btnPrintAll.Text" xml:space="preserve">
-    <value>Print Packing Slips &amp; Ship All</value>
+  <data name="lblSearchCustomer.Text" xml:space="preserve">
+    <value>Search for Customer</value>
   </data>
-  <data name="btnShipAll.Text" xml:space="preserve">
-    <value>Ship All Orders</value>
-  </data>
-  <data name="btnShipping.Text" xml:space="preserve">
+  <data name="lblShipping.Text" xml:space="preserve">
     <value>Shipping</value>
   </data>
-  <data name="chkNewestItemsFirst.Text" xml:space="preserve">
-    <value>Newest Items First</value>
+  <data name="lblShipTo.Text" xml:space="preserve">
+    <value>Ship To</value>
   </data>
-  <data name="Customer.HeaderText" xml:space="preserve">
-    <value>Customer</value>
+  <data name="lnkBacktoAbandonedCartsReport.Text" xml:space="preserve">
+    <value>Back to Abandoned Carts Report</value>
   </data>
-  <data name="Date.HeaderText" xml:space="preserve">
-    <value>Date</value>
+  <data name="NoOrder.Text" xml:space="preserve">
+    <value>That order was not found.</value>
   </data>
-  <data name="Every.Text" xml:space="preserve">
-    <value>{0} every {1} {2}</value>
+  <data name="NoUsers.Text" xml:space="preserve">
+    <value>No matching customers were found.</value>
   </data>
-  <data name="lblCanceledOrders.Text" xml:space="preserve">
-    <value>Canceled Orders</value>
-  </data>
-  <data name="lblCompletedOrders.Text" xml:space="preserve">
-    <value>Completed Orders</value>
-  </data>
-  <data name="lblNewOrders.Text" xml:space="preserve">
-    <value>New Orders</value>
-  </data>
-  <data name="lblOrdersOnHold.Text" xml:space="preserve">
-    <value>Orders On Hold</value>
-  </data>
-  <data name="lblOrdersReady.Text" xml:space="preserve">
-    <value>Orders Ready for Payment</value>
-  </data>
-  <data name="lblPrintSelected.Text" xml:space="preserve">
-    <value>Print Selected Orders</value>
-  </data>
-  <data name="lblSearch.Text" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="lblShippingReady.Text" xml:space="preserve">
-    <value>Orders Ready for Shipping</value>
-  </data>
-  <data name="NoOrders.Text" xml:space="preserve">
-    <value>No orders found.</value>
-  </data>
-  <data name="OrderNumber.HeaderText" xml:space="preserve">
-    <value>Order #</value>
-  </data>
-  <data name="OrderSubject.Text" xml:space="preserve">
-    <value>Order {0}</value>
+  <data name="OrderProcessErrors.Text" xml:space="preserve">
+    <value>One or more errors occurred attempting to process the order. Please contact the store administrator.</value>
   </data>
   <data name="PageTitle.Text" xml:space="preserve">
-    <value>Order Manager</value>
+    <value>Create New Order</value>
   </data>
-  <data name="Payment_AnyPayment.Text" xml:space="preserve">
-    <value>- Any Payment -</value>
+  <data name="revEmailAddress.ErrorMessage" xml:space="preserve">
+    <value>Invalid e-mail address</value>
   </data>
-  <data name="Payment_OverPaid.Text" xml:space="preserve">
-    <value>Over Paid</value>
+  <data name="rfCoupon.Text" xml:space="preserve">
+    <value>Coupon code is required</value>
   </data>
-  <data name="Payment_Paid.Text" xml:space="preserve">
-    <value>Paid</value>
+  <data name="rfvEmailAddress.Text" xml:space="preserve">
+    <value>E-mail address is required</value>
   </data>
-  <data name="Payment_PartiallyPaid.Text" xml:space="preserve">
-    <value>Partially Paid</value>
+  <data name="rfvPaymentMethod.Text" xml:space="preserve">
+    <value>Payment method is required</value>
   </data>
-  <data name="Payment_Unpaid.Text" xml:space="preserve">
-    <value>Unpaid</value>
+  <data name="rfvShippingRate.Text" xml:space="preserve">
+    <value>Shipping rate is invalid</value>
   </data>
-  <data name="Recurring.Text" xml:space="preserve">
-    <value>RECURRING</value>
+  <data name="UserFound.Text" xml:space="preserve">
+    <value>User found ({0}) and selected.</value>
   </data>
-  <data name="Shipping_AnyShipping.Text" xml:space="preserve">
-    <value>- Any Shipping -</value>
-  </data>
-  <data name="Shipping_PartiallyShipped.Text" xml:space="preserve">
-    <value>Partially Shipped</value>
-  </data>
-  <data name="Shipping_Shipped.Text" xml:space="preserve">
-    <value>Shipped</value>
-  </data>
-  <data name="Shipping_Unshipped.Text" xml:space="preserve">
-    <value>Unshipped</value>
-  </data>
-  <data name="Status.HeaderText" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="Status_AllOrders.Text" xml:space="preserve">
-    <value>- All Orders -</value>
-  </data>
-  <data name="Status_Canceled.Text" xml:space="preserve">
-    <value>Canceled</value>
-  </data>
-  <data name="Status_Completed.Text" xml:space="preserve">
-    <value>Completed</value>
-  </data>
-  <data name="Status_NewOrders.Text" xml:space="preserve">
-    <value>New Orders</value>
-  </data>
-  <data name="Status_OnHold.Text" xml:space="preserve">
-    <value>On Hold</value>
-  </data>
-  <data name="Status_ReadyForPayment.Text" xml:space="preserve">
-    <value>Ready for Payment</value>
-  </data>
-  <data name="Status_ReadyForShipping.Text" xml:space="preserve">
-    <value>Ready for Shipping</value>
+  <data name="UsersFound.Text" xml:space="preserve">
+    <value>Found {0} matching customers;.</value>
   </data>
 </root>

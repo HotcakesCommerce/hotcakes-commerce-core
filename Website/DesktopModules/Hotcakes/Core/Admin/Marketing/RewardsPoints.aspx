@@ -24,7 +24,7 @@
         <div class="hcForm">
             <div class="hcFormItem">
                 <label class="hcLabel"><%=Localization.GetString("ProgramName") %></label>
-                <asp:TextBox ID="RewardsNameField" runat="server" Columns="50"></asp:TextBox>
+                <asp:TextBox ID="RewardsNameField" runat="server" Columns="50"/>
             </div>
             <div class="hcFormItem">
                 <label class="hcLabel"><%=Localization.GetString("PointsIssued") %></label>

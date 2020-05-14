@@ -37,7 +37,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnValidateUser;
+        protected global::System.Web.UI.WebControls.LinkButton btnValidateUser;
         
         /// <summary>
         /// btnBrowseUsers control.
@@ -46,7 +46,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnBrowseUsers;
+        protected global::System.Web.UI.WebControls.LinkButton btnBrowseUsers;
         
         /// <summary>
         /// btnNewUser control.
@@ -55,7 +55,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnNewUser;
+        protected global::System.Web.UI.WebControls.LinkButton btnNewUser;
         
         /// <summary>
         /// pnlUserBrowser control.
@@ -82,7 +82,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnGoUserSearch;
+        protected global::System.Web.UI.WebControls.LinkButton btnGoUserSearch;
         
         /// <summary>
         /// GridView1 control.
@@ -94,13 +94,40 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
+        /// lblEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEmail;
+        
+        /// <summary>
+        /// lblFirstName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFirstName;
+        
+        /// <summary>
+        /// lblLastName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLastName;
+        
+        /// <summary>
         /// btnBrowserUserCancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnBrowserUserCancel;
+        protected global::System.Web.UI.WebControls.LinkButton btnBrowserUserCancel;
         
         /// <summary>
         /// pnlNewUser control.
@@ -154,7 +181,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnNewUserCancel;
+        protected global::System.Web.UI.WebControls.LinkButton btnNewUserCancel;
         
         /// <summary>
         /// btnNewUserSave control.
@@ -163,6 +190,6 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnNewUserSave;
+        protected global::System.Web.UI.WebControls.LinkButton btnNewUserSave;
     }
 }

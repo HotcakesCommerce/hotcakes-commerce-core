@@ -27,6 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
+using DotNetNuke.Services.Localization;
 using Hotcakes.Commerce.Contacts;
 using Hotcakes.Common.Dnn;
 
@@ -108,9 +109,9 @@ namespace Hotcakes.Modules.Core.Admin.Controls
         {
             if (ucPaymentEditor.AffiliateIDs.Count > 1)
             {
-                return "Add Multiple Payments";
+                return Localization.GetString("AddMultiplePayments");
             }
-            return ucPaymentEditor.PaymentId.HasValue ? "Edit Payment" : "Add New Payment";
+            return ucPaymentEditor.PaymentId.HasValue ? Localization.GetString("lblEditPayment") : Localization.GetString("lblAddNewPayment");
         }
 
         private void SavePayments(List<AffiliatePayment> payments)

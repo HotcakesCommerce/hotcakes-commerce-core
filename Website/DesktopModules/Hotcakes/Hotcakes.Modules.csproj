@@ -4113,6 +4113,30 @@
   <ItemGroup>
     <Content Include="Core\Admin\Controls\App_LocalResources\UrlsAssociated.ascx.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Orders\App_LocalResources\EditOrder.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Orders\App_LocalResources\CreateOrder.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\AffiliatePaymentDialog.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\AffiliatePaymentEditor.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\UserPicker.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Orders\App_LocalResources\OrderActions.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Orders\App_LocalResources\PaymentInformation.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\CreditCardInput.ascx.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

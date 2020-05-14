@@ -43,7 +43,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 		protected override void OnPreInit(EventArgs e)
 		{
 			base.OnPreInit(e);
-			PageTitle = "Order Manager";
+			PageTitle = Localization.GetString("PageTitle");
 			CurrentTab = AdminTabType.Orders;
 			ValidateCurrentUserHasPermission(SystemPermissions.OrdersView);
 		}
@@ -95,7 +95,6 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 
 				LoadTemplates();
 			}
-
 
             var pageNumber = 1;
 			if (Request.QueryString["p"] != null)
@@ -258,10 +257,11 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 		protected string RenderCustomerMailToLink(IDataItemContainer cont)
 		{
 			var o = cont.DataItem as OrderSnapshot;
-			return MailServices.MailToLink(o.UserEmail, "Order " + o.OrderNumber,
-					o.BillingAddress.FirstName + ",",
-					o.BillingAddress.FirstName + " " + o.BillingAddress.LastName);
-		}
+            return MailServices.MailToLink(o.UserEmail,
+                string.Format(Localization.GetString("OrderSubject"), o.OrderNumber),
+                string.Concat(o.BillingAddress.FirstName, ","),
+                string.Concat(o.BillingAddress.FirstName, " ", o.BillingAddress.LastName));
+        }
 
 		protected string RenderStatusHtml(IDataItemContainer cont)
 		{
@@ -463,27 +463,27 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 				case OrderStatusCode.Received:
 					lnkAcceptAll.Visible = true;
 					OrderManagerActions.Visible = true;
-					litH1.Text = "New Orders";
+					litH1.Text = Localization.GetString("lblNewOrders");
 					break;
 				case OrderStatusCode.Cancelled:
-					litH1.Text = "Cancelled Orders";
-					break;
+					litH1.Text = Localization.GetString("lblCanceledOrders");
+                    break;
 				case OrderStatusCode.Completed:
-					litH1.Text = "Completed Orders";
+					litH1.Text = Localization.GetString("lblCompletedOrders");
 					break;
 				case OrderStatusCode.OnHold:
-					litH1.Text = "Orders On Hold";
+					litH1.Text = Localization.GetString("lblOrdersOnHold");
 					break;
 				case OrderStatusCode.ReadyForPayment:
-					litH1.Text = "Orders Ready for Payment";
+					litH1.Text = Localization.GetString("lblOrdersReady");
 					lnkChargeAll.Visible = true;
 					OrderManagerActions.Visible = true;
 					break;
 				case OrderStatusCode.ReadyForShipping:
-					litH1.Text = "Orders Ready for Shipping";
+					litH1.Text = Localization.GetString("lblShippingReady");
 					break;
 				default:
-					litH1.Text = "Order Manager";
+					litH1.Text = Localization.GetString("PageTitle");
 					break;
 			}
         }
