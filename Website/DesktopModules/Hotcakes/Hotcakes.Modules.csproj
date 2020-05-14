@@ -293,6 +293,8 @@
     <Content Include="Core\Scripts\chartjs\Chart.Milestone.js" />
     <Content Include="Core\Scripts\chartjs\Chart.Milestone.Legend.js" />
     <Content Include="Core\Scripts\chartjs\Chart.min.js" />
+    <Content Include="Core\Scripts\flatpickr\flatpickr.js" />
+    <Content Include="Core\Scripts\flatpickr\flatpickr.min.css" />
     <Content Include="Core\Scripts\hcc.admin.dashboard.js" />
     <Content Include="Core\Scripts\hcc.category.performance.js" />
     <Content Include="Core\Scripts\excanvas.js" />
