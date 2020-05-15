@@ -4140,6 +4140,9 @@
   <ItemGroup>
     <Content Include="Core\Admin\Orders\App_LocalResources\PrintOrder.aspx.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\DatePickerNavigation.ascx.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -27,7 +27,8 @@
         $(function () {
             $(".hcDatePickerTextBox").flatpickr({
                 dateFormat: "m/d/Y",
-                minDate: "today"
+                minDate: new Date(2013, 1, 1),
+                maxDate: <%=DateTime.Now.AddYears(5).ToString("new Date(yyyy, M, d)") %>
             });
 
             $(".hcDefaultChoice input").on("change", function () {

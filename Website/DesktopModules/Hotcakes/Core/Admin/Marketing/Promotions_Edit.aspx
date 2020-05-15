@@ -8,7 +8,8 @@
         $(document).ready(function() {
             $(".hcDatePickerTextBox").flatpickr({
                 dateFormat: "m/d/Y",
-                minDate: "today"
+                minDate: new Date(2013, 1, 1),
+                maxDate: new Date(<%=DateTime.Now.AddYears(5).ToString("yyyy, M, d")%>)
             });
         });
 

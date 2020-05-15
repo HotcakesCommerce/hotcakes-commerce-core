@@ -33,7 +33,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls
 {
     partial class DateRangePicker : HccUserControl
     {
-        private const string DATEFORMAT = "MM/dd/yyyyy";
+        private const string DATEFORMAT = "MM/dd/yyyy";
 
         #region Fields
 

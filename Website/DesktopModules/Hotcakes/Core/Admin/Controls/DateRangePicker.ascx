@@ -23,19 +23,20 @@
 <asp:Panel runat="server" ID="pnlCustom" Visible="false">
     <div class="<%=FormItemCssClass %>">
         <label class="hcLabelShort"><%=Localization.GetString("Start") %></label>
-        <asp:TextBox ID="radStartDate" runat="server" CssClass="hcDatePickerTextBox"/>
+        <asp:TextBox ID="radStartDate" runat="server" CssClass="hcDateRangeTextBox"/>
     </div>
     <div class="<%=FormItemCssClass %>">
         <label class="hcLabelShort"><%=Localization.GetString("End") %></label>
-        <asp:TextBox ID="radEndDate" runat="server" CssClass="hcDatePickerTextBox"/>
+        <asp:TextBox ID="radEndDate" runat="server" CssClass="hcDateRangeTextBox"/>
         <asp:LinkButton ID="btnShow" CssClass="hcButton hcDatePickerButton" resourcekey="Show" runat="server" />
     </div>
     <script type="text/javascript">
         $(function()
         {
-            $(".hcDatePickerTextBox").flatpickr({
+            $(".hcDateRangeTextBox").flatpickr({
                 dateFormat: "m/d/Y",
-                minDate: "today"
+                minDate: new Date(2013, 1, 1),
+                maxDate: "today"
             });
         });
     </script>
