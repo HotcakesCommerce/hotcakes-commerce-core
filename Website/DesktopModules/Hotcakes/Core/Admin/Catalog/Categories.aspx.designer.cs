@@ -28,7 +28,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox lstType;
+        protected global::System.Web.UI.WebControls.DropDownList lstType;
         
         /// <summary>
         /// lstParents control.
@@ -37,7 +37,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox lstParents;
+        protected global::System.Web.UI.WebControls.DropDownList lstParents;
         
         /// <summary>
         /// btnNew control.

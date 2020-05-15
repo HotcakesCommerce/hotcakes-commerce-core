@@ -324,17 +324,16 @@ namespace Hotcakes.Modules.Core.Admin.Controls
                 {
                     if (ProductFile.SaveFile(HccApp.CurrentStore.Id, file.Bvin, file.FileName, NewFileUpload.PostedFile))
                     {
-                        MessageBox1.ShowOk("File saved to server successfully");
+                        MessageBox1.ShowOk(Localization.GetString("FileSaveSuccess"));
                     }
                     else
                     {
-                        MessageBox1.ShowError(
-                            "There was an error while trying to save your file to the file system. Please check your asp.net permissions.");
+                        MessageBox1.ShowError(Localization.GetString("FileSaveFailure"));
                     }
                 }
                 else
                 {
-                    MessageBox1.ShowError("There was an error while trying to save your file to the database.");
+                    MessageBox1.ShowError(Localization.GetString("FileSaveFailure"));
                 }
             }
 
@@ -350,11 +349,11 @@ namespace Hotcakes.Modules.Core.Admin.Controls
 
                     if (Save(file))
                     {
-                        MessageBox1.ShowOk("File saved to server successfully");
+                        MessageBox1.ShowOk(Localization.GetString("FileSaveSuccess"));
                     }
                     else
                     {
-                        MessageBox1.ShowError("There was an error while trying to save your file to the database.");
+                        MessageBox1.ShowError(Localization.GetString("FileSaveFailure"));
                     }
                 }
             }
@@ -367,11 +366,11 @@ namespace Hotcakes.Modules.Core.Admin.Controls
                 InitializeProductFile(file, true);
                 if (Save(file))
                 {
-                    MessageBox1.ShowOk("File saved to server successfully");
+                    MessageBox1.ShowOk(Localization.GetString("FileSaveSuccess"));
                 }
                 else
                 {
-                    MessageBox1.ShowError("There was an error while trying to save your file to the database.");
+                    MessageBox1.ShowError(Localization.GetString("FileSaveFailure"));
                 }
             }
             InitializeFileLists();

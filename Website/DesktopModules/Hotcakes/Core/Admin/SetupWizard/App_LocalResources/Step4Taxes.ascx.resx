@@ -141,7 +141,7 @@
   <data name="EditTaxSchedule.Text" xml:space="preserve">
     <value>Edit Tax Schedule</value>
   </data>
-  <data name="ScheduleName.Text" xml:space="preserve">
+  <data name="ScheduleName.HeaderText" xml:space="preserve">
     <value>Schedule Name</value>
   </data>
   <data name="TaxScheduleDelete.Text" xml:space="preserve">

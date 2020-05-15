@@ -70,7 +70,7 @@
     </asp:Panel>
 
     <asp:Label ID="lblNoRecordsMessage" CssClass="hcInfoLabelLeft" Visible="false" runat="server">
-        No Products Where Found
+        <%=Localization.GetString("NoProducts") %>
     </asp:Label>
 
     <asp:Panel ID="pnlMain" runat="server">

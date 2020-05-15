@@ -1,12 +1,17 @@
 ﻿<%@ Page Language="C#" MasterPageFile="../AdminNav.master" AutoEventWireup="true" CodeBehind="Promotions_Edit.aspx.cs" Inherits="Hotcakes.Modules.Core.Admin.Marketing.Promotions_Edit" %>
-
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register Src="../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
 <%@ Register Src="Promotions_Edit_Qualification.ascx" TagName="Promotions_Edit_Qualification" TagPrefix="hcc" %>
 <%@ Register Src="Promotions_Edit_Actions.ascx" TagName="Promotions_Edit_Actions" TagPrefix="hcc" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
+        $(document).ready(function() {
+            $(".hcDatePickerTextBox").flatpickr({
+                dateFormat: "m/d/Y",
+                minDate: new Date(2013, 1, 1),
+                maxDate: new Date(<%=DateTime.Now.AddYears(5).ToString("yyyy, M, d")%>)
+            });
+        });
 
         hcAttachUpdatePanelLoader();
 
@@ -101,13 +106,13 @@
         <div class="hcForm">
             <div class="hcFormItem" style="width: 20%">
                 <label class="hcLabel"><%=Localization.GetString("StartDate") %></label>
-                <telerik:RadDatePicker ID="radDateStart" runat="server" CssClass="hcPromotionsStartDate" ValidationGroup="SavePromotion" />
+                <asp:TextBox ID="radDateStart" runat="server" CssClass="hcPromotionsStartDate hcDatePickerTextBox" ValidationGroup="SavePromotion" />
                 <asp:RequiredFieldValidator ID="valDateStartRequired" runat="server" Display="Dynamic"
                     ControlToValidate="radDateStart" resourcekey="valDateStartRequired" CssClass="hcFormError"  ValidationGroup="SavePromotion"/>
             </div>
             <div class="hcFormItem" style="width: 20%">
                 <label class="hcLabel"><%=Localization.GetString("EndDate") %></label>
-                <telerik:RadDatePicker ID="radDateEnd" runat="server" CssClass="hcPromotionsEndDate" ValidationGroup="SavePromotion"/>
+                <asp:TextBox ID="radDateEnd" runat="server" CssClass="hcPromotionsEndDate hcDatePickerTextBox" ValidationGroup="SavePromotion" />
                 <asp:RequiredFieldValidator ID="valDateEndRequired" runat="server" Display="Dynamic"
                     ControlToValidate="radDateEnd" resourcekey="valDateEndRequired" CssClass="hcFormError" ValidationGroup="SavePromotion" />
                 <asp:CompareValidator ID="valDateCompare" runat="server" Display="Dynamic" ControlToValidate="radDateEnd" ControlToCompare="radDateStart"
@@ -126,7 +131,7 @@
                         <%=Localization.GetString("QualificationHelp") %>
                     </div>
                     <div class="hcFormItem hcFormItem66p">
-                        <telerik:RadComboBox ID="lstNewQualification" runat="server" />
+                        <asp:DropDownList ID="lstNewQualification" runat="server" />
                     </div>
                     <div class="hcFormItem hcFormItem33p">
                         <asp:LinkButton ID="btnNewQualification" runat="server"
@@ -192,7 +197,7 @@
                         <%=Localization.GetString("ActionHelp") %>
                     </div>
                     <div class="hcFormItem hcFormItem66p">
-                        <telerik:RadComboBox ID="lstNewAction" runat="server" />
+                        <asp:DropDownList ID="lstNewAction" runat="server" />
                     </div>
                     <div class="hcFormItem hcFormItem33p">
                         <asp:LinkButton ID="btnNewAction" runat="server"

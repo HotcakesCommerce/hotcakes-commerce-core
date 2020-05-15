@@ -46,6 +46,6 @@ namespace Hotcakes.Modules.Cart {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ViewComboBox;
+        protected global::System.Web.UI.WebControls.DropDownList ViewComboBox;
     }
 }

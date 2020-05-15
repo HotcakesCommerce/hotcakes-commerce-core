@@ -24,6 +24,7 @@
 #endregion
 
 using System;
+using System.Linq;
 using System.Web.UI.WebControls;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Membership;

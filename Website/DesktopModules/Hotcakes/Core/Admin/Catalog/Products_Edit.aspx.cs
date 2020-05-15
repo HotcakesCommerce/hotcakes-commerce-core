@@ -43,7 +43,6 @@ using Hotcakes.Commerce.Utilities;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Web;
 using Hotcakes.Web.Data;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
@@ -516,7 +515,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         private void PopulateTemplates()
         {
             ddlTemplateList.Items.Clear();
-            ddlTemplateList.Items.Add(new RadComboBoxItem("- Not Set -", string.Empty));
+            ddlTemplateList.Items.Add(new ListItem("- Not Set -", string.Empty));
             ddlTemplateList.AppendDataBoundItems = true;
             ddlTemplateList.DataSource = DnnPathHelper.GetViewNames("Products");
             ddlTemplateList.DataBind();
@@ -528,7 +527,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             lstManufacturers.DataTextField = "DisplayName";
             lstManufacturers.DataValueField = "Bvin";
             lstManufacturers.DataBind();
-            lstManufacturers.Items.Insert(0, new RadComboBoxItem("- No Manufacturer -", string.Empty));
+            lstManufacturers.Items.Insert(0, new ListItem("- No Manufacturer -", string.Empty));
         }
 
         private void PopulateVendors()
@@ -537,7 +536,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             lstVendors.DataTextField = "DisplayName";
             lstVendors.DataValueField = "Bvin";
             lstVendors.DataBind();
-            lstVendors.Items.Insert(0, new RadComboBoxItem("- No Vendor -", string.Empty));
+            lstVendors.Items.Insert(0, new ListItem("- No Vendor -", string.Empty));
         }
 
         private void PopulateTaxes()
@@ -552,7 +551,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         private void PopulateProductTypes()
         {
             lstProductType.Items.Clear();
-            lstProductType.Items.Add(new RadComboBoxItem("Generic", ""));
+            lstProductType.Items.Add(new ListItem("Generic", ""));
             lstProductType.AppendDataBoundItems = true;
             lstProductType.DataSource = HccApp.CatalogServices.ProductTypes.FindAll();
             lstProductType.DataTextField = "ProductTypeName";
@@ -589,10 +588,10 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                     pnlPricing.Visible = false;
                 }
 
-                if (ddlTemplateList.Items.FindItemByValue(p.TemplateName) != null)
+                if (ddlTemplateList.Items.FindByValue(p.TemplateName) != null)
                 {
                     ddlTemplateList.ClearSelection();
-                    ddlTemplateList.Items.FindItemByValue(p.TemplateName).Selected = true;
+                    ddlTemplateList.Items.FindByValue(p.TemplateName).Selected = true;
                 }
 
                 chkFeatured.Checked = p.Featured;
@@ -637,15 +636,15 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                     lstTaxClasses.ClearSelection();
                     lstTaxClasses.Items.FindByValue(p.TaxSchedule.ToString()).Selected = true;
                 }
-                if (lstManufacturers.Items.FindItemByValue(p.ManufacturerId) != null)
+                if (lstManufacturers.Items.FindByValue(p.ManufacturerId) != null)
                 {
                     lstManufacturers.ClearSelection();
-                    lstManufacturers.Items.FindItemByValue(p.ManufacturerId).Selected = true;
+                    lstManufacturers.Items.FindByValue(p.ManufacturerId).Selected = true;
                 }
-                if (lstVendors.Items.FindItemByValue(p.VendorId) != null)
+                if (lstVendors.Items.FindByValue(p.VendorId) != null)
                 {
                     lstVendors.ClearSelection();
-                    lstVendors.Items.FindItemByValue(p.VendorId).Selected = true;
+                    lstVendors.Items.FindByValue(p.VendorId).Selected = true;
                 }
 
                 LoadImagePreview(p);
@@ -660,10 +659,10 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 }
                 MediumImageAlternateTextField.Text = p.ImageFileMediumAlternateText;
 
-                if (lstProductType.Items.FindItemByValue(p.ProductTypeId) != null)
+                if (lstProductType.Items.FindByValue(p.ProductTypeId) != null)
                 {
                     lstProductType.ClearSelection();
-                    lstProductType.Items.FindItemByValue(p.ProductTypeId).Selected = true;
+                    lstProductType.Items.FindByValue(p.ProductTypeId).Selected = true;
                 }
                 // Added this line to stop errors on immediate load and save - Marcus
                 LastProductType = p.ProductTypeId;

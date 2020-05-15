@@ -42,7 +42,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            PageTitle = "Category Performance";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Catalog;
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
         }
@@ -65,10 +65,6 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
             PageMessageBox = ucMessageBox;
         }
-
-        #endregion
-
-        #region Implementation
 
         #endregion
     }

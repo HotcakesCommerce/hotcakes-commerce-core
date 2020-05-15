@@ -9,13 +9,12 @@
     <div class="hcBlock hcBlockLight">
         <div class="hcForm">
             <div class="hcFormItem">
-                <label class="hcLabel">Product Type Name:</label>
-                <asp:TextBox ID="txtNewNameField" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator runat="server" ID="rfvNewNameField" ControlToValidate="txtNewNameField" CssClass="hcFormError" ValidationGroup="AddNew" Text="Product type name is required"/>
+                <label class="hcLabel"><%=Localization.GetString("lblProductTypeName") %></label>
+                <asp:TextBox ID="txtNewNameField" runat="server"/>
+                <asp:RequiredFieldValidator runat="server" ID="rfvNewNameField" resourcekey="rfvNewNameField" ControlToValidate="txtNewNameField" CssClass="hcFormError" ValidationGroup="AddNew" />
             </div>
             <div class="hcFormItem">
-                <asp:LinkButton ID="btnNew" runat="server" Text="+ Add Product Type" CssClass="hcTertiaryAction"
-                    OnClick="btnNew_Click" ValidationGroup="AddNew" />
+                <asp:LinkButton ID="btnNew" resourcekey="btnNew" runat="server" CssClass="hcTertiaryAction" OnClick="btnNew_Click" ValidationGroup="AddNew" />
             </div>
         </div>
     </div>
@@ -34,20 +33,24 @@
                 <HeaderStyle CssClass="hcGridHeader" />
                 <ItemStyle CssClass="hcGridRow" />
                 <Columns>
-                    <asp:BoundColumn DataField="ProductTypeName" HeaderText="Product Type"></asp:BoundColumn>
-                    <asp:BoundColumn DataField="TemplateName" HeaderText="Template Name"></asp:BoundColumn>
+                    <asp:BoundColumn DataField="ProductTypeName" HeaderText="ProductType"/>
+                    <asp:BoundColumn DataField="TemplateName" HeaderText="TemplateName"/>
                     <asp:TemplateColumn>
                         <ItemStyle Width="80px" />
                         <ItemTemplate>
-                            <asp:LinkButton runat="server" ID="btnEdit" CssClass="hcIconEdit"
-                                AlternateText="Edit" CommandName="Edit" />
-                            <asp:LinkButton ID="btnDelete" runat="server" CommandName="Delete"
-                                OnClientClick="return hcConfirm(event, 'Are you sure you want to delete this item?')"
-                                CssClass="hcIconDelete" />
+                            <asp:LinkButton runat="server" ID="btnEdit" resourcekey="btnEdit" CssClass="hcIconEdit" CommandName="Edit" />
+                            <asp:LinkButton ID="btnDelete" resourcekey="btnDelete" runat="server" CommandName="Delete" CssClass="hcIconDelete hcDeleteColumn" />
                         </ItemTemplate>
                     </asp:TemplateColumn>
                 </Columns>
             </asp:DataGrid>
         </div>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".hcDeleteColumn").click(function(e) {
+                return hcConfirm(e, "<%=Localization.GetJsEncodedString("Confirm")%>");
+            });
+        });
+    </script>
 </asp:Content>

@@ -1,5 +1,4 @@
 <%@ Control Language="C#" AutoEventWireup="True" Inherits="Hotcakes.Modules.Core.Admin.Controls.DateRangePicker" CodeBehind="DateRangePicker.ascx.cs" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <div class="<%=FormItemCssClass %>">
     <asp:Label CssClass="hcLabelShort" ID="lblDateRangeLabel" resourcekey="DateRange" AssociatedControlID="lstRangeType" runat="server" />
@@ -24,11 +23,21 @@
 <asp:Panel runat="server" ID="pnlCustom" Visible="false">
     <div class="<%=FormItemCssClass %>">
         <label class="hcLabelShort"><%=Localization.GetString("Start") %></label>
-        <telerik:RadDatePicker ID="radStartDate"  runat="server"/>
+        <asp:TextBox ID="radStartDate" runat="server" CssClass="hcDateRangeTextBox"/>
     </div>
     <div class="<%=FormItemCssClass %>">
         <label class="hcLabelShort"><%=Localization.GetString("End") %></label>
-        <telerik:RadDatePicker ID="radEndDate" runat="server" />
+        <asp:TextBox ID="radEndDate" runat="server" CssClass="hcDateRangeTextBox"/>
         <asp:LinkButton ID="btnShow" CssClass="hcButton hcDatePickerButton" resourcekey="Show" runat="server" />
     </div>
+    <script type="text/javascript">
+        $(function()
+        {
+            $(".hcDateRangeTextBox").flatpickr({
+                dateFormat: "m/d/Y",
+                minDate: new Date(2013, 1, 1),
+                maxDate: "today"
+            });
+        });
+    </script>
 </asp:Panel>

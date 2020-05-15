@@ -1,6 +1,5 @@
 <%@ Control Language="C#" AutoEventWireup="True" Inherits="Hotcakes.Modules.CategoryMenu.Settings" CodeBehind="Settings.ascx.cs" %>
 <%@ Register Src="../../../controls/labelcontrol.ascx" TagName="labelcontrol" TagPrefix="dnn" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <div class="dnnFormMessage dnnFormInfo">
     <asp:Label ID="Label1" runat="server" resourcekey="SettingsHint" />
@@ -13,8 +12,7 @@
         </div>
         <div class="dnnFormItem">
             <dnn:labelcontrol id="ViewSelectionLabel" controlname="ViewComboBox" suffix=":" runat="server" />
-            <telerik:RadComboBox ID="ViewComboBox" runat="server" Width="250px" Height="150px"
-                EnableLoadOnDemand="False" ShowMoreResultsBox="false" EnableVirtualScrolling="false" />
+            <asp:DropDownList ID="ViewComboBox" runat="server" Width="250px" Height="150px"/>
         </div>
         <div class="dnnFormItem">
             <dnn:labelcontrol id="MenuTitleLabel" controlname="TitleField" suffix=":" runat="server" />
@@ -22,16 +20,16 @@
         </div>
         <div class="dnnFormItem">
             <dnn:labelcontrol id="ModeFieldLabel" controlname="ModeField" suffix=":" runat="server" />
-            <telerik:RadComboBox ID="ModeField" runat="server" AutoPostBack="True" Width="225px">
+            <asp:DropDownList ID="ModeField" runat="server" AutoPostBack="True" Width="225px">
                 <Items>
-                    <telerik:RadComboBoxItem Value="0" Text="Show Root Categories Only" />
-                    <telerik:RadComboBoxItem Value="1" Text="Show All Categories" />
-                    <telerik:RadComboBoxItem Value="2" Text="Show Children, Peers and Parents" />
-                    <telerik:RadComboBoxItem Value="3" Text="Show All Categories for Current Parent" />
-                    <telerik:RadComboBoxItem Value="4" Text="Show Selected Categories" />
-                    <telerik:RadComboBoxItem Value="5" Text="Show Children of Selected Category" />
+                    <asp:ListItem Value="0" Text="Show Root Categories Only" />
+                    <asp:ListItem Value="1" Text="Show All Categories" />
+                    <asp:ListItem Value="2" Text="Show Children, Peers and Parents" />
+                    <asp:ListItem Value="3" Text="Show All Categories for Current Parent" />
+                    <asp:ListItem Value="4" Text="Show Selected Categories" />
+                    <asp:ListItem Value="5" Text="Show Children of Selected Category" />
                 </Items>
-            </telerik:RadComboBox>
+            </asp:DropDownList>
         </div>
         <asp:Panel ID="pnlSelectedCategories" runat="server" Visible="False">
             <dnn:labelcontrol id="lblSelectCategories" suffix=":" runat="server" />
@@ -63,7 +61,7 @@
         </asp:Panel>
         <asp:Panel ID="pnlSelectedChildren" runat="server" Visible="False">
             <dnn:labelcontrol id="lblSelectParent" controlname="ModeField" suffix=":" runat="server" />
-            <telerik:RadComboBox ID="ddlParentCategories" runat="server" Width="225px" />
+            <asp:DropDownList ID="ddlParentCategories" runat="server" Width="225px" />
         </asp:Panel>
         <div class="dnnFormItem">
             <dnn:labelcontrol id="HomeLinkFieldLabel" controlname="HomeLinkField" runat="server" />

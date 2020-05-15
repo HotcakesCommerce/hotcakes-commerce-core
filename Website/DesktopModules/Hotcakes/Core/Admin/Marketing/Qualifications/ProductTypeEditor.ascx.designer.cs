@@ -28,7 +28,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox lstProductTypes;
+        protected global::System.Web.UI.WebControls.DropDownList lstProductTypes;
         
         /// <summary>
         /// btnAddProductType control.

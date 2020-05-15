@@ -19,7 +19,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtProductTypeName;
+        protected global::System.Web.UI.WebControls.TextBox txtProductTypeName;
         
         /// <summary>
         /// rfvProductTypeName control.
@@ -46,7 +46,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlMembershipRole;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMembershipRole;
         
         /// <summary>
         /// cvRoleName control.
@@ -73,7 +73,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadNumericTextBox txtExpirationNum;
+        protected global::System.Web.UI.WebControls.TextBox txtExpirationNum;
         
         /// <summary>
         /// rfvExpiration control.
@@ -91,7 +91,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlPeriodType;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPeriodType;
         
         /// <summary>
         /// lblNotify control.

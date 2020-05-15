@@ -30,7 +30,6 @@ using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Modules;
 using Hotcakes.Commerce.Dnn.Utils;
 using Hotcakes.Commerce.Dnn.Web;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.CategoryMenu
 {
@@ -59,7 +58,7 @@ namespace Hotcakes.Modules.CategoryMenu
 
         private void LoadData()
         {
-            ViewComboBox.Items.Add(new RadComboBoxItem(LocalizeString("NoneSelectedText"), string.Empty));
+            ViewComboBox.Items.Add(new ListItem(LocalizeString("NoneSelectedText"), string.Empty));
             ViewComboBox.AppendDataBoundItems = true;
             ViewComboBox.DataSource = DnnPathHelper.GetViewNames("CategoryMenu");
             ViewComboBox.DataBind();
@@ -76,9 +75,9 @@ namespace Hotcakes.Modules.CategoryMenu
             TitleField.Text = Convert.ToString(ModuleSettings["Title"]);
 
             var mode = ModuleSettings["CategoryMenuMode"] != null ? ModuleSettings["CategoryMenuMode"].ToString() : "0";
-            if (ModeField.Items.FindItemByValue(mode) != null)
+            if (ModeField.Items.FindByValue(mode) != null)
             {
-                ModeField.Items.FindItemByValue(mode).Selected = true;
+                ModeField.Items.FindByValue(mode).Selected = true;
             }
 
             ProductCountCheckBox.Checked = Convert.ToBoolean(ModuleSettings["ShowProductCount"]);
@@ -90,7 +89,7 @@ namespace Hotcakes.Modules.CategoryMenu
                 .Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
             foreach (var cat in listCategories)
             {
-                ddlParentCategories.Items.Add(new RadComboBoxItem(cat.Name, cat.Bvin));
+                ddlParentCategories.Items.Add(new ListItem(cat.Name, cat.Bvin));
 
                 if (selectedCategories.Contains(cat.Bvin))
                 {

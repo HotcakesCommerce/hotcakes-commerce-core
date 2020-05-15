@@ -82,7 +82,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadDatePicker radDateStart;
+        protected global::System.Web.UI.WebControls.TextBox radDateStart;
         
         /// <summary>
         /// valDateStartRequired control.
@@ -100,7 +100,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadDatePicker radDateEnd;
+        protected global::System.Web.UI.WebControls.TextBox radDateEnd;
         
         /// <summary>
         /// valDateEndRequired control.
@@ -136,7 +136,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox lstNewQualification;
+        protected global::System.Web.UI.WebControls.DropDownList lstNewQualification;
         
         /// <summary>
         /// btnNewQualification control.
@@ -217,7 +217,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox lstNewAction;
+        protected global::System.Web.UI.WebControls.DropDownList lstNewAction;
         
         /// <summary>
         /// btnNewAction control.

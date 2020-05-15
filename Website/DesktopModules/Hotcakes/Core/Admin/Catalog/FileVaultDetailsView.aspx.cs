@@ -26,6 +26,8 @@
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Hotcakes.Commerce;
+using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Modules.Core.Admin.Controls;
@@ -34,6 +36,14 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 {
     partial class FileVaultDetailsView : BaseAdminPage
     {
+        protected override void OnPreInit(EventArgs e)
+        {
+            base.OnPreInit(e);
+            PageTitle = Localization.GetString("PageTitle");
+            CurrentTab = AdminTabType.Catalog;
+            ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
+        }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -47,17 +57,16 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 {
                     ViewState["id"] = Request.QueryString["id"];
                 }
+                LocalizeView();
                 BindProductsGrid();
                 PopulateFileInfo();
             }
         }
 
-        protected override void OnPreInit(EventArgs e)
+        private void LocalizeView()
         {
-            base.OnPreInit(e);
-            PageTitle = "File Vault Edit";
-            CurrentTab = AdminTabType.Catalog;
-            ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
+            var localization = Factory.Instance.CreateLocalizationHelper(LocalResourceFile);
+            LocalizationUtils.LocalizeGridView(ProductsGridView, localization);
         }
 
         protected void BindProductsGrid()
@@ -69,7 +78,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         protected void PopulateFileInfo()
         {
             var file = HccApp.CatalogServices.ProductFiles.Find((string) ViewState["id"]);
-            NameLabel.Text = file.FileName;
+            lblFileName.Text = file.FileName;
             DescriptionTextBox.Text = file.ShortDescription;
         }
 
@@ -81,7 +90,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             BindProductsGrid();
         }
 
-        protected void btnBrowseProducts_Click(object sender, ImageClickEventArgs e)
+        protected void btnBrowseProducts_Click(object sender, EventArgs e)
         {
             pnlProductPicker.Visible = !pnlProductPicker.Visible;
             if (NewSkuField.Text.Trim().Length > 0)
@@ -99,7 +108,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             MessageBox1.ClearMessage();
             if (NewSkuField.Text.Trim().Length < 1)
             {
-                MessageBox1.ShowWarning("Please enter a sku first.");
+                MessageBox1.ShowWarning(Localization.GetString("NoSkuError"));
             }
             else
             {
@@ -108,7 +117,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 {
                     if (p.Sku == string.Empty)
                     {
-                        MessageBox1.ShowWarning("That product could not be located. Please check SKU.");
+                        MessageBox1.ShowWarning(Localization.GetString("InnvalidSku"));
                     }
                     else
                     {
@@ -117,31 +126,32 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                         {
                             if (HccApp.CatalogServices.ProductFiles.AddAssociatedProduct(file.Bvin, p.Bvin, 0, 0))
                             {
-                                MessageBox1.ShowOk("Product Added!");
+                                MessageBox1.ShowOk(Localization.GetString("ProductAddSuccess"));
                             }
                             else
                             {
-                                MessageBox1.ShowError("Product was not added correctly. Unknown Error");
+                                MessageBox1.ShowError(Localization.GetString("ProductAddFailure"));
                             }
                         }
                     }
                 }
             }
+
             BindProductsGrid();
         }
 
-        protected void btnAddProductBySku_Click(object sender, ImageClickEventArgs e)
+        protected void btnAddProductBySku_Click(object sender, EventArgs e)
         {
             AddProductBySku();
         }
 
-        protected void btnProductPickerCancel_Click(object sender, ImageClickEventArgs e)
+        protected void btnProductPickerCancel_Click(object sender, EventArgs e)
         {
             MessageBox1.ClearMessage();
             pnlProductPicker.Visible = false;
         }
 
-        protected void btnProductPickerOkay_Click(object sender, ImageClickEventArgs e)
+        protected void btnProductPickerOkay_Click(object sender, EventArgs e)
         {
             MessageBox1.ClearMessage();
             if (ProductPicker1.SelectedProducts.Count > 0)
@@ -156,7 +166,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             }
             else
             {
-                MessageBox1.ShowWarning("Please select a product first.");
+                MessageBox1.ShowWarning(Localization.GetString("NoProductSelected"));
             }
         }
 
@@ -191,11 +201,11 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
                 if (HccApp.CatalogServices.ProductFiles.Update(file))
                 {
-                    MessageBox1.ShowOk("File was successfully updated!");
+                    MessageBox1.ShowOk(Localization.GetString("FileUpdateSuccess"));
                 }
                 else
                 {
-                    MessageBox1.ShowError("File update failed. Unknown error.");
+                    MessageBox1.ShowError(Localization.GetString("FileUpdateFailure"));
                 }
                 BindProductsGrid();
             }
@@ -230,7 +240,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             }
         }
 
-        protected void SaveImageButton_Click(object sender, ImageClickEventArgs e)
+        protected void SaveImageButton_Click(object sender, EventArgs e)
         {
             var file = HccApp.CatalogServices.ProductFiles.Find((string) ViewState["id"]);
             if (file != null)
@@ -238,27 +248,27 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 file.ShortDescription = DescriptionTextBox.Text;
                 if (HccApp.CatalogServices.ProductFiles.Update(file))
                 {
-                    MessageBox1.ShowOk("File updated!");
+                    MessageBox1.ShowOk(Localization.GetString("FileUpdateSuccess"));
                 }
                 else
                 {
-                    MessageBox1.ShowError("An error occurred while trying to update the file");
+                    MessageBox1.ShowError(Localization.GetString("FileUpdateFailure"));
                 }
             }
         }
 
-        protected void CancelImageButton_Click(object sender, ImageClickEventArgs e)
+        protected void CancelImageButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/DesktopModules/Hotcakes/Core/Admin/Catalog/FileVault.aspx");
         }
 
-        protected void FileReplaceCancelImageButton_Click(object sender, ImageClickEventArgs e)
+        protected void FileReplaceCancelImageButton_Click(object sender, EventArgs e)
         {
             FilePicker1.Clear();
             ReplacePanel.Visible = false;
         }
 
-        protected void FileReplaceSaveImageButton_Click(object sender, ImageClickEventArgs e)
+        protected void FileReplaceSaveImageButton_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
             {
@@ -271,17 +281,17 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 }
                 else
                 {
-                    MessageBox1.ShowError("An error occurred while trying to save the file.");
+                    MessageBox1.ShowError(Localization.GetString("FileUpdateFailure"));
                 }
             }
         }
 
-        protected void ReplaceImageButton_Click(object sender, ImageClickEventArgs e)
+        protected void ReplaceImageButton_Click(object sender, EventArgs e)
         {
             ReplacePanel.Visible = true;
         }
 
-        protected void btnCloseVariants_Click(object sender, ImageClickEventArgs e)
+        protected void btnCloseVariants_Click(object sender, EventArgs e)
         {
             MessageBox1.ClearMessage();
             pnlProductChoices.Visible = false;

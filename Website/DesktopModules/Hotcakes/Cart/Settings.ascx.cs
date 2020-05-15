@@ -27,7 +27,7 @@ using System;
 using DotNetNuke.Entities.Modules;
 using Hotcakes.Commerce.Dnn.Utils;
 using Hotcakes.Commerce.Dnn.Web;
-using Telerik.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Hotcakes.Modules.Cart
 {
@@ -40,7 +40,7 @@ namespace Hotcakes.Modules.Cart
         /// </summary>
         private void FillForm()
         {
-            ViewComboBox.Items.Add(new RadComboBoxItem(LocalizeString("NoneSelectedText"), string.Empty));
+            ViewComboBox.Items.Add(new ListItem(LocalizeString("NoneSelectedText"), string.Empty));
             ViewComboBox.AppendDataBoundItems = true;
             ViewComboBox.DataSource = DnnPathHelper.GetViewNames("Cart");
             ViewComboBox.DataBind();

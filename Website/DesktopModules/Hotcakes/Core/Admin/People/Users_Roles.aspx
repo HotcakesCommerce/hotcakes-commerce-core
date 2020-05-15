@@ -50,6 +50,9 @@
                             <ControlStyle CssClass="hcIconDelete" />
                         </asp:CommandField>
                     </Columns>
+                    <EmptyDataTemplate>
+                        <div class="hcFormWarning"><%=Localization.GetString("NoRoles") %></div>
+                    </EmptyDataTemplate>
                 </asp:GridView>
             </div>
 

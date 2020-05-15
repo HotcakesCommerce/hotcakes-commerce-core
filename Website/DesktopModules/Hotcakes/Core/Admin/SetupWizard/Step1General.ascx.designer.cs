@@ -55,7 +55,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlCountries;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCountries;
         
         /// <summary>
         /// txtFirstName control.
@@ -64,7 +64,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtFirstName;
+        protected global::System.Web.UI.WebControls.TextBox txtFirstName;
         
         /// <summary>
         /// txtLastName control.
@@ -73,7 +73,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtLastName;
+        protected global::System.Web.UI.WebControls.TextBox txtLastName;
         
         /// <summary>
         /// txtCompany control.
@@ -82,7 +82,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtCompany;
+        protected global::System.Web.UI.WebControls.TextBox txtCompany;
         
         /// <summary>
         /// txtAddressLine1 control.
@@ -91,7 +91,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtAddressLine1;
+        protected global::System.Web.UI.WebControls.TextBox txtAddressLine1;
         
         /// <summary>
         /// rfvAddress1 control.
@@ -109,7 +109,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtAddressLine2;
+        protected global::System.Web.UI.WebControls.TextBox txtAddressLine2;
         
         /// <summary>
         /// txtCity control.
@@ -118,7 +118,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtCity;
+        protected global::System.Web.UI.WebControls.TextBox txtCity;
         
         /// <summary>
         /// rfvCity control.
@@ -136,7 +136,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlRegions;
+        protected global::System.Web.UI.WebControls.DropDownList ddlRegions;
         
         /// <summary>
         /// txtRegion control.
@@ -145,7 +145,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtRegion;
+        protected global::System.Web.UI.WebControls.TextBox txtRegion;
         
         /// <summary>
         /// valRegion control.
@@ -163,7 +163,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtZip;
+        protected global::System.Web.UI.WebControls.TextBox txtZip;
         
         /// <summary>
         /// rfvZip control.
@@ -181,7 +181,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtPhone;
+        protected global::System.Web.UI.WebControls.TextBox txtPhone;
         
         /// <summary>
         /// ucMessageBox control.
@@ -199,7 +199,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlTimeZone;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTimeZone;
         
         /// <summary>
         /// ddlCurrencyCulture control.
@@ -208,7 +208,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlCurrencyCulture;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCurrencyCulture;
         
         /// <summary>
         /// ddlCategoryTab control.
@@ -217,7 +217,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlCategoryTab;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCategoryTab;
         
         /// <summary>
         /// divCategoryUrl control.
@@ -235,7 +235,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtCategoryUrl;
+        protected global::System.Web.UI.WebControls.TextBox txtCategoryUrl;
         
         /// <summary>
         /// rfvCategoryUrl control.
@@ -262,7 +262,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlProductsTab;
+        protected global::System.Web.UI.WebControls.DropDownList ddlProductsTab;
         
         /// <summary>
         /// divProductsUrl control.
@@ -280,7 +280,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtProductsUrl;
+        protected global::System.Web.UI.WebControls.TextBox txtProductsUrl;
         
         /// <summary>
         /// rfvProductsUrl control.
@@ -307,7 +307,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlCheckoutTab;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCheckoutTab;
         
         /// <summary>
         /// divCheckoutUrl control.
@@ -325,7 +325,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtCheckoutUrl;
+        protected global::System.Web.UI.WebControls.TextBox txtCheckoutUrl;
         
         /// <summary>
         /// rfvCheckoutUrl control.

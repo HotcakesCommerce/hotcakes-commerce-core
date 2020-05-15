@@ -25,11 +25,12 @@
 
 using System;
 using System.Web.UI;
+using System.Web.UI.WebControls;
+using Hotcakes.Commerce;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Modules.Core.Admin.AppCode;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
@@ -62,18 +63,24 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         {
             base.OnInit(e);
             _repository = HccApp.CatalogServices.MembershipTypes;
-            PageTitle = "Membership Product Types";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Catalog;
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
 
-            rgProductTypes.NeedDataSource += rgProductTypes_NeedDataSource;
-            rgProductTypes.DeleteCommand += rgProductTypes_DeleteCommand;
-            rgProductTypes.EditCommand += rgProductTypes_EditCommand;
             btnCreate.Click += btnCreate_Click;
             ucMembershipTypeEdit.SaveData += ucMembershipTypeEdit_SaveData;
             ucMembershipTypeEdit.CancelButton.Click += CancelButton_Click;
+        }
 
-            LocalizationUtils.LocalizeRadGrid(rgProductTypes, Localization);
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            if (!Page.IsPostBack)
+            {
+                LocalizeView();
+                BindGrid();
+            }
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
@@ -85,33 +92,47 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            rgProductTypes.EditIndexes.Clear();
-            rgProductTypes.Rebind();
+            BindGrid();
             ShowEditor(false);
         }
 
-        private void rgProductTypes_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
+        private void LocalizeView()
         {
-            rgProductTypes.DataSource = _repository.GetList(HccApp.CurrentStore.Id);
+            var localization = Factory.Instance.CreateLocalizationHelper(LocalResourceFile);
+            LocalizationUtils.LocalizeGridView(rgProductTypes, localization);
         }
 
-        private void rgProductTypes_EditCommand(object sender, GridCommandEventArgs e)
+        private void BindGrid()
         {
-            e.Canceled = true;
-            e.Item.Edit = false;
-            e.Item.Selected = false;
+            var items = _repository.GetList(HccApp.CurrentStore.Id);
+            if (items != null && items.Count > 0)
+            {
+                rgProductTypes.DataSource = items;
+                rgProductTypes.DataBind();
+            }
+            else
+            {
+                msg.ShowWarning(Localization.GetString("NoProductTypes"));
+            }
+        }
 
-            var productTypeId = (string) (e.Item as GridDataItem).GetDataKeyValue("ProductTypeId");
+        protected void rgProductTypes_OnRowEditing(object sender, GridViewEditEventArgs e)
+        {
+            e.Cancel = true;
+
+            var productTypeId = (string) rgProductTypes.DataKeys[e.NewEditIndex]["ProductTypeId"];
+
             ucMembershipTypeEdit.Model = _repository.Find(productTypeId);
             ucMembershipTypeEdit.DataBind();
+
             ShowEditor(true);
         }
 
-        private void rgProductTypes_DeleteCommand(object sender, GridCommandEventArgs e)
+        protected void rgProductTypes_OnRowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            var productTypeId = (string) (e.Item as GridDataItem).GetDataKeyValue("ProductTypeId");
+            var productTypeId = (string)rgProductTypes.DataKeys[e.RowIndex]["ProductTypeId"];
             _repository.Delete(productTypeId);
-            rgProductTypes.Rebind();
+            BindGrid();
             ShowEditor(false);
         }
 
@@ -128,8 +149,8 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 _repository.Update(model);
             }
 
-            rgProductTypes.EditIndexes.Clear();
-            rgProductTypes.Rebind();
+            BindGrid();
+
             ShowEditor(false);
         }
 

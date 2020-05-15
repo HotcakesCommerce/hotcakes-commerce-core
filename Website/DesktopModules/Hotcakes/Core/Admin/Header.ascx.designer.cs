@@ -13,15 +13,6 @@ namespace Hotcakes.Modules.Core.Admin {
     public partial class Header {
         
         /// <summary>
-        /// AdminControlBar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UserControl AdminControlBar;
-        
-        /// <summary>
         /// ucLanguages control.
         /// </summary>
         /// <remarks>

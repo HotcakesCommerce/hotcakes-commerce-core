@@ -37,7 +37,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            PageTitle = "Shared Product Choices";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Catalog;
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
         }
@@ -60,17 +60,28 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
         private void RenderItems(List<Option> items)
         {
-            var sb = new StringBuilder();
-
-            var isAlternate = false;
-            sb.Append("<table border=\"0\" class=\"formtable hcGrid\">");
-            foreach (var opt in items)
+            if (items != null && items.Count > 0)
             {
-                RenderSingleItem(sb, opt, isAlternate);
-                isAlternate = !isAlternate;
+                var sb = new StringBuilder();
+
+                var isAlternate = false;
+
+                sb.Append("<table border=\"0\" class=\"formtable hcGrid\">");
+                foreach (var opt in items)
+                {
+                    RenderSingleItem(sb, opt, isAlternate);
+                    isAlternate = !isAlternate;
+                }
+
+                sb.Append("</table>");
+
+                litResults.Text = sb.ToString();
             }
-            sb.Append("</table>");
-            litResults.Text = sb.ToString();
+            else
+            {
+                MessageBox1.ClearMessage();
+                MessageBox1.ShowWarning(Localization.GetString("NoChoices"));
+            }
         }
 
         private void RenderSingleItem(StringBuilder sb, Option o, bool isAlternate)
@@ -150,7 +161,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             }
             else
             {
-                MessageBox1.ShowError("Unable to create choice. An Administrator has been alerted to the issue.");
+                MessageBox1.ShowError(Localization.GetString("CreateError"));
             }
         }
     }

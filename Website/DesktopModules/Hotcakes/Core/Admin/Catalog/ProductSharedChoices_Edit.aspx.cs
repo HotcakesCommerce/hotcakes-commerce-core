@@ -27,12 +27,21 @@ using System;
 using System.Web.UI;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Catalog.Options;
+using Hotcakes.Commerce.Membership;
 using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
     partial class ProductSharedChoices_Edit : BaseAdminPage
     {
+        protected override void OnPreInit(EventArgs e)
+        {
+            base.OnPreInit(e);
+            PageTitle = Localization.GetString("PageTitle");
+            CurrentTab = AdminTabType.Catalog;
+            ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
+        }
+
         private string ChoiceId
         {
             get { return Request.QueryString["id"]; }
@@ -94,7 +103,24 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             }
         }
 
-        protected void btnSaveOption_Click(object sender, ImageClickEventArgs e)
+        protected void btnSaveOption_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                SaveOption();
+            }
+        }
+
+        protected void btnSaveAndCloseOption_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                SaveOption();
+                Response.Redirect("ProductSharedChoices.aspx");
+            }
+        }
+
+        private void SaveOption()
         {
             Choice.Name = txtName.Text;
             Choice.NameIsHidden = chkHideName.Checked;
@@ -107,7 +133,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 case OptionTypes.DropDownList:
                     break;
                 case OptionTypes.FileUpload:
-                    var fu = (Commerce.Catalog.Options.FileUpload) Choice.Processor;
+                    var fu = (Commerce.Catalog.Options.FileUpload)Choice.Processor;
                     fu.SetMultipleFiles(Choice, MultipleFilesField.Checked);
                     break;
                 case OptionTypes.Html:
@@ -116,7 +142,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 case OptionTypes.RadioButtonList:
                     break;
                 case OptionTypes.TextInput:
-                    var ti = (TextInput) Choice.Processor;
+                    var ti = (TextInput)Choice.Processor;
                     ti.SetColumns(Choice, ColumnsField.Text);
                     ti.SetRows(Choice, RowsField.Text);
                     ti.SetMaxLength(Choice, MaxLengthField.Text);
@@ -127,7 +153,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             if (success)
             {
                 HccApp.CatalogServices.VariantsValidateForSharedOption(Choice);
-                MessageBox1.ShowOk("Changes Saved!");
+                MessageBox1.ShowOk(Localization.GetString("SaveSuccess"));
             }
 
             ItemsEditor.LoadItems();

@@ -34,7 +34,7 @@ namespace Hotcakes.Modules.Core.Admin.Content
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            PageTitle = "Edit Content Column";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Content;
             ValidateCurrentUserHasPermission(SystemPermissions.ContentView);
         }
@@ -77,11 +77,11 @@ namespace Hotcakes.Modules.Core.Admin.Content
                 {
                     HccApp.ContentServices.Columns.CopyBlockToColumn(b.Bvin, destinationColumnId);
                 }
-                msg.ShowOk("Column Copied");
+                msg.ShowOk(Localization.GetString("CopySuccess"));
             }
             else
             {
-                msg.ShowError("Copy failed. Unknown Error.");
+                msg.ShowError(Localization.GetString("CopyFailure"));
             }
             ContentColumnEditor.LoadColumn();
         }
@@ -90,15 +90,15 @@ namespace Hotcakes.Modules.Core.Admin.Content
         {
             msg.ClearMessage();
 
-            if (CloneNameField.Text.Trim().Length < 1)
+            if (string.IsNullOrEmpty(CloneNameField.Text.Trim()))
             {
-                msg.ShowWarning("Please enter a name first.");
+                msg.ShowWarning(Localization.GetString("CloneNameEmpty"));
             }
             else
             {
                 var clone = HccApp.ContentServices.Columns.Clone(ContentColumnEditor.ColumnId,
                     CloneNameField.Text.Trim());
-                msg.ShowOk("Column Copied");
+                msg.ShowOk(Localization.GetString("CopySuccess"));
             }
             ContentColumnEditor.LoadColumn();
         }

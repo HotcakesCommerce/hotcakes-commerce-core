@@ -1,7 +1,6 @@
 ﻿<%@ Page ValidateRequest="false" Title="Edit Product Tab" Language="C#" MasterPageFile="../AdminNav.master" AutoEventWireup="True" Inherits="Hotcakes.Modules.Core.Admin.Catalog.ProductsEdit_TabsEdit" Codebehind="ProductsEdit_TabsEdit.aspx.cs" %>
 <%@ Register src="../Controls/ProductEditMenu.ascx" tagname="ProductEditMenu" tagprefix="uc5" %>
 <%@ Register src="../Controls/ProductEditingDisplay.ascx" tagname="ProductEditing" tagprefix="uc5" %>
-<%@ Register src="../Controls/OptionItemEditor.ascx" tagname="OptionItemEditor" tagprefix="uc3" %>
 <%@ Register Src="../Controls/HtmlEditor.ascx" TagName="HtmlEditor" TagPrefix="uc1" %>
 <%@ Register Src="../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="uc2" %>
 <asp:Content ID="nav" ContentPlaceHolderID="NavContent" runat="server">

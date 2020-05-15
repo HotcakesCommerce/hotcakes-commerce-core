@@ -176,7 +176,11 @@
                 modal: false,
                 autoOpen: options.autoOpen,
                 closeOnEscape: true,
-                position: "center",
+                position: {
+                    my: "center",
+                    at: "center",
+                    of: window
+                },
                 dialogClass: options.dialogClass,
                 open: function (event, ui) {
                     $(".ui-widget-overlay").remove();

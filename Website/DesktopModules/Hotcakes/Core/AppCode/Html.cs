@@ -31,25 +31,29 @@ namespace Hotcakes.Modules.Core.AppCode
     [Serializable]
     public static class Html
     {
+        private const string JQUERYFORMAT = "<script src=\"{0}jquery-3.5.1.min.js\" type=\"text/javascript\"></script>";
+        private const string JQUERYMIGRATEFORMAT = "<script src=\"{0}jquery-migrate-3.3.0.min.js\" type=\"text/javascript\"></script>";
+        private const string JQUERYUIFORMAT = "<script src=\"{0}jquery-ui-1.12.1/js/jquery-ui.min.js\" type=\"text/javascript\"></script>";
+        private const string FOOTERFORMAT = "<div id=\"footer\"><div id=\"copyright\">&copy; Copyright 2013-2018 Hotcakes Commerce, LLC<br />&copy; Copyright 2019-{0} Upendo Ventures, LLC </div></div>";
+        private const string SLASH = "/";
+
         public static string JQueryIncludes(string baseScriptFolder, bool IsSecure)
         {
             var sb = new StringBuilder();
-            if (!baseScriptFolder.EndsWith("/"))
+            if (!baseScriptFolder.EndsWith(SLASH))
             {
-                baseScriptFolder += "/";
+                baseScriptFolder = string.Concat(baseScriptFolder, SLASH);
             }
 
-            // Local JQuery
-            sb.AppendLine("<script src='" + baseScriptFolder + "jquery-1.5.1.min.js' type=\"text/javascript\"></script>");
-            sb.AppendLine("<script src='" + baseScriptFolder +
-                          "jquery-ui-1.8.7.custom/js/jquery-ui-1.8.7.custom.min.js' type=\"text/javascript\"></script>");
+            sb.AppendLine(string.Format(JQUERYFORMAT, baseScriptFolder));
+            sb.AppendLine(string.Format(JQUERYMIGRATEFORMAT, baseScriptFolder));
+            sb.AppendLine(string.Format(JQUERYUIFORMAT, baseScriptFolder));
             return sb.ToString();
         }
 
         public static string AdminFooter()
         {
-            return "<div id=\"footer\"><div id=\"copyright\">&copy; Copyright 2013-" + DateTime.UtcNow.Year +
-                   " Hotcakes Commerce, LLC</div></div>";
+            return string.Format(FOOTERFORMAT, DateTime.UtcNow.Year);
         }
     }
 }

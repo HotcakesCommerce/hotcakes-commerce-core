@@ -33,7 +33,6 @@ using Hotcakes.Commerce.Dnn.Utils;
 using Hotcakes.Commerce.Dnn.Web;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Modules.Core.Settings;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.CategoryViewer
 {
@@ -65,10 +64,10 @@ namespace Hotcakes.Modules.CategoryViewer
                     CategoryContentLabel.Text = categoryText;
 
                     // check to see if there is a category in the DDL that matches the settings
-                    if (CategoryComboBox.Items.FindItemByText(categoryText) != null)
+                    if (CategoryComboBox.Items.FindByText(categoryText) != null)
                     {
                         // select the saved category if it exists
-                        CategoryComboBox.Items.FindItemByText(categoryText).Selected = true;
+                        CategoryComboBox.Items.FindByText(categoryText).Selected = true;
                     }
                     else
                     {
@@ -131,7 +130,7 @@ namespace Hotcakes.Modules.CategoryViewer
         /// </summary>
         private void FillForm()
         {
-            ViewComboBox.Items.Add(new RadComboBoxItem(LocalizeString("NoneSelectedText"), string.Empty));
+            ViewComboBox.Items.Add(new ListItem(LocalizeString("NoneSelectedText"), string.Empty));
             ViewComboBox.AppendDataBoundItems = true;
             ViewComboBox.DataSource = DnnPathHelper.GetViewNames("Category");
             ViewComboBox.DataBind();
@@ -139,7 +138,7 @@ namespace Hotcakes.Modules.CategoryViewer
             var allCats = HccApp.CatalogServices.Categories.FindAllSnapshotsPaged(1, 5000);
             var categories = CategoriesHelper.ListFullTreeWithIndentsForComboBox(allCats, false);
 
-            CategoryComboBox.Items.Add(new RadComboBoxItem(LocalizeString("NoneSelectedText"), string.Empty));
+            CategoryComboBox.Items.Add(new ListItem(LocalizeString("NoneSelectedText"), string.Empty));
             CategoryComboBox.AppendDataBoundItems = true;
             CategoryComboBox.DataSource = categories;
             CategoryComboBox.DataTextField = "Text";
@@ -174,7 +173,7 @@ namespace Hotcakes.Modules.CategoryViewer
             }
         }
 
-        private void FillComboBox(RadComboBox comboBox, object dataSource, string textField, string valueField,
+        private void FillComboBox(DropDownList comboBox, object dataSource, string textField, string valueField,
             string selectedValue)
         {
             comboBox.Items.Clear();
@@ -182,9 +181,9 @@ namespace Hotcakes.Modules.CategoryViewer
             comboBox.DataTextField = textField;
             comboBox.DataValueField = valueField;
             comboBox.DataBind();
-            comboBox.Items.Insert(0, new RadComboBoxItem());
-            var selectedItem = comboBox.Items.FindItemByValue(selectedValue) ??
-                               comboBox.Items.FindItemByText(selectedValue);
+            comboBox.Items.Insert(0, new ListItem());
+            var selectedItem = comboBox.Items.FindByValue(selectedValue) ??
+                               comboBox.Items.FindByText(selectedValue);
             if (selectedItem != null)
                 selectedItem.Selected = true;
         }

@@ -7,8 +7,7 @@
             </td>
         </tr>
         <tr>
-            <td class="hcLabel">
-                Card Number</td>
+            <td class="hcLabel"><%=Localization.GetString("lblCardNumber") %></td>
             <td class="formfield">
                 <span class="creditcardnumber">
                     <asp:TextBox ID="cccardnumber" ClientIDMode="Static" runat="server" Columns="20" MaxLength="20" />
@@ -16,9 +15,7 @@
             </td>
         </tr>
         <tr>
-            <td class="hcLabel">
-                Exp. Date
-            </td>
+            <td class="hcLabel"><%=Localization.GetString("lblExpDate") %></td>
             <td class="formfield">
                 <asp:DropDownList ID="ccexpmonth" ClientIDMode="Static" runat="server" />
                 &nbsp;/&nbsp;
@@ -26,16 +23,13 @@
             </td>
         </tr>
         <tr id="securityCodeRow" runat="server" visible="false">
-            <td class="hcLabel">
-                Security Code
-            </td>
+            <td class="hcLabel"><%=Localization.GetString("lblSecurityCode") %></td>
             <td class="formfield">
                 <asp:TextBox ID="ccsecuritycode" ClientIDMode="Static" runat="server" Columns="5" MaxLength="4" />
             </td>
         </tr>
         <tr>
-            <td class="hcLabel">
-                Name On Card</td>
+            <td class="hcLabel"><%=Localization.GetString("lblNameOnCard") %></td>
             <td class="formfield">
                 <asp:TextBox ID="cccardholder" ClientIDMode="Static" runat="server" Columns="20" />
             </td>

@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using Hotcakes.Commerce;
@@ -37,7 +38,6 @@ using Hotcakes.Commerce.Dnn.Utils;
 using Hotcakes.Commerce.Storage;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Web;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.SetupWizard
 {
@@ -81,12 +81,12 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
             }
         }
 
-        protected void ddlCountries_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        protected void ddlCountries_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateRegions(ddlCountries.SelectedValue);
         }
 
-        protected void ddlCurrencyCulture_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        protected void ddlCurrencyCulture_SelectedIndexChanged(object sender, EventArgs e)
         {
             var currCultureCode = HccApp.CurrentStore.Settings.CurrencyCultureCode;
             var currCultureInfo = CultureInfo.GetCultureInfo(currCultureCode);
@@ -133,9 +133,9 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
         {
             PopulateCountries();
             ddlCountries.ClearSelection();
-            if (ddlCountries.Items.FindItemByValue(WebAppSettings.ApplicationCountryBvin) != null)
+            if (ddlCountries.Items.FindByValue(WebAppSettings.ApplicationCountryBvin) != null)
             {
-                ddlCountries.Items.FindItemByValue(WebAppSettings.ApplicationCountryBvin).Selected = true;
+                ddlCountries.Items.FindByValue(WebAppSettings.ApplicationCountryBvin).Selected = true;
                 PopulateRegions(WebAppSettings.ApplicationCountryBvin);
             }
             else
@@ -169,7 +169,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
             ddlRegions.DataValueField = "Abbreviation";
             ddlRegions.DataBind();
 
-            var li = new RadComboBoxItem(Localization.GetString("SelectState"), string.Empty);
+            var li = new ListItem(Localization.GetString("SelectState"), string.Empty);
 
             valRegion.Enabled = ddlRegions.Items.Count > 1;
         }
@@ -287,7 +287,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
             FillLocationForm();
         }
 
-        private void PopulateTabs(RadComboBox ddlTabs, List<TabInfo> list, int defaultValue)
+        private void PopulateTabs(DropDownList ddlTabs, List<TabInfo> list, int defaultValue)
         {
             ddlTabs.DataSource = list;
             ddlTabs.DataTextField = "IndentedTabName";
@@ -295,7 +295,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
             ddlTabs.DataBind();
             ddlTabs.SelectedValue = defaultValue.ToString();
 
-            var li = new RadComboBoxItem
+            var li = new ListItem
             {
                 Value = Convert.ToString(-1),
                 Text = Localization.GetString("CreateNewPage")
@@ -324,13 +324,13 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
         private void FillLocationForm()
         {
             var timeZone = HccApp.CurrentStore.Settings.TimeZone;
-            var timeZoneItem = ddlTimeZone.Items.FindItemByValue(timeZone.Id);
+            var timeZoneItem = ddlTimeZone.Items.FindByValue(timeZone.Id);
 
             if (timeZoneItem != null)
                 timeZoneItem.Selected = true;
 
             var currencyCode = HccApp.CurrentStore.Settings.CurrencyCultureCode;
-            var currencyCodeItem = ddlCurrencyCulture.Items.FindItemByValue(currencyCode);
+            var currencyCodeItem = ddlCurrencyCulture.Items.FindByValue(currencyCode);
 
             if (currencyCodeItem != null)
                 currencyCodeItem.Selected = true;
@@ -338,20 +338,20 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
 
         private void LocalizeView()
         {
-            txtFirstName.EmptyMessage = Localization.GetString("txtFirstName.EmptyMessage");
-            txtLastName.EmptyMessage = Localization.GetString("txtLastName.EmptyMessage");
-            txtCompany.EmptyMessage = Localization.GetString("txtCompany.EmptyMessage");
-            txtAddressLine1.EmptyMessage = Localization.GetString("txtAddressLine1.EmptyMessage");
+            txtFirstName.Attributes["placeholder"] = Localization.GetString("txtFirstName.EmptyMessage");
+            txtLastName.Attributes["placeholder"] = Localization.GetString("txtLastName.EmptyMessage");
+            txtCompany.Attributes["placeholder"] = Localization.GetString("txtCompany.EmptyMessage");
+            txtAddressLine1.Attributes["placeholder"] = Localization.GetString("txtAddressLine1.EmptyMessage");
             rfvAddress1.ErrorMessage = Localization.GetString("rfvAddress1.ErrorMessage");
-            txtAddressLine2.EmptyMessage = Localization.GetString("txtAddressLine2.EmptyMessage");
-            txtCity.EmptyMessage = Localization.GetString("txtCity.EmptyMessage");
+            txtAddressLine2.Attributes["placeholder"] = Localization.GetString("txtAddressLine2.EmptyMessage");
+            txtCity.Attributes["placeholder"] = Localization.GetString("txtCity.EmptyMessage");
             rfvCity.ErrorMessage = Localization.GetString("rfvCity.ErrorMessage");
-            txtRegion.EmptyMessage = Localization.GetString("txtRegion.EmptyMessage");
+            txtRegion.Attributes["placeholder"] = Localization.GetString("txtRegion.EmptyMessage");
             valRegion.ErrorMessage = Localization.GetString("valRegion.ErrorMessage");
             valRegion.ValueToCompare = Localization.GetString("SelectState");
-            txtZip.EmptyMessage = Localization.GetString("txtZip.EmptyMessage");
+            txtZip.Attributes["placeholder"] = Localization.GetString("txtZip.EmptyMessage");
             rfvZip.ErrorMessage = Localization.GetString("rfvZip.ErrorMessage");
-            txtPhone.EmptyMessage = Localization.GetString("txtPhone.EmptyMessage");
+            txtPhone.Attributes["placeholder"] = Localization.GetString("txtPhone.EmptyMessage");
             rfvCategoryUrl.ErrorMessage = Localization.GetString("rfvCategoryUrl.ErrorMessage");
             rfvProductsUrl.ErrorMessage = Localization.GetString("rfvProductsUrl.ErrorMessage");
             rfvCheckoutUrl.ErrorMessage = Localization.GetString("rfvCheckoutUrl.ErrorMessage");

@@ -29,7 +29,6 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Web.UI.WebControls;
 using Hotcakes.Commerce.Catalog;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
@@ -96,15 +95,15 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
         }
 
 
-        public static Collection<RadComboBoxItem> ListFullTreeWithIndentsForComboBox(List<CategorySnapshot> allCats,
+        public static Collection<ListItem> ListFullTreeWithIndentsForComboBox(List<CategorySnapshot> allCats,
             bool showHidden)
         {
-            var result = new Collection<RadComboBoxItem>();
+            var result = new Collection<ListItem>();
             AddIndentedChildrenForComboBox(ref result, string.Empty, 0, ref allCats, showHidden);
             return result;
         }
 
-        private static void AddIndentedChildrenForComboBox(ref Collection<RadComboBoxItem> result, string parentId,
+        private static void AddIndentedChildrenForComboBox(ref Collection<ListItem> result, string parentId,
             int currentDepth, ref List<CategorySnapshot> allCats, bool showHidden)
         {
             var children = Category.FindChildrenInList(allCats, parentId, showHidden);
@@ -119,7 +118,7 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
                         spacer.Append("...");
                     }
 
-                    var li = new RadComboBoxItem();
+                    var li = new ListItem();
                     li.Value = c.RewriteUrl;
 
                     if (showHidden && c.Hidden)

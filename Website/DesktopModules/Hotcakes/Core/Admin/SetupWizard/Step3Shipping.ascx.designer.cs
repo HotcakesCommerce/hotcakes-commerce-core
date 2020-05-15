@@ -28,7 +28,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlProviders;
+        protected global::System.Web.UI.WebControls.DropDownList ddlProviders;
         
         /// <summary>
         /// btnNewMethod control.
@@ -46,7 +46,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid gridMethods;
+        protected global::System.Web.UI.WebControls.GridView gridMethods;
         
         /// <summary>
         /// upnlZonesGrid control.
@@ -64,7 +64,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtShippingZoneName;
+        protected global::System.Web.UI.WebControls.TextBox txtShippingZoneName;
         
         /// <summary>
         /// rfvShippingZoneName control.
@@ -91,7 +91,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid gridZones;
+        protected global::System.Web.UI.WebControls.GridView gridZones;
         
         /// <summary>
         /// txtHandlingFeeAmount control.
@@ -100,7 +100,7 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtHandlingFeeAmount;
+        protected global::System.Web.UI.WebControls.TextBox txtHandlingFeeAmount;
         
         /// <summary>
         /// HandlingFeeAmountCustomValidator control.

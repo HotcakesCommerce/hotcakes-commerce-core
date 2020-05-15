@@ -1,5 +1,4 @@
 ﻿<%@ Page ValidateRequest="false" Title="" Language="C#" MasterPageFile="../AdminNav.master" AutoEventWireup="True" Inherits="Hotcakes.Modules.Core.Admin.Catalog.ProductChoices_Edit" CodeBehind="ProductChoices_Edit.aspx.cs" %>
-
 <%@ Register Src="../Controls/ProductEditMenu.ascx" TagName="ProductEditMenu" TagPrefix="hcc" %>
 <%@ Register Src="../Controls/ProductEditingDisplay.ascx" TagName="ProductEditing" TagPrefix="hcc" %>
 <%@ Register Src="../Controls/OptionItemEditor.ascx" TagName="OptionItemEditor" TagPrefix="hcc" %>

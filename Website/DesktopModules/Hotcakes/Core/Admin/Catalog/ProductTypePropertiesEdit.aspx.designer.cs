@@ -127,7 +127,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadDatePicker radDefaultDate;
+        protected global::System.Web.UI.WebControls.TextBox radDefaultDate;
         
         /// <summary>
         /// vText control.
@@ -190,7 +190,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid rgChoices;
+        protected global::System.Web.UI.WebControls.GridView rgChoices;
         
         /// <summary>
         /// pnlEditChoice control.

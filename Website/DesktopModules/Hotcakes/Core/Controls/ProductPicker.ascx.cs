@@ -32,7 +32,6 @@ using DotNetNuke.Services.Localization;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Modules.Core.Admin.AppCode;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Controls
 {
@@ -112,13 +111,13 @@ namespace Hotcakes.Modules.Core.Controls
             {
                 var result = new StringCollection();
 
-                for (var i = 0; i <= rgProducts.Items.Count - 1; i++)
+                for (var i = 0; i <= rgProducts.Rows.Count - 1; i++)
                 {
-                    var item = rgProducts.Items[i];
+                    var item = rgProducts.Rows[i];
                     var chkSelected = (CheckBox) item.Cells[0].FindControl("chkSelected");
                     if (chkSelected != null && chkSelected.Checked)
                     {
-                        result.Add(Convert.ToString(item.GetDataKeyValue("Bvin")));
+                        result.Add(Convert.ToString(rgProducts.DataKeys[i]["Bvin"]));
                     }
                 }
 
@@ -131,9 +130,9 @@ namespace Hotcakes.Modules.Core.Controls
             base.OnInit(e);
 
             if (!DisplayInventory)
-                rgProducts.Columns.FindByUniqueName("Inventory").Visible = false;
+                GetGridViewColumnByName("Inventory").Visible = false;
             if (!DisplayPrice)
-                rgProducts.Columns.FindByUniqueName("SitePrice").Visible = false;
+                GetGridViewColumnByName("SitePrice").Visible = false;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -159,9 +158,9 @@ namespace Hotcakes.Modules.Core.Controls
             CategoryFilter.Items.Clear();
             foreach (var li in tree)
             {
-                CategoryFilter.Items.Add(new RadComboBoxItem(li.Text, li.Value));
+                CategoryFilter.Items.Add(new ListItem(li.Text, li.Value));
             }
-            CategoryFilter.Items.Insert(0, new RadComboBoxItem("- Any Category -", string.Empty));
+            CategoryFilter.Items.Insert(0, new ListItem("- Any Category -", string.Empty));
         }
 
         private void PopulateManufacturers()
@@ -170,7 +169,7 @@ namespace Hotcakes.Modules.Core.Controls
             ManufacturerFilter.DataTextField = "DisplayName";
             ManufacturerFilter.DataValueField = "Bvin";
             ManufacturerFilter.DataBind();
-            ManufacturerFilter.Items.Insert(0, new RadComboBoxItem("- Any Manufacturer -", string.Empty));
+            ManufacturerFilter.Items.Insert(0, new ListItem("- Any Manufacturer -", string.Empty));
         }
 
         private void PopulateVendors()
@@ -179,7 +178,7 @@ namespace Hotcakes.Modules.Core.Controls
             VendorFilter.DataTextField = "DisplayName";
             VendorFilter.DataValueField = "Bvin";
             VendorFilter.DataBind();
-            VendorFilter.Items.Insert(0, new RadComboBoxItem("- Any Vendor -", string.Empty));
+            VendorFilter.Items.Insert(0, new ListItem("- Any Vendor -", string.Empty));
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -217,36 +216,47 @@ namespace Hotcakes.Modules.Core.Controls
 
         public void RunSearch()
         {
-            rgProducts.CurrentPageIndex = 0;
-            rgProducts.Rebind();
+            rgProducts.PageIndex = 0;
+            BindGrid();
         }
 
         protected void ManufacturerFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            rgProducts.Rebind();
+            BindGrid();
         }
 
         protected void VendorFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            rgProducts.Rebind();
+            BindGrid();
         }
 
         protected void CategoryFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            rgProducts.Rebind();
+            BindGrid();
         }
 
-        protected void rgProducts_OnNeedDataSource(object sender, GridNeedDataSourceEventArgs e)
+        protected void BindGrid()
         {
-            var grid = (RadGrid) sender;
-
             var totalCount = 0;
             var items = HccApp.CatalogServices.Products.FindByCriteria(GetCurrentCriteria(),
-                grid.CurrentPageIndex,
-                grid.PageSize,
+                rgProducts.PageIndex,
+                rgProducts.PageSize,
                 ref totalCount);
-            grid.DataSource = items;
-            grid.VirtualItemCount = totalCount;
+            rgProducts.DataSource = items;
+            rgProducts.VirtualItemCount = totalCount;
+        }
+
+        private DataControlField GetGridViewColumnByName(string name)
+        {
+            foreach (DataControlField col in rgProducts.Columns)
+            {
+                if (col.HeaderText.ToLower().Trim() == name.ToLower().Trim())
+                {
+                    return col;
+                }
+            }
+
+            return null;
         }
     }
 }

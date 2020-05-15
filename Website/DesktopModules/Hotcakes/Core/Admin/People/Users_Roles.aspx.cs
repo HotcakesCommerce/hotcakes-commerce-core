@@ -161,7 +161,8 @@ namespace Hotcakes.Modules.Core.Admin.People
 
             btnSendNotification.Visible = roles.Any();
 
-            btnAdd.Enabled = ddlRoles.Items.Count > 0;
+            ddlRoles.Enabled = (ddlRoles.Items != null && ddlRoles.Items.Count > 0);
+            btnAdd.Enabled = (ddlRoles.Items != null && ddlRoles.Items.Count > 0);
         }
 
         #endregion

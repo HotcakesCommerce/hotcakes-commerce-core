@@ -46,7 +46,7 @@ namespace Hotcakes.Modules.ContentBlocks {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ViewComboBox;
+        protected global::System.Web.UI.WebControls.DropDownList ViewComboBox;
         
         /// <summary>
         /// ContentBlocksLabel control.
@@ -82,6 +82,6 @@ namespace Hotcakes.Modules.ContentBlocks {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ContentBlocksComboBox;
+        protected global::System.Web.UI.WebControls.DropDownList ContentBlocksComboBox;
     }
 }

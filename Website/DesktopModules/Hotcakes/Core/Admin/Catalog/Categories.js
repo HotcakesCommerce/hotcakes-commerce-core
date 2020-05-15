@@ -44,7 +44,7 @@ $(document).ready(function () {
 
     $('.trash').click(function (e) {
         curCategory = $(this);
-        return hcConfirm(e, 'Delete this Category?', callBackFunRemoveItem);
+        return hcConfirm(e, confirmText, callBackFunRemoveItem);
     });
 
 });

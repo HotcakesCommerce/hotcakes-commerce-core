@@ -24,10 +24,10 @@
 #endregion
 
 using System;
+using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Modules;
 using Hotcakes.Commerce.Dnn.Utils;
 using Hotcakes.Commerce.Dnn.Web;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Top10Products
 {
@@ -40,7 +40,7 @@ namespace Hotcakes.Modules.Top10Products
         /// </summary>
         private void FillForm()
         {
-            ViewComboBox.Items.Add(new RadComboBoxItem(LocalizeString("NoneSelectedText"), string.Empty));
+            ViewComboBox.Items.Add(new ListItem(LocalizeString("NoneSelectedText"), string.Empty));
             ViewComboBox.AppendDataBoundItems = true;
             ViewComboBox.DataSource = DnnPathHelper.GetViewNames("Top10Products");
             ViewComboBox.DataBind();

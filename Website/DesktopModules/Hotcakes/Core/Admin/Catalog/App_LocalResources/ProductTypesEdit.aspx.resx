@@ -186,4 +186,7 @@
   <data name="SecurityRole.Text" xml:space="preserve">
     <value>Security Role</value>
   </data>
+  <data name="Confirm.Text" xml:space="preserve">
+    <value>Are you sure you want to delete this item?</value>
+  </data>
 </root>

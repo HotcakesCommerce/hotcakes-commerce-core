@@ -22,9 +22,7 @@
             <div class="hcBlock">
                 <div class="hcForm">
                     <div class="hcFormItem">
-                        <asp:LinkButton
-                            ID="btnDelete" runat="server" CssClass="hcTertiaryAction"
-                            Text="Delete Order" CausesValidation="false" OnClick="btnDelete_Click" />
+                        <asp:LinkButton ID="btnDelete" runat="server" CssClass="hcTertiaryAction" resourcekey="btnDeleteOrder" CausesValidation="false" OnClick="btnDelete_Click" />
                     </div>
                 </div>
             </div>
@@ -119,7 +117,7 @@
                 }
 
             </script>
-            <h1>Edit Order
+            <h1><%=PageTitle %> 
                 <asp:Label ID="OrderNumberField" runat="server" Text="000000" />
             </h1>
 
@@ -146,14 +144,14 @@
 
             <div class="hcColumnLeft" style="width: 50%">
                 <div class="hcForm hcBillToAddress">
-                    <h2>Bill To</h2>
+                    <h2><%=Localization.GetString("lblBillTo") %></h2>
                     <div class="hcFormMessage hcBillToAddressMessage"></div>
                     <hcc:AddressEditor TabOrderOffSet="2000" ID="ucBillingAddress" CreateValidationInputs="True" FormSelector=".hcBillToAddress" ErrorMessageSelector=".hcBillToAddressMessage" runat="server" />
                 </div>
             </div>
             <div class="hcColumnRight hcLeftBorder" style="width: 49%">
                 <div class="hcForm hcShipToAddress">
-                    <h2>Ship To</h2>
+                    <h2><%=Localization.GetString("lblShipTo") %></h2>
                     <div runat="server" id="divShipToAddress">
                         <div class="hcFormMessage hcShipToAddressMessage"></div>
                         <hcc:AddressEditor TabOrderOffSet="2500" ID="ucShippingAddress" CreateValidationInputs="True" FormSelector=".hcShipToAddress" ErrorMessageSelector=".hcShipToAddressMessage" runat="server" />
@@ -180,8 +178,8 @@
             <div class="hcColumnLeft" style="width: 50%">
                 <div class="hcForm">
                     <div class="hcFormItem">
-                        <label class="hcLabel">Customer's Instructions</label>
-                        <asp:TextBox ID="txtInstructions" runat="server" TextMode="multiLine" Wrap="true" Rows="5" CssClass="hcOrderViewNotes" />
+                        <label class="hcLabel"><%=Localization.GetString("lblCustomerInstructions") %></label>
+                        <asp:TextBox ID="txtInstructions" runat="server" TextMode="MultiLine" Wrap="true" Rows="5" CssClass="hcOrderViewNotes" />
                     </div>
                 </div>
             </div>
@@ -196,30 +194,30 @@
             <div class="hcColumnLeft" style="width: 50%">
                 <asp:Panel ID="pnlCoupons" runat="server" CssClass="hcForm" DefaultButton="btnAddCoupon">
                     <div class="hcFormItemLabel">
-                        <label class="hcLabel">Add Promotional Code</label>
+                        <label class="hcLabel"><%=Localization.GetString("lblPromotionCode") %></label>
                     </div>
                     <div class="hcFormItem hcFormItem66p">
                         <asp:TextBox ID="txtCoupon" runat="server" MaxLength="50" ValidationGroup="vgCoupon" />
-                        <asp:RequiredFieldValidator ID="rfCoupon" ValidationGroup="vgCoupon" ErrorMessage="Coupon Code is required" ControlToValidate="txtCoupon" Display="Dynamic"
+                        <asp:RequiredFieldValidator ID="rfCoupon" resourcekey="rfCoupon" ValidationGroup="vgCoupon" ControlToValidate="txtCoupon" Display="Dynamic"
                             runat="server" EnableClientScript="false" CssClass="hcFormError" />
-                        <asp:LinkButton ID="btnAddCoupon" runat="server" CssClass="hcSecondaryAction hcSmall disabled" Text="Add" CausesValidation="true" OnClick="btnAddCoupon_Click" ValidationGroup="vgCoupon" />
+                        <asp:LinkButton ID="btnAddCoupon" runat="server" CssClass="hcSecondaryAction hcSmall disabled" resourcekey="btnAddCoupon" CausesValidation="true" OnClick="btnAddCoupon_Click" ValidationGroup="vgCoupon" />
                     </div>
                     <div class="hcFormItem">
-                        <asp:ListBox ID="lstCoupons" runat="server" DataTextField="CouponCode" DataValueField="CouponCode" Height="150px" SelectionMode="Multiple" CssClass="RadComboBox" />
+                        <asp:ListBox ID="lstCoupons" runat="server" DataTextField="CouponCode" DataValueField="CouponCode" Height="150px" SelectionMode="Multiple" CssClass="hcComboBox" />
                     </div>
                     <div class="hcFormItem hcFormItem50p">
-                        <asp:LinkButton ID="btnDeleteCoupon" CausesValidation="false" runat="server"  CssClass="hcSecondaryAction hcSmall disabled" Text="Delete Selected" OnClick="btnDeleteCoupon_Click" />
+                        <asp:LinkButton ID="btnDeleteCoupon" CausesValidation="false" runat="server"  CssClass="hcSecondaryAction hcSmall disabled" resourcekey="btnDeleteCoupon" OnClick="btnDeleteCoupon_Click" />
                     </div>
                 </asp:Panel>
             </div>
             <div class="hcColumnRight hcLeftBorder" style="width: 49%">
                 <div class="hcForm">
                     <div class="hcFormItem hcProductEditChoice">
-                        <label class="hcLabel">Shipping Method</label>
-                        <asp:Literal ID="litShippingMethods" runat="server"></asp:Literal>
+                        <label class="hcLabel"><%=Localization.GetString("lblShippingMethod") %></label>
+                        <asp:Literal ID="litShippingMethods" runat="server"/>
                     </div>
                     <div class="hcFormItem">
-                        <label class="hcLabel">Force Shipping Price</label>
+                        <label class="hcLabel"><%=Localization.GetString("lblForceShipping") %></label>
                         <asp:TextBox ID="ShippingOverride" runat="server" />
                     </div>
                 </div>
@@ -227,10 +225,10 @@
 
             <ul class="hcActions">
                 <li>
-                    <asp:LinkButton ID="btnSaveChanges" runat="server" Text="Save Changes" CssClass="hcPrimaryAction" OnClick="btnSaveChanges_Click" />
+                    <asp:LinkButton ID="btnSaveChanges" runat="server" resourcekey="btnSaveChanges" CssClass="hcPrimaryAction" OnClick="btnSaveChanges_Click" />
                 </li>
                 <li>
-                    <asp:HyperLink runat="server" Text="Cancel" CssClass="hcSecondaryAction" NavigateUrl="Default.aspx" />
+                    <asp:HyperLink runat="server" resourcekey="btnCancel" CssClass="hcSecondaryAction" NavigateUrl="Default.aspx" />
                 </li>
             </ul>
         </ContentTemplate>
@@ -240,22 +238,21 @@
         <asp:UpdatePanel ID="upnlRefundAmount" UpdateMode="Always" runat="server">
             <ContentTemplate>
                 <asp:PlaceHolder ID="phrRefundAmountControls" runat="server" EnableViewState="True">
-                    <asp:Label ID="Label1" CssClass="hcLabel" runat="server" Text="The customer hasn't been refunded yet. Would you like to refund the customer first?" />
+                    <asp:Label ID="Label1" CssClass="hcLabel" runat="server" resoucekey="NotRefunded" />
                     <br />
                     <ul class="hcActions">
                         <li>
-                            <asp:LinkButton runat="server" ID="btnOK" CssClass="hcPrimaryAction" Text="OK" OnClick="btnOK_Click" />
+                            <asp:LinkButton runat="server" ID="btnOK" CssClass="hcPrimaryAction" resourcekey="btnOkay" OnClick="btnOK_Click" />
                         </li>
                         <li>
-                            <asp:LinkButton runat="server" ID="btnCancel" CssClass="hcSecondaryAction" OnClientClick="closeRefundAmountDialog()" Text="Cancel" OnClick="btnCancel_Click" />
+                            <asp:LinkButton runat="server" ID="btnCancel" CssClass="hcSecondaryAction" OnClientClick="closeRefundAmountDialog()" resourcekey="btnCancel" OnClick="btnCancel_Click" />
                         </li>
                     </ul>
                 </asp:PlaceHolder>
-                <asp:PlaceHolder ID="phrRefundAmountScript" runat="server" EnableViewState="False"></asp:PlaceHolder>
+                <asp:PlaceHolder ID="phrRefundAmountScript" runat="server" EnableViewState="False"/>
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
-
 
     <div id="InventoryEidtor" class="hcForm" style="display: none">
         <asp:UpdatePanel ID="upnlInventoryEditor" UpdateMode="Always" runat="server">
@@ -267,6 +264,5 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
-
 
 </asp:Content>

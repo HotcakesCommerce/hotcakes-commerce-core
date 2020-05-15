@@ -8,7 +8,7 @@
 			if (window.print) {
 				window.print();
 			} else {
-				alert('Please choose the print button from your browser.  Usually in the menu dropdowns at File: Print');
+				alert("<%=Localization.GetJsEncodedString("BrowserPrintDisabled")%>");
 			}
 		}
 
@@ -21,42 +21,48 @@
 
 	<div style="background: #fff; padding: 10px;">
 		<div class="hcNavContent printhidden">
-			<uc1:OrderActions ID="OrderActions1" HideActions="true" runat="server" />
-
-			<div class="hcBlockNoBorder">
-				<asp:LinkButton ID="lnkPrintNow" runat="server" Text="Print" CssClass="hcPrimaryAction"  OnClientClick="javascript:doPrint();" />
+            <div class="hcBlockNoBorder">
+                <h1><%=PageTitle %></h1>
+                <div class="hcForm">
+                    <div class="hcFormItem">
+                        <label class="hcLabel"><%=Localization.GetString("lblChooseTemplate") %></label>
+                        <asp:DropDownList ID="TemplateField" runat="Server"/>
+                    </div>
+                    <div class="hcFormItem">
+                        <asp:LinkButton ID="btnGenerate" resourcekey="btnGenerate" runat="server" CssClass="hcPrimaryAction" OnClick="btnGenerate_Click" />
+                    </div>
+                    <div class="hcFormItem">
+                        <asp:LinkButton ID="lnkPrintNow" resourcekey="lnkPrintNow" runat="server" CssClass="hcSecondaryAction hcSmall" OnClientClick="javascript:doPrint();" />
+                    </div>
+                    <div class="hcFormItem">
+                        <asp:LinkButton ID="btnContinue2" resourcekey="btnContinue2" runat="server" CssClass="hcTertiaryAction hcSmall" OnClick="btnContinue2_Click" />
+                    </div>
+                </div>
 			</div>
 		</div>
 		<div class="hcMainContent printhidden">
-			<h1>Print Order</h1>
-			Template:
-            <asp:DropDownList ID="TemplateField" runat="Server"></asp:DropDownList>
-            <asp:ImageButton ID="btnGenerate" runat="server"
-                ImageUrl="~/DesktopModules/Hotcakes/Core/Admin/Images/Buttons/Go.png" OnClick="btnGenerate_Click" />
-		</div>
+            <h2><%=Localization.GetString("SubHeader") %></h2>
+            <hr/>
+        </div>
 		<div class="printbackground">
-			<asp:repeater id="rpOrder" runat="server"  OnItemDataBound="rpOrder_ItemDataBound">
+			<asp:repeater id="rpOrder" runat="server" OnItemDataBound="rpOrder_ItemDataBound">
                 <ItemTemplate>
 					<table style="width:100%; background-color:#FFFFFF">
 						<tbody>
 							<tr>
 								<td>
-										<div class="printhidden">
-											<hr />
-										</div>
-										<asp:Literal ID="litTemplate" runat="server"></asp:Literal>
-									</td>
-								</tr>
+									<div class="printhidden">
+										<hr />
+									</div>
+                                    <asp:Literal ID="litTemplate" runat="server"/>
+								</td>
+							</tr>
 						</tbody>
 					</table>
 					 <div id="pagebreak" runat="server">&nbsp;</div>
                 </ItemTemplate>
             </asp:repeater>
 		</div>
-		<div class="printhidden clear">
-			<asp:ImageButton ID="btnContinue2" runat="server" ImageUrl="~/DesktopModules/Hotcakes/Core/Admin/Images/Buttons/Ok.png" OnClick="btnContinue2_Click" />
-		</div>
-
-		<div class="clear"></div>
+        <div class="clear"></div>
 	</div>
 </asp:Content>

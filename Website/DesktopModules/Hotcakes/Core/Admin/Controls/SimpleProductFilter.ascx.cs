@@ -28,7 +28,6 @@ using System.Web.UI.WebControls;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Modules.Core.Admin.AppCode;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.Controls
 {
@@ -121,15 +120,6 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             SetListToValue(ddlProductTypeFilter, SessionManager.AdminProductCriteriaProductType);
         }
 
-        private void SetListToValue(RadComboBox l, string value)
-        {
-            if (l != null && l.Items.FindItemByValue(value) != null)
-            {
-                l.ClearSelection();
-                l.Items.FindItemByValue(value).Selected = true;
-            }
-        }
-
         private void SetListToValue(DropDownList l, string value)
         {
             if (l != null && l.Items.FindByValue(value) != null)
@@ -145,10 +135,10 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             ddlCategoryFilter.Items.Clear();
             foreach (var li in tree)
             {
-                var item = new RadComboBoxItem(li.Text, li.Value);
+                var item = new ListItem(li.Text, li.Value);
                 ddlCategoryFilter.Items.Add(item);
             }
-            ddlCategoryFilter.Items.Insert(0, new RadComboBoxItem(Localization.GetString("AnyCategory"), string.Empty));
+            ddlCategoryFilter.Items.Insert(0, new ListItem(Localization.GetString("AnyCategory"), string.Empty));
         }
 
         private void PopulateManufacturers()
@@ -158,7 +148,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             ddlManufacturerFilter.DataValueField = "Bvin";
             ddlManufacturerFilter.DataBind();
             ddlManufacturerFilter.Items.Insert(0,
-                new RadComboBoxItem(Localization.GetString("AnyManufacturer"), string.Empty));
+                new ListItem(Localization.GetString("AnyManufacturer"), string.Empty));
         }
 
         private void PopulateVendors()
@@ -167,25 +157,25 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             ddlVendorFilter.DataTextField = "DisplayName";
             ddlVendorFilter.DataValueField = "Bvin";
             ddlVendorFilter.DataBind();
-            ddlVendorFilter.Items.Insert(0, new RadComboBoxItem(Localization.GetString("AnyVendor"), string.Empty));
+            ddlVendorFilter.Items.Insert(0, new ListItem(Localization.GetString("AnyVendor"), string.Empty));
         }
 
         private void PopulateStatus()
         {
             ddlStatusFilter.Items.Clear();
-            ddlStatusFilter.Items.Add(new RadComboBoxItem(Localization.GetString("AnyStatus"), string.Empty));
-            ddlStatusFilter.Items.Add(new RadComboBoxItem(Localization.GetString("Active"), "1"));
-            ddlStatusFilter.Items.Add(new RadComboBoxItem(Localization.GetString("Disabled"), "0"));
+            ddlStatusFilter.Items.Add(new ListItem(Localization.GetString("AnyStatus"), string.Empty));
+            ddlStatusFilter.Items.Add(new ListItem(Localization.GetString("Active"), "1"));
+            ddlStatusFilter.Items.Add(new ListItem(Localization.GetString("Disabled"), "0"));
         }
 
         private void PopulateInventoryStatus()
         {
             ddlInventoryStatusFilter.Items.Clear();
-            ddlInventoryStatusFilter.Items.Add(new RadComboBoxItem(Localization.GetString("AnyInventoryStatus"),
+            ddlInventoryStatusFilter.Items.Add(new ListItem(Localization.GetString("AnyInventoryStatus"),
                 string.Empty));
-            ddlInventoryStatusFilter.Items.Add(new RadComboBoxItem(Localization.GetString("NotAvailable"), "0"));
-            ddlInventoryStatusFilter.Items.Add(new RadComboBoxItem(Localization.GetString("Available"), "1"));
-            ddlInventoryStatusFilter.Items.Add(new RadComboBoxItem(Localization.GetString("LowInventory"), "2"));
+            ddlInventoryStatusFilter.Items.Add(new ListItem(Localization.GetString("NotAvailable"), "0"));
+            ddlInventoryStatusFilter.Items.Add(new ListItem(Localization.GetString("Available"), "1"));
+            ddlInventoryStatusFilter.Items.Add(new ListItem(Localization.GetString("LowInventory"), "2"));
         }
 
         private void PopulateProductTypes()
@@ -195,67 +185,43 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             ddlProductTypeFilter.DataTextField = "ProductTypeName";
             ddlProductTypeFilter.DataValueField = "bvin";
             ddlProductTypeFilter.DataBind();
-            ddlProductTypeFilter.Items.Insert(0, new RadComboBoxItem(Localization.GetString("AnyType"), string.Empty));
+            ddlProductTypeFilter.Items.Insert(0, new ListItem(Localization.GetString("AnyType"), string.Empty));
         }
 
         protected void btnGo_Click(object sender, EventArgs e)
         {
-            if (GoPressed != null)
-            {
-                GoPressed(LoadProductCriteria(), new EventArgs());
-            }
+            GoPressed(LoadProductCriteria(), new EventArgs());
             txtFilterField.Focus();
         }
 
-        protected void ddlProductTypeFilter_SelectedIndexChanged(object sender,
-            RadComboBoxSelectedIndexChangedEventArgs e)
+        protected void ddlProductTypeFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (FilterChanged != null)
-            {
-                FilterChanged(LoadProductCriteria(), new EventArgs());
-            }
+            FilterChanged(LoadProductCriteria(), new EventArgs());
         }
 
-        protected void ddlCategoryFilter_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        protected void ddlCategoryFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (FilterChanged != null)
-            {
-                FilterChanged(LoadProductCriteria(), new EventArgs());
-            }
+            FilterChanged(LoadProductCriteria(), new EventArgs());
         }
 
-        protected void ddlManufacturerFilter_SelectedIndexChanged(object sender,
-            RadComboBoxSelectedIndexChangedEventArgs e)
+        protected void ddlManufacturerFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (FilterChanged != null)
-            {
-                FilterChanged(LoadProductCriteria(), new EventArgs());
-            }
+            FilterChanged(LoadProductCriteria(), new EventArgs());
         }
 
-        protected void ddlVendorFilter_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        protected void ddlVendorFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (FilterChanged != null)
-            {
-                FilterChanged(LoadProductCriteria(), new EventArgs());
-            }
+            FilterChanged(LoadProductCriteria(), new EventArgs());
         }
 
-        protected void ddlStatusFilter_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        protected void ddlStatusFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (FilterChanged != null)
-            {
-                FilterChanged(LoadProductCriteria(), new EventArgs());
-            }
+            FilterChanged(LoadProductCriteria(), new EventArgs());
         }
 
-        protected void ddlInventoryStatusFilter_SelectedIndexChanged(object sender,
-            RadComboBoxSelectedIndexChangedEventArgs e)
+        protected void ddlInventoryStatusFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (FilterChanged != null)
-            {
-                FilterChanged(LoadProductCriteria(), new EventArgs());
-            }
+            FilterChanged(LoadProductCriteria(), new EventArgs());
         }
     }
 }

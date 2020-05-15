@@ -55,7 +55,7 @@ namespace Hotcakes.Modules.Core.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ManufacturerFilter;
+        protected global::System.Web.UI.WebControls.DropDownList ManufacturerFilter;
         
         /// <summary>
         /// VendorLabel control.
@@ -73,7 +73,7 @@ namespace Hotcakes.Modules.Core.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox VendorFilter;
+        protected global::System.Web.UI.WebControls.DropDownList VendorFilter;
         
         /// <summary>
         /// CategoryLabel control.
@@ -91,7 +91,7 @@ namespace Hotcakes.Modules.Core.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox CategoryFilter;
+        protected global::System.Web.UI.WebControls.DropDownList CategoryFilter;
         
         /// <summary>
         /// btnSearch control.
@@ -109,7 +109,7 @@ namespace Hotcakes.Modules.Core.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid rgProducts;
+        protected global::System.Web.UI.WebControls.GridView rgProducts;
         
         /// <summary>
         /// ExcludeCategoryBvinField control.

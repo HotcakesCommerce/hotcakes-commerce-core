@@ -25,14 +25,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Modules;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Dnn.Utils;
 using Hotcakes.Commerce.Dnn.Web;
 using Hotcakes.Modules.Core.Models;
 using Newtonsoft.Json;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.ProductGrid
 {
@@ -83,7 +84,7 @@ namespace Hotcakes.Modules.ProductGrid
                 GridColumnsField.Text = gridColumns.ToString();
 
                 // load the view names into the combobox
-                ViewComboBox.Items.Add(new RadComboBoxItem(LocalizeString("NoneSelectedText"), string.Empty));
+                ViewComboBox.Items.Add(new System.Web.UI.WebControls.ListItem(LocalizeString("NoneSelectedText"), string.Empty));
                 ViewComboBox.AppendDataBoundItems = true;
                 ViewComboBox.DataSource = DnnPathHelper.GetViewNames("ProductGrid");
                 ViewComboBox.DataBind();
@@ -173,22 +174,22 @@ namespace Hotcakes.Modules.ProductGrid
             LoadItems(sortedProducts);
         }
 
-        protected void rgProducts_OnDeleteCommand(object sender, GridCommandEventArgs e)
+        protected void rgProducts_OnDeleteCommand(object sender, DataGridCommandEventArgs e)
         {
             var bvinsList = GetProductBvins();
-            var key = (int) rgProducts.Items[e.Item.ItemIndex].GetDataKeyValue("Key");
+            var key = int.Parse(rgProducts.DataKeys[e.Item.ItemIndex].ToString(), NumberStyles.Integer);
             bvinsList.Remove(key);
             SaveItems(bvinsList);
             LoadItems(GetProducts(bvinsList));
         }
 
 
-        protected void rgProducts_OnItemCommand(object sender, GridCommandEventArgs e)
+        protected void rgProducts_OnItemCommand(object sender, DataGridCommandEventArgs e)
         {
             if (e.CommandName.Equals("Up") || e.CommandName.Equals("Down"))
             {
                 var bvinsList = GetProductBvins();
-                var key = (int) rgProducts.Items[e.Item.ItemIndex].GetDataKeyValue("Key");
+                var key = int.Parse(rgProducts.DataKeys[e.Item.ItemIndex].ToString(), NumberStyles.Integer);
 
                 int key2;
                 if (e.CommandName.Equals("Up"))

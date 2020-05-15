@@ -37,7 +37,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            PageTitle = "Product Types";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Catalog;
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
         }
@@ -47,14 +47,24 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             base.OnLoad(e);
             if (!Page.IsPostBack)
             {
-                FillList();
+                LoadItems();
             }
         }
 
-        private void FillList()
+        private void LoadItems()
         {
-            dgList.DataSource = HccApp.CatalogServices.ProductTypes.FindAll().Where(pt => !pt.IsPermanent);
-            dgList.DataBind();
+            var productTypes = HccApp.CatalogServices.ProductTypes.FindAll().Where(pt => !pt.IsPermanent);
+            if (productTypes.Any())
+            {
+                dgList.Visible = true;
+                dgList.DataSource = productTypes;
+                dgList.DataBind();
+            }
+            else
+            {
+                dgList.Visible = false;
+                msg.ShowWarning(Localization.GetString("NoProductTypes"));
+            }
         }
 
         protected void btnNew_Click(object sender, EventArgs e)
@@ -69,7 +79,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 }
                 else
                 {
-                    msg.ShowError("Error while attempting to create new product type.");
+                    msg.ShowError(Localization.GetString("SaveFailure"));
                 }
             }
         }
@@ -84,7 +94,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         {
             var deleteID = (string) dgList.DataKeys[e.Item.ItemIndex];
             HccApp.CatalogServices.ProductTypeDestroy(deleteID);
-            FillList();
+            LoadItems();
         }
 
         protected void dgList_ItemDataBound(object sender, DataGridItemEventArgs e)

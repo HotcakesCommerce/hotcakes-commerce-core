@@ -103,15 +103,13 @@ a.btn b,
   height: 28px;
   margin: 1px 0;
   border: solid 1px #b4b4b4;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
   border-radius: 4px;
 }
 a.hugelink {
   font-size: 36px;
 }
 fieldset {
-  border: solid 1px #cccccc;
+  border: solid 1px #ccc;
 }
 /* Order Fraud Score Display */
 .fraud-low,
@@ -280,8 +278,6 @@ th a:link {
   color: #333;
   border: solid 1px #b4b4b4;
   padding: 10px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
   border-radius: 4px;
 }
 .controlarea2 {
@@ -289,8 +285,6 @@ th a:link {
   border: solid 1px #b4b4b4;
   padding-top: 5px;
   padding-bottom: 5px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
   border-radius: 4px;
 }
 .navcol .controlarea1,
@@ -355,8 +349,6 @@ th a:link {
   margin: 5px 5px 10px 5px;
   background-color: #F9F9F9;
   overflow: auto;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
   border-radius: 4px;
 }
 .decoratedblock h4 {
@@ -438,8 +430,6 @@ th a:link {
   padding: 20px;
   font-size: 13px;
   color: #666;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
   border-radius: 10px;
 }
 /*.editorpanel .forminput {font-size:18px;}*/
@@ -451,8 +441,6 @@ th a:link {
 }
 /* Curved Corder Styles */
 .curved {
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
   border-radius: 10px;
   /*behavior:url(border-radius.htc);*/
 }
@@ -725,8 +713,6 @@ ul.removablelist li .smalldetails {
 ul.redirects301 {
   list-style: none;
   margin: 5px 0;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
   border-radius: 10px;
   border: solid 1px #ccc;
   padding: 5px;
@@ -742,8 +728,6 @@ ul.redirects301 li a {
   background-color: #666;
   color: #fff;
   padding: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
   border-radius: 3px;
 }
 ul.redirects301 li a:hover {
@@ -787,9 +771,7 @@ table.liststyle1 tr td.listitem {
   border-bottom: solid 1px #f0f0f0;
 }
 .shadowed {
-  -webkit-box-shadow: -6px 8px 6px -6px #666666;
-  -moz-box-shadow: -6px 8px 6px -6px #666666;
-  box-shadow: -6px 8px 6px -6px #666666;
+  box-shadow: -6px 8px 6px -6px #666;
 }
 /* Order Manager Custom Styles */
 #OrderManagerActions {
@@ -1080,17 +1062,11 @@ div {
 input,
 select,
 textarea,
-.riSingle,
-html body .hcFormItem .RadInput_Default .riTextBox,
-.hcFormItem .RadComboBox_Default .rcbInput,
-.RadComboBoxDropDown ul.rcbList li {
+.riSingle {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 13px;
   color: #0c0c0c;
-}
-html body .hcFormItem .RadInput_Default .riEmpty {
-  color: #d2d2d2;
 }
 h1 {
   font-size: 30px;
@@ -1253,9 +1229,7 @@ select {
   width: 1100px;
 }
 ._hcBoxSizing {
-  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -khtml-box-sizing: border-box;
 }
@@ -1265,9 +1239,7 @@ select {
   padding: 5px 2px 20px 2px;
   clear: both;
   position: relative;
-  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -khtml-box-sizing: border-box;
   color: #63696f;
@@ -1344,9 +1316,7 @@ select {
   color: #434343;
   font-size: 14px;
   padding: 8px 0 4px 0;
-  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -khtml-box-sizing: border-box;
   color: #434343 !important;
@@ -1388,9 +1358,7 @@ select {
   padding: 5px;
   border: 1px solid #d2d2d2;
   margin: 0;
-  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -khtml-box-sizing: border-box;
 }
@@ -1408,9 +1376,7 @@ select {
 .hcFormItemInline > .hcButton.hcSmall:visited {
   margin-left: 0.5em;
   text-align: center;
-  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -khtml-box-sizing: border-box;
 }
@@ -1423,7 +1389,6 @@ select {
   display: block;
   position: absolute;
   overflow: visible;
-  /*top:-95%; right: 12%;*/
   width: 200px;
   margin-bottom: 0;
   padding: 5px 10px;
@@ -1527,25 +1492,6 @@ td span.hcFormError {
   color: red;
   background: #fbbbbb;
   position: absolute;
-}
-.hcFormItem .RadInput,
-.hcFormItem .RadComboBox,
-.hcFormItem .RadPicker {
-  width: 100% !important;
-}
-.hcFormItem .RadInput.DatePickerNav,
-.hcFormItem .RadComboBox.DatePickerNav,
-.hcFormItem .RadPicker.DatePickerNav {
-  width: 160px !important;
-}
-.hcFormItem .RadComboBox_Default td.rcbInputCellRight,
-.hcFormItem .RadComboBox_Default td.rcbArrowCellRight,
-.hcFormItem .RadComboBox_Default td.rcbArrowCell {
-  border: 1px solid #d2d2d2;
-  border-left: none;
-  background: white !important;
-  background-image: url(Images/admin_misc_sprite.png) !important;
-  background-position: -120px 11px !important;
 }
 .hcFormItemHor span.hcFormError {
   left: 250px;
@@ -1678,7 +1624,6 @@ ul.hcActions li {
 .hcFormPopup {
   background: #ffffff;
   padding-bottom: 15px;
-  -webkit-box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.75);
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.75);
 }
 .hcFormPopup .ui-dialog-titlebar {
@@ -1708,14 +1653,12 @@ ul.hcActions li {
   top: 7px !important;
   right: 7px !important;
   border: 3px solid #d2d2d2 !important;
-  -webkit-border-radius: 12px;
   border-radius: 12px;
   cursor: pointer;
 }
 .hcFormPopup .hcFormItem > input[type="text"],
 .hcFormPopup .hcFormItem > input[type="password"],
-.hcFormPopup span.riSingle,
-.hcFormPopup .RadComboBox {
+.hcFormPopup span.riSingle {
   width: 100% !important;
 }
 .hcFormPopup .hcActions {
@@ -1735,12 +1678,8 @@ ul.hcActions li {
   cursor: pointer;
   padding: 14px 40px;
   text-decoration: none;
-  -webkit-box-shadow: 0 1px 2px rgba(140, 140, 140, 0.6);
-  -moz-box-shadow: 0 1px 2px rgba(140, 140, 140, 0.6);
   box-shadow: 0 1px 2px rgba(140, 140, 140, 0.6);
   text-shadow: none;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   text-align: center;
 }
@@ -1754,8 +1693,6 @@ ul.hcActions li {
 .hcPrimaryAction:active,
 .hcPrimaryAction:visited:active {
   background: #e85b40;
-  -webkit-box-shadow: inset 0 4px 3px 0 rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: inset 0 4px 3px 0 rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 4px 3px 0 rgba(0, 0, 0, 0.15);
   color: #ffffff;
 }
@@ -1774,12 +1711,8 @@ ul.hcActions li {
   cursor: pointer;
   padding: 14px 40px;
   text-decoration: none;
-  -webkit-box-shadow: 0 1px 2px rgba(140, 140, 140, 0.6);
-  -moz-box-shadow: 0 1px 2px rgba(140, 140, 140, 0.6);
   box-shadow: 0 1px 2px rgba(140, 140, 140, 0.6);
   text-shadow: none;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   text-align: center;
 }
@@ -1793,8 +1726,6 @@ ul.hcActions li {
 .hcSecondaryAction:active,
 .hcSecondaryAction:visited:active {
   background: #0db2ba;
-  -webkit-box-shadow: inset 0 4px 3px 0 rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: inset 0 4px 3px 0 rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 4px 3px 0 rgba(0, 0, 0, 0.15);
   color: #ffffff;
 }
@@ -1813,12 +1744,8 @@ ul.hcActions li {
   cursor: pointer;
   padding: 14px 40px;
   text-decoration: none;
-  -webkit-box-shadow: 0 1px 2px rgba(140, 140, 140, 0.6);
-  -moz-box-shadow: 0 1px 2px rgba(140, 140, 140, 0.6);
   box-shadow: 0 1px 2px rgba(140, 140, 140, 0.6);
   text-shadow: none;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   text-align: center;
 }
@@ -1832,8 +1759,6 @@ ul.hcActions li {
 .hcTertiaryAction:active,
 .hcTertiaryAction:visited:active {
   background: #f8fafc;
-  -webkit-box-shadow: inset 0 4px 3px 0 rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: inset 0 4px 3px 0 rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 4px 3px 0 rgba(0, 0, 0, 0.15);
   color: #63696f;
 }
@@ -1852,12 +1777,8 @@ ul.hcActions li {
   cursor: pointer;
   padding: 14px 40px;
   text-decoration: none;
-  -webkit-box-shadow: 0 1px 2px rgba(140, 140, 140, 0.6);
-  -moz-box-shadow: 0 1px 2px rgba(140, 140, 140, 0.6);
   box-shadow: 0 1px 2px rgba(140, 140, 140, 0.6);
   text-shadow: none;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   text-align: center;
 }
@@ -1871,8 +1792,6 @@ ul.hcActions li {
 .hcButton:active,
 .hcButton:visited:active {
   background: #e85b40;
-  -webkit-box-shadow: inset 0 4px 3px 0 rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: inset 0 4px 3px 0 rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 4px 3px 0 rgba(0, 0, 0, 0.15);
   color: #ffffff;
 }
@@ -2008,139 +1927,6 @@ ul.hcActions li {
   overflow: hidden;
   width: 14px;
 }
-.RadComboBox_Default .rcbInputCellLeft,
-.RadComboBox_Default .rcbInputCellRight,
-.RadComboBox_Default .rcbArrowCellLeft,
-.RadComboBox_Default .rcbArrowCellRight {
-  /*background-image: url('ComboBox/rcbSprite.png');*/
-}
-.RadComboBox_Default table {
-  border-collapse: separate !important;
-  border-spacing: 0;
-}
-div.RadComboBox_Default .rcbArrowCell a {
-  /* 	line-height: 16px; 	height: 22px;     */
-}
-.RadComboBox_Default td.rcbInputCellLeft,
-.RadComboBox_Default td.rcbInputCellRight {
-  padding: 3px !important;
-  background: #fff;
-  text-decoration: none;
-  margin: 0 !important;
-  line-height: 16px;
-}
-.RadComboBox_Default td.rcbInputCellLeft {
-  border: 1px solid #d2d2d2;
-  border-right: none;
-}
-.RadComboBox_Default .rcbDisabled td.rcbInputCellLeft {
-  color: #ccc;
-  background: #ebebe4;
-}
-.RadComboBox_Default .rcbHovered td.rcbArrowCell {
-  opacity: 0.7 !important;
-  filter: alpha(opacity=70) !important;
-}
-.RadComboBox_Default td.rcbInputCellLeft input[readonly],
-.RadComboBox_Default td.rcbInputCellRight input[readonly] {
-  cursor: auto;
-}
-html body .RadComboBoxDropDown_Default {
-  border-color: #d2d2d2;
-}
-.RadComboBoxDropDown_Default ul li.rcbSeparator {
-  height: 1px;
-  min-height: 1px;
-  padding: 0;
-  margin: 7px;
-  background-color: #d2d2d2;
-}
-.Metro.reWrapper,
-.Metro.RadEditor .reContentCell {
-  border: 1px solid #d2d2d2 !important;
-}
-.Metro.RadEditor .reContentCell {
-  background: #f1f1f1 !important;
-  padding: 5px;
-}
-.hcForm .RadGrid,
-.RadGrid.hcGrid {
-  border: none;
-}
-.hcForm .RadGrid table,
-.RadGrid.hcGrid table {
-  border-collapse: collapse;
-}
-.hcForm .RadGrid td,
-.RadGrid.hcGrid td,
-.hcForm .RadGrid th,
-.RadGrid.hcGrid th {
-  border: 1px solid #e7e7e7 !important;
-}
-.hcForm .RadGrid td,
-.RadGrid.hcGrid td {
-  font-size: 12px;
-  color: #797c7c;
-  padding: 0;
-}
-.hcForm .RadGrid td .hcIconApprove,
-.RadGrid.hcGrid td .hcIconApprove,
-.hcForm .RadGrid td .hcIconEdit,
-.RadGrid.hcGrid td .hcIconEdit,
-.hcForm .RadGrid td .hcIconDelete,
-.RadGrid.hcGrid td .hcIconDelete,
-.hcForm .RadGrid td .hcIconInfo,
-.RadGrid.hcGrid td .hcIconInfo,
-.hcForm .RadGrid td .hcIconAdd,
-.RadGrid.hcGrid td .hcIconAdd {
-  margin: 0 8px;
-}
-.hcForm .RadGrid .rgHeader,
-.RadGrid.hcGrid .rgHeader {
-  background: #ffffff;
-  border: 1px solid #d2d2d2 !important;
-  color: #93979a;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 20px 17px;
-  text-align: left;
-}
-.hcForm .RadGrid .rgAltRow,
-.RadGrid.hcGrid .rgAltRow {
-  background: #e7e7e7;
-}
-.hcForm .RadGrid .rgRow a,
-.RadGrid.hcGrid .rgRow a,
-.hcForm .RadGrid .rgAltRow a,
-.RadGrid.hcGrid .rgAltRow a,
-.hcForm .RadGrid .rgEditRow a,
-.RadGrid.hcGrid .rgEditRow a,
-.hcForm .RadGrid tr.rgEditRow a,
-.RadGrid.hcGrid tr.rgEditRow a,
-.hcForm .RadGrid tr.rgHoveredRow a,
-.RadGrid.hcGrid tr.rgHoveredRow a,
-.hcForm .RadGrid tr.rgActiveRow a,
-.RadGrid.hcGrid tr.rgActiveRow a,
-.hcForm .RadGrid .rgFooter a,
-.RadGrid.hcGrid .rgFooter a,
-.hcForm .RadGrid .rgEditForm a,
-.RadGrid.hcGrid .rgEditForm a {
-  color: #f04f30;
-  font-weight: bold;
-}
-.hcForm .RadGrid .rgEditRow,
-.RadGrid.hcGrid .rgEditRow {
-  background-image: none;
-}
-.hcForm .RadGrid .rgRow td,
-.RadGrid.hcGrid .rgRow td,
-.hcForm .RadGrid .rgAltRow td,
-.RadGrid.hcGrid .rgAltRow td {
-  border: 1px solid #d2d2d2 !important;
-  color: #0c0c0c;
-  font-size: 14px;
-  padding: 20px 17px;
-}
 .hcGrid {
   border-collapse: collapse;
   width: 100%;
@@ -2192,7 +1978,6 @@ html body .RadComboBoxDropDown_Default {
 .hcGrid .hcFormItem > input[type="text"],
 .hcGrid .hcFormItem > input[type="password"],
 .hcGrid span.riSingle,
-.hcGrid .RadComboBox,
 .hcGrid .hcButton,
 .hcGrid .hcButton:visited {
   width: 100% !important;
@@ -2334,9 +2119,7 @@ html body .RadComboBoxDropDown_Default {
 }
 /* -------- Image Upload -------- */
 .hcImageUpload {
-  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -khtml-box-sizing: border-box;
   float: left;
@@ -2355,9 +2138,7 @@ html body .RadComboBoxDropDown_Default {
   max-width: 100%;
 }
 .hcImageUpload .hcButton {
-  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -khtml-box-sizing: border-box;
   position: relative;
@@ -2590,8 +2371,6 @@ select.hcSelectionList {
   background-image: none;
   opacity: 0.65;
   filter: alpha(opacity=65);
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
   box-shadow: none;
   color: #333;
   background-color: #E6E6E6;
@@ -2602,8 +2381,6 @@ select.hcSelectionList {
   background-image: none;
   opacity: 0.65;
   filter: alpha(opacity=65);
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
   box-shadow: none;
   color: #333;
   background-color: #E6E6E6;
@@ -2618,8 +2395,6 @@ select.hcSelectionList {
   background-image: none;
   opacity: 0.65;
   filter: alpha(opacity=65);
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
   box-shadow: none;
   color: #333;
   background-color: #E6E6E6;
@@ -2665,7 +2440,7 @@ select.hcSelectionList {
   }
 }
 #branding {
-  width: 1600px;
+  width: 1500px;
   height: 70px;
   margin: 0 auto;
   background: url(images/admin_logo.png) no-repeat 0px 0px;
@@ -2686,11 +2461,11 @@ select.hcSelectionList {
   display: inline;
 }
 #mainmenu {
-  background: #797c7c;
+  background: #0c0c0c;
 }
 #mainmenu > ul {
   height: 44px;
-  width: 1600px;
+  width: 1500px;
   margin: 0 auto;
   padding: 0 60px;
   list-style-type: none;
@@ -2720,7 +2495,6 @@ select.hcSelectionList {
   list-style-type: none;
   padding: 10px 0;
   background-color: #555757;
-  -webkit-box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.25);
   box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 0.25);
   margin-left: -20px;
   margin-top: 10px;
@@ -2747,7 +2521,8 @@ select.hcSelectionList {
 .hcMenuIcon3,
 .hcMenuIcon4,
 .hcMenuIcon5,
-.hcMenuIcon6 {
+.hcMenuIcon6,
+.hcMenuIcon7 {
   display: inline-block;
   line-height: 25px;
   vertical-align: text-top;
@@ -2781,6 +2556,9 @@ select.hcSelectionList {
 .hcMenuIcon6 {
   background-position: -25px 0;
 }
+.hcMenuIcon7 {
+  background-position: -175px 0;
+}
 .hcIconHelp {
   background-position: -150px 0;
 }
@@ -2795,8 +2573,10 @@ select.hcSelectionList {
 #navwrapper {
   display: table;
   height: 100%;
-  margin: 54px auto 0;
-  width: 1600px;
+  margin: 0 auto 54px auto;
+  width: 1500px;
+  position: relative;
+  top: -10px;
 }
 @media (max-width: 1600px) {
   #content,
@@ -2963,9 +2743,7 @@ body > form {
   padding-right: 0;
 }
 .hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem select {
-  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -khtml-box-sizing: border-box;
   padding: 3px 5px;
@@ -2976,33 +2754,6 @@ body > form {
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
   color: #ffffff;
-}
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem .RadComboBox.RadComboBox_Default {
-  border: 1px solid #63696f;
-}
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem .RadComboBox_Default .rcbReadOnly .rcbInputCellLeft {
-  background: none;
-  padding: 0 0 0 8px !important;
-}
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem .RadComboBox_Default .rcbReadOnly .rcbInputCellLeft > input {
-  margin-bottom: 0;
-}
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem .RadComboBox_Default .rcbReadOnly .rcbInputCellLeft > input:focus {
-  border: none;
-}
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem .RadComboBox_Default .rcbReadOnly .rcbInput {
-  color: #ffffff;
-}
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem .RadComboBox_Default td.rcbInputCellLeft {
-  border: none;
-}
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem .RadComboBox_Default td.rcbArrowCellRight,
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem .RadComboBox_Default td.rcbArrowCell {
-  border: none;
-  background: url(Images/admin_form_sprite.png) 0 -230px no-repeat transparent !important;
-}
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem .RadComboBox .rcbArrowCell a {
-  width: 26px;
 }
 .hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem table tbody tr td {
   color: #ffffff;
@@ -3046,9 +2797,7 @@ body > form {
   padding-top: 20px;
 }
 .hcNavContent .hcNavContentBody .hcBlock.hcNavContentBottom .hcFormItem > select {
-  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -khtml-box-sizing: border-box;
   padding: 3px 5px;
@@ -3090,9 +2839,7 @@ body > form {
 }
 .hcNavContent .hcBlockNoBorder > .hcPrimaryAction,
 .hcNavContent .hcBlockNoBorder > .hcSecondaryAction {
-  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -khtml-box-sizing: border-box;
   width: 100%;
@@ -3297,7 +3044,7 @@ body > form {
 }
 .hcBranding {
   background: rgba(0, 0, 0, 0) url("images/admin_logo.png") no-repeat scroll 0 0;
-  padding-left: 240px;
+  padding-left: 260px;
 }
 .hcWizPayment {
   margin: 0px 0px 0px 120px;
@@ -3460,7 +3207,6 @@ div.ui-dialog-titlebar > a.ui-dialog-titlebar-close {
   width: 18px;
   margin: 0px;
   overflow: hidden;
-  -webkit-border-radius: 12px;
   border-radius: 12px;
   background: #585858 url(Images/Buttons/x.png) no-repeat;
   background-position: -1px -1px;

@@ -23,10 +23,10 @@
 
 #endregion
 
+using System.Web.UI.WebControls;
 using Hotcakes.Commerce.Dnn.Utils;
 using Hotcakes.Commerce.Dnn.Web;
 using Hotcakes.Modules.Core.Settings;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Search
 {
@@ -39,7 +39,7 @@ namespace Hotcakes.Modules.Search
         /// </summary>
         private void FillForm()
         {
-            ViewComboBox.Items.Add(new RadComboBoxItem(LocalizeString("NoneSelectedText"), string.Empty));
+            ViewComboBox.Items.Add(new ListItem(LocalizeString("NoneSelectedText"), string.Empty));
             ViewComboBox.AppendDataBoundItems = true;
             ViewComboBox.DataSource = DnnPathHelper.GetViewNames("Search");
             ViewComboBox.DataBind();

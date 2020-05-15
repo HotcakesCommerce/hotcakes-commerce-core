@@ -26,9 +26,10 @@
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Hotcakes.Commerce;
+using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Taxes;
 using Hotcakes.Modules.Core.Admin.AppCode;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.SetupWizard
 {
@@ -53,9 +54,8 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
             btnTaxScheduleSave.Click += btnTaxScheduleSave_Click;
             btnTaxScheduleCancel.Click += btnTaxScheduleCancel_Click;
 
-            LocalizeView();
-
-            LoadSchedules();
+            gridTaxes.RowEditing += gridTaxes_RowEditing;
+            gridTaxes.RowDeleting += gridTaxes_RowDeleting;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -64,6 +64,10 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
 
             if (!Page.IsPostBack)
             {
+                LocalizeView();
+
+                LoadSchedules();
+
                 LoadTaxationSettings();
             }
 
@@ -87,20 +91,20 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
             LoadTaxScheduleEditor();
         }
 
-        protected void gridTaxes_ItemDelete(object sender, GridCommandEventArgs e)
+        protected void gridTaxes_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            var itemId = ((TaxSchedule) e.Item.DataItem).Id;
-            HccApp.OrderServices.TaxSchedulesDestroy(itemId);
+            var itemId = gridTaxes.DataKeys[e.RowIndex];
+            HccApp.OrderServices.TaxSchedulesDestroy(long.Parse(itemId.Value.ToString()));
             LoadSchedules();
         }
 
-        protected void gridTaxes_ItemEdit(object sender, GridCommandEventArgs e)
+        protected void gridTaxes_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            var taxSchedule = (TaxSchedule) e.Item.DataItem;
-            e.Canceled = true;
-            e.Item.Edit = false;
+            e.Cancel = true;
 
-            EditedTaxScheduleId = taxSchedule.Id;
+            var taxSchedule = gridTaxes.DataKeys[e.NewEditIndex];
+
+            EditedTaxScheduleId = long.Parse(taxSchedule.Value.ToString());
             LoadTaxScheduleEditor();
         }
 
@@ -154,17 +158,6 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
             {
                 msg.ShowInformation(
                     "Product Catalog selling price excludes VAT. All store selling prices will be shown exclusive of Sales Tax/VAT. Sales Tax/VAT will be added during checkout");
-            }
-        }
-
-        protected void gridTaxes_OnItemCreated(object sender, GridItemEventArgs e)
-        {
-            var headerItem = e.Item as GridHeaderItem;
-            if (headerItem != null)
-            {
-                var header = headerItem;
-
-                header["Name"].Text = Localization.GetString("ScheduleName");
             }
         }
 
@@ -230,8 +223,11 @@ namespace Hotcakes.Modules.Core.Admin.SetupWizard
 
         private void LocalizeView()
         {
-            txtDisplayName.EmptyMessage = Localization.GetString("txtDisplayName.EmptyMessage");
+            txtDisplayName.Attributes["placeholder"] = Localization.GetString("txtDisplayName.EmptyMessage");
             DisplayNameValidator.ErrorMessage = Localization.GetString("DisplayNameValidator.ErrorMessage");
+
+            var localization = Factory.Instance.CreateLocalizationHelper(LocalResourceFile);
+            LocalizationUtils.LocalizeGridView(gridTaxes, localization);
         }
 
         #endregion

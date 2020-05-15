@@ -40,22 +40,22 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         protected global::System.Web.UI.WebControls.TextBox FileSelectedTextBox;
         
         /// <summary>
-        /// FileHasBeenSelectedCustomValidator control.
+        /// cvFileHasBeenSelected control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator FileHasBeenSelectedCustomValidator;
+        protected global::System.Web.UI.WebControls.CustomValidator cvFileHasBeenSelected;
         
         /// <summary>
-        /// FileIsUniqueToProductCustomValidator control.
+        /// cvFileIsUniqueToProduct control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator FileIsUniqueToProductCustomValidator;
+        protected global::System.Web.UI.WebControls.CustomValidator cvFileIsUniqueToProduct;
         
         /// <summary>
         /// browseButton control.
@@ -103,13 +103,13 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         protected global::System.Web.UI.WebControls.TextBox ShortDescriptionTextBox;
         
         /// <summary>
-        /// DescriptionIsUniqueToProductCustomValidator control.
+        /// cvDescriptionIsUniqueToProduct control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator DescriptionIsUniqueToProductCustomValidator;
+        protected global::System.Web.UI.WebControls.CustomValidator cvDescriptionIsUniqueToProduct;
         
         /// <summary>
         /// AvailableMinutesRow control.
@@ -148,12 +148,12 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         protected global::System.Web.UI.WebControls.TextBox NumberOfDownloadsTextBox;
         
         /// <summary>
-        /// RegularExpressionValidator1 control.
+        /// revDownloadNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revDownloadNumber;
     }
 }

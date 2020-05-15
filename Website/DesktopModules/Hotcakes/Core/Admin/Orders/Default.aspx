@@ -62,44 +62,44 @@
     <%--<hcc:NavMenu ID="ucNavMenu" runat="server" />--%>
     <asp:Panel ID="pnlFilter" runat="server" CssClass="hcBlock hcBlockLight hcClearfix" DefaultButton="btnGo">
         <div class="hcForm">
-            <label class="hcLabel">Search</label>
+            <label class="hcLabel"><%=Localization.GetString("lblSearch") %></label>
             <div class="hcFormItem hcGo">
                 <div class="hcFieldOuter">
                     <asp:TextBox ID="FilterField" runat="server" />
-                    <asp:LinkButton ID="btnGo" runat="server" Text="Filter Results" CssClass="hcIconRight" OnClick="btnGo_Click" />
+                    <asp:LinkButton ID="btnGo" runat="server" resourcekey="btnFilterResults" CssClass="hcIconRight" OnClick="btnGo_Click" />
                 </div>
             </div>
             <div class="hcFormItem">
                 <asp:DropDownList ID="lstStatus" runat="server" OnSelectedIndexChanged="lstStatus_SelectedIndexChanged" AutoPostBack="True">
-                    <asp:ListItem Value="" Text="- All Orders -" />
-                    <asp:ListItem Value="F37EC405-1EC6-4a91-9AC4-6836215FBBBC" Text="New Orders" />
-                    <asp:ListItem Value="e42f8c28-9078-47d6-89f8-032c9a6e1cce" Text="Ready for Payment" />
-                    <asp:ListItem Value="0c6d4b57-3e46-4c20-9361-6b0e5827db5a" Text="Ready for Shipping" />
-                    <asp:ListItem Value="09D7305D-BD95-48d2-A025-16ADC827582A" Text="Completed" />
-                    <asp:ListItem Value="88B5B4BE-CA7B-41a9-9242-D96ED3CA3135" Text="On Hold" />
-                    <asp:ListItem Value="A7FFDB90-C566-4cf2-93F4-D42367F359D5" Text="Cancelled" />
+                    <asp:ListItem Value="" resourcekey="Status_AllOrders" />
+                    <asp:ListItem Value="F37EC405-1EC6-4a91-9AC4-6836215FBBBC" resourcekey="Status_NewOrders" />
+                    <asp:ListItem Value="e42f8c28-9078-47d6-89f8-032c9a6e1cce" resourcekey="Status_ReadyForPayment" />
+                    <asp:ListItem Value="0c6d4b57-3e46-4c20-9361-6b0e5827db5a" resourcekey="Status_ReadyForShipping" />
+                    <asp:ListItem Value="09D7305D-BD95-48d2-A025-16ADC827582A" resourcekey="Status_Completed" />
+                    <asp:ListItem Value="88B5B4BE-CA7B-41a9-9242-D96ED3CA3135" resourcekey="Status_OnHold" />
+                    <asp:ListItem Value="A7FFDB90-C566-4cf2-93F4-D42367F359D5" resourcekey="Status_Canceled" />
                 </asp:DropDownList>
             </div>
             <div class="hcFormItem">
                 <asp:DropDownList ID="lstPaymentStatus" runat="server" OnSelectedIndexChanged="lstPaymentStatus_SelectedIndexChanged" AutoPostBack="True">
-                    <asp:ListItem Value="" Text="- Any Payment -" />
-                    <asp:ListItem Value="1" Text="Unpaid" />
-                    <asp:ListItem Value="2" Text="Partially Paid" />
-                    <asp:ListItem Value="3" Text="Paid" />
-                    <asp:ListItem Value="4" Text="Over Paid" />
+                    <asp:ListItem Value="" resourcekey="Payment_AnyPayment" />
+                    <asp:ListItem Value="1" resourcekey="Payment_Unpaid" />
+                    <asp:ListItem Value="2" resourcekey="Payment_PartiallyPaid" />
+                    <asp:ListItem Value="3" resourcekey="Payment_Paid" />
+                    <asp:ListItem Value="4" resourcekey="Payment_OverPaid" />
                 </asp:DropDownList>
             </div>
             <div class="hcFormItem hcFormItemNoPadding">
                 <asp:DropDownList ID="lstShippingStatus" runat="server" OnSelectedIndexChanged="lstShippingStatus_SelectedIndexChanged" AutoPostBack="True">
-                    <asp:ListItem Value="" Text="- Any Shipping -" />
-                    <asp:ListItem Value="1" Text="Unshipped" />
-                    <asp:ListItem Value="2" Text="Partially Shipped" />
-                    <asp:ListItem Value="3" Text="Shipped" />
+                    <asp:ListItem Value="" resourcekey="Shipping_AnyShipping" />
+                    <asp:ListItem Value="1" resourcekey="Shipping_Unshipped" />
+                    <asp:ListItem Value="2" resourcekey="Shipping_PartiallyShipped" />
+                    <asp:ListItem Value="3" resourcekey="Shipping_Shipped" />
                 </asp:DropDownList>
             </div>
             <hcc:DateRangePicker ID="DateRangePicker1" runat="server" FormItemCssClass="hcFormItem" />
             <div class="hcFormItem">
-                <asp:CheckBox ID="chkNewestFirst" runat="server" Text="Newest Items First" AutoPostBack="True" OnCheckedChanged="chkNewestFirst_CheckedChanged" />
+                <asp:CheckBox ID="chkNewestFirst" runat="server" resourcekey="chkNewestItemsFirst" AutoPostBack="True" OnCheckedChanged="chkNewestFirst_CheckedChanged" />
             </div>
         </div>
     </asp:Panel>
@@ -107,10 +107,10 @@
     <div class="hcBlock hcBlockLight" id="OrderManagerActions" runat="server" visible="false">
         <div class="hcForm">
             <div class="hcFormItem">
-                <asp:LinkButton ID="lnkAcceptAll" runat="server" CssClass="hcTertiaryAction" Text="Accept All New Orders" OnClick="lnkAcceptAll_Click" Visible="false" />
-                <asp:LinkButton ID="lnkChargeAll" runat="server" CssClass="hcTertiaryAction" Text="Charge All & Mark for Shipping" OnClick="lnkChargeAll_Click" Visible="false" />
-                <asp:LinkButton ID="lnkShipAll" runat="server" CssClass="hcPrimaryAction" Text="Ship All Orders" OnClick="lnkShipAll_Click" Visible="false" />
-                <asp:LinkButton ID="lnkPrintPacking" runat="server" CssClass="hcTertiaryAction" Text="Print Packing Slips & Ship All" OnClick="lnkPrintPacking_Click" Visible="false" />
+                <asp:LinkButton ID="lnkAcceptAll" runat="server" CssClass="hcTertiaryAction" resourcekey="btnAcceptAll" OnClick="lnkAcceptAll_Click" Visible="false" />
+                <asp:LinkButton ID="lnkChargeAll" runat="server" CssClass="hcTertiaryAction" resourcekey="btnChargeAll" OnClick="lnkChargeAll_Click" Visible="false" />
+                <asp:LinkButton ID="lnkShipAll" runat="server" CssClass="hcPrimaryAction" resourcekey="btnShipAll" OnClick="lnkShipAll_Click" Visible="false" />
+                <asp:LinkButton ID="lnkPrintPacking" runat="server" CssClass="hcTertiaryAction" resourcekey="btnPrintAll" OnClick="lnkPrintPacking_Click" Visible="false" />
             </div>
         </div>
     </div>
@@ -118,7 +118,7 @@
     <div class="hcBlock hcBlockLight hcClearfix">
         <div class="hcForm">
             <div class="hcFormItemLabel">
-                <label class="hcLabel">Print Selected Orders</label>
+                <label class="hcLabel"><%=Localization.GetString("lblPrintSelected") %></label>
             </div>
             <div class="hcFormItem">
                 <asp:DropDownList ID="lstPrintTemplate" ClientIDMode="Static" runat="server" />
@@ -129,16 +129,16 @@
     <div class="hcBlock">
         <div class="hcForm">
             <div class="hcFormItem">
-                <asp:LinkButton ID="btnBatchPrint" ClientIDMode="Static" runat="server" Text="Print" CssClass="hcTertiaryAction" />
+                <asp:LinkButton ID="btnBatchPrint" ClientIDMode="Static" runat="server" resourcekey="btnBatchPrint" CssClass="hcTertiaryAction" />
             </div>
         </div>
         <div runat="server" id="divExportLinks">
             <div class="hcForm">
                 <div class="hcFormItem">
-                    <asp:LinkButton CssClass="hcTertiaryAction" ID="lnkExportToExcel" Text="Export to Excel" runat="server" />
+                    <asp:LinkButton CssClass="hcTertiaryAction" ID="lnkExportToExcel" resourcekey="btnExportExcel" runat="server" />
                 </div>
                 <div class="hcFormItem hcFormItemNoPadding">
-                    <asp:LinkButton CssClass="hcTertiaryAction" ID="lnkExportToQuickbooks" Text="Export to Quickbooks" runat="server" />
+                    <asp:LinkButton CssClass="hcTertiaryAction" ID="lnkExportToQuickbooks" resourcekey="btnExportQuickBooks" runat="server" />
                 </div>
             </div>
         </div>
@@ -161,7 +161,7 @@
         <Columns>
             <asp:TemplateField ItemStyle-Width="20px">
                 <HeaderTemplate>
-                    <a href="#" class="pickerallbutton" data-all="All" data-none="None">All</a>
+                    <a href="#" class="pickerallbutton" data-all="All" data-none="None"><%=Localization.GetString("All") %></a>
                 </HeaderTemplate>
                 <ItemTemplate>
                     <div class="hcCheckboxOuter">
@@ -170,7 +170,7 @@
                     </div>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:HyperLinkField HeaderText="Order #" ItemStyle-HorizontalAlign="Center"
+            <asp:HyperLinkField HeaderText="OrderNumber" ItemStyle-HorizontalAlign="Center"
                 DataTextField="OrderNumber"
                 DataNavigateUrlFields="bvin"
                 DataNavigateUrlFormatString="ViewOrder.aspx?id={0}" />
@@ -183,7 +183,7 @@
                 <ItemTemplate>
                     <strong runat="server" id="strongAmount" />
                     <span class="hcFormItemInline" runat="server" id="spanRecurringInfo" visible="false">
-                        <strong class="hcTextInfo hcRecurringInfo">RECURRING
+                        <strong class="hcTextInfo hcRecurringInfo"><%=Localization.GetString("Recurring") %>
                         <span runat="server" id="spanRecurringPopup" class="hcFormInfo Hidden"></span>
                         </strong>
                     </span>
@@ -201,15 +201,17 @@
             </asp:TemplateField>
             <asp:TemplateField ItemStyle-Width="90px">
                 <ItemTemplate>
-                    <asp:HyperLink ID="btnDetails" NavigateUrl='<%#Eval("bvin", "ViewOrder.aspx?id={0}") %>' runat="server"><i class="hcIconEdit"></i>Details</asp:HyperLink>
-                    <asp:HyperLink ID="btnPayment" NavigateUrl='<%#Eval("bvin", "OrderPayments.aspx?id={0}") %>' runat="server"><i class="hcIconEdit"></i>Payment</asp:HyperLink>
-                    <asp:HyperLink ID="btnShipping" NavigateUrl='<%#Eval("bvin", "ShipOrder.aspx?id={0}") %>' runat="server"><i class="hcIconEdit"></i>Shipping</asp:HyperLink>
+                    <asp:HyperLink ID="btnDetails" NavigateUrl='<%#Eval("bvin", "ViewOrder.aspx?id={0}") %>' runat="server"><i class="hcIconEdit"></i><%=Localization.GetString("btnDetails") %></asp:HyperLink>
+                    <asp:HyperLink ID="btnPayment" NavigateUrl='<%#Eval("bvin", "OrderPayments.aspx?id={0}") %>' runat="server"><i class="hcIconEdit"></i><%=Localization.GetString("btnPayment") %></asp:HyperLink>
+                    <asp:HyperLink ID="btnShipping" NavigateUrl='<%#Eval("bvin", "ShipOrder.aspx?id={0}") %>' runat="server"><i class="hcIconEdit"></i><%=Localization.GetString("btnShipping") %></asp:HyperLink>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
+        <EmptyDataTemplate>
+            <%=Localization.GetString("NoOrders") %>
+        </EmptyDataTemplate>
     </asp:GridView>
 
     <asp:Literal ID="litPager2" runat="server" EnableViewState="false" />
 
 </asp:Content>
-

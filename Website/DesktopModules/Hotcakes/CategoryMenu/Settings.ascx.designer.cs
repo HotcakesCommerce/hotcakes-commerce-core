@@ -55,7 +55,7 @@ namespace Hotcakes.Modules.CategoryMenu {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ViewComboBox;
+        protected global::System.Web.UI.WebControls.DropDownList ViewComboBox;
         
         /// <summary>
         /// MenuTitleLabel control.
@@ -91,7 +91,7 @@ namespace Hotcakes.Modules.CategoryMenu {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ModeField;
+        protected global::System.Web.UI.WebControls.DropDownList ModeField;
         
         /// <summary>
         /// pnlSelectedCategories control.
@@ -190,7 +190,7 @@ namespace Hotcakes.Modules.CategoryMenu {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlParentCategories;
+        protected global::System.Web.UI.WebControls.DropDownList ddlParentCategories;
         
         /// <summary>
         /// HomeLinkFieldLabel control.

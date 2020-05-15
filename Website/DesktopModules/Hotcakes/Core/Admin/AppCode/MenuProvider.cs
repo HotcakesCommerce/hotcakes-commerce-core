@@ -50,17 +50,20 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
                 {
                     language = "." + HttpContext.Current.Request.Cookies["language"].Value;
                 }
-                if ((language == ".en-us") || (language == ".en-US") || (language == ".EN-us") || (language == ".EN-US"))
-                    language = "";
 
-                return ("~/DesktopModules/Hotcakes/ControlPanel/App_LocalResources/AdminControlBar.ascx" + language + ".resx");
+                if (language.ToLower() == ".en-us")
+                {
+                    language = string.Empty;
+                }
+
+                return ("~/DesktopModules/Hotcakes/Core/Admin/App_LocalResources/AdminControlBar" + language + ".resx");
             }
         }
 
 
 
 
-        private const string _MenuFileVirtualPath = "~/desktopmodules/hotcakes/core/admin/menu.xml";
+        private const string _MenuFileVirtualPath = "~/DesktopModules/Hotcakes/Core/Admin/Menu.xml";
 
         private static List<MenuItem> _menuItems;
 
