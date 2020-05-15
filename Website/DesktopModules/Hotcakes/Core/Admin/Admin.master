@@ -1,11 +1,12 @@
 <%@ Master Language="C#" Inherits="Hotcakes.Modules.Core.Admin.Admin" CodeBehind="Admin.master.cs" AutoEventWireup="True" %>
 <%@ Register Src="Header.ascx" TagName="Header" TagPrefix="hcc" %>
 <%@ Register Src="Footer.ascx" TagName="Footer" TagPrefix="hcc" %>
-<%@ Register Src="Controls/NavMenu.ascx" TagName="NavMenu" TagPrefix="hcc" %>
+<%@ Register Src="JQueryInclude.ascx" TagName="jQuery" TagPrefix="hcc" %>
 <!DOCTYPE html>
 <html>
 <head runat="server">
     <title>Hotcakes Commerce</title>
+    <hcc:jQuery runat="server"/>
     <!--[if IE]><script type="text/javascript" src="/DesktopModules/Hotcakes/Core/Scripts/excanvas.js"></script><![endif]-->
 </head>
 <body>
