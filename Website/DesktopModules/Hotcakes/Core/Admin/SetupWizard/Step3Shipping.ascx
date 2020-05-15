@@ -34,11 +34,11 @@
                         <asp:LinkButton ID="btnNewMethod" resourcekey="Create" CssClass="hcButton hcSmall" OnClick="btnCreateMethod_Click" runat="server" />
                     </div>
                     <div class="hcFormItem">
-                        <asp:GridView runat="server" ID="gridMethods" AutoGenerateColumns="False" GridLines="None" Width="100%" CssClass="dnnGrid"  
+                        <asp:GridView runat="server" ID="gridMethods" AutoGenerateColumns="False" GridLines="None" Width="100%" CssClass="hcGrid"  
                             OnDeleteCommand="gridMethods_RowDeleting" OnEditCommand="gridMethods_RowEditing" DataKeyNames="Bvin">
-                            <HeaderStyle CssClass="dnnGridHeader"/>
-                            <RowStyle CssClass="dnnGridItem"/>
-                            <AlternatingRowStyle CssClass="dnnGridAltItem"/>
+                            <HeaderStyle CssClass="hcGridHeader"/>
+                            <RowStyle CssClass="hcGridItem"/>
+                            <AlternatingRowStyle CssClass="hcGridAltItem"/>
                             <Columns>
                                 <asp:BoundField DataField="Name" HeaderText="ShippingMethods" />
                                 <asp:TemplateField>
@@ -70,12 +70,12 @@
                         <asp:LinkButton ID="btnNewZone" resourcekey="Create" CssClass="hcButton hcSmall" OnClick="btnCreateZone_Click" runat="server" ValidationGroup="ShippingZoneWizard" />
                     </div>
                     <div class="hcFormItem">
-                        <asp:GridView runat="server" ID="gridZones" AutoGenerateColumns="False" Width="100%" CssClass="dnnGrid" 
+                        <asp:GridView runat="server" ID="gridZones" AutoGenerateColumns="False" Width="100%" CssClass="hcGrid" 
                             OnItemDataBound="gridZones_ItemDataBound"
                             OnDeleteCommand="gridZones_RowDeleting"
                             OnEditCommand="gridZones_RowEditing" OnItemCreated="gridZones_RowCreated" DataKeyNames="Id">
-                            <HeaderStyle CssClass="dnnGridHeader"/>
-                            <RowStyle CssClass="dnnGridItem"/>
+                            <HeaderStyle CssClass="hcGridHeader"/>
+                            <RowStyle CssClass="hcGridItem"/>
                             <AlternatingRowStyle CssClass="dnnGridAltItem"/>
                             <Columns>
                                 <asp:BoundField DataField="Name" HeaderText="ShippingZones" />
