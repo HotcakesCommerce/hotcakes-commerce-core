@@ -13,24 +13,6 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
     public partial class PrintOrder {
         
         /// <summary>
-        /// OrderActions1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Hotcakes.Modules.Core.Admin.Orders.OrderActions OrderActions1;
-        
-        /// <summary>
-        /// lnkPrintNow control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkPrintNow;
-        
-        /// <summary>
         /// TemplateField control.
         /// </summary>
         /// <remarks>
@@ -46,7 +28,25 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnGenerate;
+        protected global::System.Web.UI.WebControls.LinkButton btnGenerate;
+        
+        /// <summary>
+        /// lnkPrintNow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkPrintNow;
+        
+        /// <summary>
+        /// btnContinue2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnContinue2;
         
         /// <summary>
         /// rpOrder control.
@@ -56,14 +56,5 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rpOrder;
-        
-        /// <summary>
-        /// btnContinue2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnContinue2;
     }
 }

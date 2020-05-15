@@ -1575,6 +1575,9 @@ select.hcSelectionList {
   color: #333;
   background-color: #E6E6E6;
 }
+.hcComboBox {
+  min-width: 160px;
+}
 #header {
   z-index: 10;
   position: relative;
@@ -1805,7 +1808,7 @@ body > form {
   display: table-cell;
   float: left;
   height: 100%;
-  width: 15%;
+  width: 18%;
 }
 .hcNavContent .hcNavContentBody {
   height: 100%;
@@ -1936,7 +1939,7 @@ body > form {
   padding: 3px 5px;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background: url(Images/admin_form_sprite.png) 156px -230px no-repeat #222222;
+  background: url(Images/admin_form_sprite.png) 170px -232px no-repeat #222222;
   border: 1px solid #63696f;
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
@@ -1992,7 +1995,7 @@ body > form {
   padding: 3px 5px;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background: url(Images/admin_form_sprite.png) 156px -230px no-repeat #222222;
+  background: url(Images/admin_form_sprite.png) 170px -232px no-repeat #222222;
   border: 1px solid #63696f;
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
@@ -2042,7 +2045,7 @@ body > form {
   float: right;
   height: 100%;
   margin-top: 6px;
-  width: 85%;
+  width: 82%;
 }
 .hcMainContent h1 {
   line-height: 30px;

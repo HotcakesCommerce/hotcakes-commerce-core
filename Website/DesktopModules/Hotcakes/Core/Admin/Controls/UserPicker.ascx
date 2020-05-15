@@ -3,9 +3,9 @@
 <asp:Panel ID="wrapper" runat="server" DefaultButton="btnValidateUser">
     <span class="hcLabel"><%=Localization.GetString("lblEmail") %></span><br />
     <asp:TextBox ID="UserNameField" runat="server" />
-    <asp:LinkButton ID="btnValidateUser" runat="server" CausesValidation="false" resoucekey="btnValidateUser" onclick="btnValidateUser_Click" />&nbsp;
-    <asp:LinkButton ID="btnBrowseUsers" runat="server" resourcekey="btnBrowseUsers" CausesValidation="false" onclick="btnBrowseUsers_Click" />
-    <asp:LinkButton ID="btnNewUser" runat="server" resourcekey="btnNewUser" CausesValidation="false" onclick="btnNewUser_Click" /><br />
+    <asp:LinkButton ID="btnValidateUser" runat="server" CausesValidation="false" resourcekey="btnValidateUser" CssClass="hcTertiaryAction hcSmall" onclick="btnValidateUser_Click" />&nbsp;
+    <asp:LinkButton ID="btnBrowseUsers" runat="server" resourcekey="btnBrowseUsers" CausesValidation="false" CssClass="hcTertiaryAction hcSmall" onclick="btnBrowseUsers_Click" />
+    <asp:LinkButton ID="btnNewUser" runat="server" resourcekey="btnNewUser" CausesValidation="false" CssClass="hcTertiaryAction hcSmall" onclick="btnNewUser_Click" /><br />
     <asp:Panel CssClass="controlarea2" ID="pnlUserBrowser" runat="server" Visible="false" DefaultButton="btnGoUserSearch">
         <span class="lightlabel"><%=Localization.GetString("lblCustomerBrowseFilter") %></span><br />
         <asp:TextBox ID="FilterField" runat="server" Columns="15"/>
@@ -19,10 +19,10 @@
                 <Columns>
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:Label ID="lblEmail" runat="server" Text='<%# Bind("Email") %>'>'/><br />
+                            <asp:Label ID="lblEmail" runat="server" Text='<%# Bind("Email") %>'/><br />
                             <span class="smalltext">                                
-                                <asp:Label ID="lblFirstName" runat="server" Text='<%# Bind("FirstName") %>'>'/>
-                                <asp:Label ID="lblLastName" runat="server" Text='<%# Bind("LastName") %>'>'/>
+                                <asp:Label ID="lblFirstName" runat="server" Text='<%# Bind("FirstName") %>'/>
+                                <asp:Label ID="lblLastName" runat="server" Text='<%# Bind("LastName") %>'/>
                             </span>
                         </ItemTemplate>
                     </asp:TemplateField>

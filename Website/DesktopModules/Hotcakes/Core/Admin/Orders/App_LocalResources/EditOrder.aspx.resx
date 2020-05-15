@@ -183,4 +183,7 @@
   <data name="rfCoupon.ErrorMessage" xml:space="preserve">
     <value>Coupon code is required</value>
   </data>
+  <data name="btnDeleteCoupon.Text" xml:space="preserve">
+    <value>Delete Promo Code</value>
+  </data>
 </root>

@@ -203,7 +203,7 @@
                         <asp:LinkButton ID="btnAddCoupon" runat="server" CssClass="hcSecondaryAction hcSmall disabled" resourcekey="btnAddCoupon" CausesValidation="true" OnClick="btnAddCoupon_Click" ValidationGroup="vgCoupon" />
                     </div>
                     <div class="hcFormItem">
-                        <asp:ListBox ID="lstCoupons" runat="server" DataTextField="CouponCode" DataValueField="CouponCode" Height="150px" SelectionMode="Multiple" CssClass="RadComboBox" />
+                        <asp:ListBox ID="lstCoupons" runat="server" DataTextField="CouponCode" DataValueField="CouponCode" Height="150px" SelectionMode="Multiple" CssClass="hcComboBox" />
                     </div>
                     <div class="hcFormItem hcFormItem50p">
                         <asp:LinkButton ID="btnDeleteCoupon" CausesValidation="false" runat="server"  CssClass="hcSecondaryAction hcSmall disabled" resourcekey="btnDeleteCoupon" OnClick="btnDeleteCoupon_Click" />

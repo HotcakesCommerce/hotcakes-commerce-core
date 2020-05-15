@@ -5,13 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head runat="server">
-    <title>Hotcakes Setup Wizard</title>
+    <title>Hotcakes Commerce: Setup Wizard</title>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+    <hcc:jQuery runat="server"/>
 </head>
 <body>
     <form runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnableCdn="true" />
-        <hcc:jQuery runat="server"/>
         <asp:PlaceHolder ID="BodySCRIPTS" runat="server" />
         <div id="wrapper" class="dnnClear">
             <div id="content" class="hcAdminWizard">

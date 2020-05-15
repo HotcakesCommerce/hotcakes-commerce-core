@@ -117,28 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btnEditOrder.Text" xml:space="preserve">
-    <value>Edit Order</value>
+  <data name="BrowserPrintDisabled.Text" xml:space="preserve">
+    <value>The browser print function is not enabled. Please choose the print button from your browser. This is usually found in the menus at:  File &gt; Print</value>
   </data>
-  <data name="btnOrderDetails.Text" xml:space="preserve">
-    <value>Order Details</value>
-  </data>
-  <data name="btnPayment.Text" xml:space="preserve">
-    <value>Payment</value>
-  </data>
-  <data name="btnShipping.Text" xml:space="preserve">
-    <value>Shipping</value>
-  </data>
-  <data name="lnkManager.Text" xml:space="preserve">
+  <data name="btnContinue2.Text" xml:space="preserve">
     <value>Close</value>
   </data>
-  <data name="lnkPrint.Text" xml:space="preserve">
-    <value>Print Options</value>
+  <data name="btnGenerate.Text" xml:space="preserve">
+    <value>Generate Template</value>
+  </data>
+  <data name="lblChooseTemplate.Text" xml:space="preserve">
+    <value>Choose a Print Template</value>
   </data>
   <data name="lnkPrintNow.Text" xml:space="preserve">
-    <value>Print</value>
+    <value>Print Now</value>
   </data>
-  <data name="PrintAlert.Text" xml:space="preserve">
-    <value>Please choose the print button from your browser. Usually found in the menu dropdowns at: File &gt; Print</value>
+  <data name="PageTitle.Text" xml:space="preserve">
+    <value>Print Order</value>
+  </data>
+  <data name="SubHeader.Text" xml:space="preserve">
+    <value>Your Print Appears Below</value>
   </data>
 </root>

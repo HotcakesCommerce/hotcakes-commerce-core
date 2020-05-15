@@ -43,7 +43,7 @@
             <asp:HyperLink ID="lnkPrintNow" runat="server" resourcekey="lnkPrintNow" CssClass="hcTertiaryAction" />
         </div>
         <div class="hcFormItem">
-            <asp:HyperLink ID="lnkPrint" runat="server" resourcekey="lnkPrint" CssClass="hcTertiaryAction" />
+            <asp:HyperLink ID="lnkPrint" runat="server" resourcekey="lnkPrint" CssClass="hcTertiaryAction" Target="_blank" />
         </div>
         <div class="hcFormItem">
             <asp:HyperLink ID="lnkManager" runat="server" resourcekey="lnkManager" CssClass="hcTertiaryAction" />
