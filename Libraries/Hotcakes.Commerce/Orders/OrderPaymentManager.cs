@@ -121,6 +121,7 @@ namespace Hotcakes.Commerce.Orders
             {
                 Customer =
                 {
+                    IpAddress = _app.CurrentRequestContext.RoutingContext.HttpContext.Request.UserHostAddress,
                     Email = o.UserEmail,
                     City = o.BillingAddress.City,
                     Company = o.BillingAddress.Company,
