@@ -1977,11 +1977,6 @@ namespace Hotcakes.Commerce.Orders
                         t.GiftCard = p.GiftCard;
                         t.Amount = p.Amount;
 
-                        // Pass Shift4 Invoice Number through to capture
-                        t.SetAdditionalSetting("shift4invoicenumber",
-                            p.GetAdditionalSettingAsString("shift4invoicenumber"));
-                        t.SetAdditionalSetting("shift4card", p.GetAdditionalSettingAsString("shift4card"));
-
                         t.Action = ActionType.GiftCardCapture;
 
                         var proc = currentContext.CurrentStore.Settings.PaymentCurrentGiftCardProcessor();
