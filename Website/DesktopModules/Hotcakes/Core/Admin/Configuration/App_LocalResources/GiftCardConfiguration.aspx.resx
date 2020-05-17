@@ -142,7 +142,7 @@
     <value>"XX..." placeholders will be replaced to random numbers. For example GIFTXXXX-XXXX-XXXX-XXXX will look like: &lt;strong&gt;GIFT2121-2129-9843-4321&lt;/strong&gt;</value>
   </data>
   <data name="CardNumberFormat2.Text" xml:space="preserve">
-    <value>Please use minimum 10 placeholders for security reason. Maximum number length - 50 symbols.</value>
+    <value>Please use a minimum of 10 placeholders for security purposes. Maximum number length is 50 symbols.</value>
   </data>
   <data name="CardNumberFormat3.Text" xml:space="preserve">
     <value>"Format will use letters and numbers" option will additionally use letters for card numbers.</value>
