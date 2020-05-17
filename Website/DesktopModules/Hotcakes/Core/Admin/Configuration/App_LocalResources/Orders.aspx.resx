@@ -130,16 +130,16 @@
     <value>Shopping Cart</value>
   </data>
   <data name="chkForceSiteTerms.Text" xml:space="preserve">
-    <value>Require Terms Agreement During Checkout</value>
+    <value>Require terms agreement during checkout</value>
   </data>
   <data name="chkSwatches.Text" xml:space="preserve">
-    <value>Show Color Swatches for Marked Choices</value>
+    <value>Show color swatches for marked choices</value>
   </data>
   <data name="chkUseChildChoicesAdjustmentsForBundles.Text" xml:space="preserve">
-    <value>Use Child Choices Adjustments for Bundles</value>
+    <value>Use child choices adjustments for bundles</value>
   </data>
   <data name="chkZeroDollarOrders.Text" xml:space="preserve">
-    <value>Allow 0 Dollar Orders</value>
+    <value>Allow zero dollar orders</value>
   </data>
   <data name="LastOrderNumber.Text" xml:space="preserve">
     <value>Last Order Number</value>
@@ -157,7 +157,7 @@
     <value>Products</value>
   </data>
   <data name="cvLastOrderNumber.ErrorMessage" xml:space="preserve">
-    <value>Last Order Number must be numeric value greater or equal to 0</value>
+    <value>Last order number must be numeric value greater or equal to 0</value>
   </data>
   <data name="rfvLastOrderNumber.ErrorMessage" xml:space="preserve">
     <value>Last Order Number is required</value>
@@ -181,10 +181,10 @@
     <value>Shipping Account</value>
   </data>
   <data name="chkSendAbandonedCartEmails.Text" xml:space="preserve">
-    <value>Send E-Mail if Cart Was Abandoned</value>
+    <value>Send e-mail if cart was abandoned</value>
   </data>
   <data name="cvSendAbandonedEmailIn.ErrorMessage" xml:space="preserve">
-    <value>Send Abandoned E-Mail In (Days) must be integer and in between 1 to 365.</value>
+    <value>Send abandoned e-mail in (days) must be an integer and between 1 to 365.</value>
   </data>
   <data name="rfvSendAbandonedEmailIn.ErrorMessage" xml:space="preserve">
     <value>Send Abandoned E-Mail In (Days) is required</value>
@@ -193,12 +193,15 @@
     <value>Send Abandoned E-Mail In (Days)</value>
   </data>
   <data name="cvOrderLimitQuantity.ErrorMessage" xml:space="preserve">
-    <value>Minimum Order Quantity must be numeric value greater than 0</value>
+    <value>Minimum order quantity must be numeric value greater than 0</value>
   </data>
   <data name="cvOrderLimitWeight.ErrorMessage" xml:space="preserve">
-    <value>Maximum Order Weight must be numeric value greater than 0</value>
+    <value>Maximum order weight must be numeric value greater than 0</value>
   </data>
   <data name="rfvOrderLimitWeight.ErrorMessage" xml:space="preserve">
     <value>Maximum Order Weight is required</value>
+  </data>
+  <data name="chkRequirePhoneNumber.Text" xml:space="preserve">
+    <value>Require phone number during checkout</value>
   </data>
 </root>
