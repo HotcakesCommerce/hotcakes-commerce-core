@@ -122,6 +122,9 @@ namespace Hotcakes.Modules.Core
                 // This code have to be executed only once and not depending on version
                 if (!IsGenericCodeExecuted)
                 {
+                    // Copy System.Web.Mvc if it is not already present in bin folder
+                    CopyMvcLibrary();
+
                     // Increment CRM version that is used to render resources
                     IncrementCrmVersion();
 
@@ -619,6 +622,19 @@ namespace Hotcakes.Modules.Core
                     ScheduleSource = ScheduleSource.NOT_SET
                 };
                 SchedulingProvider.Instance().AddSchedule(oItem);
+            }
+        }
+
+        private void CopyMvcLibrary()
+        {
+            var versionofDNN = typeof (DotNetNukeContext).Assembly.GetName().Version;
+
+            if (versionofDNN < new Version("8.0"))
+            {
+                var sourceFile = HostingEnvironment.MapPath("~/DesktopModules/Hotcakes/System.Web.Mvc.dll");
+                var destFile = HostingEnvironment.MapPath("~/bin/System.Web.Mvc.dll");
+                if (!File.Exists(destFile))
+                    File.Copy(sourceFile, destFile);
             }
         }
 

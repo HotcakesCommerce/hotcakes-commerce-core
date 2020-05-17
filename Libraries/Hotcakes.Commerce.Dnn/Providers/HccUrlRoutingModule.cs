@@ -56,7 +56,11 @@ namespace Hotcakes.Commerce.Dnn.Providers
 
         private void RegisterViewEngines(object sender, EventArgs e)
         {
-            MvcUtils.RegisterViewEngines();
+            // For versions less than 8.0 routes are registered in ServiceRouteMapper
+            // to prevent registration of same view engine on each request
+            var versionofDNN = typeof (DotNetNukeContext).Assembly.GetName().Version;
+            if (versionofDNN >= new Version("8.0"))
+                MvcUtils.RegisterViewEngines();
         }
 
         private void InitServicePointManager(object sender, EventArgs e)

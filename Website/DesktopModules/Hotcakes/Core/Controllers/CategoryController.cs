@@ -36,6 +36,7 @@ using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Content;
 using Hotcakes.Commerce.Extensions;
 using Hotcakes.Commerce.Search;
+using Hotcakes.Commerce.Social;
 using Hotcakes.Commerce.Storage;
 using Hotcakes.Commerce.Urls;
 using Hotcakes.Commerce.Utilities;
