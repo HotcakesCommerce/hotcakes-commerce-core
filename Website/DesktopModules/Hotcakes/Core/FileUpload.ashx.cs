@@ -28,6 +28,7 @@ using System.IO;
 using System.Web;
 using DotNetNuke.Entities.Host;
 using Hotcakes.Commerce;
+using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Storage;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Web;
@@ -42,9 +43,14 @@ namespace Hotcakes.Modules.Core
         /// </summary>
         protected int MaxUploadSize = 0;
 
+        private const string UPLOAD_PATH_FORMAT = "OrderFiles/{0}/{1}";
+
         protected override object HandleAction(HttpContext context, HotcakesApplication hccApp)
         {
-            if (context.User.Identity.IsAuthenticated == false)
+            var optUniqueId = context.Request.Params["optUniqueId"];
+            var productChoice = hccApp.CatalogServices.ProductOptions.Find(optUniqueId);
+
+            if (productChoice == null || productChoice.OptionType != OptionTypes.FileUpload)
             {
                 // not found
                 context.Response.StatusCode = 404;
@@ -60,15 +66,12 @@ namespace Hotcakes.Modules.Core
             try
             {
                 var file = context.Request.Files[0];
-
                 var fileName = context.Request.Params["filename"];
-                var optUniqueId = context.Request.Params["optUniqueId"];
-
+                
                 var prePath = GetInitialPathOfUploadFolder(hccApp);
-                var orderProductPath = prePath + "\\" + optUniqueId;
+                var orderProductPath = string.Concat(prePath, "\\", optUniqueId);
 
-                var subPath = string.Format("OrderFiles/{0}/{1}", orderProductPath,
-                    Path.GetFileName(Text.CleanFileName(fileName)));
+                var subPath = string.Format(UPLOAD_PATH_FORMAT, orderProductPath, Path.GetFileName(Text.CleanFileName(fileName)));
                 var fullFilePath = DiskStorage.GetStoreDataPhysicalPath(hccApp.CurrentStore.Id, subPath);
 
                 //check if path directory exists
@@ -82,6 +85,9 @@ namespace Hotcakes.Modules.Core
                     VirtualPathUtility.ToAbsolute(DiskStorage.GetStoreDataVirtualPath(hccApp.CurrentStore.Id, subPath));
 
                 var extension = Path.GetExtension(fullFilePath);
+                //
+                // TODO: Update this DNN API call to check the User File list instead, after upgrading the minimum version to DNN 9.5/9.6
+                //
                 if (Host.AllowedExtensionWhitelist.IsAllowedExtension(extension) == false)
                 {
                     return new UploadResponse
@@ -126,7 +132,7 @@ namespace Hotcakes.Modules.Core
                         return new UploadResponse
                         {
                             StatusCode = 413,
-                            Message = "Uploaded File is too large"
+                            Message = "Uploaded file is too large"
                         };
                     }
 
@@ -143,7 +149,7 @@ namespace Hotcakes.Modules.Core
                     return new UploadResponse
                     {
                         StatusCode = 413,
-                        Message = "Uploaded File is too large"
+                        Message = "Uploaded file is too large"
                     };
                 }
 
@@ -246,7 +252,6 @@ namespace Hotcakes.Modules.Core
             return true;
         }
     }
-
 
     public class UploadResponse
     {
