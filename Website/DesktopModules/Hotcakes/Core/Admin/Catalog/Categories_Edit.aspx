@@ -62,7 +62,7 @@
             </div>
             <div class="hcFormItem">
                 <label class="hcLabel"><%=Localization.GetString("lblDescription") %><i class="hcLocalizable"></i></label>
-                <hcc:HtmlEditor ID="DescriptionField" runat="server" EditorHeight="175" EditorWidth="630" EditorWrap="true" />
+                <hcc:HtmlEditor ID="DescriptionField" runat="server" EditorHeight="175" EditorWidth="565" EditorWrap="true" />
             </div>
             <div class="hcFormItem">
                 <label class="hcLabel"><%=Localization.GetString("lblPageTitle") %><i class="hcLocalizable"></i></label>
@@ -70,11 +70,11 @@
             </div>
             <div class="hcFormItem">
                 <label class="hcLabel"><%=Localization.GetString("lblMetaDescription") %><i class="hcLocalizable"></i></label>
-                <asp:TextBox ID="MetaDescriptionField" runat="server" MaxLength="255" Width="630px" Height="75px" TextMode="MultiLine"/>
+                <asp:TextBox ID="MetaDescriptionField" runat="server" MaxLength="255" Width="565px" Height="75px" TextMode="MultiLine"/>
             </div>
             <div class="hcFormItem">
                 <label class="hcLabel"><%=Localization.GetString("lblMetaKeywords") %><i class="hcLocalizable"></i></label>
-                <asp:TextBox ID="MetaKeywordsField" runat="server" Columns="30" MaxLength="255" Width="630px"/>
+                <asp:TextBox ID="MetaKeywordsField" runat="server" Columns="30" MaxLength="255" Width="565px"/>
             </div>
             <div class="hcFormItem">
                 <label class="hcLabel"><%=Localization.GetString("lblSearchKeywords") %><i class="hcLocalizable"></i></label>
@@ -82,7 +82,7 @@
             </div>
             <div class="hcFormItem" runat="server" id="TaxonomyBlock">
                 <label class="hcLabel"><%=Localization.GetString("lblTaxonomyTags") %></label>
-                <asp:TextBox ID="txtTaxonomyTags" runat="server" TextMode="multiLine" Columns="40" Rows="3" Width="630px" />
+                <asp:TextBox ID="txtTaxonomyTags" runat="server" TextMode="multiLine" Columns="40" Rows="3" Width="565px" />
             </div>
         </div>
     </div>

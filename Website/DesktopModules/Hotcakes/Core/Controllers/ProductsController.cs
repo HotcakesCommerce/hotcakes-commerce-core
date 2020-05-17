@@ -32,6 +32,7 @@ using System.Web.Mvc;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Analytics;
 using Hotcakes.Commerce.Catalog;
+using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Content;
 using Hotcakes.Commerce.Extensions;
 using Hotcakes.Commerce.Orders;
@@ -444,6 +445,7 @@ namespace Hotcakes.Modules.Core.Controllers
             {
                 var faceBookAdmins = HccApp.CurrentStore.Settings.FaceBook.Admins;
                 var faceBookAppId = HccApp.CurrentStore.Settings.FaceBook.AppId;
+                var canonicalUrl = HccUrlBuilder.RouteHccUrl(HccRoute.Product, new { slug = model.LocalProduct.UrlSlug.ToLower() });
 
                 var currencyInfo =
                     HccApp.GlobalizationServices.Countries.FindAllForCurrency()
@@ -451,12 +453,12 @@ namespace Hotcakes.Modules.Core.Controllers
 
                 var sb = new StringBuilder();
 
-                sb.Append("<!-- FaceBook OpenGraph Tags -->");
-                sb.AppendFormat("<meta property=\"og:title\" content=\"{0}\"/>", PageTitle);
-                sb.Append("<meta property=\"og:type\" content=\"product\"/>");
-                sb.AppendFormat("<meta property=\"og:url\" content=\"{0}\"/>", ViewBag.CurrentUrl);
-                sb.AppendFormat("<meta property=\"og:image\" content=\"{0}\"/>", model.ImageUrls.MediumlUrl);
-                sb.AppendFormat("<meta property=\"og:price:amount\" content=\"{0}\" />", model.Prices.SitePrice.Text);
+                sb.AppendFormat(Constants.TAG_CANONICAL, canonicalUrl);
+                sb.AppendFormat(Constants.TAG_OGTITLE, PageTitle);
+                sb.Append(Constants.TAG_OGTYPE);
+                sb.AppendFormat(Constants.TAG_OGURL, ViewBag.CurrentUrl);
+                sb.AppendFormat(Constants.TAG_OGIMAGE, model.ImageUrls.MediumlUrl);
+                sb.AppendFormat(Constants.TAG_IOGPRICEAMOUNT, model.Prices.SitePrice.Text);
 
                 // TODO: Replace this with ISO 4217-3 currency code
                 // 
@@ -470,11 +472,11 @@ namespace Hotcakes.Modules.Core.Controllers
                 //      https://developers.facebook.com/docs/payments/product
                 //      https://developers.pinterest.com/rich_pins_product/
                 //      http://www.nationsonline.org/oneworld/currencies.htm
-                sb.AppendFormat("<meta property=\"og:price:currency\" content=\"{0}\" />", currencyInfo.IsoAlpha3);
+                sb.AppendFormat(Constants.TAG_IOGPRICECURRENCY, currencyInfo.IsoAlpha3);
 
-                sb.AppendFormat("<meta property=\"og:site_name\" content=\"{0}\" />", ViewBag.StoreName);
-                sb.AppendFormat("<meta property=\"fb:admins\" content=\"{0}\" />", faceBookAdmins);
-                sb.AppendFormat("<meta property=\"fb:app_id\" content=\"{0}\" />", faceBookAppId);
+                sb.AppendFormat(Constants.TAG_OGSITENAME, ViewBag.StoreName);
+                sb.AppendFormat(Constants.TAG_OGFBADMIN, faceBookAdmins);
+                sb.AppendFormat(Constants.TAG_OGFBAPPID, faceBookAppId);
 
                 RenderToHead("FaceBookMetaTags", sb.ToString());
             }

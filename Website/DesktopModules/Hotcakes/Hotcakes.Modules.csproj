@@ -4143,6 +4143,9 @@
   <ItemGroup>
     <Content Include="Core\Admin\Controls\App_LocalResources\DatePickerNavigation.ascx.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\Products_Edit.aspx.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
