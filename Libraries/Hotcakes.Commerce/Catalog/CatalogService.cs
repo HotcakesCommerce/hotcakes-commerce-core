@@ -1649,12 +1649,17 @@ namespace Hotcakes.Commerce.Catalog
             // FindMany sorts by PropertyName so we
             // need to resort based on option order
             // in ProductXOption table
-            var unsorted = ProductProperties.FindMany(ids);
+            var unsorted = ProductProperties.FindMany(ids).OrderBy(p => p.DisplayName);
             var result = new List<ProductProperty>();
             foreach (var cross in crosses)
             {
-                var found = unsorted.Where(y => y.Id == cross.PropertyId).FirstOrDefault();
-                if (found != null) result.Add(found);
+                var sorted = unsorted.Where(y => y.Id == cross.PropertyId).FirstOrDefault();
+                
+                if (sorted != null)
+                {
+                    sorted.Choices = sorted.Choices.OrderBy(c => c.SortOrder).ToList();
+                    result.Add(sorted);
+                }
             }
 
             return result;

@@ -28,7 +28,7 @@
             $(".hcDatePickerTextBox").flatpickr({
                 dateFormat: "m/d/Y",
                 minDate: new Date(2013, 1, 1),
-                maxDate: <%=DateTime.Now.AddYears(5).ToString("new Date(yyyy, M, d)") %>
+                maxDate: new Date(<%=DateTime.Now.AddYears(5).ToString("yyyy, M, d") %>)
             });
 
             $(".hcDefaultChoice input").on("change", function () {
@@ -76,35 +76,34 @@
         <div class="hcFormItemHor">
             <asp:Label runat="server" resourcekey="lblPropertyName" CssClass="hcLabel" />
             <asp:TextBox ID="txtPropertyName" runat="server" />
-            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPropertyName" CssClass="hcFormError"
-                Text="Property Name is Required" />
+            <asp:RequiredFieldValidator ID="rfvPropertyName" resourcekey="rfvPropertyName" runat="server" ControlToValidate="txtPropertyName" CssClass="hcFormError" ValidationGroup="ProductTyepProperty"/>
         </div>
         <div class="hcFormItemHor">
             <asp:Label runat="server" CssClass="hcLabel"><%=Localization.GetString("lblDisplayName") %><i class="hcLocalizable"></i></asp:Label>
-            <asp:TextBox ID="txtDisplayName" runat="server" />
+            <asp:TextBox ID="txtDisplayName" runat="server" ValidationGroup="ProductTyepProperty" />
         </div>
         <div class="hcFormItemHor">
             <asp:Label runat="server" resourcekey="lblDisplaySite" CssClass="hcLabel" />
             <div class="hcCheckboxOuter">
-                <asp:CheckBox ID="chkDisplayOnSite" runat="server" />
+                <asp:CheckBox ID="chkDisplayOnSite" runat="server" ValidationGroup="ProductTyepProperty" />
                 <span></span>
             </div>
         </div>
         <div class="hcFormItemHor">
             <asp:Label runat="server" resourcekey="lblDisplayShipper" CssClass="hcLabel" />
             <div class="hcCheckboxOuter">
-                <asp:CheckBox ID="chkDisplayToDropShipper" runat="server" />
+                <asp:CheckBox ID="chkDisplayToDropShipper" runat="server" ValidationGroup="ProductTyepProperty" />
                 <span></span>
             </div>
         </div>
         <div class="hcFormItemHor">
             <asp:Label runat="server" resourcekey="lblDisplaySearch" CssClass="hcLabel" />
             <div class="hcCheckboxOuter">
-                <asp:CheckBox ID="chkDisplayOnSearch" runat="server" />
+                <asp:CheckBox ID="chkDisplayOnSearch" runat="server" ValidationGroup="ProductTyepProperty" />
                 <span></span>
             </div>
         </div>
-        <h2>Property Type Specific Settings</h2>
+        <h2><%=Localization.GetString("SpecificSettingsHeader") %></h2>
         <asp:MultiView runat="server" ID="mvTypeSettings">
             <asp:View runat="server" ID="vCurrency">
                 <div class="hcFormItemHor">
@@ -139,9 +138,9 @@
             <asp:View runat="server" ID="vMultipleChoice">
                 <div class="hcFormItemHor">
                     <div class="hcFormItem hcFormItem66p">
-                        <asp:TextBox ID="txtNewChoice" runat="server" />
-                        <asp:RequiredFieldValidator runat="server" ControlToValidate="txtNewChoice" resourcekey="rfvNewChoice" CssClass="hcFormError" />
-                        <asp:LinkButton ID="btnNewChoice" resourcekey="btnNewChoice" runat="server" CssClass="hcSecondaryAction hcSmall" OnClick="btnNewChoice_Click" />
+                        <asp:TextBox ID="txtNewChoice" runat="server" ValidationGroup="MultipleChoice" />
+                        <asp:RequiredFieldValidator runat="server" ControlToValidate="txtNewChoice" resourcekey="rfvNewChoice" CssClass="hcFormError" ValidationGroup="MultipleChoice" />
+                        <asp:LinkButton ID="btnNewChoice" resourcekey="btnNewChoice" runat="server" CssClass="hcSecondaryAction hcSmall" OnClick="btnNewChoice_Click" ValidationGroup="MultipleChoice" />
                     </div>
                     <div class="hcFormItem hcFormItem66p">
                         <asp:GridView ID="rgChoices" CssClass="hcGrid" runat="server" DataKeyNames="Id" AutoGenerateColumns="False">
@@ -176,19 +175,21 @@
                                 <div class="hcForm">
                                     <div class="hcFormItem">
                                         <asp:Label runat="server" resourcekey="lblChoiceName" CssClass="hcLabel" />
-                                        <asp:TextBox runat="server" ID="txtChoiceName" />
+                                        <asp:TextBox runat="server" ID="txtChoiceName" ValidationGroup="PropertyItem" />
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="txtChoiceName" resourcekey="rfvChoiceName" CssClass="hcFormError" ValidationGroup="PropertyItem" />
                                     </div>
                                     <div class="hcFormItem">
                                         <asp:Label runat="server" CssClass="hcLabel"><%=Localization.GetString("lblDisplayName") %><i class="hcLocalizable"></i></asp:Label>
-                                        <asp:TextBox runat="server" ID="txtChoiceDisplayName" />
+                                        <asp:TextBox runat="server" ID="txtChoiceDisplayName" ValidationGroup="PropertyItem" />
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="txtChoiceDisplayName" resourcekey="rfvChoiceDisplayName" CssClass="hcFormError" ValidationGroup="PropertyItem" />
                                     </div>
                                 </div>
                                 <ul class="hcActions">
                                     <li>
-                                        <asp:LinkButton ID="btnUpdateChoice" resourcekey="btnUpdateChoice" CssClass="hcPrimaryAction" runat="server" />
+                                        <asp:LinkButton ID="btnUpdateChoice" resourcekey="btnUpdateChoice" CssClass="hcPrimaryAction" runat="server" ValidationGroup="PropertyItem" />
                                     </li>
                                     <li>
-                                        <asp:LinkButton ID="btnCancelUpdateChoice" resourcekey="btnCancelUpdateChoice" CssClass="hcSecondaryAction" runat="server" />
+                                        <asp:LinkButton ID="btnCancelUpdateChoice" resourcekey="btnCancelUpdateChoice" CssClass="hcSecondaryAction" runat="server" CausesValidation="False" />
                                     </li>
                                 </ul>
                             </div>
@@ -200,7 +201,7 @@
     </div>
     <ul class="hcActions">
         <li>
-            <asp:LinkButton runat="server" ID="btnSave" resourcekey="btnSave" CssClass="hcPrimaryAction" OnClick="btnSave_Click" />
+            <asp:LinkButton runat="server" ID="btnSave" resourcekey="btnSave" CssClass="hcPrimaryAction" OnClick="btnSave_Click" ValidationGroup="ProductTyepProperty" />
         </li>
         <li>
             <asp:LinkButton runat="server" ID="btnCancel" resourcekey="btnCancel" CssClass="hcSecondaryAction" CausesValidation="false" OnClick="btnCancel_Click" />
