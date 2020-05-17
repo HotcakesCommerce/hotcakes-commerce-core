@@ -45,25 +45,12 @@ namespace Hotcakes.Commerce.Dnn.Providers
 			RegisterRoutes(RouteTable.Routes);
 
 			RegisterDNNApi(mapRouteManager);
-
-			RegisterViewEngines();
 		}
 
 		private static void RegisterDNNApi(IMapRoute mapRouteManager)
 		{
 			mapRouteManager.MapHttpRoute("Hotcakes/ProductViewer", "default", "{controller}/{action}", new string[] { "Hotcakes.Commerce.Dnn.Social" });
 			mapRouteManager.MapHttpRoute("Hotcakes/CategoryViewer", "default", "{controller}/{action}", new string[] { "Hotcakes.Commerce.Dnn.Social" });
-		}
-
-		private void RegisterViewEngines()
-		{
-			// For versions greater than 8.0 routes are registered in HccUrlRoutingModule
-			// since all view engines are cleared in DNN's MvcHttpModule module
-            var versionofDNN = typeof(DotNetNukeContext).Assembly.GetName().Version;
-            if (versionofDNN < new Version("8.0"))
-			{
-				MvcUtils.RegisterViewEngines();
-			}
 		}
 
 		public static void RegisterWebApi(HttpConfiguration config)

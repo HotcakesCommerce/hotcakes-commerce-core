@@ -122,9 +122,6 @@ namespace Hotcakes.Modules.Core
                 // This code have to be executed only once and not depending on version
                 if (!IsGenericCodeExecuted)
                 {
-                    // Copy System.Web.Mvc if it is not already present in bin folder
-                    CopyMvcLibrary();
-
                     // Increment CRM version that is used to render resources
                     IncrementCrmVersion();
 
@@ -143,34 +140,6 @@ namespace Hotcakes.Modules.Core
                 Exceptions.LogException(ex);
 
                 return "Failed";
-            }
-        }
-
-        //this is not used now. Kept for reference if in future needs to 
-        // set config changes by string directly
-        private void MergeFileUpdated()
-        {
-            var AssemblyBinding = @"<configuration>
-              <nodes configfile=""Web.config"">
-                <node path=""/configuration/runtime/ab:assemblyBinding"" 
-                      action=""update"" 
-                      collision=""save"" 
-                      targetpath=""/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='System.Web.Mvc'][ab:assemblyIdentity/@publicKeyToken='31bf3856ad364e35']"" 
-                      nameSpace=""urn:schemas-microsoft-com:asm.v1"" 
-                      nameSpacePrefix=""ab"">
-                  <dependentAssembly xmlns=""urn:schemas-microsoft-com:asm.v1"">
-                    <assemblyIdentity name=""System.Web.Mvc"" publicKeyToken=""31bf3856ad364e35"" />
-                    <bindingRedirect oldVersion=""1.0.0.0-4.0.0.0"" newVersion=""4.0.0.1""/>
-                  </dependentAssembly>
-                </node>
-              </nodes>
-            </configuration>";
-
-            using (TextReader sr = new StringReader(AssemblyBinding))
-            {
-                var app = DotNetNukeContext.Current.Application;
-                var merge = new XmlMerge(sr, Globals.FormatVersion(app.Version), app.Description);
-                merge.UpdateConfigs();
             }
         }
 
@@ -622,19 +591,6 @@ namespace Hotcakes.Modules.Core
                     ScheduleSource = ScheduleSource.NOT_SET
                 };
                 SchedulingProvider.Instance().AddSchedule(oItem);
-            }
-        }
-
-        private void CopyMvcLibrary()
-        {
-            var versionofDNN = typeof (DotNetNukeContext).Assembly.GetName().Version;
-
-            if (versionofDNN < new Version("8.0"))
-            {
-                var sourceFile = HostingEnvironment.MapPath("~/DesktopModules/Hotcakes/System.Web.Mvc.dll");
-                var destFile = HostingEnvironment.MapPath("~/bin/System.Web.Mvc.dll");
-                if (!File.Exists(destFile))
-                    File.Copy(sourceFile, destFile);
             }
         }
 

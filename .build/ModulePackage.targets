@@ -121,8 +121,7 @@
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\MiniProfiler.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\MiniProfiler.EntityFramework6.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\BrandonHaynes.ModelAdapter.EntityFramework.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
-		<Copy SourceFiles="$(MSBuildDnnBinPath)\System.Web.Mvc.dll" DestinationFolder="$(ModulesBuildFolder)" />
-		<Copy SourceFiles="$(MSBuildDnnBinPath)\System.Web.Abstractions.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+    <Copy SourceFiles="$(MSBuildDnnBinPath)\System.Web.Abstractions.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\System.Web.Routing.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 
 		<Copy SourceFiles="@(PackageTxtInclude)" DestinationFolder="$(ModulesBuildFolder)" />
