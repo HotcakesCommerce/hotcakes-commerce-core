@@ -31,7 +31,7 @@
     // Login -----------------------
 
     function IsEmailKnown(forceSwitch, emailfieldid) {
-        var emailfield = $(emailfieldid || '#customeremail').val();
+        var emailfield = $(emailfieldid || '#customeremail').val().toLowerCase();
         $.post(hcc.getServiceUrl("checkout/IsEmailKnown"),
             {
                 "email": emailfield
@@ -584,8 +584,7 @@
         }
     };
 
-    function RefreshShippingRates() {
-
+    function RefreshShippingRates() {        
         $('#hcShippingRates').html('');
         $('#hcDeliverySection').ajaxLoader('start');
         $('#hcShippingNotValid').hide();
@@ -601,7 +600,7 @@
                 address2: $('#shippingaddress2').val(),
                 city: $('#shippingcity').val(),
                 zip: $('#shippingzip').val(),
-                state: $('#shippingstate :selected').val(),
+                state: $('#shippingtempregion').val(),
                 orderid: $('#orderbvin').val()
             },
             dataType: "json",
@@ -611,6 +610,7 @@
                 $('#hcShippingRates').show();
                 $('#hcShippingRates input').attr("tabindex", "300");
                 BindShippingRadioButtons();
+                ApplyCurrentShippingRate();
             },
             error: function (data) {
                 $('#hcDeliverySection').ajaxLoader('stop');
