@@ -268,6 +268,8 @@ namespace Hotcakes.Modules.Core.Controllers
             var result = new IsEmailKnownJsonModel();
             var email = Request.Form["email"];
 
+            email = email.Trim().ToLower();
+
             var users = HccApp.MembershipServices.Customers.FindByEmail(email);
 
             if (users != null && users.Count > 0)
@@ -742,8 +744,8 @@ namespace Hotcakes.Modules.Core.Controllers
                 // Email
                 if (model.LoginTabID == LOGIN_MODE_NEWACC)
                 {
-                    model.CurrentOrder.UserEmail = Request.Form["regemail"];
-                    model.RegUsername = Request.Form["regusername"];
+                    model.CurrentOrder.UserEmail = Request.Form["regemail"].Trim().ToLower();
+                    model.RegUsername = Request.Form["regusername"].Trim().ToLower();
 
                     if (IsOrderConfirmed)
                     {
@@ -767,7 +769,7 @@ namespace Hotcakes.Modules.Core.Controllers
                 }
                 else if (model.LoginTabID == LOGIN_MODE_GUEST)
                 {
-                    model.CurrentOrder.UserEmail = Request.Form["customeremail"];
+                    model.CurrentOrder.UserEmail = Request.Form["customeremail"].Trim().ToLower(); ;
                 }
             }
         }

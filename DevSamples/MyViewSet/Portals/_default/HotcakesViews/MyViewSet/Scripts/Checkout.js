@@ -31,7 +31,7 @@
     // Login -----------------------
 
     function IsEmailKnown(forceSwitch, emailfieldid) {
-        var emailfield = $(emailfieldid || '#customeremail').val();
+        var emailfield = $(emailfieldid || '#customeremail').val().toLowerCase();
         $.post(hcc.getServiceUrl("checkout/IsEmailKnown"),
             {
                 "email": emailfield
