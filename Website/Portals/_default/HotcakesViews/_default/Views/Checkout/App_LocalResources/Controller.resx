@@ -264,4 +264,10 @@
   <data name="FreeProductIsOut.Text" xml:space="preserve">
     <value>You qualified to received {0} for free. Unfortunately, we don’t currently have it in stock. Please contact the store if this is an issue.</value>
   </data>
+  <data name="BillingPhoneNumberValMsg.Text" xml:space="preserve">
+    <value>Billing Phone Number is required</value>
+  </data>
+  <data name="ShippingPhoneNumberValMsg.Text" xml:space="preserve">
+    <value>Shipping Phone Number is required</value>
+  </data>
 </root>

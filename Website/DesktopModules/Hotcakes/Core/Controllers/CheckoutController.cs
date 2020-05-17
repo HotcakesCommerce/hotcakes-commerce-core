@@ -408,6 +408,8 @@ namespace Hotcakes.Modules.Core.Controllers
             LoadRewardsPoints(model);
             LoadTermsAgreement(model);
 
+            model.RequirePhoneNumber = HccApp.CurrentStore.Settings.RequirePhoneNumber;
+
             // Populate Countries
             model.Countries = HccApp.GlobalizationServices.Countries.FindActiveCountries();
             model.ShowAffiliateId = HccApp.CurrentStore.Settings.AffiliateShowIDOnCheckout;
@@ -930,13 +932,13 @@ namespace Hotcakes.Modules.Core.Controllers
             // Validate Shipping Address
             if (model.CurrentOrder.HasShippingItems)
             {
-                model.Violations.AddRange(ValidateAddress(model.CurrentOrder.ShippingAddress, "Shipping"));
+                model.Violations.AddRange(ValidateAddress(model.CurrentOrder.ShippingAddress, "Shipping", model.RequirePhoneNumber));
             }
 
             // Validate Billing Address
             if (!model.BillShipSame)
             {
-                model.Violations.AddRange(ValidateAddress(model.CurrentOrder.BillingAddress, "Billing"));
+                model.Violations.AddRange(ValidateAddress(model.CurrentOrder.BillingAddress, "Billing", model.RequirePhoneNumber));
             }
 
             // Make sure a shipping method is selected
@@ -999,7 +1001,7 @@ namespace Hotcakes.Modules.Core.Controllers
             }
         }
 
-        private List<RuleViolation> ValidateAddress(Address a, string prefix)
+        private List<RuleViolation> ValidateAddress(Address a, string prefix, bool phoneRequired)
         {
             var result = new List<RuleViolation>();
 
@@ -1015,6 +1017,11 @@ namespace Hotcakes.Modules.Core.Controllers
             ValidationHelper.Required(Localization.GetString(prefix + "CityValMsg"), a.City, result, pre + "city");
             ValidationHelper.Required(Localization.GetString(prefix + "PostalCodeValMsg"), a.PostalCode, result,
                 pre + "zip");
+
+            if (phoneRequired)
+            {
+                ValidationHelper.Required(Localization.GetString(prefix + "PhoneNumberValMsg"), a.Phone, result, pre + "phone");
+            }
 
             var country = HccApp.GlobalizationServices.Countries.Find(a.CountryBvin);
             if (country != null && country.Regions.Count > 0)

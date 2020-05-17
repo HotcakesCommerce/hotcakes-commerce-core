@@ -19,6 +19,9 @@
                 <asp:CheckBox ID="chkForceSiteTerms" resourcekey="chkForceSiteTerms" runat="server" />
             </div>
             <div class="hcFormItem">
+                <asp:CheckBox runat="server" ID="chkRequirePhoneNumber" resourcekey="chkRequirePhoneNumber"/>
+            </div>
+            <div class="hcFormItem">
                 <asp:CheckBox ID="chkUseChildChoicesAdjustmentsForBundles" resourcekey="chkUseChildChoicesAdjustmentsForBundles" runat="server" />
             </div>
             <div class="hcFormItem">

@@ -178,6 +178,12 @@ namespace Hotcakes.Commerce.Accounts
             set { SetProp("MetricsRecordSearches", value); }
         }
 
+        public bool RequirePhoneNumber
+        {
+            get { return GetPropBool("RequirePhoneNumber"); }
+            set { SetProp("RequirePhoneNumber", value); }
+        }
+
         public List<string> DisabledCountryIso3Codes
         {
             get

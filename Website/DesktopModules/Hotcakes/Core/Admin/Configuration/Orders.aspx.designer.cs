@@ -49,6 +49,15 @@ namespace Hotcakes.Modules.Core.Admin.Configuration {
         protected global::System.Web.UI.WebControls.CheckBox chkForceSiteTerms;
         
         /// <summary>
+        /// chkRequirePhoneNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkRequirePhoneNumber;
+        
+        /// <summary>
         /// chkUseChildChoicesAdjustmentsForBundles control.
         /// </summary>
         /// <remarks>

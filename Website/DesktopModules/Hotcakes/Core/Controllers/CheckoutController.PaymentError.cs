@@ -173,7 +173,7 @@ namespace Hotcakes.Modules.Core.Controllers
 
 		private bool ValidatePaymentErrorOrder(CheckoutViewModel model)
 		{
-			model.Violations.AddRange(ValidateAddress(model.CurrentOrder.BillingAddress, "Billing"));
+			model.Violations.AddRange(ValidateAddress(model.CurrentOrder.BillingAddress, "Billing", model.RequirePhoneNumber));
 			model.Violations.AddRange(ValidatePayment(model));
             return model.Violations.Count <= 0;
 		}

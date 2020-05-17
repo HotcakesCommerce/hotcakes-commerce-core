@@ -67,6 +67,7 @@ namespace Hotcakes.Modules.Core.Models
             PayPalToken = string.Empty;
             RegUsername = string.Empty;
             RegPassword = string.Empty;
+            RequirePhoneNumber = false;
         }
 
         /// <summary>
@@ -218,6 +219,11 @@ namespace Hotcakes.Modules.Core.Models
         ///     as payment.
         /// </summary>
         public GiftCardViewModel GiftCards { get; set; }
+
+        /// <summary>
+        /// If enabled, customers must enter a value for the phone number before they can complete the checkout process. 
+        /// </summary>
+        public bool RequirePhoneNumber { get; set; }
 
         public string IsErr(string nameWithoutPrefix)
         {

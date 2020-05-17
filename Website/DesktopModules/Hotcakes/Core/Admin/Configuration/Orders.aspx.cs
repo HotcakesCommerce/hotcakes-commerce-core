@@ -80,6 +80,7 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
             txtOrderLimitQuantity.Text = store.Settings.MaxItemsPerOrder.ToString();
             txtOrderLimitWeight.Text = store.Settings.MaxWeightPerOrder.ToString();
             chkZeroDollarOrders.Checked = store.Settings.AllowZeroDollarOrders;
+            chkRequirePhoneNumber.Checked = store.Settings.RequirePhoneNumber;
             txtLastOrderNumber.Text =
                 HccApp.AccountServices.Stores.GetLastOrderNumber(HccApp.CurrentStore.Id).ToString();
             chkUseChildChoicesAdjustmentsForBundles.Checked = store.Settings.UseChildChoicesAdjustmentsForBundles;
@@ -106,6 +107,8 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
             store.Settings.MaxItemsPerOrder = int.Parse(txtOrderLimitQuantity.Text.Trim());
             store.Settings.MaxWeightPerOrder = Math.Round(weight, 3);
             store.Settings.AllowZeroDollarOrders = chkZeroDollarOrders.Checked;
+
+            store.Settings.RequirePhoneNumber = chkRequirePhoneNumber.Checked;
 
             if (UpdateLastOrderNumber)
             {
