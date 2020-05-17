@@ -1,4 +1,6 @@
-﻿DesktopModules/Hotcakes/Core/Admin/Parts/Editors/RadEditor/Editor.ascx
+﻿DesktopModules/Hotcakes/Core/Admin/Parts/CreditCardGateways/Shift4/Edit.ascx
+DesktopModules/Hotcakes/Core/Admin/Parts/CreditCardGateways/Shift4/
+DesktopModules/Hotcakes/Core/Admin/Parts/Editors/RadEditor/Editor.ascx
 DesktopModules/Hotcakes/Core/Admin/Parts/Editors/RadEditor/
 DesktopModules/Hotcakes/Core/Admin/Parts/Editors/RadEditorAdvanced/Editor.ascx
 DesktopModules/Hotcakes/Core/Admin/Parts/Editors/RadEditorAdvanced/
