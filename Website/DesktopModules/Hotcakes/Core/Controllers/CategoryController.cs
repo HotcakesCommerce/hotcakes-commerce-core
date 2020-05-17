@@ -32,6 +32,7 @@ using System.Web.Mvc;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Analytics;
 using Hotcakes.Commerce.Catalog;
+using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Content;
 using Hotcakes.Commerce.Extensions;
 using Hotcakes.Commerce.Search;
@@ -222,17 +223,18 @@ namespace Hotcakes.Modules.Core.Controllers
             {
                 var faceBookAdmins = HccApp.CurrentStore.Settings.FaceBook.Admins;
                 var faceBookAppId = HccApp.CurrentStore.Settings.FaceBook.AppId;
+                var canonicalUrl = HccUrlBuilder.RouteHccUrl(HccRoute.Category, new {slug = model.LocalCategory.RewriteUrl.ToLower()});
 
                 var sb = new StringBuilder();
 
-                sb.Append("<!-- FaceBook OpenGraph Tags -->");
-                sb.AppendFormat("<meta property=\"og:title\" content=\"{0}\"/>", PageTitle);
-                sb.Append("<meta property=\"og:type\" content=\"product\"/>");
-                sb.AppendFormat("<meta property=\"og:url\" content=\"{0}\"/>", ViewBag.CurrentUrl);
-                sb.AppendFormat("<meta property=\"og:image\" content=\"{0}\"/>", model.LocalCategory.ImageUrl);
-                sb.AppendFormat("<meta property=\"og:site_name\" content=\"{0}\" />", ViewBag.StoreName);
-                sb.AppendFormat("<meta property=\"fb:admins\" content=\"{0}\" />", faceBookAdmins);
-                sb.AppendFormat("<meta property=\"fb:app_id\" content=\"{0}\" />", faceBookAppId);
+                sb.AppendFormat(Constants.TAG_CANONICAL, canonicalUrl);
+                sb.AppendFormat(Constants.TAG_OGTITLE, PageTitle);
+                sb.Append(Constants.TAG_OGTYPE);
+                sb.AppendFormat(Constants.TAG_OGURL, canonicalUrl);
+                sb.AppendFormat(Constants.TAG_OGIMAGE, model.LocalCategory.ImageUrl);
+                sb.AppendFormat(Constants.TAG_OGSITENAME, ViewBag.StoreName);
+                sb.AppendFormat(Constants.TAG_OGFBADMIN, faceBookAdmins);
+                sb.AppendFormat(Constants.TAG_OGFBAPPID, faceBookAppId);
 
                 RenderToHead("FaceBookMetaTags", sb.ToString());
             }
