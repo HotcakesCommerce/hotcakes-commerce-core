@@ -198,4 +198,16 @@
   <data name="SavePropertyFailure.Text" xml:space="preserve">
     <value>Unable to save the product type property. Please check the event log. </value>
   </data>
+  <data name="rfvChoiceDisplayName.ErrorMessage" xml:space="preserve">
+    <value>Choice display name is required</value>
+  </data>
+  <data name="rfvChoiceName.ErrorMessage" xml:space="preserve">
+    <value>Choice name is required</value>
+  </data>
+  <data name="rfvPropertyName.ErrorMessage" xml:space="preserve">
+    <value>Property name is required</value>
+  </data>
+  <data name="SpecificSettingsHeader.Text" xml:space="preserve">
+    <value>Property Type Specific Settings</value>
+  </data>
 </root>
