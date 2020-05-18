@@ -3,7 +3,6 @@
 
 @if (Model.ShowConfirmation)
 {
-    
     <script type="text/javascript">
         jQuery(function () {
             $("#hcOrderConfirmed").attr('value', 'true');
@@ -54,7 +53,6 @@
                            Addresses = Model.CurrentCustomer.Addresses,
                            Address = Model.CurrentOrder.ShippingAddress,
                            Prefix = "shipping",
-                           TabIndex = 200,
                            ShowPhone = true,
                            Countries = Model.Countries,
                            Violations = Model.Violations
@@ -79,7 +77,7 @@
                     {
                         <div class="dnnFormItem">
                             <label>
-                                <input type="checkbox" id="chkbillsame" name="chkbillsame" tabindex="400" 
+                                <input type="checkbox" id="chkbillsame" name="chkbillsame" 
                                 @if (Model.BillShipSame)
                                 { <text> checked="checked"</text> }
                             />
@@ -93,7 +91,6 @@
                        Addresses = Model.CurrentCustomer.Addresses,
                        Address = Model.CurrentOrder.BillingAddress,
                        Prefix = "billing",
-                       TabIndex = 450,
                        ShowPhone = false,
                        Countries = Model.Countries,
                        Violations = Model.Violations
@@ -135,7 +132,7 @@
                 <div class="hc-instructions-section">
                     <h3>@Localization.GetString("SpecialInstructions")</h3>
                     <div class="dnnFormItem">
-                        <textarea id="specialinstructions" name="specialinstructions" tabindex="600">@Model.CurrentOrder.Instructions</textarea>
+                        <textarea id="specialinstructions" name="specialinstructions">@Model.CurrentOrder.Instructions</textarea>
                     </div>
                 </div>
                     if (Model.ShowAffiliateId)
@@ -159,8 +156,7 @@
                         @if (Model.ShowAgreeToTerms)
                         {
                             <label>
-                                <input type="checkbox" id="agreed" name="agreed" @if (Model.AgreedToTerms)
-                                                                                 { <text>checked="checked"</text> } tabindex="700"/>
+                                <input type="checkbox" id="agreed" name="agreed" @if (Model.AgreedToTerms) { <text>checked="checked"</text> }/>
                                 @Model.AgreedToTermsDescription
                             </label>
                             <a href="@Url.RouteHccUrl(HccRoute.Terms)" target="_blank" class="viewSiteTerms">@Localization.GetString("View") @Model.LabelTerms</a>
@@ -169,8 +165,7 @@
                     <div class="span6">
                         <ul class="dnnActions dnnRight">
                             <li>
-                                <input type="submit" id="hcTakeOrder" value="@Localization.GetString("PlaceOrder")" class="dnnPrimaryAction" tabindex="1000"/>
-                                @*<a href="#hcPaymentConfirm" class="dnnPrimaryAction right hc-popup" data-min-width="400" data-min-height="200" title="@Localization.GetString("ConfirmOrderTitle")" tabindex="3001">@Localization.GetString("PlaceOrder")</a>*@
+                                <input type="submit" id="hcTakeOrder" value="@Localization.GetString("PlaceOrder")" class="dnnPrimaryAction"/>
                             </li>
                         </ul>
                     </div>
@@ -184,10 +179,10 @@
                     </div>
                     <ul class="dnnActions">
                         <li>
-                            <input type="submit" id="hcConfirmButton" value="@Localization.GetString("PlaceOrder")" class="dnnPrimaryAction" tabindex="3101" />
+                            <input type="submit" id="hcConfirmButton" value="@Localization.GetString("PlaceOrder")" class="dnnPrimaryAction"/>
                         </li>
                         <li>
-                            <input type="button" id="hcCancelOrderConfirmation" value="@Localization.GetString("Cancel")" class="dnnSecondaryAction" tabindex="3100" />
+                            <input type="button" id="hcCancelOrderConfirmation" value="@Localization.GetString("Cancel")" class="dnnSecondaryAction"/>
                         </li>
                     </ul>
                 </div>
@@ -198,19 +193,11 @@
 
         <div class="span5 dnnForm">
             <div class="hc-cart-section">
-                @if (Model.CurrentOrder.IsRecurring)
-                {
-                    <h3>@Localization.GetString("Subscriptions")</h3>
-                    @Html.Partial("_Subscriptions", Model.CurrentOrder.Items)
-                }
-                else
-                {
-                    <h3>@Localization.GetString("OrderSummary")</h3>
-                    @Html.Partial("_ViewOrderItems", Model.CurrentOrder.Items)
-                    <div class="clearfix" id="hcCheckoutTotal">
-                        @Html.Raw(Model.CurrentOrder.TotalsAsTable())
-                    </div>
-                }
+                <h3>@Localization.GetString("OrderSummary")</h3>
+                @Html.Partial("_ViewOrderItems", Model.CurrentOrder.Items)
+                <div class="clearfix" id="hcCheckoutTotal">
+                    @Html.Raw(Model.CurrentOrder.TotalsAsTable())
+                </div>
             </div>
         </div>
     </div>
