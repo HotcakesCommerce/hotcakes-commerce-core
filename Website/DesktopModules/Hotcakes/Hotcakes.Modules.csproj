@@ -3729,6 +3729,8 @@
     <Content Include="Core\Scripts\tinymce\langs\readme.md" />
     <Content Include="Core\Scripts\tinymce\skins\ui\oxide-dark\fonts\tinymce-mobile.woff" />
     <Content Include="Core\Scripts\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
+    <Content Include="Providers\DataProviders\SqlDataProvider\03.02.03.SqlDataProvider" />
+    <Content Include="Providers\DataProviders\SqlDataProvider\03.03.00.SqlDataProvider" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
