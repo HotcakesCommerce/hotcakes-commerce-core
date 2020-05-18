@@ -209,6 +209,11 @@ namespace Hotcakes.Shipping.Ups
                 var sResponse = string.Empty;
                 sResponse = XmlTools.ReadHtmlPage_POST(sURL, sXML);
 
+                if (GlobalSettings.DiagnosticsMode)
+                {
+                    _Logger.LogMessage(string.Format("UPS XML Response: {0}", sResponse));
+                }
+
                 XmlDocument xDoc;
                 XmlNodeList NodeList;
                 var sStatusCode = "-1";
