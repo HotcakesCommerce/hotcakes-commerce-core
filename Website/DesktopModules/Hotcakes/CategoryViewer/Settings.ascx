@@ -15,11 +15,11 @@
 		</div>
 		<div class="dnnFormItem">
 			<dnn:LabelControl ID="CategorySelectionLabel" ControlName="CategoryComboBox" Suffix=":" runat="server" />
-			<asp:DropDownList ID="CategoryComboBox" runat="server" Width="250px" Height="150px"/>
+			<asp:DropDownList ID="CategoryComboBox" runat="server"/>
 		</div>
 		<div class="dnnFormItem">
 			<dnn:LabelControl ID="ViewSelectionLabel" ControlName="ViewComboBox" Suffix=":" runat="server" />
-			<asp:DropDownList ID="ViewComboBox" runat="server" Width="250px" Height="150px" />
+			<asp:DropDownList ID="ViewComboBox" runat="server"/>
 		</div>
 		<div class="dnnFormItem">
 			<dnn:LabelControl ID="ProductPageSizeLabel" ControlName="ProductPageSizeTextBox" Suffix=":" runat="server" />
@@ -27,11 +27,11 @@
 		</div>
         <div class="dnnFormItem">
 			<dnn:LabelControl ID="PreContentColumnLabel" ControlName="txtPreContentColumnId" Suffix=":" runat="server" />
-			<asp:DropDownList ID="ddlPreContentColumnId"  runat="server" Width="250px" MaxHeight="150px"/>
+			<asp:DropDownList ID="ddlPreContentColumnId" runat="server"/>
 		</div>	
 		<div class="dnnFormItem">
 			<dnn:LabelControl ID="PostContentColumnLabel" ControlName="txtPostContentColumnId" Suffix=":" runat="server" />
-			<asp:DropDownList ID="ddlPostContentColumnId"  runat="server" Width="250px" MaxHeight="150px"/>
+			<asp:DropDownList ID="ddlPostContentColumnId" runat="server"/>
 		</div>
         <div class="dnnFormItem">
             <dnn:labelcontrol id="ShowManufactures" controlname="ShowManufacturesCheckBox" suffix=":" runat="server" />
