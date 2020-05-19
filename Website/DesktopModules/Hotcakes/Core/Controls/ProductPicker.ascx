@@ -15,25 +15,19 @@
 		<fieldset>
 			<div class="dnnFormItem">
 				<dnn:labelcontrol id="SearchLabel" controlname="FilterField" suffix=":" runat="server" />
-				<asp:TextBox ID="FilterField" runat="server" Width="160px"></asp:TextBox>
+				<asp:TextBox ID="FilterField" runat="server" />
             </div>
             <div class="dnnFormItem">
-                    <dnn:labelcontrol id="ManufacturerLabel" controlname="ManufacturerFilter" suffix=":" runat="server" />
-				<asp:DropDownList ID="ManufacturerFilter" runat="server" AutoPostBack="True"
-					OnSelectedIndexChanged="ManufacturerFilter_SelectedIndexChanged">
-				</asp:DropDownList>
+                <dnn:labelcontrol id="ManufacturerLabel" controlname="ManufacturerFilter" suffix=":" runat="server" />
+				<asp:DropDownList ID="ManufacturerFilter" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ManufacturerFilter_SelectedIndexChanged"/>
             </div>
             <div class="dnnFormItem">
                 <dnn:labelcontrol id="VendorLabel" controlname="VendorFilter" suffix=":" runat="server" />
-				<asp:DropDownList ID="VendorFilter" runat="server" AutoPostBack="True"
-					OnSelectedIndexChanged="VendorFilter_SelectedIndexChanged">
-				</asp:DropDownList>
+				<asp:DropDownList ID="VendorFilter" runat="server" AutoPostBack="True" OnSelectedIndexChanged="VendorFilter_SelectedIndexChanged"/>
             </div>
             <div class="dnnFormItem">
                 <dnn:labelcontrol id="CategoryLabel" controlname="CategoryFilter" suffix=":" runat="server" />
-				<asp:DropDownList ID="CategoryFilter" runat="server" AutoPostBack="True"
-					OnSelectedIndexChanged="CategoryFilter_SelectedIndexChanged">
-				</asp:DropDownList>
+				<asp:DropDownList ID="CategoryFilter" runat="server" AutoPostBack="True" OnSelectedIndexChanged="CategoryFilter_SelectedIndexChanged"/>
             </div>
             <div class="dnnFormItem">
                 <dnn:labelcontrol controlname="btnSearch" runat="server" />
@@ -42,11 +36,13 @@
 		</fieldset>
 	</asp:Panel>
 	<div class="right" style="width: 50%">
-		<asp:GridView CellPadding="2" ID="rgProducts" runat="server" AllowPaging="True" PageSize="5" 
-            AutoGenerateColumns="False" Width="450px" AllowCustomPaging="True" GridLines="Horizontal" 
-            OnNeedDataSource="rgProducts_OnNeedDataSource" DataKeyField="Bvin">
+		<asp:GridView ID="rgProducts" runat="server" AllowPaging="True" PageSize="5" CssClass="dnnGrid" Width="100%" 
+            AutoGenerateColumns="False" AllowCustomPaging="True" GridLines="Horizontal" DataKeyNames="Bvin" OnPageIndexChanging="rgProducts_PageIndexChanging">
+            <HeaderStyle CssClass="dnnGridHeader"/>
+            <RowStyle CssClass="dnnGridRow"/>
+            <AlternatingRowStyle CssClass="dnnGridAltRow" />
             <Columns>
-				<asp:TemplateColumn UniqueName="MultiSelect">
+				<asp:TemplateField ItemStyle-Width="10%">
 					<HeaderTemplate>
 						<div class="chkSelectAll">
 							<asp:CheckBox ID="chkSelectAll" runat="server" />
@@ -57,15 +53,15 @@
 							<asp:CheckBox ID="chkSelected" runat="server" />
 						</div>
 					</ItemTemplate>
-				</asp:TemplateColumn>
-				<asp:BoundColumn DataField="sku" HeaderText="SKU" />
-				<asp:BoundColumn DataField="ProductName" HeaderText="Name" />
-				<asp:BoundColumn DataField="SitePrice" DataFormatString="{0:c}" HeaderText="Site Price" UniqueName="SitePrice" />
-				<asp:TemplateColumn HeaderText="Available for Sale" UniqueName="Inventory">
+				</asp:TemplateField>
+				<asp:BoundField DataField="Sku" HeaderText="SKU" />
+				<asp:BoundField DataField="ProductName" HeaderText="Name" />
+				<asp:BoundField DataField="SitePrice" DataFormatString="{0:c}" HeaderText="SitePrice" />
+				<asp:TemplateField HeaderText="Available">
 					<ItemTemplate>
-						<%# Convert.ToBoolean(Eval("IsAvailableForSale")) ? "Yes" : "No" %>
-					</ItemTemplate>
-				</asp:TemplateColumn>
+                        <asp:Label ID="lblAvailabile" runat="server" Text='<%#ParseProductAvailability(DataBinder.Eval(Container.DataItem, "IsAvailableForSale"))%>'/>
+                    </ItemTemplate>
+				</asp:TemplateField>
 			</Columns>
         </asp:GridView>
 	</div>

@@ -29,6 +29,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Services.Localization;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Dnn.Utils;
 using Hotcakes.Commerce.Dnn.Web;
@@ -43,6 +44,8 @@ namespace Hotcakes.Modules.ProductGrid
         {
             base.OnInit(e);
             btnAdd.Click += btnAdd_Click;
+            rgProducts.RowDeleting += rgProducts_OnDeleteCommand;
+            rgProducts.RowCommand += rgProducts_OnItemCommand;
         }
 
         public override void LoadSettings()
@@ -73,8 +76,9 @@ namespace Hotcakes.Modules.ProductGrid
             base.OnLoad(e);
             if (!Page.IsPostBack)
             {
-                var sortedProducts = GetSelectedProducts();
+                LocalizeView();
 
+                var sortedProducts = GetSelectedProducts();
                 LoadItems(sortedProducts);
 
                 int gridColumns;
@@ -89,6 +93,13 @@ namespace Hotcakes.Modules.ProductGrid
                 ViewComboBox.DataSource = DnnPathHelper.GetViewNames("ProductGrid");
                 ViewComboBox.DataBind();
             }
+        }
+
+        private void LocalizeView()
+        {
+            Localization.LocalizeGridView(ref rgProducts, LocalResourceFile);
+
+            valGridColumns.ErrorMessage = LocalizeString("valGridColumns.ErrorMessage");
         }
 
         private void LoadItems(SortedList<int, Product> list)
@@ -108,7 +119,6 @@ namespace Hotcakes.Modules.ProductGrid
                 rgProducts.DataBind();
             }
         }
-
 
         private void SaveItems(SortedList<int, Product> sortedProducts)
         {
@@ -174,22 +184,21 @@ namespace Hotcakes.Modules.ProductGrid
             LoadItems(sortedProducts);
         }
 
-        protected void rgProducts_OnDeleteCommand(object sender, DataGridCommandEventArgs e)
+        protected void rgProducts_OnDeleteCommand(object sender, GridViewDeleteEventArgs e)
         {
             var bvinsList = GetProductBvins();
-            var key = int.Parse(rgProducts.DataKeys[e.Item.ItemIndex].ToString(), NumberStyles.Integer);
+            var key = int.Parse(rgProducts.DataKeys[e.RowIndex].ToString(), NumberStyles.Integer);
             bvinsList.Remove(key);
             SaveItems(bvinsList);
             LoadItems(GetProducts(bvinsList));
         }
 
-
-        protected void rgProducts_OnItemCommand(object sender, DataGridCommandEventArgs e)
+        protected void rgProducts_OnItemCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName.Equals("Up") || e.CommandName.Equals("Down"))
             {
                 var bvinsList = GetProductBvins();
-                var key = int.Parse(rgProducts.DataKeys[e.Item.ItemIndex].ToString(), NumberStyles.Integer);
+                var key = int.Parse(e.CommandArgument.ToString(), NumberStyles.Integer);
 
                 int key2;
                 if (e.CommandName.Equals("Up"))

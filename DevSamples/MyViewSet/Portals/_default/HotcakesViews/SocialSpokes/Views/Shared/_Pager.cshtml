@@ -42,11 +42,14 @@
 <div class="clearfix">
 @if (ViewData["sortByList"] != null)
 {
-    <div class="hc-sort">
-        <label>@Localization.GetString("SortBy")</label>
-        @Html.DropDownList("sortOrderSelect", (IEnumerable<SelectListItem>)ViewData["sortByList"], new { onchange = "window.open(this.options[this.selectedIndex].value, '_top')" })
-    </div>
-    
+    var sortList = (IEnumerable<SelectListItem>) ViewData["sortByList"];
+    if (sortList.Count() > 1)
+    {
+        <div class="hc-sort">
+            <label>@Localization.GetString("SortBy")</label>
+            @Html.DropDownList("sortOrderSelect", (IEnumerable<SelectListItem>) ViewData["sortByList"], new {onchange = "window.open(this.options[this.selectedIndex].value, '_top')"})
+        </div>
+    }
 }
 @if (Model.TotalPages > 1)
 {

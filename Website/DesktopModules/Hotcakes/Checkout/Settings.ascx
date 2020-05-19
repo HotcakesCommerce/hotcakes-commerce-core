@@ -11,8 +11,7 @@
         </div>
         <div class="dnnFormItem">
             <dnn:labelcontrol id="ViewSelectionLabel" controlname="ViewComboBox" suffix=":" runat="server" />
-            <asp:DropDownList ID="ViewComboBox" runat="server" Width="250px" Height="150px"
-                EnableLoadOnDemand="False" ShowMoreResultsBox="false" EnableVirtualScrolling="false" />
+            <asp:DropDownList ID="ViewComboBox" runat="server"/>
         </div>
         <div class="dnnFormItem">
             <dnn:labelcontrol id="ReceiptViewLabel" controlname="ReceiptViewContentLabel" suffix=":" runat="server" />
@@ -20,7 +19,7 @@
         </div>
         <div class="dnnFormItem">
             <dnn:labelcontrol id="ReceiptViewSelectionLabel" controlname="ReceiptViewComboBox" suffix=":" runat="server" />
-            <asp:DropDownList ID="ReceiptViewComboBox" runat="server" Width="250px" Height="150px" />
+            <asp:DropDownList ID="ReceiptViewComboBox" runat="server"/>
         </div>
         <div class="dnnFormItem">
             <dnn:labelcontrol id="PaymentErrorViewLabel" controlname="PaymentErrorViewContentLabel" suffix=":" runat="server" />
@@ -28,7 +27,7 @@
         </div>
         <div class="dnnFormItem">
             <dnn:labelcontrol id="PaymentErrorViewSelectionLabel" controlname="PaymentErrorViewComboBox" suffix=":" runat="server" />
-            <asp:DropDownList ID="PaymentErrorViewComboBox" runat="server" Width="250px" Height="150px" />
+            <asp:DropDownList ID="PaymentErrorViewComboBox" runat="server"/>
         </div>
         <div class="dnnFormItem">
             <dnn:labelcontrol id="PayPalViewLabel" controlname="PayPalViewContentLabel" suffix=":" runat="server" />
@@ -36,7 +35,7 @@
         </div>
         <div class="dnnFormItem">
             <dnn:labelcontrol id="PayPalViewSelectionLabel" controlname="PayPalViewComboBox" suffix=":" runat="server" />
-            <asp:DropDownList ID="PayPalViewComboBox" runat="server" Width="250px" Height="150px" />
+            <asp:DropDownList ID="PayPalViewComboBox" runat="server"/>
         </div>
     </fieldset>
 </div>

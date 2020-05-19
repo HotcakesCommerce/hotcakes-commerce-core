@@ -74,6 +74,14 @@ namespace Hotcakes.Modules.CategoryMenu
 
             TitleField.Text = Convert.ToString(ModuleSettings["Title"]);
 
+            ModeField.Items.Clear();
+            ModeField.Items.Add(new ListItem(LocalizeString("ModeField_ShowRootOnly"), "0"));
+            ModeField.Items.Add(new ListItem(LocalizeString("ModeField_ShowAll"), "1"));
+            ModeField.Items.Add(new ListItem(LocalizeString("ModeField_ShowChildrenPeerParents"), "2"));
+            ModeField.Items.Add(new ListItem(LocalizeString("ModeField_ShowAllParent"), "3"));
+            ModeField.Items.Add(new ListItem(LocalizeString("ModeField_ShowSelected"), "4"));
+            ModeField.Items.Add(new ListItem(LocalizeString("ModeField_ShowChildrenSelected"), "5"));
+
             var mode = ModuleSettings["CategoryMenuMode"] != null ? ModuleSettings["CategoryMenuMode"].ToString() : "0";
             if (ModeField.Items.FindByValue(mode) != null)
             {

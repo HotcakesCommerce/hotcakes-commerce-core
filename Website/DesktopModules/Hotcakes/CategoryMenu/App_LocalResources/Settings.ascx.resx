@@ -159,4 +159,22 @@
   <data name="ViewSelectionLabel.Text" xml:space="preserve">
     <value>Select a view</value>
   </data>
+  <data name="ModeField_ShowAll.Text" xml:space="preserve">
+    <value>Show All Categories</value>
+  </data>
+  <data name="ModeField_ShowAllParent.Text" xml:space="preserve">
+    <value>Show All Categories for Current Parent</value>
+  </data>
+  <data name="ModeField_ShowChildrenPeerParents.Text" xml:space="preserve">
+    <value>Show Children, Peers, and Parents</value>
+  </data>
+  <data name="ModeField_ShowChildrenSelected.Text" xml:space="preserve">
+    <value>Show Children of Selected Category</value>
+  </data>
+  <data name="ModeField_ShowRootOnly.Text" xml:space="preserve">
+    <value>Show Root Categories Only</value>
+  </data>
+  <data name="ModeField_ShowSelected.Text" xml:space="preserve">
+    <value>Show Selected Categories</value>
+  </data>
 </root>
