@@ -386,6 +386,7 @@
     <Content Include="Core\Scripts\plupload\plupload.full.js" />
     <Content Include="Core\Scripts\plupload\plupload.silverlight.xap" />
     <Content Include="ExtensionUrlProvider\Settings.ascx" />
+    <Content Include="module.css" />
     <Content Include="ReleaseNotes.txt" />
     <Content Include="Core\Admin\Controls\DatePickerNavigation.ascx" />
     <Content Include="Core\Admin\Controls\Pager.ascx" />

@@ -28,6 +28,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using DotNetNuke.Security;
 using DotNetNuke.Services.Localization;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Catalog;
@@ -130,7 +131,7 @@ namespace Hotcakes.Modules.Core.Controls
             base.OnInit(e);
 
             if (!DisplayInventory)
-                GetGridViewColumnByName("Inventory").Visible = false;
+                GetGridViewColumnByName("Available").Visible = false;
             if (!DisplayPrice)
                 GetGridViewColumnByName("SitePrice").Visible = false;
         }
@@ -141,6 +142,7 @@ namespace Hotcakes.Modules.Core.Controls
 
             if (!IsInitialized)
             {
+                LocalizeView();
                 PopulateCategories();
                 PopulateManufacturers();
                 PopulateVendors();
@@ -150,6 +152,11 @@ namespace Hotcakes.Modules.Core.Controls
                     RunSearch();
                 }
             }
+        }
+
+        private void LocalizeView()
+        {
+            Localization.LocalizeGridView(ref rgProducts, LocalResourceFile);
         }
 
         private void PopulateCategories()
@@ -188,11 +195,12 @@ namespace Hotcakes.Modules.Core.Controls
 
         private ProductSearchCriteria GetCurrentCriteria()
         {
+            var security = new PortalSecurity();
             var c = new ProductSearchCriteria();
 
             if (FilterField.Text.Trim().Length > 0)
             {
-                c.Keyword = FilterField.Text.Trim();
+                c.Keyword = security.InputFilter(FilterField.Text.Trim(), PortalSecurity.FilterFlag.NoMarkup);
             }
             if (!string.IsNullOrEmpty(ManufacturerFilter.SelectedValue))
             {
@@ -208,7 +216,7 @@ namespace Hotcakes.Modules.Core.Controls
             }
             if (ExcludeCategoryBvin.Trim().Length > 0)
             {
-                c.NotCategoryId = ExcludeCategoryBvin.Trim();
+                c.NotCategoryId = security.InputFilter(ExcludeCategoryBvin.Trim(), PortalSecurity.FilterFlag.NoMarkup);
             }
             c.DisplayInactiveProducts = true;
             return c;
@@ -217,6 +225,12 @@ namespace Hotcakes.Modules.Core.Controls
         public void RunSearch()
         {
             rgProducts.PageIndex = 0;
+            BindGrid();
+        }
+
+        protected void rgProducts_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            rgProducts.PageIndex = e.NewPageIndex;
             BindGrid();
         }
 
@@ -243,6 +257,7 @@ namespace Hotcakes.Modules.Core.Controls
                 rgProducts.PageSize,
                 ref totalCount);
             rgProducts.DataSource = items;
+            rgProducts.DataBind();
             rgProducts.VirtualItemCount = totalCount;
         }
 
@@ -257,6 +272,16 @@ namespace Hotcakes.Modules.Core.Controls
             }
 
             return null;
+        }
+
+        protected string ParseProductAvailability(object value)
+        {
+            if (value != null)
+            {
+                return Convert.ToBoolean(value) ? "Yes" : "No";
+            }
+
+            return "No";
         }
     }
 }

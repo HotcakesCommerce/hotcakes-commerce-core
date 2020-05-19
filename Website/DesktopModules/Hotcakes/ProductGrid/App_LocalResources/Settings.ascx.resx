@@ -120,14 +120,23 @@
   <data name="AddProducts.Text" xml:space="preserve">
     <value>Choose Products</value>
   </data>
+  <data name="btnAdd.Text" xml:space="preserve">
+    <value>Add Selected Products</value>
+  </data>
   <data name="GridColumnsLabel.Text" xml:space="preserve">
     <value>Number of Columns</value>
   </data>
   <data name="NoneSelectedText.Text" xml:space="preserve">
     <value>(None selected)</value>
   </data>
+  <data name="ProductImage.HeaderText" xml:space="preserve">
+    <value>Product Image</value>
+  </data>
   <data name="ProductImage.Text" xml:space="preserve">
     <value>Product Image</value>
+  </data>
+  <data name="ProductName.HeaderText" xml:space="preserve">
+    <value>Product Name</value>
   </data>
   <data name="ProductName.Text" xml:space="preserve">
     <value>Product Name</value>
@@ -149,5 +158,17 @@
   </data>
   <data name="ViewSettings.Text" xml:space="preserve">
     <value>View Settings</value>
+  </data>
+  <data name="btnDel.Text" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="btnDown.Text" xml:space="preserve">
+    <value>Down</value>
+  </data>
+  <data name="btnUp.Text" xml:space="preserve">
+    <value>Up</value>
+  </data>
+  <data name="valGridColumns.ErrorMessage" xml:space="preserve">
+    <value>Please enter a numeric value</value>
   </data>
 </root>

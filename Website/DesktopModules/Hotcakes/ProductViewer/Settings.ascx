@@ -8,7 +8,7 @@
         </div>
         <div class="dnnFormItem">
             <dnn:labelcontrol id="ProductSelectionLabel" controlname="ProductComboBox" suffix=":" runat="server" />
-            <asp:DropDownList ID="ProductComboBox" runat="server" Width="250px" Height="150px" />
+            <asp:DropDownList ID="ProductComboBox" runat="server"/>
         </div>
         <div class="dnnFormItem">
             <dnn:labelcontrol id="ViewLabel" controlname="ViewContentLabel" suffix=":" runat="server" />
@@ -16,7 +16,7 @@
         </div>
         <div class="dnnFormItem">
             <dnn:labelcontrol id="ViewSelectionLabel" controlname="ViewComboBox" suffix=":" runat="server" />
-            <asp:DropDownList ID="ViewComboBox" runat="server" Width="250px" Height="150px" />
+            <asp:DropDownList ID="ViewComboBox" runat="server"/>
         </div>
     </div>
 </fieldset>

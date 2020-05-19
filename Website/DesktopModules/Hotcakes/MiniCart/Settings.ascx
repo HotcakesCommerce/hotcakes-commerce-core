@@ -11,7 +11,7 @@
 		</div>
 		<div class="dnnFormItem">
 			<dnn:LabelControl ID="ViewSelectionLabel" ControlName="ViewComboBox" Suffix=":" runat="server" />
-			<asp:DropDownList ID="ViewComboBox" runat="server" Width="250px" Height="150px"/>
+			<asp:DropDownList ID="ViewComboBox" runat="server"/>
 		</div>
 	</fieldset>
 </div>
