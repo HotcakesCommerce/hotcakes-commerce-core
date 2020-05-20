@@ -38,7 +38,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            PageTitle = "Product Cross Sells/Up Sells";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Catalog;
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
         }
