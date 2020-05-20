@@ -313,7 +313,10 @@ namespace Hotcakes.Modules.Core.Controllers
                 if (related != null)
                 {
                     var item = new SingleProductViewModel(related, HccApp);
-                    model.RelatedItems.Add(item);
+                    if (item.Item.Status == ProductStatus.Active)
+                    {
+                        model.RelatedItems.Add(item);
+                    }
                 }
             }
         }

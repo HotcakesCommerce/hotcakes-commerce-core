@@ -33,19 +33,20 @@
     <hcc:MessageBox ID="ucMessageBox" runat="server" />
     <div class="hcColumnLeft" style="width: 50%">
         <div class="hcForm">
-            <h2>Search Products</h2>
+            <h2><%=Localization.GetString("SearchProductsHeader") %></h2>
             <hcc:ProductPicker ID="ucProductPicker" runat="server" />
             <div class="hcFormItem">
-                <asp:LinkButton ID="btnAdd" runat="server" CssClass="hcSecondaryAction" OnClick="btnAdd_Click" Text="Add Selected Products >>" />
+                <asp:LinkButton ID="btnAdd" resourcekey="btnAdd" runat="server" CssClass="hcSecondaryAction" OnClick="btnAdd_Click" />
             </div>
         </div>
     </div>
     <div class="hcColumnRight hcLeftBorder" style="width: 49%">
         <div class="hcForm">
-            <h2>Selected Products</h2>
+            <h2><%=Localization.GetString("SelectedProductsHeader") %></h2>
             <asp:GridView ID="gvRelatedProducts" runat="server" AutoGenerateColumns="False" CssClass="hcGrid" DataKeyNames="Id">
                 <HeaderStyle CssClass="hcGridHeader" />
                 <RowStyle CssClass="hcGridRow" />
+                <RowStyle CssClass="hcGridAltRow" />
                 <Columns>
                     <asp:TemplateField>
                         <ItemStyle Width="22px" />
@@ -69,7 +70,7 @@
                     </asp:CommandField>
                 </Columns>
                 <EmptyDataTemplate>
-                    No products selected. Choose products from left column.
+                    <%=Localization.GetString("NoProducts") %>
                 </EmptyDataTemplate>
             </asp:GridView>
         </div>
