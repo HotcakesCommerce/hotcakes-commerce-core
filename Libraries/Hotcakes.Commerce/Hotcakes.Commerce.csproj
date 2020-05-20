@@ -1019,6 +1019,7 @@
     <Compile Include="Utilities\DateRange.cs" />
     <Compile Include="Utilities\DateRangeType.cs" />
     <Compile Include="Obsolete\EnumToString.cs" />
+    <Compile Include="Utilities\FileSystemHelper.cs" />
     <Compile Include="Utilities\HccRequestContextUtils.cs" />
     <Compile Include="Utilities\HtmlRendering.cs" />
     <Compile Include="Utilities\ImageHelper.cs" />
