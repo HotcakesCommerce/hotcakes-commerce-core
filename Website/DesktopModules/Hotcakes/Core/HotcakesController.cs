@@ -24,6 +24,8 @@
 #endregion
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -67,6 +69,9 @@ namespace Hotcakes.Modules.Core
     public class HotcakesController : IUpgradeable
     {
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(HotcakesController));
+
+        private const string SCHEDULED_JOB_TYPE = "Hotcakes.Modules.Core.ClearUploadTempFiles, Hotcakes.Modules";
+        private const string SCHEDULED_JOB_NAME = "Hotcakes Commerce: Clear Temporary Files";
 
         private bool IsGenericCodeExecuted { get; set; }
         
@@ -113,6 +118,7 @@ namespace Hotcakes.Modules.Core
                     case "03.03.00":
                         DeleteHostPage();
                         UninstallControlPanel();
+                        CreateTempFileScheduledJob();
                         break;
 
                     default:
@@ -618,6 +624,55 @@ namespace Hotcakes.Modules.Core
                 Logger.Error(e.Message, e);
             }
         }
+
+        private void CreateTempFileScheduledJob()
+        {
+            try
+            {
+                var scheduledJobs = SchedulingProvider.Instance().GetSchedule();  // retrieves all scheduled jobs 
+                var jobList = ConvertArrayList(scheduledJobs);
+                var job = jobList.FirstOrDefault(s => s.TypeFullName == SCHEDULED_JOB_TYPE);
+
+                if (job == null || job.ScheduleID == Null.NullInteger)
+                {
+                    // the scheduled job doesn't exist yet
+                    SchedulingProvider.Instance().AddSchedule(new ScheduleItem
+                    {
+                        TypeFullName = SCHEDULED_JOB_TYPE,
+                        TimeLapseMeasurement = "w", // week
+                        TimeLapse = 1,
+                        RetryTimeLapseMeasurement = "m", // minutes
+                        RetryTimeLapse = 30,
+                        RetainHistoryNum = 10,
+                        FriendlyName = SCHEDULED_JOB_NAME,
+                        Enabled = true,
+                        CatchUpEnabled = false
+                    });
+
+                    Logger.Debug("Created the scheduled job to clear temporary files created by Hotcakes Commerce.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message, ex);
+                throw ex;
+            }
+        }
+
+        #region Private Helper Methods
+        private List<ScheduleItem> ConvertArrayList(ArrayList jobs)
+        {
+            var newJobs = new List<ScheduleItem>();
+
+            foreach (var item in jobs)
+            {
+                var newItem = (ScheduleItem)item;
+                newJobs.Add(newItem);
+            }
+
+            return newJobs;
+        }
+        #endregion
 
         #region Constants
 

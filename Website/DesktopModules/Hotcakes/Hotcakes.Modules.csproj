@@ -2538,6 +2538,7 @@
     <Compile Include="Core\Api\Rest\CatalogRolesHandler.cs" />
     <Compile Include="Core\Api\Rest\GiftCardsHandler.cs" />
     <Compile Include="Core\Areas\Account\Models\OrderHistoryViewModel.cs" />
+    <Compile Include="Core\ClearUploadTempFilesJob.cs" />
     <Compile Include="Core\Controllers\CheckoutController.PaymentError.cs" />
     <Compile Include="Core\Controllers\CheckoutController.Receipt.cs" />
     <Compile Include="Core\Controllers\EditBillingController.cs" />
