@@ -1,5 +1,6 @@
-<%@ Control Language="C#" Inherits="DotNetNuke.Modules.Admin.Authentication.DNN.Login" AutoEventWireup="false" Codebehind="Login.ascx.cs" %>
+<%@ Control Language="C#" Inherits="DotNetNuke.Modules.Admin.Authentication.DNN.Login" AutoEventWireup="false" CodeBehind="Login.ascx.cs" %>
 <%@ Register TagPrefix="dnn" Assembly="DotNetNuke" Namespace="DotNetNuke.UI.WebControls"%>
+<%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls.Internal" Assembly="DotNetNuke.Web" %>
 <div class="dnnForm dnnLoginService dnnClear">
     <div class="dnnFormItem">
 		<div class="dnnLabel">
@@ -21,16 +22,16 @@
     </div>
     <div class="dnnFormItem">
         <asp:label id="lblLogin" runat="server" AssociatedControlID="cmdLogin" CssClass="dnnFormLabel" ViewStateMode="Disabled" />
-        <asp:LinkButton id="cmdLogin" resourcekey="cmdLogin" cssclass="dnnPrimaryAction" text="Login" runat="server" />
+        <asp:LinkButton id="cmdLogin" resourcekey="cmdLogin" cssclass="dnnPrimaryAction" text="Login" runat="server" CausesValidation="false" />
 		<asp:HyperLink id="cancelLink" runat="server" CssClass="dnnSecondaryAction" resourcekey="cmdCancel" CausesValidation="false" />
         
     </div>
 	<div class="dnnFormItem">
-		<asp:label id="lblLoginRememberMe" runat="server" AssociatedControlID="cmdLogin" CssClass="dnnFormLabel" />
+		<asp:label id="lblLoginRememberMe" runat="server" CssClass="dnnFormLabel" />
 		<span class="dnnLoginRememberMe"><asp:checkbox id="chkCookie" resourcekey="Remember" runat="server" /></span>
 	</div>
     <div class="dnnFormItem">
-        <label class="dnnFormLabel">&nbsp;</label>
+        <span class="dnnFormLabel">&nbsp;</span>
         <div class="dnnLoginActions">
             <ul class="dnnActions dnnClear">
                 <li id="liRegister" runat="server"><asp:HyperLink ID="registerLink" runat="server" CssClass="dnnSecondaryAction" resourcekey="cmdRegister" ViewStateMode="Disabled" /></li>                
@@ -39,40 +40,41 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-	/*globals jQuery, window, Sys */
-	(function ($, Sys) {
-		function setUpLogin() {
-			var actionLinks = $("a#dnn_ctr<%#ModuleId%>_Login_Login_DNN_cmdLogin");
-			actionLinks.click(function () {
-				if ($(this).hasClass("dnnDisabledAction")) {
-					return false;
-				}
+<dnn:DnnScriptBlock runat="server">
+    <script type="text/javascript">
+        /*globals jQuery, window, Sys */
+        (function ($, Sys) {
+            function setUpLogin() {
+                var actionLinks = $("a#dnn_ctr<%=ModuleId > Null.NullInteger ? ModuleId.ToString() : ""%>_Login_Login_DNN_cmdLogin");
+                actionLinks.click(function () {
+                    if ($(this).hasClass("dnnDisabledAction")) {
+                        return false;
+                    }
 
-				actionLinks.addClass("dnnDisabledAction");
-			});
-		}
+                    actionLinks.addClass("dnnDisabledAction");
+                });
+            }
 		
-		$(document).ready(function () {
+            $(document).ready(function () {
+                $(document).on('keydown', '.dnnLoginService', function (e) {
+                    if ($(e.target).is('input:text,input:password') && e.keyCode === 13) {
+                        var $loginButton = $('#dnn_ctr<%=ModuleId > Null.NullInteger ? ModuleId.ToString() : ""%>_Login_Login_DNN_cmdLogin');
+                        if ($loginButton.hasClass("dnnDisabledAction")) {
+                            return false;
+                        }
 
-			$('.dnnLoginService').on('keydown', function(e) {
-				if (e.keyCode === 13) {
-					var $loginButton = $('#dnn_ctr<%#ModuleId%>_Login_Login_DNN_cmdLogin');
-					if ($loginButton.hasClass("dnnDisabledAction")) {
-						return false;
-					}
+                        $loginButton.addClass("dnnDisabledAction");
+                        window.setTimeout(function () { eval($loginButton.attr('href')); }, 100);
+                        e.preventDefault();
+                        return false;
+                    }
+                });
 
-					$loginButton.addClass("dnnDisabledAction");
-					eval($loginButton.attr('href'));
-					e.preventDefault();
-					return false;
-				}
-			});
-
-			setUpLogin();
-			Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
-				setUpLogin();
-			});
-		});
-	}(jQuery, window.Sys));
-</script>  
+                setUpLogin();
+                Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
+                    setUpLogin();
+                });
+            });
+        }(jQuery, window.Sys));
+    </script>
+</dnn:DnnScriptBlock>
