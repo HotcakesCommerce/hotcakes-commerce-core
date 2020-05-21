@@ -54,6 +54,40 @@ namespace Hotcakes.Payment.Gateways
         }
 
         /// <summary>
+        /// Creates the token required by Stripe in order to send credit card information to processed for a transaction
+        /// </summary>
+        /// <param name="t">The transaction object</param>
+        /// <returns>A StripeToken object that can be associated with the charge that is sent to Stripe</returns>
+        private StripeToken CreateCardToken(Transaction t)
+        {
+            var tokenOptions = new StripeTokenCreateOptions()
+            {
+                Card = new StripeCreditCardOptions()
+                {
+                    Number = t.Card.CardNumber,
+                    ExpirationYear = t.Card.ExpirationYear.ToString(),
+                    ExpirationMonth = t.Card.ExpirationMonthPadded,                    
+                }               
+            };
+
+            if (!string.IsNullOrEmpty(t.Card.SecurityCode))
+            {
+                tokenOptions.Card.Cvc = t.Card.SecurityCode; // optional
+            }
+
+            if (t.Customer.Street.Length > 0)
+                tokenOptions.Card.AddressLine1 = t.Customer.Street; // optional
+
+            if (t.Customer.PostalCode.Length > 0)
+                tokenOptions.Card.AddressZip = t.Customer.PostalCode; // optional
+            tokenOptions.Card.Name = t.Card.CardHolderName;
+
+            var tokenService = new StripeTokenService();
+            StripeToken stripeToken = tokenService.Create(tokenOptions);
+            return stripeToken;
+        }
+
+        /// <summary>
         ///     Creates the charge.
         /// </summary>
         /// <param name="t">The t.</param>
@@ -79,21 +113,16 @@ namespace Hotcakes.Payment.Gateways
             chargeOptions.Source = new StripeSourceOptions();
 
             // set these properties if using a card
-            chargeOptions.Source.Number = t.Card.CardNumber;
-            chargeOptions.Source.ExpirationYear = t.Card.ExpirationYear.ToString();
-            chargeOptions.Source.ExpirationMonth = t.Card.ExpirationMonthPadded;
+            //set the charge token
+            var chargeToken = CreateCardToken(t);
+
+            chargeOptions.Source.TokenId = chargeToken.Id;
+
             //myCharge.CardAddressCountry = "US";             // optional
-            if (t.Customer.Street.Length > 0)
-                chargeOptions.Source.AddressLine1 = t.Customer.Street; // optional
             //myCharge.CardAddressLine2 = "Apt 24";           // optional
             //myCharge.CardAddressState = "NC";               // optional
-            if (t.Customer.PostalCode.Length > 0)
-                chargeOptions.Source.AddressZip = t.Customer.PostalCode; // optional
-            chargeOptions.Source.Name = t.Card.CardHolderName; // optional
-            if (!string.IsNullOrEmpty(t.Card.SecurityCode))
-            {
-                chargeOptions.Source.Cvc = t.Card.SecurityCode; // optional
-            }
+
+            /* chargeOptions.Source.Name = t.Card.CardHolderName;*/ // optional            
 
             // set this property if using a customer
             //myCharge.CustomerId = *customerId*;
