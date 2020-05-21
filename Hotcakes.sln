@@ -3,18 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1022
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portals", "Portals", "{F4EBAEA6-F4F5-4215-9B84-F11EE8298E7F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_default", "_default", "{3CBE5616-E32C-4C85-B1AF-C581A574B9FC}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Skins", "Skins", "{DFCDD07F-8F2E-4D88-A3C3-E4E2554816B5}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DarkKnight", "DarkKnight", "{6F53F15B-6573-4E46-8A00-8C02521365EF}"
-	ProjectSection(SolutionItems) = preProject
-		Website\Portals\_default\Skins\DarkKnight\Home-Mega-Menu.ascx = Website\Portals\_default\Skins\DarkKnight\Home-Mega-Menu.ascx
-		Website\Portals\_default\Skins\DarkKnight\Home-Standard-Menu.ascx = Website\Portals\_default\Skins\DarkKnight\Home-Standard-Menu.ascx
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotcakes.PaypalWebServices", "Libraries\Hotcakes.PaypalWebServices\Hotcakes.PaypalWebServices.csproj", "{40FCF14A-F903-4BF1-B4E0-FC5CB623BDF2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotcakes.Payment", "Libraries\Hotcakes.Payment\Hotcakes.Payment.csproj", "{4C223AD8-685A-4AAC-8610-1BEC50636203}"
@@ -56,18 +44,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{B564E3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Website", "Website", "{1EDD16FA-4A6D-44CB-813E-04F36354A959}"
 	ProjectSection(SolutionItems) = preProject
+		Website\DotNetNuke.log4net.config = Website\DotNetNuke.log4net.config
 		Website\Web.config = Website\Web.config
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotcakes.Commerce", "Libraries\Hotcakes.Commerce\Hotcakes.Commerce.csproj", "{4EFF0D3E-99D4-4A8D-A672-B88E5E47CBAA}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GravityBootstrap", "GravityBootstrap", "{F30E7ACF-674E-465A-B1A8-BB6E80428CDF}"
-	ProjectSection(SolutionItems) = preProject
-		Website\Portals\_default\Skins\GravityBootstrap\2-Col.ascx = Website\Portals\_default\Skins\GravityBootstrap\2-Col.ascx
-		Website\Portals\_default\Skins\GravityBootstrap\Home.ascx = Website\Portals\_default\Skins\GravityBootstrap\Home.ascx
-		Website\Portals\_default\Skins\GravityBootstrap\social-spokes.css = Website\Portals\_default\Skins\GravityBootstrap\social-spokes.css
-		Website\Portals\_default\Skins\GravityBootstrap\styles.css = Website\Portals\_default\Skins\GravityBootstrap\styles.css
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotcakes.Views", "Website\Hotcakes.Views.csproj", "{EBF80AA0-64ED-4DE8-B97B-A67764C6BD6D}"
 EndProject
@@ -78,12 +59,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotcakes.Web.Test", "Libraries\Hotcakes.Web.Test\Hotcakes.Web.Test.csproj", "{B13CF33E-ECED-462D-990C-4586271F4902}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotcakes.Web.TestStubs", "Libraries\Hotcakes.Web.TestStubs\Hotcakes.Web.TestStubs.csproj", "{CE757DA7-6DD8-45FE-A1B9-A44EB98D6A26}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gravity", "Gravity", "{F8E776BA-042B-48EB-B7BA-C6BB0E101542}"
-	ProjectSection(SolutionItems) = preProject
-		Website\Portals\_default\Skins\Gravity\skin.css = Website\Portals\_default\Skins\Gravity\skin.css
-		Website\Portals\_default\Skins\Gravity\social-spokes.css = Website\Portals\_default\Skins\Gravity\social-spokes.css
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotcakes.CommerceDTO.Tests", "Libraries\Hotcakes.CommerceDTO.Tests\Hotcakes.CommerceDTO.Tests.csproj", "{46EBA8E9-A38B-4B34-9DFB-1EEDD3D34850}"
 EndProject
@@ -306,17 +281,11 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{F4EBAEA6-F4F5-4215-9B84-F11EE8298E7F} = {1EDD16FA-4A6D-44CB-813E-04F36354A959}
-		{3CBE5616-E32C-4C85-B1AF-C581A574B9FC} = {F4EBAEA6-F4F5-4215-9B84-F11EE8298E7F}
-		{DFCDD07F-8F2E-4D88-A3C3-E4E2554816B5} = {3CBE5616-E32C-4C85-B1AF-C581A574B9FC}
-		{6F53F15B-6573-4E46-8A00-8C02521365EF} = {DFCDD07F-8F2E-4D88-A3C3-E4E2554816B5}
 		{B564E37A-B553-4073-801F-5CE93C217FF9} = {F008FB3A-586D-4339-98D1-00A990006429}
 		{1EDD16FA-4A6D-44CB-813E-04F36354A959} = {F008FB3A-586D-4339-98D1-00A990006429}
-		{F30E7ACF-674E-465A-B1A8-BB6E80428CDF} = {DFCDD07F-8F2E-4D88-A3C3-E4E2554816B5}
-		{F8E776BA-042B-48EB-B7BA-C6BB0E101542} = {DFCDD07F-8F2E-4D88-A3C3-E4E2554816B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		LessCompiler = aa89b33a-2a62-4919-b15f-ff3685947622
 		SolutionGuid = {5C4EE5A8-8F35-4A6B-8335-0D616409059B}
+		LessCompiler = aa89b33a-2a62-4919-b15f-ff3685947622
 	EndGlobalSection
 EndGlobal
