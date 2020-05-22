@@ -19,6 +19,6 @@
 
     <div class="span9">
         @*<h2 style="display: none;">@Localization.GetString("ReviewFor") @Model.ProductReview.ProductName</h2>*@
-        @Html.Raw(Model.ProductReview.Description)
+        @Html.Raw(Model.ProductReview.Description.Replace("\r\n", "<br/>"))
     </div>
 </div>

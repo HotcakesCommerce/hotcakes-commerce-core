@@ -1,4 +1,5 @@
 ﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+@Html.Partial("_Admin")
 @Html.Action("CategoryTrail", "BreadCrumb", new { cat = Model.LocalCategory })
 <div class="hc-category hc-category-bulkorderlist">
     @if (Model.LocalCategory.ShowTitle)
@@ -27,9 +28,9 @@
                     <td>
                         @Html.Partial("_RenderSingleProductSimple", item)
                     </td>
-                </tr>                
+                </tr>
             }
-        </table>            
+        </table>
         <input type="submit" name="addtocart" class="dnnPrimaryAction" value="@Localization.GetString("AddToCart")" />
     }
     @Html.Partial("_Pager", Model.PagerData)

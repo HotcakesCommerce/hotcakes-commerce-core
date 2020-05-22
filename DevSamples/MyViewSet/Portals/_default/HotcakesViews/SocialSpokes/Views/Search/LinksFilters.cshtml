@@ -14,8 +14,8 @@
 @helper BuildPriceUrl()
 {
     RouteValueDictionary routeValues = new RouteValueDictionary(Model.CurrentRouteValues);
-    routeValues["minprice"] = "minpriceval";
-    routeValues["maxprice"] = "maxpriceval";
+    routeValues["minprice"] = "minprice.val";
+    routeValues["maxprice"] = "maxprice.val";
     @Html.Raw(Url.RouteHccUrl(HccRoute.Search, routeValues))
 }
 @functions {
@@ -226,8 +226,8 @@
             var maxPrice = parseFloat(maxPriceField.val());
             var url = priceUrl;
 
-            url = url.replace("minpriceval", minPrice);
-            url = url.replace("maxpriceval", maxPrice);
+            url = url.replace("minprice.val", minPrice);
+            url = url.replace("maxprice.val", maxPrice);
             location.href = url;
         });
 

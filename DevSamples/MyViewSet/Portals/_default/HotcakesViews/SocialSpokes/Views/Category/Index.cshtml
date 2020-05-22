@@ -1,6 +1,6 @@
 ﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
 
-@functions 
+@functions
 {
     List<Hotcakes.Modules.Core.Models.SingleProductViewModel> GetCommunityFavoritesModel()
     {
@@ -11,7 +11,7 @@
             Model.LocalCategory.Bvin,
             Hotcakes.Commerce.Catalog.CategorySortOrder.None,
             false, 1, int.MaxValue, ref totalResults)
-            .Where( p => p.Featured );
+            .Where(p => p.Featured);
 
         var ftModel = new List<Hotcakes.Modules.Core.Models.SingleProductViewModel>();
         foreach (var p in products.Take(3))
@@ -23,11 +23,11 @@
         return ftModel;
     }
 }
-@*@Html.Action("CategoryTrail", "BreadCrumb", new { cat = Model.LocalCategory })*@
+@Html.Partial("_Admin")
 <div class="hc-category">
 
     @Html.Partial("_Header", Model)
-    
+
     <div id="hc-favorite-title">
         <div class="hc-circle">
             <div class="hc-inner-circle"></div>

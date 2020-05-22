@@ -25,27 +25,10 @@
                 </div>
             </div>
         }
-        @if (Model.IsRecurring && ViewData.ContainsKey("AllowEditBilling"))
-        {
-            <div class="hc-wrap3 hc-center">
-                <a href="#hcBillingInfo" class="dnnSecondaryAction hc-dialog">@Localization.GetString("EditBillingInfo")</a>
-            </div>
-            
-            <div id="hcBillingInfo" style="display: none;" data-width="1000" data-height="600" data-title="@Localization.GetString("EditBillingInfo")">
-                @Html.Action("Index", "EditBilling", new { area = "", order = Model.LocalOrder })
-            </div>
-
-        }
     </div>
 
-    @if (!Model.IsRecurring)
-    {
-        <text>@Html.Partial("_ViewOrderItems", Model.Items)</text>
-    }
-    else
-    {
-        <text>@Html.Partial("_ViewOrderSubscriptions", Model.Items)</text>
-    }
+    @Html.Partial("_ViewOrderItems", Model.Items)
+
     <div class="row-fluid">
         <div class="span6">
             @if (!string.IsNullOrWhiteSpace(Model.Instructions))
@@ -66,11 +49,8 @@
                 </div>
             }
         </div>
-        @if (!Model.IsRecurring)
-        {
-            <div class="span4 offset2 hc-totals">
-                @Html.Raw(Model.TotalsAsTable)
-            </div>
-        }
+        <div class="span4 offset2 hc-totals">
+            @Html.Raw(Model.TotalsAsTable)
+        </div>
     </div>
 </div>

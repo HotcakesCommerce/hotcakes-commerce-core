@@ -1,4 +1,5 @@
 ﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+@Html.Partial("_Admin")
 @Html.Action("CategoryTrail", "BreadCrumb", new { cat = Model.LocalCategory })
 <div class="hc-category hc-category-bulkorderlist">
     @if (Model.LocalCategory.ShowTitle)

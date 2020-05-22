@@ -120,7 +120,4 @@
   <data name="WishListEmpty.Text" xml:space="preserve">
     <value>You do not have any saved items at this moment.</value>
   </data>
-  <data name="YouCannotMixRecurringLineItems.Text" xml:space="preserve">
-    <value>You can not mix recurring products with regular products within the same cart.</value>
-  </data>
 </root>

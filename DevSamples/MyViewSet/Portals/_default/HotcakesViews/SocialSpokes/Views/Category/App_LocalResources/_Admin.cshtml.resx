@@ -117,49 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddFailed.Text" xml:space="preserve">
-    <value>Failed to add product to cart</value>
+  <data name="AdminMessage.Text" xml:space="preserve">
+    <value>Store Admin</value>
   </data>
-  <data name="AllSelectionsError.Text" xml:space="preserve">
-    <value>Please make all selections before adding to cart.</value>
+  <data name="CategoryAnalytics.Text" xml:space="preserve">
+    <value>View Performance</value>
   </data>
-  <data name="EnterProperQty.Text" xml:space="preserve">
-    <value>Please enter number only in quantity.</value>
+  <data name="CategoryEdit.Text" xml:space="preserve">
+    <value>Edit Category</value>
   </data>
-  <data name="GiftCardAmountInvalid.Text" xml:space="preserve">
-    <value>Amount containes invalid value.</value>
+  <data name="Dashboard.Text" xml:space="preserve">
+    <value>Dashboard</value>
   </data>
-  <data name="GiftCardAmountTooBig.Text" xml:space="preserve">
-    <value>Amount can not be greater than {0}</value>
+  <data name="ManageCategories.Text" xml:space="preserve">
+    <value>Manage Categories</value>
   </data>
-  <data name="GiftCardAmountTooSmall.Text" xml:space="preserve">
-    <value>Amount can not be smaller than {0}</value>
-  </data>
-  <data name="GiftCardEmailInvalid.Text" xml:space="preserve">
-    <value>Please enter valid Recipient Email</value>
-  </data>
-  <data name="OptionsNotAvailable.Text" xml:space="preserve">
-    <value>The combination of options you've selected isn't available at the moment. Please select different options.</value>
-  </data>
-  <data name="ProductMinimumQty.Text" xml:space="preserve">
-    <value>Product Has A Minimum Purchase Quantity of {0}</value>
-  </data>
-  <data name="ProductNotActive.Text" xml:space="preserve">
-    <value>This product is not currently available for sale.</value>
-  </data>
-  <data name="ProductNotEnoughPermission.Text" xml:space="preserve">
-    <value>Unfortunately this product or category is limited to certain roles on the site.</value>
-  </data>
-  <data name="ProductNotFound.Text" xml:space="preserve">
-    <value>Unfortunately we can't find the product specified. Probably it was removed or it's name was changed. Try to search it on our store.</value>
-  </data>
-  <data name="RequiredOptions.Text" xml:space="preserve">
-    <value>Please make all selections before adding to cart.</value>
-  </data>
-  <data name="UserPriceInvalid.Text" xml:space="preserve">
-    <value>Price contains invalid value. </value>
-  </data>
-  <data name="UserPriceTooBig.Text" xml:space="preserve">
-    <value>Price can not be greater than 99,999,999</value>
+  <data name="ManageProducts.Text" xml:space="preserve">
+    <value>Manage Products</value>
   </data>
 </root>

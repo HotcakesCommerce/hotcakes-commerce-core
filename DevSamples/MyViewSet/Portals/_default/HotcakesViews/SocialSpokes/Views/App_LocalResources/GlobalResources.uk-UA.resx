@@ -150,4 +150,7 @@
   <data name="VAT.Text" xml:space="preserve">
     <value>ПДВ</value>
   </data>
+  <data name="VolumeDiscount.Text" xml:space="preserve">
+    <value>Знижки на об’ємі</value>
+  </data>
 </root>
