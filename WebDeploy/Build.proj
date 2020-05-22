@@ -59,7 +59,7 @@
 		<WebDeployBuildFolder>$(RootFolder)\_Build\_WebDeploy</WebDeployBuildFolder>
 		<InstallFolder>$(RootFolder)\_Install</InstallFolder>
 		<DnnProviderBuildFolder>$(RootFolder)\_Build</DnnProviderBuildFolder>
-		<DnnPackage>DNN_Platform_8.0.3_Install.zip</DnnPackage>
+		<DnnPackage>DNN_Platform_9.2.2.178_Install.zip</DnnPackage>
 		<HotcakesBrandingFolder>HotcakesBranding</HotcakesBrandingFolder>
 		<InstallFolderForConfigFolder>Install</InstallFolderForConfigFolder>
 		<SourceBuildFolder>$(RootFolder)\_Build\_Source</SourceBuildFolder>
@@ -88,12 +88,14 @@
 		</ItemGroup>
 		<Delete Files="@(DeleteFiles)" />
 
+		<Message Importance="High" Text="--- Begin Replacing Branding ---" />
 		<Copy SourceFiles="$(HotcakesBrandingFolder)\images\Branding\Hotcakes_Logo.png" DestinationFiles="$(WebDeployBuildFolder)\Hotcakes\images\Branding\Hotcakes_Logo.png" />
 		<Copy SourceFiles="$(HotcakesBrandingFolder)\App_GlobalResources\GlobalResources.resx" DestinationFiles="$(WebDeployBuildFolder)\Hotcakes\App_GlobalResources\GlobalResources.resx" />
 		<Copy SourceFiles="$(HotcakesBrandingFolder)\Install\UnderConstruction.template.htm" DestinationFiles="$(WebDeployBuildFolder)\Hotcakes\Install\UnderConstruction.template.htm" />
 		<Copy SourceFiles="$(HotcakesBrandingFolder)\ErrorPage.aspx" DestinationFiles="$(WebDeployBuildFolder)\Hotcakes\ErrorPage.aspx" />
 		<Copy SourceFiles="$(HotcakesBrandingFolder)\ErrorPage.aspx.cs" DestinationFiles="$(WebDeployBuildFolder)\Hotcakes\ErrorPage.aspx.cs" />
 		<Copy SourceFiles="$(HotcakesBrandingFolder)\favicon.ico" DestinationFiles="$(WebDeployBuildFolder)\Hotcakes\favicon.ico" />
+		<Message Importance="High" Text="--- Done Replacing Branding ---" />
 
 		<Copy SourceFiles="Manifest.xml" DestinationFolder="$(WebDeployBuildFolder)\" />
 		<Copy SourceFiles="Parameters.xml" DestinationFolder="$(WebDeployBuildFolder)\" />
@@ -119,8 +121,6 @@
 
 
 		<Copy SourceFiles="$(InstallFolder)\HotcakesCommerce_$(Version)_Core_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Module\" />
-		<Copy SourceFiles="$(RootFolder)\References\Dnn\System.Web.Abstractions.dll" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\bin" />
-		<Copy SourceFiles="$(RootFolder)\References\Dnn\System.Web.Routing.dll" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\bin" />
 
     <!--
     Removing this from the build for the 03.00.01 release. Will need to formally address this again later.
@@ -232,10 +232,6 @@
 		<Copy SourceFiles="Warm_Container_01.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Container" />
 		<Copy SourceFiles="Tropical_Container_01.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Container" />
 		<Copy SourceFiles="HCC.Application_03.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Module" />
-
-		
-		<Copy SourceFiles="$(RootFolder)\References\Dnn\System.Web.Abstractions.dll" DestinationFolder="$(SourceBuildFolder)\Website\bin" />
-		<Copy SourceFiles="$(RootFolder)\References\Dnn\System.Web.Routing.dll" DestinationFolder="$(SourceBuildFolder)\Website\bin" />
 
 	  <!--
     Removing this from the build for the 03.00.01 release. Will need to formally address this again later.

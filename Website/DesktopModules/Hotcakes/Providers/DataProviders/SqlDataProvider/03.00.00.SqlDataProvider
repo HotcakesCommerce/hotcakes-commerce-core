@@ -15,3 +15,4 @@ BEGIN
 	DELETE FROM {databaseOwner}[{objectQualifier}hcc_Promotions] 
 	WHERE [QualificationsXml] LIKE N'%E1DB03D2-3119-45B3-9CDC-FD4CA07D8324%';
 END
+GO
