@@ -520,6 +520,8 @@ input[type="checkbox"] {
 
 select {
     padding: 3px 5px;
+    width: 100%;
+    max-width: 100%;
 }
 
 .hcRight {
@@ -642,6 +644,13 @@ select {
         .input-mixin();
     }
 
+    > input[type="text"].hcFormItem100pct,
+    > input[type="password"].hcFormItem100pct,
+    > select.hcFormItem100pct {
+        width: 100%;
+        max-width: 100%;
+    }
+
     > .hcFieldOuter {
         .clearfix;
 
@@ -667,10 +676,10 @@ select {
         background: none !important;
     }
 
-        select.hcSelectList.hcLong {
-            height: 20.0em;
-            background: none !important;
-        }
+    select.hcSelectList.hcLong {
+        height: 20.0em;
+        background: none !important;
+    }
 
     > input[type="checkbox"] {
         margin: 7px 5px;

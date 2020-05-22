@@ -309,6 +309,8 @@ input[type="file"] {
 }
 select {
   padding: 3px 5px;
+  width: 100%;
+  max-width: 100%;
 }
 .hcRight {
   text-align: right !important;
@@ -449,6 +451,18 @@ select {
 .hcFormItemInline > input[type="password"]:active {
   border-bottom: 2px solid #f04f30;
   outline: none;
+}
+.hcFormItem > input[type="text"].hcFormItem100pct,
+.hcFormItemHor > input[type="text"].hcFormItem100pct,
+.hcFormItemInline > input[type="text"].hcFormItem100pct,
+.hcFormItem > input[type="password"].hcFormItem100pct,
+.hcFormItemHor > input[type="password"].hcFormItem100pct,
+.hcFormItemInline > input[type="password"].hcFormItem100pct,
+.hcFormItem > select.hcFormItem100pct,
+.hcFormItemHor > select.hcFormItem100pct,
+.hcFormItemInline > select.hcFormItem100pct {
+  width: 100%;
+  max-width: 100%;
 }
 .hcFormItem > .hcFieldOuter:after,
 .hcFormItemHor > .hcFieldOuter:after,
@@ -3312,6 +3326,12 @@ body > form {
   transform: rotate(180deg);
   background: url(Images/admin_misc_sprite.png) -200px -160px no-repeat;
 }
+.hcProductPerformance .hcReverseTrend table,
+.hcCategoryPerformance .hcReverseTrend table,
+.hcProductPurchasedWith .hcReverseTrend table,
+.hcDashboard .hcReverseTrend table {
+  max-width: 500px;
+}
 /* Zone */
 .hcAddZone {
   width: 50%;
@@ -3418,4 +3438,12 @@ body > form {
   float: none !important;
   display: inline-flex !important;
   display: -ms-inline-flexbox !important;
+}
+#hcPSalesPerformanceChart {
+  max-width: 700px;
+  max-height: 300px;
+}
+#hcPSalesPerformanceChart canvas {
+  width: 100%;
+  height: 100%;
 }
