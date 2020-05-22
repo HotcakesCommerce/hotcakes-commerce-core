@@ -129,8 +129,8 @@
                 <asp:ListItem resourcekey="Range_Month" Value="3" />
                 <asp:ListItem resourcekey="Range_Week" Value="4" />
             </asp:DropDownList>
-			<div id="hcPSalesPerformanceChart" style="width:750px; height:330px;">
-				<canvas id="hcDashboardSalesOverTimeChart" class="" width="750" height="330"></canvas>
+			<div id="hcPSalesPerformanceChart">
+				<canvas id="hcDashboardSalesOverTimeChart" class=""></canvas>
 			</div>
         </div>
 
