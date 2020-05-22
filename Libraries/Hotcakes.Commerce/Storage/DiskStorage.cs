@@ -389,6 +389,18 @@ namespace Hotcakes.Commerce.Storage
             return ProductImageUrlMedium(app, productId, productImage, isSecure);
         }
 
+        public static string ProductVariantImageUrlSmall(HotcakesApplication app, string productId, string productImage,
+            string variantId, bool isSecure)
+        {
+            var storeId = app.CurrentStore.Id;
+
+            if (VariantImageExists(storeId, productId, variantId))
+            {
+                return ProductVariantImageUrl(app, productId, productImage, variantId, isSecure, "/small");
+            }
+            return ProductImageUrlSmall(app, productId, productImage, isSecure);
+        }
+
         private static string MissingImageUrl(HotcakesApplication app, bool isSecure)
         {
             return GetStoreRootUrl(app, isSecure) + MISSING_IMAGE_URL;
