@@ -154,7 +154,7 @@
     <value>Company Account Number is required</value>
   </data>
   <data name="EmailAddressValMsg.Text" xml:space="preserve">
-    <value>Email address should be in the format user@domain.com</value>
+    <value>E-Mail address should be in the format user@domain.com</value>
   </data>
   <data name="EnterValidCard.Text" xml:space="preserve">
     <value>Please enter a valid credit card number</value>
@@ -196,10 +196,10 @@
     <value>Shipping Street is required</value>
   </data>
   <data name="SiteTermsAgreementError.Text" xml:space="preserve">
-    <value>You Must Agree To The Site Terms Before You Can Proceed</value>
+    <value>You must agree to the Terms of Use before you can proceed</value>
   </data>
   <data name="TermsAndConditions.Text" xml:space="preserve">
-    <value>Terms and Conditions</value>
+    <value>Terms of Use</value>
   </data>
   <data name="TermsAndConditionsAgreement.Text" xml:space="preserve">
     <value>I Agree To This Sites Terms And Conditions</value>
@@ -226,10 +226,10 @@
     <value>Invalid password. Password length must be greater than {MinLength} characters.</value>
   </data>
   <data name="PleaseLogin.Text" xml:space="preserve">
-    <value>Please, login to view your order</value>
+    <value>Please log in to view your order</value>
   </data>
   <data name="Email.Text" xml:space="preserve">
-    <value>Email</value>
+    <value>E-Mail</value>
   </data>
   <data name="PurchaseOrderNumberValMsg.Text" xml:space="preserve">
     <value>Purchase Order Number is required</value>
@@ -263,5 +263,11 @@
   </data>
   <data name="FreeProductIsOut.Text" xml:space="preserve">
     <value>You qualified to received {0} for free. Unfortunately, we don’t currently have it in stock. Please contact the store if this is an issue.</value>
+  </data>
+  <data name="BillingPhoneNumberValMsg.Text" xml:space="preserve">
+    <value>Billing Phone Number is required</value>
+  </data>
+  <data name="ShippingPhoneNumberValMsg.Text" xml:space="preserve">
+    <value>Shipping Phone Number is required</value>
   </data>
 </root>

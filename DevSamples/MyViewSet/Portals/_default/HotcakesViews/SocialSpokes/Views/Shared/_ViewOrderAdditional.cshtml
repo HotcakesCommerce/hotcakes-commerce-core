@@ -42,13 +42,10 @@
             </table>
             }
     </div>
-    @if(!Model.IsRecurring)
-    {
     <div class="span4 offset4">
         <div class="hc-payment-info">
             <h4>@Localization.GetString("PaymentInformation"):</h4>
             @Html.Partial("_OrderPaymentSummary", (Hotcakes.Commerce.Orders.OrderPaymentSummary)ViewBag.OrderPaymentSummary)
         </div>
     </div>
-    }
 </div>

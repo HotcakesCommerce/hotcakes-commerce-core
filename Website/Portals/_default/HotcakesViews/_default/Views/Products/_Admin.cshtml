@@ -1,0 +1,16 @@
+﻿@model Hotcakes.Modules.Core.Models.ProductPageViewModel
+@if (Model.AuthorizedToEditCatalog)
+{
+    <div class="hc-catalog-admin">
+        <div class="dnnFormMessage dnnFormInformation">
+            <h6>@Localization.GetString("AdminMessage")</h6>
+            <div class="hc-admin-actions">
+                <ul class="dnnActions hc-actions">
+                    <li><a href="@Model.StoreAdminUrl" target="_blank" class="dnnTertiaryAction">@Localization.GetString("Dashboard")</a></li>
+                    <li><a href="@Model.ProductAnalyticsUrl" target="_blank" class="dnnTertiaryAction">@Localization.GetString("ProductAnalytics")</a></li>
+                    <li><a href="@Model.ProductEditUrl" target="_blank" class="dnnTertiaryAction">@Localization.GetString("ProductEdit")</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}

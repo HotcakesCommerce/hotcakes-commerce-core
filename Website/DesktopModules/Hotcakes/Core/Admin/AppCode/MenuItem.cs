@@ -31,6 +31,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
     [Serializable]
     public class MenuItem
     {
+        private const string nullUrl = "javascript:void(0);";
+        private const string adminUrlBase = "~/DesktopModules/Hotcakes/Core/Admin/";
+
         public string Name { get; set; }
         public string Text { get; set; }
         public string BaseUrl { get; set; }
@@ -43,7 +46,7 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
         {
             if (string.IsNullOrEmpty(Url))
             {
-                return "javascript:void(0);";
+                return nullUrl;
             }
 
             if (Url != null && Url.StartsWith("~/"))
@@ -51,7 +54,7 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
                 return Url;
             }
 
-            return "~/DesktopModules/Hotcakes/Core/Admin/" + Url;
+            return string.Concat(adminUrlBase, Url);
         }
     }
 }

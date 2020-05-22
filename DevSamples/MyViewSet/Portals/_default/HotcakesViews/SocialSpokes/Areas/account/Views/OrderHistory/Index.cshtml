@@ -10,7 +10,10 @@
     }
 }
 <h2>@Localization.GetString("OrderHistory")</h2>
-<h3>@Localization.GetString("YouRewardsPoints") @Model.RewardPoints</h3>
+@if (HccApp.CurrentStore.Settings.RewardsPointsEnabled)
+{
+    <h3>@Localization.GetString("YouRewardsPoints") @Model.RewardPoints</h3>
+}
 @Html.Raw((string)TempData["messages"])
 <table class="dnnGrid hc-orderhistory">
     <thead>
@@ -42,7 +45,7 @@
             </td>
             <td class="hc-right">@o.TotalGrand.ToString("C")
             </td>
-            <td>@o.StatusName
+            <td>@LocalizationUtils.GetOrderStatus(o.StatusName)
             </td>
             <td class="hc-actions">
                 <a href="@OrderLink(o)" class="dnnSecondaryAction">

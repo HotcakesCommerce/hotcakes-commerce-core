@@ -1,4 +1,5 @@
 ﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+@Html.Partial("_Admin")
 @Html.Action("CategoryTrail", "BreadCrumb", new { cat = Model.LocalCategory })
 <div class="hc-category hc-category-detailedlist">
     @if (Model.LocalCategory.ShowTitle)
@@ -17,5 +18,5 @@
     @Html.Partial("_Pager", Model.PagerData)
     @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PostContentColumnId })
 
-	@Html.Hidden("categorybvin", @Model.LocalCategory.Bvin)
+    @Html.Hidden("categorybvin", @Model.LocalCategory.Bvin)
 </div>

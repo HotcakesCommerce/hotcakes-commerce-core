@@ -1,4 +1,5 @@
 ﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+@Html.Partial("_Admin")
 @Html.Action("CategoryTrail", "BreadCrumb", new { cat = Model.LocalCategory })
 <div class="hc-category">
     @if (Model.LocalCategory.ShowTitle)
@@ -16,7 +17,7 @@
             <div class="clearfix" data-bind="with: $root">
                 <div class="hc-sort">
                     <label>@Localization.GetString("SortBy")</label>
-                    @Html.DropDownList("sortOrderSelect", Model.SortSelectList, new { data_bind="value: sortOrder, event: { change: changeSortOrder }" })
+                    @Html.DropDownList("sortOrderSelect", Model.SortSelectList, new { data_bind = "value: sortOrder, event: { change: changeSortOrder }" })
                 </div>
                 @Html.Partial("_PagerKo")
             </div>
@@ -43,6 +44,7 @@
         </div>
     </div>
     @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PostContentColumnId })
+    @Html.Hidden("categorybvin", @Model.LocalCategory.Bvin)
 </div>
 
 <script type="text/javascript">
@@ -54,9 +56,9 @@
 
     ko.applyBindings(new HcDrillDownFilterViewModel(
         @Html.Raw(@Model.DrillDownJsonModel),
-        $(".hc-category"), 
-        '@Model.LocalCategory.Bvin', 
-        '@ModuleContext.ModuleId' 
-        ), 
+        $(".hc-category"),
+        '@Model.LocalCategory.Bvin',
+        '@ModuleContext.ModuleId'
+        ),
     $(".hc-category")[0]);
 </script>

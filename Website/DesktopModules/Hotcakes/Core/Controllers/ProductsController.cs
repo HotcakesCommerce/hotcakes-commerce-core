@@ -262,6 +262,18 @@ namespace Hotcakes.Modules.Core.Controllers
 
             LoadGiftCardAmounts(model);
 
+            if (AuthorizedToEditCatalog())
+            {
+                model.ProductAnalyticsUrl = string.Format(ProductAnalyticsUrlFormat, product.Bvin);
+                model.ProductEditUrl = string.Format(ProductEditUrlFormat, product.Bvin);
+                model.StoreAdminUrl = DashboardAdminUrl;
+                model.AuthorizedToEditCatalog = true;
+            }
+            else
+            {
+                model.AuthorizedToEditCatalog = false;
+            }
+
             return model;
         }
 

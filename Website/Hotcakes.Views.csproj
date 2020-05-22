@@ -150,6 +150,9 @@
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\views.css">
       <DependentUpon>views.less</DependentUpon>
     </Content>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\views.min.css">
+      <DependentUpon>views.css</DependentUpon>
+    </Content>
     <Content Include="Portals\_default\HotcakesViews\_default\Images\attachment.png" />
     <Content Include="Portals\_default\HotcakesViews\_default\Images\bookmark.png" />
     <Content Include="Portals\_default\HotcakesViews\_default\Images\bookmarkSelect.png" />
@@ -179,6 +182,9 @@
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Receipt.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\views.css">
       <DependentUpon>views.less</DependentUpon>
+    </Content>
+    <Content Include="Portals\_default\HotcakesViews\_default\views.min.css">
+      <DependentUpon>views.css</DependentUpon>
     </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -788,6 +794,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PlaceHolder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\_default\Views\Products\_Admin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\_default\Views\Products\App_LocalResources\_Admin.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\_default\Views\Category\App_LocalResources\_Admin.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\_default\Views\Category\_Admin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Category\_Admin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Category\App_LocalResources\_Admin.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Products\_Admin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Products\App_LocalResources\_Admin.cshtml.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

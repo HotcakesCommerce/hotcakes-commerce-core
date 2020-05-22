@@ -159,10 +159,13 @@
   <data name="ValMessage_GiftCardEmailInvalid.Text" xml:space="preserve">
     <value>Please enter correct email address</value>
   </data>
-  <data name="RecurringProduct.Text" xml:space="preserve">
-    <value>This product is billed on a subscription basis, every {0} {1}.</value>
-  </data>
   <data name="Description.Text" xml:space="preserve">
     <value>Description</value>
+  </data>
+  <data name="CartNotEnoughQuantity.Text" xml:space="preserve">
+    <value>Only {1} of {0} is available for purchase at the moment. Please reduce the number ordered and update to checkout.</value>
+  </data>
+  <data name="CartOutOfStock.Text" xml:space="preserve">
+    <value>{0} Is Out Of Stock. Please Remove It.</value>
   </data>
 </root>
