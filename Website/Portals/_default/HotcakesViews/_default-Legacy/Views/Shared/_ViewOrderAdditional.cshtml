@@ -1,0 +1,51 @@
+﻿@model Hotcakes.Commerce.Orders.Order
+
+<div class="row-fluid hc-order-details">
+    <div class="span4">
+        @if (Model.Packages.Count > 0)
+            {
+            <h3>@Localization.GetString("Packages"):</h3>      
+            <table>
+                <tr>
+                    <th>@Localization.GetString("ShippedDate")</th>
+                    <th>@Localization.GetString("TrackingNumber")</th>
+                </tr>
+                @foreach (var package in Model.Packages)
+                    {
+                    <tr>
+                        <td>@if (!package.HasShipped)
+                                { <text>Not Shipped</text>}
+                                else
+                                { @DateHelper.ConvertUtcToStoreTime(HccApp, package.ShipDateUtc)}</td>
+                        <td>
+                            @package.TrackingNumber
+                        </td>
+                    </tr>
+                    }
+            </table>
+            }
+        <br />
+        @if (Model.Notes.Where(n => n.IsPublic).Count() > 0)
+            {
+            <em>@Localization.GetString("PublicNotes"):</em>
+            <table>
+                @foreach (var note in Model.Notes)
+                    {
+                        if (note.IsPublic)
+                        {
+                    <tr>
+                        <td>@note.AuditDate.ToString("d")<br />
+                            @note.Note</td>
+                    </tr>
+                        }
+                    }
+            </table>
+            }
+    </div>
+    <div class="span4 offset4">
+        <div class="hc-payment-info">
+            <h4>@Localization.GetString("PaymentInformation"):</h4>
+            @Html.Partial("_OrderPaymentSummary", (Hotcakes.Commerce.Orders.OrderPaymentSummary)ViewBag.OrderPaymentSummary)
+        </div>
+    </div>
+</div>

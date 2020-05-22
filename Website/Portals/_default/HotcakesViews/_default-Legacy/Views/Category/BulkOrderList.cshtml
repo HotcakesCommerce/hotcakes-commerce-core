@@ -1,0 +1,38 @@
+﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+@Html.Partial("_Admin")
+@Html.Action("CategoryTrail", "BreadCrumb", new { cat = Model.LocalCategory })
+<div class="hc-category hc-category-bulkorderlist">
+    @if (Model.LocalCategory.ShowTitle)
+    {
+        <h1>@Model.LocalCategory.Name</h1>
+    }
+    @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PreContentColumnId })
+    @Html.Partial("_Header", Model)
+    @Html.Partial("_Pager", Model.PagerData, new ViewDataDictionary { { "sortByList", Model.SortSelectList } })
+    @using (Html.BeginHccRouteForm(HccRouteNames.CartBulkAdd))
+    {
+        <table class="hc-record-table">
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td class="hc-checkbox">
+                        @if (item.Item.HasOptions())
+                        {
+                            <text>&nbsp;</text>
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="bulkitem" value="@item.Item.Bvin" />
+                        }
+                    </td>
+                    <td>
+                        @Html.Partial("_RenderSingleProductSimple", item)
+                    </td>
+                </tr>
+            }
+        </table>
+        <input type="submit" name="addtocart" class="dnnPrimaryAction" value="@Localization.GetString("AddToCart")" />
+    }
+    @Html.Partial("_Pager", Model.PagerData)
+    @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PostContentColumnId })
+</div>
