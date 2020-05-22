@@ -12,6 +12,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AcceptTerms.Required" lastModified="2018-06-01 13:29:22">
+    <value xml:space="preserve">Acepte los términos del acuerdo de licencia para continuar.</value>
+  </data>
+  <data name="AcceptTerms.Text" lastModified="2018-06-01 13:29:22">
+    <value xml:space="preserve">Acepto los términos del &lt;a href="../Licenses/Dnn_Corp_License.pdf" target="_blank"&gt;acuerdo de licencia&lt;/a&gt;</value>
+  </data>
   <data name="AccountInfo.Text">
     <value xml:space="preserve">Información de cuenta de acceso</value>
   </data>
@@ -153,6 +159,18 @@
   <data name="DeletingOldFiles.Text">
     <value xml:space="preserve">Borrando archivos anteriores de </value>
   </data>
+  <data name="Email.Help">
+    <value xml:space="preserve">Introduzca el email de este usuario.</value>
+  </data>
+  <data name="Email.Invalid">
+    <value xml:space="preserve">El email no es válido</value>
+  </data>
+  <data name="Email.Required" lastModified="2018-06-01 15:32:59">
+    <value xml:space="preserve">La dirección de correo electrónico es obligatoria</value>
+  </data>
+  <data name="Email.Text" lastModified="2018-06-01 15:32:59">
+    <value xml:space="preserve">Correo electrónico:</value>
+  </data>
   <data name="Error.Text">
     <value xml:space="preserve">Error</value>
   </data>
@@ -162,13 +180,16 @@
   <data name="ExtensionsInstallation.Text">
     <value xml:space="preserve">Instalación de extensiones </value>
   </data>
+  <data name="FcnMode.Text">
+    <value xml:space="preserve">Añadiendo FcnMode</value>
+  </data>
   <data name="FileAndFolderPermissionCheck.Text">
     <value xml:space="preserve">Verificación de permisos de archivo y carpeta</value>
   </data>
   <data name="FileAndFolderPermissionCheckFailed.Text">
     <value xml:space="preserve">&lt;div class="permission"&gt;&lt;img alt="Imagen que muestra la configuración de seguridad de la carpeta raíz del web: Leer, Escribir y Modificar, para la cuenta ASPNET o NT AUTHORITY/SERVICIO DE RED." src="..\403-3.gif" align="right" hspace="10"/&gt;
-&lt;p&gt;&lt;b&gt;&lt;font color='red'&gt;Su sitio ha fallado las verificaciones de permisos.&lt;/font&gt;&lt;/b&gt;&lt;/p&gt;
-Utilize el Explorador de Windows para ver las carpetas de su sitio web ( {0} ). Vaya a las propiedades de la carpeta, y seleccione la pestaña Seguridad. Añada las cuentas y permisos necesarios.
+&lt;p&gt;&lt;strong&gt;&lt;font color='red'&gt;Su sitio ha fallado las verificaciones de permisos.&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
+Utilice el Explorador de Windows para ver las carpetas de su sitio web ( {0} ). Vaya a las propiedades de la carpeta, y seleccione la pestaña Seguridad. Añada las cuentas y permisos necesarios.
 &lt;br/&gt;&lt;br/&gt;
 &lt;h3&gt;Si utiliza Windows 2000 - IIS5&lt;/h3&gt;
 &lt;p&gt;La cuenta ASPNET tiene que tener permisos de Lectura, Escritura y Modificación en la carpeta raíz de la web.&lt;/p&gt;
@@ -198,11 +219,20 @@ Utilize el Explorador de Windows para ver las carpetas de su sitio web ( {0} ). 
   <data name="IISVerificationFail.Text">
     <value xml:space="preserve">El grupo de aplicaciones de IIS tiene que ejecutarse en Modo Integrado</value>
   </data>
+  <data name="ImprovementProgramExplain.Text" lastModified="2016-11-29 16:18:45">
+    <value xml:space="preserve">El programa de mejoras del producto nos permite entender mejor como mejorar DNN para usted. Los datos enviados nos ayudarán a analizar el uso y lo que es más importante para los usuarios del producto. Todos los datos enviados son anónimos y para uso interno. Ver más información sobre el &lt;a href="http://www.dnnsoftware.com/dnn-improvement-program" target="_blank"&gt;Programa de Mejoras del Producto&lt;/a&gt;.</value>
+  </data>
+  <data name="ImprovementProgramLabel.Text" lastModified="2016-11-29 16:18:45">
+    <value xml:space="preserve">Enviar información anónima de uso a DNN</value>
+  </data>
+  <data name="ImprovementsProgramTitle.Text" lastModified="2016-11-29 16:18:45">
+    <value xml:space="preserve">Programa de mejoras del producto</value>
+  </data>
   <data name="InitHostSetting.Text">
     <value xml:space="preserve">Inicializando configuración del sistema </value>
   </data>
-  <data name="InputErrorInvalidPassword.Text">
-    <value xml:space="preserve">La contraseña entrada no cumple los requisitos mínimos de seguridad.</value>
+  <data name="InputErrorInvalidPassword.Text" lastModified="2018-06-01 15:32:59">
+    <value xml:space="preserve">La contraseña introducida no cumple los requisitos mínimos de seguridad.</value>
   </data>
   <data name="InputErrorMissingRequiredFields.Text">
     <value xml:space="preserve">Faltan campos obligatorios</value>
@@ -330,11 +360,11 @@ Utilize el Explorador de Windows para ver las carpetas de su sitio web ( {0} ). 
   <data name="SeeLogs.Text">
     <value xml:space="preserve">Ver registro</value>
   </data>
-  <data name="SkipCreatingSite.Text">
-    <value xml:space="preserve">El alias de portal [{0}] ja existe. Omitiendo este paso.</value>
+  <data name="SkipCreatingSite.Text" lastModified="2018-06-01 15:32:59">
+    <value xml:space="preserve">El alias de portal [{0}] ya existe. Omitiendo este paso.</value>
   </data>
-  <data name="SqlTypeExpress.Text">
-    <value xml:space="preserve">Arxivo SQL Server Express</value>
+  <data name="SqlTypeExpress.Text" lastModified="2018-06-01 15:32:59">
+    <value xml:space="preserve">Archivo SQL Server Express</value>
   </data>
   <data name="SqlTypeServer.Text">
     <value xml:space="preserve">SQL Server/Base de datos SQL Server Express</value>
@@ -369,14 +399,14 @@ Utilize el Explorador de Windows para ver las carpetas de su sitio web ( {0} ). 
   <data name="TimerSeconds.Text">
     <value xml:space="preserve">segundos</value>
   </data>
-  <data name="UpdatingConfigFile.Text">
-    <value xml:space="preserve">Actualizando la configuració para </value>
+  <data name="UpdatingConfigFile.Text" lastModified="2018-06-01 13:29:22">
+    <value xml:space="preserve">Actualizando la configuración para </value>
   </data>
   <data name="UpgradingNormalApplication.Text">
     <value xml:space="preserve">Actualizando aplicación</value>
   </data>
-  <data name="UpgradingVersionApplication.Text">
-    <value xml:space="preserve">Actualizando aplicacion a </value>
+  <data name="UpgradingVersionApplication.Text" lastModified="2018-06-01 13:29:22">
+    <value xml:space="preserve">Actualizando aplicación a </value>
   </data>
   <data name="UserName.Help">
     <value xml:space="preserve">Nombre de usuario del superusuario.</value>
@@ -393,8 +423,8 @@ Utilize el Explorador de Windows para ver las carpetas de su sitio web ( {0} ). 
   <data name="VisitWebsite.Text">
     <value xml:space="preserve">Ver el sitio web</value>
   </data>
-  <data name="WebsiteCreation.Text">
-    <value xml:space="preserve">Creacion del sitio web</value>
+  <data name="WebsiteCreation.Text" lastModified="2018-06-01 15:32:59">
+    <value xml:space="preserve">Creación del sitio web</value>
   </data>
   <data name="WebsiteInfo.Text">
     <value xml:space="preserve">Información del sitio web</value>

@@ -3,7 +3,7 @@
 	<tab>
 		<visible>true</visible>
 		<name>Search Results</name>
-		<skinsrc>[G]Skins/Xcillion/Home.ascx</skinsrc>
+		<skinsrc>[G]Skins/Xcillion/Inner.ascx</skinsrc>
 		<tabpermissions>
 			<permission>
 				<permissioncode>SYSTEM_TAB</permissioncode>
@@ -45,7 +45,7 @@
 				</modules>
 			</pane>
 			<pane>
-				<name>leftPane</name>
+				<name>P2_75_2</name>
 				<modules>
 					<module>
 						<title>Search Results</title>
@@ -56,7 +56,7 @@
 				</modules>
 			</pane>
 			<pane>
-				<name>rightPane</name>
+				<name>P2_25_1</name>
 				<modules>
 					<module>
 						<title>Search Facets</title>

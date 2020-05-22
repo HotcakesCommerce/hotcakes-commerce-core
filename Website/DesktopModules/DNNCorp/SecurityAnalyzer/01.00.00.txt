@@ -1,2 +1,0 @@
-﻿install\installwizard.aspx
-install\installwizard.aspx.cs

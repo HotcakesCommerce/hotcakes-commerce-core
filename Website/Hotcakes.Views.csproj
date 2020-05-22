@@ -26,6 +26,7 @@
     <SccProvider>SAK</SccProvider>
     <TargetFrameworkProfile />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -69,22 +70,22 @@
     <Reference Include="System.Web.Abstractions">
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Razor">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\Dnn\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Routing">
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.WebPages">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\Dnn\System.Web.WebPages.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.WebPages.Deployment">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\Dnn\System.Web.WebPages.Deployment.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.WebPages.Razor">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\Dnn\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
@@ -103,7 +104,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Helpers">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\Dnn\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -119,11 +120,6 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Portals\_default\Containers\Banyan\Detailed_h2.ascx" />
-    <Content Include="Portals\_default\Containers\Banyan\NoTitle.ascx" />
-    <Content Include="Portals\_default\Containers\Banyan\Title_h1.ascx" />
-    <Content Include="Portals\_default\Containers\Banyan\Title_h2.ascx" />
-    <Content Include="Portals\_default\Containers\Banyan\Title_h3.ascx" />
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\attachment.png" />
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\bookmark.png" />
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Images\bookmarkSelect.png" />
@@ -184,83 +180,6 @@
     <Content Include="Portals\_default\HotcakesViews\_default\views.css">
       <DependentUpon>views.less</DependentUpon>
     </Content>
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\2-Col.ascx" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\2-Col.doctype.xml" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\2-Col.jpg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\3-Col-Social.ascx" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\3-Col-Social.doctype.xml" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\3-col-social.jpg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\3-Col.ascx" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\3-Col.doctype.xml" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\3-col.jpg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Content\HomeSlider.html" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Content\SocialSpokesEvents.html" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\stylesheet.css" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-bold-webfont.svg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-light-webfont.svg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-lightitalic-webfont.svg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-regular-webfont.svg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-regularitalic-webfont.svg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-semibold-webfont.svg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\groups.ascx" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\groups.css" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\groups.doctype.xml" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\groups.jpg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Home.ascx" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Home.doctype.xml" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\home.jpg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\arrow.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\breadcrumb.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\carousel-sprite.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\down-arrow.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\event-image1.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\event-image2.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\event-image3.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\header-detail.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\header-nav-bg-small.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\header-nav-bg.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\icon_bin.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\icon_message.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\icon_notification.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\left-arrow.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\Nick.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\pagination.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\right-arrow.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\search-hover.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\search-large-hover.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\search-large.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\search.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\slide1.jpg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\slide2.jpg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\slide3.jpg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\slider-screenshot.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\slide_mobile.jpg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\slide_panel1.jpg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\slide_panel2.jpg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\slide_panel3.jpg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\social-icons.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\SocialSpokes-Logo.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\spriteSocial.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Images\test.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\js\bootstrap\css\bootstrap.css" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\js\bootstrap\css\bootstrap.min.css" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\js\bootstrap\img\glyphicons-halflings-white.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\js\bootstrap\img\glyphicons-halflings.png" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\js\bootstrap\js\bootstrap.js" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\js\bootstrap\js\bootstrap.min.js" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\js\holder.js" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\js\scripts.js" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Simple\menudef.xml" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Simple\simple.js" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\Simple\SimpleTokens.txt" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\skin.css">
-      <DependentUpon>skin.less</DependentUpon>
-    </Content>
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\thumbnail_2-col.jpg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\thumbnail_3-col-social.jpg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\thumbnail_3-col.jpg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\thumbnail_groups.jpg" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\thumbnail_home.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -636,27 +555,6 @@
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_ViewOrderItems.cshtml.uk-UA.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-bold-webfont.eot" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-bold-webfont.ttf" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-bold-webfont.woff" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-light-webfont.eot" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-light-webfont.ttf" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-light-webfont.woff" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-lightitalic-webfont.eot" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-lightitalic-webfont.ttf" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-lightitalic-webfont.woff" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-regular-webfont.eot" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-regular-webfont.ttf" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-regular-webfont.woff" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-regularitalic-webfont.eot" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-regularitalic-webfont.ttf" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-regularitalic-webfont.woff" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-semibold-webfont.eot" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-semibold-webfont.ttf" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\fonts\titillium-semibold-webfont.woff" />
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\js\bootstrap\img\Thumbs.db" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Shared\App_LocalResources\_RenderSingleProduct.cshtml.resx" />
   </ItemGroup>
   <ItemGroup>
@@ -664,18 +562,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Category\_FavoriteProducts.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\_skin_common.less" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\skin.less" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\_skin_structure.less" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Portals\_default\Skins\BanyanBootstrap\_skin_social.less" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Portals\_default\HotcakesViews\_default\Views\AffiliateRegistration\Index.cshtml" />

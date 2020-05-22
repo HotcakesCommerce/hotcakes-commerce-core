@@ -28,7 +28,7 @@
     <parent>HotcakesStore</parent>
     <panes>
       <pane>
-				<name>leftPane</name>
+				<name>P2_75_2</name>
 				<modules>
           <module>
             <title>Category Viewer</title>
@@ -57,7 +57,7 @@
         </modules>
       </pane>
 			<pane>
-				<name>rightPane</name>
+				<name>P2_25_1</name>
 				<modules>
 					<module>
 						<title>Category Menu</title>

@@ -1,2 +1,0 @@
-App_GlobalResources\Locales.xml.resources
-App_GlobalResources\Locales.Portal.xml.resources

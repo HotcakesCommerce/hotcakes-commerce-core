@@ -14,7 +14,7 @@
       <releaseNotes src="ReleaseNotes.txt" />
       <azureCompatible>true</azureCompatible>
       <dependencies>
-        <dependency type="CoreVersion">08.00.03</dependency>
+        <dependency type="CoreVersion">09.02.02</dependency>
       </dependencies>
       <components>
         <component type="Module">
@@ -252,7 +252,7 @@
               <name>hotcakes.config</name>
             </file>
             <file>
-              <name>System.Web.Mvc.dll</name>
+              <name>module.css</name>
             </file>
           </files>
         </component>
@@ -2017,41 +2017,5 @@
       </components>
     </package>
 
-    <package name="Hotcakes.ControlPanel" type="Provider" version="03.03.00">
-      <friendlyName>Hotcakes Control Panel</friendlyName>
-      <description>Hotcakes Control Panel</description>
-      <iconFile>~/DesktopModules/Hotcakes/Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <components>
-        <component type="Script">
-          <scripts>
-            <basePath>DesktopModules\Hotcakes\ControlPanel</basePath>
-            <script type="Install">
-              <name>ControlPanel\01.00.00.SqlDataProvider</name>
-              <version>01.00.00</version>
-            </script>
-            <script type="UnInstall">
-              <name>ControlPanel\Uninstall.SqlDataProvider</name>
-              <version>01.00.00</version>
-            </script>
-          </scripts>
-        </component>
-        <component type="ResourceFile">
-          <resourceFiles>
-            <basePath>DesktopModules\Hotcakes\ControlPanel</basePath>
-            <resourceFile>
-              <name>ControlPanel\ControlPanel.zip</name>
-            </resourceFile>
-          </resourceFiles>
-        </component>
-      </components>
-    </package>
   </packages>
 </dotnetnuke>

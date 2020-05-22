@@ -18,6 +18,12 @@
         resultsCountText: 'About {0} Results',
         currentPageIndexText: 'Current Page Number:',
         linkTarget: '',
+        showDescription: false,
+        maxDescriptionLength: 100,
+        showSnippet: false,
+        showSource: false,
+        showLastUpdated: false,
+        showTags: false,
         cultureCode: 'en-US'
     };
 
@@ -108,23 +114,48 @@
         markup += '<a href="' + data.DocumentUrl + '"' + dnn.searchResult.defaultSettings.linkTarget + '>' + data.Title + '</a></div>';
         if(renderUrl)
             markup += '<div class="dnnSearchResultItem-Link"><a href="' + data.DocumentUrl + '"' + dnn.searchResult.defaultSettings.linkTarget + '>' + data.DocumentUrl + '</a></div>';
-        
-        markup += '<div class="dnnSearchResultItem-Description">' + data.Snippet + '</div>';
-        markup += '<div class="dnnSearchResultItem-Others">';
-        markup += '<span>' + dnn.searchResult.defaultSettings.lastModifiedText + ' </span>';
-        markup += data.DisplayModifiedTime;
-        markup += '</div>';
+
+        var showDescription = dnn.searchResult.defaultSettings.showDescription;
+        var showSnippet = dnn.searchResult.defaultSettings.showSnippet;
+        var showSource = dnn.searchResult.defaultSettings.showSource;
+        var showLastUpdated = dnn.searchResult.defaultSettings.showLastUpdated;
+        var showTags = dnn.searchResult.defaultSettings.showTags;
+
+        if (showDescription && data.Description) {
+            var description = $.trim(data.Description);
+            var maxDescriptionLength = dnn.searchResult.defaultSettings.maxDescriptionLength;
+            if (description.length > maxDescriptionLength) {
+                description = description.substr(0, maxDescriptionLength) + "...";
+            }
+            markup += '<div class="dnnSearchResultItem-Description">' + description + '</div>';
+        }
+
+        if (showSnippet) {
+            markup += '<div class="dnnSearchResultItem-Description">' + data.Snippet + '</div>';
+        }
 
         markup += '<div class="dnnSearchResultItem-Others">';
-        markup += '<span>' + dnn.searchResult.defaultSettings.sourceText + ' </span>';
-        markup += '<a href="javascript:void(0)" class="dnnSearchResultItem-sourceLink" data-value="' + data.DocumentTypeName + '" >' + data.DocumentTypeName + '</a>';
+
+        if (showLastUpdated) {
+            markup += '<span>' + dnn.searchResult.defaultSettings.lastModifiedText + ' </span>';
+            markup += '<label>' + data.DisplayModifiedTime + '</label>';
+        }
+
+        if (showSource) {
+            markup += '&nbsp;&nbsp;&nbsp;<span>' + dnn.searchResult.defaultSettings.sourceText + ' </span>';
+            markup += '<a href="javascript:void(0)" class="dnnSearchResultItem-sourceLink" data-value="' +
+                data.DocumentTypeName +
+                '" >' +
+                data.DocumentTypeName +
+                '</a>';
+        }
 
         if (data.AuthorName && data.AuthorProfileUrl) {
             markup += '&nbsp;&nbsp;&nbsp;<span>' + dnn.searchResult.defaultSettings.authorText + ' </span>';
             markup += '<a href="' + data.AuthorProfileUrl + '" target="_blank">' + data.AuthorName + '</a>';
         }
                         
-        if (data.Tags && data.Tags.length) {
+        if (showTags && data.Tags && data.Tags.length) {
             markup += '&nbsp;&nbsp;&nbsp;<span class="tagSpan">' + dnn.searchResult.defaultSettings.tagsText + ' </span>';
             var k = 0;
             for (k = 0; k < data.Tags.length - 1; k++) {
@@ -521,19 +552,12 @@
         $('#dnnSearchResultAdvancedSearch').on('click', function (e, isTrigger) {
             var tags = $('#advancedTagsCtrl').val() ? $('#advancedTagsCtrl').val().split(',') : [];
 
-            var afterCtrl = $find(dnn.searchResult.defaultSettings.comboAdvancedDates);
-            var afterCtrlVal = afterCtrl.get_value();
+            var afterCtrl = $('#' + dnn.searchResult.defaultSettings.comboAdvancedDates);
+            var afterCtrlVal = afterCtrl.val();
 
-            var scopeCtrl = $find(dnn.searchResult.defaultSettings.comboAdvancedScope);
-            var scopeCtrlItems = scopeCtrl.get_items();
-            var scopeList = [];
-            for (var i = 0; i < scopeCtrlItems.get_count() ; i++) {
-                var scopeCtrlItem = scopeCtrlItems.getItem(i);
-                if (scopeCtrlItem.get_checked()) {
-                    scopeList.push(scopeCtrlItem.get_text());
-                }
-            }
-            if (scopeList.length == scopeCtrlItems.get_count())
+            var scopeCtrl = $('#' + dnn.searchResult.defaultSettings.comboAdvancedScope)[0].selectize;
+            var scopeList = scopeCtrl.get_items();
+            if (scopeList.length === scopeCtrl.get_options().length)
                 scopeList = [];
 
             var exactSearch = $('#dnnSearchResultAdvancedExactSearch').is(':checked');
@@ -560,16 +584,13 @@
         $('#dnnSearchResultAdvancedClear').on('click', function () {
             $('#advancedTagsCtrl').dnnImportTags('');
 
-            var afterCtrl = $find(dnn.searchResult.defaultSettings.comboAdvancedDates);
-            var afterCtrlItem = afterCtrl.get_items().getItem(0);
-            afterCtrlItem.select();
+            var afterCtrl = $('#' + dnn.searchResult.defaultSettings.comboAdvancedDates)[0].selectize;
+            afterCtrl.setValue('');
 
-            var scopeCtrl = $find(dnn.searchResult.defaultSettings.comboAdvancedScope);
-            var scopeCtrlItems = scopeCtrl.get_items();
-            for (var i = 0; i < scopeCtrlItems.get_count() ; i++) {
-                var scopeCtrlItem = scopeCtrlItems.getItem(i);
-                scopeCtrlItem.set_checked(true);
-            }
+            var scopeCtrl = $('#' + dnn.searchResult.defaultSettings.comboAdvancedScope)[0].selectize;
+            $.each(scopeCtrl.get_options(), function (index, item) {
+                scopeCtrl.addItem(item.id);
+            });
 
             $('#dnnSearchResultAdvancedExactSearch').removeAttr('checked');
 
@@ -592,16 +613,13 @@
         $('#dnnSearchResult_dnnSearchBox_input').prev().on('click', function () {
             $('#advancedTagsCtrl').dnnImportTags('');
 
-            var afterCtrl = $find(dnn.searchResult.defaultSettings.comboAdvancedDates);
-            var afterCtrlItem = afterCtrl.get_items().getItem(0);
-            afterCtrlItem.select();
+            var afterCtrl = $('#' + dnn.searchResult.defaultSettings.comboAdvancedDates)[0].selectize;
+            afterCtrl.setValue('');
 
-            var scopeCtrl = $find(dnn.searchResult.defaultSettings.comboAdvancedScope);
-            var scopeCtrlItems = scopeCtrl.get_items();
-            for (var i = 0; i < scopeCtrlItems.get_count() ; i++) {
-                var scopeCtrlItem = scopeCtrlItems.getItem(i);
-                scopeCtrlItem.set_checked(true);
-            }
+            var scopeCtrl = $('#' + dnn.searchResult.defaultSettings.comboAdvancedScope)[0].selectize;
+            $.each(scopeCtrl.get_options(), function (index, item) {
+                scopeCtrl.addItem(item.id);
+            });
 
             $('#dnnSearchResultAdvancedExactSearch').removeAttr('checked');
 
@@ -650,6 +668,11 @@
             dnn.searchResult.doSearch();
             return false;
 
+        });
+
+        // Recalculate input box width and close icon margin
+        $(window).resize(function () {
+            dnn.searchResult.generateAdvancedSearchTerm();
         });
 
         if (dnn.searchResult.queryOptions.sortOption === 1) {

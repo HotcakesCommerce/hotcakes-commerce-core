@@ -24,6 +24,9 @@
 
 		<!--in VS $year$ we exclude the packages folder -->
 		<ItemGroup>
+      <InstallInclude Include="**\*.ascx" Exclude="ControlPanel\**" />
+      <InstallInclude Include="**\*.css" Exclude="ControlPanel\**" />
+      <InstallInclude Include="**\*.resx" Exclude="ControlPanel\**;**\*.uk-UA.resx" />
       <InstallInclude Include="**\*.txt" />
 			<InstallInclude Include="$(DNNFileName).dnn" />
 			<InstallInclude Include="**\*.SqlDataProvider" />
@@ -84,7 +87,7 @@
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.FedEx.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.Ups.dll" />
-      <HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.UpsFreight.dll" />
+			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.UpsFreight.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.USPostal.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Web.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\$(AssemblyName).dll" />
@@ -104,7 +107,7 @@
 		<Copy SourceFiles="@(InstallInclude)" DestinationFolder="$(ModulesBuildFolder)\%(RecursiveDir)" />
 
 		<!-- Copy file to Modules Build Folder -->
-    <Copy SourceFiles="@(HotcakesDlls)" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="@(HotcakesDlls)" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\Hotcakes.Common.Dnn.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\Hotcakes.Licensing.Common.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\Hotcakes.Shipping.FedEx.XmlSerializers.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
@@ -121,8 +124,6 @@
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\MiniProfiler.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\MiniProfiler.EntityFramework6.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\BrandonHaynes.ModelAdapter.EntityFramework.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
-    <Copy SourceFiles="$(MSBuildDnnBinPath)\System.Web.Abstractions.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
-		<Copy SourceFiles="$(MSBuildDnnBinPath)\System.Web.Routing.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 
 		<Copy SourceFiles="@(PackageTxtInclude)" DestinationFolder="$(ModulesBuildFolder)" />
 		
@@ -150,7 +151,7 @@
 		
 		<RemoveDir Directories ="$(CoreBuildFolder)" /> 
 		<RemoveDir Directories ="$(ViewSetBuildFolder)" /> 
-    <RemoveDir Directories ="$(ModulesBuildFolder)" />
+		<RemoveDir Directories ="$(ModulesBuildFolder)" />
 
 		<!-- Create packages with debug symbols -->
 		<Copy SourceFiles="@(HotcakesPdbs)" DestinationFolder="$(DebugBuildFolder)"/>
