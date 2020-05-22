@@ -1,4 +1,5 @@
 ﻿@model Hotcakes.Modules.Core.Models.ProductPageViewModel
+@Html.Partial("_Admin")
 <div class="hc-product">
     @Html.Action("ProductTrail", "BreadCrumb", new { product = Model.LocalProduct })
     @Html.Action("Index", "ContentColumn", new { id = Model.LocalProduct.PreContentColumnId })
@@ -45,7 +46,7 @@
     }
 
     @if (Model.RelatedItems.Count > 0)
-    { 
+    {
         <div class="hc-related-items">
             <h3>@Localization.GetString("RelatedProducts")</h3>
             <div class="hc-record-grid hc-product-grid clearfix">
@@ -60,7 +61,7 @@
     }
 
     @if (Model.LocalProduct.Tabs.Count > 0)
-    { 
+    {
         <div class="dnnForm hc-product-tabs" id="hcProductTabs">
             <ul class="dnnAdminTabNav dnnClear">
                 @foreach (var t in Model.LocalProduct.Tabs.OrderBy(y => y.SortOrder))

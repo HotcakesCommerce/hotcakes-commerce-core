@@ -130,6 +130,27 @@ namespace Hotcakes.Modules.Core.Controllers
                 model.SortSelectList = LoadSortSelectList(model.LocalCategory, GetSort(model.LocalCategory), true);
             }
 
+            if (AuthorizedToEditCatalog())
+            {
+                if (!string.IsNullOrEmpty(model.LocalCategory.Bvin))
+                {
+                    model.CategoryAnalyticsUrl = string.Format(CategoryAnalyticsUrlFormat, model.LocalCategory.Bvin);
+                    model.CategoryEditUrl = string.Format(CategoryEditUrlFormat, model.LocalCategory.Bvin);
+                }
+                else
+                {
+                    model.CategoriesManagementUrl = CategoriesAdminUrl;
+                    model.ProductsManagementUrl = ProductsAdminUrl;
+                }
+
+                model.StoreAdminUrl = DashboardAdminUrl;
+                model.AuthorizedToEditCatalog = true;
+            }
+            else
+            {
+                model.AuthorizedToEditCatalog = false;
+            }
+
             LogCategoryViewActivity(model.LocalCategory);
 
             return View(viewName, model);

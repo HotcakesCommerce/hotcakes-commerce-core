@@ -40,7 +40,6 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
     [Serializable]
     public class MenuProvider
     {
-
         protected static string LocalResourceFile
         {
             get
@@ -48,7 +47,7 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
                 string language = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
                 if (System.Web.HttpContext.Current.Request.Cookies["language"] != null)
                 {
-                    language = "." + HttpContext.Current.Request.Cookies["language"].Value;
+                    language = string.Concat(".", HttpContext.Current.Request.Cookies["language"].Value);
                 }
 
                 if (language.ToLower() == ".en-us")
@@ -56,30 +55,27 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
                     language = string.Empty;
                 }
 
-                return ("~/DesktopModules/Hotcakes/Core/Admin/App_LocalResources/AdminControlBar" + language + ".resx");
+                return (string.Format("~/DesktopModules/Hotcakes/Core/Admin/App_LocalResources/AdminControlBar{0}.resx", language));
             }
         }
-
-
-
 
         private const string _MenuFileVirtualPath = "~/DesktopModules/Hotcakes/Core/Admin/Menu.xml";
 
         private static List<MenuItem> _menuItems;
 
-        //Cache _menuItems Object For Different Cultrue if User Change it not load Wrong Culture
         public static List<MenuItem> MenuItems
         {
             get
             {
-                if (DataCache.GetCache("_menuItems" + HttpContext.Current.Request.Cookies["language"].Value) != null)
-                    _menuItems = (List<MenuItem>)DataCache.GetCache("_menuItems" + HttpContext.Current.Request.Cookies["language"].Value);
+                var cacheKey = string.Concat("_menuItems", HttpContext.Current.Request.Cookies["language"].Value);
+                if (DataCache.GetCache(cacheKey) != null)
+                    _menuItems = (List<MenuItem>)DataCache.GetCache(cacheKey);
                 else
                 {
                     var _menuFilePath = HostingEnvironment.MapPath(_MenuFileVirtualPath);
                     var xml = XElement.Load(_menuFilePath);
                     _menuItems = ParseXml(xml);
-                    DataCache.SetCache("_menuItems" + HttpContext.Current.Request.Cookies["language"].Value, _menuItems);
+                    DataCache.SetCache(cacheKey, _menuItems);
                 }
                 return _menuItems;
             }

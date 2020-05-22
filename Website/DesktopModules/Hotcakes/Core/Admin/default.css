@@ -833,7 +833,7 @@ span.dnnSecondaryAction > a.dnnSecondaryAction {
 /* Action Button behind input */
 .dnnFormItem input[type="text"] + a.dnnPrimaryAction,
 .dnnFormItem input[type="text"] + a.dnnSecondaryAction,
-.dnnFormItem input[type="text"] + a.dnnTerriaryAction {
+.dnnFormItem input[type="text"] + a.dnnTertiaryAction {
     margin-left: 5px;
 }
 
