@@ -42,17 +42,17 @@
                         <asp:TextBox asp:TextBox ID="txtLastName" CssClass="hcInput50p" runat="server" MaxLength="255" />
                     </div>
                     <div class="hcFormItem">
-                        <asp:TextBox ID="txtCompany" runat="server" MaxLength="255" />
+                        <asp:TextBox ID="txtCompany" runat="server" MaxLength="255" CssClass="hcFormItem100pct" />
                     </div>
                     <div class="hcFormItem">
-                        <asp:TextBox ID="txtAddressLine1" runat="server" MaxLength="255" />
+                        <asp:TextBox ID="txtAddressLine1" runat="server" MaxLength="255" CssClass="hcFormItem100pct" />
                         <asp:RequiredFieldValidator id="rfvAddress1" ControlToValidate="txtAddressLine1" Display="Dynamic" CssClass="hcFormError" runat="server" />
                     </div>
                     <div class="hcFormItem">
-                        <asp:TextBox ID="txtAddressLine2" runat="server" MaxLength="255" />
+                        <asp:TextBox ID="txtAddressLine2" runat="server" MaxLength="255" CssClass="hcFormItem100pct" />
                     </div>
                     <div class="hcFormItem">
-                        <asp:TextBox ID="txtCity" CssClass="hcInput33p" runat="server" MaxLength="255" />
+                        <asp:TextBox ID="txtCity" runat="server" MaxLength="255" CssClass="hcFormItem100pct" />
                         <asp:RequiredFieldValidator ID="rfvCity" ControlToValidate="txtCity" Display="Dynamic" CssClass="hcFormError" runat="server" />
                     </div>
                     <div class="hcFormItem hcFormItem50p">
@@ -65,7 +65,7 @@
                         <asp:RequiredFieldValidator ID="rfvZip" ControlToValidate="txtZip" Display="Dynamic" CssClass="hcFormError" runat="server" />
                     </div>
                     <div class="hcFormItem">
-                        <asp:TextBox ID="txtPhone" runat="server" MaxLength="50" />
+                        <asp:TextBox ID="txtPhone" runat="server" MaxLength="50" CssClass="hcFormItem100pct" />
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
