@@ -68,6 +68,7 @@ namespace Hotcakes.Modules.Core.Models
             Item = p;
 
             ProductLink = UrlRewriter.BuildUrlForProduct(p);
+            ProductAddToCartLink = UrlRewriter.BuildUrlForProductAddToCart(p);
             ImageUrls = new ProductImageUrls();
             ImageUrls.LoadProductImageUrls(hccApp, p);
 
@@ -123,6 +124,11 @@ namespace Hotcakes.Modules.Core.Models
         ///     Product detail page link
         /// </summary>
         public string ProductLink { get; set; }
+
+        /// <summary>
+        ///     If not an empty string, the URL allows you to add the product to the cart
+        /// </summary>
+        public string ProductAddToCartLink { get; set; }
 
         /// <summary>
         ///     This holds the html for the specified list of swatches available for specific product
