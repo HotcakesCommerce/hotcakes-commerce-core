@@ -38,17 +38,17 @@ namespace Hotcakes.Commerce.Catalog.Options
     {
         private const string FILE_UPLOAD_MARKUP = "<div id=\"container_{0}\" class=\"uploadContainer\">" +
                                                     "<div class=\"fileListHeader\">" +
-                                                    "<h5 class=\"hc-file-upload-heading\">Select files</h5>" +
+                                                    "<h5 class=\"hc-file-upload-heading\">Select Files</h5>" +
                                                     "<p>" +
-                                                    "<span class=\"hc-file-upload-description\">Add files to upload queue and click the start button</span>" +
+                                                    "<span class=\"hc-file-upload-description\">Add file(s) to the upload queue, then click the start button.</span>" +
                                                     "</p>" +
                                                     "</div>" +
                                                     "<div id=\"filelist_{0}\" class=\"fileListContainer\">" +
                                                     "<ul class=\"fileList\" ></ul>" +
                                                     "</div>" +
                                                     "<br/>" +
-                                                    "<a id=\"pickfiles_{0}\" href=\"#\" class=\"dnnSecondaryAction browseFiles hc-file-upload-btn-add\">Add files</a>" +
-                                                    "<a id=\"uploadfiles_{0}\" href=\"#\" class=\"dnnSecondaryAction uploadFiles hc-file-upload-btn-upload\">Start upload</a>" +
+                                                    "<a id=\"pickfiles_{0}\" href=\"#\" class=\"dnnSecondaryAction browseFiles hc-file-upload-btn-add\">Add File(s)</a>" +
+                                                    "<a id=\"uploadfiles_{0}\" href=\"#\" class=\"dnnSecondaryAction uploadFiles hc-file-upload-btn-upload\">Start Upload</a>" +
                                                     "<input type=\"hidden\" class=\"allowmultiplefiles\" value=\"{1}\" />" +
                                                     "</div>" +
                                                     "<input type=\"hidden\" name=\"uploadfiletypes\" value=\"{2}\" />" +
