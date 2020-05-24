@@ -35,6 +35,8 @@ namespace Hotcakes.Commerce.Catalog.Options
 {
     public class CheckBoxes : IOptionProcessor
     {
+        private const string CHECKBOX_MARKUP_FORMAT = "<input type=\"checkbox\" style=\"display: inline !important;\" class=\"hcIsOption check{1} {0}\" name=\"opt{2}{1}\" value=\"{3}\"";
+
         public OptionTypes GetOptionType()
         {
             return OptionTypes.CheckBoxes;
@@ -45,7 +47,7 @@ namespace Hotcakes.Commerce.Catalog.Options
             return RenderWithSelection(baseOption, null);
         }
 
-        public string RenderWithSelection(Option option, OptionSelectionList selections, string prefix = null)
+        public string RenderWithSelection(Option option, OptionSelectionList selections, string prefix = null, string className = null)
         {
             var sb = new StringBuilder();
             var bvin = option.Bvin.Replace("-", string.Empty);
@@ -56,11 +58,12 @@ namespace Hotcakes.Commerce.Catalog.Options
                 if (!oi.IsLabel)
                 {
                     var oiBvin = oi.Bvin.Replace("-", string.Empty);
-                    sb.Append(
-                        "<input type=\"checkbox\" style=\"display: inline !important;\" class=\"hcIsOption  check" +
-                        bvin +
-                        "\" name=\"opt" + prefix + bvin +
-                        "\" value=\"" + oiBvin + "\"");
+                    sb.AppendFormat(CHECKBOX_MARKUP_FORMAT, className, bvin, prefix, oiBvin);
+                    //sb.Append(
+                    //    "<input type=\"checkbox\" style=\"display: inline !important;\" class=\"hcIsOption  check" +
+                    //    bvin +
+                    //    "\" name=\"opt" + prefix + bvin +
+                    //    "\" value=\"" + oiBvin + "\"");
 
                     if (IsSelected(oi, selections))
                     {
@@ -69,13 +72,13 @@ namespace Hotcakes.Commerce.Catalog.Options
 
                     sb.Append("/>");
                 }
-                sb.Append(oi.Name + "</label><br />");
+                sb.Append(string.Concat(oi.Name, "</label><br />"));
             }
 
             return sb.ToString();
         }
 
-        public void RenderAsControl(Option option, PlaceHolder ph, string prefix = null)
+        public void RenderAsControl(Option option, PlaceHolder ph, string prefix = null, string className = null)
         {
             foreach (var oi in option.Items)
             {
@@ -84,13 +87,14 @@ namespace Hotcakes.Commerce.Catalog.Options
                 {
                     var cb = new HtmlInputCheckBox();
                     cb.ClientIDMode = ClientIDMode.Static;
-                    cb.ID = "opt" + prefix + oi.Bvin.Replace("-", string.Empty);
-                    cb.Name = "opt" + prefix + option.Bvin.Replace("-", string.Empty);
-                    cb.Attributes["class"] = "hcIsOption check" + option.Bvin.Replace("-", string.Empty);
+                    cb.ID = string.Concat("opt", prefix, oi.Bvin.Replace("-", string.Empty));
+                    cb.Name = string.Concat("opt", prefix, option.Bvin.Replace("-", string.Empty));
+                    cb.Attributes["class"] = string.Format("hcIsOption check{0} {1}", option.Bvin.Replace("-", string.Empty), className);
+
                     cb.Value = oi.Bvin.Replace("-", string.Empty);
                     ph.Controls.Add(cb);
                 }
-                ph.Controls.Add(new LiteralControl(" " + oi.Name + "</label> <br /> "));
+                ph.Controls.Add(new LiteralControl(string.Concat(" ", oi.Name, "</label> <br /> ")));
             }
         }
 
@@ -142,7 +146,7 @@ namespace Hotcakes.Commerce.Catalog.Options
             var vals = val.SelectionData.Split(',');
             foreach (var s in vals)
             {
-                var checkId = "opt" + s.Replace("-", string.Empty);
+                var checkId = string.Concat("opt", s.Replace("-", string.Empty));
                 var cb = (HtmlInputCheckBox) ph.FindControl(checkId);
                 if (cb != null)
                 {
@@ -158,7 +162,7 @@ namespace Hotcakes.Commerce.Catalog.Options
             if (val == null) return string.Empty;
             var vals = val.SelectionData.Split(',');
 
-            var result = baseOption.Name + ": ";
+            var result = string.Concat(baseOption.Name, ": ");
             var first = true;
 
             foreach (var oi in baseOption.Items)

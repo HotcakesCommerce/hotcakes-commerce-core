@@ -36,6 +36,24 @@ namespace Hotcakes.Commerce.Catalog.Options
 {
     public class FileUpload : IOptionProcessor
     {
+        private const string FILE_UPLOAD_MARKUP = "<div id=\"container_{0}\" class=\"uploadContainer\">" +
+                                                    "<div class=\"fileListHeader\">" +
+                                                    "<h5 class=\"hc-file-upload-heading\">Select files</h5>" +
+                                                    "<p>" +
+                                                    "<span class=\"hc-file-upload-description\">Add files to upload queue and click the start button</span>" +
+                                                    "</p>" +
+                                                    "</div>" +
+                                                    "<div id=\"filelist_{0}\" class=\"fileListContainer\">" +
+                                                    "<ul class=\"fileList\" ></ul>" +
+                                                    "</div>" +
+                                                    "<br/>" +
+                                                    "<a id=\"pickfiles_{0}\" href=\"#\" class=\"dnnSecondaryAction browseFiles hc-file-upload-btn-add\">Add files</a>" +
+                                                    "<a id=\"uploadfiles_{0}\" href=\"#\" class=\"dnnSecondaryAction uploadFiles hc-file-upload-btn-upload\">Start upload</a>" +
+                                                    "<input type=\"hidden\" class=\"allowmultiplefiles\" value=\"{1}\" />" +
+                                                    "</div>" +
+                                                    "<input type=\"hidden\" name=\"uploadfiletypes\" value=\"{2}\" />" +
+                                                    "<input type=\"hidden\" name=\"opt{0}\" id=\"opt{0}\" />";
+
         public OptionTypes GetOptionType()
         {
             return OptionTypes.FileUpload;
@@ -46,16 +64,16 @@ namespace Hotcakes.Commerce.Catalog.Options
             return RenderWithSelection(baseOption, null);
         }
 
-        public string RenderWithSelection(Option baseOption, OptionSelectionList selections, string prefix = null)
+        public string RenderWithSelection(Option baseOption, OptionSelectionList selections, string prefix = null, string className = null)
         {
-            var uploadControlHtml = GetUploadControlHtml(baseOption, prefix);
+            var uploadControlHtml = GetUploadControlHtml(baseOption, prefix, className);
             return uploadControlHtml;
         }
 
-        public void RenderAsControl(Option baseOption, PlaceHolder ph, string prefix = null)
+        public void RenderAsControl(Option baseOption, PlaceHolder ph, string prefix = null, string className = null)
         {
             var li = new LiteralControl();
-            var uploaderHtml = GetUploadControlHtml(baseOption, prefix);
+            var uploaderHtml = GetUploadControlHtml(baseOption, prefix, className);
             li.Text = uploaderHtml;
             ph.Controls.Add(li);
         }
@@ -65,7 +83,7 @@ namespace Hotcakes.Commerce.Catalog.Options
             var result = new OptionSelection();
             result.OptionBvin = baseOption.Bvin;
 
-            var li = (LiteralControl)ph.FindControl("opt" + prefix + baseOption.Bvin.Replace("-", string.Empty));
+            var li = (LiteralControl)ph.FindControl(string.Concat("opt", prefix, baseOption.Bvin.Replace("-", string.Empty)));
             if (li != null)
             {
                 result.SelectionData = li.Text.Trim();
@@ -78,7 +96,7 @@ namespace Hotcakes.Commerce.Catalog.Options
         {
             var result = new OptionSelection();
             result.OptionBvin = baseOption.Bvin;
-            var formid = "opt" + prefix + baseOption.Bvin.Replace("-", string.Empty);
+            var formid = string.Concat("opt", prefix, baseOption.Bvin.Replace("-", string.Empty));
             var value = form[formid];
 
             if (value != null)
@@ -119,6 +137,7 @@ namespace Hotcakes.Commerce.Catalog.Options
                     return string.Empty;
 
                 var downloadLinks = string.Empty;
+                var strFormat = "<li><a href=\"{0}\" target=\"_blank\" class=\"fileDownLoadLink\">{1}</a><span class=\"fileSize\"> ({2})</span></li>";
 
                 foreach (var file in files)
                 {
@@ -135,20 +154,20 @@ namespace Hotcakes.Commerce.Catalog.Options
 
                     var fileSize = fileParam[1];
                     var fileName = Path.GetFileName(fileDownloadPath);
+                    var fileHtml = string.Format(strFormat, fileDownloadPath, fileName, fileSize);
 
-                    var fileHtml = "<li>" +
-                                   "<a href=\"" + fileDownloadPath + "\" target=\"_blank\" class=\"fileDownLoadLink\" >" +
-                                   fileName + "</a><span class=\"fileSize\" > (" + fileSize + ")</span>" +
-                                   "</li>";
-                    downloadLinks += fileHtml;
+                    //var fileHtml = "<li>" +
+                    //               "<a href=\"" + fileDownloadPath + "\" target=\"_blank\" class=\"fileDownLoadLink\" >" +
+                    //               fileName + "</a><span class=\"fileSize\" > (" + fileSize + ")</span>" +
+                    //               "</li>";
+
+                    downloadLinks = string.Concat(downloadLinks, fileHtml);
                 }
 
                 var bvin = baseOption.Bvin.Replace("-", string.Empty);
-                downloadLinks = "<br>" +
-                                "<ul class=\"fileDownLoadLinks\" >" +
-                                downloadLinks +
-                                "</ul>";
-                return baseOption.Name + ": " + downloadLinks; //System.Web.HttpUtility.HtmlDecode(val.SelectionData);
+                downloadLinks = string.Format("<br /><ul id=\"downloads-{0}\" class=\"fileDownLoadLinks\">{1}</ul>", bvin, downloadLinks);
+
+                return string.Concat(baseOption.Name, ": ", downloadLinks);
             }
 
             return string.Empty;
@@ -190,7 +209,7 @@ namespace Hotcakes.Commerce.Catalog.Options
                     var fileSize = fileParam[1];
                     var fileName = Path.GetFileName(fileDownloadPath);
 
-                    var fileDetails = fileName + " (" + fileSize + ") ";
+                    var fileDetails = string.Concat(fileName, " (", fileSize, ") ");
                     retVal.Add(fileDetails);
                 }
 
@@ -212,8 +231,7 @@ namespace Hotcakes.Commerce.Catalog.Options
             return allowMultiUplaod;
         }
 
-
-        private string GetUploadControlHtml(Option baseOption, string prefix)
+        private string GetUploadControlHtml(Option baseOption, string prefix, string className)
         {
             var bvin = baseOption.Bvin.Replace("-", string.Empty);
             var optUniqueId = prefix + bvin;
@@ -226,29 +244,32 @@ namespace Hotcakes.Commerce.Catalog.Options
 
             var sb = new StringBuilder();
 
-            var uploadLink = "<div id=\"container_" + optUniqueId + "\" class=\"uploadContainer\">" +
-                             "<div class=\"fileListHeader\" >" +
-                             "<h5>Select files</h5>" +
-                             "<p>" +
-                             "<span>Add files to upload queue and click the start button</span>" +
-                             "</p>" +
-                             "</div>" +
-                             "<div id=\"filelist_" + optUniqueId + "\" class=\"fileListContainer\">" +
-                             "<ul class=\"fileList\" ></ul>" +
-                             "</div>" +
-                             "<br/>" +
-                             "<a id=\"pickfiles_" + optUniqueId +
-                             "\" href=\"#\" class=\"dnnSecondaryAction browseFiles\">Add files</a>" +
-                             "<a id=\"uploadfiles_" + optUniqueId +
-                             "\" href=\"#\" class=\"dnnSecondaryAction uploadFiles\">Start upload</a>" +
-                             "<input type=\"hidden\" class=\"allowmultiplefiles\" value=\"" + allowMultipleFiles +
-                             "\" />" +
-                             "</div>" +
-                             "<input type=\"hidden\" name=\"uploadfiletypes\" class=\"\" value=\"" + supportedTypes +
-                             "\" />" +
-                             "<input type=\"hidden\" name=\"opt" + optUniqueId + "\" id=\"opt" + optUniqueId + "\" />";
+            // TODO: Localize the file upload (but it really needs to be replaced) 
+            
+            var uploadHtml = string.Format(FILE_UPLOAD_MARKUP, optUniqueId, allowMultipleFiles, supportedTypes);
+            //var uploadLink = "<div id=\"container_" + optUniqueId + "\" class=\"uploadContainer\">" +
+            //                 "<div class=\"fileListHeader\" >" +
+            //                 "<h5>Select files</h5>" +
+            //                 "<p>" +
+            //                 "<span>Add files to upload queue and click the start button</span>" +
+            //                 "</p>" +
+            //                 "</div>" +
+            //                 "<div id=\"filelist_" + optUniqueId + "\" class=\"fileListContainer\">" +
+            //                 "<ul class=\"fileList\" ></ul>" +
+            //                 "</div>" +
+            //                 "<br/>" +
+            //                 "<a id=\"pickfiles_" + optUniqueId +
+            //                 "\" href=\"#\" class=\"dnnSecondaryAction browseFiles\">Add files</a>" +
+            //                 "<a id=\"uploadfiles_" + optUniqueId +
+            //                 "\" href=\"#\" class=\"dnnSecondaryAction uploadFiles\">Start upload</a>" +
+            //                 "<input type=\"hidden\" class=\"allowmultiplefiles\" value=\"" + allowMultipleFiles +
+            //                 "\" />" +
+            //                 "</div>" +
+            //                 "<input type=\"hidden\" name=\"uploadfiletypes\" class=\"\" value=\"" + supportedTypes +
+            //                 "\" />" +
+            //                 "<input type=\"hidden\" name=\"opt" + optUniqueId + "\" id=\"opt" + optUniqueId + "\" />";
 
-            var wrapper = "<div class=\"fileUploadWrapper\">" + uploadLink + "</div>";
+            var wrapper = string.Format("<div class=\"fileUploadWrapper hc-file-upload {0}\">{1}</div>", className, uploadHtml);
 
             sb.Append(wrapper);
             return sb.ToString();

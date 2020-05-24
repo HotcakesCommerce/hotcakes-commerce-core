@@ -35,6 +35,8 @@ namespace Hotcakes.Commerce.Catalog.Options
 {
     public class RadioButtonList : IOptionProcessor
     {
+        private const string RADIOBUTTON_MARKUP_FORMAT = "<input type=\"radio\" name=\"opt{0}{1}\" value=\"{2}\" style=\"display: inline !important;\" class=\"hcIsOption radio{1} {3}\" ";
+
         public OptionTypes GetOptionType()
         {
             return OptionTypes.RadioButtonList;
@@ -45,7 +47,7 @@ namespace Hotcakes.Commerce.Catalog.Options
             return RenderWithSelection(baseOption, null);
         }
 
-        public string RenderWithSelection(Option option, OptionSelectionList selections, string prefix = null)
+        public string RenderWithSelection(Option option, OptionSelectionList selections, string prefix = null, string className = null)
         {
             var sb = new StringBuilder();
             var bvin = option.Bvin.Replace("-", string.Empty);
@@ -56,9 +58,11 @@ namespace Hotcakes.Commerce.Catalog.Options
                 if (!oi.IsLabel)
                 {
                     var oiBvin = oi.Bvin.Replace("-", string.Empty);
-                    sb.Append("<input type=\"radio\" name=\"opt" + prefix + bvin + "\" value=\"" + oiBvin +
-                              "\" style=\"display: inline !important;\"");
-                    sb.Append(" class=\"hcIsOption radio" + bvin + "\" ");
+                    
+                    sb.AppendFormat(RADIOBUTTON_MARKUP_FORMAT, prefix, bvin, oiBvin, className);
+                    //sb.Append("<input type=\"radio\" name=\"opt" + prefix + bvin + "\" value=\"" + oiBvin +
+                    //          "\" style=\"display: inline !important;\"");
+                    //sb.Append(" class=\"hcIsOption radio" + bvin + "\" ");
 
                     if (IsSelected(oi, selections))
                     {
@@ -67,13 +71,13 @@ namespace Hotcakes.Commerce.Catalog.Options
 
                     sb.Append("/>");
                 }
-                sb.Append(oi.Name + "</label><br />");
+                sb.Append(string.Concat(oi.Name, "</label><br />"));
             }
 
             return sb.ToString();
         }
 
-        public void RenderAsControl(Option baseOption, PlaceHolder ph, string prefix = null)
+        public void RenderAsControl(Option baseOption, PlaceHolder ph, string prefix = null, string className = null)
         {
             foreach (var o in baseOption.Items)
             {
@@ -82,13 +86,15 @@ namespace Hotcakes.Commerce.Catalog.Options
                 {
                     var rb = new HtmlInputRadioButton();
                     rb.ClientIDMode = ClientIDMode.Static;
-                    rb.ID = "opt" + prefix + o.Bvin.Replace("-", string.Empty);
-                    rb.Name = "opt" + prefix + baseOption.Bvin.Replace("-", string.Empty);
-                    rb.Attributes["class"] = "hcIsOption radio" + baseOption.Bvin.Replace("-", string.Empty);
+                    rb.ID = string.Concat("opt", prefix, o.Bvin.Replace("-", string.Empty));
+                    rb.Name = string.Concat("opt", prefix, baseOption.Bvin.Replace("-", string.Empty));
+                    rb.Attributes["class"] =
+                            string.Format("hcIsOption radio{0} {1}", baseOption.Bvin.Replace("-", string.Empty), className);
+
                     rb.Value = o.Bvin.Replace("-", string.Empty);
                     ph.Controls.Add(rb);
                 }
-                ph.Controls.Add(new LiteralControl(" " + o.Name + " </label> <br /> "));
+                ph.Controls.Add(new LiteralControl(string.Concat(" ", o.Name, " </label> <br /> ")));
             }
         }
 
@@ -101,7 +107,7 @@ namespace Hotcakes.Commerce.Catalog.Options
             {
                 if (!o.IsLabel)
                 {
-                    var radioId = "opt" + prefix + o.Bvin.Replace("-", string.Empty);
+                    var radioId = string.Concat("opt", prefix, o.Bvin.Replace("-", string.Empty));
                     var rb = (HtmlInputRadioButton) ph.FindControl(radioId);
                     if (rb != null)
                     {
@@ -122,7 +128,7 @@ namespace Hotcakes.Commerce.Catalog.Options
             var result = new OptionSelection();
             result.OptionBvin = baseOption.Bvin;
 
-            var formid = "opt" + prefix + baseOption.Bvin.Replace("-", string.Empty);
+            var formid = string.Concat("opt", prefix, baseOption.Bvin.Replace("-", string.Empty));
             var value = form[formid];
             if (value != null)
             {
@@ -138,7 +144,7 @@ namespace Hotcakes.Commerce.Catalog.Options
             var val = selections.FindByOptionId(baseOption.Bvin);
             if (val == null) return;
 
-            var radioId = "opt" + val.SelectionData.Replace("-", string.Empty);
+            var radioId = string.Concat("opt", val.SelectionData.Replace("-", string.Empty));
             var rb = (HtmlInputRadioButton) ph.FindControl(radioId);
             if (rb != null)
             {
@@ -157,7 +163,7 @@ namespace Hotcakes.Commerce.Catalog.Options
                 var cleaned = OptionSelection.CleanBvin(oi.Bvin);
                 if (cleaned == val.SelectionData)
                 {
-                    return baseOption.Name + ": " + oi.Name;
+                    return string.Concat(baseOption.Name, ": ", oi.Name);
                 }
             }
 

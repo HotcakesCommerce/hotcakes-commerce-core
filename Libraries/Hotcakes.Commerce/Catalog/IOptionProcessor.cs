@@ -33,8 +33,8 @@ namespace Hotcakes.Commerce.Catalog
     {
         OptionTypes GetOptionType();
         string Render(Option baseOption);
-        string RenderWithSelection(Option baseOption, OptionSelectionList selections, string prefix = null);
-        void RenderAsControl(Option baseOption, PlaceHolder ph, string prefix = null);
+        string RenderWithSelection(Option baseOption, OptionSelectionList selections, string prefix = null, string className = null);
+        void RenderAsControl(Option baseOption, PlaceHolder ph, string prefix = null, string className = null);
         OptionSelection ParseFromPlaceholder(Option baseOption, PlaceHolder ph, string prefix = null);
         OptionSelection ParseFromForm(Option baseOption, NameValueCollection form, string prefix = null);
         void SetSelectionsInPlaceholder(Option baseOption, PlaceHolder ph, OptionSelectionList selections);

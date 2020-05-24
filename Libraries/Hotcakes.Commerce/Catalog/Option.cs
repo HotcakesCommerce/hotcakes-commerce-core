@@ -194,9 +194,11 @@ namespace Hotcakes.Commerce.Catalog
         ///     An HTML-friendly string representation of the Option, based upon its respective OptionType, with default
         ///     selections made.
         /// </returns>
-        public string RenderWithSelection(OptionSelectionList selections, string prefix = null)
+        public string RenderWithSelection(OptionSelectionList selections, string prefix = null, string className = null)
         {
-            return Processor.RenderWithSelection(this, selections, prefix);
+            if (prefix == null) prefix = string.Empty;
+            if (className == null) className = string.Empty;
+            return Processor.RenderWithSelection(this, selections, prefix, className);
         }
 
         /// <summary>
