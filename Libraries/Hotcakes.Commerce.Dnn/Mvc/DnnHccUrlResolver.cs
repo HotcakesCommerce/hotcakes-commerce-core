@@ -35,6 +35,7 @@ using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Portals;
 using Hotcakes.Commerce.Accounts;
 using Hotcakes.Commerce.Urls;
+using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Dnn.Mvc
 {
@@ -199,7 +200,10 @@ namespace Hotcakes.Commerce.Dnn.Mvc
         {
             StoreSettingsUrls urlStoreSettings = null;
             if (HccRequestContext.Current.CurrentStore != null)
-                urlStoreSettings = HccRequestContext.Current.CurrentStore.Settings.Urls;
+            {
+                HccRequestContext localizedContext = HccRequestContextUtils.GetContextWithCulture(HccRequestContext.Current, CurrentPortalSettings.CultureCode);
+                urlStoreSettings = localizedContext.CurrentStore.Settings.Urls;
+            }
 
             var urlInfo = new DnnUrlInfo();
             switch (route)
