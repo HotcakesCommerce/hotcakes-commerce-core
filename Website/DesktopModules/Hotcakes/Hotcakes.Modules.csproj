@@ -281,6 +281,18 @@
     <Content Include="Core\Admin\styles.min.css">
       <DependentUpon>styles.css</DependentUpon>
     </Content>
+    <Content Include="Core\Content\demoimages\additional\brown-fedora-02.jpg" />
+    <Content Include="Core\Content\demoimages\additional\brown-fedora-03.jpg" />
+    <Content Include="Core\Content\demoimages\medium\brown-fedora-01.jpg" />
+    <Content Include="Core\Content\demoimages\medium\Laptop.jpg" />
+    <Content Include="Core\Content\demoimages\small\brown-fedora-01.jpg" />
+    <Content Include="Core\Content\demoimages\small\Laptop.jpg" />
+    <Content Include="Core\Content\demoimages\tiny\BraceletBlue.jpg" />
+    <Content Include="Core\Content\demoimages\tiny\brown-fedora-01.jpg" />
+    <Content Include="Core\Content\demoimages\tiny\Cupcake.jpg" />
+    <Content Include="Core\Content\demoimages\tiny\Earrings.jpg" />
+    <Content Include="Core\Content\demoimages\tiny\Laptop.jpg" />
+    <Content Include="Core\Content\demoimages\tiny\PurpleTop.jpg" />
     <Content Include="Core\Controls\CategoryPerformance.ascx" />
     <Content Include="Core\Controls\ProductPerformance.ascx" />
     <Content Include="Core\Controls\StoreNotFound.ascx" />
@@ -821,14 +833,10 @@
     <Content Include="Core\Content\demoimages\medium\BraceletBlue.png" />
     <Content Include="Core\Content\demoimages\medium\CupCake.jpg" />
     <Content Include="Core\Content\demoimages\medium\Earrings.jpg" />
-    <Content Include="Core\Content\demoimages\medium\indiana-jones-hat.jpg" />
-    <Content Include="Core\Content\demoimages\medium\Laptop.png" />
     <Content Include="Core\Content\demoimages\medium\PurpleTop.jpg" />
     <Content Include="Core\Content\demoimages\small\BraceletBlue.png" />
     <Content Include="Core\Content\demoimages\small\CupCake.jpg" />
     <Content Include="Core\Content\demoimages\small\Earrings.jpg" />
-    <Content Include="Core\Content\demoimages\small\indiana-jones-hat.jpg" />
-    <Content Include="Core\Content\demoimages\small\Laptop.png" />
     <Content Include="Core\Content\demoimages\small\PurpleTop.jpg" />
     <Content Include="Core\Admin\Images\DefaultStoreLogo.png" />
     <Content Include="Core\Admin\Images\spinner.gif" />

@@ -799,8 +799,8 @@ namespace Hotcakes.Commerce.Utilities
             p.ProductName = "Laptop Computer Sample";
             p.Featured = true;
             p.IsSearchable = true;
-            p.ImageFileSmall = "Laptop.png";
-            p.ImageFileMedium = "Laptop.png";
+            p.ImageFileSmall = "Laptop.jpg";
+            p.ImageFileMedium = "Laptop.jpg";
             p.ImageFileSmallAlternateText = "Laptop Computer Sample SAMPLE005";
             p.InventoryMode = ProductInventoryMode.AlwayInStock;
             p.LongDescription =
