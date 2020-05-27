@@ -525,6 +525,9 @@ mark,
   min-width: 125px;
   max-width: 125px;
 }
+#hcAdditionalImages img {
+  display: inline;
+}
 /*--------------------------------------------------
     File Upload Product Choice
 --------------------------------------------------*/

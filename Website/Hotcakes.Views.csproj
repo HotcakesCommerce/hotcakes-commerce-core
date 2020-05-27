@@ -203,16 +203,18 @@
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Cart.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Category.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Checkout.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\clipboard.min.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\EditBilling.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\EstimateShipping.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\ImageRotator.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\masonry.min.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\OrderHistory.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Pager.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\ProductGrid.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Products.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Receipt.js" />
-    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\ResizeSensor.js" />
-    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\sticky-sidebar.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Search.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Search.SearchInput.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\views.css">
       <DependentUpon>views.less</DependentUpon>
     </Content>
