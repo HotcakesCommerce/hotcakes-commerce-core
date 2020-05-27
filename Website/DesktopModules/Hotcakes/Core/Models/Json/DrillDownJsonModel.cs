@@ -67,13 +67,6 @@ namespace Hotcakes.Modules.Core.Models.Json
 
         public decimal SelectedMaxPrice { get; set; }
 
-        [Obsolete("Use the SelectedManufacturers property instead. This will be depreciated in HCC 2.0.")]
-        public List<SelectedFacetItem> SelectedManufactures
-        {
-            get { return _SelectedManufacturers; }
-            set { _SelectedManufacturers = value; }
-        }
-
         public List<SelectedFacetItem> SelectedManufacturers
         {
             get { return _SelectedManufacturers; }

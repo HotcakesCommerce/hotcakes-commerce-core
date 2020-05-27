@@ -303,28 +303,5 @@ namespace Hotcakes.Commerce.Catalog
             var productGuid = DataTypeHelper.BvinToGuid(productId);
             return FindFirstPoco(y => y.ProductFileId == fileGuid && y.ProductId == productGuid);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static ProductFileAssociationRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new ProductFileAssociationRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static ProductFileAssociationRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new ProductFileAssociationRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public ProductFileAssociationRepository(HccRequestContext c, IRepositoryStrategy<hcc_ProductFileXProduct> r,
-            ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

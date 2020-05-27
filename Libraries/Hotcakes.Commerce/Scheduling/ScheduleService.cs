@@ -50,27 +50,5 @@ namespace Hotcakes.Commerce.Scheduling
                 QueuedTasks.Delete(t.Id);
             }
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public static ScheduleService InstantiateForMemory(HccRequestContext c)
-        {
-            return Factory.CreateService<ScheduleService>();
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public static ScheduleService InstantiateForDatabase(HccRequestContext c)
-        {
-            return Factory.CreateService<ScheduleService>();
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public ScheduleService(HccRequestContext c, QueuedTaskRepository queuedTasks)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

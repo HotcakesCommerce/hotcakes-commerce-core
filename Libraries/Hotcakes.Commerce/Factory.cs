@@ -185,20 +185,5 @@ namespace Hotcakes.Commerce
         {
             return Instance.CreateService<T>(context);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 2.0.0. Use same method with other parameters instead")]
-        public static WorkflowFactory CreateWorklflowFactory(HotcakesApplication hccApp)
-        {
-            return CreateWorklflowFactory(hccApp.CurrentRequestContext);
-        }
-
-        [Obsolete("Obsolete in 2.0.0. There is no need to call this method anymore")]
-        public static void ReleaseCache()
-        {
-        }
-
-        #endregion
     }
 }

@@ -60,9 +60,6 @@ namespace Hotcakes.Modules.Core.Models
 
         public AffiliateUrlBuilderViewModel UrlBuilder { get; set; }
 
-        [Obsolete("Obsolete in 1.7.1. Used rendering of list on server in the view.")]
-        public Dictionary<int, string> TimeRangesLocalized { get; set; }
-
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this);

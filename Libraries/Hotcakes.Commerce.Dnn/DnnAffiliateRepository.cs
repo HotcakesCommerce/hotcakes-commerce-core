@@ -47,16 +47,6 @@ namespace Hotcakes.Commerce.Dnn
             _portalId = DnnGlobal.Instance.GetPortalId();
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public DnnAffiliateRepository(HccRequestContext context, bool isForMemoryOnly)
-            : this(context)
-        {
-        }
-
-        #endregion
-
         #region Internal declaration
 
         internal class AffiliateReportHelper

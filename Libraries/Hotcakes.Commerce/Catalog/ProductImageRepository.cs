@@ -220,27 +220,5 @@ namespace Hotcakes.Commerce.Catalog
             item.SortOrder = newSortOrder;
             return Update(item);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static ProductImageRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new ProductImageRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static ProductImageRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new ProductImageRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public ProductImageRepository(HccRequestContext c, IRepositoryStrategy<hcc_ProductImage> r, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

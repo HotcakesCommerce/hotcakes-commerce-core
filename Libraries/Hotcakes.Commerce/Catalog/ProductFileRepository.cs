@@ -282,28 +282,5 @@ namespace Hotcakes.Commerce.Catalog
                     .OrderBy(y => y.FileName);
             }, pageNumber, pageSize);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static ProductFileRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new ProductFileRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static ProductFileRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new ProductFileRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public ProductFileRepository(HccRequestContext c, IRepositoryStrategy<hcc_ProductFile> r,
-            IRepositoryStrategy<hcc_ProductFileXProduct> x, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

@@ -36,16 +36,6 @@ namespace Hotcakes.Commerce.Globalization
             Regions = Factory.CreateRepo<RegionRepository>(Context);
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public GlobalizationService(HccRequestContext c, bool isForMemoryOnly)
-            : this(c)
-        {
-        }
-
-        #endregion
-
         public CountryRepository Countries { get; protected set; }
         public RegionRepository Regions { get; protected set; }
     }

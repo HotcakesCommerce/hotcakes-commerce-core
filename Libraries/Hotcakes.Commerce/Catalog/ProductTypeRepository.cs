@@ -41,16 +41,6 @@ namespace Hotcakes.Commerce.Catalog
         {
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public ProductTypeRepository(HccRequestContext c, bool isForMemoryOnly)
-            : this(c)
-        {
-        }
-
-        #endregion
-
         protected override Expression<Func<hcc_ProductType, Guid>> ItemKeyExp
         {
             get { return pt => pt.bvin; }

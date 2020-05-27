@@ -38,16 +38,6 @@ namespace Hotcakes.Commerce.Accounts
             Stores = Factory.CreateRepo<StoreRepository>(Context);
         }
 
-        #region
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public AccountService(HccRequestContext c, bool isForMemoryOnly)
-            : this(c)
-        {
-        }
-
-        #endregion
-
         public ApiKeyRepository ApiKeys { get; protected set; }
         public StoreRepository Stores { get; protected set; }
 

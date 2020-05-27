@@ -48,14 +48,7 @@ namespace Hotcakes.Commerce.Search
         public List<string> Products { get; set; }
 
         public int TotalCount { get; set; }
-
-        [Obsolete("Use the Manufacturers property instead. This will be depreciated in HCC 2.0.")]
-        public List<FacetItem> Manufactures
-        {
-            get { return _Manufacturers; }
-            set { _Manufacturers = value; }
-        }
-
+        
         public List<FacetItem> Manufacturers
         {
             get { return _Manufacturers; }
@@ -73,14 +66,7 @@ namespace Hotcakes.Commerce.Search
         public decimal MinPrice { get; set; }
 
         public decimal MaxPrice { get; set; }
-
-        [Obsolete("Use the SelectedManufacturers property instead. This will be depreciated in HCC 2.0.")]
-        public List<SelectedFacetItem> SelectedManufactures
-        {
-            get { return _SelectedManufacturers; }
-            set { _SelectedManufacturers = value; }
-        }
-
+        
         public List<SelectedFacetItem> SelectedManufacturers
         {
             get { return _SelectedManufacturers; }

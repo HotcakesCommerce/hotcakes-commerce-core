@@ -53,16 +53,6 @@ namespace Hotcakes.Commerce.Reporting
 
         #endregion
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 2.0.0. Use Factory.CreateService instead")]
-        public ReportingService(HotcakesApplication app)
-            : this(app.CurrentRequestContext)
-        {
-        }
-
-        #endregion
-
         #region Internal declaration
 
         public class AffiliateItem

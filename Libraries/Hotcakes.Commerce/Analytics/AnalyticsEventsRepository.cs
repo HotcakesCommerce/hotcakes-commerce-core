@@ -90,27 +90,5 @@ namespace Hotcakes.Commerce.Analytics
         {
             return FindListPoco(q => { return q.Where(a => a.UserId == userId); });
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static AnalyticsEventsRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new AnalyticsEventsRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static AnalyticsEventsRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new AnalyticsEventsRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public AnalyticsEventsRepository(HccRequestContext c, IRepositoryStrategy<hcc_AnalyticsEvent> r, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

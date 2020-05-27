@@ -145,42 +145,5 @@ namespace Hotcakes.Commerce.Contacts
         }
 
         #endregion
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public ContactService(HccRequestContext context, bool isForMemoryOnly)
-            : this(context)
-        {
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Use same method with other parameters instead")]
-        public void AffiliateWasApproved(Affiliate aff, HotcakesApplication app)
-        {
-            AffiliateWasApproved(aff);
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Use instance method with other parameters instead")]
-        public static void SendNewRolesAssignment(CustomerAccount acc, string[] roles, HotcakesApplication app)
-        {
-            var contactService = Factory.CreateService<ContactService>(app.CurrentRequestContext);
-            contactService.SendNewRolesAssignment(acc, roles);
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Use instance method with other parameters instead")]
-        public static void SendAffiliateConfirmationEmail(Affiliate aff, HotcakesApplication app)
-        {
-            var contactService = Factory.CreateService<ContactService>(app.CurrentRequestContext);
-            contactService.SendAffiliateConfirmationEmail(aff);
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Use instance method with other parameters instead")]
-        public static void SendAffiliateApprovementEmail(Affiliate aff, HotcakesApplication app)
-        {
-            var contactService = Factory.CreateService<ContactService>(app.CurrentRequestContext);
-            contactService.SendAffiliateApprovementEmail(aff);
-        }
-
-        #endregion
     }
 }

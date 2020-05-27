@@ -34,12 +34,5 @@ namespace Hotcakes.Commerce.Reporting
         public int Quantity { get; set; }
         public int CartsCount { get; set; }
         public int ContactsCount { get; set; }
-
-        [Obsolete("Obsolete in 2.0.0. Use CartsCount property instead")]
-        public int Count
-        {
-            get { return CartsCount; }
-            set { CartsCount = value; }
-        }
     }
 }

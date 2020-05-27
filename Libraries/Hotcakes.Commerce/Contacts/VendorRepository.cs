@@ -132,54 +132,9 @@ namespace Hotcakes.Commerce.Contacts
             }
         }
 
-        [Obsolete("Obsolete in 1.8.0. Contacts property is not used")]
-        public List<VendorManufacturer> FindByUserId(string userId)
-        {
-#pragma warning disable 0612, 0618
-            var vendors = FindListPoco(q =>
-            {
-                return q
-                    .Where(y => y.StoreId == Context.CurrentStore.Id);
-            });
-
-            var output = vendors.Where(y => y.ContactExists(userId)).ToList();
-            if (output != null)
-            {
-                return output;
-            }
-
-            return new List<VendorManufacturer>();
-
-
-#pragma warning restore 0612, 0618
-        }
-
         internal void DestoryAllForStore(long storeId)
         {
             Delete(y => y.StoreId == storeId);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static VendorRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new VendorRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static VendorRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new VendorRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public VendorRepository(HccRequestContext c, IRepositoryStrategy<hcc_Vendor> r,
-            IRepositoryStrategy<hcc_UserXContact> sub, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

@@ -49,9 +49,7 @@ namespace Hotcakes.Commerce.Catalog
     ///     This is the primary class used for all products in the application
     /// </summary>
     [Serializable]
-#pragma warning disable 0612, 0618
-    public class Product : IEquatable<Product>, IReplaceable, ILocalizableModel, IPurchasable
-#pragma warning restore 0612, 0618
+    public class Product : IEquatable<Product>, IReplaceable, ILocalizableModel
     {
         public const int ProductNameMaxLength = 255;
         public const int SkuMaxLength = 50;
@@ -1444,19 +1442,6 @@ namespace Hotcakes.Commerce.Catalog
 
         #region IPurchasable Members
 
-        [Obsolete]
-        public PurchasableSnapshot AsPurchasable(OptionSelections selectionData, HotcakesApplication app)
-        {
-            return AsPurchasable(selectionData, app, true);
-        }
-
-        [Obsolete]
-        public PurchasableSnapshot AsPurchasable(OptionSelections selectionData, HotcakesApplication app,
-            bool calculateUserPrice)
-        {
-            throw new NotSupportedException();
-        }
-
         public LineItem ConvertToLineItem(HotcakesApplication app, int quantity = 1,
             OptionSelections selectionData = null, decimal? userPrice = null)
         {
@@ -1620,18 +1605,6 @@ namespace Hotcakes.Commerce.Catalog
                 li.ProductShortDescription = description.ToString();
             }
             return li;
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Use same method with other parameters instead")]
-        public string RenderTypeProperties(HotcakesApplication app)
-        {
-            return RenderTypeProperties(false, app.CurrentRequestContext);
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Use same method with other parameters instead")]
-        public string RenderTypeProperties(bool forDropShipper, HotcakesApplication app)
-        {
-            return RenderTypeProperties(forDropShipper, app.CurrentRequestContext);
         }
 
         #endregion

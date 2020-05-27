@@ -55,7 +55,6 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         private void lnkMigrate_Click(object sender, EventArgs e)
         {
-            HccApp.MarketingServices.MigrateOldPromotions();
             ucMessageBox.ClearMessage();
             lnkMigrate.Visible = false;
             ucMessageBox.ShowOk(Localization.GetString("MigrateSuccess"));
@@ -106,8 +105,6 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
             ucAffiliatePromotions.LoadPromotions(txtKeywords.Text, chkShowDisabled.Checked);
             ucOffersFreeItem.LoadPromotions(txtKeywords.Text, chkShowDisabled.Checked);
 
-            DetectOldPromotionsType();
-
             if (!chkShowDisabled.Checked)
             {
                 ucMessageBox.ShowInformation(Localization.GetString("PromotionsOrder"));
@@ -117,29 +114,6 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
         #endregion
 
         #region Implementation
-
-#pragma warning disable 0612, 0618
-        private void DetectOldPromotionsType()
-        {
-            var rowCount = 0;
-            var items = HccApp.MarketingServices.Promotions.FindAllWithFilter(PromotionType.Offer, string.Empty, true, 1,
-                int.MaxValue, ref rowCount);
-
-            if (rowCount > 0)
-            {
-                ucMessageBox.ShowWarning(string.Format("<b>{0}</b> {1}.<br/>", rowCount, Localization.GetString("LegacyTypes")));
-                var sb = new StringBuilder();
-                sb.Append("<ul>");
-                foreach (var p in items)
-                {
-                    sb.AppendFormat("<li>{0}</li>", p.Name);
-                }
-                sb.Append("</ul>");
-                ucMessageBox.ShowWarning(sb.ToString());
-                lnkMigrate.Visible = true;
-            }
-        }
-#pragma warning restore 0612, 0618
 
         private void InitialBindData()
         {

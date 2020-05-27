@@ -187,28 +187,5 @@ namespace Hotcakes.Commerce.Catalog
             }
             return true;
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static ProductRelationshipRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new ProductRelationshipRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static ProductRelationshipRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new ProductRelationshipRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public ProductRelationshipRepository(HccRequestContext c, IRepositoryStrategy<hcc_ProductRelationship> r,
-            ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

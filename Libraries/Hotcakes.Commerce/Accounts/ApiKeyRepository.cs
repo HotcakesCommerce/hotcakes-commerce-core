@@ -115,27 +115,5 @@ namespace Hotcakes.Commerce.Accounts
         {
             Delete(a => a.StoreId == storeId);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static ApiKeyRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new ApiKeyRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static ApiKeyRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new ApiKeyRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public ApiKeyRepository(HccRequestContext c, IRepositoryStrategy<hcc_ApiKey> r, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

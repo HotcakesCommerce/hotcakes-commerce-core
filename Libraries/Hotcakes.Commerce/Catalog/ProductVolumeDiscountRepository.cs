@@ -143,28 +143,5 @@ namespace Hotcakes.Commerce.Catalog
             var productGuid = DataTypeHelper.BvinToGuid(productId);
             return Delete(y => y.ProductID == productGuid && y.StoreId == storeId);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static ProductVolumeDiscountRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new ProductVolumeDiscountRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static ProductVolumeDiscountRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new ProductVolumeDiscountRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public ProductVolumeDiscountRepository(HccRequestContext c, IRepositoryStrategy<hcc_ProductVolumeDiscounts> r,
-            ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

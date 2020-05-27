@@ -283,41 +283,5 @@ namespace Hotcakes.Commerce.Shipping
 
             return international;
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public ZoneRepository(HccRequestContext context, bool isForMemoryOnly)
-            : this(context)
-        {
-        }
-
-        [Obsolete(
-            "Obsolete in 2.0.0. Method violate concept of 3 tier applications. DAL/BL layers are mixed. Use EnsureDefaultZones of OrderService"
-            )]
-        public void EnsureDefaultZones(long storeId, HotcakesApplication hccApp)
-        {
-            CreateAndReassign(UnitedStatesAll(), hccApp);
-            CreateAndReassign(UnitedStates48Contiguous(), hccApp);
-            CreateAndReassign(UnitedStatesAlaskaAndHawaii(), hccApp);
-            CreateAndReassign(International("USA"), hccApp);
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Method violate concept of 3 tier applications. DAL/BL layers are mixed.")]
-        private void CreateAndReassign(Zone zone, HotcakesApplication hccApp)
-        {
-            var methods = hccApp.OrderServices.ShippingMethods.FindForZones(new List<Zone> {zone});
-
-            if (Create(zone))
-            {
-                methods.ForEach(m =>
-                {
-                    m.ZoneId = zone.Id;
-                    hccApp.OrderServices.ShippingMethods.Update(m);
-                });
-            }
-        }
-
-        #endregion
     }
 }

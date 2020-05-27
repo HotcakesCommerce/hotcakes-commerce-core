@@ -71,27 +71,5 @@ namespace Hotcakes.Commerce.Analytics
         {
             return Factory.Instance.CreateStrategy<AnalyticsEvent>();
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public static AnalyticsService InstantiateForMemory(HccRequestContext c)
-        {
-            return Factory.CreateService<AnalyticsService>();
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public static AnalyticsService InstantiateForDatabase(HccRequestContext c)
-        {
-            return Factory.CreateService<AnalyticsService>();
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public AnalyticsService(HccRequestContext c, AnalyticsEventsRepository analyticsEvents)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

@@ -114,7 +114,6 @@
     <Compile Include="PaymentGateway.cs" />
     <Compile Include="CustomerData.cs" />
     <Compile Include="CvnResponseType.cs" />
-    <Compile Include="Obsolete\ExpirationMonth.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="MessageType.cs" />
     <Compile Include="MethodSettings.cs" />

@@ -45,16 +45,6 @@ namespace Hotcakes.Commerce.Catalog
             productTypesRepository = new ProductTypeRepository(c);
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public MembershipProductTypeRepository(HccRequestContext c, bool isForMemoryOnly)
-            : this(c)
-        {
-        }
-
-        #endregion
-
         /// <summary>
         ///     Copy database view model to object model
         /// </summary>

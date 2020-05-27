@@ -833,35 +833,5 @@ namespace Hotcakes.Commerce.Orders
 		{
 			Delete(o => o.StoreId == storeId);
 		}
-
-		#region Obsolete
-
-		[Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-		public static OrderRepository InstantiateForMemory(HccRequestContext c)
-		{
-			return new OrderRepository(c);
-		}
-
-		[Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-		public static OrderRepository InstantiateForDatabase(HccRequestContext c)
-		{
-			return new OrderRepository(c);
-		}
-
-		[Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-		private OrderRepository(HccRequestContext c,
-						IRepositoryStrategy<hcc_Order> r,
-						IRepositoryStrategy<hcc_LineItem> itemr,
-						IRepositoryStrategy<hcc_OrderNote> noter,
-						IRepositoryStrategy<hcc_OrderCoupon> couponr,
-						IRepositoryStrategy<hcc_OrderPackage> packager,
-						IRepositoryStrategy<hcc_RMA> returns,
-						IRepositoryStrategy<hcc_RMAItem> returnItems,
-						ILogger log)
-			: this(c)
-		{
-		}
-
-		#endregion
 	}
 }

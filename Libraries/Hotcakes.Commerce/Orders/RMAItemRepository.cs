@@ -162,27 +162,5 @@ namespace Hotcakes.Commerce.Orders
             var rmaGuid = DataTypeHelper.BvinToGuid(rmaBvin);
             MergeList(subitems, ri => ri.RMABvin == rmaGuid);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static RMAItemRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new RMAItemRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static RMAItemRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new RMAItemRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public RMAItemRepository(HccRequestContext c, IRepositoryStrategy<hcc_RMAItem> strategy, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

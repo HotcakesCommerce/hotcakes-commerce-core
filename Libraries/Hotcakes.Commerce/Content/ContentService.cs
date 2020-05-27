@@ -157,42 +157,5 @@ namespace Hotcakes.Commerce.Content
         }
 
         #endregion
-
-        #region
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public static ContentService InstantiateForMemory(HccRequestContext c)
-        {
-            return Factory.CreateService<ContentService>();
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public static ContentService InstantiateForDatabase(HccRequestContext c)
-        {
-            return Factory.CreateService<ContentService>();
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public ContentService(HccRequestContext c,
-            HtmlTemplateRepository templates,
-            CustomUrlRepository customUrls,
-            ContentColumnRepository cols)
-            : this(c)
-        {
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Use same method with other parameters instead")]
-        public void SendGiftCardNotification(GiftCard giftCard, LineItem item, HotcakesApplication app)
-        {
-            SendGiftCardNotification(giftCard, item);
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Use same method with other parameters instead")]
-        public void SendGiftCardNotification(GiftCard giftCard, LineItem item)
-        {
-            SendGiftCardNotification(giftCard, null, item);
-        }
-
-        #endregion
     }
 }

@@ -37,30 +37,10 @@ namespace Hotcakes.Commerce.Catalog
     /// </summary>
     public class GiftCardRepository : HccSimpleRepoBase<hcc_GiftCard, GiftCard>
     {
-        //#region Fields
-        //IRepositoryStrategy<hcc_LineItem> _lineItemRepository;
-
-        //#endregion
-
         #region Constructor
 
         public GiftCardRepository(HccRequestContext context)
             : base(context)
-        {
-        }
-
-        #endregion
-
-        #region Obsolete
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="GiftCardRepository" /> class.
-        /// </summary>
-        /// <param name="context">The context.</param>
-        /// <param name="isForMemoryOnly">if set to <c>true</c> [is for memory only].</param>
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public GiftCardRepository(HccRequestContext context, bool isForMemoryOnly)
-            : this(context)
         {
         }
 

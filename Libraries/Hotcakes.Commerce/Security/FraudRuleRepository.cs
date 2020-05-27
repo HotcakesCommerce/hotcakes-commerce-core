@@ -39,16 +39,6 @@ namespace Hotcakes.Commerce.Security
         {
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public FraudRuleRepository(HccRequestContext c, IRepositoryStrategy<hcc_Fraud> r)
-            : this(c)
-        {
-        }
-
-        #endregion
-
         protected override void CopyDataToModel(hcc_Fraud data, FraudRule model)
         {
             model.Bvin = data.bvin;

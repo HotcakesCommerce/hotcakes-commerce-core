@@ -96,28 +96,6 @@ namespace Hotcakes.Commerce.Accounts
 
         #endregion
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static StoreSettingsRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new StoreSettingsRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static StoreSettingsRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new StoreSettingsRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public StoreSettingsRepository(HccRequestContext c, IRepositoryStrategy<hcc_StoreSettings> strategy, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
-
         #region LocalizationRepoBase Implementation
 
         protected override Expression<Func<hcc_StoreSettings, long>> ItemKeyExp

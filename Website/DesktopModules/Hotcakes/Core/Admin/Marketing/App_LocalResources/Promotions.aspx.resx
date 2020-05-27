@@ -204,9 +204,6 @@
   <data name="CustomOfferForShipping.Text" xml:space="preserve">
     <value>Custom Offer for Shipping</value>
   </data>
-  <data name="LegacyTypes.Text" xml:space="preserve">
-    <value>legacy offer type(s) detected</value>
-  </data>
   <data name="MIgrateSuccess.Text" xml:space="preserve">
     <value>Promotions were migrated successfully.</value>
   </data>

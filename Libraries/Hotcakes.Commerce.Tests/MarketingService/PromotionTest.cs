@@ -664,68 +664,6 @@ namespace Hotcakes.Commerce.Tests
         }
 
         [TestMethod]
-        public void Promotion_MigrateOldPromotions()
-        {
-#pragma warning disable 0612, 0618
-            var app = CreateHccAppInMemory();
-
-            // Add Sale promo
-            var sale = new Promotion {Mode = PromotionType.Sale, Name = "SALE"};
-            sale.AddAction(new ProductPriceAdjustment());
-            app.MarketingServices.Promotions.Create(sale);
-
-            // Add Empty Offer
-            var offer = new Promotion {Mode = PromotionType.Offer, Name = "OFFER"};
-            app.MarketingServices.Promotions.Create(offer);
-
-            // Add Candidate to split
-            var offer2s = new Promotion {Mode = PromotionType.Offer, Name = "Should Be Splitted"};
-            // 2 qualifications
-            offer2s.AddQualification(new AnyOrder());
-            offer2s.AddQualification(new AnyProduct());
-            // 5 actions
-            offer2s.AddAction(new LineItemAdjustment());
-            offer2s.AddAction(new LineItemFreeShipping());
-            offer2s.AddAction(new OrderShippingAdjustment());
-            offer2s.AddAction(new OrderTotalAdjustment());
-            offer2s.AddAction(new OrderTotalAdjustment());
-            app.MarketingServices.Promotions.Create(offer2s);
-
-            var total = 0;
-            app.MarketingServices.Promotions.FindAllWithFilter(PromotionType.Offer, "", true, 1, int.MaxValue, ref total);
-            Assert.AreEqual(2, total);
-
-            app.MarketingServices.MigrateOldPromotions();
-
-            var proms = app.MarketingServices.Promotions.FindAllPaged(1, int.MaxValue);
-            Assert.AreEqual(0, proms.Where(p => p.Mode == PromotionType.Offer).Count(),
-                "All 'Offer' promotions should be migrated to other modes");
-            Assert.AreEqual(5, proms.Where(p => p.Mode != PromotionType.Offer).Count());
-            Assert.AreEqual(1, proms.Where(p => p.Mode == PromotionType.Sale).Count());
-
-            Assert.AreEqual(1, proms.Where(p => p.Mode == PromotionType.OfferForLineItems).Count());
-            Assert.AreEqual(1, proms.Where(p => p.Mode == PromotionType.OfferForShipping).Count());
-            Assert.AreEqual(2, proms.Where(p => p.Mode == PromotionType.OfferForOrder).Count());
-
-            var pLi = proms.FirstOrDefault(p => p.Mode == PromotionType.OfferForLineItems);
-            var pSh = proms.FirstOrDefault(p => p.Mode == PromotionType.OfferForShipping);
-            var pO = proms.FirstOrDefault(p => p.Mode == PromotionType.OfferForOrder && p.Name == "Should Be Splitted");
-
-            Assert.AreEqual(2, pLi.Actions.Count);
-            Assert.AreEqual(2, pLi.Qualifications.Count);
-            Assert.AreEqual(1, pSh.Actions.Count);
-            Assert.AreEqual(2, pSh.Qualifications.Count);
-            Assert.AreEqual(2, pO.Actions.Count);
-            Assert.AreEqual(2, pO.Qualifications.Count);
-
-            Assert.AreEqual(typeof (OrderTotalAdjustment), pO.Actions[0].GetType());
-            Assert.AreEqual(typeof (OrderTotalAdjustment), pO.Actions[1].GetType());
-            Assert.AreEqual(typeof (AnyOrder), pO.Qualifications[0].GetType());
-            Assert.AreEqual(typeof (AnyProduct), pO.Qualifications[1].GetType());
-#pragma warning restore 0612, 0618
-        }
-
-        [TestMethod]
         public void Promotion_ResortItems()
         {
             var app = CreateHccAppInMemory();

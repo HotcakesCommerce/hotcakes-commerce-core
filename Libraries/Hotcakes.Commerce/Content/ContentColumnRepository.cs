@@ -44,16 +44,6 @@ namespace Hotcakes.Commerce.Content
             BlockRepository = new ContentBlockRepository(context);
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public ContentColumnRepository(HccRequestContext context, bool isForMemoryOnly)
-            : this(context)
-        {
-        }
-
-        #endregion
-
         private ContentBlockRepository BlockRepository { get; set; }
 
         protected override void CopyDataToModel(hcc_ContentColumn data, ContentColumn model)

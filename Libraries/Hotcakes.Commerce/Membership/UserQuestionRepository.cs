@@ -167,28 +167,5 @@ namespace Hotcakes.Commerce.Membership
         {
             Delete(y => y.StoreId == storeId);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static UserQuestionRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new UserQuestionRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static UserQuestionRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new UserQuestionRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public UserQuestionRepository(HccRequestContext c, IRepositoryStrategy<hcc_UserQuestions> r,
-            ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

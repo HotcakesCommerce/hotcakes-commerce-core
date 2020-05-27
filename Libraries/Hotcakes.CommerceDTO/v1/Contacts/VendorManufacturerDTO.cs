@@ -47,9 +47,6 @@ namespace Hotcakes.CommerceDTO.v1.Contacts
             Address = new AddressDTO();
             DropShipEmailTemplateId = string.Empty;
             ContactType = VendorManufacturerTypeDTO.Vendor;
-#pragma warning disable 0612, 0618
-            Contacts = new List<VendorManufacturerContactDTO>();
-#pragma warning restore 0612, 0618
         }
 
         /// <summary>
@@ -100,12 +97,5 @@ namespace Hotcakes.CommerceDTO.v1.Contacts
         /// </summary>
         [DataMember]
         public VendorManufacturerTypeDTO ContactType { get; set; }
-
-        /// <summary>
-        ///     Contains a listing of user accounts that belong to the current vendor/manufacturer.
-        /// </summary>
-        [DataMember]
-        [Obsolete("Obsolete in 1.8.0. Contacts property is not used")]
-        public List<VendorManufacturerContactDTO> Contacts { get; set; }
     }
 }
