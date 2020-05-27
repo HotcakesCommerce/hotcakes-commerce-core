@@ -654,7 +654,7 @@ namespace Hotcakes.Commerce.Utilities
         {
             var sample1 = CreateBlueBracelet();
             var sample2 = CreateBrownFedora();
-            var sample3 = CreateButterflyEarings();
+            var sample3 = CreateButterflyEarrings();
             var sample4 = CreateCupCake();
             var sample5 = CreateLaptop();
             var sample6 = CreateShirt();
@@ -727,8 +727,8 @@ namespace Hotcakes.Commerce.Utilities
             p.ProductName = "Brown Fedora";
             p.Featured = true;
             p.IsSearchable = true;
-            p.ImageFileSmall = "indiana-jones-hat.jpg";
-            p.ImageFileMedium = "indiana-jones-hat.jpg";
+            p.ImageFileSmall = "brown-fedora-01.jpg";
+            p.ImageFileMedium = "brown-fedora-01.jpg";
             p.ImageFileSmallAlternateText = "Brown Fedora SAMPLE004";
             p.InventoryMode = ProductInventoryMode.AlwayInStock;
             p.LongDescription =
@@ -743,22 +743,22 @@ namespace Hotcakes.Commerce.Utilities
             return p;
         }
 
-        private Product CreateButterflyEarings()
+        private Product CreateButterflyEarrings()
         {
             var p = new Product();
             p.Sku = "SAMPLE006";
-            p.ProductName = "Butterfly Earings";
+            p.ProductName = "Butterfly Earrings";
             p.Featured = true;
             p.IsSearchable = true;
             p.ImageFileSmall = "Earrings.jpg";
             p.ImageFileMedium = "Earrings.jpg";
-            p.ImageFileSmallAlternateText = "Butterfly Earning SAMPLE006";
+            p.ImageFileSmallAlternateText = "Butterfly Earring SAMPLE006";
             p.InventoryMode = ProductInventoryMode.AlwayInStock;
             p.LongDescription =
-                "Sample Butterfly Earings Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
+                "Sample Butterfly Earrings Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
             p.SitePrice = 29.95m;
             p.Status = ProductStatus.Active;
-            p.UrlSlug = "butterfly-earings";
+            p.UrlSlug = "butterfly-earrings";
             CatalogServices.ProductsCreateWithInventory(p, true);
 
             DiskStorage.CopyDemoProductImage(p.StoreId, p.Bvin, p.ImageFileSmall);
