@@ -1,8 +1,6 @@
 ﻿body {margin: 0px;padding:0px;font: 9pt "Lucida Grande",Arial,Helvetica, sans-serif;color: #000;background-color:#fff;}
 
 .clear {clear:both;}
-.hide {display: none;}
-.printhidden {display:none;}
 .printbackground {background-color:#fff;color:#000;}
 
 #content {margin:0;padding:0 15px 10px 15px;}
@@ -15,12 +13,6 @@ h3 {font-size:17px;font-weight:bold;color:#000;padding:0;margin:0;}
 .lightlabel {font-size:11px; color:#666;}
 a:link, a:visited {color: #205900;text-decoration: none;}
 
-
-
-.topper, .bottom {display:none;}
-#settingsmenu, #productmenu {display:none;}
-#footer{display:none;}
-#branding,#header,#mainmenu,#submenu {display:none;}
 
 /* Form Tags */
 .formlabel {text-align:right;vertical-align:top;}
@@ -36,9 +28,11 @@ a:link, a:visited {color: #205900;text-decoration: none;}
 .controlarea1 {background-color:#F5F5F5;border:solid 1px #ccc;padding-top:5px;padding-bottom:5px;}
 .controlarea2 {background-color: #ffc;border:solid 1px #ccc;padding-top:5px;padding-bottom:5px;}
 
-.sidemenu, .categorymenu {display:none;}
-
-.creditcardnumber {display:none;}
+.hide, .printhidden, #branding, #header, #mainmenu, #submenu,
+.topper, .bottom, #settingsmenu, #productmenu, #footer,
+.creditcardnumber, .sidemenu, .categorymenu, .hc-noprint {
+    display: none;
+}
 
 .pagebreak {page-break-after:always;}
 

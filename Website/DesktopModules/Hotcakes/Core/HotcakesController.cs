@@ -30,7 +30,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
-using System.Web.Hosting;
 using System.Xml;
 using System.Xml.Serialization;
 using DotNetNuke.Application;
@@ -53,6 +52,7 @@ using DotNetNuke.Web.Client;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Accounts;
 using Hotcakes.Commerce.Catalog;
+using Hotcakes.Commerce.Content;
 using Hotcakes.Commerce.Dnn;
 using Hotcakes.Commerce.Dnn.Utils;
 using Hotcakes.Commerce.Marketing;
@@ -72,6 +72,10 @@ namespace Hotcakes.Modules.Core
 
         private const string SCHEDULED_JOB_TYPE = "Hotcakes.Modules.Core.ClearUploadTempFiles, Hotcakes.Modules";
         private const string SCHEDULED_JOB_NAME = "Hotcakes Commerce: Clear Temporary Files";
+
+        private const string TEMPLATE_MATCH = "</body>";
+        private const string TEMPLATE_REPLACE =
+            "<table class=\"hc-noprint\" style=\"width:100%;margin:1.5em auto;\"><tr><td style=\"width:100%;text-align:center;\">We built our store using the <em>FREE</em> and open-source <a href=\"https://hotcakes.org/?utm_source=hcc-install&amp;utm_medium=email-template&amp;utm_campaign={0}\" target=\"_blank\">Hotcakes Commerce e-commerce solution</a>.</td></tr></table></body>";
 
         private bool IsGenericCodeExecuted { get; set; }
         
@@ -119,6 +123,7 @@ namespace Hotcakes.Modules.Core
                         DeleteHostPage();
                         UninstallControlPanel();
                         CreateTempFileScheduledJob();
+                        UpdateEmailTemplateBranding();
                         break;
 
                     default:
@@ -143,6 +148,7 @@ namespace Hotcakes.Modules.Core
             }
             catch (Exception ex)
             {
+                LogError(ex.Message, ex);
                 Exceptions.LogException(ex);
 
                 return "Failed";
@@ -659,6 +665,44 @@ namespace Hotcakes.Modules.Core
             }
         }
 
+        private void UpdateEmailTemplateBranding()
+        {
+            var installDate = DateTime.MinValue;
+            var packageController = ServiceLocator<IPackageController, PackageController>.Instance;
+            var package = packageController.GetExtensionPackage(Null.NullInteger, (PackageInfo p) => p.Name == "Hotcakes.Core");
+
+            if (package != null)
+            {
+                installDate = package.CreatedOnDate;
+            }
+
+            if (installDate != DateTime.MinValue &&  installDate.Date < DateTime.Now.Date)
+            {
+                // this is a new install (not an upgrade)
+                var context = new HccRequestContext();
+                var templateRepo = Factory.CreateRepo<HtmlTemplateRepository>(context);
+                var templates = templateRepo.FindAll();
+                var hccVersion = package.Version;
+                var branding = string.Format(TEMPLATE_REPLACE, hccVersion);
+
+                foreach (var template in templates)
+                {
+                    if ((template.Subject == "Affiliate Approved Confirmation" 
+                        || template.Subject == "Affiliate Registration Confirmation" 
+                        || template.Subject == "Order [[Order.OrderNumber]] Update from [[Store.StoreName]]" 
+                        || template.Subject == "Receipt for Order [[Order.OrderNumber]] from [[Store.StoreName]]" 
+                        || template.Subject == "Shipping update for order [[Order.OrderNumber]] from [[Store.StoreName]]" 
+                        || template.Subject == "You haven't finished your purchase" 
+                        || template.Subject == "You received Gift Card") 
+                        && template.Body.StartsWith("<html>"))
+                    {
+                        template.Body.Replace(TEMPLATE_MATCH, branding);
+                        templateRepo.Update(template);
+                    }
+                }
+            }
+        }
+
         #region Private Helper Methods
         private List<ScheduleItem> ConvertArrayList(ArrayList jobs)
         {
@@ -671,6 +715,22 @@ namespace Hotcakes.Modules.Core
             }
 
             return newJobs;
+        }
+
+        private void LogError(string message, Exception ex)
+        {
+            if (ex != null)
+            {
+                Logger.Error(message, ex);
+                if (ex.InnerException != null)
+                {
+                    Logger.Error(ex.InnerException.Message, ex.InnerException);
+                }
+            }
+            else
+            {
+                Logger.Error(message);
+            }
         }
         #endregion
 
