@@ -1,5 +1,6 @@
 ﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
 @using Hotcakes.Modules.Core.AppCode
+@Html.RegisterViewScript("imagesloaded.pkgd.min.js")
 @Html.RegisterViewScript("masonry.min.js")
 @Html.Partial("_Admin")
 @Html.Action("CategoryTrail", "BreadCrumb", new { cat = Model.LocalCategory })
