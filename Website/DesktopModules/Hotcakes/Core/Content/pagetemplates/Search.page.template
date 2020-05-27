@@ -28,25 +28,20 @@
 		<parent>HotcakesStore</parent>
 		<panes>
 			<pane>
-				<name>ContentPane</name>
-				<modules>
-					<module>
-						<title>Search Input</title>
-						<definition>Hotcakes.Search</definition>
-						<moduledefinition>Hotcakes Search</moduledefinition>
-						<inheritviewpermissions>true</inheritviewpermissions>
-						<modulesettings>
-							<modulesetting>
-								<settingname>View</settingname>
-								<settingvalue>SearchInput</settingvalue>
-							</modulesetting>
-						</modulesettings>
-					</module>
-				</modules>
-			</pane>
-			<pane>
 				<name>P2_75_2</name>
 				<modules>
+          <module>
+            <title>Search Input</title>
+            <definition>Hotcakes.Search</definition>
+            <moduledefinition>Hotcakes Search</moduledefinition>
+            <inheritviewpermissions>true</inheritviewpermissions>
+            <modulesettings>
+              <modulesetting>
+                <settingname>View</settingname>
+                <settingvalue>SearchInput</settingvalue>
+              </modulesetting>
+            </modulesettings>
+          </module>
 					<module>
 						<title>Search Results</title>
 						<definition>Hotcakes.Search</definition>
