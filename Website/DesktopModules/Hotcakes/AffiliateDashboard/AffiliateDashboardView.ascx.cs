@@ -39,7 +39,7 @@ namespace Hotcakes.Modules.AffiliateDashboard
         {
             RegisterKOScripts();
             RegisterUnobtrusiveValidateScripts();
-            RegisterScript("jquery.zclip.min.js");
+            RegisterScript("clipboard.min.js");
             RegisterViewScript("Pager.js");
             RegisterViewScript("AffiliateDashboard.js");
 
