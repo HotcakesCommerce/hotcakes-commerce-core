@@ -1,0 +1,14 @@
+﻿@model Hotcakes.Modules.Core.Models.BundledProductViewModel
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4><a href="@Model.ProductLink">@Model.Item.ProductName</a></h4>
+    </div>
+    <div class="panel-body">
+        <a href="@Model.ProductLink">
+            <img class="img-responsive" src="@Model.ImageUrls.SmallUrl" alt="@Model.ImageUrls.SmallAltText"/>
+        </a>
+    </div>
+    <div class="panel-footer text-center">
+        @Localization.GetString("Quantity") @Model.BundledProductAdv.Quantity
+    </div>
+</div>

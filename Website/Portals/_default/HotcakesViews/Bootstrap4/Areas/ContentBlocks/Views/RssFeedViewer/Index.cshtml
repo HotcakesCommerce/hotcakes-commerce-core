@@ -1,0 +1,25 @@
+﻿@model Hotcakes.Modules.Core.Areas.ContentBlocks.Models.RssFeedViewModel
+<div class="row-fluid hc-rssfeedviewer">
+    <div class="col-xs-12">
+        <div class="hc-content-block">
+            @if (Model.ShowTitle)
+            {
+                <h6>@Model.Channel.Title</h6>
+            }
+            @if (Model.ShowDescription)
+            {
+                @Html.Raw(Model.Channel.Description)
+            }
+            <ul>
+            @foreach (var item in Model.Channel.GetChannelItems(Model.MaxItems))
+            {
+                <li>
+                    <a href="@Html.Raw(item.Link)">@Html.Raw(item.Title)</a><br />
+                    @Html.Raw(item.Description)
+                </li>
+            }   
+            </ul>             
+        </div>
+    </div>
+</div>           
+<div class="clearfix"></div>

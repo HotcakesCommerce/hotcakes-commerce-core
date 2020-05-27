@@ -1,0 +1,87 @@
+﻿@model Hotcakes.Modules.Core.Models.CheckoutViewModel
+
+@helper ValidationMessage(string id, string message, string suffix="")
+{
+    id = id + "_error" + suffix;
+    <span id="@id" class="col-xs-12 alert alert-danger" style="display:none">@message</span>
+}
+<script type="text/javascript">
+    var HCC = HCC || {};
+    HCC.CheckoutLogin = HCC.CheckoutLogin || {};
+    HCC.CheckoutLogin.LoginTab = '@Model.LoginTabID';
+</script>
+
+<h3>@Localization.GetString("Login")</h3>
+
+<div id="loginmessage" class="alert alert-warning Hidden">@Localization.GetString("PleaseLogin")</div>
+
+<div id="hcLoginChoose" class="hc-login-choose text-center">
+    <label for="loginChoose0" class="radio-inline">@Html.RadioButton("loginChoose0", "#hcTabNewAccount", true, new { @name = "loginChoose" })@Localization.GetString("NewAccount")</label>
+    <label for="loginChoose1" class="radio-inline">@Html.RadioButton("loginChoose1", "#hcTabLogin", false, new { @name = "loginChoose" })@Localization.GetString("Login")</label>
+    <label for="loginChoose2" class="radio-inline">@Html.RadioButton("loginChoose2", "#hcTabGuest", false, new { @name = "loginChoose" })@Localization.GetString("GuestCheckout")</label>
+</div>
+
+<div id="hcTabNewAccount" class="clearfix hcTabPane">
+    <div class="form-horizontal">
+        <div class="form-group dnnFormRequired">
+            <label class="col-sm-4 control-label">@Localization.GetString("Email"):</label>
+            <div class="col-sm-offset-0 col-sm-6">
+                @Html.TextBox("regemail", @Model.CurrentOrder.UserEmail, new {@class = "form-control"})
+            </div>
+        </div>
+        <div class="form-group dnnFormRequired">
+            <label class="col-sm-4 control-label">@Localization.GetString("Username"):</label>
+            <div class="col-sm-offset-0 col-sm-6">
+                @Html.TextBox("regusername", @Model.RegUsername, new { @class = "form-control required" })
+                @ValidationMessage("regusername", @Localization.GetString("Username_Required"))
+            </div>
+        </div>
+        <div class="form-group dnnFormRequired">
+            <label class="col-sm-4 control-label">@Localization.GetString("Password"):</label>
+            <div class="col-sm-offset-0 col-sm-6">
+                @Html.Password("regpassword", string.Empty, new {@class = "form-control"})
+            </div>
+        </div>
+        <div class="form-group dnnFormRequired">
+            <label class="col-sm-4 control-label">@Localization.GetString("ConfirmPassword"):</label>
+            <div class="col-sm-offset-0 col-sm-6">
+                @Html.Password("regconfirmpassword", string.Empty, new {@class = "form-control"})
+                @ValidationMessage("regconfirmpassword", @Localization.GetString("ConfirmPassword_Error"))
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="hcTabLogin" class="clearfix hcTabPane Hidden">
+    <div class="form-group dnnFormRequired">
+        <label class="col-sm-4 control-label">@Localization.GetString("Username"):</label>
+        <div class="col-sm-offset-0 col-sm-6">
+            @Html.TextBox("username", string.Empty, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-group dnnFormRequired">
+        <label class="col-sm-4 control-label">@Localization.GetString("Password"):</label>
+        <div class="col-sm-offset-0 col-sm-6">
+            @Html.Password("password", "", new { title = @Localization.GetString("EnterPassword"), @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <a id="loginbutton" href="#" class="btn btn-primary">
+                <em class="glyphicon glyphicon-lock"></em>@Localization.GetString("Login")
+            </a>
+            <a href="javascript:dnnModal.show('@Url.RouteHccUrl(HccRoute.SendPassword)?popUp=true',false,350,700,false)" class="btn btn-default">
+                <em class="glyphicon glyphicon-question-sign"></em>@Localization.GetString("ForgotPassword")
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="hcTabGuest" class="clearfix hcTabPane Hidden">
+    <div class="form-group dnnFormRequired">
+        <label class="col-sm-4 control-label">@Localization.GetString("EmailAddress"):</label>
+        <div class="col-sm-offset-0 col-sm-6">
+            @Html.TextBox("customeremail", @Model.CurrentOrder.UserEmail, new {@class = "form-control"})
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+﻿@model Hotcakes.Modules.Core.Models.OrderViewModel
+
+<div class="row-fluid hc-order-details">
+
+    @if (ViewData["showStatus"] != null)
+    {
+        <div class="hc-order-status">@Model.FullOrderStatusDescription</div>
+    }
+
+    <h2>@Localization.GetString("Order"): @Model.OrderNumber</h2>
+
+    <div class="row-fluid">
+        <div class="col-xs-12">
+            <div class="hcValidationSummary"></div>
+        </div>
+    </div>
+
+    @Html.Partial("~/areas/account/views/shared/_OrderDownloads.cshtml", Model.LocalOrder)
+
+    <div class="row-fluid">
+        <div class="col-sm-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">@Localization.GetString("BillTo"):</div>
+                <div class="panel-body">@Html.Raw(Model.BillingAddressAsHtml)</div>
+            </div>
+        </div>
+        @if (Model.HasShippingItems)
+        {
+            <div class="col-sm-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">@Localization.GetString("ShipTo"):</div>
+                    <div class="panel-body">@Html.Raw(Model.ShippingAddressAsHtml)</div>
+                </div>
+            </div>
+        }
+        @if (Model.Coupons.Count > 0)
+        {
+            <div class="col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">@Localization.GetString("CodesUsed"):</div>
+                    <div class="panel-body">
+                        <ul class="list-unstyled">
+                            @foreach (var coupon in Model.Coupons)
+                            {
+                                @coupon.CouponCode
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="clearfix"></div>
+
+    <h2>@Localization.GetString("OrderSummary")</h2>
+    
+    @Html.Partial("_ViewOrderItems", Model.Items)
+
+    <div class="row-fluid">
+        <div class="col-xs-12 col-sm-8">
+            @if (!string.IsNullOrWhiteSpace(Model.Instructions))
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">@Localization.GetString("CustomerInstructions"):</div>
+                    <div class="panel-body">@Model.Instructions</div>
+                </div>
+            }
+        </div>
+        <div class="col-xs-12 col-sm-4 hc-totals">
+            <div class="table-responsive">
+                @Html.Raw(Model.TotalsAsTable)
+            </div>
+        </div>
+    </div>
+</div>

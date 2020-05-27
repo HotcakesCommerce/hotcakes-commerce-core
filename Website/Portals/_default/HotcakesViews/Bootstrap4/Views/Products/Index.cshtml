@@ -1,0 +1,86 @@
+﻿@model Hotcakes.Modules.Core.Models.ProductPageViewModel
+@Html.Partial("_Admin")
+<div class="row-fluid hc-product">
+    @Html.Action("ProductTrail", "BreadCrumb", new { product = Model.LocalProduct })
+    @Html.Action("Index", "ContentColumn", new { id = Model.LocalProduct.PreContentColumnId })
+
+    <h1>@Model.LocalProduct.ProductName</h1>
+    @Html.Raw((string)TempData["messages"])
+    <div class="row-fluid">
+        <div class="col-xs-12 col-md-6">
+            <div class="row">
+                <div class="col-xs-12 text-center hc-product-image">
+                    <img id="hcProductImage" class="img-responsive" src="@Model.ImageUrls.MediumlUrl" alt="@Model.ImageUrls.MediumlAltText" />
+                </div>
+            </div>
+            <div class="row">
+                <div id="hcAdditionalImages" class="col-xs-12 text-center">
+                    @foreach (var altImg in Model.AlternateImageUrls)
+                    {
+                        <a href="@altImg.MediumlUrl"><img class="img-responsive" src="@altImg.TinyUrl" alt="@altImg.MediumlAltText" /></a>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            @Html.Partial("_ProductDetails", Model)
+        </div>
+    </div>
+
+    @if (Model.LocalProduct.IsBundle && Model.LocalProduct.BundledProducts.Count > 0)
+    {
+        <h3>@Localization.GetString("BundledProducts")</h3>
+        <div class="row-fluid">
+            <div class="row">
+                @foreach (var item in Model.BundledItems)
+                {
+                    <div class="col-xs-6 col-md-3">
+                        @Html.Partial("_RenderBundledProduct", item)
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    @if (Model.AllowReviews)
+    {
+        @Html.Partial("_Reviews")
+    }
+
+    @if (Model.RelatedItems.Count > 0)
+    {
+        <h3>@Localization.GetString("RelatedProducts")</h3>
+        <div class="row-fluid hc-related-items">
+            @foreach (var item in Model.RelatedItems.Take(4))
+            {
+                <div class="col-xs-6 col-md-3">
+                    @Html.Partial("_RenderSingleProduct", item)
+                </div>
+            }
+        </div>
+    }
+
+    @if (Model.LocalProduct.Tabs.Count > 0)
+    {
+        <div class="row-fluid">
+            <div class="col-xs-12 margin-top-md">
+                <div class="dnnForm hc-product-tabs" id="hcProductTabs">
+                    <ul class="nav nav-tabs">
+                        @foreach (var t in Model.LocalProduct.Tabs.OrderBy(y => y.SortOrder).Select((item, i) => new { i, item}))
+                        {
+                            <li @if (t.i == 0) {<text> class="active"</text> }><a href="#@("Tab" + t.item.Bvin)">@t.item.TabTitle</a></li>
+                        }
+                    </ul>
+                    @foreach (var t in Model.LocalProduct.Tabs.OrderBy(y => y.SortOrder))
+                    {
+                        <div id="@("Tab" + t.Bvin)" class="margin-top-lg">
+                            @Html.Raw(t.HtmlData)
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    @Html.Action("Index", "ContentColumn", new { id = Model.LocalProduct.PostContentColumnId })
+</div>
+<div class="clearfix"></div>

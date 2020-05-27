@@ -1,0 +1,20 @@
+﻿@model Hotcakes.Modules.Core.Models.CheckoutViewModel
+@using Hotcakes.Modules.Core.Models;
+
+<div class="row-fluid hc-ogonecheckout">
+    <div class="col-xs-12">
+
+        <h2>@Localization.GetString("OgoneCheckout")</h2>
+        
+        @Html.Raw((string)TempData["messages"])
+        
+        <div class="row-fluid">
+            <div class="col-xs-12">
+                <a href="@Url.RouteHccUrl(HccRoute.Checkout)" class="dnnPrimaryAction">
+                    @Localization.GetString("GoToCheckout")
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>

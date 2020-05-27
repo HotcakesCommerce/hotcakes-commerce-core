@@ -1,0 +1,12 @@
+﻿@model Hotcakes.Modules.Core.Models.OrderViewModel
+
+<div class="hc-receipt">
+    <h1>@Localization.GetString("OrderReceived")</h1>
+    @Html.Partial("_SetFirstPassword")
+    @Html.Partial("_ViewOrder", Model)
+</div>
+<script type="text/javascript">
+    $(document).ready(function (){
+        $("table.totaltable").attr("class", "table table-striped table-hover totaltable");
+    });
+</script>

@@ -1,0 +1,83 @@
+﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+@using Hotcakes.Modules.Core.AppCode
+@Html.RegisterViewScript("imagesloaded.pkgd.min.js")
+@Html.RegisterViewScript("masonry.min.js")
+@Html.Partial("_Admin")
+@Html.Action("CategoryTrail", "BreadCrumb", new { cat = Model.LocalCategory })
+<!-- Hotcakes Commerce: Category > DrillDown -->
+<div class="hc-category">
+    @if (Model.LocalCategory.ShowTitle)
+    {
+        <h1>@Model.LocalCategory.Name</h1>
+    }
+    @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PreContentColumnId })
+    @Html.Partial("_Header", Model)
+    <div class="row-fluid">
+        <div class="col-md-4">
+            @Html.Partial("_DrillDownFilter")
+        </div>
+        <div class="col-md-8" data-bind="with: model">
+            <h6 class="text-right"><span data-bind="text: TotalCount"></span> @Localization.GetString("ProductCount") </h6>
+            <div class="row-fluid">
+                <div class="col-xs-12" data-bind="with: $root">
+                    <div class="hc-sort">
+                        <label>@Localization.GetString("SortBy")</label>
+                        @Html.DropDownList("sortOrderSelect", Model.SortSelectList, new { data_bind = "value: sortOrder, event: { change: changeSortOrder }", @class = "form-control" })
+                    </div>
+                    @Html.Partial("_PagerKo")
+                </div>
+            </div>
+            <div class="row-fluid hc-product-cards">
+                <div class="col-xs-6 col-md-4 hc-product-card-sizer hidden"></div>
+                <div data-bind="foreach: Products">
+                    <div class="col-xs-6 col-md-4 hc-product-card">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2><a data-bind="attr: { href: ProductLink }, text: ProductName"></a></h2>
+                            </div>
+                            <div class="panel-body">
+                                <div class="hc-product-card-img">
+                                    <a data-bind="attr: { href: ProductLink }">
+                                        <img class="img-responsive" data-bind="attr: { src: ImageSmallUrl, alt: ImageSmallAltText }"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="panel-footer text-center">
+                                &nbsp;<span data-bind="html: UserPrice"></span><br />
+                                <a class="add-to-cart-product" data-bind="visible: ProductAddToCartLink == '', attr: { href: ProductLink }">
+                                    <span><em class="glyphicon glyphicon-eye-open"></em>@Localization.GetString("View")</span>
+                                </a>
+                                <a class="add-to-cart-product" data-bind="visible: ProductAddToCartLink != '', attr: { href: ProductAddToCartLink }">
+                                    <span><em class="glyphicon glyphicon-shopping-cart"></em>@Localization.GetString("AddToCart")</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="col-xs-12" data-bind="with: $root">
+                    @Html.Partial("_PagerKo")
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PostContentColumnId })
+    @Html.Hidden("categorybvin", @Model.LocalCategory.Bvin)
+</div>
+<div class="clearfix"></div>
+<script type="text/javascript">
+    ko.bindingHandlers.stopBinding = {
+        init: function() {
+            return { controlsDescendantBindings: true };
+        }
+    };
+
+    ko.applyBindings(new HcDrillDownFilterViewModel(
+        @Html.Raw(@Model.DrillDownJsonModel),
+        $(".hc-category"),
+        '@Model.LocalCategory.Bvin',
+        '@ModuleContext.ModuleId'
+        ),
+    $(".hc-category")[0]);
+</script>

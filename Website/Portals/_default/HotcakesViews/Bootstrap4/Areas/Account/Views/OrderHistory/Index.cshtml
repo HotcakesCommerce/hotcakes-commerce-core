@@ -1,0 +1,67 @@
+﻿@model Hotcakes.Modules.Core.Areas.Account.Models.OrderHistoryViewModel
+@functions
+{
+    string OrderLink(Hotcakes.Commerce.Orders.OrderSnapshot o)
+    {
+        if (o == null)
+            return string.Empty;
+        
+        return Url.RouteHccUrl(HccRoute.OrderHistory, new { action = "details", id = o.bvin });
+    }
+}
+<div class="row-fluid">
+    <h2>@Localization.GetString("OrderHistory")</h2>
+
+    @if (HccApp.CurrentStore.Settings.RewardsPointsEnabled)
+    {
+        <h6>@Localization.GetString("YouRewardsPoints") @Model.RewardPoints</h6>
+    }
+    
+    <div class="col-xs-12">
+        @Html.Raw((string)TempData["messages"])
+    </div>
+    
+    <div class="row-fluid">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <td class="hidden-xs">
+                                @Localization.GetString("TimeOfOrder")
+                            </td>
+                            <td>
+                                @Localization.GetString("OrderNumber")
+                            </td>
+                            <td>
+                                @Localization.GetString("Amount")
+                            </td>
+                            <td>
+                                @Localization.GetString("Status")
+                            </td>
+                            <td>
+                                &nbsp;
+                            </td>
+                        </tr>
+                    </thead>
+                    @foreach (var o in Model.Orders)
+                    {
+                        <tr>
+                            <td class="hidden-xs">@DateHelper.ConvertUtcToStoreTime(HccApp, o.TimeOfOrderUtc)</td>
+                            <td>@o.OrderNumber</td>
+                            <td>@o.TotalGrand.ToString("C")</td>
+                            <td>@LocalizationUtils.GetOrderStatus(o.StatusName)</td>
+                            <td class="text-right">
+                                <a href="@OrderLink(o)" class="btn btn-default btn-sm">
+                                    <em class="glyphicon glyphicon-eye-open"></em>@Localization.GetString("ViewDetails")
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+
+    @Html.Partial("_Pager", Model.PagerData)
+</div>

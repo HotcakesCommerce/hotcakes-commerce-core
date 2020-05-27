@@ -1,0 +1,236 @@
+﻿@model Hotcakes.Modules.Core.Models.AffiliateViewModel
+<div class="row-fluid">
+    <div class="col-xs-12">
+        @using (Html.BeginHccForm(new { @class = "hcAffiliateReg" }))
+        {
+            <h2>@Localization.GetString("PageTitle")</h2>
+            
+            <div class="alert alert-danger dnnFormValidationSummary" data-bind="css: { dnnFormValidationSummary: message.status() != 'OK' }, visible: message.show, html: message.text"></div>
+            
+            if (!string.IsNullOrEmpty(Model.MyAffiliateId))
+            {
+            <div class="alert alert-success">
+                @Localization.GetString("AlreadyRegistered")
+            </div>
+            }
+
+            if (string.IsNullOrEmpty(Model.MyAffiliateId))
+            {
+            <div class="row-fluid">
+                <div class="form-horizontal" data-bind="visible: !isRegistered()">
+                    @if (Model.IsLoggedIn())
+                    {
+                        <div class="form-group">
+                            <label class="col-xs-4 control-label">
+                                @Localization.GetString("lblUsername")
+                            </label>
+                            <div class="col-offset-0 col-xs-6">
+                                <p class="form-control-static">@Model.Username</p>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group dnnFormRequired">
+                            <label class="col-xs-4 control-label">
+                                @Localization.GetString("lblUsername")
+                            </label>
+                            <div class="col-offset-0 col-xs-6">
+                                @Html.TextBoxFor(model => model.Username, new { data_bind = "value: model.username", @class="form-control" })
+                                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "alert alert-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group dnnFormRequired">
+                            <label class="col-xs-4 control-label">
+                                @Localization.GetString("lblEmail")
+                            </label>
+                            <div class="col-offset-0 col-xs-6">
+                                @Html.TextBoxFor(model => model.Email, new { data_bind = "value: model.email", @class="form-control" })
+                                @Html.ValidationMessageFor(model => model.Email, Localization.GetString("ValMessage_EmailInvalid"), new { @class = "alert alert-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group dnnFormRequired">
+                            <label class="col-xs-4 control-label">
+                                @Localization.GetString("lblPassword")
+                            </label>
+                            <div class="col-offset-0 col-xs-6">
+                                @Html.PasswordFor(model => model.Password, new { data_bind = "value: model.password", @class="form-control" })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "alert alert-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group dnnFormRequired">
+                            <label class="col-xs-4 control-label">
+                                @Localization.GetString("lblConfirmPassword")
+                            </label>
+                            <div class="col-offset-0 col-xs-6">
+                                @Html.PasswordFor(model => model.ConfirmPassword, new { data_bind = "value: model.confirmPassword", @class="form-control" })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "alert alert-danger" })
+                            </div>
+                        </div>
+                    }
+                    
+                    @if (Model.FirstLastNameRequired())
+                    {
+                        <div class="form-group dnnFormRequired">
+                            <label class="col-xs-4 control-label">
+                                @Localization.GetString("lblFirstName")
+                            </label>
+                            <div class="col-offset-0 col-xs-6">
+                                @Html.TextBoxFor(model => model.FirstName, new { data_bind = "value: model.firstname", @class="form-control" })
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "alert alert-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group dnnFormRequired">
+                            <label class="col-xs-4 control-label">
+                                @Localization.GetString("lblLastName")
+                            </label>
+                            <div class="col-offset-0 col-xs-6">
+                                @Html.TextBoxFor(model => model.LastName, new { data_bind = "value: model.lastname", @class="form-control" })
+                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "alert alert-danger" })
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-group dnnFormRequired">
+                        <label class="col-xs-4 control-label">
+                            @Localization.GetString("lblMyAffiliateId")
+                        </label>
+                        <div class="col-offset-0 col-xs-6">
+                            @Html.TextBoxFor(model => model.MyAffiliateId, new { data_bind = "value: model.myaffiliateid", @placeholder = @Localization.GetString("AffiliateIdHelp"), @class="form-control" })
+                            @Html.ValidationMessageFor(model => model.MyAffiliateId, Localization.GetString("ValMessage_AffiliateIDInvalid"), new { @class = "alert alert-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="visible: model.allowReferral">
+                        <label class="col-xs-4 control-label">
+                            @Localization.GetString("lblReferralAffiliateId")
+                        </label>
+                        <div class="col-offset-0 col-xs-6">
+                            @Html.TextBoxFor(model => model.ReferralAffiliateId, new { data_bind = "value: model.referralaffiliateid, event: { change: changeReferralAffiliateId }", @placeholder = @Localization.GetString("ReferredBy"), @class="form-control" })
+                            @Html.ValidationMessageFor(model => model.ReferralAffiliateId, Localization.GetString("ValMessage_AffiliateIDInvalid"), new { @class = "alert alert-danger" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-horizontal" data-bind="visible: !isRegistered()">
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">
+                            @Localization.GetString("lblCountry")
+                        </label>
+                        <div class="col-offset-0 col-xs-6">
+                            @Html.DropDownListFor(model => model.CountryId,
+                                new SelectList(Model.Countries, "Bvin", "DisplayName"),
+                                new { data_bind = "value: model.countryid, event: { change: changeCountry }", @class="form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">
+                            @Localization.GetString("lblCompany")
+                        </label>
+                        <div class="col-offset-0 col-xs-6">
+                            @Html.TextBoxFor(model => model.Company, new { data_bind = "value: model.company", @class="form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">
+                            @Localization.GetString("lblAddress")
+                        </label>
+                        <div class="col-offset-0 col-xs-6">
+                            @Html.TextBoxFor(model => model.AddressLine, new { data_bind = "value: model.addressline", @class="form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">
+                            @Localization.GetString("lblCity")
+                        </label>
+                        <div class="col-offset-0 col-xs-6">
+                            @Html.TextBoxFor(model => model.City, new { data_bind = "value: model.city", @class="form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">
+                            @Localization.GetString("lblState")
+                        </label>
+                        <div class="col-offset-0 col-xs-6">
+                            @Html.DropDownListFor(model => model.State,
+                                new List<SelectListItem>(),
+                                new { data_bind = string.Format("value: model.state, options: regions, optionsText: 'DisplayName', optionsValue: 'Abbreviation', optionsCaption: '{0}'", Localization.GetString("NotSelectedItem")), @class="form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">
+                            @Localization.GetString("lblZip")
+                        </label>
+                        <div class="col-offset-0 col-xs-6">
+                            @Html.TextBoxFor(model => model.PostalCode, new { data_bind = "value: model.postalcode", @class="form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">
+                            @Localization.GetString("lblPhone")
+                        </label>
+                        <div class="col-offset-0 col-xs-6">
+                            @Html.TextBoxFor(model => model.Phone, new { data_bind = "value: model.phone", @class="form-control" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-horizontal" data-bind="visible: !isRegistered()">
+                    <div class="form-group dnnFormRequired">
+                        <label class="col-xs-4 control-label">
+                            &nbsp;
+                        </label>
+                        <div class="col-offset-0 col-xs-6">
+                            <div class="checkbox dnnFormRequired">
+                                <label>
+                                    @Html.CheckBoxFor(model => model.ConfirmTerms, new { data_bind = "checked: model.confirmterms" })
+                                    @Localization.GetString("lblIAgreeTo") 
+                                </label>
+                            </div>
+                            <a href="#hcAffiliateTermsPopup" data-min-width="600" data-min-height="350" title="@Localization.GetString("TermsTitle")" class="btn btn-default btn-sm hc-popup">
+                                <em class="glyphicon glyphicon-share"></em>@Localization.GetString("lblAffiliateTerms") 
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="button" data-bind="click: register" class="btn btn-primary">@Localization.GetString("btnRegister")</button>
+                    </div>
+                </div>
+            </div>
+            }
+        }
+    </div>
+</div>
+<div class="clearfix"></div>
+
+@* Affiliate Terms Popup *@
+<div id="hcAffiliateTermsPopup" style="display: none;">
+    <div class="row-fluid">
+        <div class="col-xs-12">
+            <div class="hc-affiliate-terms margin-top-lg">
+                @if (Model.AgreementText == ""){
+                    <div class="alert alert-warning">
+                        @Localization.GetString("NoAgreement")
+                    </div>
+                }
+                else{
+                    Html.Raw(Model.AgreementText);
+                }
+            </div>
+            <p class="text-right margin-top-md">
+                <button type="button" onclick="$('#hcAffiliateTermsPopup').hcDialog('close');" class="btn btn-primary">@Localization.GetString("btnClose")</button>
+            </p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        ko.applyBindings(
+            new HcAffiliateRegViewModel( 
+                new HcAffiliate(@Html.Raw(@Model.ToJson())), 
+                $(".hcAffiliateReg") 
+            ), 
+            $(".hcAffiliateReg")[0]
+        );
+    });
+</script>

@@ -1,0 +1,20 @@
+﻿@model Hotcakes.Modules.Core.Models.ProductReviewsViewModel
+<div class="row-fluid">
+    <div class="col-xs-12">
+        @if (Model.Reviews.Count > 0)
+        {
+            foreach (var review in Model.Reviews)
+            {
+                @Html.Partial("_SingleReview", review)
+                <hr/>
+            }
+        }
+        else
+        {
+        <div class="alert alert-warning">
+            @Localization.GetString("NoReviews")
+        </div>
+        }
+    </div>
+</div>
+<div class="clearfix"></div>

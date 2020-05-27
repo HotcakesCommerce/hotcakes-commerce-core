@@ -1,0 +1,21 @@
+﻿@model Hotcakes.Modules.Core.Models.SearchPageViewModel
+@using Hotcakes.Modules.Core.AppCode
+@Html.RegisterViewScript("Search.SearchInput.js")
+
+<div class="row-fluid hc-search-input">
+    <div class="col-xs-12 center-block">
+        @using (Html.BeginHccRouteForm(HccRoute.Search, FormMethod.Get, new Dictionary<string, object> { { "data-skipxy", "true" } }))
+        {
+            <div class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="search" value="@ViewBag.Search" />
+                </div>
+                <button class="btn btn-default" title="@Localization.GetString("Search")">
+                    <i class="glyphicon glyphicon-search margin-right-sm" aria-hidden="true"></i>@Localization.GetString("Search")
+                </button>
+                <input type="image" class="hidden" value="" />
+            </div>
+        }
+    </div>
+</div>
+<div class="clearfix"></div>

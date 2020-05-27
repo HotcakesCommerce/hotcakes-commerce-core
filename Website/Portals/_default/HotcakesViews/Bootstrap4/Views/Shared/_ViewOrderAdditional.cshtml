@@ -1,0 +1,57 @@
+﻿@model Hotcakes.Commerce.Orders.Order
+<hr />
+<div class="row-fluid hc-order-details">
+    <div class="col-xs-4">
+        <h6>@Localization.GetString("PublicNotes")</h6>
+        @if (Model.Notes.Where(n => n.IsPublic).Count() > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    @foreach (var note in Model.Notes)
+                        {
+                            if (note.IsPublic)
+                            {
+                        <tr>
+                            <td><label>@note.AuditDate.ToString("M/d/yyyy h:mm tt")</label><br />
+                                @note.Note</td>
+                        </tr>
+                            }
+                        }
+                </table>
+            </div>
+        }
+        else{
+            <div class="alert alert-info">@Localization.GetString("NoNotes")</div>
+        }
+    </div>
+    <div class="col-xs-4">
+        <h6>@Localization.GetString("Packages")</h6>
+        @if (Model.Packages.Count > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>@Localization.GetString("ShippedDate")</th>
+                            <th>@Localization.GetString("TrackingNumber")</th>
+                        </tr>
+                    </thead>
+                    @foreach (var package in Model.Packages)
+                        {
+                        <tr>
+                            <td>@if (!package.HasShipped) { @Localization.GetString("NotShipped")} else { @DateHelper.ConvertUtcToStoreTime(HccApp, package.ShipDateUtc) }</td>
+                            <td>@package.TrackingNumber</td>
+                        </tr>
+                        }
+                </table>
+            </div>
+        }
+        else{
+            <div class="alert alert-info">@Localization.GetString("NoPackages")</div>
+        }
+    </div>
+    <div class="col-xs-4">
+        <h6>@Localization.GetString("PaymentInformation")</h6>
+        @Html.Partial("_OrderPaymentSummary", (Hotcakes.Commerce.Orders.OrderPaymentSummary)ViewBag.OrderPaymentSummary)
+    </div>
+</div>

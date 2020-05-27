@@ -1,0 +1,10 @@
+﻿@model Hotcakes.Modules.Core.Models.SingleProductViewModel
+<div class="row-fluid">
+    <div class="col-xs-9">
+        <h5><a href="@Model.ProductLink">@Model.Item.ProductName</a></h5>
+        <h6 class="small"><a href="@Model.ProductLink">@Model.Item.Sku</a></h6>
+    </div>
+    <div class="col-xs-3">
+        <p class="lead">@Html.Raw(Model.UserPrice.DisplayPrice(true, false))</p>
+    </div>
+</div>

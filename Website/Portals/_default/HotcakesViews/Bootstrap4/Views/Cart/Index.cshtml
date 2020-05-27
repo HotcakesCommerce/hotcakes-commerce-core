@@ -1,0 +1,239 @@
+﻿@model Hotcakes.Modules.Core.Models.CartViewModel
+@using Hotcakes.Modules.Core.AppCode
+@Html.RegisterViewScript("Cart.js")
+<div class="row-fluid hc-cart">
+    <div class="col-xs-12">
+        <div class="row-fluid hc-cart-title">
+            <div class="col-xs-12">
+                <h1>@Localization.GetString("ShoppingCart")</h1>
+                <div style="display: none;" class="dnnFormMessage hc-freeitem-message">@Localization.GetString("RemoveFreeItem")</div>
+                @Html.Raw((string)TempData["messages"])
+                @if (Model.CartEmpty)
+                {
+                    <h6>@Localization.GetString("CartEmpty")</h6>
+                    <p class="text-center"><a class="btn btn-primary" href="@Model.KeepShoppingUrl"><em class="glyphicon glyphicon-shopping-cart"></em>@Localization.GetString("KeepShopping")</a></p>
+                }
+                else
+                {
+                    if (Model.CurrentOrder.TotalQuantity == 1)
+                    {
+                        <h6>@Model.CurrentOrder.TotalQuantity.ToString("#") @Localization.GetString("ItemInCart")</h6>
+                    }
+                    else
+                    {
+                        <h6>@Model.CurrentOrder.TotalQuantity.ToString("#") @Localization.GetString("ItemsInCart")</h6>
+                    }
+                }
+            </div>
+        </div>
+        @if (!Model.CartEmpty)
+        {
+            <div class="row-fluid hc-cart-title">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr class="dnnGridHeader">
+                                    <th width="10%" class="hidden-xs hidden-sm">&nbsp;</th>
+                                    <th width="40%">@Localization.GetString("Item")</th>
+                                    <td width="15%" class="hidden-xs hidden-sm">@Localization.GetString("Price")</td>
+                                    <th width="20%" class="hidden-xs hidden-sm">@Localization.GetString("Quantity")</th>
+                                    <th width="10%">@Localization.GetString("Total")</th>
+                                    <th width="5%"></th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model.LineItems)
+                            {
+                                <tr>
+                                    <td class="hidden-xs hidden-sm">
+                                        @if (item.ShowImage)
+                                        {
+                                            <a href="@item.LinkUrl" title="@item.Item.ProductName">
+                                                <img src="@item.ImageUrl" alt="@item.Item.ProductName" class="img-responsive" />
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <text>&nbsp;</text>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a href="@item.LinkUrl" title="@item.Item.ProductName">
+                                            <h6>@item.Item.ProductName</h6>
+                                        </a>
+                                        @if (item.HasDiscounts)
+                                        {
+                                            <div class="hc-discount clear"><span class="label label-success">@Html.Raw(item.Item.DiscountDetailsAsHtml())</span></div>
+                                        }
+                                        <div class="hidden-xs hidden-sm">
+                                            @Html.Raw(item.Item.ProductShortDescription)
+                                        </div>
+                                    </td>
+                                    <td class="hidden-xs hidden-sm">
+                                        <span class="lead">@item.Item.BasePricePerItem.ToString("C")</span>
+                                    </td>
+                                    <td class="hidden-xs hidden-sm">
+                                        @if (!item.Product.HideQty)
+                                        {
+                                            <div class="form-inline">
+                                                @using (Html.BeginHccRouteForm(HccRouteNames.CartUpdateItem))
+                                                {
+                                                    <div class="form-group">
+                                                        <input type="text" name="lineitemquantity" class="form-control small" value="@item.Item.Quantity" />
+                                                        <input type="submit" class="btn btn-default btn-sm" value="@Localization.GetString("UpdateItem")" />
+                                                        <input type="hidden" name="lineitemid" value="@item.Item.Id" />
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <span class="lead">@item.Item.Quantity</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.HasDiscounts)
+                                        {
+                                            <div class="hc-strike"><mark class="lead">@item.Item.LineTotalWithoutDiscounts.ToString("c")</mark></div>
+                                        }
+                                        <span class="lead">@item.Item.LineTotal.ToString("c")</span>
+                                    </td>
+                                    <td>
+                                        @using (Html.BeginHccRouteForm(HccRouteNames.CartRemoveItem))
+                                        {
+                                            if (item.Item.IsFreeItem && !item.Item.IsQuantityFree)
+                                            {
+                                                <div title="@Localization.GetString("RemoveFreeItem")" class="hc-delete hc-disabled-delete" value="@Localization.GetString("RemoveItem")" />
+                                            }
+                                            else
+                                            {
+                                                <input type="submit" class="hc-delete" value="@Localization.GetString("RemoveItem")" />
+                                            }
+                                            <input type="hidden" name="lineitemid" value="@item.Item.Id" />
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row-fluid hc-cart-title">
+                <div class="col-xs-12 col-md-6 margin-bottom-lg hc-coupon-section">
+                    <h6>@Localization.GetString("PromoCodes")</h6>
+                    @using (Html.BeginHccRouteForm(HccRouteNames.CartAddCoupon))
+                    {
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label class="control-label">@Localization.GetString("AddPromoCode")</label>
+                                <input type="text" name="couponcode" size="10" maxlength="50" class="form-control" />
+                                <input type="submit" class="btn btn-default btn-sm" value="@Localization.GetString("AddCoupon")" />
+                            </div>
+                        </div>
+                    }
+                    <ul>
+                        @foreach (var coupon in Model.CurrentOrder.Coupons)
+                        {
+                            <li>
+                                @using (Html.BeginHccRouteForm(HccRouteNames.CartRemoveCoupon))
+                                {
+                                    @coupon.CouponCode.ToUpperInvariant()
+                                    <input type="submit" class="hc-delete" value="@Localization.GetFormattedString("RemoveCoupon", coupon.CouponCode)" />
+                                    <input type="hidden" name="couponid" value="@coupon.Id" />
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-md-6 text-right margin-bottom-lg hc-totals-section">
+                    <table>
+                        @if (Model.CurrentOrder.OrderDiscountDetails.Count > 0)
+                        {
+                            <tr>
+                                <th>@Localization.GetString("BeforeDiscounts"):</th>
+                                <td>
+                                    @string.Format("{0:c}", Model.CurrentOrder.TotalOrderBeforeDiscounts)
+                                </td>
+                            </tr>
+                            foreach (var d in Model.CurrentOrder.OrderDiscountDetails)
+                            {
+                                <tr>
+                                    <th>@d.Description:</th>
+                                    <td>@string.Format("{0:c}", d.Amount)</td>
+                                </tr>
+                            }
+                            <tr class="hc-subtotal">
+                                <th>@Localization.GetString("SubTotal"):</th>
+                                <td>
+                                    @string.Format("{0:c}", Model.CurrentOrder.TotalOrderAfterDiscounts)
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr class="hc-subtotal">
+                                <th>@Localization.GetString("SubTotal"):</th>
+                                <td>
+                                    @string.Format("{0:c}", Model.CurrentOrder.TotalOrderBeforeDiscounts)
+                                </td>
+                            </tr>
+                        }
+                    </table>
+
+                    @if (Model.CurrentOrder.HasShippingItems && Model.CurrentOrder.HasShippingCharges)
+                    {
+                        <a href="#hcEstimateShipping" class="btn btn-default btn-sm hc-popup hidden-sm"
+                           data-width="400"
+                           data-height="600"
+                           title="@Localization.GetString("EstimateShipping")">
+                            <em class="glyphicon glyphicon-gift"></em>@Localization.GetString("EstimateShipping")
+                        </a>
+                        <div id="hcEstimateShipping" style="display: none;">
+                            @Html.Action("Index", "EstimateShipping")
+                        </div>
+                    }
+                </div>
+            </div>
+            <hr />
+            <div class="row-fluid">
+                <div class="col-xs-12 col-md-offset-6 col-md-6 margin-bottom-lg text-right pull-right hc-cart-actions">
+                    <ul class="dnnActions">
+                        <li class="hc-action-keepshopping">
+                            <a href="@Html.Raw(Model.KeepShoppingUrl)" class="btn btn-default">
+                                <em class="glyphicon glyphicon-shopping-cart"></em>@Localization.GetString("KeepShopping")
+                            </a>
+                        </li>
+                        <li class="hc-action-checkout">
+                            @using (Html.BeginHccForm(new { style = "float:left" }))
+                            {
+                                <input type="submit" class="btn btn-primary" value="@Localization.GetString("SecureCheckout")" />
+                            }
+                        </li>
+                        @if (Model.PayPalExpressAvailable)
+                        {
+                            <li class="hc-action-or">@Localization.GetString("OR")</li>
+                            <li class="hc-action-paypalcheckout">
+                                @using (Html.BeginHccRouteForm(HccRoute.Cart, FormMethod.Post, new { @class = "paypalexpresscheckoutform", style = "float:left" }))
+                                {
+                                    <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"
+                                           alt="@Localization.GetString("PayPalExpressCheckout")" />
+                                    <input type="hidden" name="paypalexpress" value="true" />
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        }
+    </div>
+</div>
+<div class="clearfix"></div>
+<script type="text/javascript">
+    jQuery(function () {
+        $('.hc-disabled-delete').click(function (e) {
+            $('.hc-freeitem-message').show();
+        });
+    });
+</script>

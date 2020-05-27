@@ -1,0 +1,60 @@
+﻿@model Hotcakes.Modules.Core.Models.AffiliateDashboardViewModel
+<div class="row-fluid">
+    <div class="col-xs-12">
+        <h2>@Localization.GetString("AffiliateTools")</h2>
+        <div class="form-horizontal margin-top-md" id="hcAffiliateTabs">
+            @if (Model != null)
+            {
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#@("TabCommissions")">@Localization.GetString("TabCommissions")</a></li>
+                    <li><a href="#@("TabPayments")">@Localization.GetString("TabPayments")</a></li>
+                    @if (Model.Referrals != null)
+                    {		
+                        <li><a href="#@("TabReferrals")">@Localization.GetString("TabReferrals")</a></li>
+                    }
+                    <li><a href="#@("TabProfile")">@Localization.GetString("TabProfile")</a></li>
+                    <li><a href="#@("TabTools")">@Localization.GetString("TabTools")</a></li>
+                </ul>
+                <div id="TabCommissions" class="margin-top-lg">
+                    <h6>@Localization.GetString("TabCommissions")</h6>
+                    @Html.Partial("_Commissions", Model.Orders)
+                </div>
+                <div id="TabPayments" class="margin-top-lg">
+                    <h6>@Localization.GetString("TabPayments")</h6>
+                    @Html.Partial("_Payments", Model.Payments)
+                </div>
+                if (Model.Referrals != null)
+                {
+                    <div id="TabReferrals" class="margin-top-lg">
+                        <h6>@Localization.GetString("TabReferrals")</h6>
+                        @Html.Partial("_Referrals", Model.Referrals)
+                    </div>
+                }
+                <div id="TabProfile" class="margin-top-lg">
+                    <h6>@Localization.GetString("TabProfile")</h6>
+                    @Html.Partial("_AffiliateProfile", Model.Affiliate)
+                </div>
+                <div id="TabTools" class="margin-top-lg">
+                    <h6>@Localization.GetString("TabTools")</h6>
+                    @Html.Partial("_UrlBuilder", Model.UrlBuilder)
+                </div>
+                <script type="text/javascript">
+                    $(function() {
+                        ko.applyBindings(new HcAffiliateOrders(@Html.Raw(@Model.Orders.ToJson()), $(".hcAffiliateOrders")), $(".hcAffiliateOrders")[0]);
+                        ko.applyBindings(new HcAffiliatePayments(@Html.Raw(@Model.Payments.ToJson()), $(".hcAffiliatePayments")), $(".hcAffiliatePayments")[0]);
+                        @if (Model.Referrals != null)
+                        {
+                            @: ko.applyBindings(new HcAffiliateReferrals(@Html.Raw(@Model.Referrals.ToJson()),  $(".hcReferrals")), $(".hcReferrals")[0]);
+                        }
+                        ko.applyBindings(new HcUrlBuilderViewModel(@Html.Raw(@Model.UrlBuilder.ToJson()), $(".hcUrlBuilder")), $(".hcUrlBuilder")[0]);
+                    });
+                </script>
+            }
+            else
+            {
+                <div class="alert alert-warning">@Localization.GetString("NoAffiliate")</div>
+            }
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>

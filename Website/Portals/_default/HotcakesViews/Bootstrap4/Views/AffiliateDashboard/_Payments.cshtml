@@ -1,0 +1,76 @@
+﻿@model Hotcakes.Modules.Core.Models.AffiliatePaymentsViewModel
+
+@using (Html.BeginHccForm(new { @class = "hcAffiliatePayments" }))
+{
+    <div class="row-fluid">
+        <div class="form-horizontal col-xs-12">
+            <div class="form-group">
+                <label class="col-xs-4 control-label">
+                    @Localization.GetString("lblDate")
+                </label>
+                <div class="col-xs-offset-0 col-xs-6">
+                    <select data-bind="value: dateRange" class="form-control">
+                        @foreach (var t in Enum.GetValues(typeof(DateRangeType)).OfType<DateRangeType>())
+                        {
+                            if (t != DateRangeType.Custom && t != DateRangeType.None)
+                            {
+                            <option value="@((int)t)">@Localization.GetString(t.ToString())</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-sm-4">
+                <div class="hc-board">
+                    <div class="hc-title">@Localization.GetString("PaymentsCount")</div>
+                    <div class="hc-amount-line" data-bind="text: totalCount"></div>
+                </div>
+            </div>	
+            <div class="col-xs-6 col-sm-4">
+                <div class="hc-board">
+                    <div class="hc-title">@Localization.GetString("PaymentsAmount")</div>
+                    <div class="hc-amount-line" data-bind="text: totalAmount"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h2>@Localization.GetString("Payments")</h2>
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr class="dnnGridHeader">
+                            <td>@Localization.GetString("Memo")</td>
+                            <td>@Localization.GetString("Amount")</td>
+                            <td>@Localization.GetString("Attachment")</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ko foreach: payments -->
+                        <tr>
+                            <td data-bind="text: $data.Notes"></td>
+                            <td data-bind="text: $data.Amount"></td>
+                            <td><a target="_blank" class="hc-icon-attachment" href="#" data-bind="visible: $data.AttachmentUrl.length > 0, attr: { href: $data.AttachmentUrl }"></a></td>
+                        </tr>
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix text-center">
+                <ul class="text-center list-inline list-unstyled">
+                    <!-- ko if: pager.previousPage() > 0 -->
+                    <li><a data-bind="click: function () { pager.setCurrentPage(pager.previousPage()) }">...</a></li>
+                    <!-- /ko -->
+                    <!-- ko foreach: pager.pagesList -->
+                    <li data-bind="css: { 'current': $data == $parent.pager.pageNumber() }"><a data-bind="    text: $data, click: function () { $parent.pager.setCurrentPage($data) }"></a></li>
+                    <!-- /ko -->
+                    <!-- ko if: pager.nextPage() > 0 -->
+                    <li><a data-bind="click: function () { pager.setCurrentPage(pager.nextPage()) }">...</a></li>
+                    <!-- /ko -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+}

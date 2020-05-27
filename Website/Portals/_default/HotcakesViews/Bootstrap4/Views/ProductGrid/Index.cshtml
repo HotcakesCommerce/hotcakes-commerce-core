@@ -1,0 +1,25 @@
+﻿@model List<Hotcakes.Modules.Core.Models.SingleProductViewModel>
+@using Hotcakes.Modules.Core.AppCode
+@Html.RegisterViewScript("imagesloaded.pkgd.min.js")
+@Html.RegisterViewScript("masonry.min.js")
+@Html.RegisterViewScript("ProductGrid.js")
+
+<div class="row-fluid hc-product-grid">
+    <div class="col-xs-12">
+        @if (Model.Count == 0){
+            <div class="alert alert-warning">@Localization.GetString("NoProducts")</div>
+        }
+        else{
+            <div class="row-fluid hc-product-cards">
+                <div class="col-xs-6 col-md-4 hc-product-card-sizer hidden"></div>
+                @foreach (var item in Model)
+                {
+                    <div class="col-xs-6 col-md-4 hc-product-card">
+                        @Html.Partial("_RenderSingleProduct", item)
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+<div class="clearfix"></div>
