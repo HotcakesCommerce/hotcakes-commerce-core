@@ -121,7 +121,7 @@
     <value>Bill To</value>
   </data>
   <data name="CodesUsed.Text" xml:space="preserve">
-    <value>Codes Used</value>
+    <value>Coupon Code(s) Used</value>
   </data>
   <data name="CustomerInstructions.Text" xml:space="preserve">
     <value>Customer's Instruction</value>
@@ -134,5 +134,8 @@
   </data>
   <data name="ShipTo.Text" xml:space="preserve">
     <value>Ship To</value>
+  </data>
+  <data name="OrderSummary.Text" xml:space="preserve">
+    <value>Order Summary</value>
   </data>
 </root>

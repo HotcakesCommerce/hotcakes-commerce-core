@@ -289,6 +289,7 @@
     <Content Include="Core\Scripts\chartjs\Chart.Milestone.js" />
     <Content Include="Core\Scripts\chartjs\Chart.Milestone.Legend.js" />
     <Content Include="Core\Scripts\chartjs\Chart.min.js" />
+    <Content Include="Core\Scripts\clipboard.min.js" />
     <Content Include="Core\Scripts\flatpickr\flatpickr.js" />
     <Content Include="Core\Scripts\flatpickr\flatpickr.min.css" />
     <Content Include="Core\Scripts\hcc.admin.dashboard.js" />
@@ -298,6 +299,7 @@
     <Content Include="Core\Scripts\hcc.views.js" />
     <Content Include="Core\Scripts\jquery-3.5.1.js" />
     <Content Include="Core\Scripts\jquery-3.5.1.min.js" />
+    <Content Include="Core\Scripts\jquery-migrate-3.3.0.min.js" />
     <Content Include="Core\Scripts\jquery-ui-1.12.1\css\jquery-ui.css" />
     <Content Include="Core\Scripts\jquery-ui-1.12.1\css\jquery-ui.min.css" />
     <Content Include="Core\Scripts\jquery-ui-1.12.1\css\jquery-ui.structure.css" />
@@ -309,8 +311,6 @@
     <Content Include="Core\Scripts\jquery.fileupload.js" />
     <Content Include="Core\Scripts\jquery.switchButton.js" />
     <Content Include="Core\Scripts\jquery.ui.widget.js" />
-    <Content Include="Core\Scripts\jquery.zclip.js" />
-    <Content Include="Core\Scripts\jquery.zclip.min.js" />
     <Content Include="Core\Scripts\knockout.mapping.js" />
     <Content Include="Core\Scripts\tinymce\jquery.tinymce.min.js" />
     <Content Include="Core\Scripts\tinymce\plugins\advlist\plugin.min.js" />
@@ -376,7 +376,6 @@
     <Content Include="Core\Scripts\tinymce\themes\mobile\theme.min.js" />
     <Content Include="Core\Scripts\tinymce\themes\silver\theme.min.js" />
     <Content Include="Core\Scripts\tinymce\tinymce.min.js" />
-    <Content Include="Core\Scripts\ZeroClipboard.swf" />
     <Content Include="Core\Scripts\plupload\FileUpload.js" />
     <Content Include="Core\Scripts\plupload\plupload.flash.swf" />
     <Content Include="Core\Scripts\plupload\plupload.full.js" />

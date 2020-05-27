@@ -1,15 +1,33 @@
 ﻿@model Hotcakes.Modules.Core.Models.SingleProductViewModel
-
-<div class="hc-record">
-    <div class="hc-recimage">
-        <a href="@Model.ProductLink">
-            <img class="hc-autosize" src="@Model.ImageUrls.SmallUrl" alt="@Model.ImageUrls.SmallAltText" />
-        </a>
+@{
+    var userPrice = Model.UserPrice.DisplayPrice(true, false);
+    var isSale = userPrice.Contains("strike");
+    var hasOptions = (Model.Item.HasOptions());
+}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2><a href="@Model.ProductLink">@Model.Item.ProductName</a></h2>
     </div>
-    <h2 class="hc-recname">
-        <a href="@Model.ProductLink">@Model.Item.ProductName</a>
-    </h2>
-    <div class="hc-recprice">
-        &nbsp;@Html.Raw(Model.UserPrice.DisplayPrice(true,false))
+    <div class="panel-body">
+        <div class="hc-product-card-img">
+            <a href="@Model.ProductLink">
+                <img class="img-responsive" src="@Model.ImageUrls.SmallUrl" alt="@Model.ImageUrls.SmallAltText" />
+            </a>
+        </div>
+    </div>
+    <div class="panel-footer text-center">
+        @Html.Raw(userPrice)<br/>
+        @if (hasOptions || Model.Item.IsGiftCard)
+        {
+            <a class="add-to-cart-product" href="@Model.ProductLink">
+                <span><em class="glyphicon glyphicon-eye-open"></em>@Localization.GetString("View")</span>
+            </a>
+        }
+        else
+        {
+            <a href="@Url.RouteHccUrl(HccRoute.Cart)?AddSku=@Model.Item.Sku&AddSkuQty=1" class="add-to-cart-product">
+                <span><em class="glyphicon glyphicon-shopping-cart"></em>@Localization.GetString("AddToCart")</span>
+            </a>
+        }
     </div>
 </div>

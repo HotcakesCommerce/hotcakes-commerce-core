@@ -3,19 +3,24 @@
 @Html.RegisterViewScript("ImageRotator.js")
 @if (Model.Images.Count > 0)
 {
-    <div class="hc-imagerotator @Model.CssClass">
-        <ul id="@(Model.CssId)" >
-            @for (int i = 0; i < Model.Images.Count; i++)
-            {
-                var img = Model.Images[i];
-                <li @if (i == 0)
-                    { <text>class="show"</text> }><a href="@img.Url" @if (img.NewWindow)
-                                                                                  { <text> target="_blank"</text> }>
-                    <img style="height:@(Model.Height)px;width:@(Model.Width)px;" src="@img.ImageUrl" alt="@img.Caption" />
-                </a></li>
-            }
-        </ul>
+    <div class="row-fluid">
+        <div class="col-xs-12">
+            <div class="hc-imagerotator @Model.CssClass">
+                <ul id="@(Model.CssId)" class="list-unstyled">
+                    @for (int i = 0; i < Model.Images.Count; i++)
+                    {
+                        var img = Model.Images[i];
+                        <li @if (i == 0) { <text>class="show"</text> }>
+                            <a href="@img.Url" @if (img.NewWindow) { <text> target="_blank"</text> }>
+                                <img style="height:@(Model.Height)px;width:@(Model.Width)px;" src="@img.ImageUrl" alt="@img.Caption" class="img-responsive" />
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
     </div>
+    <div class="clearfix"></div>
     <script type="text/javascript">
         $(document).ready(function() {
             StartRotator('@(Model.CssId)', @(Model.Pause));

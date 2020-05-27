@@ -159,4 +159,10 @@
   <data name="Zip.Text" xml:space="preserve">
     <value>Zip</value>
   </data>
+  <data name="Normalized.Text" xml:space="preserve">
+    <value>Normalized</value>
+  </data>
+  <data name="Original.Text" xml:space="preserve">
+    <value>Original</value>
+  </data>
 </root>

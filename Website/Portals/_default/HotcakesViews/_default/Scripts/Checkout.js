@@ -15,17 +15,23 @@
         // Handle Card Number plugin ----------
         $('#cccardnumber')
             .hcCardInput(".hc-card-icons",
-            function ($input) {
-                $.post(hcc.getServiceUrl("checkout/CleanCreditCard"), { "CardNumber": $input.val() }, null, "json")
-                    .done(function (data) {
-                        $input.val(data.CardNumber);
-                    });
-            });
+                function ($input) {
+                    $.post(hcc.getServiceUrl("checkout/CleanCreditCard"), { "CardNumber": $input.val() }, null, "json")
+                        .done(function (data) {
+                            $input.val(data.CardNumber);
+                        });
+                });
 
+        $("#hcTakeOrder").click(function () {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     }
 
     function ajaxErrorNotification() {
-        $('#loginmessage').html(hcc.l10n.common_AjaxError).attr('class', 'dnnFormMessage dnnFormError').show();
+        $('#loginmessage').html(hcc.l10n.common_AjaxError).attr('class', 'col-xs-12 alert alert-danger').show();
     }
 
     // Login -----------------------
@@ -59,31 +65,30 @@
         var username = $('#hcLoginSection #username').val();
         var passwordfield = $('#hcLoginSection #password').val();
         $.post(hcc.getServiceUrl("account/AjaxSignIn"),
-                {
-                    "username": username,
-                    "password": passwordfield
-                },
-                function (data) {
-                    if (data.Success == "True" || data.Success == true) {
-                        $('#loginmessage').html(hcc.l10n.checkout_LoggedIn).attr('class', 'dnnFormMessage dnnFormSuccess').show();
-                        $('#hcLoginChoose').hide();
-                        $('#hcTabLogin').hide();
-                        UserLoggedIn();
-                    }
-                    else {
-                        $('#loginmessage').html(hcc.l10n.checkout_LoginFailed).attr('class', 'dnnFormMessage dnnFormError').show();
-                    }
-                },
-                "json")
-                .error(function () {
-                    ajaxErrorNotification();
-                })
-                .complete(function () {
-                    $('#hcLoginSection').ajaxLoader("stop");
-                });
-
+            {
+                "username": username,
+                "password": passwordfield
+            },
+            function (data) {
+                if (data.Success == "True" || data.Success == true) {
+                    $('#loginmessage').html(hcc.l10n.checkout_LoggedIn).attr('class', 'dnnFormMessage dnnFormSuccess').show();
+                    $('#hcLoginChoose').hide();
+                    $('#hcTabLogin').hide();
+                    UserLoggedIn();
+                }
+                else {
+                    $('#loginmessage').html(hcc.l10n.checkout_LoginFailed).attr('class', 'dnnFormMessage dnnFormError').show();
+                }
+            },
+            "json")
+            .error(function () {
+                ajaxErrorNotification();
+            })
+            .complete(function () {
+                $('#hcLoginSection').ajaxLoader("stop");
+            });
     }
-    
+
     function UserLoggedIn() {
         $.ajax({
             type: 'POST',
@@ -127,8 +132,10 @@
             }
         });
         $("#hcLoginChoose input").click(function () {
+            $('#loginChoose0,#loginChoose1,#loginChoose2').prop('checked', false);
+            $(this).prop('checked', true);
             ChooseLoginTab($(this).val());
-        })
+        });
         $("#regconfirmpassword").focusout(function () { CheckConfirmPassword() });
 
         if (typeof (HCC) != "undefined" && typeof (HCC.CheckoutLogin) != "undefined") {
@@ -146,7 +153,7 @@
         init: function () {
             this.$radioButtons = $("input[name = 'userewardspoints']");
             this.$rpWrapper = $('#hccRewardPointsWrap');
-            this.bindEvents(); 
+            this.bindEvents();
         },
         bindEvents: function () {
             this.$radioButtons.change(function (e) { RewardPoints.changeRewardPoints(e); });
@@ -254,7 +261,7 @@
 
             this.$chkShowBilling.change(function (e) { Addresses.toggleBilling(e); });
             this.$shAvailableAddresses.change(function (e) { Addresses.selectedAddressChanged(e); });
-            
+
             this.$shCountry.change(function () {
                 self.loadRegionsWithSelection(self.$shState, $('#shippingcountry :selected').val(), '');
             });
@@ -324,7 +331,7 @@
                 this.$deliveryWarning.show();
             }
 
-            if(!this.isInitializing)
+            if (!this.isInitializing)
                 this.forceAddressChange();
         },
         billingChanged: function (e) {
@@ -360,8 +367,7 @@
         },
         saveNormalized: function (e) {
 
-            if (this.shippingNmAddr != null && this.$dialogShippingRadio.filter(":checked").val() == "N")
-            {
+            if (this.shippingNmAddr != null && this.$dialogShippingRadio.filter(":checked").val() == "N") {
                 this.$shAddress.val(this.shippingNmAddr.Line1);
                 this.$shAddress2.val(this.shippingNmAddr.Line2);
                 this.$shCity.val(this.shippingNmAddr.City);
@@ -436,7 +442,7 @@
             this.enableDialog(false);
             this.$submitButton.click();
         },
-        forceAddressChange: function(){
+        forceAddressChange: function () {
             OrderSummary.showLoadingProgress();
 
             this.applyAddressChange(function (data) {
@@ -445,7 +451,7 @@
                 if (data.orderitems) OrderSummary.updateItems(data.orderitems);
                 if (data.PaymentViewModel) UpdatePaymentMethods(data.PaymentViewModel);
             },
-            this.isInitializing);
+                this.isInitializing);
         },
         applyAddressChange: function (callback, isInitializing) {
             $.ajax({
@@ -502,8 +508,7 @@
                 }
             });
         },
-        populateAddressData: function(adressWrapper, address)
-        {
+        populateAddressData: function (adressWrapper, address) {
             var addressbvinField = adressWrapper.find("[id*='addressbvin']");
 
             if (address) {
@@ -566,25 +571,25 @@
         },
         loadRegionsWithSelection: function (regionlist, countryid, selectedregion, raiseChange) {
             $.post(hcc.getServiceUrl("estimateshipping/getregions/" + countryid),
-                  {
-                      "regionid": selectedregion
-                  },
-                  function (data) {
-                      regionlist.html(data.Regions);
+                {
+                    "regionid": selectedregion
+                },
+                function (data) {
+                    regionlist.html(data.Regions);
 
-                      //duplicate value to tempRegion
-                      var tempRegion = regionlist.parent().find("[id*='tempregion']");
-                      tempRegion.val(selectedregion);
+                    //duplicate value to tempRegion
+                    var tempRegion = regionlist.parent().find("[id*='tempregion']");
+                    tempRegion.val(selectedregion);
 
-                      if (raiseChange)
+                    if (raiseChange)
                         regionlist.change();
-                  },
-                 "json"
-                 );
+                },
+                "json"
+            );
         }
     };
 
-    function RefreshShippingRates() {        
+    function RefreshShippingRates() {
         $('#hcShippingRates').html('');
         $('#hcDeliverySection').ajaxLoader('start');
         $('#hcShippingNotValid').hide();
@@ -621,7 +626,6 @@
 
     function ApplyCurrentShippingRate() {
         var methodid = $("input[name='shippingrate']:checked").val();
-        //alert(' current unique key = ' + rateKey);
         OrderSummary.showLoadingProgress();
 
         var orderid = $('#orderbvin').val();
@@ -682,6 +686,7 @@
         displayTotals: function (totals) {
             this.$totals.ajaxLoader('stop');
             this.$totals.html(totals);
+            UpdateTotalTable();
         },
         updateItems: function (orderItems) {
             $(".hcLineTotal").each(function (i, el) {
@@ -689,7 +694,7 @@
                 var $totalBase = $el.find(".hcLineTotalBase");
                 var $totalAdj = $el.find(".hcLineTotalAdjusted");
                 var $lineTax = $el.find(".hcLineTax");
-                
+
 
                 var oItem = orderItems[i];
                 if (oItem.HasAnyDiscounts)
@@ -741,7 +746,7 @@
             this.$tblGiftCards = $("#hcGiftCardList");
             this.$gcFormItem = $("#hcGiftCardsFormItem");
             this.$gcFormAction = $("#hcGiftCardsFormAction");
-            
+
             this.bindEvents();
         },
         bindEvents: function () {
@@ -749,7 +754,7 @@
             self.$addGiftCard.click(function (e) { self.addGiftCard(e); });
             self.$tblGiftCards.on("click", ".hc-delete", function (e) { self.removeGiftCard(e); });
         },
-        addGiftCard: function(e){
+        addGiftCard: function (e) {
             var self = GiftCards;
             self.$gcPanel.ajaxLoader('start');
             OrderSummary.showLoadingProgress();
@@ -822,6 +827,10 @@
             UpdatePaymentMethods(payment);
         }
     };
+
+    function UpdateTotalTable() {
+        $("table.totaltable").attr("class", "table table-striped table-hover totaltable");
+    }
 
     // Initialization --------------------------
 

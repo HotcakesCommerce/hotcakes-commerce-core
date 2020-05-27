@@ -196,10 +196,17 @@ function HcDrillDownFilterViewModel(data, $form, catId, modId) {
     $(window).on('hashchange', function () {
         handleHashchange();
     });
-
-
     if (location.hash.length <= 1) {
         handleDrillDown(data);
     }
 }
 
+$(document).ready(function () {
+    if ($.fn.masonry) {
+        $(".hc-category .hc-product-cards").masonry({
+            itemSelector: ".hc-product-card",
+            columnWidth: ".hc-product-card-sizer",
+            percentPosition: true
+        });
+    }
+});

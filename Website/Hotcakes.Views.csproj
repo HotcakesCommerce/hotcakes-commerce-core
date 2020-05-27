@@ -200,15 +200,19 @@
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\AddressEditor.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\AffiliateDashboard.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\AffiliateRegistration.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Cart.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Category.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Checkout.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\EditBilling.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\EstimateShipping.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\ImageRotator.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\masonry.min.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\OrderHistory.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Pager.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Products.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Receipt.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\ResizeSensor.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\sticky-sidebar.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\views.css">
       <DependentUpon>views.less</DependentUpon>
     </Content>
@@ -269,7 +273,6 @@
     <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\_AddressEditor.cshtml" />
     <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\_FaceBookLike.cshtml" />
     <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\_FaceBookSetup.cshtml" />
-    <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\_GooglePlusOne.cshtml" />
     <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\_OrderPaymentSummary.cshtml" />
     <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\_Pager.cshtml" />
     <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\_Twitter.cshtml" />
@@ -426,7 +429,7 @@
     <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\_Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Portals\_default\HotcakesViews\_default\_views_nobootstrap.less" />
+    <Content Include="Portals\_default\HotcakesViews\_default\_views_bootstrap.less" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\AddressBook\Edit.cshtml" />
@@ -1058,6 +1061,21 @@
     <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\App_LocalResources\_ViewOrderAdditional.cshtml.resx" />
     <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\App_LocalResources\_ViewOrderItems.cshtml.resx" />
     <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\App_LocalResources\_ViewOrderItems.cshtml.uk-UA.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\App_LocalResources\_RenderSingleProduct.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\_default\Views\Category\App_LocalResources\DrillDown.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\App_LocalResources\_PagerKo.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\App_LocalResources\_RenderBundledProduct.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\_default\Views\ProductReviews\App_LocalResources\TopReviews.cshtml.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

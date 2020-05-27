@@ -120,6 +120,9 @@
   <data name="lblAddress.Text" xml:space="preserve">
     <value>Address:</value>
   </data>
+  <data name="AlreadyRegistered.Text" xml:space="preserve">
+    <value>You've already registered as an affiliate. Congrats!</value>
+  </data>
   <data name="lblCity.Text" xml:space="preserve">
     <value>City:</value>
   </data>
@@ -166,16 +169,19 @@
     <value>Close</value>
   </data>
   <data name="lblAffiliateTerms.Text" xml:space="preserve">
-    <value>Affiliate Terms</value>
+    <value>View Affiliate Terms</value>
   </data>
   <data name="lblIAgreeTo.Text" xml:space="preserve">
-    <value>I Agree To</value>
+    <value>I Agree To the Affiliate Terms (below)</value>
   </data>
   <data name="lblPhone.Text" xml:space="preserve">
     <value>Phone:</value>
   </data>
   <data name="NotSelectedItem.Text" xml:space="preserve">
     <value>- Not Selected -</value>
+  </data>
+  <data name="NoAgreement.Text" xml:space="preserve">
+    <value>An affilite agreement has not yet been saved. Please update the affiliate settings in the store administration.</value>
   </data>
   <data name="ValMessage_AffiliateIDInvalid.Text" xml:space="preserve">
     <value>Alpha-numeric and '-', '_' symbols allowed only</value>
@@ -188,5 +194,11 @@
   </data>
   <data name="lblLastName.Text" xml:space="preserve">
     <value>Last Name:</value>
+  </data>
+  <data name="ReferredBy.Text" xml:space="preserve">
+    <value>Did someone refer you?</value>
+  </data>
+  <data name="AffiliateIdHelp.Text" xml:space="preserve">
+    <value>Letters and numbers only, please</value>
   </data>
 </root>

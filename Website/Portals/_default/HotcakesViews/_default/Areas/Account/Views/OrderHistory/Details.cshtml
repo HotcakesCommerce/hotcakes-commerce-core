@@ -1,9 +1,20 @@
 ﻿@model Hotcakes.Modules.Core.Models.OrderViewModel
 
-@Html.Partial("_ViewOrder", Model)
-@Html.Partial("_ViewOrderAdditional", Model.LocalOrder)
-<ul class="dnnActions">
-    <li>
-        <a href="@Url.RouteHccUrl(HccRoute.OrderHistory)" class="dnnSecondaryAction">&laquo; @Localization.GetString("ReturToOrderHistory")</a>
-    </li>
-</ul>
+<div class="row-fluid">
+    @Html.Partial("_ViewOrder", Model)
+    <div class="clearfix"></div>
+    @Html.Partial("_ViewOrderAdditional", Model.LocalOrder)
+
+    <div class="row">
+        <div class="col-xs-12 text-center margin-top-lg margin-bottom-xl">
+            <a href="@Url.RouteHccUrl(HccRoute.OrderHistory)" class="btn btn-default">
+                <em class="glyphicon glyphicon-arrow-left"></em>@Localization.GetString("ReturToOrderHistory")
+            </a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function (){
+        $("table.totaltable").attr("class", "table table-striped table-hover totaltable");
+    });
+</script>

@@ -1,9 +1,8 @@
 body {
 }
-/* Nobootstrap Start */
-@import "_views_nobootstrap.less";
-/* Nobootstrap End */
+
 @import "_views_areas.less";
+@import "_views_bootstrap.less";
 
 /* --------------- Cart --------------- */
 .hc-cart {
@@ -316,7 +315,7 @@ body {
             margin-left: 4%;
 
             div {
-                padding-top: 10px;
+                /*padding-top: 10px;*/
             }
 
             div > h4 {
@@ -337,6 +336,7 @@ body {
         .hc-card-icons {
             position: absolute;
             bottom: -25px;
+            height: 35px;
         }
     }
 
@@ -905,4 +905,9 @@ body {
             }
         }
     }
+}
+
+/* Resolves an issue where links being used as a buttona have their text color changed. */
+a.btn-primary:visited {
+    color: #fff;
 }

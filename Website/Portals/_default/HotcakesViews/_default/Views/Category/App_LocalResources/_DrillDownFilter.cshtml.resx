@@ -139,7 +139,7 @@
     <value>Properties</value>
   </data>
   <data name="Remove.Text" xml:space="preserve">
-    <value>remove</value>
+    <value>Remove</value>
   </data>
   <data name="Types.Text" xml:space="preserve">
     <value>Types</value>
@@ -148,6 +148,6 @@
     <value>Vendors</value>
   </data>
   <data name="YouSelected.Text" xml:space="preserve">
-    <value>You Selected</value>
+    <value>Filtered By</value>
   </data>
 </root>

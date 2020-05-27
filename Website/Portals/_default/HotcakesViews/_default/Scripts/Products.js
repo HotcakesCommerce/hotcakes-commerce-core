@@ -123,6 +123,11 @@
         EvaluateSelections();
 
         $('#hcProductTabs').dnnTabs({ selected: 0 });
+        $(".nav-tabs li").click(function () {
+            var tab = $(this);
+            $(".nav-tabs li").removeAttr("class");
+            tab.attr("class", "active");
+        });
 
         $('#giftcardpredefined').change(function () {
             var $input = $('#GiftCardAmount');

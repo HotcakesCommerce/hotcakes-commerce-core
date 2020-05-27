@@ -132,4 +132,13 @@
   <data name="TrackingNumber.Text" xml:space="preserve">
     <value>Tracking Number</value>
   </data>
+  <data name="NotShipped.Text" xml:space="preserve">
+    <value>Not Shipped</value>
+  </data>
+  <data name="NoNotes.Text" xml:space="preserve">
+    <value>No notes from the store.</value>
+  </data>
+  <data name="NoPackages.Text" xml:space="preserve">
+    <value>No shipments found for this order.</value>
+  </data>
 </root>
