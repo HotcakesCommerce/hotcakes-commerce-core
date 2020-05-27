@@ -36,7 +36,6 @@ namespace Hotcakes.Modules.ProductViewer
         protected override string RenderView()
         {
             RegisterScript("plupload/plupload.full.js");
-
             RegisterScript("plupload/FileUpload.js");
             RegisterUnobtrusiveValidateScripts();
             RegisterViewScript("Products.js");

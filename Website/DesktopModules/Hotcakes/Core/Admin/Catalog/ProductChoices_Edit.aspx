@@ -32,44 +32,44 @@
         </div>
 	</div>
 	<div class="clearfix"></div>
-        <asp:MultiView ID="viewMain" runat="server">
-            <asp:View ID="viewHtml" runat="server">
-                <asp:Label runat="server" CssClass="hcLabel"><%=Localization.GetString("Description") %><i class="hcLocalizable"></i></asp:Label>
-                <hcc:HtmlEditor ID="HtmlEditor1" runat="server" EditorWidth="675" EditorHeight="220" EditorWrap="true" />
-            </asp:View>
-            <asp:View ID="viewTextInput" runat="server">
-                <div class="hcFormItem hcFormItem33p">
-                    <label class="hcLabel"><%=Localization.GetString("Columns") %></label>
-                    <asp:TextBox ID="ColumnsField" runat="server" />
-                </div>
-                <div class="hcFormItem hcFormItem33p">
-                    <label class="hcLabel"><%=Localization.GetString("Rows") %></label>
-                    <asp:TextBox ID="RowsField" runat="server" />
-                </div>
-                <div class="hcFormItem hcFormItem33p">
-                    <label class="hcLabel"><%=Localization.GetString("MaxLength") %></label>
-                    <asp:TextBox ID="MaxLengthField" runat="server" />
-                </div>
-            </asp:View>
-            <asp:View ID="viewItems" runat="server">
-                <h2><%=Localization.GetString("ChoiceItems") %></h2>
-                <hcc:OptionItemEditor ID="ItemsEditor" runat="server" />
-            </asp:View>
-            <asp:View ID="viewFileInput" runat="server">
-                <div class="hcFormItem">
-                    <asp:CheckBox ID="MultipleFilesField" resourcekey="MultipleFilesField" runat="server" Checked="true" />
-                </div>
-            </asp:View>
-        </asp:MultiView>
-        <ul class="hcActions">
-            <li>
-                <asp:LinkButton ID="btnSaveOption" resourcekey="btnSaveOption" runat="server" CssClass="hcPrimaryAction" OnClick="btnSaveOption_Click" />
-            </li>
-            <li>
-                <asp:LinkButton ID="btnSaveAndClose" resourcekey="btnSaveAndClose" runat="server" CssClass="hcSecondaryAction" OnClick="btnSaveAndClose_Click" />
-            </li>
-            <li>
-                <a class="hcSecondaryAction" href="ProductChoices.aspx?id=<%=ProductId %>"><%=Localization.GetString("Back") %></a>
-            </li>
-        </ul>
+    <asp:MultiView ID="viewMain" runat="server">
+        <asp:View ID="viewHtml" runat="server">
+            <asp:Label runat="server" CssClass="hcLabel"><%=Localization.GetString("Description") %><i class="hcLocalizable"></i></asp:Label>
+            <hcc:HtmlEditor ID="HtmlEditor1" runat="server" EditorWidth="675" EditorHeight="220" EditorWrap="true" />
+        </asp:View>
+        <asp:View ID="viewTextInput" runat="server">
+            <div class="hcFormItem hcFormItem33p">
+                <label class="hcLabel"><%=Localization.GetString("Columns") %></label>
+                <asp:TextBox ID="ColumnsField" runat="server" />
+            </div>
+            <div class="hcFormItem hcFormItem33p">
+                <label class="hcLabel"><%=Localization.GetString("Rows") %></label>
+                <asp:TextBox ID="RowsField" runat="server" />
+            </div>
+            <div class="hcFormItem hcFormItem33p">
+                <label class="hcLabel"><%=Localization.GetString("MaxLength") %></label>
+                <asp:TextBox ID="MaxLengthField" runat="server" />
+            </div>
+        </asp:View>
+        <asp:View ID="viewItems" runat="server">
+            <h2><%=Localization.GetString("ChoiceItems") %></h2>
+            <hcc:OptionItemEditor ID="ItemsEditor" runat="server" />
+        </asp:View>
+        <asp:View ID="viewFileInput" runat="server">
+            <div class="hcFormItem">
+                <asp:CheckBox ID="MultipleFilesField" resourcekey="MultipleFilesField" runat="server" Checked="true" />
+            </div>
+        </asp:View>
+    </asp:MultiView>
+    <ul class="hcActions">
+        <li>
+            <asp:LinkButton ID="btnSaveOption" resourcekey="btnSaveOption" runat="server" CssClass="hcPrimaryAction" OnClick="btnSaveOption_Click" />
+        </li>
+        <li>
+            <asp:LinkButton ID="btnSaveAndClose" resourcekey="btnSaveAndClose" runat="server" CssClass="hcSecondaryAction" OnClick="btnSaveAndClose_Click" />
+        </li>
+        <li>
+            <a class="hcSecondaryAction" href="ProductChoices.aspx?id=<%=ProductId %>"><%=Localization.GetString("Back") %></a>
+        </li>
+    </ul>
 </asp:Content>

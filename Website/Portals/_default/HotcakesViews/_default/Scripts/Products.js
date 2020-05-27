@@ -27,7 +27,7 @@
         $('#hcSubmitReviewMessage').hide();
         $('#hcSubmitReviewForm').show();
     }
-    
+
     function UpdatePriceFormItem(price, $priceEl) {
         if (!price)
             $priceEl.hide();
@@ -132,7 +132,7 @@
         $('#giftcardpredefined').change(function () {
             var $input = $('#GiftCardAmount');
             var amount = $(this).val();
-            
+
             if (amount == "") {
                 $input.css("visibility", "");
             } else {
