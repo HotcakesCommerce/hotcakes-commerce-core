@@ -99,7 +99,7 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.CreditCard
             lstCaptureMode.SelectedValue = authorizeOnly ? "1" : "0";
 
             chkRequireCreditCardSecurityCode.Checked = HccApp.CurrentStore.Settings.PaymentCreditCardRequireCVV;
-            chkDisplayFullCardNumber.Checked = HccApp.CurrentStore.Settings.DisplayFullCreditCardNumbers;
+            chkDisplayFullCardNumber.Checked = false;//HccApp.CurrentStore.Settings.DisplayFullCreditCardNumbers;
 
             lstGateway.SelectedValue = HccApp.CurrentStore.Settings.PaymentCreditCardGateway;
 
@@ -137,7 +137,7 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.CreditCard
 
             HccApp.CurrentStore.Settings.PaymentCreditCardRequireCVV = chkRequireCreditCardSecurityCode.Checked;
             HccApp.CurrentStore.Settings.PaymentCreditCardGateway = lstGateway.SelectedValue;
-            HccApp.CurrentStore.Settings.DisplayFullCreditCardNumbers = chkDisplayFullCardNumber.Checked;
+            HccApp.CurrentStore.Settings.DisplayFullCreditCardNumbers = false;
 
             // Save Credit Card Types
             var acceptedCards = new List<CardType>();
