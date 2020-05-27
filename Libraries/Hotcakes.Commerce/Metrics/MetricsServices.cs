@@ -36,29 +36,5 @@ namespace Hotcakes.Commerce.Metrics
         }
 
         public SearchQueryRepository SearchQueries { get; protected set; }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public static MetricsServices InstantiateForMemory(HccRequestContext c)
-        {
-            return Factory.CreateService<MetricsServices>(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public static MetricsServices InstantiateForDatabase(HccRequestContext c)
-        {
-            return Factory.CreateService<MetricsServices>(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public MetricsServices(HccRequestContext c,
-            SearchQueryRepository queries
-            )
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

@@ -102,6 +102,7 @@ namespace Hotcakes.Modules.Core.Models
         ///     Social tagging controls html string for this category. It contains different
         ///     information from <see cref="ISocialItem" />
         /// </summary>
+        [Obsolete("Removing in 03.05.00 or later. Previously was used for Evoq Social integration.")]
         public ISocialItem SocialItem { get; set; }
 
         public string LeftColumn { get; set; }

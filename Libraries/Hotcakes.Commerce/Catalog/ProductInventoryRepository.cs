@@ -175,28 +175,5 @@ namespace Hotcakes.Commerce.Catalog
             var storeId = Context.CurrentStore.Id;
             return FindListPoco(q => { return q.Where(y => y.StoreId == storeId); });
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static ProductInventoryRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new ProductInventoryRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static ProductInventoryRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new ProductInventoryRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public ProductInventoryRepository(HccRequestContext c, IRepositoryStrategy<hcc_ProductInventory> r,
-            ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

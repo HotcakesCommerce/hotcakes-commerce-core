@@ -56,20 +56,6 @@ namespace Hotcakes.Commerce.Dnn.Social
             EnsureJournalItem(cat);
         }
 
-        [Obsolete("Removed support for Evoq Social in version 3.0. Use SaveProductToJournal() instead. Will be removed in version 3.1.")]
-        public override ISocialItem GetProductSocialItem(Product product)
-        {
-            SaveProductToJournal(product);
-            return new StubSocialItem();
-        }
-
-        [Obsolete("Removed support for Evoq Social in version 3.0. Use SaveProductToJournal() instead. Will be removed in version 3.1.")]
-        public override ISocialItem GetCategorySocialItem(Category cat)
-        {
-            SaveCategoryToJournal(cat);
-            return new StubSocialItem();
-        }
-
         public override void UpdateProductTaxonomy(Product product, IEnumerable<string> taxonomyTags)
         {
             var journalItem = EnsureJournalItem(product);

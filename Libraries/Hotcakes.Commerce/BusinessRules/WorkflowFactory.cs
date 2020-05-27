@@ -129,9 +129,6 @@ namespace Hotcakes.Commerce.BusinessRules
         {
             return new Task[]
             {
-#pragma warning disable 0612, 0618
-                new AvalaraCancel(),
-#pragma warning restore 0612, 0618
                 new TaxProviderCancel(),
                 new RunPaymentChangedWorkflow(),
                 new UpdateOrder()
@@ -161,9 +158,6 @@ namespace Hotcakes.Commerce.BusinessRules
                 new RunWorkFlowIfPaid(),
                 new MarkCompletedWhenShippedAndPaid(),
                 new ChangeOrderStatusWhenPaymentRemoved(),
-#pragma warning disable 0612, 0618
-                new AvalaraCancelWhenPaymentRemoved(),
-#pragma warning restore 0612, 0618
                 new TaxProviderCancelWhenPaymentRemoved(),
                 new GiftCertificatesStatusUpdate(GiftCertificatesStatusUpdate.Mode.PaymentChanged),
                 new UpdateOrder()
@@ -180,9 +174,6 @@ namespace Hotcakes.Commerce.BusinessRules
             return new Task[]
             {
                 new UpdateOrder(),
-#pragma warning disable 0612, 0618
-                new AvalaraCommitTaxes(),
-#pragma warning restore 0612, 0618
                 new TaxProviderCommitTaxes(),
                 new UpdateOrder(),
                 new EmailVATInvoice(),

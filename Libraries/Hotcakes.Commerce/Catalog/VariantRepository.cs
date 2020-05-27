@@ -189,27 +189,5 @@ namespace Hotcakes.Commerce.Catalog
             var productGuid = DataTypeHelper.BvinToGuid(productBvin);
             MergeList(subitems, v => v.ProductId == productGuid);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static VariantRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new VariantRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static VariantRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new VariantRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public VariantRepository(HccRequestContext c, IRepositoryStrategy<hcc_Variants> r, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

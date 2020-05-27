@@ -98,13 +98,10 @@ namespace Hotcakes.Modules.Core
                         EnsureDefaultZones();
                         break;
 
-                    case "01.07.00":
-                        MigrateOldPromotions();
-                        break;
-
                     case "01.09.00":
                         MigrateFedExRateSetting();
                         break;
+
                     case "01.10.00":
                         MigrateAvalaraTaxProviderSetting();
                         break;
@@ -276,9 +273,9 @@ namespace Hotcakes.Modules.Core
                 "Hotcakes.ProductRotator",
                 "Hotcakes.CategoryRotator"
             };
-            foreach (var obsoltePackage in obsoletePackages)
+            foreach (var obsoletePackage in obsoletePackages)
             {
-                UninstallPackage(obsoltePackage);
+                UninstallPackage(obsoletePackage);
             }
         }
 
@@ -435,22 +432,7 @@ namespace Hotcakes.Modules.Core
             if (!contentItemTermIds.Contains(moduleCategoryTerm.TermId))
                 termController.AddTermToContent(moduleCategoryTerm, contentItem);
         }
-
-        private void MigrateOldPromotions()
-        {
-            var context = new HccRequestContext();
-            var accountServices = Factory.CreateService<AccountService>(context);
-            var stores = accountServices.Stores.FindAllPaged(1, int.MaxValue);
-
-            foreach (var store in stores)
-            {
-                context.CurrentStore = store;
-
-                var marketingServices = Factory.CreateService<MarketingService>(context);
-                marketingServices.MigrateOldPromotions();
-            }
-        }
-
+        
         private void MigrateFedExRateSetting()
         {
             // 1.9.0: negotiated rates are no longer a global setting, but a "local" setting

@@ -79,7 +79,6 @@
     <Compile Include="Barcodes\BarcodeLib.cs" />
     <Compile Include="Barcodes\BarcodeXML.cs">
       <DependentUpon>BarcodeXML.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Barcodes\BarcodeXML.Designer.cs">
       <DependentUpon>BarcodeXML.cs</DependentUpon>
@@ -155,7 +154,6 @@
     <Compile Include="Text.cs" />
     <Compile Include="UIEventArgs.cs" />
     <Compile Include="Url.cs" />
-    <Compile Include="Validation\EmailValidation.cs" />
     <Compile Include="Validation\IValidatable.cs" />
     <Compile Include="Validation\RuleViolation.cs" />
     <Compile Include="Validation\ValidationHelper.cs" />

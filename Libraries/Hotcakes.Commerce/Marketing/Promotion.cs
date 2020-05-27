@@ -370,35 +370,6 @@ namespace Hotcakes.Commerce.Marketing
 
         #endregion
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 2.0.0. Use method with same name but other parameters instead")]
-        public bool ApplyToProduct(HotcakesApplication app, Product p, UserSpecificPrice price, CustomerAccount account)
-        {
-            return ApplyToProduct(app.CurrentRequestContext, p, price, account);
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Use method with same name but other parameters instead")]
-        public bool ApplyToOrder(HotcakesApplication app, Order o)
-        {
-            return ApplyToOrder(app.CurrentRequestContext, o);
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Use method with same name but other parameters instead")]
-        public decimal ApplyToShippingRate(HotcakesApplication app, Order o, CustomerAccount account,
-            string shipMethodId, decimal originalShippingMethodRate)
-        {
-            return ApplyToShippingRate(app.CurrentRequestContext, o, account, shipMethodId, originalShippingMethodRate);
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Use method with same name but other parameters instead")]
-        public bool ApplyToAffiliate(HotcakesApplication app, CustomerAccount account, DateTime date)
-        {
-            return ApplyToAffiliate(app.CurrentRequestContext, account, date);
-        }
-
-        #endregion
-
         #region Implementation
 
         private IPromotionAction ActionFactory(IEnumerable<XElement> nodes)

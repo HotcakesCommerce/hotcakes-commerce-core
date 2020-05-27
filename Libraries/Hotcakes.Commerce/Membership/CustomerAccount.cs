@@ -199,9 +199,7 @@ namespace Hotcakes.Commerce.Membership
 
             result.Add(new HtmlTemplateTag("[[User.Bvin]]", Bvin));
 
-            // TODO: make this obsolete            
             result.Add(new HtmlTemplateTag("[[User.Notes]]", Notes));
-            result.Add(new HtmlTemplateTag("[[User.Comment]]", GlobalLocalization.GetString("UserCommentObsolete"), true));
             result.Add(new HtmlTemplateTag("[[User.CreationDate]]",
                 DateHelper.ConvertUtcToStoreTime(context.CurrentStore, CreationDateUtc).ToString()));
             result.Add(new HtmlTemplateTag("[[User.Email]]", Email));

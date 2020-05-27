@@ -213,28 +213,5 @@ namespace Hotcakes.Commerce.Orders
                 return ListPoco(items);
             }
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static RMARepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new RMARepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static RMARepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new RMARepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public RMARepository(HccRequestContext c, IRepositoryStrategy<hcc_RMA> strategy,
-            IRepositoryStrategy<hcc_RMAItem> subr, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

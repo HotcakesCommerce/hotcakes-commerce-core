@@ -47,16 +47,6 @@ namespace Hotcakes.Commerce.Catalog
             productValueRepository = new ProductPropertyValueRepository(c);
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public CategoryFacetManager(HccRequestContext c, bool isForMemory) :
-            this(c)
-        {
-        }
-
-        #endregion
-
         /// <summary>
         ///     Convert the database table row to the model.
         /// </summary>

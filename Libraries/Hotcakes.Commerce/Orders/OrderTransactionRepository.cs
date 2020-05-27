@@ -234,30 +234,6 @@ namespace Hotcakes.Commerce.Orders
 			});
 		}
 
-		/// <summary>
-        ///     DO NOT USE... DEPRECIATED.  Use FindAllAuthorizationsForOrder instead.
-		/// </summary>
-		/// <param name="orderId"></param>
-		/// <returns></returns>
-		[Obsolete("Version 1.6 - use FindAllAuthorizationsForOrder instead.")]
-		public OrderTransaction FindAuthForOrder(string orderId)
-		{
-			using (var s = CreateStrategy())
-			{
-				var orderGuid = DataTypeHelper.BvinToGuid(orderId);
-				var item = s.GetQuery().Where(y => y.OrderId == orderGuid)
-										.Where(y => y.Success)
-										.Where(y => !y.Voided)
-										.OrderBy(y => y.Timestamp).FirstOrDefault();
-				if (item != null)
-				{
-					return FirstPoco(item);
-				}
-			}
-
-			return new OrderTransaction();
-		}
-
 		public decimal TransactionsPotentialValue(List<OrderTransaction> transactions, ActionType actionType)
 		{
 			decimal amount = 0;
@@ -392,27 +368,5 @@ namespace Hotcakes.Commerce.Orders
 		{
 			Delete(y => y.StoreId == storeId);
 		}
-
-		#region Obsolete
-
-		[Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-		public static OrderTransactionRepository InstantiateForMemory(HccRequestContext c)
-		{
-			return new OrderTransactionRepository(c);
-		}
-
-		[Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-		public static OrderTransactionRepository InstantiateForDatabase(HccRequestContext c)
-		{
-			return new OrderTransactionRepository(c);
-		}
-
-		[Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-		public OrderTransactionRepository(HccRequestContext c, IRepositoryStrategy<hcc_OrderTransactions> r, ILogger log)
-            : this(c)
-		{
-		}
-
-		#endregion
 	}
 }

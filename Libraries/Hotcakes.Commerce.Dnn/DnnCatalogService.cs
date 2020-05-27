@@ -38,16 +38,6 @@ namespace Hotcakes.Commerce.Dnn
         {
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public DnnCatalogService(HccRequestContext c, bool isForMemoryOnly)
-            : this(c)
-        {
-        }
-
-        #endregion
-
         protected override bool TestRolesAccess(List<CatalogRole> roles)
         {
             var user = DnnUserController.Instance.GetCurrentUserInfo();

@@ -164,28 +164,5 @@ namespace Hotcakes.Commerce.Scheduling
         {
             Delete(y => y.StoreId == storeId);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static QueuedTaskRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new QueuedTaskRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static QueuedTaskRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new QueuedTaskRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        private QueuedTaskRepository(HccRequestContext c, IRepositoryStrategy<hcc_QueuedTask> r,
-            ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

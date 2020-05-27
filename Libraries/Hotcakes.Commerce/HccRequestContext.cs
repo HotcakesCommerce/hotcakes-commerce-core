@@ -149,16 +149,5 @@ namespace Hotcakes.Commerce
 
         // We need avoid using of this property
         public RequestContext RoutingContext { get; set; }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use WebAppSettings.HccEFConnectionString instead")]
-        public string HccEFConnectionString
-        {
-            get { return WebAppSettings.HccEFConnectionString; }
-            set { }
-        }
-
-        #endregion
     }
 }

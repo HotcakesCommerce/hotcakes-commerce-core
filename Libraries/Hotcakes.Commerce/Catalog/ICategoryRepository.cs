@@ -53,8 +53,5 @@ namespace Hotcakes.Commerce.Catalog
         DalSingleOperationResult<Category> UpdateAdv(Category c);
         void DestroyAllForStore(long storeId);
         int FindMaxSort(string parentId);
-
-        [Obsolete("Obsolete in 1.8.0. No need to call this method")]
-        bool SubmitChanges();
     }
 }

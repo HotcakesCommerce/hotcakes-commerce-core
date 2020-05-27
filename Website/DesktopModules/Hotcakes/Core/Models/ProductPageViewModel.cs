@@ -56,12 +56,6 @@ namespace Hotcakes.Modules.Core.Models
             IsAvailableForWishList = false;
             SwatchHtml = string.Empty;
             AlternateImageUrls = new List<ProductImageUrls>();
-
-#pragma warning disable 0612, 0618
-            OriginalImageUrl = string.Empty;
-            MainImageAltText = string.Empty;
-            MainImageUrl = string.Empty;
-#pragma warning restore 0612, 0618
         }
 
         /// <summary>
@@ -113,37 +107,14 @@ namespace Hotcakes.Modules.Core.Models
         public List<ProductImageUrls> AlternateImageUrls { get; private set; }
 
         /// <summary>
-        ///     Original image url
-        /// </summary>
-        [Obsolete("Obsolete in 1.2.0. Use ImageUrls property.")]
-        public string OriginalImageUrl { get; set; }
-
-        /// <summary>
-        ///     Main image URL which is shown when product detail page loads
-        /// </summary>
-        [Obsolete("Obsolete in 1.2.0. Use ImageUrls property.")]
-        public string MainImageUrl { get; set; }
-
-        /// <summary>
-        ///     Alternate text to be shown if image is not available or when move hover to the iamge.
-        /// </summary>
-        [Obsolete("Obsolete in 1.2.0. Use ImageUrls property.")]
-        public string MainImageAltText { get; set; }
-
-        /// <summary>
         ///     Product price information. There are different prices available like site price, cost price and labels and text
         ///     needs to be shown for price.
         ///     More detailed option of this can be found at  <see cref="ProductPrices" />
         /// </summary>
         public ProductPrices Prices { get; set; }
 
-
         public decimal UserSuppliedPrice { get; set; }
 
-        /// <summary>
-        ///     Returns html to render additional images of the product
-        /// </summary>
-        [Obsolete("Obsolete in 1.2.0. Use AlternateImageUrls property.")]
         public string PreRenderedImages
         {
             get
@@ -222,6 +193,7 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     Social controls for the given product in json format.
         /// </summary>
+        [Obsolete("Removing in 03.05.00 or later. Previously was used for Evoq Social integration.")]
         public ISocialItem SocialItem { get; set; }
 
         /// <summary>

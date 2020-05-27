@@ -43,12 +43,6 @@ namespace Hotcakes.Commerce.Marketing
         Sale = 1,
 
         /// <summary>
-        ///     An offer where qualifications must be met to receive the promotion.
-        /// </summary>
-        [Obsolete("Use one of the following Promotion Types instead: OfferForLineItems, OfferForOrder, OfferForShipping"
-            )] Offer = 2,
-
-        /// <summary>
         ///     Promotion exclusively for affiliates.
         /// </summary>
         Affiliate = 3,

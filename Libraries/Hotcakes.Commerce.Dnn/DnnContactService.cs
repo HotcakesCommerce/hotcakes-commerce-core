@@ -42,16 +42,6 @@ namespace Hotcakes.Commerce.Dnn
             _portalId = DnnGlobal.Instance.GetPortalId();
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public DnnContactService(HccRequestContext context, bool isForMemoryOnly)
-            : this(context)
-        {
-        }
-
-        #endregion
-
         public override void UpdateProfileAffiliateId(long affiliateId)
         {
             var aff = Affiliates.Find(affiliateId);

@@ -69,23 +69,5 @@ namespace Hotcakes.Commerce
 
         T CreateService<T>() where T : HccServiceBase;
         T CreateService<T>(HccRequestContext context) where T : HccServiceBase;
-
-        [Obsolete("Obsolete in 1.8.0. Use CreateSearchProvider instead")]
-        ISearchProvider CreateSearchProductProvider(HccRequestContext hccRequestContext);
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        MembershipServices CreateMembershipServices(HccRequestContext context, bool isForMemoryOnly);
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        AccountService CreateAccountService(HccRequestContext context, bool isForMemoryOnly);
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        CatalogService CreateCatalogService(HccRequestContext context, bool isForMemoryOnly);
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        ContactService CreateContactService(HccRequestContext context, bool isForMemoryOnly);
-
-        [Obsolete("Obsolete in 2.0.0. Use same method with other parameters instead")]
-        WorkflowFactory CreateWorkflowFactory(HotcakesApplication hccApp);
     }
 }

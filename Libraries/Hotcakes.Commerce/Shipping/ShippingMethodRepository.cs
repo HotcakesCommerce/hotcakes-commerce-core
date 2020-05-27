@@ -44,17 +44,6 @@ namespace Hotcakes.Commerce.Shipping
         {
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public ShippingMethodRepository(HccRequestContext c, IRepositoryStrategy<hcc_Stores> r,
-            IRepositoryStrategy<hcc_StoreSettings> subr, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
-
         protected override Expression<Func<hcc_ShippingMethod, Guid>> ItemKeyExp
         {
             get { return sm => sm.bvin; }

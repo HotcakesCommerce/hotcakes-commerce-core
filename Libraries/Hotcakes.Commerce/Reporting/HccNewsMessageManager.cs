@@ -57,27 +57,5 @@ namespace Hotcakes.Commerce.Reporting
         {
             return FindListPoco(q => q.OrderByDescending(y => y.TimeStampUtc).Take(maxItems));
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static HccNewsMessageManager InstantiateForMemory(HccRequestContext c)
-        {
-            return new HccNewsMessageManager(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static HccNewsMessageManager InstantiateForDatabase(HccRequestContext c)
-        {
-            return new HccNewsMessageManager(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public HccNewsMessageManager(HccRequestContext c, IRepositoryStrategy<hcc_News> r)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

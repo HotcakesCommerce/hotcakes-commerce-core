@@ -124,27 +124,5 @@ namespace Hotcakes.Commerce.Orders
             var orderGuid = DataTypeHelper.BvinToGuid(orderBvin);
             MergeList(subitems, on => on.OrderId == orderGuid && on.StoreId == storeId);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static OrderNoteRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new OrderNoteRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static OrderNoteRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new OrderNoteRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public OrderNoteRepository(IRepositoryStrategy<hcc_OrderNote> strategy, ILogger log)
-            : this(HccRequestContext.Current)
-        {
-        }
-
-        #endregion
     }
 }

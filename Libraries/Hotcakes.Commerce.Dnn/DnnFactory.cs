@@ -185,33 +185,5 @@ namespace Hotcakes.Commerce.Dnn
         {
             return Activator.CreateInstance(type, context);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public override ContactService CreateContactService(HccRequestContext context, bool isForMemoryOnly)
-        {
-            return CreateService<ContactService>(context);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public override MembershipServices CreateMembershipServices(HccRequestContext context, bool isForMemoryOnly)
-        {
-            return new DnnMembershipServices(context, isForMemoryOnly);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public override AccountService CreateAccountService(HccRequestContext context, bool isForMemoryOnly)
-        {
-            return new DnnAccountService(context, isForMemoryOnly);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public override CatalogService CreateCatalogService(HccRequestContext context, bool isForMemoryOnly)
-        {
-            return new DnnCatalogService(context, isForMemoryOnly);
-        }
-
-        #endregion
     }
 }

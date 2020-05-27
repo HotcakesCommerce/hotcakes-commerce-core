@@ -41,16 +41,6 @@ namespace Hotcakes.Commerce.Content
         {
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public HtmlTemplateRepository(HccRequestContext context, bool isForMemoryOnly)
-            : this(context)
-        {
-        }
-
-        #endregion
-
         protected override Expression<Func<hcc_HtmlTemplates, long>> ItemKeyExp
         {
             get { return ht => ht.Id; }

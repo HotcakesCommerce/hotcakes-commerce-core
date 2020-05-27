@@ -446,8 +446,10 @@ namespace Hotcakes.Modules.Core.Controllers
         private void RegisterSocialFunctionality(ProductPageViewModel model)
         {
             var socialService = HccApp.SocialService;
+            socialService.SaveProductToJournal(model.LocalProduct);
 
-            model.SocialItem = socialService.GetProductSocialItem(model.LocalProduct);
+            // Obsolete - may need to add a method to retrieve the social item in the future (if integrating directly into Evoq Social again)
+            //model.SocialItem = socialService.GetProductSocialItem(model.LocalProduct);
 
             // Social Media Globals
             ViewBag.UseFaceBook = HccApp.CurrentStore.Settings.FaceBook.UseFaceBook;

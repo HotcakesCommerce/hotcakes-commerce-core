@@ -46,17 +46,7 @@ namespace Hotcakes.Commerce.Dnn
         {
             Customers = new DnnCustomerAccountRepository(Context);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public DnnMembershipServices(HccRequestContext c, bool isForMemoryOnly)
-            : this(c)
-        {
-        }
-
-        #endregion
-
+        
         public override bool LoginUser(string username, string password, out string errorMessage, out string userId)
         {
             var psett = PortalSettings.Current;

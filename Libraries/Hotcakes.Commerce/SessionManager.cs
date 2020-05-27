@@ -572,20 +572,5 @@ namespace Hotcakes.Commerce
         }
 
         #endregion
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.7.5. Use OrderService.CurrentShoppingCart instead.")]
-        public static Order CurrentShoppingCart(OrderService svc, Store currentStore)
-        {
-            return svc.CurrentShoppingCart();
-        }
-
-        [Obsolete("Obsolete in 1.7.5. Use OrderService.InvalidateCachedCart instead.")]
-        public static void InvalidateCachedCart()
-        {
-        }
-
-        #endregion
     }
 }

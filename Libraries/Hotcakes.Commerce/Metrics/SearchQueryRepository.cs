@@ -196,27 +196,5 @@ namespace Hotcakes.Commerce.Metrics
             public int Count { get; set; }
             public decimal Percentage { get; set; }
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static SearchQueryRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new SearchQueryRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static SearchQueryRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new SearchQueryRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public SearchQueryRepository(HccRequestContext c, IRepositoryStrategy<hcc_SearchQuery> r, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

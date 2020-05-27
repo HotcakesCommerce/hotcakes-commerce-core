@@ -274,53 +274,5 @@ namespace Hotcakes.Commerce.Content
             }
             return ReplaceTagsInTemplate(context, order, order.PackagesAsReplaceable());
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 2.0.0. Use same method with other parameters instead")]
-        public List<HtmlTemplateTag> GetEmptyReplacementTags(HotcakesApplication app)
-        {
-            return GetEmptyReplacementTags(app.CurrentRequestContext);
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Use same method with other parameters instead")]
-        public HtmlTemplate ReplaceTagsInTemplate(HotcakesApplication app, IReplaceable item)
-        {
-            return ReplaceTagsInTemplate(app.CurrentRequestContext, item);
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Use same method with other parameters instead")]
-        public HtmlTemplate ReplaceTagsInTemplate(HotcakesApplication app, IReplaceable item,
-            List<IReplaceable> repeatingItems)
-        {
-            return ReplaceTagsInTemplate(app.CurrentRequestContext, item, repeatingItems);
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Use same method with other parameters instead")]
-        public HtmlTemplate ReplaceTagsInTemplate(HotcakesApplication app, List<IReplaceable> items)
-        {
-            return ReplaceTagsInTemplate(app.CurrentRequestContext, items, new List<IReplaceable>());
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Use same method with other parameters instead")]
-        public HtmlTemplate ReplaceTagsInTemplate(HotcakesApplication app, List<IReplaceable> items,
-            List<IReplaceable> repeatingItems)
-        {
-            return ReplaceTagsInTemplate(app.CurrentRequestContext, items, repeatingItems);
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Use same method with other parameters instead")]
-        public List<HtmlTemplateTag> DefaultReplacementTags(HotcakesApplication app)
-        {
-            return DefaultReplacementTags(app.CurrentRequestContext);
-        }
-
-        [Obsolete("Obsolete in 2.0.0. Use same method with other parameters instead")]
-        public HtmlTemplate ReplaceTagsInTemplateForOrder(HotcakesApplication app, Order order)
-        {
-            return ReplaceTagsInTemplateForOrder(app.CurrentRequestContext, order);
-        }
-
-        #endregion
     }
 }

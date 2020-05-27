@@ -50,16 +50,6 @@ namespace Hotcakes.Commerce.Dnn
 
         #endregion
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public DnnProductRepository(HccRequestContext c, bool isForMemoryOnly, ICatalogSharedRepositories shReps)
-            : this(c)
-        {
-        }
-
-        #endregion
-
         #region Public methods
 
         public override bool Create(Product item)

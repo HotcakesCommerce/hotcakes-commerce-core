@@ -42,17 +42,6 @@ namespace Hotcakes.Commerce.Marketing
         {
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public PromotionRepository(HccRequestContext c, IRepositoryStrategy<hcc_Stores> r,
-            IRepositoryStrategy<hcc_StoreSettings> subr, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
-
         protected override Expression<Func<hcc_Promotions, long>> ItemKeyExp
         {
             get { return p => p.Id; }

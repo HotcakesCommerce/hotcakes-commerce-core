@@ -55,16 +55,6 @@ namespace Hotcakes.Commerce.Catalog
 
         #endregion
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public ProductRepository(HccRequestContext c, ICatalogSharedRepositories shReps)
-            : this(c)
-        {
-        }
-
-        #endregion
-
         #region Fields
 
         protected OptionRepository optionRespository;

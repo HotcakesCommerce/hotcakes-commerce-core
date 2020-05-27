@@ -44,16 +44,6 @@ namespace Hotcakes.Commerce.Dnn
             _socialService = Factory.CreateSocialService(context);
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public DnnCategoryRepository(HccRequestContext c, bool isForMemoryOnly)
-            : this(c)
-        {
-        }
-
-        #endregion
-
         #region Public methods
 
         public override bool Create(Category item)

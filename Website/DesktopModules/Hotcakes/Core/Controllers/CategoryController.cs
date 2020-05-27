@@ -188,8 +188,10 @@ namespace Hotcakes.Modules.Core.Controllers
             if (!string.IsNullOrWhiteSpace(model.LocalCategory.Bvin))
             {
                 var socialService = HccApp.SocialService;
+                socialService.SaveCategoryToJournal(model.LocalCategory);
 
-                model.SocialItem = socialService.GetCategorySocialItem(model.LocalCategory);
+                // Obsolete in 3.0 - may need to consider adding back in a future release, if integrating with Evoq Social again
+                //model.SocialItem = socialService.GetCategorySocialItem(model.LocalCategory);
 
                 RenderFacebookMetaTags(model);
             }

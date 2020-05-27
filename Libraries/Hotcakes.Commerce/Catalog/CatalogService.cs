@@ -37,21 +37,13 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Catalog
 {
-    [Obsolete("Obsolete in 1.8.0. Is not used any longer")]
-    public interface ICatalogSharedRepositories
-    {
-        VariantRepository ProductVariants { get; }
-    }
-
     /// <summary>
     ///     Service interface to talk with different catalog repositories for
-    ///     product, category, variant, giftcard, product properties to perform
+    ///     product, category, variant, gift card, product properties to perform
     ///     different database operations.
     /// </summary>
     /// <remarks>All repository objects are read only to whole project.  Values cannot be set outside of this service class.</remarks>
-#pragma warning disable 0612, 0618
-    public abstract class CatalogService : HccServiceBase, ICatalogSharedRepositories
-#pragma warning restore 0612, 0618
+    public abstract class CatalogService : HccServiceBase
     {
         /// <summary>
         ///     Initialize the repository from the database factory.
@@ -2153,62 +2145,6 @@ namespace Hotcakes.Commerce.Catalog
         {
             var analyticsService = Factory.CreateService<AnalyticsService>(Context);
             analyticsService.RegisterEvent(Context.CurrentAccount.Bvin, ActionTypes.CategoryProductsUpdated, categoryId);
-        }
-
-        #endregion
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public CatalogService(HccRequestContext c, bool isForMemoryOnly)
-            : this(c)
-        {
-        }
-
-        // Products and Line Items
-        [Obsolete("Obsolete in 1.8.0. Use Product.ConvertToLineItem(...) function.")]
-        public LineItem ConvertProductToLineItem(IPurchasable p, OptionSelections selections, int quantity,
-            HotcakesApplication app, decimal? userPrice = null)
-        {
-            //Orders.LineItem li = new Orders.LineItem();
-
-            //if (p != null)
-            //{
-            //	Orders.PurchasableSnapshot snapshot = p.AsPurchasable(selections, app, true);
-            //	if (snapshot != null)
-            //	{
-            //		li.BasePricePerItem = userPrice.HasValue ? userPrice.Value : snapshot.BasePrice;
-            //		li.IsUserSuppliedPrice = userPrice.HasValue;
-            //		li.ProductId = snapshot.ProductId;
-            //		li.ProductName = snapshot.Name;
-
-            //		li.ProductShortDescription = snapshot.Description;
-            //		li.ProductSku = snapshot.Sku;
-            //		li.Quantity = quantity;
-            //		li.SelectionData = snapshot.SelectionData;
-            //		li.VariantId = snapshot.VariantId;
-            //		li.TaxSchedule = snapshot.TaxScheduleId;
-            //		li.IsTaxExempt = snapshot.IsTaxExempt;
-
-            //		li.ProductShippingHeight = snapshot.ShippingDetails.Height;
-            //		li.ProductShippingLength = snapshot.ShippingDetails.Length;
-            //		li.ProductShippingWeight = snapshot.ShippingDetails.Weight;
-            //		li.ProductShippingWidth = snapshot.ShippingDetails.Width;
-            //		li.IsNonShipping = snapshot.ShippingDetails.IsNonShipping;
-            //		li.ShipFromAddress = snapshot.ShippingDetails.ShippingSourceAddress;
-            //		li.ShipFromMode = snapshot.ShippingDetails.ShippingSource;
-            //		li.ShipFromNotificationId = snapshot.ShippingDetails.ShippingSourceId;
-            //		li.ShipSeparately = snapshot.ShippingDetails.ShipSeparately;
-            //		li.ExtraShipCharge = snapshot.ShippingDetails.ExtraShipFee;
-
-            //		li.IsBundle = snapshot.IsBundle;
-            //		li.IsGiftCard = snapshot.IsGiftCard;
-            //		li.IsRecurring = snapshot.IsRecurring;
-            //	}
-            //}
-
-            //return li;
-            return (p as Product).ConvertToLineItem(app, quantity, selections, userPrice);
         }
 
         #endregion

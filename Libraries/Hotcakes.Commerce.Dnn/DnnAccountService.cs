@@ -43,16 +43,6 @@ namespace Hotcakes.Commerce.Dnn
 
         #endregion
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public DnnAccountService(HccRequestContext c, bool isForMemoryOnly)
-            : this(c)
-        {
-        }
-
-        #endregion
-
         #region Properties
 
         public PortalSettings CurrentPortalSettings

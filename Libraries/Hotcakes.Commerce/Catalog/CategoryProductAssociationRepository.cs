@@ -467,28 +467,5 @@ namespace Hotcakes.Commerce.Catalog
         {
             Delete(y => y.StoreId == storeId);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static CategoryProductAssociationRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new CategoryProductAssociationRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static CategoryProductAssociationRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new CategoryProductAssociationRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public CategoryProductAssociationRepository(HccRequestContext c, IRepositoryStrategy<hcc_ProductXCategory> r,
-            ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

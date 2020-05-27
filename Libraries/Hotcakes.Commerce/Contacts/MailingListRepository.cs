@@ -221,29 +221,5 @@ namespace Hotcakes.Commerce.Contacts
         {
             Delete(y => y.StoreId == storeId);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static MailingListRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new MailingListRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static MailingListRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new MailingListRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        private MailingListRepository(HccRequestContext c, IRepositoryStrategy<hcc_MailingList> r,
-            IRepositoryStrategy<hcc_MailingListMember> subr,
-            ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

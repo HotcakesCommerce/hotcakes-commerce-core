@@ -55,9 +55,6 @@ namespace Hotcakes.Commerce.Contacts
             Notes = string.Empty;
             LastUpdatedUtc = DateTime.UtcNow;
             CreationDate = DateTime.UtcNow;
-#pragma warning disable 0612, 0618
-            Contacts = new List<AffiliateContact>();
-#pragma warning restore 0612, 0618
         }
 
         /// <summary>
@@ -169,12 +166,6 @@ namespace Hotcakes.Commerce.Contacts
         public string Notes { get; set; }
 
         /// <summary>
-        ///     Contains a listing of the customers that currently assigned to the affiliate
-        /// </summary>
-        [Obsolete("Obsolete in 1.8.0. Affiliate contacts are not used")]
-        public List<AffiliateContact> Contacts { get; set; }
-
-        /// <summary>
         ///     Allows you to return a listing of token key/value pairs that can be replaced in areas such as the email template
         /// </summary>
         /// <param name="context">The context.</param>
@@ -230,12 +221,6 @@ namespace Hotcakes.Commerce.Contacts
             dto.WebSiteUrl = WebSiteUrl;
             dto.Notes = Notes;
             dto.LastUpdatedUtc = LastUpdatedUtc;
-#pragma warning disable 0612, 0618
-            foreach (var contact in Contacts)
-            {
-                dto.Contacts.Add(contact.ToDto());
-            }
-#pragma warning restore 0612, 0618
             return dto;
         }
 
@@ -262,15 +247,6 @@ namespace Hotcakes.Commerce.Contacts
             WebSiteUrl = dto.WebSiteUrl;
             Notes = dto.Notes;
             LastUpdatedUtc = dto.LastUpdatedUtc;
-#pragma warning disable 0612, 0618
-            Contacts.Clear();
-            foreach (var contact in dto.Contacts)
-            {
-                var c = new AffiliateContact();
-                c.FromDto(contact);
-                Contacts.Add(c);
-            }
-#pragma warning restore 0612, 0618
         }
 
         #endregion

@@ -47,11 +47,6 @@ namespace Hotcakes.Modules.Core.Models
             UserPrice = null;
             ProductLink = string.Empty;
             SwatchDisplay = string.Empty;
-
-#pragma warning disable 0612, 0618
-            ImageUrl = string.Empty;
-            OriginalImageUrl = string.Empty;
-#pragma warning restore 0612, 0618
         }
 
         /// <summary>
@@ -73,20 +68,6 @@ namespace Hotcakes.Modules.Core.Models
             ImageUrls.LoadProductImageUrls(hccApp, p);
 
             SwatchDisplay = ImageHelper.GenerateSwatchHtmlForProduct(p, hccApp);
-
-#pragma warning disable 0612, 0618
-            ImageUrl = DiskStorage.ProductImageUrlSmall(
-                hccApp,
-                p.Bvin,
-                p.ImageFileSmall,
-                hccApp.IsCurrentRequestSecure());
-
-            OriginalImageUrl = DiskStorage.ProductImageUrlOriginal(
-                hccApp,
-                p.Bvin,
-                p.ImageFileSmall,
-                hccApp.CurrentRequestContext.RoutingContext.HttpContext.Request.IsSecureConnection);
-#pragma warning restore 0612, 0618
         }
 
         /// <summary>
@@ -107,18 +88,6 @@ namespace Hotcakes.Modules.Core.Models
         ///     <see cref="ProductImageUrls" />
         /// </summary>
         public ProductImageUrls ImageUrls { get; set; }
-
-        /// <summary>
-        ///     Main image URL
-        /// </summary>
-        [Obsolete("Obsolete in 1.2.0. Use ImageUrls property.")]
-        public string ImageUrl { get; set; }
-
-        /// <summary>
-        ///     Actual uploaded image URL without resize
-        /// </summary>
-        [Obsolete("Obsolete in 1.2.0. Use ImageUrls property.")]
-        public string OriginalImageUrl { get; set; }
 
         /// <summary>
         ///     Product detail page link

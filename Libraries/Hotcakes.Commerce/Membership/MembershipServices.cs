@@ -39,16 +39,6 @@ namespace Hotcakes.Commerce.Membership
             UserQuestions = Factory.CreateRepo<UserQuestionRepository>(Context);
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public MembershipServices(HccRequestContext c, bool isForMemoryOnly)
-            : this(c)
-        {
-        }
-
-        #endregion
-
         public UserQuestionRepository UserQuestions { get; protected set; }
         public ICustomerAccountRepository Customers { get; protected set; }
 

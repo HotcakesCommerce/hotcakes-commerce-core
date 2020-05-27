@@ -558,21 +558,5 @@ namespace Hotcakes.Commerce.Catalog
         }
 
         #endregion
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public CategoryRepository(HccRequestContext context, bool isForMemoryOnly)
-            : this(context)
-        {
-        }
-
-        [Obsolete("Obsolete in 1.8.0. No need to call this method")]
-        public bool SubmitChanges()
-        {
-            return true;
-        }
-
-        #endregion
     }
 }
