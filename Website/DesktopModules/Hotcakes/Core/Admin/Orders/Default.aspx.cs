@@ -111,6 +111,9 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 			}
 
             SessionManager.SetCookieString("AdminLastManager", "Default.aspx?p=" + pageNumber);
+
+            LocalizeView();
+
 			FindOrders(pageNumber);
 		}
 
@@ -166,6 +169,11 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 			lstPrintTemplate.DataValueField = "Id";
 			lstPrintTemplate.DataBind();
 		}
+
+        private void LocalizeView()
+        {
+            LocalizationUtils.LocalizeGridView(gvOrders, Localization);
+        }
 
 		// Searching
 		private void FindOrders(int pageNumber)
