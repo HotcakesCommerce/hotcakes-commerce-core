@@ -168,4 +168,10 @@
   <data name="CartOutOfStock.Text" xml:space="preserve">
     <value>{0} Is Out Of Stock. Please Remove It.</value>
   </data>
+  <data name="GiftCardMessage.Text" xml:space="preserve">
+    <value>Message:</value>
+  </data>
+  <data name="SetMyOwn.Text" xml:space="preserve">
+    <value>Set My Own</value>
+  </data>
 </root>

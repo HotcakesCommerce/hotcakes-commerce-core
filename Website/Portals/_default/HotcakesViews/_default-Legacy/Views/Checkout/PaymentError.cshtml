@@ -1,0 +1,40 @@
+﻿@model Hotcakes.Modules.Core.Models.CheckoutViewModel
+@using Hotcakes.Modules.Core.Models;
+
+<div class="hc-checkout">
+    <div class="dnnFormMessage dnnFormWarning">@Localization.GetString("PaymentFailed")</div>
+    <h2>@Localization.GetString("UpdatePaymentInfo")</h2>
+    @Html.Raw((string)TempData["messages"])
+    <div class="dnnForm">
+        @using (Html.BeginHccRouteForm(HccRoute.Checkout, new { action = "paymenterror" }))
+        {
+            <div class="hc-billing-section">
+                <h3>@Localization.GetString("BillingAddress")</h3>
+                <div id="hcBillingWrapper">
+                    @Html.Partial("_CheckoutAddress", new CheckoutAddressViewModel()
+                    {
+                        Address = Model.CurrentOrder.BillingAddress,
+                        Prefix = "billing",
+                        TabIndex = 450,
+                        ShowPhone = false,
+                        Countries = Model.Countries,
+                        Violations = Model.Violations
+                    })
+                </div>
+            </div>
+
+            <div class="hc-payment-section">
+                <h3>@Localization.GetString("PaymentMethod")</h3>
+                @Html.Partial("_DisplayPaymentMethods", Model)
+            </div>
+            <ul class="dnnActions">
+                <li>
+                    <input type="submit" id="btnsubmit" class="dnnPrimaryAction" value="@Localization.GetString("PlaceOrder")" tabindex="3001" />
+                </li>
+                <li>
+                    <a class="dnnSecondaryAction" href="@Url.RouteHccUrl(HccRoute.Checkout, new { action = "cancel" })" tabindex="3002">@Localization.GetString("CancelOrder")</a>
+                </li>
+            </ul>
+        }
+    </div>
+</div>

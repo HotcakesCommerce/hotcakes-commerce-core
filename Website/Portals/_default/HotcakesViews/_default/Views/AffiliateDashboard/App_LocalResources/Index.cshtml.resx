@@ -120,6 +120,9 @@
   <data name="AffiliateTools.Text" xml:space="preserve">
     <value>Affiliate Tools</value>
   </data>
+  <data name="NoAffiliate.Text" xml:space="preserve">
+    <value>No affiliate data was found for the current user account. Please contact the store if you believe this message is an error.</value>
+  </data>
   <data name="TabCommissions.Text" xml:space="preserve">
     <value>Commission Reporting </value>
   </data>

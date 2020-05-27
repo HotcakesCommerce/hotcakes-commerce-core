@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Hotcakes.Modules.Core.Areas.Account.Models.SavedItemViewModel>
+
+    <h2>@Localization.GetString("SavedItems")</h2>
+    @Html.Raw((string)TempData["messages"])
+    <div class="hc-record-list hc-wishlist clearfix">
+        @foreach (var item in Model)
+        {
+            <div class="hc-record">
+                <div class="hc-recimage">
+                    <a href="@item.FullProduct.ProductLink">
+                        <img src="@item.FullProduct.ImageUrls.SmallUrl" border="0" alt="@item.FullProduct.ImageUrls.SmallAltText" />
+                    </a>
+                </div>
+                <div class="hc-recname">
+                    <h2>@item.FullProduct.Item.ProductName</h2>
+                    <div class="hc-recdescription">
+                        @Html.Raw(item.FullProduct.Item.LongDescription)
+                        @Html.Raw(item.SavedItem.ProductShortDescription)
+                    </div>
+                </div>
+                <div class="hc-reccontrols">
+                    <table class="dnnFormItem">
+                        <tr>
+                            <td class="hc-recprice">
+                                @Html.Raw(item.FullProduct.UserPrice.DisplayPrice(true))
+                            </td>
+                            <td>
+                                @if(!item.FullProduct.Item.IsGiftCard && !item.FullProduct.Item.IsUserSuppliedPrice)
+                                {
+                                    using (Html.BeginHccRouteForm(HccRoute.WishList, new { action = "addtocart" }, FormMethod.Post))
+                                    {
+                                        <input type="hidden" name="itemid" value="@item.SavedItem.Id" />
+                                        <input class="dnnPrimaryAction" type="submit" value="@Localization.GetString("AddToCart")" />
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @using (Html.BeginHccRouteForm(HccRouteNames.WishList, new { action = "delete" }, FormMethod.Post))
+                                {
+                                    <input type="hidden" name="itemid" value="@item.SavedItem.Id" />
+                                    <input type="submit"  class="hc-delete" value="@Localization.GetString("RemoveSavedItem")" />
+                                }
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+                            }
+    </div>

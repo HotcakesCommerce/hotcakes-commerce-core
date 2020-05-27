@@ -1,0 +1,46 @@
+﻿@model Hotcakes.Modules.Core.Models.CheckoutViewModel
+
+<div class="dnnForm">
+    <div id="hcGiftCardSummary" class="dnnFormMessage dnnFormWarning" style="display: none">
+        @Html.Raw(Model.GiftCards.Summary)
+    </div>
+    <div id="hcGiftCardsFormItem" class="dnnFormItem" 
+        @if(Model.GiftCards.Cards.Count == 0){ <text>style="display: none"</text> }
+        >
+        <label class="dnnLabel">@Localization.GetString("LabelGiftCards")</label>
+        <div class="hc-controls">
+            <table class="dnnGrid" id="hcGiftCardList">
+                <tr class="dnnGridHeader">
+                    <td>@Localization.GetString("ColumnCardNumber")</td>
+                    <td>@Localization.GetString("ColumnBalance")</td>
+                    <td>@Localization.GetString("ColumnCharge")</td>
+                    <td></td>
+                </tr>
+                @foreach (var gc in Model.GiftCards.Cards)
+                {
+                    <tr class="dnnGridItem hcGiftCardRow">
+                        <td>@gc.CardNumber</td>
+                        <td>@gc.Balance</td>
+                        <td>@gc.Charge</td>
+                        <td class="hc-actions">
+                            <input type="button" class="hc-delete" value="Remove">
+                        </td>
+                    </tr>
+                }
+                <tr class="dnnGridItem hcGiftCardRow" style="display: none">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="hc-actions">
+                        <input type="button" class="hc-delete" value="Remove">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="hcGiftCardsFormAction" class="dnnFormItem">
+        <label class="dnnLabel">@Localization.GetString("LabelGiftCardNumber")</label>
+        <input type="text" id="hcGiftCardNumber" style="width: 25%" />
+        <a id="hcGiftCardButton" class="dnnSecondaryAction">@Localization.GetString("ButtonApply")</a>
+    </div>
+</div>

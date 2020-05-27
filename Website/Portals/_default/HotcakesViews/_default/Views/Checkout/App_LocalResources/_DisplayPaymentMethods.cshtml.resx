@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AcctNumber.Text" xml:space="preserve">
+    <value>Account</value>
+  </data>
   <data name="PaymentCheck.Text" xml:space="preserve">
     <value>Send a Check by Mail</value>
   </data>
@@ -149,5 +152,8 @@
   </data>
   <data name="PaymentOgone.Text" xml:space="preserve">
     <value>Ogone Payment Page</value>
+  </data>
+  <data name="PoNumber.Text" xml:space="preserve">
+    <value>PO Number</value>
   </data>
 </root>

@@ -153,6 +153,35 @@
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\views.min.css">
       <DependentUpon>views.css</DependentUpon>
     </Content>
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Images\attachment.png" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Images\bookmark.png" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Images\bookmarkSelect.png" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Images\creditcards.png" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Images\creditcards_disabled.png" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Images\delete.png" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Images\Likes.png" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Images\LikeSelect.png" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Images\minicart.png" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Images\ReviewStars.png" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Images\rss.png" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Images\rssSelect.png" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Images\search.png" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Images\spinner.gif" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\AddressBook.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\AddressEditor.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\AffiliateDashboard.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\AffiliateRegistration.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\Category.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\Checkout.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\EditBilling.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\EstimateShipping.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\ImageRotator.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\OrderHistory.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\Pager.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\Products.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\Receipt.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\views.css" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\views.min.css" />
     <Content Include="Portals\_default\HotcakesViews\_default\Images\attachment.png" />
     <Content Include="Portals\_default\HotcakesViews\_default\Images\bookmark.png" />
     <Content Include="Portals\_default\HotcakesViews\_default\Images\bookmarkSelect.png" />
@@ -171,15 +200,21 @@
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\AddressEditor.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\AffiliateDashboard.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\AffiliateRegistration.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Cart.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Category.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Checkout.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\clipboard.min.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\EditBilling.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\EstimateShipping.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\ImageRotator.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\masonry.min.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\OrderHistory.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Pager.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\ProductGrid.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Products.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Receipt.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Search.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Search.SearchInput.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\views.css">
       <DependentUpon>views.less</DependentUpon>
     </Content>
@@ -240,7 +275,6 @@
     <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\_AddressEditor.cshtml" />
     <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\_FaceBookLike.cshtml" />
     <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\_FaceBookSetup.cshtml" />
-    <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\_GooglePlusOne.cshtml" />
     <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\_OrderPaymentSummary.cshtml" />
     <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\_Pager.cshtml" />
     <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\_Twitter.cshtml" />
@@ -397,7 +431,7 @@
     <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\_Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Portals\_default\HotcakesViews\_default\_views_nobootstrap.less" />
+    <Content Include="Portals\_default\HotcakesViews\_default\_views_bootstrap.less" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Areas\account\Views\AddressBook\Edit.cshtml" />
@@ -818,6 +852,232 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Views\Products\App_LocalResources\_Admin.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\AddressBook\Edit.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\AddressBook\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\OrderHistory\Details.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\OrderHistory\DownloadFileError.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\OrderHistory\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\Shared\_OrderDownloads.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\WishList\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\AdminContent\Views\FileBrowser\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\AdminContent\Views\Shared\_PopupLayout.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\ContentBlocks\Views\CategoryRotator\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\ContentBlocks\Views\FeaturedProducts\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\ContentBlocks\Views\Html\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\ContentBlocks\Views\ImageRotator\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\ContentBlocks\Views\ProductRotator\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\ContentBlocks\Views\RssFeedViewer\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\views.less" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\AffiliateDashboard\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\AffiliateDashboard\_AffiliateProfile.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\AffiliateDashboard\_Commissions.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\AffiliateDashboard\_Payments.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\AffiliateDashboard\_Referrals.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\AffiliateDashboard\_UrlBuilder.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\AffiliateRegistration\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\BreadCrumb\BreadCrumb.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Cart\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Cart\MiniCart.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\CategoryMenu\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\CategoryMenu\MenuItem.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\BulkOrderList.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\BulkQuantityList.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\DetailedList.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\DrillDown.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\Grid.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\SimpleList.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\_Admin.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\_DrillDownFilter.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\_Header.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\PaymentError.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\Receipt.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\_CheckoutAddress.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\_CreditCardInput.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\_DisplayPaymentMethods.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\_GiftCards.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\_Login.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\_NormalizeAddressDialog.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\_SetFirstPassword.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\ContentColumn\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\EstimateShipping\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\LastProductsViewed\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\MonerisCheckout\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\OgoneCheckout\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\PayPalExpressCheckout\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\ProductGrid\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\ProductReviews\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\ProductReviews\TopReviews.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\ProductReviews\_SingleReview.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Products\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Products\_Admin.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Products\_ProductDetails.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Products\_Rating.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Products\_Reviews.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Search\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Search\LinksFilters.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Search\SearchInput.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\_AddressEditor.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\_Error.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\_FaceBookLike.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\_FaceBookSetup.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\_GooglePlusOne.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\_OrderPaymentSummary.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\_Pager.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\_PagerKo.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\_Pinterest.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\_RenderBundledProduct.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\_RenderSingleProduct.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\_RenderSingleProductDetailed.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\_RenderSingleProductSimple.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\_Twitter.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\_ViewOrder.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\_ViewOrderAdditional.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\_ViewOrderItems.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Top10Products\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\TopWeeklySellers\Index.cshtml" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Web.config" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\_views_areas.less" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\_views_common.less" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\_views_nobootstrap.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\AddressBook\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\AddressBook\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\AddressBook\App_LocalResources\Edit.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\AddressBook\App_LocalResources\Edit.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\AddressBook\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\AddressBook\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\OrderHistory\App_LocalResources\Details.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\OrderHistory\App_LocalResources\Details.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\OrderHistory\App_LocalResources\DownloadFileError.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\OrderHistory\App_LocalResources\DownloadFileError.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\OrderHistory\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\OrderHistory\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\Shared\App_LocalResources\_OrderDownloads.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\Shared\App_LocalResources\_OrderDownloads.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\WishList\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\WishList\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\WishList\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Areas\Account\Views\WishList\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\App_LocalResources\ScriptResources.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\App_LocalResources\ScriptResources.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\AffiliateDashboard\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\AffiliateDashboard\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\AffiliateDashboard\App_LocalResources\_AffiliateProfile.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\AffiliateDashboard\App_LocalResources\_Commissions.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\AffiliateDashboard\App_LocalResources\_Payments.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\AffiliateDashboard\App_LocalResources\_Referrals.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\AffiliateRegistration\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\AffiliateRegistration\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\App_LocalResources\CreditCardViewModel.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\App_LocalResources\GlobalResources.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\App_LocalResources\GlobalResources.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\BreadCrumb\App_LocalResources\BreadCrumb.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\BreadCrumb\App_LocalResources\BreadCrumb.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Cart\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Cart\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Cart\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Cart\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Cart\App_LocalResources\MiniCart.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Cart\App_LocalResources\MiniCart.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\CategoryMenu\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\App_LocalResources\BulkOrderList.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\App_LocalResources\BulkOrderList.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\App_LocalResources\BulkQuantityList.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\App_LocalResources\BulkQuantityList.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\App_LocalResources\_Admin.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\App_LocalResources\_DrillDownFilter.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Category\App_LocalResources\_Header.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\PaymentError.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\PaymentError.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\Receipt.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\Receipt.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\_CheckoutAddress.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\_CheckoutAddress.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\_CreditCardInput.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\_CreditCardInput.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\_DisplayPaymentMethods.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\_DisplayPaymentMethods.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\_GiftCards.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\_Login.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\_NormalizeAddressDialog.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\_SetFirstPassword.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\_SetFirstPassword.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Checkout\App_LocalResources\_Subscriptions.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\EstimateShipping\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\EstimateShipping\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\EstimateShipping\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\EstimateShipping\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\MonerisCheckout\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\MonerisCheckout\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\MonerisCheckout\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\MonerisCheckout\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\OgoneCheckout\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\OgoneCheckout\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\OgoneCheckout\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\OgoneCheckout\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\PayPalExpressCheckout\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\PayPalExpressCheckout\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\PayPalExpressCheckout\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\PayPalExpressCheckout\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\ProductReviews\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\ProductReviews\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\ProductReviews\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\ProductReviews\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\ProductReviews\App_LocalResources\_SingleReview.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\ProductReviews\App_LocalResources\_SingleReview.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Products\App_LocalResources\Controller.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Products\App_LocalResources\Controller.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Products\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Products\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Products\App_LocalResources\_Admin.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Products\App_LocalResources\_ProductDetails.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Products\App_LocalResources\_Rating.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Products\App_LocalResources\_Reviews.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Search\App_LocalResources\CheckboxFilters.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Search\App_LocalResources\CheckboxFilters.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Search\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Search\App_LocalResources\Index.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Search\App_LocalResources\LinksFilters.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Search\App_LocalResources\LinksFilters.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\App_LocalResources\_AddressEditor.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\App_LocalResources\_AddressEditor.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\App_LocalResources\_OrderPaymentSummary.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\App_LocalResources\_OrderPaymentSummary.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\App_LocalResources\_Pager.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\App_LocalResources\_Pinterest.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\App_LocalResources\_RenderSingleProductDetailed.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\App_LocalResources\_RenderSingleProductDetailed.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\App_LocalResources\_ViewOrder.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\App_LocalResources\_ViewOrder.cshtml.uk-UA.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\App_LocalResources\_ViewOrderAdditional.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\App_LocalResources\_ViewOrderItems.cshtml.resx" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Views\Shared\App_LocalResources\_ViewOrderItems.cshtml.uk-UA.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\App_LocalResources\_RenderSingleProduct.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\_default\Views\Category\App_LocalResources\DrillDown.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\App_LocalResources\_PagerKo.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\_default\Views\Shared\App_LocalResources\_RenderBundledProduct.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Portals\_default\HotcakesViews\_default\Views\ProductReviews\App_LocalResources\TopReviews.cshtml.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

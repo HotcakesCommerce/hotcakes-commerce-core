@@ -1,0 +1,26 @@
+﻿@model Hotcakes.Modules.Core.Models.SearchPageViewModel
+<div class="hc-search-results">
+    <div class="clearfix">
+        <h2>@Localization.GetString("Search") | @ViewBag.Search</h2>
+    </div>
+
+    @Html.Partial("_Pager", Model.PagerData)
+    @if (Model.Products.Count > 0)
+    {
+        <div class="hc-record-grid hc-product-grid clearfix">
+            @foreach (var item in Model.Products)
+            {
+                <div class="hc-wrap3">
+                    @Html.Partial("_RenderSingleProduct", item)
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="clearfix">
+            @Localization.GetString("ProductsNotFound")
+        </div>
+    }
+    @Html.Partial("_Pager", Model.PagerData)
+</div>

@@ -29,6 +29,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
+using DotNetNuke.Security;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Analytics;
 using Hotcakes.Commerce.Catalog;
@@ -50,6 +51,8 @@ namespace Hotcakes.Modules.Core.Controllers
     [Serializable]
     public class ProductsController : BaseStoreController
     {
+        private PortalSecurity security = new PortalSecurity();
+
         #region Internal declarations
 
         public class ProductValidateResponse
@@ -176,6 +179,9 @@ namespace Hotcakes.Modules.Core.Controllers
         public ActionResult Validate()
         {
             var productBvin = Request.Form["productbvin"];
+
+            if (!string.IsNullOrEmpty(productBvin)) productBvin = security.InputFilter(productBvin.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+
             var product = HccApp.CatalogServices.Products.FindWithCache(productBvin);
             var validateResult = new ProductValidateResponse();
 
@@ -391,6 +397,9 @@ namespace Hotcakes.Modules.Core.Controllers
             model.IsAvailableForSale = data.IsAvailableForSale;
 
             var formQuantity = Request.Form["qty"];
+
+            if (!string.IsNullOrEmpty(formQuantity)) formQuantity = security.InputFilter(formQuantity.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+
             var qty = 0;
             if (int.TryParse(formQuantity, out qty))
             {
@@ -620,6 +629,10 @@ namespace Hotcakes.Modules.Core.Controllers
             model.GiftCardRecEmail = Request.Form["GiftCardRecEmail"];
             model.GiftCardRecName = Request.Form["GiftCardRecName"];
             model.GiftCardMessage = Request.Form["GiftCardMessage"];
+
+            if (!string.IsNullOrEmpty(model.GiftCardRecEmail)) model.GiftCardRecEmail = security.InputFilter(model.GiftCardRecEmail.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(model.GiftCardRecName)) model.GiftCardRecName = security.InputFilter(model.GiftCardRecName.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(model.GiftCardMessage)) model.GiftCardMessage = security.InputFilter(model.GiftCardMessage.Trim(), PortalSecurity.FilterFlag.NoMarkup);
         }
 
         private void AddToWishlist(ProductPageViewModel model)
@@ -662,6 +675,8 @@ namespace Hotcakes.Modules.Core.Controllers
             var quantity = 0;
             var formQuantity = Request.Form["qty"];
 
+            if (!string.IsNullOrEmpty(formQuantity)) formQuantity = security.InputFilter(formQuantity.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+
             var minQuantity = model.LocalProduct.MinimumQty > 0 ? model.LocalProduct.MinimumQty : 1;
             if (int.TryParse(formQuantity, out quantity))
             {
@@ -701,6 +716,9 @@ namespace Hotcakes.Modules.Core.Controllers
             if (model.LocalProduct.IsUserSuppliedPrice)
             {
                 var strUserPrice = Request.Form["userprice"];
+
+                if (!string.IsNullOrEmpty(strUserPrice)) strUserPrice = security.InputFilter(strUserPrice.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+
                 decimal userPrice = 0;
                 if (decimal.TryParse(strUserPrice, out userPrice))
                 {
@@ -731,6 +749,9 @@ namespace Hotcakes.Modules.Core.Controllers
                 var gcSetting = HccApp.CurrentStore.Settings.GiftCard;
 
                 var strAmount = Request.Form["giftcardamount"];
+
+                if (!string.IsNullOrEmpty(strAmount)) strAmount = security.InputFilter(strAmount.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+
                 decimal gcAmount = 0;
 
                 if (decimal.TryParse(strAmount, out gcAmount))

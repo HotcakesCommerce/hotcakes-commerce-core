@@ -1,0 +1,13 @@
+﻿@model Hotcakes.Modules.Core.Models.SingleCategoryViewModel
+<div class="hc-categoryrotator">
+    <div class="hc-content-block">
+        <a href="@Model.LinkUrl" title="@Model.AltText">
+            @if (!string.IsNullOrEmpty(Model.IconUrl))
+            {
+            <img src="@Model.IconUrl" alt="@Model.AltText" />
+            }
+            <br />
+            <span>@Model.Name</span>
+        </a>
+    </div>
+</div>

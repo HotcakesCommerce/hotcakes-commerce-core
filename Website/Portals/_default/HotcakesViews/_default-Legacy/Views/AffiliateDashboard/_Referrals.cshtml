@@ -1,0 +1,73 @@
+﻿@model Hotcakes.Modules.Core.Models.AffiliateReferralsViewModel
+@using (Html.BeginHccForm(new { @class = "hcReferrals" }))
+{
+	<div class="span12">
+		<div class="dnnForm span9">
+			<div class="dnnFormItem">
+				<label class="dnnLabel">
+					@Localization.GetString("SearchText")
+				</label>
+				<input type="text" data-bind="value: searchText" />
+			</div>
+			<div class="dnnFormItem">
+				<label class="dnnLabel">
+					@Localization.GetString("SearchBy")
+				</label>
+				<select data-bind="value: searchBy">
+					<option value="0">@Localization.GetString("LastName")</option>
+					<option value="1">@Localization.GetString("AffiliateId")</option>
+					<option value="2">@Localization.GetString("Email")</option>
+				</select>
+			</div>
+			<div class="dnnFormItem span10">
+				<a data-bind="click: search" class="dnnSecondaryAction dnnRight">@Localization.GetString("Search")</a>
+			</div>
+		</div>
+	</div>
+	<div class="hc-wrap3">
+		<div class="hc-board">
+			<div class="hc-title">@Localization.GetString("NumberOfAffiliates")</div>
+			<div class="hc-amount-line" data-bind="text: totalCount"></div>
+		</div>
+	</div>	
+	<div class="hc-wrap3">
+		<div class="hc-board">
+			<div class="hc-title">@Localization.GetString("TotalRevenue")</div>
+			<div class="hc-amount-line" data-bind="text: totalAmount"></div>
+		</div>
+	</div>
+	<div class="dnnClear">
+		<h2>@Localization.GetString("Referrals")</h2>
+		<table class="dnnGrid">
+			<tbody>
+				<tr class="dnnGridHeader">
+					<td>@Localization.GetString("Name")</td>
+					<td>@Localization.GetString("Id")</td>
+					<td>@Localization.GetString("Email")</td>
+					<td>@Localization.GetString("Revenue")</td>
+				</tr>
+				<!-- ko foreach: referrals -->
+				<tr class="dnnGridItem">
+					<td data-bind="text: $data.Name"></td>
+					<td data-bind="text: $data.Id"></td>
+					<td data-bind="text: $data.Email"></td>
+					<td data-bind="text: $data.Revenue"></td>
+				</tr>
+				<!-- /ko -->
+			</tbody>
+		</table>
+		<div class="clearfix">
+			<ul class="dnnButtonGroup">
+				<!-- ko if: pager.previousPage() > 0 -->
+				<li><a data-bind="click: function () { pager.setCurrentPage(pager.previousPage()) }">...</a></li>
+				<!-- /ko -->
+				<!-- ko foreach: pager.pagesList -->
+				<li data-bind="css: { 'current': $data == $parent.pager.pageNumber() }"><a data-bind="	text: $data, click: function () { $parent.pager.setCurrentPage($data) }"></a></li>
+				<!-- /ko -->
+				<!-- ko if: pager.nextPage() > 0 -->
+				<li><a data-bind="click: function () { pager.setCurrentPage(pager.nextPage()) }">...</a></li>
+				<!-- /ko -->
+			</ul>
+		</div>
+	</div>
+}

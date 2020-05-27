@@ -114,13 +114,11 @@ namespace Hotcakes.Commerce.Storage
                 var saveLocation = GetStoreDataPhysicalPath(storeId);
                 saveLocation += "products\\" + productId + "\\";
 
-                FileHelper.CopySingle(Path.Combine(demoImagesPath, "small"),
-                    Path.Combine(saveLocation, "small"), imageName, true);
-                FileHelper.CopySingle(Path.Combine(demoImagesPath, "medium"),
-                    Path.Combine(saveLocation, "medium"), imageName, true);
+                FileHelper.CopySingle(Path.Combine(demoImagesPath, "tiny"), Path.Combine(saveLocation, "tiny"), imageName, true);
+                FileHelper.CopySingle(Path.Combine(demoImagesPath, "small"), Path.Combine(saveLocation, "small"), imageName, true);
+                FileHelper.CopySingle(Path.Combine(demoImagesPath, "medium"), Path.Combine(saveLocation, "medium"), imageName, true);
 
-                FileHelper.CopySingle(Path.Combine(demoImagesPath, "medium"),
-                    saveLocation, imageName, true);
+                FileHelper.CopySingle(Path.Combine(demoImagesPath, "medium"), saveLocation, imageName, true);
             }
             catch (Exception ex)
             {

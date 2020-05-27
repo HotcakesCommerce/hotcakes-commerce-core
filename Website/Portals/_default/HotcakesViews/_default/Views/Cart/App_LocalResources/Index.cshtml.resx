@@ -127,7 +127,7 @@
     <value>Before Discounts</value>
   </data>
   <data name="CartEmpty.Text" xml:space="preserve">
-    <value>Your shopping cart is empty!</value>
+    <value>It's lonely in here. You should add one of our products to your cart. </value>
   </data>
   <data name="EstimateShipping.Text" xml:space="preserve">
     <value>Calculate My Shipping</value>
@@ -136,7 +136,7 @@
     <value>Item</value>
   </data>
   <data name="ItemsInCart.Text" xml:space="preserve">
-    <value>Items in Cart</value>
+    <value>Items in Your Cart</value>
   </data>
   <data name="KeepShopping.Text" xml:space="preserve">
     <value>Keep Shopping</value>
@@ -176,5 +176,11 @@
   </data>
   <data name="UpdateItem.Text" xml:space="preserve">
     <value>Update</value>
+  </data>
+  <data name="ItemInCart.Text" xml:space="preserve">
+    <value>Item in Your Cart</value>
+  </data>
+  <data name="PromoCodes.Text" xml:space="preserve">
+    <value>Promo Code(s)</value>
   </data>
 </root>

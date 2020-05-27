@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AverageRating.Text" xml:space="preserve">
-    <value>Average Rating</value>
+    <value>Average Customer Rating</value>
   </data>
   <data name="ReturnToProduct.Text" xml:space="preserve">
-    <value>Return to Product</value>
+    <value>Return to the Product</value>
   </data>
   <data name="Reviews.Text" xml:space="preserve">
     <value>Reviews</value>

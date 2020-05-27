@@ -36,6 +36,8 @@ namespace Hotcakes.Commerce.Utilities
 {
     public class UrlRewriter
     {
+        private const string CART_ROUTE_FORMAT = "{0}?AddSku={1}&AddSkuQty=1";
+
         public static bool IsProductSlugInUse(string slug, string bvin, HotcakesApplication app)
         {
             var p = app.CatalogServices.Products.FindBySlug(slug);
@@ -185,6 +187,18 @@ namespace Hotcakes.Commerce.Utilities
             var parameters = Merge(new {slug = p.UrlSlug}, additionalParams);
             var routeValues = new RouteValueDictionary(parameters);
             return HccUrlBuilder.RouteHccUrl(HccRoute.Product, routeValues);
+        }
+
+        public static string BuildUrlForProductAddToCart(Product p)
+        {
+            if (p.HasOptions() || p.IsGiftCard)
+            {
+                return string.Empty;
+            }
+
+            var route = string.Format(CART_ROUTE_FORMAT, HccUrlBuilder.RouteHccUrl(HccRoute.Cart), p.Sku);
+
+            return route;
         }
 
         private static IDictionary<string, object> Merge(object item1, object item2)

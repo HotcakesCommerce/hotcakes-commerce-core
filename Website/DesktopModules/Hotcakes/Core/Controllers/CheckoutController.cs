@@ -28,6 +28,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.WebPages.Scope;
+using DotNetNuke.Security;
 using DotNetNuke.Security.Membership;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Analytics;
@@ -62,6 +64,8 @@ namespace Hotcakes.Modules.Core.Controllers
         private const string LOGIN_MODE_GUEST = "#hcTabGuest";
 
         private const string HCC_KEY = "hcc";
+
+        private PortalSecurity security = new PortalSecurity();
 
         #endregion
 
@@ -141,6 +145,9 @@ namespace Hotcakes.Modules.Core.Controllers
             var rateKey = Request.Form["MethodId"] ?? string.Empty;
             var orderid = Request.Form["OrderId"] ?? string.Empty;
 
+            rateKey = security.InputFilter(rateKey.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            orderid = security.InputFilter(orderid.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+
             var order = HccApp.OrderServices.Orders.FindForCurrentStore(orderid);
             HccApp.OrderServices.OrdersRequestShippingMethodByUniqueKey(rateKey, order);
             HccApp.CalculateOrderAndSave(order);
@@ -170,6 +177,8 @@ namespace Hotcakes.Modules.Core.Controllers
             var result = new OrderSummaryJsonModel();
 
             var orderid = Request.Form["OrderId"] ?? string.Empty;
+            orderid = security.InputFilter(orderid.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+
             var order = HccApp.OrderServices.Orders.FindForCurrentStore(orderid);
 
             if (order != null)
@@ -177,7 +186,10 @@ namespace Hotcakes.Modules.Core.Controllers
                 var billshipsame = false;
                 var billshipsameString = Request.Form["billshipsame"];
                 if (!string.IsNullOrEmpty(billshipsameString))
+                {
+                    billshipsameString = security.InputFilter(billshipsameString.Trim(), PortalSecurity.FilterFlag.NoMarkup);
                     billshipsame = bool.Parse(billshipsameString);
+                }
 
                 PopulateAddress(order.ShippingAddress, form, "shipping");
                 if (billshipsame)
@@ -234,6 +246,8 @@ namespace Hotcakes.Modules.Core.Controllers
             var result = new OrderSummaryJsonModel();
 
             var orderid = Request.Form["OrderId"] ?? string.Empty;
+            orderid = security.InputFilter(orderid.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+
             var order = HccApp.OrderServices.Orders.FindForCurrentStore(orderid);
 
             var useRewardPoints = Request.Form["userewardspoints"] == "1";
@@ -258,6 +272,8 @@ namespace Hotcakes.Modules.Core.Controllers
         {
             var result = new CleanCreditCardJsonModel();
             var notclean = Request.Form["CardNumber"];
+            notclean = security.InputFilter(notclean.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+
             result.CardNumber = CardValidator.CleanCardNumber(notclean);
             return new PreJsonResult(Web.Json.ObjectToJson(result));
         }
@@ -267,6 +283,7 @@ namespace Hotcakes.Modules.Core.Controllers
         {
             var result = new IsEmailKnownJsonModel();
             var email = Request.Form["email"];
+            email = security.InputFilter(email.Trim(), PortalSecurity.FilterFlag.NoMarkup);
 
             email = email.Trim().ToLower();
 
@@ -699,6 +716,11 @@ namespace Hotcakes.Modules.Core.Controllers
 
             //Shipping
             var shippingRateKey = Request.Form["shippingrate"];
+            if (!string.IsNullOrEmpty(shippingRateKey))
+            {
+                shippingRateKey = security.InputFilter(shippingRateKey.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            }
+
             HccApp.OrderServices.OrdersRequestShippingMethodByUniqueKey(shippingRateKey, model.CurrentOrder);
 
             // Save Values so far in case of later errors
@@ -713,6 +735,10 @@ namespace Hotcakes.Modules.Core.Controllers
 
             // Instructions
             model.CurrentOrder.Instructions = Request.Form["specialinstructions"];
+            if (!string.IsNullOrEmpty(model.CurrentOrder.Instructions))
+            {
+                model.CurrentOrder.Instructions = security.InputFilter(model.CurrentOrder.Instructions.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            }
 
             // Agree to Terms
             var agreedValue = Request.Form["agreed"];
@@ -724,6 +750,8 @@ namespace Hotcakes.Modules.Core.Controllers
             model.AffiliateId = Request.Form["affiliateid"];
             if (!string.IsNullOrEmpty(model.AffiliateId))
             {
+                model.AffiliateId = security.InputFilter(model.AffiliateId.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+
                 var referrerUrl = string.Empty;
                 if (Request.UrlReferrer != null)
                 {
@@ -741,13 +769,29 @@ namespace Hotcakes.Modules.Core.Controllers
         {
             if (!model.IsLoggedIn)
             {
+                /*
+                 * This line is kept for backwards compatibility. Before HCC 3.3.0, viewsets all had
+                 * 3 radio buttons of the same value, making this line always return the expected
+                 * value.
+                 */
                 model.LoginTabID = Request.Form["loginChoose"];
+
+                if (model.LoginTabID == null)
+                {
+                    // this is a request from HCC 3.3.0 or newer
+                    model.LoginTabID = Request.Form["loginChoose0"] ?? Request.Form["loginChoose2"];
+                }
+
+                model.LoginTabID = security.InputFilter(model.LoginTabID.Trim(), PortalSecurity.FilterFlag.NoMarkup);
 
                 // Email
                 if (model.LoginTabID == LOGIN_MODE_NEWACC)
                 {
                     model.CurrentOrder.UserEmail = Request.Form["regemail"].Trim().ToLower();
                     model.RegUsername = Request.Form["regusername"].Trim().ToLower();
+
+                    model.CurrentOrder.UserEmail = security.InputFilter(model.CurrentOrder.UserEmail, PortalSecurity.FilterFlag.NoMarkup);
+                    model.RegUsername = security.InputFilter(model.RegUsername, PortalSecurity.FilterFlag.NoMarkup);
 
                     if (IsOrderConfirmed)
                     {
@@ -759,6 +803,7 @@ namespace Hotcakes.Modules.Core.Controllers
                         model.RegPassword = Request.Form["regpassword"];
                         if (model.RegPassword == Request.Form["regconfirmpassword"])
                         {
+                            model.RegPassword = security.InputFilter(model.RegPassword, PortalSecurity.FilterFlag.NoMarkup);
                             if (ShowConfirmation)
                                 SessionManager.UserRegistrationPassword = model.RegPassword;
                         }
@@ -771,7 +816,8 @@ namespace Hotcakes.Modules.Core.Controllers
                 }
                 else if (model.LoginTabID == LOGIN_MODE_GUEST)
                 {
-                    model.CurrentOrder.UserEmail = Request.Form["customeremail"].Trim().ToLower(); ;
+                    model.CurrentOrder.UserEmail = Request.Form["customeremail"].Trim().ToLower();
+                    model.CurrentOrder.UserEmail = security.InputFilter(model.CurrentOrder.UserEmail, PortalSecurity.FilterFlag.NoMarkup);
                 }
             }
         }
@@ -795,6 +841,14 @@ namespace Hotcakes.Modules.Core.Controllers
             payModel.DataCreditCard.ExpirationYear = expYear;
 
             var cardSecurityCode = Request.Form["ccsecuritycode"] ?? string.Empty;
+
+            if (!string.IsNullOrEmpty(payModel.SelectedMethodId)) payModel.SelectedMethodId = security.InputFilter(payModel.SelectedMethodId, PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(payModel.DataPurchaseOrderNumber)) payModel.DataPurchaseOrderNumber = security.InputFilter(payModel.DataPurchaseOrderNumber, PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(payModel.DataCompanyAccountNumber)) payModel.DataCompanyAccountNumber = security.InputFilter(payModel.DataCompanyAccountNumber, PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(payModel.DataCreditCard.CardHolderName)) payModel.DataCreditCard.CardHolderName = security.InputFilter(payModel.DataCreditCard.CardHolderName, PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(payModel.DataCreditCard.CardNumber)) payModel.DataCreditCard.CardNumber = security.InputFilter(payModel.DataCreditCard.CardNumber, PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(cardSecurityCode)) cardSecurityCode = security.InputFilter(cardSecurityCode, PortalSecurity.FilterFlag.NoMarkup);
+
             if (IsOrderConfirmed)
             {
                 cardSecurityCode = SessionManager.CardSecurityCode;
@@ -897,11 +951,24 @@ namespace Hotcakes.Modules.Core.Controllers
             address.PostalCode = Request.Form[prefix + "zip"] ?? address.PostalCode;
             address.Phone = Request.Form[prefix + "phone"] ?? address.Phone;
 
+            if (!string.IsNullOrEmpty(address.CountryBvin)) address.CountryBvin = security.InputFilter(address.CountryBvin.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(address.FirstName)) address.FirstName = security.InputFilter(address.FirstName.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(address.LastName)) address.LastName = security.InputFilter(address.LastName.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(address.Company)) address.Company = security.InputFilter(address.Company.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(address.Line1)) address.Line1 = security.InputFilter(address.Line1.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(address.Line2)) address.Line2 = security.InputFilter(address.Line2.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(address.City)) address.City = security.InputFilter(address.City.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(address.RegionBvin)) address.RegionBvin = security.InputFilter(address.RegionBvin.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(address.PostalCode)) address.PostalCode = security.InputFilter(address.PostalCode.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(address.Phone)) address.Phone = security.InputFilter(address.Phone.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+
             address.Bvin = string.Empty;
             var user = HccApp.CurrentCustomer;
             if (user != null)
             {
                 var addressBookAddressBvin = Request.Form[prefix + "addressbvin"];
+
+                if (!string.IsNullOrEmpty(addressBookAddressBvin)) addressBookAddressBvin = security.InputFilter(addressBookAddressBvin.Trim(), PortalSecurity.FilterFlag.NoMarkup);
 
                 var addressBookAddress = user.Addresses.FirstOrDefault(a => a.Bvin == addressBookAddressBvin);
                 if (address.IsEqualTo(addressBookAddress))

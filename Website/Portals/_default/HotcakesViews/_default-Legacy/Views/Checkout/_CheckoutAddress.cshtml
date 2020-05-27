@@ -1,0 +1,76 @@
+﻿@model Hotcakes.Modules.Core.Models.CheckoutAddressViewModel
+
+<div class="dnnForm hcAddressForm">
+    <div class="dnnFormItem hcAvailableAddresses"
+        @if (!User.Identity.IsAuthenticated || Model.Addresses.Count == 0)
+        {
+            <text>style="display: none;"</text>
+        }
+        >
+        <label class="dnnLabel">@Localization.GetString("AddressBook"):</label>
+        @Html.DropDownList(Model.Prefix + "AvailableAddresses",
+            new SelectList(Model.Addresses, "Bvin", "Line1", Model.Address.Bvin),
+            Localization.GetString("NotSelectedItem"))
+    </div>
+    <div class="dnnFormItem">
+        <label class="dnnLabel">@Localization.GetString("Country"):</label>
+        <select id="@(Model.Prefix + "country")" name="@(Model.Prefix + "country")">
+            @foreach (var c in Model.Countries)
+            {
+                if (Model.Address.CountryBvin == c.Bvin)
+                {
+                <option value="@c.Bvin" selected="selected">@c.DisplayName</option>
+                }
+                else
+                {
+                <option value="@c.Bvin">@c.DisplayName</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <label class="dnnLabel">@Localization.GetString("FirstName"):</label>
+        <input type="text" id="@(Model.Prefix + "firstname")" name="@(Model.Prefix + "firstname")"
+                                        size="20" value="@Model.Address.FirstName" class="@Model.IsErr("firstname")" />
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <label class="dnnLabel">@Localization.GetString("LastName"):</label>
+        <input type="text" id="@(Model.Prefix + "lastname")" name="@(Model.Prefix + "lastname")"
+                                        size="20" value="@Model.Address.LastName" class="@Model.IsErr("lastname")" />
+    </div>
+    <div class="dnnFormItem">
+        <label class="dnnLabel">@Localization.GetString("Company"):</label><input type="text" id="@(Model.Prefix + "company")" name="@(Model.Prefix + "company")"
+                                        size="20" value="@Model.Address.Company" class="@Model.IsErr("company")" />
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <label class="dnnLabel">@Localization.GetString("Address"):</label>
+        <input type="text" id="@(Model.Prefix + "address")" name="@(Model.Prefix + "address")"
+                                       size="20" value="@Model.Address.Line1" class="@Model.IsErr("address")" />
+    </div>
+    <div class="dnnFormItem">
+        <label class="dnnLabel"></label>
+        <input type="text" id="@(Model.Prefix + "address2")" name="@(Model.Prefix + "address2")"
+                                       size="20" value="@Model.Address.Line2" class="@Model.IsErr("address")" />
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <label class="dnnLabel">@Localization.GetString("City"):</label>
+        <input type="text" id="@(Model.Prefix + "city")" name="@(Model.Prefix + "city")"
+                                        size="20" value="@Model.Address.City" class="@Model.IsErr("city")" />
+    </div>
+    <div class="dnnFormItem">
+        <label class="dnnLabel">@Localization.GetString("State"):</label>
+        <select id="@(Model.Prefix + "state")" name="@(Model.Prefix + "state")"></select>
+        <input type="hidden" id="@(Model.Prefix + "tempregion")" value="@Model.Address.RegionBvin" />
+    </div>
+    <div class="dnnFormItem dnnFormRequired">
+        <label class="dnnLabel">@Localization.GetString("PostalCode"):</label>
+        <input type="text" id="@(Model.Prefix + "zip")" name="@(Model.Prefix + "zip")" 
+                                        size="10" value="@Model.Address.PostalCode" class="@Model.IsErr("zip")" />
+    </div>
+    <div class="dnnFormItem">
+        <label class="dnnLabel">@Localization.GetString("Phone"):</label>
+        <input type="text" id="@(Model.Prefix + "phone")" name="@(Model.Prefix + "phone")" 
+                                        value="@Model.Address.Phone" size="20" class="@Model.IsErr("phone")" />
+    </div>
+    <input type="hidden" id="@(Model.Prefix + "addressbvin")" name="@(Model.Prefix + "addressbvin")" value="@Model.Address.Bvin" />
+</div>

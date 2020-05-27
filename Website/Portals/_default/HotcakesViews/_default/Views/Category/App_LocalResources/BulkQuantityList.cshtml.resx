@@ -120,4 +120,10 @@
   <data name="AddToCart.Text" xml:space="preserve">
     <value>Add To Cart</value>
   </data>
+  <data name="Product.Text" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="Quantity.Text" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
 </root>

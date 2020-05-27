@@ -1,0 +1,12 @@
+﻿@model Hotcakes.Modules.Core.Models.SingleProductViewModel
+<div class="hc-record">
+    <div class="hc-recsku">
+        <a href="@Model.ProductLink">@Model.Item.Sku</a>
+    </div>
+    <div class="hc-recname">
+        <a href="@Model.ProductLink">@Model.Item.ProductName</a>
+    </div>
+    <div class="hc-recprice">
+        @Html.Raw(Model.UserPrice.DisplayPrice(true,false))
+    </div>
+</div>

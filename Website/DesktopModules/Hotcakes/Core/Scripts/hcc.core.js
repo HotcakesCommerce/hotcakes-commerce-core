@@ -55,30 +55,34 @@
         return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     };
 
+    hcc.getUrlProtocol = function() {
+        return location.protocol + "//";
+    };
+
     //fix record image height
-    hcc.autoHeight = function (className) {
-        $(window).resize(function () {
+    hcc.autoHeight = function(className) {
+        $(window).resize(function() {
             onresize(className);
         });
 
-        var onresize = function () {
-            $(className).each(function (i, e) {
+        var onresize = function() {
+            $(className).each(function(i, e) {
                 var $el = $(e);
                 $el.height($el.width() * 0.7);
                 $el.find("img").height($el.width() * 0.7);
                 //$el.css("display", "table-cell");
             });
-        }
+        };
         setTimeout(onresize, 10);
-    }
+    };
 
     $.xhrPool = [];
-    $.xhrPool.abortAll = function () {
-        $(this).each(function (i, jqXHR) {   //  cycle through list of recorded connection
-            jqXHR.abort();  //  aborts connection
+    $.xhrPool.abortAll = function() {
+        $(this).each(function(i, jqXHR) { //  cycle through list of recorded connection
+            jqXHR.abort(); //  aborts connection
             $.xhrPool.splice(i, 1); //  removes from list by index
         });
-    }
+    };
     $.ajaxSetup({
         beforeSend: function (jqXHR) { $.xhrPool.push(jqXHR); }, //  annd connection to list
         complete: function (jqXHR) {
@@ -93,7 +97,7 @@
             bgColor: '#fff',
             duration: 300,
             opacity: 0.5
-        }
+        };
         this.container = this;
 
         this.init = function (element, options) {
@@ -127,14 +131,14 @@
             );
         };
 
-        this.remove = function () {
+        this.remove = function() {
             var overlay = this.container.children(".ajax_overlay");
             if (overlay.length) {
                 //overlay.fadeOut(this.options., function () {
                 overlay.remove();
                 //});
             }
-        }
+        };
 
         if (type != 'stop') {
             this.options = jQuery.extend(defaults, options);
