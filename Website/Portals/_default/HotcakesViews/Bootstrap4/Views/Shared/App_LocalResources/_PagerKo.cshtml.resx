@@ -126,6 +126,9 @@
   <data name="Previous.Text" xml:space="preserve">
     <value>Previous</value>
   </data>
+  <data name="Current.Text" xml:space="preserve">
+    <value>Current</value>
+  </data>
   <data name="SortBy.Text" xml:space="preserve">
     <value>Sort By</value>
   </data>

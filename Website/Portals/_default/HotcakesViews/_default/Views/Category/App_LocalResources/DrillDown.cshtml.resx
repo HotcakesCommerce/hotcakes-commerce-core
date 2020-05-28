@@ -123,6 +123,9 @@
   <data name="ProductCount.Text" xml:space="preserve">
     <value>results</value>
   </data>
+  <data name="SortBy.Text" xml:space="preserve">
+    <value>Sort By</value>
+  </data>
   <data name="View.Text" xml:space="preserve">
     <value>View Details</value>
   </data>

@@ -2,70 +2,82 @@
 @using Hotcakes.Modules.Core.AppCode
 @Html.RegisterViewScript("imagesloaded.pkgd.min.js")
 @Html.RegisterViewScript("masonry.min.js")
+
 @Html.Partial("_Admin")
-@Html.Action("CategoryTrail", "BreadCrumb", new { cat = Model.LocalCategory })
-<!-- Hotcakes Commerce: Category > DrillDown -->
-<div class="hc-category">
-    @if (Model.LocalCategory.ShowTitle)
-    {
-        <h1>@Model.LocalCategory.Name</h1>
-    }
-    @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PreContentColumnId })
-    @Html.Partial("_Header", Model)
-    <div class="row-fluid">
-        <div class="col-md-4">
-            @Html.Partial("_DrillDownFilter")
-        </div>
-        <div class="col-md-8" data-bind="with: model">
-            <h6 class="text-right"><span data-bind="text: TotalCount"></span> @Localization.GetString("ProductCount") </h6>
-            <div class="row-fluid">
-                <div class="col-xs-12" data-bind="with: $root">
-                    <div class="hc-sort">
-                        <label>@Localization.GetString("SortBy")</label>
-                        @Html.DropDownList("sortOrderSelect", Model.SortSelectList, new { data_bind = "value: sortOrder, event: { change: changeSortOrder }", @class = "form-control" })
-                    </div>
-                    @Html.Partial("_PagerKo")
-                </div>
+<div class="container">
+    @Html.Action("CategoryTrail", "BreadCrumb", new { cat = Model.LocalCategory })
+    <!-- Hotcakes Commerce: Category > DrillDown -->
+    <div class="hc-category">
+        @if (Model.LocalCategory.ShowTitle)
+        {
+            <div class="col-12">
+                <h1>@Model.LocalCategory.Name</h1>
             </div>
-            <div class="row-fluid hc-product-cards">
-                <div class="col-xs-6 col-md-4 hc-product-card-sizer hidden"></div>
-                <div data-bind="foreach: Products">
-                    <div class="col-xs-6 col-md-4 hc-product-card">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h2><a data-bind="attr: { href: ProductLink }, text: ProductName"></a></h2>
-                            </div>
-                            <div class="panel-body">
-                                <div class="hc-product-card-img">
-                                    <a data-bind="attr: { href: ProductLink }">
-                                        <img class="img-responsive" data-bind="attr: { src: ImageSmallUrl, alt: ImageSmallAltText }"/>
-                                    </a>
+        }
+        @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PreContentColumnId })
+        @Html.Partial("_Header", Model)
+
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    @Html.Partial("_DrillDownFilter")
+                </div>
+                <div class="col-9" data-bind="with: model">
+                    <h6 class="text-right"><span data-bind="text: TotalCount"></span> @Localization.GetString("ProductCount") </h6>
+                    <div class="row">
+                        <div class="col-12" data-bind="with: $root">
+                            <div class="row clearfix">
+                                <div class="col-5 float-left">
+                                    @Html.Partial("_PagerKo")
+                                </div>
+                                <div class="col">&nbsp;</div>
+                                <div class="col-5 hc-sort float-right">
+                                    <label class="d-inline col-4">@Localization.GetString("SortBy")</label>
+                                    @Html.DropDownList("sortOrderSelect", Model.SortSelectList, new { data_bind = "value: sortOrder, event: { change: changeSortOrder }", @class = "d-inline form-control col-8" })
                                 </div>
                             </div>
-                            <div class="panel-footer text-center">
-                                &nbsp;<span data-bind="html: UserPrice"></span><br />
-                                <a class="add-to-cart-product" data-bind="visible: ProductAddToCartLink == '', attr: { href: ProductLink }">
-                                    <span><em class="glyphicon glyphicon-eye-open"></em>@Localization.GetString("View")</span>
-                                </a>
-                                <a class="add-to-cart-product" data-bind="visible: ProductAddToCartLink != '', attr: { href: ProductAddToCartLink }">
-                                    <span><em class="glyphicon glyphicon-shopping-cart"></em>@Localization.GetString("AddToCart")</span>
-                                </a>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row-fluid hc-product-cards">
+                            <div class="col-6 col-md-4 hc-product-card-sizer invisible"></div>
+                            <div data-bind="foreach: Products">
+                                <div class="col-6 col-md-4 hc-product-card">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><a data-bind="attr: { href: ProductLink }, text: ProductName"></a></h5>
+                                            <div class="hc-product-card-img">
+                                                <a data-bind="attr: { href: ProductLink }">
+                                                    <img class="img-fluid rounded" data-bind="attr: { src: ImageSmallUrl, alt: ImageSmallAltText }"/>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="card-body text-center">
+                                            &nbsp;<span data-bind="html: UserPrice"></span><br />
+                                            <a class="add-to-cart-product" data-bind="visible: ProductAddToCartLink == '', attr: { href: ProductLink }">
+                                                <span><i class="fas fa-eye"></i>@Localization.GetString("View")</span>
+                                            </a>
+                                            <a class="add-to-cart-product" data-bind="visible: ProductAddToCartLink != '', attr: { href: ProductAddToCartLink }">
+                                                <span><i class="fas fa-cart-plus"></i>@Localization.GetString("AddToCart")</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-12 float-left" data-bind="with: $root">
+                            @Html.Partial("_PagerKo")
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row-fluid">
-                <div class="col-xs-12" data-bind="with: $root">
-                    @Html.Partial("_PagerKo")
-                </div>
-            </div>
         </div>
+        @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PostContentColumnId })
+        @Html.Hidden("categorybvin", @Model.LocalCategory.Bvin)
     </div>
-    @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PostContentColumnId })
-    @Html.Hidden("categorybvin", @Model.LocalCategory.Bvin)
 </div>
-<div class="clearfix"></div>
 <script type="text/javascript">
     ko.bindingHandlers.stopBinding = {
         init: function() {

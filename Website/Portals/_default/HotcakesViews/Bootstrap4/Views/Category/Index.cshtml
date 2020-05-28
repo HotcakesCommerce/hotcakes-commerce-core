@@ -47,10 +47,10 @@
 
             <div class="container">
                 <div class="row hc-product-cards">
-                    <div class="col-sm-6 col-md-4 hc-product-card-sizer hidden"></div>
+                    <div class="col-6 col-md-4 hc-product-card-sizer invisible"></div>
                     @foreach (var item in Model.Products)
                     {
-                        <div class="col-sm-6 col-md-4 hc-product-card">
+                        <div class="col-6 col-md-4 hc-product-card">
                             @Html.Partial("_RenderSingleProduct", item)
                         </div>
                     }

@@ -155,7 +155,7 @@ function HcDrillDownFilterViewModel(data, $form, catId, modId) {
         self.pager.total(data.PagerData.TotalItems);
         self.pager.pageSize(data.PagerData.PageSize);
         self.pager.setCurrentPage(data.PagerData.CurrentPage);
-        hcc.autoHeight('.hc-record-grid .hc-recimage');
+        reTileTheWall();
     }
     function getHashParams() {
         var hashParams = {};
@@ -213,6 +213,10 @@ function HcDrillDownFilterViewModel(data, $form, catId, modId) {
 }
 
 $(document).ready(function () {
+    reTileTheWall();
+});
+
+function reTileTheWall() {
     if ($.fn.masonry) {
         var $grid = $(".hc-category .hc-product-cards").masonry({
             itemSelector: ".hc-product-card",
@@ -223,4 +227,4 @@ $(document).ready(function () {
             $grid.masonry("layout");
         });
     }
-});
+}

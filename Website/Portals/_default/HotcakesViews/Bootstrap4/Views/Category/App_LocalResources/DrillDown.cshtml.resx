@@ -126,4 +126,7 @@
   <data name="View.Text" xml:space="preserve">
     <value>View Details</value>
   </data>
+  <data name="SortBy.Text" xml:space="preserve">
+    <value>Sort By</value>
+  </data>
 </root>

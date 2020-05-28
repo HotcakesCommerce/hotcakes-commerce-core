@@ -122,11 +122,31 @@
 
         EvaluateSelections();
 
-        $('#hcProductTabs').dnnTabs({ selected: 0 });
-        $(".nav-tabs li").click(function () {
-            var tab = $(this);
+        //$('#hcProductTabs').dnnTabs({ selected: 0 });
+        $('#hcProductTabs .nav-item').first().children("li").addClass("active");
+        $('#hcProductTabs .nav-item').first().children("a").addClass("active");
+        $('#hcProductTabs .tab-content').children(".tab-pane").show();
+        $('#hcProductTabs .tab-content').first().children(".tab-pane").show();
+        $(".nav-tabs li a").click(function (e) {
+            var self = $(this); //a.nav-link
+            var panelId = self.attr("data-href");
+            var panel = $(panelId);
+
             $(".nav-tabs li").removeAttr("class");
-            tab.attr("class", "active");
+            $(".nav-tabs li").attr("class", "nav-item");
+            $(".nav-tabs li a").removeAttr("class");
+            $(".nav-tabs li a").attr("class", "nav-link");
+
+            self.parent().attr("class", "nav-item active");
+            self.prop("class", "nav-link active");
+
+            $(".tab-pane").hide();
+            panel.show();
+
+            e.stopImmediatePropagation();
+            e.stopPropagation();
+            e.preventDefault();
+            return false;
         });
 
         $('#giftcardpredefined').change(function () {

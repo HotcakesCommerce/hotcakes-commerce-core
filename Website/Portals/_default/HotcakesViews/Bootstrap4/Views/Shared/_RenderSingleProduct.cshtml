@@ -9,13 +9,13 @@
         <h5 class="card-title"><a href="@Model.ProductLink">@Model.Item.ProductName</a></h5>
         <div class="hc-product-card-img">
             <a href="@Model.ProductLink">
-                <img class="img-fluid" src="@Model.ImageUrls.SmallUrl" alt="@Model.ImageUrls.SmallAltText" />
+                <img class="img-fluid rounded" src="@Model.ImageUrls.SmallUrl" alt="@Model.ImageUrls.SmallAltText" />
             </a>
         </div>
     </div>
     <div class="card-body text-center">
         @Html.Raw(userPrice)<br/>
-        @if (hasOptions || Model.Item.IsGiftCard)
+        @if (hasOptions || Model.Item.IsGiftCard || Model.Item.IsBundle || Model.Item.IsUserSuppliedPrice)
         {
             <a class="add-to-cart-product" href="@Model.ProductLink">
                 <span><i class="fas fa-eye"></i>@Localization.GetString("View")</span>

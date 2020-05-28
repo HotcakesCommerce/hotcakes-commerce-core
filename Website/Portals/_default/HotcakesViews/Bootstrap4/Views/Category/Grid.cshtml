@@ -5,24 +5,30 @@
 @Html.Partial("_Admin")
 @Html.Action("CategoryTrail", "BreadCrumb", new { cat = Model.LocalCategory })
 <!-- Hotcakes Commerce: Category > Grid -->
-<div class="row-fluid hc-category">
-    @if (Model.LocalCategory.ShowTitle)
-    {
-        <h1>@Model.LocalCategory.Name</h1>
-    }
-    @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PreContentColumnId })
-    @Html.Partial("_Header", Model)
-    @Html.Partial("_Pager", Model.PagerData, new ViewDataDictionary { { "sortByList", Model.SortSelectList } })
-    <div class="row-fluid">
-        @foreach (var item in Model.Products)
+<div class="container">
+    <div class="row hc-category">
+        @if (Model.LocalCategory.ShowTitle)
         {
-            <div class="col-md-3">
-                @Html.Partial("_RenderSingleProduct", item)
+            <div class="col-12">
+                <h1>@Model.LocalCategory.Name</h1>
             </div>
         }
+        @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PreContentColumnId })
+        @Html.Partial("_Header", Model)
+        @Html.Partial("_Pager", Model.PagerData, new ViewDataDictionary { { "sortByList", Model.SortSelectList } })
+        <div class="container">
+            <div class="row hc-product-cards">
+                <div class="col-6 col-md-4 hc-product-card-sizer invisible"></div>
+                @foreach (var item in Model.Products)
+                {
+                    <div class="col-6 col-md-4 hc-product-card">
+                        @Html.Partial("_RenderSingleProduct", item)
+                    </div>
+                }
+            </div>
+        </div>
+        @Html.Partial("_Pager", Model.PagerData)
+        @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PostContentColumnId })
+        @Html.Hidden("categorybvin", @Model.LocalCategory.Bvin)
     </div>
-    @Html.Partial("_Pager", Model.PagerData)
-    @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PostContentColumnId })
-    @Html.Hidden("categorybvin", @Model.LocalCategory.Bvin)
 </div>
-<div class="clearfix"></div>
