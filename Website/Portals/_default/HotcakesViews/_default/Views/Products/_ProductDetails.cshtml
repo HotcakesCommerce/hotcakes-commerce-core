@@ -84,7 +84,7 @@
                         { @Model.LocalProduct.UserSuppliedPriceLabel}
                         :
                     </label>
-                    <span class="col-sm-8">@Html.TextBox("userprice", new { @class = "form-control col-sm-8" })</span>
+                    <div class="col-sm-8">@Html.TextBox("userprice", new { @class = "form-control col-sm-8" })</div>
                 </div>
             }
             else if (Model.IsGiftCard)
@@ -111,7 +111,7 @@
                         @Localization.GetString("GiftCardEmail")
                     </label>
                     <div class="col-sm-8">
-                        @Html.TextBoxFor(m => m.GiftCardRecEmail, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.GiftCardRecEmail, string.Empty, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.GiftCardRecEmail, Localization.GetString("ValMessage_GiftCardEmailInvalid"), new { @class = "dnnFormMessage hcFormError" })
                     </div>
                 </div>
@@ -120,7 +120,7 @@
                         @Localization.GetString("GiftCardName")
                     </label>
                     <div class="col-sm-8">
-                        @Html.TextBox("giftcardrecname", new { @class = "form-control" })
+                        @Html.TextBox("giftcardrecname", string.Empty, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -128,7 +128,7 @@
                         @Localization.GetString("GiftCardMessage")
                     </label>
                     <div class="col-sm-8">
-                        @Html.TextArea("giftcardmessage", new { @class = "form-control" })
+                        @Html.TextArea("giftcardmessage", string.Empty, new { @class = "form-control" })
                     </div>
                 </div>
             }
@@ -175,7 +175,7 @@
             if (Model.IsAvailableForSale)
             {
                 <div class="row">
-                    <div class="col-xs-12 text-right">
+                    <div class="col-xs-offset-4 col-xs-8 text-left">
                         <div id="hcProductActions" class="form-group">
                             <input type="submit" id="addtocartbutton" value="@Localization.GetString("AddToCart")" class="btn btn-primary" />
                             @if (Model.IsAvailableForWishList)

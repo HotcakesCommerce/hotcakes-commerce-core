@@ -9,13 +9,13 @@
             <div class="col-xs-12 text-right">
                 @if (ViewBag.IsLoggedIn)
                 {
-                    <a href="#hcWriteReview" id="hcWriteReviewbtn" class="btn btn-success btn-md hc-popup" data-min-width="400" data-min-height="350" title="@Localization.GetString("WriteReviewFor") @Model.LocalProduct.ProductName">
+                    <a href="#hcWriteReview" id="hcWriteReviewbtn" class="btn btn-success btn-sm hc-popup" data-min-width="400" data-min-height="350" title="@Localization.GetString("WriteReviewFor") @Model.LocalProduct.ProductName">
                         <em class="glyphicon glyphicon-thumbs-up"></em>@Localization.GetString("WriteReview")
                     </a>
                 }
                 @if (Model.LocalProduct.ReviewsApproved.Count > 3)
                 {
-                    <a class="btn btn-default btn-md" href="@Url.RouteHccUrl(HccRoute.ProductReview, new {slug = Model.LocalProduct.UrlSlug})">
+                    <a class="btn btn-default btn-sm" href="@Url.RouteHccUrl(HccRoute.ProductReview, new {slug = Model.LocalProduct.UrlSlug})">
                         <em class="glyphicon glyphicon-book"></em>@Localization.GetString("ReadAllReviews")
                     </a>
                 }
