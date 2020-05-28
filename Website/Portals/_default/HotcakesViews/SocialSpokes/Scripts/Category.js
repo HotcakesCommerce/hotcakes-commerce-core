@@ -74,13 +74,26 @@ function HcDrillDownFilterViewModel(data, $form, catId, modId) {
         self.pager.pageNumber(page);
         var hashStr =
             "page=" + page +
-            "&sort=" + self.sortOrder() +
-            "&min=" + self.minPrice().toString().replace(DECIMAL_SEP, "_") +
-            "&max=" + self.maxPrice().toString().replace(DECIMAL_SEP, "_") +
-            "&mn=" + filter.Manufacturers.join(",") +
-            "&vn=" + filter.Vendors.join(",") +
-            "&tp=" + filter.Types.join(",") +
-            "&prop=" + joinProperties();
+                "&sort=" + self.sortOrder() +
+                "&min=" + self.minPrice().toString().replace(DECIMAL_SEP, "_") +
+                "&max=" + self.maxPrice().toString().replace(DECIMAL_SEP, "_");
+        if (filter.Manufacturers != undefined) {
+            hashStr = hashStr + "&mn=" + filter.Manufacturers.join(",");
+        } else {
+            hashStr = hashStr + "&mn=";
+        }
+        if (filter.Vendors != undefined) {
+            hashStr = hashStr + "&vn=" + filter.Vendors.join(",");
+        } else {
+            hashStr = hashStr + "&vn=";
+        }
+        if (filter.Types != undefined) {
+            hashStr = hashStr + "&tp=" + filter.Types.join(",");
+        } else {
+            hashStr = hashStr + "&tp=";
+        }
+        hashStr = hashStr + "&prop=" + joinProperties();
+
         location.hash = hashStr;
     }
     function joinProperties() {
