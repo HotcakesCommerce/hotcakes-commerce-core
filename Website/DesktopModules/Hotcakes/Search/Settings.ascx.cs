@@ -65,7 +65,7 @@ namespace Hotcakes.Modules.Search
                 }
                 PageSizeTextBox.Text = searchSettings.PageSize.ToString();
 
-                ShowManufacturesCheckBox.Checked = searchSettings.ShowManufactures;
+                ShowManufacturersCheckBox.Checked = searchSettings.ShowManufacturers;
                 ShowVendorsCheckBox.Checked = searchSettings.ShowVendors;
             }
         }
@@ -76,7 +76,7 @@ namespace Hotcakes.Modules.Search
             int pageSize;
             if (int.TryParse(PageSizeTextBox.Text, out pageSize))
                 searchSettings.PageSize = pageSize;
-            searchSettings.ShowManufactures = ShowManufacturesCheckBox.Checked;
+            searchSettings.ShowManufacturers = ShowManufacturersCheckBox.Checked;
             searchSettings.ShowVendors = ShowVendorsCheckBox.Checked;
         }
 

@@ -76,7 +76,7 @@ namespace Hotcakes.Modules.CategoryViewer
                     }
                 }
                 ProductPageSizeTextBox.Text = productPageSize;
-                ShowManufacturesCheckBox.Checked = Convert.ToBoolean(ModuleSettings["ShowManufactures"] ?? "false");
+                ShowManufacturersCheckBox.Checked = Convert.ToBoolean(ModuleSettings["ShowManufactures"] ?? "false");
                 ShowVendorsCheckBox.Checked = Convert.ToBoolean(ModuleSettings["ShowVendors"] ?? "false");
             }
         }
@@ -90,7 +90,7 @@ namespace Hotcakes.Modules.CategoryViewer
             controller.UpdateModuleSetting(ModuleId, "ProductPageSize", ProductPageSizeTextBox.Text);
             controller.UpdateModuleSetting(ModuleId, "DefaultPreContentColumnId", ddlPreContentColumnId.SelectedValue);
             controller.UpdateModuleSetting(ModuleId, "DefaultPostContentColumnId", ddlPostContentColumnId.SelectedValue);
-            controller.UpdateModuleSetting(ModuleId, "ShowManufactures", ShowManufacturesCheckBox.Checked.ToString());
+            controller.UpdateModuleSetting(ModuleId, "ShowManufactures", ShowManufacturersCheckBox.Checked.ToString());
             controller.UpdateModuleSetting(ModuleId, "ShowVendors", ShowVendorsCheckBox.Checked.ToString());
 
             var qOptions = SortingOptionsCheckBoxList.Items

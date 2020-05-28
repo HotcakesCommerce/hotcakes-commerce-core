@@ -18,11 +18,11 @@ function HcDrillDownFilterViewModel(data, $form, catId, modId) {
     });
     self.sortOrder = ko.observable(data.SortOrder);
 
-    self.chooseCatFacet = function (facet) { chooseFacet(filter.Categories, facet) }
-    self.chooseManFacet = function (facet) { chooseFacet(filter.Manufactures, facet) }
-    self.chooseVenFacet = function (facet) { chooseFacet(filter.Vendors, facet) }
-    self.chooseTypeFacet = function (facet) { chooseFacet(filter.Types, facet) }
-    self.choosePropFacet = function (parent) {
+    self.chooseCatFacet = function(facet) { chooseFacet(filter.Categories, facet); };
+    self.chooseManFacet = function(facet) { chooseFacet(filter.Manufacturers, facet); };
+    self.chooseVenFacet = function(facet) { chooseFacet(filter.Vendors, facet); };
+    self.chooseTypeFacet = function(facet) { chooseFacet(filter.Types, facet); };
+    self.choosePropFacet = function(parent) {
         var item = this;
         var propId = parent.Id;
         if (item.Id)
@@ -39,18 +39,18 @@ function HcDrillDownFilterViewModel(data, $form, catId, modId) {
         toggleArrayItem(items, item);
 
         updateHash(1);
-    }
-    self.applyPrice = function () {
+    };
+    self.applyPrice = function() {
         updateHash(1);
-    }
-    self.changeSortOrder = function () {
+    };
+    self.changeSortOrder = function() {
         updateHash(1);
-    }
+    };
 
     // Implementation
     var $priceSlider = $("<div/>").prependTo(".hc-price-slider");
     var filter = {
-        Manufactures: [],
+        Manufacturers: [],
         Vendors: [],
         Types: [],
         Properties: {},
@@ -77,7 +77,7 @@ function HcDrillDownFilterViewModel(data, $form, catId, modId) {
             "&sort=" + self.sortOrder() +
             "&min=" + self.minPrice().toString().replace(DECIMAL_SEP, "_") +
             "&max=" + self.maxPrice().toString().replace(DECIMAL_SEP, "_") +
-            "&mn=" + filter.Manufactures.join(",") +
+            "&mn=" + filter.Manufacturers.join(",") +
             "&vn=" + filter.Vendors.join(",") +
             "&tp=" + filter.Types.join(",") +
             "&prop=" + joinProperties();
@@ -124,7 +124,6 @@ function HcDrillDownFilterViewModel(data, $form, catId, modId) {
             .done(function (res) { handleDrillDown(res); })
             .fail(function () { })
             .always(function () { $form.find(".hc-product-grid").ajaxLoader("stop"); });
-
     }
     function handleDrillDown(data) {
         self.model(data);
@@ -189,7 +188,6 @@ function HcDrillDownFilterViewModel(data, $form, catId, modId) {
             };
 
             parseProperties(params.prop ? params.prop.split(",") : [], filter);
-
         }
         postDrillDown(filter, 1);
     }

@@ -341,7 +341,7 @@ namespace Hotcakes.Modules.Core.Controllers
             var queryAdv = BuildDrillDownQuery(filter);
             var result = manager.DoProductSearch(HccApp.CurrentStore.Id, null, queryAdv, pageNumber, pageSize);
 
-            model.Manufactures = sett.ShowManufactures
+            model.Manufacturers = sett.ShowManufacturers
                 ? ToCheckBoxItems(result.Manufacturers, result.SelectedManufacturers, result.TotalCount)
                 : new List<CheckboxFacetItem>();
             model.Vendors = sett.ShowVendors
@@ -432,7 +432,7 @@ namespace Hotcakes.Modules.Core.Controllers
             {
                 MinPrice = filter.MinPrice,
                 MaxPrice = filter.MaxPrice,
-                Manufactures = filter.Manufactures ?? new List<string>(),
+                Manufacturers = filter.Manufacturers ?? new List<string>(),
                 Vendors = filter.Vendors ?? new List<string>(),
                 Types = filter.Types ?? new List<string>(),
                 Categories = new List<string> {filter.CategoryId},

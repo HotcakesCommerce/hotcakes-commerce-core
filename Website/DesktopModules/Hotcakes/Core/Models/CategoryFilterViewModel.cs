@@ -26,6 +26,7 @@
 using System;
 using System.Collections.Generic;
 using Hotcakes.Commerce.Catalog;
+using Hotcakes.Modules.Core.Admin.People;
 
 namespace Hotcakes.Modules.Core.Models
 {
@@ -56,11 +57,19 @@ namespace Hotcakes.Modules.Core.Models
         /// </summary>
         public string CategoryId { get; set; }
 
-        // TODO: Depreciate and replace with a Manufacturers property
         /// <summary>
         ///     List of the manufacturers which needs to be shown in the drill down filter.
         /// </summary>
-        public List<string> Manufactures { get; set; }
+        [Obsolete("Deprecated in Hotcakes Commerce 03.03.00. Please use the Manufacturers property instead. Removing in version 03.04.00 or later.")]
+        public List<string> Manufactures {
+            get { return Manufacturers; }
+            set { Manufacturers = value; }
+        }
+
+        /// <summary>
+        ///     List of the manufacturers which needs to be shown in the drill down filter.
+        /// </summary>
+        public List<string> Manufacturers { get; set; }
 
         /// <summary>
         ///     List of the vendors which needs to be shown in the drill down filter.
