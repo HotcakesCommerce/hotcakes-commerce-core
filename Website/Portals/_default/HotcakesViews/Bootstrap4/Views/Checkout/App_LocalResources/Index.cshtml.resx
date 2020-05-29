@@ -121,7 +121,7 @@
     <value>Affiliate ID</value>
   </data>
   <data name="AffiliatesHeader.Text" xml:space="preserve">
-    <value>Affiliate</value>
+    <value>Referred?</value>
   </data>
   <data name="BillingAddress.Text" xml:space="preserve">
     <value>Billing Address</value>
@@ -203,5 +203,8 @@
   </data>
   <data name="Wait.Text" xml:space="preserve">
     <value>Please Wait...</value>
+  </data>
+  <data name="Optional.Text" xml:space="preserve">
+    <value>(optional)</value>
   </data>
 </root>

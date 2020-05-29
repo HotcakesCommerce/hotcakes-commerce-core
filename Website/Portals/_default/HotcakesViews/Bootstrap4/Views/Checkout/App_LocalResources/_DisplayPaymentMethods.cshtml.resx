@@ -156,4 +156,7 @@
   <data name="PoNumber.Text" xml:space="preserve">
     <value>PO Number</value>
   </data>
+  <data name="PayUsing.Text" xml:space="preserve">
+    <value>Pay using</value>
+  </data>
 </root>

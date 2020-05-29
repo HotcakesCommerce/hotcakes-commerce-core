@@ -304,15 +304,14 @@ mark, .mark {
     Checkout
 --------------------------------------------------*/
 
-#hcPayment .radio label,
-#hcNoPayment .radio label {
-    margin-left: 0.25em;
-    padding-left: 0;
-    font-weight: 700;
-}
-
 #hcNoPayment .form-group {
     margin-left: 0.5em;
+}
+
+#hcPayment {
+    .form-check label {
+        font-weight: 700;
+    }
 }
 
 .lineitemoptions {
@@ -336,6 +335,12 @@ mark, .mark {
 #hcShippingRates {
     input[type=radio] {
         margin-right: 1em;
+    }
+}
+
+#hcCheckoutTotal {
+    table tr td:nth-child(2) {
+        text-align: right;
     }
 }
 

@@ -34,9 +34,9 @@
     }  
 }
 <div class="hc-creditcard-form clearfix">
-    <div class="form-group">
-        <label class="col-sm-4 control-label">&nbsp;</label>
-        <div class="col-sm-offset-0 col-sm-6">
+    <div class="form-group row">
+        <label class="col-sm-3 offset-sm-1 col-form-label">&nbsp;</label>
+        <div class="col-sm-6 offset-sm-0">
             <span class="hc-card-icons">
                 @if (IsAccepted(CardType.Visa))
                 { <span class="cc-visa"></span> }
@@ -53,17 +53,17 @@
             </span>
         </div>
     </div>
-    <div class="form-group dnnFormRequired">
-        <label class="col-sm-4 control-label">@Localization.GetString("CardNumber"):</label>
-        <div class="col-sm-offset-0 col-sm-6">
+    <div class="form-group row dnnFormRequired">
+        <label class="col-sm-3 offset-sm-1 col-form-label" for="cccardnumber">@Localization.GetString("CardNumber"):</label>
+        <div class="col-sm-6 offset-sm-0">
             <input type="text" name="cccardnumber" id="cccardnumber" maxlength="20"
                 value="@Model.PaymentViewModel.DataCreditCard.CardNumber"                    
                 class="form-control @Model.IsErr("cccardnumber")" />
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-sm-4 control-label">@Localization.GetString("ExpDate"):</label>
-        <div class="col-sm-offset-0 col-sm-6 form-inline">
+    <div class="form-group row">
+        <label class="col-sm-3 offset-sm-1 col-form-label">@Localization.GetString("ExpDate"):</label>
+        <div class="col-sm-6 offset-sm-0 form-inline">
             <select name="ccexpmonth" class="form-control small hc-cc-expmonth">
                 <option value="0">--</option>
                 @Months()
@@ -74,17 +74,17 @@
             </select>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-sm-4 control-label">@Localization.GetString("SecurityCode"):</label>
-        <div class="col-sm-offset-0 col-sm-6">
-            <input type="text" name="ccsecuritycode" maxlength="4" 
+    <div class="form-group row">
+        <label class="col-sm-3 offset-sm-1 col-form-label" for="ccsecuritycode">@Localization.GetString("SecurityCode"):</label>
+        <div class="col-sm-6 offset-sm-0">
+            <input type="text" id="ccsecuritycode" name="ccsecuritycode" maxlength="4" 
                 class="form-control small hc-cc-seccode @Model.IsErr("ccsecuritycode")" />
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-sm-4 control-label">@Localization.GetString("NameOnCard"):</label>
-        <div class="col-sm-offset-0 col-sm-6">
-            <input type="text" name="cccardholder" 
+    <div class="form-group row">
+        <label class="col-sm-3 offset-sm-1 col-form-label" for="cccardholder">@Localization.GetString("NameOnCard"):</label>
+        <div class="col-sm-6 offset-sm-0">
+            <input type="text" id="cccardholder" name="cccardholder" 
                 value="@Model.PaymentViewModel.DataCreditCard.CardHolderName"
                 class="form-control @Model.IsErr("cccardholder")" />
         </div>

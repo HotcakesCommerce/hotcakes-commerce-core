@@ -727,14 +727,11 @@ mark,
 /*--------------------------------------------------
     Checkout
 --------------------------------------------------*/
-#hcPayment .radio label,
-#hcNoPayment .radio label {
-  margin-left: 0.25em;
-  padding-left: 0;
-  font-weight: 700;
-}
 #hcNoPayment .form-group {
   margin-left: 0.5em;
+}
+#hcPayment .form-check label {
+  font-weight: 700;
 }
 .lineitemoptions {
   margin-top: 0.5em;
@@ -750,6 +747,9 @@ mark,
 }
 #hcShippingRates input[type=radio] {
   margin-right: 1em;
+}
+#hcCheckoutTotal table tr td:nth-child(2) {
+  text-align: right;
 }
 /*--------------------------------------------------
     Address Book
@@ -987,10 +987,6 @@ mark,
 .hc-checkout .hc-payment-section .hc-payment-methods {
   width: 100%;
   border-collapse: collapse;
-  margin-left: 4%;
-}
-.hc-checkout .hc-payment-section .hc-payment-methods div {
-  /*padding-top: 10px;*/
 }
 .hc-checkout .hc-payment-section .hc-payment-methods div > h4 {
   display: inline;
@@ -1005,7 +1001,7 @@ mark,
 }
 .hc-checkout .hc-payment-section .hc-card-icons {
   position: absolute;
-  bottom: -25px;
+  bottom: -6px;
   height: 35px;
 }
 .hc-checkout .hc-paypal-info {

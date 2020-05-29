@@ -120,6 +120,9 @@
   <data name="Address.Text" xml:space="preserve">
     <value>Address</value>
   </data>
+  <data name="Address2.Text" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="AddressBook.Text" xml:space="preserve">
     <value>Address Book</value>
   </data>
@@ -149,5 +152,29 @@
   </data>
   <data name="State.Text" xml:space="preserve">
     <value>State</value>
+  </data>
+  <data name="phAddress1.Text" xml:space="preserve">
+    <value>123 Main Street</value>
+  </data>
+  <data name="phAddress2.Text" xml:space="preserve">
+    <value>Suite, Apt, etc.</value>
+  </data>
+  <data name="phPhone.Text" xml:space="preserve">
+    <value>650-123-4567</value>
+  </data>
+  <data name="phPostalCode.Text" xml:space="preserve">
+    <value>12345</value>
+  </data>
+  <data name="phCity.Text" xml:space="preserve">
+    <value>San Francisco</value>
+  </data>
+  <data name="phCompany.Text" xml:space="preserve">
+    <value>Acme Corp, Inc.</value>
+  </data>
+  <data name="phFirstName.Text" xml:space="preserve">
+    <value>Jane</value>
+  </data>
+  <data name="phLastName.Text" xml:space="preserve">
+    <value>Doe</value>
   </data>
 </root>

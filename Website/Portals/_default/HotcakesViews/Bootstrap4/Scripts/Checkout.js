@@ -8,7 +8,7 @@
         $(".required").focusout(function () {
             if (!$(this).val()) {
                 var msgId = "#" + $(this).attr("id") + "_error";
-                $(msgId).show();
+                $(msgId).show().removeClass("d-none");
             }
         });
 
@@ -31,7 +31,7 @@
     }
 
     function ajaxErrorNotification() {
-        $('#loginmessage').html(hcc.l10n.common_AjaxError).attr('class', 'col-xs-12 alert alert-danger').show();
+        $('#loginmessage').html(hcc.l10n.common_AjaxError).attr('class', 'col-12 alert alert-danger').show();
     }
 
     // Login -----------------------
@@ -44,8 +44,8 @@
             },
             function (data) {
                 if (data.success == "1") {
-                    $('#hcLoginSection').show();
-                    $('#loginmessage').html(hcc.l10n.checkout_PleaseLogin).attr('class', 'dnnFormMessage dnnFormSuccess').slideDown();
+                    $('#hcLoginSection').show().removeClass("d-none");
+                    $('#loginmessage').html(hcc.l10n.checkout_PleaseLogin).attr('class', 'col-12 alert alert-success').slideDown();
 
                     if (forceSwitch) {
                         $('#username').focus();
@@ -53,7 +53,7 @@
                     }
                 }
                 else {
-                    $('#loginmessage').attr('class', 'dnnFormMessage dnnFormError').slideUp();
+                    $('#loginmessage').attr('class', 'alert alert-danger').slideUp();
                 }
             },
             "json");
@@ -61,7 +61,7 @@
 
     function LoginAjax() {
         $('#hcLoginSection').ajaxLoader("start");
-        $('#loginmessage').hide();
+        $('#loginmessage').hide().addClass("d-none");
         var username = $('#hcLoginSection #username').val();
         var passwordfield = $('#hcLoginSection #password').val();
         $.post(hcc.getServiceUrl("account/AjaxSignIn"),
@@ -71,13 +71,13 @@
             },
             function (data) {
                 if (data.Success == "True" || data.Success == true) {
-                    $('#loginmessage').html(hcc.l10n.checkout_LoggedIn).attr('class', 'dnnFormMessage dnnFormSuccess').show();
-                    $('#hcLoginChoose').hide();
-                    $('#hcTabLogin').hide();
+                    $('#loginmessage').html(hcc.l10n.checkout_LoggedIn).attr('class', 'col-12 alert alert-danger').show();
+                    $('#hcLoginChoose').hide().addClass("d-none");
+                    $('#hcTabLogin').hide().addClass("d-none");
                     UserLoggedIn();
                 }
                 else {
-                    $('#loginmessage').html(hcc.l10n.checkout_LoginFailed).attr('class', 'dnnFormMessage dnnFormError').show();
+                    $('#loginmessage').html(hcc.l10n.checkout_LoginFailed).attr('class', 'col-12 alert alert-danger').show();
                 }
             },
             "json")
@@ -105,8 +105,8 @@
     }
 
     function ChooseLoginTab(loginTabId) {
-        $("#hcLoginChoose").parent().find(".hcTabPane").hide();
-        $(loginTabId).show();
+        $("#hcLoginChoose").parent().find(".hcTabPane").addClass("d-none");
+        $(loginTabId).removeClass("d-none");
     }
 
     function ClickLoginTab(loginTabId) {
@@ -115,12 +115,12 @@
 
     function CheckConfirmPassword() {
         if ($("#regconfirmpassword").val() != $("#regpassword").val()) {
-            $("#regconfirmpassword_error").show();
+            $("#regconfirmpassword_error").removeClass("d-none");
         }
     }
 
     function InitLogin() {
-        $('#loginmessage').hide();
+        $('#loginmessage').addClass("d-none");
         $('#customeremail').change(function () { IsEmailKnown(); });
         $('#regemail').change(function () { IsEmailKnown(false, '#regemail'); });
         $('#loginbutton').click(function () { LoginAjax(); return false; });
@@ -136,7 +136,7 @@
             $(this).prop('checked', true);
             ChooseLoginTab($(this).val());
         });
-        $("#regconfirmpassword").focusout(function () { CheckConfirmPassword() });
+        $("#regconfirmpassword").focusout(function () { CheckConfirmPassword(); });
 
         if (typeof (HCC) != "undefined" && typeof (HCC.CheckoutLogin) != "undefined") {
             if (HCC.CheckoutLogin.LoginTab) {
@@ -182,9 +182,9 @@
             var self = RewardPoints;
 
             if (data.ShowRewards) {
-                self.$rpWrapper.show();
+                self.$rpWrapper.show().removeClass("d-none");
             } else {
-                self.$rpWrapper.hide();
+                self.$rpWrapper.hide().addClass("d-none");
             }
 
             self.$rpWrapper.find('h3').html(data.LabelRewardPoints);
@@ -287,12 +287,12 @@
         },
         toggleBilling: function (e) {
             if (this.$chkShowBilling.is(':checked')) {
-                this.$billingWrapper.hide();
-                this.$dialogBillingBlock.hide();
+                this.$billingWrapper.hide().addClass("d-none");
+                this.$dialogBillingBlock.hide().addClass("d-none");
             }
             else {
-                this.$billingWrapper.show();
-                this.$dialogBillingBlock.show();
+                this.$billingWrapper.show().removeClass("d-none");
+                this.$dialogBillingBlock.show().removeClass("d-none");
             }
             this.billingChanged();
         },
@@ -325,10 +325,10 @@
 
             if (this.isShippingValid()) {
                 RefreshShippingRates();
-                this.$deliveryWarning.hide();
+                this.$deliveryWarning.hide().addClass("d-none");
             }
             else {
-                this.$deliveryWarning.show();
+                this.$deliveryWarning.show().removeClass("d-none");
             }
 
             if (!this.isInitializing)
@@ -342,19 +342,19 @@
             var shRes = data.ShippingValidationResult;
             var blRes = data.BillingValidationResult;
 
-            this.$shippingMessage.hide();
+            this.$shippingMessage.hide().addClass("d-none");
             if (this.$shAddress.val() != "" && this.$shCity.val() != "" && this.$shZip.val() != "" && this.$shState.val() != "") {
                 if (shRes != null && shRes.Message != null && shRes.Message != "") {
                     this.$shippingMessage.html(shRes.Message);
-                    this.$shippingMessage.show();
+                    this.$shippingMessage.show().removeClass("d-none");
                 }
             }
 
-            this.$billingMessage.hide();
+            this.$billingMessage.hide().addClass("d-none");
             if (this.$blAddress.val() != "" && this.$blCity.val() != "" && this.$blZip.val() != "" && this.$blState.val() != "") {
                 if (blRes != null && blRes.Message != null && blRes.Message != "") {
                     this.$billingMessage.html(blRes.Message);
-                    this.$billingMessage.show();
+                    this.$billingMessage.show().removeClass("d-none");
                 }
             }
         },
@@ -410,20 +410,20 @@
                             self.shippingNmAddr = shRes.NormalizedAddress;
                             self.$dialogShippingNormalized.html(shRes.NormalizedAddressHtml);
                             self.$dialogShippingOriginal.html(shRes.OriginalAddressHtml);
-                            self.$dialogShippingBlock.show();
+                            self.$dialogShippingBlock.show().removeClass("d-none");
                         }
                         else {
-                            self.$dialogShippingBlock.hide();
+                            self.$dialogShippingBlock.hide().addClass("d-none");
                         }
 
                         if (showBillingNm) {
                             self.billingNmAddr = blRes.NormalizedAddress;
                             self.$dialogBillingNormalized.html(blRes.NormalizedAddressHtml);
                             self.$dialogBillingOriginal.html(blRes.OriginalAddressHtml);
-                            self.$dialogBillingBlock.show();
+                            self.$dialogBillingBlock.show().removeClass("d-none");
                         }
                         else {
-                            self.$dialogBillingBlock.hide();
+                            self.$dialogBillingBlock.hide().addClass("d-none");
                         }
 
                         if (showShippingNm && showBillingNm) {
@@ -551,7 +551,7 @@
         loadAddresses: function (addresses, shippingAddress, billingAddress) {
             var self = this;
             if (addresses.length > 0) {
-                $(".hcAvailableAddresses").show();
+                $(".hcAvailableAddresses").show().removeClass("d-none");
 
                 $.each(addresses, function (index, value) {
                     var option = $("<option>", {
@@ -592,7 +592,7 @@
     function RefreshShippingRates() {
         $('#hcShippingRates').html('');
         $('#hcDeliverySection').ajaxLoader('start');
-        $('#hcShippingNotValid').hide();
+        $('#hcShippingNotValid').hide().addClass("d-none");
 
         $.ajax({
             type: "POST",
@@ -612,14 +612,14 @@
             success: function (data) {
                 $('#hcDeliverySection').ajaxLoader('stop');
                 $('#hcShippingRates').html(data.rates);
-                $('#hcShippingRates').show();
+                $('#hcShippingRates').show().removeClass("d-none");
                 $('#hcShippingRates input').attr("tabindex", "300");
                 BindShippingRadioButtons();
                 ApplyCurrentShippingRate();
             },
             error: function (data) {
                 $('#hcDeliverySection').ajaxLoader('stop');
-                $('#hcShippingNotValid').show();
+                $('#hcShippingNotValid').show().removeClass("d-none");
             }
         });
     }
@@ -656,14 +656,14 @@
 
     function UpdatePaymentMethods(paymentViewModel) {
         if (paymentViewModel.NoPaymentNeeded) {
-            $("#hcPayment").hide();
-            $("#hcNoPayment").show();
+            $("#hcPayment").hide().addClass("d-none");
+            $("#hcNoPayment").show().removeClass("d-none");
 
             $("#hcNoPayment input[name=paymethod]").first().prop("checked", true);
         }
         else {
-            $("#hcPayment").show();
-            $("#hcNoPayment").hide();
+            $("#hcPayment").show().removeClass("d-none");
+            $("#hcNoPayment").hide().addClass("d-none");
 
             if ($("#hcNoPayment input[name=paymethod]").first().prop("checked")) {
                 $("#hcPayment input[name=paymethod]").filter(function () {
@@ -698,9 +698,9 @@
 
                 var oItem = orderItems[i];
                 if (oItem.HasAnyDiscounts)
-                    $totalBase.show();
+                    $totalBase.show().removeClass("d-none");
                 else
-                    $totalBase.hide();
+                    $totalBase.hide().addClass("d-none");
                 $totalBase.text(oItem.LineTotalWithoutDiscounts);
                 $totalAdj.text(oItem.LineTotal);
                 $lineTax.text(oItem.LineTaxPortion)
@@ -791,12 +791,12 @@
 
                 if (summary != "") {
                     self.$divSummaryMsg.html(summary);
-                    self.$divSummaryMsg.show();
+                    self.$divSummaryMsg.show().removeClass("d-none");
                 } else {
-                    self.$divSummaryMsg.hide();
+                    self.$divSummaryMsg.hide().addClass("d-none");
                 }
-                if (cards.length > 0) this.$gcFormItem.show();
-                else this.$gcFormItem.hide();
+                if (cards.length > 0) this.$gcFormItem.show().removeClass("d-none");
+                else this.$gcFormItem.hide().addClass("d-none");
 
                 self.$tblGiftCards.find("tr.hcGiftCardRow:visible").remove();
                 var $template = self.$tblGiftCards.find(".hcGiftCardRow:hidden");
@@ -809,16 +809,16 @@
                     $cells.eq(1).text(card.Balance);
                     $cells.eq(2).text(card.Charge);
 
-                    $row.show();
+                    $row.show().removeClass("d-none");
                     self.$tblGiftCards.append($row);
                 }
             } else {
                 if (summary != "") {
                     self.$divSummaryMsg.html(summary);
-                    self.$divSummaryMsg.show();
-                    self.$gcFormAction.hide();
+                    self.$divSummaryMsg.show().removeClass("d-none");
+                    self.$gcFormAction.hide().addClass("d-none");
                 } else {
-                    self.$gcPanel.hide();
+                    self.$gcPanel.hide().addClass("d-none");
                 }
             }
         },
