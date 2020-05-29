@@ -1,9 +1,11 @@
 ﻿@model Hotcakes.Modules.Core.Models.OrderViewModel
 
-<div class="hc-receipt">
-    <h1>@Localization.GetString("OrderReceived")</h1>
-    @Html.Partial("_SetFirstPassword")
-    @Html.Partial("_ViewOrder", Model)
+<div class="container">
+    <div class="hc-receipt">
+        <h1>@Localization.GetString("OrderReceived")</h1>
+        @Html.Partial("_SetFirstPassword")
+        @Html.Partial("_ViewOrder", Model)
+    </div>
 </div>
 <script type="text/javascript">
     $(document).ready(function (){

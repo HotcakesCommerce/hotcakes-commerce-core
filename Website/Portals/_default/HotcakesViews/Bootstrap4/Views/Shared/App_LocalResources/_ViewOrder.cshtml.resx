@@ -124,7 +124,7 @@
     <value>Coupon Code(s) Used</value>
   </data>
   <data name="CustomerInstructions.Text" xml:space="preserve">
-    <value>Customer's Instruction</value>
+    <value>Customer Instructions</value>
   </data>
   <data name="EditBillingInfo.Text" xml:space="preserve">
     <value>Edit Billing Info</value>
