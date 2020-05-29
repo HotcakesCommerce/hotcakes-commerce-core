@@ -30,7 +30,7 @@
                         <div id="hcAdditionalImages" class="col-12 text-center">
                             @foreach (var altImg in Model.AlternateImageUrls)
                             {
-                                <a href="@altImg.MediumlUrl"><img class="img-responsive" src="@altImg.TinyUrl" alt="@altImg.MediumlAltText" /></a>
+                                <a href="@altImg.MediumlUrl"><img class="img-fluid rounded" src="@altImg.TinyUrl" alt="@altImg.MediumlAltText" /></a>
                             }
                         </div>
                     </div>

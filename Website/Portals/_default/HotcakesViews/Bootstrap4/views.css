@@ -890,15 +890,24 @@ mark,
   padding-bottom: 10px;
   border-bottom: 1px solid #DFDFDF;
 }
-.hc-minicart .hc-tooltip .dnnGrid {
+.hc-minicart .hc-tooltip .table {
   border: none;
   margin-bottom: 10px;
+  font-size: 1rem !important;
 }
-.hc-minicart .hc-tooltip .dnnGrid img {
+.hc-minicart .hc-tooltip .table img {
   width: 100px;
 }
-.hc-minicart .hc-tooltip .dnnGrid td {
+.hc-minicart .hc-tooltip .table tr td {
   padding: 1px 5px;
+}
+.hc-minicart .hc-tooltip .table tr td .lead,
+.hc-minicart .hc-tooltip .table tr td span.lead,
+.hc-minicart .hc-tooltip .table tr td del,
+.hc-minicart .hc-tooltip .table tr td mark,
+.hc-minicart .hc-tooltip .table tr td a,
+.hc-minicart .hc-tooltip .table tr td a.hc-mini-cart {
+  font-size: 0.9rem !important;
 }
 .hc-minicart .hc-tooltip .dnnActions {
   margin: auto;
