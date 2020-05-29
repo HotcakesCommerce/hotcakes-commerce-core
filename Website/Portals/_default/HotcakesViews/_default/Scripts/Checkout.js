@@ -613,7 +613,6 @@
                 $('#hcDeliverySection').ajaxLoader('stop');
                 $('#hcShippingRates').html(data.rates);
                 $('#hcShippingRates').show();
-                $('#hcShippingRates input').attr("tabindex", "300");
                 BindShippingRadioButtons();
                 ApplyCurrentShippingRate();
             },
