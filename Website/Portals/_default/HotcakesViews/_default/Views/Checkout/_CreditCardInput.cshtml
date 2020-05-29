@@ -54,7 +54,7 @@
         </div>
     </div>
     <div class="form-group dnnFormRequired">
-        <label class="col-sm-4 control-label">@Localization.GetString("CardNumber"):</label>
+        <label class="col-sm-4 control-label" for="cccardnumber">@Localization.GetString("CardNumber"):</label>
         <div class="col-sm-offset-0 col-sm-6">
             <input type="text" name="cccardnumber" id="cccardnumber" maxlength="20"
                 value="@Model.PaymentViewModel.DataCreditCard.CardNumber"                    
@@ -62,9 +62,9 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label">@Localization.GetString("ExpDate"):</label>
+        <label class="col-sm-4 control-label" for="ccexpmonth">@Localization.GetString("ExpDate"):</label>
         <div class="col-sm-offset-0 col-sm-6 form-inline">
-            <select name="ccexpmonth" class="form-control small hc-cc-expmonth">
+            <select id="ccexpmonth" name="ccexpmonth" class="form-control small hc-cc-expmonth">
                 <option value="0">--</option>
                 @Months()
             </select>
@@ -75,16 +75,16 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label">@Localization.GetString("SecurityCode"):</label>
+        <label class="col-sm-4 control-label" for="ccsecuritycode">@Localization.GetString("SecurityCode"):</label>
         <div class="col-sm-offset-0 col-sm-6">
-            <input type="text" name="ccsecuritycode" maxlength="4" 
+            <input type="text" id="ccsecuritycode" name="ccsecuritycode" maxlength="4" 
                 class="form-control small hc-cc-seccode @Model.IsErr("ccsecuritycode")" />
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label">@Localization.GetString("NameOnCard"):</label>
+        <label class="col-sm-4 control-label" for="cccardholder">@Localization.GetString("NameOnCard"):</label>
         <div class="col-sm-offset-0 col-sm-6">
-            <input type="text" name="cccardholder" 
+            <input type="text" id="cccardholder" name="cccardholder" 
                 value="@Model.PaymentViewModel.DataCreditCard.CardHolderName"
                 class="form-control @Model.IsErr("cccardholder")" />
         </div>
