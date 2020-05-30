@@ -1527,3 +1527,7 @@ a.hc-stockdisplay.inventoryoutofstock-danger:focus {
 a.btn-primary:visited {
   color: #fff;
 }
+.hc-transaction-label {
+  display: block;
+  font-size: 100% !important;
+}
