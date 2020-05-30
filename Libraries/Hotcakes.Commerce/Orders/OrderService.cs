@@ -316,27 +316,52 @@ namespace Hotcakes.Commerce.Orders
 
             foreach (var t in transactions)
             {
+                var statusClass = (t.Success) ? " transaction-success" : " transaction-failure";
                 switch (t.Action)
                 {
                     case ActionType.OfflinePaymentRequest:
                         found = true;
-                        sb.AppendFormat("{0:C} | {1}", t.Amount, t.RefNum1);
+                        sb.AppendFormat("<span id=\"{2}\" class=\"hc-transaction-label offline-payment{3}\">{0:C} | {1}</span>", t.Amount, t.RefNum1, t.IdAsString, statusClass);
                         break;
-                    case ActionType.CreditCardInfo:
+                    //case ActionType.CreditCardInfo:
+                    //    found = true;
+                    //    sb.AppendFormat("<span id=\"{2}\" class=\"hc-transaction-label credit-card-info{3}\">{0:C} | Credit Card {1}</span>", t.Amount, t.CreditCard.CardNumberLast4Digits, t.IdAsString, statusClass);
+                    //    break;
+                    case ActionType.CreditCardCapture:
                         found = true;
-                        sb.AppendFormat("{0:C} | Credit Card {1}", t.Amount, t.CreditCard.CardNumberLast4Digits);
+                        sb.AppendFormat("<span id=\"{2}\" class=\"hc-transaction-label credit-card-capture{3}\">{0:C} | Credit Card {1}</span>", t.Amount, t.CreditCard.CardNumberLast4Digits, t.IdAsString, statusClass);
+                        break;
+                    case ActionType.CreditCardCharge:
+                        found = true;
+                        sb.AppendFormat("<span id=\"{2}\" class=\"hc-transaction-label credit-card-charge{3}\">{0:C} | Credit Card {1}</span>", t.Amount, t.CreditCard.CardNumberLast4Digits, t.IdAsString, statusClass);
+                        break;
+                    case ActionType.CreditCardRefund:
+                        found = true;
+                        sb.AppendFormat("<span id=\"{2}\" class=\"hc-transaction-label credit-card-refund{3}\">{0:C} | Credit Card {1}</span>", t.Amount, t.CreditCard.CardNumberLast4Digits, t.IdAsString, statusClass);
+                        break;
+                    case ActionType.CreditCardVoid:
+                        found = true;
+                        sb.AppendFormat("<span id=\"{2}\" class=\"hc-transaction-label credit-card-void{3}\">{0:C} | Credit Card {1}</span>", t.Amount, t.CreditCard.CardNumberLast4Digits, t.IdAsString, statusClass);
                         break;
                     case ActionType.GiftCardInfo:
                         found = true;
-                        sb.AppendFormat("{0:C} | Gift Card", t.Amount);
+                        sb.AppendFormat("<span id=\"{1}\" class=\"hc-transaction-label gift-card-info{2}\">{0:C} | Gift Card</span>", t.Amount, t.IdAsString, statusClass);
+                        break;
+                    case ActionType.GiftCardCapture:
+                        found = true;
+                        sb.AppendFormat("<span id=\"{1}\" class=\"hc-transaction-label gift-card-capture{2}\">{0:C} | Gift Card</span>", t.Amount, t.IdAsString, statusClass);
+                        break;
+                    case ActionType.GiftCardHold:
+                        found = true;
+                        sb.AppendFormat("<span id=\"{1}\" class=\"hc-transaction-label gift-card-hold{2}\">{0:C} | Gift Card</span>", t.Amount, t.IdAsString, statusClass);
                         break;
                     case ActionType.PurchaseOrderInfo:
                         found = true;
-                        sb.AppendFormat("{0:C} | PO #{1}", t.Amount, t.PurchaseOrderNumber);
+                        sb.AppendFormat("<span id=\"{2}\" class=\"hc-transaction-label purchase-order{3}\">{0:C} | PO #{1}</span>", t.Amount, t.PurchaseOrderNumber, t.IdAsString, statusClass);
                         break;
                     case ActionType.RecurringSubscriptionInfo:
                         found = true;
-                        sb.AppendFormat("Credit Card {0}", t.CreditCard.CardNumberLast4Digits);
+                        sb.AppendFormat("<span id=\"{1}\" class=\"hc-transaction-label credit-card-recurring{2}\">Credit Card {0}</span>", t.CreditCard.CardNumberLast4Digits, t.IdAsString, statusClass);
                         break;
                     default:
                         var paymentMethod = PaymentMethods.Find(t.MethodId);
@@ -344,7 +369,7 @@ namespace Hotcakes.Commerce.Orders
                         if (paymentMethod != null)
                         {
                             found = true;
-                            sb.AppendFormat("{0}", paymentMethod.MethodName);
+                            sb.AppendFormat("<span id=\"{1}\" class=\"hc-transaction-label default{2}\">{0}</span>", paymentMethod.MethodName, t.IdAsString, statusClass);
                         }
                         break;
                 }

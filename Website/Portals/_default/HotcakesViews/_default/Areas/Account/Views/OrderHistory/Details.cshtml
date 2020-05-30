@@ -16,5 +16,7 @@
 <script type="text/javascript">
     $(document).ready(function (){
         $("table.totaltable").attr("class", "table table-striped table-hover totaltable");
+        $(".transaction-failure").addClass("badge badge-danger").attr("title", "@Localization.GetString("TransactionFailure")");
+        $(".transaction-success").addClass("badge badge-info").attr("title", "@Localization.GetString("TransactionSuccess")");;
     });
 </script>
