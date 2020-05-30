@@ -2,20 +2,20 @@
 @using Hotcakes.Modules.Core.AppCode
 @Html.RegisterViewScript("Search.SearchInput.js")
 
-<div class="row-fluid hc-search-input">
-    <div class="col-xs-12 center-block">
-        @using (Html.BeginHccRouteForm(HccRoute.Search, FormMethod.Get, new Dictionary<string, object> { { "data-skipxy", "true" } }))
-        {
-            <div class="form-inline">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="search" value="@ViewBag.Search" />
-                </div>
-                <button class="btn btn-default" title="@Localization.GetString("Search")">
-                    <i class="glyphicon glyphicon-search margin-right-sm" aria-hidden="true"></i>@Localization.GetString("Search")
-                </button>
-                <input type="image" class="hidden" value="" />
-            </div>
-        }
+<div class="container">
+    @using (Html.BeginHccRouteForm(HccRoute.Search, FormMethod.Get, new Dictionary<string, object> { { "data-skipxy", "true" } }))
+    {
+    <div class="row no-gutters hc-search-input">
+        <div class="col-xs-10 col-sm-9">
+            <label class="sr-only" for="search">@Localization.GetString("SearchLabel")</label>
+            <input type="text" class="form-control" id="search" name="search" value="@ViewBag.Search" placeholder="@Localization.GetString("SearchLabel")" />
+        </div>
+        <div class="col-xs-2 col-sm-3 text-right">
+            <button class="btn btn-primary btn-block" title="@Localization.GetString("Search")">
+                <i class="fas fa-search" aria-hidden="true"></i><span class="d-none d-sm-inline">@Localization.GetString("Search")</span>
+            </button>
+        </div>
+        <input type="image" class="invisible" value="" />
     </div>
+    }
 </div>
-<div class="clearfix"></div>

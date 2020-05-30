@@ -123,4 +123,10 @@
   <data name="Search.Text" xml:space="preserve">
     <value>Search Results</value>
   </data>
+  <data name="ProductFound.Text" xml:space="preserve">
+    <value>Product Found</value>
+  </data>
+  <data name="ProductsFound.Text" xml:space="preserve">
+    <value>Products Found</value>
+  </data>
 </root>

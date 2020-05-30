@@ -120,4 +120,7 @@
   <data name="Search.Text" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="SearchLabel.Text" xml:space="preserve">
+    <value>find a product</value>
+  </data>
 </root>
