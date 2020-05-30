@@ -38,7 +38,7 @@
                     <table class="table table-hover table-striped">
                         <thead>
                             <tr>
-                                <td class="d-none-xs">
+                                <td class="d-none d-sm-block">
                                     @Localization.GetString("TimeOfOrder")
                                 </td>
                                 <td>
@@ -58,7 +58,7 @@
                         @foreach (var o in Model.Orders)
                         {
                             <tr>
-                                <td class="d-none-xs">@DateHelper.ConvertUtcToStoreTime(HccApp, o.TimeOfOrderUtc)</td>
+                                <td class="d-none d-sm-block">@DateHelper.ConvertUtcToStoreTime(HccApp, o.TimeOfOrderUtc)</td>
                                 <td>@o.OrderNumber</td>
                                 <td>@o.TotalGrand.ToString("C")</td>
                                 <td>@LocalizationUtils.GetOrderStatus(o.StatusName)</td>

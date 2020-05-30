@@ -22,7 +22,7 @@
 								<span class="badge badge-success">@Html.Raw(@item.DiscountDetailsAsHtml())</span>
 							</div>
 						}
-						<div class="d-none-sm">
+						<div class="d-none d-sm-block">
 							@Html.Raw(item.ProductShortDescription)
 
 							@if (!string.IsNullOrEmpty(item.CustomPropGiftCardNumber))
