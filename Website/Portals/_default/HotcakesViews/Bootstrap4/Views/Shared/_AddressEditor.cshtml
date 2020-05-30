@@ -1,103 +1,105 @@
 ﻿@model Hotcakes.Modules.Core.Models.AddressViewModel
-<div class="row-fluid">
-    <div class="col-xs-12">
-        <div id="hcAddressValidation" class="dnnFormMessage dnnFormMessageWarning" style="display: none;"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div id="hcAddressValidation" class="dnnFormMessage dnnFormMessageWarning" style="display: none;"></div>
+        </div>
     </div>
-</div>
-<div class="row-fluid">
-    <div class="col-xs-12">
-        <div class="form-horizontal hcAddressForm" data-bind="with: AddressModel">
-            <div class="form-group">
-                <label class="col-sm-4 control-label">
-                    @Localization.GetString("Country"):
-                </label>
-                <div class="col-sm-offset-0 col-sm-6">
-                    @Html.DropDownListFor(model => model.CountryBvin,
-                        new SelectList(Model.Countries, "Bvin", "DisplayName", Model.CountryBvin),
-                        new { data_bind = "value: CountryBvin", @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.CountryBvin, "", new { @class = "alert alert-danger" })
+    <div class="row">
+        <div class="col-12">
+            <div class="form-horizontal hcAddressForm" data-bind="with: AddressModel">
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="CountryBvin">
+                        @Localization.GetString("Country"):
+                    </label>
+                    <div class="col-sm-6 offset-sm-0">
+                        @Html.DropDownListFor(model => model.CountryBvin,
+                            new SelectList(Model.Countries, "Bvin", "DisplayName", Model.CountryBvin),
+                            new { data_bind = "value: CountryBvin", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CountryBvin, "", new { @class = "alert alert-danger" })
+                    </div>
                 </div>
-            </div>
-            <div class="form-group dnnFormRequired">
-                <label class="col-sm-4 control-label">
-                    @Localization.GetString("FirstName"):
-                </label>
-                <div class="col-sm-offset-0 col-sm-6">
-                    @Html.TextBoxFor(model => model.FirstName, new { data_bind = "value: FirstName", @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "alert alert-danger" })
+                <div class="form-group row dnnFormRequired">
+                    <label class="col-sm-4 col-form-label" for="FirstName">
+                        @Localization.GetString("FirstName"):
+                    </label>
+                    <div class="col-sm-6 offset-sm-0">
+                        @Html.TextBoxFor(model => model.FirstName, new { data_bind = "value: FirstName", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "alert alert-danger" })
+                    </div>
                 </div>
-            </div>
-            <div class="form-group dnnFormRequired">
-                <label class="col-sm-4 control-label">
-                    @Localization.GetString("LastName"):
-                </label>
-                <div class="col-sm-offset-0 col-sm-6">
-                    @Html.TextBoxFor(model => model.LastName, new { data_bind = "value: LastName", @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "alert alert-danger" })
+                <div class="form-group row dnnFormRequired">
+                    <label class="col-sm-4 col-form-label" for="LastName">
+                        @Localization.GetString("LastName"):
+                    </label>
+                    <div class="col-sm-6 offset-sm-0">
+                        @Html.TextBoxFor(model => model.LastName, new { data_bind = "value: LastName", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "alert alert-danger" })
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">
-                    @Localization.GetString("Company"):
-                </label>
-                <div class="col-sm-offset-0 col-sm-6">
-                    @Html.TextBoxFor(model => model.Company, new { data_bind = "value: Company", @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Company, "", new { @class = "alert alert-danger" })
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="Company">
+                        @Localization.GetString("Company"):
+                    </label>
+                    <div class="col-sm-6 offset-sm-0">
+                        @Html.TextBoxFor(model => model.Company, new { data_bind = "value: Company", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Company, "", new { @class = "alert alert-danger" })
+                    </div>
                 </div>
-            </div>
-            <div class="form-group dnnFormRequired">
-                <label class="col-sm-4 control-label">
-                    @Localization.GetString("Address"):
-                </label>
-                <div class="col-sm-offset-0 col-sm-6">
-                    @Html.TextBoxFor(model => model.Line1, new { data_bind = "value: Line1", @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Line1, "", new { @class = "alert alert-danger" })
+                <div class="form-group row dnnFormRequired">
+                    <label class="col-sm-4 col-form-label" for="Line1">
+                        @Localization.GetString("Address"):
+                    </label>
+                    <div class="col-sm-6 offset-sm-0">
+                        @Html.TextBoxFor(model => model.Line1, new { data_bind = "value: Line1", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Line1, "", new { @class = "alert alert-danger" })
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">
-                    &nbsp;
-                </label>
-                <div class="col-sm-offset-0 col-sm-6">
-                    @Html.TextBoxFor(model => model.Line2, new { data_bind = "value: Line2", @class = "form-control" })
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="Line2">
+                        &nbsp;
+                    </label>
+                    <div class="col-sm-6 offset-sm-0">
+                        @Html.TextBoxFor(model => model.Line2, new { data_bind = "value: Line2", @class = "form-control" })
+                    </div>
                 </div>
-            </div>
-            <div class="form-group dnnFormRequired">
-                <label class="col-sm-4 control-label">
-                    @Localization.GetString("City"):
-                </label>
-                <div class="col-sm-offset-0 col-sm-6">
-                    @Html.TextBoxFor(model => model.City, new { data_bind = "value: City", @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "alert alert-danger" })
+                <div class="form-group row dnnFormRequired">
+                    <label class="col-sm-4 col-form-label" for="City">
+                        @Localization.GetString("City"):
+                    </label>
+                    <div class="col-sm-6 offset-sm-0">
+                        @Html.TextBoxFor(model => model.City, new { data_bind = "value: City", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "alert alert-danger" })
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">
-                    @Localization.GetString("State"):
-                </label>
-                <div class="col-sm-offset-0 col-sm-6">
-                    @Html.DropDownListFor(model => model.RegionBvin,
-                        new SelectList(Model.Regions, "Abbreviation", "DisplayName", Model.RegionBvin), 
-                        new { data_bind = "value: RegionBvin", @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.RegionBvin, "The State field is required", new { @class = "alert alert-danger" })
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="RegionBvin">
+                        @Localization.GetString("State"):
+                    </label>
+                    <div class="col-sm-6 offset-sm-0">
+                        @Html.DropDownListFor(model => model.RegionBvin,
+                            new SelectList(Model.Regions, "Abbreviation", "DisplayName", Model.RegionBvin), 
+                            new { data_bind = "value: RegionBvin", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.RegionBvin, "The State field is required", new { @class = "alert alert-danger" })
+                    </div>
                 </div>
-            </div>
-            <div class="form-group dnnFormRequired">
-                <label class="col-sm-4 control-label">
-                    @Localization.GetString("Zip"):
-                </label>
-                <div class="col-sm-offset-0 col-sm-6">
-                    @Html.TextBoxFor(model => model.PostalCode, new { data_bind = "value: PostalCode", @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "alert alert-danger" })
+                <div class="form-group row dnnFormRequired">
+                    <label class="col-sm-4 col-form-label" for="PostalCode">
+                        @Localization.GetString("Zip"):
+                    </label>
+                    <div class="col-sm-6 offset-sm-0">
+                        @Html.TextBoxFor(model => model.PostalCode, new { data_bind = "value: PostalCode", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "alert alert-danger" })
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">
-                    @Localization.GetString("Phone"):
-                </label>
-                <div class="col-sm-offset-0 col-sm-6">
-                    @Html.TextBoxFor(model => model.Phone, new { data_bind = "value: Phone", @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "alert alert-danger" })
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="Phone">
+                        @Localization.GetString("Phone"):
+                    </label>
+                    <div class="col-sm-6 offset-sm-0">
+                        @Html.TextBoxFor(model => model.Phone, new { data_bind = "value: Phone", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "alert alert-danger" })
+                    </div>
                 </div>
             </div>
         </div>
