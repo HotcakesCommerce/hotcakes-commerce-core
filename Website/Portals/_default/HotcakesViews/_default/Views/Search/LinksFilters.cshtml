@@ -36,7 +36,7 @@
             <div class="alert alert-info">@Localization.GetString("ProductsNotFound")</div>
         }
         
-        @if (Model.SelectedManufactures.Count > 0 || Model.SelectedVendors.Count > 0 || Model.SelectedTypes.Count > 0 || Model.SelectedCategories.Count > 0 || Model.SelectedProperties.Count > 0)
+        @if (Model.SelectedManufacturers.Count > 0 || Model.SelectedVendors.Count > 0 || Model.SelectedTypes.Count > 0 || Model.SelectedCategories.Count > 0 || Model.SelectedProperties.Count > 0)
         {
             <div class="hc-drilldown-selected margin-bottom-lg">
                 <h5>@Localization.GetString("YouSelected")</h5>
@@ -57,7 +57,7 @@
                             <a href="@BuildUrlRemoveValues("types")" title="@Localization.GetString("Remove")"><em class="glyphicon glyphicon-remove"></em></a>
                         </li>
                     }
-                    @foreach (var item in Model.SelectedManufactures)
+                    @foreach (var item in Model.SelectedManufacturers)
                     {
                         <li>
                             @Localization.GetString("Brands"):
@@ -110,11 +110,11 @@
                     }
                 </ul>
             }
-            @if (Model.ShowManufactures && Model.Manufactures.Count > 1 && Model.SelectedManufactures.Count == 0)
+            @if (Model.ShowManufacturers && Model.Manufacturers.Count > 1 && Model.SelectedManufacturers.Count == 0)
             {
                 <h6>@Localization.GetString("Brands")</h6>
                 <ul class="list-unstyled">
-                    @foreach (var item in Model.Manufactures)
+                    @foreach (var item in Model.Manufacturers)
                     {
                         <li>
                             <a href="@BuildUrlAddValues("manufacturers", item.Id)"><em class="glyphicon glyphicon-zoom-in"></em>@item.Name</a> @Html.Raw(" (" + @item.Count + ")")
