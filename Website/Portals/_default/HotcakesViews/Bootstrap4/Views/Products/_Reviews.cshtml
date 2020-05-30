@@ -1,7 +1,7 @@
 ﻿@model Hotcakes.Modules.Core.Models.ProductPageViewModel
 <a name="reviews"></a>
 <div class="row">
-    <div class="col-12">
+    <div class="col-12 mb-2">
         <h3>@Localization.GetString("Reviews") <span>(@Model.LocalProduct.ReviewsApproved.Count)</span></h3>
     </div>
     @Html.Action("TopReviews", "ProductReviews", new { howMany = 3, reviews = Model.LocalProduct.ReviewsApproved })
