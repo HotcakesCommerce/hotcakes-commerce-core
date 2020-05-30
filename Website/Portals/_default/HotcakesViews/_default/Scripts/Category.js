@@ -195,7 +195,7 @@ function HcDrillDownFilterViewModel(data, $form, catId, modId) {
                 MinPrice: params.min.replace("_", DECIMAL_SEP),
                 MaxPrice: params.max.replace("_", DECIMAL_SEP),
                 CategoryId: catId,
-                Manufactures: params.mn ? params.mn.split(",") : [],
+                Manufacturers: params.mn ? params.mn.split(",") : [],
                 Vendors: params.vn ? params.vn.split(",") : [],
                 Types: params.tp ? params.tp.split(",") : [],
             };
