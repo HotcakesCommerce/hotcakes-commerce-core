@@ -247,7 +247,7 @@ namespace Hotcakes.Modules.Core.Admin.Dashboard
                     CreateTopChangeItem("Blue Bracelet", 4.11m),
                     CreateTopChangeItem("Brown Fedora", -0.85m),
                     CreateTopChangeItem("Butterfly Earrings", 0.16m),
-                    CreateTopChangeItem("Cup Cake", -0.08m),
+                    CreateTopChangeItem("Cupcake", -0.08m),
                     CreateTopChangeItem("Laptop Computer", 0)
                 }
             };
@@ -264,7 +264,7 @@ namespace Hotcakes.Modules.Core.Admin.Dashboard
                     CreateTopChangeItem("Purple Top", 12m),
                     CreateTopChangeItem("Brown Fedora", -9.1m),
                     CreateTopChangeItem("White Shoes", 0.99m),
-                    CreateTopChangeItem("Cup Cake", -0.62m),
+                    CreateTopChangeItem("Cupcake", -0.62m),
                     CreateTopChangeItem("Baseball Bat", 0.03m)
                 }
             };
