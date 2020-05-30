@@ -382,3 +382,75 @@ mark, .mark {
         font-size: 1.2rem;
     }
 }
+
+/*--------------------------------------------------
+    Stock
+--------------------------------------------------*/
+
+.hc-stockdisplay {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 100%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .hc-stockdisplay {
+        transition: none
+    }
+}
+
+a.hc-stockdisplay:focus, a.hc-stockdisplay:hover {
+    text-decoration: none
+}
+
+.hc-stockdisplay:empty {
+    display: none
+}
+
+.btn .hc-stockdisplay {
+    position: relative;
+    top: -1px
+}
+
+.hc-stockdisplay-pill {
+    padding-right: .6em;
+    padding-left: .6em;
+    border-radius: 10rem
+}
+
+.hc-stockdisplay {
+    color: #fff;
+    background-color: #6c757d
+}
+
+a.hc-stockdisplay:focus, a.hc-stockdisplay:hover {
+    color: #fff;
+    background-color: #545b62
+}
+
+a.hc-stockdisplay.focus, a.hc-stockdisplay:focus {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(108, 117, 125, .5)
+}
+
+.hc-stockdisplay.inventoryoutofstock {
+    color: #fff;
+    background-color: #dc3545
+}
+    
+ a.hc-stockdisplay.inventoryoutofstock:focus, a.hc-stockdisplay.inventoryoutofstock-danger:hover {
+    color: #fff;
+    background-color: #bd2130
+}
+    
+ a.hc-stockdisplay.inventoryoutofstock-danger.focus, a.hc-stockdisplay.inventoryoutofstock-danger:focus {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .5)
+}

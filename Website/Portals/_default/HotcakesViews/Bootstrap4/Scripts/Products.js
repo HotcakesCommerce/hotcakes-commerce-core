@@ -104,6 +104,8 @@
     }
 
     function Init() {
+        $(".inventoryoutofstock").parent().addClass("inventoryoutofstock");
+
         BindAdditionalImages();
 
         // Review Form Submit
