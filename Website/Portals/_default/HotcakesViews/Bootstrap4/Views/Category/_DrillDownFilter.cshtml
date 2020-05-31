@@ -49,7 +49,7 @@
         </div>
 
         <h5 data-bind="if: SubCategories.length > 0">@Localization.GetString("Categories")</h5>
-        <ul class="list-unstyled hc-facets mb-3" data-bind="foreach: SubCategories">
+        <ul class="list-unstyled hc-facets ml-2 mb-3" data-bind="foreach: SubCategories">
             <li>
                 <a href="#" data-bind="text: Title, attr: { href: Url }"></a>
             </li>

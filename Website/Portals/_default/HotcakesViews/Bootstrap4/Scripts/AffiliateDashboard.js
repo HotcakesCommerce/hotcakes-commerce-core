@@ -292,12 +292,7 @@ var HcUrlBuilderViewModel = function (data, $form) {
 };
 
 $(function () {
-    $('#hcAffiliateTabs').dnnTabs({ selected: 0 });
-    $(".nav-tabs li").click(function () {
-        var tab = $(this);
-        $(".nav-tabs li").removeAttr("class");
-        tab.attr("class", "active");
-    });
+    $("#hcAffiliateTabs").hcTabs();
 
     $("#hcCopyToClipboard").click(function (e) {
         e.preventDefault();
@@ -305,6 +300,7 @@ $(function () {
 
     var clipboard = new ClipboardJS("#hcCopyToClipboard");
 
+    // kept this in to help viewset developers debug the clipboard plugin, if necessary 
     /*clipboard.on("success", function (e) {
         console.info("Action:", e.action);
         console.info("Text:", e.text);

@@ -2,22 +2,26 @@
 
 @using (Html.BeginHccForm(new { @class = "hcAffiliatePayments" }))
 {
-    <div class="row-fluid">
-        <div class="form-horizontal col-xs-12">
-            <div class="form-group">
-                <label class="col-xs-4 control-label">
-                    @Localization.GetString("lblDate")
-                </label>
-                <div class="col-xs-offset-0 col-xs-6">
-                    <select data-bind="value: dateRange" class="form-control">
-                        @foreach (var t in Enum.GetValues(typeof(DateRangeType)).OfType<DateRangeType>())
-                        {
-                            if (t != DateRangeType.Custom && t != DateRangeType.None)
-                            {
-                            <option value="@((int)t)">@Localization.GetString(t.ToString())</option>
-                            }
-                        }
-                    </select>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-horizontal">
+                    <div class="form-group row text-right">
+                        <label class="col-sm-4 col-form-label" for="selDateRange">
+                            @Localization.GetString("lblDate")
+                        </label>
+                        <div class="col-sm-6 offset-sm-0">
+                            <select id="selDateRange" data-bind="value: dateRange" class="form-control">
+                                @foreach (var t in Enum.GetValues(typeof(DateRangeType)).OfType<DateRangeType>())
+                                {
+                                    if (t != DateRangeType.Custom && t != DateRangeType.None)
+                                    {
+                                    <option value="@((int)t)">@Localization.GetString(t.ToString())</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,5 +76,4 @@
             </div>
         </div>
     </div>
-    <div class="clearfix"></div>
 }
