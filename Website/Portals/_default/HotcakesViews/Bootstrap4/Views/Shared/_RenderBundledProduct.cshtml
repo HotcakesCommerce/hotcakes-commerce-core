@@ -1,0 +1,16 @@
+﻿@model Hotcakes.Modules.Core.Models.BundledProductViewModel
+<div class="card mb-4">
+    <div class="card-header">
+        <h6 class="card-title text-truncate" title="@Model.Item.ProductName"><a href="@Model.ProductLink">@Model.Item.ProductName</a></h6>
+    </div>
+    <div class="card-body">
+        <div class="hc-product-card-img">
+            <a href="@Model.ProductLink">
+                <img class="img-fluid rounded" src="@Model.ImageUrls.SmallUrl" alt="@Model.ImageUrls.SmallAltText" />
+            </a>
+        </div>
+    </div>
+    <div class="card-footer text-center">
+        @Localization.GetString("Quantity") @Model.BundledProductAdv.Quantity
+    </div>
+</div>

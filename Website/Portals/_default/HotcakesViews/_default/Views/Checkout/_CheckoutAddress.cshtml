@@ -8,7 +8,7 @@
                 <text>style="display: none;"</text>
             }
             >
-            <label class="col-sm-4 control-label">@Localization.GetString("AddressBook"):</label>
+            <label class="col-sm-4 control-label" for="@(Model.Prefix + "AvailableAddresses")">@Localization.GetString("AddressBook"):</label>
             <div class="col-sm-offset-0 col-sm-6">
                 @Html.DropDownList(Model.Prefix + "AvailableAddresses",
                     new SelectList(Model.Addresses, "Bvin", "Line1", Model.Address.Bvin),
@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-4 control-label">@Localization.GetString("Country"):</label>
+            <label class="col-sm-4 control-label" for="@(Model.Prefix + "country")">@Localization.GetString("Country"):</label>
             <div class="col-sm-offset-0 col-sm-6">
                 <select id="@(Model.Prefix + "country")" name="@(Model.Prefix + "country")" class="form-control">
                     @foreach (var c in Model.Countries)
@@ -34,66 +34,66 @@
             </div>
         </div>
         <div class="form-group dnnFormRequired">
-            <label class="col-sm-4 control-label">@Localization.GetString("FirstName"):</label>
+            <label class="col-sm-4 control-label" for="@(Model.Prefix + "firstname")">@Localization.GetString("FirstName"):</label>
             <div class="col-sm-offset-0 col-sm-6">
                 <input type="text" id="@(Model.Prefix + "firstname")" name="@(Model.Prefix + "firstname")"
-                        size="20" value="@Model.Address.FirstName" class="form-control @Model.IsErr("firstname")" />
+                    value="@Model.Address.FirstName" class="form-control @Model.IsErr("firstname")" placeholder="@Localization.GetString("phFirstName")" />
             </div>
         </div>
         <div class="form-group dnnFormRequired">
-            <label class="col-sm-4 control-label">@Localization.GetString("LastName"):</label>
+            <label class="col-sm-4 control-label" for="@(Model.Prefix + "lastname")">@Localization.GetString("LastName"):</label>
             <div class="col-sm-offset-0 col-sm-6">
                 <input type="text" id="@(Model.Prefix + "lastname")" name="@(Model.Prefix + "lastname")"
-                        size="20" value="@Model.Address.LastName" class="form-control @Model.IsErr("lastname")" />
+                    value="@Model.Address.LastName" class="form-control @Model.IsErr("lastname")" placeholder="@Localization.GetString("phLastName")" />
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-4 control-label">@Localization.GetString("Company"):</label>
+            <label class="col-sm-4 control-label" for="@(Model.Prefix + "company")">@Localization.GetString("Company"):</label>
             <div class="col-sm-offset-0 col-sm-6">
                 <input type="text" id="@(Model.Prefix + "company")" name="@(Model.Prefix + "company")"
-                        size="20" value="@Model.Address.Company" class="form-control @Model.IsErr("company")" />
+                    value="@Model.Address.Company" class="form-control @Model.IsErr("company")" placeholder="@Localization.GetString("phCompany")" />
             </div>
         </div>
         <div class="form-group dnnFormRequired">
-            <label class="col-sm-4 control-label">@Localization.GetString("Address"):</label>
+            <label class="col-sm-4 control-label" for="@(Model.Prefix + "address")">@Localization.GetString("Address"):</label>
             <div class="col-sm-offset-0 col-sm-6">
                 <input type="text" id="@(Model.Prefix + "address")" name="@(Model.Prefix + "address")"
-                        size="20" value="@Model.Address.Line1" class="form-control @Model.IsErr("address")" />
+                    value="@Model.Address.Line1" class="form-control @Model.IsErr("address")" placeholder="@Localization.GetString("phAddress1")" />
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-4 control-label"></label>
+            <label class="col-sm-4 control-label" for="@(Model.Prefix + "address2")">@Localization.GetString("Address2")</label>
             <div class="col-sm-offset-0 col-sm-6">
                 <input type="text" id="@(Model.Prefix + "address2")" name="@(Model.Prefix + "address2")"
-                        size="20" value="@Model.Address.Line2" class="form-control @Model.IsErr("address")" />
+                    value="@Model.Address.Line2" class="form-control @Model.IsErr("address")" placeholder="@Localization.GetString("phAddress2")" />
             </div>
         </div>
         <div class="form-group dnnFormRequired">
-            <label class="col-sm-4 control-label">@Localization.GetString("City"):</label>
+            <label class="col-sm-4 control-label" for="@(Model.Prefix + "city")">@Localization.GetString("City"):</label>
             <div class="col-sm-offset-0 col-sm-6">
                 <input type="text" id="@(Model.Prefix + "city")" name="@(Model.Prefix + "city")"
-                        size="20" value="@Model.Address.City" class="form-control @Model.IsErr("city")" />
+                    value="@Model.Address.City" class="form-control @Model.IsErr("city")" placeholder="@Localization.GetString("phCity")" />
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-4 control-label">@Localization.GetString("State"):</label>
+            <label class="col-sm-4 control-label" for="@(Model.Prefix + "state")">@Localization.GetString("State"):</label>
             <div class="col-sm-offset-0 col-sm-6">
                 <select id="@(Model.Prefix + "state")" name="@(Model.Prefix + "state")" class="form-control"></select>
                 <input type="hidden" id="@(Model.Prefix + "tempregion")" value="@Model.Address.RegionBvin" />
             </div>
         </div>
         <div class="form-group dnnFormRequired">
-            <label class="col-sm-4 control-label">@Localization.GetString("PostalCode"):</label>
+            <label class="col-sm-4 control-label" for="@(Model.Prefix + "zip")">@Localization.GetString("PostalCode"):</label>
             <div class="col-sm-offset-0 col-sm-6">
                 <input type="text" id="@(Model.Prefix + "zip")" name="@(Model.Prefix + "zip")" 
-                        size="10" value="@Model.Address.PostalCode" class="form-control @Model.IsErr("zip")" />
+                    value="@Model.Address.PostalCode" class="form-control @Model.IsErr("zip")" placeholder="@Localization.GetString("phPostalCode")" />
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-4 control-label">@Localization.GetString("Phone"):</label>
+            <label class="col-sm-4 control-label" for="@(Model.Prefix + "phone")">@Localization.GetString("Phone"):</label>
             <div class="col-sm-offset-0 col-sm-6">
                 <input type="text" id="@(Model.Prefix + "phone")" name="@(Model.Prefix + "phone")" 
-                        value="@Model.Address.Phone" size="20" class="form-control @Model.IsErr("phone")" />
+                    value="@Model.Address.Phone" class="form-control @Model.IsErr("phone")" placeholder="@Localization.GetString("phPhone")" />
             </div>
         </div>
         <input type="hidden" id="@(Model.Prefix + "addressbvin")" name="@(Model.Prefix + "addressbvin")" value="@Model.Address.Bvin" />

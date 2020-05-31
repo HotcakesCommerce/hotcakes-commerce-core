@@ -34,8 +34,8 @@
 			<asp:DropDownList ID="ddlPostContentColumnId" runat="server"/>
 		</div>
         <div class="dnnFormItem">
-            <dnn:labelcontrol id="ShowManufactures" controlname="ShowManufacturesCheckBox" suffix=":" runat="server" />
-            <asp:CheckBox ID="ShowManufacturesCheckBox" CssClass="dnnFormLabel" runat="server" />
+            <dnn:labelcontrol id="ShowManufacturers" controlname="ShowManufacturersCheckBox" suffix=":" runat="server" />
+            <asp:CheckBox ID="ShowManufacturersCheckBox" CssClass="dnnFormLabel" runat="server" />
         </div>
         <div class="dnnFormItem">
             <dnn:labelcontrol id="ShowVendors" controlname="ShowVendorsCheckBox" suffix=":" runat="server" />

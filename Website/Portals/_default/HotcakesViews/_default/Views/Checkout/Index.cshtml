@@ -148,42 +148,42 @@
                 }
 
                 <div class="row-fluid">
-                    <div class="col-md-12 hc-payment-section">
+                    <div class="col-md-12 hc-payment-section margin-bottom-md">
                         <h3>@Localization.GetString("PaymentMethod")</h3>
                         @Html.Partial("_DisplayPaymentMethods", Model)
                     </div>
                 </div>
 
+                if (Model.ShowAffiliateId)
+                {
+                    <div class="row-fluid">
+                        <div class="col-md-12 hc-payment-section">
+                            <h3>@Localization.GetString("AffiliatesHeader")</h3>
+                            <div id="affiliatemessage" class="dnnFormMessage" style="display: none"></div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="affiliateid">@Localization.GetString("AffiliateId"):</label>
+                                <div class="col-sm-offset-0 col-sm-6">
+                                    <input type="text" id="affiliateid" name="affiliateid" value="@Model.AffiliateId" 
+                                           class="form-control @Model.IsErr("affiliateid")"  placeholder="@Localization.GetString("Optional")" />
+                                </div>
+                            </div>
+                            <script type="text/javascript">
+                                var HCC = HCC || {};
+                                HCC.Affiliate = HCC.Affiliate || {};
+                                HCC.Affiliate.MessageAffiliateInvalid = '@Localization.GetString("MessageAffiliateInvalid")';
+                            </script>
+                        </div>
+                    </div>
+                }
+
                 <div class="row-fluid">
-                    <div class="col-md-12 hc-instructions-section margin-top-lg">
+                    <div class="col-md-12 hc-instructions-section">
                         <h3>@Localization.GetString("SpecialInstructions")</h3>
                         <div class="form-group">
                             <textarea id="specialinstructions" name="specialinstructions" class="form-control">@Model.CurrentOrder.Instructions</textarea>
                         </div>
                     </div>
                 </div>
-
-                if (Model.ShowAffiliateId)
-                {
-                <div class="row-fluid">
-                    <div class="col-md-12 hc-payment-section">
-                        <h3>@Localization.GetString("AffiliatesHeader")</h3>
-                        <div id="affiliatemessage" class="dnnFormMessage" style="display: none"></div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">@Localization.GetString("AffiliateId"):</label>
-                            <div class="col-sm-offset-0 col-sm-6">
-                                <input type="text" id="affiliateid" name="affiliateid" value="@Model.AffiliateId" 
-                                    class="form-control @Model.IsErr("affiliateid")" />
-                            </div>
-                        </div>
-                        <script type="text/javascript">
-                            var HCC = HCC || {};
-                            HCC.Affiliate = HCC.Affiliate || {};
-                            HCC.Affiliate.MessageAffiliateInvalid = '@Localization.GetString("MessageAffiliateInvalid")';
-                        </script>
-                    </div>
-                </div>
-                }
 
                 @Html.Partial("_NormalizeAddressDialog", Model)
 

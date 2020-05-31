@@ -1,0 +1,93 @@
+﻿@model Hotcakes.Modules.Core.Models.AffiliateReferralsViewModel
+@using (Html.BeginHccForm(new { @class = "hcReferrals" }))
+{
+	<div class="container">
+
+		<div class="row">
+			<div class="col-12">
+				<div class="form-horizontal">
+					<div class="form-group row text-right">
+						<label class="col-sm-4 col-form-label" for="searchText">
+							@Localization.GetString("SearchText")
+						</label>
+						<div class="col-sm-6 offset-sm-0">
+							<input id="searchText" type="text" data-bind="value: searchText" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group row text-right">
+						<label class="col-sm-4 col-form-label" for="searchBy">
+							@Localization.GetString("SearchBy")
+						</label>
+						<div class="col-sm-6 offset-sm-0">
+							<select id="searchBy" data-bind="value: searchBy" class="form-control">
+								<option value="0">@Localization.GetString("LastName")</option>
+								<option value="1">@Localization.GetString("AffiliateId")</option>
+								<option value="2">@Localization.GetString("Email")</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-6 offset-sm-4 text-left">
+							<a data-bind="click: search" class="btn btn-primary"><i class="fas fa-search"></i>@Localization.GetString("Search")</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-4">
+				<div class="hc-board">
+					<div class="hc-title">@Localization.GetString("NumberOfAffiliates")</div>
+					<div class="hc-amount-line" data-bind="text: totalCount"></div>
+				</div>
+			</div>	
+			<div class="col-xs-6 col-sm-4">
+				<div class="hc-board">
+					<div class="hc-title">@Localization.GetString("TotalRevenue")</div>
+					<div class="hc-amount-line" data-bind="text: totalAmount"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<h2>@Localization.GetString("Referrals")</h2>
+
+			<div class="table-responsive">
+				<table class="table table-hover table-striped">
+					<thead>
+						<tr class="dnnGridHeader">
+							<td>@Localization.GetString("Name")</td>
+							<td>@Localization.GetString("Id")</td>
+							<td>@Localization.GetString("Email")</td>
+							<td>@Localization.GetString("Revenue")</td>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- ko foreach: referrals -->
+						<tr>
+							<td data-bind="text: $data.Name"></td>
+							<td data-bind="text: $data.Id"></td>
+							<td data-bind="text: $data.Email"></td>
+							<td data-bind="text: $data.Revenue"></td>
+						</tr>
+						<!-- /ko -->
+					</tbody>
+				</table>
+			</div>
+			<div class="clearfix text-center">
+				<ul class="text-center list-inline list-unstyled">
+					<!-- ko if: pager.previousPage() > 0 -->
+					<li><a data-bind="click: function () { pager.setCurrentPage(pager.previousPage()) }">...</a></li>
+					<!-- /ko -->
+					<!-- ko foreach: pager.pagesList -->
+					<li data-bind="css: { 'current': $data == $parent.pager.pageNumber() }"><a data-bind="	text: $data, click: function () { $parent.pager.setCurrentPage($data) }"></a></li>
+					<!-- /ko -->
+					<!-- ko if: pager.nextPage() > 0 -->
+					<li><a data-bind="click: function () { pager.setCurrentPage(pager.nextPage()) }">...</a></li>
+					<!-- /ko -->
+				</ul>
+			</div>
+		</div>
+	</div>
+}

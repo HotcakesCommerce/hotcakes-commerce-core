@@ -1,0 +1,58 @@
+﻿@model Hotcakes.Modules.Core.Areas.ContentBlocks.Models.ImageRotatorViewModel
+@using Hotcakes.Modules.Core.AppCode
+@Html.RegisterViewScript("ImageRotator.js")
+@if (Model.Images.Count > 0)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="hc-imagerotator @Model.CssClass">
+                    <ul id="@(Model.CssId)" class="list-unstyled">
+                        @for (int i = 0; i < Model.Images.Count; i++)
+                        {
+                            var img = Model.Images[i];
+                            <li @if (i == 0) { <text>class="show"</text> }>
+                                <a href="@img.Url" @if (img.NewWindow) { <text> target="_blank"</text> }>
+                                    <img style="height:@(Model.Height)px;width:@(Model.Width)px;" src="@img.ImageUrl" alt="@img.Caption" class="img-fluid" />
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            StartRotator('@(Model.CssId)', @(Model.Pause));
+        });
+    </script>
+    <style type="text/css">
+    
+        #@(Model.CssId) {
+
+        @if (Model.Height > 0)
+        {
+            <text>height: @(Model.Height)px;</text>
+        }
+        @if (Model.Width > 0)
+        {
+            <text>width: @(Model.Width)px;</text>
+        }
+        
+        position:relative;
+        margin:0;padding:0;
+        }
+
+        #@(Model.CssId) li {
+            list-style:none;
+            float:left;
+            position:absolute;
+            margin:0;padding:0;
+        }
+
+        #@(Model.CssId) li.show {
+            z-index:500;
+        }
+    </style>
+}

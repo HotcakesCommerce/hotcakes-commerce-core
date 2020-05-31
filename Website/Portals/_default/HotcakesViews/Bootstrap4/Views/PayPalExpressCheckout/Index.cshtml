@@ -1,0 +1,128 @@
+﻿@model Hotcakes.Modules.Core.Models.CheckoutViewModel
+@using Hotcakes.Modules.Core.Models;
+
+<div class="row-fluid hc-paypalcheckout">
+    <div class="col-xs-12">
+
+        <h2>@Localization.GetString("PayPalExpressCheckout")</h2>
+
+        @Html.Raw((string)TempData["messages"])
+
+        <div class="row-fluid">
+            <div class="form-horizontal col-xs-12 col-md-6 hc-order-details">
+                <div class="hc-address">
+                    <h6>@Localization.GetString("ShipTo"):</h6>
+                    <div class="hc-lines">
+                        <div class="form-group">
+                            <label class="col-xs-4 control-label">@Localization.GetString("Country"):</label>
+                            <div class="col-sm-offset-0 col-xs-6">
+                                <p class="form-control-static">@Model.CurrentOrder.ShippingAddress.CountryDisplayName</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-4 control-label">@Localization.GetString("First"):</label>
+                            <div class="col-sm-offset-0 col-xs-6">
+                                <p class="form-control-static">@Model.CurrentOrder.ShippingAddress.FirstName</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-4 control-label">@Localization.GetString("Last"):</label>
+                            <div class="col-sm-offset-0 col-xs-6">
+                                <p class="form-control-static">@Model.CurrentOrder.ShippingAddress.LastName</p>
+                            </div>
+                        </div>
+                        @if (Model.CurrentOrder.ShippingAddress.Company.Trim().Length > 0)
+                        {
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">@Localization.GetString("Company"):</label>
+                                <div class="col-sm-offset-0 col-xs-6">
+                                    <p class="form-control-static">@Model.CurrentOrder.ShippingAddress.Company</p>
+                                </div>
+                            </div>
+                        }
+                        <div class="form-group">
+                            <label class="col-xs-4 control-label">@Localization.GetString("Address"):</label>
+                            <div class="col-sm-offset-0 col-xs-6">
+                                    <p class="form-control-static">@Model.CurrentOrder.ShippingAddress.Line1
+                                    @if (Model.CurrentOrder.ShippingAddress.Line2.Trim().Length > 0)
+                                    {
+                                        <br />@Model.CurrentOrder.ShippingAddress.Line2
+                                    }</p>
+                                </div>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-4 control-label">@Localization.GetString("City"):</label>
+                            <div class="col-sm-offset-0 col-xs-6">
+                                <p class="form-control-static">@Model.CurrentOrder.ShippingAddress.City</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-4 control-label">@Localization.GetString("StateZip"):</label>
+                            <div class="col-sm-offset-0 col-xs-6">
+                                <p class="form-control-static">@Model.CurrentOrder.ShippingAddress.RegionDisplayName, @Model.CurrentOrder.ShippingAddress.PostalCode</p>
+                            </div>
+                        </div>
+                        @if (Model.CurrentOrder.UserEmail.Trim().Length > 0)
+                        {
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">@Localization.GetString("Email"):</label>
+                                <div class="col-sm-offset-0 col-xs-6">
+                                    <p class="form-control-static">@Model.CurrentOrder.UserEmail</p>
+                                </div>
+                            </div>
+                        }
+                        @if (Model.CurrentOrder.ShippingAddress.Phone.Trim().Length > 0)
+                        {
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">@Localization.GetString("Phone"):</label>
+                                <div class="col-sm-offset-0 col-xs-6">
+                                    <p class="form-control-static">@Model.CurrentOrder.ShippingAddress.Phone</p>
+                                </div>
+                            </div>
+                        }
+                        <div class="form-group">
+                            <label class="col-xs-4 control-label">@Localization.GetString("PaypalAddressStatus"):</label>
+                            <div class="col-sm-offset-0 col-xs-6">
+                                <p class="form-control-static">@ViewBag.AddressStatus</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal col-xs-12 col-md-5 col-md-offset-1">
+                @using (Html.BeginHccRouteForm(HccRoute.ThirdPartyPayment, new { token = Model.PayPalToken, payerid = Model.PayPalPayerId }, FormMethod.Post))
+                {
+                    <h6>@Localization.GetString("Shipping")</h6>
+
+                    <div class="form-group">
+                        @Html.Raw(ViewBag.ShippingRates)
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            @if (Model.ShowAgreeToTerms)
+                            {
+                                <label>
+                                    <input type="checkbox" id="agreed" name="agreed" @if (Model.AgreedToTerms) { <text>checked="checked"</text> } />
+                                        @Model.AgreedToTermsDescription
+                                </label>
+                                <br />
+                                <a href="@Url.RouteHccUrl(HccRoute.Terms)" target="_blank" class="btn btn-default">@Localization.GetString("ViewSiteTerms") @Model.LabelTerms</a>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <a href="@Url.RouteHccUrl(HccRoute.Cart)" class="btn btn-default">
+                            @Localization.GetString("ContinueShopping")
+                        </a>
+                        @if (ViewBag.HideCheckout == null || ViewBag.HideCheckout == false)
+                        {
+                            <input type="submit" id="btnsubmit" value="@Localization.GetString("PlaceOrder")" class="btn btn-primary" />
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>

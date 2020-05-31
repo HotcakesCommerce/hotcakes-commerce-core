@@ -1,0 +1,13 @@
+﻿<h6>@Localization.GetString("DownloadError")</h6>
+<div class="row">
+    <div class="col-12">
+        @Html.Raw((string)TempData["messages"])
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <a href="@Url.RouteHccUrl(HccRoute.OrderHistory)" class="btn btn-primary">
+            <i class="fas fa-arrow-left"></i>@Localization.GetString("ReturToOrderHistory")
+        </a>
+    </div>
+</div>

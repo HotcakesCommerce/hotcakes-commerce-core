@@ -48,7 +48,7 @@ namespace Hotcakes.Modules.Core.Models
             SortSelectList = new List<SelectListItem>();
             SubCategories = new List<SingleCategoryViewModel>();
             Products = new List<SingleProductViewModel>();
-            Manufactures = new List<VendorManufacturer>();
+            Manufacturers = new List<VendorManufacturer>();
             Vendors = new List<VendorManufacturer>();
             Types = new List<ProductType>();
 
@@ -86,7 +86,18 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     List of manufacturer for the different products under current category
         /// </summary>
-        public List<VendorManufacturer> Manufactures { get; set; }
+        [Obsolete(
+            "Deprecated in Hotcakes Commerce 03.03.00. Please use the Manufacturers property instead. Removing in version 03.04.00 or later.")]
+        public List<VendorManufacturer> Manufactures
+        {
+            get { return Manufacturers; }
+            set { Manufacturers = value; }
+        }
+
+        /// <summary>
+        ///     List of manufacturer for the different products under current category
+        /// </summary>
+        public List<VendorManufacturer> Manufacturers { get; set; }
 
         /// <summary>
         ///     List of vendors for the different products under current category
@@ -102,7 +113,7 @@ namespace Hotcakes.Modules.Core.Models
         ///     Social tagging controls html string for this category. It contains different
         ///     information from <see cref="ISocialItem" />
         /// </summary>
-        [Obsolete("Removing in 03.05.00 or later. Previously was used for Evoq Social integration.")]
+        [Obsolete("Removing in 03.04.00 or later. Previously was used for Evoq Social integration.")]
         public ISocialItem SocialItem { get; set; }
 
         public string LeftColumn { get; set; }

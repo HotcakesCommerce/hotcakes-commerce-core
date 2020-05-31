@@ -18,8 +18,8 @@
 			<asp:TextBox ID="PageSizeTextBox" CssClass="dnnFormLabel" runat="server" />
 		</div>
         <div class="dnnFormItem">
-			<dnn:LabelControl ID="ShowManufactures" ControlName="ShowManufacturesCheckBox" Suffix=":" runat="server" />
-			<asp:CheckBox ID="ShowManufacturesCheckBox" CssClass="dnnFormLabel" runat="server" />
+			<dnn:LabelControl ID="ShowManufacturers" ControlName="ShowManufacturersCheckBox" Suffix=":" runat="server" />
+			<asp:CheckBox ID="ShowManufacturersCheckBox" CssClass="dnnFormLabel" runat="server" />
 		</div>
         <div class="dnnFormItem">
 			<dnn:LabelControl ID="ShowVendors" ControlName="ShowVendorsCheckBox" Suffix=":" runat="server" />

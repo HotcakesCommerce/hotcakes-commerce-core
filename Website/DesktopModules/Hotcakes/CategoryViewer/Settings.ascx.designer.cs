@@ -139,22 +139,22 @@ namespace Hotcakes.Modules.CategoryViewer {
         protected global::System.Web.UI.WebControls.DropDownList ddlPostContentColumnId;
         
         /// <summary>
-        /// ShowManufactures control.
+        /// ShowManufacturers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl ShowManufactures;
+        protected global::System.Web.UI.UserControl ShowManufacturers;
         
         /// <summary>
-        /// ShowManufacturesCheckBox control.
+        /// ShowManufacturersCheckBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ShowManufacturesCheckBox;
+        protected global::System.Web.UI.WebControls.CheckBox ShowManufacturersCheckBox;
         
         /// <summary>
         /// ShowVendors control.

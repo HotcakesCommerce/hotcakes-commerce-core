@@ -77,7 +77,7 @@ namespace Hotcakes.Modules.Core.Controllers
                 }
                 if (!string.IsNullOrEmpty(Request.Params["manufacturers"]))
                 {
-                    queryAdv.Manufactures = Request.Params["manufacturers"].Split(',').ToList();
+                    queryAdv.Manufacturers = Request.Params["manufacturers"].Split(',').ToList();
                     logSearchQuery = false;
                 }
                 if (!string.IsNullOrEmpty(Request.Params["vendors"]))
@@ -131,12 +131,12 @@ namespace Hotcakes.Modules.Core.Controllers
 
                 var searchSettings = new SearchModuleSettings(ModuleContext.ModuleId);
 
-                model.ShowManufactures = searchSettings.ShowManufactures;
+                model.ShowManufacturers = searchSettings.ShowManufacturers;
                 model.ShowVendors = searchSettings.ShowVendors;
 
                 model.Categories = result.Categories;
                 model.Types = result.Types;
-                model.Manufactures = result.Manufacturers;
+                model.Manufacturers = result.Manufacturers;
                 model.Vendors = result.Vendors;
                 model.Properties = result.Properties;
                 model.MinPrice = result.MinPrice;
@@ -144,7 +144,7 @@ namespace Hotcakes.Modules.Core.Controllers
 
                 model.SelectedCategories = result.SelectedCategories;
                 model.SelectedTypes = result.SelectedTypes;
-                model.SelectedManufactures = result.SelectedManufacturers;
+                model.SelectedManufacturers = result.SelectedManufacturers;
                 model.SelectedVendors = result.SelectedVendors;
                 model.SelectedProperties = result.SelectedProperties;
                 model.SelectedMinPrice = result.SelectedMinPrice;

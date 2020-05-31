@@ -770,21 +770,21 @@ namespace Hotcakes.Commerce.Utilities
         {
             var p = new Product();
             p.Sku = "SAMPLE002";
-            p.ProductName = "Cup Cake Sample";
+            p.ProductName = "Cupcake Sample";
             p.Featured = true;
             p.IsSearchable = true;
             p.ImageFileSmall = "CupCake.jpg";
             p.ImageFileMedium = "CupCake.jpg";
-            p.ImageFileSmallAlternateText = "Cup Cake Sample SAMPLE002";
+            p.ImageFileSmallAlternateText = "Cupcake Sample SAMPLE002";
             p.InventoryMode = ProductInventoryMode.AlwayInStock;
             p.LongDescription =
                 "Savor this sweet treat from our famous collection of sample items. This product is not for sale and is a demonstration of how items could appear in your store";
-            p.MetaDescription = "Vanilla Cup Cake with Rich Frosting";
+            p.MetaDescription = "Vanilla Cupcake with Rich Frosting";
             p.MetaKeywords = "cup,cake,cupcake,valentine,small,treats,baked goods";
-            p.MetaTitle = "Vanilla Cup Cake with Rich Frosting";
+            p.MetaTitle = "Vanilla Cupcake with Rich Frosting";
             p.SitePrice = 1.99m;
             p.Status = ProductStatus.Active;
-            p.UrlSlug = "cup-cake-sample";
+            p.UrlSlug = "cupcake-sample";
             CatalogServices.ProductsCreateWithInventory(p, true);
 
             DiskStorage.CopyDemoProductImage(p.StoreId, p.Bvin, p.ImageFileSmall);

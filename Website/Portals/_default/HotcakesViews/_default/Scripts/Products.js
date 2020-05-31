@@ -74,7 +74,7 @@
                         $actions.show();
                     }
                 }, 'json')
-                .complete(function () {
+                .done(function () {
                     $container.ajaxLoader("stop");
                 });
         }

@@ -1,5 +1,6 @@
 ﻿@model Hotcakes.Modules.Core.Models.SearchPageViewModel
 @using Hotcakes.Modules.Core.AppCode
+@Html.RegisterViewScript("imagesloaded.pkgd.min.js")
 @Html.RegisterViewScript("masonry.min.js")
 @Html.RegisterViewScript("Search.js")
 
@@ -10,8 +11,24 @@
             @if (Model.Products.Count > 0){
                 <text>&quot;<em> @ViewBag.Search </em>&quot;</text>
             }
-        </h2>
+        </h1>
         <hr/>
+                
+        @if (Model.Products.Count > 0){
+            <div class="row">
+                <div class="col-12 text-right margin-bottom-md">
+                    <h6>
+                        @Model.Products.Count 
+                        @if (Model.Products.Count > 1){
+                            @Localization.GetString("ProductsFound")
+                        }else{
+                            @Localization.GetString("ProductFound")
+                        }
+                    </h6>
+                </div>
+            </div>
+        }
+
         <div class="row-fluid">
             
             <div class="row-fluid">

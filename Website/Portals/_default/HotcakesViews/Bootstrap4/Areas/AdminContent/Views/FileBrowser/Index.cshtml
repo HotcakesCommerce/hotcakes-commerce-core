@@ -1,0 +1,119 @@
+﻿@using Hotcakes.Modules.Core.AppCode
+@using Hotcakes.Commerce.Storage;
+@model Hotcakes.Modules.Core.Areas.AdminContent.Models.FileManagerViewModel
+
+@{
+    ViewBag.Title = "Browse Files";
+	Layout = "../Shared/_PopupLayout.cshtml";
+}
+
+@section HeadContent
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.trashdir').click(function() {
+                if (window.confirm('Are you sure?\n\nThe directory AND everything in it will be deleted forever!\n\nTHERE IS NO UNDO FOR THIS DELETE')) 
+                {
+                    return true;
+                }
+                return false;
+            });
+
+            $('.trashfile').click(function () {
+                if (window.confirm('Are you sure?\n\nDelete this file forever!\n\nTHERE IS NO UNDO FOR THIS DELETE')) {
+                    return true;
+                }
+                return false;
+            });
+
+            $('.selectfile').click(function () {
+                var filepluspath = $(this).attr('data-file');
+                //alert("selected file: " + filepluspath);
+                window.opener.SetImage(filepluspath);                
+            });
+        });
+    </script>
+}
+    
+@helper RenderDeleteDir(string path)
+{
+    if (DiskStorage.FileManagerIsSystemPath(path))
+    {
+        <text>&nbsp;</text>
+    }
+    else
+    {
+        <form action="@Url.Content("~/DesktopModules/Hotcakes/API/mvc/filebrowser/deletedirectory")" method="post">
+            <input type="hidden" name="path" value="@Model.Path" />
+            <input type="hidden" name="deletepath" value="@path" />
+            <input type="image" src="@Url.Content("~/DesktopModules/Hotcakes/Core/Admin/Images/TrashCan.png")" alt="Delete Directory" class="trashdir" />
+        </form>
+    }
+}
+@helper RenderDeleteFile(string filename)
+{        
+        <form action="@Url.Content("~/DesktopModules/Hotcakes/API/mvc/filebrowser/deletefile")" method="post">
+            <input type="hidden" name="path" value="@Model.Path" />
+            <input type="hidden" name="filename" value="@filename" />
+            <input type="image" src="@Url.Content("~/DesktopModules/Hotcakes/Core/Admin/Images/TrashCan.png")" alt="Delete File" class="trashfile" />
+        </form>
+}
+
+@section nav {
+    <div class="controlarea1">
+    <form action="@Url.Content("~/DesktopModules/Hotcakes/API/mvc/filebrowser/upload")" method="post" enctype="multipart/form-data">
+        <h3>Upload Files</h3>
+        <input type="file" size="10" name="postedfile" multiple="multiple" /><br />
+        <input type="image" src="@Url.Content("~/DesktopModules/Hotcakes/Core/Admin/Images/buttons/upload.png")" alt="Upload File" />
+        <input type="hidden" name="path" value="@Model.Path" />
+    </form>
+    </div>
+    <div class="controlarea1">
+    <form action="@Url.Content("~/DesktopModules/Hotcakes/API/mvc/filebrowser/createdirectory")" method="post">
+        <h3>Add New Directory</h3>
+        <input type="text" name="newdirectoryname" size="10" /><br />
+        <input type="image" src="@Url.Content("~/DesktopModules/Hotcakes/Core/Admin/Images/buttons/submit.png")" alt="Add New Directory" />
+        <input type="hidden" name="path" value="@Model.Path" />
+    </form>
+    </div>
+}
+<h1>Browse Files</h1>
+@Html.Raw(ViewBag.BreadCrumbsFinal)
+<hr />
+<table width="100%" class="liststyle1">
+@if (Model.AllowParentPath)
+{
+<tr>
+    <td style="width:32px;"><a href="@Url.Content("~/DesktopModules/Hotcakes/API/mvc/filebrowser?path=" + Model.ParentPath)"><img src="@Url.Content("~/DesktopModules/Hotcakes/Core/Admin/Images/fileicons/folder_up_32.png")" alt="Up One Level" /></a></td>
+    <td class="listitem"><a href="@Url.Content("~/DesktopModules/Hotcakes/API/mvc/filebrowser?path=" + Model.ParentPath)">&laquo; Up One Level</a></td>
+    <td class="listitem" style="width:50px;">&nbsp;</td>
+    <td class="listitem" style="width:50px;">&nbsp;</td>
+</tr>
+}
+@foreach (string d in Model.Directories)
+{
+    <tr>
+        <td style="width:32px;"><a href="@Url.Content("~/DesktopModules/Hotcakes/API/mvc/filebrowser?path=" + Model.ChildPath(d))"><img src="@Url.Content("~/DesktopModules/Hotcakes/Core/Admin/Images/fileicons/folder_32.png")"  alt="@d" /></a></td>
+        <td class="listitem"><a href="@Url.Content("~/DesktopModules/Hotcakes/API/mvc/filebrowser?path=" + Model.ChildPath(d))">@d</a></td>
+        <td class="listitem" style="width:50px;">@RenderDeleteDir(Model.ChildPath(d))</td>
+        <td class="listitem" style="width:50px;">&nbsp;</td>
+    </tr>
+}
+@foreach (string f in Model.Files)
+{
+	var path = Url.Content(Model.PreviewUrl(f));
+    <tr>
+        <td style="width:32px;">
+            <img src="@Url.Content(Html.FileIconUrl(@f))"  class="shadowed" alt="@f" />
+        </td>
+        <td class="listitem">
+            <a href="@path" class="selectfile" data-file="@Model.RelativeFileUrl(f)" alt="@f">@f</a>
+        </td>
+        <td class="listitem" style="width:50px;">@RenderDeleteFile(f)</td>
+        <td class="listitem" style="width:50px;">
+            <a href="#" class="selectfile" data-file="@Model.RelativeFileUrl(f)"><img src="@Url.Content("~/DesktopModules/Hotcakes/Core/Admin/Images/buttons/select.png")" alt="SELECT" /></a>
+        </td>
+    </tr>
+}
+</table>

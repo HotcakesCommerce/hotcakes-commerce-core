@@ -15,8 +15,8 @@
                         <tr class="dnnGridItem">
                             <td>@f.ShortDescription</td>
                             <td>
-                                <a href="@Url.RouteUrl(HccRouteNames.AccountDefault, new { controller = "OrderHistory", action = "downloadfile", id = f.Bvin, oid = Model.bvin })" class="dnnPrimaryAction">
-                                    @Localization.GetString("Download")</a>
+                                <a href="@Url.RouteUrl(HccRouteNames.AccountDefault, new { controller = "OrderHistory", action = "downloadfile", id = f.Bvin, oid = Model.bvin })" class="btn btn-default">
+                                    <em class="glyphicon glyphicon-save"></em>@Localization.GetString("Download")</a>
                             </td>
                         </tr>
                     }

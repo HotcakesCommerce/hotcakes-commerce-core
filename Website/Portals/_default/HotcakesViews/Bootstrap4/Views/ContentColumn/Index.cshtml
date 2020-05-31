@@ -1,0 +1,5 @@
+﻿@model Hotcakes.Commerce.Content.ContentColumn
+@foreach (var b in Model.Blocks)
+{
+    @Html.Action("Index", b.ControlName.Replace(" ", ""), new { Area = "ContentBlocks", block = b })
+}

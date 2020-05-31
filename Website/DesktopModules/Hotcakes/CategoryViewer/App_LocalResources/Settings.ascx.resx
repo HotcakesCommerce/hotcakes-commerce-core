@@ -147,10 +147,10 @@
   <data name="SettingsHint.Text" xml:space="preserve">
     <value>Select the category to display in this module, the view to display the category's contents, and the page size for products</value>
   </data>
-  <data name="ShowManufactures.Help" xml:space="preserve">
+  <data name="ShowManufacturers.Help" xml:space="preserve">
     <value>Shows Manufacturers facet in the Drill Down version of the category view</value>
   </data>
-  <data name="ShowManufactures.Text" xml:space="preserve">
+  <data name="ShowManufacturers.Text" xml:space="preserve">
     <value>Show Manufacturers</value>
   </data>
   <data name="ShowVendors.Help" xml:space="preserve">

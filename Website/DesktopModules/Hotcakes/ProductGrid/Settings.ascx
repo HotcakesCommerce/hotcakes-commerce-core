@@ -38,7 +38,7 @@
                     <asp:TemplateField HeaderText="ProductImage">
                         <ItemStyle Width="15%" />
                         <ItemTemplate>
-                            <asp:Image ImageUrl='<%#Eval("Value.ImageUrl") %>' runat="server" />
+                            <asp:Image ImageUrl='<%#Eval("Value.ImageUrls.TinyUrl") %>' runat="server" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="Value.Item.ProductName" HeaderText="ProductName" ItemStyle-Width="55%" />
