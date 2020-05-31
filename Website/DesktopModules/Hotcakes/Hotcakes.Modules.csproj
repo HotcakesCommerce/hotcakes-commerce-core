@@ -4156,6 +4156,9 @@
   <ItemGroup>
     <Content Include="Core\Admin\Catalog\App_LocalResources\ProductUpSellCrossSell.aspx.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Orders\App_LocalResources\ReceivePayments.ascx.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

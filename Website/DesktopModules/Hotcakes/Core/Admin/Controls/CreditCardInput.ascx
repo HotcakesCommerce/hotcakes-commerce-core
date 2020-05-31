@@ -17,9 +17,9 @@
         <tr>
             <td class="hcLabel"><%=Localization.GetString("lblExpDate") %></td>
             <td class="formfield">
-                <asp:DropDownList ID="ccexpmonth" ClientIDMode="Static" runat="server" />
+                <asp:DropDownList ID="ccexpmonth" ClientIDMode="Static" runat="server" Width="50px" />
                 &nbsp;/&nbsp;
-                <asp:DropDownList ID="ccexpyear" ClientIDMode="Static" runat="server" />
+                <asp:DropDownList ID="ccexpyear" ClientIDMode="Static" runat="server" Width="75px" />
             </td>
         </tr>
         <tr id="securityCodeRow" runat="server" visible="false">
