@@ -1,0 +1,96 @@
+﻿@model Hotcakes.Modules.Core.Models.OrderViewModel
+
+<div class="row hc-order-details">
+
+    @if (ViewData["showStatus"] != null)
+    {
+        <div class="hc-order-status">@Model.FullOrderStatusDescription</div>
+    }
+
+    <div class="row">
+        <div class="col-12">
+            <h2>@Localization.GetString("Order"): @Model.OrderNumber</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="hcValidationSummary"></div>
+        </div>
+    </div>
+
+    @Html.Partial("~/areas/account/views/shared/_OrderDownloads.cshtml", Model.LocalOrder)
+
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">@Localization.GetString("BillTo")</h5>
+                    </div>
+                    <div class="card-body">
+                        @Html.Raw(Model.BillingAddressAsHtml)
+                    </div>
+                </div>
+            </div>
+            @if (Model.HasShippingItems)
+            {
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">@Localization.GetString("ShipTo")</h5>
+                        </div>
+                        <div class="card-body">
+                            @Html.Raw(Model.ShippingAddressAsHtml)
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (Model.Coupons.Count > 0)
+            {
+                <div class="col-md-4 mt-3">
+                    <div class="card mt-5">
+                        <div class="card-body">
+                            <h5 class="card-title">@Localization.GetString("CodesUsed")</h5>
+                            <ul class="list-unstyled">
+                                @foreach (var coupon in Model.Coupons)
+                                {
+                                    @coupon.CouponCode
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>@Localization.GetString("OrderSummary")</h2>
+            </div>
+        </div>
+        
+        @Html.Partial("_ViewOrderItems", Model.Items)
+
+        <div class="row">
+            <div class="col-md-8">
+                @if (!string.IsNullOrWhiteSpace(Model.Instructions))
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@Localization.GetString("CustomerInstructions")</h5>
+                            @Model.Instructions
+                        </div>
+                    </div>
+                }
+            </div>
+            <div id="hcCheckoutTotal" class="col-md-4 hc-totals">
+                <div class="table-responsive">
+                    @Html.Raw(Model.TotalsAsTable)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

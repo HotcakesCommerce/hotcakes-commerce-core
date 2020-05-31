@@ -1,0 +1,102 @@
+﻿@model Hotcakes.Modules.Core.Models.ProductPageViewModel
+@Html.Partial("_Admin")
+<div class="container">
+    <div class="row hc-product">
+        <div class="container">
+
+            @Html.Action("ProductTrail", "BreadCrumb", new { product = Model.LocalProduct })
+            @Html.Action("Index", "ContentColumn", new { id = Model.LocalProduct.PreContentColumnId })
+
+            <div class="row">
+                <div class="col-12">
+                    <h1>@Model.LocalProduct.ProductName</h1>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    @Html.Raw((string)TempData["messages"])
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-12 text-center hc-product-image">
+                            <img id="hcProductImage" class="img-fluid rounded" src="@Model.ImageUrls.MediumlUrl" alt="@Model.ImageUrls.MediumlAltText" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="hcAdditionalImages" class="col-12 text-center">
+                            @foreach (var altImg in Model.AlternateImageUrls)
+                            {
+                                <a href="@altImg.MediumlUrl"><img class="img-fluid rounded" src="@altImg.TinyUrl" alt="@altImg.MediumlAltText" /></a>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @Html.Partial("_ProductDetails", Model)
+                </div>
+            </div>
+
+            @if (Model.LocalProduct.IsBundle && Model.LocalProduct.BundledProducts.Count > 0)
+            {
+                <h3>@Localization.GetString("BundledProducts")</h3>
+                <div class="row">
+                    @foreach (var item in Model.BundledItems)
+                    {
+                        <div class="col-6 col-md-3">
+                            @Html.Partial("_RenderBundledProduct", item)
+                        </div>
+                    }
+                </div>
+            }
+
+            @if (Model.AllowReviews)
+            {
+                @Html.Partial("_Reviews")
+            }
+
+            @if (Model.RelatedItems.Count > 0)
+            {
+                <h3>@Localization.GetString("RelatedProducts")</h3>
+                <div class="row hc-related-items">
+                    @foreach (var item in Model.RelatedItems.Take(4))
+                    {
+                        <div class="col-6 col-md-3">
+                            @Html.Partial("_RenderSingleProduct", item)
+                        </div>
+                    }
+                </div>
+            }
+
+            @if (Model.LocalProduct.Tabs.Count > 0)
+            {
+                <div class="row">
+                    <div class="col-12 mt-3">
+                        <div class="dnnForm hc-product-tabs" id="hcProductTabs" role="navigation">
+                            <ul class="nav nav-tabs list-inline">
+                                @foreach (var t in Model.LocalProduct.Tabs.OrderBy(y => y.SortOrder).Select((item, i) => new { i, item}))
+                                {
+                                    <li id="li-@t.item.Bvin" @if (t.i == 0) {<text> class="nav-item active"</text> } else {<text> class="nav-item"</text> }>
+                                        <a id="tab-@t.item.Bvin" href="#" data-href="#@("pane-" + t.item.Bvin)" @if (t.i == 0) {<text> class="nav-link active"</text> } else {<text> class="nav-link"</text> }>@t.item.TabTitle</a>
+                                    </li>
+                                }
+                            </ul>
+                            <div class="tab-content">
+                                @foreach (var t in Model.LocalProduct.Tabs.OrderBy(y => y.SortOrder))
+                                {
+                                    <div id="@("pane-" + t.Bvin)" class="tab-pane fade mt-4">
+                                        @Html.Raw(t.HtmlData)
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @Html.Action("Index", "ContentColumn", new { id = Model.LocalProduct.PostContentColumnId })
+        </div>
+    </div>
+</div>

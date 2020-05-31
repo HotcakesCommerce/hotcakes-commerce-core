@@ -1,5 +1,5 @@
 ﻿<style>
-	div.uv-install-wrapper h1, div.uv-install-wrapper h2, div.uv-install-wrapper h3, div.uv-install-wrapper h4, div.uv-install-wrapper p, div.uv-install-wrapper hr, div.uv-install-wrapper ul { margin-bottom: 0.5em; }
+	div.uv-install-wrapper h1, div.uv-install-wrapper h2, div.uv-install-wrapper h3, div.uv-install-wrapper h4, div.uv-install-wrapper p, div.uv-install-wrapper hr, div.uv-install-wrapper ul, div.uv-install-wrapper ul li { margin-bottom: 0.5em; }
 	div.uv-install-wrapper ul { padding-left: 2em; }
 	.muy-importante { color:red;font-weight:bold; }
 </style>
@@ -21,6 +21,8 @@
 		<li><strong>Improved Store Administration</strong> - Authorized store managers can now navigate directly to their respective admin pages directly from the store front-end.</li>
 		<li><strong>Localization Updates</strong> - During this development cycle, we updated every view that we came across that didn't already have localization applied to it.</li>
 	</ul>
+
+	<p class="muy-importante">The release notes continue after the Sponsors and Code Contributors below - including <span class="muy-importante">potential BREAKING changes</span>.</p>
 	
 	<h3>Sponsors</h3>
 	<p>Open-source is not free. We're so GRATEFUL for the following people/organizations for <a href="https://github.com/sponsors/hismightiness" target="_blank">sponsoring developers</a> to work on this release!</p>
@@ -70,6 +72,7 @@
 		<li><strong>Improved Branding Images</strong> - Products and categories that are missing their primary image now have a branded and better designed default image. This includes updated default images for sample products.</li>
 		<li><strong>Improved Developer Experience for AddToCart Links</strong> - Viewset developers can more easily added links to directly add products to the card with a single-click in all views.</li>
 		<li><strong>Updated credit card sprites</strong> - The credit card sprites included older logos for the major credit card vendors. The sprites have been updated in all viewsets.</li>
+		<li><strong>Sample Extension Projects Upgraded to Visual Studio 2019</strong> - The sample extension point projects all have been tested and are expceted to use Visual Studio 2019 for any new development.</li>
 	</ul>
 	
 	<h3><strong>Maintenance Updates</strong></h3>

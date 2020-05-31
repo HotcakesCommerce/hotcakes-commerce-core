@@ -1,0 +1,31 @@
+﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+@Html.Partial("_Admin")
+@Html.Action("CategoryTrail", "BreadCrumb", new { cat = Model.LocalCategory })
+<!-- Hotcakes Commerce: Category > DetailedList -->
+<div class="container">
+    <div class="row hc-category">
+        @if (Model.LocalCategory.ShowTitle)
+        {
+            <div class="col-12">
+                <h1>@Model.LocalCategory.Name</h1>
+            </div>
+        }
+        @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PreContentColumnId })
+        @Html.Partial("_Header", Model)
+        @Html.Partial("_Pager", Model.PagerData, new ViewDataDictionary { { "sortByList", Model.SortSelectList } })
+        <div class="container">
+            @foreach (var item in Model.Products)
+            {
+                <div class="row">
+                    <div class="col-12">
+                        @Html.Partial("_RenderSingleProductDetailed", item)
+                    </div>
+                </div>
+            }
+        </div>
+        @Html.Partial("_Pager", Model.PagerData)
+        @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PostContentColumnId })
+
+        @Html.Hidden("categorybvin", @Model.LocalCategory.Bvin)
+    </div>
+</div>

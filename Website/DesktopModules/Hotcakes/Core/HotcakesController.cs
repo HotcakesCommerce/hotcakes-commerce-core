@@ -658,7 +658,7 @@ namespace Hotcakes.Modules.Core
                 installDate = package.CreatedOnDate;
             }
 
-            if (installDate != DateTime.MinValue &&  installDate.Date < DateTime.Now.Date)
+            if (installDate != DateTime.MinValue &&  installDate.Date <= DateTime.Now.Date)
             {
                 // this is a new install (not an upgrade)
                 var context = new HccRequestContext();

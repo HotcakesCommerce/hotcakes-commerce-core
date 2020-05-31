@@ -1,0 +1,42 @@
+﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+@Html.Partial("_Admin")
+@Html.Action("CategoryTrail", "BreadCrumb", new { cat = Model.LocalCategory })
+<div class="hc-category">
+    @if (Model.LocalCategory.ShowTitle)
+    {
+        <h1>@Model.LocalCategory.Name</h1>
+    }
+    @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PreContentColumnId })
+    @Html.Partial("_Header", Model)
+    @if (Model.SubCategories.Count > 0)
+    {
+        <div class="hc-record-grid hc-subcategory-grid clearfix">
+            @foreach (var subcat in Model.SubCategories)
+            {
+                <div class="hc-wrap3">
+                    <div class="hc-record">
+                        <div class="hc-recimage">
+                            <a href="@subcat.LinkUrl">
+                                <img class="hc-autosize" src="@subcat.IconUrl" alt="@subcat.AltText" />
+                            </a>
+                        </div>
+                        <div class="hc-recname">
+                            <a href="@subcat.LinkUrl">@subcat.Name</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    @Html.Partial("_Pager", Model.PagerData, new ViewDataDictionary { { "sortByList", Model.SortSelectList } })
+    <div class="hc-record-grid hc-product-grid clearfix">
+        @foreach (var item in Model.Products)
+        {
+            <div class="hc-wrap3">
+                @Html.Partial("_RenderSingleProduct", item)
+            </div>
+        }
+    </div>
+    @Html.Partial("_Pager", Model.PagerData)
+    @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PostContentColumnId })
+</div>

@@ -1,0 +1,64 @@
+﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+@Html.Partial("_Admin")
+@Html.Action("CategoryTrail", "BreadCrumb", new { cat = Model.LocalCategory })
+<div class="hc-category">
+    @if (Model.LocalCategory.ShowTitle)
+    {
+        <h1>@Model.LocalCategory.Name</h1>
+    }
+    @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PreContentColumnId })
+    @Html.Partial("_Header", Model)
+    <div class="row-fluid">
+        <div class="span4">
+            @Html.Partial("_DrillDownFilter")
+        </div>
+        <div class="span8" data-bind="with: model">
+            Total: <span data-bind="text: TotalCount"></span>
+            <div class="clearfix" data-bind="with: $root">
+                <div class="hc-sort">
+                    <label>@Localization.GetString("SortBy")</label>
+                    @Html.DropDownList("sortOrderSelect", Model.SortSelectList, new { data_bind = "value: sortOrder, event: { change: changeSortOrder }" })
+                </div>
+                @Html.Partial("_PagerKo")
+            </div>
+            <div class="hc-record-grid hc-product-grid clearfix" data-bind="foreach: Products">
+                <div class="hc-wrap3">
+                    <div class="hc-record">
+                        <div class="hc-recimage">
+                            <a data-bind="attr: { href: ProductLink }">
+                                <img class="hc-autosize" data-bind="attr: { src: ImageSmallUrl, alt: ImageSmallAltText }" />
+                            </a>
+                        </div>
+                        <h2 class="hc-recname">
+                            <a data-bind="attr: { href: ProductLink }, text: ProductName"></a>
+                        </h2>
+                        <div class="hc-recprice">
+                            &nbsp;<span data-bind="html: UserPrice"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix" data-bind="with: $root">
+                @Html.Partial("_PagerKo")
+            </div>
+        </div>
+    </div>
+    @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PostContentColumnId })
+    @Html.Hidden("categorybvin", @Model.LocalCategory.Bvin)
+</div>
+
+<script type="text/javascript">
+    ko.bindingHandlers.stopBinding = {
+        init: function() {
+            return { controlsDescendantBindings: true };
+        }
+    };
+
+    ko.applyBindings(new HcDrillDownFilterViewModel(
+        @Html.Raw(@Model.DrillDownJsonModel),
+        $(".hc-category"),
+        '@Model.LocalCategory.Bvin',
+        '@ModuleContext.ModuleId'
+        ),
+    $(".hc-category")[0]);
+</script>

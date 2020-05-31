@@ -1,14 +1,14 @@
 ﻿<style>
-	div.uv-install-wrapper h1, div.uv-install-wrapper h2, div.uv-install-wrapper h3, div.uv-install-wrapper h4, div.uv-install-wrapper p, div.uv-install-wrapper hr, div.uv-install-wrapper ul { margin-bottom: 0.5em; }
+	div.uv-install-wrapper h1, div.uv-install-wrapper h2, div.uv-install-wrapper h3, div.uv-install-wrapper h4, div.uv-install-wrapper p, div.uv-install-wrapper hr, div.uv-install-wrapper ul, div.uv-install-wrapper ul li { margin-bottom: 0.5em; }
 	div.uv-install-wrapper ul { padding-left: 2em; }
 	.muy-importante { color:red;font-weight:bold; }
 </style>
 <div class="uv-install-wrapper">
 	<h1>The MIT License (MIT)</h1>
 
-	<p>Copyright (c) 2013-2019 Hotcakes Commerce, LLC (https://hotcakes.org)</p>
+	<p>Copyright (c) 2013-2018 Hotcakes Commerce, LLC (https://hotcakes.org)</p>
 	
-	<p>Copyright (c) 2020 Upendo Ventures, LLC (https://upendoventures.com)</p>
+	<p>Copyright (c) 2019-2020 Upendo Ventures, LLC (https://upendoventures.com)</p>
 
 	<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
 

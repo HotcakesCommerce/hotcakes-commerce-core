@@ -1,0 +1,32 @@
+﻿@model Hotcakes.Modules.Core.Models.FaceBookLikeModel
+<!-- FaceBook Like -->
+<div class="fb-like" data-href="@Model.PageUrl" 
+    @if (Model.IncludeSendButton)
+    {
+        <text> data-send="true"</text>
+    }
+    else
+    {
+        <text> data-send="false"</text>
+    }
+    @switch(Model.Layout)
+    {
+        case Hotcakes.Modules.Core.Models.FaceBookLayout.Box:
+            <text> data-layout="box_count"</text>
+            break;
+        case Hotcakes.Modules.Core.Models.FaceBookLayout.Buttons:
+            <text> data-layout="button_count"</text>
+            break;
+        case Hotcakes.Modules.Core.Models.FaceBookLayout.Standard:
+            <text> data-layout="standard"</text>
+            break;
+    }    
+    data-width="@Model.Width" 
+    @if (Model.ShowFaces)
+    {
+        <text> data-show-faces="true"</text>
+    }
+    else
+    {
+        <text> data-show-faces="false"</text>
+    }></div>

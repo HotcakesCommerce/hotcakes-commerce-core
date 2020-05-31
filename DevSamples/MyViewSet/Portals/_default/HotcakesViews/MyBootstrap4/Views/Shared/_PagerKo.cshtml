@@ -1,0 +1,15 @@
+﻿<nav aria-label="@Localization.GetString("PageNavigation")">
+    <!-- ko if: pager.pagesList().length > 0 -->
+    <ul class="pagination" data-bind="">
+        <!-- ko if: pager.previousPage() > 0 -->
+        <li class="page-item"><a class="page-link" data-bind="click: function () { pager.setCurrentPage(pager.previousPage()) }" aria-label="@Localization.GetString("Previous")"><span aria-hidden="true">&laquo;</span></a></li>
+        <!-- /ko -->
+        <!-- ko foreach: pager.pagesList -->
+        <li data-bind="css: { 'page-item active': $data == $parent.pager.pageNumber() }"><a class="page-link" aria-label="@Localization.GetString("Current")" data-bind="text: $data, click: function () { $parent.pager.setCurrentPage($data) }"></a></li>
+        <!-- /ko -->
+        <!-- ko if: pager.nextPage() > 0 -->
+        <li class="page-item"><a class="page-link" data-bind="click: function () { pager.setCurrentPage(pager.nextPage()) }" aria-label="@Localization.GetString("Next")"><span aria-hidden="true">&raquo;</span></a></li>
+        <!-- /ko -->
+    </ul>
+    <!-- /ko -->
+</nav>

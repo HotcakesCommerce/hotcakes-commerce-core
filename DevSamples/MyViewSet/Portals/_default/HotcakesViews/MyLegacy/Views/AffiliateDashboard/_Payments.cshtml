@@ -1,0 +1,65 @@
+﻿@model Hotcakes.Modules.Core.Models.AffiliatePaymentsViewModel
+
+@using (Html.BeginHccForm(new { @class = "hcAffiliatePayments" }))
+{
+    <div class="dnnForm span9">
+        <div class="dnnFormItem">
+            <label class="dnnLabel">
+                @Localization.GetString("lblDate")
+            </label>
+            <select data-bind="value: dateRange">
+                @foreach (var t in Enum.GetValues(typeof(DateRangeType)).OfType<DateRangeType>())
+                {
+                    if (t != DateRangeType.Custom && t != DateRangeType.None)
+                    {
+                    <option value="@((int)t)">@Localization.GetString(t.ToString())</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="hc-wrap3">
+        <div class="hc-board">
+            <div class="hc-title">@Localization.GetString("PaymentsCount")</div>
+            <div class="hc-amount-line" data-bind="text: totalCount"></div>
+        </div>
+    </div>	
+    <div class="hc-wrap3">
+        <div class="hc-board">
+            <div class="hc-title">@Localization.GetString("PaymentsAmount")</div>
+            <div class="hc-amount-line" data-bind="text: totalAmount"></div>
+        </div>
+    </div>
+    <div class="dnnClear">
+        <h2>@Localization.GetString("Payments")</h2>
+        <table class="dnnGrid">
+            <tbody>
+                <tr class="dnnGridHeader">
+                    <td>@Localization.GetString("Memo")</td>
+                    <td>@Localization.GetString("Amount")</td>
+                    <td>@Localization.GetString("Attachment")</td>
+                </tr>
+                <!-- ko foreach: payments -->
+                <tr class="dnnGridItem">
+                    <td data-bind="text: $data.Notes"></td>
+                    <td data-bind="text: $data.Amount"></td>
+                    <td><a target="_blank" class="hc-icon-attachment" href="#" data-bind="visible: $data.AttachmentUrl.length > 0, attr: { href: $data.AttachmentUrl }"></a></td>
+                </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+        <div class="clearfix">
+            <ul class="dnnButtonGroup">
+                <!-- ko if: pager.previousPage() > 0 -->
+                <li><a data-bind="click: function () { pager.setCurrentPage(pager.previousPage()) }">...</a></li>
+                <!-- /ko -->
+                <!-- ko foreach: pager.pagesList -->
+                <li data-bind="css: { 'current': $data == $parent.pager.pageNumber() }"><a data-bind="    text: $data, click: function () { $parent.pager.setCurrentPage($data) }"></a></li>
+                <!-- /ko -->
+                <!-- ko if: pager.nextPage() > 0 -->
+                <li><a data-bind="click: function () { pager.setCurrentPage(pager.nextPage()) }">...</a></li>
+                <!-- /ko -->
+            </ul>
+        </div>
+    </div>
+}

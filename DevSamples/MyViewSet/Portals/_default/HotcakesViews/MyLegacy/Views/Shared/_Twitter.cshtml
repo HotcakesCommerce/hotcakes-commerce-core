@@ -1,0 +1,42 @@
+﻿@model Hotcakes.Modules.Core.Models.TwitterViewModel
+@using System.Text
+@functions {
+    private string BuildTweetUrl()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append("https://twitter.com/share");
+        sb.Append("?url=" + HttpUtility.UrlEncode(Model.LinkUrl));
+        sb.Append("&via=" + HttpUtility.UrlEncode(Model.ViaTwitterName));
+        sb.Append("&text=" + Model.DefaultText);
+                
+        sb.Append("&related=");
+        foreach(var related in Model.RelatedAccounts)
+        {
+            sb.Append(HttpUtility.UrlEncode(related.TwitterHandle));
+            sb.Append(":");
+            sb.Append(HttpUtility.UrlEncode(related.Description));
+            sb.Append(",");
+        }
+        
+        switch(Model.CountPosition)
+        {
+            case Hotcakes.Modules.Core.Models.TwitterCountBoxPosition.None:
+                sb.Append("&count=none"); 
+                break;
+            case Hotcakes.Modules.Core.Models.TwitterCountBoxPosition.Horizontal:
+                sb.Append("&count=horizontal"); 
+                break;
+            case Hotcakes.Modules.Core.Models.TwitterCountBoxPosition.Vertical:
+                sb.Append("&count=vertical"); 
+                break;
+        }
+
+        sb.Append("&lang=" + HttpUtility.UrlEncode(Model.Language));
+        sb.Append("&counturl=" + HttpUtility.UrlEncode(Model.DisplayUrl));
+        
+        return sb.ToString();   
+    }
+}
+<!-- Tweet Button -->           
+<script src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
+<a href="@BuildTweetUrl()" class="twitter-share-button">Tweet</a>

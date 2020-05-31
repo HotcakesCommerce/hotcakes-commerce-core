@@ -1,0 +1,83 @@
+﻿@model Hotcakes.Modules.Core.Models.CheckoutViewModel
+@using Hotcakes.Commerce.Payment
+
+@helper DisplayMethodOption(PaymentMethod payMethod)
+{
+    <input type="radio" value="@payMethod.MethodId" name="paymethod" id="paymethod-@payMethod.MethodId"
+    @if (Model.PaymentViewModel.SelectedMethodId == payMethod.MethodId)
+    { <text>checked="checked"</text> }
+    />
+    <h4>
+		  @if (String.IsNullOrEmpty(Localization.GetString("Payment" + payMethod.MethodName)))
+			{
+				<label for="paymethod-@payMethod.MethodId">@payMethod.MethodName</label>
+			}else
+			{
+				<label for="paymethod-@payMethod.MethodId">@Localization.GetString("Payment" + payMethod.MethodName)</label>
+			}
+    </h4>
+}
+<div class="hc-payment-methods">
+    <div id="hcNoPayment"
+        @if (!Model.PaymentViewModel.NoPaymentNeeded)
+        {
+            <text>style="display: none;"</text>
+        }
+        >
+        <input type="radio" value="" name="paymethod" id="paymethod-nopayment" />
+        <h4>
+            <label for="paymethod-nopayment">@Localization.GetString("PaymentNoPaymentNeeded")</label></h4>
+    </div>
+    <div id="hcPayment">
+        @foreach(var payMethod in Model.PaymentViewModel.PaymentMethods)
+        {
+            switch (payMethod.MethodId)
+            {
+                case PaymentMethods.CreditCardId:
+                {
+                    <div>
+                        @DisplayMethodOption(payMethod)
+                        @Html.Partial("_CreditCardInput", Model)
+                    </div>
+                }
+                break;
+                case PaymentMethods.PaypalExpressId:
+                {
+                    <div>
+                        @DisplayMethodOption(payMethod)
+                        <div class="hc-paypal-info">
+                            <img src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif" style="margin-right: 7px;">
+                            @Html.Raw(Localization.GetString("PayPalInfo"))
+                        </div>
+                    </div>
+                }
+                break;
+                case PaymentMethods.PurchaseOrderId:
+                {
+                    <div class="hc-purchaseorder">
+                        @DisplayMethodOption(payMethod)
+                        <div class="dnnFormItem">
+                            <input type="text" name="ponumber" size="10" value="@Model.PaymentViewModel.DataPurchaseOrderNumber" class="@Model.IsErr("purchaseorder")" />
+                        </div>
+                    </div>
+                }
+                break;
+                case PaymentMethods.CompanyAccountId:
+                {
+                    <div class="hc-companyaccount">
+                        @DisplayMethodOption(payMethod)
+                        <div class="dnnFormItem">
+                            <input type="text" name="accountnumber" size="10" value="@Model.PaymentViewModel.DataCompanyAccountNumber" class="@Model.IsErr("accountnumber")" />
+                        </div>
+                    </div>
+                }
+                break;
+                default:
+                    <div>
+                        @DisplayMethodOption(payMethod)
+                    </div>
+                break;
+            }
+        }
+    </div>
+</div>
