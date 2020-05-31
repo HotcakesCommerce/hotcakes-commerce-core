@@ -25,13 +25,19 @@ a.dnnPrimaryAction:hover {
 .hc-price-slider .ui-widget-header .ui-state-default {
   background: #f5f5f5;
   /* Old browsers */
+  background: -moz-linear-gradient(top, #f5f5f5 0%, #dfdfdf 100%);
   /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f5f5f5), color-stop(100%, #dfdfdf));
   /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #f5f5f5 0%, #dfdfdf 100%);
   /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #f5f5f5 0%, #dfdfdf 100%);
   /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #f5f5f5 0%, #dfdfdf 100%);
   /* IE10+ */
   background: linear-gradient(top, #f5f5f5 0%, #dfdfdf 100%);
   /* W3C */
+  -webkit-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.4), inset 0px 1px 0px 0px #ffffff;
   box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.4), inset 0px 1px 0px 0px #ffffff;
   text-shadow: 0px 1px 0px #ffffff;
   color: #333;
@@ -46,10 +52,15 @@ a.dnnPrimaryAction:hover {
 .hc-price-slider .ui-widget-header .ui-state-focus {
   background: #fefefe;
   /* Old browsers */
+  background: -moz-linear-gradient(top, #fefefe 0%, #e8e8e8 100%);
   /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fefefe), color-stop(100%, #e8e8e8));
   /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #fefefe 0%, #e8e8e8 100%);
   /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #fefefe 0%, #e8e8e8 100%);
   /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #fefefe 0%, #e8e8e8 100%);
   /* IE10+ */
   background: linear-gradient(top, #fefefe 0%, #e8e8e8 100%);
   /* W3C */
@@ -62,13 +73,19 @@ a.dnnPrimaryAction:hover {
   border-color: #999;
   background: #c6c6c6;
   /* Old browsers */
+  background: -moz-linear-gradient(top, #c6c6c6 0%, #f3f3f3 100%);
   /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #c6c6c6), color-stop(100%, #f3f3f3));
   /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #c6c6c6 0%, #f3f3f3 100%);
   /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #c6c6c6 0%, #f3f3f3 100%);
   /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #c6c6c6 0%, #f3f3f3 100%);
   /* IE10+ */
   background: linear-gradient(top, #c6c6c6 0%, #f3f3f3 100%);
   /* W3C */
+  -webkit-box-shadow: inset 0px 1px 5px 0px rgba(0, 0, 0, 0.4);
   box-shadow: inset 0px 1px 5px 0px rgba(0, 0, 0, 0.4);
 }
 img.hc-autosize {
@@ -144,6 +161,8 @@ img.hc-autosize {
   height: 20px!important;
   background-color: initial;
   background-image: url("Images/delete.png") !important;
+  -moz-box-shadow: none!important;
+  -webkit-box-shadow: none!important;
   box-shadow: none!important;
   text-indent: 100px;
 }
@@ -217,6 +236,7 @@ img.hc-autosize {
   width: 20%;
   min-width: 70px;
   -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   overflow: hidden;
 }
@@ -355,6 +375,7 @@ span.dnnFormMessage.hcFormError:after {
   height: 200px;
   background: #e0e0e0;
   position: relative;
+  -webkit-box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.3);
   box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.3);
 }
 .hc-address .hc-title {
@@ -561,6 +582,7 @@ mark,
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
+  -ms-touch-action: manipulation;
   touch-action: manipulation;
   cursor: pointer;
   background-image: none;
@@ -570,6 +592,7 @@ mark,
   line-height: 1.42857143;
   border-radius: 4px;
   -webkit-user-select: none;
+  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
@@ -592,6 +615,7 @@ mark,
 .hc-file-upload .dnnSecondaryAction.active {
   background-image: none;
   outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 .hc-file-upload .dnnSecondaryAction.disabled,
@@ -600,6 +624,7 @@ mark,
   cursor: not-allowed;
   filter: alpha(opacity=65);
   opacity: 0.65;
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 .hc-file-upload a.dnnSecondaryAction.disabled,
@@ -743,10 +768,10 @@ mark,
     Margins & Padding
 --------------------------------------------------*/
 .padding-xs {
-  padding: .25em;
+  padding: 0.25em;
 }
 .padding-sm {
-  padding: .5em;
+  padding: 0.5em;
 }
 .padding-md {
   padding: 1em;
@@ -758,10 +783,10 @@ mark,
   padding: 3em;
 }
 .padding-x-xs {
-  padding: .25em 0;
+  padding: 0.25em 0;
 }
 .padding-x-sm {
-  padding: .5em 0;
+  padding: 0.5em 0;
 }
 .padding-x-md {
   padding: 1em 0;
@@ -773,10 +798,10 @@ mark,
   padding: 3em 0;
 }
 .padding-y-xs {
-  padding: 0 .25em;
+  padding: 0 0.25em;
 }
 .padding-y-sm {
-  padding: 0 .5em;
+  padding: 0 0.5em;
 }
 .padding-y-md {
   padding: 0 1em;
@@ -788,10 +813,10 @@ mark,
   padding: 0 3em;
 }
 .padding-top-xs {
-  padding-top: .25em;
+  padding-top: 0.25em;
 }
 .padding-top-sm {
-  padding-top: .5em;
+  padding-top: 0.5em;
 }
 .padding-top-md {
   padding-top: 1em;
@@ -803,10 +828,10 @@ mark,
   padding-top: 3em;
 }
 .padding-right-xs {
-  padding-right: .25em;
+  padding-right: 0.25em;
 }
 .padding-right-sm {
-  padding-right: .5em;
+  padding-right: 0.5em;
 }
 .padding-right-md {
   padding-right: 1em;
@@ -818,10 +843,10 @@ mark,
   padding-right: 3em;
 }
 .padding-bottom-xs {
-  padding-bottom: .25em;
+  padding-bottom: 0.25em;
 }
 .padding-bottom-sm {
-  padding-bottom: .5em;
+  padding-bottom: 0.5em;
 }
 .padding-bottom-md {
   padding-bottom: 1em;
@@ -833,10 +858,10 @@ mark,
   padding-bottom: 3em;
 }
 .padding-left-xs {
-  padding-left: .25em;
+  padding-left: 0.25em;
 }
 .padding-left-sm {
-  padding-left: .5em;
+  padding-left: 0.5em;
 }
 .padding-left-md {
   padding-left: 1em;
@@ -848,10 +873,10 @@ mark,
   padding-left: 3em;
 }
 .margin-xs {
-  margin: .25em;
+  margin: 0.25em;
 }
 .margin-sm {
-  margin: .5em;
+  margin: 0.5em;
 }
 .margin-md {
   margin: 1em;
@@ -863,10 +888,10 @@ mark,
   margin: 3em;
 }
 .margin-x-xs {
-  margin: .25em 0;
+  margin: 0.25em 0;
 }
 .margin-x-sm {
-  margin: .5em 0;
+  margin: 0.5em 0;
 }
 .margin-x-md {
   margin: 1em 0;
@@ -878,10 +903,10 @@ mark,
   margin: 3em 0;
 }
 .margin-y-xs {
-  margin: 0 .25em;
+  margin: 0 0.25em;
 }
 .margin-y-sm {
-  margin: 0 .5em;
+  margin: 0 0.5em;
 }
 .margin-y-md {
   margin: 0 1em;
@@ -893,10 +918,10 @@ mark,
   margin: 0 3em;
 }
 .margin-top-xs {
-  margin-top: .25em;
+  margin-top: 0.25em;
 }
 .margin-top-sm {
-  margin-top: .5em;
+  margin-top: 0.5em;
 }
 .margin-top-md {
   margin-top: 1em;
@@ -908,13 +933,13 @@ mark,
   margin-top: 3em;
 }
 .margin-right-xs {
-  margin-right: .25em;
+  margin-right: 0.25em;
 }
 .margin-right-sm {
-  margin-right: .5em;
+  margin-right: 0.5em;
 }
 .margin-right-sm-important {
-  margin-right: .5em !important;
+  margin-right: 0.5em !important;
 }
 .margin-right-md {
   margin-right: 1em;
@@ -926,10 +951,10 @@ mark,
   margin-right: 3em;
 }
 .margin-bottom-xs {
-  margin-bottom: .25em;
+  margin-bottom: 0.25em;
 }
 .margin-bottom-sm {
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
 }
 .margin-bottom-md {
   margin-bottom: 1em;
@@ -941,10 +966,10 @@ mark,
   margin-bottom: 3em;
 }
 .margin-left-xs {
-  margin-left: .25em;
+  margin-left: 0.25em;
 }
 .margin-left-sm {
-  margin-left: .5em;
+  margin-left: 0.5em;
 }
 .margin-left-md {
   margin-left: 1em;
@@ -960,14 +985,14 @@ mark,
 --------------------------------------------------*/
 .hc-stockdisplay {
   display: inline-block;
-  padding: .25em .4em;
+  padding: 0.25em 0.4em;
   font-size: 100%;
   font-weight: 700;
   line-height: 1;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -987,8 +1012,8 @@ a.hc-stockdisplay:hover {
   top: -1px;
 }
 .hc-stockdisplay-pill {
-  padding-right: .6em;
-  padding-left: .6em;
+  padding-right: 0.6em;
+  padding-left: 0.6em;
   border-radius: 10rem;
 }
 .hc-stockdisplay {
@@ -1321,10 +1346,10 @@ a.hc-stockdisplay.inventoryoutofstock-danger:focus {
   background-position: 0 0;
 }
 .cc-mastercard {
-  background-position: -47px 0;
+  background-position: -50px 0;
 }
 .cc-amex {
-  background-position: -94px 0;
+  background-position: -95px 0;
 }
 .cc-discover {
   background-position: -141px 0;
@@ -1458,10 +1483,15 @@ a.hc-stockdisplay.inventoryoutofstock-danger:focus {
 .hc-search .hc-search-button:hover {
   background: url('images/search.png') no-repeat center center, #2d2d2d;
   /* Old browsers */
+  background: url('images/search.png') no-repeat center center, -moz-linear-gradient(top, #2d2d2d 0%, #565656 100%);
   /* FF3.6+ */
+  background: url('images/search.png') no-repeat center center, -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2d2d2d), color-stop(100%, #565656));
   /* Chrome,Safari4+ */
+  background: url('images/search.png') no-repeat center center, -webkit-linear-gradient(top, #2d2d2d 0%, #565656 100%);
   /* Chrome10+,Safari5.1+ */
+  background: url('images/search.png') no-repeat center center, -o-linear-gradient(top, #2d2d2d 0%, #565656 100%);
   /* Opera 11.10+ */
+  background: url('images/search.png') no-repeat center center, -ms-linear-gradient(top, #2d2d2d 0%, #565656 100%);
   /* IE10+ */
   background: url('images/search.png') no-repeat center center, linear-gradient(to bottom, #2d2d2d 0%, #565656 100%);
   /* W3C */
@@ -1476,20 +1506,27 @@ a.hc-stockdisplay.inventoryoutofstock-danger:focus {
   background-color: transparent;
   border: none;
   border-radius: 0;
+  -webkit-box-shadow: none;
   box-shadow: none;
   outline: none;
   border-left: 1px solid #ddd;
   color: #000;
   line-height: 32px;
   font-size: 14px;
+  -webkit-transition: all 100ms ease-in-out;
+  -moz-transition: all 100ms ease-in-out;
+  -ms-transition: all 100ms ease-in-out;
+  -o-transition: all 100ms ease-in-out;
   transition: all 100ms ease-in-out;
 }
 .hc-search .hc-search-bar:active,
 .hc-search .hc-search-bar:focus {
   background: #ccc;
+  -webkit-box-shadow: inset 0px 3px 8px #999;
   box-shadow: inset 0px 3px 8px #999;
 }
 .ModHotcakesSearchC .hc-search-bar {
+  -webkit-box-shadow: inset 0px 3px 8px #999;
   box-shadow: inset 0px 3px 8px #999;
 }
 .hcSkinObject .hc-search {
@@ -1533,12 +1570,12 @@ a.hc-stockdisplay.inventoryoutofstock-danger:focus {
 .hc-price-slider .ui-slider .ui-slider-range {
   position: absolute;
   z-index: 1;
-  font-size: .7em;
+  font-size: 0.7em;
   display: block;
   border: 0;
 }
 .hc-price-slider .ui-slider-horizontal {
-  height: .8em;
+  height: 0.8em;
 }
 .hc-price-slider .ui-slider-horizontal .ui-slider-handle {
   top: -0.5em;
