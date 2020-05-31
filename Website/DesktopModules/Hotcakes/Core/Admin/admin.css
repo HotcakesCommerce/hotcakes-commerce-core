@@ -1005,7 +1005,7 @@ ul.hcActions li {
 .hcIconClose,
 .hcIconApprove,
 .hcIconRestore {
-  background: url(Images/admin_misc_sprite.png);
+  background: url("images/admin_misc_sprite.png");
   width: 20px;
   height: 20px;
   line-height: 20px;
@@ -1526,7 +1526,7 @@ select.hcSelectionList {
 #ctl00_MainContent_ucDateRangePicker_radEndDate_popupButton,
 #ctl00_MainContent_DateRangeField_radStartDate_popupButton,
 #ctl00_MainContent_DateRangeField_radEndDate_popupButton {
-  background: url(Images/admin_misc_sprite.png);
+  background: url("images/admin_misc_sprite.png");
   width: 20px;
   height: 20px;
   line-height: 20px;

@@ -9,7 +9,7 @@
 	 <div class="hcBlock">
         <div class="hcForm">
             <div class="hcFormItem">
-				<asp:LinkButton ID="NewTabButton" runat="server" class="hcTertiaryAction" Text="+ New Tab" AlternateText="+ New Tab"	OnClick="NewTabButton_Click" />
+				<asp:LinkButton ID="NewTabButton" runat="server" class="hcTertiaryAction" resourcekey="AddNewTab" AlternateText="+ New Tab"	OnClick="NewTabButton_Click" />
 			</div>
 		</div>
 	</div>
@@ -71,11 +71,11 @@
 		}
 	</script>
 
-	<h1>Product Tabs</h1>
+	<h1><%=PageTitle %></h1>
 	<uc1:MessageBox ID="MessageBox1" runat="server" />
 	<asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
 		<ContentTemplate>
-			<asp:Literal ID="litResults" ClientIDMode="Static" runat="server" EnableViewState="false"></asp:Literal>
+            <asp:Literal ID="litResults" ClientIDMode="Static" runat="server" EnableViewState="false"/>
 		</ContentTemplate>
 	</asp:UpdatePanel>
 

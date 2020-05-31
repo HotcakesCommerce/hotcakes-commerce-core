@@ -100,7 +100,6 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                     var editUrl = string.Format("~/DesktopModules/Hotcakes/Core/Admin/Catalog/Categories_Edit.aspx?id={0}", child.Bvin);
                     editUrl = ResolveUrl(editUrl);
                     perfUrl = ResolveUrl(perfUrl);
-                    var icon = ResolveUrl("~/DesktopModules/Hotcakes/Core/Admin/Images/" + IconImage(child.SourceType));
 
                     sb.Append("<div id=\"" + child.Bvin + "\" class=\"dragitem2 nested\">");
                     sb.Append("<table width=\"100%\" class=\"formtable\" style=\"table-layout: fixed;\">");
