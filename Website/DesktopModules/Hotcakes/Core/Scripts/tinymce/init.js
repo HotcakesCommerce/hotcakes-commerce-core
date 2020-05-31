@@ -3,8 +3,8 @@ $(document).ready(function () {
     tinymce.init({
         selector: "textarea.tinymce",
         /*inline: true,*/
-        plugins: "contextmenu,paste,fullscreen,table,link,code",
-        toolbar: "undo redo styleselect bold italic alignleft aligncenter alignright bullist numlist outdent indent code",
+        plugins: "contextmenu,paste,lists,fullscreen,table,link,code",
+        toolbar: "undo redo bold italic alignleft aligncenter alignright bullist numlist outdent indent styleselect code",
         content_css: hcc.getResourceUrl("Scripts/tinymce/tinymce.css"),
         body_class: "tinymcebody",
         browser_spellcheck: true,

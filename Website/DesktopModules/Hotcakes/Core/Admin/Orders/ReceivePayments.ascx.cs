@@ -128,7 +128,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 
             if (!RefundAmountValidate(amount))
             {
-                ucMessageBox.ShowWarning("Refund amount should be less then order charged amount.");
+                ucMessageBox.ShowWarning(Localization.GetString("RefundAmountError"));
                 return;
             }
 
@@ -150,7 +150,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             var amount = ParseMoney(CheckAmountField.Text);
             if (!RefundAmountValidate(amount))
             {
-                ucMessageBox.ShowWarning("Refund amount should be less then order charged amount.");
+                ucMessageBox.ShowWarning(Localization.GetString("RefundAmountError"));
                 return;
             }
             var checkNumber = CheckNumberField.Text.Trim();
@@ -187,7 +187,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
         {
             var pos = PayManager.PurchaseOrderInfoListAllNonAccepted();
             lstPO.Items.Clear();
-            if (pos.Count < 1) lstPO.Items.Add(new ListItem("No Purchase Orders Found.", string.Empty));
+            if (pos.Count < 1) lstPO.Items.Add(new ListItem(Localization.GetString("NoPosFound"), string.Empty));
 
             foreach (var t in pos)
             {
@@ -219,7 +219,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
         {
             var acts = PayManager.CompanyAccountInfoListAllNonAccepted();
             lstCompanyAccount.Items.Clear();
-            if (acts.Count < 1) lstCompanyAccount.Items.Add(new ListItem("No Company Accounts Found.", string.Empty));
+            if (acts.Count < 1) lstCompanyAccount.Items.Add(new ListItem(Localization.GetString("NoCoAcctsFound"), string.Empty));
             foreach (var t in acts)
             {
                 lstCompanyAccount.Items.Add(new ListItem(t.CompanyAccountNumber + " - " + t.Amount.ToString("c"),
@@ -238,7 +238,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             lstCreditCardAuths.Items.Clear();
             if (auths.Count < 1)
             {
-                lstCreditCardAuths.Items.Add(new ListItem("No Pending Holds", string.Empty));
+                lstCreditCardAuths.Items.Add(new ListItem(Localization.GetString("NoPendingHolds"), string.Empty));
                 lnkCreditCardCaptureAuth.Enabled = false;
                 lnkCreditCardVoidAuth.Enabled = false;
             }
@@ -261,7 +261,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             lstCreditCardCharges.Items.Clear();
             if (charges.Count < 1)
             {
-                lstCreditCardCharges.Items.Add(new ListItem("No Charges to Refund", string.Empty));
+                lstCreditCardCharges.Items.Add(new ListItem(Localization.GetString("NoChargesRefund"), string.Empty));
                 lnkCreditCardRefund.Enabled = false;
             }
             else
@@ -282,7 +282,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             lstCreditCards.Items.Clear();
             if (cards.Count < 1)
             {
-                lstCreditCards.Items.Add(new ListItem("No Saved Cards", string.Empty));
+                lstCreditCards.Items.Add(new ListItem(Localization.GetString("NoSavedCards"), string.Empty));
                 lnkCreditCardCharge.Enabled = false;
             }
             else
@@ -341,7 +341,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             var amount = ParseMoney(CreditCardRefundAmount.Text);
             if (!RefundAmountValidate(amount))
             {
-                ucMessageBox.ShowWarning("Refund amount should be less then order charged amount.");
+                ucMessageBox.ShowWarning(Localization.GetString("RefundAmountError"));
                 return;
             }
             if (string.IsNullOrWhiteSpace(CreditCardRefundAmount.Text))
@@ -383,7 +383,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             lstPayPalHold.Items.Clear();
             if (paypalAuths.Count < 1)
             {
-                lstPayPalHold.Items.Add(new ListItem("No Pending Holds.", string.Empty));
+                lstPayPalHold.Items.Add(new ListItem(Localization.GetFormattedString("NoPendingHolds"), string.Empty));
                 lnkPayPalCaptureHold.Enabled = false;
                 lnkPayPalVoidHold.Enabled = false;
             }
@@ -402,7 +402,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             lstPayPalRefund.Items.Clear();
             if (charges.Count < 1)
             {
-                lstPayPalRefund.Items.Add(new ListItem("No Charges to Refund", string.Empty));
+                lstPayPalRefund.Items.Add(new ListItem(Localization.GetString("NoChargesRefund"), string.Empty));
                 lnkPayPalRefund.Enabled = false;
             }
             else
@@ -444,7 +444,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             var amount = ParseMoney(PayPalRefundAmount.Text);
             if (!RefundAmountValidate(amount))
             {
-                ucMessageBox.ShowWarning("Refund amount should be less then order charged amount.");
+                ucMessageBox.ShowWarning(Localization.GetString("RefundAmountError"));
                 return;
             }
             if (string.IsNullOrWhiteSpace(PayPalRefundAmount.Text))
@@ -467,7 +467,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             lstPointsHeld.Items.Clear();
             if (auths.Count < 1)
             {
-                lstPointsHeld.Items.Add(new ListItem("No Pending Holds", string.Empty));
+                lstPointsHeld.Items.Add(new ListItem(Localization.GetString("NoPendingHolds"), string.Empty));
                 lnkPointsCaptureAuth.Enabled = false;
                 lnkPointsVoidAuth.Enabled = false;
             }
@@ -486,7 +486,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             lstPointsRefundable.Items.Clear();
             if (charges.Count < 1)
             {
-                lstPointsRefundable.Items.Add(new ListItem("No Charges to Refund", string.Empty));
+                lstPointsRefundable.Items.Add(new ListItem(Localization.GetString("NoChargesRefund"), string.Empty));
                 lnkPointsRefund.Enabled = false;
             }
             else
@@ -552,7 +552,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
                 var refTrans = PayManager.FindTransactionById(transactionId);
                 if (points > HccApp.CustomerPointsManager.PointsNeededForPurchaseAmount(refTrans.Amount))
                 {
-                    ucMessageBox.ShowWarning("Refund points value should be less then order charged amount.");
+                    ucMessageBox.ShowWarning(Localization.GetString("RefundAmountError.Text"));
                     return;
                 }
 
@@ -593,12 +593,11 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             var response = PayManager.GiftCardBalanceInquiry(card);
             if (response.Success)
             {
-                ucMessageBox.ShowOk("The card balance is " + response.CurrentValue.ToString("C") + " as of " +
-                                    DateTime.Now);
+                ucMessageBox.ShowOk(string.Format(Localization.GetString("GiftCardBalance"), response.CurrentValue.ToString("C"), DateTime.Now));
             }
             else
             {
-                var message = "Unable to check balance.";
+                var message = Localization.GetString("GiftCardBalanceError");
                 foreach (var m in response.Messages)
                 {
                     if (m.Severity == MessageType.Warning ||
@@ -647,7 +646,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             lstGiftCardHold.Items.Clear();
             if (giftCardAuth.Count < 1)
             {
-                lstGiftCardHold.Items.Add(new ListItem("No Pending Holds.", string.Empty));
+                lstGiftCardHold.Items.Add(new ListItem(Localization.GetString("NoPendingHolds"), string.Empty));
                 lnkGiftCardCapturHold.Enabled = false;
                 lnkGiftCardVoidHold.Enabled = false;
             }
@@ -666,7 +665,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             lstGiftCardCharges.Items.Clear();
             if (charges.Count < 1)
             {
-                lstGiftCardCharges.Items.Add(new ListItem("No Charges to Refund", string.Empty));
+                lstGiftCardCharges.Items.Add(new ListItem(Localization.GetString("NoChargesRefund"), string.Empty));
                 lnkGiftCardRefund.Enabled = false;
             }
             else
@@ -707,11 +706,11 @@ namespace Hotcakes.Modules.Core.Admin.Orders
         {
             if (result)
             {
-                ucMessageBox.ShowInformation("&laquo; Transaction Processed at " + DateTime.Now);
+                ucMessageBox.ShowInformation("&laquo; " + string.Format(Localization.GetString("TransactionProcessed"), DateTime.Now));
             }
             else
             {
-                ucMessageBox.ShowWarning("Could not record transaction. See Administrator!");
+                ucMessageBox.ShowWarning(Localization.GetString("ShowTransactionError"));
             }
             TransactionEvent();
         }
