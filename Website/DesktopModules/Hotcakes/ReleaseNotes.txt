@@ -1,133 +1,111 @@
-﻿<h5>Version 03.02.03</h5>
-<p><strong>Highlights</strong></p>
-<p><strong>Enhancements</strong></p>
-<ul>
-	<li><strong>Added Special Properties to Variants</strong> - SI: You're now able to add special properties to variants for even more flexibility for your unique e-commerce implementations (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/221" target="_blank">Issue 221</a>)</li>
-</ul>
-<p><strong>Bug Fixes</strong></p>
-<ul>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/193" target="_blank">Issue 193</a> - Administration category sort not working</li>
-</ul>
-<h5>Thank you to the following community members for participating in this release!</h5>
-<ul>
-	<li>Will Strohl, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
-	<li>Nirav Sanghvi, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
-	<li>Ryan Jagdfeld, <a href="https://github.com/yog-it" target="_blank">Yog-IT</a></li>
-</ul>
-
-<h5>Version 03.02.02</h5>
-<p><strong>Highlights</strong></p>
-<p><strong>Enhancements</strong></p>
-<ul>
-	<li><strong>Choose to Notify Membership Subscribers</strong> - SI: You are now able to choose whether new customers receive the DNN role assignment e-mail for membership product types (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/184" target="_blank">Issue 184</a>)</li>
-	<li><strong>Updated E-Mail Address Validation</strong> - CI: E-mail address validation now supports newer top-level domain names (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/63" target="_blank">Issue 63</a>)</li>
-	<li><strong>DNN 9.xx compatibility updates (more coming in the 03.03.00 release)</strong>
-		<ul>
-			<li><strong>Replaced Gravity Theme References</strong> - (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/185" target="_blank">Issue 185</a>)</li>
-			<li><strong>Drilldown View DNN 9+ JS Error Resolved</strong> - (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/169" target="_blank">Issue 169</a>)</li>
-		</ul>
-	</li>
-</ul>
-<p><strong>Bug Fixes</strong></p>
-<ul>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/175" target="_blank">Issue 175</a> - SI: Checkout membership task in workflow fails when memberships are bundled.</li>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/189" target="_blank">Issue 189</a> - SI: Membership products still assigned when payment is declined.</li>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/160" target="_blank">Issue 160</a> - SI: Payments made through Authorize.Net was missing the shipping address after declined payments.</li>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/168" target="_blank">Issue 168</a> - SI: Removed stray comma from addresses in the order details for non-shipping products.</li>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/31" target="_blank">Issue 31</a> - CI: Category security roles not always enforced</li>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/112" target="_blank">Issue 112</a> - CI: Resolved the &quot;Server Cannot Append Headers&quot; exception during checkout.</li>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/30" target="_blank">Issue 30</a> - CI: Unable to create or edit addresses in the address book.</li>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/200" target="_blank">Issue 200</a> - Disabling the reviews/ratings still shows ratings in product details view.</li>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/173" target="_blank">Issue 173</a> - Pricing was not properly formatted in the drilldown category view.</li>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/180" target="_blank">Issue 180</a> - Removed remaining bits of Shift4 from the code base.</li>
-</ul>
-<h5>Thank you to the following community members for participating in this release!</h5>
-<ul>
-	<li>Will Strohl, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
-	<li>Nirav Sanghvi, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
-	<li>Moslem Pasokh Shiraz, <a href="https://github.com/moslem7026" target="_blank">Moslem Pasokh Shiraz</a></li>
-	<li>Paras Daryanani, <a href="https://www.celestialsites.com/" target="_blank">Celestial Sites</a></li>
-	<li>Scippy One, <a href="https://github.com/Scippy" target="_blank">Scippy One</a></li>
-	<li>Adrian Anon, <a href="https://github.com/AnonDevelopment" target="_blank">Adrian Anon</a></li>
-</ul>
-
-<h5>Version 03.02.01</h5>
-<p><strong>Highlights</strong></p>
-<p><strong>Enhancements</strong></p>
-<ul>
-	<li><strong>E-Mail Templates</strong> - SI: Add E-Mail Template Token for Purchase Order Number (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/127" target="_blank">Issue 127</a>)</li>
-	<li><strong>Wish List</strong> - SI: Show Selected Options in the Wish List (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/113" target="_blank">Issue 113</a>)</li>
-</ul>
-<p><strong>Bug Fixes</strong></p>
-<ul>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/136" target="_blank">Issue 136</a> - SI: Divide by zero error when applying taxes to discounted line items</li>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/99" target="_blank">Issue 99</a> - SI: Restored page breaks in order management print view</li>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/93" target="_blank">Issue 93</a> - SI: Unable to use &quot;User Is...&quot; promotion qualification</li>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/50" target="_blank">Issue 50</a> - SI: PayPal Express Authorize Setting not Creating Authorizations</li>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/110" target="_blank">Issue 110</a> - SI: Tax Exempt Customers Charged Tax in Order Manager</li>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/158" target="_blank">Issue 158</a> - CI: Include StateProvince code in UPS requests</li>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/101" target="_blank">Issue 101</a> - CI: CategoryViewer - DrillDown view error when no category is set</li>
-	<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/157" target="_blank">Issue 157</a> - Updated manifest to include DLL versions to prevent conflicts with other ecosystem extensions.</li>
-</ul>
-<h5>Thank you to the following community members for participating in this release!</h5>
-<ul>
-	<li>Will Strohl, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
-	<li>Ketan Garala, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
-	<li>Matt Rutledge, <a href="http://www.believegroup.com/" target="_blank">Believe Group</a></li>
-	<li>coretaco, <a href="https://github.com/coretoco" target="_blank">coretaco</a></li>
-</ul>
-
-<h5>Version 03.02.00</h5>
-<p><strong>Highlights</strong></p>
-<p><strong>Enhancements</strong></p>
-<ul>
-	<li><strong>SE: UPS Freight Shipping Provider</strong> - UPS Freight is now supported as a built-in shipping method. <a href="https://github.com/HotcakesCommerce/core/issues/59" target="_blank">Issue 59</a></li>
-</ul>
-<p><strong>Bug Fixes</strong></p>
-<ul>
-	<li><a href="https://github.com/HotcakesCommerce/core/issues/91" target="_blank">Issue 91</a> - Resolved issue where tax calculation may be perform in the wrong order.</li>
-	<li><a href="https://github.com/HotcakesCommerce/core/issues/55" target="_blank">Issue 55</a> - Removed the unsupported IsSocial reference from viewsets.</li>
-	<li><a href="https://github.com/HotcakesCommerce/core/issues/16" target="_blank">Issue 16</a> - Removed the commercial SKU from administration views.</li>
-	<li><a href="https://github.com/HotcakesCommerce/core/issues/120" target="_blank">Issue 120</a> - Declined payments may not be reported to customers.</li>
-</ul>
-<h5>Thank you to the following community members for participating in this release!</h5>
-<ul>
-	<li>Will Strohl, <a href="https://upendoventures.com" target="_blank">Upendo Ventures</a></li>
-	<li>Josh Slaughter, <a href="https://www.clicksandmortarwebsites.com/" target="_blank">Clicks &amp; Mortar Websites</a></li>
-	<li>Matt Rutledge, <a href="http://www.believegroup.com/" target="_blank">Believe Group</a></li>
-</ul>
-
-<h5>Version 03.01.00</h5>
-<p><strong>Highlights</strong></p>
-<p><strong>Enhancements</strong></p>
-<ul>
-	<li><strong>Promotion Support for Product Variants</strong> - You can now specify a variant for a promotion to run against when creating sales/offers.</li>
-	<li><strong>Virtual Directory Support</strong> - Hotcakes can now run in a virtual directory instance.</li>
-</ul>
-<p><strong>Bug Fixes</strong></p>
-<ul>
-	<li>Issue #59 - Removed cookie compatibility checks to resolve cross-browser cookie support. https://github.com/HotcakesCommerce/core/compare/Issues/Issue-59</li>
-</ul>
-<h5>Thank you to the following community members for participating in this release!</h5>
-<ul>
-	<li>MarkXA</li>
-</ul>
-
-<h5>Version 03.00.01</h5>
-<p><strong>Highlights</strong></p>
-<blockquote>
-	<p><strong>Important Notes</strong></p>
+﻿<style>
+	div.uv-install-wrapper h1, div.uv-install-wrapper h2, div.uv-install-wrapper h3, div.uv-install-wrapper h4, div.uv-install-wrapper p, div.uv-install-wrapper hr, div.uv-install-wrapper ul { margin-bottom: 0.5em; }
+	div.uv-install-wrapper ul { padding-left: 2em; }
+	.muy-importante { color:red;font-weight:bold; }
+</style>
+<div class="uv-install-wrapper">
+	<h1>Hotcakes Commerce: Version 03.03.00</h1>
+	
+	<p><span class="muy-importante">IMPORTANT!</span> Please read through all of these release notes before proceeding. This is a major release with several improvements and maintenance updates that you need to be aware of.</p>
+	<p>This is not your normal <em>Yada, yada...</em>.</p>
+	
+	<h2><strong>Highlights</strong></h2>
 	<ul>
-		<li>If using User Has Badges Promotions, please know that it will be removed upon upgrade. Please plan accordingly prior to upgrade.</li>
-		<li>All integrations and extension points should be tested thoroughly to update HccApp object still works as expected.</li>
-		<li>Minimum required version of DNN is now 07.04.02 or newer. (Version 8 is supported but not Version 9.)</li>
+		<li><strong>Tested for DNN 9.2+ and DNN 9.6+</strong> - Hotcakes was already working fine in DNN 9.2+, but there were a handful of leftover &quot;features&quot; that had to be removed to improve the DNN 9+ user experience. There were no updates required for actual compatiblity.</li>
+		<li><strong>Removed Telerik</strong> - This solution has included Telerik since long before it was ever called Hotcakes Commerce. During this development cycle, we spent nearly 80 hours removing the Telerik controls to improve the security of Hotcakes as well as compatibility for DNN 9.6+. Nearly every single view had one of more Telerik controls included.</li>
+		<li><strong>Raised DNN Version</strong> - Hotcakes Commerce (CMS) now ships only on DNN 9.6.1.</li>
+		<li><strong>Raised Minimum Required DNN Version</strong> - Hotcakes Commerce (core) now requires DNN 9.2.2 or newer.</li>
+		<li><strong>Improved First-Time Out-of-the-Box Experience</strong> - This refers to several updates, but most notably, the default theme, viewset, and page templates used for new installations of Hotcakes Commerce.</li>
+		<li><strong>Numerous Security Hardening &amp; Performance Updates</strong> - Except for Telerik, there weren't any known security issues, but we found and applied several security updates during this development cycle. We also found and applied performance updates in several areas as part of our code review process.</li>
+		<li><strong>Updated All Client-Side Scripts/Libraries</strong> - This solution requires various client-side JavaScript and related libraries and plugins. Each has been updated to their most recent version or replaced with an alternative.</li>
+		<li><strong>Improved Store Administration</strong> - Authorized store managers can now navigate directly to their respective admin pages directly from the store front-end.</li>
+		<li><strong>Localization Updates</strong> - During this development cycle, we updated every view that we came across that didn't already have localization applied to it.</li>
 	</ul>
-</blockquote>
-<p><strong>Enhancements</strong></p>
-<ul>
-	<li><strong>#16 - Remove SKU from admin views</strong> - removed "Pro" SKU in the footer of the admin views. https://github.com/HotcakesCommerce/core/issues/16</li>
-</ul>
-<p><strong>Bug Fixes</strong></p>
-<ul>
-	<li><strong>#7 - Source array was not long enough. Check srcIndex and length, and the array's lower bounds</strong> - Added logic to prevent Hotcakes view engine from being added to the collection multiple times. This logic addresses a memory leak and a race condition which can cause a site to crash. https://github.com/HotcakesCommerce/core/issues/7</li>
-</ul>
+	
+	<h3>Sponsors</h3>
+	<p>Open-source is not free. We're so GRATEFUL for the following people/organizations for <a href="https://github.com/sponsors/hismightiness" target="_blank">sponsoring developers</a> to work on this release!</p>
+	<p>Sponsorship is <em>Powered by GitHub Sponsors</em> and ensures that this project lives and thrives. <a href="https://github.com/sponsors/hismightiness" target="_blank">Please consider contributing</a> any amount.</p>
+	<p>THANK YOU to the following rockstars!</p>
+	<ul>
+		<li>David Poindexter, <a href="https://nvisionatibe.com/" target="_blank">nvisionative</a></li>
+		<li>Matt Rutledge, <a href="https://beleivekids.com/" target="_blank">Believe Kids</a></li>
+		<li>Adam Bernstein, <a href="https://practicewise.com/" target="_blank">PracticeWise</a></li>
+	</ul>
+	
+	<h3>Code Contributors</h3>
+	<p>THANK YOU to the following community members for participating in this release!</p>
+	<ul>
+		<li>Will Strohl, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
+		<li><a href="https://github.com/Navilois" target="_blank">Alois Krichmayr (Navilois)</a></li>
+		<li>Matt Rutledge, <a href="https://beleivekids.com/" target="_blank">Believe Kids</a></li>
+		<li>Paras Daryanani, <a href="https://paras.aero/" target="_blank">paras.aero</a></li>
+		<li>Josh Slaughter, <a href="https://www.clicksandmortarwebsites.com/" target="_blank">Clicks &amp; Mortar Websites</a></li>
+		<li><a href="https://github.com/moslem7026" target="_blank">Moslem Pasokh (moslem7026)</a></li>
+	</ul>
+	
+	<h3><strong>Release Note Prefixes</strong></h3>
+	<p>The following prefixes are defined as:</p>
+	<ul>
+		<li><strong>SI:</strong> Support Inquiry - This issue was reported by a <a href="https://upendoventures.com/Support" target="_blank">support customer</a> and, as such, was prioritized above all other tasks.</li>
+		<li><strong>CI:</strong> Community Inquiry - This issue was reported by a community member in the <a href="https://hotcakes.org/Forums" target="_blanK">Hotcakes Commerce community forums</a>.</li>
+	</ul>
+	
+	<h3><strong>Enhancements</strong></h3>
+	<ul>
+		<li><strong>SI: Enforce URL Casing for Improved SEO</strong> - Product and category URL slugs that are created now all observe lower case casing. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/38" target="_blank">Issue 38</a>)</li>
+		<li><strong>SI: Make the Phone Number in Checkout Required </strong> - Store admins can now make the billing &amp; shipping address phone numbers required during checkout. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/41" target="_blank">Issue 41</a>)</li>
+		<li><strong>Removed Telerik</strong> - The Telerik controls brought with them a number of potential security risks for any website running them. They have been removed and replaced with various open-source and custom alternatives. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/226" target="_blank">Issue 226</a>)</li>
+		<li><strong>Added TinyMCE Editor</strong> - The Telerik HTML editor has been replaced with the TinyMCE editor. This is the default editor for all new and upgraded installs. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/226" target="_blank">Issue 226</a>)</li>
+		<li><strong>New Store Admin Control Panel</strong> - A new and improved control panel has been added to the administration area. It's also 100% localized! (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/36" target="_blank">Issue 36</a>)</li>
+		<li><strong>Removed DNN 8 Code</strong> - We removed any code/logic that was specifically added for DNN 8 and earlier. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/186" target="_blank">Issue 186</a>)</li>
+		<li><strong>CI: Log UPS Request &amp; Response</strong> - You can now view and inspect the actual XML request and response in the Admin Logs &amp Log4Net for UPS when diagnostic mode is turned on. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/154" target="_blank">Issue 154</a>)</li>
+		<li><strong>CI: Default Sort for Category Viewer</strong> - The product sort is now hidden when there is only 1 possible sort option. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/145" target="_blank">Issue 145</a>)</li>
+		<li><strong>Added Temp File Purge Scheduled Job</strong> - There is an upload temp folder that contains a copy of uploaded files for products and imports (images, import spreadsheets, product downloads, etc.). This scheduled job defaults to emptying this folder once per week. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/44" target="_blank">Issue 44</a>)</li>
+		<li><strong>Stripe Tokenization Support</strong> - Stripe tokens are now the default methdod for new installations. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/166" target="_blank">Issue 166</a>)</li>
+		<li><strong>Updated Page Templates for New Installs</strong> - Page templates have been updated to be aware of the DNN 9.xx theme layouts. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/33" target="_blank">Issue 33</a>)</li>
+		<li><strong>Bootstrap 3 Viewset Added</strong> - This is now the <em>_default</em> viewset for the best compatibility with the default DNN 9.xx theme.</li>
+		<li><strong>Bootstrap 4 Viewset Added</strong> - This new viewset is of the same name and can be used as-is, or as a starting point with any Bootstrap 4 theme.</li>
+		<li><strong>Added hcTabs jQuery Extension</strong> - Bootstrap 4 includes a HTML pattern update that was not compatible with the dnnTabs plugin.</li>
+		<li><strong>Removed Deprecated Methods</strong> - Numerous obsolete methods that have been marked for deletion since and before version 03.00.00 <a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/commit/11423869697e7a1de2a6b139c1582ed7d178b3a5" target="_blank">have been removed</a>.<span class="muy-importante">***</span></li>
+		<li><strong>Improved Branding Images</strong> - Products and categories that are missing their primary image now have a branded and better designed default image. This includes updated default images for sample products.</li>
+		<li><strong>Improved Developer Experience for AddToCart Links</strong> - Viewset developers can more easily added links to directly add products to the card with a single-click in all views.</li>
+		<li><strong>Updated credit card sprites</strong> - The credit card sprites included older logos for the major credit card vendors. The sprites have been updated in all viewsets.</li>
+	</ul>
+	
+	<h3><strong>Maintenance Updates</strong></h3>
+	<ul>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/86" target="_blank">Issue 86</a> - SI: Users will not see the Menu in the Admin Area if they are not a Administrator</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/209" target="_blank">Issue 209</a> - SI: Product Type Properties not sorted properly</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/237" target="_blank">Issue 237</a> - SI: Creating a new product via the REST API doesn't make it searchable</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/239" target="_blank">Issue 239</a> - SI: E-Mail Address Shouldn't Be Case-Sensitive</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/249" target="_blank">Issue 249</a> - SI: Customer IP Address on Authorize.NET is Always 0.0.0.0</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/243" target="_blank">Issue 243</a> - SI: Properly Initialize InputStream for forwards compatibility with .NET Core</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/211" target="_blank">Issue 211</a> - SI: Deactivated products still show as a related product in product details</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/pull/236" target="_blank">Issue 236</a> - Cookies saved by Hotcakes now detect and send the correct secure or unsecure cookie</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/247" target="_blank">Issue 247</a> - Pop-up positioning seemed to be randomly placed and sized in certain views of the administration area.</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/216" target="_blank">Issue 216</a> - The [[Order.VATRegistrationNumber]] e-mail template token didn't return the VAT number unless customer was also Tax Exempt</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/252" target="_blank">Issue 252</a> - CI: File upload product choice doesn't allow files to be uploaded.<span class="muy-importante">**</span></li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/69" target="_blank">Issue 69</a> - TabIndex order is not correctly observed in checkout</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/144" target="_blank">Issue 144</a> - CI: Checkout JS Error Duplicate HTML Element IDs</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/152" target="_blank">Issue 152</a> - No longer adding Host pages now that the minimum version of DNN doesn't include pre-DNN 9.xx support</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/217" target="_blank">Issue 217</a> - Corrected South Korea's ISO data.</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/214" target="_blank">Issue 214</a> - Role (membership) expiration date is ignored in sales promotions</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/153" target="_blank">Issue 153</a> - CI: Product Import appears to not import images</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/180" target="_blank">Issue 180</a> - Removed all remnants of Shift4 from code base</li>
+		<li>No Issue </a> - CartController was returning the medium product image URL as default, instead of the small product image URL.</li>
+		<li>No Issue </a> - Updated typos in &quot;Manufactures&quot; and &quot;Manufacturers&quot; and deprecated any instances of methods/properties using the misspelled <em>Manufactures</em> instances as obsolete, marked for deleting in Hotcakes 03.04.00 or later.</li>
+		<li>No Issue </a> - Updated several typos in sample products &amp; in other areas of the viewsets and store admin.</li>
+		<li>No Issue</a> - Updated all store admin views with broken images in buttons and other editing features.</li>
+	</ul>
+	
+	<h3>Breaking Changes &amp; Other Important Considerations</h3>
+	<p>As always, please <span class="muy-importante">backup before installing</span> any new/updated extension in your website and test in a development environment first.</p>
+	<ul>
+		<li><span class="muy-importante">*</span>New Viewsets: You shouldn't be modifying the <em>_default</em> viewset. If you are, you should make a copy of it before installing this update. It's completely re-written and replaced by a Bootstrap 3 viewset. The standard Hotcakes viewset is added for backwards compatibility and edge cases, named <em>_default-Legacy</em>.</li>
+		<li><span class="muy-importante">**</span><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/252" target="_blank">Issue 252</a>: Allowing any end-user to upload files alway presents risk for your website. Please plan for this and protect yourself accordingly.</li>
+		<li><span class="muy-importante">***</span>If you are using one of the Hotcakes Commerce extension points or otherwise are integrating with it, you should review your source code builds for any warnings/errors before attempting any upgrade. Many deprecated endpoints have been removed and some others have been deprecated.</li>
+		<li>Related to <a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/44" target="_blank">Issue 44</a>, please review the new scheduled job and adjust it as desired.</li>
+		<li>The ability to show the full credit card number (configuration option) has been removed.</li>
+		<li>If upgrading to/past DNN 9.2.xx, you can upgrade Hotcakes before or after. This also applies to DNN 9.6+.</li>
+	</ul>
+</div>
