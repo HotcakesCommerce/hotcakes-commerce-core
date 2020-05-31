@@ -29,13 +29,13 @@
                         @if (Model.Item.HasOptions() || Model.Item.IsGiftCard)
                         {
                             <a href="@Model.ProductLink" class="btn btn-primary">
-                                <em class="fas fa-eye"></em>@Localization.GetString("View")
+                                <i class="fas fa-eye"></i>@Localization.GetString("View")
                             </a>
                         }
                         else
                         {
                             <a href="@Url.RouteHccUrl(HccRoute.Cart, new {quickaddsku = Model.Item.Sku})" class="btn btn-primary">
-                                <em class="fas fa-cart-plus"></em>@Localization.GetString("AddToCart")
+                                <i class="fas fa-cart-plus"></i>@Localization.GetString("AddToCart")
                             </a>
                         }
                     </li>
