@@ -31,6 +31,8 @@ namespace Hotcakes.Commerce
     {
         IEnumerable<string> GetAllowedExtensions();
 
+        bool DebugModeEnabled();
+
         T GetSettingValue<T>(string key, T defVal);
     }
 }

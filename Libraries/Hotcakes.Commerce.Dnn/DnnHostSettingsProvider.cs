@@ -38,6 +38,10 @@ namespace Hotcakes.Commerce.Dnn
             return Host.AllowedExtensionWhitelist.AllowedExtensions;
         }
 
+        public bool DebugModeEnabled()
+        {
+            return Host.DebugMode;
+        }
 
         public T GetSettingValue<T>(string key, T defVal)
         {

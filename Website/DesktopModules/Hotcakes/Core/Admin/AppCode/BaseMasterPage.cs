@@ -33,6 +33,7 @@ using DotNetNuke.Application;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Web.Client;
 using DotNetNuke.Web.Client.ClientResourceManagement;
+using Hotcakes.Commerce;
 using Hotcakes.Web;
 using StackExchange.Profiling;
 
@@ -69,30 +70,63 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
         {
             base.OnLoad(e);
 
+            var hostSettings = Hotcakes.Commerce.Factory.CreateHostSettingsProvider();
+            var debug = hostSettings.DebugModeEnabled();
+
             RegisterCssInclude(FileOrder.Css.DefaultCss, "~/DesktopModules/Hotcakes/Core/Admin/default.css");
             RegisterCssInclude(FileOrder.Css.DefaultPriority + 1, "~/DesktopModules/Hotcakes/Core/Admin/admin.css");
             RegisterCssInclude(FileOrder.Css.DefaultPriority + 2, "~/DesktopModules/Hotcakes/Core/Scripts/flatpickr/flatpickr.min.css");
 
-            RegisterJsInclude(FileOrder.Js.DefaultPriority + 1, "~/DesktopModules/Hotcakes/Core/Scripts/jquery.ui.widget.js");
-            RegisterJsInclude(FileOrder.Js.DefaultPriority + 2, "~/DesktopModules/Hotcakes/Core/Scripts/jquery.fileupload.js");
-            RegisterJsInclude(FileOrder.Js.DefaultPriority + 3, "~/DesktopModules/Hotcakes/Core/Scripts/jquery.fileupload.js");
+            if (debug) { 
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 1, "~/DesktopModules/Hotcakes/Core/Scripts/jquery.ui.widget.js");
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 2, "~/DesktopModules/Hotcakes/Core/Scripts/jquery.fileupload.js");
+            }
+            else
+            {
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 1, "~/DesktopModules/Hotcakes/Core/Scripts/jquery.ui.widget.min.js");
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 2, "~/DesktopModules/Hotcakes/Core/Scripts/jquery.fileupload.min.js");
+            }
 
-            RegisterJsInclude(FileOrder.Js.DefaultPriority + 4, "~/DesktopModules/Hotcakes/Core/Scripts/flatpickr/flatpickr.js");
+            RegisterJsInclude(FileOrder.Js.DefaultPriority + 3, "~/DesktopModules/Hotcakes/Core/Scripts/flatpickr/flatpickr.js"); // already minified
 
-            RegisterJsInclude(FileOrder.Js.DefaultPriority + 5, "~/Resources/Shared/Scripts/knockout.js");
-            RegisterJsInclude(FileOrder.Js.DefaultPriority + 6, "~/DesktopModules/Hotcakes/Core/Scripts/knockout.mapping.js");
-            RegisterJsInclude(FileOrder.Js.DefaultPriority + 7, "~/DesktopModules/Hotcakes/Core/Scripts/hcc.core.js");
+            RegisterJsInclude(FileOrder.Js.DefaultPriority + 4, "~/Resources/Shared/Scripts/knockout.js"); // dnn core (minified already)
+            RegisterJsInclude(FileOrder.Js.DefaultPriority + 5, "~/DesktopModules/Hotcakes/Core/Scripts/knockout.mapping.js");
+
+            if (debug)
+            {
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 7, "~/DesktopModules/Hotcakes/Core/Scripts/hcc.core.js");
+            }
+            else
+            {
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 7, "~/DesktopModules/Hotcakes/Core/Scripts/hcc.core.min.js");
+            }
 
             RegisterJsInclude(FileOrder.Js.DefaultPriority + 8, "~/DesktopModules/Hotcakes/Core/Scripts/chartjs/Chart.min.js");
-			RegisterJsInclude(FileOrder.Js.DefaultPriority + 9, "~/DesktopModules/Hotcakes/Core/Scripts/chartjs/Chart.Milestone.js");
-			RegisterJsInclude(FileOrder.Js.DefaultPriority + 10, "~/DesktopModules/Hotcakes/Core/Scripts/chartjs/Chart.Milestone.Legend.js");
 
-            RegisterJsInclude(FileOrder.Js.DefaultPriority + 11, "~/DesktopModules/Hotcakes/Core/Admin/Admin.js");
+            if (debug)
+            {
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 9, "~/DesktopModules/Hotcakes/Core/Scripts/chartjs/Chart.Milestone.js");
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 10, "~/DesktopModules/Hotcakes/Core/Scripts/chartjs/Chart.Milestone.Legend.js");
 
-            RegisterJsInclude(FileOrder.Js.DefaultPriority + 12, "~/DesktopModules/Hotcakes/Core/Scripts/hcc.product.performance.js");
-            RegisterJsInclude(FileOrder.Js.DefaultPriority + 13, "~/DesktopModules/Hotcakes/Core/Scripts/hcc.category.performance.js");
-            RegisterJsInclude(FileOrder.Js.DefaultPriority + 14, "~/DesktopModules/Hotcakes/Core/Scripts/hcc.admin.dashboard.js");
-            RegisterJsInclude(FileOrder.Js.DefaultPriority + 15, "~/DesktopModules/Hotcakes/Core/Scripts/jquery.switchButton.js");
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 11, "~/DesktopModules/Hotcakes/Core/Admin/Admin.js");
+
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 12, "~/DesktopModules/Hotcakes/Core/Scripts/hcc.product.performance.js");
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 13, "~/DesktopModules/Hotcakes/Core/Scripts/hcc.category.performance.js");
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 14, "~/DesktopModules/Hotcakes/Core/Scripts/hcc.admin.dashboard.js");
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 15, "~/DesktopModules/Hotcakes/Core/Scripts/jquery.switchButton.js");
+            }
+            else
+            {
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 9, "~/DesktopModules/Hotcakes/Core/Scripts/chartjs/Chart.Milestone.min.js");
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 10, "~/DesktopModules/Hotcakes/Core/Scripts/chartjs/Chart.Milestone.Legend.min.js");
+
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 11, "~/DesktopModules/Hotcakes/Core/Admin/Admin.min.js");
+
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 12, "~/DesktopModules/Hotcakes/Core/Scripts/hcc.product.performance.min.js");
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 13, "~/DesktopModules/Hotcakes/Core/Scripts/hcc.category.performance.min.js");
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 14, "~/DesktopModules/Hotcakes/Core/Scripts/hcc.admin.dashboard.min.js");
+                RegisterJsInclude(FileOrder.Js.DefaultPriority + 15, "~/DesktopModules/Hotcakes/Core/Scripts/jquery.switchButton.min.js");
+            }
         }
 
         protected override void OnPreRender(EventArgs e)

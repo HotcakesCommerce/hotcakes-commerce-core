@@ -67,18 +67,17 @@ var dnn = dnn || {};
             Sys.WebForms.PageRequestManager.getInstance().add_endRequest(func);
     };
 
-    String.prototype.trim = function () {
+    String.prototype.trim = function() {
         return this.replace(/^\s*/, "").replace(/\s*$/, "");
-    }
+    };
 
-    String.prototype.padL = function (nLength, sChar) {
+    String.prototype.padL = function(nLength, sChar) {
         var sreturn = this;
         while (sreturn.length < nLength) {
             sreturn = String(sChar) + sreturn;
         }
         return sreturn;
-
-    }
+    };
 
     $.fn.hcImageUpload = function (settings) {
         var $divImageBox = settings.divImage;
@@ -133,7 +132,6 @@ jQuery(function ($) {
         $(this).find(".hcFormInfo").hide();
     });
 });
-
 
 function createAddressValidationInputs() {
     var AddressValidationInputs = {

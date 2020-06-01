@@ -65,6 +65,7 @@
 		<li><strong>Added Temp File Purge Scheduled Job</strong> - There is an upload temp folder that contains a copy of uploaded files for products and imports (images, import spreadsheets, product downloads, etc.). This scheduled job defaults to emptying this folder once per week. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/44" target="_blank">Issue 44</a>)</li>
 		<li><strong>Stripe Tokenization Support</strong> - Stripe tokens are now the default methdod for new installations. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/166" target="_blank">Issue 166</a>)</li>
 		<li><strong>Updated Page Templates for New Installs</strong> - Page templates have been updated to be aware of the DNN 9.xx theme layouts. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/33" target="_blank">Issue 33</a>)</li>
+		<li><strong>Core Scripts Load as Minified by Default</strong> - The minified scripts can be loaded as uncompressed by turning on debug mode in DNN.</li>
 		<li><strong>Bootstrap 3 Viewset Added</strong> - This is now the <em>_default</em> viewset for the best compatibility with the default DNN 9.xx theme.</li>
 		<li><strong>Bootstrap 4 Viewset Added</strong> - This new viewset is of the same name and can be used as-is, or as a starting point with any Bootstrap 4 theme.</li>
 		<li><strong>Added hcTabs jQuery Extension</strong> - Bootstrap 4 includes a HTML pattern update that was not compatible with the dnnTabs plugin.</li>
