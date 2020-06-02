@@ -70,7 +70,6 @@
                 var $el = $(e);
                 $el.height($el.width() * 0.7);
                 $el.find("img").height($el.width() * 0.7);
-                //$el.css("display", "table-cell");
             });
         };
         setTimeout(onresize, 10);
@@ -134,9 +133,7 @@
         this.remove = function () {
             var overlay = this.container.children(".ajax_overlay");
             if (overlay.length) {
-                //overlay.fadeOut(this.options., function () {
                 overlay.remove();
-                //});
             }
         };
 
@@ -387,7 +384,7 @@
                 });
 
                 $options.each(function (i, el) {
-                    var $li = $("<li/>")
+                    var $li = $("<li/>"); 
                     $li.attr("data-value", $(el).val());
                     $li.text($(el).text());
                     $ul.append($li);

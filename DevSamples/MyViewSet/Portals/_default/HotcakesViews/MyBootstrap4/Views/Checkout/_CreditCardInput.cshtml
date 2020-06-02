@@ -1,0 +1,92 @@
+﻿@model Hotcakes.Modules.Core.Models.CheckoutViewModel
+@using Hotcakes.Payment
+
+@helper Years()
+{
+    int baseYear = DateTime.Now.Year;
+    for (int i = 0; i < 10; i++)
+    {
+    <option value="@(baseYear + i)" 
+            @if (Model.PaymentViewModel.DataCreditCard.ExpirationYear == (baseYear + i))
+            {<text>selected="selected"</text>} 
+        >@(baseYear + i)</option>
+    }
+}
+@helper Months()
+{
+    for (int i = 1; i <= 12; i++)
+    {
+    <option value="@i" 
+            @if (Model.PaymentViewModel.DataCreditCard.ExpirationMonth == i)
+            { <text>selected="selected"</text>} 
+        >@i</option>
+    }
+}
+@functions 
+{
+    public bool IsAccepted(CardType ctype)
+    {
+        if (Model.PaymentViewModel.AcceptedCardTypes.Contains(ctype))
+        {
+            return true;
+        }
+        return false;
+    }  
+}
+<div class="hc-creditcard-form clearfix">
+    <div class="form-group row">
+        <label class="col-sm-3 offset-sm-1 col-form-label">&nbsp;</label>
+        <div class="col-sm-6 offset-sm-0">
+            <span class="hc-card-icons">
+                @if (IsAccepted(CardType.Visa))
+                { <span class="cc-visa"></span> }
+                @if (IsAccepted(CardType.MasterCard))
+                { <span class="cc-mastercard"></span> }
+                @if (IsAccepted(CardType.Amex))
+                { <span class="cc-amex"></span> }
+                @if (IsAccepted(CardType.Discover))
+                { <span class="cc-discover"></span> }
+                @if (IsAccepted(CardType.DinersClub))
+                { <span class="cc-diners"></span> }
+                @if (IsAccepted(CardType.JCB))
+                { <span class="cc-jcb"></span> }
+            </span>
+        </div>
+    </div>
+    <div class="form-group row dnnFormRequired">
+        <label class="col-sm-3 offset-sm-1 col-form-label" for="cccardnumber">@Localization.GetString("CardNumber"):</label>
+        <div class="col-sm-6 offset-sm-0">
+            <input type="text" name="cccardnumber" id="cccardnumber" maxlength="20"
+                value="@Model.PaymentViewModel.DataCreditCard.CardNumber"                    
+                class="form-control @Model.IsErr("cccardnumber")" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 offset-sm-1 col-form-label">@Localization.GetString("ExpDate"):</label>
+        <div class="col-sm-6 offset-sm-0 form-inline">
+            <select name="ccexpmonth" class="form-control small hc-cc-expmonth">
+                <option value="0">--</option>
+                @Months()
+            </select>
+            <select name="ccexpyear" class="form-control medium hc-cc-expyear">
+                <option value="0">----</option>
+                @Years()
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 offset-sm-1 col-form-label" for="ccsecuritycode">@Localization.GetString("SecurityCode"):</label>
+        <div class="col-sm-6 offset-sm-0">
+            <input type="password" id="ccsecuritycode" name="ccsecuritycode" maxlength="4" 
+                class="form-control small hc-cc-seccode @Model.IsErr("ccsecuritycode")" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 offset-sm-1 col-form-label" for="cccardholder">@Localization.GetString("NameOnCard"):</label>
+        <div class="col-sm-6 offset-sm-0">
+            <input type="text" id="cccardholder" name="cccardholder" 
+                value="@Model.PaymentViewModel.DataCreditCard.CardHolderName"
+                class="form-control @Model.IsErr("cccardholder")" />
+        </div>
+    </div>
+</div>

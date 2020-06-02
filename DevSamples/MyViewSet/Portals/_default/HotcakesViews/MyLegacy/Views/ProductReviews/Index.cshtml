@@ -1,0 +1,15 @@
+﻿@model Hotcakes.Modules.Core.Models.ProductReviewsViewModel
+<h2>@Localization.GetString("Reviews") (@Model.Reviews.Count): @Model.ProductView.Item.ProductName</h2>
+<div class="hc-average-rating clearfix">
+    <div class="left">@Localization.GetString("AverageRating")</div>
+    <div class="hc-rating hc-stars@(ViewBag.Avg) left"></div>
+</div>
+<div class="hc-review-list clearfix">
+    @foreach (var review in Model.Reviews)
+    {
+        @Html.Partial("_SingleReview", review)
+    }
+</div>
+<div class="clearfix">
+    <a href="@Model.ProductView.ProductLink" class="dnnSecondaryAction">&laquo; @Localization.GetString("ReturnToProduct")</a>
+</div>

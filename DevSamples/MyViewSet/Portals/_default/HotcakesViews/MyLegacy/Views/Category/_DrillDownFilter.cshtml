@@ -1,0 +1,90 @@
+﻿
+@helper RenderSelectedFacet(string facetName, string clickHandler){
+
+    <b data-bind="@String.Format("if: Selected{0}.length > 0", facetName)">@Localization.GetString(facetName)</b>
+    <ul data-bind="@String.Format("foreach: Selected{0}", facetName)">
+        <li>
+            <span data-bind="text: Name"></span><a href="#" data-bind="@String.Format("click: $root.{0}", clickHandler)"> @Localization.GetString("Remove")</a>
+        </li>
+    </ul>
+}
+
+@helper RenderFacet(string facetName, string clickHandler){
+    
+    <h3 data-bind="@String.Format("if: {0}.length > 0", facetName)">@Localization.GetString(facetName)</h3>
+    <ul class="hc-facets" data-bind="@String.Format("foreach: {0}", facetName)">
+        <li>
+            <input type="checkbox" data-bind="checked: Checked, @String.Format("click: $root.{0}", clickHandler)" />
+            <!-- ko if: !Checked -->
+            <a href="#" data-bind="text: Name, @String.Format("click: $root.{0}", clickHandler)"></a> (<span data-bind="text: Count"></span>)
+            <!-- /ko -->
+            <!-- ko if: Checked -->
+            <span data-bind="text: Name"></span>
+            <!-- /ko -->
+        </li>
+    </ul>
+}
+
+<div class="hc-drilldown-filter">
+    <!-- ko with: model -->
+    <div class="hc-drilldown-selected" data-bind="if: SelectedManufacturers.length > 0 || SelectedVendors.length > 0 || SelectedTypes.length > 0 || SelectedProperties.length > 0">
+        <h3>@Localization.GetString("YouSelected")</h3>
+
+        @RenderSelectedFacet("Manufacturers", "chooseManFacet")
+        @RenderSelectedFacet("Vendors", "chooseVenFacet")
+        @RenderSelectedFacet("Types", "chooseTypeFacet")
+
+        <div data-bind="foreach: SelectedProperties">
+            <b data-bind="text: DisplayName"></b>
+            <ul data-bind="foreach: PropertyValues">
+                <li>
+                    <span data-bind="text: Name"></span>
+                    <a href="#" data-bind="click: $root.choosePropFacet.bind($data, $parent)">@Localization.GetString("Remove")</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <h3 data-bind="if: SubCategories.length > 0">@Localization.GetString("Categories")</h3>
+    <ul data-bind="foreach: SubCategories">
+        <li>
+            <a href="#" data-bind="text: Title, attr: { href: Url }"></a>
+        </li>
+    </ul>
+    @RenderFacet("Manufacturers", "chooseManFacet")
+    @RenderFacet("Vendors", "chooseVenFacet")
+    @RenderFacet("Types", "chooseTypeFacet")
+
+    <div data-bind="foreach: Properties">
+        <h3 data-bind="text: DisplayName"></h3>
+        <ul class="hc-facets" data-bind="foreach: FacetItems">
+            <li>
+                <input type="checkbox" data-bind="checked: Checked, click: $root.choosePropFacet.bind($data, $parent)" />
+                <!-- ko if: !Checked -->
+                <a href="#" data-bind="text: Name, click: $root.choosePropFacet.bind($data, $parent)"></a> (<span data-bind="text: Count"></span>)
+                <!-- /ko -->
+                <!-- ko if: Checked -->
+                <span data-bind="text: Name"></span>
+                <!-- /ko -->
+            </li>
+        </ul>
+    </div>
+    <!-- /ko -->
+
+    <h3>@Localization.GetString("Price")</h3>
+    <div class="hc-price-slider dnnForm">
+        <div class="hc-slider-controls">
+            <div class="hc-slider-left">
+                <span>@Localization.GetString("MinPrice")</span>
+                <input type="text" id="hcSliderMinPrice" data-bind="value: minPrice" />
+            </div>
+            <div class="hc-slider-center">
+                <a id="hcApplyPriceFilter" class="dnnPrimaryAction" href="#" data-bind="click: applyPrice">@Localization.GetString("Apply")</a>
+            </div>
+            <div class="hc-slider-right">
+                <span>@Localization.GetString("MaxPrice")</span>
+                <input type="text" id="hcSliderMaxPrice" data-bind="value: maxPrice" />
+            </div>
+        </div>
+    </div>
+</div>

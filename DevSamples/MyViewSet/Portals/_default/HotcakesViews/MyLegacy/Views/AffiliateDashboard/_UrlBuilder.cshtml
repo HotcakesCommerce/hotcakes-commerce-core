@@ -1,0 +1,44 @@
+﻿@model Hotcakes.Modules.Core.Models.AffiliateUrlBuilderViewModel
+@using (Html.BeginHccForm(new { @class = "hcUrlBuilder" }))
+{
+    <div class="row-fluid">
+        <div class="span6 dnnForm">
+            <div class="dnnFormItem">
+                <label class="dnnLabel">Link To</label>
+                <select data-bind="value: mode, event: { change: changeMode }">
+                    <option value="Website">Website URL</option>
+                    <option value="Registration">Affiliate Registration</option>
+                    <option value="Product">Product</option>
+                    <option value="Category">Category</option>
+                </select>
+            </div>
+            <div class="dnnFormItem" data-bind="visible: mode() == 'Product' || mode() == 'Category'">
+                <label class="dnnLabel"></label>
+                <select data-bind="value: categoryId, options: categories, optionsText: 'Text', optionsValue: 'Value', event: { change: changeCategory }">
+                </select>
+            </div>
+            <div class="dnnFormItem" data-bind="visible: mode() == 'Product'">
+                <label class="dnnLabel"></label>
+                <select data-bind="value: productId, options: products, optionsText: 'Text', optionsValue: 'Value'">
+                </select>
+            </div>
+            <div class="dnnFormItem" data-bind="visible: mode() == 'Website' || mode() == 'Registration'">
+                <label class="dnnLabel"></label>
+                <input type="text" data-bind="value: textUrl" />
+            </div>
+            <div class="dnnFormItem">
+                <button class="dnnSecondaryAction" data-bind="click: generate">Generate</button>
+            </div>
+        </div>
+        <div class="span6 dnnForm">
+            <div class="dnnFormItem">
+                <label class="dnnLabel"></label>
+                <textarea style="width: 100%" id="hcCopySource" data-bind="value: generatedUrl, hasSelection: generatedUrl != ''"></textarea>
+            </div>
+            <div class="dnnFormItem">
+                <button class="dnnSecondaryAction" id="hcCopyToClipboard">Copy</button>
+            </div>
+
+        </div>
+    </div>
+}

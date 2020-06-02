@@ -1,0 +1,24 @@
+﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+@if (Model.AuthorizedToEditCatalog)
+{
+    <div class="hc-catalog-admin">
+        <div class="dnnFormMessage dnnFormInformation">
+            <h6>@Localization.GetString("AdminMessage")</h6>
+            <div class="hc-admin-actions">
+                <ul class="dnnActions hc-actions">
+                    <li><a href="@Model.StoreAdminUrl" target="_blank" class="dnnTertiaryAction">@Localization.GetString("Dashboard")</a></li>
+                    @if (!string.IsNullOrEmpty(Model.LocalCategory.Bvin))
+                    {
+                        <li><a href="@Model.CategoryAnalyticsUrl" target="_blank" class="dnnTertiaryAction">@Localization.GetString("CategoryAnalytics")</a></li>
+                        <li><a href="@Model.CategoryEditUrl" target="_blank" class="dnnTertiaryAction">@Localization.GetString("CategoryEdit")</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="@Model.ProductsManagementUrl" target="_blank" class="dnnTertiaryAction">@Localization.GetString("ManageProducts")</a></li>
+                        <li><a href="@Model.CategoriesManagementUrl" target="_blank" class="dnnTertiaryAction">@Localization.GetString("ManageCategories")</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+}

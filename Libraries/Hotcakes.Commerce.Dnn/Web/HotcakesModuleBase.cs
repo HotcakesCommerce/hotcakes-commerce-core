@@ -42,8 +42,6 @@ namespace Hotcakes.Commerce.Dnn.Web
     [Serializable]
     public class HotcakesModuleBase : PortalModuleBase
     {
-        // TODO: Change all script references to look for the DEBUG setting, and be CDN/minified scripts except when DEBUG == true, then use the local scripts
-
         private const string IsScriptResourcesAddedKey = "IsScriptResourcesAddedKey";
         private const string ScriptsBasePath = "~/DesktopModules/Hotcakes/Core/Scripts/";
         private LiteralControl _ltMiniProfiler;
@@ -90,12 +88,23 @@ namespace Hotcakes.Commerce.Dnn.Web
 
                 MvcRenderingEngine = new MvcRenderingEngine(ModuleContext);
 
+                var hostSettings = Hotcakes.Commerce.Factory.CreateHostSettingsProvider();
+                var debug = hostSettings.DebugModeEnabled();
+
                 // Register css
                 RegisterStyleSheet(HccApp.ViewsVirtualPath + "/views.css");
 
                 // Register scripts
-                RegisterScript("hcc.core.js", 1);
-                RegisterScript("hcc.views.js", 2);
+                if (debug)
+                {
+                    RegisterScript("hcc.core.js", 1);
+                    RegisterScript("hcc.views.js", 2);
+                }
+                else
+                {
+                    RegisterScript("hcc.core.min.js", 1);
+                    RegisterScript("hcc.views.min.js", 2);
+                }
 
                 JavaScript.RequestRegistration(CommonJs.DnnPlugins);
 

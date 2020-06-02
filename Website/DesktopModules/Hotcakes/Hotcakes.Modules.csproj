@@ -181,6 +181,7 @@
     <Content Include="01.07.00.txt" />
     <Content Include="02.00.00.txt" />
     <Content Include="03.00.00.txt" />
+    <Content Include="Core\Admin\Admin.min.js" />
     <Content Include="Core\Admin\admin.min.css">
       <DependentUpon>admin.css</DependentUpon>
     </Content>
@@ -298,16 +299,23 @@
     <Content Include="Core\Controls\StoreNotFound.ascx" />
     <Content Include="Core\Images\hcc-logo.png" />
     <Content Include="Core\Images\message-bubbles.png" />
+    <Content Include="Core\Scripts\chartjs\Chart.Milestone.Legend.min.js" />
+    <Content Include="Core\Scripts\chartjs\Chart.Milestone.min.js" />
     <Content Include="Core\Scripts\chartjs\Chart.Milestone.js" />
     <Content Include="Core\Scripts\chartjs\Chart.Milestone.Legend.js" />
     <Content Include="Core\Scripts\chartjs\Chart.min.js" />
     <Content Include="Core\Scripts\clipboard.min.js" />
     <Content Include="Core\Scripts\flatpickr\flatpickr.js" />
     <Content Include="Core\Scripts\flatpickr\flatpickr.min.css" />
+    <Content Include="Core\Scripts\hcc.admin.dashboard.min.js" />
     <Content Include="Core\Scripts\hcc.admin.dashboard.js" />
+    <Content Include="Core\Scripts\hcc.category.performance.min.js" />
     <Content Include="Core\Scripts\hcc.category.performance.js" />
     <Content Include="Core\Scripts\excanvas.js" />
+    <Content Include="Core\Scripts\hcc.core.min.js" />
+    <Content Include="Core\Scripts\hcc.product.performance.min.js" />
     <Content Include="Core\Scripts\hcc.product.performance.js" />
+    <Content Include="Core\Scripts\hcc.views.min.js" />
     <Content Include="Core\Scripts\hcc.views.js" />
     <Content Include="Core\Scripts\jquery-3.5.1.js" />
     <Content Include="Core\Scripts\jquery-3.5.1.min.js" />
@@ -320,8 +328,11 @@
     <Content Include="Core\Scripts\jquery-ui-1.12.1\css\jquery-ui.theme.min.css" />
     <Content Include="Core\Scripts\jquery-ui-1.12.1\js\jquery-ui.js" />
     <Content Include="Core\Scripts\jquery-ui-1.12.1\js\jquery-ui.min.js" />
+    <Content Include="Core\Scripts\jquery.fileupload.min.js" />
     <Content Include="Core\Scripts\jquery.fileupload.js" />
+    <Content Include="Core\Scripts\jquery.switchButton.min.js" />
     <Content Include="Core\Scripts\jquery.switchButton.js" />
+    <Content Include="Core\Scripts\jquery.ui.widget.min.js" />
     <Content Include="Core\Scripts\jquery.ui.widget.js" />
     <Content Include="Core\Scripts\knockout.mapping.js" />
     <Content Include="Core\Scripts\tinymce\jquery.tinymce.min.js" />
@@ -3736,6 +3747,9 @@
     <Content Include="Core\Scripts\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
     <Content Include="Providers\DataProviders\SqlDataProvider\03.02.03.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\03.03.00.SqlDataProvider" />
+    <Content Include="Hotcakes_Symbols.dnn">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
