@@ -6,12 +6,10 @@
       <iconFile>~/DesktopModules/Hotcakes/Core/Images/hcc-logo.png</iconFile>
       <owner>
         <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
+        <organization>Upendo Ventures, LLC</organization>
         <url>https://hotcakes.org</url>
-        <email>Support@HotcakesCommerce.com</email>
+        <email>support@upendoventures.com</email>
       </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
       <azureCompatible>true</azureCompatible>
       <dependencies>
         <dependency type="CoreVersion">09.02.02</dependency>
