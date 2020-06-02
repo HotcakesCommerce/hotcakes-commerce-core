@@ -29,7 +29,7 @@
 	<p>Sponsorship is <em>Powered by GitHub Sponsors</em> and ensures that this project lives and thrives. <a href="https://github.com/sponsors/hismightiness" target="_blank">Please consider contributing</a> any amount.</p>
 	<p>THANK YOU to the following rockstars!</p>
 	<ul>
-		<li>David Poindexter, <a href="https://nvisionatibe.com/" target="_blank">nvisionative</a></li>
+		<li>David Poindexter, <a href="https://nvisionative.com/" target="_blank">nvisionative</a></li>
 		<li>Matt Rutledge, <a href="https://beleivekids.com/" target="_blank">Believe Kids</a></li>
 		<li>Adam Bernstein, <a href="https://practicewise.com/" target="_blank">PracticeWise</a></li>
 	</ul>
@@ -43,6 +43,14 @@
 		<li>Paras Daryanani, <a href="https://paras.aero/" target="_blank">paras.aero</a></li>
 		<li>Josh Slaughter, <a href="https://www.clicksandmortarwebsites.com/" target="_blank">Clicks &amp; Mortar Websites</a></li>
 		<li><a href="https://github.com/moslem7026" target="_blank">Moslem Pasokh (moslem7026)</a></li>
+	</ul>
+
+	<h3>Partners</h3>
+	<p>THANK YOU to the following partners for participating in this release!</p>
+	<ul>
+	  <li>
+		<a href="https://hotcakes.org/Partners/Partner-Detail/id/2106" target="_blank" rel="noopener">Upendo Ventures</a>
+	  </li>
 	</ul>
 	
 	<h3><strong>Release Note Prefixes</strong></h3>

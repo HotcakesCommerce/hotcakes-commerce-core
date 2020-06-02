@@ -17,6 +17,8 @@
 			<WebsiteBuildFolder>$(RootFolder)\_Build\_Website</WebsiteBuildFolder>
 			<CoreBuildFolder>$(RootFolder)\_Build\_Website\_Core</CoreBuildFolder>
 			<ViewSetBuildFolder>$(RootFolder)\_Build\_Website\_ViewSet</ViewSetBuildFolder>
+			<Bs4ViewSetBuildFolder>$(RootFolder)\_Build\_Website\_ViewSet-BootStrap4</Bs4ViewSetBuildFolder>
+			<LegacyViewSetBuildFolder>$(RootFolder)\_Build\_Website\_ViewSet-Legacy</LegacyViewSetBuildFolder>
 			<ModulesBuildFolder>$(RootFolder)\_Build\_Website\_Modules</ModulesBuildFolder>
 			<DebugBuildFolder>$(RootFolder)\_Build\_Website\_Debug</DebugBuildFolder>
 			<InstallFolder>$(RootFolder)\_Install</InstallFolder>
@@ -70,10 +72,9 @@
 		</ItemGroup>
 
 		<ItemGroup>
-			<HotcakesViewsInclude
-				Include="..\..\Portals\_default\HotcakesViews\_default\**\*.*"
-				Exclude="..\..\**\*.uk-UA.resx;..\..\**\*.manifest"
-			/>
+			<HotcakesViewsInclude Include="..\..\Portals\_default\HotcakesViews\_default\**\*.*" Exclude="..\..\**\*.uk-UA.resx;..\..\**\*.manifest" />
+			<Bootstrap4ViewsInclude Include="..\..\Portals\_default\HotcakesViews\Bootstrap4\**\*.*" Exclude="..\..\**\*.uk-UA.resx;..\..\**\*.manifest" />
+			<LegacyViewsInclude Include="..\..\Portals\_default\HotcakesViews\_default-Legacy\**\*.*" Exclude="..\..\**\*.uk-UA.resx;..\..\**\*.manifest" />
 			<PackageTxtInclude Include="**\License.txt;**\ReleaseNotes.txt" />
 		</ItemGroup>
 
@@ -102,6 +103,8 @@
 
 		<!-- Copy file to ViewSet Build Folder -->
 		<Copy SourceFiles="@(HotcakesViewsInclude)" DestinationFolder="$(ViewSetBuildFolder)\%(RecursiveDir)" />
+		<Copy SourceFiles="@(Bootstrap4ViewsInclude)" DestinationFolder="$(Bs4ViewSetBuildFolder)\%(RecursiveDir)" />
+		<Copy SourceFiles="@(LegacyViewsInclude)" DestinationFolder="$(LegacyViewSetBuildFolder)\%(RecursiveDir)" />
 
 		<!-- Copy file to Modules Build Folder -->
 		<Copy SourceFiles="@(InstallInclude)" DestinationFolder="$(ModulesBuildFolder)\%(RecursiveDir)" />
@@ -138,8 +141,19 @@
 		<CreateItem Include="$(ViewSetBuildFolder)\**\*.*">
 			<Output TaskParameter="Include" ItemName="HotcakesViewsContent" />
 		</CreateItem>
+    <Zip Files="@(HotcakesViewsContent)" WorkingDirectory="$(ViewSetBuildFolder)" ZipFileName="$(ModulesBuildFolder)\HotcakesViews.$(Extension)" ParallelCompression="False" />
 
-		<Zip Files="@(HotcakesViewsContent)" WorkingDirectory="$(ViewSetBuildFolder)" ZipFileName="$(ModulesBuildFolder)\HotcakesViews.$(Extension)" ParallelCompression="False" />
+    <!-- Create Bootstrap4Views zip -->
+    <CreateItem Include="$(Bs4ViewSetBuildFolder)\**\*.*">
+      <Output TaskParameter="Include" ItemName="HotcakesBs4ViewsContent" />
+    </CreateItem>
+    <Zip Files="@(HotcakesBs4ViewsContent)" WorkingDirectory="$(Bs4ViewSetBuildFolder)" ZipFileName="$(ModulesBuildFolder)\Bootstrap4Views.$(Extension)" ParallelCompression="False" />
+
+    <!-- Create LegacyViews zip -->
+    <CreateItem Include="$(LegacyViewSetBuildFolder)\**\*.*">
+      <Output TaskParameter="Include" ItemName="HotcakesLegacyViewsContent" />
+    </CreateItem>
+    <Zip Files="@(HotcakesLegacyViewsContent)" WorkingDirectory="$(LegacyViewSetBuildFolder)" ZipFileName="$(ModulesBuildFolder)\LegacyViews.$(Extension)" ParallelCompression="False" />
 
 		<!-- Create the Install package -->
 		<CreateItem Include="$(ModulesBuildFolder)\**\*.*">
@@ -151,6 +165,8 @@
 		
 		<RemoveDir Directories ="$(CoreBuildFolder)" /> 
 		<RemoveDir Directories ="$(ViewSetBuildFolder)" /> 
+		<RemoveDir Directories ="$(Bs4ViewSetBuildFolder)" /> 
+		<RemoveDir Directories ="$(LegacyViewSetBuildFolder)" /> 
 		<RemoveDir Directories ="$(ModulesBuildFolder)" />
 
 		<!-- Create packages with debug symbols -->
