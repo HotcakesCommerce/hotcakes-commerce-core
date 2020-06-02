@@ -43,6 +43,11 @@ namespace Hotcakes.Commerce.Dnn.Providers
     {
         private const string ProviderType = "friendlyUrl";
         private const string RegexMatchExpression = "[^a-zA-Z0-9 ]";
+        private const string REGEX_MATCH = "regexMatch";
+        private const string URLREWRITE_ORIGINALURL = "UrlRewrite:OriginalUrl";
+        private const string WWW_DOT = "www.";
+        private const string SLUG = "slug";
+        private const string TABID = "tabid";
 
         private readonly ProviderConfiguration _providerConfiguration =
             ProviderConfiguration.GetProviderConfiguration(ProviderType);
@@ -53,9 +58,9 @@ namespace Hotcakes.Commerce.Dnn.Providers
         {
             var objProvider = (Provider) _providerConfiguration.Providers[_providerConfiguration.DefaultProvider];
 
-            if (!string.IsNullOrEmpty(objProvider.Attributes["regexMatch"]))
+            if (!string.IsNullOrEmpty(objProvider.Attributes[REGEX_MATCH]))
             {
-                _regexMatch = objProvider.Attributes["regexMatch"];
+                _regexMatch = objProvider.Attributes[REGEX_MATCH];
             }
             else
             {
@@ -120,13 +125,13 @@ namespace Hotcakes.Commerce.Dnn.Providers
         private string GetFriendlyAlias(string path, string portalAlias, bool isPagePath)
         {
             var friendlyPath = path;
-            var matchString = "";
+            var matchString = string.Empty;
             if (portalAlias != Null.NullString)
             {
-                if (HttpContext.Current.Items["UrlRewrite:OriginalUrl"] != null)
+                if (HttpContext.Current.Items[URLREWRITE_ORIGINALURL] != null)
                 {
                     var httpAlias = Globals.AddHTTP(portalAlias).ToLowerInvariant();
-                    var originalUrl = HttpContext.Current.Items["UrlRewrite:OriginalUrl"].ToString().ToLowerInvariant();
+                    var originalUrl = HttpContext.Current.Items[URLREWRITE_ORIGINALURL].ToString().ToLowerInvariant();
                     httpAlias = Globals.AddPort(httpAlias, originalUrl);
                     if (originalUrl.StartsWith(httpAlias))
                     {
@@ -136,7 +141,7 @@ namespace Hotcakes.Commerce.Dnn.Providers
                     {
                         //Manage the special case where original url contains the alias as
                         //http://www.domain.com/Default.aspx?alias=www.domain.com/child"
-                        var portalMatch = Regex.Match(originalUrl, "^?alias=" + portalAlias, RegexOptions.IgnoreCase);
+                        var portalMatch = Regex.Match(originalUrl, string.Concat("^?alias=", portalAlias), RegexOptions.IgnoreCase);
                         if (!ReferenceEquals(portalMatch, Match.Empty))
                         {
                             matchString = httpAlias;
@@ -158,7 +163,7 @@ namespace Hotcakes.Commerce.Dnn.Providers
                     {
                         // manage the case where the current hostname is www.domain.com and the portalalias is domain.com
                         // (this occurs when www.domain.com is not listed as portal alias for the portal, but domain.com is)
-                        var wwwHttpAlias = Globals.AddHTTP("www." + portalAlias);
+                        var wwwHttpAlias = Globals.AddHTTP(string.Concat(WWW_DOT, portalAlias));
                         if (originalUrl.StartsWith(wwwHttpAlias))
                         {
                             matchString = wwwHttpAlias;
@@ -199,7 +204,7 @@ namespace Hotcakes.Commerce.Dnn.Providers
         {
             var friendlyPath = path;
             var queryStringMatch = Regex.Match(friendlyPath, "(.[^\\\\?]*)\\\\?(.*)", RegexOptions.IgnoreCase);
-            var queryStringSpecialChars = "";
+            var queryStringSpecialChars = string.Empty;
             if (!ReferenceEquals(queryStringMatch, Match.Empty))
             {
                 friendlyPath = queryStringMatch.Groups[1].Value;
@@ -217,9 +222,9 @@ namespace Hotcakes.Commerce.Dnn.Providers
                     replacePath = customUrl.TrimStart('/');
                 }
 
-                if (queryStringDic.ContainsKey("slug"))
+                if (queryStringDic.ContainsKey(SLUG))
                 {
-                    replacePath = replacePath + "/" + HttpContext.Current.Server.UrlDecode(queryStringDic["slug"]);
+                    replacePath = string.Concat(replacePath, "/", HttpContext.Current.Server.UrlDecode(queryStringDic[SLUG].ToLower()));
                 }
 
                 friendlyPath = Regex.Replace(friendlyPath, Globals.glbDefaultPage, replacePath, RegexOptions.IgnoreCase);
@@ -234,24 +239,23 @@ namespace Hotcakes.Commerce.Dnn.Providers
                 {
                     var pair = nameValuePairs[i].Split(Convert.ToChar("="));
 
-                    if (pair[0] == "slug" || pair[0] == "tabid")
+                    if (pair[0] == SLUG || pair[0] == TABID)
                         continue;
 
                     //Rewrite into URL, contains only alphanumeric and the % or space
                     if (string.IsNullOrEmpty(queryStringSpecialChars))
                     {
-                        queryStringSpecialChars = pair[0] + "=" + pair[1];
+                        queryStringSpecialChars = string.Concat(pair[0], "=", pair[1]);
                     }
                     else
                     {
-                        queryStringSpecialChars = queryStringSpecialChars + "&" + pair[0] + "=" +
-                                                  HttpContext.Current.Server.UrlDecode(pair[1]);
+                        queryStringSpecialChars = string.Concat(queryStringSpecialChars, "&", pair[0], "=", HttpContext.Current.Server.UrlDecode(pair[1]));
                     }
                 }
             }
             if (!string.IsNullOrEmpty(queryStringSpecialChars))
             {
-                return friendlyPath + "?" + queryStringSpecialChars;
+                return string.Concat(friendlyPath, "?", queryStringSpecialChars);
             }
             return friendlyPath;
         }

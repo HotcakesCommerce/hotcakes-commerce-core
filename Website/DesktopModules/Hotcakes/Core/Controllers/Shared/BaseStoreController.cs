@@ -25,6 +25,7 @@
 
 using System;
 using System.Web.Mvc;
+using Hotcakes.Commerce.Membership;
 using Hotcakes.Commerce.Orders;
 using Hotcakes.Modules.Core.Filters;
 
@@ -34,6 +35,14 @@ namespace Hotcakes.Modules.Core.Controllers.Shared
     [Serializable]
     public class BaseStoreController : BaseAppController
     {
+        public const string DashboardAdminUrl = "/DesktopModules/Hotcakes/Core/Admin/default.aspx";
+        public const string ProductsAdminUrl = "/DesktopModules/Hotcakes/Core/Admin/catalog/default.aspx";
+        protected const string ProductEditUrlFormat = "/DesktopModules/Hotcakes/Core/Admin/catalog/Products_Edit.aspx?id={0}";
+        protected const string ProductAnalyticsUrlFormat = "/DesktopModules/Hotcakes/Core/Admin/catalog/Products_Performance.aspx?id={0}";
+        public const string CategoriesAdminUrl = "/DesktopModules/Hotcakes/Core/Admin/catalog/Categories.aspx";
+        protected const string CategoryEditUrlFormat = "/DesktopModules/Hotcakes/Core/Admin/catalog/Categories_Edit.aspx?id={0}";
+        protected const string CategoryAnalyticsUrlFormat = "/DesktopModules/Hotcakes/Core/Admin/catalog/Categories_Performance.aspx?id={0}";
+
         /// <summary>
         ///     Gets the current cart.
         /// </summary>
@@ -55,6 +64,11 @@ namespace Hotcakes.Modules.Core.Controllers.Shared
 
             RenderToBody("hccBottomAnalytics", HccApp.CurrentStore.Settings.Analytics.BottomAnalytics);
             RenderToHead("hccAdditionalMetaTags", HccApp.CurrentStore.Settings.Analytics.AdditionalMetaTags);
+        }
+
+        protected bool AuthorizedToEditCatalog()
+        {
+            return HccApp.MembershipServices.HasCurrentUserPermission(SystemPermissions.CatalogView, HccApp);
         }
     }
 }

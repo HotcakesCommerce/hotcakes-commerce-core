@@ -167,27 +167,5 @@ namespace Hotcakes.Commerce.Contacts
             result = possible[0];
             return result;
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static AddressRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new AddressRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static AddressRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new AddressRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public AddressRepository(HccRequestContext c, IRepositoryStrategy<hcc_Address> r, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

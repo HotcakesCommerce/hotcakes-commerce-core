@@ -28,7 +28,6 @@ using System.Configuration;
 using System.Data.Entity.Core.EntityClient;
 using System.Web.Hosting;
 using Hotcakes.Commerce.Globalization;
-using Hotcakes.Commerce.Payment;
 using Hotcakes.Commerce.Storage;
 using Hotcakes.Shipping;
 
@@ -61,28 +60,6 @@ namespace Hotcakes.Commerce
                 _appSettings = config.AppSettings;
             }
         }
-
-        #endregion
-
-        #region obsolete
-
-        [Obsolete] public const string PaymentIdCreditCard = PaymentMethods.CreditCardId;
-
-        [Obsolete] public const string PaymentIdTelephone = PaymentMethods.TelephoneId;
-
-        [Obsolete] public const string PaymentIdCheck = PaymentMethods.CheckId;
-
-        [Obsolete] public const string PaymentIdPurchaseOrder = PaymentMethods.PurchaseOrderId;
-
-        [Obsolete] public const string PaymentIdCompanyAccount = PaymentMethods.CompanyAccountId;
-
-        [Obsolete] public const string PaymentIdCashOnDelivery = PaymentMethods.CashOnDeliveryId;
-
-        [Obsolete] public const string PaymentIdPaypalExpress = PaymentMethods.PaypalExpressId;
-
-        [Obsolete] public const string PaymentIdMoneris = PaymentMethods.MonerisId;
-
-        [Obsolete] public const string PaymentIdOgone = PaymentMethods.OgoneId;
 
         #endregion
 

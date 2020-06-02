@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProductTypeEditor.ascx.cs" Inherits="Hotcakes.Modules.Core.Admin.Marketing.Qualifications.ProductTypeEditor" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <h1><%=Localization.GetString("WhenProductTypeIs") %></h1>
 
@@ -8,7 +7,7 @@
         <asp:CheckBox runat="server" ID="cbIsNot" Text="Only qualify items when NOT in these product types" />
     </div>
     <div class="hcFormItem hcFormItem66p">
-		<telerik:RadComboBox ID="lstProductTypes" runat="server"></telerik:RadComboBox>
+        <asp:DropDownList ID="lstProductTypes" runat="server"/>
     </div>
     <div class="hcFormItem hcFormItem33p">
         <asp:LinkButton ID="btnAddProductType" runat="server" resourcekey="Add" CssClass="hcSecondaryAction hcSmall"

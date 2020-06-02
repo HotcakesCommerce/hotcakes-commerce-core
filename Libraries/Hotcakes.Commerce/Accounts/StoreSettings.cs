@@ -26,6 +26,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Contacts;
 using Hotcakes.Commerce.Payment;
 using Hotcakes.Commerce.Storage;
@@ -64,26 +65,26 @@ namespace Hotcakes.Commerce.Accounts
 
         public bool ApplyVATRules
         {
-            get { return GetPropBool("ApplyVATRules"); }
-            set { SetProp("ApplyVATRules", value); }
+            get { return GetPropBool(Constants.STORESETTING_APPLYVATRULES); }
+            set { SetProp(Constants.STORESETTING_APPLYVATRULES, value); }
         }
 
         public bool PreserveCartInSession
         {
-            get { return GetPropBool("PreserveCartInSession"); }
-            set { SetProp("PreserveCartInSession", value); }
+            get { return GetPropBool(Constants.STORESETTING_PRESERVECARTSESSION); }
+            set { SetProp(Constants.STORESETTING_PRESERVECARTSESSION, value); }
         }
 
         public bool SendAbandonedCartEmails
         {
-            get { return GetPropBool("SendAbandonedCartEmails"); }
-            set { SetProp("SendAbandonedCartEmails", value); }
+            get { return GetPropBool(Constants.STORESETTING_SENDABANDONEDEMAILS); }
+            set { SetProp(Constants.STORESETTING_SENDABANDONEDEMAILS, value); }
         }
 
         public int SendAbandonedEmailIn
         {
-            get { return GetPropInt("SendAbandonedEmailIn", 1); }
-            set { SetProp("SendAbandonedEmailIn", value); }
+            get { return GetPropInt(Constants.STORESETTING_SENDABANDONEDINTERVAL, 1); }
+            set { SetProp(Constants.STORESETTING_SENDABANDONEDINTERVAL, value); }
         }
 
         public DateTime AllowApiToClearUntil
@@ -91,7 +92,7 @@ namespace Hotcakes.Commerce.Accounts
             get
             {
                 var result = DateTime.Now.AddYears(-1);
-                var prop = GetProp("AllowApiToClearUntil");
+                var prop = GetProp(Constants.STORESETTING_ALLOWAPICLEARPERIOD);
                 var temp = DateTime.UtcNow.AddYears(-1);
                 if (DateTime.TryParse(prop, out temp))
                 {
@@ -102,80 +103,86 @@ namespace Hotcakes.Commerce.Accounts
             set
             {
                 var temp = value.ToString("u");
-                SetProp("AllowApiToClearUntil", temp);
+                SetProp(Constants.STORESETTING_ALLOWAPICLEARPERIOD, temp);
             }
         }
 
         public string LogoImage
         {
-            get { return GetProp("LogoImage"); }
-            set { SetProp("LogoImage", value); }
+            get { return GetProp(Constants.STORESETTING_LOGOIMAGE); }
+            set { SetProp(Constants.STORESETTING_LOGOIMAGE, value); }
         }
 
         public bool UseLogoImage
         {
-            get { return GetPropBool("UseLogoImage"); }
-            set { SetProp("UseLogoImage", value); }
+            get { return GetPropBool(Constants.STORESETTING_USELOGOIMAGE); }
+            set { SetProp(Constants.STORESETTING_USELOGOIMAGE, value); }
         }
 
         public string LogoText
         {
             get
             {
-                var s = GetProp("LogoText");
+                var s = GetProp(Constants.STORESETTING_LOGOTEXT);
                 if (s == string.Empty)
                 {
                     s = _Store.StoreName;
                 }
                 return s;
             }
-            set { SetProp("LogoText", value); }
+            set { SetProp(Constants.STORESETTING_LOGOTEXT, value); }
         }
 
         public decimal MinumumOrderAmount
         {
-            get { return GetPropDecimal("MinimumOrderAmount"); }
-            set { SetProp("MinimumOrderAmount", value); }
+            get { return GetPropDecimal(Constants.STORESETTING_MINIMUMORDERAMOUNT); }
+            set { SetProp(Constants.STORESETTING_MINIMUMORDERAMOUNT, value); }
         }
 
         public string FriendlyName
         {
             get
             {
-                var result = GetProp("FriendlyName");
+                var result = GetProp(Constants.STORESETTING_FRIENDLYNAME);
                 if (result == string.Empty)
                 {
                     result = _Store.StoreName;
                 }
                 return result;
             }
-            set { SetProp("FriendlyName", value); }
+            set { SetProp(Constants.STORESETTING_FRIENDLYNAME, value); }
         }
 
         public int LogoRevision
         {
             get
             {
-                var result = GetPropInt("LogoRevision");
+                var result = GetPropInt(Constants.STORESETTING_LOGOREVISION);
                 if (result < 1)
                 {
                     result = 1;
                 }
                 return result;
             }
-            set { SetProp("LogoRevision", value); }
+            set { SetProp(Constants.STORESETTING_LOGOREVISION, value); }
         }
 
         public bool ProductEnableSwatches
         {
-            get { return GetPropBool("ProductEnableSwatches"); }
-            set { SetProp("ProductEnableSwatches", value); }
+            get { return GetPropBool(Constants.STORESETTING_SWATCHEDENABLED); }
+            set { SetProp(Constants.STORESETTING_SWATCHEDENABLED, value); }
         }
 
         public bool MetricsRecordSearches
         {
-            get { return GetPropBool("MetricsRecordSearches"); }
-            set { SetProp("MetricsRecordSearches", value); }
+            get { return GetPropBool(Constants.STORESETTING_METRICSRECORDSEARCHES); }
+            set { SetProp(Constants.STORESETTING_METRICSRECORDSEARCHES, value); }
+        }
+
+        public bool RequirePhoneNumber
+        {
+            get { return GetPropBool(Constants.STORESETTING_REQUIREPHONENUMBER); }
+            set { SetProp(Constants.STORESETTING_REQUIREPHONENUMBER, value); }
         }
 
         public List<string> DisabledCountryIso3Codes
@@ -183,7 +190,7 @@ namespace Hotcakes.Commerce.Accounts
             get
             {
                 var result = new List<string>();
-                var data = GetProp("DisabledCountryIso3Codes");
+                var data = GetProp(Constants.STORESETTING_COUNTRYISO3CODES);
                 var codes = data.Split(',');
                 for (var i = 0; i < codes.Length; i++)
                 {
@@ -196,30 +203,30 @@ namespace Hotcakes.Commerce.Accounts
                 var data = string.Empty;
                 foreach (var code in value)
                 {
-                    data += code + ",";
+                    data += code + Constants.COMMA;
                 }
                 data = data.TrimEnd(',');
-                SetProp("DisabledCountryIso3Codes", data);
+                SetProp(Constants.STORESETTING_COUNTRYISO3CODES, data);
             }
         }
 
         public string QuickbooksOrderAccount
         {
-            get { return GetProp("QuickbooksOrderAccount"); }
-            set { SetProp("QuickbooksOrderAccount", value); }
+            get { return GetProp(Constants.STORESETTING_QUICKBOOKSORDERACCOUNT); }
+            set { SetProp(Constants.STORESETTING_QUICKBOOKSORDERACCOUNT, value); }
         }
 
         public string QuickbooksShippingAccount
         {
-            get { return GetProp("QuickbooksShippingAccount"); }
-            set { SetProp("QuickbooksShippingAccount", value); }
+            get { return GetProp(Constants.STORESETTING_QUICKBOOKSSHIPPINGACCOUNT); }
+            set { SetProp(Constants.STORESETTING_QUICKBOOKSSHIPPINGACCOUNT, value); }
         }
 
         // Force SSL for Admin and API
         public bool ForceAdminSSL
         {
-            get { return GetPropBool("ForceAdminSSL"); }
-            set { SetProp("ForceAdminSSL", value); }
+            get { return GetPropBool(Constants.STORESETTING_FORCEADMINSSL); }
+            set { SetProp(Constants.STORESETTING_FORCEADMINSSL, value); }
         }
 
         internal void Init(List<StoreSetting> allSettings)
@@ -447,10 +454,10 @@ namespace Hotcakes.Commerce.Accounts
         {
             get
             {
-                var id = GetProp("TimeZone");
+                var id = GetProp(Constants.STORESETTING_TIMEZONE);
                 if (string.IsNullOrEmpty(id))
                 {
-                    id = "Eastern Standard Time";
+                    id = Constants.STORESETTING_TIMEZONEDEFAULT;
                 }
                 var t = TimeZoneInfo.FindSystemTimeZoneById(id);
                 return t;
@@ -460,7 +467,7 @@ namespace Hotcakes.Commerce.Accounts
                 var id = string.Empty;
                 if (value != null)
                     id = value.Id;
-                SetProp("TimeZone", id);
+                SetProp(Constants.STORESETTING_TIMEZONE, id);
             }
         }
 
@@ -468,14 +475,14 @@ namespace Hotcakes.Commerce.Accounts
         {
             get
             {
-                var cc = GetProp("CultureCode");
+                var cc = GetProp(Constants.STORESETTING_CULTURECODE);
                 if (cc == string.Empty)
                 {
-                    cc = "en-US";
+                    cc = Constants.STORESETTING_CULTUREDEFAULT;
                 }
                 return cc;
             }
-            set { SetProp("CultureCode", value); }
+            set { SetProp(Constants.STORESETTING_CULTURECODE, value); }
         }
 
         #endregion
@@ -484,59 +491,59 @@ namespace Hotcakes.Commerce.Accounts
 
         public bool IssuePointsForUserPrice
         {
-            get { return GetPropBool("IssuePointsForUserPrice"); }
-            set { SetProp("IssuePointsForUserPrice", value); }
+            get { return GetPropBool(Constants.STORESETTING_ISSUEPOINTSFORUSERPRICE); }
+            set { SetProp(Constants.STORESETTING_ISSUEPOINTSFORUSERPRICE, value); }
         }
 
         public bool UseRewardsPointsForUserPrice
         {
-            get { return GetPropBool("UseRewardsPointsForUserPrice"); }
-            set { SetProp("UseRewardsPointsForUserPrice", value); }
+            get { return GetPropBool(Constants.STORESETTING_USEREWARDPOINTSFORUSERPRICE); }
+            set { SetProp(Constants.STORESETTING_USEREWARDPOINTSFORUSERPRICE, value); }
         }
 
         public bool RewardsPointsEnabled
         {
-            get { return GetPropBool("RewardsPointsOnPurchasesActive"); }
-            set { SetProp("RewardsPointsOnPurchasesActive", value); }
+            get { return GetPropBool(Constants.STORESETTING_REWARDPOINTSONPURCHASE); }
+            set { SetProp(Constants.STORESETTING_REWARDPOINTSONPURCHASE, value); }
         }
 
         public bool RewardsPointsOnProductsActive
         {
-            get { return GetPropBool("RewardsPointsOnProductsActive"); }
-            set { SetProp("RewardsPointsOnProductsActive", value); }
+            get { return GetPropBool(Constants.STORESETTING_REWARDPOINTSONPRODUCTS); }
+            set { SetProp(Constants.STORESETTING_REWARDPOINTSONPRODUCTS, value); }
         }
 
         public int RewardsPointsIssuedPerDollarSpent
         {
             get
             {
-                var temp = GetPropInt("RewardsPointsIssuedPerDollarSpent");
+                var temp = GetPropInt(Constants.STORESETTING_REWARDPOINTSPERDOLLARSPENT);
                 if (temp < 1) temp = 1;
                 return temp;
             }
-            set { SetProp("RewardsPointsIssuedPerDollarSpent", value); }
+            set { SetProp(Constants.STORESETTING_REWARDPOINTSPERDOLLARSPENT, value); }
         }
 
         public int RewardsPointsNeededPerDollarCredit
         {
             get
             {
-                var temp = GetPropInt("RewardsPointsNeededPerDollarCredit");
+                var temp = GetPropInt(Constants.STORESETTING_REWARDPOINTSPERDOLLARCREDIT);
                 if (temp < 1) temp = 100;
                 return temp;
             }
-            set { SetProp("RewardsPointsNeededPerDollarCredit", value); }
+            set { SetProp(Constants.STORESETTING_REWARDPOINTSPERDOLLARCREDIT, value); }
         }
 
         public string RewardsPointsName
         {
             get
             {
-                var temp = GetProp("RewardsPointsName");
-                if (temp == string.Empty) temp = "Reward Points";
+                var temp = GetProp(Constants.STORESETTING_REWARDPOINTSNAME);
+                if (temp == string.Empty) temp = Constants.STORESETTING_REWARDPOINTSNAMEDEFAULT;
                 return temp;
             }
-            set { SetProp("RewardsPointsName", value); }
+            set { SetProp(Constants.STORESETTING_REWARDPOINTSNAME, value); }
         }
 
         #endregion
@@ -545,42 +552,42 @@ namespace Hotcakes.Commerce.Accounts
 
         public bool ForceTermsAgreement
         {
-            get { return GetPropBool("ForceTermsAgreement"); }
-            set { SetProp("ForceTermsAgreement", value); }
+            get { return GetPropBool(Constants.STORESETTING_FORCETERMSAGREEMENT); }
+            set { SetProp(Constants.STORESETTING_FORCETERMSAGREEMENT, value); }
         }
 
         public int MaxItemsPerOrder
         {
-            get { return GetPropInt("MaxItemsPerOrder"); }
-            set { SetProp("MaxItemsPerOrder", value); }
+            get { return GetPropInt(Constants.STORESETTING_MAXITEMSPERORDER); }
+            set { SetProp(Constants.STORESETTING_MAXITEMSPERORDER, value); }
         }
 
         public decimal MaxWeightPerOrder
         {
             get
             {
-                var result = GetPropDecimal("MaxWeightPerOrder", 9999m);
+                var result = GetPropDecimal(Constants.STORESETTING_MAXWEIGHTPERORDER, 9999m);
                 return result;
             }
-            set { SetProp("MaxWeightPerOrder", value); }
+            set { SetProp(Constants.STORESETTING_MAXWEIGHTPERORDER, value); }
         }
 
         public bool AllowZeroDollarOrders
         {
-            get { return GetPropBool("AllowZeroDollarOrders"); }
-            set { SetProp("AllowZeroDollarOrders", value); }
+            get { return GetPropBool(Constants.STORESETTING_ALLOWZERODOLLARORDERS); }
+            set { SetProp(Constants.STORESETTING_ALLOWZERODOLLARORDERS, value); }
         }
 
         public bool AutomaticallyIssueRMANumbers
         {
-            get { return GetPropBool("AutomaticallyIssueRMANumbers"); }
-            set { SetProp("AutomaticallyIssueRMANumbers", value); }
+            get { return GetPropBool(Constants.STORESETTING_AUTOISSUERMANUMBERS); }
+            set { SetProp(Constants.STORESETTING_AUTOISSUERMANUMBERS, value); }
         }
 
         public bool UseChildChoicesAdjustmentsForBundles
         {
-            get { return GetPropBool("UseChildChoicesAdjustmentsForBundles"); }
-            set { SetProp("UseChildChoicesAdjustmentsForBundles", value); }
+            get { return GetPropBool(Constants.STORESETTING_CHILDCHOICESONBUNDLES); }
+            set { SetProp(Constants.STORESETTING_CHILDCHOICESONBUNDLES, value); }
         }
 
         #endregion
@@ -589,20 +596,20 @@ namespace Hotcakes.Commerce.Accounts
 
         public decimal HandlingAmount
         {
-            get { return GetPropDecimal("HandlingAmount"); }
-            set { SetProp("HandlingAmount", value); }
+            get { return GetPropDecimal(Constants.STORESETTING_HANDLINGAMOUNT); }
+            set { SetProp(Constants.STORESETTING_HANDLINGAMOUNT, value); }
         }
 
         public bool HandlingNonShipping
         {
-            get { return GetPropBool("HandlingNonShipping"); }
-            set { SetProp("HandlingNonShipping", value); }
+            get { return GetPropBool(Constants.STORESETTING_HANDLINGNONSHIPPING); }
+            set { SetProp(Constants.STORESETTING_HANDLINGNONSHIPPING, value); }
         }
 
         public int HandlingType
         {
-            get { return GetPropInt("HandlingType"); }
-            set { SetProp("HandlingType", value); }
+            get { return GetPropInt(Constants.STORESETTING_HANDLINGTYPE); }
+            set { SetProp(Constants.STORESETTING_HANDLINGTYPE, value); }
         }
 
         #endregion
@@ -614,17 +621,17 @@ namespace Hotcakes.Commerce.Accounts
             get
             {
                 var result = string.Empty;
-                result = GetProp("TaxProvidersEnabled");
+                result = GetProp(Constants.STORESETTING_TAXPROVIDER);
                 return result;
             }
-            set { SetProp("TaxProvidersEnabled", value); }
+            set { SetProp(Constants.STORESETTING_TAXPROVIDER, value); }
         }
 
         public TaxProviderSettings TaxProviderSettingsGet(string providerID)
         {
             try
             {
-                var encrypted = GetProp("taxprovsetting" + providerID);
+                var encrypted = GetProp(string.Concat(Constants.STORESETTING_TAXPROVIDERSETTING, providerID));
                 if (encrypted.Length > 2)
                 {
                     var key = KeyManager.GetKey(0);
@@ -643,7 +650,7 @@ namespace Hotcakes.Commerce.Accounts
             var json = Json.ObjectToJson(settings);
             var key = KeyManager.GetKey(0);
             var encrypted = AesEncryption.Encode(json, key);
-            SetProp("taxprovsetting" + providerID, encrypted);
+            SetProp(string.Concat(Constants.STORESETTING_TAXPROVIDERSETTING, providerID), encrypted);
         }
 
         #endregion
@@ -655,7 +662,7 @@ namespace Hotcakes.Commerce.Accounts
             get
             {
                 var result = new List<string>();
-                var data = GetProp("PaymentMethodsEnabled");
+                var data = GetProp(Constants.STORESETTING_PAYMENTMETHODS);
                 var methodIds = data.Split(',');
                 for (var i = 0; i < methodIds.Length; i++)
                 {
@@ -665,33 +672,33 @@ namespace Hotcakes.Commerce.Accounts
             }
             set
             {
-                var data = string.Join(",", value);
-                SetProp("PaymentMethodsEnabled", data);
+                var data = string.Join(Constants.COMMA, value);
+                SetProp(Constants.STORESETTING_PAYMENTMETHODS, data);
             }
         }
 
         public bool PaymentCreditCardAuthorizeOnly
         {
-            get { return GetPropBool("PaymentCreditCardAuthorizeOnly"); }
-            set { SetProp("PaymentCreditCardAuthorizeOnly", value); }
+            get { return GetPropBool(Constants.STORESETTING_CREDITAUTHORIZEONLY); }
+            set { SetProp(Constants.STORESETTING_CREDITAUTHORIZEONLY, value); }
         }
 
         public bool PaymentCreditCardRequireCVV
         {
-            get { return GetPropBool("PaymentCreditCardRequireCVV"); }
-            set { SetProp("PaymentCreditCardRequireCVV", value); }
+            get { return GetPropBool(Constants.STORESETTING_CREDITREQUIRECVV); }
+            set { SetProp(Constants.STORESETTING_CREDITREQUIRECVV, value); }
         }
 
         public string PaymentCreditCardGateway
         {
-            get { return GetProp("PaymentCreditCardGateway"); }
-            set { SetProp("PaymentCreditCardGateway", value); }
+            get { return GetProp(Constants.STORESETTING_CREDITGATEWAY); }
+            set { SetProp(Constants.STORESETTING_CREDITGATEWAY, value); }
         }
 
         public string PaymentReccuringGateway
         {
-            get { return GetProp("PaymentReccuringGateway"); }
-            set { SetProp("PaymentReccuringGateway", value); }
+            get { return GetProp(Constants.STORESETTING_RECURRINGGATEWAY); }
+            set { SetProp(Constants.STORESETTING_RECURRINGGATEWAY, value); }
         }
 
         public List<CardType> PaymentAcceptedCards
@@ -700,7 +707,7 @@ namespace Hotcakes.Commerce.Accounts
             {
                 var result = new List<CardType>();
 
-                var data = GetProp("PaymentAcceptedCards");
+                var data = GetProp(Constants.STORESETTING_ACCEPTEDCARDS);
 
                 if (data == string.Empty) return AllCards();
 
@@ -712,7 +719,7 @@ namespace Hotcakes.Commerce.Accounts
                     {
                         try
                         {
-                            result.Add((CardType) temp);
+                            result.Add((CardType)temp);
                         }
                         catch
                         {
@@ -727,42 +734,37 @@ namespace Hotcakes.Commerce.Accounts
                 var data = string.Empty;
                 foreach (var c in value)
                 {
-                    data += (int) c + ",";
+                    data += (int)c + Constants.COMMA;
                 }
                 data = data.TrimEnd(',');
-                SetProp("PaymentAcceptedCards", data);
+                SetProp(Constants.STORESETTING_ACCEPTEDCARDS, data);
             }
         }
 
         public string GiftCardGateway
         {
-            get { return GetProp("GiftCardGateway"); }
-            set { SetProp("GiftCardGateway", value); }
+            get { return GetProp(Constants.STORESETTING_GIFTCARDGATEWAY); }
+            set { SetProp(Constants.STORESETTING_GIFTCARDGATEWAY, value); }
         }
 
         public bool PaymentGiftCardAuthorizeOnly
         {
-            get { return GetPropBool("PaymentGiftCardAuthorizeOnly"); }
-            set { SetProp("PaymentGiftCardAuthorizeOnly", value); }
+            get { return GetPropBool(Constants.STORESETTING_GIFTCARDAUTHORIZEONLY); }
+            set { SetProp(Constants.STORESETTING_GIFTCARDAUTHORIZEONLY, value); }
         }
 
         public bool DisplayFullCreditCardNumbers
         {
-            get { return GetPropBool("PaymentDisplayFullCreditCardNumbers"); }
-            set { SetProp("PaymentDisplayFullCreditCardNumbers", value); }
+            get { return GetPropBool(Constants.STORESETTING_DISPLAYFULLCARDNUMBER); }
+            set { SetProp(Constants.STORESETTING_DISPLAYFULLCARDNUMBER, value); }
         }
 
         private List<CardType> AllCards()
         {
             var result = new List<CardType>();
             result.Add(CardType.Amex);
-            //result.Add(CardType.DinersClub);
             result.Add(CardType.Discover);
-            //result.Add(CardType.JCB);
-            //result.Add(CardType.Maestro);
             result.Add(CardType.MasterCard);
-            //result.Add(CardType.Solo);
-            //result.Add(CardType.Switch);
             result.Add(CardType.Visa);
             return result;
         }
@@ -775,26 +777,26 @@ namespace Hotcakes.Commerce.Accounts
         {
             get
             {
-                var temp = GetPropInt("ProductReviewCount");
+                var temp = GetPropInt(Constants.STORESETTING_REVIEWCOUNT);
                 if (temp < 1)
                 {
                     temp = 3;
                 }
                 return temp;
             }
-            set { SetProp("ProductReviewCount", value); }
+            set { SetProp(Constants.STORESETTING_REVIEWCOUNT, value); }
         }
 
         public bool ProductReviewModerate
         {
-            get { return GetPropBool("ProductReviewModerate"); }
-            set { SetProp("ProductReviewModerate", value); }
+            get { return GetPropBool(Constants.STORESETTING_REVIEWMODERATE); }
+            set { SetProp(Constants.STORESETTING_REVIEWMODERATE, value); }
         }
 
         public bool AllowProductReviews
         {
-            get { return GetPropBool("AllowProductReviews"); }
-            set { SetProp("AllowProductReviews", value); }
+            get { return GetPropBool(Constants.STORESETTING_ALLOWREVIEWS); }
+            set { SetProp(Constants.STORESETTING_ALLOWREVIEWS, value); }
         }
 
         #endregion
@@ -803,140 +805,140 @@ namespace Hotcakes.Commerce.Accounts
 
         public string ShippingFedExKey
         {
-            get { return GetProp("ShippingFedExKey"); }
-            set { SetProp("ShippingFedExKey", value); }
+            get { return GetProp(Constants.STORESETTING_FEDEXKEY); }
+            set { SetProp(Constants.STORESETTING_FEDEXKEY, value); }
         }
 
         public string ShippingFedExPassword
         {
-            get { return GetProp("ShippingFedExPassword"); }
-            set { SetProp("ShippingFedExPassword", value); }
+            get { return GetProp(Constants.STORESETTING_FEDEXPASSWORD); }
+            set { SetProp(Constants.STORESETTING_FEDEXPASSWORD, value); }
         }
 
         public string ShippingFedExAccountNumber
         {
-            get { return GetProp("ShippingFedExAccountNumber"); }
-            set { SetProp("ShippingFedExAccountNumber", value); }
+            get { return GetProp(Constants.STORESETTING_FEDEXACCOUNT); }
+            set { SetProp(Constants.STORESETTING_FEDEXACCOUNT, value); }
         }
 
         public bool ShippingFedExDiagnostics
         {
-            get { return GetPropBool("ShippingFedExDiagnostics"); }
-            set { SetProp("ShippingFedExDiagnostics", value); }
+            get { return GetPropBool(Constants.STORESETTING_FEDEXDIAGNOSTICS); }
+            set { SetProp(Constants.STORESETTING_FEDEXDIAGNOSTICS, value); }
         }
 
         public int ShippingFedExDefaultPackaging
         {
-            get { return GetPropInt("ShippingFedExDefaultPackaging"); }
-            set { SetProp("ShippingFedExDefaultPackaging", value); }
+            get { return GetPropInt(Constants.STORESETTING_FEDEXDEFAULTPACKAGING); }
+            set { SetProp(Constants.STORESETTING_FEDEXDEFAULTPACKAGING, value); }
         }
 
         public int ShippingFedExDropOffType
         {
-            get { return GetPropInt("ShippingFedExDropOffType"); }
-            set { SetProp("ShippingFedExDropOffType", value); }
+            get { return GetPropInt(Constants.STORESETTING_FEDEXDROPOFFTYPE); }
+            set { SetProp(Constants.STORESETTING_FEDEXDROPOFFTYPE, value); }
         }
 
         public bool ShippingFedExForceResidentialRates
         {
-            get { return GetPropBool("ShippingFedExForceResidentialRates"); }
-            set { SetProp("ShippingFedExForceResidentialRates", value); }
+            get { return GetPropBool(Constants.STORESETTING_FEDEXFORCERESIDENTIAL); }
+            set { SetProp(Constants.STORESETTING_FEDEXFORCERESIDENTIAL, value); }
         }
 
         public string ShippingFedExMeterNumber
         {
-            get { return GetProp("ShippingFedExMeterNumber"); }
-            set { SetProp("ShippingFedExMeterNumber", value); }
+            get { return GetProp(Constants.STORESETTING_FEDEXMETERNUMBER); }
+            set { SetProp(Constants.STORESETTING_FEDEXMETERNUMBER, value); }
         }
 
         public bool ShippingFedExUseDevelopmentServiceUrl
         {
-            get { return GetPropBool("ShippingFedExUseDevelopmentServiceUrl"); }
-            set { SetProp("ShippingFedExUseDevelopmentServiceUrl", value); }
+            get { return GetPropBool(Constants.STORESETTING_FEDEXDEVURL); }
+            set { SetProp(Constants.STORESETTING_FEDEXDEVURL, value); }
         }
 
         public string ShippingUpsAccountNumber
         {
-            get { return GetProp("ShippingUpsAccountNumber"); }
-            set { SetProp("ShippingUpsAccountNumber", value); }
+            get { return GetProp(Constants.STORESETTING_UPSACCOUNT); }
+            set { SetProp(Constants.STORESETTING_UPSACCOUNT, value); }
         }
 
         public int ShippingUpsDefaultPackaging
         {
-            get { return GetPropInt("ShippingUpsDefaultPackaging"); }
-            set { SetProp("ShippingUpsDefaultPackaging", value); }
+            get { return GetPropInt(Constants.STORESETTING_UPSDEFAULTPACKAGING); }
+            set { SetProp(Constants.STORESETTING_UPSDEFAULTPACKAGING, value); }
         }
 
         public int ShippingUpsDefaultPayment
         {
-            get { return GetPropInt("ShippingUpsDefaultPayment"); }
-            set { SetProp("ShippingUpsDefaultPayment", value); }
+            get { return GetPropInt(Constants.STORESETTING_UPSDEFAULTPAYMENT); }
+            set { SetProp(Constants.STORESETTING_UPSDEFAULTPAYMENT, value); }
         }
 
         public int ShippingUpsDefaultService
         {
-            get { return GetPropInt("ShippingUpsDefaultService"); }
-            set { SetProp("ShippingUpsDefaultService", value); }
+            get { return GetPropInt(Constants.STORESETTING_UPSDEFAULTSERVICE); }
+            set { SetProp(Constants.STORESETTING_UPSDEFAULTSERVICE, value); }
         }
 
         public bool ShippingUPSDiagnostics
         {
-            get { return GetPropBool("ShippingUPSDiagnostics"); }
-            set { SetProp("ShippingUPSDiagnostics", value); }
+            get { return GetPropBool(Constants.STORESETTING_UPSDIAGNOSITCS); }
+            set { SetProp(Constants.STORESETTING_UPSDIAGNOSITCS, value); }
         }
 
         public bool ShippingUpsForceResidential
         {
-            get { return GetPropBool("ShippingUpsForceResidential"); }
-            set { SetProp("ShippingUpsForceResidential", value); }
+            get { return GetPropBool(Constants.STORESETTING_UPSFORCERESIDENTIAL); }
+            set { SetProp(Constants.STORESETTING_UPSFORCERESIDENTIAL, value); }
         }
 
         public string ShippingUpsLicense
         {
-            get { return GetProp("Shipping_UPS_License"); }
-            set { SetProp("Shipping_UPS_License", value); }
+            get { return GetProp(Constants.STORESETTING_UPSLICENSE); }
+            set { SetProp(Constants.STORESETTING_UPSLICENSE, value); }
         }
 
         public string ShippingUpsPassword
         {
-            get { return GetProp("Shipping_UPS_Password"); }
-            set { SetProp("Shipping_UPS_Password", value); }
+            get { return GetProp(Constants.STORESETTING_UPSPASSWORD); }
+            set { SetProp(Constants.STORESETTING_UPSPASSWORD, value); }
         }
 
         public int ShippingUpsPickupType
         {
-            get { return GetPropInt("Shipping_UPS_Pickup_Type"); }
-            set { SetProp("Shipping_UPS_Pickup_Type", value); }
+            get { return GetPropInt(Constants.STORESETTING_UPSPICKUPTYPE); }
+            set { SetProp(Constants.STORESETTING_UPSPICKUPTYPE, value); }
         }
 
         public bool ShippingUpsSkipDimensions
         {
-            get { return GetPropBool("ShippingUpsSkipDimensions"); }
-            set { SetProp("ShippingUpsSkipDimensions", value); }
+            get { return GetPropBool(Constants.STORESETTING_UPSSHIPDIMENSIONS); }
+            set { SetProp(Constants.STORESETTING_UPSSHIPDIMENSIONS, value); }
         }
 
         public string ShippingUpsUsername
         {
-            get { return GetProp("Shipping_UPS_Username"); }
-            set { SetProp("Shipping_UPS_Username", value); }
+            get { return GetProp(Constants.STORESETTING_UPSUSERNAME); }
+            set { SetProp(Constants.STORESETTING_UPSUSERNAME, value); }
         }
 
         public bool ShippingUPSWriteXML
         {
-            get { return GetPropBool("ShippingUPSWriteXML"); }
-            set { SetProp("ShippingUPSWriteXML", value); }
+            get { return GetPropBool(Constants.STORESETTING_UPSWRITEXML); }
+            set { SetProp(Constants.STORESETTING_UPSWRITEXML, value); }
         }
 
         public string ShippingUSPostalUserId
         {
-            get { return GetProp("ShippingUSPostalUserId"); }
-            set { SetProp("ShippingUSPostalUserId", value); }
+            get { return GetProp(Constants.STORESETTING_USPSUSERID); }
+            set { SetProp(Constants.STORESETTING_USPSUSERID, value); }
         }
 
         public bool ShippingUSPostalDiagnostics
         {
-            get { return GetPropBool("ShippingUSPostalDiagnostics"); }
-            set { SetProp("ShippingUSPostalDiagnostics", value); }
+            get { return GetPropBool(Constants.STORESETTING_USPSDIAGNOSITCS); }
+            set { SetProp(Constants.STORESETTING_USPSDIAGNOSITCS, value); }
         }
 
 
@@ -944,50 +946,50 @@ namespace Hotcakes.Commerce.Accounts
 
         public int ShippingUpsFreightDefaultPackaging
         {
-            get { return GetPropInt("ShippingUpsFreightDefaultPackaging"); }
-            set { SetProp("ShippingUpsFreightDefaultPackaging", value); }
+            get { return GetPropInt(Constants.STORESETTING_UPSFDEFAULTPACKAGING); }
+            set { SetProp(Constants.STORESETTING_UPSFDEFAULTPACKAGING, value); }
         }
 
         public int ShippingUpsFreightDefaultPayment
         {
-            get { return GetPropInt("ShippingUpsFreightDefaultPayment"); }
-            set { SetProp("ShippingUpsFreightDefaultPayment", value); }
+            get { return GetPropInt(Constants.STORESETTING_UPSFDEFAULTPAYMENT); }
+            set { SetProp(Constants.STORESETTING_UPSFDEFAULTPAYMENT, value); }
         }
 
         public bool ShippingUPSFreightDiagnostics
         {
-            get { return GetPropBool("ShippingUPSFreightDiagnostics"); }
-            set { SetProp("ShippingUPSFreightDiagnostics", value); }
+            get { return GetPropBool(Constants.STORESETTING_UPSFDIAGNOSTICS); }
+            set { SetProp(Constants.STORESETTING_UPSFDIAGNOSTICS, value); }
         }
 
         public bool ShippingUpsFreightForceResidential
         {
-            get { return GetPropBool("ShippingUpsFreightForceResidential"); }
-            set { SetProp("ShippingUpsFreightForceResidential", value); }
+            get { return GetPropBool(Constants.STORESETTING_UPSFFORCERESIDENTIAL); }
+            set { SetProp(Constants.STORESETTING_UPSFFORCERESIDENTIAL, value); }
         }
 
         public bool ShippingUpsFreightSkipDimensions
         {
-            get { return GetPropBool("ShippingUpsFreightSkipDimensions"); }
-            set { SetProp("ShippingUpsFreightSkipDimensions", value); }
+            get { return GetPropBool(Constants.STORESETTING_UPSFSKIPDIMENSIONS); }
+            set { SetProp(Constants.STORESETTING_UPSFSKIPDIMENSIONS, value); }
         }
 
         public int ShippingUpsFreightBillingOption
         {
-            get { return GetPropInt("ShippingUpsFreightBillingOption"); }
-            set { SetProp("ShippingUpsFreightBillingOption", value); }
+            get { return GetPropInt(Constants.STORESETTING_UPSFBILLINGOPTION); }
+            set { SetProp(Constants.STORESETTING_UPSFBILLINGOPTION, value); }
         }
 
         public string ShippingUpsFreightHandleOneUnitType
         {
-            get { return GetProp("ShippingUpsFreightHandleOneUnitType"); }
-            set { SetProp("ShippingUpsFreightHandleOneUnitType", value); }
+            get { return GetProp(Constants.STORESETTING_UPSFHANDLEONEUNITTYPE); }
+            set { SetProp(Constants.STORESETTING_UPSFHANDLEONEUNITTYPE, value); }
         }
 
         public string ShippingUpsFreightFreightClass
         {
-            get { return GetProp("ShippingUpsFreightFreightClass"); }
-            set { SetProp("ShippingUpsFreightFreightClass", value); }
+            get { return GetProp(Constants.STORESETTING_UPSFFREIGHTCLASS); }
+            set { SetProp(Constants.STORESETTING_UPSFFREIGHTCLASS, value); }
         }
 
         #endregion
@@ -997,8 +999,8 @@ namespace Hotcakes.Commerce.Accounts
 
         public decimal AffiliateCommissionAmount
         {
-            get { return GetPropDecimal("AffiliateCommissionAmount"); }
-            set { SetProp("AffiliateCommissionAmount", value); }
+            get { return GetPropDecimal(Constants.STORESETTING_AFFILIATECOMMISSIONAMOUNT); }
+            set { SetProp(Constants.STORESETTING_AFFILIATECOMMISSIONAMOUNT, value); }
         }
 
         public AffiliateCommissionType AffiliateCommissionType
@@ -1006,10 +1008,10 @@ namespace Hotcakes.Commerce.Accounts
             get
             {
                 var result = AffiliateCommissionType.PercentageCommission;
-                result = (AffiliateCommissionType) GetPropInt("AffiliateCommissionType");
+                result = (AffiliateCommissionType)GetPropInt(Constants.STORESETTING_AFFILIATECOMMISSIONTYPE);
                 return result;
             }
-            set { SetProp("AffiliateCommissionType", (int) value); }
+            set { SetProp(Constants.STORESETTING_AFFILIATECOMMISSIONTYPE, (int)value); }
         }
 
         public AffiliateConflictMode AffiliateConflictMode
@@ -1017,46 +1019,46 @@ namespace Hotcakes.Commerce.Accounts
             get
             {
                 var result = AffiliateConflictMode.FavorOldAffiliate;
-                result = (AffiliateConflictMode) GetPropInt("AffiliateConflictMode");
+                result = (AffiliateConflictMode)GetPropInt(Constants.STORESETTING_AFFILIATECONFLICTMODE);
                 return result;
             }
-            set { SetProp("AffiliateConflictMode", (int) value); }
+            set { SetProp(Constants.STORESETTING_AFFILIATECONFLICTMODE, (int)value); }
         }
 
         public int AffiliateReferralDays
         {
-            get { return GetPropInt("AffiliateReferralDays"); }
-            set { SetProp("AffiliateReferralDays", value); }
+            get { return GetPropInt(Constants.STORESETTING_AFFILIATEREFERRALDAYS); }
+            set { SetProp(Constants.STORESETTING_AFFILIATEREFERRALDAYS, value); }
         }
 
         public bool AffiliateRequireApproval
         {
-            get { return GetPropBoolWithDefault("AffiliateRequireApproval", true); }
-            set { SetProp("AffiliateRequireApproval", value); }
+            get { return GetPropBoolWithDefault(Constants.STORESETTING_AFFILIATEREQUIREAPPROVAL, true); }
+            set { SetProp(Constants.STORESETTING_AFFILIATEREQUIREAPPROVAL, value); }
         }
 
         public bool AffiliateDisplayChildren
         {
-            get { return GetPropBoolWithDefault("AffiliateDisplayChildren", true); }
-            set { SetProp("AffiliateDisplayChildren", value); }
+            get { return GetPropBoolWithDefault(Constants.STORESETTING_AFFILIATEDISPLAYCHILDREN, true); }
+            set { SetProp(Constants.STORESETTING_AFFILIATEDISPLAYCHILDREN, value); }
         }
 
         public bool AffiliateShowIDOnCheckout
         {
-            get { return GetPropBoolWithDefault("AffiliateShowIDOnCheckout", false); }
-            set { SetProp("AffiliateShowIDOnCheckout", value); }
+            get { return GetPropBoolWithDefault(Constants.STORESETTING_AFFILIATESHOWIDCHECKOUT, false); }
+            set { SetProp(Constants.STORESETTING_AFFILIATESHOWIDCHECKOUT, value); }
         }
 
         public string AffiliateAgreementText
         {
-            get { return GetProp("AffiliatAgreementText"); }
-            set { SetProp("AffiliatAgreementText", value); }
+            get { return GetProp(Constants.STORESETTING_AFFILIATEAGREEMENTTEXT); }
+            set { SetProp(Constants.STORESETTING_AFFILIATEAGREEMENTTEXT, value); }
         }
 
         public bool AffiliateReview
         {
-            get { return GetPropBoolWithDefault("AffiliateReview", false); }
-            set { SetProp("AffiliateReview", value); }
+            get { return GetPropBoolWithDefault(Constants.STORESETTING_AFFILIATEREVIEW, false); }
+            set { SetProp(Constants.STORESETTING_AFFILIATEREVIEW, value); }
         }
 
         #endregion
@@ -1067,7 +1069,7 @@ namespace Hotcakes.Commerce.Accounts
         {
             try
             {
-                var encrypted = GetProp("methodsettings" + methodId);
+                var encrypted = GetProp(string.Concat(Constants.STORESETTING_PAYMENTMETHODSETTINGS, methodId));
                 if (encrypted.Length > 2)
                 {
                     var key = KeyManager.GetKey(0);
@@ -1086,14 +1088,14 @@ namespace Hotcakes.Commerce.Accounts
             var json = Json.ObjectToJson(settings);
             var key = KeyManager.GetKey(0);
             var encrypted = AesEncryption.Encode(json, key);
-            SetProp("methodsettings" + methodId, encrypted);
+            SetProp(string.Concat(Constants.STORESETTING_PAYMENTMETHODSETTINGS, methodId), encrypted);
         }
 
         public MethodSettings PaymentSettingsGet(string ccGatewayId)
         {
             try
             {
-                var encrypted = GetProp("paysettings" + ccGatewayId);
+                var encrypted = GetProp(string.Concat(Constants.STORESETTING_PAYMENTGATEWAYSETTINGS, ccGatewayId));
                 if (encrypted.Length > 2)
                 {
                     var key = KeyManager.GetKey(0);
@@ -1112,14 +1114,14 @@ namespace Hotcakes.Commerce.Accounts
             var json = Json.ObjectToJson(settings);
             var key = KeyManager.GetKey(0);
             var encrypted = AesEncryption.Encode(json, key);
-            SetProp("paysettings" + ccGatewayId, encrypted);
+            SetProp(string.Concat(Constants.STORESETTING_PAYMENTGATEWAYSETTINGS, ccGatewayId), encrypted);
         }
 
         public MethodSettings GiftCardSettingsGet(string gcGatewayId)
         {
             try
             {
-                var encrypted = GetProp("gcpaysettings" + gcGatewayId);
+                var encrypted = GetProp(string.Concat(Constants.STORESETTING_PAYMENTGIFTCARDSETTINGS, gcGatewayId));
                 if (encrypted.Length > 2)
                 {
                     var key = KeyManager.GetKey(0);
@@ -1138,7 +1140,7 @@ namespace Hotcakes.Commerce.Accounts
             var json = Json.ObjectToJson(settings);
             var key = KeyManager.GetKey(0);
             var encrypted = AesEncryption.Encode(json, key);
-            SetProp("gcpaysettings" + gcGatewayId, encrypted);
+            SetProp(string.Concat(Constants.STORESETTING_PAYMENTGIFTCARDSETTINGS, gcGatewayId), encrypted);
         }
 
         public GiftCardGateway PaymentCurrentGiftCardProcessor()
@@ -1162,14 +1164,14 @@ namespace Hotcakes.Commerce.Accounts
 
         public bool StoreClosed
         {
-            get { return GetPropBool("StoreClosed"); }
-            set { SetProp("StoreClosed", value); }
+            get { return GetPropBool(Constants.STORESETTING_STORECLOSED); }
+            set { SetProp(Constants.STORESETTING_STORECLOSED, value); }
         }
 
         public string StoreClosedDescription
         {
-            get { return GetProp("StoreClosedDescription"); }
-            set { SetProp("StoreClosedDescription", value); }
+            get { return GetProp(Constants.STORESETTING_STORECLOSEDDESC); }
+            set { SetProp(Constants.STORESETTING_STORECLOSEDDESC, value); }
         }
 
         #endregion

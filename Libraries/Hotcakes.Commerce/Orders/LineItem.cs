@@ -879,8 +879,6 @@ namespace Hotcakes.Commerce.Orders
             result.Add(new HtmlTemplateTag("[[LineItem.VariantId]]", VariantId));
             result.Add(new HtmlTemplateTag("[[LineItem.ProductName]]", ProductName));
             result.Add(new HtmlTemplateTag("[[LineItem.ProductSku]]", ProductSku));
-            result.Add(new HtmlTemplateTag("[[LineItem.Sku]]", "Obsolete. Please use [[LineItem.ProductSku]] instead.",
-                true));
             result.Add(new HtmlTemplateTag("[[LineItem.ProductDescription]]", ProductShortDescription));
             result.Add(new HtmlTemplateTag("[[LineItem.Quantity]]", Quantity.ToString("#")));
             result.Add(new HtmlTemplateTag("[[LineItem.QuantityShipped]]", QuantityShipped.ToString("#")));
@@ -1228,39 +1226,6 @@ namespace Hotcakes.Commerce.Orders
             ShipSeparately = dto.ShipSeparately;
             ExtraShipCharge = dto.ExtraShipCharge;
             ShippingCharge = (ShippingChargeType) (int) dto.ShippingCharge;
-        }
-
-        #endregion
-
-        #region Obsolete
-
-        /// <summary>
-        ///     Total of all discounts, or zero if the discounts reach a negative value.
-        /// </summary>
-        /// <returns>Decimal</returns>
-        [Obsolete("Obsolete in 1.8.0. Use TotalDiscounts()*-1 expression.")]
-        public decimal TotalDiscountsAsPositiveNumber()
-        {
-            return TotalDiscounts()*-1;
-        }
-
-        /// <summary>
-        ///     Total of all discounts, but allowing for a negative value to be returned.
-        /// </summary>
-        /// <returns>Decimal</returns>
-        [Obsolete("Obsolete in 1.8.0. Use TotalDiscounts() function.")]
-        public decimal TotalDiscountsAsNegativeNumber()
-        {
-            return TotalDiscounts();
-        }
-
-        /// <summary>
-        ///     Returns the human-friendly version of the shipping status for display to the merchant.
-        /// </summary>
-        [Obsolete("Obsolete in 1.8.0. Use LocalizationUtils.GetOrderShippingStatus")]
-        public string ShippingStatusDescription
-        {
-            get { return LocalizationUtils.GetOrderShippingStatus(ShippingStatus); }
         }
 
         #endregion

@@ -1,4 +1,5 @@
 ﻿body {
+    height: 100%;
 }
 
 @import "_admin_wizard.less";
@@ -49,7 +50,7 @@
 
         .hcBlockContent25p {
             width: 25%;
-        float: left;
+            float: left;
         }
 
         .hcBlockContent33p {
@@ -60,7 +61,7 @@
         .hcBlockContent50p {
             width: 50%;
             float: left;
-            }
+        }
 
         .hcBlockContent75p {
             width: 75%;
@@ -79,10 +80,10 @@
             font-size: 16px;
             font-weight: bold;
             color: @color-black;
-    }
+        }
 
         .hcActions {
-        float: right;
+            float: right;
             padding: 0;
             margin-top: -5px;
 
@@ -90,7 +91,7 @@
                 font-weight: bold;
                 padding: 8px;
                 display: block;
-    }
+            }
         }
 
         .hcFindOutMore {
@@ -118,7 +119,7 @@
                 text-align: left;
                 font-size: 18px;
                 padding: 24px 20px;
-            margin: 0;
+                margin: 0;
                 width: 25%;
                 float: left;
                 border-right: 1px solid @color-lightgray;
@@ -129,8 +130,8 @@
                     text-decoration: none;
 
                     &:hover {
-            color: @color-red;
-        }
+                        color: @color-red;
+                    }
                 }
 
                 span {
@@ -194,8 +195,8 @@
 
                 &.hcRight {
                     float: right;
-        }
-    }
+                }
+            }
         }
 
         .hcAmountB {
@@ -203,7 +204,7 @@
             font-weight: bold;
 
             label {
-            display: block;
+                display: block;
                 font-weight: normal;
                 font-size: 16px;
             }
@@ -220,9 +221,9 @@
 
             .hcAmount {
                 float: left;
-                width: 65%;
+                width: 60%;
                 height: 42px;
-                padding-left: 50px;
+                padding-left: 20px;
                 padding-top: 3px;
                 font-size: 30px;
 
@@ -251,8 +252,8 @@
     .hcSalesChart,
     .hcChartArea {
         h3, .hcPeriodSelector {
-                display: inline-block;
-            }
+            display: inline-block;
+        }
 
         .hcPeriodSelector {
             font-size: 14px;
@@ -267,13 +268,18 @@
         }
 
         .hcProductPerformanceChart {
-        width: 100%;
+            width: 100%;
             height: 330px;
         }
     }
 
     .hcTopChangeBlock,
     .hcTopChangeJointBlock {
+        display: table;
+
+        .hcBlockContent {
+            display: table;
+        }
 
         .hcBlockContent,
         .hcBlockContent25p,
@@ -284,6 +290,7 @@
         }
 
         table {
+            table-layout: fixed;
             width: 100%;
             border-spacing: 0;
         }
@@ -301,7 +308,7 @@
             &:first-child {
                 width: 75%;
                 text-align: left;
-        }
+            }
 
             a {
                 white-space: nowrap;
@@ -311,15 +318,15 @@
 
                 &:hover {
                     color: @color-red;
-        }
+                }
             }
         }
 
-            td > a {
-                width: 360px;
-                display: block;
-                overflow: hidden;
-                text-overflow: ellipsis;
+        td > a {
+            width: 360px;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         tfoot td {
@@ -333,7 +340,7 @@
 
         .hcChange {
             font-weight: bold;
-    }
+        }
 
         .hcPageInfo {
             float: left;
@@ -361,9 +368,9 @@
             }
         }
 
-            td > a {
-                width: 995px;
-            }
+        td > a {
+            width: 995px;
+        }
     }
 }
 
@@ -1255,4 +1262,18 @@
 		display:-webkit-inline-flex !important;
 		display:-ms-inline-flexbox !important;
 	}
+}
+
+#hcPSalesPerformanceChart {
+    max-width: 700px;
+    max-height: 300px;
+
+    canvas {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.hc-transaction-label {
+    display: block;
 }

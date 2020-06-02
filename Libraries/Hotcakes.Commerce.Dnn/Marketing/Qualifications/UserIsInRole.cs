@@ -133,7 +133,11 @@ namespace Hotcakes.Commerce.Dnn.Marketing.Qualifications
         {
             var user = DnnUserController.Instance.GetUser(_portalId, Convert.ToInt32(customer.Bvin));
             var roles = RoleController.Instance.GetUserRoles(user, true);
-            return roles.OfType<RoleInfo>().ToList();
+            var activeroles = from role in roles
+                              where role.ExpiryDate != DateTime.MinValue 
+                                    && role.ExpiryDate > DateTime.Now
+                              select role;
+            return activeroles.OfType<RoleInfo>().ToList();
         }
 
         private RoleInfo GetRoleById(int roleId)

@@ -123,6 +123,9 @@
   <data name="Brands.Text" xml:space="preserve">
     <value>Brands</value>
   </data>
+  <data name="Category.Text" xml:space="preserve">
+    <value>Category</value>
+  </data>
   <data name="Categories.Text" xml:space="preserve">
     <value>Categories</value>
   </data>
@@ -132,11 +135,17 @@
   <data name="MinPrice.Text" xml:space="preserve">
     <value>Min Price</value>
   </data>
+  <data name="ProductsNotFound.Text" xml:space="preserve">
+    <value>No products were found. Please try another search term.</value>
+  </data>
   <data name="Price.Text" xml:space="preserve">
     <value>Price</value>
   </data>
   <data name="ProductType.Text" xml:space="preserve">
     <value>Product type</value>
+  </data>
+  <data name="RefineResults.Text" xml:space="preserve">
+    <value>Refine Search Results</value>
   </data>
   <data name="Remove.Text" xml:space="preserve">
     <value>Remove</value>
@@ -145,6 +154,6 @@
     <value>Vendors</value>
   </data>
   <data name="YouSelected.Text" xml:space="preserve">
-    <value>You Selected</value>
+    <value>Filtered By</value>
   </data>
 </root>

@@ -103,27 +103,5 @@ namespace Hotcakes.Commerce.Contacts
         {
             Delete(y => y.StoreId == storeId);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static PriceGroupRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new PriceGroupRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static PriceGroupRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new PriceGroupRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public PriceGroupRepository(HccRequestContext c, IRepositoryStrategy<hcc_PriceGroup> r, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

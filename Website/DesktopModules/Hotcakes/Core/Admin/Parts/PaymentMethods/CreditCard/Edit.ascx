@@ -43,7 +43,7 @@
 					<asp:Label runat="server" resourcekey="Gateway" CssClass="hcLabel" />
 				</div>
 				<div class="hcFormItem hcFormItem66p">
-					<asp:DropDownList ID="lstGateway" runat="server" />
+					<asp:DropDownList ID="lstGateway" runat="server" CssClass="hcFormItem66p" />
 					<asp:RequiredFieldValidator runat="server" ID="rfvGateway" ControlToValidate="lstGateway" resourcekey="rfvGateway" CssClass="hcFormError" />
 					&nbsp;&nbsp;
 					<asp:LinkButton runat="server" ID="btnOptions" resourcekey="Edit" OnClick="btnOptions_Click" CssClass="hcSecondaryAction hcSmall" />
@@ -51,8 +51,8 @@
 				<div class="hcFormItem">
 					<asp:CheckBox ID="chkRequireCreditCardSecurityCode" runat="server" resourcekey="chkRequireCreditCardSecurityCode" />
 				</div>
-				<div class="hcFormItem">
-					<asp:CheckBox ID="chkDisplayFullCardNumber" runat="server" resourcekey="chkDisplayFullCardNumber" />
+				<div class="hcFormItem" style="display: none;">
+					<asp:CheckBox ID="chkDisplayFullCardNumber" runat="server" resourcekey="chkDisplayFullCardNumber" Checked="False" Enabled="False" />
 				</div>
 			</div>
 		</div>

@@ -127,5 +127,11 @@
             <asp:LinkButton ID="btnCancel" runat="server" ResourceKey="Cancel" OnClick="btnCancel_Click" CausesValidation="false" CssClass="hcSecondaryAction" />
         </li>
     </ul>
-
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".hcIconDelete").click(function (e) {
+                return hcConfirm(e, "<%=Localization.GetJsEncodedString("Confirm")%>");
+            });
+        });
+    </script>
 </asp:Content>

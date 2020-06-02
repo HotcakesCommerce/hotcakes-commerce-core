@@ -34,6 +34,8 @@ namespace Hotcakes.Commerce.Catalog.Options
 {
     public class DropDownList : IOptionProcessor
     {
+        private const string DROPDOWN_MARKUP_FORMAT = "<select id=\"opt{0}{1}\" name=\"opt{0}{1}\" class=\"hcIsOption {2}\" >";
+
         public OptionTypes GetOptionType()
         {
             return OptionTypes.DropDownList;
@@ -44,7 +46,7 @@ namespace Hotcakes.Commerce.Catalog.Options
             return RenderWithSelection(baseOption, null);
         }
 
-        public string RenderWithSelection(Option baseOption, OptionSelectionList selections, string prefix = null)
+        public string RenderWithSelection(Option baseOption, OptionSelectionList selections, string prefix = null, string className = null)
         {
             string selected = null;
             if (selections != null)
@@ -57,32 +59,34 @@ namespace Hotcakes.Commerce.Catalog.Options
             }
 
             var sb = new StringBuilder();
+            var oBvin = baseOption.Bvin.Replace("-", string.Empty);
 
-            sb.Append("<select id=\"opt" + prefix + baseOption.Bvin.Replace("-", string.Empty) + "\" ");
-            sb.Append(" name=\"opt" + prefix + baseOption.Bvin.Replace("-", "") + "\" ");
-            sb.Append(" class=\"hcIsOption\" >");
+            sb.AppendFormat(DROPDOWN_MARKUP_FORMAT, prefix, oBvin, className);
+
+            //sb.Append("<select id=\"opt" + prefix + oBvin + "\" ");
+            //sb.Append(" name=\"opt" + prefix + oBvin + "\" ");
+            //sb.Append(" class=\"hcIsOption\" >");
 
             foreach (var o in baseOption.Items)
             {
                 if (o.IsLabel)
                 {
                     sb.Append("<option value=\"\" disabled");
-                    //sb.Append("<option value=\"systemlabel\" disabled");
 
                     if (string.IsNullOrEmpty(selected) && o.IsDefault)
                     {
                         sb.Append(" selected ");
                     }
-                    sb.Append(">" + o.Name + "</option>");
+                    sb.Append(string.Concat(">", o.Name, "</option>"));
                 }
                 else
                 {
-                    sb.Append("<option value=\"" + o.Bvin.Replace("-", string.Empty) + "\"");
+                    sb.Append(string.Concat("<option value=\"", o.Bvin.Replace("-", string.Empty), "\""));
                     if (o.Bvin.Replace("-", string.Empty) == selected || (string.IsNullOrEmpty(selected) && o.IsDefault))
                     {
                         sb.Append(" selected ");
                     }
-                    sb.Append(">" + o.Name + "</option>");
+                    sb.Append(string.Concat(">", o.Name, "</option>"));
                 }
             }
             sb.Append("</select>");
@@ -90,12 +94,14 @@ namespace Hotcakes.Commerce.Catalog.Options
             return sb.ToString();
         }
 
-        public void RenderAsControl(Option baseOption, PlaceHolder ph, string prefix = null)
+        public void RenderAsControl(Option baseOption, PlaceHolder ph, string prefix = null, string className = null)
         {
             var result = new System.Web.UI.WebControls.DropDownList();
-            result.ID = "opt" + prefix + baseOption.Bvin.Replace("-", string.Empty);
+            result.ID = string.Concat("opt", prefix, baseOption.Bvin.Replace("-", string.Empty));
             result.ClientIDMode = ClientIDMode.Static;
             result.CssClass = "hcIsOption";
+
+            if (!string.IsNullOrEmpty(className)) result.CssClass = string.Concat(result.CssClass, " ", className);
 
             foreach (var o in baseOption.Items)
             {
@@ -126,7 +132,7 @@ namespace Hotcakes.Commerce.Catalog.Options
 
             var ddl =
                 (System.Web.UI.WebControls.DropDownList)
-                    ph.FindControl("opt" + prefix + baseOption.Bvin.Replace("-", string.Empty));
+                    ph.FindControl(string.Concat("opt", prefix, baseOption.Bvin.Replace("-", string.Empty)));
             if (ddl != null && !string.IsNullOrEmpty(ddl.SelectedValue))
             {
                 result.SelectionData = ddl.SelectedValue;
@@ -139,7 +145,7 @@ namespace Hotcakes.Commerce.Catalog.Options
         {
             var result = new OptionSelection();
             result.OptionBvin = baseOption.Bvin;
-            var formid = "opt" + prefix + baseOption.Bvin.Replace("-", string.Empty);
+            var formid = string.Concat("opt", prefix, baseOption.Bvin.Replace("-", string.Empty));
             var value = form[formid];
             if (value != null)
             {
@@ -155,7 +161,7 @@ namespace Hotcakes.Commerce.Catalog.Options
             var val = selections.FindByOptionId(baseOption.Bvin);
             if (val == null) return;
 
-            var ddl = (System.Web.UI.WebControls.DropDownList)ph.FindControl("opt" + baseOption.Bvin.Replace("-", string.Empty));
+            var ddl = (System.Web.UI.WebControls.DropDownList)ph.FindControl(string.Concat("opt", baseOption.Bvin.Replace("-", string.Empty)));
             if (ddl != null)
             {
                 if (ddl.Items.FindByValue(val.SelectionData) != null)
@@ -177,7 +183,7 @@ namespace Hotcakes.Commerce.Catalog.Options
                 var cleaned = OptionSelection.CleanBvin(oi.Bvin);
                 if (cleaned == val.SelectionData)
                 {
-                    return baseOption.Name + ": " + oi.Name;
+                    return string.Concat(baseOption.Name, ": ", oi.Name);
                 }
             }
 

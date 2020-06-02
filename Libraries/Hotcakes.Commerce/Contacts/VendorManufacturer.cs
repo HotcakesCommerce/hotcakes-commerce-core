@@ -47,9 +47,6 @@ namespace Hotcakes.Commerce.Contacts
             Address = new Address();
             DropShipEmailTemplateId = string.Empty;
             ContactType = VendorManufacturerType.Unknown;
-#pragma warning disable 0612, 0618
-            Contacts = new List<VendorManufacturerContact>();
-#pragma warning restore 0612, 0618
         }
 
         /// <summary>
@@ -94,12 +91,6 @@ namespace Hotcakes.Commerce.Contacts
         public VendorManufacturerType ContactType { get; set; }
 
         /// <summary>
-        ///     Contains a listing of user accounts that belong to the current vendor/manufacturer.
-        /// </summary>
-        [Obsolete("Obsolete in 1.8.0. Contacts property is not used")]
-        public List<VendorManufacturerContact> Contacts { get; set; }
-
-        /// <summary>
         ///     Returns a listing of tokens and their replacement used by email templates.
         /// </summary>
         /// <param name="context">A populated instance of the Hotcakes Request context</param>
@@ -111,61 +102,6 @@ namespace Hotcakes.Commerce.Contacts
             result.Add(new HtmlTemplateTag("[[VendorManufacturer.Name]]", DisplayName));
             return result;
         }
-
-        #region Obsolete
-
-#pragma warning disable 0612, 0618
-        /// <summary>
-        ///     Allows for a contact to be added to the current vendor/manufacturer.
-        /// </summary>
-        /// <param name="userId">The unique ID of the user to add to this vendor/manufacturer.</param>
-        /// <returns>If true, the contact was added successfully.</returns>
-        [Obsolete("Obsolete in 1.8.0. Contacts property is not used")]
-        public bool AddContact(string userId)
-        {
-            if (!ContactExists(userId))
-            {
-                Contacts.Add(new VendorManufacturerContact
-                {
-                    StoreId = StoreId,
-                    UserId = userId,
-                    VendorManufacturerId = Bvin
-                });
-            }
-            return true;
-        }
-
-        /// <summary>
-        ///     Allows for a specified contact to be removed from the Contacts property in the current vendor/manufacturer.
-        /// </summary>
-        /// <param name="userId">The unique ID of the user account to remove from the property.</param>
-        /// <returns>If true, the contact was successfully removed.</returns>
-        [Obsolete("Obsolete in 1.8.0. Contacts property is not used")]
-        public bool RemoveContact(string userId)
-        {
-            var c = Contacts.Where(y => y.UserId == userId).SingleOrDefault();
-            if (c != null)
-            {
-                Contacts.Remove(c);
-            }
-            return true;
-        }
-
-        /// <summary>
-        ///     Performs a check using the specified UserID to see if the user exists in the Contacts property.
-        /// </summary>
-        /// <param name="userId">The unique ID of the user account to look for.</param>
-        /// <returns>If true, the contact exists in the Contacts property.</returns>
-        [Obsolete("Obsolete in 1.8.0. Contacts property is not used")]
-        public bool ContactExists(string userId)
-        {
-            var c = Contacts.Where(y => y.UserId == userId).SingleOrDefault();
-            if (c != null) return true;
-            return false;
-        }
-#pragma warning restore 0612, 0618
-
-        #endregion
 
         #region DTO
 
@@ -185,12 +121,6 @@ namespace Hotcakes.Commerce.Contacts
             dto.Address = Address.ToDto() ?? new Address().ToDto();
             dto.DropShipEmailTemplateId = DropShipEmailTemplateId ?? string.Empty;
             dto.ContactType = (VendorManufacturerTypeDTO) (int) ContactType;
-#pragma warning disable 0612, 0618
-            foreach (var contact in Contacts)
-            {
-                dto.Contacts.Add(contact.ToDto());
-            }
-#pragma warning restore 0612, 0618
             return dto;
         }
 
@@ -210,15 +140,6 @@ namespace Hotcakes.Commerce.Contacts
             Address.FromDto(dto.Address);
             DropShipEmailTemplateId = dto.DropShipEmailTemplateId;
             ContactType = (VendorManufacturerType) (int) dto.ContactType;
-#pragma warning disable 0612, 0618
-            Contacts.Clear();
-            foreach (var c in dto.Contacts)
-            {
-                var v = new VendorManufacturerContact();
-                v.FromDto(c);
-                Contacts.Add(v);
-            }
-#pragma warning restore 0612, 0618
         }
 
         #endregion

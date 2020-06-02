@@ -27,7 +27,9 @@ using System;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Hotcakes.Commerce;
 using Hotcakes.Commerce.Catalog;
+using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Utilities;
 using Hotcakes.Modules.Core.Admin.AppCode;
 
@@ -64,6 +66,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             base.OnLoad(e);
             if (!IsPostBack)
             {
+                LocalizeView();
                 LoadItems();
             }
         }
@@ -144,6 +147,14 @@ namespace Hotcakes.Modules.Core.Admin.Controls
         #endregion
 
         #region Implementation
+
+        public void LocalizeView()
+        {
+            txtNewName.Attributes.Add("placeholder", Localization.GetString("txtNewName.Placeholder"));
+
+            var localization = Factory.Instance.CreateLocalizationHelper(LocalResourceFile);
+            LocalizationUtils.LocalizeGridView(gvItems, localization);
+        }
 
         public void LoadItems()
         {

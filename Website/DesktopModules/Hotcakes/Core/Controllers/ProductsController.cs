@@ -29,9 +29,11 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
+using DotNetNuke.Security;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Analytics;
 using Hotcakes.Commerce.Catalog;
+using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Content;
 using Hotcakes.Commerce.Extensions;
 using Hotcakes.Commerce.Orders;
@@ -49,6 +51,8 @@ namespace Hotcakes.Modules.Core.Controllers
     [Serializable]
     public class ProductsController : BaseStoreController
     {
+        private PortalSecurity security = new PortalSecurity();
+
         #region Internal declarations
 
         public class ProductValidateResponse
@@ -175,6 +179,9 @@ namespace Hotcakes.Modules.Core.Controllers
         public ActionResult Validate()
         {
             var productBvin = Request.Form["productbvin"];
+
+            if (!string.IsNullOrEmpty(productBvin)) productBvin = security.InputFilter(productBvin.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+
             var product = HccApp.CatalogServices.Products.FindWithCache(productBvin);
             var validateResult = new ProductValidateResponse();
 
@@ -261,6 +268,18 @@ namespace Hotcakes.Modules.Core.Controllers
 
             LoadGiftCardAmounts(model);
 
+            if (AuthorizedToEditCatalog())
+            {
+                model.ProductAnalyticsUrl = string.Format(ProductAnalyticsUrlFormat, product.Bvin);
+                model.ProductEditUrl = string.Format(ProductEditUrlFormat, product.Bvin);
+                model.StoreAdminUrl = DashboardAdminUrl;
+                model.AuthorizedToEditCatalog = true;
+            }
+            else
+            {
+                model.AuthorizedToEditCatalog = false;
+            }
+
             return model;
         }
 
@@ -312,7 +331,10 @@ namespace Hotcakes.Modules.Core.Controllers
                 if (related != null)
                 {
                     var item = new SingleProductViewModel(related, HccApp);
-                    model.RelatedItems.Add(item);
+                    if (item.Item.Status == ProductStatus.Active)
+                    {
+                        model.RelatedItems.Add(item);
+                    }
                 }
             }
         }
@@ -375,6 +397,9 @@ namespace Hotcakes.Modules.Core.Controllers
             model.IsAvailableForSale = data.IsAvailableForSale;
 
             var formQuantity = Request.Form["qty"];
+
+            if (!string.IsNullOrEmpty(formQuantity)) formQuantity = security.InputFilter(formQuantity.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+
             var qty = 0;
             if (int.TryParse(formQuantity, out qty))
             {
@@ -421,8 +446,10 @@ namespace Hotcakes.Modules.Core.Controllers
         private void RegisterSocialFunctionality(ProductPageViewModel model)
         {
             var socialService = HccApp.SocialService;
+            socialService.SaveProductToJournal(model.LocalProduct);
 
-            model.SocialItem = socialService.GetProductSocialItem(model.LocalProduct);
+            // Obsolete - may need to add a method to retrieve the social item in the future (if integrating directly into Evoq Social again)
+            //model.SocialItem = socialService.GetProductSocialItem(model.LocalProduct);
 
             // Social Media Globals
             ViewBag.UseFaceBook = HccApp.CurrentStore.Settings.FaceBook.UseFaceBook;
@@ -444,6 +471,7 @@ namespace Hotcakes.Modules.Core.Controllers
             {
                 var faceBookAdmins = HccApp.CurrentStore.Settings.FaceBook.Admins;
                 var faceBookAppId = HccApp.CurrentStore.Settings.FaceBook.AppId;
+                var canonicalUrl = HccUrlBuilder.RouteHccUrl(HccRoute.Product, new { slug = model.LocalProduct.UrlSlug.ToLower() });
 
                 var currencyInfo =
                     HccApp.GlobalizationServices.Countries.FindAllForCurrency()
@@ -451,12 +479,12 @@ namespace Hotcakes.Modules.Core.Controllers
 
                 var sb = new StringBuilder();
 
-                sb.Append("<!-- FaceBook OpenGraph Tags -->");
-                sb.AppendFormat("<meta property=\"og:title\" content=\"{0}\"/>", PageTitle);
-                sb.Append("<meta property=\"og:type\" content=\"product\"/>");
-                sb.AppendFormat("<meta property=\"og:url\" content=\"{0}\"/>", ViewBag.CurrentUrl);
-                sb.AppendFormat("<meta property=\"og:image\" content=\"{0}\"/>", model.ImageUrls.MediumlUrl);
-                sb.AppendFormat("<meta property=\"og:price:amount\" content=\"{0}\" />", model.Prices.SitePrice.Text);
+                sb.AppendFormat(Constants.TAG_CANONICAL, canonicalUrl);
+                sb.AppendFormat(Constants.TAG_OGTITLE, PageTitle);
+                sb.Append(Constants.TAG_OGTYPE);
+                sb.AppendFormat(Constants.TAG_OGURL, ViewBag.CurrentUrl);
+                sb.AppendFormat(Constants.TAG_OGIMAGE, model.ImageUrls.MediumlUrl);
+                sb.AppendFormat(Constants.TAG_IOGPRICEAMOUNT, model.Prices.SitePrice.Text);
 
                 // TODO: Replace this with ISO 4217-3 currency code
                 // 
@@ -470,11 +498,11 @@ namespace Hotcakes.Modules.Core.Controllers
                 //      https://developers.facebook.com/docs/payments/product
                 //      https://developers.pinterest.com/rich_pins_product/
                 //      http://www.nationsonline.org/oneworld/currencies.htm
-                sb.AppendFormat("<meta property=\"og:price:currency\" content=\"{0}\" />", currencyInfo.IsoAlpha3);
+                sb.AppendFormat(Constants.TAG_IOGPRICECURRENCY, currencyInfo.IsoAlpha3);
 
-                sb.AppendFormat("<meta property=\"og:site_name\" content=\"{0}\" />", ViewBag.StoreName);
-                sb.AppendFormat("<meta property=\"fb:admins\" content=\"{0}\" />", faceBookAdmins);
-                sb.AppendFormat("<meta property=\"fb:app_id\" content=\"{0}\" />", faceBookAppId);
+                sb.AppendFormat(Constants.TAG_OGSITENAME, ViewBag.StoreName);
+                sb.AppendFormat(Constants.TAG_OGFBADMIN, faceBookAdmins);
+                sb.AppendFormat(Constants.TAG_OGFBAPPID, faceBookAppId);
 
                 RenderToHead("FaceBookMetaTags", sb.ToString());
             }
@@ -603,6 +631,10 @@ namespace Hotcakes.Modules.Core.Controllers
             model.GiftCardRecEmail = Request.Form["GiftCardRecEmail"];
             model.GiftCardRecName = Request.Form["GiftCardRecName"];
             model.GiftCardMessage = Request.Form["GiftCardMessage"];
+
+            if (!string.IsNullOrEmpty(model.GiftCardRecEmail)) model.GiftCardRecEmail = security.InputFilter(model.GiftCardRecEmail.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(model.GiftCardRecName)) model.GiftCardRecName = security.InputFilter(model.GiftCardRecName.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(model.GiftCardMessage)) model.GiftCardMessage = security.InputFilter(model.GiftCardMessage.Trim(), PortalSecurity.FilterFlag.NoMarkup);
         }
 
         private void AddToWishlist(ProductPageViewModel model)
@@ -645,6 +677,8 @@ namespace Hotcakes.Modules.Core.Controllers
             var quantity = 0;
             var formQuantity = Request.Form["qty"];
 
+            if (!string.IsNullOrEmpty(formQuantity)) formQuantity = security.InputFilter(formQuantity.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+
             var minQuantity = model.LocalProduct.MinimumQty > 0 ? model.LocalProduct.MinimumQty : 1;
             if (int.TryParse(formQuantity, out quantity))
             {
@@ -684,6 +718,9 @@ namespace Hotcakes.Modules.Core.Controllers
             if (model.LocalProduct.IsUserSuppliedPrice)
             {
                 var strUserPrice = Request.Form["userprice"];
+
+                if (!string.IsNullOrEmpty(strUserPrice)) strUserPrice = security.InputFilter(strUserPrice.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+
                 decimal userPrice = 0;
                 if (decimal.TryParse(strUserPrice, out userPrice))
                 {
@@ -714,6 +751,9 @@ namespace Hotcakes.Modules.Core.Controllers
                 var gcSetting = HccApp.CurrentStore.Settings.GiftCard;
 
                 var strAmount = Request.Form["giftcardamount"];
+
+                if (!string.IsNullOrEmpty(strAmount)) strAmount = security.InputFilter(strAmount.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+
                 decimal gcAmount = 0;
 
                 if (decimal.TryParse(strAmount, out gcAmount))

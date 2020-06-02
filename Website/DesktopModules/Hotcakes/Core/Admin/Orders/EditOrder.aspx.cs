@@ -43,6 +43,8 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 {
     public partial class EditOrder : BaseOrderPage
     {
+        private const string CONFIRMFORMAT = "return hcConfirm(event, '{0}');";
+
         private void LoadInventory()
         {
             InventoryControl.BindGrids();
@@ -80,7 +82,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             ucBillingAddress.LoadFromAddress(CurrentOrder.BillingAddress);
 
             UserIdField.Value = CurrentOrder.UserID;
-            //Email            
+            // Email            
             ucUserPicker.UserName = CurrentOrder.UserEmail;
 
             // Shipping (hide if order is non-shipping)
@@ -88,9 +90,9 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             if (CurrentOrder.HasShippingItems)
                 ucShippingAddress.LoadFromAddress(CurrentOrder.ShippingAddress);
             else
-                lblShippingAddress.Text = "Non-shipping order";
+                lblShippingAddress.Text = Localization.GetString("lblNonShippingOrder");
 
-            //Items
+            // Items
             ucOrderItems.Rebind();
 
             txtInstructions.Text = CurrentOrder.Instructions;
@@ -122,11 +124,11 @@ namespace Hotcakes.Modules.Core.Admin.Orders
                 {
                     EventLog.LogEvent("Order Edited Workflow", msg.Description, EventLogSeverity.Warning);
                 }
-                ucMessageBox.ShowError("Error Occurred. Please see event log.");
+                ucMessageBox.ShowError(Localization.GetString("lblErrorOrderSave"));
             }
             else
             {
-                ucMessageBox.ShowOk("Changes Saved");
+                ucMessageBox.ShowOk(Localization.GetString("lblSaveSuccess"));
             }
         }
 
@@ -182,7 +184,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 
                         if (!result.Succeeded)
                         {
-                            ucMessageBox.ShowError(string.Format("Subscription '{0}' update failed.", li.ProductName));
+                            ucMessageBox.ShowError(string.Format(Localization.GetString("lblSubscriptionUpdateFall"), li.ProductName));
                         }
                     }
                 }
@@ -240,7 +242,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            PageTitle = "Edit Order";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Orders;
             ValidateCurrentUserHasPermission(SystemPermissions.OrdersView);
             ViewState["IsMultiSelect"] = false;
@@ -277,20 +279,20 @@ namespace Hotcakes.Modules.Core.Admin.Orders
                 if (string.IsNullOrEmpty(OrderId))
                 {
                     // Show Error
-                    ucMessageBox.ShowWarning("Unable to locate that order.");
+                    ucMessageBox.ShowWarning(Localization.GetString("OrderNotFound"));
                 }
                 LoadOrder();
 
                 if (!InventoryControl.CheckCurrentOrderhasInventoryProduct())
                 {
-                    btnDelete.OnClientClick += "return hcConfirm(event, 'Delete this order forever?');";
+                    btnDelete.OnClientClick += string.Format(CONFIRMFORMAT, Localization.GetString("ConfirmDeleteOrder"));
                 }
 
                 if (CurrentOrder.PaymentStatus != OrderPaymentStatus.Paid &&
                     CurrentOrder.PaymentStatus != OrderPaymentStatus.PartiallyPaid ||
                     CurrentOrder.PaymentStatus == OrderPaymentStatus.Overpaid)
                 {
-                    btnDelete.OnClientClick += "return hcConfirm(event, 'Delete this order forever?');";
+                    btnDelete.OnClientClick += string.Format(CONFIRMFORMAT, Localization.GetString("ConfirmDeleteOrder"));
                 }
             }
         }
@@ -366,8 +368,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
                             success = HccApp.OrderServices.OrdersDelete(CurrentOrder.bvin, HccApp);
                             break;
                         case OrderShippingStatus.PartiallyShipped:
-                            ucMessageBox.ShowWarning(
-                                "Partially shipped orders can't be deleted. Either unship or ship all items before deleting.");
+                            ucMessageBox.ShowWarning(Localization.GetString("PartialShipWarning"));
                             break;
                         case OrderShippingStatus.Unknown:
                             success = HccApp.OrderServices.OrdersDelete(CurrentOrder.bvin, HccApp);
@@ -404,8 +405,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
                             success = HccApp.OrderServices.OrdersDelete(CurrentOrder.bvin, HccApp);
                             break;
                         case OrderShippingStatus.PartiallyShipped:
-                            ucMessageBox.ShowWarning(
-                                "Partially shipped orders can't be deleted. Either unship or ship all items before deleting.");
+                            ucMessageBox.ShowWarning(Localization.GetString("PartialShipWarning"));
                             break;
                         case OrderShippingStatus.Unknown:
                             success = HccApp.OrderServices.OrdersDelete(CurrentOrder.bvin, HccApp);

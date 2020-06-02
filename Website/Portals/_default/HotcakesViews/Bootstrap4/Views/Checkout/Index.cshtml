@@ -1,0 +1,231 @@
+﻿@model Hotcakes.Modules.Core.Models.CheckoutViewModel
+@using Hotcakes.Modules.Core.Models;
+
+@if (Model.ShowConfirmation)
+{   
+    <script type="text/javascript">
+        jQuery(function () {
+            $("#hcOrderConfirmed").attr('value', 'true');
+
+            $("#hcPaymentConfirm").hcDialog({
+                width: '400',
+                maxHeight: '200',
+                title: '@Localization.GetString("ConfirmOrderTitle")',
+                close: function () {
+                    $("#hcOrderConfirmed").attr('value', 'false');
+                }
+            });
+
+            $("#hcCancelOrderConfirmation").click(function () {
+                $("#hcPaymentConfirm").hcDialog('close');
+            });
+
+            $("#hcConfirmButton").click(function () {
+                $("#hcPaymentConfirm").parent().hide();
+            });
+
+        });
+    </script>
+}
+
+<div class="container">
+    <div class="hc-checkout">
+    <h1>@Localization.GetString("Checkout")</h1>
+
+    <div class="row">
+        <div class="col-12">
+            @Html.Raw((string)TempData["messages"])
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-7 form-horizontal">
+            @using (Html.BeginHccForm())
+            {
+                <div class="row">
+                    <div class="col-12">
+                        <div class="hc-login-section" id="hcLoginSection">
+                            @if (!Model.IsLoggedIn)
+                            {
+                                @Html.Partial("_Login", Model);
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                if (Model.CurrentOrder.HasShippingItems)
+                {
+                    <div class="row">
+                        <div class="col-12 hc-shipping-section">
+                            <h3>@Localization.GetString("ShippingAddress")</h3>
+                            <div id="hcShippingValidation" class="col-12 alert alert-danger d-none">
+                                @Localization.GetString("ShippingAddressInvalid")
+                            </div>
+                            @Html.Partial("_CheckoutAddress", new CheckoutAddressViewModel()
+                            {
+                                Addresses = Model.CurrentCustomer.Addresses,
+                                Address = Model.CurrentOrder.ShippingAddress,
+                                Prefix = "shipping",
+                                ShowPhone = true,
+                                Countries = Model.Countries,
+                                Violations = Model.Violations
+                            })
+                        </div>
+
+                        <div class="col-12 hc-delivery-section" id="hcDeliverySection">
+                            <h3>@Localization.GetString("DeliveryOptions")</h3>
+                            <div class="form-group">
+                                <div id="hcShippingRates" class="col-12 margin-left-md"></div>
+                            </div>
+                            <div id="hcShippingNotValid" class="col-12 alert alert-warning">
+                                @Localization.GetString("EnterShippingAddress")
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="row">
+                    <div class="col-12 hc-billing-section">
+                        <h3>@Localization.GetString("BillingAddress")</h3>
+                        <div id="hcBillingValidation" class="col-12 alert alert-danger d-none">
+                            @Localization.GetString("BillingAddressInvalid")
+                        </div>
+                        @if (Model.CurrentOrder.HasShippingItems)
+                        {
+                            <div class="form-check mb-4">
+                                <input type="checkbox" id="chkbillsame" name="chkbillsame" class="form-check-input" 
+                                        @if (Model.BillShipSame) { <text> checked="checked" </text> } />
+                                <label for="chkbillsame" class="form-check-label">
+                                    @Localization.GetString("BillingAddressIsSame")
+                                </label>
+                            </div>
+                        }
+                        <div id="hcBillingWrapper">
+                            @Html.Partial("_CheckoutAddress", new CheckoutAddressViewModel()
+                        {
+                            Addresses = Model.CurrentCustomer.Addresses,
+                            Address = Model.CurrentOrder.BillingAddress,
+                            Prefix = "billing",
+                            ShowPhone = false,
+                            Countries = Model.Countries,
+                            Violations = Model.Violations
+                        })
+                        </div>
+                    </div>
+                </div>
+
+                if (Model.ShowRewards)
+                {
+                <div class="row">
+                    <div class="col-12 hc-payment-section" id="hccRewardPointsWrap">
+                        <h3>@Model.LabelRewardPoints</h3>
+                        <div class="alert alert-info">@Model.RewardPointsAvailable</div>
+                        <div class="form-check">
+                            <input type="radio" @if (!Model.UseRewardsPoints) { <text> checked="checked" </text> } class="form-check-input" id="userewardspoints0" name="userewardspoints" value="0" />
+                            <label id="userewardspointslabel0" for="userewardspoints0" class="form-check-label">@Localization.GetString("DontUsePoints")</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" @if (Model.UseRewardsPoints) { <text> checked="checked" </text> } class="form-check-input" id="userewardspoints1" name="userewardspoints" value="1" />
+                            <label id="userewardspointslabel1" for="userewardspoints1" class="form-check-label">@Model.LabelRewardsUse</label>
+                        </div>
+                    </div>
+                </div>
+                }
+
+                if (Model.GiftCards.ShowGiftCards || !string.IsNullOrEmpty(Model.GiftCards.Summary))
+                {
+                <div class="row">
+                    <div class="col-12 hc-payment-section" id="hcGiftCardSection">
+                        <h3>@Localization.GetString("GiftCard")</h3>
+                        @Html.Partial("_GiftCards", Model)
+                    </div>
+                </div>
+                }
+
+                <div class="row">
+                    <div class="col-12 hc-payment-section mb-3">
+                        <h3>@Localization.GetString("PaymentMethod")</h3>
+                        @Html.Partial("_DisplayPaymentMethods", Model)
+                    </div>
+                </div>
+
+                if (Model.ShowAffiliateId)
+                {
+                <div class="row">
+                    <div class="col-12 hc-payment-section">
+                        <h3>@Localization.GetString("AffiliatesHeader")</h3>
+                        <div id="affiliatemessage" class="dnnFormMessage" style="display: none"></div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label" for="affiliateid">@Localization.GetString("AffiliateId"):</label>
+                            <div class="col-sm-6 offset-sm-0">
+                                <input type="text" id="affiliateid" name="affiliateid" value="@Model.AffiliateId" class="form-control @Model.IsErr("affiliateid")" placeholder="@Localization.GetString("Optional")" />
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            var HCC = HCC || {};
+                            HCC.Affiliate = HCC.Affiliate || {};
+                            HCC.Affiliate.MessageAffiliateInvalid = '@Localization.GetString("MessageAffiliateInvalid")';
+                        </script>
+                    </div>
+                </div>
+                }
+
+                <div class="row">
+                    <div class="col-12 hc-instructions-section">
+                        <h3>@Localization.GetString("SpecialInstructions")</h3>
+                        <div class="form-group">
+                            <textarea id="specialinstructions" name="specialinstructions" class="form-control">@Model.CurrentOrder.Instructions</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                @Html.Partial("_NormalizeAddressDialog", Model)
+
+                <div id="hcPaymentConfirm" style="display: none;">
+                    <div class="dnnForm">
+                        @Localization.GetString("ConfirmMessage").Replace("{Amount}", @Model.CurrentOrder.TotalGrand.ToString("c"))
+                    </div>
+                    <ul class="list-unstyled list-inline">
+                        <li class="list-inline-item">
+                            <input type="submit" id="hcConfirmButton" value="@Localization.GetString("PlaceOrder")" class="btn btn-primary" />
+                        </li>
+                        <li class="list-inline-item">
+                            <input type="button" id="hcCancelOrderConfirmation" value="@Localization.GetString("Cancel")" class="btn btn-secondary" />
+                        </li>
+                    </ul>
+                </div>
+                <input type="hidden" id="orderbvin" name="orderbvin" value="@Model.CurrentOrder.bvin" />
+                <input type="hidden" id="hcOrderConfirmed" name="hcOrderConfirmed" value="false" />
+                <hr/>
+                <div class="row">
+                    <div class="col-12 text-center">
+                        @if (Model.ShowAgreeToTerms)
+                        {
+                            <div class="form-check">
+                                <input type="checkbox" id="agreed" name="agreed" @if (Model.AgreedToTerms) {<text> checked="checked" </text>}/>
+                                <label for="agreed">@Model.AgreedToTermsDescription</label>
+                            </div>
+                            <a href="@Url.RouteHccUrl(HccRoute.Terms)" target="_blank" class="btn btn-outline-info">@Localization.GetString("View") @Model.LabelTerms</a>
+                        }&nbsp;
+                        <input type="submit" id="hcTakeOrder" value="@Localization.GetString("PlaceOrder")" class="btn btn-primary" />
+                    </div>
+                </div>
+                }
+            </div>
+
+            <div class="col-md-5 hc-order-summary">
+                <div class="hc-cart-section">
+                    <h3>@Localization.GetString("OrderSummary")</h3>
+                    <h4>@Localization.GetString("LineItems")</h4>
+                    @Html.Partial("_ViewOrderItems", Model.CurrentOrder.Items)
+                    <h4>@Localization.GetString("Total")</h4>
+                    <div class="col-12" id="hcCheckoutTotal">
+                        <div class="table-responsive">
+                            @Html.Raw(Model.CurrentOrder.TotalsAsTable())
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

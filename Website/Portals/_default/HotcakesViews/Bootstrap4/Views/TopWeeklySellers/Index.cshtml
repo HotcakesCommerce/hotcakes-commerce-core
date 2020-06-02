@@ -1,0 +1,15 @@
+﻿@model Hotcakes.Modules.Core.Models.SideMenuViewModel
+<!-- Hotcakes Commerce: Top Weekly Sellers view -->
+<div class="container">
+    <div class="row hc-top-weekly-sellers">
+        <div class="col-12">
+            <h2>@Model.Title</h2>
+            <ol>
+                @foreach (var item in Model.Items)
+                {
+                    <li><a href="@item.Url" title="@item.Title">@item.Name</a></li>
+                }
+            </ol>
+        </div>
+    </div>
+</div>

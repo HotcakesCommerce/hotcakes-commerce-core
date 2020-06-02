@@ -1,6 +1,4 @@
-﻿// JScript File
-
-//To prevent "Uncaught TypeError: Cannot read property 'analytics' of undefined" in older DNN versions
+﻿/* To prevent "Uncaught TypeError: Cannot read property 'analytics' of undefined" in older DNN versions */
 var dnn = dnn || {};
 
 (function ($) {
@@ -9,6 +7,7 @@ var dnn = dnn || {};
 
     // Global functions
     hcConfirm = function (event, msg, callback) {
+        event.preventDefault();
         var $ok = $("<a href='#' class='hcPrimaryAction'>OK</a>");
         var $cancel = $("<a href='#' class='hcSecondaryAction'>Cancel</a>");
         var $dlg = $("<div class='hcConfirmDialog'><p><span class='msg'></span></p><div class='hcActionsRight'><ul class='hcActions'><li><a class='ok'></a></li><li><a class='cancel'></a></li></ul></div></div>");
@@ -68,18 +67,17 @@ var dnn = dnn || {};
             Sys.WebForms.PageRequestManager.getInstance().add_endRequest(func);
     };
 
-    String.prototype.trim = function () {
+    String.prototype.trim = function() {
         return this.replace(/^\s*/, "").replace(/\s*$/, "");
-    }
+    };
 
-    String.prototype.padL = function (nLength, sChar) {
+    String.prototype.padL = function(nLength, sChar) {
         var sreturn = this;
         while (sreturn.length < nLength) {
             sreturn = String(sChar) + sreturn;
         }
         return sreturn;
-
-    }
+    };
 
     $.fn.hcImageUpload = function (settings) {
         var $divImageBox = settings.divImage;
@@ -134,7 +132,6 @@ jQuery(function ($) {
         $(this).find(".hcFormInfo").hide();
     });
 });
-
 
 function createAddressValidationInputs() {
     var AddressValidationInputs = {

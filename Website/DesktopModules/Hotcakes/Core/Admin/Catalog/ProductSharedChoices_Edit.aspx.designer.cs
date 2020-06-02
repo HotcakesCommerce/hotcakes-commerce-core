@@ -181,6 +181,15 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnSaveOption;
+        protected global::System.Web.UI.WebControls.LinkButton btnSaveOption;
+        
+        /// <summary>
+        /// btnSaveOptionAndClose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSaveOptionAndClose;
     }
 }

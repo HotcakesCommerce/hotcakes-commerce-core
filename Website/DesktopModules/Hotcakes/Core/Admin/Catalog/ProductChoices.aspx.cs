@@ -25,14 +25,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Text;
+using System.Web.UI.WebControls;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Web.Logging;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
@@ -46,7 +45,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         {
             base.OnInit(e);
 
-            PageTitle = "Edit Product Choices";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Catalog;
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
         }
@@ -68,29 +67,28 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             }
         }
 
-
         private void PopulateSharedChoices()
         {
             var items = HccApp.CatalogServices.ProductOptions.FindAllShared(1, 1000);
             if (items.Count > 0)
             {
                 ChoiceTypes.Items.Add(CreateDisableListItem("------------------"));
-                ChoiceTypes.Items.Add(CreateDisableListItem(" Shared Choices "));
+                ChoiceTypes.Items.Add(CreateDisableListItem(string.Format(" {0} ", Localization.GetString("SharedChoices"))));
                 ChoiceTypes.Items.Add(CreateDisableListItem("------------------"));
 
                 foreach (var opt in items)
                 {
-                    ChoiceTypes.Items.Add(new RadComboBoxItem(opt.Name, opt.Bvin));
+                    ChoiceTypes.Items.Add(new ListItem(opt.Name, opt.Bvin));
                 }
             }
         }
 
-        private RadComboBoxItem CreateDisableListItem(string text)
+        private ListItem CreateDisableListItem(string text)
         {
-            var item = new RadComboBoxItem(text, string.Empty);
+            var item = new ListItem(text, string.Empty);
             item.Attributes["disabled"] = "disabled";
             item.Enabled = false;
-            item.BackColor = Color.DarkGray;
+            item.Attributes["style"] = "background-color: #a9a9a9 !important;";
             return item;
         }
 
@@ -103,12 +101,21 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         {
             var sb = new StringBuilder();
 
-            sb.Append("<div id=\"dragitem-list\">");
-            foreach (var opt in items)
+            if (items != null && items.Count > 0)
             {
-                RenderSingleItem(sb, opt);
+                sb.Append("<div id=\"dragitem-list\">");
+                foreach (var opt in items)
+                {
+                    RenderSingleItem(sb, opt);
+                }
+
+                sb.Append("</div>");
             }
-            sb.Append("</div>");
+            else
+            {
+                sb.AppendFormat("<div class=\"hcClearfix\"><p>{0}</p></div>", Localization.GetString("NoOptions"));
+            }
+
             litResults.Text = sb.ToString();
         }
 
@@ -116,11 +123,9 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         {
             var destinationLink = "ProductChoices_Edit.aspx?cid=" + o.Bvin + "&id=" + productBvin;
 
-            sb.Append("<div class=\"dragitem\" id=\"item_" + o.Bvin +
-                      "\"><table class=\"formtable hcGrid\" width=\"100%\"><tbody class=\"ui-sortable\"><tr>");
-            sb.AppendFormat(
-                "<td width=\"30\"><a href=\"#\" class=\"handle\"><img class=\"hcIconMove\"  alt=\"Move\" /></a></td>");
-            sb.Append("<td width=\"25%\"><a href=\"" + destinationLink + "\">");
+            sb.AppendFormat("<div class=\"dragitem\" id=\"item_{0}\"><table class=\"formtable hcGrid\" width=\"100%\"><tbody class=\"ui-sortable\"><tr>", o.Bvin);
+            sb.AppendFormat("<td width=\"30\" class=\"handle\"><a href=\"#\" class=\"hcIconMove\" title=\"{0}\"></a></td>", Localization.GetString("Move"));
+            sb.AppendFormat("<td width=\"25%\"><a href=\"{0}\">", destinationLink);
             sb.Append(o.Name);
             sb.Append("</a></td>");
             sb.Append("<td class=\"hcProductEditChoice\">");
@@ -130,26 +135,22 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             sb.Append("<td width=\"75\">");
             if (o.IsVariant)
             {
-                sb.Append("VARIANT");
+                sb.Append(Localization.GetString("VARIANT"));
             }
             sb.Append("</td> <td width=\"105\">");
 
             if (o.IsShared)
             {
-                sb.Append("SHARED");
+                sb.Append(Localization.GetString("SHARED"));
             }
             else
             {
-                sb.Append("<a href=\"" + destinationLink + "\"><img class=\"hcIconEdit\" alt=\"edit\" /></a>");
+                sb.AppendFormat("<a href=\"{0}\" class=\"hcIconEdit\" title=\"{1}\"></a> ", destinationLink, Localization.GetString("Edit"));
             }
 
-            sb.Append("<a href=\"#\" class=\"trash\" id=\"rem" + o.Bvin + "\"");
-            if (o.IsVariant)
-            {
-                sb.Append("  title=\"variant\" ");
-            }
-            sb.AppendFormat("><img  alt=\"Delete\" class=\"hcIconDelete\" /></a></td>");
+            sb.AppendFormat("<a href=\"#\" class=\"trash hcIconDelete\" id=\"rem{0}\" title=\"{1}\"", o.Bvin, Localization.GetString("Delete"));
 
+            sb.AppendFormat("></a></td>");
 
             sb.Append("</tr></tbody></table></div>");
         }
@@ -169,27 +170,27 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
             opt.IsShared = false;
             opt.IsVariant = false;
-            opt.Name = "New Choice";
+            opt.Name = Localization.GetString("NewChoice");
 
             switch (opt.OptionType)
             {
                 case OptionTypes.CheckBoxes:
-                    opt.Name = "New Checkboxes";
+                    opt.Name = Localization.GetString("NewCheckboxes");
                     break;
                 case OptionTypes.DropDownList:
-                    opt.Name = "New Drop Down List";
+                    opt.Name = Localization.GetString("NewDropdownList");
                     break;
                 case OptionTypes.FileUpload:
-                    opt.Name = "New File Upload";
+                    opt.Name = Localization.GetString("NewFileUpload");
                     break;
                 case OptionTypes.Html:
-                    opt.Name = "New Html Description";
+                    opt.Name = Localization.GetString("NewHtmlDescription");
                     break;
                 case OptionTypes.RadioButtonList:
-                    opt.Name = "New Radio Button List";
+                    opt.Name = Localization.GetString("NewRadioButtonList");
                     break;
                 case OptionTypes.TextInput:
-                    opt.Name = "New Text Input";
+                    opt.Name = Localization.GetString("NewTextInput");
                     break;
             }
             opt.StoreId = HccApp.CurrentStore.Id;
@@ -229,8 +230,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 }
                 else
                 {
-                    MessageBox1.ShowError(
-                        "Unable to associate choice with product. An Administrator has been alerted to the issue.");
+                    MessageBox1.ShowError(Localization.GetString("CreateChoiceFailure"));
                     EventLog.LogEvent("ProductChoices.aspx",
                         "Could not associate choice " + opt.Bvin + " with product " + productBvin,
                         EventLogSeverity.Error);

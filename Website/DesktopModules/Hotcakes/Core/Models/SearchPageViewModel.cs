@@ -50,13 +50,13 @@ namespace Hotcakes.Modules.Core.Models
             Products = new List<SingleProductViewModel>();
 
             Categories = new List<FacetItem>();
-            Manufactures = new List<FacetItem>();
+            Manufacturers = new List<FacetItem>();
             Vendors = new List<FacetItem>();
             Types = new List<FacetItem>();
             Properties = new List<PropertyFacetItem>();
 
             SelectedCategories = new List<SelectedFacetItem>();
-            SelectedManufactures = new List<SelectedFacetItem>();
+            SelectedManufacturers = new List<SelectedFacetItem>();
             SelectedVendors = new List<SelectedFacetItem>();
             SelectedTypes = new List<SelectedFacetItem>();
             SelectedProperties = new List<SelectedPropertyFacetItem>();
@@ -92,7 +92,17 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     Flag to indicate whether Manufacturers needs to be shown on filter panel.
         /// </summary>
-        public bool ShowManufactures { get; set; }
+        [Obsolete("Deprecated in Hotcakes Commerce 03.03.00. Please use the ShowManufacturers property instead. Removing in version 03.04.00 or later.")]
+        public bool ShowManufactures
+        {
+            get { return ShowManufacturers;}
+            set { ShowManufacturers = value; }
+        } 
+
+        /// <summary>
+        ///     Flag to indicate whether Manufacturers needs to be shown on filter panel.
+        /// </summary>
+        public bool ShowManufacturers { get; set; }
 
         /// <summary>
         ///     Flag to indicate whether Vendors needs to be shown on filter panel.
@@ -108,7 +118,17 @@ namespace Hotcakes.Modules.Core.Models
         ///     List of available manufacturers. More detail for manufacturer on filter panel can be found at
         ///     <see cref="FacetItem" />.
         /// </summary>
-        public List<FacetItem> Manufactures { get; set; }
+        [Obsolete("Deprecated in Hotcakes Commerce 03.03.00. Please use the Manufacturers property instead. Removing in version 03.04.00 or later.")]
+        public List<FacetItem> Manufactures {
+            get { return Manufacturers; }
+            set { Manufacturers = value; }
+        }
+
+        /// <summary>
+        ///     List of available manufacturers. More detail for manufacturer on filter panel can be found at
+        ///     <see cref="FacetItem" />.
+        /// </summary>
+        public List<FacetItem> Manufacturers { get; set; }
 
         /// <summary>
         ///     List of available vendors. More detail for Vendor on filter panel can be found at <see cref="FacetItem" />.
@@ -146,7 +166,19 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     Chosen manufacturers from filter panel.
         /// </summary>
-        public List<SelectedFacetItem> SelectedManufactures { get; set; }
+        [Obsolete(
+            "Deprecated in Hotcakes Commerce 03.03.00. Please use the SelectedManufacturers property instead. Removing in version 03.04.00 or later.")]
+        public List<SelectedFacetItem> SelectedManufactures
+        {
+            get
+            { return SelectedManufacturers; }
+            set { SelectedManufacturers = value; }
+        }
+
+        /// <summary>
+        ///     Chosen manufacturers from filter panel.
+        /// </summary>
+        public List<SelectedFacetItem> SelectedManufacturers { get; set; }
 
         /// <summary>
         ///     Chosen vendors from the filter panel.

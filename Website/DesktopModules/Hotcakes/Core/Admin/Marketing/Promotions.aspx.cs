@@ -25,11 +25,11 @@
 
 using System;
 using System.Text;
+using System.Web.UI.WebControls;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Marketing;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Modules.Core.Admin.AppCode;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing
 {
@@ -55,10 +55,9 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         private void lnkMigrate_Click(object sender, EventArgs e)
         {
-            HccApp.MarketingServices.MigrateOldPromotions();
             ucMessageBox.ClearMessage();
             lnkMigrate.Visible = false;
-            ucMessageBox.ShowOk("Promotions were migrated successfull.");
+            ucMessageBox.ShowOk(Localization.GetString("MigrateSuccess"));
         }
 
         private void ResetAllPageNumbers()
@@ -106,11 +105,9 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
             ucAffiliatePromotions.LoadPromotions(txtKeywords.Text, chkShowDisabled.Checked);
             ucOffersFreeItem.LoadPromotions(txtKeywords.Text, chkShowDisabled.Checked);
 
-            DetectOldPromotionsType();
-
             if (!chkShowDisabled.Checked)
             {
-                ucMessageBox.ShowInformation("Promotions will be applied in the order that they appear in this list.");
+                ucMessageBox.ShowInformation(Localization.GetString("PromotionsOrder"));
             }
         }
 
@@ -118,55 +115,35 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         #region Implementation
 
-#pragma warning disable 0612, 0618
-        private void DetectOldPromotionsType()
-        {
-            var rowCount = 0;
-            var items = HccApp.MarketingServices.Promotions.FindAllWithFilter(PromotionType.Offer, string.Empty, true, 1,
-                int.MaxValue, ref rowCount);
-
-            if (rowCount > 0)
-            {
-                ucMessageBox.ShowWarning(string.Format("<b>{0}</b> old type offer detected.<br/>", rowCount));
-                var sb = new StringBuilder();
-                sb.Append("<ul>");
-                foreach (var p in items)
-                {
-                    sb.AppendFormat("<li>{0}</li>", p.Name);
-                }
-                sb.Append("</ul>");
-                ucMessageBox.ShowWarning(sb.ToString());
-                lnkMigrate.Visible = true;
-            }
-        }
-#pragma warning restore 0612, 0618
-
         private void InitialBindData()
         {
             chkShowDisabled.Checked = SessionManager.AdminPromotionShowDisabled;
             txtKeywords.Text = SessionManager.AdminPromotionKeywords;
             txtKeywords.Focus();
 
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("CustomSale"), "0"));
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("CustomOfferForItems"), "1"));
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("CustomOfferForFreeItems"), "5"));
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("CustomOfferForOrder"), "2"));
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("CustomOfferForShipping"), "3"));
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("AffiliatePromotion"), "4"));
-            lstNewType.Items.Add(new RadComboBoxItem {IsSeparator = true});
+            lstNewType.Items.Add(new ListItem(Localization.GetString("CustomSale"), "0"));
+            lstNewType.Items.Add(new ListItem(Localization.GetString("CustomOfferForItems"), "1"));
+            lstNewType.Items.Add(new ListItem(Localization.GetString("CustomOfferForFreeItems"), "5"));
+            lstNewType.Items.Add(new ListItem(Localization.GetString("CustomOfferForOrder"), "2"));
+            lstNewType.Items.Add(new ListItem(Localization.GetString("CustomOfferForShipping"), "3"));
+            lstNewType.Items.Add(new ListItem(Localization.GetString("AffiliatePromotion"), "4"));
 
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("SaleStoreWide"), "10"));
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("SaleProducts"), "11"));
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("SaleCategories"), "12"));
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("SaleProductTypes"), "13"));
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("SaleByPriceGroup"), "14"));
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("SaleByUser"), "15"));
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("OfferWithCoupon"), "16"));
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("OfferByPriceGroup"), "18"));
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("OfferByUser"), "17"));
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("OfferFreeShipping"), "19"));
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("OfferShippingDiscount"), "20"));
-            lstNewType.Items.Add(new RadComboBoxItem(Localization.GetString("OfferFreeShippingCategory"), "21"));
+            var lstSeparator = new ListItem("--------------", string.Empty);
+            lstSeparator.Enabled = false;
+            lstNewType.Items.Add(lstSeparator);
+
+            lstNewType.Items.Add(new ListItem(Localization.GetString("SaleStoreWide"), "10"));
+            lstNewType.Items.Add(new ListItem(Localization.GetString("SaleProducts"), "11"));
+            lstNewType.Items.Add(new ListItem(Localization.GetString("SaleCategories"), "12"));
+            lstNewType.Items.Add(new ListItem(Localization.GetString("SaleProductTypes"), "13"));
+            lstNewType.Items.Add(new ListItem(Localization.GetString("SaleByPriceGroup"), "14"));
+            lstNewType.Items.Add(new ListItem(Localization.GetString("SaleByUser"), "15"));
+            lstNewType.Items.Add(new ListItem(Localization.GetString("OfferWithCoupon"), "16"));
+            lstNewType.Items.Add(new ListItem(Localization.GetString("OfferByPriceGroup"), "18"));
+            lstNewType.Items.Add(new ListItem(Localization.GetString("OfferByUser"), "17"));
+            lstNewType.Items.Add(new ListItem(Localization.GetString("OfferFreeShipping"), "19"));
+            lstNewType.Items.Add(new ListItem(Localization.GetString("OfferShippingDiscount"), "20"));
+            lstNewType.Items.Add(new ListItem(Localization.GetString("OfferFreeShippingCategory"), "21"));
         }
 
         private string GetEditUrl(long id)

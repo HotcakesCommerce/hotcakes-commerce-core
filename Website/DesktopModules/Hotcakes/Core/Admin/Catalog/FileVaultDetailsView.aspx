@@ -1,124 +1,112 @@
-<%@ Page Language="C#" MasterPageFile="../Admin_old.master" AutoEventWireup="True" Inherits="Hotcakes.Modules.Core.Admin.Catalog.FileVaultDetailsView"
+<%@ Page Language="C#" MasterPageFile="../AdminNav.master" AutoEventWireup="True" Inherits="Hotcakes.Modules.Core.Admin.Catalog.FileVaultDetailsView"
     Title="File Vault Details" Codebehind="FileVaultDetailsView.aspx.cs" %>
-<%@ Register Src="../Controls/FilePicker.ascx" TagName="FilePicker" TagPrefix="uc4" %>
-<%@ Register Src="../Controls/TimespanPicker.ascx" TagName="TimespanPicker" TagPrefix="uc3" %>
-<%@ Register Src="../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="uc2" %>
-<%@ Register Src="../Controls/ProductPicker.ascx" TagName="ProductPicker" TagPrefix="uc1" %>
+<%@ Register Src="../Controls/NavMenu.ascx" TagName="NavMenu" TagPrefix="hcc" %>
+<%@ Register Src="../Controls/FilePicker.ascx" TagName="FilePicker" TagPrefix="hcc" %>
+<%@ Register Src="../Controls/TimespanPicker.ascx" TagName="TimespanPicker" TagPrefix="hcc" %>
+<%@ Register Src="../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
+<%@ Register Src="../Controls/ProductPicker.ascx" TagName="ProductPicker" TagPrefix="hcc" %>
+
+<asp:Content ID="nav" ContentPlaceHolderID="NavContent" runat="server">
+    <hcc:NavMenu ID="ucNavMenu" runat="server" />
+</asp:Content>
     
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
-    <div>
-        <uc2:MessageBox ID="MessageBox1" runat="server" EnableViewState="false" />
+<asp:Content ContentPlaceHolderID="MainContent" runat="Server">
+    <style>
+        .hcFileDetailsWidth hcForm {
+            width: 90%; 
+        }
+        input.hcSmall {
+            max-width: 50px;
+        }
+    </style>
+    <h1><%=PageTitle %></h1>
+    <hcc:MessageBox ID="MessageBox1" runat="server" EnableViewState="false" />
+    
+    <div class="hcFileDetailsWidth">
+        <div class="hcForm">
+            <div class="hcFormItem">
+                <label class="hcLabel"><%=Localization.GetString("lblFile") %></label>
+                <asp:Label runat="server" ID="lblFileName"/>
+                <asp:LinkButton ID="ReplaceImageButton" resourcekey="ReplaceImageButton" runat="server" onclick="ReplaceImageButton_Click" />
+            </div>
+            <div class="hcFormItem" runat="server" id="ReplacePanel" Visible="False">
+                <hcc:FilePicker ID="FilePicker1" runat="server" DisplayShortDescription="false" />
+                <asp:LinkButton ID="FileReplaceSaveImageButton" resourcekey="FileReplaceSaveImageButton" runat="server" onclick="FileReplaceSaveImageButton_Click" CausesValidation="false" CssClass="hcTertiaryAction" />
+                <asp:LinkButton ID="FileReplaceCancelImageButton" resourcekey="FileReplaceCancelImageButton" runat="server" onclick="FileReplaceCancelImageButton_Click" CausesValidation="False" CssClass="hcTertiaryAction"/>
+            </div>
+            <div class="hcFormItem">
+                <label class="hcLabel"><%=Localization.GetString("lblDescription") %></label>
+                <asp:TextBox ID="DescriptionTextBox" runat="server" ValidationGroup="UpdateDescription"/>
+                <asp:RequiredFieldValidator runat="server" resourcekey="rfvDescription" ControlToValidate="DescriptionTextBox" Display="Dynamic" CssClass="hcFormError" ValidationGroup="UpdateDescription"/>
+            </div>
+            <div class="hcFormItem">
+                <ul class="hcActions">
+                    <li>
+                        <asp:LinkButton ID="SaveImageButton" resourcekey="SaveImageButton" runat="server" ValidationGroup="UpdateDescription" CssClass="hcPrimaryAction" onclick="SaveImageButton_Click" />
+                    </li>
+                    <li>
+                        <asp:LinkButton ID="CancelImageButton" resourcekey="CancelImageButton" runat="server" CausesValidation="False" CssClass="hcSecondaryAction" onclick="CancelImageButton_Click" />
+                    </li>
+                </ul>
+            </div>
+            <div class="hcFormItem">
+                <label class="hcLabel"><%=Localization.GetString("lblProducts") %></label>
+            </div>
+            <div class="hcFormItem">
+                <asp:GridView ID="ProductsGridView" runat="server" DataKeyNames="bvin" AutoGenerateColumns="False" 
+                    onrowdatabound="ProductsGridView_RowDataBound" onrowdeleting="ProductsGridView_RowDeleting" 
+                    onrowupdating="ProductsGridView_RowUpdating" CssClass="hcGrid">
+                    <RowStyle CssClass="hcGridRow" />
+                    <HeaderStyle CssClass="hcGridHeader" />
+                    <AlternatingRowStyle CssClass="hcGridAltRow" />
+                    <Columns>
+                        <asp:BoundField HeaderText="ProductName" DataField="ProductName" HeaderStyle-Width="200px" />
+                        <asp:BoundField HeaderText="ProductSku" DataField="Sku" HeaderStyle-Width="75px" />
+                        <asp:TemplateField HeaderText="MaxDownloads">
+                            <ItemTemplate>
+                                <asp:TextBox ID="MaxDownloadsTextBox" runat="server" CssClass="hcSmall" />
+                                <asp:RegularExpressionValidator ID="MaxDownloadsRegularExpressionValidator" resourcekey="rfvMaxDownloadsTextBox" runat="server"
+                                                                ControlToValidate="MaxDownLoadsTextBox" ValidationExpression="\d{1,5}" Display="Dynamic" CssClass="hcFormError"/>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="AvailableTime">
+                            <ItemTemplate>
+                                <hcc:TimespanPicker ID="TimespanPicker" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>            
+                        <asp:TemplateField HeaderStyle-Width="68px">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="UpdateImageButton" resourcekey="UpdateImageButton" runat="server" CommandName="Update" CssClass="hcIconEdit" />
+                                <asp:LinkButton ID="RemoveImageButton" resourcekey="RemoveImageButton" runat="server" CommandName="Delete" CssClass="hcIconDelete hcDeleteColumn" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                    <EmptyDataTemplate>
+                        <%=Localization.GetString("NoFiles") %>
+                    </EmptyDataTemplate>
+                </asp:GridView>
+            </div>
+        </div>
     </div>
-    <table width="100%">
-        <tr>
-            <td>
-                <h2>Name:</h2>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <asp:Label ID="NameLabel" runat="server" Text=""></asp:Label>
-                <asp:ImageButton ID="ReplaceImageButton" runat="server" AlternateText="Replace" 
-                    ImageUrl="~/DesktopModules/Hotcakes/Core/Admin/Images/Buttons/Replace.png" 
-                    onclick="ReplaceImageButton_Click" /><br /><br />
-                <div style="width:100%;">
-                <asp:Panel ID="ReplacePanel" runat="server" Visible="false" CssClass="controlarea2">
-                    <uc4:FilePicker ID="FilePicker1" runat="server" DisplayShortDescription="false" />
-                    <asp:ImageButton ID="FileReplaceSaveImageButton" runat="server" 
-                        ImageUrl="~/DesktopModules/Hotcakes/Core/Admin/Images/Buttons/SaveChanges.png" 
-                        onclick="FileReplaceSaveImageButton_Click" />
-                    <asp:ImageButton ID="FileReplaceCancelImageButton" runat="server" 
-                        ImageUrl="~/DesktopModules/Hotcakes/Core/Admin/Images/Buttons/Cancel.png" 
-                        onclick="FileReplaceCancelImageButton_Click" />                
-                </asp:Panel>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h2>Description:</h2>
-            </td>
-        </tr>
-        <tr>
-            <td class="formfield">
-                <asp:TextBox ID="DescriptionTextBox" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="DescriptionTextBox"
-                    ErrorMessage="Description is required." ValidationGroup="UpdateDescription">*</asp:RequiredFieldValidator></td>
-        </tr>
-        <tr>
-            <td class="formfield" colspan="2">
-                <asp:ImageButton ID="SaveImageButton" runat="server" ImageUrl="~/DesktopModules/Hotcakes/Core/Admin/Images/Buttons/SaveChanges.png"
-                    ValidationGroup="UpdateDescription" onclick="SaveImageButton_Click" />
-                <asp:ImageButton ID="CancelImageButton" runat="server" ImageUrl="~/DesktopModules/Hotcakes/Core/Admin/Images/Buttons/Cancel.png"
-                    CausesValidation="False" onclick="CancelImageButton_Click" />
-            </td>
-        </tr>
-    </table>
-    &nbsp;&nbsp;
-    <asp:GridView ID="ProductsGridView" runat="server" DataKeyNames="bvin" BorderColor="#CCCCCC"
-        CellPadding="3" GridLines="None" Width="100%" AutoGenerateColumns="False" 
-        BorderWidth="0px" onrowdatabound="ProductsGridView_RowDataBound" 
-        onrowdeleting="ProductsGridView_RowDeleting" 
-        onrowupdating="ProductsGridView_RowUpdating">
-        <RowStyle CssClass="row" />
-        <HeaderStyle CssClass="rowheader" />
-        <AlternatingRowStyle CssClass="alternaterow" />
-        <Columns>
-            <asp:BoundField HeaderText="Product Name" DataField="ProductName" HeaderStyle-Width="200px" />
-            <asp:BoundField HeaderText="Product Sku" DataField="Sku" HeaderStyle-Width="75px" />
-            <asp:TemplateField HeaderText="Max Downloads">
-                <ItemTemplate>
-                    <asp:TextBox ID="MaxDownloadsTextBox" runat="server" Columns="3"></asp:TextBox>
-                    <asp:RegularExpressionValidator ID="MaxDownloadsRegularExpressionValidator" runat="server"
-                        ErrorMessage="Max Downloads must be an integer" Text="*" ControlToValidate="MaxDownLoadsTextBox"
-                        ValidationExpression="\d{1,5}"></asp:RegularExpressionValidator>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="Available Time">
-                <ItemTemplate>
-                    <uc3:TimespanPicker ID="TimespanPicker" runat="server" />
-                </ItemTemplate>
-            </asp:TemplateField>            
-            <asp:TemplateField HeaderStyle-Width="50px">
-                <ItemTemplate>
-                    <asp:ImageButton ID="UpdateImageButton" runat="server" ImageUrl="~/DesktopModules/Hotcakes/Core/Admin/Images/Buttons/Update.png"
-                        CommandName="Update" />
-                    <asp:ImageButton ID="RemoveImageButton" runat="server" ImageUrl="~/DesktopModules/Hotcakes/Core/Admin/Images/Buttons/remove.png"
-                        CommandName="Delete" />
-                </ItemTemplate>
-            </asp:TemplateField>
-        </Columns>
-        <EmptyDataTemplate>
-            This file has no products associated with it.
-        </EmptyDataTemplate>
-    </asp:GridView>
-    <asp:Panel ID="pnlAdd" runat="server" Style="padding: 10px; margin: 5px 0 20px 0;"
-        CssClass="controlarea2" DefaultButton="btnAddProductBySku">
-        Add SKU:
-        <asp:TextBox ID="NewSkuField" runat="Server" Columns="20" TabIndex="200"></asp:TextBox>
-        <asp:ImageButton ID="btnBrowseProducts" runat="server" AlternateText="Browse Products"
-            CausesValidation="False" ImageUrl="~/DesktopModules/Hotcakes/Core/Admin/Images/Buttons/Browse.png" 
-            onclick="btnBrowseProducts_Click" />&nbsp;
-        <asp:ImageButton CausesValidation="false" ID="btnAddProductBySku" runat="server"
-            AlternateText="Add Product To Order" ImageUrl="~/DesktopModules/Hotcakes/Core/Admin/Images/Buttons/AddToProduct.png"
-            TabIndex="220" onclick="btnAddProductBySku_Click" />
-        <asp:Panel CssClass="controlarea1" ID="pnlProductPicker" runat="server" Visible="false">
-            <uc1:ProductPicker ID="ProductPicker1" runat="server" IsMultiSelect="false" />
-            <asp:ImageButton ID="btnProductPickerCancel" CausesValidation="false" runat="server"
-                ImageUrl="~/DesktopModules/Hotcakes/Core/Admin/Images/Buttons/Close.png" 
-                AlternateText="Close Browser" onclick="btnProductPickerCancel_Click" />
-            <asp:ImageButton ID="btnProductPickerOkay" runat="server" AlternateText="Add To Product"
-                CausesValidation="false" 
-                ImageUrl="~/DesktopModules/Hotcakes/Core/Admin/Images/Buttons/AddToProduct.png" 
-                onclick="btnProductPickerOkay_Click" />
-        </asp:Panel>        
-        <asp:Panel ID="pnlProductChoices" runat="server" Visible="false">
-            <asp:ImageButton ID="btnCloseVariants" CausesValidation="false" runat="server"
-                ImageUrl="~/DesktopModules/Hotcakes/Core/Admin/Images/Buttons/Close.png" 
-                AlternateText="Close Browser" onclick="btnCloseVariants_Click" />&nbsp;
-            <asp:ImageButton CausesValidation="false" ID="btnAddVariant" runat="server"
-            AlternateText="Add To Product" ImageUrl="~/DesktopModules/Hotcakes/Core/Admin/Images/Buttons/AddToProduct.png"
-            TabIndex="222" />
-        </asp:Panel>
-    </asp:Panel>
+    
+    <div class="hcFileDetailsWidth">
+        <div class="hcFormItem">
+            <label class="hcLabel"><%=Localization.GetString("lblAddProduct") %></label>
+            <asp:TextBox ID="NewSkuField" runat="Server" />
+        </div>
+        <div class="hcFormItem">
+            <asp:LinkButton ID="btnBrowseProducts" resourcekey="btnBrowseProducts" runat="server" CssClass="hcTertiaryAction" CausesValidation="False" onclick="btnBrowseProducts_Click" /> &nbsp;
+            <asp:LinkButton CausesValidation="false" ID="btnAddProductBySku" resourcekey="btnAddProductBySku" runat="server" CssClass="hcTertiaryAction" onclick="btnAddProductBySku_Click" />
+        </div>
+        <div class="hcFormItem" runat="server" id="pnlProductPicker" Visible="False">
+            <hcc:ProductPicker ID="ProductPicker1" runat="server" IsMultiSelect="false" />
+            <asp:LinkButton ID="btnProductPickerCancel" resourcekey="btnProductPickerCancel" CausesValidation="false" runat="server" CssClass="hcTertiaryAction" onclick="btnProductPickerCancel_Click" />
+            <asp:LinkButton ID="btnProductPickerOkay" resourcekey="btnProductPickerOkay" runat="server" CausesValidation="false" CssClass="hcTertiaryAction" onclick="btnProductPickerOkay_Click" />
+        </div>
+        <div class="hcFormItem" runat="server" id="pnlProductChoices" Visible="False">
+            <asp:LinkButton ID="btnCloseVariants" resourcekey="btnCloseVariants" CausesValidation="false" runat="server" onclick="btnCloseVariants_Click" />&nbsp;
+            <asp:LinkButton CausesValidation="false" ID="btnAddVariant" resourcekey="btnAddVariant" runat="server" />
+        </div>
+    </div>
+
 </asp:Content>

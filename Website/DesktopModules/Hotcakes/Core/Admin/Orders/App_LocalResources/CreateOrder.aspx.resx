@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btnAddCoupon.Text" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="btnCalculateShipping.Text" xml:space="preserve">
+    <value>Get Shipping Rates</value>
+  </data>
+  <data name="btnDeleteCoupon.Text" xml:space="preserve">
+    <value>Delete Coupon</value>
+  </data>
+  <data name="btnFindOrders.Text" xml:space="preserve">
+    <value>Find Orders</value>
+  </data>
+  <data name="btnFindUser.Text" xml:space="preserve">
+    <value>Find Customer</value>
+  </data>
+  <data name="btnFindUsers.Text" xml:space="preserve">
+    <value>Find Customer</value>
+  </data>
+  <data name="btnGoFindOrder.Text" xml:space="preserve">
+    <value>Find this Order</value>
+  </data>
+  <data name="btnNewUsers.Text" xml:space="preserve">
+    <value>New Customer</value>
+  </data>
+  <data name="btnNewUserSave.Text" xml:space="preserve">
+    <value>Add New Customer</value>
+  </data>
+  <data name="btnSelectCustomer.Text" xml:space="preserve">
+    <value>Select Customer</value>
+  </data>
+  <data name="btnSubmit.Text" xml:space="preserve">
+    <value>Place Order</value>
+  </data>
+  <data name="btnUpdateShipping.Text" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="chkBillToSame.Text" xml:space="preserve">
+    <value>Bill to Same Address</value>
+  </data>
+  <data name="CreateUserError.Text" xml:space="preserve">
+    <value>Unable to create account for the customer, Please check the event log.</value>
+  </data>
+  <data name="CustomerPayByCheck.Text" xml:space="preserve">
+    <value>Customer will pay by check.</value>
+  </data>
+  <data name="CustomerPayByPhone.Text" xml:space="preserve">
+    <value>Customer will call with payment info.</value>
+  </data>
+  <data name="CustomerPayCod.Text" xml:space="preserve">
+    <value>Customer will pay cash on delivery.</value>
+  </data>
+  <data name="InvalidCoupon.Text" xml:space="preserve">
+    <value>Coupon code is invalid or is already added.</value>
+  </data>
+  <data name="lblAddCustomer.Text" xml:space="preserve">
+    <value>Add New Customer</value>
+  </data>
+  <data name="lblAddPromoCode.Text" xml:space="preserve">
+    <value>Add Promotional Code</value>
+  </data>
+  <data name="lblBillTo.Text" xml:space="preserve">
+    <value>Bill To</value>
+  </data>
+  <data name="lblCodesUsed.Text" xml:space="preserve">
+    <value>Codes Used</value>
+  </data>
+  <data name="lblCustomerInstructions.Text" xml:space="preserve">
+    <value>Customer's Instructions</value>
+  </data>
+  <data name="lblEmail.Text" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="lblFindCustomerByOrder.Text" xml:space="preserve">
+    <value>Find Customer By Order</value>
+  </data>
+  <data name="lblFirstName.Text" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="lblKeyword.Text" xml:space="preserve">
+    <value>Keyword</value>
+  </data>
+  <data name="lblLastName.Text" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="lblOrderItems.Text" xml:space="preserve">
+    <value>Order Items</value>
+  </data>
+  <data name="lblOrderNumber.Text" xml:space="preserve">
+    <value>Order Number</value>
+  </data>
+  <data name="lblPayment.Text" xml:space="preserve">
+    <value>Payment</value>
+  </data>
+  <data name="lblSearchCustomer.Text" xml:space="preserve">
+    <value>Search for Customer</value>
+  </data>
+  <data name="lblShipping.Text" xml:space="preserve">
+    <value>Shipping</value>
+  </data>
+  <data name="lblShipTo.Text" xml:space="preserve">
+    <value>Ship To</value>
+  </data>
+  <data name="lnkBacktoAbandonedCartsReport.Text" xml:space="preserve">
+    <value>Back to Abandoned Carts Report</value>
+  </data>
+  <data name="NoOrder.Text" xml:space="preserve">
+    <value>That order was not found.</value>
+  </data>
+  <data name="NoUsers.Text" xml:space="preserve">
+    <value>No matching customers were found.</value>
+  </data>
+  <data name="OrderProcessErrors.Text" xml:space="preserve">
+    <value>One or more errors occurred attempting to process the order. Please contact the store administrator.</value>
+  </data>
+  <data name="PageTitle.Text" xml:space="preserve">
+    <value>Create New Order</value>
+  </data>
+  <data name="revEmailAddress.ErrorMessage" xml:space="preserve">
+    <value>Invalid e-mail address</value>
+  </data>
+  <data name="rfCoupon.Text" xml:space="preserve">
+    <value>Coupon code is required</value>
+  </data>
+  <data name="rfvEmailAddress.Text" xml:space="preserve">
+    <value>E-mail address is required</value>
+  </data>
+  <data name="rfvPaymentMethod.Text" xml:space="preserve">
+    <value>Payment method is required</value>
+  </data>
+  <data name="rfvShippingRate.Text" xml:space="preserve">
+    <value>Shipping rate is invalid</value>
+  </data>
+  <data name="UserFound.Text" xml:space="preserve">
+    <value>User found ({0}) and selected.</value>
+  </data>
+  <data name="UsersFound.Text" xml:space="preserve">
+    <value>Found {0} matching customers;.</value>
+  </data>
+</root>

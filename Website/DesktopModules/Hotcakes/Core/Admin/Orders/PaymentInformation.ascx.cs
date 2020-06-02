@@ -55,10 +55,10 @@ namespace Hotcakes.Modules.Core.Admin.Orders
                 }
                 else
                 {
-                    lblPaymentAuthorized.Text = "N/A";
-                    lblPaymentCharged.Text = "N/A";
-                    lblPaymentRefunded.Text = "N/A";
-                    lblReturnedItems.Text = "N/A";
+                    lblPaymentAuthorized.Text = Localization.GetString("NotApplicable");
+                    lblPaymentCharged.Text = Localization.GetString("NotApplicable");
+                    lblPaymentRefunded.Text = Localization.GetString("NotApplicable");
+                    lblReturnedItems.Text = Localization.GetString("NotApplicable");
                 }
                 lblPaymentDue.Text = paySummary.AmountDue.ToString("C");
             }

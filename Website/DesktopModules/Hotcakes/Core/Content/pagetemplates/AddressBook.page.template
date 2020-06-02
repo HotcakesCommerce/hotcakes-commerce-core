@@ -3,7 +3,7 @@
   <tab>
     <visible>true</visible>
     <name>Address Book</name>
-		<skinsrc>[G]Skins/Xcillion/Home.ascx</skinsrc>
+		<skinsrc>[G]Skins/Xcillion/Inner.ascx</skinsrc>
 		<tabpermissions>
       <permission>
         <permissioncode>SYSTEM_TAB</permissioncode>

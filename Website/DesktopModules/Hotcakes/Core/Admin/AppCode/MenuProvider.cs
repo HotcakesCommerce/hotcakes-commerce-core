@@ -26,9 +26,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Hosting;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using DotNetNuke.Common.Utilities;
+using DotNetNuke.Services.Localization;
 using Hotcakes.Commerce;
 using Hotcakes.Modules.Core.AppCode;
 
@@ -37,7 +40,26 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
     [Serializable]
     public class MenuProvider
     {
-        private const string _MenuFileVirtualPath = "~/desktopmodules/hotcakes/core/admin/menu.xml";
+        protected static string LocalResourceFile
+        {
+            get
+            {
+                string language = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
+                if (System.Web.HttpContext.Current.Request.Cookies["language"] != null)
+                {
+                    language = string.Concat(".", HttpContext.Current.Request.Cookies["language"].Value);
+                }
+
+                if (language.ToLower() == ".en-us")
+                {
+                    language = string.Empty;
+                }
+
+                return (string.Format("~/DesktopModules/Hotcakes/Core/Admin/App_LocalResources/AdminControlBar{0}.resx", language));
+            }
+        }
+
+        private const string _MenuFileVirtualPath = "~/DesktopModules/Hotcakes/Core/Admin/Menu.xml";
 
         private static List<MenuItem> _menuItems;
 
@@ -45,11 +67,15 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
         {
             get
             {
-                if (_menuItems == null)
+                var cacheKey = string.Concat("_menuItems", HttpContext.Current.Request.Cookies["language"].Value);
+                if (DataCache.GetCache(cacheKey) != null)
+                    _menuItems = (List<MenuItem>)DataCache.GetCache(cacheKey);
+                else
                 {
                     var _menuFilePath = HostingEnvironment.MapPath(_MenuFileVirtualPath);
                     var xml = XElement.Load(_menuFilePath);
                     _menuItems = ParseXml(xml);
+                    DataCache.SetCache(cacheKey, _menuItems);
                 }
                 return _menuItems;
             }
@@ -132,6 +158,8 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
 
         private static List<MenuItem> ParseXml(XElement el)
         {
+            string LocalizedFile = LocalResourceFile;
+
             if (!el.HasElements)
             {
                 return new List<MenuItem>();
@@ -140,7 +168,8 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
                 .Select(e => new MenuItem
                 {
                     Name = e.GetAttributeValue("Name"),
-                    Text = e.GetAttributeValue("Text"),
+                    //Localize Text String that Loaded from Menu.xml
+                    Text = Localization.GetString(e.GetAttributeValue("Text"), LocalizedFile),
                     BaseUrl = e.GetAttributeValue("BaseUrl"),
                     Url = e.GetAttributeValue("Url"),
                     PermissionToken = e.GetAttributeValue("Permission"),

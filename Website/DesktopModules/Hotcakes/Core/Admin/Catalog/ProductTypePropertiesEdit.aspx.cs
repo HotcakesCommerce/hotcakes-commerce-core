@@ -13,7 +13,7 @@
 // The above copyright notice and this permission notice shall be included in all copies or 
 // substantial portions of the Software.
 // 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY daOF ANY KIND, EXPRESS OR 
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
@@ -28,16 +28,18 @@ using System.Globalization;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Hotcakes.Commerce;
 using Hotcakes.Commerce.Catalog;
+using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Modules.Core.Admin.AppCode;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
     partial class ProductTypePropertiesEdit : BaseAdminPage
     {
         public long? _productPropertyId;
+        private const string DATEFORMAT = "MM/dd/yyyy";
 
         public long? ProductPropertyId
         {
@@ -60,7 +62,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            PageTitle = "Edit Product Type Property";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Catalog;
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
         }
@@ -69,10 +71,9 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         {
             base.OnInit(e);
 
-            rgChoices.NeedDataSource += rgChoices_NeedDataSource;
-            rgChoices.ItemDataBound += rgChoices_ItemDataBound;
-            rgChoices.DeleteCommand += rgChoices_DeleteCommand;
-            rgChoices.EditCommand += rgChoices_EditCommand;
+            rgChoices.RowDataBound += rgChoices_RowDataBound;
+            rgChoices.RowDeleting += rgChoices_RowDeleting;
+            rgChoices.RowEditing += rgChoices_RowEditing;
 
             btnUpdateChoice.Click += btnUpdateChoice_Click;
             btnCancelUpdateChoice.Click += btnCancelUpdateChoice_Click;
@@ -88,9 +89,17 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 {
                     Response.Redirect("ProductTypeProperties.aspx");
                 }
+
+                LocalizeView();
                 PopulateCultureCodeList();
                 LoadProperty(property);
             }
+        }
+
+        private void LocalizeView()
+        {
+            var localization = Factory.Instance.CreateLocalizationHelper(LocalResourceFile);
+            LocalizationUtils.LocalizeGridView(rgChoices, localization);
         }
 
         private void PopulateCultureCodeList()
@@ -136,9 +145,9 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                             !DateTime.TryParse(property.DefaultValue, CultureInfo.InvariantCulture, DateTimeStyles.None,
                                 out selectedDate))
                         {
-                            selectedDate = DateTime.Now;
+                            selectedDate = DateTime.UtcNow;
                         }
-                        radDefaultDate.SelectedDate = selectedDate;
+                        radDefaultDate.Text = selectedDate.ToString(DATEFORMAT);
                     }
                     break;
                 case ProductPropertyType.MultipleChoiceField:
@@ -158,12 +167,12 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
         private void PopulateMultipleChoice(ProductProperty property)
         {
-            rgChoices.Rebind();
+            BindGridView();
 
-            foreach (GridDataItem item in rgChoices.MasterTableView.Items)
+            foreach (GridViewRow row in rgChoices.Rows)
             {
-                var chbDefault = item.FindControl("chbDefault") as CheckBox;
-                var choiceId = item.GetDataKeyValue("Id").ToString();
+                var chbDefault = row.FindControl("chbDefault") as CheckBox;
+                var choiceId = rgChoices.DataKeys[row.RowIndex]["Id"].ToString();
                 if (choiceId == property.DefaultValue)
                 {
                     chbDefault.Checked = true;
@@ -172,34 +181,32 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             }
         }
 
-        private void rgChoices_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
+        private void BindGridView()
         {
             var property = HccApp.CatalogServices.ProductProperties.Find(ProductPropertyId.Value);
 
-            if (property.Choices != null)
+            if (property != null && property.Choices != null && property.Choices.Count > 0)
             {
                 property.Choices = property.Choices.OrderBy(y => y.SortOrder).ToList();
+                rgChoices.DataSource = property.Choices;
+                rgChoices.DataBind();
             }
-
-            rgChoices.DataSource = property.Choices;
         }
 
-        private void rgChoices_ItemDataBound(object sender, GridItemEventArgs e)
+        private void rgChoices_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Item.ItemType == GridItemType.Item || e.Item.ItemType == GridItemType.AlternatingItem)
+            if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                var productPropertyChoice = e.Item.DataItem as ProductPropertyChoice;
-                e.Item.Attributes["productPropertyChoiceId"] = productPropertyChoice.Id.ToString();
+                var productPropertyChoice = e.Row.DataItem as ProductPropertyChoice;
+                e.Row.Attributes["productPropertyChoiceId"] = productPropertyChoice.Id.ToString();
             }
         }
 
-        private void rgChoices_EditCommand(object sender, GridCommandEventArgs e)
+        private void rgChoices_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            e.Canceled = true;
-            e.Item.Edit = false;
-            e.Item.Selected = false;
+            e.Cancel = true;
 
-            ProductPropertyChoiceId = (long) (e.Item as GridDataItem).GetDataKeyValue("Id");
+            var ProductPropertyChoiceId = long.Parse(rgChoices.DataKeys[e.NewEditIndex]["Id"].ToString());
             var prop = HccApp.CatalogServices.ProductProperties.Find(ProductPropertyId.Value);
             var choice = prop.Choices.FirstOrDefault(y => y.Id == ProductPropertyChoiceId);
 
@@ -209,9 +216,9 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             ShowEditor(true);
         }
 
-        private void rgChoices_DeleteCommand(object sender, GridCommandEventArgs e)
+        private void rgChoices_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            var choiceId = (long) (e.Item as GridDataItem).GetDataKeyValue("Id");
+            var choiceId = long.Parse(rgChoices.DataKeys[e.RowIndex]["Id"].ToString());
             var prop = HccApp.CatalogServices.ProductProperties.Find(ProductPropertyId.Value);
             var c = prop.Choices.FirstOrDefault(y => y.Id == choiceId);
             if (c != null)
@@ -219,7 +226,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 prop.Choices.Remove(c);
                 HccApp.CatalogServices.ProductProperties.Update(prop);
             }
-            rgChoices.Rebind();
+            BindGridView();
             ShowEditor(false);
         }
 
@@ -234,22 +241,21 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
                 if (HccApp.CatalogServices.ProductProperties.Update(prop))
                 {
-                    rgChoices.Rebind();
+                    BindGridView();
                 }
                 else
                 {
-                    msg.ShowError("Couldn't add choice!");
+                    msg.ShowError(Localization.GetString("AddChoiceFailure"));
                 }
 
-                rgChoices.Rebind();
+                BindGridView();
                 ShowEditor(false);
             }
         }
 
         private void btnCancelUpdateChoice_Click(object sender, EventArgs e)
         {
-            rgChoices.EditIndexes.Clear();
-            rgChoices.Rebind();
+            BindGridView();
             ShowEditor(false);
         }
 
@@ -277,19 +283,19 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                         break;
                     case ProductPropertyType.MultipleChoiceField:
                         var selectedValue = string.Empty;
-                        foreach (GridDataItem item in rgChoices.MasterTableView.Items)
+                        foreach (GridViewRow row in rgChoices.Rows)
                         {
-                            var chbDefault = item.FindControl("chbDefault") as CheckBox;
+                            var chbDefault = row.FindControl("chbDefault") as CheckBox;
                             if (chbDefault != null && chbDefault.Checked)
                             {
-                                selectedValue = item.GetDataKeyValue("Id").ToString();
+                                selectedValue = rgChoices.DataKeys[row.RowIndex]["Id"].ToString();
                                 break;
                             }
                         }
                         prop.DefaultValue = selectedValue;
                         break;
                     case ProductPropertyType.DateField:
-                        prop.DefaultValue = string.Format("{0:d}", radDefaultDate.SelectedDate,
+                        prop.DefaultValue = string.Format("{0:d}", radDefaultDate.Text.Trim(),
                             CultureInfo.InvariantCulture);
                         break;
                     case ProductPropertyType.TextField:
@@ -307,7 +313,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 }
                 else
                 {
-                    msg.ShowError("Error: Couldn't Save Property!");
+                    msg.ShowError(Localization.GetString("SavePropertyFailure"));
                 }
             }
         }
@@ -328,11 +334,11 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 prop.Choices.Add(ppc);
                 if (HccApp.CatalogServices.ProductProperties.Update(prop))
                 {
-                    rgChoices.Rebind();
+                    BindGridView();
                 }
                 else
                 {
-                    msg.ShowError("Couldn't add choice!");
+                    msg.ShowError(Localization.GetString("AddChoiceFailure"));
                 }
                 txtNewChoice.Text = string.Empty;
 

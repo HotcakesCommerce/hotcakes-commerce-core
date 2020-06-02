@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Step1General.ascx.cs" Inherits="Hotcakes.Modules.Core.Admin.SetupWizard.Step1General" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register Src="../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
 <%@ Register Src="../Controls/ImageUploader.ascx" TagName="ImageUploader" TagPrefix="hcc" %>
 <%@ Register Src="../Controls/AddressNormalizationDialog.ascx" TagName="AddressNormalizationDialog" TagPrefix="hcc" %>
@@ -34,39 +33,39 @@
                     <div class="hcFormMessage hcAddressMessage"></div>
                     <div class="hcFormItem">
                         <asp:Label ID="lblCountry" resourcekey="lblCountry" AssociatedControlID="ddlCountries" runat="server" CssClass="hcLabel" />
-                        <telerik:RadComboBox ID="ddlCountries" AutoPostBack="true" runat="server" CausesValidation="false" OnSelectedIndexChanged="ddlCountries_SelectedIndexChanged" />
+                        <asp:DropDownList ID="ddlCountries" AutoPostBack="true" runat="server" CausesValidation="false" OnSelectedIndexChanged="ddlCountries_SelectedIndexChanged" />
                     </div>
                     <div class="hcFormItem hcFormItem50p">
-                        <telerik:RadTextBox ID="txtFirstName" CssClass="hcInput50p" runat="server" />
+                        <asp:TextBox ID="txtFirstName" CssClass="hcInput50p" runat="server" MaxLength="255" />
                     </div>
                     <div class="hcFormItem hcFormItem50p">
-                        <telerik:RadTextBox ID="txtLastName" CssClass="hcInput50p" runat="server" />
+                        <asp:TextBox asp:TextBox ID="txtLastName" CssClass="hcInput50p" runat="server" MaxLength="255" />
                     </div>
                     <div class="hcFormItem">
-                        <telerik:RadTextBox ID="txtCompany" runat="server" />
+                        <asp:TextBox ID="txtCompany" runat="server" MaxLength="255" CssClass="hcFormItem100pct" />
                     </div>
                     <div class="hcFormItem">
-                        <telerik:RadTextBox ID="txtAddressLine1" runat="server" />
+                        <asp:TextBox ID="txtAddressLine1" runat="server" MaxLength="255" CssClass="hcFormItem100pct" />
                         <asp:RequiredFieldValidator id="rfvAddress1" ControlToValidate="txtAddressLine1" Display="Dynamic" CssClass="hcFormError" runat="server" />
                     </div>
                     <div class="hcFormItem">
-                        <telerik:RadTextBox ID="txtAddressLine2" runat="server" />
+                        <asp:TextBox ID="txtAddressLine2" runat="server" MaxLength="255" CssClass="hcFormItem100pct" />
                     </div>
                     <div class="hcFormItem">
-                        <telerik:RadTextBox ID="txtCity" CssClass="hcInput33p" runat="server" />
+                        <asp:TextBox ID="txtCity" runat="server" MaxLength="255" CssClass="hcFormItem100pct" />
                         <asp:RequiredFieldValidator ID="rfvCity" ControlToValidate="txtCity" Display="Dynamic" CssClass="hcFormError" runat="server" />
                     </div>
                     <div class="hcFormItem hcFormItem50p">
-                        <telerik:RadComboBox ID="ddlRegions" CssClass="hcInput33p" runat="server" />
-                        <telerik:RadTextBox ID="txtRegion" CssClass="hcInput33p" Visible="false" runat="server" />
+                        <asp:DropDownList ID="ddlRegions" CssClass="hcInput33p" runat="server" />
+                        <asp:TextBox ID="txtRegion" CssClass="hcInput33p" Visible="false" runat="server" MaxLength="255" />
                         <asp:CompareValidator ID="valRegion" ControlToValidate="ddlRegions" Operator="NotEqual" Display="Dynamic" CssClass="hcFormError" runat="server" />
                     </div>
                     <div class="hcFormItem hcFormItem50p">
-                        <telerik:RadTextBox ID="txtZip" CssClass="hcInput33p" runat="server" />
+                        <asp:TextBox ID="txtZip" CssClass="hcInput33p" runat="server" MaxLength="50" />
                         <asp:RequiredFieldValidator ID="rfvZip" ControlToValidate="txtZip" Display="Dynamic" CssClass="hcFormError" runat="server" />
                     </div>
                     <div class="hcFormItem">
-                        <telerik:RadTextBox ID="txtPhone" runat="server" />
+                        <asp:TextBox ID="txtPhone" runat="server" MaxLength="50" CssClass="hcFormItem100pct" />
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
@@ -78,11 +77,11 @@
             <hcc:MessageBox ID="ucMessageBox" runat="server" AddValidationSummaries="false" />
             <div class="hcFormItem">
                 <asp:Label resourcekey="TimeZone" AssociatedControlID="ddlTimeZone" runat="server" CssClass="hcLabel" />
-                <telerik:RadComboBox ID="ddlTimeZone" runat="server" />
+                <asp:DropDownList ID="ddlTimeZone" runat="server" />
             </div>
             <div class="hcFormItem">
                 <asp:Label resourcekey="CurrencyCulture" AssociatedControlID="ddlCurrencyCulture" runat="server" CssClass="hcLabel" />
-                <telerik:RadComboBox ID="ddlCurrencyCulture" runat="server" AutoPostBack="true" CausesValidation="false"
+                <asp:DropDownList ID="ddlCurrencyCulture" runat="server" AutoPostBack="true" CausesValidation="false"
                     OnSelectedIndexChanged="ddlCurrencyCulture_SelectedIndexChanged" />
             </div>
         </div>
@@ -94,30 +93,30 @@
                 <asp:Label AssociatedControlID="txtCategoryUrl" runat="server" CssClass="hcLabel">
                 <%=Localization.GetString("Category") %> <i class="hcIconInfo"><span class="hcFormInfo Hidden"><%=Localization.GetString("CategoryHelp") %></span></i>
                 </asp:Label>
-                <telerik:RadComboBox ID="ddlCategoryTab" runat="server" />
+                <asp:DropDownList ID="ddlCategoryTab" runat="server" />
             </div>
             <div runat="server" id="divCategoryUrl" class="hcFormItem">
-                <telerik:RadTextBox ID="txtCategoryUrl" runat="server" />
+                <asp:TextBox ID="txtCategoryUrl" runat="server" MaxLength="255" />
                 <asp:RequiredFieldValidator runat="server" ID="rfvCategoryUrl" ControlToValidate="txtCategoryUrl" Display="Dynamic" CssClass="hcFormError" />
             </div>
             <div class="hcFormItem">
                 <asp:Label ID="lblProductsUrl" AssociatedControlID="txtProductsUrl" runat="server" CssClass="hcLabel">
                    <%=Localization.GetString("Products") %> <i class="hcIconInfo"><span class="hcFormInfo Hidden"><%=Localization.GetString("ProductsHelp") %></span></i>
                 </asp:Label>
-                <telerik:RadComboBox ID="ddlProductsTab" runat="server" />
+                <asp:DropDownList ID="ddlProductsTab" runat="server" />
             </div>
             <div runat="server" id="divProductsUrl" class="hcFormItem">
-                <telerik:RadTextBox ID="txtProductsUrl" runat="server" />
+                <asp:TextBox ID="txtProductsUrl" runat="server" MaxLength="255" />
                 <asp:RequiredFieldValidator runat="server" ID="rfvProductsUrl" ControlToValidate="txtProductsUrl" Display="Dynamic" CssClass="hcFormError" />
             </div>
             <div class="hcFormItem">
                 <asp:Label ID="lblCheckoutUrl" AssociatedControlID="txtCheckoutUrl" runat="server" CssClass="hcLabel">
                     <%=Localization.GetString("Checkout") %> <i class="hcIconInfo"><span class="hcFormInfo Hidden"><%=Localization.GetString("CheckoutHelp") %></span></i>
                 </asp:Label>
-                <telerik:RadComboBox ID="ddlCheckoutTab" runat="server" />
+                <asp:DropDownList ID="ddlCheckoutTab" runat="server" />
             </div>
             <div runat="server" id="divCheckoutUrl" class="hcFormItem">
-                <telerik:RadTextBox ID="txtCheckoutUrl" runat="server" />
+                <asp:TextBox ID="txtCheckoutUrl" runat="server" MaxLength="255" />
                 <asp:RequiredFieldValidator runat="server" ID="rfvCheckoutUrl" ControlToValidate="txtCheckoutUrl" Display="Dynamic" CssClass="hcFormError" />
             </div>
         </div>
@@ -144,66 +143,65 @@
         var AddressValidationInputs = createAddressValidationInputs();
         AddressValidationInputs.init(".hcAddress", ".hcAddressMessage");
 
-        /* As long as we use telerik controls we should use specific getters and setters */
         AddressValidationInputs.getCountry = function () {
-            return $find("<%= ddlCountries.ClientID %>").get_value();
+            return $("#<%= ddlCountries.ClientID %>").val();
         };
         AddressValidationInputs.setCountry = function (value) {
-            $find("<%= ddlCountries.ClientID %>").set_value(value);
+            $find("#<%= ddlCountries.ClientID %>").val(value);
         };
         AddressValidationInputs.getFirstName = function () {
-            return $find("<%= txtFirstName.ClientID %>").get_value();
+            return $("#<%= txtFirstName.ClientID %>").val();
         };
         AddressValidationInputs.setFirstName = function (value) {
-            $find("<%= txtFirstName.ClientID %>").set_value(value);
+            $("#<%= txtFirstName.ClientID %>").val(value);
         };
         AddressValidationInputs.getLastName = function () {
-            return $find("<%= txtLastName.ClientID %>").get_value();
+            return $("#<%= txtLastName.ClientID %>").val();
         };
         AddressValidationInputs.setLastName = function (value) {
-            $find("<%= txtLastName.ClientID %>").set_value(value);
+            $("#<%= txtLastName.ClientID %>").val(value);
         };
         AddressValidationInputs.getCompany = function () {
-            return $find("<%= txtCompany.ClientID %>").get_value();
+            return $("#<%= txtCompany.ClientID %>").val();
         };
         AddressValidationInputs.setCompany = function (value) {
-            $find("<%= txtCompany.ClientID %>").set_value(value);
+            $("#<%= txtCompany.ClientID %>").val(value);
         };
         AddressValidationInputs.getAddressLine1 = function () {
-            return $find("<%= txtAddressLine1.ClientID %>").get_value();
+            return $("#<%= txtAddressLine1.ClientID %>").val();
         };
         AddressValidationInputs.setAddressLine1 = function (value) {
-            $find("<%= txtAddressLine1.ClientID %>").set_value(value);
+            $("#<%= txtAddressLine1.ClientID %>").val(value);
         };
         AddressValidationInputs.getAddressLine2 = function () {
-            return $find("<%= txtAddressLine2.ClientID %>").get_value();
+            return $("#<%= txtAddressLine2.ClientID %>").val();
         };
         AddressValidationInputs.setAddressLine2 = function (value) {
-            $find("<%= txtAddressLine2.ClientID %>").set_value(value);
+            $("#<%= txtAddressLine2.ClientID %>").val(value);
         };
         AddressValidationInputs.getCity = function () {
-            return $find("<%= txtCity.ClientID %>").get_value();
+            return $("#<%= txtCity.ClientID %>").val();
         };
         AddressValidationInputs.setCity = function (value) {
-            $find("<%= txtCity.ClientID %>").set_value(value);
+            $("#<%= txtCity.ClientID %>").val(value);
         };
         AddressValidationInputs.getRegion = function () {
-            return $find("<%= ddlRegions.ClientID %>").get_value();
+            return $("#<%= ddlRegions.ClientID %>").val();
         };
         AddressValidationInputs.setRegion = function (value) {
-            $find("<%= ddlRegions.ClientID %>").set_value(value);
+            $("#<%= ddlRegions.ClientID %>").val(value);
         };
         AddressValidationInputs.getPostalCode = function () {
-            return $find("<%= txtZip.ClientID %>").get_value();
+            return $("#<%= txtZip.ClientID %>").val();
         };
         AddressValidationInputs.setPostalCode = function (value) {
-            $find("<%= txtZip.ClientID %>").set_value(value);
+            $("#<%= txtZip.ClientID %>").val(value);
         };
         AddressValidationInputs.getPhone = function () {
-            return $find("<%= txtPhone.ClientID %>").get_value();
+            return $("#<%= txtPhone.ClientID %>").val();
         };
         AddressValidationInputs.setPhone = function (value) {
-            $find("<%= txtPhone.ClientID %>").set_value(value);
+            $("#<%= txtPhone.ClientID %>").val(value);
         };
 
         /* Create and init address validator */

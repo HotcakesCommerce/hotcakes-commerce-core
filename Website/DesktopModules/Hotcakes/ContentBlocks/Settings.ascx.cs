@@ -23,10 +23,10 @@
 
 #endregion
 
+using System.Web.UI.WebControls;
 using Hotcakes.Commerce.Dnn.Utils;
 using Hotcakes.Commerce.Dnn.Web;
 using Hotcakes.Modules.Core.Settings;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.ContentBlocks
 {
@@ -39,12 +39,12 @@ namespace Hotcakes.Modules.ContentBlocks
         /// </summary>
         private void FillForm()
         {
-            ViewComboBox.Items.Add(new RadComboBoxItem(LocalizeString("NoneSelectedText"), string.Empty));
+            ViewComboBox.Items.Add(new ListItem(LocalizeString("NoneSelectedText"), string.Empty));
             ViewComboBox.AppendDataBoundItems = true;
             ViewComboBox.DataSource = DnnPathHelper.GetViewNames("ContentColumn");
             ViewComboBox.DataBind();
 
-            ContentBlocksComboBox.Items.Add(new RadComboBoxItem(LocalizeString("NoneSelectedText"), string.Empty));
+            ContentBlocksComboBox.Items.Add(new ListItem(LocalizeString("NoneSelectedText"), string.Empty));
             ContentBlocksComboBox.AppendDataBoundItems = true;
             ContentBlocksComboBox.DataSource = HccApp.ContentServices.Columns.FindAll();
             ContentBlocksComboBox.DataTextField = "DisplayName";

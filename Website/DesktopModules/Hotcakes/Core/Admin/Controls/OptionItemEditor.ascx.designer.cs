@@ -58,6 +58,15 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         protected global::System.Web.UI.WebControls.TextBox txtItemName;
         
         /// <summary>
+        /// rfvItemName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvItemName;
+        
+        /// <summary>
         /// txtItemPrice control.
         /// </summary>
         /// <remarks>
@@ -67,6 +76,24 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         protected global::System.Web.UI.WebControls.TextBox txtItemPrice;
         
         /// <summary>
+        /// rfvItemPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvItemPrice;
+        
+        /// <summary>
+        /// cvItemPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvItemPrice;
+        
+        /// <summary>
         /// txtItemWeight control.
         /// </summary>
         /// <remarks>
@@ -74,6 +101,24 @@ namespace Hotcakes.Modules.Core.Admin.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtItemWeight;
+        
+        /// <summary>
+        /// rfvItemWeight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvItemWeight;
+        
+        /// <summary>
+        /// cvItemWeight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvItemWeight;
         
         /// <summary>
         /// cbItemIsLabel control.

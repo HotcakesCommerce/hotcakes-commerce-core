@@ -32,10 +32,10 @@ using System.Web.Mvc;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Analytics;
 using Hotcakes.Commerce.Catalog;
+using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Content;
 using Hotcakes.Commerce.Extensions;
 using Hotcakes.Commerce.Search;
-using Hotcakes.Commerce.Social;
 using Hotcakes.Commerce.Storage;
 using Hotcakes.Commerce.Urls;
 using Hotcakes.Commerce.Utilities;
@@ -130,6 +130,27 @@ namespace Hotcakes.Modules.Core.Controllers
                 model.SortSelectList = LoadSortSelectList(model.LocalCategory, GetSort(model.LocalCategory), true);
             }
 
+            if (AuthorizedToEditCatalog())
+            {
+                if (!string.IsNullOrEmpty(model.LocalCategory.Bvin))
+                {
+                    model.CategoryAnalyticsUrl = string.Format(CategoryAnalyticsUrlFormat, model.LocalCategory.Bvin);
+                    model.CategoryEditUrl = string.Format(CategoryEditUrlFormat, model.LocalCategory.Bvin);
+                }
+                else
+                {
+                    model.CategoriesManagementUrl = CategoriesAdminUrl;
+                    model.ProductsManagementUrl = ProductsAdminUrl;
+                }
+
+                model.StoreAdminUrl = DashboardAdminUrl;
+                model.AuthorizedToEditCatalog = true;
+            }
+            else
+            {
+                model.AuthorizedToEditCatalog = false;
+            }
+
             LogCategoryViewActivity(model.LocalCategory);
 
             return View(viewName, model);
@@ -167,8 +188,10 @@ namespace Hotcakes.Modules.Core.Controllers
             if (!string.IsNullOrWhiteSpace(model.LocalCategory.Bvin))
             {
                 var socialService = HccApp.SocialService;
+                socialService.SaveCategoryToJournal(model.LocalCategory);
 
-                model.SocialItem = socialService.GetCategorySocialItem(model.LocalCategory);
+                // Obsolete in 3.0 - may need to consider adding back in a future release, if integrating with Evoq Social again
+                //model.SocialItem = socialService.GetCategorySocialItem(model.LocalCategory);
 
                 RenderFacebookMetaTags(model);
             }
@@ -222,17 +245,18 @@ namespace Hotcakes.Modules.Core.Controllers
             {
                 var faceBookAdmins = HccApp.CurrentStore.Settings.FaceBook.Admins;
                 var faceBookAppId = HccApp.CurrentStore.Settings.FaceBook.AppId;
+                var canonicalUrl = HccUrlBuilder.RouteHccUrl(HccRoute.Category, new {slug = model.LocalCategory.RewriteUrl.ToLower()});
 
                 var sb = new StringBuilder();
 
-                sb.Append("<!-- FaceBook OpenGraph Tags -->");
-                sb.AppendFormat("<meta property=\"og:title\" content=\"{0}\"/>", PageTitle);
-                sb.Append("<meta property=\"og:type\" content=\"product\"/>");
-                sb.AppendFormat("<meta property=\"og:url\" content=\"{0}\"/>", ViewBag.CurrentUrl);
-                sb.AppendFormat("<meta property=\"og:image\" content=\"{0}\"/>", model.LocalCategory.ImageUrl);
-                sb.AppendFormat("<meta property=\"og:site_name\" content=\"{0}\" />", ViewBag.StoreName);
-                sb.AppendFormat("<meta property=\"fb:admins\" content=\"{0}\" />", faceBookAdmins);
-                sb.AppendFormat("<meta property=\"fb:app_id\" content=\"{0}\" />", faceBookAppId);
+                sb.AppendFormat(Constants.TAG_CANONICAL, canonicalUrl);
+                sb.AppendFormat(Constants.TAG_OGTITLE, PageTitle);
+                sb.Append(Constants.TAG_OGTYPE);
+                sb.AppendFormat(Constants.TAG_OGURL, canonicalUrl);
+                sb.AppendFormat(Constants.TAG_OGIMAGE, model.LocalCategory.ImageUrl);
+                sb.AppendFormat(Constants.TAG_OGSITENAME, ViewBag.StoreName);
+                sb.AppendFormat(Constants.TAG_OGFBADMIN, faceBookAdmins);
+                sb.AppendFormat(Constants.TAG_OGFBAPPID, faceBookAppId);
 
                 RenderToHead("FaceBookMetaTags", sb.ToString());
             }
@@ -317,7 +341,7 @@ namespace Hotcakes.Modules.Core.Controllers
             var queryAdv = BuildDrillDownQuery(filter);
             var result = manager.DoProductSearch(HccApp.CurrentStore.Id, null, queryAdv, pageNumber, pageSize);
 
-            model.Manufactures = sett.ShowManufactures
+            model.Manufacturers = sett.ShowManufacturers
                 ? ToCheckBoxItems(result.Manufacturers, result.SelectedManufacturers, result.TotalCount)
                 : new List<CheckboxFacetItem>();
             model.Vendors = sett.ShowVendors
@@ -408,7 +432,7 @@ namespace Hotcakes.Modules.Core.Controllers
             {
                 MinPrice = filter.MinPrice,
                 MaxPrice = filter.MaxPrice,
-                Manufactures = filter.Manufactures ?? new List<string>(),
+                Manufacturers = filter.Manufacturers ?? new List<string>(),
                 Vendors = filter.Vendors ?? new List<string>(),
                 Types = filter.Types ?? new List<string>(),
                 Categories = new List<string> {filter.CategoryId},

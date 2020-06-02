@@ -419,7 +419,7 @@ namespace Hotcakes.Commerce.Search
                 var queryTypes = query.Types.
                     Select(bvin => DataTypeHelper.BvinToNullableGuid(bvin)).
                     ToList();
-                var queryManufactures = query.Manufactures.
+                var queryManufacturers = query.Manufacturers.
                     Select(bvin => DataTypeHelper.BvinToNullableGuid(bvin)).
                     ToList();
                 var queryVendors = query.Vendors.
@@ -436,8 +436,8 @@ namespace Hotcakes.Commerce.Search
                 }
                 if (queryTypes.Count > 0)
                     dbQueryJ = dbQueryJ.Where(s => queryTypes.Contains(s.p.ProductTypeId));
-                if (queryManufactures.Count > 0)
-                    dbQueryJ = dbQueryJ.Where(s => queryManufactures.Contains(s.p.ManufacturerID));
+                if (queryManufacturers.Count > 0)
+                    dbQueryJ = dbQueryJ.Where(s => queryManufacturers.Contains(s.p.ManufacturerID));
                 if (queryVendors.Count > 0)
                     dbQueryJ = dbQueryJ.Where(s => queryVendors.Contains(s.p.VendorID));
                 if (query.Properties.Count > 0)
@@ -702,7 +702,7 @@ namespace Hotcakes.Commerce.Search
                     ToList();
 
                 result.SelectedManufacturers = context.hcc_Manufacturer.
-                    Where(m => queryManufactures.Contains(m.bvin)).
+                    Where(m => queryManufacturers.Contains(m.bvin)).
                     Select(m => new InternalSelectedFacetItem
                     {
                         Id = m.bvin,

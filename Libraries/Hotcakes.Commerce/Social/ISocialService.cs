@@ -37,8 +37,6 @@ namespace Hotcakes.Commerce.Social
         void UpdateCategoryTaxonomy(Category cat, IEnumerable<string> taxonomyTags);
         IEnumerable<string> GetTaxonomyTerms(Product product);
         IEnumerable<string> GetTaxonomyTerms(Category category);
-        ISocialItem GetProductSocialItem(Product product);
-        ISocialItem GetCategorySocialItem(Category cat);
         void SaveProductToJournal(Product product);
         void SaveCategoryToJournal(Category cat);
     }

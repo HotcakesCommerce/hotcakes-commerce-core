@@ -1,6 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Settings.ascx.cs" Inherits="Hotcakes.Modules.Top10Products.Settings" %>
 <%@ Register Src="../../../controls/labelcontrol.ascx" TagName="labelcontrol" TagPrefix="dnn" %>
-<%@ Register TagPrefix="telerik" Namespace="Telerik.Web.UI" Assembly="Telerik.Web.UI" %>
 <div class="dnnFormMessage dnnFormInfo">
     <asp:Label runat="server" resourcekey="SettingsHint" />
 </div>
@@ -12,8 +11,7 @@
         </div>
         <div class="dnnFormItem">
             <dnn:labelcontrol id="ViewSelectionLabel" controlname="ViewComboBox" suffix=":" runat="server" />
-            <telerik:RadComboBox ID="ViewComboBox" runat="server" Width="250px" Height="150px"
-                EnableLoadOnDemand="False" ShowMoreResultsBox="false" EnableVirtualScrolling="false" />
+            <asp:DropDownList ID="ViewComboBox" runat="server"/>
         </div>
     </fieldset>
 </div>

@@ -99,13 +99,11 @@
     <Compile Include="v1\Contacts\AddressDTO.cs" />
     <Compile Include="v1\Contacts\AddressTypesDTO.cs" />
     <Compile Include="v1\Contacts\AffiliateCommissionTypeDTO.cs" />
-    <Compile Include="v1\Contacts\AffiliateContactDTO.cs" />
     <Compile Include="v1\Contacts\AffiliateDTO.cs" />
     <Compile Include="v1\Contacts\AffiliateReferralDTO.cs" />
     <Compile Include="v1\Contacts\PhoneNumberDTO.cs" />
     <Compile Include="v1\Contacts\PriceGroupDTO.cs" />
     <Compile Include="v1\Contacts\PricingTypesDTO.cs" />
-    <Compile Include="v1\Contacts\VendorManufacturerContactDTO.cs" />
     <Compile Include="v1\Contacts\VendorManufacturerDTO.cs" />
     <Compile Include="v1\Contacts\VendorManufacturerTypeDTO.cs" />
     <Compile Include="v1\CustomPropertyDTO.cs" />

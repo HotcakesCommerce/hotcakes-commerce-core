@@ -1,0 +1,13 @@
+﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+@if (ViewBag.ShowBanner)
+{
+    <div class="hc-banner">
+        <img class="hc-autosize" src="@ViewBag.BannerUrl" alt="@Model.LocalCategory.Name" />
+    </div>
+}
+@if (((string)ViewBag.DisplayHtml).Length > 0)
+{        
+    <div class="hc-description">
+        @Html.Raw(ViewBag.DisplayHtml)
+    </div>
+}

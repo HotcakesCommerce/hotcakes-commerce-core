@@ -1,9 +1,8 @@
 body {
 }
-/* Nobootstrap Start */
-@import "_views_nobootstrap.less";
-/* Nobootstrap End */
+
 @import "_views_areas.less";
+@import "_views_bootstrap.less";
 
 /* --------------- Cart --------------- */
 .hc-cart {
@@ -316,7 +315,7 @@ body {
             margin-left: 4%;
 
             div {
-                padding-top: 10px;
+                /*padding-top: 10px;*/
             }
 
             div > h4 {
@@ -337,6 +336,7 @@ body {
         .hc-card-icons {
             position: absolute;
             bottom: -25px;
+            height: 35px;
         }
     }
 
@@ -436,10 +436,10 @@ body {
     background-position: 0 0;
 }
 .cc-mastercard {
-    background-position: -47px 0;
+    background-position: -50px 0;
 }
 .cc-amex {
-    background-position: -94px 0;
+    background-position: -95px 0;
 }
 .cc-discover {
     background-position: -141px 0;
@@ -876,4 +876,38 @@ body {
         white-space: normal;
         margin-top: 0;
     }
+}
+
+.hc-catalog-admin {
+    display: block;
+    width: 100%;
+    margin: 1em 0;
+    padding: 0.5em;
+
+    .dnnFormMessage {
+        margin: 0 auto;
+
+        h6 {
+            display: inline;
+            position: relative;
+        }
+
+        .hc-admin-actions {
+            display: inline;
+            position: relative;
+            float: right;
+
+            ul {
+                margin: 0;
+                padding: 0;
+                position: relative;
+                top: -0.5em;
+            }
+        }
+    }
+}
+
+/* Resolves an issue where links being used as a buttona have their text color changed. */
+a.btn-primary:visited {
+    color: #fff;
 }

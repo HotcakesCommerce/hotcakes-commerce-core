@@ -1,0 +1,38 @@
+﻿@model Hotcakes.Modules.Core.Models.EstimateShippingViewModel
+@using Hotcakes.Commerce.Shipping;
+
+<div class="hc-estimate-shipping dnnForm">
+    <div class="dnnFormItem">
+        <span class="dnnLabel">@Localization.GetString("Country"):</span>
+        @Html.DropDownListFor(y => y.CountryId, new SelectList(ViewBag.Countries, "Bvin", "DisplayName"))
+    </div>
+    <div class="dnnFormItem">
+        <span class="dnnLabel">@Localization.GetString("Region"):</span>
+        <select id="RegionId" name="RegionId"></select>
+    </div>
+    <div class="dnnFormItem">
+        <span class="dnnLabel">@Localization.GetString("PostalCode"):</span>
+        @Html.EditorFor(y => y.PostalCode)
+        @Html.ValidationMessageFor(y => y.PostalCode)
+    </div>
+    <div class="clearfix">
+        <ul class="dnnActions">
+            <li>
+                <input type="submit" id="hcGetRates" class="dnnPrimaryAction" value="@Localization.GetString("GetRates")"/>
+            </li>
+        </ul>
+    </div>
+    <input type="hidden" name="TempRegionId" id="TempRegionId" value="@Model.RegionId" />
+    @Html.ValidationSummary()
+    @TempData["message"]
+
+    <ul class="hc-rates" id="hcShippingRatesList">
+        @foreach (ShippingRateDisplay rate in Model.Rates)
+        {
+            <li>@Html.Raw(@rate.RateAndNameForDisplay)</li>
+        }
+    </ul>
+</div>
+
+
+

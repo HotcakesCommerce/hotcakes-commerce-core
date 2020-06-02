@@ -139,7 +139,7 @@ namespace Hotcakes.Modules.Core.Controls
 
             if (!CardValidator.IsCardNumberValid(CardNumber))
             {
-                violations.Add(new RuleViolation("Credit Card Number", string.Empty, "Please enter a valid credit card number",
+                violations.Add(new RuleViolation(Localization.GetString("CreditCardNumber"), string.Empty, Localization.GetString("CreditCardMessage"),
                     "cccardnumber"));
             }
 
@@ -147,20 +147,19 @@ namespace Hotcakes.Modules.Core.Controls
             var acceptedCards = HccApp.CurrentStore.Settings.PaymentAcceptedCards;
             if (!acceptedCards.Contains(cardTypeCheck))
             {
-                violations.Add(new RuleViolation("Card Type Not Accepted", string.Empty,
-                    "That card type is not accepted by this store. Please use a different card.", "cccardnumber"));
+                violations.Add(new RuleViolation(Localization.GetString("CardTypeInvalid"), string.Empty,
+                    Localization.GetString("CardTypeMessage"), "cccardnumber"));
             }
 
-            ValidationHelper.RequiredMinimum(1, "Card Expiration Year is required", ExpirationYear, violations,
+            ValidationHelper.RequiredMinimum(1, Localization.GetString("CardYearRequired"), ExpirationYear, violations,
                 "ccexpyear");
-            ValidationHelper.RequiredMinimum(1, "Card Expiration Month is required", ExpirationMonth, violations,
+            ValidationHelper.RequiredMinimum(1, Localization.GetString("CardMonthRequired"), ExpirationMonth, violations,
                 "ccexpmonth");
-            ValidationHelper.Required("Name on Card is required", CardHolderName, violations, "cccardholder");
+            ValidationHelper.Required(Localization.GetString("CardNameRequired"), CardHolderName, violations, "cccardholder");
 
             if (HccApp.CurrentStore.Settings.PaymentCreditCardRequireCVV)
             {
-                ValidationHelper.RequiredMinimum(3, "Card Security Code is required", SecurityCode.Length, violations,
-                    "ccsecuritycode");
+                ValidationHelper.RequiredMinimum(3, Localization.GetString("CardCodeRequired"), SecurityCode.Length, violations, "ccsecuritycode");
             }
 
             SetErrorCss(violations);

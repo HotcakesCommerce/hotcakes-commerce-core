@@ -190,12 +190,12 @@
     <value>Order #</value>
   </data>
   <data name="GiftCardsFilteredByOrderItem.Text" xml:space="preserve">
-    <value>Gift Cards filtered for order item.</value>
+    <value>Gift cards filtered for order item.</value>
   </data>
   <data name="lnkShowAll.Text" xml:space="preserve">
     <value>Show All</value>
   </data>
   <data name="NoGiftCardsFound.Text" xml:space="preserve">
-    <value>No Gift Cards Where Found For This Criteria</value>
+    <value>No gift cards found</value>
   </data>
 </root>

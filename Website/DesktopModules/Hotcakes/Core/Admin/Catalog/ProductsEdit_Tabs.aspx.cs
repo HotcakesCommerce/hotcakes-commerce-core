@@ -42,7 +42,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         {
             base.OnInit(e);
 
-            PageTitle = "Edit Product Tabs";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Catalog;
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
         }
@@ -70,9 +70,9 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
         private void RenderItems(List<ProductDescriptionTab> tabs)
         {
-            if (tabs == null)
+            if (tabs == null || tabs.Count == 0)
             {
-                litResults.Text = "This product does not have any tabs yet. Click &quot;New&quot; to create one.";
+                litResults.Text = Localization.GetString("NoTabs");
                 return;
             }
             var sb = new StringBuilder();
@@ -89,20 +89,12 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         private void RenderSingleItem(StringBuilder sb, ProductDescriptionTab t)
         {
             var destinationLink = string.Format("ProductsEdit_TabsEdit.aspx?tid={0}&id={1}", t.Bvin, productBvin);
-            var trashcanImageUrl = ResolveUrl("~/DesktopModules/Hotcakes/Core/Admin/Images/trashcan.png");
-            var draghandleImageUrl = ResolveUrl("~/DesktopModules/Hotcakes/Core/Admin/Images/draghandle.png");
 
-            sb.Append("<div class=\"dragitem\" id=\"" + t.Bvin +
-                      "\"><table class=\"formtable hcGrid\" width=\"100%\"><tbody class=\"ui-sortable\"><tr>");
-            sb.AppendFormat(
-                "<td width=\"30\"><a href=\"#\" class=\"handle\"><img class=\"hcIconMove\" alt=\"Move\" /></a></td>");
-            sb.Append("<td><a href=\"" + destinationLink + "\">");
-            sb.Append(t.TabTitle);
-            sb.Append("</a></td>");
-            sb.Append("<td width=\"75\"><a href=\"" + destinationLink +
-                      "\"><img class=\"hcIconEdit\" alt=\"edit\" /></a>");
-            sb.Append("<a href=\"#\" class=\"trash\" id=\"rem" + t.Bvin + "\"");
-            sb.AppendFormat("><img class=\"hcIconDelete\" alt=\"Delete\" /></a></td>");
+            sb.Append("<div class=\"dragitem\" id=\"" + t.Bvin + "\"><table class=\"formtable hcGrid\" width=\"100%\"><tbody class=\"ui-sortable\"><tr>");
+            sb.AppendFormat("<td width=\"30\"><a href=\"#\" class=\"handle hcIconMove\">&nbsp;</a></td>");
+            sb.Append("<td><a href=\"" + destinationLink + "\">" + t.TabTitle + "</a></td>");
+            sb.Append("<td width=\"75\"><a class=\"hcIconEdit\" href=\"" + destinationLink + "\">&nbsp;</a>");
+            sb.Append("<a href=\"#\" class=\"trash hcIconDelete\" id=\"rem" + t.Bvin + "\">&nbsp;</a></td>");
             sb.Append("</tr></tbody></table></div>");
         }
 

@@ -228,29 +228,5 @@ namespace Hotcakes.Commerce.Membership
         {
             return Factory.Instance.CreateStrategy<hcc_RewardsPoints>();
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use CustomerPointsManager(HccRequestContext context) constructor instead")]
-        public static CustomerPointsManager InstantiateForMemory(int pointsIssuedPerDollar,
-            int pointsNeededForDollarCredit, long storeId)
-        {
-            return new CustomerPointsManager(HccRequestContext.Current);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use CustomerPointsManager(HccRequestContext context) constructor instead")]
-        public static CustomerPointsManager InstantiateForDatabase(int pointsIssuedPerDollar,
-            int pointsNeededForDollarCredit, long storeId)
-        {
-            return new CustomerPointsManager(HccRequestContext.Current);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use CustomerPointsManager(HccRequestContext context) constructor instead")]
-        public CustomerPointsManager(int pointsIssuedPerDollar, int pointsNeededForDollarCredit, long storeId)
-            : this(HccRequestContext.Current)
-        {
-        }
-
-        #endregion
     }
 }

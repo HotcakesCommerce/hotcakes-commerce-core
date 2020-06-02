@@ -132,4 +132,16 @@
   <data name="VendorLabel.Text" xml:space="preserve">
     <value>Vendor</value>
   </data>
+  <data name="Available.HeaderText" xml:space="preserve">
+    <value>Available for Sale</value>
+  </data>
+  <data name="Name.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="SitePrice.HeaderText" xml:space="preserve">
+    <value>Site Price</value>
+  </data>
+  <data name="SKU.HeaderText" xml:space="preserve">
+    <value>SKU</value>
+  </data>
 </root>

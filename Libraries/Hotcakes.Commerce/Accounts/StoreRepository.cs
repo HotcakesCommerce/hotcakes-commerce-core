@@ -178,32 +178,5 @@ namespace Hotcakes.Commerce.Accounts
                 }
             }
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public StoreRepository(HccRequestContext c, IRepositoryStrategy<hcc_Stores> r,
-            IRepositoryStrategy<hcc_StoreSettings> subr, ILogger log)
-            : this(c)
-        {
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static StoreRepository InstantiateForMemory(HccRequestContext c)
-        {
-            StoreRepository result = null;
-            result = new StoreRepository(c);
-            return result;
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static StoreRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            StoreRepository result = null;
-            result = new StoreRepository(c);
-            return result;
-        }
-
-        #endregion
     }
 }

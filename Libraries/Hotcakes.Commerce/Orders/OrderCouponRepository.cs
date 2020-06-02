@@ -145,27 +145,5 @@ namespace Hotcakes.Commerce.Orders
                     .Count();
             }
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static OrderCouponRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new OrderCouponRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static OrderCouponRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new OrderCouponRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public OrderCouponRepository(IRepositoryStrategy<hcc_OrderCoupon> strategy, ILogger log)
-            : this(HccRequestContext.Current)
-        {
-        }
-
-        #endregion
     }
 }

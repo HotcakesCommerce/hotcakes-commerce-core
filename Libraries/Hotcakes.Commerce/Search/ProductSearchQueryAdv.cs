@@ -35,7 +35,7 @@ namespace Hotcakes.Commerce.Search
         public ProductSearchQueryAdv()
         {
             Types = new List<string>();
-            Manufactures = new List<string>();
+            Manufacturers = new List<string>();
             Vendors = new List<string>();
             Categories = new List<string>();
 
@@ -47,7 +47,13 @@ namespace Hotcakes.Commerce.Search
 
         public List<string> Categories { get; set; }
         public List<string> Types { get; set; }
-        public List<string> Manufactures { get; set; }
+        [Obsolete("Deprecated in Hotcakes Commerce 03.03.00. Please use the Manufacturers property instead. Removing in version 03.04.00 or later.")]
+        public List<string> Manufactures
+        {
+            get { return Manufacturers; }
+            set { Manufacturers = value; }
+        }
+        public List<string> Manufacturers { get; set; }
         public List<string> Vendors { get; set; }
         public Dictionary<long, string[]> Properties { get; set; }
 

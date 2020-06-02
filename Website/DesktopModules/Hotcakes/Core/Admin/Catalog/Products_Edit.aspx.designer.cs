@@ -136,7 +136,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox lstProductType;
+        protected global::System.Web.UI.WebControls.DropDownList lstProductType;
         
         /// <summary>
         /// ProductTypeCustomValidator control.
@@ -211,13 +211,13 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvListPrice;
         
         /// <summary>
-        /// CustomValidator1 control.
+        /// cvListPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator1;
+        protected global::System.Web.UI.WebControls.CustomValidator cvListPrice;
         
         /// <summary>
         /// CostField control.
@@ -238,13 +238,13 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCostField;
         
         /// <summary>
-        /// CustomValidator2 control.
+        /// cvCostField control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator2;
+        protected global::System.Web.UI.WebControls.CustomValidator cvCostField;
         
         /// <summary>
         /// SitePriceField control.
@@ -265,13 +265,13 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSitePrice;
         
         /// <summary>
-        /// CustomValidator3 control.
+        /// cvSitePrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator3;
+        protected global::System.Web.UI.WebControls.CustomValidator cvSitePrice;
         
         /// <summary>
         /// PriceOverrideTextBox control.
@@ -289,7 +289,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox lstManufacturers;
+        protected global::System.Web.UI.WebControls.DropDownList lstManufacturers;
         
         /// <summary>
         /// lstVendors control.
@@ -298,7 +298,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox lstVendors;
+        protected global::System.Web.UI.WebControls.DropDownList lstVendors;
         
         /// <summary>
         /// chkActive control.
@@ -334,7 +334,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlTemplateList;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTemplateList;
         
         /// <summary>
         /// ucImageUploadLarge control.
@@ -490,22 +490,22 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         protected global::System.Web.UI.WebControls.TextBox txtWeight;
         
         /// <summary>
-        /// RequiredFieldValidator2 control.
+        /// rfvWeight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvWeight;
         
         /// <summary>
-        /// CustomValidator4 control.
+        /// cstvWeight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator4;
+        protected global::System.Web.UI.WebControls.CustomValidator cstvWeight;
         
         /// <summary>
         /// cvWeight control.
@@ -526,22 +526,22 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         protected global::System.Web.UI.WebControls.TextBox ExtraShipFeeField;
         
         /// <summary>
-        /// RequiredFieldValidator9 control.
+        /// rfvExtraShipFee control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator9;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvExtraShipFee;
         
         /// <summary>
-        /// CustomValidator8 control.
+        /// cvExtraShipFee control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator8;
+        protected global::System.Web.UI.WebControls.CustomValidator cvExtraShipFee;
         
         /// <summary>
         /// chkNonShipping control.
@@ -571,13 +571,13 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         protected global::System.Web.UI.WebControls.TextBox txtLength;
         
         /// <summary>
-        /// RequiredFieldValidator6 control.
+        /// rfvLength control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator6;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLength;
         
         /// <summary>
         /// cvLength control.
@@ -598,22 +598,22 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         protected global::System.Web.UI.WebControls.TextBox txtWidth;
         
         /// <summary>
-        /// RequiredFieldValidator7 control.
+        /// rfvWidth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvWidth;
         
         /// <summary>
-        /// CustomValidator6 control.
+        /// cstvWidth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator6;
+        protected global::System.Web.UI.WebControls.CustomValidator cstvWidth;
         
         /// <summary>
         /// cvWidth control.
@@ -634,22 +634,22 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         protected global::System.Web.UI.WebControls.TextBox txtHeight;
         
         /// <summary>
-        /// RequiredFieldValidator8 control.
+        /// rfvHeight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvHeight;
         
         /// <summary>
-        /// CustomValidator7 control.
+        /// cstvHeight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator7;
+        protected global::System.Web.UI.WebControls.CustomValidator cstvHeight;
         
         /// <summary>
         /// cvHeight control.
@@ -688,22 +688,22 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         protected global::System.Web.UI.WebControls.TextBox txtMinimumQty;
         
         /// <summary>
-        /// RequiredFieldValidator10 control.
+        /// rfvMinimumQty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator10;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMinimumQty;
         
         /// <summary>
-        /// RegularExpressionValidator6 control.
+        /// revMinimumQty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator6;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revMinimumQty;
         
         /// <summary>
         /// rblAllowReviews control.
@@ -758,5 +758,32 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlPostContentColumn;
+        
+        /// <summary>
+        /// btnUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnUpdate;
+        
+        /// <summary>
+        /// btnSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSave;
+        
+        /// <summary>
+        /// btnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnCancel;
     }
 }

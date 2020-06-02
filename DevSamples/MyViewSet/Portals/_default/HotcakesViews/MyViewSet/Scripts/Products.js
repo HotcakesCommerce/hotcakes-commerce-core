@@ -27,7 +27,7 @@
         $('#hcSubmitReviewMessage').hide();
         $('#hcSubmitReviewForm').show();
     }
-    
+
     function UpdatePriceFormItem(price, $priceEl) {
         if (!price)
             $priceEl.hide();
@@ -74,7 +74,7 @@
                         $actions.show();
                     }
                 }, 'json')
-                .complete(function () {
+                .done(function () {
                     $container.ajaxLoader("stop");
                 });
         }
@@ -123,11 +123,16 @@
         EvaluateSelections();
 
         $('#hcProductTabs').dnnTabs({ selected: 0 });
+        $(".nav-tabs li").click(function () {
+            var tab = $(this);
+            $(".nav-tabs li").removeAttr("class");
+            tab.attr("class", "active");
+        });
 
         $('#giftcardpredefined').change(function () {
             var $input = $('#GiftCardAmount');
             var amount = $(this).val();
-            
+
             if (amount == "") {
                 $input.css("visibility", "");
             } else {

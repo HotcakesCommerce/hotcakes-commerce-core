@@ -60,16 +60,6 @@ namespace Hotcakes.Commerce.Contacts
             _affiliateReferralRepository = Factory.CreateRepo<AffiliateReferralRepository>(context);
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public AffiliateRepository(HccRequestContext context, bool isForMemoryOnly)
-            : this(context)
-        {
-        }
-
-        #endregion
-
         protected override void CopyDataToModel(hcc_Affiliate data, Affiliate model)
         {
             model.CommissionAmount = data.CommissionAmount;
@@ -211,18 +201,6 @@ namespace Hotcakes.Commerce.Contacts
 
         public abstract AffiliateReportTotals GetAffiliateTotals(long affId, AffiliateReportCriteria criteria,
             TotalsReturnType returnType);
-
-        [Obsolete("Obsolete in 1.8.0. Affiliate contacts are not used")]
-        public List<AffiliateContact> FindAffiliateContactsForCustomer(string customerId)
-        {
-            return new List<AffiliateContact>();
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Affiliate contacts are not used")]
-        public bool DeleteAffiliateContactsForCustomer(string customerId)
-        {
-            return true;
-        }
 
         internal void DestoryForStore(long storeId)
         {

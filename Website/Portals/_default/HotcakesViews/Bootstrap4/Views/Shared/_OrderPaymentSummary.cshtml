@@ -1,0 +1,44 @@
+﻿@model Hotcakes.Commerce.Orders.OrderPaymentSummary
+<div class="table-responsive">
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr class="">
+                <th colspan="2">
+                    @Html.Raw(Model.PaymentsSummary)
+                </th>
+            </tr>
+        </thead>
+        <tr>
+            <th>
+                @Localization.GetString("PaymentReceived")
+            </th>
+            <td>
+                @string.Format("{0:C}", Model.AmountCharged)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Localization.GetString("Total")
+            </th>
+            <td>
+                @Model.TotalCredit.ToString("C")
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Localization.GetString("Refunded")
+            </th>
+            <td>
+                @Model.AmountRefunded.ToString("C")
+            </td>
+        </tr>
+        <tr class="hc-payment-footer">
+            <th>
+                <strong>@Localization.GetString("AmountDue")</strong>
+            </th>
+            <td>
+                <strong>@Model.AmountDue.ToString("C")</strong>
+            </td>
+        </tr>
+    </table>
+</div>

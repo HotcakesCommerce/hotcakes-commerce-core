@@ -192,27 +192,5 @@ namespace Hotcakes.Commerce.Taxes
         {
             Delete(y => y.StoreId == storeId);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static TaxRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new TaxRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static TaxRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new TaxRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public TaxRepository(HccRequestContext c, IRepositoryStrategy<hcc_Taxes> r, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

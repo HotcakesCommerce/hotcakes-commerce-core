@@ -9,12 +9,11 @@
     <div class="hcBlock hcBlockLight">
         <div class="hcForm">
             <div class="hcFormItem">
-                <label class="hcLabel">Content Column Name:</label>
-                <asp:TextBox ID="NewNameField" runat="server"></asp:TextBox>
+                <label class="hcLabel"><%=Localization.GetString("lblContentColumn") %></label>
+                <asp:TextBox ID="NewNameField" runat="server" ValidationGroup="NewContentColumn" />
             </div>
             <div class="hcFormItem">
-                <asp:LinkButton ID="btnNew" runat="server" Text="+ Add Content Column" CssClass="hcTertiaryAction"
-                    OnClick="btnNew_Click" />
+                <asp:LinkButton ID="btnNew" resourcekey="btnNew" runat="server" CssClass="hcTertiaryAction" OnClick="btnNew_Click" />
             </div>
         </div>
     </div>
@@ -23,12 +22,10 @@
     <h1><%=PageTitle %></h1>
     <hcc:MessageBox ID="msg" runat="server" />
 
-    <asp:Label ID="lblNoRecordsMessage" CssClass="hcInfoLabelLeft" Visible="false" runat="server">
-        No Content Columns Where Found
-    </asp:Label>
+    <asp:Label ID="lblNoRecordsMessage" resourcekey="lblNoRecordsMessage" CssClass="hcInfoLabelLeft" Visible="false" runat="server"/>
 
     <asp:Panel ID="pnlMain" runat="server">
-        <div class="hcInfoLabel"><%=RowCount %> Content Columns Found</div>
+        <div class="hcInfoLabel"><%=RowCount %> <%=Localization.GetString("ColumnsFound") %></div>
 
         <asp:GridView ID="gvBlocks" runat="server" AutoGenerateColumns="False" DataKeyNames="bvin"
             CssClass="hcGrid"
@@ -37,7 +34,7 @@
             <HeaderStyle CssClass="hcGridHeader" />
             <Columns>
                 <asp:BoundField DataField="DisplayName" HeaderText="Content Column" ItemStyle-Width="200px" />
-                <asp:TemplateField HeaderText="Content Blocks">
+                <asp:TemplateField HeaderText="ContentBlocks">
                     <ItemTemplate>
                         <asp:Repeater DataSource='<%#Eval("Blocks") %>' runat="server">
                             <ItemTemplate>[<%#Eval("ControlName") %>]</ItemTemplate>
@@ -52,13 +49,19 @@
                         <asp:LinkButton runat="server" CssClass="hcIconEdit"
                             CausesValidation="False" CommandName="Edit" Text="Edit" />
 
-                        <asp:LinkButton OnClientClick="return hcConfirm(event, 'Delete this content column?');"
-                            runat="server" CssClass="hcIconDelete" Visible='<%#!(bool)Eval("SystemColumn") %>'
+                        <asp:LinkButton runat="server" CssClass="hcIconDelete hcDeleteColumn" Visible='<%#!(bool)Eval("SystemColumn") %>'
                             CausesValidation="False" CommandName="Delete" Text="Delete" />
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".hcDeleteColumn").click(function(e) {
+                    return hcConfirm(e, "<%=Localization.GetJsEncodedString("Confirm")%>");
+                });
+            });
+        </script>
     </asp:Panel>
 </asp:Content>
 

@@ -105,10 +105,6 @@ namespace Hotcakes.Modules.Core.Controllers
                 };
             }
 
-#pragma warning disable 0612, 0618
-            model.TimeRangesLocalized = GetTimeRangesLocalized();
-#pragma warning restore 0612, 0618
-
             //model.DefaultDateRange = (int)DefaultDateRange;
             model.UrlBuilder = new AffiliateUrlBuilderViewModel
             {

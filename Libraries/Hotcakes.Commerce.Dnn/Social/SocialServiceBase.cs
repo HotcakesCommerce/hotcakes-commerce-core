@@ -380,18 +380,6 @@ namespace Hotcakes.Commerce.Dnn.Social
         {
         }
 
-        [Obsolete("Removed support for Evoq Social in version 3.0. Use SaveProductToJournal() instead.")]
-        public virtual ISocialItem GetProductSocialItem(Product product)
-        {
-            return new StubSocialItem();
-        }
-
-        [Obsolete("Removed support for Evoq Social in version 3.0. Use SaveProductToJournal() instead.")]
-        public virtual ISocialItem GetCategorySocialItem(Category cat)
-        {
-            return new StubSocialItem();
-        }
-
         #endregion
     }
 }

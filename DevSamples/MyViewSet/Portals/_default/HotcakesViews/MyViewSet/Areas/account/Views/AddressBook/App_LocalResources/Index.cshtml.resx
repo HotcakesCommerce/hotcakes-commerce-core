@@ -124,7 +124,7 @@
     <value>Address Book</value>
   </data>
   <data name="AddressesFound.Text" xml:space="preserve">
-    <value>addresses found</value>
+    <value>address(es) found</value>
   </data>
   <data name="Delete.Text" xml:space="preserve">
     <value>Delete</value>

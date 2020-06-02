@@ -56,12 +56,6 @@ namespace Hotcakes.Modules.Core.Models
             IsAvailableForWishList = false;
             SwatchHtml = string.Empty;
             AlternateImageUrls = new List<ProductImageUrls>();
-
-#pragma warning disable 0612, 0618
-            OriginalImageUrl = string.Empty;
-            MainImageAltText = string.Empty;
-            MainImageUrl = string.Empty;
-#pragma warning restore 0612, 0618
         }
 
         /// <summary>
@@ -113,37 +107,14 @@ namespace Hotcakes.Modules.Core.Models
         public List<ProductImageUrls> AlternateImageUrls { get; private set; }
 
         /// <summary>
-        ///     Original image url
-        /// </summary>
-        [Obsolete("Obsolete in 1.2.0. Use ImageUrls property.")]
-        public string OriginalImageUrl { get; set; }
-
-        /// <summary>
-        ///     Main image URL which is shown when product detail page loads
-        /// </summary>
-        [Obsolete("Obsolete in 1.2.0. Use ImageUrls property.")]
-        public string MainImageUrl { get; set; }
-
-        /// <summary>
-        ///     Alternate text to be shown if image is not available or when move hover to the iamge.
-        /// </summary>
-        [Obsolete("Obsolete in 1.2.0. Use ImageUrls property.")]
-        public string MainImageAltText { get; set; }
-
-        /// <summary>
         ///     Product price information. There are different prices available like site price, cost price and labels and text
         ///     needs to be shown for price.
         ///     More detailed option of this can be found at  <see cref="ProductPrices" />
         /// </summary>
         public ProductPrices Prices { get; set; }
 
-
         public decimal UserSuppliedPrice { get; set; }
 
-        /// <summary>
-        ///     Returns html to render additional images of the product
-        /// </summary>
-        [Obsolete("Obsolete in 1.2.0. Use AlternateImageUrls property.")]
         public string PreRenderedImages
         {
             get
@@ -222,6 +193,7 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     Social controls for the given product in json format.
         /// </summary>
+        [Obsolete("Removing in 03.05.00 or later. Previously was used for Evoq Social integration.")]
         public ISocialItem SocialItem { get; set; }
 
         /// <summary>
@@ -255,5 +227,25 @@ namespace Hotcakes.Modules.Core.Models
         ///     Message to be shown to the gift card receiver
         /// </summary>
         public string GiftCardMessage { get; set; }
+
+        /// <summary>
+        /// If true, the current request (end user) is authorized to edit the catalog.
+        /// </summary>
+        public bool AuthorizedToEditCatalog { get; set; }
+
+        /// <summary>
+        /// This URL can be used to directly navigate to the product editing view. If empty, the current end-user is not authorized to see and use this view.
+        /// </summary>
+        public string ProductEditUrl { get; set; }
+
+        /// <summary>
+        /// This URL can be used to directly navigate to the product performance view. If empty, the current end-user is not authorized to see and use this view.
+        /// </summary>
+        public string ProductAnalyticsUrl { get; set; }
+
+        /// <summary>
+        /// The store administration URL for the dashboard. 
+        /// </summary>
+        public string StoreAdminUrl { get; set; }
     }
 }

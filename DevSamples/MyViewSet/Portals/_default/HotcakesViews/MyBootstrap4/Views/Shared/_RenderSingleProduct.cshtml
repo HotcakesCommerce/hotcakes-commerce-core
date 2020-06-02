@@ -1,0 +1,31 @@
+﻿@model Hotcakes.Modules.Core.Models.SingleProductViewModel
+@{
+    var userPrice = Model.UserPrice.DisplayPrice(true, false);
+    var isSale = userPrice.Contains("strike");
+    var hasOptions = (Model.Item.HasOptions());
+}
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title"><a href="@Model.ProductLink">@Model.Item.ProductName</a></h5>
+        <div class="hc-product-card-img">
+            <a href="@Model.ProductLink">
+                <img class="img-fluid rounded" src="@Model.ImageUrls.SmallUrl" alt="@Model.ImageUrls.SmallAltText" />
+            </a>
+        </div>
+    </div>
+    <div class="card-footer text-center">
+        @Html.Raw(userPrice)<br/>
+        @if (hasOptions || Model.Item.IsGiftCard || Model.Item.IsBundle || Model.Item.IsUserSuppliedPrice)
+        {
+            <a class="add-to-cart-product" href="@Model.ProductLink">
+                <span><i class="fas fa-eye"></i>@Localization.GetString("View")</span>
+            </a>
+        }
+        else
+        {
+            <a href="@Url.RouteHccUrl(HccRoute.Cart)?AddSku=@Model.Item.Sku&AddSkuQty=1" class="add-to-cart-product">
+                <span><i class="fas fa-cart-plus"></i>@Localization.GetString("AddToCart")</span>
+            </a>
+        }
+    </div>
+</div>

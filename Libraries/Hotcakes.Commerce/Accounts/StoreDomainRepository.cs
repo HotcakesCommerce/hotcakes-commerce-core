@@ -43,16 +43,6 @@ namespace Hotcakes.Commerce.Accounts
         {
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public StoreDomainRepository(HccRequestContext c, IRepositoryStrategy<hcc_StoreDomains> r)
-            : this(c)
-        {
-        }
-
-        #endregion
-
         /// <summary>
         ///     Copy data from database table instance to model instance.
         /// </summary>

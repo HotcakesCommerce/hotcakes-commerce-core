@@ -44,11 +44,6 @@ namespace Hotcakes.Modules.Core.Models
             LinkUrl = string.Empty;
             Name = string.Empty;
             OpenInNewWindow = false;
-
-#pragma warning disable 0612, 0618
-            IsFirstItem = false;
-            IsLastItem = false;
-#pragma warning restore 0612, 0618
         }
 
         /// <summary>
@@ -81,17 +76,5 @@ namespace Hotcakes.Modules.Core.Models
         ///     Category detail page needs to be opened on same page or on new tab
         /// </summary>
         public bool OpenInNewWindow { get; set; }
-
-        /// <summary>
-        ///     Is First item in the category rotator carousel
-        /// </summary>
-        [Obsolete]
-        public bool IsFirstItem { get; set; }
-
-        /// <summary>
-        ///     Is last item in the category rotator carousel
-        /// </summary>
-        [Obsolete]
-        public bool IsLastItem { get; set; }
     }
 }

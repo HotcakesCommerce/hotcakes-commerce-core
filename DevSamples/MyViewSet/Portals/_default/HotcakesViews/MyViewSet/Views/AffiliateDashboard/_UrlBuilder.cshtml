@@ -2,43 +2,51 @@
 @using (Html.BeginHccForm(new { @class = "hcUrlBuilder" }))
 {
     <div class="row-fluid">
-        <div class="span6 dnnForm">
-            <div class="dnnFormItem">
-                <label class="dnnLabel">Link To</label>
-                <select data-bind="value: mode, event: { change: changeMode }">
-                    <option value="Website">Website URL</option>
-                    <option value="Registration">Affiliate Registration</option>
-                    <option value="Product">Product</option>
-                    <option value="Category">Category</option>
-                </select>
+        <div class="form-horizontal col-xs-12">
+            <div class="form-group">
+                <label class="col-xs-4 control-label">@Localization.GetString("lblLinkTo"):</label>
+                <div class="col-xs-offset-0 col-xs-6">
+                    <select data-bind="value: mode, event: { change: changeMode }" class="form-control">
+                        <option value="Website">@Localization.GetString("LinkTo_Website")</option>
+                        <option value="Registration">@Localization.GetString("LinkTo_Registration")</option>
+                        <option value="Product">@Localization.GetString("LinkTo_Product")</option>
+                        <option value="Category">@Localization.GetString("LinkTo_Category")</option>
+                    </select>
+                </div>
             </div>
-            <div class="dnnFormItem" data-bind="visible: mode() == 'Product' || mode() == 'Category'">
-                <label class="dnnLabel"></label>
-                <select data-bind="value: categoryId, options: categories, optionsText: 'Text', optionsValue: 'Value', event: { change: changeCategory }">
-                </select>
+            <div class="form-group" data-bind="visible: mode() == 'Product' || mode() == 'Category'">
+                <div class="col-xs-offset-4 col-xs-6">
+                    <select data-bind="value: categoryId, options: categories, optionsText: 'Text', optionsValue: 'Value', event: { change: changeCategory }" class="form-control">
+                    </select>
+                </div>
             </div>
-            <div class="dnnFormItem" data-bind="visible: mode() == 'Product'">
-                <label class="dnnLabel"></label>
-                <select data-bind="value: productId, options: products, optionsText: 'Text', optionsValue: 'Value'">
-                </select>
+            <div class="form-group" data-bind="visible: mode() == 'Product'">
+                <div class="col-xs-offset-4 col-xs-6">
+                    <select data-bind="value: productId, options: products, optionsText: 'Text', optionsValue: 'Value'" class="form-control">
+                    </select>
+                </div>
             </div>
-            <div class="dnnFormItem" data-bind="visible: mode() == 'Website' || mode() == 'Registration'">
-                <label class="dnnLabel"></label>
-                <input type="text" data-bind="value: textUrl" />
+            <div class="form-group" data-bind="visible: mode() == 'Website' || mode() == 'Registration'">
+                <div class="col-xs-offset-4 col-xs-6">
+                    <input type="text" data-bind="value: textUrl" class="form-control" />
+                </div>
             </div>
-            <div class="dnnFormItem">
-                <button class="dnnSecondaryAction" data-bind="click: generate">Generate</button>
+            <div class="form-group">
+                <div class="col-xs-offset-4 col-xs-6 text-left">
+                    <button class="btn btn-primary" data-bind="click: generate"><em class="glyphicon glyphicon-link"></em>@Localization.GetString("btnGenerate")</button>
+                </div>
             </div>
         </div>
-        <div class="span6 dnnForm">
-            <div class="dnnFormItem">
-                <label class="dnnLabel"></label>
-                <textarea style="width: 100%" id="hcCopySource" data-bind="value: generatedUrl, hasSelection: generatedUrl != ''"></textarea>
+        <hr/>
+        <div class="form-horizontal col-xs-12">
+            <div class="form-group">
+                <label class="col-xs-4 control-label">@Localization.GetString("lblCopyFrom"):</label>
+                <div class="col-xs-offset-0 col-xs-6">
+                    <textarea id="hcCopySource" data-bind="value: generatedUrl, hasSelection: generatedUrl != ''" class="form-control"></textarea>
+                    <button class="btn btn-default margin-top-md" id="hcCopyToClipboard" data-clipboard-target="#hcCopySource"><em class="glyphicon glyphicon-copy"></em>@Localization.GetString("btnCopy")</button>
+                </div>
             </div>
-            <div class="dnnFormItem">
-                <button class="dnnSecondaryAction" id="hcCopyToClipboard">Copy</button>
-            </div>
-
         </div>
     </div>
+    <div class="clearfix"></div>
 }

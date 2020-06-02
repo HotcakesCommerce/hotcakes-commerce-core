@@ -79,7 +79,7 @@
                 <label class="hcLabel"><%=Localization.GetString("Notes") %></label>
                 <asp:TextBox ID="CommentField" runat="server" TextMode="MultiLine" CssClass="hcOrderViewNotes"  />
             </div>
-            <div class="hcFormItem">
+            <div class="hcFormItem" runat="server" ID="divPriceGroup">
                 <label class="hcLabel"><%=Localization.GetString("PricingGroup") %></label>
                 <asp:DropDownList ID="PricingGroupDropDownList" runat="server" />
             </div>

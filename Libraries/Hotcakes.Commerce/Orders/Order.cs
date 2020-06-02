@@ -1218,16 +1218,6 @@ namespace Hotcakes.Commerce.Orders
         }
 
         /// <summary>
-        ///     OBSOLETE!
-        /// </summary>
-        /// <returns></returns>
-        [Obsolete("Please use Order.IsOrderHasAllItemsQualifiedFreeShipping() instead. Will be removed in 02.01.00.")]
-        public bool IsOrderHasAllItemsQaulifiedFreeShipping()
-        {
-            return IsOrderHasAllItemsQualifiedFreeShipping();
-        }
-
-        /// <summary>
         ///     Returns a list of packages in the order that have been shipped already.
         /// </summary>
         /// <returns>List of OrderPackage</returns>
@@ -1491,7 +1481,7 @@ namespace Hotcakes.Commerce.Orders
                 result.Add(new HtmlTemplateTag("[[Order.UserEmail]]", user.Email));
 
                 var taxExemptionNumber = "-";
-                if (user.TaxExempt && !string.IsNullOrEmpty(user.TaxExemptionNumber))
+                if (!string.IsNullOrEmpty(user.TaxExemptionNumber))
                     taxExemptionNumber = user.TaxExemptionNumber;
 
                 result.Add(new HtmlTemplateTag("[[Order.VATRegistrationNumber]]", taxExemptionNumber));

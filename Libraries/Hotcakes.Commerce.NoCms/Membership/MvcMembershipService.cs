@@ -43,16 +43,6 @@ namespace Hotcakes.Commerce.NoCms.Membership
             Customers = Factory.CreateRepo<CustomerAccountRepository>(Context);
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public MvcMembershipService(HccRequestContext c, bool isForMemoryOnly)
-            : this(c)
-        {
-        }
-
-        #endregion
-
         public CustomerAccount GetCustomer(string email)
         {
             var customer = Customers.FindByEmail(email);

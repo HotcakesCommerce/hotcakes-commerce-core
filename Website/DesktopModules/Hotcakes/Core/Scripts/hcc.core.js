@@ -16,19 +16,19 @@
         return hcc.vars;
     },
 
-    hcc.getVar = function (key, def) {
-        if (hcc.getVars()[key] != null) {
-            return hcc.getVars()[key];
-        }
-        return def;
-    },
+        hcc.getVar = function (key, def) {
+            if (hcc.getVars()[key] != null) {
+                return hcc.getVars()[key];
+            }
+            return def;
+        },
 
-    hcc.getSiteRoot = function () {
-        if (dnn && dnn.getVar)
-            return dnn.getVar("hc_siteRoot", "/");
-        else
-            return hcc.getVar("hc_siteRoot", "/");
-    };
+        hcc.getSiteRoot = function () {
+            if (dnn && dnn.getVar)
+                return dnn.getVar("hc_siteRoot", "/");
+            else
+                return hcc.getVar("hc_siteRoot", "/");
+        };
     hcc.getResourceUrl = function (path) {
         var resourceUrl = hcc.getSiteRoot();
         resourceUrl += "DesktopModules/Hotcakes/Core/" + path;
@@ -55,6 +55,10 @@
         return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     };
 
+    hcc.getUrlProtocol = function () {
+        return location.protocol + "//";
+    };
+
     //fix record image height
     hcc.autoHeight = function (className) {
         $(window).resize(function () {
@@ -66,19 +70,18 @@
                 var $el = $(e);
                 $el.height($el.width() * 0.7);
                 $el.find("img").height($el.width() * 0.7);
-                //$el.css("display", "table-cell");
             });
-        }
+        };
         setTimeout(onresize, 10);
-    }
+    };
 
     $.xhrPool = [];
     $.xhrPool.abortAll = function () {
-        $(this).each(function (i, jqXHR) {   //  cycle through list of recorded connection
-            jqXHR.abort();  //  aborts connection
+        $(this).each(function (i, jqXHR) { //  cycle through list of recorded connection
+            jqXHR.abort(); //  aborts connection
             $.xhrPool.splice(i, 1); //  removes from list by index
         });
-    }
+    };
     $.ajaxSetup({
         beforeSend: function (jqXHR) { $.xhrPool.push(jqXHR); }, //  annd connection to list
         complete: function (jqXHR) {
@@ -93,7 +96,7 @@
             bgColor: '#fff',
             duration: 300,
             opacity: 0.5
-        }
+        };
         this.container = this;
 
         this.init = function (element, options) {
@@ -130,11 +133,9 @@
         this.remove = function () {
             var overlay = this.container.children(".ajax_overlay");
             if (overlay.length) {
-                //overlay.fadeOut(this.options., function () {
                 overlay.remove();
-                //});
             }
-        }
+        };
 
         if (type != 'stop') {
             this.options = jQuery.extend(defaults, options);
@@ -176,7 +177,11 @@
                 modal: false,
                 autoOpen: options.autoOpen,
                 closeOnEscape: true,
-                position: "center",
+                position: {
+                    my: "center",
+                    at: "center",
+                    of: window
+                },
                 dialogClass: options.dialogClass,
                 open: function (event, ui) {
                     $(".ui-widget-overlay").remove();
@@ -219,6 +224,44 @@
         }, options);
         return this.each(function () {
             $(this).animate({ scrollTop: $(target).offset().top - settings.offsetTop }, parseInt(settings.duration));
+        });
+    };
+
+    $.fn.hcTabs = function () {
+        var $self = $(this);
+        var target = "#" + $self.attr("id");
+        /* Based on the Bootstrap 4 HTML pattern */
+        var $tabs = $(target + " .nav-item");
+        var $tabPanes = $(target + " .tab-content .tab-pane");
+        var $tabItems = $(target + " .nav-tabs li");
+        var $tabLinks = $(target + " .nav-tabs li a");
+
+        $tabs.first().children("li").addClass("active");
+        $tabs.first().children("a").addClass("active");
+
+        $tabPanes.hide();
+        $tabPanes.first().show();
+
+        $tabLinks.click(function (e) {
+            var self = $(this); //a.nav-link
+            var panelId = self.attr("data-href");
+            var panel = $(panelId);
+
+            $tabItems.removeAttr("class");
+            $tabItems.attr("class", "nav-item");
+            $tabLinks.removeAttr("class");
+            $tabLinks.attr("class", "nav-link");
+
+            self.parent().attr("class", "nav-item active");
+            self.prop("class", "nav-link active");
+
+            $tabPanes.hide();
+            panel.show();
+
+            e.stopImmediatePropagation();
+            e.stopPropagation();
+            e.preventDefault();
+            return false;
         });
     };
 
@@ -289,88 +332,88 @@
     };
 
     $.fn.selectionRibbon = function () {
-    	return this.each(function () {
-    		var $sel = $(this);
-    		if (!$sel.data("selribbon")) {
-    			var $options = $sel.find("option");
-    			var $ul = $("<ul></ul>");
-    			$ul.addClass("hcSelectionRibbon");
+        return this.each(function () {
+            var $sel = $(this);
+            if (!$sel.data("selribbon")) {
+                var $options = $sel.find("option");
+                var $ul = $("<ul></ul>");
+                $ul.addClass("hcSelectionRibbon");
 
-    			$options.each(function (i, el) {
-    				var $li = $("<li/>")
-    				$li.attr("data-value", $(el).val());
-    				$li.text($(el).text());
-    				$ul.append($li);
-    				$li.click(function () {
-    					$sel.val($(el).val());
-    					$sel.change();
-    					$ul.find("li").removeClass("selected");
-    					$li.addClass("selected");
-    				});
-    				if ($(el).val() == $sel.val())
-    					$li.addClass("selected");
-    			});
+                $options.each(function (i, el) {
+                    var $li = $("<li/>")
+                    $li.attr("data-value", $(el).val());
+                    $li.text($(el).text());
+                    $ul.append($li);
+                    $li.click(function () {
+                        $sel.val($(el).val());
+                        $sel.change();
+                        $ul.find("li").removeClass("selected");
+                        $li.addClass("selected");
+                    });
+                    if ($(el).val() == $sel.val())
+                        $li.addClass("selected");
+                });
 
-    			$sel.after($ul);
-    			$sel.hide();
-    			$sel.data("selribbon", true);
-    		}
-    	});
+                $sel.after($ul);
+                $sel.hide();
+                $sel.data("selribbon", true);
+            }
+        });
     };
 
     $.fn.selectionList = function () {
-    	return this.each(function () {
-    		var self = $(this);
+        return this.each(function () {
+            var self = $(this);
 
-    		if (!self.data("selectionList")) {
-    			var $options = self.find("option");
-    			var $selectedOption = self.find("option:selected");
+            if (!self.data("selectionList")) {
+                var $options = self.find("option");
+                var $selectedOption = self.find("option:selected");
 
-    			var $wrapperSpan = $("<span></span>");
-    			var $span = $("<span></span>");
-    			var $ul = $("<ul></ul>");
+                var $wrapperSpan = $("<span></span>");
+                var $span = $("<span></span>");
+                var $ul = $("<ul></ul>");
 
-    			$wrapperSpan.addClass(self.attr("class"));
-    			$span.text($selectedOption.text());
+                $wrapperSpan.addClass(self.attr("class"));
+                $span.text($selectedOption.text());
 
-    			$wrapperSpan.on("mouseover", function () {
-    				$ul.show();
-    			});
-    			$wrapperSpan.on("mouseout", function () {
-    				$ul.hide();
-    			});
+                $wrapperSpan.on("mouseover", function () {
+                    $ul.show();
+                });
+                $wrapperSpan.on("mouseout", function () {
+                    $ul.hide();
+                });
 
-    			$options.each(function (i, el) {
-    				var $li = $("<li/>")
-    				$li.attr("data-value", $(el).val());
-    				$li.text($(el).text());
-    				$ul.append($li);
-    				$li.on("click", function () {
-    					self.val($(el).val());
-    					$span.text($(el).text());
+                $options.each(function (i, el) {
+                    var $li = $("<li/>"); 
+                    $li.attr("data-value", $(el).val());
+                    $li.text($(el).text());
+                    $ul.append($li);
+                    $li.on("click", function () {
+                        self.val($(el).val());
+                        $span.text($(el).text());
 
-    					$ul.hide();
+                        $ul.hide();
 
-    					self.change();
-    					$ul.find("li").removeClass("selected");
-    					$li.addClass("selected");
-    				});
-    				if ($(el).val() == self.val())
-    					$li.addClass("selected");
-    			});
+                        self.change();
+                        $ul.find("li").removeClass("selected");
+                        $li.addClass("selected");
+                    });
+                    if ($(el).val() == self.val())
+                        $li.addClass("selected");
+                });
 
-    			self.after($wrapperSpan);
-    			$wrapperSpan.append($span);
-    			$wrapperSpan.append($ul);
+                self.after($wrapperSpan);
+                $wrapperSpan.append($span);
+                $wrapperSpan.append($ul);
 
-    			self.hide();
-    			self.data("selectionList", true);
-    		}
-    	});
+                self.hide();
+                self.data("selectionList", true);
+            }
+        });
     };
 }(jQuery));
 
 jQuery(function ($) {
-	$("select.hcSelectionRibbon").selectionRibbon();
-	$("select.hcSelectionList").selectionList();
+    $("select.hcSelectionRibbon").selectionRibbon();
+    $("select.hcSelectionList").selectionList();
 });

@@ -40,16 +40,6 @@ namespace Hotcakes.Commerce.BusinessRules
             RequestContext = requestContext;
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 2.0.0. Use constructor with other parameters instead")]
-        public OrderTaskContext(HotcakesApplication app)
-            : this(app.CurrentRequestContext)
-        {
-        }
-
-        #endregion
-
         public OrderPaymentStatus PreviousPaymentStatus
         {
             get { return (OrderPaymentStatus) Inputs.GetPropertyAsInt("hcc", "PreviousPaymentStatus"); }

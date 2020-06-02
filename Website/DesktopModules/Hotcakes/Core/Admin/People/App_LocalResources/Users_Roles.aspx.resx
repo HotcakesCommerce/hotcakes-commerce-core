@@ -129,6 +129,9 @@
   <data name="EmailNotificationMessage.Text" xml:space="preserve">
     <value>You can send e-mail notifications that informs the customer about their new roles, by selecting them and then clicking the notification button below the grid.</value>
   </data>
+  <data name="NoRoles.Text" xml:space="preserve">
+    <value>There were no available roles found to assign to this customer.</value>
+  </data>
   <data name="NotificationSuccessful.Text" xml:space="preserve">
     <value>Notification(s) have been successfully sent.</value>
   </data>

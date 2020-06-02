@@ -3,6 +3,7 @@
     margin: 0 -3px 0 0;
     position: relative;
 }
+
     .searchInputContainer > input[type="text"]::-ms-clear {
         display: none;
     }
@@ -48,6 +49,7 @@ ul.searchSkinObjectPreview li {
         position: relative;
         margin: 0;
         text-transform: none;
+        word-wrap: break-word;
     }
 
         ul.searchSkinObjectPreview > li:hover {

@@ -259,27 +259,5 @@ namespace Hotcakes.Commerce.Orders
 
             return result;
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static LineItemRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new LineItemRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static LineItemRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new LineItemRepository(c);
-        }
-
-        //[Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        //public LineItemRepository(IRepositoryStrategy<hcc_LineItem> strategy, ILogger log, HccRequestContext context)
-        //	:this(context)
-        //{
-        //}
-
-        #endregion
     }
 }

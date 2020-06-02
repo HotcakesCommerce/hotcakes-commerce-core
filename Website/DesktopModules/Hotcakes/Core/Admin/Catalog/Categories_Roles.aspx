@@ -7,25 +7,24 @@
     <div class="hcBlock">
         <div class="hcForm">
             <div class="hcFormItem">
-                <asp:HyperLink ID="hypClose" runat="server" Text="Close" CssClass="hcTertiaryAction" NavigateUrl="Categories.aspx" />
+                <asp:HyperLink ID="hypClose" resourcekey="hypClose" runat="server" Text="Close" CssClass="hcTertiaryAction" NavigateUrl="Categories.aspx"/>
             </div>
         </div>
     </div>
 </asp:Content>
 <asp:Content ID="main" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Category Roles</h1>
+    <h1><%=Localization.GetString("Header") %></h1>
     <hcc:MessageBox ID="ucMessageBox" runat="server" />
     <div class="hcColumnLeft" style="width: 60%">
         <div class="hcForm">
             <div class="hcFormItemLabel">
-                <label class="hcLabel">Security Role</label>
+                <label class="hcLabel"><%=Localization.GetString("lblSecurityRole") %></label>
             </div>
             <div class="hcFormItem hcFormItem66p">
-                <asp:DropDownList ID="ddlRoles" runat="server">
-                </asp:DropDownList>
+                <asp:DropDownList ID="ddlRoles" runat="server"/>
             </div>
             <div class="hcFormItem hcFormItem33p">
-                <asp:LinkButton ID="btnAdd" Text="Add Role" CssClass="hcSecondaryAction hcSmall" runat="server" />
+                <asp:LinkButton ID="btnAdd" ResourceKey="btnAdd" CssClass="hcSecondaryAction hcSmall" runat="server" />
             </div>
 
             <div class="hcFormItem">
@@ -40,7 +39,7 @@
                         </asp:CommandField>
                     </Columns>
                     <EmptyDataTemplate>
-                        No roles added. Category is public.
+                        <%=Localization.GetString("NoRoles") %>
                     </EmptyDataTemplate>
                 </asp:GridView>
             </div>
@@ -48,12 +47,15 @@
     </div>
 	 <div class="hcColumnRight hcLeftBorder" style="width: 39%">
         <div class="hcForm">
-            <h2>Roles Hierarchy</h2>
-            <p>Security roles can be selected in the Product Type, Category, and Product edit views.</p>
-            <p>Product is public if no roles added.</p>
-            <p>If no product roles specified than all assigned category roles will be used. 
-                If no category roles specified than product type roles will be used.</p>
-            <p>Store administrators and host users are able to see all products.</p>
+            <h2><%=Localization.GetString("HelpHeader") %></h2>
+            <div class="hcClear"><%=Localization.GetString("Help") %></div>
         </div>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".hcIconDelete").click(function(e) {
+                return hcConfirm(e, "<%=Localization.GetJsEncodedString("Confirm")%>");
+            });
+        });
+    </script>
 </asp:Content>

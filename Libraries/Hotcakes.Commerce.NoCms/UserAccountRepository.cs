@@ -88,27 +88,5 @@ namespace Hotcakes.Commerce.NoCms
             data.statuscode = (int) model.Status;
             data.ResetKey = model.ResetKey;
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static UserAccountRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new UserAccountRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static UserAccountRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new UserAccountRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public UserAccountRepository(HccRequestContext c, IRepositoryStrategy<hcc_UserAccounts> r, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

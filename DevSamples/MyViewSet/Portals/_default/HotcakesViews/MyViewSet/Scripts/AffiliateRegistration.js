@@ -52,21 +52,20 @@ var HcAffiliateRegViewModel = function (model, $form) {
             contentType: "application/json",
             type: "post"
         })
-        .done(function (resp) {
-            showMessage(resp.Message, resp.Status);
-            if (resp.Status == 'OK')
-                //self.isRegistered(true);
-                window.location.replace(resp.RedirectUrl);
-        })
-        .fail(function () { })
-        .always(function () { $form.ajaxLoader("stop"); });
+            .done(function (resp) {
+                showMessage(resp.Message, resp.Status);
+                if (resp.Status == 'OK')
+                    window.location.replace(resp.RedirectUrl);
+            })
+            .fail(function () { })
+            .always(function () { $form.ajaxLoader("stop"); });
     };
 
     self.changeCountry = function () {
         $form.ajaxLoader("start");
         $.post(hcc.getServiceUrl("AffiliateRegistration/GetRegions"),
-                { countryId: self.model.countryid() }, null, "json"
-            )
+            { countryId: self.model.countryid() }, null, "json"
+        )
             .done(function (resp) {
                 self.regions(resp);
             })
@@ -76,10 +75,16 @@ var HcAffiliateRegViewModel = function (model, $form) {
     };
 
     self.changeReferralAffiliateId = function (data, event) {
+        if (self.model.referralaffiliateid() == "") {
+            self.message.show(false);
+            return;
+        }
+
         $form.ajaxLoader("start");
+
         $.post(hcc.getServiceUrl("AffiliateRegistration/IsAffiliateValid"),
-                { affiliateId: self.model.referralaffiliateid() }, null, "json"
-            )
+            { affiliateId: self.model.referralaffiliateid() }, null, "json"
+        )
             .done(function (data) {
                 if (!data) {
                     showMessage(hcc.l10n.affiliate_ReferralAffiliateIDInvalid, "Failed");

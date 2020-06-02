@@ -1,0 +1,10 @@
+﻿@model Hotcakes.Commerce.Catalog.Product
+<div class="container">
+    <div class="row hc-productrotator">
+        <div class="col-12">
+            <div class="hc-content-block">
+                @Html.Action("RenderSingleProduct", "Products", new { Area = "", product = Model })
+            </div>
+        </div>
+    </div>
+</div>

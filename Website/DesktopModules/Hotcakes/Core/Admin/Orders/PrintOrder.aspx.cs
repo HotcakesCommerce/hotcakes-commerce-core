@@ -34,6 +34,15 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 {
     partial class PrintOrder : BaseAdminPage
     {
+
+        protected override void OnPreInit(EventArgs e)
+        {
+            base.OnPreInit(e);
+            PageTitle = Localization.GetString("PageTitle");
+            CurrentTab = AdminTabType.Orders;
+            ValidateCurrentUserHasPermission(SystemPermissions.OrdersView);
+        }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -99,32 +108,12 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             }
         }
 
-        protected override void OnPreInit(EventArgs e)
-        {
-            base.OnPreInit(e);
-            PageTitle = "Print Order";
-            CurrentTab = AdminTabType.Orders;
-            ValidateCurrentUserHasPermission(SystemPermissions.OrdersView);
-        }
-
-        protected void btnGenerate_Click(object sender, ImageClickEventArgs e)
+        protected void btnGenerate_Click(object sender, EventArgs e)
         {
             Generate();
         }
 
-        protected void btnContinue_Click(object sender, ImageClickEventArgs e)
-        {
-            if (Request.QueryString["id"].Contains(","))
-            {
-                Response.Redirect("default.aspx");
-            }
-            else
-            {
-                Response.Redirect("ViewOrder.aspx?id=" + Request.QueryString["id"]);
-            }
-        }
-
-        protected void btnContinue2_Click(object sender, ImageClickEventArgs e)
+        protected void btnContinue2_Click(object sender, EventArgs e)
         {
             if (Request.QueryString["id"].Contains(","))
             {

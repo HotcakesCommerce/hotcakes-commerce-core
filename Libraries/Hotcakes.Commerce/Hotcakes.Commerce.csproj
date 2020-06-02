@@ -123,12 +123,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Dnn\System.Web.Helpers.dll</HintPath>
     </Reference>
-     <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Microsoft.AspNet.Mvc.4.0.40804.0\lib\net40\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Routing" />
-     <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Dnn\System.Web.WebPages.dll</HintPath>
     </Reference>
@@ -136,10 +136,6 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml" />
-    <Reference Include="Telerik.Web.UI, Version=2012.2.724.35, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Dnn\Telerik.Web.UI.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\CommonAssemblyInfo.cs">
@@ -190,12 +186,9 @@
     <Compile Include="BusinessRules\OrderTasks\StartOgoneCheckout.cs" />
     <Compile Include="BusinessRules\ThirdPartyCheckoutOrderTask.cs" />
     <Compile Include="BusinessRules\OrderTasks\AuthorizeGiftCards.cs" />
-    <Compile Include="BusinessRules\OrderTasks\AvalaraCancelWhenPaymentRemoved.cs" />
-    <Compile Include="BusinessRules\OrderTasks\AvalaraCommitTaxes.cs" />
     <Compile Include="BusinessRules\OrderTasks\StartMonerisCheckout.cs" />
     <Compile Include="BusinessRules\OrderTasks\ReceiveRewardsPoints.cs" />
     <Compile Include="BusinessRules\OrderTasks\RunPaymentChangedWorkflow.cs" />
-    <Compile Include="BusinessRules\OrderTasks\AvalaraCancel.cs" />
     <Compile Include="BusinessRules\OrderTasks\EmailVATInvoice.cs" />
     <Compile Include="BusinessRules\WorkflowFactory.cs" />
     <Compile Include="Catalog\CatalogExport.cs" />
@@ -221,6 +214,7 @@
     <Compile Include="Catalog\ProductPurchasedWithInfo.cs" />
     <Compile Include="Catalog\ResevationItem.cs" />
     <Compile Include="Catalog\ValidateSelectionsResult.cs" />
+    <Compile Include="Common\Constants.cs" />
     <Compile Include="Configuration\IConfigurationManager.cs" />
     <Compile Include="Configuration\SmtpSettings.cs" />
     <Compile Include="Contacts\AffiliatePayment.cs" />
@@ -639,7 +633,6 @@
     <Compile Include="Search\Searcher.cs" />
     <Compile Include="Search\ProductSearchResultAdv.cs" />
     <Compile Include="Search\SqlSearchProvider.cs" />
-    <Compile Include="Obsolete\HccAppHelper.cs" />
     <Compile Include="Extensions\HccHttpContextWrapper.cs" />
     <Compile Include="Extensions\HccHttpRequestWrapper.cs" />
     <Compile Include="Extensions\HccHttpResponseWrapper.cs" />
@@ -732,8 +725,6 @@
     <Compile Include="Contacts\AddressList.cs" />
     <Compile Include="Contacts\AddressRepository.cs" />
     <Compile Include="Contacts\AddressTypes.cs" />
-    <Compile Include="Contacts\AffiliateContact.cs" />
-    <Compile Include="Obsolete\AffiliateContactRepository.cs" />
     <Compile Include="Contacts\AffiliateReferralRepository.cs" />
     <Compile Include="Contacts\AffiliateRepository.cs" />
     <Compile Include="Contacts\ContactService.cs" />
@@ -747,8 +738,6 @@
     <Compile Include="Contacts\PriceGroup.cs" />
     <Compile Include="Contacts\PriceGroupRepository.cs" />
     <Compile Include="Contacts\PricingTypes.cs" />
-    <Compile Include="Obsolete\VendorManufacturerContact.cs" />
-    <Compile Include="Obsolete\VendorManufacturerContactRepository.cs" />
     <Compile Include="Contacts\VendorManufacturerType.cs" />
     <Compile Include="Contacts\VendorRepository.cs" />
     <Compile Include="Content\ContentBlockRepository.cs" />
@@ -767,7 +756,6 @@
     </Compile>
     <Compile Include="Content\PublishStatus.cs" />
     <Compile Include="Content\Replaceable.cs" />
-    <Compile Include="Obsolete\SiteTermIds.cs" />
     <Compile Include="Controls\AddressTypes.cs" />
     <Compile Include="Controls\ControlNotFoundException.cs" />
     <Compile Include="Controls\ModificationControl.cs">
@@ -825,14 +813,12 @@
     <Compile Include="Metrics\MetricsServices.cs" />
     <Compile Include="Metrics\SearchQueryRepository.cs" />
     <Compile Include="Metrics\YahooAnalytics.cs" />
-    <Compile Include="Obsolete\IPurchasable.cs" />
     <Compile Include="Orders\LineItemRepository.cs" />
     <Compile Include="Orders\OrderBatchProcessor.cs" />
     <Compile Include="Orders\IOrderCalculator.cs" />
     <Compile Include="Orders\OrderCalculator.cs" />
     <Compile Include="Orders\OrderCouponRepository.cs" />
     <Compile Include="Orders\OrderNoteRepository.cs" />
-    <Compile Include="Obsolete\OrderNumberGenerator.cs" />
     <Compile Include="Orders\OrderPackage.cs" />
     <Compile Include="Orders\OrderPackageItem.cs" />
     <Compile Include="Orders\OrderPackageRepository.cs" />
@@ -916,7 +902,6 @@
     <Compile Include="Content\DisplayMessageType.cs" />
     <Compile Include="Content\HtmlTemplate.cs" />
     <Compile Include="Content\HtmlTemplateTag.cs" />
-    <Compile Include="Obsolete\SiteTerms.cs" />
     <Compile Include="Content\TextEditorBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1021,7 +1006,7 @@
     <Compile Include="Utilities\DateHelper.cs" />
     <Compile Include="Utilities\DateRange.cs" />
     <Compile Include="Utilities\DateRangeType.cs" />
-    <Compile Include="Obsolete\EnumToString.cs" />
+    <Compile Include="Utilities\FileSystemHelper.cs" />
     <Compile Include="Utilities\HccRequestContextUtils.cs" />
     <Compile Include="Utilities\HtmlRendering.cs" />
     <Compile Include="Utilities\ImageHelper.cs" />

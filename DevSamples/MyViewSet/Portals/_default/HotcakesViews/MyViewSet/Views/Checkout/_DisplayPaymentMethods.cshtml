@@ -3,19 +3,17 @@
 
 @helper DisplayMethodOption(PaymentMethod payMethod)
 {
-    <input type="radio" value="@payMethod.MethodId" name="paymethod" id="paymethod-@payMethod.MethodId"
-    @if (Model.PaymentViewModel.SelectedMethodId == payMethod.MethodId)
-    { <text>checked="checked"</text> }
-    />
-    <h4>
-		  @if (String.IsNullOrEmpty(Localization.GetString("Payment" + payMethod.MethodName)))
-			{
-				<label for="paymethod-@payMethod.MethodId">@payMethod.MethodName</label>
-			}else
-			{
-				<label for="paymethod-@payMethod.MethodId">@Localization.GetString("Payment" + payMethod.MethodName)</label>
-			}
-    </h4>
+    <div class="radio">
+        <input type="radio" value="@payMethod.MethodId" name="paymethod" id="paymethod-@payMethod.MethodId" 
+            @if (Model.PaymentViewModel.SelectedMethodId == payMethod.MethodId) { <text>checked="checked"</text> } />
+        @if (String.IsNullOrEmpty(Localization.GetString("Payment" + payMethod.MethodName)))
+        {
+            <label for="paymethod-@payMethod.MethodId" title="@Localization.GetString("PayUsing") @Localization.GetString("Payment" + payMethod.MethodName)">@payMethod.MethodName</label>
+        }else
+        {
+            <label for="paymethod-@payMethod.MethodId" title="@Localization.GetString("PayUsing") @Localization.GetString("Payment" + payMethod.MethodName)">@Localization.GetString("Payment" + payMethod.MethodName)</label>
+        }
+    </div>
 }
 <div class="hc-payment-methods">
     <div id="hcNoPayment"
@@ -24,9 +22,12 @@
             <text>style="display: none;"</text>
         }
         >
-        <input type="radio" value="" name="paymethod" id="paymethod-nopayment" />
-        <h4>
-            <label for="paymethod-nopayment">@Localization.GetString("PaymentNoPaymentNeeded")</label></h4>
+        <div class="form-group">
+            <div class="radio">
+                <input type="radio" value="" name="paymethod" id="paymethod-nopayment" />
+                <label for="paymethod-nopayment">@Localization.GetString("PaymentNoPaymentNeeded")</label>
+            </div>
+        </div>
     </div>
     <div id="hcPayment">
         @foreach(var payMethod in Model.PaymentViewModel.PaymentMethods)
@@ -54,24 +55,32 @@
                 break;
                 case PaymentMethods.PurchaseOrderId:
                 {
-                    <div class="hc-purchaseorder">
-                        @DisplayMethodOption(payMethod)
-                        <div class="dnnFormItem">
-                            <input type="text" name="ponumber" size="10" value="@Model.PaymentViewModel.DataPurchaseOrderNumber" 
-                            tabindex="510"
-                            class="@Model.IsErr("purchaseorder")" />
+                    <div>
+                        @DisplayMethodOption(payMethod)    
+                        <div class="hc-purchase-order clearfix">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="ponumber">@Localization.GetString("PoNumber"):</label>
+                                <div class="col-sm-offset-0 col-sm-6">
+                                    <input type="text" id="ponumber" name="ponumber" value="@Model.PaymentViewModel.DataPurchaseOrderNumber" 
+                                        class="form-control medium @Model.IsErr("purchaseorder")" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 }
                 break;
                 case PaymentMethods.CompanyAccountId:
                 {
-                    <div class="hc-companyaccount">
+                    <div>
                         @DisplayMethodOption(payMethod)
-                        <div class="dnnFormItem">
-                            <input type="text" name="accountnumber" size="10" tabindex="520"
-                            value="@Model.PaymentViewModel.DataCompanyAccountNumber" 
-                            class="@Model.IsErr("accountnumber")" />
+                        <div class="hc-companyaccount clearfix">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="accountnumber">@Localization.GetString("AcctNumber"):</label>
+                                <div class="col-sm-offset-0 col-sm-6">
+                                    <input type="text" id="accountnumber" name="accountnumber" value="@Model.PaymentViewModel.DataCompanyAccountNumber" 
+                                        class="form-control medium @Model.IsErr("accountnumber")" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 }

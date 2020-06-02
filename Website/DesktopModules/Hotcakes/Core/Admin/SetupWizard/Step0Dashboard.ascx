@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Step0Dashboard.ascx.cs" Inherits="Hotcakes.Modules.Core.Admin.SetupWizard.Step0Dashboard" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <div class="hcWizWelcome hcBlockRow">
     <h2><%=Localization.GetString("WelcomeHeader") %></h2>
@@ -25,15 +24,15 @@
         <asp:Panel ID="pnlPageUrls" runat="server">
         <div class="hcFormItem">
             <asp:Label ID="lblCategory" resourcekey="lblCategory" AssociatedControlID="txtCategoryUrl" runat="server" CssClass="hcLabel" />
-            <telerik:RadTextBox ID="txtCategoryUrl" runat="server" />
+            <asp:TextBox ID="txtCategoryUrl" runat="server" MaxLength="250" />
         </div>
         <div class="hcFormItem">
             <asp:Label ID="lblProducts" resourcekey="lblProducts" AssociatedControlID="txtProductsUrl" runat="server" CssClass="hcLabel" />
-            <telerik:RadTextBox ID="txtProductsUrl" runat="server" />
+            <asp:TextBox ID="txtProductsUrl" runat="server" MaxLength="250" />
         </div>
         <div class="hcFormItem">
             <asp:Label ID="lblCheckout" resourcekey="lblCheckout" AssociatedControlID="txtCheckoutUrl" runat="server" CssClass="hcLabel" />
-            <telerik:RadTextBox ID="txtCheckoutUrl" runat="server" />
+            <asp:TextBox ID="txtCheckoutUrl" runat="server" MaxLength="250" />
         </div>
         </asp:Panel>
     </div>

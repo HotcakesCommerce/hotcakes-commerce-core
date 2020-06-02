@@ -214,27 +214,5 @@ namespace Hotcakes.Commerce.Content
         {
             Delete(cu => cu.StoreId == storeId);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static CustomUrlRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new CustomUrlRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static CustomUrlRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new CustomUrlRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public CustomUrlRepository(HccRequestContext c, IRepositoryStrategy<hcc_CustomUrl> r, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

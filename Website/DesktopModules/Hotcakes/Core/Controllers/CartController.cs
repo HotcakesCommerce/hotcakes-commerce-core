@@ -694,7 +694,7 @@ namespace Hotcakes.Modules.Core.Controllers
                         Item = lineItem,
                         Product = product,
                         ShowImage = true,
-                        ImageUrl = DiskStorage.ProductVariantImageUrlMedium(
+                        ImageUrl = DiskStorage.ProductVariantImageUrlSmall(
                             HccApp, lineItem.ProductId,
                             product.ImageFileSmall,
                             lineItem.VariantId, Request.IsSecureConnection),

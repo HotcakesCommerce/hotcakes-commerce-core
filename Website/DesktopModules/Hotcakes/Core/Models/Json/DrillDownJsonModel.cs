@@ -46,8 +46,14 @@ namespace Hotcakes.Modules.Core.Models.Json
 
         public List<CategoryMenuItemViewModel> SubCategories { get; set; }
 
-        // TODO: PBI 33323 Depreciate and replace this with the correctly spelled variant
-        public List<CheckboxFacetItem> Manufactures { get; set; }
+        [Obsolete("Deprecated in Hotcakes Commerce 03.03.00. Please use the Manufacturers property instead. Removing in version 03.04.00 or later.")]
+        public List<CheckboxFacetItem> Manufactures
+        {
+            get { return Manufacturers; }
+            set { Manufacturers = value; }
+        }
+
+        public List<CheckboxFacetItem> Manufacturers { get; set; }
 
         public List<CheckboxFacetItem> Vendors { get; set; }
 
@@ -66,13 +72,6 @@ namespace Hotcakes.Modules.Core.Models.Json
         public decimal SelectedMinPrice { get; set; }
 
         public decimal SelectedMaxPrice { get; set; }
-
-        [Obsolete("Use the SelectedManufacturers property instead. This will be depreciated in HCC 2.0.")]
-        public List<SelectedFacetItem> SelectedManufactures
-        {
-            get { return _SelectedManufacturers; }
-            set { _SelectedManufacturers = value; }
-        }
 
         public List<SelectedFacetItem> SelectedManufacturers
         {

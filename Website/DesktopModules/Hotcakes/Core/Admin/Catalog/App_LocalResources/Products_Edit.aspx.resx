@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btnDelete.Text" xml:space="preserve">
+    <value>Delete Product</value>
+  </data>
+  <data name="Confirm.Text" xml:space="preserve">
+    <value>Are you sure you want to delete this product?</value>
+  </data>
+  <data name="lblProductName.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="lblProductStyle.Text" xml:space="preserve">
+    <value>Product Style</value>
+  </data>
+  <data name="lblSku.Text" xml:space="preserve">
+    <value>SKU</value>
+  </data>
+  <data name="lnkBacktoAbandonedCartsReport.Text" xml:space="preserve">
+    <value>Back to Abandoned Carts Report</value>
+  </data>
+  <data name="lnkClone.Text" xml:space="preserve">
+    <value>Clone Product</value>
+  </data>
+  <data name="lnkViewInStore.Text" xml:space="preserve">
+    <value>View in Store</value>
+  </data>
+  <data name="MainHeader.Text" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="rbBehaviour_Bundle.Text" xml:space="preserve">
+    <value>Bundle</value>
+  </data>
+  <data name="rbBehaviour_GiftCard.Text" xml:space="preserve">
+    <value>Gift Card</value>
+  </data>
+  <data name="rbBehaviour_Product.Text" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="valNameRequired.ErrorMessage" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="valSkuRequired.Text" xml:space="preserve">
+    <value>SKU is required</value>
+  </data>
+  <data name="AllowReviews_Inherit.Text" xml:space="preserve">
+    <value>Inherit</value>
+  </data>
+  <data name="AllowReviews_No.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="AllowReviews_Yes.Text" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="btnSave.Text" xml:space="preserve">
+    <value>Save &amp; Close</value>
+  </data>
+  <data name="btnUpdate.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="chkActive.Text" xml:space="preserve">
+    <value>Is Active</value>
+  </data>
+  <data name="chkFeatured.Text" xml:space="preserve">
+    <value>Is Featured</value>
+  </data>
+  <data name="chkHideQty.Text" xml:space="preserve">
+    <value>Hide Quantity</value>
+  </data>
+  <data name="chkNonShipping.Text" xml:space="preserve">
+    <value>Is a Non-Shipping Product</value>
+  </data>
+  <data name="chkSearchable.Text" xml:space="preserve">
+    <value>Is Searchable</value>
+  </data>
+  <data name="chkShipSeparately.Text" xml:space="preserve">
+    <value>Ships in a Separate Box</value>
+  </data>
+  <data name="chkUserPrice.Text" xml:space="preserve">
+    <value>Allow User Supplied Price</value>
+  </data>
+  <data name="cstvHeight.ErrorMessage" xml:space="preserve">
+    <value>Height must be a numeric value</value>
+  </data>
+  <data name="cstvWeight.ErrorMessage" xml:space="preserve">
+    <value>Weight must be a numeric value</value>
+  </data>
+  <data name="cstvWidth.ErrorMessage" xml:space="preserve">
+    <value>Width must be a numeric value</value>
+  </data>
+  <data name="cvCostField.ErrorMessage" xml:space="preserve">
+    <value>Cost must be a currency value</value>
+  </data>
+  <data name="cvExtraShipFee.ErrorMessage" xml:space="preserve">
+    <value>Extra ship fee must be a numeric value</value>
+  </data>
+  <data name="cvHeight.ErrorMessage" xml:space="preserve">
+    <value>Height must be a valid number</value>
+  </data>
+  <data name="cvLength.ErrorMessage" xml:space="preserve">
+    <value>Length must be a valid number</value>
+  </data>
+  <data name="cvListPrice.ErrorMessage" xml:space="preserve">
+    <value>MSRP must be a currency value</value>
+  </data>
+  <data name="cvSitePrice.ErrorMessage" xml:space="preserve">
+    <value>Site price must be a currency value</value>
+  </data>
+  <data name="cvWeight.ErrorMessage" xml:space="preserve">
+    <value>Weight must be a valid number</value>
+  </data>
+  <data name="cvWidth.ErrorMessage" xml:space="preserve">
+    <value>Width must be a valid number</value>
+  </data>
+  <data name="DescriptionHeader.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="DimensionInset_Height.Text" xml:space="preserve">
+    <value>H</value>
+  </data>
+  <data name="DimensionInset_Length.Text" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="DimensionInset_Width.Text" xml:space="preserve">
+    <value>W</value>
+  </data>
+  <data name="DisplayHeader.Text" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="ImageFileTypeError.Text" xml:space="preserve">
+    <value>Only .PNG, .JPG, .GIF file types are allowed for image uploads.</value>
+  </data>
+  <data name="lblAllowReviews.Text" xml:space="preserve">
+    <value>Allow Reviews</value>
+  </data>
+  <data name="lblAlternateSearchKeywords.Text" xml:space="preserve">
+    <value>Alternate Search Keywords</value>
+  </data>
+  <data name="lblDimensions.Text" xml:space="preserve">
+    <value>Dimensions</value>
+  </data>
+  <data name="lblExtraShipFee.Text" xml:space="preserve">
+    <value>Extra Ship Fee</value>
+  </data>
+  <data name="lblFooterContentColumn.Text" xml:space="preserve">
+    <value>Footer Content Column</value>
+  </data>
+  <data name="lblHeaderContentColumn.Text" xml:space="preserve">
+    <value>Header Content Column</value>
+  </data>
+  <data name="lblImageDescription.Text" xml:space="preserve">
+    <value>Image Description</value>
+  </data>
+  <data name="lblLargeImage.Text" xml:space="preserve">
+    <value>Large Image</value>
+  </data>
+  <data name="lblManufacturer.Text" xml:space="preserve">
+    <value>Manufacturer</value>
+  </data>
+  <data name="lblMetaDescription.Text" xml:space="preserve">
+    <value>Meta Description</value>
+  </data>
+  <data name="lblMetaKeywords.Text" xml:space="preserve">
+    <value>Meta Keywords</value>
+  </data>
+  <data name="lblMetaTitle.Text" xml:space="preserve">
+    <value>Meta Title</value>
+  </data>
+  <data name="lblMinimumQuantity.Text" xml:space="preserve">
+    <value>Minimum Quantity</value>
+  </data>
+  <data name="lblMSRP.Text" xml:space="preserve">
+    <value>MSRP</value>
+  </data>
+  <data name="lblPageURL.Text" xml:space="preserve">
+    <value>Page URL</value>
+  </data>
+  <data name="lblPrice.Text" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="lblPricing.Text" xml:space="preserve">
+    <value>Pricing</value>
+  </data>
+  <data name="lblProductType.Text" xml:space="preserve">
+    <value>Product Type</value>
+  </data>
+  <data name="lblShipMode.Text" xml:space="preserve">
+    <value>Ship Mode</value>
+  </data>
+  <data name="lblShippingCharges.Help" xml:space="preserve">
+    <value>This should not be used as a promotion, but to define products that always or never charge the specified fees.</value>
+  </data>
+  <data name="lblShippingCharges.Text" xml:space="preserve">
+    <value>Shipping Charges</value>
+  </data>
+  <data name="lblSmallImage.Text" xml:space="preserve">
+    <value>Small Image</value>
+  </data>
+  <data name="lblSwatchFolderName.Text" xml:space="preserve">
+    <value>Swatch Folder Name</value>
+  </data>
+  <data name="lblTaxonomyTags.Text" xml:space="preserve">
+    <value>Taxonomy Tags</value>
+  </data>
+  <data name="lblTaxSchedule.Text" xml:space="preserve">
+    <value>Tax Schedule</value>
+  </data>
+  <data name="lblTemplate.Text" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="lblText.Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="lblUserPriceLabel.Text" xml:space="preserve">
+    <value>User Price Label</value>
+  </data>
+  <data name="lblVendor.Text" xml:space="preserve">
+    <value>Vendor</value>
+  </data>
+  <data name="lblWeight.Text" xml:space="preserve">
+    <value>Weight</value>
+  </data>
+  <data name="NoManufacturer.Text" xml:space="preserve">
+    <value>- No Manufacturer -</value>
+  </data>
+  <data name="NotSet.Text" xml:space="preserve">
+    <value>- Not Set -</value>
+  </data>
+  <data name="NoVendor.Text" xml:space="preserve">
+    <value>- No Vendor -</value>
+  </data>
+  <data name="ProductDeleteFailure.Text" xml:space="preserve">
+    <value>Unable to delete the product. Please check the event log.</value>
+  </data>
+  <data name="ProductTypeCustomValidator.ErrorMessage1" xml:space="preserve">
+    <value>{0} must be a valid monetary type</value>
+  </data>
+  <data name="ProductTypeCustomValidator.ErrorMessage2" xml:space="preserve">
+    <value>{0}  must be a valid date</value>
+  </data>
+  <data name="ProductTypeDefault.Text" xml:space="preserve">
+    <value>Generic</value>
+  </data>
+  <data name="ProductUpdateSuccess.Text" xml:space="preserve">
+    <value>Product updated successfully</value>
+  </data>
+  <data name="revMinimumQty.ErrorMessage" xml:space="preserve">
+    <value>Minimum quantity must be numeric</value>
+  </data>
+  <data name="rfvCostField.ErrorMessage" xml:space="preserve">
+    <value>Cost is required</value>
+  </data>
+  <data name="rfvExtraShipFee.ErrorMessage" xml:space="preserve">
+    <value>Extra ship fee is required</value>
+  </data>
+  <data name="rfvHeight.ErrorMessage" xml:space="preserve">
+    <value>Height is required</value>
+  </data>
+  <data name="rfvLength.ErrorMessage" xml:space="preserve">
+    <value>Length is required</value>
+  </data>
+  <data name="rfvListPrice.ErrorMessage" xml:space="preserve">
+    <value>List price is required</value>
+  </data>
+  <data name="rfvMinimumQty.ErrorMessage" xml:space="preserve">
+    <value>Minimum quantity is required</value>
+  </data>
+  <data name="rfvSitePrice.ErrorMessage" xml:space="preserve">
+    <value>Site price is required</value>
+  </data>
+  <data name="rfvWeight.ErrorMessage" xml:space="preserve">
+    <value>Weight is required</value>
+  </data>
+  <data name="rfvWidth.ErrorMessage" xml:space="preserve">
+    <value>Width is required</value>
+  </data>
+  <data name="SaveProductFailure.Text" xml:space="preserve">
+    <value>Unable to save the product. Please check the event log.</value>
+  </data>
+  <data name="ShipMode_FromManufacturer.Text" xml:space="preserve">
+    <value>Drop Ship from Manufacturer</value>
+  </data>
+  <data name="ShipMode_FromStore.Text" xml:space="preserve">
+    <value>Ship from Store</value>
+  </data>
+  <data name="ShipMode_FromVendor.Text" xml:space="preserve">
+    <value>Drop Ship from Vendor</value>
+  </data>
+  <data name="ShippingCharge_ChargeAll.Text" xml:space="preserve">
+    <value>Charge Shipping &amp; Handling</value>
+  </data>
+  <data name="ShippingCharge_ChargeHandling.Text" xml:space="preserve">
+    <value>Charge Handling Only</value>
+  </data>
+  <data name="ShippingCharge_ChargeShipping.Text" xml:space="preserve">
+    <value>Charge Shipping Only</value>
+  </data>
+  <data name="ShippingCharge_NoCharge.Text" xml:space="preserve">
+    <value>No Charge</value>
+  </data>
+  <data name="SkuExists.Text" xml:space="preserve">
+    <value>The entered SKU already exists on another product or variant. Please pick another SKU.</value>
+  </data>
+  <data name="TaxExemptField.Text" xml:space="preserve">
+    <value>Is Tax Exempt</value>
+  </data>
+  <data name="TaxHeader.Text" xml:space="preserve">
+    <value>Tax</value>
+  </data>
+  <data name="tlvMetaDescription.Text" xml:space="preserve">
+    <value>Meta description can not be more than 255 characters long</value>
+  </data>
+  <data name="tlvMetaTitle.Text" xml:space="preserve">
+    <value>Meta title can not be more than 512 characters long</value>
+  </data>
+  <data name="tlvNameLength.Text" xml:space="preserve">
+    <value>Name cannot be longer than 255 characters</value>
+  </data>
+  <data name="tlvSkuLength.Text" xml:space="preserve">
+    <value>SKU cannot be more than 50 characters long</value>
+  </data>
+  <data name="UrlExists.Text" xml:space="preserve">
+    <value>The requested URL is already in use by another product or category. Please choose another URL. </value>
+  </data>
+  <data name="WeightType.Text" xml:space="preserve">
+    <value>lbs</value>
+  </data>
+  <data name="lblCost.Text" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+</root>

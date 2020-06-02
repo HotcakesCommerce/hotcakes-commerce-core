@@ -72,6 +72,11 @@ namespace Hotcakes.Commerce
         private const string _AdminCustomerKeywords = "HccAdminCustomerKeywords";
         private readonly HttpSessionState _session;
 
+        public static HotcakesApplication HccApp
+        {
+            get { return HotcakesApplication.Current; }
+        }
+
         public SessionManager(HttpSessionState session)
         {
             _session = session;
@@ -367,13 +372,12 @@ namespace Hotcakes.Commerce
 
         public static void SetCurrentPaymentPendingCartId(Store currentStore, string value)
         {
-            SetCookieString(WebAppSettings.CookieNameCartIdPaymentPending(currentStore.Id), value,
-                DateTime.Now.AddDays(14), false);
+            SetCookieString(WebAppSettings.CookieNameCartIdPaymentPending(currentStore.Id), value, DateTime.Now.AddDays(14));
         }
 
         public static void SetCurrentAffiliateId(long id, DateTime expirationDate)
         {
-            SetCookieString(WebAppSettings.CookieNameAffiliateId, id.ToString(), expirationDate, false);
+            SetCookieString(WebAppSettings.CookieNameAffiliateId, id.ToString(), expirationDate);
         }
 
         public static long? CurrentAffiliateID(Store currentStore)
@@ -525,21 +529,38 @@ namespace Hotcakes.Commerce
 
         public static void SetCookieString(string cookieName, string value)
         {
-            SetCookieString(cookieName, value, null, false);
+            SetCookieString(cookieName, value, null);
         }
 
-        public static void SetCookieString(string cookieName, string value, DateTime? expirationDate, bool secure)
+        public static void SetCookieString(string cookieName, string value, DateTime? expirationDate)
         {
 	        if (Factory.HttpContext != null)
 	        {
 		        try
-		        {
-			        var saveCookie = new HttpCookie(cookieName, value);
-			        if (expirationDate.HasValue)
-				        saveCookie.Expires = expirationDate.Value;
-			        else
-				        saveCookie.Expires = DateTime.Now.AddYears(50);
-			        saveCookie.Secure = secure;
+                {
+                    var isSecure = false;
+                    if (HccApp != null)
+                    { 
+                        isSecure = HccApp.CurrentStore.Settings.ForceAdminSSL;
+                    }
+                    else
+                    {
+                        isSecure = Factory.HttpContext.Request.IsSecureConnection;
+                    }
+
+                    var saveCookie = new HttpCookie(cookieName, value);
+
+                    if (expirationDate.HasValue)
+                    {
+                        saveCookie.Expires = expirationDate.Value;
+                    }
+                    else
+                    {
+                        saveCookie.Expires = DateTime.Now.AddYears(50);
+                    }
+
+                    saveCookie.Secure = isSecure;
+
 			        Factory.HttpContext.Request.Cookies.Remove(cookieName);
 			        Factory.HttpContext.Response.Cookies.Add(saveCookie);
 		        }
@@ -548,21 +569,6 @@ namespace Hotcakes.Commerce
 			        EventLog.LogEvent(Ex);
 		        }
 	        }
-        }
-
-        #endregion
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.7.5. Use OrderService.CurrentShoppingCart instead.")]
-        public static Order CurrentShoppingCart(OrderService svc, Store currentStore)
-        {
-            return svc.CurrentShoppingCart();
-        }
-
-        [Obsolete("Obsolete in 1.7.5. Use OrderService.InvalidateCachedCart instead.")]
-        public static void InvalidateCachedCart()
-        {
         }
 
         #endregion

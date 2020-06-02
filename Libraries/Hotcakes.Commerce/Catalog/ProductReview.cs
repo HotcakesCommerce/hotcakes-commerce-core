@@ -76,16 +76,6 @@ namespace Hotcakes.Commerce.Catalog
         public string ProductBvin { get; set; }
 
         /// <summary>
-        ///     The date/time stamp reflecting when the review was submitted. This value is shown to customers.
-        /// </summary>
-        [Obsolete("Obsolete in 1.8.0. Use DateHelper.ConvertUtcToStoreTime method instead")]
-        public DateTime ReviewDate
-        {
-            get { return ReviewDateUtc.ToLocalTime(); }
-            set { ReviewDateUtc = value.ToUniversalTime(); }
-        }
-
-        /// <summary>
         ///     The UTC version of the date/time stamp reflecting when the review was submitted.
         /// </summary>
         public DateTime ReviewDateUtc { get; set; }

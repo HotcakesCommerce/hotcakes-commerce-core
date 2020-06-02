@@ -261,27 +261,5 @@ namespace Hotcakes.Commerce.Membership
                 Context.IntegrationEvents.CustomerAccountDeleted(item);
             return result;
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static CustomerAccountRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new CustomerAccountRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static CustomerAccountRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new CustomerAccountRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public CustomerAccountRepository(HccRequestContext c, IRepositoryStrategy<hcc_User> r, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

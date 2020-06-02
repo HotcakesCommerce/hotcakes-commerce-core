@@ -132,4 +132,7 @@
   <data name="FileDoesNotExist.Text" xml:space="preserve">
     <value>Whoops! The file you tried to download was already downloaded. Please generate a new one.</value>
   </data>
+  <data name="NoProducts.Test" xml:space="preserve">
+    <value>No products found.</value>
+  </data>
 </root>

@@ -109,27 +109,5 @@ namespace Hotcakes.Commerce.Accounts
         {
             return FindListPoco(q => { return q.Where(y => y.UserId == userId); });
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static AuthTokenRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new AuthTokenRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static AuthTokenRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new AuthTokenRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public AuthTokenRepository(HccRequestContext c, IRepositoryStrategy<hcc_AuthTokens> r, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

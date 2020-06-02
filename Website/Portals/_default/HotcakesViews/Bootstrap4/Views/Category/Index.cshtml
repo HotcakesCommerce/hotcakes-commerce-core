@@ -1,0 +1,70 @@
+﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+@using Hotcakes.Modules.Core.AppCode
+@Html.RegisterViewScript("imagesloaded.pkgd.min.js")
+@Html.RegisterViewScript("masonry.min.js")
+<!-- Hotcakes Commerce: Category > Index -->
+<div class="container">
+    <div class="row hc-category">
+        @Html.Partial("_Admin")
+        <div class="container">
+            @Html.Action("CategoryTrail", "BreadCrumb", new { cat = Model.LocalCategory })
+            <div class="row">
+                <div class="col-12">
+                @if (Model.LocalCategory.ShowTitle)
+                {
+                    <h1>@Model.LocalCategory.Name</h1>
+                }
+                </div>
+            </div>
+            <div class="row">
+                @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PreContentColumnId })
+            </div>
+            @Html.Partial("_Header", Model)
+            @if (Model.SubCategories.Count > 0)
+            {
+                <div class="container">
+                    <div class="row">
+                        @foreach (var subcat in Model.SubCategories)
+                        {
+                            <div class="col-sm-6 col-md-4 mb-4">
+                                <div class="card">
+                                    <a href="@subcat.LinkUrl">
+                                        <img class="card-img-top img-fluid" src="@subcat.IconUrl" alt="@subcat.AltText" />
+                                    </a>
+                                    <div class="card-body">
+                                        <a href="@subcat.LinkUrl" class="card-link">@subcat.Name</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+            <div class="row clearfix">
+                @Html.Partial("_Pager", Model.PagerData, new ViewDataDictionary { { "sortByList", Model.SortSelectList } })
+            </div>
+
+            <div class="container">
+                <div class="row hc-product-cards">
+                    <div class="col-6 col-md-4 hc-product-card-sizer invisible"></div>
+                    @foreach (var item in Model.Products)
+                    {
+                        <div class="col-6 col-md-4 hc-product-card">
+                            @Html.Partial("_RenderSingleProduct", item)
+                        </div>
+                    }
+                </div>
+            </div>
+            
+            <div class="row clearfix">
+                @Html.Partial("_Pager", Model.PagerData)
+            </div>
+
+            <div class="row">
+                @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PostContentColumnId })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>

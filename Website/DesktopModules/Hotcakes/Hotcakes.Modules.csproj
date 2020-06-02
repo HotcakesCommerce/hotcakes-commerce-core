@@ -56,7 +56,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ClientDependency.Core, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ClientDependency.Core">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\ClientDependency.Core.dll</HintPath>
     </Reference>
@@ -77,7 +77,7 @@
     <Reference Include="DotNetNuke.Web">
       <HintPath>..\..\..\References\Dnn\DotNetNuke.Web.dll</HintPath>
     </Reference>
-    <Reference Include="DotNetNuke.Web.Client, Version=6.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DotNetNuke.Web.Client">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\DotNetNuke.Web.Client.dll</HintPath>
     </Reference>
@@ -92,13 +92,9 @@
       <HintPath>..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Hotcakes.Common.Dnn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Hotcakes.Common.Dnn">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Hcc\Hotcakes.Common.Dnn.dll</HintPath>
-    </Reference>
-    <Reference Include="Hotcakes.Licensing.Common, Version=1.5.0.25262, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Hcc\Hotcakes.Licensing.Common.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
@@ -111,7 +107,7 @@
     <Reference Include="MiniProfiler.EntityFramework6">
       <HintPath>..\..\..\packages\MiniProfiler.EF6.3.0.11\lib\net40\MiniProfiler.EntityFramework6.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -121,7 +117,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Net.Http.Formatting">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -133,7 +129,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Http">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\System.Web.Http.dll</HintPath>
     </Reference>
@@ -144,7 +140,7 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.WebPages">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\System.Web.WebPages.dll</HintPath>
     </Reference>
@@ -153,14 +149,12 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Telerik.Web.UI">
-      <HintPath>..\..\..\References\Dnn\Telerik.Web.UI.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="01.00.04.txt" />
     <Content Include="01.00.06.txt" />
     <Content Include="01.08.00.txt" />
+    <Content Include="03.03.00.txt" />
     <Content Include="AddressBook\AddressBookView.ascx" />
     <Content Include="AffiliateDashboard\AffiliateDashboardView.ascx" />
     <Content Include="AffiliateRegistration\AffiliateRegistrationView.ascx" />
@@ -185,43 +179,9 @@
     <Content Include="01.05.00.txt" />
     <Content Include="01.06.00.txt" />
     <Content Include="01.07.00.txt" />
-    <Content Include="ControlPanel\ControlBar.ascx" />
-    <Content Include="ControlPanel\ControlBar.css">
-      <DependentUpon>ControlBar.less</DependentUpon>
-    </Content>
-    <Content Include="ControlPanel\controlbarimages\admin_logo.png" />
-    <Content Include="ControlPanel\controlbarimages\admin_menu_icons.png" />
-    <Content Include="ControlPanel\controlbarimages\AdvancedSettings.png" />
-    <Content Include="ControlPanel\controlbarimages\basic.png" />
-    <Content Include="ControlPanel\controlbarimages\BasicSettings.png" />
-    <Content Include="ControlPanel\controlbarimages\Bookmarks.png" />
-    <Content Include="ControlPanel\controlbarimages\bookmarkThis.png" />
-    <Content Include="ControlPanel\controlbarimages\bookmarkThisModule.png" />
-    <Content Include="ControlPanel\controlbarimages\bookmarkThisModule_white.png" />
-    <Content Include="ControlPanel\controlbarimages\closeAddModule.png" />
-    <Content Include="ControlPanel\controlbarimages\ControlBar_bg.jpg" />
-    <Content Include="ControlPanel\controlbarimages\Dropping.png" />
-    <Content Include="ControlPanel\controlbarimages\EditIcons.png" />
-    <Content Include="ControlPanel\controlbarimages\Growing.png" />
-    <Content Include="ControlPanel\controlbarimages\hccLogo.png" />
-    <Content Include="ControlPanel\controlbarimages\hide.png" />
-    <Content Include="ControlPanel\controlbarimages\icons.png" />
-    <Content Include="ControlPanel\controlbarimages\menuArrow.png" />
-    <Content Include="ControlPanel\controlbarimages\service-criticalUpdate.png" />
-    <Content Include="ControlPanel\controlbarimages\service-update.png" />
-    <Content Include="ControlPanel\controlbarimages\show.png" />
-    <Content Include="ControlPanel\controlbarimages\Store-icon.png" />
-    <Content Include="ControlPanel\CategoryPerformanceBar.ascx" />
-    <Content Include="ControlPanel\AdminControlBar.ascx" />
-    <Content Include="ControlPanel\PerformanceBar.css">
-      <DependentUpon>PerformanceBar.less</DependentUpon>
-    </Content>
-    <Content Include="ControlPanel\ProductPerformanceBar.ascx" />
-    <Content Include="ControlPanel\scripts\dnn.controlBar.js" />
     <Content Include="02.00.00.txt" />
-    <Content Include="ControlPanel\scripts\dnn.controlBar_DNN742.js" />
-    <Content Include="ControlPanel\scripts\hcc.category.performanceBar.js" />
     <Content Include="03.00.00.txt" />
+    <Content Include="Core\Admin\Admin.min.js" />
     <Content Include="Core\Admin\admin.min.css">
       <DependentUpon>admin.css</DependentUpon>
     </Content>
@@ -308,7 +268,6 @@
     <Content Include="Core\Admin\Parts\CreditCardGateways\Beanstream\Edit.ascx" />
     <Content Include="Core\Admin\Parts\CreditCardGateways\Test Recurring Gateway\Edit.ascx" />
     <Content Include="Core\Admin\Parts\CreditCardGateways\Ogone\Edit.ascx" />
-    <Content Include="Core\Admin\Parts\Editors\RadEditorAdvanced\Editor.ascx" />
     <Content Include="Core\Admin\Parts\GiftCardGateways\Hotcakes\Edit.ascx" />
     <Content Include="Core\Admin\Parts\PaymentMethods\Moneris\Edit.ascx" />
     <Content Include="Core\Admin\Parts\PaymentMethods\Ogone\Edit.ascx" />
@@ -323,31 +282,129 @@
     <Content Include="Core\Admin\styles.min.css">
       <DependentUpon>styles.css</DependentUpon>
     </Content>
+    <Content Include="Core\Content\demoimages\additional\brown-fedora-02.jpg" />
+    <Content Include="Core\Content\demoimages\additional\brown-fedora-03.jpg" />
+    <Content Include="Core\Content\demoimages\medium\brown-fedora-01.jpg" />
+    <Content Include="Core\Content\demoimages\medium\Laptop.jpg" />
+    <Content Include="Core\Content\demoimages\small\brown-fedora-01.jpg" />
+    <Content Include="Core\Content\demoimages\small\Laptop.jpg" />
+    <Content Include="Core\Content\demoimages\tiny\BraceletBlue.jpg" />
+    <Content Include="Core\Content\demoimages\tiny\brown-fedora-01.jpg" />
+    <Content Include="Core\Content\demoimages\tiny\Cupcake.jpg" />
+    <Content Include="Core\Content\demoimages\tiny\Earrings.jpg" />
+    <Content Include="Core\Content\demoimages\tiny\Laptop.jpg" />
+    <Content Include="Core\Content\demoimages\tiny\PurpleTop.jpg" />
     <Content Include="Core\Controls\CategoryPerformance.ascx" />
     <Content Include="Core\Controls\ProductPerformance.ascx" />
     <Content Include="Core\Controls\StoreNotFound.ascx" />
     <Content Include="Core\Images\hcc-logo.png" />
     <Content Include="Core\Images\message-bubbles.png" />
+    <Content Include="Core\Scripts\chartjs\Chart.Milestone.Legend.min.js" />
+    <Content Include="Core\Scripts\chartjs\Chart.Milestone.min.js" />
     <Content Include="Core\Scripts\chartjs\Chart.Milestone.js" />
     <Content Include="Core\Scripts\chartjs\Chart.Milestone.Legend.js" />
     <Content Include="Core\Scripts\chartjs\Chart.min.js" />
+    <Content Include="Core\Scripts\clipboard.min.js" />
+    <Content Include="Core\Scripts\flatpickr\flatpickr.js" />
+    <Content Include="Core\Scripts\flatpickr\flatpickr.min.css" />
+    <Content Include="Core\Scripts\hcc.admin.dashboard.min.js" />
     <Content Include="Core\Scripts\hcc.admin.dashboard.js" />
+    <Content Include="Core\Scripts\hcc.category.performance.min.js" />
     <Content Include="Core\Scripts\hcc.category.performance.js" />
     <Content Include="Core\Scripts\excanvas.js" />
+    <Content Include="Core\Scripts\hcc.core.min.js" />
+    <Content Include="Core\Scripts\hcc.product.performance.min.js" />
     <Content Include="Core\Scripts\hcc.product.performance.js" />
-    <Content Include="ControlPanel\scripts\hcc.product.performanceBar.js" />
+    <Content Include="Core\Scripts\hcc.views.min.js" />
     <Content Include="Core\Scripts\hcc.views.js" />
+    <Content Include="Core\Scripts\jquery-3.5.1.js" />
+    <Content Include="Core\Scripts\jquery-3.5.1.min.js" />
+    <Content Include="Core\Scripts\jquery-migrate-3.3.0.min.js" />
+    <Content Include="Core\Scripts\jquery-ui-1.12.1\css\jquery-ui.css" />
+    <Content Include="Core\Scripts\jquery-ui-1.12.1\css\jquery-ui.min.css" />
+    <Content Include="Core\Scripts\jquery-ui-1.12.1\css\jquery-ui.structure.css" />
+    <Content Include="Core\Scripts\jquery-ui-1.12.1\css\jquery-ui.structure.min.css" />
+    <Content Include="Core\Scripts\jquery-ui-1.12.1\css\jquery-ui.theme.css" />
+    <Content Include="Core\Scripts\jquery-ui-1.12.1\css\jquery-ui.theme.min.css" />
+    <Content Include="Core\Scripts\jquery-ui-1.12.1\js\jquery-ui.js" />
+    <Content Include="Core\Scripts\jquery-ui-1.12.1\js\jquery-ui.min.js" />
+    <Content Include="Core\Scripts\jquery.fileupload.min.js" />
     <Content Include="Core\Scripts\jquery.fileupload.js" />
+    <Content Include="Core\Scripts\jquery.switchButton.min.js" />
     <Content Include="Core\Scripts\jquery.switchButton.js" />
+    <Content Include="Core\Scripts\jquery.ui.widget.min.js" />
     <Content Include="Core\Scripts\jquery.ui.widget.js" />
-    <Content Include="Core\Scripts\jquery.zclip.min.js" />
     <Content Include="Core\Scripts\knockout.mapping.js" />
-    <Content Include="Core\Scripts\ZeroClipboard.swf" />
+    <Content Include="Core\Scripts\tinymce\jquery.tinymce.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\advlist\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\anchor\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\autolink\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\autoresize\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\autosave\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\bbcode\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\charmap\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\codesample\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\code\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\colorpicker\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\contextmenu\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\directionality\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\emoticons\js\emojis.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\emoticons\js\emojis.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\emoticons\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\fullpage\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\fullscreen\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\help\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\hr\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\imagetools\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\image\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\importcss\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\insertdatetime\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\legacyoutput\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\link\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\lists\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\media\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\nonbreaking\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\noneditable\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\pagebreak\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\paste\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\preview\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\print\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\quickbars\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\save\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\searchreplace\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\spellchecker\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\tabfocus\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\table\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\template\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\textcolor\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\textpattern\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\toc\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\visualblocks\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\visualchars\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\plugins\wordcount\plugin.min.js" />
+    <Content Include="Core\Scripts\tinymce\skins\content\dark\content.min.css" />
+    <Content Include="Core\Scripts\tinymce\skins\content\default\content.min.css" />
+    <Content Include="Core\Scripts\tinymce\skins\content\document\content.min.css" />
+    <Content Include="Core\Scripts\tinymce\skins\content\writer\content.min.css" />
+    <Content Include="Core\Scripts\tinymce\skins\ui\oxide-dark\content.inline.min.css" />
+    <Content Include="Core\Scripts\tinymce\skins\ui\oxide-dark\content.min.css" />
+    <Content Include="Core\Scripts\tinymce\skins\ui\oxide-dark\content.mobile.min.css" />
+    <Content Include="Core\Scripts\tinymce\skins\ui\oxide-dark\skin.min.css" />
+    <Content Include="Core\Scripts\tinymce\skins\ui\oxide-dark\skin.mobile.min.css" />
+    <Content Include="Core\Scripts\tinymce\skins\ui\oxide\content.inline.min.css" />
+    <Content Include="Core\Scripts\tinymce\skins\ui\oxide\content.min.css" />
+    <Content Include="Core\Scripts\tinymce\skins\ui\oxide\content.mobile.min.css" />
+    <Content Include="Core\Scripts\tinymce\skins\ui\oxide\skin.min.css" />
+    <Content Include="Core\Scripts\tinymce\skins\ui\oxide\skin.mobile.min.css" />
+    <Content Include="Core\Scripts\tinymce\themes\mobile\theme.min.js" />
+    <Content Include="Core\Scripts\tinymce\themes\silver\theme.min.js" />
+    <Content Include="Core\Scripts\tinymce\tinymce.min.js" />
     <Content Include="Core\Scripts\plupload\FileUpload.js" />
     <Content Include="Core\Scripts\plupload\plupload.flash.swf" />
     <Content Include="Core\Scripts\plupload\plupload.full.js" />
     <Content Include="Core\Scripts\plupload\plupload.silverlight.xap" />
     <Content Include="ExtensionUrlProvider\Settings.ascx" />
+    <Content Include="module.css" />
     <Content Include="ReleaseNotes.txt" />
     <Content Include="Core\Admin\Controls\DatePickerNavigation.ascx" />
     <Content Include="Core\Admin\Controls\Pager.ascx" />
@@ -787,14 +844,10 @@
     <Content Include="Core\Content\demoimages\medium\BraceletBlue.png" />
     <Content Include="Core\Content\demoimages\medium\CupCake.jpg" />
     <Content Include="Core\Content\demoimages\medium\Earrings.jpg" />
-    <Content Include="Core\Content\demoimages\medium\indiana-jones-hat.jpg" />
-    <Content Include="Core\Content\demoimages\medium\Laptop.png" />
     <Content Include="Core\Content\demoimages\medium\PurpleTop.jpg" />
     <Content Include="Core\Content\demoimages\small\BraceletBlue.png" />
     <Content Include="Core\Content\demoimages\small\CupCake.jpg" />
     <Content Include="Core\Content\demoimages\small\Earrings.jpg" />
-    <Content Include="Core\Content\demoimages\small\indiana-jones-hat.jpg" />
-    <Content Include="Core\Content\demoimages\small\Laptop.png" />
     <Content Include="Core\Content\demoimages\small\PurpleTop.jpg" />
     <Content Include="Core\Admin\Images\DefaultStoreLogo.png" />
     <Content Include="Core\Admin\Images\spinner.gif" />
@@ -835,7 +888,6 @@
     <Content Include="Core\Admin\Parts\CreditCardGateways\Stripe\Edit.ascx" />
     <Content Include="Core\Admin\Parts\CreditCardGateways\Test Gateway\Edit.ascx" />
     <Content Include="Core\Admin\Parts\Editors\None\Editor.ascx" />
-    <Content Include="Core\Admin\Parts\Editors\RadEditor\Editor.ascx" />
     <Content Include="Core\Admin\Parts\Editors\TinyMCE\Editor.ascx" />
     <Content Include="Core\Admin\Parts\PaymentMethods\CreditCard\Edit.ascx" />
     <Content Include="Core\Admin\Parts\PaymentMethods\PaypalExpress\Edit.ascx" />
@@ -867,300 +919,14 @@
     <Content Include="Core\Admin\_admin_header.less" />
     <Content Include="Core\Admin\_admin_common.less" />
     <Content Include="Core\Admin\_admin_wizard.less" />
-    <Content Include="Core\Scripts\jquery-1.5.1.js" />
-    <Content Include="Core\Scripts\jquery-1.5.1.min.js" />
-    <Content Include="Core\Scripts\jquery-ui-1.8.7.custom\css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
-    <Content Include="Core\Scripts\jquery-ui-1.8.7.custom\css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
-    <Content Include="Core\Scripts\jquery-ui-1.8.7.custom\css\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
-    <Content Include="Core\Scripts\jquery-ui-1.8.7.custom\css\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
-    <Content Include="Core\Scripts\jquery-ui-1.8.7.custom\css\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
-    <Content Include="Core\Scripts\jquery-ui-1.8.7.custom\css\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Core\Scripts\jquery-ui-1.8.7.custom\css\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
-    <Content Include="Core\Scripts\jquery-ui-1.8.7.custom\css\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
-    <Content Include="Core\Scripts\jquery-ui-1.8.7.custom\css\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
-    <Content Include="Core\Scripts\jquery-ui-1.8.7.custom\css\ui-lightness\images\ui-icons_222222_256x240.png" />
-    <Content Include="Core\Scripts\jquery-ui-1.8.7.custom\css\ui-lightness\images\ui-icons_228ef1_256x240.png" />
-    <Content Include="Core\Scripts\jquery-ui-1.8.7.custom\css\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
-    <Content Include="Core\Scripts\jquery-ui-1.8.7.custom\css\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
-    <Content Include="Core\Scripts\jquery-ui-1.8.7.custom\css\ui-lightness\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="Core\Scripts\jquery-ui-1.8.7.custom\css\ui-lightness\jquery-ui-1.8.7.custom.css" />
-    <Content Include="Core\Scripts\jquery-ui-1.8.7.custom\js\jquery-ui-1.8.7.custom.min.js" />
     <Content Include="Core\Admin\styles.less" />
     <Content Include="Core\Admin\Admin_old.master" />
     <Content Include="Core\Admin\AdminNav_old.master" />
     <Content Include="Core\Scripts\jquery.validate.hcc.js" />
     <Content Include="Core\Scripts\jquery.validate.hcc.unobtrusive.js" />
     <Content Include="Core\Scripts\tinymce\init.js" />
-    <Content Include="Core\Scripts\tinymce\jquery.tinymce.js" />
-    <Content Include="Core\Scripts\tinymce\langs\en.js" />
     <Content Include="Core\Scripts\tinymce\license.txt" />
-    <Content Include="Core\Scripts\tinymce\plugins\advhr\css\advhr.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\advhr\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\advhr\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\advhr\js\rule.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\advhr\langs\en_dlg.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\advhr\rule.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\advimage\css\advimage.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\advimage\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\advimage\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\advimage\image.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\advimage\img\sample.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\advimage\js\image.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\advimage\langs\en_dlg.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\advlink\css\advlink.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\advlink\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\advlink\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\advlink\js\advlink.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\advlink\langs\en_dlg.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\advlink\link.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\advlist\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\advlist\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\autolink\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\autolink\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\autoresize\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\autoresize\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\autosave\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\autosave\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\autosave\langs\en.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\bbcode\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\bbcode\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\contextmenu\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\contextmenu\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\directionality\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\directionality\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\emotions.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\img\smiley-cool.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\img\smiley-cry.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\img\smiley-embarassed.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\img\smiley-foot-in-mouth.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\img\smiley-frown.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\img\smiley-innocent.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\img\smiley-kiss.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\img\smiley-laughing.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\img\smiley-money-mouth.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\img\smiley-sealed.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\img\smiley-smile.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\img\smiley-surprised.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\img\smiley-tongue-out.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\img\smiley-undecided.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\img\smiley-wink.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\img\smiley-yell.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\js\emotions.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\emotions\langs\en_dlg.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\example\dialog.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\example\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\example\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\example\img\example.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\example\js\dialog.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\example\langs\en.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\example\langs\en_dlg.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\example_dependency\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\example_dependency\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\fullpage\css\fullpage.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\fullpage\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\fullpage\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\fullpage\fullpage.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\fullpage\js\fullpage.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\fullpage\langs\en_dlg.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\fullscreen\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\fullscreen\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\fullscreen\fullscreen.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\iespell\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\iespell\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\inlinepopups\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\inlinepopups\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\alert.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\button.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\buttons.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\confirm.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\corners.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\horizontal.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\vertical.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\window.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\inlinepopups\template.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\insertdatetime\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\insertdatetime\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\layer\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\layer\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\legacyoutput\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\legacyoutput\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\lists\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\lists\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\media\css\content.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\media\css\media.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\media\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\media\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\media\img\flash.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\media\img\flv_player.swf" />
-    <Content Include="Core\Scripts\tinymce\plugins\media\img\quicktime.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\media\img\realmedia.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\media\img\shockwave.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\media\img\trans.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\media\img\windowsmedia.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\media\js\embed.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\media\js\media.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\media\langs\en_dlg.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\media\media.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\media\moxieplayer.swf" />
-    <Content Include="Core\Scripts\tinymce\plugins\nonbreaking\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\nonbreaking\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\noneditable\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\noneditable\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\pagebreak\css\content.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\pagebreak\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\pagebreak\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\pagebreak\img\pagebreak.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\pagebreak\img\trans.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\paste\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\paste\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\paste\js\pastetext.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\paste\js\pasteword.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\paste\langs\en_dlg.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\paste\pastetext.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\paste\pasteword.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\preview\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\preview\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\preview\example.html" />
-    <Content Include="Core\Scripts\tinymce\plugins\preview\jscripts\embed.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\preview\preview.html" />
-    <Content Include="Core\Scripts\tinymce\plugins\print\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\print\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\save\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\save\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\searchreplace\css\searchreplace.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\searchreplace\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\searchreplace\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\searchreplace\js\searchreplace.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\searchreplace\langs\en_dlg.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\searchreplace\searchreplace.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\spellchecker\css\content.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\spellchecker\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\spellchecker\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\spellchecker\img\wline.gif" />
-    <Content Include="Core\Scripts\tinymce\plugins\style\css\props.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\style\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\style\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\style\js\props.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\style\langs\en_dlg.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\style\props.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\style\readme.txt" />
-    <Content Include="Core\Scripts\tinymce\plugins\tabfocus\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\tabfocus\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\table\cell.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\table\css\cell.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\table\css\row.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\table\css\table.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\table\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\table\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\table\js\cell.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\table\js\merge_cells.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\table\js\row.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\table\js\table.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\table\langs\en_dlg.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\table\merge_cells.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\table\row.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\table\table.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\template\blank.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\template\css\template.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\template\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\template\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\template\js\template.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\template\langs\en_dlg.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\template\template.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\visualblocks\css\visualblocks.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\visualblocks\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\visualblocks\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\visualchars\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\visualchars\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\wordcount\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\wordcount\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\abbr.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\acronym.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\attributes.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\cite.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\css\attributes.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\css\popup.css" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\del.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\editor_plugin.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\editor_plugin_src.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\ins.htm" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\js\abbr.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\js\acronym.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\js\attributes.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\js\cite.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\js\del.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\js\element_common.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\js\ins.js" />
-    <Content Include="Core\Scripts\tinymce\plugins\xhtmlxtras\langs\en_dlg.js" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\about.htm" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\anchor.htm" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\charmap.htm" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\color_picker.htm" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\editor_template.js" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\editor_template_src.js" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\image.htm" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\img\colorpicker.jpg" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\img\flash.gif" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\img\icons.gif" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\img\iframe.gif" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\img\pagebreak.gif" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\img\quicktime.gif" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\img\realmedia.gif" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\img\shockwave.gif" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\img\trans.gif" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\img\video.gif" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\img\windowsmedia.gif" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\js\about.js" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\js\anchor.js" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\js\charmap.js" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\js\color_picker.js" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\js\image.js" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\js\link.js" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\js\source_editor.js" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\langs\en.js" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\langs\en_dlg.js" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\link.htm" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\shortcuts.htm" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\default\content.css" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\default\dialog.css" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\default\img\buttons.png" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\default\img\items.gif" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\default\img\menu_arrow.gif" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\default\img\menu_check.gif" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\default\img\progress.gif" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\default\img\tabs.gif" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\default\ui.css" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\highcontrast\content.css" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\highcontrast\dialog.css" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\highcontrast\ui.css" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\o2k7\content.css" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\o2k7\dialog.css" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\o2k7\img\button_bg.png" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\o2k7\img\button_bg_black.png" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\o2k7\img\button_bg_silver.png" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\o2k7\ui.css" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\o2k7\ui_black.css" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\skins\o2k7\ui_silver.css" />
-    <Content Include="Core\Scripts\tinymce\themes\advanced\source_editor.htm" />
-    <Content Include="Core\Scripts\tinymce\themes\simple\editor_template.js" />
-    <Content Include="Core\Scripts\tinymce\themes\simple\editor_template_src.js" />
-    <Content Include="Core\Scripts\tinymce\themes\simple\img\icons.gif" />
-    <Content Include="Core\Scripts\tinymce\themes\simple\langs\en.js" />
-    <Content Include="Core\Scripts\tinymce\themes\simple\skins\default\content.css" />
-    <Content Include="Core\Scripts\tinymce\themes\simple\skins\default\ui.css" />
-    <Content Include="Core\Scripts\tinymce\themes\simple\skins\o2k7\content.css" />
-    <Content Include="Core\Scripts\tinymce\themes\simple\skins\o2k7\img\button_bg.png" />
-    <Content Include="Core\Scripts\tinymce\themes\simple\skins\o2k7\ui.css" />
     <Content Include="Core\Scripts\tinymce\tinymce.css" />
-    <Content Include="Core\Scripts\tinymce\tiny_mce.js" />
-    <Content Include="Core\Scripts\tinymce\tiny_mce_popup.js" />
-    <Content Include="Core\Scripts\tinymce\tiny_mce_src.js" />
-    <Content Include="Core\Scripts\tinymce\utils\editable_selects.js" />
-    <Content Include="Core\Scripts\tinymce\utils\form_utils.js" />
-    <Content Include="Core\Scripts\tinymce\utils\mctabs.js" />
-    <Content Include="Core\Scripts\tinymce\utils\validate.js" />
     <Content Include="FeaturedProducts\FeaturedProductsView.ascx" />
     <Content Include="LastProductsViewed\LastProductsViewed.ascx" />
     <Content Include="MiniCart\MiniCartView.ascx" />
@@ -1407,34 +1173,6 @@
     </Compile>
     <Compile Include="ContentBlocks\Settings.ascx.designer.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="ControlPanel\ControlBar.ascx.cs">
-      <DependentUpon>ControlBar.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ControlPanel\ControlBar.ascx.designer.cs">
-      <DependentUpon>ControlBar.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="ControlPanel\CategoryPerformanceBar.ascx.cs">
-      <DependentUpon>CategoryPerformanceBar.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ControlPanel\CategoryPerformanceBar.ascx.designer.cs">
-      <DependentUpon>CategoryPerformanceBar.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="ControlPanel\AdminControlBar.ascx.cs">
-      <DependentUpon>AdminControlBar.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ControlPanel\AdminControlBar.ascx.designer.cs">
-      <DependentUpon>AdminControlBar.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="ControlPanel\ProductPerformanceBar.ascx.cs">
-      <DependentUpon>ProductPerformanceBar.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ControlPanel\ProductPerformanceBar.ascx.designer.cs">
-      <DependentUpon>ProductPerformanceBar.ascx</DependentUpon>
     </Compile>
     <Compile Include="Core\AbandonedCartEmailJob.cs" />
     <Compile Include="Core\Admin\AdminWizard.master.cs">
@@ -2814,6 +2552,7 @@
     <Compile Include="Core\Api\Rest\CatalogRolesHandler.cs" />
     <Compile Include="Core\Api\Rest\GiftCardsHandler.cs" />
     <Compile Include="Core\Areas\Account\Models\OrderHistoryViewModel.cs" />
+    <Compile Include="Core\ClearUploadTempFilesJob.cs" />
     <Compile Include="Core\Controllers\CheckoutController.PaymentError.cs" />
     <Compile Include="Core\Controllers\CheckoutController.Receipt.cs" />
     <Compile Include="Core\Controllers\EditBillingController.cs" />
@@ -3574,13 +3313,6 @@
     <Compile Include="Core\Admin\Parts\Editors\None\Editor.ascx.designer.cs">
       <DependentUpon>Editor.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Core\Admin\Parts\Editors\RadEditor\Editor.ascx.cs">
-      <DependentUpon>Editor.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Core\Admin\Parts\Editors\RadEditor\Editor.ascx.designer.cs">
-      <DependentUpon>Editor.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Core\Admin\Parts\Editors\TinyMCE\Editor.ascx.cs">
       <DependentUpon>Editor.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3905,7 +3637,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Core\Scripts\tinymce\plugins\autosave\images\" />
+    <Content Include="Core\Admin\Catalog\App_LocalResources\Categories_ManualSelection.aspx.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\App_LocalResources\Global.resx">
@@ -3997,8 +3729,6 @@
     <Content Include="Providers\DataProviders\SqlDataProvider\01.07.05.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\02.00.00.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\01.08.01.SqlDataProvider" />
-    <Content Include="ControlPanel\01.00.00.SqlDataProvider" />
-    <Content Include="ControlPanel\Uninstall.SqlDataProvider" />
     <Content Include="Core\Admin\admin.css.map">
       <DependentUpon>admin.css</DependentUpon>
     </Content>
@@ -4006,13 +3736,20 @@
       <DependentUpon>styles.css</DependentUpon>
     </Content>
     <Content Include="Core\Performance.ashx" />
-    <Content Include="ControlPanel\PerformanceBar.less" />
-    <Content Include="ControlPanel\ControlBar.less" />
     <Content Include="Providers\DataProviders\SqlDataProvider\01.09.00.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\01.09.01.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\02.00.01.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\03.00.00.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\03.02.02.SqlDataProvider" />
+    <Content Include="Core\Scripts\jquery-3.5.1.min.map" />
+    <Content Include="Core\Scripts\tinymce\langs\readme.md" />
+    <Content Include="Core\Scripts\tinymce\skins\ui\oxide-dark\fonts\tinymce-mobile.woff" />
+    <Content Include="Core\Scripts\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
+    <Content Include="Providers\DataProviders\SqlDataProvider\03.02.03.SqlDataProvider" />
+    <Content Include="Providers\DataProviders\SqlDataProvider\03.03.00.SqlDataProvider" />
+    <Content Include="Hotcakes_Symbols.dnn">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -4272,11 +4009,6 @@
     <Content Include="Core\Admin\Configuration\App_LocalResources\ShippingUSPSTester.aspx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ControlPanel\App_LocalResources\ControlBar.ascx.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Core\Admin\Catalog\App_LocalResources\Products_Performance.aspx.resx" />
   </ItemGroup>
   <ItemGroup>
@@ -4291,19 +4023,10 @@
     <Content Include="Core\App_LocalResources\SalesPeriods.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ControlPanel\App_LocalResources\AdminControlBar.ascx.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ControlPanel\App_LocalResources\ProductPerformanceBar.ascx.resx" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Core\Controls\App_LocalResources\CategoryPerformance.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\App_LocalResources\OrderStatuses.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ControlPanel\App_LocalResources\CategoryPerformanceBar.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\Admin\Dashboard\App_LocalResources\DashboardHandler.ashx.resx" />
@@ -4344,6 +4067,114 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\Admin\Controls\App_LocalResources\MembershipTypeEdit.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\App_LocalResources\Header.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\App_LocalResources\AdminControlBar.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\ProductChoices.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\Categories_Roles.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Content\App_LocalResources\Columns.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Content\App_LocalResources\Columns_Edit.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\ProductSharedChoices.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\ProductSharedChoices_Edit.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\OptionItemEditor.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\ProductTypes.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\ProductTypeProperties.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\ProductTypePropertiesEdit.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\ReviewsToModerate.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\Reviews_Edit.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\ProductReviewEditor.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\FileVault.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\FileVaultDetailsView.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\FilePicker.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\Categories.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\Categories_Performance.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\Categories_Edit.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\UrlsAssociated.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Orders\App_LocalResources\EditOrder.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Orders\App_LocalResources\CreateOrder.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\AffiliatePaymentDialog.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\AffiliatePaymentEditor.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\UserPicker.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Orders\App_LocalResources\OrderActions.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Orders\App_LocalResources\PaymentInformation.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\CreditCardInput.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Orders\App_LocalResources\PrintOrder.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Controls\App_LocalResources\DatePickerNavigation.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\Products_Edit.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\ProductUpSellCrossSell.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Orders\App_LocalResources\ReceivePayments.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Catalog\App_LocalResources\ProductsEdit_Tabs.aspx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

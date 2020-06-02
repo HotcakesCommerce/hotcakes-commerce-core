@@ -36,6 +36,8 @@ namespace Hotcakes.Commerce.Utilities
 {
     public class UrlRewriter
     {
+        private const string CART_ROUTE_FORMAT = "{0}?AddSku={1}&AddSkuQty=1";
+
         public static bool IsProductSlugInUse(string slug, string bvin, HotcakesApplication app)
         {
             var p = app.CatalogServices.Products.FindBySlug(slug);
@@ -117,31 +119,6 @@ namespace Hotcakes.Commerce.Utilities
             return result;
         }
 
-        [Obsolete("Obsolete in 1.8.0. UrlRewriter didn't implement IDisposable interface.")]
-        public void Dispose()
-        {
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use other BuildUrlForCategory methods.")]
-        public static string BuildUrlForCategoryFull(CategorySnapshot c, HotcakesApplication app)
-        {
-            return BuildUrlForCategory(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use other BuildUrlForCategory methods.")]
-        public static string BuildUrlForCategory(CategorySnapshot c, RequestContext routingContext,
-            object additionalParams = null)
-        {
-            return BuildUrlForCategory(c, additionalParams);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use other BuildUrlForCategory methods.")]
-        public static string BuildUrlForCategory(CategorySnapshot c, RequestContext routingContext, string pageNumber,
-            object additionalParams = null)
-        {
-            return BuildUrlForCategory(c, pageNumber, additionalParams);
-        }
-
         public static string BuildUrlForCategory(CategorySnapshot c, object additionalParams = null)
         {
             if (c.SourceType == CategorySourceType.CustomLink)
@@ -168,23 +145,23 @@ namespace Hotcakes.Commerce.Utilities
             return HccUrlBuilder.RouteHccUrl(HccRoute.Category, routeValues);
         }
 
-        [Obsolete("Obsolete in 1.8.0. Use other BuildUrlForProduct methods.")]
-        public static string BuildUrlForProduct(Product p, Page page, object additionalParams = null)
-        {
-            return BuildUrlForProduct(p, page.Request.RequestContext, additionalParams);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use other BuildUrlForProduct methods.")]
-        public static string BuildUrlForProduct(Product p, RequestContext routingContext, object additionalParams = null)
-        {
-            return BuildUrlForProduct(p, additionalParams);
-        }
-
         public static string BuildUrlForProduct(Product p, object additionalParams = null)
         {
             var parameters = Merge(new {slug = p.UrlSlug}, additionalParams);
             var routeValues = new RouteValueDictionary(parameters);
             return HccUrlBuilder.RouteHccUrl(HccRoute.Product, routeValues);
+        }
+
+        public static string BuildUrlForProductAddToCart(Product p)
+        {
+            if (p.HasOptions() || p.IsGiftCard)
+            {
+                return string.Empty;
+            }
+
+            var route = string.Format(CART_ROUTE_FORMAT, HccUrlBuilder.RouteHccUrl(HccRoute.Cart), p.Sku);
+
+            return route;
         }
 
         private static IDictionary<string, object> Merge(object item1, object item2)

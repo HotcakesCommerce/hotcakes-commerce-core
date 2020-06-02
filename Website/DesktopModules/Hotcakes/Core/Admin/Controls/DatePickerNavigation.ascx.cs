@@ -32,18 +32,21 @@ namespace Hotcakes.Modules.Core.Admin.Controls
 {
     public partial class DatePickerNavigation : UserControl
     {
+        private const string DATEFORMAT = "MM/dd/yyyy";
+        private DateTime dteOutput;
+
         public DateTime SelectedDate
         {
             get
             {
-                if (radDatePicker.SelectedDate.HasValue)
+                if (DateIsValid())
                 {
-                    return radDatePicker.SelectedDate.Value;
+                    return dteOutput;
                 }
                 var hccPage = Page as IHccPage;
                 return DateHelper.ConvertUtcToStoreTime(hccPage.HccApp);
             }
-            set { radDatePicker.SelectedDate = value; }
+            set { radDatePicker.Text = value.ToString(DATEFORMAT); }
         }
 
         public event EventHandler SelectedDateChanged;
@@ -54,9 +57,9 @@ namespace Hotcakes.Modules.Core.Admin.Controls
 
             lnkPrev.Click += (s, a) =>
             {
-                if (radDatePicker.SelectedDate.HasValue)
+                if (DateIsValid())
                 {
-                    radDatePicker.SelectedDate = radDatePicker.SelectedDate.Value.AddDays(-1);
+                    radDatePicker.Text = dteOutput.AddDays(-1).ToString(DATEFORMAT);
                     if (SelectedDateChanged != null)
                         SelectedDateChanged(this, EventArgs.Empty);
                 }
@@ -64,19 +67,31 @@ namespace Hotcakes.Modules.Core.Admin.Controls
 
             lnkNext.Click += (s, a) =>
             {
-                if (radDatePicker.SelectedDate.HasValue)
+                if (DateIsValid())
                 {
-                    radDatePicker.SelectedDate = radDatePicker.SelectedDate.Value.AddDays(1);
+                    radDatePicker.Text = dteOutput.AddDays(1).ToString(DATEFORMAT);
                     if (SelectedDateChanged != null)
                         SelectedDateChanged(this, EventArgs.Empty);
                 }
             };
 
-            radDatePicker.SelectedDateChanged += (s, a) =>
+            radDatePicker.TextChanged += (s, a) =>
             {
                 if (SelectedDateChanged != null)
                     SelectedDateChanged(this, EventArgs.Empty);
             };
+        }
+
+        private bool DateIsValid()
+        {
+            if (!string.IsNullOrEmpty(radDatePicker.Text))
+            {
+                var blnIsValid = false;
+                blnIsValid = DateTime.TryParse(radDatePicker.Text.Trim(), out dteOutput);
+                return blnIsValid;
+            }
+
+            return false;
         }
     }
 }

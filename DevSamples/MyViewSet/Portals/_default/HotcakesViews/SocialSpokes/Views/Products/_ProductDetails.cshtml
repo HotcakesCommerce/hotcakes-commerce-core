@@ -94,12 +94,6 @@
                 @* END Placeholder rebuilds by AJAX request! *@
             </div>
 			}
-            if (Model.LocalProduct.IsRecurring)
-            {
-                <div class="dnnFormItem hc-recurring">
-                    <label>@Localization.GetFormattedString("RecurringProduct", Model.LocalProduct.RecurringInterval, LocalizationUtils.GetRecurringIntervalLower(Model.LocalProduct.RecurringIntervalType))</label>
-                </div>
-            }
 
             if(!Model.LocalProduct.HideQty)
             {
@@ -208,4 +202,3 @@
 
     @Html.Raw(Model.PreRenderedTypeValues)
 </div>
-

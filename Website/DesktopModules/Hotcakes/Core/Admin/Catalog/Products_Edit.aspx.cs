@@ -43,7 +43,6 @@ using Hotcakes.Commerce.Utilities;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Web;
 using Hotcakes.Web.Data;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
@@ -77,7 +76,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            PageTitle = "Edit Product";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Catalog;
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
         }
@@ -125,7 +124,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                     LoadProduct();
                     if (Request.QueryString["u"] == "1")
                     {
-                        ucMessageBox.ShowOk("Product Updated");
+                        ucMessageBox.ShowOk(Localization.GetString("ProductUpdateSuccess"));
                     }
                 }
                 var props = HccApp.CatalogServices.ProductPropertiesFindForType(lstProductType.SelectedValue);
@@ -228,7 +227,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         {
             if (!HccApp.CatalogServices.DestroyProduct(ProductId, HccApp.CurrentStore.Id))
             {
-                ucMessageBox.ShowWarning("Unable to delete product. Unknown Error.");
+                ucMessageBox.ShowWarning(Localization.GetString("ProductDeleteFailure"));
             }
             else
             {
@@ -250,8 +249,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                         if (!decimal.TryParse(_productTypeProperties[prop.Id], out temp))
                         {
                             args.IsValid = false;
-                            ProductTypeCustomValidator.ErrorMessage = prop.DisplayName +
-                                                                      " must be a valid monetary type.";
+                            ProductTypeCustomValidator.ErrorMessage = string.Format(Localization.GetString("ProductTypeCustomValidator.ErrorMessage1"), prop.DisplayName);
                             return;
                         }
                         break;
@@ -262,7 +260,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                                 DateTimeStyles.None, out temp2))
                         {
                             args.IsValid = false;
-                            ProductTypeCustomValidator.ErrorMessage = prop.DisplayName + " must be a valid date.";
+                            ProductTypeCustomValidator.ErrorMessage = string.Format(Localization.GetString("ProductTypeCustomValidator.ErrorMessage2"), prop.DisplayName);
                             return;
                         }
                         break;
@@ -309,7 +307,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                     var prodGuid = DataTypeHelper.BvinToNullableGuid(p.Bvin);
                     if (HccApp.CatalogServices.Products.IsSkuExist(SkuField.Text.Trim(), prodGuid))
                     {
-                        ucMessageBox.ShowError("Sku already exists on another product. Please pick another sku.");
+                        ucMessageBox.ShowError(Localization.GetString("SkuExists"));
                         return false;
                     }
                 }
@@ -390,7 +388,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
                 if (UrlRewriter.IsProductSlugInUse(p.UrlSlug, p.Bvin, HccApp))
                 {
-                    ucMessageBox.ShowWarning("The requested URL is already in use by another item.");
+                    ucMessageBox.ShowWarning(Localization.GetString("UrlExists"));
                     return false;
                 }
 
@@ -490,7 +488,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 }
                 else
                 {
-                    ucMessageBox.ShowError("Unable to save product. Unknown error. Please check event log.");
+                    ucMessageBox.ShowError(Localization.GetString("SaveProductFailure"));
                 }
             }
             return result;
@@ -516,7 +514,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         private void PopulateTemplates()
         {
             ddlTemplateList.Items.Clear();
-            ddlTemplateList.Items.Add(new RadComboBoxItem("- Not Set -", string.Empty));
+            ddlTemplateList.Items.Add(new ListItem(Localization.GetString("NotSet"), string.Empty));
             ddlTemplateList.AppendDataBoundItems = true;
             ddlTemplateList.DataSource = DnnPathHelper.GetViewNames("Products");
             ddlTemplateList.DataBind();
@@ -528,7 +526,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             lstManufacturers.DataTextField = "DisplayName";
             lstManufacturers.DataValueField = "Bvin";
             lstManufacturers.DataBind();
-            lstManufacturers.Items.Insert(0, new RadComboBoxItem("- No Manufacturer -", string.Empty));
+            lstManufacturers.Items.Insert(0, new ListItem(Localization.GetString("NoManufacturer"), string.Empty));
         }
 
         private void PopulateVendors()
@@ -537,7 +535,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             lstVendors.DataTextField = "DisplayName";
             lstVendors.DataValueField = "Bvin";
             lstVendors.DataBind();
-            lstVendors.Items.Insert(0, new RadComboBoxItem("- No Vendor -", string.Empty));
+            lstVendors.Items.Insert(0, new ListItem(Localization.GetString("NoVendor"), string.Empty));
         }
 
         private void PopulateTaxes()
@@ -546,13 +544,13 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             lstTaxClasses.DataTextField = "Name";
             lstTaxClasses.DataValueField = "Id";
             lstTaxClasses.DataBind();
-            lstTaxClasses.Items.Insert(0, new ListItem("- Not Set -", string.Empty));
+            lstTaxClasses.Items.Insert(0, new ListItem(Localization.GetString("NotSet"), string.Empty));
         }
 
         private void PopulateProductTypes()
         {
             lstProductType.Items.Clear();
-            lstProductType.Items.Add(new RadComboBoxItem("Generic", ""));
+            lstProductType.Items.Add(new ListItem(Localization.GetString("ProductTypeDefault"), string.Empty));
             lstProductType.AppendDataBoundItems = true;
             lstProductType.DataSource = HccApp.CatalogServices.ProductTypes.FindAll();
             lstProductType.DataTextField = "ProductTypeName";
@@ -563,8 +561,8 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         private void PopulateColumns()
         {
             var columns = HccApp.ContentServices.Columns.FindAll();
-            ddlPreContentColumn.Items.Add(new ListItem("- Not Set -", string.Empty));
-            ddlPostContentColumn.Items.Add(new ListItem("- Not Set -", string.Empty));
+            ddlPreContentColumn.Items.Add(new ListItem(Localization.GetString("NotSet"), string.Empty));
+            ddlPostContentColumn.Items.Add(new ListItem(Localization.GetString("NotSet"), string.Empty));
             foreach (var col in columns)
             {
                 ddlPreContentColumn.Items.Add(new ListItem(col.DisplayName, col.Bvin));
@@ -589,10 +587,10 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                     pnlPricing.Visible = false;
                 }
 
-                if (ddlTemplateList.Items.FindItemByValue(p.TemplateName) != null)
+                if (ddlTemplateList.Items.FindByValue(p.TemplateName) != null)
                 {
                     ddlTemplateList.ClearSelection();
-                    ddlTemplateList.Items.FindItemByValue(p.TemplateName).Selected = true;
+                    ddlTemplateList.Items.FindByValue(p.TemplateName).Selected = true;
                 }
 
                 chkFeatured.Checked = p.Featured;
@@ -637,15 +635,15 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                     lstTaxClasses.ClearSelection();
                     lstTaxClasses.Items.FindByValue(p.TaxSchedule.ToString()).Selected = true;
                 }
-                if (lstManufacturers.Items.FindItemByValue(p.ManufacturerId) != null)
+                if (lstManufacturers.Items.FindByValue(p.ManufacturerId) != null)
                 {
                     lstManufacturers.ClearSelection();
-                    lstManufacturers.Items.FindItemByValue(p.ManufacturerId).Selected = true;
+                    lstManufacturers.Items.FindByValue(p.ManufacturerId).Selected = true;
                 }
-                if (lstVendors.Items.FindItemByValue(p.VendorId) != null)
+                if (lstVendors.Items.FindByValue(p.VendorId) != null)
                 {
                     lstVendors.ClearSelection();
-                    lstVendors.Items.FindItemByValue(p.VendorId).Selected = true;
+                    lstVendors.Items.FindByValue(p.VendorId).Selected = true;
                 }
 
                 LoadImagePreview(p);
@@ -660,10 +658,10 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 }
                 MediumImageAlternateTextField.Text = p.ImageFileMediumAlternateText;
 
-                if (lstProductType.Items.FindItemByValue(p.ProductTypeId) != null)
+                if (lstProductType.Items.FindByValue(p.ProductTypeId) != null)
                 {
                     lstProductType.ClearSelection();
-                    lstProductType.Items.FindItemByValue(p.ProductTypeId).Selected = true;
+                    lstProductType.Items.FindByValue(p.ProductTypeId).Selected = true;
                 }
                 // Added this line to stop errors on immediate load and save - Marcus
                 LastProductType = p.ProductTypeId;
@@ -744,7 +742,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                     !DiskStorage.CopyProductImage(HccApp.CurrentStore.Id, p.Bvin, ucImageUploadLarge.TempImagePath,
                         fileName))
                 {
-                    ucMessageBox.ShowError("Only .PNG, .JPG, .GIF file types are allowed for icon images");
+                    ucMessageBox.ShowError(Localization.GetString("ImageFileTypeError"));
                 }
             }
         }

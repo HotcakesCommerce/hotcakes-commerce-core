@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Step4Taxes.ascx.cs" Inherits="Hotcakes.Modules.Core.Admin.SetupWizard.Step4Taxes" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register Src="../Controls/TaxScheduleEditor.ascx" TagPrefix="hcc" TagName="TaxScheduleEditor" %>
 <%@ Register Src="../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
 
@@ -33,7 +32,7 @@
                     </div>
                     <div class="hcFormItem">
 						<div style="float: left; width:49%;">
-							<telerik:RadTextBox ID="txtDisplayName" runat="server" />
+							<asp:TextBox ID="txtDisplayName" runat="server" MaxLength="50" />
 							<asp:RequiredFieldValidator ID="DisplayNameValidator" runat="server" CssClass="hcFormError"
                             ControlToValidate="txtDisplayName" ValidationGroup="DisplayName" Display="Dynamic" />
 						</div>
@@ -43,22 +42,22 @@
 						</div>
                     </div>
                     <div class="hcFormItem">
-                        <telerik:RadGrid runat="server" ID="gridTaxes" AutoGenerateColumns="False" GridLines="None" 
-                            OnDeleteCommand="gridTaxes_ItemDelete" OnEditCommand="gridTaxes_ItemEdit" OnItemCreated="gridTaxes_OnItemCreated">
-                            <MasterTableView DataKeyNames="Id" HorizontalAlign="NotSet" AutoGenerateColumns="False" GridLines="None">
-                                <Columns>
-                                    <telerik:GridBoundColumn DataField="Name" UniqueName="Name" />
-                                    <telerik:GridTemplateColumn>
-                                        <ItemStyle Width="80px" />
-                                        <ItemTemplate>
-                                            <asp:LinkButton ID="btnEdit" CssClass="hcIconEdit" runat="server" CausesValidation="False" CommandName="Edit" OnPreRender="btnEdit_OnPreRender" />
-                                            <asp:LinkButton ID="btnDelete" CssClass="hcIconDelete" runat="server" CausesValidation="False" CommandName="Delete" OnPreRender="btnDelete_OnPreRender" />
-                                        </ItemTemplate>
-                                    </telerik:GridTemplateColumn>
-                                </Columns>
-
-                            </MasterTableView>
-                        </telerik:RadGrid>
+                        <asp:GridView runat="server" ID="gridTaxes" AutoGenerateColumns="False" GridLines="None" CssClass="hcGrid" 
+                            OnDeleteCommand="gridTaxes_ItemDelete" OnEditCommand="gridTaxes_ItemEdit" DataKeyNames="Id">
+                            <HeaderStyle CssClass="hcGridHeader"/>
+                            <RowStyle CssClass="hcGridItem"/>
+                            <AlternatingRowStyle CssClass="hcGridAltItem"/>
+                            <Columns>
+                                <asp:BoundField DataField="Name" HeaderText="ScheduleName" />
+                                <asp:TemplateField>
+                                    <ItemStyle Width="80px" />
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="btnEdit" CssClass="hcIconEdit" runat="server" CausesValidation="False" CommandName="Edit" OnPreRender="btnEdit_OnPreRender" />
+                                        <asp:LinkButton ID="btnDelete" CssClass="hcIconDelete" runat="server" CausesValidation="False" CommandName="Delete" OnPreRender="btnDelete_OnPreRender" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
                     </div>
                 </div>
 

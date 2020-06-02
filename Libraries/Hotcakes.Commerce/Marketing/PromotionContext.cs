@@ -42,16 +42,6 @@ namespace Hotcakes.Commerce.Marketing
             PromotionId = promotionId;
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 2.0.0. Use constructor with other parameters instead")]
-        public PromotionContext(HotcakesApplication app, PromotionType mode, long promotionId)
-            : this(app.CurrentRequestContext, mode, promotionId)
-        {
-        }
-
-        #endregion
-
         public long PromotionId { get; set; }
         public PromotionType Mode { get; set; }
         public HccRequestContext RequestContext { get; set; }
@@ -61,12 +51,12 @@ namespace Hotcakes.Commerce.Marketing
         public string CustomerDescription { get; set; }
         public CustomerAccount CurrentCustomer { get; set; }
         public LineItem CurrentlyProcessingLineItem { get; set; }
+        
         // TODO: Review this property and ensure it gets implemented properly
         public bool OtherOffersApplied { get; set; }
 
         public string CurrentShippingMethodId { get; set; }
         public decimal AdjustedShippingRate { get; set; }
-
         public HotcakesApplication HccApp
         {
             get { return new HotcakesApplication(RequestContext); }

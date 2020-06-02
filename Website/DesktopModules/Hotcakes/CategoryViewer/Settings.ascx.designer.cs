@@ -64,7 +64,7 @@ namespace Hotcakes.Modules.CategoryViewer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox CategoryComboBox;
+        protected global::System.Web.UI.WebControls.DropDownList CategoryComboBox;
         
         /// <summary>
         /// ViewSelectionLabel control.
@@ -82,7 +82,7 @@ namespace Hotcakes.Modules.CategoryViewer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ViewComboBox;
+        protected global::System.Web.UI.WebControls.DropDownList ViewComboBox;
         
         /// <summary>
         /// ProductPageSizeLabel control.
@@ -118,7 +118,7 @@ namespace Hotcakes.Modules.CategoryViewer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlPreContentColumnId;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPreContentColumnId;
         
         /// <summary>
         /// PostContentColumnLabel control.
@@ -136,25 +136,25 @@ namespace Hotcakes.Modules.CategoryViewer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlPostContentColumnId;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPostContentColumnId;
         
         /// <summary>
-        /// ShowManufactures control.
+        /// ShowManufacturers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl ShowManufactures;
+        protected global::System.Web.UI.UserControl ShowManufacturers;
         
         /// <summary>
-        /// ShowManufacturesCheckBox control.
+        /// ShowManufacturersCheckBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ShowManufacturesCheckBox;
+        protected global::System.Web.UI.WebControls.CheckBox ShowManufacturersCheckBox;
         
         /// <summary>
         /// ShowVendors control.

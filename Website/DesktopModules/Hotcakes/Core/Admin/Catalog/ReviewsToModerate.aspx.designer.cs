@@ -22,13 +22,13 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         protected global::Hotcakes.Modules.Core.Admin.Controls.NavMenu NavMenu;
         
         /// <summary>
-        /// lblNoReviews control.
+        /// msg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNoReviews;
+        protected global::Hotcakes.Modules.Core.Admin.Controls.MessageBox msg;
         
         /// <summary>
         /// dlReviews control.

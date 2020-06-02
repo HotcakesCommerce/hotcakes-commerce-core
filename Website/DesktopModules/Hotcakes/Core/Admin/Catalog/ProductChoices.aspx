@@ -1,25 +1,24 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="../AdminNav.master" AutoEventWireup="True" Inherits="Hotcakes.Modules.Core.Admin.Catalog.ProductChoices" CodeBehind="ProductChoices.aspx.cs" %>
-
 <%@ Register Src="../Controls/ProductEditMenu.ascx" TagName="ProductEditMenu" TagPrefix="uc5" %>
 <%@ Register Src="../Controls/ProductEditingDisplay.ascx" TagName="ProductEditing" TagPrefix="uc5" %>
 <%@ Register Src="../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="uc1" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+
 <asp:Content ID="nav" ContentPlaceHolderID="NavContent" runat="server">
 	<uc5:ProductEditMenu ID="ProductNavigator" runat="server" SelectedMenuItem="CustomerChoices" />
-		 <div class="hcBlock hcBlockLight hcPaddingBottom">
+	<div class="hcBlock hcBlockLight hcPaddingBottom">
         <div class="hcForm">
             <div class="hcFormItem">
-				<label class="hcLabel">New Product Choice</label>
-				<telerik:RadComboBox ID="ChoiceTypes" runat="server" >
+				<label class="hcLabel"><%=Localization.GetString("NewProductChoice") %></label>
+				<asp:DropDownList ID="ChoiceTypes" runat="server" >
 					<Items>
-						<telerik:RadComboBoxItem Value="100" Text="Drop Down List" />
-						<telerik:RadComboBoxItem Value="200" Text="Radio Button List" />
-						<telerik:RadComboBoxItem Value="300" Text="Checkboxes" />
-						<telerik:RadComboBoxItem Value="400" Text="HTML Description" />
-						<telerik:RadComboBoxItem Value="500" Text="Text Input" />
-						<telerik:RadComboBoxItem Value="600" Text="File Upload" />
+						<asp:ListItem Value="100" resourcekey="DropdownList" />
+						<asp:ListItem Value="200" resourcekey="RadioButtonList" />
+						<asp:ListItem Value="300" resourcekey="Checkboxes" />
+						<asp:ListItem Value="400" resourcekey="HtmlDescription" />
+						<asp:ListItem Value="500" resourcekey="TextInput" />
+						<asp:ListItem Value="600" resourcekey="FileUpload" />
 					</Items>
-				</telerik:RadComboBox>
+				</asp:DropDownList>
 			</div>
 		</div>
 	</div>
@@ -27,13 +26,14 @@
 	 <div class="hcBlock">
         <div class="hcForm">
             <div class="hcFormItem">
-				 <asp:LinkButton ID="NewChoiceButton" AlternateText="+ New Product Choice" Text="+ New Product Choice" runat="server" CssClass="hcTertiaryAction"  OnClick="NewChoiceButton_Click" />
+				 <asp:LinkButton ID="NewChoiceButton" resourcekey="NewChoiceButton" runat="server" CssClass="hcTertiaryAction" OnClick="NewChoiceButton_Click" />
 			</div>
 		</div>
 	</div>
 
 	<uc5:ProductEditing ID="ProductEditing1" runat="server" />
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="Server">
 	<script type="text/javascript">
 	    hcAttachUpdatePanelLoader();
@@ -62,14 +62,15 @@
 			});
 			$('#dragitem-list').disableSelection();
 
-			$('.trash').click(function (e) {			    
+			$('.hcIconDelete').click(function (e) {			    
 			    if ($(this).attr('title') === 'variant') {
 			        curProductChoice = $(this);
-			        hcConfirm(e, 'Deleting this choice will DELETE YOUR VARIANTS. You will lose inventory, price and picture settings for variants. Are you sure you want to continue?', callBackFunRemoveItem);
+			        hcConfirm(e, '<%=Localization.GetJsEncodedString("Confirm")%>', callBackFunRemoveItem);
 				} else { RemoveItem($(this)); }
 				return false;
 			});
 
+            $(".hc-file-upload-btn-add, .hc-file-upload-btn-update").click(function(e) { e.preventDefault(); });
 		});
 
 		
@@ -96,12 +97,12 @@
 			return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 		}
 	</script>
-	<h1>Choices - Edit</h1>
+	<h1><%=PageTitle %></h1>
 	<uc1:MessageBox ID="MessageBox1" runat="server" />
-	    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
-			<ContentTemplate>
-				<asp:Literal ID="litResults" ClientIDMode="Static" runat="server" EnableViewState="false"></asp:Literal>
-			</ContentTemplate>
-		</asp:UpdatePanel>
+	<asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
+		<ContentTemplate>
+            <asp:Literal ID="litResults" ClientIDMode="Static" runat="server" EnableViewState="false"/>
+		</ContentTemplate>
+	</asp:UpdatePanel>
 </asp:Content>
 

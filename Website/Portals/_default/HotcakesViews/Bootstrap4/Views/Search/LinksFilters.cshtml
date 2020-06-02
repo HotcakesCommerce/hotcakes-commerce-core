@@ -1,0 +1,253 @@
+﻿@model Hotcakes.Modules.Core.Models.SearchPageViewModel
+
+@helper BuildUrlAddValues(string key, string value)
+{
+    RouteValueDictionary routeValues = new RouteValueDictionary(Model.CurrentRouteValues);
+    routeValues[key] = value;
+    @Html.Raw(Url.RouteHccUrl(HccRoute.Search, routeValues))
+}
+@helper BuildUrlRemoveValues(string key)
+{
+    RouteValueDictionary routeValues = new RouteValueDictionary(Model.CurrentRouteValues);
+    routeValues.Remove(key);
+    @Html.Raw(Url.RouteHccUrl(HccRoute.Search, routeValues))
+}
+@helper BuildPriceUrl()
+{
+    RouteValueDictionary routeValues = new RouteValueDictionary(Model.CurrentRouteValues);
+    routeValues["minprice"] = "minprice.val";
+    routeValues["maxprice"] = "maxprice.val";
+    @Html.Raw(Url.RouteHccUrl(HccRoute.Search, routeValues))
+}
+@functions {
+    public string DecToString(decimal val)
+    {
+        return val.ToString(System.Globalization.CultureInfo.InvariantCulture);
+    }
+}
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-4 hc-search-facets">
+            <input type="hidden" name="search" value="@ViewBag.Search" />
+            
+            <h5>@Localization.GetString("RefineResults")</h5>
+            <hr/>
+
+            @if (string.IsNullOrEmpty(Request.QueryString["search"])){
+                <div class="alert alert-info">@Localization.GetString("ProductsNotFound")</div>
+            }
+            
+            @if (Model.SelectedManufacturers.Count > 0 || Model.SelectedVendors.Count > 0 || Model.SelectedTypes.Count > 0 || Model.SelectedCategories.Count > 0 || Model.SelectedProperties.Count > 0)
+            {
+                <div class="hc-drilldown-selected mb-4">
+                    <h5>@Localization.GetString("YouSelected")</h5>
+                    <ul class="list-unstyled">
+                        @foreach (var item in Model.SelectedCategories)
+                        {
+                            <li>
+                                @Localization.GetString("Category"):
+                                @item.Name
+                                <a href="@BuildUrlRemoveValues("categories")" title="@Localization.GetString("Remove")"><i class="fas fa-minus-circle"></i></a>
+                            </li>
+                        }
+                        @foreach (var item in Model.SelectedTypes)
+                        {
+                            <li>
+                                @Localization.GetString("ProductType"):
+                                @item.Name
+                                <a href="@BuildUrlRemoveValues("types")" title="@Localization.GetString("Remove")"><i class="fas fa-minus-circle"></i></a>
+                            </li>
+                        }
+                        @foreach (var item in Model.SelectedManufacturers)
+                        {
+                            <li>
+                                @Localization.GetString("Brands"):
+                                @item.Name
+                                <a href="@BuildUrlRemoveValues("manufacturers")" title="@Localization.GetString("Remove")"><i class="fas fa-minus-circle"></i></a>
+                            </li>
+                        }
+                        @foreach (var item in Model.SelectedVendors)
+                        {
+                            <li>
+                                @Localization.GetString("Vendors"):
+                                @item.Name
+                                <a href="@BuildUrlRemoveValues("vendors")" title="@Localization.GetString("Remove")"><i class="fas fa-minus-circle"></i></a>
+                            </li>
+                        }
+                        @foreach (var property in Model.SelectedProperties)
+                        {
+                            <li>
+                                @property.DisplayName:
+                                @property.PropertyValues.First().Name
+                                <a href="@BuildUrlRemoveValues("prop" + property.Id)" title="@Localization.GetString("Remove")"><i class="fas fa-minus-circle"></i></a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+            <div class="hc-search-facets-lists">
+                @if (Model.Categories.Count > 1 && Model.SelectedCategories.Count == 0)
+                {
+                    <h6>@Localization.GetString("Categories")</h6>
+                    <ul class="list-unstyled">
+                        @foreach (var item in Model.Categories)
+                        {
+                            <li>
+                                @{ var gItem = item as Hotcakes.Commerce.Search.GroupFacetItem; }
+                                @if(gItem == null){
+                                    <a href="@BuildUrlAddValues("categories", item.Id)"><i class="fas fa-search-plus"></i>@item.Name</a> @Html.Raw(" (" + @item.Count + ")")
+                                }else{
+                                    @gItem.Name
+                                    <ul class="list-unstyled">
+                                    @foreach (var subItem in gItem.ChildItems)
+                                    {
+                                        <li>
+                                            <a href="@BuildUrlAddValues("categories", @subItem.Id)"><i class="fas fa-search-plus"></i>@subItem.Name</a> @Html.Raw(" (" + @subItem.Count + ")")
+                                        </li>
+                                    }
+                                    </ul>
+                                }
+                            </li>
+                        }
+                    </ul>
+                }
+                @if (Model.ShowManufacturers && Model.Manufacturers.Count > 1 && Model.SelectedManufacturers.Count == 0)
+                {
+                    <h6>@Localization.GetString("Brands")</h6>
+                    <ul class="list-unstyled">
+                        @foreach (var item in Model.Manufacturers)
+                        {
+                            <li>
+                                <a href="@BuildUrlAddValues("manufacturers", item.Id)"><i class="fas fa-search-plus"></i>@item.Name</a> @Html.Raw(" (" + @item.Count + ")")
+                            </li>
+                        }
+                    </ul>
+                }
+                @if (Model.ShowVendors && Model.Vendors.Count > 1 && Model.SelectedVendors.Count == 0)
+                {
+                    <h6>@Localization.GetString("Vendors")</h6>
+                    <ul class="list-unstyled">
+                        @foreach (var item in Model.Vendors)
+                        {
+                            <li>
+                                <a href="@BuildUrlAddValues("vendors", item.Id)"><i class="fas fa-search-plus"></i>@item.Name</a> @Html.Raw(" (" + @item.Count + ")")
+                            </li>
+                        }
+                    </ul>
+                }
+                @if (Model.Types.Count > 1 && Model.SelectedTypes.Count == 0)
+                {
+                    <h6>@Localization.GetString("ProductType")</h6>
+                    <ul class="list-unstyled">
+                        @foreach (var item in Model.Types)
+                        {
+                            <li>
+                                <a href="@BuildUrlAddValues("types", item.Id)"><i class="fas fa-search-plus"></i>@item.Name</a> @Html.Raw(" (" + @item.Count + ")")
+                            </li>
+                        }
+                    </ul>
+                }
+                @foreach (var property in Model.Properties)
+                {
+                    if (property.FacetItems.Count > 1)
+                    {
+                    <h6>@property.DisplayName</h6>
+                    <ul class="list-unstyled">
+                        @foreach (var item in property.FacetItems)
+                        {
+                            <li>
+                                <a href="@BuildUrlAddValues("prop" + property.Id, item.Id)"><i class="fas fa-search-plus"></i>@item.Name</a> @Html.Raw(" (" + @item.Count + ")")
+                            </li>
+                        }
+                    </ul>
+                    }
+                }
+                @if (Model.MinPrice != Model.MaxPrice)
+                {
+                    <h6>@Localization.GetString("Price")</h6>
+                    <div class="hc-drilldown-filter">
+                        <div class="hc-price-slider form-group">
+                            <div class="hc-slider-controls">
+                                <div class="text-left hc-slider-left">
+                                    <span>@Localization.GetString("MinPrice")</span>
+                                    <input type="text" id="hcSliderMinPrice" class="form-control small" maxlength="10" />
+                                </div>
+                                <div class="text-center hc-slider-center">
+                                    <a id="hcApplyPriceFilter" class="btn btn-primary btn-sm mt-2" href="#">@Localization.GetString("Apply")</a>
+                                </div>
+                                <div class="text-right hc-slider-right">
+                                    <span>@Localization.GetString("MaxPrice")</span>
+                                    <input type="text" id="hcSliderMaxPrice" class="form-control small" maxlength="10" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var priceUrl = "@BuildPriceUrl()";
+        var priceSlider = $("<div/>").prependTo(".hc-price-slider");
+        var minPriceField = $("#hcSliderMinPrice");
+        var maxPriceField = $("#hcSliderMaxPrice");
+        var applyButton = $("#hcApplyPriceFilter");
+
+        minPriceField.val(@DecToString(@Model.SelectedMinPrice));
+        maxPriceField.val(@DecToString(@Model.SelectedMaxPrice));
+
+        priceSlider.slider({
+            range: true,
+            min: @DecToString(@Model.MinPrice),
+            max: @DecToString(@Model.MaxPrice),
+            values: [@DecToString(@Model.SelectedMinPrice), @DecToString(@Model.SelectedMaxPrice)],
+            slide: function (event, ui) {
+                minPriceField.val(ui.values[0]);
+                maxPriceField.val(ui.values[1]);
+            }
+        });
+        
+        minPriceField.change(function ()
+        {
+            var minPrice = parseFloat(minPriceField.val());
+            var maxPrice = parseFloat(maxPriceField.val());
+            if (minPrice <= maxPrice)
+            {
+                priceSlider.slider("values", 0, minPrice);
+            }
+            else
+            {
+                minPrice = maxPrice;
+                minPriceField.val(minPrice);
+                priceSlider.slider("values", 0, minPrice);
+            }
+        });
+        maxPriceField.change(function () {
+            var minPrice = parseFloat(minPriceField.val());
+            var maxPrice = parseFloat(maxPriceField.val());
+            if (minPrice <= maxPrice)
+            {
+                priceSlider.slider("values", 1, maxPrice);
+            }
+            else
+            {
+                maxPrice = minPrice;
+                maxPriceField.val(maxPrice);
+                priceSlider.slider("values", 1, maxPrice);
+            }
+        });
+
+        applyButton.click(function(){
+            var minPrice = parseFloat(minPriceField.val());
+            var maxPrice = parseFloat(maxPriceField.val());
+            var url = priceUrl;
+
+            url = url.replace("minprice.val", minPrice);
+            url = url.replace("maxprice.val", maxPrice);
+            location.href = url;
+        });
+
+    });
+</script>

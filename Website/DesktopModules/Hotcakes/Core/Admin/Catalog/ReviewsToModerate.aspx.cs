@@ -25,7 +25,9 @@
 
 using System;
 using System.Web.UI.WebControls;
+using Hotcakes.Commerce;
 using Hotcakes.Commerce.Catalog;
+using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Commerce.Utilities;
 using Hotcakes.Modules.Core.Admin.AppCode;
@@ -37,7 +39,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            PageTitle = "Moderate Reviews";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Catalog;
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
         }
@@ -48,15 +50,22 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             if (!Page.IsPostBack)
             {
                 CurrentTab = AdminTabType.Catalog;
+                LocalizeView();
                 LoadReviews();
             }
+        }
+
+        private void LocalizeView()
+        {
+            var localization = Factory.Instance.CreateLocalizationHelper(LocalResourceFile);
+            LocalizationUtils.LocalizeDataGrid(dlReviews, localization);
         }
 
         private void LoadReviews()
         {
             if (HccApp.CatalogServices.ProductReviews.FindNotApproved(1, 1).Count == 0)
             {
-                lblNoReviews.Visible = true;
+                msg.ShowWarning(Localization.GetString("NoReviews"));
             }
             else
             {

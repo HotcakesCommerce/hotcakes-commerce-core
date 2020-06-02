@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Hotcakes.Commerce.Contacts.Address>
+
+@helper GetTitle(Hotcakes.Commerce.Contacts.Address a)
+{
+    <text>@a.FirstName</text>
+    if (a.MiddleInitial.Trim().Length > 0)
+    {
+    <text> @a.MiddleInitial</text>
+    }
+    <text> @a.LastName</text>
+}
+
+<h2>@Localization.GetString("AddressBook")</h2>
+@Html.Raw((string)TempData["messages"])
+<h3>@Model.Count().ToString() @Localization.GetString("AddressesFound")</h3>
+
+<div class="hc-addressbook clearfix">
+    @foreach (Hotcakes.Commerce.Contacts.Address a in Model)
+    {
+        <div class="hc-wrap3">
+            <div class="hc-address">
+                <div class="hc-title">@GetTitle(a)</div>
+                <div class="hc-lines">
+                    @a.Company<br />
+                    <br />
+                    @Html.Raw(a.GetLinesHtml())
+                </div>
+                <div class="hc-actions">
+                    @using (Html.BeginHccRouteForm(HccRoute.AddressBook, new { action = "delete", id = a.Bvin }, FormMethod.Post))
+                    {
+                        <input type="submit" value="@Localization.GetString("Delete")" data-confirm="@Localization.GetString("DeleteAddress")" class="dnnSecondaryAction"/>
+
+                        <a href="@Url.RouteHccUrl(HccRoute.AddressBook, new { action = "edit", id = a.Bvin })" class="dnnSecondaryAction">
+                            @Localization.GetString("Edit")</a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<a href="@Url.RouteHccUrl(HccRoute.AddressBook, new { action = "edit", id = "new" })" class="dnnPrimaryAction">
+    @Localization.GetString("AddNewAddress")
+</a>

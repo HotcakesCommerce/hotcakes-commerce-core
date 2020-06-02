@@ -39,16 +39,6 @@ namespace Hotcakes.Commerce.Catalog
         {
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public ProductReviewRepository(HccRequestContext context, bool isForMemoryOnly)
-            : this(context)
-        {
-        }
-
-        #endregion
-
         protected override Func<hcc_ProductReview, bool> MatchItems(ProductReview item)
         {
             var guid = DataTypeHelper.BvinToGuid(item.Bvin);

@@ -53,16 +53,6 @@ namespace Hotcakes.Commerce.Reporting
 
         #endregion
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 2.0.0. Use Factory.CreateService instead")]
-        public ReportingService(HotcakesApplication app)
-            : this(app.CurrentRequestContext)
-        {
-        }
-
-        #endregion
-
         #region Internal declaration
 
         public class AffiliateItem
@@ -545,13 +535,24 @@ namespace Hotcakes.Commerce.Reporting
         }
 
         /// <summary>
-        ///     Gets the top5 vendors manufactures.
+        ///     Gets the top5 vendors manufacturers.
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns></returns>
+        [Obsolete("Deprecated in Hotcakes Commerce 03.03.00. Please use the GetTop5VendorsManufacturers method instead. Removing in version 03.04.00 or later.")]
         public List<Top5Item> GetTop5VendorsManufactures(Top5VendorType type)
         {
-            using (MiniProfiler.Current.Step("GetTop5VendorsManufactures"))
+            return GetTop5VendorsManufacturers(type);
+        }
+
+        /// <summary>
+        ///     Gets the top5 vendors manufacturers.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns></returns>
+        public List<Top5Item> GetTop5VendorsManufacturers(Top5VendorType type)
+        {
+            using (MiniProfiler.Current.Step("GetTop5VendorsManufacturers"))
             {
                 List<Top5Item> items = null;
 

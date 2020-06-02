@@ -1,0 +1,183 @@
+﻿@model Hotcakes.Modules.Core.Models.AffiliateViewModel
+
+@using (Html.BeginHccForm(new { @class = "hcAffiliateReg" }))
+{
+    <h2>@Localization.GetString("PageTitle")</h2>
+    
+    <div class="dnnFormMessage hcValidationSummary" data-bind="css: { dnnFormValidationSummary: message.status() != 'OK' }, visible: message.show, html: message.text"></div>
+    
+    if (!string.IsNullOrEmpty(Model.MyAffiliateId))
+    {
+    <!-- Show any info when affiliate already registered -->
+    }
+
+    if (string.IsNullOrEmpty(Model.MyAffiliateId))
+    {
+    <div class="row-fluid">
+        <div class="dnnForm span6" data-bind="visible: !isRegistered()">
+            @if (Model.IsLoggedIn())
+            {
+                <div class="dnnFormItem">
+                    <label class="dnnLabel">
+                        @Localization.GetString("lblUsername")
+                    </label>
+                    <span>@Model.Username</span>
+                </div>
+            }
+            else
+            {
+                <div class="dnnFormItem dnnFormRequired">
+                    <label class="dnnLabel">
+                        @Localization.GetString("lblUsername")
+                    </label>
+                    @Html.TextBoxFor(model => model.Username, new { data_bind = "value: model.username" })
+                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "dnnFormMessage hcFormError" })
+                </div>
+                <div class="dnnFormItem dnnFormRequired">
+                    <label class="dnnLabel">
+                        @Localization.GetString("lblEmail")
+                    </label>
+                    @Html.TextBoxFor(model => model.Email, new { data_bind = "value: model.email" })
+                    @Html.ValidationMessageFor(model => model.Email, Localization.GetString("ValMessage_EmailInvalid"), new { @class = "dnnFormMessage hcFormError" })
+                </div>
+                <div class="dnnFormItem dnnFormRequired">
+                    <label class="dnnLabel">
+                        @Localization.GetString("lblPassword")
+                    </label>
+                    @Html.PasswordFor(model => model.Password, new { data_bind = "value: model.password" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "dnnFormMessage hcFormError" })
+                </div>
+                <div class="dnnFormItem dnnFormRequired">
+                    <label class="dnnLabel">
+                        @Localization.GetString("lblConfirmPassword")
+                    </label>
+                    @Html.PasswordFor(model => model.ConfirmPassword, new { data_bind = "value: model.confirmPassword" })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "dnnFormMessage hcFormError" })
+                </div>
+            }
+            
+            @if (Model.FirstLastNameRequired())
+            {
+                <div class="dnnFormItem dnnFormRequired">
+                    <label class="dnnLabel">
+                        @Localization.GetString("lblFirstName")
+                    </label>
+                    @Html.TextBoxFor(model => model.FirstName, new { data_bind = "value: model.firstname" })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "dnnFormMessage hcFormError" })
+                </div>
+                <div class="dnnFormItem dnnFormRequired">
+                    <label class="dnnLabel">
+                        @Localization.GetString("lblLastName")
+                    </label>
+                    @Html.TextBoxFor(model => model.LastName, new { data_bind = "value: model.lastname" })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "dnnFormMessage hcFormError" })
+                </div>
+            }
+
+            <div class="dnnFormItem dnnFormRequired">
+                <label class="dnnLabel">
+                    @Localization.GetString("lblMyAffiliateId")
+                </label>
+                @Html.TextBoxFor(model => model.MyAffiliateId, new { data_bind = "value: model.myaffiliateid" })
+                @Html.ValidationMessageFor(model => model.MyAffiliateId, Localization.GetString("ValMessage_AffiliateIDInvalid"), new { @class = "dnnFormMessage hcFormError" })
+            </div>
+            <div class="dnnFormItem" data-bind="visible: model.allowReferral">
+                <label class="dnnLabel">
+                    @Localization.GetString("lblReferralAffiliateId")
+                </label>
+                @Html.TextBoxFor(model => model.ReferralAffiliateId, new { data_bind = "value: model.referralaffiliateid, event: { change: changeReferralAffiliateId }" })
+                @Html.ValidationMessageFor(model => model.ReferralAffiliateId, Localization.GetString("ValMessage_AffiliateIDInvalid"), new { @class = "dnnFormMessage hcFormError" })
+            </div>
+            <div class="dnnFormItem dnnFormRequired">
+                <label class="dnnLabel">
+                    &nbsp;
+                </label>
+                <label>
+                    @Html.CheckBoxFor(model => model.ConfirmTerms, new { data_bind = "checked: model.confirmterms" })
+                    @Localization.GetString("lblIAgreeTo") 
+                </label>
+                <a href="#hcAffiliateTermsPopup" data-min-width="600" data-min-height="350" title="@Localization.GetString("TermsTitle")" class="hc-popup">@Localization.GetString("lblAffiliateTerms") </a>
+            </div>
+
+        </div>
+
+        <div class="dnnForm span6" data-bind="visible: !isRegistered()">
+            <div class="dnnFormItem">
+                <label class="dnnLabel">
+                    @Localization.GetString("lblCountry")
+                </label>
+                @Html.DropDownListFor(model => model.CountryId,
+                    new SelectList(Model.Countries, "Bvin", "DisplayName"),
+                    new { data_bind = "value: model.countryid, event: { change: changeCountry }" })
+            </div>
+            <div class="dnnFormItem">
+                <label class="dnnLabel">
+                    @Localization.GetString("lblCompany")
+                </label>
+                @Html.TextBoxFor(model => model.Company, new { data_bind = "value: model.company" })
+            </div>
+            <div class="dnnFormItem">
+                <label class="dnnLabel">
+                    @Localization.GetString("lblAddress")
+                </label>
+                @Html.TextBoxFor(model => model.AddressLine, new { data_bind = "value: model.addressline" })
+            </div>
+            <div class="dnnFormItem">
+                <label class="dnnLabel">
+                    @Localization.GetString("lblCity")
+                </label>
+                @Html.TextBoxFor(model => model.City, new { data_bind = "value: model.city" })
+            </div>
+            <div class="dnnFormItem">
+                <label class="dnnLabel">
+                    @Localization.GetString("lblState")
+                </label>
+                @Html.DropDownListFor(model => model.State,
+                    new List<SelectListItem>(),
+                    new { data_bind = string.Format("value: model.state, options: regions, optionsText: 'DisplayName', optionsValue: 'Abbreviation', optionsCaption: '{0}'", Localization.GetString("NotSelectedItem")) })
+            </div>
+            <div class="dnnFormItem">
+                <label class="dnnLabel">
+                    @Localization.GetString("lblZip")
+                </label>
+                @Html.TextBoxFor(model => model.PostalCode, new { data_bind = "value: model.postalcode" })
+            </div>
+            <div class="dnnFormItem">
+                <label class="dnnLabel">
+                    @Localization.GetString("lblPhone")
+                </label>
+                @Html.TextBoxFor(model => model.Phone, new { data_bind = "value: model.phone" })
+            </div>
+
+        </div>
+
+    </div>
+    <div class="span6" data-bind="visible: !isRegistered()">
+        <ul class="dnnActions dnnRight">
+            <li>
+                <button type="button" data-bind="click: register" class="dnnPrimaryAction">@Localization.GetString("btnRegister")</button>
+            </li>
+        </ul>
+    </div>
+    }
+}
+@* Affiliate Terms Popup *@
+<div id="hcAffiliateTermsPopup" style="display: none;">
+    <div class="hc-affiliate-terms">
+        @Html.Raw(@Model.AgreementText)
+    </div>
+    <ul class="dnnActions dnnRight">
+        <li>
+            <button type="button" onclick="$('#hcAffiliateTermsPopup').hcDialog('close');" class="dnnPrimaryAction">@Localization.GetString("btnClose")</button>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $(function () {
+        ko.applyBindings(new HcAffiliateRegViewModel(
+                new HcAffiliate(@Html.Raw(@Model.ToJson())),
+                $(".hcAffiliateReg")
+            ),
+            $(".hcAffiliateReg")[0]);
+    });
+</script>

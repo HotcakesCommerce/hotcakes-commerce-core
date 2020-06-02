@@ -36,16 +36,6 @@ namespace Hotcakes.Commerce.NoCms.Accounts
         {
         }
 
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateService instead")]
-        public MvcAccountService(HccRequestContext c, bool isForMemoryOnly)
-            : this(c)
-        {
-        }
-
-        #endregion
-
         public IUserAccountRepository AdminUsers { get; protected set; }
         public StoreUserRelationshipRepository AdminUsersXStores { get; protected set; }
 

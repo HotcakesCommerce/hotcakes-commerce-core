@@ -74,10 +74,6 @@ namespace Hotcakes.Modules.Core.Models
         {
             HideHomeLink = false;
             Items = new Queue<BreadCrumbItem>();
-
-#pragma warning disable 0612, 0618
-            Spacer = "<span class=\"spacer\">&nbsp;&raquo;&nbsp;</span>";
-#pragma warning restore 0612, 0618
         }
 
         /// <summary>
@@ -85,12 +81,6 @@ namespace Hotcakes.Modules.Core.Models
         ///     home link. That can be controlled from this variable
         /// </summary>
         public bool HideHomeLink { get; set; }
-
-        /// <summary>
-        ///     Provide html block which can be added to add space between the two breadcrumb items
-        /// </summary>
-        [Obsolete("Obsolete in 1.2.0")]
-        public string Spacer { get; set; }
 
         /// <summary>
         ///     List of the items which are shown in navigation. As a user drills down to nested

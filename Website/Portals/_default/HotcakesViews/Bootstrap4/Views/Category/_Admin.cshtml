@@ -1,0 +1,32 @@
+﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+@if (Model.AuthorizedToEditCatalog)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-12 hc-catalog-admin">
+                <div class="alert alert-info">
+                    <div class="row clearfix">
+                        <div class="col-4 float-left">
+                            <h6>@Localization.GetString("AdminMessage")</h6>
+                        </div>
+                        <div class="offset-1 col-7 d-block input-group text-right float-right">
+                            <div class="input-group-btn text-right float-right">
+                                <a href="@Model.StoreAdminUrl" target="_blank" class="btn btn-secondary btn-sm" role="button"><i class="fas fa-store"></i>@Localization.GetString("Dashboard")</a>
+                                @if (!string.IsNullOrEmpty(Model.LocalCategory.Bvin))
+                                {
+                                    <a href="@Model.CategoryAnalyticsUrl" target="_blank" class="btn btn-secondary btn-sm" role="button"><i class="fas fa-chart-line"></i>@Localization.GetString("CategoryAnalytics")</a>
+                                    <a href="@Model.CategoryEditUrl" target="_blank" class="btn btn-secondary btn-sm" role="button"><i class="fas fa-edit"></i>@Localization.GetString("CategoryEdit")</a>
+                                }
+                                else
+                                {
+                                    <a href="@Model.ProductsManagementUrl" target="_blank" class="btn btn-secondary btn-sm" role="button"><i class="fas fa-tags"></i>@Localization.GetString("ManageProducts")</a>
+                                    <a href="@Model.CategoriesManagementUrl" target="_blank" class="btn btn-secondary btn-sm" role="button"><i class="fas fa-stream"></i>@Localization.GetString("ManageCategories")</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

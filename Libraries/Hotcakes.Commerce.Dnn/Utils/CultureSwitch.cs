@@ -100,27 +100,5 @@ namespace Hotcakes.Commerce.Dnn.Utils
         }
 
         #endregion
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.1. Use same function with other parameters")]
-        public CultureSwitch(HotcakesApplication hccApp) :
-            this(hccApp.CurrentStore)
-        {
-        }
-
-        [Obsolete("Obsolete in 1.8.1. Use same function with other parameters")]
-        public static void SetCulture(HotcakesApplication hccApp)
-        {
-            SetCulture(hccApp.CurrentStore);
-        }
-
-        [Obsolete("Obsolete in 1.8.1. Use same function with other parameters")]
-        public static void SetCulture(HotcakesApplication hccApp, PortalSettings portalSettings)
-        {
-            SetCulture(hccApp.CurrentStore, portalSettings);
-        }
-
-        #endregion
     }
 }

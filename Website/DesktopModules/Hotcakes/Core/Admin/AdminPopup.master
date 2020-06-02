@@ -1,20 +1,22 @@
-<%@ Master Language="C#" Inherits="Hotcakes.Modules.Core.Admin.AdminPopup" Codebehind="AdminPopup.master.cs" AutoEventWireup="True" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ Master Language="C#" Inherits="Hotcakes.Modules.Core.Admin.AdminPopup" CodeBehind="AdminPopup.master.cs" AutoEventWireup="True" %>
+
+<%@ Register Src="JQueryInclude.ascx" TagName="jQuery" TagPrefix="hcc" %>
+<!DOCTYPE html>
+<html>
 <head id="Head1" runat="server">
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
-    <title>My Hotcakes Commerce Store</title>
+    <title>Hotcakes Commerce</title>
     <link href="~/DesktopModules/Hotcakes/Core/Admin/Styles.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="~/DesktopModules/Hotcakes/Core/Admin/StylesPrint.css" rel="stylesheet" type="text/css" media="print" />
+    <hcc:jQuery runat="server"/>
 </head>
 <body>
     <form id="form1" runat="server">
-        <telerik:RadScriptManager runat="server"/>
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnableCdn="true" />
         <asp:PlaceHolder ID="BodySCRIPTS" runat="server" />
         <input id="__hccVariables" runat="server" name="__hccVariables" type="hidden" />
-        <asp:ContentPlaceHolder ID="HccAdminPopupConent" runat="server"/>
+        <asp:ContentPlaceHolder ID="HccAdminPopupConent" runat="server" />
     </form>
-	<img src="//hotcakes.org/Portals/0/images/spacer.gif" alt="" />
+    <img src="//hotcakes.org/Portals/0/images/spacer.gif" alt="" />
 </body>
 </html>

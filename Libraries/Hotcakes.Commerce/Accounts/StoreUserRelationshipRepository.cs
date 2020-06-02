@@ -86,27 +86,5 @@ namespace Hotcakes.Commerce.Accounts
         {
             return FindFirstPoco(r => r.StoreId == storeId && r.UserId == userId);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static StoreUserRelationshipRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new StoreUserRelationshipRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static StoreUserRelationshipRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new StoreUserRelationshipRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public StoreUserRelationshipRepository(HccRequestContext c, IRepositoryStrategy<hcc_StoresXUsers> r, ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

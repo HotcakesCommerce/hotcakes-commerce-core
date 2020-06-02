@@ -17,7 +17,6 @@
 			<WebsiteBuildFolder>$(RootFolder)\_Build\_Website</WebsiteBuildFolder>
 			<CoreBuildFolder>$(RootFolder)\_Build\_Website\_Core</CoreBuildFolder>
 			<ViewSetBuildFolder>$(RootFolder)\_Build\_Website\_ViewSet</ViewSetBuildFolder>
-			<ControlPanelBuildFolder>$(RootFolder)\_Build\_Website\_ControlPanel</ControlPanelBuildFolder>
 			<ModulesBuildFolder>$(RootFolder)\_Build\_Website\_Modules</ModulesBuildFolder>
 			<DebugBuildFolder>$(RootFolder)\_Build\_Website\_Debug</DebugBuildFolder>
 			<InstallFolder>$(RootFolder)\_Install</InstallFolder>
@@ -25,10 +24,10 @@
 
 		<!--in VS $year$ we exclude the packages folder -->
 		<ItemGroup>
-			<InstallInclude Include="**\*.ascx" Exclude="ControlPanel\**" />
-			<InstallInclude Include="**\*.css" Exclude="ControlPanel\**" />
-			<InstallInclude Include="**\*.resx" Exclude="ControlPanel\**;**\*.uk-UA.resx" />
-			<InstallInclude Include="**\*.txt" />
+      <InstallInclude Include="**\*.ascx" Exclude="ControlPanel\**" />
+      <InstallInclude Include="**\*.css" Exclude="ControlPanel\**" />
+      <InstallInclude Include="**\*.resx" Exclude="ControlPanel\**;**\*.uk-UA.resx" />
+      <InstallInclude Include="**\*.txt" />
 			<InstallInclude Include="$(DNNFileName).dnn" />
 			<InstallInclude Include="**\*.SqlDataProvider" />
 			<InstallInclude Include="hotcakes.config" />
@@ -79,14 +78,6 @@
 		</ItemGroup>
 
 		<ItemGroup>
-			<ControlPanelInclude Include="ControlPanel\**\*.resx" />
-			<ControlPanelInclude Include="ControlPanel\**\*.ascx" />
-			<ControlPanelInclude Include="ControlPanel\**\*.css" />
-			<ControlPanelInclude Include="ControlPanel\**\*.js" />
-			<ControlPanelInclude Include="ControlPanel\**\controlbarimages\**" />
-		</ItemGroup>
-
-		<ItemGroup>
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.Ups.Keys.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Commerce.Dnn.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Commerce.dll" />
@@ -96,7 +87,7 @@
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.FedEx.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.Ups.dll" />
-      <HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.UpsFreight.dll" />
+			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.UpsFreight.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.USPostal.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Web.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\$(AssemblyName).dll" />
@@ -116,8 +107,6 @@
 		<Copy SourceFiles="@(InstallInclude)" DestinationFolder="$(ModulesBuildFolder)\%(RecursiveDir)" />
 
 		<!-- Copy file to Modules Build Folder -->
-		<Copy SourceFiles="@(ControlPanelInclude)" DestinationFolder="$(ControlPanelBuildFolder)\%(RecursiveDir)" />
-
 		<Copy SourceFiles="@(HotcakesDlls)" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\Hotcakes.Common.Dnn.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\Hotcakes.Licensing.Common.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
@@ -135,9 +124,6 @@
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\MiniProfiler.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\MiniProfiler.EntityFramework6.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\BrandonHaynes.ModelAdapter.EntityFramework.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
-		<Copy SourceFiles="$(MSBuildDnnBinPath)\System.Web.Mvc.dll" DestinationFolder="$(ModulesBuildFolder)" />
-		<Copy SourceFiles="$(MSBuildDnnBinPath)\System.Web.Abstractions.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
-		<Copy SourceFiles="$(MSBuildDnnBinPath)\System.Web.Routing.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 
 		<Copy SourceFiles="@(PackageTxtInclude)" DestinationFolder="$(ModulesBuildFolder)" />
 		
@@ -155,13 +141,6 @@
 
 		<Zip Files="@(HotcakesViewsContent)" WorkingDirectory="$(ViewSetBuildFolder)" ZipFileName="$(ModulesBuildFolder)\HotcakesViews.$(Extension)" ParallelCompression="False" />
 
-		<!-- Create the ControlPanel package -->
-		<CreateItem Include="$(ControlPanelBuildFolder)\**\*.*">
-			<Output TaskParameter="Include" ItemName="ControlPanelContent" />
-		</CreateItem>
-
-		<Zip Files="@(ControlPanelContent)" WorkingDirectory="$(ControlPanelBuildFolder)" ZipFileName="$(ModulesBuildFolder)\ControlPanel\ControlPanel.$(Extension)" ParallelCompression="False" />
-
 		<!-- Create the Install package -->
 		<CreateItem Include="$(ModulesBuildFolder)\**\*.*">
 			<Output TaskParameter="Include" ItemName="OutputContent" />
@@ -172,7 +151,6 @@
 		
 		<RemoveDir Directories ="$(CoreBuildFolder)" /> 
 		<RemoveDir Directories ="$(ViewSetBuildFolder)" /> 
-		<RemoveDir Directories ="$(ControlPanelBuildFolder)" /> 
 		<RemoveDir Directories ="$(ModulesBuildFolder)" />
 
 		<!-- Create packages with debug symbols -->

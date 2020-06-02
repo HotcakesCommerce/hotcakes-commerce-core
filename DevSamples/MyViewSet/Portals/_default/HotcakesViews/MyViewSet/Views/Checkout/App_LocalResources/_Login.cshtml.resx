@@ -127,10 +127,10 @@
     <value>Password mismatch</value>
   </data>
   <data name="Email.Text" xml:space="preserve">
-    <value>Email</value>
+    <value>E-Mail</value>
   </data>
   <data name="EmailAddress.Text" xml:space="preserve">
-    <value>Email Address</value>
+    <value>E-Mail Address</value>
   </data>
   <data name="EnterPassword.Text" xml:space="preserve">
     <value>Enter Your Password</value>

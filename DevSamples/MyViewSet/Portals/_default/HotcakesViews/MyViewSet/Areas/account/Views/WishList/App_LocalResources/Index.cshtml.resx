@@ -120,10 +120,16 @@
   <data name="AddToCart.Text" xml:space="preserve">
     <value>Add to Cart</value>
   </data>
+  <data name="Price.Text" xml:space="preserve">
+    <value>Price</value>
+  </data>
   <data name="RemoveSavedItem.Text" xml:space="preserve">
-    <value />
+    <value>Remove</value>
   </data>
   <data name="SavedItems.Text" xml:space="preserve">
     <value>Wishlist</value>
+  </data>
+  <data name="KeepShopping.Text" xml:space="preserve">
+    <value>Keep Shopping</value>
   </data>
 </root>

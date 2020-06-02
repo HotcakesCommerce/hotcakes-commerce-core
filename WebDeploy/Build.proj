@@ -57,55 +57,159 @@
 
 	<PropertyGroup>
 		<WebDeployBuildFolder>$(RootFolder)\_Build\_WebDeploy</WebDeployBuildFolder>
+		<CmsInstallBuildFolder>$(RootFolder)\_Build\_CMS-Install</CmsInstallBuildFolder>
+		<CmsUpgradeBuildFolder>$(RootFolder)\_Build\_CMS-Upgrade</CmsUpgradeBuildFolder>
 		<InstallFolder>$(RootFolder)\_Install</InstallFolder>
 		<DnnProviderBuildFolder>$(RootFolder)\_Build</DnnProviderBuildFolder>
-		<DnnPackage>DNN_Platform_8.0.3_Install.zip</DnnPackage>
+		<DnnPackage>DNN_Platform_9.2.2.178_Install.zip</DnnPackage>
+		<DnnUpgradePackage>DNN_Platform_9.2.2.178_Upgrade.zip</DnnUpgradePackage>
 		<HotcakesBrandingFolder>HotcakesBranding</HotcakesBrandingFolder>
 		<InstallFolderForConfigFolder>Install</InstallFolderForConfigFolder>
 		<SourceBuildFolder>$(RootFolder)\_Build\_Source</SourceBuildFolder>
 	</PropertyGroup>
 
 	<Target Name="Build">
-		<Message Importance="High" Text="======================================= Starting WebDeploy Package ==========================================" />
-		<CallTarget Targets="Package" />
+		<Message Importance="High" Text="======================================= Starting Packages ==========================================" />
+		<CallTarget Targets="BuildWebDeployPackage" />
 		<CallTarget Targets="CreateWPIFeed" />
-		
-		<CallTarget Targets="Source" />
-		
-		
-		
-		<RemoveDir Directories="$(WebDeployBuildFolder)" />
-		<RemoveDir Directories="$(SourceBuildFolder)" />
+    <RemoveDir Directories="$(WebDeployBuildFolder)" />
+
+    <CallTarget Targets="BuildCmsInstallPackage" />
+    <RemoveDir Directories="$(CmsInstallBuildFolder)" />
+
+    <CallTarget Targets="BuildCmsUpgradePackage" />
+    <RemoveDir Directories="$(CmsUpgradeBuildFolder)" />
+
+    <!--CallTarget Targets="Source" /-->
+    <RemoveDir Directories="$(SourceBuildFolder)" />
 	</Target>
 
-	<Target Name="Package">
-		<Message Importance="High" Text="======================================= Starting Package ==========================================" />
+	<Target Name="BuildCmsInstallPackage">
+		<Message Importance="High" Text="======================================= Starting CMS Install Package ==========================================" />
+		<Unzip ZipFileName="$(DnnPackage)" TargetDirectory="$(CmsInstallBuildFolder)" />
+
+		<ItemGroup>
+			<DeleteFiles Include="$(CmsInstallBuildFolder)\Portals\_default\Default Website.template*" />
+		</ItemGroup>
+		<Delete Files="@(DeleteFiles)" />
+
+		<Message Importance="High" Text="--- Begin Replacing Branding ---" />
+		
+    <Copy SourceFiles="$(HotcakesBrandingFolder)\images\Branding\Hotcakes_Logo.png" DestinationFiles="$(CmsInstallBuildFolder)\images\Branding\Hotcakes_Logo.png" />
+		<Copy SourceFiles="$(HotcakesBrandingFolder)\App_GlobalResources\GlobalResources.resx" DestinationFiles="$(CmsInstallBuildFolder)\App_GlobalResources\GlobalResources.resx" />
+		<Copy SourceFiles="$(HotcakesBrandingFolder)\Install\UnderConstruction.template.htm" DestinationFiles="$(CmsInstallBuildFolder)\Install\UnderConstruction.template.htm" />
+		<Copy SourceFiles="$(HotcakesBrandingFolder)\ErrorPage.aspx" DestinationFiles="$(CmsInstallBuildFolder)\ErrorPage.aspx" />
+		<Copy SourceFiles="$(HotcakesBrandingFolder)\favicon.ico" DestinationFiles="$(CmsInstallBuildFolder)\favicon.ico" />
+		<Copy SourceFiles="$(HotcakesBrandingFolder)\favicon.ico" DestinationFiles="$(CmsInstallBuildFolder)\HCC.ico" />
+
+    <Copy SourceFiles="Backup-App_Offline.htm" DestinationFiles="$(CmsInstallBuildFolder)\Backup-App_Offline.htm" />
+
+    <Copy SourceFiles="HCCCMS.template" DestinationFiles="$(CmsInstallBuildFolder)\Portals\_default\Default Website.template" />
+    <Copy SourceFiles="HCCCMS.template.resources" DestinationFiles="$(CmsInstallBuildFolder)\Portals\_default\Default Website.template.resources" />
+    <Copy SourceFiles="HCCCMS.template.en-US.resx" DestinationFiles="$(CmsInstallBuildFolder)\Portals\_default\Default Website.template.en-US.resx" />
+
+    <Copy SourceFiles="DotNetNuke.install.config" DestinationFolder="$(CmsInstallBuildFolder)\Install" />
+
+    <Message Importance="High" Text="--- Done Replacing Branding ---" />
+
+		<Copy SourceFiles="HCHostedTrial_Skin_01.00.00_Install.zip" DestinationFolder="$(CmsInstallBuildFolder)\Install\Skin" />
+		<Copy SourceFiles="Rural_Skin_01.00.00_Install.zip" DestinationFolder="$(CmsInstallBuildFolder)\nstall\Skin" />
+		<Copy SourceFiles="Tropical_Skin_01.00.00_Install.zip" DestinationFolder="$(CmsInstallBuildFolder)\Install\Skin" />
+		<Copy SourceFiles="Warm_Skin_01.00.00_Install.zip" DestinationFolder="$(CmsInstallBuildFolder)\Install\Skin" />
+		<Copy SourceFiles="HCHostedTrial_Container_01.00.00_Install.zip" DestinationFolder="$(CmsInstallBuildFolder)\Install\Container" />
+		<Copy SourceFiles="Rural_Container_01.00.00_Install.zip" DestinationFolder="$(CmsInstallBuildFolder)\Install\Container" />
+		<Copy SourceFiles="Warm_Container_01.00.00_Install.zip" DestinationFolder="$(CmsInstallBuildFolder)\Install\Container" />
+		<Copy SourceFiles="Tropical_Container_01.00.00_Install.zip" DestinationFolder="$(CmsInstallBuildFolder)\Install\Container" />
+
+    <Copy SourceFiles="HCC.Application_03.03.00_Install.zip" DestinationFolder="$(CmsInstallBuildFolder)\Install\Module" />
+
+		<Copy SourceFiles="$(InstallFolder)\HotcakesCommerce_$(Version)_Core_Install.zip" DestinationFolder="$(CmsInstallBuildFolder)\Install\Module\" />
+
+		<XmlUpdate XmlFileName="$(CmsInstallBuildFolder)\Web.config" XPath="//configuration/appSettings/add[@key='AutoUpgrade']/@value" Value="false" />
+
+		<ItemGroup>
+			<CmsPackage Include="$(CmsInstallBuildFolder)\**" />
+		</ItemGroup>
+		<Zip Files="@(CmsPackage)" WorkingDirectory="$(CmsInstallBuildFolder)" ZipFileName="$(InstallFolder)\HotcakesCommerce_$(Version)_CMS_Install.zip" ParallelCompression="False" />
+	</Target>
+
+  <Target Name="BuildCmsUpgradePackage">
+    <Message Importance="High" Text="======================================= Starting CMS Upgrade Package ==========================================" />
+    <Unzip ZipFileName="$(DnnUpgradePackage)" TargetDirectory="$(CmsUpgradeBuildFolder)" />
+
+    <ItemGroup>
+      <DeleteFiles Include="$(CmsUpgradeBuildFolder)\Portals\_default\Default Website.template*" />
+    </ItemGroup>
+    <Delete Files="@(DeleteFiles)" />
+
+    <Message Importance="High" Text="--- Begin Replacing Branding ---" />
+
+    <Copy SourceFiles="$(HotcakesBrandingFolder)\images\Branding\Hotcakes_Logo.png" DestinationFiles="$(CmsUpgradeBuildFolder)\images\Branding\Hotcakes_Logo.png" />
+    <Copy SourceFiles="$(HotcakesBrandingFolder)\App_GlobalResources\GlobalResources.resx" DestinationFiles="$(CmsUpgradeBuildFolder)\App_GlobalResources\GlobalResources.resx" />
+    <Copy SourceFiles="$(HotcakesBrandingFolder)\Install\UnderConstruction.template.htm" DestinationFiles="$(CmsUpgradeBuildFolder)\Install\UnderConstruction.template.htm" />
+    <Copy SourceFiles="$(HotcakesBrandingFolder)\ErrorPage.aspx" DestinationFiles="$(CmsUpgradeBuildFolder)\ErrorPage.aspx" />
+    <Copy SourceFiles="$(HotcakesBrandingFolder)\favicon.ico" DestinationFiles="$(CmsUpgradeBuildFolder)\favicon.ico" />
+    <Copy SourceFiles="$(HotcakesBrandingFolder)\favicon.ico" DestinationFiles="$(CmsUpgradeBuildFolder)\HCC.ico" />
+
+    <Copy SourceFiles="Backup-App_Offline.htm" DestinationFiles="$(CmsUpgradeBuildFolder)\Backup-App_Offline.htm" />
+
+    <Copy SourceFiles="HCCCMS.template" DestinationFiles="$(CmsUpgradeBuildFolder)\Portals\_default\Default Website.template" />
+    <Copy SourceFiles="HCCCMS.template.resources" DestinationFiles="$(CmsUpgradeBuildFolder)\Portals\_default\Default Website.template.resources" />
+    <Copy SourceFiles="HCCCMS.template.en-US.resx" DestinationFiles="$(CmsUpgradeBuildFolder)\Portals\_default\Default Website.template.en-US.resx" />
+
+    <Copy SourceFiles="DotNetNuke.install.config" DestinationFolder="$(CmsUpgradeBuildFolder)\Install" />
+
+    <Message Importance="High" Text="--- Done Replacing Branding ---" />
+
+    <Copy SourceFiles="HCHostedTrial_Skin_01.00.00_Install.zip" DestinationFolder="$(CmsUpgradeBuildFolder)\Install\Skin" />
+    <Copy SourceFiles="Rural_Skin_01.00.00_Install.zip" DestinationFolder="$(CmsUpgradeBuildFolder)\nstall\Skin" />
+    <Copy SourceFiles="Tropical_Skin_01.00.00_Install.zip" DestinationFolder="$(CmsUpgradeBuildFolder)\Install\Skin" />
+    <Copy SourceFiles="Warm_Skin_01.00.00_Install.zip" DestinationFolder="$(CmsUpgradeBuildFolder)\Install\Skin" />
+    <Copy SourceFiles="HCHostedTrial_Container_01.00.00_Install.zip" DestinationFolder="$(CmsUpgradeBuildFolder)\Install\Container" />
+    <Copy SourceFiles="Rural_Container_01.00.00_Install.zip" DestinationFolder="$(CmsUpgradeBuildFolder)\Install\Container" />
+    <Copy SourceFiles="Warm_Container_01.00.00_Install.zip" DestinationFolder="$(CmsUpgradeBuildFolder)\Install\Container" />
+    <Copy SourceFiles="Tropical_Container_01.00.00_Install.zip" DestinationFolder="$(CmsUpgradeBuildFolder)\Install\Container" />
+
+    <Copy SourceFiles="HCC.Application_03.03.00_Install.zip" DestinationFolder="$(CmsUpgradeBuildFolder)\Install\Module" />
+
+    <Copy SourceFiles="$(InstallFolder)\HotcakesCommerce_$(Version)_Core_Install.zip" DestinationFolder="$(CmsUpgradeBuildFolder)\Install\Module\" />
+
+    <ItemGroup>
+      <CmsUpgradePackage Include="$(CmsUpgradeBuildFolder)\**" />
+    </ItemGroup>
+    <Zip Files="@(CmsUpgradePackage)" WorkingDirectory="$(CmsUpgradeBuildFolder)" ZipFileName="$(InstallFolder)\HotcakesCommerce_$(Version)_CMS_Upgrade.zip" ParallelCompression="False" />
+  </Target>
+
+	<Target Name="BuildWebDeployPackage">
+		<Message Importance="High" Text="======================================= Starting WebDeploy Package ==========================================" />
 		<Unzip ZipFileName="$(DnnPackage)" TargetDirectory="$(WebDeployBuildFolder)\Hotcakes" />
 
 		<ItemGroup>
-			<DeleteFiles Include="$(WebDeployBuildFolder)\Hotcakes\Portals\_default\Blank Website.template*" />
 			<DeleteFiles Include="$(WebDeployBuildFolder)\Hotcakes\Portals\_default\Default Website.template*" />
 		</ItemGroup>
 		<Delete Files="@(DeleteFiles)" />
 
+		<Message Importance="High" Text="--- Begin Replacing Branding ---" />
 		<Copy SourceFiles="$(HotcakesBrandingFolder)\images\Branding\Hotcakes_Logo.png" DestinationFiles="$(WebDeployBuildFolder)\Hotcakes\images\Branding\Hotcakes_Logo.png" />
 		<Copy SourceFiles="$(HotcakesBrandingFolder)\App_GlobalResources\GlobalResources.resx" DestinationFiles="$(WebDeployBuildFolder)\Hotcakes\App_GlobalResources\GlobalResources.resx" />
 		<Copy SourceFiles="$(HotcakesBrandingFolder)\Install\UnderConstruction.template.htm" DestinationFiles="$(WebDeployBuildFolder)\Hotcakes\Install\UnderConstruction.template.htm" />
 		<Copy SourceFiles="$(HotcakesBrandingFolder)\ErrorPage.aspx" DestinationFiles="$(WebDeployBuildFolder)\Hotcakes\ErrorPage.aspx" />
-		<Copy SourceFiles="$(HotcakesBrandingFolder)\ErrorPage.aspx.cs" DestinationFiles="$(WebDeployBuildFolder)\Hotcakes\ErrorPage.aspx.cs" />
 		<Copy SourceFiles="$(HotcakesBrandingFolder)\favicon.ico" DestinationFiles="$(WebDeployBuildFolder)\Hotcakes\favicon.ico" />
+		<Copy SourceFiles="$(HotcakesBrandingFolder)\favicon.ico" DestinationFiles="$(WebDeployBuildFolder)\Hotcakes\HCC.ico" />
+
+    <Copy SourceFiles="Backup-App_Offline.htm" DestinationFiles="$(SourceBuildFolder)\Website\Backup-App_Offline.htm" />
+
+    <Copy SourceFiles="HCCCMS.template" DestinationFiles="$(SourceBuildFolder)\Website\Portals\_default\Default Website.template" />
+    <Copy SourceFiles="HCCCMS.template.resources" DestinationFiles="$(SourceBuildFolder)\Website\Portals\_default\Default Website.template.resources" />
+    <Copy SourceFiles="HCCCMS.template.en-US.resx" DestinationFiles="$(SourceBuildFolder)\Website\Portals\_default\Default Website.template.en-US.resx" />
+
+		<Message Importance="High" Text="--- Done Replacing Branding ---" />
 
 		<Copy SourceFiles="Manifest.xml" DestinationFolder="$(WebDeployBuildFolder)\" />
 		<Copy SourceFiles="Parameters.xml" DestinationFolder="$(WebDeployBuildFolder)\" />
 		<Copy SourceFiles="TBEX.xml" DestinationFolder="$(WebDeployBuildFolder)\" />
 		<Copy SourceFiles="InstallSQL1.sql" DestinationFolder="$(WebDeployBuildFolder)\" />
 		<Copy SourceFiles="InstallSQL2.sql" DestinationFolder="$(WebDeployBuildFolder)\" />
-
-		<Copy SourceFiles="admin.template" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Portals\_default\" />
-		<Copy SourceFiles="HCHostedTrial.template" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Portals\_default\" />
-		<Copy SourceFiles="HCHostedTrial.template.resources" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Portals\_default\" />
-
-		<Copy SourceFiles="DotNetNuke.Data.SqlDataProvider" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Providers\DataProviders\SqlDataProvider\" />
 
 		<Copy SourceFiles="DotNetNuke.install.config" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install" />
 		<Copy SourceFiles="HCHostedTrial_Skin_01.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Skin" />
@@ -117,32 +221,13 @@
 		<Copy SourceFiles="Warm_Container_01.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Container" />
 		<Copy SourceFiles="Tropical_Container_01.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Container" />
 
+    <Copy SourceFiles="HCC.Application_03.03.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Module" />
 
 		<Copy SourceFiles="$(InstallFolder)\HotcakesCommerce_$(Version)_Core_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Module\" />
-		<Copy SourceFiles="$(RootFolder)\References\Dnn\System.Web.Abstractions.dll" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\bin" />
-		<Copy SourceFiles="$(RootFolder)\References\Dnn\System.Web.Routing.dll" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\bin" />
 
-    <!--
-    Removing this from the build for the 03.00.01 release. Will need to formally address this again later.
-		<Copy SourceFiles="$(InstallFolderForConfigFolder)\02.00.00.config" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\DesktopModules\Hotcakes\Core\Install" />
-    <Copy SourceFiles="$(InstallFolderForConfigFolder)\03.00.00.config" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\DesktopModules\Hotcakes\Core\Install" />
-    -->
+		<XmlUpdate XmlFileName="$(WebDeployBuildFolder)\Hotcakes\Web.config" XPath="//configuration/appSettings/add[@key='UseInstallWizard']/@value" Value="false" />
 
-		<!-- Automatic store setup and configuration is disabled for now -->
-		<!--
-		<ItemGroup>
-			<InstallFolderItems Include="Install\**\*" />
-		</ItemGroup>
-		<Copy SourceFiles="@(InstallFolderItems)" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\DesktopModules\Hotcakes\Core\Install\%(RecursiveDir)" />
-		-->
-
-		<XmlUpdate XmlFileName="$(WebDeployBuildFolder)\Hotcakes\Web.config"
-		   XPath="//configuration/appSettings/add[@key='UseInstallWizard']/@value"
-		   Value="false" />
-
-		<XmlUpdate XmlFileName="$(WebDeployBuildFolder)\Hotcakes\Web.config"
-		   XPath="//configuration/appSettings/add[@key='AutoUpgrade']/@value"
-		   Value="false" />
+		<XmlUpdate XmlFileName="$(WebDeployBuildFolder)\Hotcakes\Web.config" XPath="//configuration/appSettings/add[@key='AutoUpgrade']/@value" Value="false" />
 
 		<ItemGroup>
 			<WebDeploy Include="$(WebDeployBuildFolder)\**" />
@@ -202,7 +287,6 @@
 
 	<Target Name="BrandSourcePackage">
 		<ItemGroup>
-			<DeleteFiles Include="$(SourceBuildFolder)\Website\Portals\_default\Blank Website.template*" />
 			<DeleteFiles Include="$(SourceBuildFolder)\Website\Portals\_default\Default Website.template*" />
 		</ItemGroup>
 		<Delete Files="@(DeleteFiles)" />
@@ -210,17 +294,16 @@
 		<Copy SourceFiles="$(HotcakesBrandingFolder)\App_GlobalResources\GlobalResources.resx" DestinationFiles="$(SourceBuildFolder)\Website\App_GlobalResources\GlobalResources.resx" />
 		<Copy SourceFiles="$(HotcakesBrandingFolder)\Install\UnderConstruction.template.htm" DestinationFiles="$(SourceBuildFolder)\Website\Install\UnderConstruction.template.htm" />
 		<Copy SourceFiles="$(HotcakesBrandingFolder)\ErrorPage.aspx" DestinationFiles="$(SourceBuildFolder)\Website\ErrorPage.aspx" />
-		<Copy SourceFiles="$(HotcakesBrandingFolder)\ErrorPage.aspx.cs" DestinationFiles="$(SourceBuildFolder)\Website\ErrorPage.aspx.cs" />
 		<Copy SourceFiles="$(HotcakesBrandingFolder)\favicon.ico" DestinationFiles="$(SourceBuildFolder)\Website\favicon.ico" />
+		<Copy SourceFiles="$(HotcakesBrandingFolder)\favicon.ico" DestinationFiles="$(SourceBuildFolder)\Website\HCC.ico" />
+    
+    <Copy SourceFiles="Backup-App_Offline.htm" DestinationFiles="$(SourceBuildFolder)\Website\Backup-App_Offline.htm" />
 
-		<Copy SourceFiles="admin.template" DestinationFolder="$(SourceBuildFolder)\Website\Portals\_default\" />
-		<Copy SourceFiles="DNN803.template" DestinationFiles="$(SourceBuildFolder)\Website\Portals\_default\Default Website.template" />
-		<Copy SourceFiles="DNN803.template.resources" DestinationFiles="$(SourceBuildFolder)\Website\Portals\_default\Default Website.template.resources" />
+		<Copy SourceFiles="HCCCMS.template" DestinationFiles="$(SourceBuildFolder)\Website\Portals\_default\Default Website.template" />
+		<Copy SourceFiles="HCCCMS.template.resources" DestinationFiles="$(SourceBuildFolder)\Website\Portals\_default\Default Website.template.resources" />
+		<Copy SourceFiles="HCCCMS.template.en-US.resx" DestinationFiles="$(SourceBuildFolder)\Website\Portals\_default\Default Website.template.en-US.resx" />
 
-		<Copy SourceFiles="DotNetNuke.Data.SqlDataProvider" DestinationFolder="$(SourceBuildFolder)\Website\Providers\DataProviders\SqlDataProvider\" />
-
-		<!-- <Copy SourceFiles="DotNetNuke.install.config" DestinationFiles="$(SourceBuildFolder)\Website\Install" /> -->
-		<Copy SourceFiles="DotNetNuke803.install.config" DestinationFiles="$(SourceBuildFolder)\Website\Install\DotNetNuke.install.config" />
+		<Copy SourceFiles="DotNetNuke.install.config" DestinationFiles="$(SourceBuildFolder)\Website\Install\DotNetNuke.install.config" />
 		
 		<Copy SourceFiles="HCHostedTrial_Skin_01.00.00_Install.zip" DestinationFolder="$(SourceBuildFolder)\Website\Install\Skin" />
 		<Copy SourceFiles="HCHostedTrial_Container_01.00.00_Install.zip" DestinationFolder="$(SourceBuildFolder)\Website\Install\Container" />
@@ -231,11 +314,9 @@
 		<Copy SourceFiles="Rural_Container_01.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Container" />
 		<Copy SourceFiles="Warm_Container_01.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Container" />
 		<Copy SourceFiles="Tropical_Container_01.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Container" />
-		<Copy SourceFiles="HCC.Application_03.00.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Module" />
+		<Copy SourceFiles="HCC.Application_03.03.00_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Module" />
 
-		
-		<Copy SourceFiles="$(RootFolder)\References\Dnn\System.Web.Abstractions.dll" DestinationFolder="$(SourceBuildFolder)\Website\bin" />
-		<Copy SourceFiles="$(RootFolder)\References\Dnn\System.Web.Routing.dll" DestinationFolder="$(SourceBuildFolder)\Website\bin" />
+    <Copy SourceFiles="$(InstallFolder)\HotcakesCommerce_$(Version)_Core_Install.zip" DestinationFolder="$(WebDeployBuildFolder)\Hotcakes\Install\Module\" />
 
 	  <!--
     Removing this from the build for the 03.00.01 release. Will need to formally address this again later.

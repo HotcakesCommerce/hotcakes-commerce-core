@@ -27,7 +27,6 @@ using System.Web.UI.WebControls;
 using Hotcakes.Commerce.Orders;
 using Hotcakes.Commerce.Reporting;
 using Hotcakes.Payment;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Commerce.Globalization
 {
@@ -323,19 +322,6 @@ namespace Hotcakes.Commerce.Globalization
                 if (!string.IsNullOrEmpty(headerText))
                     column.HeaderText = headerText;
                 var footerText = localization.GetString(column.FooterText + ".FooterText");
-                if (!string.IsNullOrEmpty(footerText))
-                    column.FooterText = footerText;
-            }
-        }
-
-        public static void LocalizeRadGrid(RadGrid radGrid, ILocalizationHelper localization)
-        {
-            foreach (GridColumn column in radGrid.Columns)
-            {
-                var headerText = localization.GetString(column.UniqueName + ".HeaderText");
-                if (!string.IsNullOrEmpty(headerText))
-                    column.HeaderText = headerText;
-                var footerText = localization.GetString(column.UniqueName + ".FooterText");
                 if (!string.IsNullOrEmpty(footerText))
                     column.FooterText = footerText;
             }

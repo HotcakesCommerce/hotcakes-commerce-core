@@ -190,13 +190,16 @@ namespace Hotcakes.Commerce.Catalog
         ///     (optional) When specified, this value will be included as a prefix to the Name attribute of the
         ///     rendered items.
         /// </param>
+        /// <param name="className">When specified, the given class name will be appended to the controls rendered to the view.</param>
         /// <returns>
         ///     An HTML-friendly string representation of the Option, based upon its respective OptionType, with default
         ///     selections made.
         /// </returns>
-        public string RenderWithSelection(OptionSelectionList selections, string prefix = null)
+        public string RenderWithSelection(OptionSelectionList selections, string prefix = null, string className = null)
         {
-            return Processor.RenderWithSelection(this, selections, prefix);
+            if (prefix == null) prefix = string.Empty;
+            if (className == null) className = string.Empty;
+            return Processor.RenderWithSelection(this, selections, prefix, className);
         }
 
         /// <summary>

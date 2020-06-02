@@ -134,28 +134,5 @@ namespace Hotcakes.Commerce.Contacts
         {
             return Delete(y => y.AffiliateId == affiliateId);
         }
-
-        #region Obsolete
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static AffiliateReferralRepository InstantiateForMemory(HccRequestContext c)
-        {
-            return new AffiliateReferralRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public static AffiliateReferralRepository InstantiateForDatabase(HccRequestContext c)
-        {
-            return new AffiliateReferralRepository(c);
-        }
-
-        [Obsolete("Obsolete in 1.8.0. Use Factory.CreateRepo instead")]
-        public AffiliateReferralRepository(HccRequestContext c, IRepositoryStrategy<hcc_AffiliateReferral> r,
-            ILogger log)
-            : this(c)
-        {
-        }
-
-        #endregion
     }
 }

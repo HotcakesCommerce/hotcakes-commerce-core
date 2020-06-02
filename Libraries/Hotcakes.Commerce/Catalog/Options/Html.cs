@@ -42,12 +42,12 @@ namespace Hotcakes.Commerce.Catalog.Options
             return baseOption.TextSettings.GetSettingOrEmpty("html");
         }
 
-        public string RenderWithSelection(Option baseOption, OptionSelectionList selections, string prefix = null)
+        public string RenderWithSelection(Option baseOption, OptionSelectionList selections, string prefix = null, string className = null)
         {
             return Render(baseOption);
         }
 
-        public void RenderAsControl(Option baseOption, PlaceHolder ph, string prefix = null)
+        public void RenderAsControl(Option baseOption, PlaceHolder ph, string prefix = null, string className = null)
         {
             var result = new LiteralControl(baseOption.TextSettings.GetSettingOrEmpty("html"));
             ph.Controls.Add(result);

@@ -118,9 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ProductsNotFound.Text" xml:space="preserve">
-    <value>No products were found</value>
+    <value>No products were found. Please try another search term.</value>
   </data>
   <data name="Search.Text" xml:space="preserve">
-    <value>Search</value>
+    <value>Search Results</value>
+  </data>
+  <data name="ProductFound.Text" xml:space="preserve">
+    <value>Product Found</value>
+  </data>
+  <data name="ProductsFound.Text" xml:space="preserve">
+    <value>Products Found</value>
   </data>
 </root>

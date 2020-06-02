@@ -37,7 +37,7 @@ namespace Hotcakes.Modules.Core.Admin.Configuration {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlWorkflowAssemblies;
+        protected global::System.Web.UI.WebControls.DropDownList ddlWorkflowAssemblies;
         
         /// <summary>
         /// ddlProductAssemblies control.
@@ -46,7 +46,7 @@ namespace Hotcakes.Modules.Core.Admin.Configuration {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlProductAssemblies;
+        protected global::System.Web.UI.WebControls.DropDownList ddlProductAssemblies;
         
         /// <summary>
         /// ddlCartAssemblies control.
@@ -55,7 +55,7 @@ namespace Hotcakes.Modules.Core.Admin.Configuration {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlCartAssemblies;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCartAssemblies;
         
         /// <summary>
         /// ddlCheckoutAssemblies control.
@@ -64,7 +64,7 @@ namespace Hotcakes.Modules.Core.Admin.Configuration {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ddlCheckoutAssemblies;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCheckoutAssemblies;
         
         /// <summary>
         /// btnSave control.

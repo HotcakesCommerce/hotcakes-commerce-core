@@ -75,12 +75,5 @@ namespace Hotcakes.Commerce.Utilities
                 URL = HttpUtility.UrlDecode(NewURL);
             }
         }
-
-        [Obsolete("Obsolete in 1.8.1. Use override with less number of parameters")]
-        public static string BuildUrlForRedirect(string currentUrl, string standardUrl, string secureUrl,
-            SSLRedirectTo redirectTo, string currentCartId, bool useClearText)
-        {
-            return BuildUrlForRedirect(currentUrl, redirectTo);
-        }
     }
 }

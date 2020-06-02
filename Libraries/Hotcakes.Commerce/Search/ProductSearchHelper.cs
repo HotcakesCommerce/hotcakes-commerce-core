@@ -144,7 +144,7 @@ namespace Hotcakes.Commerce.Search
         private ProductSearchQueryAdv _query;
         private List<Guid> _queryCategories;
         private List<Guid?> _queryTypes;
-        private List<Guid?> _queryManufactures;
+        private List<Guid?> _queryManufacturers;
         private List<Guid?> _queryVendors;
         private List<hcc_ProductProperty> _querySelectedProperties;
         private readonly IQueryable<hcc_CategoryTranslation> _categoryTranslations;
@@ -167,7 +167,7 @@ namespace Hotcakes.Commerce.Search
 
             _queryCategories = query.Categories.Select(bvin => DataTypeHelper.BvinToGuid(bvin)).ToList();
             _queryTypes = query.Types.Select(bvin => DataTypeHelper.BvinToNullableGuid(bvin)).ToList();
-            _queryManufactures = query.Manufactures.Select(bvin => DataTypeHelper.BvinToNullableGuid(bvin)).ToList();
+            _queryManufacturers = query.Manufacturers.Select(bvin => DataTypeHelper.BvinToNullableGuid(bvin)).ToList();
             _queryVendors = query.Vendors.Select(bvin => DataTypeHelper.BvinToNullableGuid(bvin)).ToList();
             var selPropIds = query.Properties.Keys.ToList();
             _querySelectedProperties = _context.hcc_ProductProperty.Where(pp => selPropIds.Contains(pp.Id)).ToList();
@@ -281,7 +281,7 @@ namespace Hotcakes.Commerce.Search
                 // Fill selected data
                 result.SelectedCategories = BuildSelectedCategories();
                 result.SelectedVendors = BuildSelectedVendors();
-                result.SelectedManufacturers = BuildSelectedManufactures();
+                result.SelectedManufacturers = BuildSelectedManufacturers();
                 result.SelectedTypes = BuildSelectedTypes();
                 result.SelectedProperties = BuildSelectedProperties();
 
@@ -328,8 +328,8 @@ namespace Hotcakes.Commerce.Search
             }
             if (_queryTypes.Count > 0 && excludeFacet != "T")
                 dbQuery = dbQuery.Where(q => _queryTypes.Contains(q.p.ProductTypeId));
-            if (_queryManufactures.Count > 0 && excludeFacet != "M")
-                dbQuery = dbQuery.Where(q => _queryManufactures.Contains(q.p.ManufacturerID));
+            if (_queryManufacturers.Count > 0 && excludeFacet != "M")
+                dbQuery = dbQuery.Where(q => _queryManufacturers.Contains(q.p.ManufacturerID));
             if (_queryVendors.Count > 0 && excludeFacet != "V")
                 dbQuery = dbQuery.Where(q => _queryVendors.Contains(q.p.VendorID));
 
@@ -645,10 +645,10 @@ namespace Hotcakes.Commerce.Search
                 ToList();
         }
 
-        private List<SelectedFacetItem> BuildSelectedManufactures()
+        private List<SelectedFacetItem> BuildSelectedManufacturers()
         {
             return _context.hcc_Manufacturer.
-                Where(m => _queryManufactures.Contains(m.bvin)).
+                Where(m => _queryManufacturers.Contains(m.bvin)).
                 Select(m => new InternalSelectedFacetItem
                 {
                     Id = m.bvin,

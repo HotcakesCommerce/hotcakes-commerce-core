@@ -1,0 +1,22 @@
+﻿@model Hotcakes.Modules.Core.Models.ProductPageViewModel
+@if (Model.AuthorizedToEditCatalog)
+{
+    <div class="row">
+        <div class="col-xs-12 hc-catalog-admin">
+            <div class="alert alert-info">
+                <div class="row-fluid padding-right-lg">
+                    <div class="col-xs-5">
+                        <h6>@Localization.GetString("AdminMessage")</h6>
+                    </div>
+                    <div class="col-xs-7 input-group text-right">
+                        <div class="input-group-btn">
+                            <a href="@Model.StoreAdminUrl" target="_blank" class="btn btn-default btn-sm"><em class="glyphicon glyphicon-equalizer"></em>@Localization.GetString("Dashboard")</a>
+                            <a href="@Model.ProductAnalyticsUrl" target="_blank" class="btn btn-default btn-sm"><em class="glyphicon glyphicon-stats"></em>@Localization.GetString("ProductAnalytics")</a>
+                            <a href="@Model.ProductEditUrl" target="_blank" class="btn btn-default btn-sm"><em class="glyphicon glyphicon-pencil"></em>@Localization.GetString("ProductEdit")</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

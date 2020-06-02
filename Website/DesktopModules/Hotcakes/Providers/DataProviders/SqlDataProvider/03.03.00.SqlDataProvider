@@ -1,0 +1,12 @@
+﻿/* 
+	Issue #217 
+	https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/217
+*/
+UPDATE {databaseOwner}[{objectQualifier}hcc_Countries] SET [IsoCode] = N'KP' WHERE [SystemName] = N'North Korea';
+GO
+
+UPDATE {databaseOwner}[{objectQualifier}hcc_Countries] SET [IsoAlpha3] = N'PRK' WHERE [SystemName] = N'North Korea';
+GO
+
+UPDATE {databaseOwner}[{objectQualifier}hcc_Countries] SET [IsoNumeric] = N'408' WHERE [SystemName] = N'North Korea';
+GO

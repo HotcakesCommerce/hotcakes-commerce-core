@@ -50,7 +50,14 @@ namespace Hotcakes.Modules.Core.Settings
             set { _provider.SetSettingValue("PageSize", value); }
         }
 
+        [Obsolete("Deprecated in Hotcakes Commerce 03.03.00. Please use the Manufacturers property instead. Removing in version 03.04.00 or later.")]
         public bool ShowManufactures
+        {
+            get { return ShowManufacturers; }
+            set { ShowManufacturers = value; }
+        }
+
+        public bool ShowManufacturers
         {
             get { return _provider.GetSettingValue("ShowManufactures", true); }
             set { _provider.SetSettingValue("ShowManufactures", value); }

@@ -28,7 +28,7 @@ namespace Hotcakes.Modules.Core.Admin.Reports.Sales_By_Coupon {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox lstCouponCode;
+        protected global::System.Web.UI.WebControls.DropDownList lstCouponCode;
         
         /// <summary>
         /// ucDateRangePicker control.

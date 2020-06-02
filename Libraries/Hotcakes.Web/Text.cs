@@ -170,7 +170,7 @@ namespace Hotcakes.Web
 
         public static string Slugify(string input, bool urlEncode, bool allowSlashesAndPeriods)
         {
-            var result = input.Replace(' ', '-');
+            var result = input.Trim().ToLower().Replace(' ', '-');
 
             result = result.Replace(" ", "-");
             result = result.Replace("\"", string.Empty);

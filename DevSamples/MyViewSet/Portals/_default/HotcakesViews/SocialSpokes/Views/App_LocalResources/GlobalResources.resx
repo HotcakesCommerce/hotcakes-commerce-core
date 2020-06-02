@@ -117,11 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountLocked.Text" xml:space="preserve">
+    <value>Account Locked. Contact Administrator</value>
+  </data>
+  <data name="Backordered.Text" xml:space="preserve">
+    <value>Backordered</value>
+  </data>
   <data name="BeforeDiscounts.Text" xml:space="preserve">
     <value>Before Discounts</value>
   </data>
+  <data name="CartNotEnoughQuantity.Text" xml:space="preserve">
+    <value>Only {1} of {0} is available for purchase at the moment. Please reduce the number ordered and update to checkout.</value>
+  </data>
+  <data name="CartOutOfStock.Text" xml:space="preserve">
+    <value>{0} Is Out Of Stock. Please Remove It.</value>
+  </data>
+  <data name="FreeShipping.Text" xml:space="preserve">
+    <value>Free Shipping</value>
+  </data>
   <data name="GiftCards.Text" xml:space="preserve">
     <value>Gift Cards</value>
+  </data>
+  <data name="Handling.Text" xml:space="preserve">
+    <value>Handling</value>
+  </data>
+  <data name="Home.Text" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="InStock.Text" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="InStockLabel.Text" xml:space="preserve">
+    <value>In Stock</value>
+  </data>
+  <data name="InStockWithInventoryLevel.Text" xml:space="preserve">
+    <value>In Stock ({0})</value>
+  </data>
+  <data name="ListPrice.Text" xml:space="preserve">
+    <value>List Price</value>
+  </data>
+  <data name="LoginIncorrect.Text" xml:space="preserve">
+    <value>Login incorrect, please try again.</value>
   </data>
   <data name="MaxOrderMessage.Text" xml:space="preserve">
     <value>That's a really big order! Please call us instead of ordering online.</value>
@@ -129,8 +165,29 @@
   <data name="MonerisCheckoutError.Text" xml:space="preserve">
     <value>An error occurred while trying to checkout through Moneris. Please try again. If the problem persists, please contact technical support.</value>
   </data>
+  <data name="NoShippingRequired.Text" xml:space="preserve">
+    <value>No Shipping Required.</value>
+  </data>
   <data name="OgoneCheckoutError.Text" xml:space="preserve">
     <value>An error occurred while trying to checkout through Ogone. Please try again. If the problem persists, please contact technical support.</value>
+  </data>
+  <data name="OrderAlreadyPlaced.Text" xml:space="preserve">
+    <value>Order has already been placed, or no cart exists.</value>
+  </data>
+  <data name="OutOfStock.Text" xml:space="preserve">
+    <value>This Item is Out of Stock</value>
+  </data>
+  <data name="OutOfStockLabel.Text" xml:space="preserve">
+    <value>Out Of Stock</value>
+  </data>
+  <data name="PaypalCheckoutCustomerError.Text" xml:space="preserve">
+    <value>An error occurred while trying to checkout through Paypal. Please try again. If the problem persists, please contact technical support.</value>
+  </data>
+  <data name="ProductNotAvailable.Text" xml:space="preserve">
+    <value>{0} is not available.</value>
+  </data>
+  <data name="RecentlyViewedItems.Text" xml:space="preserve">
+    <value>Recently Viewed Items</value>
   </data>
   <data name="RewardPoints.Text" xml:space="preserve">
     <value>Reward Points</value>
@@ -144,6 +201,12 @@
   <data name="ShippingHandlingBeforeDiscounts.Text" xml:space="preserve">
     <value>Shipping/Handling Before Discounts</value>
   </data>
+  <data name="SitePrice.Text" xml:space="preserve">
+    <value>Your Price</value>
+  </data>
+  <data name="SkippingReceiveFreeProduct.Text" xml:space="preserve">
+    <value>Skipping receive free product {0}({1}) to a cart because out of stock.</value>
+  </data>
   <data name="SubTotal.Text" xml:space="preserve">
     <value>Subtotal</value>
   </data>
@@ -152,6 +215,9 @@
   </data>
   <data name="Tax.Text" xml:space="preserve">
     <value>Tax</value>
+  </data>
+  <data name="ToBeDetermined.Text" xml:space="preserve">
+    <value>To Be Determined. Contact Store for Details</value>
   </data>
   <data name="Total.Text" xml:space="preserve">
     <value>Total</value>
@@ -167,5 +233,11 @@
   </data>
   <data name="VAT.Text" xml:space="preserve">
     <value>VAT</value>
+  </data>
+  <data name="VolumeDiscount.Text" xml:space="preserve">
+    <value>Volume Discount</value>
+  </data>
+  <data name="YouSave.Text" xml:space="preserve">
+    <value>You Save</value>
   </data>
 </root>

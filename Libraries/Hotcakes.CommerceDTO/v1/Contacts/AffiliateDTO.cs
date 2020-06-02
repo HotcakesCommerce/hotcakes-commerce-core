@@ -54,9 +54,6 @@ namespace Hotcakes.CommerceDTO.v1.Contacts
             CustomThemeName = string.Empty;
             Notes = string.Empty;
             LastUpdatedUtc = DateTime.UtcNow;
-#pragma warning disable 0612, 0618
-            Contacts = new List<AffiliateContactDTO>();
-#pragma warning restore 0612, 0618
         }
 
         /// <summary>
@@ -154,12 +151,5 @@ namespace Hotcakes.CommerceDTO.v1.Contacts
         /// </summary>
         [DataMember]
         public string Notes { get; set; }
-
-        /// <summary>
-        ///     Contains a listing of the customers that currently assigned to the affiliate
-        /// </summary>
-        [DataMember]
-        [Obsolete("Obsolete in 1.8.0. Affiliate contacts are not used")]
-        public List<AffiliateContactDTO> Contacts { get; set; }
     }
 }

@@ -35,12 +35,13 @@ using Hotcakes.Commerce.Membership;
 using Hotcakes.Commerce.Utilities;
 using Hotcakes.Common.Dnn;
 using Hotcakes.Modules.Core.Admin.AppCode;
-using Telerik.Web.UI;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing
 {
     public partial class Promotions_Edit : BaseAdminPage
     {
+        private const string DATEFORMAT = "MM/dd/yyyy";
+
         #region Fields
 
         private PromotionFactory _promFactory;
@@ -235,8 +236,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
                 txtCustomerDescription.Text = string.IsNullOrEmpty(p.CustomerDescription)
                     ? p.Name + " Description "
                     : p.CustomerDescription;
-                radDateStart.SelectedDate = DateHelper.ConvertUtcToStoreTime(HccApp, p.StartDateUtc);
-                radDateEnd.SelectedDate = DateHelper.ConvertUtcToStoreTime(HccApp, p.EndDateUtc);
+                radDateStart.Text = DateHelper.ConvertUtcToStoreTime(HccApp, p.StartDateUtc).ToString(DATEFORMAT);
+                radDateEnd.Text = DateHelper.ConvertUtcToStoreTime(HccApp, p.EndDateUtc).ToString(DATEFORMAT);
 
                 gvQualifications.DataSource = p.Qualifications;
                 gvQualifications.DataBind();
@@ -282,21 +283,21 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
             {
                 case PromotionType.Sale:
                     // sale
-                    lstNewQualification.Items.Add(new RadComboBoxItem(Localization.GetString("AnyProduct"),
+                    lstNewQualification.Items.Add(new ListItem(Localization.GetString("AnyProduct"),
                         PromotionQualificationBase.TypeIdAnyProduct));
-                    lstNewQualification.Items.Add(new RadComboBoxItem(Localization.GetString("WhenProductIs"),
+                    lstNewQualification.Items.Add(new ListItem(Localization.GetString("WhenProductIs"),
                         PromotionQualificationBase.TypeIdProductBvin));
-                    lstNewQualification.Items.Add(new RadComboBoxItem(Localization.GetString("WhenProductCategoryIs"),
+                    lstNewQualification.Items.Add(new ListItem(Localization.GetString("WhenProductCategoryIs"),
                         PromotionQualificationBase.TypeIdProductCategory));
-                    lstNewQualification.Items.Add(new RadComboBoxItem(Localization.GetString("WhenProductTypeIs"),
+                    lstNewQualification.Items.Add(new ListItem(Localization.GetString("WhenProductTypeIs"),
                         PromotionQualificationBase.TypeIdProductType));
-                    lstNewQualification.Items.Add(new RadComboBoxItem(Localization.GetString("WhenUserIs"),
+                    lstNewQualification.Items.Add(new ListItem(Localization.GetString("WhenUserIs"),
                         PromotionQualificationBase.TypeIdUserIs));
-                    lstNewQualification.Items.Add(new RadComboBoxItem(Localization.GetString("WhenUserIsInRole"),
+                    lstNewQualification.Items.Add(new ListItem(Localization.GetString("WhenUserIsInRole"),
                         UserIsInRole.TypeIdString));
-                    lstNewQualification.Items.Add(new RadComboBoxItem(Localization.GetString("WhenUserPriceGroupIs"),
+                    lstNewQualification.Items.Add(new ListItem(Localization.GetString("WhenUserPriceGroupIs"),
                         PromotionQualificationBase.TypeIdUserIsInGroup));
-                    lstNewAction.Items.Add(new RadComboBoxItem(Localization.GetString("AdjustProductPrice"),
+                    lstNewAction.Items.Add(new ListItem(Localization.GetString("AdjustProductPrice"),
                         ProductPriceAdjustment.TypeIdString));
                     break;
                 case PromotionType.OfferForLineItems:
@@ -304,73 +305,73 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
                 case PromotionType.OfferForShipping:
                 case PromotionType.OfferForFreeItems:
                     // offer
-                    lstNewQualification.Items.Add(new RadComboBoxItem(Localization.GetString("AnyOrder"),
+                    lstNewQualification.Items.Add(new ListItem(Localization.GetString("AnyOrder"),
                         PromotionQualificationBase.TypeIdAnyOrder));
-                    lstNewQualification.Items.Add(new RadComboBoxItem(Localization.GetString("OrderHasCouponCode"),
+                    lstNewQualification.Items.Add(new ListItem(Localization.GetString("OrderHasCouponCode"),
                         PromotionQualificationBase.TypeIdOrderHasCoupon));
-                    lstNewQualification.Items.Add(new RadComboBoxItem(Localization.GetString("WhenOrderHasProducts"),
+                    lstNewQualification.Items.Add(new ListItem(Localization.GetString("WhenOrderHasProducts"),
                         PromotionQualificationBase.TypeIdOrderHasProducts));
                     lstNewQualification.Items.Add(
-                        new RadComboBoxItem(Localization.GetString("WhenOrderDoesNotHaveProducts"),
+                        new ListItem(Localization.GetString("WhenOrderDoesNotHaveProducts"),
                             OrderHasNotProducts.TypeIdString));
-                    lstNewQualification.Items.Add(new RadComboBoxItem(Localization.GetString("WhenOrderTotal"),
+                    lstNewQualification.Items.Add(new ListItem(Localization.GetString("WhenOrderTotal"),
                         PromotionQualificationBase.TypeIdOrderSubTotalIs));
 
                     if (mode != PromotionType.OfferForFreeItems)
                     {
-                        lstNewQualification.Items.Add(new RadComboBoxItem(Localization.GetString("WhenUserIs"),
+                        lstNewQualification.Items.Add(new ListItem(Localization.GetString("WhenUserIs"),
                             PromotionQualificationBase.TypeIdUserIs));
-                        lstNewQualification.Items.Add(new RadComboBoxItem(
+                        lstNewQualification.Items.Add(new ListItem(
                             Localization.GetString("WhenUserPriceGroupIs"),
                             PromotionQualificationBase.TypeIdUserIsInGroup));
-                        lstNewQualification.Items.Add(new RadComboBoxItem(Localization.GetString("AnyShippingMethod"),
+                        lstNewQualification.Items.Add(new ListItem(Localization.GetString("AnyShippingMethod"),
                             PromotionQualificationBase.TypeIdAnyShippingMethod));
-                        lstNewQualification.Items.Add(new RadComboBoxItem(Localization.GetString("ShippingMethodIs"),
+                        lstNewQualification.Items.Add(new ListItem(Localization.GetString("ShippingMethodIs"),
                             PromotionQualificationBase.TypeIdShippingMethodIs));
                     }
 
-                    lstNewQualification.Items.Add(new RadComboBoxItem(
+                    lstNewQualification.Items.Add(new ListItem(
                         Localization.GetString("WhenItemCategoryIsIsNot"),
                         PromotionQualificationBase.TypeIdLineItemCategory));
-                    lstNewQualification.Items.Add(new RadComboBoxItem(
+                    lstNewQualification.Items.Add(new ListItem(
                         Localization.GetString("WhenVendorManufacturerIs"), VendorOrManufacturerIs.TypeIdString));
-                    lstNewQualification.Items.Add(new RadComboBoxItem(Localization.GetString("WhenLineItemIs"),
+                    lstNewQualification.Items.Add(new ListItem(Localization.GetString("WhenLineItemIs"),
                         LineItemIsProduct.TypeIdString));
-                    lstNewQualification.Items.Add(new RadComboBoxItem(Localization.GetString("WhenProductTypeIs"),
+                    lstNewQualification.Items.Add(new ListItem(Localization.GetString("WhenProductTypeIs"),
                         ProductTypeIs.TypeIdString));
 
                     if (mode == PromotionType.OfferForLineItems)
                     {
-                        lstNewAction.Items.Add(new RadComboBoxItem(Localization.GetString("AdjustQualifyingItems"),
+                        lstNewAction.Items.Add(new ListItem(Localization.GetString("AdjustQualifyingItems"),
                             LineItemAdjustment.TypeIdString));
                         lstNewAction.Items.Add(
-                            new RadComboBoxItem(Localization.GetString("MakeQualifyingItemsFreeShipping"),
+                            new ListItem(Localization.GetString("MakeQualifyingItemsFreeShipping"),
                                 LineItemFreeShipping.TypeIdString));
-                        lstNewAction.Items.Add(new RadComboBoxItem(Localization.GetString("DiscountCategory"),
+                        lstNewAction.Items.Add(new ListItem(Localization.GetString("DiscountCategory"),
                             CategoryDiscountAdjustment.TypeIdString));
                     }
                     else if (mode == PromotionType.OfferForOrder)
                     {
-                        lstNewQualification.Items.Add(new RadComboBoxItem(
+                        lstNewQualification.Items.Add(new ListItem(
                             Localization.GetString("SumOrCountOfProducts"), SumOrCountOfProducts.TypeIdString));
-                        lstNewAction.Items.Add(new RadComboBoxItem(Localization.GetString("AdjustOrderTotal"),
+                        lstNewAction.Items.Add(new ListItem(Localization.GetString("AdjustOrderTotal"),
                             OrderTotalAdjustment.TypeIdString));
                     }
                     else if (mode == PromotionType.OfferForShipping)
                     {
-                        lstNewAction.Items.Add(new RadComboBoxItem(Localization.GetString("AdjustShippingBy"),
+                        lstNewAction.Items.Add(new ListItem(Localization.GetString("AdjustShippingBy"),
                             OrderShippingAdjustment.TypeIdString));
                     }
                     else if (mode == PromotionType.OfferForFreeItems)
                     {
-                        lstNewAction.Items.Add(new RadComboBoxItem(Localization.GetString("ReceiveFreeProduct"),
+                        lstNewAction.Items.Add(new ListItem(Localization.GetString("ReceiveFreeProduct"),
                             ReceiveFreeProductAdjustment.TypeIdString));
                     }
                     break;
                 case PromotionType.Affiliate:
-                    lstNewQualification.Items.Add(new RadComboBoxItem(
+                    lstNewQualification.Items.Add(new ListItem(
                         Localization.GetString("WhenAffiliateIsApproved"), AffiliateApproved.TypeIdString));
-                    lstNewAction.Items.Add(new RadComboBoxItem(Localization.GetString("IssueRewardPoints"),
+                    lstNewAction.Items.Add(new ListItem(Localization.GetString("IssueRewardPoints"),
                         RewardPointsAjustment.TypeIdString));
                     break;
                 default:
@@ -390,8 +391,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
             p.DoNotCombine = chkDoNotCombine.Checked;
             p.Name = txtName.Text.Trim();
             p.CustomerDescription = txtCustomerDescription.Text.Trim();
-            p.StartDateUtc = ConvertStartDateToUtc(radDateStart.SelectedDate);
-            p.EndDateUtc = ConvertStartDateToUtc(radDateEnd.SelectedDate);
+            p.StartDateUtc = ConvertStartDateToUtc(DateTime.Parse(radDateStart.Text.Trim()));
+            p.EndDateUtc = ConvertStartDateToUtc(DateTime.Parse(radDateEnd.Text.Trim()));
 
             result = HccApp.MarketingServices.Promotions.Update(p);
 

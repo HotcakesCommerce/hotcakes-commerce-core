@@ -121,6 +121,7 @@ namespace Hotcakes.Commerce.Orders
             {
                 Customer =
                 {
+                    IpAddress = _app.CurrentRequestContext.RoutingContext.HttpContext.Request.UserHostAddress,
                     Email = o.UserEmail,
                     City = o.BillingAddress.City,
                     Company = o.BillingAddress.Company,
@@ -1975,11 +1976,6 @@ namespace Hotcakes.Commerce.Orders
                         t.Card = p.CreditCard;
                         t.GiftCard = p.GiftCard;
                         t.Amount = p.Amount;
-
-                        // Pass Shift4 Invoice Number through to capture
-                        t.SetAdditionalSetting("shift4invoicenumber",
-                            p.GetAdditionalSettingAsString("shift4invoicenumber"));
-                        t.SetAdditionalSetting("shift4card", p.GetAdditionalSettingAsString("shift4card"));
 
                         t.Action = ActionType.GiftCardCapture;
 

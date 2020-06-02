@@ -121,7 +121,7 @@
     <value>Affiliate ID</value>
   </data>
   <data name="AffiliatesHeader.Text" xml:space="preserve">
-    <value>Affiliate</value>
+    <value>Referred?</value>
   </data>
   <data name="BillingAddress.Text" xml:space="preserve">
     <value>Billing Address</value>
@@ -159,6 +159,9 @@
   <data name="GiftCard.Text" xml:space="preserve">
     <value>Gift Card</value>
   </data>
+  <data name="LineItems.Text" xml:space="preserve">
+    <value>Items</value>
+  </data>
   <data name="Loading.Text" xml:space="preserve">
     <value>Loading...</value>
   </data>
@@ -167,6 +170,9 @@
   </data>
   <data name="MessageAffiliateInvalid.Text" xml:space="preserve">
     <value>Affiliate ID can not be recognized</value>
+  </data>
+  <data name="Optional.Text" xml:space="preserve">
+    <value>(optional)</value>
   </data>
   <data name="OrderSummary.Text" xml:space="preserve">
     <value>Order Summary</value>
@@ -188,6 +194,9 @@
   </data>
   <data name="Subscriptions.Text" xml:space="preserve">
     <value>Subscriptions</value>
+  </data>
+  <data name="Total.Text" xml:space="preserve">
+    <value>Total</value>
   </data>
   <data name="UsePoints.Text" xml:space="preserve">
     <value>Use Points</value>

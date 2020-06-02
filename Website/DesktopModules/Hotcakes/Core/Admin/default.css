@@ -833,7 +833,7 @@ span.dnnSecondaryAction > a.dnnSecondaryAction {
 /* Action Button behind input */
 .dnnFormItem input[type="text"] + a.dnnPrimaryAction,
 .dnnFormItem input[type="text"] + a.dnnSecondaryAction,
-.dnnFormItem input[type="text"] + a.dnnTerriaryAction {
+.dnnFormItem input[type="text"] + a.dnnTertiaryAction {
     margin-left: 5px;
 }
 
@@ -1461,10 +1461,6 @@ span.dnnHSRadioButtons {
 table.dnnFormRadioButtons {
     background-color: #f0f0f0;
     margin-bottom: 5px;
-}
-
-.RadComboBox_Default .rcbInput {
-    width: 100% !important;
 }
 
 /* general group*/
@@ -3130,24 +3126,7 @@ div.SearchIcon {
             background-color: #EEEEEE;
             border: 1px solid #EEEEEE;
         }
-/*
-    #dnn_dnnSEARCH_txtSearch,
-    #dnn_dnnSearch_txtSearch,
-    #dnn_dnnSEARCH_txtSearchNew,
-    #dnn_dnnSearch_txtSearchNew {
-        margin: 0;
-        padding: inherit;
-        font-size: inherit;
-        border: inherit;
-        border-radius: 0;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        box-shadow: none;
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-        border: 0 none;
-    }
-    */
+
 /* For Upgrade from DNN6 DarkKnight --------*/
 #DNN6 {
     z-index: 0 !important;
@@ -3181,10 +3160,6 @@ div.ModDNNFeedbackC .dnnFormItem > label {
     display: inline-block;
     width: 33%;
     text-align: right;
-}
-
-div.ModDNNUserDefinedTableC div.RadEditor {
-    height: auto !important;
 }
 
 div.ModDNNUserDefinedTableC ul.dnnActions {

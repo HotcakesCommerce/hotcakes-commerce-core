@@ -417,7 +417,18 @@ namespace Hotcakes.Commerce.Catalog
 							Log(string.Format("- Product inventory update failed for product '{0}'.", p.ProductName));
 					}
 					
-					ImportImageFile(p.Bvin, imageFilename);
+					var imageImportResult = ImportImageFile(p.Bvin, imageFilename);
+                    if (imageImportResult)
+                    {
+                        var altText = string.Format("{0} {1}", p.ProductName, p.Sku);
+                        var fileName = Hotcakes.Web.Text.CleanFileName(imageFilename);
+                        p.ImageFileMedium = fileName;
+                        p.ImageFileMediumAlternateText = altText;
+                        p.ImageFileSmall = fileName;
+                        p.ImageFileSmallAlternateText = altText;
+                        _hccApp.CatalogServices.ProductsUpdateWithSearchRebuild(p);
+                    }
+
 					ImportRoles(new Guid(p.Bvin), roles);
 				}
 				else
@@ -470,7 +481,7 @@ namespace Hotcakes.Commerce.Catalog
 				}
 			}
 
-			private void ImportImageFile(string productId, string filename)
+			private bool ImportImageFile(string productId, string filename)
 			{
                 var importPath = ImagesImportPath;
 			    if (string.IsNullOrEmpty(importPath))
@@ -480,11 +491,13 @@ namespace Hotcakes.Commerce.Catalog
                 
 				var filePath = importPath + filename;
 			    var mappedPath = HostingEnvironment.MapPath(filePath);
-				
+
                 if (File.Exists(mappedPath))
-				{
-					DiskStorage.CopyProductImage(_hccApp.CurrentStore.Id, productId, filePath, filename);
+                {
+                    return DiskStorage.CopyProductImage(_hccApp.CurrentStore.Id, productId, filePath, filename);
 				}
+
+                return false;
 			}
 
             #region Properties

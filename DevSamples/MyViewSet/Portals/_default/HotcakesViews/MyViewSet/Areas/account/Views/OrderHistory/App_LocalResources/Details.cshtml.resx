@@ -120,4 +120,10 @@
   <data name="ReturToOrderHistory.Text" xml:space="preserve">
     <value>Return to Order History</value>
   </data>
+  <data name="Transaction succeeded" xml:space="preserve">
+    <value>Transaction succeeded</value>
+  </data>
+  <data name="TransactionFailure.Text" xml:space="preserve">
+    <value>Transaction failed</value>
+  </data>
 </root>

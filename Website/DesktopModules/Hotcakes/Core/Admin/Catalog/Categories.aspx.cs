@@ -30,7 +30,7 @@ using System.Text;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Modules.Core.Admin.AppCode;
-using Telerik.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
@@ -60,7 +60,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            PageTitle = "Categories";
+            PageTitle = Localization.GetString("PageTitle");
             CurrentTab = AdminTabType.Catalog;
             ValidateCurrentUserHasPermission(SystemPermissions.CatalogView);
         }
@@ -74,11 +74,11 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
             lstParents.Items.Clear();
             
-            lstParents.Items.Add(new RadComboBoxItem("(Root)", string.Empty));
+            lstParents.Items.Add(new ListItem("(Root)", string.Empty));
             var parents = CategoriesHelper.ListFullTreeWithIndents(allCats, true);
             foreach (var li in parents)
             {
-                lstParents.Items.Add(new RadComboBoxItem(li.Text, li.Value));
+                lstParents.Items.Add(new ListItem(li.Text, li.Value));
             }
 
             RenderChildren(string.Empty, allCats, sb);
@@ -96,12 +96,10 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                           "\" class=\"ui-sortable nested hcGrid\" unselectable=\"on\" style=\"-moz-user-select: none; margin-bottom: 0px !important;\">");
                 foreach (var child in children)
                 {
-                    var editUrl =
-                        string.Format(
-                            "~/DesktopModules/Hotcakes/Core/Admin/Catalog/Categories_Performance.aspx?id={0}",
-                            child.Bvin);
+                    var perfUrl = string.Format("~/DesktopModules/Hotcakes/Core/Admin/Catalog/Categories_Performance.aspx?id={0}", child.Bvin);
+                    var editUrl = string.Format("~/DesktopModules/Hotcakes/Core/Admin/Catalog/Categories_Edit.aspx?id={0}", child.Bvin);
                     editUrl = ResolveUrl(editUrl);
-                    var icon = ResolveUrl("~/DesktopModules/Hotcakes/Core/Admin/Images/" + IconImage(child.SourceType));
+                    perfUrl = ResolveUrl(perfUrl);
 
                     sb.Append("<div id=\"" + child.Bvin + "\" class=\"dragitem2 nested\">");
                     sb.Append("<table width=\"100%\" class=\"formtable\" style=\"table-layout: fixed;\">");
@@ -132,7 +130,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                         childNodeStyle = "padding-left: " + (padding == 0 ? 40 : padding) + "px;";
                     }
 
-                    sb.Append("<a href=\"" + editUrl + "\" style=\"" + childNodeStyle + "\">" + child.Name + "</a>");
+                    sb.Append("<a href=\"" + perfUrl + "\" style=\"" + childNodeStyle + "\">" + child.Name + "</a>");
                     sb.Append("</td>");
                     sb.Append("<td width=\"5%\" style=\"text-align: center;\">");
                     sb.Append("<a href=\"" + editUrl + "\" alt=\"edit\" class=\"hcIconEdit\"></a></td>");

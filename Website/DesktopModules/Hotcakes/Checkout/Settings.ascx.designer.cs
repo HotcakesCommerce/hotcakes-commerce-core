@@ -46,7 +46,7 @@ namespace Hotcakes.Modules.Checkout {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ViewComboBox;
+        protected global::System.Web.UI.WebControls.DropDownList ViewComboBox;
         
         /// <summary>
         /// ReceiptViewLabel control.
@@ -82,7 +82,7 @@ namespace Hotcakes.Modules.Checkout {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox ReceiptViewComboBox;
+        protected global::System.Web.UI.WebControls.DropDownList ReceiptViewComboBox;
         
         /// <summary>
         /// PaymentErrorViewLabel control.
@@ -118,7 +118,7 @@ namespace Hotcakes.Modules.Checkout {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox PaymentErrorViewComboBox;
+        protected global::System.Web.UI.WebControls.DropDownList PaymentErrorViewComboBox;
         
         /// <summary>
         /// PayPalViewLabel control.
@@ -154,6 +154,6 @@ namespace Hotcakes.Modules.Checkout {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox PayPalViewComboBox;
+        protected global::System.Web.UI.WebControls.DropDownList PayPalViewComboBox;
     }
 }

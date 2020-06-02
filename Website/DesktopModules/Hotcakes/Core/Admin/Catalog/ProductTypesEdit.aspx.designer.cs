@@ -94,15 +94,6 @@ namespace Hotcakes.Modules.Core.Admin.Catalog {
         protected global::System.Web.UI.WebControls.GridView gvProperties;
         
         /// <summary>
-        /// ucLicensingMessageBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Hotcakes.Modules.Core.Admin.Controls.MessageBox ucLicensingMessageBox;
-        
-        /// <summary>
         /// upRoles control.
         /// </summary>
         /// <remarks>

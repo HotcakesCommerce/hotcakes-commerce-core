@@ -37,6 +37,7 @@ namespace Hotcakes.Modules.Core.Models.Json
         public SingleProductJsonModel(Product product, HotcakesApplication app)
         {
             ProductLink = UrlRewriter.BuildUrlForProduct(product);
+            ProductAddToCartLink = UrlRewriter.BuildUrlForProductAddToCart(product);
             ProductName = product.ProductName;
             ImageSmallUrl = DiskStorage.ProductImageUrlSmall(app, product.Bvin, product.ImageFileSmall,
                 app.IsCurrentRequestSecure());
@@ -49,6 +50,7 @@ namespace Hotcakes.Modules.Core.Models.Json
         }
 
         public string ProductLink { get; set; }
+        public string ProductAddToCartLink { get; set; }
         public string ProductName { get; set; }
         public string ImageSmallUrl { get; set; }
         public string ImageSmallAltText { get; set; }

@@ -107,7 +107,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
         protected void btnSaveAndClose_Click(object sender, EventArgs e)
         {
-            if (SaveOption())
+            if (Page.IsValid && SaveOption())
             {
                 Response.Redirect("ProductChoices.aspx?id=" + ProductId);
             }

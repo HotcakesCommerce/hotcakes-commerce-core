@@ -1,0 +1,15 @@
+﻿@model Hotcakes.Modules.Core.Models.ProductPageViewModel
+@if (Model.AllowReviews)
+{
+    <div class="row">
+        <div class="col-12 mb-3">
+            <div class="hc-rating-wrapper">
+                <div class="hc-rating hc-stars@(ViewBag.Avg)"></div>
+            </div>
+            <div class="content-inline">
+                <text>-</text>
+                <a href="#reviews">@Localization.GetString("Reviews")<span> (@Model.LocalProduct.ReviewsApproved.Count)</span></a>
+            </div>
+        </div>
+    </div>
+}

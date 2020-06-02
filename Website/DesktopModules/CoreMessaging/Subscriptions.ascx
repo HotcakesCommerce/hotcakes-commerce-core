@@ -14,7 +14,7 @@
                 <div class="subscription-table-container">
                     <div class="loading-panel" data-bind="visible: isLoading"></div>
 
-                    <table class="dnnTableDisplay fixed" id="subscription-table">
+                    <table class="dnnTableDisplay" id="subscription-table">
                         <colgroup>
                             <col class="subscriptions-col-subscribed-description"/>
                             <col class="subscriptions-col-subscription-type"/>                    
@@ -41,7 +41,7 @@
       
                                     <div class="subscriptions-page-size">
                                         <%= LocalizeString("ItemsPerPage") %>
-                                        <select data-bind="value: pageSize, event: { change: function () { changePage(0) } }">
+                                        <select data-bind="value: pageSize, event: { change: function () { changePage(0) } }" aria-label="Page Size">
                                             <option value="10" selected="selected">10</option>
                                             <option value="25">25</option>
                                             <option value="50">50</option>                                        

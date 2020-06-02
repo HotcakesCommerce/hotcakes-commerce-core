@@ -118,7 +118,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         private void lnkSave_Click(object sender, EventArgs e)
         {
             var card = HccApp.CatalogServices.GiftCards.Find(GiftCardId.Value);
-            card.ExpirationDateUtc = DateHelper.ConvertStoreTimeToUtc(HccApp, dpExpiration.SelectedDate.Value);
+            card.ExpirationDateUtc = DateHelper.ConvertStoreTimeToUtc(HccApp, DateTime.Parse(dpExpiration.Text.Trim()));
             card.Amount = Convert.ToDecimal(txtAmount.Text);
             card.Enabled = cbEnabled.Checked;
 
@@ -242,7 +242,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             //NOTE: hack for jqueryui dialog, otherwise max-height calculates wrong
             lblRecipientName.Text = card.RecipientName + "&nbsp;";
 
-            dpExpiration.SelectedDate = DateHelper.ConvertUtcToStoreTime(HccApp, card.ExpirationDateUtc);
+            dpExpiration.Text = DateHelper.ConvertUtcToStoreTime(HccApp, card.ExpirationDateUtc).ToString("MM/dd/yyyy");
             txtAmount.Text = Money.FormatCurrency(card.Amount);
             lblUsedAmount.Text = Money.FormatCurrency(card.UsedAmount);
             lblOrderNumber.Text = card.OrderNumber;

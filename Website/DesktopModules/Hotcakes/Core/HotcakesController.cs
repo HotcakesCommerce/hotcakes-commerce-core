@@ -24,11 +24,12 @@
 #endregion
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
-using System.Web.Hosting;
 using System.Xml;
 using System.Xml.Serialization;
 using DotNetNuke.Application;
@@ -41,6 +42,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Framework;
+using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Installer;
 using DotNetNuke.Services.Installer.Packages;
@@ -50,6 +52,7 @@ using DotNetNuke.Web.Client;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Accounts;
 using Hotcakes.Commerce.Catalog;
+using Hotcakes.Commerce.Content;
 using Hotcakes.Commerce.Dnn;
 using Hotcakes.Commerce.Dnn.Utils;
 using Hotcakes.Commerce.Marketing;
@@ -65,6 +68,15 @@ namespace Hotcakes.Modules.Core
     [Serializable]
     public class HotcakesController : IUpgradeable
     {
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(HotcakesController));
+
+        private const string SCHEDULED_JOB_TYPE = "Hotcakes.Modules.Core.ClearUploadTempFiles, Hotcakes.Modules";
+        private const string SCHEDULED_JOB_NAME = "Hotcakes Commerce: Clear Temporary Files";
+
+        private const string TEMPLATE_MATCH = "</body>";
+        private const string TEMPLATE_REPLACE =
+            "<table class=\"hc-noprint\" style=\"width:100%;margin:1.5em auto;\"><tr><td style=\"width:100%;text-align:center;\">We built our store using the <em>FREE</em> and open-source <a href=\"https://hotcakes.org/?utm_source=hcc-install&amp;utm_medium=email-template&amp;utm_campaign={0}\" target=\"_blank\">Hotcakes Commerce e-commerce solution</a>.</td></tr></table></body>";
+
         private bool IsGenericCodeExecuted { get; set; }
         
         public string UpgradeModule(string Version)
@@ -75,7 +87,6 @@ namespace Hotcakes.Modules.Core
                 {
                     case "01.00.00":
                         DnnEventLog.InstallLogTypes();
-                        AddHostPage();
                         break;
 
                     case "01.00.07":
@@ -87,13 +98,10 @@ namespace Hotcakes.Modules.Core
                         EnsureDefaultZones();
                         break;
 
-                    case "01.07.00":
-                        MigrateOldPromotions();
-                        break;
-
                     case "01.09.00":
                         MigrateFedExRateSetting();
                         break;
+
                     case "01.10.00":
                         MigrateAvalaraTaxProviderSetting();
                         break;
@@ -108,6 +116,13 @@ namespace Hotcakes.Modules.Core
                         RevertHotcakesCloudConfig();
                         break;
 
+                    case "03.03.00":
+                        DeleteHostPage();
+                        UninstallControlPanel();
+                        CreateTempFileScheduledJob();
+                        UpdateEmailTemplateBranding();
+                        break;
+
                     default:
                         break;
                 }
@@ -115,9 +130,6 @@ namespace Hotcakes.Modules.Core
                 // This code have to be executed only once and not depending on version
                 if (!IsGenericCodeExecuted)
                 {
-                    // Copy System.Web.Mvc if it is not already present in bin folder
-                    CopyMvcLibrary();
-
                     // Increment CRM version that is used to render resources
                     IncrementCrmVersion();
 
@@ -133,37 +145,10 @@ namespace Hotcakes.Modules.Core
             }
             catch (Exception ex)
             {
+                LogError(ex.Message, ex);
                 Exceptions.LogException(ex);
 
                 return "Failed";
-            }
-        }
-
-        //this is not used now. Kept for reference if in future needs to 
-        // set config changes by string directly
-        private void MergeFileUpdated()
-        {
-            var AssemblyBinding = @"<configuration>
-              <nodes configfile=""Web.config"">
-                <node path=""/configuration/runtime/ab:assemblyBinding"" 
-                      action=""update"" 
-                      collision=""save"" 
-                      targetpath=""/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='System.Web.Mvc'][ab:assemblyIdentity/@publicKeyToken='31bf3856ad364e35']"" 
-                      nameSpace=""urn:schemas-microsoft-com:asm.v1"" 
-                      nameSpacePrefix=""ab"">
-                  <dependentAssembly xmlns=""urn:schemas-microsoft-com:asm.v1"">
-                    <assemblyIdentity name=""System.Web.Mvc"" publicKeyToken=""31bf3856ad364e35"" />
-                    <bindingRedirect oldVersion=""1.0.0.0-4.0.0.0"" newVersion=""4.0.0.1""/>
-                  </dependentAssembly>
-                </node>
-              </nodes>
-            </configuration>";
-
-            using (TextReader sr = new StringReader(AssemblyBinding))
-            {
-                var app = DotNetNukeContext.Current.Application;
-                var merge = new XmlMerge(sr, Globals.FormatVersion(app.Version), app.Description);
-                merge.UpdateConfigs();
             }
         }
 
@@ -288,9 +273,9 @@ namespace Hotcakes.Modules.Core
                 "Hotcakes.ProductRotator",
                 "Hotcakes.CategoryRotator"
             };
-            foreach (var obsoltePackage in obsoletePackages)
+            foreach (var obsoletePackage in obsoletePackages)
             {
-                UninstallPackage(obsoltePackage);
+                UninstallPackage(obsoletePackage);
             }
         }
 
@@ -400,17 +385,17 @@ namespace Hotcakes.Modules.Core
             tabCtl.UpdateTab(tab);
         }
 
-        private void AddHostPage()
+        private void DeleteHostPage()
         {
-            var hostTab = Upgrade.AddHostPage(
-                "Hotcakes Administration",
-                "Hotcakes Administration",
-                "~/Icons/Sigma/Configuration_16X16_Standard.png",
-                "~/Icons/Sigma/Configuration_32X32_Standard.png",
-                true);
-
-            hostTab.Url = VirtualPathUtility.ToAbsolute("~/DesktopModules/Hotcakes/Core/Admin/Default.aspx");
-            new TabController().UpdateTab(hostTab);
+            try
+            {
+                // this will only be the case if this is an upgrade 
+                Upgrade.RemoveHostPage("Hotcakes Administration");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message, ex);
+            }
         }
 
         private void CategorizeModules()
@@ -447,22 +432,7 @@ namespace Hotcakes.Modules.Core
             if (!contentItemTermIds.Contains(moduleCategoryTerm.TermId))
                 termController.AddTermToContent(moduleCategoryTerm, contentItem);
         }
-
-        private void MigrateOldPromotions()
-        {
-            var context = new HccRequestContext();
-            var accountServices = Factory.CreateService<AccountService>(context);
-            var stores = accountServices.Stores.FindAllPaged(1, int.MaxValue);
-
-            foreach (var store in stores)
-            {
-                context.CurrentStore = store;
-
-                var marketingServices = Factory.CreateService<MarketingService>(context);
-                marketingServices.MigrateOldPromotions();
-            }
-        }
-
+        
         private void MigrateFedExRateSetting()
         {
             // 1.9.0: negotiated rates are no longer a global setting, but a "local" setting
@@ -605,7 +575,7 @@ namespace Hotcakes.Modules.Core
                 {
                     FriendlyName = friendlyName,
                     TypeFullName = typeFullName,
-                    Enabled = true,
+                    Enabled = false,
                     CatchUpEnabled = false,
                     RetainHistoryNum = 0,
                     TimeLapse = 8,
@@ -615,19 +585,6 @@ namespace Hotcakes.Modules.Core
                     ScheduleSource = ScheduleSource.NOT_SET
                 };
                 SchedulingProvider.Instance().AddSchedule(oItem);
-            }
-        }
-
-        private void CopyMvcLibrary()
-        {
-            var versionofDNN = typeof (DotNetNukeContext).Assembly.GetName().Version;
-
-            if (versionofDNN < new Version("8.0"))
-            {
-                var sourceFile = HostingEnvironment.MapPath("~/DesktopModules/Hotcakes/System.Web.Mvc.dll");
-                var destFile = HostingEnvironment.MapPath("~/bin/System.Web.Mvc.dll");
-                if (!File.Exists(destFile))
-                    File.Copy(sourceFile, destFile);
             }
         }
 
@@ -643,6 +600,121 @@ namespace Hotcakes.Modules.Core
 
             merge.UpdateConfigs();
         }
+
+        private void UninstallControlPanel()
+        {
+            try
+            {
+                UninstallPackage("Hotcakes.ControlPanel");
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message, e);
+            }
+        }
+
+        private void CreateTempFileScheduledJob()
+        {
+            try
+            {
+                var scheduledJobs = SchedulingProvider.Instance().GetSchedule();  // retrieves all scheduled jobs 
+                var jobList = ConvertArrayList(scheduledJobs);
+                var job = jobList.FirstOrDefault(s => s.TypeFullName == SCHEDULED_JOB_TYPE);
+
+                if (job == null || job.ScheduleID == Null.NullInteger)
+                {
+                    // the scheduled job doesn't exist yet
+                    SchedulingProvider.Instance().AddSchedule(new ScheduleItem
+                    {
+                        TypeFullName = SCHEDULED_JOB_TYPE,
+                        TimeLapseMeasurement = "w", // week
+                        TimeLapse = 1,
+                        RetryTimeLapseMeasurement = "m", // minutes
+                        RetryTimeLapse = 30,
+                        RetainHistoryNum = 10,
+                        FriendlyName = SCHEDULED_JOB_NAME,
+                        Enabled = true,
+                        CatchUpEnabled = false
+                    });
+
+                    Logger.Debug("Created the scheduled job to clear temporary files created by Hotcakes Commerce.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message, ex);
+                throw ex;
+            }
+        }
+
+        private void UpdateEmailTemplateBranding()
+        {
+            var installDate = DateTime.MinValue;
+            var packageController = ServiceLocator<IPackageController, PackageController>.Instance;
+            var package = packageController.GetExtensionPackage(Null.NullInteger, (PackageInfo p) => p.Name == "Hotcakes.Core");
+
+            if (package != null)
+            {
+                installDate = package.CreatedOnDate;
+            }
+
+            if (installDate != DateTime.MinValue &&  installDate.Date == DateTime.Now.Date)
+            {
+                // this is a new install (not an upgrade)
+                var context = new HccRequestContext();
+                var templateRepo = Factory.CreateRepo<HtmlTemplateRepository>(context);
+                var templates = templateRepo.FindAll();
+                var hccVersion = package.Version;
+                var branding = string.Format(TEMPLATE_REPLACE, hccVersion);
+
+                foreach (var template in templates)
+                {
+                    if ((template.Subject == "Affiliate Approved Confirmation" 
+                        || template.Subject == "Affiliate Registration Confirmation" 
+                        || template.Subject == "Order [[Order.OrderNumber]] Update from [[Store.StoreName]]" 
+                        || template.Subject == "Receipt for Order [[Order.OrderNumber]] from [[Store.StoreName]]" 
+                        || template.Subject == "Shipping update for order [[Order.OrderNumber]] from [[Store.StoreName]]" 
+                        || template.Subject == "You haven't finished your purchase" 
+                        || template.Subject == "You received Gift Card") 
+                        && template.Body.StartsWith("<html>"))
+                    {
+                        template.Body.Replace(TEMPLATE_MATCH, branding);
+                        templateRepo.Update(template);
+                    }
+                }
+            }
+        }
+
+        #region Private Helper Methods
+        private List<ScheduleItem> ConvertArrayList(ArrayList jobs)
+        {
+            var newJobs = new List<ScheduleItem>();
+
+            foreach (var item in jobs)
+            {
+                var newItem = (ScheduleItem)item;
+                newJobs.Add(newItem);
+            }
+
+            return newJobs;
+        }
+
+        private void LogError(string message, Exception ex)
+        {
+            if (ex != null)
+            {
+                Logger.Error(message, ex);
+                if (ex.InnerException != null)
+                {
+                    Logger.Error(ex.InnerException.Message, ex.InnerException);
+                }
+            }
+            else
+            {
+                Logger.Error(message);
+            }
+        }
+        #endregion
 
         #region Constants
 
@@ -700,9 +772,7 @@ namespace Hotcakes.Modules.Core
             "Hotcakes.AffiliateDashboard",
             //SkinObjects
             "Hotcakes.SkinAffiliate",
-            "Hotcakes.SkinSearch",
-            //Providers
-            "Hotcakes.ControlPanel"
+            "Hotcakes.SkinSearch"
         };
 
         #endregion

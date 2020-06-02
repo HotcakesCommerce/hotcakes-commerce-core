@@ -114,13 +114,11 @@ namespace Hotcakes.Commerce.Storage
                 var saveLocation = GetStoreDataPhysicalPath(storeId);
                 saveLocation += "products\\" + productId + "\\";
 
-                FileHelper.CopySingle(Path.Combine(demoImagesPath, "small"),
-                    Path.Combine(saveLocation, "small"), imageName, true);
-                FileHelper.CopySingle(Path.Combine(demoImagesPath, "medium"),
-                    Path.Combine(saveLocation, "medium"), imageName, true);
+                FileHelper.CopySingle(Path.Combine(demoImagesPath, "tiny"), Path.Combine(saveLocation, "tiny"), imageName, true);
+                FileHelper.CopySingle(Path.Combine(demoImagesPath, "small"), Path.Combine(saveLocation, "small"), imageName, true);
+                FileHelper.CopySingle(Path.Combine(demoImagesPath, "medium"), Path.Combine(saveLocation, "medium"), imageName, true);
 
-                FileHelper.CopySingle(Path.Combine(demoImagesPath, "medium"),
-                    saveLocation, imageName, true);
+                FileHelper.CopySingle(Path.Combine(demoImagesPath, "medium"), saveLocation, imageName, true);
             }
             catch (Exception ex)
             {
@@ -387,6 +385,18 @@ namespace Hotcakes.Commerce.Storage
                 return ProductVariantImageUrl(app, productId, productImage, variantId, isSecure, "/medium");
             }
             return ProductImageUrlMedium(app, productId, productImage, isSecure);
+        }
+
+        public static string ProductVariantImageUrlSmall(HotcakesApplication app, string productId, string productImage,
+            string variantId, bool isSecure)
+        {
+            var storeId = app.CurrentStore.Id;
+
+            if (VariantImageExists(storeId, productId, variantId))
+            {
+                return ProductVariantImageUrl(app, productId, productImage, variantId, isSecure, "/small");
+            }
+            return ProductImageUrlSmall(app, productId, productImage, isSecure);
         }
 
         private static string MissingImageUrl(HotcakesApplication app, bool isSecure)
