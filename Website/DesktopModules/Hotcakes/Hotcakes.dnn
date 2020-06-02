@@ -10,6 +10,8 @@
         <url>https://hotcakes.org</url>
         <email>support@upendoventures.com</email>
       </owner>
+      <license src="License.txt" />
+      <releaseNotes src="ReleaseNotes.txt" />
       <azureCompatible>true</azureCompatible>
       <dependencies>
         <dependency type="CoreVersion">09.02.02</dependency>
@@ -267,6 +269,22 @@
             <basePath>Portals\_default\HotcakesViews\_default</basePath>
             <resourceFile>
               <name>HotcakesViews.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>Portals\_default\HotcakesViews\Bootstrap4</basePath>
+            <resourceFile>
+              <name>Bootstrap4Views.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>Portals\_default\HotcakesViews\_default-Legacy</basePath>
+            <resourceFile>
+              <name>LegacyViews.zip</name>
             </resourceFile>
           </resourceFiles>
         </component>
