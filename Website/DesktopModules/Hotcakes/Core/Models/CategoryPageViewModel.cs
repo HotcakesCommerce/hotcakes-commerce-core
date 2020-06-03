@@ -58,10 +58,46 @@ namespace Hotcakes.Modules.Core.Models
         }
 
         /// <summary>
-        ///     Catalog object which map to database entity in order to do different
-        ///     SQL operation
+        /// If true, the current request (end-user) is authorized to edit the catalog. If empty, the current end-user is not authorized to see and use this view.
+        /// </summary>
+        public bool AuthorizedToEditCatalog { get; set; }
+
+        /// <summary>
+        /// The administration URL for viewing and editing all categories. If empty, the current end-user is not authorized to see and use this view.
+        /// </summary>
+        public string CategoriesManagementUrl { get; set; }
+
+        /// <summary>
+        /// This URL can be used to directly navigate to the category performance view. If empty, the current end-user is not authorized to see and use this view.
+        /// </summary>
+        public string CategoryAnalyticsUrl { get; set; }
+
+        /// <summary>
+        /// This URL can be used to directly navigate to the category editing view. If empty, the current end-user is not authorized to see and use this view.
+        /// </summary>
+        public string CategoryEditUrl { get; set; }
+
+        /// <summary>
+        ///     Drill down sub categories or products JSON string for the current category
+        ///     It contains all information like vendors, manufacturers, products related to the category.
+        ///     More detail can be found from <see cref="DrillDownJsonModel" />
+        /// </summary>
+        public string DrillDownJsonModel { get; set; }
+
+        /// <summary>
+        /// This value is a legacy property that will always be an empty string and is never used by Hotcakes.
+        /// </summary>
+        public string LeftColumn { get; set; }
+
+        /// <summary>
+        ///     Catalog object which map to database entity in order to do different SQL operation
         /// </summary>
         public Category LocalCategory { get; set; }
+
+        /// <summary>
+        ///     A list of manufacturers for the different products found in the current category.
+        /// </summary>
+        public List<VendorManufacturer> Manufacturers { get; set; }
 
         /// <summary>
         ///     Pager model to render paging control on page
@@ -69,14 +105,14 @@ namespace Hotcakes.Modules.Core.Models
         public PagerViewModel PagerData { get; set; }
 
         /// <summary>
-        ///     List of the selected items by which needs to sorting on the page
+        /// This value is a legacy property that will always be an empty string and is never used by Hotcakes.
         /// </summary>
-        public List<SelectListItem> SortSelectList { get; set; }
+        public string PostColumn { get; set; }
 
         /// <summary>
-        ///     List of the subcategories under the current category
+        /// This value is a legacy property that will always be an empty string and is never used by Hotcakes.
         /// </summary>
-        public List<SingleCategoryViewModel> SubCategories { get; set; }
+        public string PreColumn { get; set; }
 
         /// <summary>
         ///     List of the products under current categories
@@ -84,30 +120,46 @@ namespace Hotcakes.Modules.Core.Models
         public List<SingleProductViewModel> Products { get; set; }
 
         /// <summary>
-        ///     List of manufacturer for the different products under current category
+        /// The administration URL for viewing and editing all products. If empty, the current end-user is not authorized to see and use this view.
         /// </summary>
-        [Obsolete(
-            "Deprecated in Hotcakes Commerce 03.03.00. Please use the Manufacturers property instead. Removing in version 03.04.00 or later.")]
-        public List<VendorManufacturer> Manufactures
-        {
-            get { return Manufacturers; }
-            set { Manufacturers = value; }
-        }
+        public string ProductsManagementUrl { get; set; }
 
         /// <summary>
-        ///     List of manufacturer for the different products under current category
+        ///     List of the selected items by which needs to sorting on the page
         /// </summary>
-        public List<VendorManufacturer> Manufacturers { get; set; }
+        public List<SelectListItem> SortSelectList { get; set; }
 
         /// <summary>
-        ///     List of vendors for the different products under current category
+        /// The store administration URL for the dashboard. If empty, the current end-user is not authorized to see and use this view.
         /// </summary>
-        public List<VendorManufacturer> Vendors { get; set; }
+        public string StoreAdminUrl { get; set; }
+
+        /// <summary>
+        ///     If there are any sub-categories for the current category, this object will contain that list.
+        /// </summary>
+        public List<SingleCategoryViewModel> SubCategories { get; set; }
 
         /// <summary>
         ///     List the product types for the different products under current category
         /// </summary>
         public List<ProductType> Types { get; set; }
+
+        /// <summary>
+        ///     A list of vendors for the different products found in the current category.
+        /// </summary>
+        public List<VendorManufacturer> Vendors { get; set; }
+
+        #region Obsolete
+
+        /// <summary>
+        ///     List of manufacturer for the different products under current category
+        /// </summary>
+        [Obsolete("Deprecated in Hotcakes Commerce 03.03.00. Please use the Manufacturers property instead. Removing in version 03.04.00 or later.")]
+        public List<VendorManufacturer> Manufactures
+        {
+            get { return Manufacturers; }
+            set { Manufacturers = value; }
+        }
 
         /// <summary>
         ///     Social tagging controls html string for this category. It contains different
@@ -116,45 +168,6 @@ namespace Hotcakes.Modules.Core.Models
         [Obsolete("Removing in 03.04.00 or later. Previously was used for Evoq Social integration.")]
         public ISocialItem SocialItem { get; set; }
 
-        public string LeftColumn { get; set; }
-        public string PreColumn { get; set; }
-        public string PostColumn { get; set; }
-
-        /// <summary>
-        ///     Drill down sub categories or products JSON string for the current category
-        ///     It contains all information like vendors, manufacturers, products related to the catgory.
-        ///     More detail can be found from <see cref="DrillDownJsonModel" />
-        /// </summary>
-        public string DrillDownJsonModel { get; set; }
-
-        /// <summary>
-        /// If true, the current request (end user) is authorized to edit the catalog.
-        /// </summary>
-        public bool AuthorizedToEditCatalog { get; set; }
-
-        /// <summary>
-        /// This URL can be used to directly navigate to the category editing view. If empty, the current end-user is not authorized to see and use this view.
-        /// </summary>
-        public string CategoryEditUrl { get; set; }
-
-        /// <summary>
-        /// This URL can be used to directly navigate to the category performance view. If empty, the current end-user is not authorized to see and use this view.
-        /// </summary>
-        public string CategoryAnalyticsUrl { get; set; }
-
-        /// <summary>
-        /// The administration URL for viewing and editing all categories. 
-        /// </summary>
-        public string CategoriesManagementUrl { get; set; }
-
-        /// <summary>
-        /// The administration URL for viewing and editing all products. 
-        /// </summary>
-        public string ProductsManagementUrl { get; set; }
-
-        /// <summary>
-        /// The store administration URL for the dashboard. 
-        /// </summary>
-        public string StoreAdminUrl { get; set; }
+        #endregion
     }
 }
