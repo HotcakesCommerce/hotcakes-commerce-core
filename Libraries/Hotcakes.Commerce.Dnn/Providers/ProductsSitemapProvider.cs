@@ -29,6 +29,7 @@ using DotNetNuke.Entities.Portals;
 using DotNetNuke.Services.Sitemap;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Urls;
+using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Dnn.Providers
 {
@@ -42,6 +43,10 @@ namespace Hotcakes.Commerce.Dnn.Providers
 
             var urls = new List<SitemapUrl>();
             SitemapUrl pageUrl = null;
+
+            if (HccRequestContext.Current != null) // Localize HccRequestContext
+                HccRequestContext.Current = HccRequestContextUtils.GetContextWithCulture(HccRequestContext.Current, ps.CultureCode);
+
             foreach (var product in products)
             {
                 pageUrl = GetPageUrl(product);
