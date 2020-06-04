@@ -1651,7 +1651,7 @@ select.hcSelectionList {
   text-decoration: none;
 }
 #branding .hcLanguageBar {
-  display: inline;
+  display: inline-block;
 }
 #mainmenu {
   background: #0c0c0c;
