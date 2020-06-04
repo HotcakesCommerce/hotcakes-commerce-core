@@ -50,19 +50,19 @@ namespace Hotcakes.Commerce.Contacts
         }
 
         /// <summary>
+        ///     An address object matching the vendor/manufacturer.
+        /// </summary>
+        public Address Address { get; set; }
+
+        /// <summary>
         ///     This is the ID of the vendor/manufacturer.
         /// </summary>
         public string Bvin { get; set; }
 
         /// <summary>
-        ///     This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
+        ///     Specifies whether this instance of the object contains contacts for a vendor or a manufacturer.
         /// </summary>
-        public long StoreId { get; set; }
-
-        /// <summary>
-        ///     An auditing value to track the last time the vendor/manufacturer record was updated.
-        /// </summary>
-        public DateTime LastUpdated { get; set; }
+        public VendorManufacturerType ContactType { get; set; }
 
         /// <summary>
         ///     The value used in all administrative and customer views to identify the vendor/manufacturer.
@@ -70,25 +70,24 @@ namespace Hotcakes.Commerce.Contacts
         public string DisplayName { get; set; }
 
         /// <summary>
-        ///     The primary email address used to contact the vendor/manufacturer. This is used for system emails for actions such
-        ///     as drop-shipping.
-        /// </summary>
-        public string EmailAddress { get; set; }
-
-        /// <summary>
-        ///     An address object matching the vendor/manufacturer.
-        /// </summary>
-        public Address Address { get; set; }
-
-        /// <summary>
-        ///     The email template ID used when workflow sends a notification email about a drop shipment.
+        ///     The e-mail template ID used when workflow sends a notification e-mail about a drop shipment.
         /// </summary>
         public string DropShipEmailTemplateId { get; set; }
 
         /// <summary>
-        ///     Specifies whether this instance of the object contains contacts for a vendor or a manufacturer.
+        ///     The primary e-mail address used to contact the vendor/manufacturer. This is used for system e-mails for actions such as drop-shipping.
         /// </summary>
-        public VendorManufacturerType ContactType { get; set; }
+        public string EmailAddress { get; set; }
+
+        /// <summary>
+        ///     An auditing value to track the last time the vendor/manufacturer record was updated.
+        /// </summary>
+        public DateTime LastUpdated { get; set; }
+
+        /// <summary>
+        ///     This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
+        /// </summary>
+        public long StoreId { get; set; }
 
         /// <summary>
         ///     Returns a listing of tokens and their replacement used by email templates.

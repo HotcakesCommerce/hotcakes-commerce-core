@@ -30,11 +30,26 @@ namespace Hotcakes.Commerce.Search
 {
     public class FacetItem
     {
-        public string ParentId { get; set; }
-        public string ParentName { get; set; }
-        public string Id { get; set; }
-        public string Name { get; set; }
+        /// <summary>
+        /// This property reflects the total number of child facet items for the current facet item.
+        /// </summary>
         public int Count { get; set; }
+        /// <summary>
+        /// This is the unique identifier for the current facet item.
+        /// </summary>
+        public string Id { get; set; }
+        /// <summary>
+        /// This is the localized name of the current facet item.  
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// If this facet item has a parent, it's parent ID will be in this property. 
+        /// </summary>
+        public string ParentId { get; set; }
+        /// <summary>
+        /// If this facet item has a parent, this property will contain the localized name of the parent facet item.  
+        /// </summary>
+        public string ParentName { get; set; }
     }
 
     public class CheckboxFacetItem : FacetItem
@@ -54,6 +69,9 @@ namespace Hotcakes.Commerce.Search
             }
         }
 
+        /// <summary>
+        /// If true, the current facet has been selected by the end-user.
+        /// </summary>
         public bool Checked { get; set; }
     }
 
@@ -69,16 +87,19 @@ namespace Hotcakes.Commerce.Search
             Count = item.Count;
         }
 
+        /// <summary>
+        /// This property is not currently used. It is intended to be used for categories that use a redirect URL.
+        /// </summary>
         public string Url { get; set; }
     }
 
     internal class InternalFacetItem
     {
-        public Guid? ParentId { get; set; }
-        public string ParentName { get; set; }
+        public int Count { get; set; }
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public int Count { get; set; }
+        public Guid? ParentId { get; set; }
+        public string ParentName { get; set; }
 
         public FacetItem Convert()
         {

@@ -30,7 +30,13 @@ namespace Hotcakes.Commerce.Search
 {
     public class SelectedFacetItem
     {
+        /// <summary>
+        /// This is the unique identifier for the current facet item.
+        /// </summary>
         public string Id { get; set; }
+        /// <summary>
+        /// This is the localized name of the current facet item.
+        /// </summary>
         public string Name { get; set; }
     }
 

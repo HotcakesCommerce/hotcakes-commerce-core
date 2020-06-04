@@ -71,33 +71,26 @@ namespace Hotcakes.Modules.Core.Models
         }
 
         /// <summary>
-        ///     Product information. Detailed information of the product and its properties can be found at
-        ///     <see cref="Commerce.Catalog.Product" />
-        /// </summary>
-        public Product Item { get; set; }
-
-        /// <summary>
-        ///     User price to be shown to end user based on the chosen option
-        ///     and show multiple information for the price.
-        /// </summary>
-        /// <remarks>This is the price that the product is normally sold to the public as.</remarks>
-        public UserSpecificPrice UserPrice { get; set; }
-
-        /// <summary>
         ///     Mulitple images available for the product. More details about the product images can be found at
         ///     <see cref="ProductImageUrls" />
         /// </summary>
         public ProductImageUrls ImageUrls { get; set; }
 
         /// <summary>
-        ///     Product detail page link
+        ///     Product information. Detailed information of the product and its properties can be found at
+        ///     <see cref="Commerce.Catalog.Product" />
         /// </summary>
-        public string ProductLink { get; set; }
+        public Product Item { get; set; }
 
         /// <summary>
         ///     If not an empty string, the URL allows you to add the product to the cart
         /// </summary>
         public string ProductAddToCartLink { get; set; }
+
+        /// <summary>
+        ///     Product detail page link
+        /// </summary>
+        public string ProductLink { get; set; }
 
         /// <summary>
         ///     This holds the html for the specified list of swatches available for specific product
@@ -107,5 +100,12 @@ namespace Hotcakes.Modules.Core.Models
         ///     images must be PNG or GIF.
         /// </remarks>
         public string SwatchDisplay { get; set; }
+
+        /// <summary>
+        ///     User price to be shown to end user based on the chosen option
+        ///     and show multiple information for the price.
+        /// </summary>
+        /// <remarks>This is the price that the product is normally sold to the public as.</remarks>
+        public UserSpecificPrice UserPrice { get; set; }
     }
 }

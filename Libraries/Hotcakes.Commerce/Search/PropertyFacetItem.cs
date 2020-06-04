@@ -34,9 +34,21 @@ namespace Hotcakes.Commerce.Search
             FacetItems = new List<FacetItem>();
         }
 
-        public long Id { get; set; }
-        public string PropertyName { get; set; }
+        /// <summary>
+        /// This is the localized name of the current facet item.
+        /// </summary>
         public string DisplayName { get; set; }
+        /// <summary>
+        /// If this facet has children, this property will contain a list of those child facets.
+        /// </summary>
         public List<FacetItem> FacetItems { get; set; }
+        /// <summary>
+        /// This is the unique identifier for the current facet item.
+        /// </summary>
+        public long Id { get; set; }
+        /// <summary>
+        /// This is the internal (store) name of the current facet item as saved in the administration area.
+        /// </summary>
+        public string PropertyName { get; set; }
     }
 }
