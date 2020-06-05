@@ -29,9 +29,21 @@ namespace Hotcakes.Commerce.Search
 {
     public class SelectedPropertyFacetItem
     {
-        public long Id { get; set; }
-        public string PropertyName { get; set; }
+        /// <summary>
+        /// This is the localized name of the current facet item.
+        /// </summary>
         public string DisplayName { get; set; }
+        /// <summary>
+        /// This is the unique identifier for the current facet item.
+        /// </summary>
+        public long Id { get; set; }
+        /// <summary>
+        /// This is the internal (store) name of the current facet item as saved in the administration area.
+        /// </summary>
+        public string PropertyName { get; set; }
+        /// <summary>
+        /// If there are any product property values selected, they will be in this object.
+        /// </summary>
         public List<SelectedFacetItem> PropertyValues { get; set; }
     }
 }
