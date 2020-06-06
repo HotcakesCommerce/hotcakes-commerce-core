@@ -130,19 +130,19 @@
     <value>Product Details</value>
   </data>
   <data name="Quantity.Text" xml:space="preserve">
-    <value>Quantity</value>
+    <value>Quantity:</value>
   </data>
   <data name="SitePrice.Text" xml:space="preserve">
-    <value>Site Price</value>
+    <value>Site Price:</value>
   </data>
   <data name="SKU.Text" xml:space="preserve">
-    <value>SKU</value>
+    <value>SKU:</value>
   </data>
   <data name="YouSave.Text" xml:space="preserve">
-    <value>You Save</value>
+    <value>You Save:</value>
   </data>
   <data name="UserPrice.Text" xml:space="preserve">
-    <value>User Supplied Price</value>
+    <value>User Supplied Price:</value>
   </data>
   <data name="ValMessage_GiftCardAmount.Text" xml:space="preserve">
     <value>Please enter correct amount value.</value>
