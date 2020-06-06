@@ -288,6 +288,14 @@
             </resourceFile>
           </resourceFiles>
         </component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>Portals\_default\HotcakesViews\Porto5</basePath>
+            <resourceFile>
+              <name>Porto5Views.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
         <component type="Assembly">
           <assemblies>
             <assembly>

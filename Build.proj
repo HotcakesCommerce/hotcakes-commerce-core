@@ -72,8 +72,8 @@
 		<Message Importance="High" Text="======================================= Starting Target Build ==========================================" />
 		<CallTarget Targets="BuildModule" />
 
-		<MSBuild Projects="DevSamples\Build.proj" Properties="RootFolder=$(MSBuildProjectDirectory);Version=$(Version)" />
-		<MSBuild Projects="WebDeploy\Build.proj" Properties="RootFolder=$(MSBuildProjectDirectory);Version=$(Version)" />
+    <!--<MSBuild Projects="DevSamples\Build.proj" Properties="RootFolder=$(MSBuildProjectDirectory);Version=$(Version)" />
+		<MSBuild Projects="WebDeploy\Build.proj" Properties="RootFolder=$(MSBuildProjectDirectory);Version=$(Version)" />-->
 
 		<!-- For Testing commented removing of _Build-->
 		<RemoveDir Directories="_Build" />
