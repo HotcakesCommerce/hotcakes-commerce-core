@@ -1,0 +1,120 @@
+﻿@model Hotcakes.Modules.Core.Models.ProductPageViewModel
+@Html.Partial("_Admin")
+<div class="container">
+    <div class="row hc-product">
+        <div class="container">
+
+            @Html.Action("Index", "ContentColumn", new { id = Model.LocalProduct.PreContentColumnId })
+
+            <hr />
+            <h1 class="mb-none"><strong>@Model.LocalProduct.ProductName</strong></h1>
+            <hr />
+            @Html.Action("ProductTrail", "BreadCrumb", new { product = Model.LocalProduct })<br />
+
+            <div class="row">
+                <div class="col-12">
+                    @Html.Raw((string)TempData["messages"])
+                </div>
+            </div>
+
+            <div class="row shop">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-12 text-center hc-product-image">
+                            <img id="hcProductImage" class="img-fluid rounded" src="@Model.ImageUrls.MediumlUrl" alt="@Model.ImageUrls.MediumlAltText" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="hcAdditionalImages" class="mx-auto">
+                            @foreach (var altImg in Model.AlternateImageUrls)
+                            {
+                                <a href="@altImg.MediumlUrl">
+                                    <a href="@altImg.MediumlUrl"><img class="img-fluid rounded" src="@altImg.TinyUrl" alt="@altImg.MediumlAltText" /></a>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @Html.Partial("_ProductDetails", Model)
+                </div>
+            </div>
+
+            @if (Model.LocalProduct.IsBundle && Model.LocalProduct.BundledProducts.Count > 0)
+            {
+                <h3>@Localization.GetString("BundledProducts")</h3>
+                <div class="row">
+                    @foreach (var item in Model.BundledItems)
+                    {
+                        <div class="col-6 col-md-3">
+                            @Html.Partial("_RenderBundledProduct", item)
+                        </div>
+                    }
+                </div>
+            }
+            <hr />
+
+            @if (Model.AllowReviews)
+            {
+                @Html.Partial("_Reviews")
+                <hr />
+            }
+
+            @if (Model.RelatedItems.Count > 0)
+            { 
+                <h3>@Localization.GetString("RelatedProducts")</h3>
+                <div class="shop">
+                    <ul class="row products product-thumb-info-list" data-plugin-masonry="masonry"> 
+                        @foreach (var item in Model.RelatedItems.Take(4))
+                        {
+                            @Html.Partial("_RenderSingleProductListItem", item)
+                        }
+                    </ul>
+                </div>
+            }
+
+            @{
+                var index = 0;
+            }
+
+            @if (Model.LocalProduct.Tabs.Count > 0)
+            { 
+                <div class="tabs tabs-product">
+                    <ul class="nav nav-tabs">
+                        @foreach (var t in Model.LocalProduct.Tabs.OrderBy(y => y.SortOrder))
+                        {
+                            if (index == 0){
+                                <li class="nav-item active"><a class="nav-link" href="#@("Tab" + t.Bvin)" data-toggle="tab">@t.TabTitle</a></li>
+                            }
+                            else
+                            {
+                                <li class="nav-item"><a class="nav-link" href="#@("Tab" + t.Bvin)" data-toggle="tab">@t.TabTitle</a></li>
+                            }
+                            index++;
+                        }
+                    </ul>
+                    <div class="tab-content">
+                    @{
+                        index = 0;
+                    }
+                    @foreach (var t in Model.LocalProduct.Tabs.OrderBy(y => y.SortOrder))
+                    {
+                        if (index == 0){
+                        <div class="tab-pane active" id="@("Tab" + t.Bvin)">
+                            @Html.Raw(t.HtmlData)
+                        </div>
+                        }
+                        else{
+                        <div class="tab-pane" id="@("Tab" + t.Bvin)">
+                            @Html.Raw(t.HtmlData)
+                        </div>
+                        }
+                        index++;
+                    }
+                    </div>
+                </div>
+            }
+            @Html.Action("Index", "ContentColumn", new { id = Model.LocalProduct.PostContentColumnId })
+        </div>
+    </div>
+</div>

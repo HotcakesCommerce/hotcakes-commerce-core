@@ -1,0 +1,29 @@
+﻿@model Hotcakes.Modules.Core.Models.ProductListViewModel
+@using Hotcakes.Commerce
+@using Hotcakes.Modules.Core.Models
+@{
+    var productList = Model.Items.Take(4);
+}
+<div class="container">
+    @if(productList != null && productList.Any()){
+        <div class="shop"> 
+            <ul class="row products product-thumb-info-list" data-plugin-masonry="masonry"> 
+                @foreach (var product in productList)
+                {
+                    @Html.Partial("_RenderSingleProductListItem", new SingleProductViewModel(product, HccApp))
+                }
+            </ul>
+        </div>
+    }else{
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="alert alert-success">@Localization.GetString("NoProducts")</div>
+            </div>
+        </div>
+    }
+    <div class="row text-right">
+        <div class="col-12 text-right">
+            <a href="@Url.RouteHccUrl(HccRoute.Category)" class="btn btn-primary btn-md">@Localization.GetString("Shop") <em class="fas fa-angle-double-right"></em></a>
+        </div>
+    </div>
+</div>

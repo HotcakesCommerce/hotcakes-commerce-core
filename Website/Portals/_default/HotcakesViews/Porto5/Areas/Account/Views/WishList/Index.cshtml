@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Hotcakes.Modules.Core.Areas.Account.Models.SavedItemViewModel>
+<div class="container">
+    <div class="row form-horizontal">
+        <h2>@Localization.GetString("SavedItems")</h2>
+        <div class="col-12">
+            @Html.Raw((string)TempData["messages"])
+        </div>
+        @if (Model.Count() > 0){
+            <div class="col-12 text-right pull-right">
+                <a href="@Url.RouteHccUrl(HccRoute.Category)" class="btn btn-secondary"><i class="fas fa-arrow-left"></i>@Localization.GetString("KeepShopping")</a>
+            </div>
+        }
+        <div class="container">
+            <div class="col-12 hc-record-list hc-wishlist">
+                @foreach (var item in Model)
+                {
+                    <div class="row">
+                        <div class="col-sm-3 text-center">
+                            <a href="@item.FullProduct.ProductLink">
+                                <img src="@item.FullProduct.ImageUrls.SmallUrl" alt="@item.FullProduct.ImageUrls.SmallAltText" class="img-fluid rounded" />
+                            </a>
+                        </div>
+                        <div class="col-sm-9">
+                            <h2>@item.FullProduct.Item.ProductName</h2>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    @Html.Raw(item.FullProduct.Item.LongDescription)
+                                    @Html.Raw(item.SavedItem.ProductShortDescription)
+                                </div>
+                                <div class="col-sm-4 float-right text-right">
+                                    <div class="col-sm-12 text-right form-group row">
+                                        <label class="col-sm-4 control-label text-right">@Localization.GetString("Price")</label>
+                                        <div class="col-sm-8">
+                                            <p class="lead form-control-static">@Html.Raw(item.FullProduct.UserPrice.DisplayPrice(true, false))</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 form-inline control-inline pull-right text-right">
+                                        <div class="col-sm-6 text-right">
+                                            @if(!item.FullProduct.Item.IsGiftCard && !item.FullProduct.Item.IsUserSuppliedPrice)
+                                            {
+                                                using (Html.BeginHccRouteForm(HccRoute.WishList, new { action = "addtocart" }, FormMethod.Post))
+                                                {
+                                                <input type="hidden" name="itemid" value="@item.SavedItem.Id" /> 
+                                                <input class="btn btn-primary btn-sm control-inline" type="submit" value="@Localization.GetString("AddToCart")" /> 
+                                                } 
+                                            }
+                                        </div>
+                                        <div class="col-sm-6 text-left">
+                                            @using (Html.BeginHccRouteForm(HccRouteNames.WishList, new { action = "delete" }, FormMethod.Post))
+                                            {
+                                                <input type="hidden" name="itemid" value="@item.SavedItem.Id" /> 
+                                                <input type="submit" class="btn btn-secondary btn-sm control-inline" value="@Localization.GetString("RemoveSavedItem")" /> 
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                }
+            </div>
+        </div>
+        <div class="col-xs-12 text-center">
+            <a href="@Url.RouteHccUrl(HccRoute.Category)" class="btn btn-secondary"><i class="fas fa-arrow-left"></i>@Localization.GetString("KeepShopping")</a>
+        </div>
+    </div>
+</div>

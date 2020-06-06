@@ -1,0 +1,46 @@
+﻿@model Hotcakes.Modules.Core.Models.SingleProductViewModel
+<div class="card mb-4 hc-product-detail-wrapper">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 col-md-3">
+                <a href="@Model.ProductLink">
+                    <img class="img-fluid rounded" src="@Model.ImageUrls.SmallUrl" alt="@Model.ImageUrls.SmallAltText" />
+                </a>
+            </div>
+            <div class="col-12 col-md-9">
+                <div class="col-12">
+                    <h2>
+                        <a href="@Model.ProductLink">@Model.Item.ProductName</a>
+                    </h2>
+                    <h6 class="small">@Model.Item.Sku</h6>
+                </div>
+                <div class="col-12 clearfix">
+                    @Html.Raw(Model.Item.LongDescription)
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 mt-2 border-top">
+                <ul class="list-unstyled list-inline float-right text-right mt-4">
+                    <li class="list-inline-item lead">
+                        @Html.Raw(Model.UserPrice.DisplayPrice(true, false))
+                    </li>
+                    <li class="list-inline-item">
+                        @if (Model.Item.HasOptions() || Model.Item.IsGiftCard)
+                        {
+                            <a href="@Model.ProductLink" class="btn btn-primary">
+                                <i class="fas fa-eye"></i>@Localization.GetString("View")
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.RouteHccUrl(HccRoute.Cart, new {quickaddsku = Model.Item.Sku})" class="btn btn-primary" rel="nofollow">
+                                <i class="fas fa-cart-plus"></i>@Localization.GetString("AddToCart")
+                            </a>
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
