@@ -33,26 +33,26 @@
 <div id="hcTabNewAccount" class="clearfix hcTabPane">
     <div class="form-horizontal">
         <div class="form-group row dnnFormRequired">
-            <label class="col-sm-4 col-form-label">@Localization.GetString("Email"):</label>
+            <label class="col-sm-4 col-form-label" for="regemail">@Localization.GetString("Email"):</label>
             <div class="col-sm-6 offset-sm-0">
                 @Html.TextBox("regemail", @Model.CurrentOrder.UserEmail, new {@class = "form-control"})
             </div>
         </div>
         <div class="form-group row dnnFormRequired">
-            <label class="col-sm-4 col-form-label">@Localization.GetString("Username"):</label>
+            <label class="col-sm-4 col-form-label" for="regusername">@Localization.GetString("Username"):</label>
             <div class="col-sm-6 offset-sm-0">
                 @Html.TextBox("regusername", @Model.RegUsername, new { @class = "form-control required" })
                 @ValidationMessage("regusername", @Localization.GetString("Username_Required"))
             </div>
         </div>
         <div class="form-group row dnnFormRequired">
-            <label class="col-sm-4 col-form-label">@Localization.GetString("Password"):</label>
+            <label class="col-sm-4 col-form-label" for="regpassword">@Localization.GetString("Password"):</label>
             <div class="col-sm-6 offset-sm-0">
                 @Html.Password("regpassword", string.Empty, new {@class = "form-control"})
             </div>
         </div>
         <div class="form-group row dnnFormRequired">
-            <label class="col-sm-4 col-form-label">@Localization.GetString("ConfirmPassword"):</label>
+            <label class="col-sm-4 col-form-label" for="regconfirmpassword">@Localization.GetString("ConfirmPassword"):</label>
             <div class="col-sm-6 offset-sm-0">
                 @Html.Password("regconfirmpassword", string.Empty, new {@class = "form-control"})
                 @ValidationMessage("regconfirmpassword", @Localization.GetString("ConfirmPassword_Error"))
@@ -64,13 +64,13 @@
 <div id="hcTabLogin" class="clearfix hcTabPane d-none">
     <div class="form-horizontal">
         <div class="form-group row dnnFormRequired">
-            <label class="col-sm-4 col-form-label">@Localization.GetString("Username"):</label>
+            <label class="col-sm-4 col-form-label" for="username">@Localization.GetString("Username"):</label>
             <div class="col-sm-6 offset-sm-0">
                 @Html.TextBox("username", string.Empty, new {@class = "form-control"})
             </div>
         </div>
         <div class="form-group row dnnFormRequired">
-            <label class="col-sm-4 col-form-label">@Localization.GetString("Password"):</label>
+            <label class="col-sm-4 col-form-label" for="password">@Localization.GetString("Password"):</label>
             <div class="col-sm-6 offset-sm-0">
                 @Html.Password("password", "", new { title = @Localization.GetString("EnterPassword"), @class = "form-control" })
             </div>
@@ -91,7 +91,7 @@
 <div id="hcTabGuest" class="clearfix hcTabPane d-none">
     <div class="form-horizontal">
         <div class="form-group row dnnFormRequired">
-            <label class="col-sm-4 col-form-label">@Localization.GetString("EmailAddress"):</label>
+            <label class="col-sm-4 col-form-label" for="customeremail">@Localization.GetString("EmailAddress"):</label>
             <div class="col-sm-6 offset-sm-0">
                 @Html.TextBox("customeremail", @Model.CurrentOrder.UserEmail, new {@class = "form-control"})
             </div>
