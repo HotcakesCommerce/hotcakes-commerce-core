@@ -1,0 +1,16 @@
+﻿@model Hotcakes.Modules.Core.Models.SingleProductViewModel
+<div class="row">
+    <div class="col-12">
+        <div class="row">
+            <div class="col">
+                <h5><a href="@Model.ProductLink">@Model.Item.ProductName</a></h5>
+            </div>
+            <div class="col col-3 text-right">
+                <h6 class="small"><a href="@Model.ProductLink">@Model.Item.Sku</a></h6>
+            </div>
+            <div class="col col-3 text-right">
+                <p class="lead">@Html.Raw(Model.UserPrice.DisplayPrice(true, false))</p>        
+            </div>
+        </div>
+    </div>
+</div>

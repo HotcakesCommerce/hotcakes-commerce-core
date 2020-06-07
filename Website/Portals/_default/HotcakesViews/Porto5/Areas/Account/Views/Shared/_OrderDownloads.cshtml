@@ -1,0 +1,28 @@
+﻿@model Hotcakes.Commerce.Orders.Order
+@using Hotcakes.Commerce.Catalog;
+
+@if (ViewBag.FileDownloads != null)
+{
+    if (ViewBag.FileDownloads.Count > 0)
+    {
+    <h5>@Localization.GetString("OrderContainsDownloads")</h5>
+    <div class="row">
+        <div class="col-12 center-block">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    @foreach (ProductFile f in ViewBag.FileDownloads)
+                    {
+                        <tr>
+                            <td>@f.ShortDescription</td>
+                            <td>
+                                <a href="@Url.RouteUrl(HccRouteNames.AccountDefault, new { controller = "OrderHistory", action = "downloadfile", id = f.Bvin, oid = Model.bvin })" class="btn btn-outline-info">
+                                    <i class="fas fa-file-download"></i>@Localization.GetString("Download")</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    }
+}

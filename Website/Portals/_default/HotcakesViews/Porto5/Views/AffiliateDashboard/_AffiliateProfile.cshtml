@@ -1,0 +1,102 @@
+﻿@model Hotcakes.Modules.Core.Models.AffiliateViewModel
+@using (Html.BeginHccForm(new { @class = "hcAffiliateProfile" }))
+{
+	<div class="dnnFormMessage hcValidationSummary" data-bind="css: { dnnFormValidationSummary: message.status() != 'OK' }, visible: message.show, html: message.text"></div>
+
+	<div class="container">
+		<div class="row">
+			<div class="form-horizontal col-12 col-sm-8 offset-sm-2">
+				<div class="form-group row dnnFormRequired">
+					<label class="col-sm-4 col-form-label" for="MyAffiliateId">
+						@Localization.GetString("lblMyAffiliateId")
+					</label>
+					<div class="col-sm-6 offset-sm-0">
+						@Html.TextBoxFor(model => model.MyAffiliateId, new { data_bind = "value: model.myaffiliateid", @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.MyAffiliateId, Localization.GetString("ValMessage_AffiliateIDInvalid"), new { @class = "dnnFormMessage hcFormError" })
+					</div>
+				</div>
+				<div class="form-group row" data-bind="visible: model.allowReferral">
+					<label class="col-sm-4 col-form-label" for="ReferralAffiliateId">
+						@Localization.GetString("lblReferralAffiliateId")
+					</label>
+					<div class="col-sm-6 offset-sm-0">
+						@Html.TextBoxFor(model => model.ReferralAffiliateId, new { data_bind = "value: model.referralaffiliateid, enable: !model.approved()", @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.ReferralAffiliateId, Localization.GetString("ValMessage_AffiliateIDInvalid"), new { @class = "dnnFormMessage hcFormError" })
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label" for="CountryId">
+						@Localization.GetString("lblCountry")
+					</label>
+					<div class="col-sm-6 offset-sm-0">
+						@Html.DropDownListFor(model => model.CountryId,
+							new SelectList(Model.Countries, "Bvin", "DisplayName"),
+							new { data_bind = "value: model.countryid, event: { change: changeCountry }", @class = "form-control" })
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label" for="Company">
+						@Localization.GetString("lblCompany")
+					</label>
+					<div class="col-sm-6 offset-sm-0">
+						@Html.TextBoxFor(model => model.Company, new { data_bind = "value: model.company", @class = "form-control" })
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label" for="AddressLine">
+						@Localization.GetString("lblAddress")
+					</label>
+					<div class="col-sm-6 offset-sm-0">
+						@Html.TextBoxFor(model => model.AddressLine, new { data_bind = "value: model.addressline", @class = "form-control" })
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label" for="City">
+						@Localization.GetString("lblCity")
+					</label>
+					<div class="col-sm-6 offset-sm-0">
+						@Html.TextBoxFor(model => model.City, new { data_bind = "value: model.city", @class = "form-control" })
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label" for="State">
+						@Localization.GetString("lblState")
+					</label>
+					<div class="col-sm-6 offset-sm-0">
+						@Html.DropDownListFor(model => model.State,
+							new List<SelectListItem>(),
+							new { data_bind = string.Format("value: model.state, options: model.regions, optionsText: 'DisplayName', optionsValue: 'Abbreviation', optionsCaption: '{0}'", Localization.GetString("NotSelectedItem")), @class = "form-control" })
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label" for="PostalCode">
+						@Localization.GetString("lblZip")
+					</label>
+					<div class="col-sm-6 offset-sm-0">
+						@Html.TextBoxFor(model => model.PostalCode, new { data_bind = "value: model.postalcode", @class = "form-control" })
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label" for="Phone">
+						@Localization.GetString("lblPhone")
+					</label>
+					<div class="col-sm-6 offset-sm-0">
+						@Html.TextBoxFor(model => model.Phone, new { data_bind = "value: model.phone", @class = "form-control" })
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-6 offset-sm-4 text-left">
+						<button type="button" data-bind="click: update" class="btn btn-primary"><i class="fas fa-save"></i>@Localization.GetString("btnUpdate")</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	    ko.applyBindings(new HcAffiliateProfileViewModel(
+		new HcAffiliate(@Html.Raw(@Model.ToJson())),
+            $(".hcAffiliateProfile")
+        ),
+        $(".hcAffiliateProfile")[0]);
+	</script>
+}

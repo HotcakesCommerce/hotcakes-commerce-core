@@ -1,0 +1,15 @@
+﻿@model List<Hotcakes.Modules.Core.Models.SingleProductViewModel>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="shop"> 
+                <ul class="row products product-thumb-info-list" data-plugin-masonry="masonry"> 
+                @foreach (var product in Model)
+                {
+                    @Html.Partial("_RenderSingleProductListItem", product)
+                }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

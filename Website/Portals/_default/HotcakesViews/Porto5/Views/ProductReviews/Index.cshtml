@@ -1,0 +1,27 @@
+﻿@model Hotcakes.Modules.Core.Models.ProductReviewsViewModel
+<div class="container">
+    <div class="row hc-product-reviews">
+        <div class="col-12">
+            <h2>@Localization.GetString("Reviews") (@Model.Reviews.Count): @Model.ProductView.Item.ProductName</h2>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h4>@Localization.GetString("AverageRating")</h4>
+                    <div class="hc-rating-wrapper center-block">
+                        <div class="hc-rating hc-stars@(ViewBag.Avg)"></div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="hc-review-list clearfix">
+                @foreach (var review in Model.Reviews)
+                {
+                    @Html.Partial("_SingleReview", review)
+                    <hr />
+                }
+            </div>
+            <div class="clearfix">
+                <a href="@Model.ProductView.ProductLink" class="btn btn-primary"><i class="fas fa-arrow-left"></i>@Localization.GetString("ReturnToProduct")</a>
+            </div>
+        </div>
+    </div>
+</div>
