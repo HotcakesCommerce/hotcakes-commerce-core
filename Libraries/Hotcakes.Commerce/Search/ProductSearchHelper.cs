@@ -552,7 +552,7 @@ namespace Hotcakes.Commerce.Search
                 }
             }
 
-            // append group items to reslut
+            // append group items to result
             foreach (var g in groups)
             {
                 if (g.ChildItems.Count == 1)
