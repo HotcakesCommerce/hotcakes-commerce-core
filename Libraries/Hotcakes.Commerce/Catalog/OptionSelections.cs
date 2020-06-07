@@ -41,9 +41,15 @@ namespace Hotcakes.Commerce.Catalog
             BundleSelectionList = new Dictionary<long, OptionSelectionList>();
         }
 
-        public OptionSelectionList OptionSelectionList { get; set; }
-
+        /// <summary>
+        /// Represents a collection of product choices or variant selections for bundled products.
+        /// </summary>
         public Dictionary<long, OptionSelectionList> BundleSelectionList { get; set; }
+
+        /// <summary>
+        /// Represents a collection of product choices or variant selections for the current product.
+        /// </summary>
+        public OptionSelectionList OptionSelectionList { get; set; }
 
         public void DeserializeFromXml(string xml)
         {

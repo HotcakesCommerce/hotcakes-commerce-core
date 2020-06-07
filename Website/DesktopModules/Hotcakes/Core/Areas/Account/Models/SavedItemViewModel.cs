@@ -38,7 +38,14 @@ namespace Hotcakes.Modules.Core.Areas.Account.Models
             FullProduct = new SingleProductViewModel();
         }
 
-        public WishListItem SavedItem { get; set; }
+        /// <summary>
+        /// This property contains all of the details of the specific product loaded from the store administration.
+        /// </summary>
         public SingleProductViewModel FullProduct { get; set; }
+
+        /// <summary>
+        /// This property contains an instance of a product, as it was saved by the customer from the product details view. 
+        /// </summary>
+        public WishListItem SavedItem { get; set; }
     }
 }
