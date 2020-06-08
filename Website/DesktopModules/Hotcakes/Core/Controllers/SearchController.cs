@@ -3,6 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
+// Copyright (c) 2020 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -34,7 +35,6 @@ using DotNetNuke.Entities.Portals;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Extensions;
 using Hotcakes.Commerce.Search;
-using Hotcakes.Commerce.Social;
 using Hotcakes.Commerce.Urls;
 using Hotcakes.Modules.Core.Controllers.Shared;
 using Hotcakes.Modules.Core.Models;

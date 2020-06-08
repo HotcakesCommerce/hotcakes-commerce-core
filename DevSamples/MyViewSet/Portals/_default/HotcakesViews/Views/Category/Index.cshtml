@@ -1,0 +1,78 @@
+﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+
+@functions
+{
+    List<Hotcakes.Modules.Core.Models.SingleProductViewModel> GetCommunityFavoritesModel()
+    {
+        var hccApp = HccAppHelper.InitHccApp();
+        int totalResults = 0;
+
+        var products = hccApp.CatalogServices.FindProductForCategoryWithSort(
+            Model.LocalCategory.Bvin,
+            Hotcakes.Commerce.Catalog.CategorySortOrder.None,
+            false, 1, int.MaxValue, ref totalResults)
+            .Where(p => p.Featured);
+
+        var ftModel = new List<Hotcakes.Modules.Core.Models.SingleProductViewModel>();
+        foreach (var p in products.Take(3))
+        {
+            var pModel = new Hotcakes.Modules.Core.Models.SingleProductViewModel(p, hccApp);
+            ftModel.Add(pModel);
+        }
+
+        return ftModel;
+    }
+}
+@Html.Partial("_Admin")
+<div class="hc-category">
+
+    @Html.Partial("_Header", Model)
+
+    <div id="hc-favorite-title">
+        <div class="hc-circle">
+            <div class="hc-inner-circle"></div>
+        </div>
+        <h1>Our Community Favorites</h1>
+        <div class="hc-circle">
+            <div class="hc-inner-circle"></div>
+        </div>
+    </div>
+
+    @Html.Partial("_FavoriteProducts", GetCommunityFavoritesModel())
+    <hr />
+    @if (Model.SubCategories.Count > 0)
+    {
+        <div class="hc-record-grid hc-subcategory-grid clearfix">
+            @foreach (var subcat in Model.SubCategories)
+            {
+                <div class="hc-wrap4">
+                    <div class="hc-record">
+                        <div class="hc-recimage">
+                            <a href="@subcat.LinkUrl">
+                                <img class="hc-autosize" src="@subcat.IconUrl" alt="@subcat.AltText" />
+                            </a>
+                        </div>
+                        <div class="hc-recname">
+                            <a href="@subcat.LinkUrl">@subcat.Name</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="hc-wrap4">
+                @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PreContentColumnId })
+            </div>
+        </div>
+    }
+    @Html.Partial("_Pager", Model.PagerData, new ViewDataDictionary { { "sortByList", Model.SortSelectList } })
+    <div class="hc-record-grid hc-product-grid clearfix">
+        @foreach (var item in Model.Products)
+        {
+            <div class="hc-wrap4">
+                @Html.Partial("_RenderSingleProduct", item)
+            </div>
+        }
+    </div>
+    @Html.Partial("_Pager", Model.PagerData)
+    @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PostContentColumnId })
+</div>
+

@@ -31,6 +31,7 @@ namespace Hotcakes.Commerce.Common
     {
         #region Common
         public const string COMMA = ",";
+        public const string HCC_KEY = "hcc";
         #endregion
 
         #region Store Settings

@@ -1,0 +1,48 @@
+﻿@model Hotcakes.Modules.Core.Models.CheckoutViewModel
+
+<div id="hcNormalizedAddressDlg" data-title="@Localization.GetString("NormalizedAddress")" data-width="550" data-height="300" style="display: none;">
+    <br />
+    <div class="hcShipping">
+        <h4>@Localization.GetString("ShippingAddress")</h4>
+        <table class="dnnGrid">
+            <tr class="dnnGridHeader">
+                <th colspan="2">@Localization.GetString("Normalized")</th>
+                <th colspan="2">@Localization.GetString("Original")</th>
+            </tr>
+            <tr class="dnnGridRow">
+                <td>
+                    <input type="radio" id="shippingNm" name="shipping" value="N" checked="checked" class="normalRadioButton" />
+                </td>
+                <td class="hcNormalizedAddress"></td>
+                <td>
+                    <input type="radio" id="shippingOr" name="shipping" value="O" class="normalRadioButton" />
+                </td>
+                <td class="hcOriginalAddress"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="hcBilling">
+        <h4>@Localization.GetString("BillingAddress")</h4>
+        <table class="dnnGrid ">
+            <tr class="dnnGridHeader">
+                <th colspan="2">@Localization.GetString("Normalized")</th>
+                <th colspan="2">@Localization.GetString("Original")</th>
+            </tr>
+            <tr class="dnnGridRow">
+                <td>
+                    <input type="radio" id="billingNm" name="billing" value="N" checked="checked" class="normalRadioButton" />
+                </td>
+                <td class="hcNormalizedAddress"></td>
+                <td>
+                    <input type="radio" id="billingOr" name="billing" value="O" class="normalRadioButton" />
+                </td>
+                <td class="hcOriginalAddress"></td>
+            </tr>
+        </table>
+    </div>
+    <ul class="dnnActions">
+        <li>
+            <a id="hcSaveNormalizedAction" class="dnnPrimaryAction">@Localization.GetString("SaveNormalizedAction")</a>
+        </li>
+    </ul>
+</div>

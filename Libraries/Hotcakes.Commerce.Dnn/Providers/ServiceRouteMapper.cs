@@ -3,6 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
+// Copyright (c) 2020 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -28,8 +29,6 @@ using DotNetNuke.Web.Api;
 using System.Web.Routing;
 using System.Web.Mvc;
 using System.Web.Http;
-using DotNetNuke.Application;
-using Hotcakes.Commerce.Dnn.Utils;
 
 namespace Hotcakes.Commerce.Dnn.Providers
 {

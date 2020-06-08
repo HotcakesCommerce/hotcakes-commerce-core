@@ -1,0 +1,23 @@
+﻿@model Hotcakes.Modules.Core.Models.SingleProductViewModel
+<div class="hc-record hc-record-simple">
+    <div class="hc-recimage">
+        <a href="@Model.ProductLink">
+            <img class="hc-autosize" src="@Model.ImageUrls.MediumlUrl" alt="@Model.ImageUrls.MediumlAltText" />
+        </a>
+    </div>
+    <h2 class="hc-recname">
+        <a href="@Model.ProductLink">@Model.Item.ProductName</a>
+    </h2>
+    <div class="hc-reccontrols">
+        @if (Model.Item.HasOptions())
+        {
+            <a href="@Model.ProductLink" class="dnnSecondaryAction">
+                @Localization.GetString("View")</a>
+        }
+        else
+        {
+            <a href="@Url.RouteHccUrl(HccRoute.Cart, new { quickaddsku = Model.Item.Sku })" class="dnnSecondaryAction">
+                @Localization.GetString("AddToCart")</a>
+        }
+    </div>
+</div>

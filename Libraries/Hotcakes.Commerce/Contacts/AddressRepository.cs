@@ -3,6 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
+// Copyright (c) 2020 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -29,8 +30,6 @@ using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
 using Hotcakes.Commerce.Globalization;
-using Hotcakes.Web.Data;
-using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.Contacts
 {
@@ -63,8 +62,6 @@ namespace Hotcakes.Commerce.Contacts
             model.RegionBvin = data.RegionBvin;
             model.UserBvin = data.UserBvin;
             model.WebSiteUrl = data.WebSiteUrl;
-
-            //model.Residential;            
         }
 
         protected override void CopyModelToData(hcc_Address data, Address model)

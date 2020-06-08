@@ -1,0 +1,63 @@
+﻿@model Hotcakes.Modules.Core.Models.AffiliateDashboardViewModel
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>@Localization.GetString("AffiliateTools")</h2>
+            <div class="form-horizontal mt-4" id="hcAffiliateTabs" role="navigation">
+                @if (Model != null)
+                {
+                    <ul class="nav nav-tabs list-inline">
+                        <li id="li-TabCommissions" class="nav-item active"><a class="nav-link active" href="#" id="tab-TabCommissions" data-href="#@("TabCommissions")">@Localization.GetString("TabCommissions")</a></li>
+                        <li id="li-TabPayments" class="nav-item"><a class="nav-link" href="#" id="tab-TabPayments" data-href="#@("TabPayments")">@Localization.GetString("TabPayments")</a></li>
+                        @if (Model.Referrals != null)
+                        {		
+                            <li id="li-TabReferrals" class="nav-item"><a class="nav-link" href="#" id="tab-TabReferrals" data-href="#@("TabReferrals")">@Localization.GetString("TabReferrals")</a></li>
+                        }
+                        <li id="li-TabProfile" class="nav-item"><a class="nav-link" href="#" id="tab-TabProfile" data-href="#@("TabProfile")">@Localization.GetString("TabProfile")</a></li>
+                        <li id="li-TabTools" class="nav-item"><a class="nav-link" href="#" id="tab-TabTools" data-href="#@("TabTools")">@Localization.GetString("TabTools")</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="TabCommissions" class="tab-pane fade mt-4">
+                            <h6>@Localization.GetString("TabCommissions")</h6>
+                            @Html.Partial("_Commissions", Model.Orders)
+                        </div>
+                        <div id="TabPayments" class="tab-pane fade mt-4">
+                            <h6>@Localization.GetString("TabPayments")</h6>
+                            @Html.Partial("_Payments", Model.Payments)
+                        </div>
+                        @if (Model.Referrals != null)
+                        {
+                            <div id="TabReferrals" class="tab-pane fade mt-4">
+                                <h6>@Localization.GetString("TabReferrals")</h6>
+                                @Html.Partial("_Referrals", Model.Referrals)
+                            </div>
+                        }
+                        <div id="TabProfile" class="tab-pane fade mt-4">
+                            <h6>@Localization.GetString("TabProfile")</h6>
+                            @Html.Partial("_AffiliateProfile", Model.Affiliate)
+                        </div>
+                        <div id="TabTools" class="tab-pane fade mt-4">
+                            <h6>@Localization.GetString("TabTools")</h6>
+                            @Html.Partial("_UrlBuilder", Model.UrlBuilder)
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $(function() {
+                            ko.applyBindings(new HcAffiliateOrders(@Html.Raw(@Model.Orders.ToJson()), $(".hcAffiliateOrders")), $(".hcAffiliateOrders")[0]);
+                            ko.applyBindings(new HcAffiliatePayments(@Html.Raw(@Model.Payments.ToJson()), $(".hcAffiliatePayments")), $(".hcAffiliatePayments")[0]);
+                            @if (Model.Referrals != null)
+                            {
+                                @: ko.applyBindings(new HcAffiliateReferrals(@Html.Raw(@Model.Referrals.ToJson()),  $(".hcReferrals")), $(".hcReferrals")[0]);
+                            }
+                            ko.applyBindings(new HcUrlBuilderViewModel(@Html.Raw(@Model.UrlBuilder.ToJson()), $(".hcUrlBuilder")), $(".hcUrlBuilder")[0]);
+                        });
+                    </script>
+                }
+                else
+                {
+                    <div class="alert alert-warning">@Localization.GetString("NoAffiliate")</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

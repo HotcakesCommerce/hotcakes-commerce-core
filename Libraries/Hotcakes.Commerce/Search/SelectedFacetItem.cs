@@ -3,6 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
+// Copyright (c) 2020 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -30,7 +31,13 @@ namespace Hotcakes.Commerce.Search
 {
     public class SelectedFacetItem
     {
+        /// <summary>
+        /// This is the unique identifier for the current facet item.
+        /// </summary>
         public string Id { get; set; }
+        /// <summary>
+        /// This is the localized name of the current facet item.
+        /// </summary>
         public string Name { get; set; }
     }
 

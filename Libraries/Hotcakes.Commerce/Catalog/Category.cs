@@ -3,6 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
+// Copyright (c) 2020 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -65,6 +66,13 @@ namespace Hotcakes.Commerce.Catalog
 
         #region Properties
 
+        private string _RewriteUrl = string.Empty;
+
+        /// <summary>
+        ///     If populated with a URL, the specified banner will be displayed in the category header.
+        /// </summary>
+        public string BannerImageUrl { get; set; }
+
         /// <summary>
         ///     This is the ID of the category.
         /// </summary>
@@ -76,25 +84,15 @@ namespace Hotcakes.Commerce.Catalog
         public DateTime CreationDateUtc { get; set; }
 
         /// <summary>
-        ///     The last updated date is used for auditing purposes to know when the category was last updated.
+        ///     If true and if using a category as a custom link, this will cause the link to be opened in a new window when the
+        ///     customer clicks on it. This is only used in the CategoryRotator content block.
         /// </summary>
-        public DateTime LastUpdatedUtc { get; set; }
+        public bool CustomPageOpenInNewWindow { get; set; }
 
         /// <summary>
-        ///     This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
+        ///     If populated with a URL, this value will be used as the URL for the category when clicked.
         /// </summary>
-        public long StoreId { get; set; }
-
-        /// <summary>
-        ///     Having an ID here will make this category a child or nested category of the category that matches this ID. This
-        ///     helps to create nested navigation and other features.
-        /// </summary>
-        public string ParentId { get; set; }
-
-        /// <summary>
-        ///     This is the name of the category that the customers will see in their views.
-        /// </summary>
-        public string Name { get; set; }
+        public string CustomPageUrl { get; set; }
 
         /// <summary>
         ///     If the description exists, it will be placed below the category banner.
@@ -108,31 +106,9 @@ namespace Hotcakes.Commerce.Catalog
         public CategorySortOrder DisplaySortOrder { get; set; }
 
         /// <summary>
-        ///     Allows you to define whether your category is a typical category or a placeholder link to another resource.
+        ///     This property determines whether the category is enabled or disabled from views.
         /// </summary>
-        /// <remarks>Always use the CategorySourceType enum for this property.</remarks>
-        public CategorySourceType SourceType { get; set; }
-
-        /// <summary>
-        ///     Allows you to define how the products in this category will be ordered.
-        /// </summary>
-        /// <remarks>Always use the CategorySortOrderDTO enum for this property.</remarks>
-        public int SortOrder { get; set; }
-
-        /// <summary>
-        ///     These keywords are used to adjust the keywords in the source code of the category landing page for SEO.
-        /// </summary>
-        public string MetaKeywords { get; set; }
-
-        /// <summary>
-        ///     This description is used to adjust the description in the source code of the category landing page for SEO.
-        /// </summary>
-        public string MetaDescription { get; set; }
-
-        /// <summary>
-        ///     This title is used to adjust the title in the source code of the category landing page for SEO.
-        /// </summary>
-        public string MetaTitle { get; set; }
+        public bool Hidden { get; set; }
 
         /// <summary>
         ///     This is the image of the category that you want associated with it in the various views. It also is used to
@@ -141,42 +117,42 @@ namespace Hotcakes.Commerce.Catalog
         public string ImageUrl { get; set; }
 
         /// <summary>
-        ///     If populated with a URL, the specified banner will be displayed in the category header.
+        ///     These keywords are additional keywords that can be used to further enhance your onsite search to find products in
+        ///     this category.
         /// </summary>
-        public string BannerImageUrl { get; set; }
+        /// <remarks>These keywords are currently not being used anywhere</remarks>
+        public string Keywords { get; set; }
 
         /// <summary>
-        ///     If populated with a URL, this value will be used as the URL for the category when clicked.
+        ///     The last updated date is used for auditing purposes to know when the category was last updated.
         /// </summary>
-        public string CustomPageUrl { get; set; }
+        public DateTime LastUpdatedUtc { get; set; }
 
         /// <summary>
-        ///     If true and if using a category as a custom link, this will cause the link to be opened in a new window when the
-        ///     customer clicks on it. This is only used in the CategoryRotator content block.
+        ///     This description is used to adjust the description in the HTML source of the category landing page for SEO.
         /// </summary>
-        public bool CustomPageOpenInNewWindow { get; set; }
+        public string MetaDescription { get; set; }
 
         /// <summary>
-        ///     If true, this category will be shown in the initial list of categories in category lists.
+        ///     These keywords are used to adjust the keywords in the HTML source of the category landing page for SEO.
         /// </summary>
-        public bool ShowInTopMenu { get; set; }
+        public string MetaKeywords { get; set; }
 
         /// <summary>
-        ///     Except when overridden by a “sort” querystring parameter, this value determines how the products in the category
-        ///     will be sorted.
+        ///     This title is used to adjust the title in the HTML source of the category landing page for SEO.
         /// </summary>
-        /// <remarks>This needs to be tested. It doesn't appear to be referenced anywhere.</remarks>
-        public bool Hidden { get; set; }
+        public string MetaTitle { get; set; }
 
         /// <summary>
-        ///     Allows you to specify a specify view in your viewset to be associated with this category when customers see it.
+        ///     This is the name of the category that the customers will see in their views.
         /// </summary>
-        public string TemplateName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
-        ///     Contains the ID of the content block that you want to use in the header area of the category.
+        ///     Having an ID here will make this category a child or nested category of the category that matches this ID. This
+        ///     helps to create nested navigation and other features.
         /// </summary>
-        public string PreContentColumnId { get; set; }
+        public string ParentId { get; set; }
 
         /// <summary>
         ///     Contains the ID of the content block that you want to use in the footer area of the category.
@@ -184,18 +160,9 @@ namespace Hotcakes.Commerce.Catalog
         public string PostContentColumnId { get; set; }
 
         /// <summary>
-        ///     If true, the category name is shown in the customer-facing views.
+        ///     Contains the ID of the content block that you want to use in the header area of the category.
         /// </summary>
-        public bool ShowTitle { get; set; }
-
-        /// <summary>
-        ///     These keywords are additional keywords that can be used to further enhance your onsite search to find products in
-        ///     this category.
-        /// </summary>
-        /// <remarks>These keywords are currently not being used anywhere</remarks>
-        public string Keywords { get; set; }
-
-        private string _RewriteUrl = string.Empty;
+        public string PreContentColumnId { get; set; }
 
         /// <summary>
         ///     This is the slug of the URL, or the last part of the URL to be used to get to this category's landing page. It must
@@ -206,6 +173,38 @@ namespace Hotcakes.Commerce.Catalog
             get { return _RewriteUrl; }
             set { _RewriteUrl = value.Trim().ToLowerInvariant(); }
         }
+
+        /// <summary>
+        ///     If true, this category will be shown in the initial list of categories in category lists.
+        /// </summary>
+        public bool ShowInTopMenu { get; set; }
+
+        /// <summary>
+        ///     If true, the category name is shown in the customer-facing views above the products found in the category.
+        /// </summary>
+        public bool ShowTitle { get; set; }
+
+        /// <summary>
+        ///     Allows you to define how the products in this category will be ordered.
+        /// </summary>
+        /// <remarks>Always use the CategorySortOrderDTO enum for this property.</remarks>
+        public int SortOrder { get; set; }
+
+        /// <summary>
+        ///     Allows you to define whether your category is a typical category or a placeholder link to another resource.
+        /// </summary>
+        /// <remarks>Always use the CategorySourceType enum for this property.</remarks>
+        public CategorySourceType SourceType { get; set; }
+
+        /// <summary>
+        ///     This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
+        /// </summary>
+        public long StoreId { get; set; }
+
+        /// <summary>
+        ///     Allows you to specify a specify view in your viewset to be associated with this category when customers see it.
+        /// </summary>
+        public string TemplateName { get; set; }
 
         #endregion
 

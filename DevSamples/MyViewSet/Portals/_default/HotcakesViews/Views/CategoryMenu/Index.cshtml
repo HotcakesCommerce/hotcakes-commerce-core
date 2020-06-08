@@ -1,0 +1,11 @@
+﻿@model Hotcakes.Modules.Core.Models.CategoryMenuViewModel
+<div class="hc-categorymenu">
+    @if (!string.IsNullOrEmpty(Model.Title))
+    { @Html.Raw(Model.Title) }
+    <ul>
+        @foreach (var item in Model.MenuItem.Items)
+        {
+            @Html.Partial("MenuItem", item)
+        }
+    </ul>
+</div>

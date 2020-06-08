@@ -3,6 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
+// Copyright (c) 2020 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -51,9 +52,10 @@ namespace Hotcakes.Commerce.Catalog
         public string Bvin { get; set; }
 
         /// <summary>
-        ///     This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
+        ///     This property is used to tell the main application when a product type is a core feature.
         /// </summary>
-        public long StoreId { get; set; }
+        /// <remarks>If true, the product type is a built-in product type.</remarks>
+        public bool IsPermanent { get; set; }
 
         /// <summary>
         ///     The last updated date is used for auditing purposes to know when the product property was last updated.
@@ -61,15 +63,14 @@ namespace Hotcakes.Commerce.Catalog
         public DateTime LastUpdated { get; set; }
 
         /// <summary>
-        ///     This property is used to tell the main application when a product type is a core feature.
-        /// </summary>
-        /// <remarks>If true, the product type is a built-in product type.</remarks>
-        public bool IsPermanent { get; set; }
-
-        /// <summary>
         ///     The name used in the merchant application to label the products that will be using this product type.
         /// </summary>
         public string ProductTypeName { get; set; }
+
+        /// <summary>
+        ///     This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
+        /// </summary>
+        public long StoreId { get; set; }
 
         /// <summary>
         ///     When used, this property allows you to set a high-level default template for products of this type to use.
