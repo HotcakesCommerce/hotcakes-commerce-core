@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/DesktopModules/Hotcakes/Core/Admin/styles.css")" rel="stylesheet" type="text/css" />
+    @Html.Raw(ViewBag.JqueryInclude)
+    @if (IsSectionDefined("HeadContent"))
+    {
+        @RenderSection("HeadContent", false)
+    }
+</head>
+<body id="pagebody">    
+    <div id="popup-wrapper">
+        <div id="main-content">
+            <table>
+                <tr>
+                    <td>@RenderSection("nav")</td>
+                    <td>@RenderBody()</td>
+                </tr>
+            </table>
+            
+        </div>
+    </div>
+    @RenderSection("EndOfForm", false)
+</body>
+</html>
+

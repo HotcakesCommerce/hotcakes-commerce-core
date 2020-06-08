@@ -1,0 +1,65 @@
+﻿@model Hotcakes.Modules.Core.Models.SearchPageViewModel
+
+<div class="container">
+    <div class="row hc-search-results">
+        <div class="col-12">
+            <h1>
+                @Localization.GetString("Search") | 
+                @if (Model.Products.Count > 0){
+                    <text>&quot;<em> @ViewBag.Search </em>&quot;</text>
+                }
+            </h1>
+            <hr/>
+                
+            @if (Model.Products.Count > 0){
+                <div class="row">
+                    <div class="col-12 text-right mb-3">
+                        <h6>
+                            @Model.Products.Count 
+                            @if (Model.Products.Count > 1){
+                                @Localization.GetString("ProductsFound")
+                            }else{
+                                @Localization.GetString("ProductFound")
+                            }
+                        </h6>
+                    </div>
+                </div>
+            }
+                
+            <div class="row">
+                <div class="col-12">
+                    @Html.Partial("_Pager", Model.PagerData)
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    @if (Model.Products.Count > 0)
+                    {
+                        <div class="shop w-100">
+                            <ul class="row products product-thumb-info-list" data-plugin-masonry="masonry">
+                            @foreach (var item in Model.Products)
+                            {
+                                @Html.Partial("_RenderSingleProductListItem", item)
+                            }
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-xs-12 alert alert-info">
+                            @Localization.GetString("ProductsNotFound")
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    @Html.Partial("_Pager", Model.PagerData)
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

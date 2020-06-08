@@ -1,0 +1,101 @@
+﻿@model Hotcakes.Modules.Core.Models.CheckoutAddressViewModel
+
+<div class="col-12">
+    <div class="form-horizontal hcAddressForm">
+        <div class="form-group row hcAvailableAddresses 
+            @if (!User.Identity.IsAuthenticated || Model.Addresses.Count == 0)
+            {
+                <text> d-none</text>
+            }
+            ">
+            <label class="col-sm-4 col-form-label" for="@(Model.Prefix + "AvailableAddresses")">@Localization.GetString("AddressBook"):</label>
+            <div class="col-sm-6 offset-sm-0">
+                @Html.DropDownList(Model.Prefix + "AvailableAddresses",
+                    new SelectList(Model.Addresses, "Bvin", "Line1", Model.Address.Bvin),
+                    Localization.GetString("NotSelectedItem"), new {@class = "form-control"})
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label" for="@(Model.Prefix + "country")">@Localization.GetString("Country"):</label>
+            <div class="col-sm-6 offset-sm-0">
+                <select id="@(Model.Prefix + "country")" name="@(Model.Prefix + "country")" class="form-control">
+                    @foreach (var c in Model.Countries)
+                    {
+                        if (Model.Address.CountryBvin == c.Bvin)
+                        {
+                        <option value="@c.Bvin" selected="selected">@c.DisplayName</option>
+                        }
+                        else
+                        {
+                        <option value="@c.Bvin">@c.DisplayName</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group row dnnFormRequired">
+            <label class="col-sm-4 col-form-label" for="@(Model.Prefix + "firstname")">@Localization.GetString("FirstName"):</label>
+            <div class="col-sm-6 offset-sm-0">
+                <input type="text" id="@(Model.Prefix + "firstname")" name="@(Model.Prefix + "firstname")"
+                    value="@Model.Address.FirstName" class="form-control @Model.IsErr("firstname")" placeholder="@Localization.GetString("phFirstName")" />
+            </div>
+        </div>
+        <div class="form-group row dnnFormRequired">
+            <label class="col-sm-4 col-form-label" for="@(Model.Prefix + "lastname")">@Localization.GetString("LastName"):</label>
+            <div class="col-sm-6 offset-sm-0">
+                <input type="text" id="@(Model.Prefix + "lastname")" name="@(Model.Prefix + "lastname")"
+                    value="@Model.Address.LastName" class="form-control @Model.IsErr("lastname")" placeholder="@Localization.GetString("phLastName")" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label" for="@(Model.Prefix + "company")">@Localization.GetString("Company"):</label>
+            <div class="col-sm-6 offset-sm-0">
+                <input type="text" id="@(Model.Prefix + "company")" name="@(Model.Prefix + "company")"
+                    value="@Model.Address.Company" class="form-control @Model.IsErr("company")" placeholder="@Localization.GetString("phCompany")" />
+            </div>
+        </div>
+        <div class="form-group row dnnFormRequired">
+            <label class="col-sm-4 col-form-label" for="@(Model.Prefix + "address")">@Localization.GetString("Address"):</label>
+            <div class="col-sm-6 offset-sm-0">
+                <input type="text" id="@(Model.Prefix + "address")" name="@(Model.Prefix + "address")"
+                    value="@Model.Address.Line1" class="form-control @Model.IsErr("address")" placeholder="@Localization.GetString("phAddress1")" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label" for="@(Model.Prefix + "address2")">@Localization.GetString("Address2")</label>
+            <div class="col-sm-6 offset-sm-0">
+                <input type="text" id="@(Model.Prefix + "address2")" name="@(Model.Prefix + "address2")"
+                    value="@Model.Address.Line2" class="form-control @Model.IsErr("address")" placeholder="@Localization.GetString("phAddress2")" />
+            </div>
+        </div>
+        <div class="form-group row dnnFormRequired">
+            <label class="col-sm-4 col-form-label" for="@(Model.Prefix + "city")">@Localization.GetString("City"):</label>
+            <div class="col-sm-6 offset-sm-0">
+                <input type="text" id="@(Model.Prefix + "city")" name="@(Model.Prefix + "city")"
+                    value="@Model.Address.City" class="form-control @Model.IsErr("city")" placeholder="@Localization.GetString("phCity")" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label" for="@(Model.Prefix + "state")">@Localization.GetString("State"):</label>
+            <div class="col-sm-6 offset-sm-0">
+                <select id="@(Model.Prefix + "state")" name="@(Model.Prefix + "state")" class="form-control"></select>
+                <input type="hidden" id="@(Model.Prefix + "tempregion")" value="@Model.Address.RegionBvin" />
+            </div>
+        </div>
+        <div class="form-group row dnnFormRequired">
+            <label class="col-sm-4 col-form-label" for="@(Model.Prefix + "zip")">@Localization.GetString("PostalCode"):</label>
+            <div class="col-sm-6 offset-sm-0">
+                <input type="text" id="@(Model.Prefix + "zip")" name="@(Model.Prefix + "zip")" 
+                    value="@Model.Address.PostalCode" class="form-control @Model.IsErr("zip")" placeholder="@Localization.GetString("phPostalCode")" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label" for="@(Model.Prefix + "phone")">@Localization.GetString("Phone"):</label>
+            <div class="col-sm-6 offset-sm-0">
+                <input type="text" id="@(Model.Prefix + "phone")" name="@(Model.Prefix + "phone")" 
+                    value="@Model.Address.Phone" class="form-control @Model.IsErr("phone")" placeholder="@Localization.GetString("phPhone")" />
+            </div>
+        </div>
+        <input type="hidden" id="@(Model.Prefix + "addressbvin")" name="@(Model.Prefix + "addressbvin")" value="@Model.Address.Bvin" />
+    </div>
+</div>

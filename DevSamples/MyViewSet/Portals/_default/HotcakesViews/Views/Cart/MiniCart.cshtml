@@ -1,0 +1,89 @@
+﻿@model Hotcakes.Modules.Core.Models.CartViewModel
+<script type="text/javascript">
+    $(function () {
+        var $target = $('#hcMiniCartTooltip');
+        var $minicart = $('#hcMiniCart');
+        var $iconbox = $minicart.find(".hc-iconbox");
+
+        if ($target.length) {
+            $minicart.hover(function () {
+                $iconbox.css("background-color", "#FFF");
+                $target.slideDown().position(
+                    'right'
+                );
+            }, function () {
+                $target.slideUp(function () {
+                    $iconbox.css("background-color", "");
+                });
+            });
+        }
+    });
+</script>
+
+<div id="hcMiniCart" class="hc-minicart">
+    <div class="hc-iconbox">
+        <a href="@Url.RouteHccUrl(HccRoute.Cart)">
+            @Model.CurrentOrder.TotalQuantity
+        </a>
+    </div>
+    @if (!Model.CartEmpty)
+    {
+        <div class="hc-tooltip dnnFormPopup" id="hcMiniCartTooltip">
+            @Model.ItemListTitle
+            <h2>@Localization.GetString("ShoppingCart")</h2>
+
+            <table class="table table-hover table-striped">
+                <tbody>
+                    @foreach (var item in Model.LineItems)
+                    {
+                        <tr>
+                            <td>
+                                @if (item.ShowImage)
+                                {
+                                    <a href="@item.LinkUrl" title="@item.Item.ProductName">
+                                        <img src="@item.ImageUrl" alt="@item.Item.ProductName" class="img-responsive img-rounded" />
+                                    </a>
+                                }
+                                else
+                                {
+                                    <text>&nbsp;</text>
+                                }
+                            </td>
+                            <td class="text-left">
+                                <a class="hc-mini-cart" href="@item.LinkUrl" title="@item.Item.ProductName">
+                                    @item.Item.ProductName
+                                </a>
+                            </td>
+                            <td class="text-left text-right">
+                                <span class="lead">
+                                @if (item.HasDiscounts)
+                                {
+                                    <span class="mark"><del>@item.Item.LineTotalWithoutDiscounts.ToString("c")</del></span><br />
+                                }
+                                @item.Item.LineTotal.ToString("c")
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tr class="hc-subtotal">
+                    <td colspan="2">
+                        @Localization.GetString("Subtotal")
+                    </td>
+                    <td>
+                        <span class="lead">@string.Format("{0:c}", Model.CurrentOrder.TotalOrderBeforeDiscounts)</span>
+                    </td>
+                </tr>
+            </table>
+
+            <ul class="list=unstyled list-inline text-center">
+                <li>
+                    <a class="btn btn-primary btn-small" href="@Url.RouteHccUrl(HccRoute.Checkout)"><em class="glyphicon glyphicon-credit-card"></em>@Localization.GetString("Checkout")</a>
+                </li>
+                <li>
+                    <a class="btn btn-default btn-small" href="@Url.RouteHccUrl(HccRoute.Cart)"><em class="glyphicon glyphicon-shopping-cart"></em>@Localization.GetString("GoToCart")</a>
+                </li>
+            </ul>
+        </div>
+    }
+</div>

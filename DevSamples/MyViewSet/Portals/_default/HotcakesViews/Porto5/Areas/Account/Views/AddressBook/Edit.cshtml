@@ -1,0 +1,27 @@
+﻿@model Hotcakes.Modules.Core.Models.AddressViewModel
+<div class="container">
+    <div class="row">
+        <h2>@Localization.GetString("EditAddress")</h2>
+
+        <div class="container">
+        @using (Html.BeginHccForm(new { @class = "hcAddressEditor" }))
+        {
+            <div class="col-12">
+                @Html.ValidationSummary(true)
+            </div>
+            <div class="col-sm-8 offset-sm-2">
+                @Html.Partial("_AddressEditor", Model)
+            </div>
+        
+            <div class="form-group row">
+                <div class="col-12 text-center mt-4 mb-5">
+                    <a href="@Url.RouteHccUrl(HccRoute.AddressBook)" class="btn btn-secondary">
+                        <i class="fas fa-trash-alt"></i>@Localization.GetString("Close")
+                    </a>
+                    <input type="submit" id="hcSaveAddress" value="@Localization.GetString("SaveChanges")" class="btn btn-primary hcHandleNormalization"/>
+                </div>
+            </div>
+        }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+﻿@model Hotcakes.Modules.Core.Models.SingleProductViewModel
+@{
+    var userPrice = Model.UserPrice.DisplayPrice(true,false);
+    var isSale = userPrice.Contains("strike");
+    var hasOptions = (Model.Item.HasOptions());
+}
+@if(isSale){
+<a href="@Model.ProductLink">
+    <span class="onsale">@Localization.GetString("Sale")</span> 
+</a>
+}
+<div class="product-thumb-info">
+    @if (hasOptions || Model.Item.IsGiftCard || Model.Item.IsBundle || Model.Item.IsUserSuppliedPrice){
+    <a class="add-to-cart-product" href="@Model.ProductLink">
+        <span><em class="fas fa-shopping-cart"></em>@Localization.GetString("View")</span> 
+    </a> 
+    }else{
+    <a href="@Url.RouteHccUrl(HccRoute.Cart, new {AddSku = Model.Item.Sku, AddSkuQty = 1})" class="add-to-cart-product" rel="nofollow">
+        <span><em class="fas fa-shopping-cart"></em>@Localization.GetString("AddToCart")</span> 
+    </a> 
+    }
+    <a href="@Model.ProductLink"> 
+        <span class="product-thumb-info-image">
+            <span class="product-thumb-info-act">
+                <span class="product-thumb-info-act-left"><em>@Localization.GetString("View")</em></span> 
+                <span class="product-thumb-info-act-right"><em><em class="fas fa-plus"></em>@Localization.GetString("Details")</em></span> 
+            </span>
+            <img alt="@Model.ImageUrls.SmallAltText" class="img-fluid store-img" src="@Model.ImageUrls.SmallUrl" /> 
+        </span>
+    </a>
+    <div class="product-thumb-info-content">
+        <a href="@Model.ProductLink">
+            <h4 class="product-tile-header">@Model.Item.ProductName</h4>
+            <div class="price">
+                <ins> 
+                    <span class="amount"> 
+                        @if(Model.Item.IsGiftCard || Model.Item.IsUserSuppliedPrice){
+                            <text>&nbsp;</text>
+                        }else{
+                            @Html.Raw(userPrice) 
+                        }
+                    </span> 
+                </ins> 
+            </div>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+﻿@model Hotcakes.Modules.Core.Areas.ContentBlocks.Models.FeaturedProductsViewModel
+
+<div class="hc-record-grid hc-product-grid clearfix">
+    @foreach (var p in Model.Items.Take(3))
+    {
+        <div class="hc-wrap3">
+            @Html.Partial("_RenderSingleProduct", p)
+        </div>
+    }
+</div>
+
+

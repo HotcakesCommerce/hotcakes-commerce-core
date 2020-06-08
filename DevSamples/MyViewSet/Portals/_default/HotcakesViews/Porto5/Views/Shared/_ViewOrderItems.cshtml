@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Hotcakes.Commerce.Orders.LineItem>
+<div class="col-12">
+	<div class="table-responsive">
+		<table class="table table-border table-hover table-striped">
+			<thead>
+				<tr>
+					<td>@Localization.GetString("Item")</td>
+					<td>@Localization.GetString("Quantity")</td>
+					<td class="text-right">@Localization.GetString("Total")</td>
+				</tr>
+			</thead>
+			@for (int i = 0; i < Model.Count(); i++)
+			{
+				var item = Model.ElementAt(i);
+				<tr>
+					<td>
+						<label>@item.ProductName</label><br />
+						<span class="text-uppercase text-monospace">@item.ProductSku</span><br />
+						@if (item.LineTotal != item.LineTotalWithoutDiscounts)
+						{
+							<div class="label-wrapper clear">
+								<span class="badge badge-success">@Html.Raw(@item.DiscountDetailsAsHtml())</span>
+							</div>
+						}
+						<div class="d-none d-sm-block">
+							@Html.Raw(item.ProductShortDescription)
+
+							@if (!string.IsNullOrEmpty(item.CustomPropGiftCardNumber))
+							{
+								@Html.Raw(Localization.GetString("GiftCardNumber") + item.CustomPropGiftCardNumber)
+							}
+						</div>
+					</td>
+					<td>@item.Quantity</td>
+					<td class="text-right">
+						<span class="hcLineTotalBase hc-strike
+							@if (!item.HasAnyDiscounts)
+							{
+								<text> d-none</text>
+							}">
+							<mark><del>@item.LineTotalWithoutDiscounts.ToString("C")</del></mark><br />
+						</span>
+						<span class="hcLineTotalAdjusted">
+							@item.LineTotal.ToString("C")
+						</span>
+					</td>
+				</tr>
+			}
+		</table>
+	</div>
+</div>

@@ -1,0 +1,54 @@
+﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+
+<div class="container">
+    
+    @Html.Partial("_Admin")
+
+    @if (Model.LocalCategory.ShowTitle)
+    {
+        <div class="heading heading-border heading-middle-border heading-middle-border-center">
+            <h1>@Model.LocalCategory.Name</h1>
+        </div>
+    }
+    @Html.Action("CategoryTrail", "BreadCrumb", new { cat = Model.LocalCategory })
+    @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PreContentColumnId })
+    @Html.Partial("_Header", Model)
+    @if (Model.SubCategories.Count > 0)
+    {
+        <div class="shop"> 
+            <ul class="row products product-thumb-info-list" data-plugin-masonry="masonry"> 
+                @foreach (var subcat in Model.SubCategories)
+                {
+                    <li class="col-md-3 col-sm-6 product">
+                        <div class="product-thumb-info">
+                            <a href="@subcat.LinkUrl"> 
+                                <span class="product-thumb-info-image">
+                                    <span class="product-thumb-info-act">
+                                        <span class="product-thumb-info-act-left"><em>@Localization.GetString("View")</em></span> 
+                                    </span>
+                                    <img alt="@subcat.AltText" class="img-fluid store-img" src="@subcat.IconUrl" /> 
+                                </span>
+                            </a>
+                            <div class="product-thumb-info-content">
+                                <a href="@subcat.LinkUrl">
+                                    <h4 class="product-tile-header">@subcat.Name</h4>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+    @Html.Partial("_Pager", Model.PagerData, new ViewDataDictionary { { "sortByList", Model.SortSelectList } })
+    <div class="shop"> 
+        <ul class="row products product-thumb-info-list" data-plugin-masonry="masonry"> 
+        @foreach (var item in Model.Products)
+        {
+            @Html.Partial("_RenderSingleProductListItem", item)
+        }
+        </ul>
+    </div>
+    @Html.Partial("_Pager", Model.PagerData)
+    @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PostContentColumnId })
+</div>

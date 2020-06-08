@@ -1,0 +1,12 @@
+﻿@model Hotcakes.Modules.Core.Models.SideMenuViewModel
+<div class="container">
+    <div class="row-12 mb-4">
+        <h3>@Model.Title</h3>
+        <ol>
+            @foreach (var item in Model.Items)
+            {
+                <li><a href="@item.Url" title="@item.Title">@item.Name</a></li>
+            }
+        </ol>
+    </div>
+</div>

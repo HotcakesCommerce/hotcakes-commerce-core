@@ -1,0 +1,13 @@
+﻿@model Hotcakes.Modules.Core.Models.CategoryMenuItemViewModel
+<li @(@Model.IsCurrent ? "class=hc-current" : "")>
+	<a href="@Model.Url"><em class="fas fa-tags"></em> @Model.Title</a>	
+	@if (@Model.Items.Count > 0)
+	{
+		<ul class="list list-icons">
+			@foreach (var item in @Model.Items)
+			{
+				@Html.Partial("MenuItem", item)
+			}
+		</ul>
+	}
+</li>

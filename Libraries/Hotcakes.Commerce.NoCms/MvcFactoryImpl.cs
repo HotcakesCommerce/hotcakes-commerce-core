@@ -3,6 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
+// Copyright (c) 2020 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -24,16 +25,11 @@
 #endregion
 
 using System;
-using Hotcakes.Commerce.Accounts;
 using Hotcakes.Commerce.BusinessRules;
-using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Configuration;
-using Hotcakes.Commerce.Contacts;
 using Hotcakes.Commerce.Extensions;
 using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Marketing;
-using Hotcakes.Commerce.Membership;
-using Hotcakes.Commerce.NoCms.Membership;
 using Hotcakes.Commerce.NoCms.Urls;
 using Hotcakes.Commerce.Search;
 using Hotcakes.Commerce.Social;

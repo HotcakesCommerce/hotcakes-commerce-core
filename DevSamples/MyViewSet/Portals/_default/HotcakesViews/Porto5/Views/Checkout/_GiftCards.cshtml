@@ -1,0 +1,50 @@
+﻿@model Hotcakes.Modules.Core.Models.CheckoutViewModel
+
+<div class="col-12">
+    <div id="hcGiftCardSummary" class="alert alert-success d-none">
+        @Html.Raw(Model.GiftCards.Summary)
+    </div>
+    <div id="hcGiftCardsFormItem" class="form-group" 
+        @if(Model.GiftCards.Cards.Count == 0){ <text>style="display: none"</text> }
+        >
+        <label class="control-label">@Localization.GetString("LabelGiftCards")</label>
+        <div class="table-responsive">
+            <table class="table table-border table-hover table-striped" id="hcGiftCardList">
+                <thead>
+                    <tr>
+                        <td>@Localization.GetString("ColumnCardNumber")</td>
+                        <td>@Localization.GetString("ColumnBalance")</td>
+                        <td>@Localization.GetString("ColumnCharge")</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </thead>
+                @foreach (var gc in Model.GiftCards.Cards)
+                {
+                    <tr>
+                        <td>@gc.CardNumber</td>
+                        <td>@gc.Balance</td>
+                        <td>@gc.Charge</td>
+                        <td class="hc-actions">
+                            <input type="button" class="hc-delete" value="Remove">
+                        </td>
+                    </tr>
+                }
+                <tr style="display: none">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="hc-actions">
+                        <input type="button" class="hc-delete" value="Remove">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="hcGiftCardsFormAction" class="form-group row">
+        <label class="col-sm-4 col-form-label" for="hcGiftCardNumber">@Localization.GetString("LabelGiftCardNumber")</label>
+        <div class="col-sm-8 form-inline">
+            <input type="text" id="hcGiftCardNumber" class="form-control" />
+            <a id="hcGiftCardButton" class="btn btn-outline-info"><i class="fas fa-gift"></i>@Localization.GetString("ButtonApply")</a>
+        </div>
+    </div>
+</div>
