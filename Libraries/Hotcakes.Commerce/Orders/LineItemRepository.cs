@@ -3,6 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
+// Copyright (c) 2020 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -26,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
 using Hotcakes.Commerce.Marketing;
@@ -37,7 +39,9 @@ namespace Hotcakes.Commerce.Orders
 {
     public class LineItemRepository : HccSimpleRepoBase<hcc_LineItem, LineItem>
     {
-        private const string HCC_KEY = "hcc";
+        private const string MARKEDFREESHIPPING = "ismarkedforfreeshipping";
+        private const string ISTAXEXEMPT = "istaxexempt";
+        private const string FREESHIPPINGIDS = "freeshippingmethodsids";
 
         public LineItemRepository(HccRequestContext c)
             : base(c)
@@ -62,9 +66,9 @@ namespace Hotcakes.Commerce.Orders
             data.IsGiftCard = model.IsGiftCard;
             data.BasePrice = model.BasePricePerItem;
             data.AdjustedPrice = model.AdjustedPricePerItem;
-            model.CustomPropertySet(HCC_KEY, "ismarkedforfreeshipping", model.IsMarkedForFreeShipping.ToString());
-            model.CustomPropertySet(HCC_KEY, "istaxexempt", model.IsTaxExempt);
-            model.CustomPropertySet(HCC_KEY, "freeshippingmethodsids",
+            model.CustomPropertySet(Constants.HCC_KEY, MARKEDFREESHIPPING, model.IsMarkedForFreeShipping.ToString());
+            model.CustomPropertySet(Constants.HCC_KEY, ISTAXEXEMPT, model.IsTaxExempt);
+            model.CustomPropertySet(Constants.HCC_KEY, FREESHIPPINGIDS,
                 string.Join(",", model.FreeShippingMethodIds.ToArray()));
             data.CustomProperties = model.CustomPropertiesToXml();
             data.DiscountDetails = DiscountDetail.ListToXml(model.DiscountDetails);
@@ -158,7 +162,7 @@ namespace Hotcakes.Commerce.Orders
             model.PromotionIds = data.PromotionIds;
             model.FreeQuantity = data.FreeQuantity;
 
-            if (model.CustomPropertyGet(HCC_KEY, "ismarkedforfreeshipping") == true.ToString())
+            if (model.CustomPropertyGet(Constants.HCC_KEY, MARKEDFREESHIPPING) == true.ToString())
             {
                 model.IsMarkedForFreeShipping = true;
             }
@@ -166,10 +170,10 @@ namespace Hotcakes.Commerce.Orders
             {
                 model.IsMarkedForFreeShipping = false;
             }
-            model.IsTaxExempt = model.CustomPropertyGetAsBool(HCC_KEY, "istaxexempt");
+            model.IsTaxExempt = model.CustomPropertyGetAsBool(Constants.HCC_KEY, ISTAXEXEMPT);
 
             // Free Shipping Method Ids
-            var freeshippingids = model.CustomPropertyGet(HCC_KEY, "freeshippingmethodsids");
+            var freeshippingids = model.CustomPropertyGet(Constants.HCC_KEY, FREESHIPPINGIDS);
             if (freeshippingids.Trim().Length > 0)
             {
                 var methods = freeshippingids.Split(',');

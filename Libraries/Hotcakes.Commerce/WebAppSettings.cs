@@ -3,6 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
+// Copyright (c) 2020 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -43,6 +44,28 @@ namespace Hotcakes.Commerce
 
         private static readonly AppSettingsSection _appSettings;
 
+        private const string HOTCAKESCONFIG = "hotcakes.config";
+
+        private const string SETTING_MAXVARIANTS = "MaxVariants";
+        private const int SETTING_MAXVARIANTS_DEFAULT = 150;
+        private const string SETTING_TEXTEDITOR = "DefaultTextEditor";
+        private const string SETTING_TEXTEDITOR_DEFAULT = "TinyMCE";
+        private const string SETTING_AFFILIATEQS = "AffiliateQueryStringName";
+        private const string SETTING_AFFILIATEQS_DEFAULT = "affid";
+        private const string SETTING_INVENTORYLOWHRS = "InventoryLowHours";
+        private const int SETTING_INVENTORYLOWHRS_DEFAULT = 24;
+        private const string SETTING_INVENTORYLOWPREFIX = "InventoryLowReportLinePrefix";
+        private const string SETTING_NEWPRODUCTBADGEDAYS = "NewProductBadgeDays";
+        private const int SETTING_NEWPRODUCTBADGEDAYS_DEFAULT = 30;
+        private const string SETTING_PRODUCTLONGDESCHGT = "ProductLongDescriptionEditorHeight";
+        private const int SETTING_PRODUCTLONGDESCHGT_DEFAULT = 300;
+        private const string SETTING_PRODUCTMAXPRICE = "ProductMaxPrice";
+        private const decimal SETTING_PRODUCTMAXPRICE_DEFAULT = 99999999;
+
+        private const string CONNECTIONSTRING = "SiteSqlServer";
+        private const string DATAPROVIDER = "System.Data.SqlClient";
+        private const string METADATA = @"res://*/Data.EF.HccDbContext.csdl|res://*/Data.EF.HccDbContext.ssdl|res://*/Data.EF.HccDbContext.msl";
+
         #endregion
 
         #region Constructor
@@ -51,7 +74,7 @@ namespace Hotcakes.Commerce
         {
             var configFileMap = new ExeConfigurationFileMap
             {
-                ExeConfigFilename = HostingEnvironment.MapPath(DiskStorage.GetHccVirtualPath("hotcakes.config"))
+                ExeConfigFilename = HostingEnvironment.MapPath(DiskStorage.GetHccVirtualPath(HOTCAKESCONFIG))
             };
 
             if (!string.IsNullOrEmpty(configFileMap.ExeConfigFilename))
@@ -67,19 +90,19 @@ namespace Hotcakes.Commerce
 
         public static int MaxVariants
         {
-            get { return GetAppSetting("MaxVariants", 150); }
+            get { return GetAppSetting(SETTING_MAXVARIANTS, SETTING_MAXVARIANTS_DEFAULT); }
         }
 
         public static string DefaultTextEditor
         {
-            get { return GetAppSetting("DefaultTextEditor", "RadEditor"); }
+            get { return GetAppSetting(SETTING_TEXTEDITOR, SETTING_TEXTEDITOR_DEFAULT); }
         }
 
         public static string AffiliateQueryStringName
         {
             get
             {
-                return GetAppSetting("AffiliateQueryStringName", "affid");
+                return GetAppSetting(SETTING_AFFILIATEQS, SETTING_AFFILIATEQS_DEFAULT);
             }
         }
 
@@ -87,7 +110,7 @@ namespace Hotcakes.Commerce
         {
             get
             {
-                return GetAppSetting("InventoryLowHours", 24);
+                return GetAppSetting(SETTING_INVENTORYLOWHRS, SETTING_INVENTORYLOWHRS_DEFAULT);
             }
         }
 
@@ -95,7 +118,7 @@ namespace Hotcakes.Commerce
         {
             get
             {
-                return GetAppSetting("InventoryLowReportLinePrefix", string.Empty);
+                return GetAppSetting(SETTING_INVENTORYLOWPREFIX, string.Empty);
             }
         }
 
@@ -103,7 +126,7 @@ namespace Hotcakes.Commerce
         {
             get
             {
-                return GetAppSetting("NewProductBadgeDays", 30);
+                return GetAppSetting(SETTING_NEWPRODUCTBADGEDAYS, SETTING_NEWPRODUCTBADGEDAYS_DEFAULT);
             }
         }
 
@@ -111,7 +134,7 @@ namespace Hotcakes.Commerce
         {
             get
             {
-                return GetAppSetting("ProductLongDescriptionEditorHeight", 300);
+                return GetAppSetting(SETTING_PRODUCTLONGDESCHGT, SETTING_PRODUCTLONGDESCHGT_DEFAULT);
             }
         }
 
@@ -119,7 +142,7 @@ namespace Hotcakes.Commerce
         {
             get
             {
-                return GetAppSetting<decimal>("ProductMaxPrice", 99999999);
+                return GetAppSetting<decimal>(SETTING_PRODUCTMAXPRICE, SETTING_PRODUCTMAXPRICE_DEFAULT);
             }
         }
 
@@ -154,7 +177,7 @@ namespace Hotcakes.Commerce
                 var result = string.Empty;
                 try
                 {
-                    result = ConfigurationManager.ConnectionStrings["SiteSqlServer"].ConnectionString;
+                    result = ConfigurationManager.ConnectionStrings[CONNECTIONSTRING].ConnectionString;
                 }
                 catch
                 {
@@ -167,11 +190,10 @@ namespace Hotcakes.Commerce
         {
             get
             {
-                var connBuilder = new EntityConnectionStringBuilder();
-                connBuilder.Provider = "System.Data.SqlClient";
-                connBuilder.ProviderConnectionString = HccConnectionString;
-                connBuilder.Metadata =
-                    @"res://*/Data.EF.HccDbContext.csdl|res://*/Data.EF.HccDbContext.ssdl|res://*/Data.EF.HccDbContext.msl";
+                var connBuilder = new EntityConnectionStringBuilder
+                {
+                    Provider = DATAPROVIDER, ProviderConnectionString = HccConnectionString, Metadata = METADATA
+                };
                 return connBuilder.ConnectionString;
             }
         }
