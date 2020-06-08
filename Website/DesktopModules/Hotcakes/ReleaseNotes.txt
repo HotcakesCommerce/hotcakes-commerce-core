@@ -55,12 +55,12 @@
 	<h3><strong>Maintenance Updates</strong></h3>
 	<ul>
 		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/205" target="_blank">Issue 205</a> - SI: Search Results &quot;Randomly&quot; Sorts Vendors &amp; Manufacturers</li>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/288" target="_blank">Issue 288</a> - Resolves display issue with language selector in store administration.</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/288" target="_blank">Issue 288</a> - Resolves display issue with the language selector in the store administration.</li>
 		<li>No Issue - Bootstrap4 Viewset: Removed extra shopping button from the wish list view when empty.</li>
 		<li>No Issue - Bootstrap4 Viewset: Resolved display issue with cart header.</li>
 		<li>No Issue - Bootstrap4 Viewset: Checkout login label controls are now associated with their form controls.</li>
 		<li>No Issue - Bootstrap4 Viewset: Corrected the margin CSS class in the product details view.</li>
 		<li>No Issue - Bootstrap4 Viewset: Updated label formatting in the product details to have a consistent display.</li>
-		<li>No Issue - Bootstrap4 Viewset: Preventing search enginges from indexing add to cart links.</li>
+		<li>No Issue - Bootstrap4 Viewset: Preventing search engines from indexing add to cart links.</li>
 	</ul>
 </div>
