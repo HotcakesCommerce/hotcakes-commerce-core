@@ -1,0 +1,10 @@
+﻿@model List<Hotcakes.Modules.Core.Models.SingleProductViewModel>
+
+<div class="hc-record-grid hc-product-grid clearfix">
+    @foreach (var p in Model)
+    {
+        <div class="hc-wrap3">
+            @Html.Partial("_RenderSingleProduct", p)
+        </div>
+    }
+</div>

@@ -1,0 +1,9 @@
+﻿@model Hotcakes.Modules.Core.Models.OrderViewModel
+
+@Html.Partial("_ViewOrder", Model)
+@Html.Partial("_ViewOrderAdditional", Model.LocalOrder)
+<ul class="dnnActions">
+    <li>
+        <a href="@Url.RouteHccUrl(HccRoute.OrderHistory)" class="dnnSecondaryAction">&laquo; @Localization.GetString("ReturToOrderHistory")</a>
+    </li>
+</ul>

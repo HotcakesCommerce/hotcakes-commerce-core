@@ -1,0 +1,17 @@
+﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+<div class="section">
+    @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PreContentColumnId })
+    <div class="shop"> 
+        <ul class="row products product-thumb-info-list" data-plugin-masonry="masonry"> 
+        @foreach (var item in Model.Products.OrderBy(p => p.Item.LastUpdated).Take(4))
+        {
+            @Html.Partial("_RenderSingleProductListItem", item)
+        }
+        </ul>
+    </div>
+    <div class="row pull-right">
+        <p>
+            <a href="@Url.RouteHccUrl(HccRoute.Category)/Clearance" class="btn btn-primary btn-md">@Localization.GetString("Shop") <em class="fas fa-angle-double-right"></em></a>
+        </p>
+    </div>
+</div>

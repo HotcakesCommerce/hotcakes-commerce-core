@@ -23,7 +23,7 @@
         }
         else
         {
-            <a href="@Url.RouteHccUrl(HccRoute.Cart)?AddSku=@Model.Item.Sku&AddSkuQty=1" class="add-to-cart-product">
+            <a href="@Url.RouteHccUrl(HccRoute.Cart, new {AddSku = Model.Item.Sku, AddSkuQty = 1})" class="add-to-cart-product" rel="nofollow">
                 <span><i class="fas fa-cart-plus"></i>@Localization.GetString("AddToCart")</span>
             </a>
         }

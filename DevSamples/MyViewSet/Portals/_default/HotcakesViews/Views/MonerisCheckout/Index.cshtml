@@ -1,0 +1,12 @@
+﻿@model Hotcakes.Modules.Core.Models.CheckoutViewModel
+@using Hotcakes.Modules.Core.Models;
+
+<div class="hc-monerischeckout">
+    <h2>@Localization.GetString("MonerisCheckout")</h2>
+    @Html.Raw((string)TempData["messages"])
+    <div class="row-fluid">
+        <a href="@Url.RouteHccUrl(HccRoute.Checkout)" class="dnnPrimaryAction">
+            @Localization.GetString("GoToCheckout")
+        </a>
+    </div>
+</div>

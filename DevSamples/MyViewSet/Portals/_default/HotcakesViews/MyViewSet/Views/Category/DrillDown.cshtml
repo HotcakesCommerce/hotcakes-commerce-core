@@ -18,10 +18,10 @@
         </div>
         <div class="col-md-8" data-bind="with: model">
             <h6 class="text-right"><span data-bind="text: TotalCount"></span> @Localization.GetString("ProductCount") </h6>
-            <div class="row-fluid">
+            <div class="row-fluid clearfix">
                 <div class="col-xs-12" data-bind="with: $root">
-                    <div class="hc-sort">
-                        <label>@Localization.GetString("SortBy")</label>
+                    <div class="form-inline hc-sort">
+                        <label for="SortSelectList">@Localization.GetString("SortBy")</label>
                         @Html.DropDownList("sortOrderSelect", Model.SortSelectList, new { data_bind = "value: sortOrder, event: { change: changeSortOrder }", @class = "form-control" })
                     </div>
                     @Html.Partial("_PagerKo")

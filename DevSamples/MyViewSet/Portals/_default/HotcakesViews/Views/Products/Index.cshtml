@@ -1,0 +1,90 @@
+﻿@model Hotcakes.Modules.Core.Models.ProductPageViewModel
+@Html.Partial("_Admin")
+<div class="hc-product">
+    @Html.Action("ProductTrail", "BreadCrumb", new { product = Model.LocalProduct })
+    @Html.Action("Index", "ContentColumn", new { id = Model.LocalProduct.PreContentColumnId })
+
+    @Html.Raw((string)TempData["messages"])
+    <div class="row-fluid">
+        <div class="span8">
+            <div class="hc-product-image">
+                <div id="hcAdditionalImages">
+                    @foreach (var altImg in Model.AlternateImageUrls)
+                    {
+                        <a href="@altImg.OriginalUrl">
+                            <img src="@altImg.SmallUrl" alt="@altImg.MediumlAltText" />
+                        </a>
+                    }
+                </div>
+                <img id="hcProductImage" src="@Model.ImageUrls.OriginalUrl" alt="@Model.ImageUrls.MediumlAltText" />
+            </div>
+        </div>
+        <div class="span4">
+            <h2>@Model.LocalProduct.ProductName</h2>
+            @Html.Partial("_ProductDetails", Model)
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span6 hc-product-description">
+            <h1>Description</h1>
+            @Html.Raw(Model.LocalProduct.LongDescription)
+        </div>
+        @if (Model.RelatedItems.Count > 0)
+        {
+            <div class="span6 hc-related-items">
+                <h1>@Localization.GetString("RelatedProducts")</h1>
+                <div class="hc-record-grid hc-product-grid clearfix">
+                    @foreach (var item in Model.RelatedItems)
+                    {
+                        <div class="hc-wrap3">
+                            @Html.Partial("_RenderSingleProductSimple", item)
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (Model.LocalProduct.IsBundle && Model.LocalProduct.BundledProducts.Count > 0)
+    {
+        <div class="hc-related-items">
+            <h3>@Localization.GetString("BundledProducts")</h3>
+            <div class="hc-record-grid hc-product-grid clearfix">
+                @foreach (var item in Model.BundledItems)
+                {
+                    <div class="hc-wrap5">
+                        @Html.Partial("_RenderBundledProduct", item)
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    @if (Model.AllowReviews)
+    {
+        @Html.Partial("_Reviews")
+    }
+
+
+    @if (Model.LocalProduct.Tabs.Count > 0)
+    {
+        <h2>Specs and Features</h2>
+        <div class="dnnForm hc-product-tabs" id="hcProductTabs">
+            <ul class="dnnAdminTabNav dnnClear">
+                @foreach (var t in Model.LocalProduct.Tabs.OrderBy(y => y.SortOrder))
+                {
+                    <li><a href="#@("Tab" + t.Bvin)">@t.TabTitle</a></li>
+                }
+            </ul>
+            @foreach (var t in Model.LocalProduct.Tabs.OrderBy(y => y.SortOrder))
+            {
+                <div id="@("Tab" + t.Bvin)">
+                    @Html.Raw(t.HtmlData)
+                </div>
+            }
+        </div>
+    }
+    @Html.Action("Index", "ContentColumn", new { id = Model.LocalProduct.PostContentColumnId })
+</div>
+
