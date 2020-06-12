@@ -551,7 +551,7 @@
               <webslicettl>0</webslicettl>
               <cultureCode />
               <content type="DNNHTML" version="08.00.00">
-				<![CDATA[&lt;h1 class=&quot;text-center&quot; style=&quot; margin-top: 1em;&quot;&gt;Hotcakes Commerce CMS&lt;/h1&gt; 
+				<![CDATA[&lt;h1 class=&quot;text-center&quot; style=&quot;margin-top: 1em;&quot;&gt;Hotcakes Commerce CMS&lt;/h1&gt; 
 				&lt;h2 class=&quot;text-center&quot;&gt;[Tab.Home.Header.NextSteps]&lt;/h2&gt;]]>
               </content>
               <modulesettings>
@@ -622,11 +622,11 @@
 					<cultureCode />
 					<content type="DNNHTML" version="08.00.00">
 						<![CDATA[&lt;div class=&quot;gray-container&quot;&gt;&lt;a href=&quot;/DesktopModules/Hotcakes/Core/Admin/SetupWizard/SetupWizard.aspx?step=0&quot;&gt;
-							&lt;img alt=&quot;wizard icon&quot; class=&quot;icon&quot; src=&quot;/portals/0/Images/wizard-icon.png&quot; /&gt;&lt;/a&gt; 
+							&lt;img alt=&quot;&quot; class=&quot;icon&quot; src=&quot;/portals/0/Images/wizard-icon.png&quot; /&gt;&lt;/a&gt; 
 							&lt;h2&gt;[Tab.Home.Step1.Header]&lt;/h2&gt; 
 							&lt;h3&gt;&lt;a href=&quot;/DesktopModules/Hotcakes/Core/Admin/SetupWizard/SetupWizard.aspx?step=0&quot;&gt;Hotcakes Wizard&lt;/a&gt;&lt;/h3&gt; 
 							&lt;p&gt;[Tab.Home.Step1.Description]&lt;/p&gt; 
-							&lt;a href=&quot;/DesktopModules/Hotcakes/Core/Admin/SetupWizard/SetupWizard.aspx?step=0&quot;&gt;&lt;img alt=&quot;wizard sample&quot; class=&quot;sample&quot; src=&quot;/portals/0/Images/wizard-sample.png&quot; /&gt;&lt;/a&gt;
+							&lt;a href=&quot;/DesktopModules/Hotcakes/Core/Admin/SetupWizard/SetupWizard.aspx?step=0&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;sample&quot; src=&quot;/portals/0/Images/wizard-sample.png&quot; /&gt;&lt;/a&gt;
 						&lt;/div&gt;]]>
 					</content>
 					<modulesettings>
@@ -689,15 +689,15 @@
 					<cultureCode />
 					<content type="DNNHTML" version="08.00.00">
 						<![CDATA[&lt;div class=&quot;darkgray-container&quot;&gt;&lt;a href=&quot;/DesktopModules/Hotcakes/Core/Admin/catalog/default.aspx&quot;&gt;
-							&lt;img alt=&quot;products icon&quot; class=&quot;icon&quot; src=&quot;/portals/0/Images/products-icon.png&quot; /&gt;&lt;/a&gt;
+							&lt;img alt=&quot;&quot; class=&quot;icon&quot; src=&quot;/portals/0/Images/products-icon.png&quot; /&gt;&lt;/a&gt;
 
 							&lt;h2&gt;[Tab.Home.Step2.Header]&lt;/h2&gt;
 
-							&lt;h3&gt;&lt;a href=&quot;/DesktopModules/Hotcakes/Core/Admin/catalog/default.aspx&quot;&gt;Sample Products&lt;/a&gt;&lt;/h3&gt;
+							&lt;h3&gt;&lt;a href=&quot;/DesktopModules/Hotcakes/Core/Admin/catalog/default.aspx&quot;&gt;[Tab.Home.Step2.SampleProducts]&lt;/a&gt;&lt;/h3&gt;
 
 							&lt;p&gt;[Tab.Home.Step2.Description]&lt;/p&gt;
 							
-							&lt;a href=&quot;/DesktopModules/Hotcakes/Core/Admin/catalog/default.aspx&quot;&gt;&lt;img alt=&quot;products sample&quot; class=&quot;sample&quot; src=&quot;/portals/0/Images/products-sample.png&quot; /&gt;&lt;/a&gt;
+							&lt;a href=&quot;/DesktopModules/Hotcakes/Core/Admin/catalog/default.aspx&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;sample&quot; src=&quot;/portals/0/Images/products-sample.png&quot; /&gt;&lt;/a&gt;
 						&lt;/div&gt;]]>
 					</content>
 					<modulesettings>
@@ -760,8 +760,8 @@
 					<cultureCode />
 					<content type="DNNHTML" version="08.00.00">
 						<![CDATA[&lt;div class=&quot;blue-container&quot;&gt;
-							&lt;img src=&quot;/portals/0/Images/enjoy-icon.png&quot; class=&quot;icon&quot; alt=&quot;products icon&quot; /&gt;
-							&lt;h2&gt;Step 3&lt;/h2&gt;
+							&lt;img src=&quot;/portals/0/Images/enjoy-icon.png&quot; class=&quot;icon&quot; alt=&quot;&quot; /&gt;
+							&lt;h2&gt;[Tab.Home.Step3.Header]&lt;/h2&gt;
 							&lt;h3&gt;[Tab.Home.StepEnjoy.Header]&lt;/h3&gt;
 							&lt;img src=&quot;/portals/0/Images/store.png&quot; class=&quot;sample&quot; alt=&quot;Hotcakes Commerce CMS&quot; /&gt;
 						&lt;/div&gt;]]>
@@ -826,7 +826,7 @@
 									&lt;div class=&quot;span6&quot;&gt;
 										&lt;img alt=&quot;Hotcakes Commerce&quot; class=&quot;icon&quot; src=&quot;/portals/0/Images/hc-logo-white.png&quot; /&gt;
 										&lt;h2&gt;[Tab.Home.HccCloud.Header]&lt;/h2&gt;
-										&lt;a class=&quot;btn&quot; href=&quot;https://upendoventures.com/Shop/Product/Hotcakes-Commerce-Cloud?utm_source=hcc&amp;utm_medium=cms&amp;utm_campaign=330&quot; target=&quot;_blank&quot;&gt;Hotcakes Cloud&lt;/a&gt;
+										&lt;a class=&quot;btn&quot; href=&quot;https://upendoventures.com/Shop/Product/Hotcakes-Commerce-Cloud?utm_source=hcc&amp;utm_medium=cms&amp;utm_campaign=340&quot; target=&quot;_blank&quot;&gt;Hotcakes Cloud&lt;/a&gt;
 									&lt;/div&gt;
 									&lt;div class=&quot;span6&quot;&gt;
 										&lt;img alt=&quot;Hotcakes Commerce&quot; class=&quot;sample&quot; src=&quot;/portals/0/Images/mac-laptop.png&quot; /&gt;
@@ -896,7 +896,7 @@
 										&lt;p&gt;[Tab.Home.SeeHow.Description]&lt;/p&gt;
 									&lt;/div&gt;
 									&lt;div class=&quot;span5&quot;&gt;
-										&lt;a class=&quot;btn&quot; href=&quot;https://hotcakes.org/Product?utm_source=hcc&amp;utm_medium=cms&amp;utm_campaign=330&quot; target=&quot;_blank&quot;&gt;[Tab.Home.SeeHow.Link.Text]&lt;/a&gt;
+										&lt;a class=&quot;btn&quot; href=&quot;https://mmmcommerce.com/Product?utm_source=hcc&amp;utm_medium=cms&amp;utm_campaign=340&quot; target=&quot;_blank&quot;&gt;[Tab.Home.SeeHow.Link.Text]&lt;/a&gt;
 									&lt;/div&gt;
 								&lt;/div&gt;
 							&lt;/div&gt;
@@ -961,7 +961,19 @@
 					<webslicettl>0</webslicettl>
 					<cultureCode />
 					<content type="DNNHTML" version="08.00.00">
-						<![CDATA[&lt;div class=&quot;row-fluid question-container&quot;&gt;&lt;div class=&quot;span3&quot;&gt;&lt;a href=&quot;https://hotcakes.org/Community?utm_source=hcc&amp;utm_medium=cms&amp;utm_campaign=330&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;icon&quot; src=&quot;/portals/0/Images/question-icon.png&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&quot;span9&quot;&gt;&lt;h2&gt;[Tab.Home.GetHelp.Header]&lt;/h2&gt;&lt;p&gt;[Tab.Home.GetHelp.Para1]&lt;/p&gt;&lt;p&gt;[Tab.Home.GetHelp.Para2]&lt;/p&gt;&lt;a class=&quot;btn&quot; href=&quot;https://upendoventures.com/Support?utm_source=hcc&amp;utm_medium=cms&amp;utm_campaign=330&quot; target=&quot;_blank&quot;&gt;[Tab.Home.GetHelp.Link.Text]&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;]]>
+						<![CDATA[&lt;div class=&quot;row-fluid question-container&quot;&gt;
+							&lt;div class=&quot;span3&quot;&gt;
+								&lt;a href=&quot;https://hotcakes.org/Community?utm_source=hcc&amp;utm_medium=cms&amp;utm_campaign=340&quot; target=&quot;_blank&quot;&gt;
+									&lt;img alt=&quot;&quot; class=&quot;icon&quot; src=&quot;/portals/0/Images/question-icon.png&quot; /&gt;
+								&lt;/a&gt;
+							&lt;/div&gt;
+							&lt;div class=&quot;span9&quot;&gt;
+								&lt;h2&gt;[Tab.Home.GetHelp.Header]&lt;/h2&gt;
+								&lt;p&gt;[Tab.Home.GetHelp.Para1]&lt;/p&gt;
+								&lt;p&gt;[Tab.Home.GetHelp.Para2]&lt;/p&gt;
+								&lt;a class=&quot;btn&quot; href=&quot;https://upendoventures.com/Support?utm_source=hcc&amp;utm_medium=cms&amp;utm_campaign=340&quot; target=&quot;_blank&quot;&gt;[Tab.Home.GetHelp.Link.Text]&lt;/a&gt;
+							&lt;/div&gt;
+						&lt;/div&gt;]]>
 					</content>
 					<modulesettings>
 						<modulesetting>
