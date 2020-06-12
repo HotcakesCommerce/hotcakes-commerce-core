@@ -1,0 +1,130 @@
+body {
+}
+@import "_views_common.less";
+
+/* ---------- Address Book ---------- */
+.hc-addressbook {
+	margin-top: 40px;
+    margin-left: -40px;
+}
+.hc-address {
+    margin-left: 40px;
+    margin-bottom: 40px;
+    height: 200px;
+    background: #e0e0e0;
+    position: relative;
+    -webkit-box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.3);
+
+    .hc-title {
+        background: white;
+        font-size: 18px;
+        font-weight: bold;
+        color: black;
+        padding: 10px;
+    }
+
+    .hc-lines {
+        font-size: 12px;
+        padding: 15px 10px 5px 10px;
+        line-height: 12px;
+        height: 70px;
+    }
+
+    .hc-actions {
+        text-align: right;
+        padding: 10px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+
+        .hc-actions a,
+        .hc-actions input[type="submit"] {
+            font-weight: bold;
+            font-size: 12px;
+            text-decoration: none;
+            line-height: normal;
+            vertical-align: top;
+        }
+}
+
+.hc-addressbook-edit {
+    width: 50%;
+    min-width: 470px;
+
+    .dnnActions {
+        float: right;
+        margin-right: 50px;
+    }
+}
+@media @media-tablet {
+    .hc-addressbook-edit {
+        width: 100%;
+        min-width: 100px;
+    }
+}
+/* ---------- Order History ---------- */
+.hc-orderhistory .hc-actions{ width: 40%; text-align: right; }
+
+/* --------------- WishList --------------- */
+.hc-wishlist {
+    .hc-recimage {
+        width: 20%;
+    }
+
+    .hc-recname {
+        float: left;
+        width: 40%;
+    }
+
+    .hc-reccontrols {
+        padding-top: 20px;
+        .hc-recprice {
+            float: none;
+        }
+
+        td {
+            padding: 10px;
+            vertical-align: middle;
+        }
+
+        input {
+            margin: 0;
+        }
+    }
+}
+@media @media-desktop {
+    .hc-wishlist {
+        .hc-recimage {
+            min-width: 150px;
+        }
+
+        .hc-recname {
+            width: 75%;
+        }
+    }
+} 
+@media @media-tablet {
+    .hc-wishlist {
+        .hc-recimage {
+            width: 40%;
+            min-width: 150px;
+        }
+
+        .hc-recname {
+            width: 50%;
+        }
+    }
+}
+@media @media-phone {
+    .hc-wishlist {
+        .hc-recimage {
+            width: 100%;
+        }
+
+        .hc-recname {
+            width: 100%;
+        }
+    }
+}

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Hotcakes.Commerce.Contacts.Address>
+
+@helper GetTitle(Hotcakes.Commerce.Contacts.Address a)
+{
+    <text>@a.FirstName</text>
+    if (a.MiddleInitial.Trim().Length > 0)
+    {
+    <text> @a.MiddleInitial</text>
+    }
+    <text> @a.LastName</text>
+}
+<div class="container">
+    <div class="row">
+        <h1>@Localization.GetString("AddressBook")</h1>
+
+        <div class="col-12">
+            @Html.Raw((string)TempData["messages"])
+        </div>
+        
+        <h6>@Model.Count().ToString() @Localization.GetString("AddressesFound")</h6>
+    </div>
+    <div class="row">
+        <div class="col-12 text-right mb-4">
+            <a href="@Url.RouteHccUrl(HccRoute.AddressBook, new { action = "edit", id = "new" })" class="btn btn-primary">
+                <i class="fas fa-plus"></i>@Localization.GetString("AddNewAddress")
+            </a>
+        </div>
+    </div>
+    <hr />
+    <div class="container">
+        <div class="row card-deck hc-address-cards mb-5">
+            @foreach (Hotcakes.Commerce.Contacts.Address a in Model)
+            {
+                <div class="col-xs-6 col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>@GetTitle(a)</h5>
+                        </div>
+                        <div class="card-body">
+                            @if (!string.IsNullOrEmpty(a.Company)){
+                                <p class="hc-address-company"><strong>@a.Company</strong></p>
+                            }
+                            <p class="hc-address-address">@Html.Raw(a.GetLinesHtml())</p>
+                        </div>
+                        <div class="card-footer text-right">
+                            @using (Html.BeginHccRouteForm(HccRoute.AddressBook, new { action = "delete", id = a.Bvin }, FormMethod.Post))
+                            {
+                                <input type="submit" value="@Localization.GetString("Delete")" data-confirm="@Localization.GetString("DeleteAddress")" class="btn btn-secondary btn-sm"/>
+
+                                <a href="@Url.RouteHccUrl(HccRoute.AddressBook, new { action = "edit", id = a.Bvin })" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-pencil-alt"></i>@Localization.GetString("Edit")
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-12 text-center">
+            <a href="@Url.RouteHccUrl(HccRoute.AddressBook, new { action = "edit", id = "new" })" class="btn btn-primary">
+                <i class="fas fa-plus""></i>@Localization.GetString("AddNewAddress")
+            </a>
+        </div>
+    </div>
+</div>

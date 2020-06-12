@@ -1,0 +1,24 @@
+﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+<div class="section">
+    @if (Model.SubCategories.Count > 0)
+    {
+        <div class="featured-boxes featured-boxes-style-4">
+            <div class="row">
+            @foreach (var subcat in Model.SubCategories.OrderBy(c => c.LocalCategory.SortOrder).Take(4))
+            {
+                <div class="col-md-3">
+                    <div class="featured-box featured-box-primary" data-appear-animation="fadeInUp" data-appear-animation-delay="300">
+                        <div class="box-content">
+                            <em class="icon-featured fas fa-tags"></em>
+                            <a href="@subcat.LinkUrl"><h4>@subcat.Name</h4></a>
+
+                            <p>@subcat.LocalCategory.Description</p>
+                            <p><a href="@subcat.LinkUrl">@Localization.GetString("Shop") <em class="fas fa-angle-double-right"></em></a></p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    }
+</div>

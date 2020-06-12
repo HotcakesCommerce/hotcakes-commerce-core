@@ -1,0 +1,107 @@
+﻿@model Hotcakes.Modules.Core.Models.CheckoutViewModel
+@using Hotcakes.Modules.Core.Models;
+
+<div class="hc-paypalcheckout">
+    <h2>@Localization.GetString("PayPalExpressCheckout")</h2>
+    @Html.Raw((string)TempData["messages"])
+    <div class="row-fluid">
+        <div class="dnnForm span6 hc-order-details">
+            <div class="hc-address">
+                <div class="hc-title">@Localization.GetString("ShipTo"):</div>
+                <div class="hc-lines">
+                    <div class="dnnFormItem">
+                        <label class="dnnLabel">@Localization.GetString("Country"):</label>
+                        <span>@Model.CurrentOrder.ShippingAddress.CountryDisplayName</span>
+                    </div>
+                    <div class="dnnFormItem">
+                        <label class="dnnLabel">@Localization.GetString("First"):</label>
+                        <span>
+                            @Model.CurrentOrder.ShippingAddress.FirstName
+                        </span>
+                    </div>
+                    <div class="dnnFormItem">
+                        <label class="dnnLabel">@Localization.GetString("Last"):</label>
+                        <span>@Model.CurrentOrder.ShippingAddress.LastName</span>
+                    </div>
+                    @if (Model.CurrentOrder.ShippingAddress.Company.Trim().Length > 0)
+                    {
+                        <div class="dnnFormItem">
+                            <label class="dnnLabel">@Localization.GetString("Company"):</label>
+                            <span>@Model.CurrentOrder.ShippingAddress.Company</span>
+                        </div>
+                    }
+                    <div class="dnnFormItem">
+                        <label class="dnnLabel">@Localization.GetString("Address"):</label>
+                        <span>@Model.CurrentOrder.ShippingAddress.Line1
+                            @if (Model.CurrentOrder.ShippingAddress.Line2.Trim().Length > 0)
+                            {
+                                <br />@Model.CurrentOrder.ShippingAddress.Line2
+                            }
+                        </span>
+                    </div>
+                    <div class="dnnFormItem">
+                        <label class="dnnLabel">@Localization.GetString("City"):</label>
+                        <span>@Model.CurrentOrder.ShippingAddress.City</span>
+                    </div>
+                    <div class="dnnFormItem">
+                        <label class="dnnLabel">@Localization.GetString("StateZip"):</label>
+                        <span>
+                            @Model.CurrentOrder.ShippingAddress.RegionDisplayName,
+                        @Model.CurrentOrder.ShippingAddress.PostalCode
+                        </span>
+                    </div>
+                    @if (Model.CurrentOrder.UserEmail.Trim().Length > 0)
+                    {
+                        <div class="dnnFormItem">
+                            <label class="dnnLabel">@Localization.GetString("Email"):</label>
+                            <span>@Model.CurrentOrder.UserEmail</span>
+                        </div>
+                    }
+                    @if (Model.CurrentOrder.ShippingAddress.Phone.Trim().Length > 0)
+                    {
+                        <div class="dnnFormItem">
+                            <label class="dnnLabel">@Localization.GetString("Phone"):</label>
+                            <span>@Model.CurrentOrder.ShippingAddress.Phone</span>
+                        </div>
+                    }
+                    <div class="dnnFormItem">
+                        <label class="dnnLabel">@Localization.GetString("PaypalAddressStatus"):</label>
+                        <span>@ViewBag.AddressStatus</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dnnForm span5 offset1">
+            @using (Html.BeginHccRouteForm(HccRoute.ThirdPartyPayment, new { token = Model.PayPalToken, payerid = Model.PayPalPayerId }, FormMethod.Post))
+            {
+                <h3>@Localization.GetString("Shipping")</h3>
+                <div class="dnnFormItem">
+                    @Html.Raw(ViewBag.ShippingRates)
+                </div>
+                <div class="dnnFormItem">
+                    @if (Model.ShowAgreeToTerms)
+                    {
+                        <input type="checkbox" id="agreed" name="agreed" @if (Model.AgreedToTerms)
+                                                                         { <text>checked="checked"</text> } />
+                        @Model.AgreedToTermsDescription
+                        <br />
+                        <a href="@Url.RouteHccUrl(HccRoute.Terms)" target="_blank" class="viewSiteTerms">@Localization.GetString("ViewSiteTerms") @Model.LabelTerms</a>
+                    }
+                </div>
+                <ul class="dnnActions">
+                    <li>
+                        <a href="@Url.RouteHccUrl(HccRoute.Cart)" class="dnnSecondaryAction">
+                            @Localization.GetString("ContinueShopping")
+                        </a>
+                    </li>
+                    @if (ViewBag.HideCheckout == null || ViewBag.HideCheckout == false)
+                    {
+                        <li>
+                            <input type="submit" id="btnsubmit" value="@Localization.GetString("PlaceOrder")" class="dnnPrimaryAction" />
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+﻿@model Hotcakes.Modules.Core.Models.PagerViewModel
+@helper IsCurrent(int page)
+{
+    if (Model.CurrentPage == page)
+    {
+        <text>class="hc-active"</text>
+    }
+}           
+@helper RenderPager() 
+{     
+    int pages = Model.PageRange == 0 ? Model.TotalPages : Math.Min(Model.TotalPages, Model.CurrentPage + Model.PageRange); 
+    int pageStart = Model.PageRange == 0 ? 1 : Math.Max(1, Model.CurrentPage - 1);
+
+    <ul class="dnnButtonGroup"> 
+        @*<li><a href="@String.Format(Model.PagerUrlFormatFirst, 1)">|&lt;</a></li>*@
+        @if (Model.CurrentPage > 1) 
+        { 
+            <li><a href="@String.Format(Model.PagerUrlFormat, Model.CurrentPage - 1)">&laquo;</a></li> 
+        } 
+        
+        @for (int i = pageStart; i <= pages; i++) 
+        {         
+            <li @IsCurrent(i)>        
+            @if (i == 1)
+            { 
+                <a href="@String.Format(Model.PagerUrlFormatFirst, i)">@i</a>
+            }
+            else
+            {
+                <a href="@String.Format(Model.PagerUrlFormat, i)">@i</a>
+            }
+            </li>
+        }   
+
+        @if (Model.CurrentPage < pages)
+        { 
+            <li><a href="@String.Format(Model.PagerUrlFormat, Model.CurrentPage + 1)">&raquo;</a></li> 
+        }
+        @*<li><a href="@String.Format(Model.PagerUrlFormat, pages)">&gt;|</a></li>*@
+    </ul> 
+}
+<div class="clearfix">
+@if (ViewData["sortByList"] != null)
+{
+    var sortList = (IEnumerable<SelectListItem>) ViewData["sortByList"];
+    if (sortList.Count() > 1)
+    {
+        <div class="hc-sort">
+            <label>@Localization.GetString("SortBy")</label>
+            @Html.DropDownList("sortOrderSelect", (IEnumerable<SelectListItem>) ViewData["sortByList"], new {onchange = "window.open(this.options[this.selectedIndex].value, '_top')"})
+        </div>
+    }
+}
+@if (Model.TotalPages > 1)
+{
+    @RenderPager() 
+}
+</div>           
+

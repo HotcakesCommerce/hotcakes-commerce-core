@@ -3,6 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
+// Copyright (c) 2020 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -533,7 +534,7 @@ namespace Hotcakes.Commerce.Search
                     Select(f => f.Convert()).
                     ToList();
 
-                result.Categories = ProductSearchHelper.GroupCategories(result.Categories);
+                result.Categories = ProductSearchHelper.GroupCategories(result.Categories).OrderByDescending(c => c.Count).ThenBy(c => c.Name).ToList();
 
                 result.Manufacturers = dbQueryJ.
                     Join(context.hcc_Manufacturer, s => s.p.ManufacturerID, m => m.bvin, (s, m) => m).
@@ -543,7 +544,9 @@ namespace Hotcakes.Commerce.Search
                         Id = m.Key.ManufacturerId,
                         Name = m.Key.ManufacturerName,
                         Count = m.Sum(t => 1)
-                    }).ToList().
+                    })
+                    .OrderByDescending(m => m.Count).ThenBy(m => m.Name)
+                    .ToList().
                     Select(f => f.Convert()).
                     ToList();
 
@@ -555,7 +558,9 @@ namespace Hotcakes.Commerce.Search
                         Id = v.Key.VendorId,
                         Name = v.Key.VendorName,
                         Count = v.Sum(t => 1)
-                    }).ToList().
+                    })
+                    .OrderByDescending(v => v.Count).ThenBy(v => v.Name)
+                    .ToList().
                     Select(f => f.Convert()).
                     ToList();
 
@@ -585,7 +590,7 @@ namespace Hotcakes.Commerce.Search
                         Name = pt.ItemTranslation.ProductTypeName,
                         Count = pt.Count
                     }).
-                    OrderBy(f => f.Name).
+                    OrderByDescending(f => f.Count).ThenBy(f => f.Name).
                     ToList().
                     Select(f => f.Convert()).
                     ToList();
@@ -668,6 +673,11 @@ namespace Hotcakes.Commerce.Search
                         }
                     }
                     result.Properties.Add(propertyFacet);
+                }
+
+                if (result.Properties != null && result.Properties.Count > 0)
+                {
+                    result.Properties = result.Properties.OrderByDescending(p => p.FacetItems.Count).ThenBy(p => p.DisplayName).ToList();
                 }
                 // End - Build product type properties facets
 

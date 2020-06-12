@@ -1,0 +1,57 @@
+﻿@model Hotcakes.Modules.Core.Models.CategoryPageViewModel
+@Html.Partial("_Admin")
+@Html.Action("CategoryTrail", "BreadCrumb", new { cat = Model.LocalCategory })
+<!-- Hotcakes Commerce: Category > BulkQuantityList -->
+<div class="container">
+    <div class="row hc-category">
+        @if (Model.LocalCategory.ShowTitle)
+        {
+            <div class="col-12">
+                <h1>@Model.LocalCategory.Name</h1>
+            </div>
+        }
+        @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PreContentColumnId })
+        @Html.Partial("_Header", Model)
+        @Html.Partial("_Pager", Model.PagerData, new ViewDataDictionary { { "sortByList", Model.SortSelectList } })
+        
+        <div class="col-12">
+            @using (Html.BeginHccRouteForm(HccRouteNames.CartBulkAdd))
+            {
+                <div class="table-responsive-md">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <th>@Localization.GetString("Quantity")</th>
+                            <th>@Localization.GetString("Product")</th>
+                        </thead>
+                        @foreach (var item in Model.Products)
+                        {
+                            <tr>
+                                <td class="hc-qty">
+                                    @if (item.Item.HasOptions() || item.Item.IsGiftCard)
+                                    {
+                                        <text>&nbsp;</text>
+                                    }
+                                    else
+                                    {
+                                        <input type="text" name="@Html.Raw("bulkqty" + item.Item.Bvin)" value="0" maxlength="5" class="form-control"/>
+                                    }
+                                </td>
+                                <td>
+                                    @Html.Partial("_RenderSingleProductSimple", item)
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-right">
+                        <input type="submit" name="addtocart" class="btn btn-primary" value="@Localization.GetString("AddToCart")" />
+                    </div>
+                </div>
+            }
+        </div>
+
+        @Html.Partial("_Pager", Model.PagerData)
+        @Html.Action("Index", "ContentColumn", new { id = Model.LocalCategory.PostContentColumnId })
+    </div>
+</div>

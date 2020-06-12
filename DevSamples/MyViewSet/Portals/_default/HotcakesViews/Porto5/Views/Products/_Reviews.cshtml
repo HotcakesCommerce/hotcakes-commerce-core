@@ -1,0 +1,72 @@
+﻿@model Hotcakes.Modules.Core.Models.ProductPageViewModel
+<a name="reviews"></a>
+<div class="row">
+    <div class="col-12 mb-2">
+        <h3>@Localization.GetString("Reviews") <span>(@Model.LocalProduct.ReviewsApproved.Count)</span></h3>
+    </div>
+    @Html.Action("TopReviews", "ProductReviews", new { howMany = 3, reviews = Model.LocalProduct.ReviewsApproved })
+    @if (ViewBag.IsLoggedIn || Model.LocalProduct.ReviewsApproved.Count > 3)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-right">
+                    <ul class="list-unstyled list-inline">
+                        <li class="list-inline-item">
+                            @if (ViewBag.IsLoggedIn)
+                            {
+                                <a href="#hcWriteReview" id="hcWriteReviewbtn" class="btn btn-primary btn-sm hc-popup" data-min-width="400" data-min-height="350" title="@Localization.GetString("WriteReviewFor") @Model.LocalProduct.ProductName">
+                                    <i class="far fa-thumbs-up"></i>@Localization.GetString("WriteReview")
+                                </a>
+                            }
+                        </li>
+                        <li class="list-inline-item">
+                            @if (Model.LocalProduct.ReviewsApproved.Count > 3)
+                            {
+                                <a class="btn btn-secondary btn-sm" href="@Url.RouteHccUrl(HccRoute.ProductReview, new {slug = Model.LocalProduct.UrlSlug})">
+                                    <i class="fas fa-book"></i>@Localization.GetString("ReadAllReviews")
+                                </a>
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@* WRITE REVIEW DIALOG *@
+<div id="hcWriteReview" style="display: none;">
+    <div class="container w-75">
+        <div class="row mt-3">
+            <div class="col-12">
+                <div id="hcSubmitReviewMessage" class="dnnFormMessage" style="display:none"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                @using (Html.BeginHccRouteForm(HccRouteNames.ProductReviews, new { action = "create" }, FormMethod.Post, new { id = "hcSubmitReviewForm" }))
+                {
+                    <div class="form-group row">
+                        <label for="rating">@Localization.GetString("Rating")</label>
+                        <select id="rating" name="rating" class="form-control">
+                            <option value="5" selected="selected">5 @Localization.GetString("Stars")</option>
+                            <option value="4">4 @Localization.GetString("Stars")</option>
+                            <option value="3">3 @Localization.GetString("Stars")</option>
+                            <option value="2">2 @Localization.GetString("Stars")</option>
+                            <option value="1">1 @Localization.GetString("Star")</option>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <label for="newreview">@Localization.GetString("YourReview")</label>
+                        <textarea id="newreview" name="newreview" rows="6" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group row text-right pull-right">
+                        <input type="button" id="hcSubmitReviewBtn" value="@Localization.GetString("Submit")" class="btn btn-primary" />
+                    </div>
+                    @Html.Hidden("productbvin", @Model.LocalProduct.Bvin)
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@* END WRITE REVIEW DIALOG *@

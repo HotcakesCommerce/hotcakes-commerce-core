@@ -37,12 +37,13 @@
                                     <tr>
                                         <th width="10%" class="d-none d-sm-block">&nbsp;</th>
                                         <th width="40%">@Localization.GetString("Item")</th>
-                                        <td width="15%" class="d-none d-sm-block">@Localization.GetString("Price")</td>
+                                        <th width="15%" class="d-none d-sm-block">@Localization.GetString("Price")</th>
                                         <th width="20%" class="d-none d-sm-block">@Localization.GetString("Quantity")</th>
                                         <th width="10%">@Localization.GetString("Total")</th>
-                                        <th width="5%"></th>
+                                        <th width="5%">&nbsp;</th>
                                     </tr>
                                 </thead>
+                                <tbody>
                                 @foreach (var item in Model.LineItems)
                                 {
                                     <tr>
@@ -115,6 +116,7 @@
                                         </td>
                                     </tr>
                                 }
+                                </tbody>
                             </table>
                         </div>
                     </div>

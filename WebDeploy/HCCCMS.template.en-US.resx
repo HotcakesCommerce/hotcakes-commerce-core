@@ -277,6 +277,12 @@ Fax: (555) 555-4564</value>
   <data name="Tab.Home.Step2.Description" xml:space="preserve">
     <value>Don't know what products to add yet? Add some samples in 1-click!</value>
   </data>
+  <data name="Tab.Home.Step2.SampleProducts" xml:space="preserve">
+    <value>Sample Products</value>
+  </data>
+  <data name="Tab.Home.Step3.Header" xml:space="preserve">
+    <value>Step 3</value>
+  </data>
   <data name="Tab.Home.StepEnjoy.Header" xml:space="preserve">
     <value>Enjoy building your new online store!</value>
   </data>

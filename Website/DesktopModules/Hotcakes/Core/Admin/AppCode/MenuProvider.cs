@@ -3,6 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
+// Copyright (c) 2020 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -33,6 +34,7 @@ using System.Xml.XPath;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Services.Localization;
 using Hotcakes.Commerce;
+using Hotcakes.Commerce.Globalization;
 using Hotcakes.Modules.Core.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
@@ -40,27 +42,10 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
     [Serializable]
     public class MenuProvider
     {
-        protected static string LocalResourceFile
-        {
-            get
-            {
-                string language = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
-                if (System.Web.HttpContext.Current.Request.Cookies["language"] != null)
-                {
-                    language = string.Concat(".", HttpContext.Current.Request.Cookies["language"].Value);
-                }
-
-                if (language.ToLower() == ".en-us")
-                {
-                    language = string.Empty;
-                }
-
-                return (string.Format("~/DesktopModules/Hotcakes/Core/Admin/App_LocalResources/AdminControlBar{0}.resx", language));
-            }
-        }
-
+        private const string localResourceFile =
+            "~/DesktopModules/Hotcakes/Core/Admin/App_LocalResources/AdminControlBar.resx";
         private const string _MenuFileVirtualPath = "~/DesktopModules/Hotcakes/Core/Admin/Menu.xml";
-
+        private static ILocalizationHelper localization { get; set; }
         private static List<MenuItem> _menuItems;
 
         public static List<MenuItem> MenuItems
@@ -158,18 +143,19 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
 
         private static List<MenuItem> ParseXml(XElement el)
         {
-            string LocalizedFile = LocalResourceFile;
-
             if (!el.HasElements)
             {
                 return new List<MenuItem>();
             }
+
+            localization = Factory.Instance.CreateLocalizationHelper(localResourceFile);
+
             return el.Elements()
                 .Select(e => new MenuItem
                 {
                     Name = e.GetAttributeValue("Name"),
                     //Localize Text String that Loaded from Menu.xml
-                    Text = Localization.GetString(e.GetAttributeValue("Text"), LocalizedFile),
+                    Text = localization.GetString(e.GetAttributeValue("Text")),
                     BaseUrl = e.GetAttributeValue("BaseUrl"),
                     Url = e.GetAttributeValue("Url"),
                     PermissionToken = e.GetAttributeValue("Permission"),

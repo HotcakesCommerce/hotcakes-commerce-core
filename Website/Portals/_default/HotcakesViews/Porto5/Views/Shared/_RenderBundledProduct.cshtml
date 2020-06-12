@@ -1,0 +1,14 @@
+﻿@model Hotcakes.Modules.Core.Models.BundledProductViewModel
+
+<div class="hc-record">
+    <div class="hc-recimage">
+        <a href="@Model.ProductLink">
+            <img class="hc-autosize" src="@Model.ImageUrls.SmallUrl" alt="@Model.ImageUrls.SmallAltText" />
+        </a>
+    </div>
+    <h2 class="hc-recname">
+        @Model.BundledProductAdv.Quantity
+        X&nbsp;&nbsp;
+        <a href="@Model.ProductLink">@Model.Item.ProductName</a>
+    </h2>
+</div>

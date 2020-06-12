@@ -1,0 +1,79 @@
+﻿@model Hotcakes.Modules.Core.Areas.Account.Models.OrderHistoryViewModel
+@functions
+{
+    string OrderLink(Hotcakes.Commerce.Orders.OrderSnapshot o)
+    {
+        if (o == null)
+            return string.Empty;
+        
+        return Url.RouteHccUrl(HccRoute.OrderHistory, new { action = "details", id = o.bvin });
+    }
+}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>@Localization.GetString("OrderHistory")</h2>
+        </div>
+    </div>
+
+    @if (HccApp.CurrentStore.Settings.RewardsPointsEnabled)
+    {
+        <div class="row">
+            <div class="col-12">
+                <h5>@Localization.GetString("YouRewardsPoints") @Model.RewardPoints</h5>
+            </div>
+        </div>
+    }
+    
+    <div class="row mb-3">
+            <div class="col-12">
+            @Html.Raw((string)TempData["messages"])
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <td class="d-none d-sm-block">
+                                    @Localization.GetString("TimeOfOrder")
+                                </td>
+                                <td>
+                                    @Localization.GetString("OrderNumber")
+                                </td>
+                                <td>
+                                    @Localization.GetString("Amount")
+                                </td>
+                                <td>
+                                    @Localization.GetString("Status")
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                        </thead>
+                        @foreach (var o in Model.Orders)
+                        {
+                            <tr>
+                                <td class="d-none d-sm-block">@DateHelper.ConvertUtcToStoreTime(HccApp, o.TimeOfOrderUtc)</td>
+                                <td>@o.OrderNumber</td>
+                                <td>@o.TotalGrand.ToString("C")</td>
+                                <td>@LocalizationUtils.GetOrderStatus(o.StatusName)</td>
+                                <td class="text-right">
+                                    <a href="@OrderLink(o)" class="btn btn-default btn-sm">
+                                        <i class="far fa-eye"></i>@Localization.GetString("ViewDetails")
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Html.Partial("_Pager", Model.PagerData)
+</div>

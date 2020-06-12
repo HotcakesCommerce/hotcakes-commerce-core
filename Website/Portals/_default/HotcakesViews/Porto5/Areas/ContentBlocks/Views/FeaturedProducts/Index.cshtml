@@ -1,0 +1,14 @@
+﻿@model Hotcakes.Modules.Core.Areas.ContentBlocks.Models.FeaturedProductsViewModel
+<!-- Hotcakes Commerce: Featured Products view -->
+<div class="container">
+    <div class="row hc-record-grid hc-product-grid">
+        <div class="shop w-100">
+            <ul class="row products product-thumb-info-list" data-plugin-masonry="masonry"> 
+            @foreach (var product in Model.Items.Take(8))
+            {
+                @Html.Partial("_RenderSingleProductListItem", product)
+            }
+            </ul>
+        </div>
+    </div>
+</div>

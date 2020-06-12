@@ -3,6 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
+// Copyright (c) 2020 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -41,45 +42,44 @@ namespace Hotcakes.Commerce.Catalog
         }
 
         /// <summary>
-        ///     The unique ID or primary key of the wish list item.
-        /// </summary>
-        public long Id { get; set; }
-
-        /// <summary>
-        ///     This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
-        /// </summary>
-        public long StoreId { get; set; }
-
-        /// <summary>
         ///     Defines the user account that the wish list item belongs to.
         /// </summary>
         public string CustomerId { get; set; }
 
         /// <summary>
-        ///     The last updated date is used for auditing purposes to know when the wish list item was last updated.
+        /// The unique ID or primary key of the wish list item.
+        /// </summary>
+        public long Id { get; set; }
+
+        /// <summary>
+        /// The last updated date is used for auditing purposes to know when the wish list item was last updated.
         /// </summary>
         public DateTime LastUpdatedUtc { get; set; }
 
         /// <summary>
-        ///     The unique ID of the product that this wish list item refers to.
+        /// The unique ID of the product that this wish list item refers to.
         /// </summary>
         public string ProductId { get; set; }
 
         /// <summary>
-        ///     The amount of products that this wish list item is saving.
+        /// Displays any selected choices made by the customer when saving the product to the wish list.
+        /// </summary>
+        public string ProductShortDescription { get; set; }
+
+        /// <summary>
+        /// The amount of products that this wish list item is saving.
         /// </summary>
         public int Quantity { get; set; }
 
         /// <summary>
-        ///     When applicable, the choices or options of the product.
+        /// When applicable, the choices or options for  the saved product.
         /// </summary>
         public OptionSelections SelectionData { get; set; }
 
-
         /// <summary>
-        /// Show Additional Product Variant/Selection
+        /// This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
         /// </summary>
-        public string ProductShortDescription { get; set; }
+        public long StoreId { get; set; }
 
         private void Init()
         {

@@ -1,0 +1,10 @@
+﻿@model Hotcakes.Modules.Core.Models.SideMenuViewModel
+<div class="hc-top-weekly-sellers">
+    <h2>@Model.Title</h2>
+    <ol>
+        @foreach (var item in Model.Items)
+        {
+            <li><a href="@item.Url" title="@item.Title">@item.Name</a></li>
+        }
+    </ol>
+</div>

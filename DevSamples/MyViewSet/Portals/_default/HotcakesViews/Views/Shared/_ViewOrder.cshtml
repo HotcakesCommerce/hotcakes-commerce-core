@@ -1,0 +1,56 @@
+﻿@model Hotcakes.Modules.Core.Models.OrderViewModel
+@Html.Partial("~/areas/account/views/shared/_OrderDownloads.cshtml", Model.LocalOrder)
+
+<div class="hc-order-details">
+    @if (ViewData["showStatus"] != null)
+    {
+        <div class="hc-order-status">@Model.FullOrderStatusDescription</div>
+    }
+    <h2>@Localization.GetString("Order") @Model.OrderNumber</h2>
+
+    <div class="hcValidationSummary"></div>
+    <div class="hc-addresses">
+        <div class="hc-wrap3">
+            <div class="hc-address">
+                <div class="hc-title">@Localization.GetString("BillTo"):</div>
+                <div class="hc-lines">@Html.Raw(Model.BillingAddressAsHtml)</div>
+            </div>
+        </div>
+        @if (Model.HasShippingItems)
+        {
+            <div class="hc-wrap3">
+                <div class="hc-address">
+                    <div class="hc-title">@Localization.GetString("ShipTo"):</div>
+                    <div class="hc-lines">@Html.Raw(Model.ShippingAddressAsHtml)</div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @Html.Partial("_ViewOrderItems", Model.Items)
+
+    <div class="row-fluid">
+        <div class="span6">
+            @if (!string.IsNullOrWhiteSpace(Model.Instructions))
+            {
+                <div class="hc-instructions">
+                    <h4>@Localization.GetString("CustomerInstructions"):</h4>
+                    @Model.Instructions
+                </div>
+            }
+            @if (Model.Coupons.Count > 0)
+            {
+                <div class="hc-coupons">
+                    <h4>@Localization.GetString("CodesUsed"):</h4>
+                    @foreach (var coupon in Model.Coupons)
+                    {
+                        @coupon.CouponCode<br />
+                    }
+                </div>
+            }
+        </div>
+        <div class="span4 offset2 hc-totals">
+            @Html.Raw(Model.TotalsAsTable)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BillingCityValMsg.Text" xml:space="preserve">
+    <value>Billing City is required</value>
+  </data>
+  <data name="BillingCountryNameValMsg.Text" xml:space="preserve">
+    <value>Billing Country Name is required</value>
+  </data>
+  <data name="BillingFirstNameValMsg.Text" xml:space="preserve">
+    <value>Billing First Name is required</value>
+  </data>
+  <data name="BillingLastNameValMsg.Text" xml:space="preserve">
+    <value>Billing Last Name is required</value>
+  </data>
+  <data name="BillingPostalCodeValMsg.Text" xml:space="preserve">
+    <value>Billing Postal Code is required</value>
+  </data>
+  <data name="BillingRegionStateValMsg.Text" xml:space="preserve">
+    <value>Billing Region/State is required</value>
+  </data>
+  <data name="BillingStreetValMsg.Text" xml:space="preserve">
+    <value>Billing Street is required</value>
+  </data>
+  <data name="CardExpirationMonthValMsg.Text" xml:space="preserve">
+    <value>Card Expiration Month is required</value>
+  </data>
+  <data name="CardExpirationYearValMsg.Text" xml:space="preserve">
+    <value>Card Expiration Year is required</value>
+  </data>
+  <data name="CardSecurityCodeValMsg.Text" xml:space="preserve">
+    <value>Card Security Code is required</value>
+  </data>
+  <data name="CardTypeNotAcceptedError.Text" xml:space="preserve">
+    <value>That card type is not accepted by this store. Please use a different card.</value>
+  </data>
+  <data name="CompanyAccountNumberValMsg.Text" xml:space="preserve">
+    <value>Company Account Number is required</value>
+  </data>
+  <data name="EmailAddressValMsg.Text" xml:space="preserve">
+    <value>E-Mail address should be in the format user@domain.com</value>
+  </data>
+  <data name="EnterValidCard.Text" xml:space="preserve">
+    <value>Please enter a valid credit card number</value>
+  </data>
+  <data name="InternalErrorOccured.Text" xml:space="preserve">
+    <value>An internal error occurred while attempting to place your order. Please contact the store owner directly to complete your order.</value>
+  </data>
+  <data name="NameOnCardValMsg.Text" xml:space="preserve">
+    <value>Name on Card is required</value>
+  </data>
+  <data name="OrderNotFound.Text" xml:space="preserve">
+    <value>Order could not be found. Please contact store for assistance.</value>
+  </data>
+  <data name="OrderNumberMissing.Text" xml:space="preserve">
+    <value>Order Number missing. Please contact an administrator.</value>
+  </data>
+  <data name="SelectPaymentMethod.Text" xml:space="preserve">
+    <value>Please select a payment method</value>
+  </data>
+  <data name="ShippingCityValMsg.Text" xml:space="preserve">
+    <value>Shipping City is required</value>
+  </data>
+  <data name="ShippingCountryNameValMsg.Text" xml:space="preserve">
+    <value>Shipping Country Name is required</value>
+  </data>
+  <data name="ShippingFirstNameValMsg.Text" xml:space="preserve">
+    <value>Shipping First Name is required</value>
+  </data>
+  <data name="ShippingLastNameValMsg.Text" xml:space="preserve">
+    <value>Shipping Last Name is required</value>
+  </data>
+  <data name="ShippingPostalCodeValMsg.Text" xml:space="preserve">
+    <value>Shipping Postal Code is required</value>
+  </data>
+  <data name="ShippingRegionStateValMsg.Text" xml:space="preserve">
+    <value>Shipping Region/State is required</value>
+  </data>
+  <data name="ShippingStreetValMsg.Text" xml:space="preserve">
+    <value>Shipping Street is required</value>
+  </data>
+  <data name="SiteTermsAgreementError.Text" xml:space="preserve">
+    <value>You must agree to the Terms of Use before you can proceed</value>
+  </data>
+  <data name="TermsAndConditions.Text" xml:space="preserve">
+    <value>Terms of Use</value>
+  </data>
+  <data name="TermsAndConditionsAgreement.Text" xml:space="preserve">
+    <value>I Agree To This Sites Terms of Use</value>
+  </data>
+  <data name="PasswordValMsg.Text" xml:space="preserve">
+    <value>Password is required</value>
+  </data>
+  <data name="UsernameValMsg.Text" xml:space="preserve">
+    <value>Username is required</value>
+  </data>
+  <data name="ConfirmPassword.Text" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="ConfirmPasswordMismatch.Text" xml:space="preserve">
+    <value>Confirm Password mismatch</value>
+  </data>
+  <data name="UsernameExists.Text" xml:space="preserve">
+    <value>This username is taken - please choose another name</value>
+  </data>
+  <data name="DuplicateEmail.Text" xml:space="preserve">
+    <value>Account for this email already exists. You can not create new account with the same email.</value>
+  </data>
+  <data name="InvalidPassword.Text" xml:space="preserve">
+    <value>Invalid password. Password length must be greater than {MinLength} characters.</value>
+  </data>
+  <data name="PleaseLogin.Text" xml:space="preserve">
+    <value>Please log in to view your order</value>
+  </data>
+  <data name="Email.Text" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="PurchaseOrderNumberValMsg.Text" xml:space="preserve">
+    <value>Purchase Order Number is required</value>
+  </data>
+  <data name="GiftCardInvalidWarning.Text" xml:space="preserve">
+    <value>The gift card you entered is either invalid or has a balance of $0. Please check the number you entered and try again.</value>
+  </data>
+  <data name="GiftCardAndRewardsPointsWholePayment.Text" xml:space="preserve">
+    <value>Rewards points and gift cards will pay for this entire order. No other payment is required.</value>
+  </data>
+  <data name="GiftCardPartialPayment.Text" xml:space="preserve">
+    <value>Amount due after using gift cards is: </value>
+  </data>
+  <data name="GiftCardWholePayment.Text" xml:space="preserve">
+    <value>Gift cards will pay for this entire order. No other payment is required.</value>
+  </data>
+  <data name="GiftCardCannotUseToBuyGiftCard.Text" xml:space="preserve">
+    <value>You can not use gift card to purchase another giftcard.</value>
+  </data>
+  <data name="ShippingMethodValMsg.Text" xml:space="preserve">
+    <value>Shipping Method is required</value>
+  </data>
+  <data name="Password.Text" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Username.Text" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="CreditCardExpirationValMsg.Text" xml:space="preserve">
+    <value>Credit card expiration date is not valid.</value>
+  </data>
+  <data name="FreeProductIsOut.Text" xml:space="preserve">
+    <value>You qualified to received {0} for free. Unfortunately, we don’t currently have it in stock. Please contact the store if this is an issue.</value>
+  </data>
+  <data name="BillingPhoneNumberValMsg.Text" xml:space="preserve">
+    <value>Billing Phone Number is required</value>
+  </data>
+  <data name="ShippingPhoneNumberValMsg.Text" xml:space="preserve">
+    <value>Shipping Phone Number is required</value>
+  </data>
+</root>

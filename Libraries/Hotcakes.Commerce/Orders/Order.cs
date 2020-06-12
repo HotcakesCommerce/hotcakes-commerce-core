@@ -3,6 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
+// Copyright (c) 2020 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -27,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Contacts;
 using Hotcakes.Commerce.Content;
 using Hotcakes.Commerce.Globalization;
@@ -52,8 +54,6 @@ namespace Hotcakes.Commerce.Orders
     [Serializable]
     public class Order : IReplaceable
     {
-        private const string HCC_KEY = "hcc";
-
         #region Constructor
 
         public Order()
@@ -313,14 +313,14 @@ namespace Hotcakes.Commerce.Orders
             get
             {
                 decimal result = -1;
-                var setting = CustomProperties.GetProperty(HCC_KEY, "shippingoverride");
+                var setting = CustomProperties.GetProperty(Constants.HCC_KEY, "shippingoverride");
                 if (setting.Trim().Length > 0)
                 {
                     decimal.TryParse(setting, out result);
                 }
                 return result;
             }
-            set { CustomProperties.SetProperty(HCC_KEY, "shippingoverride", value.ToString()); }
+            set { CustomProperties.SetProperty(Constants.HCC_KEY, "shippingoverride", value.ToString()); }
         }
 
         private decimal totalShippingBeforeDiscounts;
@@ -411,12 +411,12 @@ namespace Hotcakes.Commerce.Orders
         {
             get
             {
-                var applyVATRules = CustomProperties.GetProperty(HCC_KEY, "ApplyVATRules");
+                var applyVATRules = CustomProperties.GetProperty(Constants.HCC_KEY, "ApplyVATRules");
                 if (!string.IsNullOrEmpty(applyVATRules))
                     return bool.Parse(applyVATRules);
                 return false;
             }
-            set { CustomProperties.SetProperty(HCC_KEY, "ApplyVATRules", value.ToString()); }
+            set { CustomProperties.SetProperty(Constants.HCC_KEY, "ApplyVATRules", value.ToString()); }
         }
 
         /// <summary>
@@ -1253,7 +1253,7 @@ namespace Hotcakes.Commerce.Orders
         public int GetFileDownloadCount(string fileBvin)
         {
             var key = FileDownloadPropertyKey(fileBvin);
-            return CustomProperties.GetPropertyAsInt(HCC_KEY, key);
+            return CustomProperties.GetPropertyAsInt(Constants.HCC_KEY, key);
         }
 
         /// <summary>
@@ -1263,10 +1263,10 @@ namespace Hotcakes.Commerce.Orders
         public void IncreaseFileDownloadCount(string fileBvin)
         {
             var key = FileDownloadPropertyKey(fileBvin);
-            var current = CustomProperties.GetPropertyAsInt(HCC_KEY, key);
+            var current = CustomProperties.GetPropertyAsInt(Constants.HCC_KEY, key);
             if (current < 0) current = 0;
             current++;
-            CustomProperties.SetProperty(HCC_KEY, key, current);
+            CustomProperties.SetProperty(Constants.HCC_KEY, key, current);
         }
 
         /// <summary>
@@ -1276,12 +1276,12 @@ namespace Hotcakes.Commerce.Orders
         public void DecreaseFileDownloadCount(string fileBvin)
         {
             var key = FileDownloadPropertyKey(fileBvin);
-            var current = CustomProperties.GetPropertyAsInt(HCC_KEY, key);
+            var current = CustomProperties.GetPropertyAsInt(Constants.HCC_KEY, key);
             if (current > 0)
             {
                 current--;
             }
-            CustomProperties.SetProperty(HCC_KEY, key, current);
+            CustomProperties.SetProperty(Constants.HCC_KEY, key, current);
         }
 
         /// <summary>
@@ -1291,7 +1291,7 @@ namespace Hotcakes.Commerce.Orders
         public void ResetFileDownloadCount(string fileBvin)
         {
             var key = FileDownloadPropertyKey(fileBvin);
-            CustomProperties.SetProperty(HCC_KEY, key, 0);
+            CustomProperties.SetProperty(Constants.HCC_KEY, key, 0);
         }
 
         #endregion
@@ -1388,8 +1388,6 @@ namespace Hotcakes.Commerce.Orders
 
             result.Add(new HtmlTemplateTag("[[Order.PaymentStatus]]",
                 LocalizationUtils.GetOrderPaymentStatus(PaymentStatus, culture)));
-
-            //result.Add(new Content.HtmlTemplateTag("[[Order.NonPciFullCreditCard]]", fullCC)));
 
             var notes = string.Empty;
             foreach (var item in Notes)
@@ -1502,11 +1500,7 @@ namespace Hotcakes.Commerce.Orders
         /// <returns>String (e.g., "Paid / Partially Shipped")</returns>
         public string FullOrderStatusDescription()
         {
-            var result = string.Empty;
-            result = LocalizationUtils.GetOrderStatus(StatusName) + " / ";
-            result += LocalizationUtils.GetOrderPaymentStatus(PaymentStatus);
-            result += " / ";
-            result += LocalizationUtils.GetOrderShippingStatus(ShippingStatus);
+            var result = string.Format("{0} / {1} / {2}", LocalizationUtils.GetOrderStatus(StatusName), LocalizationUtils.GetOrderPaymentStatus(PaymentStatus), LocalizationUtils.GetOrderShippingStatus(ShippingStatus));
 
             return result;
         }

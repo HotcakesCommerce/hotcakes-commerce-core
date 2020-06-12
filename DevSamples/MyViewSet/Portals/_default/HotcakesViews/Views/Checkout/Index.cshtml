@@ -1,0 +1,205 @@
+﻿@model Hotcakes.Modules.Core.Models.CheckoutViewModel
+@using Hotcakes.Modules.Core.Models;
+
+@if (Model.ShowConfirmation)
+{
+    <script type="text/javascript">
+        jQuery(function () {
+            $("#hcOrderConfirmed").attr('value', 'true');
+
+            $("#hcPaymentConfirm").hcDialog({
+                width: '400',
+                maxHeight: '200',
+                title: '@Localization.GetString("ConfirmOrderTitle")',
+                close: function () {
+                    $("#hcOrderConfirmed").attr('value', 'false');
+                }
+            });
+
+            $("#hcCancelOrderConfirmation").click(function () {
+                $("#hcPaymentConfirm").hcDialog('close');
+            });
+
+            $("#hcConfirmButton").click(function () {
+                $("#hcPaymentConfirm").parent().hide();
+            });
+
+        });
+    </script>
+}
+<div class="hc-checkout">
+    <h2>@Localization.GetString("Checkout")</h2>
+    @Html.Raw((string)TempData["messages"])
+    <div class="row-fluid">
+        <div class="span7 dnnForm">
+            @using (Html.BeginHccForm())
+            {
+                <div class="hc-login-section" id="hcLoginSection">
+                    @if (!Model.IsLoggedIn)
+                    {
+                        @Html.Partial("_Login", Model);
+                    }
+                </div>
+
+                    if (Model.CurrentOrder.HasShippingItems)
+                    {
+                <div class="hc-shipping-section">
+                    <h3>@Localization.GetString("ShippingAddress")</h3>
+                    <div id="hcShippingValidation" class="dnnFormMessage dnnFormWarning">
+                        @Localization.GetString("ShippingAddressInvalid")
+                    </div>
+                    @Html.Partial("_CheckoutAddress", new CheckoutAddressViewModel()
+                       {
+                           Addresses = Model.CurrentCustomer.Addresses,
+                           Address = Model.CurrentOrder.ShippingAddress,
+                           Prefix = "shipping",
+                           ShowPhone = true,
+                           Countries = Model.Countries,
+                           Violations = Model.Violations
+                       })
+                </div>
+                
+                <div class="hc-delivery-section" id="hcDeliverySection">
+                    <h3>@Localization.GetString("DeliveryOptions")</h3>
+                    <div id="hcShippingRates" class="dnnFormItem"></div>
+                    <div id="hcShippingNotValid" class="dnnFormMessage dnnFormWarning">
+                        @Localization.GetString("EnterShippingAddress")
+                    </div>
+                </div>
+                    }
+                
+                <div class="hc-billing-section">
+                    <h3>@Localization.GetString("BillingAddress")</h3>
+                    <div id="hcBillingValidation" class="dnnFormMessage dnnFormWarning">
+                        @Localization.GetString("BillingAddressInvalid")
+                    </div>
+                    @if (Model.CurrentOrder.HasShippingItems)
+                    {
+                        <div class="dnnFormItem">
+                            <label>
+                                <input type="checkbox" id="chkbillsame" name="chkbillsame" 
+                                @if (Model.BillShipSame)
+                                { <text> checked="checked"</text> }
+                            />
+                                @Localization.GetString("BillingAddressIsSame")
+                            </label>
+                        </div>
+                    }
+                    <div id="hcBillingWrapper">
+                        @Html.Partial("_CheckoutAddress", new CheckoutAddressViewModel()
+                   {
+                       Addresses = Model.CurrentCustomer.Addresses,
+                       Address = Model.CurrentOrder.BillingAddress,
+                       Prefix = "billing",
+                       ShowPhone = false,
+                       Countries = Model.Countries,
+                       Violations = Model.Violations
+                   })
+                    </div>
+                </div>
+                
+                    if (Model.ShowRewards)
+                    {
+                <div id="hccRewardPointsWrap" class="hc-payment-section">
+                    <h3>@Model.LabelRewardPoints</h3>
+                    <label>@Model.RewardPointsAvailable</label><br />
+                    <input type="radio"
+                        @if (!Model.UseRewardsPoints)
+                        { <text>checked="checked"</text> }
+                        id="userewardspoints0" name="userewardspoints" title="@Localization.GetString("DontUsePoints")" value="0" class="normalRadioButton" />
+                    <label id="userewardspointslabel0" for="userewardspoints0">@Localization.GetString("DontUsePoints")</label><br />
+                    <input type="radio"
+                        @if (Model.UseRewardsPoints)
+                        { <text>checked="checked"</text> }
+                        id="userewardspoints1" name="userewardspoints" title="@Localization.GetString("UsePoints")" value="1" class="normalRadioButton" />
+                    <label id="userewardspointslabel1" for="userewardspoints1">@Model.LabelRewardsUse</label><br />
+                </div>
+                    }
+
+                    if (Model.GiftCards.ShowGiftCards || !string.IsNullOrEmpty(Model.GiftCards.Summary))
+                    {
+                <div class="hc-payment-section" id="hcGiftCardSection">
+                    <h3>@Localization.GetString("GiftCard")</h3>
+                    @Html.Partial("_GiftCards", Model)
+                </div>
+                    }
+
+                <div class="hc-payment-section">
+                    <h3>@Localization.GetString("PaymentMethod")</h3>
+                    @Html.Partial("_DisplayPaymentMethods", Model)
+                </div>
+
+                <div class="hc-instructions-section">
+                    <h3>@Localization.GetString("SpecialInstructions")</h3>
+                    <div class="dnnFormItem">
+                        <textarea id="specialinstructions" name="specialinstructions">@Model.CurrentOrder.Instructions</textarea>
+                    </div>
+                </div>
+                    if (Model.ShowAffiliateId)
+                    {
+                <div class="hc-payment-section">
+                    <h3>@Localization.GetString("AffiliatesHeader")</h3>
+                    <div id="affiliatemessage" class="dnnFormMessage" style="display: none"></div>
+                    <div class="dnnFormItem">
+                        <label class="dnnLabel">@Localization.GetString("AffiliateId"):</label>
+                        <input type="text" id="affiliateid" name="affiliateid" size="20" value="@Model.AffiliateId" class="@Model.IsErr("affiliateid")" />
+                    </div>
+                    <script type="text/javascript">
+                        var HCC = HCC || {};
+                        HCC.Affiliate = HCC.Affiliate || {};
+                        HCC.Affiliate.MessageAffiliateInvalid = '@Localization.GetString("MessageAffiliateInvalid")';
+                    </script>
+                </div>
+                    }
+                <div class="row-fluid">
+                    <div class="span6 hc-site-terms">
+                        @if (Model.ShowAgreeToTerms)
+                        {
+                            <label>
+                                <input type="checkbox" id="agreed" name="agreed" @if (Model.AgreedToTerms) { <text>checked="checked"</text> }/>
+                                @Model.AgreedToTermsDescription
+                            </label>
+                            <a href="@Url.RouteHccUrl(HccRoute.Terms)" target="_blank" class="viewSiteTerms">@Localization.GetString("View") @Model.LabelTerms</a>
+                        }
+                    </div>
+                    <div class="span6">
+                        <ul class="dnnActions dnnRight">
+                            <li>
+                                <input type="submit" id="hcTakeOrder" value="@Localization.GetString("PlaceOrder")" class="dnnPrimaryAction"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                @Html.Partial("_NormalizeAddressDialog", Model)
+
+                <div id="hcPaymentConfirm" style="display: none;">
+                    <div class="dnnForm">
+                        @Localization.GetString("ConfirmMessage").Replace("{Amount}", @Model.CurrentOrder.TotalGrand.ToString("c"))
+                    </div>
+                    <ul class="dnnActions">
+                        <li>
+                            <input type="submit" id="hcConfirmButton" value="@Localization.GetString("PlaceOrder")" class="dnnPrimaryAction"/>
+                        </li>
+                        <li>
+                            <input type="button" id="hcCancelOrderConfirmation" value="@Localization.GetString("Cancel")" class="dnnSecondaryAction"/>
+                        </li>
+                    </ul>
+                </div>
+                <input type="hidden" id="orderbvin" name="orderbvin" value="@Model.CurrentOrder.bvin" />
+                <input type="hidden" id="hcOrderConfirmed" name="hcOrderConfirmed" value="false" />
+            }
+        </div>
+
+        <div class="span5 dnnForm">
+            <div class="hc-cart-section">
+                <h3>@Localization.GetString("OrderSummary")</h3>
+                @Html.Partial("_ViewOrderItems", Model.CurrentOrder.Items)
+                <div class="clearfix" id="hcCheckoutTotal">
+                    @Html.Raw(Model.CurrentOrder.TotalsAsTable())
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

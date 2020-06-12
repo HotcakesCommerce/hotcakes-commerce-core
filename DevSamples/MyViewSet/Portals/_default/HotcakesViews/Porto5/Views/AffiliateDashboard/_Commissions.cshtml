@@ -1,0 +1,81 @@
+﻿@model Hotcakes.Modules.Core.Models.AffiliateOrdersViewModel
+
+@using (Html.BeginHccForm(new { @class = "hcAffiliateOrders" }))
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-horizontal">
+                    <div class="form-group row text-right">
+                        <label class="col-sm-4 col-form-label" for="selDateRange">
+                            @Localization.GetString("lblDate")
+                        </label>
+                        <div class="col-sm-6 offset-sm-0">
+                            <select id="selDateRange" data-bind="value: dateRange" class="form-control">
+                                @foreach (var t in Enum.GetValues(typeof(DateRangeType)).OfType<DateRangeType>())
+                                {
+                                    if (t != DateRangeType.Custom && t != DateRangeType.None)
+                                    {
+                                    <option value="@((int)t)">@Localization.GetString(t.ToString())</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-sm-4">
+                <div class="hc-board">
+                    <div class="hc-title">@Localization.GetString("OrdersCount")</div>
+                    <div class="hc-amount-line" data-bind="text: totalCount"></div>
+                </div>
+            </div>	
+            <div class="col-xs-6 col-sm-4">
+                <div class="hc-board">
+                    <div class="hc-title">@Localization.GetString("CommissionableAmount")</div>
+                    <div class="hc-amount-line" data-bind="text: totalAmount"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h2>@Localization.GetString("Orders")</h2>
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr class="dnnGridHeader">
+                            <td>@Localization.GetString("OrderDate")</td>
+                            <td>@Localization.GetString("OrderNumber")</td>
+                            <td>@Localization.GetString("Total")</td>
+                            <td>@Localization.GetString("Commission")</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ko foreach: orders -->
+                        <tr>
+                            <td data-bind="dateText: $data.OrderDate"></td>
+                            <td data-bind="text: $data.OrderNumber"></td>
+                            <td data-bind="text: $data.Amount"></td>
+                            <td data-bind="text: $data.Commission"></td>
+                        </tr>
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix text-center">
+                <ul class="text-center list-inline list-unstyled">
+                    <!-- ko if: pager.previousPage() > 0 -->
+                    <li><a data-bind="click: function () { pager.setCurrentPage(pager.previousPage()) }">...</a></li>
+                    <!-- /ko -->
+                    <!-- ko foreach: pager.pagesList -->
+                    <li data-bind="css: { 'current': $data == $parent.pager.pageNumber() }"><a data-bind="    text: $data, click: function () { $parent.pager.setCurrentPage($data) }"></a></li>
+                    <!-- /ko -->
+                    <!-- ko if: pager.nextPage() > 0 -->
+                    <li><a data-bind="click: function () { pager.setCurrentPage(pager.nextPage()) }">...</a></li>
+                    <!-- /ko -->
+                </ul>
+            </div>
+        </div>
+    </div>
+}
