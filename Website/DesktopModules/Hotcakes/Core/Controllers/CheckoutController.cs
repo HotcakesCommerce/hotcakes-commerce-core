@@ -29,6 +29,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Text.RegularExpressions;
 using System.Web.WebPages.Scope;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Membership;
@@ -38,6 +39,7 @@ using Hotcakes.Commerce.BusinessRules;
 using Hotcakes.Commerce.Contacts;
 using Hotcakes.Commerce.Dnn;
 using Hotcakes.Commerce.Extensions;
+using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Commerce.Metrics;
 using Hotcakes.Commerce.Orders;
@@ -401,6 +403,79 @@ namespace Hotcakes.Modules.Core.Controllers
             result.Addresses = model.CurrentCustomer.Addresses;
             result.BillingAddress = model.CurrentOrder.BillingAddress;
             result.ShippingAddress = model.CurrentOrder.ShippingAddress;
+
+            return new PreJsonResult(Web.Json.ObjectToJson(result));
+        }
+
+        /// <summary>
+        ///     Gets called after a the VAT number was changed.
+        /// </summary>
+        /// <returns></returns>
+        [HccHttpPost]
+        public ActionResult ApplyEUVatRules()
+        {
+            // https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s21.html - 23.06.2020
+            Regex EUVatRegex = new Regex(@"^(
+            (AT)?U[0-9]{8} |                              # Austria
+            (BE)?0[0-9]{9} |                              # Belgium
+            (BG)?[0-9]{9,10} |                            # Bulgaria
+            (CY)?[0-9]{8}L |                              # Cyprus
+            (CZ)?[0-9]{8,10} |                            # Czech Republic
+            (DE)?[0-9]{9} |                               # Germany
+            (DK)?[0-9]{8} |                               # Denmark
+            (EE)?[0-9]{9} |                               # Estonia
+            (EL|GR)?[0-9]{9} |                            # Greece
+            (ES)?[0-9A-Z][0-9]{7}[0-9A-Z] |               # Spain
+            (FI)?[0-9]{8} |                               # Finland
+            (FR)?[0-9A-Z]{2}[0-9]{9} |                    # France
+            (GB)?([0-9]{9}([0-9]{3})?|[A-Z]{2}[0-9]{3}) | # United Kingdom
+            (HU)?[0-9]{8} |                               # Hungary
+            (IE)?[0-9]S[0-9]{5}L |                        # Ireland
+            (IT)?[0-9]{11} |                              # Italy
+            (LT)?([0-9]{9}|[0-9]{12}) |                   # Lithuania
+            (LU)?[0-9]{8} |                               # Luxembourg
+            (LV)?[0-9]{11} |                              # Latvia
+            (MT)?[0-9]{8} |                               # Malta
+            (NL)?[0-9]{9}B[0-9]{2} |                      # Netherlands
+            (PL)?[0-9]{10} |                              # Poland
+            (PT)?[0-9]{9} |                               # Portugal
+            (RO)?[0-9]{2,10} |                            # Romania
+            (SE)?[0-9]{12} |                              # Sweden
+            (SI)?[0-9]{8} |                               # Slovenia
+            (SK)?[0-9]{10}                                # Slovakia
+            )$", RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+
+
+            var countryRepo = Factory.CreateRepo<CountryRepository>();
+            var storeIsoCode = countryRepo.Find(HccApp.ContactServices.Addresses.FindStoreContactAddress().CountryBvin).IsoCode;
+
+            string result = null;
+            string userVatNumber = security.InputFilter(Regex.Replace(Request.Form["UserVatNumber"], "[-. ]", ""), PortalSecurity.FilterFlag.NoMarkup);
+            bool foundMatch = EUVatRegex.IsMatch(userVatNumber);
+
+            var orderid = Request.Form["OrderId"] ?? string.Empty;
+            orderid = security.InputFilter(orderid.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            var order = HccApp.OrderServices.Orders.FindForCurrentStore(orderid);
+
+            // EU VAT: remove tax if VAT number is valid and customer is not in the same country as seller
+            if (foundMatch && storeIsoCode != userVatNumber.Substring(0, 2).ToUpper())
+            {
+                foreach (var i in order.Items)
+                {
+                    i.IsTaxExempt = true;
+                }
+                HccApp.CalculateOrderAndSave(order);
+                result = "worx";
+            }
+            else if (!foundMatch)
+            {
+                foreach (var i in order.Items)
+                {
+                    i.IsTaxExempt = false;
+                }
+                HccApp.CalculateOrderAndSave(order);
+                result = "invalid";
+            }
 
             return new PreJsonResult(Web.Json.ObjectToJson(result));
         }
