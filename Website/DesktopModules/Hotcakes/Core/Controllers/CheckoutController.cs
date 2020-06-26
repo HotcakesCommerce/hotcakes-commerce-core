@@ -408,7 +408,7 @@ namespace Hotcakes.Modules.Core.Controllers
         }
 
         /// <summary>
-        ///     Gets called after a the VAT number was changed.
+        ///     Gets called after the VAT number was changed.
         /// </summary>
         /// <returns></returns>
         [HccHttpPost]
@@ -458,23 +458,27 @@ namespace Hotcakes.Modules.Core.Controllers
             var order = HccApp.OrderServices.Orders.FindForCurrentStore(orderid);
 
             // EU VAT: remove tax if VAT number is valid and customer is not in the same country as seller
-            if (foundMatch && storeIsoCode != userVatNumber.Substring(0, 2).ToUpper())
+            if (foundMatch)
             {
-                foreach (var i in order.Items)
+                if (storeIsoCode != userVatNumber.Substring(0, 2).ToUpper())
                 {
-                    i.IsTaxExempt = true;
+                    foreach (var i in order.Items)
+                    {
+                        i.IsTaxExempt = true;
+                    }
+                    HccApp.CalculateOrderAndSave(order);
+                    result = "VatFree";
                 }
-                HccApp.CalculateOrderAndSave(order);
-                result = "worx";
+                else result = "SameCountry";
             }
-            else if (!foundMatch)
+            else
             {
                 foreach (var i in order.Items)
                 {
-                    i.IsTaxExempt = false;
+                    i.IsTaxExempt = HccApp.CatalogServices.Products.FindBySku(i.ProductSku).TaxExempt;
                 }
                 HccApp.CalculateOrderAndSave(order);
-                result = "invalid";
+                result = "VatInvalid";
             }
 
             return new PreJsonResult(Web.Json.ObjectToJson(result));
