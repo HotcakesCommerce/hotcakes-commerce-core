@@ -478,7 +478,7 @@ namespace Hotcakes.Modules.Core.Controllers
                     i.IsTaxExempt = HccApp.CatalogServices.Products.FindBySku(i.ProductSku).TaxExempt;
                 }
                 HccApp.CalculateOrderAndSave(order);
-                result = "VatInvalid";
+                result = Localization.GetString("VatNumberValMsg");
             }
 
             return new PreJsonResult(Web.Json.ObjectToJson(result));
