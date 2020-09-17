@@ -123,7 +123,8 @@ namespace Hotcakes.Modules.Core.Controllers
                 {
                     CategoryId = model.LocalCategory.Bvin,
                     PageNumber = 1,
-                    IsConsiderSearchable = false
+                    IsConsiderSearchable = false,
+                    SortOrder = model.LocalCategory.DisplaySortOrder
                 };
                 var sett = new CategoryModuleSettings(ModuleContext.ModuleId);
                 var ddModel = BuildDrillDownModel(filter, sett, 1, productPageSize);
@@ -445,7 +446,7 @@ namespace Hotcakes.Modules.Core.Controllers
             };
 
             var cat = HccApp.CatalogServices.Categories.Find(filter.CategoryId);
-            queryAdv.SortOrder = filter.SortOrder != CategorySortOrder.None ? filter.SortOrder : cat != null ? cat.DisplaySortOrder : CategorySortOrder.None;
+            queryAdv.SortOrder = filter.SortOrder != CategorySortOrder.None ? filter.SortOrder : cat?.DisplaySortOrder ?? CategorySortOrder.ManualOrder;
             return queryAdv;
         }
 
