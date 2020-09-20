@@ -117,4 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CategoriesFound.Text" xml:space="preserve">
+    <value>Found {0} categories.</value>
+  </data>
+  <data name="ErrorOccurred.Text" xml:space="preserve">
+    <value>An error occurred. Please check the log files to find and resolve the issue.</value>
+  </data>
+  <data name="ProductsFound.Text" xml:space="preserve">
+    <value>Found {0} products.</value>
+  </data>
+  <data name="ProductTypeDefault.Text" xml:space="preserve">
+    <value>Generic</value>
+  </data>
 </root>

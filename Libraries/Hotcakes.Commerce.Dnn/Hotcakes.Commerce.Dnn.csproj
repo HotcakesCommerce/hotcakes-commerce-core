@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Hotcakes.Commerce.Dnn</RootNamespace>
     <AssemblyName>Hotcakes.Commerce.Dnn</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -44,14 +44,26 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Misc\BrandonHaynes.ModelAdapter.EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Dnn.PersonaBar.Library">
+      <HintPath>..\..\References\Dnn\Dnn.PersonaBar.Library.dll</HintPath>
+    </Reference>
     <Reference Include="DotNetNuke">
       <HintPath>..\..\References\Dnn\DotNetNuke.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Abstractions">
+      <HintPath>..\..\References\Dnn\DotNetNuke.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.DependencyInjection">
+      <HintPath>..\..\References\Dnn\DotNetNuke.DependencyInjection.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.HttpModules">
       <HintPath>..\..\References\Dnn\DotNetNuke.HttpModules.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Instrumentation">
       <HintPath>..\..\References\Dnn\DotNetNuke.Instrumentation.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Log4Net">
+      <HintPath>..\..\References\Dnn\DotNetNuke.Log4Net.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Web">
       <HintPath>..\..\References\Dnn\DotNetNuke.Web.dll</HintPath>
@@ -94,16 +106,19 @@
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Http">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Dnn\System.Web.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Http.WebHost">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.1.1\lib\net45\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\..\References\Dnn\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Mvc">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Dnn\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Dnn\System.Web.WebPages.dll</HintPath>
     </Reference>
@@ -165,6 +180,10 @@
     <Compile Include="Mvc\HccMvcForm.cs" />
     <Compile Include="Mvc\HccRazorViewEngine.cs" />
     <Compile Include="Mvc\MvcRenderingEngine.cs" />
+    <Compile Include="Prompt\Constants.cs" />
+    <Compile Include="Prompt\ListProducts.cs" />
+    <Compile Include="Prompt\ListCategories.cs" />
+    <Compile Include="Prompt\PromptBase.cs" />
     <Compile Include="Providers\HccUrlRoutingModule.cs" />
     <Compile Include="Mvc\DnnHccFormRenderer.cs" />
     <Compile Include="Mvc\DnnHccUrlResolver.cs" />
@@ -226,7 +245,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DnnDbContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Data\DnnDbContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DnnDbContext.edmx</DependentUpon>
