@@ -102,14 +102,6 @@ namespace Hotcakes.Commerce.Dnn.Prompt
             }
         }
 
-        public override string LocalResourceFile
-        {
-            get
-            {
-                return Constants.PromptLocalResourceFile;
-            }
-        }
-
         private void LogError(Exception ex)
         {
             if (ex != null)

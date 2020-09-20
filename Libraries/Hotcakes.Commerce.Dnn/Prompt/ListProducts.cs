@@ -74,7 +74,7 @@ namespace Hotcakes.Commerce.Dnn.Prompt
                     Sku = product.Sku,
                     Price = product.SitePrice,
                     Slug = product.UrlSlug,
-                    ProductType = HccApp.CatalogServices.ProductTypes.Find(product.ProductTypeId) != null ? HccApp.CatalogServices.ProductTypes.Find(product.ProductTypeId).ProductTypeName : LocalizeString("ProductTypeDefault.Text"),
+                    ProductType = HccApp.CatalogServices.ProductTypes.Find(product.ProductTypeId) != null ? HccApp.CatalogServices.ProductTypes.Find(product.ProductTypeId).ProductTypeName : LocalizeString("ProductTypeDefault"),
                     TemplateName = product.TemplateName,
                     ProductID = product.Bvin
                 }).ToList();
@@ -101,14 +101,6 @@ namespace Hotcakes.Commerce.Dnn.Prompt
             {
                 LogError(e);
                 return new ConsoleErrorResultModel(LocalizeString("ErrorOccurred"));
-            }
-        }
-
-        public override string LocalResourceFile
-        {
-            get
-            {
-                return Constants.PromptLocalResourceFile;
             }
         }
 

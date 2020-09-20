@@ -37,6 +37,12 @@ namespace Hotcakes.Commerce.Dnn.Prompt
 
         public abstract override ConsoleResultModel Run();
 
-        public abstract override string LocalResourceFile { get; }
+        public override string LocalResourceFile
+        {
+            get
+            {
+                return Constants.PromptLocalResourceFile;
+            }
+        }
     }
 }
