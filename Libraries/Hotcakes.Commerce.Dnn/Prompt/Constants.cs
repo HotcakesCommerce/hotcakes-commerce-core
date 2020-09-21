@@ -29,5 +29,6 @@ namespace Hotcakes.Commerce.Dnn.Prompt
     {
         public const string PromptLocalResourceFile = "~/DesktopModules/Hotcakes/Core/App_LocalResources/Global.resx";
         public const string Namespace = "hc";
+        public const string OutputPrefix = "<span style=\"color:#f94c2b;font-weight:bold;\">Hotcakes Commerce:</span> ";
     }
 }

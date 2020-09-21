@@ -64,7 +64,7 @@ namespace Hotcakes.Commerce.Dnn.Prompt
                 {
                     return new ConsoleResultModel
                     {
-                        Output = string.Format(LocalizeString("CategoriesFound"), 0)
+                        Output = string.Concat(Constants.OutputPrefix, string.Format(LocalizeString("CategoriesFound"), 0))
                     };
                 }
                 
@@ -92,17 +92,17 @@ namespace Hotcakes.Commerce.Dnn.Prompt
                 {
                     Data = list,
                     Records = count,
-                    Output = string.Format(LocalizeString("CategoriesFound"), count) 
+                    Output = string.Concat(Constants.OutputPrefix, string.Format(LocalizeString("CategoriesFound"), count)) 
                 };
             }
             catch (Exception e)
             {
                 LogError(e);
-                return new ConsoleErrorResultModel(LocalizeString("ErrorOccurred"));
+                return new ConsoleErrorResultModel(string.Concat(Constants.OutputPrefix, LocalizeString("ErrorOccurred")));
             }
         }
 
-        private void LogError(Exception ex)
+        protected override void LogError(Exception ex)
         {
             if (ex != null)
             {
@@ -117,10 +117,10 @@ namespace Hotcakes.Commerce.Dnn.Prompt
 
     public class CategoryOutput
     {
-        public string CategoryID { get; set; }
         public string CategoryName { get; set; }
-        public string TemplateName { get; set; }
-        public string Slug { get; set; }
         public int ProductCount { get; set; }
+        public string Slug { get; set; }
+        public string TemplateName { get; set; }
+        public string CategoryID { get; set; }
     }
 }

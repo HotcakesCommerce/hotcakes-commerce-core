@@ -23,6 +23,7 @@
 
 #endregion
 
+using System;
 using Dnn.PersonaBar.Library.Prompt;
 using Dnn.PersonaBar.Library.Prompt.Models;
 
@@ -34,6 +35,8 @@ namespace Hotcakes.Commerce.Dnn.Prompt
         {
             get { return HotcakesApplication.Current; }
         }
+
+        protected abstract void LogError(Exception ex);
 
         public abstract override ConsoleResultModel Run();
 
