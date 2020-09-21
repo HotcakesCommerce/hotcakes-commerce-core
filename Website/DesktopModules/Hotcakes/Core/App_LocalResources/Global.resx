@@ -129,4 +129,16 @@
   <data name="ProductTypeDefault.Text" xml:space="preserve">
     <value>Generic</value>
   </data>
+  <data name="SalesSummaryMonth.Text" xml:space="preserve">
+    <value>Current Month</value>
+  </data>
+  <data name="SalesSummaryQuarter.Text" xml:space="preserve">
+    <value>Current Quarter</value>
+  </data>
+  <data name="SalesSummaryYear.Text" xml:space="preserve">
+    <value>Current Year</value>
+  </data>
+  <data name="ViewReports.Text" xml:space="preserve">
+    <value>View the sales reports in the dashboard for more details.</value>
+  </data>
 </root>

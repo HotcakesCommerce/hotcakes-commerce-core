@@ -181,6 +181,7 @@
     <Compile Include="Mvc\HccRazorViewEngine.cs" />
     <Compile Include="Mvc\MvcRenderingEngine.cs" />
     <Compile Include="Prompt\Constants.cs" />
+    <Compile Include="Prompt\SalesSummary.cs" />
     <Compile Include="Prompt\ListProducts.cs" />
     <Compile Include="Prompt\ListCategories.cs" />
     <Compile Include="Prompt\PromptBase.cs" />
