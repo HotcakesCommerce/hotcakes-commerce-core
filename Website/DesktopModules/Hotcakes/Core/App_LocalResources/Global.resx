@@ -129,6 +129,27 @@
   <data name="ProductTypeDefault.Text" xml:space="preserve">
     <value>Generic</value>
   </data>
+  <data name="ClearedCrmCache.Text" xml:space="preserve">
+    <value>Cleared DNN Client Resource Manager (CDF) cache.  </value>
+  </data>
+  <data name="ClearedDnnCache.Text" xml:space="preserve">
+    <value>Cleared DNN cache.</value>
+  </data>
+  <data name="ClearedHccCache.Text" xml:space="preserve">
+    <value>Cleared Hotcakes Commerce cache.</value>
+  </data>
+  <data name="ClearedPortalCache.Text" xml:space="preserve">
+    <value>Cleared portal cache (cascading) for portal: {0}</value>
+  </data>
+  <data name="ClearingImages.Text" xml:space="preserve">
+    <value>Clearing Temp Images from Portal: {0}</value>
+  </data>
+  <data name="NoPortalsFound.Text" xml:space="preserve">
+    <value>No portals found. </value>
+  </data>
+  <data name="PortalsFound.Text" xml:space="preserve">
+    <value>Found {0} portals to attempt to process.</value>
+  </data>
   <data name="SalesSummaryMonth.Text" xml:space="preserve">
     <value>Current Month</value>
   </data>
