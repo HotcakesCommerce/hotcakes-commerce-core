@@ -34,6 +34,8 @@
     }  
 }
 <div class="hc-creditcard-form clearfix">
+    <input type="hidden" id="aesInitVector" name="aesInitVector" value="@Model.AESEncryptInitVector" />
+    <input type="hidden" id="aesKey" name="aesKey" value="@Model.AESEncryptKey" />
     <div class="form-group">
         <label class="col-sm-4 control-label">&nbsp;</label>
         <div class="col-sm-offset-0 col-sm-6">

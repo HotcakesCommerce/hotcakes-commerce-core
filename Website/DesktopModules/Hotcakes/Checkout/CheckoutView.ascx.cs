@@ -40,6 +40,7 @@ namespace Hotcakes.Modules.Checkout
             _action = _action.ToLower();
             if (_action == "index" || _action == "paymenterror")
                 RegisterViewScript("Checkout.js");
+                RegisterViewScript("aes.js");
             if (_action == "receipt")
                 RegisterViewScript("Receipt.js");
 
