@@ -32,12 +32,14 @@ using DotNetNuke.Security.Roles;
 using Hotcakes.Commerce.BusinessRules;
 using Hotcakes.Commerce.BusinessRules.OrderTasks;
 using Hotcakes.Commerce.Membership;
+using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.Dnn.Workflow
 {
     [Serializable]
     public class DnnCreateUserAccountForNewCustomer : CreateUserAccountForNewCustomer
     {
+        private static readonly ILogger _Logger = new SupressLogger();
         private const string GUEST_ROLENAME = "GuestCheckout";
 
         protected override bool RequiresUniqueEmail
@@ -77,6 +79,7 @@ namespace Hotcakes.Commerce.Dnn.Workflow
             }
             catch (Exception ex)
             {
+                LogError(ex);
                 EventLog.LogEvent(ex);
             }
         }
@@ -133,6 +136,7 @@ namespace Hotcakes.Commerce.Dnn.Workflow
             }
             catch (Exception ex)
             {
+                LogError(ex);
                 EventLog.LogEvent(ex);
             }
         }
@@ -148,6 +152,7 @@ namespace Hotcakes.Commerce.Dnn.Workflow
             }
             catch (Exception ex)
             {
+                LogError(ex);
                 EventLog.LogEvent(ex);
             }
         }
@@ -181,6 +186,18 @@ namespace Hotcakes.Commerce.Dnn.Workflow
         public override Task Clone()
         {
             return new DnnCreateUserAccountForNewCustomer();
+        }
+
+        private static void LogError(Exception ex)
+        {
+            if (ex != null)
+            {
+                _Logger.LogException(ex);
+                if (ex.InnerException != null)
+                {
+                    LogError(ex.InnerException);
+                }
+            }
         }
     }
 }
