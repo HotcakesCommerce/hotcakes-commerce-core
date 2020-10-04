@@ -29,16 +29,48 @@ using System.Linq;
 using Dnn.PersonaBar.Library.Prompt;
 using Dnn.PersonaBar.Library.Prompt.Attributes;
 using Dnn.PersonaBar.Library.Prompt.Models;
+using DotNetNuke.Entities.Portals;
+using DotNetNuke.Entities.Users;
 using DotNetNuke.Instrumentation;
 using Hotcakes.Commerce.Orders;
-using Hotcakes.Payment;
 
 namespace Hotcakes.Commerce.Dnn.Prompt
 {
-    [ConsoleCommand("sales-summary", Constants.Namespace, "Displays a summary of the sales in the store.")]
+    [ConsoleCommand("sales-summary", Constants.Namespace, "PromptSalesSummary")]
     public class SalesSummary : PromptBase, IConsoleCommand
     {
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(SalesSummary));
+
+        [FlagParameter("period", "Prompt_SalesSummary_FlagPeriod", "String", "all", false)]
+        private const string FlagPeriod = "period";
+
+        private string Period { get; set; }
+
+        public override void Init(string[] args, PortalSettings portalSettings, UserInfo userInfo, int activeTabId)
+        {
+            try
+            {
+                Period = GetFlagValue(FlagPeriod, "Sales Period", "all");
+
+                switch (Period)
+                {
+                    case "all":
+                    case "year":
+                    case "quarter":
+                    case "month":
+                    case "day":
+                        // all is well, do nothing
+                        break;
+                    default:
+                        AddMessage(LocalizeString("Prompt_ParameterRequired"));
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                LogError(e);
+            }
+        }
 
         public override ConsoleResultModel Run()
         {
@@ -46,9 +78,29 @@ namespace Hotcakes.Commerce.Dnn.Prompt
             {
                 var list = new List<SalesSummaryOutput>();
 
-                list.Add(MonthSummary());
-                list.Add(QuarterSummary());
-                list.Add(YearSummary());
+                if (string.Equals(Period, "all", StringComparison.InvariantCultureIgnoreCase) ||
+                    string.Equals(Period, "day", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    list.Add(DaySummary());
+                }
+
+                if (string.Equals(Period, "all", StringComparison.InvariantCultureIgnoreCase) ||
+                    string.Equals(Period, "month", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    list.Add(MonthSummary());
+                }
+
+                if (string.Equals(Period, "all", StringComparison.InvariantCultureIgnoreCase) ||
+                    string.Equals(Period, "quarter", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    list.Add(QuarterSummary());
+                }
+
+                if (string.Equals(Period, "all", StringComparison.InvariantCultureIgnoreCase) ||
+                    string.Equals(Period, "year", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    list.Add(YearSummary());
+                }
 
                 return new ConsoleResultModel
                 {
@@ -75,6 +127,36 @@ namespace Hotcakes.Commerce.Dnn.Prompt
             }
         }
 
+        private SalesSummaryOutput DaySummary()
+        {
+            var now = DateTime.Now;
+
+            var totalTempCount = 0;
+            var transactionsData = HccApp.OrderServices.Transactions.FindForReportByDateRange(now.ToUniversalTime(),
+                now.AddDays(1).ToUniversalTime(), HccApp.CurrentStore.Id, int.MaxValue, 1, ref totalTempCount);
+
+            var transactionCount = transactionsData.Count;
+            var data = ProcessTransactions(transactionsData);
+
+            decimal orderTotal = data.Orders.Sum(order => order.TotalOrderBeforeDiscounts);
+            decimal rmaTotal = data.Rmas.Sum(rma => rma.TotalRefundItemAmount);
+            var grandTotal = orderTotal - rmaTotal;
+            decimal averageOrder = 0;
+
+            if (grandTotal > 0 && transactionCount > 0)
+            {
+                averageOrder = (grandTotal / transactionCount);
+            }
+
+            return new SalesSummaryOutput
+            {
+                TimePeriod = LocalizeString("SalesSummaryDay"),
+                Transactions = transactionCount,
+                AvgOrder = averageOrder.ToString("C"),
+                Total = grandTotal.ToString("C")
+            };
+        }
+
         private SalesSummaryOutput MonthSummary()
         {
             var now = DateTime.Now;
@@ -91,12 +173,18 @@ namespace Hotcakes.Commerce.Dnn.Prompt
             decimal orderTotal = data.Orders.Sum(order => order.TotalOrderBeforeDiscounts);
             decimal rmaTotal = data.Rmas.Sum(rma => rma.TotalRefundItemAmount);
             var grandTotal = orderTotal - rmaTotal;
+            decimal averageOrder = 0;
+
+            if (grandTotal > 0 && transactionCount > 0)
+            {
+                averageOrder = (grandTotal / transactionCount);
+            }
 
             return new SalesSummaryOutput
             {
                 TimePeriod = LocalizeString("SalesSummaryMonth"),
                 Transactions = transactionCount,
-                AvgOrder = (grandTotal / transactionCount).ToString("C"),
+                AvgOrder = averageOrder.ToString("C"),
                 Total = grandTotal.ToString("C")
             };
         }
@@ -106,7 +194,15 @@ namespace Hotcakes.Commerce.Dnn.Prompt
             var now = DateTime.Now;
             var currQuarter = (now.Month - 1) / 3 + 1;
             var startDate = new DateTime(now.Year, 3 * currQuarter - 2, 1);
-            var endDate = new DateTime(now.Year, 3 * currQuarter + 1, 1).AddDays(-1);
+            DateTime endDate;
+            if (currQuarter < 4)
+            {
+                endDate = new DateTime(now.Year, 3 * currQuarter + 1, 1).AddDays(-1);
+            }
+            else
+            {
+                endDate = new DateTime(now.Year, 12, 31).AddDays(1);
+            }
 
             var totalTempCount = 0;
             var transactionsData = HccApp.OrderServices.Transactions.FindForReportByDateRange(startDate.ToUniversalTime(),
@@ -118,12 +214,18 @@ namespace Hotcakes.Commerce.Dnn.Prompt
             decimal orderTotal = data.Orders.Sum(order => order.TotalOrderBeforeDiscounts);
             decimal rmaTotal = data.Rmas.Sum(rma => rma.TotalRefundItemAmount);
             var grandTotal = orderTotal - rmaTotal;
+            decimal averageOrder = 0;
+
+            if (grandTotal > 0 && transactionCount > 0)
+            {
+                averageOrder = (grandTotal / transactionCount);
+            }
 
             return new SalesSummaryOutput
             {
                 TimePeriod = LocalizeString("SalesSummaryQuarter"),
                 Transactions = transactionCount,
-                AvgOrder = (grandTotal / transactionCount).ToString("C"),
+                AvgOrder = averageOrder.ToString("C"),
                 Total = grandTotal.ToString("C")
             };
         }
@@ -144,12 +246,18 @@ namespace Hotcakes.Commerce.Dnn.Prompt
             decimal orderTotal = data.Orders.Sum(order => order.TotalOrderBeforeDiscounts);
             decimal rmaTotal = data.Rmas.Sum(rma => rma.TotalRefundItemAmount);
             var grandTotal = orderTotal - rmaTotal;
+            decimal averageOrder = 0;
+
+            if (grandTotal > 0 && transactionCount > 0)
+            {
+                averageOrder = (grandTotal / transactionCount);
+            }
 
             return new SalesSummaryOutput
             {
                 TimePeriod = LocalizeString("SalesSummaryYear"),
                 Transactions = transactionCount,
-                AvgOrder = (grandTotal / transactionCount).ToString("C"),
+                AvgOrder = averageOrder.ToString("C"),
                 Total = grandTotal.ToString("C")
             };
         }
