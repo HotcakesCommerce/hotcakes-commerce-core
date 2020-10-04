@@ -37,7 +37,7 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Dnn.Prompt
 {
-    [ConsoleCommand("clear-cache", Constants.Namespace, "Clears the cache and import artifacts in your store.")]
+    [ConsoleCommand("clear-store-cache", Constants.Namespace, "PromptClearCache")]
     public class ClearCache: PromptBase, IConsoleCommand
     {
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ClearCache));
@@ -97,7 +97,7 @@ namespace Hotcakes.Commerce.Dnn.Prompt
                 return new ConsoleResultModel
                 {
                     Data = messages,
-                    Output = string.Concat(Constants.OutputPrefix, string.Format(LocalizeString(""))) 
+                    Output = string.Concat(Constants.OutputPrefix, string.Format(LocalizeString("ClearedCache"))) 
                 };
             }
             catch (Exception e)
