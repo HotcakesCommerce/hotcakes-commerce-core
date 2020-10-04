@@ -32,7 +32,7 @@ using DotNetNuke.Instrumentation;
 
 namespace Hotcakes.Commerce.Dnn.Prompt
 {
-    [ConsoleCommand("list-categories", Constants.Namespace, "Lists the products in the current Hotcakes Commerce store.")]
+    [ConsoleCommand("list-categories", Constants.Namespace, "PromptListCategories")]
     public class ListCategories: PromptBase, IConsoleCommand
     {
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ListCategories));

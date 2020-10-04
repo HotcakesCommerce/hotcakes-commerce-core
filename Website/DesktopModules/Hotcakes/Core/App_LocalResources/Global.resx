@@ -162,4 +162,28 @@
   <data name="ViewReports.Text" xml:space="preserve">
     <value>View the sales reports in the dashboard for more details.</value>
   </data>
+  <data name="ClearedCache.Text" xml:space="preserve">
+    <value>Cache cleared successfully.</value>
+  </data>
+  <data name="hc.Text" xml:space="preserve">
+    <value>hc</value>
+  </data>
+  <data name="PromptClearCache.Text" xml:space="preserve">
+    <value>Clears the cache and import artifacts in your store.</value>
+  </data>
+  <data name="PromptListCategories.Text" xml:space="preserve">
+    <value>Lists the products in the current Hotcakes Commerce store.</value>
+  </data>
+  <data name="PromptListProducts.Text" xml:space="preserve">
+    <value>Lists the products in the current Hotcakes Commerce store.</value>
+  </data>
+  <data name="PromptSalesSummary.Text" xml:space="preserve">
+    <value>Displays a summary of the sales in the store.</value>
+  </data>
+  <data name="Prompt_ParameterRequired.Text" xml:space="preserve">
+    <value>None of the expected parameters or parameter values were found.</value>
+  </data>
+  <data name="SalesSummaryDay.Text" xml:space="preserve">
+    <value>Current Day</value>
+  </data>
 </root>
