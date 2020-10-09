@@ -16,7 +16,18 @@
         $('#cccardnumber')
             .hcCardInput(".hc-card-icons",
             function ($input) {
-                $.post(hcc.getServiceUrl("checkout/CleanCreditCard"), { "CardNumber": $input.val() }, null, "json")
+					var key = CryptoJS.enc.Utf8.parse($('#aesInitVector').val());
+                    var iv = CryptoJS.enc.Utf8.parse($('#aesKey').val());
+
+                    var encryptedCC = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse($input.val()), key,
+                        {
+                            keySize: 128 / 8,
+                            iv: iv,
+                            mode: CryptoJS.mode.CBC,
+                            padding: CryptoJS.pad.Pkcs7
+                        }).toString();
+
+                    $.post(hcc.getServiceUrl("checkout/CleanCreditCard"), { "CardNumber": encryptedCC }, null, "json")
                     .done(function (data) {
                         $input.val(data.CardNumber);
                     });

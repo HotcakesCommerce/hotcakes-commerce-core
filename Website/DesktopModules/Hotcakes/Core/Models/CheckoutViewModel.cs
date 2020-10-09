@@ -240,5 +240,15 @@ namespace Hotcakes.Modules.Core.Models
             }
             return result;
         }
+
+        /// <summary>
+        /// AES encrypt init Vector. 
+        /// </summary>
+        public string AESEncryptInitVector { get; set; }
+
+        /// <summary>
+        /// AES encrypt init Key. 
+        /// </summary>
+        public string AESEncryptKey { get; set; }
     }
 }
