@@ -280,6 +280,7 @@ namespace Hotcakes.Modules.Core.Controllers
         }
 
         [HccHttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult IsEmailKnown()
         {
             var result = new IsEmailKnownJsonModel();
