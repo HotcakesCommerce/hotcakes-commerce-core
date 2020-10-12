@@ -204,6 +204,7 @@
             this.$shState = $('#shippingstate');
             this.$shFirstname = $('#shippingfirstname');
             this.$shLastname = $('#shippinglastname');
+            this.$shVatNumber = $('#shippingvatnumber');
             this.$shAddress = $('#shippingaddress');
             this.$shAddress2 = $('#shippingaddress2');
             this.$shCity = $('#shippingcity');
@@ -271,6 +272,7 @@
                 $('#billingtempregion').val($(this).val());
             });
             this.$blAll.change(function (e) { Addresses.billingChanged(e); });
+            this.$shVatNumber.change(function () { ApplyEUVatRules(); });
 
             $("#hcSaveNormalizedAction").click(function (e) { Addresses.saveNormalized(e); });
             this.$submitButton.click(function (e) {
@@ -667,6 +669,22 @@
                 }).prop("checked", true);
             }
         }
+    }
+
+    function ApplyEUVatRules() {
+        $.ajax({
+            type: "POST",
+            url: hcc.getServiceUrl("checkout/applyeuvatrules"),
+            data: {
+                UserVatNumber: $('#shippingvatnumber').val(),
+                OrderId: $('#orderbvin').val()
+            },
+            dataType: "json",
+            success: function (data) {
+                $("#shippingaddress").change();
+            },
+            error: function () { }
+        });
     }
 
     // Order Summary ------------------------
