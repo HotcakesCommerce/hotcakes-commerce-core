@@ -183,6 +183,53 @@
   <data name="Prompt_ParameterRequired.Text" xml:space="preserve">
     <value>None of the expected parameters or parameter values were found.</value>
   </data>
+  <data name="Prompt_SalesSummary_FlagPeriod.Text" xml:space="preserve">
+    <value>Specify a specific period of time you wish to see details for, including: all (default), day, month, quarter, year.</value>
+  </data>
+  <data name="Prompt_SalesSummary_ResultHtml.Text" xml:space="preserve">
+    <value>&lt;div&gt;
+        &lt;h4&gt;Get Page By Page (Tab) ID&lt;/h4&gt;
+        &lt;code class="block"&gt;
+            get-page &lt;em&gt;pageId&lt;/em&gt;
+        &lt;/code&gt;
+
+        &lt;h4&gt;Get Page by Page Name&lt;/h4&gt;
+        &lt;p&gt;
+            NOTE: You cannot retrieve Host pages using this method as it only retrieves pages within a portal. Host pages technically live outside the portal. You can, however, retrieve them using the page's ID (TabID in DNN parlance).
+        &lt;/p&gt;
+        &lt;code class="block"&gt;get-page --name Home&lt;/code&gt;
+        &lt;table class="command-result-tbl"&gt;
+            &lt;tr&gt;&lt;td&gt;TabId&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;345&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Name&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;Home&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Title&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;My Website Home&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;ParentId&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;-1&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Container&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;null&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Theme&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;[G]Skins/Xcillion/Home.ascx&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Path&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;//Home&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;IncludeInMenu&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;true&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Url&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Keywords&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;DNN, KnowBetter, Prompt&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Description&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;Gnome, gnome on the range....&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;h4&gt;Get Page by Page Name and Parent&lt;/h4&gt;
+
+        &lt;code class="block"&gt;get-page --name "Page 1a" --parentid 71&lt;/code&gt;
+        &lt;table class="command-result-tbl"&gt;
+            &lt;tr&gt;&lt;td&gt;TabId&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;72&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Name&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;Page 1a&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Title&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;Page 1a&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;ParentId&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;71&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Container&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;null&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Theme&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Path&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;//Page1//Page1a&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;IncludeInMenu&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;true&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Url&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Keywords&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Description&lt;/td&gt;&lt;td&gt;:&lt;/td&gt;&lt;td&gt;Page 1 is my parent. I'm Page 1a&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;</value>
+  </data>
   <data name="SalesSummaryDay.Text" xml:space="preserve">
     <value>Current Day</value>
   </data>
