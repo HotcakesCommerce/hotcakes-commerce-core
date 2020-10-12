@@ -74,9 +74,9 @@ namespace Hotcakes.Modules.Core.Controllers
                 {
                     var redirectUrl = HccUrlBuilder.RouteHccUrl(HccRoute.Category, new {slug = customUrl.RedirectToUrl});
                     if (customUrl.IsPermanentRedirect)
-                        Response.RedirectPermanent(redirectUrl);
+                        RedirectPermanent(redirectUrl);
                     else
-                        Response.Redirect(redirectUrl);
+                        Redirect(redirectUrl);
                 }
                 if (cat == null)
                 {
