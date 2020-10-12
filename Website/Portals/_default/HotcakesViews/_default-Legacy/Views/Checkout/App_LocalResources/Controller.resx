@@ -270,4 +270,7 @@
   <data name="ShippingPhoneNumberValMsg.Text" xml:space="preserve">
     <value>Shipping Phone Number is required</value>
   </data>
+  <data name="VatNumberValMsg.Text" xml:space="preserve">
+    <value>Please check the format of the VAT number</value>
+  </data>
 </root>
