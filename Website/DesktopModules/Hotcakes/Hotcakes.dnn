@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="Hotcakes.Core" type="Library" version="03.04.01">
+    <package name="Hotcakes.Core" type="Library" version="03.05.00">
       <friendlyName>Hotcakes Commerce</friendlyName>
       <description><![CDATA[Hotcakes Commerce will give your company the control it needs to create and manage your e-commerce site.]]></description>
       <iconFile>~/DesktopModules/Hotcakes/Core/Images/hcc-logo.png</iconFile>
@@ -204,6 +204,11 @@
               <path>Providers\DataProviders\SqlDataProvider</path>
               <name>03.03.00.SqlDataProvider</name>
               <version>03.03.00</version>
+            </script>
+            <script type="Install">
+              <path>Providers\DataProviders\SqlDataProvider</path>
+              <name>03.05.00.SqlDataProvider</name>
+              <version>03.05.00</version>
             </script>
             <script type="UnInstall">
               <path>Providers\DataProviders\SqlDataProvider</path>

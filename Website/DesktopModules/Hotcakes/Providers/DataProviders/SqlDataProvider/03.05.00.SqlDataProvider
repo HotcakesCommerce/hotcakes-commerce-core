@@ -1,0 +1,11 @@
+﻿INSERT INTO {databaseOwner}[{objectQualifier}hcc_StoreSettings] ([storeid], [settingname], [settingvalue])
+SELECT	0
+		,'AESInitVector'
+		,CAST(LEFT((CONVERT(decimal(30,0),(((RAND()*999999999999)/0.00012345671)*999999999))),16) AS nvarchar(16))
+GO
+
+INSERT INTO {databaseOwner}[{objectQualifier}hcc_StoreSettings] ([storeid], [settingname], [settingvalue])
+SELECT	0
+		,'AESKey'
+		,CAST(LEFT((CONVERT(decimal(30,0),(((RAND()*999999999999)/0.00012345671)*999999999))),16) AS nvarchar(16))
+GO

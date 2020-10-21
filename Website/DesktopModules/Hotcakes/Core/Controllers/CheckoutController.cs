@@ -26,16 +26,22 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Text.RegularExpressions;
 using System.Web.WebPages.Scope;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Membership;
+using DotNetNuke.Services.Exceptions;
 using Hotcakes.Commerce;
+using Hotcakes.Commerce.Accounts;
 using Hotcakes.Commerce.Analytics;
 using Hotcakes.Commerce.BusinessRules;
+using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Contacts;
 using Hotcakes.Commerce.Dnn;
 using Hotcakes.Commerce.Extensions;
@@ -277,8 +283,79 @@ namespace Hotcakes.Modules.Core.Controllers
             var notclean = Request.Form["CardNumber"];
             notclean = security.InputFilter(notclean.Trim(), PortalSecurity.FilterFlag.NoMarkup);
 
-            result.CardNumber = CardValidator.CleanCardNumber(notclean);
-            return new PreJsonResult(Web.Json.ObjectToJson(result));
+            var context = new HccRequestContext();
+            var settingsRepo = Factory.CreateRepo<StoreSettingsRepository>(context);
+
+            var keybytes = Encoding.UTF8.GetBytes(settingsRepo.FindSingleSetting(1, Constants.STORESETTING_AESINITVECTOR).SettingValue);
+            var iv = Encoding.UTF8.GetBytes(settingsRepo.FindSingleSetting(1, Constants.STORESETTING_AESKEY).SettingValue);
+
+            var encrypted = Convert.FromBase64String(notclean);
+            var decriptedFromJavascript = DecryptStringFromBytes(encrypted, keybytes, iv);
+
+            if(!string.IsNullOrEmpty(decriptedFromJavascript))
+            {
+                result.CardNumber = CardValidator.CleanCardNumber(decriptedFromJavascript);
+                return new PreJsonResult(Web.Json.ObjectToJson(result));
+            }
+            return new PreJsonResult(string.Empty);
+        }
+
+        private static string DecryptStringFromBytes(byte[] cipherText, byte[] key, byte[] iv)
+        {
+            // Check arguments.  
+            if (cipherText == null || cipherText.Length <= 0)
+            {
+                return null;
+            }
+            if (key == null || key.Length <= 0)
+            {
+                return null;
+            }
+            if (iv == null || iv.Length <= 0)
+            {
+                return null;
+            }
+
+            string plaintext = null;
+            using (var rijAlg = new RijndaelManaged())
+            {
+                //Settings  
+                rijAlg.Mode = CipherMode.CBC;
+                rijAlg.Padding = PaddingMode.PKCS7;
+                rijAlg.FeedbackSize = 128;
+
+                rijAlg.Key = key;
+                rijAlg.IV = iv;
+
+                // Create a decrytor to perform the stream transform.  
+                var decryptor = rijAlg.CreateDecryptor(rijAlg.Key, rijAlg.IV);
+
+                try
+                {
+                    // Create the streams used for decryption.  
+                    using (var msDecrypt = new MemoryStream(cipherText))
+                    {
+                        using(var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                        {
+
+                            using (var srDecrypt = new StreamReader(csDecrypt))
+                            {
+                                // Read the decrypted bytes from the decrypting stream  
+                                // and place them in a string.  
+                                plaintext = srDecrypt.ReadToEnd();
+
+                            }
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Exceptions.LogException(ex);
+                }
+            }
+
+            return plaintext;
         }
 
         [HccHttpPost]
@@ -510,6 +587,12 @@ namespace Hotcakes.Modules.Core.Controllers
             // Populate Countries
             model.Countries = HccApp.GlobalizationServices.Countries.FindActiveCountries();
             model.ShowAffiliateId = HccApp.CurrentStore.Settings.AffiliateShowIDOnCheckout;
+            
+            var context = new HccRequestContext();
+            var settingsRepo = Factory.CreateRepo<StoreSettingsRepository>(context);
+
+            model.AESEncryptInitVector = settingsRepo.FindSingleSetting(1, Constants.STORESETTING_AESINITVECTOR).SettingValue;
+            model.AESEncryptKey = settingsRepo.FindSingleSetting(1, Constants.STORESETTING_AESKEY).SettingValue;
 
             VerifyOrderSize(model);
 
