@@ -3750,7 +3750,7 @@
     <Content Include="Hotcakes_Symbols.dnn">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Providers\DataProviders\SqlDataProvider\03.03.01.SqlDataProvider" />
+    <Content Include="Providers\DataProviders\SqlDataProvider\03.05.00.SqlDataProvider" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

@@ -1,7 +1,0 @@
-﻿INSERT INTO {databaseOwner}[{objectQualifier}hcc_StoreSettings] ([storeid], [settingname], [settingvalue])
-		VALUES (N'1',N'AESInitVector',N'8080808080808080');
-GO
-
-INSERT INTO {databaseOwner}[{objectQualifier}hcc_StoreSettings] ([storeid], [settingname], [settingvalue])
-		VALUES (N'1',N'AESKey',N'8080808080808080');
-GO
