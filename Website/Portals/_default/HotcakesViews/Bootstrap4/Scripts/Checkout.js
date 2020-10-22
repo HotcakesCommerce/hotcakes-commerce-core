@@ -48,11 +48,18 @@
 
     function IsEmailKnown(forceSwitch, emailfieldid) {
         var emailfield = $(emailfieldid || '#customeremail').val().toLowerCase();
-        $.post(hcc.getServiceUrl("checkout/IsEmailKnown"),
-            {
-                "email": emailfield
+        var form = $('#__AjaxAntiForgeryForm');
+        var token = $('input[name="__RequestVerificationToken"]', form).val();
+
+        $.ajax({
+            url: hcc.getServiceUrl("checkout/IsEmailKnown"),
+            type: 'post',
+            data: {
+                email: emailfield,
+                __RequestVerificationToken: token
             },
-            function (data) {
+            dataType: 'json',
+            success: function (data) {
                 if (data.success == "1") {
                     $('#hcLoginSection').show().removeClass("d-none");
                     $('#loginmessage').html(hcc.l10n.checkout_PleaseLogin).attr('class', 'col-12 alert alert-success').slideDown();
@@ -65,8 +72,8 @@
                 else {
                     $('#loginmessage').attr('class', 'alert alert-danger').slideUp();
                 }
-            },
-            "json");
+            }
+        });
     }
 
     function LoginAjax() {
