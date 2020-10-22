@@ -152,6 +152,11 @@ namespace Hotcakes.Modules.Core.Models
         public Product LocalProduct { get; set; }
 
         /// <summary>
+        /// The name of the manufacturer of the product.  If not populated, the product does not have a manufacturer.  
+        /// </summary>
+        public string ManufacturerName { get; set; }
+
+        /// <summary>
         /// Additional images pre-defined HTML block to render in a product details view.
         /// </summary>
         public string PreRenderedImages
@@ -254,5 +259,10 @@ namespace Hotcakes.Modules.Core.Models
         ///     Validation message for the form
         /// </summary>
         public string ValidationMessage { get; set; }
+
+        /// <summary>
+        /// The name of the vendor of the product.  If not populated, the product does not have a vendor.  
+        /// </summary>
+        public string VendorName { get; set; }
     }
 }

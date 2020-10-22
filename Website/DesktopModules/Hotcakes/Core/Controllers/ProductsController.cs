@@ -281,6 +281,24 @@ namespace Hotcakes.Modules.Core.Controllers
                 model.AuthorizedToEditCatalog = false;
             }
 
+            if (!string.IsNullOrEmpty(product.ManufacturerId))
+            {
+                var manufacturer = HccApp.ContactServices.Manufacturers.Find(product.ManufacturerId);
+                if (manufacturer != null)
+                {
+                    model.ManufacturerName = manufacturer.DisplayName;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(product.VendorId))
+            {
+                var vendor = HccApp.ContactServices.Vendors.Find(product.VendorId);
+                if (vendor != null)
+                {
+                    model.VendorName = vendor.DisplayName;
+                }
+            }
+
             return model;
         }
 
