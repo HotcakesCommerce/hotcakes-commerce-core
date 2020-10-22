@@ -18,7 +18,6 @@
                     <label class="dnnLabel">
                         @if(string.IsNullOrWhiteSpace(Model.LocalProduct.UserSuppliedPriceLabel)) { @Localization.GetString("UserPrice") }
                         else { @Model.LocalProduct.UserSuppliedPriceLabel }
-                        :
                     </label>
                     <span>@Html.TextBox("userprice")</span>
                 </div>
