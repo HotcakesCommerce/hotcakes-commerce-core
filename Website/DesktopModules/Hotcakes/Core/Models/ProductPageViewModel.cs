@@ -60,26 +60,60 @@ namespace Hotcakes.Modules.Core.Models
         }
 
         /// <summary>
-        ///     Product information. More detail found for this at <see cref="Product" />
+        ///     Flag indicates whether reviews can be added for the product or not.
         /// </summary>
-        public Product LocalProduct { get; set; }
+        public bool AllowReviews { get; set; }
 
         /// <summary>
-        ///     Flag to show product is available for sale. This can be determined based on the
-        ///     rule set for the product for availability criteria like based on stock, always available etc.
+        ///     List of Product Image urls. This is like one product can have multiple images and each images comes with different
+        ///     size and dimension as per the
+        ///     business need to view the image more closely. More information can be found at <see cref="ProductImageUrls" />
         /// </summary>
-        public bool IsAvailableForSale { get; set; }
+        public List<ProductImageUrls> AlternateImageUrls { get; private set; }
 
         /// <summary>
-        ///     If product is out of stock then specific customized message can be shown.
+        /// If true, the current request (end user) is authorized to edit the catalog.
         /// </summary>
-        public string StockMessage { get; set; }
+        public bool AuthorizedToEditCatalog { get; set; }
 
         /// <summary>
-        ///     Quntity entered by user
+        ///     If product is bundled product then this list shows the items comes under this bundled product. Individual bundled
+        ///     product more
+        ///     information can be find at <see cref="SingleProductViewModel" />
         /// </summary>
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public int Quantity { get; set; }
+        public List<BundledProductViewModel> BundledItems { get; set; }
+
+        /// <summary>
+        ///     Amount of the gift card applied for the product
+        /// </summary>
+        [Required]
+        public decimal GiftCardAmount { get; set; }
+
+        /// <summary>
+        ///     Message to be shown to the gift card receiver
+        /// </summary>
+        public string GiftCardMessage { get; set; }
+
+        /// <summary>
+        ///     List of amounts for the gift cards
+        /// </summary>
+        public List<decimal> GiftCardPredefinedAmounts { get; set; }
+
+        /// <summary>
+        ///     Gift card receiver email
+        /// </summary>
+        [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*")]
+        public string GiftCardRecEmail { get; set; }
+
+        /// <summary>
+        ///     Name of the gift card receiver
+        /// </summary>
+        public string GiftCardRecName { get; set; }
+
+        /// <summary>
+        ///     Image information for the product. More information of this can be found at <see cref="ProductImageUrls" />
+        /// </summary>
+        public ProductImageUrls ImageUrls { get; set; }
 
         /// <summary>
         ///     Default quantity set for the product
@@ -90,32 +124,41 @@ namespace Hotcakes.Modules.Core.Models
         }
 
         /// <summary>
-        ///     Options if any available for the product to purchase it. More details of options can be found at
-        ///     <see cref="OptionSelections" />
+        ///     Flag to show product is available for sale. This can be determined based on the
+        ///     rule set for the product for availability criteria like based on stock, always available etc.
         /// </summary>
-        public OptionSelections Selections { get; set; }
+        public bool IsAvailableForSale { get; set; }
 
         /// <summary>
-        ///     Image information for the product. More information of this can be found at <see cref="ProductImageUrls" />
+        ///     Flag indicates whether product can be added to wishlist or not. Based on that Add to wish list option available on
+        ///     screen.
         /// </summary>
-        public ProductImageUrls ImageUrls { get; set; }
+        public bool IsAvailableForWishList { get; set; }
 
         /// <summary>
-        ///     List of Product Image urls. This is like one product can have multiple images and each images comes with different
-        ///     size and dimension as per the
-        ///     business need to view the image more closely. More information can be found at <see cref="ProductImageUrls" />
+        ///     Flag to indicate whether current product is gift card or regular product
         /// </summary>
-        public List<ProductImageUrls> AlternateImageUrls { get; private set; }
+        public bool IsGiftCard { get; set; }
 
         /// <summary>
-        ///     Product price information. There are different prices available like site price, cost price and labels and text
-        ///     needs to be shown for price.
-        ///     More detailed option of this can be found at  <see cref="ProductPrices" />
+        ///     If product is displayed by link from cart then this shows the unique identifier for the product for that order.
         /// </summary>
-        public ProductPrices Prices { get; set; }
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
+        public long? LineItemId { get; set; }
 
-        public decimal UserSuppliedPrice { get; set; }
+        /// <summary>
+        ///     Product information. More detail found for this at <see cref="Product" />
+        /// </summary>
+        public Product LocalProduct { get; set; }
 
+        /// <summary>
+        /// The name of the manufacturer of the product.  If not populated, the product does not have a manufacturer.  
+        /// </summary>
+        public string ManufacturerName { get; set; }
+
+        /// <summary>
+        /// Additional images pre-defined HTML block to render in a product details view.
+        /// </summary>
         public string PreRenderedImages
         {
             get
@@ -148,39 +191,55 @@ namespace Hotcakes.Modules.Core.Models
         public string PreRenderedTypeValues { get; set; }
 
         /// <summary>
+        ///     Product price information. There are different prices available like site price, cost price and labels and text
+        ///     needs to be shown for price.
+        ///     More detailed option of this can be found at  <see cref="ProductPrices" />
+        /// </summary>
+        public ProductPrices Prices { get; set; }
+
+        /// <summary>
+        /// This URL can be used to directly navigate to the product performance view. If empty, the current end-user is not authorized to see and use this view.
+        /// </summary>
+        public string ProductAnalyticsUrl { get; set; }
+
+        /// <summary>
+        /// This URL can be used to directly navigate to the product editing view. If empty, the current end-user is not authorized to see and use this view.
+        /// </summary>
+        public string ProductEditUrl { get; set; }
+
+        /// <summary>
+        ///     Quantity entered by user
+        /// </summary>
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
+        public int Quantity { get; set; }
+
+        /// <summary>
         ///     Related list of the product. Individual related product more information can be find at
         ///     <see cref="SingleProductViewModel" />
         /// </summary>
         public List<SingleProductViewModel> RelatedItems { get; set; }
 
         /// <summary>
-        ///     If product is bundled product then this list shows the items comes under this bundled product. Individual bundled
-        ///     product more
-        ///     information can be find at <see cref="SingleProductViewModel" />
+        ///     Options if any available for the product to purchase it. More details of options can be found at
+        ///     <see cref="OptionSelections" />
         /// </summary>
-        public List<BundledProductViewModel> BundledItems { get; set; }
+        public OptionSelections Selections { get; set; }
 
         /// <summary>
-        ///     Validation message for the form
+        ///     Social controls for the given product in json format.
         /// </summary>
-        public string ValidationMessage { get; set; }
+        [Obsolete("Removing in 03.05.00 or later. Previously was used for Evoq Social integration.")]
+        public ISocialItem SocialItem { get; set; }
 
         /// <summary>
-        ///     If product is displayed by link from cart then this shows the unique identifier for the product for that order.
+        ///     If product is out of stock then specific customized message can be shown.
         /// </summary>
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public long? LineItemId { get; set; }
+        public string StockMessage { get; set; }
 
         /// <summary>
-        ///     Flag indicates whether product can be added to wishlist or not. Based on that Add to wish list option available on
-        ///     screen.
+        /// The store administration URL for the dashboard. 
         /// </summary>
-        public bool IsAvailableForWishList { get; set; }
-
-        /// <summary>
-        ///     Flag indicates whether reviews can be added for the product or not.
-        /// </summary>
-        public bool AllowReviews { get; set; }
+        public string StoreAdminUrl { get; set; }
 
         /// <summary>
         ///     This holds the html for the specified list of swatches available for specific product
@@ -192,61 +251,18 @@ namespace Hotcakes.Modules.Core.Models
         public string SwatchHtml { get; set; }
 
         /// <summary>
-        ///     Social controls for the given product in json format.
+        /// The price that a customer chooses/enters to page (primarily used for donation use cases).  
         /// </summary>
-        [Obsolete("Removing in 03.05.00 or later. Previously was used for Evoq Social integration.")]
-        public ISocialItem SocialItem { get; set; }
+        public decimal UserSuppliedPrice { get; set; }
 
         /// <summary>
-        ///     Flag to indicate whether current product is gift card or regular product
+        ///     Validation message for the form
         /// </summary>
-        public bool IsGiftCard { get; set; }
+        public string ValidationMessage { get; set; }
 
         /// <summary>
-        ///     List of amounts for the gift cards
+        /// The name of the vendor of the product.  If not populated, the product does not have a vendor.  
         /// </summary>
-        public List<decimal> GiftCardPredefinedAmounts { get; set; }
-
-        /// <summary>
-        ///     Amount of the gift card applied for the product
-        /// </summary>
-        [Required]
-        public decimal GiftCardAmount { get; set; }
-
-        /// <summary>
-        ///     Gift card receiver email
-        /// </summary>
-        [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*")]
-        public string GiftCardRecEmail { get; set; }
-
-        /// <summary>
-        ///     Name of the gift card receiver
-        /// </summary>
-        public string GiftCardRecName { get; set; }
-
-        /// <summary>
-        ///     Message to be shown to the gift card receiver
-        /// </summary>
-        public string GiftCardMessage { get; set; }
-
-        /// <summary>
-        /// If true, the current request (end user) is authorized to edit the catalog.
-        /// </summary>
-        public bool AuthorizedToEditCatalog { get; set; }
-
-        /// <summary>
-        /// This URL can be used to directly navigate to the product editing view. If empty, the current end-user is not authorized to see and use this view.
-        /// </summary>
-        public string ProductEditUrl { get; set; }
-
-        /// <summary>
-        /// This URL can be used to directly navigate to the product performance view. If empty, the current end-user is not authorized to see and use this view.
-        /// </summary>
-        public string ProductAnalyticsUrl { get; set; }
-
-        /// <summary>
-        /// The store administration URL for the dashboard. 
-        /// </summary>
-        public string StoreAdminUrl { get; set; }
+        public string VendorName { get; set; }
     }
 }
