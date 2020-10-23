@@ -56,7 +56,7 @@ namespace Hotcakes.Modules.Core.Controllers.Shared
         {
             if (!HccApp.MembershipServices.IsUserLoggedIn())
             {
-                Response.Redirect(HccApp.MembershipServices.GetLoginPagePath());
+                Redirect(HccApp.MembershipServices.GetLoginPagePath());
             }
         }
     }

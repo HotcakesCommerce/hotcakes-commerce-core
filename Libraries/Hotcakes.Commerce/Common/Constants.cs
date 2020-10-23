@@ -147,6 +147,8 @@ namespace Hotcakes.Commerce.Common
 
         public const string STORESETTING_STORECLOSED = "StoreClosed";
         public const string STORESETTING_STORECLOSEDDESC = "StoreClosedDescription";
+        public const string STORESETTING_AESINITVECTOR = "AESInitVector";
+        public const string STORESETTING_AESKEY = "AESKey";
         #endregion
 
         #region Views

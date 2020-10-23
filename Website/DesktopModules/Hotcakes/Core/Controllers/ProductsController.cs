@@ -232,9 +232,9 @@ namespace Hotcakes.Modules.Core.Controllers
             {
                 var redirectUrl = HccUrlBuilder.RouteHccUrl(HccRoute.Product, new {slug = customUrl.RedirectToUrl});
                 if (customUrl.IsPermanentRedirect)
-                    Response.RedirectPermanent(redirectUrl);
+                    RedirectPermanent(redirectUrl);
                 else
-                    Response.Redirect(redirectUrl);
+                    Redirect(redirectUrl);
             }
             if (product == null)
             {
@@ -279,6 +279,24 @@ namespace Hotcakes.Modules.Core.Controllers
             else
             {
                 model.AuthorizedToEditCatalog = false;
+            }
+
+            if (!string.IsNullOrEmpty(product.ManufacturerId))
+            {
+                var manufacturer = HccApp.ContactServices.Manufacturers.Find(product.ManufacturerId);
+                if (manufacturer != null)
+                {
+                    model.ManufacturerName = manufacturer.DisplayName;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(product.VendorId))
+            {
+                var vendor = HccApp.ContactServices.Vendors.Find(product.VendorId);
+                if (vendor != null)
+                {
+                    model.VendorName = vendor.DisplayName;
+                }
             }
 
             return model;

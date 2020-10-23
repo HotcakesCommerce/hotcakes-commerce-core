@@ -77,9 +77,8 @@
                         {@Localization.GetString("UserPrice") }
                         else
                         { @Model.LocalProduct.UserSuppliedPriceLabel}
-                        :
                     </label>
-                    <div class="col-sm-8">@Html.TextBox("userprice", new { @class = "form-control col-sm-8" })</div>
+                    <div class="col-sm-8">@Html.TextBox("userprice", string.Empty, new { @class = "form-control col-sm-8" })</div>
                 </div>
             }
             else if(Model.IsGiftCard)

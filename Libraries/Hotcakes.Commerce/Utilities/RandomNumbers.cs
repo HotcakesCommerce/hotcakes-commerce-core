@@ -24,6 +24,7 @@
 #endregion
 
 using System;
+using System.Text;
 using System.Threading;
 
 namespace Hotcakes.Commerce.Utilities
@@ -68,6 +69,17 @@ namespace Hotcakes.Commerce.Utilities
             maxNumber = maxNumber + 1;
 
             return r.Next(minNumber, maxNumber);
+        }
+        
+        public static string Create16DigitString()
+        {
+            var RNG = new Random();
+            var builder = new StringBuilder();
+            while (builder.Length < 16)
+            {
+                builder.Append(RNG.Next(10).ToString());
+            }
+            return builder.ToString();
         }
     }
 }

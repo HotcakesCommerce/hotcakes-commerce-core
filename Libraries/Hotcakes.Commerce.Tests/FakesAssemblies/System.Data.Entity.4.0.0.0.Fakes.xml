@@ -10,12 +10,6 @@
         <member name="M:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.#ctor">
             <summary>Initializes a new shim instance</summary>
         </member>
-        <member name="M:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.BehaveAsCurrent">
-            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
-        </member>
-        <member name="M:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.BehaveAsNotImplemented">
-            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
-        </member>
         <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.AcosNullableOfDecimal">
             <summary>Sets the shim of SqlFunctions.Acos(Nullable`1&lt;Decimal&gt; arg1)</summary>
         </member>
@@ -42,6 +36,12 @@
         </member>
         <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.AtanNullableOfDouble">
             <summary>Sets the shim of SqlFunctions.Atan(Nullable`1&lt;Double&gt; arg)</summary>
+        </member>
+        <member name="M:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
         </member>
         <member name="P:System.Data.Objects.SqlClient.Fakes.ShimSqlFunctions.Behavior">
             <summary>Assigns the behavior for all methods of the shimmed type</summary>
