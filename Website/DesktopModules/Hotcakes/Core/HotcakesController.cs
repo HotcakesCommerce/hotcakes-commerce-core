@@ -692,16 +692,17 @@ namespace Hotcakes.Modules.Core
 
             foreach (var store in stores)
             {
+                var key = Hotcakes.Commerce.Utilities.RandomNumbers.Create16DigitString();
                 store.Settings.AddOrUpdateLocalSetting(new StoreSetting
                 {
                     SettingName = Constants.STORESETTING_AESKEY,
-                    SettingValue = Guid.NewGuid().ToString("n")
+                    SettingValue = key
                 });
 
                 store.Settings.AddOrUpdateLocalSetting(new StoreSetting
                 {
                     SettingName = Constants.STORESETTING_AESINITVECTOR,
-                    SettingValue = Guid.NewGuid().ToString("n")
+                    SettingValue = key
                 });
 
                 hccApp.CurrentStore = store;
