@@ -9,3 +9,8 @@ SELECT	0
 		,'AESKey'
 		,CAST(LEFT((CONVERT(decimal(30,0),(((RAND()*999999999999)/0.00012345671)*999999999))),16) AS nvarchar(16))
 GO
+
+UPDATE	{databaseOwner}[{objectQualifier}hcc_StoreSettings]
+SET		SettingValue = CAST(LEFT((CONVERT(decimal(30,0),(((RAND()*999999999999)/0.00012345671)*999999999))),16) AS nvarchar(16))
+WHERE	SettingName IN ( 'AESInitVector', 'AESKey' )
+GO
