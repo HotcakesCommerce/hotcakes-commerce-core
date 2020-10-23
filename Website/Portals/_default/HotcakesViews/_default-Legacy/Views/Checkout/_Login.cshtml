@@ -67,11 +67,8 @@
 
 <div id="hcTabGuest" class="dnnClear hcTabPane Hidden">
     <div class="dnnFormItem dnnFormRequired">
-        <label class="dnnLabel">@Localization.GetString("EmailAddress"):</label>
-        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.TextBox("customeremail", @Model.CurrentOrder.UserEmail)
-        }
+        <label class="dnnLabel">@Localization.GetString("EmailAddress"):</label>        
+			@Html.AntiForgeryToken()
+			@Html.TextBox("customeremail", @Model.CurrentOrder.UserEmail)
     </div>
 </div>

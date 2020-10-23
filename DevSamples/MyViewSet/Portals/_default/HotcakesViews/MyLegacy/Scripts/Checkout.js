@@ -280,6 +280,7 @@
                 $('#shippingtempregion').val($(this).val());
             });
             this.$shAll.change(function (e) { Addresses.shippingChanged(e); });
+            this.$shVatNumber.change(function () { ApplyEUVatRules(); });
 
             this.$blAvailableAddresses.change(function (e) { Addresses.selectedAddressChanged(e); });
             this.$blCountry.change(function () {
@@ -289,7 +290,6 @@
                 $('#billingtempregion').val($(this).val());
             });
             this.$blAll.change(function (e) { Addresses.billingChanged(e); });
-            this.$shVatNumber.change(function () { ApplyEUVatRules(); });
 
             $("#hcSaveNormalizedAction").click(function (e) { Addresses.saveNormalized(e); });
             this.$submitButton.click(function (e) {

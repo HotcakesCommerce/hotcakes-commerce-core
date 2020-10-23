@@ -53,18 +53,18 @@ var HcAffiliateProfileViewModel = function (model, $form) {
             contentType: "application/json",
             type: "post"
         })
-        .done(function (resp) {
-            self.showMessage(resp.Message, resp.Status);
-        })
-        .fail(function () { })
-        .always(function () { $form.ajaxLoader("stop"); });
+            .done(function (resp) {
+                self.showMessage(resp.Message, resp.Status);
+            })
+            .fail(function () { })
+            .always(function () { $form.ajaxLoader("stop"); });
     };
 
     self.changeCountry = function () {
         $form.ajaxLoader("start");
         $.post(hcc.getServiceUrl("AffiliateDashboard/GetRegions"),
-                { countryId: self.model.countryid() }, null, "json"
-            )
+            { countryId: self.model.countryid() }, null, "json"
+        )
             .done(function (resp) {
                 self.model.regions(resp);
             })
@@ -76,8 +76,8 @@ var HcAffiliateProfileViewModel = function (model, $form) {
     self.changeReferralAffiliateId = function () {
         $form.ajaxLoader("start");
         $.post(hcc.getServiceUrl("AffiliateRegistration/IsAffiliateValid"),
-                { affiliateId: self.model.referralaffiliateid() }, null, "json"
-            )
+            { affiliateId: self.model.referralaffiliateid() }, null, "json"
+        )
             .done(function (data) {
                 if (!data) {
                     self.showMessage(hcc.l10n.affiliate_ReferralAffiliateIDInvalid, "Failed");
@@ -114,8 +114,8 @@ var HcBaseAffiliateDashboardReport = function (data, $form) {
     self.loadPage = function (pageNumber, pageSize) {
         $form.ajaxLoader("start");
         $.post(hcc.getServiceUrl("AffiliateDashboard/" + self.getReportName()),
-                self.getPageParameters(pageNumber, pageSize), null, "json"
-            )
+            self.getPageParameters(pageNumber, pageSize), null, "json"
+        )
             .done(function (resp) {
                 self.loadPageData(resp);
             })
@@ -210,7 +210,7 @@ var HcAffiliateReferrals = function (data, $form) {
     self.getReportName = function () {
         return 'GetReferralsReport';
     };
-    
+
     self.search = function () {
         if (self.pager.pageNumber() != 1)
             self.pager.pageNumber(1);
@@ -235,16 +235,15 @@ var HcUrlBuilderViewModel = function (data, $form) {
     self.products = ko.observableArray();
     self.categoryId = ko.observable();
     self.productId = ko.observable();
-    self.textUrl = ko.observable("http://" + document.domain + hcc.getSiteRoot());
+    self.textUrl = ko.observable(hcc.getUrlProtocol() + document.domain + hcc.getSiteRoot());
     self.generatedUrl = ko.observable();
 
     self.changeMode = function () {
-
         if (self.mode() == "Product") {
             getProducts();
         } else if (self.mode() == "Category") {
         } else if (self.mode() == "Website") {
-            self.textUrl("http://" + document.domain + hcc.getSiteRoot());
+            self.textUrl(hcc.getUrlProtocol() + document.domain + hcc.getSiteRoot());
         } else if (self.mode() == "Registration") {
             self.textUrl(data.RegistrationUrl);
         }
@@ -267,8 +266,8 @@ var HcUrlBuilderViewModel = function (data, $form) {
 
         $form.ajaxLoader("start");
         $.post(hcc.getServiceUrl("AffiliateDashboard/GenerateUrl"),
-                { id: id, mode: self.mode() }, null, "json"
-            )
+            { id: id, mode: self.mode() }, null, "json"
+        )
             .done(function (resp) { self.generatedUrl(resp); })
             .fail(function () { })
             .always(function () { $form.ajaxLoader("stop"); });
@@ -285,8 +284,8 @@ var HcUrlBuilderViewModel = function (data, $form) {
 
     var getProducts = function () {
         $.post(hcc.getServiceUrl("AffiliateDashboard/GetProducts"),
-                { categoryId: self.categoryId() }, null, "json"
-            )
+            { categoryId: self.categoryId() }, null, "json"
+        )
             .done(function (resp) {
                 self.products(resp);
             })
@@ -307,4 +306,19 @@ $(function () {
         e.stopPropagation();
         e.preventDefault();
     });
+
+    var clipboard = new ClipboardJS("#hcCopyToClipboard");
+
+    /*clipboard.on("success", function (e) {
+        console.info("Action:", e.action);
+        console.info("Text:", e.text);
+        console.info("Trigger:", e.trigger);
+        e.clearSelection();
+    });
+
+    clipboard.on("error", function (e) {
+        console.error("Action:", e.action);
+        console.error("Trigger:", e.trigger);
+        e.preventDefault();
+    });*/
 });
