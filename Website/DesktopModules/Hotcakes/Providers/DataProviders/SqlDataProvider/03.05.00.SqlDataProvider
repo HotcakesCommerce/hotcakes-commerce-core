@@ -1,16 +1,41 @@
 ﻿INSERT INTO {databaseOwner}[{objectQualifier}hcc_StoreSettings] ([storeid], [settingname], [settingvalue])
-SELECT	0
-		,'AESInitVector'
-		,CAST(LEFT((CONVERT(decimal(30,0),(((RAND()*999999999999)/0.00012345671)*999999999))),16) AS nvarchar(16))
+SELECT  v.StoreID,
+	   v.SettingName,
+	   V.SettingValue
+FROM	   (
+		 SELECT  ID As StoreID,	   
+				'AESKey' AS SettingName,
+				CAST(LEFT((CONVERT(decimal(30,0),(((RAND()*999999999999)/0.00012345671)*999999999 * ID ))),16) AS nvarchar(16)) AS SettingValue
+		  FROM	{databaseOwner}[{objectQualifier}hcc_Stores]	 
+
+		  UNION
+
+		  SELECT  ID As StoreID,	   
+				'AESInitVector' AS SettingName,
+				CAST(LEFT((CONVERT(decimal(30,0),(((RAND()*999999999999)/0.00012345671)*999999999 * ID ))),16) AS nvarchar(16)) AS SettingValue
+		  FROM	{databaseOwner}[{objectQualifier}hcc_Stores]	 
+
+	   ) AS V
 GO
 
-INSERT INTO {databaseOwner}[{objectQualifier}hcc_StoreSettings] ([storeid], [settingname], [settingvalue])
-SELECT	0
-		,'AESKey'
-		,CAST(LEFT((CONVERT(decimal(30,0),(((RAND()*999999999999)/0.00012345671)*999999999))),16) AS nvarchar(16))
-GO
 
-UPDATE	{databaseOwner}[{objectQualifier}hcc_StoreSettings]
-SET		SettingValue = CAST(LEFT((CONVERT(decimal(30,0),(((RAND()*999999999999)/0.00012345671)*999999999))),16) AS nvarchar(16))
-WHERE	SettingName IN ( 'AESInitVector', 'AESKey' )
-GO
+UPDATE  {databaseOwner}[{objectQualifier}hcc_StoreSettings]
+SET	   SettingName = V.SettingName,
+	   SettingValue = V.SettingValue
+FROM	  (
+		  SELECT  SS.StoreId,
+				SS.SettingName,
+				T.SettingValue
+		  FROM	   {databaseOwner}[{objectQualifier}hcc_StoreSettings] SS
+				INNER JOIN
+				(
+				    SELECT  ID As StoreID,	   
+						  CAST(LEFT((CONVERT(decimal(30,0),(((RAND()*999999999999)/0.00012345671)*999999999 * ID ))),16) AS nvarchar(16)) AS SettingValue
+				    FROM	{databaseOwner}[{objectQualifier}hcc_Stores]	  
+				) AS T 
+				ON T.StoreId = SS.StoreId
+		  WHERE   SS.SettingName IN ( 'AESKey', 'AESInitVector')
+	   ) AS V
+WHERE   V.StoreId = {databaseOwner}[{objectQualifier}hcc_StoreSettings].StoreId
+	   AND V.SettingName = {databaseOwner}[{objectQualifier}hcc_StoreSettings].SettingName
+GO	   
