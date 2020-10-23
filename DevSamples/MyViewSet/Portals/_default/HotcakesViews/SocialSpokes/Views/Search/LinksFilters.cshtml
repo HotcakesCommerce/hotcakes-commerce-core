@@ -26,7 +26,7 @@
 }
 <div class="hc-search-filters">
     <input type="hidden" name="search" value="@ViewBag.Search" />
-    @if (Model.SelectedManufactures.Count > 0 || Model.SelectedVendors.Count > 0 || Model.SelectedTypes.Count > 0 || Model.SelectedCategories.Count > 0 || Model.SelectedProperties.Count > 0)
+    @if (Model.SelectedManufacturers.Count > 0 || Model.SelectedVendors.Count > 0 || Model.SelectedTypes.Count > 0 || Model.SelectedCategories.Count > 0 || Model.SelectedProperties.Count > 0)
     {
         <h3>@Localization.GetString("YouSelected")</h3>
         <ul>
@@ -46,7 +46,7 @@
                     <a href="@BuildUrlRemoveValues("types")">@Localization.GetString("Remove")</a>
                 </li>
             }
-            @foreach (var item in Model.SelectedManufactures)
+            @foreach (var item in Model.SelectedManufacturers)
             {
                 <li>
                     @Localization.GetString("Brands"):
@@ -97,11 +97,11 @@
             }
         </ul>
     }
-    @if (Model.ShowManufactures && Model.Manufactures.Count > 1 && Model.SelectedManufactures.Count == 0)
+    @if (Model.ShowManufacturers && Model.Manufacturers.Count > 1 && Model.SelectedManufacturers.Count == 0)
     {
         <h3>@Localization.GetString("Brands")</h3>
         <ul>
-            @foreach (var item in Model.Manufactures)
+            @foreach (var item in Model.Manufacturers)
             {
                 <li>
                     <a href="@BuildUrlAddValues("manufacturers", item.Id)">@item.Name ( @item.Count )</a>

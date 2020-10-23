@@ -26,6 +26,7 @@
                             mode: CryptoJS.mode.CBC,
                             padding: CryptoJS.pad.Pkcs7
                         }).toString();
+
                     $.post(hcc.getServiceUrl("checkout/CleanCreditCard"), { "CardNumber": encryptedCC }, null, "json")
                         .done(function (data) {
                             $input.val(data.CardNumber);
@@ -48,9 +49,8 @@
 
     function IsEmailKnown(forceSwitch, emailfieldid) {
         var emailfield = $(emailfieldid || '#customeremail').val().toLowerCase();
-        var form = $('#__AjaxAntiForgeryForm');
-        var token = $('input[name="__RequestVerificationToken"]', form).val();
-
+		var token = $('input[name="__RequestVerificationToken"]').val();
+		
         $.ajax({
             url: hcc.getServiceUrl("checkout/IsEmailKnown"),
             type: 'post',
