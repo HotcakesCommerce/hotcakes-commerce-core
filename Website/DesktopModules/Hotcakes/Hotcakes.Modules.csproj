@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Hotcakes.Modules</RootNamespace>
     <AssemblyName>Hotcakes.Modules</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -73,6 +73,9 @@
     </Reference>
     <Reference Include="DotNetNuke">
       <HintPath>..\..\..\References\Dnn\DotNetNuke.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Abstractions">
+      <HintPath>..\..\..\References\Dnn\DotNetNuke.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Instrumentation">
       <HintPath>..\..\..\References\Dnn\DotNetNuke.Instrumentation.dll</HintPath>

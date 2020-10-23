@@ -36,18 +36,21 @@ using DotNetNuke.Security.Roles;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Common.Dnn;
+using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.Dnn
 {
     [Serializable]
     public class DnnMembershipServices : MembershipServices, IMembershipServices
     {
+        private readonly ILogger _Logger = new SupressLogger();
+
         public DnnMembershipServices(HccRequestContext context)
             : base(context)
         {
             Customers = new DnnCustomerAccountRepository(Context);
         }
-        
+
         public override bool LoginUser(string username, string password, out string errorMessage, out string userId)
         {
             var psett = PortalSettings.Current;
@@ -157,6 +160,8 @@ namespace Hotcakes.Commerce.Dnn
                     break;
             }
 
+            _Logger.LogMessage($"DNN user account ({u.Username}) create status == {status}.");
+
             return status == CreateUserStatus.Success;
         }
 
@@ -204,6 +209,18 @@ namespace Hotcakes.Commerce.Dnn
                 DateTime.Now + lastExpirationTime + timeSpan, // expiration date
                 membershipType.Notify, // notify user
                 false); // is owner
+        }
+
+        private void LogError(Exception ex)
+        {
+            if (ex != null)
+            {
+                _Logger.LogException(ex);
+                if (ex.InnerException != null)
+                {
+                    LogError(ex.InnerException);
+                }
+            }
         }
     }
 }
