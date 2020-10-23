@@ -1159,6 +1159,19 @@ namespace Hotcakes.Commerce.Accounts
             return gateway;
         }
 
+
+        public string AESKey
+        {
+            get { return GetProp(Constants.STORESETTING_AESKEY); }
+            set { SetProp(Constants.STORESETTING_AESKEY, value); }
+        }
+
+        public string AESInitVector
+        {
+            get { return GetProp(Constants.STORESETTING_AESINITVECTOR); }
+            set { SetProp(Constants.STORESETTING_AESINITVECTOR, value); }
+        }
+
         #endregion
 
         #region Store Protection

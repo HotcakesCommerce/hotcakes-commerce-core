@@ -124,6 +124,10 @@ namespace Hotcakes.Modules.Core
                         UpdateEmailTemplateBranding();
                         break;
 
+                    case "03.05.01":
+                        AddSecretKey();
+                        break;
+
                     default:
                         break;
                 }
@@ -683,6 +687,34 @@ namespace Hotcakes.Modules.Core
                         templateRepo.Update(template);
                     }
                 }
+            }
+        }
+
+        private void AddSecretKey()
+        {
+            try
+            {
+                var context = new HccRequestContext();
+                var accountServices = Factory.CreateService<AccountService>(context);
+                var stores = accountServices.Stores.FindAllPaged(1, int.MaxValue);
+
+                foreach (var store in stores)
+                {
+                    context.CurrentStore = store;
+                    var storesettings = context.CurrentStore.Settings;
+
+                    string aes = string.Join("", new System.Text.StringBuilder().Insert(0, "0123456789", 16).ToString().ToCharArray().OrderBy(o => Guid.NewGuid()).Take(16));
+                    storesettings.AESKey = aes;
+                    storesettings.AESInitVector = aes;
+
+                    // Save Settings 
+                    accountServices.Stores.Update(context.CurrentStore);
+                    CacheManager.ClearForStore(context.CurrentStore.Id);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message, ex);
             }
         }
 
