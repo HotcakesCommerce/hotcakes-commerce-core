@@ -52,7 +52,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\Dnn\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -145,6 +145,7 @@
     <Content Include="Portals\_default\HotcakesViews\Bootstrap4\Scripts\Category.js" />
     <Content Include="Portals\_default\HotcakesViews\Bootstrap4\Scripts\Checkout.js" />
     <Content Include="Portals\_default\HotcakesViews\Bootstrap4\Scripts\clipboard.min.js" />
+    <Content Include="Portals\_default\HotcakesViews\Bootstrap4\Scripts\crypto-js.js" />
     <Content Include="Portals\_default\HotcakesViews\Bootstrap4\Scripts\EditBilling.js" />
     <Content Include="Portals\_default\HotcakesViews\Bootstrap4\Scripts\EstimateShipping.js" />
     <Content Include="Portals\_default\HotcakesViews\Bootstrap4\Scripts\ImageRotator.js" />
@@ -182,6 +183,7 @@
     <Content Include="Portals\_default\HotcakesViews\Porto5\Scripts\Category.js" />
     <Content Include="Portals\_default\HotcakesViews\Porto5\Scripts\Checkout.js" />
     <Content Include="Portals\_default\HotcakesViews\Porto5\Scripts\clipboard.min.js" />
+    <Content Include="Portals\_default\HotcakesViews\Porto5\Scripts\crypto-js.js" />
     <Content Include="Portals\_default\HotcakesViews\Porto5\Scripts\EditBilling.js" />
     <Content Include="Portals\_default\HotcakesViews\Porto5\Scripts\EstimateShipping.js" />
     <Content Include="Portals\_default\HotcakesViews\Porto5\Scripts\ImageRotator.js" />
@@ -214,6 +216,7 @@
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\AffiliateRegistration.js" />
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\Category.js" />
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\Checkout.js" />
+    <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\crypto-js.js" />
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\EditBilling.js" />
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\EstimateShipping.js" />
     <Content Include="Portals\_default\HotcakesViews\SocialSpokes\Scripts\ImageRotator.js" />
@@ -247,6 +250,7 @@
     <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\AffiliateRegistration.js" />
     <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\Category.js" />
     <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\Checkout.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\crypto-js.js" />
     <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\EditBilling.js" />
     <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\EstimateShipping.js" />
     <Content Include="Portals\_default\HotcakesViews\_default-Legacy\Scripts\ImageRotator.js" />
@@ -278,6 +282,7 @@
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Category.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Checkout.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\clipboard.min.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\crypto-js.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\EditBilling.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\EstimateShipping.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\ImageRotator.js" />

@@ -40,7 +40,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BrandonHaynes.ModelAdapter.EntityFramework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BrandonHaynes.ModelAdapter.EntityFramework">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Misc\BrandonHaynes.ModelAdapter.EntityFramework.dll</HintPath>
     </Reference>
@@ -71,7 +71,7 @@
     <Reference Include="DotNetNuke.Web.Client">
       <HintPath>..\..\References\Dnn\DotNetNuke.Web.Client.dll</HintPath>
     </Reference>
-    <Reference Include="DotNetNuke.WebUtility, Version=4.2.1.783, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DotNetNuke.WebUtility">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Dnn\DotNetNuke.WebUtility.dll</HintPath>
     </Reference>
@@ -85,9 +85,6 @@
     </Reference>
     <Reference Include="Hotcakes.Common.Dnn">
       <HintPath>..\..\References\Hcc\Hotcakes.Common.Dnn.dll</HintPath>
-    </Reference>
-    <Reference Include="Hotcakes.Licensing.Common">
-      <HintPath>..\..\References\Hcc\Hotcakes.Licensing.Common.dll</HintPath>
     </Reference>
     <Reference Include="MiniProfiler">
       <HintPath>..\..\packages\MiniProfiler.3.1.1.140\lib\net40\MiniProfiler.dll</HintPath>

@@ -67,20 +67,24 @@
       <HintPath>..\..\..\packages\DocumentFormat.OpenXml.1.0\lib\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DocumentFormat.OpenXml.Extensions, Version=2.1.3842.36318, Culture=neutral, PublicKeyToken=bebd372c505097f2, processorArchitecture=MSIL">
+    <Reference Include="DocumentFormat.OpenXml.Extensions">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Misc\DocumentFormat.OpenXml.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\DotNetNuke.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Abstractions">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\DotNetNuke.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Instrumentation">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\DotNetNuke.Instrumentation.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Web">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\DotNetNuke.Web.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Web.Client">
@@ -88,6 +92,7 @@
       <HintPath>..\..\..\References\Dnn\DotNetNuke.Web.Client.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.WebUtility">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\DotNetNuke.WebUtility.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -118,6 +123,7 @@
       <HintPath>..\..\..\References\Dnn\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="paypal_base">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Misc\paypal_base.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
