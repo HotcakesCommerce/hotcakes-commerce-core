@@ -61,7 +61,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Avalara.AvaTax.Adapter, Version=13.2.1.0, Culture=neutral, PublicKeyToken=34e4ef76d6267205, processorArchitecture=MSIL">
+    <Reference Include="Avalara.AvaTax.Adapter">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Misc\Avalara.AvaTax.Adapter.dll</HintPath>
     </Reference>
@@ -69,7 +69,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\DocumentFormat.OpenXml.1.0\lib\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
-    <Reference Include="DocumentFormat.OpenXml.Extensions, Version=2.1.3842.36318, Culture=neutral, PublicKeyToken=bebd372c505097f2, processorArchitecture=MSIL">
+    <Reference Include="DocumentFormat.OpenXml.Extensions">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Misc\DocumentFormat.OpenXml.Extensions.dll</HintPath>
     </Reference>
@@ -80,9 +80,6 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="Hotcakes.Licensing.Common">
-      <HintPath>..\..\References\Hcc\Hotcakes.Licensing.Common.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <HintPath>..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
@@ -119,16 +116,16 @@
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Helpers">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Dnn\System.Web.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Mvc">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Microsoft.AspNet.Mvc.4.0.40804.0\lib\net40\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.WebPages">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Dnn\System.Web.WebPages.dll</HintPath>
     </Reference>

@@ -1,1 +1,1 @@
-﻿
+﻿Bin/Hotcakes.Licensing.Common.dll

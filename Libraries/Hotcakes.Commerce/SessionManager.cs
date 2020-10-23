@@ -31,7 +31,6 @@ using System.Web.SessionState;
 using Hotcakes.Commerce.Accounts;
 using Hotcakes.Commerce.Orders;
 using Hotcakes.Commerce.Utilities;
-using Hotcakes.Licensing.Common.DataContracts;
 using Hotcakes.Web;
 
 namespace Hotcakes.Commerce
@@ -277,12 +276,6 @@ namespace Hotcakes.Commerce
         {
             get { return GetSessionString(_AnalyticsOrderId); }
             set { SetSessionString(_AnalyticsOrderId, value); }
-        }
-
-        public static CredentialsDTO MarketingCredentials
-        {
-            get { return (CredentialsDTO) GetSessionObject("MarketingCredentials"); }
-            set { SetSessionObject("MarketingCredentials", value); }
         }
 
         public static string CardSecurityCode
