@@ -333,7 +333,7 @@ namespace Hotcakes.Commerce.Dnn
                 status = UserController.CreateUser(ref ui);
                 cust.Bvin = ui.UserID.ToString();
 
-                _Logger.LogMessage($"User ({ui.Username}||{ui.UserID}) created successfully and assigned a customer number ({cust.Bvin}).");
+                _Logger.LogMessage(string.Format("User ({0}||{1}) created successfully and assigned a customer number ({2}).", ui.Username, ui.UserID, cust.Bvin));
 
                 return status == UserCreateStatus.Success;
             }

@@ -160,7 +160,7 @@ namespace Hotcakes.Commerce.Dnn
                     break;
             }
 
-            _Logger.LogMessage($"DNN user account ({u.Username}) create status == {status}.");
+            _Logger.LogMessage(string.Format("DNN user account ({0}) create status == {1}.", u.Username, status));
 
             return status == CreateUserStatus.Success;
         }
