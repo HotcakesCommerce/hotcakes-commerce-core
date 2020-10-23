@@ -46,12 +46,7 @@ body {
             padding: 0;
             margin-right: 5px;
         }
-        //> div input {
-        //    margin-bottom: 18px;
-        //    line-height: 12px;
-        //    padding: 7px;
-        //    font-size: 12px;
-        //}
+
         > div input[type='text'] {
             width: 30%;
         }
@@ -188,14 +183,17 @@ body {
                 width: 100px;
             }
 
-            td {
+            tr td {
                 padding: 1px 5px;
+
+                .lead, span.lead, del, mark, a, a.hc-mini-cart {
+                    font-size: 0.9rem !important;
+                }
             }
         }
 
         .dnnActions {
             margin: auto;
-            // width: 190px;
             display: block;
         }
 

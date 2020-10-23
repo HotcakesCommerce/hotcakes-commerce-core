@@ -27,10 +27,10 @@
 
 <div class="hc-drilldown-filter">
     <!-- ko with: model -->
-    <div class="hc-drilldown-selected" data-bind="if: SelectedManufactures.length > 0 || SelectedVendors.length > 0 || SelectedTypes.length > 0 || SelectedProperties.length > 0">
+    <div class="hc-drilldown-selected" data-bind="if: SelectedManufacturers.length > 0 || SelectedVendors.length > 0 || SelectedTypes.length > 0 || SelectedProperties.length > 0">
         <h3>@Localization.GetString("YouSelected")</h3>
 
-        @RenderSelectedFacet("Manufactures", "chooseManFacet")
+        @RenderSelectedFacet("Manufacturers", "chooseManFacet")
         @RenderSelectedFacet("Vendors", "chooseVenFacet")
         @RenderSelectedFacet("Types", "chooseTypeFacet")
 
@@ -51,7 +51,7 @@
             <a href="#" data-bind="text: Title, attr: { href: Url }"></a>
         </li>
     </ul>
-    @RenderFacet("Manufactures", "chooseManFacet")
+    @RenderFacet("Manufacturers", "chooseManFacet")
     @RenderFacet("Vendors", "chooseVenFacet")
     @RenderFacet("Types", "chooseTypeFacet")
 

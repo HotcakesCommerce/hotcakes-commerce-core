@@ -16,17 +16,18 @@
         $('#cccardnumber')
             .hcCardInput(".hc-card-icons",
             function ($input) {
-                var key = CryptoJS.enc.Utf8.parse($('#aesInitVector').val());
-                var iv = CryptoJS.enc.Utf8.parse($('#aesKey').val());
+					var key = CryptoJS.enc.Utf8.parse($('#aesInitVector').val());
+                    var iv = CryptoJS.enc.Utf8.parse($('#aesKey').val());
 
-                var encryptedCC = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse($input.val()), key,
-                    {
-                        keySize: 128 / 8,
-                        iv: iv,
-                        mode: CryptoJS.mode.CBC,
-                        padding: CryptoJS.pad.Pkcs7
-                    }).toString();
-                $.post(hcc.getServiceUrl("checkout/CleanCreditCard"), { "CardNumber": encryptedCC }, null, "json")
+                    var encryptedCC = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse($input.val()), key,
+                        {
+                            keySize: 128 / 8,
+                            iv: iv,
+                            mode: CryptoJS.mode.CBC,
+                            padding: CryptoJS.pad.Pkcs7
+                        }).toString();
+
+                    $.post(hcc.getServiceUrl("checkout/CleanCreditCard"), { "CardNumber": encryptedCC }, null, "json")
                     .done(function (data) {
                         $input.val(data.CardNumber);
                     });
@@ -43,6 +44,7 @@
     function IsEmailKnown(forceSwitch, emailfieldid) {
         var emailfield = $(emailfieldid || '#customeremail').val().toLowerCase();
 		var token = $('input[name="__RequestVerificationToken"]').val();
+		
         $.ajax({
             url: hcc.getServiceUrl("checkout/IsEmailKnown"),
             type: 'post',
@@ -63,7 +65,7 @@
                 }
                 else {
                     $('#loginmessage').attr('class', 'dnnFormMessage dnnFormError').slideUp();
-                }                
+                }
             }
         });
     }
