@@ -167,6 +167,7 @@
     <Content Include="01.00.06.txt" />
     <Content Include="01.08.00.txt" />
     <Content Include="03.03.00.txt" />
+    <Content Include="03.05.00.txt" />
     <Content Include="AddressBook\AddressBookView.ascx" />
     <Content Include="AffiliateDashboard\AffiliateDashboardView.ascx" />
     <Content Include="AffiliateRegistration\AffiliateRegistrationView.ascx" />

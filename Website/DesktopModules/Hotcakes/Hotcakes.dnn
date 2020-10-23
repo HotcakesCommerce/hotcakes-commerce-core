@@ -228,6 +228,7 @@
         <component type="Cleanup" version="02.00.00" fileName="02.00.00.txt" />
         <component type="Cleanup" version="03.00.00" fileName="03.00.00.txt" />
         <component type="Cleanup" version="03.03.00" fileName="03.03.00.txt" />
+        <component type="Cleanup" version="03.05.00" fileName="03.05.00.txt" />
         <component type="File">
           <files>
             <basePath>DesktopModules\Hotcakes</basePath>
@@ -317,11 +318,6 @@
               <path>bin</path>
               <name>Hotcakes.Modules.dll</name>
               <sourceFileName>bin\Hotcakes.Modules.dll</sourceFileName>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Hotcakes.Licensing.Common.dll</name>
-              <sourceFileName>bin\Hotcakes.Licensing.Common.dll</sourceFileName>
             </assembly>
             <assembly>
               <path>bin</path>
