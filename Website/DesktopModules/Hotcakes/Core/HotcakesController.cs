@@ -53,6 +53,7 @@ using DotNetNuke.Web.Client;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Accounts;
 using Hotcakes.Commerce.Catalog;
+using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Content;
 using Hotcakes.Commerce.Dnn;
 using Hotcakes.Commerce.Dnn.Utils;
@@ -70,6 +71,9 @@ namespace Hotcakes.Modules.Core
     public class HotcakesController : IUpgradeable
     {
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(HotcakesController));
+        private HccRequestContext context = null;
+        private AccountService accountServices = null;
+        private List<Store> stores = null;
 
         private const string SCHEDULED_JOB_TYPE = "Hotcakes.Modules.Core.ClearUploadTempFiles, Hotcakes.Modules";
         private const string SCHEDULED_JOB_NAME = "Hotcakes Commerce: Clear Temporary Files";
@@ -84,6 +88,10 @@ namespace Hotcakes.Modules.Core
         {
             try
             {
+                context = new HccRequestContext();
+                accountServices = Factory.CreateService<AccountService>(context);
+                stores = accountServices.Stores.FindAllPaged(1, int.MaxValue);
+
                 switch (Version)
                 {
                     case "01.00.00":
@@ -122,6 +130,10 @@ namespace Hotcakes.Modules.Core
                         UninstallControlPanel();
                         CreateTempFileScheduledJob();
                         UpdateEmailTemplateBranding();
+                        break;
+
+                    case "03.05.00":
+                        UpdateStoreSettings();
                         break;
 
                     default:
@@ -181,10 +193,6 @@ namespace Hotcakes.Modules.Core
         private void MigrateAvalaraTaxProviderSetting()
         {
             // 1.10.0: Avalara tax provider implementation has been changed for tax provider approach where end user can create their own tax provider any time.
-            var context = new HccRequestContext();
-            var accountServices = Factory.CreateService<AccountService>(context);
-            var stores = accountServices.Stores.FindAllPaged(1, int.MaxValue);
-
             foreach (var store in stores)
             {
                 context.CurrentStore = store;
@@ -254,10 +262,6 @@ namespace Hotcakes.Modules.Core
 
         private void EnsureDefaultZones()
         {
-            var context = new HccRequestContext();
-            var accountServices = Factory.CreateService<AccountService>(context);
-            var stores = accountServices.Stores.FindAllPaged(1, int.MaxValue);
-
             foreach (var store in stores)
             {
                 context.CurrentStore = store;
@@ -437,10 +441,6 @@ namespace Hotcakes.Modules.Core
         private void MigrateFedExRateSetting()
         {
             // 1.9.0: negotiated rates are no longer a global setting, but a "local" setting
-            var context = new HccRequestContext();
-            var accountServices = Factory.CreateService<AccountService>(context);
-            var stores = accountServices.Stores.FindAllPaged(1, int.MaxValue);
-
             foreach (var store in stores)
             {
                 context.CurrentStore = store;
@@ -683,6 +683,30 @@ namespace Hotcakes.Modules.Core
                         templateRepo.Update(template);
                     }
                 }
+            }
+        }
+
+        private void UpdateStoreSettings()
+        {
+            var hccApp = HotcakesApplication.Current;
+
+            foreach (var store in stores)
+            {
+                var key = Hotcakes.Commerce.Utilities.RandomNumbers.Create16DigitString();
+                store.Settings.AddOrUpdateLocalSetting(new StoreSetting
+                {
+                    SettingName = Constants.STORESETTING_AESKEY,
+                    SettingValue = key
+                });
+
+                store.Settings.AddOrUpdateLocalSetting(new StoreSetting
+                {
+                    SettingName = Constants.STORESETTING_AESINITVECTOR,
+                    SettingValue = key
+                });
+
+                hccApp.CurrentStore = store;
+                hccApp.UpdateCurrentStore();
             }
         }
 

@@ -25,8 +25,8 @@ This solution is considered to be the core of Hotcakes Commerce e-commerce funct
 Quick Links
 -----------
 * [Hotcakes on Facebook](http://www.facebook.com/HotcakesCommerce)
-* [Community](https://hotcakes.org/Community)
-* [Resources](https://hotcakes.org/Resources)
+* [Community](https://mmmcommerce.com/Community)
+* [Resources](https://mmmcommerce.com/Resources)
 * [Support](https://upendoventures.com/Support)
 
 How to Contribute

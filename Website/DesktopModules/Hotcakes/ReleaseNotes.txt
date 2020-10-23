@@ -4,9 +4,9 @@
 	.muy-importante { color:red;font-weight:bold; }
 </style>
 <div class="uv-install-wrapper">
-	<h1>Hotcakes Commerce: Version 03.04.01</h1>
+	<h1>Hotcakes Commerce: Version 03.05.00</h1>
 
-	<p class="muy-importante">The release notes continue after the Sponsors and Code Contributors below.</p>
+	<p class="muy-importante">The release notes continue after the Sponsors and Contributors below.</p>
 	
 	<h3>Sponsors</h3>
 	<p>Open-source is not free. We're so GRATEFUL for the following people/organizations for <a href="https://github.com/sponsors/hismightiness" target="_blank">sponsoring developers</a> to work on this release!</p>
@@ -14,14 +14,23 @@
 	<p>THANK YOU to the following rockstars!</p>
 	<ul>
 		<li>David Poindexter, <a href="https://nvisionative.com/" target="_blank">nvisionative</a></li>
+		<li>Dan Rice, <a href="https://www.puresystems.co.uk/" target="_blank">Pure Systems</a></li>
 		<li>Matt Rutledge, <a href="https://beleivekids.com/" target="_blank">Believe Kids</a></li>
 		<li>Adam Bernstein, <a href="https://practicewise.com/" target="_blank">PracticeWise</a></li>
+		<li>Aaron Lopez, <a href="https://wolfxmachina.com/" target="_blank">Wolf X Machina</a></li>
+		<li><a href="https://www.intouch.org/" target="_blank">In Touch Ministries</a></li>
+		<li><a href="https://www.rand.org/" target="_blank">RAND Corporation Worldwide</a></li>
 	</ul>
 	
-	<h3>Code Contributors</h3>
+	<h3>Contributors</h3>
 	<p>THANK YOU to the following community members for participating in this release!</p>
 	<ul>
 		<li>Will Strohl, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
+		<li>Nirav Sanghvi, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
+		<li><a href="https://github.com/Tychodewaard" target="_blank">Tycho de Waard</a></li>
+		<li><a href="https://github.com/Navilois" target="_blank">Alois Krichmayr</a></li>
+		<li><a href="https://github.com/bubish" target="_blank">bubish</a></li>
+		<li><a href="https://github.com/RenegadeMinds" target="_blank">Ryan (RenegadeMinds)</a></li>
 	</ul>
 
 	<h3>Partners</h3>
@@ -41,71 +50,17 @@
 	
 	<h3><strong>Enhancements</strong></h3>
 	<ul>
-		<li>Nothing to note in this release.</li>
+		<li><strong>CI: Vendors &amp; Manufacturers Added to Product Views</strong> - Designers now can access the name of a product manufacturer/vendor directly in the viewset without adding any new code. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/311" target="_blank">Issue 311</a>)</li>
+		<li><strong>Support for Submit Buttons in Viewsets</strong> - Designers now can use and target submit buttons in their viewset. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/pull/309" target="_blank">Issue 309</a>)</li>
+		<li><strong>Enhanced Support for EU B2B Stores</strong> - EU-based stores can now enjoy proper formatting &amp; validation of their respective VAT number. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/155" target="_blank">Issue 155</a>)</li>
+		<li><strong>Initial Support for Prompt Commands</strong> - You can now view products, categories, and a sales summary using Prompt in the persona bar. (No Issue)</li>
 	</ul>
 	
 	<h3><strong>Maintenance Updates</strong></h3>
 	<ul>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/294" target="_blank">Issue 294</a> - Store administration menu localization not falling back to English.</li>
-	</ul>
-
-	<h1>Hotcakes Commerce: Version 03.04.00</h1>
-	
-	<h2><strong>Highlights</strong></h2>
-	<ul>
-		<li><strong>Added a Porto5 Viewset</strong> - Any website using the popular Mandeeps Porto theme may now use a compatible viewset out-of-the-box.</li>
-		<li><strong>Localization Updates</strong> - More multilingual updates have been applied.</li>
-	</ul>
-
-	<p class="muy-importante">The release notes continue after the Sponsors and Code Contributors below - including <span class="muy-importante">potential BREAKING changes</span>.</p>
-	
-	<h3>Sponsors</h3>
-	<p>Open-source is not free. We're so GRATEFUL for the following people/organizations for <a href="https://github.com/sponsors/hismightiness" target="_blank">sponsoring developers</a> to work on this release!</p>
-	<p>Sponsorship is <em>Powered by GitHub Sponsors</em> and ensures that this project lives and thrives. <a href="https://github.com/sponsors/hismightiness" target="_blank">Please consider contributing</a> any amount.</p>
-	<p>THANK YOU to the following rockstars!</p>
-	<ul>
-		<li>David Poindexter, <a href="https://nvisionative.com/" target="_blank">nvisionative</a></li>
-		<li>Matt Rutledge, <a href="https://beleivekids.com/" target="_blank">Believe Kids</a></li>
-		<li>Adam Bernstein, <a href="https://practicewise.com/" target="_blank">PracticeWise</a></li>
-	</ul>
-	
-	<h3>Code Contributors</h3>
-	<p>THANK YOU to the following community members for participating in this release!</p>
-	<ul>
-		<li>Will Strohl, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
-		<li><a href="https://github.com/Navilois" target="_blank">Alois Krichmayr (Navilois)</a></li>
-	</ul>
-
-	<h3>Partners</h3>
-	<p>THANK YOU to the following partners for participating in this release!</p>
-	<ul>
-	  <li>
-		<a href="https://hotcakes.org/Partners/Partner-Detail/id/2106" target="_blank" rel="noopener">Upendo Ventures</a>
-	  </li>
-	</ul>
-	
-	<h3><strong>Release Note Prefixes</strong></h3>
-	<p>The following prefixes are defined as:</p>
-	<ul>
-		<li><strong>SI:</strong> Support Inquiry - This issue was reported by a <a href="https://upendoventures.com/Support" target="_blank">support customer</a> and, as such, was prioritized above all other tasks.</li>
-		<li><strong>CI:</strong> Community Inquiry - This issue was reported by a community member in the <a href="https://mmmcommerce.com/Forums" target="_blanK">Hotcakes Commerce community forums</a>.</li>
-	</ul>
-	
-	<h3><strong>Enhancements</strong></h3>
-	<ul>
-		<li><strong>New Porto5 Viewset</strong> - Out-of-the-box viewset that's compatible with Mandeeps Porto 5 theme. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/290" target="_blank">Issue 290</a>)</li>
-		<li><strong>Sitemap Localization Support</strong> - The product sitemap now supports localized websites. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/269" target="_blank">Issue 269</a>)</li>
-	</ul>
-	
-	<h3><strong>Maintenance Updates</strong></h3>
-	<ul>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/205" target="_blank">Issue 205</a> - SI: Search Results &quot;Randomly&quot; Sorts Vendors &amp; Manufacturers</li>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/288" target="_blank">Issue 288</a> - Resolves display issue with the language selector in the store administration.</li>
-		<li>No Issue - Bootstrap4 Viewset: Removed extra shopping button from the wish list view when empty.</li>
-		<li>No Issue - Bootstrap4 Viewset: Resolved display issue with cart header.</li>
-		<li>No Issue - Bootstrap4 Viewset: Checkout login label controls are now associated with their form controls.</li>
-		<li>No Issue - Bootstrap4 Viewset: Corrected the margin CSS class in the product details view.</li>
-		<li>No Issue - Bootstrap4 Viewset: Updated label formatting in the product details to have a consistent display.</li>
-		<li>No Issue - Bootstrap4 Viewset: Preventing search engines from indexing add to cart links.</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/313" target="_blank">Issue 313</a> - SI: Category Viewer default sort (Manual) issue in drilldown view</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/322" target="_blank">Issue 322</a> - HTML content was showing up in Bootstrap viewsets for user supplied price products.</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/219" target="_blank">Issue 219</a> - Resolves HTTP Header error message in URL Rewriter.</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/305" target="_blank">Issue 305</a> - No longer publish inactive products to sitemap.</li>
 	</ul>
 </div>

@@ -115,7 +115,6 @@
 		<!-- Copy file to Modules Build Folder -->
 		<Copy SourceFiles="@(HotcakesDlls)" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\Hotcakes.Common.Dnn.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
-		<Copy SourceFiles="$(MSBuildDnnBinPath)\Hotcakes.Licensing.Common.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\Hotcakes.Shipping.FedEx.XmlSerializers.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\Avalara.AvaTax.Adapter.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<!-- thought log4net is not used by our code directly, it have to be present since it is used by paypal_base.dll -->

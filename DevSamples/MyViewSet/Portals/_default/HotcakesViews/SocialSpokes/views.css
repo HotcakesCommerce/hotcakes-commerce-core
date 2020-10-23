@@ -765,8 +765,16 @@ span.dnnFormMessage.hcFormError:after {
 .hc-minicart .hc-tooltip .dnnGrid img {
   width: 100px;
 }
-.hc-minicart .hc-tooltip .dnnGrid td {
+.hc-minicart .hc-tooltip .dnnGrid tr td {
   padding: 1px 5px;
+}
+.hc-minicart .hc-tooltip .dnnGrid tr td .lead,
+.hc-minicart .hc-tooltip .dnnGrid tr td span.lead,
+.hc-minicart .hc-tooltip .dnnGrid tr td del,
+.hc-minicart .hc-tooltip .dnnGrid tr td mark,
+.hc-minicart .hc-tooltip .dnnGrid tr td a,
+.hc-minicart .hc-tooltip .dnnGrid tr td a.hc-mini-cart {
+  font-size: 0.9rem !important;
 }
 .hc-minicart .hc-tooltip .dnnActions {
   margin: auto;

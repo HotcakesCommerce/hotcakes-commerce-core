@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props" Condition="Exists('..\..\..\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Hotcakes.Modules</RootNamespace>
     <AssemblyName>Hotcakes.Modules</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -31,6 +32,8 @@
     <TargetFrameworkProfile />
     <UseGlobalApplicationHostFile />
     <Use64BitIISExpress />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,17 +67,24 @@
       <HintPath>..\..\..\packages\DocumentFormat.OpenXml.1.0\lib\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DocumentFormat.OpenXml.Extensions, Version=2.1.3842.36318, Culture=neutral, PublicKeyToken=bebd372c505097f2, processorArchitecture=MSIL">
+    <Reference Include="DocumentFormat.OpenXml.Extensions">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Misc\DocumentFormat.OpenXml.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\DotNetNuke.dll</HintPath>
     </Reference>
+    <Reference Include="DotNetNuke.Abstractions">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Dnn\DotNetNuke.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="DotNetNuke.Instrumentation">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\DotNetNuke.Instrumentation.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Web">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\DotNetNuke.Web.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Web.Client">
@@ -82,6 +92,7 @@
       <HintPath>..\..\..\References\Dnn\DotNetNuke.Web.Client.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.WebUtility">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\DotNetNuke.WebUtility.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -112,6 +123,7 @@
       <HintPath>..\..\..\References\Dnn\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="paypal_base">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Misc\paypal_base.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -155,6 +167,7 @@
     <Content Include="01.00.06.txt" />
     <Content Include="01.08.00.txt" />
     <Content Include="03.03.00.txt" />
+    <Content Include="03.05.00.txt" />
     <Content Include="AddressBook\AddressBookView.ascx" />
     <Content Include="AffiliateDashboard\AffiliateDashboardView.ascx" />
     <Content Include="AffiliateRegistration\AffiliateRegistrationView.ascx" />
@@ -4177,7 +4190,7 @@
     <Content Include="Core\Admin\Catalog\App_LocalResources\ProductsEdit_Tabs.aspx.resx" />
   </ItemGroup>
   <PropertyGroup>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <Extension>zip</Extension>
     <DNNFileName>Hotcakes</DNNFileName>
@@ -4187,7 +4200,7 @@
   <Import Project="$(BuildScriptsPath)\ModulePackage.Targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="AfterBuild" DependsOnTargets="PackageModule">
   </Target>
   <ProjectExtensions>
@@ -4217,6 +4230,14 @@ xcopy "$(SolutionDir)References\Dnn" "$(SolutionDir)Website\bin\" /y /s /e
 xcopy "$(SolutionDir)References\Dev" "$(SolutionDir)Website\bin\" /y /s /e
 xcopy "$(SolutionDir)packages\EntityFramework.6.1.1\lib\net40" "$(SolutionDir)Website\bin\" /y /s /e</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\..\..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets" Condition="Exists('..\..\..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets'))" />
+    <Error Condition="!Exists('..\..\..\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

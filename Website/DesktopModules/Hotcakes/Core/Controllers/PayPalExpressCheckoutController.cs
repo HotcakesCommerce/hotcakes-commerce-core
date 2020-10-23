@@ -118,7 +118,7 @@ namespace Hotcakes.Modules.Core.Controllers
             model.PayPalPayerId = Request.QueryString["payerId"] ?? string.Empty;
 
             if (string.IsNullOrEmpty(model.PayPalToken))
-                Response.Redirect(Url.RouteHccUrl(HccRoute.Cart));
+                Redirect(Url.RouteHccUrl(HccRoute.Cart));
 
 
             var ppAPI = PaypalExpressUtilities.GetPaypalAPI(HccApp.CurrentStore);
@@ -280,7 +280,7 @@ namespace Hotcakes.Modules.Core.Controllers
                     var tempOrder = HccApp.OrderServices.Orders.FindForCurrentStore(model.CurrentOrder.bvin);
                     HccApp.CurrentRequestContext.IntegrationEvents.OrderReceived(tempOrder, HccApp);
                     SessionManager.AnalyticsOrderId = model.CurrentOrder.bvin;
-                    Response.Redirect(Url.RouteHccUrl(HccRoute.Checkout,
+                    Redirect(Url.RouteHccUrl(HccRoute.Checkout,
                         new {action = "receipt", id = model.CurrentOrder.bvin}));
                 }
             }

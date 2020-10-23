@@ -26,18 +26,26 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Text.RegularExpressions;
 using System.Web.WebPages.Scope;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Membership;
+using DotNetNuke.Services.Exceptions;
 using Hotcakes.Commerce;
+using Hotcakes.Commerce.Accounts;
 using Hotcakes.Commerce.Analytics;
 using Hotcakes.Commerce.BusinessRules;
+using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Contacts;
 using Hotcakes.Commerce.Dnn;
 using Hotcakes.Commerce.Extensions;
+using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Commerce.Metrics;
 using Hotcakes.Commerce.Orders;
@@ -275,8 +283,79 @@ namespace Hotcakes.Modules.Core.Controllers
             var notclean = Request.Form["CardNumber"];
             notclean = security.InputFilter(notclean.Trim(), PortalSecurity.FilterFlag.NoMarkup);
 
-            result.CardNumber = CardValidator.CleanCardNumber(notclean);
-            return new PreJsonResult(Web.Json.ObjectToJson(result));
+            var context = new HccRequestContext();
+            var settingsRepo = Factory.CreateRepo<StoreSettingsRepository>(context);
+
+            var keybytes = Encoding.UTF8.GetBytes(settingsRepo.FindSingleSetting(1, Constants.STORESETTING_AESINITVECTOR).SettingValue);
+            var iv = Encoding.UTF8.GetBytes(settingsRepo.FindSingleSetting(1, Constants.STORESETTING_AESKEY).SettingValue);
+
+            var encrypted = Convert.FromBase64String(notclean);
+            var decriptedFromJavascript = DecryptStringFromBytes(encrypted, keybytes, iv);
+
+            if(!string.IsNullOrEmpty(decriptedFromJavascript))
+            {
+                result.CardNumber = CardValidator.CleanCardNumber(decriptedFromJavascript);
+                return new PreJsonResult(Web.Json.ObjectToJson(result));
+            }
+            return new PreJsonResult(string.Empty);
+        }
+
+        private static string DecryptStringFromBytes(byte[] cipherText, byte[] key, byte[] iv)
+        {
+            // Check arguments.  
+            if (cipherText == null || cipherText.Length <= 0)
+            {
+                return null;
+            }
+            if (key == null || key.Length <= 0)
+            {
+                return null;
+            }
+            if (iv == null || iv.Length <= 0)
+            {
+                return null;
+            }
+
+            string plaintext = null;
+            using (var rijAlg = new RijndaelManaged())
+            {
+                //Settings  
+                rijAlg.Mode = CipherMode.CBC;
+                rijAlg.Padding = PaddingMode.PKCS7;
+                rijAlg.FeedbackSize = 128;
+
+                rijAlg.Key = key;
+                rijAlg.IV = iv;
+
+                // Create a decrytor to perform the stream transform.  
+                var decryptor = rijAlg.CreateDecryptor(rijAlg.Key, rijAlg.IV);
+
+                try
+                {
+                    // Create the streams used for decryption.  
+                    using (var msDecrypt = new MemoryStream(cipherText))
+                    {
+                        using(var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                        {
+
+                            using (var srDecrypt = new StreamReader(csDecrypt))
+                            {
+                                // Read the decrypted bytes from the decrypting stream  
+                                // and place them in a string.  
+                                plaintext = srDecrypt.ReadToEnd();
+
+                            }
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Exceptions.LogException(ex);
+                }
+            }
+
+            return plaintext;
         }
 
         [HccHttpPost]
@@ -406,6 +485,83 @@ namespace Hotcakes.Modules.Core.Controllers
             return new PreJsonResult(Web.Json.ObjectToJson(result));
         }
 
+        /// <summary>
+        ///     Gets called after the VAT number was changed.
+        /// </summary>
+        /// <returns></returns>
+        [HccHttpPost]
+        public ActionResult ApplyEUVatRules()
+        {
+            // https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s21.html - 23.06.2020
+            Regex EUVatRegex = new Regex(@"^(
+            (AT)?U[0-9]{8} |                              # Austria
+            (BE)?0[0-9]{9} |                              # Belgium
+            (BG)?[0-9]{9,10} |                            # Bulgaria
+            (CY)?[0-9]{8}L |                              # Cyprus
+            (CZ)?[0-9]{8,10} |                            # Czech Republic
+            (DE)?[0-9]{9} |                               # Germany
+            (DK)?[0-9]{8} |                               # Denmark
+            (EE)?[0-9]{9} |                               # Estonia
+            (EL|GR)?[0-9]{9} |                            # Greece
+            (ES)?[0-9A-Z][0-9]{7}[0-9A-Z] |               # Spain
+            (FI)?[0-9]{8} |                               # Finland
+            (FR)?[0-9A-Z]{2}[0-9]{9} |                    # France
+            (GB)?([0-9]{9}([0-9]{3})?|[A-Z]{2}[0-9]{3}) | # United Kingdom
+            (HU)?[0-9]{8} |                               # Hungary
+            (IE)?[0-9]S[0-9]{5}L |                        # Ireland
+            (IT)?[0-9]{11} |                              # Italy
+            (LT)?([0-9]{9}|[0-9]{12}) |                   # Lithuania
+            (LU)?[0-9]{8} |                               # Luxembourg
+            (LV)?[0-9]{11} |                              # Latvia
+            (MT)?[0-9]{8} |                               # Malta
+            (NL)?[0-9]{9}B[0-9]{2} |                      # Netherlands
+            (PL)?[0-9]{10} |                              # Poland
+            (PT)?[0-9]{9} |                               # Portugal
+            (RO)?[0-9]{2,10} |                            # Romania
+            (SE)?[0-9]{12} |                              # Sweden
+            (SI)?[0-9]{8} |                               # Slovenia
+            (SK)?[0-9]{10}                                # Slovakia
+            )$", RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+
+
+            var countryRepo = Factory.CreateRepo<CountryRepository>();
+            var storeIsoCode = countryRepo.Find(HccApp.ContactServices.Addresses.FindStoreContactAddress().CountryBvin).IsoCode;
+
+            string result = null;
+            string userVatNumber = security.InputFilter(Regex.Replace(Request.Form["UserVatNumber"], "[-. ]", ""), PortalSecurity.FilterFlag.NoMarkup);
+            bool foundMatch = EUVatRegex.IsMatch(userVatNumber);
+
+            var orderid = Request.Form["OrderId"] ?? string.Empty;
+            orderid = security.InputFilter(orderid.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            var order = HccApp.OrderServices.Orders.FindForCurrentStore(orderid);
+
+            // EU VAT: remove tax if VAT number is valid and customer is not in the same country as seller
+            if (foundMatch)
+            {
+                if (storeIsoCode != userVatNumber.Substring(0, 2).ToUpper())
+                {
+                    foreach (var i in order.Items)
+                    {
+                        i.IsTaxExempt = true;
+                    }
+                    HccApp.CalculateOrderAndSave(order);
+                    result = "VatFree";
+                }
+                else result = "SameCountry";
+            }
+            else
+            {
+                foreach (var i in order.Items)
+                {
+                    i.IsTaxExempt = HccApp.CatalogServices.Products.FindBySku(i.ProductSku).TaxExempt;
+                }
+                HccApp.CalculateOrderAndSave(order);
+                result = Localization.GetString("VatNumberValMsg");
+            }
+
+            return new PreJsonResult(Web.Json.ObjectToJson(result));
+        }
+
         #endregion
 
         #region Implementation / Load model
@@ -413,7 +569,7 @@ namespace Hotcakes.Modules.Core.Controllers
         private CheckoutViewModel LoadCheckoutModel()
         {
             if (CurrentCart == null || CurrentCart.Items == null || CurrentCart.Items.Count == 0)
-                Response.Redirect(Url.RouteHccUrl(HccRoute.Cart));
+                Redirect(Url.RouteHccUrl(HccRoute.Cart));
 
             var model = new CheckoutViewModel { CurrentOrder = CurrentCart };
 
@@ -432,6 +588,12 @@ namespace Hotcakes.Modules.Core.Controllers
             // Populate Countries
             model.Countries = HccApp.GlobalizationServices.Countries.FindActiveCountries();
             model.ShowAffiliateId = HccApp.CurrentStore.Settings.AffiliateShowIDOnCheckout;
+            
+            var context = new HccRequestContext();
+            var settingsRepo = Factory.CreateRepo<StoreSettingsRepository>(context);
+
+            model.AESEncryptInitVector = settingsRepo.FindSingleSetting(1, Constants.STORESETTING_AESINITVECTOR).SettingValue;
+            model.AESEncryptKey = settingsRepo.FindSingleSetting(1, Constants.STORESETTING_AESKEY).SettingValue;
 
             VerifyOrderSize(model);
 

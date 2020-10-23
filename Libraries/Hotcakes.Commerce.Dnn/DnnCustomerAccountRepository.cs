@@ -35,6 +35,7 @@ using Hotcakes.Commerce.Dnn.Data;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Common.Dnn;
 using Hotcakes.Web;
+using Hotcakes.Web.Logging;
 using Json = Hotcakes.Web.Json;
 
 namespace Hotcakes.Commerce.Dnn
@@ -42,6 +43,8 @@ namespace Hotcakes.Commerce.Dnn
     [Serializable]
     public class DnnCustomerAccountRepository : ICustomerAccountRepository
     {
+        private static readonly ILogger _Logger = new SupressLogger();
+
         #region Constructor
 
         public DnnCustomerAccountRepository(HccRequestContext c)
@@ -304,29 +307,41 @@ namespace Hotcakes.Commerce.Dnn
 
         internal static bool CreateDnnAccount(CustomerAccount cust, int portalId, ref UserCreateStatus status)
         {
-            if (cust == null)
-                throw new ArgumentNullException("cust");
-
-            var ui = new UserInfo();
-            if (string.IsNullOrWhiteSpace(cust.Username))
+            try
             {
-                cust.Username = BuildUsername(cust);
+                if (cust == null)
+                {
+                    throw new ArgumentNullException("cust");
+                }
+
+                var ui = new UserInfo();
+                if (string.IsNullOrWhiteSpace(cust.Username))
+                {
+                    cust.Username = BuildUsername(cust);
+                }
+
+                ui.InitRequiredProperties(
+                    cust.Username,
+                    cust.FirstName,
+                    cust.LastName,
+                    cust.Email,
+                    cust.Password,
+                    portalId,
+                    true);
+
+                UpdateUserInfo(ui, cust);
+                status = UserController.CreateUser(ref ui);
+                cust.Bvin = ui.UserID.ToString();
+
+                _Logger.LogMessage(string.Format("User ({0}||{1}) created successfully and assigned a customer number ({2}).", ui.Username, ui.UserID, cust.Bvin));
+
+                return status == UserCreateStatus.Success;
             }
-
-            ui.InitRequiredProperties(
-                cust.Username,
-                cust.FirstName,
-                cust.LastName,
-                cust.Email,
-                cust.Password,
-                portalId,
-                true);
-
-            UpdateUserInfo(ui, cust);
-            status = UserController.CreateUser(ref ui);
-            cust.Bvin = ui.UserID.ToString();
-
-            return status == UserCreateStatus.Success;
+            catch (Exception e)
+            {
+                LogError(e);
+                throw;
+            }
         }
 
         internal static void UpdateUserInfo(UserInfo uInfo, CustomerAccount cust)
@@ -423,5 +438,17 @@ namespace Hotcakes.Commerce.Dnn
         }
 
         #endregion
+
+        private static void LogError(Exception ex)
+        {
+            if (ex != null)
+            {
+                _Logger.LogException(ex);
+                if (ex.InnerException != null)
+                {
+                    LogError(ex.InnerException);
+                }
+            }
+        }
     }
 }

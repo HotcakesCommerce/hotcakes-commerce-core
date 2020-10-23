@@ -39,7 +39,7 @@ namespace Hotcakes.Commerce.Dnn.Providers
 		{
 			AreaRegistration.RegisterAllAreas();
 
-			RegisterWebApi(GlobalConfiguration.Configuration);
+            RegisterWebApi(GlobalConfiguration.Configuration);
 			RegisterGlobalFilters(GlobalFilters.Filters);
 			RegisterRoutes(RouteTable.Routes);
 

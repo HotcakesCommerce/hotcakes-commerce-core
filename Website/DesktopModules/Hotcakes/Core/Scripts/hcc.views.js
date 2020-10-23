@@ -7,7 +7,7 @@
     forms.on("keydown", "input:text", function (event) {
         var form = $(this).closest('div[data-type="form"]');
         if (event.which == 13) {
-            var inputElement = form.find("input:submit:not([data-nosubmit]), input:image:not([data-nosubmit])").first();
+            var inputElement = form.find("input:submit:not([data-nosubmit]), input:image:not([data-nosubmit]), button:submit:not([data-nosubmit])").first();
             if (inputElement)
                 inputElement.click();
 
@@ -15,7 +15,7 @@
         }
     });
 
-    forms.on("click", "input:submit:not([data-nosubmit]), input:image:not([data-nosubmit])", function (event) {
+    forms.on("click", "input:submit:not([data-nosubmit]), input:image:not([data-nosubmit]), button:submit:not([data-nosubmit])", function (event) {
         var form = $(this).closest('div[data-type="form"]');
         var submitEl = $(event.target);
 

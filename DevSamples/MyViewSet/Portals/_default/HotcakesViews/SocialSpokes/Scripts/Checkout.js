@@ -16,7 +16,18 @@
         $('#cccardnumber')
             .hcCardInput(".hc-card-icons",
             function ($input) {
-                $.post(hcc.getServiceUrl("checkout/CleanCreditCard"), { "CardNumber": $input.val() }, null, "json")
+					var key = CryptoJS.enc.Utf8.parse($('#aesInitVector').val());
+                    var iv = CryptoJS.enc.Utf8.parse($('#aesKey').val());
+
+                    var encryptedCC = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse($input.val()), key,
+                        {
+                            keySize: 128 / 8,
+                            iv: iv,
+                            mode: CryptoJS.mode.CBC,
+                            padding: CryptoJS.pad.Pkcs7
+                        }).toString();
+
+                    $.post(hcc.getServiceUrl("checkout/CleanCreditCard"), { "CardNumber": encryptedCC }, null, "json")
                     .done(function (data) {
                         $input.val(data.CardNumber);
                     });
@@ -32,9 +43,8 @@
 
     function IsEmailKnown(forceSwitch, emailfieldid) {
         var emailfield = $(emailfieldid || '#customeremail').val().toLowerCase();
-        var form = $('#__AjaxAntiForgeryForm');
-        var token = $('input[name="__RequestVerificationToken"]', form).val();
-
+		var token = $('input[name="__RequestVerificationToken"]').val();
+		
         $.ajax({
             url: hcc.getServiceUrl("checkout/IsEmailKnown"),
             type: 'post',
@@ -211,6 +221,7 @@
             this.$shState = $('#shippingstate');
             this.$shFirstname = $('#shippingfirstname');
             this.$shLastname = $('#shippinglastname');
+            this.$shVatNumber = $('#shippingvatnumber');
             this.$shAddress = $('#shippingaddress');
             this.$shAddress2 = $('#shippingaddress2');
             this.$shCity = $('#shippingcity');
@@ -278,6 +289,7 @@
                 $('#billingtempregion').val($(this).val());
             });
             this.$blAll.change(function (e) { Addresses.billingChanged(e); });
+            this.$shVatNumber.change(function () { ApplyEUVatRules(); });
 
             $("#hcSaveNormalizedAction").click(function (e) { Addresses.saveNormalized(e); });
             this.$submitButton.click(function (e) {
@@ -674,6 +686,22 @@
                 }).prop("checked", true);
             }
         }
+    }
+
+    function ApplyEUVatRules() {
+        $.ajax({
+            type: "POST",
+            url: hcc.getServiceUrl("checkout/applyeuvatrules"),
+            data: {
+                UserVatNumber: $('#shippingvatnumber').val(),
+                OrderId: $('#orderbvin').val()
+            },
+            dataType: "json",
+            success: function (data) {
+                $("#shippingaddress").change();
+            },
+            error: function () { }
+        });
     }
 
     // Order Summary ------------------------
