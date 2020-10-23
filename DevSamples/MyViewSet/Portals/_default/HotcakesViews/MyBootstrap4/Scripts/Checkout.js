@@ -49,8 +49,7 @@
 
     function IsEmailKnown(forceSwitch, emailfieldid) {
         var emailfield = $(emailfieldid || '#customeremail').val().toLowerCase();
-        var form = $('#__AjaxAntiForgeryForm');
-        var token = $('input[name="__RequestVerificationToken"]', form).val();
+		var token = $('input[name="__RequestVerificationToken"]').val();
 
         $.ajax({
             url: hcc.getServiceUrl("checkout/IsEmailKnown"),
