@@ -1176,6 +1176,18 @@ namespace Hotcakes.Commerce.Accounts
 
         #region Store Protection
 
+        public string AesKey
+        {
+            get { return GetProp(Constants.STORESETTING_AESKEY); }
+            set { SetProp(Constants.STORESETTING_AESKEY, value); }
+        }
+
+        public string AesInitVector
+        {
+            get { return GetProp(Constants.STORESETTING_AESINITVECTOR); }
+            set { SetProp(Constants.STORESETTING_AESINITVECTOR, value); }
+        }
+
         public bool StoreClosed
         {
             get { return GetPropBool(Constants.STORESETTING_STORECLOSED); }

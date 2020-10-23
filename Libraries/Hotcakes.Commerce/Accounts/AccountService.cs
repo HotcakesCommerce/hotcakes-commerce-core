@@ -169,10 +169,9 @@ namespace Hotcakes.Commerce.Accounts
             s.Settings.PayPal.Currency = "USD";
             s.Settings.MaxItemsPerOrder = 999;
             s.Settings.MaxWeightPerOrder = 9999;
-
-            var aesKey = string.Join("", new System.Text.StringBuilder().Insert(0, "0123456789", 16).ToString().ToCharArray().OrderBy(o => Guid.NewGuid()).Take(16));
-            s.Settings.AESInitVector = aesKey;
-            s.Settings.AESKey = aesKey;
+            var newKey = Utilities.RandomNumbers.Create16DigitString();
+            s.Settings.AesKey = newKey;
+            s.Settings.AesInitVector = newKey;
         }
 
         #endregion

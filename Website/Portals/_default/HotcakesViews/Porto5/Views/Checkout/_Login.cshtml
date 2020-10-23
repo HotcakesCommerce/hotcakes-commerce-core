@@ -100,7 +100,11 @@
                 <div class="form-group row dnnFormRequired">
                     <label class="col-sm-4 col-form-label" for="customeremail">@Localization.GetString("EmailAddress"):</label>
                     <div class="col-sm-6 offset-sm-0">
-                        @Html.TextBox("customeremail", @Model.CurrentOrder.UserEmail, new {@class = "form-control"})
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.TextBox("customeremail", @Model.CurrentOrder.UserEmail, new { @class = "form-control" })
+                        }
                     </div>
                 </div>
             </div>

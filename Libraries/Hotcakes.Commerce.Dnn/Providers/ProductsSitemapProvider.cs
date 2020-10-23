@@ -49,8 +49,11 @@ namespace Hotcakes.Commerce.Dnn.Providers
 
             foreach (var product in products)
             {
-                pageUrl = GetPageUrl(product);
-                urls.Add(pageUrl);
+                if (product.IsAvailableForSale)
+                {
+                    pageUrl = GetPageUrl(product);
+                    urls.Add(pageUrl);
+                }
             }
 
             return urls;

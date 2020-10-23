@@ -42,11 +42,18 @@
 
     function IsEmailKnown(forceSwitch, emailfieldid) {
         var emailfield = $(emailfieldid || '#customeremail').val().toLowerCase();
-        $.post(hcc.getServiceUrl("checkout/IsEmailKnown"),
-            {
-                "email": emailfield
+        var form = $('#__AjaxAntiForgeryForm');
+        var token = $('input[name="__RequestVerificationToken"]', form).val();
+
+        $.ajax({
+            url: hcc.getServiceUrl("checkout/IsEmailKnown"),
+            type: 'post',
+            data: {
+                email: emailfield,
+                __RequestVerificationToken: token
             },
-            function (data) {
+            dataType: 'json',
+            success: function (data) {
                 if (data.success == "1") {
                     $('#hcLoginSection').show();
                     $('#loginmessage').html(hcc.l10n.checkout_PleaseLogin).attr('class', 'dnnFormMessage dnnFormSuccess').slideDown();
@@ -59,8 +66,8 @@
                 else {
                     $('#loginmessage').attr('class', 'dnnFormMessage dnnFormError').slideUp();
                 }
-            },
-            "json");
+            }
+        });
     }
 
     function LoginAjax() {
@@ -214,6 +221,7 @@
             this.$shState = $('#shippingstate');
             this.$shFirstname = $('#shippingfirstname');
             this.$shLastname = $('#shippinglastname');
+            this.$shVatNumber = $('#shippingvatnumber');
             this.$shAddress = $('#shippingaddress');
             this.$shAddress2 = $('#shippingaddress2');
             this.$shCity = $('#shippingcity');
@@ -272,6 +280,7 @@
                 $('#shippingtempregion').val($(this).val());
             });
             this.$shAll.change(function (e) { Addresses.shippingChanged(e); });
+            this.$shVatNumber.change(function () { ApplyEUVatRules(); });
 
             this.$blAvailableAddresses.change(function (e) { Addresses.selectedAddressChanged(e); });
             this.$blCountry.change(function () {
@@ -677,6 +686,22 @@
                 }).prop("checked", true);
             }
         }
+    }
+
+    function ApplyEUVatRules() {
+        $.ajax({
+            type: "POST",
+            url: hcc.getServiceUrl("checkout/applyeuvatrules"),
+            data: {
+                UserVatNumber: $('#shippingvatnumber').val(),
+                OrderId: $('#orderbvin').val()
+            },
+            dataType: "json",
+            success: function (data) {
+                $("#shippingaddress").change();
+            },
+            error: function () { }
+        });
     }
 
     // Order Summary ------------------------

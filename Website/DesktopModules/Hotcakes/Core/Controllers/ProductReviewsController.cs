@@ -80,9 +80,9 @@ namespace Hotcakes.Modules.Core.Controllers
                         var redirectUrl = HccUrlBuilder.RouteHccUrl(HccRoute.ProductReview,
                             new {slug = url.RedirectToUrl});
                         if (url.IsPermanentRedirect)
-                            Response.RedirectPermanent(redirectUrl);
+                            RedirectPermanent(redirectUrl);
                         else
-                            Response.Redirect(redirectUrl);
+                            Redirect(redirectUrl);
                     }
                     StoreExceptionHelper.ShowInfo(Localization.GetString("ProductNotFound"));
                 }
