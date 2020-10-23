@@ -35,14 +35,20 @@ namespace Hotcakes.Modules.Checkout
         protected override string RenderView()
         {
             if (!string.IsNullOrEmpty(Request.QueryString["action"]))
+            {
                 _action = Request.QueryString["action"];
+            }
 
             _action = _action.ToLower();
             if (_action == "index" || _action == "paymenterror")
+            {
+                RegisterViewScript("crypto-js.js");
                 RegisterViewScript("Checkout.js");
-                RegisterViewScript("aes.js");
+            }
             if (_action == "receipt")
+            {
                 RegisterViewScript("Receipt.js");
+            }
 
             return MvcRenderingEngine.Render("Checkout", _action);
         }
