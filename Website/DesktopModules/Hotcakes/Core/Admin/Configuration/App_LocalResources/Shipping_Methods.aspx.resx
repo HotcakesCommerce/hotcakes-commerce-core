@@ -180,4 +180,22 @@
   <data name="TotalWeightItem.Text" xml:space="preserve">
     <value>Total Weight</value>
   </data>
+  <data name="SubtotalAmountSecondary.Text" xml:space="preserve">
+    <value> AND Subtotal &gt; {0}</value>
+  </data>
+  <data name="TotalWeightLessThan.Text" xml:space="preserve">
+    <value>Total Weight &lt; {0}</value>
+  </data>
+  <data name="TotalWeightLessThanSecondary.Text" xml:space="preserve">
+    <value> AND Total Weight &lt; {0}</value>
+  </data>
+  <data name="TotalWeightSecondary.Text" xml:space="preserve">
+    <value> AND Total Weight &gt; {0}</value>
+  </data>
+  <data name="ShowWhenItemSecondary.Text" xml:space="preserve">
+    <value>Show When (Secondary)</value>
+  </data>
+  <data name="SubtotalAmountItemSecondary.Text" xml:space="preserve">
+    <value>Subtotal Amount (Secondary)</value>
+  </data>
 </root>

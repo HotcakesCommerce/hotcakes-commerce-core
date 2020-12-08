@@ -54,6 +54,12 @@ namespace Hotcakes.Commerce.Shipping
         ///     The total weight of all line items must be greater than the specified total in order to be included in the shipping
         ///     calculation and rate retrieval methods.
         /// </summary>
-        TotalWeight = 4
+        TotalWeight = 4,
+
+        /// <summary>
+        ///     The total weight of all line items must be less than the specified total in order to be included in the shipping
+        ///     calculation and rate retrieval methods.
+        /// </summary>
+        TotalWeightLessThan = 5
     }
 }

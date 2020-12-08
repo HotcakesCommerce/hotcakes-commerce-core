@@ -121,6 +121,60 @@ namespace Hotcakes.Modules.Core.Admin.Configuration {
         protected global::System.Web.UI.WebControls.CompareValidator cvAmount;
         
         /// <summary>
+        /// pnlSecondDisplayRule control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlSecondDisplayRule;
+        
+        /// <summary>
+        /// ddlTypes2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTypes2;
+        
+        /// <summary>
+        /// txtSubtotal2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSubtotal2;
+        
+        /// <summary>
+        /// rfvAmount2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAmount2;
+        
+        /// <summary>
+        /// cvAmountSb2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvAmountSb2;
+        
+        /// <summary>
+        /// cvAmountSb control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvAmountSb;
+        
+        /// <summary>
         /// btnSaveVisibility control.
         /// </summary>
         /// <remarks>

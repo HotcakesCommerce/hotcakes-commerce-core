@@ -115,6 +115,10 @@ namespace Hotcakes.Commerce.Shipping
 
         public decimal? VisibilityAmount { get; set; }
 
+        public ShippingVisibilityMode VisibilityModeSecondary { get; set; }
+
+        public decimal? VisibilityAmountSecondary { get; set; }
+
         public int SortOrder { get; set; }
 
         private IShipment ConvertGroupsToShipments(List<ShippingGroup> groups)

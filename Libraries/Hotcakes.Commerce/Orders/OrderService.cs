@@ -252,23 +252,18 @@ namespace Hotcakes.Commerce.Orders
                                 subtotal = true;
                             }
                         }
-                        else if (method.VisibilityMode == ShippingVisibilityMode.SubtotalAmount)
+                        else
                         {
-                            if (method.VisibilityAmount.HasValue &&
-                                order.TotalOrderAfterDiscounts > method.VisibilityAmount.Value)
+                            if (EvaluateVisibilityWithAmount(method.VisibilityMode, method.VisibilityAmount, order))
                             {
-                                subtotal = true;
-                            }
-                            else
-                            {
-                                ratesSort.Remove(rate);
-                            }
-                        }
-                        else if (method.VisibilityMode == ShippingVisibilityMode.TotalWeight)
-                        {
-                            if (method.VisibilityAmount.HasValue && order.TotalWeight > method.VisibilityAmount.Value)
-                            {
-                                subtotal = true;
+                                if (EvaluateVisibilityWithAmount(method.VisibilityModeSecondary, method.VisibilityAmountSecondary, order))
+                                {
+                                    subtotal = true;
+                                }
+                                else
+                                {
+                                    ratesSort.Remove(rate);
+                                }
                             }
                             else
                             {
@@ -278,6 +273,37 @@ namespace Hotcakes.Commerce.Orders
                     }
                 }
             }
+        }
+
+        private bool EvaluateVisibilityWithAmount(ShippingVisibilityMode visibilityMode, decimal? visibilityAmount, Order order)
+        {
+            var meetsCriteria = false;
+            switch (visibilityMode)
+            {
+                case ShippingVisibilityMode.SubtotalAmount:
+                    if (visibilityAmount.HasValue && order.TotalOrderAfterDiscounts > visibilityAmount.Value)
+                    {
+                        meetsCriteria = true;
+                    }
+                    break;
+                case ShippingVisibilityMode.TotalWeight:
+                    if (visibilityAmount.HasValue && order.TotalWeight > visibilityAmount.Value)
+                    {
+                        meetsCriteria = true;
+                    }
+                    break;
+                case ShippingVisibilityMode.TotalWeightLessThan:
+                    if (visibilityAmount.HasValue && order.TotalWeight < visibilityAmount.Value)
+                    {
+                        meetsCriteria = true;
+                    }
+                    break;
+                default:
+                    meetsCriteria = true;
+                    break;
+            }
+
+            return meetsCriteria;
         }
 
         public SortableCollection<ShippingRateDisplay> FindAvailableShippingRates(Order order)

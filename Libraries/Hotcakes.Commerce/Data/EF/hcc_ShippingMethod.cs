@@ -29,6 +29,8 @@ namespace Hotcakes.Commerce.Data.EF
         public string Settings { get; set; }
         public int VisibilityMode { get; set; }
         public Nullable<decimal> VisibilityAmount { get; set; }
+        public int VisibilityModeSecondary { get; set; }
+        public Nullable<decimal> VisibilityAmountSecondary { get; set; }
         public int SortOrder { get; set; }
     
         public virtual ICollection<hcc_ShippingMethodTranslation> hcc_ShippingMethodTranslations { get; set; }

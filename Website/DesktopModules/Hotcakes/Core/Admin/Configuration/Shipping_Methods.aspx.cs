@@ -92,6 +92,10 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
             cvAmount.Text = Localization.GetString("Decimal");
             cvAmount2.Text = Localization.GetString("GreaterThan");
             rfvAmount.Text = Localization.GetString("Required");
+
+            cvAmountSb.Text = Localization.GetString("Decimal");
+            cvAmountSb2.Text = Localization.GetString("GreaterThan");
+            rfvAmount2.Text = Localization.GetString("Required");
         }
 
         #endregion
@@ -105,50 +109,50 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
                 var labelSubtotal = Localization.GetString("SubtotalAmountItem");
                 var labelWeight = Localization.GetString("TotalWeightItem");
 
-
                 var script = @"hcShowDialog(); 
-                            $('#" + ddlTypes.ClientID + @"')
-                                  .change(function () { 
-                                            if( $(this).val() > 2 )
-                                            { 
-                                                $('.hcSubtotalAmount').show();
+                    $('#" + ddlTypes.ClientID + @"')
+                        .change(function () { 
+                            if( $(this).val() > 2 )
+                            { 
+                                $('.hcSubtotalAmount').show();
+                                $('#" + pnlSecondDisplayRule.ClientID + @"').show();
 
-                                                if( $(this).val() == 4 )
-                                                {
-                                                    $('.hc-label-amount').html('" + labelWeight + @"');          
-                                                }
-                                                else if( $(this).val() == 3 )
-                                                {
-                                                    $('.hc-label-amount').html('" + labelSubtotal +
-                             @"');                         
-                                                }
-                                            }
-                                            else
-                                            {
-                                                $('.hcSubtotalAmount').hide();
-                                                $('.hc-textbox-amount').val('0'); 
-                                            }
-                                        });
-                                        if( $('#" + ddlTypes.ClientID + @"').val() > 2 )
-                                        { 
-                                             $('.hcSubtotalAmount').show(); 
-                                                
-                                            if( $('#" + ddlTypes.ClientID + @"').val() == 4)
-                                            {
-                                                $('.hc-label-amount').html('" + labelWeight + @"');          
-                                            }
-                                            else if($('#" + ddlTypes.ClientID + @"').val() == 3 )
-                                            {
-                                                $('.hc-label-amount').html('" + labelSubtotal +
-                             @"');                         
-                                            }
-                                        }
-                                        else
-                                        {
-                                             $('.hcSubtotalAmount').hide();                              
-                                             $('.hc-textbox-amount').val('0');   
-                                        }
-";
+                                if( $(this).val() == 4 )
+                                {
+                                    $('.hc-label-amount').html('" + labelWeight + @"');          
+                                }
+                                else if( $(this).val() == 3 )
+                                {
+                                    $('.hc-label-amount').html('" + labelSubtotal + @"');                         
+                                }
+                            }
+                            else
+                            {
+                                $('#" + pnlSecondDisplayRule.ClientID + @"').hide();
+                                $('.hcSubtotalAmount').hide();
+                                $('.hc-textbox-amount').val('0'); 
+                            }
+                        });
+                    if( $('#" + ddlTypes.ClientID + @"').val() > 2 )
+                    { 
+                        $('.hcSubtotalAmount').show();
+                        $('#" + pnlSecondDisplayRule.ClientID + @"').show();
+
+                        if ( $('#" + ddlTypes.ClientID + @"').val() == 4)
+                        {
+                            $('.hc-label-amount').html('" + labelWeight + @"');          
+                        }
+                        else if($('#" + ddlTypes.ClientID + @"').val() == 3 )
+                        {
+                            $('.hc-label-amount').html('" + labelSubtotal + @"');                         
+                        }
+                    }
+                    else
+                    {
+                        $('#" + pnlSecondDisplayRule.ClientID + @"').hide();
+                        $('.hcSubtotalAmount').hide();                              
+                        $('.hc-textbox-amount').val('0');   
+                    }";
 
                 pnlEditVisibility.Visible = true;
                 LoadSelectedItem(e.CommandArgument.ToString());
@@ -205,6 +209,21 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
                     case ShippingVisibilityMode.TotalWeight:
                         lb.Text = string.Format(Localization.GetString("TotalWeight"), sm.VisibilityAmount);
                         break;
+                    case ShippingVisibilityMode.TotalWeightLessThan:
+                        lb.Text = string.Format(Localization.GetString("TotalWeightLessThan"), sm.VisibilityAmount);
+                        break;
+                }
+                switch (sm.VisibilityModeSecondary)
+                {
+                    case ShippingVisibilityMode.SubtotalAmount:
+                        lb.Text += string.Format(Localization.GetString("SubtotalAmountSecondary"), sm.VisibilityAmountSecondary);
+                        break;
+                    case ShippingVisibilityMode.TotalWeight:
+                        lb.Text += string.Format(Localization.GetString("TotalWeightSecondary"), sm.VisibilityAmountSecondary);
+                        break;
+                    case ShippingVisibilityMode.TotalWeightLessThan:
+                        lb.Text += string.Format(Localization.GetString("TotalWeightLessThanSecondary"), sm.VisibilityAmountSecondary);
+                        break;
                 }
             }
         }
@@ -247,6 +266,17 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
                         item.VisibilityAmount = decimal.Parse(txtSubtotal.Text);
                     }
 
+                    var mode2 = int.Parse(ddlTypes2.SelectedValue);
+                    item.VisibilityModeSecondary = (ShippingVisibilityMode)mode2;
+                    if (mode2 > 0)
+                    {
+                        item.VisibilityAmountSecondary = decimal.Parse(txtSubtotal2.Text);
+                    }
+                    else
+                    {
+                        item.VisibilityAmountSecondary = null;
+                    }
+
                     HccApp.OrderServices.ShippingMethods.Update(item);
 
                     LoadMethods();
@@ -265,10 +295,12 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
             lblMethodName.Text = item.Name;
 
             if (item.VisibilityMode == ShippingVisibilityMode.SubtotalAmount ||
-                item.VisibilityMode == ShippingVisibilityMode.TotalWeight)
+                item.VisibilityMode == ShippingVisibilityMode.TotalWeight ||
+                item.VisibilityMode == ShippingVisibilityMode.TotalWeightLessThan)
             {
                 if (item.VisibilityAmount.HasValue)
                 {
+                    pnlSecondDisplayRule.Visible = true;
                     txtSubtotal.Text = item.VisibilityAmount.Value.ToString("0.00");
                 }
                 else
@@ -281,7 +313,31 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
                 txtSubtotal.Text = "0.00";
             }
 
+            if (item.VisibilityModeSecondary == ShippingVisibilityMode.SubtotalAmount ||
+                item.VisibilityModeSecondary == ShippingVisibilityMode.TotalWeight ||
+                item.VisibilityModeSecondary == ShippingVisibilityMode.TotalWeightLessThan)
+            {
+                if (item.VisibilityAmountSecondary.HasValue && item.VisibilityAmountSecondary.Value > 0)
+                {
+                    txtSubtotal2.Text = item.VisibilityAmountSecondary.Value.ToString("0.00");
+                }
+                else
+                {
+                    txtSubtotal2.Text = "0.00";
+                }
+            }
+            else
+            {
+                txtSubtotal2.Text = "0.00";
+            }
+
             ddlTypes.SelectedIndex = (int) item.VisibilityMode;
+
+            try
+            {
+                ddlTypes2.SelectedValue = ((int)item.VisibilityModeSecondary).ToString();
+            }
+            catch { ddlTypes2.SelectedValue = "-1"; }
         }
 
         private void LoadMethods()
@@ -326,6 +382,13 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
         private void BindVisibilityTypes()
         {
             var list = new List<ListItem>();
+            var listSecondary = new List<ListItem>();
+
+            var liNone = new ListItem
+            {
+                Text = Localization.GetString("None"),
+                Value = "-1"
+            };
 
             var li = new ListItem
             {
@@ -345,9 +408,11 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
                 Value = ((int) ShippingVisibilityMode.NoRates).ToString()
             };
 
-            var li4 = new ListItem {Text = string.Format(Localization.GetString("SubtotalAmount"), string.Empty)};
-            ;
-            li4.Value = ((int) ShippingVisibilityMode.SubtotalAmount).ToString();
+            var li4 = new ListItem
+            {
+                Text = string.Format(Localization.GetString("SubtotalAmount"), string.Empty),
+                Value = ((int) ShippingVisibilityMode.SubtotalAmount).ToString()
+            };
 
             var li5 = new ListItem
             {
@@ -355,16 +420,33 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
                 Value = ((int) ShippingVisibilityMode.TotalWeight).ToString()
             };
 
+            var li6 = new ListItem
+            {
+                Text = string.Format(Localization.GetString("TotalWeightLessThan"), string.Empty),
+                Value = ((int) ShippingVisibilityMode.TotalWeightLessThan).ToString()
+            };
+
             list.Add(li);
             list.Add(li2);
             list.Add(li3);
             list.Add(li4);
             list.Add(li5);
+            list.Add(li6);
 
             ddlTypes.DataValueField = "Value";
             ddlTypes.DataTextField = "Text";
             ddlTypes.DataSource = list;
             ddlTypes.DataBind();
+
+            listSecondary.Add(liNone);
+            listSecondary.Add(li4);
+            listSecondary.Add(li5);
+            listSecondary.Add(li6);
+
+            ddlTypes2.DataValueField = "Value";
+            ddlTypes2.DataTextField = "Text";
+            ddlTypes2.DataSource = listSecondary;
+            ddlTypes2.DataBind();
         }
 
         #endregion

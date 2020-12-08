@@ -84,7 +84,7 @@
             </asp:GridView>
             <asp:Panel ID="pnlEditVisibility" runat="server" Visible="false">
                 <div id="hcVisibilityDialog" class="dnnClear">
-                    <div style="height: 300px">
+                    <div style="min-height: 300px">
                         <div class="hcForm">
                             <div class="hcFormItem">
                                 <label class="hcLabel"><%=Localization.GetString("MethodName") %></label>
@@ -104,6 +104,22 @@
                                 <asp:CompareValidator ValidationGroup="SaveRule" ID="cvAmount" ControlToValidate="txtSubtotal"
                                     Operator="DataTypeCheck" Type="Currency" CssClass="hcFormError" runat="server" />
                             </div>
+                            <asp:Panel ID="pnlSecondDisplayRule" runat="server" Visible="false">
+                                <div class="hcFormItem">
+                                    <label class="hcLabel"><%=Localization.GetString("ShowWhenItemSecondary") %></label>
+                                    <asp:DropDownList ID="ddlTypes2" runat="server" />
+                                </div>
+                                <div class="hcFormItem hcSubtotalAmount">
+                                    <label class="hcLabel hc-label-amount2"><%=Localization.GetString("SubtotalAmountItemSecondary") %></label>
+                                    <asp:TextBox CssClass="hc-textbox-amount2" ID="txtSubtotal2" runat="server" />
+                                    <asp:RequiredFieldValidator ValidationGroup="SaveRule" ID="rfvAmount2" ControlToValidate="txtSubtotal2" CssClass="hcFormError"
+                                                                runat="server" />
+                                    <asp:CompareValidator ValidationGroup="SaveRule" ID="cvAmountSb2" ControlToValidate="txtSubtotal2"
+                                                          Operator="GreaterThanEqual" ValueToCompare="0" Type="Currency" CssClass="hcFormError" runat="server" />
+                                    <asp:CompareValidator ValidationGroup="SaveRule" ID="cvAmountSb" ControlToValidate="txtSubtotal2"
+                                                          Operator="DataTypeCheck" Type="Currency" CssClass="hcFormError" runat="server" />
+                                </div>
+                            </asp:Panel>
                         </div>
                     </div>                 
                     <div class="hcActionsRight">

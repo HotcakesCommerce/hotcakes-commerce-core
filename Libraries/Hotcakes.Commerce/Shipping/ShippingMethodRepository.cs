@@ -77,6 +77,8 @@ namespace Hotcakes.Commerce.Shipping
             model.ZoneId = data.ZoneId;
             model.VisibilityMode = (ShippingVisibilityMode) data.VisibilityMode;
             model.VisibilityAmount = data.VisibilityAmount;
+            model.VisibilityModeSecondary = (ShippingVisibilityMode) data.VisibilityModeSecondary;
+            model.VisibilityAmountSecondary = data.VisibilityAmountSecondary;
             model.SortOrder = data.SortOrder;
         }
 
@@ -98,6 +100,8 @@ namespace Hotcakes.Commerce.Shipping
             data.Item.ZoneId = model.ZoneId;
             data.Item.VisibilityMode = (int) model.VisibilityMode;
             data.Item.VisibilityAmount = model.VisibilityAmount;
+            data.Item.VisibilityModeSecondary = (int)model.VisibilityModeSecondary;
+            data.Item.VisibilityAmountSecondary = model.VisibilityAmountSecondary;
             data.Item.SortOrder = model.SortOrder;
         }
 

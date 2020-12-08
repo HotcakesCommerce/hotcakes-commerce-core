@@ -1380,6 +1380,8 @@
           <Property Name="Settings" Type="ntext" Nullable="false" />
           <Property Name="VisibilityMode" Type="int" Nullable="false" />
           <Property Name="VisibilityAmount" Type="decimal" Scale="2" />
+          <Property Name="VisibilityModeSecondary" Type="int" Nullable="false" />
+          <Property Name="VisibilityAmountSecondary" Type="decimal" Scale="2" />
           <Property Name="SortOrder" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="hcc_ShippingMethodTranslations">
@@ -3478,6 +3480,8 @@
           <NavigationProperty Name="hcc_ShippingMethodTranslations" Relationship="EfModels.FK_hcc_ShippingMethodTranslations_hcc_ShippingMethodTranslations" FromRole="hcc_ShippingMethod" ToRole="hcc_ShippingMethodTranslations" />
           <Property Type="Int32" Name="VisibilityMode" Nullable="false" />
           <Property Type="Decimal" Name="VisibilityAmount" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="VisibilityModeSecondary" Nullable="false" />
+          <Property Type="Decimal" Name="VisibilityAmountSecondary" Precision="18" Scale="2" />
           <Property Type="Int32" Name="SortOrder" Nullable="false" />
         </EntityType>
         <EntityType Name="hcc_User">
@@ -5688,6 +5692,8 @@
                 <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
                 <ScalarProperty Name="VisibilityAmount" ColumnName="VisibilityAmount" />
                 <ScalarProperty Name="VisibilityMode" ColumnName="VisibilityMode" />
+                <ScalarProperty Name="VisibilityAmountSecondary" ColumnName="VisibilityAmountSecondary" />
+                <ScalarProperty Name="VisibilityModeSecondary" ColumnName="VisibilityModeSecondary" />
                 <ScalarProperty Name="Settings" ColumnName="Settings" />
                 <ScalarProperty Name="ZoneId" ColumnName="ZoneId" />
                 <ScalarProperty Name="StoreId" ColumnName="StoreId" />
