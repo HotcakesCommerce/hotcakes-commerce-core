@@ -300,7 +300,7 @@ $(function () {
     });
 
     $("#hcCopyToClipboard").click(function (e) {
-        e.preventDefault();
+        return false;        
     });
 
     var clipboard = new ClipboardJS("#hcCopyToClipboard");
