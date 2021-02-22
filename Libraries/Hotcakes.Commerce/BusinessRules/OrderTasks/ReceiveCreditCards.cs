@@ -108,11 +108,12 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 			try
 			{
 				var payManager = new OrderPaymentManager(context.Order, context.HccApp);
+                var orderNumber = !string.IsNullOrEmpty(p.OrderNumber) ? p.OrderNumber : context.Order.OrderNumber;
 				Transaction t = payManager.CreateEmptyTransaction();
 				t.Card = p.CreditCard;
 				t.Card.SecurityCode = context.Inputs.GetProperty("hcc", "CardSecurityCode");
 				t.Amount = p.Amount;
-                t.Items = GetLineItemsForTransaction(context, p.OrderNumber);
+                t.Items = GetLineItemsForTransaction(context, orderNumber);
 
 				if (context.HccApp.CurrentStore.Settings.PaymentCreditCardAuthorizeOnly)
 				{
