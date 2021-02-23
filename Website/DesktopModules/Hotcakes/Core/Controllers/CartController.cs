@@ -325,7 +325,11 @@ namespace Hotcakes.Modules.Core.Controllers
         public ActionResult Index()
         {
             var model = IndexSetup();
-            HandleActionParams();
+            var redirectResult = HandleActionParams();
+            if (redirectResult != null && (redirectResult?.Url != Redirect(Url.RouteHccUrl(HccRoute.Cart)).Url))
+            {
+                return Redirect(redirectResult.Url);
+            }
             CheckForQuickAdd();
             LoadCart(model);
             ValidateOrderCoupons();
