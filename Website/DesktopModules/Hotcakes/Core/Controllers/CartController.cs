@@ -583,7 +583,7 @@ namespace Hotcakes.Modules.Core.Controllers
                 {
                     var redirect = bool.Parse(RedirectToCheckout);
                     if (redirect)
-                        Redirect(Url.RouteHccUrl(HccRoute.Checkout));
+                        Response.Redirect(Url.RouteHccUrl(HccRoute.Checkout));
                 }
                 return Redirect(Url.RouteHccUrl(HccRoute.Cart));
 

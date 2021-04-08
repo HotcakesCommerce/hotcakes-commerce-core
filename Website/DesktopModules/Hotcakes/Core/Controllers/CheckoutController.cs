@@ -569,7 +569,7 @@ namespace Hotcakes.Modules.Core.Controllers
         private CheckoutViewModel LoadCheckoutModel()
         {
             if (CurrentCart == null || CurrentCart.Items == null || CurrentCart.Items.Count == 0)
-                Redirect(Url.RouteHccUrl(HccRoute.Cart));
+                Response.Redirect(Url.RouteHccUrl(HccRoute.Cart));
 
             var model = new CheckoutViewModel { CurrentOrder = CurrentCart };
 

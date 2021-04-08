@@ -232,9 +232,9 @@ namespace Hotcakes.Modules.Core.Controllers
             {
                 var redirectUrl = HccUrlBuilder.RouteHccUrl(HccRoute.Product, new {slug = customUrl.RedirectToUrl});
                 if (customUrl.IsPermanentRedirect)
-                    RedirectPermanent(redirectUrl);
+                    Response.RedirectPermanent(redirectUrl);
                 else
-                    Redirect(redirectUrl);
+                    Response.Redirect(redirectUrl);
             }
             if (product == null)
             {

@@ -153,7 +153,7 @@ namespace Hotcakes.Modules.Core.Controllers
                     var tempOrder = HccApp.OrderServices.Orders.FindForCurrentStore(model.CurrentOrder.bvin);
                     HccApp.CurrentRequestContext.IntegrationEvents.OrderReceived(tempOrder, HccApp);
                     SessionManager.AnalyticsOrderId = model.CurrentOrder.bvin;
-                    Redirect(Url.RouteHccUrl(HccRoute.Checkout,
+                    Response.Redirect(Url.RouteHccUrl(HccRoute.Checkout,
                         new {action = "receipt", id = model.CurrentOrder.bvin}));
                 }
             }
