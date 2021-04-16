@@ -506,7 +506,6 @@ namespace Hotcakes.Modules.Core.Controllers
             (ES)?[0-9A-Z][0-9]{7}[0-9A-Z] |               # Spain
             (FI)?[0-9]{8} |                               # Finland
             (FR)?[0-9A-Z]{2}[0-9]{9} |                    # France
-            (GB)?([0-9]{9}([0-9]{3})?|[A-Z]{2}[0-9]{3}) | # United Kingdom
             (HU)?[0-9]{8} |                               # Hungary
             (IE)?[0-9]S[0-9]{5}L |                        # Ireland
             (IT)?[0-9]{11} |                              # Italy
