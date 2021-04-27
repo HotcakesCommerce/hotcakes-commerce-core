@@ -183,9 +183,10 @@
                         <div class="col-offset-0 col-xs-6">
                             <div class="checkbox dnnFormRequired">
                                 <label>
-                                    @Html.CheckBoxFor(model => model.ConfirmTerms, new { data_bind = "checked: model.confirmterms" })
+                                    @Html.CheckBoxFor(model => model.ConfirmTerms, new { data_bind = "checked: model.confirmterms", ID = "chkConfirmTerms" })
                                     @Localization.GetString("lblIAgreeTo")
-                                    @Html.ValidationMessageFor(model => model.ConfirmTerms, "", new { @class = "alert alert-danger" })
+                                    @Html.ValidationMessageFor(model => model.ConfirmTerms, Localization.GetString("ValMessage_ConfirmTerms"), new { @class = "alert alert-danger" })
+                                    @Html.HiddenFor(model => model.IsTrue)
                                 </label>
                             </div>
                             <a href="#hcAffiliateTermsPopup" data-min-width="600" data-min-height="350" title="@Localization.GetString("TermsTitle")" class="btn btn-default btn-sm hc-popup">
@@ -236,4 +237,16 @@
             $(".hcAffiliateReg")[0]
         );
     });
+</script>
+
+<script>
+    $(function () {
+        $("#chkConfirmTerms").change(function () {
+            CheckedIsActive();
+        });
+    });
+
+    function CheckedIsActive() {
+        $("#ConfirmTerms").attr("checked", true);
+    }
 </script>

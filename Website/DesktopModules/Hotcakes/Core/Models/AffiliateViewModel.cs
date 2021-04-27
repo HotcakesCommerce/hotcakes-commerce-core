@@ -166,9 +166,12 @@ namespace Hotcakes.Modules.Core.Models
         [RegularExpression(@"[-\w]*", ErrorMessage = "Only alpha-numeric and '-', '_' characters are allowed")]
         public string ReferralAffiliateId { get; set; }
 
+        public bool IsTrue => true;
+
         /// <summary>
         ///     Checkbox to confirm the terms
         /// </summary>
+        [Compare(nameof(IsTrue), ErrorMessage = "Please agree to Terms and Conditions")]
         public bool ConfirmTerms { get; set; }
 
         /// <summary>
