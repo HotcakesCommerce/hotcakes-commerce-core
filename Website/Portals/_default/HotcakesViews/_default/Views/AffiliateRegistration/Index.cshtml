@@ -209,13 +209,15 @@
     <div class="row-fluid">
         <div class="col-xs-12">
             <div class="hc-affiliate-terms margin-top-lg">
-                @if (string.IsNullOrEmpty(Model.AgreementText)){
+                @if (Model.AgreementText == ""){
                     <div class="alert alert-warning">
                         @Localization.GetString("NoAgreement")
                     </div>
                 }
                 else{
-                    Html.Raw(Model.AgreementText);
+                    <text>
+                    @Html.Raw(Model.AgreementText)
+                    </text>
                 }
             </div>
             <p class="text-right margin-top-md">
