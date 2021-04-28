@@ -34,7 +34,7 @@ namespace Hotcakes.Shipping
 {
     public class USPSAddressProvider : IAddressProvider
     {
-        private const string _url = "http://production.shippingapis.com/ShippingAPITest.dll?API=Verify&XML=";
+        private const string _url = "https://production.shippingapis.com/ShippingAPITest.dll?API=Verify&XML=";
         private readonly string _userID;
 
         public USPSAddressProvider(string userID)
