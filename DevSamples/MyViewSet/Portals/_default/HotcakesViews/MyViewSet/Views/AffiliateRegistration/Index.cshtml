@@ -216,7 +216,9 @@
                     </div>
                 }
                 else{
-                    Html.Raw(Model.AgreementText);
+                    <text>
+                    @Html.Raw(Model.AgreementText)
+                    </text>
                 }
             </div>
             <p class="text-right margin-top-md">
