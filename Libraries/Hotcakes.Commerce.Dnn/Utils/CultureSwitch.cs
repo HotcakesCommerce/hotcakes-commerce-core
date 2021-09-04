@@ -59,6 +59,8 @@ namespace Hotcakes.Commerce.Dnn.Utils
             if (!string.IsNullOrEmpty(store.Settings.CurrencyCultureCode))
             {
                 var currencyCulture = new CultureInfo(store.Settings.CurrencyCultureCode);
+                currencyCulture.NumberFormat.CurrencySymbol = " تومان ";
+                portalCulture.NumberFormat = currencyCulture.NumberFormat;
                 portalCulture.NumberFormat = currencyCulture.NumberFormat;
             }
 
