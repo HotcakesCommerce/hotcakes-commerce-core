@@ -103,6 +103,11 @@ namespace Hotcakes.Modules.ExtensionUrlProvider
             FriendlyUrlOptions options, string cultureCode, PortalAliasInfo portalAlias, ref List<string> messages,
             out int status, out string location)
         {
+            if (string.IsNullOrEmpty(cultureCode))
+            {
+                var PortalSetting = PortalController.Instance.GetPortal(portalId);
+                cultureCode = PortalSetting.CultureCode;
+            }
             var result = string.Empty;
             status = 200; //OK
             location = null; //no redirect location
