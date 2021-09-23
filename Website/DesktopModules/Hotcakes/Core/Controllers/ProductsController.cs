@@ -416,6 +416,8 @@ namespace Hotcakes.Modules.Core.Controllers
             model.IsAvailableForSale = data.IsAvailableForSale;
 
             var formQuantity = Request.Form["qty"];
+            if (model.LocalProduct.IsUserSuppliedPrice)
+                formQuantity = "1";
 
             if (!string.IsNullOrEmpty(formQuantity)) formQuantity = security.InputFilter(formQuantity.Trim(), PortalSecurity.FilterFlag.NoMarkup);
 
