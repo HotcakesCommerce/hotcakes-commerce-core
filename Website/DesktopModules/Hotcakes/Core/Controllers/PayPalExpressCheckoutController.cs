@@ -49,6 +49,9 @@ namespace Hotcakes.Modules.Core.Controllers
         public ActionResult Index()
         {
             var model = IndexSetup();
+            if (string.IsNullOrEmpty(model.PayPalToken))
+                return Redirect(Url.RouteHccUrl(HccRoute.Cart));
+
             DisplayPaypalExpressMode(model);
             LoadValuesFromForm(model);
 
@@ -56,7 +59,9 @@ namespace Hotcakes.Modules.Core.Controllers
                 && model.CurrentOrder.CustomProperties["ViaCheckout"].Value == "1")
             {
                 SavePaymentInfo(model);
-                ProcessOrder(model);
+                var redirectUrl = ProcessOrder(model);
+                if (redirectUrl != null)
+                    return redirectUrl;
             }
 
             return View(model);
@@ -68,6 +73,9 @@ namespace Hotcakes.Modules.Core.Controllers
         public ActionResult IndexPost()
         {
             var model = IndexSetup();
+            if (string.IsNullOrEmpty(model.PayPalToken))
+                return Redirect(Url.RouteHccUrl(HccRoute.Cart));
+
             DisplayPaypalExpressMode(model);
             LoadValuesFromForm(model);
 
@@ -77,7 +85,9 @@ namespace Hotcakes.Modules.Core.Controllers
                 // Save Payment Information
                 SavePaymentInfo(model);
 
-                ProcessOrder(model);
+                var redirectUrl = ProcessOrder(model);
+                if (redirectUrl != null)
+                    return redirectUrl;
             }
             // Render Error Summary
             foreach (var v in model.Violations)
@@ -90,7 +100,7 @@ namespace Hotcakes.Modules.Core.Controllers
 
         private CheckoutViewModel IndexSetup()
         {
-            var model = new CheckoutViewModel {CurrentOrder = CurrentCart};
+            var model = new CheckoutViewModel { CurrentOrder = CurrentCart };
 
             // Agree Checkbox
             if (HccApp.CurrentStore.Settings.ForceTermsAgreement)
@@ -116,10 +126,6 @@ namespace Hotcakes.Modules.Core.Controllers
         {
             model.PayPalToken = Request.QueryString["token"] ?? string.Empty;
             model.PayPalPayerId = Request.QueryString["payerId"] ?? string.Empty;
-
-            if (string.IsNullOrEmpty(model.PayPalToken))
-                Redirect(Url.RouteHccUrl(HccRoute.Cart));
-
 
             var ppAPI = PaypalExpressUtilities.GetPaypalAPI(HccApp.CurrentStore);
             var failed = false;
@@ -257,7 +263,7 @@ namespace Hotcakes.Modules.Core.Controllers
             ViewBag.ShippingRates = HtmlRendering.ShippingRatesToRadioButtons(rates, 300, o.ShippingMethodUniqueKey);
         }
 
-        private void ProcessOrder(CheckoutViewModel model)
+        private RedirectResult ProcessOrder(CheckoutViewModel model)
         {
             HccApp.OrderServices.Orders.Update(model.CurrentOrder);
 
@@ -280,10 +286,11 @@ namespace Hotcakes.Modules.Core.Controllers
                     var tempOrder = HccApp.OrderServices.Orders.FindForCurrentStore(model.CurrentOrder.bvin);
                     HccApp.CurrentRequestContext.IntegrationEvents.OrderReceived(tempOrder, HccApp);
                     SessionManager.AnalyticsOrderId = model.CurrentOrder.bvin;
-                    Redirect(Url.RouteHccUrl(HccRoute.Checkout,
-                        new {action = "receipt", id = model.CurrentOrder.bvin}));
+                    return Redirect(Url.RouteHccUrl(HccRoute.Checkout,
+                        new { action = "receipt", id = model.CurrentOrder.bvin }));
                 }
             }
+            return null;
         }
 
         private bool ValidatePage(CheckoutViewModel model)
