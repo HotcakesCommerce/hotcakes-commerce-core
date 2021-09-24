@@ -4,7 +4,7 @@
 	.muy-importante { color:red;font-weight:bold; }
 </style>
 <div class="uv-install-wrapper">
-	<h1>Hotcakes Commerce: Version 03.05.00</h1>
+	<h1>Hotcakes Commerce: Version 03.06.00</h1>
 
 	<p class="muy-importante">The release notes continue after the Sponsors and Contributors below.</p>
 	
@@ -50,17 +50,12 @@
 	
 	<h3><strong>Enhancements</strong></h3>
 	<ul>
-		<li><strong>CI: Vendors &amp; Manufacturers Added to Product Views</strong> - Designers now can access the name of a product manufacturer/vendor directly in the viewset without adding any new code. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/311" target="_blank">Issue 311</a>)</li>
-		<li><strong>Support for Submit Buttons in Viewsets</strong> - Designers now can use and target submit buttons in their viewset. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/pull/309" target="_blank">Issue 309</a>)</li>
-		<li><strong>Enhanced Support for EU B2B Stores</strong> - EU-based stores can now enjoy proper formatting &amp; validation of their respective VAT number. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/155" target="_blank">Issue 155</a>)</li>
-		<li><strong>Initial Support for Prompt Commands</strong> - You can now view products, categories, and a sales summary using Prompt in the persona bar. (No Issue)</li>
+		<li><strong>PLACEHOLDER</strong> - PLACEHOLDER (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/1122334455" target="_blank">Issue REPLACEME</a>), Thanks <a href="" target="_blank">PLACEHOLDER</a></li>
 	</ul>
 	
 	<h3><strong>Maintenance Updates</strong></h3>
 	<ul>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/313" target="_blank">Issue 313</a> - SI: Category Viewer default sort (Manual) issue in drilldown view</li>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/322" target="_blank">Issue 322</a> - HTML content was showing up in Bootstrap viewsets for user supplied price products.</li>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/219" target="_blank">Issue 219</a> - Resolves HTTP Header error message in URL Rewriter.</li>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/305" target="_blank">Issue 305</a> - No longer publish inactive products to sitemap.</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/11223344" target="_blank">Issue REPLACEME</a> - Placeholder.</li>
+		<li>(no issue) - Updated the build processes to use Visual Studio 2019 MSBuild and the latest C# compiler.</li>
 	</ul>
 </div>
