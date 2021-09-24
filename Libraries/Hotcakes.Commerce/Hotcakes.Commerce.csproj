@@ -525,6 +525,7 @@
     <Compile Include="Data\DbStrategy.cs" />
     <Compile Include="Data\IRepo.cs" />
     <Compile Include="Data\DalSingleOperationResult.cs" />
+    <Compile Include="Extensions\HccCustomHeaders.cs" />
     <Compile Include="FactoryBase.cs" />
     <Compile Include="Globalization\LocalizationUtils.cs" />
     <Compile Include="Globalization\ViewModelLocalization.cs" />
