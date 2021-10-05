@@ -88,6 +88,7 @@ namespace Hotcakes.Modules.Core
         {
             try
             {
+                Logger.Info("Hotcakes - Upgrade Module...");
                 context = new HccRequestContext();
                 accountServices = Factory.CreateService<AccountService>(context);
                 stores = accountServices.Stores.FindAllPaged(1, int.MaxValue);
@@ -692,6 +693,11 @@ namespace Hotcakes.Modules.Core
             try
             {
                 // TODO: Implement the RefreshStoreSettings sproc 
+                using(var db = Factory.CreateHccDbContext())
+                {
+                    Logger.Info("Trigger - Refresh Store Settings.");
+                    db.hcc_RefreshStoreSettings();
+                }
             }
             catch (Exception ex)
             {
