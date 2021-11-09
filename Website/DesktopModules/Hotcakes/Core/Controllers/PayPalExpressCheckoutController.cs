@@ -49,8 +49,6 @@ namespace Hotcakes.Modules.Core.Controllers
         public ActionResult Index()
         {
             var model = IndexSetup();
-            if (string.IsNullOrEmpty(model.PayPalToken))
-                return Redirect(Url.RouteHccUrl(HccRoute.Cart));
 
             DisplayPaypalExpressMode(model);
             LoadValuesFromForm(model);
@@ -73,8 +71,6 @@ namespace Hotcakes.Modules.Core.Controllers
         public ActionResult IndexPost()
         {
             var model = IndexSetup();
-            if (string.IsNullOrEmpty(model.PayPalToken))
-                return Redirect(Url.RouteHccUrl(HccRoute.Cart));
 
             DisplayPaypalExpressMode(model);
             LoadValuesFromForm(model);
