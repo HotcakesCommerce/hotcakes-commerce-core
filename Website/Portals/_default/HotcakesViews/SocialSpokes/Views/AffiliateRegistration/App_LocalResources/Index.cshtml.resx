@@ -189,4 +189,7 @@
   <data name="lblLastName.Text" xml:space="preserve">
     <value>Last Name:</value>
   </data>
+  <data name="ValMessage_ConfirmTerms.Text" xml:space="preserve">
+    <value>Please agree to the Terms and Conditions</value>
+  </data>
 </root>
