@@ -229,6 +229,7 @@
         <component type="Cleanup" version="03.00.00" fileName="03.00.00.txt" />
         <component type="Cleanup" version="03.03.00" fileName="03.03.00.txt" />
         <component type="Cleanup" version="03.05.00" fileName="03.05.00.txt" />
+        <component type="Cleanup" version="03.06.00" fileName="03.06.00.txt" />
         <component type="File">
           <files>
             <basePath>DesktopModules\Hotcakes</basePath>

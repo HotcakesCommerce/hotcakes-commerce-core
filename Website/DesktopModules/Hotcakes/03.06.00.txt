@@ -1,0 +1,6 @@
+﻿DesktopModules/Hotcakes/Core/Scripts/plupload/FileUpload.js
+DesktopModules/Hotcakes/Core/Scripts/plupload/plupload.flash.swf
+DesktopModules/Hotcakes/Core/Scripts/plupload/plupload.full.js
+DesktopModules/Hotcakes/Core/Scripts/plupload/plupload.silverlight.xap
+DesktopModules/Hotcakes/Core/Scripts/plupload/
+DesktopModules/Hotcakes/Core/FileUpload.ashx
