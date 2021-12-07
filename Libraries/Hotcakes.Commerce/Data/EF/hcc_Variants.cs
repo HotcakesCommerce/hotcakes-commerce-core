@@ -21,7 +21,7 @@ namespace Hotcakes.Commerce.Data.EF
         public string SelectionData { get; set; }
         public long StoreId { get; set; }
         public string CustomProperty { get; set; }
-
+    
         public virtual hcc_Product hcc_Product { get; set; }
     }
 }

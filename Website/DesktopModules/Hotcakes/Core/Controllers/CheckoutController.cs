@@ -2,8 +2,8 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020 Upendo Ventures, LLC
+// Copyright (c) 2013-2019 Hotcakes Commerce, LLC
+// Copyright (c) 2020-2021 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -64,6 +64,7 @@ using Hotcakes.Web.Validation;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+    [HccCustomHeaders]
     [Serializable]
     public partial class CheckoutController : BaseStoreController
     {
@@ -297,6 +298,7 @@ namespace Hotcakes.Modules.Core.Controllers
                 result.CardNumber = CardValidator.CleanCardNumber(decriptedFromJavascript);
                 return new PreJsonResult(Web.Json.ObjectToJson(result));
             }
+
             return new PreJsonResult(string.Empty);
         }
 
@@ -506,7 +508,6 @@ namespace Hotcakes.Modules.Core.Controllers
             (ES)?[0-9A-Z][0-9]{7}[0-9A-Z] |               # Spain
             (FI)?[0-9]{8} |                               # Finland
             (FR)?[0-9A-Z]{2}[0-9]{9} |                    # France
-            (GB)?([0-9]{9}([0-9]{3})?|[A-Z]{2}[0-9]{3}) | # United Kingdom
             (HU)?[0-9]{8} |                               # Hungary
             (IE)?[0-9]S[0-9]{5}L |                        # Ireland
             (IT)?[0-9]{11} |                              # Italy

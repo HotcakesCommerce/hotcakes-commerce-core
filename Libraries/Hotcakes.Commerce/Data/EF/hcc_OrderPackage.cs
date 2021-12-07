@@ -34,6 +34,7 @@ namespace Hotcakes.Commerce.Data.EF
         public string CustomProperties { get; set; }
         public long StoreId { get; set; }
         public string ShippingMethodId { get; set; }
+    
         public virtual hcc_Order hcc_Order { get; set; }
     }
 }

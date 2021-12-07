@@ -88,6 +88,7 @@ namespace Hotcakes.Modules.Core
         {
             try
             {
+                Logger.Info("Hotcakes - Upgrade Module...");
                 context = new HccRequestContext();
                 accountServices = Factory.CreateService<AccountService>(context);
                 stores = accountServices.Stores.FindAllPaged(1, int.MaxValue);
@@ -132,7 +133,8 @@ namespace Hotcakes.Modules.Core
                         UpdateEmailTemplateBranding();
                         break;
 
-                    case "03.05.00":
+                    case "03.05.00": 
+                    case "03.06.00":
                         UpdateStoreSettings();
                         break;
 
@@ -688,25 +690,19 @@ namespace Hotcakes.Modules.Core
 
         private void UpdateStoreSettings()
         {
-            var hccApp = HotcakesApplication.Current;
-
-            foreach (var store in stores)
+            try
             {
-                var key = Hotcakes.Commerce.Utilities.RandomNumbers.Create16DigitString();
-                store.Settings.AddOrUpdateLocalSetting(new StoreSetting
+                // TODO: Implement the RefreshStoreSettings sproc 
+                using(var db = Factory.CreateHccDbContext())
                 {
-                    SettingName = Constants.STORESETTING_AESKEY,
-                    SettingValue = key
-                });
-
-                store.Settings.AddOrUpdateLocalSetting(new StoreSetting
-                {
-                    SettingName = Constants.STORESETTING_AESINITVECTOR,
-                    SettingValue = key
-                });
-
-                hccApp.CurrentStore = store;
-                hccApp.UpdateCurrentStore();
+                    Logger.Info("Trigger - Refresh Store Settings.");
+                    db.hcc_RefreshStoreSettings();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex.Message, ex);
+                throw;
             }
         }
 

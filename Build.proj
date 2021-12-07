@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+	<PropertyGroup>
+		<LangVersion>C# 7.0</LangVersion>
+	</PropertyGroup>
+
 	<PropertyGroup>
 		<MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\.build</MSBuildCommunityTasksPath>
 	</PropertyGroup>
@@ -8,14 +12,14 @@
 
 	<!-- Version Number -->
 	<PropertyGroup Condition=" '$(BUILD_NUMBER)' == '' ">
-		<Version>03.05.00</Version>
+		<Version>03.06.00</Version>
 		<FileVersion>01.00.00</FileVersion>
 		<InformationalVersion>01.00.00</InformationalVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(BUILD_NUMBER)' != '' ">
 		<!-- Build Server Number -->
-		<Version>03.05.00</Version>
+		<Version>03.06.00</Version>
 		<FileVersion>$(BUILD_NUMBER)</FileVersion>
 		<InformationalVersion>$(BUILD_NUMBER)</InformationalVersion>
 	</PropertyGroup>

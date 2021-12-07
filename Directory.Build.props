@@ -1,0 +1,5 @@
+<Project>
+ <PropertyGroup>
+   <LangVersion>latestMajor</LangVersion>
+ </PropertyGroup>
+</Project>

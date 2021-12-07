@@ -1651,5 +1651,6 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwn
 DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents_DeleteForStore]
 GO
 
-
-
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RefreshStoreSettings]') AND type in (N'P'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_RefreshStoreSettings];
+GO
