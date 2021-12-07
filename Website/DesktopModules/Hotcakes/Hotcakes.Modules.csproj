@@ -167,6 +167,7 @@
     <Content Include="01.00.06.txt" />
     <Content Include="01.08.00.txt" />
     <Content Include="03.03.00.txt" />
+    <Content Include="03.06.00.txt" />
     <Content Include="03.05.00.txt" />
     <Content Include="AddressBook\AddressBookView.ascx" />
     <Content Include="AffiliateDashboard\AffiliateDashboardView.ascx" />
@@ -412,10 +413,6 @@
     <Content Include="Core\Scripts\tinymce\themes\mobile\theme.min.js" />
     <Content Include="Core\Scripts\tinymce\themes\silver\theme.min.js" />
     <Content Include="Core\Scripts\tinymce\tinymce.min.js" />
-    <Content Include="Core\Scripts\plupload\FileUpload.js" />
-    <Content Include="Core\Scripts\plupload\plupload.flash.swf" />
-    <Content Include="Core\Scripts\plupload\plupload.full.js" />
-    <Content Include="Core\Scripts\plupload\plupload.silverlight.xap" />
     <Content Include="ExtensionUrlProvider\Settings.ascx" />
     <Content Include="module.css" />
     <Content Include="ReleaseNotes.txt" />
@@ -962,7 +959,6 @@
     <Content Include="Core\Admin\Catalog\ProductsHandler.ashx" />
     <Content Include="Core\Admin\Catalog\ProductsImportSample.xlsx" />
     <Content Include="Core\Admin\Catalog\CatalogHandler.ashx" />
-    <Content Include="Core\FileUpload.ashx" />
     <Content Include="Providers\DataProviders\SqlDataProvider\01.00.00.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\01.00.01.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\01.00.03.SqlDataProvider" />
@@ -2602,9 +2598,6 @@
     <Compile Include="Core\Models\PaymentViewModel.cs" />
     <Compile Include="Core\Models\Validators\CreditCardNumberAttribute.cs" />
     <Compile Include="Core\StoreSettingConfig.cs" />
-    <Compile Include="Core\FileUpload.ashx.cs">
-      <DependentUpon>FileUpload.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Core\Admin\Footer.ascx.cs">
       <DependentUpon>Footer.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
