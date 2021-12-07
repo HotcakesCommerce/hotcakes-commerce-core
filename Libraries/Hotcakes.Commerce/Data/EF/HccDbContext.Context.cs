@@ -355,5 +355,10 @@ namespace Hotcakes.Commerce.Data.EF
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteStoreOrders", storeIdParameter);
         }
+    
+        public virtual int hcc_RefreshStoreSettings()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("hcc_RefreshStoreSettings");
+        }
     }
 }
