@@ -1,0 +1,47 @@
+﻿IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_RefreshStoreSettings]') AND type in (N'P'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}hcc_RefreshStoreSettings];
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}hcc_RefreshStoreSettings]
+AS
+BEGIN
+	DECLARE @StoreId INT;
+
+	DECLARE cur_HccStores CURSOR FOR 
+		SELECT s.[Id] FROM {databaseOwner}[{objectQualifier}hcc_Stores] s ORDER BY s.[Id];
+
+	OPEN cur_HccStores; 
+	FETCH NEXT FROM cur_HccStores INTO @StoreId; 
+
+	WHILE @@FETCH_STATUS = 0  
+	BEGIN  
+		DECLARE @AesValue NVARCHAR(MAX);
+		SET @AesValue = CAST(LEFT((CONVERT(decimal(30,0),(((RAND()*999999999999)/0.00012345671)*999999999))),16) AS nvarchar(16));
+
+		IF EXISTS (SELECT 1 FROM {databaseOwner}[{objectQualifier}hcc_StoreSettings] WHERE [SettingName] = N'AESKey' AND [StoreId] = @StoreId)
+		BEGIN
+			UPDATE {databaseOwner}[{objectQualifier}hcc_StoreSettings] SET [SettingValue] = @AesValue WHERE [SettingName] = N'AESKey' AND [StoreId] = @StoreId;
+		END
+		ELSE
+		BEGIN
+			INSERT INTO {databaseOwner}[{objectQualifier}hcc_StoreSettings] ([StoreId], [SettingName], [SettingValue])
+			VALUES (@StoreId, N'AESKey', @AesValue);
+		END
+
+		IF EXISTS (SELECT 1 FROM {databaseOwner}[{objectQualifier}hcc_StoreSettings] WHERE [SettingName] = N'AESInitVector' AND [StoreId] = @StoreId)
+		BEGIN
+			UPDATE {databaseOwner}[{objectQualifier}hcc_StoreSettings] SET [SettingValue] = @AesValue WHERE [SettingName] = N'AESInitVector' AND [StoreId] = @StoreId;
+		END
+		ELSE
+		BEGIN
+			INSERT INTO {databaseOwner}[{objectQualifier}hcc_StoreSettings] ([StoreId], [SettingName], [SettingValue])
+			VALUES (@StoreId, N'AESInitVector', @AesValue);
+		END
+
+		FETCH NEXT FROM cur_HccStores INTO @StoreId; 
+	END 
+
+	CLOSE cur_HccStores; 
+	DEALLOCATE cur_HccStores; 
+END
+GO

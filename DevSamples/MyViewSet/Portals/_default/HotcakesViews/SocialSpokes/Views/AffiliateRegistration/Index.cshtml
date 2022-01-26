@@ -94,7 +94,9 @@
                 </label>
                 <label>
                     @Html.CheckBoxFor(model => model.ConfirmTerms, new { data_bind = "checked: model.confirmterms" })
-                    @Localization.GetString("lblIAgreeTo") 
+                    @Localization.GetString("lblIAgreeTo")
+                    @Html.ValidationMessageFor(model => model.ConfirmTerms, Localization.GetString("ValMessage_ConfirmTerms"), new { @class = "dnnFormMessage hcFormError" })
+                    @Html.HiddenFor(model => model.IsTrue)
                 </label>
                 <a href="#hcAffiliateTermsPopup" data-min-width="600" data-min-height="350" title="@Localization.GetString("TermsTitle")" class="hc-popup">@Localization.GetString("lblAffiliateTerms") </a>
             </div>
@@ -164,7 +166,16 @@
 @* Affiliate Terms Popup *@
 <div id="hcAffiliateTermsPopup" style="display: none;">
     <div class="hc-affiliate-terms">
-        @Html.Raw(@Model.AgreementText)
+        @if (Model.AgreementText == ""){
+            <div class="alert alert-warning">
+                @Localization.GetString("NoAgreement")
+            </div>
+        }
+        else{
+            <text>
+            @Html.Raw(Model.AgreementText)
+            </text>
+        }
     </div>
     <ul class="dnnActions dnnRight">
         <li>
