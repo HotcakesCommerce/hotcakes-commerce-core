@@ -83,5 +83,10 @@ namespace Hotcakes.Commerce.Data
         {
             return Factory.Instance.CreateStrategy<T>();
         }
+
+        protected IRepoStrategy<T> CreateReadStrategy()
+        {
+            return Factory.Instance.CreateReadStrategy<T>();
+        }
     }
 }

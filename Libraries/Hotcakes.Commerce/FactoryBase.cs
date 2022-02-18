@@ -64,9 +64,20 @@ namespace Hotcakes.Commerce
             return new HccDbContext(conn);
         }
 
+        public virtual HccDbContext CreateReadOnlyHccDbContext()
+        {
+            var conn = WebAppSettings.HccEFReadOnlyConnectionString;
+            return new HccDbContext(conn);
+        }
+
         public virtual IRepoStrategy<T> CreateStrategy<T>() where T : class, new()
         {
             return new DbStrategy<T>(CreateHccDbContext());
+        }
+
+        public virtual IRepoStrategy<T> CreateReadStrategy<T>() where T : class, new()
+        {
+            return new DbStrategy<T>(CreateReadOnlyHccDbContext());
         }
 
         /*
