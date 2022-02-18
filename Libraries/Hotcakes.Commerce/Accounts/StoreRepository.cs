@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -137,9 +138,10 @@ namespace Hotcakes.Commerce.Accounts
         public List<StoreDomainSnapshot> FindDomainSnapshotsByIds(List<long> ids)
         {
             var result = new List<StoreDomainSnapshot>();
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 result = s.GetQuery()
+                    .AsNoTracking()
                     .Where(y => ids.Contains(y.Id))
                     .OrderBy(y => y.Id)
                     .Select(q => new StoreDomainSnapshot
@@ -156,9 +158,9 @@ namespace Hotcakes.Commerce.Accounts
 
         public int GetLastOrderNumber(long storeId)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var store = s.GetQuery(y => y.Id == storeId).FirstOrDefault();
+                var store = s.GetQuery(y => y.Id == storeId).AsNoTracking().FirstOrDefault();
                 if (store != null)
                     return store.LastOrderNumber;
                 return 0;
