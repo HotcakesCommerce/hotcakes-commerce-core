@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -182,10 +183,10 @@ namespace Hotcakes.Commerce.Orders
 
 		public List<OrderTransaction> FindForOrderAndRma(string orderId, string rmaId)
 		{
-			using (var s = CreateStrategy())
+			using (var s = CreateReadStrategy())
 			{
 				var orderGuid = DataTypeHelper.BvinToGuid(orderId);
-				var query = s.GetQuery().Where(y => y.OrderId == orderGuid)
+				var query = s.GetQuery().AsNoTracking().Where(y => y.OrderId == orderGuid)
 					.OrderBy(y => y.Timestamp);
 
 				var items = ListPoco(query);
@@ -267,11 +268,11 @@ namespace Hotcakes.Commerce.Orders
 																long storeId, int pageSize,
 																int pageNumber, ref int totalCount)
 		{
-			using (var s = CreateStrategy())
+			using (var s = CreateReadStrategy())
 			{
                 var actionCodes = ActionTypeUtils.BalanceChangingActions.Select(a => (int) a).ToList();
 
-				var query = s.GetQuery().Where(y => y.StoreId == Context.CurrentStore.Id)
+				var query = s.GetQuery().AsNoTracking().Where(y => y.StoreId == Context.CurrentStore.Id)
 									.Where(y => y.Timestamp >= startDateUtc && y.Timestamp <= endDateUtc)
 									.Where(y => y.Success)
 									.Where(y => !y.Voided)
@@ -290,11 +291,11 @@ namespace Hotcakes.Commerce.Orders
                                                                 long storeId, int pageSize,
                                                                 int pageNumber, ref int totalCount)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 List<int> actionCodes = ActionTypeUtils.BalanceChangingActionsForCreditCardReport.Select(a => (int)a).ToList();
 
-                var query = s.GetQuery().Where(y => y.StoreId == Context.CurrentStore.Id)
+                var query = s.GetQuery().AsNoTracking().Where(y => y.StoreId == Context.CurrentStore.Id)
                                     .Where(y => y.Timestamp >= startDateUtc && y.Timestamp <= endDateUtc)
                                     .Where(y => y.Success)
                                     .Where(y => !y.Voided)
@@ -311,9 +312,9 @@ namespace Hotcakes.Commerce.Orders
 		public decimal FindBillableTransactionTotal(DateTime startDateUtc, DateTime endDateUtc, long storeId)
 		{
 			decimal result = 0;
-			using (var s = CreateStrategy())
+			using (var s = CreateReadStrategy())
 			{
-				var query = s.GetQuery().Where(y => y.StoreId == Context.CurrentStore.Id)
+				var query = s.GetQuery().AsNoTracking().Where(y => y.StoreId == Context.CurrentStore.Id)
 										.Where(y => y.Timestamp >= startDateUtc && y.Timestamp <= endDateUtc);
 				var items = ListPoco(query);
 				result = items.Sum(y => y.AmountAppliedToOrder);
@@ -325,12 +326,13 @@ namespace Hotcakes.Commerce.Orders
 		{
 			decimal result = 0;
 
-			using (var s = CreateStrategy())
+			using (var s = CreateReadStrategy())
 			{
                 var actionCodes = ActionTypeUtils.BalanceChangingActions.Select(a => (int) a).ToList();
 
 				var x = s.GetQuery()
-								.Where(y => y.StoreId == Context.CurrentStore.Id)
+                                .AsNoTracking()
+                                .Where(y => y.StoreId == Context.CurrentStore.Id)
 								.Where(y => y.Success)
 								.Where(y => !y.Voided)
 								.Where(y => actionCodes.Contains(y.Action))
@@ -345,11 +347,11 @@ namespace Hotcakes.Commerce.Orders
         public List<SalesSummaryData> FindTotalTransactionsByDateRange(DateTime startDateUtc, DateTime endDateUtc,
             Func<hcc_OrderTransactions, int> separationFunc)
 		{
-			using (var s = CreateStrategy())
+			using (var s = CreateReadStrategy())
 			{
                 var actionCodes = ActionTypeUtils.BalanceChangingActions.Select(a => (int) a).ToList();
 
-				return s.GetQuery().Where(ot => ot.StoreId == Context.CurrentStore.Id)
+				return s.GetQuery().AsNoTracking().Where(ot => ot.StoreId == Context.CurrentStore.Id)
                     .Where(ot => ot.hcc_Order.IsPlaced == 1 && ot.hcc_Order.StatusCode != OrderStatusCode.Cancelled)
 					  .Where(y => y.Timestamp >= startDateUtc && y.Timestamp <= endDateUtc)
 					  .Where(y => y.Success)

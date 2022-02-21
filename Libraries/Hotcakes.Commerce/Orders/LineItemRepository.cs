@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Data;
@@ -242,7 +243,7 @@ namespace Hotcakes.Commerce.Orders
             var result = new Dictionary<string, int>();
             var storeId = Context.CurrentStore.Id;
 
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var query = from lineitems in s.GetQuery()
                     where lineitems.StoreId == storeId &&
@@ -253,7 +254,7 @@ namespace Hotcakes.Commerce.Orders
                     orderby groupedItems.Sum(y => y.Quantity) descending
                     select new {ProductId = groupedItems.Key, Quantity = groupedItems.Sum(y => y.Quantity)};
 
-                var query2 = query.Take(maxItems).ToList();
+                var query2 = query.Take(maxItems).AsNoTracking().ToList();
                 foreach (var popular in query2)
                 {
                     var productId = DataTypeHelper.GuidToBvin(popular.ProductId);

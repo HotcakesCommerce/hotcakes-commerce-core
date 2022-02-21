@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using Hotcakes.Commerce.Data;
@@ -150,9 +151,10 @@ namespace Hotcakes.Commerce.Catalog
         {
             var storeId = Context.CurrentStore.Id;
             var productBvin = DataTypeHelper.BvinToGuid(productId);
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var item = GetJoinedQuery(s)
+                    .AsNoTracking()
                     .Where(y => y.Item.StoreId == storeId)
                     .Where(y => y.Item.ProductBvin == productBvin)
                     .Where(y => y.Item.PropertyId == propertyId).FirstOrDefault();
@@ -184,7 +186,7 @@ namespace Hotcakes.Commerce.Catalog
             var choiceIdCount = choiceIdStrings.Count;
 
             var storeId = Context.CurrentStore.Id;
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var matchingItems = GetJoinedQuery(s).Where(y => y.Item.StoreId == storeId);
 
@@ -230,7 +232,7 @@ namespace Hotcakes.Commerce.Catalog
             var choiceIdCount = choiceIdStrings.Count;
 
             var storeId = Context.CurrentStore.Id;
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var matchingItems = GetJoinedQuery(s).Where(y => y.Item.StoreId == storeId);
 

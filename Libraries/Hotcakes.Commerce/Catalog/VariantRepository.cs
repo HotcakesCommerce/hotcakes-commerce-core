@@ -129,7 +129,7 @@ namespace Hotcakes.Commerce.Catalog
         public bool IsSkuExist(string sku, Guid? excludeProductId = null)
         {
             sku = sku.ToLower();
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var q = excludeProductId.HasValue
                     ? s.GetQuery().Where(i => i.ProductId != excludeProductId)

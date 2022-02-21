@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -73,9 +74,9 @@ namespace Hotcakes.Commerce.Scheduling
         public QueuedTask FindNextQueuedByProcessorId(Guid processorId)
         {
             var storeId = Context.CurrentStore.Id;
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var item = s.GetQuery().Where(y => y.StoreId == storeId)
+                var item = s.GetQuery().AsNoTracking().Where(y => y.StoreId == storeId)
                     .Where(y => y.Status == (int) QueuedTaskStatus.Pending)
                     .Where(y => y.TaskProcessorId == processorId)
                     .OrderBy(y => y.StartAtUtc).FirstOrDefault();
@@ -129,9 +130,9 @@ namespace Hotcakes.Commerce.Scheduling
         // Finds all stores that have a pending task ready to run at this time.
         public List<long> ListStoresWithTasksToRun()
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var storeIds = s.GetQuery().Where(y => y.Status == (int) QueuedTaskStatus.Pending)
+                var storeIds = s.GetQuery().AsNoTracking().Where(y => y.Status == (int) QueuedTaskStatus.Pending)
                     .Where(y => y.StartAtUtc <= DateTime.UtcNow)
                     .Select(y => y.StoreId).Distinct().ToList();
 

@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -124,9 +125,10 @@ namespace Hotcakes.Commerce.Metrics
         public List<SearchQuery> FindAllPaged(int pageNumber, int pageSize, ref int totalCount)
         {
             var storeId = Context.CurrentStore.Id;
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var query = s.GetQuery()
+                    .AsNoTracking()
                     .Where(y => y.StoreId == storeId)
                     .OrderBy(y => y.QueryPhrase);
 
@@ -141,9 +143,10 @@ namespace Hotcakes.Commerce.Metrics
         public List<SearchQuery> FindByShopperId(string shopperId, int pageNumber, int pageSize, ref int totalCount)
         {
             var storeId = Context.CurrentStore.Id;
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var query = s.GetQuery()
+                    .AsNoTracking()
                     .Where(y => y.StoreId == storeId)
                     .Where(y => y.ShopperId == shopperId)
                     .OrderByDescending(y => y.LastUpdated);
@@ -159,9 +162,10 @@ namespace Hotcakes.Commerce.Metrics
         {
             var result = new List<SearchQueryData>();
             var storeId = Context.CurrentStore.Id;
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 result = s.GetQuery()
+                    .AsNoTracking()
                     .Where(y => y.StoreId == storeId)
                     .GroupBy(y => y.QueryPhrase)
                     .Select(grouping => grouping.Select(y => new SearchQueryData

@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using Hotcakes.Commerce.Data;
@@ -181,9 +182,9 @@ namespace Hotcakes.Commerce.Catalog
         {
             sku = sku.ToLower();
             var storeId = Context.CurrentStore.Id;
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var q = s.GetQuery();
+                var q = s.GetQuery().AsNoTracking();
                 if (excludeProductId.HasValue)
                 {
                     q = q.Where(i => i.bvin != excludeProductId);
@@ -208,9 +209,9 @@ namespace Hotcakes.Commerce.Catalog
 
         public int FindAllCount(long storeId)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                return GetSecureQueryForStore(s, storeId).Count();
+                return GetSecureQueryForStore(s, storeId).AsNoTracking().Count();
             }
         }
 
@@ -222,9 +223,10 @@ namespace Hotcakes.Commerce.Catalog
         public int FindCountByProductType(string productTypeId)
         {
             var productTypeGuid = DataTypeHelper.BvinToNullableGuid(productTypeId);
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var result = GetSecureQueryForCurrentStore(s)
+                    .AsNoTracking()
                     .Where(y => y.Item.ProductTypeId == productTypeGuid)
                     .Count();
                 return result;
@@ -233,10 +235,10 @@ namespace Hotcakes.Commerce.Catalog
 
         public override List<Product> FindAllPaged(int pageNumber, int pageSize)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 IQueryable<JoinedItem<hcc_Product, hcc_ProductTranslation>> items;
-                items = GetSecureQueryForCurrentStore(s).OrderBy(y => y.ItemTranslation.ProductName);
+                items = GetSecureQueryForCurrentStore(s).AsNoTracking().OrderBy(y => y.ItemTranslation.ProductName);
                 items = GetPagedItems(items, pageNumber, pageSize);
                 var products = ListPoco(items);
                 products.ForEach(p => CacheManager.AddProduct(p));
@@ -246,10 +248,10 @@ namespace Hotcakes.Commerce.Catalog
 
         public List<Product> FindAllPagedWithCache(int pageNumber, int pageSize)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 IQueryable<JoinedItem<hcc_Product, hcc_ProductTranslation>> items;
-                items = GetSecureQueryForCurrentStore(s).OrderBy(y => y.ItemTranslation.ProductName);
+                items = GetSecureQueryForCurrentStore(s).AsNoTracking().OrderBy(y => y.ItemTranslation.ProductName);
                 items = GetPagedItems(items, pageNumber, pageSize);
 
                 var guids = items.Select(i => i.Item.bvin).ToList();
@@ -261,10 +263,10 @@ namespace Hotcakes.Commerce.Catalog
 
         public List<Product> FindAllPagedForAllStores(int pageNumber, int pageSize)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 IQueryable<JoinedItem<hcc_Product, hcc_ProductTranslation>> items;
-                items = GetSecureQuery(s).OrderBy(y => y.ItemTranslation.ProductName);
+                items = GetSecureQuery(s).AsNoTracking().OrderBy(y => y.ItemTranslation.ProductName);
                 items = GetPagedItems(items, pageNumber, pageSize);
 
                 var products = ListPoco(items);
@@ -275,10 +277,10 @@ namespace Hotcakes.Commerce.Catalog
 
         public List<Product> FindAllPagedForAllStoresWithCache(int pageNumber, int pageSize)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 IQueryable<JoinedItem<hcc_Product, hcc_ProductTranslation>> items;
-                items = GetSecureQuery(s).OrderBy(y => y.ItemTranslation.ProductName);
+                items = GetSecureQuery(s).AsNoTracking().OrderBy(y => y.ItemTranslation.ProductName);
                 items = GetPagedItems(items, pageNumber, pageSize);
                 var guids = items.Select(i => i.Item.bvin).ToList();
                 var bvins = guids.Select(g => DataTypeHelper.GuidToBvin(g)).ToList();
@@ -288,10 +290,10 @@ namespace Hotcakes.Commerce.Catalog
 
         public int FindCountByCriteria(ProductSearchCriteria criteria)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var query = BuildCriteriaQuery(criteria, s);
-                return query.Count();
+                return query.AsNoTracking().Count();
             }
         }
 
@@ -304,9 +306,9 @@ namespace Hotcakes.Commerce.Catalog
         public List<Product> FindByCriteria(ProductSearchCriteria criteria, int pageNumber, int pageSize,
             ref int totalCount, bool useCache = true)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var query = BuildCriteriaQuery(criteria, s);
+                var query = BuildCriteriaQuery(criteria, s).AsNoTracking();
 
                 // Get Total Count
                 totalCount = query.Count();
@@ -327,9 +329,9 @@ namespace Hotcakes.Commerce.Catalog
         public int FindProductsCountByCriteria(ProductSearchCriteria criteria, bool useCache = true)
         {
             var totalCount = 0;
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var query = BuildCriteriaQuery(criteria, s);
+                var query = BuildCriteriaQuery(criteria, s).AsNoTracking();
 
                 // Get Total Count
                 totalCount = query.Count();
@@ -503,12 +505,12 @@ namespace Hotcakes.Commerce.Catalog
             if (productBvins.Count() == 0)
                 return new List<Product>();
 
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var productGuids = productBvins.Select(bvin => DataTypeHelper.BvinToGuid(bvin)).ToList();
 
                 IQueryable<JoinedItem<hcc_Product, hcc_ProductTranslation>> items;
-                items = GetSecureQueryForCurrentStore(s);
+                items = GetSecureQueryForCurrentStore(s).AsNoTracking();
                 items = items.Where(pj => productGuids.Contains(pj.Item.bvin));
 
                 var products = ListPoco(items);
@@ -552,9 +554,10 @@ namespace Hotcakes.Commerce.Catalog
 
         public List<Product> FindManySkus(List<string> skus)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var items = GetSecureQueryForCurrentStore(s)
+                    .AsNoTracking()
                     .Where(y => skus.Contains(y.Item.SKU))
                     .OrderBy(y => y.Item.Id);
                 var guids = items.Select(i => i.Item.bvin).ToList();
@@ -567,9 +570,10 @@ namespace Hotcakes.Commerce.Catalog
         public List<string> FindFeaturedProductBvins(int pageNumber, int pageSize)
         {
             IQueryable<JoinedItem<hcc_Product, hcc_ProductTranslation>> items;
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 items = GetSecureQueryForCurrentStore(s)
+                    .AsNoTracking()
                     .Where(y => y.Item.Featured)
                     .Where(y => y.Item.Status == 1)
                     .OrderByDescending(y => y.Item.LastUpdated);
@@ -584,9 +588,10 @@ namespace Hotcakes.Commerce.Catalog
 
         public List<string> FindAllBvinsForStore(long storeId)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 return GetSecureQueryForCurrentStore(s)
+                    .AsNoTracking()
                     .Select(y => y.Item.bvin).ToList()
                     .Select(g => DataTypeHelper.GuidToBvin(g)).ToList();
             }
