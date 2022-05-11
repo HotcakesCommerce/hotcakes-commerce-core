@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="../Admin.master" AutoEventWireup="true" CodeBehind="ShippingUpsLicense.aspx.cs" Inherits="Hotcakes.Modules.Core.Admin.Configuration.ShippingUpsLicense" %>
 <%@ Register Src="../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<%--<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h1>
         <%=Localization.GetString("UPSOnlineApplication") %>
     </h1>
@@ -103,4 +103,4 @@
             <asp:LinkButton ID="btnCancel" resourcekey="btnCancel" CausesValidation="False" runat="server" CssClass="hcSecondaryAction" onclick="btnCancel_Click" />
         </li>
     </ul>
-</asp:Content>
+</asp:Content>--%>

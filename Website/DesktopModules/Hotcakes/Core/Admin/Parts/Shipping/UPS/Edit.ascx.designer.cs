@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
-    
-    
-    public partial class Edit {
-        
+namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS
+{
+
+
+    public partial class Edit
+    {
+
         /// <summary>
         /// NameField control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox NameField;
-        
+
         /// <summary>
         /// lstHighlights control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList lstHighlights;
-        
+
         /// <summary>
         /// lstZones control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList lstZones;
-        
+
         /// <summary>
         /// AdjustmentTextBox control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox AdjustmentTextBox;
-        
+
         /// <summary>
         /// rfvAdjustmentTextBox control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAdjustmentTextBox;
-        
+
         /// <summary>
         /// cvAdjustmentTextBox control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator cvAdjustmentTextBox;
-        
+
         /// <summary>
         /// AdjustmentDropDownList control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList AdjustmentDropDownList;
-        
+
         /// <summary>
         /// rbFilterMode control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rbFilterMode;
-        
+
         /// <summary>
         /// pnlFilter control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlFilter;
-        
+
         /// <summary>
         /// ShippingTypesCheckBoxList control.
         /// </summary>
@@ -101,16 +103,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList ShippingTypesCheckBoxList;
-        
-        /// <summary>
-        /// lnkRegister control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkRegister;
-        
+
         /// <summary>
         /// AccountNumberField control.
         /// </summary>
@@ -119,7 +112,70 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox AccountNumberField;
-        
+
+        /// <summary>
+        /// AccountNumberRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator AccountNumberRequired;
+
+        /// <summary>
+        /// AccessKeyField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox AccessKeyField;
+
+        /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+
+        /// <summary>
+        /// UserNameField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox UserNameField;
+
+        /// <summary>
+        /// UsernameRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator UsernameRequired;
+
+        /// <summary>
+        /// PasswordField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PasswordField;
+
+        /// <summary>
+        /// PasswordRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator PasswordRequired;
+
         /// <summary>
         /// ResidentialAddressCheckBox control.
         /// </summary>
@@ -128,7 +184,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox ResidentialAddressCheckBox;
-        
+
         /// <summary>
         /// SkipDimensionsCheckBox control.
         /// </summary>
@@ -137,7 +193,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox SkipDimensionsCheckBox;
-        
+
         /// <summary>
         /// PickupTypeRadioButtonList control.
         /// </summary>
@@ -146,7 +202,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList PickupTypeRadioButtonList;
-        
+
         /// <summary>
         /// DefaultServiceField control.
         /// </summary>
@@ -155,7 +211,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DefaultServiceField;
-        
+
         /// <summary>
         /// DefaultPackagingField control.
         /// </summary>
@@ -164,7 +220,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DefaultPackagingField;
-        
+
         /// <summary>
         /// chkDiagnostics control.
         /// </summary>
@@ -173,7 +229,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkDiagnostics;
-        
+
         /// <summary>
         /// btnSave control.
         /// </summary>
@@ -182,7 +238,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnSave;
-        
+
         /// <summary>
         /// btnCancel control.
         /// </summary>
