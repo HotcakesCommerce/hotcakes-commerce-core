@@ -81,7 +81,6 @@
 		</ItemGroup>
 
 		<ItemGroup>
-			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Shipping.Ups.Keys.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Commerce.Dnn.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.Commerce.dll" />
 			<HotcakesDlls Include="$(MSBuildDnnBinPath)\Hotcakes.CommerceDTO.dll" />

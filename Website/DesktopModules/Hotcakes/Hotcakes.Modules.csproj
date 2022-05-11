@@ -491,7 +491,6 @@
     <Content Include="Core\Admin\Configuration\Returns.aspx" />
     <Content Include="Core\Admin\Configuration\Shipping_Methods.aspx" />
     <Content Include="Core\Admin\Configuration\ShippingHandling.aspx" />
-    <Content Include="Core\Admin\Configuration\ShippingUpsLicense.aspx" />
     <Content Include="Core\Admin\Configuration\ShippingUpsThanks.aspx" />
     <Content Include="Core\Admin\Configuration\ShippingUSPSInternationalTester.aspx" />
     <Content Include="Core\Admin\Configuration\ShippingUSPSTester.aspx" />
@@ -1032,10 +1031,6 @@
     <ProjectReference Include="..\..\..\Libraries\Hotcakes.Commerce.Dnn\Hotcakes.Commerce.Dnn.csproj">
       <Project>{cce92cf0-6cae-4c74-96ba-5757d1750633}</Project>
       <Name>Hotcakes.Commerce.Dnn</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Libraries\Hotcakes.Shipping.Ups.Keys\Hotcakes.Shipping.Ups.Keys.csproj">
-      <Project>{5b7fdf2c-98ca-4030-b35f-f0abe648e5fe}</Project>
-      <Name>Hotcakes.Shipping.Ups.Keys</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Libraries\Hotcakes.CommerceDTO\Hotcakes.CommerceDTO.csproj">
       <Project>{c47a3a58-d11f-4d67-92fc-3e95b5dd6221}</Project>
@@ -1788,13 +1783,6 @@
     </Compile>
     <Compile Include="Core\Admin\Configuration\ShippingHandling.aspx.designer.cs">
       <DependentUpon>ShippingHandling.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Core\Admin\Configuration\ShippingUpsLicense.aspx.cs">
-      <DependentUpon>ShippingUpsLicense.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Core\Admin\Configuration\ShippingUpsLicense.aspx.designer.cs">
-      <DependentUpon>ShippingUpsLicense.aspx</DependentUpon>
     </Compile>
     <Compile Include="Core\Admin\Configuration\ShippingUpsThanks.aspx.cs">
       <DependentUpon>ShippingUpsThanks.aspx</DependentUpon>
