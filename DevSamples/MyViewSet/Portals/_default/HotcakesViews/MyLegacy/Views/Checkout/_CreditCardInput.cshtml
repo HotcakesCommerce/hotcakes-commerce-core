@@ -58,7 +58,7 @@
         <input type="text" name="cccardnumber" id="cccardnumber" size="20" maxlength="20"
                 tabindex="501"
                 value="@Model.PaymentViewModel.DataCreditCard.CardNumber"                    
-                class="@Model.IsErr("cccardnumber")" />
+                class="@Model.IsErr("cccardnumber")" autocomplete="off" />
 
     </div>
     <div class="dnnFormItem">
@@ -79,7 +79,7 @@
         <label class="dnnLabel">@Localization.GetString("SecurityCode")</label>
 
         <input type="text" name="ccsecuritycode" size="5" tabindex="504"
-                maxlength="4" class="hc-cc-seccode @Model.IsErr("ccsecuritycode")" />
+                maxlength="4" class="hc-cc-seccode @Model.IsErr("ccsecuritycode")" autocomplete="off" />
 
     </div>
     <div class="dnnFormItem">
@@ -87,7 +87,7 @@
 
         <input type="text" name="cccardholder" size="20" tabindex="505"
                 value="@Model.PaymentViewModel.DataCreditCard.CardHolderName"
-                class="@Model.IsErr("cccardholder")" />
+                class="@Model.IsErr("cccardholder")" autocomplete="off" />
 
     </div>
 </div>
