@@ -60,7 +60,7 @@
         <div class="col-sm-offset-0 col-sm-6">
             <input type="text" name="cccardnumber" id="cccardnumber" maxlength="20"
                 value="@Model.PaymentViewModel.DataCreditCard.CardNumber"                    
-                class="form-control @Model.IsErr("cccardnumber")" />
+                class="form-control @Model.IsErr("cccardnumber")" autocomplete="off" />
         </div>
     </div>
     <div class="form-group">
@@ -80,7 +80,7 @@
         <label class="col-sm-4 control-label" for="ccsecuritycode">@Localization.GetString("SecurityCode"):</label>
         <div class="col-sm-offset-0 col-sm-6">
             <input type="text" id="ccsecuritycode" name="ccsecuritycode" maxlength="4" 
-                class="form-control small hc-cc-seccode @Model.IsErr("ccsecuritycode")" />
+                class="form-control small hc-cc-seccode @Model.IsErr("ccsecuritycode")" autocomplete="off" />
         </div>
     </div>
     <div class="form-group">
@@ -88,7 +88,7 @@
         <div class="col-sm-offset-0 col-sm-6">
             <input type="text" id="cccardholder" name="cccardholder" 
                 value="@Model.PaymentViewModel.DataCreditCard.CardHolderName"
-                class="form-control @Model.IsErr("cccardholder")" />
+                class="form-control @Model.IsErr("cccardholder")" autocomplete="off" />
         </div>
     </div>
 </div>
