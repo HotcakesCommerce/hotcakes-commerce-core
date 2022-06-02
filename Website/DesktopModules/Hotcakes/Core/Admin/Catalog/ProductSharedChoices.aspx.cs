@@ -104,15 +104,15 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             sb.Append("<td class=\"hcProductEditChoice\">");
             sb.Append(o.Render());
             sb.Append("</td>");
-            sb.Append("<td width='5%'><a href=\"" + destinationLink + "\">");
-            sb.Append("<img class=\"hcIconEdit\" alt=\"Edit\" />");
+            sb.Append("<td width='5%'><a class='hcIconEdit' href =\"" + destinationLink + "\">");
+            //sb.Append("<img class=\"hcIconEdit\" alt=\"Edit\" />");
             sb.Append("</a></td>");
             sb.Append("<td width='5%'>");
             sb.Append("<a id=\"rem" + o.Bvin +
-                      "\"  class=\"trash\" href=\"ProductSharedChoices_Delete.aspx?redirect=y&id=");
+                      "\"  class=\"hcIconDelete hcDeleteColumn trash\" href=\"ProductSharedChoices_Delete.aspx?redirect=y&id=");
             sb.Append(o.Bvin);
             sb.Append("\" >");
-            sb.Append("<img alt=\"delete\" class=\"hcIconDelete\" />");
+            //sb.Append("<img alt=\"delete\" class=\"hcIconDelete\" />");
             sb.Append("</a></td>");
             sb.Append("</tr>");
         }

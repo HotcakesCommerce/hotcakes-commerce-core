@@ -839,7 +839,7 @@ namespace Hotcakes.Commerce.Catalog
         [Serializable]
         internal class ChoicesSheetImport : WorksheetImport
 		{
-            private readonly List<Option> options;
+            private List<Option> options;
             private string _previousSlug;
 
 			internal ChoicesSheetImport(ExcelReader reader, HotcakesApplication hccApp, Action<double, string> log)
@@ -897,7 +897,7 @@ namespace Hotcakes.Commerce.Catalog
 				{
 					p.Options.RemoveAll(e => e.Bvin == opt.Bvin);
 					opt = options.Where(y => y.Bvin == opt.Bvin).FirstOrDefault();
-				}
+                }
 
 				var shared = GetCellBool(row, "D");
 				if (shared && opt == null)
@@ -911,39 +911,42 @@ namespace Hotcakes.Commerce.Catalog
 				}
 
 				var isNew = opt == null;
+                var processedOptionItems = new List<string>();
 
-				if (isNew)
+                if (isNew)
 				{
                     opt = new Option {Name = choiceName, IsShared = shared};
-				}
+                
+				    opt.SetProcessor(optionType);
+                    var column = "E";
+				    while (column.Length < 10)
+				    {
+                        var choiceItem = GetCell(row, column);
 
-				opt.SetProcessor(optionType);
-				var processedOptionItems = new List<string>();
-                var column = "E";
-				while (column.Length < 10)
-				{
-                    var choiceItem = GetCell(row, column);
+					    if (string.IsNullOrWhiteSpace(choiceItem))
+					    {
+						    break;
+					    }
 
-					if (string.IsNullOrWhiteSpace(choiceItem))
-					{
-						break;
-					}
+					    if (opt.OptionType == OptionTypes.Html)
+					    {
+						    opt.TextSettings.AddOrUpdate("html", choiceItem);
+					    }
+					    else
+					    {
+						    if (opt.Items.All(e => e.Name != choiceItem))
+						    {
+							    opt.AddItem(choiceItem);
+						    }
+						    processedOptionItems.Add(choiceItem);
+					    }
 
-					if (opt.OptionType == OptionTypes.Html)
-					{
-						opt.TextSettings.AddOrUpdate("html", choiceItem);
-					}
-					else
-					{
-						if (opt.Items.All(e => e.Name != choiceItem))
-						{
-							opt.AddItem(choiceItem);
-						}
-						processedOptionItems.Add(choiceItem);
-					}
+					    column = GetNextColumn(column);
+				    }
 
-					column = GetNextColumn(column);
-				}
+                    _hccApp.CatalogServices.ProductOptions.Create(opt);
+                    options = _hccApp.CatalogServices.ProductOptions.FindAll(0, int.MaxValue);
+                }
 
 				if (!isNew && !opt.IsShared)
 				{
@@ -952,7 +955,7 @@ namespace Hotcakes.Commerce.Catalog
 
 
 				p.Options.Add(opt);
-				_hccApp.CatalogServices.Products.Update(p);
+				//_hccApp.CatalogServices.Products.Update(p);
 
 				if (opt.IsShared)
 				{
