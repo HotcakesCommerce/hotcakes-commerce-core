@@ -56,7 +56,7 @@
     <div class="form-group dnnFormRequired">
         <label class="col-sm-4 control-label" for="cccardnumber">@Localization.GetString("CardNumber"):</label>
         <div class="col-sm-offset-0 col-sm-6">
-            <input type="text" name="cccardnumber" id="cccardnumber" maxlength="20"
+            <input type="text" name="cccardnumber" id="cccardnumber" maxlength="20" autocomplete="cc-csc"
                 value="@Model.PaymentViewModel.DataCreditCard.CardNumber"                    
                 class="form-control @Model.IsErr("cccardnumber")" />
         </div>
