@@ -519,32 +519,30 @@ namespace Hotcakes.Commerce.Catalog
 
         public List<Product> FindManyWithCache(IEnumerable<string> productBvins)
         {
+            var result = new List<Product>();
             var cachedProducts = new List<Product>();
-            var needsRetrieval = new List<string>();
+
             foreach (var productBvin in productBvins)
             {
                 var product = CacheManager.GetProduct(productBvin, Context.CurrentStore.Id, Context.MainContentCulture);
                 if (product != null)
+                {
                     cachedProducts.Add(product);
+                }
                 else
-                    needsRetrieval.Add(productBvin);
-            }
-            var retrievedProducts = FindMany(needsRetrieval);
-            retrievedProducts.ForEach(p => CacheManager.AddProduct(p));
+                {
+                    Find(productBvin);
+                    var lastAddProduct = CacheManager.GetProduct(productBvin, Context.CurrentStore.Id, Context.MainContentCulture);
+                    if (lastAddProduct != null)
+                    {
+                        cachedProducts.Add(lastAddProduct);
+                    }
+                }
 
-            var result = new List<Product>();
-            foreach (var productBvin in productBvins)
-            {
                 var cached = cachedProducts.Where(p => p.Bvin == productBvin).FirstOrDefault();
                 if (cached != null)
                 {
                     result.Add(cached);
-                }
-                else
-                {
-                    var retrieved = retrievedProducts.Where(p => p.Bvin == productBvin).FirstOrDefault();
-                    if (retrieved != null)
-                        result.Add(retrieved);
                 }
             }
             return result;
