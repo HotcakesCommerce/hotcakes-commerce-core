@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using DotNetNuke.Entities.Users;
 using Hotcakes.Commerce.Contacts;
@@ -216,16 +217,19 @@ namespace Hotcakes.Commerce.Dnn
             private IQueryable<AffiliateReportData> BuildReportQuery()
             {
                 var orders = _strategy.GetQuery<hcc_Order>()
+                    .AsNoTracking()
                     .Where(o => o.StoreId == _storeId)
                     .Where(o => o.TimeOfOrder >= _criteria.StartDateUtc && o.TimeOfOrder <= _criteria.EndDateUtc);
 
                 var signups = _strategy.GetQuery()
+                    .AsNoTracking()
                     .Where(i => i.CreationDate >= _criteria.StartDateUtc && i.CreationDate <= _criteria.EndDateUtc);
 
                 var payments = _strategy.GetQuery<hcc_AffiliatePayments>()
+                    .AsNoTracking()
                     .Where(i => i.PaymentDate >= _criteria.StartDateUtc && i.PaymentDate <= _criteria.EndDateUtc);
 
-                var affiliates = _strategy.GetQuery().Where(a => a.StoreId == _storeId);
+                var affiliates = _strategy.GetQuery().AsNoTracking().Where(a => a.StoreId == _storeId);
 
                 if (!string.IsNullOrEmpty(_criteria.ReferralAffiliateID))
                     affiliates = affiliates.Where(a => a.ReferralID == _criteria.ReferralAffiliateID);
@@ -439,7 +443,7 @@ namespace Hotcakes.Commerce.Dnn
         public override List<AffiliateReportData> FindAllWithFilter(AffiliateReportCriteria criteria, int pageNumber,
             int pageSize, ref int rowCount)
         {
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
                 var helper = new AffiliateReportHelper(this, strategy, criteria, pageNumber, pageSize);
                 var list = helper.GetReport();
@@ -450,7 +454,7 @@ namespace Hotcakes.Commerce.Dnn
 
         public override AffiliateReportTotals GetTotalsByFilter(AffiliateReportCriteria criteria)
         {
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
                 var helper = new AffiliateReportHelper(this, strategy, criteria, 1, int.MaxValue);
                 return helper.GetTotals();
@@ -460,7 +464,7 @@ namespace Hotcakes.Commerce.Dnn
         public override AffiliateReportTotals GetTotalsByFilter(AffiliateReportCriteria criteria,
             TotalsReturnType returnType)
         {
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
                 var helper = new AffiliateReportHelper(this, strategy, criteria, 1, int.MaxValue);
                 return helper.GetTotals(returnType);
@@ -469,7 +473,7 @@ namespace Hotcakes.Commerce.Dnn
 
         public override AffiliateReportTotals GetAffiliateTotals(long affId, AffiliateReportCriteria criteria)
         {
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
                 var helper = new AffiliateReportHelper(this, strategy, criteria, 1, int.MaxValue);
                 return helper.GetAffiliateTotals(affId);
@@ -479,7 +483,7 @@ namespace Hotcakes.Commerce.Dnn
         public override AffiliateReportTotals GetAffiliateTotals(long affId, AffiliateReportCriteria criteria,
             TotalsReturnType returnType)
         {
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
                 var helper = new AffiliateReportHelper(this, strategy, criteria, 1, int.MaxValue);
                 return helper.GetAffiliateTotals(affId, returnType);

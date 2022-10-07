@@ -58,7 +58,9 @@ namespace Hotcakes.Commerce
         ISearchProvider CreateSearchProvider(HccRequestContext hccRequestContext);
 
         HccDbContext CreateHccDbContext();
+        HccDbContext CreateReadOnlyHccDbContext();
         IRepoStrategy<T> CreateStrategy<T>() where T : class, new();
+        IRepoStrategy<T> CreateReadStrategy<T>() where T : class, new();
 
         T CreateRepo<T>() where T : class, IRepo;
         T CreateRepo<T>(HccRequestContext context) where T : class, IRepo;

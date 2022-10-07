@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Contacts;
 using Hotcakes.Commerce.Data;
@@ -114,10 +115,11 @@ namespace Hotcakes.Commerce.Membership
         {
             var storeId = Context.CurrentStore.Id;
 
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
                 var query = strategy
                     .GetQuery(ca => ca.StoreId == storeId)
+                    .AsNoTracking()
                     .OrderBy(ca => ca.Email);
 
                 totalCount = query.Count();
@@ -162,10 +164,11 @@ namespace Hotcakes.Commerce.Membership
             var storeId = Context.CurrentStore.Id;
 
 
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
                 var query = strategy
                     .GetQuery(ca => ca.StoreId == storeId)
+                    .AsNoTracking()
                     .Where(ca => ca.Email.Contains(filter) ||
                                  ca.FirstName.Contains(filter) ||
                                  ca.LastName.Contains(filter) ||

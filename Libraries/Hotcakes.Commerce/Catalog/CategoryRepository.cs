@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using Hotcakes.Commerce.Data;
@@ -183,9 +184,10 @@ namespace Hotcakes.Commerce.Catalog
         /// <returns>Returns <see cref="Category" /> instance</returns>
         public Category FindBySlugForStore(string urlSlug, long storeId)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var item = GetJoinedQuery(s)
+                    .AsNoTracking()
                     .Where(y => y.Item.RewriteUrl == urlSlug && y.Item.StoreId == storeId)
                     .OrderBy(y => y.Item.SortOrder)
                     .FirstOrDefault();
@@ -200,9 +202,10 @@ namespace Hotcakes.Commerce.Catalog
         /// <returns>Returns list of <see cref="CategorySnapshot" /> instances</returns>
         public List<CategorySnapshot> FindAll()
         {
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
                 var result = GetSecureQueryForCurrentStore(strategy)
+                    .AsNoTracking()
                     .OrderBy(y => y.Item.SortOrder)
                     .ToList();
                 return ListPocoSnapshot(result);
@@ -226,9 +229,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <returns>Returns list of <see cref="CategorySnapshot" /> instances</returns>
         public List<CategorySnapshot> FindAllSnapshotsPaged(int pageNumber, int pageSize)
         {
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
-                var query = GetSecureQueryForCurrentStore(strategy).OrderBy(y => y.Item.SortOrder);
+                var query = GetSecureQueryForCurrentStore(strategy).AsNoTracking().OrderBy(y => y.Item.SortOrder);
                 var items = GetPagedItems(query, pageNumber, pageSize).ToList();
 
                 return ListPocoSnapshot(items);
@@ -243,9 +246,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <returns>Returns list of <see cref="CategorySnapshot" /> instances</returns>
         public List<CategorySnapshot> FindAllSnapshotsPagedForAllStores(int pageNumber, int pageSize)
         {
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
-                var query = GetSecureQuery(strategy).OrderBy(y => y.Item.SortOrder);
+                var query = GetSecureQuery(strategy).AsNoTracking().OrderBy(y => y.Item.SortOrder);
                 var items = GetPagedItems(query, pageNumber, pageSize).ToList();
 
                 return ListPocoSnapshot(items);
@@ -260,9 +263,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <returns>Returns list of <see cref="CategorySnapshot" /> instances</returns>
         public override List<Category> FindAllPaged(int pageNumber, int pageSize)
         {
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
-                var query = GetSecureQueryForCurrentStore(strategy).OrderBy(y => y.Item.SortOrder);
+                var query = GetSecureQueryForCurrentStore(strategy).AsNoTracking().OrderBy(y => y.Item.SortOrder);
                 var items = GetPagedItems(query, pageNumber, pageSize).ToList();
                 return ListPoco(items);
             }
@@ -290,9 +293,9 @@ namespace Hotcakes.Commerce.Catalog
         public List<CategorySnapshot> FindChildren(string parentId, int pageNumber, int pageSize, ref int totalRowCount)
         {
             var parentGuid = DataTypeHelper.BvinToNullableGuid(parentId);
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var query = GetSecureQueryForCurrentStore(s, parentId).OrderBy(y => y.Item.SortOrder);
+                var query = GetSecureQueryForCurrentStore(s, parentId).AsNoTracking().OrderBy(y => y.Item.SortOrder);
                 var items = GetPagedItems(query, pageNumber, pageSize);
                 return ListPocoSnapshot(items);
             }
@@ -321,9 +324,10 @@ namespace Hotcakes.Commerce.Catalog
             ref int totalRowCount)
         {
             var parentGuid = DataTypeHelper.BvinToNullableGuid(parentId);
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var query = GetSecureQueryForCurrentStore(s, parentId)
+                    .AsNoTracking()
                     .Where(y => y.Item.Hidden == 0)
                     .OrderBy(y => y.Item.SortOrder);
 
@@ -341,9 +345,10 @@ namespace Hotcakes.Commerce.Catalog
         public List<Category> FindMany(List<string> bvins)
         {
             var guids = bvins.Select(bvin => DataTypeHelper.BvinToGuid(bvin)).ToList();
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
                 var items = GetSecureQueryForCurrentStore(strategy)
+                    .AsNoTracking()
                     .Where(y => guids.Contains(y.Item.bvin))
                     .OrderBy(y => y.Item.SortOrder);
 
@@ -359,9 +364,10 @@ namespace Hotcakes.Commerce.Catalog
         public List<CategorySnapshot> FindManySnapshots(List<string> bvins)
         {
             var guids = bvins.Select(bvin => DataTypeHelper.BvinToGuid(bvin)).ToList();
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var items = GetSecureQueryForCurrentStore(s)
+                    .AsNoTracking()
                     .Where(y => guids.Contains(y.Item.bvin))
                     .OrderBy(y => y.Item.SortOrder)
                     .ToList();
@@ -377,9 +383,10 @@ namespace Hotcakes.Commerce.Catalog
         /// <returns>Returns list of <see cref="Category" /> instances</returns>
         public List<Category> FindMany(string name)
         {
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
                 var items = GetSecureQueryForCurrentStore(strategy)
+                    .AsNoTracking()
                     .Where(y => y.ItemTranslation.Name.Contains(name))
                     .OrderBy(y => y.Item.SortOrder);
 
@@ -516,9 +523,10 @@ namespace Hotcakes.Commerce.Catalog
         {
             var storeId = Context.CurrentStore.Id;
             var parentGuid = DataTypeHelper.BvinToNullableGuid(parentId);
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var maxSortOrder = GetJoinedQuery(s)
+                    .AsNoTracking()
                     .Where(y => y.Item.ParentID == parentGuid || !(parentGuid.HasValue || y.Item.ParentID.HasValue))
                     .Where(y => y.Item.StoreId == storeId)
                     .Max(y => (int?) y.Item.SortOrder);
@@ -529,9 +537,10 @@ namespace Hotcakes.Commerce.Catalog
 
         internal List<string> FindAllBvinsForStore(long storeId)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 return GetSecureQueryForCurrentStore(s)
+                    .AsNoTracking()
                     .Select(y => DataTypeHelper.GuidToBvin(y.Item.bvin))
                     .ToList();
             }

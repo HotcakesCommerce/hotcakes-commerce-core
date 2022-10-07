@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -156,9 +157,10 @@ namespace Hotcakes.Commerce.Contacts
         {
             var storeId = Context.CurrentStore.Id;
             var output = new List<MailingListSnapShot>();
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var query = s.GetQuery()
+                    .AsNoTracking()
                     .Where(y => y.StoreId == storeId)
                     .OrderBy(y => y.Name);
                 var items = GetPagedItems(query, pageNumber, pageSize).ToList();
@@ -188,9 +190,10 @@ namespace Hotcakes.Commerce.Contacts
         {
             var output = new List<MailingListSnapShot>();
             var storeId = Context.CurrentStore.Id;
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var query = s.GetQuery()
+                    .AsNoTracking()
                     .Where(y => y.StoreId == storeId)
                     .Where(y => y.Private == false).OrderBy(y => y.Name);
 

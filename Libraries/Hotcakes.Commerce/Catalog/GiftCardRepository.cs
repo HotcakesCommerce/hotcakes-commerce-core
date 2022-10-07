@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 using Hotcakes.Commerce.Data;
@@ -84,12 +85,12 @@ namespace Hotcakes.Commerce.Catalog
         /// <returns></returns>
         public GiftCard FindForAllStores(long id)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var gc = FindFirstPoco(y => y.GiftCardId == id);
                 if (gc != null)
                 {
-                    var hcc_li = s.GetQuery<hcc_LineItem>().FirstOrDefault(li => li.Id == gc.LineItemId);
+                    var hcc_li = s.GetQuery<hcc_LineItem>().AsNoTracking().FirstOrDefault(li => li.Id == gc.LineItemId);
 
                     if (hcc_li != null)
                     {
@@ -149,10 +150,10 @@ namespace Hotcakes.Commerce.Catalog
         /// <returns></returns>
         public List<GiftCard> FindByLineItem(long lineItemId)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var lineItems = s.GetQuery<hcc_LineItem>();
-                var query = s.GetQuery()
+                var lineItems = s.GetQuery<hcc_LineItem>().AsNoTracking();
+                var query = s.GetQuery().AsNoTracking()
                     .Where(i => i.StoreId == Context.CurrentStore.Id && i.LineItemId == lineItemId)
                     .Join(lineItems, g => g.LineItemId, li => li.Id,
                         (g, li) => new GiftCardOrder {GiftCard = g, Order = li.hcc_Order});
@@ -273,9 +274,9 @@ namespace Hotcakes.Commerce.Catalog
         public decimal GetGiftCardBalance(string cardNumber)
         {
             var storeId = Context.CurrentStore.Id;
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var giftCard = s.GetQuery()
+                var giftCard = s.GetQuery().AsNoTracking()
                     .Where(gc => gc.StoreId == storeId && gc.CardNumber == cardNumber)
                     .FirstOrDefault();
 

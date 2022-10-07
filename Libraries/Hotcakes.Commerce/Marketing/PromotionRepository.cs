@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using Hotcakes.Commerce.Data;
@@ -156,9 +157,10 @@ namespace Hotcakes.Commerce.Marketing
             int pageSize, ref int totalRowCount)
         {
             var storeId = Context.CurrentStore.Id;
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var query = GetJoinedQuery(s)
+                    .AsNoTracking()
                     .Where(y => y.Item.StoreId == storeId);
 
                 // type
@@ -223,9 +225,10 @@ namespace Hotcakes.Commerce.Marketing
         private int FindMaxSort()
         {
             var storeId = Context.CurrentStore.Id;
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var maxSortOrder = s.GetQuery()
+                    .AsNoTracking()
                     .Where(p => p.StoreId == storeId)
                     .Max(p => (int?) p.SortOrder);
 
