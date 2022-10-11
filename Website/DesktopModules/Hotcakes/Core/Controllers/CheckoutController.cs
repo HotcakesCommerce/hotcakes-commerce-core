@@ -59,8 +59,12 @@ using Hotcakes.Modules.Core.Integration;
 using Hotcakes.Modules.Core.Models;
 using Hotcakes.Modules.Core.Models.Json;
 using Hotcakes.Payment;
+using Hotcakes.Payment.Gateways;
 using Hotcakes.Web.Logging;
 using Hotcakes.Web.Validation;
+using Stripe;
+using Newtonsoft.Json;
+using Address = Hotcakes.Commerce.Contacts.Address;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
@@ -293,7 +297,7 @@ namespace Hotcakes.Modules.Core.Controllers
             var encrypted = Convert.FromBase64String(notclean);
             var decriptedFromJavascript = DecryptStringFromBytes(encrypted, keybytes, iv);
 
-            if(!string.IsNullOrEmpty(decriptedFromJavascript))
+            if (!string.IsNullOrEmpty(decriptedFromJavascript))
             {
                 result.CardNumber = CardValidator.CleanCardNumber(decriptedFromJavascript);
                 return new PreJsonResult(Web.Json.ObjectToJson(result));
@@ -337,7 +341,7 @@ namespace Hotcakes.Modules.Core.Controllers
                     // Create the streams used for decryption.  
                     using (var msDecrypt = new MemoryStream(cipherText))
                     {
-                        using(var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                        using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                         {
 
                             using (var srDecrypt = new StreamReader(csDecrypt))
@@ -589,7 +593,7 @@ namespace Hotcakes.Modules.Core.Controllers
             // Populate Countries
             model.Countries = HccApp.GlobalizationServices.Countries.FindActiveCountries();
             model.ShowAffiliateId = HccApp.CurrentStore.Settings.AffiliateShowIDOnCheckout;
-            
+
             var context = new HccRequestContext();
             var settingsRepo = Factory.CreateRepo<StoreSettingsRepository>(context);
 
@@ -598,6 +602,13 @@ namespace Hotcakes.Modules.Core.Controllers
 
             VerifyOrderSize(model);
 
+            var stripeProcessor = new StripeProcessor();
+            var requestItem = new StripeProcessor.PaymentIntentRequestItem()
+            {
+                TotalAmmount = Convert.ToInt64(model.CurrentOrder.TotalGrand)
+            };
+            var paymentIntent = stripeProcessor.CreatePaymentIntent(requestItem);
+            model.PaymentIntentClientSecret = paymentIntent.ClientSecret;
             return model;
         }
 
