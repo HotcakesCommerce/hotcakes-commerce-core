@@ -602,13 +602,6 @@ namespace Hotcakes.Modules.Core.Controllers
 
             VerifyOrderSize(model);
 
-            var stripeProcessor = new StripeProcessor();
-            var requestItem = new StripeProcessor.PaymentIntentRequestItem()
-            {
-                TotalAmmount = Convert.ToInt64(model.CurrentOrder.TotalGrand)
-            };
-            var paymentIntent = stripeProcessor.CreatePaymentIntent(requestItem);
-            model.PaymentIntentClientSecret = paymentIntent.ClientSecret;
             return model;
         }
 
