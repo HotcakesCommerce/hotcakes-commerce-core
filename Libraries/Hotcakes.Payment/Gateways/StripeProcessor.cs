@@ -24,6 +24,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using Stripe;
 
 namespace Hotcakes.Payment.Gateways
@@ -58,32 +59,23 @@ namespace Hotcakes.Payment.Gateways
         /// </summary>
         /// <param name="t">The transaction object</param>
         /// <returns>A StripeToken object that can be associated with the charge that is sent to Stripe</returns>
-        private StripeToken CreateCardToken(Transaction t)
+        private Token CreateCardToken(Transaction t)
         {
-            var tokenOptions = new StripeTokenCreateOptions()
+            var options = new TokenCreateOptions
             {
-                Card = new StripeCreditCardOptions()
+                Card = new TokenCardOptions
                 {
                     Number = t.Card.CardNumber,
-                    ExpirationYear = t.Card.ExpirationYear.ToString(),
-                    ExpirationMonth = t.Card.ExpirationMonthPadded,                    
-                }               
+                    ExpMonth = t.Card.ExpirationMonthPadded,
+                    ExpYear = t.Card.ExpirationYear.ToString(),
+                    Cvc = t.Card.SecurityCode,
+                    Name = t.Card.CardHolderName,
+                    AddressLine1 = t.Customer.Street,
+                    AddressZip = t.Customer.PostalCode
+                },
             };
-
-            if (!string.IsNullOrEmpty(t.Card.SecurityCode))
-            {
-                tokenOptions.Card.Cvc = t.Card.SecurityCode; // optional
-            }
-
-            if (t.Customer.Street.Length > 0)
-                tokenOptions.Card.AddressLine1 = t.Customer.Street; // optional
-
-            if (t.Customer.PostalCode.Length > 0)
-                tokenOptions.Card.AddressZip = t.Customer.PostalCode; // optional
-            tokenOptions.Card.Name = t.Card.CardHolderName;
-
-            var tokenService = new StripeTokenService();
-            StripeToken stripeToken = tokenService.Create(tokenOptions);
+            var tokenService = new TokenService();
+            var stripeToken = tokenService.Create(options);
             return stripeToken;
         }
 
@@ -97,12 +89,12 @@ namespace Hotcakes.Payment.Gateways
         /// </param>
         private void CreateCharge(Transaction t, bool capture)
         {
-            StripeConfiguration.SetApiKey(Settings.StripeApiKey);
+            StripeConfiguration.ApiKey = Settings.StripeApiKey;
 
-            var chargeOptions = new StripeChargeCreateOptions();
+            var chargeOptions = new ChargeCreateOptions();
 
             // always set these properties
-            chargeOptions.Amount = (int) (t.Amount*100);
+            chargeOptions.Amount = (int)(t.Amount * 100);
             chargeOptions.Currency = Settings.CurrencyCode;
 
             // set this if you want to
@@ -110,27 +102,13 @@ namespace Hotcakes.Payment.Gateways
             chargeOptions.Currency = Settings.CurrencyCode;
             chargeOptions.Description = t.MerchantDescription;
 
-            chargeOptions.Source = new StripeSourceOptions();
-
             // set these properties if using a card
             //set the charge token
             var chargeToken = CreateCardToken(t);
 
-            chargeOptions.Source.TokenId = chargeToken.Id;
+            chargeOptions.Source = chargeToken.Id;
 
-            //myCharge.CardAddressCountry = "US";             // optional
-            //myCharge.CardAddressLine2 = "Apt 24";           // optional
-            //myCharge.CardAddressState = "NC";               // optional
-
-            /* chargeOptions.Source.Name = t.Card.CardHolderName;*/ // optional            
-
-            // set this property if using a customer
-            //myCharge.CustomerId = *customerId*;
-
-            // set this property if using a token
-            //myCharge.TokenId = *tokenId*;
-
-            var chargeService = new StripeChargeService();
+            var chargeService = new ChargeService();
 
             var stripeCharge = chargeService.Create(chargeOptions);
 
@@ -149,14 +127,14 @@ namespace Hotcakes.Payment.Gateways
 
         private void CreateRefund(Transaction t)
         {
-            StripeConfiguration.SetApiKey(Settings.StripeApiKey);
+            StripeConfiguration.ApiKey = Settings.StripeApiKey;
 
-            var refundService = new StripeRefundService();
+            var refundService = new RefundService();
 
-            var refundOptions = new StripeRefundCreateOptions();
-            refundOptions.Amount = (int) (t.Amount*100);
+            var refundOptions = new RefundCreateOptions();
+            refundOptions.Amount = (int)(t.Amount * 100);
 
-            var refund = refundService.Create(t.PreviousTransactionNumber, refundOptions);
+            var refund = refundService.Create(refundOptions);
             if (refund.Id.Length > 0)
             {
                 t.Result.Succeeded = true;
@@ -172,11 +150,11 @@ namespace Hotcakes.Payment.Gateways
 
         private void CaptureCharge(Transaction t)
         {
-            StripeConfiguration.SetApiKey(Settings.StripeApiKey);
+            StripeConfiguration.ApiKey = Settings.StripeApiKey;
 
-            var chargeService = new StripeChargeService();
+            var chargeService = new ChargeService();
 
-            var stripeCharge = chargeService.Capture(t.PreviousTransactionNumber, (int) (t.Amount*100));
+            var stripeCharge = chargeService.Capture(t.Result.ReferenceNumber);
 
             if (stripeCharge.Id.Length > 0 && stripeCharge.Amount > 0)
             {
@@ -191,6 +169,57 @@ namespace Hotcakes.Payment.Gateways
             }
         }
 
+        public void CreatePaymentIntent(Transaction t)
+        {
+            StripeConfiguration.ApiKey = "sk_test_51KjFl3LWG7Wf1eHay7bIJnf3b8FmWopOjJVe9rN3APpo2jvvqj55DmVfGfcndqgRKCJGHYh2MHu1QR4MIstEubxq004U9HgTJN";
+            var pmService = new PaymentMethodService();
+            var pmOptions = new PaymentMethodCreateOptions()
+            {
+                Card = new PaymentMethodCardOptions()
+                {
+                    Cvc = t.Card.SecurityCode,
+                    Number = t.Card.CardNumber,
+                    ExpMonth = t.Card.ExpirationMonth,
+                    ExpYear = t.Card.ExpirationYear
+                },
+                BillingDetails = new PaymentMethodBillingDetailsOptions()
+                {
+                    Address = new AddressOptions() { Line1 = t.Customer.Street, PostalCode = t.Customer.PostalCode }
+                }
+
+            };
+            var pm = pmService.Create(pmOptions);
+
+            var options = new PaymentIntentCreateOptions
+            {
+                Amount = Convert.ToInt64(t.Amount * 100),
+                Currency = Settings.CurrencyCode,
+                PaymentMethod = pm.Id,
+                Confirm = true
+            };
+
+            var service = new PaymentIntentService();
+            var pi = service.Create(options);
+            if (pi.Status == "succeeded")
+            {
+                t.Result.Succeeded = true;
+                t.Result.ReferenceNumber = pi.Id;
+            }
+            else
+            {
+                t.Result.Succeeded = false;
+                t.Result.ResponseCode = pi.Status;
+                t.Result.ResponseCodeDescription = "Stripe Failure";
+            }
+        }
+
+        public class PaymentIntentRequestItem
+        {
+            public long TotalAmmount { get; set; }
+        }
+
+
+
         public override void ProcessTransaction(Transaction t)
         {
             try
@@ -201,10 +230,10 @@ namespace Hotcakes.Payment.Gateways
                         CaptureCharge(t);
                         break;
                     case ActionType.CreditCardCharge:
-                        CreateCharge(t, true);
+                        CreatePaymentIntent(t);
                         break;
                     case ActionType.CreditCardHold:
-                        CreateCharge(t, false);
+                        CreatePaymentIntent(t);
                         break;
                     case ActionType.CreditCardRefund:
                         CreateRefund(t);

@@ -294,6 +294,7 @@
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Receipt.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Search.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Search.SearchInput.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\StripeCheckout.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\views.css">
       <DependentUpon>views.less</DependentUpon>
     </Content>
