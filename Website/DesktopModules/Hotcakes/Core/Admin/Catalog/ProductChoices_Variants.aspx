@@ -29,7 +29,7 @@
     </script>
 
     <hcc:MessageBox ID="ucMessageBox" runat="server" />
-    <h1>Choices - Variants</h1>
+    <h1><%=PageTitle %></h1>
     <div class="hcColumnLeft hcChoiceVariants" style="width: 50%">
         <div class="hcForm">
             <div class="hcFormItemLabel">
