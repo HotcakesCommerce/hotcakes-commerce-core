@@ -9,7 +9,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 	<div class="hcColumnLeft" style="width: 50%">
 		<div class="hcForm">
-			 <h1>Categories</h1>
+			 <h1><%=PageTitle %></h1>
 			<uc2:MessageBox ID="msg" runat="server" />
 			<div class="hcFormItem">
 				<div>
