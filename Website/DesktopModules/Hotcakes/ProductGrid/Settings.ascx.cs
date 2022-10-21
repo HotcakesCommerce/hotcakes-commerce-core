@@ -188,7 +188,7 @@ namespace Hotcakes.Modules.ProductGrid
         protected void rgProducts_OnDeleteCommand(object sender, GridViewDeleteEventArgs e)
         {
             var bvinsList = GetProductBvins();
-            var key = int.Parse(rgProducts.DataKeys[e.RowIndex].ToString(), NumberStyles.Integer);
+            var key = (int)rgProducts.DataKeys[e.RowIndex].Value;
             bvinsList.Remove(key);
             SaveItems(bvinsList);
             LoadItems(GetProducts(bvinsList));
