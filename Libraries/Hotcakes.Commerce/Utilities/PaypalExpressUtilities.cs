@@ -33,50 +33,12 @@ namespace Hotcakes.Commerce.Utilities
 {
     public class PaypalExpressUtilities
     {
-        public static PayPalAPI GetPaypalAPI(Store currentStore)
+        public static RestPayPalApi GetRestPaypalAPI(Store currentStore)
         {
-            var APIProfile
-                = CreateAPIProfile(currentStore.Settings.PayPal.UserName,
-                    currentStore.Settings.PayPal.Password,
-                    currentStore.Settings.PayPal.Signature,
-                    currentStore.Settings.PayPal.FastSignupEmail,
-                    currentStore.Settings.PayPal.Mode);
-
-            return new PayPalAPI(APIProfile);
-        }
-
-        private static IAPIProfile CreateAPIProfile(string PayPalUserName, string PayPalPassword, string PayPalSignature,
-            string subject, string mode)
-        {
-            try
-            {
-                var profile = ProfileFactory.createSignatureAPIProfile();
-
-                if (profile != null)
-                {
-                    profile.Environment = mode;
-
-                    EventLog.LogEvent("PayPal Express Get Api", "Getting Environment " + mode,
-                        EventLogSeverity.Information);
-
-                    profile.APIUsername = PayPalUserName;
-                    profile.APIPassword = PayPalPassword;
-                    profile.APISignature = PayPalSignature;
-                    profile.Subject = subject;
-                }
-                else
-                {
-                    EventLog.LogEvent("Paypal API",
-                        "Paypal com.paypal.sdk.profiles.ProfileFactory.CreateAPIProfile has failed.",
-                        EventLogSeverity.Error);
-                }
-                return profile;
-            }
-            catch (Exception ex)
-            {
-                EventLog.LogEvent("PayPal Utilities", ex.Message + " | " + ex.StackTrace, EventLogSeverity.Warning);
-            }
-            return null;
+            return new RestPayPalApi(currentStore.Settings.PayPal.ClienId,
+                currentStore.Settings.PayPal.Secret, currentStore.Settings.PayPal.Mode);
         }
     }
+
+    
 }

@@ -24,6 +24,7 @@
 #endregion
 
 using System;
+using System.Net;
 using System.Web.Mvc;
 using com.paypal.soap.api;
 using Hotcakes.Commerce;
@@ -39,6 +40,9 @@ using Hotcakes.Modules.Core.Models;
 using Hotcakes.PaypalWebServices;
 using Hotcakes.Web.Logging;
 using Hotcakes.Web.Validation;
+using PayPalCheckoutSdk.Core;
+using PayPalCheckoutSdk.Orders;
+using Order = PayPalCheckoutSdk.Orders.Order;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
@@ -123,9 +127,9 @@ namespace Hotcakes.Modules.Core.Controllers
             model.PayPalToken = Request.QueryString["token"] ?? string.Empty;
             model.PayPalPayerId = Request.QueryString["payerId"] ?? string.Empty;
 
-            var ppAPI = PaypalExpressUtilities.GetPaypalAPI(HccApp.CurrentStore);
+            var ppAPI = PaypalExpressUtilities.GetRestPaypalAPI(HccApp.CurrentStore);
             var failed = false;
-            GetExpressCheckoutDetailsResponseType ppResponse = null;
+            PayPalHttp.HttpResponse ppResponse = null;
             try
             {
                 if (!GetExpressCheckoutDetails(ppAPI, ref ppResponse, model))
@@ -133,13 +137,6 @@ namespace Hotcakes.Modules.Core.Controllers
                     failed = true;
                     EventLog.LogEvent("Paypal Express Checkout",
                         "GetExpressCheckoutDetails call failed. Detailed Errors will follow. ", EventLogSeverity.Error);
-                    foreach (var ppError in ppResponse.Errors)
-                    {
-                        EventLog.LogEvent("Paypal error number: " + ppError.ErrorCode,
-                            "Paypal Error: '" + ppError.ShortMessage + "' Message: '" + ppError.LongMessage + "' " +
-                            " Values passed to GetExpressCheckoutDetails: Token: " + model.PayPalToken,
-                            EventLogSeverity.Error);
-                    }
                     FlashFailure(Localization.GetString("ErrorOccured"));
                     ViewBag.HideCheckout = true;
                 }
@@ -151,53 +148,52 @@ namespace Hotcakes.Modules.Core.Controllers
                 o.CustomProperties.Add("hcc", "PayerID", Request.QueryString["PayerID"]);
                 if (!failed)
                 {
-                    if (ppResponse != null && ppResponse.GetExpressCheckoutDetailsResponseDetails != null &&
-                        ppResponse.GetExpressCheckoutDetailsResponseDetails.PayerInfo != null)
+                    if (ppResponse != null && ppResponse != null &&
+                        ppResponse.Result<Order>().Payer != null)
                     {
-                        o.UserEmail = ppResponse.GetExpressCheckoutDetailsResponseDetails.PayerInfo.Payer;
-                        if (string.IsNullOrEmpty(o.ShippingAddress.Phone))
-                        {
-                            o.ShippingAddress.Phone =
-                                ppResponse.GetExpressCheckoutDetailsResponseDetails.ContactPhone ?? string.Empty;
-                        }
+                        o.UserEmail = ppResponse.Result<Order>().Payer.Email;
                     }
                 }
                 HccApp.OrderServices.Orders.Update(o);
             }
         }
 
-        private bool GetExpressCheckoutDetails(PayPalAPI ppAPI, ref GetExpressCheckoutDetailsResponseType ppResponse,
+        private bool GetExpressCheckoutDetails(RestPayPalApi ppAPI, ref PayPalHttp.HttpResponse ppResponse,
             CheckoutViewModel model)
-        {
-            ppResponse = ppAPI.GetExpressCheckoutDetails(Request.QueryString["token"]);
-            if (ppResponse.Ack == AckCodeType.Success || ppResponse.Ack == AckCodeType.SuccessWithWarning)
+        {//
+            ppResponse = System.Threading.Tasks.Task.Run(() => ppAPI.GetOrder(Request.QueryString["token"])).GetAwaiter().GetResult();
+            if (ppResponse.StatusCode == HttpStatusCode.OK)
             {
-                var payerInfo = ppResponse.GetExpressCheckoutDetailsResponseDetails.PayerInfo;
-                var country = HccApp.GlobalizationServices.Countries.FindByISOCode(payerInfo.Address.Country.ToString());
-                model.CurrentOrder.UserEmail = payerInfo.Payer;
+                var paypalOrder = ppResponse.Result<Order>();
+                var payerInfo = paypalOrder.Payer;
+                var purchaseUnits = paypalOrder.PurchaseUnits;
+                var country = HccApp.GlobalizationServices.Countries.FindByISOCode(payerInfo.AddressPortable.CountryCode.ToString());
+                model.CurrentOrder.UserEmail = payerInfo.Email;
 
                 if (model.CurrentOrder.HasShippingItems)
                 {
-                    model.CurrentOrder.ShippingAddress.FirstName = payerInfo.PayerName.FirstName;
-                    model.CurrentOrder.ShippingAddress.LastName = payerInfo.PayerName.LastName;
+                    model.CurrentOrder.ShippingAddress.FirstName = payerInfo.Name.GivenName;
+                    model.CurrentOrder.ShippingAddress.LastName = payerInfo.Name.Surname;
 
-                    model.CurrentOrder.ShippingAddress.Company = payerInfo.PayerBusiness ?? string.Empty;
-                    model.CurrentOrder.ShippingAddress.Line1 = payerInfo.Address.Street1 ?? string.Empty;
-                    model.CurrentOrder.ShippingAddress.Line2 = payerInfo.Address.Street2 ?? string.Empty;
+                    //model.CurrentOrder.ShippingAddress.Company = payerInfo. ?? string.Empty;
+                    model.CurrentOrder.ShippingAddress.Line1 = purchaseUnits[0].ShippingDetail.AddressPortable.AddressLine1 ?? string.Empty;
+                    model.CurrentOrder.ShippingAddress.Line2 = purchaseUnits[0].ShippingDetail.AddressPortable.AddressLine2 ?? string.Empty;
                     model.CurrentOrder.ShippingAddress.CountryBvin = country.Bvin ?? string.Empty;
-                    model.CurrentOrder.ShippingAddress.City = payerInfo.Address.CityName ?? string.Empty;
-                    model.CurrentOrder.ShippingAddress.RegionBvin = payerInfo.Address.StateOrProvince ?? string.Empty;
-                    model.CurrentOrder.ShippingAddress.PostalCode = payerInfo.Address.PostalCode ?? string.Empty;
-                    model.CurrentOrder.ShippingAddress.Phone = payerInfo.Address.Phone ?? string.Empty;
+                    model.CurrentOrder.ShippingAddress.City = purchaseUnits[0].ShippingDetail.AddressPortable.AdminArea1 ?? string.Empty;
+                    //model.CurrentOrder.ShippingAddress.RegionBvin = payerInfo.Address.StateOrProvince ?? string.Empty;
+                    model.CurrentOrder.ShippingAddress.PostalCode = purchaseUnits[0].ShippingDetail.AddressPortable.PostalCode ?? string.Empty;
+                    //model.CurrentOrder.ShippingAddress.Phone = purchaseUnits[0].ShippingDetail.AddressPortable.AddressLine3 ?? string.Empty;
+                    model.CurrentOrder.ThirdPartyOrderId = paypalOrder.Id;
 
-                    if (payerInfo.Address.AddressStatus == AddressStatusCodeType.Confirmed)
-                    {
-                        ViewBag.AddressStatus = Localization.GetString("Confirmed");
-                    }
-                    else
-                    {
-                        ViewBag.AddressStatus = Localization.GetString("Unconfirmed");
-                    }
+                    model.CurrentOrder.BillingAddress.FirstName = payerInfo.Name.GivenName;
+                    model.CurrentOrder.BillingAddress.LastName = payerInfo.Name.Surname;
+                    model.CurrentOrder.BillingAddress.Line1 = payerInfo.AddressPortable.AddressLine1 ?? string.Empty;
+                    model.CurrentOrder.BillingAddress.Line2 = payerInfo.AddressPortable.AdminArea2 ?? string.Empty;
+                    model.CurrentOrder.BillingAddress.CountryBvin = country.Bvin ?? string.Empty;
+                    model.CurrentOrder.BillingAddress.City = payerInfo.AddressPortable.AdminArea1 ?? string.Empty;
+                    model.CurrentOrder.BillingAddress.PostalCode = payerInfo.AddressPortable.PostalCode ?? string.Empty;
+
+                    ViewBag.AddressStatus = Localization.GetString("Confirmed");
                 }
                 return true;
             }
@@ -222,7 +218,7 @@ namespace Hotcakes.Modules.Core.Controllers
             LoadShippingMethodsForOrder(o);
         }
 
-        private void LoadShippingMethodsForOrder(Order o)
+        private void LoadShippingMethodsForOrder(Hotcakes.Commerce.Orders.Order  o)
         {
             var rates = HccApp.OrderServices.FindAvailableShippingRates(o);
 
