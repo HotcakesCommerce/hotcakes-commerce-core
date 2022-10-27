@@ -149,7 +149,8 @@ namespace Hotcakes.Commerce.Orders
                     ShipStreet = o.ShippingAddress.Line1
                 },
                 MerchantDescription = "Order " + o.OrderNumber,
-                MerchantInvoiceNumber = o.OrderNumber
+                MerchantInvoiceNumber = o.OrderNumber,
+                Result = { ReferenceNumber = o.ThirdPartyOrderId}
             };
 
             foreach (var li in o.Items)

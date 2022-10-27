@@ -42,6 +42,10 @@ namespace Hotcakes.Modules.Checkout
             _action = _action.ToLower();
             if (_action == "index" || _action == "paymenterror")
             {
+                if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway == "15011DF5-13DA-42BE-9DFF-31C71ED64D4A")
+                {
+                    RegisterExternalScript("https://js.stripe.com/v3/");
+                }
                 RegisterViewScript("crypto-js.js");
                 RegisterViewScript("Checkout.js");
             }

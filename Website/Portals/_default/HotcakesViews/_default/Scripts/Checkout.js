@@ -33,12 +33,16 @@
                         });
                 });
 
-        $("#hcTakeOrder").click(function () {
+        $("#hcTakeOrder").click(function (e) {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
         });
+
+        //e.preventDefault();
+        //e.stopPropagation();
+        //CreatePaymentMethod()
     }
 
     function ajaxErrorNotification() {
@@ -49,8 +53,8 @@
 
     function IsEmailKnown(forceSwitch, emailfieldid) {
         var emailfield = $(emailfieldid || '#customeremail').val().toLowerCase();
-		var token = $('input[name="__RequestVerificationToken"]').val();
-		
+        var token = $('input[name="__RequestVerificationToken"]').val();
+
         $.ajax({
             url: hcc.getServiceUrl("checkout/IsEmailKnown"),
             type: 'post',
@@ -410,6 +414,7 @@
             if (this.showDialog) {
                 e.stopPropagation();
                 e.preventDefault();
+
                 $(".hc-checkout").ajaxLoader("start");
 
                 this.applyAddressChange(function (res) {
@@ -422,6 +427,8 @@
                     var showBillingNm = (blRes != null && blRes.NormalizedAddress != null);
 
                     if (!showShippingNm && !showBillingNm) {
+                        //CreatePaymentMethod();
+
                         self.saveForm();
                     }
                     else {
@@ -454,7 +461,7 @@
                 });
                 return false;
             }
-
+            //CreatePaymentMethod();
             return true;
         },
         saveForm: function () {
@@ -865,6 +872,54 @@
     function UpdateTotalTable() {
         $("table.totaltable").attr("class", "table table-striped table-hover totaltable");
     }
+
+    async function CreatePaymentMethod(address) {
+        var clientSecret = $("#PaymentIntentClientSecret").val()
+        var resp = false;
+
+        if (clientSecret) {
+            var cardNumber = $("#cccardnumber").val();
+            var cvc = $("#ccsecuritycode").val();
+            var expMonth = $("#ccexpmonth").val();
+            var expYear = $("#ccexpyear").val();
+            var paymentIntent = $("#PaymentIntentId").val();
+            var pm = "";
+            if (cardNumber && cvc && expMonth && expYear) {
+                var reqUrl = hcc.getServiceUrl("checkout/AttachPaymentMethod");
+                $.post(reqUrl, { "CardNumber": cardNumber, "Cvc": cvc, "ExpMonth": expMonth, "ExpYear": expYear, "PaymentIntentId": paymentIntent }, null, "json")
+                    .done(function (data) {
+                        console.log(data);
+                        const stripe = Stripe("pk_test_51KjFl3LWG7Wf1eHaXYnb5IvUS9tM2EkUWmeRk5ru7v1pjsiloFNGT4uMSf3gmHnPHU550tVz1WZGIqa3vWfrtDjR00POv7hIxD");
+                        stripe
+                            .retrievePaymentIntent(clientSecret)
+                            .then(function (result) {
+                                if (result.paymentIntent) {
+                                    if (result.paymentIntent.status == "requires_action") {
+                                        stripe
+                                            .confirmCardPayment(clientSecret)
+                                            .then(function (result) {
+                                                if (result.paymentIntent) {
+                                                    console.log(result);
+                                                    Addresses.enableDialog(false);
+                                                    Addresses.$submitButton.click();
+                                                }
+                                            });
+                                    }
+                                }
+                                console.log(result);
+                                // Handle result.error or result.paymentIntent
+                            });
+                    })
+                    .fail(function (xhr, status, error) {
+                        console.log("xhr: " + xhr);
+                        console.log("status: " + status);
+                        console.log("error: " + error);
+                    })
+                    .always(function () { console.log("Error Always") });
+            }
+        }
+        return resp;
+    };
 
     // Initialization --------------------------
 

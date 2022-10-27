@@ -65,6 +65,7 @@ using Hotcakes.Web.Validation;
 using Stripe;
 using Newtonsoft.Json;
 using Address = Hotcakes.Commerce.Contacts.Address;
+using static Hotcakes.Payment.Gateways.StripeProcessor;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
@@ -108,7 +109,14 @@ namespace Hotcakes.Modules.Core.Controllers
             VerifySessionError(model);
             RenderErrorSummary(model);
             CheckFreeItems(model);
-
+            //if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway == "15011DF5-13DA-42BE-9DFF-31C71ED64D4A")
+            //{
+            //    var stripeProcessor = new StripeProcessor();
+            //    var paymentIntentRequest = new PaymentIntentRequestItem() { TotalAmmount = model.CurrentOrder.TotalGrand };
+            //    var paymentIntent = stripeProcessor.CreatePaymentIntent(paymentIntentRequest);
+            //    model.PaymentIntentClientSecret = paymentIntent.ClientSecret;
+            //    model.PaymentIntentId = paymentIntent.Id;
+            //}
             return View(model);
         }
 
@@ -120,7 +128,7 @@ namespace Hotcakes.Modules.Core.Controllers
         {
             var model = LoadCheckoutModel();
             LoadValuesFromForm(model);
-
+            
             var intResult = CheckoutIntegration.Create(HccApp).BeforeCheckoutCompleted(HccApp, model);
 
             if (!intResult.IsAborted)
@@ -279,6 +287,24 @@ namespace Hotcakes.Modules.Core.Controllers
             result.PaymentViewModel = LoadPaymentsModel(order);
 
             return new PreJsonResult(Web.Json.ObjectToJson(result));
+        }
+        
+        /// <summary>
+        /// Attach Payment method to Stripe Payment Intent
+        /// </summary>
+        /// <returns></returns>
+        [HccHttpPost]
+        public ActionResult AttachPaymentMethod()
+        {
+            var cardNumber = Request.Form["CardNumber"];
+            var Cvc = Request.Form["Cvc"];
+            var ExpMonth = Convert.ToInt32(Request.Form["ExpMonth"]);
+            var ExpYear = Convert.ToInt32(Request.Form["ExpYear"]);
+            var stripeService = new StripeProcessor();
+            var pm = stripeService.CreatePaymentMethod(cardNumber, Cvc, ExpMonth, ExpYear);
+            string paymentIntentId = Request.Form["PaymentIntentId"];
+            var result = stripeService.AttachPaymentMethod(pm.Id, paymentIntentId);
+            return new PreJsonResult(Web.Json.ObjectToJson(new {id = result.Id}));
         }
 
         [HccHttpPost]
@@ -862,7 +888,11 @@ namespace Hotcakes.Modules.Core.Controllers
 
             // Addresses
             model.BillShipSame = Request.Form["chkbillsame"] != null;
-
+            var paymentIntentId = Request.Form["PaymentIntentId"];
+            if (!string.IsNullOrEmpty(paymentIntentId))
+            {
+                model.CurrentOrder.ThirdPartyOrderId = paymentIntentId;
+            }
             LoadAddressFromForm("shipping", model.CurrentOrder.ShippingAddress);
             if (model.BillShipSame)
             {

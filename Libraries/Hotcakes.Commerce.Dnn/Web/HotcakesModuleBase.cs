@@ -160,6 +160,12 @@ namespace Hotcakes.Commerce.Dnn.Web
                 FileOrder.Js.DefaultPriority + order);
         }
 
+        protected void RegisterExternalScript(string path, int order = 0)
+        {
+            ClientResourceManager.RegisterScript(Page, ResolveUrl(path),
+                FileOrder.Js.DefaultPriority + order);
+        }
+
         protected void RegisterUnobtrusiveValidateScripts()
         {
             RegisterScript("jquery.validate.hcc.js", 3);
