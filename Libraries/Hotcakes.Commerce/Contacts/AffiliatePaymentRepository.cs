@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -54,10 +55,11 @@ namespace Hotcakes.Commerce.Contacts
         public List<AffiliatePayment> FindAllPaged(long affiliateId, DateTime startUtc, DateTime endUtc, int pageNumber,
             int pageSize, out int totalRowCount)
         {
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
                 var query = strategy
                     .GetQuery(i => i.AffiliateId == affiliateId && i.PaymentDate >= startUtc && i.PaymentDate <= endUtc)
+                    .AsNoTracking()
                     .OrderBy(i => i.PaymentDate);
 
                 totalRowCount = query.Count();
@@ -70,9 +72,9 @@ namespace Hotcakes.Commerce.Contacts
         public List<AffiliatePaymentReportData> FindAllWithFilter(AffiliatePaymentReportCriteria criteria,
             int pageNumber, int pageSize, out int totalRowCount)
         {
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
-                var query = strategy.GetQuery();
+                var query = strategy.GetQuery().AsNoTracking();
 
                 //IQueryable<hcc_AffiliatePayments> items = repository.Find();
                 if (!string.IsNullOrEmpty(criteria.SearchText))

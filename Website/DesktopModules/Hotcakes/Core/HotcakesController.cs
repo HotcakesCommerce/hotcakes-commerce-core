@@ -27,15 +27,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.UI.DataVisualization.Charting;
 using System.Xml;
 using System.Xml.Serialization;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Vml.Spreadsheet;
+using DocumentFormat.OpenXml.Wordprocessing;
 using DotNetNuke.Application;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Data;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Host;
@@ -43,6 +54,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Framework;
+using DotNetNuke.Framework.Providers;
 using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Installer;
@@ -55,6 +67,7 @@ using Hotcakes.Commerce.Accounts;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Content;
+using Hotcakes.Commerce.Data.EF;
 using Hotcakes.Commerce.Dnn;
 using Hotcakes.Commerce.Dnn.Utils;
 using Hotcakes.Commerce.Marketing;
@@ -62,6 +75,7 @@ using Hotcakes.Commerce.Orders;
 using Hotcakes.Commerce.Shipping;
 using Hotcakes.Commerce.Taxes.Providers;
 using Hotcakes.Commerce.Taxes.Providers.Avalara;
+using Hotcakes.Modules.Core.Admin.Controls;
 using Hotcakes.Shipping.FedEx;
 using Util = DotNetNuke.Entities.Content.Common.Util;
 
@@ -74,16 +88,18 @@ namespace Hotcakes.Modules.Core
         private HccRequestContext context = null;
         private AccountService accountServices = null;
         private List<Store> stores = null;
-
         private const string SCHEDULED_JOB_TYPE = "Hotcakes.Modules.Core.ClearUploadTempFiles, Hotcakes.Modules";
         private const string SCHEDULED_JOB_NAME = "Hotcakes Commerce: Clear Temporary Files";
+
+        const string ScriptDelimiterRegex = "(?<=(?:[^\\w]+|^))GO(?=(?: |\\t)*?(?:\\r?\\n|$))";
+        private static readonly Regex SqlObjRegex = new Regex(ScriptDelimiterRegex, RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
         private const string TEMPLATE_MATCH = "</body>";
         private const string TEMPLATE_REPLACE =
             "<table class=\"hc-noprint\" style=\"width:100%;margin:1.5em auto;\"><tr><td style=\"width:100%;text-align:center;\">We built our store using the <em>FREE</em> and open-source <a href=\"https://hotcakes.org/?utm_source=hcc-install&amp;utm_medium=email-template&amp;utm_campaign={0}\" target=\"_blank\">Hotcakes Commerce e-commerce solution</a>.</td></tr></table></body>";
 
         private bool IsGenericCodeExecuted { get; set; }
-        
+
         public string UpgradeModule(string Version)
         {
             try
@@ -133,7 +149,7 @@ namespace Hotcakes.Modules.Core
                         UpdateEmailTemplateBranding();
                         break;
 
-                    case "03.05.00": 
+                    case "03.05.00":
                     case "03.06.00":
                         UpdateStoreSettings();
                         break;
@@ -336,7 +352,7 @@ namespace Hotcakes.Modules.Core
                 PageUtils.EnsureTabsExist(urlSettings);
                 hccApp.UpdateCurrentStore();
 
-                var catImport = new CatalogImport(hccApp) {ImagesImportPath = intallFolderPath + "Images/"};
+                var catImport = new CatalogImport(hccApp) { ImagesImportPath = intallFolderPath + "Images/" };
                 catImport.ImportFromExcel(productsFile, (p, l) => { });
 
                 Directory.Delete(HttpContext.Current.Server.MapPath(intallFolderPath), true);
@@ -349,8 +365,8 @@ namespace Hotcakes.Modules.Core
         {
             using (var configFile = new FileStream(configPath, FileMode.Open))
             {
-                var serializer = new XmlSerializer(typeof (StoreConfig));
-                return (StoreConfig) serializer.Deserialize(configFile);
+                var serializer = new XmlSerializer(typeof(StoreConfig));
+                return (StoreConfig)serializer.Deserialize(configFile);
             }
         }
 
@@ -439,7 +455,7 @@ namespace Hotcakes.Modules.Core
             if (!contentItemTermIds.Contains(moduleCategoryTerm.TermId))
                 termController.AddTermToContent(moduleCategoryTerm, contentItem);
         }
-        
+
         private void MigrateFedExRateSetting()
         {
             // 1.9.0: negotiated rates are no longer a global setting, but a "local" setting
@@ -448,7 +464,7 @@ namespace Hotcakes.Modules.Core
                 context.CurrentStore = store;
 
                 var fedExService =
-                    AvailableServices.FindAll(store).FirstOrDefault(s => s.GetType() == typeof (FedExProvider));
+                    AvailableServices.FindAll(store).FirstOrDefault(s => s.GetType() == typeof(FedExProvider));
 
                 if (fedExService != null)
                 {
@@ -493,6 +509,8 @@ namespace Hotcakes.Modules.Core
             }
         }
 
+       
+
         public static void Uninstall(bool deleteModuleFiles, bool deleteStoreFiles)
         {
             foreach (var packageName in HotcakesPackages)
@@ -526,6 +544,26 @@ namespace Hotcakes.Modules.Core
                     if (Directory.Exists(portalViewsetsDir))
                         Directory.Delete(portalViewsetsDir, true);
                 }
+            }
+            //Gets the UnInstall.SqlDataProvider file
+            string script = System.IO.File.ReadAllText(System.Web.HttpContext.Current.Server.MapPath("~/DesktopModules/Hotcakes/Providers/DataProviders/SqlDataProvider/UnInstall.SqlDataProvider"));
+            //Get the Connection String from the web.config file
+            string connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings["SiteSqlServer"].ConnectionString;
+            //Check if the script has the correct format
+            var runAsQuery = SqlObjRegex.IsMatch(script);
+            if (runAsQuery)
+            {
+                //Execute the SQL query using a DataProvider instance that owns DNN.
+                //With this method we clean the module tables in the database and then we delete them. 
+                DataProvider.Instance().ExecuteScript(connectionstring, script);
+            }
+            
+            //Method to remove all module directories within the DesktopModules directory
+            if (deleteModuleFiles && deleteStoreFiles)
+            {
+                var DesktopModulesDir = System.Web.HttpContext.Current.Server.MapPath("~/DesktopModules/Hotcakes");
+                if (Directory.Exists(DesktopModulesDir))
+                    Directory.Delete(DesktopModulesDir, true);
             }
         }
 
@@ -597,7 +635,7 @@ namespace Hotcakes.Modules.Core
 
             var doc = new XmlDocument();
             doc.Load(path);
-            
+
             var app = DotNetNukeContext.Current.Application;
             var merge = new XmlMerge(doc, Globals.FormatVersion(app.Version), app.Description);
 
@@ -661,7 +699,7 @@ namespace Hotcakes.Modules.Core
                 installDate = package.CreatedOnDate;
             }
 
-            if (installDate != DateTime.MinValue &&  installDate.Date == DateTime.Now.Date)
+            if (installDate != DateTime.MinValue && installDate.Date == DateTime.Now.Date)
             {
                 // this is a new install (not an upgrade)
                 var context = new HccRequestContext();
@@ -672,13 +710,13 @@ namespace Hotcakes.Modules.Core
 
                 foreach (var template in templates)
                 {
-                    if ((template.Subject == "Affiliate Approved Confirmation" 
-                        || template.Subject == "Affiliate Registration Confirmation" 
-                        || template.Subject == "Order [[Order.OrderNumber]] Update from [[Store.StoreName]]" 
-                        || template.Subject == "Receipt for Order [[Order.OrderNumber]] from [[Store.StoreName]]" 
-                        || template.Subject == "Shipping update for order [[Order.OrderNumber]] from [[Store.StoreName]]" 
-                        || template.Subject == "You haven't finished your purchase" 
-                        || template.Subject == "You received Gift Card") 
+                    if ((template.Subject == "Affiliate Approved Confirmation"
+                        || template.Subject == "Affiliate Registration Confirmation"
+                        || template.Subject == "Order [[Order.OrderNumber]] Update from [[Store.StoreName]]"
+                        || template.Subject == "Receipt for Order [[Order.OrderNumber]] from [[Store.StoreName]]"
+                        || template.Subject == "Shipping update for order [[Order.OrderNumber]] from [[Store.StoreName]]"
+                        || template.Subject == "You haven't finished your purchase"
+                        || template.Subject == "You received Gift Card")
                         && template.Body.StartsWith("<html>"))
                     {
                         template.Body.Replace(TEMPLATE_MATCH, branding);
@@ -693,7 +731,7 @@ namespace Hotcakes.Modules.Core
             try
             {
                 // TODO: Implement the RefreshStoreSettings sproc 
-                using(var db = Factory.CreateHccDbContext())
+                using (var db = Factory.CreateHccDbContext())
                 {
                     Logger.Info("Trigger - Refresh Store Settings.");
                     db.hcc_RefreshStoreSettings();

@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -118,9 +119,10 @@ namespace Hotcakes.Commerce.Contacts
 
         public List<VendorManufacturer> FindAllWithFilter(string filter, int pageNumber, int pageSize, ref int rowCount)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var query = s.GetQuery()
+                    .AsNoTracking()
                     .Where(y => y.StoreId == Context.CurrentStore.Id)
                     .Where(y => y.DisplayName.Contains(filter) || y.EmailAddress.Contains(filter))
                     .OrderBy(y => y.DisplayName);
