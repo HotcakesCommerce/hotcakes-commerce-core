@@ -25,10 +25,14 @@
 
 using System;
 using System.Globalization;
+using System.Net;
+using System.Threading.Tasks;
 using com.paypal.soap.api;
 using Hotcakes.Commerce.Utilities;
 using Hotcakes.Payment;
 using Hotcakes.PaypalWebServices;
+using PayPalCheckoutSdk.Orders;
+using PayPalHttp;
 
 namespace Hotcakes.Commerce.Payment.Methods
 {
@@ -64,7 +68,7 @@ namespace Hotcakes.Commerce.Payment.Methods
         {
             try
             {
-                var ppAPI = PaypalExpressUtilities.GetPaypalAPI(app.CurrentStore);
+                var ppAPI = PaypalExpressUtilities.GetRestPaypalAPI(app.CurrentStore);
 
                 if (t.PreviousTransactionNumber != null)
                 {
@@ -76,20 +80,15 @@ namespace Hotcakes.Commerce.Payment.Methods
                         mode = PaymentActionCodeType.Sale;
                     }
 
-                    var paymentResponse = ppAPI.DoExpressCheckoutPayment(t.PreviousTransactionNumber,
-                        t.PreviousTransactionAuthCode,
-                        t.Amount.ToString("N", CultureInfo.InvariantCulture),
-                        mode,
-                        PayPalAPI.GetCurrencyCodeType(app.CurrentStore.Settings.PayPal.Currency),
-                        OrderNumber);
+                    var paymentResponse = Task.Run(() => ppAPI.AuthorizeOrder(t.PreviousTransactionNumber)).GetAwaiter().GetResult();
+                   
 
-                    if (paymentResponse.Ack == AckCodeType.Success ||
-                        paymentResponse.Ack == AckCodeType.SuccessWithWarning)
+                    if (paymentResponse.StatusCode == HttpStatusCode.Created)
                     {
-                        var paymentInfo = paymentResponse.DoExpressCheckoutPaymentResponseDetails.PaymentInfo[0];
+                        var paymentInfo = paymentResponse.Result<Order>().PurchaseUnits[0].Payments.Authorizations[0];
 
                         t.Result.Succeeded = true;
-                        t.Result.ReferenceNumber = paymentInfo.TransactionID;
+                        t.Result.ReferenceNumber = paymentInfo.Id;
                         t.Result.ResponseCode = "OK";
                         t.Result.ResponseCodeDescription = "PayPal Express Payment Authorized Successfully.";
                         return true;
@@ -97,10 +96,6 @@ namespace Hotcakes.Commerce.Payment.Methods
                     t.Result.Succeeded = false;
                     t.Result.Messages.Add(new Message("PayPal Express Payment Authorization Failed.", string.Empty,
                         MessageType.Error));
-                    foreach (var ppError in paymentResponse.Errors)
-                    {
-                        t.Result.Messages.Add(new Message(ppError.LongMessage, ppError.ErrorCode, MessageType.Error));
-                    }
                     return false;
                 }
             }
@@ -116,22 +111,20 @@ namespace Hotcakes.Commerce.Payment.Methods
         {
             try
             {
-                var ppAPI = PaypalExpressUtilities.GetPaypalAPI(app.CurrentStore);
+                var ppAPI = PaypalExpressUtilities.GetRestPaypalAPI(app.CurrentStore);
 
                 var OrderNumber = t.MerchantInvoiceNumber + Guid.NewGuid();
 
-                var captureResponse = ppAPI.DoCapture(t.PreviousTransactionNumber,
-                    "Thank you for your payment.",
+                var captureResponse = Task.Run(() => ppAPI.CaptureAuthorizedOrder(t.PreviousTransactionNumber,
                     t.Amount.ToString("N", CultureInfo.InvariantCulture),
-                    PayPalAPI.GetCurrencyCodeType(app.CurrentStore.Settings.PayPal.Currency),
-                    OrderNumber);
+                    app.CurrentStore.Settings.PayPal.Currency,
+                    OrderNumber)).GetAwaiter().GetResult();
 
-                if (captureResponse.Ack == AckCodeType.Success || captureResponse.Ack == AckCodeType.SuccessWithWarning)
+                if (captureResponse.StatusCode == HttpStatusCode.OK || captureResponse.StatusCode == HttpStatusCode.Created)
                 {
-                    t.Result.ReferenceNumber = captureResponse.DoCaptureResponseDetails.PaymentInfo.TransactionID;
+                    t.Result.ReferenceNumber = captureResponse.Result<PayPalCheckoutSdk.Payments.Capture>().Id;
 
-                    if (captureResponse.DoCaptureResponseDetails.PaymentInfo.PaymentStatus ==
-                        PaymentStatusCodeType.Pending)
+                    if (captureResponse.Result<PayPalCheckoutSdk.Payments.Capture>().Status == "PENDING")
                     {
                         t.Result.Succeeded = true;
                         t.Result.ResponseCode = "PENDING";
@@ -140,37 +133,16 @@ namespace Hotcakes.Commerce.Payment.Methods
                             MessageType.Information));
                         return true;
                     }
-                    if (captureResponse.DoCaptureResponseDetails.PaymentInfo.PaymentStatus ==
-                        PaymentStatusCodeType.InProgress)
+                    if (captureResponse.Result<PayPalCheckoutSdk.Payments.Capture>().Status == "DENIED")
                     {
                         t.Result.Succeeded = true;
                         t.Result.ResponseCode = "PENDING";
-                        t.Result.ResponseCodeDescription = "PayPal Express Payment IN PROGRESS";
-                        t.Result.Messages.Add(new Message("Paypal Express Payment PENDING. In Progress.", "OK",
+                        t.Result.ResponseCodeDescription = "PayPal Express Payment DENIED";
+                        t.Result.Messages.Add(new Message("Paypal Express Payment DENIED.", "OK",
                             MessageType.Information));
                         return true;
                     }
-                    if (captureResponse.DoCaptureResponseDetails.PaymentInfo.PaymentStatus == PaymentStatusCodeType.None)
-                    {
-                        t.Result.Succeeded = true;
-                        t.Result.ResponseCode = "PENDING";
-                        t.Result.ResponseCodeDescription = "PayPal Express Payment: No Status Yet";
-                        t.Result.Messages.Add(new Message("Paypal Express Payment PENDING. No Status Yet.", "OK",
-                            MessageType.Information));
-                        return true;
-                    }
-                    if (captureResponse.DoCaptureResponseDetails.PaymentInfo.PaymentStatus ==
-                        PaymentStatusCodeType.Processed)
-                    {
-                        t.Result.Succeeded = true;
-                        t.Result.ResponseCode = "PENDING";
-                        t.Result.ResponseCodeDescription = "PayPal Express Payment PENDING";
-                        t.Result.Messages.Add(new Message("Paypal Express Payment PENDING.", "OK",
-                            MessageType.Information));
-                        return true;
-                    }
-                    if (captureResponse.DoCaptureResponseDetails.PaymentInfo.PaymentStatus ==
-                        PaymentStatusCodeType.Completed)
+                    if (captureResponse.Result<PayPalCheckoutSdk.Payments.Capture>().Status == "COMPLETED")
                     {
                         t.Result.Succeeded = true;
                         t.Result.Messages.Add(new Message("PayPal Express Payment Captured Successfully.", "OK",
@@ -185,10 +157,6 @@ namespace Hotcakes.Commerce.Payment.Methods
                 t.Result.Succeeded = false;
                 t.Result.Messages.Add(new Message("Paypal Express Payment Charge Failed.", string.Empty,
                     MessageType.Error));
-                foreach (var ppError in captureResponse.Errors)
-                {
-                    t.Result.Messages.Add(new Message(ppError.LongMessage, ppError.ErrorCode, MessageType.Error));
-                }
                 return false;
             }
             catch (Exception ex)
@@ -202,33 +170,28 @@ namespace Hotcakes.Commerce.Payment.Methods
         {
             try
             {
-                var ppAPI = PaypalExpressUtilities.GetPaypalAPI(app.CurrentStore);
+                var ppAPI = PaypalExpressUtilities.GetRestPaypalAPI(app.CurrentStore);
 
-                var OrderNumber = t.MerchantInvoiceNumber + Guid.NewGuid();
 
-                DoExpressCheckoutPaymentResponseType paymentResponse;
+                HttpResponse paymentResponse;
                 //there was no authorization so we just need to do a direct sale
-                paymentResponse = ppAPI.DoExpressCheckoutPayment(t.PreviousTransactionNumber,
-                    t.PreviousTransactionAuthCode,
-                    t.Amount.ToString("N", CultureInfo.InvariantCulture),
-                    PaymentActionCodeType.Sale,
-                    PayPalAPI.GetCurrencyCodeType(app.CurrentStore.Settings.PayPal.Currency),
-                    OrderNumber);
+                
+                paymentResponse = Task.Run(() => ppAPI.CaptureOrder(t.PreviousTransactionNumber)).GetAwaiter().GetResult();
 
-                if (paymentResponse.Ack == AckCodeType.Success || paymentResponse.Ack == AckCodeType.SuccessWithWarning)
+                if (paymentResponse.StatusCode == HttpStatusCode.Created || paymentResponse.StatusCode == HttpStatusCode.OK)
                 {
-                    var paymentInfo = paymentResponse.DoExpressCheckoutPaymentResponseDetails.PaymentInfo[0];
+                    var paymentInfo = paymentResponse.Result<Order>().PurchaseUnits[0].Payments.Captures[0];
 
-                    t.Result.ReferenceNumber = paymentInfo.TransactionID;
+                    t.Result.ReferenceNumber = paymentInfo.Id;
 
-                    if (paymentInfo.PaymentStatus == PaymentStatusCodeType.Completed)
+                    if (paymentInfo.Status == "COMPLETED")
                     {
                         t.Result.Succeeded = true;
                         t.Result.Messages.Add(new Message("PayPal Express Payment Charged Successfully.", "OK",
                             MessageType.Information));
                         return true;
                     }
-                    if (paymentInfo.PaymentStatus == PaymentStatusCodeType.Pending)
+                    if (paymentInfo.Status == "PENDING")
                     {
                         t.Result.Succeeded = true;
                         t.Result.ResponseCode = "PENDING";
@@ -245,10 +208,7 @@ namespace Hotcakes.Commerce.Payment.Methods
                 t.Result.Succeeded = false;
                 t.Result.Messages.Add(new Message("Paypal Express Payment Charge Failed.", string.Empty,
                     MessageType.Error));
-                foreach (var ppError in paymentResponse.Errors)
-                {
-                    t.Result.Messages.Add(new Message(ppError.LongMessage, ppError.ErrorCode, MessageType.Error));
-                }
+                
                 return false;
             }
             catch (Exception ex)
@@ -262,20 +222,19 @@ namespace Hotcakes.Commerce.Payment.Methods
         {
             try
             {
-                var ppAPI = PaypalExpressUtilities.GetPaypalAPI(app.CurrentStore);
+                var ppAPI = PaypalExpressUtilities.GetRestPaypalAPI(app.CurrentStore);
 
                 if (t.PreviousTransactionNumber != null)
                 {
                     var refundType = string.Empty;
                     //per paypal's request, the refund type should always be set to partial
                     refundType = "Partial";
-                    var refundResponse = ppAPI.RefundTransaction(
+                    
+                    var refundResponse = Task.Run(() => ppAPI.CapturesRefund(
                         t.PreviousTransactionNumber,
-                        refundType,
                         t.Amount.ToString("N", CultureInfo.InvariantCulture),
-                        PayPalAPI.GetCurrencyCodeType(app.CurrentStore.Settings.PayPal.Currency));
-                    if (refundResponse.Ack == AckCodeType.Success ||
-                        refundResponse.Ack == AckCodeType.SuccessWithWarning)
+                        app.CurrentStore.Settings.PayPal.Currency)).GetAwaiter().GetResult();
+                    if (refundResponse.StatusCode == HttpStatusCode.Created)
                     {
                         t.Result.Succeeded = true;
                         t.Result.Messages.Add(new Message("PayPal Express Payment Refunded Successfully.", "OK",
@@ -285,10 +244,6 @@ namespace Hotcakes.Commerce.Payment.Methods
                     t.Result.Succeeded = false;
                     t.Result.Messages.Add(new Message("Paypal Express Payment Refund Failed.", string.Empty,
                         MessageType.Error));
-                    foreach (var ppError in refundResponse.Errors)
-                    {
-                        t.Result.Messages.Add(new Message(ppError.LongMessage, ppError.ErrorCode, MessageType.Error));
-                    }
                     return false;
                 }
             }
@@ -303,12 +258,12 @@ namespace Hotcakes.Commerce.Payment.Methods
         {
             try
             {
-                var ppAPI = PaypalExpressUtilities.GetPaypalAPI(app.CurrentStore);
+                var ppAPI = PaypalExpressUtilities.GetRestPaypalAPI(app.CurrentStore);
 
                 if (t.PreviousTransactionNumber != null)
                 {
-                    var voidResponse = ppAPI.DoVoid(t.PreviousTransactionNumber, "Transaction Voided");
-                    if (voidResponse.Ack == AckCodeType.Success || voidResponse.Ack == AckCodeType.SuccessWithWarning)
+                    var voidResponse = Task.Run(() => ppAPI.VoidAuthorizedPayment(t.PreviousTransactionNumber)).GetAwaiter().GetResult();
+                    if (voidResponse.StatusCode == HttpStatusCode.NoContent)
                     {
                         t.Result.Succeeded = true;
                         t.Result.Messages.Add(new Message("PayPal Express Payment Voided Successfully.", "OK",
@@ -318,10 +273,6 @@ namespace Hotcakes.Commerce.Payment.Methods
                     t.Result.Succeeded = false;
                     t.Result.Messages.Add(new Message("Paypal Express Payment Void Failed.", string.Empty,
                         MessageType.Error));
-                    foreach (var ppError in voidResponse.Errors)
-                    {
-                        t.Result.Messages.Add(new Message(ppError.LongMessage, ppError.ErrorCode, MessageType.Error));
-                    }
                     return false;
                 }
             }

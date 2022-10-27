@@ -48,7 +48,7 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             {
 
 				//Use the last transaction entered by customer first
-				List<OrderTransaction> transactions = context.HccApp.OrderServices.Transactions
+                List<OrderTransaction> transactions = context.HccApp.OrderServices.Transactions
 																	.FindForOrder(context.Order.bvin)
 																	.OrderByDescending(x => x.TimeStampUtc)
 																	.ToList();

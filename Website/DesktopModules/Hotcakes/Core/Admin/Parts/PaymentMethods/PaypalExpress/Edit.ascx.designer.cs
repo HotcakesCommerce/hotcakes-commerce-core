@@ -7,20 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hotcakes.Modules.Core.Modules.PaymentMethods.PaypalExpress {
-    
-    
-    public partial class Edit {
-        
-        /// <summary>
-        /// divLicenseCheck control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divLicenseCheck;
-        
+namespace Hotcakes.Modules.Core.Modules.PaymentMethods.PaypalExpress
+{
+
+
+    public partial class Edit
+    {
+
         /// <summary>
         /// lstMode control.
         /// </summary>
@@ -29,43 +22,25 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.PaypalExpress {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList lstMode;
-        
+
         /// <summary>
-        /// txtUsername control.
+        /// txtClientId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUsername;
-        
+        protected global::System.Web.UI.WebControls.TextBox txtClientId;
+
         /// <summary>
-        /// rfvUsername control.
+        /// rfvClientId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvUsername;
-        
-        /// <summary>
-        /// txtPassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
-        
-        /// <summary>
-        /// rfvPassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPassword;
-        
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvClientId;
+
         /// <summary>
         /// ddlCurrency control.
         /// </summary>
@@ -74,7 +49,7 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.PaypalExpress {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCurrency;
-        
+
         /// <summary>
         /// chkUnconfirmedAddress control.
         /// </summary>
@@ -83,7 +58,7 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.PaypalExpress {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkUnconfirmedAddress;
-        
+
         /// <summary>
         /// chkRequirePayPalAccount control.
         /// </summary>
@@ -92,34 +67,25 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.PaypalExpress {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkRequirePayPalAccount;
-        
+
         /// <summary>
-        /// txtSignature control.
+        /// txtSecret control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSignature;
-        
+        protected global::System.Web.UI.WebControls.TextBox txtSecret;
+
         /// <summary>
-        /// rfvSignature control.
+        /// rfvSecret control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSignature;
-        
-        /// <summary>
-        /// txtPayPalFastSignupEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPayPalFastSignupEmail;
-        
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSecret;
+
         /// <summary>
         /// lstCaptureMode control.
         /// </summary>
