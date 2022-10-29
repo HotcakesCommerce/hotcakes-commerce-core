@@ -34,6 +34,7 @@ using Hotcakes.Web.Logging;
 using System.Globalization;
 using System.Net;
 using System.Threading.Tasks;
+using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Payment;
 using PayPalCheckoutSdk.Core;
@@ -67,16 +68,16 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
                     EventLog.LogEvent("PayPal Express Checkout", "CartCancelUrl=" + cartCancelUrl, EventLogSeverity.Information);
                     EventLog.LogEvent("PayPal Express Checkout", "CartReturnUrl=" + cartReturnUrl, EventLogSeverity.Information);
 
-                    string mode = "AUTHORIZE";
+                    string mode = Constants.PAYMENT_MODE_AUTHORIZE;
                     if (!context.HccApp.CurrentStore.Settings.PayPal.ExpressAuthorizeOnly)
 					{
-                        mode = "CAPTURE";
+                        mode = Constants.PAYMENT_MODE_CAPTURE;
                     }
 
                     // Accelerated boarding
                     if (string.IsNullOrWhiteSpace(context.HccApp.CurrentStore.Settings.PayPal.UserName))
 					{
-                        mode = "CAPTURE";
+                        mode = Constants.PAYMENT_MODE_CAPTURE;
 					}
 
 					var solutionType = context.HccApp.CurrentStore.Settings.PayPal.RequirePayPalAccount ? SolutionTypeType.Mark : SolutionTypeType.Sole;
@@ -134,7 +135,7 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
                                                     mode,
                                                     context.HccApp.CurrentStore.Settings.PayPal.Currency,
                                                     solutionType,
-                                                    address.FirstName + " " + address.LastName,
+                                                    ($"{address.FirstName} {address.LastName}"),
                                                     ISOCode,
                                                     address.Line1,
                                                     address.Line2,
@@ -208,11 +209,11 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 							string urlTemplate;
                             if (string.Compare(context.HccApp.CurrentStore.Settings.PayPal.Mode, "Live", true) == 0)
                             {
-								urlTemplate = "https://www.paypal.com/checkoutnow?token={0}";
+								urlTemplate = Constants.LIVE_URL;
                             }
                             else
                             {
-								urlTemplate = "https://www.sandbox.paypal.com/checkoutnow?token={0}";
+								urlTemplate = Constants.SANDBOX_URL;
                             }
 							HttpContextBase httpContext = new HccHttpContextWrapper(HttpContext.Current);
                             httpContext.Response.Redirect(string.Format(urlTemplate, expressResponse.Result<Order>().Id), true);

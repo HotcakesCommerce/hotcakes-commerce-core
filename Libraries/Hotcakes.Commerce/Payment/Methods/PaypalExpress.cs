@@ -28,6 +28,7 @@ using System.Globalization;
 using System.Net;
 using System.Threading.Tasks;
 using com.paypal.soap.api;
+using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Utilities;
 using Hotcakes.Payment;
 using Hotcakes.PaypalWebServices;
@@ -90,11 +91,11 @@ namespace Hotcakes.Commerce.Payment.Methods
                         t.Result.Succeeded = true;
                         t.Result.ReferenceNumber = paymentInfo.Id;
                         t.Result.ResponseCode = "OK";
-                        t.Result.ResponseCodeDescription = "PayPal Express Payment Authorized Successfully.";
+                        t.Result.ResponseCodeDescription = Constants.PAYMENT_AUTHORIZE_SUCCESS;
                         return true;
                     }
                     t.Result.Succeeded = false;
-                    t.Result.Messages.Add(new Message("PayPal Express Payment Authorization Failed.", string.Empty,
+                    t.Result.Messages.Add(new Message(Constants.PAYMENT_AUTHORIZE_FAILED, string.Empty,
                         MessageType.Error));
                     return false;
                 }
@@ -122,40 +123,41 @@ namespace Hotcakes.Commerce.Payment.Methods
 
                 if (captureResponse.StatusCode == HttpStatusCode.OK || captureResponse.StatusCode == HttpStatusCode.Created)
                 {
-                    t.Result.ReferenceNumber = captureResponse.Result<PayPalCheckoutSdk.Payments.Capture>().Id;
+                    var capturedInfo = captureResponse.Result<PayPalCheckoutSdk.Payments.Capture>();
+                    t.Result.ReferenceNumber = capturedInfo.Id;
 
-                    if (captureResponse.Result<PayPalCheckoutSdk.Payments.Capture>().Status == "PENDING")
+                    if (capturedInfo.Status == Constants.PAYMENT_STATUS_Pending)
                     {
                         t.Result.Succeeded = true;
-                        t.Result.ResponseCode = "PENDING";
-                        t.Result.ResponseCodeDescription = "PayPal Express Payment PENDING";
-                        t.Result.Messages.Add(new Message("Paypal Express Payment PENDING.", "OK",
+                        t.Result.ResponseCode = Constants.PAYMENT_STATUS_Pending;
+                        t.Result.ResponseCodeDescription = Constants.PAYMENT_STATUS_Pending_DESCRIPTION;
+                        t.Result.Messages.Add(new Message(Constants.PAYMENT_STATUS_Pending_DESCRIPTION, "OK",
                             MessageType.Information));
                         return true;
                     }
-                    if (captureResponse.Result<PayPalCheckoutSdk.Payments.Capture>().Status == "DENIED")
+                    if (capturedInfo.Status == Constants.PAYMENT_STATUS_DENIED)
                     {
                         t.Result.Succeeded = true;
-                        t.Result.ResponseCode = "PENDING";
-                        t.Result.ResponseCodeDescription = "PayPal Express Payment DENIED";
-                        t.Result.Messages.Add(new Message("Paypal Express Payment DENIED.", "OK",
+                        t.Result.ResponseCode = Constants.PAYMENT_STATUS_DENIED;
+                        t.Result.ResponseCodeDescription = Constants.PAYMENT_STATUS_DENIED_DESCRIPTION;
+                        t.Result.Messages.Add(new Message(Constants.PAYMENT_STATUS_DENIED_DESCRIPTION, "OK",
                             MessageType.Information));
                         return true;
                     }
-                    if (captureResponse.Result<PayPalCheckoutSdk.Payments.Capture>().Status == "COMPLETED")
+                    if (capturedInfo.Status == Constants.PAYMENT_STATUS_COMPLETED)
                     {
                         t.Result.Succeeded = true;
-                        t.Result.Messages.Add(new Message("PayPal Express Payment Captured Successfully.", "OK",
+                        t.Result.Messages.Add(new Message(Constants.PAYMENT_STATUS_COMPLETED_DESCRIPTION, "OK",
                             MessageType.Information));
                         return true;
                     }
                     t.Result.Succeeded = false;
-                    t.Result.Messages.Add(new Message("An error occurred while trying to capture your PayPal payment.",
+                    t.Result.Messages.Add(new Message(Constants.PAYMENT_STATUS_ERROR_DESCRIPTION,
                         string.Empty, MessageType.Error));
                     return false;
                 }
                 t.Result.Succeeded = false;
-                t.Result.Messages.Add(new Message("Paypal Express Payment Charge Failed.", string.Empty,
+                t.Result.Messages.Add(new Message(Constants.PAYMENT_ERROR, string.Empty,
                     MessageType.Error));
                 return false;
             }
@@ -184,29 +186,29 @@ namespace Hotcakes.Commerce.Payment.Methods
 
                     t.Result.ReferenceNumber = paymentInfo.Id;
 
-                    if (paymentInfo.Status == "COMPLETED")
+                    if (paymentInfo.Status == Constants.PAYMENT_STATUS_COMPLETED)
                     {
                         t.Result.Succeeded = true;
-                        t.Result.Messages.Add(new Message("PayPal Express Payment Charged Successfully.", "OK",
+                        t.Result.Messages.Add(new Message(Constants.PAYMENT_STATUS_COMPLETED_DESCRIPTION, "OK",
                             MessageType.Information));
                         return true;
                     }
-                    if (paymentInfo.Status == "PENDING")
+                    if (paymentInfo.Status == Constants.PAYMENT_STATUS_Pending)
                     {
                         t.Result.Succeeded = true;
-                        t.Result.ResponseCode = "PENDING";
-                        t.Result.ResponseCodeDescription = "PayPal Express Payment PENDING";
-                        t.Result.Messages.Add(new Message("Paypal Express Payment PENDING.", "OK",
+                        t.Result.ResponseCode = Constants.PAYMENT_STATUS_Pending;
+                        t.Result.ResponseCodeDescription = Constants.PAYMENT_STATUS_Pending_DESCRIPTION;
+                        t.Result.Messages.Add(new Message(Constants.PAYMENT_STATUS_Pending_DESCRIPTION, "OK",
                             MessageType.Information));
                         return true;
                     }
                     t.Result.Succeeded = false;
-                    t.Result.Messages.Add(new Message("An error occurred while trying to charge your PayPal payment.",
+                    t.Result.Messages.Add(new Message(Constants.PAYMENT_CHARGE_ERROR,
                         string.Empty, MessageType.Error));
                     return false;
                 }
                 t.Result.Succeeded = false;
-                t.Result.Messages.Add(new Message("Paypal Express Payment Charge Failed.", string.Empty,
+                t.Result.Messages.Add(new Message(Constants.PAYMENT_ERROR, string.Empty,
                     MessageType.Error));
                 
                 return false;
@@ -228,8 +230,7 @@ namespace Hotcakes.Commerce.Payment.Methods
                 {
                     var refundType = string.Empty;
                     //per paypal's request, the refund type should always be set to partial
-                    refundType = "Partial";
-                    
+
                     var refundResponse = Task.Run(() => ppAPI.CapturesRefund(
                         t.PreviousTransactionNumber,
                         t.Amount.ToString("N", CultureInfo.InvariantCulture),
@@ -237,12 +238,12 @@ namespace Hotcakes.Commerce.Payment.Methods
                     if (refundResponse.StatusCode == HttpStatusCode.Created)
                     {
                         t.Result.Succeeded = true;
-                        t.Result.Messages.Add(new Message("PayPal Express Payment Refunded Successfully.", "OK",
+                        t.Result.Messages.Add(new Message(Constants.PAYMENT_REFUND_SUCCESS, "OK",
                             MessageType.Information));
                         return true;
                     }
                     t.Result.Succeeded = false;
-                    t.Result.Messages.Add(new Message("Paypal Express Payment Refund Failed.", string.Empty,
+                    t.Result.Messages.Add(new Message(Constants.PAYMENT_REFUND_FAILED, string.Empty,
                         MessageType.Error));
                     return false;
                 }
@@ -266,12 +267,12 @@ namespace Hotcakes.Commerce.Payment.Methods
                     if (voidResponse.StatusCode == HttpStatusCode.NoContent)
                     {
                         t.Result.Succeeded = true;
-                        t.Result.Messages.Add(new Message("PayPal Express Payment Voided Successfully.", "OK",
+                        t.Result.Messages.Add(new Message(Constants.PAYMENT_Void_SUCCESS, "OK",
                             MessageType.Information));
                         return true;
                     }
                     t.Result.Succeeded = false;
-                    t.Result.Messages.Add(new Message("Paypal Express Payment Void Failed.", string.Empty,
+                    t.Result.Messages.Add(new Message(Constants.PAYMENT_Void_FAILED, string.Empty,
                         MessageType.Error));
                     return false;
                 }

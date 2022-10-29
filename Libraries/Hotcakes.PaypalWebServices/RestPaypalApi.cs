@@ -46,6 +46,8 @@ namespace Hotcakes.PaypalWebServices
         private string clientId; 
         private string secret; 
         private string mode;
+        private const string PAYPAL_SANDBOX_MODE = "Sandbox";
+        private const string REQUEST_RETURN_TYPE = "return=representation";
 
         public RestPayPalApi(string clientId, string secret, string mode)
         {
@@ -57,8 +59,8 @@ namespace Hotcakes.PaypalWebServices
         public HttpClient client()
         {
             PayPalEnvironment environment;
-
-            if (mode == "Sandbox")
+            
+            if (mode == PAYPAL_SANDBOX_MODE)
             {
                 // Creating a sandbox environment
                 environment = new SandboxEnvironment(clientId, secret);
@@ -143,7 +145,7 @@ namespace Hotcakes.PaypalWebServices
             };
 
             var request = new OrdersCreateRequest();
-            request.Prefer("return=representation");
+            request.Prefer(REQUEST_RETURN_TYPE);
             request.RequestBody(order);
             response = await client().Execute(request);
 
@@ -198,7 +200,7 @@ namespace Hotcakes.PaypalWebServices
 
             // Call API with your client and get a response for your call
             var request = new OrdersCreateRequest();
-            request.Prefer("return=representation");
+            request.Prefer(REQUEST_RETURN_TYPE);
             request.RequestBody(order);
             response = await client().Execute(request);
 
@@ -216,7 +218,7 @@ namespace Hotcakes.PaypalWebServices
         public async Task<HttpResponse> CaptureOrder(string orderId)
         {
             var request = new OrdersCaptureRequest(orderId);
-            request.Prefer("return=representation");
+            request.Prefer(REQUEST_RETURN_TYPE);
             request.RequestBody(new OrderActionRequest());
             var response = await client().Execute(request);
             var result = response.Result<Order>();
@@ -227,7 +229,7 @@ namespace Hotcakes.PaypalWebServices
         public async Task<HttpResponse> AuthorizeOrder(string orderId)
         {
             var request = new OrdersAuthorizeRequest(orderId);
-            request.Prefer("return=representation");
+            request.Prefer(REQUEST_RETURN_TYPE);
             request.RequestBody(new AuthorizeRequest());
             var response = await client().Execute(request);
             
@@ -247,7 +249,7 @@ namespace Hotcakes.PaypalWebServices
                 InvoiceId = invoiceId,
             };
             var request = new AuthorizationsCaptureRequest(AuthorizationId);
-            request.Prefer("return=representation");
+            request.Prefer(REQUEST_RETURN_TYPE);
             request.RequestBody(capture);
             var response = await client().Execute(request);
             var result = response.Result<PayPalCheckoutSdk.Payments.Capture>();
@@ -260,7 +262,7 @@ namespace Hotcakes.PaypalWebServices
             string storeCurrency)
         {
             var request = new CapturesRefundRequest(CaptureId);
-            request.Prefer("return=representation");
+            request.Prefer(REQUEST_RETURN_TYPE);
             RefundRequest refundRequest = new RefundRequest()
             {
                 Amount = new PayPalCheckoutSdk.Payments.Money()
@@ -271,7 +273,6 @@ namespace Hotcakes.PaypalWebServices
             };
             request.RequestBody(refundRequest);
             var response = await client().Execute(request);
-            var result = response.Result<PayPalCheckoutSdk.Payments.Refund>();
 
             return response;
         }
