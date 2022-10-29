@@ -148,7 +148,12 @@
   <data name="ProductionMode.Text" xml:space="preserve">
     <value>Production Mode</value>
   </data>
-  
+  <data name="rfvClientId.Text" xml:space="preserve">
+    <value>API Client ID is required</value>
+  </data>
+  <data name="rfvSecret.Text" xml:space="preserve">
+    <value>API Secret is required</value>
+  </data>
   <data name="SandboxMode.Text" xml:space="preserve">
     <value>Sandbox Mode (for testing)</value>
   </data>
