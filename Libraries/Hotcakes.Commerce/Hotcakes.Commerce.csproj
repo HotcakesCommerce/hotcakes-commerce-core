@@ -218,6 +218,7 @@
     <Compile Include="Catalog\ResevationItem.cs" />
     <Compile Include="Catalog\ValidateSelectionsResult.cs" />
     <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\PayPalConstants.cs" />
     <Compile Include="Configuration\IConfigurationManager.cs" />
     <Compile Include="Configuration\SmtpSettings.cs" />
     <Compile Include="Contacts\AffiliatePayment.cs" />

@@ -91,11 +91,11 @@ namespace Hotcakes.Commerce.Payment.Methods
                         t.Result.Succeeded = true;
                         t.Result.ReferenceNumber = paymentInfo.Id;
                         t.Result.ResponseCode = "OK";
-                        t.Result.ResponseCodeDescription = Constants.PAYMENT_AUTHORIZE_SUCCESS;
+                        t.Result.ResponseCodeDescription = PayPalConstants.PAYMENT_AUTHORIZE_SUCCESS;
                         return true;
                     }
                     t.Result.Succeeded = false;
-                    t.Result.Messages.Add(new Message(Constants.PAYMENT_AUTHORIZE_FAILED, string.Empty,
+                    t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_AUTHORIZE_FAILED, string.Empty,
                         MessageType.Error));
                     return false;
                 }
@@ -126,38 +126,38 @@ namespace Hotcakes.Commerce.Payment.Methods
                     var capturedInfo = captureResponse.Result<PayPalCheckoutSdk.Payments.Capture>();
                     t.Result.ReferenceNumber = capturedInfo.Id;
 
-                    if (capturedInfo.Status == Constants.PAYMENT_STATUS_Pending)
+                    if (capturedInfo.Status == PayPalConstants.PAYMENT_STATUS_Pending)
                     {
                         t.Result.Succeeded = true;
-                        t.Result.ResponseCode = Constants.PAYMENT_STATUS_Pending;
-                        t.Result.ResponseCodeDescription = Constants.PAYMENT_STATUS_Pending_DESCRIPTION;
-                        t.Result.Messages.Add(new Message(Constants.PAYMENT_STATUS_Pending_DESCRIPTION, "OK",
+                        t.Result.ResponseCode = PayPalConstants.PAYMENT_STATUS_Pending;
+                        t.Result.ResponseCodeDescription = PayPalConstants.PAYMENT_STATUS_Pending_DESCRIPTION;
+                        t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_STATUS_Pending_DESCRIPTION, "OK",
                             MessageType.Information));
                         return true;
                     }
-                    if (capturedInfo.Status == Constants.PAYMENT_STATUS_DENIED)
+                    if (capturedInfo.Status == PayPalConstants.PAYMENT_STATUS_DENIED)
                     {
                         t.Result.Succeeded = true;
-                        t.Result.ResponseCode = Constants.PAYMENT_STATUS_DENIED;
-                        t.Result.ResponseCodeDescription = Constants.PAYMENT_STATUS_DENIED_DESCRIPTION;
-                        t.Result.Messages.Add(new Message(Constants.PAYMENT_STATUS_DENIED_DESCRIPTION, "OK",
+                        t.Result.ResponseCode = PayPalConstants.PAYMENT_STATUS_DENIED;
+                        t.Result.ResponseCodeDescription = PayPalConstants.PAYMENT_STATUS_DENIED_DESCRIPTION;
+                        t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_STATUS_DENIED_DESCRIPTION, "OK",
                             MessageType.Information));
                         return true;
                     }
-                    if (capturedInfo.Status == Constants.PAYMENT_STATUS_COMPLETED)
+                    if (capturedInfo.Status == PayPalConstants.PAYMENT_STATUS_COMPLETED)
                     {
                         t.Result.Succeeded = true;
-                        t.Result.Messages.Add(new Message(Constants.PAYMENT_STATUS_COMPLETED_DESCRIPTION, "OK",
+                        t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_STATUS_COMPLETED_DESCRIPTION, "OK",
                             MessageType.Information));
                         return true;
                     }
                     t.Result.Succeeded = false;
-                    t.Result.Messages.Add(new Message(Constants.PAYMENT_STATUS_ERROR_DESCRIPTION,
+                    t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_STATUS_ERROR_DESCRIPTION,
                         string.Empty, MessageType.Error));
                     return false;
                 }
                 t.Result.Succeeded = false;
-                t.Result.Messages.Add(new Message(Constants.PAYMENT_ERROR, string.Empty,
+                t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_ERROR, string.Empty,
                     MessageType.Error));
                 return false;
             }
@@ -186,29 +186,29 @@ namespace Hotcakes.Commerce.Payment.Methods
 
                     t.Result.ReferenceNumber = paymentInfo.Id;
 
-                    if (paymentInfo.Status == Constants.PAYMENT_STATUS_COMPLETED)
+                    if (paymentInfo.Status == PayPalConstants.PAYMENT_STATUS_COMPLETED)
                     {
                         t.Result.Succeeded = true;
-                        t.Result.Messages.Add(new Message(Constants.PAYMENT_STATUS_COMPLETED_DESCRIPTION, "OK",
+                        t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_STATUS_COMPLETED_DESCRIPTION, "OK",
                             MessageType.Information));
                         return true;
                     }
-                    if (paymentInfo.Status == Constants.PAYMENT_STATUS_Pending)
+                    if (paymentInfo.Status == PayPalConstants.PAYMENT_STATUS_Pending)
                     {
                         t.Result.Succeeded = true;
-                        t.Result.ResponseCode = Constants.PAYMENT_STATUS_Pending;
-                        t.Result.ResponseCodeDescription = Constants.PAYMENT_STATUS_Pending_DESCRIPTION;
-                        t.Result.Messages.Add(new Message(Constants.PAYMENT_STATUS_Pending_DESCRIPTION, "OK",
+                        t.Result.ResponseCode = PayPalConstants.PAYMENT_STATUS_Pending;
+                        t.Result.ResponseCodeDescription = PayPalConstants.PAYMENT_STATUS_Pending_DESCRIPTION;
+                        t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_STATUS_Pending_DESCRIPTION, "OK",
                             MessageType.Information));
                         return true;
                     }
                     t.Result.Succeeded = false;
-                    t.Result.Messages.Add(new Message(Constants.PAYMENT_CHARGE_ERROR,
+                    t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_CHARGE_ERROR,
                         string.Empty, MessageType.Error));
                     return false;
                 }
                 t.Result.Succeeded = false;
-                t.Result.Messages.Add(new Message(Constants.PAYMENT_ERROR, string.Empty,
+                t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_ERROR, string.Empty,
                     MessageType.Error));
                 
                 return false;
@@ -238,12 +238,12 @@ namespace Hotcakes.Commerce.Payment.Methods
                     if (refundResponse.StatusCode == HttpStatusCode.Created)
                     {
                         t.Result.Succeeded = true;
-                        t.Result.Messages.Add(new Message(Constants.PAYMENT_REFUND_SUCCESS, "OK",
+                        t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_REFUND_SUCCESS, "OK",
                             MessageType.Information));
                         return true;
                     }
                     t.Result.Succeeded = false;
-                    t.Result.Messages.Add(new Message(Constants.PAYMENT_REFUND_FAILED, string.Empty,
+                    t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_REFUND_FAILED, string.Empty,
                         MessageType.Error));
                     return false;
                 }
@@ -267,12 +267,12 @@ namespace Hotcakes.Commerce.Payment.Methods
                     if (voidResponse.StatusCode == HttpStatusCode.NoContent)
                     {
                         t.Result.Succeeded = true;
-                        t.Result.Messages.Add(new Message(Constants.PAYMENT_Void_SUCCESS, "OK",
+                        t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_Void_SUCCESS, "OK",
                             MessageType.Information));
                         return true;
                     }
                     t.Result.Succeeded = false;
-                    t.Result.Messages.Add(new Message(Constants.PAYMENT_Void_FAILED, string.Empty,
+                    t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_Void_FAILED, string.Empty,
                         MessageType.Error));
                     return false;
                 }
