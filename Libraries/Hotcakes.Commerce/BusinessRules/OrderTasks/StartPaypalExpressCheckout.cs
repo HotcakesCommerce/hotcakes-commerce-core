@@ -68,16 +68,16 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
                     EventLog.LogEvent("PayPal Express Checkout", "CartCancelUrl=" + cartCancelUrl, EventLogSeverity.Information);
                     EventLog.LogEvent("PayPal Express Checkout", "CartReturnUrl=" + cartReturnUrl, EventLogSeverity.Information);
 
-                    string mode = Constants.PAYMENT_MODE_AUTHORIZE;
+                    string mode = PayPalConstants.PAYMENT_MODE_AUTHORIZE;
                     if (!context.HccApp.CurrentStore.Settings.PayPal.ExpressAuthorizeOnly)
 					{
-                        mode = Constants.PAYMENT_MODE_CAPTURE;
+                        mode = PayPalConstants.PAYMENT_MODE_CAPTURE;
                     }
 
                     // Accelerated boarding
                     if (string.IsNullOrWhiteSpace(context.HccApp.CurrentStore.Settings.PayPal.UserName))
 					{
-                        mode = Constants.PAYMENT_MODE_CAPTURE;
+                        mode = PayPalConstants.PAYMENT_MODE_CAPTURE;
 					}
 
 					var solutionType = context.HccApp.CurrentStore.Settings.PayPal.RequirePayPalAccount ? SolutionTypeType.Mark : SolutionTypeType.Sole;
@@ -209,11 +209,11 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 							string urlTemplate;
                             if (string.Compare(context.HccApp.CurrentStore.Settings.PayPal.Mode, "Live", true) == 0)
                             {
-								urlTemplate = Constants.LIVE_URL;
+								urlTemplate = PayPalConstants.LIVE_URL;
                             }
                             else
                             {
-								urlTemplate = Constants.SANDBOX_URL;
+								urlTemplate = PayPalConstants.SANDBOX_URL;
                             }
 							HttpContextBase httpContext = new HccHttpContextWrapper(HttpContext.Current);
                             httpContext.Response.Redirect(string.Format(urlTemplate, expressResponse.Result<Order>().Id), true);
