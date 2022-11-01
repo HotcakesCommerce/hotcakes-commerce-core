@@ -45,10 +45,8 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.PaypalExpress
 
             lstMode.SelectedValue = HccApp.CurrentStore.Settings.PayPal.Mode;
 
-            txtUsername.Text = HccApp.CurrentStore.Settings.PayPal.UserName;
-            txtPassword.Text = HccApp.CurrentStore.Settings.PayPal.Password;
-            txtSignature.Text = HccApp.CurrentStore.Settings.PayPal.Signature;
-            txtPayPalFastSignupEmail.Text = HccApp.CurrentStore.Settings.PayPal.FastSignupEmail;
+            txtClientId.Text = HccApp.CurrentStore.Settings.PayPal.ClienId;
+            txtSecret.Text = HccApp.CurrentStore.Settings.PayPal.Secret;
 
             var authorizeOnly = HccApp.CurrentStore.Settings.PayPal.ExpressAuthorizeOnly;
             lstCaptureMode.SelectedValue = authorizeOnly ? "1" : "0";
@@ -62,10 +60,8 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.PaypalExpress
         {
             HccApp.CurrentStore.Settings.PayPal.Mode = lstMode.SelectedValue;
 
-            HccApp.CurrentStore.Settings.PayPal.UserName = txtUsername.Text.Trim();
-            HccApp.CurrentStore.Settings.PayPal.Password = txtPassword.Text.Trim();
-            HccApp.CurrentStore.Settings.PayPal.Signature = txtSignature.Text.Trim();
-            HccApp.CurrentStore.Settings.PayPal.FastSignupEmail = txtPayPalFastSignupEmail.Text.Trim();
+            HccApp.CurrentStore.Settings.PayPal.ClienId = txtClientId.Text.Trim();
+            HccApp.CurrentStore.Settings.PayPal.Secret = txtSecret.Text.Trim();
 
             var authorizeOnly = lstCaptureMode.SelectedValue == "1";
             HccApp.CurrentStore.Settings.PayPal.ExpressAuthorizeOnly = authorizeOnly;

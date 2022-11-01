@@ -1242,6 +1242,7 @@ namespace Hotcakes.Commerce.Orders
                         var t = CreateEmptyTransaction();
                         t.Card = p.CreditCard;
                         t.Amount = p.Amount;
+                        t.PreviousTransactionNumber = p.RefNum1;
 
                         var processor = new PaypalExpress();
 

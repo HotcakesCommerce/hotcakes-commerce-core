@@ -94,6 +94,12 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\References\Dnn\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PayPalCheckoutSdk, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PayPalCheckoutSdk.1.0.4\lib\netstandard2.0\PayPalCheckoutSdk.dll</HintPath>
+    </Reference>
+    <Reference Include="PayPalHttp-Dotnet, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PayPalHttp.1.0.1\lib\netstandard2.0\PayPalHttp-Dotnet.dll</HintPath>
+    </Reference>
     <Reference Include="paypal_base">
       <HintPath>..\..\References\Misc\paypal_base.dll</HintPath>
       <Private>True</Private>
@@ -212,6 +218,7 @@
     <Compile Include="Catalog\ResevationItem.cs" />
     <Compile Include="Catalog\ValidateSelectionsResult.cs" />
     <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\PayPalConstants.cs" />
     <Compile Include="Configuration\IConfigurationManager.cs" />
     <Compile Include="Configuration\SmtpSettings.cs" />
     <Compile Include="Contacts\AffiliatePayment.cs" />
