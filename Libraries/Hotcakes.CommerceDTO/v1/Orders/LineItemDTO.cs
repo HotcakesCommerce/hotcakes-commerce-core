@@ -206,6 +206,7 @@ namespace Hotcakes.CommerceDTO.v1.Orders
         /// <value>
         ///     The shipping charge.
         /// </value>
+        [DataMember]
         public ShippingChargeTypeDTO ShippingCharge { get; set; }
 
         /// <summary>
