@@ -48,17 +48,10 @@ namespace Hotcakes.Modules.Core.Modules.CreditCardGateways.PayPal_Payments_Pro
 
             settings.Merge(HccApp.CurrentStore.Settings.PaymentSettingsGet(GatewayId));
 
-            txtUsername.Text = settings.PayPalUserName;
-            if (settings.PayPalPassword.Length > 0)
-            {
-                txtPassword.Text = "**********";
-            }
-
+            txtClientId.Text = settings.PayPalClientId;
+            txtSecret.Text = settings.PayPalSecret;
             ddlCurrency.SelectedValue = settings.Currency;
-
-            txtSignature.Text = settings.PayPalSignature;
             rblMode.SelectedValue = settings.PayPalMode;
-
             chkDebugMode.Checked = settings.DebugMode;
         }
 
@@ -67,15 +60,9 @@ namespace Hotcakes.Modules.Core.Modules.CreditCardGateways.PayPal_Payments_Pro
             var settings = new PayPalPaymentsProSettings();
             settings.Merge(HccApp.CurrentStore.Settings.PaymentSettingsGet(GatewayId));
 
-            settings.PayPalUserName = txtUsername.Text.Trim();
-            if (txtPassword.Text != "**********")
-            {
-                settings.PayPalPassword = txtPassword.Text.Trim();
-            }
-            settings.PayPalSignature = txtSignature.Text.Trim();
-
+            settings.PayPalClientId = txtClientId.Text.Trim();
+            settings.PayPalSecret = txtSecret.Text.Trim();
             settings.Currency = ddlCurrency.SelectedValue;
-
             settings.PayPalMode = rblMode.SelectedValue;
             settings.DebugMode = chkDebugMode.Checked;
 

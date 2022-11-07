@@ -26,7 +26,6 @@
 using System;
 using System.Net;
 using System.Web.Mvc;
-using com.paypal.soap.api;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.BusinessRules;
 using Hotcakes.Commerce.Extensions;

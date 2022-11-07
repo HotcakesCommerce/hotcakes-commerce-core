@@ -42,6 +42,18 @@ namespace Hotcakes.Payment.Gateways
             set { AddOrUpdate("PayPalPassword", value); }
         }
 
+        public string PayPalClientId
+        {
+            get { return GetSettingOrEmpty("PayPalClientId"); }
+            set { AddOrUpdate("PayPalClientId", value); }
+        }
+
+        public string PayPalSecret
+        {
+            get { return GetSettingOrEmpty("PayPalSecret"); }
+            set { AddOrUpdate("PayPalSecret", value); }
+        }
+
         public string PayPalSignature
         {
             get { return GetSettingOrEmpty("PayPalSignature"); }
