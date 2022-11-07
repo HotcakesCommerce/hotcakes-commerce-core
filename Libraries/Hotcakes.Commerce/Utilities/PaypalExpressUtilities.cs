@@ -24,7 +24,6 @@
 #endregion
 
 using System;
-using com.paypal.sdk.profiles;
 using Hotcakes.Commerce.Accounts;
 using Hotcakes.PaypalWebServices;
 using Hotcakes.Web.Logging;

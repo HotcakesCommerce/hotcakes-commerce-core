@@ -4,16 +4,12 @@
 </h1>
 <div class="hcForm">
     <div class="hcFormItemHor">
-        <asp:Label runat="server" resourcekey="Username" CssClass="hcLabel" />
-        <asp:TextBox ID="txtUsername" runat="server" />
+        <asp:Label runat="server" resourcekey="ClientId" CssClass="hcLabel" />
+        <asp:TextBox ID="txtClientId" runat="server" />
     </div>
     <div class="hcFormItemHor">
-        <asp:Label runat="server" resourcekey="Password" CssClass="hcLabel" />
-        <asp:TextBox ID="txtPassword" runat="server" />
-    </div>
-    <div class="hcFormItemHor">
-        <asp:Label runat="server" resourcekey="Signature" CssClass="hcLabel" />
-        <asp:TextBox ID="txtSignature" runat="server" />
+        <asp:Label runat="server" resourcekey="Secret" CssClass="hcLabel" />
+        <asp:TextBox ID="txtSecret" runat="server" />
     </div>
     <div class="hcFormItemHor">
         <asp:Label runat="server" resourcekey="Currency" CssClass="hcLabel" />

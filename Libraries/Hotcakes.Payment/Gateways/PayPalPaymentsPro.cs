@@ -25,11 +25,14 @@
 
 using System;
 using System.Globalization;
+using System.Net;
 using System.Text;
-using com.paypal.sdk.profiles;
-using com.paypal.soap.api;
+using System.Threading.Tasks;
 using Hotcakes.PaypalWebServices;
 using Hotcakes.Web.Geography;
+using PayPalCheckoutSdk.Orders;
+using PayPalHttp;
+
 
 namespace Hotcakes.Payment.Gateways
 {
@@ -92,13 +95,13 @@ namespace Hotcakes.Payment.Gateways
 
         protected override void Authorize(Transaction t)
         {
-            var ppAPI = CreatePaypalAPI();
+            var ppAPI = CreateRestPayPalApi();
 
             var OrderNumber = t.MerchantInvoiceNumber;
             // Solves Duplicate Order Number Problem
             OrderNumber = OrderNumber + Guid.NewGuid();
 
-            var authResponse = ppAPI.DoDirectPayment(
+            HttpResponse response = Task.Run(() => ppAPI.doDirectCheckout(
                 t.Amount.ToString("N", CultureInfo.InvariantCulture),
                 t.Customer.LastName,
                 t.Customer.FirstName,
@@ -109,22 +112,23 @@ namespace Hotcakes.Payment.Gateways
                 t.Customer.City,
                 t.Customer.RegionName,
                 t.Customer.PostalCode,
-                ConvertCountry(t.Customer.CountryData),
+                t.Customer.CountryData.IsoCode,
                 t.Card.CardTypeName,
                 t.Card.CardNumber,
                 t.Card.SecurityCode,
                 t.Card.ExpirationMonth,
                 t.Card.ExpirationYear,
-                PaymentActionCodeType.Authorization,
-                t.Customer.IpAddress,
+                PayPalConstants.PAYMENT_MODE_AUTHORIZE,
                 t.Customer.ShipStreet,
                 string.Empty,
                 t.Customer.ShipCity,
                 t.Customer.ShipRegionName,
                 t.Customer.ShipPostalCode,
-                ConvertCountry(t.Customer.ShipCountryData),
+                t.Customer.ShipCountryData.IsoCode,
                 OrderNumber,
-                ConvertCurrency(Settings.Currency));
+                Settings.Currency)).GetAwaiter().GetResult();
+
+            response = Task.Run(() => ppAPI.AuthorizeOrder(response.Result<Order>().Id)).GetAwaiter().GetResult();
 
             if (Settings.DebugMode)
             {
@@ -139,7 +143,7 @@ namespace Hotcakes.Payment.Gateways
                 posted.Append(", City=" + t.Customer.Street);
                 posted.Append(", Region=" + t.Customer.RegionName);
                 posted.Append(", PostalCode=" + t.Customer.PostalCode);
-                posted.Append(", CountryName=" + ConvertCountry(t.Customer.CountryData));
+                //posted.Append(", CountryName=" + ConvertCountry(t.Customer.CountryData));
                 posted.Append(", CardTypeName=" + t.Card.CardTypeName);
                 posted.Append(", CardNumber=**********" + t.Card.CardNumberLast4Digits);
                 posted.Append(", CardExpMonth=" + t.Card.ExpirationMonth);
@@ -149,32 +153,29 @@ namespace Hotcakes.Payment.Gateways
                 t.Result.Messages.Add(new Message(posted.ToString(), "DEBUG", MessageType.Information));
             }
 
-            if (authResponse.Ack == AckCodeType.Success || authResponse.Ack == AckCodeType.SuccessWithWarning)
+            if (response.StatusCode == HttpStatusCode.Created )
             {
-                t.Result.ReferenceNumber = authResponse.TransactionID;
+                var paymentInfo = response.Result<Order>().PurchaseUnits[0].Payments.Authorizations[0];
+                t.Result.ReferenceNumber = paymentInfo.Id;
                 t.Result.Succeeded = true;
             }
             else
             {
                 t.Result.Messages.Add(new Message("Paypal Payment Authorization Failed.", string.Empty,
                     MessageType.Warning));
-                foreach (var ppError in authResponse.Errors)
-                {
-                    t.Result.Messages.Add(new Message(ppError.LongMessage, ppError.ErrorCode, MessageType.Error));
-                }
                 t.Result.Succeeded = false;
             }
         }
 
         protected override void Charge(Transaction t)
         {
-            var ppAPI = CreatePaypalAPI();
+            var ppAPI = CreateRestPayPalApi();
 
             var OrderNumber = t.MerchantInvoiceNumber;
             // Solves Duplicate Order Number Problem
             OrderNumber = OrderNumber + Guid.NewGuid();
-
-            var chargeResponse = ppAPI.DoDirectPayment(
+            
+            HttpResponse response = Task.Run(() => ppAPI.doDirectCheckout(
                 t.Amount.ToString("N", CultureInfo.InvariantCulture),
                 t.Customer.LastName,
                 t.Customer.FirstName,
@@ -185,197 +186,174 @@ namespace Hotcakes.Payment.Gateways
                 t.Customer.City,
                 t.Customer.RegionName,
                 t.Customer.PostalCode,
-                ConvertCountry(t.Customer.CountryData),
+                t.Customer.CountryData.IsoCode,
                 t.Card.CardTypeName,
                 t.Card.CardNumber,
                 t.Card.SecurityCode,
                 t.Card.ExpirationMonth,
                 t.Card.ExpirationYear,
-                PaymentActionCodeType.Sale,
-                t.Customer.IpAddress,
+                PayPalConstants.PAYMENT_MODE_CAPTURE,
                 t.Customer.ShipStreet,
                 string.Empty,
                 t.Customer.ShipCity,
                 t.Customer.ShipRegionName,
                 t.Customer.ShipPostalCode,
-                ConvertCountry(t.Customer.ShipCountryData),
+                t.Customer.ShipCountryData.IsoCode,
                 OrderNumber,
-                ConvertCurrency(Settings.Currency));
+                Settings.Currency)).GetAwaiter().GetResult();
 
-            if (chargeResponse.Ack == AckCodeType.Success || chargeResponse.Ack == AckCodeType.SuccessWithWarning)
+            response = Task.Run(() => ppAPI.CaptureOrder(response.Result<Order>().Id)).GetAwaiter().GetResult();
+            
+            if (response.StatusCode == HttpStatusCode.Created)
             {
-                t.Result.ReferenceNumber = chargeResponse.TransactionID;
+                var paymentInfo = response.Result<Order>().PurchaseUnits[0].Payments.Captures[0];
+                t.Result.ReferenceNumber = paymentInfo.Id;
                 t.Result.Succeeded = true;
             }
             else
             {
                 t.Result.Messages.Add(new Message("Paypal Charge Failed.", string.Empty, MessageType.Warning));
-                foreach (var ppError in chargeResponse.Errors)
-                {
-                    t.Result.Messages.Add(new Message(ppError.LongMessage, ppError.ErrorCode, MessageType.Error));
-                }
                 t.Result.Succeeded = false;
             }
         }
 
         protected override void Capture(Transaction t)
         {
-            var ppAPI = CreatePaypalAPI();
-
-            var OrderNumber = t.MerchantInvoiceNumber;
-
-            var captureResponse = ppAPI.DoCapture(t.PreviousTransactionNumber,
-                "Thank you for your payment.",
-                t.Amount.ToString("N", CultureInfo.InvariantCulture),
-                ConvertCurrency(Settings.Currency),
-                OrderNumber);
-
-            if (captureResponse.Ack == AckCodeType.Success || captureResponse.Ack == AckCodeType.SuccessWithWarning)
+            try
             {
-                t.Result.ReferenceNumber = captureResponse.DoCaptureResponseDetails.PaymentInfo.TransactionID;
-                t.Result.Succeeded = true;
+                var ppAPI = CreateRestPayPalApi();
 
-                switch (captureResponse.DoCaptureResponseDetails.PaymentInfo.PaymentStatus)
+                var OrderNumber = t.MerchantInvoiceNumber + Guid.NewGuid();
+
+                var captureResponse = Task.Run(() => ppAPI.CaptureAuthorizedOrder(t.PreviousTransactionNumber,
+                    t.Amount.ToString("N", CultureInfo.InvariantCulture),
+                    Settings.Currency,
+                    OrderNumber)).GetAwaiter().GetResult();
+
+                if (captureResponse.StatusCode == HttpStatusCode.OK || captureResponse.StatusCode == HttpStatusCode.Created)
                 {
-                    case PaymentStatusCodeType.Pending:
-                        t.Result.Messages.Add(new Message("PayPal Pro Payment Pending", string.Empty,
-                            MessageType.Information));
-                        t.Result.Succeeded = true;
-                        break;
-                    case PaymentStatusCodeType.InProgress:
-                        t.Result.Messages.Add(new Message("PayPal Pro Payment In Progress", string.Empty,
-                            MessageType.Information));
-                        t.Result.Succeeded = true;
-                        break;
-                    case PaymentStatusCodeType.None:
-                        t.Result.Messages.Add(new Message("PayPal Pro Payment No Status Yet", string.Empty,
-                            MessageType.Information));
-                        t.Result.Succeeded = true;
-                        break;
-                    case PaymentStatusCodeType.Processed:
-                        t.Result.Messages.Add(new Message("PayPal Pro Charged Successfully", string.Empty,
-                            MessageType.Information));
-                        t.Result.Succeeded = true;
-                        break;
-                    case PaymentStatusCodeType.Completed:
-                        t.Result.Messages.Add(new Message("PayPal Pro Charged Successfully", string.Empty,
-                            MessageType.Information));
-                        t.Result.Succeeded = true;
-                        break;
-                    default:
-                        t.Result.Messages.Add(
-                            new Message(
-                                "An error occurred while attempting to capture this PayPal Payments Pro payment",
-                                string.Empty, MessageType.Information));
-                        t.Result.Succeeded = false;
-                        break;
+                    var capturedInfo = captureResponse.Result<PayPalCheckoutSdk.Payments.Capture>();
+                    t.Result.ReferenceNumber = capturedInfo.Id;
+                    t.Result.Succeeded = true;
+
+                    switch (capturedInfo.Status)
+                    {
+                        case PayPalConstants.PAYMENT_STATUS_Pending:
+                            t.Result.Succeeded = true;
+                            t.Result.ResponseCode = PayPalConstants.PAYMENT_STATUS_Pending;
+                            t.Result.ResponseCodeDescription = PayPalConstants.PAYMENT_STATUS_Pending_DESCRIPTION;
+                            t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_STATUS_Pending_DESCRIPTION, "OK",
+                                MessageType.Information));
+                            break;
+                        case PayPalConstants.PAYMENT_STATUS_DENIED:
+                            t.Result.Succeeded = true;
+                            t.Result.ResponseCode = PayPalConstants.PAYMENT_STATUS_DENIED;
+                            t.Result.ResponseCodeDescription = PayPalConstants.PAYMENT_STATUS_DENIED_DESCRIPTION;
+                            t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_STATUS_DENIED_DESCRIPTION, "OK",
+                                MessageType.Information));
+                            break;
+                        case PayPalConstants.PAYMENT_STATUS_COMPLETED:
+                            t.Result.Succeeded = true;
+                            t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_STATUS_COMPLETED_DESCRIPTION, "OK",
+                                MessageType.Information));
+                            break;
+                        default:
+                            t.Result.Messages.Add(
+                                new Message(
+                                    PayPalConstants.PAYMENT_STATUS_ERROR_DESCRIPTION,
+                                    string.Empty, MessageType.Information));
+                            t.Result.Succeeded = false;
+                            break;
+                    }
+                }
+                else
+                {
+                    t.Result.Messages.Add(new Message("Paypal Payment Capture Failed.", string.Empty, MessageType.Warning));
+                    t.Result.Succeeded = false;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                t.Result.Messages.Add(new Message("Paypal Payment Capture Failed.", string.Empty, MessageType.Warning));
-                foreach (var ppError in captureResponse.Errors)
-                {
-                    t.Result.Messages.Add(new Message(ppError.LongMessage, ppError.ErrorCode, MessageType.Error));
-                }
-                t.Result.Succeeded = false;
+                HandleException(t, ex);
             }
         }
 
         protected override void Refund(Transaction t)
         {
-            var ppAPI = CreatePaypalAPI();
-
-            //per paypal's request, the refund type should always be set to partial
-            var refundType = "Partial";
-            var refundResponse = ppAPI.RefundTransaction(
-                t.PreviousTransactionNumber,
-                refundType,
-                t.Amount.ToString("N", CultureInfo.InvariantCulture),
-                ConvertCurrency(Settings.Currency));
-
-            if (refundResponse.Ack == AckCodeType.Success || refundResponse.Ack == AckCodeType.SuccessWithWarning)
+            try
             {
-                t.Result.ReferenceNumber = refundResponse.RefundTransactionID;
-                t.Result.Succeeded = true;
-            }
-            else
-            {
-                t.Result.Messages.Add(new Message("Paypal Payment Refund Failed.", string.Empty, MessageType.Warning));
-                foreach (var ppError in refundResponse.Errors)
+                var ppAPI = CreateRestPayPalApi();
+
+                if (t.PreviousTransactionNumber != null)
                 {
-                    t.Result.Messages.Add(new Message(ppError.LongMessage, ppError.ErrorCode, MessageType.Error));
+                    var refundType = string.Empty;
+                    //per paypal's request, the refund type should always be set to partial
+
+                    var refundResponse = Task.Run(() => ppAPI.CapturesRefund(
+                        t.PreviousTransactionNumber,
+                        t.Amount.ToString("N", CultureInfo.InvariantCulture),
+                        Settings.Currency)).GetAwaiter().GetResult();
+                    if (refundResponse.StatusCode == HttpStatusCode.Created)
+                    {
+                        t.Result.Succeeded = true;
+                        t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_REFUND_SUCCESS, "OK",
+                            MessageType.Information));
+                    }
+                    else
+                    {
+                        t.Result.Succeeded = false;
+                        t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_REFUND_FAILED, string.Empty,
+                            MessageType.Error));
+                    }
                 }
-                t.Result.Succeeded = false;
+            }
+            catch (Exception ex)
+            {
+                HandleException(t, ex);
             }
         }
 
         protected override void Void(Transaction t)
         {
-            var ppAPI = CreatePaypalAPI();
-
-            var voidResponse = ppAPI.DoVoid(t.PreviousTransactionNumber, "Transaction Voided");
-
-            if (voidResponse.Ack == AckCodeType.Success || voidResponse.Ack == AckCodeType.SuccessWithWarning)
+            try
             {
-                t.Result.Succeeded = true;
-            }
-            else
-            {
-                t.Result.Messages.Add(new Message("Paypal Payment Void Failed.", string.Empty, MessageType.Warning));
-                foreach (var ppError in voidResponse.Errors)
+                var ppAPI = CreateRestPayPalApi();
+
+                if (t.PreviousTransactionNumber != null)
                 {
-                    t.Result.Messages.Add(new Message(ppError.LongMessage, ppError.ErrorCode, MessageType.Error));
+                    var voidResponse = Task.Run(() => ppAPI.VoidAuthorizedPayment(t.PreviousTransactionNumber)).GetAwaiter().GetResult();
+                    if (voidResponse.StatusCode == HttpStatusCode.NoContent)
+                    {
+                        t.Result.Succeeded = true;
+                        t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_Void_SUCCESS, "OK",
+                            MessageType.Information));
+                    }
+                    else
+                    {
+                        t.Result.Succeeded = false;
+                        t.Result.Messages.Add(new Message(PayPalConstants.PAYMENT_Void_FAILED, string.Empty,
+                            MessageType.Error));
+                    }
                 }
-                t.Result.Succeeded = false;
+            }
+            catch (Exception ex)
+            {
+                HandleException(t, ex);
             }
         }
 
-        private PayPalAPI CreatePaypalAPI()
+        private RestPayPalApi CreateRestPayPalApi()
         {
-            var profile = ProfileFactory.createSignatureAPIProfile();
-            if (profile != null)
-            {
-                profile.APIUsername = Settings.PayPalUserName;
-                profile.APIPassword = Settings.PayPalPassword;
-                profile.Subject = string.Empty;
-                profile.Environment = Settings.PayPalMode;
-                profile.APISignature = Settings.PayPalSignature;
-            }
-            else
-            {
-                throw new ArgumentException("Paypal com.paypal.sdk.profiles.ProfileFactory.CreateAPIProfile has failed.");
-            }
-            return new PayPalAPI(profile);
+            return new RestPayPalApi(Settings.PayPalClientId,
+                Settings.PayPalSecret, Settings.PayPalMode);
         }
 
-        private CountryCodeType ConvertCountry(ICountry country)
+
+        private void HandleException(Transaction t, Exception ex)
         {
-            var result = CountryCodeType.US;
-
-            if (country == null)
-                return result;
-
-            if (Enum.IsDefined(typeof (CountryCodeType), country.IsoCode))
-            {
-                result = (CountryCodeType) Enum.Parse(typeof (CountryCodeType), country.IsoCode, true);
-            }
-
-            return result;
-        }
-
-        private CurrencyCodeType ConvertCurrency(string currency)
-        {
-            var currencyCode = CurrencyCodeType.USD;
-
-            if (string.IsNullOrEmpty(currency)) return currencyCode;
-
-            if (Enum.IsDefined(typeof (CurrencyCodeType), currency))
-            {
-                currencyCode = (CurrencyCodeType) Enum.Parse(typeof (CurrencyCodeType), currency, true);
-            }
-
-            return currencyCode;
+            t.Result.Messages.Add(new Message("Unknown Payment Error: " + ex.Message, "HCP_PPP_1001", MessageType.Error));
+            t.Result.Messages.Add(new Message("Stack Trace " + ex.StackTrace, "STACKTRACE", MessageType.Error));
+            t.Result.Succeeded = false;
         }
     }
 }
