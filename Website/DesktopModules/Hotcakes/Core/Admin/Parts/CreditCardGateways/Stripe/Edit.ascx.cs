@@ -48,6 +48,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.CreditCardGateways.Stripe
             settings.Merge(HccApp.CurrentStore.Settings.PaymentSettingsGet(GatewayId));
 
             txtApiKey.Text = settings.StripeApiKey;
+            txtPublicKey.Text = settings.StripePublicKey;
             ddlCurrency.SelectedValue = settings.CurrencyCode;
         }
 
@@ -57,6 +58,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.CreditCardGateways.Stripe
             settings.Merge(HccApp.CurrentStore.Settings.PaymentSettingsGet(GatewayId));
 
             settings.StripeApiKey = txtApiKey.Text.Trim();
+            settings.StripePublicKey = txtPublicKey.Text.Trim();
             settings.CurrencyCode = ddlCurrency.SelectedValue;
 
             HccApp.CurrentStore.Settings.PaymentSettingsSet(GatewayId, settings);

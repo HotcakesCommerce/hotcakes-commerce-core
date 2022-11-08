@@ -8,6 +8,10 @@
         <asp:TextBox ID="txtApiKey" runat="server" />
     </div>
     <div class="hcFormItemHor">
+        <asp:Label runat="server" resourcekey="PublicKey" CssClass="hcLabel" />
+        <asp:TextBox ID="txtPublicKey" runat="server" />
+    </div>
+    <div class="hcFormItemHor">
         <asp:Label runat="server" resourcekey="Currency" CssClass="hcLabel" />
         <asp:DropDownList ID="ddlCurrency" runat="server" />
     </div>

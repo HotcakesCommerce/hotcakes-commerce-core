@@ -266,6 +266,6 @@ namespace Hotcakes.Payment
 		/// <summary>
         ///     Records customer request to pay offline
 		/// </summary>
-		OfflinePaymentRequest = 9999
-	}
+		OfflinePaymentRequest = 9999,
+    }
 }

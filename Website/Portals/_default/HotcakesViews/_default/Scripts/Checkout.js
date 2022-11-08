@@ -1,4 +1,7 @@
 ﻿jQuery(function ($) {
+    const stripePublicKey = $("#StripePublicKey").val();
+    const stripe = stripePublicKey ? Stripe(stripePublicKey) : null;
+    const clientSecret = $("#PaymentIntentClientSecret").val()
 
     // Common ----------------------
 
@@ -33,12 +36,18 @@
                         });
                 });
 
-        $("#hcTakeOrder").click(function () {
+        $("#hcTakeOrder").click(function (e) {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
         });
+
+        $("#btnsubmit").click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            CreatePaymentMethod(clientSecret)
+        })
     }
 
     function ajaxErrorNotification() {
@@ -49,8 +58,8 @@
 
     function IsEmailKnown(forceSwitch, emailfieldid) {
         var emailfield = $(emailfieldid || '#customeremail').val().toLowerCase();
-		var token = $('input[name="__RequestVerificationToken"]').val();
-		
+        var token = $('input[name="__RequestVerificationToken"]').val();
+
         $.ajax({
             url: hcc.getServiceUrl("checkout/IsEmailKnown"),
             type: 'post',
@@ -300,7 +309,7 @@
 
             $("#hcSaveNormalizedAction").click(function (e) { Addresses.saveNormalized(e); });
             this.$submitButton.click(function (e) {
-                $.xhrPool.abortAll();
+                //$.xhrPool.abortAll();
                 Addresses.save(e);
             });
         },
@@ -410,6 +419,7 @@
             if (this.showDialog) {
                 e.stopPropagation();
                 e.preventDefault();
+
                 $(".hc-checkout").ajaxLoader("start");
 
                 this.applyAddressChange(function (res) {
@@ -422,7 +432,11 @@
                     var showBillingNm = (blRes != null && blRes.NormalizedAddress != null);
 
                     if (!showShippingNm && !showBillingNm) {
-                        self.saveForm();
+                        if (clientSecret) {
+                            CreatePaymentMethod(clientSecret)
+                        } else {
+                            self.saveForm();
+                        }
                     }
                     else {
                         if (showShippingNm) {
@@ -454,7 +468,6 @@
                 });
                 return false;
             }
-
             return true;
         },
         saveForm: function () {
@@ -864,6 +877,61 @@
 
     function UpdateTotalTable() {
         $("table.totaltable").attr("class", "table table-striped table-hover totaltable");
+    }
+
+    async function CreatePaymentMethod(clientSecret) {
+        var status = await checkPaymentStatus(clientSecret)
+        if (status === "requires_payment_method") {
+            var cardNumber = $("#cccardnumber").val();
+            var cvc = $("#ccsecuritycode").val();
+            var expMonth = $("#ccexpmonth").val();
+            var expYear = $("#ccexpyear").val();
+            var paymentIntent = $("#PaymentIntentId").val();
+            var pm = "";
+            if (cardNumber && cvc && expMonth && expYear) {
+                var reqUrl = hcc.getServiceUrl("checkout/AttachPaymentMethod");
+                $.post(reqUrl, { "CardNumber": cardNumber, "Cvc": cvc, "ExpMonth": expMonth, "ExpYear": expYear, "PaymentIntentId": paymentIntent }, null, "json")
+                    .done(function (data) {
+                        console.log(data);
+                        stripe
+                            .retrievePaymentIntent(clientSecret)
+                            .then(async function (result) {
+                                if (result.paymentIntent) {
+                                    if (result.paymentIntent.status == "requires_action") {
+                                        var result = await stripe.confirmCardPayment(clientSecret);
+
+                                        if (result.paymentIntent) {
+                                            console.log(result);
+                                            Addresses.saveForm();
+                                        } else {
+                                            Addresses.saveForm();
+                                        }
+                                    } else {
+                                        Addresses.saveForm();
+                                    }
+                                } else {
+                                    Addresses.saveForm();
+                                }
+                            });
+                    })
+                    .fail(function (xhr, status, error) {
+                        console.log("xhr: " + xhr);
+                        console.log("status: " + status);
+                        console.log("error: " + error);
+                    })
+                    .always(function () { console.log("Error Always") });
+            } else {
+                Addresses.saveForm();
+            }
+        } else {
+            Addresses.saveForm();
+        }
+    };
+
+    async function checkPaymentStatus(clientSecret) {
+
+        const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
+        return paymentIntent.status;
     }
 
     // Initialization --------------------------

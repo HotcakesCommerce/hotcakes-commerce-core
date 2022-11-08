@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hotcakes.Modules.Core.Admin.Parts.CreditCardGateways.Stripe {
-    
-    
-    public partial class Edit {
-        
+namespace Hotcakes.Modules.Core.Admin.Parts.CreditCardGateways.Stripe
+{
+
+
+    public partial class Edit
+    {
+
         /// <summary>
         /// txtApiKey control.
         /// </summary>
@@ -20,7 +22,16 @@ namespace Hotcakes.Modules.Core.Admin.Parts.CreditCardGateways.Stripe {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtApiKey;
-        
+
+        /// <summary>
+        /// txtPublicKey control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPublicKey;
+
         /// <summary>
         /// ddlCurrency control.
         /// </summary>

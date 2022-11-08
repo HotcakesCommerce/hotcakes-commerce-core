@@ -33,7 +33,6 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Text.RegularExpressions;
-using System.Web.WebPages.Scope;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Membership;
 using DotNetNuke.Services.Exceptions;
@@ -42,7 +41,6 @@ using Hotcakes.Commerce.Accounts;
 using Hotcakes.Commerce.Analytics;
 using Hotcakes.Commerce.BusinessRules;
 using Hotcakes.Commerce.Common;
-using Hotcakes.Commerce.Contacts;
 using Hotcakes.Commerce.Dnn;
 using Hotcakes.Commerce.Extensions;
 using Hotcakes.Commerce.Globalization;
@@ -59,8 +57,11 @@ using Hotcakes.Modules.Core.Integration;
 using Hotcakes.Modules.Core.Models;
 using Hotcakes.Modules.Core.Models.Json;
 using Hotcakes.Payment;
+using Hotcakes.Payment.Gateways;
 using Hotcakes.Web.Logging;
 using Hotcakes.Web.Validation;
+using Address = Hotcakes.Commerce.Contacts.Address;
+using static Hotcakes.Payment.Gateways.StripeProcessor;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
@@ -104,7 +105,18 @@ namespace Hotcakes.Modules.Core.Controllers
             VerifySessionError(model);
             RenderErrorSummary(model);
             CheckFreeItems(model);
-
+            if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway == "15011DF5-13DA-42BE-9DFF-31C71ED64D4A")
+            {
+                var stripeProcessor = new StripeProcessor();
+                var sett = HccApp.CurrentStore.Settings;
+                var mSett = sett.PaymentSettingsGet(sett.PaymentCreditCardGateway);
+                stripeProcessor.BaseSettings.Merge(mSett);
+                var paymentIntentRequest = new PaymentIntentRequestItem() { TotalAmount = model.CurrentOrder.TotalGrand };
+                var paymentIntent = stripeProcessor.CreatePaymentIntent(paymentIntentRequest);
+                model.PaymentIntentClientSecret = paymentIntent.ClientSecret;
+                model.PaymentIntentId = paymentIntent.Id;
+                model.StripePublicKey = stripeProcessor.Settings.StripePublicKey;
+            }
             return View(model);
         }
 
@@ -116,7 +128,7 @@ namespace Hotcakes.Modules.Core.Controllers
         {
             var model = LoadCheckoutModel();
             LoadValuesFromForm(model);
-
+            
             var intResult = CheckoutIntegration.Create(HccApp).BeforeCheckoutCompleted(HccApp, model);
 
             if (!intResult.IsAborted)
@@ -276,6 +288,28 @@ namespace Hotcakes.Modules.Core.Controllers
 
             return new PreJsonResult(Web.Json.ObjectToJson(result));
         }
+        
+        /// <summary>
+        /// Attach Payment method to Stripe Payment Intent
+        /// </summary>
+        /// <returns></returns>
+        [HccHttpPost]
+        public ActionResult AttachPaymentMethod()
+        {
+            var cardNumber = Request.Form["CardNumber"];
+            var Cvc = Request.Form["Cvc"];
+            var ExpMonth = Convert.ToInt32(Request.Form["ExpMonth"]);
+            var ExpYear = Convert.ToInt32(Request.Form["ExpYear"]);
+            var stripeProcessor = new StripeProcessor();
+            var sett = HccApp.CurrentStore.Settings;
+            var mSett = sett.PaymentSettingsGet(sett.PaymentCreditCardGateway);
+            stripeProcessor.BaseSettings.Merge(mSett);
+
+            var pm = stripeProcessor.CreatePaymentMethod(cardNumber, Cvc, ExpMonth, ExpYear);
+            string paymentIntentId = Request.Form["PaymentIntentId"];
+            var result = stripeProcessor.AttachPaymentMethod(pm.Id, paymentIntentId);
+            return new PreJsonResult(Web.Json.ObjectToJson(new {id = result.Id}));
+        }
 
         [HccHttpPost]
         public ActionResult CleanCreditCard()
@@ -293,7 +327,7 @@ namespace Hotcakes.Modules.Core.Controllers
             var encrypted = Convert.FromBase64String(notclean);
             var decriptedFromJavascript = DecryptStringFromBytes(encrypted, keybytes, iv);
 
-            if(!string.IsNullOrEmpty(decriptedFromJavascript))
+            if (!string.IsNullOrEmpty(decriptedFromJavascript))
             {
                 result.CardNumber = CardValidator.CleanCardNumber(decriptedFromJavascript);
                 return new PreJsonResult(Web.Json.ObjectToJson(result));
@@ -337,7 +371,7 @@ namespace Hotcakes.Modules.Core.Controllers
                     // Create the streams used for decryption.  
                     using (var msDecrypt = new MemoryStream(cipherText))
                     {
-                        using(var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                        using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                         {
 
                             using (var srDecrypt = new StreamReader(csDecrypt))
@@ -589,7 +623,7 @@ namespace Hotcakes.Modules.Core.Controllers
             // Populate Countries
             model.Countries = HccApp.GlobalizationServices.Countries.FindActiveCountries();
             model.ShowAffiliateId = HccApp.CurrentStore.Settings.AffiliateShowIDOnCheckout;
-            
+
             var context = new HccRequestContext();
             var settingsRepo = Factory.CreateRepo<StoreSettingsRepository>(context);
 
@@ -858,7 +892,11 @@ namespace Hotcakes.Modules.Core.Controllers
 
             // Addresses
             model.BillShipSame = Request.Form["chkbillsame"] != null;
-
+            var paymentIntentId = Request.Form["PaymentIntentId"];
+            if (!string.IsNullOrEmpty(paymentIntentId))
+            {
+                model.CurrentOrder.ThirdPartyOrderId = paymentIntentId;
+            }
             LoadAddressFromForm("shipping", model.CurrentOrder.ShippingAddress);
             if (model.BillShipSame)
             {

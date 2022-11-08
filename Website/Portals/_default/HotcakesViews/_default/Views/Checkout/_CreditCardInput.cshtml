@@ -36,22 +36,40 @@
 <div class="hc-creditcard-form clearfix">
     <input type="hidden" id="aesInitVector" name="aesInitVector" value="@Model.AESEncryptInitVector" />
     <input type="hidden" id="aesKey" name="aesKey" value="@Model.AESEncryptKey" />
+    @if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway.Equals("15011DF5-13DA-42BE-9DFF-31C71ED64D4A"))
+    {
+        <input type="hidden" id="PaymentIntentId" name="PaymentIntentId" value="@Model.PaymentIntentId" />
+        <input type="hidden" id="PaymentIntentClientSecret" name="PaymentIntentClientSecret" value="@Model.PaymentIntentClientSecret" />
+        <input type="hidden" id="StripePublicKey" value="@Model.StripePublicKey" />
+    }
     <div class="form-group">
         <label class="col-sm-4 control-label">&nbsp;</label>
         <div class="col-sm-offset-0 col-sm-6">
             <span class="hc-card-icons">
                 @if (IsAccepted(CardType.Visa))
-                { <span class="cc-visa"></span> }
+                {
+                    <span class="cc-visa"></span>
+                }
                 @if (IsAccepted(CardType.MasterCard))
-                { <span class="cc-mastercard"></span> }
+                {
+                    <span class="cc-mastercard"></span>
+                }
                 @if (IsAccepted(CardType.Amex))
-                { <span class="cc-amex"></span> }
+                {
+                    <span class="cc-amex"></span>
+                }
                 @if (IsAccepted(CardType.Discover))
-                { <span class="cc-discover"></span> }
+                {
+                    <span class="cc-discover"></span>
+                }
                 @if (IsAccepted(CardType.DinersClub))
-                { <span class="cc-diners"></span> }
+                {
+                    <span class="cc-diners"></span>
+                }
                 @if (IsAccepted(CardType.JCB))
-                { <span class="cc-jcb"></span> }
+                {
+                    <span class="cc-jcb"></span>
+                }
             </span>
         </div>
     </div>
@@ -70,7 +88,7 @@
                 <option value="0">--</option>
                 @Months()
             </select>
-            <select name="ccexpyear" class="form-control medium hc-cc-expyear">
+            <select id="ccexpyear" name="ccexpyear" class="form-control medium hc-cc-expyear">
                 <option value="0">----</option>
                 @Years()
             </select>
@@ -79,16 +97,16 @@
     <div class="form-group">
         <label class="col-sm-4 control-label" for="ccsecuritycode">@Localization.GetString("SecurityCode"):</label>
         <div class="col-sm-offset-0 col-sm-6">
-            <input type="text" id="ccsecuritycode" name="ccsecuritycode" maxlength="4" 
-                class="form-control small hc-cc-seccode @Model.IsErr("ccsecuritycode")" autocomplete="off" />
+            <input type="text" id="ccsecuritycode" name="ccsecuritycode" maxlength="4"
+                   class="form-control small hc-cc-seccode @Model.IsErr("ccsecuritycode")" autocomplete="off" />
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-4 control-label" for="cccardholder">@Localization.GetString("NameOnCard"):</label>
         <div class="col-sm-offset-0 col-sm-6">
-            <input type="text" id="cccardholder" name="cccardholder" 
-                value="@Model.PaymentViewModel.DataCreditCard.CardHolderName"
-                class="form-control @Model.IsErr("cccardholder")" autocomplete="off" />
+            <input type="text" id="cccardholder" name="cccardholder"
+                   value="@Model.PaymentViewModel.DataCreditCard.CardHolderName"
+                   class="form-control @Model.IsErr("cccardholder")" autocomplete="off" />
         </div>
     </div>
 </div>
