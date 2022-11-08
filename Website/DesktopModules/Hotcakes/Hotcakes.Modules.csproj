@@ -3790,7 +3790,9 @@
     <Content Include="Core\Admin\Parts\CreditCardGateways\Beanstream\App_LocalResources\Edit.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Core\Admin\Parts\CreditCardGateways\Stripe\App_LocalResources\Edit.ascx.resx" />
+    <Content Include="Core\Admin\Parts\CreditCardGateways\Stripe\App_LocalResources\Edit.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\Admin\Parts\CreditCardGateways\Test Gateway\App_LocalResources\Edit.ascx.resx" />

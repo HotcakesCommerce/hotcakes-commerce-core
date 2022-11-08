@@ -55,10 +55,15 @@ namespace Hotcakes.Payment.Gateways
             get { return Settings; }
         }
 
+        /// <summary>
+        /// Process the transaction object to use the PaymentIntents or Charges API depending on the value of the reference number 
+        /// </summary>
+        /// <param name="t">The Transaction object</param>
+        /// <param name="capture">Defines if the charge will be captured automatically</param>
         private void ProcessCreate(Transaction t, bool capture)
         {
             var id = t.Result.ReferenceNumber;
-            if (!string.IsNullOrEmpty(id) && id.Substring(0, 1).Equals("pi"))
+            if (!string.IsNullOrEmpty(id) && IsPaymentIntent(id))
             {
                 if (capture)
                 {
@@ -67,7 +72,7 @@ namespace Hotcakes.Payment.Gateways
                 else
                 {
                     var paymentIntent = RetrievePaymentIntent(id);
-                    if (paymentIntent.Status.Equals("requires_capture"))
+                    if (paymentIntent.Status.Equals(PaymentIntentStatus.RequiresCapture))
                     {
                         t.Result.Succeeded = true;
                         t.Result.ReferenceNumber = id;
@@ -87,16 +92,39 @@ namespace Hotcakes.Payment.Gateways
             }
         }
 
+        /// <summary>
+        /// If the Id belongs to a PaymentIntent proceed to capture with the PaymentIntent API
+        /// Else continue using Charges API
+        /// </summary>
+        /// <param name="t">The Transaction object</param>
         private void ProcessCapture(Transaction t)
         {
-            var id = t.Result.ReferenceNumber;
-            if (!string.IsNullOrEmpty(id) && id.Substring(0, 1).Equals("pi"))
+            var id = t.PreviousTransactionNumber;
+            if (!string.IsNullOrEmpty(id) && IsPaymentIntent(id))
             {
                 CapturePaymentIntent(t);
             }
             else
             {
                 CaptureCharge(t);
+            }
+        }
+
+        /// <summary>
+        /// If the Id belongs to a PaymentIntent proceed to cancel with the PaymentIntent API
+        /// Else continue using Charges API
+        /// </summary>
+        /// <param name="t">The Transaction object</param>
+        private void ProcessVoid(Transaction t)
+        {
+            var id = t.PreviousTransactionNumber;
+            if (!string.IsNullOrEmpty(id) && IsPaymentIntent(id))
+            {
+                CancelPaymentIntent(t);
+            }
+            else
+            {
+                CreateRefund(t);
             }
         }
 
@@ -169,6 +197,11 @@ namespace Hotcakes.Payment.Gateways
             }
         }
 
+        /// <summary>
+        /// Process Refund based on the transaction reference number type
+        /// https://stripe.com/docs/api/refunds/object
+        /// </summary>
+        /// <param name="t">The Transaction Object</param>
         private void CreateRefund(Transaction t)
         {
             StripeConfiguration.ApiKey = Settings.StripeApiKey;
@@ -180,8 +213,7 @@ namespace Hotcakes.Payment.Gateways
                 Amount = (int)(t.Amount * 100)
             };
 
-            var id = t.PreviousTransactionNumber.Substring(0, 2);
-            if (t.PreviousTransactionNumber.Substring(0, 2).Equals("pi"))
+            if (IsPaymentIntent(t.PreviousTransactionNumber))
             {
                 refundOptions.PaymentIntent = t.PreviousTransactionNumber;
             }
@@ -191,7 +223,7 @@ namespace Hotcakes.Payment.Gateways
             }
 
             var refund = refundService.Create(refundOptions);
-            if (refund.Id.Length > 0)
+            if (refund.Status.Length > 0)
             {
                 t.Result.Succeeded = true;
                 t.Result.ReferenceNumber = refund.Id;
@@ -210,7 +242,7 @@ namespace Hotcakes.Payment.Gateways
 
             var chargeService = new ChargeService();
 
-            var stripeCharge = chargeService.Capture(t.Result.ReferenceNumber);
+            var stripeCharge = chargeService.Capture(t.PreviousTransactionNumber);
 
             if (stripeCharge.Id.Length > 0 && stripeCharge.Amount > 0)
             {
@@ -231,7 +263,7 @@ namespace Hotcakes.Payment.Gateways
 
             var paymentIntentService = new PaymentIntentService();
 
-            var stripeCapture = paymentIntentService.Capture(t.Result.ReferenceNumber);
+            var stripeCapture = paymentIntentService.Capture(t.PreviousTransactionNumber);
 
             if (stripeCapture.Id.Length > 0 && stripeCapture.Amount > 0)
             {
@@ -246,39 +278,17 @@ namespace Hotcakes.Payment.Gateways
             }
         }
 
-        public void CreatePaymentIntent(Transaction t)
+        /// <summary>
+        /// Cancel the PaymentIntent
+        /// </summary>
+        /// <param name="t">The transaction object</param>
+        private void CancelPaymentIntent(Transaction t)
         {
-            StripeConfiguration.ApiKey = "sk_test_51KjFl3LWG7Wf1eHay7bIJnf3b8FmWopOjJVe9rN3APpo2jvvqj55DmVfGfcndqgRKCJGHYh2MHu1QR4MIstEubxq004U9HgTJN";
-            var pmService = new PaymentMethodService();
-            var pmOptions = new PaymentMethodCreateOptions()
-            {
-                Type = "card",
-                Card = new PaymentMethodCardOptions()
-                {
-                    Cvc = t.Card.SecurityCode,
-                    Number = t.Card.CardNumber,
-                    ExpMonth = t.Card.ExpirationMonth,
-                    ExpYear = t.Card.ExpirationYear
-                },
-                BillingDetails = new PaymentMethodBillingDetailsOptions()
-                {
-                    Address = new AddressOptions() { Line1 = t.Customer.Street, PostalCode = t.Customer.PostalCode }
-                }
-
-            };
-            var pm = pmService.Create(pmOptions);
-
-            var options = new PaymentIntentCreateOptions
-            {
-                Amount = Convert.ToInt64(t.Amount * 100),
-                Currency = Settings.CurrencyCode,
-                PaymentMethod = pm.Id,
-                Confirm = true
-            };
+            StripeConfiguration.ApiKey = Settings.StripeApiKey;
 
             var service = new PaymentIntentService();
-            var pi = service.Create(options);
-            if (pi.Status == "succeeded")
+            var pi = service.Cancel(t.Result.ReferenceNumber);
+            if (pi.Status.Equals(PaymentIntentStatus.Canceled))
             {
                 t.Result.Succeeded = true;
                 t.Result.ReferenceNumber = pi.Id;
@@ -291,37 +301,54 @@ namespace Hotcakes.Payment.Gateways
             }
         }
 
+        /// <summary>
+        /// Create a PaymentIntent
+        /// </summary>
+        /// <param name="request">The payment intent request item</param>
+        /// <returns></returns>
         public PaymentIntent CreatePaymentIntent(PaymentIntentRequestItem request)
         {
-            StripeConfiguration.ApiKey = "sk_test_51KjFl3LWG7Wf1eHay7bIJnf3b8FmWopOjJVe9rN3APpo2jvvqj55DmVfGfcndqgRKCJGHYh2MHu1QR4MIstEubxq004U9HgTJN";
-            var pmService = new PaymentMethodService();
+            StripeConfiguration.ApiKey = Settings.StripeApiKey;
 
             var options = new PaymentIntentCreateOptions
             {
-                Amount = Convert.ToInt64(request.TotalAmmount * 100),
+                Amount = Convert.ToInt64(request.TotalAmount * 100),
                 Currency = Settings.CurrencyCode,
-                CaptureMethod = "manual",
+                CaptureMethod = CaptureMethod.Manual,
             };
 
             var service = new PaymentIntentService();
             return service.Create(options);
         }
 
+        /// <summary>
+        /// Get a PaymentIntent by Id
+        /// </summary>
+        /// <param name="id">The PaymentIntent Id</param>
+        /// <returns>Return the PaymentIntent object</returns>
         public PaymentIntent RetrievePaymentIntent(string id)
         {
-            StripeConfiguration.ApiKey = "sk_test_51KjFl3LWG7Wf1eHay7bIJnf3b8FmWopOjJVe9rN3APpo2jvvqj55DmVfGfcndqgRKCJGHYh2MHu1QR4MIstEubxq004U9HgTJN";
+            StripeConfiguration.ApiKey = Settings.StripeApiKey;
 
             var service = new PaymentIntentService();
             return service.Get(id);
         }
 
+        /// <summary>
+        /// Create a payment method using the PaymentIntent API
+        /// </summary>
+        /// <param name="cardNumber"></param>
+        /// <param name="cvc"></param>
+        /// <param name="expMonth"></param>
+        /// <param name="expYear"></param>
+        /// <returns>The payment method object</returns>
         public PaymentMethod CreatePaymentMethod(string cardNumber, string cvc, int expMonth, int expYear)
         {
-            StripeConfiguration.ApiKey = "sk_test_51KjFl3LWG7Wf1eHay7bIJnf3b8FmWopOjJVe9rN3APpo2jvvqj55DmVfGfcndqgRKCJGHYh2MHu1QR4MIstEubxq004U9HgTJN";
+            StripeConfiguration.ApiKey = Settings.StripeApiKey;
 
             var options = new PaymentMethodCreateOptions
             {
-                Type = "card",
+                Type = PaymentMethodType.Card,
                 Card = new PaymentMethodCardOptions
                 {
                     Number = cardNumber,
@@ -334,9 +361,15 @@ namespace Hotcakes.Payment.Gateways
             return service.Create(options);
         }
 
+        /// <summary>
+        /// Attach a PaymentMethod to a PaymentIntent
+        /// </summary>
+        /// <param name="paymentMethodId">The Payment Method Id</param>
+        /// <param name="paymentIntentId">The Payment Intent Id</param>
+        /// <returns>The updated PaymentIntent object</returns>
         public PaymentIntent AttachPaymentMethod(string paymentMethodId, string paymentIntentId)
         {
-            StripeConfiguration.ApiKey = "sk_test_51KjFl3LWG7Wf1eHay7bIJnf3b8FmWopOjJVe9rN3APpo2jvvqj55DmVfGfcndqgRKCJGHYh2MHu1QR4MIstEubxq004U9HgTJN";
+            StripeConfiguration.ApiKey = Settings.StripeApiKey;
 
             var options = new PaymentIntentUpdateOptions
             {
@@ -350,7 +383,12 @@ namespace Hotcakes.Payment.Gateways
 
         public class PaymentIntentRequestItem
         {
-            public decimal TotalAmmount { get; set; }
+            public decimal TotalAmount { get; set; }
+        }
+
+        public bool IsPaymentIntent(string id)
+        {
+            return id.Substring(0, 2).Equals("pi");
         }
 
 
@@ -374,7 +412,7 @@ namespace Hotcakes.Payment.Gateways
                         CreateRefund(t);
                         break;
                     case ActionType.CreditCardVoid:
-                        CreateRefund(t);
+                        ProcessVoid(t);
                         break;
                 }
             }
@@ -393,4 +431,27 @@ namespace Hotcakes.Payment.Gateways
             }
         }
     }
+
+    #region Constants
+    public static class PaymentIntentStatus
+    {
+        public const string Succeded = "succeded";
+        public const string Canceled = "canceled";
+        public const string RequiresCapture = "requires_capture";
+        public const string RequiresPaymentMethod = "requires_payment_method";
+    }
+
+    public static class PaymentMethodType
+    {
+        public const string Card = "card";
+    }
+
+    public static class CaptureMethod
+    {
+        public const string Manual = "manual";
+    }
+
+
+    #endregion
+
 }
