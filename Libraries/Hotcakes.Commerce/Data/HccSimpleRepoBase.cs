@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -271,9 +272,9 @@ namespace Hotcakes.Commerce.Data
 
         protected virtual V FindFirstPoco(Expression<Func<T, bool>> predicate)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var item = s.GetQuery(predicate).FirstOrDefault();
+                var item = s.GetQuery(predicate).AsNoTracking().FirstOrDefault();
                 return FirstPoco(item);
             }
         }
@@ -291,9 +292,9 @@ namespace Hotcakes.Commerce.Data
 
         protected virtual List<V> FindListPoco(Func<IQueryable<T>, IQueryable<T>> processQuery)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var items = processQuery(s.GetQuery()).ToList();
+                var items = processQuery(s.GetQuery().AsNoTracking()).ToList();
                 return ListPoco(items);
             }
             ;

@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -140,9 +141,9 @@ namespace Hotcakes.Commerce.Catalog
         {
             var storeId = Context.CurrentStore.Id;
             var productBvin = DataTypeHelper.BvinToGuid(productId);
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var query = s.GetQuery().Where(y => y.StoreId == storeId)
+                var query = s.GetQuery().AsNoTracking().Where(y => y.StoreId == storeId)
                     .Where(y => y.ProductBvin == productBvin)
                     .Where(y => y.VariantId == variantId).FirstOrDefault();
                 return FirstPoco(query);

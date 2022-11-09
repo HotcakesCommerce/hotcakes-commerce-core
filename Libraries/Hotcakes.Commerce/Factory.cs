@@ -167,6 +167,11 @@ namespace Hotcakes.Commerce
             return Instance.CreateHccDbContext();
         }
 
+        public static HccDbContext CreateReadOnlyHccDbContext()
+        {
+            return Instance.CreateReadOnlyHccDbContext();
+        }
+
         public static T CreateRepo<T>() where T : class, IRepo
         {
             return Instance.CreateRepo<T>();

@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -105,9 +106,9 @@ namespace Hotcakes.Commerce.Catalog
         {
             var storeId = Context.CurrentStore.Id;
             var productGuid = DataTypeHelper.BvinToGuid(productId);
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var maxSortOrder = s.GetQuery().Where(y => y.ProductID == productGuid)
+                var maxSortOrder = s.GetQuery().AsNoTracking().Where(y => y.ProductID == productGuid)
                     .Where(y => y.StoreId == storeId)
                     .Max(y => (int?) y.SortOrder);
 

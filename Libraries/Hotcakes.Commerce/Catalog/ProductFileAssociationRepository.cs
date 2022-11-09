@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -277,10 +278,10 @@ namespace Hotcakes.Commerce.Catalog
         {
             var result = 0;
             var storeId = Context.CurrentStore.Id;
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var fileGuid = DataTypeHelper.BvinToGuid(fileId);
-                var temp = s.GetQuery().Where(y => y.ProductFileId == fileGuid)
+                var temp = s.GetQuery().AsNoTracking().Where(y => y.ProductFileId == fileGuid)
                     .Where(y => y.StoreId == storeId).Count();
 
                 if (temp >= 0)

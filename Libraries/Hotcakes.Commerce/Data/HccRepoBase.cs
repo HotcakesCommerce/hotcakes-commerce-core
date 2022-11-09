@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -73,15 +74,20 @@ namespace Hotcakes.Commerce.Data
 
         public virtual int CountOfAll()
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                return s.GetQuery().Count();
+                return s.GetQuery().AsNoTracking().Count();
             }
         }
 
         protected IRepoStrategy<T> CreateStrategy()
         {
             return Factory.Instance.CreateStrategy<T>();
+        }
+
+        protected IRepoStrategy<T> CreateReadStrategy()
+        {
+            return Factory.Instance.CreateReadStrategy<T>();
         }
     }
 }

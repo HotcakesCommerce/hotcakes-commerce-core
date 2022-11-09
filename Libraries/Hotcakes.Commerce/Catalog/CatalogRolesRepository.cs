@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -66,9 +67,9 @@ namespace Hotcakes.Commerce.Catalog
         public List<string> FindAllRoleNames()
         {
             var storeId = Context.CurrentStore.Id;
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                return s.GetQuery().Where(r => r.StoreId == storeId)
+                return s.GetQuery().AsNoTracking().Where(r => r.StoreId == storeId)
                     .Select(r => r.RoleName)
                     .Distinct()
                     .ToList();

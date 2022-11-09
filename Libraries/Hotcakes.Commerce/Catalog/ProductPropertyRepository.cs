@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using Hotcakes.Commerce.Data;
@@ -140,9 +141,9 @@ namespace Hotcakes.Commerce.Catalog
         public ProductProperty FindByName(string name)
         {
             var storeId = Context.CurrentStore.Id;
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var item = GetJoinedQuery(s).Where(y => y.Item.StoreId == storeId)
+                var item = GetJoinedQuery(s).AsNoTracking().Where(y => y.Item.StoreId == storeId)
                     .Where(y => y.Item.PropertyName == name).FirstOrDefault();
                 return FirstPoco(item);
             }

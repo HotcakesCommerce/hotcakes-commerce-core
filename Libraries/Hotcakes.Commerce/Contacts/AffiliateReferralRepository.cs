@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -107,9 +108,9 @@ namespace Hotcakes.Commerce.Contacts
         public List<AffiliateReferral> FindByCriteria(AffiliateReferralSearchCriteria criteria, int pageNumber,
             int pageSize, ref int rowCount)
         {
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
-                var query = strategy.GetQuery().Where(y => y.StoreId == Context.CurrentStore.Id);
+                var query = strategy.GetQuery().AsNoTracking().Where(y => y.StoreId == Context.CurrentStore.Id);
                 if (criteria.AffiliateId > 0)
                 {
                     query = query.Where(y => y.AffiliateId == criteria.AffiliateId);

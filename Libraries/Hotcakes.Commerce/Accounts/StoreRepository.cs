@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -68,10 +69,7 @@ namespace Hotcakes.Commerce.Accounts
 
         public Store FindById(long id)
         {
-            var store = FindFirstPoco(y => y.Id == id);
-            if (store != null)
-                CacheManager.AddStore(store, Context.MainContentCulture);
-            return store;
+            return FindByIdWithCache(id);
         }
 
         public Store FindByIdWithCache(long id)
@@ -82,7 +80,19 @@ namespace Hotcakes.Commerce.Accounts
 
         public Store FindByStoreGuid(Guid guid)
         {
-            return FindFirstPoco(y => y.StoreGuid == guid);
+            var storeId = CacheManager.GetStoreIdByGuid(guid, () =>
+            {
+                return null;
+            });
+
+            if (storeId != null)
+                return FindByIdWithCache(storeId.GetValueOrDefault());
+
+            var store = FindFirstPoco(y => y.StoreGuid == guid);
+            if(store != null)
+                CacheManager.AddStore(store, Context.MainContentCulture);
+            
+            return store;
         }
 
         protected override void GetSubItems(List<Store> models)
@@ -99,14 +109,17 @@ namespace Hotcakes.Commerce.Accounts
 
         public long FindStoreIdByCustomUrl(string hostName)
         {
-            long result = -1;
-            var s = FindFirstPoco(y => y.CustomUrl == hostName);
-            if (s != null)
+            return (long)CacheManager.GetStoreIdByHostName(hostName, () =>
             {
-                result = s.Id;
-            }
+                long result = -1;
+                var s = FindFirstPoco(y => y.CustomUrl == hostName);
+                if (s != null)
+                {
+                    result = s.Id;
+                }
 
-            return result;
+                return result;
+            });
         }
 
         public bool Update(Store s)
@@ -137,9 +150,10 @@ namespace Hotcakes.Commerce.Accounts
         public List<StoreDomainSnapshot> FindDomainSnapshotsByIds(List<long> ids)
         {
             var result = new List<StoreDomainSnapshot>();
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 result = s.GetQuery()
+                    .AsNoTracking()
                     .Where(y => ids.Contains(y.Id))
                     .OrderBy(y => y.Id)
                     .Select(q => new StoreDomainSnapshot
@@ -156,9 +170,9 @@ namespace Hotcakes.Commerce.Accounts
 
         public int GetLastOrderNumber(long storeId)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var store = s.GetQuery(y => y.Id == storeId).FirstOrDefault();
+                var store = s.GetQuery(y => y.Id == storeId).AsNoTracking().FirstOrDefault();
                 if (store != null)
                     return store.LastOrderNumber;
                 return 0;

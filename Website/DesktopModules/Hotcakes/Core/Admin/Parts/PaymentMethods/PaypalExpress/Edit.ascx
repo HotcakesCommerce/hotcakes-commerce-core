@@ -15,14 +15,9 @@
 <div class="hcColumnLeft" style="width: 50%;">
     <div class="hcForm">
         <div class="hcFormItem">
-            <asp:Label runat="server" resourcekey="APIUsername" CssClass="hcLabel" />
-            <asp:TextBox ID="txtUsername" runat="server" />
-            <asp:RequiredFieldValidator ID="rfvUsername" runat="server" resourcekey="rfvUsername" ControlToValidate="txtUsername" Display="Dynamic" CssClass="hcFormError" />
-        </div>
-        <div class="hcFormItem">
-            <asp:Label runat="server" resourcekey="APIPassword" CssClass="hcLabel" />
-            <asp:TextBox ID="txtPassword" runat="server" />
-            <asp:RequiredFieldValidator ID="rfvPassword" runat="server" resourcekey="rfvPassword" ControlToValidate="txtPassword" Display="Dynamic" CssClass="hcFormError" />
+            <asp:Label runat="server" resourcekey="APIClientId" CssClass="hcLabel" />
+            <asp:TextBox ID="txtClientId" runat="server" />
+            <asp:RequiredFieldValidator ID="rfvClientId" runat="server" resourcekey="rfvClientId" ControlToValidate="txtClientId" Display="Dynamic" CssClass="hcFormError" />
         </div>
         <div class="hcFormItem">
             <asp:Label runat="server" CssClass="hcLabel">
@@ -44,13 +39,9 @@
 <div class="hcColumnRight" style="width: 50%;">
     <div class="hcForm">
         <div class="hcFormItem">
-            <asp:Label runat="server" resourcekey="APISignature" CssClass="hcLabel" />
-            <asp:TextBox ID="txtSignature" runat="server" />
-            <asp:RequiredFieldValidator ID="rfvSignature" runat="server" resourcekey="rfvSignature" ControlToValidate="txtSignature" Display="Dynamic" CssClass="hcFormError" />
-        </div>
-        <div class="hcFormItem">
-            <asp:Label runat="server" resourcekey="PayPalFastSignupEmail" CssClass="hcLabel" />
-            <asp:TextBox ID="txtPayPalFastSignupEmail" runat="server" />
+            <asp:Label runat="server" resourcekey="APISecret" CssClass="hcLabel" />
+            <asp:TextBox ID="txtSecret" runat="server" />
+            <asp:RequiredFieldValidator ID="rfvSecret" runat="server" resourcekey="rfvSecret" ControlToValidate="txtSecret" Display="Dynamic" CssClass="hcFormError" />
         </div>
         <div class="hcFormItem">
             <asp:Label runat="server" resourcekey="CaptureMode" CssClass="hcLabel" />

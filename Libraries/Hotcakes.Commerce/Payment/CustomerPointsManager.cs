@@ -25,6 +25,7 @@
 #endregion
 
 using System;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -72,31 +73,33 @@ namespace Hotcakes.Commerce.Membership
 
         public int TotalPointsIssuedForStore(long storeId)
         {
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
-                var result = strategy.GetQuery().
-                    Where(y => y.StoreId == storeId).
-                    Sum(y => (int?) y.Points);
+                var result = strategy.GetQuery()
+                    .AsNoTracking()
+                    .Where(y => y.StoreId == storeId)
+                    .Sum(y => (int?) y.Points);
                 return result ?? 0;
             }
         }
 
         public int TotalPointsReservedForStore(long storeId)
         {
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
-                var result = strategy.GetQuery().
-                    Where(y => y.StoreId == storeId).
-                    Sum(y => (int?) y.PointsHeld);
+                var result = strategy.GetQuery()
+                    .AsNoTracking()
+                    .Where(y => y.StoreId == storeId)
+                    .Sum(y => (int?) y.PointsHeld);
                 return result ?? 0;
             }
         }
 
         public int FindAvailablePoints(string userId)
         {
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
-                var result = strategy.GetQuery().
+                var result = strategy.GetQuery().AsNoTracking().
                     Where(y => y.StoreId == Context.CurrentStore.Id).
                     Where(y => y.UserId == userId).
                     Sum(y => (int?) y.Points);
@@ -106,9 +109,9 @@ namespace Hotcakes.Commerce.Membership
 
         public int FindReserverdPoints(string userId)
         {
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
-                var result = strategy.GetQuery().
+                var result = strategy.GetQuery().AsNoTracking().
                     Where(y => y.StoreId == Context.CurrentStore.Id).
                     Where(y => y.UserId == userId).
                     Sum(y => (int?) y.PointsHeld);
@@ -228,6 +231,11 @@ namespace Hotcakes.Commerce.Membership
         protected IRepoStrategy<hcc_RewardsPoints> CreateStrategy()
         {
             return Factory.Instance.CreateStrategy<hcc_RewardsPoints>();
+        }
+
+        protected IRepoStrategy<hcc_RewardsPoints> CreateReadStrategy()
+        {
+            return Factory.Instance.CreateReadStrategy<hcc_RewardsPoints>();
         }
     }
 }
