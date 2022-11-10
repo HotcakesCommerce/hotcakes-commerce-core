@@ -4,11 +4,11 @@
 </h1>
 <div class="hcForm">
     <div class="hcFormItemHor">
-        <asp:Label runat="server" resourcekey="ClientId" CssClass="hcLabel" />
+        <asp:Label runat="server" resourcekey="lblClientId" CssClass="hcLabel" />
         <asp:TextBox ID="txtClientId" runat="server" />
     </div>
     <div class="hcFormItemHor">
-        <asp:Label runat="server" resourcekey="Secret" CssClass="hcLabel" />
+        <asp:Label runat="server" resourcekey="lblSecret" CssClass="hcLabel" />
         <asp:TextBox ID="txtSecret" runat="server" />
     </div>
     <div class="hcFormItemHor">
