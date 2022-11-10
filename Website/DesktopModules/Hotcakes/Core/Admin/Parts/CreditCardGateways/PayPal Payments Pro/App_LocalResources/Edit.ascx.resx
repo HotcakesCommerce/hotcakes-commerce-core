@@ -138,10 +138,10 @@
   <data name="CurrencyEmptyValue.Text" xml:space="preserve">
     <value>- Not Set -</value>
   </data>
-  <data name="ClientId.Text" xml:space="preserve">
+  <data name="lblClientId.Text" xml:space="preserve">
     <value>API Client ID</value>
   </data>
-  <data name="Secret.Text" xml:space="preserve">
+  <data name="lblSecret.Text" xml:space="preserve">
     <value>API Secret</value>
   </data>
 </root>
