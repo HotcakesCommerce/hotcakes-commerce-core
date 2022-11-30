@@ -4221,7 +4221,7 @@
     <PostBuildEvent>xcopy "$(TargetDir)*" "$(SolutionDir)Website\bin\" /y /s /e
 xcopy "$(SolutionDir)References\Dnn" "$(SolutionDir)Website\bin\" /y /s /e
 xcopy "$(SolutionDir)References\Dev" "$(SolutionDir)Website\bin\" /y /s /e
-xcopy "$(SolutionDir)packages\EntityFramework.6.1.1\lib\net40" "$(SolutionDir)Website\bin\" /y /s /e</PostBuildEvent>
+xcopy "$(SolutionDir)packages\EntityFramework.6.4.4\lib\net40" "$(SolutionDir)Website\bin\" /y /s /e</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\..\..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets" Condition="Exists('..\..\..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
