@@ -105,7 +105,7 @@ namespace Hotcakes.Modules.Core.Controllers
             VerifySessionError(model);
             RenderErrorSummary(model);
             CheckFreeItems(model);
-            if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway == "15011DF5-13DA-42BE-9DFF-31C71ED64D4A")
+            if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway == PaymentGatewayType.Stripe)
             {
                 var stripeProcessor = new StripeProcessor();
                 var sett = HccApp.CurrentStore.Settings;

@@ -118,6 +118,7 @@
     <Compile Include="CardType.cs" />
     <Compile Include="CardValidator.cs" />
     <Compile Include="GatewayBase.cs" />
+    <Compile Include="PaymentGatewayType.cs" />
     <Compile Include="RecurringData.cs" />
     <Compile Include="RecurringGateways\AuthorizeNet.cs" />
     <Compile Include="RecurringGateways\TestRecurringGateway.cs" />

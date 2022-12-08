@@ -32,6 +32,7 @@ using Hotcakes.Commerce.Orders;
 using Hotcakes.Commerce.Urls;
 using Hotcakes.Modules.Core.Filters;
 using Hotcakes.Modules.Core.Models;
+using Hotcakes.Payment;
 using Hotcakes.Payment.Gateways;
 
 namespace Hotcakes.Modules.Core.Controllers
@@ -45,7 +46,7 @@ namespace Hotcakes.Modules.Core.Controllers
 		public ActionResult PaymentError()
 		{
 			CheckoutViewModel model = PaymentErrorSetup();
-            if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway == "15011DF5-13DA-42BE-9DFF-31C71ED64D4A")
+            if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway == PaymentGatewayType.Stripe)
             {
                 var stripeProcessor = new StripeProcessor();
                 var sett = HccApp.CurrentStore.Settings;

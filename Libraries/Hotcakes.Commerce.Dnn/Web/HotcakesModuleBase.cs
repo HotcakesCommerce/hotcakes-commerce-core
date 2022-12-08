@@ -145,25 +145,48 @@ namespace Hotcakes.Commerce.Dnn.Web
 
         protected void RegisterStyleSheet(string path)
         {
+
             ClientResourceManager.RegisterStyleSheet(Page, ResolveUrl(path), FileOrder.Css.ModuleCss);
         }
 
         protected void RegisterViewScript(string path, int order = 0)
         {
-            ClientResourceManager.RegisterScript(Page, ResolveUrl(HccApp.ViewsVirtualPath + "/Scripts/" + path),
-                FileOrder.Js.DefaultPriority + 10 + order);
+            if (!string.IsNullOrEmpty(path))
+            {
+                ClientResourceManager.RegisterScript(Page, ResolveUrl(HccApp.ViewsVirtualPath + "/Scripts/" + path),
+                    FileOrder.Js.DefaultPriority + 10 + order);
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
         }
 
         protected void RegisterScript(string path, int order = 0)
         {
-            ClientResourceManager.RegisterScript(Page, ResolveUrl(ScriptsBasePath + path),
-                FileOrder.Js.DefaultPriority + order);
+            if (!string.IsNullOrEmpty(path))
+            {
+
+                ClientResourceManager.RegisterScript(Page, ResolveUrl(ScriptsBasePath + path),
+                    FileOrder.Js.DefaultPriority + order);
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
         }
 
-        protected void RegisterExternalScript(string path, int order = 0)
+        protected void RegisterScriptExternal(string path, int order = 0)
         {
-            ClientResourceManager.RegisterScript(Page, ResolveUrl(path),
-                FileOrder.Js.DefaultPriority + order);
+            if (!string.IsNullOrEmpty(path))
+            {
+                ClientResourceManager.RegisterScript(Page, ResolveUrl(path),
+                    FileOrder.Js.DefaultPriority + order);
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
         }
 
         protected void RegisterUnobtrusiveValidateScripts()

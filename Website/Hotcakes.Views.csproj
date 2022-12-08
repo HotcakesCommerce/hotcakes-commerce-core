@@ -294,7 +294,6 @@
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Receipt.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Search.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Search.SearchInput.js" />
-    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\StripeCheckout.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\views.css">
       <DependentUpon>views.less</DependentUpon>
     </Content>
@@ -1562,6 +1561,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Libraries\Hotcakes.Payment\Hotcakes.Payment.csproj">
+      <Project>{4C223AD8-685A-4AAC-8610-1BEC50636203}</Project>
+      <Name>Hotcakes.Payment</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>

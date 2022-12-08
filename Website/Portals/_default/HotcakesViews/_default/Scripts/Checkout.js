@@ -309,7 +309,7 @@
 
             $("#hcSaveNormalizedAction").click(function (e) { Addresses.saveNormalized(e); });
             this.$submitButton.click(function (e) {
-                //$.xhrPool.abortAll();
+                $.xhrPool.abortAll();
                 Addresses.save(e);
             });
         },
@@ -901,7 +901,6 @@
                                         var result = await stripe.confirmCardPayment(clientSecret);
 
                                         if (result.paymentIntent) {
-                                            console.log(result);
                                             Addresses.saveForm();
                                         } else {
                                             Addresses.saveForm();
@@ -914,12 +913,9 @@
                                 }
                             });
                     })
-                    .fail(function (xhr, status, error) {
-                        console.log("xhr: " + xhr);
-                        console.log("status: " + status);
+                    .fail(function (error) {
                         console.log("error: " + error);
-                    })
-                    .always(function () { console.log("Error Always") });
+                    });
             } else {
                 Addresses.saveForm();
             }

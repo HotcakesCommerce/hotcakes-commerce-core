@@ -36,7 +36,7 @@
 <div class="hc-creditcard-form clearfix">
     <input type="hidden" id="aesInitVector" name="aesInitVector" value="@Model.AESEncryptInitVector" />
     <input type="hidden" id="aesKey" name="aesKey" value="@Model.AESEncryptKey" />
-    @if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway.Equals("15011DF5-13DA-42BE-9DFF-31C71ED64D4A"))
+    @if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway.Equals(PaymentGatewayType.Stripe))
     {
         <input type="hidden" id="PaymentIntentId" name="PaymentIntentId" value="@Model.PaymentIntentId" />
         <input type="hidden" id="PaymentIntentClientSecret" name="PaymentIntentClientSecret" value="@Model.PaymentIntentClientSecret" />
