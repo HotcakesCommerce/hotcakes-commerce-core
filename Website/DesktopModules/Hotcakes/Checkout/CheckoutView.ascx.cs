@@ -46,7 +46,7 @@ namespace Hotcakes.Modules.Checkout
             {
                 if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway == PaymentGatewayType.Stripe)
                 {
-                    RegisterExternalScript("https://js.stripe.com/v3/");
+                    RegisterScriptExternal("https://js.stripe.com/v3/");
                 }
                 RegisterViewScript("crypto-js.js");
                 RegisterViewScript("Checkout.js");

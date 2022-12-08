@@ -309,7 +309,7 @@
 
             $("#hcSaveNormalizedAction").click(function (e) { Addresses.saveNormalized(e); });
             this.$submitButton.click(function (e) {
-                //$.xhrPool.abortAll();
+                $.xhrPool.abortAll();
                 Addresses.save(e);
             });
         },
