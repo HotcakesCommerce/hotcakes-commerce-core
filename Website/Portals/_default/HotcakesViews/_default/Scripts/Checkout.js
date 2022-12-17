@@ -1,7 +1,7 @@
 ﻿jQuery(function ($) {
+    const clientSecret = $("#PaymentIntentClientSecret").val()
     const stripePublicKey = $("#StripePublicKey").val();
     const stripe = stripePublicKey ? Stripe(stripePublicKey) : null;
-    const clientSecret = $("#PaymentIntentClientSecret").val()
 
     // Common ----------------------
 
@@ -879,6 +879,7 @@
         $("table.totaltable").attr("class", "table table-striped table-hover totaltable");
     }
 
+
     async function CreatePaymentMethod(clientSecret) {
         var status = await checkPaymentStatus(clientSecret)
         if (status === "requires_payment_method") {
@@ -929,6 +930,7 @@
         const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
         return paymentIntent.status;
     }
+
 
     // Initialization --------------------------
 
