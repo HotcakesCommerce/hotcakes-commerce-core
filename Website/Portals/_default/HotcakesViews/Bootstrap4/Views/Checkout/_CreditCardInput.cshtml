@@ -36,6 +36,12 @@
 <div class="hc-creditcard-form clearfix">
     <input type="hidden" id="aesInitVector" name="aesInitVector" value="@Model.AESEncryptInitVector" />
     <input type="hidden" id="aesKey" name="aesKey" value="@Model.AESEncryptKey" />
+    @if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway.Equals(PaymentGatewayType.Stripe))
+    {
+        <input type="hidden" id="PaymentIntentId" name="PaymentIntentId" value="@Model.PaymentIntentId" />
+        <input type="hidden" id="PaymentIntentClientSecret" name="PaymentIntentClientSecret" value="@Model.PaymentIntentClientSecret" />
+        <input type="hidden" id="StripePublicKey" value="@Model.StripePublicKey" />
+    }
     <div class="form-group row">
         <label class="col-sm-3 offset-sm-1 col-form-label">&nbsp;</label>
         <div class="col-sm-6 offset-sm-0">
@@ -66,11 +72,11 @@
     <div class="form-group row">
         <label class="col-sm-3 offset-sm-1 col-form-label">@Localization.GetString("ExpDate"):</label>
         <div class="col-sm-6 offset-sm-0 form-inline">
-            <select name="ccexpmonth" class="form-control small hc-cc-expmonth">
+            <select id="ccexpmonth" name="ccexpmonth" class="form-control small hc-cc-expmonth">
                 <option value="0">--</option>
                 @Months()
             </select>
-            <select name="ccexpyear" class="form-control medium hc-cc-expyear">
+            <select id="ccexpyear" name="ccexpyear" class="form-control medium hc-cc-expyear">
                 <option value="0">----</option>
                 @Years()
             </select>
