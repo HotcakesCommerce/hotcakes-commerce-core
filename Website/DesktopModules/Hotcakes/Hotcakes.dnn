@@ -312,11 +312,6 @@
             </assembly>
             <assembly>
               <path>bin</path>
-              <name>Hotcakes.Shipping.Ups.Keys.dll</name>
-              <sourceFileName>bin\Hotcakes.Shipping.Ups.Keys.dll</sourceFileName>
-            </assembly>
-            <assembly>
-              <path>bin</path>
               <name>Hotcakes.Commerce.Dnn.dll</name>
               <sourceFileName>bin\Hotcakes.Commerce.Dnn.dll</sourceFileName>
             </assembly>

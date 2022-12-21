@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using Hotcakes.Web.Data;
@@ -405,9 +406,9 @@ namespace Hotcakes.Commerce.Data
 
         protected virtual V FindFirstPoco(Expression<Func<JoinedItem<T, TT>, bool>> predicate)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var item = GetJoinedQuery(s).FirstOrDefault(predicate);
+                var item = GetJoinedQuery(s).AsNoTracking().FirstOrDefault(predicate);
                 return FirstPoco(item);
             }
         }
@@ -426,9 +427,9 @@ namespace Hotcakes.Commerce.Data
         protected virtual List<V> FindListPoco(
             Func<IQueryable<JoinedItem<T, TT>>, IQueryable<JoinedItem<T, TT>>> processQuery)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var items = processQuery(GetJoinedQuery(s)).ToList();
+                var items = processQuery(GetJoinedQuery(s).AsNoTracking()).ToList();
                 return ListPoco(items);
             }
             ;

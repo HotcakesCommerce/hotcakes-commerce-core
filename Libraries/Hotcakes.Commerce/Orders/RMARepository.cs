@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -198,9 +199,9 @@ namespace Hotcakes.Commerce.Orders
 
         public List<RMA> FindByStatusPaged(int pageNumber, int pageSize, ref int totalItems, RMAStatus status)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var query = s.GetQuery();
+                var query = s.GetQuery().AsNoTracking();
 
                 if (status != RMAStatus.None)
                 {

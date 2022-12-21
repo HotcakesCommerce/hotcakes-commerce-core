@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -306,10 +307,11 @@ namespace Hotcakes.Commerce.Orders
 		public List<OrderSnapshot> FindAll()
 		{
             var storeId = Context.CurrentStore.Id;
-			using (var strategy = CreateStrategy())
+			using (var strategy = CreateReadStrategy())
 			{
 				var query = strategy.GetQuery()
-					.Where(y => y.StoreId == storeId)
+                    .AsNoTracking()
+                    .Where(y => y.StoreId == storeId)
 					.OrderBy(y => y.Id);
 
 				return ListPocoSnapshot(query);
@@ -325,10 +327,11 @@ namespace Hotcakes.Commerce.Orders
 		{
             var storeId = Context.CurrentStore.Id;
 
-			using (var strategy = CreateStrategy())
+			using (var strategy = CreateReadStrategy())
 			{
 				var query = strategy.GetQuery()
-					.Where(y => y.StoreId == storeId)
+                    .AsNoTracking()
+                    .Where(y => y.StoreId == storeId)
 					.OrderBy(y => y.Id);
 
 				var pagedQuery = GetPagedItems(query, pageNumber, pageSize);
@@ -339,10 +342,11 @@ namespace Hotcakes.Commerce.Orders
 
 		public List<OrderSnapshot> FindAllPagedForAllStores(int pageNumber, int pageSize)
 		{
-			using (var strategy = CreateStrategy())
+			using (var strategy = CreateReadStrategy())
 			{
 				var query = strategy.GetQuery()
-					.OrderBy(y => y.Id);
+                    .AsNoTracking()
+                    .OrderBy(y => y.Id);
 
 				var pagedQuery = GetPagedItems(query, pageNumber, pageSize);
 
@@ -355,10 +359,11 @@ namespace Hotcakes.Commerce.Orders
             var storeId = Context.CurrentStore.Id;
             var guids = bvins.Select(b => DataTypeHelper.BvinToGuid(b)).ToList();
 
-			using (var strategy = CreateStrategy())
+			using (var strategy = CreateReadStrategy())
 			{
 				var query = strategy.GetQuery()
-					.Where(y => guids.Contains(y.bvin))
+                    .AsNoTracking()
+                    .Where(y => guids.Contains(y.bvin))
 					.Where(y => y.StoreId == storeId)
 					.OrderBy(y => y.Id);
 
@@ -375,10 +380,11 @@ namespace Hotcakes.Commerce.Orders
         public List<OrderSnapshot> GetReadyForPaymentPaged(DateTime StartDate, DateTime endDate, int pageNumber,
             int pageSize, ref int rowCount)
 		{
-			using (var strategy = CreateStrategy())
+			using (var strategy = CreateReadStrategy())
 			{
 				var query = strategy.GetQuery()
-					.Where(y => y.StoreId == Context.CurrentStore.Id)
+                    .AsNoTracking()
+                    .Where(y => y.StoreId == Context.CurrentStore.Id)
 					.Where(y => y.TimeOfOrder >= StartDate && y.TimeOfOrder <= endDate);
 
 				// Is Placed
@@ -406,10 +412,11 @@ namespace Hotcakes.Commerce.Orders
         public List<OrderSnapshot> GetReadyForShippingPaged(DateTime StartDate, DateTime endDate, int pageNumber,
             int pageSize, ref int rowCount)
 		{
-			using (var strategy = CreateStrategy())
+			using (var strategy = CreateReadStrategy())
 			{
 				var query = strategy.GetQuery()
-					.Where(y => y.StoreId == Context.CurrentStore.Id)
+                    .AsNoTracking()
+                    .Where(y => y.StoreId == Context.CurrentStore.Id)
 					.Where(y => y.TimeOfOrder >= StartDate && y.TimeOfOrder <= endDate);
 
 				// Is Placed
@@ -438,10 +445,11 @@ namespace Hotcakes.Commerce.Orders
         public List<OrderSnapshot> FindByCriteriaPaged(OrderSearchCriteria criteria, int pageNumber, int pageSize,
             ref int rowCount)
 		{
-			using (var strategy = CreateStrategy())
+			using (var strategy = CreateReadStrategy())
 			{
 				var query = strategy.GetQuery()
-					.Where(y => y.StoreId == Context.CurrentStore.Id)
+                    .AsNoTracking()
+                    .Where(y => y.StoreId == Context.CurrentStore.Id)
 					.Where(y => y.TimeOfOrder >= criteria.StartDateUtc && y.TimeOfOrder <= criteria.EndDateUtc);
 
 				//if (criteria.OrderNumber != string.Empty)
@@ -563,10 +571,11 @@ namespace Hotcakes.Commerce.Orders
 
 		public int GetOrdersReadyForPaymentCount(DateTime startDate, DateTime endDate)
 		{
-			using (var strategy = CreateStrategy())
+			using (var strategy = CreateReadStrategy())
 			{
 				var query = strategy.GetQuery()
-					.Where(y => y.StoreId == Context.CurrentStore.Id)
+                    .AsNoTracking()
+                    .Where(y => y.StoreId == Context.CurrentStore.Id)
 					.Where(y => y.TimeOfOrder >= startDate && y.TimeOfOrder <= endDate);
 
 				// Is Placed
@@ -587,10 +596,11 @@ namespace Hotcakes.Commerce.Orders
 
 		public int GetOrdersReadyForShippingCount(DateTime startDate, DateTime endDate)
 		{
-			using (var strategy = CreateStrategy())
+			using (var strategy = CreateReadStrategy())
 			{
 				var query = strategy.GetQuery()
-					.Where(y => y.StoreId == Context.CurrentStore.Id)
+                    .AsNoTracking()
+                    .Where(y => y.StoreId == Context.CurrentStore.Id)
 					.Where(y => y.TimeOfOrder >= startDate && y.TimeOfOrder <= endDate);
 
 				// Is Placed
@@ -611,10 +621,11 @@ namespace Hotcakes.Commerce.Orders
 
 		public int CountByCriteria(OrderSearchCriteria criteria)
 		{
-			using (var strategy = CreateStrategy())
+			using (var strategy = CreateReadStrategy())
 			{
 				var query = strategy.GetQuery()
-					.Where(y => y.StoreId == Context.CurrentStore.Id)
+                    .AsNoTracking()
+                    .Where(y => y.StoreId == Context.CurrentStore.Id)
 					.Where(y => y.TimeOfOrder >= criteria.StartDateUtc && y.TimeOfOrder <= criteria.EndDateUtc);
 
 				// Order Number
@@ -672,10 +683,11 @@ namespace Hotcakes.Commerce.Orders
 
 		public decimal FindTotalSpentByUser(string userId, long storeId)
 		{
-			using (var strategy = CreateStrategy())
+			using (var strategy = CreateReadStrategy())
 			{
 				return strategy.GetQuery()
-					.Where(y => y.UserId == userId)
+                    .AsNoTracking()
+                    .Where(y => y.UserId == userId)
 					.Where(y => y.StoreId == storeId)
 					.Where(y => y.IsPlaced == 1)
 					.Sum(y => y.GrandTotal);
@@ -685,10 +697,11 @@ namespace Hotcakes.Commerce.Orders
 		
 		public List<OrderSnapshot> FindByUserId(string userId, int pageNumber, int pageSize, ref int totalCount)
 		{
-			using (var strategy = CreateStrategy())
+			using (var strategy = CreateReadStrategy())
 			{
 				var query = strategy.GetQuery()
-						.Where(y => y.UserId == userId)
+                        .AsNoTracking()
+                        .Where(y => y.UserId == userId)
 						.Where(y => y.StoreId == Context.CurrentStore.Id)
 						//If order has number assigned then independent of its status or IsPlaced it should appear in list
 						.Where( y => y.OrderNumber.Trim().Length > 0)
@@ -719,10 +732,11 @@ namespace Hotcakes.Commerce.Orders
         public List<OrderSnapshot> FindByIdRange(int startId, int endId, int pageNumber, int pageSize,
             ref int totalCount)
 		{
-			using (var strategy = CreateStrategy())
+			using (var strategy = CreateReadStrategy())
 			{
 				var query = strategy.GetQuery()
-							.Where(y => y.StoreId == Context.CurrentStore.Id)
+                            .AsNoTracking()
+                            .Where(y => y.StoreId == Context.CurrentStore.Id)
 							.Where(y => y.Id >= startId && y.Id <= endId)
 							.OrderBy(y => y.Id);
 
@@ -752,10 +766,11 @@ namespace Hotcakes.Commerce.Orders
         public List<Order> FindAbandonedCarts(DateTime startDate, DateTime endDate, int pageNumber, int pageSize,
             out int totalCount)
 		{
-			using (var strategy = CreateStrategy())
+			using (var strategy = CreateReadStrategy())
 			{
 				var query = strategy.GetQuery()
-						.Where(o => o.StoreId == Context.CurrentStore.Id)
+                        .AsNoTracking()
+                        .Where(o => o.StoreId == Context.CurrentStore.Id)
 						.Where(o => o.IsPlaced == 0)
                     .Where(o => o.hcc_LineItem.Any())
 						.Where(o => o.TimeOfOrder > startDate)
@@ -771,10 +786,11 @@ namespace Hotcakes.Commerce.Orders
 
 		public List<string> FindAbandonedCartsUsers(DateTime startDate, DateTime endDate)
 		{
-			using (var strategy = CreateStrategy())
+			using (var strategy = CreateReadStrategy())
 			{
 				return strategy.GetQuery()
-						.Where(o => o.StoreId == Context.CurrentStore.Id)
+                        .AsNoTracking()
+                        .Where(o => o.StoreId == Context.CurrentStore.Id)
 						.Where(o => o.IsPlaced == 0)
                     .Where(o => o.hcc_LineItem.Any())
 						.Where(o => o.TimeOfOrder > startDate)
@@ -789,10 +805,11 @@ namespace Hotcakes.Commerce.Orders
 		public List<string> FindAbandonedCartsUsers(DateTime startDate, DateTime endDate, string productId)
 		{
 			var productGuid = DataTypeHelper.BvinToGuid(productId);
-			using (var strategy = CreateStrategy())
+			using (var strategy = CreateReadStrategy())
 			{
 				return strategy.GetQuery()
-						.Where(o => o.StoreId == Context.CurrentStore.Id)
+                        .AsNoTracking()
+                        .Where(o => o.StoreId == Context.CurrentStore.Id)
 						.Where(o => o.IsPlaced == 0)
 						.Where(o => o.hcc_LineItem.Any(li => li.ProductId == productGuid))
 						.Where(o => o.TimeOfOrder > startDate)
@@ -818,10 +835,11 @@ namespace Hotcakes.Commerce.Orders
 		{
             var matchCode = couponCode.Trim().ToUpperInvariant();
 
-			using (var strategy = CreateStrategy())
+			using (var strategy = CreateReadStrategy())
 			{
 				var query = strategy.GetQuery()
-					.Where(y => y.StoreId == Context.CurrentStore.Id)
+                    .AsNoTracking()
+                    .Where(y => y.StoreId == Context.CurrentStore.Id)
 					.Where(y => y.TimeOfOrder >= startDateUtc && y.TimeOfOrder <= endDateUtc)
                     .Where(y => y.hcc_OrderCoupon.Any(x => x.CouponCode == matchCode));
 

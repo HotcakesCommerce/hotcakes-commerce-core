@@ -163,5 +163,6 @@ namespace Hotcakes.Commerce.Common
         public const string TAG_IOGPRICEAMOUNT = "<meta property=\"og:price:amount\" content=\"{0}\" />";
         public const string TAG_IOGPRICECURRENCY = "<meta property=\"og:price:currency\" content=\"{0}\" />";
         #endregion
+
     }
 }

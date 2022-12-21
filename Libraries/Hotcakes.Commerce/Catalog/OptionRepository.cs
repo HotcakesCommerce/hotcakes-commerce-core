@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using Hotcakes.Commerce.Data;
@@ -284,9 +285,9 @@ namespace Hotcakes.Commerce.Catalog
         public Option FindSharedOptionByNameAndType(string name, OptionTypes optionType)
         {
             var storeId = Context.CurrentStore.Id;
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var option = GetJoinedQuery(s).FirstOrDefault(y => y.Item.StoreId == storeId
+                var option = GetJoinedQuery(s).AsNoTracking().FirstOrDefault(y => y.Item.StoreId == storeId
                                                                    && y.Item.IsShared
                                                                    &&
                                                                    y.ItemTranslation.Name.Equals(name,
@@ -310,9 +311,10 @@ namespace Hotcakes.Commerce.Catalog
                 .Select(bvin => DataTypeHelper.BvinToGuid(bvin))
                 .ToList();
 
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var items = GetJoinedQuery(s)
+                    .AsNoTracking()
                     .Where(y => guids.Contains(y.Item.bvin))
                     .Where(y => y.Item.StoreId == storeId)
                     .OrderBy(y => y.Item.bvin);

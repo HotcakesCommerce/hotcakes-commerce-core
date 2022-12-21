@@ -32,8 +32,14 @@ using com.paypal.soap.api;
 using System.Web;
 using Hotcakes.Web.Logging;
 using System.Globalization;
+using System.Net;
+using System.Threading.Tasks;
+using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Payment;
+using PayPalCheckoutSdk.Core;
+using PayPalCheckoutSdk.Orders;
+using PayPalHttp;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
@@ -54,7 +60,7 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             {
                 try
                 {
-                    PayPalAPI ppAPI = Utilities.PaypalExpressUtilities.GetPaypalAPI(context.HccApp.CurrentStore);
+                    RestPayPalApi replacePayPal = Utilities.PaypalExpressUtilities.GetRestPaypalAPI(context.HccApp.CurrentStore);
 
                     string cartReturnUrl = HccUrlBuilder.RouteHccUrl(HccRoute.ThirdPartyPayment, null, Uri.UriSchemeHttps);
                     string cartCancelUrl = HccUrlBuilder.RouteHccUrl(HccRoute.Checkout, null, Uri.UriSchemeHttps);
@@ -62,16 +68,16 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
                     EventLog.LogEvent("PayPal Express Checkout", "CartCancelUrl=" + cartCancelUrl, EventLogSeverity.Information);
                     EventLog.LogEvent("PayPal Express Checkout", "CartReturnUrl=" + cartReturnUrl, EventLogSeverity.Information);
 
-                    PaymentActionCodeType mode = PaymentActionCodeType.Authorization;
+                    string mode = PayPalConstants.PAYMENT_MODE_AUTHORIZE;
                     if (!context.HccApp.CurrentStore.Settings.PayPal.ExpressAuthorizeOnly)
 					{
-                        mode = PaymentActionCodeType.Sale;
+                        mode = PayPalConstants.PAYMENT_MODE_CAPTURE;
                     }
 
                     // Accelerated boarding
                     if (string.IsNullOrWhiteSpace(context.HccApp.CurrentStore.Settings.PayPal.UserName))
 					{
-                        mode = PaymentActionCodeType.Sale;
+                        mode = PayPalConstants.PAYMENT_MODE_CAPTURE;
 					}
 
 					var solutionType = context.HccApp.CurrentStore.Settings.PayPal.RequirePayPalAccount ? SolutionTypeType.Mark : SolutionTypeType.Sole;
@@ -87,7 +93,7 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 
 					PaymentDetailsItemType[] itemsDetails = GetOrderItemsDetails(context);
 
-					SetExpressCheckoutResponseType expressResponse;
+					PayPalHttp.HttpResponse expressResponse;
                     if (addressSupplied)
                     {
                         Contacts.Address address = context.Order.ShippingAddress;
@@ -101,12 +107,14 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 
                         if (address.CountryData != null)
                         {
-							var itemsTotalWithoutTax = context.Order.TotalOrderAfterDiscounts;
+                            var ISOCode = address.CountryData.IsoCode;
+
+                            var itemsTotalWithoutTax = context.Order.TotalOrderAfterDiscounts;
 							if (context.HccApp.CurrentStore.Settings.ApplyVATRules)
 							{
 								itemsTotalWithoutTax -= context.Order.ItemsTax;
 							}
-							string itemsTotal = itemsTotalWithoutTax.ToString("N", CultureInfo.InvariantCulture);
+                            string itemsTotal = itemsTotalWithoutTax.ToString("N", CultureInfo.InvariantCulture);
 							string taxTotal = context.Order.TotalTax.ToString("N", CultureInfo.InvariantCulture);
 							var shippingTotalWithoutTax = context.Order.TotalShippingAfterDiscounts;
 							if (context.HccApp.CurrentStore.Settings.ApplyVATRules)
@@ -116,27 +124,27 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 							string shippingTotal = shippingTotalWithoutTax.ToString("N", CultureInfo.InvariantCulture);
 
 							string orderTotal = context.Order.TotalGrand.ToString("N", CultureInfo.InvariantCulture);
-                            expressResponse = ppAPI.SetExpressCheckout(
-								itemsDetails,
-								itemsTotal,
-								taxTotal,
-								shippingTotal,
-								orderTotal,
-                                cartReturnUrl,
-                                cartCancelUrl,
-                                mode,
-                                PayPalAPI.GetCurrencyCodeType(context.HccApp.CurrentStore.Settings.PayPal.Currency),
-								solutionType,
-                                address.FirstName + " " + address.LastName,
-                                address.CountryData.IsoCode,
-                                address.Line1,
-                                address.Line2,
-                                address.City,
-                                address.RegionBvin,
-                                address.PostalCode,
-                                address.Phone,
-                                context.Order.OrderNumber + Guid.NewGuid().ToString(),
-								isNonShipping);
+                            expressResponse = System.Threading.Tasks.Task.Run(() => replacePayPal.createOrder(
+                                                    itemsDetails,
+                                                    itemsTotal,
+                                                    taxTotal,
+                                                    shippingTotal,
+                                                    orderTotal,
+                                                    cartReturnUrl,
+                                                    cartCancelUrl,
+                                                    mode,
+                                                    context.HccApp.CurrentStore.Settings.PayPal.Currency,
+                                                    solutionType,
+                                                    ($"{address.FirstName} {address.LastName}"),
+                                                    ISOCode,
+                                                    address.Line1,
+                                                    address.Line2,
+                                                    address.City,
+                                                    address.RegionBvin,
+                                                    address.PostalCode,
+                                                    address.Phone,
+                                                    context.Order.OrderNumber + Guid.NewGuid().ToString(),
+                                                    isNonShipping)).GetAwaiter().GetResult(); 
                             if (expressResponse == null)
                             {
                                 EventLog.LogEvent("PayPal Express Checkout", "Express Response Was Null!", EventLogSeverity.Error);
@@ -163,26 +171,27 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 						}
 						string itemsTotal = itemsTotalWithoutTax.ToString("N", CultureInfo.InvariantCulture);
 						string orderTotal = context.Order.TotalOrderAfterDiscounts.ToString("N", CultureInfo.InvariantCulture);
-						expressResponse = ppAPI.SetExpressCheckout(itemsDetails,
-																itemsTotal,
-																taxTotal,
-																orderTotal,
-                                                                cartReturnUrl,
-                                                                cartCancelUrl,
-                                                                mode,
-                                                                PayPalAPI.GetCurrencyCodeType(context.HccApp.CurrentStore.Settings.PayPal.Currency),
-																solutionType,
-                                                                context.Order.OrderNumber + Guid.NewGuid().ToString(),
-																isNonShipping);
+						expressResponse = System.Threading.Tasks.Task.Run(() => replacePayPal.createOrder(itemsDetails,
+                            itemsTotal,
+                            taxTotal,
+                            orderTotal,
+                            cartReturnUrl,
+                            cartCancelUrl,
+                            mode,
+                            context.HccApp.CurrentStore.Settings.PayPal.Currency,
+                            solutionType,
+                            context.Order.OrderNumber + Guid.NewGuid().ToString(),
+                            isNonShipping)).GetAwaiter().GetResult();
+                        
                         if (expressResponse == null)
                         {
                             EventLog.LogEvent("PayPal Express Checkout", "Express Response2 Was Null!", EventLogSeverity.Error);
                         }
                     }
 
-                    if (expressResponse.Ack == AckCodeType.Success || expressResponse.Ack == AckCodeType.SuccessWithWarning)
+                    if (expressResponse.StatusCode == HttpStatusCode.Created /*|| expressResponse.Ack == AckCodeType.SuccessWithWarning*/)
                     {
-                        context.Order.ThirdPartyOrderId = expressResponse.Token;
+                        context.Order.ThirdPartyOrderId = expressResponse.Result<Order>().Id;
 
                         // Recording of this info is handled on the paypal express
                         // checkout page instead of here.
@@ -193,38 +202,26 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 
                         Orders.OrderNote note = new Orders.OrderNote();
                         note.IsPublic = false;
-                        note.Note = "Paypal Order Accepted With Paypal Order Number: " + expressResponse.Token;
+                        note.Note = "Paypal Order Accepted With Paypal Order Number: " + expressResponse.Result<Order>().Id;
                         context.Order.Notes.Add(note);
                         if (context.HccApp.OrderServices.Orders.Update(context.Order))
                         {
 							string urlTemplate;
                             if (string.Compare(context.HccApp.CurrentStore.Settings.PayPal.Mode, "Live", true) == 0)
                             {
-								urlTemplate = "https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token={0}";
+								urlTemplate = PayPalConstants.LIVE_URL;
                             }
                             else
                             {
-								urlTemplate = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token={0}";
+								urlTemplate = PayPalConstants.SANDBOX_URL;
                             }
 							HttpContextBase httpContext = new HccHttpContextWrapper(HttpContext.Current);
-                            httpContext.Response.Redirect(string.Format(urlTemplate, expressResponse.Token), true);
+                            httpContext.Response.Redirect(string.Format(urlTemplate, expressResponse.Result<Order>().Id), true);
                         }
                         return true;
                     }
                     else
                     {
-                        foreach (ErrorType ppError in expressResponse.Errors)
-                        {
-                            context.Errors.Add(new WorkflowMessage(ppError.ErrorCode, ppError.ShortMessage, true));
-
-                            //create a note to save the paypal error info onto the order
-                            Orders.OrderNote note = new Orders.OrderNote();
-                            note.IsPublic = false;
-                            note.Note = "Paypal error number: " + ppError.ErrorCode + " Paypal Error: '" + ppError.ShortMessage + "' Message: '" + ppError.LongMessage;
-                            context.Order.Notes.Add(note);
-
-                            EventLog.LogEvent("Paypal error number: " + ppError.ErrorCode, "Paypal Error: '" + ppError.ShortMessage + "' Message: '" + ppError.LongMessage + "' " + " Values passed to SetExpressCheckout: Total=" + string.Format("{0:c}", context.Order.TotalOrderBeforeDiscounts) + " Cart Return Url: " + cartReturnUrl + " Cart Cancel Url: " + cartCancelUrl, EventLogSeverity.Error);
-                        }
                         context.Errors.Add(new WorkflowMessage("Paypal checkout error", GlobalLocalization.GetString("PaypalCheckoutCustomerError"), true));
                         return false;
                     }

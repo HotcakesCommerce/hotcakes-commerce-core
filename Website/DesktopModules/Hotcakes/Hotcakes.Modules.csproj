@@ -128,6 +128,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PayPalCheckoutSdk, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\PayPalCheckoutSdk.1.0.4\lib\netstandard2.0\PayPalCheckoutSdk.dll</HintPath>
+    </Reference>
+    <Reference Include="PayPalHttp-Dotnet, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\PayPalHttp.1.0.1\lib\netstandard2.0\PayPalHttp-Dotnet.dll</HintPath>
+    </Reference>
     <Reference Include="paypal_base">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Misc\paypal_base.dll</HintPath>
@@ -999,7 +1005,9 @@
     <Content Include="Core\Admin\Parts\CreditCardGateways\PayLeap\App_LocalResources\Edit.ascx.resx" />
     <Content Include="Core\Admin\Parts\CreditCardGateways\PayPal Payments Pro\App_LocalResources\Edit.ascx.resx" />
     <Content Include="Core\Admin\Parts\CreditCardGateways\Authorize.Net\App_LocalResources\Edit.ascx.resx" />
-    <Content Include="Core\Admin\Parts\PaymentMethods\PaypalExpress\App_LocalResources\Edit.ascx.resx" />
+    <Content Include="Core\Admin\Parts\PaymentMethods\PaypalExpress\App_LocalResources\Edit.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Core\Admin\Parts\ShippingZones\App_LocalResources\Edit.ascx.resx" />
     <Content Include="Core\Admin\Parts\PaymentMethods\CreditCard\App_LocalResources\Edit.ascx.resx" />
     <Content Include="Core\Admin\People\App_LocalResources\Vendors.aspx.resx" />

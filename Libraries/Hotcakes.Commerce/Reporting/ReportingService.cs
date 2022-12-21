@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.SqlServer;
 using System.Globalization;
@@ -77,13 +78,14 @@ namespace Hotcakes.Commerce.Reporting
         {
             var data = new OrdersSummaryData();
 
-            using (var db = CreateOrderStrategy())
+            using (var db = CreateReadOrderStrategy())
             {
                 var storeId = Context.CurrentStore.Id;
 
                 var summList =
                     db.GetQuery(
                         o => o.StoreId == storeId && o.IsPlaced == 1 && o.StatusCode != OrderStatusCode.Cancelled)
+                        .AsNoTracking()
                         .GroupBy(o => new {o.StatusCode})
                         .Select(g => new {g.Key.StatusCode, OrderCount = g.Count()})
                         .OrderBy(o => o.StatusCode)
@@ -112,7 +114,7 @@ namespace Hotcakes.Commerce.Reporting
         {
             using (MiniProfiler.Current.Step("GetSalesInfo"))
             {
-                using (var db = CreateOrderStrategy())
+                using (var db = CreateReadOrderStrategy())
                 {
                     var storeId = Context.CurrentStore.Id;
                     var payedStatuses = new[] {(int) OrderPaymentStatus.Paid, (int) OrderPaymentStatus.Overpaid};
@@ -124,12 +126,12 @@ namespace Hotcakes.Commerce.Reporting
                         db.GetQuery(
                             o =>
                                 o.StoreId == storeId && o.TimeOfOrder >= range.StartDate &&
-                                o.TimeOfOrder <= range.EndDate);
+                                o.TimeOfOrder <= range.EndDate).AsNoTracking();
                     var qOrdersPrev =
                         db.GetQuery(
                             o =>
                                 o.StoreId == storeId && o.TimeOfOrder >= prevRange.StartDate &&
-                                o.TimeOfOrder <= prevRange.EndDate);
+                                o.TimeOfOrder <= prevRange.EndDate).AsNoTracking();
                     var qPlacedOrders = qOrders.Where(o => o.IsPlaced == 1 && o.StatusCode != OrderStatusCode.Cancelled)
                         .Where(o => payedStatuses.Contains(o.PaymentStatus));
                     var qTrans = GetFilteredTransactions(db.GetQuery<hcc_OrderTransactions>(), range);
@@ -196,15 +198,15 @@ namespace Hotcakes.Commerce.Reporting
                 var range = DateHelper.GetDateRange(period);
                 var prevRange = DateHelper.GetDateRange(period, true);
 
-                using (var db = CreateOrderStrategy())
+                using (var db = CreateReadOrderStrategy())
                 {
                     var qOrders = db.GetQuery(o => o.StoreId == storeId
                                                    && payedStatuses.Contains(o.PaymentStatus)
-                                                   && o.TimeOfOrder >= range.StartDate && o.TimeOfOrder <= range.EndDate);
+                                                   && o.TimeOfOrder >= range.StartDate && o.TimeOfOrder <= range.EndDate).AsNoTracking();
                     var qOrdersPrev = db.GetQuery(o => o.StoreId == storeId
                                                        && payedStatuses.Contains(o.PaymentStatus)
                                                        && o.TimeOfOrder >= prevRange.StartDate &&
-                                                       o.TimeOfOrder <= prevRange.EndDate);
+                                                       o.TimeOfOrder <= prevRange.EndDate).AsNoTracking();
                     var qPlacedOrders = qOrders.Where(o => o.IsPlaced == 1 && o.StatusCode != OrderStatusCode.Cancelled);
 
                     // Sales by Device
@@ -240,7 +242,7 @@ namespace Hotcakes.Commerce.Reporting
                     }
 
                     // Revenue vs Units Sold
-                    var qTrans = GetFilteredTransactions(db.GetQuery<hcc_OrderTransactions>(), range);
+                    var qTrans = GetFilteredTransactions(db.GetQuery<hcc_OrderTransactions>().AsNoTracking(), range);
                     var totalSum = qTrans.Sum(t => (decimal?) t.Amount) ?? 0;
                     var totalCost = qPlacedOrders
                         .Join(db.GetQuery<hcc_LineItem>(), o => o.bvin, li => li.OrderBvin, (o, li) => li)
@@ -274,7 +276,7 @@ namespace Hotcakes.Commerce.Reporting
 
                     // Gist Cards
                     var qGiftCards =
-                        db.GetQuery<hcc_GiftCard>()
+                        db.GetQuery<hcc_GiftCard>().AsNoTracking()
                             .Where(
                                 g =>
                                     g.StoreId == storeId && g.IssueDateUtc >= range.StartDate &&
@@ -287,7 +289,7 @@ namespace Hotcakes.Commerce.Reporting
 
                     // Rewards Points
                     var qPoints =
-                        db.GetQuery<hcc_RewardsPoints>()
+                        db.GetQuery<hcc_RewardsPoints>().AsNoTracking()
                             .Where(
                                 p =>
                                     p.StoreId == storeId && p.TransactionTime >= range.StartDate &&
@@ -315,7 +317,7 @@ namespace Hotcakes.Commerce.Reporting
             {
                 List<Top5Item> items = null;
 
-                using (var db = CreateOrderStrategy())
+                using (var db = CreateReadOrderStrategy())
                 {
                     IQueryable<Top5Item> q = null;
 
@@ -323,7 +325,7 @@ namespace Hotcakes.Commerce.Reporting
                     {
                         case Top5ProductMode.Amount:
                         case Top5ProductMode.Quantity:
-                            q = db.GetQuery()
+                            q = db.GetQuery().AsNoTracking()
                                 .Where(
                                     o =>
                                         o.StoreId == Context.CurrentStore.Id && o.IsPlaced == 1 &&
@@ -341,9 +343,9 @@ namespace Hotcakes.Commerce.Reporting
                             break;
                         case Top5ProductMode.Rating:
                         case Top5ProductMode.Reviews:
-                            var qReview = db.GetQuery<hcc_ProductReview>().Where(r => r.Approved == 1);
+                            var qReview = db.GetQuery<hcc_ProductReview>().AsNoTracking().Where(r => r.Approved == 1);
 
-                            q = db.GetQuery()
+                            q = db.GetQuery().AsNoTracking()
                                 .Where(
                                     o =>
                                         o.StoreId == Context.CurrentStore.Id && o.IsPlaced == 1 &&
@@ -396,9 +398,9 @@ namespace Hotcakes.Commerce.Reporting
             {
                 List<Top5Item> items = null;
 
-                using (var db = CreateOrderStrategy())
+                using (var db = CreateReadOrderStrategy())
                 {
-                    var q = db.GetQuery().Where(o => o.StoreId == Context.CurrentStore.Id && o.IsPlaced != 1)
+                    var q = db.GetQuery().AsNoTracking().Where(o => o.StoreId == Context.CurrentStore.Id && o.IsPlaced != 1)
                         .Join(db.GetQuery<hcc_LineItem>(), o => o.bvin, li => li.OrderBvin, (o, li) => li)
                         .GroupBy(li => new {li.ProductId, li.ProductName})
                         .Select(g => new Top5Item
@@ -429,7 +431,7 @@ namespace Hotcakes.Commerce.Reporting
                 var storeId = Context.CurrentStore.Id;
                 List<Top5Item> items = null;
 
-                using (var db = CreateOrderStrategy())
+                using (var db = CreateReadOrderStrategy())
                 {
                     IQueryable<Top5Item> q = null;
 
@@ -440,6 +442,7 @@ namespace Hotcakes.Commerce.Reporting
                             q = db.GetQuery(
                                 o =>
                                     o.StoreId == storeId && o.IsPlaced == 1 && o.StatusCode != OrderStatusCode.Cancelled)
+                                .AsNoTracking()
                                 .GroupBy(o => new {o.UserId, o.UserEmail})
                                 .Select(g => new Top5Item
                                 {
@@ -451,6 +454,7 @@ namespace Hotcakes.Commerce.Reporting
                             break;
                         case Top5CustomerMode.Activity:
                             q = db.GetQuery<hcc_AnalyticsEvent>(a => a.StoreId == storeId && a.UserId != "")
+                                .AsNoTracking()
                                 .GroupBy(o => o.UserId)
                                 .Select(g => new Top5Item
                                 {
@@ -460,6 +464,7 @@ namespace Hotcakes.Commerce.Reporting
                             break;
                         case Top5CustomerMode.Abandoned:
                             q = db.GetQuery()
+                                .AsNoTracking()
                                 .Where(
                                     o => o.StoreId == Context.CurrentStore.Id && o.IsPlaced == 0 && o.hcc_LineItem.Any())
                                 .GroupBy(o => new {o.UserId, o.UserEmail})
@@ -516,9 +521,10 @@ namespace Hotcakes.Commerce.Reporting
             {
                 List<Top5Item> items = null;
 
-                using (var db = CreateOrderStrategy())
+                using (var db = CreateReadOrderStrategy())
                 {
                     var q = db.GetQuery<hcc_SearchQuery>().Where(sq => sq.StoreId == Context.CurrentStore.Id)
+                        .AsNoTracking()
                         .GroupBy(sq => sq.QueryPhrase)
                         .Select(g => new Top5Item
                         {
@@ -557,14 +563,14 @@ namespace Hotcakes.Commerce.Reporting
             {
                 List<Top5Item> items = null;
 
-                using (var db = CreateOrderStrategy())
+                using (var db = CreateReadOrderStrategy())
                 {
                     IQueryable<Top5Item> q = null;
 
                     switch (type)
                     {
                         case Top5VendorType.Vendors:
-                            q = db.GetQuery().Where(o => o.IsPlaced == 1 && o.StatusCode != OrderStatusCode.Cancelled)
+                            q = db.GetQuery().AsNoTracking().Where(o => o.IsPlaced == 1 && o.StatusCode != OrderStatusCode.Cancelled)
                                 .Join(db.GetQuery<hcc_LineItem>(), o => o.bvin, l => l.OrderBvin, (o, l) => l)
                                 .Join(db.GetQuery<hcc_Product>(), li => li.ProductId, p => p.bvin,
                                     (li, p) => new {li, p})
@@ -581,7 +587,7 @@ namespace Hotcakes.Commerce.Reporting
 
                             break;
                         case Top5VendorType.Manufacturers:
-                            q = db.GetQuery().Where(o => o.IsPlaced == 1 && o.StatusCode != OrderStatusCode.Cancelled)
+                            q = db.GetQuery().AsNoTracking().Where(o => o.IsPlaced == 1 && o.StatusCode != OrderStatusCode.Cancelled)
                                 .Join(db.GetQuery<hcc_LineItem>(), o => o.bvin, l => l.OrderBvin, (o, l) => l)
                                 .Join(db.GetQuery<hcc_Product>(), li => li.ProductId, p => p.bvin,
                                     (li, p) => new {li, p})
@@ -621,7 +627,7 @@ namespace Hotcakes.Commerce.Reporting
                 var storeId = Context.CurrentStore.Id;
                 List<AffiliateItem> items = null;
 
-                using (var db = CreateOrderStrategy())
+                using (var db = CreateReadOrderStrategy())
                 {
                     IQueryable<AffiliateItem> q = null;
 
@@ -656,7 +662,7 @@ namespace Hotcakes.Commerce.Reporting
                             break;
                     }
 
-                    items = q.Take(5).ToList();
+                    items = q.AsNoTracking().Take(5).ToList();
 
                     var membershipServices = Factory.CreateService<MembershipServices>(Context);
                     var users = membershipServices.Customers.FindMany(items.Select(i => i.UserId.ToString()).ToList());
@@ -701,9 +707,10 @@ namespace Hotcakes.Commerce.Reporting
             var take = pageSize;
             var skip = (pageNumber - 1)*pageSize;
 
-            using (var db = CreateOrderStrategy())
+            using (var db = CreateReadOrderStrategy())
             {
                 var items = db.GetQuery<hcc_Order>()
+                    .AsNoTracking()
                     .Where(o => o.StoreId == Context.CurrentStore.Id)
                     .Where(o => o.IsPlaced == 0)
                     .Where(o => o.hcc_LineItem.Count() > 0)
@@ -734,7 +741,7 @@ namespace Hotcakes.Commerce.Reporting
         {
             using (MiniProfiler.Current.Step("GetProductPerformance"))
             {
-                using (var db = CreateOrderStrategy())
+                using (var db = CreateReadOrderStrategy())
                 {
                     var storeId = Context.CurrentStore.Id;
                     var productGuid = DataTypeHelper.BvinToGuid(productId);
@@ -745,7 +752,7 @@ namespace Hotcakes.Commerce.Reporting
 
                     var range = DateHelper.GetDateRange(period);
                     var qOrders = db.GetQuery(o => o.StoreId == storeId
-                                                   && o.TimeOfOrder >= range.StartDate && o.TimeOfOrder <= range.EndDate);
+                                                   && o.TimeOfOrder >= range.StartDate && o.TimeOfOrder <= range.EndDate).AsNoTracking();
                     var qPuchasedItems = qOrders
                         .Where(o => payedStatuses.Contains(o.PaymentStatus))
                         .Where(o => o.IsPlaced == 1 && o.StatusCode != OrderStatusCode.Cancelled)
@@ -759,6 +766,7 @@ namespace Hotcakes.Commerce.Reporting
                         .SelectMany(o => o.hcc_LineItem)
                         .Where(li => li.ProductId == productGuid);
                     var qAnalyticsEvents = db.GetQuery<hcc_AnalyticsEvent>()
+                        .AsNoTracking()
                         .Where(
                             ae =>
                                 ae.StoreId == storeId && ae.DateTime >= range.StartDate && ae.DateTime <= range.EndDate)
@@ -767,6 +775,7 @@ namespace Hotcakes.Commerce.Reporting
                                      || ae.Action == ActionTypes.ProductCopyChanged.ToString()
                                      || ae.Action == ActionTypes.ProductPriceChanged.ToString());
                     var qViewEvents = db.GetQuery<hcc_AnalyticsEvent>()
+                        .AsNoTracking()
                         .Where(
                             ae =>
                                 ae.StoreId == storeId && ae.DateTime >= range.StartDate && ae.DateTime <= range.EndDate)
@@ -780,7 +789,7 @@ namespace Hotcakes.Commerce.Reporting
                     var previousRange = DateHelper.GetDateRange(period, true);
                     var qPrevOrders = db.GetQuery(o => o.StoreId == storeId
                                                        && o.TimeOfOrder >= previousRange.StartDate &&
-                                                       o.TimeOfOrder <= previousRange.EndDate);
+                                                       o.TimeOfOrder <= previousRange.EndDate).AsNoTracking();
                     var qPrevPuchasedItems = qPrevOrders
                         .Where(o => payedStatuses.Contains(o.PaymentStatus))
                         .Where(o => o.IsPlaced == 1 && o.StatusCode != OrderStatusCode.Cancelled)
@@ -790,6 +799,7 @@ namespace Hotcakes.Commerce.Reporting
                         .SelectMany(o => o.hcc_LineItem)
                         .Where(li => li.ProductId == productGuid);
                     var qPrevViewEvents = db.GetQuery<hcc_AnalyticsEvent>()
+                        .AsNoTracking()
                         .Where(
                             ae =>
                                 ae.StoreId == storeId && ae.DateTime >= previousRange.StartDate &&
@@ -813,7 +823,7 @@ namespace Hotcakes.Commerce.Reporting
         {
             using (MiniProfiler.Current.Step("GetCategoryPerformance"))
             {
-                using (var db = CreateOrderStrategy())
+                using (var db = CreateReadOrderStrategy())
                 {
                     var storeId = Context.CurrentStore.Id;
                     var categoryGuid = DataTypeHelper.BvinToGuid(categoryId);
@@ -822,14 +832,14 @@ namespace Hotcakes.Commerce.Reporting
 
                     var productViewed = ActionTypes.ProductViewed.ToString();
 
-                    var category = db.GetQuery<hcc_Category>().FirstOrDefault(c => c.bvin == categoryGuid);
-                    var categoryProducts = db.GetQuery<hcc_ProductXCategory>()
+                    var category = db.GetQuery<hcc_Category>().AsNoTracking().FirstOrDefault(c => c.bvin == categoryGuid);
+                    var categoryProducts = db.GetQuery<hcc_ProductXCategory>().AsNoTracking()
                         .Where(pc => pc.CategoryId == categoryGuid);
 
                     var range = DateHelper.GetDateRange(period);
                     var qOrders = db.GetQuery(o => o.StoreId == storeId
                                                    && o.TimeOfOrder >= category.CreationDate
-                                                   && o.TimeOfOrder >= range.StartDate && o.TimeOfOrder <= range.EndDate);
+                                                   && o.TimeOfOrder >= range.StartDate && o.TimeOfOrder <= range.EndDate).AsNoTracking();
                     var qPuchasedItems = qOrders
                         .Where(o => payedStatuses.Contains(o.PaymentStatus))
                         .Where(o => o.IsPlaced == 1 && o.StatusCode != OrderStatusCode.Cancelled)
@@ -843,6 +853,7 @@ namespace Hotcakes.Commerce.Reporting
                         .SelectMany(o => o.hcc_LineItem)
                         .Join(categoryProducts, li => li.ProductId, cp => cp.ProductId, (li, cp) => li);
                     var qAnalyticsEvents = db.GetQuery<hcc_AnalyticsEvent>()
+                        .AsNoTracking()
                         .Where(
                             ae =>
                                 ae.StoreId == storeId && ae.DateTime >= range.StartDate && ae.DateTime <= range.EndDate)
@@ -851,6 +862,7 @@ namespace Hotcakes.Commerce.Reporting
                                      || ae.Action == ActionTypes.CategoryCopyChanged.ToString()
                                      || ae.Action == ActionTypes.CategoryProductsUpdated.ToString());
                     var qViewEvents = db.GetQuery<hcc_AnalyticsEvent>()
+                        .AsNoTracking()
                         .Where(
                             ae =>
                                 ae.StoreId == storeId && ae.DateTime >= range.StartDate && ae.DateTime <= range.EndDate &&
@@ -876,6 +888,7 @@ namespace Hotcakes.Commerce.Reporting
                         .SelectMany(o => o.hcc_LineItem)
                         .Join(categoryProducts, li => li.ProductId, cp => cp.ProductId, (li, cp) => li);
                     var qPrevViewEvents = db.GetQuery<hcc_AnalyticsEvent>()
+                        .AsNoTracking()
                         .Where(
                             ae =>
                                 ae.StoreId == storeId && ae.DateTime >= previousRange.StartDate &&
@@ -899,7 +912,7 @@ namespace Hotcakes.Commerce.Reporting
         {
             using (MiniProfiler.Current.Step("GetProductPerformance"))
             {
-                using (var db = CreateOrderStrategy())
+                using (var db = CreateReadOrderStrategy())
                 {
                     var storeId = Context.CurrentStore.Id;
                     var payedStatuses = new[] {(int) OrderPaymentStatus.Paid, (int) OrderPaymentStatus.Overpaid};
@@ -909,7 +922,7 @@ namespace Hotcakes.Commerce.Reporting
 
                     var range = DateHelper.GetDateRange(period);
                     var qOrders = db.GetQuery(o => o.StoreId == storeId
-                                                   && o.TimeOfOrder >= range.StartDate && o.TimeOfOrder <= range.EndDate);
+                                                   && o.TimeOfOrder >= range.StartDate && o.TimeOfOrder <= range.EndDate).AsNoTracking();
                     var qPuchasedItems = qOrders
                         .Where(o => payedStatuses.Contains(o.PaymentStatus))
                         .Where(o => o.IsPlaced == 1 && o.StatusCode != OrderStatusCode.Cancelled)
@@ -920,6 +933,7 @@ namespace Hotcakes.Commerce.Reporting
                     var qAddeToCartItems = qOrders
                         .SelectMany(o => o.hcc_LineItem);
                     var qViewEvents = db.GetQuery<hcc_AnalyticsEvent>()
+                        .AsNoTracking()
                         .Where(
                             ae =>
                                 ae.StoreId == storeId && ae.DateTime >= range.StartDate && ae.DateTime <= range.EndDate)
@@ -932,7 +946,7 @@ namespace Hotcakes.Commerce.Reporting
                     var previousRange = DateHelper.GetDateRange(period, true);
                     var qPrevOrders = db.GetQuery(o => o.StoreId == storeId
                                                        && o.TimeOfOrder >= previousRange.StartDate &&
-                                                       o.TimeOfOrder <= previousRange.EndDate);
+                                                       o.TimeOfOrder <= previousRange.EndDate).AsNoTracking();
                     var qPrevPuchasedItems = qPrevOrders
                         .Where(o => payedStatuses.Contains(o.PaymentStatus))
                         .Where(o => o.IsPlaced == 1 && o.StatusCode != OrderStatusCode.Cancelled)
@@ -940,6 +954,7 @@ namespace Hotcakes.Commerce.Reporting
                     var qPrevAddeToCartItems = qPrevOrders
                         .SelectMany(o => o.hcc_LineItem);
                     var qPrevViewEvents = db.GetQuery<hcc_AnalyticsEvent>()
+                        .AsNoTracking()
                         .Where(
                             ae =>
                                 ae.StoreId == storeId && ae.DateTime >= previousRange.StartDate &&
@@ -964,7 +979,7 @@ namespace Hotcakes.Commerce.Reporting
         {
             using (MiniProfiler.Current.Step("GetTopChangeByBounces"))
             {
-                using (var db = CreateOrderStrategy())
+                using (var db = CreateReadOrderStrategy())
                 {
                     var storeId = Context.CurrentStore.Id;
                     var range = DateHelper.GetDateRange(period);
@@ -973,9 +988,11 @@ namespace Hotcakes.Commerce.Reporting
                     var productViewed = ActionTypes.ProductViewed.ToString();
 
                     var qAddedToCartEvents = db.GetQuery<hcc_AnalyticsEvent>()
+                        .AsNoTracking()
                         .Where(ae => ae.StoreId == storeId)
                         .Where(ae => ae.Action == ActionTypes.ProductAddedToCart.ToString());
                     var qViewEvents = db.GetQuery<hcc_AnalyticsEvent>()
+                        .AsNoTracking()
                         .Where(ae => ae.StoreId == storeId)
                         .Where(ae => ae.Action == productViewed)
                         .Where(ae => qAddedToCartEvents.
@@ -984,11 +1001,13 @@ namespace Hotcakes.Commerce.Reporting
                                      0);
 
                     var qProductTranslation = db.GetQuery<hcc_ProductTranslation>()
+                        .AsNoTracking()
                         .Where(
                             it =>
                                 it.Culture == Context.MainContentCulture || it.Culture == Context.FallbackContentCulture);
 
                     var qProducts = db.GetQuery<hcc_Product>()
+                        .AsNoTracking()
                         .Where(p => p.StoreId == storeId)
                         .GroupJoin(qProductTranslation, p => p.bvin, pt => pt.ProductId, (p, pt)
                             =>
@@ -1053,20 +1072,22 @@ namespace Hotcakes.Commerce.Reporting
         {
             using (MiniProfiler.Current.Step("TopChangeByAbandoments"))
             {
-                using (var db = CreateOrderStrategy())
+                using (var db = CreateReadOrderStrategy())
                 {
                     var storeId = Context.CurrentStore.Id;
                     var range = DateHelper.GetDateRange(period);
                     var previousRange = DateHelper.GetDateRange(period, true);
 
-                    var qLineItems = db.GetQuery<hcc_LineItem>();
+                    var qLineItems = db.GetQuery<hcc_LineItem>().AsNoTracking();
 
                     var qProductTranslation = db.GetQuery<hcc_ProductTranslation>()
+                        .AsNoTracking()
                         .Where(
                             it =>
                                 it.Culture == Context.MainContentCulture || it.Culture == Context.FallbackContentCulture);
 
                     var qProducts = db.GetQuery<hcc_Product>()
+                        .AsNoTracking()
                         .Where(p => p.StoreId == storeId)
                         .GroupJoin(qProductTranslation, p => p.bvin, pt => pt.ProductId, (p, pt)
                             =>
@@ -1131,21 +1152,23 @@ namespace Hotcakes.Commerce.Reporting
         {
             using (MiniProfiler.Current.Step("GetTopChangeByPurchases"))
             {
-                using (var db = CreateOrderStrategy())
+                using (var db = CreateReadOrderStrategy())
                 {
                     var storeId = Context.CurrentStore.Id;
                     var payedStatuses = new[] {(int) OrderPaymentStatus.Paid, (int) OrderPaymentStatus.Overpaid};
                     var range = DateHelper.GetDateRange(period);
                     var previousRange = DateHelper.GetDateRange(period, true);
 
-                    var qLineItems = db.GetQuery<hcc_LineItem>();
+                    var qLineItems = db.GetQuery<hcc_LineItem>().AsNoTracking();
 
                     var qProductTranslation = db.GetQuery<hcc_ProductTranslation>()
+                        .AsNoTracking()
                         .Where(
                             it =>
                                 it.Culture == Context.MainContentCulture || it.Culture == Context.FallbackContentCulture);
 
                     var qProducts = db.GetQuery<hcc_Product>()
+                        .AsNoTracking()
                         .Where(p => p.StoreId == storeId)
                         .GroupJoin(qProductTranslation, p => p.bvin, pt => pt.ProductId, (p, pt)
                             =>
@@ -1210,7 +1233,7 @@ namespace Hotcakes.Commerce.Reporting
         {
             using (MiniProfiler.Current.Step("GetTopAffectedProducts"))
             {
-                using (var db = Factory.CreateHccDbContext())
+                using (var db = Factory.CreateReadOnlyHccDbContext())
                 {
                     var storeId = Context.CurrentStore.Id;
                     var range = DateHelper.GetDateRange(period);
@@ -1256,7 +1279,7 @@ namespace Hotcakes.Commerce.Reporting
         {
             using (MiniProfiler.Current.Step("GetProductPerformance"))
             {
-                using (var db = CreateOrderStrategy())
+                using (var db = CreateReadOrderStrategy())
                 {
                     var productGuid = DataTypeHelper.BvinToGuid(productId);
                     var storeId = Context.CurrentStore.Id;
@@ -1265,7 +1288,7 @@ namespace Hotcakes.Commerce.Reporting
 
                     var range = DateHelper.GetDateRange(period);
                     var qOrders = db.GetQuery(o => o.StoreId == storeId
-                                                   && o.TimeOfOrder >= range.StartDate && o.TimeOfOrder <= range.EndDate);
+                                                   && o.TimeOfOrder >= range.StartDate && o.TimeOfOrder <= range.EndDate).AsNoTracking();
                     var qPuchasedItems = qOrders
                         .Where(o => o.IsPlaced == 1 && o.StatusCode != OrderStatusCode.Cancelled)
                         .SelectMany(o => o.hcc_LineItem).Where(li => li.ProductId == productGuid);
@@ -1276,7 +1299,7 @@ namespace Hotcakes.Commerce.Reporting
                     var previousRange = DateHelper.GetDateRange(period, true);
                     var qPrevOrders = db.GetQuery(o => o.StoreId == storeId
                                                        && o.TimeOfOrder >= previousRange.StartDate &&
-                                                       o.TimeOfOrder <= previousRange.EndDate);
+                                                       o.TimeOfOrder <= previousRange.EndDate).AsNoTracking();
                     var qPrevPuchasedItems = qPrevOrders
                         .Where(o => o.IsPlaced == 1 && o.StatusCode != OrderStatusCode.Cancelled)
                         .SelectMany(o => o.hcc_LineItem).Where(li => li.ProductId == productGuid);
@@ -1482,9 +1505,9 @@ namespace Hotcakes.Commerce.Reporting
                 .Where(y => y.hcc_Order.StatusCode != OrderStatusCode.Cancelled);
         }
 
-        protected IRepoStrategy<hcc_Order> CreateOrderStrategy()
+        protected IRepoStrategy<hcc_Order> CreateReadOrderStrategy()
         {
-            return Factory.Instance.CreateStrategy<hcc_Order>();
+            return Factory.Instance.CreateReadStrategy<hcc_Order>();
         }
 
         private PerformanceInfo PopulatePerformanceChartData(IRepoStrategy<hcc_Order> db, PerformanceInfo info,
