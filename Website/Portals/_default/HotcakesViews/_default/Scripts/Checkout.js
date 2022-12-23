@@ -42,12 +42,6 @@
                 behavior: 'smooth'
             });
         });
-
-        $("#btnsubmit").click(function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            CreatePaymentMethod(clientSecret)
-        })
     }
 
     function ajaxErrorNotification() {
@@ -879,7 +873,6 @@
         $("table.totaltable").attr("class", "table table-striped table-hover totaltable");
     }
 
-
     async function CreatePaymentMethod(clientSecret) {
         var status = await checkPaymentStatus(clientSecret)
         if (status === "requires_payment_method") {
@@ -892,25 +885,19 @@
             if (cardNumber && cvc && expMonth && expYear) {
                 var reqUrl = hcc.getServiceUrl("checkout/AttachPaymentMethod");
                 $.post(reqUrl, { "CardNumber": cardNumber, "Cvc": cvc, "ExpMonth": expMonth, "ExpYear": expYear, "PaymentIntentId": paymentIntent }, null, "json")
-                    .done(function (data) {
-                        console.log(data);
+                    .done((data) => {
                         stripe
                             .retrievePaymentIntent(clientSecret)
-                            .then(async function (result) {
+                            .then(async (result) => {
                                 if (result.paymentIntent) {
                                     if (result.paymentIntent.status == "requires_action") {
                                         var result = await stripe.confirmCardPayment(clientSecret);
-
-                                        if (result.paymentIntent) {
-                                            Addresses.saveForm();
-                                        } else {
-                                            Addresses.saveForm();
-                                        }
+                                        Addresses.saveForm()
                                     } else {
-                                        Addresses.saveForm();
+                                        Addresses.saveForm()
                                     }
                                 } else {
-                                    Addresses.saveForm();
+                                    Addresses.saveForm()
                                 }
                             });
                     })
@@ -918,12 +905,13 @@
                         console.log("error: " + error);
                     });
             } else {
-                Addresses.saveForm();
+                Addresses.saveForm()
             }
         } else {
-            Addresses.saveForm();
+            Addresses.saveForm()
         }
     };
+
 
     async function checkPaymentStatus(clientSecret) {
 

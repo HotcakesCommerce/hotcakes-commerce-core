@@ -39,7 +39,7 @@ namespace Hotcakes.Modules.Checkout
         {
             if (!string.IsNullOrEmpty(Request.QueryString["action"]))
             {
-                _action = Request.QueryString["action"].ToLower();
+                _action = Request.QueryString["action"];
             }
 
             if (_action == IndexAction || _action == PaymentErrorAction)
