@@ -396,8 +396,14 @@
               <path>bin</path>
               <name>Stripe.net.dll</name>
               <sourceFileName>bin\Stripe.net.dll</sourceFileName>
-              <version>05.00.00</version>
+              <version>40.09.00</version>
             </assembly>
+	          <assembly>
+		          <path>bin</path>
+		          <name>Microsoft.Bcl.AsyncInterfaces.dll</name>
+		          <sourceFileName>bin\Microsoft.Bcl.AsyncInterfaces.dll</sourceFileName>
+		          <version>4.700.19.46214</version>
+	          </assembly>
             <assembly>
               <path>bin</path>
               <name>DocumentFormat.OpenXml.dll</name>
