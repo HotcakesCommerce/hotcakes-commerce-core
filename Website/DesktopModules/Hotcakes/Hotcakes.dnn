@@ -1,2048 +1,2048 @@
 <dotnetnuke type="Package" version="5.0">
-  <packages>
-    <package name="Hotcakes.Core" type="Library" version="03.06.00">
-      <friendlyName>Hotcakes Commerce</friendlyName>
-      <description><![CDATA[Hotcakes Commerce will give your company the control it needs to create and manage your e-commerce site.]]></description>
-      <iconFile>~/DesktopModules/Hotcakes/Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Upendo Ventures, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@upendoventures.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <dependencies>
-        <dependency type="CoreVersion">09.02.02</dependency>
-      </dependencies>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.Core</moduleName>
-            <foldername>Hotcakes/Core</foldername>
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Commerce</friendlyName>
-                <definitionName>Hotcakes Commerce</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/CategoryViewer/CategoryViewerView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/CategoryViewer/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Hotcakes Category Viewer Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-          <eventMessage>
-            <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
-            <processorCommand>UpgradeModule</processorCommand>
-            <attributes>
-              <businessControllerClass>Hotcakes.Modules.Core.HotcakesController, Hotcakes.Modules</businessControllerClass>
-              <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-              <upgradeVersionsList>01.00.00,01.00.07,01.05.00,01.06.00,01.07.00,01.08.00,01.09.00,01.10.00,02.00.00,02.00.01,02.00.02,02.00.03,02.00.04,02.00.05,02.00.06,03.00.00,03.00.01,03.01.00,03.02.00,03.02.01,03.02.02,03.02.03,03.03.00,03.04.00,03.04.01,03.05.00,03.06.00</upgradeVersionsList>
-            </attributes>
-          </eventMessage>
-        </component>
-        <component type="Script">
-          <scripts>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.00.00.SqlDataProvider</name>
-              <version>01.00.00</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.00.01.SqlDataProvider</name>
-              <version>01.00.01</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.00.03.SqlDataProvider</name>
-              <version>01.00.03</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.00.04.SqlDataProvider</name>
-              <version>01.00.04</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.00.06.SqlDataProvider</name>
-              <version>01.00.06</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.00.09.SqlDataProvider</name>
-              <version>01.00.09</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.01.00.SqlDataProvider</name>
-              <version>01.01.00</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.02.00.SqlDataProvider</name>
-              <version>01.02.00</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.02.02.SqlDataProvider</name>
-              <version>01.02.02</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.02.04.SqlDataProvider</name>
-              <version>01.02.04</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.03.00.SqlDataProvider</name>
-              <version>01.03.00</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.04.00.SqlDataProvider</name>
-              <version>01.04.00</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.05.00.SqlDataProvider</name>
-              <version>01.05.00</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.05.03.SqlDataProvider</name>
-              <version>01.05.03</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.05.05.SqlDataProvider</name>
-              <version>01.05.05</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.06.00.SqlDataProvider</name>
-              <version>01.06.00</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.07.00.SqlDataProvider</name>
-              <version>01.07.00</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.07.05.SqlDataProvider</name>
-              <version>01.07.05</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.08.00.SqlDataProvider</name>
-              <version>01.08.00</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.08.01.SqlDataProvider</name>
-              <version>01.08.01</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.09.00.SqlDataProvider</name>
-              <version>01.09.00</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.09.01.SqlDataProvider</name>
-              <version>01.09.01</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>02.00.00.SqlDataProvider</name>
-              <version>02.00.00</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>02.00.01.SqlDataProvider</name>
-              <version>02.00.01</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>03.00.00.SqlDataProvider</name>
-              <version>03.00.00</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>03.02.02.SqlDataProvider</name>
-              <version>03.02.02</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>03.02.03.SqlDataProvider</name>
-              <version>03.02.03</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>03.03.00.SqlDataProvider</name>
-              <version>03.03.00</version>
-            </script>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>03.06.00.SqlDataProvider</name>
-              <version>03.06.00</version>
-            </script>
-            <script type="UnInstall">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>Uninstall.SqlDataProvider</name>
-              <version>03.06.00</version>
-            </script>
-          </scripts>
-        </component>
-        <component type="Cleanup" version="01.00.04" fileName="01.00.04.txt" />
-        <component type="Cleanup" version="01.00.05" fileName="01.00.05.txt" />
-        <component type="Cleanup" version="01.00.06" fileName="01.00.06.txt" />
-        <component type="Cleanup" version="01.00.07" fileName="01.00.07.txt" />
-        <component type="Cleanup" version="01.00.09" fileName="01.00.09.txt" />
-        <component type="Cleanup" version="01.02.00" fileName="01.02.00.txt" />
-        <component type="Cleanup" version="01.02.03" fileName="01.02.03.txt" />
-        <component type="Cleanup" version="01.03.00" fileName="01.03.00.txt" />
-        <component type="Cleanup" version="01.04.00" fileName="01.04.00.txt" />
-        <component type="Cleanup" version="01.05.00" fileName="01.05.00.txt" />
-        <component type="Cleanup" version="01.06.00" fileName="01.06.00.txt" />
-        <component type="Cleanup" version="01.07.00" fileName="01.07.00.txt" />
-        <component type="Cleanup" version="01.08.00" fileName="01.08.00.txt" />
-        <component type="Cleanup" version="02.00.00" fileName="02.00.00.txt" />
-        <component type="Cleanup" version="03.00.00" fileName="03.00.00.txt" />
-        <component type="Cleanup" version="03.03.00" fileName="03.03.00.txt" />
-        <component type="Cleanup" version="03.05.00" fileName="03.05.00.txt" />
-        <component type="Cleanup" version="03.06.00" fileName="03.06.00.txt" />
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>ExtensionUrlProvider</path>
-              <name>Settings.ascx</name>
-            </file>
-            <file>
-              <path>ExtensionUrlProvider\App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
-            </file>
-            <file>
-              <name>HotcakesViews.zip</name>
-            </file>
-            <file>
-              <name>ReleaseNotes.txt</name>
-            </file>
-            <file>
-              <name>License.txt</name>
-            </file>
-            <file>
-              <name>hotcakes.config</name>
-            </file>
-            <file>
-              <name>module.css</name>
-            </file>
-          </files>
-        </component>
-        <component type="ResourceFile">
-          <resourceFiles>
-            <basePath>DesktopModules\Hotcakes\Core</basePath>
-            <resourceFile>
-              <name>Core.zip</name>
-            </resourceFile>
-          </resourceFiles>
-        </component>
-        <component type="ResourceFile">
-          <resourceFiles>
-            <basePath>Portals\_default\HotcakesViews\_default</basePath>
-            <resourceFile>
-              <name>HotcakesViews.zip</name>
-            </resourceFile>
-          </resourceFiles>
-        </component>
-        <component type="ResourceFile">
-          <resourceFiles>
-            <basePath>Portals\_default\HotcakesViews\Bootstrap4</basePath>
-            <resourceFile>
-              <name>Bootstrap4Views.zip</name>
-            </resourceFile>
-          </resourceFiles>
-        </component>
-        <component type="ResourceFile">
-          <resourceFiles>
-            <basePath>Portals\_default\HotcakesViews\_default-Legacy</basePath>
-            <resourceFile>
-              <name>LegacyViews.zip</name>
-            </resourceFile>
-          </resourceFiles>
-        </component>
-        <component type="ResourceFile">
-          <resourceFiles>
-            <basePath>Portals\_default\HotcakesViews\Porto5</basePath>
-            <resourceFile>
-              <name>Porto5Views.zip</name>
-            </resourceFile>
-          </resourceFiles>
-        </component>
-        <component type="Assembly">
-          <assemblies>
-            <assembly>
-              <path>bin</path>
-              <name>Hotcakes.Common.Dnn.dll</name>
-              <sourceFileName>bin\Hotcakes.Common.Dnn.dll</sourceFileName>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Hotcakes.Commerce.Dnn.dll</name>
-              <sourceFileName>bin\Hotcakes.Commerce.Dnn.dll</sourceFileName>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Hotcakes.Modules.dll</name>
-              <sourceFileName>bin\Hotcakes.Modules.dll</sourceFileName>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Hotcakes.Commerce.dll</name>
-              <sourceFileName>bin\Hotcakes.Commerce.dll</sourceFileName>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Hotcakes.CommerceDTO.dll</name>
-              <sourceFileName>bin\Hotcakes.CommerceDTO.dll</sourceFileName>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Hotcakes.Payment.dll</name>
-              <sourceFileName>bin\Hotcakes.Payment.dll</sourceFileName>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Hotcakes.PaypalWebServices.dll</name>
-              <sourceFileName>bin\Hotcakes.PaypalWebServices.dll</sourceFileName>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Hotcakes.Shipping.dll</name>
-              <sourceFileName>bin\Hotcakes.Shipping.dll</sourceFileName>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Hotcakes.Shipping.FedEx.dll</name>
-              <sourceFileName>bin\Hotcakes.Shipping.FedEx.dll</sourceFileName>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Hotcakes.Shipping.FedEx.XmlSerializers.dll</name>
-              <sourceFileName>bin\Hotcakes.Shipping.FedEx.XmlSerializers.dll</sourceFileName>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Hotcakes.Shipping.Ups.dll</name>
-              <sourceFileName>bin\Hotcakes.Shipping.Ups.dll</sourceFileName>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Hotcakes.Shipping.UpsFreight.dll</name>
-              <sourceFileName>bin\Hotcakes.Shipping.UpsFreight.dll</sourceFileName>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Hotcakes.Shipping.USPostal.dll</name>
-              <sourceFileName>bin\Hotcakes.Shipping.USPostal.dll</sourceFileName>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Hotcakes.Web.dll</name>
-              <sourceFileName>bin\Hotcakes.Web.dll</sourceFileName>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Avalara.AvaTax.Adapter.dll</name>
-              <sourceFileName>bin\Avalara.AvaTax.Adapter.dll</sourceFileName>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>log4net.dll</name>
-              <sourceFileName>bin\log4net.dll</sourceFileName>
-              <version>01.02.00</version>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>paypal_base.dll</name>
-              <sourceFileName>bin\paypal_base.dll</sourceFileName>
-              <version>05.06.92</version>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Stripe.net.dll</name>
-              <sourceFileName>bin\Stripe.net.dll</sourceFileName>
-              <version>40.09.00</version>
-            </assembly>
-	          <assembly>
-		          <path>bin</path>
-		          <name>Microsoft.Bcl.AsyncInterfaces.dll</name>
-		          <sourceFileName>bin\Microsoft.Bcl.AsyncInterfaces.dll</sourceFileName>
-		          <version>4.700.19.46214</version>
-	          </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>DocumentFormat.OpenXml.dll</name>
-              <sourceFileName>bin\DocumentFormat.OpenXml.dll</sourceFileName>
-              <version>02.00.5022.00</version>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>DocumentFormat.OpenXml.Extensions.dll</name>
-              <sourceFileName>bin\DocumentFormat.OpenXml.Extensions.dll</sourceFileName>
-              <version>02.01.3842.34318</version>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>EntityFramework.dll</name>
-              <sourceFileName>bin\EntityFramework.dll</sourceFileName>
-              <version>06.01.01</version>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>EntityFramework.SqlServer.dll</name>
-              <sourceFileName>bin\EntityFramework.SqlServer.dll</sourceFileName>
-              <version>06.01.01</version>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>ImageResizer.dll</name>
-              <sourceFileName>bin\ImageResizer.dll</sourceFileName>
-              <version>03.04.02.549</version>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>MiniProfiler.dll</name>
-              <sourceFileName>bin\MiniProfiler.dll</sourceFileName>
-              <version>03.01.00</version>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>MiniProfiler.EntityFramework6.dll</name>
-              <sourceFileName>bin\MiniProfiler.EntityFramework6.dll</sourceFileName>
-              <version>03.00.11</version>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>BrandonHaynes.ModelAdapter.EntityFramework.dll</name>
-              <sourceFileName>bin\BrandonHaynes.ModelAdapter.EntityFramework.dll</sourceFileName>
-              <version>01.00.00</version>
-            </assembly>
-          </assemblies>
-        </component>
-        <component type="Config">
-          <config>
-            <configFile>web.config</configFile>
-            <install>
-              <configuration>
-                <nodes>
-                  <node path="/configuration/configSections/sectionGroup[@name='system.web.webPages.razor']" action="update" collision="ignore" key="name">
-                    <section name="host" type="System.Web.WebPages.Razor.Configuration.HostSection, System.Web.WebPages.Razor" requirePermission="false" />
-                  </node>
-                  <node path="/configuration/appSettings" action="update" collision="overwrite" key="key">
-                    <add key="ClientValidationEnabled" value="true" />
-                    <add key="UnobtrusiveJavaScriptEnabled" value="true" />
-                  </node>
+	<packages>
+		<package name="Hotcakes.Core" type="Library" version="03.07.00">
+			<friendlyName>Hotcakes Commerce</friendlyName>
+			<description><![CDATA[Hotcakes Commerce will give your company the control it needs to create and manage your e-commerce site.]]></description>
+			<iconFile>~/DesktopModules/Hotcakes/Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Upendo Ventures, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@upendoventures.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<dependencies>
+				<dependency type="CoreVersion">09.02.02</dependency>
+			</dependencies>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.Core</moduleName>
+						<foldername>Hotcakes/Core</foldername>
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Commerce</friendlyName>
+								<definitionName>Hotcakes Commerce</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/CategoryViewer/CategoryViewerView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/CategoryViewer/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Hotcakes Category Viewer Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+					<eventMessage>
+						<processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
+						<processorCommand>UpgradeModule</processorCommand>
+						<attributes>
+							<businessControllerClass>Hotcakes.Modules.Core.HotcakesController, Hotcakes.Modules</businessControllerClass>
+							<desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
+							<upgradeVersionsList>01.00.00,01.00.07,01.05.00,01.06.00,01.07.00,01.08.00,01.09.00,01.10.00,02.00.00,02.00.01,02.00.02,02.00.03,02.00.04,02.00.05,02.00.06,03.00.00,03.00.01,03.01.00,03.02.00,03.02.01,03.02.02,03.02.03,03.03.00,03.04.00,03.04.01,03.05.00,03.06.00</upgradeVersionsList>
+						</attributes>
+					</eventMessage>
+				</component>
+				<component type="Script">
+					<scripts>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.00.00.SqlDataProvider</name>
+							<version>01.00.00</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.00.01.SqlDataProvider</name>
+							<version>01.00.01</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.00.03.SqlDataProvider</name>
+							<version>01.00.03</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.00.04.SqlDataProvider</name>
+							<version>01.00.04</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.00.06.SqlDataProvider</name>
+							<version>01.00.06</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.00.09.SqlDataProvider</name>
+							<version>01.00.09</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.01.00.SqlDataProvider</name>
+							<version>01.01.00</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.02.00.SqlDataProvider</name>
+							<version>01.02.00</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.02.02.SqlDataProvider</name>
+							<version>01.02.02</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.02.04.SqlDataProvider</name>
+							<version>01.02.04</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.03.00.SqlDataProvider</name>
+							<version>01.03.00</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.04.00.SqlDataProvider</name>
+							<version>01.04.00</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.05.00.SqlDataProvider</name>
+							<version>01.05.00</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.05.03.SqlDataProvider</name>
+							<version>01.05.03</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.05.05.SqlDataProvider</name>
+							<version>01.05.05</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.06.00.SqlDataProvider</name>
+							<version>01.06.00</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.07.00.SqlDataProvider</name>
+							<version>01.07.00</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.07.05.SqlDataProvider</name>
+							<version>01.07.05</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.08.00.SqlDataProvider</name>
+							<version>01.08.00</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.08.01.SqlDataProvider</name>
+							<version>01.08.01</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.09.00.SqlDataProvider</name>
+							<version>01.09.00</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>01.09.01.SqlDataProvider</name>
+							<version>01.09.01</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>02.00.00.SqlDataProvider</name>
+							<version>02.00.00</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>02.00.01.SqlDataProvider</name>
+							<version>02.00.01</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>03.00.00.SqlDataProvider</name>
+							<version>03.00.00</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>03.02.02.SqlDataProvider</name>
+							<version>03.02.02</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>03.02.03.SqlDataProvider</name>
+							<version>03.02.03</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>03.03.00.SqlDataProvider</name>
+							<version>03.03.00</version>
+						</script>
+						<script type="Install">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>03.06.00.SqlDataProvider</name>
+							<version>03.06.00</version>
+						</script>
+						<script type="UnInstall">
+							<path>Providers\DataProviders\SqlDataProvider</path>
+							<name>Uninstall.SqlDataProvider</name>
+							<version>03.06.00</version>
+						</script>
+					</scripts>
+				</component>
+				<component type="Cleanup" version="01.00.04" fileName="01.00.04.txt" />
+				<component type="Cleanup" version="01.00.05" fileName="01.00.05.txt" />
+				<component type="Cleanup" version="01.00.06" fileName="01.00.06.txt" />
+				<component type="Cleanup" version="01.00.07" fileName="01.00.07.txt" />
+				<component type="Cleanup" version="01.00.09" fileName="01.00.09.txt" />
+				<component type="Cleanup" version="01.02.00" fileName="01.02.00.txt" />
+				<component type="Cleanup" version="01.02.03" fileName="01.02.03.txt" />
+				<component type="Cleanup" version="01.03.00" fileName="01.03.00.txt" />
+				<component type="Cleanup" version="01.04.00" fileName="01.04.00.txt" />
+				<component type="Cleanup" version="01.05.00" fileName="01.05.00.txt" />
+				<component type="Cleanup" version="01.06.00" fileName="01.06.00.txt" />
+				<component type="Cleanup" version="01.07.00" fileName="01.07.00.txt" />
+				<component type="Cleanup" version="01.08.00" fileName="01.08.00.txt" />
+				<component type="Cleanup" version="02.00.00" fileName="02.00.00.txt" />
+				<component type="Cleanup" version="03.00.00" fileName="03.00.00.txt" />
+				<component type="Cleanup" version="03.03.00" fileName="03.03.00.txt" />
+				<component type="Cleanup" version="03.05.00" fileName="03.05.00.txt" />
+				<component type="Cleanup" version="03.06.00" fileName="03.06.00.txt" />
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>ExtensionUrlProvider</path>
+							<name>Settings.ascx</name>
+						</file>
+						<file>
+							<path>ExtensionUrlProvider\App_LocalResources</path>
+							<name>Settings.ascx.resx</name>
+						</file>
+						<file>
+							<name>HotcakesViews.zip</name>
+						</file>
+						<file>
+							<name>ReleaseNotes.txt</name>
+						</file>
+						<file>
+							<name>License.txt</name>
+						</file>
+						<file>
+							<name>hotcakes.config</name>
+						</file>
+						<file>
+							<name>module.css</name>
+						</file>
+					</files>
+				</component>
+				<component type="ResourceFile">
+					<resourceFiles>
+						<basePath>DesktopModules\Hotcakes\Core</basePath>
+						<resourceFile>
+							<name>Core.zip</name>
+						</resourceFile>
+					</resourceFiles>
+				</component>
+				<component type="ResourceFile">
+					<resourceFiles>
+						<basePath>Portals\_default\HotcakesViews\_default</basePath>
+						<resourceFile>
+							<name>HotcakesViews.zip</name>
+						</resourceFile>
+					</resourceFiles>
+				</component>
+				<component type="ResourceFile">
+					<resourceFiles>
+						<basePath>Portals\_default\HotcakesViews\Bootstrap4</basePath>
+						<resourceFile>
+							<name>Bootstrap4Views.zip</name>
+						</resourceFile>
+					</resourceFiles>
+				</component>
+				<component type="ResourceFile">
+					<resourceFiles>
+						<basePath>Portals\_default\HotcakesViews\_default-Legacy</basePath>
+						<resourceFile>
+							<name>LegacyViews.zip</name>
+						</resourceFile>
+					</resourceFiles>
+				</component>
+				<component type="ResourceFile">
+					<resourceFiles>
+						<basePath>Portals\_default\HotcakesViews\Porto5</basePath>
+						<resourceFile>
+							<name>Porto5Views.zip</name>
+						</resourceFile>
+					</resourceFiles>
+				</component>
+				<component type="Assembly">
+					<assemblies>
+						<assembly>
+							<path>bin</path>
+							<name>Hotcakes.Common.Dnn.dll</name>
+							<sourceFileName>bin\Hotcakes.Common.Dnn.dll</sourceFileName>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Hotcakes.Commerce.Dnn.dll</name>
+							<sourceFileName>bin\Hotcakes.Commerce.Dnn.dll</sourceFileName>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Hotcakes.Modules.dll</name>
+							<sourceFileName>bin\Hotcakes.Modules.dll</sourceFileName>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Hotcakes.Commerce.dll</name>
+							<sourceFileName>bin\Hotcakes.Commerce.dll</sourceFileName>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Hotcakes.CommerceDTO.dll</name>
+							<sourceFileName>bin\Hotcakes.CommerceDTO.dll</sourceFileName>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Hotcakes.Payment.dll</name>
+							<sourceFileName>bin\Hotcakes.Payment.dll</sourceFileName>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Hotcakes.PaypalWebServices.dll</name>
+							<sourceFileName>bin\Hotcakes.PaypalWebServices.dll</sourceFileName>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Hotcakes.Shipping.dll</name>
+							<sourceFileName>bin\Hotcakes.Shipping.dll</sourceFileName>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Hotcakes.Shipping.FedEx.dll</name>
+							<sourceFileName>bin\Hotcakes.Shipping.FedEx.dll</sourceFileName>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Hotcakes.Shipping.FedEx.XmlSerializers.dll</name>
+							<sourceFileName>bin\Hotcakes.Shipping.FedEx.XmlSerializers.dll</sourceFileName>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Hotcakes.Shipping.Ups.dll</name>
+							<sourceFileName>bin\Hotcakes.Shipping.Ups.dll</sourceFileName>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Hotcakes.Shipping.UpsFreight.dll</name>
+							<sourceFileName>bin\Hotcakes.Shipping.UpsFreight.dll</sourceFileName>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Hotcakes.Shipping.USPostal.dll</name>
+							<sourceFileName>bin\Hotcakes.Shipping.USPostal.dll</sourceFileName>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Hotcakes.Web.dll</name>
+							<sourceFileName>bin\Hotcakes.Web.dll</sourceFileName>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Avalara.AvaTax.Adapter.dll</name>
+							<sourceFileName>bin\Avalara.AvaTax.Adapter.dll</sourceFileName>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>log4net.dll</name>
+							<sourceFileName>bin\log4net.dll</sourceFileName>
+							<version>01.02.00</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>paypal_base.dll</name>
+							<sourceFileName>bin\paypal_base.dll</sourceFileName>
+							<version>05.06.92</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Microsoft.Bcl.AsyncInterfaces.dll</name>
+							<sourceFileName>bin\Microsoft.Bcl.AsyncInterfaces.dll</sourceFileName>
+							<version>04.700.19.56404</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Stripe.net.dll</name>
+							<sourceFileName>bin\Stripe.net.dll</sourceFileName>
+							<version>41.02.00</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>DocumentFormat.OpenXml.dll</name>
+							<sourceFileName>bin\DocumentFormat.OpenXml.dll</sourceFileName>
+							<version>02.00.5022.00</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>DocumentFormat.OpenXml.Extensions.dll</name>
+							<sourceFileName>bin\DocumentFormat.OpenXml.Extensions.dll</sourceFileName>
+							<version>02.01.3842.34318</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>EntityFramework.dll</name>
+							<sourceFileName>bin\EntityFramework.dll</sourceFileName>
+							<version>06.01.01</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>EntityFramework.SqlServer.dll</name>
+							<sourceFileName>bin\EntityFramework.SqlServer.dll</sourceFileName>
+							<version>06.01.01</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>ImageResizer.dll</name>
+							<sourceFileName>bin\ImageResizer.dll</sourceFileName>
+							<version>03.04.02.549</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>MiniProfiler.dll</name>
+							<sourceFileName>bin\MiniProfiler.dll</sourceFileName>
+							<version>03.01.00</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>MiniProfiler.EntityFramework6.dll</name>
+							<sourceFileName>bin\MiniProfiler.EntityFramework6.dll</sourceFileName>
+							<version>03.00.11</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>BrandonHaynes.ModelAdapter.EntityFramework.dll</name>
+							<sourceFileName>bin\BrandonHaynes.ModelAdapter.EntityFramework.dll</sourceFileName>
+							<version>01.00.00</version>
+						</assembly>
+					</assemblies>
+				</component>
+				<component type="Config">
+					<config>
+						<configFile>web.config</configFile>
+						<install>
+							<configuration>
+								<nodes>
+									<node path="/configuration/configSections/sectionGroup[@name='system.web.webPages.razor']" action="update" collision="ignore" key="name">
+										<section name="host" type="System.Web.WebPages.Razor.Configuration.HostSection, System.Web.WebPages.Razor" requirePermission="false" />
+									</node>
+									<node path="/configuration/appSettings" action="update" collision="overwrite" key="key">
+										<add key="ClientValidationEnabled" value="true" />
+										<add key="UnobtrusiveJavaScriptEnabled" value="true" />
+									</node>
 
-                  <node path="/configuration/system.web/compilation/assemblies/add[@assembly='System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/compilation/assemblies/add[@assembly='System.Web.Routing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E3']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/compilation/assemblies/add[@assembly='System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/compilation/assemblies/add[@assembly='System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/compilation/assemblies/add[@assembly='System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/compilation/assemblies/add[@assembly='System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/compilation/assemblies/add[@assembly='System.Web.Routing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E3']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/compilation/assemblies/add[@assembly='System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/compilation/assemblies/add[@assembly='System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/compilation/assemblies/add[@assembly='System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35']" action="remove" collision="overwrite" />
 
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Collections']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Collections.Specialized']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Collections.Generic']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Configuration']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Text']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Text.RegularExpressions']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.Caching']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.SessionState']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.Security']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.Profile']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.UI']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.UI.WebControls']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.UI.WebControls.WebParts']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.UI.HtmlControls']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.Mvc']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.Mvc.Ajax']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.Mvc.Html']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.Routing']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.Helpers']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.WebPages']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Linq']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Collections']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Collections.Specialized']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Collections.Generic']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Configuration']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Text']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Text.RegularExpressions']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.Caching']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.SessionState']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.Security']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.Profile']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.UI']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.UI.WebControls']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.UI.WebControls.WebParts']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.UI.HtmlControls']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.Mvc']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.Mvc.Ajax']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.Mvc.Html']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.Routing']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.Helpers']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Web.WebPages']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.web/pages/namespaces/add[@namespace='System.Linq']" action="remove" collision="overwrite" />
 
-                  <node path="/configuration/system.webServer/modules" action="update" collision="overwrite" targetpath="add[@name = 'UrlRoutingModule-4.0']" >
-                    <add name="UrlRoutingModule-4.0" type="Hotcakes.Commerce.Dnn.Providers.HccUrlRoutingModule, Hotcakes.Commerce.Dnn" preCondition="managedHandler,runtimeVersionv4.0" />
-                  </node>
+									<node path="/configuration/system.webServer/modules" action="update" collision="overwrite" targetpath="add[@name = 'UrlRoutingModule-4.0']" >
+										<add name="UrlRoutingModule-4.0" type="Hotcakes.Commerce.Dnn.Providers.HccUrlRoutingModule, Hotcakes.Commerce.Dnn" preCondition="managedHandler,runtimeVersionv4.0" />
+									</node>
 
-                  <node path="/configuration/system.webServer/handlers/add[@name = 'Stylesheets']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.webServer/handlers/add[@name = 'Javascripts']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.webServer/handlers/add[@name = 'Xmls']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.webServer/handlers/add[@name = 'Images']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.webServer/handlers/add[@name = 'Gifs']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.webServer/handlers/add[@name = 'Pngs']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.webServer/handlers/add[@name = 'Stylesheets']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.webServer/handlers/add[@name = 'Javascripts']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.webServer/handlers/add[@name = 'Xmls']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.webServer/handlers/add[@name = 'Images']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.webServer/handlers/add[@name = 'Gifs']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.webServer/handlers/add[@name = 'Pngs']" action="remove" collision="overwrite" />
 
-                  <node path="/configuration/dotnetnuke/sitemap/providers" key="name" action="update" collision="overwrite">
-                    <add name="productsSitemapProvider" type="Hotcakes.Commerce.Dnn.Providers.ProductsSitemapProvider, Hotcakes.Commerce.Dnn" providerPath="~\Providers\MembershipProviders\Sitemap\ProductsSitemapProvider\" />
-                  </node>
+									<node path="/configuration/dotnetnuke/sitemap/providers" key="name" action="update" collision="overwrite">
+										<add name="productsSitemapProvider" type="Hotcakes.Commerce.Dnn.Providers.ProductsSitemapProvider, Hotcakes.Commerce.Dnn" providerPath="~\Providers\MembershipProviders\Sitemap\ProductsSitemapProvider\" />
+									</node>
 
-                  <node path="/configuration/system.serviceModel/bindings/basicHttpBinding/binding[@name='ITransactionProcessor']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.serviceModel/client/endpoint[@contract='ITransactionProcessor']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.serviceModel/bindings/basicHttpBinding/binding[@name='ITransactionProcessor']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.serviceModel/client/endpoint[@contract='ITransactionProcessor']" action="remove" collision="overwrite" />
 
-                </nodes>
-              </configuration>
-            </install>
-            <uninstall>
-              <configuration>
-                <nodes>
-                  <node path="/configuration/sectionGroup[name='system.web.webPages.razor']/host" action="remove" collision="overwrite" />
-                  <node path="/configuration/appSettings/add[@key='ClientValidationEnabled']" action="remove" collision="overwrite" />
-                  <node path="/configuration/appSettings/add[@key='UnobtrusiveJavaScriptEnabled']" action="remove" collision="overwrite" />
-                  <node path="/configuration/appSettings/add[@key='IsDnnInstall']" action="remove" collision="overwrite" />
-                  <node path="/configuration/appSettings/add[@key='Factory']" action="remove" collision="overwrite" />
+								</nodes>
+							</configuration>
+						</install>
+						<uninstall>
+							<configuration>
+								<nodes>
+									<node path="/configuration/sectionGroup[name='system.web.webPages.razor']/host" action="remove" collision="overwrite" />
+									<node path="/configuration/appSettings/add[@key='ClientValidationEnabled']" action="remove" collision="overwrite" />
+									<node path="/configuration/appSettings/add[@key='UnobtrusiveJavaScriptEnabled']" action="remove" collision="overwrite" />
+									<node path="/configuration/appSettings/add[@key='IsDnnInstall']" action="remove" collision="overwrite" />
+									<node path="/configuration/appSettings/add[@key='Factory']" action="remove" collision="overwrite" />
 
-                  <node path="/configuration/system.webServer/modules" action="update" collision="overwrite" targetpath="add[@name = 'UrlRewrite']" >
-                    <add name="UrlRewrite" type="DotNetNuke.HttpModules.UrlRewriteModule, DotNetNuke.HttpModules" preCondition="managedHandler" />
-                  </node>
-                  <node path="/configuration/system.webServer/modules" action="update" collision="overwrite" targetpath="add[@name = 'UrlRoutingModule-4.0']" >
-                    <add name="UrlRoutingModule-4.0" type="System.Web.Routing.UrlRoutingModule" preCondition="" />
-                  </node>
+									<node path="/configuration/system.webServer/modules" action="update" collision="overwrite" targetpath="add[@name = 'UrlRewrite']" >
+										<add name="UrlRewrite" type="DotNetNuke.HttpModules.UrlRewriteModule, DotNetNuke.HttpModules" preCondition="managedHandler" />
+									</node>
+									<node path="/configuration/system.webServer/modules" action="update" collision="overwrite" targetpath="add[@name = 'UrlRoutingModule-4.0']" >
+										<add name="UrlRoutingModule-4.0" type="System.Web.Routing.UrlRoutingModule" preCondition="" />
+									</node>
 
-                  <node path="/configuration/system.webServer/handlers/remove[@name = 'ExtensionlessUrlHandler-ISAPI-4.0_32bit']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.webServer/handlers/remove[@name = 'ExtensionlessUrlHandler-ISAPI-4.0_64bit']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.webServer/handlers/add[@name = 'ExtensionlessUrlHandler-ISAPI-4.0_32bit']" action="remove" collision="overwrite" />
-                  <node path="/configuration/system.webServer/handlers/add[@name = 'ExtensionlessUrlHandler-ISAPI-4.0_64bit']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.webServer/handlers/remove[@name = 'ExtensionlessUrlHandler-ISAPI-4.0_32bit']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.webServer/handlers/remove[@name = 'ExtensionlessUrlHandler-ISAPI-4.0_64bit']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.webServer/handlers/add[@name = 'ExtensionlessUrlHandler-ISAPI-4.0_32bit']" action="remove" collision="overwrite" />
+									<node path="/configuration/system.webServer/handlers/add[@name = 'ExtensionlessUrlHandler-ISAPI-4.0_64bit']" action="remove" collision="overwrite" />
 
-                  <node path="/configuration/dotnetnuke/sitemap/providers/add[@name='productsSitemapProvider']" action="remove" collision="overwrite" />
-                  <node path="/configuration/dotnetnuke/friendlyUrl/providers/add[@name='HccFriendlyUrl']" action="remove" collision="overwrite" />
-                  <node path="/configuration/dotnetnuke/friendlyUrl[@defaultProvider='HccFriendlyUrl']" action="updateattribute" name="defaultProvider" value="DNNFriendlyUrl" collision="overwrite"/>
-                </nodes>
-              </configuration>
-            </uninstall>
-          </config>
-        </component>
-      </components>
-    </package>
+									<node path="/configuration/dotnetnuke/sitemap/providers/add[@name='productsSitemapProvider']" action="remove" collision="overwrite" />
+									<node path="/configuration/dotnetnuke/friendlyUrl/providers/add[@name='HccFriendlyUrl']" action="remove" collision="overwrite" />
+									<node path="/configuration/dotnetnuke/friendlyUrl[@defaultProvider='HccFriendlyUrl']" action="updateattribute" name="defaultProvider" value="DNNFriendlyUrl" collision="overwrite"/>
+								</nodes>
+							</configuration>
+						</uninstall>
+					</config>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.ExtensionUrlProvider" type="Library" version="03.06.00">
-      <friendlyName>Hotcakes Extension Url Provider</friendlyName>
-      <description><![CDATA[Hotcakes Extension Url Provider allows you to get rid of 'slug' parameter name in friednly urls]]></description>
-      <iconFile>~/DesktopModules/Hotcakes/Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <components>
-        <component type="UrlProvider">
-          <urlProvider>
-            <name>Hotcakes Url Extension Provider</name>
-            <type>Hotcakes.Modules.ExtensionUrlProvider.HccExtensionUrlProvider</type>
-            <settingsControlSrc>DesktopModules/Hotcakes/ExtensionUrlProvider/Settings.ascx</settingsControlSrc>
-            <redirectAllUrls>false</redirectAllUrls>
-            <replaceAllUrls>true</replaceAllUrls>
-            <rewriteAllUrls>true</rewriteAllUrls>
-          </urlProvider>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.ExtensionUrlProvider" type="Library" version="03.06.00">
+			<friendlyName>Hotcakes Extension Url Provider</friendlyName>
+			<description><![CDATA[Hotcakes Extension Url Provider allows you to get rid of 'slug' parameter name in friednly urls]]></description>
+			<iconFile>~/DesktopModules/Hotcakes/Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<components>
+				<component type="UrlProvider">
+					<urlProvider>
+						<name>Hotcakes Url Extension Provider</name>
+						<type>Hotcakes.Modules.ExtensionUrlProvider.HccExtensionUrlProvider</type>
+						<settingsControlSrc>DesktopModules/Hotcakes/ExtensionUrlProvider/Settings.ascx</settingsControlSrc>
+						<redirectAllUrls>false</redirectAllUrls>
+						<replaceAllUrls>true</replaceAllUrls>
+						<rewriteAllUrls>true</rewriteAllUrls>
+					</urlProvider>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.AddressBook" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Address Book</friendlyName>
-      <description><![CDATA[Hotcakes Commerce address book allows your customers to save addresses used for shipping.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.AddressBook</moduleName>
-            <foldername>Hotcakes/AddressBook</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Address Book</friendlyName>
-                <definitionName>Hotcakes Address Book</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/AddressBook/AddressBookView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>AddressBook</path>
-              <name>AddressBookView.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.AddressBook" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Address Book</friendlyName>
+			<description><![CDATA[Hotcakes Commerce address book allows your customers to save addresses used for shipping.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.AddressBook</moduleName>
+						<foldername>Hotcakes/AddressBook</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Address Book</friendlyName>
+								<definitionName>Hotcakes Address Book</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/AddressBook/AddressBookView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>AddressBook</path>
+							<name>AddressBookView.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.Cart" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Cart</friendlyName>
-      <description><![CDATA[Hotcakes Commerce cart displays products to customers for purchase.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.Cart</moduleName>
-            <foldername>Hotcakes/Cart</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Cart</friendlyName>
-                <definitionName>Hotcakes Cart</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/Cart/CartView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/Cart/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Hotcakes Cart Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>Cart\App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
-            </file>
-            <file>
-              <path>Cart</path>
-              <name>CartView.ascx</name>
-            </file>
-            <file>
-              <path>Cart</path>
-              <name>Settings.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.Cart" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Cart</friendlyName>
+			<description><![CDATA[Hotcakes Commerce cart displays products to customers for purchase.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.Cart</moduleName>
+						<foldername>Hotcakes/Cart</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Cart</friendlyName>
+								<definitionName>Hotcakes Cart</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/Cart/CartView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/Cart/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Hotcakes Cart Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>Cart\App_LocalResources</path>
+							<name>Settings.ascx.resx</name>
+						</file>
+						<file>
+							<path>Cart</path>
+							<name>CartView.ascx</name>
+						</file>
+						<file>
+							<path>Cart</path>
+							<name>Settings.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.CategoryMenu" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Category Menu</friendlyName>
-      <description><![CDATA[Hotcakes Commerce category menu displays categories to help customers find categorized products.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.CategoryMenu</moduleName>
-            <foldername>Hotcakes/CategoryMenu</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Category Menu</friendlyName>
-                <definitionName>Hotcakes Category Menu</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/CategoryMenu/CategoryMenuView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/CategoryMenu/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Hotcakes Category Menu Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>CategoryMenu\App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
-            </file>
-            <file>
-              <path>CategoryMenu</path>
-              <name>CategoryMenuView.ascx</name>
-            </file>
-            <file>
-              <path>CategoryMenu</path>
-              <name>Settings.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.CategoryMenu" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Category Menu</friendlyName>
+			<description><![CDATA[Hotcakes Commerce category menu displays categories to help customers find categorized products.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.CategoryMenu</moduleName>
+						<foldername>Hotcakes/CategoryMenu</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Category Menu</friendlyName>
+								<definitionName>Hotcakes Category Menu</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/CategoryMenu/CategoryMenuView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/CategoryMenu/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Hotcakes Category Menu Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>CategoryMenu\App_LocalResources</path>
+							<name>Settings.ascx.resx</name>
+						</file>
+						<file>
+							<path>CategoryMenu</path>
+							<name>CategoryMenuView.ascx</name>
+						</file>
+						<file>
+							<path>CategoryMenu</path>
+							<name>Settings.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.CategoryViewer" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Category Viewer</friendlyName>
-      <description><![CDATA[Hotcakes Commerce category viewer displays a listing of categories in a visual way for customers to easily drill down to products of their choice.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.CategoryViewer</moduleName>
-            <foldername>Hotcakes/CategoryViewer</foldername>
-            <businessControllerClass />
-            <supportedFeatures>
-              <supportedFeature type="Searchable" />
-            </supportedFeatures>
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Category Viewer</friendlyName>
-                <definitionName>Hotcakes Category Viewer</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/CategoryViewer/CategoryViewerView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/CategoryViewer/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Hotcakes Category Viewer Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>CategoryViewer\App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
-            </file>
-            <file>
-              <path>CategoryViewer</path>
-              <name>CategoryViewerView.ascx</name>
-            </file>
-            <file>
-              <path>CategoryViewer</path>
-              <name>Settings.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.CategoryViewer" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Category Viewer</friendlyName>
+			<description><![CDATA[Hotcakes Commerce category viewer displays a listing of categories in a visual way for customers to easily drill down to products of their choice.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.CategoryViewer</moduleName>
+						<foldername>Hotcakes/CategoryViewer</foldername>
+						<businessControllerClass />
+						<supportedFeatures>
+							<supportedFeature type="Searchable" />
+						</supportedFeatures>
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Category Viewer</friendlyName>
+								<definitionName>Hotcakes Category Viewer</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/CategoryViewer/CategoryViewerView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/CategoryViewer/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Hotcakes Category Viewer Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>CategoryViewer\App_LocalResources</path>
+							<name>Settings.ascx.resx</name>
+						</file>
+						<file>
+							<path>CategoryViewer</path>
+							<name>CategoryViewerView.ascx</name>
+						</file>
+						<file>
+							<path>CategoryViewer</path>
+							<name>Settings.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.Checkout" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Checkout</friendlyName>
-      <description><![CDATA[Hotcakes Commerce checkout allows a customer to finalize their shopping experience by purchasing the items saved in their cart.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.Checkout</moduleName>
-            <foldername>Hotcakes/Checkout</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Checkout</friendlyName>
-                <definitionName>Hotcakes Checkout</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/Checkout/CheckoutView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>PayPalCheckout</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/Checkout/PayPalCheckoutView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>ThirdPartyPayment</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/Checkout/ThirdPartyPaymentView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/Checkout/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Hotcakes Checkout Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>Checkout\App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
-            </file>
-            <file>
-              <path>Checkout</path>
-              <name>CheckoutView.ascx</name>
-            </file>
-            <file>
-              <path>Checkout</path>
-              <name>PayPalCheckoutView.ascx</name>
-            </file>
-            <file>
-              <path>Checkout</path>
-              <name>ThirdPartyPaymentView.ascx</name>
-            </file>
-            <file>
-              <path>Checkout</path>
-              <name>Settings.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.Checkout" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Checkout</friendlyName>
+			<description><![CDATA[Hotcakes Commerce checkout allows a customer to finalize their shopping experience by purchasing the items saved in their cart.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.Checkout</moduleName>
+						<foldername>Hotcakes/Checkout</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Checkout</friendlyName>
+								<definitionName>Hotcakes Checkout</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/Checkout/CheckoutView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>PayPalCheckout</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/Checkout/PayPalCheckoutView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>ThirdPartyPayment</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/Checkout/ThirdPartyPaymentView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/Checkout/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Hotcakes Checkout Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>Checkout\App_LocalResources</path>
+							<name>Settings.ascx.resx</name>
+						</file>
+						<file>
+							<path>Checkout</path>
+							<name>CheckoutView.ascx</name>
+						</file>
+						<file>
+							<path>Checkout</path>
+							<name>PayPalCheckoutView.ascx</name>
+						</file>
+						<file>
+							<path>Checkout</path>
+							<name>ThirdPartyPaymentView.ascx</name>
+						</file>
+						<file>
+							<path>Checkout</path>
+							<name>Settings.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.FeaturedProducts" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Featured Products</friendlyName>
-      <description><![CDATA[Hotcakes Commerce featured products allows you to display products to customers that have been marked as featuresd in the product catalog.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.FeaturedProducts</moduleName>
-            <foldername>Hotcakes/FeaturedProducts</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Featured Products</friendlyName>
-                <definitionName>Hotcakes Featured Products</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/FeaturedProducts/FeaturedProductsView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/FeaturedProducts/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Hotcakes Featured Products Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>FeaturedProducts\App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
-            </file>
-            <file>
-              <path>FeaturedProducts</path>
-              <name>FeaturedProductsView.ascx</name>
-            </file>
-            <file>
-              <path>FeaturedProducts</path>
-              <name>Settings.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.FeaturedProducts" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Featured Products</friendlyName>
+			<description><![CDATA[Hotcakes Commerce featured products allows you to display products to customers that have been marked as featuresd in the product catalog.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.FeaturedProducts</moduleName>
+						<foldername>Hotcakes/FeaturedProducts</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Featured Products</friendlyName>
+								<definitionName>Hotcakes Featured Products</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/FeaturedProducts/FeaturedProductsView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/FeaturedProducts/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Hotcakes Featured Products Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>FeaturedProducts\App_LocalResources</path>
+							<name>Settings.ascx.resx</name>
+						</file>
+						<file>
+							<path>FeaturedProducts</path>
+							<name>FeaturedProductsView.ascx</name>
+						</file>
+						<file>
+							<path>FeaturedProducts</path>
+							<name>Settings.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.LastProductsViewed" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Last Products Viewed</friendlyName>
-      <description><![CDATA[Hotcakes Commerce Last Products Viewed allows you to display the last products that a customer viewed to make it easy for them to return and purchase them.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.LastProductsViewed</moduleName>
-            <foldername>Hotcakes/LastProductsViewed</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Last Products Viewed</friendlyName>
-                <definitionName>Hotcakes Last Products Viewed</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/LastProductsViewed/LastProductsViewed.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/LastProductsViewed/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Hotcakes Last Products Viewed Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>LastProductsViewed\App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
-            </file>
-            <file>
-              <path>LastProductsViewed</path>
-              <name>LastProductsViewed.ascx</name>
-            </file>
-            <file>
-              <path>LastProductsViewed</path>
-              <name>Settings.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.LastProductsViewed" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Last Products Viewed</friendlyName>
+			<description><![CDATA[Hotcakes Commerce Last Products Viewed allows you to display the last products that a customer viewed to make it easy for them to return and purchase them.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.LastProductsViewed</moduleName>
+						<foldername>Hotcakes/LastProductsViewed</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Last Products Viewed</friendlyName>
+								<definitionName>Hotcakes Last Products Viewed</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/LastProductsViewed/LastProductsViewed.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/LastProductsViewed/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Hotcakes Last Products Viewed Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>LastProductsViewed\App_LocalResources</path>
+							<name>Settings.ascx.resx</name>
+						</file>
+						<file>
+							<path>LastProductsViewed</path>
+							<name>LastProductsViewed.ascx</name>
+						</file>
+						<file>
+							<path>LastProductsViewed</path>
+							<name>Settings.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.MiniCart" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Mini Cart</friendlyName>
-      <description><![CDATA[Hotcakes Commerce Mini Cart allows you to provide a minimized cart experience, reducing the amount of things a customer sees.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.MiniCart</moduleName>
-            <foldername>Hotcakes/MiniCart</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Mini Cart</friendlyName>
-                <definitionName>Hotcakes Mini Cart</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/MiniCart/MiniCartView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/MiniCart/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Hotcakes MiniCart Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>MiniCart\App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
-            </file>
-            <file>
-              <path>MiniCart</path>
-              <name>MiniCartView.ascx</name>
-            </file>
-            <file>
-              <path>MiniCart</path>
-              <name>Settings.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.MiniCart" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Mini Cart</friendlyName>
+			<description><![CDATA[Hotcakes Commerce Mini Cart allows you to provide a minimized cart experience, reducing the amount of things a customer sees.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.MiniCart</moduleName>
+						<foldername>Hotcakes/MiniCart</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Mini Cart</friendlyName>
+								<definitionName>Hotcakes Mini Cart</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/MiniCart/MiniCartView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/MiniCart/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Hotcakes MiniCart Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>MiniCart\App_LocalResources</path>
+							<name>Settings.ascx.resx</name>
+						</file>
+						<file>
+							<path>MiniCart</path>
+							<name>MiniCartView.ascx</name>
+						</file>
+						<file>
+							<path>MiniCart</path>
+							<name>Settings.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.SearchInput" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Search Input</friendlyName>
-      <description><![CDATA[Hotcakes Commerce Search Input displays a search option for customers to use to discover products in your store.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.SearchInput</moduleName>
-            <foldername>Hotcakes/SearchInput</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Search Input</friendlyName>
-                <definitionName>Hotcakes Search Input</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/SearchInput/SearchInputView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/SearchInput/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Hotcakes SearchInput Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>SearchInput\App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
-            </file>
-            <file>
-              <path>SearchInput</path>
-              <name>SearchInputView.ascx</name>
-            </file>
-            <file>
-              <path>SearchInput</path>
-              <name>Settings.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.SearchInput" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Search Input</friendlyName>
+			<description><![CDATA[Hotcakes Commerce Search Input displays a search option for customers to use to discover products in your store.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.SearchInput</moduleName>
+						<foldername>Hotcakes/SearchInput</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Search Input</friendlyName>
+								<definitionName>Hotcakes Search Input</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/SearchInput/SearchInputView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/SearchInput/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Hotcakes SearchInput Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>SearchInput\App_LocalResources</path>
+							<name>Settings.ascx.resx</name>
+						</file>
+						<file>
+							<path>SearchInput</path>
+							<name>SearchInputView.ascx</name>
+						</file>
+						<file>
+							<path>SearchInput</path>
+							<name>Settings.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.SkinAffiliate" type="SkinObject" version="03.06.00">
-      <friendlyName>HCSKINAFFILIATE SkinObject</friendlyName>
-      <description><![CDATA[Hotcakes Commerce Affiliate skin object allows designers to add capabilities to handle affiliate requests on each page load without adding code to the page.]]></description>
-      <iconFile>~/DesktopModules/Hotcakes/Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="SkinObject">
-          <moduleControl>
-            <controlKey>HCSKINAFFILIATE</controlKey>
-            <controlSrc>DesktopModules/Hotcakes/SkinAffiliate/SkinAffiliateView.ascx</controlSrc>
-            <supportsPartialRendering>False</supportsPartialRendering>
-          </moduleControl>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>SkinAffiliate</path>
-              <name>SkinAffiliateView.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.SkinAffiliate" type="SkinObject" version="03.06.00">
+			<friendlyName>HCSKINAFFILIATE SkinObject</friendlyName>
+			<description><![CDATA[Hotcakes Commerce Affiliate skin object allows designers to add capabilities to handle affiliate requests on each page load without adding code to the page.]]></description>
+			<iconFile>~/DesktopModules/Hotcakes/Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="SkinObject">
+					<moduleControl>
+						<controlKey>HCSKINAFFILIATE</controlKey>
+						<controlSrc>DesktopModules/Hotcakes/SkinAffiliate/SkinAffiliateView.ascx</controlSrc>
+						<supportsPartialRendering>False</supportsPartialRendering>
+					</moduleControl>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>SkinAffiliate</path>
+							<name>SkinAffiliateView.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.SkinSearch" type="SkinObject" version="03.06.00">
-      <friendlyName>HCSKINSEARCH SkinObject</friendlyName>
-      <description><![CDATA[Hotcakes Commerce Search skin object allows designers to insert the store's search feature into the skin.]]></description>
-      <iconFile>~/DesktopModules/Hotcakes/Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="SkinObject">
-          <moduleControl>
-            <controlKey>HCSKINSEARCH</controlKey>
-            <controlSrc>DesktopModules/Hotcakes/SkinSearch/Search.ascx</controlSrc>
-            <supportsPartialRendering>False</supportsPartialRendering>
-          </moduleControl>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>SkinSearch</path>
-              <name>Search.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.SkinSearch" type="SkinObject" version="03.06.00">
+			<friendlyName>HCSKINSEARCH SkinObject</friendlyName>
+			<description><![CDATA[Hotcakes Commerce Search skin object allows designers to insert the store's search feature into the skin.]]></description>
+			<iconFile>~/DesktopModules/Hotcakes/Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="SkinObject">
+					<moduleControl>
+						<controlKey>HCSKINSEARCH</controlKey>
+						<controlSrc>DesktopModules/Hotcakes/SkinSearch/Search.ascx</controlSrc>
+						<supportsPartialRendering>False</supportsPartialRendering>
+					</moduleControl>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>SkinSearch</path>
+							<name>Search.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.OrderHistory" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Order History</friendlyName>
-      <description><![CDATA[Hotcakes Commerce Order History module provides a way for customers to review their past orders.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.OrderHistory</moduleName>
-            <foldername>Hotcakes/OrderHistory</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Order History</friendlyName>
-                <definitionName>Hotcakes Order History</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/OrderHistory/OrderHistoryView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/OrderHistory/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Hotcakes Order History Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>OrderHistory\App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
-            </file>
-            <file>
-              <path>OrderHistory</path>
-              <name>OrderHistoryView.ascx</name>
-            </file>
-            <file>
-              <path>OrderHistory</path>
-              <name>Settings.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.OrderHistory" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Order History</friendlyName>
+			<description><![CDATA[Hotcakes Commerce Order History module provides a way for customers to review their past orders.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.OrderHistory</moduleName>
+						<foldername>Hotcakes/OrderHistory</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Order History</friendlyName>
+								<definitionName>Hotcakes Order History</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/OrderHistory/OrderHistoryView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/OrderHistory/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Hotcakes Order History Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>OrderHistory\App_LocalResources</path>
+							<name>Settings.ascx.resx</name>
+						</file>
+						<file>
+							<path>OrderHistory</path>
+							<name>OrderHistoryView.ascx</name>
+						</file>
+						<file>
+							<path>OrderHistory</path>
+							<name>Settings.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.ProductGrid" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Product Grid</friendlyName>
-      <description><![CDATA[Hotcakes Commerce Product Grid allows you to specify a set of products to list anywhere, in a grid layout.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.ProductGrid</moduleName>
-            <foldername>Hotcakes/ProductGrid</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Product Grid</friendlyName>
-                <definitionName>Hotcakes Product Grid</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/ProductGrid/ProductGridView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/ProductGrid/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>ProductGrid\App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
-            </file>
-            <file>
-              <name>ProductGrid\ProductGridView.ascx</name>
-            </file>
-            <file>
-              <name>ProductGrid\Settings.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.ProductGrid" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Product Grid</friendlyName>
+			<description><![CDATA[Hotcakes Commerce Product Grid allows you to specify a set of products to list anywhere, in a grid layout.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.ProductGrid</moduleName>
+						<foldername>Hotcakes/ProductGrid</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Product Grid</friendlyName>
+								<definitionName>Hotcakes Product Grid</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/ProductGrid/ProductGridView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/ProductGrid/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>ProductGrid\App_LocalResources</path>
+							<name>Settings.ascx.resx</name>
+						</file>
+						<file>
+							<name>ProductGrid\ProductGridView.ascx</name>
+						</file>
+						<file>
+							<name>ProductGrid\Settings.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.ProductViewer" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Product Viewer</friendlyName>
-      <description><![CDATA[Hotcakes Commerce Product Viewer module displays a chosen product to your customers.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.ProductViewer</moduleName>
-            <foldername>Hotcakes/ProductViewer</foldername>
-            <businessControllerClass />
-            <supportedFeatures>
-              <supportedFeature type="Searchable" />
-            </supportedFeatures>
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Product Viewer</friendlyName>
-                <definitionName>Hotcakes Product Viewer</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/ProductViewer/ProductViewerView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/ProductViewer/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Hotcakes Product Viewer Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>ProductViewer\App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
-            </file>
-            <file>
-              <path>ProductViewer</path>
-              <name>ProductViewerView.ascx</name>
-            </file>
-            <file>
-              <path>ProductViewer</path>
-              <name>Settings.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.ProductViewer" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Product Viewer</friendlyName>
+			<description><![CDATA[Hotcakes Commerce Product Viewer module displays a chosen product to your customers.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.ProductViewer</moduleName>
+						<foldername>Hotcakes/ProductViewer</foldername>
+						<businessControllerClass />
+						<supportedFeatures>
+							<supportedFeature type="Searchable" />
+						</supportedFeatures>
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Product Viewer</friendlyName>
+								<definitionName>Hotcakes Product Viewer</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/ProductViewer/ProductViewerView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/ProductViewer/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Hotcakes Product Viewer Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>ProductViewer\App_LocalResources</path>
+							<name>Settings.ascx.resx</name>
+						</file>
+						<file>
+							<path>ProductViewer</path>
+							<name>ProductViewerView.ascx</name>
+						</file>
+						<file>
+							<path>ProductViewer</path>
+							<name>Settings.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.ProductReviews" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Product Reviews</friendlyName>
-      <description><![CDATA[Hotcakes Commerce Product Reviews will display related reviews for the product currently being displayed on the page.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.ProductReviews</moduleName>
-            <foldername>Hotcakes/ProductReviews</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Product Reviews</friendlyName>
-                <definitionName>Hotcakes Product Reviews</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/ProductReviews/ProductReviewsView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/ProductReviews/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Hotcakes Product Reviews Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>ProductReviews\App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
-            </file>
-            <file>
-              <path>ProductReviews</path>
-              <name>ProductReviewsView.ascx</name>
-            </file>
-            <file>
-              <path>ProductReviews</path>
-              <name>Settings.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.ProductReviews" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Product Reviews</friendlyName>
+			<description><![CDATA[Hotcakes Commerce Product Reviews will display related reviews for the product currently being displayed on the page.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.ProductReviews</moduleName>
+						<foldername>Hotcakes/ProductReviews</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Product Reviews</friendlyName>
+								<definitionName>Hotcakes Product Reviews</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/ProductReviews/ProductReviewsView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/ProductReviews/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Hotcakes Product Reviews Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>ProductReviews\App_LocalResources</path>
+							<name>Settings.ascx.resx</name>
+						</file>
+						<file>
+							<path>ProductReviews</path>
+							<name>ProductReviewsView.ascx</name>
+						</file>
+						<file>
+							<path>ProductReviews</path>
+							<name>Settings.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.ContentBlocks" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Content Blocks</friendlyName>
-      <description><![CDATA[Hotcakes Commerce Content Blocks module allows you to display content blocks you've created in the store admin.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.ContentBlocks</moduleName>
-            <foldername>Hotcakes/ContentBlocks</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Content Blocks</friendlyName>
-                <definitionName>Hotcakes Content Blocks</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/ContentBlocks/ContentBlocksView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/ContentBlocks/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Hotcakes Content Blocks Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>ContentBlocks\App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
-            </file>
-            <file>
-              <path>ContentBlocks</path>
-              <name>ContentBlocksView.ascx</name>
-            </file>
-            <file>
-              <path>ContentBlocks</path>
-              <name>Settings.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.ContentBlocks" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Content Blocks</friendlyName>
+			<description><![CDATA[Hotcakes Commerce Content Blocks module allows you to display content blocks you've created in the store admin.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.ContentBlocks</moduleName>
+						<foldername>Hotcakes/ContentBlocks</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Content Blocks</friendlyName>
+								<definitionName>Hotcakes Content Blocks</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/ContentBlocks/ContentBlocksView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/ContentBlocks/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Hotcakes Content Blocks Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>ContentBlocks\App_LocalResources</path>
+							<name>Settings.ascx.resx</name>
+						</file>
+						<file>
+							<path>ContentBlocks</path>
+							<name>ContentBlocksView.ascx</name>
+						</file>
+						<file>
+							<path>ContentBlocks</path>
+							<name>Settings.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.Search" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Search</friendlyName>
-      <description><![CDATA[Hotcakes Commerce Search Module allows you to use different settings to create a search results page for your store just the way you need it.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.Search</moduleName>
-            <foldername>Hotcakes/Search</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Search</friendlyName>
-                <definitionName>Hotcakes Search</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/Search/SearchView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/Search/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Hotcakes Search Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>Search\App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
-            </file>
-            <file>
-              <path>Search</path>
-              <name>SearchView.ascx</name>
-            </file>
-            <file>
-              <path>Search</path>
-              <name>Settings.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.Search" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Search</friendlyName>
+			<description><![CDATA[Hotcakes Commerce Search Module allows you to use different settings to create a search results page for your store just the way you need it.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.Search</moduleName>
+						<foldername>Hotcakes/Search</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Search</friendlyName>
+								<definitionName>Hotcakes Search</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/Search/SearchView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/Search/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Hotcakes Search Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>Search\App_LocalResources</path>
+							<name>Settings.ascx.resx</name>
+						</file>
+						<file>
+							<path>Search</path>
+							<name>SearchView.ascx</name>
+						</file>
+						<file>
+							<path>Search</path>
+							<name>Settings.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.TopWeeklySellers" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Top Weekly Sellers</friendlyName>
-      <description><![CDATA[Hotcakes Commerce Top Weekly Sellers will display a listing of the 10 most popular products sold over the past week.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.TopWeeklySellers</moduleName>
-            <foldername>Hotcakes/TopWeeklySellers</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Top Weekly Sellers</friendlyName>
-                <definitionName>Hotcakes Top Weekly Sellers</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/TopWeeklySellers/TopWeeklySellersView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/TopWeeklySellers/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Hotcakes Top Weekly Sellers Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>TopWeeklySellers\App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
-            </file>
-            <file>
-              <path>TopWeeklySellers</path>
-              <name>TopWeeklySellersView.ascx</name>
-            </file>
-            <file>
-              <path>TopWeeklySellers</path>
-              <name>Settings.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.TopWeeklySellers" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Top Weekly Sellers</friendlyName>
+			<description><![CDATA[Hotcakes Commerce Top Weekly Sellers will display a listing of the 10 most popular products sold over the past week.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.TopWeeklySellers</moduleName>
+						<foldername>Hotcakes/TopWeeklySellers</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Top Weekly Sellers</friendlyName>
+								<definitionName>Hotcakes Top Weekly Sellers</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/TopWeeklySellers/TopWeeklySellersView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/TopWeeklySellers/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Hotcakes Top Weekly Sellers Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>TopWeeklySellers\App_LocalResources</path>
+							<name>Settings.ascx.resx</name>
+						</file>
+						<file>
+							<path>TopWeeklySellers</path>
+							<name>TopWeeklySellersView.ascx</name>
+						</file>
+						<file>
+							<path>TopWeeklySellers</path>
+							<name>Settings.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.Top10Products" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Top 10 Products</friendlyName>
-      <description><![CDATA[Hotcakes Commerce Top 10 Products module will display a listing of the most popular products sold in the store in the past 10 calendar days.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.Top10Products</moduleName>
-            <foldername>Hotcakes/Top10Products</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Top 10 Products</friendlyName>
-                <definitionName>Hotcakes Top 10 Products</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/Top10Products/Top10ProductsView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Hotcakes/Top10Products/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Hotcakes Top 10 Products Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>Top10Products\App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
-            </file>
-            <file>
-              <path>Top10Products</path>
-              <name>Top10ProductsView.ascx</name>
-            </file>
-            <file>
-              <path>Top10Products</path>
-              <name>Settings.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.Top10Products" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Top 10 Products</friendlyName>
+			<description><![CDATA[Hotcakes Commerce Top 10 Products module will display a listing of the most popular products sold in the store in the past 10 calendar days.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.Top10Products</moduleName>
+						<foldername>Hotcakes/Top10Products</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Top 10 Products</friendlyName>
+								<definitionName>Hotcakes Top 10 Products</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/Top10Products/Top10ProductsView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/Hotcakes/Top10Products/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Hotcakes Top 10 Products Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>Top10Products\App_LocalResources</path>
+							<name>Settings.ascx.resx</name>
+						</file>
+						<file>
+							<path>Top10Products</path>
+							<name>Top10ProductsView.ascx</name>
+						</file>
+						<file>
+							<path>Top10Products</path>
+							<name>Settings.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.WishList" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Wish List</friendlyName>
-      <description><![CDATA[Hotcakes Commerce Wish List module shows your customers products that have been added to their wish list for purchase later.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.WishList</moduleName>
-            <foldername>Hotcakes/WishList</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Wish List</friendlyName>
-                <definitionName>Hotcakes Wish List</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/WishList/WishListView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>WishList</path>
-              <name>WishListView.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.WishList" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Wish List</friendlyName>
+			<description><![CDATA[Hotcakes Commerce Wish List module shows your customers products that have been added to their wish list for purchase later.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.WishList</moduleName>
+						<foldername>Hotcakes/WishList</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Wish List</friendlyName>
+								<definitionName>Hotcakes Wish List</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/WishList/WishListView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>WishList</path>
+							<name>WishListView.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.AffiliateRegistration" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Affiliate Registration</friendlyName>
-      <friendlyName>Hotcakes Wish List</friendlyName>
-      <description><![CDATA[Hotcakes Commerce Affiliate Registration module.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.AffiliateRegistration</moduleName>
-            <foldername>Hotcakes/AffiliateRegistration</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Affiliate Registration</friendlyName>
-                <definitionName>Hotcakes Affiliate Registration</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/AffiliateRegistration/AffiliateRegistrationView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>AffiliateRegistration</path>
-              <name>AffiliateRegistrationView.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.AffiliateRegistration" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Affiliate Registration</friendlyName>
+			<friendlyName>Hotcakes Wish List</friendlyName>
+			<description><![CDATA[Hotcakes Commerce Affiliate Registration module.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.AffiliateRegistration</moduleName>
+						<foldername>Hotcakes/AffiliateRegistration</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Affiliate Registration</friendlyName>
+								<definitionName>Hotcakes Affiliate Registration</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/AffiliateRegistration/AffiliateRegistrationView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>AffiliateRegistration</path>
+							<name>AffiliateRegistrationView.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-    <package name="Hotcakes.AffiliateDashboard" type="Module" version="03.06.00">
-      <friendlyName>Hotcakes Affiliate Dashboard</friendlyName>
-      <description><![CDATA[Hotcakes Commerce Affiliate Dashboard.]]></description>
-      <iconFile>Core/Images/hcc-logo.png</iconFile>
-      <owner>
-        <name>Hotcakes Commerce</name>
-        <organization>Hotcakes Commerce, LLC</organization>
-        <url>https://hotcakes.org</url>
-        <email>support@HotcakesCommerce.com</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Hotcakes.AffiliateDashboard</moduleName>
-            <foldername>Hotcakes/AffiliateDashboard</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Hotcakes Affiliate Dashboard</friendlyName>
-                <definitionName>Hotcakes Affiliate Dashboard</definitionName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Hotcakes/AffiliateDashboard/AffiliateDashboardView.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <supportsPopUps>False</supportsPopUps>
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\Hotcakes</basePath>
-            <file>
-              <path>AffiliateDashboard</path>
-              <name>AffiliateDashboardView.ascx</name>
-            </file>
-          </files>
-        </component>
-      </components>
-    </package>
+		<package name="Hotcakes.AffiliateDashboard" type="Module" version="03.06.00">
+			<friendlyName>Hotcakes Affiliate Dashboard</friendlyName>
+			<description><![CDATA[Hotcakes Commerce Affiliate Dashboard.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Hotcakes.AffiliateDashboard</moduleName>
+						<foldername>Hotcakes/AffiliateDashboard</foldername>
+						<businessControllerClass />
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>Hotcakes Affiliate Dashboard</friendlyName>
+								<definitionName>Hotcakes Affiliate Dashboard</definitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/Hotcakes/AffiliateDashboard/AffiliateDashboardView.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>AffiliateDashboard</path>
+							<name>AffiliateDashboardView.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
 
-  </packages>
+	</packages>
 </dotnetnuke>

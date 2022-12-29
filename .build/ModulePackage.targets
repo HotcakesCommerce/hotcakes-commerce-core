@@ -120,6 +120,7 @@
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\log4net.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\paypal_base.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\Stripe.net.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\Microsoft.Bcl.AsyncInterfaces.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\DocumentFormat.OpenXml.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\DocumentFormat.OpenXml.Extensions.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\EntityFramework.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
