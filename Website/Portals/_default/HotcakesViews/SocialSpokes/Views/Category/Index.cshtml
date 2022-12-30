@@ -4,10 +4,10 @@
 {
     List<Hotcakes.Modules.Core.Models.SingleProductViewModel> GetCommunityFavoritesModel()
     {
-        var hccApp = HccAppHelper.InitHccApp();
+        //var hccApp = HccAppHelper.InitHccApp();
         int totalResults = 0;
 
-        var products = hccApp.CatalogServices.FindProductForCategoryWithSort(
+        var products = HccApp.CatalogServices.FindProductForCategoryWithSort(
             Model.LocalCategory.Bvin,
             Hotcakes.Commerce.Catalog.CategorySortOrder.None,
             false, 1, int.MaxValue, ref totalResults)
@@ -16,7 +16,7 @@
         var ftModel = new List<Hotcakes.Modules.Core.Models.SingleProductViewModel>();
         foreach (var p in products.Take(3))
         {
-            var pModel = new Hotcakes.Modules.Core.Models.SingleProductViewModel(p, hccApp);
+            var pModel = new Hotcakes.Modules.Core.Models.SingleProductViewModel(p, HccApp);
             ftModel.Add(pModel);
         }
 
