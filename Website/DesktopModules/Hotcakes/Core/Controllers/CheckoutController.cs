@@ -100,6 +100,11 @@ namespace Hotcakes.Modules.Core.Controllers
         [NonCacheableResponseFilter]
         public ActionResult Index()
         {
+            if (CurrentCart == null || CurrentCart.Items == null || CurrentCart.Items.Count == 0)
+            {
+                return Redirect(Url.RouteHccUrl(HccRoute.Cart));
+            }
+            
             var model = LoadCheckoutModel();
             HccApp.AnalyticsService.RegisterEvent(HccApp.CurrentCustomerId, ActionTypes.GoToChekout, null);
             VerifySessionError(model);
@@ -603,9 +608,6 @@ namespace Hotcakes.Modules.Core.Controllers
 
         private CheckoutViewModel LoadCheckoutModel()
         {
-            if (CurrentCart == null || CurrentCart.Items == null || CurrentCart.Items.Count == 0)
-                Redirect(Url.RouteHccUrl(HccRoute.Cart));
-
             var model = new CheckoutViewModel { CurrentOrder = CurrentCart };
 
             LoadCurrentCustomer(model);

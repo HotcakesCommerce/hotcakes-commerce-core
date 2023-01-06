@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
 	<PropertyGroup>
-		<LangVersion>C# 7.0</LangVersion>
+		<LangVersion>C# 10.0</LangVersion>
 	</PropertyGroup>
 
 	<PropertyGroup>
