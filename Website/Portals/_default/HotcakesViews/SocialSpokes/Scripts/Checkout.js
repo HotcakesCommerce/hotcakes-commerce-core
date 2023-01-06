@@ -1,4 +1,7 @@
 ﻿jQuery(function ($) {
+    const clientSecret = $("#PaymentIntentClientSecret").val()
+    const stripePublicKey = $("#StripePublicKey").val();
+    const stripe = stripePublicKey ? Stripe(stripePublicKey) : null;
 
     // Common ----------------------
 
@@ -15,8 +18,8 @@
         // Handle Card Number plugin ----------
         $('#cccardnumber')
             .hcCardInput(".hc-card-icons",
-            function ($input) {
-					var key = CryptoJS.enc.Utf8.parse($('#aesInitVector').val());
+                function ($input) {
+                    var key = CryptoJS.enc.Utf8.parse($('#aesInitVector').val());
                     var iv = CryptoJS.enc.Utf8.parse($('#aesKey').val());
 
                     var encryptedCC = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse($input.val()), key,
@@ -28,10 +31,10 @@
                         }).toString();
 
                     $.post(hcc.getServiceUrl("checkout/CleanCreditCard"), { "CardNumber": encryptedCC }, null, "json")
-                    .done(function (data) {
-                        $input.val(data.CardNumber);
-                    });
-            });
+                        .done(function (data) {
+                            $input.val(data.CardNumber);
+                        });
+                });
 
     }
 
@@ -43,8 +46,8 @@
 
     function IsEmailKnown(forceSwitch, emailfieldid) {
         var emailfield = $(emailfieldid || '#customeremail').val().toLowerCase();
-		var token = $('input[name="__RequestVerificationToken"]').val();
-		
+        var token = $('input[name="__RequestVerificationToken"]').val();
+
         $.ajax({
             url: hcc.getServiceUrl("checkout/IsEmailKnown"),
             type: 'post',
@@ -76,31 +79,31 @@
         var username = $('#hcLoginSection #username').val();
         var passwordfield = $('#hcLoginSection #password').val();
         $.post(hcc.getServiceUrl("account/AjaxSignIn"),
-                {
-                    "username": username,
-                    "password": passwordfield
-                },
-                function (data) {
-                    if (data.Success == "True" || data.Success == true) {
-                        $('#loginmessage').html(hcc.l10n.checkout_LoggedIn).attr('class', 'dnnFormMessage dnnFormSuccess').show();
-                        $('#hcLoginChoose').hide();
-                        $('#hcTabLogin').hide();
-                        UserLoggedIn();
-                    }
-                    else {
-                        $('#loginmessage').html(hcc.l10n.checkout_LoginFailed).attr('class', 'dnnFormMessage dnnFormError').show();
-                    }
-                },
-                "json")
-                .error(function () {
-                    ajaxErrorNotification();
-                })
-                .complete(function () {
-                    $('#hcLoginSection').ajaxLoader("stop");
-                });
+            {
+                "username": username,
+                "password": passwordfield
+            },
+            function (data) {
+                if (data.Success == "True" || data.Success == true) {
+                    $('#loginmessage').html(hcc.l10n.checkout_LoggedIn).attr('class', 'dnnFormMessage dnnFormSuccess').show();
+                    $('#hcLoginChoose').hide();
+                    $('#hcTabLogin').hide();
+                    UserLoggedIn();
+                }
+                else {
+                    $('#loginmessage').html(hcc.l10n.checkout_LoginFailed).attr('class', 'dnnFormMessage dnnFormError').show();
+                }
+            },
+            "json")
+            .error(function () {
+                ajaxErrorNotification();
+            })
+            .complete(function () {
+                $('#hcLoginSection').ajaxLoader("stop");
+            });
 
     }
-    
+
     function UserLoggedIn() {
         $.ajax({
             type: 'POST',
@@ -163,7 +166,7 @@
         init: function () {
             this.$radioButtons = $("input[name = 'userewardspoints']");
             this.$rpWrapper = $('#hccRewardPointsWrap');
-            this.bindEvents(); 
+            this.bindEvents();
         },
         bindEvents: function () {
             this.$radioButtons.change(function (e) { RewardPoints.changeRewardPoints(e); });
@@ -272,7 +275,7 @@
 
             this.$chkShowBilling.change(function (e) { Addresses.toggleBilling(e); });
             this.$shAvailableAddresses.change(function (e) { Addresses.selectedAddressChanged(e); });
-            
+
             this.$shCountry.change(function () {
                 self.loadRegionsWithSelection(self.$shState, $('#shippingcountry :selected').val(), '');
             });
@@ -343,7 +346,7 @@
                 this.$deliveryWarning.show();
             }
 
-            if(!this.isInitializing)
+            if (!this.isInitializing)
                 this.forceAddressChange();
         },
         billingChanged: function (e) {
@@ -379,8 +382,7 @@
         },
         saveNormalized: function (e) {
 
-            if (this.shippingNmAddr != null && this.$dialogShippingRadio.filter(":checked").val() == "N")
-            {
+            if (this.shippingNmAddr != null && this.$dialogShippingRadio.filter(":checked").val() == "N") {
                 this.$shAddress.val(this.shippingNmAddr.Line1);
                 this.$shAddress2.val(this.shippingNmAddr.Line2);
                 this.$shCity.val(this.shippingNmAddr.City);
@@ -416,7 +418,11 @@
                     var showBillingNm = (blRes != null && blRes.NormalizedAddress != null);
 
                     if (!showShippingNm && !showBillingNm) {
-                        self.saveForm();
+                        if (clientSecret) {
+                            CreatePaymentMethod(clientSecret)
+                        } else {
+                            self.saveForm();
+                        }
                     }
                     else {
                         if (showShippingNm) {
@@ -455,7 +461,7 @@
             this.enableDialog(false);
             this.$submitButton.click();
         },
-        forceAddressChange: function(){
+        forceAddressChange: function () {
             OrderSummary.showLoadingProgress();
 
             this.applyAddressChange(function (data) {
@@ -464,7 +470,7 @@
                 if (data.orderitems) OrderSummary.updateItems(data.orderitems);
                 if (data.PaymentViewModel) UpdatePaymentMethods(data.PaymentViewModel);
             },
-            this.isInitializing);
+                this.isInitializing);
         },
         applyAddressChange: function (callback, isInitializing) {
             $.ajax({
@@ -521,8 +527,7 @@
                 }
             });
         },
-        populateAddressData: function(adressWrapper, address)
-        {
+        populateAddressData: function (adressWrapper, address) {
             var addressbvinField = adressWrapper.find("[id*='addressbvin']");
 
             if (address) {
@@ -585,25 +590,25 @@
         },
         loadRegionsWithSelection: function (regionlist, countryid, selectedregion, raiseChange) {
             $.post(hcc.getServiceUrl("estimateshipping/getregions/" + countryid),
-                  {
-                      "regionid": selectedregion
-                  },
-                  function (data) {
-                      regionlist.html(data.Regions);
+                {
+                    "regionid": selectedregion
+                },
+                function (data) {
+                    regionlist.html(data.Regions);
 
-                      //duplicate value to tempRegion
-                      var tempRegion = regionlist.parent().find("[id*='tempregion']");
-                      tempRegion.val(selectedregion);
+                    //duplicate value to tempRegion
+                    var tempRegion = regionlist.parent().find("[id*='tempregion']");
+                    tempRegion.val(selectedregion);
 
-                      if (raiseChange)
+                    if (raiseChange)
                         regionlist.change();
-                  },
-                 "json"
-                 );
+                },
+                "json"
+            );
         }
     };
 
-    function RefreshShippingRates() {        
+    function RefreshShippingRates() {
         $('#hcShippingRates').html('');
         $('#hcDeliverySection').ajaxLoader('start');
         $('#hcShippingNotValid').hide();
@@ -724,7 +729,7 @@
                 var $totalBase = $el.find(".hcLineTotalBase");
                 var $totalAdj = $el.find(".hcLineTotalAdjusted");
                 var $lineTax = $el.find(".hcLineTax");
-                
+
 
                 var oItem = orderItems[i];
                 if (oItem.HasAnyDiscounts)
@@ -776,7 +781,7 @@
             this.$tblGiftCards = $("#hcGiftCardList");
             this.$gcFormItem = $("#hcGiftCardsFormItem");
             this.$gcFormAction = $("#hcGiftCardsFormAction");
-            
+
             this.bindEvents();
         },
         bindEvents: function () {
@@ -784,7 +789,7 @@
             self.$addGiftCard.click(function (e) { self.addGiftCard(e); });
             self.$tblGiftCards.on("click", ".hc-delete", function (e) { self.removeGiftCard(e); });
         },
-        addGiftCard: function(e){
+        addGiftCard: function (e) {
             var self = GiftCards;
             self.$gcPanel.ajaxLoader('start');
             OrderSummary.showLoadingProgress();
@@ -857,6 +862,51 @@
             UpdatePaymentMethods(payment);
         }
     };
+
+    async function CreatePaymentMethod(clientSecret) {
+        var status = await checkPaymentStatus(clientSecret)
+        if (status === "requires_payment_method") {
+            var cardNumber = $("#cccardnumber").val();
+            var cvc = $("#ccsecuritycode").val();
+            var expMonth = $("#ccexpmonth").val();
+            var expYear = $("#ccexpyear").val();
+            var paymentIntent = $("#PaymentIntentId").val();
+            var pm = "";
+            if (cardNumber && cvc && expMonth && expYear) {
+                var reqUrl = hcc.getServiceUrl("checkout/AttachPaymentMethod");
+                $.post(reqUrl, { "CardNumber": cardNumber, "Cvc": cvc, "ExpMonth": expMonth, "ExpYear": expYear, "PaymentIntentId": paymentIntent }, null, "json")
+                    .done((data) => {
+                        stripe
+                            .retrievePaymentIntent(clientSecret)
+                            .then(async (result) => {
+                                if (result.paymentIntent) {
+                                    if (result.paymentIntent.status == "requires_action") {
+                                        var result = await stripe.confirmCardPayment(clientSecret);
+                                        Addresses.saveForm()
+                                    } else {
+                                        Addresses.saveForm()
+                                    }
+                                } else {
+                                    Addresses.saveForm()
+                                }
+                            });
+                    })
+                    .fail(function (error) {
+                        console.log("error: " + error);
+                    });
+            } else {
+                Addresses.saveForm()
+            }
+        } else {
+            Addresses.saveForm()
+        }
+    };
+
+    async function checkPaymentStatus(clientSecret) {
+
+        const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
+        return paymentIntent.status;
+    }
 
     // Initialization --------------------------
 
