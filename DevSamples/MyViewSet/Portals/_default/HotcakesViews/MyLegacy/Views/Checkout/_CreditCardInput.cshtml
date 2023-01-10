@@ -36,6 +36,12 @@
 <div class="hc-creditcard-form">
     <input type="hidden" id="aesInitVector" name="aesInitVector" value="@Model.AESEncryptInitVector" />
     <input type="hidden" id="aesKey" name="aesKey" value="@Model.AESEncryptKey" />
+     @if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway.Equals(PaymentGatewayType.Stripe))
+    {
+        <input type="hidden" id="PaymentIntentId" name="PaymentIntentId" value="@Model.PaymentIntentId" />
+        <input type="hidden" id="PaymentIntentClientSecret" name="PaymentIntentClientSecret" value="@Model.PaymentIntentClientSecret" />
+        <input type="hidden" id="StripePublicKey" value="@Model.StripePublicKey" />
+    }
     <div class="dnnFormItem">
         <label class="dnnLabel">&nbsp;</label>
         <span class="hc-card-icons">
@@ -64,12 +70,12 @@
     <div class="dnnFormItem">
         <label class="dnnLabel">@Localization.GetString("ExpDate")</label>
 
-        <select name="ccexpmonth" class="hc-cc-expmonth" tabindex="502">
+        <select id="ccexpmonth" name="ccexpmonth" class="hc-cc-expmonth" tabindex="502">
             <option value="0">--</option>
             @Months()
         </select>
 
-        <select name="ccexpyear" class="hc-cc-expyear" tabindex="503">
+        <select id="ccexpyear" name="ccexpyear" class="hc-cc-expyear" tabindex="503">
             <option value="0">----</option>
             @Years()
         </select>
@@ -78,7 +84,7 @@
     <div class="dnnFormItem">
         <label class="dnnLabel">@Localization.GetString("SecurityCode")</label>
 
-        <input type="text" name="ccsecuritycode" size="5" tabindex="504"
+        <input type="text" id="ccsecuritycode" name="ccsecuritycode" size="5" tabindex="504"
                 maxlength="4" class="hc-cc-seccode @Model.IsErr("ccsecuritycode")" autocomplete="off" />
 
     </div>
