@@ -120,6 +120,9 @@
   <data name="ApiKey.Text" xml:space="preserve">
     <value>API Key</value>
   </data>
+  <data name="PublicKey.Text" xml:space="preserve">
+    <value>Public Key</value>
+  </data>
   <data name="Currency.Text" xml:space="preserve">
     <value>Currency</value>
   </data>

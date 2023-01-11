@@ -51,7 +51,7 @@ namespace Hotcakes.Commerce.Dnn.Web
         {
             get
             {
-                return Page.Items[IsScriptResourcesAddedKey] != null && (bool) Page.Items[IsScriptResourcesAddedKey];
+                return Page.Items[IsScriptResourcesAddedKey] != null && (bool)Page.Items[IsScriptResourcesAddedKey];
             }
             set { Page.Items[IsScriptResourcesAddedKey] = value; }
         }
@@ -145,6 +145,7 @@ namespace Hotcakes.Commerce.Dnn.Web
 
         protected void RegisterStyleSheet(string path)
         {
+
             ClientResourceManager.RegisterStyleSheet(Page, ResolveUrl(path), FileOrder.Css.ModuleCss);
         }
 
@@ -156,8 +157,14 @@ namespace Hotcakes.Commerce.Dnn.Web
 
         protected void RegisterScript(string path, int order = 0)
         {
-            ClientResourceManager.RegisterScript(Page, ResolveUrl(ScriptsBasePath + path),
-                FileOrder.Js.DefaultPriority + order);
+                ClientResourceManager.RegisterScript(Page, ResolveUrl(ScriptsBasePath + path),
+                    FileOrder.Js.DefaultPriority + order);
+        }
+
+        protected void RegisterScriptExternal(string path, int order = 0)
+        {
+                ClientResourceManager.RegisterScript(Page, ResolveUrl(path),
+                    FileOrder.Js.DefaultPriority + order);
         }
 
         protected void RegisterUnobtrusiveValidateScripts()
@@ -196,7 +203,7 @@ namespace Hotcakes.Commerce.Dnn.Web
                 }
 
                 var scriptResource = string.Format(" {1} var hcc = hcc || {{}}; hcc.l10n = {0};", json, analyticsScript);
-                ScriptManager.RegisterClientScriptBlock(this, typeof (HotcakesModuleBase), "ScriptResources",
+                ScriptManager.RegisterClientScriptBlock(this, typeof(HotcakesModuleBase), "ScriptResources",
                     scriptResource, true);
 
                 IsScriptResourcesAdded = true;

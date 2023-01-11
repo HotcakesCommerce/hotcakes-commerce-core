@@ -36,6 +36,12 @@ namespace Hotcakes.Payment.Gateways
             set { AddOrUpdate("StripeApiKey", value); }
         }
 
+        public string StripePublicKey
+        {
+            get { return GetSettingOrEmpty("StripePublicKey"); }
+            set { AddOrUpdate("StripePublicKey", value); }
+        }
+
         public string CurrencyCode
         {
             get
