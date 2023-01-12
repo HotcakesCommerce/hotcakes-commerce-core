@@ -73,13 +73,7 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
                         mode = PayPalConstants.PAYMENT_MODE_CAPTURE;
                     }
 
-                    // Accelerated boarding
-                    if (string.IsNullOrWhiteSpace(context.HccApp.CurrentStore.Settings.PayPal.UserName))
-					{
-                        mode = PayPalConstants.PAYMENT_MODE_CAPTURE;
-					}
-
-					bool isNonShipping = !context.Order.HasShippingItems;
+                    bool isNonShipping = !context.Order.HasShippingItems;
 
                     bool addressSupplied = false;
                     if (context.Inputs["ViaCheckout"] != null
