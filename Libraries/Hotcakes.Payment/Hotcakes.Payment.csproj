@@ -79,9 +79,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\References\Dnn\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="paypal_base">
-      <HintPath>..\..\References\Misc\paypal_base.dll</HintPath>
-    </Reference>
     <Reference Include="Stripe.net, Version=41.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Stripe.net.41.2.0\lib\net461\Stripe.net.dll</HintPath>
     </Reference>

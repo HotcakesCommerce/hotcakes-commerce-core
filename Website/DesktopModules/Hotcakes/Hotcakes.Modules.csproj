@@ -136,10 +136,6 @@
     <Reference Include="PayPalHttp-Dotnet, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\PayPalHttp.1.0.1\lib\netstandard2.0\PayPalHttp-Dotnet.dll</HintPath>
     </Reference>
-    <Reference Include="paypal_base">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Misc\paypal_base.dll</HintPath>
-    </Reference>
     <Reference Include="Stripe.net, Version=41.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Stripe.net.41.2.0\lib\net461\Stripe.net.dll</HintPath>
