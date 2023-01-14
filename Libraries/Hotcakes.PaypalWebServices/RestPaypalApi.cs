@@ -151,13 +151,13 @@ namespace Hotcakes.PaypalWebServices
             request.RequestBody(order);
             response = await client().Execute(request);
             var result = response.Result<Order>();
-
-            response = await confirmOrder(result.Id, creditCardType, creditCardNumber, CVV2, expMonth.ToString(), expYear.ToString());
+            string fullName = buyerBillingFirstName + " " + buyerBillingLastName;
+            response = await confirmOrder(result.Id, creditCardType, creditCardNumber, CVV2, expMonth.ToString(), expYear.ToString(), fullName);
 
             return response;
         }
 
-        public async Task<HttpResponse> confirmOrder(string orderId, string creditCardType, string creditCardNumber, string CVV2, string expMonth, string expYear)
+        public async Task<HttpResponse> confirmOrder(string orderId, string creditCardType, string creditCardNumber, string CVV2, string expMonth, string expYear, string cardName)
         {
             HttpResponse response;
             expMonth = expMonth.Length == 1 ? $"0{expMonth}" : expMonth;
@@ -169,7 +169,7 @@ namespace Hotcakes.PaypalWebServices
                     {
                         Number = creditCardNumber,
                         Expiry = $"{expYear}-{expMonth}",
-                        Name = "John Doe",
+                        Name = cardName,
                         SecurityCode = CVV2,
                     }
                 },
