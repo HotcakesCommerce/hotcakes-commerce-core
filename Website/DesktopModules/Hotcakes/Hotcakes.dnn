@@ -58,7 +58,7 @@
 						<attributes>
 							<businessControllerClass>Hotcakes.Modules.Core.HotcakesController, Hotcakes.Modules</businessControllerClass>
 							<desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-							<upgradeVersionsList>01.00.00,01.00.07,01.05.00,01.06.00,01.07.00,01.08.00,01.09.00,01.10.00,02.00.00,02.00.01,02.00.02,02.00.03,02.00.04,02.00.05,02.00.06,03.00.00,03.00.01,03.01.00,03.02.00,03.02.01,03.02.02,03.02.03,03.03.00,03.04.00,03.04.01,03.05.00,03.06.00</upgradeVersionsList>
+							<upgradeVersionsList>01.00.00,01.00.07,01.05.00,01.06.00,01.07.00,01.08.00,01.09.00,01.10.00,02.00.00,02.00.01,02.00.02,02.00.03,02.00.04,02.00.05,02.00.06,03.00.00,03.00.01,03.01.00,03.02.00,03.02.01,03.02.02,03.02.03,03.03.00,03.04.00,03.04.01,03.05.00,03.06.00,03.07.00</upgradeVersionsList>
 						</attributes>
 					</eventMessage>
 				</component>
@@ -235,6 +235,7 @@
 				<component type="Cleanup" version="03.03.00" fileName="03.03.00.txt" />
 				<component type="Cleanup" version="03.05.00" fileName="03.05.00.txt" />
 				<component type="Cleanup" version="03.06.00" fileName="03.06.00.txt" />
+				<component type="Cleanup" version="03.07.00" fileName="03.07.00.txt" />
 				<component type="File">
 					<files>
 						<basePath>DesktopModules\Hotcakes</basePath>
@@ -388,9 +389,15 @@
 						</assembly>
 						<assembly>
 							<path>bin</path>
-							<name>paypal_base.dll</name>
-							<sourceFileName>bin\paypal_base.dll</sourceFileName>
-							<version>05.06.92</version>
+							<name>PayPalCheckoutSdk.dll</name>
+							<sourceFileName>bin\PayPalCheckoutSdk.dll</sourceFileName>
+							<version>01.00.00.00</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>PayPalHttp-Dotnet.dll</name>
+							<sourceFileName>bin\PayPalHttp-Dotnet.dll</sourceFileName>
+							<version>01.00.01.00</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>

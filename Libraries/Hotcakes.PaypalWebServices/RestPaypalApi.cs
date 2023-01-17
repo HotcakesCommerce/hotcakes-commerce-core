@@ -26,7 +26,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using com.paypal.soap.api;
 using PayPalCheckoutSdk.Core;
 using PayPalCheckoutSdk.Orders;
 using PayPalCheckoutSdk.Payments;
@@ -77,11 +76,115 @@ namespace Hotcakes.PaypalWebServices
             return client;
         }
 
-        public async Task<HttpResponse> createOrder(PaymentDetailsItemType[] itemsDetails,
+        public async Task<HttpResponse> doDirectCheckout(string paymentAmount,
+            string buyerBillingLastName,
+            string buyerBillingFirstName,
+            string buyerShippingLastName, string buyerShippingFirstName, string buyerBillingAddress1,
+            string buyerBillingAddress2,
+            string buyerBillingCity, string buyerBillingState, string buyerBillingPostalCode,
+            string buyerBillingCountryCode,
+            string creditCardType, string creditCardNumber, string CVV2, int expMonth, int expYear,
+            string paymentAction,
+            string buyerShippingAddress1, string buyerShippingAddress2, string buyerShippingCity,
+            string buyerShippingState,
+            string buyerShippingPostalCode, string buyerShippingCountryCode, string invoiceId,
+            string storeCurrency)
+        {
+            HttpResponse response;
+
+            OrderRequest order = new OrderRequest()
+            {
+                CheckoutPaymentIntent = paymentAction,
+                Payer = new Payer
+                {
+                    Name = new Name
+                    {
+                        GivenName = buyerBillingFirstName,
+                        Surname = buyerBillingLastName
+                    },
+                    AddressPortable = new AddressPortable
+                    {
+                        AddressLine1 = buyerBillingAddress1,
+                        AddressLine2 = buyerBillingAddress2,
+                        AdminArea1 = buyerBillingCity,
+                        AdminArea2 = buyerBillingState,
+                        PostalCode = buyerBillingPostalCode,
+                        CountryCode = buyerBillingCountryCode,
+                    }
+                },
+                PurchaseUnits = new List<PurchaseUnitRequest>
+                {
+                    new PurchaseUnitRequest
+                    {
+                        InvoiceId = invoiceId,
+                        AmountWithBreakdown = new AmountWithBreakdown
+                        {
+                            CurrencyCode = storeCurrency,
+                            Value = paymentAmount,
+                            AmountBreakdown = new AmountBreakdown
+                            {
+                                ItemTotal = new Money
+                                {
+                                    CurrencyCode = storeCurrency,
+                                    Value = paymentAmount
+                                },
+                                
+                            }
+                        },
+                        ShippingDetail = new ShippingDetail
+                        {
+                            AddressPortable = new AddressPortable
+                            {
+                                AddressLine1 = buyerShippingAddress1,
+                                AddressLine2 = buyerShippingAddress2,
+                                AdminArea2 = buyerShippingCity,
+                                AdminArea1 = buyerShippingState,
+                                PostalCode = buyerShippingPostalCode,
+                                CountryCode = buyerShippingCountryCode,AddressDetails = new AddressDetails{}
+                            }
+                        }
+                    }
+                }
+            };
+            var request = new OrdersCreateRequest();
+            request.Prefer(REQUEST_RETURN_TYPE);
+            request.RequestBody(order);
+            response = await client().Execute(request);
+            var result = response.Result<Order>();
+            string fullName = buyerBillingFirstName + " " + buyerBillingLastName;
+            response = await confirmOrder(result.Id, creditCardType, creditCardNumber, CVV2, expMonth.ToString(), expYear.ToString(), fullName);
+
+            return response;
+        }
+
+        public async Task<HttpResponse> confirmOrder(string orderId, string creditCardType, string creditCardNumber, string CVV2, string expMonth, string expYear, string cardName)
+        {
+            HttpResponse response;
+            expMonth = expMonth.Length == 1 ? $"0{expMonth}" : expMonth;
+            var orderConfirm = new OrderActionRequest()
+            {
+                PaymentSource = new PaymentSource()
+                {
+                    Card = new Card()
+                    {
+                        Number = creditCardNumber,
+                        Expiry = $"{expYear}-{expMonth}",
+                        Name = cardName,
+                        SecurityCode = CVV2,
+                    }
+                },
+            };
+            var request = new OrdersConfirmRequest(orderId);
+            request.RequestBody(orderConfirm);
+            response = await client().Execute(request);
+
+            return response;
+        }
+
+        public async Task<HttpResponse> createOrder(
             string itemsTotal, string taxTotal, string shippingTotal,
             string orderTotal, string returnURL, string cancelURL, string paymentAction,
-            string currencyCodeType, SolutionTypeType solutionType, string name,
-            string countryISOCode, string street1, string street2, string city, string region, string postalCode,
+            string currencyCodeType, string name, string countryISOCode, string street1, string street2, string city, string region, string postalCode,
             string phone, string invoiceId, bool isNonShipping)
         {
             HttpResponse response;
@@ -153,10 +256,10 @@ namespace Hotcakes.PaypalWebServices
         }
 
 
-        public async Task<HttpResponse> createOrder(PaymentDetailsItemType[] itemsDetails,
+        public async Task<HttpResponse> createOrder(
             string itemsTotal, string taxTotal, string orderTotal,
             string returnURL, string cancelURL, string paymentAction, string currencyCodeType,
-            SolutionTypeType solutionType, string invoiceId, bool isNonShipping)
+            string invoiceId, bool isNonShipping)
         {
 
             HttpResponse response;

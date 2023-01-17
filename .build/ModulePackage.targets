@@ -118,7 +118,8 @@
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\Avalara.AvaTax.Adapter.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<!-- thought log4net is not used by our code directly, it have to be present since it is used by paypal_base.dll -->
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\log4net.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
-		<Copy SourceFiles="$(MSBuildDnnBinPath)\paypal_base.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\PayPalCheckoutSdk.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
+		<Copy SourceFiles="$(MSBuildDnnBinPath)\PayPalHttp-Dotnet.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\Stripe.net.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\Microsoft.Bcl.AsyncInterfaces.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />
 		<Copy SourceFiles="$(MSBuildDnnBinPath)\DocumentFormat.OpenXml.dll" DestinationFolder="$(ModulesBuildFolder)\bin" />

@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Hotcakes.Commerce.Common
+namespace Hotcakes.PaypalWebServices
 {
     public class PayPalConstants
     {
@@ -38,5 +38,6 @@ namespace Hotcakes.Commerce.Common
         //Template URL
         public const string LIVE_URL = "https://www.paypal.com/checkoutnow?token={0}";
         public const string SANDBOX_URL = "https://www.sandbox.paypal.com/checkoutnow?token={0}";
+        
     }
 }

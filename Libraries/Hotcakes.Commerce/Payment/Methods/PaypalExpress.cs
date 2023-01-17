@@ -27,7 +27,6 @@ using System;
 using System.Globalization;
 using System.Net;
 using System.Threading.Tasks;
-using com.paypal.soap.api;
 using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Utilities;
 using Hotcakes.Payment;
@@ -74,12 +73,6 @@ namespace Hotcakes.Commerce.Payment.Methods
                 if (t.PreviousTransactionNumber != null)
                 {
                     var OrderNumber = t.MerchantInvoiceNumber + Guid.NewGuid();
-
-                    PaymentActionCodeType mode = PaymentActionCodeType.Authorization;
-                    if (!app.CurrentStore.Settings.PayPal.ExpressAuthorizeOnly)
-                    {
-                        mode = PaymentActionCodeType.Sale;
-                    }
 
                     var paymentResponse = Task.Run(() => ppAPI.AuthorizeOrder(t.PreviousTransactionNumber)).GetAwaiter().GetResult();
                    

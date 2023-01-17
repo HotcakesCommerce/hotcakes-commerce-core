@@ -28,7 +28,6 @@ using System.Collections.Generic;
 using Hotcakes.Commerce.Extensions;
 using Hotcakes.Commerce.Urls;
 using Hotcakes.PaypalWebServices;
-using com.paypal.soap.api;
 using System.Web;
 using Hotcakes.Web.Logging;
 using System.Globalization;
@@ -74,14 +73,7 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
                         mode = PayPalConstants.PAYMENT_MODE_CAPTURE;
                     }
 
-                    // Accelerated boarding
-                    if (string.IsNullOrWhiteSpace(context.HccApp.CurrentStore.Settings.PayPal.UserName))
-					{
-                        mode = PayPalConstants.PAYMENT_MODE_CAPTURE;
-					}
-
-					var solutionType = context.HccApp.CurrentStore.Settings.PayPal.RequirePayPalAccount ? SolutionTypeType.Mark : SolutionTypeType.Sole;
-					bool isNonShipping = !context.Order.HasShippingItems;
+                    bool isNonShipping = !context.Order.HasShippingItems;
 
                     bool addressSupplied = false;
                     if (context.Inputs["ViaCheckout"] != null
@@ -91,7 +83,7 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
                         context.Order.CustomProperties.Add("hcc", "ViaCheckout", "1");
                     }
 
-					PaymentDetailsItemType[] itemsDetails = GetOrderItemsDetails(context);
+					
 
 					PayPalHttp.HttpResponse expressResponse;
                     if (addressSupplied)
@@ -125,7 +117,6 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 
 							string orderTotal = context.Order.TotalGrand.ToString("N", CultureInfo.InvariantCulture);
                             expressResponse = System.Threading.Tasks.Task.Run(() => replacePayPal.createOrder(
-                                                    itemsDetails,
                                                     itemsTotal,
                                                     taxTotal,
                                                     shippingTotal,
@@ -134,8 +125,7 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
                                                     cartCancelUrl,
                                                     mode,
                                                     context.HccApp.CurrentStore.Settings.PayPal.Currency,
-                                                    solutionType,
-                                                    ($"{address.FirstName} {address.LastName}"),
+                                         ($"{address.FirstName} {address.LastName}"),
                                                     ISOCode,
                                                     address.Line1,
                                                     address.Line2,
@@ -171,7 +161,7 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 						}
 						string itemsTotal = itemsTotalWithoutTax.ToString("N", CultureInfo.InvariantCulture);
 						string orderTotal = context.Order.TotalOrderAfterDiscounts.ToString("N", CultureInfo.InvariantCulture);
-						expressResponse = System.Threading.Tasks.Task.Run(() => replacePayPal.createOrder(itemsDetails,
+						expressResponse = System.Threading.Tasks.Task.Run(() => replacePayPal.createOrder(
                             itemsTotal,
                             taxTotal,
                             orderTotal,
@@ -179,7 +169,6 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
                             cartCancelUrl,
                             mode,
                             context.HccApp.CurrentStore.Settings.PayPal.Currency,
-                            solutionType,
                             context.Order.OrderNumber + Guid.NewGuid().ToString(),
                             isNonShipping)).GetAwaiter().GetResult();
                         
@@ -237,27 +226,6 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return false;
         }
 
-		private PaymentDetailsItemType[] GetOrderItemsDetails(OrderTaskContext context)
-		{
-			var currency = PayPalAPI.GetCurrencyCodeType(context.HccApp.CurrentStore.Settings.PayPal.Currency);
-
-			var itemDetails = new List<PaymentDetailsItemType>();
-			
-			var itemDetail = new PaymentDetailsItemType();
-			itemDetail.Name = context.HccApp.CurrentStore.Settings.FriendlyName;
-			var itemsTotalWithoutTax = context.Order.TotalOrderAfterDiscounts;
-			if (context.HccApp.CurrentStore.Settings.ApplyVATRules)
-			{
-				itemsTotalWithoutTax -= context.Order.ItemsTax;
-			}
-			itemDetail.Amount = new BasicAmountType();
-			itemDetail.Amount.Value = itemsTotalWithoutTax.ToString("N", CultureInfo.InvariantCulture);
-			itemDetail.Amount.currencyID = currency;
-
-			itemDetails.Add(itemDetail);
-
-			return itemDetails.ToArray();
-		}
 
 		public override Task Clone()
 		{
