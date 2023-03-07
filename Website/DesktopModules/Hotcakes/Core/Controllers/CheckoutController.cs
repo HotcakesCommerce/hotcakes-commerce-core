@@ -894,11 +894,6 @@ namespace Hotcakes.Modules.Core.Controllers
 
             // Addresses
             model.BillShipSame = Request.Form["chkbillsame"] != null;
-            var paymentIntentId = Request.Form["PaymentIntentId"];
-            if (!string.IsNullOrEmpty(paymentIntentId))
-            {
-                model.CurrentOrder.ThirdPartyOrderId = paymentIntentId;
-            }
             LoadAddressFromForm("shipping", model.CurrentOrder.ShippingAddress);
             if (model.BillShipSame)
             {
@@ -950,6 +945,24 @@ namespace Hotcakes.Modules.Core.Controllers
             if (!string.IsNullOrEmpty(agreedValue))
             {
                 model.AgreedToTerms = true;
+            }
+
+            // Stripe Data
+            var paymentIntentId = Request.Form["PaymentIntentId"];
+            if (!string.IsNullOrEmpty(paymentIntentId))
+            {
+                model.CurrentOrder.ThirdPartyOrderId = paymentIntentId;
+                model.PaymentIntentId = paymentIntentId;
+            }
+            var clientSecret = Request.Form["PaymentIntentClientSecret"];
+            if (!string.IsNullOrEmpty(clientSecret))
+            {
+                model.PaymentIntentClientSecret = clientSecret;
+            }
+            var publicKey = Request.Form["StripePublicKey"];
+            if (!string.IsNullOrEmpty(publicKey))
+            {
+                model.StripePublicKey = publicKey;
             }
 
             model.AffiliateId = Request.Form["affiliateid"];
