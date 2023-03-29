@@ -881,8 +881,9 @@
             var expMonth = $("#ccexpmonth").val();
             var expYear = $("#ccexpyear").val();
             var paymentIntent = $("#PaymentIntentId").val();
+            var nameOnCard = $("#cccardholder").val();
             var pm = "";
-            if (cardNumber && cvc && expMonth && expYear) {
+            if (cardNumber && cvc && expMonth && expYear && nameOnCard) {
                 var reqUrl = hcc.getServiceUrl("checkout/AttachPaymentMethod");
                 $.post(reqUrl, { "CardNumber": cardNumber, "Cvc": cvc, "ExpMonth": expMonth, "ExpYear": expYear, "PaymentIntentId": paymentIntent }, null, "json")
                     .done((data) => {
