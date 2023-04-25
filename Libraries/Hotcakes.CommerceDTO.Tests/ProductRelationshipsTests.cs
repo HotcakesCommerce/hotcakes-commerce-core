@@ -24,6 +24,7 @@
 #endregion
 
 using System.Linq;
+using System.Threading;
 using Hotcakes.CommerceDTO.v1.Catalog;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -44,13 +45,19 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
+            //Create Test relationship as prerequisites          
+            var relationshipRespose = SampleData.CreateTestRelationship(proxy);
+
             //Find relation for product
-            var response = proxy.ProductRelationshipsForProduct("a7b43865-6a89-4ebe-a43b-a00b5105ae3a");
+            var response = proxy.ProductRelationshipsForProduct(relationshipRespose.ProductId);
             CheckErrors(response);
 
             //Find product relationship by unique identifier.
             var findResponse = proxy.ProductRelationshipsFind(response.Content.First().Id);
             CheckErrors(findResponse);
+
+            //Remove test relationship
+            SampleData.RemoveTestRelationship(proxy, relationshipRespose.Id);
         }
 
         /// <summary>
@@ -62,12 +69,20 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test product 1 as prerequisites          
+            var product1Respose = SampleData.CreateTestProduct(proxy);
+
+            Thread.Sleep(1000);
+
+            //Create Test product 2 as prerequisites          
+            var product2Respose = SampleData.CreateTestProduct(proxy);
+
             //Create Product relationship
             var productRelationShip = new ProductRelationshipDTO
             {
                 MarketingDescription = "Test Marketing Desc",
-                ProductId = TestConstants.TestProductBvin,
-                RelatedProductId = "a7b43865-6a89-4ebe-a43b-a00b5105ae3a",
+                ProductId = product1Respose.Bvin,
+                RelatedProductId = product2Respose.Bvin,
                 StoreId = 1
             };
             var createResponse = proxy.ProductRelationshipsCreate(productRelationShip);
@@ -80,19 +95,25 @@ namespace Hotcakes.CommerceDTO.Tests
             Assert.AreEqual(createResponse.Content.MarketingDescription, updateResponse.Content.MarketingDescription);
 
             //Unrelate the product relationship.
-            var unrelateResponse = proxy.ProductRelationshipsUnrelate(TestConstants.TestProductBvin,
-                "a7b43865-6a89-4ebe-a43b-a00b5105ae3a");
+            var unrelateResponse = proxy.ProductRelationshipsUnrelate(product1Respose.Bvin,
+                product2Respose.Bvin);
             Assert.IsTrue(unrelateResponse.Content);
 
             //Quick create product relationship.
-            var quickCreateResposne = proxy.ProductRelationshipsQuickCreate(TestConstants.TestProductBvin,
-                "a7b43865-6a89-4ebe-a43b-a00b5105ae3a", false);
+            var quickCreateResposne = proxy.ProductRelationshipsQuickCreate(product1Respose.Bvin,
+                product2Respose.Bvin, false);
             Assert.IsTrue(quickCreateResposne.Content);
 
             //Unrelate the product relationship
-            unrelateResponse = proxy.ProductRelationshipsUnrelate(TestConstants.TestProductBvin,
-                "a7b43865-6a89-4ebe-a43b-a00b5105ae3a");
+            unrelateResponse = proxy.ProductRelationshipsUnrelate(product1Respose.Bvin,
+                product2Respose.Bvin);
             Assert.IsTrue(unrelateResponse.Content);
+
+            //Remove Test Product 2
+            SampleData.RemoveTestProduct(proxy, product2Respose.Bvin);
+
+            //Remove Test Product 1
+            SampleData.RemoveTestProduct(proxy, product1Respose.Bvin);
         }
     }
 }
