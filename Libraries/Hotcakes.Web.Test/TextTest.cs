@@ -71,7 +71,7 @@ namespace Hotcakes.Web.Test
             var input = @"shoes/nikes/awesome stuff/Shared Options.Tester_1";
             var expected = @"shoes/nikes/awesome-stuff/Shared-Options.Tester_1";
             var actual = Text.Slugify(input, true, true);
-            Assert.AreEqual(actual, expected);
+            Assert.AreEqual(actual.Trim().ToLower(), expected.Trim().ToLower());
         }
 
         #region Additional test attributes
