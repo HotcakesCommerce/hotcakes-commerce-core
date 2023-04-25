@@ -25,9 +25,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 using Hotcakes.CommerceDTO.v1;
+using Hotcakes.CommerceDTO.v1.Client;
+using Hotcakes.CommerceDTO.v1.Contacts;
+using Hotcakes.CommerceDTO.v1.Membership;
 using Hotcakes.CommerceDTO.v1.Orders;
+using Hotcakes.CommerceDTO.v1.Taxes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hotcakes.CommerceDTO.Tests
@@ -47,6 +53,13 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test Product 1 as prerequisites          
+            var product1Respose = SampleData.CreateTestProduct(proxy);
+
+            Thread.Sleep(1000);
+            //Create Test Product 2 as prerequisites          
+            var product2Respose = SampleData.CreateTestProduct(proxy);
+
             //Create Order
             var order = new OrderDTO
             {
@@ -56,12 +69,12 @@ namespace Hotcakes.CommerceDTO.Tests
                     new LineItemDTO
                     {
                         StoreId = 1,
-                        ProductId = "fcb5f832-0f72-4722-bfd9-ec099051fc00"
+                        ProductId = product1Respose.Bvin
                     },
                     new LineItemDTO
                     {
                         StoreId = 1,
-                        ProductId = "d6895ee4-8118-4e51-905b-fc8edad5d711"
+                        ProductId = product2Respose.Bvin
                     }
                 }
             };
@@ -73,6 +86,11 @@ namespace Hotcakes.CommerceDTO.Tests
             var deleteResponse = proxy.OrdersDelete(orderBvin);
             CheckErrors(deleteResponse);
             Assert.IsTrue(deleteResponse.Content);
+
+            //Remove Test Product 1
+            SampleData.RemoveTestProduct(proxy, product1Respose.Bvin);
+            //Remove Test Product 2
+            SampleData.RemoveTestProduct(proxy, product2Respose.Bvin);
         }
 
         /// <summary>
@@ -84,10 +102,23 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test Order as prerequisites          
+            var orderRespose = SampleData.CreateTestOrder(proxy);
+
             //Find Order by unique identifier
-            var findResponse = proxy.OrdersFind(TestConstants.TestOrder1Bvin);
+            var findResponse = proxy.OrdersFind(orderRespose.Bvin);
             CheckErrors(findResponse);
-            Assert.AreEqual(findResponse.Content.OrderNumber, TestConstants.TestOrder1Number);
+            Assert.AreEqual(findResponse.Content.OrderNumber, orderRespose.OrderNumber);
+
+            //Remove all test products in Order
+            foreach (var item in orderRespose.Items)
+            {
+                //Remove test product
+                SampleData.RemoveTestProduct(proxy, item.ProductId);
+            }
+
+            //Remove Test Order
+            SampleData.RemoveTestOrder(proxy, orderRespose.Bvin);
         }
 
         /// <summary>
@@ -99,9 +130,22 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
+            //Create Test Order as prerequisites          
+            var orderRespose = SampleData.CreateTestOrder(proxy);
+
             //Find all Orders 
             var findResponse = proxy.OrdersFindAll();
             CheckErrors(findResponse);
+
+            //Remove all test products in Order
+            foreach (var item in orderRespose.Items)
+            {
+                //Remove test product
+                SampleData.RemoveTestProduct(proxy, item.ProductId);
+            }
+
+            //Remove Test Order
+            SampleData.RemoveTestOrder(proxy, orderRespose.Bvin);
         }
 
         /// <summary>
@@ -113,8 +157,11 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API proxy
             var proxy = CreateApiProxy();
 
+            //Create Test Order as prerequisites          
+            var orderRespose = SampleData.CreateTestOrder(proxy);
+
             //Find order by Unique identifier
-            var findResponse = proxy.OrdersFind("1e16239a-555c-435e-b8b4-1594d30bc17a");
+            var findResponse = proxy.OrdersFind(orderRespose.Bvin);
             CheckErrors(findResponse);
 
             //Update Order
@@ -133,6 +180,9 @@ namespace Hotcakes.CommerceDTO.Tests
 
             order = updateResponse.Content;
             Assert.AreEqual(order.Instructions, oldInstructions);
+
+            //Remove Test Order
+            SampleData.RemoveTestOrder(proxy, orderRespose.Bvin);
         }
 
         /// <summary>
@@ -144,9 +194,16 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
+            //Create Test OrderTransaction as prerequisites          
+            var orderTransactionRespose = SampleData.CreateTestOrderTransaction(proxy);
+
             //Find transactions by Order unique identifier
-            var findResponse = proxy.OrderTransactionsFindForOrder("1e16239a-555c-435e-b8b4-1594d30bc17a");
+            var findResponse = proxy.OrderTransactionsFindForOrder(orderTransactionRespose.OrderId.ToString());
             CheckErrors(findResponse);
+
+            //Remove Test OrderTransaction
+            SampleData.RemoveTestOrderTransactions(proxy, orderTransactionRespose.Id);
+
         }
 
         /// <summary>
@@ -158,9 +215,15 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test OrderTransaction as prerequisites          
+            var orderTransactionRespose = SampleData.CreateTestOrderTransaction(proxy);
+
             //Find transaction by Transaction unique identifier.
-            var findResponse = proxy.OrderTransactionsFind(new Guid("3B843756-A4EA-4787-A4FC-02A5B4AA65DC"));
+            var findResponse = proxy.OrderTransactionsFind(new Guid(orderTransactionRespose.Id.ToString()));
             CheckErrors(findResponse);
+
+            //Remove test OrderTransaction
+            SampleData.RemoveTestOrderTransactions(proxy, orderTransactionRespose.Id);
         }
 
         /// <summary>
@@ -235,18 +298,21 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
+            //Create Test Order as prerequisites          
+            var orderRespose = SampleData.CreateTestOrder(proxy);
+
             //Find order by Unique Identifier
-            var resOrder = proxy.OrdersFind(TestConstants.TestOrder1Bvin);
+            var resOrder = proxy.OrdersFind(orderRespose.Bvin);
             CheckErrors(resOrder);
             var dto = resOrder.Content;
-            Assert.AreEqual(dto.OrderNumber, TestConstants.TestOrder1Number);
-            Assert.AreEqual(dto.TotalGrand, TestConstants.TestOrder1TotalGrand);
+            Assert.AreEqual(dto.OrderNumber, orderRespose.OrderNumber);
+            Assert.AreEqual(dto.TotalGrand, orderRespose.TotalGrand);
 
             //Find Order Properties
             var prop = dto.CustomProperties.FirstOrDefault(p => p.DeveloperId == "test" && p.Key == "TestProp");
             if (prop == null)
             {
-                prop = new CustomPropertyDTO {DeveloperId = "test", Key = "TestProp"};
+                prop = new CustomPropertyDTO { DeveloperId = "test", Key = "TestProp" };
                 dto.CustomProperties.Add(prop);
             }
             prop.Value = "Some Value";
@@ -255,8 +321,11 @@ namespace Hotcakes.CommerceDTO.Tests
             var resOrder2 = proxy.OrdersUpdate(dto);
             CheckErrors(resOrder2);
             var dto2 = resOrder2.Content;
-            Assert.AreEqual(dto2.OrderNumber, TestConstants.TestOrder1Number);
-            Assert.AreEqual(dto2.TotalGrand, TestConstants.TestOrder1TotalGrand);
+            Assert.AreEqual(dto2.OrderNumber, orderRespose.OrderNumber);
+            Assert.AreEqual(dto2.TotalGrand, orderRespose.TotalGrand);
+
+            //Remove Test Order
+            SampleData.RemoveTestOrder(proxy, orderRespose.Bvin);
         }
     }
 }
