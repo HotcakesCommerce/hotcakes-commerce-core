@@ -43,13 +43,36 @@ namespace Hotcakes.CommerceDTO.Tests
         {
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
+            //Create Product Option as prerequisites
+            var option = new OptionDTO
+            {
+                StoreId = 1,
+                Name = "Html Option",
+                OptionType = OptionTypesDTO.Html,
+                Items = new List<OptionItemDTO>(),
+            };
+            var createProductOptionResponse = proxy.ProductOptionsCreate(option);
+
+            //Assign product option to test product
+            var assingtoProductResponse = proxy.ProductOptionsAssignToProduct(createProductOptionResponse.Content.Bvin,
+                productRespose.Bvin, false);
+
             var response = proxy.ProductOptionsFindAll();
 
             CheckErrors(response);
 
-            var responseForProduct = proxy.ProductOptionsFindAllByProductId(TestConstants.TestProductBvin);
+            var responseForProduct = proxy.ProductOptionsFindAllByProductId(productRespose.Bvin);
 
             CheckErrors(response);
+
+            //Remove Test Product Option
+            proxy.ProductOptionsDelete(createProductOptionResponse.Content.Bvin);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
 
         /// <summary>
@@ -96,6 +119,9 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
             //Create Production option
             var option = new OptionDTO
             {
@@ -109,12 +135,15 @@ namespace Hotcakes.CommerceDTO.Tests
 
             //Assign product option to test product
             var assingtoProductResponse = proxy.ProductOptionsAssignToProduct(createResponse.Content.Bvin,
-                TestConstants.TestProductBvin, false);
+                productRespose.Bvin, false);
             Assert.IsTrue(assingtoProductResponse.Content);            
 
             //Generate product variants for options
-            var generateVariantsResponse = proxy.ProductOptionsGenerateAllVariants(TestConstants.TestProductBvin);
-            Assert.IsTrue(generateVariantsResponse.Content);            
+            var generateVariantsResponse = proxy.ProductOptionsGenerateAllVariants(productRespose.Bvin);
+            Assert.IsTrue(generateVariantsResponse.Content);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
 
         //This method is used to test Assign and Unassign to product end point.
@@ -123,6 +152,9 @@ namespace Hotcakes.CommerceDTO.Tests
         {
             //Create API Proxy
             var proxy = CreateApiProxy();
+
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
 
             //Create Production option
             var option = new OptionDTO
@@ -136,12 +168,15 @@ namespace Hotcakes.CommerceDTO.Tests
             CheckErrors(createResponse);
 
             //Assign product option to test product
-            var assingtoProductResponse = proxy.ProductOptionsAssignToProduct(createResponse.Content.Bvin, TestConstants.TestProductBvin, false);
+            var assingtoProductResponse = proxy.ProductOptionsAssignToProduct(createResponse.Content.Bvin, productRespose.Bvin, false);
             Assert.IsTrue(assingtoProductResponse.Content);            
 
             //Generate product variants for options
-            var unassignFromProductResponse = proxy.ProductOptionsUnassignFromProduct(createResponse.Content.Bvin, TestConstants.TestProductBvin);
+            var unassignFromProductResponse = proxy.ProductOptionsUnassignFromProduct(createResponse.Content.Bvin, productRespose.Bvin);
             Assert.IsTrue(unassignFromProductResponse.Content);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
     }
 }
