@@ -24,7 +24,11 @@
 #endregion
 
 using Hotcakes.CommerceDTO.v1.Catalog;
+using Hotcakes.CommerceDTO.v1.Client;
+using Hotcakes.CommerceDTO.v1.Contacts;
+using Hotcakes.CommerceDTO.v1.Membership;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Hotcakes.CommerceDTO.Tests
 {
@@ -43,10 +47,35 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test CustomerAccount as prerequisites
+            var accountRespose = SampleData.CreateTestCustomerAccount(proxy);
+
+            //Create Test ProductReview as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
+            //Create Test WishList as prerequisites
+            var item = new WishListItemDTO
+            {
+                ProductId = productRespose.Bvin,
+                Quantity = 1,
+                CustomerId = accountRespose.Bvin
+            };
+
+            // Create
+            var wishListRespose = proxy.WishListItemsCreate(item);
+
             //Get all Wish Lists.
             var findResponse = proxy.WishListItemsFindAll();
 
+            //Remove test WishList
+            proxy.WishListItemsDelete(wishListRespose.Content.Id);
             CheckErrors(findResponse);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
+
+            //Remove Test CustomerAccount
+            SampleData.RemoveTestCustomerAccount(proxy, accountRespose.Bvin);
         }
 
         /// <summary>
@@ -58,10 +87,35 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
-            //Get WishLists for a customer
-            var findResponse = proxy.WishListItemsFindForCustomer("742");
+            //Create Test CustomerAccount as prerequisites
+            var accountRespose = SampleData.CreateTestCustomerAccount(proxy);
 
+            //Create Test ProductReview as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
+            //Create test WishList as prerequisites
+            var item = new WishListItemDTO
+            {
+                ProductId = productRespose.Bvin,
+                Quantity = 1,
+                CustomerId = accountRespose.Bvin
+            };
+
+            // Create
+            var wishListRespose = proxy.WishListItemsCreate(item);
+
+            //Get WishLists for a customer
+            var findResponse = proxy.WishListItemsFindForCustomer(accountRespose.Bvin);
+
+            //Remove Test WishList
+            proxy.WishListItemsDelete(wishListRespose.Content.Id);
             CheckErrors(findResponse);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
+
+            //Remove Test CustomerAccount
+            SampleData.RemoveTestCustomerAccount(proxy, accountRespose.Bvin);
         }
 
         /// <summary>
@@ -73,12 +127,18 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test CustomerAccount as prerequisites
+            var accountRespose = SampleData.CreateTestCustomerAccount(proxy);
+
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
             //Create WishList
             var item = new WishListItemDTO
             {
-                ProductId = "EBF3029C-D673-49DA-958A-432C65B16D4C",
+                ProductId = productRespose.Bvin,
                 Quantity = 1,
-                CustomerId = "2"
+                CustomerId = accountRespose.Bvin
             };
 
             // Create
@@ -100,13 +160,18 @@ namespace Hotcakes.CommerceDTO.Tests
             CheckErrors(findResponse);
             Assert.AreEqual(updateResponse.Content.Quantity, findResponse.Content.Quantity);
 
-
             // Delete
             var delete1Response = proxy.WishListItemsDelete(create1Response.Content.Id);
 
             CheckErrors(delete1Response);
 
             Assert.IsTrue(delete1Response.Content);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
+
+            //Remove Test CustomerAccount
+            SampleData.RemoveTestCustomerAccount(proxy, accountRespose.Bvin);
         }
     }
 }
