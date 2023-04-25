@@ -47,7 +47,7 @@ namespace Hotcakes.CommerceDTO.Tests
             var proxy = CreateApiProxy();
 
             //Create Test product as prerequisites
-            var prodDto = CreateTestProduct(proxy);
+            var prodDto = SampleData.CreateTestProduct(proxy);
 
             //Create CatalogRole
             var dto = new CatalogRoleDTO
@@ -57,6 +57,7 @@ namespace Hotcakes.CommerceDTO.Tests
                 RoleType = CatalogRoleTypeDTO.ProductRole
             };
             var res = proxy.CatalogRoleCreate(dto);
+
             CheckErrors(res);
             var roleDto = res.Content;
             Assert.IsNotNull(roleDto);
@@ -76,7 +77,7 @@ namespace Hotcakes.CommerceDTO.Tests
             Assert.IsTrue(res2.Content);
 
             //Remove test product
-            RemoveTestProduct(proxy, prodDto.Bvin);
+            SampleData.RemoveTestProduct(proxy, prodDto.Bvin);
         }
 
         /// <summary>
@@ -88,8 +89,8 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create proxy
             var proxy = CreateApiProxy();
 
-            //Create test category as prerequisites
-            var category = CreateTestCategory();
+            //Create Test Category as prerequisites
+            var category = SampleData.CreateTestCategory(proxy);
 
             //Create CatalogRole
             var dto = new CatalogRoleDTO
@@ -118,10 +119,9 @@ namespace Hotcakes.CommerceDTO.Tests
             CheckErrors(res2);
             Assert.IsTrue(res2.Content);
 
-            //Remove test category
-            RemoveTestCategory(proxy, category.Bvin);
+            //Remove Test Category
+            SampleData.RemoveTestCategory(proxy, category.Bvin);
         }
-
 
         /// <summary>
         ///     This method perform Create, Find ,Delete operation for CatalogRole. Role type for this function is ProductType.
@@ -132,8 +132,8 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create Proxy
             var proxy = CreateApiProxy();
 
-            //Create test product type as prerequisites
-            var productType = CreateTestProductType();
+            //Create Test ProductType as prerequisites
+            var productType = SampleData.CreateTestProductType(proxy);
 
             //Create CatalogRole
             var dto = new CatalogRoleDTO
@@ -161,105 +161,11 @@ namespace Hotcakes.CommerceDTO.Tests
             CheckErrors(res2);
             Assert.IsTrue(res2.Content);
 
-            //Remove test product
-            RemoveTestProductType(proxy, productType.Bvin);
+            //Remove Test ProductType
+            SampleData.RemoveTestProductType(proxy, productType.Bvin);
         }
 
-        /// <summary>
-        ///     This method create test category, to be used during CatalogRole creation.
-        /// </summary>
-        /// <returns></returns>
-        public CategoryDTO CreateTestCategory()
-        {
-            //Create proxy
-            var proxy = CreateApiProxy();
+        
 
-            //Create category
-            var resParent = proxy.CategoriesFindBySlug(TestConstants.TestCategorySlug);
-            CheckErrors(resParent);
-            var dto = new CategoryDTO
-            {
-                StoreId = 1,
-                Name = "Test Category",
-                ParentId = resParent.Content.Bvin
-            };
-            var resC = proxy.CategoriesCreate(dto);
-
-            return resC.Content;
-        }
-
-        /// <summary>
-        ///     This method create test product, to be used during CatalogRole creation.
-        /// </summary>
-        /// <param name="proxy">REST API Proxy instance.</param>
-        /// <returns></returns>
-        private ProductDTO CreateTestProduct(Api proxy)
-        {
-            var product = new ProductDTO
-            {
-                ProductName = "Unit tests product",
-                AllowReviews = true,
-                ListPrice = 687,
-                LongDescription = "This is test product",
-                Sku = "TST100",
-                StoreId = 1,
-                TaxExempt = true
-            };
-
-            var response = proxy.ProductsCreate(product, null);
-            return response.Content;
-        }
-
-        /// <summary>
-        ///     This method create test product type, to be used during CatalogRole creation.
-        /// </summary>
-        /// <returns></returns>
-        private ProductTypeDTO CreateTestProductType()
-        {
-            var proxy = CreateApiProxy();
-
-            var productType = new ProductTypeDTO
-            {
-                ProductTypeName = "UnitTest Type",
-                TemplateName = "TestTemplate",
-                StoreId = 1,
-                IsPermanent = true
-            };
-
-            var createResponse = proxy.ProductTypesCreate(productType);
-
-            return createResponse.Content;
-        }
-
-
-        /// <summary>
-        ///     This method remove test product.
-        /// </summary>
-        /// <param name="proxy">REST API Proxy instance.</param>
-        /// <param name="bvin">Product unique identifier.</param>
-        private void RemoveTestProduct(Api proxy, string bvin)
-        {
-            var response = proxy.ProductsDelete(bvin);
-        }
-
-        /// <summary>
-        ///     This moethod remove test category.
-        /// </summary>
-        /// <param name="proxy">REST API Proxy instance.</param>
-        /// <param name="bvin">Category unique identifier.</param>
-        private void RemoveTestCategory(Api proxy, string bvin)
-        {
-            var response = proxy.CategoriesDelete(bvin);
-        }
-
-        /// <summary>
-        ///     This method remove test product type.
-        /// </summary>
-        /// <param name="proxy">REST API Proxy instance.</param>
-        /// <param name="bvin">Product type unique identifier.</param>
-        private void RemoveTestProductType(Api proxy, string bvin)
-        {
-            var response = proxy.ProductTypesDelete(bvin);
-        }
     }
 }
