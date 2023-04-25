@@ -43,9 +43,15 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test ProductType as prerequisites          
+            var productTypeRespose = SampleData.CreateTestProductType(proxy);
+                        
             //Get All Product Types.
-            var findResponse = proxy.ProductTypesFindAll();
+            var findResponse = proxy.ProductTypesFindAll();          
             CheckErrors(findResponse);
+
+            //Remove Test ProductType
+            SampleData.RemoveTestProductType(proxy, productTypeRespose.Bvin);
         }
 
         /// <summary>
