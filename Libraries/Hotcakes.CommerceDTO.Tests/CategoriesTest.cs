@@ -26,6 +26,8 @@
 using System;
 using System.IO;
 using Hotcakes.CommerceDTO.v1.Catalog;
+using Hotcakes.CommerceDTO.v1.Client;
+using Hotcakes.CommerceDTO.v1.Contacts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hotcakes.CommerceDTO.Tests
@@ -44,7 +46,13 @@ namespace Hotcakes.CommerceDTO.Tests
         {
             var proxy = CreateApiProxy();
 
+            //Create test Category as prerequisites
+            var category = SampleData.CreateTestCategory(proxy);
+
             var findResponse = proxy.CategoriesFindAll();
+
+            //Remove test Category
+            SampleData.RemoveTestCategory(proxy, category.Bvin);
 
             CheckErrors(findResponse);
         }
@@ -86,6 +94,8 @@ namespace Hotcakes.CommerceDTO.Tests
             var deleteResponse = proxy.CategoriesDelete(createResponse.Content.Bvin);
             CheckErrors(deleteResponse);
             Assert.IsTrue(deleteResponse.Content);
+
+          
         }
 
         /// <summary>
@@ -97,8 +107,11 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test Category as prerequisites
+            var category = SampleData.CreateTestCategory(proxy);
+
             //Find Category by Slug.
-            var resParent = proxy.CategoriesFindBySlug(TestConstants.TestCategorySlug);
+            var resParent = proxy.CategoriesFindBySlug(category.RewriteUrl);
             CheckErrors(resParent);
 
             //Create Category.
@@ -118,6 +131,9 @@ namespace Hotcakes.CommerceDTO.Tests
             var resD = proxy.CategoriesDelete(resC.Content.Bvin);
             CheckErrors(resD);
             Assert.IsTrue(resD.Content);
+
+            //Remove Test Category
+            SampleData.RemoveTestCategory(proxy, category.Bvin);
         }
 
         /// <summary>
@@ -129,9 +145,11 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test Category as prerequisites
+            var category = SampleData.CreateTestCategory(proxy);
 
             //Find Category by slug.
-            var resParent = proxy.CategoriesFindBySlug(TestConstants.TestCategorySlug);
+            var resParent = proxy.CategoriesFindBySlug(category.RewriteUrl);
             CheckErrors(resParent);
 
             //Create Category.
@@ -157,6 +175,9 @@ namespace Hotcakes.CommerceDTO.Tests
 
             //Delete Category.
             proxy.CategoriesDelete(testCategory.Bvin);
+
+            //Remove Test Category
+            SampleData.RemoveTestCategory(proxy, category.Bvin);
         }
 
 
@@ -169,8 +190,11 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
-            //Find category by Slug
-            var resParent = proxy.CategoriesFindBySlug(TestConstants.TestCategorySlug);
+            //Create Test Category as prerequisites
+            var categoryRespose = SampleData.CreateTestCategory(proxy);
+
+            //Find Category by Slug
+            var resParent = proxy.CategoriesFindBySlug(categoryRespose.RewriteUrl);
             CheckErrors(resParent);
 
             //Create Category and Product.
@@ -180,35 +204,28 @@ namespace Hotcakes.CommerceDTO.Tests
                 Name = "Test Category",
                 ParentId = resParent.Content.Bvin
             };
-            var product = new ProductDTO
-            {
-                ProductName = "HCC Unit tests product",
-                AllowReviews = true,
-                ListPrice = 687,
-                LongDescription = "This is test product",
-                Sku = "TST100",
-                StoreId = 1,
-                TaxExempt = true
-            };
+
+            //Create Test Product as prerequisites
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
             var createCategoryResponse = proxy.CategoriesCreate(category);
             CheckErrors(createCategoryResponse);
-            var createProductResponse = proxy.ProductsCreate(product, null);
-            //CheckErrors(createProductResponse);
 
             //Create Product and Category association
             category.Bvin = createCategoryResponse.Content.Bvin;
-            product.Bvin = createProductResponse.Content.Bvin;
-            var assocResponse = proxy.CategoryProductAssociationsQuickCreate(product.Bvin, category.Bvin);
+
+            var assocResponse = proxy.CategoryProductAssociationsQuickCreate(productRespose.Bvin, category.Bvin);
             CheckErrors(assocResponse);
             Assert.IsTrue(assocResponse.Content);
 
             //Delete test product.
-            var productDeleteResponse = proxy.ProductsDelete(product.Bvin);
+            var productDeleteResponse = proxy.ProductsDelete(productRespose.Bvin);
             CheckErrors(productDeleteResponse);
 
-            //Delete test category.
+            //Delete Test category.
             var categoryDeleteResponse = proxy.CategoriesDelete(category.Bvin);
             CheckErrors(categoryDeleteResponse);
+
         }
 
         /// <summary>
@@ -220,8 +237,11 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
-            //Find Category by Slug.
-            var resParent = proxy.CategoriesFindBySlug(TestConstants.TestCategorySlug);
+            //Create Test Category as prerequisites
+            var categoryRespose = SampleData.CreateTestCategory(proxy);
+
+            //Find category by Slug
+            var resParent = proxy.CategoriesFindBySlug(categoryRespose.RewriteUrl);
             CheckErrors(resParent);
 
             //Create test product and category.
@@ -231,29 +251,18 @@ namespace Hotcakes.CommerceDTO.Tests
                 Name = "Test Category",
                 ParentId = resParent.Content.Bvin
             };
-            var product = new ProductDTO
-            {
-                ProductName = "HCC Unit tests product",
-                AllowReviews = true,
-                ListPrice = 687,
-                LongDescription = "This is test product",
-                Sku = "TST100",
-                StoreId = 1,
-                TaxExempt = true
-            };
+            //Create test Product as prerequisites
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
             var createCategoryResponse = proxy.CategoriesCreate(category);
             CheckErrors(createCategoryResponse);
 
-            var createProductResponse = proxy.ProductsCreate(product, null);
-            //CheckErrors(createProductResponse);
-
             //Create category and product association.
             category.Bvin = createCategoryResponse.Content.Bvin;
-            product.Bvin = createProductResponse.Content.Bvin;
 
             var assoc = new CategoryProductAssociationDTO
             {
-                ProductId = product.Bvin,
+                ProductId = productRespose.Bvin,
                 CategoryId = category.Bvin
             };
             var assocResponse = proxy.CategoryProductAssociationsCreate(assoc);
@@ -269,18 +278,21 @@ namespace Hotcakes.CommerceDTO.Tests
             Assert.AreEqual(assocUpdateResponse.Content.SortOrder, findAssociationResponse.Content.SortOrder);
 
             //Unrelate the category and product association.
-            var unrelateResponse = proxy.CategoryProductAssociationsUnrelate(createProductResponse.Content.Bvin,
+            var unrelateResponse = proxy.CategoryProductAssociationsUnrelate(productRespose.Bvin,
                 createCategoryResponse.Content.Bvin);
             CheckErrors(unrelateResponse);
             Assert.IsTrue(unrelateResponse.Content);
 
             //Delete temporary product.
-            var productDeleteResponse = proxy.ProductsDelete(product.Bvin);
+            var productDeleteResponse = proxy.ProductsDelete(productRespose.Bvin);
             CheckErrors(productDeleteResponse);
 
             //Delete temporary category.
             var categoryDeleteResponse = proxy.CategoriesDelete(category.Bvin);
             CheckErrors(categoryDeleteResponse);
+
+            //Remove test Category
+            SampleData.RemoveTestCategory(proxy, categoryRespose.Bvin);
         }
 
         /// <summary>
@@ -292,6 +304,18 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create test Category as prerequisites
+            var categoryRespose = SampleData.CreateTestCategory(proxy);
+
+            //Create test Product as prerequisites
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
+            var assoc = new CategoryProductAssociationDTO
+            {
+                ProductId = productRespose.Bvin,
+                CategoryId = categoryRespose.Bvin
+            };
+            var assocResponse = proxy.CategoryProductAssociationsCreate(assoc);
 
             // Product Bvin from sample product "Blue Bracelet"
             var lstOfProducts = proxy.ProductsFindAll();
@@ -300,6 +324,16 @@ namespace Hotcakes.CommerceDTO.Tests
             var getCategoriesResponse = proxy.CategoriesFindForProduct(lstOfProducts.Content[0].Bvin);
                 // ("3421370c-18e4-4bf4-8746-bab47b3df295");
             CheckErrors(getCategoriesResponse);
+
+            //Unrelate the category and product association.
+            proxy.CategoryProductAssociationsUnrelate(productRespose.Bvin,
+               categoryRespose.Bvin);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
+
+            //Remove Test Category
+            SampleData.RemoveTestCategory(proxy, categoryRespose.Bvin);
         }
 
         /// <summary>
@@ -312,8 +346,11 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test Category as prerequisites
+            var categoryRespose = SampleData.CreateTestCategory(proxy);
+
             //Find Category by Slug.
-            var findResponse = proxy.CategoriesFindBySlug(TestConstants.TestCategorySlug);
+            var findResponse = proxy.CategoriesFindBySlug(categoryRespose.RewriteUrl);
             CheckErrors(findResponse);
 
             //Upload image for Category icon.
@@ -329,6 +366,9 @@ namespace Hotcakes.CommerceDTO.Tests
             uploadResponse = proxy.CategoriesImagesBannerUpload(category.Bvin, fileName, imageData);
             CheckErrors(uploadResponse);
             Assert.IsTrue(uploadResponse.Content);
+
+            //Remove Test Category
+            SampleData.RemoveTestCategory(proxy, category.Bvin);
         }
 
         /// <summary>
