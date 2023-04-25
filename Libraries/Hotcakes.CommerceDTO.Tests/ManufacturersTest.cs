@@ -23,8 +23,10 @@
 
 #endregion
 
+using Hotcakes.CommerceDTO.v1.Client;
 using Hotcakes.CommerceDTO.v1.Contacts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Hotcakes.CommerceDTO.Tests
 {
@@ -42,7 +44,13 @@ namespace Hotcakes.CommerceDTO.Tests
         {
             var proxy = CreateApiProxy();
 
+            //Create Test Manufacturer as prerequisites
+            var manufacturer = SampleData.CreateTestManufacturer(proxy);
+
             var findResponse = proxy.ManufacturerFindAll();
+
+            //Remove Test Manufacturer
+            SampleData.RemoveTestManufacturer(proxy, manufacturer.Bvin);
 
             CheckErrors(findResponse);
         }
@@ -56,7 +64,7 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create Manufacturer proxy
             var proxy = CreateApiProxy();
 
-            //Create Manufacturer
+            //Create Manufacturer 
             var vendorManufacture = new VendorManufacturerDTO
             {
                 Address = new AddressDTO(),
@@ -86,5 +94,7 @@ namespace Hotcakes.CommerceDTO.Tests
             CheckErrors(deleteResponse);
             Assert.IsTrue(deleteResponse.Content);
         }
+
+        
     }
 }
