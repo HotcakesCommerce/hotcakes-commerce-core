@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyCompany("Upendo Ventures, LLC")]
 [assembly: AssemblyProduct("Hotcakes Commerce")]
-[assembly: AssemblyCopyright("Copyright © 2020 Upendo Ventures, LLC")]
+[assembly: AssemblyCopyright("Copyright © Upendo Ventures, LLC")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(false)]
 [assembly: ComVisible(false)]
 
-[assembly: AssemblyVersion("3.06.00")]
+[assembly: AssemblyVersion("3.07.00")]
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyKeyFile("")]
 [assembly: AssemblyKeyName("")]
