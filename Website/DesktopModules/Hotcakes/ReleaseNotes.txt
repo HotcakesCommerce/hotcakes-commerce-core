@@ -4,7 +4,7 @@
 	.muy-importante { color:red;font-weight:bold; }
 </style>
 <div class="uv-install-wrapper">
-	<h1>Hotcakes Commerce: Version 03.06.00</h1>
+	<h1>Hotcakes Commerce: Version 03.07.00</h1>
 
 	<p class="muy-importante">The release notes continue after the Sponsors and Contributors below.</p>
 	
@@ -24,14 +24,15 @@
 	<p>THANK YOU to the following community members for participating in this release!</p>
 	<ul>
 		<li>Will Strohl, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
-		<li>Erwin Yulianto, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
-		<li><a href="https://github.com/JordzJoestar" target="_blank">@JordzJoestar</a></li>
+		<li>Ismael Tartola, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
+		<li>Ariel Blanco, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
+		<li>Vicente Almea, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
+		<li>Jorge Delatorre, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
 		<li>Matt Rutledge, <a href="https://beleivekids.com/" target="_blank">Believe Kids</a></li>
-		<li><a href="https://github.com/moslem7026" target="_blank">@moslem7026</a></li>
 		<li>Dan Rice, <a href="https://www.puresystems.co.uk/" target="_blank">Pure Systems</a></li>
-		<li><a href="https://github.com/swilkinson-bluebolt" target="_blank">@swilkinson-bluebolt</a></li>
 		<li><a href="https://github.com/joshgk00" target="_blank">Josh Slaughter</a></li>
-		<li><a href="https://github.com/Navilois" target="_blank">Alois Krichmayr</a></li>
+		<li><a href="https://github.com/jcmrva" target="_blank">Josh M</a></li>
+		<li><a href="https://github.com/erw13n" target="_blank">Erwin Yulianto</a></li>
 	</ul>
 
 	<h3>Partners</h3>
@@ -39,9 +40,6 @@
 	<ul>
 	  <li>
 		<a href="https://mmmcommerce.com/Partners/Partner-Detail/id/2106" target="_blank" rel="noopener">Upendo Ventures</a>
-	  </li>
-	  <li>
-		<a href="http://mmmcommerce.com/Partners/Partner-Detail/id/1985" target="_blank" rel="noopener">BlueBolt</a>
 	  </li>
 	  <li>
 		<a href="http://mmmcommerce.com/Partners/Partner-Detail/id/2352" target="_blank" rel="noopener">Pure Systems</a>
@@ -57,23 +55,34 @@
 	
 	<h3><strong>Enhancements</strong></h3>
 	<ul>
-		<li><strong>SI: Updated USPS Web Tools URL</strong> - The previous URL was using a non-secure HTTP instead of HTTPS. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/353" target="_blank">Issue 353</a>), Thanks <a href="https://github.com/mtrutledge" target="_blank">@mtrutledge</a></li>
-		<li><strong>SI: Remove Unused File Upload</strong> - Removed unnecessary files for a legacy feature that no longer exists. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/361" target="_blank">Issue 361</a>), Thanks <a href="https://github.com/erw13n" target="_blank">@erw13n</a></li>
-		<li><strong>Remove GB from EU VAT rules</strong> - Great Britain is no longer in the European Union and should be excluded from the VAT rules. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/356" target="_blank">Issue 356</a>), Thanks <a href="https://github.com/Navilois" target="_blank">@Navilois</a></li>
-		<li><strong>Refresh Store Settings on Upgrades</strong> - Whenever Hotcakes Commerce is upgraded, the AES encrytion keys are automatically updated. (No Issue), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
+		<li><strong>Enhancement</strong> - SI: Replaxced Stripe Payment Provider &amp; Now Also Supporting 3-D Secure. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/395" target="_blank">Issue 395</a>), Thanks <a href="https://github.com/VAlmea" target="_blank">@VAlmea</a></li>
+		<li><strong>Enhancement</strong> - SI: Replaced PayPal Express Payment Gateway and Pro Payment Provider. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/49" target="_blank">Issue 49</a>), Thanks <a href="https://github.com/jldelatorre" target="_blank">@jldelatorre</a></li>
+		<li><strong>Enhancement</strong> - SI: Cache the Store Settings by ID and GUID. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/389" target="_blank">Issue 389</a>), Thanks <a href="https://github.com/mtrutledge" target="_blank">@mtrutledge</a></li>
+		<li><strong>Enhancement</strong> - SI: Add an ApplicationIntent=&quot;ReadOnly&quot; Option for Select Queries. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/391" target="_blank">Issue 391</a>), Thanks <a href="https://github.com/mtrutledge" target="_blank">@mtrutledge</a></li>
+		<li><strong>Performance</strong> - SI: Updates to Make Queries Read-Only Whenever Necessary. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/391" target="_blank">Issue 391</a>), Thanks <a href="https://github.com/mtrutledge" target="_blank">@mtrutledge</a></li>
+		<li><strong>Enhancement</strong> - SI: Improved Email Address Validation. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/421" target="_blank">Issue 421</a>), Thanks <a href="https://github.com/mtrutledge" target="_blank">@mtrutledge</a></li>
+		<li><strong>Enhancement</strong> - Updated the Entity Framework to the Latest 6.xx Version. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/430" target="_blank">Issue 430</a>), Thanks <a href="https://github.com/ArielBlanco1990" target="_blank">@ArielBlanco1990</a></li>
+		<!--
+		<li><strong></strong> - . (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/" target="_blank">Issue </a>), Thanks <a href="https://github.com/" target="_blank">@</a></li>
+		-->
 	</ul>
 	
 	<h3><strong>Maintenance Updates</strong></h3>
 	<ul>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/372" target="_blank">Issue 372</a> - SI: Resolves error with User Supplied Price product needing a minimum quantity. Thanks <a href="https://github.com/erw13n" target="_blank">@erw13n</a></li>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/368" target="_blank">Issue 368</a> - CI: Resolved a redirect issue with PayPal Express checkout. Thanks <a href="https://github.com/erw13n" target="_blank">@erw13n</a></li>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/292" target="_blank">Issue 292</a> - CI: Fixed JavaScript validation issue with affiliate views. Thanks <a href="https://github.com/erw13n" target="_blank">@erw13n</a></li>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/346" target="_blank">Issue 346</a> - Resolved an issue with generating URLs in the affiliate dashboard. Thanks <a href="https://github.com/joshgk00" target="_blank">@joshgk00</a></li>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/374" target="_blank">Issue 374</a> - Resolved an issue where some customers could skip the PayPal Express checkout.. Thanks <a href="https://github.com/erw13n" target="_blank">@erw13n</a></li>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/340" target="_blank">Issue 340</a> - Resolves an issue with 'slug' in the product URL. Thanks <a href="https://github.com/moslem7026" target="_blank">@moslem7026</a></li>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/350" target="_blank">Issue 350</a> - Resolved an issue with redirecting using the `RedirectToCheckout` URL parameter. Thanks <a href="https://github.com/joshgk00" target="_blank">@joshgk00</a></li>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/345" target="_blank">Issue 345</a> - `Fixed Transaction.Items` being 'null' first time `ProcessTransaction` is called. Thanks <a href="https://github.com/joshgk00" target="_blank">@joshgk00</a></li>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/339" target="_blank">Issue 339</a> - Correctly reports PayPal Express holds as a failed transaction. Thanks <a href="https://github.com/swilkinson-bluebolt" target="_blank">@swilkinson-bluebolt</a></li>
-		<li>(no issue) - Updated the build processes to use Visual Studio 2019 MSBuild and the latest C# compiler.</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/419" target="_blank">Issue 419</a> - SI: Product Grid Doesn't Allow Products to be Deleted. Thanks <a href="https://github.com/ismaelTartola" target="_blank">@ismaelTartola</a></li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/426" target="_blank">Issue 426</a> - SI: REST API Missing the ShippingCharge Property as a DataMember. Thanks <a href="https://github.com/mtrutledge" target="_blank">@mtrutledge</a></li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/436" target="_blank">Issue 436</a> - SI: CheckoutController Occasionally Throws a NullReferenceException. Thanks <a href="https://github.com/ismaelTartola" target="_blank">@ismaelTartola</a></li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/401" target="_blank">Issue 401</a> - SI: Hotcakes Admin is Referencing a Spacer Image at Hotcakes.org. Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/363" target="_blank">Issue 363</a> - CI: UPS Online Tools Registration is Broken. Thanks <a href="https://github.com/erw13n" target="_blank">@erw13n</a></li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/412" target="_blank">Issue 412</a> - Missing DLLs in the installation package. Thanks <a href="https://github.com/ArielBlanco1990" target="_blank">@ArielBlanco1990</a></li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/420" target="_blank">Issue 420</a> - Product Grid doesn't allow products to be deleted. Thanks <a href="https://github.com/IsmaelTartola" target="_blank">@IsmaelTartola</a></li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/400" target="_blank">Issue 400</a> - Uninstall doesn't clean up tables, libraries, and folders. Thanks <a href="https://github.com/ArielBlanco1990" target="_blank">@ArielBlanco1990</a></li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/333" target="_blank">Issue 333</a> - Resolved Build Warnings About DLLs of Same Version. Thanks <a href="https://github.com/ArielBlanco1990" target="_blank">@ArielBlanco1990</a></li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/378" target="_blank">Issue 378</a> - Exception occurs when editing a Product Type Property that is associated with a product. Thanks <a href="https://github.com/erw13n" target="_blank">@erw13n</a></li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/412" target="_blank">Issue 401</a> - Added Missing UPS DLL to the Installation Package. Thanks <a href="https://github.com/ArielBlanco1990" target="_blank">@ArielBlanco1990</a></li>
+		<!--
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/" target="_blank">Issue </a> - . Thanks <a href="https://github.com/" target="_blank">@</a></li>
+		<li>(no issue) - .</li>
+		-->
 	</ul>
 </div>
