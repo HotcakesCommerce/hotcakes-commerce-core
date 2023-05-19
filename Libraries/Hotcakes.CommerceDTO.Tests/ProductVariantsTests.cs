@@ -45,13 +45,22 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
+            //Create Test Variant as prerequisites          
+            SampleData.CreateTestVariant(proxy, productRespose);
+
             //Get Product by Slug
-            var res1 = proxy.ProductsBySlug(TestConstants.TestProduct1Slug);
+            var res1 = proxy.ProductsBySlug(productRespose.UrlSlug);
             CheckErrors(res1);
 
-            //Get Product variants by Product
+            //Get Product ariants by Product
             var res2 = proxy.ProductVariantsFindByProduct(res1.Content.Bvin);
             CheckErrors(res2);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
 
         /// <summary>
@@ -63,8 +72,14 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
+            //Create Test Variant as prerequisites          
+            SampleData.CreateTestVariant(proxy, productRespose);
+
             //Get Product Variants by Product.
-            var res2 = proxy.ProductVariantsFindByProduct(TestConstants.TestProductBvin);
+            var res2 = proxy.ProductVariantsFindByProduct(productRespose.Bvin);
             var listMatchingOptions = new List<VariantOptionDataDTO>();
             foreach (var item in res2.Content.First().Selections)
             {
@@ -76,18 +91,22 @@ namespace Hotcakes.CommerceDTO.Tests
 
                 listMatchingOptions.Add(variantOption);
             }
-
+            
             //Update SKU for the Product Variant.
             var productvariant = new ProductVariantSkuUpdateDTO
             {
-                ProductBvin = TestConstants.TestProductBvin,
-                Sku = TestConstants.TestProduct1Sku,
+                ProductBvin = productRespose.Bvin,
+                Sku = productRespose.Sku,
                 MatchingOptions = listMatchingOptions
             };
             var updateResponse = proxy.ProductVariantUpdateSku(productvariant);
             CheckErrors(updateResponse);
             Assert.IsTrue(updateResponse.Content);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
+    
 
         /// <summary>
         ///     This method is used to test specific test case scenario related to PBI 12570
@@ -98,8 +117,14 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
+            //Create Test Variant as prerequisites          
+            SampleData.CreateTestVariant(proxy, productRespose);
+
             //Find Product by Slug
-            var resP = proxy.ProductsBySlug(TestConstants.TestProduct1Slug);
+            var resP = proxy.ProductsBySlug(productRespose.UrlSlug);
             CheckErrors(resP);
 
             //Find Product Variants for given product
@@ -127,6 +152,9 @@ namespace Hotcakes.CommerceDTO.Tests
 
             CheckErrors(resI);
             Assert.AreEqual(resI.Content.QuantityOnHand, prodInvDto.QuantityOnHand);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
     }
 }

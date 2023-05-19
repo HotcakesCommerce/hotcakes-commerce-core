@@ -63,6 +63,7 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="SampleData.cs" />
     <Compile Include="AffiliatesTests.cs" />
     <Compile Include="ApiTestBase.cs" />
     <Compile Include="CategoriesTest.cs" />

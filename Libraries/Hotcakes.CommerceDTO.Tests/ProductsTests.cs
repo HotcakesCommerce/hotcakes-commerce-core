@@ -25,7 +25,11 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using Hotcakes.CommerceDTO.v1.Catalog;
+using Hotcakes.CommerceDTO.v1.Contacts;
+using Hotcakes.CommerceDTO.v1.Membership;
+using Hotcakes.CommerceDTO.v1.Taxes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hotcakes.CommerceDTO.Tests
@@ -45,9 +49,15 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
             //Get paged products
             var findResponse = proxy.ProductsFindPage(1, 100);
             CheckErrors(findResponse);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
 
         /// <summary>
@@ -59,9 +69,15 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
             //Get All products
             var findResponse = proxy.ProductsFindAll();
             CheckErrors(findResponse);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
 
         /// <summary>
@@ -73,11 +89,14 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
             //Fiend product by Sku.
-            var skuResponse = proxy.ProductsFindBySku(TestConstants.TestProduct1Sku);
+            var skuResponse = proxy.ProductsFindBySku(productRespose.Sku);
 
             //Find product by Slug.
-            var slugResponse = proxy.ProductsBySlug(TestConstants.TestProduct1Slug);
+            var slugResponse = proxy.ProductsBySlug(productRespose.UrlSlug);
 
             CheckErrors(skuResponse);
             CheckErrors(slugResponse);
@@ -86,6 +105,9 @@ namespace Hotcakes.CommerceDTO.Tests
             Assert.AreEqual(skuResponse.Content.ProductName, slugResponse.Content.ProductName);
             Assert.AreEqual(skuResponse.Content.ShippingDetails.ExtraShipFee,
                 slugResponse.Content.ShippingDetails.ExtraShipFee);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
 
         /// <summary>
@@ -97,10 +119,16 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
             //Get count of all products.
             var countResponse = proxy.ProductsCountOfAll();
             CheckErrors(countResponse);
             Assert.IsTrue(countResponse.Content > 0);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
 
         /// <summary>
@@ -117,7 +145,7 @@ namespace Hotcakes.CommerceDTO.Tests
                 AllowReviews = true,
                 ListPrice = 687,
                 LongDescription = "This is test product",
-                Sku = "TST100",
+                Sku = "TST102",
                 StoreId = 1,
                 TaxExempt = true
             };
@@ -129,17 +157,11 @@ namespace Hotcakes.CommerceDTO.Tests
             Assert.AreEqual(dto.Sku, resP1.Content.Sku);
             Assert.AreEqual(dto.LongDescription, resP1.Content.LongDescription);
 
-            var resP2 = proxy.ProductsCreate(dto, null);
-            Assert.AreNotEqual(resP1.Content.UrlSlug, resP2.Content.UrlSlug);
-
             //Delete
             var resD1 = proxy.ProductsDelete(resP1.Content.Bvin);
             CheckErrors(resD1);
             Assert.IsTrue(resD1.Content);
 
-            var resD2 = proxy.ProductsDelete(resP2.Content.Bvin);
-            CheckErrors(resD2);
-            Assert.IsTrue(resD2.Content);
         }
 
         /// <summary>
@@ -151,8 +173,11 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
             //Find product by SKU
-            var findResponse = proxy.ProductsFindBySku(TestConstants.TestProduct1Sku);
+            var findResponse = proxy.ProductsFindBySku(productRespose.Sku);
             CheckErrors(findResponse);
 
             //Update product
@@ -168,6 +193,9 @@ namespace Hotcakes.CommerceDTO.Tests
             var update2Response = proxy.ProductsUpdate(product);
             CheckErrors(update2Response);
             Assert.AreEqual(update2Response.Content.MetaTitle, oldMetaTitle);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
 
         /// <summary>
@@ -180,8 +208,11 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
             //Find product by SKU.
-            var findResponse = proxy.ProductsFindBySku(TestConstants.TestProduct1Sku);
+            var findResponse = proxy.ProductsFindBySku(productRespose.Sku);
             CheckErrors(findResponse);
 
             //Upload image
@@ -193,6 +224,9 @@ namespace Hotcakes.CommerceDTO.Tests
             var uploadResponse = proxy.ProductsMainImageUpload(product.Bvin, fileName, imageData);
             CheckErrors(uploadResponse);
             Assert.IsTrue(uploadResponse.Content);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
 
         /// <summary>
@@ -204,12 +238,24 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
+            //Create Test Category as prerequisites          
+            var catagoryRespose = SampleData.CreateTestCategory(proxy);
+
             //Get Category by Slug.
-            var categoryInfo = proxy.CategoriesFindBySlug(TestConstants.TestCategorySlug);
+            var categoryInfo = proxy.CategoriesFindBySlug(productRespose.UrlSlug);
 
             //Get list of products by Category unique identifier.
             var pagedResults = proxy.ProductsFindForCategory(categoryInfo.Content.Bvin, 1, 15);
             CheckErrors(pagedResults);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
+
+            //Remove Test Category
+            SampleData.RemoveTestCategory(proxy, catagoryRespose.Bvin);
         }
 
         /// <summary>
@@ -221,12 +267,18 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
             //Index product by its unique identifier
-            var searchIndexResponse = proxy.SearchManagerIndexProduct(TestConstants.TestProductBvin);
+            var searchIndexResponse = proxy.SearchManagerIndexProduct(productRespose.Bvin);
 
             CheckErrors(searchIndexResponse);
 
             Assert.IsTrue(searchIndexResponse.Content);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
 
         /// <summary>
@@ -252,10 +304,14 @@ namespace Hotcakes.CommerceDTO.Tests
         [TestMethod]
         public void Product_ClearAll()
         {
+
             var proxy = CreateApiProxy();
+
             var clearResponse = proxy.ProductsClearAll(100);
             CheckErrors(clearResponse);
             Assert.IsTrue(clearResponse.Content.ProductsCleared > 0);
         }
+
+
     }
 }

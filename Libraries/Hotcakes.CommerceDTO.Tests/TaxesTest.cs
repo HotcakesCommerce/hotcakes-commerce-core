@@ -44,10 +44,21 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
+            //Create Test TaxSchedule as prerequisites          
+            var createTaxScheduleResponse = SampleData.CreateTestTaxSchedules(proxy);
+
+            //Create Test Tax as prerequisites          
+            var createTaxResponse = SampleData.CreateTestTax(proxy, createTaxScheduleResponse.Id);
+
             //Get List of all Taxes
             var findResponse = proxy.TaxesFindAll();
-
             CheckErrors(findResponse);
+
+            //Remove Test Tax
+            SampleData.RemoveTestTax(proxy, createTaxResponse.Id);
+
+            //Remove Test TaxSchedule
+            SampleData.RemoveTestTaxSchedules(proxy, createTaxScheduleResponse.Id);
         }
 
         /// <summary>
@@ -58,6 +69,9 @@ namespace Hotcakes.CommerceDTO.Tests
         {
             //Create API Proxy.
             var proxy = CreateApiProxy();
+
+            //Create Test TaxSchedule as prerequisites          
+            var createTaxScheduleResponse = SampleData.CreateTestTaxSchedules(proxy);
 
             //Get list of all tax schedules
             var lstOfTaxSchedule = proxy.TaxSchedulesFindAll();
@@ -95,6 +109,9 @@ namespace Hotcakes.CommerceDTO.Tests
             var deleteResponse = proxy.TaxesDelete(createResponse.Content.Id);
             CheckErrors(deleteResponse);
             Assert.IsTrue(deleteResponse.Content);
+
+            //Remove Test TaxSchedule
+            SampleData.RemoveTestTaxSchedules(proxy, createTaxScheduleResponse.Id);
         }
     }
 }

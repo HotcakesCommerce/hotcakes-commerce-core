@@ -43,12 +43,15 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
             //Create Product Volume Discount.
             var productVolumeDiscount = new ProductVolumeDiscountDTO
             {
                 Amount = 50,
                 DiscountType = ProductVolumeDiscountTypeDTO.Amount,
-                ProductId = TestConstants.TestProductBvin,
+                ProductId = productRespose.Bvin,
                 Qty = 5
             };
             var createResponse = proxy.ProductVolumeDiscountsCreate(productVolumeDiscount);
@@ -71,6 +74,9 @@ namespace Hotcakes.CommerceDTO.Tests
             var deleteResponse = proxy.ProductVolumeDiscountsDelete(createResponse.Content.Bvin);
             CheckErrors(deleteResponse);
             Assert.IsTrue(deleteResponse.Content);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
     }
 }

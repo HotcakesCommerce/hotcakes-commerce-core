@@ -43,8 +43,23 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
+            //Create Product Property as prerequisites
+            var productProperty = new ProductPropertyDTO
+            {
+                DisplayName = "TestCase Property",
+                DefaultValue = "test",
+                PropertyName = "TestCaseProperty",
+                TypeCode = ProductPropertyTypeDTO.TextField,
+                StoreId = 1
+            };
+            var createproductPropertyResponse = proxy.ProductPropertiesCreate(productProperty);
+
             //Find all Product properties
             var response = proxy.ProductPropertiesFindAll();
+
+            //Remove Test Product Properties
+            proxy.ProductPropertiesDelete(createproductPropertyResponse.Content.Id);
+
             CheckErrors(response);
         }
 
@@ -57,8 +72,26 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
+            //Create Product Property as prerequisites
+            var productProperty = new ProductPropertyDTO
+            {
+                DisplayName = "TestCase Property",
+                DefaultValue = "test",
+                PropertyName = "TestCaseProperty",
+                TypeCode = ProductPropertyTypeDTO.TextField,
+                StoreId = 1
+            };
+            var createproductPropertyResponse = proxy.ProductPropertiesCreate(productProperty);
+
+            //Set Product properties value
+            var setValueResponse = proxy.ProductPropertiesSetValueForProduct(createproductPropertyResponse.Content.Id,
+               productRespose.Bvin, "settestvalue", 0);
+
             //Find all product properties for specific product
-            var response = proxy.ProductPropertiesForProduct("EBF3029C-D673-49DA-958A-432C65B16D4C");
+            var response = proxy.ProductPropertiesForProduct(productRespose.Bvin);
 
             if (response.Content == null)
             {
@@ -68,6 +101,12 @@ namespace Hotcakes.CommerceDTO.Tests
             {
                 CheckErrors(response);
             }
+
+            //Remove Test Product Properties
+            proxy.ProductPropertiesDelete(createproductPropertyResponse.Content.Id);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
 
         /// <summary>
@@ -78,6 +117,9 @@ namespace Hotcakes.CommerceDTO.Tests
         {
             //Create API Proxy.
             var proxy = CreateApiProxy();
+
+            //Create Test product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
 
             //Create Product Property
             var productProperty = new ProductPropertyDTO
@@ -106,7 +148,7 @@ namespace Hotcakes.CommerceDTO.Tests
 
             //Set Product properties value
             var setValueResponse = proxy.ProductPropertiesSetValueForProduct(updateResponse.Content.Id,
-                TestConstants.TestProductBvin, "settestvalue", 0);
+               productRespose.Bvin, "settestvalue", 0);
             CheckErrors(setValueResponse);
             Assert.IsTrue(setValueResponse.Content);
 
@@ -114,6 +156,9 @@ namespace Hotcakes.CommerceDTO.Tests
             var deleteResponse = proxy.ProductPropertiesDelete(createResponse.Content.Id);
             CheckErrors(deleteResponse);
             Assert.IsTrue(deleteResponse.Content);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
     }
 }

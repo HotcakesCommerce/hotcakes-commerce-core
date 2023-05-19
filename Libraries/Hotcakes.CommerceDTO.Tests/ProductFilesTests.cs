@@ -25,7 +25,9 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using Hotcakes.CommerceDTO.v1.Catalog;
+using Hotcakes.CommerceDTO.v1.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hotcakes.CommerceDTO.Tests
@@ -46,13 +48,16 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
             //Create Product File.
             var productfile = new ProductFileDTO
             {
                 FileName = "Test" + DateTime.Now.ToString("yyyyMMddHHmmss"),
                 MaxDownloads = 5,
                 ShortDescription = "My test file for product",
-                ProductId = TestConstants.TestProductBvin,
+                ProductId = productRespose.Bvin,
                 StoreId = 1,
                 AvailableMinutes = 20
             };
@@ -89,23 +94,28 @@ namespace Hotcakes.CommerceDTO.Tests
             Assert.IsTrue(firstPartResponse.Content);
 
             //Add file to product.
-            var addfileToProductResponse = proxy.ProductFilesAddToProduct(TestConstants.TestProductBvin,
+            var addfileToProductResponse = proxy.ProductFilesAddToProduct(productRespose.Bvin,
                 findResponse.Content.Bvin, 5, 10);
             Assert.IsTrue(addfileToProductResponse.Content);
 
             //Find product files for Product
-            var findforProductResponse = proxy.ProductFilesFindForProduct(TestConstants.TestProductBvin);
+            var findforProductResponse = proxy.ProductFilesFindForProduct(productRespose.Bvin);
             CheckErrors(findforProductResponse);
             Assert.IsTrue(findforProductResponse.Content.Count > 0);
 
             //Remove product files for Product
-            var removefileToProductResponse = proxy.ProductFilesRemoveFromProduct(TestConstants.TestProductBvin,
+            var removefileToProductResponse = proxy.ProductFilesRemoveFromProduct(productRespose.Bvin,
                 findResponse.Content.Bvin);
             Assert.IsTrue(removefileToProductResponse.Content);
 
             //Delete product file
             var deleteResponse = proxy.ProductFilesDelete(findResponse.Content.Bvin);
             Assert.IsTrue(deleteResponse.Content);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
+
+        
     }
 }

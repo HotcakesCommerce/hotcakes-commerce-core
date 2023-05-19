@@ -23,8 +23,10 @@
 
 #endregion
 
+using Hotcakes.CommerceDTO.v1.Client;
 using Hotcakes.CommerceDTO.v1.Contacts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Hotcakes.CommerceDTO.Tests
 {
@@ -43,8 +45,15 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test PriceGroup as prerequisites
+            var priceGroup = SampleData.CreateTestPriceGroup(proxy);
+
             //Get all price groups
             var findResponse = proxy.PriceGroupsFindAll();
+
+            //Remove Test PriceGroup
+            SampleData.RemoveTestPriceGroup(proxy, priceGroup.Bvin);
+            
             CheckErrors(findResponse);
         }
 
@@ -86,5 +95,7 @@ namespace Hotcakes.CommerceDTO.Tests
             CheckErrors(deleteResponse);
             Assert.IsTrue(deleteResponse.Content);
         }
+
+        
     }
 }

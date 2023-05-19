@@ -75,9 +75,30 @@ namespace Hotcakes.CommerceDTO.Tests
         {
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
+            //Create Product Inventory as prerequisites
+            var productInventoryDTO = new ProductInventoryDTO
+            {
+                LowStockPoint = 5,
+                OutOfStockPoint = 2,
+                QuantityOnHand = 50,
+                QuantityReserved = 4,
+                ProductBvin = productRespose.Bvin,
+
+            };
+            var productInventoryRespose = proxy.ProductInventoryCreate(productInventoryDTO);
+
             var findResponse = proxy.ProductInventoryFindAll();
 
             Assert.IsTrue(findResponse.Content.Count > 0);
+
+            //Delete Product Inventory
+            proxy.ProductInventoryDelete(productInventoryRespose.Content.Bvin);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
 
             CheckErrors(findResponse);
         }
@@ -106,9 +127,29 @@ namespace Hotcakes.CommerceDTO.Tests
         {
             var proxy = CreateApiProxy();
 
-            var findResponse = proxy.ProductInventoryFindForProduct(TestConstants.TestProductBvin);
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
+            //Create Product Inventory as prerequisites
+            var productInventory = new ProductInventoryDTO
+            {
+                LowStockPoint = 5,
+                OutOfStockPoint = 2,
+                QuantityOnHand = 50,
+                QuantityReserved = 4,
+                ProductBvin = productRespose.Bvin
+            };
+            var productInventoryRespose = proxy.ProductInventoryCreate(productInventory);
+
+            var findResponse = proxy.ProductInventoryFindForProduct(productRespose.Bvin);
 
             Assert.IsTrue(findResponse.Content.Count > 0);
+
+            //Delete Product Inventory
+            proxy.ProductInventoryDelete(productInventoryRespose.Content.Bvin);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
 
             CheckErrors(findResponse);
         }
@@ -124,6 +165,10 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
+
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
             //Create Product Inventory
             var productInventory = new ProductInventoryDTO
             {
@@ -131,7 +176,7 @@ namespace Hotcakes.CommerceDTO.Tests
                 OutOfStockPoint = 2,
                 QuantityOnHand = 50,
                 QuantityReserved = 4,
-                ProductBvin = TestConstants.TestProductBvin
+                ProductBvin = productRespose.Bvin
             };
             var createResponse = proxy.ProductInventoryCreate(productInventory);
             CheckErrors(createResponse);
@@ -147,6 +192,10 @@ namespace Hotcakes.CommerceDTO.Tests
             var deleteResponse = proxy.ProductInventoryDelete(createResponse.Content.Bvin);
             CheckErrors(deleteResponse);
             Assert.IsTrue(deleteResponse.Content);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
+
         }
 
 
@@ -181,6 +230,21 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
+            //Create Product Inventory as prerequisites 
+            var productInventoryDTO = new ProductInventoryDTO
+            {
+                LowStockPoint = 5,
+                OutOfStockPoint = 2,
+                QuantityOnHand = 50,
+                QuantityReserved = 4,
+                ProductBvin = productRespose.Bvin
+            };
+            var productInventoryRespose = proxy.ProductInventoryCreate(productInventoryDTO);
+
             //Find all inventory
             var findAllResponse = proxy.ProductInventoryFindAll();
             CheckErrors(findAllResponse);
@@ -207,6 +271,12 @@ namespace Hotcakes.CommerceDTO.Tests
                 Assert.AreEqual(allInventoryOfProduct.Count, findForProductResponse.Content.Count);
 
                 CheckErrors(findForProductResponse);
+
+                //Remove Test ProductInventory
+                proxy.ProductInventoryDelete(productInventoryRespose.Content.Bvin);
+
+                //Remove Test Product
+                SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
             }
         }
 
@@ -218,7 +288,39 @@ namespace Hotcakes.CommerceDTO.Tests
         {
             var proxy = CreateApiProxy();
 
-            var productFind1Response = proxy.ProductsFind(TestConstants.TestProductBvin);
+            //Create Test Product as prerequisites
+            var productDTO = new ProductDTO
+            {
+                ProductName = "Unit tests product",
+                AllowReviews = true,
+                ListPrice = 687,
+                LongDescription = "This is test product",
+                Sku = "TST106",
+                StoreId = 1,
+                TaxExempt = true,
+                IsAvailableForSale = true,
+                InventoryMode = ProductInventoryModeDTO.AlwayInStock
+            };
+
+            //Create
+            var productRespose = proxy.ProductsCreate(productDTO, null);
+
+
+            //Create Product Inventory as prerequisites
+            var productInventoryDTO = new ProductInventoryDTO
+            {
+                LowStockPoint = 5,
+                OutOfStockPoint = 2,
+                QuantityOnHand = 50,
+                QuantityReserved = 4,
+                ProductBvin = productRespose.Content.Bvin,
+                
+            };
+
+            var productInventoryRespose = proxy.ProductInventoryCreate(productInventoryDTO);
+
+
+            var productFind1Response = proxy.ProductsFind(productRespose.Content.Bvin);
             CheckErrors(productFind1Response);
             var product = productFind1Response.Content;
 
@@ -233,7 +335,7 @@ namespace Hotcakes.CommerceDTO.Tests
             var productUpdate2Response = proxy.ProductsUpdate(product);
             CheckErrors(productUpdate2Response);
 
-            var productInventoryFindResponse = proxy.ProductInventoryFindForProduct(TestConstants.TestProductBvin);
+            var productInventoryFindResponse = proxy.ProductInventoryFindForProduct(productRespose.Content.Bvin);
             CheckErrors(productInventoryFindResponse);
             var productInventories = productInventoryFindResponse.Content;
 
@@ -243,9 +345,20 @@ namespace Hotcakes.CommerceDTO.Tests
                 var productInventoryResponse = proxy.ProductInventoryUpdate(productInventory);
                 CheckErrors(productInventoryResponse);
             }
-            var productFind2Response = proxy.ProductsFind(TestConstants.TestProductBvin);
+            var productFind2Response = proxy.ProductsFind(productRespose.Content.Bvin);
             CheckErrors(productFind2Response);
             Assert.AreEqual(productFind2Response.Content.IsAvailableForSale, false);
+
+            //Delete Product Inventory
+            proxy.ProductInventoryDelete(productInventoryRespose.Content.Bvin);
+
+            //Remove Test Product
+            proxy.ProductsDelete(productRespose.Content.Bvin);
+
+
         }
+
+        
+
     }
 }
