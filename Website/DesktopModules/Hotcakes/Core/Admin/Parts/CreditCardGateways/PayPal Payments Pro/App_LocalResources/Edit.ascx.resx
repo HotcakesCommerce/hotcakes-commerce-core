@@ -120,9 +120,6 @@
   <data name="DebugMode.Text" xml:space="preserve">
     <value>Debug Mode</value>
   </data>
-  <data name="Password.Text" xml:space="preserve">
-    <value>API Password</value>
-  </data>
   <data name="PaypalMode.Text" xml:space="preserve">
     <value>Paypal Mode</value>
   </data>
@@ -135,16 +132,16 @@
   <data name="PayPalOptions.Text" xml:space="preserve">
     <value>PayPal Payments Pro Options</value>
   </data>
-  <data name="Signature.Text" xml:space="preserve">
-    <value>API Signature</value>
-  </data>
-  <data name="Username.Text" xml:space="preserve">
-    <value>API Username</value>
-  </data>
   <data name="Currency.Text" xml:space="preserve">
     <value>Currency</value>
   </data>
   <data name="CurrencyEmptyValue.Text" xml:space="preserve">
     <value>- Not Set -</value>
+  </data>
+  <data name="lblClientId.Text" xml:space="preserve">
+    <value>API Client ID</value>
+  </data>
+  <data name="lblSecret.Text" xml:space="preserve">
+    <value>API Secret</value>
   </data>
 </root>

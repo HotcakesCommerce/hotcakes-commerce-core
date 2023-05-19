@@ -49,6 +49,18 @@ namespace Hotcakes.Commerce.Accounts
             set { parent.SetPropEncrypted("PaypalPassword", value); }
         }
 
+        public string ClienId
+        {
+            get { return parent.GetPropEncrypted("PaypalClientId"); }
+            set { parent.SetPropEncrypted("PaypalClientId", value); }
+        }
+
+        public string Secret
+        {
+            get { return parent.GetPropEncrypted("PaypalSecret"); }
+            set { parent.SetPropEncrypted("PaypalSecret", value); }
+        }
+
         public string Signature
         {
             get { return parent.GetPropEncrypted("PaypalSignature"); }

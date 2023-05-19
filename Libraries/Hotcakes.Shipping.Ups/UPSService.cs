@@ -39,7 +39,7 @@ namespace Hotcakes.Shipping.Ups
     [Serializable]
     public class UPSService : IShippingService
     {
-        public const string UPSLIVESERVER = @"https://www.ups.com/ups.app/xml/";
+        public const string UPSLIVESERVER = @"https://onlinetools.ups.com/ups.app/xml/";
         private readonly List<IServiceCode> _Codes = new List<IServiceCode>();
 
         private readonly ILogger _Logger = new SupressLogger();

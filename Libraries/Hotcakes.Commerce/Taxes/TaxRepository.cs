@@ -25,6 +25,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -151,9 +152,10 @@ namespace Hotcakes.Commerce.Taxes
 
         public Tax FindByAdress(long storeId, long scheduleId, IAddress address)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var taxes = s.GetQuery()
+                    .AsNoTracking()
                     .Where(y => y.StoreId == storeId)
                     .Where(y => y.TaxScheduleId == scheduleId)
                     .OrderBy(y => y.CountryName)

@@ -25,6 +25,8 @@
 
 using System;
 using Hotcakes.CommerceDTO.v1.Catalog;
+using Hotcakes.CommerceDTO.v1.Client;
+using Hotcakes.CommerceDTO.v1.Contacts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hotcakes.CommerceDTO.Tests
@@ -44,7 +46,13 @@ namespace Hotcakes.CommerceDTO.Tests
         {
             var proxy = CreateApiProxy();
 
+            //Create Test GiftCard type as prerequisites
+            var giftCard = SampleData.CreateTestGiftCard(proxy);
+
             var findResponse = proxy.GiftCardFindAll();
+
+            //Remove Test GiftCard
+            SampleData.RemoveTestGiftCard(proxy, giftCard.GiftCardId);
 
             CheckErrors(findResponse);
         }
@@ -57,7 +65,13 @@ namespace Hotcakes.CommerceDTO.Tests
         {
             var proxy = CreateApiProxy();
 
+            //Create Test GiftCard type as prerequisites
+            var giftCard = SampleData.CreateTestGiftCard(proxy);
+
             var findResponse = proxy.GiftCardFindAllByPage(1, int.MaxValue);
+
+            //Remove Test GiftCard
+            SampleData.RemoveTestGiftCard(proxy, giftCard.GiftCardId);
 
             CheckErrors(findResponse);
         }
@@ -84,6 +98,7 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test GiftCard type as prerequisites
             var card = new GiftCardDTO
             {
                 CardNumber = "GIFT0000-1111-22222",
@@ -120,6 +135,7 @@ namespace Hotcakes.CommerceDTO.Tests
             CheckErrors(delete1Response);
 
             Assert.IsTrue(delete1Response.Content);
+
         }
     }
 }

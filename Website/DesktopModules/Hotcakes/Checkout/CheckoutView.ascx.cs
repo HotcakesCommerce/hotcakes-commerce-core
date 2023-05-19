@@ -25,23 +25,29 @@
 
 using System;
 using Hotcakes.Commerce.Dnn.Web;
+using Hotcakes.Payment;
 
 namespace Hotcakes.Modules.Checkout
 {
     public partial class CheckoutView : HotcakesModuleBase
     {
-        private string _action = "Index";
+        private const string IndexAction = "index";
+        private const string PaymentErrorAction = "paymenterror";
+        private string _action = IndexAction;
 
         protected override string RenderView()
         {
             if (!string.IsNullOrEmpty(Request.QueryString["action"]))
             {
-                _action = Request.QueryString["action"];
+                _action = Request.QueryString["action"].ToLower();
             }
 
-            _action = _action.ToLower();
-            if (_action == "index" || _action == "paymenterror")
+            if (_action == IndexAction || _action == PaymentErrorAction)
             {
+                if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway == PaymentGatewayType.Stripe)
+                {
+                    RegisterScriptExternal("https://js.stripe.com/v3/");
+                }
                 RegisterViewScript("crypto-js.js");
                 RegisterViewScript("Checkout.js");
             }

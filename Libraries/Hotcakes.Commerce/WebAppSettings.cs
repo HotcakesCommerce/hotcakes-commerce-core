@@ -170,6 +170,22 @@ namespace Hotcakes.Commerce
 
         #region Properties / Web.Config
 
+        public static string HccReadOnlyConnectionString
+        {
+            get
+            {
+                var result = string.Empty;
+                try
+                {
+                    result = "ApplicationIntent=ReadOnly;" + ConfigurationManager.ConnectionStrings[CONNECTIONSTRING].ConnectionString;
+                }
+                catch
+                {
+                }
+                return result;
+            }
+        }
+
         public static string HccConnectionString
         {
             get
@@ -193,6 +209,20 @@ namespace Hotcakes.Commerce
                 var connBuilder = new EntityConnectionStringBuilder
                 {
                     Provider = DATAPROVIDER, ProviderConnectionString = HccConnectionString, Metadata = METADATA
+                };
+                return connBuilder.ConnectionString;
+            }
+        }
+
+        public static string HccEFReadOnlyConnectionString
+        {
+            get
+            {
+                var connBuilder = new EntityConnectionStringBuilder
+                {
+                    Provider = DATAPROVIDER,
+                    ProviderConnectionString = HccReadOnlyConnectionString,
+                    Metadata = METADATA
                 };
                 return connBuilder.ConnectionString;
             }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1022
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotcakes.PaypalWebServices", "Libraries\Hotcakes.PaypalWebServices\Hotcakes.PaypalWebServices.csproj", "{40FCF14A-F903-4BF1-B4E0-FC5CB623BDF2}"
 EndProject
@@ -50,8 +50,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotcakes.Commerce", "Libraries\Hotcakes.Commerce\Hotcakes.Commerce.csproj", "{4EFF0D3E-99D4-4A8D-A672-B88E5E47CBAA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotcakes.Views", "Website\Hotcakes.Views.csproj", "{EBF80AA0-64ED-4DE8-B97B-A67764C6BD6D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotcakes.Shipping.Ups.Keys", "Libraries\Hotcakes.Shipping.Ups.Keys\Hotcakes.Shipping.Ups.Keys.csproj", "{5B7FDF2C-98CA-4030-B35F-F0ABE648E5FE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotcakes.Commerce.Dnn", "Libraries\Hotcakes.Commerce.Dnn\Hotcakes.Commerce.Dnn.csproj", "{CCE92CF0-6CAE-4C74-96BA-5757D1750633}"
 EndProject
@@ -192,16 +190,6 @@ Global
 		{EBF80AA0-64ED-4DE8-B97B-A67764C6BD6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBF80AA0-64ED-4DE8-B97B-A67764C6BD6D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EBF80AA0-64ED-4DE8-B97B-A67764C6BD6D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5B7FDF2C-98CA-4030-B35F-F0ABE648E5FE}.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{5B7FDF2C-98CA-4030-B35F-F0ABE648E5FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B7FDF2C-98CA-4030-B35F-F0ABE648E5FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B7FDF2C-98CA-4030-B35F-F0ABE648E5FE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5B7FDF2C-98CA-4030-B35F-F0ABE648E5FE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5B7FDF2C-98CA-4030-B35F-F0ABE648E5FE}.Release|.NET.ActiveCfg = Release|Any CPU
-		{5B7FDF2C-98CA-4030-B35F-F0ABE648E5FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B7FDF2C-98CA-4030-B35F-F0ABE648E5FE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B7FDF2C-98CA-4030-B35F-F0ABE648E5FE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5B7FDF2C-98CA-4030-B35F-F0ABE648E5FE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{CCE92CF0-6CAE-4C74-96BA-5757D1750633}.Debug|.NET.ActiveCfg = Debug|Any CPU
 		{CCE92CF0-6CAE-4C74-96BA-5757D1750633}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CCE92CF0-6CAE-4C74-96BA-5757D1750633}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -271,7 +259,7 @@ Global
 		{1EDD16FA-4A6D-44CB-813E-04F36354A959} = {F008FB3A-586D-4339-98D1-00A990006429}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {5C4EE5A8-8F35-4A6B-8335-0D616409059B}
 		LessCompiler = aa89b33a-2a62-4919-b15f-ff3685947622,ebf80aa0-64ed-4de8-b97b-a67764c6bd6d
+		SolutionGuid = {5C4EE5A8-8F35-4A6B-8335-0D616409059B}
 	EndGlobalSection
 EndGlobal

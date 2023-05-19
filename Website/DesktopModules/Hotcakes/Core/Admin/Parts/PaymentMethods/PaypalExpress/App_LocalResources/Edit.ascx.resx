@@ -117,14 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="APIPassword.Text" xml:space="preserve">
-    <value>API Password</value>
+  
+  <data name="APIClientId.Text" xml:space="preserve">
+    <value>API Client Id</value>
   </data>
-  <data name="APISignature.Text" xml:space="preserve">
-    <value>API Signature</value>
-  </data>
-  <data name="APIUsername.Text" xml:space="preserve">
-    <value>API Username</value>
+  <data name="APISecret.Text" xml:space="preserve">
+    <value>API Secret</value>
   </data>
   <data name="CaptureMode.Text" xml:space="preserve">
     <value>Capture Mode</value>
@@ -150,14 +148,11 @@
   <data name="ProductionMode.Text" xml:space="preserve">
     <value>Production Mode</value>
   </data>
-  <data name="rfvPassword.Text" xml:space="preserve">
-    <value>API Password is required</value>
+  <data name="rfvClientId.Text" xml:space="preserve">
+    <value>API Client ID is required</value>
   </data>
-  <data name="rfvSignature.Text" xml:space="preserve">
-    <value>API Signature is required</value>
-  </data>
-  <data name="rfvUsername.Text" xml:space="preserve">
-    <value>API Username is required</value>
+  <data name="rfvSecret.Text" xml:space="preserve">
+    <value>API Secret is required</value>
   </data>
   <data name="SandboxMode.Text" xml:space="preserve">
     <value>Sandbox Mode (for testing)</value>

@@ -45,6 +45,9 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test ProductReview as prerequisites          
+            var productReviewRespose = SampleData.CreateTestProductReview(proxy);
+
             //Get list of all reviews
             var getallResponse = proxy.ProductReviewsFindAll();
             CheckErrors(getallResponse);
@@ -52,6 +55,9 @@ namespace Hotcakes.CommerceDTO.Tests
             //Find reviews for the product
             var getallByProductResponse = proxy.ProductReviewsByProduct(getallResponse.Content.First().ProductBvin);
             CheckErrors(getallByProductResponse);
+
+            //Remove Test ProductReview
+            SampleData.RemoveTestProductReview(proxy, productReviewRespose.Bvin);
         }
 
         /// <summary>
@@ -63,11 +69,14 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
-            //Create product review
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
+            //Create Product Review
             var productReview = new ProductReviewDTO
             {
                 Approved = true,
-                ProductBvin = TestConstants.TestProductBvin,
+                ProductBvin = productRespose.Bvin,
                 Rating = ProductReviewRatingDTO.FiveStars,
                 UserID = "1",
                 ReviewDateUtc = DateTime.UtcNow
@@ -92,6 +101,9 @@ namespace Hotcakes.CommerceDTO.Tests
             var deleteResponse = proxy.ProductReviewsDelete(createResponse.Content.Bvin);
             CheckErrors(deleteResponse);
             Assert.IsTrue(deleteResponse.Content);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
     }
 }

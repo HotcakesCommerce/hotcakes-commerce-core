@@ -85,6 +85,14 @@ namespace Hotcakes.Commerce
             }
         }
 
+        // Store Id by HostUrl
+        public static long? GetStoreIdByHostName(string hostName, Func<long?> getData)
+        {
+            var cacheKey = string.Format("storeguid-{0}", hostName);
+
+            return GetItem(cacheKey, getData);
+        }
+
         // Store Id by Guid
         public static long? GetStoreIdByGuid(Guid guid, Func<long?> getData)
         {

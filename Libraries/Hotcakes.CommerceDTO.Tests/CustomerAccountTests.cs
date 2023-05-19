@@ -23,9 +23,11 @@
 
 #endregion
 
+using Hotcakes.CommerceDTO.v1.Client;
 using Hotcakes.CommerceDTO.v1.Contacts;
 using Hotcakes.CommerceDTO.v1.Membership;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Hotcakes.CommerceDTO.Tests
 {
@@ -43,7 +45,14 @@ namespace Hotcakes.CommerceDTO.Tests
         {
             var proxy = CreateApiProxy();
 
-            var findResponse = proxy.CustomerAccountsFind(TestConstants.TestAccount1Id);
+            //Create test CustomerAccount as prerequisites
+            var account = CreateTestCustomerAccount(proxy);
+
+            var findResponse = proxy.CustomerAccountsFind(account.Bvin);
+
+            //Remove test CustomerAccount
+            RemoveTestCustomerAccount(proxy, account.Bvin);
+
             CheckErrors(findResponse);
         }
 
@@ -55,7 +64,15 @@ namespace Hotcakes.CommerceDTO.Tests
         {
             var proxy = CreateApiProxy();
 
-            var findResponse = proxy.CustomerAccountsFindByEmail(TestConstants.TestAccount1Email);
+            //Create test CustomerAccount as prerequisites
+            var account = CreateTestCustomerAccount(proxy);
+
+            var findResponse = proxy.CustomerAccountsFindByEmail(account.Email);
+
+            //Remove test CustomerAccount
+            RemoveTestCustomerAccount(proxy, account.Bvin);
+
+           
             CheckErrors(findResponse);
         }
 
@@ -80,9 +97,15 @@ namespace Hotcakes.CommerceDTO.Tests
         {
             var proxy = CreateApiProxy();
 
-            var findResponse = proxy.CustomerAccountsFindAllByPage(2, 5);
+            //Create test CustomerAccount as prerequisites
+            var account = CreateTestCustomerAccount(proxy);
+
+            var findResponse = proxy.CustomerAccountsFindAllByPage(1, 5);
             CheckErrors(findResponse);
             Assert.AreEqual(findResponse.Content.Count, 5);
+
+            //Remove test CustomerAccount
+            RemoveTestCustomerAccount(proxy, account.Bvin);
         }
 
         /// <summary>
@@ -110,8 +133,8 @@ namespace Hotcakes.CommerceDTO.Tests
             //User with tTest already exists
             var account = new CustomerAccountDTO
             {
-                FirstName = "Tst",
-                LastName = "Test",
+                FirstName = "Tst" + DateTime.Now.ToString("ss"),
+                LastName = "Test" + DateTime.Now.ToString("ss"),
                 Email = "tstAccount@gmail.com",
                 Password = "password1",
                 BillingAddress = new AddressDTO
@@ -149,6 +172,42 @@ namespace Hotcakes.CommerceDTO.Tests
             var clearAllResponse = proxy.CustomerAccountsClearAll();
             CheckErrors(clearAllResponse);
             Assert.IsTrue(clearAllResponse.Content);
+        }
+
+        /// <summary>
+        ///     This method create test CustomerAccount, to be used during Manufacturer_FindAll.
+        /// </summary>
+        /// <param name="proxy">REST API Proxy instance.</param>
+        /// <returns></returns>
+        private CustomerAccountDTO CreateTestCustomerAccount(Api proxy)
+        {
+            //Create Customer Account
+            //User with tTest already exists
+            var account = new CustomerAccountDTO
+            {
+                FirstName = "TestCustomerAccountFirstName" + DateTime.Now.ToString("ss"),
+                LastName = "TestCustomerAccountLastName" + DateTime.Now.ToString("ss"),
+                Email = "testCustomerAccount@gmail.com",
+                Password = "password1",
+                BillingAddress = new AddressDTO
+                {
+                    City = "New York",
+                    CountryName = "United States",
+                    RegionName = "New York"
+                }
+            };
+            var response = proxy.CustomerAccountsCreate(account);
+            return response.Content;
+        }
+
+        /// <summary>
+        ///     This method remove test CustomerAccount.
+        /// </summary>
+        /// <param name="proxy">REST API Proxy instance.</param>
+        /// <param name="Bvin">CustomerAccount unique identifier.</param>
+        private void RemoveTestCustomerAccount(Api proxy, string Bvin)
+        {
+            var response = proxy.CustomerAccountsDelete(Bvin);
         }
     }
 }

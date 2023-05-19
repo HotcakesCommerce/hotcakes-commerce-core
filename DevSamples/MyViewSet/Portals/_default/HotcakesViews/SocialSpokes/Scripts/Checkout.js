@@ -1,4 +1,7 @@
 ﻿jQuery(function ($) {
+    const clientSecret = $("#PaymentIntentClientSecret").val()
+    const stripePublicKey = $("#StripePublicKey").val();
+    const stripe = stripePublicKey ? Stripe(stripePublicKey) : null;
 
     // Common ----------------------
 
@@ -416,7 +419,11 @@
                     var showBillingNm = (blRes != null && blRes.NormalizedAddress != null);
 
                     if (!showShippingNm && !showBillingNm) {
-                        self.saveForm();
+                        if (clientSecret) {
+                            CreatePaymentMethod(clientSecret)
+                        } else {
+                            self.saveForm();
+                        }
                     }
                     else {
                         if (showShippingNm) {
@@ -858,6 +865,53 @@
         }
     };
 
+    async function CreatePaymentMethod(clientSecret) {
+        var status = await checkPaymentStatus(clientSecret)
+        if (status === "requires_payment_method") {
+            var cardNumber = $("#cccardnumber").val();
+            var cvc = $("#ccsecuritycode").val();
+            var expMonth = $("#ccexpmonth").val();
+            var expYear = $("#ccexpyear").val();
+            var paymentIntent = $("#PaymentIntentId").val();
+            var nameOnCard = $("#cccardholder").val();
+            var pm = "";
+            if (cardNumber && cvc && expMonth && expYear && nameOnCard) {
+                var reqUrl = hcc.getServiceUrl("checkout/AttachPaymentMethod");
+                $.post(reqUrl, { "CardNumber": cardNumber, "Cvc": cvc, "ExpMonth": expMonth, "ExpYear": expYear, "PaymentIntentId": paymentIntent }, null, "json")
+                    .done((data) => {
+                        stripe
+                            .retrievePaymentIntent(clientSecret)
+                            .then(async (result) => {
+                                if (result.paymentIntent) {
+                                    if (result.paymentIntent.status == "requires_action") {
+                                        var result = await stripe.confirmCardPayment(clientSecret);
+                                        Addresses.saveForm()
+                                    } else {
+                                        Addresses.saveForm()
+                                    }
+                                } else {
+                                    Addresses.saveForm()
+                                }
+                            });
+                    })
+                    .fail(function (error) {
+                        console.log("error: " + error);
+                    });
+            } else {
+                Addresses.saveForm()
+            }
+        } else {
+            Addresses.saveForm()
+        }
+    };
+
+
+    async function checkPaymentStatus(clientSecret) {
+
+        const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
+        return paymentIntent.status;
+    }
+    
     // Initialization --------------------------
 
     OrderSummary.init();

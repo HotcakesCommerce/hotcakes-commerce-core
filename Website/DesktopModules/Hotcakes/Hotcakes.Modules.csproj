@@ -99,11 +99,11 @@
       <HintPath>..\..\..\References\Dnn\DotNetNuke.WebUtility.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Hotcakes.Common.Dnn">
@@ -113,6 +113,10 @@
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MiniProfiler">
@@ -125,9 +129,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="paypal_base">
+    <Reference Include="PayPalCheckoutSdk, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Misc\paypal_base.dll</HintPath>
+      <HintPath>..\..\..\References\Misc\PayPalCheckoutSdk.dll</HintPath>
+    </Reference>
+    <Reference Include="PayPalHttp-Dotnet, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\PayPalHttp.1.0.1\lib\netstandard2.0\PayPalHttp-Dotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Stripe.net, Version=41.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Stripe.net.41.2.0\lib\net461\Stripe.net.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -136,7 +147,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Dnn\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -150,7 +167,7 @@
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.1.1\lib\net45\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.1.0\lib\net45\System.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Drawing" />
@@ -170,6 +187,7 @@
     <Content Include="01.00.06.txt" />
     <Content Include="01.08.00.txt" />
     <Content Include="03.03.00.txt" />
+    <Content Include="03.07.00.txt" />
     <Content Include="03.06.00.txt" />
     <Content Include="03.05.00.txt" />
     <Content Include="AddressBook\AddressBookView.ascx" />
@@ -491,7 +509,6 @@
     <Content Include="Core\Admin\Configuration\Returns.aspx" />
     <Content Include="Core\Admin\Configuration\Shipping_Methods.aspx" />
     <Content Include="Core\Admin\Configuration\ShippingHandling.aspx" />
-    <Content Include="Core\Admin\Configuration\ShippingUpsLicense.aspx" />
     <Content Include="Core\Admin\Configuration\ShippingUpsThanks.aspx" />
     <Content Include="Core\Admin\Configuration\ShippingUSPSInternationalTester.aspx" />
     <Content Include="Core\Admin\Configuration\ShippingUSPSTester.aspx" />
@@ -987,7 +1004,9 @@
     <Content Include="Core\Admin\Parts\CreditCardGateways\PayLeap\App_LocalResources\Edit.ascx.resx" />
     <Content Include="Core\Admin\Parts\CreditCardGateways\PayPal Payments Pro\App_LocalResources\Edit.ascx.resx" />
     <Content Include="Core\Admin\Parts\CreditCardGateways\Authorize.Net\App_LocalResources\Edit.ascx.resx" />
-    <Content Include="Core\Admin\Parts\PaymentMethods\PaypalExpress\App_LocalResources\Edit.ascx.resx" />
+    <Content Include="Core\Admin\Parts\PaymentMethods\PaypalExpress\App_LocalResources\Edit.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Core\Admin\Parts\ShippingZones\App_LocalResources\Edit.ascx.resx" />
     <Content Include="Core\Admin\Parts\PaymentMethods\CreditCard\App_LocalResources\Edit.ascx.resx" />
     <Content Include="Core\Admin\People\App_LocalResources\Vendors.aspx.resx" />
@@ -1032,10 +1051,6 @@
     <ProjectReference Include="..\..\..\Libraries\Hotcakes.Commerce.Dnn\Hotcakes.Commerce.Dnn.csproj">
       <Project>{cce92cf0-6cae-4c74-96ba-5757d1750633}</Project>
       <Name>Hotcakes.Commerce.Dnn</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Libraries\Hotcakes.Shipping.Ups.Keys\Hotcakes.Shipping.Ups.Keys.csproj">
-      <Project>{5b7fdf2c-98ca-4030-b35f-f0abe648e5fe}</Project>
-      <Name>Hotcakes.Shipping.Ups.Keys</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Libraries\Hotcakes.CommerceDTO\Hotcakes.CommerceDTO.csproj">
       <Project>{c47a3a58-d11f-4d67-92fc-3e95b5dd6221}</Project>
@@ -1788,13 +1803,6 @@
     </Compile>
     <Compile Include="Core\Admin\Configuration\ShippingHandling.aspx.designer.cs">
       <DependentUpon>ShippingHandling.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Core\Admin\Configuration\ShippingUpsLicense.aspx.cs">
-      <DependentUpon>ShippingUpsLicense.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Core\Admin\Configuration\ShippingUpsLicense.aspx.designer.cs">
-      <DependentUpon>ShippingUpsLicense.aspx</DependentUpon>
     </Compile>
     <Compile Include="Core\Admin\Configuration\ShippingUpsThanks.aspx.cs">
       <DependentUpon>ShippingUpsThanks.aspx</DependentUpon>
@@ -3789,7 +3797,9 @@
     <Content Include="Core\Admin\Parts\CreditCardGateways\Beanstream\App_LocalResources\Edit.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Core\Admin\Parts\CreditCardGateways\Stripe\App_LocalResources\Edit.ascx.resx" />
+    <Content Include="Core\Admin\Parts\CreditCardGateways\Stripe\App_LocalResources\Edit.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\Admin\Parts\CreditCardGateways\Test Gateway\App_LocalResources\Edit.ascx.resx" />
@@ -4225,7 +4235,7 @@
     <PostBuildEvent>xcopy "$(TargetDir)*" "$(SolutionDir)Website\bin\" /y /s /e
 xcopy "$(SolutionDir)References\Dnn" "$(SolutionDir)Website\bin\" /y /s /e
 xcopy "$(SolutionDir)References\Dev" "$(SolutionDir)Website\bin\" /y /s /e
-xcopy "$(SolutionDir)packages\EntityFramework.6.1.1\lib\net40" "$(SolutionDir)Website\bin\" /y /s /e</PostBuildEvent>
+xcopy "$(SolutionDir)packages\EntityFramework.6.4.4\lib\net40" "$(SolutionDir)Website\bin\" /y /s /e</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\..\..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets" Condition="Exists('..\..\..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

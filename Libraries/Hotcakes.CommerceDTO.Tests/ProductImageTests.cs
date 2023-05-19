@@ -26,6 +26,7 @@
 using System;
 using System.IO;
 using Hotcakes.CommerceDTO.v1.Catalog;
+using Hotcakes.CommerceDTO.v1.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hotcakes.CommerceDTO.Tests
@@ -46,13 +47,16 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
             //Create Product Image 
             var productImage = new ProductImageDTO
             {
                 AlternateText = "test alternate",
                 Caption = "test caption",
                 FileName = "ProductImage.jpg",
-                ProductId = TestConstants.TestProductBvin,
+                ProductId = productRespose.Bvin,
                 StoreId = 1
             };
 
@@ -89,6 +93,9 @@ namespace Hotcakes.CommerceDTO.Tests
             var deleteResponse = proxy.ProductImagesDelete(findResponse.Content.Bvin);
             CheckErrors(deleteResponse);
             Assert.IsTrue(deleteResponse.Content);
+
+            //Remove test product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
         }
 
         /// <summary>
@@ -100,9 +107,38 @@ namespace Hotcakes.CommerceDTO.Tests
             // Create API proxy
             var proxy = CreateApiProxy();
 
+            //Create Test Product as prerequisites          
+            var productRespose = SampleData.CreateTestProduct(proxy);
+
+            //Create Test Product Image  as prerequisites
+            var productImage = new ProductImageDTO
+            {
+                AlternateText = "test alternate",
+                Caption = "test caption",
+                FileName = "ProductImage.jpg",
+                ProductId = productRespose.Bvin,
+                StoreId = 1
+            };
+
+            //Create product image
+            var imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data/ProductImage.jpg");
+            var imageData = File.ReadAllBytes(imagePath);
+            var createproductImageResponse = proxy.ProductImagesCreate(productImage, imageData);
+
             var findAllResponse = proxy.ProductImagesFindAll();
+
+            //Delete ProductImage
+            proxy.ProductImagesDelete(createproductImageResponse.Content.Bvin);
+
+            //Remove Test Product
+            SampleData.RemoveTestProduct(proxy, productRespose.Bvin);
 
             CheckErrors(findAllResponse);
         }
+
+
+       
+
+       
     }
 }

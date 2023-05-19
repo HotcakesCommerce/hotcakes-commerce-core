@@ -7,38 +7,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hotcakes.Modules.Core.Modules.CreditCardGateways.PayPal_Payments_Pro {
-    
-    
-    public partial class Edit {
-        
+namespace Hotcakes.Modules.Core.Modules.CreditCardGateways.PayPal_Payments_Pro
+{
+
+
+    public partial class Edit
+    {
+
         /// <summary>
-        /// txtUsername control.
+        /// txtClientId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUsername;
-        
+        protected global::System.Web.UI.WebControls.TextBox txtClientId;
+
         /// <summary>
-        /// txtPassword control.
+        /// txtSecret control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
-        
-        /// <summary>
-        /// txtSignature control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSignature;
-        
+        protected global::System.Web.UI.WebControls.TextBox txtSecret;
+
         /// <summary>
         /// ddlCurrency control.
         /// </summary>
@@ -47,7 +40,7 @@ namespace Hotcakes.Modules.Core.Modules.CreditCardGateways.PayPal_Payments_Pro {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCurrency;
-        
+
         /// <summary>
         /// rblMode control.
         /// </summary>
@@ -56,7 +49,7 @@ namespace Hotcakes.Modules.Core.Modules.CreditCardGateways.PayPal_Payments_Pro {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rblMode;
-        
+
         /// <summary>
         /// chkDebugMode control.
         /// </summary>

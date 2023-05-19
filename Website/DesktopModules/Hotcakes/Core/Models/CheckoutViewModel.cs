@@ -69,6 +69,9 @@ namespace Hotcakes.Modules.Core.Models
             RegUsername = string.Empty;
             RegPassword = string.Empty;
             RequirePhoneNumber = false;
+            PaymentIntentClientSecret = string.Empty;
+            PaymentIntentId = string.Empty;
+            StripePublicKey = string.Empty;
         }
 
         /// <summary>
@@ -225,6 +228,22 @@ namespace Hotcakes.Modules.Core.Models
         /// If enabled, customers must enter a value for the phone number before they can complete the checkout process. 
         /// </summary>
         public bool RequirePhoneNumber { get; set; }
+
+        /// <summary>
+        ///    The secret token belonging to a payment intent when using the Stripe payment gateway.
+        ///    This secret key is used to confirm the payment on the client side
+        /// </summary>
+        public string PaymentIntentClientSecret { get; set; }
+
+        /// <summary>
+        ///    The PaymentIntentId
+        /// </summary>
+        public string PaymentIntentId { get; set; }
+
+        /// <summary>
+        ///    The Stripe Payment gateway public Key
+        /// </summary>
+        public string StripePublicKey { get; set; }
 
         public string IsErr(string nameWithoutPrefix)
         {

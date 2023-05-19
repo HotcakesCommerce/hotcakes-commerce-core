@@ -207,7 +207,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         {
             e.Cancel = true;
 
-            var ProductPropertyChoiceId = long.Parse(rgChoices.DataKeys[e.NewEditIndex]["Id"].ToString());
+            ProductPropertyChoiceId = long.Parse(rgChoices.DataKeys[e.NewEditIndex]["Id"].ToString());
             var prop = HccApp.CatalogServices.ProductProperties.Find(ProductPropertyId.Value);
             var choice = prop.Choices.FirstOrDefault(y => y.Id == ProductPropertyChoiceId);
 

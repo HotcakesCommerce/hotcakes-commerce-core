@@ -45,13 +45,29 @@
     <asp:Label runat="server" resourcekey="UPSSettings"/>
 </h2>
 <div class="hcForm">
-    <div class="hcFormItemHor">
+    <%--<div class="hcFormItemHor">
         <asp:Label runat="server" resourcekey="RegistrationStatus" CssClass="hcLabel"/>
         <asp:HyperLink ID="lnkRegister" Target="_blank" runat="server" NavigateUrl="~/DesktopModules/Hotcakes/Core/Admin/Configuration/ShippingUpsLicense.aspx"/>
-    </div>
+    </div>--%>
     <div class="hcFormItemHor">
         <asp:Label runat="server" resourcekey="AccountNumber" CssClass="hcLabel"/>
         <asp:TextBox ID="AccountNumberField" runat="server" ValidationGroup="ShippingMethod" />
+        <asp:RequiredFieldValidator runat="server" ID="AccountNumberRequired" Text="* Account Number required" CssClass="hc-validation" ValidationGroup="ShippingMethod" ControlToValidate="AccountNumberField"></asp:RequiredFieldValidator>
+    </div>
+    <div class="hcFormItemHor">
+        <asp:Label runat="server" resourcekey="AccessKey" CssClass="hcLabel"/>
+        <asp:TextBox ID="AccessKeyField" runat="server" ValidationGroup="ShippingMethod" />
+        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" Text="* Access Key required" CssClass="hc-validation" ValidationGroup="ShippingMethod" ControlToValidate="AccessKeyField"></asp:RequiredFieldValidator>
+    </div>
+    <div class="hcFormItemHor">
+        <asp:Label runat="server" resourcekey="Username" CssClass="hcLabel"/>
+        <asp:TextBox ID="UserNameField" runat="server" ValidationGroup="ShippingMethod" />
+        <asp:RequiredFieldValidator runat="server" ID="UsernameRequired" Text="* Username required" CssClass="hc-validation" ValidationGroup="ShippingMethod" ControlToValidate="UserNameField"></asp:RequiredFieldValidator>
+    </div>
+    <div class="hcFormItemHor">
+        <asp:Label runat="server" resourcekey="Password" CssClass="hcLabel"/>
+        <asp:TextBox ID="PasswordField" runat="server" ValidationGroup="ShippingMethod" />
+        <asp:RequiredFieldValidator runat="server" ID="PasswordRequired" Text="* Password required" CssClass="hc-validation" ValidationGroup="ShippingMethod" ControlToValidate="PasswordField"></asp:RequiredFieldValidator>
     </div>
     <div class="hcFormItemHor">
         <asp:Label runat="server" resourcekey="ForceResidentialAddresses" CssClass="hcLabel"/>

@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -148,10 +149,11 @@ namespace Hotcakes.Commerce.Content
         {
             var storeId = Context.CurrentStore.Id;
 
-            using (var strategy = CreateStrategy())
+            using (var strategy = CreateReadStrategy())
             {
                 var query = strategy
                     .GetQuery(c => c.StoreId == storeId)
+                    .AsNoTracking()
                     .OrderBy(c => c.DisplayName);
 
                 totalCount = query.Count();

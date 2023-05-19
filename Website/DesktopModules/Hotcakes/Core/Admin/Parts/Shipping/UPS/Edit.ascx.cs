@@ -107,20 +107,23 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS
             }
 
             // Global Settings
+            UserNameField.Text = HccApp.CurrentStore.Settings.ShippingUpsUsername;
+            PasswordField.Text = HccApp.CurrentStore.Settings.ShippingUpsPassword;
+            AccessKeyField.Text = HccApp.CurrentStore.Settings.ShippingUpsLicense;
             AccountNumberField.Text = HccApp.CurrentStore.Settings.ShippingUpsAccountNumber;
             ResidentialAddressCheckBox.Checked = HccApp.CurrentStore.Settings.ShippingUpsForceResidential;
             PickupTypeRadioButtonList.SelectedValue = HccApp.CurrentStore.Settings.ShippingUpsPickupType.ToString();
             DefaultPackagingField.SelectedValue = HccApp.CurrentStore.Settings.ShippingUpsDefaultPackaging.ToString();
             DefaultServiceField.SelectedValue = HccApp.CurrentStore.Settings.ShippingUpsDefaultService.ToString();
 
-            if (HccApp.CurrentStore.Settings.ShippingUpsLicense.Trim().Length > 0)
-            {
-                lnkRegister.Text = Localization.GetString("AlreadyRegistered");
-            }
-            else
-            {
-                lnkRegister.Text = Localization.GetString("RegisterWithUPS");
-            }
+            //if (HccApp.CurrentStore.Settings.ShippingUpsLicense.Trim().Length > 0)
+            //{
+            //    lnkRegister.Text = Localization.GetString("AlreadyRegistered");
+            //}
+            //else
+            //{
+            //    lnkRegister.Text = Localization.GetString("RegisterWithUPS");
+            //}
 
             SkipDimensionsCheckBox.Checked = HccApp.CurrentStore.Settings.ShippingUpsSkipDimensions;
             chkDiagnostics.Checked = HccApp.CurrentStore.Settings.ShippingUPSDiagnostics;
@@ -189,6 +192,9 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS
             }
 
             // Global Settings
+            HccApp.CurrentStore.Settings.ShippingUpsUsername = UserNameField.Text.Trim();
+            HccApp.CurrentStore.Settings.ShippingUpsPassword = PasswordField.Text.Trim();
+            HccApp.CurrentStore.Settings.ShippingUpsLicense = AccessKeyField.Text.Trim();
             HccApp.CurrentStore.Settings.ShippingUpsAccountNumber = AccountNumberField.Text.Trim();
             HccApp.CurrentStore.Settings.ShippingUpsForceResidential = ResidentialAddressCheckBox.Checked;
             HccApp.CurrentStore.Settings.ShippingUpsPickupType = int.Parse(PickupTypeRadioButtonList.SelectedValue);

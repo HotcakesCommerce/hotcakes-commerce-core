@@ -43,10 +43,15 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy.
             var proxy = CreateApiProxy();
 
+            //Create Test TaxSchedule as prerequisites          
+            var createTaxScheduleResponse = SampleData.CreateTestTaxSchedules(proxy);
+
             //Get all Tax Schedules.
             var findResponse = proxy.TaxSchedulesFindAll();
-
             CheckErrors(findResponse);
+
+            //Remove Test TaxSchedule
+            SampleData.RemoveTestTaxSchedules(proxy, createTaxScheduleResponse.Id);
         }
 
         /// <summary>

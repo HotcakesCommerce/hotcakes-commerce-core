@@ -25,6 +25,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -71,9 +72,9 @@ namespace Hotcakes.Commerce.Catalog
         {
             var productGuid = DataTypeHelper.BvinToGuid(productId);
             var optionGuid = DataTypeHelper.BvinToGuid(optionId);
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                var data = s.GetQuery().Where(y => y.ProductBvin == productGuid)
+                var data = s.GetQuery().AsNoTracking().Where(y => y.ProductBvin == productGuid)
                     .Where(y => y.OptionBvin == optionGuid)
                     .Where(y => y.StoreId == storeId)
                     .OrderBy(y => y.SortOrder).FirstOrDefault();
@@ -93,9 +94,10 @@ namespace Hotcakes.Commerce.Catalog
         {
             var storeId = Context.CurrentStore.Id;
             var productGuid = DataTypeHelper.BvinToGuid(productId);
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var maxSortOrder = s.GetQuery()
+                    .AsNoTracking()
                     .Where(y => y.ProductBvin == productGuid)
                     .Where(y => y.StoreId == storeId)
                     .Max(y => (int?) y.SortOrder);

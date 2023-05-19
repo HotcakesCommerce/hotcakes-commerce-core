@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -208,9 +209,9 @@ namespace Hotcakes.Commerce.Catalog
 
             try
             {
-                using (var s = CreateStrategy())
+                using (var s = CreateReadStrategy())
                 {
-                    result = s.GetQuery().Where(y => y.StoreId == Context.CurrentStore.Id)
+                    result = s.GetQuery().AsNoTracking().Where(y => y.StoreId == Context.CurrentStore.Id)
                         .Where(y => y.CategoryId == categoryBvin)
                         .Where(y => y.ParentPropertyId == parentPropertyId)
                         .Max(y => y.SortOrder);

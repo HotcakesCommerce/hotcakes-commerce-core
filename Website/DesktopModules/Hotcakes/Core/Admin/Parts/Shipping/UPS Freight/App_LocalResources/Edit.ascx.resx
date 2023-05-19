@@ -327,4 +327,13 @@
   <data name="Wrapped.Text" xml:space="preserve">
     <value>Wrapped</value>
   </data>
+  <data name="AccessKey.Text" xml:space="preserve">
+    <value>Access Key</value>
+  </data>
+  <data name="Password.Text" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Username.Text" xml:space="preserve">
+    <value>Username</value>
+  </data>
 </root>

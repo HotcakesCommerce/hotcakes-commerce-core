@@ -24,6 +24,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -222,9 +223,10 @@ namespace Hotcakes.Commerce.Catalog
         private int FindMaxSort(string productId)
         {
             var productGuid = DataTypeHelper.BvinToGuid(productId);
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
                 var maxSortOrder = s.GetQuery()
+                    .AsNoTracking()
                     .Where(y => y.ProductId == productGuid)
                     .Max(y => (int?) y.SortOrder);
 

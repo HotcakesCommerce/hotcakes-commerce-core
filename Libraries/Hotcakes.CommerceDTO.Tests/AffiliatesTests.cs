@@ -25,8 +25,13 @@
 
 using System;
 using System.Linq;
+using Hotcakes.CommerceDTO.v1.Catalog;
 using Hotcakes.CommerceDTO.v1.Contacts;
+using Hotcakes.CommerceDTO.v1.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
+using Hotcakes.CommerceDTO.v1.Membership;
+using Hotcakes.CommerceDTO.v1.Taxes;
 
 namespace Hotcakes.CommerceDTO.Tests
 {
@@ -43,9 +48,17 @@ namespace Hotcakes.CommerceDTO.Tests
         [TestMethod]
         public void Affiliates_FindAll()
         {
-            var proxy = CreateApiProxy(); //Create API object
+            //Create API object
+            var proxy = CreateApiProxy();
 
-            var findResponse = proxy.AffiliatesFindAll(); // Get list of all affiliates
+            //Create Test Affiliate as prerequisites
+            var createAffiliateResponse = SampleData.AffiliatesTestCreate(proxy);
+
+            // Get list of all affiliates
+            var findResponse = proxy.AffiliatesFindAll(); 
+
+            //Remove Affiliate Test
+            SampleData.AffiliatesTestDelete(proxy, createAffiliateResponse);
 
             CheckErrors(findResponse);
         }
@@ -64,12 +77,14 @@ namespace Hotcakes.CommerceDTO.Tests
             var affiliate = new AffiliateDTO
             {
                 StoreId = 1,
-                DisplayName = "TestUserName" + DateTime.Now.ToString("ss"),
+                DisplayName = "TestUserName1" + DateTime.Now.ToString("ss"),
                 Enabled = true,
                 CommissionAmount = 50,
-                ReferralId = "TestReferall" + DateTime.Now.ToString("ss")
+                ReferralId = "TestReferall1" + DateTime.Now.ToString("ss")
             };
+
             var createResponse = proxy.AffiliatesCreate(affiliate);
+
             CheckErrors(createResponse);
             Assert.IsFalse(createResponse.Content.Id == 0);
 
@@ -111,6 +126,7 @@ namespace Hotcakes.CommerceDTO.Tests
             var deleteResponse = proxy.AffiliatesDelete(createResponse.Content.Id);
             CheckErrors(deleteResponse);
             Assert.IsTrue(deleteResponse.Content);
+
         }
     }
 }

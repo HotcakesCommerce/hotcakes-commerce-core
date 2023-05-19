@@ -24,6 +24,7 @@
 #endregion
 
 using Hotcakes.CommerceDTO.v1.Contacts;
+using Hotcakes.CommerceDTO.v1.Taxes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hotcakes.CommerceDTO.Tests
@@ -43,10 +44,15 @@ namespace Hotcakes.CommerceDTO.Tests
             //Create API Proxy
             var proxy = CreateApiProxy();
 
+            //Create Test Vendor as prerequisites          
+            var vendorRespose = SampleData.CreateTestVendor(proxy);
+
             //Get All Vendors.
             var findResponse = proxy.VendorFindAll();
-
             CheckErrors(findResponse);
+
+            //Remove Test Vendor
+            SampleData.RemoveTestVendor(proxy, vendorRespose.Bvin);
         }
 
         /// <summary>

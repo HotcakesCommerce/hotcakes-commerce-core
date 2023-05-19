@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Commerce.Data.EF;
@@ -127,9 +128,9 @@ namespace Hotcakes.Commerce.Orders
 
         public int GetUseTimesByUserId(string couponCode, string UserId, long storeId)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                return s.GetQuery().Where(y => y.StoreId == storeId)
+                return s.GetQuery().AsNoTracking().Where(y => y.StoreId == storeId)
                     .Where(y => y.CouponCode == couponCode)
                     .Where(y => y.UserId == UserId)
                     .Count();
@@ -138,9 +139,9 @@ namespace Hotcakes.Commerce.Orders
 
         public int GetUseTimesForStore(string couponCode, long storeId)
         {
-            using (var s = CreateStrategy())
+            using (var s = CreateReadStrategy())
             {
-                return s.GetQuery().Where(y => y.StoreId == storeId)
+                return s.GetQuery().AsNoTracking().Where(y => y.StoreId == storeId)
                     .Where(y => y.CouponCode == couponCode)
                     .Count();
             }

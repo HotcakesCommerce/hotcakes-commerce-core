@@ -162,6 +162,17 @@ namespace Hotcakes.Commerce.Dnn
             return new HccDbContext(adapter.AdaptConnection(connString), true);
         }
 
+        public override HccDbContext CreateReadOnlyHccDbContext()
+        {
+            var connString = WebAppSettings.HccEFReadOnlyConnectionString;
+            var objectQualifier = Config.GetObjectQualifer();
+            var dataBaseOwner = Config.GetDataBaseOwner().TrimEnd('.');
+            var connAdapter = new TablePrefixModelAdapter(objectQualifier, new TableSchemaModelAdapter(dataBaseOwner));
+            var adapter = new ConnectionAdapter(connAdapter, Assembly.GetCallingAssembly());
+
+            return new HccDbContext(adapter.AdaptConnection(connString), true);
+        }
+
         public override T CreateRepo<T>(HccRequestContext context)
         {
             if (Mapping.ContainsKey(typeof (T)))
