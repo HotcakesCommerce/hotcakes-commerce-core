@@ -831,6 +831,7 @@ namespace Hotcakes.Modules.Core
             "Hotcakes.AffiliateDashboard",
             //SkinObjects
             "Hotcakes.SkinAffiliate",
+            "Hotcakes.MiniCartSkinObject",
             "Hotcakes.SkinSearch"
         };
 

@@ -1174,6 +1174,47 @@
 			</components>
 		</package>
 
+		<package name="Hotcakes.MiniCartSkinObject" type="SkinObject" version="01.00.00">
+			<friendlyName>Hotcakes Mini Cart SPA SkinObject</friendlyName>
+			<description><![CDATA[Hotcakes Commerce Mini Cart allows you to provide a minimized cart experience, reducing the amount of things a customer sees.]]></description>
+			<iconFile>Core/Images/hcc-logo.png</iconFile>
+			<owner>
+				<name>Hotcakes Commerce</name>
+				<organization>Hotcakes Commerce, LLC</organization>
+				<url>https://hotcakes.org</url>
+				<email>support@HotcakesCommerce.com</email>
+			</owner>
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="SkinObject">
+					<moduleControl>
+						<moduleControl>
+							<controlKey />
+							<controlSrc>DesktopModules/Hotcakes/MiniCartSkinObject/MiniCartView.ascx</controlSrc>
+							<supportsPartialRendering>False</supportsPartialRendering>
+							<controlTitle />
+							<controlType>View</controlType>
+							<iconFile />
+							<helpUrl />
+							<supportsPopUps>False</supportsPopUps>
+							<viewOrder>0</viewOrder>
+						</moduleControl>
+					</moduleControl>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\Hotcakes</basePath>
+						<file>
+							<path>MiniCartSkinObject</path>
+							<name>MiniCartView.ascx</name>
+						</file>
+					</files>
+				</component>
+			</components>
+		</package>
+		
 		<package name="Hotcakes.SearchInput" type="Module" version="03.07.00">
 			<friendlyName>Hotcakes Search Input</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Search Input displays a search option for customers to use to discover products in your store.]]></description>

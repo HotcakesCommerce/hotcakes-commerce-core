@@ -287,6 +287,7 @@
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\EstimateShipping.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\ImageRotator.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\masonry.min.js" />
+    <Content Include="Portals\_default\HotcakesViews\_default\Scripts\MiniCart.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\OrderHistory.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\Pager.js" />
     <Content Include="Portals\_default\HotcakesViews\_default\Scripts\ProductGrid.js" />

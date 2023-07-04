@@ -23,19 +23,21 @@
 
 #endregion
 
-using System;
 using Hotcakes.Commerce.Dnn.Web;
 
-namespace Hotcakes.Modules.MiniCart
+namespace Hotcakes.Modules.MiniCartSkinObject
 {
-    public partial class MiniCartView : HotcakesModuleBase
+    public partial class MiniCartView : HotcakesSkinObjectBase
     {
         string ViewName { get; set; } = null;
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected override string RenderView()
         {
-            RegisterViewScript("MiniCart.js");
-            ViewName = Convert.ToString(Settings["View"]);
+
+            //var viewName = Convert.ToString(Settings["View"]);
+            if (!string.IsNullOrEmpty(ViewName))
+                return MvcRenderingEngine.Render("Cart", "MiniCart", ViewName);
+            return MvcRenderingEngine.Render("Cart", "MiniCart", "MiniCartSpa", new { MiniCart = true });
         }
     }
 }

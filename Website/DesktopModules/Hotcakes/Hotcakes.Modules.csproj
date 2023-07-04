@@ -435,6 +435,7 @@
     <Content Include="Core\Scripts\tinymce\themes\silver\theme.min.js" />
     <Content Include="Core\Scripts\tinymce\tinymce.min.js" />
     <Content Include="ExtensionUrlProvider\Settings.ascx" />
+    <Content Include="MiniCartSkinObject\MiniCartView.ascx" />
     <Content Include="module.css" />
     <Content Include="ReleaseNotes.txt" />
     <Content Include="Core\Admin\Controls\DatePickerNavigation.ascx" />
@@ -2599,6 +2600,7 @@
     <Compile Include="Core\Controls\StoreNotFound.ascx.designer.cs">
       <DependentUpon>StoreNotFound.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Core\Models\MiniCartViewModel.cs" />
     <Compile Include="Core\Models\PinterestViewModel.cs" />
     <Compile Include="Core\Performance.ashx.cs">
       <DependentUpon>Performance.ashx</DependentUpon>
@@ -3224,6 +3226,13 @@
     </Compile>
     <Compile Include="LastProductsViewed\Settings.ascx.designer.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="MiniCartSkinObject\MiniCartView.ascx.cs">
+      <DependentUpon>MiniCartView.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MiniCartSkinObject\MiniCartView.ascx.designer.cs">
+      <DependentUpon>MiniCartView.ascx</DependentUpon>
     </Compile>
     <Compile Include="OrderHistory\Settings.ascx.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
