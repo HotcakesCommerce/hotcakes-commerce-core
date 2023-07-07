@@ -321,6 +321,7 @@ namespace Hotcakes.Modules.Core.Controllers
         #region Main Cart Actions
 
         // GET: /Cart/
+        [Obsolete("This action is no longer used to load the minicart content.")]
         [NonCacheableResponseFilter]
         public ActionResult Index()
         {
