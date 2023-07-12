@@ -1174,7 +1174,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.MiniCartSkinObject" type="SkinObject" version="01.00.00">
+		<package name="Hotcakes.MiniCartSkinObject" type="SkinObject" version="03.07.00">
 			<friendlyName>Hotcakes Mini Cart SPA SkinObject</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Mini Cart allows you to provide a minimized cart experience, reducing the amount of things a customer sees.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
