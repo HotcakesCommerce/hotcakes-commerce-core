@@ -1,37 +1,64 @@
 # How to contribute
 
-*We have tried to make this as simple as possible. The most important part is when you want to test locally you need to create a link using `npm link` in your local generator-dnn directory.*
+Community contributions are essential part of any open source project. The community has access to a large number of unique configurations which would be extremely difficult for the core maintainers to reproduce. We want to keep it as easy as possible to contribute changes that get things working in your environment. There are a few guidelines that we need contributors to follow so that we can have a chance of keeping on top of things.
 
-## Project organization
+Make sure you have a [GitHub account](https://github.com/signup/free) to start with.
 
-* Branch `main` is always stable and release-ready.
-* Branch `dev` contains the next versions features and bugs merged from pull requests.
-* Feature branches should be created for adding new features and branched off of `dev`.
-* Bug fix branches should be created for fixing bugs and branched off of `dev`.
+## Level 1 contributions: easy ways to contribute
+There are several ways to contribute, depending on your background, level of expertise and willingness to spend some time. Everybody should be able to contribute on a minimal level:
+* Create or document issues
+* Create or improve documentation
+* Be a tester
 
-## Opening a new issue
+### Create issues
+Anybody with a GutHub account can create new issues. Please verify that a simlar issue has not been created before. Clearly describe the issue you encounter.
 
-**Do not open a duplicate issue!**
+### Create or improve documentation
+Create an issue with suggestions for document improvements. If you have an idea about the new documenation, add that text (prefereably in markdown format) in the issue as proposed new or improved documentation.
 
-1. Look through existing issues to see if your issue already exists.
-2. If your issue already exists, comment on its thread with any information you have. Even if this is simply to note that you are having the same problem, it is still helpful!
-3. Always *be as descriptive as you can*.
-4. What is the expected behavior? What is the actual behavior? What are the steps to reproduce?
-5. Attach screenshots, videos, GIFs if possible.
-6. **Include library version or branch experiencing the issue.**
-7. **Include OS version and devices experiencing the issue.**
+### Be a tester
+Download an install version of the extension and test it in your own environment. If you are reviewing issues, try to reproduce issues that have been created and enhance documentation of the issue to reproduce any bugs. 
 
-## Submitting a pull request
+If there is a new version of an extension, be one of the first to test that new version on a fresh install and as an upgrade of a previous version. Report your findings as issues.
 
-1. Find an issue to work on, or create a new one. *Avoid duplicates, please check existing issues!*
-2. Fork the repo, or make sure you are synced with the latest changes on `dev`.
-3. Create a new branch with a sweet name: `git checkout -b issue_<##>_<description>`.
-4. Do some programming.
-5. Write [unit tests](http://nshipster.com/unit-testing) when applicable.
-6. Keep your code nice and clean by adhering to the coding standards & guidelines below.
-7. Don't break unit tests or functionality.
-8. Update the documentation header comments if needed.
-9. **Rebase on `dev` branch and resolve any conflicts _before submitting a pull request!_**
-10. Submit a pull request to the `dev` branch.
+# Level 2 contributions: Provide improved or new code 
+If you are commited as community member and have programming skills, there is more that you can do:
+* Create code fixes
+* Create new functionality
 
-**You should submit one pull request per feature!** The smaller the PR, the better your chances are of getting merged. Enormous PRs will likely take enormous amounts of time to review, or they will be rejected.
+We asume that you have some basic Git(Hub) knowledge and know how to work with fork, clone, create issue, commit, push, pull requests
+
+## Get started with code contributions
+
+### Fork the repository on GitHub
+If this is your first time working with the repository, you will need to fork the repository to get your system configured for local development.
+
+If you are new to Dnn Development, you can start by watching this video playlist which explains how to setup the required tools, your development environment and submit pull requests for modules, the Platform and the Persona Bar.
+[How to make a pull requests playlist](https://www.youtube.com/playlist?list=PLIx1M8IdVvqZ0bnODGqJyxvONNPj5BzMP)
+
+* Click fork on the project. You will get a fork of the repository in your own GitHub account
+* Clone your fork locally with `git clone
+* Add the *upstream connection* to the original repository, so you can rebase and update your fork with `git remote add upstream` to the base (the original) repository
+* To update your fork to the latest, you can then run `git fetch upstream` followed by `git push`
+  
+## Making Changes
+* Create a topic branch from where you want to base your work. This is usually a branch linked to the *issue #* your are trying to solve
+* Make commits of logical units
+* When ready to publish your changes, you can with `git push -u origin my_contribution`
+* Make sure your pull request description tags the GitHub issue ID, so it is clear what issue you have fixed
+* Make sure your commit messages are in the proper format
+
+## Submitting changes
+* Push your changes to a topic branch in your fork of the repository
+* Submit a pull request to the original (upstream( repository 
+* The committers will handle updating the associated issue in the DNN Tracker to ensure it gets the necessary code review and QA
+
+## Acceptance of your changes
+* We have a group of fellow developers that review pull requests submitted by developers like yourself
+* If your changes look good, then changes are merged to an appropriate release
+* You should get an email notification as we complete processing of your pull request
+
+# Level 3 contributions: Become a repository custodian
+If you are really commited, want to work with highly commited team members (like yourself?) and want to contibute by taking care of one or more repositories, you might want to become a *repository custodian*. 
+
+Contact one of the team members of the organisation and discuss the opportunities.
