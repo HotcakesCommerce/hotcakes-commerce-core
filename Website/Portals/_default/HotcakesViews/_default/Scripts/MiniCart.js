@@ -38,6 +38,11 @@
 
         $.data(minicart, 'itemsRendered', true);
         $.post(hcc.getServiceUrl("Cart/MiniCartItems"), {}, function (data) {
+            if (data == 500) {
+                minicart.html('<div class="dnnFormMessage dnnFormValidationSummary">Upss.. Someting went wrong. We are having problems loading your Shoping Cart information.</div>');
+                return; 
+            }
+
             RenderMiniCartItems(data, minicart);
             if ($cartActions.length) {
                 $cartActions.show();

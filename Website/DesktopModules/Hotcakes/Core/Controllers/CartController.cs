@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using DotNetNuke.Instrumentation;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Analytics;
 using Hotcakes.Commerce.BusinessRules;
@@ -46,6 +47,7 @@ using Hotcakes.Modules.Core.Filters;
 using Hotcakes.Modules.Core.Integration;
 using Hotcakes.Modules.Core.Models;
 using Hotcakes.Web.Logging;
+using Newtonsoft.Json;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
@@ -53,6 +55,7 @@ namespace Hotcakes.Modules.Core.Controllers
     public class CartController : BaseStoreController
     {
         private const string HCC_KEY = "hcc";
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(CartController));
 
         private void AddSingleProduct(Product p, int quantity)
         {
@@ -347,12 +350,19 @@ namespace Hotcakes.Modules.Core.Controllers
         [NonCacheableResponseFilter]
         public ActionResult MiniCart()
         {
-            var model = new MiniCartViewModel
-            {
-                TotalQuantity = (CurrentCart != null && CurrentCart.Items != null) ? CurrentCart.Items.Count : 0
-            };
+            try {
 
-            return View(model);
+                var model = new MiniCartViewModel
+                {
+                    TotalQuantity = (CurrentCart != null && CurrentCart.Items != null) ? CurrentCart.Items.Count : 0
+                };
+
+                return View(model);
+            }
+            catch(Exception ex){
+                Logger.Error(JsonConvert.SerializeObject(ex.Message));
+                return View("MiniCartError");
+            }
         }
 
         // POST: /MiniCartItems
@@ -360,15 +370,23 @@ namespace Hotcakes.Modules.Core.Controllers
         [HccHttpPost]
         public JsonResult GetMiniCartItems()
         {
-            var model = IndexSetup();
-            HandleActionParams();
-            CheckForQuickAdd();
-            LoadCart(model);
-            ValidateOrderCoupons();
-            CheckFreeItems(model);
-            CheckForStockOnItems(model);
+            try
+            {
+                var model = IndexSetup();
+                HandleActionParams();
+                CheckForQuickAdd();
+                LoadCart(model);
+                ValidateOrderCoupons();
+                CheckFreeItems(model);
+                CheckForStockOnItems(model);
 
-            return Json(model);
+                return Json(model);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(JsonConvert.SerializeObject(ex.Message));
+                return Json(500); 
+            }            
         }
 
         // POST: /Cart/
