@@ -1,45 +1,53 @@
 ﻿jQuery(function ($) {
     // Common ----------------------
-    var $target = $('#hcMiniCartTooltip');
-    var $minicart = $('#hcMiniCart');
-    var $iconbox = $minicart.find(".hc-iconbox");
-    var $cartActions = $('#hcMiniCartTooltip').find('.dnnActions');
-    var itemsRendered = false;
+    var $pageminicarts = $('.hc-minicart');    
 
     function InitCommon() {
-        if ($cartActions.length) {
-            $cartActions.hide();
-        }
 
-        if ($target.length) {
-            $minicart.hover(function () {
-                $iconbox.css("background-color", "#FFF");
-                $target.slideDown().position(
-                    'right'
-                );
-                LoadItems();
-            }, function () {
-                $target.slideUp(function () {
-                    $iconbox.css("background-color", "");
+        $pageminicarts.each(function (key, item) {
+
+            var $minicart = $(item);
+            var $target = $minicart.children('.hc-tooltip');
+            var $iconbox = $minicart.children(".hc-iconbox");
+            var $cartActions = $minicart.children('.hcMiniCartTooltip').find('.dnnActions');
+            $.data($minicart, 'itemsRendered', false);
+
+            if ($cartActions.length) {
+                $cartActions.hide();
+            }
+
+            if ($target.length) {
+                $minicart.hover(function () {
+                    $iconbox.css("background-color", "#FFF");
+                    $target.slideDown().position(
+                        'right'
+                    );
+                    LoadItems($minicart);
+                }, function () {
+                    $target.slideUp(function () {
+                        $iconbox.css("background-color", "");
+                    });
                 });
-            });
-        }
+            }
+        });        
     }
 
-    function LoadItems() {
-        if (itemsRendered)
+    function LoadItems(minicart) {
+        if (jQuery.data(minicart, "itemsRendered"))
             return;
 
-        itemsRendered = true;
+        $.data(minicart, 'itemsRendered', true);
         $.post(hcc.getServiceUrl("Cart/MiniCartItems"), {}, function (data) {
-            RenderMiniCartItems(data);
+            RenderMiniCartItems(data, minicart);
             if ($cartActions.length) {
                 $cartActions.show();
             }
         });
     }
 
-    function RenderMiniCartItems(cartViewModel) {
+    function RenderMiniCartItems(cartViewModel, minicart) {
+
+        var $target = minicart.children('.hc-tooltip');
         $grid = $target.find('.dnnGrid');
 
         if ($grid.length) {

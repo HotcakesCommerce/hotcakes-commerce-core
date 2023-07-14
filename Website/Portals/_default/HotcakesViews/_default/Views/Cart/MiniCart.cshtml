@@ -1,6 +1,6 @@
 ﻿@model Hotcakes.Modules.Core.Models.MiniCartViewModel
 
-<div id="hcMiniCart" class="hc-minicart">
+<div class="hc-minicart">
     <div class="hc-iconbox">
         <a href="@Url.RouteHccUrl(HccRoute.Cart)">
             @Model.TotalQuantity
@@ -8,7 +8,7 @@
     </div>
     @if (Model.TotalQuantity > 0)
     {
-        <div class="hc-tooltip dnnFormPopup" id="hcMiniCartTooltip">
+        <div class="hc-tooltip dnnFormPopup" >
             <h2>@Localization.GetString("ShoppingCart")</h2>
 
             <table class="dnnGrid" width="100%">
