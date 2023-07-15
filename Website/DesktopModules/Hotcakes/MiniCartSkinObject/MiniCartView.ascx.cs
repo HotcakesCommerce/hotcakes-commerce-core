@@ -2,7 +2,7 @@
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2019 Hotcakes Commerce, LLC
+// Copyright (c) 2023 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -23,19 +23,21 @@
 
 #endregion
 
-using System;
 using Hotcakes.Commerce.Dnn.Web;
 
-namespace Hotcakes.Modules.MiniCart
+namespace Hotcakes.Modules.MiniCartSkinObject
 {
-    public partial class MiniCartView : HotcakesModuleBase
+    public partial class MiniCartView : HotcakesSkinObjectBase
     {
         string ViewName { get; set; } = null;
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected override string RenderView()
         {
-            RegisterViewScript("MiniCart.js");
-            ViewName = Convert.ToString(Settings["View"]);
+
+            //var viewName = Convert.ToString(Settings["View"]);
+            if (!string.IsNullOrEmpty(ViewName))
+                return MvcRenderingEngine.Render("Cart", "MiniCart", ViewName);
+            return MvcRenderingEngine.Render("Cart", "MiniCart", "MiniCart", new { MiniCart = true });
         }
     }
 }
