@@ -85,7 +85,10 @@ namespace Hotcakes.Commerce
             get
             {
                 if (HttpContext.Current == null)
+                {
+                    _current = new HccRequestContext();
                     return _current;
+                }
                 return (HccRequestContext) HttpContext.Current.Items[CONTEXT_KEY];
             }
             set
