@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020 Upendo Ventures, LLC
+// Copyright (c) 2020-2023 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -188,6 +188,7 @@ namespace Hotcakes.Modules.ProductGrid
         protected void rgProducts_OnDeleteCommand(object sender, GridViewDeleteEventArgs e)
         {
             var bvinsList = GetProductBvins();
+            LoadItems(GetProducts(bvinsList));
             var key = (int)rgProducts.DataKeys[e.RowIndex].Value;
             bvinsList.Remove(key);
             SaveItems(bvinsList);

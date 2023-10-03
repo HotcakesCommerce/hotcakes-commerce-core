@@ -30,12 +30,12 @@ namespace Hotcakes.Modules.MiniCart
 {
     public partial class MiniCartView : HotcakesModuleBase
     {
-        protected override string RenderView()
+        string ViewName { get; set; } = null;
+
+        protected void Page_Load(object sender, EventArgs e)
         {
-            var viewName = Convert.ToString(Settings["View"]);
-            if (!string.IsNullOrEmpty(viewName))
-                return MvcRenderingEngine.Render("Cart", "Index");
-            return MvcRenderingEngine.Render("Cart", "Index", "MiniCart", new {MiniCart = true});
+            RegisterViewScript("MiniCart.js");
+            ViewName = Convert.ToString(Settings["View"]);
         }
     }
 }

@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020 Upendo Ventures, LLC
+// Copyright (c) 2020-2023 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -85,7 +85,10 @@ namespace Hotcakes.Commerce
             get
             {
                 if (HttpContext.Current == null)
+                {
+                    _current = new HccRequestContext();
                     return _current;
+                }
                 return (HccRequestContext) HttpContext.Current.Items[CONTEXT_KEY];
             }
             set

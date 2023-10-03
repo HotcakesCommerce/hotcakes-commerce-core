@@ -144,4 +144,7 @@
   <data name="common_AjaxError" xml:space="preserve">
     <value>Ajax error. Contact administrator</value>
   </data>
+  <data name="miniCart_SubTotal" xml:space="preserve">
+    <value>Sub Total</value>
+  </data>
 </root>

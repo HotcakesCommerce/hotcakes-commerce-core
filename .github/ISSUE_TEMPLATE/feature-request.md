@@ -4,6 +4,21 @@ about: Suggest an idea for this project
 
 ---
 
+## Sponsorship  
+<!--
+Open-Source is not free.  We need to eat too. ~wink!~  
+
+We manage a TON of DNN extensions... Look!  
+https://upendoventures.com/What/CMS/DNN/Extensions  
+-->
+
+If this request requires additional support (e.g., such as direct email/phone/meeting/development), I have the following interest in helping to [sponsor the effot via GitHub Sponsors](https://github.com/sponsors/UpendoVentures):    
+
+- [ ] None, please continute to work for me for free :P  
+- [ ] Absolutely, I get value out of this!  
+- [ ] Maybe later  
+- [ ] I'm already a sponsor... Woot!  
+
 ## Is your feature request related to a problem?
 **Please describe.**
 A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
