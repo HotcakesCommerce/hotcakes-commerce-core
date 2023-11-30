@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using PayPalCheckoutSdk.Core;
 using PayPalCheckoutSdk.Orders;
@@ -207,23 +208,23 @@ namespace Hotcakes.PaypalWebServices
                             AmountWithBreakdown = new AmountWithBreakdown
                             {
                                 CurrencyCode = currencyCodeType,
-                                Value = orderTotal,
+                                Value = formatAmount(orderTotal),
                                 AmountBreakdown = new AmountBreakdown
                                 {
                                     ItemTotal = new Money
                                     {
                                         CurrencyCode = currencyCodeType,
-                                        Value = itemsTotal
+                                        Value = formatAmount(itemsTotal)
                                     },
                                     Shipping = new Money
                                     {
                                         CurrencyCode = currencyCodeType,
-                                        Value = shippingTotal
+                                        Value = formatAmount(shippingTotal)
                                     },
                                     TaxTotal = new Money
                                     {
                                         CurrencyCode = currencyCodeType,
-                                        Value = taxTotal
+                                        Value = formatAmount(taxTotal)
                                     },
                                 }
                             },
@@ -282,18 +283,18 @@ namespace Hotcakes.PaypalWebServices
                         AmountWithBreakdown = new AmountWithBreakdown()
                         {
                             CurrencyCode = currencyCodeType,
-                            Value = orderTotal,
+                            Value = formatAmount(orderTotal),
                             AmountBreakdown = new AmountBreakdown()
                             {
                                 ItemTotal = new Money
                                 {
                                     CurrencyCode = currencyCodeType,
-                                    Value = itemsTotal
+                                    Value = formatAmount(itemsTotal)
                                 },
                                 TaxTotal = new Money
                                 {
                                     CurrencyCode = currencyCodeType,
-                                    Value = taxTotal
+                                    Value = formatAmount(taxTotal)
                                 },
                             }
                         }
@@ -310,6 +311,10 @@ namespace Hotcakes.PaypalWebServices
             return response;
         }
 
+        private string formatAmount(string amount)
+        {
+            return Regex.Replace(amount, "[, ]", "");
+        }
 
         public async Task<HttpResponse> GetOrder(string orderId)
         {
