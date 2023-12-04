@@ -4,7 +4,7 @@
 	.muy-importante { color:red;font-weight:bold; }
 </style>
 <div class="uv-install-wrapper">
-	<h1>Hotcakes Commerce: Version 03.08.00</h1>
+	<h1>Hotcakes Commerce: Version 03.08.01</h1>
 
 	<p class="muy-importante">The release notes continue after the Sponsors and Contributors below.</p>
 	
@@ -17,6 +17,7 @@
 		<li>Dan Rice, <a href="https://www.puresystems.co.uk/" target="_blank">Pure Systems</a></li>
 		<li>Matt Rutledge, <a href="https://beleivekids.com/" target="_blank">Believe Kids</a></li>
 		<li>Adam Bernstein, <a href="https://practicewise.com/" target="_blank">PracticeWise</a></li>
+		<li>Jeremy Farrance, <a href="https://accuraty.com/" target="_blank">Accuraty</a></li>
 		<li><b>(two private sponsors)</b></li>
 	</ul>
 	
@@ -24,7 +25,6 @@
 	<p>THANK YOU to the following community members for participating in this release!</p>
 	<ul>
 		<li>Will Strohl, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
-		<li>Ismael Tartola, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
 		<li>Liban Silva, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
 	</ul>
 
@@ -45,8 +45,7 @@
 	
 	<h3><strong>Enhancements</strong></h3>
 	<ul>
-		<li><strong>SI: New Mini Cart SPA Theme Object</strong> - You can now not only use a SPA implementation of the mini cart module, but also as a theme object. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/51" target="_blank">Issue 51</a>), Thanks <a href="https://github.com/ismaelTartola" target="_blank">@ismaelTartola</a></li>
-		<li><strong>DNN 9.8+ Support</strong> - Hotcakes Commmerce now works against DNN 9.8 and newer. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/pulls/470" target="_blank">Pull 470</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
+		<li>None at this time.</li>
 		<!--
 		<li><strong></strong> - . (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/" target="_blank">Issue </a>), Thanks <a href="https://github.com/" target="_blank">@</a></li>
 		-->
@@ -54,9 +53,7 @@
 	
 	<h3><strong>Maintenance Updates</strong></h3>
 	<ul>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/474" target="_blank">Issue 474</a> - SI: Product Grid doesn't allow products to be deleted (2). Thanks <a href="https://github.com/ismaelTartola" target="_blank">@ismaelTartola</a></li>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/454" target="_blank">Issue 454</a> - Resolved exception caused by abandoned cart email logic. Thanks <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a></li>
-		<li>(no issue) - Updated the source code copyright.</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/479" target="_blank">Issue 479</a> - SI: PayPal Payments Pro currency format bug resolved. Thanks <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a></li>
 		<!--
 		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/" target="_blank">Issue </a> - . Thanks <a href="https://github.com/" target="_blank">@</a></li>
 		<li>(no issue) - .</li>
