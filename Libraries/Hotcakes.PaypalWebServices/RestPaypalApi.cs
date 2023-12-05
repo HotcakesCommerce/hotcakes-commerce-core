@@ -313,7 +313,7 @@ namespace Hotcakes.PaypalWebServices
 
         private string formatAmount(string amount)
         {
-            return Regex.Replace(amount, "[, ]", "");
+            return string.IsNullOrEmpty(amount) ? amount : Regex.Replace(amount, "[, ]", "");
         }
 
         public async Task<HttpResponse> GetOrder(string orderId)
