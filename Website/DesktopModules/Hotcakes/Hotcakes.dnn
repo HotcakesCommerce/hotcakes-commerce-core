@@ -28,7 +28,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/CategoryViewer/CategoryViewerView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -611,7 +611,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/AddressBook/AddressBookView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -665,7 +665,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/Cart/CartView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -737,7 +737,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/CategoryMenu/CategoryMenuView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -811,7 +811,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/CategoryViewer/CategoryViewerView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -883,7 +883,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/Checkout/CheckoutView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -985,7 +985,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/FeaturedProducts/FeaturedProductsView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -1057,7 +1057,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/LastProductsViewed/LastProductsViewed.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -1129,7 +1129,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/MiniCart/MiniCartView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -1191,7 +1191,7 @@
 				<component type="SkinObject">
 					<moduleControl>
 						<moduleControl>
-              <controlKey>View</controlKey>
+              <controlKey />
 							<controlSrc>DesktopModules/Hotcakes/MiniCartSkinObject/MiniCartView.ascx</controlSrc>
 							<supportsPartialRendering>False</supportsPartialRendering>
 							<controlTitle />
@@ -1242,7 +1242,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/SearchInput/SearchInputView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -1380,7 +1380,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/OrderHistory/OrderHistoryView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -1452,7 +1452,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/ProductGrid/ProductGridView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -1524,7 +1524,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/ProductViewer/ProductViewerView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -1596,7 +1596,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/ProductReviews/ProductReviewsView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -1668,7 +1668,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/ContentBlocks/ContentBlocksView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -1740,7 +1740,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/Search/SearchView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -1812,7 +1812,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/TopWeeklySellers/TopWeeklySellersView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -1884,7 +1884,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/Top10Products/Top10ProductsView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -1956,7 +1956,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/WishList/WishListView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -2011,7 +2011,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/AffiliateRegistration/AffiliateRegistrationView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
@@ -2065,7 +2065,7 @@
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-                    <controlKey>View</controlKey>
+                    <controlKey />
 										<controlSrc>DesktopModules/Hotcakes/AffiliateDashboard/AffiliateDashboardView.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
