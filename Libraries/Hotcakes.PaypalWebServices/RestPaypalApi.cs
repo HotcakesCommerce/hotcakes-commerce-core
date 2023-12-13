@@ -121,13 +121,13 @@ namespace Hotcakes.PaypalWebServices
                         AmountWithBreakdown = new AmountWithBreakdown
                         {
                             CurrencyCode = storeCurrency,
-                            Value = paymentAmount,
+                            Value = formatAmount(paymentAmount),
                             AmountBreakdown = new AmountBreakdown
                             {
                                 ItemTotal = new Money
                                 {
                                     CurrencyCode = storeCurrency,
-                                    Value = paymentAmount
+                                    Value = formatAmount(paymentAmount)
                                 },
                                 
                             }
@@ -351,7 +351,7 @@ namespace Hotcakes.PaypalWebServices
             {
                 Amount = new PayPalCheckoutSdk.Payments.Money()
                 {
-                    Value = value,
+                    Value = formatAmount(value),
                     CurrencyCode = currencyId
                 },
                 InvoiceId = invoiceId,
@@ -375,7 +375,7 @@ namespace Hotcakes.PaypalWebServices
             {
                 Amount = new PayPalCheckoutSdk.Payments.Money()
                 {
-                    Value = amount,
+                    Value = formatAmount(amount),
                     CurrencyCode = storeCurrency
                 }
             };
