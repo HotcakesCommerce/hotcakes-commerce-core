@@ -131,6 +131,7 @@ namespace Hotcakes.Modules.Core.Controllers
         [HccHttpPost]
         public ActionResult IndexPost()
         {
+           
             var model = LoadCheckoutModel();
             LoadValuesFromForm(model);
             
@@ -301,18 +302,14 @@ namespace Hotcakes.Modules.Core.Controllers
         [HccHttpPost]
         public ActionResult AttachPaymentMethod()
         {
-            var cardNumber = Request.Form["CardNumber"];
-            var Cvc = Request.Form["Cvc"];
-            var ExpMonth = Convert.ToInt32(Request.Form["ExpMonth"]);
-            var ExpYear = Convert.ToInt32(Request.Form["ExpYear"]);
             var stripeProcessor = new StripeProcessor();
             var sett = HccApp.CurrentStore.Settings;
             var mSett = sett.PaymentSettingsGet(sett.PaymentCreditCardGateway);
             stripeProcessor.BaseSettings.Merge(mSett);
 
-            var pm = stripeProcessor.CreatePaymentMethod(cardNumber, Cvc, ExpMonth, ExpYear);
             string paymentIntentId = Request.Form["PaymentIntentId"];
-            var result = stripeProcessor.AttachPaymentMethod(pm.Id, paymentIntentId);
+            string paymentMethodId = Request.Form["PaymentMethodId"];
+            var result = stripeProcessor.AttachPaymentMethod(paymentMethodId, paymentIntentId);
             return new PreJsonResult(Web.Json.ObjectToJson(new {id = result.Id}));
         }
 
@@ -954,6 +951,13 @@ namespace Hotcakes.Modules.Core.Controllers
                 model.CurrentOrder.ThirdPartyOrderId = paymentIntentId;
                 model.PaymentIntentId = paymentIntentId;
             }
+
+            var paymentMethodId = Request.Form["PaymentMethodId"];
+            if (!string.IsNullOrEmpty(paymentMethodId))
+            {
+                model.PaymentMethodId = paymentMethodId;
+            }
+
             var clientSecret = Request.Form["PaymentIntentClientSecret"];
             if (!string.IsNullOrEmpty(clientSecret))
             {
@@ -1360,6 +1364,16 @@ namespace Hotcakes.Modules.Core.Controllers
         private List<RuleViolation> ValidateCreditCard(CheckoutViewModel model)
         {
             var violations = new List<RuleViolation>();
+
+            if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway == PaymentGatewayType.Stripe)
+            {
+                if (string.IsNullOrEmpty(model.PaymentMethodId))
+                {
+                    violations.Add(new RuleViolation("Payment Method", string.Empty, Localization.GetString("StripePaymentError"), string.Empty));
+                }
+                return violations;
+            }
+
             var cardData = model.PaymentViewModel.DataCreditCard;
             if (!CardValidator.IsCardNumberValid(cardData.CardNumber))
             {
