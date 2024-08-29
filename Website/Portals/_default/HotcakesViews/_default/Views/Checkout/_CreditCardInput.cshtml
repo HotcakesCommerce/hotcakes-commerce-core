@@ -1,112 +1,210 @@
 ﻿@model Hotcakes.Modules.Core.Models.CheckoutViewModel
 @using Hotcakes.Payment
 
-@helper Years()
+@if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway.Equals(PaymentGatewayType.Stripe))
 {
-    int baseYear = DateTime.Now.Year;
-    for (int i = 0; i < 10; i++)
-    {
-    <option value="@(baseYear + i)" 
-            @if (Model.PaymentViewModel.DataCreditCard.ExpirationYear == (baseYear + i))
-            {<text>selected="selected"</text>} 
-        >@(baseYear + i)</option>
-    }
-}
-@helper Months()
-{
-    for (int i = 1; i <= 12; i++)
-    {
-    <option value="@i" 
-            @if (Model.PaymentViewModel.DataCreditCard.ExpirationMonth == i)
-            { <text>selected="selected"</text>} 
-        >@i</option>
-    }
-}
-@functions 
-{
-    public bool IsAccepted(CardType ctype)
-    {
-        if (Model.PaymentViewModel.AcceptedCardTypes.Contains(ctype))
-        {
-            return true;
+    <input type="hidden" id="PaymentIntentId" name="PaymentIntentId" value="@Model.PaymentIntentId" />
+    <input type="hidden" id="PaymentIntentClientSecret" name="PaymentIntentClientSecret" value="@Model.PaymentIntentClientSecret" />
+    <input type="hidden" id="StripePublicKey" name="StripePublicKey" value="@Model.StripePublicKey" />
+    <input type="hidden" id="PaymentMethodId" name="PaymentMethodId" />
+    <form id="payment-form">
+        <div class="form-group">
+            <div class="col-sm-offset-0 col-sm-12">
+                <div id="card-element" class="StripeElement"></div>
+                <div id="card-errors" role="alert" style="color: red;"></div>
+            </div>
+        </div>
+    </form>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var stripe = Stripe('@Model.StripePublicKey');
+        var elements = stripe.elements();
+
+        var card = elements.create('card', {
+            style: {
+                base: {
+                    color: '#32325d',
+                    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                    fontSmoothing: 'antialiased',
+                    fontSize: '16px',
+                    '::placeholder': {
+                        color: '#aab7c4'
+                    }
+                },
+                invalid: {
+                    color: '#fa755a',
+                    iconColor: '#fa755a'
+                }
+            }
+        });
+
+        card.mount('#card-element');
+
+        card.on('change', function (event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+            if (event.complete) {
+                handlePayment();
+            }
+        });
+
+        window.handlePayment = function handlePayment() {
+           stripe.createPaymentMethod({
+            type: 'card',
+            card: card,
+          }).then(function(result) {
+                if (result.error) {
+                    // Informar de un error en la tarjeta
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Enviar el token al servidor
+                    console.log(result);
+                    console.log( result.paymentMethod.id);
+                    document.getElementById('PaymentMethodId').value = result.paymentMethod.id;
+                }
+            });
         }
-        return false;
-    }  
+    });
+    </script>
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .StripeElement {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn-submit {
+            background-color: #6772E5;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
 }
-<div class="hc-creditcard-form clearfix">
-    <input type="hidden" id="aesInitVector" name="aesInitVector" value="@Model.AESEncryptInitVector" />
-    <input type="hidden" id="aesKey" name="aesKey" value="@Model.AESEncryptKey" />
-    @if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway.Equals(PaymentGatewayType.Stripe))
+else
+{
+    @helper Years()
     {
-        <input type="hidden" id="PaymentIntentId" name="PaymentIntentId" value="@Model.PaymentIntentId" />
-        <input type="hidden" id="PaymentIntentClientSecret" name="PaymentIntentClientSecret" value="@Model.PaymentIntentClientSecret" />
-        <input type="hidden" id="StripePublicKey" name="StripePublicKey" value="@Model.StripePublicKey" />
+        int baseYear = DateTime.Now.Year;
+        for (int i = 0; i < 10; i++)
+        {
+            <option value="@(baseYear + i)"
+                    @if (Model.PaymentViewModel.DataCreditCard.ExpirationYear == (baseYear + i)) { <text> selected="selected" </text> }>
+                @(baseYear + i)
+            </option>
+        }
     }
-    <div class="form-group">
-        <label class="col-sm-4 control-label">&nbsp;</label>
-        <div class="col-sm-offset-0 col-sm-6">
-            <span class="hc-card-icons">
-                @if (IsAccepted(CardType.Visa))
-                {
-                    <span class="cc-visa"></span>
-                }
-                @if (IsAccepted(CardType.MasterCard))
-                {
-                    <span class="cc-mastercard"></span>
-                }
-                @if (IsAccepted(CardType.Amex))
-                {
-                    <span class="cc-amex"></span>
-                }
-                @if (IsAccepted(CardType.Discover))
-                {
-                    <span class="cc-discover"></span>
-                }
-                @if (IsAccepted(CardType.DinersClub))
-                {
-                    <span class="cc-diners"></span>
-                }
-                @if (IsAccepted(CardType.JCB))
-                {
-                    <span class="cc-jcb"></span>
-                }
-            </span>
+    @helper Months()
+    {
+        for (int i = 1; i <= 12; i++)
+        {
+            <option value="@i"
+                    @if (Model.PaymentViewModel.DataCreditCard.ExpirationMonth == i) { <text> selected="selected" </text> }>
+                @i
+                </option>
+            }
+    }
+    @functions
+{
+        public bool IsAccepted(CardType ctype)
+        {
+            if (Model.PaymentViewModel.AcceptedCardTypes.Contains(ctype))
+            {
+                return true;
+            }
+            return false;
+        }
+    }
+
+
+    <div class="hc-creditcard-form clearfix">
+        <input type="hidden" id="aesInitVector" name="aesInitVector" value="@Model.AESEncryptInitVector" />
+        <input type="hidden" id="aesKey" name="aesKey" value="@Model.AESEncryptKey" />
+        <div class="form-group">
+            <label class="col-sm-4 control-label">&nbsp;</label>
+            <div class="col-sm-offset-0 col-sm-6">
+                <span class="hc-card-icons">
+                    @if (IsAccepted(CardType.Visa))
+                    {
+                        <span class="cc-visa"></span>
+                    }
+                    @if (IsAccepted(CardType.MasterCard))
+                    {
+                        <span class="cc-mastercard"></span>
+                    }
+                    @if (IsAccepted(CardType.Amex))
+                    {
+                        <span class="cc-amex"></span>
+                    }
+                    @if (IsAccepted(CardType.Discover))
+                    {
+                        <span class="cc-discover"></span>
+                    }
+                    @if (IsAccepted(CardType.DinersClub))
+                    {
+                        <span class="cc-diners"></span>
+                    }
+                    @if (IsAccepted(CardType.JCB))
+                    {
+                        <span class="cc-jcb"></span>
+                    }
+                </span>
+            </div>
+        </div>
+        <div class="form-group dnnFormRequired">
+            <label class="col-sm-4 control-label" for="cccardnumber">@Localization.GetString("CardNumber"):</label>
+            <div class="col-sm-offset-0 col-sm-6">
+                <input type="text" name="cccardnumber" id="cccardnumber" maxlength="20" autocomplete="cc-csc"
+                       value="@Model.PaymentViewModel.DataCreditCard.CardNumber"
+                       class="form-control @Model.IsErr("cccardnumber")" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label" for="ccexpmonth">@Localization.GetString("ExpDate"):</label>
+            <div class="col-sm-offset-0 col-sm-6 form-inline">
+                <select id="ccexpmonth" name="ccexpmonth" class="form-control small hc-cc-expmonth">
+                    <option value="0">--</option>
+                    @Months()
+                </select>
+                <select id="ccexpyear" name="ccexpyear" class="form-control medium hc-cc-expyear">
+                    <option value="0">----</option>
+                    @Years()
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label" for="ccsecuritycode">@Localization.GetString("SecurityCode"):</label>
+            <div class="col-sm-offset-0 col-sm-6">
+                <input type="text" id="ccsecuritycode" name="ccsecuritycode" maxlength="4"
+                       class="form-control small hc-cc-seccode @Model.IsErr("ccsecuritycode")" autocomplete="off" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label" for="cccardholder">@Localization.GetString("NameOnCard"):</label>
+            <div class="col-sm-offset-0 col-sm-6">
+                <input type="text" id="cccardholder" name="cccardholder"
+                       value="@Model.PaymentViewModel.DataCreditCard.CardHolderName"
+                       class="form-control @Model.IsErr("cccardholder")" autocomplete="off" />
+            </div>
         </div>
     </div>
-    <div class="form-group dnnFormRequired">
-        <label class="col-sm-4 control-label" for="cccardnumber">@Localization.GetString("CardNumber"):</label>
-        <div class="col-sm-offset-0 col-sm-6">
-            <input type="text" name="cccardnumber" id="cccardnumber" maxlength="20" autocomplete="cc-csc"
-                value="@Model.PaymentViewModel.DataCreditCard.CardNumber"                    
-                class="form-control @Model.IsErr("cccardnumber")" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-4 control-label" for="ccexpmonth">@Localization.GetString("ExpDate"):</label>
-        <div class="col-sm-offset-0 col-sm-6 form-inline">
-            <select id="ccexpmonth" name="ccexpmonth" class="form-control small hc-cc-expmonth">
-                <option value="0">--</option>
-                @Months()
-            </select>
-            <select id="ccexpyear" name="ccexpyear" class="form-control medium hc-cc-expyear">
-                <option value="0">----</option>
-                @Years()
-            </select>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-4 control-label" for="ccsecuritycode">@Localization.GetString("SecurityCode"):</label>
-        <div class="col-sm-offset-0 col-sm-6">
-            <input type="text" id="ccsecuritycode" name="ccsecuritycode" maxlength="4"
-                   class="form-control small hc-cc-seccode @Model.IsErr("ccsecuritycode")" autocomplete="off" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-4 control-label" for="cccardholder">@Localization.GetString("NameOnCard"):</label>
-        <div class="col-sm-offset-0 col-sm-6">
-            <input type="text" id="cccardholder" name="cccardholder"
-                   value="@Model.PaymentViewModel.DataCreditCard.CardHolderName"
-                   class="form-control @Model.IsErr("cccardholder")" autocomplete="off" />
-        </div>
-    </div>
-</div>
+}
