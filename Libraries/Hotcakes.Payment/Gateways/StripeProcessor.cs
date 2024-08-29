@@ -262,6 +262,10 @@ namespace Hotcakes.Payment.Gateways
             StripeConfiguration.ApiKey = Settings.StripeApiKey;
 
             var paymentIntentService = new PaymentIntentService();
+            if (string.IsNullOrEmpty(t.PreviousTransactionNumber))
+            {
+                t.PreviousTransactionNumber = t.Result.ReferenceNumber;
+            }
 
             var stripeCapture = paymentIntentService.Capture(t.PreviousTransactionNumber);
 
