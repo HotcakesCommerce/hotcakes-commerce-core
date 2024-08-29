@@ -876,16 +876,12 @@
     async function CreatePaymentMethod(clientSecret) {
         var status = await checkPaymentStatus(clientSecret)
         if (status === "requires_payment_method") {
-            var cardNumber = $("#cccardnumber").val();
-            var nameOnCard = $("#cccardholder").val();
-            var cvc = $("#ccsecuritycode").val();
-            var expMonth = $("#ccexpmonth").val();
-            var expYear = $("#ccexpyear").val();
             var paymentIntent = $("#PaymentIntentId").val();
+            var paymentMethodId = $("#PaymentMethodId").val();
             var pm = "";
-            if (cardNumber && cvc && expMonth && expYear && nameOnCard) {
+            if (paymentMethodId) {
                 var reqUrl = hcc.getServiceUrl("checkout/AttachPaymentMethod");
-                $.post(reqUrl, { "CardNumber": cardNumber, "Cvc": cvc, "ExpMonth": expMonth, "ExpYear": expYear, "PaymentIntentId": paymentIntent }, null, "json")
+                $.post(reqUrl, { "PaymentIntentId": paymentIntent, "PaymentMethodId": paymentMethodId }, null, "json")
                     .done((data) => {
                         stripe
                             .retrievePaymentIntent(clientSecret)
