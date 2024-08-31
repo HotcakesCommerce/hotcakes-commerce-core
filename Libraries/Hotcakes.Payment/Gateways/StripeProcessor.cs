@@ -242,6 +242,8 @@ namespace Hotcakes.Payment.Gateways
 
             var chargeService = new ChargeService();
 
+            t.PreviousTransactionNumber = UpdatePreviousTransactionNumber(t.PreviousTransactionNumber, t.Result.ReferenceNumber);
+
             var stripeCharge = chargeService.Capture(t.PreviousTransactionNumber);
 
             if (stripeCharge.Id.Length > 0 && stripeCharge.Amount > 0)
@@ -262,10 +264,8 @@ namespace Hotcakes.Payment.Gateways
             StripeConfiguration.ApiKey = Settings.StripeApiKey;
 
             var paymentIntentService = new PaymentIntentService();
-            if (string.IsNullOrEmpty(t.PreviousTransactionNumber))
-            {
-                t.PreviousTransactionNumber = t.Result.ReferenceNumber;
-            }
+          
+            t.PreviousTransactionNumber = UpdatePreviousTransactionNumber(t.PreviousTransactionNumber, t.Result.ReferenceNumber);
 
             var stripeCapture = paymentIntentService.Capture(t.PreviousTransactionNumber);
 
@@ -280,6 +280,15 @@ namespace Hotcakes.Payment.Gateways
                 t.Result.ResponseCode = "FAIL";
                 t.Result.ResponseCodeDescription = "Stripe Failure";
             }
+        }
+
+        private string UpdatePreviousTransactionNumber(string PreviousTransactionNumber, string ReferenceNumber)
+        {
+            if (string.IsNullOrEmpty(PreviousTransactionNumber))
+            {
+                return ReferenceNumber;
+            }
+            return PreviousTransactionNumber;
         }
 
         /// <summary>
