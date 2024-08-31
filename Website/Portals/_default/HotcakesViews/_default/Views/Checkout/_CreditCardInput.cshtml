@@ -3,13 +3,26 @@
 
 @if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway.Equals(PaymentGatewayType.Stripe))
 {
+    string language = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
     <input type="hidden" id="PaymentIntentId" name="PaymentIntentId" value="@Model.PaymentIntentId" />
     <input type="hidden" id="PaymentIntentClientSecret" name="PaymentIntentClientSecret" value="@Model.PaymentIntentClientSecret" />
     <input type="hidden" id="StripePublicKey" name="StripePublicKey" value="@Model.StripePublicKey" />
     <input type="hidden" id="PaymentMethodId" name="PaymentMethodId" />
+
+    <style>
+        .StripeElement {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .mt-1 {
+            margin-top: 1rem;
+        }
+    </style>
+
     <form id="payment-form">
         <div class="form-group">
-            <div class="col-sm-offset-0 col-sm-12">
+            <div class="col-sm-offset-0 col-sm-12 mt-1">
                 <div id="card-element" class="StripeElement"></div>
                 <div id="card-errors" role="alert" style="color: red;"></div>
             </div>
@@ -19,7 +32,7 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var stripe = Stripe('@Model.StripePublicKey');
+        var stripe = Stripe('@Model.StripePublicKey', { locale: '@language' });
         var elements = stripe.elements();
 
         var card = elements.create('card', {
@@ -60,45 +73,17 @@
             card: card,
           }).then(function(result) {
                 if (result.error) {
-                    // Informar de un error en la tarjeta
+                    // show errors
                     var errorElement = document.getElementById('card-errors');
                     errorElement.textContent = result.error.message;
                 } else {
-                    // Enviar el token al servidor
-                    console.log(result);
-                    console.log( result.paymentMethod.id);
+                    // Get the value of PaimentMethodId
                     document.getElementById('PaymentMethodId').value = result.paymentMethod.id;
                 }
             });
         }
     });
     </script>
-    <style>
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .StripeElement {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .btn-submit {
-            background-color: #6772E5;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-        }
-    </style>
 }
 else
 {
@@ -120,11 +105,11 @@ else
             <option value="@i"
                     @if (Model.PaymentViewModel.DataCreditCard.ExpirationMonth == i) { <text> selected="selected" </text> }>
                 @i
-                </option>
-            }
+            </option>
+        }
     }
     @functions
-{
+    {
         public bool IsAccepted(CardType ctype)
         {
             if (Model.PaymentViewModel.AcceptedCardTypes.Contains(ctype))
