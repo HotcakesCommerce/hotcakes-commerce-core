@@ -878,7 +878,6 @@
         if (status === "requires_payment_method") {
             var paymentIntent = $("#PaymentIntentId").val();
             var paymentMethodId = $("#PaymentMethodId").val();
-            var pm = "";
             if (paymentMethodId) {
                 var reqUrl = hcc.getServiceUrl("checkout/AttachPaymentMethod");
                 $.post(reqUrl, { "PaymentIntentId": paymentIntent, "PaymentMethodId": paymentMethodId }, null, "json")
