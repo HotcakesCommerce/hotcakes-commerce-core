@@ -213,6 +213,8 @@ namespace Hotcakes.Payment.Gateways
                 Amount = (int)(t.Amount * 100)
             };
 
+            t.PreviousTransactionNumber = UpdatePreviousTransactionNumber(t.PreviousTransactionNumber, t.Result.ReferenceNumber);
+
             if (IsPaymentIntent(t.PreviousTransactionNumber))
             {
                 refundOptions.PaymentIntent = t.PreviousTransactionNumber;
