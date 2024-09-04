@@ -1048,13 +1048,22 @@ namespace Hotcakes.Modules.Core.Controllers
         {
             var order = model.CurrentOrder;
             var payModel = model.PaymentViewModel;
-
+            if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway == PaymentGatewayType.Stripe)
+            {
+                payModel.DataCreditCard.StripeCardType = Request.Form["StripeCardType"] ?? string.Empty;
+                payModel.DataCreditCard.CardNumber = Request.Form["cccardnumber"] ?? string.Empty;
+               
+            }
+            else
+            {
+                payModel.DataCreditCard.CardNumber = CardValidator.CleanCardNumber(Request.Form["cccardnumber"] ?? string.Empty);
+            }
             payModel.SelectedMethodId = Request.Form["paymethod"] ?? string.Empty;
             payModel.DataPurchaseOrderNumber = Request.Form["ponumber"] ?? string.Empty;
             payModel.DataCompanyAccountNumber = Request.Form["accountnumber"] ?? string.Empty;
             payModel.DataCreditCard.CardHolderName = Request.Form["cccardholder"] ?? string.Empty;
-            payModel.DataCreditCard.CardNumber =
-                CardValidator.CleanCardNumber(Request.Form["cccardnumber"] ?? string.Empty);
+            
+               
             var expMonth = 0;
             int.TryParse(Request.Form["ccexpmonth"] ?? string.Empty, out expMonth);
             payModel.DataCreditCard.ExpirationMonth = expMonth;
