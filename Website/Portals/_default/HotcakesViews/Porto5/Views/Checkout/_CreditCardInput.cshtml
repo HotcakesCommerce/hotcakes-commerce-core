@@ -6,8 +6,14 @@
     string language = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
     <input type="hidden" id="PaymentIntentId" name="PaymentIntentId" value="@Model.PaymentIntentId" />
     <input type="hidden" id="PaymentIntentClientSecret" name="PaymentIntentClientSecret" value="@Model.PaymentIntentClientSecret" />
-    <input type="hidden" id="StripePublicKey" name="StripePublicKey" value="@Model.StripePublicKey" /> 
+    <input type="hidden" id="StripePublicKey" name="StripePublicKey" value="@Model.StripePublicKey" />
     <input type="hidden" id="PaymentMethodId" name="PaymentMethodId" />
+    <input type="hidden" name="cccardnumber" id="cccardnumber" />
+    <input type="hidden" id="ccexpmonth" name="ccexpmonth" />
+    <input type="hidden" id="ccexpyear" name="ccexpyear" />
+    <input type="hidden" id="StripeCardType" name="StripeCardType" />
+
+
 
     <style>
         .StripeElement {
@@ -15,6 +21,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
         .mt-1 {
             margin-top: 1rem;
         }
@@ -77,13 +84,17 @@
                         var errorElement = document.getElementById('card-errors');
                         errorElement.textContent = result.error.message;
                     } else {
-                        // Get the value of PaimentMethodId
                         document.getElementById('PaymentMethodId').value = result.paymentMethod.id;
+                        document.getElementById('cccardnumber').value = result.paymentMethod.card.last4;
+                        document.getElementById('ccexpmonth').value = result.paymentMethod.card.exp_month;
+                        document.getElementById('ccexpyear').value = result.paymentMethod.card.exp_year;
+                        document.getElementById('StripeCardType').value = result.paymentMethod.card.display_brand;
                     }
                 });
             }
         });
-    </script>      
+    </script>
+
 }
 else
 {
@@ -92,23 +103,23 @@ else
         int baseYear = DateTime.Now.Year;
         for (int i = 0; i < 10; i++)
         {
-        <option value="@(baseYear + i)" 
-                @if (Model.PaymentViewModel.DataCreditCard.ExpirationYear == (baseYear + i))
-                {<text>selected="selected"</text>} 
-            >@(baseYear + i)</option>
+            <option value="@(baseYear + i)"
+                    @if (Model.PaymentViewModel.DataCreditCard.ExpirationYear == (baseYear + i)) { <text> selected="selected" </text> }>
+                @(baseYear + i)
+            </option>
         }
     }
     @helper Months()
     {
         for (int i = 1; i <= 12; i++)
         {
-        <option value="@i" 
-                @if (Model.PaymentViewModel.DataCreditCard.ExpirationMonth == i)
-                { <text>selected="selected"</text>} 
-            >@i</option>
-        }
+            <option value="@i"
+                    @if (Model.PaymentViewModel.DataCreditCard.ExpirationMonth == i) { <text> selected="selected" </text> }>
+                @i
+                </option>
+            }
     }
-    @functions 
+    @functions
     {
         public bool IsAccepted(CardType ctype)
         {
@@ -117,7 +128,7 @@ else
                 return true;
             }
             return false;
-        }  
+        }
     }
     <div class="hc-creditcard-form">
         <input type="hidden" id="aesInitVector" name="aesInitVector" value="@Model.AESEncryptInitVector" />
@@ -127,17 +138,17 @@ else
             <div class="col-sm-6 offset-sm-0">
                 <span class="hc-card-icons">
                     @if (IsAccepted(CardType.Visa))
-                    { <span class="cc-visa"></span> }
+                    {<span class="cc-visa"></span>}
                     @if (IsAccepted(CardType.MasterCard))
-                    { <span class="cc-mastercard"></span> }
+                    {<span class="cc-mastercard"></span>}
                     @if (IsAccepted(CardType.Amex))
-                    { <span class="cc-amex"></span> }
+                    {<span class="cc-amex"></span>}
                     @if (IsAccepted(CardType.Discover))
-                    { <span class="cc-discover"></span> }
+                    {<span class="cc-discover"></span>}
                     @if (IsAccepted(CardType.DinersClub))
-                    { <span class="cc-diners"></span> }
+                    {<span class="cc-diners"></span>}
                     @if (IsAccepted(CardType.JCB))
-                    { <span class="cc-jcb"></span> }
+                    {<span class="cc-jcb"></span>}
                 </span>
             </div>
         </div>
@@ -145,8 +156,8 @@ else
             <label class="col-sm-3 offset-sm-1 col-form-label" for="cccardnumber">@Localization.GetString("CardNumber"):</label>
             <div class="col-sm-6 offset-sm-0">
                 <input type="text" name="cccardnumber" id="cccardnumber" maxlength="20"
-                    value="@Model.PaymentViewModel.DataCreditCard.CardNumber"                    
-                    class="form-control @Model.IsErr("cccardnumber")" autocomplete="cc-csc" />
+                       value="@Model.PaymentViewModel.DataCreditCard.CardNumber"
+                       class="form-control @Model.IsErr("cccardnumber")" autocomplete="cc-csc" />
             </div>
         </div>
         <div class="form-group row">
@@ -165,16 +176,16 @@ else
         <div class="form-group row">
             <label class="col-sm-3 offset-sm-1 col-form-label" for="ccsecuritycode">@Localization.GetString("SecurityCode"):</label>
             <div class="col-sm-6 offset-sm-0">
-                <input type="password" id="ccsecuritycode" name="ccsecuritycode" maxlength="4" 
-                    class="form-control small hc-cc-seccode @Model.IsErr("ccsecuritycode")" autocomplete="off" />
+                <input type="password" id="ccsecuritycode" name="ccsecuritycode" maxlength="4"
+                       class="form-control small hc-cc-seccode @Model.IsErr("ccsecuritycode")" autocomplete="off" />
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-3 offset-sm-1 col-form-label" for="cccardholder">@Localization.GetString("NameOnCard"):</label>
             <div class="col-sm-6 offset-sm-0">
-                <input type="text" id="cccardholder" name="cccardholder" 
-                    value="@Model.PaymentViewModel.DataCreditCard.CardHolderName"
-                    class="form-control @Model.IsErr("cccardholder")" autocomplete="off" />
+                <input type="text" id="cccardholder" name="cccardholder"
+                       value="@Model.PaymentViewModel.DataCreditCard.CardHolderName"
+                       class="form-control @Model.IsErr("cccardholder")" autocomplete="off" />
             </div>
         </div>
     </div>
