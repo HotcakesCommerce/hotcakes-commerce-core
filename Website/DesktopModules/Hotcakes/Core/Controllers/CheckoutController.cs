@@ -1051,7 +1051,7 @@ namespace Hotcakes.Modules.Core.Controllers
             if (HccApp.CurrentStore.Settings.PaymentCreditCardGateway == PaymentGatewayType.Stripe)
             {
                 payModel.DataCreditCard.StripeCardType = Request.Form["StripeCardType"] ?? string.Empty;
-            {
+            }
             payModel.DataCreditCard.CardNumber = Request.Form["cccardnumber"] ?? string.Empty;
             payModel.SelectedMethodId = Request.Form["paymethod"] ?? string.Empty;
             payModel.DataPurchaseOrderNumber = Request.Form["ponumber"] ?? string.Empty;
