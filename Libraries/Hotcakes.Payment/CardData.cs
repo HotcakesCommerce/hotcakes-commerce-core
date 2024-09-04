@@ -37,6 +37,8 @@ namespace Hotcakes.Payment
     {
         private string _CardNumber = string.Empty;
 
+        public string StripeCardType { get; set; }
+
         public CardData()
         {
             SecurityCode = string.Empty;
@@ -130,7 +132,21 @@ namespace Hotcakes.Payment
         [ScriptIgnore]
         public CardType CardType
         {
-            get { return CardValidator.GetCardTypeFromNumber(CardNumber); }
+            get {
+                if (!string.IsNullOrWhiteSpace(StripeCardType))
+                {
+                    if (Enum.TryParse(StripeCardType, true, out CardType cardType))
+                    {
+                        return cardType;
+                    }
+                    else
+                    {
+                        return CardType.Unknown;
+                    }
+                }
+
+                    return CardValidator.GetCardTypeFromNumber(CardNumber); 
+            }
         }
         
         /// <summary>
@@ -175,6 +191,11 @@ namespace Hotcakes.Payment
         /// <returns>Boolean - if true, the card number and date are valid.</returns>
         public bool IsCardValid(DateTime localTime)
         {
+            if (!string.IsNullOrWhiteSpace(StripeCardType))
+            {
+                return true;
+            }
+
             if (!CardValidator.IsCardNumberValid(CardNumber))
             {
                 return false;
@@ -190,7 +211,11 @@ namespace Hotcakes.Payment
 
 		public bool IsCardNumberValid()
 		{
-			if (CardValidator.IsCardNumberValid(this.CardNumber) == false)
+            if (!string.IsNullOrWhiteSpace(StripeCardType))
+            {
+                return true;
+            }
+            if (CardValidator.IsCardNumberValid(this.CardNumber) == false)
 			{
 				return false;
 			}
