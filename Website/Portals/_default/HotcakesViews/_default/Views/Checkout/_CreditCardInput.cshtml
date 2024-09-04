@@ -8,6 +8,10 @@
     <input type="hidden" id="PaymentIntentClientSecret" name="PaymentIntentClientSecret" value="@Model.PaymentIntentClientSecret" />
     <input type="hidden" id="StripePublicKey" name="StripePublicKey" value="@Model.StripePublicKey" />
     <input type="hidden" id="PaymentMethodId" name="PaymentMethodId" />
+    <input type="hidden" name="cccardnumber" id="cccardnumber" />
+    <input type="hidden" id="ccexpmonth" name="ccexpmonth" />
+    <input type="hidden" id="ccexpyear" name="ccexpyear" />
+    <input type="hidden" id="StripeCardType" name="StripeCardType" />
 
     <style>
         .StripeElement {
@@ -15,6 +19,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
         .mt-1 {
             margin-top: 1rem;
         }
@@ -77,8 +82,11 @@
                         var errorElement = document.getElementById('card-errors');
                         errorElement.textContent = result.error.message;
                     } else {
-                        // Get the value of PaimentMethodId
                         document.getElementById('PaymentMethodId').value = result.paymentMethod.id;
+                        document.getElementById('cccardnumber').value = result.paymentMethod.card.last4;
+                        document.getElementById('ccexpmonth').value = result.paymentMethod.card.exp_month;
+                        document.getElementById('ccexpyear').value = result.paymentMethod.card.exp_year;
+                        document.getElementById('StripeCardType').value = result.paymentMethod.card.display_brand;
                     }
                 });
             }
