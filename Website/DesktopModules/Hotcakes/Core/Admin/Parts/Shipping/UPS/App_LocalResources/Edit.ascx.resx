@@ -144,6 +144,12 @@
   <data name="btnSave.Text" xml:space="preserve">
     <value>Save Changes</value>
   </data>
+  <data name="ClientId.Text" xml:space="preserve">
+    <value>Client ID</value>
+  </data>
+  <data name="ClientSecret.Text" xml:space="preserve">
+    <value>Client Secret</value>
+  </data>
   <data name="CustomerCounter.Text" xml:space="preserve">
     <value>Customer Counter</value>
   </data>
