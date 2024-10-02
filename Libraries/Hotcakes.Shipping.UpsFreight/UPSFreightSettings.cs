@@ -30,34 +30,26 @@ namespace Hotcakes.Shipping.UpsFreight
     [Serializable]
     public class UPSFreightSettings
     {
-        private string _license = string.Empty;
-        private string _password = string.Empty;
         private string _ServerUrl = string.Empty;
-
-        private string _userID = string.Empty;
-
-        public string UserID
-        {
-            get { return _userID; }
-            set { _userID = value; }
-        }
-
-        public string Password
-        {
-            get { return _password; }
-            set { _password = value; }
-        }
-
-        public string License
-        {
-            get { return _license; }
-            set { _license = value; }
-        }
+        private string _clientId = string.Empty;
+        private string _clientSecret = string.Empty;
 
         public string ServerUrl
         {
             get { return _ServerUrl; }
             set { _ServerUrl = value; }
+        }
+
+        public string ClientId
+        {
+            get { return _clientId; }
+            set { _clientId = value; }
+        }
+
+        public string ClientSecret
+        {
+            get { return _clientSecret; }
+            set { _clientSecret = value; }
         }
     }
 }
