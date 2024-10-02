@@ -894,18 +894,6 @@ namespace Hotcakes.Commerce.Accounts
             set { SetProp(Constants.STORESETTING_UPSFORCERESIDENTIAL, value); }
         }
 
-        public string ShippingUpsLicense
-        {
-            get { return GetProp(Constants.STORESETTING_UPSLICENSE); }
-            set { SetProp(Constants.STORESETTING_UPSLICENSE, value); }
-        }
-
-        public string ShippingUpsPassword
-        {
-            get { return GetProp(Constants.STORESETTING_UPSPASSWORD); }
-            set { SetProp(Constants.STORESETTING_UPSPASSWORD, value); }
-        }
-
         public int ShippingUpsPickupType
         {
             get { return GetPropInt(Constants.STORESETTING_UPSPICKUPTYPE); }
@@ -918,10 +906,16 @@ namespace Hotcakes.Commerce.Accounts
             set { SetProp(Constants.STORESETTING_UPSSHIPDIMENSIONS, value); }
         }
 
-        public string ShippingUpsUsername
+        public string ShippingUpsClientId
         {
-            get { return GetProp(Constants.STORESETTING_UPSUSERNAME); }
-            set { SetProp(Constants.STORESETTING_UPSUSERNAME, value); }
+            get { return GetProp(Constants.STORESETTING_UPSCLIENTID); }
+            set { SetProp(Constants.STORESETTING_UPSCLIENTID, value); }
+        }
+
+        public string ShippingUpsClientSecret
+        {
+            get { return GetProp(Constants.STORESETTING_UPSCLIENTSECRET); }
+            set { SetProp(Constants.STORESETTING_UPSCLIENTSECRET, value); }
         }
 
         public bool ShippingUPSWriteXML
