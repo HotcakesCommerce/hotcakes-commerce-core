@@ -49,21 +49,17 @@
         <asp:TextBox ID="AccountNumberField" runat="server" ValidationGroup="ShippingMethod" />
         <asp:RequiredFieldValidator runat="server" ID="AccountNumberRequired" Text="* Account Number required" CssClass="hc-validation" ValidationGroup="ShippingMethod" ControlToValidate="AccountNumberField"></asp:RequiredFieldValidator>
     </div>
-    <div class="hcFormItemHor">
-        <asp:Label runat="server" resourcekey="AccessKey" CssClass="hcLabel"/>
-        <asp:TextBox ID="AccessKeyField" runat="server" ValidationGroup="ShippingMethod" />
-        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" Text="* Access Key required" CssClass="hc-validation" ValidationGroup="ShippingMethod" ControlToValidate="AccessKeyField"></asp:RequiredFieldValidator>
-    </div>
-    <div class="hcFormItemHor">
-        <asp:Label runat="server" resourcekey="Username" CssClass="hcLabel"/>
-        <asp:TextBox ID="UserNameField" runat="server" ValidationGroup="ShippingMethod" />
-        <asp:RequiredFieldValidator runat="server" ID="UsernameRequired" Text="* Username required" CssClass="hc-validation" ValidationGroup="ShippingMethod" ControlToValidate="UserNameField"></asp:RequiredFieldValidator>
-    </div>
-    <div class="hcFormItemHor">
-        <asp:Label runat="server" resourcekey="Password" CssClass="hcLabel"/>
-        <asp:TextBox ID="PasswordField" runat="server" ValidationGroup="ShippingMethod" />
-        <asp:RequiredFieldValidator runat="server" ID="PasswordRequired" Text="* Password required" CssClass="hc-validation" ValidationGroup="ShippingMethod" ControlToValidate="PasswordField"></asp:RequiredFieldValidator>
-    </div>
+   <div class="hcFormItemHor">
+      <asp:Label runat="server" resourcekey="ClientId" CssClass="hcLabel"/>
+      <asp:TextBox ID="ClientIdField" runat="server" ValidationGroup="ShippingMethod" />
+      <asp:RequiredFieldValidator runat="server" ID="ClientIdRequired" Text="* ClientId required" CssClass="hc-validation" ValidationGroup="ShippingMethod" ControlToValidate="ClientIdField"></asp:RequiredFieldValidator>
+  </div>
+     <div class="hcFormItemHor">
+     <asp:Label runat="server" resourcekey="ClientSecret" CssClass="hcLabel"/>
+     <asp:TextBox ID="ClientSecretField" runat="server" ValidationGroup="ShippingMethod" />
+     <asp:RequiredFieldValidator runat="server" ID="PasswordRequired" Text="* ClientSecret required" CssClass="hc-validation" ValidationGroup="ShippingMethod" ControlToValidate="ClientSecretField"></asp:RequiredFieldValidator>
+ </div>
+
     <div class="hcFormItemHor">
         <asp:Label runat="server" resourcekey="ForceResidentialAddresses" CssClass="hcLabel"/>
         <asp:CheckBox ID="ResidentialAddressCheckBox" runat="server" ValidationGroup="ShippingMethod" />
