@@ -123,49 +123,31 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS
         protected global::System.Web.UI.WebControls.RequiredFieldValidator AccountNumberRequired;
 
         /// <summary>
-        /// AccessKeyField control.
+        /// ClientIdField control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox AccessKeyField;
+        protected global::System.Web.UI.WebControls.TextBox ClientIdField;
 
         /// <summary>
-        /// RequiredFieldValidator1 control.
+        /// ClientIdRequired control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ClientIdRequired;
 
         /// <summary>
-        /// UserNameField control.
+        /// ClientSecretField control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UserNameField;
-
-        /// <summary>
-        /// UsernameRequired control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator UsernameRequired;
-
-        /// <summary>
-        /// PasswordField control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PasswordField;
+        protected global::System.Web.UI.WebControls.TextBox ClientSecretField;
 
         /// <summary>
         /// PasswordRequired control.
