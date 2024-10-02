@@ -116,12 +116,11 @@ namespace Hotcakes.Commerce.Common
         public const string STORESETTING_UPSDEFAULTSERVICE = "ShippingUpsDefaultService";
         public const string STORESETTING_UPSDIAGNOSITCS = "ShippingUPSDiagnostics";
         public const string STORESETTING_UPSFORCERESIDENTIAL = "ShippingUpsForceResidential";
-        public const string STORESETTING_UPSLICENSE = "Shipping_UPS_License";
-        public const string STORESETTING_UPSPASSWORD = "Shipping_UPS_Password";
         public const string STORESETTING_UPSPICKUPTYPE = "Shipping_UPS_Pickup_Type";
         public const string STORESETTING_UPSSHIPDIMENSIONS = "ShippingUpsSkipDimensions";
-        public const string STORESETTING_UPSUSERNAME = "Shipping_UPS_Username";
         public const string STORESETTING_UPSWRITEXML = "ShippingUPSWriteXML";
+        public const string STORESETTING_UPSCLIENTID = "Shipping_UPS_ClientId";
+        public const string STORESETTING_UPSCLIENTSECRET = "Shipping_UPS_ClientSecret";
 
         public const string STORESETTING_UPSFDEFAULTPACKAGING = "ShippingUpsFreightDefaultPackaging";
         public const string STORESETTING_UPSFDEFAULTPAYMENT = "ShippingUpsFreightDefaultPayment";
