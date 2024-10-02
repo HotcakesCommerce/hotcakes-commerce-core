@@ -107,9 +107,8 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS
             }
 
             // Global Settings
-            UserNameField.Text = HccApp.CurrentStore.Settings.ShippingUpsUsername;
-            PasswordField.Text = HccApp.CurrentStore.Settings.ShippingUpsPassword;
-            AccessKeyField.Text = HccApp.CurrentStore.Settings.ShippingUpsLicense;
+            ClientIdField.Text = HccApp.CurrentStore.Settings.ShippingUpsClientId;
+            ClientSecretField.Text = HccApp.CurrentStore.Settings.ShippingUpsClientSecret;
             AccountNumberField.Text = HccApp.CurrentStore.Settings.ShippingUpsAccountNumber;
             ResidentialAddressCheckBox.Checked = HccApp.CurrentStore.Settings.ShippingUpsForceResidential;
             PickupTypeRadioButtonList.SelectedValue = HccApp.CurrentStore.Settings.ShippingUpsPickupType.ToString();
@@ -192,9 +191,8 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS
             }
 
             // Global Settings
-            HccApp.CurrentStore.Settings.ShippingUpsUsername = UserNameField.Text.Trim();
-            HccApp.CurrentStore.Settings.ShippingUpsPassword = PasswordField.Text.Trim();
-            HccApp.CurrentStore.Settings.ShippingUpsLicense = AccessKeyField.Text.Trim();
+            HccApp.CurrentStore.Settings.ShippingUpsClientId = ClientIdField.Text.Trim();
+            HccApp.CurrentStore.Settings.ShippingUpsClientSecret = ClientSecretField.Text.Trim();
             HccApp.CurrentStore.Settings.ShippingUpsAccountNumber = AccountNumberField.Text.Trim();
             HccApp.CurrentStore.Settings.ShippingUpsForceResidential = ResidentialAddressCheckBox.Checked;
             HccApp.CurrentStore.Settings.ShippingUpsPickupType = int.Parse(PickupTypeRadioButtonList.SelectedValue);
