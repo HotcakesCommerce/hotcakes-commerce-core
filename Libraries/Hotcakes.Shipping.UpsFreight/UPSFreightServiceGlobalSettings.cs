@@ -33,18 +33,16 @@ namespace Hotcakes.Shipping.UpsFreight
         public UPSFreightServiceGlobalSettings()
         {
             AccountNumber = string.Empty;
-            LicenseNumber = string.Empty;
-            Username = string.Empty;
-            Password = string.Empty;
+            ClientId = string.Empty;
+            ClientSecret = string.Empty;
             DiagnosticsMode = false;
             ForceResidential = true;
             IgnoreDimensions = true;
         }
 
         public string AccountNumber { get; set; }
-        public string LicenseNumber { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public string ClientId { get; set; }
+        public string ClientSecret { get; set; }
         public bool DiagnosticsMode { get; set; }
         public bool ForceResidential { get; set; }
         public bool IgnoreDimensions { get; set; }
