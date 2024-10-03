@@ -59,6 +59,7 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Models\ErrorResponse.cs" />
     <Compile Include="Models\RateRequest.cs" />
     <Compile Include="Models\ShipmentRequest.cs" />
     <Compile Include="Models\TokenResponse.cs" />
