@@ -213,6 +213,9 @@
   <data name="ShippingZone.Text" xml:space="preserve">
     <value>Shipping Zone</value>
   </data>
+  <data name="TestingMode.Text" xml:space="preserve">
+    <value>Testing Mode</value>
+  </data>
   <data name="UPS10KgBox.Text" xml:space="preserve">
     <value>UPS 10Kg Box</value>
   </data>
