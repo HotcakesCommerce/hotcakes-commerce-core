@@ -342,4 +342,7 @@
   <data name="ClientSecret.Text" xml:space="preserve">
     <value>Client Secret</value>
   </data>
+  <data name="TestingMode.Text" xml:space="preserve">
+    <value>Testing Mode</value>
+  </data>
 </root>
