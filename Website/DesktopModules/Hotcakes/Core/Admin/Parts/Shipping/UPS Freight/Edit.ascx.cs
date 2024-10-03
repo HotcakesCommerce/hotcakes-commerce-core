@@ -169,6 +169,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
 
             SkipDimensionsCheckBox.Checked = HccApp.CurrentStore.Settings.ShippingUpsFreightSkipDimensions;
             chkDiagnostics.Checked = HccApp.CurrentStore.Settings.ShippingUPSFreightDiagnostics;
+            chkTesting.Checked = HccApp.CurrentStore.Settings.ShippingUPSTestingMode;
 
             // Method Settings
             var Settings = new UPSFreightServiceSettings();
@@ -224,6 +225,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
             HccApp.CurrentStore.Settings.ShippingUpsFreightDefaultPackaging = int.Parse(DefaultPackagingField.SelectedValue);
             HccApp.CurrentStore.Settings.ShippingUpsFreightSkipDimensions = SkipDimensionsCheckBox.Checked;
             HccApp.CurrentStore.Settings.ShippingUPSFreightDiagnostics = chkDiagnostics.Checked;
+            HccApp.CurrentStore.Settings.ShippingUPSTestingMode = chkTesting.Checked;
 
             HccApp.CurrentStore.Settings.ShippingUpsFreightBillingOption = Convert.ToInt32(PayerShipmentBillingOptionDropDownList.SelectedValue);
             HccApp.CurrentStore.Settings.ShippingUpsFreightHandleOneUnitType =PayerShipmentBillingOptionDropDownList.SelectedValue;
