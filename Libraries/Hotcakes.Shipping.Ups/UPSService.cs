@@ -42,7 +42,9 @@ namespace Hotcakes.Shipping.Ups
     [Serializable]
     public class UPSService : IShippingService
     {
-        public const string UPSLIVESERVER = @"https://wwwcie.ups.com";
+        public const string BaseUrlTesting = "https://wwwcie.ups.com";
+        public const string BaseUrlProduction = "https://onlinetools.ups.com";
+        public readonly string UPSLIVESERVER;
         private readonly List<IServiceCode> _Codes = new List<IServiceCode>();
 
         private readonly ILogger _Logger = new SupressLogger();
@@ -56,6 +58,7 @@ namespace Hotcakes.Shipping.Ups
             _Logger = logger;
             GlobalSettings = globalSettings;
             Settings = new UPSServiceSettings();
+            UPSLIVESERVER = globalSettings.TestingMode ? BaseUrlTesting : BaseUrlProduction;
             _tokenService = new TokenService(globalSettings, UPSLIVESERVER);
             InitializeCodes();
         }
@@ -204,7 +207,7 @@ namespace Hotcakes.Shipping.Ups
 
                 try
                 {
-                    var ratesRequest = BuildUPSRateRequestForShipment(shipment, settings, true);
+                    var ratesRequest = BuildUPSRateRequestForShipment(shipment, settings);
                     var jsonRequest = JsonConvert.SerializeObject(ratesRequest);
 
                     #region GetRates
@@ -220,7 +223,13 @@ namespace Hotcakes.Shipping.Ups
                         response.EnsureSuccessStatusCode();
                         if (!response.IsSuccessStatusCode)
                         {
-                            //TODO: VALIDATE ERROR MESSAGES
+                            var errorContent = response.Content.ReadAsStringAsync().Result;
+                            var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
+                            foreach (var error in errorResponse.Response.Errors)
+                            {
+                                _Logger.LogMessage($"Error Code: {error.Code}, Message: {error.Message}");
+                            }
+
                             return rates;
                         }
                         var stringContent = response.Content.ReadAsStringAsync().Result;
@@ -333,7 +342,7 @@ namespace Hotcakes.Shipping.Ups
         }
 
       
-        private RatesRequest BuildUPSRateRequestForShipment(IShipment shipment, UpsSettings settings, bool rate)
+        private RatesRequest BuildUPSRateRequestForShipment(IShipment shipment, UpsSettings settings)
         {
             var result = new RatesRequest();
             var request = new RateRequest();
