@@ -213,9 +213,8 @@ namespace Hotcakes.Shipping.Ups
                     #region GetRates
                     using (var client = new HttpClient())
                     {
-                        var request = new HttpRequestMessage(HttpMethod.Post, $"{UPSLIVESERVER}/api/rating/v2403/Shop?additionalinfo=");
-                        request.Headers.Add("transID", "");
-                        request.Headers.Add("transactionSrc", "testing");
+                        var request = new HttpRequestMessage(HttpMethod.Post, $"{UPSLIVESERVER}/api/rating/v2403/Shop");
+                        request.Headers.Add("transactionSrc", GlobalSettings.TestingMode ? "testing" : "Hotcakes Commerce");
                         request.Headers.Add("Authorization", $"Bearer {_tokenService.GetAccessTokenAsync()}");
                         var content = new StringContent(jsonRequest, null, "application/json");
                         request.Content = content;
