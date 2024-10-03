@@ -888,6 +888,12 @@ namespace Hotcakes.Commerce.Accounts
             set { SetProp(Constants.STORESETTING_UPSDIAGNOSITCS, value); }
         }
 
+        public bool ShippingUPSTestingMode
+        {
+            get { return GetPropBool(Constants.STORESETTING_UPSTESTINGMODE); }
+            set { SetProp(Constants.STORESETTING_UPSTESTINGMODE, value); }
+        }
+
         public bool ShippingUpsForceResidential
         {
             get { return GetPropBool(Constants.STORESETTING_UPSFORCERESIDENTIAL); }
