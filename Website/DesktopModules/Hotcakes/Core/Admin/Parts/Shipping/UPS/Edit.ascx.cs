@@ -126,6 +126,8 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS
 
             SkipDimensionsCheckBox.Checked = HccApp.CurrentStore.Settings.ShippingUpsSkipDimensions;
             chkDiagnostics.Checked = HccApp.CurrentStore.Settings.ShippingUPSDiagnostics;
+            chkTesting.Checked = HccApp.CurrentStore.Settings.ShippingUPSTestingMode;
+
 
             // Method Settings
             var Settings = new UPSServiceSettings();
@@ -200,6 +202,7 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPS
             HccApp.CurrentStore.Settings.ShippingUpsDefaultPackaging = int.Parse(DefaultPackagingField.SelectedValue);
             HccApp.CurrentStore.Settings.ShippingUpsSkipDimensions = SkipDimensionsCheckBox.Checked;
             HccApp.CurrentStore.Settings.ShippingUPSDiagnostics = chkDiagnostics.Checked;
+            HccApp.CurrentStore.Settings.ShippingUPSTestingMode = chkTesting.Checked;
 
             // Method Settings
             var Settings = new UPSServiceSettings();
