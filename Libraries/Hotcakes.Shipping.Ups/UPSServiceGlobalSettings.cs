@@ -47,6 +47,7 @@ namespace Hotcakes.Shipping.Ups
         public string ClientId { get; set; }
         public string ClientSecret { get; set; }
 
+        public bool TestingMode { get; set; }
         public bool DiagnosticsMode { get; set; }
         public bool ForceResidential { get; set; }
         public bool IgnoreDimensions { get; set; }
