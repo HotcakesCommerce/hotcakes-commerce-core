@@ -73,6 +73,7 @@ namespace Hotcakes.Commerce.Shipping
                 ClientSecret = currentStore.Settings.ShippingUpsClientSecret,
                 DefaultPackaging = (PackagingType) currentStore.Settings.ShippingUpsDefaultPackaging,
                 DiagnosticsMode = currentStore.Settings.ShippingUPSDiagnostics,
+                TestingMode = currentStore.Settings.ShippingUPSTestingMode,
                 ForceResidential = currentStore.Settings.ShippingUpsForceResidential,
                 IgnoreDimensions = currentStore.Settings.ShippingUpsSkipDimensions,
                 PickUpType = (PickupType) currentStore.Settings.ShippingUpsPickupType
@@ -88,6 +89,7 @@ namespace Hotcakes.Commerce.Shipping
                 ClientSecret = currentStore.Settings.ShippingUpsClientSecret,
                 DefaultPackaging = (Hotcakes.Shipping.UpsFreight.PackingTypes)currentStore.Settings.ShippingUpsFreightDefaultPackaging,
                 DiagnosticsMode = currentStore.Settings.ShippingUPSFreightDiagnostics,
+                TestingMode = currentStore.Settings.ShippingUPSTestingMode,
                 ForceResidential = currentStore.Settings.ShippingUpsFreightForceResidential,
                 IgnoreDimensions = currentStore.Settings.ShippingUpsFreightSkipDimensions,
                 BillingOption = (Hotcakes.Shipping.UpsFreight.BillingOption)currentStore.Settings.ShippingUpsFreightBillingOption,
