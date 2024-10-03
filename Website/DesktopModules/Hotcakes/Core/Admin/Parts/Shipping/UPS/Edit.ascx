@@ -84,6 +84,10 @@
         <asp:Label runat="server" resourcekey="DiagnosticsMode" CssClass="hcLabel"/>
         <asp:CheckBox ID="chkDiagnostics" runat="server" ValidationGroup="ShippingMethod" />
     </div>
+     <div class="hcFormItemHor">
+        <asp:Label runat="server" resourcekey="TestingMode" CssClass="hcLabel"/>
+        <asp:CheckBox ID="chkTesting" runat="server" ValidationGroup="ShippingMethod" />
+     </div>
 </div>
 <ul class="hcActions">
     <li>
