@@ -121,6 +121,7 @@ namespace Hotcakes.Commerce.Common
         public const string STORESETTING_UPSWRITEXML = "ShippingUPSWriteXML";
         public const string STORESETTING_UPSCLIENTID = "Shipping_UPS_ClientId";
         public const string STORESETTING_UPSCLIENTSECRET = "Shipping_UPS_ClientSecret";
+        public const string STORESETTING_UPSTESTINGMODE = "Shipping_UPS_Testing";
 
         public const string STORESETTING_UPSFDEFAULTPACKAGING = "ShippingUpsFreightDefaultPackaging";
         public const string STORESETTING_UPSFDEFAULTPAYMENT = "ShippingUpsFreightDefaultPayment";
