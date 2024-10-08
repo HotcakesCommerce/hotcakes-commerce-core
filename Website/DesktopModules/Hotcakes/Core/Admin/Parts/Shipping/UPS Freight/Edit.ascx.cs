@@ -147,8 +147,9 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
             }
 
             // Global Settings
-            ClientIdField.Text = HccApp.CurrentStore.Settings.ShippingUpsClientId;
-            ClientSecretField.Text = HccApp.CurrentStore.Settings.ShippingUpsClientSecret;
+            UserNameField.Text = HccApp.CurrentStore.Settings.ShippingUpsUsername;
+            PasswordField.Text = HccApp.CurrentStore.Settings.ShippingUpsPassword;
+            AccessKeyField.Text = HccApp.CurrentStore.Settings.ShippingUpsLicense;
             AccountNumberField.Text = HccApp.CurrentStore.Settings.ShippingUpsAccountNumber;
             ResidentialAddressCheckBox.Checked = HccApp.CurrentStore.Settings.ShippingUpsFreightForceResidential;
             PayerShipmentBillingOptionDropDownList.SelectedValue = HccApp.CurrentStore.Settings.ShippingUpsFreightBillingOption.ToString();
@@ -169,7 +170,6 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
 
             SkipDimensionsCheckBox.Checked = HccApp.CurrentStore.Settings.ShippingUpsFreightSkipDimensions;
             chkDiagnostics.Checked = HccApp.CurrentStore.Settings.ShippingUPSFreightDiagnostics;
-            chkTesting.Checked = HccApp.CurrentStore.Settings.ShippingUPSTestingMode;
 
             // Method Settings
             var Settings = new UPSFreightServiceSettings();
@@ -216,8 +216,9 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
             }
 
             // Global Settings
-            HccApp.CurrentStore.Settings.ShippingUpsClientId = ClientIdField.Text.Trim();
-            HccApp.CurrentStore.Settings.ShippingUpsClientSecret = ClientSecretField.Text.Trim();
+            HccApp.CurrentStore.Settings.ShippingUpsUsername = UserNameField.Text.Trim();
+            HccApp.CurrentStore.Settings.ShippingUpsPassword = PasswordField.Text.Trim();
+            HccApp.CurrentStore.Settings.ShippingUpsLicense = AccessKeyField.Text.Trim();
             HccApp.CurrentStore.Settings.ShippingUpsAccountNumber = AccountNumberField.Text.Trim();
             HccApp.CurrentStore.Settings.ShippingUpsFreightForceResidential = ResidentialAddressCheckBox.Checked;
           
@@ -225,7 +226,6 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
             HccApp.CurrentStore.Settings.ShippingUpsFreightDefaultPackaging = int.Parse(DefaultPackagingField.SelectedValue);
             HccApp.CurrentStore.Settings.ShippingUpsFreightSkipDimensions = SkipDimensionsCheckBox.Checked;
             HccApp.CurrentStore.Settings.ShippingUPSFreightDiagnostics = chkDiagnostics.Checked;
-            HccApp.CurrentStore.Settings.ShippingUPSTestingMode = chkTesting.Checked;
 
             HccApp.CurrentStore.Settings.ShippingUpsFreightBillingOption = Convert.ToInt32(PayerShipmentBillingOptionDropDownList.SelectedValue);
             HccApp.CurrentStore.Settings.ShippingUpsFreightHandleOneUnitType =PayerShipmentBillingOptionDropDownList.SelectedValue;
