@@ -84,12 +84,12 @@ namespace Hotcakes.Commerce.Shipping
             // Load UPS Freight
             var upsFreightGlobal = new UPSFreightServiceGlobalSettings
             {
+                LicenseNumber = currentStore.Settings.ShippingUpsLicense,
+                Username = currentStore.Settings.ShippingUpsUsername,
+                Password = currentStore.Settings.ShippingUpsPassword,
                 AccountNumber = currentStore.Settings.ShippingUpsAccountNumber,
-                ClientId = currentStore.Settings.ShippingUpsClientId,
-                ClientSecret = currentStore.Settings.ShippingUpsClientSecret,
                 DefaultPackaging = (Hotcakes.Shipping.UpsFreight.PackingTypes)currentStore.Settings.ShippingUpsFreightDefaultPackaging,
                 DiagnosticsMode = currentStore.Settings.ShippingUPSFreightDiagnostics,
-                TestingMode = currentStore.Settings.ShippingUPSTestingMode,
                 ForceResidential = currentStore.Settings.ShippingUpsFreightForceResidential,
                 IgnoreDimensions = currentStore.Settings.ShippingUpsFreightSkipDimensions,
                 BillingOption = (Hotcakes.Shipping.UpsFreight.BillingOption)currentStore.Settings.ShippingUpsFreightBillingOption,
