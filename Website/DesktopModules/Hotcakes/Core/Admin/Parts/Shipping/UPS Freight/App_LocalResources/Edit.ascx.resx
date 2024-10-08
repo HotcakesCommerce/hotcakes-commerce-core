@@ -336,13 +336,4 @@
   <data name="Username.Text" xml:space="preserve">
     <value>Username</value>
   </data>
-  <data name="ClientId.Text" xml:space="preserve">
-    <value>Client ID</value>
-  </data>
-  <data name="ClientSecret.Text" xml:space="preserve">
-    <value>Client Secret</value>
-  </data>
-  <data name="TestingMode.Text" xml:space="preserve">
-    <value>Testing Mode</value>
-  </data>
 </root>
