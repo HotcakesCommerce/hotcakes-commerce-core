@@ -92,17 +92,56 @@ namespace Hotcakes.Shipping.Ups
             set { _Messages = value; }
         }
 
+
+        /// <summary>
+        /// Retrieves a list of all available UPS service codes and their display names.
+        /// </summary>
+        /// <returns>
+        /// A list of <see cref="IServiceCode"/> objects representing all UPS service codes 
+        /// available in the system.
+        /// </returns>
+        /// <remarks>
+        /// This method returns the complete list of service codes, which can be used 
+        /// for displaying available shipping options to users or for processing shipments 
+        /// with specific service types. 
+        /// </remarks>
         public List<IServiceCode> ListAllServiceCodes()
         {
             return _Codes;
         }
 
+
+        /// <summary>
+        /// Rates a shipment by retrieving shipping rates from UPS based on the provided shipment details.
+        /// </summary>
+        /// <param name="shipment">An object representing the shipment for which the rates are to be calculated.</param>
+        /// <returns>
+        /// A list of <see cref="IShippingRate"/> objects containing the calculated shipping rates for the specified shipment.
+        /// </returns>
+        /// <remarks>
+        /// This method clears any existing messages from the message list before calling the method 
+        /// to retrieve UPS rates for the shipment. 
+        /// It is assumed that the shipment object contains all necessary information required for rate calculation.
+        /// </remarks>
         public List<IShippingRate> RateShipment(IShipment shipment)
         {
             _Messages.Clear();
             return GetUPSRatesForShipment(shipment);
         }
 
+
+        /// <summary>
+        /// Constructs a tracking URL for a given UPS tracking code.
+        /// </summary>
+        /// <param name="trackingCode">A string representing the UPS tracking number.</param>
+        /// <returns>
+        /// A string containing the URL to track the shipment if the <paramref name="trackingCode"/> is not null or empty;
+        /// otherwise, returns a default UPS homepage URL.
+        /// </returns>
+        /// <remarks>
+        /// This method generates a URL that can be used to track a shipment on the UPS website. 
+        /// If the provided tracking code is null or empty, it returns the UPS homepage instead.
+        /// </remarks>
         public string GetTrackingUrl(string trackingCode)
         {
             if (!string.IsNullOrEmpty(trackingCode))
@@ -112,6 +151,15 @@ namespace Hotcakes.Shipping.Ups
             return "http://wwwapps.ups.com/";
         }
 
+
+        /// <summary>
+        /// Initializes a collection of UPS service codes with their corresponding display names.
+        /// </summary>
+        /// <remarks>
+        /// This method populates the internal `_Codes` collection with a set of predefined UPS service codes. 
+        /// Each service code is represented by a <see cref="ServiceCode"/> object that includes a unique code 
+        /// and a display name describing the type of UPS shipping service.
+        /// </remarks>
         private void InitializeCodes()
         {
             _Codes.Add(new ServiceCode {Code = "1", DisplayName = "UPS Next Day Air"});
@@ -187,8 +235,24 @@ namespace Hotcakes.Shipping.Ups
             return rates;
         }
 
-        // Gets all available rates regardless of settings
-
+        /// <summary>
+        /// Retrieves all shipping rates for a given shipment using the UPS API.
+        /// </summary>
+        /// <param name="shipment">The <see cref="IShipment"/> object containing the shipment details for which to obtain rates.</param>
+        /// <returns>
+        /// A list of <see cref="IShippingRate"/> objects representing the available shipping rates retrieved from the UPS API.
+        /// </returns>
+        /// <remarks>
+        /// This method sends an HTTP POST request to the UPS API to get the available shipping rates
+        /// for a given shipment. If valid rates are found, they are added to the list of rates.
+        /// If there are errors in the response or an exception occurs, errors are logged, and the method returns an empty list.
+        /// 
+        /// The method handles authentication with the UPS API using an access token obtained through the token service (_tokenService).
+        /// It also includes error handling, logging messages and exceptions when necessary.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">
+        /// Thrown if the request to the UPS API is unsuccessful or the response status is not successful.
+        /// </exception>
         private List<IShippingRate> GetAllShippingRatesForShipment(IShipment shipment)
         {
             var rates = new List<IShippingRate>();
@@ -320,6 +384,19 @@ namespace Hotcakes.Shipping.Ups
             return rates;
         }
 
+
+        /// <summary>
+        /// Decodes a given UPS service code into its corresponding display name.
+        /// </summary>
+        /// <param name="sCode">The UPS service code to be decoded, as a string.</param>
+        /// <returns>
+        /// The display name of the UPS service if the code is found; otherwise, it returns "UPS".
+        /// </returns>
+        /// <remarks>
+        /// The method checks if the service code starts with a "0", and if so, removes the leading zero before searching. 
+        /// It then iterates through the predefined list of service codes stored in the `_Codes` collection. 
+        /// If a match is found, it returns the corresponding display name; otherwise, "UPS" is returned by default.
+        /// </remarks>
         private string DecodeUpsServiceCode(string sCode)
         {
             var temp = sCode;
@@ -340,7 +417,18 @@ namespace Hotcakes.Shipping.Ups
             return "UPS";
         }
 
-      
+        /// <summary>
+        /// Builds a UPS rate request based on the provided shipment details and UPS settings.
+        /// </summary>
+        /// <param name="shipment">An object implementing the <see cref="IShipment"/> interface that contains the details of the shipment, such as source and destination addresses, packages, and other shipment data.</param>
+        /// <param name="settings">An instance of <see cref="UpsSettings"/> that contains the configuration and credentials necessary to make the UPS rate request, such as account number and pickup type.</param>
+        /// <returns>
+        /// A <see cref="RatesRequest"/> object containing the complete UPS rate request, ready to be sent to the UPS API.
+        /// </returns>
+        /// <remarks>
+        /// This method builds the entire request structure required for calculating shipping rates from UPS, including details like the transaction reference, pickup type, shipper information, and shipment details (ship-to, ship-from).
+        /// It also optimizes packages for weight and can ignore package dimensions based on global settings. 
+        /// </remarks>
         private RatesRequest BuildUPSRateRequestForShipment(IShipment shipment, UpsSettings settings)
         {
             var result = new RatesRequest();
