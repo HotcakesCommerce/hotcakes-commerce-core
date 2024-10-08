@@ -924,6 +924,24 @@ namespace Hotcakes.Commerce.Accounts
             set { SetProp(Constants.STORESETTING_UPSCLIENTSECRET, value); }
         }
 
+        public string ShippingUpsLicense
+        {
+            get { return GetProp(Constants.STORESETTING_UPSLICENSE); }
+            set { SetProp(Constants.STORESETTING_UPSLICENSE, value); }
+        }
+
+        public string ShippingUpsUsername
+        {
+            get { return GetProp(Constants.STORESETTING_UPSUSERNAME); }
+            set { SetProp(Constants.STORESETTING_UPSUSERNAME, value); }
+        }
+
+        public string ShippingUpsPassword
+        {
+            get { return GetProp(Constants.STORESETTING_UPSPASSWORD); }
+            set { SetProp(Constants.STORESETTING_UPSPASSWORD, value); }
+        }
+
         public bool ShippingUPSWriteXML
         {
             get { return GetPropBool(Constants.STORESETTING_UPSWRITEXML); }
