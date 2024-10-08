@@ -132,31 +132,49 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
         protected global::System.Web.UI.WebControls.RequiredFieldValidator AccountNumberRequired;
 
         /// <summary>
-        /// ClientIdField control.
+        /// AccessKeyField control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ClientIdField;
+        protected global::System.Web.UI.WebControls.TextBox AccessKeyField;
 
         /// <summary>
-        /// ClientIdRequired control.
+        /// RequiredFieldValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator ClientIdRequired;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
-        /// ClientSecretField control.
+        /// UserNameField control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ClientSecretField;
+        protected global::System.Web.UI.WebControls.TextBox UserNameField;
+
+        /// <summary>
+        /// UsernameRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator UsernameRequired;
+
+        /// <summary>
+        /// PasswordField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PasswordField;
 
         /// <summary>
         /// PasswordRequired control.
@@ -220,15 +238,6 @@ namespace Hotcakes.Modules.Core.Admin.Parts.Shipping.UPSFreight
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkDiagnostics;
-
-        /// <summary>
-        /// chkTesting control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkTesting;
 
         /// <summary>
         /// btnSave control.
