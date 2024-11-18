@@ -4,7 +4,7 @@
 	.muy-importante { color:red;font-weight:bold; }
 </style>
 <div class="uv-install-wrapper">
-	<h1>Hotcakes Commerce: Version 03.08.01</h1>
+	<h1>Hotcakes Commerce: Version 03.08.02</h1>
 
 	<p class="muy-importante">The release notes continue after the Sponsors and Contributors below.</p>
 	
@@ -53,7 +53,9 @@
 	
 	<h3><strong>Maintenance Updates</strong></h3>
 	<ul>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/479" target="_blank">Issue 479</a> - SI: PayPal Payments Pro currency format bug resolved. Thanks <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a></li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/484" target="_blank">Issue 484</a> - SI: Resolves `INVALID_PARAMETER_SYNTAX` Error in PayPal Pro. Thanks <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a>!</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/500" target="_blank">Issue 500</a> - Default views used incorrect value for the total search results. Thanks <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a>!</li>
+		<li>(no issue) - Resolved build issue by adding a missing MVC reference. Thanks, <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a> & <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a>!</li>
 		<!--
 		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/" target="_blank">Issue </a> - . Thanks <a href="https://github.com/" target="_blank">@</a></li>
 		<li>(no issue) - .</li>
