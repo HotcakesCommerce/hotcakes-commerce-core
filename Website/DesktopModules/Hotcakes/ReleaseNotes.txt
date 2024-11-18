@@ -53,7 +53,9 @@
 	
 	<h3><strong>Maintenance Updates</strong></h3>
 	<ul>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/484" target="_blank">Issue 484</a> - SI: Resolves `INVALID_PARAMETER_SYNTAX` Error in PayPal Pro. Thanks <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a></li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/484" target="_blank">Issue 484</a> - SI: Resolves `INVALID_PARAMETER_SYNTAX` Error in PayPal Pro. Thanks <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a>!</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/500" target="_blank">Issue 500</a> - Default views used incorrect value for the total search results. Thanks <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a>!</li>
+		<li>(no issue) - Resolved build issue by adding a missing MVC reference. Thanks, <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a> & <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a>!</li>
 		<!--
 		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/" target="_blank">Issue </a> - . Thanks <a href="https://github.com/" target="_blank">@</a></li>
 		<li>(no issue) - .</li>
