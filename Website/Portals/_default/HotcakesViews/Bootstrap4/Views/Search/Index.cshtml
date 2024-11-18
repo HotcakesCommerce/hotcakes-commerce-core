@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-12 text-right mb-3">
                         <h6>
-                            @Model.Products.Count 
+                            @Model.PagerData.TotalItems
                             @if (Model.Products.Count > 1){
                                 @Localization.GetString("ProductsFound")
                             }else{
