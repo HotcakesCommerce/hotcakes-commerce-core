@@ -30,28 +30,20 @@ namespace Hotcakes.Shipping.Ups
     [Serializable]
     public class UpsSettings
     {
-        private string _license = string.Empty;
-        private string _password = string.Empty;
         private string _ServerUrl = string.Empty;
+        private string _clientId = string.Empty;
+        private string _clientSecret = string.Empty;
 
-        private string _userID = string.Empty;
-
-        public string UserID
+        public string ClientId
         {
-            get { return _userID; }
-            set { _userID = value; }
+            get { return _clientId; }
+            set { _clientId = value; }
         }
 
-        public string Password
+        public string ClientSecret
         {
-            get { return _password; }
-            set { _password = value; }
-        }
-
-        public string License
-        {
-            get { return _license; }
-            set { _license = value; }
+            get { return _clientSecret; }
+            set { _clientSecret = value; }
         }
 
         public string ServerUrl

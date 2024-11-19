@@ -69,11 +69,11 @@ namespace Hotcakes.Commerce.Shipping
             var upsglobal = new UPSServiceGlobalSettings
             {
                 AccountNumber = currentStore.Settings.ShippingUpsAccountNumber,
-                LicenseNumber = currentStore.Settings.ShippingUpsLicense,
-                Username = currentStore.Settings.ShippingUpsUsername,
-                Password = currentStore.Settings.ShippingUpsPassword,
+                ClientId = currentStore.Settings.ShippingUpsClientId,
+                ClientSecret = currentStore.Settings.ShippingUpsClientSecret,
                 DefaultPackaging = (PackagingType) currentStore.Settings.ShippingUpsDefaultPackaging,
                 DiagnosticsMode = currentStore.Settings.ShippingUPSDiagnostics,
+                TestingMode = currentStore.Settings.ShippingUPSTestingMode,
                 ForceResidential = currentStore.Settings.ShippingUpsForceResidential,
                 IgnoreDimensions = currentStore.Settings.ShippingUpsSkipDimensions,
                 PickUpType = (PickupType) currentStore.Settings.ShippingUpsPickupType
@@ -84,10 +84,10 @@ namespace Hotcakes.Commerce.Shipping
             // Load UPS Freight
             var upsFreightGlobal = new UPSFreightServiceGlobalSettings
             {
-                AccountNumber = currentStore.Settings.ShippingUpsAccountNumber,
                 LicenseNumber = currentStore.Settings.ShippingUpsLicense,
                 Username = currentStore.Settings.ShippingUpsUsername,
                 Password = currentStore.Settings.ShippingUpsPassword,
+                AccountNumber = currentStore.Settings.ShippingUpsAccountNumber,
                 DefaultPackaging = (Hotcakes.Shipping.UpsFreight.PackingTypes)currentStore.Settings.ShippingUpsFreightDefaultPackaging,
                 DiagnosticsMode = currentStore.Settings.ShippingUPSFreightDiagnostics,
                 ForceResidential = currentStore.Settings.ShippingUpsFreightForceResidential,
