@@ -71,6 +71,7 @@ namespace Hotcakes.Modules.Core.Models
             RequirePhoneNumber = false;
             PaymentIntentClientSecret = string.Empty;
             PaymentIntentId = string.Empty;
+            PaymentMethodId = string.Empty;
             StripePublicKey = string.Empty;
         }
 
@@ -239,6 +240,11 @@ namespace Hotcakes.Modules.Core.Models
         ///    The PaymentIntentId
         /// </summary>
         public string PaymentIntentId { get; set; }
+
+        /// <summary>
+        ///    The PaymentMethodId
+        /// </summary>
+        public string PaymentMethodId { get; set; }
 
         /// <summary>
         ///    The Stripe Payment gateway public Key
