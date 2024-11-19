@@ -128,13 +128,14 @@ namespace Hotcakes.Commerce.Catalog
 
         public bool IsSkuExist(string sku, Guid? excludeProductId = null)
         {
+            var storeId = Context.CurrentStore.Id;
             sku = sku.ToLower();
             using (var s = CreateReadStrategy())
             {
                 var q = excludeProductId.HasValue
                     ? s.GetQuery().Where(i => i.ProductId != excludeProductId)
                     : s.GetQuery();
-                return q.Any(i => i.Sku.ToLower() == sku);
+                return q.Where(y => y.StoreId == storeId).Any(i => i.Sku.ToLower() == sku);
             }
         }
 
