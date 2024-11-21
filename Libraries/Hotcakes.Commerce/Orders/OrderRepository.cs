@@ -782,6 +782,28 @@ namespace Hotcakes.Commerce.Orders
 				var items = GetPagedItems(query, pageNumber, pageSize);
 				return ListPoco(items);
 			}
+		} 
+        
+        public List<Order> FindPaymentFailure(DateTime startDate, DateTime endDate, int pageNumber, int pageSize,
+            out int totalCount)
+		{
+			using (var strategy = CreateReadStrategy())
+			{
+				var query = strategy.GetQuery()
+                        .AsNoTracking()
+                        .Where(o => o.StoreId == Context.CurrentStore.Id)
+                        .Where(o => o.hcc_LineItem.Count() > 0)
+                        .Where(o => o.TimeOfOrder > startDate)
+                        .Where(o => o.TimeOfOrder < endDate)
+                        .Where(o => o.hcc_OrderTransactions.Any(t => !t.Success))
+                        .Where(o => o.PaymentStatus == (int)OrderPaymentStatus.Unknown || o.PaymentStatus == (int)OrderPaymentStatus.Unpaid)
+                        .OrderByDescending(o => o.TimeOfOrder);
+
+				totalCount = query.Count();
+
+				var items = GetPagedItems(query, pageNumber, pageSize);
+				return ListPoco(items);
+			}
 		}
 
 		public List<string> FindAbandonedCartsUsers(DateTime startDate, DateTime endDate)
