@@ -204,4 +204,7 @@
   <data name="chkRequirePhoneNumber.Text" xml:space="preserve">
     <value>Require phone number during checkout</value>
   </data>
+  <data name="chkEnableFailedPaymentNotification.Text" xml:space="preserve">
+    <value>Enable Failed Payment Notification</value>
+  </data>
 </root>
