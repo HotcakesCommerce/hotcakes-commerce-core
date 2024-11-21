@@ -88,6 +88,12 @@ namespace Hotcakes.Commerce.Accounts
             set { SetProp(Constants.STORESETTING_SENDABANDONEDINTERVAL, value); }
         }
 
+        public bool EnableFailedPaymentNotification
+        {
+            get { return GetPropBool(Constants.ENABLED_FAILED_PAYMENT_NOTIFICATION); }
+            set { SetProp(Constants.ENABLED_FAILED_PAYMENT_NOTIFICATION, value); }
+        }
+
         public DateTime AllowApiToClearUntil
         {
             get
