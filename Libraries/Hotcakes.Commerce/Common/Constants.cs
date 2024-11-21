@@ -149,6 +149,8 @@ namespace Hotcakes.Commerce.Common
         public const string STORESETTING_STORECLOSEDDESC = "StoreClosedDescription";
         public const string STORESETTING_AESINITVECTOR = "AESInitVector";
         public const string STORESETTING_AESKEY = "AESKey";
+
+        public const string ENABLED_FAILED_PAYMENT_NOTIFICATION = "EnableFailedPaymentNotification";
         #endregion
 
         #region Views
