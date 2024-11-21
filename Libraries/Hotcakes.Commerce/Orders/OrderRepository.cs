@@ -756,7 +756,7 @@ namespace Hotcakes.Commerce.Orders
 			{
 				return q.Where(o => o.StoreId == Context.CurrentStore.Id)
 						.Where(o => o.IsPlaced == 0)
-                    .Where(o => o.hcc_LineItem.Any())
+                        .Where(o => o.hcc_LineItem.Any())
 						.Where(o => !string.IsNullOrEmpty(o.UserId))
 						.Where(o => !o.IsAbandonedEmailSent)
 						.Where(o => o.TimeOfOrder < endTouchDate);
@@ -772,7 +772,7 @@ namespace Hotcakes.Commerce.Orders
                         .AsNoTracking()
                         .Where(o => o.StoreId == Context.CurrentStore.Id)
 						.Where(o => o.IsPlaced == 0)
-                    .Where(o => o.hcc_LineItem.Any())
+                        .Where(o => o.hcc_LineItem.Any())
 						.Where(o => o.TimeOfOrder > startDate)
 						.Where(o => o.TimeOfOrder < endDate)
 						.OrderByDescending(o => o.TimeOfOrder);
@@ -782,8 +782,23 @@ namespace Hotcakes.Commerce.Orders
 				var items = GetPagedItems(query, pageNumber, pageSize);
 				return ListPoco(items);
 			}
-		} 
-        
+		}
+
+        public List<Order> FindPaymentFailure()
+        {
+            var endTouchDate = DateTime.UtcNow;
+
+            return FindListPoco(q =>
+            {
+                return q.Where(o => o.StoreId == Context.CurrentStore.Id)
+                        .Where(o => o.hcc_LineItem.Any())
+                        .Where(o => !string.IsNullOrEmpty(o.UserId))
+                        .Where(o => o.TimeOfOrder < endTouchDate)
+                        .Where(o => o.hcc_OrderTransactions.Any(t => !t.Success))
+                        .Where(o => o.PaymentStatus == (int)OrderPaymentStatus.Unknown || o.PaymentStatus == (int)OrderPaymentStatus.Unpaid);
+            });
+        }
+
         public List<Order> FindPaymentFailure(DateTime startDate, DateTime endDate, int pageNumber, int pageSize,
             out int totalCount)
 		{
