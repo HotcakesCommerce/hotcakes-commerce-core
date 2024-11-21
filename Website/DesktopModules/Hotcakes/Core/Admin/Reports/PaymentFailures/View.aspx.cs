@@ -74,28 +74,28 @@ namespace Hotcakes.Modules.Core.Admin.Reports.PaymentFailures
             if (showAgregatedReport)
             {
                 var reportingService = Factory.CreateService<ReportingService>();
-                var abandonedProducts = reportingService.GetPaymentFailure(startDate, endDate, pageNumber, pageSize,
+                var resultProducts = reportingService.GetPaymentFailure(startDate, endDate, pageNumber, pageSize,
                     out totalCount);
 
-                var isDataPresent = abandonedProducts != null && abandonedProducts.Count > 0;
+                var isDataPresent = resultProducts != null && resultProducts.Count > 0;
                 divNavBottom.Visible = isDataPresent;
                 lblNoCartsMessage.Visible = !isDataPresent;
                 pnlReportsData.Visible = isDataPresent;
 
-                rpProducts.DataSource = abandonedProducts;
+                rpProducts.DataSource = resultProducts;
                 rpProducts.DataBind();
             }
             else
             {
-                var abandonedCarts = HccApp.OrderServices.Orders.FindAbandonedCarts(startDate, endDate, pageNumber,
+                var result = HccApp.OrderServices.Orders.FindPaymentFailure(startDate, endDate, pageNumber,
                     pageSize, out totalCount);
 
-                var isDataPresent = abandonedCarts != null && abandonedCarts.Count > 0;
+                var isDataPresent = result != null && result.Count > 0;
                 divNavBottom.Visible = isDataPresent;
                 lblNoCartsMessage.Visible = !isDataPresent;
                 pnlReportsData.Visible = isDataPresent;
 
-                rpCarts.DataSource = abandonedCarts;
+                rpCarts.DataSource = result;
                 rpCarts.DataBind();
             }
 
