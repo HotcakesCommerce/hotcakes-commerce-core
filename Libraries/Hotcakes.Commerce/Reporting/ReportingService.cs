@@ -758,11 +758,11 @@ namespace Hotcakes.Commerce.Reporting
                 var items = db.GetQuery<hcc_Order>()
                     .AsNoTracking()
                     .Where(o => o.StoreId == Context.CurrentStore.Id)
-                    .Where(o => o.IsPlaced == 0)
                     .Where(o => o.hcc_LineItem.Count() > 0)
                     .Where(o => o.TimeOfOrder > startDate)
                     .Where(o => o.TimeOfOrder < endDate)
                     .Where(o => o.hcc_OrderTransactions.Any(t => !t.Success))
+                    .Where(o => o.PaymentStatus == (int)OrderPaymentStatus.Unknown || o.PaymentStatus == (int)OrderPaymentStatus.Unpaid)
                     .SelectMany(o => o.hcc_LineItem)
                     .GroupBy(l => new {l.ProductId, l.ProductName})
                     .Select(g => new AbandonedProduct
