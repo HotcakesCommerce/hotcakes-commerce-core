@@ -1205,6 +1205,7 @@
     <Compile Include="ContentBlocks\Settings.ascx.designer.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Core\PaymentFailureEmailJob.cs" />
     <Compile Include="Core\AbandonedCartEmailJob.cs" />
     <Compile Include="Core\Admin\AdminWizard.master.cs">
       <DependentUpon>AdminWizard.master</DependentUpon>
