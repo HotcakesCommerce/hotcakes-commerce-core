@@ -75,7 +75,7 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
 
             LocalizeView();
 
-            var store = HccApp.CurrentStore;
+            Commerce.Accounts.Store store = HccApp.CurrentStore;
 
             chkSwatches.Checked = store.Settings.ProductEnableSwatches;
             txtOrderLimitQuantity.Text = store.Settings.MaxItemsPerOrder.ToString();
@@ -93,6 +93,8 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
 
             txtQuickbooksOrderAccount.Text = store.Settings.QuickbooksOrderAccount;
             txtQuickbooksShippingAccount.Text = store.Settings.QuickbooksShippingAccount;
+
+            chkEnableFailedPaymentNotification.Checked = store.Settings.EnableFailedPaymentNotification;
         }
 
         private bool Save()
@@ -130,6 +132,8 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
 
             store.Settings.QuickbooksOrderAccount = txtQuickbooksOrderAccount.Text.Trim();
             store.Settings.QuickbooksShippingAccount = txtQuickbooksShippingAccount.Text.Trim();
+
+            store.Settings.EnableFailedPaymentNotification = chkEnableFailedPaymentNotification.Checked;
 
             return HccApp.UpdateCurrentStore();
         }
