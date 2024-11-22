@@ -57,6 +57,7 @@
                 <HeaderTemplate>
                     <table class="hcGrid">
                         <tr class="hcGridHeader">
+                            <th><%=Localization.GetString("OrderNumber") %></th>
                             <th><%=Localization.GetString("Date") %></th>
                             <th><%=Localization.GetString("User") %></th>
                             <th><%=Localization.GetString("Product") %></th>
@@ -66,6 +67,7 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                     <tr class="hcGridRow">
+                        <td runat="server" id="tdId" />
                         <td runat="server" id="tdDate" />
                         <td>
                             <asp:HyperLink runat="server" ID="hlUser" />
