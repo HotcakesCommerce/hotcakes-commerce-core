@@ -137,6 +137,61 @@ BEGIN
 END
 GO
 
+IF NOT EXISTS (SELECT 1 FROM {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] WHERE [DisplayName] = N'Daily Online Order Payment Failure Report')
+BEGIN
+    INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([StoreId],[LastUpdatedUtc],[DisplayName],[FromEmail],[TemplateType])
+    VALUES (0, GETDATE(), N'Daily Online Order Payment Failure Report', N'[[Store.ContactEmail]]', 511)
+
+    INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplateTranslations] ([HtmlTemplateId],[Culture],[Subject],[Body],[RepeatingSection])
+    VALUES (@@IDENTITY, 'en-US', N'Daily Online Order Payment Failure Report', N'<html>
+    <head>
+    <meta name=vs_targetSchema content="http://schemas.microsoft.com/intellisense/ie5">
+        <style type="text/css"> A { text-decoration: none; }
+        A:link { color: #3366cc; text-decoration: none; }
+        A:visited { color: #663399; text-decoration: none; }
+        A:active { color: #cccccc; text-decoration: none; }
+        A:Hover { text-decoration: underline; }
+        BODY, TD, CENTER, P { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 10px; color: #333333; }
+        .body { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 10px; color: #333333; }
+        .content { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: normal; color: #000000; }
+        .title { font-family: Helvetica, Arial, sans-serif; font-size: 10px; font-weight: normal; color: #000000; }
+        .headline { font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; color: #000000; }
+        .message { font-family: Geneva, Verdana, Arial, Helvetica; font-size: 9px; }
+        </style>
+    </head>
+    <body bgcolor="#ffffff" LINK="#3366cc" VLINK="#3366cc" ALINK="#3366cc" LEFTMARGIN="0" TOPMARGIN="0">
+        <table cellSpacing=1 cellPadding=3 width="100%" border="0" runat="server">
+        <tr>
+            <td colSpan=2>[[Store.Logo]]</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                One or more online orders failed due to payment issues. Please review and address these as soon as possible.
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+              <table border="0" cellspacing="0" cellpadding="5" width="100%">
+                    <tr><td colspan="4"><hr></td></tr>
+                    <tr><td><b>Failed Order Numbers:</b></td></tr>
+                <tr>
+                </tr>
+                    <tr><td colspan="4"><hr></td></tr>
+                   	[[RepeatingSection]]
+                    <tr><td colspan="4"><hr></td></tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                Check the store dashboard for more details and take any necessary action to resolve the issues.
+            </td>
+        </tr>
+    </table>
+    </body>
+    </html>', N'<tr><td align=left valign=top>Order Number: [[Order.OrderNumber]]</td></tr>')
+END
+GO
 
 IF NOT EXISTS (SELECT 1 FROM {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] WHERE [DisplayName] = N'Contact Abandoned Cart Users')
 BEGIN
