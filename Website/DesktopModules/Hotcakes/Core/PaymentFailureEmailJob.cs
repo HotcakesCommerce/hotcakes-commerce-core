@@ -24,6 +24,8 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Scheduling;
 using Hotcakes.Commerce;
@@ -76,33 +78,29 @@ namespace Hotcakes.Modules.Core
             {
                 var orderService = Factory.CreateService<OrderService>(context);
                 var orders = orderService.Orders.FindPaymentFailure();
-                foreach (var order in orders)
-                {
-                    SendPaymentFailureEmail(context, order);
-                }
+                
+                SendPaymentFailureEmail(context, orders);
             }
         }
 
-        private void SendPaymentFailureEmail(HccRequestContext context, Order order)
+        private void SendPaymentFailureEmail(HccRequestContext context, List<Order> orders)
         {
             try
             {
+                var firstOrder = orders.First();
                 var membershipServices = Factory.CreateService<MembershipServices>(context);
-                var customer = membershipServices.Customers.Find(order.UserID);
+                var customer = membershipServices.Customers.Find(firstOrder.UserID);
 
                 if (customer != null && !string.IsNullOrEmpty(customer.Email))
                 {
-                    var hccRequestContext = HccRequestContextUtils.GetContextWithCulture(context, order.UsedCulture);
+                    var hccRequestContext = HccRequestContextUtils.GetContextWithCulture(context, firstOrder.UsedCulture);
                     var contentService = Factory.CreateService<ContentService>(hccRequestContext);
-                    var template = contentService.GetHtmlTemplateOrDefault(HtmlTemplateType.AbandonedCart);
-                    template = template.ReplaceTagsInTemplate(hccRequestContext, order, order.ItemsAsReplaceable());
+                    var template = contentService.GetHtmlTemplateOrDefault(HtmlTemplateType.PaymentFailure);
+                    var ordersCast = orders.Cast<IReplaceable>().ToList();
+                    template = template.ReplaceTagsInTemplate(hccRequestContext, new List<IReplaceable>(), ordersCast);
 
                     var mailMessage = template.ConvertToMailMessage(customer.Email);
                     MailServices.SendMail(mailMessage, hccRequestContext.CurrentStore);
-
-                    order.IsAbandonedEmailSent = true;
-                    var orderService = Factory.CreateService<OrderService>(hccRequestContext);
-                    orderService.Orders.Update(order);
                 }
             }
             catch (Exception ex)
