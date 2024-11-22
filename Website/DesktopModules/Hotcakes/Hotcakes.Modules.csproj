@@ -4180,7 +4180,9 @@
     <Content Include="Core\Admin\Orders\App_LocalResources\EditOrder.aspx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Core\Admin\Orders\App_LocalResources\CreateOrder.aspx.resx" />
+    <Content Include="Core\Admin\Orders\App_LocalResources\CreateOrder.aspx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\Admin\Controls\App_LocalResources\AffiliatePaymentDialog.ascx.resx" />
