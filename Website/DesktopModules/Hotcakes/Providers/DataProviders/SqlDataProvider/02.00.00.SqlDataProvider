@@ -189,7 +189,7 @@ BEGIN
         </tr>
     </table>
     </body>
-    </html>', N'<tr><td align=left valign=top>Order Number: [[Order.OrderNumber]]</td></tr>')
+    </html>', N'<tr><td align=left valign=top>Order Number: [[Order.OrderId]]</td></tr>')
 END
 GO
 
