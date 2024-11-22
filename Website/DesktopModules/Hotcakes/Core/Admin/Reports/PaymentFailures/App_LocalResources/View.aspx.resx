@@ -177,4 +177,7 @@
   <data name="EnableFailedPaymentNotification.Text" xml:space="preserve">
     <value>Enable Failed Payment Notification</value>
   </data>
+  <data name="OrderNumber.Text" xml:space="preserve">
+    <value>Order Number</value>
+  </data>
 </root>
