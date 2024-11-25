@@ -47,6 +47,7 @@ namespace Hotcakes.Commerce.Content
         RecurringPaymentFailed = 506,
         ContactAbandonedCartUsers = 507,
         FreeProductIsOutOfStock = 510,
-        AffiliateReview = 508
+        AffiliateReview = 508,
+        PaymentFailure=511,
     }
 }

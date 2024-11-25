@@ -45,19 +45,20 @@
 		<Item Text="AllOrders" Url="orders/default.aspx?p=1&amp;mode=0"/>
 	</Item>
 	<Item Text="Reports" BaseUrl="reports/" Url="" Permission="C2B41076-A952-49ff-B2E2-DE62EFC2B554">
-    <Item Text="SummaryReport" Url="reports/Summary Report/view.aspx"/>
-    <Item Text="TransactionsByDay" Url="reports/Daily Sales/view.aspx"/>
-    <Item Text="ProductSales" Url="reports/Daily Product Sales/view.aspx"/>
-    <Item Text="OrdersByDate" Url="reports/Sales By Date/view.aspx"/>
-    <Item Text="CreditCardActivity" Url="reports/Daily CC Activity/view.aspx"/>
+		<Item Text="SummaryReport" Url="reports/Summary Report/view.aspx"/>
+		<Item Text="TransactionsByDay" Url="reports/Daily Sales/view.aspx"/>
+		<Item Text="ProductSales" Url="reports/Daily Product Sales/view.aspx"/>
+		<Item Text="OrdersByDate" Url="reports/Sales By Date/view.aspx"/>
+		<Item Text="CreditCardActivity" Url="reports/Daily CC Activity/view.aspx"/>
 		<Item Text="AffiliateReport" Url="people/affiliates.aspx"/>
-    <Item Text="AffiliatePayments" Url="people/affiliatepayments.aspx"/>
-    <Item Text="SalesByCoupon" Url="reports/Sales By Coupon/view.aspx"/>
-    <Item Text="SalesTaxReport" Url="reports/Sales Tax Report/view.aspx"/>
-    <Item Text="TopProducts" Url="reports/Top Products/view.aspx"/>
-    <Item Text="AbandonedCarts" Url="reports/AbandonedCarts/view.aspx"/>
+		<Item Text="AffiliatePayments" Url="people/affiliatepayments.aspx"/>
+		<Item Text="SalesByCoupon" Url="reports/Sales By Coupon/view.aspx"/>
+		<Item Text="SalesTaxReport" Url="reports/Sales Tax Report/view.aspx"/>
+		<Item Text="TopProducts" Url="reports/Top Products/view.aspx"/>
+		<Item Text="AbandonedCarts" Url="reports/AbandonedCarts/view.aspx"/>
+		<Item Text="PaymentFailures" Url="reports/PaymentFailures/view.aspx"/>
 		<Item Text="GiftCards" Url="catalog/GiftCards.aspx"/>
-	</Item>
+	</Item> 
 	<Item Text="Admin" BaseUrl="configuration-admin/" Url="" Permission="0984762F-9E31-4f6f-A087-138A69973AE1">
 		<Item Text="Affiliates" Url="configuration/Affiliates.aspx"/>
 		<Item Text="Analytics" Url="configuration/Analytics.aspx"/>
