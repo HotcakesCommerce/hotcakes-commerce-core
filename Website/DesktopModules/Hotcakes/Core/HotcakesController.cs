@@ -624,9 +624,9 @@ namespace Hotcakes.Modules.Core
                     CatchUpEnabled = false,
                     RetainHistoryNum = 0,
                     TimeLapse = 1,
-                    TimeLapseMeasurement = "h",
-                    RetryTimeLapse = 1,
-                    RetryTimeLapseMeasurement = "h",
+                    TimeLapseMeasurement = "d",
+                    RetryTimeLapse = 30,
+                    RetryTimeLapseMeasurement = "m",
                     ScheduleSource = ScheduleSource.NOT_SET
                 };
                 SchedulingProvider.Instance().AddSchedule(oItem);
