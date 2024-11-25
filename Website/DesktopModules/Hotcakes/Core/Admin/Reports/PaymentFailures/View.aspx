@@ -82,6 +82,7 @@
                             <tr class="hcGridRow">
                                 <td />
                                 <td />
+                                <td />
                                 <td><%#Eval("ProductName") %></td>
                                 <td class="hcRight"><%#Eval("Quantity") %></td>
                                 <td class="hcRight"><%#Eval("LineTotal", "{0:C}") %></td>
