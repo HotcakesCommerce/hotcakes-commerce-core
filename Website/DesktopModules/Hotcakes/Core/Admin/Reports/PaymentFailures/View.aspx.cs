@@ -106,7 +106,7 @@ namespace Hotcakes.Modules.Core.Admin.Reports.PaymentFailures
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                var tdId = e.Item.FindControl("tdId") as HtmlTableCell;
+                var hlOrderNumber = e.Item.FindControl("hlOrderNumber") as HyperLink;
                 var tdDate = e.Item.FindControl("tdDate") as HtmlTableCell;
                 var hlUser = e.Item.FindControl("hlUser") as HyperLink;
                 var lbUser = e.Item.FindControl("lbUser") as Label;
@@ -114,7 +114,11 @@ namespace Hotcakes.Modules.Core.Admin.Reports.PaymentFailures
                 var rpCartItems = e.Item.FindControl("rpCartItems") as Repeater;
 
                 var cart = e.Item.DataItem as Order;
-                tdId.InnerText = cart.Id.ToString();
+                if (hlOrderNumber != null)
+                {
+                    hlOrderNumber.NavigateUrl = $"../../orders/ViewOrder.aspx?id={cart.bvin}";
+                    hlOrderNumber.Text = cart.Id.ToString();
+                }
 
                 var user = HccApp.MembershipServices.Customers.Find(cart.UserID);
 
