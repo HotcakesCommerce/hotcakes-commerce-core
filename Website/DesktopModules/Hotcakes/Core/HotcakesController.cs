@@ -154,7 +154,7 @@ namespace Hotcakes.Modules.Core
                         UpdateStoreSettings();
                         break; 
                     
-                    case "03.08.02":
+                    case "03.09.00":
                         CreatePaymentFailureScheduler();
                         break;
 
