@@ -172,13 +172,14 @@ BEGIN
         <tr>
             <td colspan="2">
               <table border="0" cellspacing="0" cellpadding="5" width="100%">
-                    <tr><td colspan="4"><hr></td></tr>
                     <tr><td><b>Failed Order Numbers:</b></td></tr>
-                <tr>
-                </tr>
-                    <tr><td colspan="4"><hr></td></tr>
-                   	[[RepeatingSection]]
-                    <tr><td colspan="4"><hr></td></tr>
+                    <tr>
+                        <td>
+                            <ul>
+                                [[RepeatingSection]]
+                            </ul>
+                        </td>
+                    </tr>
                 </table>
             </td>
         </tr>
@@ -189,7 +190,7 @@ BEGIN
         </tr>
     </table>
     </body>
-    </html>', N'<tr><td align=left valign=top>Order Number: [[Order.OrderId]]</td></tr>')
+    </html>', N'<li>Order Number: [[Order.OrderId]]</li>')
 END
 GO
 
