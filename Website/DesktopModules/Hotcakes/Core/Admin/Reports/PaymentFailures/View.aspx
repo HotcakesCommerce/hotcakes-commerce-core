@@ -1,14 +1,14 @@
-﻿<%@ Page Language="C#" MasterPageFile="../../AdminNav.master" AutoEventWireup="true" CodeBehind="View.aspx.cs" Inherits="Hotcakes.Modules.Core.Admin.Reports.PaymentFailures.View" %>
+﻿<%@ page language="C#" masterpagefile="../../AdminNav.master" autoeventwireup="true" codebehind="View.aspx.cs" inherits="Hotcakes.Modules.Core.Admin.Reports.PaymentFailures.View" %>
 
-<%@ Register Src="../../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
-<%@ Register Src="../../Controls/DateRangePicker.ascx" TagName="DateRangePicker" TagPrefix="hcc" %>
-<%@ Register Src="../../Controls/Pager.ascx" TagName="Pager" TagPrefix="hcc" %>
-<%@ Register Src="../../Controls/NavMenu.ascx" TagName="NavMenu" TagPrefix="hcc" %>
-<%@ Register Src="../../Controls/ContactAbandonedCartUsers.ascx" TagName="ContactAbandonedCartUsers" TagPrefix="hcc" %>
+<%@ register src="../../Controls/MessageBox.ascx" tagname="MessageBox" tagprefix="hcc" %>
+<%@ register src="../../Controls/DateRangePicker.ascx" tagname="DateRangePicker" tagprefix="hcc" %>
+<%@ register src="../../Controls/Pager.ascx" tagname="Pager" tagprefix="hcc" %>
+<%@ register src="../../Controls/NavMenu.ascx" tagname="NavMenu" tagprefix="hcc" %>
+<%@ register src="../../Controls/ContactAbandonedCartUsers.ascx" tagname="ContactAbandonedCartUsers" tagprefix="hcc" %>
 
 <asp:Content ContentPlaceHolderID="NavContent" runat="server">
 
-    <hcc:NavMenu runat="server" BaseUrl="reports/" ID="NavMenu" />
+    <hcc:navmenu runat="server" baseurl="reports/" id="NavMenu" />
 
     <div runat="server" id="divNavBottom">
         <div class="hcBlock">
@@ -28,11 +28,11 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="Server">
     <div class="hcReport">
         <h1><%=PageTitle %></h1>
-        <hcc:MessageBox ID="ucMessageBox" runat="server" />
+        <hcc:messagebox id="ucMessageBox" runat="server" />
 
         <div class="hcColumnLeft" style="width: 60%">
             <div class="hcForm">
-                <hcc:DateRangePicker ID="ucDateRangePicker" runat="server" RangeType="ThisMonth" />
+                <hcc:daterangepicker id="ucDateRangePicker" runat="server" rangetype="ThisMonth" />
             </div>
         </div>
 
@@ -67,7 +67,9 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                     <tr class="hcGridRow">
-                        <td runat="server" id="tdId" />
+                        <td>
+                            <asp:HyperLink runat="server" ID="hlOrderNumber" />
+                        </td>
                         <td runat="server" id="tdDate" />
                         <td>
                             <asp:HyperLink runat="server" ID="hlUser" />
@@ -122,10 +124,10 @@
                     </table>
                 </FooterTemplate>
             </asp:Repeater>
-            <hcc:Pager ID="ucPager" PageSize="10" PostBackMode="true" runat="server" PageSizeSet="10,25,50,0" />
+            <hcc:pager id="ucPager" pagesize="10" postbackmode="true" runat="server" pagesizeset="10,25,50,0" />
         </asp:Panel>
 
-        <hcc:ContactAbandonedCartUsers runat="server" Id="ucContactAbandonedCartUsers" />
+        <hcc:contactabandonedcartusers runat="server" id="ucContactAbandonedCartUsers" />
     </div>
 </asp:Content>
 
