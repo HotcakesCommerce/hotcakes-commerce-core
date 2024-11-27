@@ -117,94 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BrowserCookies.Text" xml:space="preserve">
-    <value>Browser Cookies</value>
+  <data name="PaymentFailures.Text" xml:space="preserve">
+    <value>Payment Failures Report</value>
   </data>
-  <data name="BrowserSession.Text" xml:space="preserve">
-    <value>Browser Session</value>
+  <data name="Date.Text" xml:space="preserve">
+    <value>Date</value>
   </data>
-  <data name="btnSave.Text" xml:space="preserve">
-    <value>Save Changes</value>
+  <data name="hlCart.Text" xml:space="preserve">
+    <value>View Cart</value>
   </data>
-  <data name="Cart.Text" xml:space="preserve">
-    <value>Shopping Cart</value>
+  <data name="LineTotal.Text" xml:space="preserve">
+    <value>Line&amp;nbsp;Total</value>
   </data>
-  <data name="chkForceSiteTerms.Text" xml:space="preserve">
-    <value>Require terms agreement during checkout</value>
+  <data name="NoPaymentFailuresFound.Text" xml:space="preserve">
+    <value>No payment failure were found for this date range.</value>
   </data>
-  <data name="chkSwatches.Text" xml:space="preserve">
-    <value>Show color swatches for marked choices</value>
+  <data name="Product.Text" xml:space="preserve">
+    <value>Product</value>
   </data>
-  <data name="chkUseChildChoicesAdjustmentsForBundles.Text" xml:space="preserve">
-    <value>Use child choices adjustments for bundles</value>
+  <data name="Quantity.Text" xml:space="preserve">
+    <value>Quantity</value>
   </data>
-  <data name="chkZeroDollarOrders.Text" xml:space="preserve">
-    <value>Allow zero dollar orders</value>
+  <data name="User.Text" xml:space="preserve">
+    <value>Customer</value>
   </data>
-  <data name="LastOrderNumber.Text" xml:space="preserve">
-    <value>Last Order Number</value>
+  <data name="CartsReport.Text" xml:space="preserve">
+    <value>By Carts</value>
   </data>
-  <data name="MaximumOrderQuantity.Text" xml:space="preserve">
-    <value>Maximum Order Quantity</value>
+  <data name="ProductsReport.Text" xml:space="preserve">
+    <value>By Products</value>
   </data>
-  <data name="MaximumOrderWeight.Text" xml:space="preserve">
-    <value>Maximum Order Weight</value>
+  <data name="Count.Text" xml:space="preserve">
+    <value>Carts</value>
   </data>
-  <data name="Orders.Text" xml:space="preserve">
-    <value>Orders</value>
+  <data name="Anonymous.Text" xml:space="preserve">
+    <value>[Never Logged In]</value>
   </data>
-  <data name="Products.Text" xml:space="preserve">
-    <value>Products</value>
+  <data name="ContactsCount.Text" xml:space="preserve">
+    <value>Contacts</value>
   </data>
-  <data name="cvLastOrderNumber.ErrorMessage" xml:space="preserve">
-    <value>Last order number must be numeric value greater or equal to 0</value>
+  <data name="DownloadContacts.Text" xml:space="preserve">
+    <value>Download Contacts</value>
   </data>
-  <data name="rfvLastOrderNumber.ErrorMessage" xml:space="preserve">
-    <value>Last Order Number is required</value>
+  <data name="Email.Text" xml:space="preserve">
+    <value>Email</value>
   </data>
-  <data name="SettingsSuccess.Text" xml:space="preserve">
-    <value>Settings saved successfully.</value>
+  <data name="ExportToExcel.Text" xml:space="preserve">
+    <value>Export To Excel</value>
   </data>
-  <data name="ShoppingCartStorage.Text" xml:space="preserve">
-    <value>Save Shopping Cart To</value>
+  <data name="FirstName.Text" xml:space="preserve">
+    <value>First Name</value>
   </data>
-  <data name="ShoppingCartStorageHelp.Text" xml:space="preserve">
-    <value>If you choose Browser Cookies, users can close their browser or it can crash and their shopping cart is still available. With Browser Session, the shopping cart will be lost in either of those scenarios.</value>
+  <data name="LastName.Text" xml:space="preserve">
+    <value>Last Name</value>
   </data>
-  <data name="OrderAccount.Text" xml:space="preserve">
-    <value>Order Account</value>
+  <data name="NoName.Text" xml:space="preserve">
+    <value>[Profile is Missing Name]</value>
   </data>
-  <data name="QuickBooks.Text" xml:space="preserve">
-    <value>QuickBooks</value>
-  </data>
-  <data name="ShippingAccount.Text" xml:space="preserve">
-    <value>Shipping Account</value>
-  </data>
-  <data name="chkSendAbandonedCartEmails.Text" xml:space="preserve">
-    <value>Send e-mail if cart was abandoned</value>
-  </data>
-  <data name="cvSendAbandonedEmailIn.ErrorMessage" xml:space="preserve">
-    <value>Send abandoned e-mail in (days) must be an integer and between 1 to 365.</value>
-  </data>
-  <data name="rfvSendAbandonedEmailIn.ErrorMessage" xml:space="preserve">
-    <value>Send Abandoned E-Mail In (Days) is required</value>
-  </data>
-  <data name="SendAbandonedEmailIn.Text" xml:space="preserve">
-    <value>Send Abandoned E-Mail In (Days)</value>
-  </data>
-  <data name="cvOrderLimitQuantity.ErrorMessage" xml:space="preserve">
-    <value>Minimum order quantity must be numeric value greater than 0</value>
-  </data>
-  <data name="cvOrderLimitWeight.ErrorMessage" xml:space="preserve">
-    <value>Maximum order weight must be numeric value greater than 0</value>
-  </data>
-  <data name="rfvOrderLimitWeight.ErrorMessage" xml:space="preserve">
-    <value>Maximum Order Weight is required</value>
-  </data>
-  <data name="chkRequirePhoneNumber.Text" xml:space="preserve">
-    <value>Require phone number during checkout</value>
-  </data>
-  <data name="chkEnableFailedPaymentNotification.Text" xml:space="preserve">
+  <data name="EnableFailedPaymentNotification.Text" xml:space="preserve">
     <value>Enable Failed Payment Notification</value>
+  </data>
+  <data name="OrderNumber.Text" xml:space="preserve">
+    <value>Order Number</value>
   </data>
 </root>

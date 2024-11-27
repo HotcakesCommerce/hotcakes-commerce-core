@@ -152,6 +152,10 @@ namespace Hotcakes.Modules.Core
                     case "03.05.00":
                     case "03.06.00":
                         UpdateStoreSettings();
+                        break; 
+                    
+                    case "03.09.00":
+                        CreatePaymentFailureScheduler();
                         break;
 
                     default:
@@ -598,6 +602,31 @@ namespace Hotcakes.Modules.Core
                     TimeLapseMeasurement = "h",
                     RetryTimeLapse = 1,
                     RetryTimeLapseMeasurement = "h",
+                    ScheduleSource = ScheduleSource.NOT_SET
+                };
+                SchedulingProvider.Instance().AddSchedule(oItem);
+            }
+        } 
+        
+        public void CreatePaymentFailureScheduler()
+        {
+            var friendlyName = "Send Payment Failure Emails";
+            var typeFullName = "Hotcakes.Modules.Core.PaymentFailureEmailJob, Hotcakes.Modules";
+
+            var schedules = SchedulingProvider.Instance().GetSchedule().OfType<ScheduleItem>();
+            if (!schedules.Any(s => s.FriendlyName == friendlyName))
+            {
+                var oItem = new ScheduleItem
+                {
+                    FriendlyName = friendlyName,
+                    TypeFullName = typeFullName,
+                    Enabled = true,
+                    CatchUpEnabled = false,
+                    RetainHistoryNum = 0,
+                    TimeLapse = 1,
+                    TimeLapseMeasurement = "d",
+                    RetryTimeLapse = 30,
+                    RetryTimeLapseMeasurement = "m",
                     ScheduleSource = ScheduleSource.NOT_SET
                 };
                 SchedulingProvider.Instance().AddSchedule(oItem);
