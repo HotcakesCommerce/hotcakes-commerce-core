@@ -894,22 +894,16 @@ namespace Hotcakes.Commerce.Accounts
             set { SetProp(Constants.STORESETTING_UPSDIAGNOSITCS, value); }
         }
 
+        public bool ShippingUPSTestingMode
+        {
+            get { return GetPropBool(Constants.STORESETTING_UPSTESTINGMODE); }
+            set { SetProp(Constants.STORESETTING_UPSTESTINGMODE, value); }
+        }
+
         public bool ShippingUpsForceResidential
         {
             get { return GetPropBool(Constants.STORESETTING_UPSFORCERESIDENTIAL); }
             set { SetProp(Constants.STORESETTING_UPSFORCERESIDENTIAL, value); }
-        }
-
-        public string ShippingUpsLicense
-        {
-            get { return GetProp(Constants.STORESETTING_UPSLICENSE); }
-            set { SetProp(Constants.STORESETTING_UPSLICENSE, value); }
-        }
-
-        public string ShippingUpsPassword
-        {
-            get { return GetProp(Constants.STORESETTING_UPSPASSWORD); }
-            set { SetProp(Constants.STORESETTING_UPSPASSWORD, value); }
         }
 
         public int ShippingUpsPickupType
@@ -924,10 +918,34 @@ namespace Hotcakes.Commerce.Accounts
             set { SetProp(Constants.STORESETTING_UPSSHIPDIMENSIONS, value); }
         }
 
+        public string ShippingUpsClientId
+        {
+            get { return GetProp(Constants.STORESETTING_UPSCLIENTID); }
+            set { SetProp(Constants.STORESETTING_UPSCLIENTID, value); }
+        }
+
+        public string ShippingUpsClientSecret
+        {
+            get { return GetProp(Constants.STORESETTING_UPSCLIENTSECRET); }
+            set { SetProp(Constants.STORESETTING_UPSCLIENTSECRET, value); }
+        }
+
+        public string ShippingUpsLicense
+        {
+            get { return GetProp(Constants.STORESETTING_UPSLICENSE); }
+            set { SetProp(Constants.STORESETTING_UPSLICENSE, value); }
+        }
+
         public string ShippingUpsUsername
         {
             get { return GetProp(Constants.STORESETTING_UPSUSERNAME); }
             set { SetProp(Constants.STORESETTING_UPSUSERNAME, value); }
+        }
+
+        public string ShippingUpsPassword
+        {
+            get { return GetProp(Constants.STORESETTING_UPSPASSWORD); }
+            set { SetProp(Constants.STORESETTING_UPSPASSWORD, value); }
         }
 
         public bool ShippingUPSWriteXML

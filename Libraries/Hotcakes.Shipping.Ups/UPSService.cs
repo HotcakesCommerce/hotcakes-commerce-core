@@ -24,33 +24,42 @@
 
 #endregion
 
+using Hotcakes.Shipping.Ups.Models;
+using Hotcakes.Shipping.Ups.Models.Responses;
+using Hotcakes.Shipping.Ups.Services;
+using Hotcakes.Web;
+using Hotcakes.Web.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
-using System.Xml;
-using Hotcakes.Web;
-using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Shipping.Ups
 {
     [Serializable]
     public class UPSService : IShippingService
     {
-        public const string UPSLIVESERVER = @"https://onlinetools.ups.com/ups.app/xml/";
+        public const string BaseUrlTesting = "https://wwwcie.ups.com";
+        public const string BaseUrlProduction = "https://onlinetools.ups.com";
+        public readonly string UPSLIVESERVER;
         private readonly List<IServiceCode> _Codes = new List<IServiceCode>();
 
         private readonly ILogger _Logger = new SupressLogger();
 
         private List<ShippingServiceMessage> _Messages = new List<ShippingServiceMessage>();
 
+        private readonly TokenService _tokenService;
+
         public UPSService(UPSServiceGlobalSettings globalSettings, ILogger logger)
         {
             _Logger = logger;
             GlobalSettings = globalSettings;
             Settings = new UPSServiceSettings();
+            UPSLIVESERVER = globalSettings.TestingMode ? BaseUrlTesting : BaseUrlProduction;
+            _tokenService = new TokenService(globalSettings, UPSLIVESERVER);
             InitializeCodes();
         }
 
@@ -83,17 +92,56 @@ namespace Hotcakes.Shipping.Ups
             set { _Messages = value; }
         }
 
+
+        /// <summary>
+        /// Retrieves a list of all available UPS service codes and their display names.
+        /// </summary>
+        /// <returns>
+        /// A list of <see cref="IServiceCode"/> objects representing all UPS service codes 
+        /// available in the system.
+        /// </returns>
+        /// <remarks>
+        /// This method returns the complete list of service codes, which can be used 
+        /// for displaying available shipping options to users or for processing shipments 
+        /// with specific service types. 
+        /// </remarks>
         public List<IServiceCode> ListAllServiceCodes()
         {
             return _Codes;
         }
 
+
+        /// <summary>
+        /// Rates a shipment by retrieving shipping rates from UPS based on the provided shipment details.
+        /// </summary>
+        /// <param name="shipment">An object representing the shipment for which the rates are to be calculated.</param>
+        /// <returns>
+        /// A list of <see cref="IShippingRate"/> objects containing the calculated shipping rates for the specified shipment.
+        /// </returns>
+        /// <remarks>
+        /// This method clears any existing messages from the message list before calling the method 
+        /// to retrieve UPS rates for the shipment. 
+        /// It is assumed that the shipment object contains all necessary information required for rate calculation.
+        /// </remarks>
         public List<IShippingRate> RateShipment(IShipment shipment)
         {
             _Messages.Clear();
             return GetUPSRatesForShipment(shipment);
         }
 
+
+        /// <summary>
+        /// Constructs a tracking URL for a given UPS tracking code.
+        /// </summary>
+        /// <param name="trackingCode">A string representing the UPS tracking number.</param>
+        /// <returns>
+        /// A string containing the URL to track the shipment if the <paramref name="trackingCode"/> is not null or empty;
+        /// otherwise, returns a default UPS homepage URL.
+        /// </returns>
+        /// <remarks>
+        /// This method generates a URL that can be used to track a shipment on the UPS website. 
+        /// If the provided tracking code is null or empty, it returns the UPS homepage instead.
+        /// </remarks>
         public string GetTrackingUrl(string trackingCode)
         {
             if (!string.IsNullOrEmpty(trackingCode))
@@ -103,6 +151,15 @@ namespace Hotcakes.Shipping.Ups
             return "http://wwwapps.ups.com/";
         }
 
+
+        /// <summary>
+        /// Initializes a collection of UPS service codes with their corresponding display names.
+        /// </summary>
+        /// <remarks>
+        /// This method populates the internal `_Codes` collection with a set of predefined UPS service codes. 
+        /// Each service code is represented by a <see cref="ServiceCode"/> object that includes a unique code 
+        /// and a display name describing the type of UPS shipping service.
+        /// </remarks>
         private void InitializeCodes()
         {
             _Codes.Add(new ServiceCode {Code = "1", DisplayName = "UPS Next Day Air"});
@@ -178,7 +235,24 @@ namespace Hotcakes.Shipping.Ups
             return rates;
         }
 
-        // Gets all available rates regardless of settings
+        /// <summary>
+        /// Retrieves all shipping rates for a given shipment using the UPS API.
+        /// </summary>
+        /// <param name="shipment">The <see cref="IShipment"/> object containing the shipment details for which to obtain rates.</param>
+        /// <returns>
+        /// A list of <see cref="IShippingRate"/> objects representing the available shipping rates retrieved from the UPS API.
+        /// </returns>
+        /// <remarks>
+        /// This method sends an HTTP POST request to the UPS API to get the available shipping rates
+        /// for a given shipment. If valid rates are found, they are added to the list of rates.
+        /// If there are errors in the response or an exception occurs, errors are logged, and the method returns an empty list.
+        /// 
+        /// The method handles authentication with the UPS API using an access token obtained through the token service (_tokenService).
+        /// It also includes error handling, logging messages and exceptions when necessary.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">
+        /// Thrown if the request to the UPS API is unsuccessful or the response status is not successful.
+        /// </exception>
         private List<IShippingRate> GetAllShippingRatesForShipment(IShipment shipment)
         {
             var rates = new List<IShippingRate>();
@@ -188,194 +262,94 @@ namespace Hotcakes.Shipping.Ups
             {
                 var sErrorMessage = string.Empty;
                 var sErrorCode = string.Empty;
-
-                var sURL = string.Concat(UPSLIVESERVER, "Rate");
-
-                // Build XML
                 var settings = new UpsSettings
                 {
-                    UserID = GlobalSettings.Username,
-                    Password = GlobalSettings.Password,
                     ServerUrl = UPSLIVESERVER,
-                    License = GlobalSettings.LicenseNumber
+                    ClientId = GlobalSettings.ClientId,
+                    ClientSecret = GlobalSettings.ClientSecret
                 };
-
-                var sXML = string.Empty;
-
-                sXML = XmlTools.BuildAccessKey(settings);
-                sXML += "\n";
-
-                sXML += BuildUPSRateRequestForShipment(shipment, settings);
-
-                var sResponse = string.Empty;
-                sResponse = XmlTools.ReadHtmlPage_POST(sURL, sXML);
-
-                if (GlobalSettings.DiagnosticsMode)
-                {
-                    _Logger.LogMessage(string.Format("UPS XML Response: {0}", sResponse));
-                }
-
-                XmlDocument xDoc;
-                XmlNodeList NodeList;
-                var sStatusCode = "-1";
 
                 try
                 {
-                    xDoc = new XmlDocument();
-                    xDoc.LoadXml(sResponse);
+                    var ratesRequest = BuildUPSRateRequestForShipment(shipment, settings);
+                    var jsonRequest = JsonConvert.SerializeObject(ratesRequest);
 
-                    if (xDoc.DocumentElement.Name == "RatingServiceSelectionResponse")
+                    #region GetRates
+                    using (var client = new HttpClient())
                     {
-                        XmlNode n;
-                        var i = 0;
-                        XmlNode nTag;
-
-                        NodeList = xDoc.GetElementsByTagName("RatingServiceSelectionResponse");
-                        n = NodeList.Item(0);
-                        for (i = 0; i <= n.ChildNodes.Count - 1; i++)
+                        var request = new HttpRequestMessage(HttpMethod.Post, $"{UPSLIVESERVER}/api/rating/v2403/Shop");
+                        request.Headers.Add("transactionSrc", GlobalSettings.TestingMode ? "testing" : "Hotcakes Commerce");
+                        request.Headers.Add("Authorization", $"Bearer {_tokenService.GetAccessTokenAsync()}");
+                        var content = new StringContent(jsonRequest, null, "application/json");
+                        request.Content = content;
+                        var response = client.SendAsync(request).Result;
+                        response.EnsureSuccessStatusCode();
+                        if (!response.IsSuccessStatusCode)
                         {
-                            nTag = n.ChildNodes.Item(i);
-                            switch (nTag.Name)
+                            var errorContent = response.Content.ReadAsStringAsync().Result;
+                            var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
+                            foreach (var error in errorResponse.Response.Errors)
                             {
-                                case "Response":
-                                    var iRes = 0;
-                                    XmlNode nRes;
-                                    for (iRes = 0; iRes <= nTag.ChildNodes.Count - 1; iRes++)
-                                    {
-                                        nRes = nTag.ChildNodes[iRes];
-                                        switch (nRes.Name)
-                                        {
-                                            case "ResponseStatusCode":
-                                                sStatusCode = nRes.FirstChild.Value;
-                                                break;
-                                            case "ResponseStatusDescription":
-                                                // Not Used
-                                                break;
-                                            case "Error":
-                                                var iErr = 0;
-                                                XmlNode nErr;
-                                                for (iErr = 0; iErr <= nRes.ChildNodes.Count - 1; iErr++)
-                                                {
-                                                    nErr = nRes.ChildNodes[iErr];
-                                                    switch (nErr.Name)
-                                                    {
-                                                        case "ErrorCode":
-                                                            sErrorCode = nErr.FirstChild.Value;
-                                                            break;
-                                                        case "ErrorDescription":
-                                                            sErrorMessage = nErr.FirstChild.Value;
-                                                            break;
-                                                        case "ErrorSeverity":
-                                                            // Not Used
-                                                            break;
-                                                    }
-                                                }
-                                                break;
-                                        }
-                                    }
-                                    break;
-                                case "RatedShipment":
+                                _Logger.LogMessage($"Error Code: {error.Code}, Message: {error.Message}");
+                            }
 
-                                    var iRated = 0;
-                                    XmlNode nRated;
+                            return rates;
+                        }
+                        var stringContent = response.Content.ReadAsStringAsync().Result;
+                        if (GlobalSettings.DiagnosticsMode)
+                        {
+                            _Logger.LogMessage(string.Format("UPS API Response: {0}", stringContent));
+                        }
 
-                                    var sPostage = string.Empty;
-                                    var sCurrencyCode = string.Empty;
-                                    var sCode = string.Empty;
-                                    var sDescription = string.Empty;
+                        var ratesResponse = RatesResponse.FromJson(stringContent);
 
-                                    for (iRated = 0; iRated <= nTag.ChildNodes.Count - 1; iRated++)
-                                    {
-                                        nRated = nTag.ChildNodes[iRated];
-                                        switch (nRated.Name)
-                                        {
-                                            case "Service":
-                                                var iServices = 0;
-                                                XmlNode nServices;
-                                                for (iServices = 0;
-                                                    iServices <= nRated.ChildNodes.Count - 1;
-                                                    iServices++)
-                                                {
-                                                    nServices = nRated.ChildNodes[iServices];
-                                                    switch (nServices.Name)
-                                                    {
-                                                        case "Code":
-                                                            sCode = nServices.FirstChild.Value;
-                                                            sDescription = DecodeUpsServiceCode(sCode);
-                                                            break;
-                                                        case "Description":
-                                                            sDescription = nServices.FirstChild.Value;
-                                                            break;
-                                                    }
-                                                }
-                                                break;
-                                            case "TotalCharges":
-                                                var iCharges = 0;
-                                                XmlNode nCharges;
-                                                for (iCharges = 0; iCharges <= nRated.ChildNodes.Count - 1; iCharges++)
-                                                {
-                                                    nCharges = nRated.ChildNodes[iCharges];
-                                                    switch (nCharges.Name)
-                                                    {
-                                                        case "MonetaryValue":
-                                                            sPostage = nCharges.FirstChild.Value;
-                                                            break;
-                                                        case "CurrencyCode":
-                                                            sCurrencyCode = nCharges.FirstChild.Value;
-                                                            break;
-                                                    }
-                                                }
-                                                break;
-                                        }
-                                    }
+                        if (ratesResponse.RateResponse.Response.ResponseStatus.Code != "1")
+                        {
+                            return rates;
+                        }
 
-                                    var dRate = -1m;
+                        foreach (var ratedShipment in ratesResponse.RateResponse.RatedShipment)
+                        {
+                            var dRate = -1m;
+                            if (ratedShipment.TotalCharges.MonetaryValue.Length > 0)
+                            {
+                                dRate = decimal.Parse(ratedShipment.TotalCharges.MonetaryValue, NumberStyles.Currency, CultureInfo.InvariantCulture);
+                            }
+                            else
+                            {
+                                var nop = new ShippingServiceMessage();
+                                nop.SetInfo(string.Empty, "No UPS Postage Found");
+                                _Messages.Add(nop);
+                                hasErrors = true;
+                            }
 
-                                    if (sPostage.Length > 0)
-                                    {
-                                        dRate = decimal.Parse(sPostage, NumberStyles.Currency,
-                                            CultureInfo.InvariantCulture);
-                                    }
-                                    else
-                                    {
-                                        var nop = new ShippingServiceMessage();
-                                        nop.SetInfo(string.Empty, "No UPS Postage Found");
-                                        _Messages.Add(nop);
-                                        hasErrors = true;
-                                    }
+                            if (dRate >= 0)
+                            {
+                                var shippingRate = new ShippingRate
+                                {
+                                    DisplayName = DecodeUpsServiceCode(ratedShipment.Service.Code),
+                                    EstimatedCost = dRate,
+                                    ServiceCodes = ratedShipment.Service.Code,
+                                    ServiceId = Id
 
-                                    if (dRate >= 0)
-                                    {
-                                        var r = new ShippingRate
-                                        {
-                                            DisplayName = sDescription,
-                                            EstimatedCost = dRate,
-                                            ServiceCodes = sCode,
-                                            ServiceId = Id
-                                        };
-                                        rates.Add(r);
-                                    }
+                                };
+                                rates.Add(shippingRate);
+                            }
 
-                                    if (GlobalSettings.DiagnosticsMode)
-                                    {
-                                        var msg = new ShippingServiceMessage();
+                            if (GlobalSettings.DiagnosticsMode)
+                            {
+                                var msg = new ShippingServiceMessage();
 
-                                        msg.SetDiagnostics("UPS Rates Found",
-                                            string.Concat("StatusCode = ", sStatusCode, ", Postage = ", sPostage,
-                                                ", Errors = ", sErrorMessage, ", Rate = ", dRate));
+                                msg.SetDiagnostics("UPS Rates Found",
+                                    string.Concat("StatusCode = ", ratesResponse.RateResponse.Response.ResponseStatus.Code, ", Postage = ", ratedShipment.TotalCharges.MonetaryValue,
+                                        ", Errors = ", sErrorMessage, ", Rate = ", dRate));
 
-                                        _Messages.Add(msg);
-                                    }
-
-                                    break;
+                                _Messages.Add(msg);
                             }
                         }
                     }
-                    else
-                    {
-                        hasErrors = true;
-                        sErrorMessage = "Couldn't find valid XML response from server.";
-                    }
+                    #endregion
+
                 }
                 catch (Exception Exx)
                 {
@@ -388,11 +362,6 @@ namespace Hotcakes.Shipping.Ups
                     _Messages.Add(mex);
 
                     return rates;
-                }
-
-                if (sStatusCode != "1")
-                {
-                    hasErrors = true;
                 }
             }
 
@@ -415,6 +384,19 @@ namespace Hotcakes.Shipping.Ups
             return rates;
         }
 
+
+        /// <summary>
+        /// Decodes a given UPS service code into its corresponding display name.
+        /// </summary>
+        /// <param name="sCode">The UPS service code to be decoded, as a string.</param>
+        /// <returns>
+        /// The display name of the UPS service if the code is found; otherwise, it returns "UPS".
+        /// </returns>
+        /// <remarks>
+        /// The method checks if the service code starts with a "0", and if so, removes the leading zero before searching. 
+        /// It then iterates through the predefined list of service codes stored in the `_Codes` collection. 
+        /// If a match is found, it returns the corresponding display name; otherwise, "UPS" is returned by default.
+        /// </remarks>
         private string DecodeUpsServiceCode(string sCode)
         {
             var temp = sCode;
@@ -435,119 +417,110 @@ namespace Hotcakes.Shipping.Ups
             return "UPS";
         }
 
-        private string BuildUPSRateRequestForShipment(IShipment shipment, UpsSettings settings)
+        /// <summary>
+        /// Builds a UPS rate request based on the provided shipment details and UPS settings.
+        /// </summary>
+        /// <param name="shipment">An object implementing the <see cref="IShipment"/> interface that contains the details of the shipment, such as source and destination addresses, packages, and other shipment data.</param>
+        /// <param name="settings">An instance of <see cref="UpsSettings"/> that contains the configuration and credentials necessary to make the UPS rate request, such as account number and pickup type.</param>
+        /// <returns>
+        /// A <see cref="RatesRequest"/> object containing the complete UPS rate request, ready to be sent to the UPS API.
+        /// </returns>
+        /// <remarks>
+        /// This method builds the entire request structure required for calculating shipping rates from UPS, including details like the transaction reference, pickup type, shipper information, and shipment details (ship-to, ship-from).
+        /// It also optimizes packages for weight and can ignore package dimensions based on global settings. 
+        /// </remarks>
+        private RatesRequest BuildUPSRateRequestForShipment(IShipment shipment, UpsSettings settings)
         {
-            var sXML = string.Empty;
-            var strWriter = new StringWriter();
-            var xw = new XmlTextWriter(strWriter);
+            var result = new RatesRequest();
+            var request = new RateRequest();
 
             try
             {
-                xw.Formatting = Formatting.Indented;
-                xw.Indentation = 3;
-
-                //--------------------------------------------            
-                // Agreement Request
-                xw.WriteStartElement("RatingServiceSelectionRequest");
-
-                //--------------------------------------------
-                // Request
-                xw.WriteStartElement("Request");
+                request.Request = new RequestBody();
                 //--------------------------------------------
                 // TransactionReference
-                xw.WriteStartElement("TransactionReference");
-                xw.WriteElementString("CustomerContext", "Rate Request");
-                xw.WriteElementString("XpciVersion", "1.0001");
-                xw.WriteEndElement();
+                request.Request.TransactionReference = new Models.TransactionReference
+                {
+                    CustomerContext = "Rate Request",
+                    TransactionIdentifier = new Guid().ToString()
+                };
                 // End TransactionReference
                 //--------------------------------------------
-                xw.WriteElementString("RequestOption", "Shop");
-                xw.WriteEndElement();
-                // End Request
-                //--------------------------------------------
-
                 //--------------------------------------------
                 // Pickup Type
                 if (GlobalSettings.PickUpType != PickupType.Unknown)
                 {
-                    var pickupCode = ((int) GlobalSettings.PickUpType).ToString();
+                    var pickupCode = ((int)GlobalSettings.PickUpType).ToString();
 
                     if (pickupCode.Trim().Length < 2)
                     {
                         pickupCode = "0" + pickupCode;
                     }
 
-                    xw.WriteStartElement("PickupType");
-                    xw.WriteElementString("Code", pickupCode);
-                    xw.WriteEndElement();
+                    request.PickupType = new CodeInfo
+                    {
+                        Code = pickupCode
+                    };
                 }
                 // End Pickup Type
                 //--------------------------------------------
 
                 //--------------------------------------------
                 // Shipment
-                xw.WriteStartElement("Shipment");
+                request.Shipment = new RateShipment();
 
                 // Shipper
-                xw.WriteStartElement("Shipper");
-                xw.WriteStartElement("Address");
+
+                request.Shipment.Shipper = new Shipper
+                {
+                    Address = new Address(),
+                    ShipperNumber = GlobalSettings.AccountNumber
+                };
 
                 //Use City name for countries that don't have postal codes
                 if (shipment.SourceAddress.PostalCode.Trim().Length > 0)
                 {
-                    xw.WriteElementString("PostalCode",
-                        XmlTools.TrimToLength(shipment.SourceAddress.PostalCode.Trim(), 9));
+                   request.Shipment.Shipper.Address.PostalCode = XmlTools.TrimToLength(shipment.SourceAddress.PostalCode.Trim(), 9);
                 }
                 else
                 {
-                    xw.WriteElementString("City", XmlTools.TrimToLength(shipment.SourceAddress.City.Trim(), 30));
+                    request.Shipment.Shipper.Address.City = XmlTools.TrimToLength(shipment.SourceAddress.City.Trim(), 30);
                 }
 
                 if (shipment.SourceAddress.RegionData != null)
                 {
-                    xw.WriteElementString("StateProvinceCode", shipment.SourceAddress.RegionData.Abbreviation);
+                    request.Shipment.Shipper.Address.StateProvinceCode = shipment.SourceAddress.RegionData.Abbreviation;
                 }
 
-                xw.WriteElementString("CountryCode", shipment.SourceAddress.CountryData.IsoCode);
-
-                xw.WriteElementString("ShipperNumber", settings.License);
-
-                xw.WriteEndElement();
-                xw.WriteEndElement();
+                request.Shipment.Shipper.Address.CountryCode = shipment.SourceAddress.CountryData.IsoCode;
 
                 // Ship To
-                xw.WriteStartElement("ShipTo");
-                xw.WriteStartElement("Address");
+                request.Shipment.ShipTo = new ShipTo
+                {
+                    Address = new Address()
+                };
 
                 if (shipment.DestinationAddress.PostalCode.Length > 0)
                 {
-                    xw.WriteElementString("PostalCode", shipment.DestinationAddress.PostalCode);
+                    request.Shipment.ShipTo.Address.PostalCode = shipment.DestinationAddress.PostalCode;
                 }
                 else
                 {
                     if (shipment.DestinationAddress.City.Length > 0)
                     {
-                        xw.WriteElementString("City", shipment.DestinationAddress.City);
+                        request.Shipment.ShipTo.Address.City = shipment.DestinationAddress.City;
                     }
                 }
 
                 if (shipment.DestinationAddress.RegionData != null)
                 {
-                    xw.WriteElementString("StateProvinceCode", shipment.DestinationAddress.RegionData.Abbreviation);
+                    request.Shipment.ShipTo.Address.StateProvinceCode = shipment.DestinationAddress.RegionData.Abbreviation;
                 }
 
                 if (shipment.DestinationAddress.CountryData.Bvin.Length > 0)
                 {
-                    xw.WriteElementString("CountryCode", shipment.DestinationAddress.CountryData.IsoCode);
+                    request.Shipment.ShipTo.Address.CountryCode = shipment.DestinationAddress.CountryData.IsoCode;
                 }
-
-                if (GlobalSettings.ForceResidential)
-                {
-                    xw.WriteElementString("ResidentialAddress", string.Empty);
-                }
-
-                xw.WriteEndElement();
-                xw.WriteEndElement();
 
                 var ignoreDimensions = GlobalSettings.IgnoreDimensions;
 
@@ -556,35 +529,19 @@ namespace Hotcakes.Shipping.Ups
 
                 foreach (var p in optimizedPackages)
                 {
-                    WriteSingleUPSPackage(ref xw, p, ignoreDimensions);
+                    WriteSingleUPSPackage(ref request, p, ignoreDimensions);
                 }
-
-                if (Settings.NegotiatedRates)
-                {
-                    xw.WriteStartElement("RateInformation");
-                    xw.WriteElementString("NegotiatedRatesIndicator", string.Empty);
-                    xw.WriteEndElement();
-                }
-
-                xw.WriteEndElement();
                 // End Shipment
                 //--------------------------------------------
-
-                xw.WriteEndElement();
                 // End Agreement Request
                 //--------------------------------------------
-
-                xw.Flush();
-                xw.Close();
             }
             catch (Exception ex)
             {
                 _Logger.LogException(ex);
             }
-
-            sXML = strWriter.GetStringBuilder().ToString();
-
-            return sXML;
+            result.RateRequest = request;
+            return result;
         }
 
         protected bool IsOversized(IShippable prod)
@@ -600,7 +557,7 @@ namespace Hotcakes.Shipping.Ups
             return IsOversize;
         }
 
-        private void WriteSingleUPSPackage(ref XmlTextWriter xw, IShippable pak, bool ignoreDimensions)
+        private void WriteSingleUPSPackage(ref RateRequest request, IShippable pak, bool ignoreDimensions)
         {
             decimal dGirth = 0;
             decimal dLength = 0;
@@ -633,9 +590,7 @@ namespace Hotcakes.Shipping.Ups
             
             //--------------------------------------------
             // Package
-            xw.WriteStartElement("Package");
-
-            xw.WriteStartElement("PackagingType");
+            request.Shipment.Package = new RatePackage();
 
             var packageType = "02";
 
@@ -647,55 +602,51 @@ namespace Hotcakes.Shipping.Ups
                     packageType = "0" + packageType;
                 }
             }
-
-            xw.WriteElementString("Code", packageType);
-            xw.WriteElementString("Description", "Package");
-            xw.WriteEndElement();
+            request.Shipment.Package.PackagingType = new Models.PackagingType
+            {
+                Code = packageType,
+                Description = "Package"
+            };
 
             //Dimensions can be skipped in latest UPS specs
             if (!ignoreDimensions)
             {
                 if (dLength > 0 | dHeight > 0 | dwidth > 0)
                 {
-                    xw.WriteStartElement("Dimensions");
-                    xw.WriteStartElement("UnitOfMeasure");
-                    xw.WriteElementString("Code", "IN");
-                    xw.WriteEndElement();
-                    xw.WriteElementString("Length", Math.Round(dLength, 2).ToString(CultureInfo.InvariantCulture));
-                    xw.WriteElementString("Width", Math.Round(dwidth, 2).ToString(CultureInfo.InvariantCulture));
-                    xw.WriteElementString("Height", Math.Round(dHeight, 2).ToString(CultureInfo.InvariantCulture));
-                    xw.WriteEndElement();
+                    request.Shipment.Package.Dimensions = new Dimensions
+                    {
+                        Height = Math.Round(dHeight, 2).ToString(CultureInfo.InvariantCulture),
+                        Length = Math.Round(dLength, 2).ToString(CultureInfo.InvariantCulture),
+                        Width = Math.Round(dwidth, 2).ToString(CultureInfo.InvariantCulture),
+                        UnitOfMeasurement = new CodeInfo 
+                        {
+                            Code = "IN"
+                        }
+                    };
                 }
             }
 
             if (pak.BoxWeight > 0)
             {
-                xw.WriteStartElement("PackageWeight");
-                xw.WriteStartElement("UnitOfMeasure");
-
-                xw.WriteElementString("Code", pak.BoxWeightType == WeightType.Pounds ? "LBS" : "KGS");
-
-                xw.WriteEndElement();
-                xw.WriteElementString("Weight", Math.Round(pak.BoxWeight, 1).ToString(CultureInfo.InvariantCulture));
-                xw.WriteEndElement();
+                request.Shipment.Package.PackageWeight = new PackageWeight 
+                {
+                    UnitOfMeasurement = new CodeInfo 
+                    {
+                        Code = pak.BoxWeightType == WeightType.Pounds ? "LBS" : "KGS"
+                    },
+                    Weight = Math.Round(pak.BoxWeight, 1).ToString(CultureInfo.InvariantCulture)
+                };
             }
             else
             {
-                xw.WriteStartElement("PackageWeight");
-                xw.WriteStartElement("UnitOfMeasure");
-
-                if (pak.BoxWeightType == WeightType.Pounds)
+                request.Shipment.Package.PackageWeight = new PackageWeight
                 {
-                    xw.WriteElementString("Code", "LBS");
-                }
-                else
-                {
-                    xw.WriteElementString("Code", "KGS");
-                }
-
-                xw.WriteEndElement();
-                xw.WriteElementString("Weight", Math.Round(0.1, 1).ToString(CultureInfo.InvariantCulture));
-                xw.WriteEndElement();
+                    UnitOfMeasurement = new CodeInfo
+                    {
+                        Code = pak.BoxWeightType == WeightType.Pounds ? "LBS" : "KGS"
+                    },
+                    Weight = Math.Round(0.1, 1).ToString(CultureInfo.InvariantCulture)
+                };
             }
 
             if (ignoreDimensions == false)
@@ -706,23 +657,21 @@ namespace Hotcakes.Shipping.Ups
                 {
                     if (oversizeCheck < 108 & pak.BoxWeight < 30)
                     {
-                        xw.WriteElementString("OversizePackage", "1");
+                        request.Shipment.Package.OversizeIndicator = "1";
                     }
                     else
                     {
                         if (pak.BoxWeight < 70)
                         {
-                            xw.WriteElementString("OversizePackage", "2");
+                            request.Shipment.Package.OversizeIndicator = "2";
                         }
                         else
                         {
-                            xw.WriteElementString("OversizePackage", "0");
+                            request.Shipment.Package.OversizeIndicator = "0";
                         }
                     }
                 }
             }
-
-            xw.WriteEndElement();
             // End Package
             //--------------------------------------------
         }
