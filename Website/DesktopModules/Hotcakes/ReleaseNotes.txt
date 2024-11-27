@@ -4,7 +4,7 @@
 	.muy-importante { color:red;font-weight:bold; }
 </style>
 <div class="uv-install-wrapper">
-	<h1>Hotcakes Commerce: Version 03.08.02</h1>
+	<h1>Hotcakes Commerce: Version 03.09.00</h1>
 
 	<p class="muy-importante">The release notes continue after the Sponsors and Contributors below.</p>
 	
