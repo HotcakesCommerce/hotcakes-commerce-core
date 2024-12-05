@@ -177,6 +177,9 @@ namespace Hotcakes.Modules.Core
 			p.ProductName = mainProduct.ProductName + " Bundle";
 			p.IsBundle = true;
 			p.IsSearchable = true;
+			p.AllowUpcharge = false;
+			p.UpchargeAmount = 3m;
+			p.UpchargeUnit = "1";
 			p.Status = ProductStatus.Disabled;
 			p.InventoryMode = ProductInventoryMode.AlwayInStock;
 			p.UrlSlug = CreateUrlSlug(mainProduct.UrlSlug + "-bundle", hccApp);
