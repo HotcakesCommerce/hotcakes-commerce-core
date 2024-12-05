@@ -685,6 +685,9 @@ namespace Hotcakes.Commerce.Utilities
             p.ProductName = "Blue Bracelet";
             p.Featured = true;
             p.IsSearchable = true;
+            p.AllowUpcharge = false;
+            p.UpchargeAmount = 3m;
+            p.UpchargeUnit = "1";
             p.ImageFileSmall = "BraceletBlue.png";
             p.ImageFileMedium = "BraceletBlue.png";
             p.ImageFileSmallAlternateText = "Blue Bracelet SAMPLE001";
@@ -728,6 +731,9 @@ namespace Hotcakes.Commerce.Utilities
             p.ProductName = "Brown Fedora";
             p.Featured = true;
             p.IsSearchable = true;
+            p.AllowUpcharge = false;
+            p.UpchargeAmount = 3m;
+            p.UpchargeUnit = "1";
             p.ImageFileSmall = "brown-fedora-01.jpg";
             p.ImageFileMedium = "brown-fedora-01.jpg";
             p.ImageFileSmallAlternateText = "Brown Fedora SAMPLE004";
@@ -751,6 +757,9 @@ namespace Hotcakes.Commerce.Utilities
             p.ProductName = "Butterfly Earrings";
             p.Featured = true;
             p.IsSearchable = true;
+            p.AllowUpcharge = false;
+            p.UpchargeAmount = 3m;
+            p.UpchargeUnit = "1";
             p.ImageFileSmall = "Earrings.jpg";
             p.ImageFileMedium = "Earrings.jpg";
             p.ImageFileSmallAlternateText = "Butterfly Earring SAMPLE006";
@@ -774,6 +783,9 @@ namespace Hotcakes.Commerce.Utilities
             p.ProductName = "Cupcake Sample";
             p.Featured = true;
             p.IsSearchable = true;
+            p.AllowUpcharge = false;
+            p.UpchargeAmount = 3m;
+            p.UpchargeUnit = "1";
             p.ImageFileSmall = "CupCake.jpg";
             p.ImageFileMedium = "CupCake.jpg";
             p.ImageFileSmallAlternateText = "Cupcake Sample SAMPLE002";
@@ -800,6 +812,9 @@ namespace Hotcakes.Commerce.Utilities
             p.ProductName = "Laptop Computer Sample";
             p.Featured = true;
             p.IsSearchable = true;
+            p.AllowUpcharge = false;
+            p.UpchargeAmount = 3m;
+            p.UpchargeUnit = "1";
             p.ImageFileSmall = "Laptop.jpg";
             p.ImageFileMedium = "Laptop.jpg";
             p.ImageFileSmallAlternateText = "Laptop Computer Sample SAMPLE005";
@@ -861,6 +876,9 @@ namespace Hotcakes.Commerce.Utilities
             p.ProductName = "Purple Top";
             p.Featured = true;
             p.IsSearchable = true;
+            p.AllowUpcharge = false;
+            p.UpchargeAmount = 3m;
+            p.UpchargeUnit = "1";
             p.ImageFileSmall = "PurpleTop.jpg";
             p.ImageFileMedium = "PurpleTop.jpg";
             p.ImageFileSmallAlternateText = "Purple Top SAMPLE003";
