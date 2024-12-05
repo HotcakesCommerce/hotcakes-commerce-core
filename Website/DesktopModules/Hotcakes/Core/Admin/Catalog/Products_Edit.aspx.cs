@@ -37,10 +37,12 @@ using Hotcakes.Commerce;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Content;
 using Hotcakes.Commerce.Dnn.Utils;
+using Hotcakes.Commerce.Marketing;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Commerce.Shipping;
 using Hotcakes.Commerce.Storage;
 using Hotcakes.Commerce.Utilities;
+using Hotcakes.Common.Dnn;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Web;
 using Hotcakes.Web.Data;
@@ -93,7 +95,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-
+           
             PageMessageBox = ucMessageBox;
 
             // TODO: troubleshoot taxonomy to see why it's not saving and loading
@@ -288,7 +290,17 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
                 p.Status = chkActive.Checked ? ProductStatus.Active : ProductStatus.Disabled;
                 p.IsSearchable = chkSearchable.Checked;
+                p.AllowUpcharge = chkAllowUpcharge.Checked;
 
+                p.UpchargeAmount = UpchargeAmountField.Text.ConvertTo(p.UpchargeAmount);
+
+                p.UpchargeUnit = lstUpchargeUnitType.SelectedValue;
+
+                if (p.UpchargeUnit == "0")
+                {
+                    p.UpchargeAmount = Money.RoundCurrency(p.UpchargeAmount);
+                }
+                
                 var isBundle = rbBehaviour.SelectedValue == "B";
                 var isGC = rbBehaviour.SelectedValue == "GC";
                 p.IsBundle = isBundle;
@@ -422,11 +434,11 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
                 p.ShippingDetails.ExtraShipFee =
                     Money.RoundCurrency(decimal.Parse(ExtraShipFeeField.Text, NumberStyles.Currency, culture));
-                p.ShippingMode = (ShippingMode) int.Parse(ddlShipType.SelectedValue);
+                p.ShippingMode = (ShippingMode)int.Parse(ddlShipType.SelectedValue);
                 p.ShippingDetails.IsNonShipping = chkNonShipping.Checked;
                 p.ShippingDetails.ShipSeparately = chkShipSeparately.Checked;
 
-                p.ShippingCharge = (ShippingChargeType) int.Parse(lstShippingCharge.SelectedValue);
+                p.ShippingCharge = (ShippingChargeType)int.Parse(lstShippingCharge.SelectedValue);
 
                 p.MinimumQty = int.Parse(txtMinimumQty.Text, NumberStyles.Integer, Thread.CurrentThread.CurrentUICulture);
 
@@ -459,7 +471,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 if (result)
                 {
                     // Create taxonomy tags
-                    var taxonomyTags = txtTaxonomyTags.Text.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
+                    var taxonomyTags = txtTaxonomyTags.Text.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
                     HccApp.SocialService.UpdateProductTaxonomy(p, taxonomyTags);
 
                     // Save images
@@ -578,6 +590,8 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             {
                 chkActive.Checked = p.Status == ProductStatus.Active;
                 chkSearchable.Checked = p.IsSearchable;
+                chkAllowUpcharge.Checked = p.AllowUpcharge;
+
                 if (p.IsBundle)
                 {
                     rbBehaviour.SelectedValue = "B";
@@ -646,6 +660,15 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                     lstVendors.ClearSelection();
                     lstVendors.Items.FindByValue(p.VendorId).Selected = true;
                 }
+                if (lstUpchargeUnitType.Items.Count == 0)
+                {
+                    lstUpchargeUnitType.Items.Add(new ListItem("Amount", "0"));
+                    lstUpchargeUnitType.Items.Add(new ListItem("Percent", "1")); 
+                }
+
+                UpchargeAmountField.Text = p.UpchargeAmount % 1 == 0 ? ((int)p.UpchargeAmount).ToString() : p.UpchargeAmount.ToString("0.##");
+
+                lstUpchargeUnitType.SelectedValue = Enum.TryParse<AmountTypes>(p.UpchargeUnit, out var upchargeType) ? ((int)upchargeType).ToString() : "0";
 
                 LoadImagePreview(p);
                 if (string.IsNullOrEmpty(p.ImageFileSmallAlternateText))
@@ -693,20 +716,20 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 txtHeight.Text = Math.Round(p.ShippingDetails.Height, 3).ToString();
 
                 ExtraShipFeeField.Text = p.ShippingDetails.ExtraShipFee.ToString("C");
-                if (ddlShipType.Items.FindByValue(((int) p.ShippingMode).ToString()) != null)
+                if (ddlShipType.Items.FindByValue(((int)p.ShippingMode).ToString()) != null)
                 {
                     ddlShipType.ClearSelection();
-                    ddlShipType.Items.FindByValue(((int) p.ShippingMode).ToString()).Selected = true;
+                    ddlShipType.Items.FindByValue(((int)p.ShippingMode).ToString()).Selected = true;
                 }
-                if (lstShippingCharge.Items.FindByValue(((int) p.ShippingCharge).ToString()) != null)
+                if (lstShippingCharge.Items.FindByValue(((int)p.ShippingCharge).ToString()) != null)
                 {
                     lstShippingCharge.ClearSelection();
-                    lstShippingCharge.Items.FindByValue(((int) p.ShippingCharge).ToString()).Selected = true;
+                    lstShippingCharge.Items.FindByValue(((int)p.ShippingCharge).ToString()).Selected = true;
                 }
                 chkNonShipping.Checked = p.ShippingDetails.IsNonShipping;
                 chkShipSeparately.Checked = p.ShippingDetails.ShipSeparately;
 
-                txtMinimumQty.Text = Math.Round((decimal) p.MinimumQty, 0).ToString();
+                txtMinimumQty.Text = Math.Round((decimal)p.MinimumQty, 0).ToString();
 
                 txtRewriteUrl.Text = p.UrlSlug;
 
