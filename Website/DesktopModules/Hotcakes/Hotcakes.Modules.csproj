@@ -1276,8 +1276,8 @@
     <Compile Include="Core\Admin\AppCode\WebUtils.cs" />
     <Compile Include="Core\Admin\Catalog\BundledProducts.aspx.cs">
       <DependentUpon>BundledProducts.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Core\Admin\Catalog\BundledProducts.aspx.designer.cs">
       <DependentUpon>BundledProducts.aspx</DependentUpon>
@@ -3789,6 +3789,7 @@
     </Content>
     <Content Include="Providers\DataProviders\SqlDataProvider\03.06.00.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\03.09.00.SqlDataProvider" />
+    <Content Include="Providers\DataProviders\SqlDataProvider\03.09.01.SqlDataProvider" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
