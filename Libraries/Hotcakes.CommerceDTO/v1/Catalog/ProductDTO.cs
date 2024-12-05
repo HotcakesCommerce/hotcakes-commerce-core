@@ -84,6 +84,9 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
             IsAvailableForSale = true;
             InventoryMode = ProductInventoryModeDTO.AlwayInStock;
             IsSearchable = true;
+            AllowUpcharge = false;
+            UpchargeAmount  = 3m;
+            UpchargeUnit = "1";
         }
 
         /// <summary>
@@ -347,5 +350,15 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
         public bool IsSearchable { get; set; }
 
         public ShippingChargeTypeDTO ShippingCharge { get; set; }
+
+        [DataMember]
+        public bool AllowUpcharge  { get; set; }
+
+        [DataMember]
+        public decimal UpchargeAmount  { get; set; }
+
+        [DataMember]
+        public string UpchargeUnit  { get; set; }
+        
     }
 }
