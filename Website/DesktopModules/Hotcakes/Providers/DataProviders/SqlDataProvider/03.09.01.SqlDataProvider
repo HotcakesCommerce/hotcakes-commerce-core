@@ -1,0 +1,11 @@
+﻿ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD
+	[AllowUpcharge] bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_AllowUpcharge] DEFAULT 0
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD
+	[UpchargeAmount] [decimal](18, 10)  NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_UpchargeAmount] DEFAULT 3
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD
+	[UpchargeUnit ] [nvarchar](255) NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_UpchargeUnit ] DEFAULT '1'
+GO
