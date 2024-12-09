@@ -273,4 +273,7 @@
   <data name="VatNumberValMsg.Text" xml:space="preserve">
     <value>Please check the format of the VAT number</value>
   </data>
+  <data name="StripePaymentError.Text" xml:space="preserve">
+    <value>There was an error processing your payment. Please verify that your credit card details are correct and try again. If the issue persists, contact support.</value>
+  </data>
 </root>
