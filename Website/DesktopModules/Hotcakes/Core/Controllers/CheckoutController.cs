@@ -1263,7 +1263,7 @@ namespace Hotcakes.Modules.Core.Controllers
 
             if (MembershipProviderConfig.RequiresUniqueEmail)
             {
-                if (HccApp.MembershipServices.Customers.FindByEmail(model.CurrentOrder.UserEmail) != null)
+                if (HccApp.MembershipServices.Customers.FindByEmail(model.CurrentOrder.UserEmail)?.Any()==true)
                 {
                     model.Violations.Add(new RuleViolation(Localization.GetString("Email"), model.CurrentOrder.UserEmail,
                         Localization.GetString("DuplicateEmail")));
