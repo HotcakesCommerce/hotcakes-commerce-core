@@ -1666,3 +1666,20 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_StoreSettings]') AND type in (N'U'))
 DROP TABLE {databaseOwner}[{objectQualifier}hcc_StoreSettings]
 GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Product_AllowUpcharge]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_AllowUpcharge]
+END
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Product_UpchargeAmount]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_UpchargeAmount]
+END
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_{objectQualifier}hcc_Product_UpchargeUnit]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] DROP CONSTRAINT [DF_{objectQualifier}hcc_Product_UpchargeUnit]
+END
+GO
