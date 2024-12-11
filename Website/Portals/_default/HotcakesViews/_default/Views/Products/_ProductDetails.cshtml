@@ -10,222 +10,235 @@
     
     <div class="row-fluid">
     <div class="col-xs-12 margin-bottom-xl">
-    <div class="hc-product-form form-horizontal">
-        @using (Html.BeginHccForm())
-        {
-            <div class="form-group">
-                <label class="col-sm-4 control-label">@Localization.GetString("SKU")</label>
-                <div class="col-sm-8 margin-top-sm">
-                    <span id="hcSku">@Model.LocalProduct.Sku</span>
-                    <span id="hcStockDisplay" class="hc-stockdisplay">@Html.Raw(Model.StockMessage)</span>
-                </div>
-            </div>
-            if (!Model.LocalProduct.IsBundle)
+        <div class="hc-product-form form-horizontal">
+            @using (Html.BeginHccForm())
             {
-                foreach (var opt in Model.LocalProduct.Options)
-                {
-                    <div class="form-group clearfix">
-                        @if (!opt.NameIsHidden)
-                        {<label class="col-sm-4 control-label">@opt.Name</label>}
-                         <div class="col-sm-8 margin-top-sm">
-                             @if (opt.OptionType != OptionTypes.CheckBoxes && opt.OptionType != OptionTypes.RadioButtonList && opt.OptionType != OptionTypes.FileUpload)
-                             {
-                                 @Html.Raw(opt.RenderWithSelection(Model.Selections.OptionSelectionList, string.Empty, "form-control"))
-                             }
-                             else
-                             {
-                                 @Html.Raw(opt.RenderWithSelection(Model.Selections.OptionSelectionList, string.Empty, "margin-right-sm-important"))
-                             }
-                         </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">@Localization.GetString("SKU")</label>
+                    <div class="col-sm-8 margin-top-sm">
+                        <span id="hcSku">@Model.LocalProduct.Sku</span>
+                        <span id="hcStockDisplay" class="hc-stockdisplay">@Html.Raw(Model.StockMessage)</span>
                     </div>
-                }
-            }
-            else
-            {
-                foreach (var bundledItem in Model.BundledItems)
+                </div>
+                if (!Model.LocalProduct.IsBundle)
                 {
-                    if (bundledItem.Item.Options.Count > 0)
+                    foreach (var opt in Model.LocalProduct.Options)
                     {
-                        <h5>@bundledItem.Item.ProductName</h5>
-                        foreach (var opt in bundledItem.Item.Options)
-                        {
-                            <div class="form-group clearfix">
-                                @if (!opt.NameIsHidden)
-                                {<label class="col-sm-4 control-label">@opt.Name</label>}
-                                 <div class="col-sm-8 margin-top-sm">
-                                     @if (opt.OptionType != OptionTypes.CheckBoxes && opt.OptionType != OptionTypes.RadioButtonList)
-                                     {
-                                         @Html.Raw(opt.RenderWithSelection(Model.Selections.GetSelections(bundledItem.BundledProductAdv.Id), bundledItem.BundledProductAdv.Id.ToString(), "form-control"))
-                                     }
-                                     else
-                                     {
-                                         @Html.Raw(opt.RenderWithSelection(Model.Selections.GetSelections(bundledItem.BundledProductAdv.Id), bundledItem.BundledProductAdv.Id.ToString(), "margin-right-sm-important"))
-                                     }
-                                 </div>
+                        <div class="form-group clearfix">
+                            @if (!opt.NameIsHidden)
+                            {<label class="col-sm-4 control-label">@opt.Name</label>}
+                            <div class="col-sm-8 margin-top-sm">
+                                @if (opt.OptionType != OptionTypes.CheckBoxes && opt.OptionType != OptionTypes.RadioButtonList && opt.OptionType != OptionTypes.FileUpload)
+                                {
+                                    @Html.Raw(opt.RenderWithSelection(Model.Selections.OptionSelectionList, string.Empty, "form-control"))
+                                }
+                                else
+                                {
+                                    @Html.Raw(opt.RenderWithSelection(Model.Selections.OptionSelectionList, string.Empty, "margin-right-sm-important"))
+                                }
                             </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    foreach (var bundledItem in Model.BundledItems)
+                    {
+                        if (bundledItem.Item.Options.Count > 0)
+                        {
+                            <h5>@bundledItem.Item.ProductName</h5>
+                            foreach (var opt in bundledItem.Item.Options)
+                            {
+                                <div class="form-group clearfix">
+                                    @if (!opt.NameIsHidden)
+                                    {<label class="col-sm-4 control-label">@opt.Name</label>}
+                                    <div class="col-sm-8 margin-top-sm">
+                                        @if (opt.OptionType != OptionTypes.CheckBoxes && opt.OptionType != OptionTypes.RadioButtonList)
+                                        {
+                                            @Html.Raw(opt.RenderWithSelection(Model.Selections.GetSelections(bundledItem.BundledProductAdv.Id), bundledItem.BundledProductAdv.Id.ToString(), "form-control"))
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw(opt.RenderWithSelection(Model.Selections.GetSelections(bundledItem.BundledProductAdv.Id), bundledItem.BundledProductAdv.Id.ToString(), "margin-right-sm-important"))
+                                        }
+                                    </div>
+                                </div>
+                            }
                         }
                     }
                 }
-            }
 
-            <div id="hcValidationMessage" style="display: none">
-                @* Placeholder rebuilds by AJAX request! *@
-                <div class="dnnFormMessage dnnFormWarning">@Html.Raw(Model.ValidationMessage)</div>
-                @* END Placeholder rebuilds by AJAX request! *@
-            </div>
-
-            if (Model.LocalProduct.IsUserSuppliedPrice)
-            {
-                <div class="form-group hc-userprice">
-                    <label class="col-sm-4 control-label">
-                        @if (string.IsNullOrWhiteSpace(Model.LocalProduct.UserSuppliedPriceLabel))
-                        {@Localization.GetString("UserPrice") }
-                        else
-                        { @Model.LocalProduct.UserSuppliedPriceLabel}
-                    </label>
-                    <div class="col-sm-8">@Html.TextBox("userprice", string.Empty, new { @class = "form-control col-sm-8" })</div>
-                </div>
-            }
-            else if (Model.IsGiftCard)
-            {
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">
-                        @Localization.GetString("GiftCardAmount")
-                    </label>
-                    <div class="col-md-8">
-                        <select id="giftcardpredefined" class="form-control">
-                            <option value="">@Localization.GetString("SetMyOwn")</option>
-                            @foreach (var am in Model.GiftCardPredefinedAmounts)
-                            {
-                                <option value="@am">@am.ToString("c")</option>
-                            }
-                        </select>
-                        @* Note: Unobtrusive validation disabled for "GiftCardAmount" because it doesnt support different cultures *@
-                        @Html.TextBoxFor(m => m.GiftCardAmount, new { style = "width:40%;", @data_val = "false", @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.GiftCardAmount, Localization.GetString("ValMessage_GiftCardAmount"), new { @class = "dnnFormMessage hcFormError" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">
-                        @Localization.GetString("GiftCardEmail")
-                    </label>
-                    <div class="col-sm-8">
-                        @Html.TextBoxFor(m => m.GiftCardRecEmail, string.Empty, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.GiftCardRecEmail, Localization.GetString("ValMessage_GiftCardEmailInvalid"), new { @class = "dnnFormMessage hcFormError" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">
-                        @Localization.GetString("GiftCardName")
-                    </label>
-                    <div class="col-sm-8">
-                        @Html.TextBox("giftcardrecname", string.Empty, new { @class = "form-control" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">
-                        @Localization.GetString("GiftCardMessage")
-                    </label>
-                    <div class="col-sm-8">
-                        @Html.TextArea("giftcardmessage", string.Empty, new { @class = "form-control" })
-                    </div>
-                </div>
-            }
-            else
-            {
-                <div id="hcPriceWrapper">
+                <div id="hcValidationMessage" style="display: none">
                     @* Placeholder rebuilds by AJAX request! *@
-                    <div class="form-group clear hc-listprice">
-                        <label class="col-sm-4 control-label">@Localization.GetString("ListPrice")</label>
-                        <span class="col-sm-8 margin-top-sm">
-                            @if (Model.Prices.ListPrice != null)
-                            {
-                                @Html.Raw(Model.Prices.ListPrice.Text)
-                            }
-                        </span>
-                    </div>
-                    <div class="form-group clear hc-siteprice">
-                        <label class="col-sm-4 control-label">@Localization.GetString("SitePrice")</label>
-                        <span class="col-sm-8 margin-top-sm">@Html.Raw(Model.Prices.SitePrice.Text)</span>
-                    </div>
-                    <div class="form-group clear hc-yousave">
-                        <label class="col-sm-4 control-label">@Localization.GetString("YouSave")</label>
-                        <span class="col-sm-8 margin-top-sm">
-                            @if (Model.Prices.YouSave != null)
-                            {
-                                @Html.Raw(Model.Prices.YouSave.Text)
-                            }
-                        </span>
-                    </div>
+                    <div class="dnnFormMessage dnnFormWarning">@Html.Raw(Model.ValidationMessage)</div>
                     @* END Placeholder rebuilds by AJAX request! *@
                 </div>
-            }
 
-            if (!Model.LocalProduct.HideQty)
-            {
-                <div class="form-group">
-                    <label for="qty" class="col-sm-4 control-label">@Localization.GetString("Quantity")</label>
-                    <div class="col-sm-8">
-                        <input type="text" id="qty" name="qty" value="@Model.InitialQuantity" class="form-control small" />
+                if (Model.LocalProduct.AllowUpcharge)
+                {
+                    <div class="form-group hc-userprice">
+                         <label class="col-sm-4 control-label">
+                              Cover Credit Card Fees
+                          </label>
+                         <div class="col-sm-8">
+                             <input type="checkbox" id="covercreditcard" name="covercreditcard" />
+                         </div>
                     </div>
-                </div>
-            }
+                }
 
-            if (Model.IsAvailableForSale)
-            {
-                <div class="row">
-                    <div class="col-xs-offset-4 col-xs-8 text-left">
-                        <div id="hcProductActions" class="form-group">
-                            <input type="submit" id="addtocartbutton" value="@Localization.GetString("AddToCart")" class="btn btn-primary" />
-                            @if (Model.IsAvailableForWishList)
+                if (Model.LocalProduct.IsUserSuppliedPrice)
+                {
+                    <div class="form-group hc-userprice">
+                        <label class="col-sm-4 control-label">
+                            @if (string.IsNullOrWhiteSpace(Model.LocalProduct.UserSuppliedPriceLabel))
+                            {@Localization.GetString("UserPrice") }
+                        else
+                        { @Model.LocalProduct.UserSuppliedPriceLabel}
+                        </label>
+                        <div class="col-sm-8">@Html.TextBox("userprice", string.Empty, new { @class = "form-control col-sm-8" })</div>
+                    </div>
+                }
+                else if (Model.IsGiftCard)
+                {
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            @Localization.GetString("GiftCardAmount")
+                        </label>
+                        <div class="col-md-8">
+                            <select id="giftcardpredefined" class="form-control">
+                                <option value="">@Localization.GetString("SetMyOwn")</option>
+                                @foreach (var am in Model.GiftCardPredefinedAmounts)
+                                {
+                                    <option value="@am">@am.ToString("c")</option>
+                                }
+                            </select>
+                            @* Note: Unobtrusive validation disabled for "GiftCardAmount" because it doesnt support different cultures *@
+                            @Html.TextBoxFor(m => m.GiftCardAmount, new { style = "width:40%;", @data_val = "false", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.GiftCardAmount, Localization.GetString("ValMessage_GiftCardAmount"), new { @class = "dnnFormMessage hcFormError" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            @Localization.GetString("GiftCardEmail")
+                        </label>
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(m => m.GiftCardRecEmail, string.Empty, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.GiftCardRecEmail, Localization.GetString("ValMessage_GiftCardEmailInvalid"), new { @class = "dnnFormMessage hcFormError" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            @Localization.GetString("GiftCardName")
+                        </label>
+                        <div class="col-sm-8">
+                            @Html.TextBox("giftcardrecname", string.Empty, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            @Localization.GetString("GiftCardMessage")
+                        </label>
+                        <div class="col-sm-8">
+                            @Html.TextArea("giftcardmessage", string.Empty, new { @class = "form-control" })
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div id="hcPriceWrapper">
+                        @* Placeholder rebuilds by AJAX request! *@
+                        <div class="form-group clear hc-listprice">
+                            <label class="col-sm-4 control-label">@Localization.GetString("ListPrice")</label>
+                            <span class="col-sm-8 margin-top-sm">
+                                @if (Model.Prices.ListPrice != null)
+                                {
+                                    @Html.Raw(Model.Prices.ListPrice.Text)
+                                }
+                            </span>
+                        </div>
+                        <div class="form-group clear hc-siteprice">
+                            <label class="col-sm-4 control-label">@Localization.GetString("SitePrice")</label>
+                            <span class="col-sm-8 margin-top-sm">@Html.Raw(Model.Prices.SitePrice.Text)</span>
+                        </div>
+                        <div class="form-group clear hc-yousave">
+                            <label class="col-sm-4 control-label">@Localization.GetString("YouSave")</label>
+                            <span class="col-sm-8 margin-top-sm">
+                                @if (Model.Prices.YouSave != null)
+                                {
+                                    @Html.Raw(Model.Prices.YouSave.Text)
+                                }
+                            </span>
+                        </div>
+                        @* END Placeholder rebuilds by AJAX request! *@
+                    </div>
+                }
+
+                if (!Model.LocalProduct.HideQty)
+                {
+                    <div class="form-group">
+                        <label for="qty" class="col-sm-4 control-label">@Localization.GetString("Quantity")</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="qty" name="qty" value="@Model.InitialQuantity" class="form-control small" />
+                        </div>
+                    </div>
+                }
+
+                if (Model.IsAvailableForSale)
+                {
+                    <div class="row">
+                        <div class="col-xs-offset-4 col-xs-8 text-left">
+                            <div id="hcProductActions" class="form-group">
+                                <input type="submit" id="addtocartbutton" value="@Localization.GetString("AddToCart")" class="btn btn-primary" />
+                                @if (Model.IsAvailableForWishList)
+                                {
+                                    <input id="savelaterbutton" name="savelaterbutton" type="submit" value="@Localization.GetString("AddToWishlist")" class="btn btn-default" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @Html.Hidden("productbvin", @Model.LocalProduct.Bvin)
+
+                if (ViewBag.UseFacebook || ViewBag.UsePinterest || ViewBag.UseTwitter)
+                {
+                    <div class="row-fluid">
+                        <div class="col-xs-12">
+                            @if (ViewBag.UseFaceBook)
                             {
-                                <input id="savelaterbutton" name="savelaterbutton" type="submit" value="@Localization.GetString("AddToWishlist")" class="btn btn-default" />
+                                @Html.Partial("_FaceBookSetup")
+                                @Html.Partial("_FaceBookLike", new FaceBookLikeModel()
+                                {
+                                    PageUrl = ViewBag.CurrentUrl
+                                })
+                            }
+
+                            @if (ViewBag.UsePinterest)
+                            {
+                                @Html.Partial("_Pinterest", new PinterestViewModel()
+                                {
+                                    Size = PinterestSize.Small,
+                                    Color = PinterestColor.Red,
+                                    Shape = PinterestShape.Rectangular,
+                                    Language = PinterestLanguage.English
+                                })
+                            }
+
+                            @if (ViewBag.UseTwitter)
+                            {
+                                @Html.Partial("_Twitter", new TwitterViewModel()
+                                {
+                                    DisplayUrl = ViewBag.CurrentUrl,
+                                    LinkUrl = ViewBag.CurrentUrl,
+                                    ViaTwitterName = ViewBag.TwitterHandle,
+                                    DefaultText = string.Format(ViewBag.TwitterDefaultTweetText, string.Concat(Model.LocalProduct.ProductName, " ", Model.LocalProduct.Sku))
+                                })
                             }
                         </div>
                     </div>
-                </div>
+                }
             }
-
-            @Html.Hidden("productbvin", @Model.LocalProduct.Bvin)
-
-            if(ViewBag.UseFacebook || ViewBag.UsePinterest || ViewBag.UseTwitter) { 
-                <div class="row-fluid">
-                    <div class="col-xs-12">
-                        @if (ViewBag.UseFaceBook)
-                        {
-                            @Html.Partial("_FaceBookSetup")
-                            @Html.Partial("_FaceBookLike", new FaceBookLikeModel()
-                            {
-                                PageUrl = ViewBag.CurrentUrl
-                            })
-                        }
-
-                        @if (ViewBag.UsePinterest)
-                        {
-                            @Html.Partial("_Pinterest", new PinterestViewModel()
-                            {
-                                Size = PinterestSize.Small,
-                                Color = PinterestColor.Red,
-                                Shape = PinterestShape.Rectangular,
-                                Language = PinterestLanguage.English
-                            })
-                        }
-
-                        @if (ViewBag.UseTwitter)
-                        {
-                            @Html.Partial("_Twitter", new TwitterViewModel()
-                            {
-                                DisplayUrl = ViewBag.CurrentUrl,
-                                LinkUrl = ViewBag.CurrentUrl,
-                                ViaTwitterName = ViewBag.TwitterHandle,
-                                DefaultText = string.Format(ViewBag.TwitterDefaultTweetText, string.Concat(Model.LocalProduct.ProductName, " ", Model.LocalProduct.Sku))
-                            })
-                        }
-                    </div>
-                </div>
-            }
-        }
-    </div>
+        </div>
     </div>
     </div>
     </div>
