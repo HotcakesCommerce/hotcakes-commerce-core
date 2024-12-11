@@ -22,6 +22,13 @@
 								<span class="label label-success">@Html.Raw(@item.DiscountDetailsAsHtml())</span>
 							</div>
 						}
+						@if (item.LineTotal != item.LineTotalWithoutUpcharge)
+						{
+							<div class="label-wrapper clear" style="padding-top: 0.2rem;">
+								<span class="label label-success">@Html.Raw(@item.UpchargeDetailsAsHtml())</span>
+							</div>
+						}
+						
 						<div class="hidden-xs">
 							@Html.Raw(item.ProductShortDescription)
 
