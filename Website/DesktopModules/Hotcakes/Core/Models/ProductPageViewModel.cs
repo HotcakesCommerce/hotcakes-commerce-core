@@ -264,5 +264,7 @@ namespace Hotcakes.Modules.Core.Models
         /// The name of the vendor of the product.  If not populated, the product does not have a vendor.  
         /// </summary>
         public string VendorName { get; set; }
+
+        public bool CoverCreditCardFees { get; set; }
     }
 }
