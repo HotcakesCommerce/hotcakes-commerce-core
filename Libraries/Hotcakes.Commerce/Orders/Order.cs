@@ -223,6 +223,7 @@ namespace Hotcakes.Commerce.Orders
         ///     Gets or sets the culture that was last used when creating the order
         /// </summary>
         public string UsedCulture { get; set; }
+        public bool CoverCreditCardFees { get; set; }
 
         #endregion
 
