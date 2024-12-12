@@ -101,6 +101,9 @@ namespace Hotcakes.Commerce.Orders
                 DistributeOrderDiscounts(order);
             }
 
+            //Add apply upcharges to de order
+            ApplyUpcharges(order);
+
             return true;
         }
 
@@ -189,7 +192,7 @@ namespace Hotcakes.Commerce.Orders
                     {
                         li.DiscountDetails.Add(new DiscountDetail
                         {
-                            Amount = discount.Amount*li.Quantity,
+                            Amount = discount.Amount * li.Quantity,
                             Description = discount.Description,
                             DiscountType = PromotionType.Sale
                         });
@@ -241,7 +244,7 @@ namespace Hotcakes.Commerce.Orders
 
                         if (p != null)
                         {
-                            var adjustedPricePerItem = item.BasePricePerItem + item.TotalDiscounts()/item.Quantity;
+                            var adjustedPricePerItem = item.BasePricePerItem + item.TotalDiscounts() / item.Quantity;
                             var alreadyDiscounted = p.SitePrice > adjustedPricePerItem;
 
                             var volumeDiscountGlobalText = GlobalLocalization.GetString(VOLUME_DISCOUNT_LOCALIZATION_KEY);
@@ -254,9 +257,9 @@ namespace Hotcakes.Commerce.Orders
                             if (!alreadyDiscounted || !item.DiscountDetails.Any())
                             {
                                 // item isn't discounted yet so apply the exact price the merchant set
-                                var toDiscount = -1*(adjustedPricePerItem - volumeDiscountToApply.Amount);
+                                var toDiscount = -1 * (adjustedPricePerItem - volumeDiscountToApply.Amount);
 
-                                toDiscount = toDiscount*item.Quantity;
+                                toDiscount = toDiscount * item.Quantity;
 
                                 item.DiscountDetails.Add(new DiscountDetail
                                 {
@@ -270,10 +273,10 @@ namespace Hotcakes.Commerce.Orders
                                 // item is already discounted (probably by user group) so figure out
                                 // the percentage of volume discount instead
                                 var originalPriceChange = p.SitePrice - volumeDiscountToApply.Amount;
-                                var percentChange = originalPriceChange/p.SitePrice;
-                                var newDiscount = -1*percentChange*adjustedPricePerItem;
+                                var percentChange = originalPriceChange / p.SitePrice;
+                                var newDiscount = -1 * percentChange * adjustedPricePerItem;
 
-                                newDiscount = newDiscount*item.Quantity;
+                                newDiscount = newDiscount * item.Quantity;
 
                                 item.DiscountDetails.Add(new DiscountDetail
                                 {
@@ -289,6 +292,19 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        private void ApplyUpcharges(Order order)
+        {
+            foreach (var item in order.Items)
+            {
+                var p = _app.CatalogServices.Products.FindWithCache(item.ProductId);
+
+                if (p != null && p.AllowUpcharge && item.IsCoverCreditCardFees)
+                {
+                    item.LineTotal = item.LineTotal + item.TotalUpcharge();
+                }
+            }
+        }
+
         private void CalculateItemsPrices(Order order)
         {
             foreach (var li in order.Items)
@@ -297,7 +313,7 @@ namespace Hotcakes.Commerce.Orders
 
                 if (li.LineTotal < 0) li.LineTotal = 0;
 
-                li.AdjustedPricePerItem = Money.RoundCurrency(li.LineTotal/li.Quantity);
+                li.AdjustedPricePerItem = Money.RoundCurrency(li.LineTotal / li.Quantity);
             }
         }
 
@@ -305,7 +321,7 @@ namespace Hotcakes.Commerce.Orders
         {
             if (mode == PromotionType.OfferForShipping)
             {
-                string[] skipOfferForShipping = {ShippingMethod.MethodUnknown, ShippingMethod.MethodToBeDetermined};
+                string[] skipOfferForShipping = { ShippingMethod.MethodUnknown, ShippingMethod.MethodToBeDetermined };
 
                 if (skipOfferForShipping.Contains(order.ShippingMethodId)) return;
             }
@@ -318,7 +334,7 @@ namespace Hotcakes.Commerce.Orders
             decimal totalHandling = 0;
             var store = _app.CurrentStore;
 
-            if (store.Settings.HandlingType == (int) HandlingMode.PerItem)
+            if (store.Settings.HandlingType == (int)HandlingMode.PerItem)
             {
                 decimal amount = 0;
 
@@ -338,9 +354,9 @@ namespace Hotcakes.Commerce.Orders
                     }
                 }
 
-                totalHandling = store.Settings.HandlingAmount*amount;
+                totalHandling = store.Settings.HandlingAmount * amount;
             }
-            else if (store.Settings.HandlingType == (int) HandlingMode.PerOrder)
+            else if (store.Settings.HandlingType == (int)HandlingMode.PerOrder)
             {
                 // charge handling if there aren't non shipping items
                 if (store.Settings.HandlingNonShipping)
@@ -380,10 +396,10 @@ namespace Hotcakes.Commerce.Orders
             if (itemsToChargeFor < lineItems.Count)
             {
                 // determine what the per-item handling fee is
-                var handlingPerItem = perOrderHandlingAmount/lineItems.Count;
+                var handlingPerItem = perOrderHandlingAmount / lineItems.Count;
 
                 // determine the pro-rated handling fee for items that allow handling charges
-                return Money.RoundCurrency(handlingPerItem*itemsToChargeFor);
+                return Money.RoundCurrency(handlingPerItem * itemsToChargeFor);
             }
             // no changes in the handling are necessary
             return perOrderHandlingAmount;
@@ -500,7 +516,7 @@ namespace Hotcakes.Commerce.Orders
                 {
                     if (totalValueOfItems == 0) continue;
 
-                    var part = Money.RoundCurrency(totalShipping*item.LineTotal/totalValueOfItems);
+                    var part = Money.RoundCurrency(totalShipping * item.LineTotal / totalValueOfItems);
 
                     item.ShippingPortion += part;
                     totalApplied += part;
@@ -528,7 +544,7 @@ namespace Hotcakes.Commerce.Orders
 
         private void TaxOrder(Order order)
         {
-            TaxItems(order.ItemsAsITaxable(), order.BillingAddress, order.ShippingAddress, order.TotalOrderDiscounts,order.UserID);
+            TaxItems(order.ItemsAsITaxable(), order.BillingAddress, order.ShippingAddress, order.TotalOrderDiscounts, order.UserID);
 
             var isTaxRateSame = true;
             decimal taxRate = -1;
@@ -569,12 +585,12 @@ namespace Hotcakes.Commerce.Orders
 
                         if (taxAmount != 0 && remainAmount != 0)
                         {
-                            order.ShippingTaxRate = taxAmount/remainAmount;
+                            order.ShippingTaxRate = taxAmount / remainAmount;
                         }
                     }
                     else
                     {
-                        order.ShippingTaxRate = order.ShippingTax/order.TotalShippingAfterDiscounts;
+                        order.ShippingTaxRate = order.ShippingTax / order.TotalShippingAfterDiscounts;
                     }
                 }
             }
@@ -586,7 +602,7 @@ namespace Hotcakes.Commerce.Orders
             order.TotalTax = order.ItemsTax + order.ShippingTax;
         }
 
-        private void TaxItems(List<ITaxable> items, IAddress billingAddress, IAddress shippingAddress,decimal totalOrderDiscounts,string userId)
+        private void TaxItems(List<ITaxable> items, IAddress billingAddress, IAddress shippingAddress, decimal totalOrderDiscounts, string userId)
         {
             var applyVATRules = _app.CurrentStore.Settings.ApplyVATRules;
             decimal discount = 0;
@@ -623,8 +639,8 @@ namespace Hotcakes.Commerce.Orders
                 var tax = _app.OrderServices.Taxes.FindByAdress(_app.CurrentStore.Id, schedule.TaxScheduleId(),
                     taxationAddress);
 
-                var defaultRate = schedule.TaxScheduleDefaultRate()/100;
-                var defaultShippingRate = schedule.TaxScheduleDefaultShippingRate()/100;
+                var defaultRate = schedule.TaxScheduleDefaultRate() / 100;
+                var defaultShippingRate = schedule.TaxScheduleDefaultShippingRate() / 100;
                 decimal rate = 0;
                 decimal shippingRate = 0;
 
@@ -641,9 +657,9 @@ namespace Hotcakes.Commerce.Orders
 
                     if (!taxExemptUser)
                     {
-                        rate = tax.Rate/100;
+                        rate = tax.Rate / 100;
 
-                        if (tax.ApplyToShipping) shippingRate = tax.ShippingRate/100;
+                        if (tax.ApplyToShipping) shippingRate = tax.ShippingRate / 100;
                     }
                 }
 
@@ -660,12 +676,12 @@ namespace Hotcakes.Commerce.Orders
                         {
                             //Subtract included tax
                             var lineTotal = item.LineTotal;
-                            var lineTotalVAT = Money.RoundCurrency(lineTotal - lineTotal/(1 + defaultRate));
+                            var lineTotalVAT = Money.RoundCurrency(lineTotal - lineTotal / (1 + defaultRate));
 
                             item.LineTotal = lineTotal - lineTotalVAT;
 
                             //Add new tax value
-                            item.TaxPortion = Money.RoundCurrency(item.LineTotal*rate);
+                            item.TaxPortion = Money.RoundCurrency(item.LineTotal * rate);
 
                             item.LineTotal += item.TaxPortion;
                         }
@@ -673,7 +689,7 @@ namespace Hotcakes.Commerce.Orders
                         {
                             var lineTotal = item.LineTotal;
 
-                            item.TaxPortion = Money.RoundCurrency(lineTotal - lineTotal/(1 + rate));
+                            item.TaxPortion = Money.RoundCurrency(lineTotal - lineTotal / (1 + rate));
                         }
 
                         if (shippingRate != defaultShippingRate)
@@ -681,11 +697,11 @@ namespace Hotcakes.Commerce.Orders
                             //Subtract tax from shipping portion always since rates may differ
                             var shippingPortion = item.ShippingPortion;
                             var shippingPortionVAT =
-                                Money.RoundCurrency(shippingPortion - shippingPortion/(1 + defaultShippingRate));
+                                Money.RoundCurrency(shippingPortion - shippingPortion / (1 + defaultShippingRate));
 
                             item.ShippingPortion = shippingPortion - shippingPortionVAT;
 
-                            item.ShippingTaxPortion = Money.RoundCurrency(item.ShippingPortion*shippingRate);
+                            item.ShippingTaxPortion = Money.RoundCurrency(item.ShippingPortion * shippingRate);
 
                             item.ShippingPortion += item.ShippingTaxPortion;
                         }
@@ -694,7 +710,7 @@ namespace Hotcakes.Commerce.Orders
                             var shippingPortion = item.ShippingPortion;
 
                             item.ShippingTaxPortion =
-                                Money.RoundCurrency(shippingPortion - shippingPortion/(1 + shippingRate));
+                                Money.RoundCurrency(shippingPortion - shippingPortion / (1 + shippingRate));
                         }
                     }
                     else
@@ -703,13 +719,13 @@ namespace Hotcakes.Commerce.Orders
 
                         item.TaxPortion = lineTotalTax;
 
-                        var shippingPortionTax = Money.RoundCurrency(item.ShippingPortion*shippingRate);
+                        var shippingPortionTax = Money.RoundCurrency(item.ShippingPortion * shippingRate);
 
                         item.ShippingTaxPortion = shippingPortionTax;
                     }
                 }
 
-                item.AdjustedPricePerItem = Money.RoundCurrency(item.LineTotal/item.Quantity);
+                item.AdjustedPricePerItem = Money.RoundCurrency(item.LineTotal / item.Quantity);
             }
         }
 
@@ -733,7 +749,7 @@ namespace Hotcakes.Commerce.Orders
                 {
                     if (totalValueOfItems != 0)
                     {
-                        var part = Money.RoundCurrency(totalOrderDiscounts*lineItem.LineTotal/totalValueOfItems);
+                        var part = Money.RoundCurrency(totalOrderDiscounts * lineItem.LineTotal / totalValueOfItems);
 
                         lineItem.LineTotal += part;
 
@@ -741,7 +757,7 @@ namespace Hotcakes.Commerce.Orders
                     }
                 }
 
-                lineItem.AdjustedPricePerItem = Money.RoundCurrency(lineItem.LineTotal/lineItem.Quantity);
+                lineItem.AdjustedPricePerItem = Money.RoundCurrency(lineItem.LineTotal / lineItem.Quantity);
             }
         }
 
