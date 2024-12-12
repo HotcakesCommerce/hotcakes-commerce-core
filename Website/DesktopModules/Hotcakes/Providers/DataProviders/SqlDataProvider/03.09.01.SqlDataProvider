@@ -9,3 +9,7 @@ GO
 ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD
 	[UpchargeUnit ] [nvarchar](255) NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_UpchargeUnit ] DEFAULT '1'
 GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] ADD
+	[IsCoverCreditCardFees] bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_IsCoverCreditCardFees] DEFAULT 0
+GO
