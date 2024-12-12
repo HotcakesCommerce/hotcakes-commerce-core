@@ -79,7 +79,7 @@ namespace Hotcakes.Commerce.Orders
                 {
                     if (HttpContext.Current.Items["CurrentShoppingCart"] != null)
                     {
-                        return (Order) HttpContext.Current.Items["CurrentShoppingCart"];
+                        return (Order)HttpContext.Current.Items["CurrentShoppingCart"];
                     }
                 }
                 return null;
@@ -722,6 +722,7 @@ namespace Hotcakes.Commerce.Orders
                         else
                         {
                             productInCart.Quantity += listItem.Quantity;
+                            productInCart.IsCoverCreditCardFees = listItem.IsCoverCreditCardFees;
                             result = true;
                         }
                     }
@@ -785,7 +786,7 @@ namespace Hotcakes.Commerce.Orders
                         li.ShippingCharge == ShippingChargeType.ChargeShippingAndHandling ||
                         li.ShippingCharge == ShippingChargeType.ChargeShipping)
                     {
-                        totalExtraFees += li.ExtraShipCharge*li.Quantity;
+                        totalExtraFees += li.ExtraShipCharge * li.Quantity;
                     }
                 }
 
@@ -814,7 +815,7 @@ namespace Hotcakes.Commerce.Orders
 
                     if (newRate < displayRate.Rate)
                     {
-                        var discount = -1*(newRate - displayRate.Rate);
+                        var discount = -1 * (newRate - displayRate.Rate);
 
                         displayRate.PotentialDiscount = discount;
                     }
@@ -894,7 +895,7 @@ namespace Hotcakes.Commerce.Orders
 
         private void CreateAndReassign(Zone zone)
         {
-            var methods = ShippingMethods.FindForZones(new List<Zone> {zone});
+            var methods = ShippingMethods.FindForZones(new List<Zone> { zone });
 
             if (ShippingZones.Create(zone))
             {
