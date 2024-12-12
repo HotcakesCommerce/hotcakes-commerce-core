@@ -78,6 +78,7 @@ namespace Hotcakes.CommerceDTO.v1.Orders
             ShippingCharge = ShippingChargeTypeDTO.ChargeShippingAndHandling;
             PromotionIds = null;
             FreeQuantity = 0;
+            IsCoverCreditCardFees = false;
         }
 
         /// <summary>
@@ -323,5 +324,11 @@ namespace Hotcakes.CommerceDTO.v1.Orders
         /// </summary>
         [DataMember]
         public int FreeQuantity { get; set; }
+
+        /// <summary>
+        ///     Retuns true if the product matching this line item is Cover Credit Card Fees.
+        /// </summary>
+        [DataMember]
+        public bool IsCoverCreditCardFees { get; set; }
     }
 }
