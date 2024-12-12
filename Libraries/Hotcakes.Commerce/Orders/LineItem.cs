@@ -93,6 +93,7 @@ namespace Hotcakes.Commerce.Orders
             IsTaxExempt = false;
             FreeShippingMethodIds = new List<string>();
             RecurringBilling = new RecurringBilling(this);
+            IsCoverCreditCardFees = false;
         }
 
         #endregion
@@ -237,7 +238,7 @@ namespace Hotcakes.Commerce.Orders
         /// </summary>
         public string PromotionIds { get; set; }
 
-        public bool CoverCreditCardFees { get; set; }
+        public bool IsCoverCreditCardFees { get; set; }
 
         #endregion
 
