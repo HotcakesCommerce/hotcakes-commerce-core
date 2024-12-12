@@ -112,6 +112,7 @@ namespace Hotcakes.Commerce.Orders
             data.IsRecurringCancelled = model.RecurringBilling.IsCancelled;
             data.PromotionIds = model.PromotionIds;
             data.FreeQuantity = model.FreeQuantity;
+            data.IsCoverCreditCardFees = model.IsCoverCreditCardFees;
         }
 
         protected override void CopyDataToModel(hcc_LineItem data, LineItem model)
@@ -162,6 +163,7 @@ namespace Hotcakes.Commerce.Orders
             model.RecurringBilling.IsCancelled = data.IsRecurringCancelled;
             model.PromotionIds = data.PromotionIds;
             model.FreeQuantity = data.FreeQuantity;
+            model.IsCoverCreditCardFees = data.IsCoverCreditCardFees;
 
             if (model.CustomPropertyGet(Constants.HCC_KEY, MARKEDFREESHIPPING) == true.ToString())
             {
