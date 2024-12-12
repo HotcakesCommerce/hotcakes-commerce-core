@@ -670,14 +670,6 @@ namespace Hotcakes.Modules.Core.Controllers
 
         private bool AddToCart(ProductPageViewModel model)
         {
-            if (model.LocalProduct.AllowUpcharge)
-            {
-                var boolCoverCreditCardFees = Request.Form["covercreditcard"] == "on";
-                if (boolCoverCreditCardFees)
-                {
-                    model.CoverCreditCardFees = boolCoverCreditCardFees;
-                }
-            }
             var isValidSelections = ValidateSelections(model);
             var isValidQty = DetermineQuantityToAdd(model);
             var isValidUserPrice = ValidateUserPrice(model);
@@ -847,8 +839,7 @@ namespace Hotcakes.Modules.Core.Controllers
                 var boolCoverCreditCardFees = Request.Form["covercreditcard"] == "on";
                 if (boolCoverCreditCardFees)
                 {
-                    model.CoverCreditCardFees = boolCoverCreditCardFees;
-                    li.CoverCreditCardFees = boolCoverCreditCardFees;
+                    li.IsCoverCreditCardFees = boolCoverCreditCardFees;
                 }
             }
 
