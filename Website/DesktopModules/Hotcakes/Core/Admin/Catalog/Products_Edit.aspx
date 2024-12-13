@@ -108,13 +108,11 @@ Src="../Controls/ImageUploader.ascx" TagName="ImageUploader" TagPrefix="hcc" %>
 
         var $chbAllowUpcharge = $('.hcAllowUpcharge input');
         var $hcAllowUpchargeSection = $('.hcAllowUpchargeSection');
+        var $hcAllowUpchargeChb = $('.hcAllowUpcharge');
 
         var updateAllowUpchargeSectionVisibility = function () { updateElementState($chbAllowUpcharge, $hcAllowUpchargeSection); }
-
         $chbAllowUpcharge.change(updateAllowUpchargeSectionVisibility);
-
         updateAllowUpchargeSectionVisibility();
-
 
         var $chbUserPrice = $('.hcUserPrice input');
         var $hcUserPriceLabel = $('.hcUserPriceLabel');
@@ -127,25 +125,26 @@ Src="../Controls/ImageUploader.ascx" TagName="ImageUploader" TagPrefix="hcc" %>
         var $txtProductName = $('#txtProductName');
         var $txtRewriteUrl = $('#txtRewriteUrl');
 
-
         var updatePriceVisibility = function () { updateState($chbUserPrice, $txtPriceInputs); }
         var updateQtyVisibility = function () { updateState($chbHideQty, $txtMinQty); }
         var updateQtyFormItem = function () { showControlParent($chbUserPrice, $chbHideQty); }
         var updatePriceLabelFormItem = function () { showControlParent($chbUserPrice, $hcUserPriceLabel); }
         var updateShippingChargeVisibility = function () { hideControlParent($cbShippingCharge, $hcShippingChargeInput); }
+        var updateAllowUpchargeChbVisibility = function () { updateElementState($chbUserPrice, $hcAllowUpchargeChb); }
 
         $chbUserPrice.change(updatePriceVisibility);
         $chbUserPrice.change(updateQtyFormItem);
         $chbUserPrice.change(updatePriceLabelFormItem);
         $chbHideQty.change(updateQtyVisibility);
         $cbShippingCharge.change(updateShippingChargeVisibility);
-
+        $chbUserPrice.change(updateAllowUpchargeChbVisibility);
    
         updatePriceVisibility();
         updateQtyVisibility();
         updateQtyFormItem();
         updatePriceLabelFormItem();
         updateShippingChargeVisibility();
+        updateAllowUpchargeChbVisibility();
 
         $txtProductName.change(function () {
             var rawName = $(this).val();
@@ -316,6 +315,7 @@ Src="../Controls/ImageUploader.ascx" TagName="ImageUploader" TagPrefix="hcc" %>
           CssClass="hcUserPriceLabel"
         />
       </div>
+      <div class="hcFormItem">
       <div class="hcFormItem hcFormItem50p">
         <label class="hcLabel"><%=Localization.GetString("lblMSRP") %></label>
         <asp:TextBox
@@ -403,6 +403,7 @@ Src="../Controls/ImageUploader.ascx" TagName="ImageUploader" TagPrefix="hcc" %>
           CssClass="hcPriceInput"
           style="width: 200px"
         />
+      </div>
       </div>
     </asp:Panel>
     <div class="hcForm">
