@@ -29,9 +29,11 @@ using System.Linq;
 using System.Web;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Catalog;
+using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Reporting;
 using Hotcakes.Commerce.Utilities;
+using Hotcakes.CommerceDTO.v1.Catalog;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Web;
 
@@ -177,9 +179,9 @@ namespace Hotcakes.Modules.Core
 			p.ProductName = mainProduct.ProductName + " Bundle";
 			p.IsBundle = true;
 			p.IsSearchable = true;
-			p.AllowUpcharge = false;
-			p.UpchargeAmount = 3m;
-			p.UpchargeUnit = "1";
+			p.AllowUpcharge = Constants.AllowUpcharge;
+            p.UpchargeAmount = Constants.UpchargeAmount;
+			p.UpchargeUnit = ((int)UpchargeAmountTypesDTO.Percent).ToString();
 			p.Status = ProductStatus.Disabled;
 			p.InventoryMode = ProductInventoryMode.AlwayInStock;
 			p.UrlSlug = CreateUrlSlug(mainProduct.UrlSlug + "-bundle", hccApp);
