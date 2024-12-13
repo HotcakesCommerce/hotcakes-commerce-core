@@ -86,7 +86,7 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
             IsSearchable = true;
             AllowUpcharge = false;
             UpchargeAmount  = 3m;
-            UpchargeUnit = "1";
+            UpchargeUnit = ((int)UpchargeAmountTypesDTO.Percent).ToString();
         }
 
         /// <summary>
