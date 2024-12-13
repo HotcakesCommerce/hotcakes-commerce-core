@@ -42,6 +42,7 @@ using Hotcakes.Commerce.Membership;
 using Hotcakes.Commerce.Shipping;
 using Hotcakes.Commerce.Storage;
 using Hotcakes.Commerce.Utilities;
+using Hotcakes.CommerceDTO.v1.Catalog;
 using Hotcakes.Common.Dnn;
 using Hotcakes.Modules.Core.Admin.AppCode;
 using Hotcakes.Web;
@@ -662,8 +663,8 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
                 }
                 if (lstUpchargeUnitType.Items.Count == 0)
                 {
-                    lstUpchargeUnitType.Items.Add(new ListItem("Amount", "0"));
-                    lstUpchargeUnitType.Items.Add(new ListItem("Percent", "1")); 
+                    lstUpchargeUnitType.Items.Add(new ListItem(UpchargeAmountTypesDTO.Amount.ToString(), ((int)UpchargeAmountTypesDTO.Amount).ToString()));
+                    lstUpchargeUnitType.Items.Add(new ListItem(UpchargeAmountTypesDTO.Percent.ToString(), ((int)UpchargeAmountTypesDTO.Percent).ToString())); 
                 }
 
                 UpchargeAmountField.Text = p.UpchargeAmount % 1 == 0 ? ((int)p.UpchargeAmount).ToString() : p.UpchargeAmount.ToString("0.##");
