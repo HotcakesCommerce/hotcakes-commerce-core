@@ -37,6 +37,7 @@ using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Marketing;
 using Hotcakes.Commerce.Shipping;
 using Hotcakes.Commerce.Taxes;
+using Hotcakes.CommerceDTO.v1.Catalog;
 using Hotcakes.CommerceDTO.v1.Orders;
 using Hotcakes.CommerceDTO.v1.Shipping;
 using Hotcakes.Payment;
@@ -540,11 +541,11 @@ namespace Hotcakes.Commerce.Orders
 
             }
             decimal baseTotal = BasePricePerItem * Quantity;
-            if (product.UpchargeUnit == "0")
+            if (product.UpchargeUnit == ((int)UpchargeAmountTypesDTO.Amount).ToString())
             {
                 upchargeAmountTotal = product.UpchargeAmount;
             }
-            if (product.UpchargeUnit == "1")
+            if (product.UpchargeUnit == ((int)UpchargeAmountTypesDTO.Percent).ToString())
             {
                 upchargeAmountTotal = baseTotal * (product.UpchargeAmount / 100);
             }
