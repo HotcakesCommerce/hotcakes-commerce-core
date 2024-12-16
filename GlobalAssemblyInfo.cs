@@ -12,7 +12,7 @@
 [assembly: System.Reflection.AssemblyConfiguration("Release")]
 [assembly: System.Reflection.AssemblyCopyright("Copyright © 2024. All rights reserved.")]
 [assembly: System.Reflection.AssemblyFileVersion("01.00.00")]
-[assembly: System.Reflection.AssemblyVersion("03.08.02")]
+[assembly: System.Reflection.AssemblyVersion("03.09.00")]
 
 
 
@@ -26,7 +26,7 @@ internal sealed partial class ThisAssembly {
     
     internal const string AssemblyFileVersion = "01.00.00";
     
-    internal const string AssemblyVersion = "03.08.02";
+    internal const string AssemblyVersion = "03.09.00";
     
     private ThisAssembly() {
     }
