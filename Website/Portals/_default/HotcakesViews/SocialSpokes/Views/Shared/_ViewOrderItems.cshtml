@@ -28,17 +28,25 @@
 				}
 			</td>
 			<td class="hc-center">@item.Quantity</td>
-			<td class="hcLineTotal hc-right">
-				<span class="hcLineTotalBase hc-strike"
-			@if (!item.HasAnyDiscounts)
-			{
-				<text>style="display:none;"</text>
-			}
-			>@item.LineTotalWithoutDiscounts.ToString("C")</span><br />
+            <td class="hcLineTotal hc-right">
+                @if (item.IsCoverCreditCardFees && item.HasAnyUpcharge)
+                {
+                    <span class="hc-strike"
+                          @if (!item.HasAnyUpcharge) { <text> style="display:none;" </text> }>
+                       @item.LineTotalWithoutUpcharge.ToString("C")
+                    </span><br />
+                }
+				@if (item.HasAnyDiscounts)
+				{
+                    <span class="hcLineTotalBase hc-strike"
+                          @if (!item.HasAnyDiscounts){ <text> style="display:none;" </text> }>
+				        @item.LineTotalWithoutDiscounts.ToString("C")
+					</span><br />
+				}
 				<span class="hcLineTotalAdjusted">
-					@item.LineTotal.ToString("C")
-				</span>
-			</td>
+                  @item.LineTotal.ToString("C")
+                </span>
+            </td>
 		</tr>
  }
 </table>
