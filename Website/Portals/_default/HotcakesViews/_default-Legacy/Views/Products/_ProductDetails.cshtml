@@ -59,6 +59,17 @@
                 <div class="dnnFormMessage dnnFormWarning">@Html.Raw(Model.ValidationMessage)</div>
                 @* END Placeholder rebuilds by AJAX request! *@
             </div>
+            if (Model.LocalProduct.IsUserSuppliedPrice && Model.LocalProduct.AllowUpcharge)
+            {
+                <div class="dnnFormItem hc-upcharge">
+                    <label class="dnnLabel">
+                        @Localization.GetString("AcceptUpchargeFee")
+                    </label>
+                    <div>
+                       <input type="checkbox" id="covercreditcard" name="covercreditcard" checked />
+                    </div>
+                </div>
+            }
                     
             if (Model.LocalProduct.IsUserSuppliedPrice)
             {
