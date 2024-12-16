@@ -13,19 +13,19 @@
 	<p>Sponsorship is <em>Powered by GitHub Sponsors</em> and ensures that this project lives and thrives. <a href="https://github.com/sponsors/UpendoVentures" target="_blank">Please consider contributing</a> any amount.</p>
 	<p>THANK YOU to the following rockstars!</p>
 	<ul>
-		<li>David Poindexter, <a href="https://nvisionative.com/" target="_blank">nvisionative</a></li>
-		<li>Dan Rice, <a href="https://www.puresystems.co.uk/" target="_blank">Pure Systems</a></li>
-		<li>Matt Rutledge, <a href="https://beleivekids.com/" target="_blank">Believe Kids</a></li>
 		<li>Adam Bernstein, <a href="https://practicewise.com/" target="_blank">PracticeWise</a></li>
 		<li>Jeremy Farrance, <a href="https://accuraty.com/" target="_blank">Accuraty</a></li>
-		<li><b>(two private sponsors)</b></li>
+		<li><a href="http://www.rammware.net/" target="_blank">John Ramminger</a></li>
+		<li><em>2 private sponsors</em></li>
 	</ul>
 	
 	<h3>Contributors</h3>
 	<p>THANK YOU to the following community members for participating in this release!</p>
 	<ul>
 		<li>Will Strohl, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
-		<li>Liban Silva, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
+		<li>Alejandro Roman, <a href="https://upendoventures.com/What/CMS/DNN" target="_blank">Upendo Ventures</a></li>
+		<li>Liban Silva, <a href="https://upendoventures.com/What/CMS/DNN/Extensions" target="_blank">Upendo Ventures</a></li>
+		<li><a href="https://github.com/mtrutledge" target="_blank">Matt Rutledge</a></li>
 	</ul>
 
 	<h3>Partners</h3>
@@ -45,17 +45,21 @@
 	
 	<h3><strong>Enhancements</strong></h3>
 	<ul>
-		<li>None at this time.</li>
+		<li><strong>SI: UPS API Updated</strong> - The UPS API integration has been updated to use the most current API. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/487" target="_blank">Issue 487</a>), Thanks <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a></li>
+		<li><strong>SI: Notify Store Management When Checkout Payment Fails</strong> - A new option has been added to allow store owners to be notified when payments fail. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/43" target="_blank">Issue 43</a>), Thanks <a href="https://github.com/alejoroman0605" target="_blank">@alejoroman0605</a></li>
+		<li><strong>SI: Allow User Supplied Price Upcharge</strong> - Now, you can apply an upcharge value to the User Supplied Price feature. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/373" target="_blank">Issue 373</a>), Thanks <a href="https://github.com/ArielBlanco1990" target="_blank">@ArielBlanco1990</a></li>
+		<li><strong>Improved Customer Matches When Editing Orders</strong> - Finding customers has been been improved &amp; now includes partial matches. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/514" target="_blank">Issue 514</a>), Thanks <a href="https://github.com/alejoroman0605" target="_blank">@alejoroman0605</a></li>
 		<!--
 		<li><strong></strong> - . (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/" target="_blank">Issue </a>), Thanks <a href="https://github.com/" target="_blank">@</a></li>
+		<li>None at this time.</li>
 		-->
 	</ul>
 	
 	<h3><strong>Maintenance Updates</strong></h3>
 	<ul>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/484" target="_blank">Issue 484</a> - SI: Resolves `INVALID_PARAMETER_SYNTAX` Error in PayPal Pro. Thanks <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a>!</li>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/500" target="_blank">Issue 500</a> - Default views used incorrect value for the total search results. Thanks <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a>!</li>
-		<li>(no issue) - Resolved build issue by adding a missing MVC reference. Thanks, <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a> & <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a>!</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/506" target="_blank">Issue 506</a> - SI: Unexpected URL Characters Break the URL Provider. Thanks <a href="https://github.com/alejoroman0605" target="_blank">@alejoroman0605</a>!</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/508" target="_blank">Issue 508</a> - SI: Problems Checking Out When `RequiresUniqueEmail` is Enabled. Thanks <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a>!</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/pulls/492" target="_blank">Pull 492</a> - Resolved Issue Finding Products by StoreID in Multi-Store Implementations. Thanks <a href="https://github.com/mtrutledge" target="_blank">@mtrutledge</a>!</li>
 		<!--
 		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/" target="_blank">Issue </a> - . Thanks <a href="https://github.com/" target="_blank">@</a></li>
 		<li>(no issue) - .</li>
