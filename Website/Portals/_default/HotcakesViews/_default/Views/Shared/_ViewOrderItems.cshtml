@@ -12,48 +12,54 @@
 			@for (int i = 0; i < Model.Count(); i++)
 			{
 				var item = Model.ElementAt(i);
-				<tr>
-					<td>
-						<label>@item.ProductName</label><br />
-						<span>@item.ProductSku</span><br />
-						@if (item.LineTotal != item.LineTotalWithoutDiscounts)
-						{
-							<div class="label-wrapper clear">
-								<span class="label label-success">@Html.Raw(@item.DiscountDetailsAsHtml())</span>
-							</div>
-						}
-						@if (item.LineTotal != item.LineTotalWithoutUpcharge)
-						{
-							<div class="label-wrapper clear" style="padding-top: 0.2rem;">
-								<span class="label label-success">@Html.Raw(@item.UpchargeDetailsAsHtml())</span>
-							</div>
-						}
-						
-						<div class="hidden-xs">
-							@Html.Raw(item.ProductShortDescription)
+                <tr>
+                    <td>
+                        <label>@item.ProductName</label><br />
+                        <span>@item.ProductSku</span><br />
+                        @if (item.LineTotal != item.LineTotalWithoutDiscounts)
+                        {
+                            <div class="label-wrapper clear">
+                                <span class="label label-success">@Html.Raw(@item.DiscountDetailsAsHtml())</span>
+                            </div>
+                        }
+                        @if (item.LineTotal != item.LineTotalWithoutUpcharge)
+                        {
+                            <div class="label-wrapper clear" style="padding-top: 0.2rem;">
+                                <span class="label label-success">@Html.Raw(@item.UpchargeDetailsAsHtml())</span>
+                            </div>
+                        }
 
-							@if (!string.IsNullOrEmpty(item.CustomPropGiftCardNumber))
-							{
-								@Html.Raw(Localization.GetString("GiftCardNumber") + item.CustomPropGiftCardNumber)
-							}
-						</div>
-					</td>
-					<td>@item.Quantity</td>
+                        <div class="hidden-xs">
+                            @Html.Raw(item.ProductShortDescription)
+
+                            @if (!string.IsNullOrEmpty(item.CustomPropGiftCardNumber))
+                            {
+                                @Html.Raw(Localization.GetString("GiftCardNumber") + item.CustomPropGiftCardNumber)
+                            }
+                        </div>
+                    </td>
+                    <td>@item.Quantity</td>
                     <td class="text-right">
-                        <span class="hcLineTotalAdjusted">
-                            @item.LineTotal.ToString("C")
-                        </span><br />
                         @if (item.IsCoverCreditCardFees)
                         {
                             <span class="hcLineTotalBase hc-strike"
-                                  @if (!item.HasAnyUpcharge) { <text> style="display:none;" </text>  }>
+                                  @if (!item.HasAnyUpcharge) { <text> style="display:none;" </text> }>
                                 <mark>@item.LineTotalWithoutUpcharge.ToString("C")</mark>
                             </span><br />
                         }
-                        <span class="hcLineTotalBase hc-strike"
-                              @if (!item.HasAnyDiscounts) { <text> style="display:none;" </text>  }><mark>@item.LineTotalWithoutDiscounts.ToString("C")</mark></span>
-                        </td>
-				</tr>
+                        @if (item.HasAnyDiscounts)
+                        {
+                            <span class="hcLineTotalBase hc-strike"
+                                  @if (!item.HasAnyDiscounts) { <text> style="display:none;" </text> }>
+                                 <mark>@item.LineTotalWithoutDiscounts.ToString("C")</mark>
+                            </span> <br />
+
+                        }
+                        <span class="hcLineTotalAdjusted">
+                            @item.LineTotal.ToString("C")
+                        </span>
+                    </td>
+                    </tr>
 			}
 		</table>
 	</div>
