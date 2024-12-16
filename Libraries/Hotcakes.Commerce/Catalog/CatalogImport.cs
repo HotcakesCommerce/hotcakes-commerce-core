@@ -376,6 +376,10 @@ namespace Hotcakes.Commerce.Catalog
                 var roles = GetCell(row, "AH");
 
 			    p.IsSearchable = GetCellBool(row, "AI");
+				p.AllowUpcharge = GetCellBool(row, "AJ");
+				p.UpchargeAmount  = GetCellDecimal(row, "AK");
+				p.UpchargeUnit = GetCell(row, "AL");
+			
 
 				if (string.IsNullOrWhiteSpace(p.ProductName))
 				{
