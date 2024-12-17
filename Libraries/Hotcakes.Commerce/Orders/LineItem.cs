@@ -673,7 +673,7 @@ namespace Hotcakes.Commerce.Orders
         public string UpchargeDetailsAsHtml()
         {
             var sb = new StringBuilder();
-            sb.Append($"Upcharge Amount: ({TotalUpcharge():C})<br />");
+            sb.Append($"{GlobalLocalization.GetString("UpchargeAmount")} : ({TotalUpcharge():C})<br />");
             return sb.ToString();
         }
 
