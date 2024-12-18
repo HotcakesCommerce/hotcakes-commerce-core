@@ -358,7 +358,7 @@
           <Property Name="ShippingCharge" Type="int" Nullable="false" />
           <Property Name="FreeQuantity" Type="int" Nullable="false" />
           <Property Name="PromotionIds" Type="nvarchar" MaxLength="500" />
-          <Property Name="IsCoverCreditCardFees" Type="bit" Nullable="false" />
+          <Property Name="IsUpchargeAllowed" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="hcc_MailingList">
           <Key>
@@ -4154,7 +4154,7 @@
           <Property Type="Boolean" Name="IsRecurringCancelled" Nullable="false" />
           <Property Type="Int32" Name="FreeQuantity" Nullable="false" />
           <Property Type="String" Name="PromotionIds" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="IsCoverCreditCardFees" Nullable="false" />
+          <Property Type="Boolean" Name="IsUpchargeAllowed" Nullable="false" />
         </EntityType>
         <EntityType Name="hcc_Promotions">
           <Key>
@@ -6087,7 +6087,7 @@
                 <ScalarProperty Name="PromotionIds" ColumnName="PromotionIds" />
                 <ScalarProperty Name="FreeQuantity" ColumnName="FreeQuantity" />
                 <ScalarProperty Name="IsRecurringCancelled" ColumnName="IsRecurringCancelled" />
-                <ScalarProperty Name="IsCoverCreditCardFees" ColumnName="IsCoverCreditCardFees" />
+                <ScalarProperty Name="IsUpchargeAllowed" ColumnName="IsUpchargeAllowed" />
                 <ScalarProperty Name="ShippingCharge" ColumnName="ShippingCharge" />
                 <ScalarProperty Name="RecurringIntervalType" ColumnName="RecurringIntervalType" />
                 <ScalarProperty Name="RecurringInterval" ColumnName="RecurringInterval" />
