@@ -265,6 +265,6 @@ namespace Hotcakes.Modules.Core.Models
         /// </summary>
         public string VendorName { get; set; }
 
-        public bool CoverCreditCardFees { get; set; }
+        public bool UpchargeAllowed { get; set; }
     }
 }
