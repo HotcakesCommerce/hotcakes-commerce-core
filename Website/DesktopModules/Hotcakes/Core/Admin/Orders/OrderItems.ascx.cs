@@ -115,7 +115,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
                 lblDescription.Text = lineItem.ProductName;
                 lblDescription.Text += "<br />" + lineItem.ProductShortDescription;
                 lblShippingStatus.Text = LocalizationUtils.GetOrderShippingStatus(lineItem.ShippingStatus);
-                lblAdjustedPrice.Text = lineItem.IsCoverCreditCardFees && lineItem.HasAnyUpcharge ? (lineItem.AdjustedPricePerItem + lineItem.TotalUpcharge()).ToString("C") : lineItem.AdjustedPricePerItem.ToString("C");
+                lblAdjustedPrice.Text = lineItem.IsUpchargeAllowed && lineItem.HasAnyUpcharge ? (lineItem.AdjustedPricePerItem + lineItem.TotalUpcharge()).ToString("C") : lineItem.AdjustedPricePerItem.ToString("C");
                 txtQty.Text = lineItem.Quantity.ToString();
                 txtQty.Visible = EditMode;
                 lblQty.Text = lineItem.Quantity.ToString();
@@ -130,7 +130,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
                     litDiscounts.Text = "<div class=\"discounts\">" + lineItem.DiscountDetailsAsHtml() + "</div>";
                 }
 
-                if (lineItem.IsCoverCreditCardFees && lineItem.HasAnyUpcharge)
+                if (lineItem.IsUpchargeAllowed && lineItem.HasAnyUpcharge)
                 {
                     lblLineTotalWithoutUpcharge.Visible = true;
                     lblLineTotalWithoutUpcharge.Text = lineItem.LineTotalWithoutUpcharge.ToString("c");
