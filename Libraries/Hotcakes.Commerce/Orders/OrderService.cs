@@ -722,7 +722,7 @@ namespace Hotcakes.Commerce.Orders
                         else
                         {
                             productInCart.Quantity += listItem.Quantity;
-                            productInCart.IsCoverCreditCardFees = listItem.IsCoverCreditCardFees;
+                            productInCart.IsUpchargeAllowed = listItem.IsUpchargeAllowed;
                             result = true;
                         }
                     }
