@@ -39,7 +39,7 @@
                     </td>
 					<td>@item.Quantity</td>
                     <td class="text-right">
-                        @if (item.IsCoverCreditCardFees)
+                        @if (item.IsUpchargeAllowed)
                         {
                             <span class="hcLineTotalBase hc-strike
                                   @if (!item.HasAnyUpcharge) { <text> d-none</text> }">
