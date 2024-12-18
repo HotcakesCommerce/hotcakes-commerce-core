@@ -836,10 +836,10 @@ namespace Hotcakes.Modules.Core.Controllers
 
             if (model.LocalProduct.AllowUpcharge)
             {
-                var boolCoverCreditCardFees = Request.Form["covercreditcard"] == "on";
-                if (boolCoverCreditCardFees)
+                var boolUpchargeAllowed = Request.Form["upchargeallowed"] == "on";
+                if (boolUpchargeAllowed)
                 {
-                    li.IsCoverCreditCardFees = boolCoverCreditCardFees;
+                    li.IsUpchargeAllowed = boolUpchargeAllowed;
                 }
             }
 
