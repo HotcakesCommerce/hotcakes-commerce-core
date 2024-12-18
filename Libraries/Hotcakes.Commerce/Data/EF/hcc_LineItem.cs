@@ -60,7 +60,7 @@ namespace Hotcakes.Commerce.Data.EF
         public bool IsRecurringCancelled { get; set; }
         public int FreeQuantity { get; set; }
         public string PromotionIds { get; set; }
-        public bool IsCoverCreditCardFees { get; set; }
+        public bool IsUpchargeAllowed { get; set; }
     
         public virtual hcc_Order hcc_Order { get; set; }
     }
