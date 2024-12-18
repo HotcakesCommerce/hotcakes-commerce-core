@@ -72,6 +72,9 @@ namespace Hotcakes.Commerce.Data.EF
         public bool IsUserPrice { get; set; }
         public bool HideQty { get; set; }
         public bool IsSearchable { get; set; }
+        public bool AllowUpcharge { get; set; }
+        public decimal UpchargeAmount { get; set; }
+        public string UpchargeUnit { get; set; }
         public bool IsBundle { get; set; }
         public bool IsGiftCard { get; set; }
         public bool IsRecurring { get; set; }

@@ -732,6 +732,9 @@
   <data name="EditModule_IsSearchable.Label" xml:space="preserve">
     <value>Is Searchable?</value>
   </data>
+  <data name="EditModule_AllowUpcharge.Label" xml:space="preserve">
+    <value>Allow Upcharge?</value>
+  </data>
   <data name="EditModule_IsUpgradable.HelpText" xml:space="preserve">
     <value>Identifies if the module supports the IUpgradable interface allowing it to run custom code when upgraded.</value>
   </data>

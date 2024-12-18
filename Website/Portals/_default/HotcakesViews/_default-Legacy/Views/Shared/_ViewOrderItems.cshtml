@@ -10,35 +10,48 @@
  {
 	 var item = Model.ElementAt(i);
 		<tr class="@(i % 2 == 1 ? "dnnGridAltItem" : "dnnGridItem")">
-			<td>
-				@item.ProductName<br />
-				<span>@item.ProductSku</span><br />
-				<div class="hidden-phone">
-					@Html.Raw(item.ProductShortDescription)
+            <td>
+                @item.ProductName<br />
+                <span>@item.ProductSku</span><br />
+                <div class="hidden-phone">
+                    @Html.Raw(item.ProductShortDescription)
 
                     @if (!string.IsNullOrEmpty(item.CustomPropGiftCardNumber))
                     {
                         @Html.Raw(Localization.GetString("GiftCardNumber") + item.CustomPropGiftCardNumber)
                     }
-				</div>
-				@if (item.LineTotal != item.LineTotalWithoutDiscounts)
-				{
+                </div>
+                @if (item.LineTotal != item.LineTotalWithoutDiscounts)
+                {
                     <br />
-					@Html.Raw(@item.DiscountDetailsAsHtml())
-				}
-			</td>
+                    @Html.Raw(@item.DiscountDetailsAsHtml())
+                }
+                @if (item.LineTotal != item.LineTotalWithoutUpcharge)
+                {
+                    <br />
+                    @Html.Raw(@item.UpchargeDetailsAsHtml())
+                }
+            </td>
 			<td class="hc-center">@item.Quantity</td>
-			<td class="hcLineTotal hc-right">
-				<span class="hcLineTotalBase hc-strike"
-			@if (!item.HasAnyDiscounts)
-			{
-				<text>style="display:none;"</text>
-			}
-			>@item.LineTotalWithoutDiscounts.ToString("C")</span><br />
-				<span class="hcLineTotalAdjusted">
-					@item.LineTotal.ToString("C")
-				</span>
-			</td>
+            <td class="hcLineTotal hc-right">
+                @if (item.IsUpchargeAllowed && item.HasAnyUpcharge)
+                {
+                    <span class="hc-strike"
+                          @if (!item.HasAnyUpcharge) { <text> style="display:none;" </text> }>
+                        @item.LineTotalWithoutUpcharge.ToString("C")
+                    </span><br />
+                }
+                @if (item.HasAnyDiscounts)
+                {
+                    <span class="hcLineTotalBase hc-strike"
+                          @if (!item.HasAnyDiscounts) { <text> style="display:none;" </text> }>
+                        @item.LineTotalWithoutDiscounts.ToString("C")
+                     </span><br />
+                }
+                 <span class="hcLineTotalAdjusted">
+                    @item.LineTotal.ToString("C")
+                 </span>
+            </td>
 		</tr>
  }
 </table>

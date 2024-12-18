@@ -54,3 +54,31 @@ BEGIN
     </html>', N'<li>Order Number: [[Order.OrderId]]</li>')
 END
 GO
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_Product' AND  COLUMN_NAME = 'AllowUpcharge')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD
+	[AllowUpcharge] bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_AllowUpcharge] DEFAULT 0
+END
+GO
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_Product' AND  COLUMN_NAME = 'UpchargeAmount')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD
+	[UpchargeAmount] [decimal](18, 10)  NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_UpchargeAmount] DEFAULT 3
+END
+GO
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_Product' AND  COLUMN_NAME = 'UpchargeUnit')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_Product] ADD
+	[UpchargeUnit ] [nvarchar](255) NULL CONSTRAINT [DF_{objectQualifier}hcc_Product_UpchargeUnit ] DEFAULT '1'
+END
+GO
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_Product' AND  COLUMN_NAME = 'IsUpchargeAllowed')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] ADD
+	[IsUpchargeAllowed] bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_IsUpchargeAllowed] DEFAULT 0
+END
+GO

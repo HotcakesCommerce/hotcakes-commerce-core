@@ -51,6 +51,7 @@
                     <asp:HyperLink ID="lnkGiftCards" runat="server" />
                 </div>
                 <asp:Literal ID="litDiscounts" runat="server" />
+                <asp:Literal ID="litUpcharge" runat="server" />
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="Shipping">
@@ -84,6 +85,7 @@
             <HeaderStyle CssClass="hcRight" />
             <ItemTemplate>
                 <asp:Label ID="lblLineTotalWithoutDiscounts" runat="server" CssClass="hcItemDiscount" Visible="false" />
+                <asp:Label ID="lblLineTotalWithoutUpcharge" runat="server" CssClass="hcItemDiscount" Visible="false" />
                 <asp:Label ID="lblLineTotal" runat="server" />
             </ItemTemplate>
         </asp:TemplateField>
@@ -116,6 +118,7 @@
                     <asp:HyperLink ID="lnkGiftCards" runat="server" />
                 </div>
                 <asp:Literal ID="litDiscounts" runat="server" />
+                <asp:Literal ID="litUpcharge" runat="server" />
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="Qty">
@@ -136,6 +139,7 @@
             <HeaderStyle CssClass="hcRight" />
             <ItemTemplate>
                 <asp:Label ID="lblLineTotalWithoutDiscounts" runat="server" CssClass="hcItemDiscount" Visible="false" />
+                <asp:Label ID="lblLineTotalWithoutUpcharge" runat="server" CssClass="hcItemDiscount" Visible="false" />
                 <asp:Label ID="lblLineTotal" runat="server" />
                 <asp:Label ID="lblInterval" runat="server" />
             </ItemTemplate>

@@ -255,6 +255,9 @@ namespace Hotcakes.Commerce.Tests
 				edit.Featured = product.Featured;
 				edit.IsBundle = product.IsBundle;
 				edit.IsSearchable = product.IsSearchable;
+				edit.AllowUpcharge = product.AllowUpcharge;
+				edit.UpchargeAmount = product.UpchargeAmount;
+				edit.UpchargeUnit = product.UpchargeUnit;
 				edit.Status = product.Status;
 				edit.Sku = product.Sku;
 				edit.ProductName = product.ProductName;

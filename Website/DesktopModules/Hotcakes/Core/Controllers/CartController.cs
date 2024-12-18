@@ -739,6 +739,7 @@ namespace Hotcakes.Modules.Core.Controllers
             {
                 var lineItem = CurrentCart.Items[i];
                 var product = lineItem.GetAssociatedProduct(HccApp);
+               
                 if (product != null)
                 {
                     var ci = new CartLineItemViewModel
@@ -752,7 +753,10 @@ namespace Hotcakes.Modules.Core.Controllers
                             lineItem.VariantId, Request.IsSecureConnection),
                         LinkUrl = UrlRewriter.BuildUrlForProduct(product,
                             new { lineItem.OrderBvin, LineItemId = lineItem.Id }),
-                        HasDiscounts = lineItem.HasAnyDiscounts
+                        HasDiscounts = lineItem.HasAnyDiscounts,
+                        HasUpcharge = (lineItem.IsUpchargeAllowed && product.AllowUpcharge == true && product.UpchargeAmount > 0) ? true : false,
+                        UpchargeAmount = (lineItem.IsUpchargeAllowed && product.AllowUpcharge) ? product.UpchargeAmount : 0m
+
                     };
 
                     model.LineItems.Add(ci);

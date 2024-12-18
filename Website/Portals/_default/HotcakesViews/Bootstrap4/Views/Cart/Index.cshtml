@@ -67,6 +67,10 @@
                                             {
                                                 <div class="hc-discount clear"><span class="badge badge-success">@Html.Raw(item.Item.DiscountDetailsAsHtml())</span></div>
                                             }
+                                            @if (item.HasUpcharge)
+                                            {
+                                                <div class="hc-discount clear"><span class="badge badge-success">@Html.Raw(item.Item.UpchargeDetailsAsHtml())</span></div>
+                                            }
                                             <div class="d-none d-sm-block">
                                                 @Html.Raw(item.Item.ProductShortDescription)
                                             </div>
@@ -97,6 +101,10 @@
                                             @if (item.HasDiscounts)
                                             {
                                                 <del><mark class="lead">@item.Item.LineTotalWithoutDiscounts.ToString("c")</mark></del><br />
+                                            }
+                                            @if (item.HasUpcharge)
+                                            {
+                                                <del><mark class="lead">@item.Item.LineTotalWithoutUpcharge.ToString("c")</mark></del>
                                             }
                                             <span class="lead">@item.Item.LineTotal.ToString("c")</span>
                                         </td>

@@ -192,6 +192,9 @@
   <data name="chkSearchable.Text" xml:space="preserve">
     <value>Is Searchable</value>
   </data>
+  <data name="chkAllowUpcharge.Text" xml:space="preserve">
+    <value>Allow Upcharge</value>
+  </data>
   <data name="chkShipSeparately.Text" xml:space="preserve">
     <value>Ships in a Separate Box</value>
   </data>
@@ -446,5 +449,8 @@
   </data>
   <data name="lblCost.Text" xml:space="preserve">
     <value>Cost</value>
+  </data>
+  <data name="AdjustPriceBy.Text" xml:space="preserve">
+    <value>Adjust Price by (+/-)</value>
   </data>
 </root>

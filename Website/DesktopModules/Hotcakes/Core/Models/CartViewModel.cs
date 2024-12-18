@@ -50,6 +50,7 @@ namespace Hotcakes.Modules.Core.Models
             LineItems = new List<CartLineItemViewModel>();
             PayPalExpressAvailable = false;
             Rates = new List<ShippingRateDisplay>();
+           
         }
 
         /// <summary>
@@ -118,5 +119,7 @@ namespace Hotcakes.Modules.Core.Models
         ///     shipping method criteria on products.
         /// </summary>
         public List<ShippingRateDisplay> Rates { get; set; }
+
+        public bool UpchargeAllowed { get; set; }
     }
 }

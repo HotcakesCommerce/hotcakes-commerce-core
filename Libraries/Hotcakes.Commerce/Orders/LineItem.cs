@@ -37,6 +37,7 @@ using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Marketing;
 using Hotcakes.Commerce.Shipping;
 using Hotcakes.Commerce.Taxes;
+using Hotcakes.CommerceDTO.v1.Catalog;
 using Hotcakes.CommerceDTO.v1.Orders;
 using Hotcakes.CommerceDTO.v1.Shipping;
 using Hotcakes.Payment;
@@ -93,6 +94,7 @@ namespace Hotcakes.Commerce.Orders
             IsTaxExempt = false;
             FreeShippingMethodIds = new List<string>();
             RecurringBilling = new RecurringBilling(this);
+            IsUpchargeAllowed = false;
         }
 
         #endregion
@@ -195,6 +197,11 @@ namespace Hotcakes.Commerce.Orders
         public List<DiscountDetail> DiscountDetails { get; set; }
 
         /// <summary>
+        ///     A upcharge being applied to this line item.
+        /// </summary>
+        public decimal UpchargeDetails { get; set; }
+
+        /// <summary>
         ///     The choices/options that were selected when adding the product to this line item.
         /// </summary>
         public OptionSelections SelectionData { get; set; }
@@ -231,6 +238,8 @@ namespace Hotcakes.Commerce.Orders
         /// <summary>
         /// </summary>
         public string PromotionIds { get; set; }
+
+        public bool IsUpchargeAllowed { get; set; }
 
         #endregion
 
@@ -426,6 +435,19 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+
+        /// <summary>
+        ///     Returns true if there are any upcharge that have been applied to this line item.
+        /// </summary>
+        public bool HasAnyUpcharge {
+            get
+            {
+                if (TotalUpcharge() < 0)
+                    return false;
+                return true;
+            }
+        }
+
         /// <summary>
         ///     Returns true if the line item contains any discounts that are not sales (e.g., Offers).
         /// </summary>
@@ -474,6 +496,60 @@ namespace Hotcakes.Commerce.Orders
         public decimal LineTotalWithoutDiscounts
         {
             get { return BasePricePerItem*Quantity; }
+        }
+
+        /// <summary>
+        ///     The cumulative total of the line item base price for the given quantity, including discounts and sales.
+        /// </summary>
+        public decimal LineTotalWithDiscounts
+        {
+            get { return (BasePricePerItem * Quantity) + TotalDiscounts(); }
+        }
+
+        /// <summary>
+        ///     The cumulative total of the line item base price for the given quantity, including upcharges and sales.
+        /// </summary>
+        public decimal LineTotalWithoutUpcharge
+        {
+            get
+            {
+                decimal baseTotal = BasePricePerItem * Quantity;
+                if (HasAnyDiscounts)
+                {
+                    return baseTotal + TotalDiscounts();
+                }
+                return baseTotal;
+            }
+        }
+
+
+        /// <summary>
+        ///     Total of Upcharge
+        /// </summary>
+        /// <returns>Decimal</returns>
+        public decimal TotalUpcharge()
+        {
+            decimal upchargeAmountTotal = 0;
+            var productRepo = new ProductRepository(HccRequestContext.Current);
+            var product = productRepo.FindBySku(this.ProductSku);
+            if (product == null || product.UpchargeAmount <= 0)
+            {
+                return 0;
+            }
+            if (true)
+            {
+
+            }
+            decimal baseTotal = BasePricePerItem * Quantity;
+            if (product.UpchargeUnit == ((int)UpchargeAmountTypesDTO.Amount).ToString())
+            {
+                upchargeAmountTotal = product.UpchargeAmount;
+            }
+            if (product.UpchargeUnit == ((int)UpchargeAmountTypesDTO.Percent).ToString())
+            {
+                upchargeAmountTotal = baseTotal * (product.UpchargeAmount / 100);
+            }
+            return upchargeAmountTotal;
         }
 
         public decimal LineTotalWithTaxPortion(bool isVAT)
@@ -587,6 +663,17 @@ namespace Hotcakes.Commerce.Orders
                     sb.Append(d.Description + " " + d.Amount.ToString("c") + "<br />");
                 }
             }
+            return sb.ToString();
+        }
+
+        /// <summary>
+        ///     Generates a line by line summary of the upcharge that are in this line item.
+        /// </summary>
+        /// <returns>String - an HTML version of the line items for display to the merchant.</returns>
+        public string UpchargeDetailsAsHtml()
+        {
+            var sb = new StringBuilder();
+            sb.Append($"{GlobalLocalization.GetString("UpchargeAmount")} : ({TotalUpcharge():C})<br />");
             return sb.ToString();
         }
 
@@ -869,12 +956,12 @@ namespace Hotcakes.Commerce.Orders
         public List<HtmlTemplateTag> GetReplaceableTags(HccRequestContext context)
         {
             var result = new List<HtmlTemplateTag>();
-
             var culture = context.MainContentCulture;
-            result.Add(new HtmlTemplateTag("[[LineItem.AdjustedPrice]]", AdjustedPricePerItem.ToString("c")));
+            result.Add(new HtmlTemplateTag("[[LineItem.AdjustedPrice]]", HasAnyUpcharge ? (TotalUpcharge() + AdjustedPricePerItem).ToString("c") : AdjustedPricePerItem.ToString("c")));
             result.Add(new HtmlTemplateTag("[[LineItem.BasePrice]]", BasePricePerItem.ToString("c")));
             result.Add(new HtmlTemplateTag("[[LineItem.LineTotalBeforeVAT]]", (LineTotal - TaxPortion).ToString("c")));
             result.Add(new HtmlTemplateTag("[[LineItem.Discounts]]", DiscountDetailsAsHtml()));
+            result.Add(new HtmlTemplateTag("[[LineItem.Upcharges]]", UpchargeDetailsAsHtml()));
             result.Add(new HtmlTemplateTag("[[LineItem.LineTotal]]", LineTotal.ToString("c")));
             result.Add(new HtmlTemplateTag("[[LineItem.ProductId]]", ProductId));
             result.Add(new HtmlTemplateTag("[[LineItem.VariantId]]", VariantId));

@@ -13,37 +13,53 @@
 			{
 				var item = Model.ElementAt(i);
 				<tr>
-					<td>
-						<label>@item.ProductName</label><br />
-						<span class="text-uppercase text-monospace">@item.ProductSku</span><br />
-						@if (item.LineTotal != item.LineTotalWithoutDiscounts)
-						{
-							<div class="label-wrapper clear">
-								<span class="badge badge-success">@Html.Raw(@item.DiscountDetailsAsHtml())</span>
-							</div>
-						}
-						<div class="d-none d-sm-block">
-							@Html.Raw(item.ProductShortDescription)
+                    <td>
+                        <label>@item.ProductName</label><br />
+                        <span class="text-uppercase text-monospace">@item.ProductSku</span><br />
+                        @if (item.LineTotal != item.LineTotalWithoutDiscounts)
+                        {
+                            <div class="label-wrapper clear">
+                                <span class="badge badge-success">@Html.Raw(@item.DiscountDetailsAsHtml())</span>
+                            </div>
+                        }
+                        @if (item.LineTotal != item.LineTotalWithoutUpcharge)
+                        {
+                            <div class="label-wrapper clear" style="padding-top: 0.2rem;">
+                                <span class="badge badge-success">@Html.Raw(@item.UpchargeDetailsAsHtml())</span>
+                            </div>
+                        }
+                        <div class="d-none d-sm-block">
+                            @Html.Raw(item.ProductShortDescription)
 
-							@if (!string.IsNullOrEmpty(item.CustomPropGiftCardNumber))
-							{
-								@Html.Raw(Localization.GetString("GiftCardNumber") + item.CustomPropGiftCardNumber)
-							}
-						</div>
-					</td>
+                            @if (!string.IsNullOrEmpty(item.CustomPropGiftCardNumber))
+                            {
+                                @Html.Raw(Localization.GetString("GiftCardNumber") + item.CustomPropGiftCardNumber)
+                            }
+                        </div>
+                    </td>
 					<td>@item.Quantity</td>
-					<td class="text-right">
-						<span class="hcLineTotalBase hc-strike
+                    <td class="text-right">
+                        @if (item.IsUpchargeAllowed)
+                        {
+                            <span class="hcLineTotalBase hc-strike
+                                  @if (!item.HasAnyUpcharge) { <text> d-none</text> }">
+                                <mark><del>@item.LineTotalWithoutUpcharge.ToString("C")</del></mark>
+                            </span><br />
+                        }
+                        @if (item.HasAnyDiscounts)
+						{
+                            <span class="hcLineTotalBase hc-strike
 							@if (!item.HasAnyDiscounts)
 							{
 								<text> d-none</text>
 							}">
-							<mark><del>@item.LineTotalWithoutDiscounts.ToString("C")</del></mark><br />
-						</span>
-						<span class="hcLineTotalAdjusted">
-							@item.LineTotal.ToString("C")
-						</span>
-					</td>
+                                <mark><del>@item.LineTotalWithoutDiscounts.ToString("C")</del></mark>
+                            </span><br />
+						}
+                            <span class="hcLineTotalAdjusted">
+                                @item.LineTotal.ToString("C")
+                            </span>
+                        </td>
 				</tr>
 			}
 		</table>

@@ -834,6 +834,15 @@ namespace Hotcakes.Modules.Core.Controllers
 
             var li = model.LocalProduct.ConvertToLineItem(HccApp, model.Quantity, model.Selections, userPrice);
 
+            if (model.LocalProduct.AllowUpcharge)
+            {
+                var boolUpchargeAllowed = Request.Form["upchargeallowed"] == "on";
+                if (boolUpchargeAllowed)
+                {
+                    li.IsUpchargeAllowed = boolUpchargeAllowed;
+                }
+            }
+
             if (model.IsGiftCard)
             {
                 li.CustomPropGiftCardEmail = model.GiftCardRecEmail;

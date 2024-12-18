@@ -702,6 +702,9 @@ namespace Hotcakes.Commerce.Catalog
             model.CustomPropertiesFromXml(data.CustomProperties);
             model.Featured = data.Featured;
             model.IsSearchable = data.IsSearchable;
+            model.AllowUpcharge = data.AllowUpcharge;
+            model.UpchargeAmount = data.UpchargeAmount;
+            model.UpchargeUnit = data.UpchargeUnit;
             model.GiftWrapAllowed = data.GiftWrapAllowed == 1 ? true : false;
             model.GiftWrapPrice = data.GiftWrapPrice;
             model.ImageFileMedium = data.ImageFileMedium;
@@ -770,6 +773,9 @@ namespace Hotcakes.Commerce.Catalog
             data.Item.CustomProperties = model.CustomPropertiesToXml();
             data.Item.Featured = model.Featured;
             data.Item.IsSearchable = model.IsSearchable;
+            data.Item.AllowUpcharge = model.AllowUpcharge;
+            data.Item.UpchargeAmount = model.UpchargeAmount;
+            data.Item.UpchargeUnit = model.UpchargeUnit;
             data.Item.GiftWrapAllowed = model.GiftWrapAllowed ? 1 : 0;
             data.Item.GiftWrapPrice = model.GiftWrapPrice;
             data.Item.ImageFileMedium = model.ImageFileMedium;

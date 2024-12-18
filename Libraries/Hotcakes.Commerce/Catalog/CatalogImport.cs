@@ -36,6 +36,7 @@ using System.Web.Hosting;
 using DocumentFormat.OpenXml.Extensions;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Hotcakes.Commerce.Contacts;
+using Hotcakes.Commerce.Data.EF;
 using Hotcakes.Commerce.Shipping;
 using Hotcakes.Commerce.Storage;
 using Hotcakes.Commerce.Taxes;
@@ -330,7 +331,7 @@ namespace Hotcakes.Commerce.Catalog
 					return false;
 				}
 
-				p.UrlSlug = slug;
+                p.UrlSlug = slug;
 				p.Status = GetCellBool(row, "B") ? ProductStatus.Active : ProductStatus.Disabled;
 				p.Featured = GetCellBool(row, "C");
 				p.Sku = sku;
@@ -376,8 +377,45 @@ namespace Hotcakes.Commerce.Catalog
                 var roles = GetCell(row, "AH");
 
 			    p.IsSearchable = GetCellBool(row, "AI");
+                bool allowUpcharge;
+                var cellValueAJ = GetCell(row, "AJ");
+                if (string.IsNullOrWhiteSpace(cellValueAJ))
+                {
+                    allowUpcharge = false; 
+                }
+                else
+                {
+                    allowUpcharge = GetCellBool(row, "AJ");
+                }
 
-				if (string.IsNullOrWhiteSpace(p.ProductName))
+                p.AllowUpcharge = allowUpcharge;
+
+                decimal upchargeAmount;
+                var cellValueAK = GetCell(row, "AK");
+                if (string.IsNullOrWhiteSpace(cellValueAK))
+                {
+                    upchargeAmount = 3m;
+                }
+                else
+                {
+                    upchargeAmount = GetCellDecimal(row, "AK");
+                }
+                p.UpchargeAmount = upchargeAmount;
+
+                string upchargeUnit;
+                var cellValueAL = GetCell(row, "AL");
+                if (string.IsNullOrWhiteSpace(cellValueAL))
+                {
+                    upchargeUnit = "1";
+                }
+                else
+                {
+                    upchargeUnit = cellValueAL;
+                }
+                p.UpchargeUnit = upchargeUnit;
+
+
+                if (string.IsNullOrWhiteSpace(p.ProductName))
 				{
 					Log(string.Format("- Product name is empty for row {0}", row.RowIndex));
 					return false;

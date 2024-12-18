@@ -74,6 +74,18 @@
                         @* END Placeholder rebuilds by AJAX request! *@
                     </div>
 
+                    if (Model.LocalProduct.IsUserSuppliedPrice && Model.LocalProduct.AllowUpcharge)
+                    {
+                       <div class="form-group row hc-upcharge">
+                            <label class="col-sm-4 col-form-label">
+                               @Localization.GetString("AcceptUpchargeFee")
+                              </label>
+                            <div class="col-sm-8">
+                                <input type="checkbox" id="upchargeallowed" name="upchargeallowed" checked />
+                             </div>
+                        </div>
+                    }
+
                     if (Model.LocalProduct.IsUserSuppliedPrice)
                     {
                         <div class="form-group row hc-userprice">

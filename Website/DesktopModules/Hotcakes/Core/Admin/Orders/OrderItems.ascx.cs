@@ -81,7 +81,9 @@ namespace Hotcakes.Modules.Core.Admin.Orders
                 var lblLineTotal = e.Row.FindControl("lblLineTotal") as Label;
                 var btnDelete = e.Row.FindControl("btnDelete") as LinkButton;
                 var lblLineTotalWithoutDiscounts = e.Row.FindControl("lblLineTotalWithoutDiscounts") as Label;
+                var lblLineTotalWithoutUpcharge = e.Row.FindControl("lblLineTotalWithoutUpcharge") as Label;
                 var litDiscounts = (Literal) e.Row.FindControl("litDiscounts");
+                var litUpcharge = (Literal)e.Row.FindControl("litUpcharge");
                 var divGiftWrap = e.Row.FindControl("divGiftWrap") as HtmlGenericControl;
                 var litGiftCardsNumbers = e.Row.FindControl("litGiftCardsNumbers") as Literal;
                 var lnkGiftCards = e.Row.FindControl("lnkGiftCards") as HyperLink;
@@ -113,7 +115,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
                 lblDescription.Text = lineItem.ProductName;
                 lblDescription.Text += "<br />" + lineItem.ProductShortDescription;
                 lblShippingStatus.Text = LocalizationUtils.GetOrderShippingStatus(lineItem.ShippingStatus);
-                lblAdjustedPrice.Text = lineItem.AdjustedPricePerItem.ToString("C");
+                lblAdjustedPrice.Text = lineItem.IsUpchargeAllowed && lineItem.HasAnyUpcharge ? (lineItem.AdjustedPricePerItem + lineItem.TotalUpcharge()).ToString("C") : lineItem.AdjustedPricePerItem.ToString("C");
                 txtQty.Text = lineItem.Quantity.ToString();
                 txtQty.Visible = EditMode;
                 lblQty.Text = lineItem.Quantity.ToString();
@@ -126,6 +128,14 @@ namespace Hotcakes.Modules.Core.Admin.Orders
                     lblLineTotalWithoutDiscounts.Text = lineItem.LineTotalWithoutDiscounts.ToString("c");
 
                     litDiscounts.Text = "<div class=\"discounts\">" + lineItem.DiscountDetailsAsHtml() + "</div>";
+                }
+
+                if (lineItem.IsUpchargeAllowed && lineItem.HasAnyUpcharge)
+                {
+                    lblLineTotalWithoutUpcharge.Visible = true;
+                    lblLineTotalWithoutUpcharge.Text = lineItem.LineTotalWithoutUpcharge.ToString("c");
+
+                    litUpcharge.Text = "<div class=\"discounts\">" + lineItem.UpchargeDetailsAsHtml() + "</div>";
                 }
 
                 if (!EditMode && !string.IsNullOrEmpty(lineItem.CustomPropGiftCardNumber))
@@ -183,10 +193,12 @@ namespace Hotcakes.Modules.Core.Admin.Orders
                 var litGiftCardsNumbers = e.Row.FindControl("litGiftCardsNumbers") as Literal;
                 var lnkGiftCards = e.Row.FindControl("lnkGiftCards") as HyperLink;
                 var litDiscounts = e.Row.FindControl("litDiscounts") as Literal;
+                var litUpcharge = e.Row.FindControl("litUpcharge") as Literal;
                 var txtQty = e.Row.FindControl("txtQty") as TextBox;
                 var lblQty = e.Row.FindControl("lblQty") as Label;
                 var lblNextPaymentDate = e.Row.FindControl("lblNextPaymentDate") as Label;
                 var lblLineTotalWithoutDiscounts = e.Row.FindControl("lblLineTotalWithoutDiscounts") as Label;
+                var lblLineTotalWithoutUpcharge = e.Row.FindControl("lblLineTotalWithoutUpcharge") as Label;
                 var lblLineTotal = e.Row.FindControl("lblLineTotal") as Label;
                 var lblInterval = e.Row.FindControl("lblInterval") as Label;
                 var lblTotalPayed = e.Row.FindControl("lblTotalPayed") as Label;
@@ -215,6 +227,14 @@ namespace Hotcakes.Modules.Core.Admin.Orders
                     lblLineTotalWithoutDiscounts.Text = lineItem.LineTotalWithoutDiscounts.ToString("c");
 
                     litDiscounts.Text = "<div class=\"discounts\">" + lineItem.DiscountDetailsAsHtml() + "</div>";
+                }
+
+                if (lineItem.HasAnyUpcharge)
+                {
+                    lblLineTotalWithoutUpcharge.Visible = true;
+                    lblLineTotalWithoutUpcharge.Text = lineItem.LineTotalWithoutUpcharge.ToString("c");
+
+                    litUpcharge.Text = "<div class=\"discounts\">" + lineItem.UpchargeDetailsAsHtml() + "</div>";
                 }
 
                 if (!EditMode && !string.IsNullOrEmpty(lineItem.CustomPropGiftCardNumber))
