@@ -298,7 +298,7 @@ namespace Hotcakes.Commerce.Orders
             {
                 var p = _app.CatalogServices.Products.FindWithCache(item.ProductId);
 
-                if (p != null && p.AllowUpcharge && item.IsCoverCreditCardFees)
+                if (p != null && p.AllowUpcharge && item.IsUpchargeAllowed)
                 {
                     item.LineTotal = item.LineTotal + item.TotalUpcharge();
                 }
