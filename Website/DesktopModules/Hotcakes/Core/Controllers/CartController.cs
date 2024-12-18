@@ -754,8 +754,8 @@ namespace Hotcakes.Modules.Core.Controllers
                         LinkUrl = UrlRewriter.BuildUrlForProduct(product,
                             new { lineItem.OrderBvin, LineItemId = lineItem.Id }),
                         HasDiscounts = lineItem.HasAnyDiscounts,
-                        HasUpcharge = (lineItem.IsCoverCreditCardFees && product.AllowUpcharge == true && product.UpchargeAmount > 0) ? true : false,
-                        UpchargeAmount = (lineItem.IsCoverCreditCardFees && product.AllowUpcharge) ? product.UpchargeAmount : 0m
+                        HasUpcharge = (lineItem.IsUpchargeAllowed && product.AllowUpcharge == true && product.UpchargeAmount > 0) ? true : false,
+                        UpchargeAmount = (lineItem.IsUpchargeAllowed && product.AllowUpcharge) ? product.UpchargeAmount : 0m
 
                     };
 
