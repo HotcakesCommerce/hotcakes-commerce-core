@@ -120,6 +120,6 @@ namespace Hotcakes.Modules.Core.Models
         /// </summary>
         public List<ShippingRateDisplay> Rates { get; set; }
 
-        public bool CoverCreditCardFees { get; set; }
+        public bool UpchargeAllowed { get; set; }
     }
 }
