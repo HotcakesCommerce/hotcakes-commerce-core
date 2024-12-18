@@ -42,7 +42,7 @@
                         <span class="hcLineTotalAdjusted">
                             @item.LineTotal.ToString("C")
                         </span>
-                        @if (item.IsCoverCreditCardFees)
+                        @if (item.IsUpchargeAllowed)
                         {
                             <span class="hcLineTotalBase hc-strike
                             @if (!item.HasAnyUpcharge)
