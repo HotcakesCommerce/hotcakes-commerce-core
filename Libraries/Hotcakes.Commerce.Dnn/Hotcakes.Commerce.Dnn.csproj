@@ -143,7 +143,9 @@
     </Compile>
     <Compile Include="Data\DnnUserEx.cs" />
     <Compile Include="DnnSearchProvider.cs" />
-    <Compile Include="DnnStoreSettingsProvider.cs" />
+    <Compile Include="DnnStoreSettingsProvider.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Data\DnnDbContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
