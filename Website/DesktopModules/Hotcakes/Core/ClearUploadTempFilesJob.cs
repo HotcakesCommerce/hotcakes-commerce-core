@@ -24,6 +24,7 @@
 #endregion
 
 using System;
+using DotNetNuke.Abstractions.Portals;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Exceptions;
@@ -62,9 +63,9 @@ namespace Hotcakes.Modules.Core
 
                 foreach (PortalInfo portal in portals)
                 {
-                    Logger.DebugFormat("Processing Portal: {0}", portal.PortalID);
+                    Logger.DebugFormat("Processing Portal: {0}", ((IPortalInfo)portal).PortalId);
 
-                    var folderPath = string.Format("\\Portals\\{0}\\Hotcakes\\Data\\temp\\", portal.PortalID);
+                    var folderPath = string.Format("\\Portals\\{0}\\Hotcakes\\Data\\temp\\", ((IPortalInfo)portal).PortalId);
                     var fullPath = System.Web.Hosting.HostingEnvironment.MapPath(folderPath);
 
                     Logger.DebugFormat("folderPath: {0}", folderPath);

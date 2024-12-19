@@ -114,11 +114,13 @@
       <HintPath>..\..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="MiniProfiler">
       <HintPath>..\..\..\packages\MiniProfiler.3.1.1.140\lib\net40\MiniProfiler.dll</HintPath>
     </Reference>
@@ -3127,7 +3129,9 @@
     <Compile Include="Core\Api\Mobile\HccApiController.cs" />
     <Compile Include="Core\Api\Mobile\OrdersController.cs" />
     <Compile Include="Core\Api\Mobile\ReportsController.cs" />
-    <Compile Include="Core\HotcakesController.cs" />
+    <Compile Include="Core\HotcakesController.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Core\Models\AddressViewModel.cs" />
     <Compile Include="Core\Models\BreadCrumbViewModel.cs" />
     <Compile Include="Core\Models\CartLineItemViewModel.cs" />
