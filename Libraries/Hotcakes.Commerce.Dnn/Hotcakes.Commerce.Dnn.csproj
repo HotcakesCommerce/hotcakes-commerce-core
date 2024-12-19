@@ -168,7 +168,9 @@
     <Compile Include="Data\DnnUser.cs">
       <DependentUpon>DnnDbContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="DnnAccountService.cs" />
+    <Compile Include="DnnAccountService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="DnnAffiliateRepository.cs" />
     <Compile Include="DnnCatalogService.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -185,7 +187,9 @@
     <Compile Include="DnnFactory.cs" />
     <Compile Include="DnnGlobal.cs" />
     <Compile Include="DnnHostSettingsProvider.cs" />
-    <Compile Include="DnnLocalizationHelper.cs" />
+    <Compile Include="DnnLocalizationHelper.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="DnnMembershipServices.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
