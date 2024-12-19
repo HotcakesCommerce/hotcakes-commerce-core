@@ -24,19 +24,31 @@
 #endregion
 
 using System;
+using DotNetNuke.Abstractions.Logging;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Log.EventLog;
 using Hotcakes.Web.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hotcakes.Commerce.Dnn
 {
     [Serializable]
-    public class DnnEventLog : ILogger
+    public class DnnEventLog : PortalModuleBase, ILogger
     {
         private const string LOGTYPE_MESSAGE = "HOTCAKES_INFO";
         private const string LOGTYPE_EXCEPTION = "HOTCAKES_EXCEPTION";
+        private readonly IEventLogger eventLogger;
+        private readonly LogInfo LogInfo;
+        private ILogInfo logInfo => LogInfo;
+
+        public DnnEventLog()
+        {
+            eventLogger = DependencyProvider.GetRequiredService<IEventLogger>();
+            LogInfo = new LogInfo();          
+        }
 
         public void LogMessage(string message)
         {
@@ -50,27 +62,23 @@ namespace Hotcakes.Commerce.Dnn
 
         public void LogMessage(string source, string message, EventLogSeverity severity)
         {
-            var logInfo = new LogInfo();
             var user = DnnUserController.Instance.GetCurrentUserInfo();
-
-            logInfo.LogUserID = user != null ? user.UserID : -1;
-            logInfo.LogPortalID = PortalSettings.Current != null ? PortalSettings.Current.PortalId : -1;
+            logInfo.LogUserId = user != null ? user.UserID : -1;
+            logInfo.LogPortalId = PortalSettings.Current != null ? PortalSettings.Current.PortalId : -1;
             logInfo.LogTypeKey = LOGTYPE_MESSAGE;
             logInfo.AddProperty("Severity", severity.ToString());
             logInfo.LogProperties.Add(new LogDetailInfo("Source", source));
             logInfo.LogProperties.Add(new LogDetailInfo("Message", message));
 
-            var log = new EventLogController();
-            log.AddLog(logInfo);
+            eventLogger.AddLog(logInfo);
         }
 
         public void LogException(Exception ex, EventLogSeverity severity)
         {
-            var logInfo = new LogInfo();
             var user = DnnUserController.Instance.GetCurrentUserInfo();
 
-            logInfo.LogUserID = user != null ? user.UserID : -1;
-            logInfo.LogPortalID = DnnGlobal.Instance.GetPortalId();
+            logInfo.LogUserId = user != null ? user.UserID : -1;
+            logInfo.LogPortalId = DnnGlobal.Instance.GetPortalId();
             logInfo.LogTypeKey = LOGTYPE_EXCEPTION;
             logInfo.AddProperty("Severity", severity.ToString());
 
@@ -97,8 +105,7 @@ namespace Hotcakes.Commerce.Dnn
             logInfo.LogProperties.Add(new LogDetailInfo("Message", exception4.Message));
             logInfo.LogProperties.Add(new LogDetailInfo("Source", exception4.Source));
 
-            var log = new EventLogController();
-            log.AddLog(logInfo);
+            eventLogger.AddLog(logInfo);
         }
 
         public static void InstallLogTypes()
