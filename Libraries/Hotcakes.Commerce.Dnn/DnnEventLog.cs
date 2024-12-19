@@ -124,7 +124,7 @@ namespace Hotcakes.Commerce.Dnn
                 var logTypeInfo = controller.GetLogTypeInfoDictionary()[logTypeKey];
                 logTypeInfo.LogTypeFriendlyName = logTypeFriendlyName;
                 logTypeInfo.LogTypeDescription = string.Empty;
-                logTypeInfo.LogTypeCSSClass = cssClass;
+                ((ILogTypeInfo)logTypeInfo).LogTypeCssClass = cssClass;
                 logTypeInfo.LogTypeOwner = "Hotcakes.Logging.EventLogType";
                 controller.UpdateLogType(logTypeInfo);
             }
@@ -136,9 +136,9 @@ namespace Hotcakes.Commerce.Dnn
                     LogTypeKey = logTypeKey,
                     LogTypeFriendlyName = logTypeFriendlyName,
                     LogTypeDescription = string.Empty,
-                    LogTypeCSSClass = cssClass,
                     LogTypeOwner = "Hotcakes.Logging.EventLogType"
                 };
+                ((ILogTypeInfo)logTypeInfo).LogTypeCssClass = cssClass;
                 controller.AddLogType(logTypeInfo);
 
                 //Add LogType
@@ -152,9 +152,8 @@ namespace Hotcakes.Commerce.Dnn
                     NotificationThresholdTimeType = LogTypeConfigInfo.NotificationThresholdTimeTypes.Seconds,
                     MailFromAddress = Null.NullString,
                     MailToAddress = Null.NullString,
-                    LogTypePortalID = "*"
                 };
-
+                ((ILogTypeConfigInfo)logTypeConf).LogTypePortalId = "*";
                 controller.AddLogTypeConfigInfo(logTypeConf);
             }
         }
