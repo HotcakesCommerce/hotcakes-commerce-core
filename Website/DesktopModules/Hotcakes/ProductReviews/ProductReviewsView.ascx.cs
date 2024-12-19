@@ -23,15 +23,22 @@
 
 #endregion
 
+using DotNetNuke.Abstractions;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Security.Permissions;
 using Hotcakes.Commerce.Dnn.Web;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hotcakes.Modules.ProductReviews
 {
     public partial class ProductReviewsView : HotcakesModuleBase
     {
+        private readonly INavigationManager _navigationManager;
+        public ProductReviewsView()
+        {
+            _navigationManager = DependencyProvider.GetRequiredService<INavigationManager>();
+        }
         protected override string RenderView()
         {
             var slug = Request.Params["slug"];
@@ -46,7 +53,7 @@ namespace Hotcakes.Modules.ProductReviews
                 {
                     if (PortalSettings.HomeTabId != PortalSettings.ActiveTab.TabID)
                     {
-                        Response.Redirect(Globals.NavigateURL(PortalSettings.HomeTabId));
+                        Response.Redirect(_navigationManager.NavigateURL(PortalSettings.HomeTabId));
                     }
                 }
             }
