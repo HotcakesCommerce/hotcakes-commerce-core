@@ -26,6 +26,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using DotNetNuke.Abstractions.Portals;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Portals;
@@ -109,7 +110,7 @@ namespace Hotcakes.Commerce.Dnn
             public CultureInfo GetPageLocale()
             {
                 var portalSettings = Instance.GetCurrentPortalSettings();
-                return Localization.GetPageLocale(portalSettings);
+                return Localization.GetPageLocale((IPortalSettings)portalSettings);
             }
         }
     }
