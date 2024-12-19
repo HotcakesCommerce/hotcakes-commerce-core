@@ -23,9 +23,11 @@
 
 #endregion
 
+using DotNetNuke.Entities.Modules;
+
 namespace Hotcakes.Commerce
 {
-    public abstract class HccServiceBase
+    public abstract class HccServiceBase : PortalModuleBase
     {
         protected HccServiceBase(HccRequestContext context)
         {

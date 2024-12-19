@@ -170,10 +170,14 @@
     </Compile>
     <Compile Include="DnnAccountService.cs" />
     <Compile Include="DnnAffiliateRepository.cs" />
-    <Compile Include="DnnCatalogService.cs" />
+    <Compile Include="DnnCatalogService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="DnnCategoryRepository.cs" />
     <Compile Include="DnnConfigurationManager.cs" />
-    <Compile Include="DnnContactService.cs" />
+    <Compile Include="DnnContactService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="DnnCustomerAccountRepository.cs" />
     <Compile Include="DnnEventLog.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -182,7 +186,9 @@
     <Compile Include="DnnGlobal.cs" />
     <Compile Include="DnnHostSettingsProvider.cs" />
     <Compile Include="DnnLocalizationHelper.cs" />
-    <Compile Include="DnnMembershipServices.cs" />
+    <Compile Include="DnnMembershipServices.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="DnnProductRepository.cs" />
     <Compile Include="DnnProductReviewRepository.cs" />
     <Compile Include="DnnModuleSettingsProvider.cs" />
@@ -202,7 +208,9 @@
     <Compile Include="Prompt\PromptBase.cs" />
     <Compile Include="Providers\HccUrlRoutingModule.cs" />
     <Compile Include="Mvc\DnnHccFormRenderer.cs" />
-    <Compile Include="Mvc\DnnHccUrlResolver.cs" />
+    <Compile Include="Mvc\DnnHccUrlResolver.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Social\SocialServiceBase.cs" />
     <Compile Include="Social\SocialServiceImpl.cs" />
     <Compile Include="Social\StubSocialItem.cs" />
