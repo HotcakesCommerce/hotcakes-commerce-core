@@ -26,14 +26,24 @@
 
 using System;
 using System.Collections.Generic;
+using DotNetNuke.Abstractions.Application;
 using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Host;
+using DotNetNuke.Entities.Modules;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hotcakes.Commerce.Dnn
 {
     [Serializable]
-    public class DnnHostSettingsProvider : IHostSettingsProvider
+    public class DnnHostSettingsProvider : PortalModuleBase, IHostSettingsProvider
     {
+        private readonly IHostSettingsService _hostSettingsService;
+
+        public DnnHostSettingsProvider()
+        {
+            _hostSettingsService = DependencyProvider.GetRequiredService<IHostSettingsService>();
+        }
+
         public IEnumerable<string> GetAllowedExtensions()
         {
             return Host.AllowedExtensionWhitelist.AllowedExtensions;
@@ -66,7 +76,7 @@ namespace Hotcakes.Commerce.Dnn
 
         protected object GetSettingValue(string key)
         {
-            return HostController.Instance.GetString(key);
+            return _hostSettingsService.GetString(key);
         }
     }
 }
