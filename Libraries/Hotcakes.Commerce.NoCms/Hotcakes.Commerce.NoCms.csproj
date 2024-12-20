@@ -84,9 +84,7 @@
     <Compile Include="IUserAccountRepository.cs" />
     <Compile Include="Membership\AuthenticationToken.cs" />
     <Compile Include="Membership\CustomerAccountRepository.cs" />
-    <Compile Include="Membership\MvcMembershipService.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="Membership\MvcMembershipService.cs" />
     <Compile Include="MvcEventLog.cs" />
     <Compile Include="MvcFactoryImpl.cs" />
     <Compile Include="MvcHccFormRenderer.cs" />
