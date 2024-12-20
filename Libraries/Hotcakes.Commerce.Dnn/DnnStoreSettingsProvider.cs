@@ -27,14 +27,22 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using DotNetNuke.Entities.Controllers;
+using DotNetNuke.Abstractions.Application;
+using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Localization;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hotcakes.Commerce.Dnn
 {
     [Serializable]
-    public class DnnStoreSettingsProvider : IStoreSettingsProvider
+    public class DnnStoreSettingsProvider : PortalModuleBase, IStoreSettingsProvider
     {
+        private readonly IHostSettingsService _hostSettingsService;
+
+        public DnnStoreSettingsProvider()
+        {
+            _hostSettingsService = DependencyProvider.GetRequiredService<IHostSettingsService>();
+        }
         public T GetSettingValue<T>(string key, T defVal)
         {
             var val = GetSettingValue(key);
@@ -85,7 +93,7 @@ namespace Hotcakes.Commerce.Dnn
 
         protected object GetSettingValue(string key)
         {
-            return HostController.Instance.GetString(key);
+            return _hostSettingsService.GetString(key);
         }
 
         protected HccLocale ConvertLocale(Locale locale)

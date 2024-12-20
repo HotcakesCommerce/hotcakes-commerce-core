@@ -27,6 +27,7 @@
 using System;
 using System.Globalization;
 using System.Threading;
+using DotNetNuke.Abstractions.Portals;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Services.Localization;
 using Hotcakes.Commerce.Accounts;
@@ -55,7 +56,7 @@ namespace Hotcakes.Commerce.Dnn.Utils
         public static void SetCulture(Store store, PortalSettings portalSettings)
         {
             // Get culture settings from DNN
-            var portalCulture = Localization.GetPageLocale(portalSettings);
+            var portalCulture = Localization.GetPageLocale((IPortalSettings)portalSettings);
             if (!string.IsNullOrEmpty(store.Settings.CurrencyCultureCode))
             {
                 var currencyCulture = new CultureInfo(store.Settings.CurrencyCultureCode);

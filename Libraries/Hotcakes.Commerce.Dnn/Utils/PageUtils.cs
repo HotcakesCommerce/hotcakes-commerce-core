@@ -27,6 +27,7 @@ using System;
 using System.IO;
 using System.Web.Hosting;
 using System.Xml;
+using DotNetNuke.Abstractions.Portals;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
@@ -170,7 +171,7 @@ namespace Hotcakes.Commerce.Dnn.Utils
             var portal = DnnGlobal.Instance.GetCurrentPortal();
             var tabPath = Globals.GenerateTabPath(Null.NullInteger, tabName);
 
-            var tabId = TabController.GetTabByTabPath(portal.PortalID, tabPath, portal.CultureCode);
+            var tabId = TabController.GetTabByTabPath(((IPortalInfo)portal).PortalId, tabPath, portal.CultureCode);
             var tabController = new TabController();
             if (tabId > Null.NullInteger)
             {

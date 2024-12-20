@@ -61,8 +61,8 @@
 		<CmsUpgradeBuildFolder>$(RootFolder)\_Build\_CMS-Upgrade</CmsUpgradeBuildFolder>
 		<InstallFolder>$(RootFolder)\_Install</InstallFolder>
 		<DnnProviderBuildFolder>$(RootFolder)\_Build</DnnProviderBuildFolder>
-		<DnnPackage>DNN_Platform_9.8.0_Install.zip</DnnPackage>
-		<DnnUpgradePackage>DNN_Platform_9.8.0_Upgrade.zip</DnnUpgradePackage>
+		<DnnPackage>DNN_Platform_9.11.0_Install.zip</DnnPackage>
+		<DnnUpgradePackage>DNN_Platform_9.11.0_Upgrade.zip</DnnUpgradePackage>
 		<HotcakesBrandingFolder>HotcakesBranding</HotcakesBrandingFolder>
 		<InstallFolderForConfigFolder>Install</InstallFolderForConfigFolder>
 		<SourceBuildFolder>$(RootFolder)\_Build\_Source</SourceBuildFolder>

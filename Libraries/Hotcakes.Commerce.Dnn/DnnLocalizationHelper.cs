@@ -29,25 +29,30 @@ using System.IO;
 using System.Threading;
 using System.Web.Hosting;
 using System.Xml.XPath;
+using DotNetNuke.Abstractions;
+using DotNetNuke.Abstractions.Application;
 using DotNetNuke.Collections.Internal;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Cache;
 using DotNetNuke.Services.Localization;
 using Hotcakes.Commerce.Globalization;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hotcakes.Commerce.Dnn
 {
     [Serializable]
-    public class DnnLocalizationHelper : ILocalizationHelper
+    public class DnnLocalizationHelper : PortalModuleBase, ILocalizationHelper
     {
         private readonly string _resourceFile;
-
+        private readonly IApplicationStatusInfo _applicationStatusInfo;
         public DnnLocalizationHelper(string resourcefile)
         {
             _resourceFile = resourcefile;
+            _applicationStatusInfo = DependencyProvider.GetRequiredService<IApplicationStatusInfo>();
         }
 
         public string GetString(string key)
@@ -133,7 +138,7 @@ namespace Hotcakes.Commerce.Dnn
             Locale userLocale = null;
             try
             {
-                if (Globals.Status != Globals.UpgradeStatus.Install)
+                if (_applicationStatusInfo.Status != UpgradeStatus.Install)
                 {
                     //Get Fallback language, but not when we are installing (because we may not have a database yet)
                     userLocale = LocaleController.Instance.GetLocale(userLanguage);
@@ -407,7 +412,7 @@ namespace Hotcakes.Commerce.Dnn
             return bFound;
         }
 
-        private static bool TryGetStringInternal(string key, string userLanguage, string resourceFile,
+        private bool TryGetStringInternal(string key, string userLanguage, string resourceFile,
             PortalSettings portalSettings, ref string resourceValue)
         {
             var defaultLanguage = Null.NullString;
@@ -435,7 +440,7 @@ namespace Hotcakes.Commerce.Dnn
             Locale userLocale = null;
             try
             {
-                if (Globals.Status != Globals.UpgradeStatus.Install)
+                if (_applicationStatusInfo.Status != UpgradeStatus.Install)
                 {
                     //Get Fallback language, but not when we are installing (because we may not have a database yet)
                     userLocale = LocaleController.Instance.GetLocale(userLanguage);

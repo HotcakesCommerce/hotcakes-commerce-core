@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Specialized;
 using System.IO;
+using System.Net;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DotNetNuke.Security;
@@ -201,7 +202,7 @@ namespace Hotcakes.Modules.Core.Controls
 
             if (FilterField.Text.Trim().Length > 0)
             {
-                c.Keyword = security.InputFilter(FilterField.Text.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+                c.Keyword = WebUtility.HtmlEncode(FilterField.Text.Trim());
             }
             if (!string.IsNullOrEmpty(ManufacturerFilter.SelectedValue))
             {
@@ -217,7 +218,7 @@ namespace Hotcakes.Modules.Core.Controls
             }
             if (ExcludeCategoryBvin.Trim().Length > 0)
             {
-                c.NotCategoryId = security.InputFilter(ExcludeCategoryBvin.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+                c.NotCategoryId = WebUtility.HtmlEncode(ExcludeCategoryBvin.Trim());
             }
             c.DisplayInactiveProducts = true;
             return c;

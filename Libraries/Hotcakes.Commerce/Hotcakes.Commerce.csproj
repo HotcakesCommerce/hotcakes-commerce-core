@@ -73,6 +73,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Misc\DocumentFormat.OpenXml.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="DotNetNuke">
+      <HintPath>..\..\References\Dnn\DotNetNuke.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -147,7 +150,9 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Accounts\AccountService.cs" />
+    <Compile Include="Accounts\AccountService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Accounts\ApiKey.cs" />
     <Compile Include="Accounts\ApiKeyRepository.cs" />
     <Compile Include="Accounts\AuthToken.cs" />
@@ -181,7 +186,9 @@
     <Compile Include="Analytics\ActionTypes.cs" />
     <Compile Include="Analytics\AnalyticsEvent.cs" />
     <Compile Include="Analytics\AnalyticsEventsRepository.cs" />
-    <Compile Include="Analytics\AnalyticsService.cs" />
+    <Compile Include="Analytics\AnalyticsService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="BusinessRules\OrderTasks\AddUserAddressesToAddressBook.cs" />
     <Compile Include="BusinessRules\OrderTasks\TaxProviderCommitTaxes.cs" />
     <Compile Include="BusinessRules\OrderTasks\TaxProviderCancelWhenPaymentRemoved.cs" />
@@ -538,7 +545,9 @@
     <Compile Include="FactoryBase.cs" />
     <Compile Include="Globalization\LocalizationUtils.cs" />
     <Compile Include="Globalization\ViewModelLocalization.cs" />
-    <Compile Include="HccServiceBase.cs" />
+    <Compile Include="HccServiceBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Marketing\PromotionActions\CategoryDiscountAdjustment.cs" />
     <Compile Include="Marketing\PromotionActions\ReceiveFreeProductAdjustment.cs" />
     <Compile Include="Marketing\PromotionQualifications\LineItemIsProduct.cs" />
@@ -571,7 +580,9 @@
     <Compile Include="Reporting\PurchasedWithProductPerformanceInfo.cs" />
     <Compile Include="Reporting\OrdersSummmaryData.cs" />
     <Compile Include="Reporting\PerformanceInfo.cs" />
-    <Compile Include="Reporting\ReportingService.cs" />
+    <Compile Include="Reporting\ReportingService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Data\IRepoStrategy.cs" />
     <Compile Include="Reporting\SalesInfo.cs" />
     <Compile Include="Reporting\SalesPeriod.cs" />
@@ -591,7 +602,9 @@
     <Compile Include="StoreNotFoundException.cs" />
     <Compile Include="Globalization\Country.cs" />
     <Compile Include="Globalization\CountryRepository.cs" />
-    <Compile Include="Globalization\GlobalizationService.cs" />
+    <Compile Include="Globalization\GlobalizationService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Globalization\Region.cs" />
     <Compile Include="Globalization\RegionRepository.cs" />
     <Compile Include="HccLocale.cs" />
@@ -673,7 +686,9 @@
     <Compile Include="BusinessRules\OrderTasks\WorkflowNote.cs" />
     <Compile Include="BusinessRules\WorkflowNames.cs" />
     <Compile Include="CacheManager.cs" />
-    <Compile Include="Catalog\CatalogService.cs" />
+    <Compile Include="Catalog\CatalogService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Catalog\CategoryFacet.cs" />
     <Compile Include="Catalog\CategoryFacetDisplayMode.cs" />
     <Compile Include="Catalog\CategoryFacetKeyHelper.cs" />
@@ -734,7 +749,9 @@
     <Compile Include="Contacts\AddressTypes.cs" />
     <Compile Include="Contacts\AffiliateReferralRepository.cs" />
     <Compile Include="Contacts\AffiliateRepository.cs" />
-    <Compile Include="Contacts\ContactService.cs" />
+    <Compile Include="Contacts\ContactService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Contacts\GravatarHelper.cs" />
     <Compile Include="Contacts\MailingListMemberRepository.cs" />
     <Compile Include="Contacts\MailingListRepository.cs" />
@@ -752,7 +769,9 @@
     <Compile Include="Content\ContentBlockSettingList.cs" />
     <Compile Include="Content\ContentBlockSettings.cs" />
     <Compile Include="Content\ContentColumnRepository.cs" />
-    <Compile Include="Content\ContentService.cs" />
+    <Compile Include="Content\ContentService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Content\CustomUrlRepository.cs" />
     <Compile Include="Content\CustomUrlType.cs" />
     <Compile Include="Content\HtmlTemplateRepository.cs" />
@@ -796,14 +815,18 @@
     <Compile Include="Marketing\PromotionQualifications\UserIsInGroup.cs" />
     <Compile Include="Marketing\PromotionType.cs" />
     <Compile Include="Marketing\RelativeProcessingCost.cs" />
-    <Compile Include="Membership\MembershipServices.cs" />
+    <Compile Include="Membership\MembershipServices.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Membership\UserQuestionRepository.cs" />
     <Compile Include="Controls\ITextBoxBasedControl.cs" />
     <Compile Include="Controls\LoginCompleteEventArgs.cs" />
     <Compile Include="Controls\PageChangingEventArgs.cs" />
     <Compile Include="IMultiStorePage.cs" />
     <Compile Include="Integration.cs" />
-    <Compile Include="Marketing\MarketingService.cs" />
+    <Compile Include="Marketing\MarketingService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Marketing\PreDefinedPromotion.cs" />
     <Compile Include="Marketing\PromotionActions\IPromotionAction.cs" />
     <Compile Include="Marketing\PromotionQualifications\AnyProduct.cs" />
@@ -817,7 +840,9 @@
     <Compile Include="Marketing\PromotionRepository.cs" />
     <Compile Include="Marketing\PromotionStatus.cs" />
     <Compile Include="Metrics\GoogleAnalytics.cs" />
-    <Compile Include="Metrics\MetricsServices.cs" />
+    <Compile Include="Metrics\MetricsServices.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Metrics\SearchQueryRepository.cs" />
     <Compile Include="Metrics\YahooAnalytics.cs" />
     <Compile Include="Orders\LineItemRepository.cs" />
@@ -835,7 +860,9 @@
     <Compile Include="Orders\OrderTransaction.cs" />
     <Compile Include="Orders\OrderTransactionRepository.cs" />
     <Compile Include="Orders\PurchasableSnapshot.cs" />
-    <Compile Include="Payment\CustomerPointsManager.cs" />
+    <Compile Include="Payment\CustomerPointsManager.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Payment\Methods\CompanyAccount.cs" />
     <Compile Include="PaypalExpressCheckoutArgs.cs" />
     <Compile Include="Controls\UserSelectedEventArgs.cs" />
@@ -952,7 +979,9 @@
     <Compile Include="Scheduling\QueuedTaskResult.cs" />
     <Compile Include="Scheduling\QueuedTaskStatus.cs" />
     <Compile Include="Scheduling\ScheduledEventFrequency.cs" />
-    <Compile Include="Scheduling\ScheduleService.cs" />
+    <Compile Include="Scheduling\ScheduleService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Security\FraudCheckData.cs" />
     <Compile Include="Security\FraudRule.cs" />
     <Compile Include="Security\FraudRuleRepository.cs" />
@@ -1003,7 +1032,9 @@
     <Compile Include="Taxes\TaxRepository.cs" />
     <Compile Include="Taxes\TaxSchedule.cs" />
     <Compile Include="Taxes\TaxScheduleRepository.cs" />
-    <Compile Include="Orders\OrderService.cs" />
+    <Compile Include="Orders\OrderService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Urls\IHccUrlResolver.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="Urls\HccRoute.cs" />

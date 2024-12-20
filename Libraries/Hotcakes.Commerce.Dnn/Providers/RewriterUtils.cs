@@ -29,8 +29,11 @@ using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using DotNetNuke.Abstractions.Application;
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Controllers;
+using DotNetNuke.Entities.Modules;
+using Microsoft.Extensions.DependencyInjection;
 
 #endregion
 
@@ -41,7 +44,7 @@ namespace Hotcakes.Commerce.Dnn.Providers
     {
         private static readonly Regex ServicesFrameworkRegex = new Regex("DesktopModules/[^/]+/API/");
 
-        internal static void RewriteUrl(HttpContext context, string sendToUrl)
+       internal static void RewriteUrl(HttpContext context, string sendToUrl)
         {
             var x = string.Empty;
             var y = string.Empty;
@@ -108,12 +111,12 @@ namespace Hotcakes.Commerce.Dnn.Providers
             return appPath + url.Substring(1);
         }
 
-        internal static bool OmitFromRewriteProcessing(string localPath)
+        internal static bool OmitFromRewriteProcessing(string localPath, IHostSettingsService hostSettingsService, IApplicationStatusInfo applicationStatusInfo)
         {
             var omitSettings = string.Empty;
-            if (Globals.Status == Globals.UpgradeStatus.None)
+            if (applicationStatusInfo.Status == UpgradeStatus.None)
             {
-                omitSettings = HostController.Instance.GetString("OmitFromRewriteProcessing");
+                omitSettings = hostSettingsService.GetString("OmitFromRewriteProcessing");
             }
 
             if (string.IsNullOrEmpty(omitSettings))

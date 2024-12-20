@@ -86,6 +86,12 @@
     <Reference Include="Hotcakes.Common.Dnn">
       <HintPath>..\..\References\Hcc\Hotcakes.Common.Dnn.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="MiniProfiler">
       <HintPath>..\..\packages\MiniProfiler.3.1.1.140\lib\net40\MiniProfiler.dll</HintPath>
     </Reference>
@@ -99,8 +105,14 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Http">
@@ -131,7 +143,9 @@
     </Compile>
     <Compile Include="Data\DnnUserEx.cs" />
     <Compile Include="DnnSearchProvider.cs" />
-    <Compile Include="DnnStoreSettingsProvider.cs" />
+    <Compile Include="DnnStoreSettingsProvider.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Data\DnnDbContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -154,19 +168,33 @@
     <Compile Include="Data\DnnUser.cs">
       <DependentUpon>DnnDbContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="DnnAccountService.cs" />
+    <Compile Include="DnnAccountService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="DnnAffiliateRepository.cs" />
-    <Compile Include="DnnCatalogService.cs" />
+    <Compile Include="DnnCatalogService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="DnnCategoryRepository.cs" />
     <Compile Include="DnnConfigurationManager.cs" />
-    <Compile Include="DnnContactService.cs" />
+    <Compile Include="DnnContactService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="DnnCustomerAccountRepository.cs" />
-    <Compile Include="DnnEventLog.cs" />
+    <Compile Include="DnnEventLog.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="DnnFactory.cs" />
     <Compile Include="DnnGlobal.cs" />
-    <Compile Include="DnnHostSettingsProvider.cs" />
-    <Compile Include="DnnLocalizationHelper.cs" />
-    <Compile Include="DnnMembershipServices.cs" />
+    <Compile Include="DnnHostSettingsProvider.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DnnLocalizationHelper.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DnnMembershipServices.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="DnnProductRepository.cs" />
     <Compile Include="DnnProductReviewRepository.cs" />
     <Compile Include="DnnModuleSettingsProvider.cs" />
@@ -186,7 +214,9 @@
     <Compile Include="Prompt\PromptBase.cs" />
     <Compile Include="Providers\HccUrlRoutingModule.cs" />
     <Compile Include="Mvc\DnnHccFormRenderer.cs" />
-    <Compile Include="Mvc\DnnHccUrlResolver.cs" />
+    <Compile Include="Mvc\DnnHccUrlResolver.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Social\SocialServiceBase.cs" />
     <Compile Include="Social\SocialServiceImpl.cs" />
     <Compile Include="Social\StubSocialItem.cs" />

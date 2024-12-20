@@ -67,6 +67,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Dnn\System.Web.WebPages.dll</HintPath>
     </Reference>
+    <Reference Include="DotNetNuke">
+      <HintPath>..\..\References\Dnn\DotNetNuke.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -74,7 +77,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accounts\MvcAccountService.cs" />
+    <Compile Include="Accounts\MvcAccountService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="CreateUserAccountForNewCustomer.cs" />
     <Compile Include="IUserAccountRepository.cs" />
     <Compile Include="Membership\AuthenticationToken.cs" />

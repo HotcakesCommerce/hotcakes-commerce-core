@@ -25,10 +25,13 @@
 #endregion
 
 using System;
+using DotNetNuke.Abstractions.Portals;
 using DotNetNuke.Application;
+using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Services.Analytics.Config;
 using Hotcakes.Commerce.Accounts;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hotcakes.Commerce.Dnn
 {
@@ -36,10 +39,11 @@ namespace Hotcakes.Commerce.Dnn
     public class DnnAccountService : AccountService
     {
         #region Constructor
-
+        private readonly IPortalAliasService _portalAliasService;
         public DnnAccountService(HccRequestContext context)
             : base(context)
         {
+            _portalAliasService = DependencyProvider.GetRequiredService<IPortalAliasService>();
         }
 
         #endregion
@@ -57,11 +61,11 @@ namespace Hotcakes.Commerce.Dnn
 
         public override Store GetStoreByUrl(string url)
         {
-            var aliasInfo = PortalAliasController.Instance.GetPortalAlias(url);
+            var aliasInfo = _portalAliasService.GetPortalAlias(url);
             if (aliasInfo != null)
             {
                 var portalController = new PortalController();
-                var portalInfo = portalController.GetPortal(aliasInfo.PortalID);
+                var portalInfo = portalController.GetPortal(aliasInfo.PortalId);
                 if (portalInfo != null)
                 {
                     return Stores.FindByStoreGuid(portalInfo.GUID);

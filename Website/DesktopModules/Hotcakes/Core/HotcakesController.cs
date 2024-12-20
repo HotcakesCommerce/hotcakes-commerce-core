@@ -43,6 +43,7 @@ using System.Xml.Serialization;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Vml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
+using DotNetNuke.Abstractions.Application;
 using DotNetNuke.Application;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
@@ -78,13 +79,15 @@ using Hotcakes.Commerce.Taxes.Providers.Avalara;
 using Hotcakes.Modules.Core.Admin.Controls;
 using Hotcakes.Shipping.FedEx;
 using Util = DotNetNuke.Entities.Content.Common.Util;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hotcakes.Modules.Core
 {
     [Serializable]
-    public class HotcakesController : IUpgradeable
+    public class HotcakesController : PortalModuleBase, IUpgradeable
     {
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(HotcakesController));
+        private IHostSettingsService _hostSettingsService;
         private HccRequestContext context = null;
         private AccountService accountServices = null;
         private List<Store> stores = null;
@@ -99,6 +102,10 @@ namespace Hotcakes.Modules.Core
             "<table class=\"hc-noprint\" style=\"width:100%;margin:1.5em auto;\"><tr><td style=\"width:100%;text-align:center;\">We built our store using the <em>FREE</em> and open-source <a href=\"https://hotcakes.org/?utm_source=hcc-install&amp;utm_medium=email-template&amp;utm_campaign={0}\" target=\"_blank\">Hotcakes Commerce e-commerce solution</a>.</td></tr></table></body>";
 
         private bool IsGenericCodeExecuted { get; set; }
+        public HotcakesController()
+        {
+            _hostSettingsService = DependencyProvider.GetRequiredService<IHostSettingsService>();
+        }
 
         public string UpgradeModule(string Version)
         {
@@ -278,8 +285,7 @@ namespace Hotcakes.Modules.Core
         private void IncrementCrmVersion()
         {
             var newVersion = Host.CrmVersion + 1;
-            HostController.Instance.Update(ClientResourceSettings.VersionKey,
-                newVersion.ToString(CultureInfo.InvariantCulture), true);
+            _hostSettingsService.Update(ClientResourceSettings.VersionKey,newVersion.ToString(CultureInfo.InvariantCulture), true);
         }
 
         private void EnsureDefaultZones()
