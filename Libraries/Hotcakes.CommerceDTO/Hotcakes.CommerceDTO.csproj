@@ -92,6 +92,7 @@
     <Compile Include="v1\Catalog\ProductVariantSkuUpdateDTO.cs" />
     <Compile Include="v1\Catalog\ProductVolumeDiscountDTO.cs" />
     <Compile Include="v1\Catalog\ProductVolumeDiscountTypeDTO.cs" />
+    <Compile Include="v1\Catalog\UpchargeAmountTypesDTO.cs" />
     <Compile Include="v1\Catalog\VariantDTO.cs" />
     <Compile Include="v1\Catalog\WishListItemDTO.cs" />
     <Compile Include="v1\Client\Api.cs" />

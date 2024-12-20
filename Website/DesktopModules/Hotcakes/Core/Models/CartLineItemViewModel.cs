@@ -46,6 +46,8 @@ namespace Hotcakes.Modules.Core.Models
             ImageUrl = string.Empty;
             LinkUrl = "#";
             HasDiscounts = false;
+            HasUpcharge = false;
+            UpchargeAmount = 0m;
         }
 
         /// <summary>
@@ -82,5 +84,15 @@ namespace Hotcakes.Modules.Core.Models
         ///     configuration set by the merchant.
         /// </summary>
         public bool HasDiscounts { get; set; }
+
+        /// <summary>
+        ///     Flag which indicates if any upcharge are applied to the line item or not.  During
+        ///     order calculation, this flag has been set based on the different criteria and
+        ///     configuration set by the merchant.
+        /// </summary>
+        public bool HasUpcharge { get; set; }
+
+        public decimal UpchargeAmount { get; set; }
+
     }
 }
