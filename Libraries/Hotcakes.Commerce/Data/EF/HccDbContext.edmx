@@ -358,6 +358,7 @@
           <Property Name="ShippingCharge" Type="int" Nullable="false" />
           <Property Name="FreeQuantity" Type="int" Nullable="false" />
           <Property Name="PromotionIds" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsUpchargeAllowed" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="hcc_MailingList">
           <Key>
@@ -587,6 +588,9 @@
           <Property Name="IsUserPrice" Type="bit" Nullable="false" />
           <Property Name="HideQty" Type="bit" Nullable="false" />
           <Property Name="IsSearchable" Type="bit" Nullable="false" />
+          <Property Name="AllowUpcharge" Type="bit" Nullable="false" />
+          <Property Name="UpchargeAmount" Type="numeric" Precision="18" Scale="10" Nullable="false" />
+          <Property Name="UpchargeUnit" Type="nvarchar" Nullable="false" />
           <Property Name="IsBundle" Type="bit" Nullable="false" />
           <Property Name="IsGiftCard" Type="bit" Nullable="false" />
           <Property Name="IsRecurring" Type="bit" Nullable="false" />
@@ -3206,6 +3210,9 @@
           <Property Type="Boolean" Name="IsUserPrice" Nullable="false" />
           <Property Type="Boolean" Name="HideQty" Nullable="false" />
           <Property Type="Boolean" Name="IsSearchable" Nullable="false" />
+          <Property Type="Boolean" Name="AllowUpcharge" Nullable="false" />
+          <Property Type="Decimal" Name="UpchargeAmount" Nullable="false" Precision="18" Scale="10" />
+          <Property Type="String" Name="UpchargeUnit" Nullable="false" />
           <NavigationProperty Name="hcc_Manufacturer" Relationship="EfModels.FK_hcc_Product_hcc_Manufacturer" FromRole="hcc_Product" ToRole="hcc_Manufacturer" />
           <NavigationProperty Name="hcc_ProductType" Relationship="EfModels.FK_hcc_Product_hcc_ProductType" FromRole="hcc_Product" ToRole="hcc_ProductType" />
           <NavigationProperty Name="hcc_Vendor" Relationship="EfModels.FK_hcc_Product_hcc_Vendor" FromRole="hcc_Product" ToRole="hcc_Vendor" />
@@ -4147,6 +4154,7 @@
           <Property Type="Boolean" Name="IsRecurringCancelled" Nullable="false" />
           <Property Type="Int32" Name="FreeQuantity" Nullable="false" />
           <Property Type="String" Name="PromotionIds" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsUpchargeAllowed" Nullable="false" />
         </EntityType>
         <EntityType Name="hcc_Promotions">
           <Key>
@@ -5418,6 +5426,9 @@
                 <ScalarProperty Name="IsGiftCard" ColumnName="IsGiftCard" />
                 <ScalarProperty Name="IsBundle" ColumnName="IsBundle" />
                 <ScalarProperty Name="IsSearchable" ColumnName="IsSearchable" />
+                <ScalarProperty Name="AllowUpcharge" ColumnName="AllowUpcharge" />
+                <ScalarProperty Name="UpchargeAmount" ColumnName="UpchargeAmount" />
+                <ScalarProperty Name="UpchargeUnit" ColumnName="UpchargeUnit" />
                 <ScalarProperty Name="HideQty" ColumnName="HideQty" />
                 <ScalarProperty Name="IsUserPrice" ColumnName="IsUserPrice" />
                 <ScalarProperty Name="IsAvailableForSale" ColumnName="IsAvailableForSale" />
@@ -6076,6 +6087,7 @@
                 <ScalarProperty Name="PromotionIds" ColumnName="PromotionIds" />
                 <ScalarProperty Name="FreeQuantity" ColumnName="FreeQuantity" />
                 <ScalarProperty Name="IsRecurringCancelled" ColumnName="IsRecurringCancelled" />
+                <ScalarProperty Name="IsUpchargeAllowed" ColumnName="IsUpchargeAllowed" />
                 <ScalarProperty Name="ShippingCharge" ColumnName="ShippingCharge" />
                 <ScalarProperty Name="RecurringIntervalType" ColumnName="RecurringIntervalType" />
                 <ScalarProperty Name="RecurringInterval" ColumnName="RecurringInterval" />

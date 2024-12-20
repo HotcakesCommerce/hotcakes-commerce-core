@@ -757,6 +757,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     If true, this product will be indexed and returned in the search results.
         /// </summary>
         public bool IsSearchable { get; set; }
+        public bool AllowUpcharge { get; set; }
+        public decimal UpchargeAmount  { get; set; }
+        public string UpchargeUnit { get; set; }
 
         /// <summary>
         ///     If set to true, this product will allow reviews to be saved by customers.
@@ -1012,6 +1015,9 @@ namespace Hotcakes.Commerce.Catalog
             }
             result.InventoryMode = InventoryMode;
             result.IsSearchable = IsSearchable;
+            result.AllowUpcharge = AllowUpcharge;
+            result.UpchargeAmount = UpchargeAmount;
+            result.UpchargeUnit = UpchargeUnit;
             result.IsAvailableForSale = IsAvailableForSale;
             result.IsBundle = IsBundle;
             result.IsUserSuppliedPrice = IsUserSuppliedPrice;
@@ -1368,6 +1374,10 @@ namespace Hotcakes.Commerce.Catalog
 
             IsSearchable = dto.IsSearchable;
 
+            AllowUpcharge = dto.AllowUpcharge;
+            UpchargeAmount = dto.UpchargeAmount;
+            UpchargeUnit = dto.UpchargeUnit;
+
             ShippingCharge = (ShippingChargeType) (int) dto.ShippingCharge;
         }
 
@@ -1435,6 +1445,9 @@ namespace Hotcakes.Commerce.Catalog
             dto.ShippingCharge = (ShippingChargeTypeDTO) (int) ShippingCharge;
 
             dto.IsSearchable = IsSearchable;
+            dto.AllowUpcharge = AllowUpcharge;
+            dto.UpchargeAmount = UpchargeAmount;
+            dto.UpchargeUnit = UpchargeUnit;
 
             return dto;
         }

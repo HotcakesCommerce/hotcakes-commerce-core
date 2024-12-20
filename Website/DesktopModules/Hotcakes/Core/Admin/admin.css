@@ -19,7 +19,7 @@ body {
   clear: both;
   height: 0;
 }
-input[type='checkbox'] {
+input[type="checkbox"] {
   display: block !important;
   cursor: pointer;
   background: none;
@@ -28,12 +28,12 @@ input[type='checkbox'] {
   float: left;
   width: 17px;
 }
-input[type='checkbox'] + label {
+input[type="checkbox"] + label {
   display: block;
   float: left;
   margin: 7px 10px 0 0;
 }
-input[type='checkbox']:before {
+input[type="checkbox"]:before {
   content: " ";
   display: inline-block;
   width: 17px;
@@ -43,7 +43,7 @@ input[type='checkbox']:before {
   background-position: 0 0;
   background-repeat: no-repeat;
 }
-input[type='checkbox']:checked:before {
+input[type="checkbox"]:checked:before {
   content: " ";
   display: inline-block;
   width: 17px;
@@ -53,7 +53,7 @@ input[type='checkbox']:checked:before {
   background-position: 0 -40px;
   background-repeat: no-repeat;
 }
-input[type='checkbox']:disabled:before {
+input[type="checkbox"]:disabled:before {
   content: " ";
   display: inline-block;
   width: 17px;
@@ -63,7 +63,7 @@ input[type='checkbox']:disabled:before {
   background-position: 0 -80px;
   background-repeat: no-repeat;
 }
-input[type='radio'] {
+input[type="radio"] {
   display: block !important;
   cursor: pointer;
   background: none;
@@ -72,12 +72,12 @@ input[type='radio'] {
   float: left;
   width: 17px;
 }
-input[type='radio'] + label {
+input[type="radio"] + label {
   display: block;
   float: left;
   margin: 7px 10px 0 0;
 }
-input[type='radio']:before {
+input[type="radio"]:before {
   content: " ";
   display: inline-block;
   width: 17px;
@@ -87,7 +87,7 @@ input[type='radio']:before {
   background-position: 0 -120px;
   background-repeat: no-repeat;
 }
-input[type='radio']:checked:before {
+input[type="radio"]:checked:before {
   content: " ";
   display: inline-block;
   width: 17px;
@@ -97,7 +97,7 @@ input[type='radio']:checked:before {
   background-position: 0 -160px;
   background-repeat: no-repeat;
 }
-input[type='radio']:disabled:before {
+input[type="radio"]:disabled:before {
   content: " ";
   display: inline-block;
   width: 17px;
@@ -115,8 +115,8 @@ input[type='radio']:disabled:before {
   width: 17px;
   z-index: 1;
 }
-.hcCheckboxOuter input[type='checkbox'],
-.hcCheckboxOuter input[type='radio'] {
+.hcCheckboxOuter input[type="checkbox"],
+.hcCheckboxOuter input[type="radio"] {
   display: block !important;
   cursor: pointer;
   background: none;
@@ -127,8 +127,8 @@ input[type='radio']:disabled:before {
   width: 17px;
   z-index: 10;
 }
-.hcCheckboxOuter input[type='checkbox'] + span,
-.hcCheckboxOuter input[type='radio'] + span {
+.hcCheckboxOuter input[type="checkbox"] + span,
+.hcCheckboxOuter input[type="radio"] + span {
   position: absolute;
   top: 0;
   left: 0;
@@ -138,19 +138,19 @@ input[type='radio']:disabled:before {
   background-position: 0 0;
   background-repeat: no-repeat;
 }
-.hcCheckboxOuter input[type='checkbox']:checked + span {
+.hcCheckboxOuter input[type="checkbox"]:checked + span {
   background-position: 0 -40px;
 }
-.hcCheckboxOuter input[type='checkbox']:disabled + span {
+.hcCheckboxOuter input[type="checkbox"]:disabled + span {
   background-position: 0 -80px;
 }
-.hcCheckboxOuter input[type='radio'] + span {
+.hcCheckboxOuter input[type="radio"] + span {
   background-position: 0 -120px;
 }
-.hcCheckboxOuter input[type='radio']:checked + span {
+.hcCheckboxOuter input[type="radio"]:checked + span {
   background-position: 0 -160px;
 }
-.hcCheckboxOuter input[type='radio']:disabled + span {
+.hcCheckboxOuter input[type="radio"]:disabled + span {
   background-position: 0 -200px;
 }
 input[type="text"] {
@@ -196,18 +196,18 @@ a.dnnDisabled input[type="checkbox"]:disabled + label {
   float: left;
   display: block;
 }
-.aspNetDisabled input[type='checkbox'],
-a.aspNetDisabled input[type='checkbox'],
-.dnnDisabled input[type='checkbox'],
-a.dnnDisabled input[type='checkbox'] {
+.aspNetDisabled input[type="checkbox"],
+a.aspNetDisabled input[type="checkbox"],
+.dnnDisabled input[type="checkbox"],
+a.dnnDisabled input[type="checkbox"] {
   float: left;
   display: inline-block;
   margin: 7px 5px auto;
 }
-.aspNetDisabled input[type='checkbox']:before,
-a.aspNetDisabled input[type='checkbox']:before,
-.dnnDisabled input[type='checkbox']:before,
-a.dnnDisabled input[type='checkbox']:before {
+.aspNetDisabled input[type="checkbox"]:before,
+a.aspNetDisabled input[type="checkbox"]:before,
+.dnnDisabled input[type="checkbox"]:before,
+a.dnnDisabled input[type="checkbox"]:before {
   content: " ";
   display: inline-block;
   width: 17px;
@@ -226,7 +226,7 @@ h5,
 td,
 th,
 div {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 14px;
   color: #434343;
@@ -236,7 +236,7 @@ input,
 select,
 textarea,
 .riSingle {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 13px;
   color: #0c0c0c;
@@ -507,7 +507,7 @@ select {
   box-sizing: border-box;
   -khtml-box-sizing: border-box;
   color: #434343 !important;
-  font-family: 'Roboto', sans-serif !important;
+  font-family: "Roboto", sans-serif !important;
   font-size: 14px !important;
   line-height: 18px !important;
   padding: 0 0 8px 0 !important;
@@ -525,13 +525,13 @@ select {
 .hcFormItem select.hcSelectList,
 .hcFormItemHor select.hcSelectList,
 .hcFormItemInline select.hcSelectList {
-  height: 10.0em;
+  height: 10em;
   background: none !important;
 }
 .hcFormItem select.hcSelectList.hcLong,
 .hcFormItemHor select.hcSelectList.hcLong,
 .hcFormItemInline select.hcSelectList.hcLong {
-  height: 20.0em;
+  height: 20em;
   background: none !important;
 }
 .hcFormItem > input[type="checkbox"],
@@ -799,7 +799,7 @@ ul.hcActions li {
 .hcFormMessage.hcFormWarning {
   background-color: rgba(255, 255, 0, 0.15);
   /* yellow */
-  border-color: #CDB21F;
+  border-color: #cdb21f;
   /* yellow */
 }
 .hcFormMessage.hcFormSuccess {
@@ -1563,7 +1563,7 @@ select.hcSelectionList {
   filter: alpha(opacity=65);
   box-shadow: none;
   color: #333;
-  background-color: #E6E6E6;
+  background-color: #e6e6e6;
 }
 .hcButton.disabled,
 .hcButton[disabled] {
@@ -1573,7 +1573,7 @@ select.hcSelectionList {
   filter: alpha(opacity=65);
   box-shadow: none;
   color: #333;
-  background-color: #E6E6E6;
+  background-color: #e6e6e6;
 }
 .hcCheckboxUser {
   text-align: left;
@@ -1587,7 +1587,7 @@ select.hcSelectionList {
   filter: alpha(opacity=65);
   box-shadow: none;
   color: #333;
-  background-color: #E6E6E6;
+  background-color: #e6e6e6;
 }
 .hcComboBox {
   min-width: 160px;
@@ -1599,7 +1599,7 @@ select.hcSelectionList {
 }
 @page {
   size: A4 portrait;
-  margin: 19.05mm 13.20mm 36.60mm 19.05mm;
+  margin: 19.05mm 13.2mm 36.6mm 19.05mm;
 }
 @media print {
   #header {
@@ -1840,10 +1840,20 @@ body > form {
 .hcNavContent .hcNavContentBody .hcBlock.hcBlockLight {
   background: #222222;
 }
-.hcNavContent .hcNavContentBody .hcBlock.hcBlockLight .hcForm .hcFormItem:first-child h2 {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock.hcBlockLight
+  .hcForm
+  .hcFormItem:first-child
+  h2 {
   margin-top: 0;
 }
-.hcNavContent .hcNavContentBody .hcBlock.hcBlockLight .hcForm .hcFormItem:first-child .hcLabel {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock.hcBlockLight
+  .hcForm
+  .hcFormItem:first-child
+  .hcLabel {
   padding-top: 0;
 }
 .hcNavContent .hcNavContentBody .hcBlock.hcBlockLight.hcPaddingBottom {
@@ -1866,23 +1876,55 @@ body > form {
 .hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem .hcTertiaryAction {
   margin: 5px 0 20px 0;
 }
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem input [type="text"],
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem input[type="password"] textarea,
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem
+  input
+  [type="text"],
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem
+  input[type="password"]
+  textarea,
 .hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem select,
 .hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem .hcButton {
   margin-bottom: 30px;
   width: 100%;
 }
 .hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem input[type="text"],
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem input[type="password"] {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem
+  input[type="password"] {
   color: #ffffff;
 }
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem input[type="checkbox"],
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem input[type="radio"] {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem
+  input[type="checkbox"],
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem
+  input[type="radio"] {
   margin-left: 0;
   margin-right: 12px;
 }
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem input[type="checkbox"]:before {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem
+  input[type="checkbox"]:before {
   content: " ";
   display: inline-block;
   width: 17px;
@@ -1892,7 +1934,12 @@ body > form {
   background-position: 0 -360px;
   background-repeat: no-repeat;
 }
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem input[type="checkbox"]:checked:before {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem
+  input[type="checkbox"]:checked:before {
   content: " ";
   display: inline-block;
   width: 17px;
@@ -1902,7 +1949,12 @@ body > form {
   background-position: 0 -40px;
   background-repeat: no-repeat;
 }
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem input[type="checkbox"]:disabled:before {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem
+  input[type="checkbox"]:disabled:before {
   content: " ";
   display: inline-block;
   width: 17px;
@@ -1912,7 +1964,12 @@ body > form {
   background-position: 0 -80px;
   background-repeat: no-repeat;
 }
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem input[type="radio"]:before {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem
+  input[type="radio"]:before {
   content: " ";
   display: inline-block;
   width: 17px;
@@ -1922,7 +1979,12 @@ body > form {
   background-position: 0 -400px;
   background-repeat: no-repeat;
 }
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem input[type="radio"]:checked:before {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem
+  input[type="radio"]:checked:before {
   content: " ";
   display: inline-block;
   width: 17px;
@@ -1932,7 +1994,12 @@ body > form {
   background-position: 0 -160px;
   background-repeat: no-repeat;
 }
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem input[type="radio"]:disabled:before {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem
+  input[type="radio"]:disabled:before {
   content: " ";
   display: inline-block;
   width: 17px;
@@ -1942,8 +2009,20 @@ body > form {
   background-position: 0 -200px;
   background-repeat: no-repeat;
 }
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem input[type="checkbox"] + label,
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem input[type="radio"] + label {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem
+  input[type="checkbox"]
+  + label,
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem
+  input[type="radio"]
+  + label {
   padding-right: 0;
 }
 .hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem select {
@@ -1955,7 +2034,7 @@ body > form {
   -moz-appearance: none;
   background: url(Images/admin_form_sprite.png) 170px -232px no-repeat #222222;
   border: 1px solid #63696f;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 12px;
   color: #ffffff;
 }
@@ -1965,11 +2044,22 @@ body > form {
 .hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem.hcGo label {
   padding-top: 15px;
 }
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem.hcGo .hcFieldOuter {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem.hcGo
+  .hcFieldOuter {
   height: 53px;
   position: relative;
 }
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem.hcGo .hcFieldOuter input {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem.hcGo
+  .hcFieldOuter
+  input {
   position: absolute;
   color: #ffffff;
   padding-right: 20px;
@@ -1977,7 +2067,13 @@ body > form {
   z-index: 0;
   width: 90% !important;
 }
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem.hcGo .hcFieldOuter .hcIconRight {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem.hcGo
+  .hcFieldOuter
+  .hcIconRight {
   position: absolute;
   background-position: -240px -120px;
   height: 15px;
@@ -1987,12 +2083,24 @@ body > form {
   width: 15px;
   z-index: 1;
 }
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem.hcGo .hcSelectOuter select {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem.hcGo
+  .hcSelectOuter
+  select {
   background-position-x: 134px;
   padding-right: 20px;
   width: 84%;
 }
-.hcNavContent .hcNavContentBody .hcBlock .hcForm .hcFormItem.hcGo .hcSelectOuter .hcIconRight {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock
+  .hcForm
+  .hcFormItem.hcGo
+  .hcSelectOuter
+  .hcIconRight {
   background-position: -232px -194px;
   width: 20px;
   height: 20px;
@@ -2002,7 +2110,11 @@ body > form {
   padding-bottom: 20px;
   padding-top: 20px;
 }
-.hcNavContent .hcNavContentBody .hcBlock.hcNavContentBottom .hcFormItem > select {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock.hcNavContentBottom
+  .hcFormItem
+  > select {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   -khtml-box-sizing: border-box;
@@ -2011,14 +2123,18 @@ body > form {
   -moz-appearance: none;
   background: url(Images/admin_form_sprite.png) 170px -232px no-repeat #222222;
   border: 1px solid #63696f;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 12px;
   color: #ffffff;
 }
 .hcNavContent .hcNavContentBody .hcBlock.hcBlockNotTopPadding {
   padding-top: 0;
 }
-.hcNavContent .hcNavContentBody .hcBlock.hcBlockNotBottomPadding .hcForm .hcFormItem {
+.hcNavContent
+  .hcNavContentBody
+  .hcBlock.hcBlockNotBottomPadding
+  .hcForm
+  .hcFormItem {
   padding-bottom: 0;
 }
 .hcNavContent .hcNavContentBody .hcPrimaryAction,
@@ -2092,7 +2208,7 @@ body > form {
 .hcNavMenu li a:hover {
   color: #ffffff;
   display: block;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 300;
   font-size: 12px;
   line-height: 12px;
@@ -2164,7 +2280,7 @@ body > form {
 .hcWizardProgressNav li a:visited i:after {
   top: 31px;
   left: 4px;
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   width: 17px;
@@ -2762,14 +2878,14 @@ body > form {
   width: 47px;
   height: 30px;
   display: inline-block;
-  background: url('Images/creditcards.png') no-repeat 0px 0px;
+  background: url("Images/creditcards.png") no-repeat 0px 0px;
   border: solid 1px #999;
 }
 .cc-disabled {
   width: 47px;
   height: 30px;
   display: inline-block;
-  background: url('Images/creditcards_disabled.png') no-repeat 0px 0px;
+  background: url("Images/creditcards_disabled.png") no-repeat 0px 0px;
   border: solid 1px #999;
 }
 .cc-visa {
@@ -2850,27 +2966,27 @@ body > form {
 }
 .hcOrderHighlight .hcBlue,
 .hcOrderHighlight tr.hcBlue td {
-  background-color: #8AA5CE;
+  background-color: #8aa5ce;
 }
 .hcOrderHighlight .hcYellow,
 .hcOrderHighlight tr.hcYellow td {
-  background-color: #FFF958;
+  background-color: #fff958;
 }
 .hcOrderHighlight .hcLime,
 .hcOrderHighlight tr.hcLime td {
-  background-color: #5EFF69;
+  background-color: #5eff69;
 }
 .hcOrderHighlight .hcOrange,
 .hcOrderHighlight tr.hcOrange td {
-  background-color: #F19E32;
+  background-color: #f19e32;
 }
 .hcOrderHighlight .hcPurple,
 .hcOrderHighlight tr.hcPurple td {
-  background-color: #D377D2;
+  background-color: #d377d2;
 }
 .hcOrderHighlight .hcTan,
 .hcOrderHighlight tr.hcTan td {
-  background-color: #C9B193;
+  background-color: #c9b193;
 }
 /* ---------- Product Choices ---------- */
 .hcFormOptions {
@@ -2922,17 +3038,17 @@ body > form {
   padding: 3px;
 }
 .fraud-low {
-  background-color: #44991C;
+  background-color: #44991c;
   color: #fff;
-  border: solid 1px #36C;
+  border: solid 1px #36c;
 }
 .fraud-medium {
-  background-color: #F9F900;
-  color: #3E3E00;
+  background-color: #f9f900;
+  color: #3e3e00;
 }
 .fraud-high {
-  background-color: #C10000;
-  border-color: #C10000;
+  background-color: #c10000;
+  border-color: #c10000;
   color: #ff0;
 }
 /* Order Transaction Styles */
@@ -2963,6 +3079,9 @@ body > form {
 .hcItemDiscount {
   text-decoration: line-through;
 }
+.hcItemUpcharge {
+  text-decoration: line-through;
+}
 /* Create Order */
 .hcPaymentForm .hcCreditCard {
   padding-left: 30px;
@@ -2991,7 +3110,7 @@ body > form {
   color: #adadad;
 }
 .switch-button-label.on {
-  color: #0088CC;
+  color: #0088cc;
 }
 .switch-button-background {
   float: left;
@@ -3006,7 +3125,7 @@ body > form {
   position: absolute;
   left: -1px;
   top: -1px;
-  background: #FAFAFA;
+  background: #fafafa;
   border: 1px solid #aaa;
   border-radius: 4px;
 }
@@ -3205,12 +3324,22 @@ body > form {
   width: 25%;
   background: white;
 }
-.hcProductPerformance .hcProductPurchasedWith .hcProductBlock:not(:nth-child(4)),
-.hcCategoryPerformance .hcProductPurchasedWith .hcProductBlock:not(:nth-child(4)) {
+.hcProductPerformance
+  .hcProductPurchasedWith
+  .hcProductBlock:not(:nth-child(4)),
+.hcCategoryPerformance
+  .hcProductPurchasedWith
+  .hcProductBlock:not(:nth-child(4)) {
   border-right: 7px solid #f4f4f4;
 }
-.hcProductPerformance .hcProductPurchasedWith .hcProductBlock input[type="checkbox"],
-.hcCategoryPerformance .hcProductPurchasedWith .hcProductBlock input[type="checkbox"] {
+.hcProductPerformance
+  .hcProductPurchasedWith
+  .hcProductBlock
+  input[type="checkbox"],
+.hcCategoryPerformance
+  .hcProductPurchasedWith
+  .hcProductBlock
+  input[type="checkbox"] {
   float: right;
 }
 .hcProductPerformance .hcProductPurchasedWith .hcProductBlock .hcLabel,

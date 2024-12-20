@@ -60,6 +60,10 @@
                         {
                             <div class="hc-discounts">@Html.Raw(item.Item.DiscountDetailsAsHtml())</div>
                         }
+                        @if (item.HasUpcharge)
+                        {
+                            <div class="hc-discounts">@Html.Raw(item.Item.UpchargeDetailsAsHtml())</div>
+                        }
                     </td>
                     <td class="hc-recprice hidden-phone">
                         @item.Item.BasePricePerItem.ToString("C")
@@ -83,6 +87,10 @@
                         @if (item.HasDiscounts)
                         {
                             <div class="hc-strike">@item.Item.LineTotalWithoutDiscounts.ToString("c")</div>
+                        }
+                        @if (item.HasUpcharge)
+                        {
+                            <div class="hc-strike">@item.Item.LineTotalWithoutUpcharge.ToString("c")</div>
                         }
                         @item.Item.LineTotal.ToString("c")
                     </td>
