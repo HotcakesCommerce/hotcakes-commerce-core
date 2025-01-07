@@ -24,6 +24,7 @@
 	<ul>
 		<li>Will Strohl, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
 		<li>Alejandro Roman, <a href="https://upendoventures.com/What/CMS/DNN" target="_blank">Upendo Ventures</a></li>
+		<li>Ariel Blanco, <a href="https://upendoventures.com/What/CMS/DNN/Extensions" target="_blank">Upendo Ventures</a></li>
 		<li>Liban Silva, <a href="https://upendoventures.com/What/CMS/DNN/Extensions" target="_blank">Upendo Ventures</a></li>
 		<li><a href="https://github.com/mtrutledge" target="_blank">Matt Rutledge</a></li>
 	</ul>
