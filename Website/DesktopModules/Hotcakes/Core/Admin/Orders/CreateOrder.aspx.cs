@@ -555,8 +555,10 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 
             var totalCount = 0;
             var found = false;
-            var users = HccApp.MembershipServices.Customers.FindByFilter(FilterUserField.Text.Trim(),
-                gridSelectUser.PageIndex, gridSelectUser.PageSize, ref totalCount);
+            var pageIndex = gridSelectUser.PageIndex;
+            var pageSize = gridSelectUser.PageSize;
+
+            var users = HccApp.MembershipServices.Customers.FindByFilter(FilterUserField.Text.Trim(), pageIndex + 1, pageSize, ref totalCount);
             if (users != null)
             {
                 if (totalCount > 0)
@@ -573,11 +575,11 @@ namespace Hotcakes.Modules.Core.Admin.Orders
                     }
                     else
                     {
-                        var message = string.Format(Localization.GetString("UsersFound"), totalCount);
-                        lblFindUserMessage.Text = string.Format(SUCCESSFORMAT, message);
+                        lblFindUserMessage.Text = string.Format(SUCCESSFORMAT, Localization.GetString("MultipleUsersFound"));
                         gridSelectUser.Visible = true;
                         gridSelectUser.VirtualItemCount = totalCount;
                         gridSelectUser.DataSource = users;
+                        gridSelectUser.DataBind();
                     }
                 }
             }
@@ -585,6 +587,29 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             if (!found)
             {
                 lblFindUserMessage.Text = string.Format(ERRORFORMAT, Localization.GetString("NoUsers"));
+            }
+        }
+
+        protected void gridSelectUser_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gridSelectUser.PageIndex = e.NewPageIndex;
+            BindUserGrid();
+        }
+
+        protected void gridSelectUser_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectUser")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                var user = HccApp.MembershipServices.Customers.Find(gridSelectUser.DataKeys[index].Value.ToString());
+                if (user != null)
+                {
+                    var message = string.Format(Localization.GetString("UserFound"), user.Email);
+                    lblFindUserMessage.Text = string.Format(SUCCESSFORMAT, message);
+                    var args = new UserSelectedEventArgs();
+                    args.UserAccount = user;
+                    UserSelected(args);
+                }
             }
         }
 

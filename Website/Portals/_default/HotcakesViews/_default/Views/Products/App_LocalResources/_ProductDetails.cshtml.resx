@@ -174,4 +174,7 @@
   <data name="SetMyOwn.Text" xml:space="preserve">
     <value>Set My Own</value>
   </data>
+  <data name="AcceptUpchargeFee.Text" xml:space="preserve">
+    <value>Accept Upcharge Fee</value>
+  </data>
 </root>

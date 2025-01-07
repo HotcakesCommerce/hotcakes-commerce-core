@@ -17,7 +17,7 @@
     </div>
     <div class="panel-footer text-center">
         @Html.Raw(userPrice)<br/>
-        @if (hasOptions || Model.Item.IsGiftCard || Model.Item.IsBundle || Model.Item.IsUserSuppliedPrice)
+        @if (hasOptions || Model.Item.IsGiftCard || Model.Item.IsBundle || Model.Item.IsUserSuppliedPrice || Model.Item.AllowUpcharge)
         {
             <a class="add-to-cart-product" href="@Model.ProductLink">
                 <span><em class="glyphicon glyphicon-eye-open"></em>@Localization.GetString("View")</span>

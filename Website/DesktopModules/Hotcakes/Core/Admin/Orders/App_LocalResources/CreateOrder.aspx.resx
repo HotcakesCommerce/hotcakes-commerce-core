@@ -222,6 +222,9 @@
   <data name="lnkBacktoAbandonedCartsReport.Text" xml:space="preserve">
     <value>Back to Abandoned Carts Report</value>
   </data>
+  <data name="MultipleUsersFound.Text" xml:space="preserve">
+    <value>Multiple Users Found</value>
+  </data>
   <data name="NoOrder.Text" xml:space="preserve">
     <value>That order was not found.</value>
   </data>

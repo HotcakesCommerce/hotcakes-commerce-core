@@ -144,6 +144,12 @@
   <data name="btnSave.Text" xml:space="preserve">
     <value>Save Changes</value>
   </data>
+  <data name="ClientId.Text" xml:space="preserve">
+    <value>Client ID</value>
+  </data>
+  <data name="ClientSecret.Text" xml:space="preserve">
+    <value>Client Secret</value>
+  </data>
   <data name="CustomerCounter.Text" xml:space="preserve">
     <value>Customer Counter</value>
   </data>
@@ -206,6 +212,9 @@
   </data>
   <data name="ShippingZone.Text" xml:space="preserve">
     <value>Shipping Zone</value>
+  </data>
+  <data name="TestingMode.Text" xml:space="preserve">
+    <value>Testing Mode</value>
   </data>
   <data name="UPS10KgBox.Text" xml:space="preserve">
     <value>UPS 10Kg Box</value>

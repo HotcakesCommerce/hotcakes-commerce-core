@@ -187,6 +187,7 @@ namespace Hotcakes.Commerce.Content
             {
                 case HtmlTemplateType.NewOrderForAdmin:
                 case HtmlTemplateType.AbandonedCart:
+                case HtmlTemplateType.PaymentFailure:
                 case HtmlTemplateType.RecurringPaymentSuccess:
                 case HtmlTemplateType.RecurringPaymentFailed:
                 case HtmlTemplateType.NewOrder:
@@ -257,6 +258,7 @@ namespace Hotcakes.Commerce.Content
                 case HtmlTemplateType.OrderShipment:
                 case HtmlTemplateType.DropShippingNotice:
                 case HtmlTemplateType.AbandonedCart:
+                case HtmlTemplateType.PaymentFailure:
                 case HtmlTemplateType.RecurringPaymentSuccess:
                 case HtmlTemplateType.RecurringPaymentFailed:
                     return true;

@@ -29,10 +29,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Hotcakes.Commerce.Analytics;
+using Hotcakes.Commerce.Common;
 using Hotcakes.Commerce.Content;
 using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Orders;
 using Hotcakes.Commerce.Storage;
+using Hotcakes.Commerce.Utilities;
+using Hotcakes.CommerceDTO.v1.Catalog;
 using Hotcakes.Web;
 using Hotcakes.Web.Data;
 
@@ -721,7 +724,12 @@ namespace Hotcakes.Commerce.Catalog
             {
                 item.UrlSlug = Text.Slugify(item.ProductName, true);
             }
-
+            if (string.IsNullOrWhiteSpace(item.UpchargeUnit))
+            {
+                item.UpchargeAmount = Constants.UpchargeAmount;
+                item.UpchargeUnit = ((int)UpchargeAmountTypesDTO.Percent).ToString();
+            }
+            
             var result = Products.Create(item);
             if (rebuildSearchIndex)
             {

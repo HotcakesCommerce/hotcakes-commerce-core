@@ -229,7 +229,10 @@ namespace Hotcakes.Commerce.Catalog
                     "StockOut",
                     "Low Stock at",
                     "Roles",
-                    "Searchable"
+                    "Searchable",
+                    "AllowUpcharge",
+                    "UpchargeAmount",
+                    "UpchargeUnit"
                 }, _headerStyle);
 
                 _firstRow = 3;
@@ -275,7 +278,10 @@ namespace Hotcakes.Commerce.Catalog
                     invs.Sum(i => i.OutOfStockPoint).ToString(),
                     invs.Sum(i => i.LowStockPoint).ToString(),
                     GetRoles(p.Bvin),
-                    GetYesNo(p.IsSearchable)
+                    GetYesNo(p.IsSearchable),
+                    GetYesNo(p.AllowUpcharge),
+                    p.UpchargeAmount.ToString(),
+                    p.UpchargeUnit
                 }, _rowStyle);
 
                 return base.WriteProductRow(p, rowIndex);

@@ -1373,6 +1373,7 @@ namespace Hotcakes.Commerce.Orders
                 DateHelper.ConvertUtcToStoreTime(context.CurrentStore, LastUpdatedUtc).ToString()));
             result.Add(new HtmlTemplateTag("[[Order.OrderDiscounts]]", TotalOrderDiscounts.ToString("c")));
             result.Add(new HtmlTemplateTag("[[Order.OrderNumber]]", OrderNumber));
+            result.Add(new HtmlTemplateTag("[[Order.OrderId]]", Id.ToString()));
 
             var orderService = Factory.CreateService<OrderService>(context);
             result.Add(new HtmlTemplateTag("[[Order.PaymentMethod]]", orderService.OrdersListPaymentMethods(this)));

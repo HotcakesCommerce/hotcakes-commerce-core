@@ -312,6 +312,7 @@
     <Content Include="Core\Admin\People\AffiliatePayments.aspx" />
     <Content Include="Core\Admin\People\Users_AddressBook.aspx" />
     <Content Include="Core\Admin\People\Users_Roles.aspx" />
+    <Content Include="Core\Admin\Reports\PaymentFailures\View.aspx" />
     <Content Include="Core\Admin\Reports\AbandonedCarts\View.aspx" />
     <Content Include="Core\Admin\Reports\Customers By Product\View.aspx" />
     <Content Include="Core\Admin\styles.min.css">
@@ -1036,7 +1037,9 @@
     <Content Include="Core\Admin\Controls\App_LocalResources\Pager.ascx.resx" />
     <Content Include="Core\Admin\Dashboard\App_LocalResources\Dashboard.ascx.resx" />
     <Content Include="Core\Admin\Dashboard\App_LocalResources\TopFive.ascx.resx" />
-    <Content Include="Core\Admin\Reports\AbandonedCarts\App_LocalResources\View.aspx.resx" />
+    <Content Include="Core\Admin\Reports\AbandonedCarts\App_LocalResources\View.aspx.resx">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Core\Admin\Parts\CreditCardGateways\Test Recurring Gateway\App_LocalResources\Edit.ascx.resx" />
     <Content Include="Core\Admin\Orders\App_LocalResources\OrderItems.ascx.resx" />
     <Content Include="Core\App_LocalResources\OrderPaymentStatuses.resx" />
@@ -1202,6 +1205,7 @@
     <Compile Include="ContentBlocks\Settings.ascx.designer.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Core\PaymentFailureEmailJob.cs" />
     <Compile Include="Core\AbandonedCartEmailJob.cs" />
     <Compile Include="Core\Admin\AdminWizard.master.cs">
       <DependentUpon>AdminWizard.master</DependentUpon>
@@ -1272,8 +1276,8 @@
     <Compile Include="Core\Admin\AppCode\WebUtils.cs" />
     <Compile Include="Core\Admin\Catalog\BundledProducts.aspx.cs">
       <DependentUpon>BundledProducts.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Core\Admin\Catalog\BundledProducts.aspx.designer.cs">
       <DependentUpon>BundledProducts.aspx</DependentUpon>
@@ -2555,6 +2559,13 @@
     <Compile Include="Core\Admin\People\Users_Roles.aspx.designer.cs">
       <DependentUpon>Users_Roles.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Core\Admin\Reports\PaymentFailures\View.aspx.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Core\Admin\Reports\PaymentFailures\View.aspx.designer.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Core\Admin\Reports\AbandonedCarts\View.aspx.cs">
       <DependentUpon>View.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3777,6 +3788,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Providers\DataProviders\SqlDataProvider\03.06.00.SqlDataProvider" />
+    <Content Include="Providers\DataProviders\SqlDataProvider\03.09.00.SqlDataProvider" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -4101,7 +4113,9 @@
     <Content Include="Core\Admin\App_LocalResources\Header.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Core\Admin\App_LocalResources\AdminControlBar.resx" />
+    <Content Include="Core\Admin\App_LocalResources\AdminControlBar.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\Admin\Catalog\App_LocalResources\ProductChoices.aspx.resx" />
@@ -4167,7 +4181,9 @@
     <Content Include="Core\Admin\Orders\App_LocalResources\EditOrder.aspx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Core\Admin\Orders\App_LocalResources\CreateOrder.aspx.resx" />
+    <Content Include="Core\Admin\Orders\App_LocalResources\CreateOrder.aspx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\Admin\Controls\App_LocalResources\AffiliatePaymentDialog.ascx.resx" />
@@ -4204,6 +4220,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\Admin\Catalog\App_LocalResources\ProductsEdit_Tabs.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Admin\Reports\PaymentFailures\App_LocalResources\View.aspx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>

@@ -737,6 +737,53 @@ namespace Hotcakes.Commerce.Reporting
             }
         }
 
+        /// <summary>
+        ///     Create payment failure products report
+        /// </summary>
+        /// <param name="startDate">The start date.</param>
+        /// <param name="endDate">The end date.</param>
+        /// <param name="pageNumber">The page number.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <param name="totalCount">The total count.</param>
+        /// <returns></returns>
+        public List<AbandonedProduct> GetPaymentFailure(DateTime startDate, DateTime endDate, int pageNumber,
+            int pageSize, out int totalCount)
+        {
+            if (pageNumber < 1) pageNumber = 1;
+            var take = pageSize;
+            var skip = (pageNumber - 1)*pageSize;
+
+            using (var db = CreateReadOrderStrategy())
+            {
+                var items = db.GetQuery<hcc_Order>()
+                    .AsNoTracking()
+                    .Where(o => o.StoreId == Context.CurrentStore.Id)
+                    .Where(o => o.hcc_LineItem.Count() > 0)
+                    .Where(o => o.TimeOfOrder > startDate)
+                    .Where(o => o.TimeOfOrder < endDate)
+                    .Where(o => o.hcc_OrderTransactions.Any(t => !t.Success))
+                    .Where(o => o.PaymentStatus == (int)OrderPaymentStatus.Unknown || o.PaymentStatus == (int)OrderPaymentStatus.Unpaid)
+                    .SelectMany(o => o.hcc_LineItem)
+                    .GroupBy(l => new {l.ProductId, l.ProductName})
+                    .Select(g => new AbandonedProduct
+                    {
+                        ProductGuid = g.Key.ProductId,
+                        ProductName = g.Key.ProductName,
+                        Quantity = g.Sum(l => l.Quantity),
+                        CartsCount = g.Select(l => l.hcc_Order.Id).Distinct().Count(),
+                        ContactsCount =
+                            g.Select(l => l.hcc_Order.UserId).Distinct().Count(u => u != null && u != string.Empty)
+                    });
+
+                totalCount = items.Count();
+                return items.
+                    OrderByDescending(l => l.CartsCount).
+                    Skip(skip).
+                    Take(take).
+                    ToList();
+            }
+        }
+
         public PerformanceInfo GetProductPerformance(string productId, SalesPeriod period)
         {
             using (MiniProfiler.Current.Step("GetProductPerformance"))

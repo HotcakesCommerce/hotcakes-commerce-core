@@ -40,6 +40,9 @@
                 <asp:TextBox ID="txtLastOrderNumber" runat="server" />
                 <asp:RequiredFieldValidator ID="rfvLastOrderNumber" runat="server" resourcekey="rfvLastOrderNumber" ControlToValidate="txtLastOrderNumber" Display="Dynamic" CssClass="hcFormError" />
                 <asp:CompareValidator ID="cvLastOrderNumber" runat="server" resourcekey="cvLastOrderNumber" ControlToValidate="txtLastOrderNumber" Operator="GreaterThanEqual" Type="Integer" ValueToCompare="0" Display="Dynamic" CssClass="hcFormError" />
+            </div>  
+            <div class="hcFormItem">
+                 <asp:CheckBox ID="chkEnableFailedPaymentNotification" resourcekey="chkEnableFailedPaymentNotification" runat="server" />
             </div>
         </div>
     </div>

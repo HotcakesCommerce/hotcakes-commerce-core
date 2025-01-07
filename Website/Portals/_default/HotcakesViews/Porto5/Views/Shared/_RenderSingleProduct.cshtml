@@ -34,7 +34,8 @@
             <div class="price">
                 <ins> 
                     <span class="amount"> 
-                        @if(Model.Item.IsGiftCard || Model.Item.IsUserSuppliedPrice){
+                        @if(Model.Item.IsGiftCard || Model.Item.IsUserSuppliedPrice || Model.Item.AllowUpcharge)
+                        {
                             <text>&nbsp;</text>
                         }else{
                             @Html.Raw(userPrice) 

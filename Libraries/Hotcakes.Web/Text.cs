@@ -178,6 +178,8 @@ namespace Hotcakes.Web
             result = result.Replace("&", "and");
             result = result.Replace("?", string.Empty);
             result = result.Replace("=", string.Empty);
+            result = result.Replace("(", string.Empty);
+            result = result.Replace(")", string.Empty);
             if (!allowSlashesAndPeriods)
             {
                 result = result.Replace("/", string.Empty);

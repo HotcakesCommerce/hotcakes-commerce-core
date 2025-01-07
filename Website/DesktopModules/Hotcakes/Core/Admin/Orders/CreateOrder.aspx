@@ -152,27 +152,27 @@
                                     </tr>
                                 </table>
                             </asp:Panel>
-                            <asp:GridView ShowHeader="false" ID="gridSelectUser" runat="server" PageSize="10" AutoGenerateColumns="False" AllowCustomPaging="True" AllowPaging="True"
-                                GridLines="None" OnEditCommand="gridSelectUser_RowEditing" DataKeyNames="Bvin" CssClass="hcGrid">
-                                <RowStyle CssClass="hcGridRow" />
-                                <AlternatingRowStyle CssClass="hcGridAltRow" />
-                                <Columns>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <asp:Label ID="lblUsername" runat="server" Text='<%# Bind("Email") %>' /><br />
-                                            <span class="smalltext">
-                                                <asp:Label ID="lblFirstName" runat="server" Text='<%# Bind("FirstName") %>' /> 
-                                                <asp:Label ID="lblLastName" runat="server" Text='<%# Bind("LastName") %>' />
-                                            </span>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <asp:LinkButton ID="SelectUserButton" runat="server" CausesValidation="false" CommandName="Edit" resourcekey="btnSelectCustomer"/>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                </Columns>
-                            </asp:GridView>
+                             <asp:GridView ShowHeader="false" ID="gridSelectUser" runat="server" PageSize="5" AutoGenerateColumns="False" AllowCustomPaging="True" AllowPaging="True"
+                                 GridLines="None" OnEditCommand="gridSelectUser_RowEditing" OnPageIndexChanging="gridSelectUser_PageIndexChanging" OnRowCommand="gridSelectUser_RowCommand" DataKeyNames="Bvin" CssClass="hcGrid">
+                                 <RowStyle CssClass="hcGridRow" />
+                                 <AlternatingRowStyle CssClass="hcGridAltRow" />
+                                 <Columns>
+                                     <asp:TemplateField>
+                                         <ItemTemplate>
+                                             <asp:Label ID="lblUsername" runat="server" Text='<%# Bind("Email") %>' /><br />
+                                             <span class="smalltext">
+                                                 <asp:Label ID="lblFirstName" runat="server" Text='<%# Bind("FirstName") %>' />
+                                                 <asp:Label ID="lblLastName" runat="server" Text='<%# Bind("LastName") %>' />
+                                             </span>
+                                         </ItemTemplate>
+                                     </asp:TemplateField>
+                                     <asp:TemplateField>
+                                         <ItemTemplate>
+                                             <asp:LinkButton ID="SelectUserButton" runat="server" CausesValidation="false" CommandName="SelectUser" CommandArgument='<%# Container.DataItemIndex %>' resourcekey="btnSelectCustomer" />
+                                         </ItemTemplate>
+                                     </asp:TemplateField>
+                                 </Columns>
+                             </asp:GridView>
                         </asp:View>
                         <asp:View ID="ViewNew" runat="server">
                             <strong><%=Localization.GetString("lblAddCustomer") %></strong><br />

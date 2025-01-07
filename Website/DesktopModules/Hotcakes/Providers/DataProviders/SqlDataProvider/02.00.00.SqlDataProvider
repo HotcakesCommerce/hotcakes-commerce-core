@@ -137,7 +137,6 @@ BEGIN
 END
 GO
 
-
 IF NOT EXISTS (SELECT 1 FROM {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] WHERE [DisplayName] = N'Contact Abandoned Cart Users')
 BEGIN
 	INSERT INTO {databaseOwner}[{objectQualifier}hcc_HtmlTemplates] ([StoreId],[LastUpdatedUtc],[DisplayName],[FromEmail],[TemplateType])

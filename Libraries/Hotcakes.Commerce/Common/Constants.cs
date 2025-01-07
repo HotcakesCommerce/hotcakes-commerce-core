@@ -116,12 +116,15 @@ namespace Hotcakes.Commerce.Common
         public const string STORESETTING_UPSDEFAULTSERVICE = "ShippingUpsDefaultService";
         public const string STORESETTING_UPSDIAGNOSITCS = "ShippingUPSDiagnostics";
         public const string STORESETTING_UPSFORCERESIDENTIAL = "ShippingUpsForceResidential";
-        public const string STORESETTING_UPSLICENSE = "Shipping_UPS_License";
-        public const string STORESETTING_UPSPASSWORD = "Shipping_UPS_Password";
         public const string STORESETTING_UPSPICKUPTYPE = "Shipping_UPS_Pickup_Type";
         public const string STORESETTING_UPSSHIPDIMENSIONS = "ShippingUpsSkipDimensions";
-        public const string STORESETTING_UPSUSERNAME = "Shipping_UPS_Username";
         public const string STORESETTING_UPSWRITEXML = "ShippingUPSWriteXML";
+        public const string STORESETTING_UPSCLIENTID = "Shipping_UPS_ClientId";
+        public const string STORESETTING_UPSCLIENTSECRET = "Shipping_UPS_ClientSecret";
+        public const string STORESETTING_UPSTESTINGMODE = "Shipping_UPS_Testing";
+        public const string STORESETTING_UPSUSERNAME = "Shipping_UPS_Username";
+        public const string STORESETTING_UPSLICENSE = "Shipping_UPS_License";
+        public const string STORESETTING_UPSPASSWORD = "Shipping_UPS_Password";
 
         public const string STORESETTING_UPSFDEFAULTPACKAGING = "ShippingUpsFreightDefaultPackaging";
         public const string STORESETTING_UPSFDEFAULTPAYMENT = "ShippingUpsFreightDefaultPayment";
@@ -149,6 +152,8 @@ namespace Hotcakes.Commerce.Common
         public const string STORESETTING_STORECLOSEDDESC = "StoreClosedDescription";
         public const string STORESETTING_AESINITVECTOR = "AESInitVector";
         public const string STORESETTING_AESKEY = "AESKey";
+
+        public const string ENABLED_FAILED_PAYMENT_NOTIFICATION = "EnableFailedPaymentNotification";
         #endregion
 
         #region Views
@@ -164,5 +169,11 @@ namespace Hotcakes.Commerce.Common
         public const string TAG_IOGPRICECURRENCY = "<meta property=\"og:price:currency\" content=\"{0}\" />";
         #endregion
 
+        #region AllowUpcharge
+
+        public const decimal UpchargeAmount = 3m;
+        public const bool AllowUpcharge = false;
+
+        #endregion
     }
 }

@@ -61,6 +61,7 @@ namespace Hotcakes.Commerce.Content
             CheckForType(HtmlTemplateType.NewRoleAssignment, templates);
             CheckForType(HtmlTemplateType.GiftCardNotification, templates);
             CheckForType(HtmlTemplateType.AbandonedCart, templates);
+            CheckForType(HtmlTemplateType.PaymentFailure, templates);
             CheckForType(HtmlTemplateType.RecurringPaymentSuccess, templates);
             CheckForType(HtmlTemplateType.RecurringPaymentFailed, templates);
             CheckForType(HtmlTemplateType.ContactAbandonedCartUsers, templates);
