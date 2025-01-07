@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(false)]
 [assembly: ComVisible(false)]
 
-[assembly: AssemblyVersion("3.08.02")]
+[assembly: AssemblyVersion("3.09.00")]
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyKeyFile("")]
 [assembly: AssemblyKeyName("")]
