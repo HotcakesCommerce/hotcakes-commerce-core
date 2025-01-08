@@ -62,6 +62,7 @@ using Hotcakes.Web.Logging;
 using Hotcakes.Web.Validation;
 using Address = Hotcakes.Commerce.Contacts.Address;
 using static Hotcakes.Payment.Gateways.StripeProcessor;
+using System.Net;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
@@ -173,8 +174,8 @@ namespace Hotcakes.Modules.Core.Controllers
             var rateKey = Request.Form["MethodId"] ?? string.Empty;
             var orderid = Request.Form["OrderId"] ?? string.Empty;
 
-            rateKey = security.InputFilter(rateKey.Trim(), PortalSecurity.FilterFlag.NoMarkup);
-            orderid = security.InputFilter(orderid.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            rateKey = WebUtility.HtmlEncode(rateKey.Trim());
+            orderid = WebUtility.HtmlEncode(orderid.Trim());
 
             var order = HccApp.OrderServices.Orders.FindForCurrentStore(orderid);
             HccApp.OrderServices.OrdersRequestShippingMethodByUniqueKey(rateKey, order);
@@ -205,7 +206,7 @@ namespace Hotcakes.Modules.Core.Controllers
             var result = new OrderSummaryJsonModel();
 
             var orderid = Request.Form["OrderId"] ?? string.Empty;
-            orderid = security.InputFilter(orderid.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            orderid = WebUtility.HtmlEncode(orderid.Trim());
 
             var order = HccApp.OrderServices.Orders.FindForCurrentStore(orderid);
 
@@ -215,7 +216,7 @@ namespace Hotcakes.Modules.Core.Controllers
                 var billshipsameString = Request.Form["billshipsame"];
                 if (!string.IsNullOrEmpty(billshipsameString))
                 {
-                    billshipsameString = security.InputFilter(billshipsameString.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+                    billshipsameString = WebUtility.HtmlEncode(billshipsameString.Trim());
                     billshipsame = bool.Parse(billshipsameString);
                 }
 
@@ -274,7 +275,7 @@ namespace Hotcakes.Modules.Core.Controllers
             var result = new OrderSummaryJsonModel();
 
             var orderid = Request.Form["OrderId"] ?? string.Empty;
-            orderid = security.InputFilter(orderid.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            orderid = WebUtility.HtmlEncode(orderid.Trim());
 
             var order = HccApp.OrderServices.Orders.FindForCurrentStore(orderid);
 
@@ -318,7 +319,7 @@ namespace Hotcakes.Modules.Core.Controllers
         {
             var result = new CleanCreditCardJsonModel();
             var notclean = Request.Form["CardNumber"];
-            notclean = security.InputFilter(notclean.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            notclean = WebUtility.HtmlEncode(notclean.Trim());
 
             var context = new HccRequestContext();
             var settingsRepo = Factory.CreateRepo<StoreSettingsRepository>(context);
@@ -402,7 +403,7 @@ namespace Hotcakes.Modules.Core.Controllers
         {
             var result = new IsEmailKnownJsonModel();
             var email = Request.Form["email"];
-            email = security.InputFilter(email.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            email = WebUtility.HtmlEncode(email.Trim());
 
             email = email.Trim().ToLower();
 
@@ -565,11 +566,11 @@ namespace Hotcakes.Modules.Core.Controllers
             var storeIsoCode = countryRepo.Find(HccApp.ContactServices.Addresses.FindStoreContactAddress().CountryBvin).IsoCode;
 
             string result = null;
-            string userVatNumber = security.InputFilter(Regex.Replace(Request.Form["UserVatNumber"], "[-. ]", ""), PortalSecurity.FilterFlag.NoMarkup);
+            string userVatNumber = WebUtility.HtmlEncode(Regex.Replace(Request.Form["UserVatNumber"], "[-. ]", ""));
             bool foundMatch = EUVatRegex.IsMatch(userVatNumber);
 
             var orderid = Request.Form["OrderId"] ?? string.Empty;
-            orderid = security.InputFilter(orderid.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            orderid = WebUtility.HtmlEncode(orderid.Trim());
             var order = HccApp.OrderServices.Orders.FindForCurrentStore(orderid);
 
             // EU VAT: remove tax if VAT number is valid and customer is not in the same country as seller
@@ -915,7 +916,7 @@ namespace Hotcakes.Modules.Core.Controllers
             var shippingRateKey = Request.Form["shippingrate"];
             if (!string.IsNullOrEmpty(shippingRateKey))
             {
-                shippingRateKey = security.InputFilter(shippingRateKey.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+                shippingRateKey = WebUtility.HtmlEncode(shippingRateKey.Trim());
             }
 
             HccApp.OrderServices.OrdersRequestShippingMethodByUniqueKey(shippingRateKey, model.CurrentOrder);
@@ -934,7 +935,7 @@ namespace Hotcakes.Modules.Core.Controllers
             model.CurrentOrder.Instructions = Request.Form["specialinstructions"];
             if (!string.IsNullOrEmpty(model.CurrentOrder.Instructions))
             {
-                model.CurrentOrder.Instructions = security.InputFilter(model.CurrentOrder.Instructions.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+                model.CurrentOrder.Instructions = WebUtility.HtmlEncode(model.CurrentOrder.Instructions.Trim());
             }
 
             // Agree to Terms
@@ -972,7 +973,7 @@ namespace Hotcakes.Modules.Core.Controllers
             model.AffiliateId = Request.Form["affiliateid"];
             if (!string.IsNullOrEmpty(model.AffiliateId))
             {
-                model.AffiliateId = security.InputFilter(model.AffiliateId.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+                model.AffiliateId = WebUtility.HtmlEncode(model.AffiliateId.Trim());
 
                 var referrerUrl = string.Empty;
                 if (Request.UrlReferrer != null)
@@ -1004,7 +1005,7 @@ namespace Hotcakes.Modules.Core.Controllers
                     model.LoginTabID = Request.Form["loginChoose0"] ?? Request.Form["loginChoose2"];
                 }
 
-                model.LoginTabID = security.InputFilter(model.LoginTabID.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+                model.LoginTabID = WebUtility.HtmlEncode(model.LoginTabID.Trim());
 
                 // Email
                 if (model.LoginTabID == LOGIN_MODE_NEWACC)
@@ -1012,8 +1013,8 @@ namespace Hotcakes.Modules.Core.Controllers
                     model.CurrentOrder.UserEmail = Request.Form["regemail"].Trim().ToLower();
                     model.RegUsername = Request.Form["regusername"].Trim().ToLower();
 
-                    model.CurrentOrder.UserEmail = security.InputFilter(model.CurrentOrder.UserEmail, PortalSecurity.FilterFlag.NoMarkup);
-                    model.RegUsername = security.InputFilter(model.RegUsername, PortalSecurity.FilterFlag.NoMarkup);
+                    model.CurrentOrder.UserEmail = WebUtility.HtmlEncode(model.CurrentOrder.UserEmail);
+                    model.RegUsername = WebUtility.HtmlEncode(model.RegUsername);
 
                     if (IsOrderConfirmed)
                     {
@@ -1025,7 +1026,7 @@ namespace Hotcakes.Modules.Core.Controllers
                         model.RegPassword = Request.Form["regpassword"];
                         if (model.RegPassword == Request.Form["regconfirmpassword"])
                         {
-                            model.RegPassword = security.InputFilter(model.RegPassword, PortalSecurity.FilterFlag.NoMarkup);
+                            model.RegPassword = WebUtility.HtmlEncode(model.RegPassword);
                             if (ShowConfirmation)
                                 SessionManager.UserRegistrationPassword = model.RegPassword;
                         }
@@ -1039,7 +1040,7 @@ namespace Hotcakes.Modules.Core.Controllers
                 else if (model.LoginTabID == LOGIN_MODE_GUEST)
                 {
                     model.CurrentOrder.UserEmail = Request.Form["customeremail"].Trim().ToLower();
-                    model.CurrentOrder.UserEmail = security.InputFilter(model.CurrentOrder.UserEmail, PortalSecurity.FilterFlag.NoMarkup);
+                    model.CurrentOrder.UserEmail = WebUtility.HtmlEncode(model.CurrentOrder.UserEmail);
                 }
             }
         }
@@ -1068,12 +1069,12 @@ namespace Hotcakes.Modules.Core.Controllers
 
             var cardSecurityCode = Request.Form["ccsecuritycode"] ?? string.Empty;
 
-            if (!string.IsNullOrEmpty(payModel.SelectedMethodId)) payModel.SelectedMethodId = security.InputFilter(payModel.SelectedMethodId, PortalSecurity.FilterFlag.NoMarkup);
-            if (!string.IsNullOrEmpty(payModel.DataPurchaseOrderNumber)) payModel.DataPurchaseOrderNumber = security.InputFilter(payModel.DataPurchaseOrderNumber, PortalSecurity.FilterFlag.NoMarkup);
-            if (!string.IsNullOrEmpty(payModel.DataCompanyAccountNumber)) payModel.DataCompanyAccountNumber = security.InputFilter(payModel.DataCompanyAccountNumber, PortalSecurity.FilterFlag.NoMarkup);
-            if (!string.IsNullOrEmpty(payModel.DataCreditCard.CardHolderName)) payModel.DataCreditCard.CardHolderName = security.InputFilter(payModel.DataCreditCard.CardHolderName, PortalSecurity.FilterFlag.NoMarkup);
-            if (!string.IsNullOrEmpty(payModel.DataCreditCard.CardNumber)) payModel.DataCreditCard.CardNumber = security.InputFilter(payModel.DataCreditCard.CardNumber, PortalSecurity.FilterFlag.NoMarkup);
-            if (!string.IsNullOrEmpty(cardSecurityCode)) cardSecurityCode = security.InputFilter(cardSecurityCode, PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(payModel.SelectedMethodId)) payModel.SelectedMethodId = WebUtility.HtmlEncode(payModel.SelectedMethodId);
+            if (!string.IsNullOrEmpty(payModel.DataPurchaseOrderNumber)) payModel.DataPurchaseOrderNumber = WebUtility.HtmlEncode(payModel.DataPurchaseOrderNumber);
+            if (!string.IsNullOrEmpty(payModel.DataCompanyAccountNumber)) payModel.DataCompanyAccountNumber = WebUtility.HtmlEncode(payModel.DataCompanyAccountNumber);
+            if (!string.IsNullOrEmpty(payModel.DataCreditCard.CardHolderName)) payModel.DataCreditCard.CardHolderName = WebUtility.HtmlEncode(payModel.DataCreditCard.CardHolderName);
+            if (!string.IsNullOrEmpty(payModel.DataCreditCard.CardNumber)) payModel.DataCreditCard.CardNumber = WebUtility.HtmlEncode(payModel.DataCreditCard.CardNumber);
+            if (!string.IsNullOrEmpty(cardSecurityCode)) cardSecurityCode = WebUtility.HtmlEncode(cardSecurityCode);
 
             if (IsOrderConfirmed)
             {
@@ -1177,16 +1178,16 @@ namespace Hotcakes.Modules.Core.Controllers
             address.PostalCode = Request.Form[prefix + "zip"] ?? address.PostalCode;
             address.Phone = Request.Form[prefix + "phone"] ?? address.Phone;
 
-            if (!string.IsNullOrEmpty(address.CountryBvin)) address.CountryBvin = security.InputFilter(address.CountryBvin.Trim(), PortalSecurity.FilterFlag.NoMarkup);
-            if (!string.IsNullOrEmpty(address.FirstName)) address.FirstName = security.InputFilter(address.FirstName.Trim(), PortalSecurity.FilterFlag.NoMarkup);
-            if (!string.IsNullOrEmpty(address.LastName)) address.LastName = security.InputFilter(address.LastName.Trim(), PortalSecurity.FilterFlag.NoMarkup);
-            if (!string.IsNullOrEmpty(address.Company)) address.Company = security.InputFilter(address.Company.Trim(), PortalSecurity.FilterFlag.NoMarkup);
-            if (!string.IsNullOrEmpty(address.Line1)) address.Line1 = security.InputFilter(address.Line1.Trim(), PortalSecurity.FilterFlag.NoMarkup);
-            if (!string.IsNullOrEmpty(address.Line2)) address.Line2 = security.InputFilter(address.Line2.Trim(), PortalSecurity.FilterFlag.NoMarkup);
-            if (!string.IsNullOrEmpty(address.City)) address.City = security.InputFilter(address.City.Trim(), PortalSecurity.FilterFlag.NoMarkup);
-            if (!string.IsNullOrEmpty(address.RegionBvin)) address.RegionBvin = security.InputFilter(address.RegionBvin.Trim(), PortalSecurity.FilterFlag.NoMarkup);
-            if (!string.IsNullOrEmpty(address.PostalCode)) address.PostalCode = security.InputFilter(address.PostalCode.Trim(), PortalSecurity.FilterFlag.NoMarkup);
-            if (!string.IsNullOrEmpty(address.Phone)) address.Phone = security.InputFilter(address.Phone.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            if (!string.IsNullOrEmpty(address.CountryBvin)) address.CountryBvin = WebUtility.HtmlEncode(address.CountryBvin.Trim());
+            if (!string.IsNullOrEmpty(address.FirstName)) address.FirstName = WebUtility.HtmlEncode(address.FirstName.Trim());
+            if (!string.IsNullOrEmpty(address.LastName)) address.LastName = WebUtility.HtmlEncode(address.LastName.Trim());
+            if (!string.IsNullOrEmpty(address.Company)) address.Company = WebUtility.HtmlEncode(address.Company.Trim());
+            if (!string.IsNullOrEmpty(address.Line1)) address.Line1 = WebUtility.HtmlEncode(address.Line1.Trim());
+            if (!string.IsNullOrEmpty(address.Line2)) address.Line2 = WebUtility.HtmlEncode(address.Line2.Trim());
+            if (!string.IsNullOrEmpty(address.City)) address.City = WebUtility.HtmlEncode(address.City.Trim());
+            if (!string.IsNullOrEmpty(address.RegionBvin)) address.RegionBvin = WebUtility.HtmlEncode(address.RegionBvin.Trim());
+            if (!string.IsNullOrEmpty(address.PostalCode)) address.PostalCode = WebUtility.HtmlEncode(address.PostalCode.Trim());
+            if (!string.IsNullOrEmpty(address.Phone)) address.Phone = WebUtility.HtmlEncode(address.Phone.Trim());
 
             address.Bvin = string.Empty;
             var user = HccApp.CurrentCustomer;
@@ -1194,7 +1195,7 @@ namespace Hotcakes.Modules.Core.Controllers
             {
                 var addressBookAddressBvin = Request.Form[prefix + "addressbvin"];
 
-                if (!string.IsNullOrEmpty(addressBookAddressBvin)) addressBookAddressBvin = security.InputFilter(addressBookAddressBvin.Trim(), PortalSecurity.FilterFlag.NoMarkup);
+                if (!string.IsNullOrEmpty(addressBookAddressBvin)) addressBookAddressBvin = WebUtility.HtmlEncode(addressBookAddressBvin.Trim());
 
                 var addressBookAddress = user.Addresses.FirstOrDefault(a => a.Bvin == addressBookAddressBvin);
                 if (address.IsEqualTo(addressBookAddress))

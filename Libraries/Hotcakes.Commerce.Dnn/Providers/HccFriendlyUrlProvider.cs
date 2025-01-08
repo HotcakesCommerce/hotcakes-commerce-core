@@ -29,6 +29,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using DotNetNuke.Abstractions.Portals;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
@@ -71,19 +72,20 @@ namespace Hotcakes.Commerce.Dnn.Providers
 
         public override string FriendlyUrl(TabInfo tab, string path)
         {
-            var _portalSettings = PortalController.Instance.GetCurrentPortalSettings();
+            var _portalSettings = PortalController.Instance.GetCurrentSettings();
             return FriendlyUrl(tab, path, Globals.glbDefaultPage, _portalSettings);
         }
 
         public override string FriendlyUrl(TabInfo tab, string path, string pageName)
         {
-            var _portalSettings = PortalController.Instance.GetCurrentPortalSettings();
+            var _portalSettings = PortalController.Instance.GetCurrentSettings();
             return FriendlyUrl(tab, path, pageName, _portalSettings);
         }
 
         public override string FriendlyUrl(TabInfo tab, string path, string pageName, PortalSettings settings)
         {
-            return FriendlyUrl(tab, path, pageName, settings.PortalAlias.HTTPAlias);
+            var portalAlias = settings.PortalAlias as IPortalAliasInfo;
+            return FriendlyUrl(tab, path, pageName, portalAlias.HttpAlias);
         }
 
         public override string FriendlyUrl(TabInfo tab, string path, string pageName, string portalAlias)

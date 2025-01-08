@@ -25,15 +25,22 @@
 #endregion
 
 using System;
+using DotNetNuke.Abstractions;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Security.Permissions;
 using Hotcakes.Commerce.Dnn.Web;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hotcakes.Modules.ProductViewer
 {
     public partial class ProductViewerView : HotcakesModuleBase
     {
+        private readonly INavigationManager _navigationManager;
+        public ProductViewerView()
+        {
+            _navigationManager = DependencyProvider.GetRequiredService<INavigationManager>();
+        }
         protected override string RenderView()
         {
             // Remove plupload.js as it's not used (erwin)
@@ -61,7 +68,7 @@ namespace Hotcakes.Modules.ProductViewer
                 {
                     if (PortalSettings.HomeTabId != PortalSettings.ActiveTab.TabID)
                     {
-                        Response.Redirect(Globals.NavigateURL(PortalSettings.HomeTabId));
+                        Response.Redirect(_navigationManager.NavigateURL(PortalSettings.HomeTabId));
                     }
                 }
             }

@@ -29,6 +29,7 @@ using System.Linq;
 using Dnn.PersonaBar.Library.Prompt;
 using Dnn.PersonaBar.Library.Prompt.Attributes;
 using Dnn.PersonaBar.Library.Prompt.Models;
+using DotNetNuke.Abstractions.Portals;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Instrumentation;
@@ -62,7 +63,7 @@ namespace Hotcakes.Commerce.Dnn.Prompt
                 {
                     messages.Add(new PromptMessage(string.Format(LocalizeString("ClearingImages"), portal.PortalName)));
 
-                    var folderPath = string.Format("\\Portals\\{0}\\Hotcakes\\Data\\temp\\", portal.PortalID);
+                    var folderPath = string.Format("\\Portals\\{0}\\Hotcakes\\Data\\temp\\", ((IPortalInfo)portal).PortalId);
                     var fullPath = System.Web.Hosting.HostingEnvironment.MapPath(folderPath);
 
                     var tempFolder = new System.IO.DirectoryInfo(fullPath);
@@ -81,7 +82,7 @@ namespace Hotcakes.Commerce.Dnn.Prompt
                 // clearing cache in each portal
                 foreach (PortalInfo portal in portals)
                 {
-                    DataCache.ClearPortalCache(portal.PortalID, true);
+                    DataCache.ClearPortalCache(((IPortalInfo)portal).PortalId, true);
                     messages.Add(new PromptMessage(string.Format(LocalizeString("ClearedPortalCache"), portal.PortalName)));
                 }
 

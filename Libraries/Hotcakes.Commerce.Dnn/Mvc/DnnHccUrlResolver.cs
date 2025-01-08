@@ -28,6 +28,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Routing;
+using DotNetNuke.Abstractions;
+using DotNetNuke.Abstractions.Application;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
@@ -35,12 +37,22 @@ using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Portals;
 using Hotcakes.Commerce.Accounts;
 using Hotcakes.Commerce.Urls;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hotcakes.Commerce.Dnn.Mvc
 {
     [Serializable]
-    public class DnnHccUrlResolver : IHccUrlResolver
+    public class DnnHccUrlResolver : PortalModuleBase, IHccUrlResolver
     {
+        #region Constructors
+        private readonly INavigationManager _navigationManager;
+
+        public DnnHccUrlResolver()
+        {
+            _navigationManager = DependencyProvider.GetRequiredService<INavigationManager>();
+        }
+        #endregion
+
         #region Properties
 
         public PortalSettings CurrentPortalSettings
@@ -106,15 +118,15 @@ namespace Hotcakes.Commerce.Dnn.Mvc
             }
             if (route == HccRoute.Terms)
             {
-                return Globals.NavigateURL("Terms");
+                return _navigationManager.NavigateURL("Terms");
             }
             if (route == HccRoute.Logoff)
             {
-                return Globals.NavigateURL("LogOff");
+                return _navigationManager.NavigateURL("LogOff");
             }
             if (route == HccRoute.SendPassword)
             {
-                return Globals.NavigateURL("SendPassword");
+                return _navigationManager.NavigateURL("SendPassword");
             }
             if (route == HccRoute.UserProfile)
             {
@@ -163,7 +175,7 @@ namespace Hotcakes.Commerce.Dnn.Mvc
             var navigateUrl = string.Empty;
             if (PortalSettings.Current != null)
             {
-                navigateUrl = Globals.NavigateURL(urlInfo.TabId, isSuperTab, portalSettings, urlInfo.ControlKey, null,
+                navigateUrl = _navigationManager.NavigateURL(urlInfo.TabId, isSuperTab, portalSettings, urlInfo.ControlKey, null,
                     parameters);
             }
             else
