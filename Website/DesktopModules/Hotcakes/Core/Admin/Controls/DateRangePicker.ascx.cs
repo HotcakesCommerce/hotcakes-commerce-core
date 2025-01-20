@@ -112,7 +112,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             {
                 if (RangeType == DateRangeType.Custom)
                 {
-                    var date = DateTime.Parse(radStartDate.Text.Trim());
+                    var date = DateTime.Parse(radEndDate.Text.Trim());
                     return date.MaxOutTime();
                 }
                 _range.RangeType = RangeType;
@@ -210,7 +210,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             DateTime result;
             if (RangeType == DateRangeType.Custom)
             {
-                var date = DateTime.Parse(radStartDate.Text.Trim());
+                var date = DateTime.Parse(radEndDate.Text.Trim());
                 result = date.MaxOutTime();
             }
             else
