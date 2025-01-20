@@ -3789,6 +3789,7 @@
     </Content>
     <Content Include="Providers\DataProviders\SqlDataProvider\03.06.00.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\03.09.00.SqlDataProvider" />
+    <Content Include="Providers\DataProviders\SqlDataProvider\03.09.01.SqlDataProvider" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

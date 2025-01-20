@@ -10,9 +10,9 @@
 
 [assembly: System.Reflection.AssemblyInformationalVersion("01.00.00")]
 [assembly: System.Reflection.AssemblyConfiguration("Release")]
-[assembly: System.Reflection.AssemblyCopyright("Copyright © 2024. All rights reserved.")]
+[assembly: System.Reflection.AssemblyCopyright("Copyright © 2025. All rights reserved.")]
 [assembly: System.Reflection.AssemblyFileVersion("01.00.00")]
-[assembly: System.Reflection.AssemblyVersion("03.09.00")]
+[assembly: System.Reflection.AssemblyVersion("03.09.01")]
 
 
 
@@ -22,11 +22,11 @@ internal sealed partial class ThisAssembly {
     
     internal const string AssemblyConfiguration = "Release";
     
-    internal const string AssemblyCopyright = "Copyright © 2024. All rights reserved.";
+    internal const string AssemblyCopyright = "Copyright © 2025. All rights reserved.";
     
     internal const string AssemblyFileVersion = "01.00.00";
     
-    internal const string AssemblyVersion = "03.09.00";
+    internal const string AssemblyVersion = "03.09.01";
     
     private ThisAssembly() {
     }

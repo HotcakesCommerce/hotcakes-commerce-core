@@ -29,6 +29,7 @@ using System.Web.UI.WebControls;
 using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Membership;
 using Hotcakes.Modules.Core.Admin.AppCode;
+using Hotcakes.Commerce;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
@@ -101,6 +102,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
         {
             if (Save())
             {
+                CacheManager.ClearForStore(HccApp.CurrentStore.Id);
                 ucMessageBox.ShowOk("Changes Saved!");
             }
             LoadInventory();
