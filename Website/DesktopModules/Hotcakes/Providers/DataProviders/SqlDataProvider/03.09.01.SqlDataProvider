@@ -1,0 +1,6 @@
+﻿IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}hcc_LineItem' AND  COLUMN_NAME = 'IsUpchargeAllowed')
+BEGIN
+ALTER TABLE {databaseOwner}[{objectQualifier}hcc_LineItem] ADD
+	[IsUpchargeAllowed] bit NOT NULL CONSTRAINT [DF_{objectQualifier}hcc_LineItem_IsUpchargeAllowed] DEFAULT 0
+END
+GO
