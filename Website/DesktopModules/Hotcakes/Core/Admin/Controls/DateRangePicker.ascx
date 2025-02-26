@@ -31,12 +31,23 @@
         <asp:LinkButton ID="btnShow" CssClass="hcButton hcDatePickerButton" resourcekey="Show" runat="server" />
     </div>
     <script type="text/javascript">
-        $(function()
-        {
+        $(function () {
+            var dateFormat = "<%=CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern %>";
+
+            // Convert the .NET date format to flatpickr date format
+            var flatpickrDateFormat = dateFormat
+                .replace(/d{1,2}/g, "d")
+                .replace(/M{1,2}/g, "m")
+                .replace(/y{2,4}/g, "Y");
+
             $(".hcDateRangeTextBox").flatpickr({
-                dateFormat: "m/d/Y",
+                dateFormat: flatpickrDateFormat,
                 minDate: new Date(2013, 1, 1),
-                maxDate: "today"
+                maxDate: "today",
+                onChange: function (selectedDates, dateStr, instance) {
+                    var formattedDate = instance.formatDate(selectedDates[0], flatpickrDateFormat);
+                    $(instance.input).val(formattedDate);
+                }
             });
         });
     </script>
