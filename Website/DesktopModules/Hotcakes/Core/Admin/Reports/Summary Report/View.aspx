@@ -1,12 +1,10 @@
-﻿<%@ Page Language="C#" MasterPageFile="../../AdminNav.master" AutoEventWireup="true" Inherits="Hotcakes.Modules.Core.Admin.Reports.Summary_Report.View" Title="Untitled Page" CodeBehind="View.aspx.cs" %>
+﻿<%@ Page Language="C#" MasterPageFile="../../AdminNav.master" AutoEventWireup="true" Inherits="Hotcakes.Modules.Core.Admin.Reports.Summary_Report.View" Title="Untitled Page" CodeBehind="View.aspx.cs" Culture="auto" UICulture="auto" %>
 
 <%@ Register Src="../../Controls/MessageBox.ascx" TagName="MessageBox" TagPrefix="hcc" %>
 <%@ Register Src="../../Controls/DateRangePicker.ascx" TagName="DateRangePicker" TagPrefix="hcc" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="Server">
-    
     <div class="hcReport">
-        
         <h1><%=PageTitle %></h1>
         <hcc:MessageBox ID="ucMessageBox" runat="server" />
 
