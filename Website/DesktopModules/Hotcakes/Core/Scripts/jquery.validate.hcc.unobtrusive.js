@@ -36,9 +36,29 @@
         return value;
     }
 
+    
+    function safeParseJSON(data) {
+        if (data === undefined || data === null || data === '') {
+            return {};
+        }
+        // Check if the string is in a valid format before attempting to parse it
+        if (typeof data === "string") {
+            try {
+                return $.parseJSON(data);  //We try to parse only if it is a string
+            } catch (e) {
+                console.warn("Error parsing JSON:", e);
+                return {}; 
+            }
+        }
+        // If it is not a string, we return an empty object
+        return {};
+    }
+
+
+
     function onError(error, inputElement) {  // 'this' is the form element
         var container = $(this).find("[data-valmsg-for='" + inputElement[0].name + "']"),
-            replace = $.parseJSON(container.attr("data-valmsg-replace")) !== false;
+            replace = safeParseJSON(container.attr("data-valmsg-replace")) !== false;
 
         container.removeClass("field-validation-valid").addClass("field-validation-error");
         error.data("unobtrusiveContainer", container);
@@ -68,7 +88,7 @@
 
     function onSuccess(error) {  // 'this' is the form element
         var container = error.data("unobtrusiveContainer"),
-            replace = $.parseJSON(container.attr("data-valmsg-replace"));
+            replace = safeParseJSON(container.attr("data-valmsg-replace"));
 
         if (container) {
             container.addClass("field-validation-valid").removeClass("field-validation-error");
