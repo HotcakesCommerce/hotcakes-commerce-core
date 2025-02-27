@@ -590,7 +590,7 @@
           <Property Name="IsSearchable" Type="bit" Nullable="false" />
           <Property Name="AllowUpcharge" Type="bit" Nullable="false" />
           <Property Name="UpchargeAmount" Type="numeric" Precision="18" Scale="10" Nullable="false" />
-          <Property Name="UpchargeUnit" Type="nvarchar" Nullable="false" />
+          <Property Name="UpchargeUnit" Type="nvarchar" Nullable="true" />
           <Property Name="IsBundle" Type="bit" Nullable="false" />
           <Property Name="IsGiftCard" Type="bit" Nullable="false" />
           <Property Name="IsRecurring" Type="bit" Nullable="false" />
@@ -3212,7 +3212,7 @@
           <Property Type="Boolean" Name="IsSearchable" Nullable="false" />
           <Property Type="Boolean" Name="AllowUpcharge" Nullable="false" />
           <Property Type="Decimal" Name="UpchargeAmount" Nullable="false" Precision="18" Scale="10" />
-          <Property Type="String" Name="UpchargeUnit" Nullable="false" />
+          <Property Type="String" Name="UpchargeUnit" Nullable="true" />
           <NavigationProperty Name="hcc_Manufacturer" Relationship="EfModels.FK_hcc_Product_hcc_Manufacturer" FromRole="hcc_Product" ToRole="hcc_Manufacturer" />
           <NavigationProperty Name="hcc_ProductType" Relationship="EfModels.FK_hcc_Product_hcc_ProductType" FromRole="hcc_Product" ToRole="hcc_ProductType" />
           <NavigationProperty Name="hcc_Vendor" Relationship="EfModels.FK_hcc_Product_hcc_Vendor" FromRole="hcc_Product" ToRole="hcc_Vendor" />
