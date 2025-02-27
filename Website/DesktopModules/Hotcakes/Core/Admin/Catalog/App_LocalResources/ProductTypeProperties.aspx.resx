@@ -132,6 +132,9 @@
   <data name="CreateError.Text" xml:space="preserve">
     <value>Error while attempting to create new property. Please check the event log.</value>
   </data>
+  <data name="DeleteErrorPropertyAssigned.Text" xml:space="preserve">
+    <value>This property is assigned to a product and cannot be deleted.</value>
+  </data>
   <data name="DisplayName.HeaderText" xml:space="preserve">
     <value>Display Name</value>
   </data>
