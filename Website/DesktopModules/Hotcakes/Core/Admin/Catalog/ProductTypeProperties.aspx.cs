@@ -90,7 +90,16 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
         protected void dgList_DeleteCommand(object source, DataGridCommandEventArgs e)
         {
-            var deleteID = (long) dgList.DataKeys[e.Item.ItemIndex];
+            var deleteID = (long)dgList.DataKeys[e.Item.ItemIndex];
+
+            // Check if the property is assigned to any product type
+            var isPropertyAssigned = HccApp.CatalogServices.ProductTypesXProperties.Find(deleteID);
+            if (isPropertyAssigned != null)
+            {
+                msg.ShowError(Localization.GetString("DeleteErrorPropertyAssigned"));
+                return;
+            }
+
             HccApp.CatalogServices.ProductPropertiesDestroy(deleteID);
             LoadItems();
         }
