@@ -107,14 +107,14 @@
             <div class="hcColumn" style="width: 35%">
                 <div class="hcForm">
                     <h2><%=Localization.GetString("lblBillTo") %></h2>
+                    <div class="hcFormItem">
+                        <asp:CheckBox ID="chkBillToSame" Checked="true" runat="server" AutoPostBack="true" resourcekey="chkBillToSame" OnCheckedChanged="chkBillToSame_CheckedChanged" />
+                    </div>
                     <asp:Panel ID="pnlBillTo" CssClass="hcBillToAddress" runat="server" Visible="false">
                         <div class="hcFormMessage hcBillToAddressMessage" style="margin-left: 2px; margin-right: 2px;"></div>
                         <hcc:AddressEditor ID="BillToAddress" ShowAddressLine3="false" CreateValidationInputs="True" FormSelector=".hcBillToAddress" ErrorMessageSelector=".hcBillToAddressMessage" runat="server" TabOrderOffSet="2000" />
                     </asp:Panel>
-                    <div class="hcFormItem">
-                        <asp:CheckBox ID="chkBillToSame" Checked="true" runat="server" AutoPostBack="true"
-                            resourcekey="chkBillToSame" OnCheckedChanged="chkBillToSame_CheckedChanged" />
-                    </div>
+                  
                 </div>
             </div>
 
