@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="Hotcakes.Core_Symbols" type="Library" version="03.09.01">
+    <package name="Hotcakes.Core_Symbols" type="Library" version="03.09.02">
       <friendlyName>Hotcakes Commerce Symbols</friendlyName>
       <description><![CDATA[Debugging symbols]]></description>
       <iconFile>~/DesktopModules/Hotcakes/Core/Images/hcc-logo.png</iconFile>
@@ -15,7 +15,7 @@
       <azureCompatible>true</azureCompatible>
       <dependencies>
         <dependency type="CoreVersion">09.08.00</dependency>
-        <dependency type="managedPackage" version="03.09.01">Hotcakes.Core</dependency>
+        <dependency type="managedPackage" version="03.09.02">Hotcakes.Core</dependency>
       </dependencies>
       <components>
         <component type="ResourceFile">
