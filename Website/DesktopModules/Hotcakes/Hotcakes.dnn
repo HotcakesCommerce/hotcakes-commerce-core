@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
 	<packages>
-		<package name="Hotcakes.Core" type="Library" version="03.09.01">
+		<package name="Hotcakes.Core" type="Library" version="03.09.02">
 			<friendlyName>Hotcakes Commerce</friendlyName>
 			<description><![CDATA[Hotcakes Commerce will give your company the control it needs to create and manage your e-commerce site.]]></description>
 			<iconFile>~/DesktopModules/Hotcakes/Core/Images/hcc-logo.png</iconFile>
@@ -58,7 +58,7 @@
 						<attributes>
 							<businessControllerClass>Hotcakes.Modules.Core.HotcakesController, Hotcakes.Modules</businessControllerClass>
 							<desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-							<upgradeVersionsList>01.00.00,01.00.07,01.05.00,01.06.00,01.07.00,01.08.00,01.09.00,01.10.00,02.00.00,02.00.01,02.00.02,02.00.03,02.00.04,02.00.05,02.00.06,03.00.00,03.00.01,03.01.00,03.02.00,03.02.01,03.02.02,03.02.03,03.03.00,03.04.00,03.04.01,03.05.00,03.06.00,03.07.00,03.08.00,03.08.01,03.08.02,03.09.00,03.09.01</upgradeVersionsList>
+							<upgradeVersionsList>01.00.00,01.00.07,01.05.00,01.06.00,01.07.00,01.08.00,01.09.00,01.10.00,02.00.00,02.00.01,02.00.02,02.00.03,02.00.04,02.00.05,02.00.06,03.00.00,03.00.01,03.01.00,03.02.00,03.02.01,03.02.02,03.02.03,03.03.00,03.04.00,03.04.01,03.05.00,03.06.00,03.07.00,03.08.00,03.08.01,03.08.02,03.09.00,03.09.01,03.09.02</upgradeVersionsList>
 						</attributes>
 					</eventMessage>
 				</component>
@@ -220,10 +220,15 @@
 							<name>03.09.01.SqlDataProvider</name>
 							<version>03.09.01</version>
 						</script>
+            <script type="Install">
+              <path>Providers\DataProviders\SqlDataProvider</path>
+              <name>03.09.02.SqlDataProvider</name>
+              <version>03.09.02</version>
+            </script>
 						<script type="UnInstall">
 							<path>Providers\DataProviders\SqlDataProvider</path>
 							<name>Uninstall.SqlDataProvider</name>
-							<version>03.09.01</version>
+							<version>03.09.02</version>
 						</script>
 					</scripts>
 				</component>
@@ -568,7 +573,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.ExtensionUrlProvider" type="Library" version="03.09.01">
+		<package name="Hotcakes.ExtensionUrlProvider" type="Library" version="03.09.02">
 			<friendlyName>Hotcakes Extension Url Provider</friendlyName>
 			<description><![CDATA[Hotcakes Extension Url Provider allows you to get rid of 'slug' parameter name in friednly urls]]></description>
 			<iconFile>~/DesktopModules/Hotcakes/Core/Images/hcc-logo.png</iconFile>
@@ -594,7 +599,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.AddressBook" type="Module" version="03.09.01">
+		<package name="Hotcakes.AddressBook" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Address Book</friendlyName>
 			<description><![CDATA[Hotcakes Commerce address book allows your customers to save addresses used for shipping.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -648,7 +653,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.Cart" type="Module" version="03.09.01">
+		<package name="Hotcakes.Cart" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Cart</friendlyName>
 			<description><![CDATA[Hotcakes Commerce cart displays products to customers for purchase.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -720,7 +725,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.CategoryMenu" type="Module" version="03.09.01">
+		<package name="Hotcakes.CategoryMenu" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Category Menu</friendlyName>
 			<description><![CDATA[Hotcakes Commerce category menu displays categories to help customers find categorized products.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -792,7 +797,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.CategoryViewer" type="Module" version="03.09.01">
+		<package name="Hotcakes.CategoryViewer" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Category Viewer</friendlyName>
 			<description><![CDATA[Hotcakes Commerce category viewer displays a listing of categories in a visual way for customers to easily drill down to products of their choice.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -866,7 +871,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.Checkout" type="Module" version="03.09.01">
+		<package name="Hotcakes.Checkout" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Checkout</friendlyName>
 			<description><![CDATA[Hotcakes Commerce checkout allows a customer to finalize their shopping experience by purchasing the items saved in their cart.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -968,7 +973,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.FeaturedProducts" type="Module" version="03.09.01">
+		<package name="Hotcakes.FeaturedProducts" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Featured Products</friendlyName>
 			<description><![CDATA[Hotcakes Commerce featured products allows you to display products to customers that have been marked as featuresd in the product catalog.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -1040,7 +1045,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.LastProductsViewed" type="Module" version="03.09.01">
+		<package name="Hotcakes.LastProductsViewed" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Last Products Viewed</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Last Products Viewed allows you to display the last products that a customer viewed to make it easy for them to return and purchase them.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -1112,7 +1117,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.MiniCart" type="Module" version="03.09.01">
+		<package name="Hotcakes.MiniCart" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Mini Cart</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Mini Cart allows you to provide a minimized cart experience, reducing the amount of things a customer sees.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -1184,7 +1189,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.MiniCartSkinObject" type="SkinObject" version="03.09.01">
+		<package name="Hotcakes.MiniCartSkinObject" type="SkinObject" version="03.09.02">
 			<friendlyName>Hotcakes Mini Cart SPA SkinObject</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Mini Cart allows you to provide a minimized cart experience, reducing the amount of things a customer sees.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -1225,7 +1230,7 @@
 			</components>
 		</package>
 		
-		<package name="Hotcakes.SearchInput" type="Module" version="03.09.01">
+		<package name="Hotcakes.SearchInput" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Search Input</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Search Input displays a search option for customers to use to discover products in your store.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -1297,7 +1302,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.SkinAffiliate" type="SkinObject" version="03.09.01">
+		<package name="Hotcakes.SkinAffiliate" type="SkinObject" version="03.09.02">
 			<friendlyName>HCSKINAFFILIATE SkinObject</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Affiliate skin object allows designers to add capabilities to handle affiliate requests on each page load without adding code to the page.]]></description>
 			<iconFile>~/DesktopModules/Hotcakes/Core/Images/hcc-logo.png</iconFile>
@@ -1330,7 +1335,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.SkinSearch" type="SkinObject" version="03.09.01">
+		<package name="Hotcakes.SkinSearch" type="SkinObject" version="03.09.02">
 			<friendlyName>HCSKINSEARCH SkinObject</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Search skin object allows designers to insert the store's search feature into the skin.]]></description>
 			<iconFile>~/DesktopModules/Hotcakes/Core/Images/hcc-logo.png</iconFile>
@@ -1363,7 +1368,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.OrderHistory" type="Module" version="03.09.01">
+		<package name="Hotcakes.OrderHistory" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Order History</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Order History module provides a way for customers to review their past orders.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -1435,7 +1440,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.ProductGrid" type="Module" version="03.09.01">
+		<package name="Hotcakes.ProductGrid" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Product Grid</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Product Grid allows you to specify a set of products to list anywhere, in a grid layout.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -1505,7 +1510,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.ProductViewer" type="Module" version="03.09.01">
+		<package name="Hotcakes.ProductViewer" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Product Viewer</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Product Viewer module displays a chosen product to your customers.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -1579,7 +1584,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.ProductReviews" type="Module" version="03.09.01">
+		<package name="Hotcakes.ProductReviews" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Product Reviews</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Product Reviews will display related reviews for the product currently being displayed on the page.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -1651,7 +1656,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.ContentBlocks" type="Module" version="03.09.01">
+		<package name="Hotcakes.ContentBlocks" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Content Blocks</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Content Blocks module allows you to display content blocks you've created in the store admin.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -1723,7 +1728,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.Search" type="Module" version="03.09.01">
+		<package name="Hotcakes.Search" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Search</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Search Module allows you to use different settings to create a search results page for your store just the way you need it.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -1795,7 +1800,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.TopWeeklySellers" type="Module" version="03.09.01">
+		<package name="Hotcakes.TopWeeklySellers" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Top Weekly Sellers</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Top Weekly Sellers will display a listing of the 10 most popular products sold over the past week.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -1867,7 +1872,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.Top10Products" type="Module" version="03.09.01">
+		<package name="Hotcakes.Top10Products" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Top 10 Products</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Top 10 Products module will display a listing of the most popular products sold in the store in the past 10 calendar days.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -1939,7 +1944,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.WishList" type="Module" version="03.09.01">
+		<package name="Hotcakes.WishList" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Wish List</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Wish List module shows your customers products that have been added to their wish list for purchase later.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
@@ -1993,7 +1998,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.AffiliateRegistration" type="Module" version="03.09.01">
+		<package name="Hotcakes.AffiliateRegistration" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Affiliate Registration</friendlyName>
 			<friendlyName>Hotcakes Wish List</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Affiliate Registration module.]]></description>
@@ -2048,7 +2053,7 @@
 			</components>
 		</package>
 
-		<package name="Hotcakes.AffiliateDashboard" type="Module" version="03.09.01">
+		<package name="Hotcakes.AffiliateDashboard" type="Module" version="03.09.02">
 			<friendlyName>Hotcakes Affiliate Dashboard</friendlyName>
 			<description><![CDATA[Hotcakes Commerce Affiliate Dashboard.]]></description>
 			<iconFile>Core/Images/hcc-logo.png</iconFile>
