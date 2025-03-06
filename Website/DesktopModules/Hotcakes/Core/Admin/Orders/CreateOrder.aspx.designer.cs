@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hotcakes.Modules.Core.Admin.Orders {
-    
-    
-    public partial class CreateOrder {
-        
+namespace Hotcakes.Modules.Core.Admin.Orders
+{
+
+
+    public partial class CreateOrder
+    {
+
         /// <summary>
         /// ucOrderActions control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Hotcakes.Modules.Core.Admin.Orders.OrderActions ucOrderActions;
-        
+
         /// <summary>
         /// hcPaymentInfo control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl hcPaymentInfo;
-        
+
         /// <summary>
         /// ucPaymentInformation control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Hotcakes.Modules.Core.Admin.Orders.PaymentInformation ucPaymentInformation;
-        
+
         /// <summary>
         /// CouponField control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label CouponField;
-        
+
         /// <summary>
         /// lnkBacktoAbandonedCartsReport control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink lnkBacktoAbandonedCartsReport;
-        
+
         /// <summary>
         /// upMain control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel upMain;
-        
+
         /// <summary>
         /// ucMessageBox control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Hotcakes.Modules.Core.Admin.Controls.MessageBox ucMessageBox;
-        
+
         /// <summary>
         /// ucOrderItems control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Hotcakes.Modules.Core.Admin.Orders.OrderItems ucOrderItems;
-        
+
         /// <summary>
         /// ShipToAddress control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Hotcakes.Modules.Core.Admin.Controls.AddressEditor ShipToAddress;
-        
+
         /// <summary>
         /// EmailAddressLabel control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label EmailAddressLabel;
-        
+
         /// <summary>
         /// EmailAddressTextBox control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox EmailAddressTextBox;
-        
+
         /// <summary>
         /// EmailRegularExpressionValidator control.
         /// </summary>
@@ -119,25 +121,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator EmailRegularExpressionValidator;
-        
-        /// <summary>
-        /// pnlBillTo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlBillTo;
-        
-        /// <summary>
-        /// BillToAddress control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Hotcakes.Modules.Core.Admin.Controls.AddressEditor BillToAddress;
-        
+
         /// <summary>
         /// chkBillToSame control.
         /// </summary>
@@ -146,7 +130,25 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkBillToSame;
-        
+
+        /// <summary>
+        /// pnlBillTo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlBillTo;
+
+        /// <summary>
+        /// BillToAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Hotcakes.Modules.Core.Admin.Controls.AddressEditor BillToAddress;
+
         /// <summary>
         /// btnFindUsers control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnFindUsers;
-        
+
         /// <summary>
         /// btnNewUsers control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnNewUsers;
-        
+
         /// <summary>
         /// btnFindOrders control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnFindOrders;
-        
+
         /// <summary>
         /// viewFindUsers control.
         /// </summary>
@@ -182,7 +184,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.MultiView viewFindUsers;
-        
+
         /// <summary>
         /// ViewFind control.
         /// </summary>
@@ -191,7 +193,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View ViewFind;
-        
+
         /// <summary>
         /// lblFindUserMessage control.
         /// </summary>
@@ -200,7 +202,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFindUserMessage;
-        
+
         /// <summary>
         /// pnlFindUser control.
         /// </summary>
@@ -209,7 +211,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlFindUser;
-        
+
         /// <summary>
         /// FilterUserField control.
         /// </summary>
@@ -218,7 +220,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox FilterUserField;
-        
+
         /// <summary>
         /// btnFindUser control.
         /// </summary>
@@ -227,7 +229,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnFindUser;
-        
+
         /// <summary>
         /// gridSelectUser control.
         /// </summary>
@@ -236,7 +238,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gridSelectUser;
-        
+
         /// <summary>
         /// ViewNew control.
         /// </summary>
@@ -245,7 +247,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View ViewNew;
-        
+
         /// <summary>
         /// lblNewUserMessage control.
         /// </summary>
@@ -254,7 +256,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNewUserMessage;
-        
+
         /// <summary>
         /// pnlNewUser control.
         /// </summary>
@@ -263,7 +265,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlNewUser;
-        
+
         /// <summary>
         /// NewUserEmailField control.
         /// </summary>
@@ -272,7 +274,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox NewUserEmailField;
-        
+
         /// <summary>
         /// NewUserFirstNameField control.
         /// </summary>
@@ -281,7 +283,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox NewUserFirstNameField;
-        
+
         /// <summary>
         /// NewUserLastNameField control.
         /// </summary>
@@ -290,7 +292,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox NewUserLastNameField;
-        
+
         /// <summary>
         /// btnNewUserSave control.
         /// </summary>
@@ -299,7 +301,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnNewUserSave;
-        
+
         /// <summary>
         /// ViewOrder control.
         /// </summary>
@@ -308,7 +310,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View ViewOrder;
-        
+
         /// <summary>
         /// lblFindOrderMessage control.
         /// </summary>
@@ -317,7 +319,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFindOrderMessage;
-        
+
         /// <summary>
         /// pnlFindUserByOrder control.
         /// </summary>
@@ -326,7 +328,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlFindUserByOrder;
-        
+
         /// <summary>
         /// FindOrderNumberField control.
         /// </summary>
@@ -335,7 +337,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox FindOrderNumberField;
-        
+
         /// <summary>
         /// btnGoFindOrder control.
         /// </summary>
@@ -344,7 +346,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGoFindOrder;
-        
+
         /// <summary>
         /// UserIdField control.
         /// </summary>
@@ -353,7 +355,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField UserIdField;
-        
+
         /// <summary>
         /// ShippingRatesList control.
         /// </summary>
@@ -362,7 +364,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList ShippingRatesList;
-        
+
         /// <summary>
         /// btnCalculateShipping control.
         /// </summary>
@@ -371,7 +373,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnCalculateShipping;
-        
+
         /// <summary>
         /// btnUpdateShipping control.
         /// </summary>
@@ -380,7 +382,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnUpdateShipping;
-        
+
         /// <summary>
         /// divNoPaymentNeeded control.
         /// </summary>
@@ -389,7 +391,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divNoPaymentNeeded;
-        
+
         /// <summary>
         /// rbNoPayment control.
         /// </summary>
@@ -398,7 +400,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbNoPayment;
-        
+
         /// <summary>
         /// divCreditCard control.
         /// </summary>
@@ -407,7 +409,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCreditCard;
-        
+
         /// <summary>
         /// rbCreditCard control.
         /// </summary>
@@ -416,7 +418,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbCreditCard;
-        
+
         /// <summary>
         /// ucCreditCardInput control.
         /// </summary>
@@ -425,7 +427,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Hotcakes.Modules.Core.Controls.CreditCardInput ucCreditCardInput;
-        
+
         /// <summary>
         /// divPurchaseOrder control.
         /// </summary>
@@ -434,7 +436,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPurchaseOrder;
-        
+
         /// <summary>
         /// rbPurchaseOrder control.
         /// </summary>
@@ -443,7 +445,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbPurchaseOrder;
-        
+
         /// <summary>
         /// txtPurchaseOrder control.
         /// </summary>
@@ -452,7 +454,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPurchaseOrder;
-        
+
         /// <summary>
         /// divCompanyAccount control.
         /// </summary>
@@ -461,7 +463,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCompanyAccount;
-        
+
         /// <summary>
         /// rbCompanyAccount control.
         /// </summary>
@@ -470,7 +472,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbCompanyAccount;
-        
+
         /// <summary>
         /// txtAccountNumber control.
         /// </summary>
@@ -479,7 +481,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAccountNumber;
-        
+
         /// <summary>
         /// divCheck control.
         /// </summary>
@@ -488,7 +490,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCheck;
-        
+
         /// <summary>
         /// rbCheck control.
         /// </summary>
@@ -497,7 +499,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbCheck;
-        
+
         /// <summary>
         /// divTelephone control.
         /// </summary>
@@ -506,7 +508,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTelephone;
-        
+
         /// <summary>
         /// rbTelephone control.
         /// </summary>
@@ -515,7 +517,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbTelephone;
-        
+
         /// <summary>
         /// divCashOnDelivery control.
         /// </summary>
@@ -524,7 +526,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCashOnDelivery;
-        
+
         /// <summary>
         /// rbCashOnDelivery control.
         /// </summary>
@@ -533,7 +535,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbCashOnDelivery;
-        
+
         /// <summary>
         /// pnlInstructions control.
         /// </summary>
@@ -542,7 +544,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlInstructions;
-        
+
         /// <summary>
         /// txtInstructions control.
         /// </summary>
@@ -551,7 +553,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtInstructions;
-        
+
         /// <summary>
         /// pnlCoupons control.
         /// </summary>
@@ -560,7 +562,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlCoupons;
-        
+
         /// <summary>
         /// txtCoupon control.
         /// </summary>
@@ -569,7 +571,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCoupon;
-        
+
         /// <summary>
         /// rfCoupon control.
         /// </summary>
@@ -578,7 +580,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfCoupon;
-        
+
         /// <summary>
         /// btnAddCoupon control.
         /// </summary>
@@ -587,7 +589,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnAddCoupon;
-        
+
         /// <summary>
         /// CouponGrid control.
         /// </summary>
@@ -596,7 +598,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView CouponGrid;
-        
+
         /// <summary>
         /// litOrderSummary control.
         /// </summary>
@@ -605,7 +607,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litOrderSummary;
-        
+
         /// <summary>
         /// btnSubmit control.
         /// </summary>
@@ -614,7 +616,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnSubmit;
-        
+
         /// <summary>
         /// AddressNormalizationDialog control.
         /// </summary>

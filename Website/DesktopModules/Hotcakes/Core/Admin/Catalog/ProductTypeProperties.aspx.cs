@@ -3,6 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
+// Copyright (c) 2020-2025 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -90,7 +91,16 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
         protected void dgList_DeleteCommand(object source, DataGridCommandEventArgs e)
         {
-            var deleteID = (long) dgList.DataKeys[e.Item.ItemIndex];
+            var deleteID = (long)dgList.DataKeys[e.Item.ItemIndex];
+
+            // Check if the property is assigned to any product type
+            var isPropertyAssigned = HccApp.CatalogServices.ProductTypesXProperties.Find(deleteID);
+            if (isPropertyAssigned != null)
+            {
+                msg.ShowError(Localization.GetString("DeleteErrorPropertyAssigned"));
+                return;
+            }
+
             HccApp.CatalogServices.ProductPropertiesDestroy(deleteID);
             LoadItems();
         }

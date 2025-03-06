@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2023 Upendo Ventures, LLC
+// Copyright (c) 2020-2025 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -56,6 +56,16 @@ namespace Hotcakes.Commerce.Catalog
             model.LastUpdated = data.LastUpdated;
             model.ShortDescription = data.ShortDescription;
             model.StoreId = data.StoreId;
+
+            if (data.hcc_ProductFileXProduct.FirstOrDefault() != null)
+            {
+                model.MaxDownloads = data.hcc_ProductFileXProduct.FirstOrDefault()?.MaxDownloads ?? 0;
+            }
+
+            if (data.hcc_ProductFileXProduct.FirstOrDefault() != null) 
+            {
+                model.AvailableMinutes = data.hcc_ProductFileXProduct?.FirstOrDefault()?.AvailableMinutes ?? 0;
+            }
         }
 
         protected override void CopyModelToData(hcc_ProductFile data, ProductFile model)

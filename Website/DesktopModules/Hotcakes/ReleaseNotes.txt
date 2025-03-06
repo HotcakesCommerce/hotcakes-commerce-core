@@ -4,7 +4,7 @@
 	.muy-importante { color:red;font-weight:bold; }
 </style>
 <div class="uv-install-wrapper">
-	<h1>Hotcakes Commerce: Version 03.09.01</h1>
+	<h1>Hotcakes Commerce: Version 03.09.02</h1>
 
 	<p class="muy-importante">The release notes continue after the Sponsors and Contributors below.</p>
 	
@@ -24,6 +24,8 @@
 	<ul>
 		<li>Will Strohl, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
 		<li>Ariel Blanco, <a href="https://upendoventures.com/What/CMS/DNN/Extensions" target="_blank">Upendo Ventures</a></li>
+		<li>Alejandro Roman, <a href="https://upendoventures.com/What/CMS/DNN/Extensions" target="_blank">Upendo Ventures</a></li>
+		<li>Liban Silva, <a href="https://upendoventures.com/What/CMS/DNN/Extensions" target="_blank">Upendo Ventures</a></li>
 		<li><a href="https://github.com/mtrutledge" target="_blank">Matt Rutledge</a></li>
 	</ul>
 
@@ -44,7 +46,7 @@
 	
 	<h3><strong>Enhancements</strong></h3>
 	<ul>
-		<li>None at this time.</li>
+		<li><strong>Added Bangladesh to Available Countries</strong> - Previously, Bangladesh was missing from the available countries. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/pulls/534" target="_blank">Pull 534</a>), Thanks <a href="https://github.com/alejoroman0605" target="_blank">@alejoroman0605</a></li>
 		<!--
 		<li><strong></strong> - . (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/" target="_blank">Issue </a>), Thanks <a href="https://github.com/" target="_blank">@</a></li>
 		<li>None at this time.</li>
@@ -53,8 +55,13 @@
 	
 	<h3><strong>Maintenance Updates</strong></h3>
 	<ul>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/524" target="_blank">Issue 524</a> - SI: Product Sales Report Custom Date Range Appears to Show Wrong Data. Thanks <a href="https://github.com/ArielBlanco1990" target="_blank">@ArielBlanco1990</a>!</li>
-		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/510" target="_blank">Issue 510</a> - Category Drilldown View Appears to Ignore Inventory Mode. Thanks <a href="https://github.com/ArielBlanco1990" target="_blank">@ArielBlanco1990</a>!</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/300" target="_blank">Issue 300</a> - SI: HC Admin Reports Date Pickers Not Showing Correct Format When Using the `en-GB` Locale. Thanks <a href="https://github.com/alejoroman0605" target="_blank">@alejoroman0605</a></li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/pulls/537" target="_blank">Pull 537</a> - SI: Update `HccDbContext.edmx`. Thanks <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a></li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/187" target="_blank">Issue 187</a> - CI: Data Inconsistency When Deleting a Product Type Property Value. Thanks <a href="https://github.com/alejoroman0605" target="_blank">@alejoroman0605</a></li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/191" target="_blank">Issue 191</a> - File download limit doesn't work. Thanks <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a>!</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/450" target="_blank">Issue 450</a> - Text Input Choice Field Causes JSON Parse Error. Thanks <a href="https://github.com/libanlsilva" target="_blank">@libanlsilva</a>!</li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/104" target="_blank">Issue 104</a> - Order Manager Billing Address Usability Issue. Thanks <a href="https://github.com/ArielBlanco1990" target="_blank">@ArielBlanco1990</a></li>
+		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/392" target="_blank">Issue 392</a> - Release prep for v03.09.02. Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
 		<!--
 		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/" target="_blank">Issue </a> - . Thanks <a href="https://github.com/" target="_blank">@</a></li>
 		<li>(no issue) - .</li>

@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2023 Upendo Ventures, LLC
+// Copyright (c) 2020-2025 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -25,6 +25,7 @@
 #endregion
 
 using System;
+using System.Globalization;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Utilities;
 using Hotcakes.Modules.Core.Admin.AppCode;
@@ -32,17 +33,12 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Modules.Core.Admin.Controls
 {
-    partial class DateRangePicker : HccUserControl
+    public partial class DateRangePicker : HccUserControl
     {
-        private const string DATEFORMAT = "MM/dd/yyyy";
-
-        #region Fields
-
+        private string DateFormat => CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
         private readonly DateRange _range = new DateRange();
-
-        public class RangeTypeChangedEventArgs : EventArgs
-        {
-        }
+        #region Fields
+        public class RangeTypeChangedEventArgs : EventArgs { }
 
         public delegate void RangeTypeChangedDelegate(object sender, RangeTypeChangedEventArgs e);
 
@@ -51,7 +47,6 @@ namespace Hotcakes.Modules.Core.Admin.Controls
         #endregion
 
         #region Properties
-
         public string FormItemCssClass { get; set; }
 
         public string LabelText
@@ -74,12 +69,12 @@ namespace Hotcakes.Modules.Core.Admin.Controls
 
         public DateRangeType RangeType
         {
-            get { return (DateRangeType) int.Parse(lstRangeType.SelectedValue); }
+            get { return (DateRangeType)int.Parse(lstRangeType.SelectedValue); }
             set
             {
-                if (lstRangeType.Items.FindByValue(((int) value).ToString()) != null)
+                if (lstRangeType.Items.FindByValue(((int)value).ToString()) != null)
                 {
-                    lstRangeType.SelectedValue = ((int) value).ToString();
+                    lstRangeType.SelectedValue = ((int)value).ToString();
                 }
             }
         }
@@ -90,7 +85,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             {
                 if (RangeType == DateRangeType.Custom)
                 {
-                    var date = DateTime.Parse(radStartDate.Text.Trim());
+                    var date = DateTime.Parse(radStartDate.Text.Trim(), CultureInfo.CurrentCulture);
                     return date.ZeroOutTime();
                 }
                 _range.RangeType = RangeType;
@@ -101,7 +96,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             }
             set
             {
-                radStartDate.Text = value.ToString(DATEFORMAT);
+                radStartDate.Text = value.ToString(DateFormat, CultureInfo.CurrentCulture);
                 RangeType = DateRangeType.Custom;
             }
         }
@@ -112,7 +107,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             {
                 if (RangeType == DateRangeType.Custom)
                 {
-                    var date = DateTime.Parse(radEndDate.Text.Trim());
+                    var date = DateTime.Parse(radEndDate.Text.Trim(), CultureInfo.CurrentCulture);
                     return date.MaxOutTime();
                 }
                 _range.RangeType = RangeType;
@@ -122,15 +117,13 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             }
             set
             {
-                radEndDate.Text = value.ToString(DATEFORMAT);
+                radEndDate.Text = value.ToString(DateFormat, CultureInfo.CurrentCulture);
                 RangeType = DateRangeType.Custom;
             }
         }
-
         #endregion
 
         #region Event Handlers
-
         public DateRangePicker()
         {
             FormItemCssClass = "hcFormItemHor";
@@ -154,18 +147,12 @@ namespace Hotcakes.Modules.Core.Admin.Controls
 
         protected void btnShow_Click(object sender, EventArgs e)
         {
-            if (RangeTypeChanged != null)
-            {
-                RangeTypeChanged(this, new RangeTypeChangedEventArgs());
-            }
+            RangeTypeChanged?.Invoke(this, new RangeTypeChangedEventArgs());
         }
 
         protected void lstRangeType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (RangeTypeChanged != null)
-            {
-                RangeTypeChanged(this, new RangeTypeChangedEventArgs());
-            }
+            RangeTypeChanged?.Invoke(this, new RangeTypeChangedEventArgs());
         }
 
         protected override void OnPreRender(EventArgs e)
@@ -174,30 +161,28 @@ namespace Hotcakes.Modules.Core.Admin.Controls
 
             if (RangeType != DateRangeType.Custom)
             {
-                radStartDate.Text = StartDate.ToString(DATEFORMAT);
-                radEndDate.Text = EndDate.ToString(DATEFORMAT);
+                radStartDate.Text = StartDate.ToString(DateFormat, CultureInfo.CurrentCulture);
+                radEndDate.Text = EndDate.ToString(DateFormat, CultureInfo.CurrentCulture);
             }
 
-            pnlCustom.Visible = lstRangeType.SelectedValue == ((int) DateRangeType.Custom).ToString();
+            pnlCustom.Visible = lstRangeType.SelectedValue == ((int)DateRangeType.Custom).ToString();
         }
 
         #endregion
 
         #region Public Methods
-
         public DateTime GetStartDateUtc(HotcakesApplication hccApp)
         {
             DateTime result;
 
             if (RangeType == DateRangeType.Custom)
             {
-                var date = DateTime.Parse(radStartDate.Text.Trim());
+                var date = DateTime.Parse(radStartDate.Text.Trim(), CultureInfo.CurrentCulture);
                 result = date.ZeroOutTime();
             }
             else
             {
                 _range.RangeType = RangeType;
-                ;
                 _range.CalculateDatesFromType(DateHelper.ConvertUtcToStoreTime(hccApp));
                 result = _range.StartDate;
             }
@@ -210,7 +195,7 @@ namespace Hotcakes.Modules.Core.Admin.Controls
             DateTime result;
             if (RangeType == DateRangeType.Custom)
             {
-                var date = DateTime.Parse(radEndDate.Text.Trim());
+                var date = DateTime.Parse(radEndDate.Text.Trim(), CultureInfo.CurrentCulture);
                 result = date.MaxOutTime();
             }
             else

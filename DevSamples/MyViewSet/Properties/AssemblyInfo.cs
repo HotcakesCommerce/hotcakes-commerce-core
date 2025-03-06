@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("My Custom Viewset")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Hotcakes Commerce, LLC")]
+[assembly: AssemblyCompany("Upendo Ventures, LLC")]
 [assembly: AssemblyProduct("Hotcakes Commerce")]
-[assembly: AssemblyCopyright("Copyright © 2019 Hotcakes Commerce, LLC")]
+[assembly: AssemblyCopyright("Copyright © Upendo Ventures, LLC")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

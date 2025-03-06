@@ -3,6 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
+// Copyright (c) 2020-2025 Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -195,9 +196,14 @@ namespace Hotcakes.Commerce.Contacts
                 try
                 {
                     var countryRepo = Factory.CreateRepo<CountryRepository>();
-                    return countryRepo.Find(CountryBvin).Regions.
-                        Where(r => r.Abbreviation == RegionBvin).
-                        FirstOrDefault();
+                    if (countryRepo == null)
+                        return null;
+
+                    var country = countryRepo.Find(CountryBvin);
+                    if (country == null || country.Regions == null)
+                        return null;
+
+                    return country.Regions.FirstOrDefault(r => r.Abbreviation == RegionBvin);
                 }
                 catch
                 {
@@ -205,6 +211,7 @@ namespace Hotcakes.Commerce.Contacts
                 }
             }
         }
+
 
         /// <summary>
         ///     Contains the zip or postal code of the address, as necessary.
