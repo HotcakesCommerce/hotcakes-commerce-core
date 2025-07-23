@@ -179,7 +179,7 @@ namespace Hotcakes.Modules.Core.Controllers
                     model.CurrentOrder.ShippingAddress.Line1 = purchaseUnits[0].ShippingDetail.AddressPortable.AddressLine1 ?? string.Empty;
                     model.CurrentOrder.ShippingAddress.Line2 = purchaseUnits[0].ShippingDetail.AddressPortable.AddressLine2 ?? string.Empty;
                     model.CurrentOrder.ShippingAddress.CountryBvin = country.Bvin ?? string.Empty;
-                    model.CurrentOrder.ShippingAddress.City = purchaseUnits[0].ShippingDetail.AddressPortable.AdminArea1 ?? string.Empty;
+                    model.CurrentOrder.ShippingAddress.City = purchaseUnits[0].ShippingDetail.AddressPortable.AdminArea2 ?? string.Empty;
                     //model.CurrentOrder.ShippingAddress.RegionBvin = payerInfo.Address.StateOrProvince ?? string.Empty;
                     model.CurrentOrder.ShippingAddress.PostalCode = purchaseUnits[0].ShippingDetail.AddressPortable.PostalCode ?? string.Empty;
                     //model.CurrentOrder.ShippingAddress.Phone = purchaseUnits[0].ShippingDetail.AddressPortable.AddressLine3 ?? string.Empty;
@@ -188,9 +188,9 @@ namespace Hotcakes.Modules.Core.Controllers
                     model.CurrentOrder.BillingAddress.FirstName = payerInfo.Name.GivenName;
                     model.CurrentOrder.BillingAddress.LastName = payerInfo.Name.Surname;
                     model.CurrentOrder.BillingAddress.Line1 = payerInfo.AddressPortable.AddressLine1 ?? string.Empty;
-                    model.CurrentOrder.BillingAddress.Line2 = payerInfo.AddressPortable.AdminArea2 ?? string.Empty;
+                    model.CurrentOrder.BillingAddress.Line2 = payerInfo.AddressPortable.AddressLine2 ?? string.Empty;
                     model.CurrentOrder.BillingAddress.CountryBvin = country.Bvin ?? string.Empty;
-                    model.CurrentOrder.BillingAddress.City = payerInfo.AddressPortable.AdminArea1 ?? string.Empty;
+                    model.CurrentOrder.BillingAddress.City = payerInfo.AddressPortable.AdminArea2 ?? string.Empty;
                     model.CurrentOrder.BillingAddress.PostalCode = payerInfo.AddressPortable.PostalCode ?? string.Empty;
 
                     ViewBag.AddressStatus = Localization.GetString("Confirmed");
