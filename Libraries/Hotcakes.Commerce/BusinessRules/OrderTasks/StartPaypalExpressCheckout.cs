@@ -60,16 +60,6 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             {
                 try
                 {
-                    // Assign the order number for PayPal to show under the Invoice ID. If this is not done then PayPal wont show this orders number in the business UI.
-                    if (string.IsNullOrEmpty(context.Order.OrderNumber))
-                    {
-                        context.Order.OrderNumber = context.HccApp.OrderServices.GenerateNewOrderNumber(context.HccApp.CurrentRequestContext.CurrentStore.Id).ToString();
-                        Hotcakes.Commerce.Orders.OrderNote orderNote = new Hotcakes.Commerce.Orders.OrderNote();
-                        orderNote.IsPublic = false;
-                        orderNote.Note = "This order was assigned number " + context.Order.OrderNumber;
-                        context.Order.Notes.Add(orderNote);
-                    }
-
                     RestPayPalApi replacePayPal = Utilities.PaypalExpressUtilities.GetRestPaypalAPI(context.HccApp.CurrentStore);
 
                     string cartReturnUrl = HccUrlBuilder.RouteHccUrl(HccRoute.ThirdPartyPayment, null, Uri.UriSchemeHttps);
@@ -86,6 +76,7 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 
                     bool isNonShipping = !context.Order.HasShippingItems;
 
+                    bool skipBreakdownOfOrderTotals = context.HccApp.CurrentStore.Settings.PayPal.NoOrderTotalBreakdown;
                     bool addressSupplied = false;
                     if (context.Inputs["ViaCheckout"] != null
                         && context.Inputs["ViaCheckout"].Value == "1")
@@ -132,6 +123,14 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
                                 IsPublic = false,
                                 Note = "Sending to Paypal. Address Supplied = true.     Shipping Total: " + shippingTotal + "   Order Total:  " + orderTotal
                             });
+
+                            if(skipBreakdownOfOrderTotals)
+                            {
+                                // If breakdown of order totals is not required, we can send the total order amount directly
+                                itemsTotal = orderTotal;
+                                taxTotal = "0.00";
+                                shippingTotal = "0.00";
+                            }
 
                             expressResponse = System.Threading.Tasks.Task.Run(() => replacePayPal.createOrder(
                                                     itemsTotal,
@@ -183,6 +182,14 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
                             IsPublic = false,
                             Note = "Sending to Paypal. Address Supplied = false.     Shipping Total: " + context.Order.TotalShippingAfterDiscounts.ToString("N", CultureInfo.InvariantCulture) + "   Order Total:  " + orderTotal
                         });
+
+                        if (skipBreakdownOfOrderTotals)
+                        {
+                            // If breakdown of order totals is not required, we can send the total order amount directly
+                            itemsTotal = orderTotal;
+                            taxTotal = "0.00";
+                        }
+
                         expressResponse = System.Threading.Tasks.Task.Run(() => replacePayPal.createOrder(
                             itemsTotal,
                             taxTotal,

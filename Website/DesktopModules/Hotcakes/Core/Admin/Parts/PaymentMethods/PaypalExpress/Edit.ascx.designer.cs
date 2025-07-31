@@ -69,6 +69,15 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.PaypalExpress
         protected global::System.Web.UI.WebControls.CheckBox chkRequirePayPalAccount;
 
         /// <summary>
+        /// chkSkipTotalBreakdown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkSkipTotalBreakdown;
+
+        /// <summary>
         /// txtSecret control.
         /// </summary>
         /// <remarks>

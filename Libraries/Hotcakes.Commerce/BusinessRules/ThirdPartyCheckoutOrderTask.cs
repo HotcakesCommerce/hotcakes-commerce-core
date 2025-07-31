@@ -38,6 +38,16 @@ namespace Hotcakes.Commerce.BusinessRules
             {
                 context.Order.CustomProperties.Add("hcc", "MethodId", PaymentMethodId);
 
+                // Assign the order number for PayPal or any third party payment to show under the Invoice ID. If this is not done then PayPal wont show this orders number in the business UI.
+                if (string.IsNullOrEmpty(context.Order.OrderNumber))
+                {
+                    context.Order.OrderNumber = context.HccApp.OrderServices.GenerateNewOrderNumber(context.HccApp.CurrentRequestContext.CurrentStore.Id).ToString();
+                    Hotcakes.Commerce.Orders.OrderNote orderNote = new Hotcakes.Commerce.Orders.OrderNote();
+                    orderNote.IsPublic = false;
+                    orderNote.Note = "This order was assigned number " + context.Order.OrderNumber;
+                    context.Order.Notes.Add(orderNote);
+                }
+
                 context.HccApp.OrderServices.Orders.Update(context.Order);
 
                 return ProcessCheckout(context);

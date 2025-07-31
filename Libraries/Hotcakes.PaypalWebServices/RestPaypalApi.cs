@@ -216,17 +216,7 @@ namespace Hotcakes.PaypalWebServices
                                     {
                                         CurrencyCode = currencyCodeType,
                                         Value = formatAmount(itemsTotal)
-                                    },
-                                    Shipping = new Money
-                                    {
-                                        CurrencyCode = currencyCodeType,
-                                        Value = formatAmount(shippingTotal)
-                                    },
-                                    TaxTotal = new Money
-                                    {
-                                        CurrencyCode = currencyCodeType,
-                                        Value = formatAmount(taxTotal)
-                                    },
+                                    }
                                 }
                             },
                             ShippingDetail = new ShippingDetail
@@ -248,6 +238,24 @@ namespace Hotcakes.PaypalWebServices
                         }
                     }
             };
+
+            if(!string.IsNullOrEmpty(shippingTotal))
+            {
+                order.PurchaseUnits[0].AmountWithBreakdown.AmountBreakdown.Shipping = new Money
+                {
+                    CurrencyCode = currencyCodeType,
+                    Value = formatAmount(shippingTotal)
+                };
+            }
+
+            if (!string.IsNullOrEmpty(taxTotal))
+            {
+                order.PurchaseUnits[0].AmountWithBreakdown.AmountBreakdown.TaxTotal = new Money
+                {
+                    CurrencyCode = currencyCodeType,
+                    Value = formatAmount(taxTotal)
+                };
+            }
 
             var request = new OrdersCreateRequest();
             request.Prefer(REQUEST_RETURN_TYPE);
@@ -291,17 +299,21 @@ namespace Hotcakes.PaypalWebServices
                                 {
                                     CurrencyCode = currencyCodeType,
                                     Value = formatAmount(itemsTotal)
-                                },
-                                TaxTotal = new Money
-                                {
-                                    CurrencyCode = currencyCodeType,
-                                    Value = formatAmount(taxTotal)
-                                },
+                                }
                             }
                         }
                     }
                 }
             };
+
+            if (!string.IsNullOrEmpty(taxTotal))
+            {
+                order.PurchaseUnits[0].AmountWithBreakdown.AmountBreakdown.TaxTotal = new Money
+                {
+                    CurrencyCode = currencyCodeType,
+                    Value = formatAmount(taxTotal)
+                };
+            }
 
             // Call API with your client and get a response for your call
             var request = new OrdersCreateRequest();
