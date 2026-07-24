@@ -45,35 +45,35 @@
       <HintPath>..\..\References\Misc\BrandonHaynes.ModelAdapter.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Dnn.PersonaBar.Library">
-      <HintPath>..\..\References\Dnn\Dnn.PersonaBar.Library.dll</HintPath>
+      <HintPath>..\..\packages\Dnn.PersonaBar.Library.9.13.0\lib\net45\Dnn.PersonaBar.Library.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke">
-      <HintPath>..\..\References\Dnn\DotNetNuke.dll</HintPath>
+      <HintPath>..\..\packages\DotNetNuke.Core.9.13.0\lib\net45\DotNetNuke.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Abstractions">
-      <HintPath>..\..\References\Dnn\DotNetNuke.Abstractions.dll</HintPath>
+      <HintPath>..\..\packages\DotNetNuke.Abstractions.9.13.0\lib\netstandard2.0\DotNetNuke.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.DependencyInjection">
-      <HintPath>..\..\References\Dnn\DotNetNuke.DependencyInjection.dll</HintPath>
+      <HintPath>..\..\packages\DotNetNuke.DependencyInjection.9.13.0\lib\netstandard2.0\DotNetNuke.DependencyInjection.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.HttpModules">
-      <HintPath>..\..\References\Dnn\DotNetNuke.HttpModules.dll</HintPath>
+      <HintPath>..\..\packages\DotNetNuke.Bundle.9.13.0\lib\net45\DotNetNuke.HttpModules.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Instrumentation">
-      <HintPath>..\..\References\Dnn\DotNetNuke.Instrumentation.dll</HintPath>
+      <HintPath>..\..\packages\DotNetNuke.Instrumentation.9.13.0\lib\net45\DotNetNuke.Instrumentation.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Log4Net">
-      <HintPath>..\..\References\Dnn\DotNetNuke.Log4Net.dll</HintPath>
+      <HintPath>..\..\packages\DotNetNuke.Instrumentation.9.13.0\lib\net45\DotNetNuke.Log4Net.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Web">
-      <HintPath>..\..\References\Dnn\DotNetNuke.Web.dll</HintPath>
+      <HintPath>..\..\packages\DotNetNuke.Web.9.13.0\lib\net45\DotNetNuke.Web.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Web.Client">
-      <HintPath>..\..\References\Dnn\DotNetNuke.Web.Client.dll</HintPath>
+      <HintPath>..\..\packages\DotNetNuke.Web.Client.9.13.0\lib\net45\DotNetNuke.Web.Client.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.WebUtility">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Dnn\DotNetNuke.WebUtility.dll</HintPath>
+      <HintPath>..\..\packages\DotNetNuke.Web.9.13.0\lib\net45\DotNetNuke.WebUtility.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -86,6 +86,12 @@
     <Reference Include="Hotcakes.Common.Dnn">
       <HintPath>..\..\References\Hcc\Hotcakes.Common.Dnn.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.DependencyInjection.2.1.1\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="MiniProfiler">
       <HintPath>..\..\packages\MiniProfiler.3.1.1.140\lib\net40\MiniProfiler.dll</HintPath>
     </Reference>
@@ -93,7 +99,7 @@
       <HintPath>..\..\packages\MiniProfiler.EF6.3.0.11\lib\net40\MiniProfiler.EntityFramework6.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\..\References\Dnn\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>..\..\packages\SharpZipLib.1.3.3\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -105,19 +111,19 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Http">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Dnn\System.Web.Http.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.WebHost">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Dnn\System.Web.Http.WebHost.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.9\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Dnn\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Dnn\System.Web.WebPages.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />

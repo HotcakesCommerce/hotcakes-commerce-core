@@ -64,7 +64,7 @@
   <ItemGroup>
     <Reference Include="ClientDependency.Core">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Dnn\ClientDependency.Core.dll</HintPath>
+      <HintPath>..\..\..\packages\ClientDependency.1.9.10\lib\net45\ClientDependency.Core.dll</HintPath>
     </Reference>
     <Reference Include="DocumentFormat.OpenXml">
       <HintPath>..\..\..\packages\DocumentFormat.OpenXml.1.0\lib\DocumentFormat.OpenXml.dll</HintPath>
@@ -76,27 +76,27 @@
     </Reference>
     <Reference Include="DotNetNuke">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Dnn\DotNetNuke.dll</HintPath>
+      <HintPath>..\..\..\packages\DotNetNuke.Core.9.13.0\lib\net45\DotNetNuke.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Abstractions">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Dnn\DotNetNuke.Abstractions.dll</HintPath>
+      <HintPath>..\..\..\packages\DotNetNuke.Abstractions.9.13.0\lib\netstandard2.0\DotNetNuke.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Instrumentation">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Dnn\DotNetNuke.Instrumentation.dll</HintPath>
+      <HintPath>..\..\..\packages\DotNetNuke.Instrumentation.9.13.0\lib\net45\DotNetNuke.Instrumentation.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Web">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Dnn\DotNetNuke.Web.dll</HintPath>
+      <HintPath>..\..\..\packages\DotNetNuke.Web.9.13.0\lib\net45\DotNetNuke.Web.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Web.Client">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Dnn\DotNetNuke.Web.Client.dll</HintPath>
+      <HintPath>..\..\..\packages\DotNetNuke.Web.Client.9.13.0\lib\net45\DotNetNuke.Web.Client.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.WebUtility">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Dnn\DotNetNuke.WebUtility.dll</HintPath>
+      <HintPath>..\..\..\packages\DotNetNuke.Web.9.13.0\lib\net45\DotNetNuke.WebUtility.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -127,7 +127,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Dnn\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PayPalCheckoutSdk, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -145,7 +145,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Dnn\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
@@ -163,7 +163,7 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Http">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Dnn\System.Web.Http.dll</HintPath>
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -174,7 +174,7 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.WebPages">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Dnn\System.Web.WebPages.dll</HintPath>
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -3791,6 +3791,7 @@
     <Content Include="Providers\DataProviders\SqlDataProvider\03.09.00.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\03.09.01.SqlDataProvider" />
     <Content Include="Providers\DataProviders\SqlDataProvider\03.09.02.SqlDataProvider" />
+    <Content Include="Providers\DataProviders\SqlDataProvider\03.10.00.SqlDataProvider" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
