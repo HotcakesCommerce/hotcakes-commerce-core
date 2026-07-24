@@ -225,6 +225,11 @@
               <name>03.09.02.SqlDataProvider</name>
               <version>03.09.02</version>
             </script>
+            <script type="Install">
+              <path>Providers\DataProviders\SqlDataProvider</path>
+              <name>03.10.00.SqlDataProvider</name>
+              <version>03.10.00</version>
+            </script>
 						<script type="UnInstall">
 							<path>Providers\DataProviders\SqlDataProvider</path>
 							<name>Uninstall.SqlDataProvider</name>
@@ -442,13 +447,13 @@
 							<path>bin</path>
 							<name>EntityFramework.dll</name>
 							<sourceFileName>bin\EntityFramework.dll</sourceFileName>
-							<version>06.01.01</version>
+							<version>06.05.02</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>EntityFramework.SqlServer.dll</name>
 							<sourceFileName>bin\EntityFramework.SqlServer.dll</sourceFileName>
-							<version>06.01.01</version>
+							<version>06.05.02</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
