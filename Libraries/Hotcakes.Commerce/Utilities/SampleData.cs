@@ -466,15 +466,15 @@ namespace Hotcakes.Commerce.Utilities
             var ordersList = new List<Order>();
             var address = new Address
             {
-                FirstName = "Ryan",
-                LastName = "Morgan",
-                Line1 = "319 CLEMATIS ST",
-                Line2 = "Suite 500",
-                City = "WEST PALM BCH",
-                RegionBvin = "FL",
-                PostalCode = "44301",
+                FirstName = "John",
+                LastName = "Dough",
+                Line1 = "890 Laurel St.",
+                //Line2 = "",
+                City = "San Carlos",
+                RegionBvin = "CA",
+                PostalCode = "94070",
                 CountryBvin = Country.UnitedStatesCountryBvin,
-                Phone = "(561) 714-7926"
+                Phone = "(650) 123-4567"
             };
 
             while (currDate > endDate)
