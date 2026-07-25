@@ -90,7 +90,7 @@ namespace Hotcakes.Commerce.Orders
             ShippingMethodDisplayName = string.Empty;
             ShippingProviderId = string.Empty;
             ShippingProviderServiceCode = string.Empty;
-            UsedCulture = "en-US";
+            UsedCulture = Constants.STORESETTING_CULTUREDEFAULT;
         }
 
         #endregion
@@ -312,13 +312,12 @@ namespace Hotcakes.Commerce.Orders
         {
             get
             {
-                decimal result = -1;
                 var setting = CustomProperties.GetProperty(Constants.HCC_KEY, "shippingoverride");
-                if (setting.Trim().Length > 0)
+                if (!string.IsNullOrEmpty(setting) && decimal.TryParse(setting, out var result))
                 {
-                    decimal.TryParse(setting, out result);
+                    return result;
                 }
-                return result;
+                return -1;
             }
             set { CustomProperties.SetProperty(Constants.HCC_KEY, "shippingoverride", value.ToString()); }
         }
@@ -450,15 +449,7 @@ namespace Hotcakes.Commerce.Orders
         /// </summary>
         public decimal TotalOrderDiscounts
         {
-            get
-            {
-                var result = 0m;
-                if (OrderDiscountDetails.Count > 0)
-                {
-                    result = OrderDiscountDetails.Sum(y => y.Amount);
-                }
-                return result;
-            }
+            get { return OrderDiscountDetails.Sum(y => y.Amount); }
         }
 
         /// <summary>
@@ -552,12 +543,7 @@ namespace Hotcakes.Commerce.Orders
         {
             get
             {
-                var result = 0;
-                foreach (var li in Items)
-                {
-                    result += li.Quantity;
-                }
-                return result;
+                return Items.Sum(li => li.Quantity);
             }
         }
 
@@ -568,15 +554,7 @@ namespace Hotcakes.Commerce.Orders
         {
             get
             {
-                var result = 0m;
-                foreach (var li in Items)
-                {
-                    if (!li.IsNonShipping)
-                    {
-                        result += li.Quantity;
-                    }
-                }
-                return result;
+                return Items.Where(li => !li.IsNonShipping).Aggregate(0m, (current, li) => current + li.Quantity);
             }
         }
 
@@ -587,12 +565,7 @@ namespace Hotcakes.Commerce.Orders
         {
             get
             {
-                var result = 0m;
-                foreach (var li in Items)
-                {
-                    result += li.GetTotalWeight();
-                }
-                return result;
+                return Items.Sum(li => li.GetTotalWeight());
             }
         }
 
@@ -602,17 +575,7 @@ namespace Hotcakes.Commerce.Orders
         /// <returns></returns>
         public decimal SubTotalOfShippingItems()
         {
-            decimal result = 0;
-
-            foreach (var li in Items)
-            {
-                if (!li.IsNonShipping)
-                {
-                    result += li.LineTotal;
-                }
-            }
-
-            return result;
+            return Items.Where(li => !li.IsNonShipping).Sum(li => li.LineTotal);
         }
 
         /// <summary>
@@ -621,15 +584,7 @@ namespace Hotcakes.Commerce.Orders
         /// <returns>Decimal representation of the total weight</returns>
         public decimal TotalWeightOfShippingItems()
         {
-            var result = 0m;
-            foreach (var li in Items)
-            {
-                if (!li.IsNonShipping)
-                {
-                    result += li.GetTotalWeight();
-                }
-            }
-            return result;
+            return Items.Where(li => !li.IsNonShipping).Sum(li => li.GetTotalWeight());
         }
 
         /// <summary>
@@ -638,14 +593,7 @@ namespace Hotcakes.Commerce.Orders
         /// <returns>List of IReplaceable</returns>
         public List<IReplaceable> ItemsAsReplaceable()
         {
-            var result = new List<IReplaceable>();
-
-            foreach (var li in Items)
-            {
-                result.Add(li);
-            }
-
-            return result;
+            return Items.Cast<IReplaceable>().ToList();
         }
 
         /// <summary>
@@ -654,14 +602,7 @@ namespace Hotcakes.Commerce.Orders
         /// <returns>List of IReplaceable</returns>
         public List<IReplaceable> PackagesAsReplaceable()
         {
-            var result = new List<IReplaceable>();
-
-            foreach (var op in Packages)
-            {
-                result.Add(op);
-            }
-
-            return result;
+            return Packages.Cast<IReplaceable>().ToList();
         }
 
         /// <summary>
@@ -675,10 +616,15 @@ namespace Hotcakes.Commerce.Orders
         /// </returns>
         public decimal GetTotal(bool includeUserSuppliedPrice, bool includeGiftCards, bool includeDiscounts)
         {
-            var items = includeUserSuppliedPrice ? Items : Items.Where(i => !i.IsUserSuppliedPrice);
-            items = includeGiftCards ? items : items.Where(i => !i.IsGiftCard);
+            var items = Items.AsEnumerable();
 
-            var total = items.Sum(i => i.LineTotal);
+            if (!includeUserSuppliedPrice)
+                items = items.Where(i => !i.IsUserSuppliedPrice);
+            if (!includeGiftCards)
+                items = items.Where(i => !i.IsGiftCard);
+
+            var itemsList = items.ToList(); // Materialize once
+            var total = itemsList.Sum(i => i.LineTotal);
 
             if (includeDiscounts)
             {
@@ -724,7 +670,7 @@ namespace Hotcakes.Commerce.Orders
         /// </returns>
         public string TotalsAsTable(string localizeCulture = null)
         {
-            var sb = new StringBuilder();
+            var sb = new StringBuilder(2048); // Provide estimated capacity
 
             sb.Append("<table class=\"totaltable\">");
 
@@ -1021,20 +967,8 @@ namespace Hotcakes.Commerce.Orders
         /// <returns>Boolean - if true, the coupon was successfully removed from the order.</returns>
         public bool RemoveCouponCodeByCode(string code)
         {
-            var result = false;
             var testCode = code.Trim().ToUpper();
-            var codes = Coupons.Where(y => y.CouponCode == testCode).ToList();
-            var toRemove = new List<long>();
-            foreach (var oc in codes)
-            {
-                toRemove.Add(oc.Id);
-            }
-            foreach (var id in toRemove)
-            {
-                RemoveCouponCode(id);
-                result = true;
-            }
-            return result;
+            return Coupons.RemoveAll(y => y.CouponCode == testCode) > 0;
         }
 
         /// <summary>
@@ -1056,9 +990,16 @@ namespace Hotcakes.Commerce.Orders
         /// </summary>
         /// <param name="shippingMethodId">The unique ID of the desired shipping method.</param>
         /// <returns>List of ShippingGroup</returns>
+        /// <summary>
+        ///     Parses the line items to return the proposed packages for shipping.
+        /// </summary>
+        /// <param name="shippingMethodId">The unique ID of the desired shipping method.</param>
+        /// <returns>List of ShippingGroup</returns>
         public List<ShippingGroup> GetShippingGroups(string shippingMethodId)
         {
             var result = new List<ShippingGroup>();
+            var shippingMethodIdUpper = shippingMethodId.ToUpperInvariant();
+
             foreach (var item in Items)
             {
                 // skip non-shipping items
@@ -1076,7 +1017,7 @@ namespace Hotcakes.Commerce.Orders
 
                 //skip items marked as "free shipping" by discount engine. Check if quantity is grater than 1. If quantity 1 we have to allow to get rates and then
                 // on checkout page show as discount
-                if (item.MarkedForFreeShipping(shippingMethodId.ToUpperInvariant()) && Items.Count > 1 &&
+                if (item.MarkedForFreeShipping(shippingMethodIdUpper) && Items.Count > 1 &&
                     !IsOrderHasAllItemsQualifiedFreeShipping())
                 {
                     continue;
@@ -1086,58 +1027,7 @@ namespace Hotcakes.Commerce.Orders
 
                 if (!item.ShipSeparately)
                 {
-                    if (item.ShipFromMode == ShippingMode.ShipFromManufacturer)
-                    {
-                        foreach (var package in result)
-                        {
-                            if ((package.ShippingMode == ShippingMode.ShipFromManufacturer) && !package.ShipSeperately)
-                            {
-                                if (package.ShipId == item.ShipFromNotificationId)
-                                {
-                                    packageToAddTo = package;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    else if (item.ShipFromMode == ShippingMode.ShipFromSite)
-                    {
-                        foreach (var package in result)
-                        {
-                            if ((package.ShippingMode == ShippingMode.ShipFromSite) && !package.ShipSeperately)
-                            {
-                                packageToAddTo = package;
-                                break;
-                            }
-                        }
-                    }
-                    else if (item.ShipFromMode == ShippingMode.ShipFromVendor)
-                    {
-                        foreach (var package in result)
-                        {
-                            if ((package.ShippingMode == ShippingMode.ShipFromVendor) && !package.ShipSeperately)
-                            {
-                                if (package.ShipId == item.ShipFromNotificationId)
-                                {
-                                    packageToAddTo = package;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        //Throw New ApplicationException("Unrecognized shipping mode.")
-                        // Assume ship from store if no other mode located
-                        foreach (var package in result)
-                        {
-                            if ((package.ShippingMode == ShippingMode.ShipFromSite) && !package.ShipSeperately)
-                            {
-                                packageToAddTo = package;
-                                break;
-                            }
-                        }
-                    }
+                    packageToAddTo = FindMatchingPackage(result, item);
                 }
 
                 if (packageToAddTo == null)
@@ -1159,9 +1049,10 @@ namespace Hotcakes.Commerce.Orders
 
                 if (item.ShipSeparately)
                 {
-                    if (item.Quantity - item.QuantityShipped > 1)
+                    var quantityToShip = item.Quantity - item.QuantityShipped;
+                    if (quantityToShip > 1)
                     {
-                        for (var i = 0; i <= item.Quantity - item.QuantityShipped - 1; i++)
+                        for (var i = 0; i < quantityToShip; i++)
                         {
                             var newLineItem = item.Clone(true);
                             newLineItem.Quantity = 1;
@@ -1357,13 +1248,7 @@ namespace Hotcakes.Commerce.Orders
             result.Add(new HtmlTemplateTag("[[Order.BillingAddress.RegionName]]", BillingAddress.RegionDisplayName));
             result.Add(new HtmlTemplateTag("[[Order.BillingAddress.WebSiteUrl]]", BillingAddress.WebSiteUrl));
             result.Add(new HtmlTemplateTag("[[Order.Bvin]]", bvin));
-            var coupons = string.Empty;
-            for (var i = 0; i <= Coupons.Count - 1; i++)
-            {
-                coupons += Coupons[i].CouponCode + ", ";
-            }
-
-            coupons = coupons.Trim().TrimEnd(',');
+            var coupons = string.Join(", ", Coupons.Select(c => c.CouponCode));
 
             result.Add(new HtmlTemplateTag("[[Order.Coupons]]", coupons));
             result.Add(new HtmlTemplateTag("[[Order.FraudScore]]", FraudScore.ToString("#.#")));
@@ -1556,32 +1441,38 @@ namespace Hotcakes.Commerce.Orders
         /// <returns>iDictionary of Line Item ID and a running total.</returns>
         public IDictionary<long, decimal> GetLineItemValuesAccountingForOrderDiscounts()
         {
-            var result = new Dictionary<long, decimal>();
+            var result = new Dictionary<long, decimal>(Items.Count);
 
             if (TotalOrderDiscounts > 0)
             {
+                // Single pass to calculate line item totals
                 decimal lineItemTotals = 0;
                 foreach (var item in Items)
                 {
                     lineItemTotals += item.LineTotal;
                 }
 
-                foreach (var item in Items)
+                // Avoid division by zero
+                if (lineItemTotals == 0)
                 {
-                    result.Add(item.Id, item.LineTotal/lineItemTotals);
+                    foreach (var item in Items)
+                    {
+                        result.Add(item.Id, 0);
+                    }
+                    return result;
                 }
 
-                foreach (var item in Items)
-                {
-                    result[item.Id] = Math.Round(item.LineTotal - TotalOrderDiscounts*result[item.Id], 2);
-                }
-
+                // Calculate proportions and apply discounts in a single pass
                 decimal discountedTotals = 0;
-                foreach (var key in result.Keys)
+                foreach (var item in Items)
                 {
-                    discountedTotals += result[key];
+                    var proportion = item.LineTotal / lineItemTotals;
+                    var discountedValue = Math.Round(item.LineTotal - TotalOrderDiscounts * proportion, 2);
+                    result.Add(item.Id, discountedValue);
+                    discountedTotals += discountedValue;
                 }
 
+                // Adjust for rounding differences
                 var difference = lineItemTotals - TotalOrderDiscounts - discountedTotals;
                 if (difference != 0)
                 {
@@ -1597,6 +1488,7 @@ namespace Hotcakes.Commerce.Orders
             }
             else
             {
+                // No discounts - simple pass through
                 foreach (var item in Items)
                 {
                     result.Add(item.Id, item.LineTotal);
@@ -1651,8 +1543,53 @@ namespace Hotcakes.Commerce.Orders
 
         #region Implementation
 
+
+
         /// <summary>
-        ///     Evaluates all line items in the order to determine the current shippment status.
+        ///     Helper method to find a matching package for the given line item.
+        /// </summary>
+        /// <param name="packages">The list of existing packages.</param>
+        /// <param name="item">The line item to match.</param>
+        /// <returns>The matching ShippingGroup or null if not found.</returns>
+        private ShippingGroup FindMatchingPackage(List<ShippingGroup> packages, LineItem item)
+        {
+            ShippingGroup match = null;
+
+            switch (item.ShipFromMode)
+            {
+                case ShippingMode.ShipFromManufacturer:
+                    match = packages.FirstOrDefault(p =>
+                        p.ShippingMode == ShippingMode.ShipFromManufacturer &&
+                        !p.ShipSeperately &&
+                        p.ShipId == item.ShipFromNotificationId);
+                    break;
+
+                case ShippingMode.ShipFromSite:
+                    match = packages.FirstOrDefault(p =>
+                        p.ShippingMode == ShippingMode.ShipFromSite &&
+                        !p.ShipSeperately);
+                    break;
+
+                case ShippingMode.ShipFromVendor:
+                    match = packages.FirstOrDefault(p =>
+                        p.ShippingMode == ShippingMode.ShipFromVendor &&
+                        !p.ShipSeperately &&
+                        p.ShipId == item.ShipFromNotificationId);
+                    break;
+
+                default:
+                    // Assume ship from store if no other mode located
+                    match = packages.FirstOrDefault(p =>
+                        p.ShippingMode == ShippingMode.ShipFromSite &&
+                        !p.ShipSeperately);
+                    break;
+            }
+
+            return match;
+        }
+
+        /// <summary>
+        ///     Evaluates all line items in the order to determine the current shipment status.
         /// </summary>
         /// <returns>OrderShippingStatus</returns>
         private OrderShippingStatus EvaluateShippingStatus()
@@ -1665,10 +1602,11 @@ namespace Hotcakes.Commerce.Orders
                 var unShippedFound = false;
                 var nonShippingFound = false;
 
-                for (var i = 0; i <= Items.Count - 1; i++)
+                // Use foreach instead of index-based loop for better performance and readability
+                foreach (var item in Items)
                 {
-                    Items[i].ShippingStatus = Items[i].EvaluateShippingStatus(TimeOfOrderUtc);
-                    switch (Items[i].ShippingStatus)
+                    item.ShippingStatus = item.EvaluateShippingStatus(TimeOfOrderUtc);
+                    switch (item.ShippingStatus)
                     {
                         case OrderShippingStatus.NonShipping:
                             nonShippingFound = true;
@@ -1687,31 +1625,25 @@ namespace Hotcakes.Commerce.Orders
                     }
                 }
 
-                if (nonShippingFound && (unShippedFound == false) && (shippedFound == false))
+                if (nonShippingFound && !unShippedFound && !shippedFound)
                 {
                     // Only non shipping items
                     result = OrderShippingStatus.FullyShipped;
                 }
+                else if (shippedFound && unShippedFound)
+                {
+                    // Some items shipping and others not
+                    result = OrderShippingStatus.PartiallyShipped;
+                }
+                else if (shippedFound)
+                {
+                    // only shipped found
+                    result = OrderShippingStatus.FullyShipped;
+                }
                 else
                 {
-                    if (shippedFound && unShippedFound)
-                    {
-                        // Some items shipping and others not
-                        result = OrderShippingStatus.PartiallyShipped;
-                    }
-                    else
-                    {
-                        if (shippedFound)
-                        {
-                            // only shipped found
-                            result = OrderShippingStatus.FullyShipped;
-                        }
-                        else
-                        {
-                            // only unshipped found
-                            result = OrderShippingStatus.Unshipped;
-                        }
-                    }
+                    // only unshipped found
+                    result = OrderShippingStatus.Unshipped;
                 }
             }
 
@@ -1775,7 +1707,7 @@ namespace Hotcakes.Commerce.Orders
             {
                 dto.Packages.Add(pak.ToDto());
             }
-            dto.PaymentStatus = (OrderPaymentStatusDTO) (int) PaymentStatus;
+            dto.PaymentStatus = (OrderPaymentStatusDTO)(int)PaymentStatus;
             dto.ShippingAddress = ShippingAddress.ToDto();
             dto.ShippingDiscountDetails = new List<DiscountDetailDTO>();
             foreach (var sd in ShippingDiscountDetails)
@@ -1786,7 +1718,7 @@ namespace Hotcakes.Commerce.Orders
             dto.ShippingMethodId = ShippingMethodId ?? string.Empty;
             dto.ShippingProviderId = ShippingProviderId ?? string.Empty;
             dto.ShippingProviderServiceCode = ShippingProviderServiceCode ?? string.Empty;
-            dto.ShippingStatus = (OrderShippingStatusDTO) (int) ShippingStatus;
+            dto.ShippingStatus = (OrderShippingStatusDTO)(int)ShippingStatus;
             dto.StatusCode = StatusCode ?? string.Empty;
             dto.StatusName = StatusName ?? string.Empty;
             dto.StoreId = StoreId;
@@ -1889,7 +1821,7 @@ namespace Hotcakes.Commerce.Orders
                     Packages.Add(pak2);
                 }
             }
-            PaymentStatus = (OrderPaymentStatus) (int) dto.PaymentStatus;
+            PaymentStatus = (OrderPaymentStatus)(int)dto.PaymentStatus;
             ShippingAddress.FromDto(dto.ShippingAddress);
             ShippingDiscountDetails.Clear();
             if (dto.ShippingDiscountDetails != null)
@@ -1905,7 +1837,7 @@ namespace Hotcakes.Commerce.Orders
             ShippingMethodId = dto.ShippingMethodId ?? string.Empty;
             ShippingProviderId = dto.ShippingProviderId ?? string.Empty;
             ShippingProviderServiceCode = dto.ShippingProviderServiceCode ?? string.Empty;
-            ShippingStatus = (OrderShippingStatus) (int) dto.ShippingStatus;
+            ShippingStatus = (OrderShippingStatus)(int)dto.ShippingStatus;
             StatusCode = dto.StatusCode ?? string.Empty;
             StatusName = dto.StatusName ?? string.Empty;
             StoreId = dto.StoreId;

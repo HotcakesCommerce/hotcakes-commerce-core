@@ -71,44 +71,49 @@ namespace Hotcakes.Commerce.Orders
         private readonly Order o;
         private readonly CustomerPointsManager _pointsManager;
 
+        // Cache for transactions to avoid repeated database calls
+        private List<OrderTransaction> _cachedTransactions;
+        private bool _transactionsCacheValid;
+
         #endregion
 
         #region Public methods
 
         public OrderTransaction FindTransactionById(string id)
         {
-            foreach (var t in svc.Transactions.FindForOrder(o.bvin))
-            {
-                if (t.IdAsString.ToLower() == id.ToLower())
-                {
-                    return t;
-                }
-            }
-            return null;
+            if (string.IsNullOrEmpty(id))
+                return null;
+
+            var idLower = id.ToLower();
+            var transactions = GetCachedTransactions();
+
+            return transactions.FirstOrDefault(t =>
+                string.Equals(t.IdAsString, idLower, StringComparison.OrdinalIgnoreCase));
         }
 
         public bool ClearAllTransactions()
         {
-            foreach (var t in svc.Transactions.FindForOrder(o.bvin))
+            var transactions = GetCachedTransactions();
+            foreach (var t in transactions)
             {
                 svc.Transactions.Delete(t.Id);
             }
-            //reload local if we were using local store
+            InvalidateTransactionCache();
             return true;
         }
 
         public bool ClearAllNonStoreCreditTransactions()
         {
-            foreach (var t in svc.Transactions.FindForOrder(o.bvin))
+            var transactions = GetCachedTransactions();
+            var toDelete = transactions.Where(t =>
+                t.Action != ActionType.RewardPointsInfo &&
+                t.Action != ActionType.GiftCardInfo).ToList();
+
+            foreach (var t in toDelete)
             {
-                if (t.Action == ActionType.RewardPointsInfo ||
-                    t.Action == ActionType.GiftCardInfo)
-                {
-                    continue;
-                }
                 svc.Transactions.Delete(t.Id);
             }
-            //reload local if we were using local store
+            InvalidateTransactionCache();
             return true;
         }
 
@@ -151,18 +156,28 @@ namespace Hotcakes.Commerce.Orders
                 },
                 MerchantDescription = "Order " + o.OrderNumber,
                 MerchantInvoiceNumber = o.OrderNumber,
-                Result = { ReferenceNumber = o.ThirdPartyOrderId}
+                Result = { ReferenceNumber = o.ThirdPartyOrderId }
             };
 
-            foreach (var li in o.Items)
+            if (addLineItems)
             {
-                t.Items.Add(new TransactionItem
+                var itemCount = o.Items.Count;
+                if (itemCount > 0)
                 {
-                    Description = li.ProductName,
-                    LineTotal = li.LineTotal,
-                    Sku = li.ProductSku,
-                    IsNonShipping = li.IsNonShipping
-                });
+                    // Pre-allocate capacity to avoid list resizing
+                    var items = new List<TransactionItem>(itemCount);
+                    foreach (var li in o.Items)
+                    {
+                        items.Add(new TransactionItem
+                        {
+                            Description = li.ProductName,
+                            LineTotal = li.LineTotal,
+                            Sku = li.ProductSku,
+                            IsNonShipping = li.IsNonShipping
+                        });
+                    }
+                    t.Items.AddRange(items);
+                }
             }
 
             return t;
@@ -179,7 +194,9 @@ namespace Hotcakes.Commerce.Orders
             t.Action = ActionType.CashReceived;
             var ot = new OrderTransaction(t);
             ot.Success = true;
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var result = svc.AddPaymentTransactionToOrder(o, ot);
+            if (result) InvalidateTransactionCache();
+            return result;
         }
 
         public bool CashRefund(decimal amount, string rmaBvin = "")
@@ -190,7 +207,9 @@ namespace Hotcakes.Commerce.Orders
             var ot = new OrderTransaction(t);
             ot.Success = true;
             ot.RMABvin = rmaBvin;
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var result = svc.AddPaymentTransactionToOrder(o, ot);
+            if (result) InvalidateTransactionCache();
+            return result;
         }
 
         #endregion
@@ -205,7 +224,9 @@ namespace Hotcakes.Commerce.Orders
             t.Action = ActionType.CheckReceived;
             var ot = new OrderTransaction(t);
             ot.Success = true;
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var result = svc.AddPaymentTransactionToOrder(o, ot);
+            if (result) InvalidateTransactionCache();
+            return result;
         }
 
         public bool CheckReturn(decimal amount, string checkNumber, string rmaBvin = "")
@@ -217,7 +238,9 @@ namespace Hotcakes.Commerce.Orders
             var ot = new OrderTransaction(t);
             ot.Success = true;
             ot.RMABvin = rmaBvin;
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var result = svc.AddPaymentTransactionToOrder(o, ot);
+            if (result) InvalidateTransactionCache();
+            return result;
         }
 
         #endregion
@@ -239,32 +262,36 @@ namespace Hotcakes.Commerce.Orders
             }
             else
             {
-                if (existing.HasSuccessfulLinkedAction(ActionType.PurchaseOrderAccepted,
-                    svc.Transactions.FindForOrder(o.bvin)))
+                var transactions = GetCachedTransactions();
+                if (existing.HasSuccessfulLinkedAction(ActionType.PurchaseOrderAccepted, transactions))
                 {
                     // Fail, already accepted
                     ot.Success = false;
                     ot.Messages = "The requested PO has already been accepted.";
                 }
-
-                // Succes, receive it, link it to the info transaction
-                ot.Amount = EnsurePositiveAmount(existing.Amount);
-                ot.LinkedToTransaction = existing.IdAsString;
-                ot.Success = true;
+                else
+                {
+                    // Success, receive it, link it to the info transaction
+                    ot.Amount = EnsurePositiveAmount(existing.Amount);
+                    ot.LinkedToTransaction = existing.IdAsString;
+                    ot.Success = true;
+                }
             }
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var result = svc.AddPaymentTransactionToOrder(o, ot);
+            if (result) InvalidateTransactionCache();
+            return result;
         }
 
         private OrderTransaction LocateExistingPurchaseOrder(string poNumber)
         {
-            foreach (var t in PurchaseOrderInfoListAll())
-            {
-                if (t.PurchaseOrderNumber.ToLower() == poNumber.Trim().ToLower())
-                {
-                    return t;
-                }
-            }
-            return null;
+            if (string.IsNullOrEmpty(poNumber))
+                return null;
+
+            var poNumberLower = poNumber.Trim().ToLower();
+            var poInfoList = PurchaseOrderInfoListAll();
+
+            return poInfoList.FirstOrDefault(t =>
+                string.Equals(t.PurchaseOrderNumber, poNumberLower, StringComparison.OrdinalIgnoreCase));
         }
 
         public List<OrderTransaction> PurchaseOrderInfoListAll()
@@ -274,17 +301,12 @@ namespace Hotcakes.Commerce.Orders
 
         public List<OrderTransaction> PurchaseOrderInfoListAllNonAccepted()
         {
-            var result = new List<OrderTransaction>();
-            var transactions = svc.Transactions.FindForOrder(o.bvin);
-            foreach (var t in PurchaseOrderInfoListAll())
-            {
-                if (!t.HasSuccessfulLinkedAction(ActionType.PurchaseOrderAccepted, transactions))
-                {
-                    result.Add(t);
-                }
-            }
+            var transactions = GetCachedTransactions();
+            var poInfoList = PurchaseOrderInfoListAll();
 
-            return result;
+            return poInfoList.Where(t =>
+                !t.HasSuccessfulLinkedAction(ActionType.PurchaseOrderAccepted, transactions))
+                .ToList();
         }
 
         public bool PurchaseOrderAddInfo(string poNumber, decimal amount)
@@ -293,8 +315,10 @@ namespace Hotcakes.Commerce.Orders
             t.Amount = EnsurePositiveAmount(amount);
             t.PurchaseOrderNumber = poNumber;
             t.Action = ActionType.PurchaseOrderInfo;
-            var ot = new OrderTransaction(t) {Success = true};
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var ot = new OrderTransaction(t) { Success = true };
+            var result = svc.AddPaymentTransactionToOrder(o, ot);
+            if (result) InvalidateTransactionCache();
+            return result;
         }
 
         #endregion
@@ -316,32 +340,36 @@ namespace Hotcakes.Commerce.Orders
             }
             else
             {
-                if (existing.HasSuccessfulLinkedAction(ActionType.CompanyAccountAccepted,
-                    svc.Transactions.FindForOrder(o.bvin)))
+                var transactions = GetCachedTransactions();
+                if (existing.HasSuccessfulLinkedAction(ActionType.CompanyAccountAccepted, transactions))
                 {
                     // Fail, already accepted
                     ot.Success = false;
                     ot.Messages = "The requested Company Account has already been accepted.";
                 }
-
-                // Succes, receive it, link it to the info transaction
-                ot.Amount = EnsurePositiveAmount(existing.Amount);
-                ot.LinkedToTransaction = existing.IdAsString;
-                ot.Success = true;
+                else
+                {
+                    // Success, receive it, link it to the info transaction
+                    ot.Amount = EnsurePositiveAmount(existing.Amount);
+                    ot.LinkedToTransaction = existing.IdAsString;
+                    ot.Success = true;
+                }
             }
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var result = svc.AddPaymentTransactionToOrder(o, ot);
+            if (result) InvalidateTransactionCache();
+            return result;
         }
 
         private OrderTransaction LocateExistingCompanyAccount(string accountNumber)
         {
-            foreach (var t in CompanyAccountInfoListAll())
-            {
-                if (t.CompanyAccountNumber.ToLower() == accountNumber.Trim().ToLower())
-                {
-                    return t;
-                }
-            }
-            return null;
+            if (string.IsNullOrEmpty(accountNumber))
+                return null;
+
+            var accountNumberLower = accountNumber.Trim().ToLower();
+            var accountInfoList = CompanyAccountInfoListAll();
+
+            return accountInfoList.FirstOrDefault(t =>
+                string.Equals(t.CompanyAccountNumber, accountNumberLower, StringComparison.OrdinalIgnoreCase));
         }
 
         public List<OrderTransaction> CompanyAccountInfoListAll()
@@ -351,17 +379,12 @@ namespace Hotcakes.Commerce.Orders
 
         public List<OrderTransaction> CompanyAccountInfoListAllNonAccepted()
         {
-            var result = new List<OrderTransaction>();
-            var transactions = svc.Transactions.FindForOrder(o.bvin);
-            foreach (var t in CompanyAccountInfoListAll())
-            {
-                if (!t.HasSuccessfulLinkedAction(ActionType.CompanyAccountAccepted, transactions))
-                {
-                    result.Add(t);
-                }
-            }
+            var transactions = GetCachedTransactions();
+            var accountInfoList = CompanyAccountInfoListAll();
 
-            return result;
+            return accountInfoList.Where(t =>
+                !t.HasSuccessfulLinkedAction(ActionType.CompanyAccountAccepted, transactions))
+                .ToList();
         }
 
         public bool CompanyAccountAddInfo(string accountNumber, decimal amount)
@@ -370,8 +393,10 @@ namespace Hotcakes.Commerce.Orders
             t.Amount = EnsurePositiveAmount(amount);
             t.CompanyAccountNumber = accountNumber;
             t.Action = ActionType.CompanyAccountInfo;
-            var ot = new OrderTransaction(t) {Success = true};
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var ot = new OrderTransaction(t) { Success = true };
+            var result = svc.AddPaymentTransactionToOrder(o, ot);
+            if (result) InvalidateTransactionCache();
+            return result;
         }
 
         #endregion
@@ -384,8 +409,10 @@ namespace Hotcakes.Commerce.Orders
             t.Amount = EnsurePositiveAmount(amount);
             t.Card = card;
             t.Action = ActionType.CreditCardInfo;
-            var ot = new OrderTransaction(t) {Success = true};
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var ot = new OrderTransaction(t) { Success = true };
+            var result = svc.AddPaymentTransactionToOrder(o, ot);
+            if (result) InvalidateTransactionCache();
+            return result;
         }
 
         public bool CreditCardHold(string infoTransactionId, decimal amount, string securityCode = null)
@@ -409,7 +436,9 @@ namespace Hotcakes.Commerce.Orders
             {
                 ot.Success = false;
                 ot.Messages = "Transaction must be CC info type to process.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             var context = _app.CurrentRequestContext;
@@ -417,10 +446,12 @@ namespace Hotcakes.Commerce.Orders
             if (processor != null)
             {
                 processor.ProcessTransaction(t);
-                ot = new OrderTransaction(t) {LinkedToTransaction = infoTransaction.IdAsString};
+                ot = new OrderTransaction(t) { LinkedToTransaction = infoTransaction.IdAsString };
             }
 
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public List<OrderTransaction> CreditCardInfoListAll()
@@ -435,69 +466,41 @@ namespace Hotcakes.Commerce.Orders
 
         public List<OrderTransaction> CreditCardHoldListAll()
         {
-            var result = new List<OrderTransaction>();
-
-            foreach (var t in svc.Transactions.FindForOrder(o.bvin))
-            {
-                if (t.Action == ActionType.CreditCardHold)
-                {
-                    if (!t.Voided && t.Success)
-                    {
-                        result.Add(t);
-                    }
-                }
-            }
-            return result;
+            var transactions = GetCachedTransactions();
+            return transactions.Where(t =>
+                t.Action == ActionType.CreditCardHold &&
+                !t.Voided &&
+                t.Success)
+                .ToList();
         }
 
         public List<OrderTransaction> CreditCardChargeOrCaptureListAll()
         {
-            var result = new List<OrderTransaction>();
-
-            foreach (var t in svc.Transactions.FindForOrder(o.bvin))
-            {
-                if (t.Action == ActionType.CreditCardCapture || t.Action == ActionType.CreditCardCharge)
-                {
-                    if (!t.Voided && t.Success)
-                    {
-                        result.Add(t);
-                    }
-                }
-            }
-            return result;
+            var transactions = GetCachedTransactions();
+            return transactions.Where(t =>
+                (t.Action == ActionType.CreditCardCapture || t.Action == ActionType.CreditCardCharge) &&
+                !t.Voided &&
+                t.Success)
+                .ToList();
         }
 
         public OrderTransaction CreditCardHoldFind(string id)
         {
-            foreach (var t in CreditCardHoldListAll())
-            {
-                if (t.IdAsString == id)
-                {
-                    return t;
-                }
-            }
-            return null;
+            if (string.IsNullOrEmpty(id))
+                return null;
+
+            var holdList = CreditCardHoldListAll();
+            return holdList.FirstOrDefault(t => t.IdAsString == id);
         }
 
         public List<OrderTransaction> CreditCardChargeListAllRefundable()
         {
-            var result = new List<OrderTransaction>();
-
-            foreach (var t in svc.Transactions.FindForOrder(o.bvin))
-            {
-                if (t.Action == ActionType.CreditCardCapture ||
-                    t.Action == ActionType.CreditCardCharge)
-                {
-                    if (!t.Voided)
-                    {
-                        if (t.Success)
-                        {
-                            result.Add(t);
-                        }
-                    }
-                }
-            }
-            return result;
+            var transactions = GetCachedTransactions();
+            return transactions.Where(t =>
+                (t.Action == ActionType.CreditCardCapture || t.Action == ActionType.CreditCardCharge) &&
+                !t.Voided &&
+                t.Success)
+                .ToList();
         }
 
         public bool CreditCardCapture(string holdTransactionId, decimal amount, string securityCode = null)
@@ -524,7 +527,9 @@ namespace Hotcakes.Commerce.Orders
             {
                 ot.Success = false;
                 ot.Messages = "Transaction must be CC hold type to process.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             var context = _app.CurrentRequestContext;
@@ -535,7 +540,9 @@ namespace Hotcakes.Commerce.Orders
                 ot = new OrderTransaction(t);
                 ot.LinkedToTransaction = holdTransaction.IdAsString;
             }
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public bool CreditCardCharge(string infoTransactionId, decimal amount, string securityCode = null)
@@ -560,7 +567,9 @@ namespace Hotcakes.Commerce.Orders
             {
                 ot.Success = false;
                 ot.Messages = "Transaction must be CC info type to process.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             var context = _app.CurrentRequestContext;
@@ -568,10 +577,12 @@ namespace Hotcakes.Commerce.Orders
             if (processor != null)
             {
                 processor.ProcessTransaction(t);
-                ot = new OrderTransaction(t) {LinkedToTransaction = infoTransaction.IdAsString};
+                ot = new OrderTransaction(t) { LinkedToTransaction = infoTransaction.IdAsString };
             }
 
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public bool CreditCardRefund(string previousTransaction, decimal amount, string securityCode = null,
@@ -594,7 +605,7 @@ namespace Hotcakes.Commerce.Orders
             t.PreviousTransactionNumber = previousTransaction.RefNum1;
             t.PreviousTransactionAuthCode = previousTransaction.RefNum2;
             t.Items = GetLineItemsForTransaction(previousTransaction.OrderNumber);
-            var ot = new OrderTransaction(t) {RMABvin = rmaBvin};
+            var ot = new OrderTransaction(t) { RMABvin = rmaBvin };
 
             if (previousTransaction.Action != ActionType.CreditCardCapture
                 && previousTransaction.Action != ActionType.CreditCardCharge
@@ -602,7 +613,9 @@ namespace Hotcakes.Commerce.Orders
             {
                 ot.Success = false;
                 ot.Messages = "Transaction must be CC capture or charge type to refund.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             var context = _app.CurrentRequestContext;
@@ -616,7 +629,9 @@ namespace Hotcakes.Commerce.Orders
                     RMABvin = rmaBvin
                 };
             }
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public bool CreditCardVoid(string previousTransaction, decimal amount, string securityCode = null)
@@ -643,7 +658,9 @@ namespace Hotcakes.Commerce.Orders
             {
                 ot.Success = false;
                 ot.Messages = "Transaction can not be voided.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             var context = _app.CurrentRequestContext;
@@ -651,7 +668,7 @@ namespace Hotcakes.Commerce.Orders
             if (processor != null)
             {
                 processor.ProcessTransaction(t);
-                ot = new OrderTransaction(t) {LinkedToTransaction = previousTransaction.IdAsString};
+                ot = new OrderTransaction(t) { LinkedToTransaction = previousTransaction.IdAsString };
 
                 // if the void went through, make sure we mark the previous transaction as voided
                 if (t.Result.Succeeded)
@@ -660,63 +677,64 @@ namespace Hotcakes.Commerce.Orders
                     svc.Transactions.Update(previousTransaction);
                 }
             }
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public bool CreditCardCompleteAllCreditCards()
         {
             var result = true;
-
             var currentContext = _app.CurrentRequestContext;
+            var transactions = GetCachedTransactions();
 
-            var transactions = svc.Transactions.FindForOrder(o.bvin);
+            var relevantTransactions = transactions.Where(p =>
+                p.Action == ActionType.CreditCardInfo ||
+                p.Action == ActionType.CreditCardHold)
+                .ToList();
 
-            foreach (var p in transactions)
+            foreach (var p in relevantTransactions)
             {
-                if (p.Action == ActionType.CreditCardInfo ||
-                    p.Action == ActionType.CreditCardHold)
+                // if we already have an auth or charge on the card, skip
+                if (p.HasSuccessfulLinkedAction(ActionType.CreditCardCharge, transactions) ||
+                    p.HasSuccessfulLinkedAction(ActionType.CreditCardHold, transactions) ||
+                    p.HasSuccessfulLinkedAction(ActionType.CreditCardCapture, transactions))
                 {
-                    // if we already have an auth or charge on the card, skip
-                    if (p.HasSuccessfulLinkedAction(ActionType.CreditCardCharge, transactions) ||
-                        p.HasSuccessfulLinkedAction(ActionType.CreditCardHold, transactions) ||
-                        p.HasSuccessfulLinkedAction(ActionType.CreditCardCapture, transactions)
-                        )
+                    continue;
+                }
+
+                try
+                {
+                    var t = CreateEmptyTransaction();
+                    t.Card = p.CreditCard;
+                    t.Amount = p.Amount;
+
+                    if (p.Action == ActionType.CreditCardHold)
                     {
-                        continue;
+                        t.Action = ActionType.CreditCardCapture;
                     }
-
-                    try
+                    else
                     {
-                        var t = CreateEmptyTransaction();
-                        t.Card = p.CreditCard;
-                        t.Amount = p.Amount;
-
-                        if (p.Action == ActionType.CreditCardHold)
-                        {
-                            t.Action = ActionType.CreditCardCapture;
-                        }
-                        else
-                        {
-                            t.Action = ActionType.CreditCardCharge;
-                        }
-                        t.Items = GetLineItemsForTransaction(p.OrderNumber);
-
-                        var proc = PaymentGateways.CurrentPaymentProcessor(currentContext.CurrentStore);
-                        proc.ProcessTransaction(t);
-
-                        var ot = new OrderTransaction(t);
-                        ot.LinkedToTransaction = p.IdAsString;
-                        svc.AddPaymentTransactionToOrder(o, ot);
-
-                        if (t.Result.Succeeded == false) result = false;
+                        t.Action = ActionType.CreditCardCharge;
                     }
-                    catch (Exception ex)
-                    {
-                        EventLog.LogEvent(ex);
-                    }
+                    t.Items = GetLineItemsForTransaction(p.OrderNumber);
+
+                    var proc = PaymentGateways.CurrentPaymentProcessor(currentContext.CurrentStore);
+                    proc.ProcessTransaction(t);
+
+                    var ot = new OrderTransaction(t);
+                    ot.LinkedToTransaction = p.IdAsString;
+                    svc.AddPaymentTransactionToOrder(o, ot);
+
+                    if (t.Result.Succeeded == false) result = false;
+                }
+                catch (Exception ex)
+                {
+                    EventLog.LogEvent(ex);
                 }
             }
 
+            InvalidateTransactionCache();
             return result;
         }
 
@@ -734,8 +752,10 @@ namespace Hotcakes.Commerce.Orders
             var t = CreateEmptyTransaction();
             t.Card = card;
             t.Action = ActionType.RecurringSubscriptionInfo;
-            var ot = new OrderTransaction(t) {Success = true};
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var ot = new OrderTransaction(t) { Success = true };
+            var result = svc.AddPaymentTransactionToOrder(o, ot);
+            if (result) InvalidateTransactionCache();
+            return result;
         }
 
         public ResultData RecurringSubscriptionCreate(OrderTransaction infoTransaction, LineItem li)
@@ -774,6 +794,7 @@ namespace Hotcakes.Commerce.Orders
             };
 
             svc.AddPaymentTransactionToOrder(o, ot);
+            InvalidateTransactionCache();
 
             return t.Result;
         }
@@ -785,9 +806,8 @@ namespace Hotcakes.Commerce.Orders
             if (li == null)
                 throw new ArgumentException("lineItemId");
 
-            var tCreateSub =
-                FindAllTransactionsOfType(ActionType.RecurringSubscriptionCreate)
-                    .FirstOrDefault(s => s.LineItemId == lineItemId);
+            var tCreateSub = FindAllTransactionsOfType(ActionType.RecurringSubscriptionCreate)
+                .FirstOrDefault(s => s.LineItemId == lineItemId);
 
             var t = CreateEmptyTransaction(false);
             t.Items.Add(new TransactionItem
@@ -823,6 +843,7 @@ namespace Hotcakes.Commerce.Orders
             li.RecurringBilling.IsCancelled = t.Result.Succeeded;
 
             svc.AddPaymentTransactionToOrder(o, ot);
+            InvalidateTransactionCache();
 
             return t.Result;
         }
@@ -834,9 +855,8 @@ namespace Hotcakes.Commerce.Orders
             if (li == null)
                 throw new ArgumentException("lineItemId");
 
-            var tCreateSub =
-                FindAllTransactionsOfType(ActionType.RecurringSubscriptionCreate)
-                    .FirstOrDefault(s => s.LineItemId == lineItemId);
+            var tCreateSub = FindAllTransactionsOfType(ActionType.RecurringSubscriptionCreate)
+                .FirstOrDefault(s => s.LineItemId == lineItemId);
 
             var t = CreateEmptyTransaction(false);
             t.Items.Add(new TransactionItem
@@ -874,6 +894,7 @@ namespace Hotcakes.Commerce.Orders
             ot.LineItemId = li.Id;
 
             svc.AddPaymentTransactionToOrder(o, ot);
+            InvalidateTransactionCache();
 
             return t.Result;
         }
@@ -886,9 +907,8 @@ namespace Hotcakes.Commerce.Orders
                 throw new ArgumentException("paymentTransaction must be of a RecurringPayment type.");
 
             var subsId = paymentTransaction.Result.ReferenceNumber;
-            var tCreateSub =
-                FindAllTransactionsOfType(ActionType.RecurringSubscriptionCreate)
-                    .FirstOrDefault(s => s.RefNum1 == subsId);
+            var tCreateSub = FindAllTransactionsOfType(ActionType.RecurringSubscriptionCreate)
+                .FirstOrDefault(s => s.RefNum1 == subsId);
 
             var ot = new OrderTransaction(paymentTransaction);
             if (tCreateSub != null)
@@ -897,7 +917,9 @@ namespace Hotcakes.Commerce.Orders
                 ot.LineItemId = tCreateSub.LineItemId;
             }
 
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var result = svc.AddPaymentTransactionToOrder(o, ot);
+            if (result) InvalidateTransactionCache();
+            return result;
         }
 
         public List<OrderTransaction> RecurringPaymentsGetByLineItem(long lineItemId)
@@ -918,18 +940,19 @@ namespace Hotcakes.Commerce.Orders
 
         public long? GetLineItemBySubsription(string subscriptionId)
         {
-            var tCreateSub =
-                FindAllTransactionsOfType(ActionType.RecurringSubscriptionCreate)
-                    .FirstOrDefault(s => s.RefNum1 == subscriptionId);
-            return tCreateSub != null ? tCreateSub.LineItemId : null;
+            if (string.IsNullOrEmpty(subscriptionId))
+                return null;
+
+            var tCreateSub = FindAllTransactionsOfType(ActionType.RecurringSubscriptionCreate)
+                .FirstOrDefault(s => s.RefNum1 == subscriptionId);
+            return tCreateSub?.LineItemId;
         }
 
         public string GetSubscriptionByLineItem(long lineItemId)
         {
-            var tCreateSub =
-                FindAllTransactionsOfType(ActionType.RecurringSubscriptionCreate)
-                    .FirstOrDefault(s => s.LineItemId == lineItemId);
-            return tCreateSub != null ? tCreateSub.RefNum1 : null;
+            var tCreateSub = FindAllTransactionsOfType(ActionType.RecurringSubscriptionCreate)
+                .FirstOrDefault(s => s.LineItemId == lineItemId);
+            return tCreateSub?.RefNum1;
         }
 
         #endregion
@@ -948,90 +971,58 @@ namespace Hotcakes.Commerce.Orders
                 RefNum1 = token,
                 RefNum2 = payerId
             };
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var result = svc.AddPaymentTransactionToOrder(o, ot);
+            if (result) InvalidateTransactionCache();
+            return result;
         }
 
         public bool PayPalExpressHasInfo()
         {
             var result = PayPalExpressInfoListAll();
-            if (result.Count > 0) return true;
-            return false;
+            return result.Count > 0;
         }
 
         public List<OrderTransaction> PayPalExpressInfoListAll()
         {
-            var result = new List<OrderTransaction>();
-
-            foreach (var t in svc.Transactions.FindForOrder(o.bvin))
-            {
-                if (t.Action == ActionType.PayPalExpressCheckoutInfo)
-                {
-                    result.Add(t);
-                }
-            }
-            return result;
+            return FindAllTransactionsOfType(ActionType.PayPalExpressCheckoutInfo);
         }
 
         public OrderTransaction PayPalExpressInfoFind(string id)
         {
-            foreach (var t in PayPalExpressInfoListAll())
-            {
-                if (t.IdAsString == id)
-                {
-                    return t;
-                }
-            }
-            return null;
+            if (string.IsNullOrEmpty(id))
+                return null;
+
+            var infoList = PayPalExpressInfoListAll();
+            return infoList.FirstOrDefault(t => t.IdAsString == id);
         }
 
         public List<OrderTransaction> PayPalExpressHoldListAll()
         {
-            var result = new List<OrderTransaction>();
-
-            foreach (var t in svc.Transactions.FindForOrder(o.bvin))
-            {
-                if (t.Action == ActionType.PayPalHold)
-                {
-                    if (!t.Voided && t.Success)
-                    {
-                        result.Add(t);
-                    }
-                }
-            }
-            return result;
+            var transactions = GetCachedTransactions();
+            return transactions.Where(t =>
+                t.Action == ActionType.PayPalHold &&
+                !t.Voided &&
+                t.Success)
+                .ToList();
         }
 
         public OrderTransaction PayPalExpressHoldFind(string id)
         {
-            foreach (var t in PayPalExpressHoldListAll())
-            {
-                if (t.IdAsString == id)
-                {
-                    return t;
-                }
-            }
-            return null;
+            if (string.IsNullOrEmpty(id))
+                return null;
+
+            var holdList = PayPalExpressHoldListAll();
+            return holdList.FirstOrDefault(t => t.IdAsString == id);
         }
 
         public List<OrderTransaction> PayPalExpressListAllRefundable()
         {
-            var result = new List<OrderTransaction>();
-
-            foreach (var t in svc.Transactions.FindForOrder(o.bvin))
-            {
-                if (t.Action == ActionType.PayPalCapture ||
-                    t.Action == ActionType.PayPalCharge)
-                {
-                    if (!t.Voided)
-                    {
-                        if (t.Success)
-                        {
-                            result.Add(t);
-                        }
-                    }
-                }
-            }
-            return result;
+            var transactions = GetCachedTransactions();
+            return transactions.Where(t =>
+                (t.Action == ActionType.PayPalCapture || t.Action == ActionType.PayPalCharge) &&
+                !t.Voided &&
+                t.Success)
+                .ToList();
         }
 
         public bool PayPalExpressHold(string infoTransactionId, decimal amount)
@@ -1051,12 +1042,14 @@ namespace Hotcakes.Commerce.Orders
             t.Amount = EnsurePositiveAmount(amount);
             t.PreviousTransactionNumber = infoTransaction.RefNum1;
             t.PreviousTransactionAuthCode = infoTransaction.RefNum2;
-            var ot = new OrderTransaction(t) {MethodId = PaymentMethods.PaypalExpressId};
+            var ot = new OrderTransaction(t) { MethodId = PaymentMethods.PaypalExpressId };
             if (infoTransaction.Action != ActionType.PayPalExpressCheckoutInfo)
             {
                 ot.Success = false;
                 ot.Messages = "Transaction must be PayPal info type to process.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             var processor = new PaypalExpress();
@@ -1069,6 +1062,7 @@ namespace Hotcakes.Commerce.Orders
             }
 
             txnSuccess = ot.Success && svc.AddPaymentTransactionToOrder(o, ot);
+            if (txnSuccess) InvalidateTransactionCache();
             return txnSuccess;
         }
 
@@ -1087,21 +1081,25 @@ namespace Hotcakes.Commerce.Orders
             t.Amount = EnsurePositiveAmount(amount);
             t.PreviousTransactionNumber = holdTransaction.RefNum1;
             t.PreviousTransactionAuthCode = holdTransaction.RefNum2;
-            var ot = new OrderTransaction(t) {MethodId = PaymentMethods.PaypalExpressId};
+            var ot = new OrderTransaction(t) { MethodId = PaymentMethods.PaypalExpressId };
             if (holdTransaction.Action != ActionType.PayPalHold)
             {
                 ot.Success = false;
                 ot.Messages = "Transaction must be PayPal hold type to process.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             var processor = new PaypalExpress();
             if (processor != null)
             {
                 processor.Capture(t, _app);
-                ot = new OrderTransaction(t) {LinkedToTransaction = holdTransaction.IdAsString};
+                ot = new OrderTransaction(t) { LinkedToTransaction = holdTransaction.IdAsString };
             }
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public bool PayPalExpressCharge(string infoTransactionId, decimal amount)
@@ -1119,22 +1117,26 @@ namespace Hotcakes.Commerce.Orders
             t.Amount = EnsurePositiveAmount(amount);
             t.PreviousTransactionNumber = infoTransaction.RefNum1;
             t.PreviousTransactionAuthCode = infoTransaction.RefNum2;
-            var ot = new OrderTransaction(t) {MethodId = PaymentMethods.PaypalExpressId};
+            var ot = new OrderTransaction(t) { MethodId = PaymentMethods.PaypalExpressId };
             if (infoTransaction.Action != ActionType.PayPalExpressCheckoutInfo)
             {
                 ot.Success = false;
                 ot.Messages = "Transaction must be PayPal info type to process.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             var processor = new PaypalExpress();
             if (processor != null)
             {
                 processor.Charge(t, _app);
-                ot = new OrderTransaction(t) {LinkedToTransaction = infoTransaction.IdAsString};
+                ot = new OrderTransaction(t) { LinkedToTransaction = infoTransaction.IdAsString };
             }
 
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public bool PayPalExpressRefund(string previousTransaction, decimal amount, string rmaBvin = "")
@@ -1163,7 +1165,9 @@ namespace Hotcakes.Commerce.Orders
             {
                 ot.Success = false;
                 ot.Messages = "Transaction must be PayPal capture or charge type to refund.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             var processor = new PaypalExpress();
@@ -1176,7 +1180,9 @@ namespace Hotcakes.Commerce.Orders
                     LinkedToTransaction = previousTransaction.IdAsString
                 };
             }
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public bool PayPalExpressVoid(string previousTransaction, decimal amount)
@@ -1194,19 +1200,21 @@ namespace Hotcakes.Commerce.Orders
             t.Amount = EnsurePositiveAmount(amount);
             t.PreviousTransactionNumber = previousTransaction.RefNum1;
             t.PreviousTransactionAuthCode = previousTransaction.RefNum2;
-            var ot = new OrderTransaction(t) {MethodId = PaymentMethods.PaypalExpressId};
+            var ot = new OrderTransaction(t) { MethodId = PaymentMethods.PaypalExpressId };
             if (!previousTransaction.IsVoidable)
             {
                 ot.Success = false;
                 ot.Messages = "Transaction can not be voided.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             var processor = new PaypalExpress();
             if (processor != null)
             {
                 processor.Void(t, _app);
-                ot = new OrderTransaction(t) {LinkedToTransaction = previousTransaction.IdAsString};
+                ot = new OrderTransaction(t) { LinkedToTransaction = previousTransaction.IdAsString };
 
                 // if the void went through, make sure we mark the previous transaction as voided
                 if (t.Result.Succeeded)
@@ -1215,62 +1223,63 @@ namespace Hotcakes.Commerce.Orders
                     svc.Transactions.Update(previousTransaction);
                 }
             }
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public bool PayPalExpressCompleteAllPayments()
         {
             var result = true;
+            var transactions = GetCachedTransactions();
 
-            var transactions = svc.Transactions.FindForOrder(o.bvin);
+            var relevantTransactions = transactions.Where(p =>
+                p.Action == ActionType.PayPalExpressCheckoutInfo ||
+                p.Action == ActionType.PayPalHold)
+                .ToList();
 
-            foreach (var p in transactions)
+            foreach (var p in relevantTransactions)
             {
-                if (p.Action == ActionType.PayPalExpressCheckoutInfo ||
-                    p.Action == ActionType.PayPalHold)
+                // if we already have an auth or charge on the card, skip
+                if (p.HasSuccessfulLinkedAction(ActionType.PayPalCharge, transactions) ||
+                    p.HasSuccessfulLinkedAction(ActionType.PayPalCapture, transactions) ||
+                    p.HasSuccessfulLinkedAction(ActionType.PayPalHold, transactions))
                 {
-                    // if we already have an auth or charge on the card, skip
-                    if (
-                        p.HasSuccessfulLinkedAction(ActionType.PayPalCharge, transactions) ||
-                        p.HasSuccessfulLinkedAction(ActionType.PayPalCapture, transactions) ||
-                        p.HasSuccessfulLinkedAction(ActionType.PayPalHold, transactions)
-                        )
+                    continue;
+                }
+
+                try
+                {
+                    var t = CreateEmptyTransaction();
+                    t.Card = p.CreditCard;
+                    t.Amount = p.Amount;
+                    t.PreviousTransactionNumber = p.RefNum1;
+
+                    var processor = new PaypalExpress();
+
+                    if (p.Action == ActionType.PayPalHold)
                     {
-                        continue;
+                        t.Action = ActionType.PayPalCapture;
+                        processor.Capture(t, _app);
+                    }
+                    else
+                    {
+                        t.Action = ActionType.PayPalCharge;
+                        processor.Charge(t, _app);
                     }
 
-                    try
-                    {
-                        var t = CreateEmptyTransaction();
-                        t.Card = p.CreditCard;
-                        t.Amount = p.Amount;
-                        t.PreviousTransactionNumber = p.RefNum1;
+                    var ot = new OrderTransaction(t) { LinkedToTransaction = p.IdAsString };
+                    svc.AddPaymentTransactionToOrder(o, ot);
 
-                        var processor = new PaypalExpress();
-
-                        if (p.Action == ActionType.PayPalHold)
-                        {
-                            t.Action = ActionType.PayPalCapture;
-                            processor.Capture(t, _app);
-                        }
-                        else
-                        {
-                            t.Action = ActionType.PayPalCharge;
-                            processor.Charge(t, _app);
-                        }
-
-                        var ot = new OrderTransaction(t) {LinkedToTransaction = p.IdAsString};
-                        svc.AddPaymentTransactionToOrder(o, ot);
-
-                        if (t.Result.Succeeded == false) result = false;
-                    }
-                    catch (Exception ex)
-                    {
-                        EventLog.LogEvent(ex);
-                    }
+                    if (t.Result.Succeeded == false) result = false;
+                }
+                catch (Exception ex)
+                {
+                    EventLog.LogEvent(ex);
                 }
             }
 
+            InvalidateTransactionCache();
             return result;
         }
 
@@ -1298,8 +1307,10 @@ namespace Hotcakes.Commerce.Orders
             t.Customer.UserId = o.UserID;
             t.RewardPoints = points;
             t.Action = ActionType.RewardPointsInfo;
-            var ot = new OrderTransaction(t) {Success = true};
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var ot = new OrderTransaction(t) { Success = true };
+            var result = svc.AddPaymentTransactionToOrder(o, ot);
+            if (result) InvalidateTransactionCache();
+            return result;
         }
 
         private OrderTransaction FindOrCreateRewardsInfo(string infoTransactionId)
@@ -1347,21 +1358,27 @@ namespace Hotcakes.Commerce.Orders
                 ot.Success = false;
                 ot.Messages = string.Format("Customer only has {0} points available and cannot hold {1} points.",
                     availablePoints, rewardPoints);
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             if (rewardPoints == 0)
             {
                 ot.Success = false;
                 ot.Messages = "Cannot hold 0 points.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             if (infoTransaction.Action != ActionType.RewardPointsInfo)
             {
                 ot.Success = false;
                 ot.Messages = "Transaction must be Rewards Points info type to process.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             if (_pointsManager.HoldPoints(o.UserID, rewardPoints))
@@ -1376,7 +1393,9 @@ namespace Hotcakes.Commerce.Orders
             }
             ot.LinkedToTransaction = infoTransaction.IdAsString;
 
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public bool RewardsPointsUnHold(string holdTransactionId, int points)
@@ -1400,7 +1419,9 @@ namespace Hotcakes.Commerce.Orders
             {
                 ot.Success = false;
                 ot.Messages = "Transaction must be Rewards Points Hold type to process.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             if (_pointsManager.UnHoldPoints(o.UserID, rewardPoints))
@@ -1417,7 +1438,9 @@ namespace Hotcakes.Commerce.Orders
                 ot.Messages = "Not enought points held to unhold";
             }
 
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public List<OrderTransaction> RewardsPointsInfoListAll()
@@ -1432,52 +1455,31 @@ namespace Hotcakes.Commerce.Orders
 
         public List<OrderTransaction> RewardsPointsHoldListAll()
         {
-            var result = new List<OrderTransaction>();
-
-            foreach (var t in svc.Transactions.FindForOrder(o.bvin))
-            {
-                if (t.Action == ActionType.RewardPointsHold)
-                {
-                    if (!t.Voided && t.Success)
-                    {
-                        result.Add(t);
-                    }
-                }
-            }
-            return result;
+            var transactions = GetCachedTransactions();
+            return transactions.Where(t =>
+                t.Action == ActionType.RewardPointsHold &&
+                !t.Voided &&
+                t.Success)
+                .ToList();
         }
 
         public OrderTransaction RewardsPointsHoldFind(string id)
         {
-            foreach (var t in RewardsPointsHoldListAll())
-            {
-                if (t.IdAsString == id)
-                {
-                    return t;
-                }
-            }
-            return null;
+            if (string.IsNullOrEmpty(id))
+                return null;
+
+            var holdList = RewardsPointsHoldListAll();
+            return holdList.FirstOrDefault(t => t.IdAsString == id);
         }
 
         public List<OrderTransaction> RewardsPointsListAllRefundable()
         {
-            var result = new List<OrderTransaction>();
-
-            foreach (var t in svc.Transactions.FindForOrder(o.bvin))
-            {
-                if (t.Action == ActionType.RewardPointsCapture ||
-                    t.Action == ActionType.RewardPointsDecrease)
-                {
-                    if (!t.Voided)
-                    {
-                        if (t.Success)
-                        {
-                            result.Add(t);
-                        }
-                    }
-                }
-            }
-            return result;
+            var transactions = GetCachedTransactions();
+            return transactions.Where(t =>
+                (t.Action == ActionType.RewardPointsCapture || t.Action == ActionType.RewardPointsDecrease) &&
+                !t.Voided &&
+                t.Success)
+                .ToList();
         }
 
         public bool RewardsPointsCapture(string holdTransactionId, int points)
@@ -1501,7 +1503,9 @@ namespace Hotcakes.Commerce.Orders
             {
                 ot.Success = false;
                 ot.Messages = "Transaction must be Rewards Points hold type to process.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             if (_pointsManager.CapturePoints(o.UserID, rewardPoints))
@@ -1516,7 +1520,9 @@ namespace Hotcakes.Commerce.Orders
             }
             ot.LinkedToTransaction = holdTransaction.IdAsString;
 
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public bool RewardsPointsCharge(string infoTransactionId, int points)
@@ -1542,21 +1548,27 @@ namespace Hotcakes.Commerce.Orders
                 ot.Success = false;
                 ot.Messages = string.Format("Customer only has {0} points available and can't spend {1} points.",
                     availablePoints, rewardPoints);
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             if (rewardPoints == 0)
             {
                 ot.Success = false;
                 ot.Messages = "Cannot spend 0 points.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             if (infoTransaction.Action != ActionType.RewardPointsInfo)
             {
                 ot.Success = false;
                 ot.Messages = "Transaction must be Rewards Points info type to process.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             if (_pointsManager.DecreasePoints(o.UserID, rewardPoints))
@@ -1571,7 +1583,9 @@ namespace Hotcakes.Commerce.Orders
             }
             ot.LinkedToTransaction = infoTransaction.IdAsString;
 
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public bool RewardsPointsRefund(string previousTransaction, int points, string rmaBvin = "")
@@ -1588,7 +1602,7 @@ namespace Hotcakes.Commerce.Orders
             var t = CreateEmptyTransaction();
             t.Action = ActionType.RewardPointsIncrease;
             t.Amount = _pointsManager.DollarCreditForPoints(rewardPoints);
-            var ot = new OrderTransaction(t) {RMABvin = rmaBvin};
+            var ot = new OrderTransaction(t) { RMABvin = rmaBvin };
 
             if (previousTransaction.Action != ActionType.RewardPointsCapture
                 && previousTransaction.Action != ActionType.RewardPointsDecrease
@@ -1596,7 +1610,9 @@ namespace Hotcakes.Commerce.Orders
             {
                 ot.Success = false;
                 ot.Messages = "Transaction must be Rewards Points capture or charge type to refund.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             if (_pointsManager.IssuePoints(o.UserID, rewardPoints))
@@ -1611,7 +1627,9 @@ namespace Hotcakes.Commerce.Orders
             }
             ot.LinkedToTransaction = previousTransaction.IdAsString;
 
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         #endregion
@@ -1630,8 +1648,10 @@ namespace Hotcakes.Commerce.Orders
             t.Amount = EnsurePositiveAmount(amount);
             t.GiftCard = giftCard;
             t.Action = ActionType.GiftCardInfo;
-            var ot = new OrderTransaction(t) {Success = true};
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var ot = new OrderTransaction(t) { Success = true };
+            var result = svc.AddPaymentTransactionToOrder(o, ot);
+            if (result) InvalidateTransactionCache();
+            return result;
         }
 
         /// <summary>
@@ -1643,7 +1663,9 @@ namespace Hotcakes.Commerce.Orders
         public bool GiftCardUpdateInfo(OrderTransaction infoTransaction, decimal amount)
         {
             infoTransaction.Amount = amount;
-            return svc.Transactions.Update(infoTransaction);
+            var result = svc.Transactions.Update(infoTransaction);
+            if (result) InvalidateTransactionCache();
+            return result;
         }
 
         /// <summary>
@@ -1657,7 +1679,9 @@ namespace Hotcakes.Commerce.Orders
 
             if (ot != null)
             {
-                return svc.Transactions.Delete(ot.Id);
+                var result = svc.Transactions.Delete(ot.Id);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             return false;
@@ -1689,7 +1713,9 @@ namespace Hotcakes.Commerce.Orders
             {
                 ot.Success = false;
                 ot.Messages = "Transaction must be Gift Card info type to process.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             var context = _app.CurrentRequestContext;
@@ -1697,10 +1723,12 @@ namespace Hotcakes.Commerce.Orders
             if (processor != null)
             {
                 processor.ProcessTransaction(t);
-                ot = new OrderTransaction(t) {LinkedToTransaction = infoTransaction.IdAsString};
+                ot = new OrderTransaction(t) { LinkedToTransaction = infoTransaction.IdAsString };
             }
 
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public List<OrderTransaction> GiftCardInfoListAll()
@@ -1718,77 +1746,50 @@ namespace Hotcakes.Commerce.Orders
             if (string.IsNullOrEmpty(giftCardNumber))
                 return null;
 
-            giftCardNumber = giftCardNumber.Trim().ToLower();
+            var giftCardNumberLower = giftCardNumber.Trim().ToLower();
+            var giftCardInfoList = FindAllTransactionsOfType(ActionType.GiftCardInfo);
 
-            return FindAllTransactionsOfType(ActionType.GiftCardInfo)
-                .FirstOrDefault(ot => ot.GiftCard.CardNumber.ToLower() == giftCardNumber);
+            return giftCardInfoList.FirstOrDefault(ot =>
+                string.Equals(ot.GiftCard.CardNumber, giftCardNumberLower, StringComparison.OrdinalIgnoreCase));
         }
 
         public List<OrderTransaction> GiftCardHoldListAll()
         {
-            var result = new List<OrderTransaction>();
-
-            foreach (var t in svc.Transactions.FindForOrder(o.bvin))
-            {
-                if (t.Action == ActionType.GiftCardHold)
-                {
-                    if (!t.Voided && t.Success)
-                    {
-                        result.Add(t);
-                    }
-                }
-            }
-            return result;
+            var transactions = GetCachedTransactions();
+            return transactions.Where(t =>
+                t.Action == ActionType.GiftCardHold &&
+                !t.Voided &&
+                t.Success)
+                .ToList();
         }
 
         public List<OrderTransaction> GiftCardChargeOrCaptureListAll()
         {
-            var result = new List<OrderTransaction>();
-
-            foreach (var t in svc.Transactions.FindForOrder(o.bvin))
-            {
-                if (t.Action == ActionType.GiftCardCapture || t.Action == ActionType.GiftCardDecrease)
-                {
-                    if (!t.Voided && t.Success)
-                    {
-                        result.Add(t);
-                    }
-                }
-            }
-            return result;
+            var transactions = GetCachedTransactions();
+            return transactions.Where(t =>
+                (t.Action == ActionType.GiftCardCapture || t.Action == ActionType.GiftCardDecrease) &&
+                !t.Voided &&
+                t.Success)
+                .ToList();
         }
 
         public OrderTransaction GiftCardHoldFind(string id)
         {
-            foreach (var t in GiftCardHoldListAll())
-            {
-                if (t.IdAsString == id)
-                {
-                    return t;
-                }
-            }
-            return null;
+            if (string.IsNullOrEmpty(id))
+                return null;
+
+            var holdList = GiftCardHoldListAll();
+            return holdList.FirstOrDefault(t => t.IdAsString == id);
         }
 
         public List<OrderTransaction> GiftCardChargeListAllRefundable()
         {
-            var result = new List<OrderTransaction>();
-
-            foreach (var t in svc.Transactions.FindForOrder(o.bvin))
-            {
-                if (t.Action == ActionType.GiftCardCapture ||
-                    t.Action == ActionType.GiftCardDecrease)
-                {
-                    if (!t.Voided)
-                    {
-                        if (t.Success)
-                        {
-                            result.Add(t);
-                        }
-                    }
-                }
-            }
-            return result;
+            var transactions = GetCachedTransactions();
+            return transactions.Where(t =>
+                (t.Action == ActionType.GiftCardCapture || t.Action == ActionType.GiftCardDecrease) &&
+                !t.Voided &&
+                t.Success)
+                .ToList();
         }
 
         public bool GiftCardCapture(string holdTransactionId, decimal amount)
@@ -1813,7 +1814,9 @@ namespace Hotcakes.Commerce.Orders
             {
                 ot.Success = false;
                 ot.Messages = "Transaction must be Gift Card hold type to process.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             var context = _app.CurrentRequestContext;
@@ -1821,9 +1824,11 @@ namespace Hotcakes.Commerce.Orders
             if (processor != null)
             {
                 processor.ProcessTransaction(t);
-                ot = new OrderTransaction(t) {LinkedToTransaction = holdTransaction.IdAsString};
+                ot = new OrderTransaction(t) { LinkedToTransaction = holdTransaction.IdAsString };
             }
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public bool GiftCardUnHold(string previousTransaction, decimal amount)
@@ -1847,7 +1852,9 @@ namespace Hotcakes.Commerce.Orders
             {
                 ot.Success = false;
                 ot.Messages = "Transaction can not be voided.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             var context = _app.CurrentRequestContext;
@@ -1855,7 +1862,7 @@ namespace Hotcakes.Commerce.Orders
             if (processor != null)
             {
                 processor.ProcessTransaction(t);
-                ot = new OrderTransaction(t) {LinkedToTransaction = previousTransaction.IdAsString};
+                ot = new OrderTransaction(t) { LinkedToTransaction = previousTransaction.IdAsString };
 
                 // if the void went through, make sure we mark the previous transaction as voided
                 if (t.Result.Succeeded)
@@ -1864,7 +1871,9 @@ namespace Hotcakes.Commerce.Orders
                     svc.Transactions.Update(previousTransaction);
                 }
             }
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public bool GiftCardDecreaseWithCard(string newCardNumber, decimal amount)
@@ -1873,9 +1882,10 @@ namespace Hotcakes.Commerce.Orders
             t.Amount = EnsurePositiveAmount(amount);
             t.GiftCard.CardNumber = newCardNumber;
             t.Action = ActionType.GiftCardInfo;
-            var ot = new OrderTransaction(t) {Success = true};
+            var ot = new OrderTransaction(t) { Success = true };
             if (svc.AddPaymentTransactionToOrder(o, ot))
             {
+                InvalidateTransactionCache();
                 return GiftCardDecrease(ot, amount);
             }
             return false;
@@ -1901,7 +1911,9 @@ namespace Hotcakes.Commerce.Orders
             {
                 ot.Success = false;
                 ot.Messages = "Transaction must be Gift Card info type to process.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             var context = _app.CurrentRequestContext;
@@ -1909,10 +1921,12 @@ namespace Hotcakes.Commerce.Orders
             if (processor != null)
             {
                 processor.ProcessTransaction(t);
-                ot = new OrderTransaction(t) {LinkedToTransaction = infoTransaction.IdAsString};
+                ot = new OrderTransaction(t) { LinkedToTransaction = infoTransaction.IdAsString };
             }
 
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public bool GiftCardIncrease(string previousTransaction, decimal amount, string rmaBvin = "")
@@ -1931,7 +1945,7 @@ namespace Hotcakes.Commerce.Orders
             t.Amount = EnsurePositiveAmount(amount);
             t.PreviousTransactionNumber = previousTransaction.RefNum1;
             t.PreviousTransactionAuthCode = previousTransaction.RefNum2;
-            var ot = new OrderTransaction(t) {RMABvin = rmaBvin};
+            var ot = new OrderTransaction(t) { RMABvin = rmaBvin };
 
             if (previousTransaction.Action != ActionType.GiftCardCapture
                 && previousTransaction.Action != ActionType.GiftCardDecrease
@@ -1939,7 +1953,9 @@ namespace Hotcakes.Commerce.Orders
             {
                 ot.Success = false;
                 ot.Messages = "Transaction must be Gift Card capture, increase or info type to increase.";
-                return svc.AddPaymentTransactionToOrder(o, ot);
+                var result = svc.AddPaymentTransactionToOrder(o, ot);
+                if (result) InvalidateTransactionCache();
+                return result;
             }
 
             var context = _app.CurrentRequestContext;
@@ -1953,54 +1969,55 @@ namespace Hotcakes.Commerce.Orders
                     LinkedToTransaction = previousTransaction.IdAsString
                 };
             }
-            return svc.AddPaymentTransactionToOrder(o, ot);
+            var addResult = svc.AddPaymentTransactionToOrder(o, ot);
+            if (addResult) InvalidateTransactionCache();
+            return addResult;
         }
 
         public bool GiftCardCompleteAllGiftCards()
         {
             var result = true;
-
             var currentContext = _app.CurrentRequestContext;
+            var transactions = GetCachedTransactions();
 
-            var transactions = svc.Transactions.FindForOrder(o.bvin);
+            var relevantTransactions = transactions.Where(p =>
+                p.Action == ActionType.GiftCardHold)
+                .ToList();
 
-            foreach (var p in transactions)
+            foreach (var p in relevantTransactions)
             {
-                if (p.Action == ActionType.GiftCardHold)
+                // if we already have an auth or charge on the card, skip
+                if (p.HasSuccessfulLinkedAction(ActionType.GiftCardDecrease, transactions) ||
+                    p.HasSuccessfulLinkedAction(ActionType.GiftCardCapture, transactions))
                 {
-                    // if we already have an auth or charge on the card, skip
-                    if (p.HasSuccessfulLinkedAction(ActionType.GiftCardDecrease, transactions) ||
-                        p.HasSuccessfulLinkedAction(ActionType.GiftCardCapture, transactions)
-                        )
-                    {
-                        continue;
-                    }
+                    continue;
+                }
 
-                    try
-                    {
-                        var t = CreateEmptyTransaction();
-                        t.Card = p.CreditCard;
-                        t.GiftCard = p.GiftCard;
-                        t.Amount = p.Amount;
+                try
+                {
+                    var t = CreateEmptyTransaction();
+                    t.Card = p.CreditCard;
+                    t.GiftCard = p.GiftCard;
+                    t.Amount = p.Amount;
 
-                        t.Action = ActionType.GiftCardCapture;
+                    t.Action = ActionType.GiftCardCapture;
 
-                        var proc = currentContext.CurrentStore.Settings.PaymentCurrentGiftCardProcessor();
-                        proc.ProcessTransaction(t);
+                    var proc = currentContext.CurrentStore.Settings.PaymentCurrentGiftCardProcessor();
+                    proc.ProcessTransaction(t);
 
-                        var ot = new OrderTransaction(t);
-                        ot.LinkedToTransaction = p.IdAsString;
-                        svc.AddPaymentTransactionToOrder(o, ot);
+                    var ot = new OrderTransaction(t);
+                    ot.LinkedToTransaction = p.IdAsString;
+                    svc.AddPaymentTransactionToOrder(o, ot);
 
-                        if (t.Result.Succeeded == false) result = false;
-                    }
-                    catch (Exception ex)
-                    {
-                        EventLog.LogEvent(ex);
-                    }
+                    if (t.Result.Succeeded == false) result = false;
+                }
+                catch (Exception ex)
+                {
+                    EventLog.LogEvent(ex);
                 }
             }
 
+            InvalidateTransactionCache();
             return result;
         }
 
@@ -2085,9 +2102,10 @@ namespace Hotcakes.Commerce.Orders
 
             if (order != null && order.OrderNumber == orderNumber)
             {
-                var items = new List<TransactionItem>();
+                var itemCount = order.Items.Count;
+                var items = new List<TransactionItem>(itemCount);
 
-                foreach(var item in order.Items)
+                foreach (var item in order.Items)
                 {
                     items.Add(new TransactionItem
                     {
@@ -2108,6 +2126,22 @@ namespace Hotcakes.Commerce.Orders
 
         #region Implementation
 
+        private List<OrderTransaction> GetCachedTransactions()
+        {
+            if (_cachedTransactions == null || !_transactionsCacheValid)
+            {
+                _cachedTransactions = svc.Transactions.FindForOrder(o.bvin);
+                _transactionsCacheValid = true;
+            }
+            return _cachedTransactions;
+        }
+
+        private void InvalidateTransactionCache()
+        {
+            _transactionsCacheValid = false;
+            _cachedTransactions = null;
+        }
+
         private List<OrderTransaction> FindAllTransactionsOfType(ActionType type)
         {
             return svc.Transactions.FindForOrder(o.bvin, type);
@@ -2115,18 +2149,18 @@ namespace Hotcakes.Commerce.Orders
 
         private OrderTransaction FindSingleTransactionByTypeAndId(ActionType type, string Id)
         {
-            foreach (var t in svc.Transactions.FindForOrder(o.bvin, type))
-            {
-                if (t.IdAsString == Id) return t;
-            }
-            return null;
+            if (string.IsNullOrEmpty(Id))
+                return null;
+
+            var transactions = svc.Transactions.FindForOrder(o.bvin, type);
+            return transactions.FirstOrDefault(t => t.IdAsString == Id);
         }
 
         private decimal EnsurePositiveAmount(decimal input)
         {
             if (input < 0)
             {
-                return input*-1;
+                return input * -1;
             }
             return input;
         }
@@ -2135,7 +2169,7 @@ namespace Hotcakes.Commerce.Orders
         {
             if (input < 0)
             {
-                return input*-1;
+                return input * -1;
             }
             return input;
         }

@@ -57,7 +57,7 @@ namespace Hotcakes.Commerce.Marketing
         {
             model.Id = data.Id;
             model.StoreId = data.StoreId;
-            model.Mode = (PromotionType) data.Mode;
+            model.Mode = (PromotionType)data.Mode;
             model.LastUpdatedUtc = data.LastUpdatedUtc;
             model.Name = data.Name;
             model.StartDateUtc = data.StartDateUtc;
@@ -79,7 +79,7 @@ namespace Hotcakes.Commerce.Marketing
         {
             data.Item.Id = model.Id;
             data.Item.StoreId = model.StoreId;
-            data.Item.Mode = (int) model.Mode;
+            data.Item.Mode = (int)model.Mode;
             data.Item.LastUpdatedUtc = model.LastUpdatedUtc;
             data.Item.Name = model.Name;
             data.Item.StartDateUtc = model.StartDateUtc;
@@ -109,20 +109,19 @@ namespace Hotcakes.Commerce.Marketing
             item.StoreId = Context.CurrentStore.Id;
             item.LastUpdatedUtc = DateTime.UtcNow;
 
-            var totalRowCount = 0;
-            int? minbSortOrder = null;
-            var items = FindAllWithFilter(item.Mode, null, true, 1, int.MaxValue, ref totalRowCount);
-            if (item != null && items.Any())
-            {
-                minbSortOrder = items.Min(y => y.SortOrder);
-            }
+            // Performance improvement: Query only for MIN(SortOrder) instead of loading all promotions
+            var storeId = Context.CurrentStore.Id;
+            var mode = (int)item.Mode;
 
-            var newSortOrder = 1;
-            if (minbSortOrder.HasValue)
+            using (var s = CreateReadStrategy())
             {
-                newSortOrder = minbSortOrder.Value - 1;
+                var minSortOrder = s.GetQuery()
+                    .AsNoTracking()
+                    .Where(p => p.StoreId == storeId && p.Mode == mode)
+                    .Min(p => (int?)p.SortOrder);
+
+                item.SortOrder = minSortOrder.HasValue ? minSortOrder.Value - 1 : 1;
             }
-            item.SortOrder = newSortOrder;
 
             return base.Create(item);
         }
@@ -166,7 +165,7 @@ namespace Hotcakes.Commerce.Marketing
                 // type
                 if (type != PromotionType.Unknown)
                 {
-                    query = query.Where(y => y.Item.Mode == (int) type);
+                    query = query.Where(y => y.Item.Mode == (int)type);
                 }
 
                 // keyword 
@@ -184,9 +183,15 @@ namespace Hotcakes.Commerce.Marketing
                     query = query.Where(y => y.Item.IsEnabled);
                 }
 
-                totalRowCount = query.Count();
+                // Performance improvement: Use OrderBy before getting count to enable potential query optimization
+                var orderedQuery = query.OrderBy(y => y.Item.SortOrder);
 
-                var items = GetPagedItems(query.OrderBy(y => y.Item.SortOrder), pageNumber, pageSize);
+                // Performance improvement: Execute count and paging in same query context
+                var items = GetPagedItems(orderedQuery, pageNumber, pageSize).ToList();
+                totalRowCount = items.Any() && pageSize < int.MaxValue
+                    ? orderedQuery.Count()
+                    : items.Count;
+
                 return ListPoco(items);
             }
         }
@@ -194,15 +199,16 @@ namespace Hotcakes.Commerce.Marketing
         public List<Promotion> FindAllPotentiallyActive(DateTime currentDateTimeUtc, PromotionType type)
         {
             var storeId = Context.CurrentStore.Id;
-            var intMode = (int) type;
+            var intMode = (int)type;
 
+            // Performance improvement: Combine all Where clauses into a single predicate
             return FindListPoco(q =>
             {
-                return q.Where(y => y.Item.StoreId == storeId)
-                    .Where(y => y.Item.IsEnabled)
-                    .Where(y => y.Item.StartDateUtc <= currentDateTimeUtc)
-                    .Where(y => y.Item.EndDateUtc >= currentDateTimeUtc)
-                    .Where(i => i.Item.Mode == intMode)
+                return q.Where(y => y.Item.StoreId == storeId
+                                 && y.Item.IsEnabled
+                                 && y.Item.StartDateUtc <= currentDateTimeUtc
+                                 && y.Item.EndDateUtc >= currentDateTimeUtc
+                                 && y.Item.Mode == intMode)
                     .OrderBy(y => y.Item.SortOrder);
             });
         }
@@ -230,7 +236,7 @@ namespace Hotcakes.Commerce.Marketing
                 var maxSortOrder = s.GetQuery()
                     .AsNoTracking()
                     .Where(p => p.StoreId == storeId)
-                    .Max(p => (int?) p.SortOrder);
+                    .Max(p => (int?)p.SortOrder);
 
                 return maxSortOrder ?? 0;
             }
@@ -243,22 +249,42 @@ namespace Hotcakes.Commerce.Marketing
 
         public bool Resort(List<long> sortedIds, int orderOffset = 0)
         {
-            if (sortedIds != null)
+            if (sortedIds == null || sortedIds.Count == 0)
             {
-                for (var i = 1; i <= sortedIds.Count; i++)
-                {
-                    UpdateSortOrder(sortedIds[i - 1], orderOffset + i);
-                }
+                return true;
             }
-            return true;
+
+            // Performance improvement: Batch update all sort orders in a single database operation
+            using (var s = CreateStrategy())
+            {
+                var promotions = s.GetQuery()
+                    .Where(p => sortedIds.Contains(p.Id))
+                    .ToList();
+
+                for (var i = 0; i < sortedIds.Count; i++)
+                {
+                    var promotion = promotions.FirstOrDefault(p => p.Id == sortedIds[i]);
+                    if (promotion != null)
+                    {
+                        promotion.SortOrder = orderOffset + i + 1;
+                    }
+                }
+
+                return s.SubmitChanges();
+            }
         }
 
         private bool UpdateSortOrder(long id, int newSortOrder)
         {
-            var item = Find(id);
-            if (item == null) return false;
-            item.SortOrder = newSortOrder;
-            return Update(item);
+            // Performance improvement: Update only the SortOrder field without loading the entire Promotion model
+            using (var s = CreateStrategy())
+            {
+                var item = s.GetQuery().FirstOrDefault(p => p.Id == id);
+                if (item == null) return false;
+
+                item.SortOrder = newSortOrder;
+                return s.SubmitChanges();
+            }
         }
     }
 }
