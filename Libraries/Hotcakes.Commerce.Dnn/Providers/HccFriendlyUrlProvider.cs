@@ -71,13 +71,13 @@ namespace Hotcakes.Commerce.Dnn.Providers
 
         public override string FriendlyUrl(TabInfo tab, string path)
         {
-            var _portalSettings = PortalController.Instance.GetCurrentPortalSettings();
+            var _portalSettings = PortalController.Instance.GetCurrentSettings();
             return FriendlyUrl(tab, path, Globals.glbDefaultPage, _portalSettings);
         }
 
         public override string FriendlyUrl(TabInfo tab, string path, string pageName)
         {
-            var _portalSettings = PortalController.Instance.GetCurrentPortalSettings();
+            var _portalSettings = PortalController.Instance.GetCurrentSettings();
             return FriendlyUrl(tab, path, pageName, _portalSettings);
         }
 
