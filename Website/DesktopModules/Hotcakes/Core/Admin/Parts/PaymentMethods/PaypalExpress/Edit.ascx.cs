@@ -54,6 +54,7 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.PaypalExpress
 
             chkUnconfirmedAddress.Checked = HccApp.CurrentStore.Settings.PayPal.AllowUnconfirmedAddresses;
             chkRequirePayPalAccount.Checked = HccApp.CurrentStore.Settings.PayPal.RequirePayPalAccount;
+            chkSkipTotalBreakdown.Checked = HccApp.CurrentStore.Settings.PayPal.NoOrderTotalBreakdown;
             ddlCurrency.SelectedValue = HccApp.CurrentStore.Settings.PayPal.Currency;
         }
 
@@ -68,6 +69,7 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.PaypalExpress
             HccApp.CurrentStore.Settings.PayPal.ExpressAuthorizeOnly = authorizeOnly;
             HccApp.CurrentStore.Settings.PayPal.AllowUnconfirmedAddresses = chkUnconfirmedAddress.Checked;
             HccApp.CurrentStore.Settings.PayPal.RequirePayPalAccount = chkRequirePayPalAccount.Checked;
+            HccApp.CurrentStore.Settings.PayPal.NoOrderTotalBreakdown = chkSkipTotalBreakdown.Checked;
             HccApp.CurrentStore.Settings.PayPal.Currency = ddlCurrency.SelectedValue;
 
             HccApp.AccountServices.Stores.Update(HccApp.CurrentStore);
