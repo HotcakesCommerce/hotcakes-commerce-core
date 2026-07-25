@@ -86,7 +86,8 @@ namespace Hotcakes.Commerce
             {
                 if (HttpContext.Current == null)
                 {
-                    _current = new HccRequestContext();
+                    if(_current == null)
+                        _current = new HccRequestContext();
                     return _current;
                 }
                 return (HccRequestContext) HttpContext.Current.Items[CONTEXT_KEY];

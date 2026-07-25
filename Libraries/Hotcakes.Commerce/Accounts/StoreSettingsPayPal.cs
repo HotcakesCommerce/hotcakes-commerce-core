@@ -103,5 +103,11 @@ namespace Hotcakes.Commerce.Accounts
             get { return parent.GetProp("PayPalFastSignupEmail"); }
             set { parent.SetProp("PayPalFastSignupEmail", value); }
         }
+
+        public bool NoOrderTotalBreakdown
+        {
+            get { return parent.GetPropBool("PayPalNoTotalBreakdown"); }
+            set { parent.SetProp("PayPalNoTotalBreakdown", value); }
+        }
     }
 }

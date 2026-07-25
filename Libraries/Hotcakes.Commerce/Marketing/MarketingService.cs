@@ -172,22 +172,25 @@ namespace Hotcakes.Commerce.Marketing
         {
             var result = new List<Promotion>();
 
+            // Convert code to upper case once for comparison
+            var codeUpper = code.ToUpperInvariant();
+
             var promos = Promotions.FindAll();
             foreach (var p in promos)
             {
-                // TFS 12734 - TypeId() never returns a match
-                var couponQualifications =
-                    p.Qualifications.Where(y => y.CleanTypeId == PromotionQualificationBase.TypeIdOrderHasCoupon)
-                        .ToList();
-                if (couponQualifications != null)
+                // Filter coupon qualifications once per promotion
+                var couponQualifications = p.Qualifications
+                    .Where(y => y.CleanTypeId == PromotionQualificationBase.TypeIdOrderHasCoupon)
+                    .Cast<OrderHasCoupon>()
+                    .ToList();
+
+                // Check if any coupon qualification matches the code
+                if (couponQualifications.Count > 0)
                 {
                     foreach (var q in couponQualifications)
                     {
-                        var count =
-                            ((OrderHasCoupon) q)
-                                .CurrentCoupons()
-                                .Count(y => y.ToUpperInvariant() == code.ToUpperInvariant());
-                        if (count > 0)
+                        // Use Any() instead of Count() for early termination
+                        if (q.CurrentCoupons().Any(y => y.ToUpperInvariant() == codeUpper))
                         {
                             result.Add(p);
                             break;
@@ -203,27 +206,31 @@ namespace Hotcakes.Commerce.Marketing
         {
             var promos = Promotions.FindAll();
 
-            var codes = new List<string>();
+            // Use HashSet for O(1) lookups instead of List's O(n) Contains
+            var codesSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
             foreach (var p in promos)
             {
-                var couponQualifications =
-                    p.Qualifications.Where(y => y.CleanTypeId == PromotionQualificationBase.TypeIdOrderHasCoupon)
-                        .ToList();
-                if (couponQualifications != null)
+                var couponQualifications = p.Qualifications
+                    .Where(y => y.CleanTypeId == PromotionQualificationBase.TypeIdOrderHasCoupon)
+                    .Cast<OrderHasCoupon>()
+                    .ToList();
+
+                if (couponQualifications.Count > 0)
                 {
                     foreach (var q in couponQualifications)
                     {
-                        foreach (var code in ((OrderHasCoupon) q).CurrentCoupons())
+                        foreach (var code in q.CurrentCoupons())
                         {
-                            if (!codes.Contains(code.ToUpperInvariant()))
-                            {
-                                codes.Add(code.ToUpperInvariant());
-                            }
+                            // HashSet automatically handles duplicates
+                            codesSet.Add(code);
                         }
                     }
                 }
             }
-            return codes;
+
+            // Return as list, maintaining uppercase normalization for backwards compatibility
+            return codesSet.Select(c => c.ToUpperInvariant()).ToList();
         }
 
         // This is used to find a date range for when a coupon code might have been active
@@ -235,14 +242,31 @@ namespace Hotcakes.Commerce.Marketing
             var result = new PromotionRangeResult();
 
             var matchingPromos = FindPromotionsWithCouponCode(code);
-            if (matchingPromos == null) return result;
-            if (matchingPromos.Count < 1) return result;
+            if (matchingPromos == null || matchingPromos.Count < 1)
+            {
+                return result;
+            }
 
-            var startItem = matchingPromos.OrderBy(y => y.StartDateUtc).FirstOrDefault();
-            var endItem = matchingPromos.OrderByDescending(y => y.EndDateUtc).FirstOrDefault();
+            // Use single pass to find min and max dates instead of two separate LINQ queries
+            var firstPromo = matchingPromos[0];
+            var minStartDate = firstPromo.StartDateUtc;
+            var maxEndDate = firstPromo.EndDateUtc;
 
-            if (startItem != null) result.StartDateUtc = startItem.StartDateUtc;
-            if (endItem != null) result.EndDateUtc = endItem.EndDateUtc;
+            for (int i = 1; i < matchingPromos.Count; i++)
+            {
+                var promo = matchingPromos[i];
+                if (promo.StartDateUtc < minStartDate)
+                {
+                    minStartDate = promo.StartDateUtc;
+                }
+                if (promo.EndDateUtc > maxEndDate)
+                {
+                    maxEndDate = promo.EndDateUtc;
+                }
+            }
+
+            result.StartDateUtc = minStartDate;
+            result.EndDateUtc = maxEndDate;
 
             return result;
         }
@@ -262,11 +286,14 @@ namespace Hotcakes.Commerce.Marketing
         {
             var offers = Promotions.FindAllPotentiallyActive(DateTime.UtcNow, mode);
 
+            // Cache the property check to avoid repeated lookups during iteration
+            var hasNonSaleDiscounts = order.HasAnyNonSaleDiscounts;
+
             foreach (var offer in offers)
             {
                 // do not apply the offer if the current offer is marked as Do Not Combine, 
                 // and other offers appear to be applied already
-                if (offer.DoNotCombine && order.HasAnyNonSaleDiscounts) continue;
+                if (offer.DoNotCombine && hasNonSaleDiscounts) continue;
 
                 offer.ApplyToOrder(Context, order);
             }

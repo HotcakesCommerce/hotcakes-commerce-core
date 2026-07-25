@@ -807,7 +807,7 @@ namespace Hotcakes.Commerce.Orders
 				var query = strategy.GetQuery()
                         .AsNoTracking()
                         .Where(o => o.StoreId == Context.CurrentStore.Id)
-                        .Where(o => o.hcc_LineItem.Count() > 0)
+                        .Where(o => o.hcc_LineItem.Any())
                         .Where(o => o.TimeOfOrder > startDate)
                         .Where(o => o.TimeOfOrder < endDate)
                         .Where(o => o.hcc_OrderTransactions.Any(t => !t.Success))

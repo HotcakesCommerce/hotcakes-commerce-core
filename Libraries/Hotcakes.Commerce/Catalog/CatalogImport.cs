@@ -951,36 +951,37 @@ namespace Hotcakes.Commerce.Catalog
 				var isNew = opt == null;
                 var processedOptionItems = new List<string>();
 
+                var column = "E";
+                while (column.Length < 10)
+                {
+                    var choiceItem = GetCell(row, column);
+
+                    if (string.IsNullOrWhiteSpace(choiceItem))
+                    {
+                        break;
+                    }
+
+                    if (opt.OptionType == OptionTypes.Html)
+                    {
+                        opt.TextSettings.AddOrUpdate("html", choiceItem);
+                    }
+                    else
+                    {
+                        if (opt.Items.All(e => e.Name != choiceItem))
+                        {
+                            opt.AddItem(choiceItem);
+                        }
+                        processedOptionItems.Add(choiceItem);
+                    }
+
+                    column = GetNextColumn(column);
+                }
+
                 if (isNew)
 				{
                     opt = new Option {Name = choiceName, IsShared = shared};
                 
 				    opt.SetProcessor(optionType);
-                    var column = "E";
-				    while (column.Length < 10)
-				    {
-                        var choiceItem = GetCell(row, column);
-
-					    if (string.IsNullOrWhiteSpace(choiceItem))
-					    {
-						    break;
-					    }
-
-					    if (opt.OptionType == OptionTypes.Html)
-					    {
-						    opt.TextSettings.AddOrUpdate("html", choiceItem);
-					    }
-					    else
-					    {
-						    if (opt.Items.All(e => e.Name != choiceItem))
-						    {
-							    opt.AddItem(choiceItem);
-						    }
-						    processedOptionItems.Add(choiceItem);
-					    }
-
-					    column = GetNextColumn(column);
-				    }
 
                     _hccApp.CatalogServices.ProductOptions.Create(opt);
                     options = _hccApp.CatalogServices.ProductOptions.FindAll(0, int.MaxValue);

@@ -24,16 +24,10 @@
 
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
 using Hotcakes.Commerce.Accounts;
 using Hotcakes.Commerce.BusinessRules;
 using Hotcakes.Commerce.Data;
+using Hotcakes.Commerce.Data.EF;
 using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Marketing;
 using Hotcakes.Commerce.Marketing.PromotionActions;
@@ -44,6 +38,14 @@ using Hotcakes.Commerce.Taxes;
 using Hotcakes.Commerce.Taxes.Providers;
 using Hotcakes.Commerce.Utilities;
 using Hotcakes.Payment;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
 using Task = System.Threading.Tasks.Task;
 
 namespace Hotcakes.Commerce.Orders
@@ -75,20 +77,19 @@ namespace Hotcakes.Commerce.Orders
             get
             {
                 //we must check the HttpContext, otherwise this will fail during unit tests
-                if (HttpContext.Current != null)
+                var current = HttpContext.Current;
+                if (current != null)
                 {
-                    if (HttpContext.Current.Items["CurrentShoppingCart"] != null)
-                    {
-                        return (Order)HttpContext.Current.Items["CurrentShoppingCart"];
-                    }
+                    return current.Items["CurrentShoppingCart"] as Order;
                 }
                 return null;
             }
             set
             {
-                if (HttpContext.Current != null)
+                var current = HttpContext.Current;
+                if (current != null)
                 {
-                    HttpContext.Current.Items["CurrentShoppingCart"] = value;
+                    current.Items["CurrentShoppingCart"] = value;
                 }
             }
         }
@@ -116,17 +117,7 @@ namespace Hotcakes.Commerce.Orders
         // Shipping
         public Zone ShippingZoneFindInList(List<Zone> zones, long id)
         {
-            Zone result = null;
-
-            foreach (var z in zones)
-            {
-                if (z.Id == id)
-                {
-                    return z;
-                }
-            }
-
-            return result;
+            return zones.FirstOrDefault(z => z.Id == id);
         }
 
         public bool ShippingZoneAddArea(long zoneId, string countryIso3, string regionAbbreviation)
@@ -136,16 +127,7 @@ namespace Hotcakes.Commerce.Orders
             {
                 if (z.Id == zoneId)
                 {
-                    var exists = false;
-                    foreach (var a in z.Areas)
-                    {
-                        if (a.CountryIsoAlpha3 == countryIso3 &&
-                            a.RegionAbbreviation == regionAbbreviation)
-                        {
-                            exists = true;
-                            break;
-                        }
-                    }
+                    var exists = z.Areas.Any(a => a.CountryIsoAlpha3 == countryIso3 && a.RegionAbbreviation == regionAbbreviation);
                     if (!exists)
                     {
                         z.Areas.Add(new ZoneArea
@@ -167,16 +149,7 @@ namespace Hotcakes.Commerce.Orders
             {
                 if (z.Id == zoneId)
                 {
-                    ZoneArea located = null;
-                    foreach (var a in z.Areas)
-                    {
-                        if (a.CountryIsoAlpha3 == countryIso3 &&
-                            a.RegionAbbreviation == regionAbbreviation)
-                        {
-                            located = a;
-                            break;
-                        }
-                    }
+                    var located = z.Areas.FirstOrDefault(a => a.CountryIsoAlpha3 == countryIso3 && a.RegionAbbreviation == regionAbbreviation);
                     if (located != null)
                     {
                         if (z.Areas.Remove(located))
@@ -224,11 +197,10 @@ namespace Hotcakes.Commerce.Orders
             var shippingProviders = ShippingMethods.FindAll(order.StoreId);
             shippingProviders = shippingProviders.OrderBy(s => s.SortOrder).ToList();
             var subtotal = false;
-            var rates = ratesSort.ToList();
 
             foreach (var method in shippingProviders)
             {
-                var filteredrates = rates.Where(r => r.ShippingMethodId == method.Bvin).ToList();
+                var filteredrates = ratesSort.ToList().Where(r => r.ShippingMethodId == method.Bvin).ToList();
 
                 foreach (var rate in filteredrates)
                 {
@@ -312,6 +284,11 @@ namespace Hotcakes.Commerce.Orders
 
         public string OrdersListPaymentMethods(List<OrderTransaction> transactions)
         {
+            if (transactions == null || transactions.Count == 0)
+            {
+                return "No Payment Methods Selected";
+            }
+
             var found = false;
             var sb = new StringBuilder();
 
@@ -499,18 +476,15 @@ namespace Hotcakes.Commerce.Orders
 
         public bool OrdersRequestShippingMethodByUniqueKey(string rateUniqueKey, Order o)
         {
-            var result = false;
-
             var rates = FindAvailableShippingRates(o);
-            foreach (ShippingRateDisplay r in rates)
+            var matchingRate = rates.OfType<ShippingRateDisplay>().FirstOrDefault(r => r.UniqueKey == rateUniqueKey);
+
+            if (matchingRate != null)
             {
-                if (r.UniqueKey == rateUniqueKey)
-                {
-                    return OrdersRequestShippingMethod(r, o);
-                }
+                return OrdersRequestShippingMethod(matchingRate, o);
             }
 
-            return result;
+            return false;
         }
 
         public bool OrdersDelete(string orderBvin, HotcakesApplication app)
@@ -548,7 +522,7 @@ namespace Hotcakes.Commerce.Orders
 
         public int GenerateNewOrderNumber(long storeId)
         {
-            using (var context = Factory.CreateHccDbContext())
+            using (HccDbContext context = Factory.CreateHccDbContext())
             {
                 var results = context.GenerateNewOrderNumber(storeId);
                 if (results != null)
@@ -684,51 +658,65 @@ namespace Hotcakes.Commerce.Orders
         /// <returns></returns>
         private bool CheckItemExistInOrder(Order order, LineItem listItem)
         {
-            var result = false;
-
             var productInCartList = order.Items.Where(i => i.ProductId == listItem.ProductId).ToList();
-            if (productInCartList != null && productInCartList.Any())
+            if (productInCartList == null || !productInCartList.Any())
             {
-                foreach (var productInCart in productInCartList)
+                return false;
+            }
+
+            // Pre-compute comparison values to avoid repeated operations
+            var itemSelectionData = listItem.SelectionData;
+            var isGiftCard = listItem.IsGiftCard;
+            var isUserSuppliedPrice = listItem.IsUserSuppliedPrice;
+
+            // Cache string comparisons for gift cards
+            string giftCardEmailLower = null;
+            string giftCardNameLower = null;
+            string giftCardMessageLower = null;
+
+            if (isGiftCard)
+            {
+                giftCardEmailLower = listItem.CustomPropGiftCardEmail?.Trim().ToLower();
+                giftCardNameLower = listItem.CustomPropGiftCardName?.Trim().ToLower();
+                giftCardMessageLower = listItem.CustomPropGiftCardMessage?.Trim().ToLower();
+            }
+
+            foreach (var productInCart in productInCartList)
+            {
+                var areEqual = itemSelectionData.Equals(productInCart.SelectionData);
+                if (!areEqual)
                 {
-                    var areEqual = listItem.SelectionData.Equals(productInCart.SelectionData);
-                    if (areEqual)
+                    continue;
+                }
+
+                if (isGiftCard)
+                {
+                    if (productInCart.BasePricePerItem == listItem.BasePricePerItem
+                        && string.Equals(productInCart.CustomPropGiftCardEmail?.Trim(), giftCardEmailLower, StringComparison.OrdinalIgnoreCase)
+                        && string.Equals(productInCart.CustomPropGiftCardName?.Trim(), giftCardNameLower, StringComparison.OrdinalIgnoreCase)
+                        && string.Equals(productInCart.CustomPropGiftCardMessage?.Trim(), giftCardMessageLower, StringComparison.OrdinalIgnoreCase))
                     {
-                        if (listItem.IsGiftCard)
-                        {
-                            if (productInCart.BasePricePerItem == listItem.BasePricePerItem
-                                &&
-                                productInCart.CustomPropGiftCardEmail.Trim().ToLower() ==
-                                listItem.CustomPropGiftCardEmail.Trim().ToLower()
-                                &&
-                                productInCart.CustomPropGiftCardName.Trim().ToLower() ==
-                                listItem.CustomPropGiftCardName.Trim().ToLower()
-                                &&
-                                productInCart.CustomPropGiftCardMessage.Trim().ToLower() ==
-                                listItem.CustomPropGiftCardMessage.Trim().ToLower())
-                            {
-                                productInCart.Quantity += listItem.Quantity;
-                                result = true;
-                            }
-                        }
-                        else if (listItem.IsUserSuppliedPrice)
-                        {
-                            if (productInCart.BasePricePerItem == listItem.BasePricePerItem)
-                            {
-                                productInCart.Quantity += listItem.Quantity;
-                                result = true;
-                            }
-                        }
-                        else
-                        {
-                            productInCart.Quantity += listItem.Quantity;
-                            productInCart.IsUpchargeAllowed = listItem.IsUpchargeAllowed;
-                            result = true;
-                        }
+                        productInCart.Quantity += listItem.Quantity;
+                        return true;
                     }
                 }
+                else if (isUserSuppliedPrice)
+                {
+                    if (productInCart.BasePricePerItem == listItem.BasePricePerItem)
+                    {
+                        productInCart.Quantity += listItem.Quantity;
+                        return true;
+                    }
+                }
+                else
+                {
+                    productInCart.Quantity += listItem.Quantity;
+                    productInCart.IsUpchargeAllowed = listItem.IsUpchargeAllowed;
+                    return true;
+                }
             }
-            return result;
+
+            return false;
         }
 
         private SortableCollection<ShippingRateDisplay> FindAvailableShippingRatesInternal(Order order,
@@ -775,14 +763,22 @@ namespace Hotcakes.Commerce.Orders
                 }
             }
 
-            // Update results with extra ship fees and handling
+            // Pre-calculate order totals and cache them
+            var orderTotalHandling = order.TotalHandling;
+            var hasAnyNonSaleDiscounts = order.HasAnyNonSaleDiscounts;
+            var orderItemsCount = order.Items.Count;
+            var isOrderAllItemsFreeShipping = order.IsOrderHasAllItemsQualifiedFreeShipping();
+
+            // Update results with extra ship fees and handling - Single pass optimization
             foreach (ShippingRateDisplay displayRate in result)
             {
                 // Tally up extra ship fees
                 var totalExtraFees = 0m;
+                var shippingMethodId = displayRate.ShippingMethodId;
+
                 foreach (var li in order.Items)
                 {
-                    if (li.ExtraShipCharge > 0 && !li.MarkedForFreeShipping(displayRate.ShippingMethodId) &&
+                    if (li.ExtraShipCharge > 0 && !li.MarkedForFreeShipping(shippingMethodId) &&
                         li.ShippingCharge == ShippingChargeType.ChargeShippingAndHandling ||
                         li.ShippingCharge == ShippingChargeType.ChargeShipping)
                     {
@@ -790,9 +786,8 @@ namespace Hotcakes.Commerce.Orders
                     }
                 }
 
-                displayRate.Rate += totalExtraFees + order.TotalHandling;
+                displayRate.Rate += totalExtraFees + orderTotalHandling;
             }
-
 
             // Apply promotions to rates here
             var membershipServices = Factory.CreateService<MembershipServices>();
@@ -804,11 +799,12 @@ namespace Hotcakes.Commerce.Orders
             var offers = marketingServices.Promotions.FindAllPotentiallyActive(DateTime.UtcNow,
                 PromotionType.OfferForShipping);
 
+            // Apply shipping offers
             foreach (ShippingRateDisplay displayRate in result)
             {
                 foreach (var offer in offers)
                 {
-                    if (offer.DoNotCombine && order.HasAnyNonSaleDiscounts) continue;
+                    if (offer.DoNotCombine && hasAnyNonSaleDiscounts) continue;
 
                     var newRate = offer.ApplyToShippingRate(Context, order, currentUser, displayRate.ShippingMethodId,
                         displayRate.Rate);
@@ -816,18 +812,33 @@ namespace Hotcakes.Commerce.Orders
                     if (newRate < displayRate.Rate)
                     {
                         var discount = -1 * (newRate - displayRate.Rate);
-
                         displayRate.PotentialDiscount = discount;
                     }
                 }
             }
 
             //Changes to have free shipping available for single item in cart by promotion set for "Order Items" - 9May2016-Tushar
-
             var offersForLineItems = marketingServices.Promotions.FindAllPotentiallyActive(DateTime.UtcNow,
                 PromotionType.OfferForLineItems);
+
+            // Cache free shipping action lookup
+            var freeShippingOffers = new Dictionary<string, List<IPromotionAction>>();
+            foreach (var offer in offersForLineItems)
+            {
+                var freeShippingActions = offer.Actions.Where(
+                    p => p.TypeId.ToString() == LineItemFreeShipping.TypeIdString &&
+                         p.Settings.ContainsKey("methodids")).ToList();
+
+                if (freeShippingActions.Any())
+                {
+                    freeShippingOffers[offer.Id.ToString()] = freeShippingActions;
+                }
+            }
+
             foreach (ShippingRateDisplay displayRate in result)
             {
+                var shippingMethodIdUpper = displayRate.ShippingMethodId.ToUpperInvariant();
+
                 foreach (var offer in offersForLineItems)
                 {
                     var context = new PromotionContext(Context, PromotionType.OfferForLineItems, offer.Id)
@@ -837,23 +848,22 @@ namespace Hotcakes.Commerce.Orders
                         CustomerDescription = offer.CustomerDescription,
                         CurrentShippingMethodId = displayRate.ShippingMethodId,
                         AdjustedShippingRate = displayRate.Rate,
-                        OtherOffersApplied = order.HasAnyNonSaleDiscounts
+                        OtherOffersApplied = hasAnyNonSaleDiscounts
                     };
 
                     var isQualified = offer.ApplyForFreeShipping(context);
-                    if (order.Items.Count == 1 || order.IsOrderHasAllItemsQualifiedFreeShipping())
+                    if (orderItemsCount == 1 || isOrderAllItemsFreeShipping)
                     {
-                        var isFreeShippingAction =
-                            offer.Actions.Where(
-                                p =>
-                                    p.TypeId.ToString() == LineItemFreeShipping.TypeIdString &&
-                                    p.Settings.ContainsKey("methodids") &&
-                                    p.Settings["methodids"].ToUpperInvariant()
-                                        .Contains(displayRate.ShippingMethodId.ToUpperInvariant())).ToList();
-
-                        if (isFreeShippingAction.Count > 0 && isQualified)
+                        var offerId = offer.Id.ToString();
+                        if (freeShippingOffers.ContainsKey(offerId))
                         {
-                            displayRate.PotentialDiscount = displayRate.Rate;
+                            var isFreeShippingAction = freeShippingOffers[offerId].Any(
+                                p => p.Settings["methodids"].ToUpperInvariant().Contains(shippingMethodIdUpper));
+
+                            if (isFreeShippingAction && isQualified)
+                            {
+                                displayRate.PotentialDiscount = displayRate.Rate;
+                            }
                         }
                     }
                 }
@@ -869,10 +879,10 @@ namespace Hotcakes.Commerce.Orders
             {
                 if (order.IsOrderFreeShipping())
                 {
-                    var rateName = order.TotalHandling > 0
+                    var rateName = orderTotalHandling > 0
                         ? GlobalLocalization.GetString("Handling")
                         : GlobalLocalization.GetString("FreeShipping");
-                    result.Add(new ShippingRateDisplay(rateName, "", "", order.TotalHandling,
+                    result.Add(new ShippingRateDisplay(rateName, "", "", orderTotalHandling,
                         ShippingMethod.MethodFreeShipping));
                 }
                 else
@@ -909,7 +919,7 @@ namespace Hotcakes.Commerce.Orders
 
         public bool RemoveAllOrders(long storeId)
         {
-            using (var db = Factory.CreateHccDbContext())
+            using (HccDbContext db = Factory.CreateHccDbContext())
             {
                 db.DeleteStoreOrders(storeId);
             }
