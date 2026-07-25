@@ -56,7 +56,7 @@ namespace Hotcakes.Commerce.Orders
 
         protected override Func<hcc_LineItem, bool> NotMatchItems(List<LineItem> items)
         {
-            var itemIds = items.Select(i => i.Id).ToList();
+            var itemIds = new HashSet<long>(items.Select(i => i.Id));
             return li => !itemIds.Contains(li.Id);
         }
 
@@ -70,7 +70,7 @@ namespace Hotcakes.Commerce.Orders
             model.CustomPropertySet(Constants.HCC_KEY, MARKEDFREESHIPPING, model.IsMarkedForFreeShipping.ToString());
             model.CustomPropertySet(Constants.HCC_KEY, ISTAXEXEMPT, model.IsTaxExempt);
             model.CustomPropertySet(Constants.HCC_KEY, FREESHIPPINGIDS,
-                string.Join(",", model.FreeShippingMethodIds.ToArray()));
+                string.Join(",", model.FreeShippingMethodIds));
             data.CustomProperties = model.CustomPropertiesToXml();
             data.DiscountDetails = DiscountDetail.ListToXml(model.DiscountDetails);
             data.LastUpdated = model.LastUpdatedUtc;
@@ -100,15 +100,15 @@ namespace Hotcakes.Commerce.Orders
             data.TaxScheduleId = model.TaxSchedule;
             data.VariantId = model.VariantId;
             data.ShipFromAddress = model.ShipFromAddress.ToXml(true);
-            data.ShipFromMode = (int) model.ShipFromMode;
+            data.ShipFromMode = (int)model.ShipFromMode;
             data.ShipFromNotificationId = model.ShipFromNotificationId;
             data.ExtraShipCharge = model.ExtraShipCharge;
-            data.ShippingCharge = (int) model.ShippingCharge;
+            data.ShippingCharge = (int)model.ShippingCharge;
             data.IsBundle = model.IsBundle;
             data.QuantityReserved = model.QuantityReserved;
             data.IsRecurring = model.IsRecurring;
             data.RecurringInterval = model.RecurringBilling.Interval;
-            data.RecurringIntervalType = (int) model.RecurringBilling.IntervalType;
+            data.RecurringIntervalType = (int)model.RecurringBilling.IntervalType;
             data.IsRecurringCancelled = model.RecurringBilling.IsCancelled;
             data.PromotionIds = model.PromotionIds;
             data.FreeQuantity = model.FreeQuantity;
@@ -140,7 +140,7 @@ namespace Hotcakes.Commerce.Orders
             model.QuantityShipped = data.QuantityShipped;
             model.SelectionData.DeserializeFromXml(data.SelectionData);
             model.ShippingPortion = data.ShippingPortion;
-            model.IsNonShipping = data.IsNonShipping == 1 ? true : false;
+            model.IsNonShipping = data.IsNonShipping == 1;
             model.StatusCode = data.StatusCode;
             model.StatusName = data.StatusName;
             model.StoreId = data.StoreId;
@@ -150,40 +150,40 @@ namespace Hotcakes.Commerce.Orders
             model.TaxSchedule = data.TaxScheduleId;
             model.VariantId = data.VariantId;
             model.ShipFromAddress.FromXmlString(data.ShipFromAddress);
-            model.ShipFromMode = (ShippingMode) data.ShipFromMode;
+            model.ShipFromMode = (ShippingMode)data.ShipFromMode;
             model.ShipFromNotificationId = data.ShipFromNotificationId;
             model.ExtraShipCharge = data.ExtraShipCharge;
-            model.ShippingCharge = (ShippingChargeType) data.ShippingCharge;
+            model.ShippingCharge = (ShippingChargeType)data.ShippingCharge;
             model.ShipSeparately = data.ShipSeparately;
             model.IsBundle = data.IsBundle;
             model.QuantityReserved = data.QuantityReserved;
             model.IsRecurring = data.IsRecurring;
             model.RecurringBilling.Interval = data.RecurringInterval ?? 0;
-            model.RecurringBilling.IntervalType = (RecurringIntervalType) (data.RecurringIntervalType ?? 0);
+            model.RecurringBilling.IntervalType = (RecurringIntervalType)(data.RecurringIntervalType ?? 0);
             model.RecurringBilling.IsCancelled = data.IsRecurringCancelled;
             model.PromotionIds = data.PromotionIds;
             model.FreeQuantity = data.FreeQuantity;
             model.IsUpchargeAllowed = data.IsUpchargeAllowed;
 
-            if (model.CustomPropertyGet(Constants.HCC_KEY, MARKEDFREESHIPPING) == true.ToString())
-            {
-                model.IsMarkedForFreeShipping = true;
-            }
-            else
-            {
-                model.IsMarkedForFreeShipping = false;
-            }
+            var markedFreeShipping = model.CustomPropertyGet(Constants.HCC_KEY, MARKEDFREESHIPPING);
+            model.IsMarkedForFreeShipping = bool.TryParse(markedFreeShipping, out var isFreeShipping) && isFreeShipping;
+
             model.IsTaxExempt = model.CustomPropertyGetAsBool(Constants.HCC_KEY, ISTAXEXEMPT);
 
             // Free Shipping Method Ids
             var freeshippingids = model.CustomPropertyGet(Constants.HCC_KEY, FREESHIPPINGIDS);
-            if (freeshippingids.Trim().Length > 0)
+            if (!string.IsNullOrWhiteSpace(freeshippingids))
             {
                 var methods = freeshippingids.Split(',');
-                foreach (var methodId in methods)
+                var methodCount = methods.Length;
+                for (var i = 0; i < methodCount; i++)
                 {
-                    //Always add method id as upper invariant to avoid issue on comparision
-                    model.FreeShippingMethodIds.Add(methodId.ToUpperInvariant());
+                    var methodId = methods[i];
+                    if (!string.IsNullOrWhiteSpace(methodId))
+                    {
+                        //Always add method id as upper invariant to avoid issue on comparision
+                        model.FreeShippingMethodIds.Add(methodId.ToUpperInvariant());
+                    }
                 }
             }
         }
@@ -211,7 +211,7 @@ namespace Hotcakes.Commerce.Orders
 
         public List<LineItem> FindForOrders(List<string> bvins)
         {
-            var guids = bvins.Select(b => DataTypeHelper.BvinToGuid(b)).ToList();
+            var guids = new HashSet<Guid>(bvins.Select(b => DataTypeHelper.BvinToGuid(b)));
             return FindListPoco(q =>
             {
                 return q.Where(y => guids.Contains(y.OrderBvin))
@@ -248,13 +248,13 @@ namespace Hotcakes.Commerce.Orders
             using (var s = CreateReadStrategy())
             {
                 var query = from lineitems in s.GetQuery()
-                    where lineitems.StoreId == storeId &&
-                          lineitems.hcc_Order.TimeOfOrder >= startDateUtc &&
-                          lineitems.hcc_Order.TimeOfOrder <= endDateUtc
-                    group lineitems by lineitems.ProductId
+                            where lineitems.StoreId == storeId &&
+                                  lineitems.hcc_Order.TimeOfOrder >= startDateUtc &&
+                                  lineitems.hcc_Order.TimeOfOrder <= endDateUtc
+                            group lineitems by lineitems.ProductId
                     into groupedItems
-                    orderby groupedItems.Sum(y => y.Quantity) descending
-                    select new {ProductId = groupedItems.Key, Quantity = groupedItems.Sum(y => y.Quantity)};
+                            orderby groupedItems.Sum(y => y.Quantity) descending
+                            select new { ProductId = groupedItems.Key, Quantity = groupedItems.Sum(y => y.Quantity) };
 
                 var query2 = query.Take(maxItems).AsNoTracking().ToList();
                 foreach (var popular in query2)

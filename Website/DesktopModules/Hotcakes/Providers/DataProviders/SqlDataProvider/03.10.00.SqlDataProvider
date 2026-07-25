@@ -1,0 +1,101 @@
+﻿-- Add BGD to DisabledCountryIso3Codes for all existing stores
+DECLARE @StoreId BIGINT;
+
+-- Cursor to iterate through all Store Ids
+DECLARE StoreCursor CURSOR FOR
+SELECT Id FROM dbo.[hcc_Stores];
+
+OPEN StoreCursor;
+
+FETCH NEXT FROM StoreCursor INTO @StoreId;
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    -- Check if the record exists for the current StoreId
+    IF EXISTS (SELECT 1 FROM dbo.[hcc_StoreSettings] WHERE SettingName = 'DisabledCountryIso3Codes' AND StoreId = @StoreId)
+    BEGIN
+        -- Update the existing record
+        UPDATE dbo.[hcc_StoreSettings]
+        SET SettingValue = 
+            CASE 
+                WHEN CHARINDEX('BGD', SettingValue) = 0 THEN SettingValue + ',BGD'
+                ELSE SettingValue
+            END
+        WHERE SettingName = 'DisabledCountryIso3Codes' AND StoreId = @StoreId;
+    END
+    ELSE
+    BEGIN
+        -- Insert a new record for the current StoreId
+        INSERT INTO dbo.[hcc_StoreSettings] (StoreId, SettingName, SettingValue)
+        VALUES (@StoreId, 'DisabledCountryIso3Codes', 'BGD');
+    END;
+
+    -- Fetch the next StoreId
+    FETCH NEXT FROM StoreCursor INTO @StoreId;
+END;
+
+-- Close and deallocate the cursor
+CLOSE StoreCursor;
+DEALLOCATE StoreCursor;
+
+GO
+
+-- Supports analytics lookups by browser session.
+IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AnalyticsEvents]', N'U') IS NOT NULL
+    AND NOT EXISTS
+    (
+        SELECT 1
+        FROM sys.indexes
+        WHERE [object_id] = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AnalyticsEvents]')
+          AND [name] = N'IX_hcc_AnalyticsEvents_SessionGuid'
+    )
+BEGIN
+    CREATE NONCLUSTERED INDEX [IX_hcc_AnalyticsEvents_SessionGuid]
+        ON {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents] ([SessionGuid]);
+END;
+GO
+
+-- Supports analytics lookup and deletion by customer.
+IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AnalyticsEvents]', N'U') IS NOT NULL
+    AND NOT EXISTS
+    (
+        SELECT 1
+        FROM sys.indexes
+        WHERE [object_id] = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_AnalyticsEvents]')
+          AND [name] = N'IX_hcc_AnalyticsEvents_UserId'
+    )
+BEGIN
+    CREATE NONCLUSTERED INDEX [IX_hcc_AnalyticsEvents_UserId]
+        ON {databaseOwner}[{objectQualifier}hcc_AnalyticsEvents] ([UserId]);
+END;
+GO
+
+-- Supports store-scoped order searches, counts, and date sorting.
+IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Order]', N'U') IS NOT NULL
+    AND NOT EXISTS
+    (
+        SELECT 1
+        FROM sys.indexes
+        WHERE [object_id] = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Order]')
+          AND [name] = N'IX_hcc_Order_StoreId_TimeOfOrder'
+    )
+BEGIN
+    CREATE NONCLUSTERED INDEX [IX_hcc_Order_StoreId_TimeOfOrder]
+        ON {databaseOwner}[{objectQualifier}hcc_Order] ([StoreId], [TimeOfOrder]);
+END;
+GO
+
+-- Supports active/abandoned cart and placed-order date scans.
+IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Order]', N'U') IS NOT NULL
+    AND NOT EXISTS
+    (
+        SELECT 1
+        FROM sys.indexes
+        WHERE [object_id] = OBJECT_ID(N'{databaseOwner}[{objectQualifier}hcc_Order]')
+          AND [name] = N'IX_hcc_Order_StoreId_IsPlaced_TimeOfOrder'
+    )
+BEGIN
+    CREATE NONCLUSTERED INDEX [IX_hcc_Order_StoreId_IsPlaced_TimeOfOrder]
+        ON {databaseOwner}[{objectQualifier}hcc_Order] ([StoreId], [IsPlaced], [TimeOfOrder]);
+END;
+GO
