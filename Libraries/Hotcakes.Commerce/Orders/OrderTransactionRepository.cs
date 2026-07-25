@@ -170,7 +170,7 @@ namespace Hotcakes.Commerce.Orders
 		public List<OrderTransaction> FindForOrder(string orderId, ActionType byAction = ActionType.Unknown)
 		{
 			var orderGuid = DataTypeHelper.BvinToGuid(orderId);
-			return FindListPoco(q =>
+			return FindListPocoMainInstance(q =>
 			{
 				var query = q.Where(y => y.OrderId == orderGuid);
 				if (byAction != ActionType.Unknown)

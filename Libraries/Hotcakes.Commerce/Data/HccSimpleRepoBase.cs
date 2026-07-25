@@ -290,6 +290,16 @@ namespace Hotcakes.Commerce.Data
             GetSubItems(model);
             return model;
         }
+        
+        protected virtual List<V> FindListPocoMainInstance(Func<IQueryable<T>, IQueryable<T>> processQuery)
+        {
+            using (var s = CreateStrategy())
+            {
+                var items = processQuery(s.GetQuery().AsNoTracking()).ToList();
+                return ListPoco(items);
+            }
+            ;
+        }
 
         protected virtual List<V> FindListPoco(Func<IQueryable<T>, IQueryable<T>> processQuery)
         {

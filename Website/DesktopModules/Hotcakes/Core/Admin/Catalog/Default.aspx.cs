@@ -111,9 +111,9 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
             {
                 var conf = objConfiguration as ExportConfiguration;
 
+                Factory.HttpContext = conf.HttpContext;
                 HccRequestContext.Current = conf.HccRequestContext;
                 DnnGlobal.SetPortalSettings(conf.DnnPortalSettings);
-                Factory.HttpContext = conf.HttpContext;
                 CultureSwitch.SetCulture(HccApp.CurrentStore, conf.DnnPortalSettings);
 
                 var products = HccApp.CatalogServices.Products.FindByCriteria(conf.Criteria, 1, int.MaxValue,
