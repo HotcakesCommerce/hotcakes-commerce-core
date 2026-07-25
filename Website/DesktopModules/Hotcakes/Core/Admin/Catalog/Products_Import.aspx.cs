@@ -127,13 +127,24 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 			HccRequestContext.Current = conf.HccRequestContext;
 			DnnGlobal.SetPortalSettings(conf.DnnPortalSettings);
 			Factory.HttpContext = conf.HttpContext;
-			CultureSwitch.SetCulture(HccApp.CurrentStore, conf.DnnPortalSettings);
+
+            var hccRequestContext = new HccRequestContext
+            {
+                CurrentStore = conf.HccRequestContext.CurrentStore, 
+                MainContentCulture = System.Globalization.CultureInfo.CurrentCulture.Name,
+                FallbackContentCulture = "en-US",
+                CurrentAccount = conf.HccRequestContext.CurrentAccount,
+                RoutingContext = conf.HttpContext?.Request?.RequestContext,
+            };
+            HotcakesApplication hccApp = new HotcakesApplication(hccRequestContext);
+
+            CultureSwitch.SetCulture(hccApp.CurrentStore, conf.DnnPortalSettings);
 
 			var manager = new SessionManager(conf.Session);
 			manager.AdminProductImportLog = null;
 			manager.AdminProductImportProgress = 0;
 
-			var catImport = new CatalogImport(HccApp);
+			var catImport = new CatalogImport(hccApp);
 			catImport.UpdateExistingProducts = chkImportOverride.Checked;
 
             // added import path so version 2.xx knows where import images are stored
