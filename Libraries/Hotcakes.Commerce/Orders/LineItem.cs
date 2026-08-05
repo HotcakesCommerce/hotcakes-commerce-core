@@ -53,6 +53,11 @@ namespace Hotcakes.Commerce.Orders
     {
         private const string HCC_KEY = "hcc";
 
+        [NonSerialized]
+        private Dictionary<long, int> _cachedPromotionIds;
+        [NonSerialized]
+        private bool _promotionIdsCacheDirty = true;
+
         #region Constructor
 
         public LineItem()
@@ -237,7 +242,19 @@ namespace Hotcakes.Commerce.Orders
 
         /// <summary>
         /// </summary>
-        public string PromotionIds { get; set; }
+        private string _promotionIds;
+        public string PromotionIds
+        {
+            get { return _promotionIds; }
+            set
+            {
+                if (_promotionIds != value)
+                {
+                    _promotionIds = value;
+                    _promotionIdsCacheDirty = true;
+                }
+            }
+        }
 
         public bool IsUpchargeAllowed { get; set; }
 
@@ -429,9 +446,15 @@ namespace Hotcakes.Commerce.Orders
         {
             get
             {
-                if (DiscountDetails == null)
+                if (DiscountDetails == null || DiscountDetails.Count == 0)
                     return false;
-                return DiscountDetails.Count(d => d.Amount != 0) > 0;
+
+                for (int i = 0; i < DiscountDetails.Count; i++)
+                {
+                    if (DiscountDetails[i].Amount != 0)
+                        return true;
+                }
+                return false;
             }
         }
 
@@ -439,7 +462,8 @@ namespace Hotcakes.Commerce.Orders
         /// <summary>
         ///     Returns true if there are any upcharge that have been applied to this line item.
         /// </summary>
-        public bool HasAnyUpcharge {
+        public bool HasAnyUpcharge
+        {
             get
             {
                 if (TotalUpcharge() < 0)
@@ -457,18 +481,17 @@ namespace Hotcakes.Commerce.Orders
             {
                 if (DiscountDetails == null || DiscountDetails.Count == 0) return false;
 
-                // if this routine is changed, all marketing promotions & promo combinations should be retested
-                // why is there a comparison for (Amount != 0) ? - Will
-
-                var count = 0;
-
-                count =
-                    DiscountDetails.Count(
-                        d =>
-                            d.DiscountType != PromotionType.Sale && d.Amount != 0 &&
-                            d.DiscountType != PromotionType.VolumeDiscount);
-
-                return count > 0;
+                for (int i = 0; i < DiscountDetails.Count; i++)
+                {
+                    var d = DiscountDetails[i];
+                    if (d.DiscountType != PromotionType.Sale &&
+                        d.Amount != 0 &&
+                        d.DiscountType != PromotionType.VolumeDiscount)
+                    {
+                        return true;
+                    }
+                }
+                return false;
             }
         }
 
@@ -484,8 +507,14 @@ namespace Hotcakes.Commerce.Orders
 
                 var b = LineTotalWithoutDiscounts;
 
-                var saleDiscounts = DiscountDetails.Where(y => y.DiscountType == PromotionType.Sale);
-                var saleDiscountAmounts = saleDiscounts.Sum(y => y.Amount);
+                decimal saleDiscountAmounts = 0;
+                for (int i = 0; i < DiscountDetails.Count; i++)
+                {
+                    if (DiscountDetails[i].DiscountType == PromotionType.Sale)
+                    {
+                        saleDiscountAmounts += DiscountDetails[i].Amount;
+                    }
+                }
                 return b + saleDiscountAmounts;
             }
         }
@@ -495,7 +524,7 @@ namespace Hotcakes.Commerce.Orders
         /// </summary>
         public decimal LineTotalWithoutDiscounts
         {
-            get { return BasePricePerItem*Quantity; }
+            get { return BasePricePerItem * Quantity; }
         }
 
         /// <summary>
@@ -566,9 +595,25 @@ namespace Hotcakes.Commerce.Orders
             if (DiscountDetails == null || DiscountDetails.Count < 1)
                 return 0;
 
-            return IsFreeItem
-                ? DiscountDetails.Where(s => s.DiscountType == PromotionType.OfferForFreeItems).Sum(y => y.Amount)
-                : DiscountDetails.Sum(y => y.Amount);
+            decimal total = 0;
+            if (IsFreeItem)
+            {
+                for (int i = 0; i < DiscountDetails.Count; i++)
+                {
+                    if (DiscountDetails[i].DiscountType == PromotionType.OfferForFreeItems)
+                    {
+                        total += DiscountDetails[i].Amount;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < DiscountDetails.Count; i++)
+                {
+                    total += DiscountDetails[i].Amount;
+                }
+            }
+            return total;
         }
 
         /// <summary>
@@ -589,7 +634,7 @@ namespace Hotcakes.Commerce.Orders
                 if (RecurringBilling.IsCancelled)
                     return OrderShippingStatus.NonShipping;
 
-                var packagesSent = QuantityShipped/Quantity;
+                var packagesSent = QuantityShipped / Quantity;
 
                 var coverredDate = RecurringCoverage(timeofOrder, packagesSent);
                 var now = DateTime.UtcNow;
@@ -601,7 +646,7 @@ namespace Hotcakes.Commerce.Orders
                 coverredDate = RecurringCoverage(timeofOrder, packagesSent + 1);
                 if (coverredDate >= now)
                 {
-                    if (QuantityShipped%Quantity != 0)
+                    if (QuantityShipped % Quantity != 0)
                         return OrderShippingStatus.PartiallyShipped;
                     return OrderShippingStatus.Unshipped;
                 }
@@ -624,10 +669,10 @@ namespace Hotcakes.Commerce.Orders
             switch (RecurringBilling.IntervalType)
             {
                 case RecurringIntervalType.Days:
-                    coverredDate = startDate.AddDays(RecurringBilling.Interval*recurCount);
+                    coverredDate = startDate.AddDays(RecurringBilling.Interval * recurCount);
                     break;
                 case RecurringIntervalType.Months:
-                    coverredDate = startDate.AddMonths(RecurringBilling.Interval*recurCount);
+                    coverredDate = startDate.AddMonths(RecurringBilling.Interval * recurCount);
                     break;
                 default:
                     throw new Exception("RecurringIntervalType is not supported");
@@ -639,7 +684,7 @@ namespace Hotcakes.Commerce.Orders
         {
             if (startDate > endDate)
                 throw new ArgumentException("startDate have to less than endDate");
-            for (var i = 1;; i++)
+            for (var i = 1; ; i++)
             {
                 var coverredBy = RecurringCoverage(startDate, i);
                 if (coverredBy > endDate)
@@ -655,12 +700,14 @@ namespace Hotcakes.Commerce.Orders
         {
             if (DiscountDetails == null) return string.Empty;
             if (DiscountDetails.Count < 1) return string.Empty;
-            var sb = new StringBuilder();
-            foreach (var d in DiscountDetails)
+
+            var sb = new StringBuilder(DiscountDetails.Count * 80);
+            for (int i = 0; i < DiscountDetails.Count; i++)
             {
+                var d = DiscountDetails[i];
                 if (d.Amount != 0)
                 {
-                    sb.Append(d.Description + " " + d.Amount.ToString("c") + "<br />");
+                    sb.Append(d.Description).Append(" ").Append(d.Amount.ToString("c")).Append("<br />");
                 }
             }
             return sb.ToString();
@@ -672,7 +719,7 @@ namespace Hotcakes.Commerce.Orders
         /// <returns>String - an HTML version of the line items for display to the merchant.</returns>
         public string UpchargeDetailsAsHtml()
         {
-            var sb = new StringBuilder();
+            var sb = new StringBuilder(100);
             sb.Append($"{GlobalLocalization.GetString("UpchargeAmount")} : ({TotalUpcharge():C})<br />");
             return sb.ToString();
         }
@@ -692,19 +739,17 @@ namespace Hotcakes.Commerce.Orders
         /// <returns>Boolean - if true, the requested custom property exists</returns>
         public bool CustomPropertyExists(string devId, string propertyKey)
         {
-            var result = false;
-            for (var i = 0; i <= CustomProperties.Count - 1; i++)
+            for (var i = 0; i < CustomProperties.Count; i++)
             {
-                if (CustomProperties[i].DeveloperId.Trim().ToLower() == devId.Trim().ToLower())
+                if (string.Equals(CustomProperties[i].DeveloperId.Trim(), devId.Trim(), StringComparison.OrdinalIgnoreCase))
                 {
-                    if (CustomProperties[i].Key.Trim().ToLower() == propertyKey.Trim().ToLower())
+                    if (string.Equals(CustomProperties[i].Key.Trim(), propertyKey.Trim(), StringComparison.OrdinalIgnoreCase))
                     {
-                        result = true;
-                        break;
+                        return true;
                     }
                 }
             }
-            return result;
+            return false;
         }
 
         /// <summary>
@@ -718,25 +763,19 @@ namespace Hotcakes.Commerce.Orders
         /// <param name="value">The value you wish to save for use later.</param>
         public void CustomPropertySet(string devId, string key, string value)
         {
-            var found = false;
-
-            for (var i = 0; i <= CustomProperties.Count - 1; i++)
+            for (var i = 0; i < CustomProperties.Count; i++)
             {
-                if (CustomProperties[i].DeveloperId.Trim().ToLower() == devId.Trim().ToLower())
+                if (string.Equals(CustomProperties[i].DeveloperId.Trim(), devId.Trim(), StringComparison.OrdinalIgnoreCase))
                 {
-                    if (CustomProperties[i].Key.Trim().ToLower() == key.Trim().ToLower())
+                    if (string.Equals(CustomProperties[i].Key.Trim(), key.Trim(), StringComparison.OrdinalIgnoreCase))
                     {
                         CustomProperties[i].Value = value;
-                        found = true;
-                        break;
+                        return;
                     }
                 }
             }
 
-            if (found == false)
-            {
-                CustomProperties.Add(new CustomProperty(devId, key, value));
-            }
+            CustomProperties.Add(new CustomProperty(devId, key, value));
         }
 
         /// <summary>
@@ -764,21 +803,18 @@ namespace Hotcakes.Commerce.Orders
         /// <returns>String - if found, a string version of the custom property value will be returned.</returns>
         public string CustomPropertyGet(string devId, string key)
         {
-            var result = string.Empty;
-
-            for (var i = 0; i <= CustomProperties.Count - 1; i++)
+            for (var i = 0; i < CustomProperties.Count; i++)
             {
-                if (CustomProperties[i].DeveloperId.Trim().ToLower() == devId.Trim().ToLower())
+                if (string.Equals(CustomProperties[i].DeveloperId.Trim(), devId.Trim(), StringComparison.OrdinalIgnoreCase))
                 {
-                    if (CustomProperties[i].Key.Trim().ToLower() == key.Trim().ToLower())
+                    if (string.Equals(CustomProperties[i].Key.Trim(), key.Trim(), StringComparison.OrdinalIgnoreCase))
                     {
-                        result = CustomProperties[i].Value;
-                        break;
+                        return CustomProperties[i].Value;
                     }
                 }
             }
 
-            return result;
+            return string.Empty;
         }
 
         /// <summary>
@@ -824,21 +860,18 @@ namespace Hotcakes.Commerce.Orders
         /// <returns>Boolean - if true, the custom property was found and successfully deleted.</returns>
         public bool CustomPropertyRemove(string devId, string key)
         {
-            var result = false;
-
-            for (var i = 0; i <= CustomProperties.Count - 1; i++)
+            for (var i = 0; i < CustomProperties.Count; i++)
             {
-                if (CustomProperties[i].DeveloperId.Trim().ToLower() == devId.Trim().ToLower())
+                if (string.Equals(CustomProperties[i].DeveloperId.Trim(), devId.Trim(), StringComparison.OrdinalIgnoreCase))
                 {
-                    if (CustomProperties[i].Key.Trim().ToLower() == key.Trim().ToLower())
+                    if (string.Equals(CustomProperties[i].Key.Trim(), key.Trim(), StringComparison.OrdinalIgnoreCase))
                     {
                         CustomProperties.Remove(CustomProperties[i]);
-                        result = true;
-                        break;
+                        return true;
                     }
                 }
             }
-            return result;
+            return false;
         }
 
         /// <summary>
@@ -878,7 +911,7 @@ namespace Hotcakes.Commerce.Orders
             {
                 var tr = new StringReader(data);
                 var xs = new XmlSerializer(CustomProperties.GetType());
-                CustomProperties = (CustomPropertyCollection) xs.Deserialize(tr);
+                CustomProperties = (CustomPropertyCollection)xs.Deserialize(tr);
                 if (CustomProperties != null)
                 {
                     result = true;
@@ -955,7 +988,7 @@ namespace Hotcakes.Commerce.Orders
         /// <returns>List of HtmlTemplateTag</returns>
         public List<HtmlTemplateTag> GetReplaceableTags(HccRequestContext context)
         {
-            var result = new List<HtmlTemplateTag>();
+            var result = new List<HtmlTemplateTag>(23);
             var culture = context.MainContentCulture;
             result.Add(new HtmlTemplateTag("[[LineItem.AdjustedPrice]]", HasAnyUpcharge ? (TotalUpcharge() + AdjustedPricePerItem).ToString("c") : AdjustedPricePerItem.ToString("c")));
             result.Add(new HtmlTemplateTag("[[LineItem.BasePrice]]", BasePricePerItem.ToString("c")));
@@ -1050,9 +1083,9 @@ namespace Hotcakes.Commerce.Orders
             result.ProductShippingWidth = ProductShippingWidth;
             result.ShipSeparately = ShipSeparately;
 
-            foreach (var y in CustomProperties)
+            for (int i = 0; i < CustomProperties.Count; i++)
             {
-                result.CustomProperties.Add(y.Clone());
+                result.CustomProperties.Add(CustomProperties[i].Clone());
             }
 
             if (copyId)
@@ -1063,111 +1096,107 @@ namespace Hotcakes.Commerce.Orders
             return result;
         }
 
-        public void AddPromotionId(long promotionId, int quantity)
+        private Dictionary<long, int> ParsePromotionIds()
         {
-            if (PromotionIds != null)
+            if (!_promotionIdsCacheDirty && _cachedPromotionIds != null)
             {
-                var list = PromotionIds.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList();
+                return _cachedPromotionIds;
+            }
 
-                var hash = new Dictionary<long, int>();
+            var hash = new Dictionary<long, int>();
+
+            if (!string.IsNullOrEmpty(PromotionIds))
+            {
+                var list = PromotionIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var item in list)
                 {
-                    var parts = item.Split(new[] {'='}, StringSplitOptions.RemoveEmptyEntries);
-
-                    hash.Add(long.Parse(parts[0]), int.Parse(parts[1]));
+                    var parts = item.Split(new[] { '=' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (parts.Length == 2)
+                    {
+                        long promotionId;
+                        int quantity;
+                        if (long.TryParse(parts[0], out promotionId) && int.TryParse(parts[1], out quantity))
+                        {
+                            hash[promotionId] = quantity;
+                        }
+                    }
                 }
+            }
 
-                if (hash.ContainsKey(promotionId))
-                {
-                    list.Remove(promotionId.ToString());
-                    hash[promotionId] = quantity;
-                }
-                else
-                {
-                    hash.Add(promotionId, quantity);
-                }
+            _cachedPromotionIds = hash;
+            _promotionIdsCacheDirty = false;
+            return hash;
+        }
 
-                PromotionIds = string.Join(",", hash.Select(h => h.Key.ToString() + "=" + h.Value.ToString()).ToList());
+        public void AddPromotionId(long promotionId, int quantity)
+        {
+            var hash = ParsePromotionIds();
 
-                FreeQuantity = hash.Sum(h => h.Value);
+            if (hash.ContainsKey(promotionId))
+            {
+                hash[promotionId] = quantity;
             }
             else
             {
-                PromotionIds += "," + promotionId + "=" + quantity;
-                FreeQuantity = quantity;
+                hash.Add(promotionId, quantity);
+            }
+
+            var sb = new StringBuilder(hash.Count * 20);
+            bool first = true;
+            foreach (var kvp in hash)
+            {
+                if (!first) sb.Append(',');
+                sb.Append(kvp.Key).Append('=').Append(kvp.Value);
+                first = false;
+            }
+
+            PromotionIds = sb.ToString();
+            FreeQuantity = 0;
+            foreach (var kvp in hash)
+            {
+                FreeQuantity += kvp.Value;
             }
         }
 
         public Dictionary<long, int> GetFreePromotions()
         {
-            if (PromotionIds == null)
-            {
-                return new Dictionary<long, int>();
-            }
-
-            var list = PromotionIds.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList();
-
-            var hash = new Dictionary<long, int>();
-
-            foreach (var item in list)
-            {
-                var parts = item.Split(new[] {'='}, StringSplitOptions.RemoveEmptyEntries);
-
-                hash.Add(long.Parse(parts[0]), int.Parse(parts[1]));
-            }
-
-            return hash;
+            return new Dictionary<long, int>(ParsePromotionIds());
         }
 
         public int GetFreeCountByPromotionId(long promotionId)
         {
-            if (PromotionIds == null)
+            var hash = ParsePromotionIds();
+
+            int value;
+            if (hash.TryGetValue(promotionId, out value))
             {
-                return -1;
-            }
-
-            var list = PromotionIds.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList();
-
-            var hash = new Dictionary<long, int>();
-
-            foreach (var item in list)
-            {
-                var parts = item.Split(new[] {'='}, StringSplitOptions.RemoveEmptyEntries);
-
-                hash.Add(long.Parse(parts[0]), int.Parse(parts[1]));
-            }
-
-            if (hash.ContainsKey(promotionId))
-            {
-                return hash[promotionId];
+                return value;
             }
             return -1;
         }
 
         public void RemovePromotionId(long promotionId)
         {
-            if (PromotionIds != null)
+            var hash = ParsePromotionIds();
+
+            if (hash.Remove(promotionId))
             {
-                var list = PromotionIds.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList();
-
-                var hash = new Dictionary<long, int>();
-
-                foreach (var item in list)
+                var sb = new StringBuilder(hash.Count * 20);
+                bool first = true;
+                foreach (var kvp in hash)
                 {
-                    var parts = item.Split(new[] {'='}, StringSplitOptions.RemoveEmptyEntries);
-
-                    hash.Add(long.Parse(parts[0]), int.Parse(parts[1]));
+                    if (!first) sb.Append(',');
+                    sb.Append(kvp.Key).Append('=').Append(kvp.Value);
+                    first = false;
                 }
 
-                if (hash.ContainsKey(promotionId))
+                PromotionIds = sb.ToString();
+                FreeQuantity = 0;
+                foreach (var kvp in hash)
                 {
-                    hash.Remove(promotionId);
-                    PromotionIds = string.Join(",",
-                        hash.Select(h => h.Key.ToString() + "=" + h.Value.ToString()).ToList());
+                    FreeQuantity += kvp.Value;
                 }
-
-                FreeQuantity = hash.Sum(h => h.Value);
             }
         }
 
@@ -1196,9 +1225,9 @@ namespace Hotcakes.Commerce.Orders
             dto.IsBundle = IsBundle;
             dto.IsGiftCard = IsGiftCard;
 
-            foreach (var detail in DiscountDetails)
+            for (int i = 0; i < DiscountDetails.Count; i++)
             {
-                dto.DiscountDetails.Add(detail.ToDto());
+                dto.DiscountDetails.Add(DiscountDetails[i].ToDto());
             }
             dto.OrderBvin = OrderBvin ?? string.Empty;
             dto.ProductId = ProductId ?? string.Empty;
@@ -1214,9 +1243,9 @@ namespace Hotcakes.Commerce.Orders
             dto.StatusName = StatusName ?? string.Empty;
             dto.TaxRate = TaxRate;
             dto.TaxPortion = TaxPortion;
-            foreach (var op in SelectionData.OptionSelectionList)
+            for (int i = 0; i < SelectionData.OptionSelectionList.Count; i++)
             {
-                dto.SelectionData.Add(op.ToDto());
+                dto.SelectionData.Add(SelectionData.OptionSelectionList[i].ToDto());
             }
             dto.IsNonShipping = IsNonShipping;
             dto.TaxSchedule = TaxSchedule;
@@ -1224,16 +1253,16 @@ namespace Hotcakes.Commerce.Orders
             dto.ProductShippingLength = ProductShippingLength;
             dto.ProductShippingWeight = ProductShippingWeight;
             dto.ProductShippingWidth = ProductShippingWidth;
-            foreach (var cp in CustomProperties)
+            for (int i = 0; i < CustomProperties.Count; i++)
             {
-                dto.CustomProperties.Add(cp.ToDto());
+                dto.CustomProperties.Add(CustomProperties[i].ToDto());
             }
             dto.ShipFromAddress = ShipFromAddress.ToDto();
-            dto.ShipFromMode = (ShippingModeDTO) (int) ShipFromMode;
+            dto.ShipFromMode = (ShippingModeDTO)(int)ShipFromMode;
             dto.ShipFromNotificationId = ShipFromNotificationId ?? string.Empty;
             dto.ShipSeparately = ShipSeparately;
             dto.ExtraShipCharge = ExtraShipCharge;
-            dto.ShippingCharge = (ShippingChargeTypeDTO) (int) ShippingCharge;
+            dto.ShippingCharge = (ShippingChargeTypeDTO)(int)ShippingCharge;
 
             return dto;
         }
@@ -1261,10 +1290,10 @@ namespace Hotcakes.Commerce.Orders
             DiscountDetails.Clear();
             if (dto.DiscountDetails != null)
             {
-                foreach (var detail in dto.DiscountDetails)
+                for (int i = 0; i < dto.DiscountDetails.Count; i++)
                 {
                     var d = new DiscountDetail();
-                    d.FromDto(detail);
+                    d.FromDto(dto.DiscountDetails[i]);
                     DiscountDetails.Add(d);
                 }
             }
@@ -1285,10 +1314,10 @@ namespace Hotcakes.Commerce.Orders
             SelectionData.Clear();
             if (dto.SelectionData != null)
             {
-                foreach (var op in dto.SelectionData)
+                for (int i = 0; i < dto.SelectionData.Count; i++)
                 {
                     var o = new OptionSelection();
-                    o.FromDto(op);
+                    o.FromDto(dto.SelectionData[i]);
                     SelectionData.OptionSelectionList.Add(o);
                 }
             }
@@ -1301,19 +1330,19 @@ namespace Hotcakes.Commerce.Orders
             CustomProperties.Clear();
             if (dto.CustomProperties != null)
             {
-                foreach (var cpd in dto.CustomProperties)
+                for (int i = 0; i < dto.CustomProperties.Count; i++)
                 {
                     var prop = new CustomProperty();
-                    prop.FromDto(cpd);
+                    prop.FromDto(dto.CustomProperties[i]);
                     CustomProperties.Add(prop);
                 }
             }
             ShipFromAddress.FromDto(dto.ShipFromAddress);
-            ShipFromMode = (ShippingMode) (int) dto.ShipFromMode;
+            ShipFromMode = (ShippingMode)(int)dto.ShipFromMode;
             ShipFromNotificationId = dto.ShipFromNotificationId ?? string.Empty;
             ShipSeparately = dto.ShipSeparately;
             ExtraShipCharge = dto.ExtraShipCharge;
-            ShippingCharge = (ShippingChargeType) (int) dto.ShippingCharge;
+            ShippingCharge = (ShippingChargeType)(int)dto.ShippingCharge;
         }
 
         #endregion

@@ -35,7 +35,7 @@ namespace Hotcakes.Modules.Core.AppCode
         private const string JQUERYFORMAT = "<script src=\"{0}jquery-3.5.1.min.js\" type=\"text/javascript\"></script>";
         private const string JQUERYMIGRATEFORMAT = "<script src=\"{0}jquery-migrate-3.3.0.min.js\" type=\"text/javascript\"></script>";
         private const string JQUERYUIFORMAT = "<script src=\"{0}jquery-ui-1.12.1/js/jquery-ui.min.js\" type=\"text/javascript\"></script>";
-        private const string FOOTERFORMAT = "<div id=\"footer\"><div id=\"copyright\">&copy; Copyright 2013-2018 Hotcakes Commerce, LLC<br />&copy; Copyright 2019-{0} Upendo Ventures, LLC </div></div>";
+        private const string FOOTERFORMAT = "<div id=\"footer\"><div id=\"copyright\">&copy; Copyright {0} Upendo Ventures, LLC </div></div>";
         private const string SLASH = "/";
 
         public static string JQueryIncludes(string baseScriptFolder, bool IsSecure)

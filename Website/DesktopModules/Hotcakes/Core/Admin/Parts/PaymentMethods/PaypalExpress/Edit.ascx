@@ -34,6 +34,9 @@
         <div class="hcFormItem">
             <asp:CheckBox ID="chkRequirePayPalAccount" runat="server" resourcekey="chkRequirePayPalAccount" />
         </div>
+        <div class="hcFormItem">
+            <asp:CheckBox ID="chkSkipTotalBreakdown" runat="server" resourcekey="chkSkipTotalBreakdown" />
+        </div>
     </div>
 </div>
 <div class="hcColumnRight" style="width: 50%;">

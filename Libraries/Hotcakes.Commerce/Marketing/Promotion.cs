@@ -60,6 +60,8 @@ namespace Hotcakes.Commerce.Marketing
         private readonly List<IPromotionQualification> _qualifications = new List<IPromotionQualification>();
         private readonly List<IPromotionAction> _actions = new List<IPromotionAction>();
         private readonly PromotionFactory _factory;
+        private ReadOnlyCollection<IPromotionQualification> _qualificationsReadOnly;
+        private ReadOnlyCollection<IPromotionAction> _actionsReadOnly;
 
         #endregion
 
@@ -79,12 +81,12 @@ namespace Hotcakes.Commerce.Marketing
 
         public ReadOnlyCollection<IPromotionQualification> Qualifications
         {
-            get { return _qualifications.AsReadOnly(); }
+            get { return _qualificationsReadOnly ?? (_qualificationsReadOnly = _qualifications.AsReadOnly()); }
         }
 
         public ReadOnlyCollection<IPromotionAction> Actions
         {
-            get { return _actions.AsReadOnly(); }
+            get { return _actionsReadOnly ?? (_actionsReadOnly = _actions.AsReadOnly()); }
         }
 
         #endregion
@@ -105,7 +107,7 @@ namespace Hotcakes.Commerce.Marketing
         public string ActionsToXml()
         {
             var x = new XElement("Actions",
-                from a in Actions
+                from a in _actions
                 select new XElement("Action",
                     new XElement("Id", a.Id),
                     new XElement("TypeId", a.TypeId),
@@ -124,22 +126,22 @@ namespace Hotcakes.Commerce.Marketing
         public void ActionsFromXml(string xml)
         {
             _actions.Clear();
-            if (xml.Trim().Length < 1) return;
+            _actionsReadOnly = null;
+            if (string.IsNullOrWhiteSpace(xml)) return;
 
             var doc = XDocument.Parse(xml, LoadOptions.None);
-            var query = from xElem in doc.Descendants("Action")
-                select ActionFactory(xElem.Descendants());
-            _actions.AddRange(query);
+            var actions = doc.Descendants("Action").Select(xElem => ActionFactory(xElem.Descendants())).Where(a => a != null);
+            _actions.AddRange(actions);
         }
 
         public string QualificationsToXml()
         {
             var x = new XElement("Qualifications",
-                from q in Qualifications
+                from q in _qualifications
                 select new XElement("Qualification",
                     new XElement("Id", q.Id),
                     new XElement("TypeId", q.TypeId),
-                    new XElement("ProcessingCost", (int) q.ProcessingCost),
+                    new XElement("ProcessingCost", (int)q.ProcessingCost),
                     new XElement("Settings",
                         from s in q.Settings
                         select new XElement("Setting",
@@ -155,12 +157,12 @@ namespace Hotcakes.Commerce.Marketing
         public void QualificationsFromXml(string xml)
         {
             _qualifications.Clear();
-            if (xml.Trim().Length < 1) return;
+            _qualificationsReadOnly = null;
+            if (string.IsNullOrWhiteSpace(xml)) return;
 
             var doc = XDocument.Parse(xml, LoadOptions.None);
-            var query = from xElem in doc.Descendants("Qualification")
-                select QualificationFactory(xElem.Descendants());
-            _qualifications.AddRange(query);
+            var qualifications = doc.Descendants("Qualification").Select(xElem => QualificationFactory(xElem.Descendants())).Where(q => q != null);
+            _qualifications.AddRange(qualifications);
         }
 
         public bool AddQualification(IPromotionQualification q)
@@ -174,16 +176,18 @@ namespace Hotcakes.Commerce.Marketing
 
             q.Id = maxid + 1;
             _qualifications.Add(q);
+            _qualificationsReadOnly = null;
 
             return true;
         }
 
         public bool RemoveQualification(long id)
         {
-            var d = _qualifications.SingleOrDefault(y => y.Id == id);
-            if (d != null)
+            var index = FindQualificationIndex(id);
+            if (index >= 0)
             {
-                _qualifications.Remove(d);
+                _qualifications.RemoveAt(index);
+                _qualificationsReadOnly = null;
                 return true;
             }
             return false;
@@ -191,8 +195,7 @@ namespace Hotcakes.Commerce.Marketing
 
         public IPromotionQualification GetQualification(long id)
         {
-            var d = _qualifications.SingleOrDefault(y => y.Id == id);
-            return d;
+            return _qualifications.FirstOrDefault(y => y.Id == id);
         }
 
         public bool AddAction(IPromotionAction a)
@@ -206,16 +209,18 @@ namespace Hotcakes.Commerce.Marketing
 
             a.Id = maxid + 1;
             _actions.Add(a);
+            _actionsReadOnly = null;
 
             return true;
         }
 
         public bool RemoveAction(long id)
         {
-            var d = _actions.SingleOrDefault(y => y.Id == id);
-            if (d != null)
+            var index = FindActionIndex(id);
+            if (index >= 0)
             {
-                _actions.Remove(d);
+                _actions.RemoveAt(index);
+                _actionsReadOnly = null;
                 return true;
             }
             return false;
@@ -223,8 +228,7 @@ namespace Hotcakes.Commerce.Marketing
 
         public IPromotionAction GetAction(long id)
         {
-            var d = _actions.SingleOrDefault(y => y.Id == id);
-            return d;
+            return _actions.FirstOrDefault(y => y.Id == id);
         }
 
         /// <summary>
@@ -276,7 +280,8 @@ namespace Hotcakes.Commerce.Marketing
 
             if (Mode == PromotionType.OfferForLineItems || Mode == PromotionType.OfferForFreeItems)
             {
-                for (var i = 0; i < context.Order.Items.Count; i++)
+                var itemCount = context.Order.Items.Count;
+                for (var i = 0; i < itemCount; i++)
                 {
                     var li = context.Order.Items[i];
 
@@ -284,7 +289,7 @@ namespace Hotcakes.Commerce.Marketing
                         (!li.IsFreeItem || Mode == PromotionType.OfferForLineItems))
                     {
                         // don't try to add it again, if it's already there
-                        if (li.DiscountDetails.Any(d => d.PromotionId == context.PromotionId)) continue;
+                        if (HasPromotionDiscount(li.DiscountDetails, context.PromotionId)) continue;
 
                         context.CurrentlyProcessingLineItem = li;
                         result = ApplyPromotion(context, PromotionQualificationMode.LineItems);
@@ -356,7 +361,8 @@ namespace Hotcakes.Commerce.Marketing
         public bool ApplyForFreeShipping(PromotionContext promoContext)
         {
             var result = false;
-            for (var i = 0; i < promoContext.Order.Items.Count; i++)
+            var itemCount = promoContext.Order.Items.Count;
+            for (var i = 0; i < itemCount; i++)
             {
                 var li = promoContext.Order.Items[i];
 
@@ -476,10 +482,43 @@ namespace Hotcakes.Commerce.Marketing
 
         private void RunActions(PromotionContext context)
         {
-            foreach (var a in _actions)
+            var actionCount = _actions.Count;
+            for (var i = 0; i < actionCount; i++)
             {
-                a.ApplyAction(context);
+                _actions[i].ApplyAction(context);
             }
+        }
+
+        private int FindQualificationIndex(long id)
+        {
+            var count = _qualifications.Count;
+            for (var i = 0; i < count; i++)
+            {
+                if (_qualifications[i].Id == id)
+                    return i;
+            }
+            return -1;
+        }
+
+        private int FindActionIndex(long id)
+        {
+            var count = _actions.Count;
+            for (var i = 0; i < count; i++)
+            {
+                if (_actions[i].Id == id)
+                    return i;
+            }
+            return -1;
+        }
+
+        private bool HasPromotionDiscount(IEnumerable<DiscountDetail> discountDetails, long promotionId)
+        {
+            foreach (var detail in discountDetails)
+            {
+                if (detail.PromotionId == promotionId)
+                    return true;
+            }
+            return false;
         }
 
         #endregion

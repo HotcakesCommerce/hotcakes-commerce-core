@@ -226,7 +226,7 @@ namespace Hotcakes.PaypalWebServices
                                     {
                                         CurrencyCode = currencyCodeType,
                                         Value = formatAmount(taxTotal)
-                                    },
+                                    }
                                 }
                             },
                             ShippingDetail = new ShippingDetail
@@ -296,7 +296,7 @@ namespace Hotcakes.PaypalWebServices
                                 {
                                     CurrencyCode = currencyCodeType,
                                     Value = formatAmount(taxTotal)
-                                },
+                                }
                             }
                         }
                     }

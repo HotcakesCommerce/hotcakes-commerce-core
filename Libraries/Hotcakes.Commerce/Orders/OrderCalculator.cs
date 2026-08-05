@@ -24,15 +24,16 @@
 
 #endregion
 
-using System.Collections.Generic;
-using System.Linq;
 using Hotcakes.Commerce.Globalization;
 using Hotcakes.Commerce.Marketing;
+using Hotcakes.Commerce.Membership;
 using Hotcakes.Commerce.Shipping;
 using Hotcakes.Commerce.Taxes;
 using Hotcakes.Commerce.Taxes.Providers;
 using Hotcakes.Commerce.Utilities;
 using Hotcakes.Web.Geography;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hotcakes.Commerce.Orders
 {
@@ -135,21 +136,15 @@ namespace Hotcakes.Commerce.Orders
         {
             if (order != null)
             {
-                var freeItemFlag =
-                    order.CustomProperties.FirstOrDefault(s => s.DeveloperId == DEVELOPER_ID && s.Key == FREE_ITEMS_KEY);
-
-                if (freeItemFlag != null)
+                foreach (var prop in order.CustomProperties)
                 {
-                    freeItemFlag.Value = string.Empty;
-                }
-
-                var flag =
-                    order.CustomProperties.FirstOrDefault(
-                        s => s.DeveloperId == DEVELOPER_ID && s.Key == FREE_PROMOTIONS_KEY);
-
-                if (flag != null)
-                {
-                    flag.Value = string.Empty;
+                    if (prop.DeveloperId == DEVELOPER_ID)
+                    {
+                        if (prop.Key == FREE_ITEMS_KEY || prop.Key == FREE_PROMOTIONS_KEY)
+                        {
+                            prop.Value = string.Empty;
+                        }
+                    }
                 }
             }
         }
@@ -181,7 +176,7 @@ namespace Hotcakes.Commerce.Orders
                     // Null check because if the item isn't in the catalog
                     // we will get back a null user specific price. 
                     //
-                    // In the future it may be a good idea to add an option
+                    // TODO: In the future it may be a good idea to add an option
                     // allowing merchant to select if they would like to allow
                     // items not in the catalog to exist in carts or if we should
                     // just remove items from the cart with a warning here.
@@ -189,14 +184,23 @@ namespace Hotcakes.Commerce.Orders
 
                     li.BasePricePerItem = price.BasePrice;
 
-                    foreach (var discount in price.DiscountDetails)
+                    // Cache count and discount details list reference
+                    var priceDiscountDetails = price.DiscountDetails;
+                    var discountDetailsCount = priceDiscountDetails.Count;
+
+                    if (discountDetailsCount > 0)
                     {
-                        li.DiscountDetails.Add(new DiscountDetail
+                        var liQuantity = li.Quantity;
+                        for (var i = 0; i < discountDetailsCount; i++)
                         {
-                            Amount = discount.Amount * li.Quantity,
-                            Description = discount.Description,
-                            DiscountType = PromotionType.Sale
-                        });
+                            var discount = priceDiscountDetails[i];
+                            li.DiscountDetails.Add(new DiscountDetail
+                            {
+                                Amount = discount.Amount * liQuantity,
+                                Description = discount.Description,
+                                DiscountType = PromotionType.Sale
+                            });
+                        }
                     }
                 }
             }
@@ -206,9 +210,12 @@ namespace Hotcakes.Commerce.Orders
         {
             // Count up how many of each item in order
             var quantityMap = new Dictionary<string, int>();
+            var orderItems = order.Items;
+            var itemsCount = orderItems.Count;
 
-            foreach (var item in order.Items)
+            for (var i = 0; i < itemsCount; i++)
             {
+                var item = orderItems[i];
                 if (!item.IsUserSuppliedPrice && !item.IsGiftCard)
                 {
                     if (quantityMap.ContainsKey(item.ProductId))
@@ -222,71 +229,80 @@ namespace Hotcakes.Commerce.Orders
                 }
             }
 
-            // Check for discounts on each item
-            foreach (var productId in quantityMap.Keys)
+            if (quantityMap.Count == 0) return;
+
+            // Cache the volume discount global text lookup
+            var volumeDiscountGlobalText = GlobalLocalization.GetString(VOLUME_DISCOUNT_LOCALIZATION_KEY);
+            if (string.IsNullOrEmpty(volumeDiscountGlobalText))
             {
-                var volumeDiscounts = _app.CatalogServices.VolumeDiscounts.FindByProductId(productId);
+                volumeDiscountGlobalText = VOLUME_DISCOUNT_GLOBAL_TEXT;
+            }
+
+            var catalogServices = _app.CatalogServices;
+
+            // Check for discounts on each item
+            foreach (var kvp in quantityMap)
+            {
+                var productId = kvp.Key;
+                var quantity = kvp.Value;
+
+                var volumeDiscounts = catalogServices.VolumeDiscounts.FindByProductId(productId);
 
                 if (volumeDiscounts.Count == 0) continue;
 
                 // Locate the correct discount in the chart of discounts
-                var quantity = quantityMap[productId];
                 var volumeDiscountToApply = volumeDiscounts.LastOrDefault(vd => quantity >= vd.Qty);
 
                 if (volumeDiscountToApply == null) continue;
 
+                // Cache product lookup
+                var p = catalogServices.Products.FindWithCache(productId);
+                if (p == null) continue;
+
+                var sitePrice = p.SitePrice;
+                var volumeDiscountAmount = volumeDiscountToApply.Amount;
+
                 // Now we have to go through the entire order and discount all items
-                // Traversal through all items is requred because few line items of same product may be present in the cart
-                foreach (var item in order.Items)
+                // Traversal through all items is required because few line items of same product may be present in the cart
+                for (var i = 0; i < itemsCount; i++)
                 {
+                    var item = orderItems[i];
                     if (item.ProductId == productId)
                     {
-                        var p = _app.CatalogServices.Products.FindWithCache(item.ProductId);
+                        var itemQuantity = item.Quantity;
+                        var adjustedPricePerItem = item.BasePricePerItem + item.TotalDiscounts() / itemQuantity;
+                        var alreadyDiscounted = sitePrice > adjustedPricePerItem;
+                        var hasDiscounts = item.DiscountDetails.Count > 0;
 
-                        if (p != null)
+                        if (!alreadyDiscounted || !hasDiscounts)
                         {
-                            var adjustedPricePerItem = item.BasePricePerItem + item.TotalDiscounts() / item.Quantity;
-                            var alreadyDiscounted = p.SitePrice > adjustedPricePerItem;
+                            // item isn't discounted yet so apply the exact price the merchant set
+                            var toDiscount = -1 * (adjustedPricePerItem - volumeDiscountAmount);
+                            toDiscount = toDiscount * itemQuantity;
 
-                            var volumeDiscountGlobalText = GlobalLocalization.GetString(VOLUME_DISCOUNT_LOCALIZATION_KEY);
-
-                            if (string.IsNullOrEmpty(volumeDiscountGlobalText))
+                            item.DiscountDetails.Add(new DiscountDetail
                             {
-                                volumeDiscountGlobalText = VOLUME_DISCOUNT_GLOBAL_TEXT;
-                            }
+                                Amount = toDiscount,
+                                Description = volumeDiscountGlobalText,
+                                DiscountType = PromotionType.VolumeDiscount
+                            });
+                        }
+                        else
+                        {
+                            // item is already discounted (probably by user group) so figure out
+                            // the percentage of volume discount instead
+                            var originalPriceChange = sitePrice - volumeDiscountAmount;
+                            var percentChange = originalPriceChange / sitePrice;
+                            var newDiscount = -1 * percentChange * adjustedPricePerItem;
+                            newDiscount = newDiscount * itemQuantity;
 
-                            if (!alreadyDiscounted || !item.DiscountDetails.Any())
+                            item.DiscountDetails.Add(new DiscountDetail
                             {
-                                // item isn't discounted yet so apply the exact price the merchant set
-                                var toDiscount = -1 * (adjustedPricePerItem - volumeDiscountToApply.Amount);
-
-                                toDiscount = toDiscount * item.Quantity;
-
-                                item.DiscountDetails.Add(new DiscountDetail
-                                {
-                                    Amount = toDiscount,
-                                    Description = volumeDiscountGlobalText,
-                                    DiscountType = PromotionType.VolumeDiscount
-                                });
-                            }
-                            else
-                            {
-                                // item is already discounted (probably by user group) so figure out
-                                // the percentage of volume discount instead
-                                var originalPriceChange = p.SitePrice - volumeDiscountToApply.Amount;
-                                var percentChange = originalPriceChange / p.SitePrice;
-                                var newDiscount = -1 * percentChange * adjustedPricePerItem;
-
-                                newDiscount = newDiscount * item.Quantity;
-
-                                item.DiscountDetails.Add(new DiscountDetail
-                                {
-                                    Amount = newDiscount,
-                                    Description =
-                                        percentChange.ToString(PERCENT_CHANGED_FORMAT) + volumeDiscountGlobalText,
-                                    DiscountType = PromotionType.VolumeDiscount
-                                });
-                            }
+                                Amount = newDiscount,
+                                Description =
+                                    percentChange.ToString(PERCENT_CHANGED_FORMAT) + volumeDiscountGlobalText,
+                                DiscountType = PromotionType.VolumeDiscount
+                            });
                         }
                     }
                 }
@@ -295,21 +311,33 @@ namespace Hotcakes.Commerce.Orders
 
         private void ApplyUpcharges(Order order)
         {
-            foreach (var item in order.Items)
-            {
-                var p = _app.CatalogServices.Products.FindWithCache(item.ProductId);
+            var catalogServices = _app.CatalogServices;
+            var orderItems = order.Items;
+            var itemsCount = orderItems.Count;
 
-                if (p != null && p.AllowUpcharge && item.IsUpchargeAllowed)
+            for (var i = 0; i < itemsCount; i++)
+            {
+                var item = orderItems[i];
+                if (item.IsUpchargeAllowed)
                 {
-                    item.LineTotal = item.LineTotal + item.TotalUpcharge();
+                    var p = catalogServices.Products.FindWithCache(item.ProductId);
+
+                    if (p != null && p.AllowUpcharge)
+                    {
+                        item.LineTotal = item.LineTotal + item.TotalUpcharge();
+                    }
                 }
             }
         }
 
         private void CalculateItemsPrices(Order order)
         {
-            foreach (var li in order.Items)
+            var orderItems = order.Items;
+            var itemsCount = orderItems.Count;
+
+            for (var i = 0; i < itemsCount; i++)
             {
+                var li = orderItems[i];
                 li.LineTotal = li.LineTotalWithoutDiscounts + li.TotalDiscounts();
 
                 if (li.LineTotal < 0) li.LineTotal = 0;
@@ -334,16 +362,22 @@ namespace Hotcakes.Commerce.Orders
         {
             decimal totalHandling = 0;
             var store = _app.CurrentStore;
+            var storeSettings = store.Settings;
+            var handlingType = storeSettings.HandlingType;
 
-            if (store.Settings.HandlingType == (int)HandlingMode.PerItem)
+            if (handlingType == (int)HandlingMode.PerItem)
             {
                 decimal amount = 0;
+                var handlingNonShipping = storeSettings.HandlingNonShipping;
+                var orderItems = order.Items;
+                var itemsCount = orderItems.Count;
 
-                foreach (var item in order.Items)
+                for (var i = 0; i < itemsCount; i++)
                 {
+                    var item = orderItems[i];
                     if (item.IsNonShipping)
                     {
-                        if (store.Settings.HandlingNonShipping)
+                        if (handlingNonShipping)
                         {
                             amount += item.Quantity;
                         }
@@ -355,29 +389,40 @@ namespace Hotcakes.Commerce.Orders
                     }
                 }
 
-                totalHandling = store.Settings.HandlingAmount * amount;
+                totalHandling = storeSettings.HandlingAmount * amount;
             }
-            else if (store.Settings.HandlingType == (int)HandlingMode.PerOrder)
+            else if (handlingType == (int)HandlingMode.PerOrder)
             {
+                var handlingNonShipping = storeSettings.HandlingNonShipping;
+                var orderItems = order.Items;
+                var itemsCount = orderItems.Count;
+
                 // charge handling if there aren't non shipping items
-                if (store.Settings.HandlingNonShipping)
+                if (handlingNonShipping)
                 {
-                    if (order.Items.Count > 0)
+                    if (itemsCount > 0)
                     {
-                        totalHandling = RecalculateHandlingPerLineItemSettings(store.Settings.HandlingAmount,
-                            order.Items);
+                        totalHandling = RecalculateHandlingPerLineItemSettings(storeSettings.HandlingAmount, orderItems);
                     }
                 }
                 else
                 {
-                    if (
-                        order.Items.Any(
-                            i =>
-                                !i.IsNonShipping && i.ShippingCharge == ShippingChargeType.ChargeShippingAndHandling ||
-                                i.ShippingCharge == ShippingChargeType.ChargeHandling))
+                    var hasChargeableItems = false;
+                    for (var i = 0; i < itemsCount; i++)
                     {
-                        totalHandling = RecalculateHandlingPerLineItemSettings(store.Settings.HandlingAmount,
-                            order.Items);
+                        var item = orderItems[i];
+                        if (!item.IsNonShipping &&
+                            (item.ShippingCharge == ShippingChargeType.ChargeShippingAndHandling ||
+                             item.ShippingCharge == ShippingChargeType.ChargeHandling))
+                        {
+                            hasChargeableItems = true;
+                            break;
+                        }
+                    }
+
+                    if (hasChargeableItems)
+                    {
+                        totalHandling = RecalculateHandlingPerLineItemSettings(storeSettings.HandlingAmount, orderItems);
                     }
                 }
             }
@@ -388,16 +433,23 @@ namespace Hotcakes.Commerce.Orders
         private decimal RecalculateHandlingPerLineItemSettings(decimal perOrderHandlingAmount, List<LineItem> lineItems)
         {
             // determine how many line items allow handling to be charged
-            var itemsToChargeFor =
-                lineItems.Count(
-                    i =>
-                        i.ShippingCharge == ShippingChargeType.ChargeHandling ||
-                        i.ShippingCharge == ShippingChargeType.ChargeShippingAndHandling);
+            var lineItemsCount = lineItems.Count;
+            var itemsToChargeFor = 0;
 
-            if (itemsToChargeFor < lineItems.Count)
+            for (var i = 0; i < lineItemsCount; i++)
+            {
+                var item = lineItems[i];
+                if (item.ShippingCharge == ShippingChargeType.ChargeHandling ||
+                    item.ShippingCharge == ShippingChargeType.ChargeShippingAndHandling)
+                {
+                    itemsToChargeFor++;
+                }
+            }
+
+            if (itemsToChargeFor < lineItemsCount)
             {
                 // determine what the per-item handling fee is
-                var handlingPerItem = perOrderHandlingAmount / lineItems.Count;
+                var handlingPerItem = perOrderHandlingAmount / lineItemsCount;
 
                 // determine the pro-rated handling fee for items that allow handling charges
                 return Money.RoundCurrency(handlingPerItem * itemsToChargeFor);
@@ -466,34 +518,41 @@ namespace Hotcakes.Commerce.Orders
 
             order.TotalShippingAfterDiscounts = totalShipping + totalHandling;
 
+            var orderItems = order.Items;
+            var itemsCount = orderItems.Count;
+
             // Clear shipping portion
-            foreach (var item in order.Items)
+            for (var i = 0; i < itemsCount; i++)
             {
-                item.ShippingPortion = 0;
+                orderItems[i].ShippingPortion = 0;
             }
 
+            var currentStoreSettings = _app.CurrentStore.Settings;
+            var handlingNonShipping = currentStoreSettings.HandlingNonShipping;
+
             // Add handling portions
-            var itemsToDistributeHandling = _app.CurrentStore.Settings.HandlingNonShipping
-                ? order.Items
-                : order.Items.Where(
+            var itemsToDistributeHandling = handlingNonShipping
+                ? orderItems
+                : orderItems.Where(
                     y =>
                         y.ShippingStatus != OrderShippingStatus.NonShipping &&
-                        y.ShippingCharge == ShippingChargeType.ChargeHandling ||
-                        y.ShippingCharge == ShippingChargeType.ChargeShippingAndHandling).ToList();
+                        (y.ShippingCharge == ShippingChargeType.ChargeHandling ||
+                         y.ShippingCharge == ShippingChargeType.ChargeShippingAndHandling)).ToList();
 
             DistributeShippingPortions(itemsToDistributeHandling, totalHandling);
 
-            var itemsToDistributeShipping = _app.CurrentStore.Settings.HandlingNonShipping
-                ? order.Items
-                : order.Items.Where(
+            var itemsToDistributeShipping = handlingNonShipping
+                ? orderItems
+                : orderItems.Where(
                     y =>
                         y.ShippingStatus != OrderShippingStatus.NonShipping &&
-                        y.ShippingCharge == ShippingChargeType.ChargeShipping ||
-                        y.ShippingCharge == ShippingChargeType.ChargeShippingAndHandling).ToList();
+                        (y.ShippingCharge == ShippingChargeType.ChargeShipping ||
+                         y.ShippingCharge == ShippingChargeType.ChargeShippingAndHandling)).ToList();
 
             // Add shipping portions
+            var shippingMethodId = order.ShippingMethodId;
             itemsToDistributeShipping =
-                itemsToDistributeShipping.Where(i => !i.MarkedForFreeShipping(order.ShippingMethodId)).ToList();
+                itemsToDistributeShipping.Where(i => !i.MarkedForFreeShipping(shippingMethodId)).ToList();
 
             DistributeShippingPortions(itemsToDistributeShipping, totalShipping);
         }
@@ -501,6 +560,8 @@ namespace Hotcakes.Commerce.Orders
         private void DistributeShippingPortions(List<LineItem> items, decimal totalShipping)
         {
             var itemsCount = items.Count;
+            if (itemsCount == 0) return;
+
             var totalValueOfItems = items.Sum(i => i.LineTotal);
             decimal totalApplied = 0;
 
@@ -549,25 +610,36 @@ namespace Hotcakes.Commerce.Orders
 
             var isTaxRateSame = true;
             decimal taxRate = -1;
-            order.TotalShippingAfterDiscounts = 0;
+            decimal itemsTax = 0;
+            decimal shippingTax = 0;
+            decimal totalShippingAfterDiscounts = 0;
 
-            foreach (var li in order.Items)
+            var orderItems = order.Items;
+            var itemsCount = orderItems.Count;
+
+            for (var i = 0; i < itemsCount; i++)
             {
-                order.ItemsTax += li.TaxPortion;
-                order.ShippingTax += li.ShippingTaxPortion;
-                order.TotalShippingAfterDiscounts += li.ShippingPortion;
+                var li = orderItems[i];
+                itemsTax += li.TaxPortion;
+                shippingTax += li.ShippingTaxPortion;
+                totalShippingAfterDiscounts += li.ShippingPortion;
 
-                if (!isTaxRateSame) continue;
-
-                if (li.ShippingTaxRate != taxRate && taxRate != -1)
+                if (isTaxRateSame)
                 {
-                    isTaxRateSame = false;
+                    var liShippingTaxRate = li.ShippingTaxRate;
+                    if (liShippingTaxRate != taxRate && taxRate != -1)
+                    {
+                        isTaxRateSame = false;
+                    }
+                    taxRate = liShippingTaxRate;
                 }
-
-                taxRate = li.ShippingTaxRate;
             }
 
-            if (order.TotalShippingAfterDiscounts != 0)
+            order.ItemsTax = itemsTax;
+            order.ShippingTax = shippingTax;
+            order.TotalShippingAfterDiscounts = totalShippingAfterDiscounts;
+
+            if (totalShippingAfterDiscounts != 0)
             {
                 var applyVATRules = _app.CurrentStore.Settings.ApplyVATRules;
 
@@ -581,8 +653,8 @@ namespace Hotcakes.Commerce.Orders
                     {
                         order.ShippingTaxRate = 0;
 
-                        var taxAmount = order.ShippingTax;
-                        var remainAmount = order.TotalShippingAfterDiscounts - taxAmount;
+                        var taxAmount = shippingTax;
+                        var remainAmount = totalShippingAfterDiscounts - taxAmount;
 
                         if (taxAmount != 0 && remainAmount != 0)
                         {
@@ -591,7 +663,7 @@ namespace Hotcakes.Commerce.Orders
                     }
                     else
                     {
-                        order.ShippingTaxRate = order.ShippingTax / order.TotalShippingAfterDiscounts;
+                        order.ShippingTaxRate = shippingTax / totalShippingAfterDiscounts;
                     }
                 }
             }
@@ -600,23 +672,32 @@ namespace Hotcakes.Commerce.Orders
                 order.ShippingTaxRate = 0;
             }
 
-            order.TotalTax = order.ItemsTax + order.ShippingTax;
+            order.TotalTax = itemsTax + shippingTax;
         }
 
         private void TaxItems(List<ITaxable> items, IAddress billingAddress, IAddress shippingAddress, decimal totalOrderDiscounts, string userId)
         {
             var applyVATRules = _app.CurrentStore.Settings.ApplyVATRules;
+            var storeId = _app.CurrentStore.Id;
+            var orderServices = _app.OrderServices;
+            var taxSchedules = orderServices.TaxSchedules;
+            var taxes = orderServices.Taxes;
+            var membershipServices = _app.MembershipServices;
+
             decimal discount = 0;
             decimal qty = 0;
+
             if (totalOrderDiscounts != 0)
             {
-                foreach (var i in items)
+                var itemsCount = items.Count;
+                for (var i = 0; i < itemsCount; i++)
                 {
-                    if (i.IsTaxExempt == false && i.TaxSchedule != -1)
+                    var item = items[i];
+                    if (item.IsTaxExempt == false && item.TaxSchedule != -1)
                     {
-                        if (_app.OrderServices.TaxSchedules.FindForThisStore(i.TaxSchedule) != null)
+                        if (taxSchedules.FindForThisStore(item.TaxSchedule) != null)
                         {
-                            qty += i.Quantity;
+                            qty += item.Quantity;
                         }
                     }
                 }
@@ -627,18 +708,24 @@ namespace Hotcakes.Commerce.Orders
                 }
             }
 
-            foreach (var item in items)
+            // Cache user lookup if needed
+            CustomerAccount user = null;
+            var userCached = false;
+
+            var itemsCount2 = items.Count;
+            for (var i = 0; i < itemsCount2; i++)
             {
+                var item = items[i];
+
                 if (item.IsTaxExempt) continue;
 
-                ITaxSchedule schedule = _app.OrderServices.TaxSchedules.FindForThisStore(item.TaxSchedule);
+                ITaxSchedule schedule = taxSchedules.FindForThisStore(item.TaxSchedule);
 
                 if (schedule == null) continue;
 
                 //Get best match by address
                 var taxationAddress = item.IsNonShipping ? billingAddress : shippingAddress;
-                var tax = _app.OrderServices.Taxes.FindByAdress(_app.CurrentStore.Id, schedule.TaxScheduleId(),
-                    taxationAddress);
+                var tax = taxes.FindByAdress(storeId, schedule.TaxScheduleId(), taxationAddress);
 
                 var defaultRate = schedule.TaxScheduleDefaultRate() / 100;
                 var defaultShippingRate = schedule.TaxScheduleDefaultShippingRate() / 100;
@@ -653,7 +740,13 @@ namespace Hotcakes.Commerce.Orders
 
                 if (tax != null)
                 {
-                    var user = _app.MembershipServices.Customers.Find(userId);
+                    // Cache user lookup
+                    if (!userCached)
+                    {
+                        user = membershipServices.Customers.Find(userId);
+                        userCached = true;
+                    }
+
                     var taxExemptUser = user != null ? user.TaxExempt : false;
 
                     if (!taxExemptUser)
@@ -665,8 +758,8 @@ namespace Hotcakes.Commerce.Orders
                 }
 
                 item.SetTaxRate(rate);
-
                 item.SetShippingTaxRate(shippingRate);
+
                 var lineItemTotalDiscount = item.Quantity * discount;
 
                 if (tax != null)
@@ -732,14 +825,15 @@ namespace Hotcakes.Commerce.Orders
 
         private void DistributeOrderDiscounts(Order order)
         {
-            var itemsCount = order.Items.Count;
+            var orderItems = order.Items;
+            var itemsCount = orderItems.Count;
             var totalOrderDiscounts = order.TotalOrderDiscounts;
-            var totalValueOfItems = order.Items.Sum(i => i.LineTotal);
+            var totalValueOfItems = orderItems.Sum(i => i.LineTotal);
             decimal totalApplied = 0;
 
             for (var i = 0; i < itemsCount; i++)
             {
-                var lineItem = order.Items[i];
+                var lineItem = orderItems[i];
 
                 if (i == itemsCount - 1)
                 {
@@ -764,8 +858,12 @@ namespace Hotcakes.Commerce.Orders
 
         private void DistributeShipping(Order order)
         {
-            foreach (var orderItem in order.Items)
+            var orderItems = order.Items;
+            var itemsCount = orderItems.Count;
+
+            for (var i = 0; i < itemsCount; i++)
             {
+                var orderItem = orderItems[i];
                 orderItem.LineTotal += orderItem.ShippingPortion;
             }
         }

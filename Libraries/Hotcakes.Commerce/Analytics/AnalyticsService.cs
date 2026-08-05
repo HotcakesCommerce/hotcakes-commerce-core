@@ -25,6 +25,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using Hotcakes.Commerce.Data;
 using Hotcakes.Web.Data;
 
@@ -32,10 +33,19 @@ namespace Hotcakes.Commerce.Analytics
 {
     public class AnalyticsService : HccServiceBase
     {
+        private Guid? _cachedSessionGuid;
+        private Guid? _cachedShoppingSessionGuid;
+        private long _cachedStoreId;
+
         public AnalyticsService(HccRequestContext context)
             : base(context)
         {
             AnalyticsEvents = Factory.CreateRepo<AnalyticsEventsRepository>(Context);
+
+            // Cache frequently accessed values once during initialization
+            _cachedSessionGuid = SessionManager.GetCurrentSessionGuid();
+            _cachedShoppingSessionGuid = SessionManager.GetCurrentShoppingSessionGuid();
+            _cachedStoreId = Context.CurrentStore.Id;
         }
 
         public AnalyticsEventsRepository AnalyticsEvents { get; protected set; }
@@ -44,14 +54,40 @@ namespace Hotcakes.Commerce.Analytics
         {
             var analyticsEvent = new AnalyticsEvent();
             analyticsEvent.UserId = userId;
-            analyticsEvent.SessionGuid = SessionManager.GetCurrentSessionGuid();
-            analyticsEvent.ShoppingSessionGuid = SessionManager.GetCurrentShoppingSessionGuid();
-            analyticsEvent.StoreId = Context.CurrentStore.Id;
+            analyticsEvent.SessionGuid = _cachedSessionGuid;
+            analyticsEvent.ShoppingSessionGuid = _cachedShoppingSessionGuid;
+            analyticsEvent.StoreId = _cachedStoreId;
             analyticsEvent.Action = actionType;
             analyticsEvent.ObjectId = DataTypeHelper.BvinToNullableGuid(objectId);
             analyticsEvent.DateTime = DateTime.UtcNow;
 
             AnalyticsEvents.Create(analyticsEvent);
+        }
+
+        public void RegisterEvents(List<Tuple<string, ActionTypes, string>> events)
+        {
+            if (events == null || events.Count == 0)
+                return;
+
+            var analyticsEvents = new List<AnalyticsEvent>();
+            var timestamp = DateTime.UtcNow;
+
+            foreach (var eventData in events)
+            {
+                var analyticsEvent = new AnalyticsEvent
+                {
+                    UserId = eventData.Item1,
+                    SessionGuid = _cachedSessionGuid,
+                    ShoppingSessionGuid = _cachedShoppingSessionGuid,
+                    StoreId = _cachedStoreId,
+                    Action = eventData.Item2,
+                    ObjectId = DataTypeHelper.BvinToNullableGuid(eventData.Item3),
+                    DateTime = timestamp
+                };
+                analyticsEvents.Add(analyticsEvent);
+            }
+
+            AnalyticsEvents.BatchCreate(analyticsEvents, mergeSubItems: false);
         }
 
         public void DeleteEventsByCustomer(string userID)
