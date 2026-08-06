@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Hotcakes.CommerceDTO.v1.Orders;
 using Hotcakes.Payment;
 
@@ -42,17 +43,35 @@ namespace Hotcakes.Commerce.Orders
 		#region Properties
 
 		/// <summary>
-        ///     The unique ID of the transaction.
+		///     The unique ID of the transaction.
 		/// </summary>
-		public Guid Id { get; set; }
+		private Guid _id;
+		private string _idAsStringCache;
+
+		public Guid Id
+		{
+			get { return _id; }
+			set
+			{
+				_id = value;
+				_idAsStringCache = null;
+			}
+		}
 
 		/// <summary>
-        ///     A string version of the Id property.
+		///     A string version of the Id property.
 		/// </summary>
 		public string IdAsString
 		{
-            get { return Id.ToString(); }
-			}
+            get
+            {
+                if (_idAsStringCache == null)
+                {
+                    _idAsStringCache = _id.ToString();
+                }
+                return _idAsStringCache;
+            }
+		}
 
 		/// <summary>
         ///     This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
@@ -267,7 +286,7 @@ namespace Hotcakes.Commerce.Orders
 			Amount = t.Amount;
 			if (t.IsRefundTransaction)
 			{
-                Amount = t.Amount*-1;
+                Amount = t.Amount * -1;
 			}
 			GiftCard = t.GiftCard;
 			CreditCard = t.Card;
@@ -275,25 +294,39 @@ namespace Hotcakes.Commerce.Orders
 			Voided = false;
 			RefNum1 = t.Result.ReferenceNumber;
 			RefNum2 = t.Result.ReferenceNumber2;
-			Messages = string.Empty;
-			if (t.Result.Messages.Count > 0)
+
+			// Build messages efficiently
+			if (t.Result.Messages != null && t.Result.Messages.Count > 0)
 			{
-                foreach (var m in t.Result.Messages)
+				var sb = new StringBuilder();
+				foreach (var m in t.Result.Messages)
 				{
-					Messages += ":: " + m.Code + " - " + m.Description + " ";
+					sb.Append(":: ");
+					sb.Append(m.Code);
+					sb.Append(" - ");
+					sb.Append(m.Description);
+					sb.Append(' ');
 				}
+				Messages = sb.ToString();
 			}
+			else
+			{
+				Messages = string.Empty;
+			}
+
 			CheckNumber = t.CheckNumber;
 			PurchaseOrderNumber = t.PurchaseOrderNumber;
 
 			CompanyAccountNumber = t.CompanyAccountNumber;
-			AdditionalSettings = new Dictionary<string, string>();
+
+			// Copy additional settings efficiently
 			if (t.AdditionalSettings != null)
 			{
-				foreach (var s in t.AdditionalSettings)
-				{
-					AdditionalSettings.Add(s.Key, s.Value);
-				}
+				AdditionalSettings = new Dictionary<string, string>(t.AdditionalSettings);
+			}
+			else
+			{
+				AdditionalSettings = new Dictionary<string, string>();
 			}
 		}
 
@@ -309,30 +342,28 @@ namespace Hotcakes.Commerce.Orders
 		{
 			get
 			{
-                var isWithinTimeWindow = false;
-
                 var cutOffTicks = DateTime.UtcNow.AddHours(-16).Ticks;
                 var timestampTicks = TimeStampUtc.Ticks;
 				if (timestampTicks >= cutOffTicks)
 				{
-					isWithinTimeWindow = true;
-				}
-
-				if (isWithinTimeWindow)
-				{
-					if (Action == ActionType.CreditCardCapture ||
-						Action == ActionType.CreditCardCharge ||
-						Action == ActionType.CreditCardHold ||
-						Action == ActionType.CreditCardRefund ||
-						Action == ActionType.PayPalCapture ||
-						Action == ActionType.PayPalCharge ||
-						Action == ActionType.PayPalHold ||
-						Action == ActionType.PayPalRefund ||
-						Action == ActionType.ThirdPartyPayMethodCapture ||
-						Action == ActionType.ThirdPartyPayMethodCharge ||
-						Action == ActionType.ThirdPartyPayMethodHold ||
-						Action == ActionType.ThirdPartyPayMethodRefund)
-						return true;
+					switch (Action)
+					{
+						case ActionType.CreditCardCapture:
+						case ActionType.CreditCardCharge:
+						case ActionType.CreditCardHold:
+						case ActionType.CreditCardRefund:
+						case ActionType.PayPalCapture:
+						case ActionType.PayPalCharge:
+						case ActionType.PayPalHold:
+						case ActionType.PayPalRefund:
+						case ActionType.ThirdPartyPayMethodCapture:
+						case ActionType.ThirdPartyPayMethodCharge:
+						case ActionType.ThirdPartyPayMethodHold:
+						case ActionType.ThirdPartyPayMethodRefund:
+							return true;
+						default:
+							return false;
+					}
 				}
 				return false;
 			}
@@ -345,41 +376,36 @@ namespace Hotcakes.Commerce.Orders
 		{
 			get
 			{
-				decimal result = 0;
+				if (!Success || Voided) return 0m;
 
-				if (Success)
+				switch (Action)
 				{
-					if (!Voided)
-					{
-						if (Action == ActionType.CreditCardCapture ||
-							Action == ActionType.CreditCardCharge ||
-							Action == ActionType.CreditCardRefund ||
-							Action == ActionType.CashReceived ||
-							Action == ActionType.CashReturned ||
-							Action == ActionType.CheckReceived ||
-							Action == ActionType.CheckReturned ||
-							Action == ActionType.GiftCardCapture ||
-							Action == ActionType.GiftCardDecrease ||
-							Action == ActionType.GiftCardIncrease ||
-							Action == ActionType.PayPalCapture ||
-							Action == ActionType.PayPalCharge ||
-							Action == ActionType.PayPalRefund ||
-							Action == ActionType.PurchaseOrderAccepted ||
-							Action == ActionType.CompanyAccountAccepted ||
-							Action == ActionType.RewardPointsDecrease ||
-							Action == ActionType.RewardPointsCapture ||
-							Action == ActionType.RewardPointsIncrease ||
-							Action == ActionType.ThirdPartyPayMethodCapture ||
-							Action == ActionType.ThirdPartyPayMethodCharge ||
-							Action == ActionType.ThirdPartyPayMethodRefund ||
-							Action == ActionType.RecurringPayment)
-						{
-							result += Amount;
-						}
-					}
+					case ActionType.CreditCardCapture:
+					case ActionType.CreditCardCharge:
+					case ActionType.CreditCardRefund:
+					case ActionType.CashReceived:
+					case ActionType.CashReturned:
+					case ActionType.CheckReceived:
+					case ActionType.CheckReturned:
+					case ActionType.GiftCardCapture:
+					case ActionType.GiftCardDecrease:
+					case ActionType.GiftCardIncrease:
+					case ActionType.PayPalCapture:
+					case ActionType.PayPalCharge:
+					case ActionType.PayPalRefund:
+					case ActionType.PurchaseOrderAccepted:
+					case ActionType.CompanyAccountAccepted:
+					case ActionType.RewardPointsDecrease:
+					case ActionType.RewardPointsCapture:
+					case ActionType.RewardPointsIncrease:
+					case ActionType.ThirdPartyPayMethodCapture:
+					case ActionType.ThirdPartyPayMethodCharge:
+					case ActionType.ThirdPartyPayMethodRefund:
+					case ActionType.RecurringPayment:
+						return Amount;
+					default:
+						return 0m;
 				}
-
-				return result;
 			}
 		}
 
@@ -390,25 +416,20 @@ namespace Hotcakes.Commerce.Orders
 		{
 			get
 			{
-				decimal result = 0;
+				if (!Success || Voided) return 0m;
 
-				if (Success)
+				switch (Action)
 				{
-					if (!Voided)
-					{
-						if (Action == ActionType.CreditCardHold ||
-							Action == ActionType.GiftCardHold ||
-							Action == ActionType.PayPalHold ||
-							Action == ActionType.RewardPointsHold ||
-							Action == ActionType.RewardPointsUnHold ||
-							Action == ActionType.ThirdPartyPayMethodHold)
-						{
-							result += Amount;
-						}
-					}
+					case ActionType.CreditCardHold:
+					case ActionType.GiftCardHold:
+					case ActionType.PayPalHold:
+					case ActionType.RewardPointsHold:
+					case ActionType.RewardPointsUnHold:
+					case ActionType.ThirdPartyPayMethodHold:
+						return Amount;
+					default:
+						return 0m;
 				}
-
-				return result;
 			}
 		}
 
@@ -434,9 +455,9 @@ namespace Hotcakes.Commerce.Orders
 		/// <returns>If true, a successful transaction was found that links to this one.</returns>
         public bool HasSuccessfulLinkedAction(ActionType action, List<OrderTransaction> transactions)
 		{
-            return
-                transactions.Any(
-                    t => t.Success && !t.Voided && t.Action == action && t.LinkedToTransaction == IdAsString);
+            // Use cached IdAsString to avoid repeated Guid -> string conversions inside Any predicate
+            var idAsString = IdAsString;
+            return transactions.Any(t => t.Success && !t.Voided && t.Action == action && t.LinkedToTransaction == idAsString);
 		} 
 
 		#endregion
@@ -541,14 +562,11 @@ namespace Hotcakes.Commerce.Orders
         /// <param name="value">This is the information that you are saving to later retrieve.</param>
         public void SetAdditionalSetting(string key, string value)
         {
-            if (AdditionalSettings.ContainsKey(key))
+            if (AdditionalSettings == null)
             {
-                AdditionalSettings[key] = value;
+                AdditionalSettings = new Dictionary<string, string>();
             }
-            else
-            {
-                AdditionalSettings.Add(key, value);
-            }
+            AdditionalSettings[key] = value;
         }
 
         /// <summary>

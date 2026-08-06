@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -46,23 +46,29 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
                 return all == "1";
             }
-            set { SetSetting("PrTIsNotMode", value); }
+            set { SetSetting("PrTIsNotMode", value ? "1" : "0"); }
         }
 
         public override string FriendlyDescription(HotcakesApplication app)
         {
-            var allTypes = app.CatalogServices.ProductTypes.FindAll();
-            allTypes.Insert(0, new Catalog.ProductType {Bvin = "0", ProductTypeName = "Generic"});
+            var allTypes = app?.CatalogServices?.ProductTypes?.FindAll() ?? new System.Collections.Generic.List<Catalog.ProductType>();
+            allTypes.Insert(0, new Catalog.ProductType { Bvin = "0", ProductTypeName = "Generic" });
 
             var result = "When Product Type is" + (IsNotMode ? " not" : string.Empty) + " :<ul>";
-            foreach (var bvin in CurrentIds())
+            var ids = CurrentIds();
+
+            if (ids.Count > 0)
             {
-                var p = allTypes.Where(y => y.Bvin == bvin).FirstOrDefault();
-                if (p != null)
+                foreach (var bvin in ids)
                 {
-                    result += "<li>" + p.ProductTypeName + "</li>";
+                    var p = allTypes.FirstOrDefault(y => string.Equals(y.Bvin?.Trim(), bvin, StringComparison.OrdinalIgnoreCase));
+                    if (p != null)
+                    {
+                        result += "<li>" + p.ProductTypeName + "</li>";
+                    }
                 }
             }
+
             result += "</ul>";
             return result;
         }
@@ -85,7 +91,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             if (context.UserPrice == null) return false;
 
             var ids = CurrentIds();
-            var match = context.Product.ProductTypeId.Trim().ToLowerInvariant();
+            var match = (context.Product.ProductTypeId ?? string.Empty).Trim().ToLowerInvariant();
 
             // for "generic" type we need to match 0 instead of empty string
             if (match == string.Empty) match = "0";

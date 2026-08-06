@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -34,6 +34,7 @@ using Hotcakes.Commerce.Utilities;
 using Hotcakes.Web.Geography;
 using System.Collections.Generic;
 using System.Linq;
+using Hotcakes.Commerce.Catalog;
 
 namespace Hotcakes.Commerce.Orders
 {
@@ -208,8 +209,8 @@ namespace Hotcakes.Commerce.Orders
 
         private void ApplyVolumeDiscounts(Order order)
         {
-            // Count up how many of each item in order
-            var quantityMap = new Dictionary<string, int>();
+            // Build mapping of productId -> list of line items and total quantity in one pass
+            var itemsByProduct = new Dictionary<string, List<LineItem>>();
             var orderItems = order.Items;
             var itemsCount = orderItems.Count;
 
@@ -218,18 +219,16 @@ namespace Hotcakes.Commerce.Orders
                 var item = orderItems[i];
                 if (!item.IsUserSuppliedPrice && !item.IsGiftCard)
                 {
-                    if (quantityMap.ContainsKey(item.ProductId))
+                    if (!itemsByProduct.TryGetValue(item.ProductId, out var list))
                     {
-                        quantityMap[item.ProductId] += item.Quantity;
+                        list = new List<LineItem>();
+                        itemsByProduct[item.ProductId] = list;
                     }
-                    else
-                    {
-                        quantityMap.Add(item.ProductId, item.Quantity);
-                    }
+                    list.Add(item);
                 }
             }
 
-            if (quantityMap.Count == 0) return;
+            if (itemsByProduct.Count == 0) return;
 
             // Cache the volume discount global text lookup
             var volumeDiscountGlobalText = GlobalLocalization.GetString(VOLUME_DISCOUNT_LOCALIZATION_KEY);
@@ -239,71 +238,71 @@ namespace Hotcakes.Commerce.Orders
             }
 
             var catalogServices = _app.CatalogServices;
+            var productCache = new Dictionary<string, Product>();
 
-            // Check for discounts on each item
-            foreach (var kvp in quantityMap)
+            // Check for discounts on each product group
+            foreach (var kvp in itemsByProduct)
             {
                 var productId = kvp.Key;
-                var quantity = kvp.Value;
+                var itemsList = kvp.Value;
+                var quantity = itemsList.Sum(li => li.Quantity);
 
                 var volumeDiscounts = catalogServices.VolumeDiscounts.FindByProductId(productId);
-
                 if (volumeDiscounts.Count == 0) continue;
 
                 // Locate the correct discount in the chart of discounts
                 var volumeDiscountToApply = volumeDiscounts.LastOrDefault(vd => quantity >= vd.Qty);
-
                 if (volumeDiscountToApply == null) continue;
 
                 // Cache product lookup
-                var p = catalogServices.Products.FindWithCache(productId);
+                if (!productCache.TryGetValue(productId, out var p))
+                {
+                    p = catalogServices.Products.FindWithCache(productId);
+                    productCache[productId] = p;
+                }
                 if (p == null) continue;
 
                 var sitePrice = p.SitePrice;
                 var volumeDiscountAmount = volumeDiscountToApply.Amount;
 
-                // Now we have to go through the entire order and discount all items
-                // Traversal through all items is required because few line items of same product may be present in the cart
-                for (var i = 0; i < itemsCount; i++)
+                // Apply discounts only to items of this product (itemsList)
+                for (var i = 0; i < itemsList.Count; i++)
                 {
-                    var item = orderItems[i];
-                    if (item.ProductId == productId)
+                    var item = itemsList[i];
+                    var itemQuantity = item.Quantity;
+                    var adjustedPricePerItem = item.BasePricePerItem + item.TotalDiscounts() / itemQuantity;
+                    var alreadyDiscounted = sitePrice > adjustedPricePerItem;
+                    var hasDiscounts = item.DiscountDetails.Count > 0;
+
+                    if (!alreadyDiscounted || !hasDiscounts)
                     {
-                        var itemQuantity = item.Quantity;
-                        var adjustedPricePerItem = item.BasePricePerItem + item.TotalDiscounts() / itemQuantity;
-                        var alreadyDiscounted = sitePrice > adjustedPricePerItem;
-                        var hasDiscounts = item.DiscountDetails.Count > 0;
+                        // item isn't discounted yet so apply the exact price the merchant set
+                        var toDiscount = -1 * (adjustedPricePerItem - volumeDiscountAmount);
+                        toDiscount = toDiscount * itemQuantity;
 
-                        if (!alreadyDiscounted || !hasDiscounts)
+                        item.DiscountDetails.Add(new DiscountDetail
                         {
-                            // item isn't discounted yet so apply the exact price the merchant set
-                            var toDiscount = -1 * (adjustedPricePerItem - volumeDiscountAmount);
-                            toDiscount = toDiscount * itemQuantity;
+                            Amount = toDiscount,
+                            Description = volumeDiscountGlobalText,
+                            DiscountType = PromotionType.VolumeDiscount
+                        });
+                    }
+                    else
+                    {
+                        // item is already discounted (probably by user group) so figure out
+                        // the percentage of volume discount instead
+                        var originalPriceChange = sitePrice - volumeDiscountAmount;
+                        var percentChange = originalPriceChange / sitePrice;
+                        var newDiscount = -1 * percentChange * adjustedPricePerItem;
+                        newDiscount = newDiscount * itemQuantity;
 
-                            item.DiscountDetails.Add(new DiscountDetail
-                            {
-                                Amount = toDiscount,
-                                Description = volumeDiscountGlobalText,
-                                DiscountType = PromotionType.VolumeDiscount
-                            });
-                        }
-                        else
+                        item.DiscountDetails.Add(new DiscountDetail
                         {
-                            // item is already discounted (probably by user group) so figure out
-                            // the percentage of volume discount instead
-                            var originalPriceChange = sitePrice - volumeDiscountAmount;
-                            var percentChange = originalPriceChange / sitePrice;
-                            var newDiscount = -1 * percentChange * adjustedPricePerItem;
-                            newDiscount = newDiscount * itemQuantity;
-
-                            item.DiscountDetails.Add(new DiscountDetail
-                            {
-                                Amount = newDiscount,
-                                Description =
-                                    percentChange.ToString(PERCENT_CHANGED_FORMAT) + volumeDiscountGlobalText,
-                                DiscountType = PromotionType.VolumeDiscount
-                            });
-                        }
+                            Amount = newDiscount,
+                            Description =
+                                percentChange.ToString(PERCENT_CHANGED_FORMAT) + volumeDiscountGlobalText,
+                            DiscountType = PromotionType.VolumeDiscount
+                        });
                     }
                 }
             }
@@ -314,13 +313,18 @@ namespace Hotcakes.Commerce.Orders
             var catalogServices = _app.CatalogServices;
             var orderItems = order.Items;
             var itemsCount = orderItems.Count;
+            var productCache = new Dictionary<string, Product>();
 
             for (var i = 0; i < itemsCount; i++)
             {
                 var item = orderItems[i];
                 if (item.IsUpchargeAllowed)
                 {
-                    var p = catalogServices.Products.FindWithCache(item.ProductId);
+                    if (!productCache.TryGetValue(item.ProductId, out var p))
+                    {
+                        p = catalogServices.Products.FindWithCache(item.ProductId);
+                        productCache[item.ProductId] = p;
+                    }
 
                     if (p != null && p.AllowUpcharge)
                     {
@@ -506,7 +510,6 @@ namespace Hotcakes.Commerce.Orders
                 //   Order with 2 items; shipping per item=$2; handling per order=$1
                 //   - LineItemFreeShipping: shipping before discount=$5, shipping after discount=$1 
                 //   - OrderShippingAjustment(%50): shipping before discount=$5, shipping after discount=$2.5
-
                 totalHandling += totalShipping;
                 totalShipping = 0;
 
@@ -712,6 +715,9 @@ namespace Hotcakes.Commerce.Orders
             CustomerAccount user = null;
             var userCached = false;
 
+            // Cache schedules to avoid repeated lookups
+            var scheduleCache = new Dictionary<int, ITaxSchedule>();
+
             var itemsCount2 = items.Count;
             for (var i = 0; i < itemsCount2; i++)
             {
@@ -719,7 +725,18 @@ namespace Hotcakes.Commerce.Orders
 
                 if (item.IsTaxExempt) continue;
 
-                ITaxSchedule schedule = taxSchedules.FindForThisStore(item.TaxSchedule);
+                // Use long as the key type for scheduleCache
+                ITaxSchedule schedule;
+                int scheduleKey = item.TaxSchedule.GetHashCode();
+                if (scheduleCache.ContainsKey(scheduleKey))
+                {
+                    schedule = scheduleCache[scheduleKey];
+                }
+                else
+                {
+                    schedule = taxSchedules.FindForThisStore(item.TaxSchedule);
+                    if (schedule != null) scheduleCache[scheduleKey] = schedule;
+                }
 
                 if (schedule == null) continue;
 

@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -24,12 +24,14 @@
 
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.UI.WebControls;
 using Hotcakes.Commerce.Marketing.PromotionQualifications;
 using Hotcakes.Modules.Core.Admin.AppCode;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Web.UI.WebControls;
+using Hotcakes.Commerce.Catalog;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 {
@@ -42,38 +44,49 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 
         protected void btnAddLineItemCategory_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(lstLineItemCategories.SelectedValue))
+            var selected = lstLineItemCategories?.SelectedValue?.Trim();
+            var q = TypedQualification;
+            if (!string.IsNullOrEmpty(selected) && q != null)
             {
-                var q = TypedQualification;
-                q.AddCategoryId(lstLineItemCategories.SelectedValue);
+                q.AddCategoryId(selected);
+                UpdatePromotion();
             }
-            UpdatePromotion();
+
             LoadQualification();
         }
 
         protected void gvLineItemCategories_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             var q = TypedQualification;
-            var bvin = (string) e.Keys[0];
-            q.RemoveCategoryId(bvin);
+            if (q == null || e?.Keys == null || e.Keys.Count == 0) return;
+
+            var bvin = e.Keys[0] as string;
+            if (string.IsNullOrWhiteSpace(bvin)) return;
+
+            q.RemoveCategoryId(bvin.Trim());
             UpdatePromotion();
             LoadQualification();
         }
 
         public override void LoadQualification()
         {
-            var allCats = HccApp.CatalogServices.Categories.FindAll();
-            var available = CategoriesHelper.ListFullTreeWithIndents(allCats, true);
+            var allCats = HccApp?.CatalogServices?.Categories?.FindAll() ?? new List<CategorySnapshot>();
+            var available = CategoriesHelper.ListFullTreeWithIndents(allCats, true) ?? new Collection<ListItem>();
 
             var displayData = new List<FriendlyBvinDisplay>();
 
-            foreach (var bvin in TypedQualification.CurrentCategoryIds())
+            var currentIds = TypedQualification?.CurrentCategoryIds() ?? new List<string>();
+            foreach (var bvin in currentIds)
             {
-                var item = new FriendlyBvinDisplay();
-                item.bvin = bvin;
-                item.DisplayName = bvin;
+                if (string.IsNullOrWhiteSpace(bvin)) continue;
 
-                var t = available.FirstOrDefault(y => y.Value == bvin);
+                var item = new FriendlyBvinDisplay
+                {
+                    bvin = bvin,
+                    DisplayName = bvin
+                };
+
+                var t = available.FirstOrDefault(y => string.Equals(y.Value, bvin, StringComparison.OrdinalIgnoreCase));
                 if (t != null)
                 {
                     item.DisplayName = t.Text;
@@ -88,14 +101,18 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
                 lstLineItemCategories.Items.Add(li);
             }
 
-            chkLineItemCategoryNot.Checked = TypedQualification.CategoryNot;
+            chkLineItemCategoryNot.Checked = TypedQualification?.CategoryNot ?? false;
             gvLineItemCategories.DataSource = displayData;
             gvLineItemCategories.DataBind();
         }
 
         public override bool SaveQualification()
         {
-            TypedQualification.CategoryNot = chkLineItemCategoryNot.Checked;
+            var q = TypedQualification;
+            if (q != null)
+            {
+                q.CategoryNot = chkLineItemCategoryNot.Checked;
+            }
 
             return UpdatePromotion();
         }

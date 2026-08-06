@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
@@ -39,37 +40,56 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
         }
 
         #endregion
-
+            
         #region Public methods
 
         public List<string> GetProductIds()
         {
-            return GetSettingArr("products");
+            // Ensure normalization (trim + lower) to match comparisons elsewhere
+            return GetSettingArr("products")
+                .Where(s => !string.IsNullOrWhiteSpace(s))
+                .Select(s => s.Trim().ToLowerInvariant())
+                .ToList();
         }
 
         public void AddProductIds(IEnumerable<string> bvins)
         {
-            AddSettingItems("products", bvins);
+            if (bvins == null) return;
+            var existing = GetProductIds();
+            var normalized = bvins
+                .Where(s => !string.IsNullOrWhiteSpace(s))
+                .Select(s => s.Trim().ToLowerInvariant())
+                .Where(s => !existing.Contains(s))
+                .ToList();
+
+            if (normalized.Count == 0) return;
+
+            var combined = existing.Concat(normalized).ToList();
+            AddSettingItems("products", combined);
         }
 
         public void RemoveProductId(string bvin)
         {
-            RemoveSettingItem("products", bvin);
+            if (string.IsNullOrWhiteSpace(bvin)) return;
+            var normalized = bvin.Trim().ToLowerInvariant();
+            RemoveSettingItem("products", normalized);
         }
 
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var result = "When Line Item is:<ul>";
-
-            foreach (var id in GetProductIds())
+            var ids = GetProductIds();
+            if (ids.Count > 0 && app?.CatalogServices?.Products != null)
             {
-                var p = app.CatalogServices.Products.FindWithCache(id);
-                if (p != null)
+                foreach (var id in ids)
                 {
-                    result += "<li>[" + p.Sku + "] " + p.ProductName + "</li>";
+                    var p = app.CatalogServices.Products.FindWithCache(id);
+                    if (p != null)
+                    {
+                        result += "<li>[" + p.Sku + "] " + p.ProductName + "</li>";
+                    }
                 }
             }
-
             result += "</ul>";
             return result;
         }
@@ -85,7 +105,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
         }
 
         public ProductBvin(string bvin)
-            : this(new List<string> {bvin})
+            : this(new List<string> { bvin })
         {
         }
 
@@ -103,12 +123,16 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var result = "When Product is:<ul>";
-            foreach (var bvin in GetProductIds())
+            var ids = GetProductIds();
+            if (ids.Count > 0 && app?.CatalogServices?.Products != null)
             {
-                var p = app.CatalogServices.Products.FindWithCache(bvin);
-                if (p != null)
+                foreach (var bvin in ids)
                 {
-                    result += "<li>[" + p.Sku + "] " + p.ProductName + "</li>";
+                    var p = app.CatalogServices.Products.FindWithCache(bvin);
+                    if (p != null)
+                    {
+                        result += "<li>[" + p.Sku + "] " + p.ProductName + "</li>";
+                    }
                 }
             }
             result += "</ul>";
@@ -122,7 +146,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             if (context.Product == null) return false;
             if (context.UserPrice == null) return false;
 
-            var match = context.Product.Bvin.Trim().ToLowerInvariant();
+            var match = (context.Product.Bvin ?? string.Empty).Trim().ToLowerInvariant();
 
             return GetProductIds().Contains(match);
         }

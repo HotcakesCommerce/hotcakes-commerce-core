@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
+using Hotcakes.Commerce.Contacts;
 using Hotcakes.Commerce.Marketing.PromotionQualifications;
 using Hotcakes.Modules.Core.Admin.AppCode;
 
@@ -43,7 +44,12 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
         protected void btnAddUserIsInGroup_Click(object sender, EventArgs e)
         {
             var q = TypedQualification;
-            q.AddGroup(lstUserIsInGroup.SelectedValue);
+            if (q == null || lstUserIsInGroup == null) return;
+
+            var selected = lstUserIsInGroup.SelectedValue;
+            if (string.IsNullOrWhiteSpace(selected)) return;
+
+            q.AddGroup(selected.Trim());
             UpdatePromotion();
             LoadQualification();
         }
@@ -51,7 +57,15 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
         protected void gvUserIsInGroup_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             var q = TypedQualification;
-            var bvin = (string) e.Keys[0];
+            if (q == null) return;
+            if (e.Keys == null || e.Keys.Count == 0) return;
+
+            var keyObj = e.Keys[0];
+            if (keyObj == null) return;
+
+            var bvin = keyObj as string ?? keyObj.ToString();
+            if (string.IsNullOrWhiteSpace(bvin)) return;
+
             q.RemoveGroup(bvin);
             UpdatePromotion();
             LoadQualification();
@@ -59,34 +73,49 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 
         public override void LoadQualification()
         {
-            var allGroups = HccApp.ContactServices.PriceGroups.FindAll();
+            var q = TypedQualification;
+            if (q == null) return;
+
+            var allGroups = HccApp?.ContactServices?.PriceGroups?.FindAll() ?? new List<PriceGroup>();
 
             var displayData = new List<FriendlyBvinDisplay>();
 
-            foreach (var bvin in TypedQualification.CurrentGroupIds())
+            foreach (var bvin in q.CurrentGroupIds() ?? Enumerable.Empty<string>())
             {
+                if (string.IsNullOrWhiteSpace(bvin)) continue;
+
                 var item = new FriendlyBvinDisplay
                 {
                     bvin = bvin,
                     DisplayName = bvin
                 };
 
-                var t = allGroups.FirstOrDefault(y => y.Bvin == bvin);
+                // Match by trimmed ordinal ignore-case
+                var trimmed = bvin.Trim();
+                var t = allGroups.FirstOrDefault(y => string.Equals((y.Bvin ?? string.Empty).Trim(), trimmed, StringComparison.OrdinalIgnoreCase));
                 if (t != null)
                 {
-                    item.DisplayName = t.Name;
+                    item.DisplayName = t.Name ?? trimmed;
+                    // remove matched to avoid duplicates in selection list
                     allGroups.Remove(t);
                 }
+
                 displayData.Add(item);
             }
 
-            lstUserIsInGroup.DataSource = allGroups;
-            lstUserIsInGroup.DataValueField = "Bvin";
-            lstUserIsInGroup.DataTextField = "Name";
-            lstUserIsInGroup.DataBind();
+            if (lstUserIsInGroup != null)
+            {
+                lstUserIsInGroup.DataSource = allGroups;
+                lstUserIsInGroup.DataValueField = "Bvin";
+                lstUserIsInGroup.DataTextField = "Name";
+                lstUserIsInGroup.DataBind();
+            }
 
-            gvUserIsInGroup.DataSource = displayData;
-            gvUserIsInGroup.DataBind();
+            if (gvUserIsInGroup != null)
+            {
+                gvUserIsInGroup.DataSource = displayData;
+                gvUserIsInGroup.DataBind();
+            }
         }
 
         public override bool SaveQualification()

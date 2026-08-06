@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -26,6 +26,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
@@ -43,69 +45,77 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         public List<string> UserIds()
         {
-            var result = new List<string>();
-            var all = GetSetting("userids");
-            var parts = all.Split(',');
-            foreach (var s in parts)
-            {
-                if (s != string.Empty)
-                {
-                    result.Add(s.Trim().ToUpperInvariant());
-                }
-            }
-            return result;
+            var all = GetSetting("userids") ?? string.Empty;
+
+            var parts = all
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => s.Trim())
+                .Where(s => s.Length > 0)
+                .Select(s => s.ToUpperInvariant())
+                .ToList();
+
+            return parts;
         }
 
-        private void SaveUserIdsToSettings(List<string> coupons)
+        private void SaveUserIdsToSettings(IEnumerable<string> userIds)
         {
-            var all = string.Empty;
-            foreach (var s in coupons)
+            if (userIds == null)
             {
-                if (s != string.Empty)
-                {
-                    all += s.Trim().ToUpperInvariant() + ",";
-                }
+                SetSetting("userids", string.Empty);
+                return;
             }
-            all = all.TrimEnd(',');
-            SetSetting("userids", all);
+
+            var cleaned = userIds
+                .Where(s => !string.IsNullOrWhiteSpace(s))
+                .Select(s => s.Trim().ToUpperInvariant());
+
+            SetSetting("userids", string.Join(",", cleaned));
         }
 
         public override string FriendlyDescription(HotcakesApplication app)
         {
-            var result = "When User Is:<ul>";
+            var sb = new StringBuilder();
+            sb.Append("When User Is:<ul>");
 
             foreach (var userid in UserIds())
             {
                 var c = app.MembershipServices.Customers.Find(userid);
                 if (c != null)
                 {
-                    result += "<li>" + c.Email + "</li>";
+                    sb.Append("<li>");
+                    sb.Append(c.Email);
+                    sb.Append("</li>");
                 }
             }
 
-            result += "</ul>";
-            return result;
+            sb.Append("</ul>");
+            return sb.ToString();
         }
 
         public void AddUserId(string uid)
         {
-            var _UserIds = UserIds();
+            if (string.IsNullOrWhiteSpace(uid)) return;
 
-            var possible = uid.Trim().ToUpperInvariant();
-            if (possible == string.Empty) return;
-            if (_UserIds.Contains(possible)) return;
-            _UserIds.Add(possible);
-            SaveUserIdsToSettings(_UserIds);
+            var candidate = uid.Trim().ToUpperInvariant();
+            var ids = UserIds();
+
+            if (ids.Contains(candidate)) return;
+
+            ids.Add(candidate);
+            SaveUserIdsToSettings(ids);
         }
 
         public void RemoveUserId(string uid)
         {
-            var _UserIds = UserIds();
-            if (_UserIds.Contains(uid.Trim().ToUpperInvariant()))
-            {
-                _UserIds.Remove(uid.Trim().ToUpperInvariant());
-                SaveUserIdsToSettings(_UserIds);
-            }
+            if (string.IsNullOrWhiteSpace(uid)) return;
+
+            var candidate = uid.Trim().ToUpperInvariant();
+            var ids = UserIds();
+
+            if (!ids.Contains(candidate)) return;
+
+            ids.RemoveAll(x => string.Equals(x, candidate, StringComparison.OrdinalIgnoreCase));
+            SaveUserIdsToSettings(ids);
         }
 
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)

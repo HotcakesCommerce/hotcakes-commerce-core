@@ -1,9 +1,9 @@
-﻿#region License
+﻿    #region License
 
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Marketing.PromotionActions
@@ -48,49 +49,42 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         public List<string> MethodIds()
         {
-            var result = new List<string>();
-            var all = GetSetting("methodids");
-            var parts = all.Split(',');
-            foreach (var s in parts)
-            {
-                if (s != string.Empty)
-                {
-                    result.Add(s.Trim().ToUpperInvariant());
-                }
-            }
-            return result;
+            var all = GetSetting("methodids") ?? string.Empty;
+            var parts = all.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            return parts
+                .Select(s => s.Trim())
+                .Where(s => s.Length > 0)
+                .Select(s => s.ToUpperInvariant())
+                .ToList();
         }
 
-        private void SaveMethodIdsToSettings(List<string> methodIds)
+        private void SaveMethodIdsToSettings(IEnumerable<string> methodIds)
         {
-            var all = string.Empty;
-            foreach (var s in methodIds)
-            {
-                if (s != string.Empty)
-                {
-                    all += s.Trim().ToUpperInvariant() + ",";
-                }
-            }
-            all = all.TrimEnd(',');
+            var normalized = methodIds
+                .Where(s => !string.IsNullOrWhiteSpace(s))
+                .Select(s => s.Trim().ToUpperInvariant());
+            var all = string.Join(",", normalized);
             SetSetting("methodids", all);
         }
 
         public override string FriendlyDescription(HotcakesApplication app)
         {
-            if (MethodIds().Count < 1)
+            var ids = MethodIds();
+            if (ids.Count < 1)
             {
                 return "Make Qualifying Items Free Shipping";
             }
+
             var methods = app.OrderServices.ShippingMethods.FindAll(app.CurrentStore.Id);
 
             var result = "Make Qualifying Items Free Shipping:<ul>";
-            foreach (var itemid in MethodIds())
+            foreach (var itemid in ids)
             {
                 var displayName = itemid;
 
                 if (methods != null)
                 {
-                    var m = methods.SingleOrDefault(y => y.Bvin.ToUpperInvariant() == itemid.ToUpperInvariant());
+                    var m = methods.SingleOrDefault(y => string.Equals(y.Bvin, itemid, StringComparison.OrdinalIgnoreCase));
                     if (m != null)
                     {
                         displayName = m.Name;
@@ -105,31 +99,34 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         public void AddItemId(string itemid)
         {
-            var _ItemIds = MethodIds();
+            if (string.IsNullOrWhiteSpace(itemid)) return;
 
+            var ids = MethodIds();
             var possible = itemid.Trim().ToUpperInvariant();
-            if (possible == string.Empty) return;
-            if (_ItemIds.Contains(possible)) return;
-            _ItemIds.Add(possible);
-            SaveMethodIdsToSettings(_ItemIds);
+            if (ids.Contains(possible)) return;
+            ids.Add(possible);
+            SaveMethodIdsToSettings(ids);
         }
 
         public void RemoveItemId(string itemid)
         {
-            var _ItemIds = MethodIds();
-            if (_ItemIds.Contains(itemid.Trim().ToUpperInvariant()))
+            if (string.IsNullOrWhiteSpace(itemid)) return;
+
+            var ids = MethodIds();
+            var normalized = itemid.Trim().ToUpperInvariant();
+            if (ids.Contains(normalized))
             {
-                _ItemIds.Remove(itemid.Trim().ToUpperInvariant());
-                SaveMethodIdsToSettings(_ItemIds);
+                ids.Remove(normalized);
+                SaveMethodIdsToSettings(ids);
             }
         }
 
 
         public override bool ApplyAction(PromotionContext context)
         {
+            if (context == null) return false;
             if (context.Mode != PromotionType.OfferForLineItems) return false;
 
-            if (context == null) return false;
             if (context.Order == null) return false;
             if (context.Order.Items == null) return false;
 
@@ -137,11 +134,14 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
             var li = context.CurrentlyProcessingLineItem;
             li.IsMarkedForFreeShipping = true;
-            if (MethodIds().Count > 0)
+
+            var methodIds = MethodIds();
+            if (methodIds.Count > 0)
             {
-                foreach (var methodId in MethodIds())
+                var normalizedMethodIds = new HashSet<string>(methodIds, StringComparer.OrdinalIgnoreCase);
+                foreach (var methodId in normalizedMethodIds)
                 {
-                    if (!li.FreeShippingMethodIds.Contains(methodId))
+                    if (!li.FreeShippingMethodIds.Any(x => string.Equals(x, methodId, StringComparison.OrdinalIgnoreCase)))
                     {
                         li.FreeShippingMethodIds.Add(methodId.ToUpperInvariant());
                     }
@@ -156,12 +156,12 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
                 if (!string.IsNullOrWhiteSpace(context.CurrentShippingMethodId))
                 {
                     baseShippingRate = context.AdjustedShippingRate;
-                    currentShippingMethodID = context.CurrentShippingMethodId;
+                    currentShippingMethodID = context.CurrentShippingMethodId ?? string.Empty;
                 }
                 else
                 {
                     baseShippingRate = context.Order.TotalShippingBeforeDiscounts;
-                    currentShippingMethodID = context.Order.ShippingMethodId;
+                    currentShippingMethodID = context.Order.ShippingMethodId ?? string.Empty;
                 }
 
 

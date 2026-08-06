@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -68,7 +68,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
         public Dictionary<string, string> Settings
         {
             get { return _Settings; }
-            set { _Settings = value; }
+            set { _Settings = value ?? new Dictionary<string, string>(); }
         }
 
         public virtual bool HasOptions
@@ -85,107 +85,155 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         protected List<int> GetSettingIds(string key)
         {
-            return GetSettingArr(key).Select(i => Convert.ToInt32(i)).ToList();
+            return GetSettingArr(key)
+                .Select(s =>
+                {
+                    int.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out var v);
+                    return v;
+                })
+                .ToList();
         }
 
         protected List<string> GetSettingArr(string key)
         {
             var str = GetSetting(key);
-            if (!string.IsNullOrEmpty(str))
-            {
-                return str.Split(',').ToList();
-            }
-            return new List<string>();
+            if (string.IsNullOrEmpty(str)) return new List<string>();
+            return str
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => s.Trim())
+                .Where(s => s.Length > 0)
+                .ToList();
         }
 
         protected void AddSettingItem(string key, string item)
         {
-            AddSettingItems(key, new List<string> {item});
+            AddSettingItems(key, new[] { item });
         }
 
         protected void AddSettingItems(string key, IEnumerable<string> newItems)
         {
             var items = GetSettingArr(key);
-            items.AddRange(newItems);
+            if (newItems != null)
+            {
+                items.AddRange(newItems.Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x.Trim()));
+            }
             SetSetting(key, items);
         }
 
         protected void RemoveSettingItem(string key, string item)
         {
+            if (string.IsNullOrWhiteSpace(item))
+            {
+                return;
+            }
+
             var items = GetSettingArr(key);
-            items.Remove(item);
+            var cleaned = item.Trim();
+            items.RemoveAll(i => string.Equals(i, cleaned, StringComparison.OrdinalIgnoreCase));
             SetSetting(key, items);
         }
 
         protected string GetSetting(string key)
         {
             if (Settings == null) return string.Empty;
-            if (!Settings.ContainsKey(key)) return string.Empty;
-            var result = Settings[key];
-            return result;
+            if (string.IsNullOrEmpty(key)) return string.Empty;
+            if (!Settings.TryGetValue(key, out var result)) return string.Empty;
+            return result ?? string.Empty;
         }
 
         protected int GetSettingAsInt(string key)
         {
-            if (Settings == null) return -1;
             var result = GetSetting(key);
-            if (result == null) return -1;
-            var temp = -1;
-            int.TryParse(result, NumberStyles.Any, CultureInfo.InvariantCulture, out temp);
-            return temp;
+            if (string.IsNullOrEmpty(result)) return -1;
+            if (int.TryParse(result, NumberStyles.Any, CultureInfo.InvariantCulture, out var temp)) return temp;
+            return -1;
         }
 
         protected decimal GetSettingAsDecimal(string key)
         {
-            if (Settings == null) return -1;
             var result = GetSetting(key);
-            if (result == null) return -1;
-            decimal temp = -1;
-            decimal.TryParse(result, NumberStyles.Any, CultureInfo.InvariantCulture, out temp);
-            return temp;
+            if (string.IsNullOrEmpty(result)) return -1;
+            if (decimal.TryParse(result, NumberStyles.Any, CultureInfo.InvariantCulture, out var temp)) return temp;
+            return -1;
         }
 
         protected bool GetSettingAsBool(string key)
         {
-            if (Settings == null) return false;
             var result = GetSetting(key);
-            if (result == null) return false;
+            if (string.IsNullOrEmpty(result)) return false;
+            // Preserve original encoding ("1" == true) but accept "true" (case-insensitive) as well.
             if (result == ONE) return true;
+            if (bool.TryParse(result, out var b)) return b;
             return false;
         }
 
         protected void SetSetting(string key, List<string> ids)
         {
-            SetSetting(key, string.Join(",", ids));
+            SetSetting(key, ids ?? new List<string>());
         }
 
         protected void SetSetting(string key, List<int> ids)
         {
-            SetSetting(key, string.Join(",", ids));
+            SetSetting(key, ids ?? new List<int>());
         }
 
         protected void SetSetting(string key, string value)
         {
             if (Settings == null) return;
-            Settings[key] = value;
+            if (string.IsNullOrEmpty(key)) return;
+            Settings[key] = value ?? string.Empty;
         }
 
         protected void SetSetting(string key, int value)
         {
             if (Settings == null) return;
+            if (string.IsNullOrEmpty(key)) return;
             Settings[key] = value.ToString(CultureInfo.InvariantCulture);
         }
 
         protected void SetSetting(string key, decimal value)
         {
             if (Settings == null) return;
+            if (string.IsNullOrEmpty(key)) return;
             Settings[key] = value.ToString(CultureInfo.InvariantCulture);
         }
 
         protected void SetSetting(string key, bool value)
         {
             if (Settings == null) return;
+            if (string.IsNullOrEmpty(key)) return;
             Settings[key] = value ? ONE : ZERO;
+        }
+
+        private void SetSetting(string key, IEnumerable<string> values)
+        {
+            if (Settings == null) return;
+            if (string.IsNullOrEmpty(key)) return;
+            if (values == null)
+            {
+                Settings[key] = string.Empty;
+                return;
+            }
+
+            var cleaned = values
+                .Where(s => !string.IsNullOrWhiteSpace(s))
+                .Select(s => s.Trim())
+                .ToArray();
+
+            Settings[key] = string.Join(",", cleaned);
+        }
+
+        private void SetSetting(string key, IEnumerable<int> values)
+        {
+            if (Settings == null) return;
+            if (string.IsNullOrEmpty(key)) return;
+            if (values == null)
+            {
+                Settings[key] = string.Empty;
+                return;
+            }
+
+            Settings[key] = string.Join(",", values.Select(v => v.ToString(CultureInfo.InvariantCulture)));
         }
     }
 }

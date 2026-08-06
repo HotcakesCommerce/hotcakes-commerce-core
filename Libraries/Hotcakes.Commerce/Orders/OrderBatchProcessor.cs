@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -37,21 +37,27 @@ namespace Hotcakes.Commerce.Orders
             var totalCount = 0;
             var currentPage = 1;
 
+            var ordersRepo = svc.Orders;
+
             // Process all pages, not just the first 1000
             do
             {
-                var orders = svc.Orders.FindByCriteriaPaged(criteria, currentPage, pageSize, ref totalCount);
+                var orders = ordersRepo.FindByCriteriaPaged(criteria, currentPage, pageSize, ref totalCount);
                 if (orders == null || orders.Count == 0)
                     break;
 
                 foreach (var o in orders)
                 {
-                    var ord = svc.Orders.FindForCurrentStore(o.bvin);
+                    var ord = ordersRepo.FindForCurrentStore(o.bvin);
                     if (ord != null)
                     {
-                        ord.StatusCode = OrderStatusCode.ReadyForPayment;
-                        ord.StatusName = "Ready for Payment";
-                        svc.Orders.Update(ord);
+                        // Avoid unnecessary updates by checking current status
+                        if (ord.StatusCode != OrderStatusCode.ReadyForPayment)
+                        {
+                            ord.StatusCode = OrderStatusCode.ReadyForPayment;
+                            ord.StatusName = "Ready for Payment";
+                            ordersRepo.Update(ord);
+                        }
                     }
                 }
 
@@ -64,31 +70,34 @@ namespace Hotcakes.Commerce.Orders
             var orders = app.OrderServices.Orders.FindAll();
             if (orders != null)
             {
+                var transactionsRepo = app.OrderServices.Transactions;
+                var ordersRepo = app.OrderServices.Orders;
+                var catalog = app.CatalogServices;
+
                 foreach (var objOrderSnapshot in orders)
                 {
                     // Use snapshot bvin directly instead of retrieving full order again
                     var orderBvin = objOrderSnapshot.bvin;
 
                     // Get transactions and delete them
-                    var transactions = app.OrderServices.Transactions.FindForOrder(orderBvin);
+                    var transactions = transactionsRepo.FindForOrder(orderBvin);
                     foreach (var transaction in transactions)
                     {
-                        app.OrderServices.Transactions.Delete(transaction.Id);
+                        transactionsRepo.Delete(transaction.Id);
                     }
 
                     // Only retrieve full order once for inventory unreservation
-                    var objOrder = app.OrderServices.Orders.FindForCurrentStore(orderBvin);
+                    var objOrder = ordersRepo.FindForCurrentStore(orderBvin);
                     if (objOrder != null)
                     {
                         var lstLineItems = objOrder.Items;
 
                         foreach (var objLineItem in lstLineItems)
                         {
-                            // Remove unused inventory retrieval - it's never used
-                            app.CatalogServices.InventoryLineItemUnreserveInventory(objLineItem);
+                            catalog.InventoryLineItemUnreserveInventory(objLineItem);
                         }
 
-                        app.OrderServices.Orders.Delete(orderBvin);
+                        ordersRepo.Delete(orderBvin);
                     }
                 }
             }
@@ -102,10 +111,14 @@ namespace Hotcakes.Commerce.Orders
             var pageSize = 1000;
             var currentPage = 1;
 
+            var transactionsRepo = app.OrderServices.Transactions;
+            var ordersRepo = app.OrderServices.Orders;
+            var catalog = app.CatalogServices;
+
             // Process all pages, not just the first 1000
             do
             {
-                var orders = app.OrderServices.Orders.FindByUserId(CustomerID, currentPage, pageSize, ref totalCount);
+                var orders = ordersRepo.FindByUserId(CustomerID, currentPage, pageSize, ref totalCount);
                 if (orders == null || orders.Count == 0)
                     break;
 
@@ -115,25 +128,24 @@ namespace Hotcakes.Commerce.Orders
                     var orderBvin = objOrderSnapshot.bvin;
 
                     // Get transactions and delete them
-                    var transactions = app.OrderServices.Transactions.FindForOrder(orderBvin);
+                    var transactions = transactionsRepo.FindForOrder(orderBvin);
                     foreach (var transaction in transactions)
                     {
-                        app.OrderServices.Transactions.Delete(transaction.Id);
+                        transactionsRepo.Delete(transaction.Id);
                     }
 
                     // Only retrieve full order once for inventory unreservation
-                    var objOrder = app.OrderServices.Orders.FindForCurrentStore(orderBvin);
+                    var objOrder = ordersRepo.FindForCurrentStore(orderBvin);
                     if (objOrder != null)
                     {
                         var lstLineItems = objOrder.Items;
 
                         foreach (var objLineItem in lstLineItems)
                         {
-                            // Remove unused inventory retrieval - it's never used
-                            app.CatalogServices.InventoryLineItemUnreserveInventory(objLineItem);
+                            catalog.InventoryLineItemUnreserveInventory(objLineItem);
                         }
 
-                        app.OrderServices.Orders.Delete(orderBvin);
+                        ordersRepo.Delete(orderBvin);
                     }
                 }
 
@@ -152,17 +164,19 @@ namespace Hotcakes.Commerce.Orders
             var totalCount = 0;
             var currentPage = 1;
 
+            var ordersRepo = app.OrderServices.Orders;
+
             // Process all pages, not just the first 1000
             do
             {
-                var orders = app.OrderServices.Orders.FindByCriteriaPaged(criteria, currentPage, pageSize, ref totalCount);
+                var orders = ordersRepo.FindByCriteriaPaged(criteria, currentPage, pageSize, ref totalCount);
                 if (orders == null || orders.Count == 0)
                     break;
 
                 foreach (var os in orders)
                 {
                     // Retrieve full order only once
-                    var o = app.OrderServices.Orders.FindForCurrentStore(os.bvin);
+                    var o = ordersRepo.FindForCurrentStore(os.bvin);
                     if (o == null)
                         continue;
 
@@ -174,17 +188,19 @@ namespace Hotcakes.Commerce.Orders
                     if (o.PaymentStatus == OrderPaymentStatus.Paid ||
                         o.PaymentStatus == OrderPaymentStatus.Overpaid)
                     {
-                        if (o.ShippingStatus == OrderShippingStatus.FullyShipped)
+                        var newStatus = o.ShippingStatus == OrderShippingStatus.FullyShipped
+                            ? OrderStatusCode.Completed
+                            : OrderStatusCode.ReadyForShipping;
+
+                        var newStatusName = newStatus == OrderStatusCode.Completed ? "Completed" : "Ready for Shipping";
+
+                        // Only update when status actually changes to avoid redundant DB writes
+                        if (o.StatusCode != newStatus || o.StatusName != newStatusName)
                         {
-                            o.StatusCode = OrderStatusCode.Completed;
-                            o.StatusName = "Completed";
+                            o.StatusCode = newStatus;
+                            o.StatusName = newStatusName;
+                            ordersRepo.Update(o);
                         }
-                        else
-                        {
-                            o.StatusCode = OrderStatusCode.ReadyForShipping;
-                            o.StatusName = "Ready for Shipping";
-                        }
-                        app.OrderServices.Orders.Update(o);
                     }
                 }
 
@@ -235,17 +251,19 @@ namespace Hotcakes.Commerce.Orders
             var totalCount = 0;
             var currentPage = 1;
 
+            var ordersRepo = app.OrderServices.Orders;
+
             // Process all pages, not just the first 1000
             do
             {
-                var orders = app.OrderServices.Orders.FindByCriteriaPaged(criteria, currentPage, pageSize, ref totalCount);
+                var orders = ordersRepo.FindByCriteriaPaged(criteria, currentPage, pageSize, ref totalCount);
                 if (orders == null || orders.Count == 0)
                     break;
 
                 foreach (var os in orders)
                 {
                     // Retrieve full order only once
-                    var o = app.OrderServices.Orders.FindForCurrentStore(os.bvin);
+                    var o = ordersRepo.FindForCurrentStore(os.bvin);
                     if (o == null)
                         continue;
 

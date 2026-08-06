@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
@@ -48,67 +49,66 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         public List<string> CurrentCategoryIds()
         {
-            var result = new List<string>();
-            var all = GetSetting("CategoryIds");
-            var parts = all.Split(',');
-            foreach (var s in parts)
-            {
-                if (s != string.Empty)
-                {
-                    result.Add(s);
-                }
-            }
-            return result;
+            var all = GetSetting("CategoryIds") ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(all)) return new List<string>();
+
+            return all
+                .Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => s.Trim().ToLowerInvariant())
+                .Where(s => s.Length > 0)
+                .ToList();
         }
 
-        private void SaveCategoryIdsToSettings(List<string> typeIds)
+        private void SaveCategoryIdsToSettings(IEnumerable<string> typeIds)
         {
-            var all = string.Empty;
-            foreach (var s in typeIds)
-            {
-                if (s != string.Empty)
-                {
-                    all += s + ",";
-                }
-            }
-            all = all.TrimEnd(',');
+            var list = typeIds?.Where(s => !string.IsNullOrWhiteSpace(s)).ToList() ?? new List<string>();
+            var all = list.Count == 0 ? string.Empty : string.Join(",", list);
             SetSetting("CategoryIds", all);
         }
 
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var result = "When Product Category Is:<ul>";
-            foreach (var bvin in CurrentCategoryIds())
+            var ids = CurrentCategoryIds();
+
+            if (ids.Count > 0 && app?.CatalogServices?.Categories != null)
             {
-                var c = app.CatalogServices.Categories.Find(bvin);
-                if (c != null)
+                foreach (var bvin in ids)
                 {
-                    result += "<li>" + c.Name + "<br />";
-                    result += "<em>" + c.RewriteUrl + "</em></li>";
+                    var c = app.CatalogServices.Categories.Find(bvin);
+                    if (c != null)
+                    {
+                        result += "<li>" + c.Name + "<br />";
+                        result += "<em>" + c.RewriteUrl + "</em></li>";
+                    }
                 }
             }
+
             result += "</ul>";
             return result;
         }
 
         public void AddCategoryId(string id)
         {
-            var _Ids = CurrentCategoryIds();
+            if (string.IsNullOrWhiteSpace(id)) return;
 
+            var ids = CurrentCategoryIds();
             var possible = id.Trim().ToLowerInvariant();
-            if (possible == string.Empty) return;
-            if (_Ids.Contains(possible)) return;
-            _Ids.Add(possible);
-            SaveCategoryIdsToSettings(_Ids);
+            if (ids.Contains(possible)) return;
+
+            ids.Add(possible);
+            SaveCategoryIdsToSettings(ids);
         }
 
         public void RemoveCategoryId(string id)
         {
-            var _Ids = CurrentCategoryIds();
-            if (_Ids.Contains(id))
+            if (string.IsNullOrWhiteSpace(id)) return;
+
+            var ids = CurrentCategoryIds();
+            var normalized = id.Trim().ToLowerInvariant();
+            if (ids.Remove(normalized))
             {
-                _Ids.Remove(id);
-                SaveCategoryIdsToSettings(_Ids);
+                SaveCategoryIdsToSettings(ids);
             }
         }
 

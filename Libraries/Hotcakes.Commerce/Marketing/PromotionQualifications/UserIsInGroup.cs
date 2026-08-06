@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
@@ -43,30 +44,30 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         public List<string> CurrentGroupIds()
         {
-            var result = new List<string>();
-            var all = GetSetting("groupids");
-            var parts = all.Split(',');
-            foreach (var s in parts)
-            {
-                if (s != string.Empty)
-                {
-                    result.Add(s.Trim().ToLowerInvariant());
-                }
-            }
-            return result;
+            var all = GetSetting("groupids") ?? string.Empty;
+            var parts = all
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => s.Trim())
+                .Where(s => s.Length > 0)
+                .Select(s => s.ToLowerInvariant())
+                .ToList();
+
+            return parts;
         }
 
         private void SaveGroupIdsToSettings(List<string> groupids)
         {
-            var all = string.Empty;
-            foreach (var s in groupids)
+            if (groupids == null || groupids.Count == 0)
             {
-                if (s != string.Empty)
-                {
-                    all += s.Trim().ToLowerInvariant() + ",";
-                }
+                SetSetting("groupids", string.Empty);
+                return;
             }
-            all = all.TrimEnd(',');
+
+            var cleaned = groupids
+                .Where(s => !string.IsNullOrWhiteSpace(s))
+                .Select(s => s.Trim().ToLowerInvariant());
+
+            var all = string.Join(",", cleaned);
             SetSetting("groupids", all);
         }
 
@@ -88,37 +89,42 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         public void AddGroup(string groupid)
         {
-            var _Groups = CurrentGroupIds();
+            if (string.IsNullOrWhiteSpace(groupid)) return;
 
-            var possible = groupid.Trim().ToLowerInvariant();
-            if (possible == string.Empty) return;
-            if (_Groups.Contains(possible)) return;
-            _Groups.Add(possible);
-            SaveGroupIdsToSettings(_Groups);
+            var cleaned = groupid.Trim().ToLowerInvariant();
+            var groups = CurrentGroupIds();
+
+            if (groups.Contains(cleaned)) return;
+
+            groups.Add(cleaned);
+            SaveGroupIdsToSettings(groups);
         }
 
         public void RemoveGroup(string groupid)
         {
-            var _Groups = CurrentGroupIds();
-            if (_Groups.Contains(groupid.Trim().ToLowerInvariant()))
-            {
-                _Groups.Remove(groupid.Trim().ToLowerInvariant());
-                SaveGroupIdsToSettings(_Groups);
-            }
+            if (string.IsNullOrWhiteSpace(groupid)) return;
+
+            var cleaned = groupid.Trim().ToLowerInvariant();
+            var groups = CurrentGroupIds();
+
+            if (!groups.Contains(cleaned)) return;
+
+            groups.RemoveAll(g => string.Equals(g, cleaned, StringComparison.OrdinalIgnoreCase));
+            SaveGroupIdsToSettings(groups);
         }
 
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
-            if (context == null) return false;
-            if (context.CurrentCustomer == null) return false;
-            if (context.CurrentCustomer.PricingGroupId == string.Empty) return false;
+            var customer = context?.CurrentCustomer;
+            if (customer == null) return false;
 
-            if (CurrentGroupIds().Contains(context.CurrentCustomer.PricingGroupId.Trim().ToLowerInvariant()))
-            {
-                return true;
-            }
+            var pricingGroupId = customer.PricingGroupId;
+            if (string.IsNullOrWhiteSpace(pricingGroupId)) return false;
 
-            return false;
+            var target = pricingGroupId.Trim().ToLowerInvariant();
+            var groups = CurrentGroupIds();
+
+            return groups.Contains(target);
         }
     }
 }

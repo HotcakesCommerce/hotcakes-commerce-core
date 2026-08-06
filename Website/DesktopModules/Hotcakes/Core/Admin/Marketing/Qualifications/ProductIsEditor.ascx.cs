@@ -1,4 +1,4 @@
-﻿#region License
+﻿    #region License
 
 // Distributed under the MIT License
 // ============================================================
@@ -44,8 +44,10 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
-            gvProductBvins.RowDeleting += gvProductBvins_RowDeleting;
-            btnAddProduct.Click += btnAddProduct_Click;
+
+            if (gvProductBvins != null) gvProductBvins.RowDeleting += gvProductBvins_RowDeleting;
+            if (btnAddProduct != null) btnAddProduct.Click += btnAddProduct_Click;
+
             if (!string.IsNullOrEmpty(Title))
             {
                 Title = Localization.GetString(Title);
@@ -58,27 +60,64 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
-            TypedQualification.AddProductIds(ucProductPicker.SelectedProducts.OfType<string>());
+            var q = TypedQualification;
+            if (q == null || ucProductPicker == null) return;
+
+            var selected = ucProductPicker.SelectedProducts;
+            if (selected == null) return;
+
+            // Ensure items are strings and trimmed
+            var ids = selected.OfType<string>()
+                .Where(s => !string.IsNullOrWhiteSpace(s))
+                .Select(s => s.Trim())
+                .ToList();
+
+            if (ids.Count == 0) return;
+
+            q.AddProductIds(ids);
             UpdatePromotion();
             LoadQualification();
         }
 
         private void gvProductBvins_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            var bvin = e.Keys[0] as string;
-            TypedQualification.RemoveProductId(bvin);
+            var q = TypedQualification;
+            if (q == null || e?.Keys == null || e.Keys.Count == 0) return;
+
+            var keyObj = e.Keys[0];
+            if (keyObj == null) return;
+
+            var bvin = keyObj as string ?? keyObj.ToString();
+            if (string.IsNullOrWhiteSpace(bvin)) return;
+
+            q.RemoveProductId(bvin.Trim());
             UpdatePromotion();
             LoadQualification();
         }
 
         public override void LoadQualification()
         {
-            ucProductPicker.LoadSearch();
+            if (ucProductPicker != null) ucProductPicker.LoadSearch();
 
-            var ids = TypedQualification.GetProductIds();
-            var products = HccApp.CatalogServices.Products.FindManyWithCache(ids);
-            gvProductBvins.DataSource = products;
-            gvProductBvins.DataBind();
+            var q = TypedQualification;
+            if (q == null)
+            {
+                if (gvProductBvins != null)
+                {
+                    gvProductBvins.DataSource = Enumerable.Empty<object>();
+                    gvProductBvins.DataBind();
+                }
+                return;
+            }
+
+            var ids = q.GetProductIds() ?? Enumerable.Empty<string>();
+            var products = HccApp?.CatalogServices?.Products?.FindManyWithCache(ids) ?? Enumerable.Empty<object>();
+
+            if (gvProductBvins != null)
+            {
+                gvProductBvins.DataSource = products;
+                gvProductBvins.DataBind();
+            }
         }
 
         public override bool SaveQualification()

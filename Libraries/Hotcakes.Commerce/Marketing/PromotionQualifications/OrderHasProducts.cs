@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
@@ -124,12 +125,16 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             if (context.Order == null) return false;
             if (context.Order.Items == null) return false;
 
+            var productIds = CurrentIds();
+            if (productIds.Count == 0) return false;
+            if (Quantity <= 0) return true;
+
             switch (SetMode)
             {
                 case QualificationSetMode.AnyOfTheseItems:
-                    return MatchAny(Quantity, context.Order.Items, CurrentIds());
+                    return MatchAny(Quantity, context.Order.Items, productIds);
                 case QualificationSetMode.AllOfTheseItems:
-                    return MatchAll(Quantity, context.Order.Items, CurrentIds());
+                    return MatchAll(Quantity, context.Order.Items, productIds);
             }
 
             return false;
@@ -137,46 +142,34 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         private bool MatchAny(int qty, List<LineItem> items, List<string> productIds)
         {
-            var QuantityLeftToMatch = qty;
+            if (qty <= 0) return true;
+            if (items == null || items.Count == 0) return false;
 
-            foreach (var li in items)
-            {
-                if (productIds.Contains(li.ProductId.Trim().ToLowerInvariant()))
-                {
-                    QuantityLeftToMatch -= li.Quantity;
-                    if (QuantityLeftToMatch <= 0) return true;
-                }
-            }
+            var matchedQuantity = items
+                .Where(li => !string.IsNullOrWhiteSpace(li.ProductId) &&
+                             productIds.Contains(li.ProductId.Trim().ToLowerInvariant()))
+                .Sum(li => li.Quantity);
 
-            return false;
+            return matchedQuantity >= qty;
         }
 
         private bool MatchAll(int qty, List<LineItem> items, List<string> productIds)
         {
-            // Build up dictionary of items to match with quantities
-            var ItemsToFind = new Dictionary<string, int>();
-            foreach (var bvin in productIds)
-            {
-                ItemsToFind.Add(bvin, qty);
-            }
+            if (qty <= 0) return true;
+            if (productIds == null || productIds.Count == 0) return false;
+            if (items == null || items.Count == 0) return false;
 
-            // Subtract each quantity found for items
-            foreach (var li in items)
-            {
-                var lid = li.ProductId.Trim().ToLowerInvariant();
-                if (ItemsToFind.ContainsKey(lid))
-                {
-                    ItemsToFind[lid] -= li.Quantity;
-                }
-            }
+            // Build map of productId -> total quantity present in order
+            var itemQuantities = items
+                .Where(li => !string.IsNullOrWhiteSpace(li.ProductId))
+                .GroupBy(li => li.ProductId.Trim().ToLowerInvariant())
+                .ToDictionary(g => g.Key, g => g.Sum(li => li.Quantity));
 
-            foreach (var bvin2 in productIds)
+            // Ensure each required productId has at least 'qty' quantity present
+            foreach (var required in productIds)
             {
-                // If we didn't get enough quantity found, return false;
-                if (ItemsToFind[bvin2] > 0)
-                {
-                    return false;
-                }
+                itemQuantities.TryGetValue(required, out var foundQty);
+                if (foundQty < qty) return false;
             }
 
             return true;

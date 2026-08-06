@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -33,6 +33,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
     public class OrderTotalAdjustment : PromotionActionBase
     {
         public const string TypeIdString = "6574b0b9-9c65-4968-8605-eecf6f7a0407";
+            
+        private static readonly Guid _typeId = new Guid(TypeIdString);
 
         public OrderTotalAdjustment()
         {
@@ -52,7 +54,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         public override Guid TypeId
         {
-            get { return new Guid(TypeIdString); }
+            get { return _typeId; }
         }
 
         public AmountTypes AdjustmentType
@@ -99,15 +101,18 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             // only apply when applying to sub total
             if (context.Mode != PromotionType.OfferForOrder) return false;
 
-            var adjustment = 0m;
+            // Compute order total once instead of calling GetTotal repeatedly.
+            var orderTotal = context.Order.GetTotal(false, false, false);
+
+            decimal adjustment = 0;
 
             switch (AdjustmentType)
             {
                 case AmountTypes.MonetaryAmount:
-                    adjustment = Money.GetDiscountAmount(context.Order.GetTotal(false, false, false), Amount);
+                    adjustment = Money.GetDiscountAmount(orderTotal, Amount);
                     break;
                 case AmountTypes.Percent:
-                    adjustment = Money.GetDiscountAmountByPercent(context.Order.GetTotal(false, false, false), Amount);
+                    adjustment = Money.GetDiscountAmountByPercent(orderTotal, Amount);
                     break;
             }
 

@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -920,6 +920,7 @@ namespace Hotcakes.Commerce.Orders
         /// <returns>Boolean - if true, the coupon was successfully added.</returns>
         public bool AddCouponCode(string code)
         {
+            if (string.IsNullOrWhiteSpace(code)) return false;
             if (!CouponCodeExists(code))
             {
                 Coupons.Add(new OrderCoupon
@@ -941,8 +942,9 @@ namespace Hotcakes.Commerce.Orders
         /// <returns>Boolean - if true, the coupon code has already been added to this order.</returns>
         public bool CouponCodeExists(string code)
         {
-            var c = Coupons.Count(y => y.CouponCode.Trim().ToUpper() == code.Trim().ToUpper());
-            return c > 0;
+            if (string.IsNullOrWhiteSpace(code)) return false;
+            var test = code.Trim().ToUpper();
+            return Coupons.Any(y => y.CouponCode.Trim().ToUpper() == test);
         }
 
         /// <summary>
@@ -967,6 +969,7 @@ namespace Hotcakes.Commerce.Orders
         /// <returns>Boolean - if true, the coupon was successfully removed from the order.</returns>
         public bool RemoveCouponCodeByCode(string code)
         {
+            if (string.IsNullOrWhiteSpace(code)) return false;
             var testCode = code.Trim().ToUpper();
             return Coupons.RemoveAll(y => y.CouponCode == testCode) > 0;
         }
@@ -990,23 +993,15 @@ namespace Hotcakes.Commerce.Orders
         /// </summary>
         /// <param name="shippingMethodId">The unique ID of the desired shipping method.</param>
         /// <returns>List of ShippingGroup</returns>
-        /// <summary>
-        ///     Parses the line items to return the proposed packages for shipping.
-        /// </summary>
-        /// <param name="shippingMethodId">The unique ID of the desired shipping method.</param>
-        /// <returns>List of ShippingGroup</returns>
         public List<ShippingGroup> GetShippingGroups(string shippingMethodId)
         {
             var result = new List<ShippingGroup>();
-            var shippingMethodIdUpper = shippingMethodId.ToUpperInvariant();
+            var shippingMethodIdUpper = (shippingMethodId ?? string.Empty).ToUpperInvariant();
 
-            foreach (var item in Items)
+            foreach (var item in Items ?? Enumerable.Empty<LineItem>())
             {
                 // skip non-shipping items
-                if (item.IsNonShipping)
-                {
-                    continue;
-                }
+                if (item.IsNonShipping) continue;
 
                 // skip excluded shipping items (from the product setting)
                 if (item.ShippingCharge == ShippingChargeType.None ||
@@ -1015,7 +1010,7 @@ namespace Hotcakes.Commerce.Orders
                     continue;
                 }
 
-                //skip items marked as "free shipping" by discount engine. Check if quantity is grater than 1. If quantity 1 we have to allow to get rates and then
+                // skip items marked as "free shipping" by discount engine. Check if quantity is greater than 1. If quantity 1 we have to allow to get rates and then
                 // on checkout page show as discount
                 if (item.MarkedForFreeShipping(shippingMethodIdUpper) && Items.Count > 1 &&
                     !IsOrderHasAllItemsQualifiedFreeShipping())
@@ -1081,7 +1076,7 @@ namespace Hotcakes.Commerce.Orders
         /// <returns>Boolean - if true, shipping is free for this order.</returns>
         public bool IsOrderFreeShipping()
         {
-            foreach (var item in Items)
+            foreach (var item in Items ?? Enumerable.Empty<LineItem>())
             {
                 if (item.CustomProperties["freeshipping"] == null
                     && !item.IsMarkedForFreeShipping)
@@ -1103,9 +1098,9 @@ namespace Hotcakes.Commerce.Orders
 
         public bool IsOrderHasAllItemsQualifiedFreeShipping()
         {
-            var FreeShipItems = Items.Count(p => p.IsMarkedForFreeShipping);
+            var freeShipItems = (Items ?? Enumerable.Empty<LineItem>()).Count(p => p.IsMarkedForFreeShipping);
 
-            return Items.Count == FreeShipItems;
+            return (Items ?? Enumerable.Empty<LineItem>()).Count() == freeShipItems;
         }
 
         /// <summary>
@@ -1115,7 +1110,7 @@ namespace Hotcakes.Commerce.Orders
         public List<OrderPackage> FindShippedPackages()
         {
             var result = new List<OrderPackage>();
-            foreach (var p in Packages)
+            foreach (var p in Packages ?? Enumerable.Empty<OrderPackage>())
             {
                 if (p.HasShipped)
                 {
@@ -1143,6 +1138,7 @@ namespace Hotcakes.Commerce.Orders
         /// <returns>Integer - the total number of downloads.</returns>
         public int GetFileDownloadCount(string fileBvin)
         {
+            if (string.IsNullOrEmpty(fileBvin)) return 0;
             var key = FileDownloadPropertyKey(fileBvin);
             return CustomProperties.GetPropertyAsInt(Constants.HCC_KEY, key);
         }
@@ -1153,6 +1149,7 @@ namespace Hotcakes.Commerce.Orders
         /// <param name="fileBvin">The unique ID of the product file to increase the download count for.</param>
         public void IncreaseFileDownloadCount(string fileBvin)
         {
+            if (string.IsNullOrEmpty(fileBvin)) return;
             var key = FileDownloadPropertyKey(fileBvin);
             var current = CustomProperties.GetPropertyAsInt(Constants.HCC_KEY, key);
             if (current < 0) current = 0;
@@ -1166,6 +1163,7 @@ namespace Hotcakes.Commerce.Orders
         /// <param name="fileBvin">The unique ID of the product file to decrease the download count for.</param>
         public void DecreaseFileDownloadCount(string fileBvin)
         {
+            if (string.IsNullOrEmpty(fileBvin)) return;
             var key = FileDownloadPropertyKey(fileBvin);
             var current = CustomProperties.GetPropertyAsInt(Constants.HCC_KEY, key);
             if (current > 0)
@@ -1181,6 +1179,7 @@ namespace Hotcakes.Commerce.Orders
         /// <param name="fileBvin">The unique ID of the product file.</param>
         public void ResetFileDownloadCount(string fileBvin)
         {
+            if (string.IsNullOrEmpty(fileBvin)) return;
             var key = FileDownloadPropertyKey(fileBvin);
             CustomProperties.SetProperty(Constants.HCC_KEY, key, 0);
         }
@@ -1196,7 +1195,7 @@ namespace Hotcakes.Commerce.Orders
         /// <returns>LineItem</returns>
         public LineItem GetLineItem(long Id)
         {
-            return Items.SingleOrDefault(y => y.Id == Id);
+            return (Items ?? Enumerable.Empty<LineItem>()).SingleOrDefault(y => y.Id == Id);
         }
 
         /// <summary>
@@ -1207,7 +1206,7 @@ namespace Hotcakes.Commerce.Orders
         {
             var result = new List<ITaxable>();
 
-            foreach (ITaxable t in Items)
+            foreach (ITaxable t in Items ?? Enumerable.Empty<LineItem>())
             {
                 result.Add(t);
             }
@@ -1248,7 +1247,7 @@ namespace Hotcakes.Commerce.Orders
             result.Add(new HtmlTemplateTag("[[Order.BillingAddress.RegionName]]", BillingAddress.RegionDisplayName));
             result.Add(new HtmlTemplateTag("[[Order.BillingAddress.WebSiteUrl]]", BillingAddress.WebSiteUrl));
             result.Add(new HtmlTemplateTag("[[Order.Bvin]]", bvin));
-            var coupons = string.Join(", ", Coupons.Select(c => c.CouponCode));
+            var coupons = string.Join(", ", (Coupons ?? Enumerable.Empty<OrderCoupon>()).Select(c => c.CouponCode));
 
             result.Add(new HtmlTemplateTag("[[Order.Coupons]]", coupons));
             result.Add(new HtmlTemplateTag("[[Order.FraudScore]]", FraudScore.ToString("#.#")));

@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -63,12 +63,23 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         public List<string> CurrentCategoryIds()
         {
-            return GetSettingArr("CategoryIds");
+            var all = GetSetting("CategoryIds") ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(all)) return new List<string>();
+
+            return all
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => s.Trim().ToLowerInvariant())
+                .Where(s => s.Length > 0)
+                .ToList();
         }
 
-        private void SaveCategoryIdsToSettings(List<string> typeIds)
+        private void SaveCategoryIdsToSettings(IEnumerable<string> typeIds)
         {
-            SetSetting("CategoryIds", typeIds);
+            var list = typeIds?.Where(s => !string.IsNullOrWhiteSpace(s))
+                       .Select(s => s.Trim().ToLowerInvariant())
+                       .ToList() ?? new List<string>();
+            var all = list.Count == 0 ? string.Empty : string.Join(",", list);
+            SetSetting("CategoryIds", all);
         }
 
         public override string FriendlyDescription(HotcakesApplication app)
@@ -79,37 +90,45 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
                 result += "Not ";
             }
             result += ":<ul>";
-            foreach (var bvin in CurrentCategoryIds())
+
+            var ids = CurrentCategoryIds();
+            if (ids.Count > 0 && app?.CatalogServices?.Categories != null)
             {
-                var c = app.CatalogServices.Categories.Find(bvin);
-                if (c != null)
+                foreach (var bvin in ids)
                 {
-                    result += "<li>" + c.Name + "<br />";
-                    result += "<em>" + c.RewriteUrl + "</em></li>";
+                    var c = app.CatalogServices.Categories.Find(bvin);
+                    if (c != null)
+                    {
+                        result += "<li>" + c.Name + "<br />";
+                        result += "<em>" + c.RewriteUrl + "</em></li>";
+                    }
                 }
             }
+
             result += "</ul>";
             return result;
         }
 
         public void AddCategoryId(string id)
         {
-            var ids = CurrentCategoryIds();
+            if (string.IsNullOrWhiteSpace(id)) return;
 
-            if (!ids.Contains(id))
-            {
-                ids.Add(id);
-                SaveCategoryIdsToSettings(ids);
-            }
+            var ids = CurrentCategoryIds();
+            var normalized = id.Trim().ToLowerInvariant();
+            if (ids.Contains(normalized)) return;
+
+            ids.Add(normalized);
+            SaveCategoryIdsToSettings(ids);
         }
 
         public void RemoveCategoryId(string id)
         {
-            var ids = CurrentCategoryIds();
+            if (string.IsNullOrWhiteSpace(id)) return;
 
-            if (ids.Contains(id))
+            var ids = CurrentCategoryIds();
+            var normalized = id.Trim().ToLowerInvariant();
+            if (ids.Remove(normalized))
             {
-                ids.Remove(id);
                 SaveCategoryIdsToSettings(ids);
             }
         }
@@ -140,31 +159,26 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
         private bool MeetLineItem(PromotionContext context, LineItem li)
         {
             if (li == null) return false;
+            if (context?.HccApp?.CatalogServices?.CategoriesXProducts == null) return false;
+
             var productBvin = li.ProductId;
+            if (string.IsNullOrWhiteSpace(productBvin)) return false;
 
             // Note: this only checks the first 100 categories. You're pretty much insane if you're
             // running a promotion on a product by category and it's in more than 100 categories.
-            var assignments = context.HccApp.CatalogServices.CategoriesXProducts.FindForProduct(productBvin, 1, 100);
+            var assignments = context.HccApp.CatalogServices.CategoriesXProducts.FindForProduct(productBvin, 1, 100)
+                              ?? new List<Catalog.CategoryProductAssociation>();
 
-            var found = false;
-
-            foreach (var cross in assignments)
-            {
-                var match = cross.CategoryId.Trim().ToLowerInvariant();
-                if (CurrentCategoryIds().Contains(match))
-                {
-                    found = true;
-                    break;
-                }
-            }
+            var categoryIds = CurrentCategoryIds();
+            var found = assignments
+                .Select(cross => (cross.CategoryId ?? string.Empty).Trim().ToLowerInvariant())
+                .Any(catId => categoryIds.Contains(catId));
 
             if (CategoryNot)
             {
-                if (found) return false;
-                return true;
+                return !found;
             }
-            if (found) return true;
-            return false;
+            return found;
         }
     }
 }

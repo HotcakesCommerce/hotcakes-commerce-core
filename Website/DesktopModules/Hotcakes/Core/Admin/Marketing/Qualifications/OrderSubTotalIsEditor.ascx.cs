@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -26,6 +26,7 @@
 
 using Hotcakes.Commerce.Marketing.PromotionQualifications;
 using Hotcakes.Modules.Core.Admin.AppCode;
+using System.Globalization;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 {
@@ -38,16 +39,24 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 
         public override void LoadQualification()
         {
-            OrderSubTotalIsField.Text = TypedQualification.Amount.ToString();
+            if (TypedQualification == null || OrderSubTotalIsField == null) return;
+            OrderSubTotalIsField.Text = TypedQualification.Amount.ToString(CultureInfo.CurrentCulture);
         }
 
         public override bool SaveQualification()
         {
+            if (TypedQualification == null || OrderSubTotalIsField == null) return false;
+
             var ototal = TypedQualification.Amount;
-            decimal parsedototal = 0;
-            if (decimal.TryParse(OrderSubTotalIsField.Text, out parsedototal))
+            var text = OrderSubTotalIsField.Text?.Trim();
+            if (!string.IsNullOrEmpty(text))
             {
-                ototal = parsedototal;
+                decimal parsedototal;
+                if (decimal.TryParse(text, NumberStyles.Number, CultureInfo.CurrentCulture, out parsedototal))
+                {
+                    ototal = parsedototal;
+                }
+                // If parsing fails, keep previous value (preserve existing behavior)
             }
             TypedQualification.Amount = ototal;
 

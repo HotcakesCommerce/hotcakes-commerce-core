@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -64,10 +64,23 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         public void LoadAction(Promotion prom, IPromotionAction action)
         {
+            if (prom == null || action == null)
+            {
+                if (mvActions != null) mvActions.Visible = false;
+                return;
+            }
+
             PromotionId = prom.Id;
             ActionId = action.Id;
 
-            switch (action.TypeId.ToString())
+            var typeId = action.TypeId.ToString().ToUpperInvariant();
+
+            if (mvActions == null)
+            {
+                return;
+            }
+
+            switch (typeId)
             {
                 case ProductPriceAdjustment.TypeIdString:
                     mvActions.SetActiveView(viewAdjustProductPrice);
@@ -92,6 +105,10 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
                     break;
                 case CategoryDiscountAdjustment.TypeIdString:
                     mvActions.SetActiveView(viewCategoryDiscount);
+                    break;
+                default:
+                    // If type is unknown, hide editor
+                    mvActions.Visible = false;
                     break;
             }
 
@@ -118,20 +135,29 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
         {
             var editor = GetCurrentActionEditor();
 
-            if (editor != null)
+            if (editor == null)
             {
-                editor.Promotion = GetCurrentPromotion();
-                editor.Action = editor.Promotion.GetAction(ActionId);
+                return;
+            }
 
-                if (loadAction)
-                {
-                    editor.LoadAction();
-                }
+            var promotion = GetCurrentPromotion();
+            editor.Promotion = promotion;
+
+            editor.Action = promotion != null ? promotion.GetAction(ActionId) : null;
+
+            if (loadAction && editor.Action != null)
+            {
+                editor.LoadAction();
             }
         }
 
         private BaseActionControl GetCurrentActionEditor()
         {
+            if (mvActions == null)
+            {
+                return null;
+            }
+
             var view = mvActions.GetActiveView();
             return view != null ? view.Controls.OfType<BaseActionControl>().FirstOrDefault() : null;
         }

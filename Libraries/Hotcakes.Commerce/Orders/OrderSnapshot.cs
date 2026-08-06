@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -96,11 +96,16 @@ namespace Hotcakes.Commerce.Orders
             dto.AffiliateID = AffiliateID;
             dto.BillingAddress = BillingAddress.ToDto();
             dto.bvin = bvin ?? string.Empty;
-            dto.CustomProperties = new List<CustomPropertyDTO>();
-            foreach (var prop in CustomProperties)
+
+            // Pre-allocate list capacity to avoid multiple internal resizes
+            var sourceProps = CustomProperties ?? new CustomPropertyCollection();
+            var customList = new List<CustomPropertyDTO>(sourceProps.Count);
+            foreach (var prop in sourceProps)
             {
-                dto.CustomProperties.Add(prop.ToDto());
+                customList.Add(prop.ToDto());
             }
+            dto.CustomProperties = customList;
+
             dto.FraudScore = FraudScore;
             dto.Id = Id;
             dto.Instructions = Instructions ?? string.Empty;

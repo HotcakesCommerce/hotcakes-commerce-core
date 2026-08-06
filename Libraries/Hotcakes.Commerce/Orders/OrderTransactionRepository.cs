@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -119,7 +119,6 @@ namespace Hotcakes.Commerce.Orders
 			data.Timestamp = model.TimeStampUtc;
 			data.Voided = model.Voided;
 			data.Messages = model.Messages;
-            data.GiftCard = model.GiftCard.ObjectToJson();
 			data.CheckNumber = model.CheckNumber;
 			data.PurchaseOrderNumber = model.PurchaseOrderNumber;
 			data.CompanyAccountNumber = model.CompanyAccountNumber;
@@ -182,19 +181,18 @@ namespace Hotcakes.Commerce.Orders
         }
 
 		public List<OrderTransaction> FindForOrderAndRma(string orderId, string rmaId)
-		{
-			using (var s = CreateReadStrategy())
-			{
-				var orderGuid = DataTypeHelper.BvinToGuid(orderId);
-				var query = s.GetQuery().AsNoTracking().Where(y => y.OrderId == orderGuid)
-					.OrderBy(y => y.Timestamp);
+        {
+            using var s = CreateReadStrategy();
 
-				var items = ListPoco(query);
+            var orderGuid = DataTypeHelper.BvinToGuid(orderId);
+            var query = s.GetQuery().AsNoTracking().Where(y => y.OrderId == orderGuid)
+                .OrderBy(y => y.Timestamp);
 
-				var result = items.Where(y => y.RMABvin == rmaId).ToList();
-				return result;
-			}
-		}
+            var items = ListPoco(query);
+
+            var result = items.Where(y => y.RMABvin == rmaId).ToList();
+            return result;
+        }
 
 		/// <summary>
         ///     Queries the store for all Transactions that match the given order.
@@ -223,12 +221,17 @@ namespace Hotcakes.Commerce.Orders
 			var orderGuid = DataTypeHelper.BvinToGuid(orderId);
 			return FindListPoco(q =>
 			{
+				var authActionCodes = new[]
+				{
+					(int) ActionType.CreditCardHold,
+					(int) ActionType.GiftCardHold,
+					(int) ActionType.PayPalHold,
+					(int) ActionType.RewardPointsHold,
+					(int) ActionType.ThirdPartyPayMethodHold
+				};
+
 				return q.Where(y => y.OrderId == orderGuid)
-										.Where(y => y.Action == Convert.ToInt32(ActionType.CreditCardHold)
-											|| y.Action == Convert.ToInt32(ActionType.GiftCardHold)
-											|| y.Action == Convert.ToInt32(ActionType.PayPalHold)
-											|| y.Action == Convert.ToInt32(ActionType.RewardPointsHold)
-											|| y.Action == Convert.ToInt32(ActionType.ThirdPartyPayMethodHold))
+										.Where(y => authActionCodes.Contains(y.Action))
 										.Where(y => y.Success)
 										.Where(y => !y.Voided)
 										.OrderBy(y => y.Timestamp);
@@ -238,8 +241,9 @@ namespace Hotcakes.Commerce.Orders
 		public decimal TransactionsPotentialValue(List<OrderTransaction> transactions, ActionType actionType)
 		{
 			decimal amount = 0;
-            foreach (var t in transactions)
+            for (int i = 0, n = transactions.Count; i < n; i++)
 			{
+				var t = transactions[i];
 				if (t.Action == actionType)
 				{
 					amount += t.Amount;
@@ -251,8 +255,9 @@ namespace Hotcakes.Commerce.Orders
 		public decimal TransactionsPotentialStoreCredits(List<OrderTransaction> transactions)
 		{
 			decimal amount = 0;
-            foreach (var t in transactions)
+            for (int i = 0, n = transactions.Count; i < n; i++)
 			{
+				var t = transactions[i];
 				if (t.Action == ActionType.GiftCardInfo ||
 					t.Action == ActionType.RewardPointsInfo)
 				{
@@ -271,8 +276,9 @@ namespace Hotcakes.Commerce.Orders
 			using (var s = CreateReadStrategy())
 			{
                 var actionCodes = ActionTypeUtils.BalanceChangingActions.Select(a => (int) a).ToList();
+				var storeIdLocal = Context.CurrentStore.Id;
 
-				var query = s.GetQuery().AsNoTracking().Where(y => y.StoreId == Context.CurrentStore.Id)
+				var query = s.GetQuery().AsNoTracking().Where(y => y.StoreId == storeIdLocal)
 									.Where(y => y.Timestamp >= startDateUtc && y.Timestamp <= endDateUtc)
 									.Where(y => y.Success)
 									.Where(y => !y.Voided)
@@ -294,8 +300,9 @@ namespace Hotcakes.Commerce.Orders
             using (var s = CreateReadStrategy())
             {
                 List<int> actionCodes = ActionTypeUtils.BalanceChangingActionsForCreditCardReport.Select(a => (int)a).ToList();
+                var storeIdLocal = Context.CurrentStore.Id;
 
-                var query = s.GetQuery().AsNoTracking().Where(y => y.StoreId == Context.CurrentStore.Id)
+                var query = s.GetQuery().AsNoTracking().Where(y => y.StoreId == storeIdLocal)
                                     .Where(y => y.Timestamp >= startDateUtc && y.Timestamp <= endDateUtc)
                                     .Where(y => y.Success)
                                     .Where(y => !y.Voided)
