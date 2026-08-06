@@ -1,9 +1,9 @@
-﻿#region License
+﻿    #region License
 
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -26,8 +26,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web.UI.WebControls;
+using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Marketing.PromotionQualifications;
 using Hotcakes.Modules.Core.Admin.AppCode;
 
@@ -43,7 +45,12 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
         protected void btnAddProductCategory_Click(object sender, EventArgs e)
         {
             var q = TypedQualification;
-            q.AddCategoryId(lstProductCategories.SelectedValue);
+            if (q == null || lstProductCategories == null) return;
+
+            var selected = lstProductCategories.SelectedValue;
+            if (string.IsNullOrWhiteSpace(selected)) return;
+
+            q.AddCategoryId(selected.Trim());
             UpdatePromotion();
             LoadQualification();
         }
@@ -51,46 +58,79 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
         protected void gvProductCategories_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             var q = TypedQualification;
-            var bvin = (string) e.Keys[0];
-            q.RemoveCategoryId(bvin);
+            if (q == null || e?.Keys == null || e.Keys.Count == 0) return;
+
+            var keyObj = e.Keys[0];
+            if (keyObj == null) return;
+
+            var bvin = keyObj as string ?? keyObj.ToString();
+            if (string.IsNullOrWhiteSpace(bvin)) return;
+
+            q.RemoveCategoryId(bvin.Trim());
             UpdatePromotion();
             LoadQualification();
         }
 
         public override void LoadQualification()
         {
-            var allCats = HccApp.CatalogServices.Categories.FindAll();
-            var available = CategoriesHelper.ListFullTreeWithIndents(allCats, true);
+            var q = TypedQualification;
+            if (q == null)
+            {
+                if (lstProductCategories != null) lstProductCategories.Items.Clear();
+                if (gvProductCategories != null) gvProductCategories.DataSource = Enumerable.Empty<object>();
+                if (gvProductCategories != null) gvProductCategories.DataBind();
+                return;
+            }
+
+            var allCats = HccApp.CatalogServices.Categories.FindAll() ?? new List<CategorySnapshot>();
+            var available = CategoriesHelper.ListFullTreeWithIndents(allCats, true) ?? new Collection<ListItem>();
 
             var displayData = new List<FriendlyBvinDisplay>();
 
-            foreach (var bvin in TypedQualification.CurrentCategoryIds())
+            foreach (var rawBvin in q.CurrentCategoryIds() ?? Enumerable.Empty<string>())
             {
-                var item = new FriendlyBvinDisplay();
-                item.bvin = bvin;
-                item.DisplayName = bvin;
+                if (string.IsNullOrWhiteSpace(rawBvin)) continue;
+                var bvin = rawBvin.Trim();
 
-                var t = available.FirstOrDefault(y => y.Value == bvin);
-                if (t != null)
+                var item = new FriendlyBvinDisplay
                 {
-                    item.DisplayName = t.Text;
-                    available.Remove(t);
+                    bvin = bvin,
+                    DisplayName = bvin
+                };
+
+                var match = available.FirstOrDefault(y =>
+                    string.Equals((y?.Value ?? string.Empty).Trim(), bvin, StringComparison.OrdinalIgnoreCase));
+
+                if (match != null)
+                {
+                    item.DisplayName = match.Text ?? bvin;
+                    available.Remove(match);
                 }
+
                 displayData.Add(item);
             }
 
-            lstProductCategories.Items.Clear();
-            foreach (var li in available)
+            if (lstProductCategories != null)
             {
-                lstProductCategories.Items.Add(li);
+                lstProductCategories.Items.Clear();
+                foreach (var li in available)
+                {
+                    lstProductCategories.Items.Add(li);
+                }
             }
 
-            gvProductCategories.DataSource = displayData;
-            gvProductCategories.DataBind();
+            if (gvProductCategories != null)
+            {
+                gvProductCategories.DataSource = displayData;
+                gvProductCategories.DataBind();
+            }
         }
 
         public override bool SaveQualification()
         {
+            var q = TypedQualification;
+            if (q == null) return false;
+
             return UpdatePromotion();
         }
 

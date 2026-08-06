@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -111,9 +111,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         public override bool ApplyAction(PromotionContext context)
         {
-            if (context.Mode != PromotionType.OfferForLineItems) return false;
-
             if (context == null) return false;
+            if (context.Mode != PromotionType.OfferForLineItems) return false;
             if (context.Order == null) return false;
             if (context.Order.Items == null) return false;
             if (context.CurrentlyProcessingLineItem == null) return false;
@@ -179,8 +178,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         public List<string> GetCategories()
         {
-            var result = new List<string>();
             var all = GetSetting("categoryids");
+            if (string.IsNullOrWhiteSpace(all)) return new List<string>();
             return
                 all.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
                     .Select(s => s.Trim().ToUpperInvariant())
@@ -189,7 +188,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         public void SaveIdsToSettings(List<string> items)
         {
-            var all = string.Join(",", items.Select(s => s.Trim().ToUpperInvariant()));
+            var safeItems = items ?? new List<string>();
+            var all = string.Join(",", safeItems.Select(s => s.Trim().ToUpperInvariant()));
 
             SetSetting("categoryids", all);
         }
@@ -200,23 +200,24 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         public void AddCategoryId(string id)
         {
-            var _Ids = GetCategories();
+            var ids = GetCategories();
 
-            var possible = id.Trim().ToLowerInvariant();
-            if (possible == string.Empty) return;
-            if (_Ids.Contains(possible)) return;
-            _Ids.Add(possible);
-            SaveIdsToSettings(_Ids);
+            var possible = (id ?? string.Empty).Trim().ToUpperInvariant();
+            if (string.IsNullOrEmpty(possible)) return;
+            if (ids.Contains(possible)) return;
+            ids.Add(possible);
+            SaveIdsToSettings(ids);
         }
 
         public void RemoveCategoryId(string id)
         {
-            var _Ids = GetCategories();
+            var ids = GetCategories();
 
-            if (_Ids.Contains(id))
+            var normalized = (id ?? string.Empty).Trim().ToUpperInvariant();
+            if (ids.Contains(normalized))
             {
-                _Ids.Remove(id);
-                SaveIdsToSettings(_Ids);
+                ids.Remove(normalized);
+                SaveIdsToSettings(ids);
             }
         }
 

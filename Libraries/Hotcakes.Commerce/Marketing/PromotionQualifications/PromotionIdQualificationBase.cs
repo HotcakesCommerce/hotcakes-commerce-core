@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -27,7 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+    
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
     public abstract class PromotionIdQualificationBase : PromotionQualificationBase
@@ -36,11 +36,14 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         public List<string> CurrentIds()
         {
-            var result = new List<string>();
-            var all = GetSetting(IdSettingName);
-            result = all.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList();
+            var all = GetSetting(IdSettingName) ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(all)) return new List<string>();
 
-            return result;
+            return all
+                .Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => s.Trim().ToLowerInvariant())
+                .Where(s => s.Length > 0)
+                .ToList();
         }
 
         #endregion
@@ -49,7 +52,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         private void SaveIdsToSettings(List<string> typeIds)
         {
-            var all = string.Join(",", typeIds);
+            var all = (typeIds == null || typeIds.Count == 0) ? string.Empty : string.Join(",", typeIds);
             SetSetting(IdSettingName, all);
         }
 
@@ -69,13 +72,14 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         public void AddNewId(string typeId)
         {
-            var _Ids = CurrentIds();
+            if (string.IsNullOrWhiteSpace(typeId)) return;
 
+            var ids = CurrentIds();
             var possible = typeId.Trim().ToLowerInvariant();
-            if (possible == string.Empty) return;
-            if (_Ids.Contains(possible)) return;
-            _Ids.Add(possible);
-            SaveIdsToSettings(_Ids);
+            if (ids.Contains(possible)) return;
+
+            ids.Add(possible);
+            SaveIdsToSettings(ids);
         }
 
         public void RemoveId(string typeId)

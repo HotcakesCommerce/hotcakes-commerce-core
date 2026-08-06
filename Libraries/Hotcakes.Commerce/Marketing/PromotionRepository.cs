@@ -1,9 +1,9 @@
-﻿#region License
+﻿    #region License
 
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -188,9 +188,15 @@ namespace Hotcakes.Commerce.Marketing
 
                 // Performance improvement: Execute count and paging in same query context
                 var items = GetPagedItems(orderedQuery, pageNumber, pageSize).ToList();
-                totalRowCount = items.Any() && pageSize < int.MaxValue
-                    ? orderedQuery.Count()
-                    : items.Count;
+
+                if (pageSize < int.MaxValue)
+                {
+                    totalRowCount = orderedQuery.Count();
+                }
+                else
+                {
+                    totalRowCount = items.Count;
+                }
 
                 return ListPoco(items);
             }
@@ -225,6 +231,11 @@ namespace Hotcakes.Commerce.Marketing
 
         public List<Promotion> FindByIds(List<long> ids)
         {
+            if (ids == null || ids.Count == 0)
+            {
+                return new List<Promotion>();
+            }
+
             return FindListPoco(q => { return q.Where(y => ids.Contains(y.Item.Id)); });
         }
 

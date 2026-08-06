@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
@@ -43,30 +44,23 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         public List<string> CurrentCoupons()
         {
-            var result = new List<string>();
-            var all = GetSetting("coupons");
-            var parts = all.Split(',');
-            foreach (var s in parts)
-            {
-                if (s != string.Empty)
-                {
-                    result.Add(s.Trim().ToUpperInvariant());
-                }
-            }
-            return result;
+            var all = GetSetting("coupons") ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(all)) return new List<string>();
+
+            return all
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => s.Trim().ToUpperInvariant())
+                .Where(s => s.Length > 0)
+                .ToList();
         }
 
         private void SaveCouponsToSettings(List<string> coupons)
         {
-            var all = string.Empty;
-            foreach (var s in coupons)
-            {
-                if (s != string.Empty)
-                {
-                    all += s.Trim().ToUpperInvariant() + ",";
-                }
-            }
-            all = all.TrimEnd(',');
+            var list = coupons?.Where(s => !string.IsNullOrWhiteSpace(s))
+                .Select(s => s.Trim().ToUpperInvariant())
+                .ToList() ?? new List<string>();
+
+            var all = list.Count == 0 ? string.Empty : string.Join(",", list);
             SetSetting("coupons", all);
         }
 
@@ -83,22 +77,25 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         public void AddCoupon(string coupon)
         {
-            var _Coupons = CurrentCoupons();
+            if (string.IsNullOrWhiteSpace(coupon)) return;
 
-            var possible = coupon.Trim().ToUpperInvariant();
-            if (possible == string.Empty) return;
-            if (_Coupons.Contains(possible)) return;
-            _Coupons.Add(possible);
-            SaveCouponsToSettings(_Coupons);
+            var normalized = coupon.Trim().ToUpperInvariant();
+            var coupons = CurrentCoupons();
+            if (coupons.Contains(normalized)) return;
+
+            coupons.Add(normalized);
+            SaveCouponsToSettings(coupons);
         }
 
         public void RemoveCoupon(string coupon)
         {
-            var _Coupons = CurrentCoupons();
-            if (_Coupons.Contains(coupon.Trim().ToUpperInvariant()))
+            if (string.IsNullOrWhiteSpace(coupon)) return;
+
+            var normalized = coupon.Trim().ToUpperInvariant();
+            var coupons = CurrentCoupons();
+            if (coupons.Remove(normalized))
             {
-                _Coupons.Remove(coupon.Trim().ToUpperInvariant());
-                SaveCouponsToSettings(_Coupons);
+                SaveCouponsToSettings(coupons);
             }
         }
 
@@ -107,14 +104,12 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             if (mode != PromotionQualificationMode.Orders && mode != PromotionQualificationMode.LineItems) return false;
             if (context == null) return false;
             if (context.Order == null) return false;
-            if (context.Order.Coupons == null) return false;
 
-            foreach (var coupon in CurrentCoupons())
-            {
-                if (context.Order.CouponCodeExists(coupon)) return true;
-            }
+            var coupons = CurrentCoupons();
+            if (coupons.Count == 0) return false;
 
-            return false;
+            // Use Order helper to determine existence; assume it handles case appropriately.
+            return coupons.Any(c => context.Order.CouponCodeExists(c));
         }
     }
 }

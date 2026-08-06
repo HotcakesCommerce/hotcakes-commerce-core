@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -25,6 +25,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -51,9 +52,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         public void LoadPromotions(string keywords, bool showDisabled)
         {
-            var items =
-                HccApp.MarketingServices.Promotions.FindAllWithFilter(Mode, keywords, showDisabled, ucPager.PageNumber,
-                    ucPager.PageSize, ref RowCount);
+            var items = HccApp.MarketingServices.Promotions.FindAllWithFilter(Mode, keywords, showDisabled, ucPager.PageNumber,
+                    ucPager.PageSize, ref RowCount) ?? Enumerable.Empty<Promotion>();
 
             ucPager.SetRowCount(RowCount);
 
@@ -84,31 +84,45 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
         {
             if (e.Row.RowType == DataControlRowType.Header)
             {
-                e.Row.Cells[1].Text = Localization.GetString("Name");
-                e.Row.Cells[2].Text = Localization.GetString("Status");
-                e.Row.Cells[3].Text = Localization.GetString("Enabled");
+                if (e.Row.Cells.Count > 1) e.Row.Cells[1].Text = Localization.GetString("Name");
+                if (e.Row.Cells.Count > 2) e.Row.Cells[2].Text = Localization.GetString("Status");
+                if (e.Row.Cells.Count > 3) e.Row.Cells[3].Text = Localization.GetString("Enabled");
             }
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 var p = e.Row.DataItem as Promotion;
-                e.Row.Attributes["id"] = p.Id.ToString();
+                if (p != null)
+                {
+                    e.Row.Attributes["id"] = p.Id.ToString();
+                }
 
-                var chkBox = e.Row.Cells[3].Controls[0] as CheckBox;
-                chkBox.Enabled = true;
-                chkBox.Attributes.Add("onclick", "return false;");
+                CheckBox chkBox = null;
+                if (e.Row.Cells.Count > 3)
+                {
+                    chkBox = e.Row.Cells[3].Controls.OfType<CheckBox>().FirstOrDefault();
+                }
+
+                if (chkBox != null)
+                {
+                    chkBox.Enabled = true;
+                    chkBox.Attributes.Add("onclick", "return false;");
+                }
             }
         }
 
         private void gvPromotions_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            var id = (long) e.Keys[0];
-            HccApp.MarketingServices.Promotions.Delete(id);
+            if (e.Keys != null && e.Keys.Count > 0 && e.Keys[0] != null)
+            {
+                var id = (long)e.Keys[0];
+                HccApp.MarketingServices.Promotions.Delete(id);
+            }
         }
 
         protected void lnkDelete_OnPreRender(object sender, EventArgs e)
         {
-            var linkButton = (LinkButton) sender;
+            var linkButton = (LinkButton)sender;
             linkButton.OnClientClick = string.Concat("return hcConfirm(event, '",
                 Localization.GetString("ConfirmDelete.Text"), "');");
         }
@@ -116,7 +130,9 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
         private void gvPromotions_PreRender(object sender, EventArgs e)
         {
             // We need calculate rowoffset to correct working of sorting functionality
-            gvPromotions.Attributes["data-rowoffset"] = (ucPager.PageSize*(ucPager.PageNumber - 1)).ToString();
+            var pageSize = ucPager.PageSize < 1 ? 10 : ucPager.PageSize;
+            var pageNumber = ucPager.PageNumber < 1 ? 1 : ucPager.PageNumber;
+            gvPromotions.Attributes["data-rowoffset"] = (pageSize * (pageNumber - 1)).ToString();
         }
 
         #endregion
@@ -126,13 +142,13 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
         protected string GetStatus(IDataItemContainer cont)
         {
             var p = cont.DataItem as Promotion;
-            return p.GetStatus().ToString();
+            return p != null ? p.GetStatus().ToString() : string.Empty;
         }
 
         protected string GetEditUrl(IDataItemContainer cont)
         {
             var p = cont.DataItem as Promotion;
-            return GetEditUrl(p.Id);
+            return p != null ? GetEditUrl(p.Id) : GetEditUrl(0);
         }
 
         private string GetEditUrl(long id)

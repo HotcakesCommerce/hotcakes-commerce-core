@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -39,24 +39,39 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             get { return Qualification as PromotionIdQualificationBase; }
         }
 
+        private OrderHasProducts TypedOrderHasProducts
+        {
+            get { return TypedQualification as OrderHasProducts; }
+        }
+
         public bool IsNotMode { get; set; }
 
         protected void gvOrderProducts_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            var q = TypedQualification;
-            var bvin = (string) e.Keys[0];
-            q.RemoveId(bvin);
+            if (TypedQualification == null) return;
+            if (e?.Keys == null || e.Keys.Count == 0) return;
+
+            var bvin = e.Keys[0] as string;
+            if (string.IsNullOrWhiteSpace(bvin)) return;
+
+            TypedQualification.RemoveId(bvin);
             UpdatePromotion();
             LoadQualification();
         }
 
         protected void btnAddOrderProduct_Click(object sender, EventArgs e)
         {
-            var q = TypedQualification;
+            if (TypedQualification == null) return;
+            if (ProductPickerOrderProducts?.SelectedProducts == null) return;
+
             foreach (var bvin in ProductPickerOrderProducts.SelectedProducts)
             {
-                q.AddNewId(bvin);
+                if (!string.IsNullOrWhiteSpace(bvin))
+                {
+                    TypedQualification.AddNewId(bvin);
+                }
             }
+
             UpdatePromotion();
             LoadQualification();
         }
@@ -70,37 +85,42 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             }
             else
             {
-                var ohp = (OrderHasProducts) TypedQualification;
+                var ohp = TypedOrderHasProducts ?? new OrderHasProducts();
 
                 pnlHas.Visible = true;
                 pnlHasNot.Visible = false;
 
                 if (lstOrderProductSetMode.Items.Count == 0)
                 {
-                    lstOrderProductSetMode.Items.Add(new ListItem(Localization.GetString("Any"), "1"));
-                    lstOrderProductSetMode.Items.Add(new ListItem(Localization.GetString("All"), "0"));
+                    lstOrderProductSetMode.Items.Add(new ListItem(Localization.GetString("Any"), ((int)QualificationSetMode.AnyOfTheseItems).ToString()));
+                    lstOrderProductSetMode.Items.Add(new ListItem(Localization.GetString("All"), ((int)QualificationSetMode.AllOfTheseItems).ToString()));
                 }
 
-                var typedQty = 1;
-                int.TryParse(ohp.Quantity.ToString(), out typedQty);
-
-                OrderProductQuantityField.Text = typedQty == 0 ? "1" : ohp.Quantity.ToString();
+                var typedQty = Math.Max(1, ohp.Quantity);
+                OrderProductQuantityField.Text = typedQty.ToString();
             }
 
             ProductPickerOrderProducts.LoadSearch();
+
             var displayData = new List<FriendlyBvinDisplay>();
+            var ids = TypedQualification?.CurrentIds() ?? new List<string>();
 
-            foreach (var bvin in TypedQualification.CurrentIds())
+            foreach (var bvin in ids)
             {
-                var item = new FriendlyBvinDisplay();
-                item.bvin = bvin;
-                item.DisplayName = bvin;
+                if (string.IsNullOrWhiteSpace(bvin)) continue;
 
-                var p = HccApp.CatalogServices.Products.FindWithCache(item.bvin);
+                var item = new FriendlyBvinDisplay
+                {
+                    bvin = bvin,
+                    DisplayName = bvin
+                };
+
+                var p = HccApp?.CatalogServices?.Products?.FindWithCache(item.bvin);
                 if (p != null)
                 {
-                    item.DisplayName = "[" + p.Sku + "] " + p.ProductName;
+                    item.DisplayName = $"[{p.Sku}] {p.ProductName}";
                 }
+
                 displayData.Add(item);
             }
 
@@ -110,23 +130,26 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 
         public override bool SaveQualification()
         {
-            if (!IsNotMode)
+            if (!IsNotMode && TypedOrderHasProducts != null)
             {
-                var ohp = (OrderHasProducts) TypedQualification;
+                var ohp = TypedOrderHasProducts;
 
                 var qty1 = ohp.Quantity;
-                var parsedqty1 = 1;
-                if (int.TryParse(OrderProductQuantityField.Text, out parsedqty1))
+                if (int.TryParse(OrderProductQuantityField.Text, out var parsedqty1))
                 {
                     qty1 = parsedqty1;
                 }
+
                 var setmode = ohp.SetMode;
-                var parsedsetmode = 1;
-                if (int.TryParse(lstOrderProductSetMode.SelectedValue, out parsedsetmode))
+                if (int.TryParse(lstOrderProductSetMode.SelectedValue, out var parsedsetmode))
                 {
-                    setmode = (QualificationSetMode) parsedsetmode;
+                    if (Enum.IsDefined(typeof(QualificationSetMode), parsedsetmode))
+                    {
+                        setmode = (QualificationSetMode)parsedsetmode;
+                    }
                 }
-                ohp.Quantity = qty1;
+
+                ohp.Quantity = Math.Max(1, qty1);
                 ohp.SetMode = setmode;
             }
 

@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -68,17 +68,21 @@ namespace Hotcakes.Commerce.Accounts
 
             return s;
         }
-
+    
         //Get Store instance by given URL
         public virtual Store GetStoreByUrl(string url)
         {
-            var storeId = Stores.FindStoreIdByCustomUrl(url);
+            if (string.IsNullOrWhiteSpace(url)) return null;
+
+            var host = url.Trim().ToLowerInvariant();
+
+            var storeId = Stores.FindStoreIdByCustomUrl(host);
 
             if (storeId < 1)
             {
                 // Check other custom domains
                 var repo = new StoreDomainRepository(Context);
-                var possible = repo.FindForAnyStoreByDomain(url);
+                var possible = repo.FindForAnyStoreByDomain(host);
                 if (possible != null && possible.StoreId > 0)
                 {
                     storeId = possible.StoreId;
@@ -99,8 +103,10 @@ namespace Hotcakes.Commerce.Accounts
         /// <returns>Store instance</returns>
         public virtual Store GetCurrentStore()
         {
-            var url = HttpContext.Current.Request.Url;
-            var host = url.DnsSafeHost.ToLowerInvariant();
+            var context = HttpContext.Current;
+            if (context?.Request?.Url == null) return null;
+
+            var host = context.Request.Url.DnsSafeHost.ToLowerInvariant();
             return GetStoreByUrl(host);
         }
 
@@ -112,6 +118,8 @@ namespace Hotcakes.Commerce.Accounts
         {
             var store = Stores.FindByIdWithCache(Context.CurrentStore.Id);
             var result = new GoogleAnalyticsSettings();
+            if (store == null) return result;
+
             result.UseTracker = store.Settings.GetPropBool("UseGoogleTracker");
             result.TrackerId = store.Settings.GetProp("GoogleTrackerId");
             return result;
@@ -123,7 +131,11 @@ namespace Hotcakes.Commerce.Accounts
         /// <param name="newSettings"></param>
         public virtual void SetGoogleAnalyticsSettings(GoogleAnalyticsSettings newSettings)
         {
+            if (newSettings == null) throw new ArgumentNullException(nameof(newSettings));
+
             var store = Stores.FindById(Context.CurrentStore.Id);
+            if (store == null) throw new InvalidOperationException("Current store could not be found.");
+
             store.Settings.SetProp("UseGoogleTracker", newSettings.UseTracker);
             store.Settings.SetProp("GoogleTrackerId", newSettings.TrackerId);
             Stores.Update(store);
@@ -141,7 +153,20 @@ namespace Hotcakes.Commerce.Accounts
         /// <returns></returns>
         protected virtual Store CreateStore()
         {
-            var host = HttpContext.Current.Request.Url.DnsSafeHost.ToLowerInvariant();
+            var context = HttpContext.Current;
+            string host = "localhost";
+
+            if (context?.Request?.Url != null)
+            {
+                try
+                {
+                    host = context.Request.Url.DnsSafeHost.ToLowerInvariant();
+                }
+                catch
+                {
+                    host = "localhost";
+                }
+            }
 
             var s = new Store();
             s.StoreName = host;
@@ -157,6 +182,8 @@ namespace Hotcakes.Commerce.Accounts
         /// <param name="s"></param>
         protected virtual void SetupDefaultStoreSettings(Store s)
         {
+            if (s == null) throw new ArgumentNullException(nameof(s));
+
             s.Settings.FriendlyName = "My Hotcakes Store";
             s.Settings.LogoRevision = 0;
             s.Settings.UseLogoImage = false;

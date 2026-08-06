@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -84,11 +84,10 @@ namespace Hotcakes.Commerce.Orders
             if (string.IsNullOrEmpty(id))
                 return null;
 
-            var idLower = id.ToLower();
             var transactions = GetCachedTransactions();
 
             return transactions.FirstOrDefault(t =>
-                string.Equals(t.IdAsString, idLower, StringComparison.OrdinalIgnoreCase));
+                string.Equals(t.IdAsString, id, StringComparison.OrdinalIgnoreCase));
         }
 
         public bool ClearAllTransactions()
@@ -287,11 +286,11 @@ namespace Hotcakes.Commerce.Orders
             if (string.IsNullOrEmpty(poNumber))
                 return null;
 
-            var poNumberLower = poNumber.Trim().ToLower();
+            var poNumberTrimmed = poNumber.Trim();
             var poInfoList = PurchaseOrderInfoListAll();
 
             return poInfoList.FirstOrDefault(t =>
-                string.Equals(t.PurchaseOrderNumber, poNumberLower, StringComparison.OrdinalIgnoreCase));
+                string.Equals(t.PurchaseOrderNumber, poNumberTrimmed, StringComparison.OrdinalIgnoreCase));
         }
 
         public List<OrderTransaction> PurchaseOrderInfoListAll()
@@ -365,13 +364,13 @@ namespace Hotcakes.Commerce.Orders
             if (string.IsNullOrEmpty(accountNumber))
                 return null;
 
-            var accountNumberLower = accountNumber.Trim().ToLower();
+            var accountNumberTrimmed = accountNumber.Trim();
             var accountInfoList = CompanyAccountInfoListAll();
 
             return accountInfoList.FirstOrDefault(t =>
-                string.Equals(t.CompanyAccountNumber, accountNumberLower, StringComparison.OrdinalIgnoreCase));
+                string.Equals(t.CompanyAccountNumber, accountNumberTrimmed, StringComparison.OrdinalIgnoreCase));
         }
-
+            
         public List<OrderTransaction> CompanyAccountInfoListAll()
         {
             return FindAllTransactionsOfType(ActionType.CompanyAccountInfo);
@@ -1291,7 +1290,7 @@ namespace Hotcakes.Commerce.Orders
         {
             var result = "0 - " + 0.ToString("c");
 
-            if (o.UserID != string.Empty)
+            if (!string.IsNullOrEmpty(o.UserID))
             {
                 var points = _pointsManager.FindAvailablePoints(o.UserID);
                 result = points + " - " + _pointsManager.DollarCreditForPoints(points).ToString("c");
@@ -1317,7 +1316,7 @@ namespace Hotcakes.Commerce.Orders
         {
             OrderTransaction t = null;
 
-            if (infoTransactionId == string.Empty)
+            if (string.IsNullOrEmpty(infoTransactionId))
             {
                 if (RewardsPointsInfoListAll().Count < 1)
                 {
@@ -1746,11 +1745,11 @@ namespace Hotcakes.Commerce.Orders
             if (string.IsNullOrEmpty(giftCardNumber))
                 return null;
 
-            var giftCardNumberLower = giftCardNumber.Trim().ToLower();
+            var giftCardNumberTrimmed = giftCardNumber.Trim();
             var giftCardInfoList = FindAllTransactionsOfType(ActionType.GiftCardInfo);
 
             return giftCardInfoList.FirstOrDefault(ot =>
-                string.Equals(ot.GiftCard.CardNumber, giftCardNumberLower, StringComparison.OrdinalIgnoreCase));
+                string.Equals(ot.GiftCard.CardNumber, giftCardNumberTrimmed, StringComparison.OrdinalIgnoreCase));
         }
 
         public List<OrderTransaction> GiftCardHoldListAll()
@@ -2119,7 +2118,8 @@ namespace Hotcakes.Commerce.Orders
                 return items;
             }
 
-            return null;
+            // Return empty list rather than null to avoid consumers accidentally assigning null to transaction items
+            return new List<TransactionItem>();
         }
 
         #endregion
@@ -2147,31 +2147,23 @@ namespace Hotcakes.Commerce.Orders
             return svc.Transactions.FindForOrder(o.bvin, type);
         }
 
-        private OrderTransaction FindSingleTransactionByTypeAndId(ActionType type, string Id)
+        private OrderTransaction FindSingleTransactionByTypeAndId(ActionType type, string id)
         {
-            if (string.IsNullOrEmpty(Id))
+            if (string.IsNullOrEmpty(id))
                 return null;
 
             var transactions = svc.Transactions.FindForOrder(o.bvin, type);
-            return transactions.FirstOrDefault(t => t.IdAsString == Id);
+            return transactions.FirstOrDefault(t => t.IdAsString == id);
         }
 
         private decimal EnsurePositiveAmount(decimal input)
         {
-            if (input < 0)
-            {
-                return input * -1;
-            }
-            return input;
+            return Math.Abs(input);
         }
 
         private int EnsurePositiveAmount(int input)
         {
-            if (input < 0)
-            {
-                return input * -1;
-            }
-            return input;
+            return Math.Abs(input);
         }
 
         #endregion

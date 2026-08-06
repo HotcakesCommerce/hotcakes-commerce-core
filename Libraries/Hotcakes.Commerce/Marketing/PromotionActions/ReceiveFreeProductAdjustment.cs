@@ -1,9 +1,9 @@
-﻿#region License
+﻿    #region License
 
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, 
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -88,26 +88,31 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
         {
             var _ItemIds = GetQuantities();
 
-            var possible = itemid.Trim().ToUpperInvariant();
+            var possible = (itemid ?? string.Empty).Trim().ToUpperInvariant();
             if (possible == string.Empty) return;
 
             if (_ItemIds.ContainsKey(possible))
             {
                 _ItemIds[possible] = _ItemIds[possible] + quantity;
             }
-
-            _ItemIds.Add(possible, quantity);
+            else
+            {
+                _ItemIds.Add(possible, quantity);
+            }
 
             SaveQuantitiesToSettings(_ItemIds);
         }
 
         public void RemoveItemId(string itemid)
         {
+            if (string.IsNullOrWhiteSpace(itemid)) return;
+
+            var key = itemid.Trim().ToUpperInvariant();
             var _ItemIds = GetQuantities();
 
-            if (_ItemIds.ContainsKey(itemid.Trim().ToUpperInvariant()))
+            if (_ItemIds.ContainsKey(key))
             {
-                _ItemIds.Remove(itemid.Trim().ToUpperInvariant());
+                _ItemIds.Remove(key);
 
                 SaveQuantitiesToSettings(_ItemIds);
             }
@@ -129,9 +134,15 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             foreach (var item in products)
             {
                 var prod = context.HccApp.CatalogServices.Products.FindWithCache(item.Key);
+                if (prod == null)
+                {
+                    // product no longer exists, skip
+                    continue;
+                }
+
                 var li = prod.ConvertToLineItem(context.HccApp, item.Value);
                 var IsFreeQuantity = false;
-                var freeQtyFlag = context.CurrentlyProcessingLineItem.CustomProperties.GetProperty(HCC_KEY, "freeQuantity");
+                var freeQtyFlag = context.CurrentlyProcessingLineItem?.CustomProperties.GetProperty(HCC_KEY, "freeQuantity");
 
                 if (li.ProductId.ToUpperInvariant() == context.CurrentlyProcessingLineItem.ProductId.ToUpperInvariant() &&
                     li.SelectionData.Equals(context.CurrentlyProcessingLineItem.SelectionData) && freeQtyFlag != "false")
@@ -183,16 +194,20 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             //ResetOrderFlags(context);
 
             var products = GetQuantities();
-            CleanCart(context, GetQuantities());
+            CleanCart(context, products);
 
             return true;
         }
 
         public Dictionary<string, int> GetQuantities()
         {
-            var result = new List<string>();
-            var all = GetSetting("quantityids");
-            result = all
+            var all = GetSetting("quantityids") ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(all))
+            {
+                return new Dictionary<string, int>(0);
+            }
+
+            var result = all
                 .Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
                 .Select(s => s.Trim().ToUpperInvariant())
                 .ToList();
@@ -202,10 +217,24 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             foreach (var item in result)
             {
                 var parts = item.Split(new[] {'='}, StringSplitOptions.RemoveEmptyEntries);
-                var id = parts[0];
-                var quantity = int.Parse(parts[1]);
+                if (parts.Length < 2) continue;
 
-                hash.Add(id, quantity);
+                var id = parts[0];
+                if (!int.TryParse(parts[1], out var quantity))
+                {
+                    // ignore malformed quantity entries
+                    continue;
+                }
+
+                if (!hash.ContainsKey(id))
+                {
+                    hash.Add(id, quantity);
+                }
+                else
+                {
+                    // merge duplicate entries by summing quantities
+                    hash[id] = hash[id] + quantity;
+                }
             }
 
             return hash;
