@@ -1,9 +1,9 @@
-﻿#region License
+﻿    #region License
 
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -34,6 +34,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
     {
         public const string TypeIdString = "608c118e-cf72-4703-b4cb-dab1d579c53e";
 
+        private static readonly Guid _typeId = new Guid(TypeIdString);
+
         public OrderShippingAdjustment()
         {
             Id = 0;
@@ -52,7 +54,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         public override Guid TypeId
         {
-            get { return new Guid(TypeIdString); }
+            get { return _typeId; }
         }
 
         public AmountTypes AdjustmentType
@@ -75,17 +77,18 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         public override string FriendlyDescription(HotcakesApplication app)
         {
-            var isDiscount = Amount < 0;
-
+            var amount = Amount;
+            var isDiscount = amount < 0m;
             var result = (isDiscount ? "Decrease" : "Increase") + " Shipping by ";
+            var adjustmentType = AdjustmentType;
 
-            switch (AdjustmentType)
+            switch (adjustmentType)
             {
                 case AmountTypes.MonetaryAmount:
-                    result += Math.Abs(Amount).ToString("c");
+                    result += Math.Abs(amount).ToString("c");
                     break;
                 case AmountTypes.Percent:
-                    result += (Math.Abs(Amount)/100m).ToString("p");
+                    result += (Math.Abs(amount) / 100m).ToString("p");
                     break;
             }
             return result;
@@ -99,30 +102,25 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             // only apply when applying to shipping areas
             if (context.Mode != PromotionType.OfferForShipping) return false;
 
-            // TODO: It doesn't make sense
-            //if (context.AdjustedShippingRate <= 0)
-            //{
-            //	context.AdjustedShippingRate = context.Order.TotalShippingBeforeDiscounts;
-            //}
+            // Determine whether we're working with a specific shipping method
+            var hasCurrentShippingMethod = !string.IsNullOrWhiteSpace(context.CurrentShippingMethodId);
 
-            // Business logic below should include 2 cases:
-            // 1) when discount for current order is calculated
-            // 2) when discount is calculated for all possible shipping method in the loop
-            // This can be determined by value of CurrentShippingMethodId variable
-            decimal baseShippingRate = 0;
-            if (!string.IsNullOrWhiteSpace(context.CurrentShippingMethodId))
-                baseShippingRate = context.AdjustedShippingRate;
-            else
-                baseShippingRate = context.Order.TotalShippingBeforeDiscounts;
+            // Determine base shipping rate once
+            decimal baseShippingRate = hasCurrentShippingMethod
+                ? context.AdjustedShippingRate
+                : context.Order.TotalShippingBeforeDiscounts;
 
-            decimal adjustment = 0;
-            switch (AdjustmentType)
+            var adjustmentType = AdjustmentType;
+            var amount = Amount;
+
+            decimal adjustment = 0m;
+            switch (adjustmentType)
             {
                 case AmountTypes.MonetaryAmount:
-                    adjustment = Money.GetDiscountAmount(baseShippingRate, Amount);
+                    adjustment = Money.GetDiscountAmount(baseShippingRate, amount);
                     break;
                 case AmountTypes.Percent:
-                    adjustment = Money.GetDiscountAmountByPercent(baseShippingRate, Amount);
+                    adjustment = Money.GetDiscountAmountByPercent(baseShippingRate, amount);
                     break;
             }
 

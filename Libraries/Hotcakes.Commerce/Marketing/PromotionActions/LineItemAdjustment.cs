@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -34,6 +34,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
     public class LineItemAdjustment : PromotionActionBase
     {
         public const string TypeIdString = "adf5b289-3f11-4e90-a8c7-fe62a0274205";
+        private static readonly Guid _typeId = new Guid(TypeIdString);
 
         public LineItemAdjustment()
         {
@@ -45,7 +46,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         public override Guid TypeId
         {
-            get { return new Guid(TypeIdString); }
+            get { return _typeId; }
         }
 
         public AmountTypes AdjustmentType
@@ -53,11 +54,12 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             get
             {
                 var temp = GetSetting("AdjustmentType");
-                var result = AmountTypes.MonetaryAmount;
-                Enum.TryParse(temp, out result);
+                if (string.IsNullOrWhiteSpace(temp)) return AmountTypes.MonetaryAmount;
+                AmountTypes result;
+                Enum.TryParse(temp, true, out result);
                 return result;
             }
-            set { SetSetting("AdjustmentType", (int) value); }
+            set { SetSetting("AdjustmentType", ((int) value).ToString()); }
         }
 
         public decimal Amount
@@ -68,20 +70,23 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         public override string FriendlyDescription(HotcakesApplication app)
         {
-            var isDiscount = Amount < 0;
-
-            var result = (isDiscount ? "Decrease" : "Increase") + " Qualifying Item Price by ";
-
+            var isDiscount = Amount < 0m;
+            var action = isDiscount ? "Decrease" : "Increase";
+            var absAmount = Math.Abs(Amount);
+            string amountText;
             switch (AdjustmentType)
             {
                 case AmountTypes.MonetaryAmount:
-                    result += Math.Abs(Amount).ToString("c");
+                    amountText = absAmount.ToString("c");
                     break;
                 case AmountTypes.Percent:
-                    result += (Math.Abs(Amount)/100m).ToString("p");
+                    amountText = (absAmount / 100m).ToString("p");
+                    break;
+                default:
+                    amountText = absAmount.ToString();
                     break;
             }
-            return result;
+            return action + " Qualifying Item Price by " + amountText;
         }
 
         public override bool ApplyAction(PromotionContext context)
@@ -91,22 +96,19 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
                 if (context == null) return false;
                 if (context.Mode != PromotionType.OfferForLineItems) return false;
 
-                if (context.Order == null) return false;
-                if (context.Order.Items == null) return false;
+                var order = context.Order;
+                if (order == null || order.Items == null) return false;
                 if (context.CurrentlyProcessingLineItem == null) return false;
 
                 var li = context.CurrentlyProcessingLineItem;
-                var promo = context.HccApp.MarketingServices.Promotions.Find(context.PromotionId);
 
-                // Check if lineitem already has this promotion. Dont apply it again in that case.
+                // Check if lineitem already has this promotion. Don't apply it again in that case.
                 if (li.DiscountDetails.Any(d => d.PromotionId == context.PromotionId))
                 {
                     return true;
                 }
-                //if (promo.DoNotCombine && context.Order.HasAnyNonSaleDiscounts) return false;
 
                 var adjustment = 0m;
-
                 switch (AdjustmentType)
                 {
                     case AmountTypes.MonetaryAmount:
@@ -115,8 +117,10 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
                     case AmountTypes.Percent:
                         adjustment = Money.GetDiscountAmountByPercent(li.LineTotalWithSalesWithoutDiscounts, Amount);
                         break;
+                    default:
+                        adjustment = 0m;
+                        break;
                 }
-
 
                 li.DiscountDetails.Add(new DiscountDetail
                 {

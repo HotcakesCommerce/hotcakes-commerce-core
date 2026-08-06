@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -49,26 +49,26 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
-            lnkMigrate.Click += lnkMigrate_Click;
-            chkShowDisabled.CheckedChanged += (s, a) => ResetAllPageNumbers();
-            btnGo.Click += (s, a) => ResetAllPageNumbers();
+            if (lnkMigrate != null) lnkMigrate.Click += lnkMigrate_Click;
+            if (chkShowDisabled != null) chkShowDisabled.CheckedChanged += (s, a) => ResetAllPageNumbers();
+            if (btnGo != null) btnGo.Click += (s, a) => ResetAllPageNumbers();
         }
 
         private void lnkMigrate_Click(object sender, EventArgs e)
         {
-            ucMessageBox.ClearMessage();
-            lnkMigrate.Visible = false;
-            ucMessageBox.ShowOk(Localization.GetString("MigrateSuccess"));
+            ucMessageBox?.ClearMessage();
+            if (lnkMigrate != null) lnkMigrate.Visible = false;
+            ucMessageBox?.ShowOk(Localization.GetString("MigrateSuccess"));
         }
 
         private void ResetAllPageNumbers()
         {
-            ucSalesList.ResetPageNumber();
-            ucOffersOrderItems.ResetPageNumber();
-            ucOffersOrderSubTotal.ResetPageNumber();
-            ucOffersFreeItem.ResetPageNumber();
-            ucOffersOrderShipping.ResetPageNumber();
-            ucAffiliatePromotions.ResetPageNumber();
+            ucSalesList?.ResetPageNumber();
+            ucOffersOrderItems?.ResetPageNumber();
+            ucOffersOrderSubTotal?.ResetPageNumber();
+            ucOffersFreeItem?.ResetPageNumber();
+            ucOffersOrderShipping?.ResetPageNumber();
+            ucAffiliatePromotions?.ResetPageNumber();
         }
 
         protected override void OnLoad(EventArgs e)
@@ -81,15 +81,36 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
             }
             else
             {
-                SessionManager.AdminPromotionShowDisabled = chkShowDisabled.Checked;
-                SessionManager.AdminPromotionKeywords = txtKeywords.Text;
+                // Fix: SessionManager is a static class, not an instance. Remove null check and use static properties.
+                SessionManager.AdminPromotionShowDisabled = chkShowDisabled?.Checked ?? false;
+                SessionManager.AdminPromotionKeywords = txtKeywords?.Text ?? string.Empty;
             }
         }
 
         protected void btnNew_Click(object sender, EventArgs e)
         {
-            var predefinedPromo = (PreDefinedPromotion) Convert.ToInt32(lstNewType.SelectedValue);
+            if (lstNewType == null) return;
+
+            if (!int.TryParse(lstNewType.SelectedValue, out var selected))
+            {
+                ucMessageBox?.ShowWarning(Localization.GetString("InvalidSelection"));
+                return;
+            }
+
+            if (!Enum.IsDefined(typeof(PreDefinedPromotion), selected))
+            {
+                ucMessageBox?.ShowWarning(Localization.GetString("InvalidSelection"));
+                return;
+            }
+
+            var predefinedPromo = (PreDefinedPromotion)selected;
             var promo = HccApp.MarketingServices.GetPredefinedPromotion(predefinedPromo);
+            if (promo == null)
+            {
+                ucMessageBox?.ShowWarning(Localization.GetString("CreatePromotionError"));
+                return;
+            }
+
             HccApp.MarketingServices.Promotions.Create(promo);
 
             Response.Redirect(GetEditUrl(promo.Id));
@@ -113,38 +134,41 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
         }
 
         #endregion
-
+            
         #region Implementation
 
         private void InitialBindData()
         {
+            // Fix: SessionManager is a static class, not an instance. Remove null check and use static properties.
             chkShowDisabled.Checked = SessionManager.AdminPromotionShowDisabled;
             txtKeywords.Text = SessionManager.AdminPromotionKeywords;
-            txtKeywords.Focus();
 
-            lstNewType.Items.Add(new ListItem(Localization.GetString("CustomSale"), "0"));
-            lstNewType.Items.Add(new ListItem(Localization.GetString("CustomOfferForItems"), "1"));
-            lstNewType.Items.Add(new ListItem(Localization.GetString("CustomOfferForFreeItems"), "5"));
-            lstNewType.Items.Add(new ListItem(Localization.GetString("CustomOfferForOrder"), "2"));
-            lstNewType.Items.Add(new ListItem(Localization.GetString("CustomOfferForShipping"), "3"));
-            lstNewType.Items.Add(new ListItem(Localization.GetString("AffiliatePromotion"), "4"));
+            txtKeywords?.Focus();
 
-            var lstSeparator = new ListItem("--------------", string.Empty);
-            lstSeparator.Enabled = false;
-            lstNewType.Items.Add(lstSeparator);
+            lstNewType?.Items.Clear();
 
-            lstNewType.Items.Add(new ListItem(Localization.GetString("SaleStoreWide"), "10"));
-            lstNewType.Items.Add(new ListItem(Localization.GetString("SaleProducts"), "11"));
-            lstNewType.Items.Add(new ListItem(Localization.GetString("SaleCategories"), "12"));
-            lstNewType.Items.Add(new ListItem(Localization.GetString("SaleProductTypes"), "13"));
-            lstNewType.Items.Add(new ListItem(Localization.GetString("SaleByPriceGroup"), "14"));
-            lstNewType.Items.Add(new ListItem(Localization.GetString("SaleByUser"), "15"));
-            lstNewType.Items.Add(new ListItem(Localization.GetString("OfferWithCoupon"), "16"));
-            lstNewType.Items.Add(new ListItem(Localization.GetString("OfferByPriceGroup"), "18"));
-            lstNewType.Items.Add(new ListItem(Localization.GetString("OfferByUser"), "17"));
-            lstNewType.Items.Add(new ListItem(Localization.GetString("OfferFreeShipping"), "19"));
-            lstNewType.Items.Add(new ListItem(Localization.GetString("OfferShippingDiscount"), "20"));
-            lstNewType.Items.Add(new ListItem(Localization.GetString("OfferFreeShippingCategory"), "21"));
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("CustomSale"), "0"));
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("CustomOfferForItems"), "1"));
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("CustomOfferForFreeItems"), "5"));
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("CustomOfferForOrder"), "2"));
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("CustomOfferForShipping"), "3"));
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("AffiliatePromotion"), "4"));
+
+            var lstSeparator = new ListItem("--------------", string.Empty) { Enabled = false };
+            lstNewType?.Items.Add(lstSeparator);
+
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("SaleStoreWide"), "10"));
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("SaleProducts"), "11"));
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("SaleCategories"), "12"));
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("SaleProductTypes"), "13"));
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("SaleByPriceGroup"), "14"));
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("SaleByUser"), "15"));
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("OfferWithCoupon"), "16"));
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("OfferByPriceGroup"), "18"));
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("OfferByUser"), "17"));
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("OfferFreeShipping"), "19"));
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("OfferShippingDiscount"), "20"));
+            lstNewType?.Items.Add(new ListItem(Localization.GetString("OfferFreeShippingCategory"), "21"));
         }
 
         private string GetEditUrl(long id)

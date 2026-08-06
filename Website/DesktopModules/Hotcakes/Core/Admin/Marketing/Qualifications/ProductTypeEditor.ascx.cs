@@ -1,9 +1,9 @@
-﻿#region License
+﻿    #region License
 
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -52,26 +52,30 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
         {
             base.OnInit(e);
 
-            cbIsNot.CheckedChanged += cbIsNot_CheckedChanged;
+            if (cbIsNot != null) cbIsNot.CheckedChanged += cbIsNot_CheckedChanged;
         }
 
         private void cbIsNot_CheckedChanged(object sender, EventArgs e)
         {
-            if (TypedQualification is ProductTypeIs)
+            if (TypedQualification is ProductTypeIs pti)
             {
-                ((ProductTypeIs) TypedQualification).IsNotMode = cbIsNot.Checked;
+                pti.IsNotMode = cbIsNot?.Checked ?? pti.IsNotMode;
             }
-
-            if (TypedQualification is ProductType)
+            else if (TypedQualification is ProductType pt)
             {
-                ((ProductType) TypedQualification).IsNotMode = cbIsNot.Checked;
+                pt.IsNotMode = cbIsNot?.Checked ?? pt.IsNotMode;
             }
         }
 
         protected void btnAddProductType_Click(object sender, EventArgs e)
         {
             var q = TypedQualification;
-            q.AddNewId(lstProductTypes.SelectedValue);
+            if (q == null || lstProductTypes == null) return;
+
+            var selected = lstProductTypes.SelectedValue;
+            if (string.IsNullOrWhiteSpace(selected)) return;
+
+            q.AddNewId(selected.Trim());
             UpdatePromotion();
             LoadQualification();
         }
@@ -79,23 +83,33 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
         protected void gvProductTypes_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             var q = TypedQualification;
-            var bvin = (string) e.Keys[0];
-            q.RemoveId(bvin);
+            if (q == null) return;
+            if (e?.Keys == null || e.Keys.Count == 0) return;
+
+            var keyObj = e.Keys[0];
+            if (keyObj == null) return;
+
+            var bvin = keyObj as string ?? keyObj.ToString();
+            if (string.IsNullOrWhiteSpace(bvin)) return;
+
+            q.RemoveId(bvin.Trim());
             UpdatePromotion();
             LoadQualification();
         }
 
         protected void btnDeleteProductType_OnPreRender(object sender, EventArgs e)
         {
-            var link = (LinkButton) sender;
-            link.Text = Localization.GetString("Delete");
+            if (sender is LinkButton link)
+            {
+                link.Text = Localization.GetString("Delete");
+            }
         }
 
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
 
-            cbIsNot.Visible = IsNotMode;
+            if (cbIsNot != null) cbIsNot.Visible = IsNotMode;
         }
 
         #endregion
@@ -104,53 +118,69 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 
         public override void LoadQualification()
         {
-            var allTypes = HccApp.CatalogServices.ProductTypes.FindAll();
-
-            if (TypedQualification is ProductTypeIs)
+            var q = TypedQualification;
+            if (q == null)
             {
-                var pti = (ProductTypeIs) TypedQualification;
-                cbIsNot.Checked = pti.IsNotMode;
+                if (lstProductTypes != null) lstProductTypes.Items.Clear();
+                if (gvProductTypes != null) gvProductTypes.DataBind();
+                return;
             }
 
-            if (TypedQualification is ProductType)
+            var allTypes = HccApp.CatalogServices.ProductTypes.FindAll();
+
+            if (q is ProductTypeIs pti)
             {
-                var pti = (ProductType) TypedQualification;
-                cbIsNot.Checked = pti.IsNotMode;
+                if (cbIsNot != null) cbIsNot.Checked = pti.IsNotMode;
+            }
+
+            if (q is ProductType pt)
+            {
+                if (cbIsNot != null) cbIsNot.Checked = pt.IsNotMode;
             }
 
             var displayData = new List<FriendlyBvinDisplay>();
 
-            foreach (var bvin in TypedQualification.CurrentIds())
+            foreach (var rawBvin in (q.CurrentIds() ?? Enumerable.Empty<string>()))
             {
-                var item = new FriendlyBvinDisplay();
-                item.bvin = bvin;
-                item.DisplayName = bvin;
+                if (string.IsNullOrWhiteSpace(rawBvin)) continue;
+                var bvin = rawBvin.Trim();
 
-                var t = allTypes.FirstOrDefault(y => y.Bvin == bvin);
-                if (t != null)
+                var item = new FriendlyBvinDisplay
                 {
-                    item.DisplayName = t.ProductTypeName;
-                    allTypes.Remove(t);
+                    bvin = bvin,
+                    DisplayName = bvin
+                };
+
+                var match = allTypes.FirstOrDefault(y =>
+                    string.Equals((y.Bvin ?? string.Empty).Trim(), bvin, StringComparison.OrdinalIgnoreCase));
+
+                if (match != null)
+                {
+                    item.DisplayName = match.ProductTypeName ?? bvin;
+                    allTypes.Remove(match);
                 }
+
                 displayData.Add(item);
             }
 
-            if (allTypes != null)
+            // Filter out empty product type names for selection list
+            var availableTypes = allTypes
+                .Where(y => !string.IsNullOrEmpty(y.ProductTypeName))
+                .ToList();
+
+            if (lstProductTypes != null)
             {
-                allTypes = allTypes.Where(y => !string.IsNullOrEmpty(y.ProductTypeName)).ToList();
+                lstProductTypes.DataSource = availableTypes;
+                lstProductTypes.DataValueField = "Bvin";
+                lstProductTypes.DataTextField = "ProductTypeName";
+                lstProductTypes.DataBind();
             }
 
-            if (displayData != null)
+            if (gvProductTypes != null)
             {
-                displayData = displayData.Where(y => !string.IsNullOrEmpty(y.DisplayName)).ToList();
+                gvProductTypes.DataSource = displayData.Where(y => !string.IsNullOrEmpty(y.DisplayName)).ToList();
+                gvProductTypes.DataBind();
             }
-            lstProductTypes.DataSource = allTypes;
-            lstProductTypes.DataValueField = "Bvin";
-            lstProductTypes.DataTextField = "ProductTypeName";
-            lstProductTypes.DataBind();
-
-            gvProductTypes.DataSource = displayData;
-            gvProductTypes.DataBind();
         }
 
         public override bool SaveQualification()

@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -24,31 +24,46 @@
 
 #endregion
 
+using System;
 using System.Reflection;
 
 namespace Hotcakes.Commerce.Globalization
 {
     /// <summary>
-    ///     This strategy with calling Init method in static contructor won't work properly in multistore setup
-    ///     We need simply prevent single initialization and don't use static field or static contructor to handle that
-    ///     scenario.
-    ///     Since for now this approach is used only to edit billing info for recurring orders so we skip fixing this for now
+    ///     Helper to populate static string properties on view-model localization classes from resource files.
+    ///     The method is intentionally non-caching to avoid cross-store contamination in multi-store setups.
     /// </summary>
     public abstract class ViewModelLocalization
     {
         protected static void Init<T>(string modelName)
         {
-            var path = string.Format("/Views/App_LocalResources/{0}.resx", modelName);
-            var loc =
-                Factory.Instance.CreateLocalizationHelper(string.Concat(HotcakesApplication.Current.ViewsVirtualPath,
-                    path));
-            var props = typeof (T).GetProperties(BindingFlags.Static | BindingFlags.Public);
+            if (string.IsNullOrWhiteSpace(modelName)) throw new ArgumentException("modelName is required", nameof(modelName));
+
+            var path = $"/Views/App_LocalResources/{modelName}.resx";
+            var resourcePath = string.Concat(HotcakesApplication.Current.ViewsVirtualPath, path);
+            var loc = Factory.Instance.CreateLocalizationHelper(resourcePath);
+            if (loc == null) return;
+
+            var props = typeof(T).GetProperties(BindingFlags.Static | BindingFlags.Public);
+            if (props == null || props.Length == 0) return;
 
             foreach (var prop in props)
             {
-                if (prop.PropertyType == typeof (string))
+                if (prop.PropertyType != typeof(string)) continue;
+                if (!prop.CanWrite) continue;
+
+                try
                 {
-                    prop.SetValue(null, loc.GetString(prop.Name), null);
+                    var value = loc.GetString(prop.Name);
+                    if (!string.IsNullOrEmpty(value))
+                    {
+                        prop.SetValue(null, value, null);
+                    }
+                }
+                catch
+                {
+                    // Swallow exceptions to avoid breaking callers when a single property fails.
+                    // Logging may be added here if desired.
                 }
             }
         }

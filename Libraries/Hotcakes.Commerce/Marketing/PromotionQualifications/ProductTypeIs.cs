@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -61,14 +61,18 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             var result = "When Product Type is" + (IsNotMode ? " not" : string.Empty) + ":<ul>";
             var ids = CurrentIds();
 
-            foreach (var bvin in ids)
+            if (ids.Count > 0 && app?.CatalogServices?.ProductTypes != null)
             {
-                var c = app.CatalogServices.ProductTypes.Find(bvin);
-                if (c != null)
+                foreach (var bvin in ids)
                 {
-                    result += "<li>" + c.ProductTypeName + "<br />";
+                    var c = app.CatalogServices.ProductTypes.Find(bvin);
+                    if (c != null)
+                    {
+                        result += "<li>" + c.ProductTypeName + "<br />";
+                    }
                 }
             }
+
             result += "</ul>";
 
             return result;
@@ -106,6 +110,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         private bool MeetLineItem(PromotionContext context, LineItem li, List<string> ids)
         {
+            if (context?.HccApp?.CatalogServices == null) return false;
+
             var prod = context.HccApp.CatalogServices.Products.FindWithCache(li.ProductId);
 
             if (prod == null)
@@ -113,14 +119,17 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
                 return false;
             }
 
-            var type = prod.ProductTypeId == string.Empty ? "00000000-0000-0000-0000-000000000000" : prod.ProductTypeId;
-                // additional check for generic.
+            var type = string.IsNullOrWhiteSpace(prod.ProductTypeId)
+                ? "00000000-0000-0000-0000-000000000000"
+                : prod.ProductTypeId;
+
+            var normalized = type.Trim().ToLowerInvariant();
 
             if (IsNotMode)
             {
-                return !ids.Contains(type);
+                return !ids.Contains(normalized);
             }
-            return ids.Contains(type);
+            return ids.Contains(normalized);
         }
     }
 }

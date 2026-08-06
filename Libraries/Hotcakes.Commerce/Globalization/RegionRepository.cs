@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -36,20 +36,15 @@ namespace Hotcakes.Commerce.Globalization
 {
     public class RegionRepository : HccLocalizationRepoBase<hcc_Region, hcc_RegionTranslation, Region, Guid>
     {
-        public RegionRepository(HccRequestContext c)
-            : base(c)
+            public RegionRepository(HccRequestContext context)
+            : base(context)
         {
+            if (context == null) throw new ArgumentNullException(nameof(context));
         }
 
-        protected override Expression<Func<hcc_Region, Guid>> ItemKeyExp
-        {
-            get { return r => r.RegionId; }
-        }
+        protected override Expression<Func<hcc_Region, Guid>> ItemKeyExp => r => r.RegionId;
 
-        protected override Expression<Func<hcc_RegionTranslation, Guid>> ItemTranslationKeyExp
-        {
-            get { return rt => rt.RegionId; }
-        }
+        protected override Expression<Func<hcc_RegionTranslation, Guid>> ItemTranslationKeyExp => rt => rt.RegionId;
 
         protected override void CopyItemToModel(hcc_Region data, Region model)
         {
@@ -75,31 +70,30 @@ namespace Hotcakes.Commerce.Globalization
         protected override void CopyModelToTrans(JoinedItem<hcc_Region, hcc_RegionTranslation> data, Region model)
         {
             data.ItemTranslation.RegionId = model.RegionId;
-
             data.ItemTranslation.DisplayName = model.DisplayName;
         }
 
         public List<Region> FindAll()
         {
-            return FindListPoco(q => { return q.OrderBy(r => r.ItemTranslation.DisplayName); });
+            return FindListPoco(q => q.OrderBy(r => r.ItemTranslation.DisplayName));
         }
 
         public List<Region> FindAll(Guid countryId)
         {
             return FindListPoco(q =>
-            {
-                return q.Where(r => r.Item.CountryId == countryId)
-                    .OrderBy(r => r.ItemTranslation.DisplayName);
-            });
+                q.Where(r => r.Item.CountryId == countryId)
+                 .OrderBy(r => r.ItemTranslation.DisplayName));
         }
 
         public List<Region> FindAll(List<Guid> countryIds)
         {
+            if (countryIds == null || countryIds.Count == 0) return new List<Region>();
             return FindListPoco(q => q.Where(cb => countryIds.Contains(cb.Item.CountryId)));
         }
 
         public override bool Create(Region region)
         {
+            if (region == null) throw new ArgumentNullException(nameof(region));
             if (region.RegionId == Guid.Empty)
             {
                 region.RegionId = Guid.NewGuid();

@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -33,13 +33,11 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
     public class ProductPriceAdjustment : PromotionActionBase
     {
         public const string TypeIdString = "a07aff02-ba28-42e0-b334-324de467b2d7";
+        private static readonly Guid TypeIdValue = Guid.Parse(TypeIdString);
 
         public ProductPriceAdjustment()
+            : this(AmountTypes.MonetaryAmount, 0m)
         {
-            Id = 0;
-            Settings = new Dictionary<string, string>();
-            AdjustmentType = AmountTypes.MonetaryAmount;
-            Amount = 0m;
         }
 
         public ProductPriceAdjustment(AmountTypes type, decimal amount)
@@ -50,21 +48,23 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             Amount = amount;
         }
 
-        public override Guid TypeId
-        {
-            get { return new Guid(TypeIdString); }
-        }
+        public override Guid TypeId => TypeIdValue;
 
         public AmountTypes AdjustmentType
         {
             get
             {
                 var temp = GetSetting("AdjustmentType");
-                var result = AmountTypes.MonetaryAmount;
-                Enum.TryParse(temp, out result);
-                return result;
+                if (string.IsNullOrWhiteSpace(temp)) return AmountTypes.MonetaryAmount;
+
+                if (Enum.TryParse<AmountTypes>(temp, true, out var result))
+                {
+                    return result;
+                }
+
+                return AmountTypes.MonetaryAmount;
             }
-            set { SetSetting("AdjustmentType", (int) value); }
+            set { SetSetting("AdjustmentType", (int)value); }
         }
 
         public decimal Amount
@@ -76,7 +76,6 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var isDiscount = Amount < 0;
-
             var result = (isDiscount ? "Decrease" : "Increase") + " Product Price by ";
 
             switch (AdjustmentType)
@@ -85,32 +84,29 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
                     result += Math.Abs(Amount).ToString("c");
                     break;
                 case AmountTypes.Percent:
-                    result += (Math.Abs(Amount)/100m).ToString("p");
+                    result += (Math.Abs(Amount) / 100m).ToString("p");
+                    break;
+                default:
+                    result += Math.Abs(Amount).ToString();
                     break;
             }
+
             return result;
         }
 
         public override bool ApplyAction(PromotionContext context)
         {
-            if (context == null) return false;
-            if (context.Product == null) return false;
-            if (context.UserPrice == null) return false;
+            if (context == null || context.Product == null || context.UserPrice == null) return false;
 
             // only apply when applying to product price
             if (context.Mode != PromotionType.Sale) return false;
 
-            var adjustment = 0m;
-
-            switch (AdjustmentType)
+            var adjustment = AdjustmentType switch
             {
-                case AmountTypes.MonetaryAmount:
-                    adjustment = Money.GetDiscountAmount(context.UserPrice.BasePrice, Amount);
-                    break;
-                case AmountTypes.Percent:
-                    adjustment = Money.GetDiscountAmountByPercent(context.UserPrice.BasePrice, Amount);
-                    break;
-            }
+                AmountTypes.MonetaryAmount => Money.GetDiscountAmount(context.UserPrice.BasePrice, Amount),
+                AmountTypes.Percent => Money.GetDiscountAmountByPercent(context.UserPrice.BasePrice, Amount),
+                _ => 0m
+            };
 
             context.UserPrice.AddAdjustment(adjustment, context.CustomerDescription, context.PromotionId, Id);
 

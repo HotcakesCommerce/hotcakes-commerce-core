@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
@@ -49,17 +50,18 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         #region Helper Methods
 
-        private bool MatchAny(List<LineItem> items, List<string> productIds)
+        private bool MatchAny(IEnumerable<LineItem> items, List<string> productIds)
         {
-            foreach (var li in items)
-            {
-                if (productIds.Contains(li.ProductId.Trim().ToLowerInvariant()))
-                {
-                    return false;
-                }
-            }
+            if (items == null) return true;
+            if (productIds == null || productIds.Count == 0) return true;
 
-            return true;
+            // Return true only when none of the items match any product id in the set
+            return !items.Any(li =>
+            {
+                if (string.IsNullOrWhiteSpace(li.ProductId)) return false;
+                var pid = li.ProductId.Trim().ToLowerInvariant();
+                return productIds.Contains(pid);
+            });
         }
 
         #endregion
@@ -73,18 +75,21 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         public override string FriendlyDescription(HotcakesApplication app)
         {
-            var result = "When order doesn't have";
+            var result = "When order doesn't have:<ul>";
 
-            result += ":<ul>";
-
-            foreach (var bvin in CurrentIds())
+            var ids = CurrentIds();
+            if (ids.Count > 0 && app?.CatalogServices?.Products != null)
             {
-                var p = app.CatalogServices.Products.FindWithCache(bvin);
-                if (p != null)
+                foreach (var bvin in ids)
                 {
-                    result += "<li>[" + p.Sku + "] " + p.ProductName + "</li>";
+                    var p = app.CatalogServices.Products.FindWithCache(bvin);
+                    if (p != null)
+                    {
+                        result += "<li>[" + p.Sku + "] " + p.ProductName + "</li>";
+                    }
                 }
             }
+
             result += "</ul>";
             return result;
         }
@@ -102,7 +107,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             if (context.Order == null) return false;
             if (context.Order.Items == null) return false;
 
-            return MatchAny(context.Order.Items, CurrentIds());
+            var productIds = CurrentIds();
+            return MatchAny(context.Order.Items, productIds);
         }
 
         #endregion

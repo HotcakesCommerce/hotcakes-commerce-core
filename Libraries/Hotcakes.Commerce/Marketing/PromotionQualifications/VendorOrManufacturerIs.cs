@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
@@ -58,37 +59,44 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         public override string FriendlyDescription(HotcakesApplication app)
         {
-            var result = "When Vendor/Manufacturer Is " + (IsNotMode ? "Not" : string.Empty) + ":<ul>";
-            var ids = CurrentIds();
-            var vendorIds = new List<string>();
+            var sb = new StringBuilder();
+            sb.Append("When Vendor/Manufacturer Is ");
+            sb.Append(IsNotMode ? "Not" : string.Empty);
+            sb.Append(":<ul>");
+
+            var ids = CurrentIds() ?? new List<string>();
+            var vendorCandidateIds = new List<string>();
 
             foreach (var bvin in ids)
             {
-                var c = app.ContactServices.Manufacturers.Find(bvin);
+                if (string.IsNullOrWhiteSpace(bvin)) continue;
 
-                if (c != null)
+                var manufacturer = app.ContactServices.Manufacturers.Find(bvin);
+                if (manufacturer != null)
                 {
-                    result += "<li>" + c.DisplayName + "<br />";
+                    sb.Append("<li>");
+                    sb.Append(manufacturer.DisplayName);
+                    sb.Append("<br />");
                 }
                 else
                 {
-                    vendorIds.Add(bvin);
+                    vendorCandidateIds.Add(bvin);
                 }
             }
 
-            foreach (var bvin in vendorIds)
+            foreach (var bvin in vendorCandidateIds)
             {
-                var c = app.ContactServices.Vendors.Find(bvin);
-
-                if (c != null)
+                var vendor = app.ContactServices.Vendors.Find(bvin);
+                if (vendor != null)
                 {
-                    result += "<li>" + c.DisplayName + "<br />";
+                    sb.Append("<li>");
+                    sb.Append(vendor.DisplayName);
+                    sb.Append("<br />");
                 }
             }
 
-            result += "</ul>";
-
-            return result;
+            sb.Append("</ul>");
+            return sb.ToString();
         }
 
         protected override void OnInit()
@@ -107,15 +115,13 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             if (mode == PromotionQualificationMode.LineItems)
             {
                 if (context.CurrentlyProcessingLineItem == null) return false;
-
-                var li = context.CurrentlyProcessingLineItem;
-
-                return MeetLineItem(context, li, ids);
+                return MeetLineItem(context, context.CurrentlyProcessingLineItem, ids);
             }
+    
             if (mode == PromotionQualificationMode.Orders)
             {
                 var items = context.Order.Items;
-                return items.Any(i => MeetLineItem(context, i, ids));
+                return items.Any(i => MeetLineItem(context, i, CurrentIds()));
             }
 
             return false;
@@ -124,20 +130,25 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
         private bool MeetLineItem(PromotionContext context, LineItem li, List<string> ids)
         {
             if (li == null) return false;
-            var productBvin = li.ProductId;
+            if (context?.HccApp?.CatalogServices == null) return false;
 
             var prod = context.HccApp.CatalogServices.Products.FindWithCache(li.ProductId);
+            if (prod == null) return false;
 
-            if (prod == null)
+            var effectiveIds = (ids ?? Enumerable.Empty<string>()).Where(x => !string.IsNullOrWhiteSpace(x));
+            var idSet = new HashSet<string>(effectiveIds, StringComparer.OrdinalIgnoreCase);
+
+            bool IdInSet(string candidate)
             {
-                return false;
+                return !string.IsNullOrWhiteSpace(candidate) && idSet.Contains(candidate);
             }
 
             if (IsNotMode)
             {
-                return !ids.Contains(prod.VendorId) && !ids.Contains(prod.ManufacturerId);
+                return !IdInSet(prod.VendorId) && !IdInSet(prod.ManufacturerId);
             }
-            return ids.Contains(prod.VendorId) || ids.Contains(prod.ManufacturerId);
+
+            return IdInSet(prod.VendorId) || IdInSet(prod.ManufacturerId);
         }
     }
 }

@@ -41,10 +41,14 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 
         protected void btnAddOrderCoupon_Click(object sender, EventArgs e)
         {
-            var code = OrderCouponField.Text.Trim();
+            var code = OrderCouponField?.Text?.Trim();
+            if (string.IsNullOrWhiteSpace(code)) return;
 
             var q = TypedQualification;
+            if (q == null) return;
+
             q.AddCoupon(code);
+            OrderCouponField.Text = string.Empty;
             UpdatePromotion();
             LoadQualification();
         }
@@ -52,7 +56,12 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
         protected void gvOrderCoupons_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             var q = TypedQualification;
-            var coupon = (string) e.Keys[0];
+            if (q == null) return;
+            if (e?.Keys == null || e.Keys.Count == 0) return;
+
+            var coupon = e.Keys[0] as string;
+            if (string.IsNullOrWhiteSpace(coupon)) return;
+
             q.RemoveCoupon(coupon);
             UpdatePromotion();
             LoadQualification();
@@ -62,8 +71,11 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
         {
             var displayData = new List<FriendlyBvinDisplay>();
 
-            foreach (var coupon in TypedQualification.CurrentCoupons())
+            var coupons = TypedQualification?.CurrentCoupons() ?? new List<string>();
+            foreach (var coupon in coupons)
             {
+                if (string.IsNullOrWhiteSpace(coupon)) continue;
+
                 var item = new FriendlyBvinDisplay
                 {
                     bvin = coupon,
@@ -71,6 +83,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
                 };
                 displayData.Add(item);
             }
+
             gvOrderCoupons.DataSource = displayData;
             gvOrderCoupons.DataBind();
         }
@@ -82,8 +95,10 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 
         protected void btnDeleteOrderCoupon_OnPreRender(object sender, EventArgs e)
         {
-            var link = (LinkButton) sender;
-            link.Text = Localization.GetString("Delete");
+            if (sender is LinkButton link)
+            {
+                link.Text = Localization.GetString("Delete");
+            }
         }
     }
 }

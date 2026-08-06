@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -165,8 +165,10 @@ namespace Hotcakes.Commerce.Orders
         //Orders and Items
         public SystemOperationResult OrdersUpdateItemQuantity(long itemId, int quantity, Order o)
         {
-            var result = new SystemOperationResult();
-            result.Success = true;
+            var result = new SystemOperationResult
+            {
+                Success = true
+            };
 
             var item = o.Items.SingleOrDefault(y => y.Id == itemId);
             if (item == null)
@@ -184,7 +186,9 @@ namespace Hotcakes.Commerce.Orders
 
             if (quantity == 0)
             {
+                // remove and return success/failure
                 result.Success = o.Items.Remove(item);
+                return result;
             }
 
             item.Quantity = quantity;
@@ -196,60 +200,91 @@ namespace Hotcakes.Commerce.Orders
         {
             var shippingProviders = ShippingMethods.FindAll(order.StoreId);
             shippingProviders = shippingProviders.OrderBy(s => s.SortOrder).ToList();
-            var subtotal = false;
+
+            // Build lookup of rates by ShippingMethodId to avoid repeated enumeration and allocations
+            var ratesByMethod = new Dictionary<string, List<ShippingRateDisplay>>(StringComparer.OrdinalIgnoreCase);
+            foreach (ShippingRateDisplay r in ratesSort)
+            {
+                var key = r?.ShippingMethodId ?? string.Empty;
+                if (!ratesByMethod.TryGetValue(key, out var list))
+                {
+                    list = new List<ShippingRateDisplay>();
+                    ratesByMethod[key] = list;
+                }
+                list.Add(r);
+            }
+
+            var toRemove = new List<ShippingRateDisplay>();
+            var subtotalFlagByMethod = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
 
             foreach (var method in shippingProviders)
             {
-                var filteredrates = ratesSort.ToList().Where(r => r.ShippingMethodId == method.Bvin).ToList();
+                var methodKey = method.Bvin ?? string.Empty;
+                var filteredRates = ratesByMethod.TryGetValue(methodKey, out var list) ? list : null;
+                if (filteredRates == null || filteredRates.Count == 0) continue;
 
-                foreach (var rate in filteredrates)
+                // preserve a subtotal flag per method (original logic used a single flag that carried across methods)
+                var subtotal = subtotalFlagByMethod.ContainsKey(methodKey) && subtotalFlagByMethod[methodKey];
+
+                foreach (var rate in filteredRates)
                 {
-                    if (rate != null)
+                    if (rate == null) continue;
+
+                    switch (method.VisibilityMode)
                     {
-                        if (method.VisibilityMode == ShippingVisibilityMode.Always)
-                        {
+                        case ShippingVisibilityMode.Always:
                             subtotal = true;
-                        }
-                        else if (method.VisibilityMode == ShippingVisibilityMode.Never)
-                        {
-                            ratesSort.Remove(rate);
-                        }
-                        else if (method.VisibilityMode == ShippingVisibilityMode.NoRates)
-                        {
+                            break;
+
+                        case ShippingVisibilityMode.Never:
+                            toRemove.Add(rate);
+                            break;
+
+                        case ShippingVisibilityMode.NoRates:
                             if (subtotal)
                             {
-                                ratesSort.Remove(rate);
+                                toRemove.Add(rate);
                             }
                             else
                             {
                                 subtotal = true;
                             }
-                        }
-                        else if (method.VisibilityMode == ShippingVisibilityMode.SubtotalAmount)
-                        {
-                            if (method.VisibilityAmount.HasValue &&
-                                order.TotalOrderAfterDiscounts > method.VisibilityAmount.Value)
+                            break;
+
+                        case ShippingVisibilityMode.SubtotalAmount:
+                         	if (method.VisibilityAmount.HasValue && order.TotalOrderAfterDiscounts > method.VisibilityAmount.Value)
                             {
                                 subtotal = true;
                             }
                             else
                             {
-                                ratesSort.Remove(rate);
+                                toRemove.Add(rate);
                             }
-                        }
-                        else if (method.VisibilityMode == ShippingVisibilityMode.TotalWeight)
-                        {
+                            break;
+
+                        case ShippingVisibilityMode.TotalWeight:
                             if (method.VisibilityAmount.HasValue && order.TotalWeight > method.VisibilityAmount.Value)
                             {
                                 subtotal = true;
                             }
                             else
                             {
-                                ratesSort.Remove(rate);
+                                toRemove.Add(rate);
                             }
-                        }
+                            break;
+
+                        default:
+                            break;
                     }
                 }
+
+                subtotalFlagByMethod[methodKey] = subtotal;
+            }
+
+            // Remove collected rates
+            foreach (var r in toRemove.Distinct())
+            {
+                ratesSort.Remove(r);
             }
         }
 
@@ -492,7 +527,6 @@ namespace Hotcakes.Commerce.Orders
             var o = Orders.FindForCurrentStore(orderBvin);
             if (o == null) return true;
 
-
             var currentProvider = TaxProviders.CurrentTaxProvider(app.CurrentStore);
             if (currentProvider != null)
             {
@@ -659,7 +693,7 @@ namespace Hotcakes.Commerce.Orders
         private bool CheckItemExistInOrder(Order order, LineItem listItem)
         {
             var productInCartList = order.Items.Where(i => i.ProductId == listItem.ProductId).ToList();
-            if (productInCartList == null || !productInCartList.Any())
+            if (!productInCartList.Any())
             {
                 return false;
             }
@@ -669,22 +703,20 @@ namespace Hotcakes.Commerce.Orders
             var isGiftCard = listItem.IsGiftCard;
             var isUserSuppliedPrice = listItem.IsUserSuppliedPrice;
 
-            // Cache string comparisons for gift cards
-            string giftCardEmailLower = null;
-            string giftCardNameLower = null;
-            string giftCardMessageLower = null;
+            string giftCardEmail = null;
+            string giftCardName = null;
+            string giftCardMessage = null;
 
             if (isGiftCard)
             {
-                giftCardEmailLower = listItem.CustomPropGiftCardEmail?.Trim().ToLower();
-                giftCardNameLower = listItem.CustomPropGiftCardName?.Trim().ToLower();
-                giftCardMessageLower = listItem.CustomPropGiftCardMessage?.Trim().ToLower();
+                giftCardEmail = listItem.CustomPropGiftCardEmail?.Trim();
+                giftCardName = listItem.CustomPropGiftCardName?.Trim();
+                giftCardMessage = listItem.CustomPropGiftCardMessage?.Trim();
             }
 
             foreach (var productInCart in productInCartList)
             {
-                var areEqual = itemSelectionData.Equals(productInCart.SelectionData);
-                if (!areEqual)
+                if (!itemSelectionData.Equals(productInCart.SelectionData))
                 {
                     continue;
                 }
@@ -692,9 +724,9 @@ namespace Hotcakes.Commerce.Orders
                 if (isGiftCard)
                 {
                     if (productInCart.BasePricePerItem == listItem.BasePricePerItem
-                        && string.Equals(productInCart.CustomPropGiftCardEmail?.Trim(), giftCardEmailLower, StringComparison.OrdinalIgnoreCase)
-                        && string.Equals(productInCart.CustomPropGiftCardName?.Trim(), giftCardNameLower, StringComparison.OrdinalIgnoreCase)
-                        && string.Equals(productInCart.CustomPropGiftCardMessage?.Trim(), giftCardMessageLower, StringComparison.OrdinalIgnoreCase))
+                        && string.Equals(productInCart.CustomPropGiftCardEmail?.Trim(), giftCardEmail, StringComparison.OrdinalIgnoreCase)
+                        && string.Equals(productInCart.CustomPropGiftCardName?.Trim(), giftCardName, StringComparison.OrdinalIgnoreCase)
+                        && string.Equals(productInCart.CustomPropGiftCardMessage?.Trim(), giftCardMessage, StringComparison.OrdinalIgnoreCase))
                     {
                         productInCart.Quantity += listItem.Quantity;
                         return true;
@@ -778,9 +810,11 @@ namespace Hotcakes.Commerce.Orders
 
                 foreach (var li in order.Items)
                 {
-                    if (li.ExtraShipCharge > 0 && !li.MarkedForFreeShipping(shippingMethodId) &&
-                        li.ShippingCharge == ShippingChargeType.ChargeShippingAndHandling ||
-                        li.ShippingCharge == ShippingChargeType.ChargeShipping)
+                    // Ensure correct operator precedence and conditions
+                    if (li.ExtraShipCharge > 0
+                        && !li.MarkedForFreeShipping(shippingMethodId)
+                        && (li.ShippingCharge == ShippingChargeType.ChargeShippingAndHandling
+                            || li.ShippingCharge == ShippingChargeType.ChargeShipping))
                     {
                         totalExtraFees += li.ExtraShipCharge * li.Quantity;
                     }
@@ -793,11 +827,12 @@ namespace Hotcakes.Commerce.Orders
             var membershipServices = Factory.CreateService<MembershipServices>();
             CustomerAccount currentUser = null;
 
-            if (order.UserID != string.Empty) currentUser = membershipServices.Customers.Find(order.UserID);
+            if (!string.IsNullOrEmpty(order.UserID)) currentUser = membershipServices.Customers.Find(order.UserID);
 
             var marketingServices = Factory.CreateService<MarketingService>();
             var offers = marketingServices.Promotions.FindAllPotentiallyActive(DateTime.UtcNow,
                 PromotionType.OfferForShipping);
+
 
             // Apply shipping offers
             foreach (ShippingRateDisplay displayRate in result)
@@ -837,7 +872,7 @@ namespace Hotcakes.Commerce.Orders
 
             foreach (ShippingRateDisplay displayRate in result)
             {
-                var shippingMethodIdUpper = displayRate.ShippingMethodId.ToUpperInvariant();
+                var shippingMethodIdUpper = displayRate.ShippingMethodId?.ToUpperInvariant() ?? string.Empty;
 
                 foreach (var offer in offersForLineItems)
                 {

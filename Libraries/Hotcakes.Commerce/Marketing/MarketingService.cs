@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -172,8 +172,10 @@ namespace Hotcakes.Commerce.Marketing
         {
             var result = new List<Promotion>();
 
-            // Convert code to upper case once for comparison
-            var codeUpper = code.ToUpperInvariant();
+            if (string.IsNullOrWhiteSpace(code))
+            {
+                return result;
+            }
 
             var promos = Promotions.FindAll();
             foreach (var p in promos)
@@ -181,21 +183,12 @@ namespace Hotcakes.Commerce.Marketing
                 // Filter coupon qualifications once per promotion
                 var couponQualifications = p.Qualifications
                     .Where(y => y.CleanTypeId == PromotionQualificationBase.TypeIdOrderHasCoupon)
-                    .Cast<OrderHasCoupon>()
-                    .ToList();
+                    .OfType<OrderHasCoupon>();
 
-                // Check if any coupon qualification matches the code
-                if (couponQualifications.Count > 0)
+                // Check if any coupon qualification matches the code (case-insensitive)
+                if (couponQualifications.Any(q => q.CurrentCoupons()?.Any(c => string.Equals(c, code, StringComparison.OrdinalIgnoreCase)) == true))
                 {
-                    foreach (var q in couponQualifications)
-                    {
-                        // Use Any() instead of Count() for early termination
-                        if (q.CurrentCoupons().Any(y => y.ToUpperInvariant() == codeUpper))
-                        {
-                            result.Add(p);
-                            break;
-                        }
-                    }
+                    result.Add(p);
                 }
             }
 
@@ -213,23 +206,24 @@ namespace Hotcakes.Commerce.Marketing
             {
                 var couponQualifications = p.Qualifications
                     .Where(y => y.CleanTypeId == PromotionQualificationBase.TypeIdOrderHasCoupon)
-                    .Cast<OrderHasCoupon>()
-                    .ToList();
+                    .OfType<OrderHasCoupon>();
 
-                if (couponQualifications.Count > 0)
+                foreach (var q in couponQualifications)
                 {
-                    foreach (var q in couponQualifications)
+                    var current = q.CurrentCoupons();
+                    if (current == null) continue;
+                    foreach (var code in current)
                     {
-                        foreach (var code in q.CurrentCoupons())
+                        // HashSet automatically handles duplicates
+                        if (!string.IsNullOrWhiteSpace(code))
                         {
-                            // HashSet automatically handles duplicates
                             codesSet.Add(code);
                         }
                     }
                 }
             }
 
-            // Return as list, maintaining uppercase normalization for backwards compatibility
+            // Return as list, normalized to uppercase for backwards compatibility
             return codesSet.Select(c => c.ToUpperInvariant()).ToList();
         }
 
@@ -240,6 +234,11 @@ namespace Hotcakes.Commerce.Marketing
         public PromotionRangeResult FindDateRangeForCouponCode(string code)
         {
             var result = new PromotionRangeResult();
+
+            if (string.IsNullOrWhiteSpace(code))
+            {
+                return result;
+            }
 
             var matchingPromos = FindPromotionsWithCouponCode(code);
             if (matchingPromos == null || matchingPromos.Count < 1)
@@ -273,6 +272,8 @@ namespace Hotcakes.Commerce.Marketing
 
         public void ApplyAffiliatePromotions(CustomerAccount acc)
         {
+            if (acc == null) return;
+
             var now = DateTime.UtcNow;
             var promotions = Promotions.FindAllAffiliatePromotions(now);
 
@@ -284,16 +285,16 @@ namespace Hotcakes.Commerce.Marketing
 
         public void ApplyOffers(Order order, PromotionType mode)
         {
-            var offers = Promotions.FindAllPotentiallyActive(DateTime.UtcNow, mode);
+            if (order == null) return;
 
-            // Cache the property check to avoid repeated lookups during iteration
-            var hasNonSaleDiscounts = order.HasAnyNonSaleDiscounts;
+            var offers = Promotions.FindAllPotentiallyActive(DateTime.UtcNow, mode);
 
             foreach (var offer in offers)
             {
                 // do not apply the offer if the current offer is marked as Do Not Combine, 
-                // and other offers appear to be applied already
-                if (offer.DoNotCombine && hasNonSaleDiscounts) continue;
+                // and other offers appear to be applied already. Evaluate HasAnyNonSaleDiscounts
+                // per-iteration because applying offers may change the order state.
+                if (offer.DoNotCombine && order.HasAnyNonSaleDiscounts) continue;
 
                 offer.ApplyToOrder(Context, order);
             }
