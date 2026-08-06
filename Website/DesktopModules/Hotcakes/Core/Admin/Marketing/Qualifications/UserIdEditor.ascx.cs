@@ -1,9 +1,9 @@
-﻿#region License
+﻿    #region License
 
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -43,7 +43,15 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
         protected void gvUserIs_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             var q = TypedQualification;
-            var bvin = (string) e.Keys[0];
+            if (q == null) return;
+            if (e?.Keys == null || e.Keys.Count == 0) return;
+
+            var keyObj = e.Keys[0];
+            if (keyObj == null) return;
+
+            var bvin = keyObj as string ?? keyObj.ToString();
+            if (string.IsNullOrWhiteSpace(bvin)) return;
+
             q.RemoveUserId(bvin);
             UpdatePromotion();
             LoadQualification();
@@ -51,8 +59,11 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 
         private void UserPicker1_UserSelected(object sender, UserSelectedEventArgs e)
         {
-            var q = TypedQualification;
-            q.AddUserId(e.UserAccount.Bvin);
+            if (TypedQualification == null) return;
+            if (e == null || e.UserAccount == null) return;
+            if (string.IsNullOrWhiteSpace(e.UserAccount.Bvin)) return;
+
+            TypedQualification.AddUserId(e.UserAccount.Bvin.Trim());
             UpdatePromotion();
             LoadQualification();
         }
@@ -60,30 +71,49 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
-            UserPicker1.UserSelected += UserPicker1_UserSelected;
-            UserPicker1.MessageBox = ucMessageBox;
+
+            if (UserPicker1 != null)
+            {
+                UserPicker1.UserSelected += UserPicker1_UserSelected;
+                UserPicker1.MessageBox = ucMessageBox;
+            }
         }
 
         public override void LoadQualification()
         {
+            var q = TypedQualification;
+            if (q == null)
+            {
+                if (gvUserIs != null) gvUserIs.DataSource = new List<FriendlyBvinDisplay>();
+                if (gvUserIs != null) gvUserIs.DataBind();
+                return;
+            }
+
             var displayData = new List<FriendlyBvinDisplay>();
 
-            foreach (var bvin in TypedQualification.UserIds())
+            foreach (var bvin in q.UserIds())
             {
-                var item = new FriendlyBvinDisplay();
-                item.bvin = bvin;
-                item.DisplayName = bvin;
+                if (string.IsNullOrWhiteSpace(bvin)) continue;
 
-                var c = HccApp.MembershipServices.Customers.Find(item.bvin);
+                var item = new FriendlyBvinDisplay
+                {
+                    bvin = bvin,
+                    DisplayName = bvin
+                };
+
+                var c = HccApp?.MembershipServices?.Customers?.Find(item.bvin);
                 if (c != null)
                 {
-                    item.DisplayName = c.Email;
+                    item.DisplayName = c.Email ?? item.DisplayName;
                 }
                 displayData.Add(item);
             }
 
-            gvUserIs.DataSource = displayData;
-            gvUserIs.DataBind();
+            if (gvUserIs != null)
+            {
+                gvUserIs.DataSource = displayData;
+                gvUserIs.DataBind();
+            }
         }
 
         public override bool SaveQualification()

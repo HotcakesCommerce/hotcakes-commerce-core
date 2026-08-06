@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Hotcakes.Commerce.Orders;
 
@@ -54,52 +55,57 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         public List<string> CategoryIds()
         {
-            return GetSettingArr("CategoryIds");
+            var arr = GetSettingArr("CategoryIds") ?? new List<string>();
+            return arr;
         }
 
         public void AddCategoryId(string id)
         {
+            if (string.IsNullOrWhiteSpace(id)) return;
+
+            var cleaned = id.Trim();
             var ids = CategoryIds();
 
-            if (!ids.Contains(id))
-            {
-                ids.Add(id);
-                SaveCategoryIds(ids);
-            }
+            if (ids.Contains(cleaned, StringComparer.OrdinalIgnoreCase)) return;
+
+            ids.Add(cleaned);
+            SaveCategoryIds(ids);
         }
 
         public void RemoveCategoryId(string id)
         {
+            if (string.IsNullOrWhiteSpace(id)) return;
+
+            var cleaned = id.Trim();
             var ids = CategoryIds();
 
-            if (ids.Contains(id))
+            var removed = ids.RemoveAll(x => string.Equals(x, cleaned, StringComparison.OrdinalIgnoreCase));
+            if (removed > 0)
             {
-                ids.Remove(id);
                 SaveCategoryIds(ids);
             }
         }
 
         public override string FriendlyDescription(HotcakesApplication app)
         {
-            var result = "When " + (CalculationMode == SumOrCountMode.CountMode ? "Total Quantity " : "Total Price ");
-            result += "of Products within Specified Categories >= ";
-            result += SumAmount.ToString();
-            return result;
+            var modeText = CalculationMode == SumOrCountMode.CountMode ? "Total Quantity " : "Total Price ";
+            return $"When {modeText}of Products within Specified Categories >= {SumAmount.ToString(CultureInfo.InvariantCulture)}";
         }
 
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
-            if (mode == PromotionQualificationMode.Orders)
+            if (context?.Order?.Items == null) return false;
+            if (mode != PromotionQualificationMode.Orders) return false;
+
+            var filtered = GetFilteredItems(context);
+
+            if (CalculationMode == SumOrCountMode.SumMode)
             {
-                var resItems = GetFilteredItems(context);
-                if (CalculationMode == SumOrCountMode.SumMode)
-                {
-                    return resItems.Sum(i => i.LineTotal) >= SumAmount;
-                }
-                return resItems.Sum(i => i.Quantity) >= SumAmount;
+                return filtered.Sum(i => i.LineTotal) >= SumAmount;
             }
 
-            return false;
+            // CountMode: compare total quantity against SumAmount (SumAmount stored as decimal)
+            return filtered.Sum(i => (decimal)i.Quantity) >= SumAmount;
         }
 
         #region Implementation
@@ -107,12 +113,21 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
         private List<LineItem> GetFilteredItems(PromotionContext context)
         {
             var resItems = new List<LineItem>();
+            if (context == null || context.Order == null || context.Order.Items == null) return resItems;
+
             var specCats = CategoryIds();
+            if (specCats == null || specCats.Count == 0) return resItems;
+
+            var specSet = new HashSet<string>(specCats, StringComparer.OrdinalIgnoreCase);
 
             foreach (var item in context.Order.Items)
             {
-                var cats = context.HccApp.CatalogServices.CategoriesXProducts.FindForProduct(item.ProductId, 1, 100);
-                if (cats.Any(c => specCats.Contains(c.CategoryId)))
+                if (item == null) continue;
+
+                var cats = context.HccApp?.CatalogServices?.CategoriesXProducts?.FindForProduct(item.ProductId, 1, 100);
+                if (cats == null) continue;
+
+                if (cats.Any(c => specSet.Contains(c.CategoryId)))
                 {
                     resItems.Add(item);
                 }

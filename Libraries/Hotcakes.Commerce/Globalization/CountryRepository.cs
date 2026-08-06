@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -36,23 +36,18 @@ namespace Hotcakes.Commerce.Globalization
 {
     public class CountryRepository : HccLocalizationRepoBase<hcc_Country, hcc_CountryTranslation, Country, Guid>
     {
-        public RegionRepository regionRepository;
+        public readonly RegionRepository regionRepository;
 
         public CountryRepository(HccRequestContext context)
             : base(context)
         {
+            if (context == null) throw new ArgumentNullException(nameof(context));
             regionRepository = new RegionRepository(context);
         }
 
-        protected override Expression<Func<hcc_Country, Guid>> ItemKeyExp
-        {
-            get { return c => c.CountryId; }
-        }
+        protected override Expression<Func<hcc_Country, Guid>> ItemKeyExp => c => c.CountryId;
 
-        protected override Expression<Func<hcc_CountryTranslation, Guid>> ItemTranslationKeyExp
-        {
-            get { return ct => ct.CountryId; }
-        }
+        protected override Expression<Func<hcc_CountryTranslation, Guid>> ItemTranslationKeyExp => ct => ct.CountryId;
 
         protected override void CopyItemToModel(hcc_Country data, Country model)
         {
@@ -84,20 +79,25 @@ namespace Hotcakes.Commerce.Globalization
         protected override void CopyModelToTrans(JoinedItem<hcc_Country, hcc_CountryTranslation> data, Country model)
         {
             data.ItemTranslation.CountryId = DataTypeHelper.BvinToGuid(model.Bvin);
-
             data.ItemTranslation.DisplayName = model.DisplayName;
         }
 
         protected override void GetSubItems(List<Country> models)
         {
+            if (models == null || models.Count == 0) return;
+
             var countryIds = models.Select(s => DataTypeHelper.BvinToGuid(s.Bvin)).ToList();
             var allRegions = regionRepository.FindAll(countryIds);
+
+            var regionsByCountry = allRegions.ToLookup(r => r.CountryId);
 
             foreach (var model in models)
             {
                 var countryGuid = DataTypeHelper.BvinToGuid(model.Bvin);
-                var region = allRegions.Where(r => r.CountryId == countryGuid).OrderBy(r => r.DisplayName).ToList();
-                model.Regions = region;
+                var regionList = regionsByCountry[countryGuid]
+                    .OrderBy(r => r.DisplayName)
+                    .ToList();
+                model.Regions = regionList;
             }
         }
 
@@ -106,9 +106,9 @@ namespace Hotcakes.Commerce.Globalization
             var result = CacheManager.GetCountries(Context.MainContentCulture);
             if (result == null)
             {
-                result = FindListPoco(q => q);
-
-                result = result.OrderBy(c => c.DisplayName).ToList();
+                result = FindListPoco(q => q)
+                    .OrderBy(c => c.DisplayName)
+                    .ToList();
 
                 CacheManager.AddCountries(Context.MainContentCulture, result);
             }
@@ -129,7 +129,6 @@ namespace Hotcakes.Commerce.Globalization
         {
             return FindAll().FirstOrDefault(c => c.DisplayName == displayName);
         }
-
 
         public Country FindByISOCode(string isoCode)
         {

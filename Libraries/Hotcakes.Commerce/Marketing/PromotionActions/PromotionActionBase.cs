@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -36,7 +36,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         private const string ZERO = "0";
         private const string ONE = "1";
-
+            
         public PromotionActionBase()
         {
             Id = 0;
@@ -65,57 +65,54 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         protected string GetSetting(string key)
         {
-            if (Settings == null) return string.Empty;
-            if (!Settings.ContainsKey(key)) return string.Empty;
-            var result = Settings[key];
-            return result;
+            var s = Settings;
+            if (s == null) return string.Empty;
+            return s.TryGetValue(key, out var result) ? (result ?? string.Empty) : string.Empty;
         }
 
         protected int GetSettingAsInt(string key)
         {
-            if (Settings == null) return -1;
-            var result = GetSetting(key);
-            if (result == null) return -1;
-            var temp = -1;
-            int.TryParse(result, NumberStyles.Any, CultureInfo.InvariantCulture, out temp);
-            return temp;
+            var s = Settings;
+            if (s == null) return -1;
+            if (!s.TryGetValue(key, out var result) || string.IsNullOrEmpty(result)) return -1;
+            return int.TryParse(result, NumberStyles.Any, CultureInfo.InvariantCulture, out var temp) ? temp : -1;
         }
 
         protected decimal GetSettingAsDecimal(string key)
         {
-            if (Settings == null) return -1;
-            var result = GetSetting(key);
-            if (result == null) return -1;
-            decimal temp = -1;
-            decimal.TryParse(result, NumberStyles.Any, CultureInfo.InvariantCulture, out temp);
-            return temp;
+            var s = Settings;
+            if (s == null) return -1;
+            if (!s.TryGetValue(key, out var result) || string.IsNullOrEmpty(result)) return -1;
+            return decimal.TryParse(result, NumberStyles.Any, CultureInfo.InvariantCulture, out var temp) ? temp : -1;
         }
 
         protected bool GetSettingAsBool(string key)
         {
-            if (Settings == null) return false;
-            var result = GetSetting(key);
-            if (result == null) return false;
-            if (result == ONE) return true;
-            return false;
+            var s = Settings;
+            if (s == null) return false;
+            if (!s.TryGetValue(key, out var result)) return false;
+            return string.Equals(result, ONE, StringComparison.Ordinal);
         }
 
         protected void SetSetting(string key, string value)
         {
-            if (Settings == null) return;
-            Settings[key] = value;
+            var s = Settings;
+            if (s == null) return;
+            s[key] = value;
         }
 
         protected void SetSetting(string key, int value)
         {
-            if (Settings == null) return;
-            Settings[key] = value.ToString(CultureInfo.InvariantCulture);
+            var s = Settings;
+            if (s == null) return;
+            s[key] = value.ToString(CultureInfo.InvariantCulture);
         }
 
         protected void SetSetting(string key, decimal value)
         {
-            if (Settings == null) return;
-            Settings[key] = value.ToString(CultureInfo.InvariantCulture);
+            var s = Settings;
+            if (s == null) return;
+            s[key] = value.ToString(CultureInfo.InvariantCulture);
         }
 
         protected void SetSetting(string key, bool value)

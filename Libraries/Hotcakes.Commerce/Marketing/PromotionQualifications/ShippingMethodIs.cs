@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
@@ -44,74 +45,87 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         public List<string> ItemIds()
         {
-            var result = new List<string>();
-            var all = GetSetting("itemids");
-            var parts = all.Split(',');
-            foreach (var s in parts)
-            {
-                if (s != string.Empty)
-                {
-                    result.Add(s.Trim().ToUpperInvariant());
-                }
-            }
-            return result;
+            var all = GetSetting("itemids") ?? string.Empty;
+
+            var parts = all
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => s.Trim())
+                .Where(s => s.Length > 0)
+                .Select(s => s.ToUpperInvariant())
+                .ToList();
+
+            return parts;
         }
 
-        private void SaveItemIdsToSettings(List<string> coupons)
+        private void SaveItemIdsToSettings(IEnumerable<string> itemIds)
         {
-            var all = string.Empty;
-            foreach (var s in coupons)
+            if (itemIds == null)
             {
-                if (s != string.Empty)
-                {
-                    all += s.Trim().ToUpperInvariant() + ",";
-                }
+                SetSetting("itemids", string.Empty);
+                return;
             }
-            all = all.TrimEnd(',');
-            SetSetting("itemids", all);
+
+            var cleaned = itemIds
+                .Where(s => !string.IsNullOrWhiteSpace(s))
+                .Select(s => s.Trim().ToUpperInvariant())
+                .Distinct(StringComparer.OrdinalIgnoreCase);
+
+            SetSetting("itemids", string.Join(",", cleaned));
         }
 
         public override string FriendlyDescription(HotcakesApplication app)
         {
-            var methods = app.OrderServices.ShippingMethods.FindAll(app.CurrentStore.Id);
+            var sb = new StringBuilder();
+            sb.Append("When Order Has Shipping Method Of:<ul>");
 
-            var result = "When Order Has Shipping Method Of:<ul>";
+            var methods = app?.OrderServices?.ShippingMethods?.FindAll(app.CurrentStore.Id);
+
             foreach (var itemid in ItemIds())
             {
                 var displayName = itemid;
 
                 if (methods != null)
                 {
-                    var m = methods.SingleOrDefault(y => y.Bvin.ToUpperInvariant() == itemid.ToUpperInvariant());
+                    var m = methods.SingleOrDefault(y => string.Equals(y.Bvin, itemid, StringComparison.OrdinalIgnoreCase));
                     if (m != null)
                     {
                         displayName = m.Name;
                     }
                 }
-                result += "<li>" + displayName + "</li>";
+
+                sb.Append("<li>");
+                sb.Append(displayName);
+                sb.Append("</li>");
             }
-            result += "</ul>";
-            return result;
+
+            sb.Append("</ul>");
+            return sb.ToString();
         }
 
         public void AddItemId(string itemid)
         {
-            var _ItemIds = ItemIds();
+            if (string.IsNullOrWhiteSpace(itemid)) return;
 
             var possible = itemid.Trim().ToUpperInvariant();
-            if (possible == string.Empty) return;
-            if (_ItemIds.Contains(possible)) return;
-            _ItemIds.Add(possible);
-            SaveItemIdsToSettings(_ItemIds);
+            var ids = ItemIds();
+
+            if (ids.Contains(possible)) return;
+
+            ids.Add(possible);
+            SaveItemIdsToSettings(ids);
         }
 
         public void RemoveItemId(string itemid)
         {
-            var _ItemIds = ItemIds();
-            if (_ItemIds.Contains(itemid.Trim().ToUpperInvariant()))
+            if (string.IsNullOrWhiteSpace(itemid)) return;
+
+            var cleaned = itemid.Trim().ToUpperInvariant();
+            var ids = ItemIds();
+
+            var removed = ids.RemoveAll(x => string.Equals(x, cleaned, StringComparison.OrdinalIgnoreCase));
+            if (removed > 0)
             {
-                _ItemIds.Remove(itemid.Trim().ToUpperInvariant());
-                SaveItemIdsToSettings(_ItemIds);
+                SaveItemIdsToSettings(ids);
             }
         }
 
@@ -119,20 +133,17 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
         {
             if (context == null) return false;
 
-            var idToTest = context.CurrentShippingMethodId.Trim();
-            if (idToTest.Length < 1)
+            var idToTest = context.CurrentShippingMethodId?.Trim();
+            if (string.IsNullOrEmpty(idToTest))
             {
-                if (context.Order == null) return false;
-                idToTest = context.Order.ShippingMethodId.Trim();
+                idToTest = context.Order?.ShippingMethodId?.Trim();
             }
-            if (idToTest.Length < 1) return false;
+            if (string.IsNullOrWhiteSpace(idToTest)) return false;
 
-            foreach (var itemid in ItemIds())
-            {
-                if (idToTest.ToUpperInvariant() == itemid.ToUpperInvariant()) return true;
-            }
+            var idNormalized = idToTest.ToUpperInvariant();
+            var idSet = new HashSet<string>(ItemIds(), StringComparer.OrdinalIgnoreCase);
 
-            return false;
+            return idSet.Contains(idNormalized);
         }
     }
 }

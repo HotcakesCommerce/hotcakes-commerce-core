@@ -1,9 +1,9 @@
-﻿#region License
+﻿    #region License
 
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -29,6 +29,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Hotcakes.Commerce.Marketing.PromotionQualifications;
+using Hotcakes.Commerce.Shipping;
 using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
@@ -44,7 +45,12 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
         protected void btnAddShippingMethodIs_Click(object sender, EventArgs e)
         {
             var q = TypedQualification;
-            q.AddItemId(lstShippingMethodIs.SelectedValue.ToUpperInvariant());
+            if (q == null || lstShippingMethodIs == null) return;
+
+            var selected = lstShippingMethodIs.SelectedValue;
+            if (string.IsNullOrWhiteSpace(selected)) return;
+
+            q.AddItemId(selected.Trim().ToUpperInvariant());
             UpdatePromotion();
             LoadQualification();
         }
@@ -53,47 +59,73 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
         {
             var q = TypedQualification;
             if (q == null) return;
-            var bvin = (string) e.Keys[0];
-            q.RemoveItemId(bvin.ToUpperInvariant());
+            if (e?.Keys == null || e.Keys.Count == 0) return;
+
+            var keyObj = e.Keys[0];
+            if (keyObj == null) return;
+
+            var bvin = keyObj as string ?? keyObj.ToString();
+            if (string.IsNullOrWhiteSpace(bvin)) return;
+
+            q.RemoveItemId(bvin.Trim().ToUpperInvariant());
             UpdatePromotion();
             LoadQualification();
         }
 
         public override void LoadQualification()
         {
-            var available = HccApp.OrderServices.ShippingMethods.FindAll(HccApp.CurrentStore.Id);
+            var q = TypedQualification;
+            if (q == null) return;
+
+            var available = HccApp.OrderServices.ShippingMethods.FindAll(HccApp.CurrentStore.Id) ??
+                            new List<ShippingMethod>();
 
             var displayData = new List<FriendlyBvinDisplay>();
 
-            foreach (var itemid in TypedQualification.ItemIds())
+            foreach (var itemid in q.ItemIds() ?? Enumerable.Empty<string>())
             {
+                if (string.IsNullOrWhiteSpace(itemid)) continue;
+
+                var trimmedId = itemid.Trim();
                 var item = new FriendlyBvinDisplay
                 {
                     bvin = itemid,
                     DisplayName = itemid
                 };
 
-                var t = available.FirstOrDefault(y => y.Bvin.ToUpperInvariant() == itemid.ToUpperInvariant());
-                if (t != null)
+                var match = available.FirstOrDefault(y =>
+                    string.Equals((y.Bvin ?? string.Empty).Trim(), trimmedId, StringComparison.OrdinalIgnoreCase));
+
+                if (match != null)
                 {
-                    item.DisplayName = t.Name;
-                    available.Remove(t);
+                    item.DisplayName = match.Name ?? trimmedId;
+                    available.Remove(match);
                 }
+
                 displayData.Add(item);
             }
 
-            lstShippingMethodIs.Items.Clear();
-            lstShippingMethodIs.DataSource = available;
-            lstShippingMethodIs.DataTextField = "Name";
-            lstShippingMethodIs.DataValueField = "Bvin";
-            lstShippingMethodIs.DataBind();
+            if (lstShippingMethodIs != null)
+            {
+                lstShippingMethodIs.Items.Clear();
+                lstShippingMethodIs.DataSource = available;
+                lstShippingMethodIs.DataTextField = "Name";
+                lstShippingMethodIs.DataValueField = "Bvin";
+                lstShippingMethodIs.DataBind();
+            }
 
-            gvShippingMethodIs.DataSource = displayData;
-            gvShippingMethodIs.DataBind();
+            if (gvShippingMethodIs != null)
+            {
+                gvShippingMethodIs.DataSource = displayData;
+                gvShippingMethodIs.DataBind();
+            }
         }
 
         public override bool SaveQualification()
         {
+            var q = TypedQualification;
+            if (q == null) return false;
+
             return UpdatePromotion();
         }
 

@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -39,15 +39,7 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper _globalLocalization;
 
-        private static ILocalizationHelper GlobalLocalization
-        {
-            get
-            {
-                if (_globalLocalization == null)
-                    _globalLocalization = Factory.Instance.CreateLocalizationHelper(GlobalResourceFile);
-                return _globalLocalization;
-            }
-        }
+        private static ILocalizationHelper GlobalLocalization => _globalLocalization ??= Factory.Instance.CreateLocalizationHelper(GlobalResourceFile);
 
         public static string GetGlobalResource(string key)
         {
@@ -63,16 +55,7 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper _orderShippingStatusesLocalization;
 
-        private static ILocalizationHelper OrderShippingStatusesLocalization
-        {
-            get
-            {
-                if (_orderShippingStatusesLocalization == null)
-                    _orderShippingStatusesLocalization =
-                        Factory.Instance.CreateLocalizationHelper(OrderShippingStatusesResourceFile);
-                return _orderShippingStatusesLocalization;
-            }
-        }
+        private static ILocalizationHelper OrderShippingStatusesLocalization => _orderShippingStatusesLocalization ??= Factory.Instance.CreateLocalizationHelper(OrderShippingStatusesResourceFile);
 
         public static string GetOrderShippingStatus(OrderShippingStatus shippingStatus, string culture = null)
         {
@@ -91,16 +74,7 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper _orderPaymentStatusesLocalization;
 
-        private static ILocalizationHelper OrderPaymentStatusesLocalization
-        {
-            get
-            {
-                if (_orderPaymentStatusesLocalization == null)
-                    _orderPaymentStatusesLocalization =
-                        Factory.Instance.CreateLocalizationHelper(OrderPaymentStatusesResourceFile);
-                return _orderPaymentStatusesLocalization;
-            }
-        }
+        private static ILocalizationHelper OrderPaymentStatusesLocalization => _orderPaymentStatusesLocalization ??= Factory.Instance.CreateLocalizationHelper(OrderPaymentStatusesResourceFile);
 
         public static string GetOrderPaymentStatus(OrderPaymentStatus paymentStatus, string culture = null)
         {
@@ -119,15 +93,7 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper _orderStatusesLocalization;
 
-        private static ILocalizationHelper OrderStatusesLocalization
-        {
-            get
-            {
-                if (_orderStatusesLocalization == null)
-                    _orderStatusesLocalization = Factory.Instance.CreateLocalizationHelper(OrderStatusesResourceFile);
-                return _orderStatusesLocalization;
-            }
-        }
+        private static ILocalizationHelper OrderStatusesLocalization => _orderStatusesLocalization ??= Factory.Instance.CreateLocalizationHelper(OrderStatusesResourceFile);
 
         public static string GetOrderStatus(string orderStatus, string culture = null)
         {
@@ -143,25 +109,16 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper _recurringIntervalTypesLocalization;
 
-        private static ILocalizationHelper RecurringIntervalTypesLocalization
-        {
-            get
-            {
-                if (_recurringIntervalTypesLocalization == null)
-                    _recurringIntervalTypesLocalization =
-                        Factory.Instance.CreateLocalizationHelper(RecurringIntervalTypesResourceFile);
-                return _recurringIntervalTypesLocalization;
-            }
-        }
+        private static ILocalizationHelper RecurringIntervalTypesLocalization => _recurringIntervalTypesLocalization ??= Factory.Instance.CreateLocalizationHelper(RecurringIntervalTypesResourceFile);
 
         public static string GetRecurringInterval(RecurringIntervalType intervalType)
         {
-            return OrderPaymentStatusesLocalization.GetFormattedString(intervalType.ToString());
+            return RecurringIntervalTypesLocalization.GetFormattedString(intervalType.ToString());
         }
 
         public static string GetRecurringIntervalLower(RecurringIntervalType intervalType)
         {
-            return OrderPaymentStatusesLocalization.GetFormattedString(intervalType.ToString()).ToLower();
+            return RecurringIntervalTypesLocalization.GetFormattedString(intervalType.ToString()).ToLower();
         }
 
         #endregion
@@ -173,15 +130,7 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper _salesPeriodsLocalization;
 
-        private static ILocalizationHelper SalesPeriodsLocalization
-        {
-            get
-            {
-                if (_salesPeriodsLocalization == null)
-                    _salesPeriodsLocalization = Factory.Instance.CreateLocalizationHelper(SalesPeriodsResourceFile);
-                return _salesPeriodsLocalization;
-            }
-        }
+        private static ILocalizationHelper SalesPeriodsLocalization => _salesPeriodsLocalization ??= Factory.Instance.CreateLocalizationHelper(SalesPeriodsResourceFile);
 
         public static string GetSalesPeriod(SalesPeriod period)
         {
@@ -202,15 +151,7 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper _actionTypesLocalization;
 
-        private static ILocalizationHelper ActionTypesLocalization
-        {
-            get
-            {
-                if (_actionTypesLocalization == null)
-                    _actionTypesLocalization = Factory.Instance.CreateLocalizationHelper(ActionTypesResourceFile);
-                return _actionTypesLocalization;
-            }
-        }
+        private static ILocalizationHelper ActionTypesLocalization => _actionTypesLocalization ??= Factory.Instance.CreateLocalizationHelper(ActionTypesResourceFile);
 
         public static string GetActionType(ActionType actionType, string methodName)
         {
@@ -229,15 +170,7 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper _paymentMethodsLocalization;
 
-        private static ILocalizationHelper PaymentMethodsLocalization
-        {
-            get
-            {
-                if (_paymentMethodsLocalization == null)
-                    _paymentMethodsLocalization = Factory.Instance.CreateLocalizationHelper(PaymentMethodsResourceFile);
-                return _paymentMethodsLocalization;
-            }
-        }
+        private static ILocalizationHelper PaymentMethodsLocalization => _paymentMethodsLocalization ??= Factory.Instance.CreateLocalizationHelper(PaymentMethodsResourceFile);
 
         public static string GetPaymentMethodFriendlyName(string methodName)
         {
@@ -253,15 +186,7 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper _taxProvidersLocalization;
 
-        private static ILocalizationHelper TaxProvidersLocalization
-        {
-            get
-            {
-                if (_taxProvidersLocalization == null)
-                    _taxProvidersLocalization = Factory.Instance.CreateLocalizationHelper(TaxProvidersResourceFile);
-                return _taxProvidersLocalization;
-            }
-        }
+        private static ILocalizationHelper TaxProvidersLocalization => _taxProvidersLocalization ??= Factory.Instance.CreateLocalizationHelper(TaxProvidersResourceFile);
 
         public static string GetTaxProviderFriendlyName(string providerName)
         {
@@ -277,16 +202,7 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper _quickbooksExportLocalization;
 
-        private static ILocalizationHelper QuickbooksExportLocalization
-        {
-            get
-            {
-                if (_quickbooksExportLocalization == null)
-                    _quickbooksExportLocalization =
-                        Factory.Instance.CreateLocalizationHelper(QuickbooksExportResourceFile);
-                return _quickbooksExportLocalization;
-            }
-        }
+        private static ILocalizationHelper QuickbooksExportLocalization => _quickbooksExportLocalization ??= Factory.Instance.CreateLocalizationHelper(QuickbooksExportResourceFile);
 
         public static string GetQuickbooksExportString(string key)
         {
@@ -304,6 +220,8 @@ namespace Hotcakes.Commerce.Globalization
 
         public static void LocalizeDataGrid(DataGrid dataGrid, ILocalizationHelper localization)
         {
+            if (dataGrid == null || localization == null) return;
+
             foreach (DataGridColumn column in dataGrid.Columns)
             {
                 var headerText = localization.GetString(column.HeaderText + ".HeaderText");
@@ -317,6 +235,8 @@ namespace Hotcakes.Commerce.Globalization
 
         public static void LocalizeGridView(GridView gridView, ILocalizationHelper localization)
         {
+            if (gridView == null || localization == null) return;
+
             foreach (DataControlField column in gridView.Columns)
             {
                 var headerText = localization.GetString(column.HeaderText + ".HeaderText");

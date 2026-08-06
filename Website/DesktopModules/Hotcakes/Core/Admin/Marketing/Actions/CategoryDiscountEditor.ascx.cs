@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -26,8 +26,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web.UI.WebControls;
+using Hotcakes.Commerce.Catalog;
 using Hotcakes.Commerce.Marketing;
 using Hotcakes.Commerce.Marketing.PromotionActions;
 using Hotcakes.Commerce.Utilities;
@@ -51,18 +53,24 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
 
         private void LoadCategories()
         {
-            var allCats = HccApp.CatalogServices.Categories.FindAll();
-            var available = CategoriesHelper.ListFullTreeWithIndents(allCats, true);
+            var allCats = HccApp?.CatalogServices?.Categories?.FindAll() ?? new List<CategorySnapshot>();
+            var available = CategoriesHelper.ListFullTreeWithIndents(allCats, true) ?? new Collection<ListItem>();
 
             var displayData = new List<FriendlyBvinDisplay>();
 
-            foreach (var bvin in TypedAction.GetCategories())
+            var categories = TypedAction?.GetCategories() ?? new List<string>();
+            foreach (var bvin in categories)
             {
-                var item = new FriendlyBvinDisplay();
-                item.bvin = bvin;
-                item.DisplayName = bvin;
+                if (string.IsNullOrWhiteSpace(bvin)) continue;
 
-                var t = available.FirstOrDefault(y => y.Value.ToLowerInvariant() == bvin.ToLowerInvariant());
+                var normalizedBvin = bvin.Trim();
+                var item = new FriendlyBvinDisplay
+                {
+                    bvin = normalizedBvin,
+                    DisplayName = normalizedBvin
+                };
+
+                var t = available.FirstOrDefault(y => string.Equals(y.Value, normalizedBvin, StringComparison.OrdinalIgnoreCase));
                 if (t != null)
                 {
                     item.DisplayName = t.Text;
@@ -89,26 +97,41 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
         {
             if (lstLineItemAdjustType.Items.Count == 0)
             {
-                lstLineItemAdjustType.Items.Add(new ListItem(Localization.GetString("Amount"), "0"));
-                lstLineItemAdjustType.Items.Add(new ListItem(Localization.GetString("Percent"), "1"));
+                lstLineItemAdjustType.Items.Add(new ListItem(Localization.GetString("Amount"), ((int)AmountTypes.MonetaryAmount).ToString()));
+                lstLineItemAdjustType.Items.Add(new ListItem(Localization.GetString("Percent"), ((int)AmountTypes.Percent).ToString()));
             }
 
-            LineItemAdjustAmountField.Text = TypedAction.Amount.ToString();
-            lstLineItemAdjustType.SelectedValue = TypedAction.AdjustmentType == AmountTypes.Percent ? "1" : "0";
+            var action = TypedAction;
+            if (action == null)
+            {
+                LineItemAdjustAmountField.Text = string.Empty;
+                lstLineItemAdjustType.SelectedIndex = 0;
+                LoadCategories();
+                return;
+            }
+
+            LineItemAdjustAmountField.Text = action.Amount.ToString();
+            lstLineItemAdjustType.SelectedValue = action.AdjustmentType == AmountTypes.Percent
+                ? ((int)AmountTypes.Percent).ToString()
+                : ((int)AmountTypes.MonetaryAmount).ToString();
 
             LoadCategories();
         }
 
         public override bool SaveAction()
         {
-            TypedAction.Amount = LineItemAdjustAmountField.Text.ConvertTo(TypedAction.Amount);
-            TypedAction.AdjustmentType = lstLineItemAdjustType.SelectedValue == "1"
+            var action = TypedAction;
+            if (action == null) return UpdatePromotion();
+
+            action.Amount = LineItemAdjustAmountField.Text.ConvertTo(action.Amount);
+
+            action.AdjustmentType = lstLineItemAdjustType.SelectedValue == ((int)AmountTypes.Percent).ToString()
                 ? AmountTypes.Percent
                 : AmountTypes.MonetaryAmount;
 
-            if (TypedAction.AdjustmentType == AmountTypes.MonetaryAmount)
+            if (action.AdjustmentType == AmountTypes.MonetaryAmount)
             {
-                TypedAction.Amount = Money.RoundCurrency(TypedAction.Amount);
+                action.Amount = Money.RoundCurrency(action.Amount);
             }
 
             return UpdatePromotion();
@@ -120,17 +143,24 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
 
         protected void btnAddProductCategory_Click(object sender, EventArgs e)
         {
-            var q = TypedAction;
-            q.AddCategoryId(lstProductCategories.SelectedValue);
+            var action = TypedAction;
+            var selected = lstProductCategories?.SelectedValue?.Trim();
+            if (action == null || string.IsNullOrWhiteSpace(selected)) return;
+
+            action.AddCategoryId(selected);
             UpdatePromotion();
             LoadAction();
         }
 
         protected void gvProductCategories_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            var q = TypedAction;
-            var bvin = (string) e.Keys[0];
-            q.RemoveCategoryId(bvin);
+            var action = TypedAction;
+            if (action == null || e?.Keys == null || e.Keys.Count == 0) return;
+
+            var bvin = e.Keys[0] as string;
+            if (string.IsNullOrWhiteSpace(bvin)) return;
+
+            action.RemoveCategoryId(bvin.Trim());
             UpdatePromotion();
             LoadAction();
         }

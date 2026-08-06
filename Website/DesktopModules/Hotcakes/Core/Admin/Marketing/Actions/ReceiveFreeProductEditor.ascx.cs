@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -47,27 +47,28 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
 
         private void UpdateQuantities()
         {
-            var products = TypedAction.GetQuantities();
+            var action = TypedAction;
+            if (action == null) return;
+
+            var products = action.GetQuantities();
+            if (products == null || gvProducts?.Rows == null) return;
 
             for (var i = 0; i < gvProducts.Rows.Count; i++)
             {
-                var id = (string) gvProducts.DataKeys[i].Value;
+                var key = gvProducts.DataKeys?[i]?.Value as string;
+                if (string.IsNullOrWhiteSpace(key)) continue;
 
-                if (products.ContainsKey(id))
+                var txt = gvProducts.Rows[i].FindControl("txtQuantity") as TextBox;
+                if (txt == null) continue;
+
+                // Try to parse the provided value; if invalid, skip and leave existing quantity
+                if (int.TryParse(txt.Text, out var parsedQuantity) && parsedQuantity >= 0)
                 {
-                    var txt = (TextBox) gvProducts.Rows[i].FindControl("txtQuantity");
-
-                    if (string.IsNullOrEmpty(txt.Text))
-                    {
-                        return;
-                    }
-
-                    var quantity = int.Parse(txt.Text);
-                    products[id] = quantity;
+                    products[key] = parsedQuantity;
                 }
             }
 
-            TypedAction.SaveQuantitiesToSettings(products);
+            action.SaveQuantitiesToSettings(products);
         }
 
         #endregion
@@ -85,15 +86,28 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
 
         private void gvProducts_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                var item = (FriendlyBvinDisplay) e.Row.DataItem;
-                var txtQuantity = (TextBox) e.Row.FindControl("txtQuantity");
-                var cvQuantity = (CompareValidator) e.Row.FindControl("cvCompare");
-                var rfQuantity = (RequiredFieldValidator) e.Row.FindControl("rvQuantity");
+            if (e.Row.RowType != DataControlRowType.DataRow) return;
+            if (e.Row.DataItem == null) return;
 
+            var item = e.Row.DataItem as FriendlyBvinDisplay;
+            if (item == null) return;
+
+            var txtQuantity = e.Row.FindControl("txtQuantity") as TextBox;
+            var cvQuantity = e.Row.FindControl("cvCompare") as CompareValidator;
+            var rfQuantity = e.Row.FindControl("rvQuantity") as RequiredFieldValidator;
+
+            if (txtQuantity != null)
+            {
                 txtQuantity.Text = item.Quantity.ToString();
+            }
+
+            if (cvQuantity != null)
+            {
                 cvQuantity.ErrorMessage = Localization.GetString("ValidationMessagePositiveInteger");
+            }
+
+            if (rfQuantity != null)
+            {
                 rfQuantity.ErrorMessage = string.Format("{0} {1}", item.DisplayName,
                     Localization.GetString("ValidationMessageRequired"));
             }
@@ -101,26 +115,36 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
 
         protected void btnDeleteProduct_OnPreRender(object sender, EventArgs e)
         {
-            var link = (LinkButton) sender;
-            link.Text = Localization.GetString("Delete");
+            if (sender is LinkButton link)
+            {
+                link.Text = Localization.GetString("Delete");
+            }
         }
 
         protected void gvProducts_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            var q = TypedAction;
-            var bvin = (string) e.Keys[0];
-            q.RemoveItemId(bvin);
+            var action = TypedAction;
+            if (action == null) return;
+            if (e?.Keys == null || e.Keys.Count == 0) return;
+
+            var bvin = e.Keys[0] as string;
+            if (string.IsNullOrWhiteSpace(bvin)) return;
+
+            action.RemoveItemId(bvin);
             UpdatePromotion();
             LoadAction();
         }
 
         protected void btnAddProduct_Click(object sender, EventArgs e)
         {
-            var q = TypedAction;
+            var action = TypedAction;
+            if (action == null) return;
+            if (ProductPickerOrderProducts?.SelectedProducts == null) return;
 
             foreach (var bvin in ProductPickerOrderProducts.SelectedProducts)
             {
-                q.AddItemId(bvin, 1);
+                if (string.IsNullOrWhiteSpace(bvin)) continue;
+                action.AddItemId(bvin, 1);
             }
 
             UpdatePromotion();
@@ -134,21 +158,35 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
         public override void LoadAction()
         {
             ProductPickerOrderProducts.LoadSearch();
+
             var displayData = new List<FriendlyBvinDisplay>();
-            var products = TypedAction.GetQuantities();
+
+            var action = TypedAction;
+            if (action == null)
+            {
+                gvProducts.DataSource = displayData;
+                gvProducts.DataBind();
+                return;
+            }
+
+            var products = action.GetQuantities() ?? new Dictionary<string, int>();
 
             foreach (var bvin in products.Keys)
             {
-                var item = new FriendlyBvinDisplay();
-                item.bvin = bvin;
-                item.DisplayName = bvin;
-                item.Quantity = products[bvin];
+                if (string.IsNullOrWhiteSpace(bvin)) continue;
 
-                var p = HccApp.CatalogServices.Products.FindWithCache(item.bvin);
+                var item = new FriendlyBvinDisplay
+                {
+                    bvin = bvin,
+                    DisplayName = bvin,
+                    Quantity = products[bvin]
+                };
+
+                var p = HccApp?.CatalogServices?.Products?.FindWithCache(item.bvin);
 
                 if (p != null)
                 {
-                    item.DisplayName = string.Format("[{0}]{1}", p.Sku, p.ProductName);
+                    item.DisplayName = $"[{p.Sku}]{p.ProductName}";
                 }
 
                 displayData.Add(item);

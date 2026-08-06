@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -37,12 +37,12 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         protected string PointsForEachSpent
         {
-            get { return string.Format(Localization.GetString("PointsForEachSpent"), string.Format("{0:c}", 1)); }
+            get { return string.Format(Localization.GetString("PointsForEachSpent"), 1.ToString("c")); }
         }
 
         protected string PointsForCredit
         {
-            get { return string.Format(Localization.GetString("PointsForCredit"), string.Format("{0:c}", 1)); }
+            get { return string.Format(Localization.GetString("PointsForCredit"), 1.ToString("c")); }
         }
 
         #endregion
@@ -89,9 +89,9 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
             lblPointsIssued.Text = pointsIssued.ToString();
             lblPointsIssuedValue.Text = manager.DollarCreditForPoints(pointsIssued).ToString("c");
 
-            var pointsReserverd = manager.TotalPointsReservedForStore(HccApp.CurrentStore.Id);
-            lblPointsReserved.Text = pointsReserverd.ToString();
-            lblPointsReservedValue.Text = manager.DollarCreditForPoints(pointsReserverd).ToString("c");
+            var pointsReserved = manager.TotalPointsReservedForStore(HccApp.CurrentStore.Id);
+            lblPointsReserved.Text = pointsReserved.ToString();
+            lblPointsReservedValue.Text = manager.DollarCreditForPoints(pointsReserved).ToString("c");
 
             RewardsNameField.Text = HccApp.CurrentStore.Settings.RewardsPointsName;
             chkEnableRewardsPoints.Checked = HccApp.CurrentStore.Settings.RewardsPointsEnabled;
@@ -108,7 +108,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
             HccApp.CurrentStore.Settings.UseRewardsPointsForUserPrice = chkUseForUserPrice.Checked;
             HccApp.CurrentStore.Settings.IssuePointsForUserPrice = chkIssuePointsForUserPrice.Checked;
             var pointPerDollar = 1;
-            if (int.TryParse(PointsPerDollarField.Text, out pointPerDollar))
+            if (int.TryParse(PointsPerDollarField.Text.Trim(), out pointPerDollar))
             {
                 HccApp.CurrentStore.Settings.RewardsPointsIssuedPerDollarSpent = pointPerDollar;
             }
@@ -118,7 +118,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
                 return false;
             }
             var pointsPerCredit = 100;
-            if (int.TryParse(PointsCreditField.Text, out pointsPerCredit))
+            if (int.TryParse(PointsCreditField.Text.Trim(), out pointsPerCredit))
             {
                 HccApp.CurrentStore.Settings.RewardsPointsNeededPerDollarCredit = pointsPerCredit;
             }

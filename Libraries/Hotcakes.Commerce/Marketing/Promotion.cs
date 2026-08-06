@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -383,7 +383,7 @@ namespace Hotcakes.Commerce.Marketing
         {
             if (nodes == null) return null;
 
-            var nodeTypeId = nodes.FirstOrDefault(y => y.Name == "TypeId");
+            var nodeTypeId = nodes.FirstOrDefault(y => y.Name.LocalName == "TypeId");
             if (nodeTypeId == null) return null;
             var typeId = new Guid(nodeTypeId.Value);
 
@@ -391,20 +391,24 @@ namespace Hotcakes.Commerce.Marketing
 
             if (result == null) return null;
 
-            var nodeId = nodes.FirstOrDefault(y => y.Name == "Id");
+            var nodeId = nodes.FirstOrDefault(y => y.Name.LocalName == "Id");
             if (nodeId != null)
             {
-                long temp = 0;
-                long.TryParse(nodeId.Value, out temp);
-                result.Id = temp;
+                if (long.TryParse(nodeId.Value, out var temp))
+                {
+                    result.Id = temp;
+                }
             }
-            var nodeSettings = nodes.FirstOrDefault(y => y.Name == "Settings");
+            var nodeSettings = nodes.FirstOrDefault(y => y.Name.LocalName == "Settings");
             if (nodeSettings != null)
             {
                 foreach (var setting in nodeSettings.Descendants("Setting"))
                 {
-                    var key = setting.Element("Key").Value;
-                    var value = setting.Element("Value").Value;
+                    var keyElem = setting.Element("Key");
+                    if (keyElem == null) continue;
+                    var valueElem = setting.Element("Value");
+                    var key = keyElem.Value;
+                    var value = valueElem?.Value ?? string.Empty;
                     result.Settings[key] = value;
                 }
             }
@@ -416,7 +420,7 @@ namespace Hotcakes.Commerce.Marketing
         {
             if (nodes == null) return null;
 
-            var nodeTypeId = nodes.FirstOrDefault(y => y.Name == "TypeId");
+            var nodeTypeId = nodes.FirstOrDefault(y => y.Name.LocalName == "TypeId");
             if (nodeTypeId == null) return null;
             var typeId = new Guid(nodeTypeId.Value);
 
@@ -424,20 +428,24 @@ namespace Hotcakes.Commerce.Marketing
 
             if (result == null) return null;
 
-            var nodeId = nodes.FirstOrDefault(y => y.Name == "Id");
+            var nodeId = nodes.FirstOrDefault(y => y.Name.LocalName == "Id");
             if (nodeId != null)
             {
-                long temp = 0;
-                long.TryParse(nodeId.Value, out temp);
-                result.Id = temp;
+                if (long.TryParse(nodeId.Value, out var temp))
+                {
+                    result.Id = temp;
+                }
             }
-            var nodeSettings = nodes.FirstOrDefault(y => y.Name == "Settings");
+            var nodeSettings = nodes.FirstOrDefault(y => y.Name.LocalName == "Settings");
             if (nodeSettings != null)
             {
                 foreach (var setting in nodeSettings.Descendants("Setting"))
                 {
-                    var key = setting.Element("Key").Value;
-                    var value = setting.Element("Value").Value;
+                    var keyElem = setting.Element("Key");
+                    if (keyElem == null) continue;
+                    var valueElem = setting.Element("Value");
+                    var key = keyElem.Value;
+                    var value = valueElem?.Value ?? string.Empty;
                     result.Settings[key] = value;
                 }
             }
@@ -491,34 +499,17 @@ namespace Hotcakes.Commerce.Marketing
 
         private int FindQualificationIndex(long id)
         {
-            var count = _qualifications.Count;
-            for (var i = 0; i < count; i++)
-            {
-                if (_qualifications[i].Id == id)
-                    return i;
-            }
-            return -1;
+            return _qualifications.FindIndex(q => q.Id == id);
         }
 
         private int FindActionIndex(long id)
         {
-            var count = _actions.Count;
-            for (var i = 0; i < count; i++)
-            {
-                if (_actions[i].Id == id)
-                    return i;
-            }
-            return -1;
+            return _actions.FindIndex(a => a.Id == id);
         }
 
         private bool HasPromotionDiscount(IEnumerable<DiscountDetail> discountDetails, long promotionId)
         {
-            foreach (var detail in discountDetails)
-            {
-                if (detail.PromotionId == promotionId)
-                    return true;
-            }
-            return false;
+            return discountDetails != null && discountDetails.Any(d => d.PromotionId == promotionId);
         }
 
         #endregion

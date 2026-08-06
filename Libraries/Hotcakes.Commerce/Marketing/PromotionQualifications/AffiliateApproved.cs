@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -32,7 +32,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
     public class AffiliateApproved : PromotionQualificationBase
     {
         public const string TypeIdString = "BC68C7FB-A1A5-4CBB-81BE-16DF5FEA780C";
-
+            
         #region Constructor
 
         public AffiliateApproved()
@@ -49,10 +49,18 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             get { return new Guid(TypeIdString); }
         }
 
+        // Preserve existing setting key (note: original property name contains a historic typo).
         public bool HasReffferalID
         {
             get { return GetSettingAsBool("HasReffferalID"); }
             set { SetSetting("HasReffferalID", value); }
+        }
+
+        // New correctly spelled convenience property that maps to the same stored setting.
+        public bool HasReferralId
+        {
+            get { return HasReffferalID; }
+            set { HasReffferalID = value; }
         }
 
         #endregion

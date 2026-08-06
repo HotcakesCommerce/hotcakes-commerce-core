@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -33,7 +33,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
     public class LineItemIsProduct : HasProductsQualificationBase
     {
         public const string TypeIdString = "CCB783E6-9CA3-42FF-A59F-E063D3EFEB99";
-
+            
         public override Guid TypeId
         {
             get { return new Guid(TypeIdString); }
@@ -55,6 +55,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             if (mode == PromotionQualificationMode.Orders)
             {
                 var items = context.Order.Items;
+                if (items == null) return false;
                 return items.Any(i => MeetLineItem(context, i));
             }
 

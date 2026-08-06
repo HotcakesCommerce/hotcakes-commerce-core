@@ -3,7 +3,7 @@
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -39,11 +39,14 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         public const string TypeIdString = "3875f348-d0e4-4fd9-8d25-e5c506e50d00";
 
+        // Cache the parsed Guid to avoid repeated allocations
+        private static readonly Guid _typeId = new Guid(TypeIdString);
+
         #region Properties
 
         public override Guid TypeId
         {
-            get { return new Guid(TypeIdString); }
+            get { return _typeId; }
         }
 
         public RecipientType Recipient
@@ -82,32 +85,31 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
         public override string FriendlyDescription(HotcakesApplication app)
         {
             if (Recipient == RecipientType.Self)
-                return string.Format("Issue <strong>{0}</strong> Reward Points to Affiliate", Amount);
-            return string.Format("Issue <strong>{0}</strong> Reward Points to Referral Affiliate", Amount);
+                return $"Issue <strong>{Amount}</strong> Reward Points to Affiliate";
+            return $"Issue <strong>{Amount}</strong> Reward Points to Referral Affiliate";
         }
 
         public override bool ApplyAction(PromotionContext context)
         {
-            if (context == null) return false;
-            if (context.CurrentCustomer == null) return false;
+            if (context?.CurrentCustomer == null) return false;
             if (context.Mode != PromotionType.Affiliate) return false;
 
             if (Recipient == RecipientType.Self)
             {
                 return context.HccApp.CustomerPointsManager.IssuePoints(context.CurrentCustomer.Bvin, Amount);
             }
+
             if (Recipient == RecipientType.ReferralAffiliate)
             {
-                var userId = Convert.ToInt32(context.CurrentCustomer.Bvin);
+                if (!int.TryParse(context.CurrentCustomer.Bvin, out var userId)) return false;
+
                 var aff = context.HccApp.ContactServices.Affiliates.FindByUserId(userId);
-                if (aff != null && aff.Enabled)
-                {
-                    var refAff = context.HccApp.ContactServices.Affiliates.FindByAffiliateId(aff.ReferralAffiliateId);
-                    if (refAff != null && refAff.Enabled)
-                    {
-                        return context.HccApp.CustomerPointsManager.IssuePoints(refAff.UserId.ToString(), Amount);
-                    }
-                }
+                if (aff?.Enabled != true) return false;
+
+                var refAff = context.HccApp.ContactServices.Affiliates.FindByAffiliateId(aff.ReferralAffiliateId);
+                if (refAff?.Enabled != true) return false;
+
+                return context.HccApp.CustomerPointsManager.IssuePoints(refAff.UserId.ToString(), Amount);
             }
 
             return false;
