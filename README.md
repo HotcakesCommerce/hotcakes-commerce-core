@@ -1,5 +1,9 @@
 ![Hotcakes Commerce](hotcakes-banner.png)
 
+<!-- hy-mt2-i18n:start -->
+**English** · [中文](./README_zh-CN.md) · [日本語](./README_ja.md) · [Español](./README_es.md)
+<!-- hy-mt2-i18n:end -->
+
 Project Description
 ==================
 At Hotcakes Commerce, we believe that e-commerce should be easy for everyone on your team.  This open source e-commerce solution delivers on that promise.
