@@ -203,7 +203,8 @@
     <Content Include="Portals\_default\HotcakesViews\MyBootstrap4\_views_areas.less" />
     <Content Include="Portals\_default\HotcakesViews\MyBootstrap4\_views_bootstrap.less" />
     <Content Include="Portals\_default\HotcakesViews\MyBootstrap4\_views_common.less" />
-  </ItemGroup>
+      <Content Include="Portals\_default\HotcakesViews\MyBootstrap5\**" />
+</ItemGroup>
   <ItemGroup>
     <Content Include="Portals\_default\HotcakesViews\MyBootstrap4\Images\attachment.png" />
     <Content Include="Portals\_default\HotcakesViews\MyBootstrap4\Images\bookmark.png" />

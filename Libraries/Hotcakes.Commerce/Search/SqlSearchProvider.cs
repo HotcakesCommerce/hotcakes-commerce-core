@@ -1,9 +1,9 @@
-﻿#region License
+#region License
 
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -184,12 +184,11 @@ namespace Hotcakes.Commerce.Search
 
         public bool ObjectIndexObjectExists(long siteId, int type, Guid objectId)
         {
-            var o = ObjectIndexFindByTypeAndId(siteId, type, objectId);
-            if (o != null)
+            using (var context = CreateHccDbContext())
             {
-                return true;
+                return context.hcc_SearchObjects.Any(so =>
+                    so.ObjectType == type && so.ObjectId == objectId && so.SiteId == siteId);
             }
-            return false;
         }
 
         public bool ObjectIndexDelete(long id)
@@ -286,7 +285,7 @@ namespace Hotcakes.Commerce.Search
             {
                 var results = new List<SearchObject>();
 
-                var skip = (pageNumber - 1)*pageSize;
+                var skip = (pageNumber - 1) * pageSize;
                 if (skip < 0) skip = 0;
 
                 var query = context.hcc_SearchObjectWords.Where(w => wordIds.Contains(w.WordId));
@@ -299,7 +298,7 @@ namespace Hotcakes.Commerce.Search
                     {
                         Id = g.Key,
                         Score = g.Sum(y => y.Score),
-                        Count = g.Sum(y => 1)
+                        Count = g.Count()
                     })
                     .OrderByDescending(y => y.Count)
                     .ThenByDescending(y => y.Score);
@@ -313,13 +312,26 @@ namespace Hotcakes.Commerce.Search
                     objectIds.Add(s.Id);
                 }
 
-                // Now find all objects but they are unsorted 
-                var unsorted = ObjectIndexFindAllInList(objectIds);
-                // Make sure results are sorted by keyword values
+                // Inline fetch of search objects to avoid creating a separate context and extra round trips
+                var unsorted = context.hcc_SearchObjects
+                    .Where(o => objectIds.Contains(o.Id))
+                    .Select(o => new SearchObject
+                    {
+                        Id = o.Id,
+                        ObjectId = o.ObjectId,
+                        ObjectType = o.ObjectType,
+                        Title = o.Title,
+                        SiteId = o.SiteId,
+                        LastIndexUtc = o.LastIndexUtc
+                    })
+                    .ToList();
+
+                var unsortedDict = unsorted.ToDictionary(x => x.Id);
+
+                // Preserve ordering from items
                 foreach (var s in items)
                 {
-                    var temp = unsorted.Where(y => y.Id == s.Id).FirstOrDefault();
-                    if (temp != null)
+                    if (unsortedDict.TryGetValue(s.Id, out var temp))
                     {
                         results.Add(temp);
                     }
@@ -342,7 +354,7 @@ namespace Hotcakes.Commerce.Search
             {
                 var result = new ProductSearchResultAdv();
 
-                var skip = (pageNumber - 1)*pageSize;
+                var skip = (pageNumber - 1) * pageSize;
                 if (skip < 0) skip = 0;
 
                 var dbQuery = context.hcc_SearchObjectWords.
@@ -402,7 +414,7 @@ namespace Hotcakes.Commerce.Search
                     {
                         ObjectId = g.Key,
                         Score = g.Sum(y => y.sow.Score),
-                        Count = g.Sum(y => 1)
+                        Count = g.Count()
                     }).
                     Join(products, s => s.ObjectId, p => p.bvin, (s, p) => new {so = s, p}).
                     GroupJoin(propertiesJoin, s => s.p.bvin, ppvj => ppvj.ppv.Item.ProductBvin,
@@ -453,19 +465,18 @@ namespace Hotcakes.Commerce.Search
                             dbQueryJ =
                                 dbQueryJ.Where(
                                     s =>
-                                        s.ppvj.Where(
+                                        s.ppvj.Any(
                                             pj =>
                                                 pj.ppv.Item.PropertyId == propertyId &&
-                                                pj.ppv.ItemTranslation.PropertyLocalizableValue == propertyValue)
-                                            .Count() > 0);
+                                                pj.ppv.ItemTranslation.PropertyLocalizableValue == propertyValue));
                         else
                             dbQueryJ =
                                 dbQueryJ.Where(
                                     s =>
-                                        s.ppvj.Where(
+                                        s.ppvj.Any(
                                             pj =>
                                                 pj.ppv.Item.PropertyId == propertyId &&
-                                                pj.ppv.Item.PropertyValue == propertyValue).Count() > 0);
+                                                pj.ppv.Item.PropertyValue == propertyValue));
                     }
                 }
 
@@ -500,7 +511,7 @@ namespace Hotcakes.Commerce.Search
                     {
                         g.Key.CategoryId,
                         g.Key.ParentId,
-                        Count = g.Sum(t => 1)
+                        Count = g.Count()
                     }).
                     GroupJoin(categoryTranslations, i => i.CategoryId, it => it.CategoryId, (i, it) => new
                     {
@@ -543,7 +554,7 @@ namespace Hotcakes.Commerce.Search
                     {
                         Id = m.Key.ManufacturerId,
                         Name = m.Key.ManufacturerName,
-                        Count = m.Sum(t => 1)
+                        Count = m.Count()
                     })
                     .OrderByDescending(m => m.Count).ThenBy(m => m.Name)
                     .ToList().
@@ -557,7 +568,7 @@ namespace Hotcakes.Commerce.Search
                     {
                         Id = v.Key.VendorId,
                         Name = v.Key.VendorName,
-                        Count = v.Sum(t => 1)
+                        Count = v.Count()
                     })
                     .OrderByDescending(v => v.Count).ThenBy(v => v.Name)
                     .ToList().
@@ -575,7 +586,7 @@ namespace Hotcakes.Commerce.Search
                     Select(g => new
                     {
                         ProductTypeId = g.Key,
-                        Count = g.Sum(t => 1)
+                        Count = g.Count()
                     }).
                     GroupJoin(productTypeTranslations, pt => pt.ProductTypeId, ptt => ptt.ProductTypeId, (i, it) => new
                     {

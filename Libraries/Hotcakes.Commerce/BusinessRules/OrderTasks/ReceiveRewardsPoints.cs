@@ -1,9 +1,9 @@
-﻿#region License
+#region License
 
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -115,3 +115,4 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 
     }
 }
+

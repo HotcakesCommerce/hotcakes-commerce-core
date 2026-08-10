@@ -1,0 +1,19 @@
+@model Hotcakes.Modules.Core.Models.CheckoutViewModel
+@using Hotcakes.Modules.Core.Models;
+
+<div class="row-fluid hc-monerischeckout">
+    <div class="col-12">
+        <h2>@Localization.GetString("MonerisCheckout")</h2>
+
+        @Html.Raw((string)TempData["messages"])
+
+        <div class="row-fluid">
+            <div class="col-12">
+                <a href="@Url.RouteHccUrl(HccRoute.Checkout)" class="btn btn-secondary">
+                    @Localization.GetString("GoToCheckout")
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>

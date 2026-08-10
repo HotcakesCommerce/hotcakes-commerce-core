@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "upendo-local-development": {
+      "command": "C:\\Work\\HCC-Core\\hcc-core\\Tools\\Upendo.LocalDevelopmentMcp\\bin\\Release\\net8.0\\Upendo.LocalDevelopmentMcp.exe",
+      "args": [],
+      "cwd": "C:\\Work\\HCC-Core\\hcc-core",
+      "env": {},
+      "disabled": false
+    }
+  }
+}
