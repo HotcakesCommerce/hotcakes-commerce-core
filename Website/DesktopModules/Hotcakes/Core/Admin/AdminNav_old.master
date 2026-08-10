@@ -38,6 +38,15 @@
             <uc2:footer ID="Footer1" runat="server" />            
         </div>
     </form>
-	<img src="//mmmcommerce.com/Portals/0/images/spacer.gif" alt="" />
+    <script type="text/javascript">
+        (function () {
+            try {
+                var img = new Image();
+                img.src = '//mmmcommerce.com/Portals/0/images/spacer.gif';
+            } catch (e) {
+                // Fail silently
+            }
+        })();
+    </script>
 </body>
 </html>
