@@ -157,5 +157,21 @@ namespace Hotcakes.Commerce.Search
         }
 
         #endregion
+
+        #region Helpers
+
+        private List<long> GetWordIdsForQuery(string query, string culture)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return new List<long>();
+            }
+
+            var parts = TextParser.ParseText(query, culture);
+            var wordIds = FindAllWordIds(parts, culture);
+            return wordIds ?? new List<long>();
+        }
+
+        #endregion
     }
 }
