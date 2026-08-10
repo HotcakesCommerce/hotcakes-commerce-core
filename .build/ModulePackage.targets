@@ -18,6 +18,7 @@
 			<CoreBuildFolder>$(RootFolder)\_Build\_Website\_Core</CoreBuildFolder>
 			<ViewSetBuildFolder>$(RootFolder)\_Build\_Website\_ViewSet</ViewSetBuildFolder>
 			<Bs4ViewSetBuildFolder>$(RootFolder)\_Build\_Website\_ViewSet-BootStrap4</Bs4ViewSetBuildFolder>
+			<Bs5ViewSetBuildFolder>$(RootFolder)\_Build\_Website\_ViewSet-BootStrap5</Bs5ViewSetBuildFolder>
 			<LegacyViewSetBuildFolder>$(RootFolder)\_Build\_Website\_ViewSet-Legacy</LegacyViewSetBuildFolder>
 			<Porto5ViewSetBuildFolder>$(RootFolder)\_Build\_Website\_ViewSet-Porto5</Porto5ViewSetBuildFolder>
 			<ModulesBuildFolder>$(RootFolder)\_Build\_Website\_Modules</ModulesBuildFolder>
@@ -75,6 +76,7 @@
 		<ItemGroup>
 			<HotcakesViewsInclude Include="..\..\Portals\_default\HotcakesViews\_default\**\*.*" Exclude="..\..\**\*.uk-UA.resx;..\..\**\*.manifest" />
 			<Bootstrap4ViewsInclude Include="..\..\Portals\_default\HotcakesViews\Bootstrap4\**\*.*" Exclude="..\..\**\*.uk-UA.resx;..\..\**\*.manifest" />
+      <Bootstrap5ViewsInclude Include="..\..\Portals\_default\HotcakesViews\Bootstrap5\**\*.*" Exclude="..\..\**\*.uk-UA.resx;..\..\**\*.manifest" />
 			<LegacyViewsInclude Include="..\..\Portals\_default\HotcakesViews\_default-Legacy\**\*.*" Exclude="..\..\**\*.uk-UA.resx;..\..\**\*.manifest" />
 			<Porto5ViewsInclude Include="..\..\Portals\_default\HotcakesViews\Porto5\**\*.*" Exclude="..\..\**\*.uk-UA.resx;..\..\**\*.manifest" />
 			<PackageTxtInclude Include="**\License.txt;**\ReleaseNotes.txt" />
@@ -105,6 +107,7 @@
 		<!-- Copy files to ViewSet Build Folder -->
 		<Copy SourceFiles="@(HotcakesViewsInclude)" DestinationFolder="$(ViewSetBuildFolder)\%(RecursiveDir)" />
 		<Copy SourceFiles="@(Bootstrap4ViewsInclude)" DestinationFolder="$(Bs4ViewSetBuildFolder)\%(RecursiveDir)" />
+    <Copy SourceFiles="@(Bootstrap5ViewsInclude)" DestinationFolder="$(Bs5ViewSetBuildFolder)\%(RecursiveDir)" />
 		<Copy SourceFiles="@(LegacyViewsInclude)" DestinationFolder="$(LegacyViewSetBuildFolder)\%(RecursiveDir)" />
 		<Copy SourceFiles="@(Porto5ViewsInclude)" DestinationFolder="$(Porto5ViewSetBuildFolder)\%(RecursiveDir)" />
 
@@ -151,6 +154,12 @@
       <Output TaskParameter="Include" ItemName="HotcakesBs4ViewsContent" />
     </CreateItem>
     <Zip Files="@(HotcakesBs4ViewsContent)" WorkingDirectory="$(Bs4ViewSetBuildFolder)" ZipFileName="$(ModulesBuildFolder)\Bootstrap4Views.$(Extension)" ParallelCompression="False" />
+
+    <!-- Create Bootstrap5Views zip -->
+    <CreateItem Include="$(Bs5ViewSetBuildFolder)\**\*.*">
+      <Output TaskParameter="Include" ItemName="HotcakesBs5ViewsContent" />
+    </CreateItem>
+    <Zip Files="@(HotcakesBs5ViewsContent)" WorkingDirectory="$(Bs5ViewSetBuildFolder)" ZipFileName="$(ModulesBuildFolder)\Bootstrap5Views.$(Extension)" ParallelCompression="False" />
 
     <!-- Create LegacyViews zip -->
     <CreateItem Include="$(LegacyViewSetBuildFolder)\**\*.*">

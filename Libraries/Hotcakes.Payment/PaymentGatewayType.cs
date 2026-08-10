@@ -1,8 +1,8 @@
-﻿#region License
+#region License
 
 // Distributed under the MIT License
 // ============================================================
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -42,3 +42,4 @@ namespace Hotcakes.Payment
         public const string Test = "FCACE46F-7B9C-4b49-82B6-426CF522C0C6";
     }
 }
+

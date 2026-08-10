@@ -1,9 +1,9 @@
-﻿#region License
+#region License
 
 // Distributed under the MIT License
 // ============================================================
 // Copyright (c) 2019 Hotcakes Commerce, LLC
-// Copyright (c) 2020-2025 Upendo Ventures, LLC
+// Copyright (c) 2020-present Upendo Ventures, LLC
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 // and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -255,7 +255,9 @@ namespace Hotcakes.Modules.Core.Controllers
                 sb.AppendFormat(Constants.TAG_OGTITLE, PageTitle);
                 sb.Append(Constants.TAG_OGTYPE);
                 sb.AppendFormat(Constants.TAG_OGURL, canonicalUrl);
-                sb.AppendFormat(Constants.TAG_OGIMAGE, model.LocalCategory.ImageUrl);
+                var ogImageUrl = DiskStorage.CategoryIconUrl(HccApp, model.LocalCategory.Bvin,
+                    model.LocalCategory.ImageUrl, Request.IsSecureConnection);
+                sb.AppendFormat(Constants.TAG_OGIMAGE, ogImageUrl);
                 sb.AppendFormat(Constants.TAG_OGSITENAME, ViewBag.StoreName);
                 sb.AppendFormat(Constants.TAG_OGFBADMIN, faceBookAdmins);
                 sb.AppendFormat(Constants.TAG_OGFBAPPID, faceBookAppId);
