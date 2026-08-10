@@ -255,7 +255,9 @@ namespace Hotcakes.Modules.Core.Controllers
                 sb.AppendFormat(Constants.TAG_OGTITLE, PageTitle);
                 sb.Append(Constants.TAG_OGTYPE);
                 sb.AppendFormat(Constants.TAG_OGURL, canonicalUrl);
-                sb.AppendFormat(Constants.TAG_OGIMAGE, model.LocalCategory.ImageUrl);
+                var ogImageUrl = DiskStorage.CategoryIconUrl(HccApp, model.LocalCategory.Bvin,
+                    model.LocalCategory.ImageUrl, Request.IsSecureConnection);
+                sb.AppendFormat(Constants.TAG_OGIMAGE, ogImageUrl);
                 sb.AppendFormat(Constants.TAG_OGSITENAME, ViewBag.StoreName);
                 sb.AppendFormat(Constants.TAG_OGFBADMIN, faceBookAdmins);
                 sb.AppendFormat(Constants.TAG_OGFBAPPID, faceBookAppId);
