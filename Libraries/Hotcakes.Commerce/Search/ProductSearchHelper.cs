@@ -340,7 +340,7 @@ namespace Hotcakes.Commerce.Search
             }
             return dbQuery;
         }
-
+            
         private IQueryable<ProductQuery> FilterByPropertyFacets(IQueryable<ProductQuery> dbQuery,
             long? excludePropertyId = null)
         {
@@ -357,19 +357,18 @@ namespace Hotcakes.Commerce.Search
                         dbQuery =
                             dbQuery.Where(
                                 q =>
-                                    q.ppvj.Where(
+                                    q.ppvj.Any(
                                         pj =>
                                             pj.ppv.Item.PropertyId == propertyId &&
-                                            propertyValues.Contains(pj.ppv.ItemTranslation.PropertyLocalizableValue))
-                                        .Count() > 0);
+                                            propertyValues.Contains(pj.ppv.ItemTranslation.PropertyLocalizableValue)));
                     else
                         dbQuery =
                             dbQuery.Where(
                                 q =>
-                                    q.ppvj.Where(
+                                    q.ppvj.Any(
                                         pj =>
                                             pj.ppv.Item.PropertyId == propertyId &&
-                                            propertyValues.Contains(pj.ppv.Item.PropertyValue)).Count() > 0);
+                                            propertyValues.Contains(pj.ppv.Item.PropertyValue)));
                 }
             }
             return dbQuery;
@@ -384,7 +383,7 @@ namespace Hotcakes.Commerce.Search
                 {
                     Id = m.Key.ManufacturerId,
                     Name = m.Key.ManufacturerName,
-                    Count = m.Sum(t => 1)
+                    Count = m.Count()
                 }).ToList().
                 OrderBy(f => f.Name).
                 Select(f => f.Convert()).
@@ -400,7 +399,7 @@ namespace Hotcakes.Commerce.Search
                 {
                     Id = v.Key.VendorId,
                     Name = v.Key.VendorName,
-                    Count = v.Sum(t => 1)
+                    Count = v.Count()
                 }).OrderBy(f => f.Name).
                 ToList().
                 Select(f => f.Convert()).

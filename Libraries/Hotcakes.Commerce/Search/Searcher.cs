@@ -52,14 +52,12 @@ namespace Hotcakes.Commerce.Search
 
         public long AddOrCreateWord(string stemmedWord, string culture)
         {
-            var id = FindWordId(stemmedWord, culture);
-
+            var id = provider.FindWordId(stemmedWord, culture);
             if (id > 0)
             {
                 return id;
             }
-            id = provider.InsertWord(stemmedWord, culture);
-            return id;
+            return provider.InsertWord(stemmedWord, culture);
         }
 
         public long FindWordId(string stemmedWord, string culture)
@@ -81,9 +79,7 @@ namespace Hotcakes.Commerce.Search
             var existing = provider.ObjectIndexFindByTypeAndId(s.SiteId, s.ObjectType, s.ObjectId);
             if (existing != null)
             {
-                var existingId = existing.Id;
-                ObjectIndexDelete(existingId);
-                return provider.ObjectIndexInsert(s);
+                ObjectIndexDelete(existing.Id);
             }
             return provider.ObjectIndexInsert(s);
         }
@@ -127,11 +123,8 @@ namespace Hotcakes.Commerce.Search
         public List<SearchObject> DoSearch(long siteId, string query, string culture, int pageNumber, int pageSize,
             ref int totalResults)
         {
-            // Parse Query into words
-            var parts = TextParser.ParseText(query, culture);
-
-            // Get wordIds for all words in query
-            var wordIds = FindAllWordIds(parts, culture);
+            // Parse Query into words and obtain word ids
+            var wordIds = GetWordIdsForQuery(query, culture);
 
             if (siteId > 0)
             {
@@ -151,11 +144,8 @@ namespace Hotcakes.Commerce.Search
         {
             if (!string.IsNullOrWhiteSpace(query))
             {
-                // Parse Query into words
-                var parts = TextParser.ParseText(query, culture);
-
-                // Get wordIds for all words in query
-                var wordIds = FindAllWordIds(parts, culture);
+                // Parse Query into words and obtain word ids
+                var wordIds = GetWordIdsForQuery(query, culture);
 
                 if (siteId > 0)
                 {
