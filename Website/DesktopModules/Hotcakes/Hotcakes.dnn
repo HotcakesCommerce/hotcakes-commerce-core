@@ -310,6 +310,14 @@
 				</component>
 				<component type="ResourceFile">
 					<resourceFiles>
+						<basePath>Portals\_default\HotcakesViews\Bootstrap5</basePath>
+						<resourceFile>
+							<name>Bootstrap5Views.zip</name>
+						</resourceFile>
+					</resourceFiles>
+				</component>
+				<component type="ResourceFile">
+					<resourceFiles>
 						<basePath>Portals\_default\HotcakesViews\_default-Legacy</basePath>
 						<resourceFile>
 							<name>LegacyViews.zip</name>
