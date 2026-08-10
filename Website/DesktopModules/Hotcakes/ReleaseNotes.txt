@@ -4,7 +4,7 @@
 	.muy-importante { color:red;font-weight:bold; }
 </style>
 <div class="uv-install-wrapper">
-	<h1>Hotcakes Commerce: Version 03.11.00</h1>
+	<h1>Hotcakes Commerce: Version 03.12.00</h1>
 
 	<p class="muy-importante">The release notes continue after the Sponsors and Contributors below.</p>
 	
@@ -15,7 +15,7 @@
 	<ul>
 		<li>Adam Bernstein, <a href="https://practicewise.com/" target="_blank">PracticeWise</a></li>
 		<li><a href="https://github.com/puresystems" target="_blank">PureSystems</a></li>
-		<li><em>4 private sponsors</em></li>
+		<li><em>four private sponsors</em></li>
 	</ul>
 	
 	<h3>Contributors</h3>
@@ -41,24 +41,20 @@
 	
 	<h3><strong>Enhancements</strong></h3>
 	<ul>
-		<li><strong>Improved Account and Store Resolution Reliability</strong> - Added safer handling for missing request context, invalid URLs, blank host values, and unavailable stores. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issue/564" target="_blank">Issue 564</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
-		<li><strong>Improved Promotion and Marketing Resilience</strong> - Hardened promotion, qualification, and action processing against missing or malformed data, unknown action types, invalid dates, and unavailable entities. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issue/564" target="_blank">Issue 564</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
-		<li><strong>Improved Order and Coupon Processing</strong> - Added safer validation for coupon codes, shipping discounts, order updates, transaction lookups, and payment-related identifiers. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issue/564" target="_blank">Issue 564</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
+		<li><strong>Bootstrap 5 Viewset</strong> - A clean Bootstrap 5 viewset is now available. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/pull/571" target="_blank">PR 571</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
+		<li><strong>Performance Updates: Search</strong> - Implemented performance updates across the search feature. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/pull/571" target="_blank">PR 571</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
 		<!--
 		<li><strong></strong> - . (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/" target="_blank">Issue </a>), Thanks <a href="https://github.com/" target="_blank">@</a></li>
 		<li>None at this time.</li>
 		-->
 	</ul>
-
-	<h3><strong>Performance Updates</strong></h3>
-	<ul>
-		<li><strong>Performance and Resilience Audit</strong> - Reduced avoidable database work, improved promotion paging, optimized volume-discount repricing, and avoided unnecessary order updates while preserving existing behavior for valid requests. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issue/564" target="_blank">Issue 564</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
-		<li><strong>Improved Promotion Administration</strong> - Added defensive handling for promotion editors and safer behavior when promotion actions or qualifications cannot be loaded. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issue/564" target="_blank">Issue 564</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
-	</ul>
 	
-	<h3><strong>Maintenance Updates</strong></h3>
+	<h3><strong>Bugs Fixes &amp; Maintenance Updates</strong></h3>
 	<ul>
-		<li><strong>Improved Input Validation and Null Handling</strong> - Applied broader safeguards across account, localization, promotion, order, repository, and administration workflows to prevent unhandled errors from incomplete or unexpected input. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issue/564" target="_blank">Issue 564</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
+		<li><strong>Open-Graph Image Metatag using filename instead of absolute URL for Categories Image</strong> - Updated category Open Graph image metadata to use the complete image URL. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issue/551" target="_blank">Issue 551</a>), Thanks <a href="https://github.com/alex-pommier" target="_blank">@alex-pommier</a></li>
+		<li><strong>Added MCP configuration</strong> - Added configuration file for Upendo's local MCP server. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/pull/571" target="_blank">PR 571</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
+		<li><strong>Made pixels Async</strong> - Pixels are loading asynchronously. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/pull/571" target="_blank">PR 571</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
+		<li><strong>Updated copyrights</strong> - Updated copyrights for this year. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/pull/571" target="_blank">PR 571</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
 		<!--
 		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/" target="_blank">Issue </a> - . Thanks <a href="https://github.com/" target="_blank">@</a></li>
 		<li>(no issue) - .</li>
