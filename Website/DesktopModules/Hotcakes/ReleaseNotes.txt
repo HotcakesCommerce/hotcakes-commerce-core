@@ -4,7 +4,7 @@
 	.muy-importante { color:red;font-weight:bold; }
 </style>
 <div class="uv-install-wrapper">
-	<h1>Hotcakes Commerce: Version 03.12.00</h1>
+	<h1>Hotcakes Commerce: Version 03.12.01</h1>
 
 	<p class="muy-importante">The release notes continue after the Sponsors and Contributors below.</p>
 	
@@ -41,20 +41,16 @@
 	
 	<h3><strong>Enhancements</strong></h3>
 	<ul>
-		<li><strong>Bootstrap 5 Viewset</strong> - A clean Bootstrap 5 viewset is now available. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/pull/571" target="_blank">PR 571</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
-		<li><strong>Performance Updates: Search</strong> - Implemented performance updates across the search feature. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/pull/571" target="_blank">PR 571</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
+		<li><strong>Diagnostic Logging for URLs</strong> - Adds debugging details to the local Log4NET file when enabled. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/576" target="_blank">Issue 576</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
 		<!--
-		<li><strong></strong> - . (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/" target="_blank">Issue </a>), Thanks <a href="https://github.com/" target="_blank">@</a></li>
+		<li><strong></strong> - . (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/" target="_blank">Issue </a>), Thanks <a href="https://github.com/" target="_blank">@</a>!</li>
 		<li>None at this time.</li>
 		-->
 	</ul>
 	
 	<h3><strong>Bugs Fixes &amp; Maintenance Updates</strong></h3>
 	<ul>
-		<li><strong>Open-Graph Image Metatag using filename instead of absolute URL for Categories Image</strong> - Updated category Open Graph image metadata to use the complete image URL. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issue/551" target="_blank">Issue 551</a>), Thanks <a href="https://github.com/alex-pommier" target="_blank">@alex-pommier</a></li>
-		<li><strong>Added MCP configuration</strong> - Added configuration file for Upendo's local MCP server. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/pull/571" target="_blank">PR 571</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
-		<li><strong>Made pixels Async</strong> - Pixels are loading asynchronously. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/pull/571" target="_blank">PR 571</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
-		<li><strong>Updated copyrights</strong> - Updated copyrights for this year. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/pull/571" target="_blank">PR 571</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
+		<li><strong>Removes `/slug` from URLs</strong> - Resolves DNN SEO settings that inserts `/slug` into the output URLs. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issue/575" target="_blank">Issue 575</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a>!</li>
 		<!--
 		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/" target="_blank">Issue </a> - . Thanks <a href="https://github.com/" target="_blank">@</a></li>
 		<li>(no issue) - .</li>
