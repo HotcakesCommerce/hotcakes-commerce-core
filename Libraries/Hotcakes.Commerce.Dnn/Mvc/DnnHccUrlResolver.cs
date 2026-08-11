@@ -34,6 +34,7 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Portals;
+using DotNetNuke.Instrumentation;
 using Hotcakes.Commerce.Accounts;
 using Hotcakes.Commerce.Urls;
 
@@ -50,6 +51,8 @@ namespace Hotcakes.Commerce.Dnn.Mvc
         }
 
         #endregion
+
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(DnnHccUrlResolver));
 
         public string RouteHccUrl(HccRoute route, string actionName, string controllerName, string protocol,
             string hostName, string fragment, RouteValueDictionary routeValues, RouteCollection routeCollection,
@@ -159,6 +162,27 @@ namespace Hotcakes.Commerce.Dnn.Mvc
 
             var portalSettings = CurrentPortalSettings;
             var isSuperTab = Globals.IsHostTab(urlInfo.TabId);
+
+            // Ensure slug param is deterministically positioned: place immediately after 'mid' if present, otherwise first
+            Logger.Debug("DnnHccUrlResolver - params before reposition: " + (paramsList.Count > 0 ? string.Join(";", paramsList) : "(none)"));
+            var slugIndex = paramsList.FindIndex(p => p.StartsWith("slug=", StringComparison.OrdinalIgnoreCase));
+            if (slugIndex >= 0)
+            {
+                var slugParam = paramsList[slugIndex];
+                Logger.Debug("DnnHccUrlResolver - found slug param: " + slugParam);
+                paramsList.RemoveAt(slugIndex);
+                var midIndex = paramsList.FindIndex(p => p.StartsWith("mid=", StringComparison.OrdinalIgnoreCase));
+                if (midIndex >= 0)
+                {
+                    paramsList.Insert(midIndex + 1, slugParam);
+                }
+                else
+                {
+                    paramsList.Insert(0, slugParam);
+                }
+                Logger.Debug("DnnHccUrlResolver - params after reposition: " + string.Join(";", paramsList));
+            }
+
             var parameters = paramsList.ToArray();
 
             var navigateUrl = string.Empty;
@@ -171,6 +195,7 @@ namespace Hotcakes.Commerce.Dnn.Mvc
             {
                 navigateUrl = NavigateUrl(urlInfo.TabId, isSuperTab, portalSettings, urlInfo.ControlKey, parameters);
             }
+            Logger.Debug("DnnHccUrlResolver - NavigateURL result: " + navigateUrl);
             return navigateUrl;
         }
 
