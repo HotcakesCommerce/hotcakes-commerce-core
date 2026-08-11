@@ -183,8 +183,9 @@
 		
 		<RemoveDir Directories ="$(CoreBuildFolder)" /> 
 		<RemoveDir Directories ="$(ViewSetBuildFolder)" /> 
-		<RemoveDir Directories ="$(Bs4ViewSetBuildFolder)" /> 
-		<RemoveDir Directories ="$(LegacyViewSetBuildFolder)" /> 
+		<RemoveDir Directories ="$(Bs4ViewSetBuildFolder)" />
+    <RemoveDir Directories ="$(Bs5ViewSetBuildFolder)" />
+    <RemoveDir Directories ="$(LegacyViewSetBuildFolder)" /> 
 		<RemoveDir Directories ="$(Porto5ViewSetBuildFolder)" /> 
 		<RemoveDir Directories ="$(ModulesBuildFolder)" />
 
