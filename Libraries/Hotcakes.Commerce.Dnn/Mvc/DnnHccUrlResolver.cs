@@ -185,18 +185,81 @@ namespace Hotcakes.Commerce.Dnn.Mvc
 
             var parameters = paramsList.ToArray();
 
-            var navigateUrl = string.Empty;
-            if (PortalSettings.Current != null)
+            // Try multiple NavigateURL overloads and pick the variant that does not contain a literal "slug/" in the AbsolutePath.
+            string chosenUrl = null;
+            try
             {
-                navigateUrl = Globals.NavigateURL(urlInfo.TabId, isSuperTab, portalSettings, urlInfo.ControlKey, null,
-                    parameters);
+                string navA = null;
+                if (PortalSettings.Current != null)
+                {
+                    // Original approach (preserves portalSettings and isSuperTab)
+                    navA = Globals.NavigateURL(urlInfo.TabId, isSuperTab, portalSettings, urlInfo.ControlKey, null, parameters);
+                }
+                else
+                {
+                    navA = NavigateUrl(urlInfo.TabId, isSuperTab, portalSettings, urlInfo.ControlKey, parameters);
+                }
+                Logger.Debug("DnnHccUrlResolver - NavigateURL variant A: " + navA);
+
+                string navB = null;
+                try
+                {
+                    // Simpler overload: tabId, controlKey, params
+                    navB = Globals.NavigateURL(urlInfo.TabId, urlInfo.ControlKey, parameters);
+                    Logger.Debug("DnnHccUrlResolver - NavigateURL variant B: " + navB);
+                }
+                catch (MissingMethodException)
+                {
+                    // If the overload isn't available in this DNN version, ignore.
+                    Logger.Debug("DnnHccUrlResolver - variant B overload not available");
+                }
+
+                // Evaluate AbsolutePath for each candidate (prefer one without '/slug/')
+                Uri uriA = null, uriB = null;
+                if (!string.IsNullOrEmpty(navA))
+                {
+                    uriA = new Uri(navA, UriKind.RelativeOrAbsolute);
+                    if (!uriA.IsAbsoluteUri && Factory.HttpContext != null)
+                    {
+                        var req = Factory.HttpContext.Request;
+                        uriA = new Uri(req.Url.Scheme + "://" + req.Url.Host + navA);
+                    }
+                }
+                if (!string.IsNullOrEmpty(navB))
+                {
+                    uriB = new Uri(navB, UriKind.RelativeOrAbsolute);
+                    if (!uriB.IsAbsoluteUri && Factory.HttpContext != null)
+                    {
+                        var req = Factory.HttpContext.Request;
+                        uriB = new Uri(req.Url.Scheme + "://" + req.Url.Host + navB);
+                    }
+                }
+
+                bool aHasSlug = uriA != null && uriA.AbsolutePath.IndexOf("/slug/", StringComparison.OrdinalIgnoreCase) >= 0;
+                bool bHasSlug = uriB != null && uriB.AbsolutePath.IndexOf("/slug/", StringComparison.OrdinalIgnoreCase) >= 0;
+
+                if (uriA != null && !aHasSlug)
+                    chosenUrl = uriA.ToString();
+                else if (uriB != null && !bHasSlug)
+                    chosenUrl = uriB.ToString();
+                else if (uriA != null)
+                    chosenUrl = uriA.ToString();
+                else if (uriB != null)
+                    chosenUrl = uriB.ToString();
             }
-            else
+            catch (Exception ex)
             {
-                navigateUrl = NavigateUrl(urlInfo.TabId, isSuperTab, portalSettings, urlInfo.ControlKey, parameters);
+                Logger.Error(ex);
             }
-            Logger.Debug("DnnHccUrlResolver - NavigateURL result: " + navigateUrl);
-            return navigateUrl;
+
+            if (string.IsNullOrEmpty(chosenUrl))
+            {
+                // Fallback to the basic NavigateURL call if something went wrong above
+                chosenUrl = Globals.NavigateURL(urlInfo.TabId, urlInfo.ControlKey, paramsList.ToArray());
+            }
+
+            Logger.Debug("DnnHccUrlResolver - Chosen NavigateURL: " + chosenUrl);
+            return chosenUrl;
         }
 
         private string NavigateUrl(int tabId, bool isSuperTab, PortalSettings settings, string controlKey,
