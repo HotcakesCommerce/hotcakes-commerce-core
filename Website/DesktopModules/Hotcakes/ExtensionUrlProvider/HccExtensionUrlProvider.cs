@@ -30,6 +30,7 @@ using System.Collections.Specialized;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Urls;
+using DotNetNuke.Instrumentation;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Accounts;
 
@@ -38,6 +39,8 @@ namespace Hotcakes.Modules.ExtensionUrlProvider
     [Serializable]
     public class HccExtensionUrlProvider : DotNetNuke.Entities.Urls.ExtensionUrlProvider
     {
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(HccExtensionUrlProvider));
+
         public override bool AlwaysUsesDnnPagePath(int portalId)
         {
             return false;
@@ -49,18 +52,35 @@ namespace Hotcakes.Modules.ExtensionUrlProvider
             useDnnPagePath = true;
             if (messages == null)
                 messages = new List<string>();
+
+            Logger.Debug(string.Format("HccExtensionUrlProvider.ChangeFriendlyUrl - tabId={0}; path={1}; culture={2}; useDnnPagePath={3}", tab != null ? tab.TabID : -1, friendlyUrlPath ?? "(null)", cultureCode ?? "(null)", useDnnPagePath));
+
+            var store = HccRequestContext.Current != null ? HccRequestContext.Current.CurrentStore : null;
             if (HccRequestContext.Current != null)
+                Logger.Debug(string.Format("HccExtensionUrlProvider.ChangeFriendlyUrl - request context available; storeId={0}", store != null ? store.Id : -1));
+
+            if (store == null && tab != null && friendlyUrlPath != null && friendlyUrlPath.IndexOf("/slug/", StringComparison.OrdinalIgnoreCase) >= 0)
             {
-                var store = HccRequestContext.Current.CurrentStore;
-                if (tab != null && store != null)
-                {
+                var lookupContext = new HccRequestContext();
+                if (!string.IsNullOrWhiteSpace(cultureCode))
+                    lookupContext.MainContentCulture = cultureCode;
+                lookupContext.FallbackContentCulture = string.Empty;
+                var portalSettings = new PortalSettings(tab.PortalID);
+                var accountServices = Factory.CreateService<AccountService>(lookupContext);
+                store = accountServices.GetStoreByUrl(portalSettings.DefaultPortalAlias);
+                Logger.Debug(string.Format("HccExtensionUrlProvider.ChangeFriendlyUrl - ambient context unavailable; portalId={0}; alias={1}; fallback storeId={2}", tab.PortalID, portalSettings.DefaultPortalAlias ?? "(null)", store != null ? store.Id : -1));
+            }
+
+            if (store != null && tab != null)
+            {
                     var urlSettings = store.Settings.Urls;
+                    Logger.Debug(string.Format("HccExtensionUrlProvider.ChangeFriendlyUrl - configured tabs product={0}; category={1}; review={2}; current={3}", urlSettings.ProductTabId, urlSettings.CategoryTabId, urlSettings.ProductReviewTabId, tab.TabID));
                     if (urlSettings.ProductTabId == tab.TabID
                         || urlSettings.CategoryTabId == tab.TabID
                         || urlSettings.ProductReviewTabId == tab.TabID)
                     {
                         var slugParamName = "/slug/";
-                        var slugStart = friendlyUrlPath.IndexOf(slugParamName);
+                        var slugStart = friendlyUrlPath == null ? -1 : friendlyUrlPath.IndexOf(slugParamName, StringComparison.OrdinalIgnoreCase);
                         if (slugStart > -1)
                         {
                             var slugEnd = friendlyUrlPath.IndexOf("/", slugStart + slugParamName.Length);
@@ -78,12 +98,16 @@ namespace Hotcakes.Modules.ExtensionUrlProvider
 
                             if (!string.IsNullOrWhiteSpace(spareArgs))
                                 newUrl += "?" + CreateQueryStringFromParameters(spareArgs.Split('/'), -1).TrimStart('&');
+                            Logger.Debug(string.Format("HccExtensionUrlProvider.ChangeFriendlyUrl - transformed path={0}; result={1}; useDnnPagePath={2}", friendlyUrlPath, newUrl, useDnnPagePath));
                             return newUrl;
                         }
+                        Logger.Debug("HccExtensionUrlProvider.ChangeFriendlyUrl - eligible tab but /slug/ marker was not found; returning null");
                         return null;
                     }
+                    Logger.Debug("HccExtensionUrlProvider.ChangeFriendlyUrl - current tab is not a Hotcakes product/category/review tab; returning null");
                 }
-            }
+            else
+                Logger.Debug("HccExtensionUrlProvider.ChangeFriendlyUrl - tab or store unavailable; returning null");
             return null;
         }
 
@@ -115,6 +139,7 @@ namespace Hotcakes.Modules.ExtensionUrlProvider
 
             var requestedPath = string.Join("/", urlParms);
             requestedPath = EnsureLeadingChar("/", requestedPath);
+            Logger.Debug(string.Format("HccExtensionUrlProvider.TransformFriendlyUrlToQueryString - tabId={0}; portalId={1}; path={2}; culture={3}", tabId, portalId, requestedPath, cultureCode ?? "(null)"));
 
             var context = new HccRequestContext();
             var accountServices = Factory.CreateService<AccountService>(context);
@@ -138,8 +163,13 @@ namespace Hotcakes.Modules.ExtensionUrlProvider
                         result = "slug=" + urlParms[0];
                     }
                     result += CreateQueryStringFromParameters(urlParms, position);
+                    Logger.Debug(string.Format("HccExtensionUrlProvider.TransformFriendlyUrlToQueryString - transformed result={0}; status={1}", result, status));
                 }
+                else
+                    Logger.Debug("HccExtensionUrlProvider.TransformFriendlyUrlToQueryString - tab is not a Hotcakes product/category/review tab");
             }
+            else
+                Logger.Debug("HccExtensionUrlProvider.TransformFriendlyUrlToQueryString - store not found for portal alias");
             return result;
         }
     }
