@@ -34,6 +34,7 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Portals;
+using DotNetNuke.Instrumentation;
 using Hotcakes.Commerce.Accounts;
 using Hotcakes.Commerce.Urls;
 
@@ -50,6 +51,8 @@ namespace Hotcakes.Commerce.Dnn.Mvc
         }
 
         #endregion
+
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(DnnHccUrlResolver));
 
         public string RouteHccUrl(HccRoute route, string actionName, string controllerName, string protocol,
             string hostName, string fragment, RouteValueDictionary routeValues, RouteCollection routeCollection,
@@ -159,19 +162,104 @@ namespace Hotcakes.Commerce.Dnn.Mvc
 
             var portalSettings = CurrentPortalSettings;
             var isSuperTab = Globals.IsHostTab(urlInfo.TabId);
+
+            // Ensure slug param is deterministically positioned: place immediately after 'mid' if present, otherwise first
+            Logger.Debug("DnnHccUrlResolver - params before reposition: " + (paramsList.Count > 0 ? string.Join(";", paramsList) : "(none)"));
+            var slugIndex = paramsList.FindIndex(p => p.StartsWith("slug=", StringComparison.OrdinalIgnoreCase));
+            if (slugIndex >= 0)
+            {
+                var slugParam = paramsList[slugIndex];
+                Logger.Debug("DnnHccUrlResolver - found slug param: " + slugParam);
+                paramsList.RemoveAt(slugIndex);
+                var midIndex = paramsList.FindIndex(p => p.StartsWith("mid=", StringComparison.OrdinalIgnoreCase));
+                if (midIndex >= 0)
+                {
+                    paramsList.Insert(midIndex + 1, slugParam);
+                }
+                else
+                {
+                    paramsList.Insert(0, slugParam);
+                }
+                Logger.Debug("DnnHccUrlResolver - params after reposition: " + string.Join(";", paramsList));
+            }
+
             var parameters = paramsList.ToArray();
 
-            var navigateUrl = string.Empty;
-            if (PortalSettings.Current != null)
+            // Try multiple NavigateURL overloads and pick the variant that does not contain a literal "slug/" in the AbsolutePath.
+            string chosenUrl = null;
+            try
             {
-                navigateUrl = Globals.NavigateURL(urlInfo.TabId, isSuperTab, portalSettings, urlInfo.ControlKey, null,
-                    parameters);
+                string navA = null;
+                if (PortalSettings.Current != null)
+                {
+                    // Original approach (preserves portalSettings and isSuperTab)
+                    navA = Globals.NavigateURL(urlInfo.TabId, isSuperTab, portalSettings, urlInfo.ControlKey, null, parameters);
+                }
+                else
+                {
+                    navA = NavigateUrl(urlInfo.TabId, isSuperTab, portalSettings, urlInfo.ControlKey, parameters);
+                }
+                Logger.Debug("DnnHccUrlResolver - NavigateURL variant A: " + navA);
+
+                string navB = null;
+                try
+                {
+                    // Simpler overload: tabId, controlKey, params
+                    navB = Globals.NavigateURL(urlInfo.TabId, urlInfo.ControlKey, parameters);
+                    Logger.Debug("DnnHccUrlResolver - NavigateURL variant B: " + navB);
+                }
+                catch (MissingMethodException)
+                {
+                    // If the overload isn't available in this DNN version, ignore.
+                    Logger.Debug("DnnHccUrlResolver - variant B overload not available");
+                }
+
+                // Evaluate AbsolutePath for each candidate (prefer one without '/slug/')
+                Uri uriA = null, uriB = null;
+                if (!string.IsNullOrEmpty(navA))
+                {
+                    uriA = new Uri(navA, UriKind.RelativeOrAbsolute);
+                    if (!uriA.IsAbsoluteUri && Factory.HttpContext != null)
+                    {
+                        var req = Factory.HttpContext.Request;
+                        uriA = new Uri(req.Url.Scheme + "://" + req.Url.Host + navA);
+                    }
+                }
+                if (!string.IsNullOrEmpty(navB))
+                {
+                    uriB = new Uri(navB, UriKind.RelativeOrAbsolute);
+                    if (!uriB.IsAbsoluteUri && Factory.HttpContext != null)
+                    {
+                        var req = Factory.HttpContext.Request;
+                        uriB = new Uri(req.Url.Scheme + "://" + req.Url.Host + navB);
+                    }
+                }
+
+                bool aHasSlug = uriA != null && uriA.AbsolutePath.IndexOf("/slug/", StringComparison.OrdinalIgnoreCase) >= 0;
+                bool bHasSlug = uriB != null && uriB.AbsolutePath.IndexOf("/slug/", StringComparison.OrdinalIgnoreCase) >= 0;
+
+                if (uriA != null && !aHasSlug)
+                    chosenUrl = uriA.ToString();
+                else if (uriB != null && !bHasSlug)
+                    chosenUrl = uriB.ToString();
+                else if (uriA != null)
+                    chosenUrl = uriA.ToString();
+                else if (uriB != null)
+                    chosenUrl = uriB.ToString();
             }
-            else
+            catch (Exception ex)
             {
-                navigateUrl = NavigateUrl(urlInfo.TabId, isSuperTab, portalSettings, urlInfo.ControlKey, parameters);
+                Logger.Error(ex);
             }
-            return navigateUrl;
+
+            if (string.IsNullOrEmpty(chosenUrl))
+            {
+                // Fallback to the basic NavigateURL call if something went wrong above
+                chosenUrl = Globals.NavigateURL(urlInfo.TabId, urlInfo.ControlKey, paramsList.ToArray());
+            }
+
+            Logger.Debug("DnnHccUrlResolver - Chosen NavigateURL: " + chosenUrl);
+            return chosenUrl;
         }
 
         private string NavigateUrl(int tabId, bool isSuperTab, PortalSettings settings, string controlKey,
