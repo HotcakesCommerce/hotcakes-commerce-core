@@ -12,7 +12,7 @@
                     <h1>@Model.LocalProduct.ProductName</h1>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-12">
                     @Html.Raw((string)TempData["messages"])
@@ -71,24 +71,54 @@
                 </div>
             }
 
-            @if (Model.LocalProduct.Tabs.Count > 0)
+            @{
+                var tabs = Model.LocalProduct.Tabs
+                    .OrderBy(x => x.SortOrder)
+                    .ToList();
+            }
+
+            @if (tabs.Count > 0)
             {
                 <div class="row">
                     <div class="col-12 mt-3">
-                        <div class="dnnForm hc-product-tabs" id="hcProductTabs" role="navigation">
-                            <ul class="nav nav-tabs list-inline">
-                                @foreach (var t in Model.LocalProduct.Tabs.OrderBy(y => y.SortOrder).Select((item, i) => new { i, item}))
+                        <div class="dnnForm hc-product-tabs" id="hcProductTabs">
+                            <ul class="nav nav-pills nav-fill"
+                                id="infotabs-tabs"
+                                role="tablist">
+
+                                @foreach (var t in tabs.Select((item, i) => new { item, i }))
                                 {
-                                    <li id="li-@t.item.Bvin" @if (t.i == 0) {<text> class="nav-item active"</text> } else {<text> class="nav-item"</text> }>
-                                        <a id="tab-@t.item.Bvin" href="#" data-href="#@("pane-" + t.item.Bvin)" @if (t.i == 0) {<text> class="nav-link active"</text> } else {<text> class="nav-link"</text> }>@t.item.TabTitle</a>
+                                    var paneId = "pane-" + t.item.Bvin;
+                                    var tabId = "tab-" + t.item.Bvin;
+                                    var isActive = t.i == 0;
+
+                                    <li class="nav-item" role="presentation">
+                                        <a id="@tabId"
+                                           class="nav-link @(isActive ? "active" : "")"
+                                           href="#@paneId"
+                                           data-bs-toggle="tab"
+                                           data-bs-target="#@paneId"
+                                           role="tab"
+                                           aria-controls="@paneId"
+                                           aria-selected="@(isActive ? "true" : "false")">
+                                            @t.item.TabTitle
+                                        </a>
                                     </li>
                                 }
                             </ul>
-                            <div class="tab-content">
-                                @foreach (var t in Model.LocalProduct.Tabs.OrderBy(y => y.SortOrder))
+
+                            <div class="tab-content" id="infotabs-content">
+                                @foreach (var t in tabs.Select((item, i) => new { item, i }))
                                 {
-                                    <div id="@("pane-" + t.Bvin)" class="tab-pane fade mt-4">
-                                        @Html.Raw(t.HtmlData)
+                                    var paneId = "pane-" + t.item.Bvin;
+                                    var isActive = t.i == 0;
+
+                                    <div id="@paneId"
+                                         class="tab-pane fade mt-4 @(isActive ? "show active" : "")"
+                                         role="tabpanel"
+                                         aria-labelledby="tab-@t.item.Bvin"
+                                         tabindex="0">
+                                        @Html.Raw(t.item.HtmlData)
                                     </div>
                                 }
                             </div>

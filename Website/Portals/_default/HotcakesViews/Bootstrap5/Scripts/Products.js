@@ -103,6 +103,41 @@ jQuery(function ($) {
         });
     }
 
+    function InitProductTabs() {
+        var $tabs = $('#hcProductTabs');
+
+        if (!$tabs.length) {
+            return;
+        }
+
+        // Remove inline display styles left by the legacy hcTabs plugin.
+        $tabs.find('.tab-content > .tab-pane').each(function () {
+            this.style.removeProperty('display');
+        });
+
+        // Bootstrap 5 uses data-bs-toggle/data-bs-target to manage clicks.
+        $tabs.find('[data-bs-toggle="tab"]').on('click', function (e) {
+            e.preventDefault();
+
+            var targetSelector = $(this).attr('data-bs-target');
+            var target = document.querySelector(targetSelector);
+
+            if (!target) {
+                return;
+            }
+
+            $tabs.find('.nav-link').removeClass('active')
+                .attr('aria-selected', 'false');
+
+            $tabs.find('.tab-pane').removeClass('active show');
+
+            $(this).addClass('active')
+                .attr('aria-selected', 'true');
+
+            $(target).addClass('active show');
+        });
+    }
+
     function Init() {
         $(".inventoryoutofstock").parent().addClass("inventoryoutofstock");
 
@@ -124,7 +159,7 @@ jQuery(function ($) {
 
         EvaluateSelections();
 
-        $("#hcProductTabs").hcTabs();
+        InitProductTabs();
 
         $('#giftcardpredefined').change(function () {
             var $input = $('#GiftCardAmount');
