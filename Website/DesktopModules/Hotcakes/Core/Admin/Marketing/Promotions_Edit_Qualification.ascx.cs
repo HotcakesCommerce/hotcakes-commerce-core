@@ -24,17 +24,22 @@
 
 #endregion
 
-using System;
-using System.Linq;
+using DotNetNuke.Instrumentation;
+using DotNetNuke.Services.Installer.Log;
 using Hotcakes.Commerce.Dnn.Marketing.Qualifications;
 using Hotcakes.Commerce.Marketing;
 using Hotcakes.Commerce.Marketing.PromotionQualifications;
 using Hotcakes.Modules.Core.Admin.AppCode;
+using System;
+using System.Linq;
+using Hotcakes.Shipping.FedEx.FedExRateServices;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing
 {
     public partial class Promotions_Edit_Qualification : HccUserControl
     {
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(Promotions_Edit_Qualification));
+
         #region Event Handlers
 
         protected override void OnLoad(EventArgs e)
@@ -47,77 +52,77 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         public void LoadQualification(Promotion p, IPromotionQualification qualif)
         {
-                PromotionId = p.Id;
-                QualificationId = qualif.Id;
-                mvQualifications.Visible = true;
+            PromotionId = p.Id;
+            QualificationId = qualif.Id;
+            mvQualifications.Visible = true;
 
-                switch (qualif.TypeId.ToString().ToUpper())
-                {
-                    case PromotionQualificationBase.TypeIdAnyProduct:
-                        mvQualifications.Visible = false;
-                        break;
-                    case PromotionQualificationBase.TypeIdProductBvin:
-                        mvQualifications.SetActiveView(viewProductBvin);
-                        break;
-                    case PromotionQualificationBase.TypeIdProductCategory:
-                        mvQualifications.SetActiveView(viewProductCategory);
-                        break;
-                    case PromotionQualificationBase.TypeIdProductType:
-                        mvQualifications.SetActiveView(viewProductType);
-                        break;
-                    case PromotionQualificationBase.TypeIdOrderHasCoupon:
-                        mvQualifications.SetActiveView(viewOrderHasCoupon);
-                        break;
-                    case PromotionQualificationBase.TypeIdAnyOrder:
-                        ucMessageBox.ShowInformation("This qualification does not have any configuration options.");
-                        mvQualifications.Visible = false;
-                        break;
-                    case PromotionQualificationBase.TypeIdOrderSubTotalIs:
-                        mvQualifications.SetActiveView(viewOrderSubTotalIs);
-                        break;
-                    case PromotionQualificationBase.TypeIdOrderHasProducts:
-                        mvQualifications.SetActiveView(viewOrderHasProduct);
-                        break;
-                    case PromotionQualificationBase.TypeIdUserIs:
-                        mvQualifications.SetActiveView(viewUserId);
-                        break;
-                    case PromotionQualificationBase.TypeIdUserIsInGroup:
-                        mvQualifications.SetActiveView(viewUserIsInGroup);
-                        break;
-                    case UserIsInRole.TypeIdString:
-                        mvQualifications.SetActiveView(viewUserIsInRole);
-                        break;
-                    case PromotionQualificationBase.TypeIdAnyShippingMethod:
-                        ucMessageBox.ShowInformation("Any shipping method does not have any configuration options.");
-                        mvQualifications.Visible = false;
-                        break;
-                    case PromotionQualificationBase.TypeIdShippingMethodIs:
-                        mvQualifications.SetActiveView(viewShippingMethodIs);
-                        break;
-                    case PromotionQualificationBase.TypeIdLineItemCategory:
-                        mvQualifications.SetActiveView(viewLineItemCategory);
-                        break;
-                    case AffiliateApproved.TypeIdString:
-                        mvQualifications.SetActiveView(viewAffiliateApproved);
-                        break;
-                    case LineItemIsProduct.TypeIdString:
-                        mvQualifications.SetActiveView(viewLineItemIs);
-                        break;
-                    case SumOrCountOfProducts.TypeIdString:
-                        mvQualifications.SetActiveView(viewProductsSumCount);
-                        break;
-                    case ProductTypeIs.TypeIdString:
-                        mvQualifications.SetActiveView(viewProductTypeIsNot);
-                        break;
-                    case OrderHasNotProducts.TypeIdString:
-                        mvQualifications.SetActiveView(viewProductIsNot);
-                        break;
-                    case VendorOrManufacturerIs.TypeIdString:
-                        mvQualifications.SetActiveView(viewVendorManufacturer);
-                        break;
-                }
+            switch (qualif.TypeId.ToString().ToUpper())
+            {
+                case PromotionQualificationBase.TypeIdAnyProduct:
+                    mvQualifications.Visible = false;
+                    break;
+                case PromotionQualificationBase.TypeIdProductBvin:
+                    mvQualifications.SetActiveView(viewProductBvin);
+                    break;
+                case PromotionQualificationBase.TypeIdProductCategory:
+                    mvQualifications.SetActiveView(viewProductCategory);
+                    break;
+                case PromotionQualificationBase.TypeIdProductType:
+                    mvQualifications.SetActiveView(viewProductType);
+                    break;
+                case PromotionQualificationBase.TypeIdOrderHasCoupon:
+                    mvQualifications.SetActiveView(viewOrderHasCoupon);
+                    break;
+                case PromotionQualificationBase.TypeIdAnyOrder:
+                    ucMessageBox.ShowInformation("This qualification does not have any configuration options.");
+                    mvQualifications.Visible = false;
+                    break;
+                case PromotionQualificationBase.TypeIdOrderSubTotalIs:
+                    mvQualifications.SetActiveView(viewOrderSubTotalIs);
+                    break;
+                case PromotionQualificationBase.TypeIdOrderHasProducts:
+                    mvQualifications.SetActiveView(viewOrderHasProduct);
+                    break;
+                case PromotionQualificationBase.TypeIdUserIs:
+                    mvQualifications.SetActiveView(viewUserId);
+                    break;
+                case PromotionQualificationBase.TypeIdUserIsInGroup:
+                    mvQualifications.SetActiveView(viewUserIsInGroup);
+                    break;
+                case UserIsInRole.TypeIdString:
+                    mvQualifications.SetActiveView(viewUserIsInRole);
+                    break;
+                case PromotionQualificationBase.TypeIdAnyShippingMethod:
+                    ucMessageBox.ShowInformation("Any shipping method does not have any configuration options.");
+                    mvQualifications.Visible = false;
+                    break;
+                case PromotionQualificationBase.TypeIdShippingMethodIs:
+                    mvQualifications.SetActiveView(viewShippingMethodIs);
+                    break;
+                case PromotionQualificationBase.TypeIdLineItemCategory:
+                    mvQualifications.SetActiveView(viewLineItemCategory);
+                    break;
+                case AffiliateApproved.TypeIdString:
+                    mvQualifications.SetActiveView(viewAffiliateApproved);
+                    break;
+                case LineItemIsProduct.TypeIdString:
+                    mvQualifications.SetActiveView(viewLineItemIs);
+                    break;
+                case SumOrCountOfProducts.TypeIdString:
+                    mvQualifications.SetActiveView(viewProductsSumCount);
+                    break;
+                case ProductTypeIs.TypeIdString:
+                    mvQualifications.SetActiveView(viewProductTypeIsNot);
+                    break;
+                case OrderHasNotProducts.TypeIdString:
+                    mvQualifications.SetActiveView(viewProductIsNot);
+                    break;
+                case VendorOrManufacturerIs.TypeIdString:
+                    mvQualifications.SetActiveView(viewVendorManufacturer);
+                    break;
+            }
 
-                LoadQualificationEditor(true);
+            LoadQualificationEditor(true);
         }
 
         public bool SaveQualification()
@@ -136,13 +141,13 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         protected long PromotionId
         {
-            get { return (long?) ViewState["PromotionId"] ?? -1; }
+            get { return (long?)ViewState["PromotionId"] ?? -1; }
             set { ViewState["PromotionId"] = value; }
         }
 
         protected long QualificationId
         {
-            get { return (long?) ViewState["QualificationId"] ?? -1; }
+            get { return (long?)ViewState["QualificationId"] ?? -1; }
             set { ViewState["QualificationId"] = value; }
         }
 
@@ -154,29 +159,20 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
         {
             var editor = GetCurrentEditor();
 
-            if (editor == null)
+            if (editor != null)
             {
-                return;
-            }
+                editor.Promotion = GetCurrentPromotion();
+                editor.Qualification = editor.Promotion.GetQualification(QualificationId);
 
-            var promotion = GetCurrentPromotion();
-            editor.Promotion = promotion;
-
-            editor.Qualification = promotion != null ? promotion.GetQualification(QualificationId) : null;
-
-            if (loadQualif && editor.Qualification != null)
-            {
-                editor.LoadQualification();
+                if (loadQualif)
+                {
+                    editor.LoadQualification();
+                }
             }
         }
 
         private BaseQualificationControl GetCurrentEditor()
         {
-            if (mvQualifications == null)
-            {
-                return null;
-            }
-
             var view = mvQualifications.GetActiveView();
             return view != null ? view.Controls.OfType<BaseQualificationControl>().FirstOrDefault() : null;
         }

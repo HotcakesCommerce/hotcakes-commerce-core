@@ -169,12 +169,12 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         protected void SetSetting(string key, List<string> ids)
         {
-            SetSetting(key, ids ?? new List<string>());
+            SetSetting(key, string.Join(",", ids ?? new List<string>()));
         }
 
         protected void SetSetting(string key, List<int> ids)
         {
-            SetSetting(key, ids ?? new List<int>());
+            SetSetting(key, string.Join(",", ids));
         }
 
         protected void SetSetting(string key, string value)

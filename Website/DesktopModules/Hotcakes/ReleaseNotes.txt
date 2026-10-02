@@ -4,7 +4,7 @@
 	.muy-importante { color:red;font-weight:bold; }
 </style>
 <div class="uv-install-wrapper">
-	<h1>Hotcakes Commerce: Version 03.12.01</h1>
+	<h1>Hotcakes Commerce: Version 03.12.02</h1>
 
 	<p class="muy-importante">The release notes continue after the Sponsors and Contributors below.</p>
 	
@@ -21,27 +21,18 @@
 	<h3>Contributors</h3>
 	<p>THANK YOU to the following community members for participating in this release!</p>
 	<ul>
-		<li>Will Strohl, <a href="https://upendoventures.com/What/Hotcakes-Commerce" target="_blank">Upendo Ventures</a></li>
-	</ul>
-
-	<h3>Partners</h3>
-	<p>THANK YOU to the following partners for participating in this release!</p>
-	<ul>
-	  <li>
-		<a href="https://mmmcommerce.com/Partners/Partner-Detail/id/2106" target="_blank" rel="noopener">Upendo Ventures</a>
-	  </li>
+		<li>Will Strohl, <a href="https://upendoventures.com/what/hotcakes-commerce" target="_blank">Upendo Ventures</a></li>
 	</ul>
 	
 	<h3><strong>Release Note Prefixes</strong></h3>
 	<p>The following prefixes are defined as:</p>
 	<ul>
-		<li><strong>SI:</strong> Support Inquiry - This issue was reported by a <a href="https://upendoventures.com/Support" target="_blank">support customer</a> and, as such, was prioritized above all other tasks.</li>
-		<li><strong>CI:</strong> Community Inquiry - This issue was reported by a community member in the <a href="https://mmmcommerce.com/Forums" target="_blanK">Hotcakes Commerce community forums</a>.</li>
+		<li><strong>SI:</strong> Support Inquiry - This issue was reported by a <a href="https://runsonupendo.com/services" target="_blank">support customer</a> and, as such, was prioritized above all other tasks.</li>
 	</ul>
 	
 	<h3><strong>Enhancements</strong></h3>
 	<ul>
-		<li><strong>Diagnostic Logging for URLs</strong> - Adds debugging details to the local Log4NET file when enabled. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/576" target="_blank">Issue 576</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
+		<li><strong>ASP.NET MVC Dependency Configuration</strong> - Updates the Hotcakes module dependency and deployment configuration to improve consistent MVC and Razor assembly resolution during installation and upgrades. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/581" target="_blank">Issue 581</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a></li>
 		<!--
 		<li><strong></strong> - . (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/" target="_blank">Issue </a>), Thanks <a href="https://github.com/" target="_blank">@</a>!</li>
 		<li>None at this time.</li>
@@ -50,7 +41,8 @@
 	
 	<h3><strong>Bugs Fixes &amp; Maintenance Updates</strong></h3>
 	<ul>
-		<li><strong>Removes `/slug` from URLs</strong> - Resolves DNN SEO settings that inserts `/slug` into the output URLs. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issue/575" target="_blank">Issue 575</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a>!</li>
+		<li><strong>Promotion Actions Editor Loading</strong> - Ensures the Promotion Actions window activates and loads the intended action-specific editor view, including the selected action configuration. (<a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/580" target="_blank">Issue 580</a>, <a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/582" target="_blank">Issue 582</a>), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a>!</li>
+		<li><strong>GA Release Prep</strong> - Prepared and built the software release for general availability. (No Issue), Thanks <a href="https://github.com/WillStrohl" target="_blank">@WillStrohl</a>!</li>
 		<!--
 		<li><a href="https://github.com/HotcakesCommerce/hotcakes-commerce-core/issues/" target="_blank">Issue </a> - . Thanks <a href="https://github.com/" target="_blank">@</a></li>
 		<li>(no issue) - .</li>
