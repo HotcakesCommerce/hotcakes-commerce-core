@@ -24,16 +24,19 @@
 
 #endregion
 
-using System;
-using System.Linq;
+using DotNetNuke.Instrumentation;
 using Hotcakes.Commerce.Marketing;
 using Hotcakes.Commerce.Marketing.PromotionActions;
 using Hotcakes.Modules.Core.Admin.AppCode;
+using System;
+using System.Linq;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing
 {
     public partial class Promotions_Edit_Actions : HccUserControl
     {
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(Promotions_Edit_Actions));
+
         #region Event Handlers
 
         protected override void OnLoad(EventArgs e)
@@ -64,21 +67,14 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         public void LoadAction(Promotion prom, IPromotionAction action)
         {
-            if (prom == null || action == null)
-            {
-                if (mvActions != null) mvActions.Visible = false;
-                return;
-            }
-
             PromotionId = prom.Id;
             ActionId = action.Id;
 
-            var typeId = action.TypeId.ToString().ToUpperInvariant();
+            LogDebugMessage($"Loading action editor for PromotionId={PromotionId}, ActionId={ActionId}", Logger);
 
-            if (mvActions == null)
-            {
-                return;
-            }
+            var typeId = action.TypeId.ToString().ToLowerInvariant();
+
+            LogDebugMessage($"Action TypeId={typeId}", Logger);
 
             switch (typeId)
             {
@@ -106,10 +102,6 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
                 case CategoryDiscountAdjustment.TypeIdString:
                     mvActions.SetActiveView(viewCategoryDiscount);
                     break;
-                default:
-                    // If type is unknown, hide editor
-                    mvActions.Visible = false;
-                    break;
             }
 
             LoadActionEditor(true);
@@ -134,30 +126,23 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
         private void LoadActionEditor(bool loadAction)
         {
             var editor = GetCurrentActionEditor();
+            LogDebugMessage($"Loading action editor for PromotionId={PromotionId}, ActionId={ActionId}", Logger);
 
-            if (editor == null)
+            if (editor != null)
             {
-                return;
-            }
+                editor.Promotion = GetCurrentPromotion();
+                editor.Action = editor.Promotion.GetAction(ActionId);
+                LogDebugMessage($"Loaded action editor for PromotionId={PromotionId}, ActionId={ActionId}", Logger);
 
-            var promotion = GetCurrentPromotion();
-            editor.Promotion = promotion;
-
-            editor.Action = promotion != null ? promotion.GetAction(ActionId) : null;
-
-            if (loadAction && editor.Action != null)
-            {
-                editor.LoadAction();
+                if (loadAction)
+                {
+                    editor.LoadAction();
+                }
             }
         }
 
         private BaseActionControl GetCurrentActionEditor()
         {
-            if (mvActions == null)
-            {
-                return null;
-            }
-
             var view = mvActions.GetActiveView();
             return view != null ? view.Controls.OfType<BaseActionControl>().FirstOrDefault() : null;
         }

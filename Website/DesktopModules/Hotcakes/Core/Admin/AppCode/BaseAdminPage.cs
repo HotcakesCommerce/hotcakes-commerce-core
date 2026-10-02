@@ -24,6 +24,7 @@
 
 #endregion
 
+using DotNetNuke.Instrumentation;
 using System;
 using System.Collections;
 using System.Text.RegularExpressions;
@@ -476,5 +477,24 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
         }
 
         #endregion
+
+        protected void LogError(Exception ex, ILog Logger)
+        {
+            if (ex == null) return;
+
+            Logger.Error(ex.Message, ex);
+            if (ex.InnerException != null)
+            {
+                LogError(ex.InnerException, Logger);
+            }
+        }
+
+        protected void LogDebugMessage(string message, ILog Logger, Exception ex = null)
+        {
+            if (string.IsNullOrEmpty(message)) return;
+            if (!Logger.IsDebugEnabled) return;
+
+            Logger.Debug(!string.IsNullOrEmpty(message) ? message : ex.Message, ex);
+        }
     }
 }

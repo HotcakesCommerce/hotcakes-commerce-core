@@ -24,9 +24,7 @@
 
 #endregion
 
-using System;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using DotNetNuke.Instrumentation;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Dnn.Marketing.Qualifications;
 using Hotcakes.Commerce.Marketing;
@@ -36,11 +34,15 @@ using Hotcakes.Commerce.Membership;
 using Hotcakes.Commerce.Utilities;
 using Hotcakes.Common.Dnn;
 using Hotcakes.Modules.Core.Admin.AppCode;
+using System;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing
 {
     public partial class Promotions_Edit : BaseAdminPage
     {
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(Promotions_Edit));
         private const string DATEFORMAT = "MM/dd/yyyy";
 
         #region Fields
@@ -72,12 +74,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
             btnCloseQualificationEditor.Click += btnCloseQualificationEditor_Click;
             btnCloseActionEditor.Click += btnCloseActionEditor_Click;
-
             _currPromotion = GetCurrentPromotion();
-            if (_currPromotion != null)
-            {
-                PageTitle = Localization.GetString("EditPromotion_" + _currPromotion.Mode);
-            }
+            PageTitle = Localization.GetString("EditPromotion_" + _currPromotion.Mode);
         }
 
         protected override void OnLoad(EventArgs e)
@@ -87,46 +85,33 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
             if (!IsPostBack)
             {
                 lnkBack.NavigateUrl = BackUrl();
-                if (_currPromotion != null)
-                {
-                    PopulateLists(_currPromotion.Mode);
-                }
+                PopulateLists(_currPromotion.Mode);
                 gvActions.Attributes.Add("style", "word-break:break-all;word-wrap:break-word");
             }
         }
 
         protected override void OnPreRender(EventArgs e)
         {
-            chkDoNotCombine.Visible = _currPromotion != null && _currPromotion.Mode != PromotionType.Affiliate;
+            chkDoNotCombine.Visible = _currPromotion.Mode != PromotionType.Affiliate;
 
             base.OnPreRender(e);
         }
 
         private void gvActions_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (e.Keys != null && e.Keys.Count > 0 && e.Keys[0] != null)
-            {
-                var id = (long) e.Keys[0];
-                DeleteAction(id);
-            }
+            var id = (long)e.Keys[0];
+            DeleteAction(id);
         }
 
         private void gvActions_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            if (gvActions.DataKeys != null && e.NewEditIndex >= 0 && e.NewEditIndex < gvActions.DataKeys.Count)
-            {
-                var key = gvActions.DataKeys[e.NewEditIndex].Value;
-                if (key != null)
-                {
-                    var id = (long) key;
-                    ShowActionEditor(id, 1050);
-                }
-            }
+            var id = (long)gvActions.DataKeys[e.NewEditIndex].Value;
+            ShowActionEditor(id, 1050);
         }
 
         protected void gvActions_OnRowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.Header && e.Row.Cells.Count > 0)
+            if (e.Row.RowType == DataControlRowType.Header)
             {
                 e.Row.Cells[0].Text = Localization.GetString("Actions");
             }
@@ -134,29 +119,19 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         private void gvQualifications_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (e.Keys != null && e.Keys.Count > 0 && e.Keys[0] != null)
-            {
-                var id = (long) e.Keys[0];
-                DeleteQualification(id);
-            }
+            var id = (long)e.Keys[0];
+            DeleteQualification(id);
         }
 
         private void gvQualifications_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            if (gvQualifications.DataKeys != null && e.NewEditIndex >= 0 && e.NewEditIndex < gvQualifications.DataKeys.Count)
-            {
-                var key = gvQualifications.DataKeys[e.NewEditIndex].Value;
-                if (key != null)
-                {
-                    var id = (long) key;
-                    ShowQualificationEditor(id);
-                }
-            }
+            var id = (long)gvQualifications.DataKeys[e.NewEditIndex].Value;
+            ShowQualificationEditor(id);
         }
 
         protected void gvQualifications_OnRowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.Header && e.Row.Cells.Count > 0)
+            if (e.Row.RowType == DataControlRowType.Header)
             {
                 e.Row.Cells[0].Text = Localization.GetString("Qualifications");
             }
@@ -175,37 +150,34 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
         protected void btnNewQualification_Click(object sender, EventArgs e)
         {
             var p = _currPromotion;
-            if (p == null || _promFactory == null) return;
+            if (p == null) return;
 
             var newid = lstNewQualification.SelectedValue;
-            if (Guid.TryParse(newid, out var newGuid))
+            var pq = _promFactory.CreateQualification(new Guid(newid));
+
+            p.AddQualification(pq);
+
+            HccApp.MarketingServices.Promotions.Update(p);
+
+            if (pq.HasOptions)
             {
-                var pq = _promFactory.CreateQualification(newGuid);
-                p.AddQualification(pq);
-
-                HccApp.MarketingServices.Promotions.Update(p);
-
-                if (pq.HasOptions)
-                {
-                    ShowQualificationEditor(pq.Id);
-                }
+                ShowQualificationEditor(pq.Id);
             }
         }
 
         protected void btnNewAction_Click(object sender, EventArgs e)
         {
+            LogDebugMessage("Called btnNewAction_Click", Logger);
+
             var p = _currPromotion;
-            if (p == null || _promFactory == null) return;
+            if (p == null) return;
 
             var newid = lstNewAction.SelectedValue;
-            if (Guid.TryParse(newid, out var newGuid))
-            {
-                var pa = _promFactory.CreateAction(newGuid);
-                p.AddAction(pa);
+            var pa = _promFactory.CreateAction(new Guid(newid));
+            p.AddAction(pa);
 
-                HccApp.MarketingServices.Promotions.Update(p);
-                ShowActionEditor(pa.Id, 1050);
-            }
+            HccApp.MarketingServices.Promotions.Update(p);
+            ShowActionEditor(pa.Id, 1050);
         }
 
         protected void btnSaveQualification_Click(object sender, EventArgs e)
@@ -242,20 +214,16 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         protected void lnkDelete_OnPreRender(object sender, EventArgs e)
         {
-            if (sender is LinkButton link)
-            {
-                link.Text = Localization.GetString("Delete");
-                link.OnClientClick = string.Concat("return hcConfirm(event, '", Localization.GetString("ConfirmDelete"),
-                    "');");
-            }
+            var link = (LinkButton)sender;
+            link.Text = Localization.GetString("Delete");
+            link.OnClientClick = string.Concat("return hcConfirm(event, '", Localization.GetString("ConfirmDelete"),
+                "');");
         }
 
         protected void lnkEdit_OnPreRender(object sender, EventArgs e)
         {
-            if (sender is LinkButton link)
-            {
-                link.Text = Localization.GetString("Edit");
-            }
+            var link = (LinkButton)sender;
+            link.Text = Localization.GetString("Edit");
         }
 
         #endregion
@@ -274,25 +242,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
                 txtCustomerDescription.Text = string.IsNullOrEmpty(p.CustomerDescription)
                     ? p.Name + " Description "
                     : p.CustomerDescription;
-
-                if (DateTime.TryParse(radDateStart.Text?.Trim(), out var parsedStart))
-                {
-                    radDateStart.Text = DateHelper.ConvertUtcToStoreTime(HccApp, p.StartDateUtc).ToString(DATEFORMAT);
-                }
-                else
-                {
-                    // show existing start date if present
-                    radDateStart.Text = DateHelper.ConvertUtcToStoreTime(HccApp, p.StartDateUtc).ToString(DATEFORMAT);
-                }
-
-                if (DateTime.TryParse(radDateEnd.Text?.Trim(), out var parsedEnd))
-                {
-                    radDateEnd.Text = DateHelper.ConvertUtcToStoreTime(HccApp, p.EndDateUtc).ToString(DATEFORMAT);
-                }
-                else
-                {
-                    radDateEnd.Text = DateHelper.ConvertUtcToStoreTime(HccApp, p.EndDateUtc).ToString(DATEFORMAT);
-                }
+                radDateStart.Text = DateHelper.ConvertUtcToStoreTime(HccApp, p.StartDateUtc).ToString(DATEFORMAT);
+                radDateEnd.Text = DateHelper.ConvertUtcToStoreTime(HccApp, p.EndDateUtc).ToString(DATEFORMAT);
 
                 gvQualifications.DataSource = p.Qualifications;
                 gvQualifications.DataBind();
@@ -305,8 +256,6 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
         protected string GetQualificationDescription(IDataItemContainer cont)
         {
             var q = cont.DataItem as IPromotionQualification;
-            if (q == null) return string.Empty;
-
             var desc = q.FriendlyDescription(HccApp);
 
             if (q.ProcessingCost == RelativeProcessingCost.Higher ||
@@ -321,13 +270,13 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
         protected string GetActionDescription(IDataItemContainer cont)
         {
             var a = cont.DataItem as IPromotionAction;
-            return a != null ? a.FriendlyDescription(HccApp) : string.Empty;
+            return a.FriendlyDescription(HccApp);
         }
 
         protected bool HasQualificationOptions(IDataItemContainer cont)
         {
             var q = cont.DataItem as IPromotionQualification;
-            return q != null && q.HasOptions;
+            return q.HasOptions;
         }
 
         // Qualifiers and Action Methods
@@ -448,21 +397,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
             p.DoNotCombine = chkDoNotCombine.Checked;
             p.Name = txtName.Text.Trim();
             p.CustomerDescription = txtCustomerDescription.Text.Trim();
-
-            if (!DateTime.TryParse(radDateStart.Text?.Trim(), out var startDate))
-            {
-                ucMessageBox.ShowWarning(Localization.GetString("InvalidDateFormat.Text"));
-                return false;
-            }
-
-            if (!DateTime.TryParse(radDateEnd.Text?.Trim(), out var endDate))
-            {
-                ucMessageBox.ShowWarning(Localization.GetString("InvalidDateFormat.Text"));
-                return false;
-            }
-
-            p.StartDateUtc = ConvertStartDateToUtc(startDate);
-            p.EndDateUtc = ConvertStartDateToUtc(endDate);
+            p.StartDateUtc = ConvertStartDateToUtc(DateTime.Parse(radDateStart.Text.Trim()));
+            p.EndDateUtc = ConvertStartDateToUtc(DateTime.Parse(radDateEnd.Text.Trim()));
 
             result = HccApp.MarketingServices.Promotions.Update(p);
 
@@ -494,8 +430,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         private void ShowQualificationEditor(long id)
         {
-            if (_currPromotion == null) return;
-
+            LogDebugMessage("Called ShowQualificationEditor", Logger);
             var qualif = _currPromotion.GetQualification(id);
             Promotions_Edit_Qualification1.LoadQualification(_currPromotion, qualif);
             pnlEditQualification.Visible = true;
@@ -512,8 +447,6 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         private void ShowActionEditor(long id, int width = 500)
         {
-            if (_currPromotion == null) return;
-
             var action = _currPromotion.GetAction(id);
             Promotions_Edit_Actions1.LoadAction(_currPromotion, action);
             pnlEditAction.Visible = true;
@@ -536,8 +469,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         private string BackUrl()
         {
-            var page = Request.QueryString["page"] ?? string.Empty;
-            return "promotions.aspx?page=" + page;
+            return "promotions.aspx?page=" + Request.QueryString["page"];
         }
 
         private Promotion GetCurrentPromotion()
