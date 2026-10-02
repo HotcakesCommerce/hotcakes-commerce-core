@@ -64,8 +64,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
             if (normalized.Count == 0) return;
 
-            var combined = existing.Concat(normalized).ToList();
-            AddSettingItems("products", combined);
+            AddSettingItems("products", normalized);
         }
 
         public void RemoveProductId(string bvin)
