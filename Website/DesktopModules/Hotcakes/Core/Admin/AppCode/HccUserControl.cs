@@ -26,6 +26,7 @@
 
 using System;
 using System.Web.UI;
+using DotNetNuke.Instrumentation;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Globalization;
 
@@ -67,6 +68,25 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             Localization = Factory.Instance.CreateLocalizationHelper(LocalResourceFile);
 
             base.OnInit(e);
+        }
+        
+        protected void LogError(Exception ex, ILog Logger)
+        {
+            if (ex == null) return;
+
+            Logger.Error(ex.Message, ex);
+            if (ex.InnerException != null)
+            {
+                LogError(ex.InnerException, Logger);
+            }
+        }
+
+        protected void LogDebugMessage(string message, ILog Logger, Exception ex = null)
+        {
+            if (string.IsNullOrEmpty(message)) return;
+            if (!Logger.IsDebugEnabled) return;
+
+            Logger.Debug(!string.IsNullOrEmpty(message) ? message : ex.Message, ex);
         }
     }
 }

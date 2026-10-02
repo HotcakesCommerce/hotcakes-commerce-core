@@ -28,7 +28,7 @@
         (function () {
             try {
                 var img = new Image();
-                img.src = '//mmmcommerce.com/Portals/0/images/spacer.gif';
+                img.src = '//runsonupendo.com/Portals/0/images/spacer.gif';
             } catch (e) {
                 // Fail silently
             }
