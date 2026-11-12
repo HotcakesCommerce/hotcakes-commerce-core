@@ -46,6 +46,7 @@ using Hotcakes.Modules.Core.Controllers.Shared;
 using Hotcakes.Modules.Core.Integration;
 using Hotcakes.Modules.Core.Models;
 using Hotcakes.Web.Validation;
+using Newtonsoft.Json;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
@@ -441,6 +442,7 @@ namespace Hotcakes.Modules.Core.Controllers
             ViewBag.Avg = CalculateAverageRating(model.LocalProduct.ReviewsApproved);
 
             SetPageMetaData(model.LocalProduct);
+            RenderProductSeoMetadata(model);
             RegisterSocialFunctionality(model);
         }
 
@@ -500,7 +502,6 @@ namespace Hotcakes.Modules.Core.Controllers
 
                 var sb = new StringBuilder();
 
-                sb.AppendFormat(Constants.TAG_CANONICAL, canonicalUrl);
                 sb.AppendFormat(Constants.TAG_OGTITLE, PageTitle);
                 sb.Append(Constants.TAG_OGTYPE);
                 sb.AppendFormat(Constants.TAG_OGURL, ViewBag.CurrentUrl);
@@ -527,6 +528,131 @@ namespace Hotcakes.Modules.Core.Controllers
 
                 RenderToHead("FaceBookMetaTags", sb.ToString());
             }
+        }
+
+        private void RenderProductSeoMetadata(ProductPageViewModel model)
+        {
+            var product = model.LocalProduct;
+            var canonicalUrl = UrlRewriter.BuildUrlForProduct(product);
+
+            RenderToHead("HccCanonical", string.Format(Constants.TAG_CANONICAL, canonicalUrl));
+
+            var productData = new Dictionary<string, object>
+            {
+                {"@context", "https://schema.org"},
+                {"@type", "Product"},
+                {"name", product.ProductName},
+                {"url", canonicalUrl},
+                {"sku", product.Sku}
+            };
+
+            var description = product.MetaDescription;
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                description = Regex.Replace(product.LongDescription ?? string.Empty, "<.*?>", string.Empty).Trim();
+            }
+
+            if (!string.IsNullOrWhiteSpace(description))
+                productData["description"] = description;
+
+            var images = model.AlternateImageUrls
+                .Select(x => x.MediumlUrl)
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .Distinct()
+                .ToList();
+            if (images.Count == 0 && !string.IsNullOrWhiteSpace(model.ImageUrls.MediumlUrl))
+                images.Add(model.ImageUrls.MediumlUrl);
+            if (images.Count > 0)
+                productData["image"] = images;
+
+            if (!string.IsNullOrWhiteSpace(model.ManufacturerName))
+            {
+                productData["brand"] = new Dictionary<string, object>
+                {
+                    {"@type", "Brand"},
+                    {"name", model.ManufacturerName}
+                };
+            }
+
+            if (string.IsNullOrWhiteSpace(product.SitePriceOverrideText))
+            {
+                var currency = HccApp.GlobalizationServices.Countries.FindAllForCurrency()
+                    .FirstOrDefault(c => c.CultureCode == HccApp.CurrentStore.Settings.CurrencyCultureCode);
+
+                if (currency != null)
+                {
+                    productData["offers"] = new Dictionary<string, object>
+                    {
+                        {"@type", "Offer"},
+                        {"url", canonicalUrl},
+                        {"price", product.SitePrice.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)},
+                        {"priceCurrency", currency.IsoAlpha3},
+                        {"availability", model.IsAvailableForSale ? "https://schema.org/InStock" : "https://schema.org/OutOfStock"},
+                        {"itemCondition", "https://schema.org/NewCondition"}
+                    };
+                }
+            }
+
+            var reviews = product.ReviewsApproved ?? new List<ProductReview>();
+            if (reviews.Count > 0)
+            {
+                productData["aggregateRating"] = new Dictionary<string, object>
+                {
+                    {"@type", "AggregateRating"},
+                    {"ratingValue", reviews.Average(x => (int) x.Rating).ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)},
+                    {"reviewCount", reviews.Count},
+                    {"bestRating", 5},
+                    {"worstRating", 1}
+                };
+            }
+
+            RenderJsonLd("HccProductStructuredData", productData);
+
+            var breadcrumbItems = new List<Dictionary<string, object>>();
+            AddBreadcrumbItem(breadcrumbItems, 1, ViewBag.StoreName ?? "Home", HccApp.StoreUrl(false, true));
+
+            var categories = HccApp.CatalogServices.FindCategoriesForProduct(product.Bvin);
+            if (categories.Count > 0)
+            {
+                var trail = Category.BuildTrailToRoot(categories[0].Bvin, HccApp.CatalogServices.Categories);
+                if (trail != null)
+                {
+                    foreach (var category in trail)
+                    {
+                        AddBreadcrumbItem(breadcrumbItems, breadcrumbItems.Count + 1, category.Name,
+                            UrlRewriter.BuildUrlForCategory(category));
+                    }
+                }
+            }
+
+            AddBreadcrumbItem(breadcrumbItems, breadcrumbItems.Count + 1, product.ProductName, canonicalUrl);
+            RenderJsonLd("HccProductBreadcrumbStructuredData", new Dictionary<string, object>
+            {
+                {"@context", "https://schema.org"},
+                {"@type", "BreadcrumbList"},
+                {"itemListElement", breadcrumbItems}
+            });
+        }
+
+        private void AddBreadcrumbItem(List<Dictionary<string, object>> items, int position, string name, string url)
+        {
+            items.Add(new Dictionary<string, object>
+            {
+                {"@type", "ListItem"},
+                {"position", position},
+                {"name", name},
+                {"item", url}
+            });
+        }
+
+        private void RenderJsonLd(string key, object data)
+        {
+            var settings = new JsonSerializerSettings
+            {
+                StringEscapeHandling = StringEscapeHandling.EscapeHtml
+            };
+            var json = JsonConvert.SerializeObject(data, settings);
+            RenderToHead(key, "<script type=\"application/ld+json\">" + json + "</script>");
         }
 
         private void SetPageMetaData(Product prod)
