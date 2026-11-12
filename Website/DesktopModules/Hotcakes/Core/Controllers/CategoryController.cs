@@ -132,6 +132,8 @@ namespace Hotcakes.Modules.Core.Controllers
                 model.SortSelectList = LoadSortSelectList(model.LocalCategory, GetSort(model.LocalCategory), true);
             }
 
+            RenderCategorySeoMetadata(model);
+
             if (AuthorizedToEditCatalog())
             {
                 if (!string.IsNullOrEmpty(model.LocalCategory.Bvin))
@@ -251,7 +253,6 @@ namespace Hotcakes.Modules.Core.Controllers
 
                 var sb = new StringBuilder();
 
-                sb.AppendFormat(Constants.TAG_CANONICAL, canonicalUrl);
                 sb.AppendFormat(Constants.TAG_OGTITLE, PageTitle);
                 sb.Append(Constants.TAG_OGTYPE);
                 sb.AppendFormat(Constants.TAG_OGURL, canonicalUrl);
@@ -264,6 +265,79 @@ namespace Hotcakes.Modules.Core.Controllers
 
                 RenderToHead("FaceBookMetaTags", sb.ToString());
             }
+        }
+
+        private void RenderCategorySeoMetadata(CategoryPageViewModel model)
+        {
+            var category = model.LocalCategory;
+            var pageNumber = GetPageNumber();
+            var canonicalUrl = UrlRewriter.BuildUrlForCategory(new CategorySnapshot(category),
+                pageNumber > 1 ? pageNumber.ToString() : null);
+
+            RenderToHead("HccCanonical", string.Format(Constants.TAG_CANONICAL, canonicalUrl));
+
+            if (ShouldNoIndexCategory(model))
+                RenderToHead("HccRobotsMeta", "<meta name=\"robots\" content=\"noindex,follow\" />");
+
+            var breadcrumbItems = new List<Dictionary<string, object>>();
+            AddBreadcrumbItem(breadcrumbItems, 1, ViewBag.StoreName ?? "Home", HccApp.StoreUrl(false, true));
+
+            var trail = string.IsNullOrWhiteSpace(category.Bvin)
+                ? null
+                : Category.BuildTrailToRoot(category.Bvin, HccApp.CatalogServices.Categories);
+            if (trail != null)
+            {
+                foreach (var item in trail)
+                {
+                    AddBreadcrumbItem(breadcrumbItems, breadcrumbItems.Count + 1, item.Name,
+                        UrlRewriter.BuildUrlForCategory(item));
+                }
+            }
+
+            RenderJsonLd("HccCategoryBreadcrumbStructuredData", new Dictionary<string, object>
+            {
+                {"@context", "https://schema.org"},
+                {"@type", "BreadcrumbList"},
+                {"itemListElement", breadcrumbItems}
+            });
+        }
+
+        private bool ShouldNoIndexCategory(CategoryPageViewModel model)
+        {
+            if (Request.QueryString["sort"] != null)
+                return true;
+
+            var filterKeys = new[]
+            {
+                "filter", "filters", "minprice", "maxprice", "manufacturer", "manufacturers",
+                "vendor", "vendors", "type", "types", "property", "properties"
+            };
+
+            if (Request.QueryString.AllKeys.Any(key => filterKeys.Contains(key, StringComparer.OrdinalIgnoreCase)))
+                return true;
+
+            return GetPageNumber() == 1 && model.Products.Count == 0 && model.SubCategories.Count == 0;
+        }
+
+        private void AddBreadcrumbItem(List<Dictionary<string, object>> items, int position, string name, string url)
+        {
+            items.Add(new Dictionary<string, object>
+            {
+                {"@type", "ListItem"},
+                {"position", position},
+                {"name", name},
+                {"item", url}
+            });
+        }
+
+        private void RenderJsonLd(string key, object data)
+        {
+            var settings = new JsonSerializerSettings
+            {
+                StringEscapeHandling = StringEscapeHandling.EscapeHtml
+            };
+            var json = JsonConvert.SerializeObject(data, settings);
+            RenderToHead(key, "<script type=\"application/ld+json\">" + json + "</script>");
         }
 
         #endregion
