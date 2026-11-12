@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "upendo-repository": {
+      "type": "local",
+      "command": [
+        "dotnet",
+        "Tools/Upendo.LocalDevelopmentMcp/bin/Release/net8.0/Upendo.LocalDevelopmentMcp.dll"
+      ],
+      "cwd": ".",
+      "enabled": true
+    }
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "Repository": {
+    "Root": ".",
+    "StandardsFiles": [
+      "AGENTS.md",
+      "CLAUDE.md",
+      "copilot-instructions.md",
+      ".github/copilot-instructions.md"
+    ],
+    "AllowedRoots": [
+      ".build",
+      ".github",
+      "DevSamples",
+      "Libraries",
+      "References",
+      "Tools",
+      "WebDeploy",
+      "Website",
+      ".editorconfig",
+      ".gitattributes",
+      ".gitignore",
+      "AGENTS.md",
+      "Build.proj",
+      "CLAUDE.md",
+      "CODE_OF_CONDUCT.md",
+      "CommonAssemblyInfo.cs",
+      "CONTRIBUTING.md",
+      "Directory.Build.props",
+      "GlobalAssemblyInfo.cs",
+      "Hotcakes.sln",
+      "LICENSE",
+      "README.md"
+    ],
+    "ExcludedGlobs": [
+      ".git/**",
+      "**/bin/**",
+      "**/obj/**",
+      "**/node_modules/**",
+      "**/packages/**",
+      "**/App_Data/**",
+      "**/.vs/**",
+      "**/.vscode/**",
+      "**/*.suo",
+      "**/*.user"
+    ],
+    "MaximumReadBytes": 1048576,
+    "MaximumSearchResults": 200,
+    "ProcessTimeoutSeconds": 900,
+    "Builds": [
+      {
+        "Name": "solution-release",
+        "Kind": "msbuild",
+        "WorkingDirectory": ".build",
+        "Executable": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe",
+        "Arguments": [
+          "../Hotcakes.sln",
+          "/restore",
+          "/m",
+          "/p:Configuration=Release",
+          "/p:Platform=Any CPU"
+        ]
+      },
+      {
+        "Name": "solution-debug",
+        "Kind": "msbuild",
+        "WorkingDirectory": ".build",
+        "Executable": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe",
+        "Arguments": [
+          "../Hotcakes.sln",
+          "/restore",
+          "/m",
+          "/p:Configuration=Debug",
+          "/p:Platform=Any CPU"
+        ]
+      },
+      {
+        "Name": "hotcakes-commerce-release",
+        "Kind": "msbuild",
+        "WorkingDirectory": "Libraries/Hotcakes.Commerce",
+        "Executable": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe",
+        "Arguments": [
+          "Hotcakes.Commerce.csproj",
+          "/restore",
+          "/m",
+          "/p:Configuration=Release",
+          "/p:Platform=Any CPU"
+        ]
+      },
+      {
+        "Name": "hotcakes-commerce-dnn-release",
+        "Kind": "msbuild",
+        "WorkingDirectory": "Libraries/Hotcakes.Commerce.Dnn",
+        "Executable": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe",
+        "Arguments": [
+          "Hotcakes.Commerce.Dnn.csproj",
+          "/restore",
+          "/m",
+          "/p:Configuration=Release",
+          "/p:Platform=Any CPU"
+        ]
+      },
+      {
+        "Name": "hotcakes-modules-release",
+        "Kind": "msbuild",
+        "WorkingDirectory": "Website/DesktopModules/Hotcakes",
+        "Executable": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe",
+        "Arguments": [
+          "Hotcakes.Modules.csproj",
+          "/restore",
+          "/m",
+          "/p:Configuration=Release",
+          "/p:Platform=Any CPU"
+        ]
+      },
+      {
+        "Name": "hotcakes-web-release",
+        "Kind": "msbuild",
+        "WorkingDirectory": "Libraries/Hotcakes.Web",
+        "Executable": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe",
+        "Arguments": [
+          "Hotcakes.Web.csproj",
+          "/restore",
+          "/m",
+          "/p:Configuration=Release",
+          "/p:Platform=Any CPU"
+        ]
+      },
+      {
+        "Name": "local-development-mcp",
+        "Kind": "dotnet",
+        "WorkingDirectory": "Tools/Upendo.LocalDevelopmentMcp",
+        "Executable": "dotnet.exe",
+        "Arguments": [
+          "build",
+          "Upendo.LocalDevelopmentMcp.csproj",
+          "--configuration",
+          "Release"
+        ]
+      }
+    ]
+  }
+}
