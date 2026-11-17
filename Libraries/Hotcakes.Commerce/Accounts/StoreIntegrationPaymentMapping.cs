@@ -28,11 +28,14 @@ using System;
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Represents StoreIntegrationPaymentMapping data and behavior within the Hotcakes Commerce account and store boundary.</summary>
     [Serializable]
     public class StoreIntegrationPaymentMapping
     {
         private const string COMMA = ",";
 
+        /// <summary>Performs the StoreIntegrationPaymentMapping operation.</summary>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public StoreIntegrationPaymentMapping()
         {
             HccPaymentMethodId = string.Empty;
@@ -40,16 +43,32 @@ namespace Hotcakes.Commerce.Accounts
             IntegrationPaymentMethodId = string.Empty;
         }
 
+        /// <summary>Gets or sets HccPaymentMethodId.</summary>
+        /// <remarks>The Hotcakes payment method identifier in the serialized mapping.</remarks>
+        /// <value>The Hotcakes payment method identifier in the serialized mapping.</value>
         public string HccPaymentMethodId { get; set; }
+        /// <summary>Gets or sets HccCardType.</summary>
+        /// <remarks>The Hotcakes card type in the serialized mapping.</remarks>
+        /// <value>The Hotcakes card type in the serialized mapping.</value>
         public string HccCardType { get; set; }
+        /// <summary>Gets or sets IntegrationPaymentMethodId.</summary>
+        /// <remarks>The external integration payment method identifier in the serialized mapping.</remarks>
+        /// <value>The external integration payment method identifier in the serialized mapping.</value>
         public string IntegrationPaymentMethodId { get; set; }
 
+        /// <summary>Serializes the payment mapping into its compatibility string format.</summary>
+        /// <returns>A comma-separated string containing <see cref="HccPaymentMethodId"/>, <see cref="HccCardType"/>, and <see cref="IntegrationPaymentMethodId"/> in that order.</returns>
+        /// <remarks>The comma delimiter is part of the persisted integration-settings contract.</remarks>
         public string Serialize()
         {
             var output = string.Concat(HccPaymentMethodId, COMMA, HccCardType, COMMA, IntegrationPaymentMethodId);
             return output;
         }
 
+        /// <summary>Loads mapping values from the compatibility string format.</summary>
+        /// <param name="data">A comma-separated value containing at least three fields.</param>
+        /// <returns><see langword="true"/> when at least three fields were available and assigned; otherwise <see langword="false"/>.</returns>
+        /// <remarks>Malformed input returns <see langword="false"/> without changing the mapping.</remarks>
         public bool Deserialize(string data)
         {
             var parts = data.Split(',');

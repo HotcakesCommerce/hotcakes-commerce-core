@@ -32,13 +32,19 @@ using Hotcakes.Commerce.Data.EF;
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>Provides store-scoped persistence for <see cref="PriceGroup"/> records.</summary>
     public class PriceGroupRepository : HccSimpleRepoBase<hcc_PriceGroup, PriceGroup>
     {
+        /// <summary>Initializes the repository with the request context used to resolve the current store.</summary>
+        /// <param name="c">The Hotcakes request context.</param>
         public PriceGroupRepository(HccRequestContext c)
             : base(c)
         {
         }
 
+        /// <summary>Copies a price-group domain model into its database row.</summary>
+        /// <param name="data">The destination database row.</param>
+        /// <param name="model">The source price group.</param>
         protected override void CopyModelToData(hcc_PriceGroup data, PriceGroup model)
         {
             data.AdjustmentAmount = model.AdjustmentAmount;
@@ -49,6 +55,10 @@ namespace Hotcakes.Commerce.Contacts
             data.StoreId = model.StoreId;
         }
 
+        /// <summary>Copies a database price-group row into the domain model.</summary>
+        /// <param name="data">The database row.</param>
+        /// <param name="model">The destination price group.</param>
+        /// <remarks>The persisted integer pricing mode is converted to <see cref="PricingTypes"/>.</remarks>
         protected override void CopyDataToModel(hcc_PriceGroup data, PriceGroup model)
         {
             model.AdjustmentAmount = data.AdjustmentAmount;
@@ -60,11 +70,18 @@ namespace Hotcakes.Commerce.Contacts
         }
 
 
+        /// <summary>Finds a price group by its identifier.</summary>
+        /// <param name="bvin">The price-group identifier.</param>
+        /// <returns>The matching price group, or <see langword="null"/> when no record matches.</returns>
         public PriceGroup Find(string bvin)
         {
             return FindFirstPoco(y => y.bvin == bvin);
         }
 
+        /// <summary>Creates a price group for the current store.</summary>
+        /// <param name="item">The price group to persist.</param>
+        /// <returns><see langword="true"/> when the base repository creates the record.</returns>
+        /// <remarks>An empty identifier is generated, store ownership is assigned, and the UTC update timestamp is refreshed.</remarks>
         public override bool Create(PriceGroup item)
         {
             if (item.Bvin == string.Empty)
@@ -76,6 +93,9 @@ namespace Hotcakes.Commerce.Contacts
             return base.Create(item);
         }
 
+        /// <summary>Updates a price group only when it belongs to the current store.</summary>
+        /// <param name="item">The price group to update.</param>
+        /// <returns><see langword="false"/> for a different store; otherwise the repository update result.</returns>
         public bool Update(PriceGroup item)
         {
             if (item.StoreId != Context.CurrentStore.Id)
@@ -86,11 +106,16 @@ namespace Hotcakes.Commerce.Contacts
             return Update(item, y => y.bvin == item.Bvin);
         }
 
+        /// <summary>Deletes a price group by its identifier.</summary>
+        /// <param name="bvin">The price-group identifier.</param>
+        /// <returns>The repository delete result.</returns>
         public bool Delete(string bvin)
         {
             return Delete(y => y.bvin == bvin);
         }
 
+        /// <summary>Returns all price groups for the current store, ordered by name.</summary>
+        /// <returns>The current store's price groups.</returns>
         public List<PriceGroup> FindAll()
         {
             var storeId = Context.CurrentStore.Id;

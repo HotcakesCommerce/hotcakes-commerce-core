@@ -37,8 +37,10 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Content
 {
+    /// <summary>Represents a localized HTML message template and its optional repeating section.</summary>
     public class HtmlTemplate : ILocalizableModel
     {
+        /// <summary>Initializes an empty custom template with zero identifiers and current UTC update time.</summary>
         public HtmlTemplate()
         {
             Id = 0;
@@ -52,17 +54,29 @@ namespace Hotcakes.Commerce.Content
             TemplateType = HtmlTemplateType.Custom;
         }
 
+        /// <summary>Gets or sets the template identifier.</summary>
         public long Id { get; set; }
+        /// <summary>Gets or sets the owning store identifier.</summary>
         public long StoreId { get; set; }
+        /// <summary>Gets or sets the UTC time when the template was last updated.</summary>
         public DateTime LastUpdatedUtc { get; set; }
+        /// <summary>Gets or sets the display name.</summary>
         public string DisplayName { get; set; }
+        /// <summary>Gets or sets the sender address used when creating a message.</summary>
         public string From { get; set; }
+        /// <summary>Gets or sets the message subject, including replacement tags.</summary>
         public string Subject { get; set; }
+        /// <summary>Gets or sets the HTML message body, including replacement tags.</summary>
         public string Body { get; set; }
+        /// <summary>Gets or sets the repeated HTML fragment inserted for repeating items.</summary>
         public string RepeatingSection { get; set; }
+        /// <summary>Gets or sets the business type of this template.</summary>
         public HtmlTemplateType TemplateType { get; set; }
+        /// <summary>Gets or sets the culture of the localized content.</summary>
         public string ContentCulture { get; set; }
 
+        /// <summary>Creates a copy of this template's content and metadata without copying its identifier.</summary>
+        /// <remarks>The clone's <see cref="TemplateType"/> is always <see cref="HtmlTemplateType.Custom"/>.</remarks>
         public HtmlTemplate Clone()
         {
             var t = new HtmlTemplate();
@@ -78,6 +92,7 @@ namespace Hotcakes.Commerce.Content
             return t;
         }
 
+        /// <summary>Returns a copy with store defaults and tags from one item replaced in the sender, subject, and body.</summary>
         public HtmlTemplate ReplaceTagsInTemplate(HccRequestContext context, IReplaceable item)
         {
             var items = new List<IReplaceable>();
@@ -85,6 +100,7 @@ namespace Hotcakes.Commerce.Content
             return ReplaceTagsInTemplate(context, items);
         }
 
+        /// <summary>Returns a copy with store defaults, one primary item, and repeating items applied.</summary>
         public HtmlTemplate ReplaceTagsInTemplate(HccRequestContext context, IReplaceable item,
             List<IReplaceable> repeatingItems)
         {
@@ -93,11 +109,14 @@ namespace Hotcakes.Commerce.Content
             return ReplaceTagsInTemplate(context, items, repeatingItems);
         }
 
+        /// <summary>Returns a copy with store defaults and tags from the supplied items replaced.</summary>
         public HtmlTemplate ReplaceTagsInTemplate(HccRequestContext context, List<IReplaceable> items)
         {
             return ReplaceTagsInTemplate(context, items, new List<IReplaceable>());
         }
 
+        /// <summary>Returns a copy with store defaults, primary items, and repeated section items applied.</summary>
+        /// <remarks>Each repeated item expands <c>RepeatingSection</c>; the concatenated result replaces <c>[[RepeatingSection]]</c> in the body.</remarks>
         public HtmlTemplate ReplaceTagsInTemplate(HccRequestContext context, List<IReplaceable> items,
             List<IReplaceable> repeatingItems)
         {
@@ -141,6 +160,8 @@ namespace Hotcakes.Commerce.Content
             return copy;
         }
 
+        /// <summary>Converts the template into an HTML <see cref="MailMessage"/> for the recipient.</summary>
+        /// <remarks>If the mail message cannot be constructed, the implementation returns <see langword="null"/>.</remarks>
         public MailMessage ConvertToMailMessage(string toEmail)
         {
             try
@@ -157,6 +178,7 @@ namespace Hotcakes.Commerce.Content
             }
         }
 
+        /// <summary>Gets replacement tags derived from the current store, URLs, logo, and current local and UTC times.</summary>
         public List<HtmlTemplateTag> DefaultReplacementTags(HccRequestContext context)
         {
             var tags = new List<HtmlTemplateTag>();
@@ -177,6 +199,8 @@ namespace Hotcakes.Commerce.Content
             return tags;
         }
 
+        /// <summary>Gets default replacement tags plus empty-value tags appropriate to this template type.</summary>
+        /// <remarks>Several retained template types intentionally provide no additional tags because they are not used.</remarks>
         public List<HtmlTemplateTag> GetEmptyReplacementTags(HccRequestContext context)
         {
             var tags = new List<HtmlTemplateTag>();
@@ -246,6 +270,7 @@ namespace Hotcakes.Commerce.Content
             return tags;
         }
 
+        /// <summary>Determines whether this template type supports a repeating section.</summary>
         public bool HasRepeatingSection()
         {
             switch (TemplateType)
@@ -269,6 +294,8 @@ namespace Hotcakes.Commerce.Content
             return false;
         }
 
+        /// <summary>Returns an order template copy with order and item or package replacement tags applied.</summary>
+        /// <remarks>Shipment templates repeat packages; all other order template types repeat order items.</remarks>
         public HtmlTemplate ReplaceTagsInTemplateForOrder(HccRequestContext context, Order order)
         {
             if (TemplateType != HtmlTemplateType.OrderShipment)

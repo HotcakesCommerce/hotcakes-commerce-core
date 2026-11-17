@@ -30,11 +30,26 @@ using System.Reflection;
 namespace Hotcakes.Commerce.Globalization
 {
     /// <summary>
-    ///     Helper to populate static string properties on view-model localization classes from resource files.
-    ///     The method is intentionally non-caching to avoid cross-store contamination in multi-store setups.
+    /// Provides non-caching initialization for static string properties on localized view-model types.
     /// </summary>
+    /// <remarks>
+    /// The resource path is formed from <see cref="HotcakesApplication.ViewsVirtualPath"/>
+    /// and <c>/Views/App_LocalResources/{modelName}.resx</c>. Initialization reads the resource file
+    /// on each call rather than caching values, which avoids cross-store contamination in multi-store setups.
+    /// Errors for individual properties are swallowed so one property cannot break the caller.
+    /// </remarks>
     public abstract class ViewModelLocalization
     {
+        /// <summary>
+        /// Populates writable public static string properties on <typeparamref name="T"/> from its view resource file.
+        /// </summary>
+        /// <typeparam name="T">The view-model type whose public static string properties are populated.</typeparam>
+        /// <param name="modelName">The model name used to select <c>/Views/App_LocalResources/{modelName}.resx</c>.</param>
+        /// <remarks>
+        /// Null, unavailable, read-only, non-string, and empty resource values do not replace existing values.
+        /// A blank model name throws <see cref="ArgumentException"/>. The method intentionally performs no
+        /// caching and catches failures while setting individual properties.
+        /// </remarks>
         protected static void Init<T>(string modelName)
         {
             if (string.IsNullOrWhiteSpace(modelName)) throw new ArgumentException("modelName is required", nameof(modelName));

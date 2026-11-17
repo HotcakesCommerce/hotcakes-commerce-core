@@ -26,10 +26,12 @@
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>Product and variant quantity used when reserving inventory.</summary>
     public class ResevationItem
     {
         public string ProductId { get; set; }
         public string VariantId { get; set; }
+        /// <summary>Gets or sets the Quantity value.</summary>
         public int Quantity { get; set; }
     }
 }

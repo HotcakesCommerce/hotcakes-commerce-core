@@ -33,20 +33,32 @@ using System.Web.UI.WebControls;
 
 namespace Hotcakes.Commerce.Catalog.Options
 {
+    /// <summary>
+    /// Implements the <see cref="IOptionProcessor" /> contract for single-selection drop-down options.
+    /// </summary>
     public class DropDownList : IOptionProcessor
     {
         private const string DROPDOWN_MARKUP_FORMAT = "<select id=\"opt{0}{1}\" name=\"opt{0}{1}\" class=\"hcIsOption {2}\" >";
 
+        /// <summary>
+        /// Performs the GetOptionType catalog operation.
+        /// </summary>
         public OptionTypes GetOptionType()
         {
             return OptionTypes.DropDownList;
         }
 
+        /// <summary>
+        /// Performs the Render catalog operation.
+        /// </summary>
         public string Render(Option baseOption)
         {
             return RenderWithSelection(baseOption, null);
         }
 
+        /// <summary>
+        /// Performs the RenderWithSelection catalog operation.
+        /// </summary>
         public string RenderWithSelection(Option baseOption, OptionSelectionList selections, string prefix = null, string className = null)
         {
             string selected = null;
@@ -95,6 +107,9 @@ namespace Hotcakes.Commerce.Catalog.Options
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Performs the RenderAsControl catalog operation.
+        /// </summary>
         public void RenderAsControl(Option baseOption, PlaceHolder ph, string prefix = null, string className = null)
         {
             var result = new System.Web.UI.WebControls.DropDownList();
@@ -126,6 +141,9 @@ namespace Hotcakes.Commerce.Catalog.Options
             ph.Controls.Add(result);
         }
 
+        /// <summary>
+        /// Performs the ParseFromPlaceholder catalog operation.
+        /// </summary>
         public OptionSelection ParseFromPlaceholder(Option baseOption, PlaceHolder ph, string prefix = null)
         {
             var result = new OptionSelection();
@@ -142,6 +160,9 @@ namespace Hotcakes.Commerce.Catalog.Options
             return result;
         }
 
+        /// <summary>
+        /// Performs the ParseFromForm catalog operation.
+        /// </summary>
         public OptionSelection ParseFromForm(Option baseOption, NameValueCollection form, string prefix = null)
         {
             var result = new OptionSelection();
@@ -155,6 +176,9 @@ namespace Hotcakes.Commerce.Catalog.Options
             return result;
         }
 
+        /// <summary>
+        /// Performs the SetSelectionsInPlaceholder catalog operation.
+        /// </summary>
         public void SetSelectionsInPlaceholder(Option baseOption, PlaceHolder ph, OptionSelectionList selections)
         {
             if (ph == null) return;
@@ -173,6 +197,9 @@ namespace Hotcakes.Commerce.Catalog.Options
             }
         }
 
+        /// <summary>
+        /// Performs the CartDescription catalog operation.
+        /// </summary>
         public string CartDescription(Option baseOption, OptionSelectionList selections)
         {
             if (selections == null) return string.Empty;
@@ -191,6 +218,9 @@ namespace Hotcakes.Commerce.Catalog.Options
             return string.Empty;
         }
 
+        /// <summary>
+        /// Performs the GetSelectionValues catalog operation.
+        /// </summary>
         public List<string> GetSelectionValues(Option option, OptionSelectionList selections)
         {
             var opSel = selections.FindByOptionId(option.Bvin);

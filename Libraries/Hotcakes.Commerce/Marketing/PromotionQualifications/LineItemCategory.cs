@@ -31,36 +31,45 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Matches order line items by their assigned categories.</summary>
+    /// <remarks>Category lookup examines only the first 100 assignments and supports a negated mode.</remarks>
     public class LineItemCategory : PromotionQualificationBase
     {
+        /// <summary>Initializes an empty category qualification.</summary>
         public LineItemCategory()
             : this(string.Empty)
         {
         }
 
+        /// <summary>Initializes a category qualification with one category identifier.</summary>
+        /// <param name="categoryId">The category identifier.</param>
         public LineItemCategory(string categoryId)
         {
             ProcessingCost = RelativeProcessingCost.Highest;
             AddCategoryId(categoryId);
         }
 
+        /// <summary>Gets the stable line-item category qualification identifier.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdLineItemCategory); }
         }
 
+        /// <summary>Gets or sets whether matching means the line item is not in the configured categories.</summary>
         public bool CategoryNot
         {
             get { return GetSettingAsBool("CategoryNot"); }
             set { SetSetting("CategoryNot", value); }
         }
 
+        /// <summary>Gets or sets the persisted sum threshold setting; this rule does not use it during matching.</summary>
         public decimal SumAmount
         {
             get { return GetSettingAsDecimal("SumAmount"); }
             set { SetSetting("SumAmount", value); }
         }
 
+        /// <summary>Gets configured category IDs, normalized to lowercase.</summary>
         public List<string> CurrentCategoryIds()
         {
             var all = GetSetting("CategoryIds") ?? string.Empty;
@@ -82,6 +91,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             SetSetting("CategoryIds", all);
         }
 
+        /// <summary>Builds a category description, resolving names through the catalog.</summary>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var result = "When Item Category Is ";
@@ -109,6 +119,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             return result;
         }
 
+        /// <summary>Adds a normalized category ID unless it is blank or already present.</summary>
         public void AddCategoryId(string id)
         {
             if (string.IsNullOrWhiteSpace(id)) return;
@@ -121,6 +132,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             SaveCategoryIdsToSettings(ids);
         }
 
+        /// <summary>Removes a normalized category ID when present.</summary>
         public void RemoveCategoryId(string id)
         {
             if (string.IsNullOrWhiteSpace(id)) return;
@@ -133,6 +145,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             }
         }
 
+        /// <summary>Matches the current line item or any order item by category.</summary>
+        /// <remarks>In line-item mode a current line item is required; order mode scans all items.</remarks>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             if (context == null) return false;

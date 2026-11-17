@@ -26,15 +26,24 @@
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>Aggregates order, referral, payment, sales, and commission values for an affiliate report.</summary>
     public class AffiliateReportTotals
     {
+        /// <summary>Gets or sets the number of referred orders.</summary>
         public int OrdersCount { get; set; }
+        /// <summary>Gets or sets the number of tracked referrals.</summary>
         public int ReferralsCount { get; set; }
+        /// <summary>Gets or sets the number of recorded payments.</summary>
         public int PaymentsCount { get; set; }
+        /// <summary>Gets or sets the total referred sales amount.</summary>
         public decimal SalesAmount { get; set; }
+        /// <summary>Gets or sets the commission earned from referred sales.</summary>
         public decimal Commission { get; set; }
+        /// <summary>Gets or sets the commission already paid.</summary>
         public decimal CommissionPaid { get; set; }
 
+        /// <summary>Gets the difference between <see cref="Commission"/> and <see cref="CommissionPaid"/>.</summary>
+        /// <remarks>This is calculated on demand and is not independently stored.</remarks>
         public decimal CommissionOwed
         {
             get { return Commission - CommissionPaid; }

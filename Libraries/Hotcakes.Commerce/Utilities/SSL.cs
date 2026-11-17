@@ -28,14 +28,29 @@ using System.Web;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Provides URL helpers for switching between secure and non-secure HTTP schemes.
+    /// </summary>
     public class SSL
     {
+        /// <summary>
+        /// Identifies the scheme to which a URL redirect should be changed.
+        /// </summary>
         public enum SSLRedirectTo
         {
+            /// <summary>Use the <c>https</c> scheme.</summary>
             SSL = 1,
+            /// <summary>Use the <c>http</c> scheme.</summary>
             NonSSL = 2
         }
 
+        /// <summary>
+        /// Builds a URL with the requested HTTP scheme after repeatedly URL-decoding the input.
+        /// </summary>
+        /// <param name="currentUrl">The URL to normalize and convert.</param>
+        /// <param name="redirectTo">The target scheme.</param>
+        /// <returns>The converted URL, or the normalized URL when no scheme conversion is required.</returns>
+        /// <remarks>Decoding is performed before scheme conversion and may therefore change encoded URL content.</remarks>
         public static string BuildUrlForRedirect(string currentUrl, SSLRedirectTo redirectTo)
         {
             RemoveAllEncoding(ref currentUrl);
@@ -53,6 +68,15 @@ namespace Hotcakes.Commerce.Utilities
             return url;
         }
 
+        /// <summary>
+        /// Redirects the current HTTP response to the current request URL with the requested scheme.
+        /// </summary>
+        /// <param name="RedirectTo">The scheme to use for the redirect.</param>
+        /// <remarks>
+        /// The current absolute URL is lower-cased and repeatedly decoded before conversion. No response redirect
+        /// is issued when the resulting URL is identical, preventing a redirect loop. The target is derived from
+        /// the current request rather than validated as an arbitrary external destination.
+        /// </remarks>
         public static void SSLRedirect(SSLRedirectTo RedirectTo)
         {
             var CurrentUrl = HttpContext.Current.Request.Url.AbsoluteUri.ToLower();
@@ -66,6 +90,11 @@ namespace Hotcakes.Commerce.Utilities
             }
         }
 
+        /// <summary>
+        /// Repeatedly URL-decodes a string until another decode produces no change.
+        /// </summary>
+        /// <param name="URL">The string to decode; the parameter is replaced with the final decoded value.</param>
+        /// <remarks>This method mutates the caller's variable through the <see langword="ref"/> parameter.</remarks>
         public static void RemoveAllEncoding(ref string URL)
         {
             var NewURL = string.Empty;

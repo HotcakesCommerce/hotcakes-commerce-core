@@ -30,6 +30,14 @@ using System.Globalization;
 
 namespace Hotcakes.Commerce.Marketing.PromotionActions
 {
+    /// <summary>
+    /// Provides shared persistence and setting conversion behavior for promotion actions.
+    /// </summary>
+    /// <remarks>
+    /// Settings are stored as invariant-culture strings. The default application behavior returns
+    /// <see langword="false"/> and the default cancellation behavior returns <see langword="true"/>;
+    /// concrete actions override these operations when they have an effect to apply or undo.
+    /// </remarks>
     public abstract class PromotionActionBase : IPromotionAction
     {
         private Dictionary<string, string> _Settings = new Dictionary<string, string>();
@@ -37,32 +45,49 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
         private const string ZERO = "0";
         private const string ONE = "1";
             
+        /// <summary>Initializes an unsaved promotion action.</summary>
         public PromotionActionBase()
         {
             Id = 0;
         }
 
+        /// <summary>Gets or sets the persisted action identifier.</summary>
         public long Id { get; set; }
+
+        /// <summary>Gets the stable serialized identifier for the concrete action type.</summary>
         public abstract Guid TypeId { get; }
 
+        /// <summary>Gets or sets the persisted string settings for the action.</summary>
         public Dictionary<string, string> Settings
         {
             get { return _Settings; }
             set { _Settings = value; }
         }
 
+        /// <summary>Gets an HTML description of the concrete promotion action.</summary>
+        /// <param name="app">The application context used to resolve display information.</param>
+        /// <returns>The action description.</returns>
         public abstract string FriendlyDescription(HotcakesApplication app);
 
+        /// <summary>Applies the concrete action; the base implementation performs no action.</summary>
+        /// <param name="context">The promotion evaluation context.</param>
+        /// <returns><see langword="false"/> because no effect is applied by the base implementation.</returns>
         public virtual bool ApplyAction(PromotionContext context)
         {
             return false;
         }
 
+        /// <summary>Cancels the concrete action; the base implementation has nothing to undo.</summary>
+        /// <param name="context">The promotion evaluation context.</param>
+        /// <returns><see langword="true"/> because there is no base effect to roll back.</returns>
         public virtual bool CancelAction(PromotionContext context)
         {
             return true;
         }
 
+        /// <summary>Reads a setting, returning an empty string when it is absent or null.</summary>
+        /// <param name="key">The persisted setting key.</param>
+        /// <returns>The setting value or an empty string.</returns>
         protected string GetSetting(string key)
         {
             var s = Settings;
@@ -70,6 +95,9 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             return s.TryGetValue(key, out var result) ? (result ?? string.Empty) : string.Empty;
         }
 
+        /// <summary>Reads a setting as an invariant-culture integer.</summary>
+        /// <param name="key">The persisted setting key.</param>
+        /// <returns>The parsed value, or <c>-1</c> when missing or invalid.</returns>
         protected int GetSettingAsInt(string key)
         {
             var s = Settings;
@@ -78,6 +106,9 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             return int.TryParse(result, NumberStyles.Any, CultureInfo.InvariantCulture, out var temp) ? temp : -1;
         }
 
+        /// <summary>Reads a setting as an invariant-culture decimal.</summary>
+        /// <param name="key">The persisted setting key.</param>
+        /// <returns>The parsed value, or <c>-1</c> when missing or invalid.</returns>
         protected decimal GetSettingAsDecimal(string key)
         {
             var s = Settings;
@@ -86,6 +117,9 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             return decimal.TryParse(result, NumberStyles.Any, CultureInfo.InvariantCulture, out var temp) ? temp : -1;
         }
 
+        /// <summary>Reads a Boolean setting encoded as <c>1</c>.</summary>
+        /// <param name="key">The persisted setting key.</param>
+        /// <returns><see langword="true"/> only when the stored value is exactly <c>1</c>.</returns>
         protected bool GetSettingAsBool(string key)
         {
             var s = Settings;
@@ -94,6 +128,9 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             return string.Equals(result, ONE, StringComparison.Ordinal);
         }
 
+        /// <summary>Stores a string setting without changing its key or value.</summary>
+        /// <param name="key">The persisted setting key.</param>
+        /// <param name="value">The value to store.</param>
         protected void SetSetting(string key, string value)
         {
             var s = Settings;
@@ -101,6 +138,9 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             s[key] = value;
         }
 
+        /// <summary>Stores an integer setting using invariant-culture formatting.</summary>
+        /// <param name="key">The persisted setting key.</param>
+        /// <param name="value">The value to store.</param>
         protected void SetSetting(string key, int value)
         {
             var s = Settings;
@@ -108,6 +148,9 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             s[key] = value.ToString(CultureInfo.InvariantCulture);
         }
 
+        /// <summary>Stores a decimal setting using invariant-culture formatting.</summary>
+        /// <param name="key">The persisted setting key.</param>
+        /// <param name="value">The value to store.</param>
         protected void SetSetting(string key, decimal value)
         {
             var s = Settings;
@@ -115,6 +158,9 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             s[key] = value.ToString(CultureInfo.InvariantCulture);
         }
 
+        /// <summary>Stores a Boolean setting as <c>1</c> or <c>0</c>.</summary>
+        /// <param name="key">The persisted setting key.</param>
+        /// <param name="value">The value to store.</param>
         protected void SetSetting(string key, bool value)
         {
             if (Settings == null) return;

@@ -30,37 +30,49 @@ using Hotcakes.Web.Geography;
 namespace Hotcakes.Commerce.Globalization
 {
     /// <summary>
-    ///     This object is used to hold a minimal amount of mapped information about a Region and Country combination in other
-    ///     objects.
+    ///     Represents the mapped identity and localized display data for a region within a country.
     /// </summary>
+    /// <remarks>
+    ///     <see cref="RegionId"/> and <see cref="CountryId"/> identify the persisted records. <see cref="DisplayName"/>
+    ///     exposes the localized name when available and otherwise falls back to <see cref="SystemName"/>.
+    ///     The object is serializable for compatibility with existing commerce and API payloads.
+    /// </remarks>
     [Serializable]
     public class Region : IRegion
     {
         /// <summary>
-        ///     The ID or bvin of the region.
+        ///     Gets or sets the persisted identifier of the region.
         /// </summary>
+        /// <value>The region identifier used by the region repository.</value>
         public Guid RegionId { get; set; }
 
         /// <summary>
-        ///     The ID or bvin of the country.
+        ///     Gets or sets the identifier of the country that owns the region.
         /// </summary>
+        /// <value>The parent country identifier used for region filtering and mapping.</value>
         public Guid CountryId { get; set; }
 
         private string _displayName { get; set; }
 
         /// <summary>
-        ///     This value is used to globally identify this field on localized sites.
+        ///     Gets or sets the stable, non-localized region name.
         /// </summary>
+        /// <value>The system name used as the localization fallback and global identity label.</value>
         public string SystemName { get; set; }
 
         /// <summary>
-        ///     The standardized abbreviation of the region.
+        ///     Gets or sets the standardized region abbreviation.
         /// </summary>
+        /// <value>The abbreviation used when a caller looks up a region through <see cref="Country.FindRegion(string)"/>.</value>
         public string Abbreviation { get; set; }
 
         /// <summary>
-        ///     This is the display name specified in a localized site, otherwise the SystemName is used.
+        ///     Gets or sets the localized region name displayed to customers.
         /// </summary>
+        /// <remarks>
+        ///     When the localized value is null or empty, the getter returns <see cref="SystemName"/>. The setter stores
+        ///     the localized value without changing the system name.
+        /// </remarks>
         public string DisplayName
         {
             get

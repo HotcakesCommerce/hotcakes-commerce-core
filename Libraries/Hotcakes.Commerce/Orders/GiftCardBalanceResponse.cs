@@ -29,8 +29,10 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>Represents the result of a gift-card balance inquiry, including messages and the available value.</summary>
     public class GiftCardBalanceResponse
     {
+        /// <summary>Initializes a new instance of this type.</summary>
         public GiftCardBalanceResponse()
         {
             CurrentValue = 0;
@@ -38,8 +40,11 @@ namespace Hotcakes.Commerce.Orders
             Success = false;
         }
 
+        /// <summary>Gets or sets the applicable order or payment value.</summary>
         public decimal CurrentValue { get; set; }
+        /// <summary>Gets or sets the applicable order or payment value.</summary>
         public List<Message> Messages { get; set; }
+        /// <summary>Gets or sets the applicable order or payment value.</summary>
         public bool Success { get; set; }
     }
 }

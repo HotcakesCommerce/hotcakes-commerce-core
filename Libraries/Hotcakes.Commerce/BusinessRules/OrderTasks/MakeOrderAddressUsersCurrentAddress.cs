@@ -26,10 +26,23 @@
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>
+    /// Copies the order's shipping and, when different, billing address to the signed-in customer profile.
+    /// </summary>
+    /// <remarks>
+    /// The task identifier is <c>7cf8a5b6-3999-41b0-b283-e8280d19f3bb</c> and the step name is
+    /// <c>Make Order Address User's Current Address</c>. It updates the customer profile only when the user exists;
+    /// rollback does not restore the previous profile addresses.
+    /// </remarks>
     public class MakeOrderAddressUsersCurrentAddress : OrderTask
     {
         private const string TASK_NAME = "Make Order Address User's Current Address";
 
+        /// <summary>
+        /// Copies the order addresses to the existing customer profile when a user identifier is available.
+        /// </summary>
+        /// <param name="context">The <see cref="OrderTaskContext"/> containing the order and membership services.</param>
+        /// <returns>Always <see langword="true"/>, including when no user profile exists.</returns>
         public override bool Execute(OrderTaskContext context)
         {
             if (context.UserId != string.Empty)
@@ -56,21 +69,38 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return true;
         }
 
+        /// <summary>
+        /// Does not restore the customer's addresses before this task ran.
+        /// </summary>
+        /// <param name="context">The workflow context.</param>
+        /// <returns>Always <see langword="true"/>.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>
+        /// Gets the stable task identifier used to register this task in workflows.
+        /// </summary>
+        /// <returns><c>7cf8a5b6-3999-41b0-b283-e8280d19f3bb</c>.</returns>
         public override string TaskId()
         {
             return "7cf8a5b6-3999-41b0-b283-e8280d19f3bb";
         }
 
+        /// <summary>
+        /// Gets the display name of this task.
+        /// </summary>
+        /// <returns><c>Make Order Address User's Current Address</c>.</returns>
         public override string TaskName()
         {
             return TASK_NAME;
         }
 
+        /// <summary>
+        /// Gets the workflow step name.
+        /// </summary>
+        /// <returns><c>Make Order Address User's Current Address</c>.</returns>
         public override string StepName()
         {
             var result = string.Empty;
@@ -78,6 +108,10 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return result;
         }
 
+        /// <summary>
+        /// Creates a new address-copy task.
+        /// </summary>
+        /// <returns>A new <see cref="MakeOrderAddressUsersCurrentAddress"/> instance.</returns>
         public override Task Clone()
         {
             return new MakeOrderAddressUsersCurrentAddress();

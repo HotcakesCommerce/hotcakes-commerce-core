@@ -34,8 +34,15 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.Marketing.PromotionActions
 {
+    /// <summary>Adds configured products to an order at no charge for a free-item promotion.</summary>
+    /// <remarks>
+    /// Product quantities are persisted in <c>quantityids</c>. The action tracks successful application,
+    /// unavailable products, and free quantities in order custom properties, and removes only its own
+    /// free-product effects when canceled.
+    /// </remarks>
     public class ReceiveFreeProductAdjustment : PromotionActionBase
     {
+        /// <summary>Stable serialized identifier for the receive-free-product action.</summary>
         public const string TypeIdString = "a000c557-9e29-47cc-a1f8-7de40b19f48c";
 
         private const string HCC_KEY = "hcc";
@@ -44,6 +51,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         #region Constructor
 
+        /// <summary>Initializes an action with no configured free products.</summary>
         public ReceiveFreeProductAdjustment()
         {
             Settings = new Dictionary<string, string>();
@@ -53,6 +61,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         #region Properties
 
+        /// <summary>Gets the stable serialized action identifier.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdString); }
@@ -62,6 +71,9 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         #region Public methods
 
+        /// <summary>Describes the configured free products and quantities as HTML.</summary>
+        /// <param name="app">The application context used to resolve product names and SKUs.</param>
+        /// <returns>The action description.</returns>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var result = string.Empty;
@@ -84,6 +96,9 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             return result;
         }
 
+        /// <summary>Adds a product quantity to the configured free-product map.</summary>
+        /// <param name="itemid">The product identifier to normalize and store.</param>
+        /// <param name="quantity">The quantity to add; existing entries are incremented by this value.</param>
         public void AddItemId(string itemid, int quantity)
         {
             var _ItemIds = GetQuantities();
@@ -103,6 +118,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             SaveQuantitiesToSettings(_ItemIds);
         }
 
+        /// <summary>Removes a configured free-product entry when present.</summary>
+        /// <param name="itemid">The product identifier to normalize and remove.</param>
         public void RemoveItemId(string itemid)
         {
             if (string.IsNullOrWhiteSpace(itemid)) return;
@@ -118,6 +135,10 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             }
         }
 
+        /// <summary>Adds or updates configured free products and checks inventory availability.</summary>
+        /// <param name="context">The free-item promotion context.</param>
+        /// <returns><see langword="true"/> when all configured products are handled; otherwise <see langword="false"/>.</returns>
+        /// <remarks>Repeated application is guarded by the compatibility-sensitive <c>freePromotions</c> flag. Unavailable products may trigger notification, cart cleanup, or an out-of-stock marker.</remarks>
         public override bool ApplyAction(PromotionContext context)
         {
             if (context == null) return false;
@@ -186,6 +207,10 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             return true;
         }
 
+        /// <summary>Removes this promotion's free-product discount details and promotion markers.</summary>
+        /// <param name="context">The order context containing the affected cart.</param>
+        /// <returns><see langword="false"/> when the context or order is missing; otherwise <see langword="true"/>.</returns>
+        /// <remarks>Cancellation removes promotion effects from matching line items and persists the changed order.</remarks>
         public override bool CancelAction(PromotionContext context)
         {
             if (context == null) return false;
@@ -199,6 +224,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             return true;
         }
 
+        /// <summary>Reads configured product quantities from the <c>quantityids</c> setting.</summary>
+        /// <returns>A product-identifier map; malformed entries are ignored and duplicate identifiers are summed.</returns>
         public Dictionary<string, int> GetQuantities()
         {
             var all = GetSetting("quantityids") ?? string.Empty;
@@ -240,6 +267,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             return hash;
         }
 
+        /// <summary>Persists product quantities in the compatibility-sensitive <c>quantityids</c> setting.</summary>
+        /// <param name="items">The product quantities to serialize.</param>
         public void SaveQuantitiesToSettings(Dictionary<string, int> items)
         {
             var all = string.Join(",", items.Select(s => s.Key.Trim().ToUpperInvariant() + "=" + s.Value));

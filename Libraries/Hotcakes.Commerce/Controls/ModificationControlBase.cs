@@ -28,6 +28,14 @@ using System.Web.UI;
 
 namespace Hotcakes.Commerce.Controls
 {
+    /// <summary>
+    /// Provides the base type for Web Forms controls that apply changes to commerce models.
+    /// </summary>
+    /// <remarks>
+    /// This type adds no members to <see cref="UserControl"/>. Derived controls therefore
+    /// retain the standard Web Forms control hierarchy and lifecycle, including loading,
+    /// view-state, postback, and rendering behavior supplied by the base class.
+    /// </remarks>
     public class ModificationControlBase : UserControl
     {
     }

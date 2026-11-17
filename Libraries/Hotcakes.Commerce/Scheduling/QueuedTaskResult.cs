@@ -26,15 +26,24 @@
 
 namespace Hotcakes.Commerce.Scheduling
 {
+    /// <summary>
+    /// Describes the outcome of a queued-task operation.
+    /// </summary>
     public class QueuedTaskResult
     {
+        /// <summary>
+        /// Initializes an unsuccessful result with no notes.
+        /// </summary>
         public QueuedTaskResult()
         {
             Success = false;
             Notes = string.Empty;
         }
 
+        /// <summary>Gets or sets whether the operation completed successfully.</summary>
         public bool Success { get; set; }
+
+        /// <summary>Gets or sets explanatory notes about the operation outcome.</summary>
         public string Notes { get; set; }
     }
 }

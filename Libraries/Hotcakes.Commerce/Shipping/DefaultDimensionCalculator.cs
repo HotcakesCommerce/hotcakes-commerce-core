@@ -28,8 +28,20 @@ using System;
 
 namespace Hotcakes.Commerce.Shipping
 {
+    /// <summary>
+    /// Calculates an estimated package size and total weight from the items in a shipping group.
+    /// </summary>
+    /// <remarks>
+    /// A single item with quantity one uses its own dimensions. Other groups use the longest item dimension
+    /// and an estimate derived from total volume; each resulting dimension is then raised to at least one.
+    /// </remarks>
     public class DefaultDimensionCalculator : DimensionCalculator
     {
+        /// <summary>
+        /// Generates dimensions and weight for the supplied shipping group.
+        /// </summary>
+        /// <param name="shippingGroup">The group whose package dimensions are populated.</param>
+        /// <remarks>Existing dimensions are reset when <paramref name="shippingGroup"/> has an item collection.</remarks>
         public override void GenerateDimensions(ShippingGroup shippingGroup)
         {
             if (shippingGroup.Items != null)

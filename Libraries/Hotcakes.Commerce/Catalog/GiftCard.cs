@@ -40,10 +40,18 @@ namespace Hotcakes.Commerce.Catalog
     [Serializable]
     public class GiftCard : IReplaceable
     {
+        /// <summary>
+        /// Initializes a new instance of <see cref="GiftCard" />.
+        /// </summary>
         public GiftCard()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="GiftCard" />.
+        /// </summary>
+        /// <param name="data">Value used to initialize the instance.</param>
+        /// <param name="message">Value used to initialize the instance.</param>
         public GiftCard(GiftCardData data, string message)
         {
             LineItemId = data.LineItemId;

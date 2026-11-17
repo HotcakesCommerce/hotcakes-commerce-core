@@ -31,12 +31,26 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Analytics
 {
+    /// <summary>
+    /// Records and removes store-scoped customer and commerce analytics events.
+    /// </summary>
+    /// <remarks>
+    /// Session and store identifiers are captured when the service is constructed. Create a new
+    /// service when the request scope changes. Events are persisted through
+    /// <see cref="AnalyticsEventsRepository"/> and receive a UTC timestamp when registered.
+    /// </remarks>
+    /// <seealso cref="AnalyticsEvent"/>
+    /// <seealso cref="ActionTypes"/>
     public class AnalyticsService : HccServiceBase
     {
         private Guid? _cachedSessionGuid;
         private Guid? _cachedShoppingSessionGuid;
         private long _cachedStoreId;
 
+        /// <summary>
+        /// Initializes the analytics service for the specified commerce request context.
+        /// </summary>
+        /// <param name="context">The request context used to determine the store and current sessions.</param>
         public AnalyticsService(HccRequestContext context)
             : base(context)
         {
@@ -48,8 +62,23 @@ namespace Hotcakes.Commerce.Analytics
             _cachedStoreId = Context.CurrentStore.Id;
         }
 
+        /// <summary>
+        /// Gets the repository used to persist analytics events.
+        /// </summary>
+        /// <value>The repository associated with this service's request context.</value>
         public AnalyticsEventsRepository AnalyticsEvents { get; protected set; }
 
+        /// <summary>
+        /// Registers one analytics event for the current store and captured session context.
+        /// </summary>
+        /// <param name="userId">The customer identifier associated with the event, if available.</param>
+        /// <param name="actionType">The action represented by the event.</param>
+        /// <param name="objectId">The commerce object identifier in BVIN format, if applicable.</param>
+        /// <remarks>
+        /// The object identifier is converted to a nullable GUID, and the event timestamp is assigned
+        /// using <see cref="DateTime.UtcNow"/>. The event is persisted immediately through
+        /// <see cref="AnalyticsEvents"/>.
+        /// </remarks>
         public void RegisterEvent(string userId, ActionTypes actionType, string objectId)
         {
             var analyticsEvent = new AnalyticsEvent();
@@ -64,6 +93,14 @@ namespace Hotcakes.Commerce.Analytics
             AnalyticsEvents.Create(analyticsEvent);
         }
 
+        /// <summary>
+        /// Registers multiple analytics events for the current store and captured session context.
+        /// </summary>
+        /// <param name="events">The event tuples containing customer identifier, action, and optional object identifier.</param>
+        /// <remarks>
+        /// A null or empty list is ignored. All events in a non-empty batch receive the same UTC
+        /// timestamp and are persisted through one repository batch operation.
+        /// </remarks>
         public void RegisterEvents(List<Tuple<string, ActionTypes, string>> events)
         {
             if (events == null || events.Count == 0)
@@ -90,11 +127,22 @@ namespace Hotcakes.Commerce.Analytics
             AnalyticsEvents.BatchCreate(analyticsEvents, mergeSubItems: false);
         }
 
+        /// <summary>
+        /// Deletes analytics events associated with a customer identifier.
+        /// </summary>
+        /// <param name="userID">The customer identifier whose events should be deleted.</param>
+        /// <remarks>This operation is destructive and delegates store/authorization scope handling to the repository and caller.</remarks>
         public void DeleteEventsByCustomer(string userID)
         {
             AnalyticsEvents.DeleteByUserId(userID);
         }
 
+        /// <summary>
+        /// Deletes all analytics events for a store by invoking the database delete procedure.
+        /// </summary>
+        /// <param name="storeId">The store identifier whose analytics events should be deleted.</param>
+        /// <returns><see langword="true"/> after the delete procedure is invoked.</returns>
+        /// <remarks>This is a destructive operation; callers must authorize the supplied store scope before invoking it.</remarks>
         public bool DeleteEventsByStoreID(long storeId)
         {
             using (var db = Factory.CreateHccDbContext())

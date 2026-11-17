@@ -26,23 +26,60 @@
 
 namespace Hotcakes.Commerce.Security
 {
+    /// <summary>
+    /// Scores fraud-check data against the fraud rules for the current store.
+    /// </summary>
+    /// <remarks>
+    /// Each matching rule contributes its fixed weight, and the total is capped at
+    /// 10. Matching rules also append their compatibility-sensitive default messages
+    /// to <see cref="FraudCheckData.Messages"/>. This class performs exact comparisons
+    /// against the values supplied by <see cref="FraudCheckData"/>; it does not alter
+    /// rule values or provide a separate fraud decision.
+    /// </remarks>
     public class FraudScorer
     {
         private readonly HccRequestContext _context;
         private readonly FraudRuleRepository _repository;
 
+        /// <summary>
+        /// Initializes a scorer with an explicit rule repository.
+        /// </summary>
+        /// <param name="context">The request context used to identify the current store.</param>
+        /// <param name="repository">The repository from which store rules are loaded.</param>
         public FraudScorer(HccRequestContext context, FraudRuleRepository repository)
         {
             _repository = repository;
             _context = context;
         }
 
+        /// <summary>
+        /// Initializes a scorer with a repository created for the supplied context.
+        /// </summary>
+        /// <param name="context">The request context used to identify the current store.</param>
         public FraudScorer(HccRequestContext context)
         {
             _repository = new FraudRuleRepository(context);
             _context = context;
         }
 
+        /// <summary>
+        /// Scores the supplied fraud-check data against all rules for the current store.
+        /// </summary>
+        /// <param name="data">The normalized fraud-check data to compare.</param>
+        /// <returns>
+        /// The accumulated fraud score, capped at 10. A score of zero is returned when
+        /// no rules are available.
+        /// </returns>
+        /// <remarks>
+        /// Matching weights are credit card 7, email address 5, domain name 3, phone
+        /// number 3, and IP address 1. The total is capped only after all rules are
+        /// evaluated. Matching rules append their exact default messages to
+        /// <see cref="FraudCheckData.Messages"/>: <c>Credit Card Matched Fraud Rules</c>,
+        /// <c>Email Address Matched Fraud Rules</c>, <c>Domain Matched Fraud Rules</c>,
+        /// <c>Phone Number Matched Fraud Rules</c>, and <c>IP Address Fraud Rules</c>,
+        /// respectively. Comparisons are exact after the normalization performed while
+        /// assigning values to <see cref="FraudCheckData"/>.
+        /// </remarks>
         public decimal ScoreData(FraudCheckData data)
         {
             decimal result = 0;

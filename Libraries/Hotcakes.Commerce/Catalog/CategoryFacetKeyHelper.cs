@@ -29,6 +29,9 @@ using System.Linq;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Represents the catalog class <see cref="CategoryFacetKeyHelper" /> and its associated behavior.
+    /// </summary>
     public class CategoryFacetKeyHelper
     {
         /// <summary>

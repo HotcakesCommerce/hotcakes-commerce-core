@@ -31,11 +31,15 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Marketing.PromotionActions
 {
+    /// <summary>Adjusts the price of the currently qualifying line item.</summary>
+    /// <remarks>The signed amount is converted through <see cref="Money"/> and recorded as a line-item discount detail.</remarks>
     public class LineItemAdjustment : PromotionActionBase
     {
+        /// <summary>Stable serialized identifier for the line-item adjustment action.</summary>
         public const string TypeIdString = "adf5b289-3f11-4e90-a8c7-fe62a0274205";
         private static readonly Guid _typeId = new Guid(TypeIdString);
 
+        /// <summary>Initializes a line-item adjustment with a monetary amount of zero.</summary>
         public LineItemAdjustment()
         {
             Id = 0;
@@ -44,11 +48,13 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             Amount = 0m;
         }
 
+        /// <summary>Gets the stable serialized action identifier.</summary>
         public override Guid TypeId
         {
             get { return _typeId; }
         }
 
+        /// <summary>Gets or sets whether <see cref="Amount"/> is monetary or percentage-based.</summary>
         public AmountTypes AdjustmentType
         {
             get
@@ -62,12 +68,16 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             set { SetSetting("AdjustmentType", ((int) value).ToString()); }
         }
 
+        /// <summary>Gets or sets the signed adjustment amount; negative values decrease the item price.</summary>
         public decimal Amount
         {
             get { return GetSettingAsDecimal("Amount"); }
             set { SetSetting("Amount", value); }
         }
 
+        /// <summary>Describes the qualifying item price adjustment.</summary>
+        /// <param name="app">The application context; it is not used by this implementation.</param>
+        /// <returns>The action description.</returns>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var isDiscount = Amount < 0m;
@@ -89,6 +99,10 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             return action + " Qualifying Item Price by " + amountText;
         }
 
+        /// <summary>Applies the adjustment to the currently processed line item.</summary>
+        /// <param name="context">The line-item promotion context.</param>
+        /// <returns><see langword="false"/> for invalid contexts or an exception; otherwise <see langword="true"/>.</returns>
+        /// <remarks>The action skips insertion when the line item already contains this promotion.</remarks>
         public override bool ApplyAction(PromotionContext context)
         {
             try

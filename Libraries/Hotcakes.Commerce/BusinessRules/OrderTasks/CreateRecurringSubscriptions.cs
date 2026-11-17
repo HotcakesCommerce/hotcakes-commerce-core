@@ -32,6 +32,11 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>
+    /// <summary>
+    /// Represents the <see cref="OrderTask"/> that performs the CreateRecurringSubscriptions workflow operation. The stable task identifier is <c>9E4EF40C-29DD-451F-8F79-F0526273B4EA</c>. Execution and rollback preserve existing order workflow behavior, including persistence, <see cref="WorkflowMessage"/> errors, payment activity, email delivery, and rollback limitations.
+    /// </summary>
+    /// </summary>
     public class CreateRecurringSubscriptions : OrderTask
     {
         #region Fields
@@ -43,6 +48,13 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 
         #region Overrides
 
+        /// <summary>
+        /// Executes this order workflow task using the supplied <see cref="OrderTaskContext"/>. The return value controls whether the workflow continues; order changes, persistence, messages, payments, or email follow the existing implementation.
+        /// </summary>
+
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override bool Execute(OrderTaskContext context)
         {
             var result = true;
@@ -76,21 +88,45 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return result;
         }
 
+        /// <summary>
+        /// Attempts to roll back this task using the supplied <see cref="OrderTaskContext"/>. A successful return does not imply that external persistence, payment processing, account creation, or email delivery was reversed.
+        /// </summary>
+
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>
+        /// Gets the display name registered for this order task.
+        /// </summary>
+
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override string TaskName()
         {
             return "Create Recurring Subscriptions";
         }
 
+        /// <summary>
+        /// Gets this task's stable workflow identifier.
+        /// </summary>
+
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override string TaskId()
         {
             return "9E4EF40C-29DD-451F-8F79-F0526273B4EA";
         }
 
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override Task Clone()
         {
             return new CreateRecurringSubscriptions();

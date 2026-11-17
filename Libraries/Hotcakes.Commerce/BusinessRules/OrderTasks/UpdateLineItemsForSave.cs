@@ -26,8 +26,13 @@
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>Re-evaluates the current order's shipping status and persists the order for saving.</summary>
+    /// <remarks>This is an <see cref="OrderTask"/> executed with an <see cref="OrderTaskContext"/>.</remarks>
     public class UpdateLineItemsForSave : OrderTask
     {
+        /// <summary>Evaluates shipping status and updates the current order through the order service.</summary>
+        /// <param name="context">The order workflow context.</param>
+        /// <returns>Always <see langword="true"/> after invoking the order update.</returns>
         public override bool Execute(OrderTaskContext context)
         {
             context.Order.EvaluateCurrentShippingStatus();
@@ -35,21 +40,30 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return true;
         }
 
+        /// <summary>Reports that this persistence operation has no local rollback implementation.</summary>
+        /// <param name="context">The order workflow context.</param>
+        /// <returns>Always <see langword="true"/>.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>Gets the stable workflow identifier for this task.</summary>
+        /// <returns>The task ID <c>6E27D187-F367-40f8-8231-160B6E22AB86</c>.</returns>
         public override string TaskId()
         {
             return "6E27D187-F367-40f8-8231-160B6E22AB86";
         }
 
+        /// <summary>Gets the display name of this workflow task.</summary>
+        /// <returns><c>Update Line Items for Save</c>.</returns>
         public override string TaskName()
         {
             return "Update Line Items for Save";
         }
 
+        /// <summary>Gets the step label, which is the task name.</summary>
+        /// <returns><c>Update Line Items for Save</c>.</returns>
         public override string StepName()
         {
             var result = string.Empty;
@@ -60,6 +74,8 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return result;
         }
 
+        /// <summary>Creates an independent line-item update task instance.</summary>
+        /// <returns>A new <see cref="UpdateLineItemsForSave"/> instance.</returns>
         public override Task Clone()
         {
             return new UpdateLineItemsForSave();

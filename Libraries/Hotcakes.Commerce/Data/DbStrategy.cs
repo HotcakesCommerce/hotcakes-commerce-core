@@ -36,19 +36,46 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.Data
 {
+    /// <summary>
+    /// Provides Entity Framework-backed repository operations for a default entity type.
+    /// </summary>
+    /// <typeparam name="TDefaultEntity">The entity type used by the non-generic convenience members.</typeparam>
+    /// <remarks>
+    /// The strategy wraps the supplied <see cref="DbContext"/>. Entity sets are resolved lazily and cached by
+    /// entity type for the lifetime of the strategy. Queries remain deferred until the returned
+    /// <see cref="IQueryable{T}"/> is enumerated or otherwise executed by the caller.
+    /// </remarks>
     public class DbStrategy<TDefaultEntity> : IRepoStrategy<TDefaultEntity> where TDefaultEntity : class
     {
         private readonly DbContext _db;
 
         private readonly Dictionary<Type, object> _dbSets = new Dictionary<Type, object>();
 
+        /// <summary>
+        /// Initializes a strategy over an existing Entity Framework context.
+        /// </summary>
+        /// <param name="db">The context used for queries, tracking, persistence, and function execution.</param>
         public DbStrategy(DbContext db)
         {
             _db = db;
         }
 
+        /// <summary>
+        /// Gets or sets the logger used for concurrency diagnostics during persistence.
+        /// </summary>
         public ILogger Logger { get; set; }
 
+        /// <summary>
+        /// Persists changes currently tracked by the underlying context.
+        /// </summary>
+        /// <returns>
+        /// Always returns <see langword="true"/>. A <see cref="DbUpdateConcurrencyException"/> is logged at
+        /// debug severity and is not rethrown by this implementation.
+        /// </returns>
+        /// <remarks>
+        /// The underlying context performs its normal change detection and transaction behavior when
+        /// <see cref="DbContext.SaveChanges()"/> is called.
+        /// </remarks>
         public bool SubmitChanges()
         {
             try
@@ -68,11 +95,26 @@ namespace Hotcakes.Commerce.Data
             return true;
         }
 
+        /// <summary>
+        /// Gets a deferred query for the default entity type.
+        /// </summary>
+        /// <param name="predicate">An optional predicate applied to the query before it is returned.</param>
+        /// <returns>A deferred <see cref="IQueryable{T}"/> over the default entity set.</returns>
         public IQueryable<TDefaultEntity> GetQuery(Expression<Func<TDefaultEntity, bool>> predicate = null)
         {
             return GetQuery<TDefaultEntity>(predicate);
         }
 
+        /// <summary>
+        /// Gets a deferred query for an entity type supported by the underlying context.
+        /// </summary>
+        /// <typeparam name="TEntity">The entity type to query.</typeparam>
+        /// <param name="predicate">An optional predicate applied to the query before it is returned.</param>
+        /// <returns>A deferred <see cref="IQueryable{T}"/> over the requested entity set.</returns>
+        /// <remarks>
+        /// The entity set is cached by type after its first resolution. This method does not enumerate the
+        /// query or execute database work by itself.
+        /// </remarks>
         public IQueryable<TEntity> GetQuery<TEntity>(Expression<Func<TEntity, bool>> predicate = null)
             where TEntity : class
         {
@@ -84,26 +126,55 @@ namespace Hotcakes.Commerce.Data
             return q;
         }
 
+        /// <summary>
+        /// Marks a default entity for insertion in the underlying context.
+        /// </summary>
+        /// <param name="item">The entity to add.</param>
         public void Add(TDefaultEntity item)
         {
             AddEntity(item);
         }
 
+        /// <summary>
+        /// Marks an entity for insertion in the underlying context.
+        /// </summary>
+        /// <typeparam name="TEntity">The entity type to add.</typeparam>
+        /// <param name="item">The entity to add.</param>
         public void AddEntity<TEntity>(TEntity item) where TEntity : class
         {
             GetDbSet<TEntity>().Add(item);
         }
 
+        /// <summary>
+        /// Marks a default entity for deletion in the underlying context.
+        /// </summary>
+        /// <param name="item">The entity to remove.</param>
         public void Delete(TDefaultEntity item)
         {
             DeleteEntity(item);
         }
 
+        /// <summary>
+        /// Marks an entity for deletion in the underlying context.
+        /// </summary>
+        /// <typeparam name="TEntity">The entity type to remove.</typeparam>
+        /// <param name="item">The entity to remove.</param>
         public void DeleteEntity<TEntity>(TEntity item) where TEntity : class
         {
             GetDbSet<TEntity>().Remove(item);
         }
 
+        /// <summary>
+        /// Executes a mapped Entity Framework function and materializes its results.
+        /// </summary>
+        /// <typeparam name="TResult">The result type returned by the function.</typeparam>
+        /// <param name="functionName">The mapped function name passed to the object context.</param>
+        /// <param name="parameters">An object whose readable properties provide function parameter names and values.</param>
+        /// <returns>A materialized list containing the function results.</returns>
+        /// <remarks>
+        /// Parameter descriptors are created from the properties of <paramref name="parameters"/>. Null values
+        /// are represented with the corresponding property type. The function is executed immediately.
+        /// </remarks>
         public IList<TResult> ExecFunction<TResult>(string functionName, object parameters)
         {
             var oParams = new List<ObjectParameter>();
@@ -127,6 +198,15 @@ namespace Hotcakes.Commerce.Data
                     .ToList();
         }
 
+        /// <summary>
+        /// Executes a function intended to produce a scalar or command result without returning rows.
+        /// </summary>
+        /// <param name="functionName">The database function or procedure name to execute.</param>
+        /// <param name="parameters">The named parameter values appended to the command text.</param>
+        /// <remarks>
+        /// The command is executed immediately through the underlying object context. This method preserves
+        /// the existing command construction and does not return the command result.
+        /// </remarks>
         public void ExecScalarFunction(string functionName, List<KeyValuePair<string, object>> parameters)
         {
             var oParams = new List<ObjectParameter>();
@@ -144,16 +224,34 @@ namespace Hotcakes.Commerce.Data
             // ((IObjectContextAdapter)_db).ObjectContext.ExecuteFunction(functionName, oParams.ToArray());
         }
 
+        /// <summary>
+        /// Disposes the underlying context.
+        /// </summary>
+        /// <remarks>
+        /// Because the strategy wraps the supplied context, disposing the strategy also disposes that context.
+        /// </remarks>
         public void Dispose()
         {
             _db.Dispose();
         }
 
+        /// <summary>
+        /// Detaches an object from the underlying object context.
+        /// </summary>
+        /// <param name="item">The object to detach from change tracking.</param>
         public void Detach(object item)
         {
             ((IObjectContextAdapter) _db).ObjectContext.Detach(item);
         }
 
+        /// <summary>
+        /// Configures automatic change detection for the underlying context.
+        /// </summary>
+        /// <param name="detect">The requested change-detection setting.</param>
+        /// <remarks>
+        /// The current implementation always disables automatic change detection and does not use the value
+        /// of <paramref name="detect"/>. Callers should account for this compatibility-sensitive behavior.
+        /// </remarks>
         public void AutoDetectChanges(bool detect)
         {
             _db.Configuration.AutoDetectChangesEnabled = false;

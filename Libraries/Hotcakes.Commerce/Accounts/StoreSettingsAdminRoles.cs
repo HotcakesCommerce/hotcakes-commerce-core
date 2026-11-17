@@ -28,34 +28,46 @@ using System;
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Provides the administrative-role settings façade owned by a <see cref="StoreSettings"/> instance.</summary>
+    /// <remarks>Each value is scoped to the current store and is staged in the parent façade when set. The caller controls when the staged settings are persisted.</remarks>
     [Serializable]
     public class StoreSettingsAdminRoles
     {
         private readonly StoreSettings parent;
 
+        /// <summary>Initializes a new administrative-role façade for <paramref name="s"/>.</summary>
+        /// <param name="s">The store settings façade that owns the settings.</param>
         public StoreSettingsAdminRoles(StoreSettings s)
         {
             parent = s;
         }
 
+        /// <summary>Gets or sets the role name allowed to manage the catalog.</summary>
+        /// <value>The value persisted under <c>RoleCatalogManagement</c>.</value>
         public string RoleCatalogManagement
         {
             get { return parent.GetProp("RoleCatalogManagement"); }
             set { parent.SetProp("RoleCatalogManagement", value); }
         }
 
+        /// <summary>Gets or sets the role name allowed to manage orders and customers.</summary>
+        /// <value>The value persisted under <c>RoleOrdersAndCustomers</c>.</value>
         public string RoleOrdersAndCustomers
         {
             get { return parent.GetProp("RoleOrdersAndCustomers"); }
             set { parent.SetProp("RoleOrdersAndCustomers", value); }
         }
 
+        /// <summary>Gets or sets the role name allowed to administer the store.</summary>
+        /// <value>The value persisted under <c>RoleStoreAdministration</c>.</value>
         public string RoleStoreAdministration
         {
             get { return parent.GetProp("RoleStoreAdministration"); }
             set { parent.SetProp("RoleStoreAdministration", value); }
         }
 
+        /// <summary>Gets or sets the role name allowed to access the store administration experience on mobile devices.</summary>
+        /// <value>The value persisted under <c>RoleMobileAccess</c>.</value>
         public string RoleMobileAccess
         {
             get { return parent.GetProp("RoleMobileAccess"); }

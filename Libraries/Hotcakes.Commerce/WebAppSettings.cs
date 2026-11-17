@@ -35,8 +35,17 @@ using Hotcakes.Shipping;
 namespace Hotcakes.Commerce
 {
     /// <summary>
-    ///     These are application wide settings and apply to all stores in the system
+    ///     Provides application-wide Hotcakes Commerce settings that apply to all stores in the system.
     /// </summary>
+    /// <remarks>
+    ///     This partial declaration loads settings from the mapped <c>hotcakes.config</c> file and exposes
+    ///     values from the web application's <c>SiteSqlServer</c> connection string. The companion
+    ///     <c>WebAppSettings.System.cs</c> partial declaration contains runtime configuration such as
+    ///     cookie names and version information. Properties designer files are not part of this runtime
+    ///     configuration surface and are intentionally excluded. Typed settings use their documented
+    ///     defaults when the setting is absent or cannot be converted to the property's type. Connection
+    ///     string accessors catch configuration lookup failures and return an empty string.
+    /// </remarks>
     [Serializable]
     public partial class WebAppSettings
     {
@@ -88,16 +97,28 @@ namespace Hotcakes.Commerce
 
         #region Properties / Hotcakes.Config
 
+        /// <summary>
+        ///     Gets the maximum number of variants allowed for a product.
+        /// </summary>
+        /// <value>The configured <c>MaxVariants</c> value, or <c>150</c> when it is unavailable.</value>
         public static int MaxVariants
         {
             get { return GetAppSetting(SETTING_MAXVARIANTS, SETTING_MAXVARIANTS_DEFAULT); }
         }
 
+        /// <summary>
+        ///     Gets the text editor identifier used by default by the application.
+        /// </summary>
+        /// <value>The configured <c>DefaultTextEditor</c> value, or <c>TinyMCE</c>.</value>
         public static string DefaultTextEditor
         {
             get { return GetAppSetting(SETTING_TEXTEDITOR, SETTING_TEXTEDITOR_DEFAULT); }
         }
 
+        /// <summary>
+        ///     Gets the query-string parameter name used to identify an affiliate.
+        /// </summary>
+        /// <value>The configured <c>AffiliateQueryStringName</c> value, or <c>affid</c>.</value>
         public static string AffiliateQueryStringName
         {
             get
@@ -106,6 +127,10 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        ///     Gets the number of hours used when identifying low-inventory products.
+        /// </summary>
+        /// <value>The configured <c>InventoryLowHours</c> value, or <c>24</c>.</value>
         public static int InventoryLowHours
         {
             get
@@ -114,6 +139,10 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        ///     Gets the prefix placed before each line in the low-inventory report.
+        /// </summary>
+        /// <value>The configured <c>InventoryLowReportLinePrefix</c> value, or an empty string.</value>
         public static string InventoryLowReportLinePrefix
         {
             get
@@ -122,6 +151,10 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        ///     Gets the number of days for which a product is marked as new.
+        /// </summary>
+        /// <value>The configured <c>NewProductBadgeDays</c> value, or <c>30</c>.</value>
         public static int NewProductBadgeDays
         {
             get
@@ -130,6 +163,10 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        ///     Gets the height, in pixels, of the product long-description editor.
+        /// </summary>
+        /// <value>The configured <c>ProductLongDescriptionEditorHeight</c> value, or <c>300</c>.</value>
         public static int ProductLongDescriptionEditorHeight
         {
             get
@@ -138,6 +175,10 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        ///     Gets the maximum product price accepted by the application.
+        /// </summary>
+        /// <value>The configured decimal <c>ProductMaxPrice</c> value, or <c>99999999</c>.</value>
         public static decimal ProductMaxPrice
         {
             get
@@ -146,21 +187,37 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        ///     Gets the bvin of the country used as the application country.
+        /// </summary>
+        /// <value>The United States country bvin from <see cref="Country.UnitedStatesCountryBvin"/>.</value>
         public static string ApplicationCountryBvin
         {
             get { return Country.UnitedStatesCountryBvin; }
         }
 
+        /// <summary>
+        ///     Gets the application's weight unit.
+        /// </summary>
+        /// <value><see cref="WeightType.Pounds"/>.</value>
         public static WeightType ApplicationWeightUnits
         {
             get { return WeightType.Pounds; }
         }
 
+        /// <summary>
+        ///     Gets the application's length unit.
+        /// </summary>
+        /// <value><see cref="LengthType.Inches"/>.</value>
         public static LengthType ApplicationLengthUnits
         {
             get { return LengthType.Inches; }
         }
 
+        /// <summary>
+        ///     Gets the minimum password length configured for ASP.NET membership.
+        /// </summary>
+        /// <value>The value of <see cref="System.Web.Security.Membership.MinRequiredPasswordLength"/>.</value>
         public static int PasswordMinimumLength
         {
             get { return System.Web.Security.Membership.MinRequiredPasswordLength; }
@@ -170,6 +227,13 @@ namespace Hotcakes.Commerce
 
         #region Properties / Web.Config
 
+        /// <summary>
+        ///     Gets the SQL Server connection string configured for read-only operations.
+        /// </summary>
+        /// <value>
+        ///     The <c>SiteSqlServer</c> connection string prefixed with
+        ///     <c>ApplicationIntent=ReadOnly;</c>, or an empty string when configuration cannot be read.
+        /// </value>
         public static string HccReadOnlyConnectionString
         {
             get
@@ -186,6 +250,10 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        ///     Gets the SQL Server connection string configured under <c>SiteSqlServer</c>.
+        /// </summary>
+        /// <value>The configured connection string, or an empty string when configuration cannot be read.</value>
         public static string HccConnectionString
         {
             get
@@ -202,6 +270,13 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        ///     Gets an Entity Framework connection string for the primary Hotcakes database.
+        /// </summary>
+        /// <value>
+        ///     An entity connection using provider <c>System.Data.SqlClient</c>, the embedded
+        ///     <c>HccDbContext</c> metadata, and <see cref="HccConnectionString"/> as its provider connection string.
+        /// </value>
         public static string HccEFConnectionString
         {
             get
@@ -214,6 +289,13 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        ///     Gets an Entity Framework connection string for read-only Hotcakes database operations.
+        /// </summary>
+        /// <value>
+        ///     An entity connection using provider <c>System.Data.SqlClient</c>, the embedded
+        ///     <c>HccDbContext</c> metadata, and <see cref="HccReadOnlyConnectionString"/> as its provider connection string.
+        /// </value>
         public static string HccEFReadOnlyConnectionString
         {
             get

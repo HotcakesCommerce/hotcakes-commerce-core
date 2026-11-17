@@ -29,16 +29,31 @@ using System.Linq;
 
 namespace Hotcakes.Commerce.Scheduling
 {
+    /// <summary>
+    /// Provides scheduling operations backed by a <see cref="QueuedTaskRepository"/>.
+    /// </summary>
     public class ScheduleService : HccServiceBase
     {
+        /// <summary>Initializes the service and its queued-task repository.</summary>
+        /// <param name="context">The commerce request context for the service.</param>
         public ScheduleService(HccRequestContext context)
             : base(context)
         {
             QueuedTasks = Factory.CreateRepo<QueuedTaskRepository>(Context);
         }
 
+        /// <summary>Gets or sets the repository used for queued-task operations.</summary>
+        /// <remarks>The setter is protected so derived services can replace the repository implementation.</remarks>
         public QueuedTaskRepository QueuedTasks { get; protected set; }
 
+        /// <summary>Removes pending tasks for a processor.</summary>
+        /// <param name="storeId">The store identifier supplied by the caller.</param>
+        /// <param name="processorId">The processor identifier whose pending tasks should be removed.</param>
+        /// <remarks>
+        /// The current implementation reads the first page of tasks through <see cref="QueuedTaskRepository.FindAllPaged(int, int)"/>
+        /// and deletes matching pending tasks. The <paramref name="storeId"/> argument is not used to filter that query; the repository
+        /// applies the store associated with its current request context. Non-pending tasks are retained.
+        /// </remarks>
         public void RemoveAllTasksForProcessor(long storeId, Guid processorId)
         {
             var tasks = QueuedTasks.FindAllPaged(1, 1000);

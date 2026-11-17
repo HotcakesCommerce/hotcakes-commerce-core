@@ -29,20 +29,40 @@ using System.Xml.Serialization;
 namespace Hotcakes.Commerce.Payment.Methods
 {
     /// <summary>
-    ///     Moneris Hosted Pay Page Data Preload Response
+    /// Represents the XML response returned by Moneris when a Hosted Pay Page
+    /// data-preload request is submitted.
     /// </summary>
+    /// <remarks>
+    /// The root element is <c>response</c>. The element names are part of the
+    /// Moneris contract and are preserved by the <see cref="XmlElementAttribute"/>
+    /// declarations on each property.
+    /// </remarks>
     [XmlRoot("response")]
     public class MonerisHPPDPResponse
     {
+        /// <summary>
+        /// Gets or sets the Moneris Hosted Pay Page identifier returned in
+        /// <c>hpp_id</c>.
+        /// </summary>
         [XmlElement("hpp_id")]
         public string HostedPayPageId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the preload ticket returned in <c>ticket</c>.
+        /// </summary>
         [XmlElement("ticket")]
         public string Ticket { get; set; }
 
+        /// <summary>
+        /// Gets or sets the order identifier returned in <c>order_id</c>.
+        /// </summary>
         [XmlElement("order_id")]
         public string OrderId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the provider response code returned in
+        /// <c>response_code</c>.
+        /// </summary>
         [XmlElement("response_code")]
         public string ResponseCode { get; set; }
     }

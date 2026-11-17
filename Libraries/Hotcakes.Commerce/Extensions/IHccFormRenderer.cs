@@ -30,10 +30,29 @@ using System.Web.Mvc.Html;
 
 namespace Hotcakes.Commerce.Extensions
 {
+    /// <summary>
+    /// Defines the renderer used by HCC MVC form extension methods.
+    /// </summary>
+    /// <remarks>
+    /// Implementations may render a virtual form rather than a conventional HTML form;
+    /// the HCC GET and POST selector attributes use <see cref="VirtualFormUsed"/> to
+    /// select the corresponding <c>hccrequesttype</c> route value.
+    /// </remarks>
     public interface IHccFormRenderer
     {
+        /// <summary>
+        /// Gets a value indicating whether the most recent form rendering used a virtual form.
+        /// </summary>
         bool VirtualFormUsed { get; }
 
+        /// <summary>
+        /// Renders an HCC form and returns its MVC form scope.
+        /// </summary>
+        /// <param name="htmlHelper">The MVC HTML helper for the current view.</param>
+        /// <param name="formAction">The action URL or form target to render.</param>
+        /// <param name="method">The HTTP method represented by the form.</param>
+        /// <param name="htmlAttributes">HTML attributes applied to the rendered form.</param>
+        /// <returns>An <see cref="MvcForm"/> representing the rendered form.</returns>
         MvcForm FormHelper(HtmlHelper htmlHelper, string formAction, FormMethod method,
             IDictionary<string, object> htmlAttributes);
     }

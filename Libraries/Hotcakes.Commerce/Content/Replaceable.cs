@@ -29,17 +29,27 @@ using System.Collections.Generic;
 namespace Hotcakes.Commerce.Content
 {
     /// <summary>
-    ///     Holds a temporary list of replacement tags
-    ///     Allows you to generate "one off" tags or lists as needed
-    ///     Used by the "new password" email messages
+    /// Holds a temporary list of replacement tags for one-off template substitutions.
     /// </summary>
+    /// <remarks>
+    /// This implementation is used for ad hoc tokens, including tokens supplied by new-password email messages.
+    /// The <see cref="Tags"/> list is returned directly by <see cref="GetReplaceableTags(HccRequestContext)"/>.
+    /// </remarks>
     public class Replaceable : IReplaceable
     {
+        /// <summary>
+        /// Initializes an instance with an empty list of replacement tags.
+        /// </summary>
         public Replaceable()
         {
             Tags = new List<HtmlTemplateTag>();
         }
 
+        /// <summary>
+        /// Initializes an instance containing one replacement tag.
+        /// </summary>
+        /// <param name="tagName">The token to find in template text.</param>
+        /// <param name="replacement">The text that replaces the token.</param>
         public Replaceable(string tagName, string replacement)
         {
             Tags = new List<HtmlTemplateTag>();
@@ -47,8 +57,22 @@ namespace Hotcakes.Commerce.Content
             Tags.Add(t);
         }
 
+        /// <summary>
+        /// Gets or sets the replacement tags supplied by this instance.
+        /// </summary>
+        /// <remarks>
+        /// The list is mutable and is returned as-is by <see cref="GetReplaceableTags(HccRequestContext)"/>.
+        /// </remarks>
         public List<HtmlTemplateTag> Tags { get; set; }
 
+        /// <summary>
+        /// Gets the replacement tags held by this instance.
+        /// </summary>
+        /// <param name="context">The request context for the email operation. This implementation does not read the parameter.</param>
+        /// <returns>The current <see cref="Tags"/> list, not a copy.</returns>
+        /// <remarks>
+        /// The context parameter is accepted to implement <see cref="IReplaceable"/> but is ignored by this class.
+        /// </remarks>
         public List<HtmlTemplateTag> GetReplaceableTags(HccRequestContext context)
         {
             return Tags;

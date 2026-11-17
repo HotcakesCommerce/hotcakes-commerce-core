@@ -28,27 +28,33 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Commerce.Search
 {
+    /// <summary>
+    /// Represents a product property facet and its available values.
+    /// </summary>
     public class PropertyFacetItem
     {
+        /// <summary>
+        /// Initializes a property facet with an empty list of values.
+        /// </summary>
         public PropertyFacetItem()
         {
             FacetItems = new List<FacetItem>();
         }
 
         /// <summary>
-        /// This is the localized name of the current facet item.
+        /// Gets or sets the localized display name of the property.
         /// </summary>
         public string DisplayName { get; set; }
         /// <summary>
-        /// If this facet has children, this property will contain a list of those child facets.
+        /// Gets or sets the available values for this property facet.
         /// </summary>
         public List<FacetItem> FacetItems { get; set; }
         /// <summary>
-        /// This is the unique identifier for the current facet item.
+        /// Gets or sets the property identifier.
         /// </summary>
         public long Id { get; set; }
         /// <summary>
-        /// This is the internal (store) name of the current facet item as saved in the administration area.
+        /// Gets or sets the internal store name of the property.
         /// </summary>
         public string PropertyName { get; set; }
     }

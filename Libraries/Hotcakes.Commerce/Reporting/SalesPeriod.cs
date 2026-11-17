@@ -26,11 +26,16 @@
 
 namespace Hotcakes.Commerce.Reporting
 {
+    /// <summary>Identifies the reporting period used to group chart and comparison data.</summary>
     public enum SalesPeriod
     {
+        /// <summary>Groups data by year.</summary>
         Year = 1,
+        /// <summary>Groups data by quarter.</summary>
         Quarter = 2,
+        /// <summary>Groups data by month.</summary>
         Month = 3,
+        /// <summary>Groups data by week.</summary>
         Week = 4
     }
 }

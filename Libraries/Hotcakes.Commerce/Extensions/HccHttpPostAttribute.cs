@@ -30,6 +30,14 @@ using System.Web.Mvc;
 
 namespace Hotcakes.Commerce.Extensions
 {
+    /// <summary>
+    /// Selects an MVC action for an HTTP POST or an HCC virtual POST form request.
+    /// </summary>
+    /// <remarks>
+    /// For a virtual HCC form, the <c>hccrequesttype</c> route value must equal
+    /// <c>hccpost</c>. Otherwise selection delegates to MVC's standard
+    /// <see cref="AcceptVerbsAttribute"/> POST behavior.
+    /// </remarks>
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class HccHttpPostAttribute : ActionMethodSelectorAttribute
     {
@@ -37,6 +45,15 @@ namespace Hotcakes.Commerce.Extensions
         private static readonly AcceptVerbsAttribute _innerAttribute = new AcceptVerbsAttribute(HttpVerbs.Post);
 
         // Methods
+        /// <summary>
+        /// Determines whether the attributed action is eligible for the current request.
+        /// </summary>
+        /// <param name="controllerContext">The current MVC controller context.</param>
+        /// <param name="methodInfo">The action method being tested.</param>
+        /// <returns>
+        /// <see langword="true"/> for an HCC virtual POST request, or for a standard
+        /// HTTP POST request when no virtual form request type is present.
+        /// </returns>
         public override bool IsValidForRequest(ControllerContext controllerContext, MethodInfo methodInfo)
         {
             var hccRequestType = (string) controllerContext.RequestContext.RouteData.Values["hccrequesttype"];

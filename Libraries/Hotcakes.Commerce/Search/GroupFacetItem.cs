@@ -28,8 +28,19 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Commerce.Search
 {
+    /// <summary>
+    /// Represents a grouped category facet whose child values share a parent.
+    /// </summary>
+    /// <remarks>
+    /// <see cref="ProductSearchHelper.GroupCategories(System.Collections.Generic.List{FacetItem})"/>
+    /// creates groups only when multiple child values share a parent; a single child is returned
+    /// directly instead of as a group.
+    /// </remarks>
     public class GroupFacetItem : FacetItem
     {
+        /// <summary>
+        /// Gets or sets the child facet values in this group.
+        /// </summary>
         public List<FacetItem> ChildItems { get; set; }
     }
 }

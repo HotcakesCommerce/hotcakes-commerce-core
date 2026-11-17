@@ -26,12 +26,19 @@
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>Represents store locale data.</summary>
+    /// <remarks>Property names and serialized values are compatibility-sensitive.</remarks>
     public class HccLocale
     {
+        /// <summary>Gets or sets the locale code.</summary>
         public string Code { get; set; }
+        /// <summary>Gets or sets the fallback locale code.</summary>
         public string Fallback { get; set; }
+        /// <summary>Gets or sets the English locale name.</summary>
         public string EnglishName { get; set; }
+        /// <summary>Gets or sets the native locale name.</summary>
         public string NativeName { get; set; }
+        /// <summary>Gets or sets display text for the locale.</summary>
         public string Text { get; set; }
     }
 }

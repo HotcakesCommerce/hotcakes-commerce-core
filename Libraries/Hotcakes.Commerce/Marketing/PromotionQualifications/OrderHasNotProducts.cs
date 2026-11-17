@@ -31,16 +31,19 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Matches orders that contain none of the configured products.</summary>
     public class OrderHasNotProducts : PromotionIdQualificationBase
     {
         #region Constants
 
+        /// <summary>Stable serialized type identifier for this qualification.</summary>
         public const string TypeIdString = "FAA3EF10-B54E-466D-9495-3990E1828A39";
 
         #endregion
 
         #region Init
 
+        /// <summary>Initializes the qualification with the lowest processing cost.</summary>
         public OrderHasNotProducts()
         {
             ProcessingCost = RelativeProcessingCost.Lowest;
@@ -68,11 +71,13 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         #region Overrides
 
+        /// <summary>Gets the stable order-exclusion qualification identifier.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdString); }
         }
 
+        /// <summary>Builds a description of the excluded products.</summary>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var result = "When order doesn't have:<ul>";
@@ -94,11 +99,13 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             return result;
         }
 
+        /// <summary>Gets the product-exclusion setting key.</summary>
         public override string IdSettingName
         {
             get { return "ProductNotIds"; }
         }
 
+        /// <summary>Matches order and line-item scopes when no order item has a configured product ID.</summary>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             if (mode != PromotionQualificationMode.Orders &&

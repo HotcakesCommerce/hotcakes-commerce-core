@@ -42,6 +42,10 @@ namespace Hotcakes.Commerce.Catalog
     {
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="CatalogRolesRepository" />.
+        /// </summary>
+        /// <param name="context">Value used to initialize the instance.</param>
         public CatalogRolesRepository(HccRequestContext context)
             : base(context)
         {
@@ -77,16 +81,34 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Performs the <c>FindByProductId</c> catalog operation.
+        /// </summary>
+        /// <param name="productId">Input used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
+        /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
         public List<CatalogRole> FindByProductId(Guid productId)
         {
             return FindListPoco(q => { return q.Where(r => r.ProductId == productId); });
         }
 
+        /// <summary>
+        /// Performs the <c>FindByCategoryId</c> catalog operation.
+        /// </summary>
+        /// <param name="categoryId">Input used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
+        /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
         public List<CatalogRole> FindByCategoryId(Guid categoryId)
         {
             return FindListPoco(q => { return q.Where(r => r.CategoryId == categoryId); });
         }
 
+        /// <summary>
+        /// Performs the <c>FindByCategoryIds</c> catalog operation.
+        /// </summary>
+        /// <param name="categoryIds">Input used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
+        /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
         public List<CatalogRole> FindByCategoryIds(List<Guid> categoryIds)
         {
             return
@@ -94,16 +116,34 @@ namespace Hotcakes.Commerce.Catalog
                     q => { return q.Where(r => r.CategoryId.HasValue && categoryIds.Contains(r.CategoryId.Value)); });
         }
 
+        /// <summary>
+        /// Performs the <c>FindByProductTypeId</c> catalog operation.
+        /// </summary>
+        /// <param name="productTypeId">Input used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
+        /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
         public List<CatalogRole> FindByProductTypeId(Guid productTypeId)
         {
             return FindListPoco(q => { return q.Where(r => r.ProductTypeId == productTypeId); });
         }
 
+        /// <summary>
+        /// Performs the <c>Delete</c> catalog operation.
+        /// </summary>
+        /// <param name="roleId">Input used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
+        /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
         public bool Delete(long roleId)
         {
             return Delete(y => y.CatalogRoleId == roleId);
         }
 
+        /// <summary>
+        /// Performs the <c>CloneForProduct</c> catalog operation.
+        /// </summary>
+        /// <param name="productId">Input used by the operation.</param>
+        /// <param name="newProductId">Input used by the operation.</param>
+        /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
         public void CloneForProduct(string productId, string newProductId)
         {
             var productGuid = DataTypeHelper.BvinToGuid(productId);
@@ -128,6 +168,12 @@ namespace Hotcakes.Commerce.Catalog
 
         #region Implementation
 
+        /// <summary>
+        /// Performs the <c>CopyDataToModel</c> catalog operation.
+        /// </summary>
+        /// <param name="data">Input used by the operation.</param>
+        /// <param name="model">Input used by the operation.</param>
+        /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
         protected override void CopyDataToModel(hcc_CatalogRoles data, CatalogRole model)
         {
             model.CatalogRoleId = data.CatalogRoleId;
@@ -150,6 +196,12 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Performs the <c>CopyModelToData</c> catalog operation.
+        /// </summary>
+        /// <param name="data">Input used by the operation.</param>
+        /// <param name="model">Input used by the operation.</param>
+        /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
         protected override void CopyModelToData(hcc_CatalogRoles data, CatalogRole model)
         {
             data.CatalogRoleId = model.CatalogRoleId;

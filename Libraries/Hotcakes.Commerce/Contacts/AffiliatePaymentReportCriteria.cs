@@ -28,23 +28,37 @@ using System;
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>Defines date and text filters for affiliate payment reports.</summary>
+    /// <remarks>The payment repository applies both date bounds inclusively and orders results by payment date.</remarks>
     public class AffiliatePaymentReportCriteria
     {
+        /// <summary>Specifies which payment field is compared with <see cref="SearchText"/>.</summary>
         public enum SearchType
         {
+            /// <summary>Searches by the numeric payment identifier.</summary>
             PaymentId = 0,
+            /// <summary>Searches within the affiliate's referral identifier.</summary>
             AffiliateId = 1
         }
 
+        /// <summary>Initializes the report to the broad historical date range used by the existing API.</summary>
         public AffiliatePaymentReportCriteria()
         {
             StartDateUtc = new DateTime(1900, 1, 1);
             EndDateUtc = new DateTime(3000, 1, 1);
         }
 
+        /// <summary>Gets or sets the inclusive UTC start date for payments.</summary>
         public DateTime StartDateUtc { get; set; }
+
+        /// <summary>Gets or sets the inclusive UTC end date for payments.</summary>
         public DateTime EndDateUtc { get; set; }
+
+        /// <summary>Gets or sets the field used to interpret <see cref="SearchText"/>.</summary>
         public SearchType SearchBy { get; set; }
+
+        /// <summary>Gets or sets the optional text used by the selected <see cref="SearchBy"/> criterion.</summary>
+        /// <remarks>Non-numeric payment searches are treated as an unmatched payment identifier.</remarks>
         public string SearchText { get; set; }
     }
 }

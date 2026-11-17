@@ -26,9 +26,14 @@
 
 namespace Hotcakes.Commerce.Membership
 {
+    /// <summary>
+    /// Identifies how a <see cref="UserQuestion"/> accepts an answer.
+    /// </summary>
     public enum UserQuestionType
     {
+        /// <summary>Allows the respondent to enter a free-form answer.</summary>
         FreeAnswer = 0,
+        /// <summary>Allows the respondent to select from the question's <see cref="UserQuestion.Values"/>.</summary>
         MultipleChoice = 1
     }
 }

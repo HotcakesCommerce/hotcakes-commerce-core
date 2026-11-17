@@ -26,10 +26,13 @@
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>Contains the outcome arguments for a PayPal Express Checkout operation.</summary>
     public class PaypalExpressCheckoutArgs
     {
         private bool _failed = true;
 
+        /// <summary>Gets or sets whether the checkout operation failed.</summary>
+        /// <value><c>true</c> by default, until the operation explicitly marks the result as successful.</value>
         public bool Failed
         {
             get { return _failed; }

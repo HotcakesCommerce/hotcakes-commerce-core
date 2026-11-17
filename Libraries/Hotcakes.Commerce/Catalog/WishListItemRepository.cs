@@ -32,6 +32,7 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>Provides the catalog WishListItemRepository API.</summary>
     public class WishListItemRepository : HccSimpleRepoBase<hcc_WishListItem, WishListItem>
     {
         public WishListItemRepository(HccRequestContext c)
@@ -39,6 +40,9 @@ namespace Hotcakes.Commerce.Catalog
         {
         }
 
+        /// <summary>Gets or sets the CopyDataToModel value.</summary>
+        /// <param name="data">Input used by this operation.</param>
+        /// <param name="model">Input used by this operation.</param>
         protected override void CopyDataToModel(hcc_WishListItem data, WishListItem model)
         {
             model.Id = data.Id;
@@ -50,6 +54,9 @@ namespace Hotcakes.Commerce.Catalog
             model.StoreId = data.StoreId;
         }
 
+        /// <summary>Gets or sets the CopyModelToData value.</summary>
+        /// <param name="data">Input used by this operation.</param>
+        /// <param name="model">Input used by this operation.</param>
         protected override void CopyModelToData(hcc_WishListItem data, WishListItem model)
         {
             data.Id = model.Id;
@@ -61,6 +68,9 @@ namespace Hotcakes.Commerce.Catalog
             data.StoreId = model.StoreId;
         }
 
+        /// <summary>Gets or sets the Find value.</summary>
+        /// <param name="id">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public WishListItem Find(long id)
         {
             var result = FindForAllStores(id);
@@ -74,17 +84,26 @@ namespace Hotcakes.Commerce.Catalog
             return null;
         }
 
+        /// <summary>Gets or sets the FindForAllStores value.</summary>
+        /// <param name="id">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public WishListItem FindForAllStores(long id)
         {
             return FindFirstPoco(y => y.Id == id);
         }
 
+        /// <summary>Gets or sets the Create value.</summary>
+        /// <param name="item">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public override bool Create(WishListItem item)
         {
             item.StoreId = Context.CurrentStore.Id;
             return base.Create(item);
         }
 
+        /// <summary>Gets or sets the Update value.</summary>
+        /// <param name="c">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public bool Update(WishListItem c)
         {
             if (c.StoreId != Context.CurrentStore.Id)
@@ -94,6 +113,9 @@ namespace Hotcakes.Commerce.Catalog
             return Update(c, y => y.Id == c.Id);
         }
 
+        /// <summary>Gets or sets the Delete value.</summary>
+        /// <param name="id">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public bool Delete(long id)
         {
             var storeId = Context.CurrentStore.Id;
@@ -105,17 +127,30 @@ namespace Hotcakes.Commerce.Catalog
             return Delete(y => y.Id == id && y.StoreId == storeId);
         }
 
+        /// <summary>Gets or sets the FindByProductId value.</summary>
+        /// <param name="productId">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public List<WishListItem> FindByProductId(string productId)
         {
             var storeId = Context.CurrentStore.Id;
             return FindByProductIdForStore(productId, storeId);
         }
 
+        /// <summary>Gets or sets the FindByProductIdForStore value.</summary>
+        /// <param name="productId">Input used by this operation.</param>
+        /// <param name="storeId">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public List<WishListItem> FindByProductIdForStore(string productId, long storeId)
         {
             return FindByProductIdPaged(productId, 1, int.MaxValue, storeId);
         }
 
+        /// <summary>Gets or sets the FindByProductIdPaged value.</summary>
+        /// <param name="productId">Input used by this operation.</param>
+        /// <param name="pageNumber">Input used by this operation.</param>
+        /// <param name="pageSize">Input used by this operation.</param>
+        /// <param name="storeId">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public List<WishListItem> FindByProductIdPaged(string productId, int pageNumber, int pageSize, long storeId)
         {
             var productGuid = DataTypeHelper.BvinToGuid(productId);
@@ -127,6 +162,11 @@ namespace Hotcakes.Commerce.Catalog
             }, pageNumber, pageSize);
         }
 
+        /// <summary>Gets or sets the FindByCustomerIdPaged value.</summary>
+        /// <param name="customerId">Input used by this operation.</param>
+        /// <param name="pageNumber">Input used by this operation.</param>
+        /// <param name="pageSize">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public List<WishListItem> FindByCustomerIdPaged(string customerId, int pageNumber, int pageSize)
         {
             var storeId = Context.CurrentStore.Id;
@@ -138,18 +178,28 @@ namespace Hotcakes.Commerce.Catalog
             }, pageNumber, pageSize);
         }
 
+        /// <summary>Gets or sets the DeleteForProductId value.</summary>
+        /// <param name="productBvin">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public bool DeleteForProductId(string productBvin)
         {
             var productGuid = DataTypeHelper.BvinToGuid(productBvin);
             return Delete(y => y.ProductId == productGuid);
         }
 
+        /// <summary>Gets or sets the DeleteForProductIdForStore value.</summary>
+        /// <param name="productBvin">Input used by this operation.</param>
+        /// <param name="storeId">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public bool DeleteForProductIdForStore(string productBvin, long storeId)
         {
             var productGuid = DataTypeHelper.BvinToGuid(productBvin);
             return Delete(y => y.ProductId == productGuid && y.StoreId == storeId);
         }
 
+        /// <summary>Gets or sets the DeleteForCustomerId value.</summary>
+        /// <param name="customerId">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public bool DeleteForCustomerId(string customerId)
         {
             return Delete(y => y.CustomerId == customerId);

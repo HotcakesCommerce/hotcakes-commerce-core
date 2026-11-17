@@ -41,16 +41,34 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>
+    /// Starts the Moneris Hosted Pay Page checkout for the current order.
+    /// </summary>
+    /// <remarks>
+    /// The task posts the order, address, tax, shipping, discount, and line-item values to Moneris,
+    /// then redirects the current response to the hosted payment page. It reports a localized
+    /// customer-visible error through <see cref="WorkflowMessage"/> if the request or response fails.
+    /// </remarks>
     public class StartMonerisCheckout : ThirdPartyCheckoutOrderTask
     {
+        /// <summary>Gets the Moneris Hosted Pay Page endpoint used in developer mode.</summary>
         public const string DevelopmentUrl = "https://esqa.moneris.com/HPPDP/index.php";
+
+        /// <summary>Gets the Moneris Hosted Pay Page production endpoint.</summary>
         public const string ProductionUrl = "https://www3.moneris.com/HPPDP/index.php";
 
+        /// <summary>Gets the payment-method identifier for Moneris.</summary>
         public override string PaymentMethodId
         {
             get { return PaymentMethods.MonerisId; }
         }
 
+        /// <summary>
+        /// Posts the current order to Moneris and redirects the response to the hosted checkout page.
+        /// </summary>
+        /// <param name="context">The order workflow context containing the current order and store settings.</param>
+        /// <returns><see langword="false"/> after the redirect or when no HTTP context is available; also returns <see langword="false"/> when an error is recorded.</returns>
+        /// <remarks>The method records a localized <see cref="WorkflowMessage"/> for checkout failures and does not undo any external Moneris request.</remarks>
         public override bool ProcessCheckout(OrderTaskContext context)
         {
             if (context.HccApp.CurrentRequestContext.RoutingContext.HttpContext != null)
@@ -155,21 +173,30 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return false;
         }
 
+        /// <summary>Creates an independent Moneris checkout task instance.</summary>
+        /// <returns>A new <see cref="StartMonerisCheckout"/> instance.</returns>
         public override Task Clone()
         {
             return new StartMonerisCheckout();
         }
 
+        /// <summary>Reports that this task has no local rollback operation.</summary>
+        /// <param name="context">The order workflow context.</param>
+        /// <returns>Always <see langword="true"/>; a hosted-payment redirect cannot be rolled back here.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>Gets the stable workflow identifier for this task.</summary>
+        /// <returns>The Moneris checkout task ID <c>CD1E286D-3476-48E8-A227-FB5DDBA5A241</c>.</returns>
         public override string TaskId()
         {
             return "CD1E286D-3476-48E8-A227-FB5DDBA5A241";
         }
 
+        /// <summary>Gets the display name of this workflow task.</summary>
+        /// <returns><c>Start Moneris Checkout</c>.</returns>
         public override string TaskName()
         {
             return "Start Moneris Checkout";

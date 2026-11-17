@@ -26,9 +26,20 @@
 
 namespace Hotcakes.Commerce.Controls
 {
+    /// <summary>
+    /// Identifies which checkout address a control or workflow is operating on.
+    /// The numeric values are part of the existing compatibility contract.
+    /// </summary>
     public enum AddressTypes
     {
+        /// <summary>
+        /// The address used for billing and payment-related information.
+        /// </summary>
         Billing = 0,
+
+        /// <summary>
+        /// The address used for shipment delivery information.
+        /// </summary>
         Shipping = 1
     }
 }

@@ -26,10 +26,14 @@
 
 namespace Hotcakes.Commerce.Content
 {
+    /// <summary>Identifies the kind of commerce object associated with a <see cref="CustomUrl"/>.</summary>
     public enum CustomUrlType
     {
+        /// <summary>A URL that is not associated with a product or category.</summary>
         General = 0,
+        /// <summary>A URL associated with a product.</summary>
         Product = 1,
+        /// <summary>A URL associated with a category.</summary>
         Category = 2
     }
 }

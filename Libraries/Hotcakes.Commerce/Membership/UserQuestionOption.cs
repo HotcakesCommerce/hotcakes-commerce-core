@@ -28,8 +28,14 @@ using System;
 
 namespace Hotcakes.Commerce.Membership
 {
+    /// <summary>
+    /// Represents one selectable answer for a <see cref="UserQuestion"/>.
+    /// </summary>
     public class UserQuestionOption
     {
+        /// <summary>
+        /// Initializes an option with an empty identifier and value and a UTC update timestamp.
+        /// </summary>
         public UserQuestionOption()
         {
             Bvin = string.Empty;
@@ -37,13 +43,20 @@ namespace Hotcakes.Commerce.Membership
             Value = string.Empty;
         }
 
+        /// <summary>
+        /// Initializes an option with the specified display value.
+        /// </summary>
+        /// <param name="val">The option value.</param>
         public UserQuestionOption(string val) : this()
         {
             Value = val;
         }
 
+        /// <summary>Gets or sets the option's string identifier.</summary>
         public string Bvin { get; set; }
+        /// <summary>Gets or sets the UTC timestamp for the last model update.</summary>
         public DateTime LastUpdated { get; set; }
+        /// <summary>Gets or sets the option's display value.</summary>
         public string Value { get; set; }
     }
 }

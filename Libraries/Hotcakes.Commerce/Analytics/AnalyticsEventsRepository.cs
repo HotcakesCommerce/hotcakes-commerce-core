@@ -32,8 +32,21 @@ using Hotcakes.Commerce.Data.EF;
 
 namespace Hotcakes.Commerce.Analytics
 {
+    /// <summary>
+    /// Provides persistence operations for store-scoped <see cref="AnalyticsEvent"/> records.
+    /// </summary>
+    /// <remarks>
+    /// Queries and deletes are executed against the analytics event data store. Methods that accept
+    /// a store identifier or customer identifier do not add authorization checks; callers must supply
+    /// identifiers appropriate to the current operation and enforce any required access policy.
+    /// </remarks>
+    /// <seealso cref="AnalyticsService"/>
     public class AnalyticsEventsRepository : HccSimpleRepoBase<hcc_AnalyticsEvent, AnalyticsEvent>
     {
+        /// <summary>
+        /// Initializes a repository using the specified commerce request context.
+        /// </summary>
+        /// <param name="context">The request context that supplies the current commerce scope.</param>
         public AnalyticsEventsRepository(HccRequestContext context)
             : base(context)
         {
@@ -65,26 +78,54 @@ namespace Hotcakes.Commerce.Analytics
             data.DateTime = model.DateTime;
         }
 
+        /// <summary>
+        /// Deletes one analytics event by its database identifier.
+        /// </summary>
+        /// <param name="analyticsEventId">The identifier of the event to delete.</param>
+        /// <returns><see langword="true"/> when the repository delete operation succeeds; otherwise, <see langword="false"/>.</returns>
         public bool Delete(long analyticsEventId)
         {
             return Delete(a => a.AnalyticsEventId == analyticsEventId);
         }
 
+        /// <summary>
+        /// Deletes analytics events associated with a customer identifier.
+        /// </summary>
+        /// <param name="userId">The customer identifier whose events should be deleted.</param>
+        /// <returns><see langword="true"/> when the repository delete operation succeeds; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>This method does not independently verify that the customer belongs to the current store.</remarks>
         public bool DeleteByUserId(string userId)
         {
             return Delete(a => a.UserId == userId);
         }
 
+        /// <summary>
+        /// Deletes all analytics events for the specified store.
+        /// </summary>
+        /// <param name="storID">The store identifier whose events should be deleted.</param>
+        /// <returns><see langword="true"/> when the repository delete operation succeeds; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>This is a destructive operation and does not infer the store identifier from the request context.</remarks>
         public bool DeleteAllForCurrentStore(long storID)
         {
             return Delete(a => a.StoreId == storID);
         }
 
+        /// <summary>
+        /// Finds analytics events associated with a browsing session.
+        /// </summary>
+        /// <param name="sessionGuid">The browsing-session identifier to find.</param>
+        /// <returns>A list of matching analytics events.</returns>
         public List<AnalyticsEvent> FindBySessionGuid(Guid sessionGuid)
         {
             return FindListPoco(q => { return q.Where(a => a.SessionGuid == sessionGuid); });
         }
 
+        /// <summary>
+        /// Finds analytics events associated with a customer identifier.
+        /// </summary>
+        /// <param name="userId">The customer identifier to find.</param>
+        /// <returns>A list of matching analytics events.</returns>
+        /// <remarks>This method does not independently verify that the customer belongs to the current store.</remarks>
         public List<AnalyticsEvent> FindByUserId(string userId)
         {
             return FindListPoco(q => { return q.Where(a => a.UserId == userId); });

@@ -28,8 +28,10 @@ using System;
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>Represents the lightweight list metadata returned by paged list queries.</summary>
     public class MailingListSnapShot
     {
+        /// <summary>Initializes a snapshot with default identifiers, timestamp, and visibility.</summary>
         public MailingListSnapShot()
         {
             Id = 0;
@@ -39,10 +41,15 @@ namespace Hotcakes.Commerce.Contacts
             StoreId = 0;
         }
 
+        /// <summary>Gets or sets the list identifier.</summary>
         public long Id { get; set; }
+        /// <summary>Gets or sets the list display name.</summary>
         public string Name { get; set; }
+        /// <summary>Gets or sets the UTC timestamp of the last update.</summary>
         public DateTime LastUpdatedUtc { get; set; }
+        /// <summary>Gets or sets whether the represented list is private.</summary>
         public bool IsPrivate { get; set; }
+        /// <summary>Gets or sets the identifier of the owning store.</summary>
         public long StoreId { get; set; }
     }
 }

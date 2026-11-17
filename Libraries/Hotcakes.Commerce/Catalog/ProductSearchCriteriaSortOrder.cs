@@ -26,10 +26,14 @@
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>Sort direction used by product-store search criteria.</summary>
     public enum ProductSearchCriteriaSortOrder
     {
+        /// <summary>Specifies the NotSet value.</summary>
         NotSet = -1,
+        /// <summary>Specifies the Ascending value.</summary>
         Ascending = 0,
+        /// <summary>Specifies the Descending value.</summary>
         Descending = 1
     }
 }

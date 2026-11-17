@@ -26,11 +26,17 @@
 
 namespace Hotcakes.Commerce.Reporting
 {
+    /// <summary>Contains order counts grouped by the operational status used by the dashboard.</summary>
+    /// <remarks>The source file name and type name retain the compatibility-sensitive spelling of this API.</remarks>
     public class OrdersSummaryData
     {
+        /// <summary>Gets or sets the number of new orders.</summary>
         public int NewCount { get; set; }
+        /// <summary>Gets or sets the number of orders currently on hold.</summary>
         public int OnHoldCount { get; set; }
+        /// <summary>Gets or sets the number of orders ready for payment.</summary>
         public int ReadyForPaymentCount { get; set; }
+        /// <summary>Gets or sets the number of orders ready for shipping.</summary>
         public int ReadyForShippingCount { get; set; }
     }
 }

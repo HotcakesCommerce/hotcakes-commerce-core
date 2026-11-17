@@ -32,13 +32,26 @@ using Hotcakes.Commerce.Data.EF;
 
 namespace Hotcakes.Commerce.Membership
 {
+    /// <summary>
+    /// Converts, reads, and mutates reward-point balances for the current store.
+    /// Point mutations are recorded as ledger rows; this service does not rewrite prior rows.
+    /// </summary>
     public class CustomerPointsManager : HccServiceBase
     {
+        /// <summary>
+        /// Initializes a manager for the supplied commerce request context.
+        /// </summary>
+        /// <param name="context">The request context whose current store scopes point operations.</param>
         public CustomerPointsManager(HccRequestContext context)
             : base(context)
         {
         }
 
+        /// <summary>
+        /// Calculates the dollar credit represented by a number of points, rounded to two decimals.
+        /// </summary>
+        /// <param name="points">The number of points to convert.</param>
+        /// <returns>The rounded dollar credit using the current store's points-per-dollar setting.</returns>
         public decimal DollarCreditForPoints(int points)
         {
             var storeSettings = Context.CurrentStore.Settings;
@@ -50,6 +63,11 @@ namespace Hotcakes.Commerce.Membership
             return result;
         }
 
+        /// <summary>
+        /// Calculates the points required for a purchase amount, rounding fractional points upward.
+        /// </summary>
+        /// <param name="purchaseAmount">The purchase amount in store currency.</param>
+        /// <returns>The ceiling of the amount multiplied by the current store's points-needed setting.</returns>
         public int PointsNeededForPurchaseAmount(decimal purchaseAmount)
         {
             var storeSettings = Context.CurrentStore.Settings;
@@ -61,6 +79,11 @@ namespace Hotcakes.Commerce.Membership
             return result;
         }
 
+        /// <summary>
+        /// Calculates points issued for whole-dollar spend; fractional spend is discarded.
+        /// </summary>
+        /// <param name="spend">The amount spent.</param>
+        /// <returns>The number of points calculated from the current store's issue rate.</returns>
         public int PointsToIssueForSpend(decimal spend)
         {
             var storeSettings = Context.CurrentStore.Settings;
@@ -71,6 +94,11 @@ namespace Hotcakes.Commerce.Membership
             return (int) points;
         }
 
+        /// <summary>
+        /// Sums all available points ledger entries for a store, including negative entries.
+        /// </summary>
+        /// <param name="storeId">The store identifier to query.</param>
+        /// <returns>The net issued points, or zero when the store has no entries.</returns>
         public int TotalPointsIssuedForStore(long storeId)
         {
             using (var strategy = CreateReadStrategy())
@@ -83,6 +111,11 @@ namespace Hotcakes.Commerce.Membership
             }
         }
 
+        /// <summary>
+        /// Sums all held-point ledger entries for a store, including negative entries.
+        /// </summary>
+        /// <param name="storeId">The store identifier to query.</param>
+        /// <returns>The net reserved points, or zero when the store has no entries.</returns>
         public int TotalPointsReservedForStore(long storeId)
         {
             using (var strategy = CreateReadStrategy())
@@ -95,6 +128,11 @@ namespace Hotcakes.Commerce.Membership
             }
         }
 
+        /// <summary>
+        /// Finds the current user's available points in the current store.
+        /// </summary>
+        /// <param name="userId">The user identifier to query.</param>
+        /// <returns>The net available points, or zero when no entries exist.</returns>
         public int FindAvailablePoints(string userId)
         {
             using (var strategy = CreateReadStrategy())
@@ -107,6 +145,11 @@ namespace Hotcakes.Commerce.Membership
             }
         }
 
+        /// <summary>
+        /// Finds points held for a user in the current store.
+        /// </summary>
+        /// <param name="userId">The user identifier to query.</param>
+        /// <returns>The net held points, or zero when no entries exist. The misspelled method name is retained for compatibility.</returns>
         public int FindReserverdPoints(string userId)
         {
             using (var strategy = CreateReadStrategy())
@@ -119,6 +162,12 @@ namespace Hotcakes.Commerce.Membership
             }
         }
 
+        /// <summary>
+        /// Captures previously held points by adding a negative held-point ledger entry.
+        /// </summary>
+        /// <param name="userId">The user whose held points are captured.</param>
+        /// <param name="points">The number of held points to capture.</param>
+        /// <returns><see langword="false"/> when insufficient points are held; otherwise the persistence result.</returns>
         public bool CapturePoints(string userId, int points)
         {
             var currentPoints = FindReserverdPoints(userId);
@@ -139,6 +188,12 @@ namespace Hotcakes.Commerce.Membership
             }
         }
 
+        /// <summary>
+        /// Decreases available points by appending a negative point ledger entry.
+        /// </summary>
+        /// <param name="userId">The user whose points are decreased.</param>
+        /// <param name="points">The number of points to decrease.</param>
+        /// <returns><see langword="false"/> when insufficient points are available; otherwise the persistence result.</returns>
         public bool DecreasePoints(string userId, int points)
         {
             var currentPoints = FindAvailablePoints(userId);
@@ -159,6 +214,12 @@ namespace Hotcakes.Commerce.Membership
             }
         }
 
+        /// <summary>
+        /// Moves available points into the held balance by appending one ledger entry.
+        /// </summary>
+        /// <param name="userId">The user whose points are held.</param>
+        /// <param name="points">The number of points to hold.</param>
+        /// <returns><see langword="false"/> when insufficient points are available; otherwise the persistence result.</returns>
         public bool HoldPoints(string userId, int points)
         {
             var currentPoints = FindAvailablePoints(userId);
@@ -180,6 +241,12 @@ namespace Hotcakes.Commerce.Membership
             }
         }
 
+        /// <summary>
+        /// Releases held points back to the available balance by appending one ledger entry.
+        /// </summary>
+        /// <param name="userId">The user whose points are released.</param>
+        /// <param name="points">The number of points to release.</param>
+        /// <returns>The persistence result.</returns>
         public bool UnHoldPoints(string userId, int points)
         {
             using (var strategy = CreateStrategy())
@@ -197,6 +264,12 @@ namespace Hotcakes.Commerce.Membership
             }
         }
 
+        /// <summary>
+        /// Issues points by appending a positive available-point ledger entry.
+        /// </summary>
+        /// <param name="userId">The user receiving the points.</param>
+        /// <param name="points">The number of points to issue.</param>
+        /// <returns>The persistence result.</returns>
         public bool IssuePoints(string userId, int points)
         {
             using (var strategy = CreateStrategy())
@@ -228,11 +301,19 @@ namespace Hotcakes.Commerce.Membership
             }
         }
 
+        /// <summary>
+        /// Creates the writable repository strategy used for reward-point ledger mutations.
+        /// </summary>
+        /// <returns>A writable reward-points repository strategy.</returns>
         protected IRepoStrategy<hcc_RewardsPoints> CreateStrategy()
         {
             return Factory.Instance.CreateStrategy<hcc_RewardsPoints>();
         }
 
+        /// <summary>
+        /// Creates the read-only repository strategy used for reward-point queries.
+        /// </summary>
+        /// <returns>A read-only reward-points repository strategy.</returns>
         protected IRepoStrategy<hcc_RewardsPoints> CreateReadStrategy()
         {
             return Factory.Instance.CreateReadStrategy<hcc_RewardsPoints>();

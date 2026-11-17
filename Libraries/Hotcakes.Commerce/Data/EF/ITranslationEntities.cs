@@ -28,62 +28,107 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Data.EF
 {
+    /// <summary>
+    /// Extends the generated category translation entity with the <see cref="ITranslationEntity"/> contract.
+    /// </summary>
     partial class hcc_CategoryTranslation : ITranslationEntity
     {
     }
 
+    /// <summary>
+    /// Extends the generated product translation entity with the <see cref="ITranslationEntity"/> contract.
+    /// </summary>
     partial class hcc_ProductTranslation : ITranslationEntity
     {
     }
 
+    /// <summary>
+    /// Extends the generated product type translation entity with the <see cref="ITranslationEntity"/> contract.
+    /// </summary>
     partial class hcc_ProductTypeTranslation : ITranslationEntity
     {
     }
 
+    /// <summary>
+    /// Extends the generated product property translation entity with the <see cref="ITranslationEntity"/> contract.
+    /// </summary>
     partial class hcc_ProductPropertyTranslation : ITranslationEntity
     {
     }
 
+    /// <summary>
+    /// Extends the generated product property choice translation entity with the <see cref="ITranslationEntity"/> contract.
+    /// </summary>
     partial class hcc_ProductPropertyChoiceTranslation : ITranslationEntity
     {
     }
 
+    /// <summary>
+    /// Extends the generated promotion translation entity with the <see cref="ITranslationEntity"/> contract.
+    /// </summary>
     partial class hcc_PromotionTranslation : ITranslationEntity
     {
     }
 
+    /// <summary>
+    /// Extends the generated shipping method translation entity with the <see cref="ITranslationEntity"/> contract.
+    /// </summary>
     partial class hcc_ShippingMethodTranslation : ITranslationEntity
     {
     }
 
+    /// <summary>
+    /// Extends the generated product option translation entity with the <see cref="ITranslationEntity"/> contract.
+    /// </summary>
     partial class hcc_ProductOptionTranslation : ITranslationEntity
     {
     }
 
+    /// <summary>
+    /// Extends the generated product option item translation entity with the <see cref="ITranslationEntity"/> contract.
+    /// </summary>
     partial class hcc_ProductOptionItemTranslation : ITranslationEntity
     {
     }
 
+    /// <summary>
+    /// Extends the generated product property value translation entity with the <see cref="ITranslationEntity"/> contract.
+    /// </summary>
     partial class hcc_ProductPropertyValueTranslation : ITranslationEntity
     {
     }
 
+    /// <summary>
+    /// Extends the generated HTML template translation entity with the <see cref="ITranslationEntity"/> contract.
+    /// </summary>
     partial class hcc_HtmlTemplateTranslation : ITranslationEntity
     {
     }
 
+    /// <summary>
+    /// Extends the generated content block translation entity with the <see cref="ITranslationEntity"/> contract.
+    /// </summary>
     partial class hcc_ContentBlockTranslation : ITranslationEntity
     {
     }
 
+    /// <summary>
+    /// Extends the generated country translation entity with the <see cref="ITranslationEntity"/> contract.
+    /// </summary>
     partial class hcc_CountryTranslation : ITranslationEntity
     {
     }
 
+    /// <summary>
+    /// Extends the generated region translation entity with the <see cref="ITranslationEntity"/> contract.
+    /// </summary>
     partial class hcc_RegionTranslation : ITranslationEntity
     {
     }
 
+    /// <summary>
+    /// Extends the generated store settings translation entity with the <see cref="ITranslationEntity"/> contract.
+    /// </summary>
     partial class hcc_StoreSettingsTranslations : ITranslationEntity
     {
     }

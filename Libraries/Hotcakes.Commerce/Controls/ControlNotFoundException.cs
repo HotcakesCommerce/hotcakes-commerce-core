@@ -28,16 +28,36 @@ using System;
 
 namespace Hotcakes.Commerce.Controls
 {
+    /// <summary>
+    /// Represents an application error raised when a requested control cannot be found.
+    /// </summary>
+    /// <remarks>
+    /// This exception carries no additional state beyond <see cref="ApplicationException"/>.
+    /// Callers should use the message and, when supplied, the inner exception to diagnose
+    /// the missing control; construction itself does not perform a lookup.
+    /// </remarks>
     public class ControlNotFoundException : ApplicationException
     {
+        /// <summary>
+        /// Initializes an instance with the default exception message.
+        /// </summary>
         public ControlNotFoundException()
         {
         }
 
+        /// <summary>
+        /// Initializes an instance with a descriptive message.
+        /// </summary>
+        /// <param name="message">The message that describes the missing control condition.</param>
         public ControlNotFoundException(string message) : base(message)
         {
         }
 
+        /// <summary>
+        /// Initializes an instance with a descriptive message and the exception that caused it.
+        /// </summary>
+        /// <param name="message">The message that describes the missing control condition.</param>
+        /// <param name="innerException">The exception that caused the current exception, or <see langword="null"/> if there is no underlying exception.</param>
         public ControlNotFoundException(string message, Exception innerException) : base(message, innerException)
         {
         }

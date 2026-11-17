@@ -29,8 +29,11 @@ using System.Linq;
 
 namespace Hotcakes.Commerce.BusinessRules
 {
+    /// <summary>Contains the state shared by tasks while a <see cref="Workflow"/> runs.</summary>
+    /// <remarks><see cref="Inputs"/>, <see cref="Errors"/>, and <see cref="Outputs"/> are workflow-scoped collections; callers must not assume they are persisted automatically.</remarks>
     public class TaskContext
     {
+        /// <summary>Initializes an empty task context with empty input, error, and output collections.</summary>
         public TaskContext()
         {
             UserId = string.Empty;
@@ -40,12 +43,23 @@ namespace Hotcakes.Commerce.BusinessRules
             Outputs = new Collection<WorkflowMessage>();
         }
 
+        /// <summary>Gets or sets the identifier of the user associated with the workflow.</summary>
+        /// <value>An empty string when no user is associated with the context.</value>
         public string UserId { get; set; }
 
+        /// <summary>Gets or sets task input values shared through the workflow.</summary>
+        /// <value>The custom property collection for workflow inputs.</value>
         public CustomPropertyCollection Inputs { get; set; }
+        /// <summary>Gets or sets all messages produced while processing the workflow.</summary>
+        /// <value>The workflow error collection, including messages not intended for customers.</value>
         public Collection<WorkflowMessage> Errors { get; set; }
+        /// <summary>Gets or sets messages produced as workflow output.</summary>
+        /// <value>The workflow output collection.</value>
         public Collection<WorkflowMessage> Outputs { get; set; }
 
+        /// <summary>Returns a new collection containing only errors marked for customer display.</summary>
+        /// <returns>A snapshot of <see cref="Errors"/> entries whose <see cref="WorkflowMessage.CustomerVisible"/> value is <c>true</c>.</returns>
+        /// <remarks>Changing the returned collection does not remove messages from <see cref="Errors"/>.</remarks>
         public Collection<WorkflowMessage> GetCustomerVisibleErrors()
         {
             var list = Errors.Where(e => e.CustomerVisible).ToList();

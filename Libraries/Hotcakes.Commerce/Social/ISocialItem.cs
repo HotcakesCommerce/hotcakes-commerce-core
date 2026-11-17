@@ -26,9 +26,25 @@
 
 namespace Hotcakes.Commerce.Social
 {
+    /// <summary>
+    /// Defines the content identity and JSON serialization contract for an item stored in a social journal.
+    /// </summary>
+    /// <remarks>
+    /// Implementations provide the platform content-item identifier used to connect the social record to its
+    /// content metadata, and provide a JSON representation for consumers that persist or transport the item.
+    /// </remarks>
     public interface ISocialItem
     {
+        /// <summary>
+        /// Gets the platform content-item identifier associated with this social item.
+        /// </summary>
+        /// <value>The content-item identifier used by the social integration.</value>
         int ContentItemId { get; }
+
+        /// <summary>
+        /// Gets the JSON representation of this social item.
+        /// </summary>
+        /// <returns>A JSON string containing the serialized social item data.</returns>
         string ToJson();
     }
 }

@@ -28,22 +28,25 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Commerce.Search
 {
+    /// <summary>
+    /// Represents a product property and the values selected for that property.
+    /// </summary>
     public class SelectedPropertyFacetItem
     {
         /// <summary>
-        /// This is the localized name of the current facet item.
+        /// Gets or sets the localized display name of the property.
         /// </summary>
         public string DisplayName { get; set; }
         /// <summary>
-        /// This is the unique identifier for the current facet item.
+        /// Gets or sets the property identifier.
         /// </summary>
         public long Id { get; set; }
         /// <summary>
-        /// This is the internal (store) name of the current facet item as saved in the administration area.
+        /// Gets or sets the internal store name of the property.
         /// </summary>
         public string PropertyName { get; set; }
         /// <summary>
-        /// If there are any product property values selected, they will be in this object.
+        /// Gets or sets the selected values for the property.
         /// </summary>
         public List<SelectedFacetItem> PropertyValues { get; set; }
     }

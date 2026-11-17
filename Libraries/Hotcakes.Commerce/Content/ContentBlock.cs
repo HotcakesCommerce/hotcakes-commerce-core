@@ -32,12 +32,23 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Commerce.Content
 {
+    /// <summary>
+    /// Represents a content block assigned to a <see cref="ContentColumn"/>.
+    /// </summary>
+    /// <remarks>
+    /// Base and text settings, and list values, are persisted as JSON inside the
+    /// content-block record. The XML member names used by <see cref="ToXml(bool)"/>
+    /// and <see cref="FromXml(ref XmlReader)"/> are compatibility-sensitive.
+    /// </remarks>
     public class ContentBlock
     {
         private XmlReaderSettings _hccXmlReaderSettings = new XmlReaderSettings();
 
         private readonly XmlWriterSettings _hccXmlWriterSettings = new XmlWriterSettings();
 
+        /// <summary>
+        /// Initializes a content block with empty settings and default ordering values.
+        /// </summary>
         public ContentBlock()
         {
             BaseSettings = new ContentBlockSettings();
@@ -51,16 +62,56 @@ namespace Hotcakes.Commerce.Content
             ControlName = string.Empty;
         }
 
+        /// <summary>
+        /// Gets or sets the block's business identifier.
+        /// </summary>
         public string Bvin { get; set; }
+
+        /// <summary>
+        /// Gets or sets the store that owns the block.
+        /// </summary>
         public long StoreId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the UTC timestamp of the last persistence update.
+        /// </summary>
         public DateTime LastUpdated { get; set; }
+
+        /// <summary>
+        /// Gets or sets the business identifier of the containing <see cref="ContentColumn"/>.
+        /// </summary>
         public string ColumnId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the block's ordering position within its column.
+        /// </summary>
         public int SortOrder { get; set; }
+
+        /// <summary>
+        /// Gets or sets the content-control name used to render the block.
+        /// </summary>
         public string ControlName { get; set; }
+
+        /// <summary>
+        /// Gets or sets non-translated settings for the block.
+        /// </summary>
         public ContentBlockSettings BaseSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets translated text settings for the block.
+        /// </summary>
         public ContentBlockSettings TextSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the named lists associated with the block.
+        /// </summary>
         public ContentBlockSettingList Lists { get; set; }
 
+        /// <summary>
+        /// Creates a copy of the block, including settings and list items.
+        /// </summary>
+        /// <returns>A new block with copied content and a current UTC <see cref="LastUpdated"/> value.</returns>
+        /// <remarks>The clone keeps the column, control, and sort information but receives a new default identifier.</remarks>
         public ContentBlock Clone()
         {
             var clone = new ContentBlock();
@@ -84,6 +135,11 @@ namespace Hotcakes.Commerce.Content
             return clone;
         }
 
+        /// <summary>
+        /// Serializes this block using the established content-block XML element names.
+        /// </summary>
+        /// <param name="omitDeclaration">Retained for API compatibility; fragment output is produced by the current implementation.</param>
+        /// <returns>The serialized content block XML.</returns>
         public virtual string ToXml(bool omitDeclaration)
         {
             var response = string.Empty;
@@ -97,6 +153,11 @@ namespace Hotcakes.Commerce.Content
             return response;
         }
 
+        /// <summary>
+        /// Deserializes this block from an XML string.
+        /// </summary>
+        /// <param name="x">The content-block XML to read.</param>
+        /// <returns><see langword="true"/> when parsing completes; malformed XML is logged and returns <see langword="false"/>.</returns>
         public virtual bool FromXmlString(string x)
         {
             var sw = new StringReader(x);
@@ -107,6 +168,11 @@ namespace Hotcakes.Commerce.Content
             return result;
         }
 
+        /// <summary>
+        /// Reads compatibility-sensitive content-block elements from an XML reader.
+        /// </summary>
+        /// <param name="xr">The reader positioned at content-block XML.</param>
+        /// <returns><see langword="true"/> when reading completes; malformed XML is logged and returns <see langword="false"/>.</returns>
         public bool FromXml(ref XmlReader xr)
         {
             var results = false;
@@ -169,6 +235,10 @@ namespace Hotcakes.Commerce.Content
             return results;
         }
 
+        /// <summary>
+        /// Writes this block to an XML writer using the established serialized element names.
+        /// </summary>
+        /// <param name="xw">The writer that receives the block, or <see langword="null"/> to perform no work.</param>
         public void ToXmlWriter(ref XmlWriter xw)
         {
             if (xw != null)

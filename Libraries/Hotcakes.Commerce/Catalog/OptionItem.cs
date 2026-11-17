@@ -36,6 +36,9 @@ namespace Hotcakes.Commerce.Catalog
     [Serializable]
     public class OptionItem
     {
+        /// <summary>
+        /// Provides the catalog type or contract represented by this declaration.
+        /// </summary>
         public OptionItem()
         {
             Bvin = string.Empty;
@@ -100,6 +103,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Use this method to create a copy of the current option item.
         /// </summary>
         /// <returns>A duplicate of the current OptionItem.</returns>
+        /// <summary>
+        /// Performs the Clone catalog operation.
+        /// </summary>
         public OptionItem Clone()
         {
             var result = new OptionItem();
@@ -122,6 +128,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Allows you to convert the current product option item object to the DTO equivalent for use with the REST API
         /// </summary>
         /// <returns>A new instance of OptionItemDTO</returns>
+        /// <summary>
+        /// Performs the ToDto catalog operation.
+        /// </summary>
         public OptionItemDTO ToDto()
         {
             var dto = new OptionItemDTO();
@@ -142,6 +151,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Allows you to populate the current product option item object using an instance of OptionItemDTO
         /// </summary>
         /// <param name="dto">An instance of the product option item from the REST API</param>
+        /// <summary>
+        /// Performs the FromDto catalog operation.
+        /// </summary>
         public void FromDto(OptionItemDTO dto)
         {
             if (dto == null) return;

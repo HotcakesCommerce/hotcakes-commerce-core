@@ -26,8 +26,16 @@
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Maps common file-name extensions to MIME types.
+    /// </summary>
     public class MimeTypes
     {
+        /// <summary>
+        /// Finds the MIME type associated with a file-name extension.
+        /// </summary>
+        /// <param name="extension">The extension, including its leading period, such as <c>.pdf</c>.</param>
+        /// <returns>The matching MIME type, or <see cref="string.Empty"/> when the extension is <see langword="null"/> or unsupported.</returns>
         public static string FindTypeForExtension(string extension)
         {
             var result = string.Empty;

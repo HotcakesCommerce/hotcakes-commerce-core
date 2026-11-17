@@ -26,8 +26,20 @@
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    ///     Creates an instance of this type.
+    /// </summary>
+    /// <summary>
+    ///     Defines the order calculation operation that mutates an <see cref="Order"/> with current pricing, promotion,
+    ///     shipping, tax, and recurring-order allocations.
+    /// </summary>
     public interface IOrderCalculator
     {
+        /// <summary>
+        ///     Calculates the supplied order in place.
+        /// </summary>
+        /// <param name="o">The order to reset, price, discount, ship, tax, and allocate.</param>
+        /// <returns><c>true</c> when calculation completes.</returns>
         bool Calculate(Order o);
     }
 }

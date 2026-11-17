@@ -26,13 +26,16 @@
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>Provides the common base for commerce services.</summary>
     public abstract class HccServiceBase
     {
+        /// <summary>Initializes a service with its request context.</summary><param name="context">The commerce request context.</param>
         protected HccServiceBase(HccRequestContext context)
         {
             Context = context;
         }
 
+        /// <summary>Gets the request context supplied to the service.</summary>
         protected HccRequestContext Context { get; private set; }
     }
 }

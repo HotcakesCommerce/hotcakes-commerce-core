@@ -26,12 +26,30 @@
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Defines the catalog data or behavior represented by this member.
+    /// </summary>
     public enum ProductSearchCriteriaSortBy
     {
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         ProductName = 0,
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         ManufacturerName = 1,
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         CreationDate = 2,
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         SitePrice = 3,
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         Vendor = 4
     }
 }

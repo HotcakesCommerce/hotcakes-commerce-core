@@ -35,11 +35,14 @@ using Hotcakes.Web.Logging;
 namespace Hotcakes.Commerce.Accounts
 {
     /// <summary>
-    ///     This class used to perform database operations against hcc_AuthTokens table.
+    ///     This class used to perform database operations against hcc_AuthTokens table. Represents AuthTokenRepository data and behavior within the Hotcakes Commerce account and store boundary.
     /// </summary>
     [Serializable]
     public class AuthTokenRepository : HccSimpleRepoBase<hcc_AuthTokens, AuthToken>
     {
+        /// <summary>Performs the AuthTokenRepository operation.</summary>
+        /// <param name="context">The context value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public AuthTokenRepository(HccRequestContext context)
             : base(context)
         {

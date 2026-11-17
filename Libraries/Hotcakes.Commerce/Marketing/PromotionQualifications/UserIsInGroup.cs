@@ -30,18 +30,24 @@ using System.Linq;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Matches the current customer against a configured pricing group.</summary>
+    /// <remarks>Group identifiers are stored comma-separated, trimmed, and normalized to lowercase.</remarks>
     public class UserIsInGroup : PromotionQualificationBase
     {
+        /// <summary>Initializes the qualification with a lower relative processing cost.</summary>
         public UserIsInGroup()
         {
             ProcessingCost = RelativeProcessingCost.Lower;
         }
 
+        /// <summary>Gets the stable serialized type identifier reserved for this qualification.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdUserIsInGroup); }
         }
 
+        /// <summary>Gets the configured group identifiers after trimming and lowercase normalization.</summary>
+        /// <returns>A new list of non-empty configured group identifiers, or an empty list when none are configured.</returns>
         public List<string> CurrentGroupIds()
         {
             var all = GetSetting("groupids") ?? string.Empty;
@@ -71,6 +77,10 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             SetSetting("groupids", all);
         }
 
+        /// <summary>Builds an HTML list containing the display name of each configured group that can be found.</summary>
+        /// <param name="app">The application context used to resolve pricing groups.</param>
+        /// <returns>Display text containing the current-user group description and matching group names.</returns>
+        /// <remarks>Identifiers that do not resolve to a pricing group are omitted from the generated list.</remarks>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var result = "When Current User Is In Group:<ul>";
@@ -87,6 +97,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             return result;
         }
 
+        /// <summary>Adds a pricing group identifier to the configured list.</summary>
+        /// <param name="groupid">The identifier to trim, lowercase, and add; blank or duplicate values are ignored.</param>
         public void AddGroup(string groupid)
         {
             if (string.IsNullOrWhiteSpace(groupid)) return;
@@ -100,6 +112,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             SaveGroupIdsToSettings(groups);
         }
 
+        /// <summary>Removes a pricing group identifier from the configured list.</summary>
+        /// <param name="groupid">The identifier to trim and remove; blank or absent values are ignored.</param>
         public void RemoveGroup(string groupid)
         {
             if (string.IsNullOrWhiteSpace(groupid)) return;
@@ -113,6 +127,10 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             SaveGroupIdsToSettings(groups);
         }
 
+        /// <summary>Checks whether the current customer's pricing group is configured for this qualification.</summary>
+        /// <param name="context">The promotion context containing the current customer.</param>
+        /// <param name="mode">The requested promotion evaluation mode; this rule uses the customer's pricing group regardless of mode.</param>
+        /// <returns><c>true</c> when the customer's non-blank pricing group matches a configured group identifier; otherwise <c>false</c>.</returns>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             var customer = context?.CurrentCustomer;

@@ -32,33 +32,41 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Matches an order by the price or quantity of items in configured categories.</summary>
+    /// <remarks>Category assignments are queried with a first-100 result limit for each product.</remarks>
     public class SumOrCountOfProducts : PromotionQualificationBase
     {
+        /// <summary>Stable serialized type identifier for this qualification.</summary>
         public const string TypeIdString = "F8DB4172-1707-46E6-84CF-24009FAE1951";
 
+        /// <summary>Gets the stable sum-or-count qualification identifier.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdString); }
         }
 
+        /// <summary>Gets or sets whether matching uses line totals or total quantity.</summary>
         public SumOrCountMode CalculationMode
         {
             get { return GetSettingAsBool("CalculationMode") ? SumOrCountMode.CountMode : SumOrCountMode.SumMode; }
             set { SetSetting("CalculationMode", value == SumOrCountMode.CountMode); }
         }
 
+        /// <summary>Gets or sets the threshold compared with the selected calculation.</summary>
         public decimal SumAmount
         {
             get { return GetSettingAsDecimal("SumAmount"); }
             set { SetSetting("SumAmount", value); }
         }
 
+        /// <summary>Gets the configured category identifiers.</summary>
         public List<string> CategoryIds()
         {
             var arr = GetSettingArr("CategoryIds") ?? new List<string>();
             return arr;
         }
 
+        /// <summary>Adds a category identifier unless blank or already present.</summary>
         public void AddCategoryId(string id)
         {
             if (string.IsNullOrWhiteSpace(id)) return;
@@ -72,6 +80,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             SaveCategoryIds(ids);
         }
 
+        /// <summary>Removes a category identifier case-insensitively.</summary>
         public void RemoveCategoryId(string id)
         {
             if (string.IsNullOrWhiteSpace(id)) return;
@@ -86,12 +95,14 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             }
         }
 
+        /// <summary>Builds a description of the selected calculation and threshold.</summary>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var modeText = CalculationMode == SumOrCountMode.CountMode ? "Total Quantity " : "Total Price ";
             return $"When {modeText}of Products within Specified Categories >= {SumAmount.ToString(CultureInfo.InvariantCulture)}";
         }
 
+        /// <summary>Matches order scope when categorized line totals or quantities reach the threshold.</summary>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             if (context?.Order?.Items == null) return false;
@@ -144,9 +155,12 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
         #endregion
     }
 
+    /// <summary>Specifies whether categorized products are evaluated by price or quantity.</summary>
     public enum SumOrCountMode
     {
+        /// <summary>Compare the sum of line totals.</summary>
         SumMode = 0,
+        /// <summary>Compare the sum of line-item quantities.</summary>
         CountMode = 1
     }
 }

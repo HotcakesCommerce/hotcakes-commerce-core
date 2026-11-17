@@ -28,12 +28,14 @@ using System;
 
 namespace Hotcakes.Commerce.Content
 {
+    /// <summary>Represents a store-scoped custom URL redirect.</summary>
     public class CustomUrl
     {
         private string _RedirectToUrl = string.Empty;
 
         private string _RequestedUrl = string.Empty;
 
+        /// <summary>Initializes a custom URL with a UTC timestamp, permanent redirect semantics, and general URL type.</summary>
         public CustomUrl()
         {
             Bvin = string.Empty;
@@ -44,13 +46,21 @@ namespace Hotcakes.Commerce.Content
             StoreId = 0;
         }
 
+        /// <summary>Gets or sets the unique identifier for this URL record.</summary>
         public string Bvin { get; set; }
+        /// <summary>Gets or sets the UTC time when this record was last updated.</summary>
         public DateTime LastUpdated { get; set; }
+        /// <summary>Gets or sets whether the redirect is permanent.</summary>
         public bool IsPermanentRedirect { get; set; }
+        /// <summary>Gets or sets the type of commerce data associated with the URL.</summary>
         public CustomUrlType SystemDataType { get; set; }
+        /// <summary>Gets or sets the associated system object's identifier.</summary>
         public string SystemData { get; set; }
+        /// <summary>Gets or sets the store that owns this URL.</summary>
         public long StoreId { get; set; }
 
+        /// <summary>Gets or sets the requested path, trimming trailing slashes and normalizing it to lowercase invariant text.</summary>
+        /// <remarks>Whitespace-only values become an empty string. Leading slashes and other characters are preserved.</remarks>
         public string RequestedUrl
         {
             get { return _RequestedUrl; }
@@ -69,6 +79,8 @@ namespace Hotcakes.Commerce.Content
             }
         }
 
+        /// <summary>Gets or sets the redirect destination, trimming trailing slashes and normalizing it to lowercase invariant text.</summary>
+        /// <remarks>Whitespace-only values become an empty string. Leading slashes and other characters are preserved.</remarks>
         public string RedirectToUrl
         {
             get { return _RedirectToUrl; }

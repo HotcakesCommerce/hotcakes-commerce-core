@@ -28,16 +28,54 @@ using System;
 
 namespace Hotcakes.Commerce.Analytics
 {
+    /// <summary>
+    /// Represents one customer, shopping-session, or store analytics event.
+    /// </summary>
+    /// <remarks>
+    /// An event is scoped to a store through <see cref="StoreId"/> and may be associated with a
+    /// customer, browsing session, and shopping session. Persist and query instances through
+    /// <see cref="AnalyticsEventsRepository"/> or record new events through
+    /// <see cref="AnalyticsService"/>.
+    /// </remarks>
+    /// <seealso cref="ActionTypes"/>
     public class AnalyticsEvent
     {
+        /// <summary>Gets or sets the database identifier of the analytics event.</summary>
+        /// <value>The persisted analytics-event identifier.</value>
         public long AnalyticsEventId { get; set; }
+
+        /// <summary>Gets or sets the identifier of the customer associated with the event.</summary>
+        /// <value>The customer identifier, or <see langword="null"/> when the event is not associated with a customer.</value>
         public string UserId { get; set; }
+
+        /// <summary>Gets or sets the browsing-session identifier associated with the event.</summary>
+        /// <value>The session identifier, or <see langword="null"/> when no browsing session is available.</value>
         public Guid? SessionGuid { get; set; }
+
+        /// <summary>Gets or sets the shopping-session identifier associated with the event.</summary>
+        /// <value>The shopping-session identifier, or <see langword="null"/> when no shopping session is available.</value>
         public Guid? ShoppingSessionGuid { get; set; }
+
+        /// <summary>Gets or sets the identifier of the store that owns the event.</summary>
+        /// <value>The store identifier used to isolate analytics data between stores.</value>
         public long StoreId { get; set; }
+
+        /// <summary>Gets or sets the type of action represented by the event.</summary>
+        /// <value>The serialized analytics action.</value>
+        /// <seealso cref="ActionTypes"/>
         public ActionTypes Action { get; set; }
+
+        /// <summary>Gets or sets the identifier of the commerce object related to the event.</summary>
+        /// <value>The related object identifier, or <see langword="null"/> when the event has no specific object.</value>
         public Guid? ObjectId { get; set; }
+
+        /// <summary>Gets or sets additional event data.</summary>
+        /// <value>Optional event-specific data stored with the analytics record.</value>
+        /// <remarks>The content and format are determined by the caller and are not interpreted by this model.</remarks>
         public string AdditionalData { get; set; }
+
+        /// <summary>Gets or sets the UTC date and time at which the event occurred.</summary>
+        /// <value>The event timestamp.</value>
         public DateTime DateTime { get; set; }
     }
 }

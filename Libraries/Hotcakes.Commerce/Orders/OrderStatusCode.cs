@@ -31,19 +31,55 @@ using Hotcakes.Commerce.Globalization;
 
 namespace Hotcakes.Commerce.Orders
 {
+	/// <summary>
+	/// Represents the OrderStatusCode order-domain type and preserves the established public compatibility surface.
+	/// </summary>
 	public class OrderStatusCode
 	{
+        /// <summary>
+        /// Provides the member operation.
+        /// </summary>
         public const string Cancelled = "A7FFDB90-C566-4cf2-93F4-D42367F359D5";
+        /// <summary>
+        /// Provides the member operation.
+        /// </summary>
         public const string OnHold = "88B5B4BE-CA7B-41a9-9242-D96ED3CA3135";
+        /// <summary>
+        /// Provides the member operation.
+        /// </summary>
         public const string Received = "F37EC405-1EC6-4a91-9AC4-6836215FBBBC";
+        /// <summary>
+        /// Provides the member operation.
+        /// </summary>
         public const string ReadyForPayment = "e42f8c28-9078-47d6-89f8-032c9a6e1cce";
+        /// <summary>
+        /// Provides the member operation.
+        /// </summary>
         public const string ReadyForShipping = "0c6d4b57-3e46-4c20-9361-6b0e5827db5a";
+        /// <summary>
+        /// Provides the member operation.
+        /// </summary>
         public const string Completed = "09D7305D-BD95-48d2-A025-16ADC827582A";
 		//public const string SessionTimeout = "C3965268-7AEE-4627-8C27-3CAE2965EA29";
+        /// <summary>
+        /// The bvin.
+        /// </summary>
         public string Bvin { get; set; }
+        /// <summary>
+        /// The last updated.
+        /// </summary>
         public DateTime LastUpdated { get; set; }
+		/// <summary>
+		/// The status name.
+		/// </summary>
 		public string StatusName {get;set;}
+		/// <summary>
+		/// The system code.
+		/// </summary>
 		public bool SystemCode {get;set;}
+		/// <summary>
+		/// The sort order.
+		/// </summary>
 		public int SortOrder {get;set;}
 
 		public string StatusDisplayName
@@ -54,6 +90,9 @@ namespace Hotcakes.Commerce.Orders
 			}
 		}
 
+		/// <summary>
+		/// Provides the member operation while preserving the established order-domain behavior.
+		/// </summary>
 		public OrderStatusCode()
 		{
             Bvin = string.Empty;
@@ -63,6 +102,9 @@ namespace Hotcakes.Commerce.Orders
             SortOrder = 0;
 		}
 	
+        /// <summary>
+        /// Provides the FindAll operation while preserving the established order-domain behavior.
+        /// </summary>
         public static List<OrderStatusCode> FindAll()
         {
             var result = new List<OrderStatusCode>();
@@ -113,6 +155,9 @@ namespace Hotcakes.Commerce.Orders
             return result;
         }
 
+        /// <summary>
+        /// Provides the FindByBvin operation while preserving the established order-domain behavior.
+        /// </summary>
         public static OrderStatusCode FindByBvin(string bvin)
         {
             return FindAll().FirstOrDefault(os => os.Bvin == bvin);

@@ -26,16 +26,46 @@
 
 namespace Hotcakes.Commerce.Data
 {
+    /// <summary>
+    /// Represents the outcome of a repository operation against one value.
+    /// </summary>
+    /// <typeparam name="V">The POCO type represented by the operation.</typeparam>
+    /// <remarks>
+    /// A new instance starts with <see cref="Success" /> set to <c>false</c> and
+    /// <see cref="OldValue" /> initialized with <c>new V()</c>. Repository implementations
+    /// copy the prior persisted value into <see cref="OldValue" /> when one is found; the
+    /// initialized value can therefore also represent an operation that found no match.
+    /// </remarks>
     public class DalSingleOperationResult<V>
         where V : class, new()
     {
+        /// <summary>
+        /// Initializes a new single-operation result with a default value instance.
+        /// </summary>
         public DalSingleOperationResult()
         {
             OldValue = new V();
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the repository operation reported success.
+        /// </summary>
+        /// <value><c>true</c> when the operation reports success; otherwise, <c>false</c>.</value>
+        /// <remarks>
+        /// The default value is <c>false</c>. A repository may leave this value unchanged when
+        /// no matching record is found or when the operation returns before persistence.
+        /// </remarks>
         public bool Success { get; set; }
 
+        /// <summary>
+        /// Gets or sets the value as it existed before the operation changed it.
+        /// </summary>
+        /// <value>The prior value, initialized to a new <typeparamref name="V" /> instance.</value>
+        /// <remarks>
+        /// The result type always initializes this property by invoking the generic type's
+        /// parameterless constructor. Repository implementations may replace its contents with
+        /// the prior persisted value; it is not <c>null</c> solely because no match was found.
+        /// </remarks>
         public V OldValue { get; set; }
     }
 }

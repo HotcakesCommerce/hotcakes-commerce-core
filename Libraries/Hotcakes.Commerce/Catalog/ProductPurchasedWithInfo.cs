@@ -29,8 +29,14 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Defines the catalog data or behavior represented by this member.
+    /// </summary>
     public class ProductPurchasedWithInfo
     {
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductPurchasedWithInfo(HotcakesApplication hccApp, Product product)
         {
             ImageUrl = DiskStorage.ProductImageUrlSmall(hccApp, product.Bvin, product.ImageFileSmall,
@@ -41,20 +47,59 @@ namespace Hotcakes.Commerce.Catalog
             CreatedOn = DateHelper.ConvertUtcToStoreTime(hccApp, product.CreationDateUtc).ToString("MMM dd, yyyy");
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string ImageUrl { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string ProductId { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string ProductName { get; set; }
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public string UpdatedOn { get; set; }
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public string CreatedOn { get; set; }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public int QuantitySold { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string QuantitySoldPercentageChange { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string QuantitySoldComparison { get; set; }
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public bool IsQuantitySoldGrowing { get; set; }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string Revenue { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string RevenuePercentageChange { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string RevenueComparison { get; set; }
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public bool IsRevenueGrowing { get; set; }
     }
 }

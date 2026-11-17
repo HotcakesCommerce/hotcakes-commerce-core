@@ -28,13 +28,26 @@ using System;
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>Contains the projected fields returned by an affiliate payment report query.</summary>
+    /// <remarks>The report stores the affiliate's referral code in <see cref="AffiliateId"/>, not its numeric database key.</remarks>
     public class AffiliatePaymentReportData
     {
+        /// <summary>Gets or sets the payment identifier.</summary>
         public long Id { get; set; }
+
+        /// <summary>Gets or sets the affiliate referral code projected from the related affiliate.</summary>
         public string AffiliateId { get; set; }
+
+        /// <summary>Gets or sets the payment amount.</summary>
         public decimal PaymentAmount { get; set; }
+
+        /// <summary>Gets or sets the UTC payment date.</summary>
         public DateTime PaymentDateUtc { get; set; }
+
+        /// <summary>Gets or sets the payment notes.</summary>
         public string Notes { get; set; }
+
+        /// <summary>Gets or sets the associated payment file name.</summary>
         public string FileName { get; set; }
     }
 }

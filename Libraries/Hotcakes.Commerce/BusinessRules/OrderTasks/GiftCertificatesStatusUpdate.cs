@@ -28,6 +28,14 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>
+    /// Enables or disables gift cards when an order's status or payment status crosses the paid or cancelled boundary.
+    /// </summary>
+    /// <remarks>
+    /// The task identifier is <c>BBB982F8-E966-4D5A-A370-615247EC1ADB</c>. Execution updates persisted gift-card status through
+    /// <c>OrderServices.UpdateGiftCardsStatus</c>; rollback is a no-op and does not
+    /// restore a prior gift-card status.
+    /// </remarks>
     public class GiftCertificatesStatusUpdate : OrderTask
     {
         #region Fields
@@ -38,6 +46,10 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes the task for either order-status or payment-status change handling.
+        /// </summary>
+        /// <param name="mode">The change category that controls which status transition is evaluated.</param>
         public GiftCertificatesStatusUpdate(Mode mode)
         {
             TaskMode = mode;
@@ -53,6 +65,11 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 
         #region Public Methods
 
+        /// <summary>
+        /// Updates gift-card availability when the configured status transition occurs.
+        /// </summary>
+        /// <param name="context">The <see cref="OrderTaskContext"/> containing the current and previous order states.</param>
+        /// <returns>Always <see langword="true"/>; this task does not report a failure for an unhandled mode.</returns>
         public override bool Execute(OrderTaskContext context)
         {
             _app = context.HccApp;
@@ -72,21 +89,38 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return true;
         }
 
+        /// <summary>
+        /// Does not reverse gift-card status changes made during execution.
+        /// </summary>
+        /// <param name="context">The workflow context; it is not modified by rollback.</param>
+        /// <returns>Always <see langword="true"/>.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>
+        /// Gets the display name of this task.
+        /// </summary>
+        /// <returns><c>Disable Gift Cards When Payment Removed</c>.</returns>
         public override string TaskName()
         {
             return "Disable Gift Cards When Payment Removed";
         }
 
+        /// <summary>
+        /// Gets the stable task identifier used to register this task in workflows.
+        /// </summary>
+        /// <returns><c>BBB982F8-E966-4D5A-A370-615247EC1ADB</c>.</returns>
         public override string TaskId()
         {
             return "BBB982F8-E966-4D5A-A370-615247EC1ADB";
         }
 
+        /// <summary>
+        /// Creates a task with the same <see cref="Mode"/> as this instance.
+        /// </summary>
+        /// <returns>A new <see cref="GiftCertificatesStatusUpdate"/> instance.</returns>
         public override Task Clone()
         {
             return new GiftCertificatesStatusUpdate(TaskMode);
@@ -125,9 +159,14 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             }
         }
 
+        /// <summary>
+        /// Selects the order change that triggers gift-card status updates.
+        /// </summary>
         public enum Mode
         {
+            /// <summary>Handles transitions into or out of <see cref="OrderStatusCode.Cancelled"/>.</summary>
             OrderStatusChanged,
+            /// <summary>Handles transitions across <see cref="OrderPaymentStatus.Paid"/>.</summary>
             PaymentChanged
         }
 

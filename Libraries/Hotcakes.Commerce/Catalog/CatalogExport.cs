@@ -36,6 +36,9 @@ using Hotcakes.Web.OpenXml;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Represents the catalog class <see cref="CatalogExport" /> and its associated behavior.
+    /// </summary>
     public class CatalogExport
     {
         #region Fields
@@ -46,6 +49,10 @@ namespace Hotcakes.Commerce.Catalog
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="CatalogExport" />.
+        /// </summary>
+        /// <param name="hccApp">Value used to initialize the instance.</param>
         public CatalogExport(HotcakesApplication hccApp)
         {
             _hccApp = hccApp;
@@ -53,6 +60,13 @@ namespace Hotcakes.Commerce.Catalog
 
         #endregion
 
+        /// <summary>
+        /// Performs the <c>ExportToExcel</c> catalog operation.
+        /// </summary>
+        /// <param name="products">Input used by the operation.</param>
+        /// <param name="fileName">Input used by the operation.</param>
+        /// <param name="response">Input used by the operation.</param>
+        /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
         public void ExportToExcel(List<Product> products, string fileName, HttpResponse response = null)
         {
             var writer = new ExcelWriter("Main");
@@ -87,10 +101,30 @@ namespace Hotcakes.Commerce.Catalog
 
         internal class BaseSheetWriter
         {
+            /// <summary>
+            /// Gets or sets the <see cref="_firstRow" /> catalog value.
+            /// </summary>
+            /// <value>The current value of <see cref="_firstRow" />.</value>
             protected int _firstRow;
+            /// <summary>
+            /// Gets or sets the <see cref="_hccApp" /> catalog value.
+            /// </summary>
+            /// <value>The current value of <see cref="_hccApp" />.</value>
             protected HotcakesApplication _hccApp;
+            /// <summary>
+            /// Gets or sets the <see cref="_headerStyle" /> catalog value.
+            /// </summary>
+            /// <value>The current value of <see cref="_headerStyle" />.</value>
             protected SpreadsheetStyle _headerStyle;
+            /// <summary>
+            /// Gets or sets the <see cref="_rowStyle" /> catalog value.
+            /// </summary>
+            /// <value>The current value of <see cref="_rowStyle" />.</value>
             protected SpreadsheetStyle _rowStyle;
+            /// <summary>
+            /// Gets or sets the <see cref="_writer" /> catalog value.
+            /// </summary>
+            /// <value>The current value of <see cref="_writer" />.</value>
             protected ExcelWriter _writer;
 
             internal BaseSheetWriter(ExcelWriter writer, HotcakesApplication hccApp)
@@ -102,6 +136,12 @@ namespace Hotcakes.Commerce.Catalog
                 _headerStyle.IsBold = true;
             }
 
+            /// <summary>
+            /// Performs the <c>GetYesNo</c> catalog operation.
+            /// </summary>
+            /// <param name="val">Input used by the operation.</param>
+            /// <returns>The result of the operation.</returns>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected string GetYesNo(bool? val)
             {
                 if (val.HasValue)
@@ -109,6 +149,12 @@ namespace Hotcakes.Commerce.Catalog
                 return string.Empty;
             }
 
+            /// <summary>
+            /// Performs the <c>GetNextColumn</c> catalog operation.
+            /// </summary>
+            /// <param name="colname">Input used by the operation.</param>
+            /// <returns>The result of the operation.</returns>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected string GetNextColumn(string colname)
             {
                 return SpreadsheetReader.GetColumnName(colname, 1);
@@ -122,6 +168,11 @@ namespace Hotcakes.Commerce.Catalog
             {
             }
 
+            /// <summary>
+            /// Performs the <c>Write</c> catalog operation.
+            /// </summary>
+            /// <param name="products">Input used by the operation.</param>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             public void Write(List<Product> products)
             {
                 Initialize(products);
@@ -134,15 +185,31 @@ namespace Hotcakes.Commerce.Catalog
                 }
             }
 
+            /// <summary>
+            /// Performs the <c>Initialize</c> catalog operation.
+            /// </summary>
+            /// <param name="products">Input used by the operation.</param>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected virtual void Initialize(List<Product> products)
             {
             }
 
+            /// <summary>
+            /// Performs the <c>WriteProductRow</c> catalog operation.
+            /// </summary>
+            /// <param name="p">Input used by the operation.</param>
+            /// <param name="rowIndex">Input used by the operation.</param>
+            /// <returns>The result of the operation.</returns>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected virtual int WriteProductRow(Product p, int rowIndex)
             {
                 return ++rowIndex;
             }
 
+            /// <summary>
+            /// Performs the <c>WriteHeader</c> catalog operation.
+            /// </summary>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected virtual void WriteHeader()
             {
             }
@@ -162,6 +229,11 @@ namespace Hotcakes.Commerce.Catalog
             {
             }
 
+            /// <summary>
+            /// Performs the <c>Initialize</c> catalog operation.
+            /// </summary>
+            /// <param name="products">Input used by the operation.</param>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected override void Initialize(List<Product> products)
             {
                 _catalogRoles = _hccApp.CatalogServices.CatalogRoles.FindAllPaged(1, int.MaxValue);
@@ -172,6 +244,10 @@ namespace Hotcakes.Commerce.Catalog
                 _manufacturerList = _hccApp.ContactServices.Manufacturers.FindAll();
             }
 
+            /// <summary>
+            /// Performs the <c>WriteHeader</c> catalog operation.
+            /// </summary>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected override void WriteHeader()
             {
                 var centerStyle = _writer.GetStyle();
@@ -239,6 +315,13 @@ namespace Hotcakes.Commerce.Catalog
                 _firstRow = 3;
             }
 
+            /// <summary>
+            /// Performs the <c>WriteProductRow</c> catalog operation.
+            /// </summary>
+            /// <param name="p">Input used by the operation.</param>
+            /// <param name="rowIndex">Input used by the operation.</param>
+            /// <returns>The result of the operation.</returns>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected override int WriteProductRow(Product p, int rowIndex)
             {
                 var invs = GetInventories(p.Bvin);
@@ -349,12 +432,21 @@ namespace Hotcakes.Commerce.Catalog
 
             internal List<string> CategoryBvins { get; set; }
 
+            /// <summary>
+            /// Performs the <c>Initialize</c> catalog operation.
+            /// </summary>
+            /// <param name="products">Input used by the operation.</param>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected override void Initialize(List<Product> products)
             {
                 _crosses = _hccApp.CatalogServices.CategoriesXProducts.FindAll();
                 _categories = _hccApp.CatalogServices.Categories.FindAll();
             }
 
+            /// <summary>
+            /// Performs the <c>WriteHeader</c> catalog operation.
+            /// </summary>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected override void WriteHeader()
             {
                 _writer.AddWorksheet("Categories");
@@ -370,6 +462,13 @@ namespace Hotcakes.Commerce.Catalog
                 _firstRow = 2;
             }
 
+            /// <summary>
+            /// Performs the <c>WriteProductRow</c> catalog operation.
+            /// </summary>
+            /// <param name="p">Input used by the operation.</param>
+            /// <param name="rowIndex">Input used by the operation.</param>
+            /// <returns>The result of the operation.</returns>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected override int WriteProductRow(Product p, int rowIndex)
             {
                 var bvins = _crosses.Where(y => y.ProductId == p.Bvin)
@@ -410,6 +509,10 @@ namespace Hotcakes.Commerce.Catalog
             {
             }
 
+            /// <summary>
+            /// Performs the <c>WriteHeader</c> catalog operation.
+            /// </summary>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected override void WriteHeader()
             {
                 _writer.AddWorksheet("Choices");
@@ -427,6 +530,13 @@ namespace Hotcakes.Commerce.Catalog
                 _firstRow = 2;
             }
 
+            /// <summary>
+            /// Performs the <c>WriteProductRow</c> catalog operation.
+            /// </summary>
+            /// <param name="p">Input used by the operation.</param>
+            /// <param name="rowIndex">Input used by the operation.</param>
+            /// <returns>The result of the operation.</returns>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected override int WriteProductRow(Product p, int rowIndex)
             {
                 var slugHasWritten = false;
@@ -475,6 +585,10 @@ namespace Hotcakes.Commerce.Catalog
             {
             }
 
+            /// <summary>
+            /// Performs the <c>WriteHeader</c> catalog operation.
+            /// </summary>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected override void WriteHeader()
             {
                 _writer.AddWorksheet("Info Tabs");
@@ -491,6 +605,13 @@ namespace Hotcakes.Commerce.Catalog
                 _firstRow = 2;
             }
 
+            /// <summary>
+            /// Performs the <c>WriteProductRow</c> catalog operation.
+            /// </summary>
+            /// <param name="p">Input used by the operation.</param>
+            /// <param name="rowIndex">Input used by the operation.</param>
+            /// <returns>The result of the operation.</returns>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected override int WriteProductRow(Product p, int rowIndex)
             {
                 var slugHasWritten = false;
@@ -527,6 +648,11 @@ namespace Hotcakes.Commerce.Catalog
             {
             }
 
+            /// <summary>
+            /// Performs the <c>Initialize</c> catalog operation.
+            /// </summary>
+            /// <param name="products">Input used by the operation.</param>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected override void Initialize(List<Product> products)
             {
                 _crosses = _hccApp.CatalogServices.ProductTypesXProperties.FindAllPaged(1, int.MaxValue);
@@ -534,6 +660,10 @@ namespace Hotcakes.Commerce.Catalog
                 _productPropertiesValue = _hccApp.CatalogServices.ProductPropertyValues.FindAllPaged(1, int.MaxValue);
             }
 
+            /// <summary>
+            /// Performs the <c>WriteHeader</c> catalog operation.
+            /// </summary>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected override void WriteHeader()
             {
                 _writer.AddWorksheet("Type Properties");
@@ -550,6 +680,13 @@ namespace Hotcakes.Commerce.Catalog
                 _firstRow = 2;
             }
 
+            /// <summary>
+            /// Performs the <c>WriteProductRow</c> catalog operation.
+            /// </summary>
+            /// <param name="p">Input used by the operation.</param>
+            /// <param name="rowIndex">Input used by the operation.</param>
+            /// <returns>The result of the operation.</returns>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected override int WriteProductRow(Product p, int rowIndex)
             {
                 var slugHasWritten = false;
@@ -611,6 +748,11 @@ namespace Hotcakes.Commerce.Catalog
             {
             }
 
+            /// <summary>
+            /// Performs the <c>Write</c> catalog operation.
+            /// </summary>
+            /// <param name="catIds">Input used by the operation.</param>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             public void Write(List<string> catIds)
             {
                 var categories = FindUsedCategories(catIds);
@@ -657,6 +799,10 @@ namespace Hotcakes.Commerce.Catalog
                 }
             }
 
+            /// <summary>
+            /// Performs the <c>WriteHeader</c> catalog operation.
+            /// </summary>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected void WriteHeader()
             {
                 _writer.AddWorksheet("Category Tree");
@@ -673,6 +819,13 @@ namespace Hotcakes.Commerce.Catalog
                 _firstRow = 2;
             }
 
+            /// <summary>
+            /// Performs the <c>WriteCategoryRow</c> catalog operation.
+            /// </summary>
+            /// <param name="cat">Input used by the operation.</param>
+            /// <param name="rowIndex">Input used by the operation.</param>
+            /// <returns>The result of the operation.</returns>
+            /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
             protected int WriteCategoryRow(Category cat, int rowIndex)
             {
                 var parentCat = _allCategories.FirstOrDefault(c => c.Bvin == cat.ParentId);

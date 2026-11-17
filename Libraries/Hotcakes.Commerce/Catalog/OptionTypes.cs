@@ -26,13 +26,25 @@
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Gets or sets the option types.
+    /// </summary>
+    /// <summary>
+    /// Identifies the processor used to render and parse a product option. The numeric values are persisted and must not be changed.
+    /// </summary>
     public enum OptionTypes
     {
+        /// <summary>Renders a single-value drop-down list.</summary>
         DropDownList = 100,
+        /// <summary>Renders a single-value radio-button list.</summary>
         RadioButtonList = 200,
+        /// <summary>Renders a multi-value checkbox list.</summary>
         CheckBoxes = 300,
+        /// <summary>Renders informational HTML without a customer selection.</summary>
         Html = 400,
+        /// <summary>Renders a text input or multi-line text area.</summary>
         TextInput = 500,
+        /// <summary>Renders the file-upload option and its upload metadata.</summary>
         FileUpload = 600
     }
 }

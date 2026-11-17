@@ -56,6 +56,9 @@ namespace Hotcakes.Commerce.Orders
     {
         #region Constructor
 
+        /// <summary>
+        ///     Creates an order with collection properties, addresses, custom properties, status values, and compatibility defaults initialized.
+        /// </summary>
         public Order()
         {
             Coupons = new List<OrderCoupon>();
@@ -857,6 +860,9 @@ namespace Hotcakes.Commerce.Orders
             return GlobalLocalization.GetString(localizeKey, localizeCuture);
         }
 
+        /// <summary>
+        ///     Gets or sets the is recurring value used by this API.
+        /// </summary>
         public bool IsRecurring
         {
             get { return Items.Any(i => i.IsRecurring); }
@@ -1096,6 +1102,10 @@ namespace Hotcakes.Commerce.Orders
             return true;
         }
 
+        /// <summary>
+        ///     Performs the is order has all items qualified free shipping operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <returns>The value produced by the operation.</returns>
         public bool IsOrderHasAllItemsQualifiedFreeShipping()
         {
             var freeShipItems = (Items ?? Enumerable.Empty<LineItem>()).Count(p => p.IsMarkedForFreeShipping);

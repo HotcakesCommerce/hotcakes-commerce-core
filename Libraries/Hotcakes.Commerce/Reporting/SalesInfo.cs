@@ -32,14 +32,21 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Reporting
 {
+    /// <summary>Contains sales totals, order counts, device breakdowns, and chart data for a reporting period.</summary>
     public class SalesInfo
     {
+        /// <summary>Gets or sets the labels corresponding to <see cref="ChartData"/>.</summary>
         public List<string> ChartLabels { get; set; }
+        /// <summary>Gets or sets the sales values corresponding to <see cref="ChartLabels"/>.</summary>
         public List<decimal> ChartData { get; set; }
 
+        /// <summary>Gets or sets the total number of orders.</summary>
         public int OrdersCount { get; set; }
+        /// <summary>Gets or sets the number of completed orders.</summary>
         public int OrdersCompleted { get; set; }
 
+        /// <summary>Gets the rounded percentage of orders that were not completed; returns zero when there are no orders.</summary>
+        /// <remarks>The value is calculated from <see cref="OrdersCount"/> and <see cref="OrdersCompleted"/>.</remarks>
         public int OrdersAbandonedPercent
         {
             get
@@ -55,26 +62,42 @@ namespace Hotcakes.Commerce.Reporting
             }
         }
 
+        /// <summary>Gets or sets the total value of orders.</summary>
         public decimal OrdersTotalSum { get; set; }
+        /// <summary>Gets or sets the number of successful transactions.</summary>
         public int OrdersSuccessfulTransactions { get; set; }
 
+        /// <summary>Gets or sets the number of sales made from desktop devices.</summary>
         public int SalesByDesktopCount { get; set; }
+        /// <summary>Gets or sets the current desktop sales percentage.</summary>
         public decimal SalesByDesktopPercent { get; set; }
+        /// <summary>Gets or sets the comparison-period desktop sales percentage.</summary>
         public decimal SalesByDesktopPercentPrev { get; set; }
+        /// <summary>Gets or sets the number of sales made from tablet devices.</summary>
         public int SalesByTabletCount { get; set; }
+        /// <summary>Gets or sets the current tablet sales percentage.</summary>
         public decimal SalesByTabletPercent { get; set; }
+        /// <summary>Gets or sets the comparison-period tablet sales percentage.</summary>
         public decimal SalesByTabletPercentPrev { get; set; }
+        /// <summary>Gets or sets the number of sales made from phone devices.</summary>
         public int SalesByPhoneCount { get; set; }
+        /// <summary>Gets or sets the current phone sales percentage.</summary>
         public decimal SalesByPhonePercent { get; set; }
+        /// <summary>Gets or sets the comparison-period phone sales percentage.</summary>
         public decimal SalesByPhonePercentPrev { get; set; }
     }
 
+    /// <summary>Provides the display-ready JSON projection of <see cref="SalesInfo"/>.</summary>
     public class SalesInfoJson
     {
+        /// <summary>Initializes an empty JSON projection.</summary>
         public SalesInfoJson()
         {
         }
 
+        /// <summary>Initializes a localized projection from sales data.</summary>
+        /// <param name="info">The source sales data.</param>
+        /// <param name="localization">The helper used for comparison labels.</param>
         public SalesInfoJson(SalesInfo info, ILocalizationHelper localization)
         {
             ChartLabels = info.ChartLabels;
@@ -117,25 +140,38 @@ namespace Hotcakes.Commerce.Reporting
             }
         }
 
+        /// <summary>Gets or sets the chart labels.</summary>
         public List<string> ChartLabels { get; set; }
+        /// <summary>Gets or sets the chart values.</summary>
         public List<decimal> ChartData { get; set; }
-
+        /// <summary>Gets or sets the total order count.</summary>
         public int OrdersCount { get; set; }
+        /// <summary>Gets or sets the completed order count.</summary>
         public int OrdersCompleted { get; set; }
+        /// <summary>Gets or sets the abandoned-order percentage.</summary>
         public int OrdersAbandonedPercent { get; set; }
+        /// <summary>Gets or sets the localized order total.</summary>
         public string OrdersTotalSum { get; set; }
+        /// <summary>Gets or sets the successful transaction count.</summary>
         public int OrdersSuccessfulTransactions { get; set; }
 
+        /// <summary>Gets or sets the desktop sales count.</summary>
         public int SalesByDesktopCount { get; set; }
+        /// <summary>Gets or sets the localized desktop comparison.</summary>
         public string SalesByDesktopComparison { get; set; }
+        /// <summary>Gets whether desktop sales are growing; null indicates the comparison threshold was not exceeded.</summary>
         public bool? SalesByDesktopGrowing { get; set; }
-
+        /// <summary>Gets or sets the tablet sales count.</summary>
         public int SalesByTabletCount { get; set; }
+        /// <summary>Gets or sets the localized tablet comparison.</summary>
         public string SalesByTabletComparison { get; set; }
+        /// <summary>Gets whether tablet sales are growing; null indicates the comparison threshold was not exceeded.</summary>
         public bool? SalesByTabletGrowing { get; set; }
-
+        /// <summary>Gets or sets the phone sales count.</summary>
         public int SalesByPhoneCount { get; set; }
+        /// <summary>Gets or sets the localized phone comparison.</summary>
         public string SalesByPhoneComparison { get; set; }
+        /// <summary>Gets whether phone sales are growing; null indicates the comparison threshold was not exceeded.</summary>
         public bool? SalesByPhoneGrowing { get; set; }
     }
 }

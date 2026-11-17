@@ -34,6 +34,9 @@ using Hotcakes.Web.OpenXml;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Represents the catalog class <see cref="GiftCardExport" /> and its associated behavior.
+    /// </summary>
     public class GiftCardExport
     {
         #region Fields
@@ -44,6 +47,10 @@ namespace Hotcakes.Commerce.Catalog
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="GiftCardExport" />.
+        /// </summary>
+        /// <param name="hccApp">Value used to initialize the instance.</param>
         public GiftCardExport(HotcakesApplication hccApp)
         {
             _hccApp = hccApp;
@@ -71,10 +78,26 @@ namespace Hotcakes.Commerce.Catalog
 
         internal class MainSheetWriter
         {
+            /// <summary>
+            /// Gets or sets the <see cref="_firstRow" /> catalog value.
+            /// </summary>
+            /// <value>The current value of <see cref="_firstRow" />.</value>
             protected int _firstRow;
             private readonly HotcakesApplication _hccApp;
+            /// <summary>
+            /// Gets or sets the <see cref="_headerStyle" /> catalog value.
+            /// </summary>
+            /// <value>The current value of <see cref="_headerStyle" />.</value>
             protected SpreadsheetStyle _headerStyle;
+            /// <summary>
+            /// Gets or sets the <see cref="_rowStyle" /> catalog value.
+            /// </summary>
+            /// <value>The current value of <see cref="_rowStyle" />.</value>
             protected SpreadsheetStyle _rowStyle;
+            /// <summary>
+            /// Gets or sets the <see cref="_writer" /> catalog value.
+            /// </summary>
+            /// <value>The current value of <see cref="_writer" />.</value>
             protected ExcelWriter _writer;
 
             internal MainSheetWriter(ExcelWriter writer, HotcakesApplication hccApp)

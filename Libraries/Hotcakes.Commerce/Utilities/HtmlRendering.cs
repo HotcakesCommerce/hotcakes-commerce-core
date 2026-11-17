@@ -34,8 +34,21 @@ using Hotcakes.Commerce.Shipping;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Generates HTML fragments for common storefront controls.
+    /// </summary>
+    /// <remarks>
+    /// The returned strings are intended for direct insertion into the storefront markup. Only selected text values
+    /// are HTML-encoded by the existing implementation; callers should treat the output as HTML rather than plain text.
+    /// </remarks>
     public class HtmlRendering
     {
+        /// <summary>
+        /// Generates a link to the store root using either the configured logo image or encoded logo text.
+        /// </summary>
+        /// <param name="app">The current Hotcakes application and store context.</param>
+        /// <param name="isSecureRequest">Whether the generated store URLs should use the secure request scheme.</param>
+        /// <returns>An HTML anchor containing the configured logo image or logo text.</returns>
         public static string Logo(HotcakesApplication app, bool isSecureRequest)
         {
             var storeRootUrl = app.StoreUrl(isSecureRequest, false);
@@ -62,6 +75,11 @@ namespace Hotcakes.Commerce.Utilities
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Generates an HTML link to the store root using the configured logo text.
+        /// </summary>
+        /// <param name="app">The current Hotcakes application and store context.</param>
+        /// <returns>An HTML anchor containing HTML-encoded logo text.</returns>
         public static string LogoText(HotcakesApplication app)
         {
             var storeRootUrl = app.StoreUrl(false, true);
@@ -78,6 +96,16 @@ namespace Hotcakes.Commerce.Utilities
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Generates storefront account, sign-in or sign-out, and checkout links.
+        /// </summary>
+        /// <param name="app">The current Hotcakes application and store context.</param>
+        /// <param name="currentUserId">The current user identifier; an empty string causes a sign-in link to be emitted.</param>
+        /// <returns>An HTML unordered list containing the storefront header links.</returns>
+        /// <remarks>
+        /// When a user is signed in, the method looks up the customer and HTML-encodes the email address used in the
+        /// sign-out link title. The generated link labels are fixed English text.
+        /// </remarks>
         public static string HeaderLinks(HotcakesApplication app, string currentUserId)
         {
             var sb = new StringBuilder();
@@ -120,6 +148,15 @@ namespace Hotcakes.Commerce.Utilities
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Adds the product's visible options to a Web Forms placeholder as server controls.
+        /// </summary>
+        /// <param name="product">The product whose options are rendered.</param>
+        /// <param name="ph">The placeholder that receives the generated controls.</param>
+        /// <remarks>
+        /// Bundle products receive a product label and controls for each bundled product; ordinary products receive
+        /// their options directly. Hidden option names are omitted, but their input controls are still rendered.
+        /// </remarks>
         public static void ProductOptionsAsControls(Product product, PlaceHolder ph)
         {
             if (!product.IsBundle)
@@ -169,6 +206,17 @@ namespace Hotcakes.Commerce.Utilities
             }
         }
 
+        /// <summary>
+        /// Generates radio-button markup for non-negative shipping rates.
+        /// </summary>
+        /// <param name="rates">The shipping rates to render, or <see langword="null"/> for no output.</param>
+        /// <param name="tabIndex">The starting tab index; values less than or equal to zero do not add a tab index.</param>
+        /// <param name="selectedMethodUniqueKey">The unique key of the rate that should be marked as selected.</param>
+        /// <returns>HTML radio-button markup, or an empty string when <paramref name="rates"/> is <see langword="null"/>.</returns>
+        /// <remarks>
+        /// The current implementation calculates a tab offset but does not emit it in the generated markup. Rates with
+        /// negative amounts are omitted.
+        /// </remarks>
         public static string ShippingRatesToRadioButtons(SortableCollection<ShippingRateDisplay> rates, int tabIndex,
             string selectedMethodUniqueKey)
         {

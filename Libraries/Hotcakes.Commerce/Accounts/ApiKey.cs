@@ -30,11 +30,13 @@ namespace Hotcakes.Commerce.Accounts
 {
     /// <summary>
     ///     This method is used to store API key information for
-    ///     specific store.
+    ///     specific store. Represents ApiKey data and behavior within the Hotcakes Commerce account and store boundary.
     /// </summary>
     [Serializable]
     public class ApiKey
     {
+        /// <summary>Performs the ApiKey operation.</summary>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public ApiKey()
         {
             Id = -1;
@@ -42,8 +44,17 @@ namespace Hotcakes.Commerce.Accounts
             Key = string.Empty;
         }
 
+        /// <summary>Gets or sets Id.</summary>
+        /// <remarks>The database identifier for this record; a newly constructed model uses its established unsaved sentinel value unless otherwise noted.</remarks>
+        /// <value>The database identifier for this record; a newly constructed model uses its established unsaved sentinel value unless otherwise noted.</value>
         public long Id { get; set; }
+        /// <summary>Gets or sets StoreId.</summary>
+        /// <remarks>The identifier of the store that owns this record. Store data is isolated by this value.</remarks>
+        /// <value>The identifier of the store that owns this record. Store data is isolated by this value.</value>
         public long StoreId { get; set; }
+        /// <summary>Gets or sets Key.</summary>
+        /// <remarks>The API credential value. Treat it as sensitive and do not expose it in logs or user-facing output.</remarks>
+        /// <value>The API credential value. Treat it as sensitive and do not expose it in logs or user-facing output.</value>
         public string Key { get; set; }
     }
 }

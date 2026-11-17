@@ -28,9 +28,15 @@ using System;
 
 namespace Hotcakes.Commerce.Search
 {
+    /// <summary>
+    /// Represents the scored relationship between an indexed object and a lexicon word.
+    /// </summary>
     [Serializable]
     public class SearchObjectWord
     {
+        /// <summary>
+        /// Initializes a relationship with zero-valued identifiers and score.
+        /// </summary>
         public SearchObjectWord()
         {
             SearchObjectId = 0;
@@ -39,9 +45,21 @@ namespace Hotcakes.Commerce.Search
             Score = 0;
         }
 
+        /// <summary>
+        /// Gets or sets the related <see cref="SearchObject"/> identifier.
+        /// </summary>
         public long SearchObjectId { get; set; }
+        /// <summary>
+        /// Gets or sets the site identifier for the relationship.
+        /// </summary>
         public long SiteId { get; set; }
+        /// <summary>
+        /// Gets or sets the related <see cref="LexiconWord"/> identifier.
+        /// </summary>
         public long WordId { get; set; }
+        /// <summary>
+        /// Gets or sets the search relevance score for the word relationship.
+        /// </summary>
         public int Score { get; set; }
     }
 }

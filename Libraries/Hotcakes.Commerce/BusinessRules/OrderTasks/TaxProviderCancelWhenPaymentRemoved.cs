@@ -29,8 +29,14 @@ using Hotcakes.Commerce.Taxes.Providers;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>Cancels the tax document when the order's payment has been removed and it is unpaid.</summary>
+    /// <remarks>This is an <see cref="OrderTask"/> executed with an <see cref="OrderTaskContext"/>.</remarks>
+    /// <remarks>The configured provider is called only when <see cref="OrderPaymentStatus.Unpaid"/> is the current payment status.</remarks>
     public class TaxProviderCancelWhenPaymentRemoved : OrderTask
     {
+        /// <summary>Executes conditional tax-document cancellation for the current order.</summary>
+        /// <param name="context">The order workflow context.</param>
+        /// <returns>Always <see langword="true"/> after optionally invoking the provider.</returns>
         public override bool Execute(OrderTaskContext context)
         {
             if (context.Order.PaymentStatus == OrderPaymentStatus.Unpaid)
@@ -46,16 +52,24 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return true;
         }
 
+        /// <summary>Reports that provider cancellation has no local rollback implementation.</summary>
+        /// <param name="context">The order workflow context.</param>
+        /// <returns>Always <see langword="true"/>; an external provider cancellation is not reversed here.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>Gets the default display name for this task.</summary>
+        /// <returns><c>Tax provider Cancel Taxes When Payment Removed</c>.</returns>
         public override string TaskName()
         {
             return "Tax provider Cancel Taxes When Payment Removed";
         }
 
+        /// <summary>Gets a provider-specific display name when a context and provider are available.</summary>
+        /// <param name="context">The order workflow context, or <see langword="null"/> for the default name.</param>
+        /// <returns>The provider name followed by <c> Cancel Taxes When Payment Removed</c>, or the default task name.</returns>
         public override string TaskName(OrderTaskContext context)
         {
             if (context != null)
@@ -73,16 +87,23 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return "Tax provider Cancel Taxes When Payment Removed";
         }
 
+        /// <summary>Gets the stable workflow identifier for this task.</summary>
+        /// <returns>The task ID <c>82E064C8-6D75-499B-B556-1056B9D87DF0</c>.</returns>
         public override string TaskId()
         {
             return "82E064C8-6D75-499B-B556-1056B9D87DF0";
         }
 
+        /// <summary>Gets the step label using the context-sensitive task name.</summary>
+        /// <param name="context">The order workflow context.</param>
+        /// <returns>The value returned by <see cref="TaskName(OrderTaskContext)"/>.</returns>
         public override string StepName(OrderTaskContext context)
         {
             return TaskName(context);
         }
 
+        /// <summary>Creates an independent payment-removal tax task instance.</summary>
+        /// <returns>A new <see cref="TaxProviderCancelWhenPaymentRemoved"/> instance.</returns>
         public override Task Clone()
         {
             return new TaxProviderCancelWhenPaymentRemoved();

@@ -44,6 +44,9 @@ namespace Hotcakes.Commerce.Catalog
         private readonly OptionItemRepository itemRepository;
         private readonly ProductOptionAssociationRepository optionCrosses;
 
+        /// <summary>
+        /// Provides the catalog type or contract represented by this declaration.
+        /// </summary>
         public OptionRepository(HccRequestContext c)
             : base(c)
         {
@@ -51,16 +54,25 @@ namespace Hotcakes.Commerce.Catalog
             itemRepository = new OptionItemRepository(c);
         }
 
+        /// <summary>
+        /// Gets or sets the guid.
+        /// </summary>
         protected override Expression<Func<hcc_ProductOptions, Guid>> ItemKeyExp
         {
             get { return po => po.bvin; }
         }
 
+        /// <summary>
+        /// Gets or sets the guid.
+        /// </summary>
         protected override Expression<Func<hcc_ProductOptionTranslation, Guid>> ItemTranslationKeyExp
         {
             get { return pot => pot.ProductOptionId; }
         }
 
+        /// <summary>
+        /// Performs the hcc_ProductOptionTranslation catalog operation.
+        /// </summary>
         protected override Func<JoinedItem<hcc_ProductOptions, hcc_ProductOptionTranslation>, bool> MatchItems(
             Option item)
         {
@@ -68,6 +80,9 @@ namespace Hotcakes.Commerce.Catalog
             return po => po.Item.bvin == guid;
         }
 
+        /// <summary>
+        /// Performs the hcc_ProductOptionTranslation catalog operation.
+        /// </summary>
         protected override Func<JoinedItem<hcc_ProductOptions, hcc_ProductOptionTranslation>, bool> NotMatchItems(
             List<Option> items)
         {
@@ -80,6 +95,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="data"><see cref="hcc_ProductOptions" /> instance</param>
         /// <param name="model"><see cref="Option" /> instance </param>
+        /// <summary>
+        /// Performs the CopyItemToModel catalog operation.
+        /// </summary>
         protected override void CopyItemToModel(hcc_ProductOptions data, Option model)
         {
             model.Bvin = DataTypeHelper.GuidToBvin(data.bvin);
@@ -97,6 +115,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="data"><see cref="hcc_ProductOptions" /> instance</param>
         /// <param name="model"><see cref="Option" /> instance </param>
+        /// <summary>
+        /// Performs the CopyTransToModel catalog operation.
+        /// </summary>
         protected override void CopyTransToModel(hcc_ProductOptionTranslation data, Option model)
         {
             model.Name = data.Name;
@@ -108,6 +129,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="data">Joined item for database object model</param>
         /// <param name="model"><see cref="Option" /> instance</param>
+        /// <summary>
+        /// Performs the CopyModelToItem catalog operation.
+        /// </summary>
         protected override void CopyModelToItem(JoinedItem<hcc_ProductOptions, hcc_ProductOptionTranslation> data,
             Option model)
         {
@@ -126,6 +150,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="data">Joined item for database object model</param>
         /// <param name="model"><see cref="Option" /> instance</param>
+        /// <summary>
+        /// Performs the CopyModelToTrans catalog operation.
+        /// </summary>
         protected override void CopyModelToTrans(JoinedItem<hcc_ProductOptions, hcc_ProductOptionTranslation> data,
             Option model)
         {
@@ -139,6 +166,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Get list of option items for given options
         /// </summary>
         /// <param name="models">List of <see cref="Option" /> instances</param>
+        /// <summary>
+        /// Performs the GetSubItems catalog operation.
+        /// </summary>
         protected override void GetSubItems(List<Option> models)
         {
             var bvinIds = models.Select(s => s.Bvin).ToList();
@@ -155,6 +185,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Merge the option and its option items.
         /// </summary>
         /// <param name="model"><see cref="Option" /> instance</param>
+        /// <summary>
+        /// Performs the MergeSubItems catalog operation.
+        /// </summary>
         protected override void MergeSubItems(Option model)
         {
             itemRepository.MergeList(model.Bvin, model.Items);
@@ -165,6 +198,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="bvin">Option unique identifier</param>
         /// <returns>Returns <see cref="Option" /> instance</returns>
+        /// <summary>
+        /// Performs the Find catalog operation.
+        /// </summary>
         public Option Find(string bvin)
         {
             var result = FindForAllStores(bvin);
@@ -183,6 +219,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="bvin">Option unique identifier</param>
         /// <returns>Returns <see cref="Option" /> instance</returns>
+        /// <summary>
+        /// Performs the FindForAllStores catalog operation.
+        /// </summary>
         public Option FindForAllStores(string bvin)
         {
             var guid = DataTypeHelper.BvinToGuid(bvin);
@@ -194,6 +233,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="item"><see cref="Option" /> instance</param>
         /// <returns>Returns true if option created successfully.</returns>
+        /// <summary>
+        /// Performs the Create catalog operation.
+        /// </summary>
         public override bool Create(Option item)
         {
             if (item.Bvin == string.Empty)
@@ -209,6 +251,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="c"><see cref="Option" /> instance</param>
         /// <returns>Returns true if the option updated successully.</returns>
+        /// <summary>
+        /// Performs the Update catalog operation.
+        /// </summary>
         public bool Update(Option c)
         {
             if (c.StoreId != Context.CurrentStore.Id)
@@ -224,6 +269,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="bvin">Option unique identifier</param>
         /// <returns>Returns true if option deleted successfully</returns>
+        /// <summary>
+        /// Performs the Delete catalog operation.
+        /// </summary>
         public bool Delete(string bvin)
         {
             var storeId = Context.CurrentStore.Id;
@@ -236,6 +284,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="optionBvins">List of option unique identifier</param>
         /// <returns>Returns true if options deleted successfully</returns>
+        /// <summary>
+        /// Performs the Delete catalog operation.
+        /// </summary>
         public bool Delete(List<string> optionBvins)
         {
             var storeId = Context.CurrentStore.Id;
@@ -249,6 +300,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="pageNumber">Page number</param>
         /// <param name="pageSize">Page size</param>
         /// <returns>Returns list of <see cref="Option" /> instances</returns>
+        /// <summary>
+        /// Performs the FindAll catalog operation.
+        /// </summary>
         public List<Option> FindAll(int pageNumber, int pageSize)
         {
             var storeId = Context.CurrentStore.Id;
@@ -265,6 +319,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="pageNumber">Page number</param>
         /// <param name="pageSize">Page size</param>
         /// <returns>Returns list of <see cref="Option" /> instances</returns>
+        /// <summary>
+        /// Performs the FindAllShared catalog operation.
+        /// </summary>
         public List<Option> FindAllShared(int pageNumber, int pageSize)
         {
             var storeId = Context.CurrentStore.Id;
@@ -282,6 +339,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="name">name of the option</param>
         /// <param name="optionType"><see cref="OptionTypes" /> of the option</param>
         /// <returns></returns>
+        /// <summary>
+        /// Performs the FindSharedOptionByNameAndType catalog operation.
+        /// </summary>
         public Option FindSharedOptionByNameAndType(string name, OptionTypes optionType)
         {
             var storeId = Context.CurrentStore.Id;
@@ -303,6 +363,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="bvins">List of option unique identifier</param>
         /// <returns>Returns list <see cref="Option" /> instances</returns>
+        /// <summary>
+        /// Performs the FindMany catalog operation.
+        /// </summary>
         public List<Option> FindMany(List<string> bvins)
         {
             var result = new List<Option>();
@@ -333,6 +396,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="productBvins">List of product unique identifiers</param>
         /// <returns>Returns dictionary with product and its options</returns>
+        /// <summary>
+        /// Performs the List catalog operation.
+        /// </summary>
         public Dictionary<string, List<Option>> FindByProductIds(List<string> productBvins)
         {
             var result = new Dictionary<string, List<Option>>();
@@ -368,6 +434,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="productBvin">Product unique identifier</param>
         /// <returns>List of  <see cref="Option" /> instances.</returns>
+        /// <summary>
+        /// Performs the FindByProductId catalog operation.
+        /// </summary>
         public List<Option> FindByProductId(string productBvin)
         {
             var crosses = optionCrosses.FindForProduct(productBvin, 1, 1000);
@@ -393,6 +462,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="productId">Product unique identifier</param>
         /// <returns>Returns true if the options removed successfully.</returns>
+        /// <summary>
+        /// Performs the DeleteForProductId catalog operation.
+        /// </summary>
         public bool DeleteForProductId(string productId)
         {
             var opts = FindByProductId(productId);
@@ -407,6 +479,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="productBvin">Product unique identifier</param>
         /// <param name="subitems"><see cref="OptionList" /> instance</param>
+        /// <summary>
+        /// Performs the MergeList catalog operation.
+        /// </summary>
         public void MergeList(string productBvin, OptionList subitems)
         {
             var storeId = Context.CurrentStore.Id;
@@ -442,6 +517,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="optionItemBvin">Option Item unique identifier</param>
         /// <returns>Returns true if the option removed successfully</returns>
+        /// <summary>
+        /// Performs the DeleteOptionItem catalog operation.
+        /// </summary>
         public bool DeleteOptionItem(string optionItemBvin)
         {
             return itemRepository.Delete(optionItemBvin);
@@ -453,6 +531,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="optionId">Option unique identifier</param>
         /// <param name="sortedItemIds">List of sorted items ids.</param>
         /// <returns></returns>
+        /// <summary>
+        /// Performs the ResortOptionItems catalog operation.
+        /// </summary>
         public bool ResortOptionItems(string optionId, List<string> sortedItemIds)
         {
             return itemRepository.Resort(optionId, sortedItemIds);
@@ -463,6 +544,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="bvin">Option item unique identifier</param>
         /// <returns>Returns <see cref="OptionItem" /> instance</returns>
+        /// <summary>
+        /// Performs the OptionItemFind catalog operation.
+        /// </summary>
         public OptionItem OptionItemFind(string bvin)
         {
             return itemRepository.Find(bvin);
@@ -473,6 +557,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="item"><see cref="OptionItem" /> instance</param>
         /// <returns>Returns true if option updated successfully.</returns>
+        /// <summary>
+        /// Performs the OptionItemUpdate catalog operation.
+        /// </summary>
         public bool OptionItemUpdate(OptionItem item)
         {
             return itemRepository.Update(item);
@@ -483,6 +570,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="productOptionId">Source product option unique identifier</param>
         /// <param name="newProductOptionId">Destionation product option unique identifier</param>
+        /// <summary>
+        /// Performs the Clone catalog operation.
+        /// </summary>
         public void Clone(string productOptionId, out string newProductOptionId)
         {
             var productOptionGuid = DataTypeHelper.BvinToGuid(productOptionId);

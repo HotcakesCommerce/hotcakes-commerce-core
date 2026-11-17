@@ -28,9 +28,15 @@ using System;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Defines the catalog data or behavior represented by this member.
+    /// </summary>
     [Serializable]
     public class ProductSearchCriteria
     {
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductSearchCriteria()
         {
             Keyword = string.Empty;
@@ -49,23 +55,74 @@ namespace Hotcakes.Commerce.Catalog
             DisplayProductWithChoice = true;
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public bool RoleFiltering { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string Keyword { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string ManufacturerId { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string VendorId { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductStatus Status { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductInventoryStatus InventoryStatus { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string ProductTypeId { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string CategoryId { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string NotCategoryId { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public bool DisplayInactiveProducts { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public bool DisplayBundles { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public bool DisplayGiftCards { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public bool DisplayRecurring { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public bool NotCategorized { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public CategorySortOrder CategorySort { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public bool DisplayProductWithChoice { get; set; }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public ProductSearchCriteria Clone()
         {
             var result = new ProductSearchCriteria();

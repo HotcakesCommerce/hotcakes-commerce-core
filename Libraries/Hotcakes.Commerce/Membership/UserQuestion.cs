@@ -31,8 +31,14 @@ using System.Xml.Serialization;
 
 namespace Hotcakes.Commerce.Membership
 {
+    /// <summary>
+    /// Defines a store-scoped security question and, when applicable, its selectable answers.
+    /// </summary>
     public class UserQuestion
     {
+        /// <summary>
+        /// Initializes a question with empty identifiers and name, a UTC timestamp, <see cref="UserQuestionType.FreeAnswer"/>, no options, and order zero.
+        /// </summary>
         public UserQuestion()
         {
             Bvin = string.Empty;
@@ -44,14 +50,29 @@ namespace Hotcakes.Commerce.Membership
             Order = 0;
         }
 
+        /// <summary>Gets or sets the question's string identifier.</summary>
         public string Bvin { get; set; }
+        /// <summary>Gets or sets the identifier of the store that owns the question.</summary>
         public long StoreId { get; set; }
+        /// <summary>Gets or sets the UTC timestamp for the last model update.</summary>
         public DateTime LastUpdated { get; set; }
+        /// <summary>Gets or sets the question text or display name.</summary>
         public string Name { get; set; }
+        /// <summary>Gets or sets whether the question is free-answer or multiple-choice.</summary>
         public UserQuestionType Type { get; set; }
+        /// <summary>Gets the selectable options associated with the question.</summary>
+        /// <remarks>The collection is replaced when <see cref="ReadValuesFromXml(string)"/> is called.</remarks>
         public Collection<UserQuestionOption> Values { get; private set; }
+        /// <summary>Gets or sets the display order within the owning store's questions.</summary>
         public int Order { get; set; }
 
+        /// <summary>
+        /// Reads question options from serialized XML.
+        /// </summary>
+        /// <param name="xml">XML representing a <see cref="Collection{T}"/> of <see cref="UserQuestionOption"/> objects.</param>
+        /// <remarks>
+        /// The implementation deserializes using <see cref="XmlSerializer"/> and then assigns a new empty collection in its <c>finally</c> block, including after a successful deserialize. Consequently, this method currently leaves <see cref="Values"/> empty; that behavior is preserved for compatibility.
+        /// </remarks>
         public void ReadValuesFromXml(string xml)
         {
             var xs = new XmlSerializer(typeof (Collection<UserQuestionOption>));
@@ -67,6 +88,10 @@ namespace Hotcakes.Commerce.Membership
             }
         }
 
+        /// <summary>
+        /// Serializes the current question options to XML.
+        /// </summary>
+        /// <returns>The XML produced by <see cref="XmlSerializer"/> for the current <see cref="Values"/> collection; an empty string if serialization does not assign a result.</returns>
         public string WriteValuesToXml()
         {
             var result = string.Empty;

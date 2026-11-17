@@ -35,13 +35,30 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>
+    /// Sends drop-shipping notices to each distinct manufacturer and vendor represented by the order.
+    /// </summary>
+    /// <remarks>
+    /// The task identifier is <c>995E482F-8BDC-47E2-926F-D7248553035F</c>. Bundle items are ignored; missing
+    /// manufacturer or vendor identifiers generate warning log entries. Each notice result is recorded as a private
+    /// order note and the order is upserted. Rollback does not recall messages or remove notes.
+    /// </remarks>
     public class RunAllDropShipWorkflows : OrderTask
     {
+        /// <summary>
+        /// Creates a new drop-shipping notification task.
+        /// </summary>
+        /// <returns>A new <see cref="RunAllDropShipWorkflows"/> instance.</returns>
         public override Task Clone()
         {
             return new RunAllDropShipWorkflows();
         }
 
+        /// <summary>
+        /// Finds distinct drop-shipping recipients and sends the configured notice for each one.
+        /// </summary>
+        /// <param name="context">The <see cref="OrderTaskContext"/> containing the order and commerce services.</param>
+        /// <returns>Always <see langword="true"/>; send outcomes are recorded as order notes.</returns>
         public override bool Execute(OrderTaskContext context)
         {
             var manufacturers = new Collection<string>();
@@ -100,16 +117,29 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return true;
         }
 
+        /// <summary>
+        /// Does not recall sent drop-shipping notices or remove the notes recorded for them.
+        /// </summary>
+        /// <param name="context">The workflow context.</param>
+        /// <returns>Always <see langword="true"/>.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>
+        /// Gets the stable task identifier used to register this task in workflows.
+        /// </summary>
+        /// <returns><c>995E482F-8BDC-47E2-926F-D7248553035F</c>.</returns>
         public override string TaskId()
         {
             return "995E482F-8BDC-47E2-926F-D7248553035F";
         }
 
+        /// <summary>
+        /// Gets the display name of this task.
+        /// </summary>
+        /// <returns><c>Run All Dropship Notifications</c>.</returns>
         public override string TaskName()
         {
             return "Run All Dropship Notifications";

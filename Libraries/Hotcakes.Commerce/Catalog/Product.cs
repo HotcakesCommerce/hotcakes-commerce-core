@@ -52,9 +52,18 @@ namespace Hotcakes.Commerce.Catalog
     [Serializable]
     public class Product : IEquatable<Product>, IReplaceable, ILocalizableModel
     {
+        /// <summary>
+        /// Gets or sets the int.
+        /// </summary>
         public const int ProductNameMaxLength = 255;
+        /// <summary>
+        /// Gets or sets the int.
+        /// </summary>
         public const int SkuMaxLength = 50;
 
+        /// <summary>
+        /// Provides the catalog type or contract represented by this declaration.
+        /// </summary>
         public Product()
         {
             Bvin = string.Empty;
@@ -121,6 +130,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="context">An instance of the application</param>
         /// <returns>List of HtmlTemplateTags - a key/value pair of values to replace placeholders in email templates.</returns>
+        /// <summary>
+        /// Performs the GetReplaceableTags catalog operation.
+        /// </summary>
         public List<HtmlTemplateTag> GetReplaceableTags(HccRequestContext context)
         {
             var result = new List<HtmlTemplateTag>();
@@ -177,6 +189,9 @@ namespace Hotcakes.Commerce.Catalog
             return result;
         }
 
+        /// <summary>
+        /// Performs the GetRecurringSpan catalog operation.
+        /// </summary>
         public TimeSpan GetRecurringSpan(DateTime startDate, int quantity, bool firstSpan = false)
         {
             var timeSpan = TimeSpan.Zero;
@@ -211,6 +226,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     If a variant is found and it is greater than 0.00, that price is returned. Otherwise, the SitePrice property
         ///     is returned.
         /// </returns>
+        /// <summary>
+        /// Performs the GetCurrentPrice catalog operation.
+        /// </summary>
         public decimal GetCurrentPrice(string userBvin, decimal adjustment, LineItem li, string variantId)
         {
             var result = SitePrice;
@@ -263,6 +281,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </param>
         /// <param name="propertyKey">String - this is the key that the property is saved under that is used to find a value for.</param>
         /// <returns>If true, the custom property exists, matching the devId and propertyKey</returns>
+        /// <summary>
+        /// Performs the CustomPropertyExists catalog operation.
+        /// </summary>
         public bool CustomPropertyExists(string devId, string propertyKey)
         {
             var result = false;
@@ -289,6 +310,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </param>
         /// <param name="key">String - this is the key that the property is saved under that is used to find a value for.</param>
         /// <param name="value">String - this is the value that the property should be saving and returned when the key is queried.</param>
+        /// <summary>
+        /// Performs the CustomPropertySet catalog operation.
+        /// </summary>
         public void CustomPropertySet(string devId, string key, string value)
         {
             var found = false;
@@ -321,6 +345,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </param>
         /// <param name="key">String - this is the key that the property is saved under that is used to find a value for.</param>
         /// <param name="value">Long - this is the value that the property should be saving and returned when the key is queried.</param>
+        /// <summary>
+        /// Performs the CustomPropertySet catalog operation.
+        /// </summary>
         public void CustomPropertySet(string devId, string key, long value)
         {
             CustomPropertySet(devId, key, value.ToString());
@@ -336,6 +363,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </param>
         /// <param name="key">String - this is the key that the property is saved under that is used to find a value for.</param>
         /// <returns>If found, the value of the custom property is returned. Otherwise, an empty string will be returned.</returns>
+        /// <summary>
+        /// Performs the CustomPropertyGet catalog operation.
+        /// </summary>
         public string CustomPropertyGet(string devId, string key)
         {
             var result = string.Empty;
@@ -360,6 +390,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </param>
         /// <param name="key">String - this is the key that the property is saved under that is used to find a value for.</param>
         /// <returns>If found, true will be returned. Otherwise, this method will default to false.</returns>
+        /// <summary>
+        /// Performs the CustomPropertyGetAsBool catalog operation.
+        /// </summary>
         public bool CustomPropertyGetAsBool(string devId, string key)
         {
             var v = CustomPropertyGet(devId, key);
@@ -378,6 +411,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </param>
         /// <param name="key">String - this is the key that the property is saved under that is used to find a value for.</param>
         /// <returns>If found, the saved value will be returned. Otherwise, this method will return 0.</returns>
+        /// <summary>
+        /// Performs the CustomPropertyGetAsLong catalog operation.
+        /// </summary>
         public long CustomPropertyGetAsLong(string devId, string key)
         {
             var v = CustomPropertyGet(devId, key);
@@ -399,6 +435,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Boolean - this is the value that the property should be saving and returned when the key is
         ///     queried.
         /// </param>
+        /// <summary>
+        /// Performs the CustomPropertySetAsBool catalog operation.
+        /// </summary>
         public void CustomPropertySetAsBool(string devId, string key, bool value)
         {
             CustomPropertySet(devId, key, value.ToString());
@@ -412,6 +451,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     safely.
         /// </param>
         /// <param name="key">String - this is the key that the property is saved under that is used to find a value for.</param>
+        /// <summary>
+        /// Performs the CustomPropertyRemove catalog operation.
+        /// </summary>
         public bool CustomPropertyRemove(string devId, string key)
         {
             var result = false;
@@ -436,6 +478,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <returns>String - the XML representation of all of the custom properties for the product.</returns>
         /// <remarks>Any issues that are caused by this method are written to the EventLog.</remarks>
+        /// <summary>
+        /// Performs the CustomPropertiesToXml catalog operation.
+        /// </summary>
         public string CustomPropertiesToXml()
         {
             var result = string.Empty;
@@ -469,6 +514,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     If any errors occur, they will be written to the EventLog and the CustomProperties property will contain an
         ///     empty collection.
         /// </remarks>
+        /// <summary>
+        /// Performs the CustomPropertiesFromXml catalog operation.
+        /// </summary>
         public bool CustomPropertiesFromXml(string data)
         {
             var result = false;
@@ -500,12 +548,18 @@ namespace Hotcakes.Commerce.Catalog
         ///     This is the numeric version of the unique ID of the product as generated by the database.
         /// </summary>
         /// <remarks>The application will not use this property. Bvin should be used instead for all integration and development.</remarks>
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         public long Id { get; set; }
 
         /// <summary>
         ///     The unique ID or primary key of the product.
         /// </summary>
         /// <remarks>This property should always be used instead of Id.</remarks>
+        /// <summary>
+        /// Gets or sets the bvin.
+        /// </summary>
         public string Bvin { get; set; }
 
         /// <summary>
@@ -523,6 +577,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     The product name is the title of the product as a customer will see it.
         /// </summary>
         /// <remarks>This value should be the localized version of the product name.</remarks>
+        /// <summary>
+        /// Gets or sets the product name.
+        /// </summary>
         public string ProductName { get; set; }
 
         /// <summary>
@@ -539,6 +596,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     The site price reflects the actual price that a customer will pay, regardless to the list price (MSRP).
         /// </summary>
         /// <remarks>This value will not reflect changes made by sales, price groups, or offers.</remarks>
+        /// <summary>
+        /// Gets or sets the site price.
+        /// </summary>
         public decimal SitePrice { get; set; }
 
         /// <summary>
@@ -546,6 +606,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     customers.
         /// </summary>
         /// <remarks>This value is not currently used in the application.</remarks>
+        /// <summary>
+        /// Gets or sets the site price override text.
+        /// </summary>
         public string SitePriceOverrideText { get; set; }
 
         /// <summary>
@@ -593,6 +656,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     If true, the user interface should not display a quantity textbox to the customer.
         /// </summary>
         /// <remarks>If true, the mimimun quantity property will be used.</remarks>
+        /// <summary>
+        /// Gets or sets the hide qty.
+        /// </summary>
         public bool HideQty { get; set; }
 
         /// <summary>
@@ -670,12 +736,18 @@ namespace Hotcakes.Commerce.Catalog
         ///     A shorter version of the LongDescription property.
         /// </summary>
         /// <remarks>This property is currently not being used in the application.</remarks>
+        /// <summary>
+        /// Gets or sets the short description.
+        /// </summary>
         public string ShortDescription { get; set; }
 
         /// <summary>
         ///     This is the product description that is shown to customers.
         /// </summary>
         /// <remarks>This value contains HTML.</remarks>
+        /// <summary>
+        /// Gets or sets the long description.
+        /// </summary>
         public string LongDescription { get; set; }
 
         /// <summary>
@@ -692,6 +764,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     If true, the current product can be gift wrapped prior to shipping for delivery.
         /// </summary>
         /// <remarks>This property is currently not being used in the application.</remarks>
+        /// <summary>
+        /// Gets or sets the gift wrap allowed.
+        /// </summary>
         public bool GiftWrapAllowed { get; set; }
 
         /// <summary>
@@ -699,12 +774,18 @@ namespace Hotcakes.Commerce.Catalog
         ///     engine.
         /// </summary>
         /// <remarks>This property should not be manually updated outside of the application logic.</remarks>
+        /// <summary>
+        /// Gets or sets the hidden search keywords.
+        /// </summary>
         public string HiddenSearchKeywords { get; set; }
 
         /// <summary>
         ///     If gift wrap is enabled for this product and selected, this price will be added to the order total.
         /// </summary>
         /// <remarks>This property is currently not being used in the application.</remarks>
+        /// <summary>
+        /// Gets or sets the gift wrap price.
+        /// </summary>
         public decimal GiftWrapPrice { get; set; }
 
         /// <summary>
@@ -712,6 +793,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     search engines.
         /// </summary>
         /// <remarks>This is a great place to put keywords that might relate to competitive product/service names.</remarks>
+        /// <summary>
+        /// Gets or sets the keywords.
+        /// </summary>
         public string Keywords { get; set; }
 
         /// <summary>
@@ -757,8 +841,17 @@ namespace Hotcakes.Commerce.Catalog
         ///     If true, this product will be indexed and returned in the search results.
         /// </summary>
         public bool IsSearchable { get; set; }
+        /// <summary>
+        /// Gets or sets the allow upcharge.
+        /// </summary>
         public bool AllowUpcharge { get; set; }
+        /// <summary>
+        /// Gets or sets the upcharge amount.
+        /// </summary>
         public decimal UpchargeAmount  { get; set; }
+        /// <summary>
+        /// Gets or sets the upcharge unit.
+        /// </summary>
         public string UpchargeUnit { get; set; }
 
         /// <summary>
@@ -775,6 +868,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     This property is intended to hold the localization-friendly name of the culture for the product.
         /// </summary>
         /// <remarks>This property is inherited from an implementation and is currently not being used in the application.</remarks>
+        /// <summary>
+        /// Gets or sets the content culture.
+        /// </summary>
         public string ContentCulture { get; set; }
 
         /// <summary>
@@ -794,6 +890,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <value>
         ///     The shipping charge.
         /// </value>
+        /// <summary>
+        /// Gets or sets the shipping charge.
+        /// </summary>
         public ShippingChargeType ShippingCharge { get; set; }
 
         /// <summary>
@@ -819,6 +918,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     This method will populate the Tabs property with tab information from an XML data source.
         /// </summary>
         /// <param name="xml">String - the XML serialized representation of the product.</param>
+        /// <summary>
+        /// Performs the TabsFromXml catalog operation.
+        /// </summary>
         public void TabsFromXml(string xml)
         {
             if (xml == string.Empty) return;
@@ -846,6 +948,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     This method will write the Tabs property to XML.
         /// </summary>
         /// <returns>String - the XML serialized representation of the Tabs property.</returns>
+        /// <summary>
+        /// Performs the TabsToXml catalog operation.
+        /// </summary>
         public string TabsToXml()
         {
             var result = string.Empty;
@@ -883,6 +988,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     This property simply returns the appropriate value from the TaxExempt property.
         /// </summary>
         /// <returns>If true, tax rules and calculation will be applied to this product.</returns>
+        /// <summary>
+        /// Performs the IsTaxable catalog operation.
+        /// </summary>
         public bool IsTaxable()
         {
             return !TaxExempt;
@@ -892,6 +1000,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Returns the path saved by the merchant in the product edit view
         /// </summary>
         /// <remarks>This should match up with a folder in the swatches folder of the Hotcakes data directory</remarks>
+        /// <summary>
+        /// Gets or sets the swatch path.
+        /// </summary>
         public string SwatchPath
         {
             get { return CustomPropertyGet("hcc", "swatchpath"); }
@@ -910,6 +1021,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     If the product has at least one Option, this property will return true.
         /// </summary>
         /// <returns>If true, there are one or more Options available for this product.</returns>
+        /// <summary>
+        /// Performs the HasOptions catalog operation.
+        /// </summary>
         public bool HasOptions()
         {
             return Options.Count > 0;
@@ -919,6 +1033,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     If the product has at least one Variant, this property will return true.
         /// </summary>
         /// <returns>If true, there are one or more Variants available for this product.</returns>
+        /// <summary>
+        /// Performs the HasVariants catalog operation.
+        /// </summary>
         public bool HasVariants()
         {
             return Variants.Count > 0;
@@ -982,6 +1099,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </param>
         /// <param name="cloneProductImages">If true, the Images will be cloned along with the rest of the Product properties.</param>
         /// <returns>A copy of the current product with an empty Bvin (ID)</returns>
+        /// <summary>
+        /// Performs the Clone catalog operation.
+        /// </summary>
         public Product Clone(bool cloneProductChoicesAndInputs, bool cloneProductImages)
         {
             var result = new Product();
@@ -1105,6 +1225,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     This method allows you to clone the current product to create a new one based upon it.
         /// </summary>
         /// <returns>A copy of the current product with an empty Bvin (ID)</returns>
+        /// <summary>
+        /// Performs the Clone catalog operation.
+        /// </summary>
         public Product Clone()
         {
             return Clone(true, true);
@@ -1119,6 +1242,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="selections">A collection of selections</param>
         /// <returns>ValidateSelectionsResult - basically a true or false result</returns>
+        /// <summary>
+        /// Performs the ValidateSelections catalog operation.
+        /// </summary>
         public ValidateSelectionsResult ValidateSelections(OptionSelections selections)
         {
             if (selections.HasEmptySelection(this))
@@ -1170,6 +1296,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     product.
         /// </summary>
         /// <returns>Either a populated or empty list of ProductProperty</returns>
+        /// <summary>
+        /// Performs the GetProductTypeProperties catalog operation.
+        /// </summary>
         public List<ProductProperty> GetProductTypeProperties()
         {
             var app = HotcakesApplication.Current;
@@ -1183,6 +1312,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="app">A populated instance of the HccApplication object (if null, the method will create this for you)</param>
         /// <returns>Either a populated or empty list of ProductProperty</returns>
+        /// <summary>
+        /// Performs the GetProductTypeProperties catalog operation.
+        /// </summary>
         public List<ProductProperty> GetProductTypeProperties(HotcakesApplication app)
         {
             if (app == null) app = HotcakesApplication.Current;
@@ -1195,6 +1327,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="name">The name of the product type property you want to find</param>
         /// <returns>You will get a ProductPropertySnapshot object if the property exists, otherwise it will be a NULL object.</returns>
+        /// <summary>
+        /// Performs the GetProductTypeProperty catalog operation.
+        /// </summary>
         public ProductPropertySnapshot GetProductTypeProperty(string name)
         {
             return GetProductTypeProperty(null, name);
@@ -1206,6 +1341,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="app">A populated instance of the HccApplication object (if null, the method will create this for you)</param>
         /// <param name="name">The name of the product type property you want to find</param>
         /// <returns>You will get a ProductPropertySnapshot object if the property exists, otherwise it will be a NULL object.</returns>
+        /// <summary>
+        /// Performs the GetProductTypeProperty catalog operation.
+        /// </summary>
         public ProductPropertySnapshot GetProductTypeProperty(HotcakesApplication app, string name)
         {
             if (app == null) app = HotcakesApplication.Current;
@@ -1237,6 +1375,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </param>
         /// <param name="context">An instance of the Hotcakes Request context</param>
         /// <returns>String - HTML unordered list output representing the product type properties.</returns>
+        /// <summary>
+        /// Performs the RenderTypeProperties catalog operation.
+        /// </summary>
         public string RenderTypeProperties(bool forDropShipper = false, HccRequestContext context = null)
         {
             if (context == null)
@@ -1312,6 +1453,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Allows you to populate the current product object using a ProductDTO instance
         /// </summary>
         /// <param name="dto">An instance of the product from the REST API</param>
+        /// <summary>
+        /// Performs the FromDto catalog operation.
+        /// </summary>
         public void FromDto(ProductDTO dto)
         {
             AllowReviews = dto.AllowReviews;
@@ -1385,6 +1529,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Allows you to convert the current product object to the DTO equivalent for use with the REST API
         /// </summary>
         /// <returns>A new instance of ProductDTO</returns>
+        /// <summary>
+        /// Performs the ToDto catalog operation.
+        /// </summary>
         public ProductDTO ToDto()
         {
             var dto = new ProductDTO();
@@ -1456,6 +1603,9 @@ namespace Hotcakes.Commerce.Catalog
 
         #region IPurchasable Members
 
+        /// <summary>
+        /// Performs the ConvertToLineItem catalog operation.
+        /// </summary>
         public LineItem ConvertToLineItem(HotcakesApplication app, int quantity = 1,
             OptionSelections selectionData = null, decimal? userPrice = null)
         {

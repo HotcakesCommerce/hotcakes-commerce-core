@@ -26,11 +26,26 @@
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Defines the catalog data or behavior represented by this member.
+    /// </summary>
     public class ProductPropertySnapshot
     {
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductPropertyType TypeCode { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string PropertyName { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string DisplayName { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string PropertyValue { get; set; }
     }
 }

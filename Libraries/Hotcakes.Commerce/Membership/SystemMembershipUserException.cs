@@ -29,43 +29,68 @@ using System.Runtime.Serialization;
 
 namespace Hotcakes.Commerce.Membership
 {
+    /// <summary>
+    /// Represents a membership-account failure together with its normalized <see cref="CreateUserStatus"/>.
+    /// </summary>
+    /// <remarks>The default status is <see cref="CreateUserStatus.UserRejected"/>. The exception preserves the standard <see cref="Exception"/> constructors and serialization shape.</remarks>
     public class SystemMembershipUserException : Exception
     {
         private CreateUserStatus _status = CreateUserStatus.UserRejected;
 
+        /// <summary>Initializes an exception with the default <see cref="CreateUserStatus.UserRejected"/> status.</summary>
         public SystemMembershipUserException()
         {
         }
 
+        /// <summary>Initializes an exception with a message and the default rejection status.</summary>
+        /// <param name="message">The exception message.</param>
         public SystemMembershipUserException(string message) : base(message)
         {
         }
 
+        /// <summary>Initializes an exception with a message and membership status.</summary>
+        /// <param name="message">The exception message.</param>
+        /// <param name="userstatus">The normalized membership outcome.</param>
         public SystemMembershipUserException(string message, CreateUserStatus userstatus) : base(message)
         {
             _status = userstatus;
         }
 
+        /// <summary>Initializes an exception with a message, inner exception, and default rejection status.</summary>
+        /// <param name="message">The exception message.</param>
+        /// <param name="inner">The exception that caused this exception.</param>
         public SystemMembershipUserException(string message, Exception inner) : base(message, inner)
         {
         }
 
+        /// <summary>Initializes an exception with a message, inner exception, and membership status.</summary>
+        /// <param name="message">The exception message.</param>
+        /// <param name="inner">The exception that caused this exception.</param>
+        /// <param name="userstatus">The normalized membership outcome.</param>
         public SystemMembershipUserException(string message, Exception inner, CreateUserStatus userstatus)
             : base(message, inner)
         {
             _status = userstatus;
         }
 
+        /// <summary>Initializes a serialized exception with the default rejection status.</summary>
+        /// <param name="info">The serialized exception data.</param>
+        /// <param name="context">The serialization context.</param>
         public SystemMembershipUserException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
 
+        /// <summary>Initializes a serialized exception with a membership status.</summary>
+        /// <param name="info">The serialized exception data.</param>
+        /// <param name="context">The serialization context.</param>
+        /// <param name="userstatus">The normalized membership outcome.</param>
         public SystemMembershipUserException(SerializationInfo info, StreamingContext context,
             CreateUserStatus userstatus) : base(info, context)
         {
             _status = userstatus;
         }
 
+        /// <summary>Gets or sets the normalized membership outcome associated with this exception.</summary>
         public CreateUserStatus Status
         {
             get { return _status; }

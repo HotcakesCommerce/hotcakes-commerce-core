@@ -26,11 +26,16 @@
 
 namespace Hotcakes.Commerce.Reporting
 {
+    /// <summary>Selects the measure used to rank the top products report.</summary>
     public enum Top5ProductMode
     {
+        /// <summary>Ranks products by sales amount.</summary>
         Amount = 1,
+        /// <summary>Ranks products by quantity sold.</summary>
         Quantity = 2,
+        /// <summary>Ranks products by rating.</summary>
         Rating = 3,
+        /// <summary>Ranks products by review count.</summary>
         Reviews = 4
     }
 }

@@ -32,10 +32,16 @@ namespace Hotcakes.Commerce.Catalog
     /// <summary>
     ///     This is the primary object that is used to manage all aspects of ProductType in the main application.
     /// </summary>
-    /// <remarks>The REST API equivalent is ProductTypeDTO.</remarks>
+    /// <remarks>
+    ///     The REST API equivalent is <see cref="ProductTypeDTO" />. Product types identify the product template and
+    ///     properties available to products in a store.
+    /// </remarks>
     [Serializable]
     public class ProductType
     {
+        /// <summary>
+        ///     Initializes a product type with empty identifiers and names, the current UTC timestamp, and non-permanent status.
+        /// </summary>
         public ProductType()
         {
             Bvin = string.Empty;

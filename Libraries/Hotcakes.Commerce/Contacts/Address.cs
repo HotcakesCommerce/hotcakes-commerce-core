@@ -48,6 +48,9 @@ namespace Hotcakes.Commerce.Contacts
 
         private string _postalCode = string.Empty;
 
+        /// <summary>
+        /// Initializes a new address with empty text values, the general address type, and the current UTC timestamp.
+        /// </summary>
         public Address()
         {
             Init();
@@ -82,7 +85,7 @@ namespace Hotcakes.Commerce.Contacts
         public string FirstName { get; set; }
 
         /// <summary>
-        ///     The middle iniital of the recipient at this address.
+        ///     The middle initial of the recipient at this address.
         /// </summary>
         public string MiddleInitial { get; set; }
 
@@ -544,10 +547,10 @@ namespace Hotcakes.Commerce.Contacts
         }
 
         /// <summary>
-        ///     Allows you to compare another address object to determine if the two addresses are the same.
+        ///     Compares the address fields used for address equality with another address.
         /// </summary>
-        /// <param name="a2">Another address object.</param>
-        /// <returns>If true, the current address matches the address in the parameter.</returns>
+        /// <param name="a2">The address to compare with this instance.</param>
+        /// <returns><see langword="true"/> when the compared address fields match, ignoring case and surrounding whitespace; otherwise, <see langword="false"/>.</returns>
         public bool IsEqualTo(Address a2)
         {
             if (a2 == null)
@@ -625,10 +628,11 @@ namespace Hotcakes.Commerce.Contacts
         }
 
         /// <summary>
-        ///     Used to copy the current address object to another address object.
+        ///     Copies the address values handled by this legacy helper to another address instance.
         /// </summary>
-        /// <param name="destinationAddress">An instance of Address where you want the address to be copied to</param>
-        /// <returns>If the copy can execute successfully, true will be returned.</returns>
+        /// <param name="destinationAddress">The address instance to receive the copied values.</param>
+        /// <returns><see langword="true"/> when assignment completes; otherwise, <see langword="false"/> if an exception is caught.</returns>
+        /// <remarks>This method preserves its historical field-selection behavior and does not copy every property on this type.</remarks>
         public bool CopyTo(Address destinationAddress)
         {
             var result = true;
@@ -662,10 +666,11 @@ namespace Hotcakes.Commerce.Contacts
         }
 
         /// <summary>
-        ///     Allows you to return a serialized version of this address in XML format.
+        ///     Returns the address serialized in the established XML fragment format.
         /// </summary>
-        /// <param name="omitDeclaration">This value is not used in this method.</param>
-        /// <returns>A string representation of the Address object in XML format.</returns>
+        /// <param name="omitDeclaration">Accepted for compatibility; the value is not used.</param>
+        /// <returns>A string representation of the <see cref="Address"/> object in XML format.</returns>
+        /// <remarks>The serialized element names and values are compatibility-sensitive.</remarks>
         public virtual string ToXml(bool omitDeclaration)
         {
             var response = string.Empty;
@@ -680,10 +685,11 @@ namespace Hotcakes.Commerce.Contacts
         }
 
         /// <summary>
-        ///     Used to deserialize an XML string to form a new Address object.
+        ///     Deserializes an XML string into this address.
         /// </summary>
-        /// <param name="x">String - the XML used to create an Address object.</param>
-        /// <returns>If successful, true will be returned.</returns>
+        /// <param name="x">The XML used to populate the <see cref="Address"/> object.</param>
+        /// <returns><see langword="true"/> when the XML is successfully parsed; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>The input is expected to use the element names emitted by <see cref="ToXml(bool)"/>.</remarks>
         public virtual bool FromXmlString(string x)
         {
             var sw = new StringReader(x);

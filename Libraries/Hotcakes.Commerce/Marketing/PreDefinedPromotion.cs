@@ -26,26 +26,45 @@
 
 namespace Hotcakes.Commerce.Marketing
 {
+    /// <summary>Identifies the predefined promotion template returned by <see cref="MarketingService.GetPredefinedPromotion"/>.</summary>
     public enum PreDefinedPromotion
     {
+        /// <summary>Blank sale template.</summary>
         CustomSale = 0,
+        /// <summary>Blank line-item offer template.</summary>
         CustomOfferForLineItems = 1,
+        /// <summary>Blank order offer template with an order adjustment action.</summary>
         CustomOfferForOrder = 2,
+        /// <summary>Blank shipping offer template with a shipping adjustment action.</summary>
         CustomOfferForShipping = 3,
+        /// <summary>Blank affiliate promotion template with a reward-points action.</summary>
         CustomAffiliatePromotion = 4,
+        /// <summary>Blank free-item offer template.</summary>
         CustomOfferForFreeItems = 5,
 
+        /// <summary>Storewide sale template.</summary>
         SaleStorewide = 10,
+        /// <summary>Product-specific sale template.</summary>
         SaleProducts = 11,
+        /// <summary>Category sale template.</summary>
         SaleCategories = 12,
+        /// <summary>Product-type sale template.</summary>
         SaleProductType = 13,
+        /// <summary>Price-group sale template.</summary>
         SaleUserGroup = 14,
+        /// <summary>User-specific sale template.</summary>
         SaleUser = 15,
+        /// <summary>Coupon-qualified order discount template.</summary>
         OrderDiscountCoupon = 16,
+        /// <summary>User-qualified order discount template.</summary>
         OrderDiscountUser = 17,
+        /// <summary>Price-group-qualified order discount template.</summary>
         OrderDiscountUserGroup = 18,
+        /// <summary>Free-shipping template.</summary>
         OrderFreeShipping = 19,
+        /// <summary>Shipping-discount template.</summary>
         OrderShippingDiscount = 20,
+        /// <summary>Category-based free-shipping template.</summary>
         OrderFreeShippingByCategory = 21
     }
 }

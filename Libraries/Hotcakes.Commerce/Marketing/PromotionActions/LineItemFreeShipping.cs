@@ -32,21 +32,28 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Marketing.PromotionActions
 {
+    /// <summary>Marks qualifying line items for free shipping and optionally limits eligible methods.</summary>
+    /// <remarks>Method identifiers are stored in the compatibility-sensitive <c>methodids</c> setting.</remarks>
     public class LineItemFreeShipping : PromotionActionBase
     {
+        /// <summary>Stable serialized identifier for the line-item free-shipping action.</summary>
         public const string TypeIdString = "5f7de3ab-c551-47f3-8ff6-dfe6586be867";
 
+        /// <summary>Initializes a free-shipping action with no method restriction.</summary>
         public LineItemFreeShipping()
         {
             Id = 0;
             Settings = new Dictionary<string, string>();
         }
 
+        /// <summary>Gets the stable serialized action identifier.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdString); }
         }
 
+        /// <summary>Gets configured shipping method identifiers as trimmed uppercase values.</summary>
+        /// <returns>A new list of configured method identifiers.</returns>
         public List<string> MethodIds()
         {
             var all = GetSetting("methodids") ?? string.Empty;
@@ -67,6 +74,9 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             SetSetting("methodids", all);
         }
 
+        /// <summary>Describes the free-shipping action and resolves configured method names when possible.</summary>
+        /// <param name="app">The application context used to find shipping methods.</param>
+        /// <returns>The HTML action description.</returns>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var ids = MethodIds();
@@ -97,6 +107,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
         }
 
 
+        /// <summary>Adds a shipping method identifier unless it is empty or already configured.</summary>
+        /// <param name="itemid">The shipping method identifier to normalize and add.</param>
         public void AddItemId(string itemid)
         {
             if (string.IsNullOrWhiteSpace(itemid)) return;
@@ -108,6 +120,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             SaveMethodIdsToSettings(ids);
         }
 
+        /// <summary>Removes a configured shipping method identifier when present.</summary>
+        /// <param name="itemid">The shipping method identifier to normalize and remove.</param>
         public void RemoveItemId(string itemid)
         {
             if (string.IsNullOrWhiteSpace(itemid)) return;
@@ -122,6 +136,10 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
         }
 
 
+        /// <summary>Marks the current line item for free shipping and records the promotion effect.</summary>
+        /// <param name="context">The line-item shipping promotion context.</param>
+        /// <returns><see langword="false"/> for an invalid context; otherwise <see langword="true"/>.</returns>
+        /// <remarks>For a single item, or when all items qualify, the selected shipping rate may also receive a full discount.</remarks>
         public override bool ApplyAction(PromotionContext context)
         {
             if (context == null) return false;

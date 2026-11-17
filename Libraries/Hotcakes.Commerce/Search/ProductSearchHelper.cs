@@ -34,56 +34,88 @@ using StackExchange.Profiling;
 
 namespace Hotcakes.Commerce.Search
 {
+    /// <summary>
+    /// Holds the product, optional product translation, and joined property values used by a search query.
+    /// </summary>
     public class ProductQuery
     {
+        /// <summary>Gets or sets the product row.</summary>
         public hcc_Product p;
+        /// <summary>Gets or sets property/value joins applicable to the product.</summary>
         public IEnumerable<ProductPropertyJoin> ppvj;
+        /// <summary>Gets or sets the selected product translation; it may be null for non-name sorting.</summary>
         public hcc_ProductTranslation pt;
     }
 
     /// <summary>
     ///     Contains "Property Value" + "Property" + "Propery Types"
     /// </summary>
+    /// <summary>
+    /// Contains a product property, one of its values, and the product types associated with the property.
+    /// </summary>
     public class ProductPropertyJoin
     {
         /// <summary>
         ///     Reference to Property
         /// </summary>
+        /// <summary>Gets or sets the property and its selected-culture translation.</summary>
         public ProductProperty pp;
 
         /// <summary>
         ///     Property Value
         /// </summary>
+        /// <summary>Gets or sets the property value and its selected-culture translation.</summary>
         public ProductPropertyValue ppv;
 
         /// <summary>
         ///     Reference to Product Types
         /// </summary>
+        /// <summary>Gets or sets the product-type associations for the property.</summary>
         public IEnumerable<hcc_ProductTypeXProductProperty> ptypes;
     }
 
     /// <summary>
     ///     Contains Product Property with translation
     /// </summary>
+    /// <summary>Contains a product property and its preferred translation.</summary>
     public class ProductProperty
     {
+        /// <summary>Gets or sets the property row.</summary>
         public hcc_ProductProperty Item;
+        /// <summary>Gets or sets the main-culture translation, or the fallback translation.</summary>
         public hcc_ProductPropertyTranslation ItemTranslation;
     }
 
     /// <summary>
     ///     Contains Property Value with translation
     /// </summary>
+    /// <summary>Contains a product property value and its preferred translation.</summary>
     public class ProductPropertyValue
     {
+        /// <summary>Gets or sets the property-value row.</summary>
         public hcc_ProductPropertyValue Item;
+        /// <summary>Gets or sets the main-culture translation, or the fallback translation.</summary>
         public hcc_ProductPropertyValueTranslation ItemTranslation;
     }
 
+    /// <summary>
+    /// Builds advanced product searches and their facet and selected-value projections.
+    /// </summary>
+    /// <remarks>
+    /// Translation joins prefer <see cref="HccRequestContext.MainContentCulture"/> and fall back to
+    /// <see cref="HccRequestContext.FallbackContentCulture"/>. The helper filters active, available-for-sale
+    /// products, while derived classes can add security restrictions through <see cref="SecurityFilter"/>.
+    /// </remarks>
     public class ProductSearchHelper
     {
         #region Constructor
 
+        /// <summary>
+        /// Initializes a helper for a request context, database context, and site.
+        /// </summary>
+        /// <param name="reqContext">The request context supplying the main and fallback cultures.</param>
+        /// <param name="context">The commerce database context.</param>
+        /// <param name="siteId">The site identifier associated with the search.</param>
         public ProductSearchHelper(HccRequestContext reqContext, HccDbContext context, long siteId)
         {
             _reqContext = reqContext;
@@ -158,6 +190,19 @@ namespace Hotcakes.Commerce.Search
 
         #region Implementation
 
+        /// <summary>
+        /// Executes a filtered product search and builds its facets and selected-facet projections.
+        /// </summary>
+        /// <remarks>
+        /// Price bounds in the result are calculated before price filtering. Facet lists exclude their
+        /// own facet dimension while applying the other selected dimensions. Product identifiers are
+        /// paged after sorting; a negative calculated skip is treated as zero. Name sorting uses the
+        /// main-culture translation when available and otherwise the fallback-culture translation.
+        /// </remarks>
+        /// <param name="query">The filters and sort order to apply.</param>
+        /// <param name="pageNumber">The one-based page number. Values producing a negative skip start at zero.</param>
+        /// <param name="pageSize">The maximum number of product identifiers to return.</param>
+        /// <returns>A result containing product bvins, total count, price bounds, facets, and selected values.</returns>
         public ProductSearchResultAdv DoSearch(ProductSearchQueryAdv query, int pageNumber, int pageSize)
         {
             _query = query;
@@ -307,6 +352,11 @@ namespace Hotcakes.Commerce.Search
             return result;
         }
 
+        /// <summary>
+        /// Applies an extension point for additional product visibility or security restrictions.
+        /// </summary>
+        /// <param name="items">The active product query before search-specific filters are applied.</param>
+        /// <returns>The query after any additional restrictions.</returns>
         protected virtual IQueryable<hcc_Product> SecurityFilter(IQueryable<hcc_Product> items)
         {
             return items;
@@ -523,6 +573,16 @@ namespace Hotcakes.Commerce.Search
             return result;
         }
 
+        /// <summary>
+        /// Groups category facet values by parent and orders the resulting values by count descending.
+        /// </summary>
+        /// <remarks>
+        /// Items without a parent remain top-level. A parent with one child is replaced by that child;
+        /// parents with multiple children become <see cref="GroupFacetItem"/> values whose count is the
+        /// sum of child counts and whose children are ordered by count descending.
+        /// </remarks>
+        /// <param name="list">The category facet values to group.</param>
+        /// <returns>The grouped and count-descending category facet values.</returns>
         public static List<FacetItem> GroupCategories(List<FacetItem> list)
         {
             var result = new List<FacetItem>();

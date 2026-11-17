@@ -33,25 +33,40 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    /// Represents the RMAItemRepository order-domain type and preserves the established public compatibility surface.
+    /// </summary>
     public class RMAItemRepository : HccSimpleRepoBase<hcc_RMAItem, RMAItem>
     {
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         public RMAItemRepository(HccRequestContext c)
             : base(c)
         {
         }
 
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override Func<hcc_RMAItem, bool> MatchItems(RMAItem item)
         {
             var guid = DataTypeHelper.BvinToGuid(item.Bvin);
             return ri => ri.bvin == guid;
         }
 
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override Func<hcc_RMAItem, bool> NotMatchItems(List<RMAItem> items)
         {
             var itemGuids = items.Select(i => DataTypeHelper.BvinToGuid(i.Bvin)).ToList();
             return ri => !itemGuids.Contains(ri.bvin);
         }
 
+        /// <summary>
+        /// Provides the CopyModelToData operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override void CopyModelToData(hcc_RMAItem data, RMAItem model)
         {
             data.bvin = DataTypeHelper.BvinToGuid(model.Bvin);
@@ -74,6 +89,9 @@ namespace Hotcakes.Commerce.Orders
             data.StoreId = model.StoreId;
         }
 
+        /// <summary>
+        /// Provides the CopyDataToModel operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override void CopyDataToModel(hcc_RMAItem data, RMAItem model)
         {
             model.Bvin = DataTypeHelper.GuidToBvin(data.bvin);
@@ -96,12 +114,18 @@ namespace Hotcakes.Commerce.Orders
             model.StoreId = data.StoreId;
         }
 
+        /// <summary>
+        /// Provides the Find operation while preserving the established order-domain behavior.
+        /// </summary>
         public RMAItem Find(string bvin)
         {
             var guid = DataTypeHelper.BvinToGuid(bvin);
             return FindFirstPoco(y => y.bvin == guid);
         }
 
+        /// <summary>
+        /// Provides the Create operation while preserving the established order-domain behavior.
+        /// </summary>
         public override bool Create(RMAItem item)
         {
             if (item.Bvin == string.Empty)
@@ -113,18 +137,27 @@ namespace Hotcakes.Commerce.Orders
             return base.Create(item);
         }
 
+        /// <summary>
+        /// Provides the Update operation while preserving the established order-domain behavior.
+        /// </summary>
         public bool Update(RMAItem item)
         {
             var rmaItemId = DataTypeHelper.BvinToGuid(item.Bvin);
             return base.Update(item, y => y.bvin == rmaItemId);
         }
 
+        /// <summary>
+        /// Provides the Delete operation while preserving the established order-domain behavior.
+        /// </summary>
         public bool Delete(string bvin)
         {
             var guid = DataTypeHelper.BvinToGuid(bvin);
             return Delete(y => y.bvin == guid);
         }
 
+        /// <summary>
+        /// Finds the requested records within the established repository store scope and ordering.
+        /// </summary>
         public List<RMAItem> FindForRMA(string rmaBvin)
         {
             var rmaId = DataTypeHelper.BvinToGuid(rmaBvin);
@@ -135,18 +168,27 @@ namespace Hotcakes.Commerce.Orders
             });
         }
 
+        /// <summary>
+        /// Finds the requested records within the established repository store scope and ordering.
+        /// </summary>
         public List<RMAItem> FindForRMA(List<string> bvinIds)
         {
             var rmaIds = bvinIds.Select(bvin => DataTypeHelper.BvinToGuid(bvin)).ToList();
             return FindListPoco(q => q.Where(cb => rmaIds.Contains(cb.bvin)));
         }
 
+        /// <summary>
+        /// Deletes all records associated with the specified parent identifier.
+        /// </summary>
         public void DeleteForRMA(string rmaBvin)
         {
             var rmaId = DataTypeHelper.BvinToGuid(rmaBvin);
             Delete(y => y.RMABvin == rmaId);
         }
 
+        /// <summary>
+        /// Merges the supplied records after assigning their established parent and store scope.
+        /// </summary>
         public void MergeList(string rmaBvin, List<RMAItem> subitems)
         {
             // Set Base Key Field

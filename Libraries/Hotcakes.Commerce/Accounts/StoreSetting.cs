@@ -29,6 +29,7 @@ using System.Globalization;
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Represents StoreSetting data and behavior within the Hotcakes Commerce account and store boundary.</summary>
     [Serializable]
     public class StoreSetting
     {
@@ -37,6 +38,8 @@ namespace Hotcakes.Commerce.Accounts
         private const string TRUE = "TRUE";
         private const string T = "T";
 
+        /// <summary>Performs the StoreSetting operation.</summary>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public StoreSetting()
         {
             Id = -1;
@@ -47,14 +50,34 @@ namespace Hotcakes.Commerce.Accounts
             LocalizedSettingValue = string.Empty;
         }
 
+        /// <summary>Gets or sets Id.</summary>
+        /// <remarks>The database identifier for this record; a newly constructed model uses its established unsaved sentinel value unless otherwise noted.</remarks>
+        /// <value>The database identifier for this record; a newly constructed model uses its established unsaved sentinel value unless otherwise noted.</value>
         public long Id { get; set; }
+        /// <summary>Gets or sets StoreId.</summary>
+        /// <remarks>The identifier of the store that owns this record. Store data is isolated by this value.</remarks>
+        /// <value>The identifier of the store that owns this record. Store data is isolated by this value.</value>
         public long StoreId { get; set; }
+        /// <summary>Gets or sets ContentCulture.</summary>
+        /// <remarks>The culture name associated with the localized setting value.</remarks>
+        /// <value>The culture name associated with the localized setting value.</value>
         public string ContentCulture { get; set; }
+        /// <summary>Gets or sets SettingName.</summary>
+        /// <remarks>The serialized store-setting key. This name is part of the persistence contract and must remain stable.</remarks>
+        /// <value>The serialized store-setting key. This name is part of the persistence contract and must remain stable.</value>
         public string SettingName { get; set; }
+        /// <summary>Gets or sets SettingValue.</summary>
+        /// <remarks>The non-localized serialized value for the setting.</remarks>
+        /// <value>The non-localized serialized value for the setting.</value>
         public string SettingValue { get; set; }
 
+        /// <summary>Gets or sets LocalizedSettingValue.</summary>
+        /// <remarks>The localized serialized value for the setting, using the culture named by <see cref="ContentCulture"/>.</remarks>
+        /// <value>The localized serialized value for the setting, using the culture named by <see cref="ContentCulture"/>.</value>
         public string LocalizedSettingValue { get; set; }
 
+        /// <summary>Gets or sets the boolean view of <see cref="SettingValue"/>.</summary>
+        /// <value>The serialized value is <c>1</c> when <see langword="true"/> and <c>0</c> when <see langword="false"/>. Any value other than <c>1</c> reads as <see langword="false"/>.</value>
         public bool SettingValueAsBool
         {
             get
@@ -72,6 +95,8 @@ namespace Hotcakes.Commerce.Accounts
             }
         }
 
+        /// <summary>Gets or sets the localized setting value as an integer.</summary>
+        /// <value>The parsed integer, or <c>-1</c> when <see cref="LocalizedSettingValue"/> cannot be parsed.</value>
         public int LocalizedValueAsInteger
         {
             get
@@ -83,6 +108,8 @@ namespace Hotcakes.Commerce.Accounts
             set { LocalizedSettingValue = value.ToString(); }
         }
 
+        /// <summary>Gets or sets the non-localized setting value as an integer.</summary>
+        /// <value>The parsed integer, or <c>-1</c> when <see cref="SettingValue"/> cannot be parsed.</value>
         public int ValueAsInteger
         {
             get
@@ -94,6 +121,8 @@ namespace Hotcakes.Commerce.Accounts
             set { SettingValue = value.ToString(); }
         }
 
+        /// <summary>Gets or sets the non-localized setting value as a 64-bit integer.</summary>
+        /// <value>The parsed value, or <c>-1</c> when <see cref="SettingValue"/> cannot be parsed.</value>
         public long ValueAsLong
         {
             get
@@ -105,6 +134,8 @@ namespace Hotcakes.Commerce.Accounts
             set { SettingValue = value.ToString(); }
         }
 
+        /// <summary>Gets or sets the non-localized setting value as a decimal.</summary>
+        /// <value>The invariant-culture parsed value, or <c>-1</c> when the value is empty or cannot be parsed.</value>
         public decimal ValueAsDecimal
         {
             get
@@ -117,6 +148,8 @@ namespace Hotcakes.Commerce.Accounts
             set { SettingValue = value.ToString(CultureInfo.InvariantCulture); }
         }
 
+        /// <summary>Gets or sets the non-localized setting value as a <see cref="Guid"/>.</summary>
+        /// <value>The parsed identifier, or <see cref="Guid.Empty"/> when the value is empty or cannot be parsed.</value>
         public Guid ValueAsGuid
         {
             get
@@ -129,6 +162,8 @@ namespace Hotcakes.Commerce.Accounts
             set { SettingValue = value.ToString(); }
         }
 
+        /// <summary>Gets or sets the non-localized setting value as a Boolean.</summary>
+        /// <value>Reads as <see langword="true"/> only for <c>1</c>, <c>T</c>, or <c>TRUE</c>; other values read as <see langword="false"/>. Setters persist <c>1</c> or <c>0</c>.</value>
         public bool ValueAsBool
         {
             get

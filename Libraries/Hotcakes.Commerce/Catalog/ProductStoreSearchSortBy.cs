@@ -26,13 +26,20 @@
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>Field used to order product-store search results.</summary>
     public enum ProductStoreSearchSortBy
     {
+        /// <summary>Specifies the NotSet value.</summary>
         NotSet = -1,
+        /// <summary>Specifies the ProductName value.</summary>
         ProductName = 0,
+        /// <summary>Specifies the ManufacturerName value.</summary>
         ManufacturerName = 1,
+        /// <summary>Specifies the CreationDate value.</summary>
         CreationDate = 2,
+        /// <summary>Specifies the SitePrice value.</summary>
         SitePrice = 3,
+        /// <summary>Specifies the Vendor value.</summary>
         Vendor = 4
     }
 }

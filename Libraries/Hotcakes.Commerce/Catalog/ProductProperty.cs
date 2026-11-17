@@ -38,6 +38,9 @@ namespace Hotcakes.Commerce.Catalog
     [Serializable]
     public class ProductProperty
     {
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductProperty()
         {
             Id = 0;

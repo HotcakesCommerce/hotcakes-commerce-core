@@ -31,6 +31,9 @@ using Hotcakes.Commerce.Reporting;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Gets or sets the i product repository.
+    /// </summary>
     public interface IProductRepository
     {
         int CountOfAll();

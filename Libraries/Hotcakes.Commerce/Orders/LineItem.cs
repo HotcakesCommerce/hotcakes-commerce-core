@@ -60,6 +60,9 @@ namespace Hotcakes.Commerce.Orders
 
         #region Constructor
 
+        /// <summary>
+        ///     Creates a line item with collection properties, shipping data, recurring-billing state, and pricing defaults initialized.
+        /// </summary>
         public LineItem()
         {
             Id = 0;
@@ -238,11 +241,17 @@ namespace Hotcakes.Commerce.Orders
         public int FreeQuantity { get; set; }
 
 
+        /// <summary>
+        ///     Gets or sets the is quantity free value used by this API.
+        /// </summary>
         public bool IsQuantityFree { get; set; }
 
         /// <summary>
         /// </summary>
         private string _promotionIds;
+        /// <summary>
+        ///     Gets or sets the promotion ids value used by this API.
+        /// </summary>
         public string PromotionIds
         {
             get { return _promotionIds; }
@@ -256,6 +265,9 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the is upcharge allowed value used by this API.
+        /// </summary>
         public bool IsUpchargeAllowed { get; set; }
 
         #endregion
@@ -581,6 +593,11 @@ namespace Hotcakes.Commerce.Orders
             return upchargeAmountTotal;
         }
 
+        /// <summary>
+        ///     Performs the line total with tax portion operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="isVAT">The supplied is v a t value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public decimal LineTotalWithTaxPortion(bool isVAT)
         {
             return LineTotal + (isVAT ? 0 : TaxPortion);
@@ -663,6 +680,12 @@ namespace Hotcakes.Commerce.Orders
             return OrderShippingStatus.Unshipped;
         }
 
+        /// <summary>
+        ///     Performs the recurring coverage operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="startDate">The supplied start date value.</param>
+        /// <param name="recurCount">The supplied recur count value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public DateTime RecurringCoverage(DateTime startDate, int recurCount)
         {
             DateTime coverredDate;
@@ -680,6 +703,12 @@ namespace Hotcakes.Commerce.Orders
             return coverredDate;
         }
 
+        /// <summary>
+        ///     Performs the get recur times operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="startDate">The supplied start date value.</param>
+        /// <param name="endDate">The supplied end date value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public int GetRecurTimes(DateTime startDate, DateTime endDate)
         {
             if (startDate > endDate)
@@ -964,6 +993,11 @@ namespace Hotcakes.Commerce.Orders
 
         #region Public Methods
 
+        /// <summary>
+        ///     Performs the marked for free shipping operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="shippingMethodId">The supplied shipping method id value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public bool MarkedForFreeShipping(string shippingMethodId)
         {
             //Added ToUpperInvariant as many time shipping method value comes in small case and it fails on comparision 
@@ -1129,6 +1163,11 @@ namespace Hotcakes.Commerce.Orders
             return hash;
         }
 
+        /// <summary>
+        ///     Performs the add promotion id operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="promotionId">The supplied promotion id value.</param>
+        /// <param name="quantity">The supplied quantity value.</param>
         public void AddPromotionId(long promotionId, int quantity)
         {
             var hash = ParsePromotionIds();
@@ -1159,11 +1198,20 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the get free promotions operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <returns>The value produced by the operation.</returns>
         public Dictionary<long, int> GetFreePromotions()
         {
             return new Dictionary<long, int>(ParsePromotionIds());
         }
 
+        /// <summary>
+        ///     Performs the get free count by promotion id operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="promotionId">The supplied promotion id value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public int GetFreeCountByPromotionId(long promotionId)
         {
             var hash = ParsePromotionIds();
@@ -1176,6 +1224,10 @@ namespace Hotcakes.Commerce.Orders
             return -1;
         }
 
+        /// <summary>
+        ///     Performs the remove promotion id operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="promotionId">The supplied promotion id value.</param>
         public void RemovePromotionId(long promotionId)
         {
             var hash = ParsePromotionIds();

@@ -33,6 +33,9 @@ using System.Web.UI.WebControls;
 
 namespace Hotcakes.Commerce.Catalog.Options
 {
+    /// <summary>
+    /// Implements the <see cref="IOptionProcessor" /> contract for text and multi-line text options.
+    /// </summary>
     public class TextInput : IOptionProcessor
     {
         private const string TEXTAREA_MARKUP_FORMAT = "<textarea id=\"{0}\" cols=\"{1}\" rows=\"{2}\" name=\"{0}\" class=\"{4}\">{3}</textarea>";
@@ -45,16 +48,25 @@ namespace Hotcakes.Commerce.Catalog.Options
         private const string DEFAULT_COLS = "20";
         private const string DEFAULT_ROWS = "1";
 
+        /// <summary>
+        /// Performs the GetOptionType catalog operation.
+        /// </summary>
         public OptionTypes GetOptionType()
         {
             return OptionTypes.TextInput;
         }
 
+        /// <summary>
+        /// Performs the Render catalog operation.
+        /// </summary>
         public string Render(Option baseOption)
         {
             return RenderWithSelection(baseOption, null);
         }
 
+        /// <summary>
+        /// Performs the RenderWithSelection catalog operation.
+        /// </summary>
         public string RenderWithSelection(Option baseOption, OptionSelectionList selections, string prefix = null, string className = null)
         {
             var selected = string.Empty;
@@ -102,6 +114,9 @@ namespace Hotcakes.Commerce.Catalog.Options
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Performs the RenderAsControl catalog operation.
+        /// </summary>
         public void RenderAsControl(Option baseOption, PlaceHolder ph, string prefix = null, string className = null)
         {
             var textControl = new TextBox();
@@ -135,6 +150,9 @@ namespace Hotcakes.Commerce.Catalog.Options
             ph.Controls.Add(textControl);
         }
 
+        /// <summary>
+        /// Performs the ParseFromPlaceholder catalog operation.
+        /// </summary>
         public OptionSelection ParseFromPlaceholder(Option baseOption, PlaceHolder ph, string prefix = null)
         {
             var result = new OptionSelection();
@@ -149,6 +167,9 @@ namespace Hotcakes.Commerce.Catalog.Options
             return result;
         }
 
+        /// <summary>
+        /// Performs the ParseFromForm catalog operation.
+        /// </summary>
         public OptionSelection ParseFromForm(Option baseOption, NameValueCollection form, string prefix = null)
         {
             var result = new OptionSelection();
@@ -162,6 +183,9 @@ namespace Hotcakes.Commerce.Catalog.Options
             return result;
         }
 
+        /// <summary>
+        /// Performs the SetSelectionsInPlaceholder catalog operation.
+        /// </summary>
         public void SetSelectionsInPlaceholder(Option baseOption, PlaceHolder ph, OptionSelectionList selections)
         {
             if (ph == null) return;
@@ -176,6 +200,9 @@ namespace Hotcakes.Commerce.Catalog.Options
             }
         }
 
+        /// <summary>
+        /// Performs the CartDescription catalog operation.
+        /// </summary>
         public string CartDescription(Option baseOption, OptionSelectionList selections)
         {
             if (selections == null) return string.Empty;
@@ -190,6 +217,9 @@ namespace Hotcakes.Commerce.Catalog.Options
             return string.Empty;
         }
 
+        /// <summary>
+        /// Performs the GetSelectionValues catalog operation.
+        /// </summary>
         public List<string> GetSelectionValues(Option option, OptionSelectionList selections)
         {
             var opSel = selections.FindByOptionId(option.Bvin);
@@ -198,31 +228,49 @@ namespace Hotcakes.Commerce.Catalog.Options
             return vals;
         }
 
+        /// <summary>
+        /// Performs the SetRows catalog operation.
+        /// </summary>
         public void SetRows(Option baseOption, string value)
         {
             baseOption.Settings.AddOrUpdate(OPTION_NAME_ROWS, value);
         }
 
+        /// <summary>
+        /// Performs the GetRows catalog operation.
+        /// </summary>
         public string GetRows(Option baseOption)
         {
             return baseOption.Settings.GetSettingOrEmpty(OPTION_NAME_ROWS);
         }
 
+        /// <summary>
+        /// Performs the SetColumns catalog operation.
+        /// </summary>
         public void SetColumns(Option baseOption, string value)
         {
             baseOption.Settings.AddOrUpdate(OPTION_NAME_COLUMNS, value);
         }
 
+        /// <summary>
+        /// Performs the GetColumns catalog operation.
+        /// </summary>
         public string GetColumns(Option baseOption)
         {
             return baseOption.Settings.GetSettingOrEmpty(OPTION_NAME_COLUMNS);
         }
 
+        /// <summary>
+        /// Performs the SetMaxLength catalog operation.
+        /// </summary>
         public void SetMaxLength(Option baseOption, string value)
         {
             baseOption.Settings.AddOrUpdate(OPTION_NAME_MAXLENGTH, value);
         }
 
+        /// <summary>
+        /// Performs the GetMaxLength catalog operation.
+        /// </summary>
         public string GetMaxLength(Option baseOption)
         {
             return baseOption.Settings.GetSettingOrEmpty(OPTION_NAME_MAXLENGTH);

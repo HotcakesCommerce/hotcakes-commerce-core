@@ -29,17 +29,32 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Defines the contract implemented by a promotion qualification rule.</summary>
+    /// <remarks>Qualifications expose persisted settings and evaluate a <see cref="PromotionContext"/> in a requested <see cref="PromotionQualificationMode"/>.</remarks>
     public interface IPromotionQualification
     {
+        /// <summary>Gets or sets the persisted identifier of this qualification instance.</summary>
         long Id { get; set; }
+        /// <summary>Gets the stable type identifier used to register and persist this qualification.</summary>
         Guid TypeId { get; }
+        /// <summary>Gets the uppercase, hyphenated representation of <see cref="TypeId"/>.</summary>
         string CleanTypeId { get; }
+        /// <summary>Gets or sets the relative cost used when ordering qualification evaluation.</summary>
         RelativeProcessingCost ProcessingCost { get; set; }
+        /// <summary>Gets or sets the string settings persisted for this qualification.</summary>
         Dictionary<string, string> Settings { get; set; }
+        /// <summary>Gets a value indicating whether the qualification exposes configurable options.</summary>
         bool HasOptions { get; }
 
+        /// <summary>Builds the HTML-friendly description shown for this qualification.</summary>
+        /// <param name="app">The application context used to resolve display names.</param>
+        /// <returns>A human-readable description, potentially containing HTML markup.</returns>
         string FriendlyDescription(HotcakesApplication app);
 
+        /// <summary>Determines whether the supplied context satisfies this qualification.</summary>
+        /// <param name="context">The order, product, or line-item context being evaluated.</param>
+        /// <param name="mode">The scope in which the qualification is being evaluated.</param>
+        /// <returns><c>true</c> when the qualification matches; otherwise, <c>false</c>.</returns>
         bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode);
     }
 }

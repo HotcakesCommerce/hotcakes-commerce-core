@@ -28,23 +28,41 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Gets or sets the product facet count.
+    /// </summary>
     public class ProductFacetCount
     {
+        /// <summary>
+        /// Provides the catalog type or contract represented by this declaration.
+        /// </summary>
         public ProductFacetCount()
         {
             Key = string.Empty;
             ProductCount = 0;
         }
 
+        /// <summary>
+        /// Gets or sets the key.
+        /// </summary>
         public string Key { get; set; }
+        /// <summary>
+        /// Gets or sets the product count.
+        /// </summary>
         public int ProductCount { get; set; }
 
+        /// <summary>
+        /// Performs the FindCountForKey catalog operation.
+        /// </summary>
         public static int FindCountForKey(string key, List<ProductFacetCount> counts)
         {
             var sqlKey = CategoryFacetKeyHelper.ParseKeyToSqlList(key);
             return FindCountForSqlKey(sqlKey, counts);
         }
 
+        /// <summary>
+        /// Performs the FindCountForSqlKey catalog operation.
+        /// </summary>
         public static int FindCountForSqlKey(string sqlKey, List<ProductFacetCount> counts)
         {
             foreach (var c in counts)

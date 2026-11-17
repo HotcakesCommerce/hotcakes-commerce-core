@@ -30,12 +30,16 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Marketing.PromotionActions
 {
+    /// <summary>Adjusts the order total during order-level promotion evaluation.</summary>
+    /// <remarks>The computed adjustment is persisted through the order's discount collection.</remarks>
     public class OrderTotalAdjustment : PromotionActionBase
     {
+        /// <summary>Stable serialized identifier for the order-total adjustment action.</summary>
         public const string TypeIdString = "6574b0b9-9c65-4968-8605-eecf6f7a0407";
             
         private static readonly Guid _typeId = new Guid(TypeIdString);
 
+        /// <summary>Initializes a monetary order-total adjustment with amount zero.</summary>
         public OrderTotalAdjustment()
         {
             Id = 0;
@@ -44,6 +48,9 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             Amount = 0m;
         }
 
+        /// <summary>Initializes an order-total adjustment with the specified amount mode and signed amount.</summary>
+        /// <param name="type">Whether the amount is monetary or percentage-based.</param>
+        /// <param name="amount">The signed adjustment amount.</param>
         public OrderTotalAdjustment(AmountTypes type, decimal amount)
         {
             Id = 0;
@@ -52,11 +59,13 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             Amount = amount;
         }
 
+        /// <summary>Gets the stable serialized action identifier.</summary>
         public override Guid TypeId
         {
             get { return _typeId; }
         }
 
+        /// <summary>Gets or sets whether <see cref="Amount"/> is monetary or percentage-based.</summary>
         public AmountTypes AdjustmentType
         {
             get
@@ -69,12 +78,16 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             set { SetSetting("AdjustmentType", (int) value); }
         }
 
+        /// <summary>Gets or sets the signed order-total adjustment amount.</summary>
         public decimal Amount
         {
             get { return GetSettingAsDecimal("Amount"); }
             set { SetSetting("Amount", value); }
         }
 
+        /// <summary>Describes the order-total adjustment.</summary>
+        /// <param name="app">The application context; it is not used by this implementation.</param>
+        /// <returns>The action description.</returns>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var isDiscount = Amount < 0;
@@ -93,6 +106,10 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             return result;
         }
 
+        /// <summary>Calculates and records an adjustment against the order total.</summary>
+        /// <param name="context">The order promotion context.</param>
+        /// <returns><see langword="false"/> for invalid or non-order contexts; otherwise <see langword="true"/>.</returns>
+        /// <remarks>The current order total is calculated once, then persisted through the order discount API.</remarks>
         public override bool ApplyAction(PromotionContext context)
         {
             if (context == null) return false;

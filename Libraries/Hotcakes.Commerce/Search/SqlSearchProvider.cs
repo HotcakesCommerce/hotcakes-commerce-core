@@ -35,15 +35,34 @@ using StackExchange.Profiling;
 
 namespace Hotcakes.Commerce.Search
 {
+    /// <summary>
+    /// Persists the search lexicon, indexed objects, and object-word scores in the Hotcakes SQL database.
+    /// </summary>
+    /// <remarks>
+    /// The provider uses the search tables and stored procedure exposed by <see cref="HccDbContext"/>.
+    /// Basic searches are ranked first by the number of matched words and then by the sum of their
+    /// stored scores. Product searches additionally apply product security, filters, culture fallback,
+    /// and facet calculation in SQL. The implementation intentionally preserves the database provider's
+    /// existing XML word-score representation and sentinel behavior.
+    /// </remarks>
     public class SqlSearchProvider : ISearchProvider
     {
         private readonly HccRequestContext _hccRequestContext;
 
+        /// <summary>
+        /// Initializes a provider using the request context whose content cultures are used by product searches.
+        /// </summary>
+        /// <param name="hccRequestContext">The request context supplying the main and fallback content cultures.</param>
         public SqlSearchProvider(HccRequestContext hccRequestContext)
         {
             _hccRequestContext = hccRequestContext;
         }
 
+        /// <summary>
+        /// Creates the database context used by this provider.
+        /// </summary>
+        /// <returns>A new Hotcakes database context.</returns>
+        /// <remarks>Overrides can supply a specialized context for an extension of the provider.</remarks>
         protected HccDbContext CreateHccDbContext()
         {
             return Factory.CreateHccDbContext();
@@ -51,6 +70,12 @@ namespace Hotcakes.Commerce.Search
 
         #region Lexicon operations
 
+        /// <summary>
+        /// Inserts a stemmed word and culture into the SQL lexicon.
+        /// </summary>
+        /// <param name="stemmedWord">The already-stemmed word to persist.</param>
+        /// <param name="culture">The culture associated with the word.</param>
+        /// <returns>The database-generated lexicon identifier.</returns>
         public long InsertWord(string stemmedWord, string culture)
         {
             using (var context = CreateHccDbContext())
@@ -64,6 +89,12 @@ namespace Hotcakes.Commerce.Search
             }
         }
 
+        /// <summary>
+        /// Finds the SQL lexicon identifier for a stemmed word in a culture.
+        /// </summary>
+        /// <param name="stemmedWord">The stemmed word to find.</param>
+        /// <param name="culture">The culture to match.</param>
+        /// <returns>The matching identifier, or <c>0</c> when no row is found.</returns>
         public long FindWordId(string stemmedWord, string culture)
         {
             using (var context = CreateHccDbContext())
@@ -75,6 +106,12 @@ namespace Hotcakes.Commerce.Search
             }
         }
 
+        /// <summary>
+        /// Finds all SQL lexicon identifiers whose words occur in the supplied list for a culture.
+        /// </summary>
+        /// <param name="stemmedWords">The stemmed words to match.</param>
+        /// <param name="culture">The culture to match.</param>
+        /// <returns>The matching database identifiers.</returns>
         public List<long> FindAllWordIds(List<string> stemmedWords, string culture)
         {
             using (var context = CreateHccDbContext())
@@ -90,6 +127,12 @@ namespace Hotcakes.Commerce.Search
 
         #region Search Object operations
 
+        /// <summary>
+        /// Inserts an indexed search object and assigns its database identifier to the object.
+        /// </summary>
+        /// <param name="s">The search object to persist.</param>
+        /// <returns>The assigned search-object identifier.</returns>
+        /// <remarks>The index timestamp is set to the current UTC time by the provider.</remarks>
         public long ObjectIndexInsert(SearchObject s)
         {
             using (var context = CreateHccDbContext())
@@ -108,6 +151,11 @@ namespace Hotcakes.Commerce.Search
             }
         }
 
+        /// <summary>
+        /// Loads one indexed search object by its database identifier.
+        /// </summary>
+        /// <param name="id">The search-object identifier.</param>
+        /// <returns>The matching object, or <c>null</c> when it is not present.</returns>
         public SearchObject ObjectIndexFind(long id)
         {
             using (var context = CreateHccDbContext())
@@ -133,6 +181,11 @@ namespace Hotcakes.Commerce.Search
             }
         }
 
+        /// <summary>
+        /// Loads all indexed search objects whose database identifiers occur in the supplied list.
+        /// </summary>
+        /// <param name="ids">The search-object identifiers to load.</param>
+        /// <returns>The matching objects as materialized search objects.</returns>
         public List<SearchObject> ObjectIndexFindAllInList(List<long> ids)
         {
             using (var context = CreateHccDbContext())
@@ -158,6 +211,13 @@ namespace Hotcakes.Commerce.Search
             }
         }
 
+        /// <summary>
+        /// Finds an indexed object by site, object type, and application object identifier.
+        /// </summary>
+        /// <param name="siteId">The site identifier owning the indexed object.</param>
+        /// <param name="type">The search object type.</param>
+        /// <param name="objectId">The application object identifier.</param>
+        /// <returns>The matching object, or <c>null</c> when no row matches all three values.</returns>
         public SearchObject ObjectIndexFindByTypeAndId(long siteId, int type, Guid objectId)
         {
             using (var context = CreateHccDbContext())
@@ -182,6 +242,13 @@ namespace Hotcakes.Commerce.Search
             }
         }
 
+        /// <summary>
+        /// Determines whether an indexed object exists for a site, type, and application identifier.
+        /// </summary>
+        /// <param name="siteId">The site identifier.</param>
+        /// <param name="type">The search object type.</param>
+        /// <param name="objectId">The application object identifier.</param>
+        /// <returns><c>true</c> when a matching SQL row exists; otherwise, <c>false</c>.</returns>
         public bool ObjectIndexObjectExists(long siteId, int type, Guid objectId)
         {
             using (var context = CreateHccDbContext())
@@ -191,6 +258,11 @@ namespace Hotcakes.Commerce.Search
             }
         }
 
+        /// <summary>
+        /// Deletes an indexed search object by database identifier.
+        /// </summary>
+        /// <param name="id">The search-object identifier.</param>
+        /// <returns><c>true</c> when a row was deleted; otherwise, <c>false</c>.</returns>
         public bool ObjectIndexDelete(long id)
         {
             using (var context = CreateHccDbContext())
@@ -208,6 +280,21 @@ namespace Hotcakes.Commerce.Search
             }
         }
 
+        /// <summary>
+        /// Adds an object and its word scores through the database indexing procedure.
+        /// </summary>
+        /// <param name="siteId">The site identifier.</param>
+        /// <param name="objectId">The application object identifier.</param>
+        /// <param name="objectType">The search object type.</param>
+        /// <param name="title">The object title.</param>
+        /// <param name="wordScores">A map from stemmed word to its score.</param>
+        /// <param name="culture">The culture of the indexed content.</param>
+        /// <remarks>
+        /// The score map is serialized as <c>&lt;dict&gt;</c> containing <c>&lt;pair&gt;</c> elements with
+        /// <c>&lt;word&gt;</c> and <c>&lt;score&gt;</c> children. Values are appended without XML escaping;
+        /// callers therefore retain responsibility for the existing word format. The stored procedure
+        /// persists the object, lexicon associations, and scores according to the database schema.
+        /// </remarks>
         public void AddObjectIndex(long siteId, Guid objectId, int objectType, string title,
             Dictionary<string, int> wordScores, string culture)
         {
@@ -235,6 +322,11 @@ namespace Hotcakes.Commerce.Search
 
         #region Search Object Word operations
 
+        /// <summary>
+        /// Deletes the SQL object-word row matching both object and word identifiers.
+        /// </summary>
+        /// <param name="word">The object-word association to remove.</param>
+        /// <returns><c>true</c> when a row was deleted; otherwise, <c>false</c>.</returns>
         public bool ObjectWordIndexDelete(SearchObjectWord word)
         {
             using (var context = CreateHccDbContext())
@@ -253,6 +345,11 @@ namespace Hotcakes.Commerce.Search
             }
         }
 
+        /// <summary>
+        /// Inserts an object-word association and its score into SQL.
+        /// </summary>
+        /// <param name="w">The association containing the object, word, site, and score values.</param>
+        /// <returns><c>true</c> after the insert is submitted successfully.</returns>
         public bool ObjectWordIndexInsert(SearchObjectWord w)
         {
             using (var context = CreateHccDbContext())
@@ -273,11 +370,29 @@ namespace Hotcakes.Commerce.Search
 
         #region Search operations
 
+        /// <summary>
+        /// Searches across sites for indexed objects matching the supplied word identifiers.
+        /// </summary>
+        /// <param name="wordIds">The lexicon identifiers to match.</param>
+        /// <param name="pageNumber">The one-based page number.</param>
+        /// <param name="pageSize">The maximum number of objects to return.</param>
+        /// <param name="totalResults">Receives the total number of grouped matches before paging.</param>
+        /// <returns>The page of objects, ranked by match count and then summed score.</returns>
+        /// <remarks>This overload delegates to <see cref="DoSearchBySite(long, List{long}, int, int, ref int)"/> with site filtering disabled.</remarks>
         public List<SearchObject> DoSearch(List<long> wordIds, int pageNumber, int pageSize, ref int totalResults)
         {
             return DoSearchBySite(-1, wordIds, pageNumber, pageSize, ref totalResults);
         }
 
+        /// <summary>
+        /// Searches indexed objects for matching words, optionally restricted to a site.
+        /// </summary>
+        /// <param name="siteId">The site identifier; values greater than zero restrict results to that site.</param>
+        /// <param name="wordIds">The lexicon identifiers to match.</param>
+        /// <param name="pageNumber">The one-based page number; negative paging offsets are clamped to zero.</param>
+        /// <param name="pageSize">The maximum number of objects to return.</param>
+        /// <param name="totalResults">Receives the total number of grouped matches before paging.</param>
+        /// <returns>Objects in SQL ranking order: descending matched-word count, then descending score.</returns>
         public List<SearchObject> DoSearchBySite(long siteId, List<long> wordIds, int pageNumber, int pageSize,
             ref int totalResults)
         {
@@ -341,12 +456,35 @@ namespace Hotcakes.Commerce.Search
             }
         }
 
+        /// <summary>
+        /// Performs an advanced product search across sites.
+        /// </summary>
+        /// <param name="wordIds">The lexicon identifiers to match.</param>
+        /// <param name="query">The product filters, culture-sensitive facet selections, and price bounds.</param>
+        /// <param name="pageNumber">The one-based page number.</param>
+        /// <param name="pageSize">The maximum number of products to return.</param>
+        /// <returns>Products, counts, price bounds, selected facets, and available facets.</returns>
+        /// <remarks>This overload delegates to the site-aware implementation with site filtering disabled.</remarks>
         public ProductSearchResultAdv DoSearch(List<long> wordIds, ProductSearchQueryAdv query, int pageNumber,
             int pageSize)
         {
             return DoSearchBySite(-1, wordIds, query, pageNumber, pageSize);
         }
 
+        /// <summary>
+        /// Performs an advanced SQL product search using word scores and product filters.
+        /// </summary>
+        /// <param name="siteId">The site identifier; values greater than zero restrict indexed words to that site.</param>
+        /// <param name="wordIds">The lexicon identifiers to match.</param>
+        /// <param name="query">The product filters and requested facet selections.</param>
+        /// <param name="pageNumber">The one-based page number; negative offsets are clamped to zero.</param>
+        /// <param name="pageSize">The maximum number of products to return.</param>
+        /// <returns>A result containing ranked products, total count, price range, selected values, and facets.</returns>
+        /// <remarks>
+        /// Active products are security-filtered, ranked by matched-word count and then summed score,
+        /// and translated using the main content culture before the fallback content culture. Price
+        /// bounds are calculated before price filtering; facets are calculated from the filtered query.
+        /// </remarks>
         public ProductSearchResultAdv DoSearchBySite(long siteId, List<long> wordIds, ProductSearchQueryAdv query,
             int pageNumber, int pageSize)
         {
@@ -823,6 +961,15 @@ namespace Hotcakes.Commerce.Search
             }
         }
 
+        /// <summary>
+        /// Performs an advanced product search through the reusable SQL search helper.
+        /// </summary>
+        /// <param name="siteId">The site identifier passed to the search helper.</param>
+        /// <param name="query">The product filters and requested facet selections.</param>
+        /// <param name="pageNumber">The one-based page number.</param>
+        /// <param name="pageSize">The maximum number of products to return.</param>
+        /// <returns>The helper-produced advanced product search result.</returns>
+        /// <remarks>The operation is profiled as <c>SqlProductSearcher_DoSearch_DrillDown</c>.</remarks>
         public ProductSearchResultAdv DoSearchBySite(long siteId, ProductSearchQueryAdv query, int pageNumber,
             int pageSize)
         {
@@ -839,12 +986,26 @@ namespace Hotcakes.Commerce.Search
 
         #region Implementation
 
+        /// <summary>
+        /// Creates the helper used by the advanced product-search path.
+        /// </summary>
+        /// <param name="reqContext">The commerce request context.</param>
+        /// <param name="context">The database context for the search.</param>
+        /// <param name="siteId">The site identifier to pass to the helper.</param>
+        /// <returns>A product search helper.</returns>
+        /// <remarks>Derived providers can override this extension point without changing the public search contract.</remarks>
         protected virtual ProductSearchHelper CreateSearchHelper(HccRequestContext reqContext, HccDbContext context,
             long siteId)
         {
             return new ProductSearchHelper(reqContext, context, siteId);
         }
 
+        /// <summary>
+        /// Applies the provider's product visibility or security filter to a queryable product set.
+        /// </summary>
+        /// <param name="items">The active-product query to filter.</param>
+        /// <returns>The query after security filtering.</returns>
+        /// <remarks>The base implementation returns the query unchanged; derived providers can add store- or user-specific rules.</remarks>
         protected virtual IQueryable<hcc_Product> SecurityFilter(IQueryable<hcc_Product> items)
         {
             return items;

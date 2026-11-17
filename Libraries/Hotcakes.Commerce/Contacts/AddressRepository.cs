@@ -33,13 +33,25 @@ using Hotcakes.Commerce.Globalization;
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>
+    /// Provides store-scoped persistence operations for <see cref="Address"/> records.
+    /// </summary>
     public class AddressRepository : HccSimpleRepoBase<hcc_Address, Address>
     {
+        /// <summary>
+        /// Initializes the repository with the commerce request context used for store scoping.
+        /// </summary>
+        /// <param name="context">The current commerce request context.</param>
         public AddressRepository(HccRequestContext context)
             : base(context)
         {
         }
 
+        /// <summary>
+        /// Copies persisted address data into the domain model.
+        /// </summary>
+        /// <param name="data">The persisted address record.</param>
+        /// <param name="model">The domain address to populate.</param>
         protected override void CopyDataToModel(hcc_Address data, Address model)
         {
             model.StoreId = data.StoreId;
@@ -64,6 +76,11 @@ namespace Hotcakes.Commerce.Contacts
             model.WebSiteUrl = data.WebSiteUrl;
         }
 
+        /// <summary>
+        /// Copies the domain address into its persisted data record.
+        /// </summary>
+        /// <param name="data">The persisted address record to populate.</param>
+        /// <param name="model">The domain address containing the values to persist.</param>
         protected override void CopyModelToData(hcc_Address data, Address model)
         {
             data.StoreId = model.StoreId;
@@ -91,11 +108,21 @@ namespace Hotcakes.Commerce.Contacts
         }
 
 
+        /// <summary>
+        /// Finds an address by its unique bvin.
+        /// </summary>
+        /// <param name="bvin">The address bvin.</param>
+        /// <returns>The matching address, or <see langword="null"/> when no record is found.</returns>
         public Address Find(string bvin)
         {
             return FindFirstPoco(y => y.bvin == bvin);
         }
 
+        /// <summary>
+        /// Creates an address in the current store, assigning its store, timestamp, and bvin.
+        /// </summary>
+        /// <param name="item">The address to create.</param>
+        /// <returns><see langword="true"/> when persistence succeeds; otherwise, <see langword="false"/>.</returns>
         public override bool Create(Address item)
         {
             item.StoreId = Context.CurrentStore.Id;
@@ -104,6 +131,11 @@ namespace Hotcakes.Commerce.Contacts
             return base.Create(item);
         }
 
+        /// <summary>
+        /// Updates an address only when it belongs to the current store.
+        /// </summary>
+        /// <param name="item">The address to update.</param>
+        /// <returns><see langword="true"/> when the update succeeds; otherwise, <see langword="false"/>.</returns>
         public bool Update(Address item)
         {
             if (item.StoreId != Context.CurrentStore.Id)
@@ -114,17 +146,31 @@ namespace Hotcakes.Commerce.Contacts
             return Update(item, y => y.bvin == item.Bvin);
         }
 
+        /// <summary>
+        /// Deletes the address identified by the bvin.
+        /// </summary>
+        /// <param name="bvin">The address bvin.</param>
+        /// <returns><see langword="true"/> when the delete operation succeeds; otherwise, <see langword="false"/>.</returns>
         public bool Delete(string bvin)
         {
             return Delete(y => y.bvin == bvin);
         }
 
+        /// <summary>
+        /// Returns all addresses belonging to the current store in repository order.
+        /// </summary>
+        /// <returns>The current store's addresses.</returns>
         public List<Address> FindAll()
         {
             var storeId = Context.CurrentStore.Id;
             return FindListPoco(q => { return q.Where(y => y.StoreId == storeId).OrderBy(y => y.Id); });
         }
 
+        /// <summary>
+        /// Finds all current-store addresses having the specified address type.
+        /// </summary>
+        /// <param name="t">The address type to match.</param>
+        /// <returns>Matching addresses ordered by their persisted identifier.</returns>
         public List<Address> FindByType(AddressTypes t)
         {
             var storeId = Context.CurrentStore.Id;
@@ -136,6 +182,11 @@ namespace Hotcakes.Commerce.Contacts
             });
         }
 
+        /// <summary>
+        /// Finds all current-store addresses associated with a user bvin.
+        /// </summary>
+        /// <param name="userBvin">The user bvin to match.</param>
+        /// <returns>Matching addresses ordered by their persisted identifier.</returns>
         public List<Address> FindByUserBvin(string userBvin)
         {
             var storeId = Context.CurrentStore.Id;
@@ -147,6 +198,11 @@ namespace Hotcakes.Commerce.Contacts
             });
         }
 
+        /// <summary>
+        /// Returns the first store-contact address for the current store, creating a default one when none exists.
+        /// </summary>
+        /// <returns>The existing or newly created store-contact address.</returns>
+        /// <remarks>The default address retains the historical United States and Virginia values.</remarks>
         public Address FindStoreContactAddress()
         {
             var result = new Address();

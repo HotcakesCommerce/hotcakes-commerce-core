@@ -38,14 +38,18 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Orders
 {
+	/// <summary>Provides store-scoped persistence and reporting queries for <see cref="OrderTransaction"/> records.</summary>
+    /// <remarks>Credit-card data is encrypted before storage, while gift-card and additional settings data are serialized for persistence. Reads and writes preserve the transaction's action classification and store boundary.</remarks>
 	[Serializable]
 	public class OrderTransactionRepository : HccSimpleRepoBase<hcc_OrderTransactions, OrderTransaction>
 	{
+		/// <summary>Initializes a new instance of this type.</summary>
 		public OrderTransactionRepository(HccRequestContext c)
 			: base(c)
 		{
 		}
 
+		/// <summary>Gets or sets the applicable order and payment value.</summary>
 		protected override void CopyDataToModel(hcc_OrderTransactions data, OrderTransaction model)
 		{
             model.Action = (ActionType) data.Action;
@@ -94,6 +98,7 @@ namespace Hotcakes.Commerce.Orders
 			model.LineItemId = data.LineItemId;
 		}
 
+		/// <summary>Gets or sets the applicable order and payment value.</summary>
 		protected override void CopyModelToData(hcc_OrderTransactions data, OrderTransaction model)
 		{
             data.Action = (int) model.Action;
@@ -126,17 +131,20 @@ namespace Hotcakes.Commerce.Orders
 			data.LineItemId = model.LineItemId;
 		}
 
+		/// <summary>Creates the requested order or payment object.</summary>
 		public override bool Create(OrderTransaction item)
 		{
 			item.StoreId = Context.CurrentStore.Id;
 			return base.Create(item);
 		}
 
+		/// <summary>Updates the requested payment or transaction information.</summary>
 		public bool Update(OrderTransaction c)
 		{
             return Update(c, y => y.Id == c.Id);
 		}
 
+		/// <summary>Deletes the requested transaction data.</summary>
 		public bool Delete(Guid id)
 		{
             var storeId = Context.CurrentStore.Id;
@@ -148,16 +156,19 @@ namespace Hotcakes.Commerce.Orders
 			return Delete(y => y.Id == id && y.StoreId == storeId);
 		}
 
+		/// <summary>Finds matching order transaction data.</summary>
 		public OrderTransaction Find(Guid id)
 		{
 			return FindFirstPoco(y => y.Id == id && y.StoreId == Context.CurrentStore.Id);
 		}
 
+		/// <summary>Finds matching order transaction data.</summary>
 		public OrderTransaction FindForAllStores(Guid id)
 		{
 			return FindFirstPoco(y => y.Id == id);
 		}
 
+        /// <summary>Gets or sets the applicable order and payment value.</summary>
         public bool RecordPaymentTransaction(Transaction t, Order o)
 		{
             var ot = new OrderTransaction(t);
@@ -166,6 +177,7 @@ namespace Hotcakes.Commerce.Orders
 			return Create(ot);
 		}
 
+		/// <summary>Finds matching order transaction data.</summary>
 		public List<OrderTransaction> FindForOrder(string orderId, ActionType byAction = ActionType.Unknown)
 		{
 			var orderGuid = DataTypeHelper.BvinToGuid(orderId);
@@ -180,6 +192,7 @@ namespace Hotcakes.Commerce.Orders
 			});
         }
 
+		/// <summary>Finds matching order transaction data.</summary>
 		public List<OrderTransaction> FindForOrderAndRma(string orderId, string rmaId)
         {
             using var s = CreateReadStrategy();
@@ -238,6 +251,7 @@ namespace Hotcakes.Commerce.Orders
 			});
 		}
 
+		/// <summary>Gets or sets the applicable order and payment value.</summary>
 		public decimal TransactionsPotentialValue(List<OrderTransaction> transactions, ActionType actionType)
 		{
 			decimal amount = 0;
@@ -252,6 +266,7 @@ namespace Hotcakes.Commerce.Orders
 			return amount;
 		}
 
+		/// <summary>Gets or sets the applicable order and payment value.</summary>
 		public decimal TransactionsPotentialStoreCredits(List<OrderTransaction> transactions)
 		{
 			decimal amount = 0;
@@ -269,6 +284,7 @@ namespace Hotcakes.Commerce.Orders
 
 
 		// Page Number is 1 based, NOT zero based
+		/// <summary>Finds matching order transaction data.</summary>
 		public List<OrderTransaction> FindForReportByDateRange(DateTime startDateUtc, DateTime endDateUtc,
 																long storeId, int pageSize,
 																int pageNumber, ref int totalCount)
@@ -293,6 +309,7 @@ namespace Hotcakes.Commerce.Orders
 		}
 
         // Page Number is 1 based, NOT zero based
+        /// <summary>Finds matching order transaction data.</summary>
         public List<OrderTransaction> FindForCreditCardReportByDateRange(DateTime startDateUtc, DateTime endDateUtc,
                                                                 long storeId, int pageSize,
                                                                 int pageNumber, ref int totalCount)
@@ -316,6 +333,7 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+		/// <summary>Finds matching order transaction data.</summary>
 		public decimal FindBillableTransactionTotal(DateTime startDateUtc, DateTime endDateUtc, long storeId)
 		{
 			decimal result = 0;
@@ -329,6 +347,7 @@ namespace Hotcakes.Commerce.Orders
 			return result;
 		}
 
+		/// <summary>Finds matching order transaction data.</summary>
 		public decimal FindTotalTransactionsForever()
 		{
 			decimal result = 0;
@@ -351,6 +370,7 @@ namespace Hotcakes.Commerce.Orders
 			return result;
 		}
 
+        /// <summary>Finds matching order transaction data.</summary>
         public List<SalesSummaryData> FindTotalTransactionsByDateRange(DateTime startDateUtc, DateTime endDateUtc,
             Func<hcc_OrderTransactions, int> separationFunc)
 		{

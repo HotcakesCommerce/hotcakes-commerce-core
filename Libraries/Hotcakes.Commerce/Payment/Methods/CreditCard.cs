@@ -28,29 +28,36 @@ using System;
 
 namespace Hotcakes.Commerce.Payment.Methods
 {
+    /// <summary>Built-in credit-card checkout method.</summary>
     [Serializable]
     public class CreditCard : PaymentMethod
     {
+        /// <summary>Gets the stable credit-card method identifier.</summary>
         public override string MethodId
         {
             get { return Id(); }
         }
 
+        /// <summary>Gets the serialized display name, <c>CreditCard</c>.</summary>
         public override string MethodName
         {
             get { return "CreditCard"; }
         }
 
+        /// <summary>Gets the checkout ordering value, 100.</summary>
         public override int SortIndex
         {
             get { return 100; }
         }
 
+        /// <summary>Gets <see langword="true"/> because credit-card checkout supports recurring billing.</summary>
         public override bool SupportRecurringBilling
         {
             get { return true; }
         }
 
+        /// <summary>Returns the stable identifier used by <see cref="PaymentMethods"/>.</summary>
+        /// <returns>The credit-card method identifier.</returns>
         public static string Id()
         {
             return PaymentMethods.CreditCardId;

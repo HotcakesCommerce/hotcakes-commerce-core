@@ -31,8 +31,12 @@ using Hotcakes.Shipping;
 
 namespace Hotcakes.Commerce.Shipping
 {
+    /// <summary>
+    /// Holds a shipping rate and the provider identifiers and package suggestions used to display or select it.
+    /// </summary>
     public class ShippingRateDisplay
     {
+        /// <summary>Initializes an empty display with empty identifiers, message, and package suggestions.</summary>
         public ShippingRateDisplay()
         {
             DisplayName = string.Empty;
@@ -43,6 +47,8 @@ namespace Hotcakes.Commerce.Shipping
             SuggestedPackages = new Collection<OrderPackage>();
         }
 
+        /// <summary>Initializes a display from a provider rate.</summary>
+        /// <param name="rate">The provider rate whose name, cost, service identifier, and service codes are copied.</param>
         public ShippingRateDisplay(IShippingRate rate)
             : this()
         {
@@ -52,6 +58,12 @@ namespace Hotcakes.Commerce.Shipping
             ProviderServiceCode = rate.ServiceCodes;
         }
 
+        /// <summary>Initializes a display from explicit shipping method and provider values.</summary>
+        /// <param name="name">The display name.</param>
+        /// <param name="shipProviderId">The provider identifier.</param>
+        /// <param name="shipProviderServiceCode">The provider service code.</param>
+        /// <param name="totalRate">The displayed rate.</param>
+        /// <param name="shipMethodId">The shipping method identifier.</param>
         public ShippingRateDisplay(string name, string shipProviderId, string shipProviderServiceCode, decimal totalRate,
             string shipMethodId)
             : this()
@@ -63,15 +75,27 @@ namespace Hotcakes.Commerce.Shipping
             ShippingMethodId = shipMethodId;
         }
 
+        /// <summary>Gets or sets the customer-facing rate name.</summary>
         public string DisplayName { get; set; }
+        /// <summary>Gets or sets the provider identifier.</summary>
         public string ProviderId { get; set; }
+        /// <summary>Gets or sets the provider service code or codes.</summary>
         public string ProviderServiceCode { get; set; }
+        /// <summary>Gets or sets the rate before any potential discount display.</summary>
         public decimal Rate { get; set; }
+        /// <summary>Gets or sets the selected shipping method identifier.</summary>
         public string ShippingMethodId { get; set; }
+        /// <summary>Gets or sets a provider response or diagnostic message.</summary>
         public string ResponseMessage { get; set; }
+        /// <summary>Gets or sets the potential discount used only when formatting <see cref="RateAndNameForDisplay"/>.</summary>
         public decimal PotentialDiscount { get; set; }
+        /// <summary>Gets or sets the provider-suggested order packages.</summary>
         public Collection<OrderPackage> SuggestedPackages { get; set; }
 
+        /// <summary>
+        /// Gets the raw HTML fragment containing the formatted rate, optional discount, and display name.
+        /// </summary>
+        /// <remarks>The returned value is intentionally unencoded and includes the <c>hc-shipping-discount</c> span when applicable.</remarks>
         public string RateAndNameForDisplay
         {
             get
@@ -87,11 +111,14 @@ namespace Hotcakes.Commerce.Shipping
             }
         }
 
+        /// <summary>Gets the concatenated shipping method, provider, and service-code key.</summary>
         public string UniqueKey
         {
             get { return ShippingMethodId + ProviderId + ProviderServiceCode; }
         }
 
+        /// <summary>Creates a copy of this display, including cloned suggested packages.</summary>
+        /// <returns>A new display instance. <see cref="PotentialDiscount"/> is not copied.</returns>
         public ShippingRateDisplay GetCopy()
         {
             var result = new ShippingRateDisplay();
@@ -111,6 +138,11 @@ namespace Hotcakes.Commerce.Shipping
             return result;
         }
 
+        /// <summary>Adjusts the rate in place by a fixed amount or percentage.</summary>
+        /// <param name="adjustmentType">The adjustment mode.</param>
+        /// <param name="amount">The amount or percentage to apply.</param>
+        /// <returns>This instance, except that a <see cref="ShippingMethodAdjustmentType.None"/> adjustment returns it unchanged.</returns>
+        /// <remarks>A zero rate is not adjusted; percentage adjustments are rounded to two decimal places.</remarks>
         public ShippingRateDisplay AdjustRate(ShippingMethodAdjustmentType adjustmentType, decimal amount)
         {
             if (Rate != 0)

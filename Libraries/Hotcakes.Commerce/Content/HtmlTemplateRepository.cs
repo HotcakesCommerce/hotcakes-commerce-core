@@ -34,24 +34,29 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Content
 {
+    /// <summary>Persists localized, store-scoped <see cref="HtmlTemplate"/> records.</summary>
     public class HtmlTemplateRepository :
         HccLocalizationRepoBase<hcc_HtmlTemplates, hcc_HtmlTemplateTranslation, HtmlTemplate, long>
     {
+        /// <summary>Initializes the repository for the specified commerce context.</summary>
         public HtmlTemplateRepository(HccRequestContext context)
             : base(context)
         {
         }
 
+        /// <summary>Gets the expression that identifies a template record.</summary>
         protected override Expression<Func<hcc_HtmlTemplates, long>> ItemKeyExp
         {
             get { return ht => ht.Id; }
         }
 
+        /// <summary>Gets the expression that identifies a template translation by template identifier.</summary>
         protected override Expression<Func<hcc_HtmlTemplateTranslation, long>> ItemTranslationKeyExp
         {
             get { return htt => htt.HtmlTemplateId; }
         }
 
+        /// <summary>Copies persisted template fields into the model.</summary>
         protected override void CopyItemToModel(hcc_HtmlTemplates data, HtmlTemplate model)
         {
             model.Id = data.Id;
@@ -62,6 +67,7 @@ namespace Hotcakes.Commerce.Content
             model.TemplateType = (HtmlTemplateType) data.TemplateType;
         }
 
+        /// <summary>Copies persisted translation fields into the model.</summary>
         protected override void CopyTransToModel(hcc_HtmlTemplateTranslation data, HtmlTemplate model)
         {
             model.ContentCulture = data.Culture;
@@ -70,6 +76,7 @@ namespace Hotcakes.Commerce.Content
             model.RepeatingSection = data.RepeatingSection;
         }
 
+        /// <summary>Copies nonlocalized model fields into the persistence item.</summary>
         protected override void CopyModelToItem(JoinedItem<hcc_HtmlTemplates, hcc_HtmlTemplateTranslation> data,
             HtmlTemplate model)
         {
@@ -81,6 +88,7 @@ namespace Hotcakes.Commerce.Content
             data.Item.TemplateType = (int) model.TemplateType;
         }
 
+        /// <summary>Copies localized model fields into the persistence translation item.</summary>
         protected override void CopyModelToTrans(JoinedItem<hcc_HtmlTemplates, hcc_HtmlTemplateTranslation> data,
             HtmlTemplate model)
         {
@@ -91,27 +99,32 @@ namespace Hotcakes.Commerce.Content
             data.ItemTranslation.RepeatingSection = model.RepeatingSection;
         }
 
+        /// <summary>Finds a template by identifier in the current store.</summary>
         public HtmlTemplate Find(long Id)
         {
             return FindFirstPoco(ht => ht.Item.Id == Id && ht.Item.StoreId == Context.CurrentStore.Id);
         }
 
+        /// <summary>Finds a current-store template by display name.</summary>
         public HtmlTemplate Find(string displayName)
         {
             return FindFirstPoco(ht => ht.Item.DisplayName == displayName && ht.Item.StoreId == Context.CurrentStore.Id);
         }
 
+        /// <summary>Finds a template by identifier without applying current-store filtering.</summary>
         public HtmlTemplate FindForAllStores(long Id)
         {
             return FindFirstPoco(ht => ht.Item.Id == Id);
         }
 
+        /// <summary>Finds a template by store and template type.</summary>
         public HtmlTemplate FindByStoreAndType(long storeId, HtmlTemplateType templateType)
         {
             var typeId = (int) templateType;
             return FindFirstPoco(ht => ht.Item.StoreId == storeId && ht.Item.TemplateType == typeId);
         }
 
+        /// <summary>Creates a template, stamping the current UTC time and current store.</summary>
         public override bool Create(HtmlTemplate item)
         {
             item.LastUpdatedUtc = DateTime.UtcNow;
@@ -119,6 +132,8 @@ namespace Hotcakes.Commerce.Content
             return base.Create(item);
         }
 
+        /// <summary>Updates a current-store template and refreshes its UTC timestamp.</summary>
+        /// <returns><see langword="false"/> when the template belongs to another store or persistence fails.</returns>
         public bool Update(HtmlTemplate c)
         {
             if (c.StoreId != Context.CurrentStore.Id)
@@ -129,6 +144,7 @@ namespace Hotcakes.Commerce.Content
             return Update(c, ht => ht.Id == c.Id);
         }
 
+        /// <summary>Deletes a current-store template by identifier.</summary>
         public bool Delete(long Id)
         {
             var t = Find(Id);
@@ -145,6 +161,7 @@ namespace Hotcakes.Commerce.Content
             return Delete(ht => ht.Id == id);
         }
 
+        /// <summary>Gets all templates for the current store, ordered by display name.</summary>
         public List<HtmlTemplate> FindAll()
         {
             var storeId = Context.CurrentStore.Id;

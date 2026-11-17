@@ -26,9 +26,18 @@
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    /// Represents the HandlingMode order-domain type and preserves the established public compatibility surface.
+    /// </summary>
     public enum HandlingMode
     {
+        /// <summary>
+        /// The serialized enum value for per item.
+        /// </summary>
         PerItem = 0,
+        /// <summary>
+        /// The serialized enum value for per order.
+        /// </summary>
         PerOrder = 1
     }
 }

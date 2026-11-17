@@ -30,29 +30,59 @@ using Hotcakes.Commerce.Urls;
 
 namespace Hotcakes.Commerce.Extensions
 {
+    /// <summary>
+    /// Provides MVC URL helpers that delegate HCC route generation to the configured URL resolver.
+    /// </summary>
     public static class HccUrlExtensions
     {
+        /// <summary>Generates a URL for an HCC route.</summary>
+        /// <param name="urlHelper">The MVC URL helper supplying route and request context.</param>
+        /// <param name="route">The HCC route to generate.</param>
+        /// <returns>The URL returned by the configured HCC URL resolver.</returns>
         public static string RouteHccUrl(this UrlHelper urlHelper, HccRoute route)
         {
             return urlHelper.RouteHccUrl(route, null);
         }
 
+        /// <summary>Generates a URL for an HCC route and route values.</summary>
+        /// <param name="urlHelper">The MVC URL helper supplying route and request context.</param>
+        /// <param name="route">The HCC route to generate.</param>
+        /// <param name="routeValues">Values used while resolving the route.</param>
+        /// <returns>The URL returned by the configured HCC URL resolver.</returns>
         public static string RouteHccUrl(this UrlHelper urlHelper, HccRoute route, object routeValues)
         {
             return urlHelper.RouteHccUrl(route, routeValues, null);
         }
 
+        /// <summary>Generates an HCC route URL from a route-value dictionary.</summary>
+        /// <param name="urlHelper">The MVC URL helper supplying route and request context.</param>
+        /// <param name="route">The HCC route to generate.</param>
+        /// <param name="routeValues">Values used while resolving the route.</param>
+        /// <returns>The URL returned by the configured HCC URL resolver.</returns>
         public static string RouteHccUrl(this UrlHelper urlHelper, HccRoute route, RouteValueDictionary routeValues)
         {
             return urlHelper.RouteHccUrl(route, routeValues, null, null);
         }
 
+        /// <summary>Generates an HCC route URL with route values and an optional protocol.</summary>
+        /// <param name="urlHelper">The MVC URL helper supplying route and request context.</param>
+        /// <param name="route">The HCC route to generate.</param>
+        /// <param name="routeValues">Values used while resolving the route.</param>
+        /// <param name="protocol">The optional URI protocol.</param>
+        /// <returns>The URL returned by the configured HCC URL resolver.</returns>
         public static string RouteHccUrl(this UrlHelper urlHelper, HccRoute route, object routeValues, string protocol)
         {
             return RouteHccUrl(route, null, null, protocol, null, null, new RouteValueDictionary(routeValues),
                 urlHelper.RouteCollection, urlHelper.RequestContext, false);
         }
 
+        /// <summary>Generates an HCC route URL with protocol and host name options.</summary>
+        /// <param name="urlHelper">The MVC URL helper supplying route and request context.</param>
+        /// <param name="route">The HCC route to generate.</param>
+        /// <param name="routeValues">Values used while resolving the route.</param>
+        /// <param name="protocol">The optional URI protocol.</param>
+        /// <param name="hostName">The optional host name.</param>
+        /// <returns>The URL returned by the configured HCC URL resolver.</returns>
         public static string RouteHccUrl(this UrlHelper urlHelper, HccRoute route, RouteValueDictionary routeValues,
             string protocol, string hostName)
         {

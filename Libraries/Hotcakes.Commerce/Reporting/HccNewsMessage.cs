@@ -28,10 +28,14 @@ using System;
 
 namespace Hotcakes.Commerce.Reporting
 {
+    /// <summary>Represents a news message displayed by the commerce reporting area.</summary>
     public class HccNewsMessage
     {
+        /// <summary>Gets or sets the message identifier.</summary>
         public long Id { get; set; }
+        /// <summary>Gets or sets the message timestamp in UTC.</summary>
         public DateTime TimeStampUtc { get; set; }
+        /// <summary>Gets or sets the message text.</summary>
         public string Message { get; set; }
     }
 }

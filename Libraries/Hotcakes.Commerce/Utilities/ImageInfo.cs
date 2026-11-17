@@ -28,6 +28,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Describes an image's dimensions, file size, and optional path information.
+    /// </summary>
     public class ImageInfo
     {
         private string _FormattedDimensions = string.Empty;
@@ -35,35 +38,61 @@ namespace Hotcakes.Commerce.Utilities
         private string _PhysicalPath = string.Empty;
         private string _Url = string.Empty;
 
+        /// <summary>
+        /// Initializes an empty image-information object with a zero byte size.
+        /// </summary>
         public ImageInfo()
         {
             SizeInBytes = 0m;
         }
 
+        /// <summary>
+        /// Gets or sets the image width in pixels.
+        /// </summary>
         public int Width { get; set; }
 
+        /// <summary>
+        /// Gets or sets the image height in pixels.
+        /// </summary>
         public int Height { get; set; }
 
+        /// <summary>
+        /// Gets or sets the image file size in bytes.
+        /// </summary>
         public decimal SizeInBytes { get; set; }
 
+        /// <summary>
+        /// Gets or sets the display-formatted file size, such as <c>12 KB</c>.
+        /// </summary>
+        /// <value>A display string; the class does not calculate or normalize assigned values.</value>
         public string FormattedSize
         {
             get { return _FormattedSize; }
             set { _FormattedSize = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the display-formatted dimensions, such as <c>640 x 480</c>.
+        /// </summary>
         public string FormattedDimensions
         {
             get { return _FormattedDimensions; }
             set { _FormattedDimensions = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the physical file-system path for the image.
+        /// </summary>
         public string PhysicalPath
         {
             get { return _PhysicalPath; }
             set { _PhysicalPath = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the URL used to access the image.
+        /// </summary>
+        /// <value>A URL string; this property remains a string for compatibility with the existing API.</value>
         [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings")]
         public string Url
         {

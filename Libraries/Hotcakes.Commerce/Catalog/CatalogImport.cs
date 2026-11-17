@@ -47,6 +47,9 @@ using Hotcakes.Web.OpenXml;
 
 namespace Hotcakes.Commerce.Catalog
 {
+	/// <summary>
+	/// Represents the catalog class <see cref="CatalogImport" /> and its associated behavior.
+	/// </summary>
     [Serializable]
 	public class CatalogImport
 	{
@@ -58,6 +61,10 @@ namespace Hotcakes.Commerce.Catalog
 
 		#region Constructor
 
+		/// <summary>
+		/// Initializes a new instance of <see cref="CatalogImport" />.
+		/// </summary>
+		/// <param name="hccApp">Value used to initialize the instance.</param>
 		public CatalogImport(HotcakesApplication hccApp)
 		{
 			_hccApp = hccApp;
@@ -67,6 +74,12 @@ namespace Hotcakes.Commerce.Catalog
 
 		#region Public methods
 
+		/// <summary>
+		/// Performs the <c>ImportFromExcel</c> catalog operation.
+		/// </summary>
+		/// <param name="fileName">Input used by the operation.</param>
+		/// <param name="log">Input used by the operation.</param>
+		/// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
 		public void ImportFromExcel(string fileName, Action<double, string> log)
 		{
 			try
@@ -118,7 +131,15 @@ namespace Hotcakes.Commerce.Catalog
 
 			#region Properties
 
+        /// <summary>
+        /// Gets or sets the <see cref="UpdateExistingProducts" /> catalog value.
+        /// </summary>
+        /// <value>The current value of <see cref="UpdateExistingProducts" />.</value>
         public bool UpdateExistingProducts { get; set; }
+        /// <summary>
+        /// Gets or sets the <see cref="ImagesImportPath" /> catalog value.
+        /// </summary>
+        /// <value>The current value of <see cref="ImagesImportPath" />.</value>
         public string ImagesImportPath { get; set; }
 
 			#endregion
@@ -193,17 +214,40 @@ namespace Hotcakes.Commerce.Catalog
                 return _importedRows > 0;
 			}
 
+			/// <summary>
+			/// Performs the <c>ProcessAfter</c> catalog operation.
+			/// </summary>
+			/// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
 			protected virtual void ProcessAfter()
             {
             }
 
+			/// <summary>
+			/// Performs the <c>ProcessRow</c> catalog operation.
+			/// </summary>
+			/// <param name="row">Input used by the operation.</param>
+			/// <returns>The result of the operation.</returns>
+			/// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
 			protected abstract bool ProcessRow(Row row);
 
             #region Fields
 
+            /// <summary>
+            /// Gets or sets the <see cref="_hccApp" /> catalog value.
+            /// </summary>
+            /// <value>The current value of <see cref="_hccApp" />.</value>
             protected HotcakesApplication _hccApp;
+            /// <summary>Catalog API member.</summary>
             protected Action<double, string> _log;
+            /// <summary>
+            /// Gets or sets the <see cref="_reader" /> catalog value.
+            /// </summary>
+            /// <value>The current value of <see cref="_reader" />.</value>
             protected ExcelReader _reader;
+            /// <summary>
+            /// Gets or sets the <see cref="_cleanedProducts" /> catalog value.
+            /// </summary>
+            /// <value>The current value of <see cref="_cleanedProducts" />.</value>
             protected List<string> _cleanedProducts = new List<string>();
             private double _progress;
             private int _importedRows;
@@ -212,7 +256,9 @@ namespace Hotcakes.Commerce.Catalog
 
             #region Properties
 
+            /// <summary>Catalog API member.</summary>
             protected abstract int HeaderRowsCount { get; }
+            /// <summary>Catalog API member.</summary>
             protected abstract string SheetName { get; }
             internal Dictionary<string, Product> Products { get; set; }
 
@@ -220,6 +266,11 @@ namespace Hotcakes.Commerce.Catalog
 
 			#region Implementation
 
+			/// <summary>
+			/// Performs the <c>LogProgress</c> catalog operation.
+			/// </summary>
+			/// <param name="progress">Input used by the operation.</param>
+			/// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
 			protected void LogProgress(double progress)
 			{
 				_progress = progress;
@@ -232,17 +283,38 @@ namespace Hotcakes.Commerce.Catalog
 				_log(_progress, message);
 			}
 
+			/// <summary>
+			/// Performs the <c>GetCell</c> catalog operation.
+			/// </summary>
+			/// <param name="row">Input used by the operation.</param>
+			/// <param name="column">Input used by the operation.</param>
+			/// <returns>The result of the operation.</returns>
+			/// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
 			protected string GetCell(Row row, string column)
 			{
 				return _reader.GetCellValue(row, column) ?? "";
 			}
 
+			/// <summary>
+			/// Performs the <c>GetCellBool</c> catalog operation.
+			/// </summary>
+			/// <param name="row">Input used by the operation.</param>
+			/// <param name="column">Input used by the operation.</param>
+			/// <returns>The result of the operation.</returns>
+			/// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
 			protected bool GetCellBool(Row row, string column)
 			{
 				var val = GetCell(row, column).ToUpper();
 				return val == "TRUE" || val == "YES" || val == "1";
 			}
 
+			/// <summary>
+			/// Performs the <c>GetCellNullableBool</c> catalog operation.
+			/// </summary>
+			/// <param name="row">Input used by the operation.</param>
+			/// <param name="column">Input used by the operation.</param>
+			/// <returns>The result of the operation.</returns>
+			/// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
 			protected bool? GetCellNullableBool(Row row, string column)
 			{
 				var val = GetCell(row, column).ToUpper();
@@ -251,6 +323,13 @@ namespace Hotcakes.Commerce.Catalog
 				return val == "TRUE" || val == "YES" || val == "1";
 			}
 
+			/// <summary>
+			/// Performs the <c>GetCellCurrency</c> catalog operation.
+			/// </summary>
+			/// <param name="row">Input used by the operation.</param>
+			/// <param name="column">Input used by the operation.</param>
+			/// <returns>The result of the operation.</returns>
+			/// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
 			protected decimal GetCellCurrency(Row row, string column)
 			{
 				var val = GetCell(row, column);
@@ -268,6 +347,13 @@ namespace Hotcakes.Commerce.Catalog
 				return Money.RoundCurrency(price);
 			}
 
+			/// <summary>
+			/// Performs the <c>GetCellDecimal</c> catalog operation.
+			/// </summary>
+			/// <param name="row">Input used by the operation.</param>
+			/// <param name="column">Input used by the operation.</param>
+			/// <returns>The result of the operation.</returns>
+			/// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
 			protected decimal GetCellDecimal(Row row, string column)
 			{
 				var val = GetCell(row, column);
@@ -279,6 +365,12 @@ namespace Hotcakes.Commerce.Catalog
 				return dVal;
 			}
 
+			/// <summary>
+			/// Performs the <c>GetNextColumn</c> catalog operation.
+			/// </summary>
+			/// <param name="colname">Input used by the operation.</param>
+			/// <returns>The result of the operation.</returns>
+			/// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
 			protected string GetNextColumn(string colname)
 			{
 				return SpreadsheetReader.GetColumnName(colname, 1);
@@ -305,6 +397,12 @@ namespace Hotcakes.Commerce.Catalog
 				_storeProductsCount = _hccApp.CatalogServices.Products.CountOfAll();
 			}
 
+			/// <summary>
+			/// Performs the <c>ProcessRow</c> catalog operation.
+			/// </summary>
+			/// <param name="row">Input used by the operation.</param>
+			/// <returns>The result of the operation.</returns>
+			/// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
 			protected override bool ProcessRow(Row row)
 			{
 				var slug = GetCell(row, "A").Trim();
@@ -541,14 +639,24 @@ namespace Hotcakes.Commerce.Catalog
 
             #region Properties
 
+            /// <summary>
+            /// Gets or sets the <see cref="UpdateExistingProducts" /> catalog value.
+            /// </summary>
+            /// <value>The current value of <see cref="UpdateExistingProducts" />.</value>
             public bool UpdateExistingProducts { get; set; }
+            /// <summary>
+            /// Gets or sets the <see cref="ImagesImportPath" /> catalog value.
+            /// </summary>
+            /// <value>The current value of <see cref="ImagesImportPath" />.</value>
             public string ImagesImportPath { get; set; }
 
+            /// <summary>Catalog API member.</summary>
             protected override int HeaderRowsCount
             {
                 get { return 2; }
             }
 
+            /// <summary>Catalog API member.</summary>
             protected override string SheetName
             {
                 get { return "Main"; }
@@ -680,6 +788,12 @@ namespace Hotcakes.Commerce.Catalog
 				PendingCategories = new List<CategoryInfo>();
 			}
 
+			/// <summary>
+			/// Performs the <c>ProcessRow</c> catalog operation.
+			/// </summary>
+			/// <param name="row">Input used by the operation.</param>
+			/// <returns>The result of the operation.</returns>
+			/// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
 			protected override bool ProcessRow(Row row)
 			{
 				var slug = GetCell(row, "A").Trim();
@@ -698,6 +812,10 @@ namespace Hotcakes.Commerce.Catalog
 				return true;
 			}
 
+			/// <summary>
+			/// Performs the <c>ProcessAfter</c> catalog operation.
+			/// </summary>
+			/// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
 			protected override void ProcessAfter()
 			{
 				var tree = OrganizeCategoryTree();
@@ -764,24 +882,45 @@ namespace Hotcakes.Commerce.Catalog
 
             internal class CategoryInfo
             {
+                /// <summary>
+                /// Initializes a new instance of <see cref="CategoryInfo" />.
+                /// </summary>
                 public CategoryInfo()
                 {
                     Children = new List<CategoryInfo>();
                 }
 
+                /// <summary>
+                /// Gets or sets the <see cref="Slug" /> catalog value.
+                /// </summary>
+                /// <value>The current value of <see cref="Slug" />.</value>
                 public string Slug { get; set; }
+                /// <summary>
+                /// Gets or sets the <see cref="ParentSlug" /> catalog value.
+                /// </summary>
+                /// <value>The current value of <see cref="ParentSlug" />.</value>
                 public string ParentSlug { get; set; }
+                /// <summary>
+                /// Gets or sets the <see cref="CategoryName" /> catalog value.
+                /// </summary>
+                /// <value>The current value of <see cref="CategoryName" />.</value>
                 public string CategoryName { get; set; }
+                /// <summary>
+                /// Gets or sets the <see cref="Children" /> catalog value.
+                /// </summary>
+                /// <value>The current value of <see cref="Children" />.</value>
                 public List<CategoryInfo> Children { get; set; }
             }
 
             #region Properties
 
+            /// <summary>Catalog API member.</summary>
             protected override int HeaderRowsCount
             {
                 get { return 1; }
             }
 
+            /// <summary>Catalog API member.</summary>
             protected override string SheetName
             {
                 get { return "Category Tree"; }
@@ -802,6 +941,12 @@ namespace Hotcakes.Commerce.Catalog
 				_categoryList = _hccApp.CatalogServices.Categories.FindAllPaged(1, int.MaxValue);
 			}
 
+			/// <summary>
+			/// Performs the <c>ProcessRow</c> catalog operation.
+			/// </summary>
+			/// <param name="row">Input used by the operation.</param>
+			/// <returns>The result of the operation.</returns>
+			/// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
 			protected override bool ProcessRow(Row row)
 			{
 				var slug = GetCell(row, "A").Trim();
@@ -859,11 +1004,13 @@ namespace Hotcakes.Commerce.Catalog
 
             #region Properties
 
+            /// <summary>Catalog API member.</summary>
             protected override int HeaderRowsCount
             {
                 get { return 1; }
             }
 
+            /// <summary>Catalog API member.</summary>
             protected override string SheetName
             {
                 get { return "Categories"; }
@@ -886,16 +1033,24 @@ namespace Hotcakes.Commerce.Catalog
 				options = _hccApp.CatalogServices.ProductOptions.FindAll(0, int.MaxValue);
 			}
 
+            /// <summary>Catalog API member.</summary>
             protected override int HeaderRowsCount
             {
                 get { return 1; }
             }
 
+            /// <summary>Catalog API member.</summary>
             protected override string SheetName
             {
                 get { return "Choices"; }
             }
 
+			/// <summary>
+			/// Performs the <c>ProcessRow</c> catalog operation.
+			/// </summary>
+			/// <param name="row">Input used by the operation.</param>
+			/// <returns>The result of the operation.</returns>
+			/// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
 			protected override bool ProcessRow(Row row)
 			{
 				var slug = GetCell(row, "A").Trim();
@@ -1062,16 +1217,24 @@ namespace Hotcakes.Commerce.Catalog
 			{
             }
 
+            /// <summary>Catalog API member.</summary>
             protected override int HeaderRowsCount
             {
                 get { return 1; }
             }
 
+            /// <summary>Catalog API member.</summary>
             protected override string SheetName
             {
                 get { return "Info Tabs"; }
 			}
 
+			/// <summary>
+			/// Performs the <c>ProcessRow</c> catalog operation.
+			/// </summary>
+			/// <param name="row">Input used by the operation.</param>
+			/// <returns>The result of the operation.</returns>
+			/// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
 			protected override bool ProcessRow(Row row)
 			{
 				var slug = GetCell(row, "A").Trim();
@@ -1145,16 +1308,24 @@ namespace Hotcakes.Commerce.Catalog
 				_allProductProperties = _hccApp.CatalogServices.ProductProperties.FindAll();
             }
 
+            /// <summary>Catalog API member.</summary>
             protected override int HeaderRowsCount
             {
                 get { return 1; }
             }
 
+            /// <summary>Catalog API member.</summary>
             protected override string SheetName
             {
                 get { return "Type Properties"; }
 			}
 
+			/// <summary>
+			/// Performs the <c>ProcessRow</c> catalog operation.
+			/// </summary>
+			/// <param name="row">Input used by the operation.</param>
+			/// <returns>The result of the operation.</returns>
+			/// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
 			protected override bool ProcessRow(Row row)
 			{
 				var slug = GetCell(row, "A").Trim();

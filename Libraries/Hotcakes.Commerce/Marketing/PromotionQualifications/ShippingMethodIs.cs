@@ -31,18 +31,22 @@ using System.Text;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Matches an order's current or stored shipping method identifier.</summary>
     public class ShippingMethodIs : PromotionQualificationBase
     {
+        /// <summary>Initializes the qualification with normal processing cost.</summary>
         public ShippingMethodIs()
         {
             ProcessingCost = RelativeProcessingCost.Normal;
         }
 
+        /// <summary>Gets the stable shipping-method qualification identifier.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdShippingMethodIs); }
         }
 
+        /// <summary>Gets configured shipping method IDs, normalized to uppercase.</summary>
         public List<string> ItemIds()
         {
             var all = GetSetting("itemids") ?? string.Empty;
@@ -73,6 +77,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             SetSetting("itemids", string.Join(",", cleaned));
         }
 
+        /// <summary>Builds a description resolving configured shipping method names when available.</summary>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var sb = new StringBuilder();
@@ -102,6 +107,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             return sb.ToString();
         }
 
+        /// <summary>Adds a shipping method ID after trimming and uppercasing it.</summary>
         public void AddItemId(string itemid)
         {
             if (string.IsNullOrWhiteSpace(itemid)) return;
@@ -115,6 +121,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             SaveItemIdsToSettings(ids);
         }
 
+        /// <summary>Removes a shipping method ID case-insensitively.</summary>
         public void RemoveItemId(string itemid)
         {
             if (string.IsNullOrWhiteSpace(itemid)) return;
@@ -129,6 +136,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             }
         }
 
+        /// <summary>Matches the current shipping method first, then the order's shipping method.</summary>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             if (context == null) return false;

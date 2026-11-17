@@ -26,17 +26,32 @@
 
 namespace Hotcakes.Commerce.Controls
 {
+    /// <summary>
+    /// Provides the account identifiers associated with a completed login operation.
+    /// </summary>
+    /// <remarks>
+    /// Instances are mutable data-transfer objects. Both values are initialized to an
+    /// empty string, and the setters do not validate or normalize assigned values.
+    /// </remarks>
     public class LoginCompleteEventArgs
     {
         private string _UserEmail = string.Empty;
         private string _userId = string.Empty;
 
+        /// <summary>
+        /// Gets or sets the identifier of the user whose login completed.
+        /// </summary>
+        /// <value>The user identifier, or the current value assigned by the caller.</value>
         public string UserId
         {
             get { return _userId; }
             set { _userId = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the email address associated with the completed login.
+        /// </summary>
+        /// <value>The user email address, or the current value assigned by the caller.</value>
         public string UserEmail
         {
             get { return _UserEmail; }

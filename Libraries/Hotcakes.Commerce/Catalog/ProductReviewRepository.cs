@@ -33,25 +33,40 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Defines the catalog data or behavior represented by this member.
+    /// </summary>
     public class ProductReviewRepository : HccSimpleRepoBase<hcc_ProductReview, ProductReview>
     {
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductReviewRepository(HccRequestContext context)
             : base(context)
         {
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override Func<hcc_ProductReview, bool> MatchItems(ProductReview item)
         {
             var guid = DataTypeHelper.BvinToGuid(item.Bvin);
             return pr => pr.bvin == guid;
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override Func<hcc_ProductReview, bool> NotMatchItems(List<ProductReview> items)
         {
             var itemGuids = items.Select(i => DataTypeHelper.BvinToGuid(i.Bvin)).ToList();
             return pr => !itemGuids.Contains(pr.bvin);
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyDataToModel(hcc_ProductReview data, ProductReview model)
         {
             model.StoreId = data.StoreId;
@@ -66,6 +81,9 @@ namespace Hotcakes.Commerce.Catalog
             model.UserID = data.UserID;
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyModelToData(hcc_ProductReview data, ProductReview model)
         {
             data.StoreId = model.StoreId;
@@ -80,6 +98,9 @@ namespace Hotcakes.Commerce.Catalog
             data.UserID = model.UserID;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductReview Find(string bvin)
         {
             var result = FindForAllStores(bvin);
@@ -93,12 +114,18 @@ namespace Hotcakes.Commerce.Catalog
             return null;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductReview FindForAllStores(string bvin)
         {
             var guid = DataTypeHelper.BvinToGuid(bvin);
             return FindFirstPoco(y => y.bvin == guid);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public override bool Create(ProductReview item)
         {
             item.LastUpdated = DateTime.UtcNow;
@@ -110,6 +137,9 @@ namespace Hotcakes.Commerce.Catalog
             return base.Create(item);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool Update(ProductReview c)
         {
             if (c.StoreId != Context.CurrentStore.Id)
@@ -122,18 +152,27 @@ namespace Hotcakes.Commerce.Catalog
             return Update(c, y => y.bvin == guid && y.StoreId == Context.CurrentStore.Id);
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool Delete(string bvin)
         {
             var guid = DataTypeHelper.BvinToGuid(bvin);
             return Delete(y => y.bvin == guid);
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool DeleteForProductId(string productId)
         {
             var productGuid = DataTypeHelper.BvinToGuid(productId);
             return Delete(y => y.ProductId == productGuid);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductReview> FindByProductIds(List<string> productIds)
         {
             var storeId = Context.CurrentStore.Id;
@@ -147,11 +186,17 @@ namespace Hotcakes.Commerce.Catalog
             });
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductReview> FindByProductId(string productId)
         {
             return FindByProductIdPaged(productId, 1, int.MaxValue);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductReview> FindByProductIdPaged(string productId, int pageNumber, int pageSize)
         {
             var guid = DataTypeHelper.BvinToNullableGuid(productId);
@@ -165,11 +210,17 @@ namespace Hotcakes.Commerce.Catalog
             }, pageNumber, pageSize);
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool DeleteByCustomerID(string CustomerId)
         {
             return Delete(x => x.UserID == CustomerId);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductReview> FindByCustomerID(string CustomerID)
         {
             // var guid = DataTypeHelper.BvinToNullableGuid(CustomerID);
@@ -181,6 +232,9 @@ namespace Hotcakes.Commerce.Catalog
             }, 1, 1000);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public void MergeList(string productBvin, List<ProductReview> subitems)
         {
             var storeId = Context.CurrentStore.Id;
@@ -199,6 +253,9 @@ namespace Hotcakes.Commerce.Catalog
             MergeList(subitems, pr => pr.ProductId == productGuid);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductReview> FindNotApproved(int pageNumber, int pageSize)
         {
             var storeId = Context.CurrentStore.Id;
@@ -210,6 +267,9 @@ namespace Hotcakes.Commerce.Catalog
             }, pageNumber, pageSize);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool UpdateKarma(string reviewBvin, int karmaModifier)
         {
             var item = Find(reviewBvin);

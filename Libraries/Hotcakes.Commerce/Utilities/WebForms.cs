@@ -33,15 +33,37 @@ using System.Web.UI;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Provides HTTP request and ASP.NET Web Forms response-cache helpers.
+    /// </summary>
     public class WebForms
     {
         private const int DefaultTimeout = 100000;
 
+        /// <summary>
+        /// Sends UTF-8 form-urlencoded data to a URL using an HTTP POST request and the default timeout.
+        /// </summary>
+        /// <param name="serviceUrl">The URL of the service endpoint.</param>
+        /// <param name="postData">The form data sent as UTF-8 bytes.</param>
+        /// <returns>The response body decoded as UTF-8.</returns>
+        /// <exception cref="ArgumentException">The request fails; the original exception message and source are included.</exception>
         public static string SendRequestByPost(string serviceUrl, string postData)
         {
             return SendRequestByPost(serviceUrl, postData, null, DefaultTimeout);
         }
 
+        /// <summary>
+        /// Sends UTF-8 form-urlencoded data to a URL using an HTTP POST request.
+        /// </summary>
+        /// <param name="serviceUrl">The URL of the service endpoint.</param>
+        /// <param name="postData">The form data sent as UTF-8 bytes.</param>
+        /// <param name="proxy">The proxy used for the request, or <see langword="null"/> for the default proxy behavior.</param>
+        /// <param name="timeout">The request timeout in milliseconds.</param>
+        /// <returns>The response body decoded as UTF-8.</returns>
+        /// <exception cref="ArgumentException">The request or response read fails; the original exception message and
+        /// source are included.</exception>
+        /// <remarks>The method does not expose response headers or status details and wraps all failures in an
+        /// <see cref="ArgumentException"/>.</remarks>
         public static string SendRequestByPost(string serviceUrl, string postData, WebProxy proxy, int timeout)
         {
             WebResponse objResp;
@@ -77,6 +99,11 @@ namespace Hotcakes.Commerce.Utilities
             return strResp;
         }
 
+        /// <summary>
+        /// Configures a Web Forms response so that browsers and proxies must not cache the page.
+        /// </summary>
+        /// <param name="currentPage">The page whose response cache headers are changed.</param>
+        /// <remarks>Sets no-cache and no-store directives, an expired date, a zero max age, and revalidation extensions.</remarks>
         public static void MakePageNonCacheable(Page currentPage)
         {
             currentPage.Response.Cache.SetCacheability(HttpCacheability.NoCache);

@@ -28,13 +28,27 @@ using System;
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>Represents a payment recorded against an affiliate's earned commission.</summary>
+    /// <remarks>Payments are associated with an affiliate and are used by affiliate payment reports.</remarks>
     public class AffiliatePayment
     {
+        /// <summary>Gets or sets the unique payment identifier.</summary>
         public long Id { get; set; }
+
+        /// <summary>Gets or sets the numeric identifier of the affiliate receiving the payment.</summary>
+        /// <seealso cref="Affiliate"/>
         public long AffiliateId { get; set; }
+
+        /// <summary>Gets or sets the amount paid to the affiliate.</summary>
         public decimal PaymentAmount { get; set; }
+
+        /// <summary>Gets or sets the UTC date on which the payment was recorded.</summary>
         public DateTime PaymentDateUtc { get; set; }
+
+        /// <summary>Gets or sets notes associated with the payment.</summary>
         public string Notes { get; set; }
+
+        /// <summary>Gets or sets the name of the file associated with the payment record.</summary>
         public string FileName { get; set; }
     }
 }

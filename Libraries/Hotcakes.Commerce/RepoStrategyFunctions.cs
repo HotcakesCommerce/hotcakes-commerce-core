@@ -32,8 +32,12 @@ using Hotcakes.Commerce.Reporting;
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>Provides reporting-function adapters for an order repository strategy.</summary>
     public class RepoStrategyFunctions
     {
+        /// <summary>Executes the promotions activity report for a store and UTC date range.</summary>
+        /// <param name="repo">The repository strategy used to execute the database function.</param><param name="storeId">The store identifier.</param><param name="startDateUtc">The inclusive report start date in UTC.</param><param name="endDateUtc">The report end date in UTC.</param>
+        /// <returns>The function's result rows as returned by the repository; null behavior is determined by <see cref="IRepoStrategy{T}"/>.</returns>
         public static IList<hcc_GetPromotionsActivityList_Result> GetPromotionsActivityList(
             IRepoStrategy<hcc_Order> repo, long storeId, DateTime startDateUtc, DateTime endDateUtc)
         {
@@ -46,6 +50,10 @@ namespace Hotcakes.Commerce
                 });
         }
 
+        /// <summary>Executes the bounced-order report grouped by UTC day and maps each row to a <see cref="BounceItem"/>.</summary>
+        /// <param name="repo">The repository strategy used to execute the database function.</param><param name="storeId">The store identifier.</param><param name="rangeStart">The report range start.</param><param name="rangeEnd">The report range end.</param><param name="productGuid">An optional product filter.</param><param name="categoryGuid">An optional category filter.</param>
+        /// <returns>A list containing each result row's non-null year, month, day, and count mapped to <see cref="BounceItem.Year"/>, <see cref="BounceItem.Month"/>, <see cref="BounceItem.Day"/>, and <see cref="BounceItem.Amount"/>.</returns>
+        /// <remarks>The mapping dereferences nullable result fields; the database function must return values for Year, Month, Day, and Count.</remarks>
         public static List<BounceItem> GetBouncedListByDay(IRepoStrategy<hcc_Order> repo, long storeId,
             DateTime rangeStart, DateTime rangeEnd, Guid? productGuid = null, Guid? categoryGuid = null)
         {
@@ -73,6 +81,10 @@ namespace Hotcakes.Commerce
             return bouncedList;
         }
 
+        /// <summary>Executes the bounced-order report grouped by hour and maps each row to a <see cref="BounceItem"/>.</summary>
+        /// <param name="repo">The repository strategy used to execute the database function.</param><param name="storeId">The store identifier.</param><param name="rangeStart">The report range start.</param><param name="rangeEnd">The report range end.</param><param name="productGuid">An optional product filter.</param><param name="categoryGuid">An optional category filter.</param>
+        /// <returns>A list containing each result row's non-null day, hour, and count mapped to <see cref="BounceItem.Day"/>, <see cref="BounceItem.Hour"/>, and <see cref="BounceItem.Amount"/>.</returns>
+        /// <remarks>The mapping dereferences nullable result fields; the database function must return values for Day, Hour, and Count.</remarks>
         public static List<BounceItem> GetBouncedListByHour(IRepoStrategy<hcc_Order> repo, long storeId,
             DateTime rangeStart, DateTime rangeEnd, Guid? productGuid = null, Guid? categoryGuid = null)
         {

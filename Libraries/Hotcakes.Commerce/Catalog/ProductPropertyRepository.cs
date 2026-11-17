@@ -35,28 +35,43 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Defines the catalog data or behavior represented by this member.
+    /// </summary>
     public class ProductPropertyRepository :
         HccLocalizationRepoBase<hcc_ProductProperty, hcc_ProductPropertyTranslation, ProductProperty, long>
     {
         private readonly ProductPropertyChoiceRepository choiceRepository;
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductPropertyRepository(HccRequestContext c)
             : base(c)
         {
             choiceRepository = new ProductPropertyChoiceRepository(c);
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override Expression<Func<hcc_ProductProperty, long>> ItemKeyExp
         {
             get { return pp => pp.Id; }
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override Expression<Func<hcc_ProductPropertyTranslation, long>> ItemTranslationKeyExp
         {
             get { return ppt => ppt.ProductPropertyId; }
         }
 
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyItemToModel(hcc_ProductProperty data, ProductProperty model)
         {
             model.CultureCode = data.CultureCode;
@@ -72,12 +87,18 @@ namespace Hotcakes.Commerce.Catalog
             model.IsLocalizable = data.IsLocalizable;
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyTransToModel(hcc_ProductPropertyTranslation data, ProductProperty model)
         {
             model.DisplayName = data.DisplayName;
             model.DefaultLocalizableValue = data.DefaultLocalizableValue;
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyModelToItem(JoinedItem<hcc_ProductProperty, hcc_ProductPropertyTranslation> data,
             ProductProperty model)
         {
@@ -94,6 +115,9 @@ namespace Hotcakes.Commerce.Catalog
             data.Item.IsLocalizable = model.IsLocalizable;
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyModelToTrans(JoinedItem<hcc_ProductProperty, hcc_ProductPropertyTranslation> data,
             ProductProperty model)
         {
@@ -103,6 +127,9 @@ namespace Hotcakes.Commerce.Catalog
             data.ItemTranslation.DefaultLocalizableValue = model.DefaultLocalizableValue;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         protected override void GetSubItems(List<ProductProperty> models)
         {
             var propertyIds = models.Select(s => s.Id).ToList();
@@ -115,11 +142,17 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         protected override void MergeSubItems(ProductProperty model)
         {
             choiceRepository.MergeList(model.Id, model.Choices);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductProperty Find(long id)
         {
             var result = FindForAllStores(id);
@@ -133,11 +166,17 @@ namespace Hotcakes.Commerce.Catalog
             return null;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductProperty FindForAllStores(long id)
         {
             return FindFirstPoco(y => y.Item.Id == id);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductProperty FindByName(string name)
         {
             var storeId = Context.CurrentStore.Id;
@@ -149,12 +188,18 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public override bool Create(ProductProperty item)
         {
             item.StoreId = Context.CurrentStore.Id;
             return base.Create(item);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool Update(ProductProperty c)
         {
             if (c.StoreId != Context.CurrentStore.Id)
@@ -164,6 +209,9 @@ namespace Hotcakes.Commerce.Catalog
             return Update(c, y => y.Id == c.Id);
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool Delete(long id)
         {
             var storeId = Context.CurrentStore.Id;
@@ -175,6 +223,9 @@ namespace Hotcakes.Commerce.Catalog
             return Delete(y => y.Id == id);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductProperty> FindAll()
         {
             var storeId = Context.CurrentStore.Id;
@@ -185,6 +236,9 @@ namespace Hotcakes.Commerce.Catalog
             });
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductProperty> FindMany(List<long> ids)
         {
             var storeId = Context.CurrentStore.Id;
@@ -196,21 +250,33 @@ namespace Hotcakes.Commerce.Catalog
             });
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool DeleteChoice(long id)
         {
             return choiceRepository.Delete(id);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool ResortChoices(long propertyId, List<long> sortedItemIds)
         {
             return choiceRepository.Resort(propertyId, sortedItemIds);
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductPropertyChoice ChoiceFind(long id)
         {
             return choiceRepository.Find(id);
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public bool ChoiceUpdate(ProductPropertyChoice item)
         {
             return choiceRepository.Update(item);
@@ -222,6 +288,9 @@ namespace Hotcakes.Commerce.Catalog
         }
 
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool ResortProductPropertyChoices(List<long> sortedProductPropertyChoices)
         {
             if (sortedProductPropertyChoices != null)

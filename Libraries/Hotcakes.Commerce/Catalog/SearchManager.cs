@@ -36,6 +36,7 @@ using StackExchange.Profiling;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>Coordinates product search queries and product search-index maintenance.</summary>
     public class SearchManager
     {
         private const int INDEXREBUILDPAGESIZE = 1000;
@@ -52,6 +53,7 @@ namespace Hotcakes.Commerce.Catalog
             QueryRepository = Factory.CreateRepo<SearchQueryRepository>(Context);
         }
 
+        /// <summary>Gets or sets the Context value.</summary>
         protected HccRequestContext Context { get; set; }
         private SearchQueryRepository QueryRepository { get; set; }
 
@@ -60,11 +62,20 @@ namespace Hotcakes.Commerce.Catalog
             return searcher.DoSearch(query, pageNumber, pageSize, Context.MainContentCulture, ref totalResults);
         }
 
+        /// <summary>Gets or sets the DoSearch value.</summary>
+        /// <param name="siteId">Input used by this operation.</param>
+        /// <param name="query">Input used by this operation.</param>
+        /// <param name="pageNumber">Input used by this operation.</param>
+        /// <param name="pageSize">Input used by this operation.</param>
+        /// <param name="totalResults">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public List<SearchObject> DoSearch(long siteId, string query, int pageNumber, int pageSize, ref int totalResults)
         {
             return searcher.DoSearch(siteId, query, Context.MainContentCulture, pageNumber, pageSize, ref totalResults);
         }
 
+        /// <summary>Gets or sets the DoProductSearchForAllStores value.</summary>
+        /// <returns>The result of this operation.</returns>
         public ProductSearchResultAdv DoProductSearchForAllStores(string query, ProductSearchQueryAdv queryAdv,
             int pageNumber, int pageSize)
         {
@@ -75,6 +86,8 @@ namespace Hotcakes.Commerce.Catalog
                 () => { return searcher.DoSearch(query, culture, queryAdv, pageNumber, pageSize); });
         }
 
+        /// <summary>Gets or sets the DoProductSearch value.</summary>
+        /// <returns>The result of this operation.</returns>
         public ProductSearchResultAdv DoProductSearch(long siteId, string query, ProductSearchQueryAdv queryAdv,
             int pageNumber, int pageSize, bool logSearchQuery = false)
         {
@@ -95,6 +108,8 @@ namespace Hotcakes.Commerce.Catalog
                 () => { return searcher.DoSearch(siteId, query, culture, queryAdv, pageNumber, pageSize); });
         }
 
+        /// <summary>Rebuilds the product search index in pages for all catalog products.</summary>
+        /// <param name="app">Input used by this operation.</param>
         public void RebuildProductSearchIndex(HotcakesApplication app)
         {
             var totalProducts = app.CatalogServices.Products.FindAllForAllStoresCount();
@@ -120,11 +135,16 @@ namespace Hotcakes.Commerce.Catalog
         }
 
         // Products
+        /// <summary>Adds or updates one product in the search index.</summary>
+        /// <param name="p">Input used by this operation.</param>
         public void IndexSingleProduct(Product p)
         {
             IndexProduct(p);
         }
 
+        /// <summary>Removes one product from the search index when it is present.</summary>
+        /// <param name="storeId">Input used by this operation.</param>
+        /// <param name="bvin">Input used by this operation.</param>
         public void RemoveSingleProduct(long storeId, string bvin)
         {
             var guid = DataTypeHelper.BvinToGuid(bvin);

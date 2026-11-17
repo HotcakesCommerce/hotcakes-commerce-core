@@ -28,28 +28,40 @@ using System;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Matches any product evaluation with a product and user price.</summary>
+    /// <remarks>This is the lowest-cost, optionless product qualification.</remarks>
     public class AnyProduct : PromotionQualificationBase
     {
+        /// <summary>Initializes an instance with <see cref="RelativeProcessingCost.Lowest"/>.</summary>
         public AnyProduct()
         {
             ProcessingCost = RelativeProcessingCost.Lowest;
         }
 
+        /// <summary>Gets the stable identifier for the any-product qualification.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdAnyProduct); }
         }
 
+        /// <summary>Gets a value indicating that this qualification has no settings.</summary>
         public override bool HasOptions
         {
             get { return false; }
         }
 
+        /// <summary>Gets the display description for the catch-all product rule.</summary>
+        /// <param name="app">The application context; unused by this rule.</param>
+        /// <returns>The literal description <c>When Any Product</c>.</returns>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             return "When Any Product";
         }
 
+        /// <summary>Matches product scope when the context contains both a product and user price.</summary>
+        /// <param name="context">The promotion context to inspect.</param>
+        /// <param name="mode">The requested evaluation scope.</param>
+        /// <returns><c>true</c> only for <see cref="PromotionQualificationMode.Products"/> with the required context values.</returns>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             if (mode != PromotionQualificationMode.Products) return false;

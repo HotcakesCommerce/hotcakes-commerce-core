@@ -26,21 +26,38 @@
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Identifies the predefined periods that a <see cref="DateRange"/> can calculate.
+    /// </summary>
     public enum DateRangeType
     {
+        /// <summary>No predefined range.</summary>
         None = 0,
+        /// <summary>The current day.</summary>
         Today = 1,
+        /// <summary>The week containing the supplied current time, beginning on Sunday.</summary>
         ThisWeek = 2,
+        /// <summary>The complete calendar week immediately preceding the supplied current time.</summary>
         LastWeek = 3,
+        /// <summary>The 31-day period ending on the supplied current day.</summary>
         Last31Days = 4,
+        /// <summary>The 60-day period ending on the supplied current day.</summary>
         Last60Days = 5,
+        /// <summary>The 120-day period ending on the supplied current day.</summary>
         Last120Days = 6,
+        /// <summary>The current calendar year through its final day.</summary>
         YearToDate = 7,
+        /// <summary>The complete calendar year immediately preceding the supplied current time.</summary>
         LastYear = 8,
+        /// <summary>The broad fixed range from January 1, 1900 through December 31, 3000.</summary>
         AllDates = 9,
+        /// <summary>The calendar month containing the supplied current time.</summary>
         ThisMonth = 10,
+        /// <summary>The complete calendar month immediately preceding the supplied current time.</summary>
         LastMonth = 11,
+        /// <summary>The calendar day immediately preceding the supplied current time.</summary>
         Yesterday = 12,
+        /// <summary>A caller-defined range; assigning dates is effective while this value is selected.</summary>
         Custom = 99
     }
 }

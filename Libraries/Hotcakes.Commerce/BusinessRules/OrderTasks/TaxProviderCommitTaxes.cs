@@ -28,8 +28,14 @@ using Hotcakes.Commerce.Taxes.Providers;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>Commits the current order's taxes through the configured tax provider.</summary>
+    /// <remarks>This is an <see cref="OrderTask"/> executed with an <see cref="OrderTaskContext"/>.</remarks>
+    /// <remarks>Recurring orders are skipped. When a provider is called, the order is updated in a <see langword="finally"/> block even if the provider throws.</remarks>
     public class TaxProviderCommitTaxes : OrderTask
     {
+        /// <summary>Executes tax commitment for a non-recurring order when a provider is enabled.</summary>
+        /// <param name="context">The order workflow context.</param>
+        /// <returns>Always <see langword="true"/> after the optional provider call and update attempt.</returns>
         public override bool Execute(OrderTaskContext context)
         {
             var taxProviderId = context.HccApp.CurrentStore.Settings.TaxProviderEnabled;
@@ -50,16 +56,24 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return true;
         }
 
+        /// <summary>Reports that tax commitment has no local rollback implementation.</summary>
+        /// <param name="context">The order workflow context.</param>
+        /// <returns>Always <see langword="true"/>; an external tax commitment is not reversed here.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>Gets the default display name for this task.</summary>
+        /// <returns><c>Tax provider Commit Taxes</c>.</returns>
         public override string TaskName()
         {
             return "Tax provider Commit Taxes";
         }
 
+        /// <summary>Gets a provider-specific display name when a context and provider are available.</summary>
+        /// <param name="context">The order workflow context, or <see langword="null"/> for the default name.</param>
+        /// <returns>The provider name followed by <c> Commit Taxes</c>, or the default task name.</returns>
         public override string TaskName(OrderTaskContext context)
         {
             if (context != null)
@@ -77,16 +91,23 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return "Tax provider Commit Taxes";
         }
 
+        /// <summary>Gets the stable workflow identifier for this task.</summary>
+        /// <returns>The task ID <c>8943A0AE-C4FD-4161-AB08-7438473C362E</c>.</returns>
         public override string TaskId()
         {
             return "8943A0AE-C4FD-4161-AB08-7438473C362E";
         }
 
+        /// <summary>Gets the step label using the context-sensitive task name.</summary>
+        /// <param name="context">The order workflow context.</param>
+        /// <returns>The value returned by <see cref="TaskName(OrderTaskContext)"/>.</returns>
         public override string StepName(OrderTaskContext context)
         {
             return TaskName(context);
         }
 
+        /// <summary>Creates an independent tax-commit task instance.</summary>
+        /// <returns>A new <see cref="TaxProviderCommitTaxes"/> instance.</returns>
         public override Task Clone()
         {
             return new TaxProviderCommitTaxes();

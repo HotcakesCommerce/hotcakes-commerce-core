@@ -26,9 +26,12 @@
 
 namespace Hotcakes.Commerce.Reporting
 {
+    /// <summary>Selects the measure used to rank the top affiliates report.</summary>
     public enum Top5AffiliateMode
     {
+        /// <summary>Ranks affiliates by referral count.</summary>
         Referral = 1,
+        /// <summary>Ranks affiliates by generated revenue.</summary>
         Revenue = 2
     }
 }

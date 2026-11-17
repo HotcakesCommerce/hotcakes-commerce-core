@@ -26,10 +26,24 @@
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>
+    /// Represents the component parts of a telephone number.
+    /// </summary>
     public class PhoneNumber
     {
+        /// <summary>
+        /// Gets or sets the international dialing country code.
+        /// </summary>
         public string CountryCode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the primary telephone number without the extension.
+        /// </summary>
         public string Number { get; set; }
+
+        /// <summary>
+        /// Gets or sets the telephone extension.
+        /// </summary>
         public string Extension { get; set; }
     }
 }

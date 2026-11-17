@@ -34,6 +34,16 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    /// Exports order transactions in the tab-delimited QuickBooks import format.
+    /// </summary>
+    /// <remarks>
+    /// Each qualifying balance-changing transaction produces a <c>TRNS</c> record, one <c>SPL</c>
+    /// record for every order item, one shipping <c>SPL</c> record, and an <c>ENDTRNS</c> record.
+    /// Gift-card and reward-point transactions are excluded. The exporter preserves the existing
+    /// QuickBooks column names, localized memo strings, payment-method labels, and invariant
+    /// culture numeric/date formatting.
+    /// </remarks>
     [Serializable]
     public class QuickbooksOrdersExport
     {
@@ -43,10 +53,23 @@ namespace Hotcakes.Commerce.Orders
 
         #endregion
 
+        /// <summary>
+        /// Gets the tabular lines accumulated for the next QuickBooks text response.
+        /// </summary>
+        /// <remarks>
+        /// Each array represents one output line in column order. Lines are appended by export
+        /// processing and are not cleared automatically at the start of an export, preserving the
+        /// existing behavior when an instance is reused.
+        /// </remarks>
         public List<string[]> FileLines = new List<string[]>();
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a QuickBooks exporter with the application context used to resolve orders,
+        /// transactions, customers, products, and store accounts.
+        /// </summary>
+        /// <param name="hccApp">The current Hotcakes application context.</param>
         public QuickbooksOrdersExport(HotcakesApplication hccApp)
         {
             _hccApp = hccApp;
@@ -54,6 +77,18 @@ namespace Hotcakes.Commerce.Orders
 
         #endregion
 
+        /// <summary>
+        /// Generates a tab-delimited QuickBooks import file and writes it to an HTTP response.
+        /// </summary>
+        /// <param name="response">The response that receives the text attachment.</param>
+        /// <param name="fileName">The attachment file name supplied to the response.</param>
+        /// <param name="orders">Order snapshots whose qualifying transactions are exported.</param>
+        /// <remarks>
+        /// The output begins with the fixed <c>!TRNS</c>, <c>!SPL</c>, and <c>!ENDTRNS</c>
+        /// headers. Only balance-changing transactions other than gift-card and reward-point
+        /// transactions are emitted. The response content type is <c>text/plain</c>, columns are
+        /// separated by tab characters, and lines use <see cref="Environment.NewLine"/>.
+        /// </remarks>
         public void ExportToQuickbooks(HttpResponse response, string fileName, List<OrderSnapshot> orders)
         {
             WriteHeader();
@@ -92,6 +127,18 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        /// Writes the QuickBooks transaction and split records for one order transaction.
+        /// </summary>
+        /// <remarks>
+        /// The transaction amount is allocated proportionally across each item and shipping using
+        /// line totals and the post-discount shipping total. VAT mode omits tax portions from those
+        /// allocation bases. Item and shipping splits are written as negative amounts, while the
+        /// transaction amount is written with invariant culture and no sign transformation. Division uses the
+        /// order grand total exactly as implemented, including its behavior for zero totals.
+        /// </remarks>
+        /// <param name="order">The full order associated with the transaction.</param>
+        /// <param name="transaction">The balance-changing transaction to export.</param>
         private void ProcessSingleTransaction(Order order, OrderTransaction transaction)
         {
             var date = transaction.TimeStampUtc.ToString("d", CultureInfo.InvariantCulture);
@@ -143,6 +190,14 @@ namespace Hotcakes.Commerce.Orders
             WriteLine(new[] {"ENDTRNS"});
         }
 
+        /// <summary>
+        /// Maps a transaction action to the localized QuickBooks payment-method label.
+        /// </summary>
+        /// <param name="transaction">The transaction whose action and method identify the label.</param>
+        /// <returns>
+        /// A localized cash, check, company-account, purchase-order, credit-card, PayPal,
+        /// third-party method, or unknown label.
+        /// </returns>
         private string GetPaymentMethodName(OrderTransaction transaction)
         {
             switch (transaction.Action)
@@ -175,16 +230,35 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        /// Gets the QuickBooks transaction type for an exported action.
+        /// </summary>
+        /// <param name="actionType">The source transaction action.</param>
+        /// <returns>Always <c>DEPOSIT</c>, preserving the current export format.</returns>
         private string GetTransactionType(ActionType actionType)
         {
             return "DEPOSIT";
         }
 
+        /// <summary>
+        /// Appends one already-ordered QuickBooks record to <see cref="FileLines"/>.
+        /// </summary>
+        /// <param name="line">The fields comprising one tab-delimited output line.</param>
         private void WriteLine(string[] line)
         {
             FileLines.Add(line);
         }
 
+        /// <summary>
+        /// Sends the accumulated QuickBooks lines as a plain-text attachment and ends the response.
+        /// </summary>
+        /// <param name="response">The response to clear and populate.</param>
+        /// <param name="filename">The attachment file name.</param>
+        /// <remarks>
+        /// The method joins fields with a tab character and writes the platform
+        /// <see cref="Environment.NewLine"/> after every line, then calls
+        /// <see cref="HttpResponse.End"/>.
+        /// </remarks>
         private void WriteToResponse(HttpResponse response, string filename)
         {
             response.Clear();

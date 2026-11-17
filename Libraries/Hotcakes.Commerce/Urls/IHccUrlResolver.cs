@@ -34,10 +34,13 @@ namespace Hotcakes.Commerce.Urls
     /// </summary>
     /// <remarks>
     /// Implementations connect the commerce route abstraction represented by <see cref="HccRoute"/>
-    /// to the active ASP.NET route collection and store configuration. Obtain the configured
-    /// implementation through the application factory rather than constructing an implementation
-    /// directly. <see cref="HccUrlBuilder"/> provides the standard convenience API for callers that
-    /// only need to generate a commerce route URL.
+    /// to the active ASP.NET route collection and store configuration. The resolver owns route
+    /// selection, route-value encoding, protocol and host handling, optional fragments, and the
+    /// store/portal scope of generated URLs. Implementations must preserve the established route
+    /// and store URL contracts rather than treating this interface as a generic URL formatter.
+    /// Obtain the configured implementation through the application factory rather than
+    /// constructing an implementation directly. <see cref="HccUrlBuilder"/> provides the standard
+    /// convenience API for callers that only need to generate a commerce route URL.
     /// </remarks>
     public interface IHccUrlResolver
     {
@@ -57,7 +60,17 @@ namespace Hotcakes.Commerce.Urls
         /// <see langword="true"/> to include implicit MVC values from the request context; otherwise,
         /// <see langword="false"/>.
         /// </param>
-        /// <returns>The resolved route URL.</returns>
+        /// <returns>The resolved route URL, using the resolver's established protocol, host,
+        /// fragment, encoding, routing, and store/portal-scope semantics.</returns>
+        /// <remarks>
+        /// Implementations are responsible for honoring the supplied route collection and request
+        /// context, applying <paramref name="routeValues"/> to the selected route, and deciding how
+        /// <paramref name="protocol"/>, <paramref name="hostName"/>, and <paramref name="fragment"/>
+        /// affect the result. <paramref name="actionName"/> and <paramref name="controllerName"/>
+        /// support MVC-compatible resolution where applicable; <paramref name="includeImplicitMvcValues"/>
+        /// controls whether implicit MVC values from <paramref name="requestContext"/> participate.
+        /// The resolver must retain the existing security and path behavior of the active provider.
+        /// </remarks>
         /// <seealso cref="HccUrlBuilder.RouteHccUrl(HccRoute)"/>
         string RouteHccUrl(HccRoute route, string actionName, string controllerName, string protocol, string hostName,
             string fragment, RouteValueDictionary routeValues, RouteCollection routeCollection,
@@ -70,7 +83,8 @@ namespace Hotcakes.Commerce.Urls
         /// <returns>The store data virtual path.</returns>
         /// <remarks>
         /// The returned path is resolved by the active commerce URL provider and may vary by deployment
-        /// or store configuration.
+        /// or store configuration. Callers must treat it as provider-owned path data rather than
+        /// constructing or normalizing a path from the store identifier themselves.
         /// </remarks>
         string GetStoreDataVirtualPath(long storeId);
 
@@ -84,8 +98,11 @@ namespace Hotcakes.Commerce.Urls
         /// </param>
         /// <returns>The store root URL.</returns>
         /// <remarks>
-        /// The result is determined by the active store and URL-provider configuration. Callers should
-        /// use this method instead of constructing store URLs from host or portal values directly.
+        /// The result is determined by the active store and URL-provider configuration. The
+        /// <paramref name="secure"/> flag requests HTTPS when supported by that configuration; it
+        /// does not authorize callers to bypass provider, store, portal, or path rules. Callers
+        /// should use this method instead of constructing store URLs from host or portal values
+        /// directly.
         /// </remarks>
         string GetStoreRootUrl(Store store, bool secure = false);
     }

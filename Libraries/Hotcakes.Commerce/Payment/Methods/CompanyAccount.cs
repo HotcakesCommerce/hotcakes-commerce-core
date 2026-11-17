@@ -28,24 +28,30 @@ using System;
 
 namespace Hotcakes.Commerce.Payment.Methods
 {
+    /// <summary>Built-in company-account checkout method.</summary>
     [Serializable]
     public class CompanyAccount : PaymentMethod
     {
+        /// <summary>Gets the stable company-account method identifier.</summary>
         public override string MethodId
         {
             get { return Id(); }
         }
 
+        /// <summary>Gets the serialized display name, <c>CompanyAccount</c>.</summary>
         public override string MethodName
         {
             get { return "CompanyAccount"; }
         }
 
+        /// <summary>Gets the checkout ordering value, 400.</summary>
         public override int SortIndex
         {
             get { return 400; }
         }
 
+        /// <summary>Returns the stable identifier used by <see cref="PaymentMethods"/>.</summary>
+        /// <returns>The company-account method identifier.</returns>
         public static string Id()
         {
             return PaymentMethods.CompanyAccountId;

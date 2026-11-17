@@ -32,8 +32,28 @@ using Hotcakes.Commerce.Accounts;
 
 namespace Hotcakes.Commerce.Taxes.Providers
 {
+    /// <summary>
+    /// Discovers, lists, and selects the tax provider instances available to the application.
+    /// </summary>
+    /// <remarks>
+    /// Provider types are discovered once from the assemblies already loaded in the current
+    /// <see cref="AppDomain"/>. Concrete <see cref="ITaxProvider"/> types are instantiated and ordered by
+    /// <see cref="ITaxProvider.SortIndex"/>. The resulting provider instances and their
+    /// <see cref="ITaxProvider.Basesettings"/> objects are shared by all callers; selecting a provider
+    /// merges store settings into that shared object and does not create a per-store clone or clear keys.
+    /// This preserves the existing behavior and means callers should treat returned instances and lists as
+    /// compatibility-sensitive shared state.
+    /// </remarks>
     public class TaxProviders
     {
+        /// <summary>
+        /// The fixed provider ID used by the Avalara tax provider.
+        /// </summary>
+        /// <remarks>
+        /// The exact value is <c>A1C70FD1-DA71-42D1-A299-A0D3C4DAAF92</c>. It is persisted and referenced
+        /// by existing installations and must not be changed, even though the containing type uses the
+        /// historical spelling <c>Avatax</c>.
+        /// </remarks>
         public const string AvataxServiceId = "A1C70FD1-DA71-42D1-A299-A0D3C4DAAF92";
 
         static TaxProviders()
@@ -73,11 +93,25 @@ namespace Hotcakes.Commerce.Taxes.Providers
             }
         }
 
+        /// <summary>Gets all providers discovered during type initialization, ordered by sort index.</summary>
+        /// <returns>The shared mutable provider list.</returns>
+        /// <remarks>
+        /// The returned list is the backing list itself, not a copy. Provider instances in it are shared
+        /// with <see cref="CurrentTaxProvider"/> and <see cref="Find"/>.
+        /// </remarks>
         public static List<ITaxProvider> AvailableProviders()
         {
             return Providers;
         }
 
+        /// <summary>Gets the provider enabled in the specified store.</summary>
+        /// <param name="store">The store whose <c>TaxProviderEnabled</c> setting identifies the provider.</param>
+        /// <returns>The matching provider, or <see langword="null"/> when no provider is enabled or found.</returns>
+        /// <remarks>
+        /// The enabled ID comparison is case-sensitive. When a provider is found, its store settings are
+        /// loaded with <c>TaxProviderSettingsGet</c> and merged into the provider's shared
+        /// <see cref="ITaxProvider.Basesettings"/> object.
+        /// </remarks>
         public static ITaxProvider CurrentTaxProvider(Store store)
         {
             ITaxProvider provider = null;
@@ -99,6 +133,15 @@ namespace Hotcakes.Commerce.Taxes.Providers
         }
 
 
+        /// <summary>Finds a provider by ID and loads that provider's settings for the specified store.</summary>
+        /// <param name="providerId">The provider ID to find; comparison is case-insensitive.</param>
+        /// <param name="store">The store whose provider settings should be merged.</param>
+        /// <returns>The matching provider, or <see langword="null"/> when no provider has the requested ID.</returns>
+        /// <remarks>
+        /// The matching provider instance is shared. Store settings are merged into its existing
+        /// <see cref="ITaxProvider.Basesettings"/> object, so keys not present in the current store remain
+        /// present from earlier state. This documents the existing behavior without changing it.
+        /// </remarks>
         public static ITaxProvider Find(string providerId, Store store)
         {
             var sett = store.Settings;

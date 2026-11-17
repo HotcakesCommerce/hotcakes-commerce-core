@@ -28,17 +28,23 @@ using Hotcakes.CommerceDTO.v1.Orders;
 
 namespace Hotcakes.Commerce.Reporting
 {
+    /// <summary>Represents one period and its sales total in a summary response.</summary>
     public class SalesSummaryData
     {
+        /// <summary>Initializes a summary with zero-valued period and total fields.</summary>
         public SalesSummaryData()
         {
             Period = 0;
             Sum = 0;
         }
 
+        /// <summary>Gets or sets the period number represented by this entry.</summary>
         public int Period { get; set; }
+        /// <summary>Gets or sets the sales total for the period.</summary>
         public decimal Sum { get; set; }
 
+        /// <summary>Creates the corresponding order-summary data-transfer object.</summary>
+        /// <returns>A DTO containing this entry's period and total.</returns>
         public SalesSummaryDTO ToDto()
         {
             return new SalesSummaryDTO

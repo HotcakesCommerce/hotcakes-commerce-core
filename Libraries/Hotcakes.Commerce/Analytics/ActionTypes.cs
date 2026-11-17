@@ -26,21 +26,57 @@
 
 namespace Hotcakes.Commerce.Analytics
 {
+    /// <summary>
+    /// Identifies an analytics event recorded by Hotcakes Commerce.
+    /// </summary>
+    /// <remarks>
+    /// The member names are serialized to the analytics event store and are therefore part of the
+    /// persistence contract. Existing spellings, including <c>GoToChekout</c> and
+    /// <c>ChekoutCompleted</c>, must remain unchanged for previously stored events to deserialize.
+    /// </remarks>
+    /// <seealso cref="AnalyticsEvent"/>
     public enum ActionTypes
     {
+        /// <summary>Indicates that a product was viewed.</summary>
         ProductViewed,
+
+        /// <summary>Indicates that a category was viewed.</summary>
         CategoryViewed,
+
+        /// <summary>Indicates that a product was added to the shopping cart.</summary>
         ProductAddedToCart,
+
+        /// <summary>Indicates that the customer navigated to the shopping cart.</summary>
         GoToCart,
+
+        /// <summary>Indicates that the customer navigated to checkout.</summary>
         GoToChekout,
+
+        /// <summary>Indicates that checkout was completed.</summary>
         ChekoutCompleted,
+
+        /// <summary>Indicates that an order was paid.</summary>
         OrderPaid,
+
+        /// <summary>Indicates that a product price changed.</summary>
         ProductPriceChanged,
+
+        /// <summary>Indicates that product descriptive content changed.</summary>
         ProductCopyChanged,
+
+        /// <summary>Indicates that product images changed.</summary>
         ProductImagesChanged,
+
+        /// <summary>Indicates that a product was added to a bundle.</summary>
         ProductWasBundled,
+
+        /// <summary>Indicates that the products assigned to a category changed.</summary>
         CategoryProductsUpdated,
+
+        /// <summary>Indicates that category descriptive content changed.</summary>
         CategoryCopyChanged,
+
+        /// <summary>Indicates that category images changed.</summary>
         CategoryImagesChanged
     }
 }

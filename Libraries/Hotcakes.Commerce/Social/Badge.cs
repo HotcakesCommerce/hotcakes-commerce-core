@@ -26,9 +26,19 @@
 
 namespace Hotcakes.Commerce.Social
 {
+    /// <summary>
+    /// Represents badge data consisting of a persistent identifier and a display name.
+    /// </summary>
     public class Badge
     {
+        /// <summary>
+        /// Gets or sets the persistent identifier of the badge.
+        /// </summary>
         public int BadgeId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the display name of the badge.
+        /// </summary>
         public string BadgeName { get; set; }
     }
 }

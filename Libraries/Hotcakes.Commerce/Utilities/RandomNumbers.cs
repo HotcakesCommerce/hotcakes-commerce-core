@@ -30,6 +30,9 @@ using System.Threading;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Generates pseudo-random integers and digit strings for non-cryptographic uses.
+    /// </summary>
     public class RandomNumbers
     {
         /// <summary>
@@ -43,6 +46,12 @@ namespace Hotcakes.Commerce.Utilities
             return RandomInteger(maxNumber, minNumber, DateTime.Now.Millisecond);
         }
 
+        /// <summary>
+        /// Generates a pseudo-random integer after a short delay intended to vary the time-based seed.
+        /// </summary>
+        /// <param name="maxNumber">The maximum possible value, inclusive.</param>
+        /// <param name="minNumber">The minimum possible value, inclusive.</param>
+        /// <returns>A pseudo-random integer in the inclusive range. Repeated calls are not guaranteed to differ.</returns>
         public static int RandomIntegerRepeatable(int maxNumber, int minNumber)
         {
             Thread.Sleep(10);
@@ -72,6 +81,11 @@ namespace Hotcakes.Commerce.Utilities
             return r.Next(minNumber, maxNumber);
         }
         
+        /// <summary>
+        /// Creates a string containing 16 pseudo-random decimal digits.
+        /// </summary>
+        /// <returns>A 16-character string composed of digits from <c>0</c> through <c>9</c>.</returns>
+        /// <remarks>This method is not intended for security-sensitive tokens.</remarks>
         public static string Create16DigitString()
         {
             var RNG = new Random();

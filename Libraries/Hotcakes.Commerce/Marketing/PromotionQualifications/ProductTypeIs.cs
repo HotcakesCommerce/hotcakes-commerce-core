@@ -31,10 +31,14 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Matches order items by the product type loaded for each product.</summary>
+    /// <remarks>Missing product types use the all-zero GUID representation; exclusion mode reverses membership.</remarks>
     public class ProductTypeIs : PromotionIdQualificationBase
     {
+        /// <summary>Stable serialized type identifier for this qualification.</summary>
         public const string TypeIdString = "04065B1E-5217-41EF-9801-7AB5244A3373";
 
+        /// <summary>Gets or sets whether configured product types are excluded.</summary>
         public bool IsNotMode
         {
             get
@@ -46,16 +50,19 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             set { SetSetting("PrTIsNotMode", value); }
         }
 
+        /// <summary>Gets the stable product-type order qualification identifier.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdString); }
         }
 
+        /// <summary>Gets the product-type identifier setting key.</summary>
         public override string IdSettingName
         {
             get { return "ProductTypeIds"; }
         }
 
+        /// <summary>Builds a description of the configured product types.</summary>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var result = "When Product Type is" + (IsNotMode ? " not" : string.Empty) + ":<ul>";
@@ -78,11 +85,13 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             return result;
         }
 
+        /// <summary>Sets the lowest processing cost during construction.</summary>
         protected override void OnInit()
         {
             ProcessingCost = RelativeProcessingCost.Lowest;
         }
 
+        /// <summary>Matches the current line item or any order item by loaded product type.</summary>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             var ids = CurrentIds();

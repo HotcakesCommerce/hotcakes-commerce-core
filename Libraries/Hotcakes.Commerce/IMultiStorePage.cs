@@ -26,8 +26,11 @@
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>Defines the commerce application exposed by a Hotcakes page.</summary>
+    /// <remarks>This file is named <c>IMultiStorePage.cs</c>, while the public type is <c>IHccPage</c>; both names are preserved.</remarks>
     public interface IHccPage
     {
+        /// <summary>Gets the page's Hotcakes application facade.</summary>
         HotcakesApplication HccApp { get; }
     }
 }

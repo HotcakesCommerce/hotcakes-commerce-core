@@ -31,10 +31,14 @@ using System.Threading;
 
 namespace Hotcakes.Commerce.BusinessRules
 {
+    /// <summary>Executes an ordered collection of business-rule tasks.</summary>
+    /// <remarks>Execution stops at the first failure or non-thread-abort exception. The failing step and all prior steps are rolled back in reverse order.</remarks>
     public class Workflow
     {
         private readonly List<Task> _Tasks = new List<Task>();
 
+        /// <summary>Initializes a workflow from an ordered task array.</summary>
+        /// <param name="tasks">The tasks to execute in array order; <c>null</c> creates an empty workflow.</param>
         public Workflow(Task[] tasks)
         {
             if (tasks != null)
@@ -43,6 +47,10 @@ namespace Hotcakes.Commerce.BusinessRules
             }
         }
 
+        /// <summary>Runs each task in sequence using the supplied context.</summary>
+        /// <param name="c">The context shared by all tasks and rollback operations.</param>
+        /// <returns><c>true</c> when every task succeeds; otherwise, <c>false</c>.</returns>
+        /// <remarks>Non-<see cref="ThreadAbortException"/> exceptions become non-customer-visible <see cref="WorkflowMessage"/> errors and are logged before rollback.</remarks>
         public bool Run(TaskContext c)
         {
             var result = true;
@@ -74,6 +82,10 @@ namespace Hotcakes.Commerce.BusinessRules
             return result;
         }
 
+        /// <summary>Creates and runs the workflow identified by <paramref name="name"/>.</summary>
+        /// <param name="c">The order context used to resolve the application and run the workflow.</param>
+        /// <param name="name">The workflow identifier to create through the context's factory.</param>
+        /// <returns><c>true</c> when the selected workflow completes; otherwise, <c>false</c>.</returns>
         public static bool RunByName(OrderTaskContext c, WorkflowNames name)
         {
             var result = false;

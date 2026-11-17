@@ -26,9 +26,19 @@
 
 namespace Hotcakes.Commerce.Content
 {
+    /// <summary>
+    /// Defines whether content is still being edited or is available as published content.
+    /// </summary>
     public enum PublishStatus
     {
+        /// <summary>
+        /// Content that is not published. The serialized numeric value is <c>0</c>.
+        /// </summary>
         Draft = 0,
+
+        /// <summary>
+        /// Content that is published. The serialized numeric value is <c>1</c>.
+        /// </summary>
         Published = 1
     }
 }

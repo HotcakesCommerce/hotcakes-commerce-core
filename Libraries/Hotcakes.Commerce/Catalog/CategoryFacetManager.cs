@@ -43,6 +43,10 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         private readonly ProductPropertyValueRepository productValueRepository;
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="CategoryFacetManager" />.
+        /// </summary>
+        /// <param name="c">Value used to initialize the instance.</param>
         public CategoryFacetManager(HccRequestContext c)
             : base(c)
         {

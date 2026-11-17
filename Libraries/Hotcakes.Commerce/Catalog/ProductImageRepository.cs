@@ -35,25 +35,40 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Defines the catalog data or behavior represented by this member.
+    /// </summary>
     public class ProductImageRepository : HccSimpleRepoBase<hcc_ProductImage, ProductImage>
     {
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductImageRepository(HccRequestContext c)
             : base(c)
         {
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override Func<hcc_ProductImage, bool> MatchItems(ProductImage item)
         {
             var guid = DataTypeHelper.BvinToGuid(item.Bvin);
             return pi => pi.bvin == guid;
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override Func<hcc_ProductImage, bool> NotMatchItems(List<ProductImage> items)
         {
             var itemGuids = items.Select(i => DataTypeHelper.BvinToGuid(i.Bvin)).ToList();
             return pi => !itemGuids.Contains(pi.bvin);
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyDataToModel(hcc_ProductImage data, ProductImage model)
         {
             model.AlternateText = data.AlternateText;
@@ -66,6 +81,9 @@ namespace Hotcakes.Commerce.Catalog
             model.StoreId = data.StoreId;
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyModelToData(hcc_ProductImage data, ProductImage model)
         {
             data.AlternateText = model.AlternateText;
@@ -79,18 +97,27 @@ namespace Hotcakes.Commerce.Catalog
         }
 
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductImage Find(string bvin)
         {
             var guid = DataTypeHelper.BvinToGuid(bvin);
             return FindFirstPoco(y => y.bvin == guid && y.StoreId == Context.CurrentStore.Id);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductImage FindForAllStores(string bvin)
         {
             var guid = DataTypeHelper.BvinToGuid(bvin);
             return FindFirstPoco(y => y.bvin == guid);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public override bool Create(ProductImage item)
         {
             if (string.IsNullOrEmpty(item.Bvin))
@@ -116,6 +143,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool Update(ProductImage c)
         {
             if (c.StoreId != Context.CurrentStore.Id)
@@ -128,12 +158,18 @@ namespace Hotcakes.Commerce.Catalog
             return Update(c, y => y.bvin == guid);
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool Delete(string bvin)
         {
             var result = DeleteAdv(bvin);
             return result.Success;
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public DalBatchOperationResult<ProductImage> DeleteAdv(string bvin)
         {
             var storeId = Context.CurrentStore.Id;
@@ -147,12 +183,18 @@ namespace Hotcakes.Commerce.Catalog
             return result;
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool DeleteForProductId(string productId)
         {
             var productGuid = DataTypeHelper.BvinToGuid(productId);
             return Delete(y => y.ProductID == productGuid);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductImage> FindByProductIds(List<string> productIds)
         {
             var storeId = Context.CurrentStore.Id;
@@ -166,11 +208,17 @@ namespace Hotcakes.Commerce.Catalog
             });
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductImage> FindByProductId(string productId)
         {
             return FindByProductIdPaged(productId, 1, int.MaxValue);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductImage> FindByProductIdPaged(string productId, int pageNumber, int pageSize)
         {
             var storeId = Context.CurrentStore.Id;
@@ -183,6 +231,9 @@ namespace Hotcakes.Commerce.Catalog
             }, pageNumber, pageSize);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public void MergeList(string productBvin, List<ProductImage> subitems)
         {
             var storeId = Context.CurrentStore.Id;
@@ -201,6 +252,9 @@ namespace Hotcakes.Commerce.Catalog
             MergeList(subitems, pi => pi.ProductID == productGuid);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool Resort(string productBvin, List<string> sortedIds)
         {
             if (sortedIds != null)

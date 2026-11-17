@@ -32,6 +32,10 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Commerce.Payment
 {
+    /// <summary>
+    /// Discovers and indexes non-abstract <see cref="GiftCardGateway"/> implementations from loaded assemblies.
+    /// Discovery occurs once in the type initializer and instances are ordered by name.
+    /// </summary>
     public class GiftCardGateways
     {
         static GiftCardGateways()
@@ -71,11 +75,20 @@ namespace Hotcakes.Commerce.Payment
             }
         }
 
+        /// <summary>
+        /// Gets all discovered gift-card gateways.
+        /// </summary>
+        /// <returns>The cached gateway instances ordered by name.</returns>
         public static List<GiftCardGateway> FindAll()
         {
             return Gateways;
         }
 
+        /// <summary>
+        /// Finds a discovered gift-card gateway by its exact identifier.
+        /// </summary>
+        /// <param name="id">The gateway identifier.</param>
+        /// <returns>The matching gateway, or <see langword="null"/> when none is found.</returns>
         public static GiftCardGateway Find(string id)
         {
             return Gateways.FirstOrDefault(m => m.Id == id);

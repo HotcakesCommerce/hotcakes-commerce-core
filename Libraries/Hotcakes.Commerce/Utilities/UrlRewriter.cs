@@ -35,10 +35,19 @@ using Hotcakes.Commerce.Urls;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Provides helpers for validating and generating Hotcakes Commerce URLs.
+    /// </summary>
+    /// <remarks>URL generation delegates route construction to <see cref="HccUrlBuilder"/> and the configured HCC routes.</remarks>
     public class UrlRewriter
     {
         private const string CART_ROUTE_FORMAT = "{0}?AddSku={1}&AddSkuQty=1";
 
+        /// <summary>Determines whether a product slug belongs to a different product.</summary>
+        /// <param name="slug">The product URL slug to find.</param>
+        /// <param name="bvin">The product identifier that is allowed to retain the slug.</param>
+        /// <param name="app">The application whose catalog repository is queried.</param>
+        /// <returns><see langword="true"/> when another product uses the slug; otherwise, <see langword="false"/>.</returns>
         public static bool IsProductSlugInUse(string slug, string bvin, HotcakesApplication app)
         {
             var p = app.CatalogServices.Products.FindBySlug(slug);
@@ -55,11 +64,22 @@ namespace Hotcakes.Commerce.Utilities
             return false;
         }
 
+        /// <summary>Determines whether a category slug belongs to a different category.</summary>
+        /// <param name="slug">The category URL slug to find.</param>
+        /// <param name="bvin">The category identifier that is allowed to retain the slug.</param>
+        /// <param name="app">The application providing the category repository.</param>
+        /// <returns><see langword="true"/> when another category uses the slug; otherwise, <see langword="false"/>.</returns>
+        /// <seealso cref="IsCategorySlugInUse(string, string, ICategoryRepository)"/>
         public static bool IsCategorySlugInUse(string slug, string bvin, HotcakesApplication app)
         {
             return IsCategorySlugInUse(slug, bvin, app.CatalogServices.Categories);
         }
 
+        /// <summary>Determines whether a category repository contains a different category with a slug.</summary>
+        /// <param name="slug">The category URL slug to find.</param>
+        /// <param name="bvin">The category identifier that is allowed to retain the slug.</param>
+        /// <param name="repository">The category repository to query.</param>
+        /// <returns><see langword="true"/> when another category uses the slug; otherwise, <see langword="false"/>.</returns>
         public static bool IsCategorySlugInUse(string slug, string bvin, ICategoryRepository repository)
         {
             var c = repository.FindBySlug(slug);
@@ -76,6 +96,13 @@ namespace Hotcakes.Commerce.Utilities
             return false;
         }
 
+        /// <summary>Determines whether a requested URL conflicts with a category, product, or custom URL.</summary>
+        /// <param name="requestedUrl">The requested URL or slug to check.</param>
+        /// <param name="thisCustomUrlBvin">The current custom URL identifier, which is excluded from the conflict.</param>
+        /// <param name="context">The request context associated with the URL check.</param>
+        /// <param name="app">The application whose catalog and content repositories are queried.</param>
+        /// <returns><see langword="true"/> when the URL is already used by another record; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>The category and product checks use a lower-case working value; custom URL lookup uses the original input.</remarks>
         public static bool IsUrlInUse(string requestedUrl, string thisCustomUrlBvin, HccRequestContext context,
             HotcakesApplication app)
         {
@@ -103,6 +130,10 @@ namespace Hotcakes.Commerce.Utilities
             return result;
         }
 
+        /// <summary>Prefixes a custom URL with an application path when the application is not rooted at <c>/</c>.</summary>
+        /// <param name="customUrl">The custom URL to prefix.</param>
+        /// <param name="appPath">The application path, including or excluding a trailing slash.</param>
+        /// <returns>The custom URL made relative to the application path.</returns>
         public static string MakeRelativeCustomUrlSafeForApp(string customUrl, string appPath)
         {
             var result = customUrl;
@@ -120,6 +151,10 @@ namespace Hotcakes.Commerce.Utilities
             return result;
         }
 
+        /// <summary>Builds a route URL for a category, or returns its custom link when it has one.</summary>
+        /// <param name="c">The category snapshot to represent.</param>
+        /// <param name="additionalParams">Optional route values merged after the category slug.</param>
+        /// <returns>The category custom link or the generated HCC category route URL.</returns>
         public static string BuildUrlForCategory(CategorySnapshot c, object additionalParams = null)
         {
             if (c.SourceType == CategorySourceType.CustomLink)
@@ -133,6 +168,11 @@ namespace Hotcakes.Commerce.Utilities
             return HccUrlBuilder.RouteHccUrl(HccRoute.Category, routeValues);
         }
 
+        /// <summary>Builds a route URL for a category page, or returns its custom link when it has one.</summary>
+        /// <param name="c">The category snapshot to represent.</param>
+        /// <param name="pageNumber">The page value added to the route.</param>
+        /// <param name="additionalParams">Optional route values merged after the category slug and page.</param>
+        /// <returns>The category custom link or the generated paged HCC category route URL.</returns>
         public static string BuildUrlForCategory(CategorySnapshot c, string pageNumber, object additionalParams = null)
         {
             if (c.SourceType == CategorySourceType.CustomLink)
@@ -146,6 +186,10 @@ namespace Hotcakes.Commerce.Utilities
             return HccUrlBuilder.RouteHccUrl(HccRoute.Category, routeValues);
         }
 
+        /// <summary>Builds an HCC product route URL from a product slug.</summary>
+        /// <param name="p">The product to represent.</param>
+        /// <param name="additionalParams">Optional route values merged after the product slug.</param>
+        /// <returns>The generated product route URL.</returns>
         public static string BuildUrlForProduct(Product p, object additionalParams = null)
         {
             var parameters = Merge(new {slug = p.UrlSlug}, additionalParams);
@@ -153,6 +197,9 @@ namespace Hotcakes.Commerce.Utilities
             return HccUrlBuilder.RouteHccUrl(HccRoute.Product, routeValues);
         }
 
+        /// <summary>Builds a direct add-to-cart URL for a product without options.</summary>
+        /// <param name="p">The product to add.</param>
+        /// <returns>A cart URL containing the product SKU and quantity one, or an empty string for products requiring options or gift-card configuration.</returns>
         public static string BuildUrlForProductAddToCart(Product p)
         {
             if (p.HasOptions() || p.IsGiftCard)
@@ -310,6 +357,10 @@ namespace Hotcakes.Commerce.Utilities
             return result;
         }
 
+        /// <summary>Appends a query string to a URL using the appropriate separator.</summary>
+        /// <param name="url">The URL to extend.</param>
+        /// <param name="query">The query text without a leading separator.</param>
+        /// <returns>The URL followed by <c>?</c> or <c>&amp;</c> and the supplied query.</returns>
         public static string JoinUrlAndQuery(string url, string query)
         {
             if (url.Contains("?"))
@@ -319,6 +370,10 @@ namespace Hotcakes.Commerce.Utilities
             return url + "?" + query;
         }
 
+        /// <summary>Builds an absolute URL from the request host, scheme, and raw URL.</summary>
+        /// <param name="Request">The HTTP request whose scheme, host, and raw URL are used.</param>
+        /// <returns>The request URL reconstructed as an absolute URL.</returns>
+        /// <remarks>The raw URL is preserved, including its query text; this method does not canonicalize or validate it.</remarks>
         public static string GetRewrittenUrlFromRequest(HttpRequest Request)
         {
             if (Request.RawUrl.StartsWith("/"))
@@ -328,6 +383,9 @@ namespace Hotcakes.Commerce.Utilities
             return Request.Url.Scheme + "://" + Request.Url.Host + "/" + Request.RawUrl;
         }
 
+        /// <summary>Changes a URL beginning with <c>http://</c> to <c>https://</c>.</summary>
+        /// <param name="currentUrl">The URL whose scheme should be changed.</param>
+        /// <returns>The URL with its scheme changed when it uses lower-case <c>http://</c>; otherwise, the original value.</returns>
         public static string SwitchUrlToSecure(string currentUrl)
         {
             if (currentUrl.StartsWith("http://"))
@@ -337,6 +395,9 @@ namespace Hotcakes.Commerce.Utilities
             return currentUrl;
         }
 
+        /// <summary>Changes a URL beginning with <c>https://</c> to <c>http://</c>.</summary>
+        /// <param name="currentUrl">The URL whose scheme should be changed.</param>
+        /// <returns>The URL with its scheme changed when it uses lower-case <c>https://</c>; otherwise, the original value.</returns>
         public static string SwitchUrlToStandard(string currentUrl)
         {
             if (currentUrl.StartsWith("https://"))

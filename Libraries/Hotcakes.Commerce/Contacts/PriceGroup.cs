@@ -37,6 +37,7 @@ namespace Hotcakes.Commerce.Contacts
     [Serializable]
     public class PriceGroup
     {
+        /// <summary>Initializes a price group with empty identity and name values, the default list-price percentage mode, and a current UTC timestamp.</summary>
         public PriceGroup()
         {
             StoreId = 0;

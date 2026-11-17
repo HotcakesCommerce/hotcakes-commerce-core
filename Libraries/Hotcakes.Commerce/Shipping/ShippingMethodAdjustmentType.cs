@@ -26,10 +26,14 @@
 
 namespace Hotcakes.Commerce.Shipping
 {
+    /// <summary>Specifies how a configured adjustment changes a provider shipping rate.</summary>
     public enum ShippingMethodAdjustmentType
     {
+        /// <summary>No adjustment is applied.</summary>
         None = 0,
+        /// <summary>Adds <see cref="ShippingMethod.Adjustment"/> as a fixed amount to each rate.</summary>
         Amount = 1,
+        /// <summary>Adds the configured percentage of each rate to that rate.</summary>
         Percentage = 2
     }
 }

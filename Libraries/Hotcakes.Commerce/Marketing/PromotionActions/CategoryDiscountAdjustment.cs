@@ -31,16 +31,20 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Marketing.PromotionActions
 {
+    /// <summary>Adjusts qualifying line-item totals when a product belongs to a configured category.</summary>
+    /// <remarks>Category identifiers are stored under <c>categoryids</c>, normalized to uppercase, and joined by commas.</remarks>
     public class CategoryDiscountAdjustment : PromotionActionBase
     {
         #region Constants
 
+        /// <summary>Stable serialized identifier for the category adjustment action.</summary>
         public const string TypeIdString = "9482acc3-9ef6-4490-9890-cb7787d6b0ee";
 
         #endregion
 
         #region Init
 
+        /// <summary>Initializes a category adjustment with a monetary amount of zero.</summary>
         public CategoryDiscountAdjustment()
         {
             Id = 0;
@@ -53,6 +57,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         #region Properties
 
+        /// <summary>Gets or sets whether <see cref="Amount"/> is monetary or percentage-based.</summary>
         public AmountTypes AdjustmentType
         {
             get
@@ -65,6 +70,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             set { SetSetting("AdjustmentType", (int) value); }
         }
 
+        /// <summary>Gets or sets the signed adjustment amount; negative values decrease the qualifying total.</summary>
         public decimal Amount
         {
             get { return GetSettingAsDecimal("Amount"); }
@@ -75,6 +81,9 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         #region Overrides
 
+        /// <summary>Describes the category adjustment and lists configured categories as HTML.</summary>
+        /// <param name="app">The application context used to resolve category names and URLs.</param>
+        /// <returns>The localized-style HTML description used by the promotion UI.</returns>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var isDiscount = Amount < 0;
@@ -109,6 +118,10 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             return result;
         }
 
+        /// <summary>Applies one discount detail to the currently processed qualifying line item.</summary>
+        /// <param name="context">The line-item promotion context.</param>
+        /// <returns><see langword="false"/> for an invalid or non-line-item context; otherwise <see langword="true"/>.</returns>
+        /// <remarks>Only the first 100 category assignments are inspected. A matching promotion is not added twice.</remarks>
         public override bool ApplyAction(PromotionContext context)
         {
             if (context == null) return false;
@@ -167,6 +180,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             return true;
         }
 
+        /// <summary>Gets the stable serialized action identifier.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdString); }
@@ -176,6 +190,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         #region Helper Methods
 
+        /// <summary>Gets configured category identifiers, normalized to trimmed uppercase values.</summary>
+        /// <returns>A new list of category identifiers; malformed empty entries are omitted.</returns>
         public List<string> GetCategories()
         {
             var all = GetSetting("categoryids");
@@ -186,6 +202,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
                     .ToList();
         }
 
+        /// <summary>Persists category identifiers in the compatibility-sensitive <c>categoryids</c> setting.</summary>
+        /// <param name="items">The identifiers to normalize and persist; null is treated as an empty list.</param>
         public void SaveIdsToSettings(List<string> items)
         {
             var safeItems = items ?? new List<string>();
@@ -198,6 +216,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
 
         #region Public Methods
 
+        /// <summary>Adds a category identifier unless it is empty or already present.</summary>
+        /// <param name="id">The category identifier to normalize and add.</param>
         public void AddCategoryId(string id)
         {
             var ids = GetCategories();
@@ -209,6 +229,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             SaveIdsToSettings(ids);
         }
 
+        /// <summary>Removes a matching normalized category identifier, if present.</summary>
+        /// <param name="id">The category identifier to normalize and remove.</param>
         public void RemoveCategoryId(string id)
         {
             var ids = GetCategories();

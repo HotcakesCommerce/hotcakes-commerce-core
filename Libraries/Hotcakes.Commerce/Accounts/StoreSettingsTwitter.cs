@@ -28,28 +28,38 @@ using System;
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Provides Twitter settings owned by a <see cref="StoreSettings"/> instance.</summary>
+    /// <remarks>Values are store-scoped and staged through the parent façade. The historical default tweet text is retained for compatibility.</remarks>
     [Serializable]
     public class StoreSettingsTwitter
     {
         private readonly StoreSettings parent;
 
+        /// <summary>Initializes a new Twitter settings façade.</summary>
+        /// <param name="s">The owning store settings façade.</param>
         public StoreSettingsTwitter(StoreSettings s)
         {
             parent = s;
         }
 
+        /// <summary>Gets or sets whether Twitter integration is enabled.</summary>
+        /// <value>The <c>UseTwitter</c> setting; the compatibility default is <see langword="true"/>.</value>
         public bool UseTwitter
         {
             get { return parent.GetPropBoolWithDefault("UseTwitter", true); }
             set { parent.SetProp("UseTwitter", value); }
         }
 
+        /// <summary>Gets or sets the store's Twitter handle.</summary>
+        /// <value>The <c>TwitterHandle</c> setting.</value>
         public string TwitterHandle
         {
             get { return parent.GetProp("TwitterHandle"); }
             set { parent.SetProp("TwitterHandle", value); }
         }
 
+        /// <summary>Gets or sets the default tweet text template.</summary>
+        /// <value>The <c>DefaultTweetText</c> setting; an empty stored value is exposed as <c>Check This Out: {0} </c>.</value>
         public string DefaultTweetText
         {
             get

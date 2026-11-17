@@ -26,6 +26,7 @@
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>Association between a product type and a product property.</summary>
     public class ProductTypePropertyAssociation
     {
         public ProductTypePropertyAssociation()
@@ -37,10 +38,12 @@ namespace Hotcakes.Commerce.Catalog
             SortOrder = 0;
         }
 
+        /// <summary>Gets or sets the Id value.</summary>
         public long Id { get; set; }
         public long StoreId { get; set; }
         public string ProductTypeBvin { get; set; }
         public long PropertyId { get; set; }
+        /// <summary>Gets or sets the SortOrder value.</summary>
         public int SortOrder { get; set; }
     }
 }

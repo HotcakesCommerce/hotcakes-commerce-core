@@ -34,24 +34,39 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    /// Represents the OrderCouponRepository order-domain type and preserves the established public compatibility surface.
+    /// </summary>
     public class OrderCouponRepository : HccSimpleRepoBase<hcc_OrderCoupon, OrderCoupon>
     {
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         public OrderCouponRepository(HccRequestContext c)
             : base(c)
         {
         }
 
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override Func<hcc_OrderCoupon, bool> MatchItems(OrderCoupon item)
         {
             return oc => oc.Id == item.Id;
         }
 
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override Func<hcc_OrderCoupon, bool> NotMatchItems(List<OrderCoupon> items)
         {
             var itemIds = items.Select(i => i.Id).ToList();
             return oc => !itemIds.Contains(oc.Id);
         }
 
+        /// <summary>
+        /// Provides the CopyModelToData operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override void CopyModelToData(hcc_OrderCoupon data, OrderCoupon model)
         {
             data.Id = model.Id;
@@ -63,6 +78,9 @@ namespace Hotcakes.Commerce.Orders
             data.UserId = model.UserId;
         }
 
+        /// <summary>
+        /// Provides the CopyDataToModel operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override void CopyDataToModel(hcc_OrderCoupon data, OrderCoupon model)
         {
             model.Id = data.Id;
@@ -74,17 +92,26 @@ namespace Hotcakes.Commerce.Orders
             model.UserId = data.UserId;
         }
 
+        /// <summary>
+        /// Provides the Update operation while preserving the established order-domain behavior.
+        /// </summary>
         public bool Update(OrderCoupon item)
         {
             item.LastUpdatedUtc = DateTime.UtcNow;
             return base.Update(item, y => y.Id == item.Id);
         }
 
+        /// <summary>
+        /// Provides the Delete operation while preserving the established order-domain behavior.
+        /// </summary>
         public bool Delete(long id)
         {
             return Delete(y => y.Id == id);
         }
 
+        /// <summary>
+        /// Finds the requested records within the established repository store scope and ordering.
+        /// </summary>
         public List<OrderCoupon> FindForOrders(List<string> orderBvins)
         {
             var orderGuids = orderBvins.Select(bvin => DataTypeHelper.BvinToGuid(bvin)).ToList();
@@ -96,6 +123,9 @@ namespace Hotcakes.Commerce.Orders
             });
         }
 
+        /// <summary>
+        /// Finds the requested records within the established repository store scope and ordering.
+        /// </summary>
         public List<OrderCoupon> FindForOrder(string orderBvin)
         {
             var guid = DataTypeHelper.BvinToGuid(orderBvin);
@@ -106,12 +136,18 @@ namespace Hotcakes.Commerce.Orders
             });
         }
 
+        /// <summary>
+        /// Deletes all records associated with the specified parent identifier.
+        /// </summary>
         public void DeleteForOrder(string orderBvin)
         {
             var guid = DataTypeHelper.BvinToGuid(orderBvin);
             Delete(y => y.OrderBvin == guid);
         }
 
+        /// <summary>
+        /// Merges the supplied records after assigning their established parent and store scope.
+        /// </summary>
         public void MergeList(string orderBvin, long storeId, List<OrderCoupon> subitems)
         {
             // Set Base Key Field
@@ -126,6 +162,9 @@ namespace Hotcakes.Commerce.Orders
             MergeList(subitems, oc => oc.OrderBvin == orderGuid && oc.StoreId == storeId);
         }
 
+        /// <summary>
+        /// Provides the GetUseTimesByUserId operation while preserving the established order-domain behavior.
+        /// </summary>
         public int GetUseTimesByUserId(string couponCode, string UserId, long storeId)
         {
             using (var s = CreateReadStrategy())
@@ -137,6 +176,9 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        /// Provides the GetUseTimesForStore operation while preserving the established order-domain behavior.
+        /// </summary>
         public int GetUseTimesForStore(string couponCode, long storeId)
         {
             using (var s = CreateReadStrategy())

@@ -29,6 +29,7 @@ namespace Hotcakes.Commerce.Shipping
     /// <summary>
     ///     This enumeration is used to determine how product shipping will be charged on shippable products.
     /// </summary>
+    /// <remarks>These values determine whether shipping and/or handling is charged for a shippable product.</remarks>
     public enum ShippingChargeType
     {
         /// <summary>
@@ -42,12 +43,12 @@ namespace Hotcakes.Commerce.Shipping
         ChargeShippingAndHandling = 1,
 
         /// <summary>
-        ///     This member dictates that the product will only change for shipping, not handling.
+        ///     This member dictates that the product will only charge for shipping, not handling.
         /// </summary>
         ChargeShipping = 2,
 
         /// <summary>
-        ///     This member dictates that the product will only change for handling, not shipping.
+        ///     This member dictates that the product will only charge for handling, not shipping.
         /// </summary>
         ChargeHandling = 3
     }

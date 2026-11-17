@@ -26,13 +26,20 @@
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>Relative weight assigned to indexed product text.</summary>
     public enum SearchManagerImportance
     {
+        /// <summary>Specifies the Highest value.</summary>
         Highest = 100,
+        /// <summary>Specifies the High value.</summary>
         High = 50,
+        /// <summary>Specifies the NormalHigh value.</summary>
         NormalHigh = 20,
+        /// <summary>Specifies the Normal value.</summary>
         Normal = 10,
+        /// <summary>Specifies the Low value.</summary>
         Low = 5,
+        /// <summary>Specifies the Lowest value.</summary>
         Lowest = 1
     }
 }

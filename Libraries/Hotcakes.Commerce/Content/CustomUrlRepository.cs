@@ -34,13 +34,16 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Content
 {
+    /// <summary>Persists and queries store-scoped <see cref="CustomUrl"/> records.</summary>
     public class CustomUrlRepository : HccSimpleRepoBase<hcc_CustomUrl, CustomUrl>
     {
+        /// <summary>Initializes the repository for the specified commerce context.</summary>
         public CustomUrlRepository(HccRequestContext context)
             : base(context)
         {
         }
 
+        /// <summary>Copies persisted custom URL fields into the model, including normalized URL properties.</summary>
         protected override void CopyDataToModel(hcc_CustomUrl data, CustomUrl model)
         {
             model.Bvin = data.bvin;
@@ -53,6 +56,7 @@ namespace Hotcakes.Commerce.Content
             model.SystemDataType = (CustomUrlType) data.SystemDataType;
         }
 
+        /// <summary>Copies custom URL model fields into the persistence record.</summary>
         protected override void CopyModelToData(hcc_CustomUrl data, CustomUrl model)
         {
             data.bvin = model.Bvin;
@@ -65,6 +69,7 @@ namespace Hotcakes.Commerce.Content
             data.SystemDataType = (int) model.SystemDataType;
         }
 
+        /// <summary>Finds a URL by identifier only when it belongs to the current store.</summary>
         public CustomUrl Find(string bvin)
         {
             var result = FindForAllStores(bvin);
@@ -78,11 +83,13 @@ namespace Hotcakes.Commerce.Content
             return null;
         }
 
+        /// <summary>Finds a URL by identifier without applying current-store filtering.</summary>
         public CustomUrl FindForAllStores(string bvin)
         {
             return FindFirstPoco(cu => cu.bvin == bvin);
         }
 
+        /// <summary>Creates a URL, assigning an identifier when needed and stamping the current store and UTC update time.</summary>
         public override bool Create(CustomUrl item)
         {
             if (item.Bvin == string.Empty)
@@ -94,6 +101,8 @@ namespace Hotcakes.Commerce.Content
             return base.Create(item);
         }
 
+        /// <summary>Updates a URL belonging to the current store and refreshes its UTC update time.</summary>
+        /// <returns><see langword="false"/> when the URL belongs to another store or persistence fails.</returns>
         public bool Update(CustomUrl customUrl)
         {
             if (customUrl.StoreId != Context.CurrentStore.Id)
@@ -104,6 +113,7 @@ namespace Hotcakes.Commerce.Content
             return Update(customUrl, cu => cu.bvin == customUrl.Bvin);
         }
 
+        /// <summary>Deletes the current-store URL with the specified identifier.</summary>
         public bool Delete(string bvin)
         {
             var storeId = Context.CurrentStore.Id;
@@ -115,18 +125,21 @@ namespace Hotcakes.Commerce.Content
             return Delete(cu => cu.bvin == bvin && cu.StoreId == storeId);
         }
 
+        /// <summary>Finds current-store URLs associated with the specified system data.</summary>
         public List<CustomUrl> FindBySystemData(string systemData)
         {
             var storeId = Context.CurrentStore.Id;
             return FindBySystemData(systemData, storeId);
         }
 
+        /// <summary>Deletes all current-store URLs associated with the specified system data.</summary>
         public bool DeleteBySystemData(string systemData)
         {
             var storeId = Context.CurrentStore.Id;
             return Delete(cu => cu.StoreId == storeId && cu.SystemData == systemData);
         }
 
+        /// <summary>Finds URLs associated with system data in the specified store.</summary>
         public List<CustomUrl> FindBySystemData(string systemData, long storeId)
         {
             return FindListPoco(q =>
@@ -136,6 +149,7 @@ namespace Hotcakes.Commerce.Content
             });
         }
 
+        /// <summary>Finds a current-store URL by its lowercase-invariant requested path.</summary>
         public CustomUrl FindByRequestedUrl(string requestedUrl)
         {
             var match = requestedUrl.ToLowerInvariant();
@@ -143,6 +157,7 @@ namespace Hotcakes.Commerce.Content
             return FindFirstPoco(cu => cu.StoreId == storeId && cu.RequestedUrl == match);
         }
 
+        /// <summary>Finds a current-store URL by requested path and URL type.</summary>
         public CustomUrl FindByRequestedUrl(string requestedUrl, CustomUrlType type)
         {
             var match = requestedUrl.ToLowerInvariant();
@@ -151,6 +166,7 @@ namespace Hotcakes.Commerce.Content
                 FindFirstPoco(cu => cu.StoreId == storeId && cu.RequestedUrl == match && cu.SystemDataType == (int) type);
         }
 
+        /// <summary>Finds a current-store URL by its lowercase-invariant redirect destination.</summary>
         public CustomUrl FindByRedirectToUrl(string redirectToUrl)
         {
             var match = redirectToUrl.ToLowerInvariant();
@@ -158,12 +174,17 @@ namespace Hotcakes.Commerce.Content
             return FindFirstPoco(cu => cu.StoreId == storeId && cu.RedirectToUrl == match);
         }
 
+        /// <summary>Gets all URLs for the current store, ordered by requested URL.</summary>
         public List<CustomUrl> FindAll()
         {
             var totalCount = 0;
             return FindAllPaged(1, int.MaxValue, ref totalCount);
         }
 
+        /// <summary>Gets one page of current-store URLs ordered by requested URL.</summary>
+        /// <param name="pageNumber">The one-based page number.</param>
+        /// <param name="pageSize">The maximum number of records in the page.</param>
+        /// <param name="totalCount">Receives the total number of matching records.</param>
         public List<CustomUrl> FindAllPaged(int pageNumber, int pageSize, ref int totalCount)
         {
             var storeId = Context.CurrentStore.Id;
@@ -182,6 +203,7 @@ namespace Hotcakes.Commerce.Content
             }
         }
 
+        /// <summary>Registers a permanent redirect unless the requested URL is already in use, then updates redirects for the object.</summary>
         public void Register301(string requestedUrl, string redirectUrl, string objectId, CustomUrlType customUrlType,
             HccRequestContext context, HotcakesApplication app)
         {
@@ -200,6 +222,7 @@ namespace Hotcakes.Commerce.Content
             UpdateAllUrlsForObject(objectId, redirectUrl);
         }
 
+        /// <summary>Updates the redirect destination of all current-store URLs associated with an object.</summary>
         public void UpdateAllUrlsForObject(string objectId, string redirectToUrl)
         {
             var all = FindBySystemData(objectId);

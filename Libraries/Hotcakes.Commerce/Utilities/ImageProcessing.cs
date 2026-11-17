@@ -30,6 +30,13 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Creates standard-size derivatives of image files.
+    /// </summary>
+    /// <remarks>
+    /// Derivatives are written beside the source image in conventional subdirectories when applicable. Failures are
+    /// logged through the Hotcakes event log and reported as <see langword="false"/>.
+    /// </remarks>
     public class ImageProcessing
     {
         private const int TINYWIDTH = 50;
@@ -71,36 +78,71 @@ namespace Hotcakes.Commerce.Utilities
             return result;
         }
 
+        /// <summary>
+        /// Creates a derivative no larger than 50 by 50 pixels in the <c>tiny</c> subdirectory.
+        /// </summary>
+        /// <param name="originalFile">The source image file.</param>
+        /// <returns><see langword="true"/> when the derivative is created; otherwise, <see langword="false"/>.</returns>
         public static bool ShrinkToTiny(string originalFile)
         {
             return ShrinkImage(originalFile, "tiny", TINYWIDTH, TINYHEIGHT);
         }
 
+        /// <summary>
+        /// Creates a derivative no larger than 220 by 220 pixels in the <c>small</c> subdirectory.
+        /// </summary>
+        /// <param name="originalFile">The source image file.</param>
+        /// <returns><see langword="true"/> when the derivative is created; otherwise, <see langword="false"/>.</returns>
         public static bool ShrinkToSmall(string originalFile)
         {
             return ShrinkImage(originalFile, "small", SMALLWIDTH, SMALLHEIGHT);
         }
 
+        /// <summary>
+        /// Creates a derivative no larger than 440 by 440 pixels in the <c>medium</c> subdirectory.
+        /// </summary>
+        /// <param name="originalFile">The source image file.</param>
+        /// <returns><see langword="true"/> when the derivative is created; otherwise, <see langword="false"/>.</returns>
         public static bool ShrinkToMedium(string originalFile)
         {
             return ShrinkImage(originalFile, "medium", MEDIUMWIDTH, MEDIUMHEIGHT);
         }
 
+        /// <summary>
+        /// Creates a derivative no larger than 310 by 110 pixels in the <c>logo</c> subdirectory.
+        /// </summary>
+        /// <param name="originalFile">The source image file.</param>
+        /// <returns><see langword="true"/> when the derivative is created; otherwise, <see langword="false"/>.</returns>
         public static bool ShrinkToLogo(string originalFile)
         {
             return ShrinkImage(originalFile, "logo", LOGOWIDTH, LOGOHEIGHT);
         }
 
+        /// <summary>
+        /// Creates a banner derivative using the source image directory and the implementation's unrestricted banner dimensions.
+        /// </summary>
+        /// <param name="originalFile">The source image file.</param>
+        /// <returns><see langword="true"/> when the derivative is created; otherwise, <see langword="false"/>.</returns>
         public static bool ShrinkToBanner(string originalFile)
         {
             return ShrinkImage(originalFile, "banner", BANNERWIDTH, BANNERHEIGHT);
         }
 
+        /// <summary>
+        /// Creates a 160 by 120 theme-preview derivative beside the source image.
+        /// </summary>
+        /// <param name="originalFile">The source image file.</param>
+        /// <returns><see langword="true"/> when the derivative is created; otherwise, <see langword="false"/>.</returns>
         public static bool ShrinkToThemePreview(string originalFile)
         {
             return ShrinkImage(originalFile, "", THEMEPREVIEWWIDTH, THEMEPREVIEWHEIGHT);
         }
 
+        /// <summary>
+        /// Creates a 640 by 480 theme-preview derivative beside the source image.
+        /// </summary>
+        /// <param name="originalFile">The source image file.</param>
+        /// <returns><see langword="true"/> when the derivative is created; otherwise, <see langword="false"/>.</returns>
         public static bool ShrinkToThemePreviewBig(string originalFile)
         {
             return ShrinkImage(originalFile, "", THEMEPREVIEWBIGWIDTH, THEMEPREVIEWBIGHEIGHT);

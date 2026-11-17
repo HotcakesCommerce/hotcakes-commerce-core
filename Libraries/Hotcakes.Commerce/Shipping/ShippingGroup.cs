@@ -31,6 +31,10 @@ using Hotcakes.Shipping;
 
 namespace Hotcakes.Commerce.Shipping
 {
+    /// <summary>
+    /// Groups line items with their shipping origin, destination, mode, package dimensions, and charge context.
+    /// </summary>
+    /// <remarks>The misspelled <see cref="ShipSeperately"/> name is retained for compatibility.</remarks>
     public class ShippingGroup
     {
         private Address _destinationAddress = new Address();
@@ -39,6 +43,9 @@ namespace Hotcakes.Commerce.Shipping
         private ShippingMode _ShippingMode = ShippingMode.None;
         private Address _sourceAddress = new Address();
 
+        /// <summary>
+        /// Initializes an empty shipping group with zero dimensions and no separate-shipping or oversize flag.
+        /// </summary>
         public ShippingGroup()
         {
             Oversize = false;
@@ -49,52 +56,67 @@ namespace Hotcakes.Commerce.Shipping
             Length = 0;
         }
 
+        /// <summary>
+        /// Gets the mutable collection of order line items assigned to this group.
+        /// </summary>
         public Collection<LineItem> Items
         {
             get { return _items; }
         }
 
+        /// <summary>Gets or sets the address from which this group ships.</summary>
         public Address SourceAddress
         {
             get { return _sourceAddress; }
             set { _sourceAddress = value; }
         }
 
+        /// <summary>Gets or sets the destination address for this group.</summary>
         public Address DestinationAddress
         {
             get { return _destinationAddress; }
             set { _destinationAddress = value; }
         }
 
+        /// <summary>Gets or sets the shipping source mode for this group.</summary>
         public ShippingMode ShippingMode
         {
             get { return _ShippingMode; }
             set { _ShippingMode = value; }
         }
 
+        /// <summary>Gets or sets the group identifier; cloning clears this value.</summary>
         public string ShipId
         {
             get { return _shipId; }
             set { _shipId = value; }
         }
 
+        /// <summary>Gets or sets the package length.</summary>
         public decimal Length { get; set; }
 
+        /// <summary>Gets or sets the package width.</summary>
         public decimal Width { get; set; }
 
+        /// <summary>Gets or sets the package height.</summary>
         public decimal Height { get; set; }
 
+        /// <summary>Gets or sets the total package weight.</summary>
         public decimal Weight { get; set; }
 
+        /// <summary>Gets or sets whether the group must ship separately. The compatibility-sensitive property name is misspelled.</summary>
         public bool ShipSeperately { get; set; }
 
+        /// <summary>Gets or sets whether the group is oversized.</summary>
         public bool Oversize { get; set; }
 
+        /// <summary>Gets the default dimension calculator, creating a <see cref="DefaultDimensionCalculator"/> on each access.</summary>
         public static DimensionCalculator DimensionCalculator
         {
             get { return new DefaultDimensionCalculator(); }
         }
 
+        /// <summary>Generates package dimensions using <see cref="DimensionCalculator"/>.</summary>
         public virtual void GenerateDimensions()
         {
             if (DimensionCalculator != null)
@@ -103,6 +125,9 @@ namespace Hotcakes.Commerce.Shipping
             }
         }
 
+        /// <summary>Creates a copy with cloned line items, copied addresses, a cleared identifier, and recalculated dimensions.</summary>
+        /// <param name="CopyBvins">Whether cloned line items should retain their BVIN values.</param>
+        /// <returns>A new shipping group.</returns>
         public ShippingGroup Clone(bool CopyBvins)
         {
             var result = new ShippingGroup();
@@ -125,6 +150,8 @@ namespace Hotcakes.Commerce.Shipping
             return result;
         }
 
+        /// <summary>Converts this group to the shipping-provider package contract.</summary>
+        /// <returns>An <see cref="IShippable"/> containing dimensions, item quantity, and line value.</returns>
         public IShippable AsIShippable()
         {
             GenerateDimensions();

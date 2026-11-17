@@ -35,10 +35,13 @@ namespace Hotcakes.Commerce
     [Serializable]
     public class CustomProperty
     {
+        /// <summary>Initializes an empty custom property with empty developer, key, and value strings.</summary>
         public CustomProperty()
         {
         }
 
+        /// <summary>Initializes a custom property with its owner, key, and value.</summary>
+        /// <param name="devId">The developer or integration identifier.</param><param name="propertyKey">The property key.</param><param name="propertyValue">The property value.</param>
         public CustomProperty(string devId, string propertyKey, string propertyValue)
         {
             _DeveloperId = devId;
@@ -50,6 +53,7 @@ namespace Hotcakes.Commerce
         ///     This is a unique ID that you use to group your own properties together.
         /// </summary>
         /// <remarks>Use any value that you wish here as long as it is unique to your company and you use it consistently.</remarks>
+        /// <value>The identifier of the developer or integration that owns the property.</value>
         public string DeveloperId
         {
             get { return _DeveloperId; }
@@ -59,6 +63,7 @@ namespace Hotcakes.Commerce
         /// <summary>
         ///     This is the unique name that is used to store and retrieve the custom property.
         /// </summary>
+        /// <value>The case-insensitive lookup key for the property.</value>
         public string Key
         {
             get { return _Key; }
@@ -69,6 +74,7 @@ namespace Hotcakes.Commerce
         ///     This is the information that you are saving to later retrieve.
         /// </summary>
         /// <remarks>You are not limited in the number of characters that you can use.</remarks>
+        /// <value>The stored property value.</value>
         public string Value
         {
             get { return _Value; }
@@ -79,6 +85,7 @@ namespace Hotcakes.Commerce
         ///     Allows you to retrieve the value of a custom property already converted into an integer.
         /// </summary>
         /// <returns>If unsuccessful, 0 is returned.</returns>
+        /// <remarks>Parsing uses the runtime integer format; an unparsable value, including an empty value, returns zero.</remarks>
         public int GetValueAsInt()
         {
             var result = 0;
@@ -93,6 +100,7 @@ namespace Hotcakes.Commerce
         ///     Allows you to assign an integer to the Value property without having to convert it.
         /// </summary>
         /// <param name="value">Integer - the value to assign to the Value property</param>
+        /// <remarks>The integer is converted with <see cref="int.ToString()"/> before assignment.</remarks>
         public void SetValueAsInt(int value)
         {
             Value = value.ToString();
@@ -121,6 +129,7 @@ namespace Hotcakes.Commerce
         ///     Allows you to populate the current custom property object using a CustomPropertyDTO instance
         /// </summary>
         /// <param name="dto">An instance of the custom property from the REST API</param>
+        /// <remarks>The DTO's developer identifier, key, and value replace the current values.</remarks>
         public void FromDto(CustomPropertyDTO dto)
         {
             DeveloperId = dto.DeveloperId;
@@ -132,6 +141,7 @@ namespace Hotcakes.Commerce
         ///     Allows you to convert the current custom property object to the DTO equivalent for use with the REST API
         /// </summary>
         /// <returns>A new instance of CustomPropertyDTO</returns>
+        /// <remarks>The returned DTO contains the current developer identifier, key, and value.</remarks>
         public CustomPropertyDTO ToDto()
         {
             var dto = new CustomPropertyDTO();

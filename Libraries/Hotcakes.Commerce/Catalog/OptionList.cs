@@ -30,17 +30,26 @@ using System.Text;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Gets or sets the option list.
+    /// </summary>
     public class OptionList : List<Option>
     {
         private const string UL_OPEN = "<ul class=\"lineitemoptions\">";
         private const string LINE_ITEM = "<li>{0}</li>";
         private const string UL_CLOSE = "</ul>";
 
+        /// <summary>
+        /// Performs the VariantsOnly catalog operation.
+        /// </summary>
         public List<Option> VariantsOnly()
         {
             return this.Where(y => y.IsVariant).ToList();
         }
 
+        /// <summary>
+        /// Performs the ContainsVariantSelection catalog operation.
+        /// </summary>
         public bool ContainsVariantSelection(OptionSelection selection)
         {
             // look through a list of options to see if it contains a valid option
@@ -62,6 +71,9 @@ namespace Hotcakes.Commerce.Catalog
             return result;
         }
 
+        /// <summary>
+        /// Performs the CartDescription catalog operation.
+        /// </summary>
         public string CartDescription(OptionSelectionList selections)
         {
             var sb = new StringBuilder();

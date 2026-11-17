@@ -33,12 +33,15 @@ namespace Hotcakes.Commerce.Urls
     /// Pass a value from this enumeration to <see cref="HccUrlBuilder.RouteHccUrl(HccRoute)"/>
     /// or to an implementation of <see cref="IHccUrlResolver"/> to generate a URL using the
     /// active storefront route configuration. The numeric values are part of the existing public
-    /// contract and must remain stable for persisted or serialized route values.
+    /// contract and must remain stable for persisted or serialized route values. Values 0 through
+    /// 10 are followed by a deliberate gap at 11; <see cref="Login"/> therefore retains the value
+    /// 12 and subsequent values must not be renumbered to fill the gap.
     /// </remarks>
     /// <seealso cref="HccRouteNames"/>
     public enum HccRoute
     {
         /// <summary>Represents an undefined or unavailable storefront destination.</summary>
+        /// <remarks>This value does not identify a concrete storefront route.</remarks>
         Undefined = 0,
 
         /// <summary>Represents the storefront category destination.</summary>
@@ -70,6 +73,8 @@ namespace Hotcakes.Commerce.Urls
 
         /// <summary>Represents the customer address-book destination.</summary>
         AddressBook = 10,
+
+        // Value 11 is intentionally unused for compatibility with the established route contract.
 
         /// <summary>Represents the customer login destination.</summary>
         Login = 12,

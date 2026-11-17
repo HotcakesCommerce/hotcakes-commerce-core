@@ -37,38 +37,59 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.Taxes.Providers.Avalara
 {
+    /// <summary>
+    /// Integrates Hotcakes tax-provider operations with Avalara AvaTax.
+    /// </summary>
+    /// <remarks>
+    /// The provider calculates sales orders, commits sales invoices, and cancels committed
+    /// documents through <see cref="HccAvaTax"/>. Diagnostic notes and event-log entries are
+    /// controlled by <see cref="AvalaraSettings.DebugMode"/>; exceptions from tax calculation
+    /// are logged and otherwise remain subject to the existing broad handling behavior.
+    /// </remarks>
     [Serializable]
     public class Avalara : ITaxProvider
     {
+        /// <summary>Gets the mutable Avalara settings used by this provider.</summary>
         public AvalaraSettings settings;
 
         private const string HCC_KEY = "hcc";
 
+        /// <summary>Initializes the provider with a new, empty <see cref="AvalaraSettings"/> instance.</summary>
         public Avalara()
         {
             settings = new AvalaraSettings();
         }
 
+        /// <summary>Gets the stable tax-provider identifier returned by <see cref="Id"/>.</summary>
         public string ProviderId
         {
             get { return Id(); }
         }
 
+        /// <summary>Gets the display name <c>Avalara</c>.</summary>
         public string ProviderName
         {
             get { return "Avalara"; }
         }
 
+        /// <summary>Gets the provider sort position, which is <c>700</c>.</summary>
         public int SortIndex
         {
             get { return 700; }
         }
 
+        /// <summary>Gets the settings through the common tax-provider settings abstraction.</summary>
         public TaxProviderSettings Basesettings
         {
             get { return settings; }
         }
 
+        /// <summary>
+        /// Tests the configured AvaTax SOAP connection.
+        /// </summary>
+        /// <param name="hccContext">The current commerce request context and store.</param>
+        /// <returns><see langword="true"/> when the AvaTax ping succeeds; otherwise <see langword="false"/>.</returns>
+        /// <remarks>Exceptions are caught and produce <see langword="false"/> without being rethrown.</remarks>
         public bool TestConnection(HccRequestContext hccContext)
         {
             try
@@ -83,6 +104,18 @@ namespace Hotcakes.Commerce.Taxes.Providers.Avalara
             return false;
         }
 
+        /// <summary>
+        /// Calculates and applies Avalara tax to an order.
+        /// </summary>
+        /// <param name="order">The order to update.</param>
+        /// <param name="hccContext">The current commerce request context and store.</param>
+        /// <remarks>
+        /// Existing included VAT is removed before calculation when VAT rules apply. Shipping
+        /// lines, customer exemption information, store origin, order destination, currency,
+        /// discounts, and tax schedules are mapped to AvaTax. A successful response is applied
+        /// back to the order; debug notes and event logging follow <see cref="AvalaraSettings.DebugMode"/>.
+        /// Any exception is logged through the existing event logger.
+        /// </remarks>
         public void GetTaxes(Order order, HccRequestContext hccContext)
         {
             try
@@ -184,6 +217,17 @@ namespace Hotcakes.Commerce.Taxes.Providers.Avalara
             }
         }
 
+        /// <summary>
+        /// Creates, posts, and commits the Avalara sales-invoice tax document for an order.
+        /// </summary>
+        /// <param name="order">The order whose tax document is to be committed.</param>
+        /// <param name="hccContext">The current commerce request context and store.</param>
+        /// <remarks>
+        /// The committed document code is stored in the order custom-property key identified by
+        /// <see cref="TaxProviderPropertyName"/>. Existing committed orders are not committed again.
+        /// The operation uses <see cref="DocumentType.SalesInvoice"/> and preserves the provider's
+        /// existing failure messages and debug logging behavior.
+        /// </remarks>
         public void CommitTaxes(Order order, HccRequestContext hccContext)
         {
             if (string.IsNullOrEmpty(order.CustomProperties.GetProperty(HCC_KEY, TaxProviderPropertyName)))
@@ -339,6 +383,14 @@ namespace Hotcakes.Commerce.Taxes.Providers.Avalara
             }
         }
 
+        /// <summary>Attempts to cancel the committed Avalara document associated with an order.</summary>
+        /// <param name="order">The order containing the committed document custom property.</param>
+        /// <param name="hccContext">The current commerce request context and store.</param>
+        /// <remarks>
+        /// Cancellation uses <see cref="DocumentType.SalesInvoice"/> and the Avalara
+        /// <c>DocDeleted</c> cancellation code. Failure messages are written to the event log,
+        /// while order notes are written only when debug mode is enabled.
+        /// </remarks>
         public void CancelTaxDocument(Order order, HccRequestContext hccContext)
         {
             if (!string.IsNullOrEmpty(order.CustomProperties.GetProperty(HCC_KEY, TaxProviderPropertyName)))
@@ -393,6 +445,8 @@ namespace Hotcakes.Commerce.Taxes.Providers.Avalara
             }
         }
 
+        /// <summary>Gets the stable identifier shared with the AvaTax service registration.</summary>
+        /// <returns><see cref="TaxProviders.AvataxServiceId"/>.</returns>
         public static string Id()
         {
             return TaxProviders.AvataxServiceId;
@@ -400,11 +454,15 @@ namespace Hotcakes.Commerce.Taxes.Providers.Avalara
 
         #region Custom Order properties
 
+        /// <summary>Gets the order custom-property name used to store a committed Avalara document code.</summary>
+        /// <remarks>The compatibility-sensitive value is <c>AvalaraTaxCommitted</c>.</remarks>
         public string TaxProviderPropertyName
         {
             get { return "AvalaraTaxCommitted"; }
         }
 
+        /// <summary>Gets the order custom-property name used to count repeated tax requests.</summary>
+        /// <remarks>The compatibility-sensitive value is <c>AvalaraGetTaxCount</c>.</remarks>
         public string TaxProviderGetTaxCountPropertyName
         {
             get { return "AvalaraGetTaxCount"; }

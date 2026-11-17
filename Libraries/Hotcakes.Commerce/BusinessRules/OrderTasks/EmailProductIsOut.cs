@@ -31,8 +31,21 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>
+    /// <summary>
+    /// Represents the <see cref="OrderTask"/> that performs the EmailProductIsOut workflow operation. The stable task identifier is <c>E2DB096A-2E8D-4757-A381-EA684375B4F2</c>. Execution and rollback preserve existing order workflow behavior, including persistence, <see cref="WorkflowMessage"/> errors, payment activity, email delivery, and rollback limitations.
+    /// </summary>
+    /// </summary>
     public class EmailProductIsOut : OrderTask
     {
+        /// <summary>
+        /// Sends the out-of-stock product email using the supplied application and order. Email failures are logged and are not returned as workflow failure.
+        /// </summary>
+        /// <param name="hccApp">The value used by this member.</param>
+        /// <param name="order">The value used by this member.</param>
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public void Execute(HotcakesApplication hccApp, Order order)
         {
             try
@@ -60,6 +73,13 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             }
         }
 
+        /// <summary>
+        /// Executes this order workflow task using the supplied <see cref="OrderTaskContext"/>. The return value controls whether the workflow continues; order changes, persistence, messages, payments, or email follow the existing implementation.
+        /// </summary>
+
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override bool Execute(OrderTaskContext context)
         {
             try
@@ -92,26 +112,53 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return true;
         }
 
+        /// <summary>
+        /// Attempts to roll back this task using the supplied <see cref="OrderTaskContext"/>. A successful return does not imply that external persistence, payment processing, account creation, or email delivery was reversed.
+        /// </summary>
+
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>
+        /// Gets this task's stable workflow identifier.
+        /// </summary>
+
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override string TaskId()
         {
             return "E2DB096A-2E8D-4757-A381-EA684375B4F2";
         }
 
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override string TaskName()
         {
             return "Email Product IS Out of Stock";
         }
 
+        /// <summary>
+        /// Gets the display name used for this workflow step.
+        /// </summary>
+
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override string StepName()
         {
             return "Email Product IS Out of Stock";
         }
 
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override Task Clone()
         {
             return new EmailProductIsOut();

@@ -38,6 +38,15 @@ using Hotcakes.Web.OpenXml;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    /// Exports order snapshots and their line items to an Excel workbook.
+    /// </summary>
+    /// <remarks>
+    /// The workbook contains a <c>Main</c> worksheet for order-level data and a <c>Line Items</c>
+    /// worksheet for item-level data. The writer preserves the established headings, including
+    /// compatibility spellings such as <c>User Suplied Price</c>, and appends product option
+    /// columns after the fixed line-item columns.
+    /// </remarks>
     [Serializable]
     public class OrdersExport
     {
@@ -49,6 +58,11 @@ namespace Hotcakes.Commerce.Orders
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes an order exporter with the application context used to load full orders,
+        /// line items, tax schedules, and product options.
+        /// </summary>
+        /// <param name="hccApp">The current Hotcakes application context.</param>
         public OrdersExport(HotcakesApplication hccApp)
         {
             _hccApp = hccApp;
@@ -56,6 +70,19 @@ namespace Hotcakes.Commerce.Orders
 
         #endregion
 
+        /// <summary>
+        /// Writes order-level and line-item data to an Excel attachment in the HTTP response.
+        /// </summary>
+        /// <param name="response">The response that receives the generated workbook.</param>
+        /// <param name="fileName">The attachment file name supplied to the response.</param>
+        /// <param name="orders">Order snapshots to export, in the supplied order.</param>
+        /// <remarks>
+        /// The main sheet writes the fixed order columns, including discount details serialized by
+        /// <see cref="DiscountDetail.ListToXml"/>. The line-items sheet writes one row per item,
+        /// then adds dynamic option columns beginning at column Y. Currency values use the current
+        /// culture's currency format; the order date uses <see cref="DateTime.ToString()"/> with
+        /// no explicit format or culture.
+        /// </remarks>
         public void ExportToExcel(HttpResponse response, string fileName, List<OrderSnapshot> orders)
         {
             var writer = new ExcelWriter("Main");
@@ -75,10 +102,15 @@ namespace Hotcakes.Commerce.Orders
 
         internal class BaseSheetWriter
         {
+            /// <summary>Gets or sets the first data row for the current worksheet.</summary>
             protected int _firstRow;
+            /// <summary>Provides the application context used to resolve related commerce data.</summary>
             protected HotcakesApplication _hccApp;
+            /// <summary>Style applied to the worksheet header.</summary>
             protected SpreadsheetStyle _headerStyle;
+            /// <summary>Style applied to data rows.</summary>
             protected SpreadsheetStyle _rowStyle;
+            /// <summary>The workbook writer used by this sheet writer.</summary>
             protected ExcelWriter _writer;
 
             private const string YES = "YES";
@@ -93,6 +125,10 @@ namespace Hotcakes.Commerce.Orders
                 _headerStyle.IsBold = true;
             }
 
+            /// <summary>
+            /// Writes the header and invokes the order-row extension point for each snapshot.
+            /// </summary>
+            /// <param name="orders">Order snapshots to write.</param>
             public void Write(List<OrderSnapshot> orders)
             {
                 WriteHeader();
@@ -104,20 +140,39 @@ namespace Hotcakes.Commerce.Orders
                 }
             }
 
+            /// <summary>
+            /// Writes or advances one order row. Derived writers override this extension point and
+            /// return the next available row index.
+            /// </summary>
+            /// <param name="p">The order snapshot being written.</param>
+            /// <param name="rowIndex">The current worksheet row.</param>
+            /// <returns>The row index for the next order.</returns>
             protected virtual int WriteOrderRow(OrderSnapshot p, int rowIndex)
             {
                 return ++rowIndex;
             }
 
+            /// <summary>
+            /// Writes the worksheet header. The base implementation intentionally emits no
+            /// headings; concrete sheet writers provide them.
+            /// </summary>
             protected virtual void WriteHeader()
             {
             }
 
+            /// <summary>Converts a Boolean export value to the compatibility strings YES or NO.</summary>
+            /// <param name="val">The value to convert.</param>
+            /// <returns><c>YES</c> when <paramref name="val"/> is true; otherwise <c>NO</c>.</returns>
             protected string GetYesNo(bool val)
             {
                 return val ? YES : NO;
             }
 
+            /// <summary>
+            /// Formats a monetary value with the current culture's currency format.
+            /// </summary>
+            /// <param name="val">The monetary value.</param>
+            /// <returns>The culture-sensitive currency string used by the workbook.</returns>
             protected string GetCurrency(decimal val)
             {
                 return val.ToString("C");
@@ -132,7 +187,9 @@ namespace Hotcakes.Commerce.Orders
             }
 
             /// <summary>
-            ///     Creates the header row for the XLS to define the columns the spreadsheet will have.
+            /// Creates the main-sheet header row. The headings and order are part of the export
+            /// format and therefore intentionally mirror the existing output, including both
+            /// shipping totals and adjusted shipping totals.
             /// </summary>
             protected override void WriteHeader()
             {
@@ -196,9 +253,10 @@ namespace Hotcakes.Commerce.Orders
             }
 
             /// <summary>
-            ///     Writes a row in the spreadsheet for each order found in the search
+            /// Writes one main-sheet row for an order snapshot, resolving the full order to obtain
+            /// discount detail XML and adjusted shipping totals.
             /// </summary>
-            /// <param name="o">OrderSnapshop - a truncated version of the order record used to write the row.</param>
+            /// <param name="o">The truncated order snapshot used to write the row.</param>
             /// <param name="rowIndex">The position of the row in the spreadsheet</param>
             /// <returns>An integer value indicating the next row index</returns>
             protected override int WriteOrderRow(OrderSnapshot o, int rowIndex)
@@ -273,6 +331,10 @@ namespace Hotcakes.Commerce.Orders
             {
             }
 
+            /// <summary>
+            /// Creates the fixed line-item headings on the <c>Line Items</c> worksheet. Product
+            /// option headings are added later by <see cref="WriteOptions"/>.
+            /// </summary>
             protected override void WriteHeader()
             {
                 _writer.AddWorksheet("Line Items");
@@ -309,6 +371,13 @@ namespace Hotcakes.Commerce.Orders
                 _firstRow = 2;
             }
 
+            /// <summary>
+            /// Writes one row for each line item belonging to the supplied order snapshot and
+            /// records any product-option columns needed by those rows.
+            /// </summary>
+            /// <param name="o">The order snapshot whose line items are exported.</param>
+            /// <param name="rowIndex">The first row available for the order's items.</param>
+            /// <returns>The next available worksheet row after all items.</returns>
             protected override int WriteOrderRow(OrderSnapshot o, int rowIndex)
             {
                 var items = _hccApp.OrderServices.Orders.FindLineItemsForOrders(new List<OrderSnapshot> {o});
@@ -351,6 +420,15 @@ namespace Hotcakes.Commerce.Orders
                 return rowIndex;
             }
 
+            /// <summary>
+            /// Writes dynamically discovered product-option columns after the fixed columns.
+            /// </summary>
+            /// <remarks>
+            /// Options are collected while line items are written. Columns start at Y and advance
+            /// alphabetically; values retain the row index recorded during item processing. The
+            /// implementation's existing selection behavior is preserved, including its use of
+            /// the first selection value for each option value row.
+            /// </remarks>
             public void WriteOptions()
             {
                 var column = "Y";
@@ -459,13 +537,17 @@ namespace Hotcakes.Commerce.Orders
 
             internal class OptionValue
             {
+                /// <summary>Gets or sets the worksheet row receiving this option value.</summary>
                 public int RowIndex { get; set; }
+                /// <summary>Gets or sets the text written to the option cell.</summary>
                 public string Value { get; set; }
             }
 
             internal class Option
             {
+                /// <summary>Gets or sets the trimmed option heading.</summary>
                 public string OptionName { get; set; }
+                /// <summary>Gets or sets the row values written under the option heading.</summary>
                 public List<OptionValue> RowValues { get; set; }
             }
         }

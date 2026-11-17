@@ -28,11 +28,20 @@ using System;
 
 namespace Hotcakes.Commerce.Payment.Methods
 {
+    /// <summary>
+    /// Identifies the hash algorithm used by Ogone request and response
+    /// signature calculations.
+    /// </summary>
     [Serializable]
     public enum OgoneHashAlgorithm
     {
+        /// <summary>Uses SHA-1 for the Ogone hash.</summary>
         Sha1,
+
+        /// <summary>Uses SHA-256 for the Ogone hash.</summary>
         Sha256,
+
+        /// <summary>Uses SHA-512 for the Ogone hash.</summary>
         Sha512
     }
 }

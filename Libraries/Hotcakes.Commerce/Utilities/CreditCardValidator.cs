@@ -29,6 +29,13 @@ using System.Collections.ObjectModel;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Validates supported payment-card numbers by card type, length, prefix, and the Mod-10 checksum.
+    /// </summary>
+    /// <remarks>
+    /// Validation removes non-digit characters before checking the number. The validator stores the card name and
+    /// validation messages from the most recent call to <see cref="ValidateCard(string, string)"/>.
+    /// </remarks>
     public class CreditCardValidator
     {
         private string _cardName = "unknown";
@@ -36,8 +43,13 @@ namespace Hotcakes.Commerce.Utilities
         private Collection<string> _errorMessages = new Collection<string>();
 
         /// <summary>
-        ///     Holds the last error message reported by the validator
+        /// Gets or sets the validation messages produced by the most recent card validation.
         /// </summary>
+        /// <value>A mutable collection of human-readable validation messages.</value>
+        /// <remarks>
+        /// <see cref="ValidateCard(string, string)"/> clears this collection before adding messages. Assigning a
+        /// different collection changes the collection that subsequent validation calls clear and populate.
+        /// </remarks>
         public Collection<string> ErrorMessages
         {
             get { return _errorMessages; }
@@ -45,8 +57,9 @@ namespace Hotcakes.Commerce.Utilities
         }
 
         /// <summary>
-        ///     Holds the English name of the card type. For example: Visa
+        /// Gets or sets the English name associated with the most recently selected card type.
         /// </summary>
+        /// <value>The card name, such as <c>Visa</c>; an unknown card type leaves the value unchanged by validation.</value>
         public string CardName
         {
             get { return _cardName; }
@@ -54,10 +67,13 @@ namespace Hotcakes.Commerce.Utilities
         }
 
         /// <summary>
-        ///     Removes all non-digit characters from a credit card string
+        /// Removes all non-digit characters from a card-number string.
         /// </summary>
-        /// <param name="rawCardNumber">input string containing user input</param>
-        /// <returns>A string containing only the digit characters of the credit card number</returns>
+        /// <param name="rawCardNumber">The input string containing the card number and any formatting characters.</param>
+        /// <returns>A string containing only the digit characters from <paramref name="rawCardNumber"/>.</returns>
+        /// <remarks>
+        /// The method does not validate the resulting number and expects a non-<see langword="null"/> input.
+        /// </remarks>
         public static string CleanCardNumber(string rawCardNumber)
         {
             var result = string.Empty;
@@ -77,14 +93,22 @@ namespace Hotcakes.Commerce.Utilities
         }
 
         /// <summary>
-        ///     Validates that a given card number matches the format and mod10 formula for a given type
+        /// Validates a card number against the supported format and Mod-10 checksum for a card type.
         /// </summary>
-        /// <param name="rawCardNumber">Card number to check</param>
+        /// <param name="rawCardNumber">The card number to check; non-digit formatting characters are ignored.</param>
         /// <param name="cardType">
-        ///     Type of card to validate against (A = American Express, V = Visa, D = Discover, M = MasterCard,
-        ///     J = Japanese Credit Bureau, C = Diner's Club)
+        /// The card type code: <c>A</c> for American Express, <c>V</c> for Visa, <c>D</c> for Discover,
+        /// <c>M</c> for MasterCard, <c>J</c> for JCB, or <c>C</c> for Diner's Club. Several additional card names
+        /// (<c>SOLO</c>, <c>SWITCH</c>, <c>STAR</c>, <c>MAESTRO</c>, <c>VISADELTA</c>, and <c>VISAELECTRON</c>)
+        /// are accepted without number validation.
         /// </param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> when the card type is recognized and its checks pass, or when the type is
+        /// intentionally treated as unvalidated; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// Before validation, <see cref="ErrorMessages"/> is cleared and <see cref="CardName"/> is updated. Failed
+        /// checks append descriptive messages to <see cref="ErrorMessages"/>. An unrecognized card type is accepted
+        /// without validation.
+        /// </remarks>
         public bool ValidateCard(string rawCardNumber, string cardType)
         {
             var result = true;

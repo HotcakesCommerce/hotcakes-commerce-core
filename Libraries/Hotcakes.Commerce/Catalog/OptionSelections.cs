@@ -34,8 +34,14 @@ using System.Xml.XPath;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Gets or sets the option selections.
+    /// </summary>
     public class OptionSelections
     {
+        /// <summary>
+        /// Provides the catalog type or contract represented by this declaration.
+        /// </summary>
         public OptionSelections()
         {
             OptionSelectionList = new OptionSelectionList();
@@ -52,6 +58,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         public OptionSelectionList OptionSelectionList { get; set; }
 
+        /// <summary>
+        /// Performs the DeserializeFromXml catalog operation.
+        /// </summary>
         public void DeserializeFromXml(string xml)
         {
             if (string.IsNullOrEmpty(xml))
@@ -110,6 +119,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Performs the SerializeToXml catalog operation.
+        /// </summary>
         public string SerializeToXml()
         {
             using (var sw = new StringWriter())
@@ -148,12 +160,18 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Performs the Clear catalog operation.
+        /// </summary>
         public void Clear()
         {
             OptionSelectionList.Clear();
             BundleSelectionList.Clear();
         }
 
+        /// <summary>
+        /// Performs the HasEmptySelection catalog operation.
+        /// </summary>
         public bool HasEmptySelection(Product product)
         {
             foreach (var os in OptionSelectionList)
@@ -194,6 +212,9 @@ namespace Hotcakes.Commerce.Catalog
             return false;
         }
 
+        /// <summary>
+        /// Performs the GetSelections catalog operation.
+        /// </summary>
         public OptionSelectionList GetSelections(long bundledProductId)
         {
             if (BundleSelectionList.Keys.Contains(bundledProductId))
@@ -203,6 +224,9 @@ namespace Hotcakes.Commerce.Catalog
             return new OptionSelectionList();
         }
 
+        /// <summary>
+        /// Performs the AddBundleSelections catalog operation.
+        /// </summary>
         public void AddBundleSelections(long bundledProductId, OptionSelection option)
         {
             if (!BundleSelectionList.Keys.Contains(bundledProductId))
@@ -218,6 +242,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="other">The other option selections</param>
         /// <returns></returns>
+        /// <summary>
+        /// Performs the Equals catalog operation.
+        /// </summary>
         public bool Equals(OptionSelections other)
         {
             var areEqual = OptionSelectionList.Equals(other.OptionSelectionList);

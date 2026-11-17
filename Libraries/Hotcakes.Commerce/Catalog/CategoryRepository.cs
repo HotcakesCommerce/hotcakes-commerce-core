@@ -45,6 +45,10 @@ namespace Hotcakes.Commerce.Catalog
     {
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="CategoryRepository" />.
+        /// </summary>
+        /// <param name="c">Value used to initialize the instance.</param>
         public CategoryRepository(HccRequestContext c)
             : base(c)
         {
@@ -398,16 +402,24 @@ namespace Hotcakes.Commerce.Catalog
 
         #region Implementation
 
+        /// <summary>Catalog API member.</summary>
         protected override Expression<Func<hcc_Category, Guid>> ItemKeyExp
         {
             get { return c => c.bvin; }
         }
 
+        /// <summary>Catalog API member.</summary>
         protected override Expression<Func<hcc_CategoryTranslation, Guid>> ItemTranslationKeyExp
         {
             get { return ct => ct.CategoryId; }
         }
 
+        /// <summary>
+        /// Performs the <c>CopyItemToModel</c> catalog operation.
+        /// </summary>
+        /// <param name="data">Input used by the operation.</param>
+        /// <param name="model">Input used by the operation.</param>
+        /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
         protected override void CopyItemToModel(hcc_Category data, Category model)
         {
             model.BannerImageUrl = data.BannerImageURL;
@@ -431,6 +443,12 @@ namespace Hotcakes.Commerce.Catalog
             model.TemplateName = data.TemplateName;
         }
 
+        /// <summary>
+        /// Performs the <c>CopyTransToModel</c> catalog operation.
+        /// </summary>
+        /// <param name="data">Input used by the operation.</param>
+        /// <param name="model">Input used by the operation.</param>
+        /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
         protected override void CopyTransToModel(hcc_CategoryTranslation data, Category model)
         {
             model.Name = data.Name;
@@ -470,6 +488,12 @@ namespace Hotcakes.Commerce.Catalog
             data.Item.TemplateName = model.TemplateName;
         }
 
+        /// <summary>
+        /// Performs the <c>CopyModelToTrans</c> catalog operation.
+        /// </summary>
+        /// <param name="data">Input used by the operation.</param>
+        /// <param name="model">Input used by the operation.</param>
+        /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
         protected override void CopyModelToTrans(JoinedItem<hcc_Category, hcc_CategoryTranslation> data, Category model)
         {
             data.ItemTranslation.CategoryId = data.Item.bvin;
@@ -482,6 +506,12 @@ namespace Hotcakes.Commerce.Catalog
             data.ItemTranslation.MetaTitle = model.MetaTitle;
         }
 
+        /// <summary>
+        /// Performs the <c>ListPocoSnapshot</c> catalog operation.
+        /// </summary>
+        /// <param name="items">Input used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
+        /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
         protected virtual List<CategorySnapshot> ListPocoSnapshot(
             IEnumerable<JoinedItem<hcc_Category, hcc_CategoryTranslation>> items)
         {
@@ -519,6 +549,12 @@ namespace Hotcakes.Commerce.Catalog
             return result;
         }
 
+        /// <summary>
+        /// Performs the <c>FindMaxSort</c> catalog operation.
+        /// </summary>
+        /// <param name="parentId">Input used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
+        /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
         public int FindMaxSort(string parentId)
         {
             var storeId = Context.CurrentStore.Id;
@@ -546,18 +582,21 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>Catalog API member.</summary>
         protected virtual IQueryable<JoinedItem<hcc_Category, hcc_CategoryTranslation>> GetSecureQuery(
             IRepoStrategy<hcc_Category> strategy)
         {
             return GetJoinedQuery(strategy);
         }
 
+        /// <summary>Catalog API member.</summary>
         protected virtual IQueryable<JoinedItem<hcc_Category, hcc_CategoryTranslation>> GetSecureQueryForCurrentStore(
             IRepoStrategy<hcc_Category> strategy)
         {
             return GetSecureQuery(strategy).Where(i => i.Item.StoreId == Context.CurrentStore.Id);
         }
 
+        /// <summary>Catalog API member.</summary>
         protected IQueryable<JoinedItem<hcc_Category, hcc_CategoryTranslation>> GetSecureQueryForCurrentStore(
             IRepoStrategy<hcc_Category> strategy, string parentId)
         {

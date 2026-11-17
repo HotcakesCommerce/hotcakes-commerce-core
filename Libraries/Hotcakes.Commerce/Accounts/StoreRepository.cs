@@ -33,11 +33,15 @@ using Hotcakes.Commerce.Data.EF;
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Represents StoreRepository data and behavior within the Hotcakes Commerce account and store boundary.</summary>
     [Serializable]
     public class StoreRepository : HccSimpleRepoBase<hcc_Stores, Store>
     {
         private readonly StoreSettingsRepository settingsRepository;
 
+        /// <summary>Performs the StoreRepository operation.</summary>
+        /// <param name="context">The context value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public StoreRepository(HccRequestContext context)
             : base(context)
         {
@@ -67,17 +71,26 @@ namespace Hotcakes.Commerce.Accounts
             settingsRepository.MergeList(model.Id, model.Settings.AllSettings);
         }
 
+        /// <summary>Performs the FindById operation.</summary>
+        /// <param name="id">The id value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public Store FindById(long id)
         {
             return FindByIdWithCache(id);
         }
 
+        /// <summary>Performs the FindByIdWithCache operation.</summary>
+        /// <param name="id">The id value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public Store FindByIdWithCache(long id)
         {
             return CacheManager.GetStore(id, Context.MainContentCulture,
                 () => { return FindFirstPoco(y => y.Id == id); });
         }
 
+        /// <summary>Performs the FindByStoreGuid operation.</summary>
+        /// <param name="guid">The guid value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public Store FindByStoreGuid(Guid guid)
         {
             var storeId = CacheManager.GetStoreIdByGuid(guid, () =>
@@ -107,6 +120,9 @@ namespace Hotcakes.Commerce.Accounts
             }
         }
 
+        /// <summary>Performs the FindStoreIdByCustomUrl operation.</summary>
+        /// <param name="hostName">The hostName value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public long FindStoreIdByCustomUrl(string hostName)
         {
             return (long)CacheManager.GetStoreIdByHostName(hostName, () =>
@@ -122,12 +138,18 @@ namespace Hotcakes.Commerce.Accounts
             });
         }
 
+        /// <summary>Performs the Update operation.</summary>
+        /// <param name="s">The s value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public bool Update(Store s)
         {
             CacheManager.ClearStoreById(s.Id, Context.MainContentCulture);
             return Update(s, y => y.Id == s.Id);
         }
 
+        /// <summary>Performs the Delete operation.</summary>
+        /// <param name="id">The id value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public bool Delete(long id)
         {
             CacheManager.ClearStoreById(id);
@@ -135,11 +157,16 @@ namespace Hotcakes.Commerce.Accounts
         }
 
 
+        /// <summary>Performs the ListAllForSuper operation.</summary>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public List<Store> ListAllForSuper()
         {
             return FindListPoco(q => { return q.OrderByDescending(y => y.DateCreated); });
         }
 
+        /// <summary>Performs the FindStoresCreatedAfterDateForSuper operation.</summary>
+        /// <param name="cutOffDateUtc">The cutOffDateUtc value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public List<Store> FindStoresCreatedAfterDateForSuper(DateTime cutOffDateUtc)
         {
             return
@@ -147,6 +174,8 @@ namespace Hotcakes.Commerce.Accounts
                     q => { return q.Where(y => y.DateCreated >= cutOffDateUtc).OrderByDescending(y => y.DateCreated); });
         }
 
+        /// <summary>Performs the FindDomainSnapshotsByIds operation.</summary>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public List<StoreDomainSnapshot> FindDomainSnapshotsByIds(List<long> ids)
         {
             var result = new List<StoreDomainSnapshot>();
@@ -168,6 +197,9 @@ namespace Hotcakes.Commerce.Accounts
             return result;
         }
 
+        /// <summary>Performs the GetLastOrderNumber operation.</summary>
+        /// <param name="storeId">The storeId value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public int GetLastOrderNumber(long storeId)
         {
             using (var s = CreateReadStrategy())
@@ -179,6 +211,9 @@ namespace Hotcakes.Commerce.Accounts
             }
         }
 
+        /// <summary>Performs the SetLastOrderNumber operation.</summary>
+        /// <param name="storeId">The storeId value used by the operation.</param>
+        /// <param name="lastOrderNumber">The lastOrderNumber value used by the operation.</param>
         public void SetLastOrderNumber(long storeId, int lastOrderNumber)
         {
             using (var s = CreateStrategy())

@@ -26,9 +26,18 @@
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Represents the catalog enum <see cref="CategoryFacetDisplayMode" /> and its associated behavior.
+    /// </summary>
     public enum CategoryFacetDisplayMode
     {
+    /// <summary>
+    /// Serialized catalog value <c>Single = 0</c>.
+    /// </summary>
         Single = 0,
+    /// <summary>
+    /// Serialized catalog value <c>Multiple = 1</c>.
+    /// </summary>
         Multiple = 1
     }
 }

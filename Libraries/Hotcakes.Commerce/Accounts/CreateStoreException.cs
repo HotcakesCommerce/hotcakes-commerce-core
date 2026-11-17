@@ -28,14 +28,22 @@ using System;
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Represents CreateStoreException data and behavior within the Hotcakes Commerce account and store boundary.</summary>
     [Serializable]
     public class CreateStoreException : Exception
     {
+        /// <summary>Performs the CreateStoreException operation.</summary>
+        /// <param name="message">The message value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public CreateStoreException(string message)
             : base(message)
         {
         }
 
+        /// <summary>Performs the CreateStoreException operation.</summary>
+        /// <param name="reason">The reason value used by the operation.</param>
+        /// <param name="inner">The inner value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public CreateStoreException(string reason, Exception inner)
             : base(reason, inner)
         {

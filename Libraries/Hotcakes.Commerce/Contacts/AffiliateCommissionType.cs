@@ -26,10 +26,14 @@
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>Specifies how an affiliate commission is calculated.</summary>
     public enum AffiliateCommissionType
     {
+        /// <summary>No commission calculation type is selected.</summary>
         None = 0,
+        /// <summary>Calculates commission as a percentage.</summary>
         PercentageCommission = 1,
+        /// <summary>Calculates commission as a fixed amount.</summary>
         FlatRateCommission = 2
     }
 }

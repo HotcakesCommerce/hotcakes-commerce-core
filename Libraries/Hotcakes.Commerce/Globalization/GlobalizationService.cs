@@ -26,8 +26,21 @@
 
 namespace Hotcakes.Commerce.Globalization
 {
+    /// <summary>
+    /// Provides the globalization repositories used within a commerce request context.
+    /// </summary>
+    /// <remarks>
+    /// The service composes <see cref="CountryRepository"/> and <see cref="RegionRepository"/>
+    /// instances through the established <see cref="Factory.CreateRepo{T}(HccRequestContext)"/>
+    /// mechanism. Repository creation therefore retains the context and store scoping supplied
+    /// to the base <see cref="HccServiceBase"/>.
+    /// </remarks>
     public class GlobalizationService : HccServiceBase
     {
+        /// <summary>
+        /// Initializes a globalization service for the specified commerce request context.
+        /// </summary>
+        /// <param name="context">The request context used to compose the repositories.</param>
         public GlobalizationService(HccRequestContext context)
             : base(context)
         {
@@ -35,7 +48,16 @@ namespace Hotcakes.Commerce.Globalization
             Regions = Factory.CreateRepo<RegionRepository>(Context);
         }
 
+        /// <summary>
+        /// Gets the country repository composed for this service's request context.
+        /// </summary>
+        /// <value>The context-bound country repository.</value>
         public CountryRepository Countries { get; protected set; }
+
+        /// <summary>
+        /// Gets the region repository composed for this service's request context.
+        /// </summary>
+        /// <value>The context-bound region repository.</value>
         public RegionRepository Regions { get; protected set; }
     }
 }

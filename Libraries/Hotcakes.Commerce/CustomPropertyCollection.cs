@@ -38,11 +38,11 @@ namespace Hotcakes.Commerce
     [Serializable]
     public class CustomPropertyCollection : Collection<CustomProperty>
     {
+        /// <summary>The compatibility-sensitive developer identifier used for built-in HCC properties.</summary>
         private const string HCC_KEY = "hcc";
 
-        /// <summary>
-        ///     If true, there is 1 reward point issued.
-        /// </summary>
+        /// <summary>Gets or sets whether one reward point was issued.</summary>
+        /// <remarks>This internal flag is serialized through the exact developer/key pair <c>hcc</c>/<c>rewardspointsissued</c>; <c>true</c> stores <c>1</c>, while <c>false</c> removes the value by storing <c>null</c>.</remarks>
         internal bool HccRewardsPointsIssued
         {
             get { return GetProperty(HCC_KEY, "rewardspointsissued") == "1"; }
@@ -53,7 +53,8 @@ namespace Hotcakes.Commerce
         ///     Sets or gets the custom property using the specified key for HCC custom properties only.
         /// </summary>
         /// <param name="val">The value to read/write</param>
-        /// <returns>CustomProperty</returns>
+        /// <returns>The matching HCC property, or <c>null</c> when no case-insensitive key match exists.</returns>
+        /// <remarks>The setter updates only an existing HCC property; it does not add a missing property and assigns only its value.</remarks>
         public CustomProperty this[string val]
         {
             get
@@ -93,9 +94,8 @@ namespace Hotcakes.Commerce
         /// </value>
         /// <param name="val">The value to read/write</param>
         /// <param name="developerId">The developer identifier.</param>
-        /// <returns>
-        ///     CustomProperty
-        /// </returns>
+        /// <returns>The matching property, or <c>null</c> when no case-insensitive key and developer match exists.</returns>
+        /// <remarks>The setter updates only an existing matching property; it does not add a missing property and assigns only its value.</remarks>
         public CustomProperty this[string val, string developerId]
         {
             get
@@ -157,7 +157,7 @@ namespace Hotcakes.Commerce
         ///     integrations.
         /// </param>
         /// <param name="propertyKey">The unique ID of the custom property used to look up the value.</param>
-        /// <returns>Boolean - if true, a custom property was found matching both the developer ID and the property key.</returns>
+        /// <returns><c>true</c> when a case-insensitive, trimmed developer/key pair exists; otherwise <c>false</c>.</returns>
         public bool Exists(string devId, string propertyKey)
         {
             var result = false;
@@ -184,6 +184,7 @@ namespace Hotcakes.Commerce
         /// </param>
         /// <param name="key">The unique ID of the custom property used to look up the value.</param>
         /// <param name="value">The value you wish to save for use later.</param>
+        /// <remarks>Matching is case-insensitive after trimming both identifiers. A new property is added when no match exists.</remarks>
         public void SetProperty(string devId, string key, string value)
         {
             var found = false;
@@ -216,6 +217,7 @@ namespace Hotcakes.Commerce
         /// </param>
         /// <param name="key">The unique ID of the custom property used to look up the value.</param>
         /// <param name="value">The value you wish to save for use later.</param>
+        /// <remarks>The integer is converted to a string and delegated to the string overload.</remarks>
         public void SetProperty(string devId, string key, int value)
         {
             SetProperty(devId, key, value.ToString());
@@ -229,7 +231,8 @@ namespace Hotcakes.Commerce
         ///     integrations.
         /// </param>
         /// <param name="key">The unique ID of the custom property used to look up the value.</param>
-        /// <returns>String - if found, a string version of the custom property value will be returned.</returns>
+        /// <returns>The matching value, or <see cref="string.Empty"/> when no matching property exists.</returns>
+        /// <remarks>Matching is case-insensitive after trimming both identifiers.</remarks>
         public string GetProperty(string devId, string key)
         {
             var result = string.Empty;
@@ -257,7 +260,8 @@ namespace Hotcakes.Commerce
         ///     integrations.
         /// </param>
         /// <param name="key">The unique ID of the custom property used to look up the value.</param>
-        /// <returns>Integer - if found, the integer version of the custom property value will be returned.</returns>
+        /// <returns>The parsed integer value, or zero when no match exists or the value is not an integer.</returns>
+        /// <remarks>Matching is case-insensitive after trimming both identifiers.</remarks>
         public int GetPropertyAsInt(string devId, string key)
         {
             var result = 0;
@@ -282,7 +286,8 @@ namespace Hotcakes.Commerce
         /// </summary>
         /// <param name="devId">The developer ID that created and is managing the custom property.</param>
         /// <param name="key">The unique ID of the custom property used to delete the custom property from the store.</param>
-        /// <returns>Boolean - if true, the custom property was found and successfully deleted.</returns>
+        /// <returns><c>true</c> when a matching property was removed; otherwise <c>false</c>.</returns>
+        /// <remarks>Matching is case-insensitive after trimming both identifiers.</remarks>
         public bool Remove(string devId, string key)
         {
             var result = false;
@@ -305,7 +310,8 @@ namespace Hotcakes.Commerce
         /// <summary>
         ///     Parses and returns the current custom property collection object as an XML serialized string.
         /// </summary>
-        /// <returns>String - an XML representation of the current custom property collection object</returns>
+        /// <returns>An XML representation of this collection, or <see cref="string.Empty"/> when serialization fails.</returns>
+        /// <remarks>Serialization uses <see cref="XmlSerializer"/> for this collection type, preserving its established XML shape. Failures are logged and do not escape.</remarks>
         public string ToXml()
         {
             var result = string.Empty;
@@ -330,7 +336,8 @@ namespace Hotcakes.Commerce
         ///     Accepts an XML serialized version of a custom property collection and returns the deserialized version of the XML.
         /// </summary>
         /// <param name="data">The XML representation of a custom property collection.</param>
-        /// <returns>A deserialized version of a custom property collection object.</returns>
+        /// <returns>The deserialized collection, or a new empty collection when deserialization fails.</returns>
+        /// <remarks>Failures are logged and do not escape; malformed or incompatible XML therefore produces an empty collection.</remarks>
         public static CustomPropertyCollection FromXml(string data)
         {
             var result = new CustomPropertyCollection();

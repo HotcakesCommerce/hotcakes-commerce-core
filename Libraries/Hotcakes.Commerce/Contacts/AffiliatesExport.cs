@@ -32,8 +32,14 @@ using Hotcakes.Web.OpenXml;
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>Exports affiliate report projections to an Excel response.</summary>
     public class AffiliatesExport
     {
+        /// <summary>Writes affiliate report rows and summary columns to an Excel workbook response.</summary>
+        /// <param name="response">The HTTP response receiving the generated workbook.</param>
+        /// <param name="fileName">The file name supplied when writing the response.</param>
+        /// <param name="affiliates">The report rows to export.</param>
+        /// <remarks>The export includes sales, orders, commission owed, and signups; it does not include every report property.</remarks>
         public void ExportToExcel(HttpResponse response, string fileName, List<AffiliateReportData> affiliates)
         {
             var writer = new ExcelWriter("Main");
@@ -47,9 +53,13 @@ namespace Hotcakes.Commerce.Contacts
 
         internal class MainSheetWriter
         {
+            /// <summary>Stores the first data row index after the header.</summary>
             protected int _firstRow;
+            /// <summary>Stores the style applied to the header row.</summary>
             protected SpreadsheetStyle _headerStyle;
+            /// <summary>Stores the style applied to data rows.</summary>
             protected SpreadsheetStyle _rowStyle;
+            /// <summary>Stores the workbook writer used by the sheet.</summary>
             protected ExcelWriter _writer;
 
             internal MainSheetWriter(ExcelWriter writer)
@@ -114,6 +124,7 @@ namespace Hotcakes.Commerce.Contacts
                 return ++rowIndex;
             }
 
+            /// <summary>Formats a numeric value using the current culture's currency format.</summary>
             protected string GetCurrency(decimal val)
             {
                 return val.ToString("C");

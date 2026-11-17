@@ -36,6 +36,11 @@ namespace Hotcakes.Commerce.Marketing
     /// </summary>
     public class PromotionContext
     {
+        /// <summary>Initializes a context carrying the request, promotion mode, and promotion identifier.</summary>
+        /// <param name="requestContext">The non-null commerce request context.</param>
+        /// <param name="mode">The promotion mode being evaluated.</param>
+        /// <param name="promotionId">The promotion identifier used when recording discounts.</param>
+        /// <exception cref="ArgumentNullException">The request context is null.</exception>
         public PromotionContext(HccRequestContext requestContext, PromotionType mode, long promotionId)
         {
             if (requestContext == null) throw new ArgumentNullException(nameof(requestContext));
@@ -48,21 +53,33 @@ namespace Hotcakes.Commerce.Marketing
             PromotionId = promotionId;
         }
 
+        /// <summary>Gets or sets the promotion identifier used by actions and discount details.</summary>
         public long PromotionId { get; set; }
+        /// <summary>Gets or sets the promotion mode being evaluated.</summary>
         public PromotionType Mode { get; set; }
+        /// <summary>Gets or sets the commerce request context.</summary>
         public HccRequestContext RequestContext { get; set; }
+        /// <summary>Gets or sets the order being evaluated, when applicable.</summary>
         public Order Order { get; set; }
+        /// <summary>Gets or sets the product being evaluated, when applicable.</summary>
         public Product Product { get; set; }
+        /// <summary>Gets or sets the user-specific price being evaluated.</summary>
         public UserSpecificPrice UserPrice { get; set; }
+        /// <summary>Gets or sets the customer-facing promotion description supplied to actions.</summary>
         public string CustomerDescription { get; set; }
+        /// <summary>Gets or sets the customer account associated with the evaluation.</summary>
         public CustomerAccount CurrentCustomer { get; set; }
+        /// <summary>Gets or sets the line currently being processed by a line-item evaluation.</summary>
         public LineItem CurrentlyProcessingLineItem { get; set; }
 
-        // TODO: Review this property and ensure it gets implemented properly
+        /// <summary>Gets or sets whether another offer has already been applied; consumers should preserve the current behavior.</summary>
         public bool OtherOffersApplied { get; set; }
 
+        /// <summary>Gets or sets the current shipping method identifier.</summary>
         public string CurrentShippingMethodId { get; set; }
+        /// <summary>Gets or sets the mutable shipping rate after actions adjust it.</summary>
         public decimal AdjustedShippingRate { get; set; }
+        /// <summary>Creates an application facade for the current <see cref="RequestContext"/>.</summary>
         public HotcakesApplication HccApp
         {
             get { return new HotcakesApplication(RequestContext); }

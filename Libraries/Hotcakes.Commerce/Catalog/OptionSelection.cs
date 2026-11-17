@@ -41,10 +41,16 @@ namespace Hotcakes.Commerce.Catalog
         private string _OptionBvin = string.Empty;
         private string _SelectionData = string.Empty;
 
+        /// <summary>
+        /// Provides the catalog type or contract represented by this declaration.
+        /// </summary>
         public OptionSelection()
         {
         }
 
+        /// <summary>
+        /// Provides the catalog type or contract represented by this declaration.
+        /// </summary>
         public OptionSelection(string optionBvin, string selectionData)
         {
             _OptionBvin = CleanBvin(optionBvin);
@@ -85,6 +91,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="input">String - the original GUID or Bvin</param>
         /// <returns>String - te GUID without the hypens</returns>
+        /// <summary>
+        /// Performs the CleanBvin catalog operation.
+        /// </summary>
         public static string CleanBvin(string input)
         {
             return input.Replace("-", string.Empty);
@@ -95,6 +104,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="selections">The chosen selections for the product.</param>
         /// <returns>String - a unique key generated from the given selections</returns>
+        /// <summary>
+        /// Performs the GenerateUniqueKeyForSelections catalog operation.
+        /// </summary>
         public static string GenerateUniqueKeyForSelections(List<OptionSelection> selections)
         {
             var result = string.Empty;
@@ -117,6 +129,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="options">The available options for the product.</param>
         /// <param name="selections">The options that have been selected.</param>
         /// <returns>If true, the selected options all match that available choices.</returns>
+        /// <summary>
+        /// Performs the ContainsInvalidSelectionForOptions catalog operation.
+        /// </summary>
         public static bool ContainsInvalidSelectionForOptions(OptionList options, List<OptionSelection> selections)
         {
             var result = false;
@@ -138,6 +153,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Allows you to convert the current open selection object to the DTO equivalent for use with the REST API
         /// </summary>
         /// <returns>A new instance of OptionSelectionDTO</returns>
+        /// <summary>
+        /// Performs the ToDto catalog operation.
+        /// </summary>
         public OptionSelectionDTO ToDto()
         {
             var dto = new OptionSelectionDTO();
@@ -152,6 +170,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Allows you to populate the current option selection object using a OptionSelectionDTO instance
         /// </summary>
         /// <param name="dto">An instance of the option selection from the REST API</param>
+        /// <summary>
+        /// Performs the FromDto catalog operation.
+        /// </summary>
         public void FromDto(OptionSelectionDTO dto)
         {
             if (dto == null) return;

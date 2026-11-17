@@ -44,10 +44,22 @@ using StackExchange.Profiling;
 
 namespace Hotcakes.Commerce.Reporting
 {
+    /// <summary>
+    /// Provides store-scoped order, sales, analytics, product-performance, and change-report queries.
+    /// </summary>
+    /// <remarks>
+    /// Results are read from the current store in the supplied <see cref="HccRequestContext"/>. Date ranges,
+    /// payment-status rules, aggregation choices, and chart cardinality are intentionally defined by each method;
+    /// callers should not infer one report's semantics from another.
+    /// </remarks>
     public class ReportingService : HccServiceBase
     {
         #region Constructor
 
+        /// <summary>
+        /// Initializes a reporting service for the supplied commerce request context.
+        /// </summary>
+        /// <param name="context">The request context that supplies the current store and culture settings.</param>
         public ReportingService(HccRequestContext context)
             : base(context)
         {
@@ -57,12 +69,20 @@ namespace Hotcakes.Commerce.Reporting
 
         #region Internal declaration
 
+        /// <summary>
+        /// Internal projection used while resolving the top affiliate report before it is converted to <see cref="Top5Item"/>.
+        /// </summary>
         public class AffiliateItem
         {
+            /// <summary>Gets or sets the aggregated revenue, when the affiliate report is revenue-based.</summary>
             public decimal? Amount;
+            /// <summary>Gets or sets the number of referred orders or affiliates, depending on the report mode.</summary>
             public int Count;
+            /// <summary>Gets or sets the affiliate identifier.</summary>
             public long Id;
+            /// <summary>Gets or sets the resolved affiliate user name.</summary>
             public string Name;
+            /// <summary>Gets or sets the associated membership user identifier.</summary>
             public int UserId;
         }
 
@@ -71,9 +91,14 @@ namespace Hotcakes.Commerce.Reporting
         #region Public methods
 
         /// <summary>
-        ///     Gets the orders summary.
+        /// Gets counts for current-store orders by the principal workflow statuses.
         /// </summary>
-        /// <returns></returns>
+        /// <remarks>
+        /// Only placed, non-cancelled orders are counted. The returned <see cref="OrdersSummaryData"/> contains
+        /// counts for received, on-hold, ready-for-payment, and ready-for-shipping orders; other statuses are not
+        /// exposed by this summary.
+        /// </remarks>
+        /// <returns>The current store's order-status summary.</returns>
         public OrdersSummaryData GetOrdersSummary()
         {
             var data = new OrdersSummaryData();
@@ -106,10 +131,17 @@ namespace Hotcakes.Commerce.Reporting
         }
 
         /// <summary>
-        ///     Gets the sales information.
+        /// Gets sales totals, completed-order counts, device breakdowns, and payment chart data for a period.
         /// </summary>
-        /// <param name="period">The period.</param>
-        /// <returns></returns>
+        /// <remarks>
+        /// Order counts include orders with line items in the selected date range, while completed-order and
+        /// device counts use placed, non-cancelled orders with paid or overpaid payment status. Revenue is the sum
+        /// of successful, non-voided balance-changing transactions after reward-point and gift-card actions are
+        /// excluded. The chart contains 12, 3, 30, or 7 points for <see cref="SalesPeriod.Year"/>,
+        /// <see cref="SalesPeriod.Quarter"/>, <see cref="SalesPeriod.Month"/>, or <see cref="SalesPeriod.Week"/>, respectively.
+        /// </remarks>
+        /// <param name="period">The reporting period used to select the current range and chart cardinality.</param>
+        /// <returns>The sales aggregation and payment chart data.</returns>
         public SalesInfo GetSalesInfo(SalesPeriod period)
         {
             using (MiniProfiler.Current.Step("GetSalesInfo"))
@@ -184,10 +216,15 @@ namespace Hotcakes.Commerce.Reporting
         }
 
         /// <summary>
-        ///     Gets the analytic information.
+        /// Gets analytic sales, revenue, units, promotion, gift-card, reward-point, and device information.
         /// </summary>
-        /// <param name="period">The period.</param>
-        /// <returns></returns>
+        /// <remarks>
+        /// The current and previous ranges are compared for device metrics. Revenue is transaction totals less
+        /// product site cost, units are summed from placed, non-cancelled paid or overpaid orders, and the remaining
+        /// sections aggregate records belonging to the current store. Promotion results are ordered by activity.
+        /// </remarks>
+        /// <param name="period">The reporting period used for current and previous aggregations.</param>
+        /// <returns>The analytic aggregation for the selected period.</returns>
         public AnalyticInfo GetAnalyticInfo(SalesPeriod period)
         {
             using (MiniProfiler.Current.Step("GetAnalyticInfo"))
@@ -307,10 +344,16 @@ namespace Hotcakes.Commerce.Reporting
         }
 
         /// <summary>
-        ///     Gets the top5 products.
+        /// Gets up to five products ranked by amount, quantity, rating, or review count.
         /// </summary>
-        /// <param name="mode">The mode.</param>
-        /// <returns></returns>
+        /// <remarks>
+        /// Amount and quantity use placed, non-cancelled order line items. Rating and review modes use approved
+        /// product reviews associated with products appearing in those orders. Amount and rating sort by
+        /// <see cref="Top5Item.Amount"/>; quantity and reviews sort by <see cref="Top5Item.Count"/>. Rating and
+        /// review amounts are formatted with the compatibility value <c>F</c>.
+        /// </remarks>
+        /// <param name="mode">The product aggregation and ranking mode.</param>
+        /// <returns>At most five ranked product results.</returns>
         public List<Top5Item> GetTop5Products(Top5ProductMode mode)
         {
             using (MiniProfiler.Current.Step("GetTop5Products"))
@@ -389,9 +432,10 @@ namespace Hotcakes.Commerce.Reporting
         }
 
         /// <summary>
-        ///     Gets the top5 abandoned products.
+        /// Gets up to five products most frequently present in abandoned carts.
         /// </summary>
-        /// <returns></returns>
+        /// <remarks>Abandoned means an order that is not placed; the count is the number of matching line items.</remarks>
+        /// <returns>At most five products ordered by descending abandoned line-item count.</returns>
         public List<Top5Item> GetTop5AbandonedProducts()
         {
             using (MiniProfiler.Current.Step("GetTop5AbandonedProducts"))
@@ -420,10 +464,15 @@ namespace Hotcakes.Commerce.Reporting
         }
 
         /// <summary>
-        ///     Gets the top5 customers.
+        /// Gets up to five customers ranked by order amount, order frequency, analytics activity, or abandonment.
         /// </summary>
-        /// <param name="mode">The mode.</param>
-        /// <returns></returns>
+        /// <remarks>
+        /// Amount and frequency use placed, non-cancelled orders. Activity counts analytics events with a user id;
+        /// abandoned results use non-placed orders with line items. Customer names are resolved through membership,
+        /// with <c>[Anonymous]</c> and <c>[USER DELETED]</c> compatibility values where applicable.
+        /// </remarks>
+        /// <param name="mode">The customer aggregation and ranking mode.</param>
+        /// <returns>At most five ranked customer results.</returns>
         public List<Top5Item> GetTop5Customers(Top5CustomerMode mode)
         {
             using (MiniProfiler.Current.Step("GetTop5Customers"))
@@ -512,9 +561,9 @@ namespace Hotcakes.Commerce.Reporting
         }
 
         /// <summary>
-        ///     Gets the top5 search terms.
+        /// Gets up to five search phrases most frequently recorded for the current store.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>At most five search terms ordered by descending search count.</returns>
         public List<Top5Item> GetTop5SearchTerms()
         {
             using (MiniProfiler.Current.Step("GetTop5SearchTerms"))
@@ -542,10 +591,11 @@ namespace Hotcakes.Commerce.Reporting
         }
 
         /// <summary>
-        ///     Gets the top5 vendors manufacturers.
+        /// Gets the legacy top-five vendor or manufacturer report.
         /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns></returns>
+        /// <remarks>This compatibility-sensitive misspelling delegates to <see cref="GetTop5VendorsManufacturers"/>.</remarks>
+        /// <param name="type">Whether to aggregate vendors or manufacturers.</param>
+        /// <returns>At most five results ordered by descending amount.</returns>
         [Obsolete("Deprecated in Hotcakes Commerce 03.03.00. Please use the GetTop5VendorsManufacturers method instead. Removing in version 03.04.00 or later.")]
         public List<Top5Item> GetTop5VendorsManufactures(Top5VendorType type)
         {
@@ -553,10 +603,15 @@ namespace Hotcakes.Commerce.Reporting
         }
 
         /// <summary>
-        ///     Gets the top5 vendors manufacturers.
+        /// Gets up to five vendors or manufacturers ranked by line-item amount.
         /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns></returns>
+        /// <remarks>
+        /// Both modes aggregate placed, non-cancelled orders and the result is always ordered by amount, even when
+        /// the type is vendor or manufacturer. The underlying compatibility query does not apply an explicit store
+        /// predicate to these order rows; that observed behavior is preserved.
+        /// </remarks>
+        /// <param name="type">Whether to aggregate vendors or manufacturers.</param>
+        /// <returns>At most five vendor or manufacturer results.</returns>
         public List<Top5Item> GetTop5VendorsManufacturers(Top5VendorType type)
         {
             using (MiniProfiler.Current.Step("GetTop5VendorsManufacturers"))
@@ -616,10 +671,15 @@ namespace Hotcakes.Commerce.Reporting
         }
 
         /// <summary>
-        ///     Gets the top5 affiliates.
+        /// Gets up to five affiliates ranked by referrals or attributed revenue.
         /// </summary>
-        /// <param name="mode">The mode.</param>
-        /// <returns></returns>
+        /// <remarks>
+        /// Referral mode counts affiliates referred by each affiliate. Revenue mode sums current-store order grand
+        /// totals joined to affiliates without an additional placed or cancelled-order filter. Affiliate users are
+        /// resolved through membership and missing users are named <c>[USER DELETED]</c>.
+        /// </remarks>
+        /// <param name="mode">The affiliate aggregation and ranking mode.</param>
+        /// <returns>At most five affiliate results represented as <see cref="Top5Item"/> values.</returns>
         public List<Top5Item> GetTop5Affiliates(Top5AffiliateMode mode)
         {
             using (MiniProfiler.Current.Step("GetTop5Affiliates"))
@@ -692,14 +752,19 @@ namespace Hotcakes.Commerce.Reporting
         }
 
         /// <summary>
-        ///     Create agregated abandoned products report
+        /// Creates a paged abandoned-product report for the current store.
         /// </summary>
-        /// <param name="startDate">The start date.</param>
-        /// <param name="endDate">The end date.</param>
-        /// <param name="pageNumber">The page number.</param>
-        /// <param name="pageSize">Size of the page.</param>
-        /// <param name="totalCount">The total count.</param>
-        /// <returns></returns>
+        /// <remarks>
+        /// Abandoned orders are non-placed orders with line items whose order time is strictly after
+        /// <paramref name="startDate"/> and strictly before <paramref name="endDate"/>. Results are grouped by
+        /// product, ordered by descending cart count, and page numbering is one-based; values below one are treated as page one.
+        /// </remarks>
+        /// <param name="startDate">Exclusive start of the order-time filter.</param>
+        /// <param name="endDate">Exclusive end of the order-time filter.</param>
+        /// <param name="pageNumber">One-based page number.</param>
+        /// <param name="pageSize">Maximum number of products to return.</param>
+        /// <param name="totalCount">Receives the unpaged number of grouped products.</param>
+        /// <returns>The requested page of <see cref="AbandonedProduct"/> results.</returns>
         public List<AbandonedProduct> GetAbandonedProducts(DateTime startDate, DateTime endDate, int pageNumber,
             int pageSize, out int totalCount)
         {
@@ -738,14 +803,19 @@ namespace Hotcakes.Commerce.Reporting
         }
 
         /// <summary>
-        ///     Create payment failure products report
+        /// Creates a paged report of products in orders with payment failures.
         /// </summary>
-        /// <param name="startDate">The start date.</param>
-        /// <param name="endDate">The end date.</param>
-        /// <param name="pageNumber">The page number.</param>
-        /// <param name="pageSize">Size of the page.</param>
-        /// <param name="totalCount">The total count.</param>
-        /// <returns></returns>
+        /// <remarks>
+        /// Orders must contain line items, have at least one unsuccessful transaction, and have unknown or unpaid
+        /// payment status. The order-time boundaries are exclusive. Products are grouped and ordered by descending
+        /// cart count; page numbering is one-based and values below one are treated as page one.
+        /// </remarks>
+        /// <param name="startDate">Exclusive start of the order-time filter.</param>
+        /// <param name="endDate">Exclusive end of the order-time filter.</param>
+        /// <param name="pageNumber">One-based page number.</param>
+        /// <param name="pageSize">Maximum number of products to return.</param>
+        /// <param name="totalCount">Receives the unpaged number of grouped products.</param>
+        /// <returns>The requested page of <see cref="AbandonedProduct"/> results.</returns>
         public List<AbandonedProduct> GetPaymentFailure(DateTime startDate, DateTime endDate, int pageNumber,
             int pageSize, out int totalCount)
         {
@@ -784,6 +854,13 @@ namespace Hotcakes.Commerce.Reporting
             }
         }
 
+        /// <summary>
+        /// Gets product-level purchases, cart additions, views, changes, and chart data for a product and period.
+        /// </summary>
+        /// <remarks>Current and previous metrics use the corresponding date ranges; purchases require paid or overpaid, placed, non-cancelled orders.</remarks>
+        /// <param name="productId">The product bvin to analyze.</param>
+        /// <param name="period">The reporting period and chart granularity.</param>
+        /// <returns>The product performance aggregation.</returns>
         public PerformanceInfo GetProductPerformance(string productId, SalesPeriod period)
         {
             using (MiniProfiler.Current.Step("GetProductPerformance"))
@@ -866,6 +943,13 @@ namespace Hotcakes.Commerce.Reporting
             }
         }
 
+        /// <summary>
+        /// Gets category-level purchases, cart additions, views, changes, and chart data for a category and period.
+        /// </summary>
+        /// <remarks>Category metrics include products linked to the category and are additionally bounded by the category creation date.</remarks>
+        /// <param name="categoryId">The category bvin to analyze.</param>
+        /// <param name="period">The reporting period and chart granularity.</param>
+        /// <returns>The category performance aggregation.</returns>
         public PerformanceInfo GetCategoryPerformance(string categoryId, SalesPeriod period)
         {
             using (MiniProfiler.Current.Step("GetCategoryPerformance"))
@@ -955,6 +1039,12 @@ namespace Hotcakes.Commerce.Reporting
             }
         }
 
+        /// <summary>
+        /// Gets aggregate product performance across the current store for a period.
+        /// </summary>
+        /// <remarks>Unlike the product overload, this method aggregates all products and uses the same period-dependent chart series.</remarks>
+        /// <param name="period">The reporting period and chart granularity.</param>
+        /// <returns>The aggregate product performance information.</returns>
         public PerformanceInfo GetProductPerformance(SalesPeriod period)
         {
             using (MiniProfiler.Current.Step("GetProductPerformance"))
@@ -1021,6 +1111,15 @@ namespace Hotcakes.Commerce.Reporting
             }
         }
 
+        /// <summary>
+        /// Gets a page of products with the largest change in bounce counts between the current and previous ranges.
+        /// </summary>
+        /// <remarks>Changes are relative values, sorted by absolute change; ascending therefore means smallest absolute change first.</remarks>
+        /// <param name="period">The current reporting period.</param>
+        /// <param name="sortDirection">Whether absolute change is sorted ascending or descending.</param>
+        /// <param name="pageNumber">One-based page number used for <c>Skip</c>/<c>Take</c>.</param>
+        /// <param name="pageSize">Number of items to request.</param>
+        /// <returns>Paged change results and the total matching product count.</returns>
         public TopChangeInfo GetTopChangeByBounces(SalesPeriod period, SortDirection sortDirection, int pageNumber,
             int pageSize)
         {
@@ -1114,6 +1213,15 @@ namespace Hotcakes.Commerce.Reporting
             }
         }
 
+        /// <summary>
+        /// Gets a page of products with the largest change in abandoned quantities.
+        /// </summary>
+        /// <remarks>The compatibility-sensitive <c>Abandoments</c> spelling is part of the public API. Relative changes are sorted by absolute value and a zero previous value yields 1 when the current value is non-zero, otherwise 0.</remarks>
+        /// <param name="period">The current reporting period.</param>
+        /// <param name="sortDirection">Whether absolute change is sorted ascending or descending.</param>
+        /// <param name="pageNumber">One-based page number used for <c>Skip</c>/<c>Take</c>.</param>
+        /// <param name="pageSize">Number of items to request.</param>
+        /// <returns>Paged change results and the total matching product count.</returns>
         public TopChangeInfo GetTopChangeByAbandoments(SalesPeriod period, SortDirection sortDirection, int pageNumber,
             int pageSize)
         {
@@ -1194,6 +1302,15 @@ namespace Hotcakes.Commerce.Reporting
             }
         }
 
+        /// <summary>
+        /// Gets a page of products with the largest change in purchased quantities.
+        /// </summary>
+        /// <remarks>Purchases require paid or overpaid, placed, non-cancelled orders; relative changes are sorted by absolute value.</remarks>
+        /// <param name="period">The current reporting period.</param>
+        /// <param name="sortDirection">Whether absolute change is sorted ascending or descending.</param>
+        /// <param name="pageNumber">One-based page number used for <c>Skip</c>/<c>Take</c>.</param>
+        /// <param name="pageSize">Number of items to request.</param>
+        /// <returns>Paged change results and the total matching product count.</returns>
         public TopChangeInfo GetTopChangeByPurchases(SalesPeriod period, SortDirection sortDirection, int pageNumber,
             int pageSize)
         {
@@ -1275,6 +1392,16 @@ namespace Hotcakes.Commerce.Reporting
             }
         }
 
+        /// <summary>
+        /// Gets a page of products affected by the selected bounce, abandonment, purchase, or combined change measure.
+        /// </summary>
+        /// <remarks>This report delegates sorting, filtering, and total-count calculation to the established stored procedure.</remarks>
+        /// <param name="period">The current reporting period.</param>
+        /// <param name="sortBy">The affected-product measure used by the report.</param>
+        /// <param name="sortDirection">The stored-procedure sort direction.</param>
+        /// <param name="pageNumber">The page number passed to the report query.</param>
+        /// <param name="pageSize">The page size passed to the report query.</param>
+        /// <returns>Paged affected-product changes and the total count.</returns>
         public TopChangeInfo GetTopAffectedProducts(SalesPeriod period, TopAffectedSort sortBy,
             SortDirection sortDirection, int pageNumber, int pageSize)
         {
@@ -1321,6 +1448,13 @@ namespace Hotcakes.Commerce.Reporting
             }
         }
 
+        /// <summary>
+        /// Gets purchased-with-product quantity and revenue for a product and compares them with the previous period.
+        /// </summary>
+        /// <remarks>The compatibility implementation reports previous revenue from abandoned items; this documentation preserves that observed behavior.</remarks>
+        /// <param name="productId">The product bvin to analyze.</param>
+        /// <param name="period">The reporting period used for current and previous ranges.</param>
+        /// <returns>The purchased-with-product performance values.</returns>
         public PurchasedWithProductPerformanceInfo GetPurchasedWithProductPerformance(string productId,
             SalesPeriod period)
         {
@@ -1552,6 +1686,10 @@ namespace Hotcakes.Commerce.Reporting
                 .Where(y => y.hcc_Order.StatusCode != OrderStatusCode.Cancelled);
         }
 
+        /// <summary>
+        /// Creates the read strategy used for order reporting queries.
+        /// </summary>
+        /// <returns>A read-only repository strategy for <see cref="hcc_Order"/> records.</returns>
         protected IRepoStrategy<hcc_Order> CreateReadOrderStrategy()
         {
             return Factory.Instance.CreateReadStrategy<hcc_Order>();

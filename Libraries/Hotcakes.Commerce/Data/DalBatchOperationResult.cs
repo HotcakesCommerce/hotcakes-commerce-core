@@ -28,16 +28,46 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Commerce.Data
 {
+    /// <summary>
+    /// Represents the outcome of a repository operation that can affect multiple values.
+    /// </summary>
+    /// <typeparam name="V">The POCO type represented by the operation.</typeparam>
+    /// <remarks>
+    /// A new instance starts with <see cref="Success" /> set to <c>false</c> and an empty
+    /// <see cref="OldValues" /> collection. Repository implementations populate the result
+    /// as the operation progresses; an empty collection therefore does not by itself indicate
+    /// whether the operation was successful.
+    /// </remarks>
     public class DalBatchOperationResult<V>
         where V : class, new()
     {
+        /// <summary>
+        /// Initializes a new batch-operation result with an empty collection of prior values.
+        /// </summary>
         public DalBatchOperationResult()
         {
             OldValues = new List<V>();
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the repository operation reported success.
+        /// </summary>
+        /// <value><c>true</c> when the operation reports success; otherwise, <c>false</c>.</value>
+        /// <remarks>
+        /// The default value is <c>false</c>. The concrete repository strategy is responsible
+        /// for setting this property after attempting to persist changes.
+        /// </remarks>
         public bool Success { get; set; }
 
+        /// <summary>
+        /// Gets or sets the values as they existed before the operation changed or deleted them.
+        /// </summary>
+        /// <value>A mutable list of prior values, initially empty.</value>
+        /// <remarks>
+        /// Implementations use this collection for batch updates and deletes. Its contents and
+        /// ordering are determined by the repository operation; it is not automatically populated
+        /// by this result type.
+        /// </remarks>
         public List<V> OldValues { get; set; }
     }
 }

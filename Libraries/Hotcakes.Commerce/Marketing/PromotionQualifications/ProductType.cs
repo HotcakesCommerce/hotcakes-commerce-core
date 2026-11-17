@@ -29,15 +29,19 @@ using System.Linq;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Matches product contexts by product type identifier.</summary>
+    /// <remarks>Blank product type IDs are treated as the generic type identifier <c>0</c>.</remarks>
     public class ProductType : PromotionIdQualificationBase
     {
         #region Overrides
 
+        /// <summary>Gets the stable product-type qualification identifier.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdProductType); }
         }
 
+        /// <summary>Gets or sets whether configured product types are excluded rather than required.</summary>
         public bool IsNotMode
         {
             get
@@ -49,6 +53,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             set { SetSetting("PrTIsNotMode", value ? "1" : "0"); }
         }
 
+        /// <summary>Builds a description of the configured product types.</summary>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var allTypes = app?.CatalogServices?.ProductTypes?.FindAll() ?? new System.Collections.Generic.List<Catalog.ProductType>();
@@ -73,16 +78,19 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             return result;
         }
 
+        /// <summary>Sets the lowest processing cost during construction.</summary>
         protected override void OnInit()
         {
             ProcessingCost = RelativeProcessingCost.Lowest;
         }
 
+        /// <summary>Gets the product-type identifier setting key.</summary>
         public override string IdSettingName
         {
             get { return "TypeIds"; }
         }
 
+        /// <summary>Matches product scope by normalized product type, including generic-type handling.</summary>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             if (mode != PromotionQualificationMode.Products) return false;
@@ -107,10 +115,13 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         #region Init
 
+        /// <summary>Initializes an empty product-type qualification.</summary>
         public ProductType()
         {
         }
 
+        /// <summary>Initializes a product-type qualification with one identifier.</summary>
+        /// <param name="id">The product type identifier.</param>
         public ProductType(string id)
             : base(id)
         {

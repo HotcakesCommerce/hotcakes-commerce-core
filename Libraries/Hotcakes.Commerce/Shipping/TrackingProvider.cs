@@ -26,11 +26,16 @@
 
 namespace Hotcakes.Commerce.Shipping
 {
+    /// <summary>Identifies the carrier used to track a shipment.</summary>
     public enum TrackingProvider
     {
+        /// <summary>No tracking carrier is specified.</summary>
         None = 0,
+        /// <summary>United Parcel Service.</summary>
         UPS = 1,
+        /// <summary>Federal Express.</summary>
         FedEx = 2,
+        /// <summary>United States Postal Service.</summary>
         USPostal = 3
     }
 }

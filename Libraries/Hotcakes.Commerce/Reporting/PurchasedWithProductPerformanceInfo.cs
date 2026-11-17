@@ -26,12 +26,17 @@
 
 namespace Hotcakes.Commerce.Reporting
 {
+    /// <summary>Contains current and comparison-period performance for a product purchased with another product.</summary>
     public class PurchasedWithProductPerformanceInfo
     {
+        /// <summary>Gets or sets the quantity sold in the current period.</summary>
         public int QuantitySold { get; set; }
+        /// <summary>Gets or sets the revenue in the current period.</summary>
         public decimal Revenue { get; set; }
 
+        /// <summary>Gets or sets the quantity sold in the comparison period.</summary>
         public int QuantitySoldPrev { get; set; }
+        /// <summary>Gets or sets the revenue in the comparison period.</summary>
         public decimal RevenuePrev { get; set; }
     }
 }

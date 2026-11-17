@@ -32,10 +32,17 @@ namespace Hotcakes.Commerce.Catalog
     /// <summary>
     ///     This is the primary object that is used to manage all aspects of product volume discount in the main application.
     /// </summary>
-    /// <remarks>The REST API equivalent is ProductVolumeDiscountDTO.</remarks>
+    /// <remarks>
+    ///     The REST API equivalent is <see cref="ProductVolumeDiscountDTO" />. A discount applies to a product when the
+    ///     cart quantity reaches <see cref="Qty" /> and interprets <see cref="Amount" /> according to <see cref="DiscountType" />.
+    /// </remarks>
     [Serializable]
     public class ProductVolumeDiscount
     {
+        /// <summary>
+        ///     Initializes a volume discount with empty identifiers, a current UTC timestamp, no discount amount, and the
+        ///     <see cref="ProductVolumeDiscountType.None" /> type.
+        /// </summary>
         public ProductVolumeDiscount()
         {
             Bvin = string.Empty;

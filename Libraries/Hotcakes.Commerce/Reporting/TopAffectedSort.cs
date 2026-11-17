@@ -26,11 +26,16 @@
 
 namespace Hotcakes.Commerce.Reporting
 {
+    /// <summary>Selects the change measure used to sort the most affected items report.</summary>
     public enum TopAffectedSort
     {
+        /// <summary>Sorts by overall change.</summary>
         ByChange = 0,
+        /// <summary>Sorts by bounce change.</summary>
         ByBouncesChange = 1,
+        /// <summary>Sorts by abandonment change. The member name is retained for compatibility.</summary>
         ByAbandomentsChange = 2,
+        /// <summary>Sorts by purchase change.</summary>
         ByPurchasesChange = 3
     }
 }

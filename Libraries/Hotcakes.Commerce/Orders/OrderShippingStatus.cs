@@ -26,12 +26,30 @@
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    /// Represents the OrderShippingStatus order-domain type and preserves the established public compatibility surface.
+    /// </summary>
     public enum OrderShippingStatus
     {
+        /// <summary>
+        /// The serialized enum value for unknown.
+        /// </summary>
         Unknown = 0,
+        /// <summary>
+        /// The serialized enum value for unshipped.
+        /// </summary>
         Unshipped = 1,
+        /// <summary>
+        /// The serialized enum value for partially shipped.
+        /// </summary>
         PartiallyShipped = 2,
+        /// <summary>
+        /// The serialized enum value for fully shipped.
+        /// </summary>
         FullyShipped = 3,
+        /// <summary>
+        /// The serialized enum value for non shipping.
+        /// </summary>
         NonShipping = 4
     }
 }

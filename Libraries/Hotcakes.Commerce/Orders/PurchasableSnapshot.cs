@@ -29,8 +29,14 @@ using Hotcakes.Commerce.Shipping;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    ///     Creates a purchasable snapshot with empty identifiers and descriptive values plus zero or false pricing, tax, shipping, and mode defaults.
+    /// </summary>
     public class PurchasableSnapshot
     {
+        /// <summary>
+        ///     Creates a purchasable snapshot with empty identifiers and descriptive values plus zero or false pricing, tax, shipping, and mode defaults.
+        /// </summary>
         public PurchasableSnapshot()
         {
             ProductId = string.Empty;
@@ -48,18 +54,57 @@ namespace Hotcakes.Commerce.Orders
             IsRecurring = false;
         }
 
+        /// <summary>
+        ///     Gets or sets the product id value used by this API.
+        /// </summary>
         public string ProductId { get; set; }
+        /// <summary>
+        ///     Gets or sets the variant id value used by this API.
+        /// </summary>
         public string VariantId { get; set; }
+        /// <summary>
+        ///     Gets or sets the name value used by this API.
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        ///     Gets or sets the sku value used by this API.
+        /// </summary>
         public string Sku { get; set; }
+        /// <summary>
+        ///     Gets or sets the description value used by this API.
+        /// </summary>
         public string Description { get; set; }
+        /// <summary>
+        ///     Gets or sets the base price value used by this API.
+        /// </summary>
         public decimal BasePrice { get; set; }
+        /// <summary>
+        ///     Gets or sets the is tax exempt value used by this API.
+        /// </summary>
         public bool IsTaxExempt { get; set; }
+        /// <summary>
+        ///     Gets or sets the tax schedule id value used by this API.
+        /// </summary>
         public long TaxScheduleId { get; set; }
+        /// <summary>
+        ///     Gets or sets the selection data value used by this API.
+        /// </summary>
         public OptionSelections SelectionData { get; set; }
+        /// <summary>
+        ///     Gets or sets the shipping details value used by this API.
+        /// </summary>
         public ShippableItem ShippingDetails { get; set; }
+        /// <summary>
+        ///     Gets or sets the is bundle value used by this API.
+        /// </summary>
         public bool IsBundle { get; set; }
+        /// <summary>
+        ///     Gets or sets the is gift card value used by this API.
+        /// </summary>
         public bool IsGiftCard { get; set; }
+        /// <summary>
+        ///     Gets or sets the is recurring value used by this API.
+        /// </summary>
         public bool IsRecurring { get; set; }
     }
 }

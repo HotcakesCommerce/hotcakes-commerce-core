@@ -29,12 +29,18 @@ using System;
 namespace Hotcakes.Commerce.Accounts
 {
     /// <summary>
-    ///     Used to store Google analytics tracking configuration.
+    ///     Used to store Google analytics tracking configuration. Represents GoogleAnalyticsSettings data and behavior within the Hotcakes Commerce account and store boundary.
     /// </summary>
     [Serializable]
     public class GoogleAnalyticsSettings
     {
+        /// <summary>Gets or sets UseTracker.</summary>
+        /// <remarks>Whether Google Analytics tracking is enabled for the current store.</remarks>
+        /// <value>Whether Google Analytics tracking is enabled for the current store.</value>
         public bool UseTracker { get; set; }
+        /// <summary>Gets or sets TrackerId.</summary>
+        /// <remarks>The Google Analytics tracker identifier stored with the current store settings.</remarks>
+        /// <value>The Google Analytics tracker identifier stored with the current store settings.</value>
         public string TrackerId { get; set; }
     }
 }

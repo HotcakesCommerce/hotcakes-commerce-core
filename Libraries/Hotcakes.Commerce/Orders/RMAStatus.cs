@@ -26,14 +26,38 @@
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    /// Represents the RMAStatus order-domain type and preserves the established public compatibility surface.
+    /// </summary>
     public enum RMAStatus
     {
+        /// <summary>
+        /// The serialized enum value for none.
+        /// </summary>
         None = -1,
+        /// <summary>
+        /// The serialized enum value for unsubmitted.
+        /// </summary>
         Unsubmitted = 0,
+        /// <summary>
+        /// The serialized enum value for pending.
+        /// </summary>
         Pending = 1,
+        /// <summary>
+        /// The serialized enum value for open.
+        /// </summary>
         Open = 2,
+        /// <summary>
+        /// The serialized enum value for closed.
+        /// </summary>
         Closed = 3,
+        /// <summary>
+        /// The serialized enum value for rejected.
+        /// </summary>
         Rejected = 4,
+        /// <summary>
+        /// The serialized enum value for need refund.
+        /// </summary>
         NeedRefund = 5
     }
 }

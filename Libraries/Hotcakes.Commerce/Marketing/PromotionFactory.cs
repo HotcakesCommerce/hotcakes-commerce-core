@@ -30,8 +30,13 @@ using Hotcakes.Commerce.Marketing.PromotionQualifications;
 
 namespace Hotcakes.Commerce.Marketing
 {
+    /// <summary>Maps persisted promotion type GUIDs to qualification and action implementations.</summary>
     public class PromotionFactory
     {
+        /// <summary>Creates the qualification corresponding to a persisted type identifier.</summary>
+        /// <param name="typeId">The qualification implementation GUID.</param>
+        /// <returns>A new qualification instance.</returns>
+        /// <exception cref="InvalidOperationException">No registered qualification matches <paramref name="typeId"/>.</exception>
         public virtual IPromotionQualification CreateQualification(Guid typeId)
         {
             switch (typeId.ToString().ToUpper())
@@ -80,6 +85,10 @@ namespace Hotcakes.Commerce.Marketing
                 typeId));
         }
 
+        /// <summary>Creates the action corresponding to a persisted type identifier.</summary>
+        /// <param name="typeId">The action implementation GUID.</param>
+        /// <returns>A new action instance.</returns>
+        /// <exception cref="InvalidOperationException">No registered action matches <paramref name="typeId"/>.</exception>
         public virtual IPromotionAction CreateAction(Guid typeId)
         {
             switch (typeId.ToString())

@@ -31,11 +31,30 @@ namespace Hotcakes.Commerce
 {
     public partial class WebAppSettings
     {
+        /// <summary>
+        ///     Gets the name of the cookie that stores the customer's Hotcakes session identifier.
+        /// </summary>
         public const string CookieNameSessionGuid = "HotcakesSessionGuid";
+
+        /// <summary>
+        ///     Gets the name of the cookie that stores the customer's shopping session identifier.
+        /// </summary>
         public const string CookieNameShoppingSessionGuid = "HotcakesShoppingSessionGuid";
+
+        /// <summary>
+        ///     Gets the name of the cookie that stores the identifiers of the customer's recently viewed products.
+        /// </summary>
         public const string CookieNameLastProductsViewed = "HotcakesLastProductsViewed";
+
+        /// <summary>
+        ///     Gets the name of the cookie that stores the affiliate referral identifier.
+        /// </summary>
         public const string CookieNameAffiliateId = "HotcakesCustomerIDReferrer";
 
+        /// <summary>
+        ///     Gets the application version from the <c>Hotcakes.Modules</c> assembly.
+        /// </summary>
+        /// <value>The assembly version of <c>Hotcakes.Modules.Core.HotcakesController</c>.</value>
         public static Version AppVersion
         {
             get
@@ -45,31 +64,58 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        ///     Gets the product SKU for this application build.
+        /// </summary>
+        /// <value>An empty string; this edition does not expose a SKU.</value>
         public static string SKU
         {
             get { return string.Empty; }
         }
 
+        /// <summary>
+        ///     Gets the application version formatted with major, minor, and build components.
+        /// </summary>
+        /// <value>The first three components of <see cref="AppVersion"/>.</value>
         public static string FriendlyAppVersion
         {
             get { return AppVersion.ToString(3); }
         }
 
+        /// <summary>
+        ///     Gets the product SKU formatted for display.
+        /// </summary>
+        /// <value>An empty string; this edition does not expose a SKU.</value>
         public static string FriendlySKU
         {
             get { return string.Empty; }
         }
 
+        /// <summary>
+        ///     Creates the cookie name used for a store's cart when payment is pending.
+        /// </summary>
+        /// <param name="storeId">The store identifier to include in the cookie name.</param>
+        /// <returns>The cookie name in the form <c>hotcakes-cartid-pendingpayment-{storeId}</c>.</returns>
         public static string CookieNameCartIdPaymentPending(long storeId)
         {
             return "hotcakes-cartid-pendingpayment-" + storeId;
         }
 
+        /// <summary>
+        ///     Creates the cookie name used for a store's cart.
+        /// </summary>
+        /// <param name="storeId">The store identifier to include in the cookie name.</param>
+        /// <returns>The cookie name in the form <c>hotcakes-cartid-{storeId}</c>.</returns>
         public static string CookieNameCartId(long storeId)
         {
             return "hotcakes-cartid-" + storeId;
         }
 
+        /// <summary>
+        ///     Creates the cookie name used for a store's last selected category.
+        /// </summary>
+        /// <param name="storeId">The store identifier to include in the cookie name.</param>
+        /// <returns>The cookie name in the form <c>hotcakes-lastcategory-{storeId}</c>.</returns>
         public static string CookieNameLastCategory(long storeId)
         {
             return "hotcakes-lastcategory-" + storeId;

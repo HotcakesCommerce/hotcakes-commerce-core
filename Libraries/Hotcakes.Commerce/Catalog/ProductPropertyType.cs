@@ -27,9 +27,12 @@
 namespace Hotcakes.Commerce.Catalog
 {
     /// <summary>
-    ///     This enumeration allows for ProductProperties to determine how to accept, store, and display product types and
-    ///     their respective values.
+    ///     Specifies how a product property accepts, validates, stores, and displays its value.
     /// </summary>
+    /// <remarks>
+    ///     These values select the property editor and value handling used by catalog administration and product rendering.
+    ///     The numeric values are compatibility-sensitive persisted values.
+    /// </remarks>
     public enum ProductPropertyType
     {
         /// <summary>

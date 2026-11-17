@@ -48,17 +48,26 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>
+    /// Facade for store-scoped commerce operations; services are created lazily for the current request context.
+    /// </summary>
     public class HotcakesApplication
     {
         private List<Promotion> _CurrentlyActiveSales;
 
         private WorkflowFactory _WorkflowFactory;
 
+        /// <summary>
+        /// Initializes the facade for the supplied commerce request context.
+        /// </summary>
         public HotcakesApplication(HccRequestContext hccContext)
         {
             CurrentRequestContext = hccContext;
         }
 
+        /// <summary>
+        /// Gets the lazily-created workflow factory bound to <see cref="CurrentRequestContext"/>.
+        /// </summary>
         public WorkflowFactory WorkflowFactory
         {
             get
@@ -68,19 +77,31 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        /// Gets a facade bound to <see cref="HccRequestContext.Current"/>.
+        /// </summary>
         public static HotcakesApplication Current
         {
             get { return new HotcakesApplication(HccRequestContext.Current); }
         }
 
+        /// <summary>
+        /// Public API member: <c>public HccRequestContext CurrentRequestContext { get; set; }</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public HccRequestContext CurrentRequestContext { get; set; }
 
+        /// <summary>
+        /// Public API member: <c>public Store CurrentStore</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public Store CurrentStore
         {
             get { return CurrentRequestContext.CurrentStore; }
             set { CurrentRequestContext.CurrentStore = value; }
         }
 
+        /// <summary>
+        /// Public API member: <c>public string CurrentCustomerId</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public string CurrentCustomerId
         {
             get
@@ -94,11 +115,17 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        /// Public API member: <c>public CustomerAccount CurrentCustomer</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public CustomerAccount CurrentCustomer
         {
             get { return CurrentRequestContext.CurrentAccount; }
         }
 
+        /// <summary>
+        /// Public API member: <c>public string ViewsVirtualPath</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public string ViewsVirtualPath
         {
             get
@@ -112,6 +139,9 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        /// Public API member: <c>public List&lt;Promotion&gt; CurrentlyActiveSales</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public List<Promotion> CurrentlyActiveSales
         {
             get
@@ -124,6 +154,9 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        /// Public API member: <c>public string StoreUrl(bool forceSecure, bool forceNonSecure)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public string StoreUrl(bool forceSecure, bool forceNonSecure)
         {
             var result = VirtualPathUtility.ToAbsolute("~");
@@ -146,6 +179,9 @@ namespace Hotcakes.Commerce
             return result;
         }
 
+        /// <summary>
+        /// Public API member: <c>public bool IsCurrentRequestSecure()</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public bool IsCurrentRequestSecure()
         {
             var secure = false;
@@ -160,17 +196,26 @@ namespace Hotcakes.Commerce
             return secure;
         }
 
+        /// <summary>
+        /// Public API member: <c>public bool UpdateCurrentStore()</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public bool UpdateCurrentStore()
         {
             return AccountServices.Stores.Update(CurrentStore);
         }
 
+        /// <summary>
+        /// Calculates an order using the normal repricing, discount, tax, shipping, and order-calculation workflow.
+        /// </summary>
         public bool CalculateOrder(Order o)
         {
             var calc = new OrderCalculator(this);
             return calc.Calculate(o);
         }
 
+        /// <summary>
+        /// Calculates an order while preserving existing product repricing decisions.
+        /// </summary>
         public bool CalculateOrderWithoutRepricing(Order o)
         {
             var calc = new OrderCalculator(this);
@@ -178,6 +223,9 @@ namespace Hotcakes.Commerce
             return calc.Calculate(o);
         }
 
+        /// <summary>
+        /// Calculates without repricing or discounts; this exact misspelled compatibility name is intentional.
+        /// </summary>
         public bool CalculateOrderWithoutRepriceingWithoutDiscounts(Order o)
         {
             var calc = new OrderCalculator(this);
@@ -186,24 +234,36 @@ namespace Hotcakes.Commerce
             return calc.Calculate(o);
         }
 
+        /// <summary>
+        /// Calculates and persists the order only when calculation succeeds.
+        /// </summary>
         public bool CalculateOrderAndSave(Order o)
         {
             if (!CalculateOrder(o)) return false;
             return OrderServices.Orders.Upsert(o);
         }
 
+        /// <summary>
+        /// Public API member: <c>public bool CalculateOrderAndSaveWithoutRepricing(Order o)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public bool CalculateOrderAndSaveWithoutRepricing(Order o)
         {
             if (!CalculateOrderWithoutRepricing(o)) return false;
             return OrderServices.Orders.Upsert(o);
         }
 
+        /// <summary>
+        /// Public API member: <c>public bool CalculateOrderAndSaveWithoutRepricingWithoutDiscounts(Order o)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public bool CalculateOrderAndSaveWithoutRepricingWithoutDiscounts(Order o)
         {
             if (!CalculateOrderWithoutRepriceingWithoutDiscounts(o)) return false;
             return OrderServices.Orders.Upsert(o);
         }
 
+        /// <summary>
+        /// Adds a line item, updates cart metadata and analytics, recalculates the order, and persists it.
+        /// </summary>
         public bool AddToOrderWithCalculateAndSave(Order o, LineItem li)
         {
             o.IsAbandonedEmailSent = false;
@@ -215,6 +275,9 @@ namespace Hotcakes.Commerce
             return OrderServices.Orders.Upsert(o);
         }
 
+        /// <summary>
+        /// Adds a line item, updates cart metadata and analytics, and persists without recalculating.
+        /// </summary>
         public bool AddToOrderAndSave(Order o, LineItem li)
         {
             o.IsAbandonedEmailSent = false;
@@ -224,6 +287,9 @@ namespace Hotcakes.Commerce
             return OrderServices.Orders.Upsert(o);
         }
 
+        /// <summary>
+        /// Public API member: <c>public void ClearOrder(Order order)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public void ClearOrder(Order order)
         {
             if (order == null)
@@ -233,6 +299,9 @@ namespace Hotcakes.Commerce
             CalculateOrderAndSave(order);
         }
 
+        /// <summary>
+        /// Checks inventory for order items, including bundle components, without changing reservations.
+        /// </summary>
         public SystemOperationResult CheckForStockOnItems(Order order)
         {
             // Build a list of product quantities to check
@@ -317,6 +386,9 @@ namespace Hotcakes.Commerce
             return new SystemOperationResult(true, string.Empty);
         }
 
+        /// <summary>
+        /// Checks inventory for one line item, expanding bundle components without changing reservations.
+        /// </summary>
         public SystemOperationResult CheckForStockOnItems(LineItem item)
         {
             // Build a list of product quantities to check
@@ -401,6 +473,9 @@ namespace Hotcakes.Commerce
 
 
         // Product Pricing
+        /// <summary>
+        /// Calculates a customer-specific product price for the supplied BVIN and selections.
+        /// </summary>
         public UserSpecificPrice PriceProduct(string productBvin, string userId, OptionSelections selections)
         {
             var p = CatalogServices.Products.FindWithCache(productBvin);
@@ -408,6 +483,9 @@ namespace Hotcakes.Commerce
             return PriceProduct(p, customer, selections, CurrentlyActiveSales);
         }
 
+        /// <summary>
+        /// Applies customer pricing groups and sales, then prevents a negative final price.
+        /// </summary>
         public UserSpecificPrice PriceProduct(Product p, CustomerAccount currentUser, OptionSelections selections,
             List<Promotion> currentSales)
         {
@@ -465,6 +543,9 @@ namespace Hotcakes.Commerce
 
 
         // Orders
+        /// <summary>
+        /// Attempts to reserve every order line quantity and reports partial failures through the result and optional error list.
+        /// </summary>
         public bool OrdersReserveInventoryForAllItems(Order o, List<string> errors)
         {
             var result = true;
@@ -486,6 +567,9 @@ namespace Hotcakes.Commerce
             return result;
         }
 
+        /// <summary>
+        /// Releases reservations for every line item and logs individual unreserve failures.
+        /// </summary>
         public bool OrdersUnreserveInventoryForAllItems(Order o)
         {
             var result = true;
@@ -502,6 +586,9 @@ namespace Hotcakes.Commerce
         }
 
         // Order Packages
+        /// <summary>
+        /// Ships every unshipped package, updates inventory, runs package-shipped workflows, and updates the order.
+        /// </summary>
         public bool OrdersShipAllPackages(Order o)
         {
             foreach (var p in o.Packages)
@@ -515,6 +602,9 @@ namespace Hotcakes.Commerce
             return true;
         }
 
+        /// <summary>
+        /// Marks a package shipped, ships eligible items, and runs the package-shipped workflow.
+        /// </summary>
         public bool OrdersShipPackage(OrderPackage package, Order order)
         {
             if (order == null)
@@ -568,6 +658,9 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        /// Reverses shipment quantities, bounded by quantities already shipped for non-recurring orders.
+        /// </summary>
         public bool OrdersUnshipItems(OrderPackage package, Order order)
         {
             if (order == null)
@@ -600,6 +693,9 @@ namespace Hotcakes.Commerce
         }
 
         //Reporting
+        /// <summary>
+        /// Returns products associated with the ten most popular items ordered during the previous two months.
+        /// </summary>
         public List<Product> ReportingTop10Sellers()
         {
             var results = new List<Product>();
@@ -614,6 +710,9 @@ namespace Hotcakes.Commerce
             return results;
         }
 
+        /// <summary>
+        /// Returns products associated with popular items ordered in the specified UTC range.
+        /// </summary>
         public List<Product> ReportingTopSellersByDate(DateTime startDateUtc, DateTime endDateUtc, int maxResults)
         {
             var results = new List<Product>();
@@ -625,6 +724,9 @@ namespace Hotcakes.Commerce
             return results;
         }
 
+        /// <summary>
+        /// Resolves a product slug and follows a product custom-URL redirect when needed.
+        /// </summary>
         public Product ParseProductBySlug(string slug, out CustomUrl customUrl)
         {
             customUrl = null;
@@ -642,6 +744,9 @@ namespace Hotcakes.Commerce
             return result;
         }
 
+        /// <summary>
+        /// Resolves a category slug and follows a category custom-URL redirect when needed.
+        /// </summary>
         public Category ParseCategoryBySlug(string slug, out CustomUrl customUrl)
         {
             customUrl = null;
@@ -659,6 +764,9 @@ namespace Hotcakes.Commerce
             return result;
         }
 
+        /// <summary>
+        /// Returns related products ranked by co-occurring quantity in placed orders for the current store.
+        /// </summary>
         public List<ProductRelationship> GetAutoSuggestedRelatedItems(string bvin, int maxItemsToReturn)
         {
             using (var context = Factory.CreateHccDbContext())
@@ -717,6 +825,9 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        /// Destroys all categories only before the store API-clearance deadline; otherwise returns false.
+        /// </summary>
         public bool DestroyAllCategories()
         {
             var current = DateTime.UtcNow;
@@ -741,12 +852,18 @@ namespace Hotcakes.Commerce
             CatalogServices.Categories.DestroyAllForStore(storeId);
         }
 
+        /// <summary>
+        /// Public API member: <c>public bool DestroyCustomerAccount(string bvin)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public bool DestroyCustomerAccount(string bvin)
         {
             CatalogServices.WishListItems.DeleteForCustomerId(bvin);
             return MembershipServices.Customers.Delete(bvin);
         }
 
+        /// <summary>
+        /// Clears a bounded number of products only before the store API-clearance deadline.
+        /// </summary>
         public ClearProductsData ClearProducts(int howMany)
         {
             var result = new ClearProductsData();
@@ -788,6 +905,9 @@ namespace Hotcakes.Commerce
             return result;
         }
 
+        /// <summary>
+        /// Public API member: <c>public bool DestroyAllProductsForStore(long storeId)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public bool DestroyAllProductsForStore(long storeId)
         {
             var bvins = CatalogServices.Products.FindAllBvinsForStore(storeId);
@@ -799,6 +919,9 @@ namespace Hotcakes.Commerce
         }
 
         // Multi-Store Destroy
+        /// <summary>
+        /// Destroys store-owned files and commerce records across all established service areas, then deletes the store.
+        /// </summary>
         public bool DestroyStore(long storeId)
         {
             EventLog.LogEvent("System", "Destroying Store " + storeId, EventLogSeverity.Debug);
@@ -880,12 +1003,30 @@ namespace Hotcakes.Commerce
 
         private class ProductIdCombo
         {
+            /// <summary>
+            /// Public API member: <c>public string ProductId { get; set; }</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+            /// </summary>
             public string ProductId { get; set; }
+            /// <summary>
+            /// Public API member: <c>public string VariantId { get; set; }</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+            /// </summary>
             public string VariantId { get; set; }
+            /// <summary>
+            /// Public API member: <c>public string ProductName { get; set; }</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+            /// </summary>
             public string ProductName { get; set; }
+            /// <summary>
+            /// Public API member: <c>public int Quantity { get; set; }</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+            /// </summary>
             public int Quantity { get; set; }
+            /// <summary>
+            /// Public API member: <c>public Product Product { get; set; }</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+            /// </summary>
             public Product Product { get; set; }
 
+            /// <summary>
+            /// Public API member: <c>public string Key()</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+            /// </summary>
             public string Key()
             {
                 return ProductId + VariantId;
@@ -896,6 +1037,9 @@ namespace Hotcakes.Commerce
 
         private AccountService _AccountService;
 
+        /// <summary>
+        /// Public API member: <c>public AccountService AccountServices</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public AccountService AccountServices
         {
             get
@@ -910,6 +1054,9 @@ namespace Hotcakes.Commerce
 
         private CatalogService _CatalogService;
 
+        /// <summary>
+        /// Public API member: <c>public CatalogService CatalogServices</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public CatalogService CatalogServices
         {
             get
@@ -924,6 +1071,9 @@ namespace Hotcakes.Commerce
 
         private ContactService _ContactServices;
 
+        /// <summary>
+        /// Public API member: <c>public ContactService ContactServices</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public ContactService ContactServices
         {
             get
@@ -938,6 +1088,9 @@ namespace Hotcakes.Commerce
 
         private ContentService _ContentServices;
 
+        /// <summary>
+        /// Public API member: <c>public ContentService ContentServices</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public ContentService ContentServices
         {
             get
@@ -952,6 +1105,9 @@ namespace Hotcakes.Commerce
 
         private OrderService _OrderServices;
 
+        /// <summary>
+        /// Public API member: <c>public OrderService OrderServices</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public OrderService OrderServices
         {
             get
@@ -966,6 +1122,9 @@ namespace Hotcakes.Commerce
 
         private MarketingService _MarketingServices;
 
+        /// <summary>
+        /// Public API member: <c>public MarketingService MarketingServices</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public MarketingService MarketingServices
         {
             get
@@ -980,6 +1139,9 @@ namespace Hotcakes.Commerce
 
         private ScheduleService _ScheduleServices;
 
+        /// <summary>
+        /// Public API member: <c>public ScheduleService ScheduleServices</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public ScheduleService ScheduleServices
         {
             get
@@ -994,6 +1156,9 @@ namespace Hotcakes.Commerce
 
         private MembershipServices _MembershipServices;
 
+        /// <summary>
+        /// Public API member: <c>public MembershipServices MembershipServices</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public MembershipServices MembershipServices
         {
             get
@@ -1008,6 +1173,9 @@ namespace Hotcakes.Commerce
 
         private MetricsServices _MetricsServices;
 
+        /// <summary>
+        /// Gets the lazily-created metrics service; the misspelled compatibility name is intentional.
+        /// </summary>
         public MetricsServices MetricsSerices
         {
             get
@@ -1022,6 +1190,9 @@ namespace Hotcakes.Commerce
 
         private CustomerPointsManager _CustomerPointsManager;
 
+        /// <summary>
+        /// Public API member: <c>public CustomerPointsManager CustomerPointsManager</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public CustomerPointsManager CustomerPointsManager
         {
             get
@@ -1036,6 +1207,9 @@ namespace Hotcakes.Commerce
 
         private AnalyticsService _AnalyticsService;
 
+        /// <summary>
+        /// Public API member: <c>public AnalyticsService AnalyticsService</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public AnalyticsService AnalyticsService
         {
             get
@@ -1050,6 +1224,9 @@ namespace Hotcakes.Commerce
 
         private GlobalizationService _GlobalizationService;
 
+        /// <summary>
+        /// Public API member: <c>public GlobalizationService GlobalizationServices</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public GlobalizationService GlobalizationServices
         {
             get
@@ -1064,6 +1241,9 @@ namespace Hotcakes.Commerce
 
         private ISocialService _SocialService;
 
+        /// <summary>
+        /// Public API member: <c>public ISocialService SocialService</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public ISocialService SocialService
         {
             get

@@ -26,14 +26,34 @@
 
 namespace Hotcakes.Commerce.Metrics
 {
+    /// <summary>
+    /// Composes the repositories used to record and report store search-query metrics.
+    /// </summary>
+    /// <remarks>
+    /// The application-level service is exposed through the compatibility-sensitive
+    /// <c>MetricsSerices</c> property name. The misspelling is preserved by the public
+    /// application API and is not corrected here.
+    /// </remarks>
     public class MetricsServices : HccServiceBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MetricsServices"/> class for the specified request context.
+        /// </summary>
+        /// <param name="context">The commerce request context that supplies the current store and repository scope.</param>
         public MetricsServices(HccRequestContext context)
             : base(context)
         {
             SearchQueries = Factory.CreateRepo<SearchQueryRepository>(Context);
         }
 
+        /// <summary>
+        /// Gets or sets the repository for persisted <see cref="SearchQuery"/> records and query reports.
+        /// </summary>
+        /// <value>The repository created for this service's request context.</value>
+        /// <remarks>
+        /// The protected setter permits derived services to replace the repository while preserving the
+        /// service's public composition contract.
+        /// </remarks>
         public SearchQueryRepository SearchQueries { get; protected set; }
     }
 }

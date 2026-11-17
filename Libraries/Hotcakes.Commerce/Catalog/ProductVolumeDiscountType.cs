@@ -27,8 +27,12 @@
 namespace Hotcakes.Commerce.Catalog
 {
     /// <summary>
-    ///     This enumeration is used to help determine how product volume discounts are applied in the application.
+    ///     Specifies how a product volume discount amount is applied.
     /// </summary>
+    /// <remarks>
+    ///     The numeric values are persisted and converted directly to the corresponding catalog DTO values, so they are
+    ///     compatibility-sensitive.
+    /// </remarks>
     public enum ProductVolumeDiscountType
     {
         /// <summary>

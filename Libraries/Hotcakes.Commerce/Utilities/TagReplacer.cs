@@ -29,9 +29,24 @@ using Hotcakes.Commerce.Storage;
 
 namespace Hotcakes.Commerce.Utilities
 {
-    // TODO: Get rid of this slow pig!!, TagHandlers and templates take care of this now.
+    /// <summary>
+    /// Replaces legacy store content tags in a string.
+    /// </summary>
+    /// <remarks>New code should prefer the tag-handler and template mechanisms used by the application.</remarks>
     public class TagReplacer
     {
+        /// <summary>
+        /// Replaces recognized legacy tags with store-specific URLs, branding, links, files, and address markup.
+        /// </summary>
+        /// <param name="source">The content containing tags such as <c>{{homelink}}</c> and <c>{{logo}}</c>.</param>
+        /// <param name="app">The current application used to resolve request security, customer, store, and contact data.</param>
+        /// <returns>
+        /// The source with recognized tags replaced. If the source does not contain <c>{{</c>, it is returned unchanged.
+        /// </returns>
+        /// <remarks>
+        /// The store address is inserted as HTML from <see cref="Hotcakes.Commerce.Contacts.Address.ToHtmlString"/>; callers must treat the
+        /// returned value as markup rather than encode it a second time. Unrecognized tags remain unchanged.
+        /// </remarks>
         public static string ReplaceContentTags(string source, HotcakesApplication app)
         {
             if (source.Contains("{{"))

@@ -43,9 +43,18 @@ using PayPalHttp;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>
+    /// Creates a PayPal Express order and redirects the customer to PayPal for approval.
+    /// </summary>
+    /// <remarks>
+    /// The task supports checkout-supplied addresses, optional order-total breakdowns, VAT-inclusive
+    /// totals, and authorize-versus-capture mode. On success it stores the PayPal order ID and updates
+    /// the local order before redirecting; failures add the localized customer-visible checkout error.
+    /// </remarks>
 	public class StartPaypalExpressCheckout : ThirdPartyCheckoutOrderTask
     {
 
+        /// <summary>Gets the payment-method identifier for PayPal Express.</summary>
 		public override string PaymentMethodId
 		{
 			get
@@ -54,6 +63,12 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 			}
 		}
 
+        /// <summary>
+        /// Creates the PayPal order and redirects the current response to the configured PayPal environment.
+        /// </summary>
+        /// <param name="context">The order workflow context containing the order, store settings, and request inputs.</param>
+        /// <returns><see langword="true"/> when PayPal accepts the order and the local order is updated; otherwise <see langword="false"/>.</returns>
+        /// <remarks>Exceptions and non-created PayPal responses add a <see cref="WorkflowMessage"/> using the <c>PaypalCheckoutCustomerError</c> localization key. The commented-out payment-information call remains inactive.</remarks>
 		public override bool ProcessCheckout(OrderTaskContext context)
         {
             if (context.HccApp.CurrentRequestContext.RoutingContext.HttpContext != null)
@@ -256,21 +271,30 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
         }
 
 
+        /// <summary>Creates an independent PayPal Express checkout task instance.</summary>
+        /// <returns>A new <see cref="StartPaypalExpressCheckout"/> instance.</returns>
 		public override Task Clone()
 		{
 			return new StartPaypalExpressCheckout();
 		}
 
+        /// <summary>Reports that this task has no local rollback operation.</summary>
+        /// <param name="context">The order workflow context.</param>
+        /// <returns>Always <see langword="true"/>; a PayPal order and external redirect are not undone here.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>Gets the stable workflow identifier for this task.</summary>
+        /// <returns>The PayPal Express checkout task ID <c>56597582-05d0-4b51-bd87-7426a9cf146f</c>.</returns>
         public override string TaskId()
         {
             return "56597582-05d0-4b51-bd87-7426a9cf146f";
         }
 
+        /// <summary>Gets the display name of this workflow task.</summary>
+        /// <returns><c>Start Paypal Express Checkout</c>.</returns>
         public override string TaskName()
         {
             return "Start Paypal Express Checkout";

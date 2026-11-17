@@ -26,44 +26,71 @@
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>
+    /// Throws <see cref="StoreException"/> instances carrying view message metadata.
+    /// </summary>
     public class StoreExceptionHelper
     {
+        /// <summary>
+        /// Public API member: <c>public static void ShowError(string content)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public static void ShowError(string content)
         {
             ShowError(null, content);
         }
 
+        /// <summary>
+        /// Public API member: <c>public static void ShowInfo(string content)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public static void ShowInfo(string content)
         {
             ShowInfo(null, content);
         }
 
+        /// <summary>
+        /// Public API member: <c>public static void ShowWarning(string content)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public static void ShowWarning(string content)
         {
             ShowWarning(null, content);
         }
 
+        /// <summary>
+        /// Public API member: <c>public static void ShowSuccess(string content)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public static void ShowSuccess(string content)
         {
             ShowSuccess(null, content);
         }
 
 
+        /// <summary>
+        /// Public API member: <c>public static void ShowError(string header, string content)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public static void ShowError(string header, string content)
         {
             ShowMessage(header, content, ViewMessageType.Error);
         }
 
+        /// <summary>
+        /// Public API member: <c>public static void ShowInfo(string header, string content)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public static void ShowInfo(string header, string content)
         {
             ShowMessage(header, content, ViewMessageType.Info);
         }
 
+        /// <summary>
+        /// Public API member: <c>public static void ShowWarning(string header, string content)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public static void ShowWarning(string header, string content)
         {
             ShowMessage(header, content, ViewMessageType.Warning);
         }
 
+        /// <summary>
+        /// Public API member: <c>public static void ShowSuccess(string header, string content)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public static void ShowSuccess(string header, string content)
         {
             ShowMessage(header, content, ViewMessageType.Success);

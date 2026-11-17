@@ -34,6 +34,7 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>Provides the catalog VariantRepository API.</summary>
     public class VariantRepository : HccSimpleRepoBase<hcc_Variants, Variant>
     {
         public VariantRepository(HccRequestContext c)
@@ -41,18 +42,23 @@ namespace Hotcakes.Commerce.Catalog
         {
         }
 
+        /// <summary>Gets or sets the bool value.</summary>
         protected override Func<hcc_Variants, bool> MatchItems(Variant item)
         {
             var guid = DataTypeHelper.BvinToGuid(item.Bvin);
             return v => v.bvin == guid;
         }
 
+        /// <summary>Gets or sets the bool value.</summary>
         protected override Func<hcc_Variants, bool> NotMatchItems(List<Variant> items)
         {
             var itemGuids = items.Select(i => DataTypeHelper.BvinToGuid(i.Bvin)).ToList();
             return v => !itemGuids.Contains(v.bvin);
         }
 
+        /// <summary>Gets or sets the CopyDataToModel value.</summary>
+        /// <param name="data">Input used by this operation.</param>
+        /// <param name="model">Input used by this operation.</param>
         protected override void CopyDataToModel(hcc_Variants data, Variant model)
         {
             model.Bvin = DataTypeHelper.GuidToBvin(data.bvin);
@@ -69,6 +75,9 @@ namespace Hotcakes.Commerce.Catalog
             model.CustomProperty = data.CustomProperty;
         }
 
+        /// <summary>Gets or sets the CopyModelToData value.</summary>
+        /// <param name="data">Input used by this operation.</param>
+        /// <param name="model">Input used by this operation.</param>
         protected override void CopyModelToData(hcc_Variants data, Variant model)
         {
             data.bvin = DataTypeHelper.BvinToGuid(model.Bvin);
@@ -81,6 +90,9 @@ namespace Hotcakes.Commerce.Catalog
         }
 
 
+        /// <summary>Gets or sets the Find value.</summary>
+        /// <param name="bvin">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public Variant Find(string bvin)
         {
             var result = FindForAllStores(bvin);
@@ -94,12 +106,18 @@ namespace Hotcakes.Commerce.Catalog
             return null;
         }
 
+        /// <summary>Gets or sets the FindForAllStores value.</summary>
+        /// <param name="bvin">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public Variant FindForAllStores(string bvin)
         {
             var guid = DataTypeHelper.BvinToGuid(bvin);
             return FindFirstPoco(y => y.bvin == guid);
         }
 
+        /// <summary>Gets or sets the Create value.</summary>
+        /// <param name="item">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public override bool Create(Variant item)
         {
             if (item.Bvin == string.Empty)
@@ -110,6 +128,9 @@ namespace Hotcakes.Commerce.Catalog
             return base.Create(item);
         }
 
+        /// <summary>Gets or sets the Update value.</summary>
+        /// <param name="c">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public bool Update(Variant c)
         {
             if (c.StoreId != Context.CurrentStore.Id)
@@ -120,12 +141,19 @@ namespace Hotcakes.Commerce.Catalog
             return Update(c, y => y.bvin == guid);
         }
 
+        /// <summary>Gets or sets the Delete value.</summary>
+        /// <param name="bvin">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public bool Delete(string bvin)
         {
             var guid = DataTypeHelper.BvinToGuid(bvin);
             return Delete(y => y.bvin == guid);
         }
 
+        /// <summary>Gets or sets the IsSkuExist value.</summary>
+        /// <param name="sku">Input used by this operation.</param>
+        /// <param name="excludeProductId">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public bool IsSkuExist(string sku, Guid? excludeProductId = null)
         {
             var storeId = Context.CurrentStore.Id;
@@ -139,6 +167,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>Gets or sets the FindByProductIds value.</summary>
+        /// <param name="productIds">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public List<Variant> FindByProductIds(List<string> productIds)
         {
             var storeId = Context.CurrentStore.Id;
@@ -151,11 +182,19 @@ namespace Hotcakes.Commerce.Catalog
             });
         }
 
+        /// <summary>Gets or sets the FindByProductId value.</summary>
+        /// <param name="productId">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public List<Variant> FindByProductId(string productId)
         {
             return FindByProductIdPaged(productId, 1, int.MaxValue);
         }
 
+        /// <summary>Gets or sets the FindByProductIdPaged value.</summary>
+        /// <param name="productId">Input used by this operation.</param>
+        /// <param name="pageNumber">Input used by this operation.</param>
+        /// <param name="pageSize">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public List<Variant> FindByProductIdPaged(string productId, int pageNumber, int pageSize)
         {
             var storeId = Context.CurrentStore.Id;
@@ -168,12 +207,18 @@ namespace Hotcakes.Commerce.Catalog
             }, pageNumber, pageSize);
         }
 
+        /// <summary>Gets or sets the DeleteForProductId value.</summary>
+        /// <param name="productBvin">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public bool DeleteForProductId(string productBvin)
         {
             var productGuid = DataTypeHelper.BvinToGuid(productBvin);
             return Delete(y => y.ProductId == productGuid);
         }
 
+        /// <summary>Gets or sets the MergeList value.</summary>
+        /// <param name="productBvin">Input used by this operation.</param>
+        /// <param name="subitems">Input used by this operation.</param>
         public void MergeList(string productBvin, List<Variant> subitems)
         {
             var storeId = Context.CurrentStore.Id;

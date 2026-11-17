@@ -29,20 +29,50 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>
+    /// Synchronous integration event hub for customer-account and order notifications; raisers do not queue or swallow handler exceptions.
+    /// </summary>
     public class Integration
     {
+        /// <summary>
+        /// Public API member: <c>public delegate void CustomerAccountEmailChangedHandler(object sender, string oldEmail, string newEmail);</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public delegate void CustomerAccountEmailChangedHandler(object sender, string oldEmail, string newEmail);
 
+        /// <summary>
+        /// Public API member: <c>public delegate void CustomerAccountEventHandler(object sender, CustomerAccount account);</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public delegate void CustomerAccountEventHandler(object sender, CustomerAccount account);
 
+        /// <summary>
+        /// Public API member: <c>public delegate void OrderEventHandler(object sender, Order order, HotcakesApplication app);</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public delegate void OrderEventHandler(object sender, Order order, HotcakesApplication app);
 
+        /// <summary>
+        /// Public API member: <c>public event CustomerAccountEventHandler OnCustomerAccountUpdated;</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public event CustomerAccountEventHandler OnCustomerAccountUpdated;
+        /// <summary>
+        /// Public API member: <c>public event CustomerAccountEventHandler OnCustomerAccountCreated;</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public event CustomerAccountEventHandler OnCustomerAccountCreated;
+        /// <summary>
+        /// Public API member: <c>public event CustomerAccountEventHandler OnCustomerAccountDeleted;</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public event CustomerAccountEventHandler OnCustomerAccountDeleted;
+        /// <summary>
+        /// Public API member: <c>public event CustomerAccountEmailChangedHandler OnCustomerAccountEmailChanged;</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public event CustomerAccountEmailChangedHandler OnCustomerAccountEmailChanged;
+        /// <summary>
+        /// Public API member: <c>public event OrderEventHandler OnOrderReceived;</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public event OrderEventHandler OnOrderReceived;
 
+        /// <summary>
+        /// Synchronously raises <see cref="OnCustomerAccountUpdated"/> when subscribed.
+        /// </summary>
         public void CustomerAccountUpdated(CustomerAccount account)
         {
             if (OnCustomerAccountUpdated != null)
@@ -51,6 +81,9 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        /// Synchronously raises <see cref="OnCustomerAccountCreated"/> when subscribed.
+        /// </summary>
         public void CustomerAccountCreated(CustomerAccount account)
         {
             if (OnCustomerAccountCreated != null)
@@ -59,6 +92,9 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        /// Synchronously raises <see cref="OnCustomerAccountDeleted"/> when subscribed.
+        /// </summary>
         public void CustomerAccountDeleted(CustomerAccount account)
         {
             if (OnCustomerAccountDeleted != null)
@@ -67,6 +103,9 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        /// Synchronously raises <see cref="OnCustomerAccountEmailChanged"/> when subscribed.
+        /// </summary>
         public void CustomerAccountEmailChanged(string oldEmail, string newEmail)
         {
             if (OnCustomerAccountEmailChanged != null)
@@ -75,6 +114,9 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        /// Synchronously raises <see cref="OnOrderReceived"/> when subscribed.
+        /// </summary>
         public void OrderReceived(Order order, HotcakesApplication app)
         {
             if (OnOrderReceived != null)

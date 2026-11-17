@@ -33,11 +33,14 @@ using Hotcakes.Commerce.Data.EF;
 namespace Hotcakes.Commerce.Accounts
 {
     /// <summary>
-    ///     This class used to perform different database operation against hcc_StoreDomains table.
+    ///     This class used to perform different database operation against hcc_StoreDomains table. Represents StoreDomainRepository data and behavior within the Hotcakes Commerce account and store boundary.
     /// </summary>
     [Serializable]
     public class StoreDomainRepository : HccSimpleRepoBase<hcc_StoreDomains, StoreDomain>
     {
+        /// <summary>Performs the StoreDomainRepository operation.</summary>
+        /// <param name="c">The c value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public StoreDomainRepository(HccRequestContext c)
             : base(c)
         {
@@ -67,23 +70,35 @@ namespace Hotcakes.Commerce.Accounts
             model.DomainName = data.DomainName;
         }
 
+        /// <summary>Performs the Find operation.</summary>
+        /// <param name="id">The id value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public StoreDomain Find(long id)
         {
             return FindFirstPoco(y => y.Id == id);
         }
 
+        /// <summary>Performs the FindForAnyStoreByDomain operation.</summary>
+        /// <param name="domain">The domain value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public StoreDomain FindForAnyStoreByDomain(string domain)
         {
             var domainMatch = domain.Trim().ToLowerInvariant();
             return FindFirstPoco(y => y.DomainName == domainMatch);
         }
 
+        /// <summary>Performs the Create operation.</summary>
+        /// <param name="item">The item value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public override bool Create(StoreDomain item)
         {
             item.StoreId = Context.CurrentStore.Id;
             return base.Create(item);
         }
 
+        /// <summary>Performs the Update operation.</summary>
+        /// <param name="item">The item value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public bool Update(StoreDomain item)
         {
             if (item.StoreId != Context.CurrentStore.Id)
@@ -93,11 +108,17 @@ namespace Hotcakes.Commerce.Accounts
             return Update(item, y => y.Id == item.Id);
         }
 
+        /// <summary>Performs the Delete operation.</summary>
+        /// <param name="id">The id value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public bool Delete(long id)
         {
             return Delete(y => y.Id == id);
         }
 
+        /// <summary>Performs the FindForStore operation.</summary>
+        /// <param name="storeId">The storeId value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public List<StoreDomain> FindForStore(long storeId)
         {
             return FindListPoco(q =>
@@ -107,6 +128,8 @@ namespace Hotcakes.Commerce.Accounts
             });
         }
 
+        /// <summary>Performs the FindForCurrentStore operation.</summary>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public List<StoreDomain> FindForCurrentStore()
         {
             var storeId = Context.CurrentStore.Id;

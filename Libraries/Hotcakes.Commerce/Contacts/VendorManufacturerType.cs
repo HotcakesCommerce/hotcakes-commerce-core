@@ -26,10 +26,19 @@
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>
+    /// Identifies whether a <see cref="VendorManufacturer"/> represents a vendor or a manufacturer.
+    /// </summary>
+    /// <remarks>
+    /// The numeric values are part of the persisted and DTO-compatible contract and must not be changed.
+    /// </remarks>
     public enum VendorManufacturerType
     {
+        /// <summary>Represents an unspecified contact type.</summary>
         Unknown = -1,
+        /// <summary>Represents a supplier that can fulfill products, including drop shipments.</summary>
         Vendor = 0,
+        /// <summary>Represents a product manufacturer.</summary>
         Manufacturer = 1
     }
 }

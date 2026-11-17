@@ -26,10 +26,22 @@
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    /// Represents the DeviceType order-domain type and preserves the established public compatibility surface.
+    /// </summary>
     public enum DeviceType
     {
+        /// <summary>
+        /// The serialized enum value for desktop.
+        /// </summary>
         Desktop = 0,
+        /// <summary>
+        /// The serialized enum value for tablet.
+        /// </summary>
         Tablet = 1,
+        /// <summary>
+        /// The serialized enum value for phone.
+        /// </summary>
         Phone = 2
     }
 }

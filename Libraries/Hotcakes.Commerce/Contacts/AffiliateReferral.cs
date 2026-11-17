@@ -36,6 +36,7 @@ namespace Hotcakes.Commerce.Contacts
     [Serializable]
     public class AffiliateReferral
     {
+        /// <summary>Initializes a referral with current UTC time and empty referrer data.</summary>
         public AffiliateReferral()
         {
             Id = 0;
@@ -90,10 +91,8 @@ namespace Hotcakes.Commerce.Contacts
             return dto;
         }
 
-        /// <summary>
-        ///     Allows you to populate the current AffiliateReferral object using an AffiliateReferralDTO instance
-        /// </summary>
-        /// <param name="dto">An instance of the AffiliateReferral from the REST API</param>
+        /// <summary>Populates this referral from its REST API representation.</summary>
+        /// <param name="dto">The DTO to copy; <see langword="null"/> leaves this instance unchanged.</param>
         public void FromDto(AffiliateReferralDTO dto)
         {
             if (dto == null) return;

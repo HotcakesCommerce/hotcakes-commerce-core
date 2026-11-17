@@ -41,6 +41,10 @@ namespace Hotcakes.Commerce.Catalog
     {
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="GiftCardRepository" />.
+        /// </summary>
+        /// <param name="context">Value used to initialize the instance.</param>
         public GiftCardRepository(HccRequestContext context)
             : base(context)
         {
@@ -52,7 +56,15 @@ namespace Hotcakes.Commerce.Catalog
 
         internal class GiftCardOrder
         {
+            /// <summary>
+            /// Gets or sets the <see cref="GiftCard" /> catalog value.
+            /// </summary>
+            /// <value>The current value of <see cref="GiftCard" />.</value>
             public hcc_GiftCard GiftCard { get; set; }
+            /// <summary>
+            /// Gets or sets the <see cref="Order" /> catalog value.
+            /// </summary>
+            /// <value>The current value of <see cref="Order" />.</value>
             public hcc_Order Order { get; set; }
         }
 
@@ -306,6 +318,12 @@ namespace Hotcakes.Commerce.Catalog
             }).ToList();
         }
 
+        /// <summary>
+        /// Performs the <c>CopyModelToData</c> catalog operation.
+        /// </summary>
+        /// <param name="data">Input used by the operation.</param>
+        /// <param name="model">Input used by the operation.</param>
+        /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
         protected override void CopyModelToData(hcc_GiftCard data, GiftCard model)
         {
             data.GiftCardId = model.GiftCardId;
@@ -322,6 +340,12 @@ namespace Hotcakes.Commerce.Catalog
             data.RecipientName = model.RecipientName;
         }
 
+        /// <summary>
+        /// Performs the <c>CopyDataToModel</c> catalog operation.
+        /// </summary>
+        /// <param name="data">Input used by the operation.</param>
+        /// <param name="model">Input used by the operation.</param>
+        /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
         protected override void CopyDataToModel(hcc_GiftCard data, GiftCard model)
         {
             model.GiftCardId = data.GiftCardId;

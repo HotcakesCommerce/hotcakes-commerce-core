@@ -31,6 +31,16 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.Metrics
 {
+    /// <summary>
+    /// Renders Google Analytics ecommerce and Google Ads conversion markup from Hotcakes order data.
+    /// </summary>
+    /// <remarks>
+    /// The methods return script fragments as strings; they do not register scripts with a page or
+    /// perform any network request. The generated markup intentionally preserves the provider's
+    /// historical formatting and concatenation behavior. In particular, only apostrophes are
+    /// replaced in values passed through the internal Google-safe helper; this is not general
+    /// JavaScript, HTML, or URL escaping.
+    /// </remarks>
     public class GoogleAnalytics
     {
         private static string GoogleSafeString(string input)
@@ -39,6 +49,21 @@ namespace Hotcakes.Commerce.Metrics
             return result;
         }
 
+        /// <summary>
+        /// Renders the legacy Google ecommerce tracker and, when an order is supplied, its transaction and item data.
+        /// </summary>
+        /// <param name="googleId">The Google tracking identifier. This compatibility parameter is accepted but is not rendered or otherwise used by the current implementation.</param>
+        /// <param name="o">The order whose totals, shipping address, and line items are rendered; when <see langword="null"/>, only the opening and closing script tags are returned.</param>
+        /// <param name="storeName">The affiliation or store name rendered in the transaction data.</param>
+        /// <param name="categoryName">The category or variation rendered for each order item.</param>
+        /// <returns>A JavaScript <c>script</c> element containing the ecommerce calls. The output includes one transaction, one item per order line, and an ecommerce send call when <paramref name="o"/> is not <see langword="null"/>.</returns>
+        /// <remarks>
+        /// Order number, store name, address names, category, product name, and SKU are passed through
+        /// the internal apostrophe replacement before being concatenated into single-quoted JavaScript
+        /// values. Other characters are not escaped, including backslashes, line breaks, HTML markup,
+        /// or JavaScript syntax. Numeric values are concatenated using their normal string conversion,
+        /// and the output uses the order's shipping address and item collection as observed at render time.
+        /// </remarks>
         public static string RenderLatestTrackerAndTransaction(string googleId, Order o, string storeName,
             string categoryName)
         {
@@ -81,6 +106,23 @@ namespace Hotcakes.Commerce.Metrics
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Renders Google Ads purchase-conversion markup for an order value.
+        /// </summary>
+        /// <param name="orderValue">The purchase amount. It is rounded to two decimal places and formatted with invariant culture for the JavaScript value and image query string.</param>
+        /// <param name="conversionId">The Google conversion identifier, inserted into the JavaScript variable and tracking image path without escaping.</param>
+        /// <param name="conversionFormat">The conversion format inserted into <c>google_conversion_format</c> without escaping.</param>
+        /// <param name="conversionLabel">The conversion label inserted into the JavaScript variable and image query string without URL escaping.</param>
+        /// <param name="backgroundColor">The conversion color inserted into <c>google_conversion_color</c> without JavaScript escaping.</param>
+        /// <param name="https">Selects <c>https://</c> rather than <c>http://</c> for the noscript impression image. The external conversion script is always emitted with its fixed HTTPS URL.</param>
+        /// <returns>A JavaScript conversion block followed by the fixed Google conversion script URL and a noscript tracking image.</returns>
+        /// <remarks>
+        /// The generated JavaScript and image URL are assembled by direct string concatenation. The
+        /// conversion identifier, label, format, and background color are not escaped or encoded, so
+        /// callers must provide values compatible with the provider markup. The method retains the
+        /// historical malformed <c>/* &lt;!CDATA[ */</c> comment marker, emits a conversion-value
+        /// conditional based on the formatted amount, and does not change the provider's script semantics.
+        /// </remarks>
         public static string RenderGoogleAdwordTracker(decimal orderValue, string conversionId, string conversionFormat,
             string conversionLabel, string backgroundColor, bool https)
         {

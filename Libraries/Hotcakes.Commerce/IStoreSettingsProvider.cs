@@ -29,13 +29,18 @@ using System.Globalization;
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>Defines store-scoped settings and locale data access.</summary>
     public interface IStoreSettingsProvider
     {
+        /// <summary>Gets a typed store setting or its default.</summary><typeparam name="T">The setting type.</typeparam><param name="key">The setting key.</param><param name="defVal">The default value.</param>
         T GetSettingValue<T>(string key, T defVal);
-
+        /// <summary>Gets configured store locales.</summary>
         List<HccLocale> GetLocales();
+        /// <summary>Gets locale metadata by code.</summary><param name="code">The locale code.</param>
         HccLocale GetLocale(string code);
+        /// <summary>Gets the current page culture.</summary>
         CultureInfo GetPageLocale();
+        /// <summary>Gets the store default locale code.</summary>
         string GetDefaultLocale();
     }
 }

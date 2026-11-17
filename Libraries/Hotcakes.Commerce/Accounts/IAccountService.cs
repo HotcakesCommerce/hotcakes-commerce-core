@@ -26,6 +26,7 @@
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Represents IAccountService data and behavior within the Hotcakes Commerce account and store boundary.</summary>
     public interface IAccountService
     {
         //IUserAccountRepository AdminUsers { get; }

@@ -26,11 +26,16 @@
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>Object type identifiers used by the search index.</summary>
     public enum SearchManagerObjectType
     {
+        /// <summary>Specifies the Product value.</summary>
         Product = 100,
+        /// <summary>Specifies the Category value.</summary>
         Category = 200,
+        /// <summary>Specifies the CustomPage value.</summary>
         CustomPage = 300,
+        /// <summary>Specifies the ProductReviews value.</summary>
         ProductReviews = 400
     }
 }

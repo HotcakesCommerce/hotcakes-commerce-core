@@ -28,12 +28,18 @@ using System;
 
 namespace Hotcakes.Commerce.Reporting
 {
+    /// <summary>Describes a product found in abandoned carts and the related contact activity.</summary>
     public class AbandonedProduct
     {
+        /// <summary>Gets or sets the product identifier.</summary>
         public Guid ProductGuid { get; set; }
+        /// <summary>Gets or sets the product name used in the report.</summary>
         public string ProductName { get; set; }
+        /// <summary>Gets or sets the total quantity of this product in the abandoned carts.</summary>
         public int Quantity { get; set; }
+        /// <summary>Gets or sets the number of carts containing this product.</summary>
         public int CartsCount { get; set; }
+        /// <summary>Gets or sets the number of contacts associated with the abandoned-cart activity.</summary>
         public int ContactsCount { get; set; }
     }
 }
