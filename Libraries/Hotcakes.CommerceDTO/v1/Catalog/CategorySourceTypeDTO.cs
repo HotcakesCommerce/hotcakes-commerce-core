@@ -28,14 +28,35 @@ using System.Runtime.Serialization;
 
 namespace Hotcakes.CommerceDTO.v1.Catalog
 {
+    /// <summary>
+    ///     Specifies how a category obtains its content or destination.
+    /// </summary>
     [DataContract]
     public enum CategorySourceTypeDTO
     {
+        /// <summary>
+        ///     The category is managed manually.
+        /// </summary>
         [EnumMember] Manual = 0,
+        /// <summary>
+        ///     The category contents are determined by rules.
+        /// </summary>
         [EnumMember] ByRules = 1,
+        /// <summary>
+        ///     The category points to a custom link.
+        /// </summary>
         [EnumMember] CustomLink = 2,
+        /// <summary>
+        ///     The category points to a custom page.
+        /// </summary>
         [EnumMember] CustomPage = 3,
+        /// <summary>
+        ///     The category provides a drill-down destination.
+        /// </summary>
         [EnumMember] DrillDown = 4,
+        /// <summary>
+        ///     The category points to a flexible page.
+        /// </summary>
         [EnumMember] FlexPage = 5
     }
 }

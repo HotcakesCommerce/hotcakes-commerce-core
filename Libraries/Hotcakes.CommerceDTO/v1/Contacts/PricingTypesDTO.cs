@@ -28,14 +28,23 @@ using System.Runtime.Serialization;
 
 namespace Hotcakes.CommerceDTO.v1.Contacts
 {
+    /// <summary>
+    ///     Identifies how a <see cref="PriceGroupDTO"/> adjusts a product's base price.
+    /// </summary>
     [DataContract]
     public enum PricingTypesDTO
     {
+        /// <summary>Subtracts a percentage from the list price.</summary>
         [EnumMember] PercentageOffListPrice = 0,
+        /// <summary>Subtracts a fixed amount from the list price.</summary>
         [EnumMember] AmountOffListPrice = 1,
+        /// <summary>Adds a percentage to the cost price.</summary>
         [EnumMember] PercentageAboveCost = 2,
+        /// <summary>Adds a fixed amount to the cost price.</summary>
         [EnumMember] AmountAboveCost = 3,
+        /// <summary>Subtracts a percentage from the site's price.</summary>
         [EnumMember] PercentageOffSitePrice = 4,
+        /// <summary>Subtracts a fixed amount from the site's price.</summary>
         [EnumMember] AmountOffSitePrice = 5
     }
 }

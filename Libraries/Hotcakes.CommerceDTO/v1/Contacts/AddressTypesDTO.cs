@@ -28,13 +28,21 @@ using System.Runtime.Serialization;
 
 namespace Hotcakes.CommerceDTO.v1.Contacts
 {
+    /// <summary>
+    ///     Identifies the business purpose of an <see cref="AddressDTO"/>.
+    /// </summary>
     [DataContract]
     public enum AddressTypesDTO
     {
+        /// <summary>General-purpose address.</summary>
         [EnumMember] General = 0,
+        /// <summary>Billing address.</summary>
         [EnumMember] Billing = 1,
+        /// <summary>Shipping address.</summary>
         [EnumMember] Shipping = 2,
+        /// <summary>Address used for both billing and shipping.</summary>
         [EnumMember] BillingAndShipping = 3,
+        /// <summary>Store contact address.</summary>
         [EnumMember] StoreContact = 99
     }
 }

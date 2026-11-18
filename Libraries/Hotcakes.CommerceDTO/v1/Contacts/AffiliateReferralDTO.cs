@@ -33,10 +33,14 @@ namespace Hotcakes.CommerceDTO.v1.Contacts
     ///     This is the main object used for all affiliate referrals through the REST API.
     /// </summary>
     /// <remarks>This is the REST API equivalent of the AffiliateReferral object.</remarks>
+    /// <seealso cref="AffiliateDTO"/>
     [DataContract]
     [Serializable]
     public class AffiliateReferralDTO
     {
+        /// <summary>
+        ///     Initializes a referral with the current UTC timestamp and empty referrer information.
+        /// </summary>
         public AffiliateReferralDTO()
         {
             Id = 0;

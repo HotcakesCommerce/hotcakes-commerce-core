@@ -36,6 +36,9 @@ namespace Hotcakes.CommerceDTO.v1
     [Serializable]
     public class CustomPropertyDTO
     {
+        /// <summary>
+        /// Initializes a custom property with empty developer, key, and value strings.
+        /// </summary>
         public CustomPropertyDTO()
         {
             DeveloperId = string.Empty;

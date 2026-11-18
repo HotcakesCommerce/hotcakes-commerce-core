@@ -35,6 +35,9 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
     [Serializable]
     public class PageOfProducts
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PageOfProducts"/> type with its default DTO values.
+        /// </summary>
         public PageOfProducts()
         {
             Products = new List<ProductDTO>();

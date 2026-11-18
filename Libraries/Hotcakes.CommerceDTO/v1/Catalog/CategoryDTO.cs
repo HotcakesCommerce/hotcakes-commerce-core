@@ -40,6 +40,9 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
     {
         //public List<CategoryPageVersionDTO> Versions { get; set; }
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="CategoryDTO"/> type with its default DTO values.
+        /// </summary>
         public CategoryDTO()
         {
             Bvin = string.Empty;

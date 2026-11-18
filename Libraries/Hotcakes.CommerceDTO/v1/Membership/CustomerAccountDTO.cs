@@ -40,7 +40,9 @@ namespace Hotcakes.CommerceDTO.v1.Membership
     [Serializable]
     public class CustomerAccountDTO
     {
-        // Constructor			
+        /// <summary>
+        /// Initializes a customer account with empty collections, addresses, and default account values.
+        /// </summary>
         public CustomerAccountDTO()
         {
             Addresses = new List<AddressDTO>();
@@ -62,93 +64,109 @@ namespace Hotcakes.CommerceDTO.v1.Membership
         }
 
         /// <summary>
-        ///     The unique ID of the customer account
+        /// Gets or sets the unique identifier of the customer account.
         /// </summary>
+        /// <value>The customer account identifier.</value>
         [DataMember]
         public string Bvin { get; set; }
 
         /// <summary>
-        ///     The primary email address for the customer and it is used to get their avatar from gravatar.
+        /// Gets or sets the customer's primary email address.
         /// </summary>
+        /// <remarks>The address is also used to retrieve the customer's Gravatar.</remarks>
+        /// <value>The primary email address.</value>
         [DataMember]
         public string Email { get; set; }
 
         /// <summary>
-        ///     First name of the customer
+        /// Gets or sets the customer's first name.
         /// </summary>
+        /// <value>The first name.</value>
         [DataMember]
         public string FirstName { get; set; }
 
         /// <summary>
-        ///     Last or surname of the customer
+        /// Gets or sets the customer's last name or surname.
         /// </summary>
+        /// <value>The last name.</value>
         [DataMember]
         public string LastName { get; set; }
 
         /// <summary>
-        ///     Encrypted password of the customer
+        /// Gets or sets the customer's encrypted password value.
         /// </summary>
+        /// <value>The encrypted password.</value>
         [DataMember]
         public string Password { get; set; }
 
         /// <summary>
-        ///     Addresses from the customer's address book
+        /// Gets or sets the addresses in the customer's address book.
         /// </summary>
+        /// <value>A list of <see cref="AddressDTO"/> instances.</value>
         [DataMember]
         public List<AddressDTO> Addresses { get; set; }
 
         /// <summary>
-        ///     Defines whether the customer is exempt from paying taxes
+        /// Gets or sets a value indicating whether the customer is exempt from paying taxes.
         /// </summary>
+        /// <value><see langword="true"/> if the customer is tax exempt; otherwise, <see langword="false"/>.</value>
         [DataMember]
         public bool TaxExempt { get; set; }
 
         /// <summary>
-        ///     Notes about the customer
+        /// Gets or sets notes associated with the customer.
         /// </summary>
+        /// <value>The customer notes.</value>
         [DataMember]
         public string Notes { get; set; }
 
         /// <summary>
-        ///     The unique ID (bvin) of the price group that this customer belongs to.
+        /// Gets or sets the unique identifier of the price group to which the customer belongs.
         /// </summary>
-        /// <remarks>Enmpty string means that they are not part of any price group.</remarks>
+        /// <remarks>An empty string indicates that the customer is not part of a price group.</remarks>
+        /// <value>The price group identifier.</value>
         [DataMember]
         public string PricingGroupId { get; set; }
 
         /// <summary>
-        ///     The number of times that the customer failed to login
+        /// Gets or sets the number of failed customer login attempts.
         /// </summary>
+        /// <value>The failed login count.</value>
         [DataMember]
         public int FailedLoginCount { get; set; }
 
         /// <summary>
-        ///     The date/time stamp of the last time the customer was updated
+        /// Gets or sets the UTC date and time when the customer was last updated.
         /// </summary>
+        /// <value>The last-update timestamp in UTC.</value>
         [DataMember]
         public DateTime LastUpdatedUtc { get; set; }
 
         /// <summary>
-        ///     The date/time stamp of when the customer was created
+        /// Gets or sets the UTC date and time when the customer account was created.
         /// </summary>
+        /// <value>The account creation timestamp in UTC.</value>
         [DataMember]
         public DateTime CreationDateUtc { get; set; }
 
         /// <summary>
-        ///     The date/time stamp of the last time the customer logged in
+        /// Gets or sets the UTC date and time when the customer last logged in.
         /// </summary>
+        /// <value>The last-login timestamp in UTC.</value>
         [DataMember]
         public DateTime LastLoginDateUtc { get; set; }
 
         /// <summary>
-        ///     Address details for the primary shipping address
+        /// Gets or sets the customer's primary shipping address.
         /// </summary>
+        /// <value>An <see cref="AddressDTO"/> containing shipping address details.</value>
         [DataMember]
         public AddressDTO ShippingAddress { get; set; }
 
         /// <summary>
-        ///     Address details for billing the customer
+        /// Gets or sets the customer's billing address.
         /// </summary>
+        /// <value>An <see cref="AddressDTO"/> containing billing address details.</value>
         [DataMember]
         public AddressDTO BillingAddress { get; set; }
     }

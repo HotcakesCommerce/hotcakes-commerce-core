@@ -35,22 +35,22 @@ namespace Hotcakes.CommerceDTO.v1.Shipping
     public enum ShippingModeDTO
     {
         /// <summary>
-        ///     This member should not be used.
+        ///     No shipping origin is specified; this value should not be used for a shippable product.
         /// </summary>
         [EnumMember] None = 0,
 
         /// <summary>
-        ///     If specified, this will have the product ship from the store address.
+        ///     The product ships from the store address.
         /// </summary>
         [EnumMember] ShipFromSite = 1,
 
         /// <summary>
-        ///     This member dictates that the product will ship from the vendors address.
+        ///     The product ships from the vendor's address.
         /// </summary>
         [EnumMember] ShipFromVendor = 2,
 
         /// <summary>
-        ///     When specified, the product will ship from the manufacturers address.
+        ///     The product ships from the manufacturer's address.
         /// </summary>
         [EnumMember] ShipFromManufacturer = 3
     }

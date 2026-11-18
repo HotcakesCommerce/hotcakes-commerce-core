@@ -35,6 +35,9 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
     [Serializable]
     public class ProductRelationshipDTO
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ProductRelationshipDTO"/> type with its default DTO values.
+        /// </summary>
         public ProductRelationshipDTO()
         {
             Id = 0;

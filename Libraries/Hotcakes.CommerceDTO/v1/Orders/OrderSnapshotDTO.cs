@@ -35,11 +35,15 @@ namespace Hotcakes.CommerceDTO.v1.Orders
     ///     the shopping cart.
     /// </summary>
     /// <remarks>
-    ///     This class will generally map to the hcc_Order table in the database.
+    ///     This class will generally map to the hcc_Order table in the database. Use <see cref="OrderDTO"/> when the complete
+    ///     order representation is required.
     /// </remarks>
     [Serializable]
     public class OrderSnapshotDTO
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderSnapshotDTO"/> class with default snapshot values.
+        /// </summary>
         public OrderSnapshotDTO()
         {
             bvin = string.Empty;

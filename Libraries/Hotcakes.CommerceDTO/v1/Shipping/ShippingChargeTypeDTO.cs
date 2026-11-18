@@ -35,7 +35,7 @@ namespace Hotcakes.CommerceDTO.v1.Shipping
     public enum ShippingChargeTypeDTO
     {
         /// <summary>
-        ///     Neither shipping or handling should be charged for this product.
+        ///     Neither shipping nor handling should be charged for this product.
         /// </summary>
         [EnumMember] None = 0,
 
@@ -45,12 +45,12 @@ namespace Hotcakes.CommerceDTO.v1.Shipping
         [EnumMember] ChargeShippingAndHandling = 1,
 
         /// <summary>
-        ///     This member dictates that the product will only change for shipping, not handling.
+        ///     The product is charged for shipping but not handling.
         /// </summary>
         [EnumMember] ChargeShipping = 2,
 
         /// <summary>
-        ///     This member dictates that the product will only change for handling, not shipping.
+        ///     The product is charged for handling but not shipping.
         /// </summary>
         [EnumMember] ChargeHandling = 3
     }

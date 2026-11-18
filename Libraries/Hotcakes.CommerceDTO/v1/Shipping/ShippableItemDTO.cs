@@ -30,12 +30,16 @@ using System.Runtime.Serialization;
 namespace Hotcakes.CommerceDTO.v1.Shipping
 {
     /// <summary>
-    ///     This is the primary class used for all shippable items in the REST API
+    ///     This is the primary class used for all shippable items in the REST API.
     /// </summary>
+    /// <seealso cref="ShippingModeDTO"/>
     [DataContract]
     [Serializable]
     public class ShippableItemDTO
     {
+        /// <summary>
+        ///     Initializes a shippable item with shipping enabled, zero dimensions, and site-origin shipping.
+        /// </summary>
         public ShippableItemDTO()
         {
             IsNonShipping = false;

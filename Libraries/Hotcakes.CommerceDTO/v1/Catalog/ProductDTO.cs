@@ -33,7 +33,7 @@ using Hotcakes.CommerceDTO.v1.Shipping;
 namespace Hotcakes.CommerceDTO.v1.Catalog
 {
     /// <summary>
-    ///     This is the primary class used for all products in the REST API
+    ///     Represents a product and its catalog, pricing, inventory, shipping, merchandising, and presentation data for the REST API.
     /// </summary>
     [Serializable]
     [XmlInclude(typeof (CustomPropertyDTO))]
@@ -44,6 +44,9 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
     [XmlInclude(typeof (ProductDescriptionTabDTO))]
     public class ProductDTO
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ProductDTO"/> type with its default DTO values.
+        /// </summary>
         public ProductDTO()
         {
             Bvin = string.Empty;
@@ -347,17 +350,32 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
         [DataMember]
         public long StoreId { get; set; }
 
+        /// <summary>
+        ///     Indicates whether the product is included in catalog and site search results.
+        /// </summary>
         [DataMember]
         public bool IsSearchable { get; set; }
 
+        /// <summary>
+        ///     The shipping charge mode used when calculating shipping for the product.
+        /// </summary>
         public ShippingChargeTypeDTO ShippingCharge { get; set; }
 
+        /// <summary>
+        ///     Indicates whether an upcharge may be applied to the product.
+        /// </summary>
         [DataMember]
         public bool AllowUpcharge  { get; set; }
 
+        /// <summary>
+        ///     The amount or percentage used for the product upcharge, according to <see cref="UpchargeUnit"/>.
+        /// </summary>
         [DataMember]
         public decimal UpchargeAmount  { get; set; }
 
+        /// <summary>
+        ///     The unit represented by <see cref="UpchargeAmount"/>, such as the <see cref="UpchargeAmountTypesDTO.Percent"/> value.
+        /// </summary>
         [DataMember]
         public string UpchargeUnit  { get; set; }
         

@@ -32,11 +32,15 @@ namespace Hotcakes.CommerceDTO.v1.Contacts
     /// <summary>
     ///     This is the main object that is used for all address management in the REST API
     /// </summary>
-    /// <remarks>The main application equivalent to this is the Address object</remarks>
+    /// <remarks>The main application equivalent to this is the Address object.</remarks>
+    /// <seealso cref="AddressTypesDTO"/>
     [DataContract]
     [Serializable]
     public class AddressDTO
     {
+        /// <summary>
+        ///     Initializes an address with empty text values, the general address type, and the current UTC timestamp.
+        /// </summary>
         public AddressDTO()
         {
             Init();

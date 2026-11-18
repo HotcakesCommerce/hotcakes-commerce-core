@@ -38,6 +38,9 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
     [Serializable]
     public class ProductPropertyChoiceDTO
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ProductPropertyChoiceDTO"/> type with its default DTO values.
+        /// </summary>
         public ProductPropertyChoiceDTO()
         {
             Id = 0;

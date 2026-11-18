@@ -37,6 +37,9 @@ namespace Hotcakes.CommerceDTO.v1.Orders
     [Serializable]
     public class OrderCouponDTO
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderCouponDTO"/> class with default coupon values.
+        /// </summary>
         public OrderCouponDTO()
         {
             Id = 0;

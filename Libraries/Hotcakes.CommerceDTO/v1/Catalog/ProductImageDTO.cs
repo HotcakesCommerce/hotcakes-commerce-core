@@ -29,10 +29,16 @@ using System.Runtime.Serialization;
 
 namespace Hotcakes.CommerceDTO.v1.Catalog
 {
+    /// <summary>
+    ///     Represents an image associated with a catalog product, including its display text and ordering.
+    /// </summary>
     [DataContract]
     [Serializable]
     public class ProductImageDTO
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ProductImageDTO"/> type with its default DTO values.
+        /// </summary>
         public ProductImageDTO()
         {
             Bvin = string.Empty;
@@ -45,27 +51,51 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
             StoreId = 0;
         }
 
+        /// <summary>
+        ///     The unique identifier of the product image.
+        /// </summary>
         [DataMember]
         public string Bvin { get; set; }
 
+        /// <summary>
+        ///     The UTC date and time when the product image was last updated.
+        /// </summary>
         [DataMember]
         public DateTime LastUpdatedUtc { get; set; }
 
+        /// <summary>
+        ///     The unique identifier of the product to which the image belongs.
+        /// </summary>
         [DataMember]
         public string ProductId { get; set; }
 
+        /// <summary>
+        ///     The image file name used to render the product image.
+        /// </summary>
         [DataMember]
         public string FileName { get; set; }
 
+        /// <summary>
+        ///     The caption associated with the product image.
+        /// </summary>
         [DataMember]
         public string Caption { get; set; }
 
+        /// <summary>
+        ///     Alternative text for the product image.
+        /// </summary>
         [DataMember]
         public string AlternateText { get; set; }
 
+        /// <summary>
+        ///     The display order of the image relative to other product images.
+        /// </summary>
         [DataMember]
         public int SortOrder { get; set; }
 
+        /// <summary>
+        ///     The identifier of the Hotcakes store that owns the product image.
+        /// </summary>
         [DataMember]
         public long StoreId { get; set; }
     }

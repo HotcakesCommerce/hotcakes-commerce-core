@@ -29,19 +29,31 @@ using System.Runtime.Serialization;
 
 namespace Hotcakes.CommerceDTO.v1.Orders
 {
+    /// <summary>
+    /// Represents an aggregate sales value for a reporting period.
+    /// </summary>
     [DataContract]
     [Serializable]
     public class SalesSummaryDTO
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SalesSummaryDTO"/> class with zero-valued summary fields.
+        /// </summary>
         public SalesSummaryDTO()
         {
             Period = 0;
             Sum = 0;
         }
 
+        /// <summary>
+        /// Gets or sets the reporting period represented by this summary.
+        /// </summary>
         [DataMember]
         public int Period { get; set; }
 
+        /// <summary>
+        /// Gets or sets the aggregate sales amount for the reporting period.
+        /// </summary>
         [DataMember]
         public decimal Sum { get; set; }
     }

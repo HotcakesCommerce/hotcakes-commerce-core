@@ -35,6 +35,9 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
     [Serializable]
     public class VariantOptionDataDTO
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="VariantOptionDataDTO"/> type with its default DTO values.
+        /// </summary>
         public VariantOptionDataDTO()
         {
             ChoiceId = string.Empty;
@@ -58,6 +61,9 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
     [Serializable]
     public class ProductVariantSkuUpdateDTO
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ProductVariantSkuUpdateDTO"/> type with its default DTO values.
+        /// </summary>
         public ProductVariantSkuUpdateDTO()
         {
             ProductBvin = string.Empty;

@@ -33,10 +33,14 @@ namespace Hotcakes.CommerceDTO.v1.Contacts
     ///     This class is the main object that helps manage price groups in the REST API
     /// </summary>
     /// <remarks>The main application equivalent is PriceGroup.</remarks>
+    /// <seealso cref="PricingTypesDTO"/>
     [DataContract]
     [Serializable]
     public class PriceGroupDTO
     {
+        /// <summary>
+        ///     Initializes a price group with an empty name and percentage-off-list-price pricing.
+        /// </summary>
         public PriceGroupDTO()
         {
             StoreId = 0;
