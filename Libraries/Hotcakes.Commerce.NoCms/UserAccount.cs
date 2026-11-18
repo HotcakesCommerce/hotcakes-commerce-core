@@ -29,11 +29,17 @@ using Hotcakes.Web.Cryptography;
 
 namespace Hotcakes.Commerce.NoCms
 {
+    /// <summary>
+    /// Represents a NoCms user account and its password credentials.
+    /// </summary>
     [Serializable]
     public class UserAccount
     {
         private string _hashedPassword = string.Empty;
 
+        /// <summary>
+        /// Initializes a new user account with an active status and empty credential values.
+        /// </summary>
         public UserAccount()
         {
             Id = -1;
@@ -45,9 +51,20 @@ namespace Hotcakes.Commerce.NoCms
             ResetKey = string.Empty;
         }
 
+        /// <summary>
+        /// Gets or sets the account identifier.
+        /// </summary>
         public long Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the email address associated with the account.
+        /// </summary>
         public string Email { get; set; }
 
+        /// <summary>
+        /// Gets or sets the stored password value. When a salt is present, assigning a value hashes it before storage.
+        /// </summary>
+        /// <seealso cref="Salt"/>
         public string HashedPassword
         {
             get { return _hashedPassword; }
@@ -65,11 +82,33 @@ namespace Hotcakes.Commerce.NoCms
             }
         }
 
+        /// <summary>
+        /// Gets or sets the UTC date and time when the account was created.
+        /// </summary>
         public DateTime DateCreated { get; set; }
+
+        /// <summary>
+        /// Gets or sets the status assigned to the account.
+        /// </summary>
+        /// <seealso cref="UserAccountStatus"/>
         public UserAccountStatus Status { get; set; }
+
+        /// <summary>
+        /// Gets or sets the salt used when hashing the password.
+        /// </summary>
         public string Salt { get; set; }
+
+        /// <summary>
+        /// Gets or sets the key used to authorize a password reset.
+        /// </summary>
         public string ResetKey { get; set; }
 
+        /// <summary>
+        /// Resets the password when the supplied reset key matches <see cref="ResetKey"/>.
+        /// </summary>
+        /// <param name="resetKey">The reset key to validate.</param>
+        /// <param name="newPassword">The new password value.</param>
+        /// <returns><see langword="true"/> when the reset key matches and the password is reset; otherwise, <see langword="false"/>.</returns>
         public bool ResetPassword(string resetKey, string newPassword)
         {
             if (resetKey != ResetKey) return false;
@@ -78,6 +117,11 @@ namespace Hotcakes.Commerce.NoCms
             return true;
         }
 
+        /// <summary>
+        /// Determines whether a plaintext password matches the account's stored password.
+        /// </summary>
+        /// <param name="trialPassword">The plaintext password to test.</param>
+        /// <returns><see langword="true"/> when the password matches; otherwise, <see langword="false"/>.</returns>
         public bool DoesPasswordMatch(string trialPassword)
         {
             if (Salt == string.Empty)

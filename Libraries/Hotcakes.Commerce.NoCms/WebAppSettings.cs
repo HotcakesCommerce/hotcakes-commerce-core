@@ -26,33 +26,62 @@
 
 namespace Hotcakes.Commerce.NoCms
 {
+    /// <summary>
+    /// Provides application settings used by the NoCms authentication and account workflows.
+    /// </summary>
     public class WebAppSettings
     {
+        /// <summary>
+        /// Gets the number of unsuccessful sign-in attempts allowed before a user is locked out.
+        /// </summary>
+        /// <value>Five attempts.</value>
         public static int UserLockoutAttempts
         {
             get { return 5; }
         }
 
+        /// <summary>
+        /// Gets the number of minutes for which a user remains locked out.
+        /// </summary>
+        /// <value>Fifteen minutes.</value>
         public static int UserLockoutMinutes
         {
             get { return 15; }
         }
 
+        /// <summary>
+        /// Gets the minimum password length required by the configured membership provider.
+        /// </summary>
+        /// <value>The value of <see cref="System.Web.Security.Membership.MinRequiredPasswordLength"/>.</value>
         public static int PasswordMinimumLength
         {
             get { return System.Web.Security.Membership.MinRequiredPasswordLength; }
         }
 
+        /// <summary>
+        /// Gets the number of days for which an authentication token remains valid.
+        /// </summary>
+        /// <returns>Ninety days.</returns>
         public static int AuthenticationTokenValidForDays()
         {
             return 90;
         }
 
+        /// <summary>
+        /// Builds the authentication-token cookie name used for an administrator of a store.
+        /// </summary>
+        /// <param name="storeId">The identifier of the store associated with the cookie.</param>
+        /// <returns>A cookie name containing the store identifier and the administrator token prefix.</returns>
         public static string CookieNameAuthenticationTokenAdmin(long storeId)
         {
             return "hotcakes-authtoken-" + storeId;
         }
 
+        /// <summary>
+        /// Builds the authentication-token cookie name used for a customer of a store.
+        /// </summary>
+        /// <param name="storeId">The identifier of the store associated with the cookie.</param>
+        /// <returns>A cookie name containing the store identifier and the customer token prefix.</returns>
         public static string CookieNameAuthenticationTokenCustomer(long storeId)
         {
             return "hotcakes-authtokencustomer-" + storeId;

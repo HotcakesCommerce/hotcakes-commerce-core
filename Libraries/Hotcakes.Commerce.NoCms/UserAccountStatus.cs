@@ -26,10 +26,24 @@
 
 namespace Hotcakes.Commerce.NoCms
 {
+    /// <summary>
+    /// Specifies the status and privileges assigned to a <see cref="UserAccount"/>.
+    /// </summary>
     public enum UserAccountStatus
     {
+        /// <summary>
+        /// The account is disabled.
+        /// </summary>
         Disabled = 0,
+
+        /// <summary>
+        /// The account is active.
+        /// </summary>
         Active = 1,
+
+        /// <summary>
+        /// The account has super-user privileges.
+        /// </summary>
         SuperUser = 99
     }
 }

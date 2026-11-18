@@ -30,14 +30,27 @@ using Hotcakes.Commerce.Data.EF;
 
 namespace Hotcakes.Commerce.NoCms
 {
+    /// <summary>
+    /// Provides persistence operations for <see cref="UserAccount"/> records.
+    /// </summary>
     [Serializable]
     public class UserAccountRepository : HccSimpleRepoBase<hcc_UserAccounts, UserAccount>, IUserAccountRepository
     {
+        /// <summary>
+        /// Initializes a repository using the specified commerce request context.
+        /// </summary>
+        /// <param name="c">The request context used by the repository.</param>
         public UserAccountRepository(HccRequestContext c)
             : base(c)
         {
         }
 
+        /// <summary>
+        /// Creates a user account after assigning its creation time and ensuring its password is hashed.
+        /// </summary>
+        /// <param name="item">The account to persist.</param>
+        /// <returns><see langword="true"/> when the account is created; otherwise, <see langword="false"/>.</returns>
+        /// <seealso cref="UserAccount.HashPasswordIfNeeded"/>
         public override bool Create(UserAccount item)
         {
             item.DateCreated = DateTime.UtcNow;
@@ -45,22 +58,42 @@ namespace Hotcakes.Commerce.NoCms
             return base.Create(item);
         }
 
+        /// <summary>
+        /// Updates a user account after ensuring its password is hashed.
+        /// </summary>
+        /// <param name="c">The account containing the values to persist.</param>
+        /// <returns><see langword="true"/> when the account is updated; otherwise, <see langword="false"/>.</returns>
         public bool Update(UserAccount c)
         {
             c.HashPasswordIfNeeded();
             return Update(c, y => y.Id == c.Id);
         }
 
+        /// <summary>
+        /// Deletes a user account by identifier.
+        /// </summary>
+        /// <param name="id">The identifier of the account to delete.</param>
+        /// <returns><see langword="true"/> when the account is deleted; otherwise, <see langword="false"/>.</returns>
         public bool Delete(long id)
         {
             return Delete(y => y.Id == id);
         }
 
+        /// <summary>
+        /// Finds a user account by identifier.
+        /// </summary>
+        /// <param name="id">The identifier of the account to find.</param>
+        /// <returns>The matching account, or <see langword="null"/> when no account is found.</returns>
         public UserAccount FindById(long id)
         {
             return FindFirstPoco(y => y.Id == id);
         }
 
+        /// <summary>
+        /// Finds a user account by email address.
+        /// </summary>
+        /// <param name="email">The email address to search for.</param>
+        /// <returns>The matching account, or <see langword="null"/> when no account is found.</returns>
         public UserAccount FindByEmail(string email)
         {
             return FindFirstPoco(y => y.email == email);

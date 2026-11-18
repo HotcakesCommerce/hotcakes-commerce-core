@@ -37,13 +37,27 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.Membership
 {
+    /// <summary>
+    /// Provides store-scoped persistence operations for <see cref="CustomerAccount"/> records.
+    /// </summary>
     public class CustomerAccountRepository : HccSimpleRepoBase<hcc_User, CustomerAccount>, ICustomerAccountRepository
     {
+        /// <summary>
+        /// Initializes a repository using the specified commerce request context.
+        /// </summary>
+        /// <param name="context">The request context used to resolve the current store.</param>
         public CustomerAccountRepository(HccRequestContext context)
             : base(context)
         {
         }
 
+        /// <summary>
+        /// Finds a customer account by identifier in the current store.
+        /// </summary>
+        /// <param name="bvin">The account identifier to find.</param>
+        /// <param name="useCache">A compatibility parameter retained for callers that specify cache behavior.</param>
+        /// <returns>The matching account in the current store, or <see langword="null"/> when no account is found there.</returns>
+        /// <seealso cref="FindForAllStores(string)"/>
         public CustomerAccount Find(string bvin, bool useCache = true)
         {
             var result = FindForAllStores(bvin);
@@ -57,11 +71,21 @@ namespace Hotcakes.Commerce.Membership
             return null;
         }
 
+        /// <summary>
+        /// Finds a customer account by identifier without restricting the initial lookup to the current store.
+        /// </summary>
+        /// <param name="bvin">The account identifier to find.</param>
+        /// <returns>The matching account, or <see langword="null"/> when no account is found.</returns>
         public CustomerAccount FindForAllStores(string bvin)
         {
             return FindFirstPoco(ca => ca.bvin == bvin);
         }
 
+        /// <summary>
+        /// Creates a customer account in the current store.
+        /// </summary>
+        /// <param name="item">The account to persist.</param>
+        /// <returns><see langword="true"/> when the account is created; otherwise, <see langword="false"/>.</returns>
         public override bool Create(CustomerAccount item)
         {
             if (item.Bvin == string.Empty)
@@ -76,6 +100,11 @@ namespace Hotcakes.Commerce.Membership
             return result;
         }
 
+        /// <summary>
+        /// Updates a customer account when it belongs to the current store.
+        /// </summary>
+        /// <param name="customerAccount">The account containing the values to persist.</param>
+        /// <returns><see langword="true"/> when the account is updated; otherwise, <see langword="false"/>.</returns>
         public bool Update(CustomerAccount customerAccount)
         {
             if (customerAccount.StoreId != Context.CurrentStore.Id)
@@ -89,28 +118,53 @@ namespace Hotcakes.Commerce.Membership
             return result;
         }
 
+        /// <summary>
+        /// Deletes a customer account from the current store.
+        /// </summary>
+        /// <param name="bvin">The account identifier to delete.</param>
+        /// <returns><see langword="true"/> when the account is deleted; otherwise, <see langword="false"/>.</returns>
         public bool Delete(string bvin)
         {
             var storeId = Context.CurrentStore.Id;
             return DeleteForStore(bvin, storeId);
         }
 
+        /// <summary>
+        /// Provides the portal-level account deletion hook.
+        /// </summary>
         public void DeleteAllForPortal()
         {
         }
 
+        /// <summary>
+        /// Finds all customer accounts in the current store.
+        /// </summary>
+        /// <returns>All customer accounts in the current store.</returns>
         public List<CustomerAccount> FindAll()
         {
             var totalCount = 0;
             return FindAllPaged(1, int.MaxValue, ref totalCount);
         }
 
+        /// <summary>
+        /// Finds a page of customer accounts in the current store.
+        /// </summary>
+        /// <param name="pageNumber">The one-based page number to retrieve.</param>
+        /// <param name="pageSize">The maximum number of accounts to return.</param>
+        /// <returns>The requested page of customer accounts.</returns>
         public override List<CustomerAccount> FindAllPaged(int pageNumber, int pageSize)
         {
             var allCount = 0;
             return FindAllPaged(pageNumber, pageSize, ref allCount);
         }
 
+        /// <summary>
+        /// Finds a page of customer accounts in the current store and reports the total count.
+        /// </summary>
+        /// <param name="pageNumber">The one-based page number to retrieve.</param>
+        /// <param name="pageSize">The maximum number of accounts to return.</param>
+        /// <param name="totalCount">When this method returns, the total number of matching accounts.</param>
+        /// <returns>The requested page of customer accounts.</returns>
         public List<CustomerAccount> FindAllPaged(int pageNumber, int pageSize, ref int totalCount)
         {
             var storeId = Context.CurrentStore.Id;
@@ -129,6 +183,11 @@ namespace Hotcakes.Commerce.Membership
             }
         }
 
+        /// <summary>
+        /// Finds customer accounts in the current store by email address.
+        /// </summary>
+        /// <param name="email">The email address to search for.</param>
+        /// <returns>The matching accounts, or <see langword="null"/> when the email is empty.</returns>
         public List<CustomerAccount> FindByEmail(string email)
         {
             if (string.IsNullOrEmpty(email))
@@ -140,12 +199,22 @@ namespace Hotcakes.Commerce.Membership
             return FindListPoco(q => q.Where(y => y.StoreId == storeId && y.Email == email));
         }
 
+        /// <summary>
+        /// Finds a customer account in the current store by username.
+        /// </summary>
+        /// <param name="username">The username to search for.</param>
+        /// <returns>The matching account, or <see langword="null"/> when no account is found.</returns>
         public CustomerAccount FindByUsername(string username)
         {
             var storeId = Context.CurrentStore.Id;
             return FindFirstPoco(ca => ca.StoreId == storeId && ca.Email == username);
         }
 
+        /// <summary>
+        /// Finds multiple customer accounts in the current store by their identifiers.
+        /// </summary>
+        /// <param name="ids">The account identifiers to search for.</param>
+        /// <returns>The matching accounts ordered by email address.</returns>
         public List<CustomerAccount> FindMany(List<string> ids)
         {
             var result = new List<CustomerAccount>();
@@ -158,6 +227,14 @@ namespace Hotcakes.Commerce.Membership
             });
         }
 
+        /// <summary>
+        /// Finds a page of customer accounts in the current store using a text filter.
+        /// </summary>
+        /// <param name="filter">The text to search for in account contact and address fields.</param>
+        /// <param name="pageNumber">The one-based page number to retrieve.</param>
+        /// <param name="pageSize">The maximum number of accounts to return.</param>
+        /// <param name="totalCount">When this method returns, the total number of matching accounts.</param>
+        /// <returns>The requested page of matching customer accounts.</returns>
         public List<CustomerAccount> FindByFilter(string filter, int pageNumber, int pageSize, ref int totalCount)
         {
             var result = new List<CustomerAccount>();
@@ -183,6 +260,10 @@ namespace Hotcakes.Commerce.Membership
             }
         }
 
+        /// <summary>
+        /// Deletes all customer accounts belonging to a store.
+        /// </summary>
+        /// <param name="storeId">The identifier of the store whose accounts should be deleted.</param>
         public void DestroyAllForStore(long storeId)
         {
             Delete(ca => ca.StoreId == storeId);

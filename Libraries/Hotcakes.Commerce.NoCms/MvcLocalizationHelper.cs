@@ -30,33 +30,78 @@ using Hotcakes.Commerce.Globalization;
 
 namespace Hotcakes.Commerce.NoCms
 {
+    /// <summary>
+    /// Provides the MVC-host implementation of the HCC localization helper contract.
+    /// </summary>
+    /// <remarks>
+    /// The adapter currently exposes the contract without implementing resource lookup; each
+    /// operation therefore retains its existing <see cref="NotImplementedException"/> behavior.
+    /// </remarks>
     public class MvcLocalizationHelper : ILocalizationHelper
     {
+        /// <summary>
+        /// Gets a resource value using the implementation's default culture behavior.
+        /// </summary>
+        /// <param name="key">The resource key to look up.</param>
+        /// <returns>The resource value when implemented.</returns>
+        /// <exception cref="NotImplementedException">Always thrown because this MVC adapter does not implement resource lookup.</exception>
         public string GetString(string key)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets a resource value for a specified culture.
+        /// </summary>
+        /// <param name="key">The resource key to look up.</param>
+        /// <param name="culture">The culture name to use for the lookup.</param>
+        /// <returns>The culture-specific resource value when implemented.</returns>
+        /// <exception cref="NotImplementedException">Always thrown because this MVC adapter does not implement resource lookup.</exception>
         public string GetString(string key, string culture)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets a resource value and applies the supplied format arguments.
+        /// </summary>
+        /// <param name="key">The resource key to look up.</param>
+        /// <param name="args">The values used to format the resource value.</param>
+        /// <returns>The formatted resource value when implemented.</returns>
+        /// <exception cref="NotImplementedException">Always thrown because this MVC adapter does not implement resource lookup.</exception>
         public string GetFormattedString(string key, params object[] args)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets the resource values exposed by this helper as a dictionary.
+        /// </summary>
+        /// <returns>The resource dictionary when implemented.</returns>
+        /// <exception cref="NotImplementedException">Always thrown because this MVC adapter does not implement resource lookup.</exception>
         public Dictionary<string, string> GetResourceDictionary()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets a resource value encoded for JavaScript use.
+        /// </summary>
+        /// <param name="key">The resource key to look up.</param>
+        /// <returns>The JavaScript-encoded resource value when implemented.</returns>
+        /// <exception cref="NotImplementedException">Always thrown because this MVC adapter does not implement resource lookup.</exception>
         public string GetJsEncodedString(string key)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets a resource value encoded for JavaScript use with caller-supplied characters to encode.
+        /// </summary>
+        /// <param name="key">The resource key to look up.</param>
+        /// <param name="characters">The characters supplied to the encoding routine.</param>
+        /// <returns>The JavaScript-encoded resource value when implemented.</returns>
+        /// <exception cref="NotImplementedException">Always thrown because this MVC adapter does not implement resource lookup.</exception>
         public string GetJsEncodedString(string key, string[] characters)
         {
             throw new NotImplementedException();

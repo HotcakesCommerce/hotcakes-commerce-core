@@ -26,13 +26,45 @@
 
 namespace Hotcakes.Commerce.NoCms
 {
+    /// <summary>
+    /// Defines persistence operations for <see cref="UserAccount"/> records.
+    /// </summary>
     public interface IUserAccountRepository
     {
+        /// <summary>
+        /// Creates a user account record.
+        /// </summary>
+        /// <param name="item">The account to persist.</param>
+        /// <returns><see langword="true"/> when the record is created; otherwise, <see langword="false"/>.</returns>
+        /// <seealso cref="UserAccount"/>
         bool Create(UserAccount item);
+
+        /// <summary>
+        /// Updates an existing user account record.
+        /// </summary>
+        /// <param name="c">The account containing the values to persist.</param>
+        /// <returns><see langword="true"/> when the record is updated; otherwise, <see langword="false"/>.</returns>
         bool Update(UserAccount c);
+
+        /// <summary>
+        /// Deletes a user account by identifier.
+        /// </summary>
+        /// <param name="id">The identifier of the account to delete.</param>
+        /// <returns><see langword="true"/> when the record is deleted; otherwise, <see langword="false"/>.</returns>
         bool Delete(long id);
 
+        /// <summary>
+        /// Finds a user account by identifier.
+        /// </summary>
+        /// <param name="id">The identifier of the account to find.</param>
+        /// <returns>The matching account, or <see langword="null"/> when no account is found.</returns>
         UserAccount FindById(long id);
+
+        /// <summary>
+        /// Finds a user account by email address.
+        /// </summary>
+        /// <param name="email">The email address to search for.</param>
+        /// <returns>The matching account, or <see langword="null"/> when no account is found.</returns>
         UserAccount FindByEmail(string email);
     }
 }
