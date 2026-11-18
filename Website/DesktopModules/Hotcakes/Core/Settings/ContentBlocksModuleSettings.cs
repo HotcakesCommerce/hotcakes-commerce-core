@@ -29,22 +29,35 @@ using Hotcakes.Commerce;
 
 namespace Hotcakes.Modules.Core.Settings
 {
+    /// <summary>
+    /// Provides persisted settings for a content-block module instance.
+    /// </summary>
     [Serializable]
     public class ContentBlocksModuleSettings
     {
         private readonly IModuleSettingsProvider _provider;
+        /// <summary>
+        /// Initializes settings for the specified module instance.
+        /// </summary>
+        /// <param name="moduleId">The DNN module instance identifier.</param>
 
         public ContentBlocksModuleSettings(int moduleId)
         {
             _provider = Factory.Instance.CreateModuleSettingsProvider(moduleId);
         }
 
+        /// <summary>
+        /// Gets or sets the selected content-block view.
+        /// </summary>
         public string View
         {
             get { return _provider.GetSettingValue("View", string.Empty); }
             set { _provider.SetSettingValue("View", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the identifier of the content block to display.
+        /// </summary>
         public string ContentBlockId
         {
             get { return _provider.GetSettingValue("ContentBlockId", string.Empty); }

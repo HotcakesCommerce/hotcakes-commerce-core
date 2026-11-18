@@ -34,6 +34,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Configuration
 {
+    /// <summary>
+    /// Provides the administrative page for editing a shipping zone.
+    /// </summary>
     public partial class Shipping_Zones_Edit : BaseAdminPage
     {
         #region Fields

@@ -37,6 +37,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 {
+    /// <summary>
+    /// Edits a qualification based on product count or total.
+    /// </summary>
     public partial class ProductsSumCountEditor : BaseQualificationControl
     {
         private SumOrCountOfProducts TypedQualification
@@ -73,6 +76,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             LoadQualification();
         }
 
+        /// <summary>Loads the product count qualification into the editor.</summary>
         public override void LoadQualification()
         {
             if (TypedQualification == null) return;
@@ -142,6 +146,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             }
         }
 
+        /// <summary>Saves the product count qualification.</summary>
+        /// <returns><see langword="true"/> when the qualification is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveQualification()
         {
             var q = TypedQualification;

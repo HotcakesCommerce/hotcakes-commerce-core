@@ -34,6 +34,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing
 {
+    /// <summary>
+    /// Provides the administrative page for listing promotions.
+    /// </summary>
     public partial class Promotions : BaseAdminPage
     {
         #region Event Handlers

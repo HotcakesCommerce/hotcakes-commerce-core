@@ -93,6 +93,9 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     Flag to indicate whether Manufacturers needs to be shown on filter panel.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the ShowManufactures value used by this storefront model.
+        /// </summary>
         [Obsolete("Deprecated in Hotcakes Commerce 03.03.00. Please use the ShowManufacturers property instead. Removing in version 03.04.00 or later.")]
         public bool ShowManufactures
         {
@@ -118,6 +121,9 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     List of available manufacturers. More detail for manufacturer on filter panel can be found at
         ///     <see cref="FacetItem" />.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the Manufactures value used by this storefront model.
         /// </summary>
         [Obsolete("Deprecated in Hotcakes Commerce 03.03.00. Please use the Manufacturers property instead. Removing in version 03.04.00 or later.")]
         public List<FacetItem> Manufactures {
@@ -166,6 +172,9 @@ namespace Hotcakes.Modules.Core.Models
 
         /// <summary>
         ///     Chosen manufacturers from filter panel.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the SelectedManufactures value used by this storefront model.
         /// </summary>
         [Obsolete(
             "Deprecated in Hotcakes Commerce 03.03.00. Please use the SelectedManufacturers property instead. Removing in version 03.04.00 or later.")]

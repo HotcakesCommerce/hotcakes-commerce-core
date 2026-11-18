@@ -41,6 +41,8 @@ namespace Hotcakes.Modules.Core.Api.Rest
     [Serializable]
     public class OrdersHandler : BaseRestHandler
     {
+        /// <summary>Initializes a new instance of the <see cref="OrdersHandler"/> handler.</summary>
+        /// <param name="app">The commerce application context used by the handler.</param>
         public OrdersHandler(HotcakesApplication app)
             : base(app)
         {

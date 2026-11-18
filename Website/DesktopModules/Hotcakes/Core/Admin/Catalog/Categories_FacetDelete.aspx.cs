@@ -31,6 +31,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
+    /// <summary>
+    /// Provides the administrative endpoint for deleting a category facet.
+    /// </summary>
     public partial class Categories_FacetDelete : BaseAdminJsonPage
     {
         protected override void OnLoad(EventArgs e)

@@ -26,6 +26,9 @@
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class WebUtils.
+    /// </summary>
     public static class WebUtils
     {
         private const string CONFIRM_FORMAT = "return hcConfirm(event, '{0}');";
@@ -33,11 +36,21 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
         // this function needs to be added on specific page or control to add page or control specific business logic
         private const string CONFIRM_FORMAT_WITH_PARAMETERS = "return ShowConfirmationMessage(this,event,'{0}');";
 
+        /// <summary>
+        /// Performs the administrative operation represented by JsConfirmMessage.
+        /// </summary>
+        /// <param name="value">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static string JsConfirmMessage(string value)
         {
             return string.Format(CONFIRM_FORMAT, value);
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by JsConfirmMessageWithDisabledCheck.
+        /// </summary>
+        /// <param name="value">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static string JsConfirmMessageWithDisabledCheck(string value)
         {
             return string.Format(CONFIRM_FORMAT_WITH_PARAMETERS, value);

@@ -28,10 +28,19 @@ using System;
 
 namespace Hotcakes.Modules.Core.Models.Json
 {
+/// <summary>
+    /// Represents the IsEmailKnownJsonModel storefront model.
+    /// </summary>
     [Serializable]
     public class IsEmailKnownJsonModel
     {
+        /// <summary>
+        /// Gets or sets the success value used by this storefront model.
+        /// </summary>
         public string success = "0";
+        /// <summary>
+        /// Gets or sets the username value used by this storefront model.
+        /// </summary>
         public string username = string.Empty;
     }
 }

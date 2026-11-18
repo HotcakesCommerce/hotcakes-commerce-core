@@ -32,6 +32,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
 {
+    /// <summary>
+    /// Edits a promotion action that grants a free product.
+    /// </summary>
     public partial class ReceiveFreeProduct : BaseActionControl
     {
         #region Properties
@@ -155,6 +158,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
 
         #region Overrides
 
+        /// <summary>Loads the free-product action into the editor.</summary>
         public override void LoadAction()
         {
             ProductPickerOrderProducts.LoadSearch();
@@ -196,6 +200,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
             gvProducts.DataBind();
         }
 
+        /// <summary>Saves the free-product action.</summary>
+        /// <returns><see langword="true"/> when the action is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveAction()
         {
             var item = gvProducts.Rows[0].FindControl("txtQuantity");

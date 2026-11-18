@@ -33,6 +33,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.SetupWizard
 {
+    /// <summary>
+    /// Provides the setup wizard dashboard step.
+    /// </summary>
     public partial class Step0Dashboard : HccPart
     {
         protected override void OnInit(EventArgs e)

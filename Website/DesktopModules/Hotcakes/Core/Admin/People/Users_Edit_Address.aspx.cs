@@ -37,11 +37,13 @@ namespace Hotcakes.Modules.Core.Admin.People
     {
         #region Properties
 
+        /// <summary>Gets or sets the address identifier being edited.</summary>
         public string AddressId
         {
             get { return Request.QueryString["id"]; }
         }
 
+        /// <summary>Gets the customer identifier associated with the address.</summary>
         public override string CustomerId
         {
             get { return Request.QueryString["UserID"]; }

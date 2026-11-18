@@ -30,12 +30,24 @@ using Hotcakes.Commerce.Marketing.PromotionActions;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class BaseActionControl.
+    /// </summary>
     [Serializable]
     public abstract class BaseActionControl : HccUserControl
     {
+        /// <summary>
+        /// Performs the administrative operation represented by LoadAction.
+        /// </summary>
         public Promotion Promotion { get; set; }
+        /// <summary>
+        /// Performs the administrative operation represented by LoadAction.
+        /// </summary>
         public IPromotionAction Action { get; set; }
 
+        /// <summary>
+        /// Performs the administrative operation represented by LoadAction.
+        /// </summary>
         public abstract void LoadAction();
         public abstract bool SaveAction();
 
@@ -44,10 +56,22 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             return HccApp.MarketingServices.Promotions.Update(Promotion);
         }
 
+        /// <summary>
+        /// Defines the administrative class FriendlyBvinDisplay.
+        /// </summary>
         protected class FriendlyBvinDisplay
         {
+            /// <summary>
+            /// Gets or sets the bvin.
+            /// </summary>
             public string bvin { get; set; }
+            /// <summary>
+            /// Gets or sets the display name.
+            /// </summary>
             public string DisplayName { get; set; }
+            /// <summary>
+            /// Gets or sets the quantity.
+            /// </summary>
             public int Quantity { get; set; }
         }
     }

@@ -40,6 +40,8 @@ namespace Hotcakes.Modules.Core.Controllers
     {
         #region Public methods
 
+        /// <summary>Displays the receipt for the current order.</summary>
+        /// <returns>The receipt view.</returns>
         //GET: /checkout/receipt
         [NonCacheableResponseFilter]
         public ActionResult Receipt()

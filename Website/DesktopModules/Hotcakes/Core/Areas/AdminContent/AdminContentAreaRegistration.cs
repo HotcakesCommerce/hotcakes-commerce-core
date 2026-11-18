@@ -29,14 +29,24 @@ using System.Web.Mvc;
 
 namespace Hotcakes.Modules.Core.Areas.AdminContent
 {
+    /// <summary>
+    /// Registers the MVC area that serves administrative content controllers.
+    /// </summary>
     [Serializable]
     public class AdminContentAreaRegistration : AreaRegistration
     {
+        /// <summary>
+        /// Gets the name of the MVC area.
+        /// </summary>
         public override string AreaName
         {
             get { return "AdminContent"; }
         }
 
+        /// <summary>
+        /// Registers the routes for this MVC area.
+        /// </summary>
+        /// <param name="context">The value supplied for context.</param>
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute("FileBrowser", "DesktopModules/Hotcakes/API/mvc/filebrowser/{action}/{id}",

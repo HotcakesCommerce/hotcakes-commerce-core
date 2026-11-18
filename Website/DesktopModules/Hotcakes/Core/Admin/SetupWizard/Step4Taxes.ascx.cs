@@ -34,6 +34,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.SetupWizard
 {
+    /// <summary>
+    /// Provides the tax-settings step of the setup wizard.
+    /// </summary>
     public partial class Step4Taxes : HccPart
     {
         #region Properties

@@ -155,6 +155,9 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     List of manufacturer for the different products under current category
         /// </summary>
+        /// <summary>
+        /// Gets or sets the Manufactures value used by this storefront model.
+        /// </summary>
         [Obsolete("Deprecated in Hotcakes Commerce 03.03.00. Please use the Manufacturers property instead. Removing in version 03.04.00 or later.")]
         public List<VendorManufacturer> Manufactures
         {
@@ -165,6 +168,9 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     Social tagging controls html string for this category. It contains different
         ///     information from <see cref="ISocialItem" />
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the SocialItem value used by this storefront model.
         /// </summary>
         [Obsolete("Removing in 03.04.00 or later. Previously was used for Evoq Social integration.")]
         public ISocialItem SocialItem { get; set; }

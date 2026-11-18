@@ -35,6 +35,9 @@ using Hotcakes.Shipping.Services;
 
 namespace Hotcakes.Modules.Core.Modules.Shipping.Flat_Rate_Per_Item
 {
+    /// <summary>
+    /// Defines the administrative class Edit.
+    /// </summary>
     public partial class Edit : HccShippingPart
     {
         protected override void OnInit(EventArgs e)

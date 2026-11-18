@@ -38,13 +38,23 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Modules.Core
 {
+    /// <summary>
+    /// Scheduled task that sends notifications for orders with failed payments.
+    /// </summary>
     public class PaymentFailureEmailJob : SchedulerClient
     {
+        /// <summary>
+        /// Initializes the scheduled task with its DNN schedule history entry.
+        /// </summary>
+        /// <param name="item">The schedule history entry used to report task progress and status.</param>
         public PaymentFailureEmailJob(ScheduleHistoryItem item)
         {
             ScheduleHistoryItem = item;
         }
 
+        /// <summary>
+        /// Processes all stores and sends configured failed-payment notifications.
+        /// </summary>
         public override void DoWork()
         {
             try

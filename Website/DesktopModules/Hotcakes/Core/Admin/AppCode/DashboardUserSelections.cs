@@ -31,11 +31,18 @@ using Hotcakes.Common.Dnn;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class DashboardUserSelections.
+    /// </summary>
     public class DashboardUserSelections
     {
         private readonly HotcakesApplication _app;
         private readonly Dictionary<string, string> _settings;
 
+        /// <summary>
+        /// Initializes a new instance of DashboardUserSelections.
+        /// </summary>
+        /// <param name="app">Value used by the operation.</param>
         public DashboardUserSelections(HotcakesApplication app)
         {
             var userId = app.CurrentCustomerId;
@@ -43,6 +50,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             _app = app;
         }
 
+        /// <summary>
+        /// Gets or sets the period1.
+        /// </summary>
         public SalesPeriod Period1
         {
             get { return (SalesPeriod) GetIntValue("HccDashboardPeriod1", (int) SalesPeriod.Month); }
@@ -53,6 +63,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             }
         }
 
+        /// <summary>
+        /// Gets or sets the period2.
+        /// </summary>
         public SalesPeriod Period2
         {
             get { return (SalesPeriod) GetIntValue("HccDashboardPeriod2", (int) SalesPeriod.Month); }
@@ -63,6 +76,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             }
         }
 
+        /// <summary>
+        /// Gets or sets the product mode.
+        /// </summary>
         public Top5ProductMode ProductMode
         {
             get { return (Top5ProductMode) GetIntValue("HccDashboardProductMode", (int) Top5ProductMode.Amount); }
@@ -73,6 +89,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             }
         }
 
+        /// <summary>
+        /// Gets or sets the customer mode.
+        /// </summary>
         public Top5CustomerMode CustomerMode
         {
             get { return (Top5CustomerMode) GetIntValue("HccDashboardCustomerMode", (int) Top5CustomerMode.Amount); }
@@ -83,6 +102,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             }
         }
 
+        /// <summary>
+        /// Gets or sets the vendor type.
+        /// </summary>
         public Top5VendorType VendorType
         {
             get { return (Top5VendorType) GetIntValue("HccDashboardVendorType", (int) Top5VendorType.Vendors); }
@@ -93,6 +115,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             }
         }
 
+        /// <summary>
+        /// Gets or sets the affiliate mode.
+        /// </summary>
         public Top5AffiliateMode AffiliateMode
         {
             get

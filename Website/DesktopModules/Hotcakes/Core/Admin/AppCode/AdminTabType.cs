@@ -26,21 +26,63 @@
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative enum AdminTabType.
+    /// </summary>
     public enum AdminTabType
     {
+        /// <summary>
+        /// Specifies the none value.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Specifies the dashboard value.
+        /// </summary>
         Dashboard = 1,
+        /// <summary>
+        /// Specifies the catalog value.
+        /// </summary>
         Catalog = 2,
+        /// <summary>
+        /// Specifies the marketing value.
+        /// </summary>
         Marketing = 8,
+        /// <summary>
+        /// Specifies the people value.
+        /// </summary>
         People = 3,
+        /// <summary>
+        /// Specifies the content value.
+        /// </summary>
         Content = 4, // excluded
+        /// <summary>
+        /// Specifies the orders value.
+        /// </summary>
         Orders = 5,
+        /// <summary>
+        /// Specifies the reports value.
+        /// </summary>
         Reports = 6,
+        /// <summary>
+        /// Specifies the admin value.
+        /// </summary>
         Admin = 7,
+        /// <summary>
+        /// Specifies the configuration value.
+        /// </summary>
         Configuration = 8,
+        /// <summary>
+        /// Specifies the plugins value.
+        /// </summary>
         Plugins = 9, // excluded
+        /// <summary>
+        /// Specifies the host admin value.
+        /// </summary>
         HostAdmin = 10,
 
+        /// <summary>
+        /// Specifies the setup wizard value.
+        /// </summary>
         SetupWizard = 100
     }
 }

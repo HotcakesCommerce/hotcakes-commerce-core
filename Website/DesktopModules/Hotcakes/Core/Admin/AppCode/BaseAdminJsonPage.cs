@@ -32,9 +32,15 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class BaseAdminJsonPage.
+    /// </summary>
     [Serializable]
     public class BaseAdminJsonPage : Page, IHccPage
     {
+        /// <summary>
+        /// Gets or sets the hcc app.
+        /// </summary>
         public HotcakesApplication HccApp
         {
             get { return HotcakesApplication.Current; }
@@ -51,6 +57,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             ValidatBasicAccess();
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by ValidatBasicAccess.
+        /// </summary>
         public void ValidatBasicAccess()
         {
             if (!HccApp.MembershipServices.IsUserLoggedIn())

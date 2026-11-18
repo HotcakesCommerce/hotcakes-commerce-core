@@ -29,15 +29,39 @@ using Hotcakes.Commerce.Content;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative interface IMessageBox.
+    /// </summary>
     public interface IMessageBox
     {
+        /// <summary>
+        /// Provides an administrative API member.
+        /// </summary>
         void ClearMessage();
 
+        /// <summary>
+        /// Provides an administrative API member.
+        /// </summary>
         void ShowOk(string msg);
+        /// <summary>
+        /// Provides an administrative API member.
+        /// </summary>
         void ShowError(string msg);
+        /// <summary>
+        /// Provides an administrative API member.
+        /// </summary>
         void ShowInformation(string msg);
+        /// <summary>
+        /// Provides an administrative API member.
+        /// </summary>
         void ShowWarning(string msg);
+        /// <summary>
+        /// Provides an administrative API member.
+        /// </summary>
         void ShowException(Exception ex);
+        /// <summary>
+        /// Provides an administrative API member.
+        /// </summary>
         void ShowMessage(string msg, DisplayMessageType msgType);
     }
 }

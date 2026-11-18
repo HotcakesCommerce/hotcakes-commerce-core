@@ -32,11 +32,13 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
 {
     partial class Payment_Edit_Gateway : BaseAdminPage
     {
+        /// <summary>Gets or sets the gateway identifier being edited.</summary>
         public string GatewayId
         {
             get { return Request.QueryString["id"]; }
         }
 
+        /// <summary>Gets or sets the payment method identifier associated with the gateway.</summary>
         public string MethodId
         {
             get { return Request.QueryString["payid"]; }

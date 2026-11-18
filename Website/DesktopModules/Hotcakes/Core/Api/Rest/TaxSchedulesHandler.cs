@@ -41,6 +41,8 @@ namespace Hotcakes.Modules.Core.Api.Rest
     [Serializable]
     public class TaxSchedulesHandler : BaseRestHandler
     {
+        /// <summary>Initializes a new instance of the <see cref="TaxSchedulesHandler"/> handler.</summary>
+        /// <param name="app">The commerce application context used by the handler.</param>
         public TaxSchedulesHandler(HotcakesApplication app)
             : base(app)
         {

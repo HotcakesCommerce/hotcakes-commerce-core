@@ -41,15 +41,18 @@ using Hotcakes.Modules.Core.Filters;
 
 namespace Hotcakes.Modules.Core.Controllers.Shared
 {
+/// <summary>Provides common storefront controller context, localization, and response helpers.</summary>
     [StoreClosedFilter]
     [Serializable]
     public class BaseAppController : Controller
     {
+        /// <summary>Gets the current Hotcakes application.</summary>
         public HotcakesApplication HccApp
         {
             get { return HotcakesApplication.Current; }
         }
 
+        /// <summary>Gets the DNN module instance associated with the request.</summary>
         public ModuleInstanceContext ModuleContext
         {
             get
@@ -59,6 +62,7 @@ namespace Hotcakes.Modules.Core.Controllers.Shared
             }
         }
 
+        /// <summary>Gets the parent module view name when one was supplied.</summary>
         public string ModuleViewName
         {
             get
@@ -73,6 +77,7 @@ namespace Hotcakes.Modules.Core.Controllers.Shared
             }
         }
 
+        /// <summary>Gets or sets the localization helper for the current controller view.</summary>
         public ILocalizationHelper Localization { get; set; }
 
         private CultureSwitch ActionCultureSwitch { get; set; }
@@ -84,6 +89,7 @@ namespace Hotcakes.Modules.Core.Controllers.Shared
             get { return HttpContext.Handler as CDefault; }
         }
 
+        /// <summary>Gets or sets the current page title.</summary>
         public string PageTitle
         {
             get
@@ -99,6 +105,7 @@ namespace Hotcakes.Modules.Core.Controllers.Shared
             }
         }
 
+        /// <summary>Gets or sets the current page description.</summary>
         public string PageDescription
         {
             get
@@ -114,6 +121,7 @@ namespace Hotcakes.Modules.Core.Controllers.Shared
             }
         }
 
+        /// <summary>Gets or sets the current page keywords.</summary>
         public string PageKeywords
         {
             get
@@ -304,11 +312,17 @@ namespace Hotcakes.Modules.Core.Controllers.Shared
             return Json(new {Status = isSuccess ? "OK" : "Failed", Message = message, RedirectUrl = redirectUrl});
         }
 
+        /// <summary>Registers content for rendering in the page head.</summary>
+        /// <param name="key">The unique registration key.</param>
+        /// <param name="content">The content to append.</param>
         public void RenderToHead(string key, string content)
         {
             RenderToElement(key, content, "Head");
         }
 
+        /// <summary>Registers content for rendering in the page body resource area.</summary>
+        /// <param name="key">The unique registration key.</param>
+        /// <param name="content">The content to append.</param>
         public void RenderToBody(string key, string content)
         {
             RenderToElement(key, content, "ClientResourceIncludes");

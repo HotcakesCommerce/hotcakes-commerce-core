@@ -28,17 +28,27 @@ using System;
 
 namespace Hotcakes.Modules.Core.Api.Mobile.Models
 {
+    /// <summary>
+    /// Describes a shipping provider available to the mobile client.
+    /// </summary>
     [Serializable]
     public class Shipper
     {
+        /// <summary>Gets or sets the shipping provider code.</summary>
         public string Code { get; set; }
+        /// <summary>Gets or sets the shipping provider name.</summary>
         public string Name { get; set; }
     }
 
+    /// <summary>
+    /// Contains shipping information for an order.
+    /// </summary>
     [Serializable]
     public class OrderShipping
     {
+        /// <summary>Gets or sets the shipping provider code.</summary>
         public string ShipperCode { get; set; }
+        /// <summary>Gets or sets the shipment tracking number.</summary>
         public string TrackingNumber { get; set; }
     }
 }

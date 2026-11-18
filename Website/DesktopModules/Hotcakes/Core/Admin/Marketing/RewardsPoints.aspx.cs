@@ -31,6 +31,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing
 {
+    /// <summary>
+    /// Provides the administrative page for managing reward points.
+    /// </summary>
     public partial class RewardsPoints : BaseAdminPage
     {
         #region Properties

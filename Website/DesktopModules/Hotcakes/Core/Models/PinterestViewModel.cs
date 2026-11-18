@@ -28,28 +28,67 @@ using System;
 
 namespace Hotcakes.Modules.Core.Models
 {
+    /// <summary>
+    /// Defines the supported values for PinterestSize.
+    /// </summary>
     public enum PinterestSize
     {
+        /// <summary>
+        /// Represents the Small option.
+        /// </summary>
         Small = 0,
+        /// <summary>
+        /// Represents the Large option.
+        /// </summary>
         Large = 3
     }
 
+    /// <summary>
+    /// Defines the supported values for PinterestShape.
+    /// </summary>
     public enum PinterestShape
     {
+        /// <summary>
+        /// Represents the Rectangular option.
+        /// </summary>
         Rectangular = 0,
+        /// <summary>
+        /// Represents the Circular option.
+        /// </summary>
         Circular = 1
     }
 
+    /// <summary>
+    /// Defines the supported values for PinterestColor.
+    /// </summary>
     public enum PinterestColor
     {
+        /// <summary>
+        /// Represents the Red option.
+        /// </summary>
         Red = 0,
+        /// <summary>
+        /// Represents the Gray option.
+        /// </summary>
         Gray = 1,
+        /// <summary>
+        /// Represents the White option.
+        /// </summary>
         White = 2
     }
 
+    /// <summary>
+    /// Defines the supported values for PinterestLanguage.
+    /// </summary>
     public enum PinterestLanguage
     {
+        /// <summary>
+        /// Represents the English option.
+        /// </summary>
         English = 0,
+        /// <summary>
+        /// Represents the Japanese option.
+        /// </summary>
         Japanese = 1
     }
 
@@ -60,6 +99,9 @@ namespace Hotcakes.Modules.Core.Models
     [Serializable]
     public class PinterestViewModel
     {
+        /// <summary>
+        /// Initializes a new instance of the PinterestViewModel type.
+        /// </summary>
         public PinterestViewModel()
         {
             Size = PinterestSize.Small;

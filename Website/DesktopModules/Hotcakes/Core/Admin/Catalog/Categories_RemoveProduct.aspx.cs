@@ -29,6 +29,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
+    /// <summary>
+    /// Provides the administrative endpoint for removing a product from a category.
+    /// </summary>
     public partial class Categories_RemoveProduct : BaseAdminJsonPage
     {
         protected override void OnLoad(EventArgs e)

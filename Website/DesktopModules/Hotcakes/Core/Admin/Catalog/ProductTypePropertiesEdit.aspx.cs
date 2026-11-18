@@ -39,9 +39,11 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 {
     partial class ProductTypePropertiesEdit : BaseAdminPage
     {
+        /// <summary>Stores the optional product property identifier during editing.</summary>
         public long? _productPropertyId;
         private const string DATEFORMAT = "MM/dd/yyyy";
 
+        /// <summary>Gets or sets the optional product property identifier.</summary>
         public long? ProductPropertyId
         {
             get

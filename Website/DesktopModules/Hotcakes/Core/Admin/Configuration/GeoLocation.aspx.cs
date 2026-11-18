@@ -31,6 +31,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Configuration
 {
+    /// <summary>
+    /// Provides the administrative page for configuring geolocation.
+    /// </summary>
     public partial class GeoLocation : BaseAdminPage
     {
         protected override void OnPreInit(EventArgs e)

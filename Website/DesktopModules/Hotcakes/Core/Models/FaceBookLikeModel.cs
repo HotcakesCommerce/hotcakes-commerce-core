@@ -28,22 +28,52 @@ using System;
 
 namespace Hotcakes.Modules.Core.Models
 {
+    /// <summary>
+    /// Defines the supported values for FaceBookVerb.
+    /// </summary>
     public enum FaceBookVerb
     {
+        /// <summary>
+        /// Represents the Like option.
+        /// </summary>
         Like = 0,
+        /// <summary>
+        /// Represents the Recommend option.
+        /// </summary>
         Recommend = 1
     }
 
+    /// <summary>
+    /// Defines the supported values for FaceBookLayout.
+    /// </summary>
     public enum FaceBookLayout
     {
+        /// <summary>
+        /// Represents the Buttons option.
+        /// </summary>
         Buttons = 0,
+        /// <summary>
+        /// Represents the Standard option.
+        /// </summary>
         Standard = 1,
+        /// <summary>
+        /// Represents the Box option.
+        /// </summary>
         Box = 2
     }
 
+    /// <summary>
+    /// Defines the supported values for FaceBookColorScheme.
+    /// </summary>
     public enum FaceBookColorScheme
     {
+        /// <summary>
+        /// Represents the Light option.
+        /// </summary>
         Light = 0,
+        /// <summary>
+        /// Represents the Dark option.
+        /// </summary>
         Dark = 1
     }
 

@@ -42,6 +42,8 @@ namespace Hotcakes.Modules.Core.Api.Rest
     [Serializable]
     public class AffiliatesHandler : BaseRestHandler
     {
+        /// <summary>Initializes a new instance of the <see cref="AffiliatesHandler"/> handler.</summary>
+        /// <param name="app">The commerce application context used by the handler.</param>
         public AffiliatesHandler(HotcakesApplication app)
             : base(app)
         {

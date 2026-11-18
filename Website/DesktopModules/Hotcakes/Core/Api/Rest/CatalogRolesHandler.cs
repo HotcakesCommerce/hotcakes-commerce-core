@@ -42,6 +42,8 @@ namespace Hotcakes.Modules.Core.Api.Rest
     /// </summary>
     public class CatalogRolesHandler : BaseRestHandler
     {
+        /// <summary>Initializes a new instance of the <see cref="CatalogRolesHandler"/> handler.</summary>
+        /// <param name="app">The commerce application context used by the handler.</param>
         public CatalogRolesHandler(HotcakesApplication app)
             : base(app)
         {

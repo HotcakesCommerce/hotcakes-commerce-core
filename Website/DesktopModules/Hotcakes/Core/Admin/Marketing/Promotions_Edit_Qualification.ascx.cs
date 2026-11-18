@@ -36,6 +36,9 @@ using Hotcakes.Shipping.FedEx.FedExRateServices;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing
 {
+    /// <summary>
+    /// Provides the administrative editor for promotion qualifications.
+    /// </summary>
     public partial class Promotions_Edit_Qualification : HccUserControl
     {
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(Promotions_Edit_Qualification));
@@ -50,6 +53,9 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         #endregion
 
+        /// <summary>Loads a promotion qualification into the editor.</summary>
+        /// <param name="p">The promotion being edited.</param>
+        /// <param name="qualif">The qualification to load.</param>
         public void LoadQualification(Promotion p, IPromotionQualification qualif)
         {
             PromotionId = p.Id;
@@ -125,6 +131,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
             LoadQualificationEditor(true);
         }
 
+        /// <summary>Saves the promotion qualification represented by the editor.</summary>
+        /// <returns><see langword="true"/> when the qualification is saved; otherwise, <see langword="false"/>.</returns>
         public bool SaveQualification()
         {
             var editor = GetCurrentEditor();

@@ -29,6 +29,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
+    /// <summary>
+    /// Provides the administrative page for deleting a file vault entry.
+    /// </summary>
     public partial class FileVaultDelete : BaseAdminPage
     {
         protected void Page_Load(object sender, EventArgs e)

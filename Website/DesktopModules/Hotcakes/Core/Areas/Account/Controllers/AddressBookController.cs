@@ -41,10 +41,13 @@ using Hotcakes.Modules.Core.Models.Json;
 
 namespace Hotcakes.Modules.Core.Areas.Account.Controllers
 {
+/// <summary>Manages the signed-in customer's saved addresses.</summary>
     [CustomerSignedInFilter]
     [Serializable]
     public class AddressBookController : BaseStoreController
     {
+        /// <summary>Displays the customer's saved addresses.</summary>
+        /// <returns>The address book view.</returns>
         public ActionResult Index()
         {
             var addresses = LoadAddresses();
@@ -52,6 +55,9 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
             return View(addresses);
         }
 
+        /// <summary>Deletes a saved address and returns to the address book.</summary>
+        /// <param name="id">The address business identifier.</param>
+        /// <returns>A redirect to the address book.</returns>
         [HccHttpPost]
         public ActionResult Delete(string id)
         {
@@ -65,6 +71,10 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
             return Redirect(Url.RouteHccUrl(HccRoute.AddressBook));
         }
 
+        /// <summary>Saves a new or existing customer address.</summary>
+        /// <param name="id">The address identifier, or <c>new</c> for a new address.</param>
+        /// <param name="posted">The submitted address form values.</param>
+        /// <returns>The address view on validation failure or a redirect after saving.</returns>
         [ActionName("Edit")]
         [HccHttpPost]
         public ActionResult EditPosted(string id, FormCollection posted)
@@ -102,6 +112,9 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
             return View(model);
         }
 
+        /// <summary>Validates and optionally normalizes a posted address.</summary>
+        /// <param name="form">The submitted address fields.</param>
+        /// <returns>A serialized address validation response.</returns>
         [HttpPost]
         public ActionResult ValidateAddress(FormCollection form)
         {
@@ -131,6 +144,9 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
             return new PreJsonResult(Web.Json.ObjectToJson(model));
         }
 
+        /// <summary>Displays the edit form for a saved or new address.</summary>
+        /// <param name="id">The address identifier, or <c>new</c>.</param>
+        /// <returns>The address edit view.</returns>
         public ActionResult Edit(string id)
         {
             var a = LoadAddress(id);

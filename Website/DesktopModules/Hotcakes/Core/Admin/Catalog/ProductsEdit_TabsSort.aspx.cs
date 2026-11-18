@@ -30,6 +30,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
+    /// <summary>
+    /// Provides the administrative endpoint for sorting product edit tabs.
+    /// </summary>
     public partial class ProductsEdit_TabsSort : BaseAdminJsonPage
     {
         protected override void OnLoad(EventArgs e)

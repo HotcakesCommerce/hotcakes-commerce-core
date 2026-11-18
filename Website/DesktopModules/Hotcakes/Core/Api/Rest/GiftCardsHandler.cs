@@ -42,6 +42,8 @@ namespace Hotcakes.Modules.Core.Api.Rest
     [Serializable]
     public class GiftCardsHandler : BaseRestHandler
     {
+        /// <summary>Initializes a new instance of the <see cref="GiftCardsHandler"/> handler.</summary>
+        /// <param name="app">The commerce application context used by the handler.</param>
         public GiftCardsHandler(HotcakesApplication app)
             : base(app)
         {

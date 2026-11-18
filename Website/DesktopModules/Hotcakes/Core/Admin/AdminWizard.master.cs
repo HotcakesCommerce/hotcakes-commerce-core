@@ -29,6 +29,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin
 {
+    /// <summary>
+    /// Defines the administrative class AdminWizard.
+    /// </summary>
     public partial class AdminWizard : BaseMasterPage
     {
         /// <summary>

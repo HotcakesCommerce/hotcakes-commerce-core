@@ -43,12 +43,15 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Modules.Core.Areas.Account.Controllers
 {
+/// <summary>Displays signed-in customer orders and digital downloads.</summary>
     [CustomerSignedInFilter]
     [Serializable]
     public class OrderHistoryController : BaseStoreController
     {
         #region Public methods
 
+        /// <summary>Displays the customer's paged order history.</summary>
+        /// <returns>The order history view.</returns>
         public ActionResult Index()
         {
             var model = new OrderHistoryViewModel();
@@ -58,6 +61,9 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
             return View(model);
         }
 
+        /// <summary>Displays the details for a customer order.</summary>
+        /// <param name="id">The order business identifier.</param>
+        /// <returns>The order details view.</returns>
         public ActionResult Details(string id)
         {
             var model = LoadOrder(id);
@@ -65,6 +71,9 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
             return View(model);
         }
 
+        /// <summary>Downloads a purchased product file after ownership and availability checks.</summary>
+        /// <param name="id">The product file identifier.</param>
+        /// <returns>The file response or a download error view.</returns>
         public ActionResult DownloadFile(string id)
         {
             var orderBvin = Request.QueryString["oid"] ?? string.Empty;
@@ -132,6 +141,10 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
             return r;
         }
 
+        /// <summary>Cancels a recurring subscription line item for the current customer.</summary>
+        /// <param name="orderId">The order business identifier.</param>
+        /// <param name="lineItemId">The recurring line item identifier.</param>
+        /// <returns>A JSON status response.</returns>
         public JsonResult CancelSubscription(string orderId, long lineItemId)
         {
             var o = HccApp.OrderServices.Orders.FindForCurrentStore(orderId);

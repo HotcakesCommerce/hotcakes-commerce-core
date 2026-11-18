@@ -42,6 +42,9 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Modules.Core.Admin.Orders
 {
+    /// <summary>
+    /// Provides the administrative page for editing an order.
+    /// </summary>
     public partial class EditOrder : BaseOrderPage
     {
         private const string CONFIRMFORMAT = "return hcConfirm(event, '{0}');";
@@ -266,6 +269,8 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             ucOrderItems.OrderEdited += ucOrderItems_OrderEdited;
         }
 
+        /// <summary>Returns the view state used to restore the order editing page.</summary>
+        /// <returns>The current page view state.</returns>
         public StateBag ReturnViewState()
         {
             return ViewState;

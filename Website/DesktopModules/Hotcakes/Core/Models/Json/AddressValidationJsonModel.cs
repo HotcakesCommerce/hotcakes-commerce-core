@@ -29,13 +29,31 @@ using Hotcakes.Commerce.Contacts;
 
 namespace Hotcakes.Modules.Core.Models.Json
 {
+/// <summary>
+    /// Represents the AddressValidationJsonModel storefront model.
+    /// </summary>
     [Serializable]
     public class AddressValidationJsonModel
     {
+        /// <summary>
+        /// Gets or sets the IsValid value used by this storefront model.
+        /// </summary>
         public bool IsValid { get; set; }
+        /// <summary>
+        /// Gets or sets the Message value used by this storefront model.
+        /// </summary>
         public string Message { get; set; }
+        /// <summary>
+        /// Gets or sets the NormalizedAddress value used by this storefront model.
+        /// </summary>
         public Address NormalizedAddress { get; set; }
+        /// <summary>
+        /// Gets or sets the NormalizedAddressHtml value used by this storefront model.
+        /// </summary>
         public string NormalizedAddressHtml { get; set; }
+        /// <summary>
+        /// Gets or sets the OriginalAddressHtml value used by this storefront model.
+        /// </summary>
         public string OriginalAddressHtml { get; set; }
     }
 }

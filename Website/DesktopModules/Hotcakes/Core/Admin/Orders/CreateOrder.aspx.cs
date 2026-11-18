@@ -42,6 +42,9 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Modules.Core.Admin.Orders
 {
+    /// <summary>
+    /// Provides the administrative page for creating an order.
+    /// </summary>
     public partial class CreateOrder : BaseOrderPage
     {
         private const string ERRORFORMAT = "<span class=\"errormessage\">{0}</span>";

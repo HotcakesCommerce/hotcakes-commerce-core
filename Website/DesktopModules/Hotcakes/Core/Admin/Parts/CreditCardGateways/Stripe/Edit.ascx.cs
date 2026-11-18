@@ -31,8 +31,14 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Modules.Core.Admin.Parts.CreditCardGateways.Stripe
 {
+    /// <summary>
+    /// Defines the administrative class Edit.
+    /// </summary>
     public partial class Edit : HccCreditCardGatewayPart
     {
+        /// <summary>
+        /// Performs the administrative operation represented by LoadData.
+        /// </summary>
         public override void LoadData()
         {
             if (ddlCurrency.Items.Count == 0)
@@ -53,6 +59,9 @@ namespace Hotcakes.Modules.Core.Admin.Parts.CreditCardGateways.Stripe
             ddlCurrency.SelectedValue = settings.CurrencyCode;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by SaveData.
+        /// </summary>
         public override void SaveData()
         {
             var settings = new StripeSettings();

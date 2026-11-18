@@ -86,6 +86,9 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     Amount of the gift card applied for the product
         /// </summary>
+        /// <summary>
+        /// Gets or sets the GiftCardAmount value used by this storefront model.
+        /// </summary>
         [Required]
         public decimal GiftCardAmount { get; set; }
 
@@ -101,6 +104,9 @@ namespace Hotcakes.Modules.Core.Models
 
         /// <summary>
         ///     Gift card receiver email
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the GiftCardRecEmail value used by this storefront model.
         /// </summary>
         [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*")]
         public string GiftCardRecEmail { get; set; }
@@ -142,6 +148,9 @@ namespace Hotcakes.Modules.Core.Models
 
         /// <summary>
         ///     If product is displayed by link from cart then this shows the unique identifier for the product for that order.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the LineItemId value used by this storefront model.
         /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public long? LineItemId { get; set; }
@@ -210,6 +219,9 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     Quantity entered by user
         /// </summary>
+        /// <summary>
+        /// Gets or sets the Quantity value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public int Quantity { get; set; }
 
@@ -227,6 +239,9 @@ namespace Hotcakes.Modules.Core.Models
 
         /// <summary>
         ///     Social controls for the given product in json format.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the SocialItem value used by this storefront model.
         /// </summary>
         [Obsolete("Removing in 03.05.00 or later. Previously was used for Evoq Social integration.")]
         public ISocialItem SocialItem { get; set; }
@@ -265,6 +280,9 @@ namespace Hotcakes.Modules.Core.Models
         /// </summary>
         public string VendorName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the UpchargeAllowed value used by this storefront model.
+        /// </summary>
         public bool UpchargeAllowed { get; set; }
     }
 }

@@ -33,6 +33,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
 {
+    /// <summary>
+    /// Edits a promotion action that adjusts an order total.
+    /// </summary>
     public partial class AdjustOrderTotalEditor : BaseActionControl
     {
         private OrderTotalAdjustment TypedAction
@@ -40,6 +43,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
             get { return Action as OrderTotalAdjustment; }
         }
 
+        /// <summary>Loads the order-total adjustment action into the editor.</summary>
         public override void LoadAction()
         {
             if (lstOrderTotalAdjustmentType.Items.Count == 0)
@@ -52,6 +56,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
             lstOrderTotalAdjustmentType.SelectedValue = TypedAction.AdjustmentType == AmountTypes.Percent ? "1" : "0";
         }
 
+        /// <summary>Saves the order-total adjustment action.</summary>
+        /// <returns><see langword="true"/> when the action is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveAction()
         {
             TypedAction.Amount = OrderTotalAmountField.Text.ConvertTo(TypedAction.Amount);

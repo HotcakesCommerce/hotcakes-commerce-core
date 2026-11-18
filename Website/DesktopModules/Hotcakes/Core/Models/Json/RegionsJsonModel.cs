@@ -28,9 +28,15 @@ using System;
 
 namespace Hotcakes.Modules.Core.Models.Json
 {
+/// <summary>
+    /// Represents the RegionsJsonModel storefront model.
+    /// </summary>
     [Serializable]
     public class RegionsJsonModel
     {
+        /// <summary>
+        /// Gets or sets the Regions value used by this storefront model.
+        /// </summary>
         public string Regions { get; set; }
     }
 }

@@ -32,6 +32,9 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.Moneris
 {
     partial class Edit : HccPaymentMethodPart
     {
+        /// <summary>
+        /// Performs the administrative operation represented by LoadData.
+        /// </summary>
         public override void LoadData()
         {
             var settings = new MonerisSettings();
@@ -46,6 +49,9 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.Moneris
             lblUrl.Text = HccUrlBuilder.RouteHccUrl(HccRoute.ThirdPartyPayment);
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by SaveData.
+        /// </summary>
         public override void SaveData()
         {
             var settings = new MonerisSettings();

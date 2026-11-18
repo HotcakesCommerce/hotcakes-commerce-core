@@ -40,6 +40,9 @@ using System.Web.UI.WebControls;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing
 {
+    /// <summary>
+    /// Provides the administrative page for editing a promotion.
+    /// </summary>
     public partial class Promotions_Edit : BaseAdminPage
     {
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(Promotions_Edit));

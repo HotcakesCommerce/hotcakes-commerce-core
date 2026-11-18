@@ -93,6 +93,9 @@ namespace Hotcakes.Modules.Core.Models
         /// </summary>
         public bool HasUpcharge { get; set; }
 
+        /// <summary>
+        /// Gets or sets the UpchargeAmount value used by this storefront model.
+        /// </summary>
         public decimal UpchargeAmount { get; set; }
 
     }

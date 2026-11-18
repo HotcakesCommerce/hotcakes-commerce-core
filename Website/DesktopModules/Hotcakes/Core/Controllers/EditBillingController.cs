@@ -37,9 +37,12 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Provides storefront billing details for recurring orders.</summary>
     [Serializable]
     public class EditBillingController : BaseAppController
     {
+        /// <summary>Displays the billing and payment form for the routed order.</summary>
+        /// <returns>The billing edit view.</returns>
         public ActionResult Index()
         {
             var order = RouteData.Values["order"] as Order;
@@ -51,6 +54,9 @@ namespace Hotcakes.Modules.Core.Controllers
             return View(model);
         }
 
+        /// <summary>Saves billing details and updates active recurring subscriptions.</summary>
+        /// <param name="form">The submitted billing form values.</param>
+        /// <returns>A JSON status response.</returns>
         [HccHttpPost]
         public JsonResult Save(FormCollection form)
         {
@@ -101,6 +107,9 @@ namespace Hotcakes.Modules.Core.Controllers
             return Json(new {Status = "Invalid", Message = GetValidationSummaryMessage()});
         }
 
+        /// <summary>Normalizes a submitted credit-card number.</summary>
+        /// <param name="number">The card number to clean.</param>
+        /// <returns>A JSON result containing the normalized number.</returns>
         [HccHttpPost]
         public JsonResult CleanCreditCard(string number)
         {

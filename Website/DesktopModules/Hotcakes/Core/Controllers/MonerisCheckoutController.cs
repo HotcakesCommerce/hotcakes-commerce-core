@@ -44,9 +44,12 @@ using Hotcakes.Web.Validation;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Processes hosted Moneris checkout responses for the current store.</summary>
     [Serializable]
     public class MonerisCheckoutController : BaseStoreController
     {
+        /// <summary>Validates and processes the posted Moneris response.</summary>
+        /// <returns>The checkout response view.</returns>
         [NonCacheableResponseFilter]
         public ActionResult Index()
         {

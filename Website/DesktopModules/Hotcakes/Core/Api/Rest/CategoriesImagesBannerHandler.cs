@@ -33,15 +33,23 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Modules.Core.Api.Rest
 {
+    /// <summary>Handles REST API requests for CategoriesImagesBannerHandler.</summary>
+    /// <remarks>Responses are serialized using the established REST API response contract.</remarks>
     [Serializable]
     public class CategoriesImagesBannerHandler : BaseRestHandler
     {
+        /// <summary>Initializes a new instance of the <see cref="CategoriesImagesBannerHandler"/> handler.</summary>
+        /// <param name="app">The commerce application context used by the handler.</param>
         public CategoriesImagesBannerHandler(HotcakesApplication app)
             : base(app)
         {
         }
 
         // List or Find Single
+        /// <summary>Executes the REST API GetAction operation.</summary>
+        /// <param name="parameters">The value supplied for this operation.</param>
+        /// <param name="querystring">The value supplied for this operation.</param>
+        /// <returns>The serialized REST API response or the requested parameter value.</returns>
         public override string GetAction(string parameters, NameValueCollection querystring)
         {
             var response = new ApiResponse<bool>();
@@ -53,6 +61,11 @@ namespace Hotcakes.Modules.Core.Api.Rest
         }
 
         // Create or Update
+        /// <summary>Executes the REST API PostAction operation.</summary>
+        /// <param name="parameters">The value supplied for this operation.</param>
+        /// <param name="querystring">The value supplied for this operation.</param>
+        /// <param name="postdata">The value supplied for this operation.</param>
+        /// <returns>The serialized REST API response or the requested parameter value.</returns>
         public override string PostAction(string parameters, NameValueCollection querystring, string postdata)
         {
             var data = string.Empty;
@@ -76,6 +89,11 @@ namespace Hotcakes.Modules.Core.Api.Rest
             return data;
         }
 
+        /// <summary>Executes the REST API DeleteAction operation.</summary>
+        /// <param name="parameters">The value supplied for this operation.</param>
+        /// <param name="querystring">The value supplied for this operation.</param>
+        /// <param name="postdata">The value supplied for this operation.</param>
+        /// <returns>The serialized REST API response or the requested parameter value.</returns>
         public override string DeleteAction(string parameters, NameValueCollection querystring, string postdata)
         {
             var response = new ApiResponse<bool>();

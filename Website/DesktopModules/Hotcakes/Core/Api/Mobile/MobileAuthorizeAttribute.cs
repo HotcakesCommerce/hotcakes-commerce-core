@@ -31,9 +31,17 @@ using DotNetNuke.Web.Api;
 
 namespace Hotcakes.Modules.Core.Api.Mobile
 {
+    /// <summary>
+    /// Authorizes mobile API requests from authenticated users in the store's mobile-access role.
+    /// </summary>
     [Serializable]
     public class MobileAuthorizeAttribute : AuthorizeAttributeBase, IOverrideDefaultAuthLevel
     {
+        /// <summary>
+        /// Determines whether the current principal is authenticated and has mobile API access.
+        /// </summary>
+        /// <param name="context">The authorization context for the current API request.</param>
+        /// <returns><see langword="true"/> when the request is authorized; otherwise, <see langword="false"/>.</returns>
         public override bool IsAuthorized(AuthFilterContext context)
         {
             if (!Thread.CurrentPrincipal.Identity.IsAuthenticated)

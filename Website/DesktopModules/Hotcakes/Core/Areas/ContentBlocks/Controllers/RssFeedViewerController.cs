@@ -34,9 +34,16 @@ using Hotcakes.Web.Rss;
 
 namespace Hotcakes.Modules.Core.Areas.ContentBlocks.Controllers
 {
+    /// <summary>
+    /// Loads and renders the RSS feed configured by a content block.
+    /// </summary>
     [Serializable]
     public class RssFeedViewerController : BaseAppController
     {
+        /// <summary>
+        /// Renders the content block or administrative file view for the current request.
+        /// </summary>
+        /// <param name="block">The value supplied for block.</param>
         public ActionResult Index(ContentBlock block)
         {
             var model = new RssFeedViewModel {Channel = new RSSChannel(Factory.CreateEventLogger())};

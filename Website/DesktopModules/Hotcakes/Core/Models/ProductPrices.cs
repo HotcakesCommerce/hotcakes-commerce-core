@@ -41,10 +41,15 @@ namespace Hotcakes.Modules.Core.Models
         ///     Different price available for the product
         /// </summary>
         public PriceData ListPrice;
+        /// <summary>
+        /// Gets or sets the PriceData SitePrice value used by this storefront model.
+        /// </summary>
 
         public PriceData SitePrice;
+        /// <summary>
+        /// Gets or sets the PriceData YouSave value used by this storefront model.
+        /// </summary>
         public PriceData YouSave;
-
         /// <summary>
         ///     Generate the different type of price information for the product
         /// </summary>
@@ -52,6 +57,7 @@ namespace Hotcakes.Modules.Core.Models
         ///     User specific price information based on the chosen option for the product on the product detail
         ///     page
         /// </param>
+
         public ProductPrices(UserSpecificPrice price)
         {
             if (price.ListPriceGreaterThanCurrentPrice)

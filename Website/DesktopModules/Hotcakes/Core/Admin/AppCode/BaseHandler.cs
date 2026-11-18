@@ -34,11 +34,17 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class BaseHandler.
+    /// </summary>
     [Serializable]
     public abstract class BaseHandler : IHttpHandler
     {
         private string _localResourceFile;
 
+        /// <summary>
+        /// Gets or sets the local resource file.
+        /// </summary>
         public virtual string LocalResourceFile
         {
             get
@@ -54,13 +60,23 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             set { _localResourceFile = value; }
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by ProcessRequest.
+        /// </summary>
         public ILocalizationHelper Localization { get; set; }
 
+        /// <summary>
+        /// Performs the administrative operation represented by ProcessRequest.
+        /// </summary>
         public bool IsReusable
         {
             get { return false; }
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by ProcessRequest.
+        /// </summary>
+        /// <param name="context">Value used by the operation.</param>
         public void ProcessRequest(HttpContext context)
         {
             Localization = Factory.Instance.CreateLocalizationHelper(LocalResourceFile);

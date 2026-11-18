@@ -31,6 +31,9 @@ namespace Hotcakes.Modules.Core.Modules.CreditCardGateways.Test_Recurring_Gatewa
 {
     partial class Edit : HccCreditCardGatewayPart
     {
+        /// <summary>
+        /// Performs the administrative operation represented by LoadData.
+        /// </summary>
         public override void LoadData()
         {
             var settings = new TestRecurringGatewaySettings();
@@ -41,6 +44,9 @@ namespace Hotcakes.Modules.Core.Modules.CreditCardGateways.Test_Recurring_Gatewa
             chkCancelFails.Checked = !settings.ResponseForCancel;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by SaveData.
+        /// </summary>
         public override void SaveData()
         {
             var settings = new TestRecurringGatewaySettings();

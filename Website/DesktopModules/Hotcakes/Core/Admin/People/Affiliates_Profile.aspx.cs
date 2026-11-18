@@ -37,6 +37,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.People
 {
+    /// <summary>
+    /// Provides the administrative page for viewing an affiliate profile.
+    /// </summary>
     public partial class Affiliates_Profile : BaseAdminPage
     {
         #region Properties

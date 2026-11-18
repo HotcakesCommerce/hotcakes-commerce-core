@@ -34,26 +34,46 @@ using DotNetNuke.Web.Client.Providers;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class CssInclude.
+    /// </summary>
     public class CssInclude : DnnCssInclude
     {
+        /// <summary>
+        /// Defines the administrative class JsInclude.
+        /// </summary>
         public CssInclude()
         {
             ForceProvider = HccPageHeaderProvider.ProviderName;
         }
     }
 
+    /// <summary>
+    /// Defines the administrative class JsInclude.
+    /// </summary>
     public class JsInclude : DnnJsInclude
     {
+        /// <summary>
+        /// Defines the administrative class HccPageHeaderProvider.
+        /// </summary>
         public JsInclude()
         {
             ForceProvider = HccBodyProvider.ProviderName;
         }
     }
 
+    /// <summary>
+    /// Defines the administrative class HccPageHeaderProvider.
+    /// </summary>
     public class HccPageHeaderProvider : DnnPageHeaderProvider
     {
         internal const string ProviderName = "HccPageHeaderProvider";
 
+        /// <summary>
+        /// Performs the administrative operation represented by Initialize.
+        /// </summary>
+        /// <param name="name">Value used by the operation.</param>
+        /// <param name="config">Value used by the operation.</param>
         public override void Initialize(string name, NameValueCollection config)
         {
             if (string.IsNullOrEmpty(name))
@@ -83,6 +103,10 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             page.Header.Controls.Add(child2);
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by Register.
+        /// </summary>
+        /// <param name="cdSettings">Value used by the operation.</param>
         public static void Register(ClientDependencySettings cdSettings)
         {
             if (cdSettings.FileRegistrationProviderCollection[ProviderName] == null)
@@ -94,10 +118,18 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
         }
     }
 
+    /// <summary>
+    /// Defines the administrative class HccBodyProvider.
+    /// </summary>
     public class HccBodyProvider : DnnBodyProvider
     {
         internal const string ProviderName = "HccBodyProvider";
 
+        /// <summary>
+        /// Performs the administrative operation represented by Initialize.
+        /// </summary>
+        /// <param name="name">Value used by the operation.</param>
+        /// <param name="config">Value used by the operation.</param>
         public override void Initialize(string name, NameValueCollection config)
         {
             if (string.IsNullOrEmpty(name))
@@ -136,6 +168,10 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             }
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by Register.
+        /// </summary>
+        /// <param name="cdSettings">Value used by the operation.</param>
         public static void Register(ClientDependencySettings cdSettings)
         {
             if (cdSettings.FileRegistrationProviderCollection[ProviderName] == null)

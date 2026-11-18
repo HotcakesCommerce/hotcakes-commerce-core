@@ -30,9 +30,18 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Integration
 {
+    /// <summary>
+    /// Provides the default cart integration behavior when no custom integration is configured.
+    /// </summary>
     [Serializable]
     internal class CartIntegration : ICartIntegration
     {
+        /// <summary>
+        /// Runs the default cart pre-checkout hook without changing the checkout flow.
+        /// </summary>
+        /// <param name="hccApp">The current Hotcakes application.</param>
+        /// <param name="model">The cart view model being submitted.</param>
+        /// <returns>A default <see cref="IntegrationResult"/>.</returns>
         public IntegrationResult BeforeProceedToCheckout(HotcakesApplication hccApp, CartViewModel model)
         {
             return new IntegrationResult();

@@ -28,13 +28,25 @@ using System;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class HccCreditCardGatewayPart.
+    /// </summary>
     [Serializable]
     public abstract class HccCreditCardGatewayPart : HccPart
     {
+        /// <summary>
+        /// Performs the administrative operation represented by LoadData.
+        /// </summary>
         public string GatewayId { get; set; }
 
+        /// <summary>
+        /// Performs the administrative operation represented by LoadData.
+        /// </summary>
         public abstract void LoadData();
 
+        /// <summary>
+        /// Performs the administrative operation represented by SaveData.
+        /// </summary>
         public abstract void SaveData();
     }
 }

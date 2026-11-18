@@ -35,9 +35,16 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Areas.ContentBlocks.Controllers
 {
+    /// <summary>
+    /// Renders the products selected by a featured-products content block.
+    /// </summary>
     [Serializable]
     public class FeaturedProductsController : BaseAppController
     {
+        /// <summary>
+        /// Renders the content block or administrative file view for the current request.
+        /// </summary>
+        /// <param name="block">The value supplied for block.</param>
         public ActionResult Index(ContentBlock block)
         {
             var model = new FeaturedProductsViewModel

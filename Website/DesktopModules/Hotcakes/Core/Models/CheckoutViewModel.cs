@@ -251,6 +251,11 @@ namespace Hotcakes.Modules.Core.Models
         /// </summary>
         public string StripePublicKey { get; set; }
 
+        /// <summary>
+        /// Performs the IsErr operation for this model.
+        /// </summary>
+        /// <param name="nameWithoutPrefix">The value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public string IsErr(string nameWithoutPrefix)
         {
             var result = string.Empty;

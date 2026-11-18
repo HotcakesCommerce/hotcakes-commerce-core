@@ -29,8 +29,17 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Integration
 {
+    /// <summary>
+    /// Defines an extension point that runs before a customer proceeds to checkout.
+    /// </summary>
     public interface ICartIntegration
     {
+        /// <summary>
+        /// Runs before the cart proceeds to checkout.
+        /// </summary>
+        /// <param name="hccApp">The current Hotcakes application.</param>
+        /// <param name="model">The cart view model being submitted.</param>
+        /// <returns>An <see cref="IntegrationResult"/> that can abort checkout with a message.</returns>
         IntegrationResult BeforeProceedToCheckout(HotcakesApplication hccApp, CartViewModel model);
     }
 }

@@ -30,9 +30,16 @@ using Hotcakes.Modules.Core.Controllers.Shared;
 
 namespace Hotcakes.Modules.Core.Filters
 {
+    /// <summary>
+    /// Performs storefront closed-state checks before an action executes.
+    /// </summary>
     [Serializable]
     public class StoreClosedFilterAttribute : ActionFilterAttribute
     {
+        /// <summary>
+        /// Checks the current store before executing a storefront action.
+        /// </summary>
+        /// <param name="filterContext">The context for the action being executed.</param>
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             // do base action first to ensure we have our context objects like hccApp

@@ -33,6 +33,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Parts.ContentBlocks.CategoryRotator
 {
+    /// <summary>
+    /// Defines the administrative class AdminView.
+    /// </summary>
     public partial class AdminView : HccContentBlockPart
     {
         protected void Page_Load(object sender, EventArgs e)

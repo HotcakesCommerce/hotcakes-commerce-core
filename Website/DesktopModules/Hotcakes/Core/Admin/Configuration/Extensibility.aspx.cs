@@ -36,6 +36,9 @@ using Hotcakes.Modules.Core.Integration;
 
 namespace Hotcakes.Modules.Core.Admin.Configuration
 {
+    /// <summary>
+    /// Provides the administrative page for configuring extensibility providers.
+    /// </summary>
     public partial class Extensibility : BaseAdminPage
     {
         protected override void OnPreInit(EventArgs e)
@@ -101,6 +104,9 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
             ddl.SelectedValue = selectedValue;
         }
 
+        /// <summary>Returns the loadable types exposed by an assembly.</summary>
+        /// <param name="assembly">The assembly to inspect.</param>
+        /// <returns>The types that can be loaded from the assembly.</returns>
         public static IEnumerable<Type> GetLoadableTypes(Assembly assembly)
         {
             try

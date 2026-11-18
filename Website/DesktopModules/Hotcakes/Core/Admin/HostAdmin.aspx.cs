@@ -35,8 +35,14 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin
 {
+    /// <summary>
+    /// Defines the administrative class HostAdmin.
+    /// </summary>
     public partial class HostAdmin : BaseAdminPage
     {
+        /// <summary>
+        /// Gets or sets the force wizard redirect.
+        /// </summary>
         public override bool ForceWizardRedirect
         {
             get { return false; }
@@ -130,7 +136,13 @@ namespace Hotcakes.Modules.Core.Admin
 
         private class AnalyticsGenerationConfiguration
         {
+            /// <summary>
+            /// Gets or sets the hcc request context.
+            /// </summary>
             public HccRequestContext HccRequestContext { get; set; }
+            /// <summary>
+            /// Gets or sets the http context.
+            /// </summary>
             public HttpContext HttpContext { get; set; }
         }
     }

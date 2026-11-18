@@ -39,6 +39,9 @@ namespace Hotcakes.Modules.Core.Controls
 {
     partial class ProductPicker : UserControl
     {
+        /// <summary>
+        /// Gets the localized resource file path for the control.
+        /// </summary>
         public string LocalResourceFile
         {
             get
@@ -53,6 +56,9 @@ namespace Hotcakes.Modules.Core.Controls
             get { return HotcakesApplication.Current; }
         }
 
+        /// <summary>
+        /// Gets or sets the product search keyword.
+        /// </summary>
         public string Keyword
         {
             get { return FilterField.Text.Trim(); }
@@ -73,6 +79,9 @@ namespace Hotcakes.Modules.Core.Controls
             set { ViewState["IsInitialized"] = value; }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether product prices are displayed.
+        /// </summary>
         public bool DisplayPrice
         {
             get
@@ -87,6 +96,9 @@ namespace Hotcakes.Modules.Core.Controls
             set { ViewState["DisplayPrice"] = value; }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether product inventory is displayed.
+        /// </summary>
         public bool DisplayInventory
         {
             get
@@ -101,12 +113,18 @@ namespace Hotcakes.Modules.Core.Controls
             set { ViewState["DisplayInventory"] = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the category identifier whose products are excluded.
+        /// </summary>
         public string ExcludeCategoryBvin
         {
             get { return ExcludeCategoryBvinField.Value; }
             set { ExcludeCategoryBvinField.Value = value; }
         }
 
+        /// <summary>
+        /// Gets the product identifiers selected in the picker.
+        /// </summary>
         public StringCollection SelectedProducts
         {
             get
@@ -223,6 +241,9 @@ namespace Hotcakes.Modules.Core.Controls
             return c;
         }
 
+        /// <summary>
+        /// Runs the product search and refreshes the picker results.
+        /// </summary>
         public void RunSearch()
         {
             rgProducts.PageIndex = 0;

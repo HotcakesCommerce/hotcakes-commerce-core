@@ -29,6 +29,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
+    /// <summary>
+    /// Provides the administrative endpoint for sorting product type properties.
+    /// </summary>
     public partial class ProductTypes_SortProperties : BaseAdminJsonPage
     {
         protected override void OnLoad(EventArgs e)

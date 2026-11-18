@@ -26,11 +26,26 @@
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative enum ErrorTypes.
+    /// </summary>
     public enum ErrorTypes
     {
+        /// <summary>
+        /// Specifies the ok value.
+        /// </summary>
         Ok = 0,
+        /// <summary>
+        /// Specifies the info value.
+        /// </summary>
         Info = 1,
+        /// <summary>
+        /// Specifies the error value.
+        /// </summary>
         Error = 2,
+        /// <summary>
+        /// Specifies the warning value.
+        /// </summary>
         Warning = 3
     }
 }

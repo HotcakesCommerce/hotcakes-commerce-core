@@ -33,6 +33,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
 {
+    /// <summary>
+    /// Edits a promotion action that adjusts a product price.
+    /// </summary>
     public partial class AdjustProductPrice : BaseActionControl
     {
         private ProductPriceAdjustment TypedAction
@@ -40,6 +43,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
             get { return Action as ProductPriceAdjustment; }
         }
 
+        /// <summary>Loads the product-price adjustment action into the editor.</summary>
         public override void LoadAction()
         {
             if (lstAdjustmentType.Items.Count == 0)
@@ -52,6 +56,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
             lstAdjustmentType.SelectedValue = TypedAction.AdjustmentType == AmountTypes.Percent ? "1" : "0";
         }
 
+        /// <summary>Saves the product-price adjustment action.</summary>
+        /// <returns><see langword="true"/> when the action is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveAction()
         {
             TypedAction.AdjustmentType = lstAdjustmentType.SelectedValue == "1"

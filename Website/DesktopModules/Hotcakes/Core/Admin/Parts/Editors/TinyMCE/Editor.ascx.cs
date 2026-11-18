@@ -30,32 +30,50 @@ using Hotcakes.Commerce.Content;
 
 namespace Hotcakes.Modules.Core.Admin.Parts.Editors.TinyMCE
 {
+    /// <summary>
+    /// Defines the administrative class Editor.
+    /// </summary>
     public partial class Editor : TextEditorBase
     {
+        /// <summary>
+        /// Gets or sets the editor height.
+        /// </summary>
         public override int EditorHeight
         {
             get { return (int) EditorField.Height.Value; }
             set { EditorField.Height = Unit.Pixel(value); }
         }
 
+        /// <summary>
+        /// Gets or sets the editor width.
+        /// </summary>
         public override int EditorWidth
         {
             get { return (int) EditorField.Width.Value; }
             set { EditorField.Width = Unit.Pixel(value); }
         }
 
+        /// <summary>
+        /// Gets or sets the editor wrap.
+        /// </summary>
         public override bool EditorWrap
         {
             get { return EditorField.Wrap; }
             set { EditorField.Wrap = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the tab index.
+        /// </summary>
         public override int TabIndex
         {
             get { return EditorField.TabIndex; }
             set { EditorField.TabIndex = (short) value; }
         }
 
+        /// <summary>
+        /// Gets or sets the text.
+        /// </summary>
         public override string Text
         {
             get { return EditorField.Text; }

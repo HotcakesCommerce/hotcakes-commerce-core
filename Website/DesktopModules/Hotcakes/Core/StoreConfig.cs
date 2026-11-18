@@ -29,20 +29,35 @@ using System.Xml.Serialization;
 
 namespace Hotcakes.Modules.Core
 {
+    /// <summary>
+    /// Represents the store configuration serialized by the installation configuration file.
+    /// </summary>
     [XmlType("store")]
     public class StoreConfig
     {
+        /// <summary>
+        /// Initializes an empty store configuration with a writable settings collection.
+        /// </summary>
         public StoreConfig()
         {
             Settings = new List<StoreSettingConfig>();
         }
 
+        /// <summary>
+        /// Gets or sets the store display name.
+        /// </summary>
         [XmlElement("storeName")]
         public string StoreName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the starting order number for the store.
+        /// </summary>
         [XmlElement("lastOrderNumber")]
         public int LastOrderNumber { get; set; }
 
+        /// <summary>
+        /// Gets or sets the store settings to apply during installation.
+        /// </summary>
         [XmlArray("settings")]
         public List<StoreSettingConfig> Settings { get; set; }
     }

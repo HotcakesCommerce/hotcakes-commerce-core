@@ -31,10 +31,16 @@ using Hotcakes.Commerce.Search;
 
 namespace Hotcakes.Modules.Core.Models.Json
 {
+/// <summary>
+    /// Represents the DrillDownJsonModel storefront model.
+    /// </summary>
     [Serializable]
     public class DrillDownJsonModel
     {
         private List<SelectedFacetItem> _SelectedManufacturers;
+        /// <summary>
+        /// Initializes a new instance of the DrillDownJsonModel type.
+        /// </summary>
 
         public DrillDownJsonModel()
         {
@@ -132,6 +138,9 @@ namespace Hotcakes.Modules.Core.Models.Json
 
         #region Obsolete
 
+        /// <summary>
+        /// Gets or sets the Manufactures value used by this storefront model.
+        /// </summary>
         [Obsolete("Deprecated in Hotcakes Commerce 03.03.00. Please use the Manufacturers property instead. Removing in version 03.04.00 or later.")]
         public List<CheckboxFacetItem> Manufactures
         {

@@ -35,6 +35,9 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
+    /// <summary>
+    /// Provides the administrative page for editing a category custom link.
+    /// </summary>
     public partial class Categories_EditCustomLink : BaseCategoryPage
     {
         #region Event handlers

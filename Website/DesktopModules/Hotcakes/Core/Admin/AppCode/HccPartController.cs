@@ -33,11 +33,20 @@ using Hotcakes.Commerce;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class HccPartController.
+    /// </summary>
     [Serializable]
     public static class HccPartController
     {
         #region "Tax Providers"
 
+        /// <summary>
+        /// Performs the administrative operation represented by LoadTaxProviderEditor.
+        /// </summary>
+        /// <param name="methodName">Value used by the operation.</param>
+        /// <param name="p">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static Control LoadTaxProviderEditor(string methodName, Page p)
         {
             var fullName = "Parts/TaxProviders/" + methodName + "/Edit.ascx";
@@ -48,6 +57,12 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
 
         #region " Shipping "
 
+        /// <summary>
+        /// Performs the administrative operation represented by LoadShippingEditor.
+        /// </summary>
+        /// <param name="shippingName">Value used by the operation.</param>
+        /// <param name="p">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static Control LoadShippingEditor(string shippingName, Page p)
         {
             var fullName = "Parts/Shipping/" + shippingName + "/Edit.ascx";
@@ -58,6 +73,11 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
 
         #region " Have to be moved and converted to regular controls "
 
+        /// <summary>
+        /// Performs the administrative operation represented by LoadShippingZoneEditor.
+        /// </summary>
+        /// <param name="p">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static Control LoadShippingZoneEditor(Page p)
         {
             const string fullName = "Parts/ShippingZones/Edit.ascx";
@@ -68,6 +88,10 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
 
         #region " Admin Plugins "
 
+        /// <summary>
+        /// Performs the administrative operation represented by FindAdminPlugins.
+        /// </summary>
+        /// <returns>The result of the operation.</returns>
         public static StringCollection FindAdminPlugins()
         {
             var result = new StringCollection();
@@ -120,6 +144,10 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
 
         #region " Content Blocks "
 
+        /// <summary>
+        /// Performs the administrative operation represented by FindContentBlocks.
+        /// </summary>
+        /// <returns>The result of the operation.</returns>
         public static StringCollection FindContentBlocks()
         {
             var result = new StringCollection();
@@ -127,12 +155,24 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             return result;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by LoadContentBlockAdminView.
+        /// </summary>
+        /// <param name="blockName">Value used by the operation.</param>
+        /// <param name="p">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static Control LoadContentBlockAdminView(string blockName, Page p)
         {
             var fullName = "Parts/ContentBlocks/" + blockName + "/Adminview.ascx";
             return LoadSingleControl(fullName, ref p);
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by LoadContentBlockEditor.
+        /// </summary>
+        /// <param name="blockName">Value used by the operation.</param>
+        /// <param name="p">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static Control LoadContentBlockEditor(string blockName, Page p)
         {
             var fullName = "Parts/ContentBlocks/" + blockName + "/Editor.ascx";
@@ -143,18 +183,36 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
 
         #region " Payment Methods "
 
+        /// <summary>
+        /// Performs the administrative operation represented by LoadPaymentMethodEditor.
+        /// </summary>
+        /// <param name="methodName">Value used by the operation.</param>
+        /// <param name="p">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static Control LoadPaymentMethodEditor(string methodName, Page p)
         {
             var fullName = "Parts/PaymentMethods/" + methodName + "/Edit.ascx";
             return LoadSingleControl(fullName, ref p);
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by LoadCreditCardGatewayEditor.
+        /// </summary>
+        /// <param name="gatewayName">Value used by the operation.</param>
+        /// <param name="p">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static Control LoadCreditCardGatewayEditor(string gatewayName, Page p)
         {
             var fullName = "Parts/CreditCardGateways/" + gatewayName + "/Edit.ascx";
             return LoadSingleControl(fullName, ref p);
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by LoadGiftCardGatewayEditor.
+        /// </summary>
+        /// <param name="gatewayName">Value used by the operation.</param>
+        /// <param name="p">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static Control LoadGiftCardGatewayEditor(string gatewayName, Page p)
         {
             var fullName = "Parts/GiftCardGateways/" + gatewayName + "/Edit.ascx";
@@ -165,17 +223,33 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
 
         #region " Editors "
 
+        /// <summary>
+        /// Performs the administrative operation represented by LoadEditor.
+        /// </summary>
+        /// <param name="editorName">Value used by the operation.</param>
+        /// <param name="p">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static Control LoadEditor(string editorName, Page p)
         {
             var fullName = "Parts/Editors/" + editorName + "/editor.ascx";
             return LoadSingleControl(fullName, ref p);
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by LoadDefaultEditor.
+        /// </summary>
+        /// <param name="p">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static Control LoadDefaultEditor(Page p)
         {
             return LoadEditor(WebAppSettings.DefaultTextEditor, p);
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by LoadInventoryEditor.
+        /// </summary>
+        /// <param name="p">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static Control LoadInventoryEditor(Page p)
         {
             var fullName = "Orders/OrderItemInventory.ascx";

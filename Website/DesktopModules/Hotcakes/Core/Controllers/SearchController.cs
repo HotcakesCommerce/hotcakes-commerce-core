@@ -42,11 +42,16 @@ using Hotcakes.Modules.Core.Settings;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Provides storefront product search and search-input actions.</summary>
     [Serializable]
     public class SearchController : BaseStoreController
     {
         //
         // GET: /Search/
+        /// <summary>Searches the catalog and renders filtered, paged product results.</summary>
+        /// <param name="search">The search text.</param>
+        /// <param name="pageSize">The number of results per page.</param>
+        /// <returns>The search results view.</returns>
         [ValidateInput(false)]
         public ActionResult Index(string search, int pageSize = 9)
         {
@@ -182,6 +187,9 @@ namespace Hotcakes.Modules.Core.Controllers
             return View(model);
         }
 
+        /// <summary>Displays the search input and redirects completed searches to the search route.</summary>
+        /// <param name="search">The current search text.</param>
+        /// <returns>The search input view or a search redirect.</returns>
         [ValidateInput(false)]
         public ActionResult SearchInput(string search)
         {

@@ -35,6 +35,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Reports.Sales_Tax_Report
 {
+    /// <summary>
+    /// Displays the administrative sales tax report.
+    /// </summary>
     public partial class View : BaseReportPage
     {
         protected int TaxCount;

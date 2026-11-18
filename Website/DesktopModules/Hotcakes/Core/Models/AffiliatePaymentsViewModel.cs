@@ -31,6 +31,7 @@ using Newtonsoft.Json;
 namespace Hotcakes.Modules.Core.Models
 {
     /// <summary>
+    /// Represents the commission payment history displayed on the affiliate dashboard.
     /// </summary>
     [Serializable]
     public class AffiliatePaymentsViewModel
@@ -50,6 +51,10 @@ namespace Hotcakes.Modules.Core.Models
         /// </summary>
         public string TotalAmount { get; set; }
 
+        /// <summary>
+        /// Performs the ToJson operation for this model.
+        /// </summary>
+        /// <returns>The result of the operation.</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this);
@@ -60,8 +65,17 @@ namespace Hotcakes.Modules.Core.Models
         /// </summary>
         public class PaymentViewModel
         {
+            /// <summary>
+            /// Gets or sets the Notes value used by this storefront model.
+            /// </summary>
             public string Notes { get; set; }
+            /// <summary>
+            /// Gets or sets the Amount value used by this storefront model.
+            /// </summary>
             public string Amount { get; set; }
+            /// <summary>
+            /// Gets or sets the AttachmentUrl value used by this storefront model.
+            /// </summary>
             public string AttachmentUrl { get; set; }
         }
     }

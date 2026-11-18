@@ -34,9 +34,14 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Renders a storefront grid from an ordered product identifier list.</summary>
     [Serializable]
     public class ProductGridController : BaseAppController
     {
+        /// <summary>Loads and renders the requested products in grid order.</summary>
+        /// <param name="productsList">Product identifiers keyed by their display order.</param>
+        /// <param name="maxColumns">The maximum number of columns to expose to the view.</param>
+        /// <returns>The product grid view.</returns>
         public ActionResult Index(Dictionary<int, string> productsList, int maxColumns)
         {
             var model = LoadProductGrid(productsList, maxColumns);

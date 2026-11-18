@@ -33,6 +33,9 @@ using Hotcakes.Shipping.Services;
 
 namespace Hotcakes.Modules.Core.Modules.Shipping.Rate_Per_Weight_Formula
 {
+    /// <summary>
+    /// Defines the administrative class Edit.
+    /// </summary>
     public partial class Edit : HccShippingPart
     {
         protected override void OnInit(EventArgs e)

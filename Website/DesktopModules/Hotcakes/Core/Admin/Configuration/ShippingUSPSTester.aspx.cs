@@ -40,6 +40,9 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Modules.Core.Admin.Configuration
 {
+    /// <summary>
+    /// Provides the administrative test page for USPS rates.
+    /// </summary>
     public partial class ShippingUSPSTester : BaseAdminPage
     {
         protected override void OnPreInit(EventArgs e)

@@ -35,6 +35,9 @@ using Hotcakes.Commerce.Catalog;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 {
+    /// <summary>
+    /// Edits a qualification based on a line item's category.
+    /// </summary>
     public partial class LineItemCategoryEditor : BaseQualificationControl
     {
         private LineItemCategory TypedQualification
@@ -68,6 +71,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             LoadQualification();
         }
 
+        /// <summary>Loads the line-item category qualification into the editor.</summary>
         public override void LoadQualification()
         {
             var allCats = HccApp?.CatalogServices?.Categories?.FindAll() ?? new List<CategorySnapshot>();
@@ -106,6 +110,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             gvLineItemCategories.DataBind();
         }
 
+        /// <summary>Saves the line-item category qualification.</summary>
+        /// <returns><see langword="true"/> when the qualification is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveQualification()
         {
             var q = TypedQualification;

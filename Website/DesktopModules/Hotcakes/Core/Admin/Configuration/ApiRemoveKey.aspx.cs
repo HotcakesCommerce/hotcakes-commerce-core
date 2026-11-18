@@ -29,6 +29,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Configuration
 {
+    /// <summary>
+    /// Provides the administrative endpoint for removing an API key.
+    /// </summary>
     public partial class ApiRemoveKey : BaseAdminJsonPage
     {
         protected override void OnLoad(EventArgs e)

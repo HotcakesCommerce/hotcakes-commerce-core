@@ -33,6 +33,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
 {
+    /// <summary>
+    /// Edits a promotion action that adjusts order shipping.
+    /// </summary>
     public partial class OrderShippingAdjustmentEditor : BaseActionControl
     {
         private OrderShippingAdjustment TypedAction
@@ -40,6 +43,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
             get { return Action as OrderShippingAdjustment; }
         }
 
+        /// <summary>Loads the order-shipping adjustment action into the editor.</summary>
         public override void LoadAction()
         {
             if (lstOrderShippingAdjustmentType.Items.Count == 0)
@@ -53,6 +57,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
             lstOrderShippingAdjustmentType.SelectedValue = TypedAction.AdjustmentType == AmountTypes.Percent ? "1" : "0";
         }
 
+        /// <summary>Saves the order-shipping adjustment action.</summary>
+        /// <returns><see langword="true"/> when the action is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveAction()
         {
             TypedAction.Amount = OrderShippingAdjustmentAmount.Text.ConvertTo(TypedAction.Amount);

@@ -36,6 +36,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Configuration
 {
+    /// <summary>
+    /// Provides the administrative page for configuring store pages.
+    /// </summary>
     public partial class PageConfiguration : BaseAdminPage
     {
         protected override void OnPreInit(EventArgs e)

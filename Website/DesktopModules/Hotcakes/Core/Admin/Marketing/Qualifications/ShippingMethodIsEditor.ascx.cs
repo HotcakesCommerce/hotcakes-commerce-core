@@ -34,6 +34,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 {
+    /// <summary>
+    /// Edits a qualification based on the selected shipping method.
+    /// </summary>
     public partial class ShippingMethodIsEditor : BaseQualificationControl
     {
         private ShippingMethodIs TypedQualification
@@ -72,6 +75,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             LoadQualification();
         }
 
+        /// <summary>Loads the shipping-method qualification into the editor.</summary>
         public override void LoadQualification()
         {
             var q = TypedQualification;
@@ -121,6 +125,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             }
         }
 
+        /// <summary>Saves the shipping-method qualification.</summary>
+        /// <returns><see langword="true"/> when the qualification is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveQualification()
         {
             var q = TypedQualification;

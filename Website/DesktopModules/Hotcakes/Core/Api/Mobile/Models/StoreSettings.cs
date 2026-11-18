@@ -28,9 +28,13 @@ using System;
 
 namespace Hotcakes.Modules.Core.Api.Mobile.Models
 {
+    /// <summary>
+    /// Contains store settings exposed to the mobile client.
+    /// </summary>
     [Serializable]
     public class StoreSettings
     {
+        /// <summary>Gets or sets the culture code used for store currency formatting.</summary>
         public string CurrencyCultureCode { get; set; }
     }
 }

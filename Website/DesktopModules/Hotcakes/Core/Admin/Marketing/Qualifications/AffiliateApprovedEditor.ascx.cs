@@ -29,6 +29,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 {
+    /// <summary>
+    /// Edits a qualification based on affiliate approval.
+    /// </summary>
     public partial class AffiliateApprovedEditor : BaseQualificationControl
     {
         private AffiliateApproved TypedQualification
@@ -36,11 +39,14 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             get { return Qualification as AffiliateApproved; }
         }
 
+        /// <summary>Loads the affiliate-approval qualification into the editor.</summary>
         public override void LoadQualification()
         {
             chkHasReffferalID.Checked = TypedQualification.HasReffferalID;
         }
 
+        /// <summary>Saves the affiliate-approval qualification.</summary>
+        /// <returns><see langword="true"/> when the qualification is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveQualification()
         {
             TypedQualification.HasReffferalID = chkHasReffferalID.Checked;

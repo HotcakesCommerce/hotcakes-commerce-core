@@ -46,9 +46,12 @@ using Order = PayPalCheckoutSdk.Orders.Order;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Handles PayPal Express storefront checkout callbacks and submissions.</summary>
     [Serializable]
     public class PayPalExpressCheckoutController : BaseStoreController
     {
+        /// <summary>Loads PayPal checkout details and processes a callback request.</summary>
+        /// <returns>The checkout view or a completed-order redirect.</returns>
         [NonCacheableResponseFilter]
         public ActionResult Index()
         {
@@ -69,6 +72,8 @@ namespace Hotcakes.Modules.Core.Controllers
             return View(model);
         }
 
+        /// <summary>Validates and processes the PayPal Express checkout submission.</summary>
+        /// <returns>The checkout view or a completed-order redirect.</returns>
         [NonCacheableResponseFilter]
         [ActionName("Index")]
         [HccHttpPost]

@@ -34,6 +34,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Reports.Daily_Product_Sales
 {
+    /// <summary>
+    /// Displays the administrative daily product sales report.
+    /// </summary>
     public partial class View : BaseReportPage
     {
         #region Event Handlers
@@ -48,6 +51,7 @@ namespace Hotcakes.Modules.Core.Admin.Reports.Daily_Product_Sales
 
         private class ReportData
         {
+            /// <summary>Initializes an empty daily product sales report row.</summary>
             public ReportData()
             {
                 LineItemBvin = string.Empty;
@@ -66,21 +70,35 @@ namespace Hotcakes.Modules.Core.Admin.Reports.Daily_Product_Sales
                 LineTotalWithoutDiscounts = 0;
             }
 
+            /// <summary>Gets or sets the line item identifier.</summary>
             public string LineItemBvin { get; set; }
+            /// <summary>Gets or sets the order identifier.</summary>
             public string OrderBvin { get; set; }
+            /// <summary>Gets or sets the product identifier.</summary>
             public string ProductId { get; set; }
+            /// <summary>Gets or sets the line total.</summary>
             public decimal LineTotal { get; set; }
+            /// <summary>Gets or sets the unit price.</summary>
             public decimal UnitPrice { get; set; }
+            /// <summary>Gets or sets the quantity sold.</summary>
             public decimal Quantity { get; set; }
+            /// <summary>Gets or sets the product SKU.</summary>
             public string Sku { get; set; }
+            /// <summary>Gets or sets the product name.</summary>
             public string ProductName { get; set; }
 
+            /// <summary>Gets or sets the variant identifier.</summary>
             public string VariantId { get; set; }
+            /// <summary>Gets or sets the base price.</summary>
             public decimal BasePrice { get; set; }
+            /// <summary>Gets or sets the refunded item quantity.</summary>
             public decimal RefundItems { get; set; }
 
+            /// <summary>Gets or sets the line total before discounts.</summary>
             public decimal LineTotalWithoutDiscounts { get; set; }
+            /// <summary>Gets or sets the line discounts represented as a positive number.</summary>
             public decimal LineDiscountsAsPositiveNumber { get; set; }
+            /// <summary>Gets or sets the report date.</summary>
             public DateTime Date { get; set; }
         }
 

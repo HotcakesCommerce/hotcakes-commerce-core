@@ -28,9 +28,15 @@ using System;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class HccContentBlockPart.
+    /// </summary>
     [Serializable]
     public class HccContentBlockPart : HccPart
     {
+        /// <summary>
+        /// Gets or sets the block id.
+        /// </summary>
         public string BlockId { get; set; }
     }
 }

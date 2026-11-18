@@ -32,6 +32,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
+    /// <summary>
+    /// Provides the administrative page for editing a product edit tab.
+    /// </summary>
     public partial class ProductsEdit_TabsEdit : BaseProductPage
     {
         private const string closeUrl = "~/DesktopModules/Hotcakes/Core/Admin/Catalog/{0}?id={1}";

@@ -32,6 +32,7 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
 {
     partial class Payment_Edit : BaseAdminPage
     {
+        /// <summary>Gets or sets the payment method identifier being edited.</summary>
         public string MethodId
         {
             get { return Request.QueryString["id"]; }

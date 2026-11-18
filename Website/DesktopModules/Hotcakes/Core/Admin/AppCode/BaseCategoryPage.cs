@@ -32,6 +32,9 @@ using Hotcakes.Modules.Core.Admin.Controls;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class BaseCategoryPage.
+    /// </summary>
     public class BaseCategoryPage : BaseAdminPage
     {
         #region Event Handlers
@@ -85,6 +88,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the category id.
+        /// </summary>
         public string CategoryId
         {
             get
@@ -97,11 +103,17 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             set { ViewState["CategoryId"] = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the parent category id.
+        /// </summary>
         public string ParentCategoryId
         {
             get { return Request.QueryString["ParentID"]; }
         }
 
+        /// <summary>
+        /// Gets or sets the category type.
+        /// </summary>
         public string CategoryType
         {
             get { return Request.QueryString["type"]; }

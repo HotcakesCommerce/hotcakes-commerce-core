@@ -65,6 +65,7 @@ using static Hotcakes.Payment.Gateways.StripeProcessor;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+    /// <summary>Handles storefront checkout, payment, address, and order completion actions.</summary>
     [HccCustomHeaders]
     [Serializable]
     public partial class CheckoutController : BaseStoreController
@@ -96,6 +97,8 @@ namespace Hotcakes.Modules.Core.Controllers
 
         #region Public methods
 
+        /// <summary>Displays the checkout form for the current cart.</summary>
+        /// <returns>The checkout view or a cart redirect.</returns>
         // GET: /checkout
         [NonCacheableResponseFilter]
         public ActionResult Index()
@@ -124,6 +127,8 @@ namespace Hotcakes.Modules.Core.Controllers
             }
             return View(model);
         }
+        /// <summary>Validates and processes the checkout submission.</summary>
+        /// <returns>The checkout view or the completed-order redirect.</returns>
 
         // POST: /checkout
         [NonCacheableResponseFilter]
@@ -199,6 +204,9 @@ namespace Hotcakes.Modules.Core.Controllers
             return new PreJsonResult(Web.Json.ObjectToJson(result));
         }
 
+        /// <summary>Applies posted billing and shipping address changes to an order.</summary>
+        /// <param name="form">The posted address values.</param>
+        /// <returns>A serialized order summary response.</returns>
         [HccHttpPost]
         public ActionResult ApplyAddressChange(FormCollection form)
         {
@@ -268,6 +276,9 @@ namespace Hotcakes.Modules.Core.Controllers
             return new PreJsonResult(Web.Json.ObjectToJson(result));
         }
 
+        /// <summary>Applies or removes reward points from an order.</summary>
+        /// <param name="form">The posted reward-points selection.</param>
+        /// <returns>A serialized order summary response.</returns>
         [HccHttpPost]
         public ActionResult ApplyRewardPointsChange(FormCollection form)
         {
@@ -313,6 +324,8 @@ namespace Hotcakes.Modules.Core.Controllers
             return new PreJsonResult(Web.Json.ObjectToJson(new {id = result.Id}));
         }
 
+        /// <summary>Decrypts and normalizes the credit-card number posted by the checkout form.</summary>
+        /// <returns>A serialized cleaned-card response.</returns>
         [HccHttpPost]
         public ActionResult CleanCreditCard()
         {
@@ -396,6 +409,8 @@ namespace Hotcakes.Modules.Core.Controllers
             return plaintext;
         }
 
+        /// <summary>Checks whether the submitted email belongs to a known customer.</summary>
+        /// <returns>A serialized customer lookup response.</returns>
         [HccHttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult IsEmailKnown()
@@ -422,6 +437,9 @@ namespace Hotcakes.Modules.Core.Controllers
             return new PreJsonResult(Web.Json.ObjectToJson(result));
         }
 
+        /// <summary>Returns a current customer's saved address by identifier.</summary>
+        /// <param name="addressBvin">The address business identifier.</param>
+        /// <returns>A serialized address response.</returns>
         [HccHttpPost]
         public ActionResult UserAddress(string addressBvin)
         {
@@ -436,6 +454,9 @@ namespace Hotcakes.Modules.Core.Controllers
             return new PreJsonResult(Web.Json.ObjectToJson(address));
         }
 
+        /// <summary>Adds a gift card payment to the current order when eligible.</summary>
+        /// <param name="form">The posted gift-card number.</param>
+        /// <returns>A serialized gift-card and order summary response.</returns>
         [HccHttpPost]
         public ActionResult AddNewGiftCard(FormCollection form)
         {
@@ -483,6 +504,9 @@ namespace Hotcakes.Modules.Core.Controllers
             return new PreJsonResult(Web.Json.ObjectToJson(result));
         }
 
+        /// <summary>Removes a gift card payment from the current order.</summary>
+        /// <param name="form">The posted gift-card number.</param>
+        /// <returns>A serialized gift-card and order summary response.</returns>
         [HccHttpPost]
         public ActionResult RemoveGiftCard(FormCollection form)
         {
@@ -504,6 +528,8 @@ namespace Hotcakes.Modules.Core.Controllers
             return new PreJsonResult(Web.Json.ObjectToJson(result));
         }
 
+        /// <summary>Returns the current checkout customer, addresses, and rewards data.</summary>
+        /// <returns>A serialized customer data response.</returns>
         [HccHttpPost]
         public ActionResult GetCustomerData()
         {
@@ -523,10 +549,8 @@ namespace Hotcakes.Modules.Core.Controllers
             return new PreJsonResult(Web.Json.ObjectToJson(result));
         }
 
-        /// <summary>
-        ///     Gets called after the VAT number was changed.
-        /// </summary>
-        /// <returns></returns>
+        /// <summary>Applies or removes EU VAT exemption rules after the VAT number changes.</summary>
+        /// <returns>A serialized VAT processing result.</returns>
         [HccHttpPost]
         public ActionResult ApplyEUVatRules()
         {

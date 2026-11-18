@@ -32,6 +32,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Reports.Sales_By_Coupon
 {
+    /// <summary>
+    /// Displays the administrative sales-by-coupon report.
+    /// </summary>
     public partial class View : BaseReportPage
     {
         #region Fields

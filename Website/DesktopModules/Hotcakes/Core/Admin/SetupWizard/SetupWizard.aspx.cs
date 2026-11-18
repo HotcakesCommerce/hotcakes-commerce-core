@@ -31,10 +31,14 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.SetupWizard
 {
+    /// <summary>
+    /// Provides the administrative store setup wizard.
+    /// </summary>
     public partial class SetupWizard : BaseAdminPage, IHccPage
     {
         private int? _step;
 
+        /// <summary>Gets or sets the active setup wizard step.</summary>
         public int Step
         {
             get

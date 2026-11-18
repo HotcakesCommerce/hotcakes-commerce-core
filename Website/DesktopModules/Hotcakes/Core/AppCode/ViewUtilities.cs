@@ -34,9 +34,18 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Modules.Core.AppCode
 {
+    /// <summary>
+    /// Provides utility operations used by Hotcakes views.
+    /// </summary>
     [Serializable]
     public class ViewUtilities
     {
+        /// <summary>
+        /// Downloads a product file through the application storage services.
+        /// </summary>
+        /// <param name="file">The value supplied for file.</param>
+        /// <param name="app">The value supplied for app.</param>
+        /// <returns>The result of the operation.</returns>
         public static bool DownloadFile(ProductFile file, HotcakesApplication app)
         {
             var extension = Path.GetExtension(file.FileName);

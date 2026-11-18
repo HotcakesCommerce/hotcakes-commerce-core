@@ -34,8 +34,17 @@ namespace Hotcakes.Modules.Core.Models
     /// </summary>
     public enum TwitterCountBoxPosition
     {
+        /// <summary>
+        /// Represents the None option.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Represents the Horizontal option.
+        /// </summary>
         Horizontal = 1,
+        /// <summary>
+        /// Represents the Vertical option.
+        /// </summary>
         Vertical = 2
     }
 
@@ -45,13 +54,22 @@ namespace Hotcakes.Modules.Core.Models
     [Serializable]
     public class TwitterRelatedAccount
     {
+        /// <summary>
+        /// Initializes a new instance of the TwitterRelatedAccount type.
+        /// </summary>
         public TwitterRelatedAccount()
         {
             TwitterHandle = string.Empty;
             Description = string.Empty;
         }
 
+        /// <summary>
+        /// Gets or sets the TwitterHandle value used by this storefront model.
+        /// </summary>
         public string TwitterHandle { get; set; }
+        /// <summary>
+        /// Gets or sets the Description value used by this storefront model.
+        /// </summary>
         public string Description { get; set; }
     }
 

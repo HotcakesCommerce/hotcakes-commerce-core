@@ -33,6 +33,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 {
+    /// <summary>
+    /// Edits a qualification based on product type.
+    /// </summary>
     public partial class ProductTypeEditor : BaseQualificationControl
     {
         #region Properties
@@ -42,6 +45,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             get { return Qualification as PromotionIdQualificationBase; }
         }
 
+        /// <summary>Gets or sets whether the qualification uses the negative matching mode.</summary>
         public bool IsNotMode { get; set; }
 
         #endregion
@@ -116,6 +120,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 
         #region Helper Methods
 
+        /// <summary>Loads the product-type qualification into the editor.</summary>
         public override void LoadQualification()
         {
             var q = TypedQualification;
@@ -183,6 +188,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             }
         }
 
+        /// <summary>Saves the product-type qualification.</summary>
+        /// <returns><see langword="true"/> when the qualification is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveQualification()
         {
             if (TypedQualification is ProductTypeIs)

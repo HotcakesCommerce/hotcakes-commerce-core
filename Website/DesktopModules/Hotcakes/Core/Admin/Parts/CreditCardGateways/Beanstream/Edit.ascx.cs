@@ -31,6 +31,9 @@ namespace Hotcakes.Modules.Core.Admin.Parts.CreditCardGateways.Beanstream
 {
     partial class Edit : HccCreditCardGatewayPart
     {
+        /// <summary>
+        /// Performs the administrative operation represented by LoadData.
+        /// </summary>
         public override void LoadData()
         {
             var settings = new BeanstreamSettings();
@@ -42,6 +45,9 @@ namespace Hotcakes.Modules.Core.Admin.Parts.CreditCardGateways.Beanstream
             chkDebugMode.Checked = settings.DebugMode;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by SaveData.
+        /// </summary>
         public override void SaveData()
         {
             var settings = new BeanstreamSettings();

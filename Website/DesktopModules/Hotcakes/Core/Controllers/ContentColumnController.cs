@@ -30,9 +30,13 @@ using Hotcakes.Modules.Core.Controllers.Shared;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Renders a configured storefront content column.</summary>
     [Serializable]
     public class ContentColumnController : BaseAppController
     {
+        /// <summary>Finds a content column by identifier or display name and renders it.</summary>
+        /// <param name="id">The column identifier or display name.</param>
+        /// <returns>The column view, or empty content when no column matches.</returns>
         [ChildActionOnly]
         public ActionResult Index(string id)
         {

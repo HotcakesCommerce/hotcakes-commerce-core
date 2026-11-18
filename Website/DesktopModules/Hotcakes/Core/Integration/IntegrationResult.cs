@@ -28,10 +28,19 @@ using System;
 
 namespace Hotcakes.Modules.Core.Integration
 {
+    /// <summary>
+    /// Contains the outcome of an integration hook invocation.
+    /// </summary>
     [Serializable]
     public class IntegrationResult
     {
+        /// <summary>
+        /// Gets or sets whether the operation should be aborted.
+        /// </summary>
         public bool IsAborted { get; set; }
+        /// <summary>
+        /// Gets or sets the message to present when the operation is aborted.
+        /// </summary>
         public string AbortMessage { get; set; }
     }
 }

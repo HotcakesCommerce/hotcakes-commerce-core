@@ -34,6 +34,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Orders
 {
+    /// <summary>
+    /// Provides the control for adding products to an administrative order.
+    /// </summary>
     public partial class OrderAddProduct : HccUserControl
     {
         protected void btnCloseGiftCardDetails_Click(object sender, EventArgs e)
@@ -120,7 +123,9 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 
         #region Properties
 
+        /// <summary>Gets or sets the order to which products are added.</summary>
         public Order CurrentOrder { get; set; }
+        /// <summary>Occurs after a product is added to the current order.</summary>
         public event EventHandler ProductAdded;
 
         #endregion

@@ -32,21 +32,33 @@ using Hotcakes.Commerce.Globalization;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class HccUserControl.
+    /// </summary>
     [Serializable]
     public class HccUserControl : UserControl
     {
         private string _localResourceFile;
 
+        /// <summary>
+        /// Gets or sets the hcc app.
+        /// </summary>
         public HotcakesApplication HccApp
         {
             get { return HccPage.HccApp; }
         }
 
+        /// <summary>
+        /// Gets or sets the hcc page.
+        /// </summary>
         public IHccPage HccPage
         {
             get { return (IHccPage) Page; }
         }
 
+        /// <summary>
+        /// Gets or sets the local resource file.
+        /// </summary>
         public virtual string LocalResourceFile
         {
             get
@@ -61,6 +73,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             set { _localResourceFile = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the localization.
+        /// </summary>
         public ILocalizationHelper Localization { get; set; }
 
         protected override void OnInit(EventArgs e)

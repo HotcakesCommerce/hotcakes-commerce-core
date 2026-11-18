@@ -43,6 +43,9 @@ namespace Hotcakes.Modules.Core
 	/// <summary>
 	///     Summary description for Performance
 	/// </summary>
+    /// <summary>
+    /// Handles administrative performance requests for products, categories, and bundles.
+    /// </summary>
 	public class Performance : BaseHandler, IHttpHandler
 	{
 		protected override object HandleAction(HttpRequest request, HotcakesApplication hccApp)
@@ -73,6 +76,12 @@ namespace Hotcakes.Modules.Core
 			return true;
 		}
 
+        /// <summary>
+        /// Gets performance data for a product over the requested sales period.
+        /// </summary>
+        /// <param name="request">The HTTP request containing the product and period parameters.</param>
+        /// <param name="hccApp">The current Hotcakes application.</param>
+        /// <returns>The product performance data prepared for the administrative client.</returns>
 		public object GetProductPerformanceData(HttpRequest request, HotcakesApplication hccApp)
 		{
 			var productId = request.Params["productId"];
@@ -93,6 +102,12 @@ namespace Hotcakes.Modules.Core
 			return performanceJson; 
 		}
 
+        /// <summary>
+        /// Gets performance data for a category over the requested sales period.
+        /// </summary>
+        /// <param name="request">The HTTP request containing the category and period parameters.</param>
+        /// <param name="hccApp">The current Hotcakes application.</param>
+        /// <returns>The category performance data prepared for the administrative client.</returns>
 		public object GetCategoryPerformanceData(HttpRequest request, HotcakesApplication hccApp)
 		{
 			var categoryId = request.Params["categoryId"];
@@ -111,6 +126,12 @@ namespace Hotcakes.Modules.Core
 			return new PerformanceInfoJson(performanceInfo, period, Localization);
 		}
 
+        /// <summary>
+        /// Gets products commonly purchased with the requested product and their performance data.
+        /// </summary>
+        /// <param name="request">The HTTP request containing the product and period parameters.</param>
+        /// <param name="hccApp">The current Hotcakes application.</param>
+        /// <returns>The related-product performance data prepared for the administrative client.</returns>
 		public object GetProductPurchasedWithData(HttpRequest request, HotcakesApplication hccApp)
 		{
 			var productId = request.Params["productId"];
@@ -158,12 +179,12 @@ namespace Hotcakes.Modules.Core
 			return results;
 		}
 
-		/// <summary>
-		///     Creates the bundle.
-		/// </summary>
-		/// <param name="request">The request.</param>
-		/// <param name="hccApp">The HCC application.</param>
-		/// <returns></returns>
+        /// <summary>
+        /// Creates a disabled bundle from the requested product and component products.
+        /// </summary>
+        /// <param name="request">The HTTP request containing the source product and component product IDs.</param>
+        /// <param name="hccApp">The current Hotcakes application.</param>
+        /// <returns>The administrative URL for editing the newly created bundle.</returns>
 		public object CreateBundle(HttpRequest request, HotcakesApplication hccApp)
 		{
 			var productId = request.Params["productId"];

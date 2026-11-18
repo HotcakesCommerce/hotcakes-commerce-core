@@ -32,10 +32,16 @@ using Hotcakes.Common.Dnn;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class PerformanceUserSelections.
+    /// </summary>
     public class PerformanceUserSelections
     {
         private readonly Dictionary<string, string> _settings;
 
+        /// <summary>
+        /// Initializes a new instance of PerformanceUserSelections.
+        /// </summary>
         public PerformanceUserSelections()
         {
             var context = HccRequestContext.Current;
@@ -44,6 +50,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             _settings = membershipServices.GetUserSettings(userId, false);
         }
 
+        /// <summary>
+        /// Gets or sets the products performace period.
+        /// </summary>
         public SalesPeriod ProductsPerformacePeriod
         {
             get { return (SalesPeriod) GetIntValue("HccProductsPerformacePeriod", (int) SalesPeriod.Month); }
@@ -54,6 +63,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             }
         }
 
+        /// <summary>
+        /// Gets or sets the categories performace period.
+        /// </summary>
         public SalesPeriod CategoriesPerformacePeriod
         {
             get { return (SalesPeriod) GetIntValue("HccCategoriesPerformacePeriod", (int) SalesPeriod.Month); }

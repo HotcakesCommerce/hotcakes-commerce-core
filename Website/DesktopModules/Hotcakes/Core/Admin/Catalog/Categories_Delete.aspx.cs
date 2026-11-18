@@ -29,6 +29,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
+    /// <summary>
+    /// Provides the administrative endpoint for deleting a catalog category.
+    /// </summary>
     public partial class Categories_Delete : BaseAdminJsonPage
     {
         protected override void OnLoad(EventArgs e)

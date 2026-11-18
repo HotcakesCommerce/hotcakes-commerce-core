@@ -304,9 +304,13 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
         private class ExportConfiguration
         {
+            /// <summary>Gets or sets the commerce request context used by the catalog page.</summary>
             public HccRequestContext HccRequestContext { get; set; }
+            /// <summary>Gets or sets the current HTTP context.</summary>
             public HttpContext HttpContext { get; set; }
+            /// <summary>Gets or sets the current DNN portal settings.</summary>
             public PortalSettings DnnPortalSettings { get; set; }
+            /// <summary>Gets or sets the criteria used to search catalog products.</summary>
             public ProductSearchCriteria Criteria { get; set; }
         }
 

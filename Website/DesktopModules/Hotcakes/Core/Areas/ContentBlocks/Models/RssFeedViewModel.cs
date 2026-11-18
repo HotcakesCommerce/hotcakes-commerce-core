@@ -29,9 +29,15 @@ using Hotcakes.Web.Rss;
 
 namespace Hotcakes.Modules.Core.Areas.ContentBlocks.Models
 {
+    /// <summary>
+    /// Represents the data displayed by an RSS feed content block.
+    /// </summary>
     [Serializable]
     public class RssFeedViewModel
     {
+        /// <summary>
+        /// Represents the data displayed by an RSS feed content block.
+        /// </summary>
         public RssFeedViewModel()
         {
             Channel = null;
@@ -40,9 +46,21 @@ namespace Hotcakes.Modules.Core.Areas.ContentBlocks.Models
             MaxItems = 5;
         }
 
+        /// <summary>
+        /// Gets or sets the RSS channel loaded for the content block.
+        /// </summary>
         public RSSChannel Channel { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether the RSS title is displayed.
+        /// </summary>
         public bool ShowTitle { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether the RSS description is displayed.
+        /// </summary>
         public bool ShowDescription { get; set; }
+        /// <summary>
+        /// Gets or sets the maximum number of RSS items displayed.
+        /// </summary>
         public int MaxItems { get; set; }
     }
 }

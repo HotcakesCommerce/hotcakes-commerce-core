@@ -29,13 +29,35 @@ using Hotcakes.Commerce;
 
 namespace Hotcakes.Modules.Core.Api.Rest
 {
+    /// <summary>Handles REST API requests for IRestHandler.</summary>
+    /// <remarks>Responses are serialized using the established REST API response contract.</remarks>
     public interface IRestHandler
     {
+        /// <summary>Gets or sets the commerce application context used by this handler.</summary>
         HotcakesApplication HccApp { get; set; }
 
+        /// <summary>Executes the REST API GetAction operation.</summary>
+        /// <param name="parameters">The value supplied for this operation.</param>
+        /// <param name="querystring">The value supplied for this operation.</param>
+        /// <returns>The serialized REST API response.</returns>
         string GetAction(string parameters, NameValueCollection querystring);
+        /// <summary>Executes the REST API PostAction operation.</summary>
+        /// <param name="parameters">The value supplied for this operation.</param>
+        /// <param name="querystring">The value supplied for this operation.</param>
+        /// <param name="postdata">The value supplied for this operation.</param>
+        /// <returns>The serialized REST API response.</returns>
         string PostAction(string parameters, NameValueCollection querystring, string postdata);
+        /// <summary>Executes the REST API PutAction operation.</summary>
+        /// <param name="parameters">The value supplied for this operation.</param>
+        /// <param name="querystring">The value supplied for this operation.</param>
+        /// <param name="postdata">The value supplied for this operation.</param>
+        /// <returns>The serialized REST API response.</returns>
         string PutAction(string parameters, NameValueCollection querystring, string postdata);
+        /// <summary>Executes the REST API DeleteAction operation.</summary>
+        /// <param name="parameters">The value supplied for this operation.</param>
+        /// <param name="querystring">The value supplied for this operation.</param>
+        /// <param name="postdata">The value supplied for this operation.</param>
+        /// <returns>The serialized REST API response.</returns>
         string DeleteAction(string parameters, NameValueCollection querystring, string postdata);
     }
 }

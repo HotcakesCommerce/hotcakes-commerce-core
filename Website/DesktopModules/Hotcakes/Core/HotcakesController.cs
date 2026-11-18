@@ -81,6 +81,9 @@ using Util = DotNetNuke.Entities.Content.Common.Util;
 
 namespace Hotcakes.Modules.Core
 {
+    /// <summary>
+    /// Applies Hotcakes installation and upgrade operations to the DNN host and stores.
+    /// </summary>
     [Serializable]
     public class HotcakesController : IUpgradeable
     {
@@ -100,6 +103,11 @@ namespace Hotcakes.Modules.Core
 
         private bool IsGenericCodeExecuted { get; set; }
 
+        /// <summary>
+        /// Runs the upgrade steps associated with a module version and performs one-time initialization.
+        /// </summary>
+        /// <param name="Version">The version from which the module is being upgraded.</param>
+        /// <returns><c>Success</c> when the upgrade completes; otherwise <c>Failed</c>.</returns>
         public string UpgradeModule(string Version)
         {
             try
@@ -433,6 +441,10 @@ namespace Hotcakes.Modules.Core
             }
         }
 
+        /// <summary>
+        /// Assigns the Hotcakes module category to a DNN desktop module.
+        /// </summary>
+        /// <param name="moduleName">The DNN desktop module name to categorize.</param>
         public void CategorizeHccModule(string moduleName)
         {
             var objDesktopModule = DesktopModuleController.GetDesktopModuleByModuleName(moduleName, Null.NullInteger);
@@ -515,6 +527,11 @@ namespace Hotcakes.Modules.Core
 
        
 
+        /// <summary>
+        /// Removes Hotcakes packages, pages, data, and optionally module and store files.
+        /// </summary>
+        /// <param name="deleteModuleFiles">Whether module-owned files should be deleted.</param>
+        /// <param name="deleteStoreFiles">Whether store-owned files should be deleted.</param>
         public static void Uninstall(bool deleteModuleFiles, bool deleteStoreFiles)
         {
             foreach (var packageName in HotcakesPackages)
@@ -583,6 +600,9 @@ namespace Hotcakes.Modules.Core
             }
         }
 
+        /// <summary>
+        /// Creates the scheduled task that sends abandoned-cart emails when it is not already registered.
+        /// </summary>
         public void CreateAbandonedCartScheduler()
         {
             var friendlyName = "Send Abandoned Cart Emails";
@@ -608,6 +628,9 @@ namespace Hotcakes.Modules.Core
             }
         } 
         
+        /// <summary>
+        /// Creates the scheduled task that sends payment-failure emails when it is not already registered.
+        /// </summary>
         public void CreatePaymentFailureScheduler()
         {
             var friendlyName = "Send Payment Failure Emails";
@@ -633,6 +656,9 @@ namespace Hotcakes.Modules.Core
             }
         }
 
+        /// <summary>
+        /// Creates the disabled scheduled task for recurring-order updates when it is not already registered.
+        /// </summary>
         public void UpdateRecurringOrdersScheduler()
         {
             var friendlyName = "Update Recurring Orders";

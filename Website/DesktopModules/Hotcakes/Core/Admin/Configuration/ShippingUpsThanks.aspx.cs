@@ -30,6 +30,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Configuration
 {
+    /// <summary>
+    /// Provides the administrative completion page for UPS shipping setup.
+    /// </summary>
     public partial class ShippingUpsThanks : BaseAdminPage
     {
         protected override void OnPreInit(EventArgs e)

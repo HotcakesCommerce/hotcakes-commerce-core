@@ -40,9 +40,13 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Displays and creates storefront product reviews.</summary>
     [Serializable]
     public class ProductReviewsController : BaseStoreController
     {
+        /// <summary>Displays approved reviews for the product identified by its slug.</summary>
+        /// <param name="slug">The product URL slug.</param>
+        /// <returns>The product reviews view.</returns>
         public ActionResult Index(string slug)
         {
             var model = new ProductReviewsViewModel();
@@ -149,6 +153,10 @@ namespace Hotcakes.Modules.Core.Controllers
             return AverageRating;
         }
 
+        /// <summary>Displays a limited set of product reviews.</summary>
+        /// <param name="howMany">The maximum number of reviews to display.</param>
+        /// <param name="reviews">The reviews to select from.</param>
+        /// <returns>The product reviews view.</returns>
         public ActionResult TopReviews(int howMany, List<ProductReview> reviews)
         {
             var model = new ProductReviewsViewModel();
@@ -171,6 +179,8 @@ namespace Hotcakes.Modules.Core.Controllers
             return View(model);
         }
 
+        /// <summary>Creates a review from the posted storefront review fields.</summary>
+        /// <returns>A JSON result containing the localized message and success flag.</returns>
         [HccHttpPost]
         public ActionResult Create()
         {

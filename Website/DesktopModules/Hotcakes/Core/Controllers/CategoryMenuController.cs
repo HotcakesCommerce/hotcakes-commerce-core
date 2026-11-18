@@ -35,6 +35,7 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Builds and renders configurable storefront category menus.</summary>
     [Serializable]
     public class CategoryMenuController : BaseAppController
     {
@@ -43,6 +44,10 @@ namespace Hotcakes.Modules.Core.Controllers
 
         #region Controller actions
 
+        /// <summary>Loads the configured category menu for the current category context.</summary>
+        /// <param name="model">The menu settings and output model.</param>
+        /// <param name="slug">The current category URL slug.</param>
+        /// <returns>The category menu view.</returns>
         public ActionResult Index(CategoryMenuViewModel model, string slug)
         {
             LoadMenu(model, slug);

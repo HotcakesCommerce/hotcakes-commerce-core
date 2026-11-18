@@ -33,6 +33,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 {
+    /// <summary>
+    /// Edits a qualification based on a user identifier.
+    /// </summary>
     public partial class UserIdEditor : BaseQualificationControl
     {
         private UserIs TypedQualification
@@ -79,6 +82,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             }
         }
 
+        /// <summary>Loads the user-identifier qualification into the editor.</summary>
         public override void LoadQualification()
         {
             var q = TypedQualification;
@@ -116,6 +120,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             }
         }
 
+        /// <summary>Saves the user-identifier qualification.</summary>
+        /// <returns><see langword="true"/> when the qualification is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveQualification()
         {
             return UpdatePromotion();

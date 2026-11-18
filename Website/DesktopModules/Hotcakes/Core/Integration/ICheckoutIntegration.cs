@@ -29,8 +29,17 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Integration
 {
+    /// <summary>
+    /// Defines an extension point that runs before checkout completion.
+    /// </summary>
     public interface ICheckoutIntegration
     {
+        /// <summary>
+        /// Runs before checkout is completed.
+        /// </summary>
+        /// <param name="hccApp">The current Hotcakes application.</param>
+        /// <param name="model">The checkout view model being submitted.</param>
+        /// <returns>An <see cref="IntegrationResult"/> that can abort completion with a message.</returns>
         IntegrationResult BeforeCheckoutCompleted(HotcakesApplication hccApp, CheckoutViewModel model);
     }
 }

@@ -32,6 +32,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
+    /// <summary>
+    /// Provides the administrative endpoint for sorting category facets.
+    /// </summary>
     public partial class Categories_FacetSort : BaseAdminJsonPage
     {
         protected override void OnLoad(EventArgs e)

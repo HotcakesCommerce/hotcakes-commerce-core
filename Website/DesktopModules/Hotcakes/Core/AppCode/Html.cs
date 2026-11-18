@@ -29,6 +29,9 @@ using System.Text;
 
 namespace Hotcakes.Modules.Core.AppCode
 {
+    /// <summary>
+    /// Provides HTML and script markup helpers used by Hotcakes views.
+    /// </summary>
     [Serializable]
     public static class Html
     {
@@ -37,6 +40,12 @@ namespace Hotcakes.Modules.Core.AppCode
         private const string JQUERYUIFORMAT = "<script src=\"{0}jquery-ui-1.12.1/js/jquery-ui.min.js\" type=\"text/javascript\"></script>";
         private const string FOOTERFORMAT = "<div id=\"footer\"><div id=\"copyright\">&copy; Copyright {0} Upendo Ventures, LLC </div></div>";
         private const string SLASH = "/";
+        /// <summary>
+        /// Builds the markup for the jQuery libraries used by a Hotcakes page.
+        /// </summary>
+        /// <param name="baseScriptFolder">The value supplied for baseScriptFolder.</param>
+        /// <param name="IsSecure">The value supplied for IsSecure.</param>
+        /// <returns>The result of the operation.</returns>
 
         public static string JQueryIncludes(string baseScriptFolder, bool IsSecure)
         {
@@ -52,6 +61,10 @@ namespace Hotcakes.Modules.Core.AppCode
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Builds the standard administration footer markup with the current UTC year.
+        /// </summary>
+        /// <returns>The result of the operation.</returns>
         public static string AdminFooter()
         {
             return string.Format(FOOTERFORMAT, DateTime.UtcNow.Year);

@@ -38,6 +38,9 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Modules.Core.Admin.Configuration
 {
+    /// <summary>
+    /// Provides the administrative page for managing view sets.
+    /// </summary>
     public partial class ViewsManager : BaseAdminPage
     {
         protected override void OnInit(EventArgs e)

@@ -32,6 +32,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Configuration
 {
+    /// <summary>
+    /// Provides the administrative page for managing API keys.
+    /// </summary>
     public partial class Api : BaseAdminPage
     {
         private const string API_KEY_FORMAT = " <a id=\"remove{0}\" href=\"#\" class=\"removeapikey\">{1}</a>";

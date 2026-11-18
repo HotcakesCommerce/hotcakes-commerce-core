@@ -34,6 +34,9 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Modules.Core.Admin.Reports.Daily_CC_Activity
 {
+    /// <summary>
+    /// Displays the administrative daily credit-card activity report.
+    /// </summary>
     public partial class View : BaseReportPage
     {
         #region Fields

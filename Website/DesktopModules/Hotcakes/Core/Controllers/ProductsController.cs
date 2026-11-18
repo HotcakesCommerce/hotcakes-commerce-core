@@ -50,6 +50,7 @@ using Newtonsoft.Json;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Displays storefront products and validates product purchase selections.</summary>
     [Serializable]
     public class ProductsController : BaseStoreController
     {
@@ -57,14 +58,22 @@ namespace Hotcakes.Modules.Core.Controllers
 
         #region Internal declarations
 
+        /// <summary>Contains product option, price, inventory, and image validation results.</summary>
         public class ProductValidateResponse
         {
+            /// <summary>Gets or sets whether all product validation checks passed.</summary>
             public bool IsValid = true;
+            /// <summary>Gets or sets the medium variant image URL.</summary>
             public string MediumImageUrl = string.Empty;
+            /// <summary>Gets or sets the localized validation message.</summary>
             public string Message = string.Empty;
+            /// <summary>Gets or sets the calculated product prices.</summary>
             public ProductPrices Prices;
+            /// <summary>Gets or sets the selected product SKU.</summary>
             public string Sku = string.Empty;
+            /// <summary>Gets or sets the localized stock message.</summary>
             public string StockMessage = string.Empty;
+            /// <summary>Gets or sets the original variant image URL.</summary>
             public string OriginalImageUrl { get; set; }
         }
 
@@ -79,6 +88,7 @@ namespace Hotcakes.Modules.Core.Controllers
 
         #region Properties
 
+        /// <summary>Gets whether the request is rendered by a concrete-item module.</summary>
         public bool IsConcreteItemModule
         {
             get { return Convert.ToBoolean(RouteData.Values["isConcreteItemModule"]); }
@@ -93,6 +103,9 @@ namespace Hotcakes.Modules.Core.Controllers
 
         #region Public methods
 
+        /// <summary>Displays the product identified by the requested slug.</summary>
+        /// <param name="slug">The product URL slug.</param>
+        /// <returns>The selected product view.</returns>
         // GET: /{*slug}
         public ActionResult Index(string slug)
         {
@@ -112,6 +125,9 @@ namespace Hotcakes.Modules.Core.Controllers
             var viewName = GetViewName(model);
             return View(viewName, model);
         }
+        /// <summary>Processes product selections and adds the product to the cart or wish list.</summary>
+        /// <param name="slug">The product URL slug.</param>
+        /// <returns>The cart redirect or product view with validation feedback.</returns>
 
         // POST: /{*slug}
         [HccHttpPost]
@@ -165,6 +181,9 @@ namespace Hotcakes.Modules.Core.Controllers
             return View(viewName, model);
         }
 
+        /// <summary>Renders a product summary for use as a child action.</summary>
+        /// <param name="product">The product to render.</param>
+        /// <returns>The product summary view or empty content for a missing product.</returns>
         [ChildActionOnly]
         public ActionResult RenderSingleProduct(Product product)
         {
@@ -177,6 +196,8 @@ namespace Hotcakes.Modules.Core.Controllers
             return View("_RenderSingleProduct", model);
         }
 
+        /// <summary>Validates posted product selections, pricing, inventory, and variant imagery.</summary>
+        /// <returns>A serialized <see cref="ProductValidateResponse"/> result.</returns>
         [HccHttpPost]
         public ActionResult Validate()
         {

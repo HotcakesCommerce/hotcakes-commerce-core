@@ -32,6 +32,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 {
+    /// <summary>
+    /// Edits a qualification based on role membership.
+    /// </summary>
     public partial class UserIsInRoleEditor : BaseQualificationControl
     {
         private UserIsInRole TypedQualification
@@ -59,6 +62,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             LoadQualification();
         }
 
+        /// <summary>Loads the role-membership qualification into the editor.</summary>
         public override void LoadQualification()
         {
             var roles = TypedQualification.GetAllRoles();
@@ -88,6 +92,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             gvRoles.DataBind();
         }
 
+        /// <summary>Saves the role-membership qualification.</summary>
+        /// <returns><see langword="true"/> when the qualification is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveQualification()
         {
             return UpdatePromotion();

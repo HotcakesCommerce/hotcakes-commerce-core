@@ -35,9 +35,13 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Modules.Core.Api.Rest
 {
+    /// <summary>Handles REST API requests for PriceGroupsHandler.</summary>
+    /// <remarks>Responses are serialized using the established REST API response contract.</remarks>
     [Serializable]
     public class PriceGroupsHandler : BaseRestHandler
     {
+        /// <summary>Initializes a new instance of the <see cref="PriceGroupsHandler"/> handler.</summary>
+        /// <param name="app">The commerce application context used by the handler.</param>
         public PriceGroupsHandler(HotcakesApplication app)
             : base(app)
         {

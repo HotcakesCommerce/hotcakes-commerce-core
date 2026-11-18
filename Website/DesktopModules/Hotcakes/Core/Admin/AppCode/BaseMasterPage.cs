@@ -40,6 +40,9 @@ using StackExchange.Profiling;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class BaseMasterPage.
+    /// </summary>
     [Serializable]
     public class BaseMasterPage : MasterPage
     {
@@ -50,6 +53,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
 
         public bool HideAdminControlBar { get; set; }
 
+        /// <summary>
+        /// Gets or sets the hide admin control bar.
+        /// </summary>
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);

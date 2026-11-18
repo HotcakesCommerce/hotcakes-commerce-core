@@ -40,6 +40,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
     {
         #region Properties
 
+        /// <summary>Gets or sets the product type identifier being edited.</summary>
         public string TypeId
         {
             get { return Request.QueryString["id"] ?? string.Empty; }

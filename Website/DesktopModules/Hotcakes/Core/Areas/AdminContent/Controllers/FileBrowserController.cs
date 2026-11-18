@@ -36,6 +36,9 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Areas.AdminContent.Controllers
 {
+    /// <summary>
+    /// Provides administrative actions for browsing and managing store files.
+    /// </summary>
     [Serializable]
     public class FileBrowserController : BaseAdminController
     {
@@ -79,6 +82,9 @@ namespace Hotcakes.Modules.Core.Areas.AdminContent.Controllers
             }
             return result;
         }
+        /// <summary>
+        /// Renders the content block or administrative file view for the current request.
+        /// </summary>
 
         [HttpGet]
         public ActionResult Index()
@@ -96,6 +102,9 @@ namespace Hotcakes.Modules.Core.Areas.AdminContent.Controllers
 
             return View(model);
         }
+        /// <summary>
+        /// Creates a directory in the current store file area and returns to the file manager.
+        /// </summary>
 
         [HttpPost]
         public ActionResult CreateDirectory()
@@ -111,6 +120,9 @@ namespace Hotcakes.Modules.Core.Areas.AdminContent.Controllers
             var destination = Url.Content("~/DesktopModules/Hotcakes/API/mvc/filebrowser?path=" + path);
             return new RedirectResult(destination);
         }
+        /// <summary>
+        /// Deletes a directory in the current store file area and returns to the file manager.
+        /// </summary>
 
         [HttpPost]
         public ActionResult DeleteDirectory()
@@ -128,6 +140,9 @@ namespace Hotcakes.Modules.Core.Areas.AdminContent.Controllers
             var destination = Url.Content("~/DesktopModules/Hotcakes/API/mvc/filebrowser?path=" + path);
             return new RedirectResult(destination);
         }
+        /// <summary>
+        /// Uploads the submitted files into the selected current store directory.
+        /// </summary>
 
         [HttpPost]
         public ActionResult Upload()
@@ -158,6 +173,9 @@ namespace Hotcakes.Modules.Core.Areas.AdminContent.Controllers
             var destination = Url.Content("~/DesktopModules/Hotcakes/API/mvc/filebrowser?path=" + path);
             return new RedirectResult(destination);
         }
+        /// <summary>
+        /// Deletes a file in the current store file area and returns to the file manager.
+        /// </summary>
 
         [HttpPost]
         public ActionResult DeleteFile()

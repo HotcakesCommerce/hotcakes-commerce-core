@@ -29,6 +29,9 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Modules.Core.Models.Validators
 {
+    /// <summary>
+    /// Represents the CreditCardNumberAttribute storefront model.
+    /// </summary>
     public class CreditCardNumberAttribute : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)

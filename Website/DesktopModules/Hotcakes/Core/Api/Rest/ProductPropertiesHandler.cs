@@ -42,6 +42,8 @@ namespace Hotcakes.Modules.Core.Api.Rest
     [Serializable]
     public class ProductPropertiesHandler : BaseRestHandler
     {
+        /// <summary>Initializes a new instance of the <see cref="ProductPropertiesHandler"/> handler.</summary>
+        /// <param name="app">The commerce application context used by the handler.</param>
         public ProductPropertiesHandler(HotcakesApplication app)
             : base(app)
         {

@@ -68,10 +68,22 @@ namespace Hotcakes.Modules.Core.Admin
             return new TempImage {Message = "Unknonw Error"};
         }
 
+        /// <summary>
+        /// Defines the administrative class TempImage.
+        /// </summary>
         public class TempImage
         {
+            /// <summary>
+            /// Gets or sets the file name.
+            /// </summary>
             public string FileName { get; set; }
+            /// <summary>
+            /// Gets or sets the temp file name.
+            /// </summary>
             public string TempFileName { get; set; }
+            /// <summary>
+            /// Gets or sets the message.
+            /// </summary>
             public string Message { get; set; }
         }
     }

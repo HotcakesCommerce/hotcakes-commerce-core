@@ -30,9 +30,16 @@ using System.Net.Http;
 
 namespace Hotcakes.Modules.Core.Api.Mobile
 {
+    /// <summary>
+    /// Provides the mobile API login-session endpoint.
+    /// </summary>
     [Serializable]
     public class LoginController : HccApiController
     {
+        /// <summary>
+        /// Verifies that the current request has an authenticated mobile user.
+        /// </summary>
+        /// <returns>An empty successful response when the current user is authorized.</returns>
         [MobileAuthorize]
         public HttpResponseMessage Get()
         {

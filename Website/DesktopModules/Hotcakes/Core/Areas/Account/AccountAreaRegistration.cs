@@ -29,14 +29,18 @@ using System.Web.Mvc;
 
 namespace Hotcakes.Modules.Core.Areas.Account
 {
+/// <summary>Registers MVC routes for the storefront customer account area.</summary>
     [Serializable]
     public class AccountAreaRegistration : AreaRegistration
     {
+        /// <summary>Gets the account area name used by MVC.</summary>
         public override string AreaName
         {
             get { return "Account"; }
         }
 
+        /// <summary>Registers account, authentication, and saved-item routes.</summary>
+        /// <param name="context">The MVC area registration context.</param>
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute("customerloginajax", "DesktopModules/Hotcakes/API/mvc/account/ajaxsignin",

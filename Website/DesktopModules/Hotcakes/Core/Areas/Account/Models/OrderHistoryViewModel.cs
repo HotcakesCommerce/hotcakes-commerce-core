@@ -31,11 +31,15 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Areas.Account.Models
 {
+/// <summary>Contains the customer's paged order history and rewards balance.</summary>
     [Serializable]
     public class OrderHistoryViewModel
     {
+        /// <summary>Gets or sets the order-history paging data.</summary>
         public PagerViewModel PagerData { get; set; }
+        /// <summary>Gets or sets the orders displayed on the current page.</summary>
         public List<OrderSnapshot> Orders { get; set; }
+        /// <summary>Gets or sets the customer's available reward points.</summary>
         public int RewardPoints { get; set; }
     }
 }

@@ -29,11 +29,20 @@ using System.Web.UI.WebControls;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class TextBoxLengthValidator.
+    /// </summary>
     [Serializable]
     public class TextBoxLengthValidator : RegularExpressionValidator
     {
+        /// <summary>
+        /// Gets or sets the min length.
+        /// </summary>
         public int? MinLength { get; set; }
 
+        /// <summary>
+        /// Gets or sets the max length.
+        /// </summary>
         public int? MaxLength { get; set; }
 
         protected override void OnPreRender(EventArgs e)

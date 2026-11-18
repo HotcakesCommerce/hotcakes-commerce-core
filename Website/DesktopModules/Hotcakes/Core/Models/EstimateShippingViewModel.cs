@@ -55,11 +55,17 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     Unique identifier of the country where the order will be shipped.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the CountryId value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string CountryId { get; set; }
 
         /// <summary>
         ///     Unique identifier of the region where the order will be shipped.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the RegionId value used by this storefront model.
         /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string RegionId { get; set; }
@@ -67,17 +73,26 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     Postal code where the order will be shipped to.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the PostalCode value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string PostalCode { get; set; }
 
         /// <summary>
         ///     The name of the city to ship to.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the City value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string City { get; set; }
 
         /// <summary>
         ///     Lists the rates returned from estimating the current order shipping costs.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the Rates value used by this storefront model.
         /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public List<ShippingRateDisplay> Rates { get; set; }

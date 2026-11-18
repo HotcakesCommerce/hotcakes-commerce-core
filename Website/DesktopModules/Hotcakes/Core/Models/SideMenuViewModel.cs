@@ -33,6 +33,9 @@ namespace Hotcakes.Modules.Core.Models
     ///     Side menu view
     /// </summary>
     /// <remarks>Generally used to show on top weekly seller and top 10 products views </remarks>
+    /// <summary>
+    /// Represents the SideMenuViewModel storefront model.
+    /// </summary>
     [Serializable]
     public class SideMenuViewModel
     {

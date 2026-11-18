@@ -44,11 +44,11 @@ namespace Hotcakes.Modules.Core.Models
         ///     Contains the zip or postal code of the address, as necessary.
         /// </summary>
         private string _PostalCode = string.Empty;
-
         /// <summary>
         ///     Default constructor to set the default values for
         ///     each of the address property
         /// </summary>
+
         public AddressViewModel()
         {
             Init();
@@ -103,11 +103,17 @@ namespace Hotcakes.Modules.Core.Models
         ///     The unique ID or primary key of the Address.
         /// </summary>
         /// <remarks>This property should always be used instead of Id.</remarks>
+        /// <summary>
+        /// Gets or sets the Bvin value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string Bvin { get; set; }
 
         /// <summary>
         ///     The last updated date is used for auditing purposes to know when the address was last updated.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the LastUpdatedUtc value used by this storefront model.
         /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public DateTime LastUpdatedUtc { get; set; }
@@ -115,17 +121,26 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the StoreId value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public long StoreId { get; set; }
 
         /// <summary>
         ///     A user-defined value to name this address for easy identification in the user interface.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the NickName value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string NickName { get; set; }
 
         /// <summary>
         ///     The first name of the recipient at this address.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the FirstName value used by this storefront model.
         /// </summary>
         [Required]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
@@ -134,11 +149,17 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     The middle initial of the recipient at this address.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the MiddleInitial value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string MiddleInitial { get; set; }
 
         /// <summary>
         ///     The last name or surname of the recipient at this address.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the LastName value used by this storefront model.
         /// </summary>
         [Required]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
@@ -147,11 +168,17 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     If this is not a residential address, a company name should be specified.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the Company value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string Company { get; set; }
 
         /// <summary>
         ///     The first line of the street address, such as 123 Main Street.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the Line1 value used by this storefront model.
         /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         [Required]
@@ -160,17 +187,26 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     The second line of the street address, such as Suite 100.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the Line2 value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string Line2 { get; set; }
 
         /// <summary>
         ///     The third line of the street address. Usually used for non-US or military addresses.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the Line3 value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string Line3 { get; set; }
 
         /// <summary>
         ///     The name of the city.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the City value used by this storefront model.
         /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         [Required]
@@ -179,16 +215,25 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     This property will contain the SystemName of the region.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the RegionName value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string RegionName { get; set; }
 
         /// <summary>
         ///     This should contain a valid ID of the Region, if applicable.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the RegionBvin value used by this storefront model.
+        /// </summary>
         [Required]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string RegionBvin { get; set; }
 
+        /// <summary>
+        /// Gets or sets the PostalCode value used by this storefront model.
+        /// </summary>
         [Required]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string PostalCode
@@ -200,11 +245,17 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     This property will contain the SystemName of the country.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the CountryName value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string CountryName { get; set; }
 
         /// <summary>
         ///     This is the unique ID or bvin of the country related to this address.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the CountryBvin value used by this storefront model.
         /// </summary>
         [Required]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
@@ -213,11 +264,17 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     A telephone number for the address.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the Phone value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string Phone { get; set; }
 
         /// <summary>
         ///     A fax or facsimile number for the address.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the Fax value used by this storefront model.
         /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string Fax { get; set; }
@@ -225,17 +282,26 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     A website URL for the address. Primarily used for vendors and manufacturers.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the WebSiteUrl value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string WebSiteUrl { get; set; }
 
         /// <summary>
         ///     Addresses are mapped back to a CMS user record, even for vendors and manufacturers. This field is the user ID.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the UserBvin value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string UserBvin { get; set; }
 
         /// <summary>
         ///     Specifies if the address belongs to the merchant or not.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the AddressType value used by this storefront model.
         /// </summary>
         [Required]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
