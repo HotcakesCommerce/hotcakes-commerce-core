@@ -28,6 +28,7 @@ using System;
 
 namespace Hotcakes.Web.Rss
 {
+    /// <summary>Represents an item in an RSS feed.</summary>
     [Serializable]
     public class RSSItem
     {
@@ -35,18 +36,21 @@ namespace Hotcakes.Web.Rss
         private string _Link = string.Empty;
         private string _Title = string.Empty;
 
+        /// <summary>Gets or sets the item description.</summary>
         public string Description
         {
             get { return _Description; }
             set { _Description = value; }
         }
 
+        /// <summary>Gets or sets the item link.</summary>
         public string Link
         {
             get { return _Link; }
             set { _Link = value; }
         }
 
+        /// <summary>Gets or sets the item title.</summary>
         public string Title
         {
             get { return _Title; }

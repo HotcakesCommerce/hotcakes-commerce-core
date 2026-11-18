@@ -31,6 +31,9 @@ using System.Text;
 
 namespace Hotcakes.Web.Cryptography
 {
+    /// <summary>
+    /// Provides AES encryption and decryption helpers for text using a hexadecimal key.
+    /// </summary>
     [Serializable]
     public sealed class AesEncryption
     {
@@ -40,6 +43,16 @@ namespace Hotcakes.Web.Cryptography
             0x82, 0x93, 0x12, 0xF5
         };
 
+        /// <summary>
+        /// Encrypts a message and returns the encrypted bytes as a Base64 string.
+        /// </summary>
+        /// <param name="message">The plaintext message to encrypt.</param>
+        /// <param name="key">The encryption key represented as hexadecimal bytes, optionally separated by hyphens or spaces.</param>
+        /// <returns>A Base64-encoded representation of the encrypted message.</returns>
+        /// <exception cref="ArgumentException">The message, key, or encryption operation is invalid.</exception>
+        /// <see cref="Decode(string, string)"/>
+        /// <see cref="Conversion.HexToByteArray(string)"/>
+        /// <see cref="Base64.ConvertToBase64(byte[])"/>
         public static string Encode(string message, string key)
         {
             var result = string.Empty;
@@ -76,6 +89,16 @@ namespace Hotcakes.Web.Cryptography
             return result;
         }
 
+        /// <summary>
+        /// Decrypts a Base64-encoded message using a hexadecimal key.
+        /// </summary>
+        /// <param name="encoded">The Base64-encoded encrypted message.</param>
+        /// <param name="key">The encryption key represented as hexadecimal bytes, optionally separated by hyphens or spaces.</param>
+        /// <returns>The decrypted plaintext message, or an empty string when the decrypted stream contains no bytes.</returns>
+        /// <exception cref="ArgumentException">The encoded value, key, or decryption operation is invalid.</exception>
+        /// <see cref="Encode(string, string)"/>
+        /// <see cref="Base64.ConvertFromBase64(string)"/>
+        /// <see cref="Conversion.HexToByteArray(string)"/>
         public static string Decode(string encoded, string key)
         {
             var result = string.Empty;

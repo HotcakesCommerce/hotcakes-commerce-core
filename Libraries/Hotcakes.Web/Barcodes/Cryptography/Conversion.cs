@@ -29,23 +29,40 @@ using System.Text;
 
 namespace Hotcakes.Web.Cryptography
 {
+    /// <summary>
+    /// Provides UTF-8, hexadecimal, and byte-array conversion helpers.
+    /// </summary>
     [Serializable]
     public sealed class Conversion
     {
-        // Converts a plain text string into an array of bytes
+        /// <summary>
+        /// Converts a string to its UTF-8 byte representation.
+        /// </summary>
+        /// <param name="inputCharacters">The string to convert.</param>
+        /// <returns>The UTF-8 bytes for <paramref name="inputCharacters"/>.</returns>
+        /// <see cref="BytesToString(byte[])"/>
         public static byte[] StringToBytes(string inputCharacters)
         {
             return Encoding.UTF8.GetBytes(inputCharacters);
         }
 
-        // Converts an array of bytes to a string
+        /// <summary>
+        /// Converts UTF-8 bytes to a string.
+        /// </summary>
+        /// <param name="utf8Bytes">The UTF-8 bytes to convert.</param>
+        /// <returns>The string represented by <paramref name="utf8Bytes"/>.</returns>
+        /// <see cref="StringToBytes(string)"/>
         public static string BytesToString(byte[] utf8Bytes)
         {
             return Encoding.UTF8.GetString(utf8Bytes);
         }
         
-        // Converts as string containing hex numbers into an array of bytes
-        // Example: "FF-06" would convert to a byte[] {0xFF, 0x06} OR byte[] {255, 6}
+        /// <summary>
+        /// Converts a string of hexadecimal numbers to a byte array.
+        /// </summary>
+        /// <param name="hexString">The hexadecimal string. Hyphens and spaces are ignored; for example, <c>FF-06</c> becomes bytes <c>0xFF</c> and <c>0x06</c>.</param>
+        /// <returns>The bytes represented by <paramref name="hexString"/>.</returns>
+        /// <see cref="ByteArrayToHex(byte[])"/>
         public static byte[] HexToByteArray(string hexString)
         {
             var working = hexString.Replace("-", string.Empty);
@@ -62,6 +79,12 @@ namespace Hotcakes.Web.Cryptography
             return bytes;
         }
 
+        /// <summary>
+        /// Converts a byte array to a hyphen-separated hexadecimal string.
+        /// </summary>
+        /// <param name="input">The bytes to convert.</param>
+        /// <returns>A hyphen-separated hexadecimal representation of <paramref name="input"/>.</returns>
+        /// <see cref="HexToByteArray(string)"/>
         public static string ByteArrayToHex(byte[] input)
         {
             return BitConverter.ToString(input);

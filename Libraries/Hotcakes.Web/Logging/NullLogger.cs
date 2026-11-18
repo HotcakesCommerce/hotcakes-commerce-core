@@ -28,24 +28,38 @@ using System;
 
 namespace Hotcakes.Web.Logging
 {
+    /// <summary>Provides a simple console-backed implementation of <see cref="ILogger"/>.</summary>
     [Serializable]
     public class NullLogger : ILogger
     {
+        /// <summary>Writes a message to the console.</summary>
+        /// <param name="message">The message to write.</param>
         public void LogMessage(string message)
         {
             Console.WriteLine(message);
         }
 
+        /// <summary>Rethrows an exception.</summary>
+        /// <param name="ex">The exception to rethrow.</param>
+        /// <exception cref="Exception">The supplied exception is always rethrown.</exception>
         public void LogException(Exception ex)
         {
             throw ex;
         }
 
+        /// <summary>Writes a source-qualified message to the console.</summary>
+        /// <param name="source">The component or source that produced the message.</param>
+        /// <param name="message">The message to write.</param>
+        /// <param name="severity">The severity assigned to the message.</param>
         public void LogMessage(string source, string message, EventLogSeverity severity)
         {
             Console.WriteLine(source + " " + message);
         }
 
+        /// <summary>Rethrows an exception with its specified severity.</summary>
+        /// <param name="ex">The exception to rethrow.</param>
+        /// <param name="severity">The severity assigned to the exception.</param>
+        /// <exception cref="Exception">The supplied exception is always rethrown.</exception>
         public void LogException(Exception ex, EventLogSeverity severity)
         {
             throw ex;

@@ -34,6 +34,10 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Web.Data
 {
+    /// <summary>
+    /// Implements repository persistence against an Entity Framework database context.
+    /// </summary>
+    /// <typeparam name="T">The entity type managed by the strategy.</typeparam>
     [Serializable]
     public class DatabaseStrategy<T> : IRepositoryStrategy<T> where T : class, new()
     {
@@ -42,6 +46,10 @@ namespace Hotcakes.Web.Data
         private readonly ObjectContext _objectContext;
         private ObjectSet<T> _objectSet;
 
+        /// <summary>
+        /// Initializes a database strategy using the specified context.
+        /// </summary>
+        /// <param name="context">The Entity Framework context used for persistence.</param>
         public DatabaseStrategy(DbContext context)
         {
             Logger = new NullLogger();
@@ -66,14 +74,24 @@ namespace Hotcakes.Web.Data
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether mutations are submitted immediately.
+        /// </summary>
         public bool AutoSubmit
         {
             get { return _AutoSubmit; }
             set { _AutoSubmit = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the logger used for persistence diagnostics.
+        /// </summary>
         public ILogger Logger { get; set; }
 
+        /// <summary>
+        /// Saves pending changes through the underlying context.
+        /// </summary>
+        /// <returns><see langword="true"/> when saving succeeds; otherwise, <see langword="false"/>.</returns>
         public bool SubmitChanges()
         {
             if (_objectContext != null)
@@ -93,6 +111,11 @@ namespace Hotcakes.Web.Data
             return false;
         }
 
+        /// <summary>
+        /// Finds an entity by its <see cref="PrimaryKey"/>.
+        /// </summary>
+        /// <param name="id">The entity key.</param>
+        /// <returns>The matching entity, or <see langword="null"/> when it is not found.</returns>
         public T FindByPrimaryKey(PrimaryKey id)
         {
             var setName = _objectSet.Context.DefaultContainerName + "." + _objectSet.EntitySet.Name;
@@ -121,6 +144,10 @@ namespace Hotcakes.Web.Data
             return null;
         }
 
+        /// <summary>
+        /// Gets a queryable sequence for the entity set.
+        /// </summary>
+        /// <returns>The entity query, or <see langword="null"/> when it cannot be created.</returns>
         public IQueryable<T> Find()
         {
             try
@@ -134,6 +161,11 @@ namespace Hotcakes.Web.Data
             return null;
         }
 
+        /// <summary>
+        /// Adds an entity to the entity set.
+        /// </summary>
+        /// <param name="item">The entity to add.</param>
+        /// <returns><see langword="true"/> when the entity is accepted; otherwise, <see langword="false"/>.</returns>
         public bool Create(T item)
         {
             try
@@ -149,6 +181,11 @@ namespace Hotcakes.Web.Data
             return false;
         }
 
+        /// <summary>
+        /// Deletes the entity identified by a <see cref="PrimaryKey"/>.
+        /// </summary>
+        /// <param name="id">The entity key.</param>
+        /// <returns><see langword="true"/> when an entity is deleted; otherwise, <see langword="false"/>.</returns>
         public bool Delete(PrimaryKey id)
         {
             var found = FindByPrimaryKey(id);
@@ -159,11 +196,19 @@ namespace Hotcakes.Web.Data
             return true;
         }
 
+        /// <summary>
+        /// Detaches an entity from the object context.
+        /// </summary>
+        /// <param name="item">The entity to detach.</param>
         public void Detach(T item)
         {
             objectSet.Detach(item);
         }
 
+        /// <summary>
+        /// Counts the entities in the entity set.
+        /// </summary>
+        /// <returns>The entity count, or <c>-1</c> when counting fails.</returns>
         public int CountOfAll()
         {
             try

@@ -26,15 +26,24 @@
 
 namespace Hotcakes.Web.Geography
 {
+    /// <summary>Defines the descriptive and validation data for a country.</summary>
     public interface ICountry
     {
+        /// <summary>Gets the country identifier.</summary>
         string Bvin { get; }
+        /// <summary>Gets the culture code associated with the country.</summary>
         string CultureCode { get; }
+        /// <summary>Gets the system name of the country.</summary>
         string SystemName { get; }
+        /// <summary>Gets the ISO country code.</summary>
         string IsoCode { get; }
+        /// <summary>Gets the three-letter ISO country code.</summary>
         string IsoAlpha3 { get; }
+        /// <summary>Gets the numeric ISO country code.</summary>
         string IsoNumeric { get; }
+        /// <summary>Gets the regular expression used to validate postal codes.</summary>
         string PostalCodeValidationRegex { get; }
+        /// <summary>Gets the display name of the country.</summary>
         string DisplayName { get; }
     }
 }

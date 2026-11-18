@@ -28,14 +28,19 @@ using System;
 
 namespace Hotcakes.Web
 {
+    /// <summary>
+    /// Provides conversions between common measurement units used by the commerce APIs.
+    /// </summary>
+    /// <seealso cref="Dates"/>
     [Serializable]
     public static class Conversions
     {
         /// <summary>
-        ///     Converts inches to centimeters
+        /// Converts a distance in inches to centimeters.
         /// </summary>
-        /// <param name="inches">Inches to convert</param>
-        /// <returns>Inches converted to centimeters</returns>
+        /// <param name="inches">The distance, in inches.</param>
+        /// <returns>The equivalent distance in centimeters.</returns>
+        /// <seealso cref="CentimetersToInches(decimal)"/>
         public static decimal InchesToCentimeters(decimal inches)
         {
             var centimeters = 0m;
@@ -44,10 +49,11 @@ namespace Hotcakes.Web
         }
 
         /// <summary>
-        ///     Converts centimeters to inches
+        /// Converts a distance in centimeters to inches.
         /// </summary>
-        /// <param name="centimeters">Centimeters to convert</param>
-        /// <returns>Centimeters converted to inches</returns>
+        /// <param name="centimeters">The distance, in centimeters.</param>
+        /// <returns>The equivalent distance in inches.</returns>
+        /// <seealso cref="InchesToCentimeters(decimal)"/>
         public static decimal CentimetersToInches(decimal centimeters)
         {
             var inches = 0m;
@@ -56,10 +62,11 @@ namespace Hotcakes.Web
         }
 
         /// <summary>
-        ///     Converts pounds to kilograms
+        /// Converts a weight in pounds to kilograms.
         /// </summary>
-        /// <param name="pounds">Pound amount to convert</param>
-        /// <returns>Pounds converted to Kilograms</returns>
+        /// <param name="pounds">The weight, in pounds.</param>
+        /// <returns>The equivalent weight in kilograms.</returns>
+        /// <seealso cref="KilogramsToPounds(decimal)"/>
         public static decimal PoundsToKilograms(decimal pounds)
         {
             var kilograms = 0m;
@@ -68,10 +75,11 @@ namespace Hotcakes.Web
         }
 
         /// <summary>
-        ///     Converts Kilograms to Pounds
+        /// Converts a weight in kilograms to pounds.
         /// </summary>
-        /// <param name="kilograms">Kilogram amount to convert</param>
-        /// <returns>Kilograms converted to pounds</returns>
+        /// <param name="kilograms">The weight, in kilograms.</param>
+        /// <returns>The equivalent weight in pounds.</returns>
+        /// <seealso cref="PoundsToKilograms(decimal)"/>
         public static decimal KilogramsToPounds(decimal kilograms)
         {
             var pounds = 0m;
@@ -80,10 +88,11 @@ namespace Hotcakes.Web
         }
 
         /// <summary>
-        ///     Converts the non-whole pounds portion of a decial number to ounces
+        /// Converts the fractional portion of a pound value to ounces.
         /// </summary>
-        /// <param name="pounds">The decimal representation of pounds to be converted</param>
-        /// <returns>Only the non-whole pound portion of the pounds converted to ounces</returns>
+        /// <param name="pounds">The decimal weight in pounds.</param>
+        /// <returns>The fractional-pound portion expressed in ounces.</returns>
+        /// <seealso cref="OuncesToDecimalPounds(decimal)"/>
         public static decimal DecimalPoundsToOunces(decimal pounds)
         {
             // Get only Partial Pounds
@@ -92,7 +101,12 @@ namespace Hotcakes.Web
             return remainder*16;
         }
 
-        // Converts ounces to decimal pounds
+        /// <summary>
+        /// Converts a weight in ounces to decimal pounds.
+        /// </summary>
+        /// <param name="ounces">The weight, in ounces.</param>
+        /// <returns>The equivalent weight in pounds.</returns>
+        /// <seealso cref="DecimalPoundsToOunces(decimal)"/>
         public static decimal OuncesToDecimalPounds(decimal ounces)
         {
             var result = ounces/16.0m;

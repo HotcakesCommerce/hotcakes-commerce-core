@@ -30,17 +30,31 @@ using System.Web.Script.Serialization;
 
 namespace Hotcakes.Web
 {
+    /// <summary>
+    /// Provides JSON serialization helpers backed by <see cref="JavaScriptSerializer"/>.
+    /// </summary>
     [Serializable]
     public static class Json
     {
         private const int MAXLENGTH = int.MaxValue;
 
+        /// <summary>
+        /// Serializes an object to JSON.
+        /// </summary>
+        /// <param name="target">The object to serialize.</param>
+        /// <returns>The JSON representation of <paramref name="target"/>.</returns>
         public static string ObjectToJson(this object target)
         {
             var ser = new JavaScriptSerializer {MaxJsonLength = MAXLENGTH};
             return ser.Serialize(target);
         }
 
+        /// <summary>
+        /// Deserializes a JSON string to the requested type.
+        /// </summary>
+        /// <typeparam name="T">The target deserialization type.</typeparam>
+        /// <param name="json">The JSON string to deserialize.</param>
+        /// <returns>The deserialized value, or the default value of <typeparamref name="T"/> when the input is null or empty.</returns>
         public static T ObjectFromJson<T>(string json)
         {
             if (string.IsNullOrEmpty(json))
@@ -49,6 +63,12 @@ namespace Hotcakes.Web
             return ser.Deserialize<T>(json);
         }
 
+        /// <summary>
+        /// Reads JSON from a <see cref="Stream"/> and deserializes it to the requested type.
+        /// </summary>
+        /// <typeparam name="T">The target deserialization type.</typeparam>
+        /// <param name="stream">The stream containing the JSON text.</param>
+        /// <returns>The deserialized value.</returns>
         public static T ObjectFromJson<T>(Stream stream)
         {
             var rdr = new StreamReader(stream);

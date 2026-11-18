@@ -33,11 +33,22 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Web.Data
 {
+    /// <summary>
+    /// Provides shared in-memory collections for memory repository strategies.
+    /// </summary>
     [Serializable]
     public class MemoryStrategyFactory
     {
+        /// <summary>
+        /// Gets the type-indexed in-memory storage collections.
+        /// </summary>
         public static Dictionary<Type, IList> _storage = new Dictionary<Type, IList>();
 
+        /// <summary>
+        /// Gets or creates the collection used for a model type.
+        /// </summary>
+        /// <typeparam name="TF">The model type whose collection is requested.</typeparam>
+        /// <returns>The shared collection for <typeparamref name="TF"/>.</returns>
         public static List<TF> CreateItems<TF>()
         {
             IList list = null;
@@ -50,6 +61,9 @@ namespace Hotcakes.Web.Data
             return list as List<TF>;
         }
 
+        /// <summary>
+        /// Removes all models from every shared in-memory collection.
+        /// </summary>
         public static void Clear()
         {
             foreach (var item in _storage.Values)
@@ -59,6 +73,10 @@ namespace Hotcakes.Web.Data
         }
     }
 
+    /// <summary>
+    /// Implements repository persistence using shared in-memory collections.
+    /// </summary>
+    /// <typeparam name="T">The model type managed by the strategy.</typeparam>
     [Serializable]
     public class MemoryStrategy<T> : IRepositoryStrategy<T> where T : class, new()
     {
@@ -66,6 +84,10 @@ namespace Hotcakes.Web.Data
         private readonly PrimaryKeyType _keyType = PrimaryKeyType.Bvin;
         private readonly List<T> items;
 
+        /// <summary>
+        /// Initializes a memory strategy using the specified key type.
+        /// </summary>
+        /// <param name="keyType">The key type used when assigning generated keys.</param>
         public MemoryStrategy(PrimaryKeyType keyType)
         {
             items = MemoryStrategyFactory.CreateItems<T>();
@@ -73,6 +95,11 @@ namespace Hotcakes.Web.Data
             Logger = new NullLogger();
         }
 
+        /// <summary>
+        /// Initializes a memory strategy using the specified key type and logger.
+        /// </summary>
+        /// <param name="keyType">The key type used when assigning generated keys.</param>
+        /// <param name="logger">The logger used for persistence diagnostics.</param>
         public MemoryStrategy(PrimaryKeyType keyType, ILogger logger)
         {
             items = MemoryStrategyFactory.CreateItems<T>();
@@ -80,15 +107,25 @@ namespace Hotcakes.Web.Data
             Logger = logger;
         }
 
+        /// <summary>
+        /// Gets or sets the logger used for persistence diagnostics.
+        /// </summary>
         public ILogger Logger { get; set; }
 
-
+        /// <summary>
+        /// Gets or sets the submission behavior. In-memory changes are always immediate.
+        /// </summary>
         public bool AutoSubmit
         {
             get { return true; }
             set { } // do nothing
         }
 
+        /// <summary>
+        /// Finds an item by its <see cref="PrimaryKey"/>.
+        /// </summary>
+        /// <param name="key">The item key.</param>
+        /// <returns>The matching item, or <see langword="null"/> when it is not found.</returns>
         public T FindByPrimaryKey(PrimaryKey key)
         {
             return items.SingleOrDefault(delegate(T t)
@@ -113,6 +150,10 @@ namespace Hotcakes.Web.Data
             });
         }
 
+        /// <summary>
+        /// Gets the in-memory items as a queryable sequence.
+        /// </summary>
+        /// <returns>The queryable item sequence, or <see langword="null"/> when querying fails.</returns>
         public IQueryable<T> Find()
         {
             try
@@ -127,6 +168,11 @@ namespace Hotcakes.Web.Data
             return null;
         }
 
+        /// <summary>
+        /// Adds an item to the shared in-memory collection.
+        /// </summary>
+        /// <param name="item">The item to add.</param>
+        /// <returns><see langword="true"/> when the item is added; otherwise, <see langword="false"/>.</returns>
         public bool Create(T item)
         {
             var result = false;
@@ -146,11 +192,20 @@ namespace Hotcakes.Web.Data
             return result;
         }
 
+        /// <summary>
+        /// Completes pending changes. In-memory changes are already applied.
+        /// </summary>
+        /// <returns>Always <see langword="true"/>.</returns>
         public bool SubmitChanges()
         {
             return true;
         }
 
+        /// <summary>
+        /// Deletes the item identified by a <see cref="PrimaryKey"/>.
+        /// </summary>
+        /// <param name="key">The item key.</param>
+        /// <returns><see langword="true"/> when an item is deleted; otherwise, <see langword="false"/>.</returns>
         public bool Delete(PrimaryKey key)
         {
             var result = false;
@@ -174,10 +229,18 @@ namespace Hotcakes.Web.Data
             return result;
         }
 
+        /// <summary>
+        /// Detaches an item. This strategy does not track items, so the operation has no effect.
+        /// </summary>
+        /// <param name="item">The item to detach.</param>
         public void Detach(T item)
         {
         }
 
+        /// <summary>
+        /// Counts the items in the shared in-memory collection.
+        /// </summary>
+        /// <returns>The item count.</returns>
         public int CountOfAll()
         {
             var result = 0;

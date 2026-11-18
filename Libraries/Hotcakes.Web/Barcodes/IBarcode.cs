@@ -26,12 +26,18 @@
 
 namespace Hotcakes.Web.Barcodes
 {
+    /// <summary>Defines the values produced by an individual barcode symbology encoder.</summary>
+    /// <seealso cref="Barcode"/>
     internal interface IBarcode
     {
+        /// <summary>Gets the binary bar-and-space representation of the barcode.</summary>
         string Encoded_Value { get; }
 
+        /// <summary>Gets the raw input data used by the encoder.</summary>
         string RawData { get; }
 
+        /// <summary>Gets the symbology-formatted input data.</summary>
+        /// <seealso cref="RawData"/>
         string FormattedData { get; }
     }
 }

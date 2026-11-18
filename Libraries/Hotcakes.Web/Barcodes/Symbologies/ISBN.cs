@@ -28,9 +28,14 @@ using System;
 
 namespace Hotcakes.Web.Barcodes
 {
+    /// <summary>Bookland/ISBN barcode encoder.</summary>
+    /// <remarks>The encoded output is exposed through <see cref="IBarcode.Encoded_Value"/>.</remarks>
     [Serializable]
     internal class ISBN : BarcodeCommon, IBarcode
     {
+        /// <summary>Encodes ISBN data using the Bookland EAN-13 representation.</summary>
+        /// <param name="input">The data to encode.</param>
+        /// <seealso cref="Encoded_Value"/>
         public ISBN(string input)
         {
             Raw_Data = input;
@@ -38,6 +43,8 @@ namespace Hotcakes.Web.Barcodes
 
         #region IBarcode Members
 
+        /// <summary>Gets the encoded bar-and-space representation.</summary>
+        /// <seealso cref="IBarcode.Encoded_Value"/>
         public string Encoded_Value
         {
             get { return Encode_ISBN_Bookland(); }

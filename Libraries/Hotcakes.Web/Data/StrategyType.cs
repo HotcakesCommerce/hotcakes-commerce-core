@@ -26,9 +26,19 @@
 
 namespace Hotcakes.Web.Data
 {
+    /// <summary>
+    /// Identifies the persistence strategy used by a repository.
+    /// </summary>
     public enum StrategyType
     {
+        /// <summary>
+        /// Stores repository data in memory.
+        /// </summary>
         InMemory = 0,
+
+        /// <summary>
+        /// Stores repository data in a database.
+        /// </summary>
         Database = 1
     }
 }

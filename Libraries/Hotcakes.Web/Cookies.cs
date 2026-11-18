@@ -31,9 +31,12 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Web
 {
+    /// <summary>Provides helpers for reading and writing HTTP cookies.</summary>
     [Serializable]
     public class Cookies
     {
+        /// <summary>Gets a cookie value from the request, or response when absent from the request.</summary>
+        /// <param name="cookieName">The cookie name.</param><param name="context">The HTTP context to inspect.</param><param name="log">The logger used for failures.</param><returns>The cookie value, or an empty string.</returns>
         public static string GetCookieString(string cookieName, HttpContextBase context, ILogger log)
         {
             var result = string.Empty;
@@ -72,6 +75,8 @@ namespace Hotcakes.Web
             return result;
         }
 
+        /// <summary>Gets a cookie converted to a 64-bit integer.</summary>
+        /// <param name="cookieName">The cookie name.</param><param name="context">The HTTP context.</param><param name="log">The logger used for failures.</param><returns>The parsed value, or -1.</returns>
         public static long GetCookieLong(string cookieName, HttpContextBase context, ILogger log)
         {
             long result = -1;
@@ -80,6 +85,8 @@ namespace Hotcakes.Web
             return result;
         }
 
+        /// <summary>Gets a cookie converted to a <see cref="Guid"/>.</summary>
+        /// <param name="cookieName">The cookie name.</param><param name="context">The HTTP context.</param><param name="log">The logger used for failures.</param><returns>The parsed identifier, or <see langword="null"/>.</returns>
         public static Guid? GetCookieGuid(string cookieName, HttpContextBase context, ILogger log)
         {
             Guid? result = null;
@@ -95,24 +102,32 @@ namespace Hotcakes.Web
             return result;
         }
 
+        /// <summary>Sets a string cookie using default expiration behavior.</summary>
+        /// <param name="cookieName">The cookie name.</param><param name="value">The value.</param><param name="context">The HTTP context.</param><param name="temporary">Whether the cookie is temporary.</param><param name="log">The logger used for failures.</param>
         public static void SetCookieString(string cookieName, string value, HttpContextBase context, bool temporary,
             ILogger log)
         {
             SetCookieString(cookieName, value, context, temporary, null, log);
         }
 
+        /// <summary>Sets a string cookie for the specified domain.</summary>
+        /// <param name="cookieName">The cookie name.</param><param name="value">The value.</param><param name="context">The HTTP context.</param><param name="temporary">Whether the cookie is temporary.</param><param name="domain">The cookie domain.</param><param name="log">The logger used for failures.</param>
         public static void SetCookieStringWithDomain(string cookieName, string value, HttpContextBase context,
             bool temporary, string domain, ILogger log)
         {
             SetCookieString(cookieName, value, context, temporary, null, domain, log);
         }
 
+        /// <summary>Sets a string cookie with an optional expiration date.</summary>
+        /// <param name="cookieName">The cookie name.</param><param name="value">The value.</param><param name="context">The HTTP context.</param><param name="temporary">Whether the cookie is temporary.</param><param name="expirationDate">The optional expiration date.</param><param name="log">The logger used for failures.</param>
         public static void SetCookieString(string cookieName, string value, HttpContextBase context, bool temporary,
             DateTime? expirationDate, ILogger log)
         {
             SetCookieString(cookieName, value, context, temporary, expirationDate, "", log);
         }
 
+        /// <summary>Sets a string cookie with an optional expiration date and domain.</summary>
+        /// <param name="cookieName">The cookie name.</param><param name="value">The value.</param><param name="context">The HTTP context.</param><param name="temporary">Whether the cookie is temporary.</param><param name="expirationDate">The optional expiration date.</param><param name="domain">The cookie domain.</param><param name="log">The logger used for failures.</param>
         public static void SetCookieString(string cookieName, string value, HttpContextBase context, bool temporary,
             DateTime? expirationDate, string domain, ILogger log)
         {
@@ -145,12 +160,16 @@ namespace Hotcakes.Web
             }
         }
 
+        /// <summary>Sets a 64-bit integer cookie.</summary>
+        /// <param name="cookieName">The cookie name.</param><param name="value">The value.</param><param name="context">The HTTP context.</param><param name="temporary">Whether the cookie is temporary.</param><param name="log">The logger used for failures.</param>
         public static void SetCookieLong(string cookieName, long value, HttpContextBase context, bool temporary,
             ILogger log)
         {
             SetCookieString(cookieName, value.ToString(), context, temporary, log);
         }
 
+        /// <summary>Sets a <see cref="Guid"/> cookie.</summary>
+        /// <param name="cookieName">The cookie name.</param><param name="value">The value.</param><param name="context">The HTTP context.</param><param name="temporary">Whether the cookie is temporary.</param><param name="log">The logger used for failures.</param>
         public static void SetCookieGuid(string cookieName, Guid value, HttpContextBase context, bool temporary,
             ILogger log)
         {

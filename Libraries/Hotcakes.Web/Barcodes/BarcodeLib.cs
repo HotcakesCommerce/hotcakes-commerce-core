@@ -36,50 +36,91 @@ namespace Hotcakes.Web.Barcodes
 
     #region Enums
 
+    /// <summary>Identifies the barcode symbology used by <see cref="Barcode"/>.</summary>
     public enum TYPE
     {
+        /// <summary>Uses the UNSPECIFIED barcode encoding.</summary>
         UNSPECIFIED,
+        /// <summary>Uses the UPCA barcode encoding.</summary>
         UPCA,
+        /// <summary>Uses the UPCE barcode encoding.</summary>
         UPCE,
+        /// <summary>Uses the UPC_SUPPLEMENTAL_2DIGIT barcode encoding.</summary>
         UPC_SUPPLEMENTAL_2DIGIT,
+        /// <summary>Uses the UPC_SUPPLEMENTAL_5DIGIT barcode encoding.</summary>
         UPC_SUPPLEMENTAL_5DIGIT,
+        /// <summary>Uses the EAN13 barcode encoding.</summary>
         EAN13,
+        /// <summary>Uses the EAN8 barcode encoding.</summary>
         EAN8,
+        /// <summary>Uses the Interleaved2of5 barcode encoding.</summary>
         Interleaved2of5,
+        /// <summary>Uses the Standard2of5 barcode encoding.</summary>
         Standard2of5,
+        /// <summary>Uses the Industrial2of5 barcode encoding.</summary>
         Industrial2of5,
+        /// <summary>Uses the CODE39 barcode encoding.</summary>
         CODE39,
+        /// <summary>Uses the CODE39Extended barcode encoding.</summary>
         CODE39Extended,
+        /// <summary>Uses the Codabar barcode encoding.</summary>
         Codabar,
+        /// <summary>Uses the PostNet barcode encoding.</summary>
         PostNet,
+        /// <summary>Uses the BOOKLAND barcode encoding.</summary>
         BOOKLAND,
+        /// <summary>Uses the ISBN barcode encoding.</summary>
         ISBN,
+        /// <summary>Uses the JAN13 barcode encoding.</summary>
         JAN13,
+        /// <summary>Uses the MSI_Mod10 barcode encoding.</summary>
         MSI_Mod10,
+        /// <summary>Uses the MSI_2Mod10 barcode encoding.</summary>
         MSI_2Mod10,
+        /// <summary>Uses the MSI_Mod11 barcode encoding.</summary>
         MSI_Mod11,
+        /// <summary>Uses the MSI_Mod11_Mod10 barcode encoding.</summary>
         MSI_Mod11_Mod10,
+        /// <summary>Uses the Modified_Plessey barcode encoding.</summary>
         Modified_Plessey,
+        /// <summary>Uses the CODE11 barcode encoding.</summary>
         CODE11,
+        /// <summary>Uses the USD8 barcode encoding.</summary>
         USD8,
+        /// <summary>Uses the UCC12 barcode encoding.</summary>
         UCC12,
+        /// <summary>Uses the UCC13 barcode encoding.</summary>
         UCC13,
+        /// <summary>Uses the LOGMARS barcode encoding.</summary>
         LOGMARS,
+        /// <summary>Uses the CODE128 barcode encoding.</summary>
         CODE128,
+        /// <summary>Uses the CODE128A barcode encoding.</summary>
         CODE128A,
+        /// <summary>Uses the CODE128B barcode encoding.</summary>
         CODE128B,
+        /// <summary>Uses the CODE128C barcode encoding.</summary>
         CODE128C,
+        /// <summary>Uses the ITF14 barcode encoding.</summary>
         ITF14,
+        /// <summary>Uses the CODE93 barcode encoding.</summary>
         CODE93
     }
 
+    /// <summary>Identifies an image format accepted by <see cref="M:Hotcakes.Web.Barcode.SaveImage(System.String,Hotcakes.Web.SaveTypes)"/>.</summary>
     public enum SaveTypes
     {
+        /// <summary>Uses the JPG image format.</summary>
         JPG,
+        /// <summary>Uses the BMP image format.</summary>
         BMP,
+        /// <summary>Uses the PNG image format.</summary>
         PNG,
+        /// <summary>Uses the GIF image format.</summary>
         GIF,
+        /// <summary>Uses the TIFF image format.</summary>
         TIFF,
+        /// <summary>Uses the default image format configured by <see cref="Barcode.ImageFormat"/>.</summary>
         UNSPECIFIED
     }
 
@@ -93,6 +134,8 @@ namespace Hotcakes.Web.Barcodes
     {
         #region IDisposable Members
 
+        /// <summary>Releases resources held by the barcode instance.</summary>
+        /// <seealso cref="EncodedImage"/>
         public void Dispose()
         {
             try
@@ -144,6 +187,10 @@ namespace Hotcakes.Web.Barcodes
             Raw_Data = data;
         }
 
+        /// <summary>Initializes a barcode with raw data and a symbology.</summary>
+        /// <param name="data">The data to encode.</param>
+        /// <param name="iType">The symbology to use.</param>
+        /// <seealso cref="EncodedType"/>
         public Barcode(string data, TYPE iType)
         {
             EncodedImage = null;
@@ -890,6 +937,10 @@ namespace Hotcakes.Web.Barcodes
             }
         }
 
+        /// <summary>Creates an image from the base64 image data in a serialized barcode document.</summary>
+        /// <param name="internalXML">The serialized barcode data containing the image.</param>
+        /// <returns>The image stored in <paramref name="internalXML"/>.</returns>
+        /// <seealso cref="XML"/>
         public static Image GetImageFromXML(BarcodeXML internalXML)
         {
             try

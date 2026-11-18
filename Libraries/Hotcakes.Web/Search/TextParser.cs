@@ -31,14 +31,34 @@ using System.Text;
 
 namespace Hotcakes.Web.Search
 {
+    /// <summary>
+    /// Parses search text into normalized, optionally stemmed query terms.
+    /// </summary>
     [Serializable]
     public class TextParser
     {
+        /// <summary>
+        /// Parses a query using English stop-word removal and a limit of ten terms.
+        /// </summary>
+        /// <param name="fullQuery">The complete query text.</param>
+        /// <param name="culture">The culture used for stemming and stop-word handling.</param>
+        /// <returns>A list of normalized query terms.</returns>
+        /// <see cref="ParseText(string, string, bool, int)" />
         public static List<string> ParseText(string fullQuery, string culture)
         {
             return ParseText(fullQuery, culture, true, 10);
         }
 
+        /// <summary>
+        /// Parses a query into normalized terms, optionally removing stop words and limiting the result count.
+        /// </summary>
+        /// <param name="fullQuery">The complete query text.</param>
+        /// <param name="culture">The culture used for stemming and stop-word handling.</param>
+        /// <param name="removeStopWords"><see langword="true" /> to omit recognized stop words; otherwise, <see langword="false" />.</param>
+        /// <param name="limit">The maximum number of terms to return.</param>
+        /// <returns>A list of normalized query terms in query order.</returns>
+        /// <see cref="WordProcessor.StemSingleWord(string, string)" />
+        /// <see cref="WordProcessor.IsStopWord(string, string)" />
         public static List<string> ParseText(string fullQuery, string culture, bool removeStopWords, int limit)
         {
             var result = new List<string>();

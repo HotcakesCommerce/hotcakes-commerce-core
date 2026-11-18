@@ -29,15 +29,16 @@ using System.Data;
 
 namespace Hotcakes.Web.Barcodes
 {
+    /// <summary>Code 93 barcode encoder.</summary>
+    /// <remarks>The encoded output is exposed through <see cref="IBarcode.Encoded_Value"/>.</remarks>
     [Serializable]
     internal class Code93 : BarcodeCommon, IBarcode
     {
         private readonly DataTable C93_Code = new DataTable("C93_Code");
 
-        /// <summary>
-        ///     Encodes with Code93.
-        /// </summary>
-        /// <param name="input">Data to encode.</param>
+        /// <summary>Encodes data using the Code 93 symbology.</summary>
+        /// <param name="input">The data to encode.</param>
+        /// <seealso cref="Encoded_Value"/>
         public Code93(string input)
         {
             Raw_Data = input;
@@ -45,6 +46,8 @@ namespace Hotcakes.Web.Barcodes
 
         #region IBarcode Members
 
+        /// <summary>Gets the encoded bar-and-space representation.</summary>
+        /// <seealso cref="IBarcode.Encoded_Value"/>
         public string Encoded_Value
         {
             get { return Encode_Code93(); }

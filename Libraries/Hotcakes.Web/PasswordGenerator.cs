@@ -28,9 +28,18 @@ using System;
 
 namespace Hotcakes.Web
 {
+    /// <summary>
+    /// Generates passwords from the utility's compatibility character set.
+    /// </summary>
+    /// <seealso cref="GeneratePassword(int)"/>
     [Serializable]
     public class PasswordGenerator
     {
+        /// <summary>
+        /// Generates a password with the requested length.
+        /// </summary>
+        /// <param name="length">The number of characters to generate.</param>
+        /// <returns>A password whose first character is a letter and whose remaining characters are letters or digits.</returns>
         public static string GeneratePassword(int length)
         {
             var result = string.Empty;

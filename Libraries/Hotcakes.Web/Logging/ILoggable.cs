@@ -26,8 +26,10 @@
 
 namespace Hotcakes.Web.Logging
 {
+    /// <summary>Identifies an object that exposes an <see cref="ILogger"/>.</summary>
     public interface ILoggable
     {
+        /// <summary>Gets or sets the logger used by the object.</summary>
         ILogger Logger { get; set; }
     }
 }

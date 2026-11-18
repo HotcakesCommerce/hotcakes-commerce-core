@@ -62,14 +62,9 @@ namespace Hotcakes.Web.Search
 
 	*/
 
-    /**
-      * Stemmer, implementing the Porter Stemming Algorithm
-      *
-      * The Stemmer class transforms a word into its root form.  The input
-      * word can be provided a character at time (by calling add()), or at once
-      * by calling one of the various stem(something) methods.
-      */
-
+    /// <summary>
+    /// Implements the Porter stemming algorithm for reducing English words to root forms.
+    /// </summary>
     [Serializable]
     internal class PorterStemmer
     {
@@ -83,6 +78,9 @@ namespace Hotcakes.Web.Search
             j,
             k;
 
+        /// <summary>
+        /// Initializes an empty stemmer buffer.
+        /// </summary>
         public PorterStemmer()
         {
             b = new char[INC];
@@ -90,11 +88,11 @@ namespace Hotcakes.Web.Search
             i_end = 0;
         }
 
-        /**
-         * Add a character to the word being stemmed.  When you are finished
-         * adding characters, you can call stem(void) to stem the word.
-         */
-
+        /// <summary>
+        /// Adds one character to the word being stemmed.
+        /// </summary>
+        /// <param name="ch">The character to append.</param>
+        /// <see cref="stem()" />
         public void add(char ch)
         {
             if (i == b.Length)
@@ -107,11 +105,13 @@ namespace Hotcakes.Web.Search
             b[i++] = ch;
         }
 
-        /** Adds wLen characters to the word being stemmed contained in a portion
-         * of a char[] array. This is like repeated calls of add(char ch), but
-         * faster.
-         */
-
+        /// <summary>
+        /// Adds characters from an array to the word being stemmed.
+        /// </summary>
+        /// <param name="w">The character array containing the input.</param>
+        /// <param name="wLen">The number of characters to append from the beginning of <paramref name="w" />.</param>
+        /// <see cref="add(char)" />
+        /// <see cref="stem()" />
         public void add(char[] w, int wLen)
         {
             if (i + wLen >= b.Length)
@@ -125,32 +125,31 @@ namespace Hotcakes.Web.Search
                 b[i++] = w[c];
         }
 
-        /**
-         * After a word has been stemmed, it can be retrieved by toString(),
-         * or a reference to the internal buffer can be retrieved by getResultBuffer
-         * and getResultLength (which is generally more efficient.)
-         */
-
+        /// <summary>
+        /// Returns the stemmed word as a string.
+        /// </summary>
+        /// <returns>The stemmed word.</returns>
+        /// <see cref="stem()" />
         public override string ToString()
         {
             return new string(b, 0, i_end);
         }
 
-        /**
-         * Returns the length of the word resulting from the stemming process.
-         */
-
+        /// <summary>
+        /// Gets the length of the stemmed word in the result buffer.
+        /// </summary>
+        /// <returns>The number of valid characters in the result buffer.</returns>
+        /// <see cref="getResultBuffer()" />
         public int getResultLength()
         {
             return i_end;
         }
 
-        /**
-         * Returns a reference to a character buffer containing the results of
-         * the stemming process.  You also need to consult getResultLength()
-         * to determine the length of the result.
-         */
-
+        /// <summary>
+        /// Gets the internal character buffer containing the stemmed word.
+        /// </summary>
+        /// <returns>The internal result buffer.</returns>
+        /// <remarks>Use <see cref="getResultLength()" /> to determine how many characters are valid.</remarks>
         public char[] getResultBuffer()
         {
             return b;
@@ -615,12 +614,10 @@ namespace Hotcakes.Web.Search
                 k--;
         }
 
-        /** Stem the word placed into the Stemmer buffer through calls to add().
-         * Returns true if the stemming process resulted in a word different
-         * from the input.  You can retrieve the result with
-         * getResultLength()/getResultBuffer() or toString().
-         */
-
+        /// <summary>
+        /// Stems the word accumulated through calls to <see cref="add(char)" /> or <see cref="add(char[], int)" />.
+        /// </summary>
+        /// <remarks>Retrieve the result with <see cref="ToString()" />, <see cref="getResultLength()" />, or <see cref="getResultBuffer()" />.</remarks>
         public void stem()
         {
             k = i - 1;

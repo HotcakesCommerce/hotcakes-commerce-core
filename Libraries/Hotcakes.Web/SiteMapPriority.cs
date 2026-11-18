@@ -26,18 +26,32 @@
 
 namespace Hotcakes.Web
 {
+    /// <summary>
+    /// Specifies the priority value written to a sitemap document.
+    /// </summary>
     public enum SiteMapPriority
     {
+        /// <summary>No priority is written.</summary>
         NotSet,
+        /// <summary>Priority 1.0.</summary>
         p10,
+        /// <summary>Priority 0.9.</summary>
         p9,
+        /// <summary>Priority 0.8.</summary>
         p8,
+        /// <summary>Priority 0.7.</summary>
         p7,
+        /// <summary>Priority 0.6.</summary>
         p6,
+        /// <summary>Priority 0.5.</summary>
         p5,
+        /// <summary>Priority 0.4.</summary>
         p4,
+        /// <summary>Priority 0.3.</summary>
         p3,
+        /// <summary>Priority 0.2.</summary>
         p2,
+        /// <summary>Priority 0.1.</summary>
         p1
     }
 }

@@ -31,8 +31,11 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Web.Data
 {
-    // T = the linq to sql proxy class
-    // V = your POCO class
+    /// <summary>
+    /// Provides repository operations that translate between persistence entities and POCO models.
+    /// </summary>
+    /// <typeparam name="T">The persistence entity type.</typeparam>
+    /// <typeparam name="V">The POCO model type exposed by the repository.</typeparam>
     [Serializable]
     public abstract class ConvertingRepositoryBase<T, V>
         where T : class, new()
@@ -41,6 +44,9 @@ namespace Hotcakes.Web.Data
         protected ILogger logger = new NullLogger();
         protected IRepositoryStrategy<T> repository = null;
 
+        /// <summary>
+        /// Gets or sets whether repository mutations are submitted immediately.
+        /// </summary>
         public virtual bool AutoSubmit
         {
             get { return repository.AutoSubmit; }
@@ -123,7 +129,11 @@ namespace Hotcakes.Web.Data
         }
 
 
-        // Note: No longer creates GUID values automatically
+        /// <summary>
+        /// Adds a POCO model after translating it to the persistence representation.
+        /// </summary>
+        /// <param name="item">The model to add.</param>
+        /// <returns><see langword="true"/> when the model is added successfully; otherwise, <see langword="false"/>.</returns>
         public virtual bool Create(V item)
         {
             var result = false;
@@ -165,6 +175,12 @@ namespace Hotcakes.Web.Data
             return result;
         }
 
+        /// <summary>
+        /// Finds a page of translated models.
+        /// </summary>
+        /// <param name="pageNumber">The one-based page number. Values less than one use the first page.</param>
+        /// <param name="pageSize">The maximum number of models in the page.</param>
+        /// <returns>The requested model page.</returns>
         public virtual List<V> FindAllPaged(int pageNumber, int pageSize)
         {
             var result = new List<V>();
@@ -230,11 +246,19 @@ namespace Hotcakes.Web.Data
             return repository.Delete(key);
         }
 
+        /// <summary>
+        /// Gets the number of persistence entities in the repository.
+        /// </summary>
+        /// <returns>The total entity count.</returns>
         public virtual int CountOfAll()
         {
             return repository.CountOfAll();
         }
 
+        /// <summary>
+        /// Persists pending repository changes.
+        /// </summary>
+        /// <returns><see langword="true"/> when submission succeeds; otherwise, <see langword="false"/>.</returns>
         public virtual bool SubmitChanges()
         {
             return repository.SubmitChanges();

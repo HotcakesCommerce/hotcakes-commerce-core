@@ -32,24 +32,31 @@ using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Hotcakes.Web.OpenXml
 {
+    /// <summary>Reads worksheet data from an Open XML spreadsheet.</summary>
     [Serializable]
     public class ExcelReader
     {
         private readonly SpreadsheetDocument _doc;
         private WorksheetPart _worksheet;
 
+        /// <summary>Opens a spreadsheet for read access.</summary>
+        /// <param name="filename">The spreadsheet file path.</param>
         public ExcelReader(string filename)
         {
             var stream = AbstractReader.Copy(filename);
             _doc = SpreadsheetDocument.Open(stream, false);
         }
 
+        /// <summary>Selects a worksheet for subsequent row and cell operations.</summary>
+        /// <param name="sheetName">The worksheet name.</param><returns><see langword="true"/> when the worksheet exists; otherwise, <see langword="false"/>.</returns>
         public bool SetWorksheet(string sheetName)
         {
             _worksheet = SpreadsheetReader.GetWorksheetPartByName(_doc, sheetName);
             return _worksheet != null;
         }
 
+        /// <summary>Gets the number of rows in a worksheet.</summary>
+        /// <param name="sheetName">The worksheet name.</param><returns>The worksheet row count.</returns>
         public int GetRowCount(string sheetName)
         {
             var wp = SpreadsheetReader.GetWorksheetPartByName(_doc, sheetName);
@@ -58,6 +65,8 @@ namespace Hotcakes.Web.OpenXml
             return sheetData.Elements<Row>().Count();
         }
 
+        /// <summary>Gets a row from the selected worksheet.</summary>
+        /// <param name="rowIndex">The row index.</param><returns>The requested <see cref="Row"/>.</returns>
         public Row GetRow(uint rowIndex)
         {
             if (_worksheet == null)
@@ -68,6 +77,8 @@ namespace Hotcakes.Web.OpenXml
             return WorksheetReader.GetRow(sheetData, rowIndex);
         }
 
+        /// <summary>Gets the value of a cell in a row from the selected worksheet.</summary>
+        /// <param name="row">The row containing the cell.</param><param name="columnName">The column name.</param><returns>The cell value, or <see langword="null"/> when the cell is absent.</returns>
         public string GetCellValue(Row row, string columnName)
         {
             if (_worksheet == null)

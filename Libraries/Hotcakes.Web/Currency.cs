@@ -30,15 +30,39 @@ using System.Linq;
 
 namespace Hotcakes.Web
 {
+    /// <summary>
+    /// Describes a currency using its ISO code and localized names.
+    /// </summary>
+    /// <seealso cref="Currency.GetCurrencyList()"/>
     public class CurrencyData
     {
+        /// <summary>
+        /// Gets or sets the ISO 4217 currency symbol.
+        /// </summary>
+        /// <seealso cref="CurrencyData"/>
         public string ISOCurrencySymbol { get; set; }
+
+        /// <summary>
+        /// Gets or sets the currency name in English.
+        /// </summary>
         public string CurrencyEnglishName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the currency name in the native language.
+        /// </summary>
         public string CurrencyNativeName { get; set; }
     }
 
+    /// <summary>
+    /// Provides access to the currencies available from the installed specific cultures.
+    /// </summary>
+    /// <seealso cref="CurrencyData"/>
     public static class Currency
     {
+        /// <summary>
+        /// Gets the distinct currencies available from the installed specific cultures, ordered by English name.
+        /// </summary>
+        /// <returns>A list of <see cref="CurrencyData"/> records describing the available currencies.</returns>
         public static List<CurrencyData> GetCurrencyList()
         {
             var currencyList = CultureInfo

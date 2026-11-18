@@ -31,6 +31,9 @@ using System.Text;
 
 namespace Hotcakes.Web.Cryptography
 {
+    /// <summary>
+    /// Provides Triple DES encryption and decryption for text using a configured key.
+    /// </summary>
     [Serializable]
     public class TripleDesEncryption
     {
@@ -42,6 +45,10 @@ namespace Hotcakes.Web.Cryptography
 
         private readonly byte[] _KeyBytes = new byte[24]; //23 in vb
 
+        /// <summary>
+        /// Initializes a new instance using the built-in default key.
+        /// </summary>
+        /// <see cref="TripleDesEncryption(string)"/>
         public TripleDesEncryption()
         {
             var arrKey = new byte[_Key.Length];
@@ -54,6 +61,12 @@ namespace Hotcakes.Web.Cryptography
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance using the specified key, or the built-in default key when the argument is null.
+        /// </summary>
+        /// <param name="requestedKey">The key text to use for deriving the Triple DES key and initialization vector.</param>
+        /// <exception cref="ArgumentException">The derived encryption key cannot be configured.</exception>
+        /// <see cref="TripleDesEncryption()"/>
         public TripleDesEncryption(string requestedKey)
         {
             if (requestedKey != null)
@@ -70,6 +83,13 @@ namespace Hotcakes.Web.Cryptography
             }
         }
 
+        /// <summary>
+        /// Encrypts a message and returns the encrypted bytes as a Base64 string.
+        /// </summary>
+        /// <param name="message">The plaintext message to encrypt.</param>
+        /// <returns>The encrypted message as Base64, or an empty string when encryption fails or produces no output.</returns>
+        /// <see cref="Decode(string)"/>
+        /// <see cref="Base64.ConvertToBase64(byte[])"/>
         public string Encode(string message)
         {
             var sOutput = string.Empty;
@@ -115,6 +135,13 @@ namespace Hotcakes.Web.Cryptography
             return sOutput;
         }
 
+        /// <summary>
+        /// Decrypts a Base64-encoded message.
+        /// </summary>
+        /// <param name="message">The Base64-encoded encrypted message.</param>
+        /// <returns>The decrypted message, or an empty string when decryption fails or produces no output.</returns>
+        /// <see cref="Encode(string)"/>
+        /// <see cref="Base64.ConvertFromBase64(string)"/>
         public string Decode(string message)
         {
             var sOutput = string.Empty;

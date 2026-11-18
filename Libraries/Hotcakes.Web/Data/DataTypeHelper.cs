@@ -28,9 +28,17 @@ using System;
 
 namespace Hotcakes.Web.Data
 {
+    /// <summary>
+    /// Provides conversions between GUID values and bvin strings.
+    /// </summary>
     [Serializable]
     public static class DataTypeHelper
     {
+        /// <summary>
+        /// Converts a nullable GUID to its lowercase, hyphenated bvin representation.
+        /// </summary>
+        /// <param name="guid">The GUID to convert.</param>
+        /// <returns>The bvin string, or <see cref="string.Empty"/> when <paramref name="guid"/> has no value.</returns>
         public static string GuidToBvin(Guid? guid)
         {
             if (!guid.HasValue)
@@ -38,6 +46,12 @@ namespace Hotcakes.Web.Data
             return guid.Value.ToString("D").ToLowerInvariant();
         }
 
+        /// <summary>
+        /// Converts a bvin string to a GUID.
+        /// </summary>
+        /// <param name="bvin">The bvin string.</param>
+        /// <returns>The parsed GUID, or <see cref="Guid.Empty"/> when <paramref name="bvin"/> is null or empty.</returns>
+        /// <exception cref="FormatException">The bvin is not a valid GUID representation.</exception>
         public static Guid BvinToGuid(string bvin)
         {
             if (!string.IsNullOrEmpty(bvin))
@@ -45,6 +59,12 @@ namespace Hotcakes.Web.Data
             return Guid.Empty;
         }
 
+        /// <summary>
+        /// Converts a bvin string to a nullable GUID.
+        /// </summary>
+        /// <param name="bvin">The bvin string.</param>
+        /// <returns>The parsed GUID, or <see langword="null"/> when <paramref name="bvin"/> is null or empty.</returns>
+        /// <exception cref="FormatException">The bvin is not a valid GUID representation.</exception>
         public static Guid? BvinToNullableGuid(string bvin)
         {
             if (string.IsNullOrEmpty(bvin))

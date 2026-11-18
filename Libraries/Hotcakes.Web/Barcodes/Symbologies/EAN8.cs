@@ -28,6 +28,8 @@ using System;
 
 namespace Hotcakes.Web.Barcodes
 {
+    /// <summary>EAN-8 barcode encoder.</summary>
+    /// <remarks>The encoded output is exposed through <see cref="IBarcode.Encoded_Value"/>.</remarks>
     [Serializable]
     internal class EAN8 : BarcodeCommon, IBarcode
     {
@@ -43,6 +45,9 @@ namespace Hotcakes.Web.Barcodes
             "1010000", "1000100", "1001000", "1110100"
         };
 
+        /// <summary>Encodes data using the EAN-8 symbology.</summary>
+        /// <param name="input">The data to encode.</param>
+        /// <seealso cref="Encoded_Value"/>
         public EAN8(string input)
         {
             Raw_Data = input;
@@ -52,6 +57,8 @@ namespace Hotcakes.Web.Barcodes
 
         #region IBarcode Members
 
+        /// <summary>Gets the encoded bar-and-space representation.</summary>
+        /// <seealso cref="IBarcode.Encoded_Value"/>
         public string Encoded_Value
         {
             get { return Encode_EAN8(); }

@@ -28,14 +28,30 @@ using System;
 
 namespace Hotcakes.Web.Cryptography
 {
+    /// <summary>
+    /// Provides access to encryption keys used by the cryptography helpers.
+    /// </summary>
     [Serializable]
     public static class KeyManager
     {
+        /// <summary>
+        /// Generates a new 256-bit encryption key.
+        /// </summary>
+        /// <returns>A randomly generated key in hyphen-separated hexadecimal form.</returns>
+        /// <see cref="KeyGenerator.Generate256bitKey()"/>
+        /// <see cref="GetKey(long)"/>
         public static string GenerateKey()
         {
             return KeyGenerator.Generate256bitKey();
         }
 
+        /// <summary>
+        /// Gets the encryption key associated with an identifier.
+        /// </summary>
+        /// <param name="id">The identifier of the key to retrieve.</param>
+        /// <returns>The configured encryption key in hyphen-separated hexadecimal form.</returns>
+        /// <remarks>Key selection is currently not differentiated by <paramref name="id"/>.</remarks>
+        /// <see cref="GenerateKey()"/>
         public static string GetKey(long id)
         {
             // TODO: Support Multiple keys and switching keys

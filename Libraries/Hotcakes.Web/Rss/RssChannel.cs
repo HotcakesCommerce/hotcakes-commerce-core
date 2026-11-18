@@ -33,9 +33,12 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Web.Rss
 {
+    /// <summary>Represents an RSS channel and provides methods for loading its content.</summary>
     [Serializable]
     public class RSSChannel
     {
+        /// <summary>Initializes a channel using the supplied logger for load failures.</summary>
+        /// <param name="logger">The logger used while loading the feed.</param>
         public RSSChannel(ILogger logger)
         {
             Description = string.Empty;
@@ -46,13 +49,19 @@ namespace Hotcakes.Web.Rss
             Logger = logger;
         }
 
+        /// <summary>Gets or sets the channel description.</summary>
         public string Description { get; set; }
+        /// <summary>Gets or sets the feed URL.</summary>
         public string FeedUrl { get; set; }
+        /// <summary>Gets or sets the channel link.</summary>
         public string Link { get; set; }
+        /// <summary>Gets or sets the channel title.</summary>
         public string Title { get; set; }
 
         private ILogger Logger { get; set; }
 
+        /// <summary>Loads channel metadata from an RSS feed URL.</summary>
+        /// <param name="url">The RSS feed URL.</param>
         public void LoadFromFeed(string url)
         {
             FeedUrl = url;
@@ -91,6 +100,8 @@ namespace Hotcakes.Web.Rss
             }
         }
 
+        /// <summary>Gets up to the requested number of items from the loaded channel.</summary>
+        /// <param name="maxitems">The maximum number of items to return.</param><returns>A list of <see cref="RSSItem"/> values.</returns>
         public List<RSSItem> GetChannelItems(int maxitems)
         {
             var result = new List<RSSItem>();
