@@ -37,6 +37,13 @@ namespace Hotcakes.Commerce.Dnn.Providers
     [Serializable]
     internal class ProductsSitemapProvider : SitemapProvider
     {
+        /// <summary>
+        /// Gets sitemap URLs for products available for sale in the current store.
+        /// </summary>
+        /// <param name="portalId">The DNN portal identifier.</param>
+        /// <param name="ps">The portal settings used for localization.</param>
+        /// <param name="version">The sitemap version requested by DNN.</param>
+        /// <returns>The product sitemap URLs.</returns>
         public override List<SitemapUrl> GetUrls(int portalId, PortalSettings ps, string version)
         {
             var productsRepo = Factory.CreateRepo<ProductRepository>();

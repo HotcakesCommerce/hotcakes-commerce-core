@@ -50,9 +50,15 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Creates DNN-specific Hotcakes services, repositories, providers, and data contexts through <see cref="FactoryBase"/>.
+    /// </summary>
     [Serializable]
     public class DnnFactory : FactoryBase
     {
+        /// <summary>
+        /// Initializes a factory with the repository and service mappings used by DNN.
+        /// </summary>
         public DnnFactory()
         {
             Mapping = new Dictionary<Type, Type>();
@@ -70,6 +76,11 @@ namespace Hotcakes.Commerce.Dnn
 
         private Dictionary<Type, Type> Mapping { get; set; }
 
+        /// <summary>
+        /// Creates the configured workflow factory, falling back to the DNN workflow factory when no valid plugin is configured.
+        /// </summary>
+        /// <param name="context">The current Hotcakes request context.</param>
+        /// <returns>The workflow factory for the current store.</returns>
         public override WorkflowFactory CreateWorkflowFactory(HccRequestContext context)
         {
             var settings = context.CurrentStore.Settings.Urls;
@@ -92,21 +103,38 @@ namespace Hotcakes.Commerce.Dnn
             return new DnnWorkflowFactory();
         }
 
+        /// <summary>
+        /// Creates the DNN URL resolver.
+        /// </summary>
+        /// <returns>A DNN-specific URL resolver.</returns>
         public override IHccUrlResolver CreateHccUrlResolver()
         {
             return new DnnHccUrlResolver();
         }
 
+        /// <summary>
+        /// Creates the DNN form renderer.
+        /// </summary>
+        /// <returns>A DNN-specific form renderer.</returns>
         public override IHccFormRenderer CreateHccFormRenderer()
         {
             return new DnnHccFormRenderer();
         }
 
+        /// <summary>
+        /// Creates the logger that writes Hotcakes events to the DNN event log.
+        /// </summary>
+        /// <returns>A DNN event logger.</returns>
         public override ILogger CreateEventLogger()
         {
             return new DnnEventLog();
         }
 
+        /// <summary>
+        /// Creates the DNN social service for the current request.
+        /// </summary>
+        /// <param name="context">The current Hotcakes request context.</param>
+        /// <returns>A DNN social service.</returns>
         public override ISocialService CreateSocialService(HccRequestContext context)
         {
             // TODO: Remove this in 3.1 so we don't have to use reflection
@@ -116,41 +144,76 @@ namespace Hotcakes.Commerce.Dnn
             return (ISocialService) Activator.CreateInstance(type, context);
         }
 
+        /// <summary>
+        /// Creates a localization helper for a resource file.
+        /// </summary>
+        /// <param name="resourceFile">The resource file used for localized values.</param>
+        /// <returns>A DNN localization helper.</returns>
         public override ILocalizationHelper CreateLocalizationHelper(string resourceFile)
         {
             return new DnnLocalizationHelper(resourceFile);
         }
 
+        /// <summary>
+        /// Creates the DNN promotion factory.
+        /// </summary>
+        /// <returns>A DNN-specific promotion factory.</returns>
         public override PromotionFactory CreatePromotionFactory()
         {
             return new DnnPromotionFactory();
         }
 
+        /// <summary>
+        /// Creates the DNN configuration manager.
+        /// </summary>
+        /// <returns>A configuration manager backed by DNN host settings.</returns>
         public override IConfigurationManager CreateConfigurationManager()
         {
             return new DnnConfigurationManager();
         }
 
+        /// <summary>
+        /// Creates a settings provider for a DNN module.
+        /// </summary>
+        /// <param name="moduleId">The DNN module identifier whose settings are managed.</param>
+        /// <returns>A module settings provider for the specified module.</returns>
         public override IModuleSettingsProvider CreateModuleSettingsProvider(int moduleId)
         {
             return new DnnModuleSettingsProvider(moduleId);
         }
 
+        /// <summary>
+        /// Creates the provider used to read DNN host settings.
+        /// </summary>
+        /// <returns>A DNN host settings provider.</returns>
         public override IHostSettingsProvider CreateHostSettingsProvider()
         {
             return new DnnHostSettingsProvider();
         }
 
+        /// <summary>
+        /// Creates the provider used to read store settings and locales from DNN.
+        /// </summary>
+        /// <returns>A DNN store settings provider.</returns>
         public override IStoreSettingsProvider CreateStoreSettingsProvider()
         {
             return new DnnStoreSettingsProvider();
         }
 
+        /// <summary>
+        /// Creates a DNN-aware product search provider.
+        /// </summary>
+        /// <param name="hccRequestContext">The current Hotcakes request context.</param>
+        /// <returns>A search provider that applies DNN catalog security filtering.</returns>
         public override ISearchProvider CreateSearchProvider(HccRequestContext hccRequestContext)
         {
             return new DnnSearchProvider(hccRequestContext);
         }
 
+        /// <summary>
+        /// Creates a writable Hotcakes database context using DNN connection and naming settings.
+        /// </summary>
+        /// <returns>A configured Hotcakes database context.</returns>
         public override HccDbContext CreateHccDbContext()
         {
             var connString = WebAppSettings.HccEFConnectionString;
@@ -162,6 +225,10 @@ namespace Hotcakes.Commerce.Dnn
             return new HccDbContext(adapter.AdaptConnection(connString), true);
         }
 
+        /// <summary>
+        /// Creates a read-only Hotcakes database context using DNN connection and naming settings.
+        /// </summary>
+        /// <returns>A configured read-only Hotcakes database context.</returns>
         public override HccDbContext CreateReadOnlyHccDbContext()
         {
             var connString = WebAppSettings.HccEFReadOnlyConnectionString;
@@ -173,6 +240,12 @@ namespace Hotcakes.Commerce.Dnn
             return new HccDbContext(adapter.AdaptConnection(connString), true);
         }
 
+        /// <summary>
+        /// Creates a repository, using the DNN implementation when one is registered for the requested type.
+        /// </summary>
+        /// <typeparam name="T">The repository type to create.</typeparam>
+        /// <param name="context">The current Hotcakes request context.</param>
+        /// <returns>A repository instance for the requested type.</returns>
         public override T CreateRepo<T>(HccRequestContext context)
         {
             if (Mapping.ContainsKey(typeof (T)))
@@ -183,6 +256,12 @@ namespace Hotcakes.Commerce.Dnn
             return base.CreateRepo<T>(context);
         }
 
+        /// <summary>
+        /// Creates a service, using the DNN implementation when one is registered for the requested type.
+        /// </summary>
+        /// <typeparam name="T">The service type to create.</typeparam>
+        /// <param name="context">The current Hotcakes request context.</param>
+        /// <returns>A service instance for the requested type.</returns>
         public override T CreateService<T>(HccRequestContext context)
         {
             if (Mapping.ContainsKey(typeof (T)))

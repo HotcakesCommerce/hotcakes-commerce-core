@@ -29,6 +29,9 @@ using Dnn.PersonaBar.Library.Prompt.Models;
 
 namespace Hotcakes.Commerce.Dnn.Prompt
 {
+    /// <summary>
+    /// Provides shared localization, application access, and error-handling contracts for Hotcakes prompt commands.
+    /// </summary>
     public abstract class PromptBase : ConsoleCommandBase, IConsoleCommand
     {
         protected HotcakesApplication HccApp
@@ -38,8 +41,15 @@ namespace Hotcakes.Commerce.Dnn.Prompt
 
         protected abstract void LogError(Exception ex);
 
+        /// <summary>
+        /// Executes the prompt command.
+        /// </summary>
+        /// <returns>The command result presented by the Persona Bar prompt.</returns>
         public abstract override ConsoleResultModel Run();
 
+        /// <summary>
+        /// Gets the localization resource file used by Hotcakes prompt commands.
+        /// </summary>
         public override string LocalResourceFile
         {
             get

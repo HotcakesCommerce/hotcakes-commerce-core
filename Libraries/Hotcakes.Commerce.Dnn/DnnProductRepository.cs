@@ -35,6 +35,9 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Provides product persistence with DNN catalog-role security and journal integration.
+    /// </summary>
     [Serializable]
     public class DnnProductRepository : ProductRepository
     {
@@ -42,6 +45,10 @@ namespace Hotcakes.Commerce.Dnn
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes the repository for the specified commerce request context.
+        /// </summary>
+        /// <param name="c">The context used to resolve the current store and social service.</param>
         public DnnProductRepository(HccRequestContext c)
             : base(c)
         {
@@ -53,6 +60,11 @@ namespace Hotcakes.Commerce.Dnn
 
         #region Public methods
 
+        /// <summary>
+        /// Creates a product and updates its DNN journal record.
+        /// </summary>
+        /// <param name="item">The product to create.</param>
+        /// <returns><c>true</c> when the product is created; otherwise, <c>false</c>.</returns>
         public override bool Create(Product item)
         {
             var res = base.Create(item);

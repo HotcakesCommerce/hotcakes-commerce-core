@@ -36,14 +36,23 @@ using Hotcakes.Commerce.Membership;
 
 namespace Hotcakes.Commerce.Dnn.Marketing.Qualifications
 {
+    /// <summary>
+    /// Defines a promotion qualification that succeeds when the current customer belongs to a configured DNN role.
+    /// </summary>
     [Serializable]
     public class UserIsInRole : PromotionQualificationBase
     {
+        /// <summary>
+        /// Gets the stable identifier used to persist this qualification type.
+        /// </summary>
         public const string TypeIdString = "EF230BB4-C7E1-482F-98EB-AC2706863E85";
         private readonly int _portalId;
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes the qualification for the current DNN portal.
+        /// </summary>
         public UserIsInRole()
         {
             ProcessingCost = RelativeProcessingCost.Lower;
@@ -54,6 +63,9 @@ namespace Hotcakes.Commerce.Dnn.Marketing.Qualifications
 
         #region Properties
 
+        /// <summary>
+        /// Gets the unique identifier for this qualification type.
+        /// </summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdString); }
@@ -63,11 +75,19 @@ namespace Hotcakes.Commerce.Dnn.Marketing.Qualifications
 
         #region Public methods
 
+        /// <summary>
+        /// Gets all roles defined for the current DNN portal.
+        /// </summary>
+        /// <returns>A list of portal roles.</returns>
         public List<RoleInfo> GetAllRoles()
         {
             return RoleController.Instance.GetRoles(_portalId).ToList();
         }
 
+        /// <summary>
+        /// Adds a DNN role identifier to the qualification's configured role list.
+        /// </summary>
+        /// <param name="roleId">The numeric DNN role identifier.</param>
         public void AddRole(string roleId)
         {
             var ids = GetRoleIds();
@@ -75,6 +95,10 @@ namespace Hotcakes.Commerce.Dnn.Marketing.Qualifications
             SaveRoleIds(ids);
         }
 
+        /// <summary>
+        /// Removes a DNN role identifier from the qualification's configured role list.
+        /// </summary>
+        /// <param name="roleId">The numeric DNN role identifier.</param>
         public void RemoveRole(string roleId)
         {
             var ids = GetRoleIds();
@@ -83,11 +107,20 @@ namespace Hotcakes.Commerce.Dnn.Marketing.Qualifications
             SaveRoleIds(ids);
         }
 
+        /// <summary>
+        /// Gets the DNN roles currently configured for this qualification.
+        /// </summary>
+        /// <returns>A list of configured portal roles.</returns>
         public List<RoleInfo> GetRoles()
         {
             return GetRoleIds().Select(i => GetRoleById(i)).ToList();
         }
 
+        /// <summary>
+        /// Builds a display description containing the roles required by this qualification.
+        /// </summary>
+        /// <param name="app">The current Hotcakes application context.</param>
+        /// <returns>An HTML description of the configured role requirement.</returns>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var sb = new StringBuilder();
@@ -105,6 +138,12 @@ namespace Hotcakes.Commerce.Dnn.Marketing.Qualifications
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Determines whether the current customer belongs to one of the configured active DNN roles.
+        /// </summary>
+        /// <param name="context">The promotion context containing the current customer.</param>
+        /// <param name="mode">The promotion qualification evaluation mode.</param>
+        /// <returns><see langword="true"/> when the customer matches a configured role; otherwise, <see langword="false"/>.</returns>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             if (context == null) return false;

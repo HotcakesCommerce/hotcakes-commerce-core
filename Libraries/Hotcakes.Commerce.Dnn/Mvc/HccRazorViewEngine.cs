@@ -36,6 +36,9 @@ using Hotcakes.Commerce.Dnn.Resources;
 
 namespace Hotcakes.Commerce.Dnn.Mvc
 {
+    /// <summary>
+    /// Locates Hotcakes Razor views using the module's view root and MVC conventions.
+    /// </summary>
     [Serializable]
     public class HccRazorViewEngine : RazorViewEngine
     {
@@ -47,6 +50,9 @@ namespace Hotcakes.Commerce.Dnn.Mvc
         private static readonly string[] _emptyLocations = new string[0];
         internal Func<string, string> GetExtensionThunk;
 
+        /// <summary>
+        /// Initializes the Hotcakes Razor view engine with its supported view locations.
+        /// </summary>
         public HccRazorViewEngine()
         {
             GetExtensionThunk = VirtualPathUtility.GetExtension;
@@ -105,6 +111,13 @@ namespace Hotcakes.Commerce.Dnn.Mvc
             return base.FileExists(controllerContext, virtualPath);
         }
 
+        /// <summary>
+        /// Finds a partial view using the configured Hotcakes view locations.
+        /// </summary>
+        /// <param name="controllerContext">The current controller context.</param>
+        /// <param name="partialViewName">The partial view name or path.</param>
+        /// <param name="useCache">Whether to use the view location cache.</param>
+        /// <returns>The partial view result, including searched locations when no view is found.</returns>
         public override ViewEngineResult FindPartialView(ControllerContext controllerContext, string partialViewName,
             bool useCache)
         {
@@ -131,6 +144,14 @@ namespace Hotcakes.Commerce.Dnn.Mvc
             return new ViewEngineResult(CreatePartialView(controllerContext, partialPath), this);
         }
 
+        /// <summary>
+        /// Finds a view and optional master view using the configured Hotcakes view locations.
+        /// </summary>
+        /// <param name="controllerContext">The current controller context.</param>
+        /// <param name="viewName">The view name or path.</param>
+        /// <param name="masterName">The master view name or path.</param>
+        /// <param name="useCache">Whether to use the view location cache.</param>
+        /// <returns>The view result, including searched locations when no view is found.</returns>
         public override ViewEngineResult FindView(ControllerContext controllerContext, string viewName,
             string masterName, bool useCache)
         {
@@ -359,6 +380,11 @@ namespace Hotcakes.Commerce.Dnn.Mvc
         internal static class AreaHelpers
         {
             // Methods
+            /// <summary>
+            /// Gets the MVC area name represented by a route.
+            /// </summary>
+            /// <param name="route">The route to inspect.</param>
+            /// <returns>The area name, or <see langword="null"/> when none is defined.</returns>
             public static string GetAreaName(RouteBase route)
             {
                 var area = route as IRouteWithArea;
@@ -374,6 +400,11 @@ namespace Hotcakes.Commerce.Dnn.Mvc
                 return null;
             }
 
+            /// <summary>
+            /// Gets the MVC area name represented by route data.
+            /// </summary>
+            /// <param name="routeData">The route data to inspect.</param>
+            /// <returns>The area name, or <see langword="null"/> when none is defined.</returns>
             public static string GetAreaName(RouteData routeData)
             {
                 object obj2;
@@ -389,11 +420,23 @@ namespace Hotcakes.Commerce.Dnn.Mvc
         {
             protected readonly string _virtualPathFormatString;
 
+            /// <summary>
+            /// Initializes a view location format.
+            /// </summary>
+            /// <param name="virtualPathFormatString">The format string used to build a virtual path.</param>
             public ViewLocation(string virtualPathFormatString)
             {
                 _virtualPathFormatString = virtualPathFormatString;
             }
 
+            /// <summary>
+            /// Formats a view location from its route values.
+            /// </summary>
+            /// <param name="viewName">The view name.</param>
+            /// <param name="controllerName">The controller name.</param>
+            /// <param name="areaName">The area name.</param>
+            /// <param name="rootFolder">The application view root.</param>
+            /// <returns>The formatted virtual path.</returns>
             public virtual string Format(string viewName, string controllerName, string areaName, string rootFolder)
             {
                 return string.Format(CultureInfo.InvariantCulture, _virtualPathFormatString, viewName, controllerName,
@@ -403,11 +446,23 @@ namespace Hotcakes.Commerce.Dnn.Mvc
 
         private class AreaAwareViewLocation : ViewLocation
         {
+            /// <summary>
+            /// Initializes an area-aware view location format.
+            /// </summary>
+            /// <param name="virtualPathFormatString">The format string used to build a virtual path.</param>
             public AreaAwareViewLocation(string virtualPathFormatString)
                 : base(virtualPathFormatString)
             {
             }
 
+            /// <summary>
+            /// Formats an area-aware view location from its route values.
+            /// </summary>
+            /// <param name="viewName">The view name.</param>
+            /// <param name="controllerName">The controller name.</param>
+            /// <param name="areaName">The area name.</param>
+            /// <param name="rootFolder">The application view root.</param>
+            /// <returns>The formatted virtual path.</returns>
             public override string Format(string viewName, string controllerName, string areaName, string rootFolder)
             {
                 return string.Format(CultureInfo.InvariantCulture, _virtualPathFormatString, viewName, controllerName,

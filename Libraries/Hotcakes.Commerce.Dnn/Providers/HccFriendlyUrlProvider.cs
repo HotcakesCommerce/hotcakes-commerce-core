@@ -39,6 +39,9 @@ using Hotcakes.Commerce.Accounts;
 
 namespace Hotcakes.Commerce.Dnn.Providers
 {
+    /// <summary>
+    /// Generates DNN friendly URLs using Hotcakes store-specific URL configuration.
+    /// </summary>
     [Serializable]
     public class HccFriendlyUrlProvider : DNNFriendlyUrlProvider
     {
@@ -55,6 +58,9 @@ namespace Hotcakes.Commerce.Dnn.Providers
 
         private readonly string _regexMatch;
 
+        /// <summary>
+        /// Initializes the provider from the configured DNN friendly URL settings.
+        /// </summary>
         public HccFriendlyUrlProvider()
         {
             var objProvider = (Provider) _providerConfiguration.Providers[_providerConfiguration.DefaultProvider];
@@ -69,23 +75,52 @@ namespace Hotcakes.Commerce.Dnn.Providers
             }
         }
 
+        /// <summary>
+        /// Converts a path to a friendly URL using the current portal settings.
+        /// </summary>
+        /// <param name="tab">The destination tab.</param>
+        /// <param name="path">The path to convert.</param>
+        /// <returns>The friendly URL.</returns>
         public override string FriendlyUrl(TabInfo tab, string path)
         {
             var _portalSettings = PortalController.Instance.GetCurrentSettings();
             return FriendlyUrl(tab, path, Globals.glbDefaultPage, _portalSettings);
         }
 
+        /// <summary>
+        /// Converts a path to a friendly URL using the current portal and page settings.
+        /// </summary>
+        /// <param name="tab">The destination tab.</param>
+        /// <param name="path">The path to convert.</param>
+        /// <param name="pageName">The page name used by DNN URL generation.</param>
+        /// <returns>The friendly URL.</returns>
         public override string FriendlyUrl(TabInfo tab, string path, string pageName)
         {
             var _portalSettings = PortalController.Instance.GetCurrentSettings();
             return FriendlyUrl(tab, path, pageName, _portalSettings);
         }
 
+        /// <summary>
+        /// Converts a path to a friendly URL using explicit portal settings.
+        /// </summary>
+        /// <param name="tab">The destination tab.</param>
+        /// <param name="path">The path to convert.</param>
+        /// <param name="pageName">The page name used by DNN URL generation.</param>
+        /// <param name="settings">The portal settings to use.</param>
+        /// <returns>The friendly URL.</returns>
         public override string FriendlyUrl(TabInfo tab, string path, string pageName, PortalSettings settings)
         {
             return FriendlyUrl(tab, path, pageName, settings.PortalAlias.HTTPAlias);
         }
 
+        /// <summary>
+        /// Converts a path to a friendly URL using an explicit portal alias and Hotcakes URL configuration.
+        /// </summary>
+        /// <param name="tab">The destination tab.</param>
+        /// <param name="path">The path to convert.</param>
+        /// <param name="pageName">The page name used by DNN URL generation.</param>
+        /// <param name="portalAlias">The portal alias used to build the URL.</param>
+        /// <returns>The friendly URL.</returns>
         public override string FriendlyUrl(TabInfo tab, string path, string pageName, string portalAlias)
         {
             var currentStore = HccRequestContext.Current.CurrentStore;

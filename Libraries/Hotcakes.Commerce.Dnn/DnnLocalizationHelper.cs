@@ -41,26 +41,50 @@ using Hotcakes.Commerce.Globalization;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Resolves localized strings and resource dictionaries from DNN resource files.
+    /// </summary>
     [Serializable]
     public class DnnLocalizationHelper : ILocalizationHelper
     {
         private readonly string _resourceFile;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DnnLocalizationHelper"/> class.
+        /// </summary>
+        /// <param name="resourcefile">The resource file path or resource file root used for lookups.</param>
         public DnnLocalizationHelper(string resourcefile)
         {
             _resourceFile = resourcefile;
         }
 
+        /// <summary>
+        /// Gets a localized string for the current UI culture.
+        /// </summary>
+        /// <param name="key">The localization resource key.</param>
+        /// <returns>The localized value, or an empty value when the key cannot be resolved.</returns>
         public string GetString(string key)
         {
             return GetString(key, _resourceFile, null);
         }
 
+        /// <summary>
+        /// Gets a localized string for a specified culture.
+        /// </summary>
+        /// <param name="key">The localization resource key.</param>
+        /// <param name="culture">The culture name to use, or <see langword="null"/> to use the current UI culture.</param>
+        /// <returns>The localized value, or an empty value when the key cannot be resolved.</returns>
         public string GetString(string key, string culture)
         {
             return GetString(key, _resourceFile, culture);
         }
 
+        /// <summary>
+        /// Gets a localized string and formats it with the supplied arguments.
+        /// </summary>
+        /// <param name="key">The localization resource key.</param>
+        /// <param name="args">The values to substitute into the localized format string.</param>
+        /// <returns>The formatted localized value, or an empty value when the key cannot be resolved.</returns>
         public string GetFormattedString(string key, params object[] args)
         {
             var value = GetString(key);
@@ -69,11 +93,22 @@ namespace Hotcakes.Commerce.Dnn
             return string.Format(value, args);
         }
 
+        /// <summary>
+        /// Gets a localized string with single and double quotation marks escaped for JavaScript.
+        /// </summary>
+        /// <param name="key">The localization resource key.</param>
+        /// <returns>The localized value with JavaScript-sensitive quotation marks escaped.</returns>
         public string GetJsEncodedString(string key)
         {
             return GetJsEncodedString(key, new[] {"\'", "\""});
         }
 
+        /// <summary>
+        /// Gets a localized string and escapes the specified characters for JavaScript output.
+        /// </summary>
+        /// <param name="key">The localization resource key.</param>
+        /// <param name="characters">The characters or strings to prefix with a backslash.</param>
+        /// <returns>The localized value with the specified characters escaped.</returns>
         public string GetJsEncodedString(string key, string[] characters)
         {
             var value = GetString(key);
@@ -84,6 +119,10 @@ namespace Hotcakes.Commerce.Dnn
             return value;
         }
 
+        /// <summary>
+        /// Gets all localized resources from the configured resource file and applicable fallbacks.
+        /// </summary>
+        /// <returns>A dictionary keyed by resource name.</returns>
         public Dictionary<string, string> GetResourceDictionary()
         {
             return GetResourceDictionary(_resourceFile);

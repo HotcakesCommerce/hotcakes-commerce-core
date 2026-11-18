@@ -25,10 +25,24 @@
 
 namespace Hotcakes.Commerce.Dnn.Prompt
 {
+    /// <summary>
+    /// Defines shared constants used by Hotcakes Commerce Persona Bar prompt commands.
+    /// </summary>
     public static class Constants
     {
+        /// <summary>
+        /// Gets the path to the shared prompt localization resource file.
+        /// </summary>
         public const string PromptLocalResourceFile = "~/DesktopModules/Hotcakes/Core/App_LocalResources/Global.resx";
+
+        /// <summary>
+        /// Gets the command namespace used to register Hotcakes Commerce prompt commands.
+        /// </summary>
         public const string Namespace = "hc";
+
+        /// <summary>
+        /// Gets the HTML prefix prepended to prompt command output.
+        /// </summary>
         public const string OutputPrefix = "<span style=\"color:#f94c2b;font-weight:bold;\">Hotcakes Commerce:</span> ";
     }
 }

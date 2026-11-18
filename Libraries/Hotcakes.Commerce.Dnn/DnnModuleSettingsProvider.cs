@@ -32,9 +32,16 @@ using Hotcakes.Modules.Core.Settings;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Reads and writes settings for a DNN module instance through <see cref="IModuleSettingsProvider"/>.
+    /// </summary>
     [Serializable]
     public class DnnModuleSettingsProvider : IModuleSettingsProvider
     {
+        /// <summary>
+        /// Initializes a provider for a DNN module.
+        /// </summary>
+        /// <param name="moduleId">The DNN module identifier whose settings are managed.</param>
         public DnnModuleSettingsProvider(int moduleId)
         {
             _moduleId = moduleId;
@@ -59,6 +66,13 @@ namespace Hotcakes.Commerce.Dnn
             }
         }
 
+        /// <summary>
+        /// Gets a module setting converted to the requested type.
+        /// </summary>
+        /// <typeparam name="T">The type to which the setting is converted.</typeparam>
+        /// <param name="key">The module setting key.</param>
+        /// <param name="defVal">The value returned when the setting is missing or cannot be converted.</param>
+        /// <returns>The converted setting value, or <paramref name="defVal"/> when unavailable or invalid.</returns>
         public T GetSettingValue<T>(string key, T defVal)
         {
             var val = GetSettingValue(key);
@@ -79,6 +93,11 @@ namespace Hotcakes.Commerce.Dnn
             return res;
         }
 
+        /// <summary>
+        /// Stores a module setting and refreshes this provider's cached settings.
+        /// </summary>
+        /// <param name="key">The module setting key.</param>
+        /// <param name="value">The value to store.</param>
         public void SetSettingValue(string key, object value)
         {
             _moduleController.UpdateModuleSetting(_moduleId, key, value.ToString());

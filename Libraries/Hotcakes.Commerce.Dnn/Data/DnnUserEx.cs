@@ -30,11 +30,22 @@ using System.Linq;
 
 namespace Hotcakes.Commerce.Dnn.Data
 {
+    /// <summary>
+    /// Adds convenient accessors for DNN user profile data to the generated user entity.
+    /// </summary>
     [Serializable]
     public partial class DnnUser
     {
+        /// <summary>
+        /// Gets or sets the profile properties associated with the user.
+        /// </summary>
         public List<DnnProfile> Profile { get; set; }
 
+        /// <summary>
+        /// Gets the profile value for a property name.
+        /// </summary>
+        /// <param name="propertyName">The DNN profile property name.</param>
+        /// <returns>The matching profile value, or <see langword="null"/> when no matching property exists.</returns>
         public string this[string propertyName]
         {
             get
@@ -44,36 +55,57 @@ namespace Hotcakes.Commerce.Dnn.Data
             }
         }
 
+        /// <summary>
+        /// Gets the user's country profile value.
+        /// </summary>
         public string ProfileCountry
         {
             get { return this["Country"]; }
         }
 
+        /// <summary>
+        /// Gets the user's company profile value.
+        /// </summary>
         public string ProfileCompany
         {
             get { return this["Company"]; }
         }
 
+        /// <summary>
+        /// Gets the user's street profile value.
+        /// </summary>
         public string ProfileStreet
         {
             get { return this["Street"]; }
         }
 
+        /// <summary>
+        /// Gets the user's city profile value.
+        /// </summary>
         public string ProfileCity
         {
             get { return this["City"]; }
         }
 
+        /// <summary>
+        /// Gets the user's region profile value.
+        /// </summary>
         public string ProfileRegion
         {
             get { return this["Region"]; }
         }
 
+        /// <summary>
+        /// Gets the user's postal-code profile value.
+        /// </summary>
         public string ProfilePostalCode
         {
             get { return this["PostalCode"]; }
         }
 
+        /// <summary>
+        /// Gets the user's telephone profile value.
+        /// </summary>
         public string ProfileTelephone
         {
             get { return this["Telephone"]; }

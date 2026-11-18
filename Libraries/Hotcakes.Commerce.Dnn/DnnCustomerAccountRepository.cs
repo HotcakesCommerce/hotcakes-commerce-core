@@ -41,6 +41,9 @@ using Json = Hotcakes.Web.Json;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Implements customer account persistence using DNN portal users and profile properties.
+    /// </summary>
     [Serializable]
     public class DnnCustomerAccountRepository : ICustomerAccountRepository
     {
@@ -48,6 +51,10 @@ namespace Hotcakes.Commerce.Dnn
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes the repository for the specified commerce request context.
+        /// </summary>
+        /// <param name="c">The context used to resolve the current commerce store.</param>
         public DnnCustomerAccountRepository(HccRequestContext c)
         {
             Context = c;
@@ -68,6 +75,12 @@ namespace Hotcakes.Commerce.Dnn
 
         #region Public methods
 
+        /// <summary>
+        /// Finds a customer account by its DNN user identifier.
+        /// </summary>
+        /// <param name="bvin">The DNN user identifier represented as a string.</param>
+        /// <param name="useCache">Whether the DNN user cache may be used.</param>
+        /// <returns>The matching <see cref="CustomerAccount"/>, or <c>null</c> when no user exists.</returns>
         public CustomerAccount Find(string bvin, bool useCache = true)
         {
             var userId = bvin.ConvertTo(Null.NullInteger);
@@ -81,11 +94,21 @@ namespace Hotcakes.Commerce.Dnn
             return null;
         }
 
+        /// <summary>
+        /// Finds a customer account without applying a store-specific restriction.
+        /// </summary>
+        /// <param name="bvin">The DNN user identifier represented as a string.</param>
+        /// <returns>The matching <see cref="CustomerAccount"/>, or <c>null</c>.</returns>
         public CustomerAccount FindForAllStores(string bvin)
         {
             return Find(bvin);
         }
 
+        /// <summary>
+        /// Creates a customer account as a DNN portal user.
+        /// </summary>
+        /// <param name="cust">The customer account to create.</param>
+        /// <returns><c>true</c> when the DNN account is created successfully; otherwise, <c>false</c>.</returns>
         public bool Create(CustomerAccount cust)
         {
             var status = UserCreateStatus.UnexpectedError;
@@ -93,6 +116,11 @@ namespace Hotcakes.Commerce.Dnn
             return status == UserCreateStatus.Success;
         }
 
+        /// <summary>
+        /// Updates the DNN user and profile properties represented by a customer account.
+        /// </summary>
+        /// <param name="cust">The customer account to update.</param>
+        /// <returns><c>true</c> when the account is updated; otherwise, <c>false</c>.</returns>
         public bool Update(CustomerAccount cust)
         {
             try
@@ -118,6 +146,11 @@ namespace Hotcakes.Commerce.Dnn
             return true;
         }
 
+        /// <summary>
+        /// Deletes the DNN user represented by a customer account identifier.
+        /// </summary>
+        /// <param name="bvin">The DNN user identifier represented as a string.</param>
+        /// <returns><c>true</c> when the user is deleted; otherwise, <c>false</c>.</returns>
         public bool Delete(string bvin)
         {
             var userId = bvin.ConvertTo(Null.NullInteger);
@@ -125,12 +158,19 @@ namespace Hotcakes.Commerce.Dnn
             return uInfo == null ? false : UserController.DeleteUser(ref uInfo, false, false);
         }
 
+        /// <summary>
+        /// Deletes all users and removed-user records for the current DNN portal.
+        /// </summary>
         public void DeleteAllForPortal()
         {
             UserController.DeleteUsers(PortalId, false, false);
             UserController.RemoveDeletedUsers(PortalId);
         }
 
+        /// <summary>
+        /// Returns all DNN users in the current portal as customer accounts.
+        /// </summary>
+        /// <returns>A list of customer accounts, or an empty list when no users exist.</returns>
         public List<CustomerAccount> FindAll()
         {
             var users = UserController.GetUsers(PortalId).OfType<UserInfo>();
@@ -144,6 +184,13 @@ namespace Hotcakes.Commerce.Dnn
             return new List<CustomerAccount>();
         }
 
+        /// <summary>
+        /// Returns one page of portal users as customer accounts.
+        /// </summary>
+        /// <param name="pageNumber">The one-based page number.</param>
+        /// <param name="pageSize">The maximum number of accounts to return.</param>
+        /// <param name="totalCount">Receives the total number of portal users.</param>
+        /// <returns>The requested page of customer accounts.</returns>
         public List<CustomerAccount> FindAllPaged(int pageNumber, int pageSize, ref int totalCount)
         {
             var pageIndex = GetPageIndex(pageNumber);
@@ -158,12 +205,23 @@ namespace Hotcakes.Commerce.Dnn
             return new List<CustomerAccount>();
         }
 
+        /// <summary>
+        /// Returns one page of portal users as customer accounts.
+        /// </summary>
+        /// <param name="pageNumber">The one-based page number.</param>
+        /// <param name="pageSize">The maximum number of accounts to return.</param>
+        /// <returns>The requested page of customer accounts.</returns>
         public List<CustomerAccount> FindAllPaged(int pageNumber, int pageSize)
         {
             var totalCount = 0;
             return FindAllPaged(pageNumber, pageSize, ref totalCount);
         }
 
+        /// <summary>
+        /// Finds portal users whose email matches the supplied address.
+        /// </summary>
+        /// <param name="email">The email address to search for.</param>
+        /// <returns>Matching customer accounts, or <c>null</c> when the email is blank.</returns>
         public List<CustomerAccount> FindByEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
@@ -178,6 +236,11 @@ namespace Hotcakes.Commerce.Dnn
                 .ToList();
         }
 
+        /// <summary>
+        /// Finds the first portal user with the supplied username.
+        /// </summary>
+        /// <param name="username">The username to search for.</param>
+        /// <returns>The matching customer account, or <c>null</c>.</returns>
         public CustomerAccount FindByUsername(string username)
         {
             var totalCount = 0;
@@ -188,6 +251,11 @@ namespace Hotcakes.Commerce.Dnn
             return user == null ? null : UserInfoToCustomer(user);
         }
 
+        /// <summary>
+        /// Finds multiple portal users by their DNN user identifiers.
+        /// </summary>
+        /// <param name="ids">The user identifiers represented as strings.</param>
+        /// <returns>The matching customer accounts.</returns>
         public List<CustomerAccount> FindMany(List<string> ids)
         {
             var users = DnnUserController.Instance.GetUsers(PortalId, true)
@@ -204,6 +272,14 @@ namespace Hotcakes.Commerce.Dnn
             return new List<CustomerAccount>();
         }
 
+        /// <summary>
+        /// Searches portal users and returns a page of matching customer accounts.
+        /// </summary>
+        /// <param name="filter">Text to match against user and profile fields.</param>
+        /// <param name="pageNumber">The one-based page number.</param>
+        /// <param name="pageSize">The maximum number of accounts to return.</param>
+        /// <param name="totalCount">Receives the total number of matching users.</param>
+        /// <returns>The requested page of matching customer accounts.</returns>
         public List<CustomerAccount> FindByFilter(string filter, int pageNumber, int pageSize, ref int totalCount)
         {
             var pageIndex = GetPageIndex(pageNumber);
@@ -249,12 +325,20 @@ namespace Hotcakes.Commerce.Dnn
             return users.Select(UserInfoToCustomer).ToList();
         }
 
+        /// <summary>
+        /// Counts all users in the current DNN portal.
+        /// </summary>
+        /// <returns>The number of portal users.</returns>
         public int CountOfAll()
         {
             var users = UserController.GetUsers(PortalId);
             return users == null ? 0 : users.Count;
         }
 
+        /// <summary>
+        /// Handles store destruction without deleting shared DNN portal users.
+        /// </summary>
+        /// <param name="storeId">The store identifier being destroyed.</param>
         public void DestroyAllForStore(long storeId)
         {
             // We won't delete store users since we cann't be sure

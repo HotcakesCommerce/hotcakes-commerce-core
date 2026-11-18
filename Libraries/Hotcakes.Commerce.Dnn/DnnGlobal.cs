@@ -35,20 +35,60 @@ using DotNetNuke.Services.Localization;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Provides access to the current DNN portal, portal settings, and localization context.
+    /// </summary>
     public interface IDnnGlobal
     {
+        /// <summary>
+        /// Gets the identifier of the current portal, or <see cref="DotNetNuke.Common.Utilities.Null.NullInteger"/> when no portal is available.
+        /// </summary>
+        /// <returns>The current portal identifier.</returns>
         int GetPortalId();
+
+        /// <summary>
+        /// Gets the current <see cref="PortalInfo"/>.
+        /// </summary>
+        /// <returns>The current portal, or <see langword="null"/> when it cannot be resolved.</returns>
         PortalInfo GetCurrentPortal();
+
+        /// <summary>
+        /// Gets the current <see cref="PortalSettings"/>.
+        /// </summary>
+        /// <returns>The current portal settings, or <see langword="null"/> when no settings are available.</returns>
         PortalSettings GetCurrentPortalSettings();
+
+        /// <summary>
+        /// Gets the locales configured for the current portal.
+        /// </summary>
+        /// <returns>A dictionary keyed by culture code.</returns>
         Dictionary<string, Locale> GetLocales();
+
+        /// <summary>
+        /// Gets a locale for the current portal by culture code.
+        /// </summary>
+        /// <param name="code">The culture code to find.</param>
+        /// <returns>The matching <see cref="Locale"/>, or <see langword="null"/> when no match exists.</returns>
         Locale GetLocale(string code);
+
+        /// <summary>
+        /// Gets the locale used to render the current page.
+        /// </summary>
+        /// <returns>The current page culture.</returns>
         CultureInfo GetPageLocale();
     }
 
 
+    /// <summary>
+    /// Provides the DNN portal and localization context used by Hotcakes Commerce.
+    /// </summary>
     [Serializable]
     public class DnnGlobal : ServiceLocator<IDnnGlobal, DnnGlobal>
     {
+        /// <summary>
+        /// Sets the portal settings used by the current execution context.
+        /// </summary>
+        /// <param name="pSettings">The portal settings to use, or <see langword="null"/> to clear the explicit settings.</param>
         public static void SetPortalSettings(PortalSettings pSettings)
         {
             DnnGlobalImpl.Settings = pSettings;
@@ -69,6 +109,10 @@ namespace Hotcakes.Commerce.Dnn
                 set { _settings = value; }
             }
 
+            /// <summary>
+            /// Gets the identifier of the current portal, or <see cref="DotNetNuke.Common.Utilities.Null.NullInteger"/> when no portal is available.
+            /// </summary>
+            /// <returns>The current portal identifier.</returns>
             public int GetPortalId()
             {
                 var sett = GetCurrentPortalSettings();
@@ -78,22 +122,39 @@ namespace Hotcakes.Commerce.Dnn
                 return Null.NullInteger;
             }
 
+            /// <summary>
+            /// Gets the current <see cref="PortalInfo"/>.
+            /// </summary>
+            /// <returns>The current portal, or <see langword="null"/> when it cannot be resolved.</returns>
             public PortalInfo GetCurrentPortal()
             {
                 var controller = new PortalController();
                 return controller.GetPortal(GetPortalId());
             }
 
+            /// <summary>
+            /// Gets the current <see cref="PortalSettings"/>.
+            /// </summary>
+            /// <returns>The current portal settings, or <see langword="null"/> when none are available.</returns>
             public PortalSettings GetCurrentPortalSettings()
             {
                 return Settings ?? PortalSettings.Current;
             }
 
+            /// <summary>
+            /// Gets the locales configured for the current portal.
+            /// </summary>
+            /// <returns>A dictionary keyed by culture code.</returns>
             public Dictionary<string, Locale> GetLocales()
             {
                 return LocaleController.Instance.GetLocales(GetPortalId());
             }
 
+            /// <summary>
+            /// Gets a locale for the current portal by culture code.
+            /// </summary>
+            /// <param name="code">The culture code to find.</param>
+            /// <returns>The matching <see cref="Locale"/>, or <see langword="null"/> when no match exists.</returns>
             public Locale GetLocale(string code)
             {
                 var locale = LocaleController.Instance.GetLocale(GetPortalId(), code);
@@ -107,6 +168,10 @@ namespace Hotcakes.Commerce.Dnn
                 return locale;
             }
 
+            /// <summary>
+            /// Gets the locale used to render the current page.
+            /// </summary>
+            /// <returns>The current page culture.</returns>
             public CultureInfo GetPageLocale()
             {
                 var portalSettings = Instance.GetCurrentPortalSettings();

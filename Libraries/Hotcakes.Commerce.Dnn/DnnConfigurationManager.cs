@@ -30,9 +30,16 @@ using Hotcakes.Commerce.Configuration;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Provides Hotcakes configuration values from the active DNN host configuration through <see cref="IConfigurationManager"/>.
+    /// </summary>
     [Serializable]
     public class DnnConfigurationManager : IConfigurationManager
     {
+        /// <summary>
+        /// Gets the SMTP settings configured for the DNN host.
+        /// </summary>
+        /// <value>A snapshot of the host SMTP server, authentication, security, and credential settings.</value>
         public SmtpSettings SmtpSettings
         {
             get

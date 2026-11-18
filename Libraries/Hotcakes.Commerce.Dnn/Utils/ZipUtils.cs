@@ -31,9 +31,17 @@ using ICSharpCode.SharpZipLib.Zip;
 
 namespace Hotcakes.Commerce.Dnn.Utils
 {
+    /// <summary>
+    /// Provides helpers for creating and extracting ZIP archives.
+    /// </summary>
     [Serializable]
     public static class ZipUtils
     {
+        /// <summary>
+        /// Recursively adds the contents of a directory to a ZIP archive.
+        /// </summary>
+        /// <param name="inputFolderPath">The directory whose files and subdirectories should be archived.</param>
+        /// <param name="outputPathAndFile">The path of the ZIP file to create.</param>
         public static void ZipFiles(string inputFolderPath, string outputPathAndFile)
         {
             var ar = GenerateFileList(inputFolderPath); // generate file list
@@ -93,6 +101,11 @@ namespace Hotcakes.Commerce.Dnn.Utils
         }
 
 
+        /// <summary>
+        /// Extracts the entries in a ZIP archive into a directory, excluding entries whose names contain <c>.ini</c>.
+        /// </summary>
+        /// <param name="zipPathAndFile">The path of the ZIP archive to extract.</param>
+        /// <param name="outputFolder">The directory into which archive entries should be extracted.</param>
         public static void UnZipFiles(string zipPathAndFile, string outputFolder)
         {
             var s = new ZipInputStream(File.OpenRead(zipPathAndFile));

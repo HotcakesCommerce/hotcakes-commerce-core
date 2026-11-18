@@ -33,12 +33,19 @@ using Hotcakes.Commerce.Accounts;
 
 namespace Hotcakes.Commerce.Dnn.Utils
 {
+    /// <summary>
+    /// Temporarily applies a store's culture settings to the current thread and restores the previous cultures when disposed.
+    /// </summary>
     [Serializable]
     public class CultureSwitch : IDisposable
     {
         private readonly CultureInfo oldCulture;
         private readonly CultureInfo oldUICulture;
 
+        /// <summary>
+        /// Initializes a culture scope for the specified <see cref="Store"/>.
+        /// </summary>
+        /// <param name="store">The store whose culture and currency settings should be applied.</param>
         public CultureSwitch(Store store)
         {
             oldCulture = Thread.CurrentThread.CurrentCulture;
@@ -47,11 +54,20 @@ namespace Hotcakes.Commerce.Dnn.Utils
             SetCulture(store);
         }
 
+        /// <summary>
+        /// Applies the specified store's culture settings using the current DNN portal settings.
+        /// </summary>
+        /// <param name="store">The store whose culture and currency settings should be applied.</param>
         public static void SetCulture(Store store)
         {
             SetCulture(store, PortalSettings.Current);
         }
 
+        /// <summary>
+        /// Applies the specified store's culture settings using the supplied DNN portal settings.
+        /// </summary>
+        /// <param name="store">The store whose culture and currency settings should be applied.</param>
+        /// <param name="portalSettings">The portal settings used to resolve the portal culture.</param>
         public static void SetCulture(Store store, PortalSettings portalSettings)
         {
             // Get culture settings from DNN
@@ -66,6 +82,9 @@ namespace Hotcakes.Commerce.Dnn.Utils
             Thread.CurrentThread.CurrentUICulture = portalCulture;
         }
 
+        /// <summary>
+        /// Restores the cultures that were active before this scope was created.
+        /// </summary>
         public void RollbackCulture()
         {
             Thread.CurrentThread.CurrentCulture = oldCulture;
@@ -76,6 +95,9 @@ namespace Hotcakes.Commerce.Dnn.Utils
 
         private bool disposed;
 
+        /// <summary>
+        /// Restores the original cultures and releases this culture scope.
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
@@ -87,6 +109,10 @@ namespace Hotcakes.Commerce.Dnn.Utils
             Dispose(false);
         }
 
+        /// <summary>
+        /// Releases the resources owned by this culture scope.
+        /// </summary>
+        /// <param name="disposing"><see langword="true"/> when called explicitly; <see langword="false"/> when called by the finalizer.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposed)

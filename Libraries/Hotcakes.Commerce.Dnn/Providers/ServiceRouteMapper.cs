@@ -32,9 +32,16 @@ using System.Web.Http;
 
 namespace Hotcakes.Commerce.Dnn.Providers
 {
+    /// <summary>
+    /// Registers Hotcakes MVC, Web API, and DNN service routes.
+    /// </summary>
 	[Serializable()]
 	public class ServiceRouteMapper : IServiceRouteMapper
 	{
+        /// <summary>
+        /// Registers all Hotcakes routes with the supplied DNN route manager.
+        /// </summary>
+        /// <param name="mapRouteManager">The DNN route manager used for service routes.</param>
 		public void RegisterRoutes(IMapRoute mapRouteManager)
 		{
 			AreaRegistration.RegisterAllAreas();
@@ -52,6 +59,10 @@ namespace Hotcakes.Commerce.Dnn.Providers
 			mapRouteManager.MapHttpRoute("Hotcakes/CategoryViewer", "default", "{controller}/{action}", new string[] { "Hotcakes.Commerce.Dnn.Social" });
 		}
 
+        /// <summary>
+        /// Registers Hotcakes Web API routes with the global route table.
+        /// </summary>
+        /// <param name="config">The Web API configuration.</param>
 		public static void RegisterWebApi(HttpConfiguration config)
 		{
 			RegisterWebApiRoute("hcapi-authorize", "DesktopModules/Hotcakes/API/mobile/v1-0/authorize", new { controller = "Login" });
@@ -63,6 +74,12 @@ namespace Hotcakes.Commerce.Dnn.Providers
 			RegisterWebApiRoute("hcapi-storesettings", "DesktopModules/Hotcakes/API/mobile/v1-0/storesettings", new { controller = "Settings" });
 		}
 
+        /// <summary>
+        /// Registers a named Hotcakes Web API route and its controller namespace metadata.
+        /// </summary>
+        /// <param name="name">The route name.</param>
+        /// <param name="routeTemplate">The route template.</param>
+        /// <param name="defaults">The default route values.</param>
 		public static void RegisterWebApiRoute(string name, string routeTemplate, object defaults)
 		{
 			var r = RouteTable.Routes.MapHttpRoute(name, routeTemplate, defaults);
@@ -72,11 +89,19 @@ namespace Hotcakes.Commerce.Dnn.Providers
 			r.DataTokens["name"] = name;
 		}
 
+        /// <summary>
+        /// Registers the global MVC filters used by Hotcakes routes.
+        /// </summary>
+        /// <param name="filters">The global filter collection to update.</param>
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters)
 		{
 			filters.Add(new HandleErrorAttribute());
 		}
 
+        /// <summary>
+        /// Registers Hotcakes MVC routes and route exclusions.
+        /// </summary>
+        /// <param name="routes">The route collection to update.</param>
 		public static void RegisterRoutes(RouteCollection routes)
 		{
 			// Ignore the website root

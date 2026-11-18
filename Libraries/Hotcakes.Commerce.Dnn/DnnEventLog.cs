@@ -33,22 +33,39 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Writes Hotcakes messages and exceptions to the DNN event log through <see cref="ILogger"/>.
+    /// </summary>
     [Serializable]
     public class DnnEventLog : ILogger
     {
         private const string LOGTYPE_MESSAGE = "HOTCAKES_INFO";
         private const string LOGTYPE_EXCEPTION = "HOTCAKES_EXCEPTION";
 
+        /// <summary>
+        /// Logs an informational message using Hotcakes as the source.
+        /// </summary>
+        /// <param name="message">The message to record.</param>
         public void LogMessage(string message)
         {
             LogMessage("Hotcakes", message, EventLogSeverity.Information);
         }
 
+        /// <summary>
+        /// Logs an exception with error severity.
+        /// </summary>
+        /// <param name="ex">The exception to record.</param>
         public void LogException(Exception ex)
         {
             LogException(ex, EventLogSeverity.Error);
         }
 
+        /// <summary>
+        /// Logs a message with the specified source and DNN event-log severity.
+        /// </summary>
+        /// <param name="source">The component or operation that produced the message.</param>
+        /// <param name="message">The message to record.</param>
+        /// <param name="severity">The severity assigned to the event-log entry.</param>
         public void LogMessage(string source, string message, EventLogSeverity severity)
         {
             var logInfo = new LogInfo();
@@ -65,6 +82,11 @@ namespace Hotcakes.Commerce.Dnn
             log.AddLog(logInfo);
         }
 
+        /// <summary>
+        /// Logs an exception with the specified DNN event-log severity and contextual details.
+        /// </summary>
+        /// <param name="ex">The exception to record.</param>
+        /// <param name="severity">The severity assigned to the event-log entry.</param>
         public void LogException(Exception ex, EventLogSeverity severity)
         {
             var logInfo = new LogInfo();
@@ -102,6 +124,9 @@ namespace Hotcakes.Commerce.Dnn
             log.AddLog(logInfo);
         }
 
+        /// <summary>
+        /// Installs or updates the event-log types used by Hotcakes.
+        /// </summary>
         public static void InstallLogTypes()
         {
             var controller = new LogController();

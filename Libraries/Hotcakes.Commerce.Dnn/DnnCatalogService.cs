@@ -31,14 +31,26 @@ using Hotcakes.Commerce.Catalog;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Provides catalog services with role access evaluated against the current DNN user.
+    /// </summary>
     [Serializable]
     public class DnnCatalogService : CatalogService
     {
+        /// <summary>
+        /// Initializes the catalog service for the specified commerce request context.
+        /// </summary>
+        /// <param name="context">The request context used by the catalog service.</param>
         public DnnCatalogService(HccRequestContext context)
             : base(context)
         {
         }
 
+        /// <summary>
+        /// Determines whether the current DNN user can access a catalog role restriction.
+        /// </summary>
+        /// <param name="roles">The catalog roles allowed to access the item.</param>
+        /// <returns><c>true</c> when the current user is permitted or no roles are required; otherwise, <c>false</c>.</returns>
         protected override bool TestRolesAccess(List<CatalogRole> roles)
         {
             var user = DnnUserController.Instance.GetCurrentUserInfo();

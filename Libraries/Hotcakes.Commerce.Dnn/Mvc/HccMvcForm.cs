@@ -39,6 +39,10 @@ namespace Hotcakes.Commerce.Dnn.Mvc
         private readonly TextWriter _writer;
         private bool _disposed;
 
+        /// <summary>
+        /// Initializes a virtual Hotcakes MVC form and replaces the current form context.
+        /// </summary>
+        /// <param name="viewContext">The MVC view context that owns the form.</param>
         public HccMvcForm(ViewContext viewContext)
             : base(viewContext)
         {

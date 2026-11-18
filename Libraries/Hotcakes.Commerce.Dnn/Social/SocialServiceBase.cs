@@ -39,9 +39,16 @@ using Hotcakes.Commerce.Urls;
 
 namespace Hotcakes.Commerce.Dnn.Social
 {
+    /// <summary>
+    /// Provides the DNN journal and content-item integration used by Hotcakes social services.
+    /// </summary>
     [Serializable]
     public class SocialServiceBase : ISocialService
     {
+        /// <summary>
+        /// Initializes the service with the Hotcakes request context used for store and URL settings.
+        /// </summary>
+        /// <param name="context">The current Hotcakes request context.</param>
         public SocialServiceBase(HccRequestContext context)
         {
             Context = context;
@@ -340,43 +347,84 @@ namespace Hotcakes.Commerce.Dnn.Social
 
         #region ISocialService
 
+        /// <summary>
+        /// Creates or updates the DNN journal entry for a product.
+        /// </summary>
+        /// <param name="product">The product to represent in the journal.</param>
         public virtual void UpdateJournalRecord(Product product)
         {
             EnsureJournalItem(product, true);
         }
 
+        /// <summary>
+        /// Creates or updates the DNN journal entry for a product review.
+        /// </summary>
+        /// <param name="review">The review to represent in the journal.</param>
+        /// <param name="product">The product associated with the review.</param>
         public virtual void UpdateJournalRecord(ProductReview review, Product product)
         {
             EnsureJournalItem(review, product, true);
         }
 
+        /// <summary>
+        /// Creates or updates the DNN journal entry for a category.
+        /// </summary>
+        /// <param name="cat">The category to represent in the journal.</param>
         public virtual void UpdateJournalRecord(Category cat)
         {
             EnsureJournalItem(cat, true);
         }
 
+        /// <summary>
+        /// Updates taxonomy terms for a product in the social integration.
+        /// </summary>
+        /// <param name="product">The product whose taxonomy should be updated.</param>
+        /// <param name="taxonomyTags">The taxonomy term names to associate with the product.</param>
         public virtual void UpdateProductTaxonomy(Product product, IEnumerable<string> taxonomyTags)
         {
         }
 
+        /// <summary>
+        /// Updates taxonomy terms for a category in the social integration.
+        /// </summary>
+        /// <param name="cat">The category whose taxonomy should be updated.</param>
+        /// <param name="taxonomyTags">The taxonomy term names to associate with the category.</param>
         public virtual void UpdateCategoryTaxonomy(Category cat, IEnumerable<string> taxonomyTags)
         {
         }
 
+        /// <summary>
+        /// Gets taxonomy terms associated with a product.
+        /// </summary>
+        /// <param name="product">The product whose taxonomy terms should be returned.</param>
+        /// <returns>The associated taxonomy term names.</returns>
         public virtual IEnumerable<string> GetTaxonomyTerms(Product product)
         {
             return new List<string>();
         }
 
+        /// <summary>
+        /// Gets taxonomy terms associated with a category.
+        /// </summary>
+        /// <param name="category">The category whose taxonomy terms should be returned.</param>
+        /// <returns>The associated taxonomy term names.</returns>
         public virtual IEnumerable<string> GetTaxonomyTerms(Category category)
         {
             return new List<string>();
         }
 
+        /// <summary>
+        /// Saves a product to the DNN journal.
+        /// </summary>
+        /// <param name="product">The product to save.</param>
         public virtual void SaveProductToJournal(Product product)
         {
         }
 
+        /// <summary>
+        /// Saves a category to the DNN journal.
+        /// </summary>
+        /// <param name="cat">The category to save.</param>
         public virtual void SaveCategoryToJournal(Category cat)
         {
         }

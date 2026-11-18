@@ -35,34 +35,67 @@ using DotNetNuke.Common.Utilities;
 
 namespace Hotcakes.Commerce.Dnn.Data
 {
+    /// <summary>
+    /// Extends the generated Entity Framework context with constructors and connection creation
+    /// that honor the active DNN database owner and object qualifier settings.
+    /// </summary>
     [Serializable]
     public partial class DnnDbContext
     {
+        /// <summary>
+        /// Initializes a context using a named connection string or connection string.
+        /// </summary>
+        /// <param name="nameOrConnectionString">The connection string or the name of a connection string in configuration.</param>
         public DnnDbContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
         }
 
+        /// <summary>
+        /// Initializes a context using an existing database connection.
+        /// </summary>
+        /// <param name="existingConnection">The database connection to use.</param>
+        /// <param name="contextOwnsConnection">A value indicating whether the context should dispose the connection.</param>
         public DnnDbContext(DbConnection existingConnection, bool contextOwnsConnection)
             : base(existingConnection, contextOwnsConnection)
         {
         }
 
+        /// <summary>
+        /// Initializes a context from an existing Entity Framework object context.
+        /// </summary>
+        /// <param name="objectContext">The object context to wrap.</param>
+        /// <param name="dbContextOwnsObjectContext">A value indicating whether this context should dispose the object context.</param>
         public DnnDbContext(ObjectContext objectContext, bool dbContextOwnsObjectContext)
             : base(objectContext, dbContextOwnsObjectContext)
         {
         }
 
+        /// <summary>
+        /// Initializes a context using a named connection string or connection string and a compiled model.
+        /// </summary>
+        /// <param name="nameOrConnectionString">The connection string or the name of a connection string in configuration.</param>
+        /// <param name="model">The compiled Entity Framework model to use.</param>
         public DnnDbContext(string nameOrConnectionString, DbCompiledModel model)
             : base(nameOrConnectionString, model)
         {
         }
 
+        /// <summary>
+        /// Initializes a context using an existing connection and a compiled model.
+        /// </summary>
+        /// <param name="existingConnection">The database connection to use.</param>
+        /// <param name="model">The compiled Entity Framework model to use.</param>
+        /// <param name="contextOwnsConnection">A value indicating whether the context should dispose the connection.</param>
         public DnnDbContext(DbConnection existingConnection, DbCompiledModel model, bool contextOwnsConnection)
             : base(existingConnection, model, contextOwnsConnection)
         {
         }
 
+        /// <summary>
+        /// Creates a context connected to the configured DNN database with the current table prefix and schema settings applied.
+        /// </summary>
+        /// <returns>A configured <see cref="DnnDbContext"/> instance.</returns>
         public static DnnDbContext Instantiate()
         {
             var connBuilder = new EntityConnectionStringBuilder();

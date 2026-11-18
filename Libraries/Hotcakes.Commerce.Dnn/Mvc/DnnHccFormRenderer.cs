@@ -32,9 +32,20 @@ using Hotcakes.Commerce.Extensions;
 
 namespace Hotcakes.Commerce.Dnn.Mvc
 {
+    /// <summary>
+    /// Renders Hotcakes forms as DNN-compatible virtual form containers through <see cref="IHccFormRenderer"/>.
+    /// </summary>
     [Serializable]
     public class DnnHccFormRenderer : IHccFormRenderer
     {
+        /// <summary>
+        /// Writes the opening virtual form container and returns its disposable form helper.
+        /// </summary>
+        /// <param name="htmlHelper">The HTML helper associated with the current view.</param>
+        /// <param name="formAction">The action value written to the virtual form container.</param>
+        /// <param name="method">The HTTP method value written to the virtual form container.</param>
+        /// <param name="htmlAttributes">Additional HTML attributes to merge into the container.</param>
+        /// <returns>A <see cref="HccMvcForm"/> that closes the virtual form container when disposed.</returns>
         public MvcForm FormHelper(HtmlHelper htmlHelper, string formAction, FormMethod method,
             IDictionary<string, object> htmlAttributes)
         {
@@ -67,6 +78,9 @@ namespace Hotcakes.Commerce.Dnn.Mvc
         }
 
 
+        /// <summary>
+        /// Gets a value indicating whether this renderer uses a virtual form rather than a native HTML form.
+        /// </summary>
         public bool VirtualFormUsed
         {
             get { return true; }

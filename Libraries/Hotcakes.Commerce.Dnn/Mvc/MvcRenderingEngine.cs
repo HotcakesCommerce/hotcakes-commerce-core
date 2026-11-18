@@ -35,21 +35,46 @@ using Hotcakes.Commerce.Extensions;
 
 namespace Hotcakes.Commerce.Dnn.Mvc
 {
+    /// <summary>
+    /// Renders Hotcakes MVC actions within a <see cref="ModuleInstanceContext"/>.
+    /// </summary>
     [Serializable]
     public class MvcRenderingEngine
     {
+        /// <summary>
+        /// Initializes a rendering engine for a DNN module instance.
+        /// </summary>
+        /// <param name="moduleContext">The <see cref="ModuleInstanceContext"/> used to resolve view settings and route data.</param>
         public MvcRenderingEngine(ModuleInstanceContext moduleContext)
         {
             ModuleContext = moduleContext;
         }
 
+        /// <summary>
+        /// Gets or sets the DNN module context used during rendering.
+        /// </summary>
         public ModuleInstanceContext ModuleContext { get; set; }
 
+        /// <summary>
+        /// Renders an MVC action using the default view selected by the module.
+        /// </summary>
+        /// <param name="controllerName">The controller name.</param>
+        /// <param name="actionName">The action name.</param>
+        /// <param name="routeValues">Values supplied to the action route.</param>
+        /// <returns>The rendered HTML.</returns>
         public string Render(string controllerName, string actionName, object routeValues)
         {
             return Render(controllerName, actionName, null, routeValues);
         }
 
+        /// <summary>
+        /// Renders an MVC action, optionally selecting a specific module view.
+        /// </summary>
+        /// <param name="controllerName">The controller name.</param>
+        /// <param name="actionName">The action name.</param>
+        /// <param name="viewName">The optional module view name.</param>
+        /// <param name="routeValues">Optional values supplied to the action route.</param>
+        /// <returns>The rendered HTML.</returns>
         public string Render(string controllerName, string actionName, string viewName = null, object routeValues = null)
         {
             if (routeValues == null)
@@ -125,6 +150,9 @@ namespace Hotcakes.Commerce.Dnn.Mvc
         {
             private ViewDataDictionary viewData = new ViewDataDictionary();
 
+            /// <summary>
+            /// Gets or sets the view data exposed by the container.
+            /// </summary>
             public ViewDataDictionary ViewData
             {
                 get { return viewData; }

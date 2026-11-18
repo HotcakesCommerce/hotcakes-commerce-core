@@ -40,6 +40,9 @@ using StackExchange.Profiling;
 
 namespace Hotcakes.Commerce.Dnn.Web
 {
+    /// <summary>
+    /// Provides the common DNN module lifecycle and resource-registration behavior for Hotcakes MVC modules.
+    /// </summary>
     [Serializable]
     public class HotcakesModuleBase : PortalModuleBase
     {
@@ -56,13 +59,23 @@ namespace Hotcakes.Commerce.Dnn.Web
             set { Page.Items[IsScriptResourcesAddedKey] = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the MVC rendering engine used to render this module's view.
+        /// </summary>
         public MvcRenderingEngine MvcRenderingEngine { get; set; }
 
+        /// <summary>
+        /// Gets the current <see cref="HotcakesApplication"/> instance.
+        /// </summary>
         protected HotcakesApplication HccApp
         {
             get { return HotcakesApplication.Current; }
         }
 
+        /// <summary>
+        /// Initializes the module and registers the DNN client namespace and request culture.
+        /// </summary>
+        /// <param name="e">The event data for the initialization event.</param>
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
@@ -75,6 +88,10 @@ namespace Hotcakes.Commerce.Dnn.Web
             Page.Form.Controls.Add(_ltMiniProfiler);
         }
 
+        /// <summary>
+        /// Loads the module, registers its resources, and renders its MVC view.
+        /// </summary>
+        /// <param name="e">The event data for the load event.</param>
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -137,42 +154,71 @@ namespace Hotcakes.Commerce.Dnn.Web
             }
         }
 
+        /// <summary>
+        /// Adds MiniProfiler output immediately before the module is rendered.
+        /// </summary>
+        /// <param name="e">The event data for the pre-render event.</param>
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
             _ltMiniProfiler.Text = MiniProfiler.RenderIncludes().ToHtmlString();
         }
 
+        /// <summary>
+        /// Registers a module stylesheet with DNN client resource management.
+        /// </summary>
+        /// <param name="path">The virtual path to the stylesheet.</param>
         protected void RegisterStyleSheet(string path)
         {
 
             ClientResourceManager.RegisterStyleSheet(Page, ResolveUrl(path), FileOrder.Css.ModuleCss);
         }
 
+        /// <summary>
+        /// Registers a script from the active Hotcakes view set with DNN client resource management.
+        /// </summary>
+        /// <param name="path">The script path relative to the active view set's scripts directory.</param>
+        /// <param name="order">The priority offset for the script.</param>
         protected void RegisterViewScript(string path, int order = 0)
         {
             ClientResourceManager.RegisterScript(Page, ResolveUrl(HccApp.ViewsVirtualPath + "/Scripts/" + path),
                 FileOrder.Js.DefaultPriority + 10 + order);
         }
 
+        /// <summary>
+        /// Registers a script from the shared Hotcakes scripts directory.
+        /// </summary>
+        /// <param name="path">The script path relative to the shared Hotcakes scripts directory.</param>
+        /// <param name="order">The priority offset for the script.</param>
         protected void RegisterScript(string path, int order = 0)
         {
                 ClientResourceManager.RegisterScript(Page, ResolveUrl(ScriptsBasePath + path),
                     FileOrder.Js.DefaultPriority + order);
         }
 
+        /// <summary>
+        /// Registers an external or otherwise fully qualified script path.
+        /// </summary>
+        /// <param name="path">The virtual path to the script.</param>
+        /// <param name="order">The priority offset for the script.</param>
         protected void RegisterScriptExternal(string path, int order = 0)
         {
                 ClientResourceManager.RegisterScript(Page, ResolveUrl(path),
                     FileOrder.Js.DefaultPriority + order);
         }
 
+        /// <summary>
+        /// Registers the Hotcakes unobtrusive validation scripts.
+        /// </summary>
         protected void RegisterUnobtrusiveValidateScripts()
         {
             RegisterScript("jquery.validate.hcc.js", 3);
             RegisterScript("jquery.validate.hcc.unobtrusive.js", 4);
         }
 
+        /// <summary>
+        /// Registers Knockout and its supporting client scripts used by Hotcakes administration views.
+        /// </summary>
         protected void RegisterKOScripts()
         {
             ClientResourceManager.RegisterScript(Page, "~/Resources/Shared/Scripts/knockout.js", FileOrder.Js.jQuery);
@@ -183,6 +229,9 @@ namespace Hotcakes.Commerce.Dnn.Web
                 FileOrder.Js.jQuery + 1);
         }
 
+        /// <summary>
+        /// Initializes localized client resources and the commerce tracking script for the page.
+        /// </summary>
         protected virtual void InitializeScriptManager()
         {
             if (!IsScriptResourcesAdded)
@@ -210,6 +259,9 @@ namespace Hotcakes.Commerce.Dnn.Web
             }
         }
 
+        /// <summary>
+        /// Registers Hotcakes client variables derived from the current portal alias.
+        /// </summary>
         protected void RegisterScriptVariables()
         {
             var httpAlias = PortalSettings.DefaultPortalAlias;
@@ -220,6 +272,10 @@ namespace Hotcakes.Commerce.Dnn.Web
             ClientAPI.RegisterClientVariable(Page, "hc_siteRoot", strValue, /*overwrite*/ true);
         }
 
+        /// <summary>
+        /// Renders the MVC view for the module.
+        /// </summary>
+        /// <returns>The rendered view markup, or <see langword="null"/> when no view is supplied.</returns>
         protected virtual string RenderView()
         {
             return null;

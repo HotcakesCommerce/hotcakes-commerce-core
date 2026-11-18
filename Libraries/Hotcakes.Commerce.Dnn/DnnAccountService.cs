@@ -32,11 +32,18 @@ using Hotcakes.Commerce.Accounts;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Provides account and store operations backed by the current DNN portal.
+    /// </summary>
     [Serializable]
     public class DnnAccountService : AccountService
     {
         #region Constructor
 
+        /// <summary>
+        /// Initializes the service for the specified commerce request context.
+        /// </summary>
+        /// <param name="context">The request context used to resolve the current store and account services.</param>
         public DnnAccountService(HccRequestContext context)
             : base(context)
         {
@@ -46,6 +53,9 @@ namespace Hotcakes.Commerce.Dnn
 
         #region Properties
 
+        /// <summary>
+        /// Gets the portal settings associated with the current DNN request.
+        /// </summary>
         public PortalSettings CurrentPortalSettings
         {
             get { return DnnGlobal.Instance.GetCurrentPortalSettings(); }
@@ -55,6 +65,11 @@ namespace Hotcakes.Commerce.Dnn
 
         #region Public methods
 
+        /// <summary>
+        /// Finds the commerce store associated with a DNN portal alias URL.
+        /// </summary>
+        /// <param name="url">The portal alias URL to resolve.</param>
+        /// <returns>The matching <see cref="Store"/>, or <c>null</c> when the URL is not mapped to a portal or store.</returns>
         public override Store GetStoreByUrl(string url)
         {
             var aliasInfo = PortalAliasController.Instance.GetPortalAlias(url);
@@ -70,6 +85,10 @@ namespace Hotcakes.Commerce.Dnn
             return null;
         }
 
+        /// <summary>
+        /// Gets the commerce store associated with the current DNN portal.
+        /// </summary>
+        /// <returns>The current <see cref="Store"/>, or <c>null</c> when no current portal settings are available.</returns>
         public override Store GetCurrentStore()
         {
             if (CurrentPortalSettings != null)
@@ -77,6 +96,10 @@ namespace Hotcakes.Commerce.Dnn
             return null;
         }
 
+        /// <summary>
+        /// Reads the Google Analytics settings from DNN analytics configuration.
+        /// </summary>
+        /// <returns>The current <see cref="GoogleAnalyticsSettings"/> values.</returns>
         public override GoogleAnalyticsSettings GetGoogleAnalyticsSettings()
         {
             var config = AnalyticsConfiguration.GetConfig("GoogleAnalytics");
@@ -104,6 +127,10 @@ namespace Hotcakes.Commerce.Dnn
             return result;
         }
 
+        /// <summary>
+        /// Persists Google Analytics settings in the DNN analytics configuration.
+        /// </summary>
+        /// <param name="newSettings">The settings to save.</param>
         public override void SetGoogleAnalyticsSettings(GoogleAnalyticsSettings newSettings)
         {
             var config = AnalyticsConfiguration.GetConfig("GoogleAnalytics");

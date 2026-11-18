@@ -35,9 +35,17 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Commerce.Dnn.Utils
 {
+    /// <summary>
+    /// Resolves Hotcakes view paths and enumerates available Razor views in the DNN installation.
+    /// </summary>
     [Serializable]
     public static class DnnPathHelper
     {
+        /// <summary>
+        /// Gets the view names available for a controller in the shared Hotcakes views directory.
+        /// </summary>
+        /// <param name="controller">The controller directory whose views should be enumerated.</param>
+        /// <returns>A sorted list of view names without the <c>.cshtml</c> extension.</returns>
         public static List<string> GetViewNames(string controller)
         {
             var path =
@@ -51,6 +59,12 @@ namespace Hotcakes.Commerce.Dnn.Utils
             return fileNames;
         }
 
+        /// <summary>
+        /// Gets the view names available for a controller in a specified MVC area.
+        /// </summary>
+        /// <param name="controller">The controller directory whose views should be enumerated.</param>
+        /// <param name="area">The MVC area containing the controller.</param>
+        /// <returns>A sorted list of view names without the <c>.cshtml</c> extension.</returns>
         public static List<string> GetViewNames(string controller, string area)
         {
             var corePath = string.Format("/Areas/{0}/Views/{1}", area, controller);
@@ -63,6 +77,10 @@ namespace Hotcakes.Commerce.Dnn.Utils
             return fileNames;
         }
 
+        /// <summary>
+        /// Gets the virtual path to the current portal's Hotcakes views directory.
+        /// </summary>
+        /// <returns>The portal-relative virtual path used for Hotcakes views.</returns>
         public static string GetViewsVirtualPath()
         {
             var homeDirectory = PortalSettings.Current.HomeDirectory;

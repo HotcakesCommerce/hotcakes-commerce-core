@@ -38,9 +38,16 @@ using Hotcakes.Commerce.Accounts;
 
 namespace Hotcakes.Commerce.Dnn.Utils
 {
+    /// <summary>
+    /// Provides helpers for configuring and inspecting Hotcakes DNN pages and tabs.
+    /// </summary>
     [Serializable]
     public static class PageUtils
     {
+        /// <summary>
+        /// Determines whether page URLs should be displayed using the Hotcakes friendly URL provider.
+        /// </summary>
+        /// <returns><see langword="true"/> when the configured friendly URL provider is <c>HccFriendlyUrl</c>; otherwise, <see langword="false"/>.</returns>
         public static bool ShowPageUrls()
         {
             var fupConfig = ProviderConfiguration.GetProviderConfiguration("friendlyUrl");
@@ -49,6 +56,10 @@ namespace Hotcakes.Commerce.Dnn.Utils
             return showPageUrls;
         }
 
+        /// <summary>
+        /// Ensures that the store's configured catalog and checkout tabs exist, creating missing tabs from their page templates.
+        /// </summary>
+        /// <param name="sett">The store URL settings whose tab identifiers should be completed.</param>
         public static void EnsureTabsExist(StoreSettingsUrls sett)
         {
             int? parentId = null;
