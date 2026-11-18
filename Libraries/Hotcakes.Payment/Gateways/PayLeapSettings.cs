@@ -28,33 +28,39 @@ using System;
 
 namespace Hotcakes.Payment.Gateways
 {
+    /// <summary>Stores the credentials and endpoint options used by <see cref="PayLeap"/>.</summary>
     [Serializable]
     public class PayLeapSettings : MethodSettings
     {
+        /// <summary>Gets or sets the PayLeap user name.</summary>
         public string Username
         {
             get { return GetSettingOrEmpty("Username"); }
             set { AddOrUpdate("Username", value); }
         }
 
+        /// <summary>Gets or sets the PayLeap password.</summary>
         public string Password
         {
             get { return GetSettingOrEmpty("Password"); }
             set { AddOrUpdate("Password", value); }
         }
 
+        /// <summary>Gets or sets a value indicating whether PayLeap training mode is requested.</summary>
         public bool TrainingMode
         {
             get { return GetBoolSetting("TrainingMode"); }
             set { SetBoolSetting("TrainingMode", value); }
         }
 
+        /// <summary>Gets or sets a value indicating whether the PayLeap test endpoint is used.</summary>
         public bool DeveloperMode
         {
             get { return GetBoolSetting("DeveloperMode"); }
             set { SetBoolSetting("DeveloperMode", value); }
         }
 
+        /// <summary>Gets or sets a value indicating whether request and response payloads are recorded in <see cref="Transaction.Result"/>.</summary>
         public bool EnableDebugTracing
         {
             get { return GetBoolSetting("EnableDebugTracing"); }

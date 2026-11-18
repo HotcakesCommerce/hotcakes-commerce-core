@@ -37,31 +37,40 @@ using PayPalHttp;
 
 namespace Hotcakes.Payment.Gateways
 {
+    /// <summary>Processes card transactions through the PayPal Payments Pro gateway using the <see cref="PaymentGateway"/> contract.</summary>
     [Serializable]
     public class PayPalPaymentsPro : PaymentGateway
     {
+        /// <summary>Initializes a PayPal Payments Pro gateway with default settings.</summary>
         public PayPalPaymentsPro()
         {
             Settings = new PayPalPaymentsProSettings();
         }
 
+        /// <summary>Gets the display name of this payment gateway.</summary>
         public override string Name
         {
             get { return "PayPal Payments Pro"; }
         }
 
+        /// <summary>Gets the stable identifier of this payment gateway.</summary>
         public override string Id
         {
             get { return "0B81046B-7A24-4512-8A6B-6C4C59D4C503"; }
         }
 
+        /// <summary>Gets or sets the credentials, mode, currency, and diagnostic settings for this gateway.</summary>
+        /// <seealso cref="PayPalPaymentsProSettings"/>
         public PayPalPaymentsProSettings Settings { get; set; }
 
+        /// <summary>Gets the gateway settings through the common payment method settings contract.</summary>
         public override MethodSettings BaseSettings
         {
             get { return Settings; }
         }
 
+        /// <summary>Processes the requested transaction through PayPal and populates its result.</summary>
+        /// <param name="t">The transaction to process.</param>
         public override void ProcessTransaction(Transaction t)
         {
             try

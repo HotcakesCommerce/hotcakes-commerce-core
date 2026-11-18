@@ -26,11 +26,18 @@
 
 namespace Hotcakes.Payment
 {
+    /// <summary>
+    /// Represents the normalized result of a card verification number check.
+    /// </summary>
     public enum CvnResponseType
     {
+        /// <summary>The card verification number matched.</summary>
         Match,
+        /// <summary>The card verification number did not match.</summary>
         NoMatch,
+        /// <summary>Card verification was unavailable or not performed.</summary>
         Unavailable,
+        /// <summary>The payment gateway reported a card verification error.</summary>
         Error
     }
 }

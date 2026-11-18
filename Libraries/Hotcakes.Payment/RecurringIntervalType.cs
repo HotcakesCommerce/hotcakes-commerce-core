@@ -26,9 +26,14 @@
 
 namespace Hotcakes.Payment
 {
+    /// <summary>
+    /// Specifies the unit used for the interval between recurring payments.
+    /// </summary>
     public enum RecurringIntervalType
     {
+        /// <summary>The recurring interval is measured in days.</summary>
         Days = 0,
+        /// <summary>The recurring interval is measured in months.</summary>
         Months = 1
     }
 }

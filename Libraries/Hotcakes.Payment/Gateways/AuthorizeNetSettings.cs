@@ -28,39 +28,46 @@ using System;
 
 namespace Hotcakes.Payment.Gateways
 {
+    /// <summary>Stores the credentials and behavior flags used by <see cref="AuthorizeNet"/>.</summary>
     [Serializable]
     public class AuthorizeNetSettings : MethodSettings
     {
+        /// <summary>Gets or sets the Authorize.Net merchant login identifier.</summary>
         public string MerchantLoginId
         {
             get { return GetSettingOrEmpty("MerchantLoginId"); }
             set { AddOrUpdate("MerchantLoginId", value); }
         }
 
+        /// <summary>Gets or sets the Authorize.Net transaction key.</summary>
         public string TransactionKey
         {
             get { return GetSettingOrEmpty("TransactionKey"); }
             set { AddOrUpdate("TransactionKey", value); }
         }
 
+        /// <summary>Gets or sets a value indicating whether Authorize.Net should email the customer.</summary>
         public bool SendEmailToCustomer
         {
             get { return GetBoolSetting("SendEmailToCustomer"); }
             set { SetBoolSetting("SendEmailToCustomer", value); }
         }
 
+        /// <summary>Gets or sets a value indicating whether the Authorize.Net developer endpoint is used.</summary>
         public bool DeveloperMode
         {
             get { return GetBoolSetting("DeveloperMode"); }
             set { SetBoolSetting("DeveloperMode", value); }
         }
 
+        /// <summary>Gets or sets a value indicating whether the transaction is submitted in test mode.</summary>
         public bool TestMode
         {
             get { return GetBoolSetting("TestMode"); }
             set { SetBoolSetting("TestMode", value); }
         }
 
+        /// <summary>Gets or sets a value indicating whether request and response details are added to <see cref="Transaction.Result"/>.</summary>
         public bool DebugMode
         {
             get { return GetBoolSetting("DebugMode"); }

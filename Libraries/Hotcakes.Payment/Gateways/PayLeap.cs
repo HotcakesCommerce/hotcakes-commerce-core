@@ -31,34 +31,43 @@ using System.Xml.Linq;
 
 namespace Hotcakes.Payment.Gateways
 {
+    /// <summary>Processes card transactions through the PayLeap gateway using the <see cref="PaymentGateway"/> contract.</summary>
     [Serializable]
     public class PayLeap : PaymentGateway
     {
         private const string LiveUrl = "https://secure.payleap.com/SmartPayments/transact.asmx/ProcessCreditCard";
         private const string DeveloperUrl = "http://test.payleap.com/SmartPayments/transact.asmx/ProcessCreditCard";
 
+        /// <summary>Initializes a PayLeap gateway with default settings.</summary>
         public PayLeap()
         {
             Settings = new PayLeapSettings();
         }
 
+        /// <summary>Gets the display name of this payment gateway.</summary>
         public override string Name
         {
             get { return "PayLeap"; }
         }
 
+        /// <summary>Gets the stable identifier of this payment gateway.</summary>
         public override string Id
         {
             get { return "6FC76AD8-66BF-47b0-8982-1C4118F01645"; }
         }
 
+        /// <summary>Gets or sets the credentials and endpoint settings for this gateway.</summary>
+        /// <seealso cref="PayLeapSettings"/>
         public PayLeapSettings Settings { get; set; }
 
+        /// <summary>Gets the gateway settings through the common payment method settings contract.</summary>
         public override MethodSettings BaseSettings
         {
             get { return Settings; }
         }
 
+        /// <summary>Submits the requested transaction to PayLeap and populates its result.</summary>
+        /// <param name="t">The transaction to process.</param>
         public override void ProcessTransaction(Transaction t)
         {
             var result = false;
@@ -323,8 +332,10 @@ namespace Hotcakes.Payment.Gateways
         #endregion
     }
 
+    /// <summary>Represents the parsed response returned by PayLeap.</summary>
     public class PayLeapResponse
     {
+        /// <summary>Initializes an empty PayLeap response with empty field values.</summary>
         public PayLeapResponse()
         {
             Result = string.Empty;
@@ -336,14 +347,23 @@ namespace Hotcakes.Payment.Gateways
             GetCVResult = string.Empty;
         }
 
+        /// <summary>Gets or sets the PayLeap result code.</summary>
         public string Result { get; set; }
+        /// <summary>Gets or sets the PayLeap response message.</summary>
         public string Message { get; set; }
+        /// <summary>Gets or sets the PayLeap response message detail.</summary>
         public string RespMSG { get; set; }
+        /// <summary>Gets or sets the authorization code.</summary>
         public string AuthCode { get; set; }
+        /// <summary>Gets or sets the PayLeap reference number.</summary>
         public string PNRef { get; set; }
+        /// <summary>Gets or sets the address verification result.</summary>
         public string GetAVSResult { get; set; }
+        /// <summary>Gets or sets the card verification result.</summary>
         public string GetCVResult { get; set; }
 
+        /// <summary>Parses PayLeap response elements into this response object.</summary>
+        /// <param name="response">The XML response document to parse.</param>
         public void Parse(XDocument response)
         {
             if (response != null)

@@ -28,13 +28,17 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Payment
 {
+    /// <summary>
+    /// Provides classifications and report-oriented groupings for <see cref="ActionType"/> values.
+    /// </summary>
 	public static class ActionTypeUtils
 	{
         /// <summary>
-        ///     Tells you whether the transaction is a credit card transaction or not.
-		/// </summary>
-		/// <param name="action">Transaction type to evaluate.</param>
-		/// <returns>If true, the transaction type (action) is a credit card transaction.</returns>
+        /// Determines whether an action represents a credit-card transaction.
+        /// </summary>
+        /// <param name="action">The transaction action to evaluate.</param>
+        /// <returns><see langword="true"/> when <paramref name="action"/> is a credit-card transaction; otherwise, <see langword="false"/>.</returns>
+        /// <seealso cref="ActionType.CreditCardCharge"/>
 		public static bool IsCreditCardTransaction(ActionType action)
 		{
             return action == ActionType.CreditCardCapture ||
@@ -46,10 +50,11 @@ namespace Hotcakes.Payment
 		}
 
 		/// <summary>
-        ///     Tells you whether the transaction is a gift card transaction or not.
+        /// Determines whether an action represents a gift-card transaction.
 		/// </summary>
-		/// <param name="action">Transaction type to evaluate.</param>
-		/// <returns>If true, the transaction type (action) is a gift card transaction.</returns>
+        /// <param name="action">The transaction action to evaluate.</param>
+        /// <returns><see langword="true"/> when <paramref name="action"/> is a gift-card transaction; otherwise, <see langword="false"/>.</returns>
+        /// <seealso cref="ActionType.GiftCardCapture"/>
 		public static bool IsGiftCardTransaction(ActionType action)
 		{
             return action == ActionType.GiftCardCapture ||
@@ -61,10 +66,11 @@ namespace Hotcakes.Payment
 		}
 
 		/// <summary>
-        ///     Tells you whether the transaction is a PayPal transaction or not.
+        /// Determines whether an action represents a PayPal transaction.
 		/// </summary>
-		/// <param name="action">Transaction type to evaluate.</param>
-		/// <returns>If true, the transaction type (action) is a PayPal transaction.</returns>
+        /// <param name="action">The transaction action to evaluate.</param>
+        /// <returns><see langword="true"/> when <paramref name="action"/> is a PayPal transaction; otherwise, <see langword="false"/>.</returns>
+        /// <seealso cref="ActionType.PayPalCharge"/>
 		public static bool IsPayPalTransaction(ActionType action)
 		{
             return action == ActionType.PayPalCapture ||
@@ -76,10 +82,11 @@ namespace Hotcakes.Payment
 		}
 
 		/// <summary>
-        ///     Tells you whether the transaction is a reward point transaction or not.
+        /// Determines whether an action represents a reward-point transaction.
 		/// </summary>
-		/// <param name="action">Transaction type to evaluate.</param>
-		/// <returns>If true, the transaction type (action) is a reward point transaction.</returns>
+        /// <param name="action">The transaction action to evaluate.</param>
+        /// <returns><see langword="true"/> when <paramref name="action"/> is a reward-point transaction; otherwise, <see langword="false"/>.</returns>
+        /// <seealso cref="ActionType.RewardPointsIncrease"/>
 		public static bool IsRewardPointTransaction(ActionType action)
 		{
             return action == ActionType.RewardPointsCapture ||
@@ -90,9 +97,13 @@ namespace Hotcakes.Payment
                    action == ActionType.RewardPointsUnHold;
 		}
 
-		/// <summary>
-		/// The list of actions that influence accounts balance
-		/// </summary>
+        /// <summary>
+        /// Gets the mutable list of actions that affect an account balance.
+        /// </summary>
+        /// <remarks>
+        /// The list contains the action values used when calculating general balance changes.
+        /// </remarks>
+        /// <seealso cref="ActionType.CreditCardCapture"/>
 		public static List<ActionType> BalanceChangingActions = new List<ActionType>(){
 			ActionType.CashReceived,
 			ActionType.CashReturned,
@@ -118,8 +129,12 @@ namespace Hotcakes.Payment
 		};
 
         /// <summary>
-        /// The list of actions that influence accounts balance
+        /// Gets the mutable list of actions included in the credit-card balance report.
         /// </summary>
+        /// <remarks>
+        /// This list is limited to credit-card capture, charge, and refund operations.
+        /// </remarks>
+        /// <seealso cref="ActionType.CreditCardCapture"/>
         public static List<ActionType> BalanceChangingActionsForCreditCardReport = new List<ActionType>(){
 			ActionType.CreditCardCapture,
 			ActionType.CreditCardCharge,

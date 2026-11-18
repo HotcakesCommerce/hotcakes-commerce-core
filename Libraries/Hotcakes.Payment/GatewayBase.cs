@@ -28,13 +28,30 @@ using System;
 
 namespace Hotcakes.Payment
 {
+    /// <summary>
+    /// Provides the common identity and configuration contract for payment gateways.
+    /// </summary>
+    /// <remarks>
+    /// Concrete gateways derive from this type and expose their display name, identifier, and
+    /// base settings through the abstract members defined here.
+    /// </remarks>
     [Serializable]
     public abstract class GatewayBase
     {
+        /// <summary>
+        /// Gets the display name of the gateway.
+        /// </summary>
         public abstract string Name { get; }
 
+        /// <summary>
+        /// Gets the stable identifier used to distinguish the gateway.
+        /// </summary>
         public abstract string Id { get; }
 
+        /// <summary>
+        /// Gets the gateway's base configuration settings.
+        /// </summary>
+        /// <seealso cref="MethodSettings" />
         public abstract MethodSettings BaseSettings { get; }
     }
 }

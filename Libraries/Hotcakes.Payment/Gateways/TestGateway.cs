@@ -28,34 +28,54 @@ using System;
 
 namespace Hotcakes.Payment.Gateways
 {
+    /// <summary>
+    /// Provides a deterministic payment gateway implementation for testing payment workflows.
+    /// </summary>
     [Serializable]
     public class TestGateway : PaymentGateway
     {
-        // Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestGateway"/> class.
+        /// </summary>
         public TestGateway()
         {
             Settings = new TestGatewaySettings();
         }
 
-        // Properties
+        /// <summary>
+        /// Gets the display name of this payment gateway.
+        /// </summary>
         public override string Name
         {
             get { return "Test Gateway"; }
         }
 
+        /// <summary>
+        /// Gets the stable identifier of this payment gateway.
+        /// </summary>
         public override string Id
         {
             get { return "FCACE46F-7B9C-4b49-82B6-426CF522C0C6"; }
         }
 
+        /// <summary>
+        /// Gets or sets the response settings used by this test gateway.
+        /// </summary>
         public TestGatewaySettings Settings { get; set; }
 
+        /// <summary>
+        /// Gets the settings exposed through the base payment gateway contract.
+        /// </summary>
         public override MethodSettings BaseSettings
         {
             get { return Settings; }
         }
 
-        // Methods
+        /// <summary>
+        /// Processes a transaction by applying the configured simulated response for its action.
+        /// </summary>
+        /// <param name="t">The transaction to process.</param>
+        /// <seealso cref="TestGatewaySettings"/>
         public override void ProcessTransaction(Transaction t)
         {
             var result = false;

@@ -30,10 +30,22 @@ using AuthorizeNetSDK = AuthorizeNet;
 
 namespace Hotcakes.Payment.RecurringGateways
 {
+    /// <summary>
+    /// Provides recurring-payment subscription operations through Authorize.Net.
+    /// </summary>
+    /// <remarks>
+    /// This gateway maps Hotcakes recurring transactions to Authorize.Net subscription requests
+    /// and uses the configured <see cref="AuthorizeNetSettings" /> credentials and endpoint mode.
+    /// </remarks>
+    /// <seealso cref="RecurringPaymentGateway" />
+    /// <seealso cref="AuthorizeNetSettings" />
     public class AuthorizeNet : RecurringPaymentGateway
     {
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AuthorizeNet" /> gateway and its settings.
+        /// </summary>
         public AuthorizeNet()
         {
             Settings = new AuthorizeNetSettings();
@@ -41,6 +53,16 @@ namespace Hotcakes.Payment.RecurringGateways
 
         #endregion
 
+        /// <summary>
+        /// Gets the supported interval range for an Authorize.Net recurring subscription.
+        /// </summary>
+        /// <param name="intervalType">The unit used to measure the recurring interval.</param>
+        /// <returns>
+        /// A <see cref="RecurringPaymentGateway.Range" /> whose values constrain daily intervals
+        /// to 7 through 365 and monthly intervals to 1 through 12; other units use the base range.
+        /// </returns>
+        /// <seealso cref="RecurringIntervalType" />
+        /// <seealso cref="RecurringPaymentGateway.GetRangeForIntervalType(RecurringIntervalType)" />
         public override Range GetRangeForIntervalType(RecurringIntervalType intervalType)
         {
             switch (intervalType)
@@ -149,6 +171,20 @@ namespace Hotcakes.Payment.RecurringGateways
             return new AuthorizeNetSDK.SubscriptionGateway(Settings.MerchantLoginId, Settings.TransactionKey, mode);
         }
 
+        /// <summary>
+        /// Parses an Authorize.Net silent-post payload into a recurring payment transaction.
+        /// </summary>
+        /// <param name="postData">The form values received from the Authorize.Net silent-post callback.</param>
+        /// <returns>
+        /// A populated <see cref="Transaction" /> when the payload identifies a recurring payment;
+        /// otherwise, <see langword="null" />.
+        /// </returns>
+        /// <remarks>
+        /// The returned transaction contains the recurring payment amount, customer details,
+        /// response data, and subscription identifiers extracted from the payload.
+        /// </remarks>
+        /// <seealso cref="ActionType.RecurringPayment" />
+        /// <seealso cref="Transaction.Result" />
         public static Transaction ParseSilentPost(NameValueCollection postData)
         {
             var authTrans = new SilentPostHelper().Parse(postData);
@@ -193,6 +229,7 @@ namespace Hotcakes.Payment.RecurringGateways
         #region Internal declaration
 
         /// <summary>
+        /// Parses recurring-payment notification data returned by Authorize.Net.
         /// </summary>
         internal class SilentPostHelper
         {
@@ -285,18 +322,31 @@ namespace Hotcakes.Payment.RecurringGateways
 
         #region Properties
 
+        /// <summary>
+        /// Gets the display name of this payment gateway.
+        /// </summary>
         public override string Name
         {
             get { return "Authorize.Net"; }
         }
 
+        /// <summary>
+        /// Gets the stable identifier of this payment gateway.
+        /// </summary>
         public override string Id
         {
             get { return "1ED5E3E8-BF78-462F-AB16-906EFFC28D2A"; }
         }
 
+        /// <summary>
+        /// Gets or sets the Authorize.Net credentials and endpoint settings used by this gateway.
+        /// </summary>
         public AuthorizeNetSettings Settings { get; set; }
 
+        /// <summary>
+        /// Gets the settings exposed through the base payment gateway contract.
+        /// </summary>
+        /// <seealso cref="Settings" />
         public override MethodSettings BaseSettings
         {
             get { return Settings; }

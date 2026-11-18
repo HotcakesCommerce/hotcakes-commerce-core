@@ -26,13 +26,22 @@
 
 namespace Hotcakes.Payment
 {
+    /// <summary>
+    /// Represents the normalized result of an address verification service check.
+    /// </summary>
     public enum AvsResponseType
     {
+        /// <summary>Address verification was unavailable or inconclusive (B, G, P, R, S, or U).</summary>
         Unavailable, // B, G, P, R, S, U
+        /// <summary>The payment gateway reported an address verification error (E).</summary>
         Error, // E
+        /// <summary>Both the address and postal code matched (X or Y).</summary>
         FullMatch, // X, Y
+        /// <summary>Neither the address nor postal code matched (N).</summary>
         NoMatch, // N
+        /// <summary>The postal code matched but the address did not fully match (W or Z).</summary>
         PartialMatchPostalCode, // W, Z
+        /// <summary>The address matched but the postal code did not fully match (A).</summary>
         PartialMatchAddress // A
     }
 }

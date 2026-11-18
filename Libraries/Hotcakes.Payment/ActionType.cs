@@ -27,8 +27,12 @@
 namespace Hotcakes.Payment
 {
 	/// <summary>
-    ///     Various actions that a transaction can be.
-	/// </summary>
+    ///     Identifies the operation represented by a payment transaction.
+    /// </summary>
+    /// <remarks>
+    ///     The numeric values are part of the payment contract and must remain stable.
+    ///     Use <see cref="ActionTypeUtils"/> when classifying related transaction actions.
+    /// </remarks>
 	public enum ActionType
 	{
 		/// <summary>
@@ -256,12 +260,24 @@ namespace Hotcakes.Payment
 		/// </summary>
 		RecurringSubscriptionInfo = 801,
 
+        /// <summary>
+        ///     Creates a recurring subscription.
+        /// </summary>
 		RecurringSubscriptionCreate = 802,
 
+        /// <summary>
+        ///     Updates an existing recurring subscription.
+        /// </summary>
 		RecurringSubscriptionUpdate = 803,
 
+        /// <summary>
+        ///     Cancels an existing recurring subscription.
+        /// </summary>
 		RecurringSubscriptionCancel = 804,
 
+        /// <summary>
+        ///     Processes a payment for a recurring subscription.
+        /// </summary>
 		RecurringPayment = 805,
 
 		/// <summary>

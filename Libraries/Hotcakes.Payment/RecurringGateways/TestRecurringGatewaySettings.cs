@@ -28,23 +28,36 @@ using System;
 
 namespace Hotcakes.Payment.RecurringGateways
 {
+    /// <summary>
+    /// Stores the simulated subscription-operation responses used by
+    /// <see cref="TestRecurringGateway" />.
+    /// </summary>
     [Serializable]
     public class TestRecurringGatewaySettings : MethodSettings
     {
         private const bool DefaultRespose = true;
 
+        /// <summary>
+        /// Gets or sets the simulated result for recurring subscription creation.
+        /// </summary>
         public bool ResponseForCreate
         {
             get { return GetBoolSetting("ResponseForCreate", DefaultRespose); }
             set { SetBoolSetting("ResponseForCreate", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the simulated result for recurring subscription updates.
+        /// </summary>
         public bool ResponseForUpdate
         {
             get { return GetBoolSetting("ResponseForUpdate", DefaultRespose); }
             set { SetBoolSetting("ResponseForUpdate", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the simulated result for recurring subscription cancellations.
+        /// </summary>
         public bool ResponseForCancel
         {
             get { return GetBoolSetting("ResponseForCancel", DefaultRespose); }

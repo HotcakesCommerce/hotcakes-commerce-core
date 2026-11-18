@@ -29,9 +29,17 @@ using System.Xml;
 
 namespace Hotcakes.Payment
 {
+    /// <summary>
+    /// Provides text transformation helpers used by payment integrations.
+    /// </summary>
     [Serializable]
     public class TextHelper
     {
+        /// <summary>
+        /// XML-encodes text by placing it in an element and returning the encoded inner XML.
+        /// </summary>
+        /// <param name="code">The text to encode.</param>
+        /// <returns>The XML-encoded text.</returns>
         public static string XmlEncode(string code)
         {
             var doc = new XmlDocument {PreserveWhitespace = true};

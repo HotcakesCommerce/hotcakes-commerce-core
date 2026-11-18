@@ -26,11 +26,18 @@
 
 namespace Hotcakes.Payment
 {
+    /// <summary>
+    /// Identifies the severity or purpose of a payment response message.
+    /// </summary>
     public enum MessageType
     {
+        /// <summary>The message type is unknown.</summary>
         Unknown = 0,
+        /// <summary>The message provides informational details.</summary>
         Information = 1,
+        /// <summary>The message reports a warning that does not necessarily prevent completion.</summary>
         Warning = 2,
+        /// <summary>The message reports an error.</summary>
         Error = 3
     }
 }

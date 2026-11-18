@@ -28,21 +28,33 @@ using System;
 
 namespace Hotcakes.Payment.Gateways
 {
+    /// <summary>
+    /// Stores the Stripe credentials and payment options used by <see cref="StripeProcessor"/>.
+    /// </summary>
     [Serializable]
     public class StripeSettings : MethodSettings
     {
+        /// <summary>
+        /// Gets or sets the secret API key used for authenticated Stripe requests.
+        /// </summary>
         public string StripeApiKey
         {
             get { return GetSettingOrEmpty("StripeApiKey"); }
             set { AddOrUpdate("StripeApiKey", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the publishable API key used by Stripe client integrations.
+        /// </summary>
         public string StripePublicKey
         {
             get { return GetSettingOrEmpty("StripePublicKey"); }
             set { AddOrUpdate("StripePublicKey", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the three-letter currency code used for Stripe amounts.
+        /// </summary>
         public string CurrencyCode
         {
             get
@@ -53,6 +65,9 @@ namespace Hotcakes.Payment.Gateways
             set { AddOrUpdate("CurrencyCode", value); }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether Stripe developer mode is enabled.
+        /// </summary>
         public bool DeveloperMode
         {
             get { return GetBoolSetting("DeveloperMode"); }

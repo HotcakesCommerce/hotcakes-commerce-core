@@ -36,34 +36,43 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Payment.Gateways
 {
+	/// <summary>Processes card transactions through the Authorize.Net gateway using the <see cref="PaymentGateway"/> contract.</summary>
 	[Serializable]
 	public class AuthorizeNet : PaymentGateway
 	{
 		private const string LiveUrl = "https://secure2.authorize.net/gateway/transact.dll";
 		private const string DeveloperUrl = "https://test.authorize.net/gateway/transact.dll";
 
+        /// <summary>Initializes an Authorize.Net gateway with default settings.</summary>
         public AuthorizeNet()
         {
             Settings = new AuthorizeNetSettings();
         }
 
+		/// <summary>Gets the display name of this payment gateway.</summary>
 		public override string Name
 		{
 			get { return "Authorize.Net"; }
 		}
 
+		/// <summary>Gets the stable identifier of this payment gateway.</summary>
 		public override string Id
 		{
 			get { return "828F3F70-EF01-4db6-A385-C5467CF91587"; }
 		}
 
+		/// <summary>Gets or sets the credentials and behavior settings for this gateway.</summary>
+		/// <seealso cref="AuthorizeNetSettings"/>
 		public AuthorizeNetSettings Settings { get; set; }
 
+		/// <summary>Gets the gateway settings through the common payment method settings contract.</summary>
 		public override MethodSettings BaseSettings
 		{
 			get { return Settings; }
 		}
 
+		/// <summary>Submits the requested transaction to Authorize.Net and populates its result.</summary>
+		/// <param name="t">The transaction to process.</param>
 		public override void ProcessTransaction(Transaction t)
 		{
 			try

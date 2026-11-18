@@ -28,35 +28,53 @@ using System;
 
 namespace Hotcakes.Payment.Gateways
 {
+    /// <summary>
+    /// Configures the simulated responses returned by <see cref="TestGateway"/>.
+    /// </summary>
     [Serializable]
     public class TestGatewaySettings : MethodSettings
     {
         private const bool DefaultRespose = true;
 
+        /// <summary>
+        /// Gets or sets the simulated result for credit-card hold transactions.
+        /// </summary>
         public bool ResponseForHold
         {
             get { return GetBoolSetting("ResponseForHold", DefaultRespose); }
             set { SetBoolSetting("ResponseForHold", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the simulated result for credit-card capture transactions.
+        /// </summary>
         public bool ResponseForCapture
         {
             get { return GetBoolSetting("ResponseForCapture", DefaultRespose); }
             set { SetBoolSetting("ResponseForCapture", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the simulated result for credit-card charge transactions.
+        /// </summary>
         public bool ResponseForCharge
         {
             get { return GetBoolSetting("ResponseForCharge", DefaultRespose); }
             set { SetBoolSetting("ResponseForCharge", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the simulated result for credit-card refund transactions.
+        /// </summary>
         public bool ResponseForRefund
         {
             get { return GetBoolSetting("ResponseForRefund", DefaultRespose); }
             set { SetBoolSetting("ResponseForRefund", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the simulated result for credit-card void transactions.
+        /// </summary>
         public bool ResponseForVoid
         {
             get { return GetBoolSetting("ResponseForVoid", DefaultRespose); }
