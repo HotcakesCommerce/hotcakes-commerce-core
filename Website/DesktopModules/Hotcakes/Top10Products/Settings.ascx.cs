@@ -32,6 +32,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.Top10Products
 {
+    /// <summary>
+    /// Provides module settings for the top ten products module.
+    /// </summary>
     public partial class Settings : HotcakesSettingsBase
     {
         #region Implementation
@@ -51,6 +54,9 @@ namespace Hotcakes.Modules.Top10Products
 
         #region ModuleSettingsBase overrides
 
+        /// <summary>
+        /// Loads the top ten products settings into the controls.
+        /// </summary>
         public override void LoadSettings()
         {
             if (!IsPostBack)
@@ -68,6 +74,9 @@ namespace Hotcakes.Modules.Top10Products
             }
         }
 
+        /// <summary>
+        /// Saves the top ten products settings from the controls.
+        /// </summary>
         public override void UpdateSettings()
         {
             var controller = new ModuleController();

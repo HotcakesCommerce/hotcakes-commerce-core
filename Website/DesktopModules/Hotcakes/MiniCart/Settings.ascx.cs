@@ -32,6 +32,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.MiniCart
 {
+    /// <summary>
+    /// Provides module settings for the mini cart module.
+    /// </summary>
     public partial class Settings : HotcakesSettingsBase
     {
         #region Implementation
@@ -51,6 +54,9 @@ namespace Hotcakes.Modules.MiniCart
 
         #region ModuleSettingsBase overrides
 
+        /// <summary>
+        /// Loads the mini cart settings into the controls.
+        /// </summary>
         public override void LoadSettings()
         {
             if (!IsPostBack)
@@ -68,6 +74,9 @@ namespace Hotcakes.Modules.MiniCart
             }
         }
 
+        /// <summary>
+        /// Saves the mini cart settings from the controls.
+        /// </summary>
         public override void UpdateSettings()
         {
             var controller = new ModuleController();

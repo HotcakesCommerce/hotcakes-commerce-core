@@ -32,6 +32,9 @@ using System.Web.UI.WebControls;
 
 namespace Hotcakes.Modules.Cart
 {
+    /// <summary>
+    /// Provides module settings for the cart module.
+    /// </summary>
     public partial class Settings : HotcakesSettingsBase
     {
         #region Implementation
@@ -51,6 +54,9 @@ namespace Hotcakes.Modules.Cart
 
         #region ModuleSettingsBase overrides
 
+        /// <summary>
+        /// Loads the cart module settings into the controls.
+        /// </summary>
         public override void LoadSettings()
         {
             if (!IsPostBack)
@@ -68,6 +74,9 @@ namespace Hotcakes.Modules.Cart
             }
         }
 
+        /// <summary>
+        /// Saves the cart module settings from the controls.
+        /// </summary>
         public override void UpdateSettings()
         {
             var controller = new ModuleController();

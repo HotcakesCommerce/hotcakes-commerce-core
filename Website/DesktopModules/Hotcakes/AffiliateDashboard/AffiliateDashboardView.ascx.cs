@@ -29,6 +29,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.AffiliateDashboard
 {
+    /// <summary>
+    /// Hosts the storefront affiliate dashboard view.
+    /// </summary>
     public partial class AffiliateDashboardView : HotcakesModuleBase
     {
         protected override void OnLoad(EventArgs e)

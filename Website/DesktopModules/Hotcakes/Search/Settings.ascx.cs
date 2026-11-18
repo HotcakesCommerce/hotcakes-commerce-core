@@ -31,6 +31,9 @@ using Hotcakes.Modules.Core.Settings;
 
 namespace Hotcakes.Modules.Search
 {
+    /// <summary>
+    /// Provides module settings for the search module.
+    /// </summary>
     public partial class Settings : HotcakesSettingsBase
     {
         #region Implementation
@@ -50,6 +53,9 @@ namespace Hotcakes.Modules.Search
 
         #region ModuleSettingsBase overrides
 
+        /// <summary>
+        /// Loads the search settings into the controls.
+        /// </summary>
         public override void LoadSettings()
         {
             if (!IsPostBack)
@@ -71,6 +77,9 @@ namespace Hotcakes.Modules.Search
             }
         }
 
+        /// <summary>
+        /// Saves the search settings from the controls.
+        /// </summary>
         public override void UpdateSettings()
         {
             var searchSettings = new SearchModuleSettings(ModuleId) {View = ViewComboBox.SelectedValue};

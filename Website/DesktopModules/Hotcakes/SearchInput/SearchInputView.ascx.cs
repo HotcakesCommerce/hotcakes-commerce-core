@@ -29,6 +29,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.SearchInput
 {
+    /// <summary>
+    /// Hosts the storefront search input view.
+    /// </summary>
     public partial class SearchInputView : HotcakesModuleBase
     {
         protected override string RenderView()

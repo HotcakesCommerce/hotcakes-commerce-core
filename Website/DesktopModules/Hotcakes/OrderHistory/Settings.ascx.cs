@@ -32,6 +32,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.OrderHistory
 {
+    /// <summary>
+    /// Provides module settings for the order history module.
+    /// </summary>
     public partial class Settings : HotcakesSettingsBase
     {
         #region Implementation
@@ -51,6 +54,9 @@ namespace Hotcakes.Modules.OrderHistory
 
         #region ModuleSettingsBase overrides
 
+        /// <summary>
+        /// Loads the order history settings into the controls.
+        /// </summary>
         public override void LoadSettings()
         {
             if (!IsPostBack)
@@ -68,6 +74,9 @@ namespace Hotcakes.Modules.OrderHistory
             }
         }
 
+        /// <summary>
+        /// Saves the order history settings from the controls.
+        /// </summary>
         public override void UpdateSettings()
         {
             var controller = new ModuleController();

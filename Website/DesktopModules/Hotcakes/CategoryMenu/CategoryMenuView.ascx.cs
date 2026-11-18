@@ -30,6 +30,9 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.CategoryMenu
 {
+    /// <summary>
+    /// Hosts the storefront category menu view.
+    /// </summary>
     public partial class CategoryMenuView : HotcakesModuleBase
     {
         protected override string RenderView()

@@ -28,6 +28,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.OrderHistory
 {
+    /// <summary>
+    /// Hosts the storefront order history view.
+    /// </summary>
     public partial class OrderHistoryView : HotcakesModuleBase
     {
         protected override string RenderView()

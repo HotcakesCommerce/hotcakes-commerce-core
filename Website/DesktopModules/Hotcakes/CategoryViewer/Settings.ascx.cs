@@ -37,10 +37,16 @@ using Hotcakes.Modules.Core.Settings;
 
 namespace Hotcakes.Modules.CategoryViewer
 {
+    /// <summary>
+    /// Provides module settings for the category viewer module.
+    /// </summary>
     public partial class Settings : HotcakesSettingsBase
     {
         #region ModuleSettingsBase overrides
 
+        /// <summary>
+        /// Loads the category viewer settings into the controls.
+        /// </summary>
         public override void LoadSettings()
         {
             if (!IsPostBack)
@@ -82,6 +88,9 @@ namespace Hotcakes.Modules.CategoryViewer
             }
         }
 
+        /// <summary>
+        /// Saves the category viewer settings from the controls.
+        /// </summary>
         public override void UpdateSettings()
         {
             var categorySettings = new CategoryModuleSettings(ModuleId);

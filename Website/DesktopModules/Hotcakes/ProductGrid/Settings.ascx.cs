@@ -39,6 +39,9 @@ using Newtonsoft.Json;
 
 namespace Hotcakes.Modules.ProductGrid
 {
+    /// <summary>
+    /// Provides module settings for the product grid module.
+    /// </summary>
     partial class Settings : HotcakesSettingsBase
     {
         protected override void OnInit(EventArgs e)
@@ -49,6 +52,9 @@ namespace Hotcakes.Modules.ProductGrid
             rgProducts.RowCommand += rgProducts_OnItemCommand;
         }
 
+        /// <summary>
+        /// Loads the product grid settings into the controls.
+        /// </summary>
         public override void LoadSettings()
         {
             var viewText = Convert.ToString(ModuleSettings["View"]);
@@ -62,6 +68,9 @@ namespace Hotcakes.Modules.ProductGrid
             }
         }
 
+        /// <summary>
+        /// Saves the product grid settings from the controls.
+        /// </summary>
         public override void UpdateSettings()
         {
             var controller = new ModuleController();

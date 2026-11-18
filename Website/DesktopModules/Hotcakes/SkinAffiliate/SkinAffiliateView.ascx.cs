@@ -31,6 +31,9 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Modules.SkinAffiliate
 {
+    /// <summary>
+    /// Hosts the affiliate tracking skin object.
+    /// </summary>
     public partial class SkinAffiliateView : HotcakesSkinObjectBase
     {
         protected override void OnInit(EventArgs e)

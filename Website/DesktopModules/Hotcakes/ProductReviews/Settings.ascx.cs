@@ -32,6 +32,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.ProductReviews
 {
+    /// <summary>
+    /// Provides module settings for the product reviews module.
+    /// </summary>
     public partial class Settings : HotcakesSettingsBase
     {
         #region Implementation
@@ -51,6 +54,9 @@ namespace Hotcakes.Modules.ProductReviews
 
         #region ModuleSettingsBase overrides
 
+        /// <summary>
+        /// Loads the product reviews settings into the controls.
+        /// </summary>
         public override void LoadSettings()
         {
             if (!IsPostBack)
@@ -68,6 +74,9 @@ namespace Hotcakes.Modules.ProductReviews
             }
         }
 
+        /// <summary>
+        /// Saves the product reviews settings from the controls.
+        /// </summary>
         public override void UpdateSettings()
         {
             var controller = new ModuleController();

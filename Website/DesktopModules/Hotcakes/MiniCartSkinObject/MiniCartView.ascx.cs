@@ -28,6 +28,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.MiniCartSkinObject
 {
+    /// <summary>
+    /// Hosts the mini-cart skin object view.
+    /// </summary>
     public partial class MiniCartView : HotcakesSkinObjectBase
     {
         string ViewName { get; set; } = null;

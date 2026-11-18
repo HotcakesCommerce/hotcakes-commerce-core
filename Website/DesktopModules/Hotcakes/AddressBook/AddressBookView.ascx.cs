@@ -29,6 +29,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.AddressBook
 {
+    /// <summary>
+    /// Hosts the storefront address book view.
+    /// </summary>
     public partial class AddressBookView : HotcakesModuleBase
     {
         protected override string RenderView()

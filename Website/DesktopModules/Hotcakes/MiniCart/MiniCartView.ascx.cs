@@ -29,6 +29,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.MiniCart
 {
+    /// <summary>
+    /// Hosts the storefront mini-cart view.
+    /// </summary>
     public partial class MiniCartView : HotcakesModuleBase
     {
         string ViewName { get; set; } = null;

@@ -31,6 +31,9 @@ using Newtonsoft.Json;
 
 namespace Hotcakes.Modules.ProductGrid
 {
+    /// <summary>
+    /// Hosts the storefront product grid view.
+    /// </summary>
     public partial class ProductGridView : HotcakesModuleBase
     {
         protected override string RenderView()

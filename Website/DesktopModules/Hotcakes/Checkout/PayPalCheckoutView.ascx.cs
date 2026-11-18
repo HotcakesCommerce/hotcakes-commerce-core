@@ -28,6 +28,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.Checkout
 {
+    /// <summary>
+    /// Hosts the PayPal checkout view.
+    /// </summary>
     public partial class PayPalCheckoutView : HotcakesModuleBase
     {
         protected override string RenderView()

@@ -30,6 +30,9 @@ using Hotcakes.Commerce.Payment;
 
 namespace Hotcakes.Modules.Checkout
 {
+    /// <summary>
+    /// Hosts the third-party payment checkout view.
+    /// </summary>
     public partial class ThirdPartyPaymentView : HotcakesModuleBase
     {
         protected Order CurrentOrder

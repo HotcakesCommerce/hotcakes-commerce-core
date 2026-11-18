@@ -28,8 +28,14 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.SkinSearch
 {
+    /// <summary>
+    /// Hosts the search skin object.
+    /// </summary>
     public partial class Search : HotcakesSkinObjectBase
     {
+        /// <summary>
+        /// Gets or sets the storefront view name used to render the search input.
+        /// </summary>
         public string ViewName { get; set; }
 
         protected override string RenderView()
