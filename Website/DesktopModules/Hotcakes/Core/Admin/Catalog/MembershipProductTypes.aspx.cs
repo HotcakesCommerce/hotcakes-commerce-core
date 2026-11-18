@@ -35,6 +35,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
+    /// <summary>
+    /// Provides the administrative page for managing membership product types.
+    /// </summary>
     public partial class MembershipProductTypes : BaseAdminPage
     {
         #region Fields

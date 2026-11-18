@@ -32,23 +32,52 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+	/// <summary>
+	/// Represents the <see cref="OrderTask"/> that performs the AuthorizeGiftCards workflow operation. The stable task identifier is <c>0D569BCD-224B-44ab-9BF5-D87E090D2A1A</c>. Execution and rollback preserve existing order workflow behavior, including persistence, <see cref="WorkflowMessage"/> errors, payment activity, email delivery, and rollback limitations.
+	/// </summary>
 	public class AuthorizeGiftCards : OrderTask
     {
+        /// <summary>
+        /// Creates a new task instance with the same task type and documented constructor defaults.
+        /// </summary>
+        /// <returns>The value produced by this member.</returns>
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override Task Clone()
         {
  	        return new AuthorizeGiftCards();
         }
 
+        /// <summary>
+        /// Gets this task's stable workflow identifier.
+        /// </summary>
+
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override string TaskId()
 		{
 			return "0D569BCD-224B-44ab-9BF5-D87E090D2A1A";
 		}
 
+		/// <summary>
+		/// <summary>
+		/// Documents this public workflow member and preserves its existing behavior.
+		/// </summary>
+		/// </summary>
 		public override string TaskName()
 		{
 			return "Authorize Gift Certificates";
 		}
       
+        /// <summary>
+        /// Executes this order workflow task using the supplied <see cref="OrderTaskContext"/>. The return value controls whether the workflow continues; order changes, persistence, messages, payments, or email follow the existing implementation.
+        /// </summary>
+      
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override bool Execute(OrderTaskContext context)
         {
             var result = true;
@@ -152,6 +181,13 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return result;
         }
 
+        /// <summary>
+        /// Attempts to roll back this task using the supplied <see cref="OrderTaskContext"/>. A successful return does not imply that external persistence, payment processing, account creation, or email delivery was reversed.
+        /// </summary>
+
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override bool Rollback(OrderTaskContext context)
         {
  	        return true;

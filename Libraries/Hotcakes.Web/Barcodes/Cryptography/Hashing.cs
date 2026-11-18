@@ -30,14 +30,30 @@ using System.Text;
 
 namespace Hotcakes.Web.Cryptography
 {
+    /// <summary>
+    /// Provides MD5 hashing helpers that return either Base64 text or raw hash bytes.
+    /// </summary>
     [Serializable]
     public sealed class Hashing
     {
+        /// <summary>
+        /// Computes the MD5 hash of a message and returns it as a Base64 string.
+        /// </summary>
+        /// <param name="message">The message to hash.</param>
+        /// <returns>The MD5 hash encoded as Base64.</returns>
+        /// <see cref="Md5HashToBytes(string)"/>
+        /// <see cref="Md5Hash(string, string)"/>
         public static string Md5Hash(string message)
         {
             return Base64.ConvertToBase64(Md5HashToBytes(message));
         }
 
+        /// <summary>
+        /// Computes the MD5 hash of a message and returns the raw hash bytes.
+        /// </summary>
+        /// <param name="message">The message to hash.</param>
+        /// <returns>The raw MD5 hash bytes.</returns>
+        /// <see cref="Md5Hash(string)"/>
         public static byte[] Md5HashToBytes(string message)
         {
             //The string we wish to encrypt
@@ -62,6 +78,13 @@ namespace Hotcakes.Web.Cryptography
             return hashedDataBytes;
         }
 
+        /// <summary>
+        /// Computes the MD5 hash of a salt followed by a message and returns it as a Base64 string.
+        /// </summary>
+        /// <param name="message">The message to append after <paramref name="salt"/> before hashing.</param>
+        /// <param name="salt">The string to prepend to <paramref name="message"/>.</param>
+        /// <returns>The MD5 hash of the concatenated salt and message, encoded as Base64.</returns>
+        /// <see cref="Md5Hash(string)"/>
         public static string Md5Hash(string message, string salt)
         {
             return Md5Hash(salt + message);

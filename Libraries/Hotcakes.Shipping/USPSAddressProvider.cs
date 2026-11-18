@@ -33,16 +33,37 @@ using Hotcakes.Web.Geography;
 
 namespace Hotcakes.Shipping
 {
+    /// <summary>
+    /// Validates and normalizes postal addresses through the United States Postal Service address verification API.
+    /// </summary>
+    /// <remarks>
+    /// This provider implements the shared <see cref="IAddressProvider" /> contract and uses the supplied USPS API user ID
+    /// when submitting an <see cref="IAddress" /> for verification.
+    /// </remarks>
     public class USPSAddressProvider : IAddressProvider
     {
         private const string _url = "https://production.shippingapis.com/ShippingAPITest.dll?API=Verify&XML=";
         private readonly string _userID;
 
+        /// <summary>
+        /// Initializes a provider that authenticates requests with the specified USPS API user ID.
+        /// </summary>
+        /// <param name="userID">The USPS Web Tools API user ID used for address verification requests.</param>
+        /// <seealso cref="USPSAddressProvider.ValidateAddress" />
+        /// <seealso cref="USPSAddressProvider.NormalizeAddress" />
         public USPSAddressProvider(string userID)
         {
             _userID = userID;
         }
 
+        /// <summary>
+        /// Checks whether the specified address can be verified by USPS without changing the address values.
+        /// </summary>
+        /// <param name="address">The <see cref="IAddress" /> to submit for verification.</param>
+        /// <param name="message">When the method returns, the USPS response text or error description.</param>
+        /// <returns><see langword="true" /> when USPS accepts the address; otherwise, <see langword="false" />.</returns>
+        /// <exception cref="USPSAddressProvider.USPSException">The USPS service returns a top-level error response.</exception>
+        /// <seealso cref="USPSAddressProvider.NormalizeAddress" />
         public bool ValidateAddress(IAddress address, out string message)
         {
             var xmlRes = RequestValidation(address);
@@ -57,6 +78,14 @@ namespace Hotcakes.Shipping
             return false;
         }
 
+        /// <summary>
+        /// Verifies the specified address and replaces its address fields with the USPS-normalized values.
+        /// </summary>
+        /// <param name="address">The <see cref="IAddress" /> whose values should be normalized.</param>
+        /// <param name="message">When the method returns, the USPS response text or error description.</param>
+        /// <returns><see langword="true" /> when USPS returns normalized address data; otherwise, <see langword="false" />.</returns>
+        /// <exception cref="USPSAddressProvider.USPSException">The USPS service returns a top-level error response.</exception>
+        /// <seealso cref="USPSAddressProvider.ValidateAddress" />
         public bool NormalizeAddress(IAddress address, out string message)
         {
             var xmlRes = RequestValidation(address);
@@ -138,8 +167,17 @@ namespace Hotcakes.Shipping
             return subEl.Value;
         }
 
+        /// <summary>
+        /// Represents a top-level error returned while communicating with the USPS address verification service.
+        /// </summary>
+        /// <seealso cref="ApplicationException" />
         public class USPSException : ApplicationException
         {
+            /// <summary>
+            /// Initializes an exception with the USPS-provided error description.
+            /// </summary>
+            /// <param name="message">The error description returned by USPS.</param>
+            /// <seealso cref="ApplicationException" />
             public USPSException(string message)
                 : base(message)
             {

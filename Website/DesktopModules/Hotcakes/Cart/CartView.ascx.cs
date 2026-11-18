@@ -29,6 +29,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.Cart
 {
+    /// <summary>
+    /// Hosts the storefront shopping cart view.
+    /// </summary>
     public partial class CartView : HotcakesModuleBase
     {
         protected override string RenderView()

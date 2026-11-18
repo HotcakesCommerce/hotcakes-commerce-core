@@ -32,13 +32,30 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>
+    /// Issues stored gift cards for gift-card line items and records their generated numbers on the order.
+    /// </summary>
+    /// <remarks>
+    /// The task identifier is <c>203bf29e-52e4-468a-8899-0498f1f48886</c>. Issuance is incremental by the
+    /// <c>hcc/giftCardsIssued</c> line-item property, persists the order after each successful card, and attempts to
+    /// send a notification. Rollback returns success but does not remove issued cards or undo notifications.
+    /// </remarks>
     public class IssueGiftCertificates : OrderTask
     {
+        /// <summary>
+        /// Creates a new gift-certificate issuance task.
+        /// </summary>
+        /// <returns>A new <see cref="IssueGiftCertificates"/> instance.</returns>
         public override Task Clone()
         {
             return new IssueGiftCertificates();
         }
 
+        /// <summary>
+        /// Issues any gift cards not yet issued for gift-card line items and records the issued count.
+        /// </summary>
+        /// <param name="context">The <see cref="OrderTaskContext"/> containing the order and commerce services.</param>
+        /// <returns>Always <see langword="true"/>; failures are added to the context's <c>Errors</c> collection.</returns>
         public override bool Execute(OrderTaskContext context)
         {
             foreach (var item in context.Order.Items)
@@ -139,16 +156,29 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             }
         }
 
+        /// <summary>
+        /// Does not reverse gift-card creation, order persistence, or notification delivery.
+        /// </summary>
+        /// <param name="context">The workflow context.</param>
+        /// <returns>Always <see langword="true"/>.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>
+        /// Gets the stable task identifier used to register this task in workflows.
+        /// </summary>
+        /// <returns><c>203bf29e-52e4-468a-8899-0498f1f48886</c>.</returns>
         public override string TaskId()
         {
             return "203bf29e-52e4-468a-8899-0498f1f48886";
         }
 
+        /// <summary>
+        /// Gets the display name of this task.
+        /// </summary>
+        /// <returns><c>Issue Gift Certificates</c>.</returns>
         public override string TaskName()
         {
             return "Issue Gift Certificates";

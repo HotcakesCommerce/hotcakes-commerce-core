@@ -32,11 +32,16 @@ namespace Hotcakes.CommerceDTO.v1.Contacts
     /// <summary>
     ///     This is the main object that is used for all affiliate management in the REST API
     /// </summary>
-    /// <remarks>The main application equivalent to this is the Affiliate object</remarks>
+    /// <remarks>The main application equivalent to this is the Affiliate object.</remarks>
+    /// <seealso cref="AffiliateReferralDTO"/>
+    /// <seealso cref="AddressDTO"/>
     [DataContract]
     [Serializable]
     public class AffiliateDTO
     {
+        /// <summary>
+        ///     Initializes an affiliate with empty contact values and the default percentage commission settings.
+        /// </summary>
         public AffiliateDTO()
         {
             Id = 0;
@@ -96,7 +101,7 @@ namespace Hotcakes.CommerceDTO.v1.Contacts
         public string DisplayName { get; set; }
 
         /// <summary>
-        ///     The primary or business address for the affiliate
+        ///     The primary or business <see cref="AddressDTO"/> for the affiliate.
         /// </summary>
         [DataMember]
         public AddressDTO Address { get; set; }
@@ -108,7 +113,7 @@ namespace Hotcakes.CommerceDTO.v1.Contacts
         public decimal CommissionAmount { get; set; }
 
         /// <summary>
-        ///     Reflects how the CommissionAmount should be calculated when applying referred purchase commissions
+        ///     Reflects how <see cref="CommissionAmount"/> should be calculated when applying referred purchase commissions.
         /// </summary>
         /// <remarks>Possible values include: None, Percentage, and Flat Rate</remarks>
         [DataMember]

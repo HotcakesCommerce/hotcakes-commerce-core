@@ -34,6 +34,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.SetupWizard
 {
+    /// <summary>
+    /// Provides the payment-settings step of the setup wizard.
+    /// </summary>
     public partial class Step2Payment : HccPart
     {
         #region Properties

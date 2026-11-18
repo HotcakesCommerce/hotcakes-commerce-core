@@ -41,6 +41,7 @@ namespace Hotcakes.Commerce.Marketing
     [Serializable]
     public class DiscountDetail
     {
+        /// <summary>Initializes a discount detail with a new identifier and neutral default values.</summary>
         public DiscountDetail()
         {
             Id = Guid.NewGuid();
@@ -71,7 +72,10 @@ namespace Hotcakes.Commerce.Marketing
         /// </summary>
         public PromotionType DiscountType { get; set; }
 
+        /// <summary>Gets or sets the identifier of the promotion that produced this discount.</summary>
         public long PromotionId { get; set; }
+
+        /// <summary>Gets or sets the identifier of the promotion action that produced this discount.</summary>
         public long ActionId { get; set; }
 
         /// <summary>
@@ -104,7 +108,8 @@ namespace Hotcakes.Commerce.Marketing
         ///     Accepts an XML version of a DiscountDetail list and returns them in a DiscountDetail list.
         /// </summary>
         /// <param name="xml">XML version of DiscountDetail list to parse.</param>
-        /// <returns>List of DiscountDetail</returns>
+        /// <returns>A list parsed from the XML; an empty list is returned for blank input or no detail elements.</returns>
+        /// <exception cref="FormatException">The XML is not well formed.</exception>
         public static List<DiscountDetail> ListFromXml(string xml)
         {
             var result = new List<DiscountDetail>();
@@ -167,7 +172,7 @@ namespace Hotcakes.Commerce.Marketing
         /// <summary>
         ///     Allows you to convert the current discount detail object to the DTO equivalent for use with the REST API
         /// </summary>
-        /// <returns>A new instance of DiscountDetailDTO</returns>
+        /// <returns>A new instance of <see cref="DiscountDetailDTO"/> containing the transferable fields.</returns>
         public DiscountDetailDTO ToDto()
         {
             var dto = new DiscountDetailDTO();
@@ -182,7 +187,7 @@ namespace Hotcakes.Commerce.Marketing
         /// <summary>
         ///     Allows you to populate the current DiscountDetail object using a DiscountDetailDTO instance
         /// </summary>
-        /// <param name="dto">An instance of the discount detail from the REST API</param>
+        /// <param name="dto">An instance of the discount detail from the REST API; null is ignored.</param>
         public void FromDto(DiscountDetailDTO dto)
         {
             if (dto == null) return;

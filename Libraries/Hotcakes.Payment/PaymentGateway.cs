@@ -28,9 +28,24 @@ using System;
 
 namespace Hotcakes.Payment
 {
+    /// <summary>
+    /// Provides the base implementation for gateways that process credit-card transactions.
+    /// </summary>
+    /// <seealso cref="GatewayBase" />
     [Serializable]
     public abstract class PaymentGateway : GatewayBase
     {
+        /// <summary>
+        /// Dispatches a transaction to the operation associated with its action.
+        /// </summary>
+        /// <param name="t">The transaction to process.</param>
+        /// <remarks>
+        /// Derived gateways override the protected operation methods to provide provider-specific
+        /// behavior. Unsupported operations and processing failures are recorded on
+        /// <see cref="Transaction.Result" />.
+        /// </remarks>
+        /// <seealso cref="ActionType" />
+        /// <seealso cref="Transaction" />
         public virtual void ProcessTransaction(Transaction t)
         {
             try
@@ -62,26 +77,51 @@ namespace Hotcakes.Payment
             }
         }
 
+        /// <summary>
+        /// Authorizes the transaction amount without completing the charge.
+        /// </summary>
+        /// <param name="t">The transaction to authorize.</param>
+        /// <remarks>Derived gateways override this method when authorization is supported.</remarks>
         protected virtual void Authorize(Transaction t)
         {
             NotSupported(t);
         }
 
+        /// <summary>
+        /// Charges the transaction amount.
+        /// </summary>
+        /// <param name="t">The transaction to charge.</param>
+        /// <remarks>Derived gateways override this method when charging is supported.</remarks>
         protected virtual void Charge(Transaction t)
         {
             NotSupported(t);
         }
 
+        /// <summary>
+        /// Captures a previously authorized transaction.
+        /// </summary>
+        /// <param name="t">The transaction to capture.</param>
+        /// <remarks>Derived gateways override this method when capture is supported.</remarks>
         protected virtual void Capture(Transaction t)
         {
             NotSupported(t);
         }
 
+        /// <summary>
+        /// Refunds a previously charged transaction.
+        /// </summary>
+        /// <param name="t">The transaction to refund.</param>
+        /// <remarks>Derived gateways override this method when refunds are supported.</remarks>
         protected virtual void Refund(Transaction t)
         {
             NotSupported(t);
         }
 
+        /// <summary>
+        /// Voids an authorization or otherwise reverses an unsettled transaction.
+        /// </summary>
+        /// <param name="t">The transaction to void.</param>
+        /// <remarks>Derived gateways override this method when voids are supported.</remarks>
         protected virtual void Void(Transaction t)
         {
             NotSupported(t);

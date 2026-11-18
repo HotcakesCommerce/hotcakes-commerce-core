@@ -26,12 +26,23 @@
 
 namespace Hotcakes.Commerce.BusinessRules
 {
+    /// <summary>Base class for order tasks that hand checkout to an external payment provider.</summary>
+    /// <remarks>Only the task whose <see cref="PaymentMethodId"/> matches the <c>MethodId</c> input processes checkout; other tasks return success without changing the order.</remarks>
     public abstract class ThirdPartyCheckoutOrderTask : OrderTask
     {
+        /// <summary>Gets the payment method identifier handled by this task.</summary>
+        /// <value>The exact identifier compared with the workflow input named <c>MethodId</c>.</value>
         public abstract string PaymentMethodId { get; }
 
+        /// <summary>Starts checkout with the selected third-party provider.</summary>
+        /// <param name="context">The order context containing the order and provider input.</param>
+        /// <returns><c>true</c> when provider processing succeeds; otherwise, <c>false</c>.</returns>
         public abstract bool ProcessCheckout(OrderTaskContext context);
 
+        /// <summary>Matches the selected provider, assigns an order number when needed, and starts checkout.</summary>
+        /// <param name="context">The order context whose <c>MethodId</c> input selects this provider.</param>
+        /// <returns>The result of <see cref="ProcessCheckout(OrderTaskContext)"/> for a matching provider; otherwise, <c>true</c>.</returns>
+        /// <remarks>A missing order number is persisted before provider processing so external payment systems can display the invoice number.</remarks>
         public override bool Execute(OrderTaskContext context)
         {
             if (context.Inputs["MethodId"] != null && context.Inputs["MethodId"].Value == PaymentMethodId)

@@ -26,13 +26,25 @@
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>
+    /// Specifies the basis and calculation mode used by a <see cref="PriceGroup"/>.
+    /// </summary>
+    /// <remarks>
+    /// The numeric values are serialized and persisted; retain them for compatibility with existing price groups and DTOs.
+    /// </remarks>
     public enum PricingTypes
     {
+        /// <summary>Subtracts a percentage of the product MSRP from the list price basis.</summary>
         PercentageOffListPrice = 0,
+        /// <summary>Subtracts a fixed amount from the product MSRP.</summary>
         AmountOffListPrice = 1,
+        /// <summary>Adds a percentage to the product cost.</summary>
         PercentageAboveCost = 2,
+        /// <summary>Adds a fixed amount to the product cost.</summary>
         AmountAboveCost = 3,
+        /// <summary>Subtracts a percentage of the current site price.</summary>
         PercentageOffSitePrice = 4,
+        /// <summary>Subtracts a fixed amount from the current site price.</summary>
         AmountOffSitePrice = 5
     }
 }

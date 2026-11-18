@@ -28,13 +28,30 @@ using System;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>
+    /// Redirects an anonymous checkout request to the login page.
+    /// </summary>
+    /// <remarks>
+    /// The task identifier is <c>141375d5-6dcd-4ab1-8f2f-515b2d5c5778</c>. The redirect target is
+    /// <c>~/login.aspx?ReturnTo=Checkout</c>. Redirect exceptions are logged and do not fail the workflow;
+    /// rollback has no effect.
+    /// </remarks>
     public class RequireLoginBeforeCheckout : OrderTask
     {
+        /// <summary>
+        /// Creates a new login-requirement task.
+        /// </summary>
+        /// <returns>A new <see cref="RequireLoginBeforeCheckout"/> instance.</returns>
         public override Task Clone()
         {
             return new RequireLoginBeforeCheckout();
         }
 
+        /// <summary>
+        /// Redirects to checkout login when the workflow user identifier is empty.
+        /// </summary>
+        /// <param name="context">The <see cref="OrderTaskContext"/> containing the current request.</param>
+        /// <returns>Always <see langword="true"/>; redirect exceptions are logged.</returns>
         public override bool Execute(OrderTaskContext context)
         {
             try
@@ -55,16 +72,29 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return true;
         }
 
+        /// <summary>
+        /// Does not undo a redirect or otherwise change the request.
+        /// </summary>
+        /// <param name="context">The workflow context.</param>
+        /// <returns>Always <see langword="true"/>.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>
+        /// Gets the stable task identifier used to register this task in workflows.
+        /// </summary>
+        /// <returns><c>141375d5-6dcd-4ab1-8f2f-515b2d5c5778</c>.</returns>
         public override string TaskId()
         {
             return "141375d5-6dcd-4ab1-8f2f-515b2d5c5778";
         }
 
+        /// <summary>
+        /// Gets the display name of this task.
+        /// </summary>
+        /// <returns><c>Require Login Before Checkout</c>.</returns>
         public override string TaskName()
         {
             return "Require Login Before Checkout";

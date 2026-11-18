@@ -30,8 +30,17 @@ using System.Web;
 
 namespace Hotcakes.Web
 {
+    /// <summary>
+    /// Provides helpers for constructing URL query strings.
+    /// </summary>
+    /// <seealso cref="NameValueCollection"/>
     public static class Url
     {
+        /// <summary>
+        /// Builds a URL-encoded query string from a collection of parameter values.
+        /// </summary>
+        /// <param name="parameters">The parameter names and values to encode.</param>
+        /// <returns>The parameters joined with ampersands, with values encoded by <see cref="HttpUtility.UrlEncode(string)"/>.</returns>
         public static string BuldQueryString(NameValueCollection parameters)
         {
             var queryParameters = Array.ConvertAll(parameters.AllKeys,

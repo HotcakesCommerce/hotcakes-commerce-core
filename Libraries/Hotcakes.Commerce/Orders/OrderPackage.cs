@@ -49,6 +49,9 @@ namespace Hotcakes.Commerce.Orders
     {
         private const string TrackingNumberMarkup = "<a href=\"{0}\">{1}</a>";
 
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         public OrderPackage()
         {
             Id = 0;
@@ -78,6 +81,9 @@ namespace Hotcakes.Commerce.Orders
         /// </summary>
         /// <param name="context">An instance of the Hotcakes Request context.</param>
         /// <returns>List of HtmlTemplateTag</returns>
+        /// <summary>
+        /// Provides the GetReplaceableTags operation while preserving the established order-domain behavior.
+        /// </summary>
         public List<HtmlTemplateTag> GetReplaceableTags(HccRequestContext context)
         {
             var result = new List<HtmlTemplateTag>();
@@ -225,6 +231,9 @@ namespace Hotcakes.Commerce.Orders
         ///     Creates a copy of the current order package.
         /// </summary>
         /// <returns>OrderPackage</returns>
+        /// <summary>
+        /// Provides the Clone operation while preserving the established order-domain behavior.
+        /// </summary>
         public OrderPackage Clone()
         {
             var memoryStream = new MemoryStream();
@@ -243,95 +252,152 @@ namespace Hotcakes.Commerce.Orders
         /// <summary>
         ///     This is the ID of the current order package.
         /// </summary>
+        /// <summary>
+        /// The id.
+        /// </summary>
         public long Id { get; set; }
 
         /// <summary>
         ///     This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
+        /// </summary>
+        /// <summary>
+        /// The store id.
         /// </summary>
         public long StoreId { get; set; }
 
         /// <summary>
         ///     The last updated date is used for auditing purposes to know when the order package was last updated.
         /// </summary>
+        /// <summary>
+        /// The last updated utc.
+        /// </summary>
         public DateTime LastUpdatedUtc { get; set; }
 
         /// <summary>
         ///     A listing of the products or line items in the order package
+        /// </summary>
+        /// <summary>
+        /// The items.
         /// </summary>
         public List<OrderPackageItem> Items { get; set; }
 
         /// <summary>
         ///     A description of the package consisting of the SKU and product names.
         /// </summary>
+        /// <summary>
+        /// The description.
+        /// </summary>
         public string Description { get; set; }
 
         /// <summary>
         ///     The unique ID of the order that this package belongs to.
+        /// </summary>
+        /// <summary>
+        /// The order id.
         /// </summary>
         public string OrderId { get; set; }
 
         /// <summary>
         ///     The width of the package.
         /// </summary>
+        /// <summary>
+        /// The width.
+        /// </summary>
         public decimal Width { get; set; }
 
         /// <summary>
         ///     The height of the package.
+        /// </summary>
+        /// <summary>
+        /// The height.
         /// </summary>
         public decimal Height { get; set; }
 
         /// <summary>
         ///     The length of the package.
         /// </summary>
+        /// <summary>
+        /// The length.
+        /// </summary>
         public decimal Length { get; set; }
 
         /// <summary>
         ///     The units used to measure the dimensions of the package.
+        /// </summary>
+        /// <summary>
+        /// The size units.
         /// </summary>
         public LengthType SizeUnits { get; set; }
 
         /// <summary>
         ///     The weight of the package.
         /// </summary>
+        /// <summary>
+        /// The weight.
+        /// </summary>
         public decimal Weight { get; set; }
 
         /// <summary>
         ///     The units used to measure the weight of the package.
+        /// </summary>
+        /// <summary>
+        /// The weight units.
         /// </summary>
         public WeightType WeightUnits { get; set; }
 
         /// <summary>
         ///     The unique ID of the shipping provider used for this package.
         /// </summary>
+        /// <summary>
+        /// The shipping provider id.
+        /// </summary>
         public string ShippingProviderId { get; set; }
 
         /// <summary>
         ///     The service code used by the shipping provider to describe the type of package.
+        /// </summary>
+        /// <summary>
+        /// The shipping provider service code.
         /// </summary>
         public string ShippingProviderServiceCode { get; set; }
 
         /// <summary>
         ///     A unique ID used by the shipping provider to track the package.
         /// </summary>
+        /// <summary>
+        /// The tracking number.
+        /// </summary>
         public string TrackingNumber { get; set; }
 
         /// <summary>
         ///     A boolean value to determine if the package has shipped or not.
+        /// </summary>
+        /// <summary>
+        /// The has shipped.
         /// </summary>
         public bool HasShipped { get; set; }
 
         /// <summary>
         ///     The date/time stamp with the package shipped.
         /// </summary>
+        /// <summary>
+        /// The ship date utc.
+        /// </summary>
         public DateTime ShipDateUtc { get; set; }
 
         /// <summary>
         ///     A shipping estimate returned from the shipping provider.
         /// </summary>
+        /// <summary>
+        /// The estimated shipping cost.
+        /// </summary>
         public decimal EstimatedShippingCost { get; set; }
 
         /// <summary>
         ///     The unique ID of the shipping provider method
+        /// </summary>
+        /// <summary>
+        /// The shipping method id.
         /// </summary>
         public string ShippingMethodId { get; set; }
 
@@ -341,6 +407,9 @@ namespace Hotcakes.Commerce.Orders
         /// <remarks>
         ///     Highly useful for things like ERP integrations.
         /// </remarks>
+        /// <summary>
+        /// The custom properties.
+        /// </summary>
         public CustomPropertyCollection CustomProperties { get; set; }
 
         #endregion
@@ -351,6 +420,9 @@ namespace Hotcakes.Commerce.Orders
         ///     Creates and returns an XML-serialized version of the line items or products in this package.
         /// </summary>
         /// <returns>String - XML representation of the line items in the current package.</returns>
+        /// <summary>
+        /// Provides the ItemsToXml operation while preserving the established order-domain behavior.
+        /// </summary>
         public string ItemsToXml()
         {
             var result = string.Empty;
@@ -371,6 +443,9 @@ namespace Hotcakes.Commerce.Orders
             return result;
         }
 
+        /// <summary>
+        /// Provides the ItemsFromXml operation while preserving the established order-domain behavior.
+        /// </summary>
         public bool ItemsFromXml(string data)
         {
             var result = false;
@@ -403,6 +478,9 @@ namespace Hotcakes.Commerce.Orders
         ///     Allows you to convert the current order package object to the DTO equivalent for use with the REST API
         /// </summary>
         /// <returns>A new instance of OrderPackageDTO</returns>
+        /// <summary>
+        /// Provides the ToDto operation while preserving the established order-domain behavior.
+        /// </summary>
         public OrderPackageDTO ToDto()
         {
             var dto = new OrderPackageDTO();
@@ -445,6 +523,9 @@ namespace Hotcakes.Commerce.Orders
         ///     Allows you to populate the current order package object using a OrderPackageDTO instance
         /// </summary>
         /// <param name="dto">An instance of the order package from the REST API</param>
+        /// <summary>
+        /// Provides the FromDto operation while preserving the established order-domain behavior.
+        /// </summary>
         public void FromDto(OrderPackageDTO dto)
         {
             if (dto == null) return;

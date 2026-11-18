@@ -29,13 +29,31 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>
+    /// Runs the payment-complete workflow when an order is paid or recurring.
+    /// </summary>
+    /// <remarks>
+    /// The public type spelling intentionally remains <c>RunWorkFlowIfPaid</c>. Its task identifier is
+    /// <c>6565A823-1591-4069-8005-2FEE50E4C9E9</c>. A child-workflow failure adds the customer-visible
+    /// <c>An Error Occurred While Trying To Process Your Request, Please Try Again.</c> message and the task also
+    /// registers the order-paid analytics event. Rollback does not undo child-workflow work or analytics.
+    /// </remarks>
     public class RunWorkFlowIfPaid : OrderTask
     {
+        /// <summary>
+        /// Creates a new paid-order workflow task.
+        /// </summary>
+        /// <returns>A new <see cref="RunWorkFlowIfPaid"/> instance.</returns>
         public override Task Clone()
         {
             return new RunWorkFlowIfPaid();
         }
 
+        /// <summary>
+        /// Runs the payment-complete workflow for paid or recurring orders and records the paid analytics event.
+        /// </summary>
+        /// <param name="context">The <see cref="OrderTaskContext"/> passed to the child workflow.</param>
+        /// <returns>The child workflow result when applicable; otherwise <see langword="true"/>.</returns>
         public override bool Execute(OrderTaskContext context)
         {
             if (context.Order.PaymentStatus == OrderPaymentStatus.Paid || context.Order.IsRecurring)
@@ -56,16 +74,29 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return true;
         }
 
+        /// <summary>
+        /// Does not reverse payment-complete workflow work or the analytics event.
+        /// </summary>
+        /// <param name="context">The workflow context.</param>
+        /// <returns>Always <see langword="true"/>.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>
+        /// Gets the stable task identifier used to register this task in workflows.
+        /// </summary>
+        /// <returns><c>6565A823-1591-4069-8005-2FEE50E4C9E9</c>.</returns>
         public override string TaskId()
         {
             return "6565A823-1591-4069-8005-2FEE50E4C9E9";
         }
 
+        /// <summary>
+        /// Gets the display name of this task.
+        /// </summary>
+        /// <returns><c>Run Payment Complete Workflow if Paid</c>.</returns>
         public override string TaskName()
         {
             return "Run Payment Complete Workflow if Paid";

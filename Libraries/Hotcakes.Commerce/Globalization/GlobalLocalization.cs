@@ -26,6 +26,15 @@
 
 namespace Hotcakes.Commerce.Globalization
 {
+    /// <summary>
+    /// Provides access to the application's global view resource file.
+    /// </summary>
+    /// <remarks>
+    /// Each lookup creates a helper for the resource path formed from
+    /// <see cref="HotcakesApplication.ViewsVirtualPath"/> and
+    /// <c>/Views/App_LocalResources/GlobalResources.resx</c>. The path and per-call
+    /// helper creation are compatibility-sensitive parts of the global lookup contract.
+    /// </remarks>
     public static class GlobalLocalization
     {
         private static ILocalizationHelper Localization
@@ -38,16 +47,33 @@ namespace Hotcakes.Commerce.Globalization
             }
         }
 
+        /// <summary>
+        /// Gets a localized value from the global resource file using the helper's default culture behavior.
+        /// </summary>
+        /// <param name="key">The resource key to look up.</param>
+        /// <returns>The localized resource value returned by <see cref="ILocalizationHelper.GetString(string)"/>.</returns>
         public static string GetString(string key)
         {
             return Localization.GetString(key);
         }
 
+        /// <summary>
+        /// Gets a localized value from the global resource file for a specified culture.
+        /// </summary>
+        /// <param name="key">The resource key to look up.</param>
+        /// <param name="culture">The culture name passed to the localization helper.</param>
+        /// <returns>The localized resource value returned by <see cref="ILocalizationHelper.GetString(string, string)"/>.</returns>
         public static string GetString(string key, string culture)
         {
             return Localization.GetString(key, culture);
         }
 
+        /// <summary>
+        /// Gets a formatted value from the global resource file.
+        /// </summary>
+        /// <param name="key">The resource key to look up.</param>
+        /// <param name="args">The format arguments passed to the localization helper.</param>
+        /// <returns>The formatted resource value returned by <see cref="ILocalizationHelper.GetFormattedString(string, object[])"/>.</returns>
         public static string GetFormattedString(string key, params object[] args)
         {
             return Localization.GetFormattedString(key, args);

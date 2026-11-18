@@ -33,6 +33,9 @@ namespace Hotcakes.Modules.Core.Admin
 {
     partial class Header : HccUserControl
     {
+        /// <summary>
+        /// Gets or sets the hide menu.
+        /// </summary>
         public bool HideMenu
         {
             get { return !ucMenu.Visible; }

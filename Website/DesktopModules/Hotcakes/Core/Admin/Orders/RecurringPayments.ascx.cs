@@ -35,10 +35,15 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Modules.Core.Admin.Orders
 {
+    /// <summary>
+    /// Provides controls for managing recurring payments on an administrative order.
+    /// </summary>
     public partial class RecurringPayments : HccUserControl
     {
+        /// <summary>Occurs when a recurring payment transaction is processed.</summary>
         public TransactionEventDelegate TransactionEvent;
         public Order CurrentOrder { get; set; }
+        /// <summary>Gets or sets the order associated with recurring payments.</summary>
         private OrderPaymentManager PayManager { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)

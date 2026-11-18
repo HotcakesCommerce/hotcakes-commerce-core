@@ -30,6 +30,14 @@ using System.Web.Mvc;
 
 namespace Hotcakes.Commerce.Extensions
 {
+    /// <summary>
+    /// Adds the cache-prevention headers used by HCC MVC actions.
+    /// </summary>
+    /// <remarks>
+    /// The filter sets the response cache policy to <see cref="HttpCacheability.NoCache"/>,
+    /// appends the HCC cache extension, and writes the <c>Pragma</c> and <c>Expires</c>
+    /// headers. It applies these headers after the action has executed.
+    /// </remarks>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
     public class HccCustomHeaders : System.Web.Mvc.ActionFilterAttribute
     {
@@ -39,6 +47,14 @@ namespace Hotcakes.Commerce.Extensions
         private const string HEADER_EXPIRES_KEY = "Expires";
         private const string HEADER_EXPIRES_VALUE = "0";
 
+        /// <summary>
+        /// Applies HCC's no-cache response headers after an MVC action executes.
+        /// </summary>
+        /// <param name="context">The MVC action execution context whose response is updated.</param>
+        /// <remarks>
+        /// The literal header values are compatibility-sensitive and are intentionally
+        /// preserved. The base implementation is called after the HCC headers are set.
+        /// </remarks>
         [OutputCache(Location = System.Web.UI.OutputCacheLocation.None)]
         public override void OnActionExecuted(ActionExecutedContext context)
         {

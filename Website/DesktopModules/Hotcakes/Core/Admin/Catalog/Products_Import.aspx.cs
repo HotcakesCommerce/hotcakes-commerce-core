@@ -42,6 +42,9 @@ using ErrorTypes = Hotcakes.Modules.Core.Admin.AppCode.ErrorTypes;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
+	/// <summary>
+	/// Provides the administrative page for importing products.
+	/// </summary>
 	public partial class Products_Import : BaseAdminPage
 	{
 		#region Fields
@@ -168,9 +171,13 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 
 		private class ImportConfiguration
 		{
+			/// <summary>Gets or sets the commerce request context for the import operation.</summary>
 			public HccRequestContext HccRequestContext { get; set; }
+			/// <summary>Gets or sets the HTTP context for the import operation.</summary>
 			public HttpContext HttpContext { get; set; }
+			/// <summary>Gets or sets the session state for the import operation.</summary>
 			public HttpSessionState Session { get; set; }
+			/// <summary>Gets or sets the DNN portal settings for the import operation.</summary>
 			public PortalSettings DnnPortalSettings { get; set; }
 		}
 

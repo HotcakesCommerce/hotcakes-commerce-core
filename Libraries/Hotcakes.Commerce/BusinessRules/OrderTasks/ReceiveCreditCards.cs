@@ -34,8 +34,22 @@ using System.Linq;
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
 
+	/// <summary>
+	/// Processes outstanding credit-card information transactions for the order.
+	/// </summary>
+	/// <remarks>
+	/// The task identifier is <c>253305A6-87A4-4bcc-AA98-8A082E2D8162</c>. Transactions are considered newest first;
+	/// existing successful holds or charges are skipped, and processing stops when the amount due is covered. The task
+	/// uses either a hold or charge according to store settings, records gateway transactions, and places the order on
+	/// hold with the customer-visible payment error when processing fails. Rollback does not void or remove payments.
+	/// </remarks>
 	public class ReceiveCreditCards : OrderTask
 	{
+		/// <summary>
+		/// Processes credit-card transactions until the order's authorized amount due is covered.
+		/// </summary>
+		/// <param name="context">The <see cref="OrderTaskContext"/> containing the order, payment input, and commerce services.</param>
+		/// <returns><see langword="false"/> when a payment transaction fails; otherwise <see langword="true"/>.</returns>
 		public override bool Execute(OrderTaskContext context)
 		{
 			bool result = true;
@@ -184,20 +198,37 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return null;
         }
 
+        /// <summary>
+        /// Does not reverse gateway charges or holds created during execution.
+        /// </summary>
+        /// <param name="context">The workflow context.</param>
+        /// <returns>Always <see langword="true"/>.</returns>
         public override bool Rollback(OrderTaskContext context)
 		{
 			return true;
 		}
 
+		/// <summary>
+		/// Gets the stable task identifier used to register this task in workflows.
+		/// </summary>
+		/// <returns><c>253305A6-87A4-4bcc-AA98-8A082E2D8162</c>.</returns>
 		public override string TaskId()
 		{
 			return "253305A6-87A4-4bcc-AA98-8A082E2D8162";
 		}
 
+		/// <summary>
+		/// Gets the display name of this task.
+		/// </summary>
+		/// <returns><c>Receive Credit Cards</c>.</returns>
 		public override string TaskName()
 		{
 			return "Receive Credit Cards";
 		}
+		/// <summary>
+		/// Creates a new credit-card receiving task.
+		/// </summary>
+		/// <returns>A new <see cref="ReceiveCreditCards"/> instance.</returns>
 		public override Task Clone()
 		{
 			return new ReceiveCreditCards();

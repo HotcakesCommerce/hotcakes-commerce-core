@@ -35,6 +35,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.People
 {
+    /// <summary>
+    /// Provides the administrative page for managing store roles.
+    /// </summary>
     public partial class RoleAdministration : BaseAdminPage
     {
         #region Event handlers

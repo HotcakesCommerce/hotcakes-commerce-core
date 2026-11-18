@@ -28,8 +28,15 @@ using System.Collections.Generic;
 
 namespace Hotcakes.CommerceDTO.v1
 {
+    /// <summary>
+    /// Defines the error collection exposed by an API response.
+    /// </summary>
     public interface IApiResponse
     {
+        /// <summary>
+        /// Gets or sets the errors returned by the API operation.
+        /// </summary>
+        /// <remarks>An empty collection indicates that no API errors were returned.</remarks>
         List<ApiError> Errors { get; set; }
     }
 }

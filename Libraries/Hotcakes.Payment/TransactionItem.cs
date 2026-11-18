@@ -28,12 +28,19 @@ using System;
 
 namespace Hotcakes.Payment
 {
+    /// <summary>
+    /// Represents a line item included in a payment <see cref="Transaction"/>.
+    /// </summary>
     [Serializable]
     public class TransactionItem
     {
+        /// <summary>Gets or sets the item description.</summary>
         public string Description { get; set; }
+        /// <summary>Gets or sets the total amount for this line.</summary>
         public decimal LineTotal { get; set; }
+        /// <summary>Gets or sets the stock-keeping unit for this line.</summary>
         public string Sku { get; set; }
+        /// <summary>Gets or sets a value indicating whether this line does not require shipping.</summary>
         public bool IsNonShipping { get; set; }
     }
 }

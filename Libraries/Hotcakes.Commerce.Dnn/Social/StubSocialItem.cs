@@ -29,14 +29,24 @@ using Hotcakes.Commerce.Social;
 
 namespace Hotcakes.Commerce.Dnn.Social
 {
+    /// <summary>
+    /// Provides an empty social item implementation when no DNN content item is available.
+    /// </summary>
     [Serializable]
     public class StubSocialItem : ISocialItem
     {
+        /// <summary>
+        /// Gets the placeholder content-item identifier.
+        /// </summary>
         public int ContentItemId
         {
             get { return -1; }
         }
 
+        /// <summary>
+        /// Gets the JSON representation of this placeholder social item.
+        /// </summary>
+        /// <returns>An empty JSON representation.</returns>
         public string ToJson()
         {
             return string.Empty;

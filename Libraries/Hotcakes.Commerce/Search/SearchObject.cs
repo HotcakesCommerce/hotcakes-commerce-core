@@ -28,9 +28,15 @@ using System;
 
 namespace Hotcakes.Commerce.Search
 {
+    /// <summary>
+    /// Represents an object tracked by the commerce search index.
+    /// </summary>
     [Serializable]
     public class SearchObject
     {
+        /// <summary>
+        /// Initializes a search object with compatibility defaults, including a 1900-01-01 UTC index timestamp.
+        /// </summary>
         public SearchObject()
         {
             Id = 0;
@@ -41,11 +47,29 @@ namespace Hotcakes.Commerce.Search
             LastIndexUtc = new DateTime(1900, 1, 1);
         }
 
+        /// <summary>
+        /// Gets or sets the persistent search-object identifier.
+        /// </summary>
         public long Id { get; set; }
+        /// <summary>
+        /// Gets or sets the application-defined object type value.
+        /// </summary>
         public int ObjectType { get; set; }
+        /// <summary>
+        /// Gets or sets the identifier of the indexed object.
+        /// </summary>
         public Guid ObjectId { get; set; }
+        /// <summary>
+        /// Gets or sets the site identifier that owns the indexed object.
+        /// </summary>
         public long SiteId { get; set; }
+        /// <summary>
+        /// Gets or sets the title stored for the indexed object.
+        /// </summary>
         public string Title { get; set; }
+        /// <summary>
+        /// Gets or sets the UTC date and time when the object was last indexed.
+        /// </summary>
         public DateTime LastIndexUtc { get; set; }
     }
 }

@@ -42,6 +42,9 @@ namespace Hotcakes.Commerce.Catalog
     {
         private readonly ProductFileAssociationRepository crosses;
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductFileRepository(HccRequestContext c)
             : base(c)
         {
@@ -49,6 +52,9 @@ namespace Hotcakes.Commerce.Catalog
         }
 
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyDataToModel(hcc_ProductFile data, ProductFile model)
         {
             model.Bvin = DataTypeHelper.GuidToBvin(data.bvin);
@@ -68,6 +74,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyModelToData(hcc_ProductFile data, ProductFile model)
         {
             data.bvin = DataTypeHelper.BvinToGuid(model.Bvin);
@@ -77,6 +86,9 @@ namespace Hotcakes.Commerce.Catalog
             data.StoreId = model.StoreId;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductFile Find(string bvin)
         {
             var result = FindForAllStores(bvin);
@@ -90,12 +102,18 @@ namespace Hotcakes.Commerce.Catalog
             return null;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductFile FindForAllStores(string bvin)
         {
             var guid = DataTypeHelper.BvinToGuid(bvin);
             return FindFirstPoco(y => y.bvin == guid);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public override bool Create(ProductFile item)
         {
             item.LastUpdated = DateTime.UtcNow;
@@ -107,6 +125,9 @@ namespace Hotcakes.Commerce.Catalog
             return base.Create(item);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool Update(ProductFile c)
         {
             if (c.StoreId != Context.CurrentStore.Id)
@@ -118,6 +139,9 @@ namespace Hotcakes.Commerce.Catalog
             return Update(c, y => y.bvin == guid);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         protected override void MergeSubItems(ProductFile model)
         {
             if (!string.IsNullOrEmpty(model.ProductId))
@@ -140,6 +164,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool Delete(string bvin)
         {
             var storeId = Context.CurrentStore.Id;
@@ -161,6 +188,9 @@ namespace Hotcakes.Commerce.Catalog
             return Delete(y => y.bvin == guid && y.StoreId == storeId);
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool DeleteForProductId(string productId)
         {
             var storeId = Context.CurrentStore.Id;
@@ -177,6 +207,9 @@ namespace Hotcakes.Commerce.Catalog
             return true;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductFile> FindByProductId(string productId)
         {
             var storeId = Context.CurrentStore.Id;
@@ -203,6 +236,9 @@ namespace Hotcakes.Commerce.Catalog
             return result;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductFile> FindByFileNameAndDescription(string fileName, string description)
         {
             var result = new List<ProductFile>();
@@ -215,6 +251,9 @@ namespace Hotcakes.Commerce.Catalog
             });
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductFile FindByBvinAndProductBvin(string bvin, string productBvin)
         {
             var x = crosses.FindByFileIdAndProductId(bvin, productBvin);
@@ -229,6 +268,9 @@ namespace Hotcakes.Commerce.Catalog
             return null;
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public bool FileAlreadyExists(string fileBvin)
         {
             var f = Find(fileBvin);
@@ -236,6 +278,9 @@ namespace Hotcakes.Commerce.Catalog
             return false;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public int CountOfProductsUsingFile(string fileId)
         {
             var result = 0;
@@ -243,6 +288,9 @@ namespace Hotcakes.Commerce.Catalog
             return result;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<string> FindProductIdsForFile(string fileId)
         {
             var ids = new List<string>();
@@ -254,6 +302,9 @@ namespace Hotcakes.Commerce.Catalog
             return ids;
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool RemoveAssociatedProduct(string fileBvin, string productBvin)
         {
             var x = crosses.FindByFileIdAndProductId(fileBvin, productBvin);
@@ -261,6 +312,9 @@ namespace Hotcakes.Commerce.Catalog
             return crosses.Delete(x.Id);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool AddAssociatedProduct(string fileBvin, string productBvin, int availableMinutes, int maxDownloads)
         {
             var storeId = Context.CurrentStore.Id;
@@ -274,6 +328,9 @@ namespace Hotcakes.Commerce.Catalog
             return crosses.Create(x);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public int FindAllCount()
         {
             var storeId = Context.CurrentStore.Id;
@@ -284,6 +341,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductFile> FindAll(int pageNumber, int pageSize)
         {
             var storeId = Context.CurrentStore.Id;

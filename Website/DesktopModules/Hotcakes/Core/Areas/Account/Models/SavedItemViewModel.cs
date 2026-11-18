@@ -30,9 +30,11 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Areas.Account.Models
 {
+/// <summary>Combines a saved-item record with its full product presentation model.</summary>
     [Serializable]
     public class SavedItemViewModel
     {
+        /// <summary>Initializes an empty saved-item presentation model.</summary>
         public SavedItemViewModel()
         {
             SavedItem = new WishListItem();

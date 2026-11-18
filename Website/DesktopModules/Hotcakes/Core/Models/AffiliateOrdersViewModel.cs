@@ -53,6 +53,10 @@ namespace Hotcakes.Modules.Core.Models
         /// </summary>
         public string TotalAmount { get; set; }
 
+        /// <summary>
+        /// Performs the ToJson operation for this model.
+        /// </summary>
+        /// <returns>The result of the operation.</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this);
@@ -63,9 +67,21 @@ namespace Hotcakes.Modules.Core.Models
         /// </summary>
         public class OrderViewModel
         {
+            /// <summary>
+            /// Gets or sets the OrderNumber value used by this storefront model.
+            /// </summary>
             public string OrderNumber { get; set; }
+            /// <summary>
+            /// Gets or sets the OrderDate value used by this storefront model.
+            /// </summary>
             public DateTime OrderDate { get; set; }
+            /// <summary>
+            /// Gets or sets the Amount value used by this storefront model.
+            /// </summary>
             public string Amount { get; set; }
+            /// <summary>
+            /// Gets or sets the Commission value used by this storefront model.
+            /// </summary>
             public string Commission { get; set; }
         }
     }

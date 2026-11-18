@@ -35,6 +35,9 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.CreditCard
 {
     partial class Edit : HccPaymentMethodPart
     {
+        /// <summary>
+        /// Gets or sets the has own buttons.
+        /// </summary>
         public override bool HasOwnButtons
         {
             get { return true; }
@@ -86,6 +89,9 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.CreditCard
             lstGateway.DataBind();
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by LoadData.
+        /// </summary>
         public override void LoadData()
         {
             // Skip loading of data when we are returning from gateway editor
@@ -131,6 +137,9 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.CreditCard
             }
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by SaveData.
+        /// </summary>
         public override void SaveData()
         {
             var authorizeOnly = lstCaptureMode.SelectedValue == "1";

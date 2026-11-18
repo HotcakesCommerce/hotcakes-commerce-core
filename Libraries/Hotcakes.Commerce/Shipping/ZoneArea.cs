@@ -26,9 +26,22 @@
 
 namespace Hotcakes.Commerce.Shipping
 {
+    /// <summary>
+    /// Defines one country and optional region component of a <see cref="Zone"/>.
+    /// Values are serialized as part of the zone's area data and are compared case-insensitively by
+    /// <see cref="ZoneRepository.FindAllZonesForAddress"/>.
+    /// </summary>
     public class ZoneArea
     {
+        /// <summary>
+        /// Gets or sets the ISO alpha-3 country code used for matching.
+        /// </summary>
         public string CountryIsoAlpha3 { get; set; }
+
+        /// <summary>
+        /// Gets or sets the region abbreviation used for matching, or an empty value to match every
+        /// region in <see cref="CountryIsoAlpha3"/>.
+        /// </summary>
         public string RegionAbbreviation { get; set; }
     }
 }

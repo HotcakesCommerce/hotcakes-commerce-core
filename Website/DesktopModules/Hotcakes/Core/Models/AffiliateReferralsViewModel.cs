@@ -52,6 +52,10 @@ namespace Hotcakes.Modules.Core.Models
         /// </summary>
         public string TotalAmount { get; set; }
 
+        /// <summary>
+        /// Performs the ToJson operation for this model.
+        /// </summary>
+        /// <returns>The result of the operation.</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this);
@@ -62,9 +66,21 @@ namespace Hotcakes.Modules.Core.Models
         /// </summary>
         public class ReferalViewModel
         {
+            /// <summary>
+            /// Gets or sets the Name value used by this storefront model.
+            /// </summary>
             public string Name { get; set; }
+            /// <summary>
+            /// Gets or sets the Id value used by this storefront model.
+            /// </summary>
             public string Id { get; set; }
+            /// <summary>
+            /// Gets or sets the Email value used by this storefront model.
+            /// </summary>
             public string Email { get; set; }
+            /// <summary>
+            /// Gets or sets the Revenue value used by this storefront model.
+            /// </summary>
             public string Revenue { get; set; }
         }
     }

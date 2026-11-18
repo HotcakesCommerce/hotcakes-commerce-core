@@ -26,12 +26,18 @@
 
 namespace Hotcakes.Commerce.Marketing
 {
+    /// <summary>Describes the state calculated for a promotion at the current UTC time.</summary>
     public enum PromotionStatus
     {
+        /// <summary>No recognized status.</summary>
         Unknown = 0,
+        /// <summary>The promotion is not enabled.</summary>
         Disabled = 1,
+        /// <summary>The promotion is enabled and within its effective date range.</summary>
         Active = 2,
+        /// <summary>The promotion starts in the future.</summary>
         Upcoming = 3,
+        /// <summary>The promotion's end date has passed.</summary>
         Expired = 4
     }
 }

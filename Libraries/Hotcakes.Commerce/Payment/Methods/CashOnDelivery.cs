@@ -28,24 +28,30 @@ using System;
 
 namespace Hotcakes.Commerce.Payment.Methods
 {
+    /// <summary>Built-in cash-on-delivery checkout method.</summary>
     [Serializable]
     public class CashOnDelivery : PaymentMethod
     {
+        /// <summary>Gets the stable cash-on-delivery method identifier.</summary>
         public override string MethodId
         {
             get { return Id(); }
         }
 
+        /// <summary>Gets the serialized display name, <c>CashOnDelivery</c>.</summary>
         public override string MethodName
         {
             get { return "CashOnDelivery"; }
         }
 
+        /// <summary>Gets the checkout ordering value, 700.</summary>
         public override int SortIndex
         {
             get { return 700; }
         }
 
+        /// <summary>Returns the stable identifier used by <see cref="PaymentMethods"/>.</summary>
+        /// <returns>The cash-on-delivery method identifier.</returns>
         public static string Id()
         {
             return PaymentMethods.CashOnDeliveryId;

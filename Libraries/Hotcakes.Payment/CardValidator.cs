@@ -29,16 +29,20 @@ using System;
 namespace Hotcakes.Payment
 {
     /// <summary>
-    ///     This is the class used to help validate the credit card numbers that are input into the system.
+    /// Provides helpers for identifying and validating credit-card numbers.
     /// </summary>
+    /// <remarks>
+    /// The helpers normalize input to ASCII digits before applying card-type prefixes, supported
+    /// lengths, and the Mod-10 check used by this library.
+    /// </remarks>
     [Serializable]
     public static class CardValidator
     {
         /// <summary>
-        ///     This method will return the type of the credit card, based upon the credit card number provided.
+        /// Determines the card type from a credit-card number.
         /// </summary>
-        /// <param name="number">A credit card number of at least 6 characters in length.</param>
-        /// <returns>The type of the credit card is returned.</returns>
+        /// <param name="number">The credit-card number to inspect; non-digit characters are ignored.</param>
+        /// <returns>The detected <see cref="CardType" />, or <see cref="CardType.Unknown" /> when the prefix is not recognized.</returns>
         public static CardType GetCardTypeFromNumber(string number)
         {
             var cleanNumber = CleanCardNumber(number);
@@ -123,10 +127,10 @@ namespace Hotcakes.Payment
         }
 
         /// <summary>
-        ///     This method will remove any non-numeric values from the card number passed into it.
+        /// Removes non-ASCII-digit characters from a card-number value.
         /// </summary>
-        /// <param name="number">The value to remove unexpected characters from.</param>
-        /// <returns>The original value, with only numeris characters</returns>
+        /// <param name="number">The value from which unexpected characters should be removed.</param>
+        /// <returns>The input value containing only ASCII digits, or <see cref="string.Empty" /> for null, empty, or whitespace input.</returns>
         public static string CleanCardNumber(string number)
         {
             var result = string.Empty;
@@ -148,13 +152,12 @@ namespace Hotcakes.Payment
         }
 
         /// <summary>
-        ///     This method will inspect the credit card number, and determine whether it is valid or not.
+        /// Determines whether a credit-card number is valid for its detected card type.
         /// </summary>
-        /// <param name="number">The full credit card number</param>
-        /// <returns>
-        ///     If the credit card doesn't match the expected format and/or length of the prescribed card number, "false" will
-        ///     be returned.
-        /// </returns>
+        /// <param name="number">The full credit-card number; non-digit characters are ignored.</param>
+        /// <returns><see langword="true" /> when the number passes card-type, length, and Mod-10 validation; otherwise, <see langword="false" />.</returns>
+        /// <seealso cref="GetCardTypeFromNumber(string)" />
+        /// <seealso cref="IsCardNumberValid(string, CardType)" />
         public static bool IsCardNumberValid(string number)
         {
             var type = GetCardTypeFromNumber(number);
@@ -162,14 +165,12 @@ namespace Hotcakes.Payment
         }
 
         /// <summary>
-        ///     This method will inspect the credit card number, and determine whether it is valid or not.
+        /// Determines whether a credit-card number is valid for a specified card type.
         /// </summary>
-        /// <param name="number">The full credit card number</param>
-        /// <param name="type">The type of credit card the number belongs to</param>
-        /// <returns>
-        ///     If the credit card doesn't match the expected format and/or length of the prescribed card number, "false" will
-        ///     be returned.
-        /// </returns>
+        /// <param name="number">The full credit-card number; non-digit characters are ignored.</param>
+        /// <param name="type">The expected <see cref="CardType" />.</param>
+        /// <returns><see langword="true" /> when the detected type matches <paramref name="type" /> and the number passes length and Mod-10 validation; otherwise, <see langword="false" />.</returns>
+        /// <seealso cref="GetCardTypeFromNumber(string)" />
         public static bool IsCardNumberValid(string number, CardType type)
         {
             var cleanCardNumber = CleanCardNumber(number);

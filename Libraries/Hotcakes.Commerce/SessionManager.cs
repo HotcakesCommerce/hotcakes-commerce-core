@@ -35,6 +35,14 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>
+    /// Provides the session, cookie, and current-cart accessors used by Hotcakes Commerce.
+    /// </summary>
+    /// <remarks>
+    /// The static members use the current HTTP request. Session-backed values are stored in the
+    /// current ASP.NET session, while cookie-backed values are written to the response cookie
+    /// collection. The established key names are part of the compatibility contract.
+    /// </remarks>
     public class SessionManager
     {
         private const string CategoryLastIdVariable = "HccCategoryLastVisited";
@@ -72,22 +80,35 @@ namespace Hotcakes.Commerce
         private const string _AdminCustomerKeywords = "HccAdminCustomerKeywords";
         private readonly HttpSessionState _session;
 
+        /// <summary>
+        /// Gets the current <see cref="HotcakesApplication"/> instance.
+        /// </summary>
         public static HotcakesApplication HccApp
         {
             get { return HotcakesApplication.Current; }
         }
 
+        /// <summary>
+        /// Initializes a manager for the specified ASP.NET session state collection.
+        /// </summary>
+        /// <param name="session">The session collection used by instance-scoped administrative values.</param>
         public SessionManager(HttpSessionState session)
         {
             _session = session;
         }
 
+        /// <summary>
+        /// Gets or sets the current administrative language in the <c>HccAdminCurrentLanguage</c> cookie.
+        /// </summary>
         public static string AdminCurrentLanguage
         {
             get { return GetCookieString(_AdminCurrentLanguage); }
             set { SetCookieString(_AdminCurrentLanguage, value); }
         }
 
+        /// <summary>
+        /// Gets or sets the last visited category identifier in the <c>HccCategoryLastVisited</c> session value.
+        /// </summary>
         public static string CategoryLastId
         {
             get { return GetSessionString(CategoryLastIdVariable); }
@@ -96,84 +117,107 @@ namespace Hotcakes.Commerce
 
         // Admin Settings
 
+        /// <summary>Gets or sets the administrative product-search keyword in session.</summary>
         public static string AdminProductCriteriaKeyword
         {
             get { return GetSessionString(_AdminProductSearchCriteriaKeyword); }
             set { SetSessionString(_AdminProductSearchCriteriaKeyword, value); }
         }
 
+        /// <summary>Gets or sets the administrative product-search manufacturer filter in session.</summary>
         public static string AdminProductCriteriaManufacturer
         {
             get { return GetSessionString(_AdminProductSearchCriteriaManufacturer); }
             set { SetSessionString(_AdminProductSearchCriteriaManufacturer, value); }
         }
 
+        /// <summary>Gets or sets the administrative product-search vendor filter in session.</summary>
         public static string AdminProductCriteriaVendor
         {
             get { return GetSessionString(_AdminProductSearchCriteriaVendor); }
             set { SetSessionString(_AdminProductSearchCriteriaVendor, value); }
         }
 
+        /// <summary>Gets or sets the administrative product-search category filter in session.</summary>
         public static string AdminProductCriteriaCategory
         {
             get { return GetSessionString(_AdminProductSearchCriteriaCategory); }
             set { SetSessionString(_AdminProductSearchCriteriaCategory, value); }
         }
 
+        /// <summary>Gets or sets the administrative product-search status filter in session.</summary>
         public static string AdminProductCriteriaStatus
         {
             get { return GetSessionString(_AdminProductSearchCriteriaStatus); }
             set { SetSessionString(_AdminProductSearchCriteriaStatus, value); }
         }
 
+        /// <summary>Gets or sets the administrative product-search inventory-status filter in session.</summary>
         public static string AdminProductCriteriaInventoryStatus
         {
             get { return GetSessionString(_AdminProductSearchCriteriaInventoryStatus); }
             set { SetSessionString(_AdminProductSearchCriteriaInventoryStatus, value); }
         }
 
+        /// <summary>Gets or sets the administrative product-search product-type filter in session.</summary>
         public static string AdminProductCriteriaProductType
         {
             get { return GetSessionString(_AdminProductSearchCriteriaProductType); }
             set { SetSessionString(_AdminProductSearchCriteriaProductType, value); }
         }
 
+        /// <summary>
+        /// Gets or sets the current product-import log in the instance session.
+        /// </summary>
+        /// <remarks>A missing value is returned as a new empty list; the list is not automatically persisted until set.</remarks>
         public List<string> AdminProductImportLog
         {
             get { return (List<string>) GetSessionObjectInt(_AdminProductImportLog) ?? new List<string>(); }
             set { SetSessionObjectInt(_AdminProductImportLog, value); }
         }
 
+        /// <summary>
+        /// Gets or sets product-import progress in the instance session.
+        /// </summary>
+        /// <remarks>A missing value is returned as <c>0</c>.</remarks>
         public double AdminProductImportProgress
         {
             get { return (double?) GetSessionObjectInt(_AdminProductImportProgress) ?? 0; }
             set { SetSessionObjectInt(_AdminProductImportProgress, value); }
         }
 
+        /// <summary>Gets or sets the administrative order-search keyword in session.</summary>
         public static string AdminOrderSearchKeyword
         {
             get { return GetSessionString(_AdminOrderSearchKeyword); }
             set { SetSessionString(_AdminOrderSearchKeyword, value); }
         }
 
+        /// <summary>Gets or sets the administrative order-search payment filter in session.</summary>
         public static string AdminOrderSearchPaymentFilter
         {
             get { return GetSessionString(_AdminOrderSearchPaymentFilter); }
             set { SetSessionString(_AdminOrderSearchPaymentFilter, value); }
         }
 
+        /// <summary>Gets or sets the administrative order-search shipping filter in session.</summary>
         public static string AdminOrderSearchShippingFilter
         {
             get { return GetSessionString(_AdminOrderSearchShippingFilter); }
             set { SetSessionString(_AdminOrderSearchShippingFilter, value); }
         }
 
+        /// <summary>Gets or sets the administrative order-search status filter in session.</summary>
         public static string AdminOrderSearchStatusFilter
         {
             get { return GetSessionString(_AdminOrderSearchStatusFilter); }
             set { SetSessionString(_AdminOrderSearchStatusFilter, value); }
         }
 
+        /// <summary>
+        /// Gets or sets the administrative order-search date range in session.
+        /// </summary>
+        /// <remarks>The default is <see cref="DateRangeType.AllDates"/> when no value has been stored.</remarks>
         public static DateRangeType AdminOrderSearchDateRange
         {
             get
@@ -188,6 +232,8 @@ namespace Hotcakes.Commerce
             set { SetSessionObject(_AdminOrderSearchDateRange, value); }
         }
 
+        /// <summary>Gets or sets the administrative order-search start date in session.</summary>
+        /// <remarks>The default is tomorrow when no value has been stored.</remarks>
         public static DateTime AdminOrderSearchStartDate
         {
             get
@@ -202,6 +248,8 @@ namespace Hotcakes.Commerce
             set { SetSessionObject(_AdminOrderSearchStartDate, value); }
         }
 
+        /// <summary>Gets or sets the administrative order-search end date in session.</summary>
+        /// <remarks>The default is tomorrow when no value has been stored.</remarks>
         public static DateTime AdminOrderSearchEndDate
         {
             get
@@ -216,6 +264,8 @@ namespace Hotcakes.Commerce
             set { SetSessionObject(_AdminOrderSearchEndDate, value); }
         }
 
+        /// <summary>Gets or sets the last administrative order-search page in session.</summary>
+        /// <remarks>The default is page <c>1</c> when no value has been stored.</remarks>
         public static int AdminOrderSearchLastPage
         {
             get
@@ -231,6 +281,8 @@ namespace Hotcakes.Commerce
             set { SetSessionObject(_AdminOrderSearchLastPage, value); }
         }
 
+        /// <summary>Gets or sets whether administrative order results are newest first in session.</summary>
+        /// <remarks>The default is <see langword="true"/> when no value has been stored.</remarks>
         public static bool AdminOrderSearchNewestFirst
         {
             get
@@ -242,59 +294,80 @@ namespace Hotcakes.Commerce
             set { SetSessionObject(_AdminOrderSearchNewestFirst, value); }
         }
 
+        /// <summary>Gets or sets the administrative promotion-search keywords in session.</summary>
         public static string AdminPromotionKeywords
         {
             get { return GetSessionString(_AdminPromotionKeywords); }
             set { SetSessionString(_AdminPromotionKeywords, value); }
         }
 
+        /// <summary>Gets or sets the administrative vendor-search keywords in session.</summary>
         public static string AdminVendorKeywords
         {
             get { return GetSessionString(_AdminVendorKeywords); }
             set { SetSessionString(_AdminVendorKeywords, value); }
         }
 
+        /// <summary>Gets or sets the administrative manufacturer-search keywords in session.</summary>
         public static string AdminManufacturerKeywords
         {
             get { return GetSessionString(_AdminManufacturerKeywords); }
             set { SetSessionString(_AdminManufacturerKeywords, value); }
         }
 
+        /// <summary>Gets or sets the administrative customer-search keywords in session.</summary>
         public static string AdminCustomerKeywords
         {
             get { return GetSessionString(_AdminCustomerKeywords); }
             set { SetSessionString(_AdminCustomerKeywords, value); }
         }
 
+        /// <summary>Gets or sets whether disabled promotions are included in administrative results.</summary>
         public static bool AdminPromotionShowDisabled
         {
             get { return (bool?) GetSessionObject(_AdminPromotionShowDisabled) ?? false; }
             set { SetSessionObject(_AdminPromotionShowDisabled, value); }
         }
 
+        /// <summary>Gets or sets the analytics order identifier in session.</summary>
         public static string AnalyticsOrderId
         {
             get { return GetSessionString(_AnalyticsOrderId); }
             set { SetSessionString(_AnalyticsOrderId, value); }
         }
 
+        /// <summary>
+        /// Gets or sets the payment-card security code in session.
+        /// </summary>
+        /// <remarks>This value is retained under the compatibility key <c>CardSecurityCode</c>; callers must treat it as sensitive payment data.</remarks>
         public static string CardSecurityCode
         {
             get { return GetSessionString("CardSecurityCode"); }
             set { SetSessionString("CardSecurityCode", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the user-registration password in session.
+        /// </summary>
+        /// <remarks>This value is retained under the compatibility key <c>UserRegistrationPassword</c>; callers must treat it as sensitive credential data.</remarks>
         public static string UserRegistrationPassword
         {
             get { return GetSessionString("UserRegistrationPassword"); }
             set { SetSessionString("UserRegistrationPassword", value); }
         }
 
+        /// <summary>
+        /// Determines whether the supplied application has a current customer.
+        /// </summary>
+        /// <param name="app">The application whose current customer is checked.</param>
+        /// <returns><see langword="true"/> when <paramref name="app"/> has a current customer; otherwise, <see langword="false"/>.</returns>
         public static bool IsUserAuthenticated(HotcakesApplication app)
         {
             return app.CurrentCustomer != null;
         }
 
+        /// <summary>Gets the current session identifier from the configured session GUID cookie.</summary>
+        /// <returns>The cookie GUID, or <see langword="null"/> when it is absent or invalid.</returns>
         public static Guid? GetCurrentSessionGuid()
         {
             var sessionGuid = Cookies.GetCookieGuid(
@@ -304,6 +377,8 @@ namespace Hotcakes.Commerce
             return sessionGuid;
         }
 
+        /// <summary>Stores the current session identifier in the configured session GUID cookie.</summary>
+        /// <param name="value">The session identifier to store.</param>
         public static void SetCurrentSessionGuid(Guid value)
         {
             Cookies.SetCookieGuid(WebAppSettings.CookieNameSessionGuid,
@@ -313,6 +388,8 @@ namespace Hotcakes.Commerce
                 Factory.CreateEventLogger());
         }
 
+        /// <summary>Gets the current shopping-session identifier from its configured cookie.</summary>
+        /// <returns>The cookie GUID, or <see langword="null"/> when it is absent or invalid.</returns>
         public static Guid? GetCurrentShoppingSessionGuid()
         {
             var sessionGuid = Cookies.GetCookieGuid(
@@ -322,6 +399,8 @@ namespace Hotcakes.Commerce
             return sessionGuid;
         }
 
+        /// <summary>Stores the current shopping-session identifier in its configured cookie.</summary>
+        /// <param name="value">The shopping-session identifier to store.</param>
         public static void SetCurrentShoppingSessionGuid(Guid value)
         {
             Cookies.SetCookieGuid(WebAppSettings.CookieNameShoppingSessionGuid,
@@ -331,6 +410,11 @@ namespace Hotcakes.Commerce
                 Factory.CreateEventLogger());
         }
 
+        /// <summary>
+        /// Gets the current cart identifier for a store.
+        /// </summary>
+        /// <param name="currentStore">The store whose cart-preservation setting and identifier are used.</param>
+        /// <returns>The cart identifier from session when cart preservation is enabled; otherwise, from the store cart cookie.</returns>
         public static string GetCurrentCartID(Store currentStore)
         {
             var result = string.Empty;
@@ -347,6 +431,9 @@ namespace Hotcakes.Commerce
             return result;
         }
 
+        /// <summary>Stores the current cart identifier in session or in the store cart cookie.</summary>
+        /// <param name="currentStore">The store whose cart-preservation setting determines the storage location.</param>
+        /// <param name="value">The cart identifier to store.</param>
         public static void SetCurrentCartId(Store currentStore, string value)
         {
             if (currentStore.Settings.PreserveCartInSession)
@@ -359,21 +446,33 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>Gets the payment-pending cart identifier from the store-specific cookie.</summary>
+        /// <param name="currentStore">The store whose payment-pending cart cookie is read.</param>
+        /// <returns>The pending cart identifier, or an empty string when no value is available.</returns>
         public static string GetCurrentPaymentPendingCartId(Store currentStore)
         {
             return GetCookieString(WebAppSettings.CookieNameCartIdPaymentPending(currentStore.Id));
         }
 
+        /// <summary>Stores a payment-pending cart identifier for fourteen days in the store-specific cookie.</summary>
+        /// <param name="currentStore">The store whose payment-pending cart cookie is written.</param>
+        /// <param name="value">The cart identifier to store.</param>
         public static void SetCurrentPaymentPendingCartId(Store currentStore, string value)
         {
             SetCookieString(WebAppSettings.CookieNameCartIdPaymentPending(currentStore.Id), value, DateTime.Now.AddDays(14));
         }
 
+        /// <summary>Stores an affiliate identifier in the configured affiliate cookie until the specified expiration.</summary>
+        /// <param name="id">The affiliate identifier.</param>
+        /// <param name="expirationDate">The cookie expiration date and time.</param>
         public static void SetCurrentAffiliateId(long id, DateTime expirationDate)
         {
             SetCookieString(WebAppSettings.CookieNameAffiliateId, id.ToString(), expirationDate);
         }
 
+        /// <summary>Gets the affiliate identifier from the configured affiliate cookie.</summary>
+        /// <param name="currentStore">The current store context; retained for API compatibility.</param>
+        /// <returns>The parsed affiliate identifier, or <see langword="null"/> when the cookie is absent or not a valid integer.</returns>
         public static long? CurrentAffiliateID(Store currentStore)
         {
             var refVal = GetCookieString(WebAppSettings.CookieNameAffiliateId);
@@ -390,6 +489,9 @@ namespace Hotcakes.Commerce
             return null;
         }
 
+        /// <summary>Determines whether the current store has a nonblank cart identifier.</summary>
+        /// <param name="currentStore">The store whose current cart is checked.</param>
+        /// <returns><see langword="true"/> when a non-whitespace cart identifier is available; otherwise, <see langword="false"/>.</returns>
         public static bool CurrentUserHasCart(Store currentStore)
         {
             var cartId = GetCurrentCartID(currentStore);
@@ -415,6 +517,9 @@ namespace Hotcakes.Commerce
             _session[variableName] = value;
         }
 
+        /// <summary>Gets a string value from the current ASP.NET session.</summary>
+        /// <param name="variableName">The exact session key to read.</param>
+        /// <returns>The stored string, or an empty string when the session, key, or value is unavailable.</returns>
         public static string GetSessionString(string variableName)
         {
             var result = string.Empty;
@@ -428,6 +533,9 @@ namespace Hotcakes.Commerce
             return result;
         }
 
+        /// <summary>Stores a string in the current ASP.NET session.</summary>
+        /// <param name="variableName">The exact session key to write.</param>
+        /// <param name="value">The value to store; <see langword="null"/> is stored as an empty string.</param>
         public static void SetSessionString(string variableName, string value)
         {
             if (Factory.HttpContext != null)
@@ -439,6 +547,9 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>Gets an object from the current ASP.NET session.</summary>
+        /// <param name="variableName">The exact session key to read.</param>
+        /// <returns>The stored object, or <see langword="null"/> when no current session value exists.</returns>
         public static object GetSessionObject(string variableName)
         {
             object result = null;
@@ -458,6 +569,9 @@ namespace Hotcakes.Commerce
             return result;
         }
 
+        /// <summary>Stores an object in the current ASP.NET session when an HTTP context is available.</summary>
+        /// <param name="variableName">The exact session key to write.</param>
+        /// <param name="value">The object to store.</param>
         public static void SetSessionObject(string variableName, object value)
         {
             if (Factory.HttpContext != null)
@@ -466,6 +580,9 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>Gets a value from the current request's cookie collection.</summary>
+        /// <param name="cookieName">The exact cookie name to read.</param>
+        /// <returns>The cookie value, or an empty string when the context is unavailable or reading fails.</returns>
         public static string GetCookieString(string cookieName)
         {
             try
@@ -483,6 +600,10 @@ namespace Hotcakes.Commerce
             return string.Empty;
         }
 
+        /// <summary>Gets a value from a supplied cookie collection.</summary>
+        /// <param name="cookieName">The exact cookie name to read.</param>
+        /// <param name="cookies">The cookie collection to search.</param>
+        /// <returns>The first nonempty matching cookie value, or an empty string when none is available or reading fails.</returns>
         public static string GetCookieString(string cookieName, HttpCookieCollection cookies)
         {
             var result = string.Empty;
@@ -521,11 +642,21 @@ namespace Hotcakes.Commerce
             return result;
         }
 
+        /// <summary>Writes a cookie using the default fifty-year expiration.</summary>
+        /// <param name="cookieName">The exact cookie name to write.</param>
+        /// <param name="value">The cookie value.</param>
         public static void SetCookieString(string cookieName, string value)
         {
             SetCookieString(cookieName, value, null);
         }
 
+        /// <summary>
+        /// Writes a cookie to the current response.
+        /// </summary>
+        /// <param name="cookieName">The exact cookie name to write.</param>
+        /// <param name="value">The cookie value.</param>
+        /// <param name="expirationDate">The expiration date; when omitted, the cookie expires fifty years from now.</param>
+        /// <remarks>The cookie's secure flag follows the store's forced-admin-SSL setting, or the current request when no application is available. Failures are logged and not rethrown.</remarks>
         public static void SetCookieString(string cookieName, string value, DateTime? expirationDate)
         {
 	        if (Factory.HttpContext != null)

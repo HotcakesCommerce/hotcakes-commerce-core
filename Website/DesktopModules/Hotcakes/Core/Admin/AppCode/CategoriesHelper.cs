@@ -33,6 +33,9 @@ using Hotcakes.Commerce.Catalog;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class CategoriesHelper.
+    /// </summary>
     [Serializable]
     public class CategoriesHelper
     {
@@ -43,17 +46,34 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             return ListFullTreeWithIndents(repo, false);
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by ListFullTreeWithIndents.
+        /// </summary>
+        /// <param name="repo">Value used by the operation.</param>
+        /// <param name="showHidden">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static Collection<ListItem> ListFullTreeWithIndents(ICategoryRepository repo, bool showHidden)
         {
             var allCats = repo.FindAllSnapshotsPaged(1, int.MaxValue);
             return ListFullTreeWithIndents(allCats, showHidden);
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by ListFullTreeWithIndents.
+        /// </summary>
+        /// <param name="allCats">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static Collection<ListItem> ListFullTreeWithIndents(List<CategorySnapshot> allCats)
         {
             return ListFullTreeWithIndents(allCats, false);
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by ListFullTreeWithIndents.
+        /// </summary>
+        /// <param name="allCats">Value used by the operation.</param>
+        /// <param name="showHidden">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static Collection<ListItem> ListFullTreeWithIndents(List<CategorySnapshot> allCats, bool showHidden)
         {
             var result = new Collection<ListItem>();
@@ -96,6 +116,12 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
         }
 
 
+        /// <summary>
+        /// Performs the administrative operation represented by ListFullTreeWithIndentsForComboBox.
+        /// </summary>
+        /// <param name="allCats">Value used by the operation.</param>
+        /// <param name="showHidden">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static Collection<ListItem> ListFullTreeWithIndentsForComboBox(List<CategorySnapshot> allCats,
             bool showHidden)
         {

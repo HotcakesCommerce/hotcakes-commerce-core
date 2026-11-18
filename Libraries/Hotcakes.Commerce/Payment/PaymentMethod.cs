@@ -28,22 +28,39 @@ using System;
 
 namespace Hotcakes.Commerce.Payment
 {
-    // Holds a payment method as displayed to customers
-    // during the checkout process
+    /// <summary>
+    /// Describes a payment method displayed to customers during checkout.
+    /// Implementations are discovered by <see cref="PaymentMethods"/> through loaded assemblies.
+    /// </summary>
     [Serializable]
     public abstract class PaymentMethod
     {
+        /// <summary>
+        /// Gets the stable identifier used in store payment-method settings.
+        /// </summary>
         public abstract string MethodId { get; }
 
+        /// <summary>
+        /// Gets the compatibility-sensitive display name for the method.
+        /// </summary>
         public abstract string MethodName { get; }
 
+        /// <summary>
+        /// Gets the ordering value used when available methods are sorted.
+        /// </summary>
         public abstract int SortIndex { get; }
 
+        /// <summary>
+        /// Gets a value indicating whether payment is expected before order placement.
+        /// </summary>
         public virtual bool PayBeforePlacement
         {
             get { return false; }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the method supports recurring billing.
+        /// </summary>
         public virtual bool SupportRecurringBilling
         {
             get { return false; }

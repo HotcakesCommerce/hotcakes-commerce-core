@@ -37,6 +37,9 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
     [Serializable]
     public class ProductTypeDTO
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ProductTypeDTO"/> type with its default DTO values.
+        /// </summary>
         public ProductTypeDTO()
         {
             Bvin = string.Empty;

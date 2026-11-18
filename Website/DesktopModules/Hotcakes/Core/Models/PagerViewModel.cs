@@ -43,10 +43,10 @@ namespace Hotcakes.Modules.Core.Models
         ///     If this is not available then by default PageURLForamt will be used by system
         /// </summary>
         private string _PagerUrlFormatFirst = string.Empty;
-
         /// <summary>
         ///     Set default values
         /// </summary>
+
         public PagerViewModel()
         {
             PageRange = 15;
@@ -60,11 +60,17 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     Number of records per page
         /// </summary>
+        /// <summary>
+        /// Gets or sets the PageSize value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public int PageSize { get; set; }
 
         /// <summary>
         ///     The page number which currently user want to looking for
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the CurrentPage value used by this storefront model.
         /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public int CurrentPage { get; set; }
@@ -72,11 +78,17 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     Total number of items available
         /// </summary>
+        /// <summary>
+        /// Gets or sets the TotalItems value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public int TotalItems { get; set; }
 
         /// <summary>
         ///     used to identify how many
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the PageRange value used by this storefront model.
         /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public int PageRange { get; set; }
@@ -94,10 +106,16 @@ namespace Hotcakes.Modules.Core.Models
         ///     so needs to format the URL format with tokens in order to get replaced with proper values
         ///     at run time.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the PagerUrlFormat value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string PagerUrlFormat { get; set; }
 
         // Url for first page 
+        /// <summary>
+        /// Gets or sets the PagerUrlFormatFirst value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string PagerUrlFormatFirst
         {

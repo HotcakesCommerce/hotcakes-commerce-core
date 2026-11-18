@@ -28,8 +28,20 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>
+    /// Marks a non-recurring order completed when it is fully shipped and paid.
+    /// </summary>
+    /// <remarks>
+    /// The task identifier is <c>19e6e637-e651-488d-a54c-11bc249ef28f</c>. Execution changes the in-memory order
+    /// status; rollback sets the status code to <see cref="OrderStatusCode.Received"/> but does not persist that change.
+    /// </remarks>
     public class MarkCompletedWhenShippedAndPaid : OrderTask
     {
+        /// <summary>
+        /// Changes a non-recurring, fully shipped, paid order to the completed status.
+        /// </summary>
+        /// <param name="context">The <see cref="OrderTaskContext"/> containing the order.</param>
+        /// <returns>Always <see langword="true"/>.</returns>
         public override bool Execute(OrderTaskContext context)
         {
             if (!context.Order.IsRecurring
@@ -46,22 +58,39 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return true;
         }
 
+        /// <summary>
+        /// Changes the in-memory order status code back to <see cref="OrderStatusCode.Received"/>.
+        /// </summary>
+        /// <param name="context">The workflow context.</param>
+        /// <returns>Always <see langword="true"/>.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             context.Order.StatusCode = OrderStatusCode.Received;
             return true;
         }
 
+        /// <summary>
+        /// Gets the stable task identifier used to register this task in workflows.
+        /// </summary>
+        /// <returns><c>19e6e637-e651-488d-a54c-11bc249ef28f</c>.</returns>
         public override string TaskId()
         {
             return "19e6e637-e651-488d-a54c-11bc249ef28f";
         }
 
+        /// <summary>
+        /// Gets the display name of this task.
+        /// </summary>
+        /// <returns><c>Mark Completed When Order Is Shipped And Paid</c>.</returns>
         public override string TaskName()
         {
             return "Mark Completed When Order Is Shipped And Paid";
         }
 
+        /// <summary>
+        /// Creates a new completion-status task.
+        /// </summary>
+        /// <returns>A new <see cref="MarkCompletedWhenShippedAndPaid"/> instance.</returns>
         public override Task Clone()
         {
             return new MarkCompletedWhenShippedAndPaid();

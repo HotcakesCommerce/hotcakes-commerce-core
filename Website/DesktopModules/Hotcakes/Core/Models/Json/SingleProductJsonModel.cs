@@ -32,9 +32,17 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Modules.Core.Models.Json
 {
+/// <summary>
+    /// Represents the SingleProductJsonModel storefront model.
+    /// </summary>
     [Serializable]
     public class SingleProductJsonModel
     {
+        /// <summary>
+        /// Performs the SingleProductJsonModel operation for this model.
+        /// </summary>
+        /// <param name="product">The value used by the operation.</param>
+        /// <param name="app">The value used by the operation.</param>
         public SingleProductJsonModel(Product product, HotcakesApplication app)
         {
             ProductLink = UrlRewriter.BuildUrlForProduct(product);
@@ -50,13 +58,37 @@ namespace Hotcakes.Modules.Core.Models.Json
             UserPrice = up.DisplayPrice(true,false);
         }
 
+        /// <summary>
+        /// Gets or sets the ProductLink value used by this storefront model.
+        /// </summary>
         public string ProductLink { get; set; }
+        /// <summary>
+        /// Gets or sets the ProductAddToCartLink value used by this storefront model.
+        /// </summary>
         public string ProductAddToCartLink { get; set; }
+        /// <summary>
+        /// Gets or sets the ProductName value used by this storefront model.
+        /// </summary>
         public string ProductName { get; set; }
+        /// <summary>
+        /// Gets or sets the ImageSmallUrl value used by this storefront model.
+        /// </summary>
         public string ImageSmallUrl { get; set; }
+        /// <summary>
+        /// Gets or sets the ImageSmallAltText value used by this storefront model.
+        /// </summary>
         public string ImageSmallAltText { get; set; }
+        /// <summary>
+        /// Gets or sets the UserPrice value used by this storefront model.
+        /// </summary>
         public string UserPrice { get; set; }
+        /// <summary>
+        /// Gets or sets the ProductSku value used by this storefront model.
+        /// </summary>
         public string ProductSku { get; set; }
+        /// <summary>
+        /// Gets or sets the Bvin value used by this storefront model.
+        /// </summary>
         public string Bvin { get; set; }
     }
 }

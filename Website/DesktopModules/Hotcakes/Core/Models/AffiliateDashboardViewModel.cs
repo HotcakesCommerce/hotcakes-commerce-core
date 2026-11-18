@@ -58,8 +58,15 @@ namespace Hotcakes.Modules.Core.Models
         /// </summary>
         public AffiliateReferralsViewModel Referrals { get; set; }
 
+        /// <summary>
+        /// Gets or sets the UrlBuilder value used by this storefront model.
+        /// </summary>
         public AffiliateUrlBuilderViewModel UrlBuilder { get; set; }
 
+        /// <summary>
+        /// Performs the ToJson operation for this model.
+        /// </summary>
+        /// <returns>The result of the operation.</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this);

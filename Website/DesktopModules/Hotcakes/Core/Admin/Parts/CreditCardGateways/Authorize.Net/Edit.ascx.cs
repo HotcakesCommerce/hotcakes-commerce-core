@@ -31,6 +31,9 @@ namespace Hotcakes.Modules.Core.Admin.Parts.CreditCardGateways.Authorize.Net
 {
     partial class Edit : HccCreditCardGatewayPart
     {
+        /// <summary>
+        /// Performs the administrative operation represented by LoadData.
+        /// </summary>
         public override void LoadData()
         {
             var settings = new AuthorizeNetSettings();
@@ -44,6 +47,9 @@ namespace Hotcakes.Modules.Core.Admin.Parts.CreditCardGateways.Authorize.Net
             chkDebugMode.Checked = settings.DebugMode;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by SaveData.
+        /// </summary>
         public override void SaveData()
         {
             var settings = new AuthorizeNetSettings();

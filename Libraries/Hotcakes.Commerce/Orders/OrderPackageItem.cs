@@ -36,6 +36,9 @@ namespace Hotcakes.Commerce.Orders
     [Serializable]
     public class OrderPackageItem
     {
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         public OrderPackageItem()
         {
             ProductBvin = string.Empty;
@@ -43,6 +46,9 @@ namespace Hotcakes.Commerce.Orders
             Quantity = 0;
         }
 
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         public OrderPackageItem(string bvin, long itemId, int qty)
         {
             ProductBvin = bvin;
@@ -53,15 +59,24 @@ namespace Hotcakes.Commerce.Orders
         /// <summary>
         ///     The unique ID or bvin of the product that is in this package.
         /// </summary>
+        /// <summary>
+        /// The product bvin.
+        /// </summary>
         public string ProductBvin { get; set; }
 
         /// <summary>
         ///     The unique ID of the line item that matches this package.
         /// </summary>
+        /// <summary>
+        /// The line item id.
+        /// </summary>
         public long LineItemId { get; set; }
 
         /// <summary>
         ///     Total number of products that are in this package.
+        /// </summary>
+        /// <summary>
+        /// The quantity.
         /// </summary>
         public int Quantity { get; set; }
 
@@ -71,6 +86,9 @@ namespace Hotcakes.Commerce.Orders
         ///     Allows you to convert the current package item object to the DTO equivalent for use with the REST API
         /// </summary>
         /// <returns>A new instance of OrderPackageItemDTO</returns>
+        /// <summary>
+        /// Provides the ToDto operation while preserving the established order-domain behavior.
+        /// </summary>
         public OrderPackageItemDTO ToDto()
         {
             var dto = new OrderPackageItemDTO();
@@ -86,6 +104,9 @@ namespace Hotcakes.Commerce.Orders
         ///     Allows you to populate the current package item object using an OrderPackageItemDTO instance
         /// </summary>
         /// <param name="dto">An instance of the package item from the REST API</param>
+        /// <summary>
+        /// Provides the FromDto operation while preserving the established order-domain behavior.
+        /// </summary>
         public void FromDto(OrderPackageItemDTO dto)
         {
             if (dto == null) return;

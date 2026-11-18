@@ -30,6 +30,8 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>Stores recurring billing schedule and payment state for an order line item.</summary>
+    /// <remarks><see cref="LoadPaymentInfo"/> derives the next payment date from recorded recurring payments and the configured interval. The public member name <c>TotalPayed</c> is retained for serialized and compatibility-sensitive consumers.</remarks>
     public class RecurringBilling
     {
         #region Fields
@@ -40,6 +42,7 @@ namespace Hotcakes.Commerce.Orders
 
         #region Constructor
 
+        /// <summary>Initializes a new instance of this type.</summary>
         public RecurringBilling(LineItem li)
         {
             _li = li;
@@ -50,6 +53,8 @@ namespace Hotcakes.Commerce.Orders
 
         #region Public methods
 
+        /// <summary>Loads payment information and recalculates the applicable recurring billing state.</summary>
+        /// <param name="app">The application context used to find the line item's order and recurring payments.</param>
         public void LoadPaymentInfo(HotcakesApplication app)
         {
             var o = app.OrderServices.Orders.FindForCurrentStore(_li.OrderBvin);
@@ -76,6 +81,7 @@ namespace Hotcakes.Commerce.Orders
 
         #region Properties
 
+        /// <summary>Gets or sets the applicable order or payment value.</summary>
         public DateTime StartsOn { get; set; }
 
         /// <summary>

@@ -53,6 +53,10 @@ namespace Hotcakes.Modules.Core.Models
         /// </summary>
         public List<ListItem> Categories { get; set; }
 
+        /// <summary>
+        /// Performs the ToJson operation for this model.
+        /// </summary>
+        /// <returns>The result of the operation.</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this);

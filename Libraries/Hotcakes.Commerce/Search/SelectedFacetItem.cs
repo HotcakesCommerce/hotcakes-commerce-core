@@ -29,14 +29,17 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Search
 {
+    /// <summary>
+    /// Represents a facet value selected in a product search query.
+    /// </summary>
     public class SelectedFacetItem
     {
         /// <summary>
-        /// This is the unique identifier for the current facet item.
+        /// Gets or sets the selected facet identifier in bvin string form.
         /// </summary>
         public string Id { get; set; }
         /// <summary>
-        /// This is the localized name of the current facet item.
+        /// Gets or sets the localized display name of the selected facet value.
         /// </summary>
         public string Name { get; set; }
     }

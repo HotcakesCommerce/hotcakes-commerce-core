@@ -36,8 +36,21 @@ using System;
 
 namespace Hotcakes.Commerce.Shipping
 {
+    /// <summary>
+    /// Discovers the shipping services available to a store and supplies each service with its stored settings.
+    /// </summary>
+    /// <remarks>
+    /// Discovery starts with services returned by <see cref="Service.FindAll"/> and then adds the
+    /// configured FedEx, United States Postal Service, UPS, and UPS Freight providers. Provider
+    /// instances are created on each call; credentials and provider options are read from the supplied store.
+    /// </remarks>
     public class AvailableServices
     {
+        /// <summary>
+        /// Finds all shipping services and configures the built-in providers for the store.
+        /// </summary>
+        /// <param name="currentStore">The store whose shipping settings configure the providers.</param>
+        /// <returns>A new list containing discovered services and the built-in provider instances.</returns>
         public static List<IShippingService> FindAll(Store currentStore)
         {
             var result = Service.FindAll();
@@ -101,6 +114,13 @@ namespace Hotcakes.Commerce.Shipping
             return result;
         }
 
+        /// <summary>
+        /// Finds the first discovered shipping service whose identifier exactly matches the requested identifier.
+        /// </summary>
+        /// <param name="id">The service identifier to compare with <see cref="IShippingService.Id"/>.</param>
+        /// <param name="currentStore">The store whose provider settings are used during discovery.</param>
+        /// <returns>The matching service, or <see langword="null"/> when no service has that identifier.</returns>
+        /// <remarks>Discovery is performed again for this call, so the returned provider is a newly configured instance.</remarks>
         public static IShippingService FindById(string id, Store currentStore)
         {
             return FindAll(currentStore).FirstOrDefault(svc => svc.Id == id);

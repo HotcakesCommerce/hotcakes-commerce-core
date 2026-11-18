@@ -31,16 +31,36 @@ using System.Text;
 
 namespace Hotcakes.Payment
 {
+    /// <summary>
+    /// Provides utilities for sending HTTP POST requests to payment services.
+    /// </summary>
     [Serializable]
     public class NetworkUtilities
     {
         private const int DEFAULTTIMEOUT = 100000;
 
+        /// <summary>
+        /// Sends a UTF-8 form-encoded HTTP POST request using the default timeout.
+        /// </summary>
+        /// <param name="serviceUrl">The URL of the payment service.</param>
+        /// <param name="postData">The form-encoded request body.</param>
+        /// <returns>The UTF-8 response body returned by the service.</returns>
+        /// <exception cref="WebException">The request cannot be sent or the service does not return a response.</exception>
+        /// <seealso cref="SendRequestByPost(string, string, WebProxy, int)" />
         public static string SendRequestByPost(string serviceUrl, string postData)
         {
             return SendRequestByPost(serviceUrl, postData, null, DEFAULTTIMEOUT);
         }
 
+        /// <summary>
+        /// Sends a UTF-8 form-encoded HTTP POST request with an optional proxy and timeout.
+        /// </summary>
+        /// <param name="serviceUrl">The URL of the payment service.</param>
+        /// <param name="postData">The form-encoded request body.</param>
+        /// <param name="proxy">The proxy to use, or <see langword="null" /> to use the default request proxy.</param>
+        /// <param name="timeout">The timeout, in milliseconds, for the request.</param>
+        /// <returns>The UTF-8 response body returned by the service.</returns>
+        /// <exception cref="WebException">The request cannot be sent or the service does not return a response.</exception>
         public static string SendRequestByPost(string serviceUrl, string postData, WebProxy proxy, int timeout)
         {
             WebResponse resp = null;

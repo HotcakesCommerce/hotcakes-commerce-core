@@ -28,8 +28,15 @@ using System;
 
 namespace Hotcakes.Commerce.Content
 {
+    /// <summary>
+    /// Represents one ordered item in a <see cref="ContentBlockSettingList"/>.
+    /// </summary>
+    /// <remarks>The ten setting slots retain their compatibility-sensitive serialized property names.</remarks>
     public class ContentBlockSettingListItem
     {
+        /// <summary>
+        /// Initializes an item with a new identifier, empty values, and sort position one.
+        /// </summary>
         public ContentBlockSettingListItem()
         {
             Id = Guid.NewGuid().ToString();
@@ -47,20 +54,37 @@ namespace Hotcakes.Commerce.Content
             SortOrder = 1;
         }
 
+        /// <summary>Gets or sets the item identifier.</summary>
         public string Id { get; set; }
+        /// <summary>Gets or sets the name of the containing list.</summary>
         public string ListName { get; set; }
+        /// <summary>Gets or sets the first caller-defined setting value.</summary>
         public string Setting1 { get; set; }
+        /// <summary>Gets or sets the second caller-defined setting value.</summary>
         public string Setting2 { get; set; }
+        /// <summary>Gets or sets the third caller-defined setting value.</summary>
         public string Setting3 { get; set; }
+        /// <summary>Gets or sets the fourth caller-defined setting value.</summary>
         public string Setting4 { get; set; }
+        /// <summary>Gets or sets the fifth caller-defined setting value.</summary>
         public string Setting5 { get; set; }
+        /// <summary>Gets or sets the sixth caller-defined setting value.</summary>
         public string Setting6 { get; set; }
+        /// <summary>Gets or sets the seventh caller-defined setting value.</summary>
         public string Setting7 { get; set; }
+        /// <summary>Gets or sets the eighth caller-defined setting value.</summary>
         public string Setting8 { get; set; }
+        /// <summary>Gets or sets the ninth caller-defined setting value.</summary>
         public string Setting9 { get; set; }
+        /// <summary>Gets or sets the tenth caller-defined setting value.</summary>
         public string Setting10 { get; set; }
+        /// <summary>Gets or sets the item's ordering position within its list.</summary>
         public int SortOrder { get; set; }
 
+        /// <summary>
+        /// Creates a copy of this item with a newly generated identifier.
+        /// </summary>
+        /// <returns>A copy of the item values and sort position.</returns>
         public ContentBlockSettingListItem Clone()
         {
             var clone = new ContentBlockSettingListItem();

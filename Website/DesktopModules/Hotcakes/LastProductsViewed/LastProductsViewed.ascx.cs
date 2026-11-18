@@ -28,6 +28,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.LastProductsViewed
 {
+    /// <summary>
+    /// Hosts the storefront recently viewed products view.
+    /// </summary>
     public partial class LastProductsViewedView : HotcakesModuleBase
     {
         protected override string RenderView()

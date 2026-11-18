@@ -26,10 +26,14 @@
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>Availability status assigned to a product.</summary>
     public enum ProductStatus
     {
+        /// <summary>Specifies the Active value.</summary>
         Active = 1,
+        /// <summary>Specifies the Disabled value.</summary>
         Disabled = 0,
+        /// <summary>Specifies the NotSet value.</summary>
         NotSet = -1
     }
 }

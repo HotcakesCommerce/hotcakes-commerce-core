@@ -28,10 +28,17 @@ using System;
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Represents UrlConfigSettings data and behavior within the Hotcakes Commerce account and store boundary.</summary>
     [Serializable]
     public class UrlConfigSettings
     {
+        /// <summary>Gets or sets CustomUrl.</summary>
+        /// <remarks>The normalized host name used to identify the store. Values are trimmed and lower-cased before storage.</remarks>
+        /// <value>The normalized host name used to identify the store. Values are trimmed and lower-cased before storage.</value>
         public string CustomUrl { get; set; }
+        /// <summary>Gets or sets TabId.</summary>
+        /// <remarks>The DNN tab identifier associated with the URL configuration.</remarks>
+        /// <value>The DNN tab identifier associated with the URL configuration.</value>
         public int TabId { get; set; }
     }
 }

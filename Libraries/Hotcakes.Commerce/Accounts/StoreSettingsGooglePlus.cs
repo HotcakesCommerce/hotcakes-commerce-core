@@ -28,16 +28,22 @@ using System;
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Provides the store's Google Plus settings façade.</summary>
+    /// <remarks>The historical Google Plus naming is retained for compatibility. Values are store-scoped and staged through <see cref="StoreSettings"/> until saved.</remarks>
     [Serializable]
     public class StoreSettingsGooglePlus
     {
         private readonly StoreSettings parent;
 
+        /// <summary>Initializes a new Google Plus settings façade.</summary>
+        /// <param name="s">The owning store settings façade.</param>
         public StoreSettingsGooglePlus(StoreSettings s)
         {
             parent = s;
         }
 
+        /// <summary>Gets or sets whether Google Plus integration is enabled.</summary>
+        /// <value>The <c>UseGooglePlus</c> setting; the compatibility default is <see langword="true"/>.</value>
         public bool UseGooglePlus
         {
             get { return parent.GetPropBoolWithDefault("UseGooglePlus", true); }

@@ -34,11 +34,16 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Renders breadcrumb trails for storefront categories and products.</summary>
     [Serializable]
     public class BreadCrumbController : BaseAppController
     {
         //
         // GET: /BreadCrumb/
+        /// <summary>Renders a breadcrumb trail for a category.</summary>
+        /// <param name="cat">The category for which the trail is built.</param>
+        /// <param name="extras">Additional breadcrumb items appended to the trail.</param>
+        /// <returns>The breadcrumb partial view.</returns>
         [ChildActionOnly]
         public ActionResult CategoryTrail(Category cat, List<BreadCrumbItem> extras)
         {
@@ -94,6 +99,10 @@ namespace Hotcakes.Modules.Core.Controllers
             return result;
         }
 
+        /// <summary>Renders a breadcrumb trail for a product and its first category.</summary>
+        /// <param name="product">The product for which the trail is built.</param>
+        /// <param name="extras">Additional breadcrumb items appended to the trail.</param>
+        /// <returns>The breadcrumb partial view.</returns>
         [ChildActionOnly]
         public ActionResult ProductTrail(Product product, List<BreadCrumbItem> extras)
         {
@@ -124,6 +133,9 @@ namespace Hotcakes.Modules.Core.Controllers
             model.Items.Enqueue(new BreadCrumbItem {Name = p.ProductName});
         }
 
+        /// <summary>Renders a breadcrumb trail from caller-supplied items.</summary>
+        /// <param name="extras">The breadcrumb items to render.</param>
+        /// <returns>The breadcrumb partial view.</returns>
         [ChildActionOnly]
         public ActionResult ManualTrail(List<BreadCrumbItem> extras)
         {

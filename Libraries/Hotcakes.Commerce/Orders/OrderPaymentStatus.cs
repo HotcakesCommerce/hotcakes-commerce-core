@@ -26,12 +26,30 @@
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    /// Represents the OrderPaymentStatus order-domain type and preserves the established public compatibility surface.
+    /// </summary>
     public enum OrderPaymentStatus
     {
+        /// <summary>
+        /// The serialized enum value for unknown.
+        /// </summary>
         Unknown = 0,
+        /// <summary>
+        /// The serialized enum value for unpaid.
+        /// </summary>
         Unpaid = 1,
+        /// <summary>
+        /// The serialized enum value for partially paid.
+        /// </summary>
         PartiallyPaid = 2,
+        /// <summary>
+        /// The serialized enum value for paid.
+        /// </summary>
         Paid = 3,
+        /// <summary>
+        /// The serialized enum value for overpaid.
+        /// </summary>
         Overpaid = 4
     }
 }

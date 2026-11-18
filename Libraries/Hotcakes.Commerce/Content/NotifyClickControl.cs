@@ -29,10 +29,15 @@ using System.Web.UI;
 
 namespace Hotcakes.Commerce.Content
 {
+    /// <summary>Provides a Web Forms user-control base that raises a click notification and reports handler errors.</summary>
     public class NotifyClickControl : UserControl
     {
+        /// <summary>Occurs when the control notifies listeners of a click.</summary>
         public event EventHandler<ClickedEventArgs> Clicked;
 
+        /// <summary>Raises <see cref="Clicked"/> with supplied information.</summary>
+        /// <param name="data">Information passed to the event arguments.</param>
+        /// <returns><see langword="true"/> unless an event handler sets <see cref="ClickedEventArgs.ErrorOccurred"/>.</returns>
         protected bool NotifyClicked(string data)
         {
             var args = new ClickedEventArgs(data);
@@ -43,6 +48,8 @@ namespace Hotcakes.Commerce.Content
             return !args.ErrorOccurred;
         }
 
+        /// <summary>Raises <see cref="Clicked"/> without additional information.</summary>
+        /// <returns><see langword="true"/> unless an event handler sets <see cref="ClickedEventArgs.ErrorOccurred"/>.</returns>
         protected bool NotifyClicked()
         {
             var args = new ClickedEventArgs();
@@ -53,15 +60,19 @@ namespace Hotcakes.Commerce.Content
             return !args.ErrorOccurred;
         }
 
+        /// <summary>Contains information and error state for a <see cref="NotifyClickControl.Clicked"/> notification.</summary>
         public class ClickedEventArgs : EventArgs
         {
             private string _info = string.Empty;
 
+            /// <summary>Initializes arguments with no information and no error.</summary>
             public ClickedEventArgs()
             {
                 ErrorOccurred = false;
             }
 
+            /// <summary>Initializes arguments with the supplied information and no error.</summary>
+            /// <param name="data">Information to expose through <see cref="Info"/>; <see langword="null"/> leaves it empty.</param>
             public ClickedEventArgs(string data)
             {
                 ErrorOccurred = false;
@@ -71,12 +82,14 @@ namespace Hotcakes.Commerce.Content
                 }
             }
 
+            /// <summary>Gets or sets the information associated with the notification.</summary>
             public string Info
             {
                 get { return _info; }
                 set { _info = value; }
             }
 
+            /// <summary>Gets or sets whether an event handler reported an error.</summary>
             public bool ErrorOccurred { get; set; }
         }
     }

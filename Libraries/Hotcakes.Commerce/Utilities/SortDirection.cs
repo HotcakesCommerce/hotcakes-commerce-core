@@ -26,9 +26,14 @@
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Specifies the direction used by <see cref="SortableCollection{T}.Sort(string, SortDirection)"/>.
+    /// </summary>
     public enum SortDirection
     {
+        /// <summary>Sorts values in ascending order.</summary>
         Ascending = -1,
+        /// <summary>Sorts values in descending order.</summary>
         Descending = 1
     }
 }

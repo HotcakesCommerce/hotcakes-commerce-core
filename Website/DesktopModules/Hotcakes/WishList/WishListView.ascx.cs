@@ -29,6 +29,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.WishList
 {
+    /// <summary>
+    /// Hosts the storefront wish list view.
+    /// </summary>
     public partial class WishListView : HotcakesModuleBase
     {
         protected override void OnLoad(EventArgs e)

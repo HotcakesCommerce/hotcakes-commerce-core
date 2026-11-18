@@ -26,12 +26,34 @@
 
 namespace Hotcakes.Commerce.Content
 {
+    /// <summary>
+    /// Defines the kinds of messages that can be displayed to a user.
+    /// </summary>
     public enum DisplayMessageType
     {
+        /// <summary>
+        /// An informational message. The serialized numeric value is <c>0</c>.
+        /// </summary>
         Information = 0,
+
+        /// <summary>
+        /// A message indicating that an operation completed successfully. The serialized numeric value is <c>1</c>.
+        /// </summary>
         Success = 1,
+
+        /// <summary>
+        /// A warning message. The serialized numeric value is <c>2</c>.
+        /// </summary>
         Warning = 2,
+
+        /// <summary>
+        /// A message representing an exception condition. The serialized numeric value is <c>3</c>.
+        /// </summary>
         Exception = 3,
+
+        /// <summary>
+        /// An error message. The serialized numeric value is <c>5</c>; the value <c>4</c> is intentionally unused.
+        /// </summary>
         Error = 5
     }
 }

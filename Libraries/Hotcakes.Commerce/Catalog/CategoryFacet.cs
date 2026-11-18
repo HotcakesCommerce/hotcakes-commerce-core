@@ -35,6 +35,9 @@ namespace Hotcakes.Commerce.Catalog
         private CategoryFacetDisplayMode _DisplayMode = CategoryFacetDisplayMode.Single;
         private string _FilterName = string.Empty;
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="CategoryFacet" />.
+        /// </summary>
         public CategoryFacet()
         {
             StoreId = 0;

@@ -32,8 +32,30 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Metrics
 {
+    /// <summary>
+    /// Renders ShopZilla and Bizrate conversion and receipt-survey tracking markup.
+    /// </summary>
+    /// <remarks>
+    /// The class preserves the historical provider names used by the API: ShopZilla for the
+    /// tracking identifier and script, and Bizrate for the receipt-survey block. Both methods
+    /// return markup only and do not load the provider scripts themselves.
+    /// </remarks>
     public class ShopZilla
     {
+        /// <summary>
+        /// Renders the Bizrate post-purchase receipt-survey variables, provider script, and ShopZilla tracker.
+        /// </summary>
+        /// <param name="o">The completed order supplying the order number, total, billing postal code, line items, and custom properties.</param>
+        /// <param name="app">The Hotcakes application context supplying product lookup, product URLs, the current store, and the ShopZilla identifier.</param>
+        /// <returns>Markup containing the Bizrate receipt-survey variables and script, followed by the output of <see cref="RenderTracker(Order, HotcakesApplication)"/>.</returns>
+        /// <remarks>
+        /// Up to five item slots are emitted. Each populated slot contains a rewritten product URL,
+        /// SKU, an empty GTIN field, and the line total divided by quantity; remaining slots contain
+        /// empty values. Values are concatenated directly into JavaScript and are not HTML, JavaScript,
+        /// or URL escaped. The output retains the provider's observed malformed HTML comment
+        /// delimiters, which use a non-ASCII dash character, and the trailing newline behavior of
+        /// the End comment.
+        /// </remarks>
         public static string RenderReceiptSurvey(Order o, HotcakesApplication app)
         {
             var sb = new StringBuilder();
@@ -85,6 +107,19 @@ namespace Hotcakes.Commerce.Metrics
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Renders the ShopZilla ROI tracker variables and its external tracking script.
+        /// </summary>
+        /// <param name="o">The order supplying the total, order number, line-item quantities, and customer-status custom property.</param>
+        /// <param name="app">The Hotcakes application context supplying the current store's ShopZilla identifier.</param>
+        /// <returns>Markup defining the provider variables and referencing the fixed HTTPS ShopZilla ROI tracker URL.</returns>
+        /// <remarks>
+        /// The <c>cust_type</c> value is <c>0</c> when the order contains the <c>hcc</c>/<c>allowpasswordreset</c>
+        /// custom property with value <c>1</c>; otherwise it is <c>1</c>, despite the historical comment
+        /// describing <c>0</c> as a new customer and <c>1</c> as an old customer. The method sums all
+        /// item quantities for <c>units_ordered</c>. The provider identifier, order values, and order
+        /// number are directly concatenated and are not escaped. The external script URL is always HTTPS.
+        /// </remarks>
         public static string RenderTracker(Order o, HotcakesApplication app)
         {
             var sb = new StringBuilder();

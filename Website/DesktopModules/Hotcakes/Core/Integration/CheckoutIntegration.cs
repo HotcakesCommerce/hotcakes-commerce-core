@@ -30,9 +30,18 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Integration
 {
+    /// <summary>
+    /// Provides the default checkout integration behavior when no custom integration is configured.
+    /// </summary>
     [Serializable]
     internal class CheckoutIntegration : ICheckoutIntegration
     {
+        /// <summary>
+        /// Runs the default checkout pre-completion hook without changing the checkout flow.
+        /// </summary>
+        /// <param name="hccApp">The current Hotcakes application.</param>
+        /// <param name="model">The checkout view model being submitted.</param>
+        /// <returns>A default <see cref="IntegrationResult"/>.</returns>
         public IntegrationResult BeforeCheckoutCompleted(HotcakesApplication hccApp, CheckoutViewModel model)
         {
             return new IntegrationResult();

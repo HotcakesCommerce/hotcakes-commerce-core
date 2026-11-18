@@ -29,6 +29,9 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class MenuItem.
+    /// </summary>
     [Serializable]
     public class MenuItem
     {
@@ -36,13 +39,44 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
         private const string adminUrlBase = "~/DesktopModules/Hotcakes/Core/Admin/";
 
         public string Name { get; set; }
+        /// <summary>
+        /// Performs the administrative operation represented by GetUrl.
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// </summary>
+        /// <returns>The result of the operation.</returns>
         public string Text { get; set; }
+        /// <summary>
+        /// Performs the administrative operation represented by GetUrl.
+        /// </summary>
+        /// <returns>The result of the operation.</returns>
         public string BaseUrl { get; set; }
+        /// <summary>
+        /// Performs the administrative operation represented by GetUrl.
+        /// </summary>
+        /// <returns>The result of the operation.</returns>
         public string Url { get; set; }
+        /// <summary>
+        /// Performs the administrative operation represented by GetUrl.
+        /// </summary>
+        /// <returns>The result of the operation.</returns>
         public string PermissionToken { get; set; }
+        /// <summary>
+        /// Performs the administrative operation represented by GetUrl.
+        /// </summary>
+        /// <returns>The result of the operation.</returns>
         public bool HiddenInDnnMenu { get; set; }
+        /// <summary>
+        /// Performs the administrative operation represented by GetUrl.
+        /// </summary>
+        /// <returns>The result of the operation.</returns>
         public List<MenuItem> ChildItems { get; set; }
 
+        /// <summary>
+        /// Performs the administrative operation represented by GetUrl.
+        /// </summary>
+        /// <returns>The result of the operation.</returns>
         public string GetUrl()
         {
             if (string.IsNullOrEmpty(Url))

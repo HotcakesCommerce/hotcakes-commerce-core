@@ -31,9 +31,12 @@ using ImageResizer;
 
 namespace Hotcakes.Web
 {
+    /// <summary>Provides image sizing and file resizing helpers.</summary>
     [Serializable]
     public class Images
     {
+        /// <summary>Calculates dimensions that fit an image within the specified bounds.</summary>
+        /// <param name="maxwidth">The maximum width.</param><param name="maxheight">The maximum height.</param><param name="originalImage">The image whose dimensions are measured.</param><returns>The fitted dimensions.</returns>
         public static Size GetNewDimensions(int maxwidth, int maxheight, ref Bitmap originalImage)
         {
             int height;
@@ -43,6 +46,8 @@ namespace Hotcakes.Web
             return GetNewDimensions(maxwidth, maxheight, width, height);
         }
 
+        /// <summary>Calculates dimensions that fit the specified size within maximum bounds while preserving its aspect ratio.</summary>
+        /// <param name="maxwidth">The maximum width.</param><param name="maxheight">The maximum height.</param><param name="width">The original width.</param><param name="height">The original height.</param><returns>The fitted dimensions.</returns>
         public static Size GetNewDimensions(int maxwidth, int maxheight, int width, int height)
         {
             float multiplier;
@@ -66,6 +71,8 @@ namespace Hotcakes.Web
             return new Size(width, maxheight);
         }
 
+        /// <summary>Resizes an image file on disk and copies the result to the destination path.</summary>
+        /// <param name="originalFile">The source image path.</param><param name="newFileName">The destination image path.</param><param name="maxWidth">The maximum width.</param><param name="maxHeight">The maximum height.</param>
         public static void ShrinkImageFileOnDisk(string originalFile, string newFileName, int maxWidth, int maxHeight)
         {
             var tempFile = TempFiles.GetTemporaryFileInfo();

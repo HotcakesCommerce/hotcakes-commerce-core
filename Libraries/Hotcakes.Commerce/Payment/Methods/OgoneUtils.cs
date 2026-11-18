@@ -33,8 +33,21 @@ using System.Text;
 
 namespace Hotcakes.Commerce.Payment.Methods
 {
+    /// <summary>
+    /// Provides the Ogone SHA-out parameter list and signature calculation
+    /// utility.
+    /// </summary>
     public static class OgoneUtils
     {
+        /// <summary>
+        /// Gets the mutable list of exact Ogone response parameter names used
+        /// when constructing a SHA-out signature.
+        /// </summary>
+        /// <remarks>
+        /// The list preserves the provider spelling, including underscores.
+        /// The field is intentionally mutable for compatibility with existing
+        /// integrations.
+        /// </remarks>
         public static List<string> ShaOutParams = new List<string>
         {
             "AAVADDRESS",
@@ -95,6 +108,24 @@ namespace Hotcakes.Commerce.Payment.Methods
             "VC"
         };
 
+        /// <summary>
+        /// Calculates an Ogone SHA signature from the supplied parameters.
+        /// </summary>
+        /// <param name="parameters">The parameter collection to include in the signature.</param>
+        /// <param name="hashAlgorithm">The SHA algorithm used to calculate the digest.</param>
+        /// <param name="passPhrase">The pass phrase appended to every included parameter.</param>
+        /// <returns>
+        /// An uppercase hexadecimal digest. Parameters are upper-cased and
+        /// sorted by key; entries whose values are null, empty, or whitespace
+        /// are omitted.
+        /// </returns>
+        /// <remarks>
+        /// The hash input is built by concatenating each included
+        /// <c>KEY=value</c> pair followed immediately by <paramref name="passPhrase"/>,
+        /// with no separators. The resulting string is encoded as UTF-8 before
+        /// hashing. The selected algorithm is provided by
+        /// <see cref="OgoneHashAlgorithm"/>.
+        /// </remarks>
         public static string CalculateShaHash(NameValueCollection parameters, OgoneHashAlgorithm hashAlgorithm,
             string passPhrase)
         {

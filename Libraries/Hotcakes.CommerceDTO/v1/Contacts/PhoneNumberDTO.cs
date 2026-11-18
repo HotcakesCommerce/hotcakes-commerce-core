@@ -30,14 +30,14 @@ using System.Runtime.Serialization;
 namespace Hotcakes.CommerceDTO.v1.Contacts
 {
     /// <summary>
-    ///     Phone number information
+    ///     Phone number information used as part of contact details.
     /// </summary>
     [DataContract]
     [Serializable]
     public class PhoneNumberDTO
     {
         /// <summary>
-        ///     Set default values
+        ///     Initializes an empty phone number with no country code or extension.
         /// </summary>
         public PhoneNumberDTO()
         {

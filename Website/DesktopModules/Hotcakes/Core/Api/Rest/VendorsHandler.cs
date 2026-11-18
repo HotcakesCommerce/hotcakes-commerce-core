@@ -41,6 +41,8 @@ namespace Hotcakes.Modules.Core.Api.Rest
     [Serializable]
     public class VendorsHandler : BaseRestHandler
     {
+        /// <summary>Initializes a new instance of the <see cref="VendorsHandler"/> handler.</summary>
+        /// <param name="app">The commerce application context used by the handler.</param>
         public VendorsHandler(HotcakesApplication app)
             : base(app)
         {

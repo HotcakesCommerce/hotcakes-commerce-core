@@ -29,9 +29,18 @@ using System.Text;
 
 namespace Hotcakes.Web
 {
+    /// <summary>
+    /// Provides helpers for calculating page offsets and rendering HTML pagers.
+    /// </summary>
     [Serializable]
     public class Paging
     {
+        /// <summary>
+        /// Calculates the number of pages needed for a record count and page size.
+        /// </summary>
+        /// <param name="totalRecords">The total number of records.</param>
+        /// <param name="pageSize">The number of records on each page.</param>
+        /// <returns>The calculated page count, with at least one page.</returns>
         public static int TotalPages(int totalRecords, int pageSize)
         {
             var result = 1;
@@ -54,6 +63,12 @@ namespace Hotcakes.Web
             return result;
         }
 
+        /// <summary>
+        /// Calculates the zero-based starting row index for a page.
+        /// </summary>
+        /// <param name="pageNumber">The one-based page number.</param>
+        /// <param name="pageSize">The number of records on each page.</param>
+        /// <returns>The zero-based starting row index.</returns>
         public static int StartRowIndex(int pageNumber, int pageSize)
         {
             var pageIndex = pageNumber - 1;
@@ -61,22 +76,58 @@ namespace Hotcakes.Web
             return pageIndex*pageSize;
         }
 
+        /// <summary>
+        /// Renders an HTML pager based on a record count and page size.
+        /// </summary>
+        /// <param name="link">A composite-format link containing the page number placeholder.</param>
+        /// <param name="currentPage">The current one-based page number.</param>
+        /// <param name="totalRecords">The total number of records.</param>
+        /// <param name="pageSize">The number of records on each page.</param>
+        /// <returns>The rendered pager markup, or an empty string when paging is unnecessary.</returns>
+        /// <see cref="RenderPager(string, int, int)" />
         public static string RenderPager(string link, int currentPage, int totalRecords, int pageSize)
         {
             return RenderPager(link, currentPage, TotalPages(totalRecords, pageSize));
         }
 
+        /// <summary>
+        /// Renders an HTML pager for a known page count using the default display limit.
+        /// </summary>
+        /// <param name="link">A composite-format link containing the page number placeholder.</param>
+        /// <param name="currentPage">The current one-based page number.</param>
+        /// <param name="pages">The total number of pages.</param>
+        /// <returns>The rendered pager markup, or an empty string when paging is unnecessary.</returns>
+        /// <see cref="RenderPagerWithLimits(string, int, int, int)" />
         public static string RenderPager(string link, int currentPage, int pages)
         {
             return RenderPagerWithLimits(link, currentPage, pages, 10);
         }
 
+        /// <summary>
+        /// Renders an HTML pager from a record count with a maximum number of visible pages.
+        /// </summary>
+        /// <param name="link">A composite-format link containing the page number placeholder.</param>
+        /// <param name="currentPage">The current one-based page number.</param>
+        /// <param name="totalRecords">The total number of records.</param>
+        /// <param name="pageSize">The number of records on each page.</param>
+        /// <param name="maxPagesToShow">The maximum number of page links in one group.</param>
+        /// <returns>The rendered pager markup, or an empty string when paging is unnecessary.</returns>
+        /// <see cref="TotalPages(int, int)" />
+        /// <see cref="RenderPagerWithLimits(string, int, int, int)" />
         public static string RenderPagerWithLimits(string link, int currentPage, int totalRecords, int pageSize,
             int maxPagesToShow)
         {
             return RenderPagerWithLimits(link, currentPage, TotalPages(totalRecords, pageSize), maxPagesToShow);
         }
 
+        /// <summary>
+        /// Renders an HTML pager for a known page count with a maximum number of visible pages.
+        /// </summary>
+        /// <param name="link">A composite-format link containing the page number placeholder.</param>
+        /// <param name="currentPage">The current one-based page number.</param>
+        /// <param name="pages">The total number of pages.</param>
+        /// <param name="maxPagesToShow">The maximum number of page links in one group.</param>
+        /// <returns>The rendered pager markup, or an empty string when paging is unnecessary.</returns>
         public static string RenderPagerWithLimits(string link, int currentPage, int pages, int maxPagesToShow)
         {
             // don't render a pager if we don't need one

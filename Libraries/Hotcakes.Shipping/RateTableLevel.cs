@@ -30,9 +30,17 @@ using System.Linq;
 
 namespace Hotcakes.Shipping
 {
+    /// <summary>
+    /// Represents one threshold and its associated shipping charge or percentage.
+    /// </summary>
+    /// <seealso cref="IComparable{RateTableLevel}" />
+    /// <seealso cref="IEquatable{RateTableLevel}" />
     [Serializable]
     public class RateTableLevel : IComparable<RateTableLevel>, IEquatable<RateTableLevel>
     {
+        /// <summary>
+        /// Initializes a rate-table level with zero values.
+        /// </summary>
         public RateTableLevel()
         {
             Level = 0;
@@ -40,10 +48,26 @@ namespace Hotcakes.Shipping
             Percent = 0;
         }
 
+        /// <summary>
+        /// Gets or sets the threshold at which this level applies.
+        /// </summary>
         public decimal Level { get; set; }
+
+        /// <summary>
+        /// Gets or sets the fixed rate associated with this level.
+        /// </summary>
         public decimal Rate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the percentage associated with this level.
+        /// </summary>
         public decimal Percent { get; set; }
 
+        /// <summary>
+        /// Compares this level with another level by <see cref="Level" />.
+        /// </summary>
+        /// <param name="other">The level to compare with this instance.</param>
+        /// <returns>A value indicating the relative order of the two levels.</returns>
         public int CompareTo(RateTableLevel other)
         {
             return Level.CompareTo(other.Level);
@@ -51,6 +75,11 @@ namespace Hotcakes.Shipping
 
         #region IEquatable<RateTableLevel> Members
 
+        /// <summary>
+        /// Determines whether another level has the same threshold, rate, and percentage.
+        /// </summary>
+        /// <param name="other">The level to compare with this instance.</param>
+        /// <returns><see langword="true" /> when all rate-table values match; otherwise, <see langword="false" />.</returns>
         public bool Equals(RateTableLevel other)
         {
             if ((other.Level == Level)
@@ -62,6 +91,12 @@ namespace Hotcakes.Shipping
 
         #endregion
 
+        /// <summary>
+        /// Finds the applicable rate-table level for a threshold value.
+        /// </summary>
+        /// <param name="levelValue">The value for which an applicable level is sought.</param>
+        /// <param name="levels">The levels to inspect. The list is sorted as part of the lookup.</param>
+        /// <returns>The highest qualifying level, or a level with <see cref="Level" /> set to -1 when no level qualifies.</returns>
         public static RateTableLevel FindRateForLevel(decimal levelValue, List<RateTableLevel> levels)
         {
             var result = new RateTableLevel

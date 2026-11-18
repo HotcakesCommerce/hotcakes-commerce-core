@@ -34,8 +34,12 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Modules.Core.Admin.Configuration
 {
+    /// <summary>
+    /// Provides the administrative page for editing a country configuration.
+    /// </summary>
     public partial class Countries_Edit : BaseAdminPage
     {
+        /// <summary>Gets or sets the country identifier being edited.</summary>
         public string CountryId
         {
             get { return Request.Params["countryId"]; }

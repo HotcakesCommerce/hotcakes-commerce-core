@@ -31,9 +31,15 @@ using Hotcakes.Modules.Core.Admin.Controls;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class BaseProductPage.
+    /// </summary>
     [Serializable]
     public abstract class BaseProductPage : BaseAdminPage
     {
+        /// <summary>
+        /// Gets or sets the product id.
+        /// </summary>
         public string ProductId
         {
             get
@@ -46,6 +52,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             set { ViewState["ProductId"] = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the return url.
+        /// </summary>
         public string ReturnUrl
         {
             get { return Request.QueryString["returnUrl"]; }

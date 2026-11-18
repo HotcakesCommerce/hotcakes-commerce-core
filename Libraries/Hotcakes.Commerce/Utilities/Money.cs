@@ -30,60 +30,111 @@ using System.Threading;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Provides currency arithmetic, rounding, and display helpers.
+    /// </summary>
     public class Money
     {
+        /// <summary>Applies a percentage discount and rounds the result using the current UI culture's currency precision.</summary>
+        /// <param name="baseAmount">The amount before the discount.</param>
+        /// <param name="percentage">The discount percentage.</param>
+        /// <returns>The discounted, rounded amount.</returns>
         public static decimal ApplyDiscountPercent(decimal baseAmount, decimal percentage)
         {
             return RoundCurrency(baseAmount*((100 - percentage)/100));
         }
 
+        /// <summary>Applies a percentage increase and rounds the result using the current UI culture's currency precision.</summary>
+        /// <param name="baseAmount">The amount before the increase.</param>
+        /// <param name="percentage">The increase percentage.</param>
+        /// <returns>The increased, rounded amount.</returns>
         public static decimal ApplyIncreasedPercent(decimal baseAmount, decimal percentage)
         {
             return RoundCurrency(baseAmount*((100 + percentage)/100));
         }
 
+        /// <summary>Calculates a percentage discount and rounds it using the current UI culture's currency precision.</summary>
+        /// <param name="baseAmount">The amount on which the discount is calculated.</param>
+        /// <param name="percentage">The discount percentage.</param>
+        /// <returns>The rounded discount amount.</returns>
         public static decimal GetDiscountAmountByPercent(decimal baseAmount, decimal percentage)
         {
             return RoundCurrency(baseAmount*(percentage/100));
         }
 
+        /// <summary>Returns a fixed discount amount.</summary>
+        /// <param name="baseAmount">The original amount; retained for API symmetry and not used in the calculation.</param>
+        /// <param name="discountAmount">The fixed discount amount.</param>
+        /// <returns><paramref name="discountAmount"/> unchanged.</returns>
         public static decimal GetDiscountAmount(decimal baseAmount, decimal discountAmount)
         {
             return discountAmount;
         }
 
+        /// <summary>Subtracts a fixed discount amount from a base amount.</summary>
+        /// <param name="baseAmount">The amount before the discount.</param>
+        /// <param name="discountAmount">The fixed amount to subtract.</param>
+        /// <returns>The amount after subtraction.</returns>
         public static decimal ApplyDiscountAmount(decimal baseAmount, decimal discountAmount)
         {
             return baseAmount - discountAmount;
         }
 
+        /// <summary>Adds a fixed increase amount to a base amount.</summary>
+        /// <param name="baseAmount">The amount before the increase.</param>
+        /// <param name="increaseAmount">The fixed amount to add.</param>
+        /// <returns>The amount after addition.</returns>
         public static decimal ApplyIncreasedAmount(decimal baseAmount, decimal increaseAmount)
         {
             return baseAmount + increaseAmount;
         }
 
+        /// <summary>Formats an amount with the current UI culture's number of currency decimal places.</summary>
+        /// <param name="amount">The amount to format.</param>
+        /// <returns>The formatted fixed-point amount.</returns>
+        /// <seealso cref="FormatCurrency(decimal, CultureInfo)"/>
         public static string FormatCurrency(decimal amount)
         {
             return FormatCurrency(amount, Thread.CurrentThread.CurrentUICulture);
         }
 
+        /// <summary>Formats an amount with the specified culture's currency decimal precision.</summary>
+        /// <param name="amount">The amount to format.</param>
+        /// <param name="c">The culture whose currency precision is used.</param>
+        /// <returns>The formatted fixed-point amount.</returns>
         public static string FormatCurrency(decimal amount, CultureInfo c)
         {
             var digits = c.NumberFormat.CurrencyDecimalDigits;
             return amount.ToString("F0" + digits);
         }
 
+        /// <summary>Rounds an amount to the current UI culture's currency decimal precision.</summary>
+        /// <param name="amount">The amount to round.</param>
+        /// <returns>The rounded amount, using midpoint-away-from-zero rounding.</returns>
+        /// <seealso cref="RoundCurrency(decimal, CultureInfo)"/>
         public static decimal RoundCurrency(decimal amount)
         {
             return RoundCurrency(amount, Thread.CurrentThread.CurrentUICulture);
         }
 
+        /// <summary>Rounds an amount to the specified culture's currency decimal precision.</summary>
+        /// <param name="amount">The amount to round.</param>
+        /// <param name="c">The culture whose currency precision is used.</param>
+        /// <returns>The rounded amount, using midpoint-away-from-zero rounding.</returns>
         public static decimal RoundCurrency(decimal amount, CultureInfo c)
         {
             var digits = c.NumberFormat.CurrencyDecimalDigits;
             return decimal.Round(amount, digits, MidpointRounding.AwayFromZero);
         }
 
+        /// <summary>
+        /// Produces a compact display string for an amount, using thousand, million, or billion suffixes when needed.
+        /// </summary>
+        /// <param name="amount">The amount to display. The value is rounded upward before formatting.</param>
+        /// <param name="format">The format provider used by numeric formatting.</param>
+        /// <param name="digitsMax">The maximum number of leading digits before a suffix is selected.</param>
+        /// <param name="formatString">The numeric format prefix, such as <c>F</c>.</param>
+        /// <returns>A compact amount string with an optional <c>k</c>, <c>m</c>, or <c>b</c> suffix.</returns>
         public static string GetFriendlyAmount(decimal amount, IFormatProvider format, int digitsMax = 3,
             string formatString = "F")
         {

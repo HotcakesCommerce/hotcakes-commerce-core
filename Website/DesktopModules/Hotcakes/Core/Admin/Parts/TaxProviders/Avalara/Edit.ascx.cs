@@ -32,6 +32,9 @@ namespace Hotcakes.Modules.Core.Modules.TaxProviders.Avalara
 {
     partial class Edit : HccTaxProviderPart
     {
+        /// <summary>
+        /// Performs the administrative operation represented by LoadData.
+        /// </summary>
         public override void LoadData()
         {
             var settings = new AvalaraSettings();
@@ -47,6 +50,9 @@ namespace Hotcakes.Modules.Core.Modules.TaxProviders.Avalara
             txtTaxExemptCode.Text = settings.TaxExemptCode;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by SaveData.
+        /// </summary>
         public override void SaveData()
         {
             var settings = new AvalaraSettings();

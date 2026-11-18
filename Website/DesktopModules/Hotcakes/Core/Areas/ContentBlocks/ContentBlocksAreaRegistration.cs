@@ -29,14 +29,24 @@ using System.Web.Mvc;
 
 namespace Hotcakes.Modules.Core.Areas.ContentBlocks
 {
+    /// <summary>
+    /// Registers the MVC area that serves content block controllers.
+    /// </summary>
     [Serializable]
     public class ContentBlocksAreaRegistration : AreaRegistration
     {
+        /// <summary>
+        /// Gets the name of the MVC area.
+        /// </summary>
         public override string AreaName
         {
             get { return "ContentBlocks"; }
         }
 
+        /// <summary>
+        /// Registers the routes for this MVC area.
+        /// </summary>
+        /// <param name="context">The value supplied for context.</param>
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(

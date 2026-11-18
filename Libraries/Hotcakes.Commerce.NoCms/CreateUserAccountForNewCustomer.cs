@@ -35,8 +35,21 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.NoCms
 {
+    /// <summary>
+    /// Creates a <see cref="CustomerAccount"/> for an order when the customer does not already have an account.
+    /// </summary>
     public class CreateUserAccountForNewCustomer : OrderTask
     {
+        /// <summary>
+        /// Finds an existing customer by the order email address or creates a new customer account from the order details.
+        /// </summary>
+        /// <param name="context">The workflow context containing the order, commerce application, and request information.</param>
+        /// <returns><see langword="true"/> after the existing or newly created customer identifier has been assigned to <see cref="OrderTaskContext.UserId"/>.</returns>
+        /// <remarks>
+        /// New accounts receive a generated password whose length is based on <see cref="WebAppSettings.PasswordMinimumLength"/>,
+        /// with a minimum of eight characters. When the forgot-password template is available, the generated password is sent
+        /// to the new customer through the configured mail service.
+        /// </remarks>
         public override bool Execute(OrderTaskContext context)
         {
             var u = context.HccApp.MembershipServices.Customers.FindByEmail(context.Order.UserEmail).FirstOrDefault();
@@ -91,21 +104,38 @@ namespace Hotcakes.Commerce.NoCms
             return true;
         }
 
+        /// <summary>
+        /// Performs the workflow rollback operation for this task.
+        /// </summary>
+        /// <param name="context">The workflow context for the task being rolled back.</param>
+        /// <returns><see langword="true"/> because this task does not undo the customer account operation.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>
+        /// Gets the stable identifier used to register this workflow task.
+        /// </summary>
+        /// <returns>The task identifier <c>1755C649-4C16-41A6-B5AE-5259067FFF0E</c>.</returns>
         public override string TaskId()
         {
             return "1755C649-4C16-41A6-B5AE-5259067FFF0E";
         }
 
+        /// <summary>
+        /// Gets the display name of this workflow task.
+        /// </summary>
+        /// <returns><c>Create User Account for New Customer</c>.</returns>
         public override string TaskName()
         {
             return "Create User Account for New Customer";
         }
 
+        /// <summary>
+        /// Gets the display name of the workflow step.
+        /// </summary>
+        /// <returns><c>Create User Account for New Customer</c>, falling back to <see cref="TaskName"/> if the configured name is empty.</returns>
         public override string StepName()
         {
             var result = string.Empty;
@@ -117,6 +147,10 @@ namespace Hotcakes.Commerce.NoCms
             return result;
         }
 
+        /// <summary>
+        /// Creates an independent instance of this workflow task.
+        /// </summary>
+        /// <returns>A new <see cref="CreateUserAccountForNewCustomer"/> instance.</returns>
         public override Task Clone()
         {
             return new CreateUserAccountForNewCustomer();

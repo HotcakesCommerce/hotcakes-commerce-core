@@ -33,6 +33,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
+    /// <summary>
+    /// Provides the administrative page for managing category roles.
+    /// </summary>
     public partial class Categories_Roles : BaseCategoryPage
     {
         #region Implementation

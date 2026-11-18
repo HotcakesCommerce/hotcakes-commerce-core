@@ -33,9 +33,12 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Displays the store's top sellers for the current Sunday-to-Saturday week.</summary>
     [Serializable]
     public class TopWeeklySellersController : BaseAppController
     {
+        /// <summary>Loads and renders the current week's top sellers.</summary>
+        /// <returns>The weekly sellers view.</returns>
         public ActionResult Index()
         {
             var model = new SideMenuViewModel {Title = "Top Weekly Sellers"};
@@ -49,6 +52,10 @@ namespace Hotcakes.Modules.Core.Controllers
             return View(model);
         }
 
+        /// <summary>Calculates the inclusive start and end timestamps for the current week.</summary>
+        /// <param name="currentTime">A timestamp within the week to calculate.</param>
+        /// <param name="start">Receives the start of the week.</param>
+        /// <param name="end">Receives the final millisecond of the week.</param>
         public void CalculateDates(DateTime currentTime, ref DateTime start, ref DateTime end)
         {
             start = FindStartOfWeek(currentTime);

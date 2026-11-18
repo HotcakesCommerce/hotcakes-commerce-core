@@ -33,6 +33,9 @@ using Hotcakes.Modules.Core.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
+    /// <summary>
+    /// Provides the administrative page for managing product file downloads.
+    /// </summary>
     public partial class FileDownloads : BaseProductPage
     {
         protected override void OnInit(EventArgs e)

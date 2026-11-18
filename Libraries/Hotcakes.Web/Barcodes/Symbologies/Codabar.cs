@@ -29,11 +29,16 @@ using System.Collections;
 
 namespace Hotcakes.Web.Barcodes
 {
+    /// <summary>Codabar barcode encoder.</summary>
+    /// <remarks>The encoded output is exposed through <see cref="IBarcode.Encoded_Value"/>.</remarks>
     [Serializable]
     internal class Codabar : BarcodeCommon, IBarcode
     {
         private readonly Hashtable Codabar_Code = new Hashtable(); //is initialized by init_Codabar()
 
+        /// <summary>Encodes data using the Codabar symbology.</summary>
+        /// <param name="input">The data to encode.</param>
+        /// <seealso cref="Encoded_Value"/>
         public Codabar(string input)
         {
             Raw_Data = input;
@@ -41,6 +46,8 @@ namespace Hotcakes.Web.Barcodes
 
         #region IBarcode Members
 
+        /// <summary>Gets the encoded bar-and-space representation.</summary>
+        /// <seealso cref="IBarcode.Encoded_Value"/>
         public string Encoded_Value
         {
             get { return Encode_Codabar(); }

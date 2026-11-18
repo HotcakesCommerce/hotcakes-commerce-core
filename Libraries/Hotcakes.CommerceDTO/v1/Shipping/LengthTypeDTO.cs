@@ -28,16 +28,19 @@ using System.Runtime.Serialization;
 
 namespace Hotcakes.CommerceDTO.v1.Shipping
 {
+    /// <summary>
+    ///     Identifies the unit used for length measurements on a <see cref="ShippableItemDTO"/>.
+    /// </summary>
     [DataContract]
     public enum LengthTypeDTO
     {
         /// <summary>
-        ///     Measured in inches
+        ///     Length is measured in inches.
         /// </summary>
         [EnumMember] Inches = 1,
 
         /// <summary>
-        ///     Measured in centimeters
+        ///     Length is measured in centimeters.
         /// </summary>
         [EnumMember] Centimeters = 2
     }

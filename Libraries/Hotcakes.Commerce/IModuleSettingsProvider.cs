@@ -26,10 +26,13 @@
 
 namespace Hotcakes.Modules.Core.Settings
 {
+    /// <summary>Defines settings access for a module instance.</summary>
+    /// <remarks>The <c>Hotcakes.Modules.Core.Settings</c> namespace is retained for compatibility.</remarks>
     public interface IModuleSettingsProvider
     {
+        /// <summary>Gets a typed module setting or its default.</summary><typeparam name="T">The setting type.</typeparam><param name="key">The setting key.</param><param name="defVal">The default value.</param>
         T GetSettingValue<T>(string key, T defVal);
-
+        /// <summary>Stores a module setting.</summary><param name="key">The setting key.</param><param name="value">The value to store.</param>
         void SetSettingValue(string key, object value);
     }
 }

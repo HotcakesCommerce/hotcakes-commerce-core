@@ -30,6 +30,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Configuration
 {
+    /// <summary>
+    /// Provides the administrative page for configuring social media settings.
+    /// </summary>
     public partial class SocialMedia : BaseAdminPage
     {
         protected override void OnPreInit(EventArgs e)

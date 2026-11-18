@@ -42,10 +42,10 @@ namespace Hotcakes.Modules.Core.Models
         ///     If this is not available then by default PageURLForamt will be used by system
         /// </summary>
         private string _PagerUrlFormatFirst = string.Empty;
-
         /// <summary>
         ///     Set default values
         /// </summary>
+
         public MiniPagerViewModel()
         {
             CurrentPage = 1;
@@ -57,11 +57,17 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     Total available pages based on page size and total records
         /// </summary>
+        /// <summary>
+        /// Gets or sets the TotalPages value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public int TotalPages { get; set; }
 
         /// <summary>
         ///     Current page that end user needs to see
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the CurrentPage value used by this storefront model.
         /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public int CurrentPage { get; set; }
@@ -71,10 +77,16 @@ namespace Hotcakes.Modules.Core.Models
         ///     so needs to format the URL format with tokens in order to get replaced with proper values
         ///     at run time.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the PagerUrlFormat value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string PagerUrlFormat { get; set; }
 
         // Url for first page 
+        /// <summary>
+        /// Gets or sets the PagerUrlFormatFirst value used by this storefront model.
+        /// </summary>
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string PagerUrlFormatFirst
         {

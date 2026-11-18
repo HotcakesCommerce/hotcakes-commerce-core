@@ -32,10 +32,17 @@ namespace Hotcakes.Commerce.Catalog
     /// <summary>
     ///     This is the primary class used for wish list items in the main application.
     /// </summary>
-    /// <remarks>The REST API equivalent is WishListItemDTO.</remarks>
+    /// <remarks>
+    ///     The REST API equivalent is <see cref="WishListItemDTO" />. A wishlist item belongs to a customer and store and
+    ///     may retain the option selections used when the product was saved.
+    /// </remarks>
     [Serializable]
     public class WishListItem
     {
+        /// <summary>
+        ///     Initializes a wishlist item with empty identifiers, a quantity of one, the current UTC timestamp, and empty
+        ///     option selections.
+        /// </summary>
         public WishListItem()
         {
             Init();
@@ -62,8 +69,11 @@ namespace Hotcakes.Commerce.Catalog
         public string ProductId { get; set; }
 
         /// <summary>
-        /// Displays any selected choices made by the customer when saving the product to the wish list.
+        ///     Displays the short description associated with the saved product's selected choices.
         /// </summary>
+        /// <remarks>
+        ///     This value is a display-oriented field; the saved option selections are held in <see cref="SelectionData" />.
+        /// </remarks>
         public string ProductShortDescription { get; set; }
 
         /// <summary>
@@ -94,10 +104,13 @@ namespace Hotcakes.Commerce.Catalog
         }
 
         /// <summary>
-        ///     Returns an instance of the Product object using the ProductId property.
+        ///     Resolves the product identified by <see cref="ProductId" /> through the application's catalog service.
         /// </summary>
-        /// <param name="app">An instance of the hotcakes application</param>
-        /// <returns>Product - an instance of the Product object</returns>
+        /// <param name="app">Application instance whose catalog service resolves the associated product.</param>
+        /// <returns>
+        ///     The associated <see cref="Product" /> when it can be resolved; otherwise the result returned by the product
+        ///     repository for the identifier.
+        /// </returns>
         public Product GetAssociatedProduct(HotcakesApplication app)
         {
             return app.CatalogServices.Products.FindWithCache(ProductId);

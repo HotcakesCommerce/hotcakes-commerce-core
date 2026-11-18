@@ -124,6 +124,8 @@ namespace Hotcakes.Commerce.Catalog
         }
 
 
+        /// <summary>Converts this catalog model to its REST API DTO representation.</summary>
+        /// <returns>The result of this operation.</returns>
         public VariantDTO ToDto()
         {
             var selDto = Selections.Select(s => s.ToDto()).ToList();

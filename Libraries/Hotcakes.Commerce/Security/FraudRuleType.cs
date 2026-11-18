@@ -26,13 +26,45 @@
 
 namespace Hotcakes.Commerce.Security
 {
+    /// <summary>
+    /// Identifies the fraud-check input represented by a <see cref="FraudRule"/>.
+    /// </summary>
+    /// <remarks>
+    /// The numeric values are persisted with fraud rules and must remain compatible
+    /// with existing records.
+    /// </remarks>
     public enum FraudRuleType
     {
+        /// <summary>
+        /// Indicates that no fraud rule type has been selected.
+        /// </summary>
         None = 0,
+
+        /// <summary>
+        /// Matches an IP address.
+        /// </summary>
         IPAddress = 1,
+
+        /// <summary>
+        /// Matches a domain name.
+        /// </summary>
         DomainName = 2,
+
+        /// <summary>
+        /// Matches an email address.
+        /// </summary>
         EmailAddress = 3,
+
+        /// <summary>
+        /// Matches a phone number after the check-data normalization applied by
+        /// <see cref="FraudCheckData.PhoneNumber"/>.
+        /// </summary>
         PhoneNumber = 4,
+
+        /// <summary>
+        /// Matches a credit-card number after the check-data normalization applied by
+        /// <see cref="FraudCheckData.CreditCard"/>.
+        /// </summary>
         CreditCardNumber = 5
     }
 }

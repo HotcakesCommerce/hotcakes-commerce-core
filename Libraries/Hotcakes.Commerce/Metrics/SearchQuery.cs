@@ -28,13 +28,29 @@ using System;
 
 namespace Hotcakes.Commerce.Metrics
 {
+    /// <summary>
+    /// Represents a shopper's search phrase recorded for a commerce store.
+    /// </summary>
+    /// <remarks>
+    /// The <see cref="ShopperID"/> property casing is part of the model's compatibility-sensitive
+    /// public API and is intentionally preserved. A newly constructed instance starts with an empty
+    /// identifier and phrase, a zero store identifier, and a UTC <see cref="LastUpdated"/> value.
+    /// </remarks>
     public class SearchQuery
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchQuery"/> class with default values.
+        /// </summary>
         public SearchQuery()
         {
             clear();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchQuery"/> class for a shopper and phrase.
+        /// </summary>
+        /// <param name="userId">The shopper identifier to assign to <see cref="ShopperID"/>.</param>
+        /// <param name="searchPhrase">The search phrase to assign to <see cref="QueryPhrase"/>.</param>
         public SearchQuery(string userId, string searchPhrase)
         {
             clear();
@@ -42,10 +58,32 @@ namespace Hotcakes.Commerce.Metrics
             QueryPhrase = searchPhrase;
         }
 
+        /// <summary>
+        /// Gets or sets the unique identifier of this search-query record.
+        /// </summary>
+        /// <value>The record identifier, or an empty string before repository creation assigns one.</value>
         public string Bvin { get; set; }
+
+        /// <summary>
+        /// Gets or sets the identifier of the store that owns this record.
+        /// </summary>
+        /// <value>The commerce store identifier; repository creation replaces it with the current store.</value>
         public long StoreId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the UTC date and time when this record was last updated.
+        /// </summary>
         public DateTime LastUpdated { get; set; }
+
+        /// <summary>
+        /// Gets or sets the shopper identifier associated with the search.
+        /// </summary>
+        /// <value>The shopper identifier. The public member name is intentionally <c>ShopperID</c>.</value>
         public string ShopperID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the phrase entered by the shopper.
+        /// </summary>
         public string QueryPhrase { get; set; }
 
         private void clear()

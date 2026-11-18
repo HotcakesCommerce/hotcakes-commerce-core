@@ -30,15 +30,19 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Matches an order or line item by configured product BVIN.</summary>
     public class LineItemIsProduct : HasProductsQualificationBase
     {
+        /// <summary>Stable serialized type identifier for this qualification.</summary>
         public const string TypeIdString = "CCB783E6-9CA3-42FF-A59F-E063D3EFEB99";
             
+        /// <summary>Gets the stable line-item product qualification identifier.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdString); }
         }
 
+        /// <summary>Matches the current line item or any order item against configured product IDs.</summary>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             if (context == null) return false;

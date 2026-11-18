@@ -30,12 +30,18 @@ using System.Runtime.Serialization;
 
 namespace Hotcakes.CommerceDTO.v1.Catalog
 {
+    /// <summary>
+    ///     A compact category representation used when returning category relationships such as parents, peers, and children.
+    /// </summary>
     [DataContract]
     [Serializable]
     public class CategorySnapshotDTO
     {
         //public List<CategoryPageVersionDTO> Versions { get; set; }
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="CategorySnapshotDTO"/> type with its default DTO values.
+        /// </summary>
         public CategorySnapshotDTO()
         {
             Bvin = string.Empty;

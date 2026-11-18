@@ -28,27 +28,32 @@ using System;
 
 namespace Hotcakes.Payment.Gateways
 {
+    /// <summary>Stores the credentials and diagnostic options used by <see cref="Beanstream"/>.</summary>
     [Serializable]
     public class BeanstreamSettings : MethodSettings
     {
+        /// <summary>Gets or sets the Beanstream merchant identifier.</summary>
         public string MerchantId
         {
             get { return GetSettingOrEmpty("MerchantId"); }
             set { AddOrUpdate("MerchantId", value); }
         }
 
+        /// <summary>Gets or sets the Beanstream user name.</summary>
         public string UserName
         {
             get { return GetSettingOrEmpty("UserName"); }
             set { AddOrUpdate("UserName", value); }
         }
 
+        /// <summary>Gets or sets the Beanstream password.</summary>
         public string Password
         {
             get { return GetSettingOrEmpty("Password"); }
             set { AddOrUpdate("Password", value); }
         }
 
+        /// <summary>Gets or sets a value indicating whether request and response details are added to <see cref="Transaction.Result"/>.</summary>
         public bool DebugMode
         {
             get { return GetBoolSetting("DebugMode"); }

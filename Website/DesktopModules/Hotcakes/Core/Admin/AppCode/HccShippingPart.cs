@@ -30,11 +30,21 @@ using Hotcakes.Commerce.Shipping;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class HccShippingPart.
+    /// </summary>
     [Serializable]
     public class HccShippingPart : HccPart
     {
+        /// <summary>
+        /// Performs the administrative operation represented by AddHighlightColors.
+        /// </summary>
         public ShippingMethod ShippingMethod { get; set; }
 
+        /// <summary>
+        /// Performs the administrative operation represented by AddHighlightColors.
+        /// </summary>
+        /// <param name="lst">The list to which highlight options are added.</param>
         public void AddHighlightColors(DropDownList lst)
         {
             var liNone = new ListItem("- None -", string.Empty);

@@ -29,32 +29,48 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Search
 {
+    /// <summary>
+    /// Represents one value in a product-search facet.
+    /// </summary>
+    /// <remarks>
+    /// Identifier values are exposed as bvin strings, including identifiers converted from the
+    /// database representation. Parent fields are populated for hierarchical category facets.
+    /// </remarks>
     public class FacetItem
     {
         /// <summary>
-        /// This property reflects the total number of child facet items for the current facet item.
+        /// Gets or sets the number of matching products represented by this facet value.
         /// </summary>
         public int Count { get; set; }
         /// <summary>
-        /// This is the unique identifier for the current facet item.
+        /// Gets or sets the facet value identifier in bvin string form.
         /// </summary>
         public string Id { get; set; }
         /// <summary>
-        /// This is the localized name of the current facet item.  
+        /// Gets or sets the localized display name of the facet value.
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// If this facet item has a parent, it's parent ID will be in this property. 
+        /// Gets or sets the parent facet identifier in bvin string form, when the value is hierarchical.
         /// </summary>
         public string ParentId { get; set; }
         /// <summary>
-        /// If this facet item has a parent, this property will contain the localized name of the parent facet item.  
+        /// Gets or sets the localized display name of the parent facet, when one exists.
         /// </summary>
         public string ParentName { get; set; }
     }
 
+    /// <summary>
+    /// Represents a facet value together with its selected state for checkbox-based filters.
+    /// </summary>
     public class CheckboxFacetItem : FacetItem
     {
+        /// <summary>
+        /// Initializes a checkbox facet by copying the supplied facet values.
+        /// </summary>
+        /// <param name="item">The facet value to copy.</param>
+        /// <param name="selected">Whether the facet is selected.</param>
+        /// <param name="baseCount">The count added to an unselected facet value.</param>
         public CheckboxFacetItem(FacetItem item, bool selected, int baseCount = 0)
         {
             Checked = selected;
@@ -71,13 +87,21 @@ namespace Hotcakes.Commerce.Search
         }
 
         /// <summary>
-        /// If true, the current facet has been selected by the end-user.
+        /// Gets or sets a value indicating whether the facet is selected by the end user.
         /// </summary>
         public bool Checked { get; set; }
     }
 
+    /// <summary>
+    /// Represents a category facet value and its optional redirect URL.
+    /// </summary>
     public class CategoryFacetItem : FacetItem
     {
+        /// <summary>
+        /// Initializes a category facet by copying the supplied facet values.
+        /// </summary>
+        /// <param name="item">The facet value to copy.</param>
+        /// <param name="url">The URL associated with the category facet.</param>
         public CategoryFacetItem(FacetItem item, string url)
         {
             Url = url;
@@ -89,7 +113,7 @@ namespace Hotcakes.Commerce.Search
         }
 
         /// <summary>
-        /// This property is not currently used. It is intended to be used for categories that use a redirect URL.
+        /// Gets or sets the category URL. The current implementation does not use this value for redirects.
         /// </summary>
         public string Url { get; set; }
     }

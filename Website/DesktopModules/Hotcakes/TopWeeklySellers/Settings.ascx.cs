@@ -32,6 +32,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.TopWeeklySellers
 {
+    /// <summary>
+    /// Provides module settings for the top weekly sellers module.
+    /// </summary>
     public partial class Settings : HotcakesSettingsBase
     {
         #region Implementation
@@ -51,6 +54,9 @@ namespace Hotcakes.Modules.TopWeeklySellers
 
         #region ModuleSettingsBase overrides
 
+        /// <summary>
+        /// Loads the top weekly sellers settings into the controls.
+        /// </summary>
         public override void LoadSettings()
         {
             if (!IsPostBack)
@@ -68,6 +74,9 @@ namespace Hotcakes.Modules.TopWeeklySellers
             }
         }
 
+        /// <summary>
+        /// Saves the top weekly sellers settings from the controls.
+        /// </summary>
         public override void UpdateSettings()
         {
             var controller = new ModuleController();

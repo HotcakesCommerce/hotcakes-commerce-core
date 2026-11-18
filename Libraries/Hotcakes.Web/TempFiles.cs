@@ -29,9 +29,18 @@ using System.IO;
 
 namespace Hotcakes.Web
 {
+    /// <summary>
+    /// Provides helpers for creating temporary files.
+    /// </summary>
+    /// <seealso cref="FileInfo"/>
     [Serializable]
     public class TempFiles
     {
+        /// <summary>
+        /// Creates a temporary file and marks it with the <see cref="FileAttributes.Temporary"/> attribute.
+        /// </summary>
+        /// <returns>Information about the created temporary file.</returns>
+        /// <exception cref="ArgumentException">Thrown when the temporary file cannot be created.</exception>
         public static FileInfo GetTemporaryFileInfo()
         {
             string tempFileName;

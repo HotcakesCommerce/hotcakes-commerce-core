@@ -29,11 +29,15 @@ using System.Web.Mvc;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Writes an already generated response body using a caller-specified content type.</summary>
     [Serializable]
     public class RawResult : ActionResult
     {
         private readonly string contentType = "text/html";
         private readonly string data = string.Empty;
+        /// <summary>Initializes a raw response result.</summary>
+        /// <param name="content">The response body.</param>
+        /// <param name="contenttype">The MIME content type for the response.</param>
 
         public RawResult(string content, string contenttype)
         {
@@ -41,6 +45,8 @@ namespace Hotcakes.Modules.Core.Controllers
             contentType = contenttype;
         }
 
+        /// <summary>Writes the raw content to the current HTTP response.</summary>
+        /// <param name="context">The current MVC controller context.</param>
         public override void ExecuteResult(ControllerContext context)
         {
             context.HttpContext.Response.Clear();

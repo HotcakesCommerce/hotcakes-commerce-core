@@ -26,13 +26,20 @@
 
 namespace Hotcakes.Web.Logging
 {
+    /// <summary>Specifies the severity associated with a log entry.</summary>
     public enum EventLogSeverity
     {
+        /// <summary>Diagnostic information used for debugging.</summary>
         Debug = -1,
+        /// <summary>No severity was assigned.</summary>
         None = 0,
+        /// <summary>An informational log entry.</summary>
         Information = 1,
+        /// <summary>A condition that may require attention.</summary>
         Warning = 2,
+        /// <summary>An error that prevented an operation from completing normally.</summary>
         Error = 3,
+        /// <summary>A fatal condition affecting the application.</summary>
         Fatal = 4
     }
 }

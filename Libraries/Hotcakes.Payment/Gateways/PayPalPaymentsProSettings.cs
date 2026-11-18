@@ -28,51 +28,60 @@ using System;
 
 namespace Hotcakes.Payment.Gateways
 {
+    /// <summary>Stores the credentials, mode, currency, and diagnostic options used by <see cref="PayPalPaymentsPro"/>.</summary>
     [Serializable]
     public class PayPalPaymentsProSettings : MethodSettings
     {
+        /// <summary>Gets or sets the PayPal user name.</summary>
         public string PayPalUserName
         {
             get { return GetSettingOrEmpty("PayPalUserName"); }
             set { AddOrUpdate("PayPalUserName", value); }
         }
 
+        /// <summary>Gets or sets the PayPal password.</summary>
         public string PayPalPassword
         {
             get { return GetSettingOrEmpty("PayPalPassword"); }
             set { AddOrUpdate("PayPalPassword", value); }
         }
 
+        /// <summary>Gets or sets the PayPal client identifier.</summary>
         public string PayPalClientId
         {
             get { return GetSettingOrEmpty("PayPalClientId"); }
             set { AddOrUpdate("PayPalClientId", value); }
         }
 
+        /// <summary>Gets or sets the PayPal client secret.</summary>
         public string PayPalSecret
         {
             get { return GetSettingOrEmpty("PayPalSecret"); }
             set { AddOrUpdate("PayPalSecret", value); }
         }
 
+        /// <summary>Gets or sets the PayPal signature.</summary>
         public string PayPalSignature
         {
             get { return GetSettingOrEmpty("PayPalSignature"); }
             set { AddOrUpdate("PayPalSignature", value); }
         }
 
+        /// <summary>Gets or sets the PayPal API mode.</summary>
         public string PayPalMode
         {
             get { return GetSettingOrEmpty("PayPalMode"); }
             set { AddOrUpdate("PayPalMode", value); }
         }
 
+        /// <summary>Gets or sets a value indicating whether diagnostic request details are added to <see cref="Transaction.Result"/>.</summary>
         public bool DebugMode
         {
             get { return GetBoolSetting("DebugMode"); }
             set { SetBoolSetting("DebugMode", value); }
         }
 
+        /// <summary>Gets or sets the currency code used for PayPal requests.</summary>
         public string Currency
         {
             get

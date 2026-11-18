@@ -26,11 +26,18 @@
 
 namespace Hotcakes.Payment
 {
+    /// <summary>
+    /// Describes the schedule and provider identity for recurring billing.
+    /// </summary>
     public class RecurringData
     {
+        /// <summary>Gets or sets the number of <see cref="IntervalType"/> units between recurring charges.</summary>
         public int Interval { get; set; }
+        /// <summary>Gets or sets the unit used by <see cref="Interval"/>.</summary>
         public RecurringIntervalType IntervalType { get; set; }
+        /// <summary>Gets or sets the payment provider's subscription identifier.</summary>
         public string SubscriptionId { get; set; }
+        /// <summary>Gets or sets the payment provider's subscription name.</summary>
         public string SubscriptionName { get; set; }
     }
 }

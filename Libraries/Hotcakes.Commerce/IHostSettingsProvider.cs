@@ -28,12 +28,14 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>Defines access to host-level commerce settings.</summary>
     public interface IHostSettingsProvider
     {
+        /// <summary>Gets host-allowed file extensions.</summary>
         IEnumerable<string> GetAllowedExtensions();
-
+        /// <summary>Determines whether host debug mode is enabled.</summary>
         bool DebugModeEnabled();
-
+        /// <summary>Gets a typed host setting or its default.</summary><typeparam name="T">The setting type.</typeparam><param name="key">The setting key.</param><param name="defVal">The default value.</param>
         T GetSettingValue<T>(string key, T defVal);
     }
 }

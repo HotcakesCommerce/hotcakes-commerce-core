@@ -33,24 +33,36 @@ namespace Hotcakes.Commerce.Payment.Methods
      * as it is not clear what implications it might have on the system
      */
 
+    /// <summary>
+    /// Represents the reward-points checkout data shape.
+    /// This type intentionally does not inherit <see cref="PaymentMethod"/>; that compatibility exception is preserved because the display-method implications remain unresolved.
+    /// </summary>
     [Serializable]
     public class RewardPoints //: PaymentMethod
     {
+        /// <summary>Gets the stable reward-points identifier.</summary>
         public string MethodId
         {
             get { return Id(); }
         }
 
+        /// <summary>Gets the serialized display name, <c>RewardPoints</c>.</summary>
         public string MethodName
         {
             get { return "RewardPoints"; }
         }
 
+        /// <summary>Gets or sets whether reward-point controls are shown.</summary>
         public bool ShowRewards { get; set; }
+        /// <summary>Gets or sets the label for using rewards.</summary>
         public string LabelRewardsUse { get; set; }
+        /// <summary>Gets or sets the reward-points label.</summary>
         public string LabelRewardPoints { get; set; }
+        /// <summary>Gets or sets the formatted available-points value.</summary>
         public string RewardPointsAvailable { get; set; }
 
+        /// <summary>Returns the stable reward-points identifier.</summary>
+        /// <returns>The reward-points identifier.</returns>
         public static string Id()
         {
             return "24d33b16-4f33-424d-bb1e-5d5b5a1e37ae";

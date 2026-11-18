@@ -35,6 +35,9 @@ using Hotcakes.Commerce.Membership;
 
 namespace Hotcakes.Commerce.Dnn.Providers
 {
+    /// <summary>
+    /// Initializes Hotcakes request context and MVC routing during DNN request processing.
+    /// </summary>
     [Serializable]
     public class HccUrlRoutingModule : UrlRoutingModule
     {

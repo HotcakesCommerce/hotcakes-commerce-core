@@ -28,8 +28,25 @@ using System;
 
 namespace Hotcakes.Commerce.Security
 {
+    /// <summary>
+    /// Describes one persisted fraud rule and the store to which it belongs.
+    /// </summary>
+    /// <remarks>
+    /// <see cref="FraudRuleRepository"/> maps this model to the <c>hcc_Fraud</c>
+    /// persistence record. The value is interpreted according to <see cref="RuleType"/>
+    /// and is compared with the corresponding normalized value on
+    /// <see cref="FraudCheckData"/>.
+    /// </remarks>
     public class FraudRule
     {
+        /// <summary>
+        /// Initializes an empty rule with the current UTC timestamp, no rule type,
+        /// an empty value, and no store identifier.
+        /// </summary>
+        /// <remarks>
+        /// Repository creation replaces the timestamp, assigns a BVIN when necessary,
+        /// and scopes the rule to the current store.
+        /// </remarks>
         public FraudRule()
         {
             Bvin = string.Empty;
@@ -39,10 +56,35 @@ namespace Hotcakes.Commerce.Security
             StoreId = 0;
         }
 
+        /// <summary>
+        /// Gets or sets the unique business value identifier used to locate the rule.
+        /// </summary>
         public string Bvin { get; set; }
+
+        /// <summary>
+        /// Gets or sets the UTC time at which the rule was last updated.
+        /// </summary>
         public DateTime LastUpdated { get; set; }
+
+        /// <summary>
+        /// Gets or sets the kind of fraud input against which <see cref="RuleValue"/>
+        /// is compared.
+        /// </summary>
         public FraudRuleType RuleType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the persisted comparison value for this rule.
+        /// </summary>
+        /// <remarks>
+        /// The value is not normalized by this model. Callers should store it in the
+        /// same form produced for the corresponding <see cref="FraudCheckData"/>
+        /// property so that <see cref="FraudScorer"/> can compare it correctly.
+        /// </remarks>
         public string RuleValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets the identifier of the store owning this rule.
+        /// </summary>
         public long StoreId { get; set; }
     }
 }

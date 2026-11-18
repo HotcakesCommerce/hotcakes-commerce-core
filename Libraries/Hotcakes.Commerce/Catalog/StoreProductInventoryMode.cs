@@ -26,9 +26,12 @@
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>Point in the shopping workflow at which product inventory is reserved.</summary>
     public enum StoreProductInventoryMode
     {
+        /// <summary>Specifies the ReserveOnOrder value.</summary>
         ReserveOnOrder = 1,
+        /// <summary>Specifies the ReserveAtCart value.</summary>
         ReserveAtCart = 2
     }
 }

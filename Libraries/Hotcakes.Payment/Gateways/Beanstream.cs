@@ -34,28 +34,36 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Payment.Gateways
 {
+    /// <summary>Processes card transactions through the Beanstream gateway using the <see cref="PaymentGateway"/> contract.</summary>
     [Serializable]
     public class Beanstream : PaymentGateway
     {
+        /// <summary>Gets the Beanstream transaction endpoint.</summary>
         public const string ApiUrl = "https://www.beanstream.com/scripts/process_transaction.asp";
 
+        /// <summary>Initializes a Beanstream gateway with default settings.</summary>
         public Beanstream()
         {
             Settings = new BeanstreamSettings();
         }
 
+        /// <summary>Gets the display name of this payment gateway.</summary>
         public override string Name
         {
             get { return "Beanstream"; }
         }
 
+        /// <summary>Gets the stable identifier of this payment gateway.</summary>
         public override string Id
         {
             get { return "D14D5F35-F5CE-4C7E-9495-E9164EBDFF4E"; }
         }
 
+        /// <summary>Gets or sets the credentials and diagnostic settings for this gateway.</summary>
+        /// <seealso cref="BeanstreamSettings"/>
         public BeanstreamSettings Settings { get; set; }
 
+        /// <summary>Gets the gateway settings through the common payment method settings contract.</summary>
         public override MethodSettings BaseSettings
         {
             get { return Settings; }

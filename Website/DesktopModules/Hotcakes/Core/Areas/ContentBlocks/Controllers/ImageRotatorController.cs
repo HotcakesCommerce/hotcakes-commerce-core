@@ -35,9 +35,16 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Modules.Core.Areas.ContentBlocks.Controllers
 {
+    /// <summary>
+    /// Renders the images configured in an image-rotator content block.
+    /// </summary>
     [Serializable]
     public class ImageRotatorController : BaseAppController
     {
+        /// <summary>
+        /// Renders the content block or administrative file view for the current request.
+        /// </summary>
+        /// <param name="block">The value supplied for block.</param>
         public ActionResult Index(ContentBlock block)
         {
             var model = new ImageRotatorViewModel();

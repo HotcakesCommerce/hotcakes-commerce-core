@@ -34,6 +34,14 @@ using Hotcakes.Web.OpenXml;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    /// Exports customers associated with an order-product search to an Excel workbook.
+    /// </summary>
+    /// <remarks>
+    /// The workbook uses a worksheet named <c>Main</c> and preserves the established twelve
+    /// columns, including billing-address values. Customer values are written as text through
+    /// <see cref="ExcelWriter"/>; the supplied product name is repeated for every customer row.
+    /// </remarks>
     [Serializable]
     public class OrderCustomersExport
     {
@@ -45,6 +53,10 @@ namespace Hotcakes.Commerce.Orders
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes an exporter with the application context used by the nested sheet writers.
+        /// </summary>
+        /// <param name="hccApp">The current Hotcakes application context.</param>
         public OrderCustomersExport(HotcakesApplication hccApp)
         {
             _hccApp = hccApp;
@@ -52,6 +64,18 @@ namespace Hotcakes.Commerce.Orders
 
         #endregion
 
+        /// <summary>
+        /// Writes the matching customers to an Excel attachment in the HTTP response.
+        /// </summary>
+        /// <param name="response">The response that receives the generated workbook.</param>
+        /// <param name="fileName">The attachment file name supplied to the response.</param>
+        /// <param name="customers">Customers to write, in the supplied order.</param>
+        /// <param name="productName">The product name placed in each customer's row.</param>
+        /// <remarks>
+        /// The header columns are <c>ID</c>, <c>Product Name</c>, first and last name, email,
+        /// phone, and the billing address fields through <c>Postal Code</c>. The implementation
+        /// reads the billing address directly, including its display region and country names.
+        /// </remarks>
         public void ExportToExcel(HttpResponse response, string fileName, List<CustomerAccount> customers,
             string productName)
         {
@@ -68,10 +92,15 @@ namespace Hotcakes.Commerce.Orders
 
         internal class BaseSheetWriter
         {
+            /// <summary>Gets or sets the first data row for this sheet.</summary>
             protected int _firstRow;
+            /// <summary>Provides the application context used by derived writers.</summary>
             protected HotcakesApplication _hccApp;
+            /// <summary>Style applied to the header row.</summary>
             protected SpreadsheetStyle _headerStyle;
+            /// <summary>Style applied to customer data rows.</summary>
             protected SpreadsheetStyle _rowStyle;
+            /// <summary>The workbook writer used to emit cells and rows.</summary>
             protected ExcelWriter _writer;
 
             internal BaseSheetWriter(ExcelWriter writer, HotcakesApplication hccApp)
@@ -83,6 +112,11 @@ namespace Hotcakes.Commerce.Orders
                 _headerStyle.IsBold = true;
             }
 
+            /// <summary>
+            /// Writes the header and invokes the row extension point for each customer.
+            /// </summary>
+            /// <param name="customers">Customers to write.</param>
+            /// <param name="productName">Product name passed to each row writer.</param>
             public void Write(List<CustomerAccount> customers, string productName)
             {
                 WriteHeader();
@@ -94,11 +128,23 @@ namespace Hotcakes.Commerce.Orders
                 }
             }
 
+            /// <summary>
+            /// Writes or advances one customer row. Derived writers override this extension point
+            /// to emit customer-specific columns and should return the next row index.
+            /// </summary>
+            /// <param name="c">The customer being written.</param>
+            /// <param name="rowIndex">The current row index.</param>
+            /// <param name="productName">The product name associated with the search.</param>
+            /// <returns>The row index to use for the next customer.</returns>
             protected virtual int WriteCustomerRow(CustomerAccount c, int rowIndex, string productName)
             {
                 return ++rowIndex;
             }
 
+            /// <summary>
+            /// Writes the sheet header. The base implementation intentionally emits no columns;
+            /// concrete writers define their own export headings.
+            /// </summary>
             protected virtual void WriteHeader()
             {
             }
@@ -106,13 +152,17 @@ namespace Hotcakes.Commerce.Orders
 
         internal class MainSheetWriter : BaseSheetWriter
         {
+            /// <summary>Initializes the customer main-sheet writer.</summary>
+            /// <param name="writer">The workbook writer.</param>
+            /// <param name="hccApp">The current Hotcakes application context.</param>
             internal MainSheetWriter(ExcelWriter writer, HotcakesApplication hccApp)
                 : base(writer, hccApp)
             {
             }
 
             /// <summary>
-            ///     Creates the header row for the XLS to define the columns the spreadsheet will have.
+            /// Creates the header row defining the customer export columns and their compatibility
+            /// column names.
             /// </summary>
             protected override void WriteHeader()
             {
@@ -139,7 +189,9 @@ namespace Hotcakes.Commerce.Orders
             }
 
             /// <summary>
-            ///     Writes a row in the spreadsheet for each customer found in the search
+            /// Writes one row containing the customer's identifier, product name, contact details,
+            /// and billing address. Values are taken directly from the customer record and are not
+            /// normalized by this writer.
             /// </summary>
             /// <param name="c">CustomerAccount - the customer record.</param>
             /// <param name="rowIndex">The position of the row in the spreadsheet</param>

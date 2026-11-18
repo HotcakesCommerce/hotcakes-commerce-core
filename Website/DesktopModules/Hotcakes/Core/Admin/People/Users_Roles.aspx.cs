@@ -34,6 +34,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.People
 {
+    /// <summary>
+    /// Provides the administrative page for managing a customer's roles.
+    /// </summary>
     public partial class Users_Roles : BaseCustomerPage
     {
         #region Properties

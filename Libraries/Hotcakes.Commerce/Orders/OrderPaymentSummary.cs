@@ -29,17 +29,28 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>Calculates the payment totals, credits, authorizations, refunds, and balance due for an order.</summary>
+    /// <remarks>Summary values are derived from successful, non-voided transaction classifications and pending RMA refunds. Recurring orders calculate the grand total from elapsed billing intervals rather than using only the original order total.</remarks>
     public class OrderPaymentSummary
     {
+        /// <summary>Gets the amount represented by the applicable transaction classification.</summary>
         public decimal AmountAuthorized { get; private set; }
+        /// <summary>Gets the amount represented by the applicable transaction classification.</summary>
         public decimal AmountCharged { get; private set; }
+        /// <summary>Gets the amount represented by the applicable transaction classification.</summary>
         public decimal AmountRefunded { get; private set; }
+        /// <summary>Gets the amount represented by the applicable transaction classification.</summary>
         public decimal AmountDue { get; private set; }
+        /// <summary>Gets the amount represented by the applicable transaction classification.</summary>
         public decimal AmountDueWithAuth { get; private set; }
+        /// <summary>Gets the amount represented by the applicable transaction classification.</summary>
         public decimal AmountReturned { get; private set; }
+        /// <summary>Gets or sets the applicable order or payment value.</summary>
         public string PaymentsSummary { get; private set; }
+        /// <summary>Gets or sets the applicable order or payment value.</summary>
         public decimal TotalCredit { get; private set; }
 
+        /// <summary>Clears the applicable order transaction data.</summary>
         public void Clear()
         {
             AmountAuthorized = 0m;
@@ -52,6 +63,9 @@ namespace Hotcakes.Commerce.Orders
             AmountReturned = 0m;
         }
 
+        /// <summary>Populates this object from the supplied source data.</summary>
+        /// <param name="o">The order whose transactions and returns are summarized.</param>
+        /// <param name="svc">The order service used to load transactions and payment-method display data.</param>
         public void Populate(Order o, OrderService svc)
         {
             Clear();

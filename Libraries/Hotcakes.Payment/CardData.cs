@@ -38,8 +38,15 @@ namespace Hotcakes.Payment
     {
         private string _CardNumber = string.Empty;
 
+        /// <summary>
+        /// Gets or sets the card type name supplied by Stripe when the card number is not available.
+        /// </summary>
+        /// <remarks>When this value is populated, <see cref="CardType"/> and card-number validation use the supplied type.</remarks>
         public string StripeCardType { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CardData"/> class.
+        /// </summary>
         public CardData()
         {
             SecurityCode = string.Empty;
@@ -210,6 +217,11 @@ namespace Hotcakes.Payment
             return true;
         }
 
+        /// <summary>
+        /// Validates the card number without checking its expiration date.
+        /// </summary>
+        /// <returns><c>true</c> when the supplied Stripe card type is present or the card number is valid; otherwise, <c>false</c>.</returns>
+        /// <seealso cref="IsCardValid(DateTime)"/>
 		public bool IsCardNumberValid()
 		{
             if (!string.IsNullOrWhiteSpace(StripeCardType))

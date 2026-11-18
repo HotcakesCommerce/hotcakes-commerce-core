@@ -30,6 +30,9 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Modules.Checkout
 {
+    /// <summary>
+    /// Hosts the storefront checkout view.
+    /// </summary>
     public partial class CheckoutView : HotcakesModuleBase
     {
         private const string IndexAction = "index";

@@ -37,6 +37,9 @@ namespace Hotcakes.CommerceDTO.v1.Orders
     [Serializable]
     public class OrderTransactionDTO
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderTransactionDTO"/> class with default transaction values.
+        /// </summary>
         public OrderTransactionDTO()
         {
             Action = OrderTransactionActionDTO.Uknown;

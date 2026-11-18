@@ -26,23 +26,38 @@
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>
+    /// Carries an operation success flag and its unnormalized message.
+    /// </summary>
     public class SystemOperationResult
     {
         private string _Message = string.Empty;
 
+        /// <summary>
+        /// Initializes an unsuccessful result with an empty message.
+        /// </summary>
         public SystemOperationResult()
         {
             Success = false;
         }
 
+        /// <summary>
+        /// Public API member: <c>public SystemOperationResult(bool resultSuccess, string resultMessage)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public SystemOperationResult(bool resultSuccess, string resultMessage)
         {
             Success = resultSuccess;
             _Message = resultMessage;
         }
 
+        /// <summary>
+        /// Public API member: <c>public bool Success { get; set; }</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public bool Success { get; set; }
 
+        /// <summary>
+        /// Public API member: <c>public string Message</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public string Message
         {
             get { return _Message; }

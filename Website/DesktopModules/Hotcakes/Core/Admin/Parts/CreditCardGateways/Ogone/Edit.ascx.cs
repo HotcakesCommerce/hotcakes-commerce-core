@@ -33,6 +33,9 @@ namespace Hotcakes.Modules.Core.Admin.Parts.CreditCardGateways.Ogone
 {
     partial class Edit : HccCreditCardGatewayPart
     {
+        /// <summary>
+        /// Performs the administrative operation represented by LoadData.
+        /// </summary>
         public override void LoadData()
         {
             if (ddlCurrency.Items.Count == 0)
@@ -55,6 +58,9 @@ namespace Hotcakes.Modules.Core.Admin.Parts.CreditCardGateways.Ogone
             chkDeveloperMode.Checked = settings.DeveloperMode;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by SaveData.
+        /// </summary>
         public override void SaveData()
         {
             var settings = new OgoneSettings();

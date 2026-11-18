@@ -26,22 +26,89 @@
 
 namespace Hotcakes.Commerce.Social
 {
+    /// <summary>
+    /// Defines the activity identifiers and display-message format strings used by social integrations.
+    /// </summary>
+    /// <remarks>
+    /// The identifier values are compatibility-sensitive values exchanged with the social platform. The format
+    /// constants must be used with the placeholders in their documented order when creating activity messages.
+    /// </remarks>
     public class SocialActivities
     {
+        /// <summary>
+        /// Gets the activity identifier for a completed purchase: <c>HCPurchaseCompleted</c>.
+        /// </summary>
         public const string CompletePurchase = "HCPurchaseCompleted";
+
+        /// <summary>
+        /// Gets the activity identifier for viewing a product: <c>HCProductViewed</c>.
+        /// </summary>
         public const string ViewProduct = "HCProductViewed";
+
+        /// <summary>
+        /// Gets the activity identifier for reviewing a product: <c>HCProductReviewed</c>.
+        /// </summary>
         public const string ReviewProduct = "HCProductReviewed";
+
+        /// <summary>
+        /// Gets the activity identifier for viewing a category: <c>HCCategoryViewed</c>.
+        /// </summary>
         public const string ViewCategory = "HCCategoryViewed";
+
+        /// <summary>
+        /// Gets the activity identifier for adding a product to a wishlist: <c>HCProductAddedtoWishlist</c>.
+        /// </summary>
         public const string AddProductToWishlist = "HCProductAddedtoWishlist";
+
+        /// <summary>
+        /// Gets the activity identifier for a store search: <c>HCSearchPerformed</c>.
+        /// </summary>
         public const string SearchStore = "HCSearchPerformed";
+
+        /// <summary>
+        /// Gets the activity identifier for purchasing a membership product: <c>HCMembershipProductPurchased</c>.
+        /// </summary>
         public const string PurchaseMembershipProduct = "HCMembershipProductPurchased";
 
+        /// <summary>
+        /// Gets the completed-purchase message format, <c>Purchase completed for order number {0}</c>, where
+        /// <c>{0}</c> is the order number.
+        /// </summary>
         public const string CompletePurchase_Format = "Purchase completed for order number {0}";
+
+        /// <summary>
+        /// Gets the product-view message format, <c>{0} product viewed</c>, where <c>{0}</c> is the product name.
+        /// </summary>
         public const string ViewProduct_Format = "{0} product viewed";
+
+        /// <summary>
+        /// Gets the product-review message format, <c>{0} product reviewed with rating {1}</c>, where <c>{0}</c>
+        /// is the product name and <c>{1}</c> is the review rating.
+        /// </summary>
         public const string ReviewProduct_Format = "{0} product reviewed with rating {1}";
+
+        /// <summary>
+        /// Gets the category-view message format, <c>{0} category viewed</c>, where <c>{0}</c> is the category
+        /// name.
+        /// </summary>
         public const string ViewCategory_Format = "{0} category viewed";
+
+        /// <summary>
+        /// Gets the wishlist message format, <c>{0} product added to wishlist</c>, where <c>{0}</c> is the
+        /// product name.
+        /// </summary>
         public const string AddProductToWishlist_Format = "{0} product added to wishlist";
+
+        /// <summary>
+        /// Gets the store-search message format, <c>Search performed by '{0}' query</c>, where <c>{0}</c> is the
+        /// search query.
+        /// </summary>
         public const string SearchStore_Format = "Search performed by '{0}' query";
+
+        /// <summary>
+        /// Gets the membership-purchase message format, <c>{0} membership product purchased</c>, where <c>{0}</c>
+        /// is the product name.
+        /// </summary>
         public const string PurchaseMembershipProduct_Format = "{0} membership product purchased";
     }
 }

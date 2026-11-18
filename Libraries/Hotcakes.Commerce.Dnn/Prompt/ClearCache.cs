@@ -37,11 +37,18 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Dnn.Prompt
 {
+    /// <summary>
+    /// Implements the prompt command that clears Hotcakes Commerce and related DNN caches.
+    /// </summary>
     [ConsoleCommand("clear-store-cache", Constants.Namespace, "PromptClearCache")]
     public class ClearCache: PromptBase, IConsoleCommand
     {
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ClearCache));
 
+        /// <summary>
+        /// Clears temporary portal images and the DNN, client-resource, portal, and Hotcakes caches.
+        /// </summary>
+        /// <returns>A prompt result containing progress messages, or an error result when clearing fails.</returns>
         public override ConsoleResultModel Run()
         {
             try

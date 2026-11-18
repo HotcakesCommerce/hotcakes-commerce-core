@@ -28,11 +28,23 @@ using System;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Represents the catalog enum <see cref="CategorySourceType" /> and its associated behavior.
+    /// </summary>
     [Serializable]
     public enum CategorySourceType
     {
+    /// <summary>
+    /// Serialized catalog value <c>Manual = 0</c>.
+    /// </summary>
         Manual = 0,
+    /// <summary>
+    /// Serialized catalog value <c>CustomLink = 2</c>.
+    /// </summary>
         CustomLink = 2,
+    /// <summary>
+    /// Serialized catalog value <c>DrillDown = 4</c>.
+    /// </summary>
         DrillDown = 4
     }
 }

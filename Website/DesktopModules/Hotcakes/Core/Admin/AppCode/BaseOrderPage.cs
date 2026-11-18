@@ -29,11 +29,17 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class BaseOrderPage.
+    /// </summary>
     [Serializable]
     public abstract class BaseOrderPage : BaseAdminPage
     {
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the order id.
+        /// </summary>
         public string OrderId
         {
             get
@@ -46,11 +52,17 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             set { ViewState["OrderId"] = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the return url.
+        /// </summary>
         public string ReturnUrl
         {
             get { return Request.QueryString["returnUrl"]; }
         }
 
+        /// <summary>
+        /// Gets or sets the rma id.
+        /// </summary>
         public string RmaId
         {
             get
@@ -65,6 +77,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
 
         private Order _currentOrder;
 
+        /// <summary>
+        /// Gets or sets the current order.
+        /// </summary>
         public Order CurrentOrder
         {
             get

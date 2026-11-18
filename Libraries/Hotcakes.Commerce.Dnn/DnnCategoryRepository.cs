@@ -34,11 +34,18 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Provides category persistence with DNN catalog-role security and journal integration.
+    /// </summary>
     [Serializable]
     public class DnnCategoryRepository : CategoryRepository
     {
         private readonly ISocialService _socialService;
 
+        /// <summary>
+        /// Initializes the repository for the specified commerce request context.
+        /// </summary>
+        /// <param name="context">The context used to resolve the current store and social service.</param>
         public DnnCategoryRepository(HccRequestContext context)
             : base(context)
         {
@@ -47,6 +54,11 @@ namespace Hotcakes.Commerce.Dnn
 
         #region Public methods
 
+        /// <summary>
+        /// Creates a category and updates its DNN journal record.
+        /// </summary>
+        /// <param name="item">The category to create.</param>
+        /// <returns><c>true</c> when the category is created; otherwise, <c>false</c>.</returns>
         public override bool Create(Category item)
         {
             var res = base.Create(item);
@@ -54,6 +66,11 @@ namespace Hotcakes.Commerce.Dnn
             return res;
         }
 
+        /// <summary>
+        /// Updates a category and updates its DNN journal record.
+        /// </summary>
+        /// <param name="c">The category to update.</param>
+        /// <returns><c>true</c> when the category is updated; otherwise, <c>false</c>.</returns>
         public override bool Update(Category c)
         {
             var res = base.Update(c);
@@ -61,6 +78,11 @@ namespace Hotcakes.Commerce.Dnn
             return res;
         }
 
+        /// <summary>
+        /// Deletes a category by its business key and updates its DNN journal state.
+        /// </summary>
+        /// <param name="key">The category business key.</param>
+        /// <returns><c>true</c> when the category is deleted; otherwise, <c>false</c>.</returns>
         public override bool Delete(string key)
         {
             var res = base.Delete(key);

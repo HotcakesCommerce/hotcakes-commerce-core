@@ -29,9 +29,15 @@ using Hotcakes.CommerceDTO.v1.Catalog;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Defines the catalog data or behavior represented by this member.
+    /// </summary>
     [Serializable]
     public class ProductImage
     {
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductImage()
         {
             Bvin = string.Empty;
@@ -44,15 +50,42 @@ namespace Hotcakes.Commerce.Catalog
             StoreId = 0;
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string Bvin { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public DateTime LastUpdatedUtc { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string ProductId { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string FileName { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string Caption { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string AlternateText { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public int SortOrder { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public long StoreId { get; set; }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public ProductImage Clone()
         {
             var result = new ProductImage();
@@ -70,6 +103,9 @@ namespace Hotcakes.Commerce.Catalog
         }
 
         // DTO
+        /// <summary>
+        /// Converts catalog data to or from its corresponding data-transfer representation.
+        /// </summary>
         public ProductImageDTO ToDto()
         {
             var dto = new ProductImageDTO();
@@ -86,6 +122,9 @@ namespace Hotcakes.Commerce.Catalog
             return dto;
         }
 
+        /// <summary>
+        /// Converts catalog data to or from its corresponding data-transfer representation.
+        /// </summary>
         public void FromDto(ProductImageDTO dto)
         {
             if (dto == null) return;

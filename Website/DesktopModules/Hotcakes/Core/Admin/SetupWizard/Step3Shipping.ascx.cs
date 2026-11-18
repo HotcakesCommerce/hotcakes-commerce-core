@@ -38,6 +38,9 @@ using Hotcakes.Modules.Core.Admin.Parts.ShippingZones;
 
 namespace Hotcakes.Modules.Core.Admin.SetupWizard
 {
+    /// <summary>
+    /// Provides the shipping-settings step of the setup wizard.
+    /// </summary>
     public partial class Step3Shipping : HccPart
     {
         protected override void OnInit(EventArgs e)

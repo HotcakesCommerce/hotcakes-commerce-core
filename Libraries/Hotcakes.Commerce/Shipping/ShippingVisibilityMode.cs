@@ -26,35 +26,23 @@
 
 namespace Hotcakes.Commerce.Shipping
 {
+    /// <summary>Specifies when a shipping method is included in shipping calculations and rate retrieval.</summary>
+    /// <remarks>Threshold-based modes use <see cref="ShippingMethod.VisibilityAmount"/>.</remarks>
     public enum ShippingVisibilityMode
     {
-        /// <summary>
-        ///     The shipping method will always be included in shipping calculation and rate retrieval methods.
-        /// </summary>
+        /// <summary>The shipping method is always included in shipping calculation and rate retrieval.</summary>
         Always = 0,
 
-        /// <summary>
-        ///     The shipping method will never be included in shipping calculation and rate retrieval methods. This is effectively
-        ///     disabling the shipping method.
-        /// </summary>
+        /// <summary>The shipping method is never included; this effectively disables the method.</summary>
         Never = 1,
 
-        /// <summary>
-        ///     This method will only be included in shipping calculation and rate retrieval when the previous methods do not
-        ///     return any rates.
-        /// </summary>
+        /// <summary>The method is included only when previous methods do not return rates.</summary>
         NoRates = 2,
 
-        /// <summary>
-        ///     The order subtotal must be greater than the specified amount in order to be included in the shipping calculation
-        ///     and rate retrieval methods.
-        /// </summary>
+        /// <summary>The order subtotal must be greater than the configured visibility amount.</summary>
         SubtotalAmount = 3,
 
-        /// <summary>
-        ///     The total weight of all line items must be greater than the specified total in order to be included in the shipping
-        ///     calculation and rate retrieval methods.
-        /// </summary>
+        /// <summary>The total weight of all line items must be greater than the configured visibility amount.</summary>
         TotalWeight = 4
     }
 }

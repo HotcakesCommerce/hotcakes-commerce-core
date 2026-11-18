@@ -29,6 +29,7 @@ using System.Linq;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>Collection helpers for locating variants by selection keys or identifiers.</summary>
     public class VariantList : List<Variant>
     {
         public bool ContainsKey(string uniqueKey)
@@ -36,16 +37,26 @@ namespace Hotcakes.Commerce.Catalog
             return this.Any(v => v.UniqueKey() == uniqueKey);
         }
 
+        /// <summary>Finds the first variant with the specified selection key, or null.</summary>
+        /// <param name="uniqueKey">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public Variant FindByKey(string uniqueKey)
         {
             return this.FirstOrDefault(v => v.UniqueKey() == uniqueKey);
         }
 
+        /// <summary>Finds the first variant with the specified Bvin, or null.</summary>
+        /// <param name="bvin">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public Variant FindByBvin(string bvin)
         {
             return this.FirstOrDefault(v => v.Bvin == bvin);
         }
 
+        /// <summary>Finds a variant matching the variant-bearing selections in the supplied options.</summary>
+        /// <param name="selections">Input used by this operation.</param>
+        /// <param name="options">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public Variant FindBySelectionData(OptionSelectionList selections, OptionList options)
         {
             var variantSelections = new OptionSelectionList();

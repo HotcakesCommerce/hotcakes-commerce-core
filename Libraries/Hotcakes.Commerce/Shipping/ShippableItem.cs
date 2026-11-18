@@ -34,11 +34,19 @@ using Hotcakes.Web;
 namespace Hotcakes.Commerce.Shipping
 {
     /// <summary>
-    ///     This is the primary class used for all shippable items in the application
+    /// Represents the shipping characteristics and origin metadata for a product or other shippable item.
     /// </summary>
+    /// <remarks>
+    /// The XML representation contains the scalar shipping fields and omits
+    /// <see cref="ShippingSourceAddress"/>. The DTO conversion likewise transfers the scalar fields only.
+    /// </remarks>
     [Serializable]
     public class ShippableItem
     {
+        /// <summary>
+        /// Initializes an item with non-shipping disabled, zero fees and dimensions, site shipping as the source,
+        /// and an empty source identifier and address.
+        /// </summary>
         public ShippableItem()
         {
             IsNonShipping = false;
@@ -54,61 +62,63 @@ namespace Hotcakes.Commerce.Shipping
         }
 
         /// <summary>
-        ///     If true, the associated product will not be shipped and therefore should not have shipping logic applied.
+        /// Gets or sets whether the associated product is not shipped and should not have shipping logic applied.
         /// </summary>
         public bool IsNonShipping { get; set; }
 
         /// <summary>
-        ///     If greater than zero, the specified fee should be added to the shipping fee presented to the customer.
+        /// Gets or sets an additional fee to add to the shipping fee presented to the customer when greater than zero.
         /// </summary>
         public decimal ExtraShipFee { get; set; }
 
         /// <summary>
-        ///     The shippable weight of the product in pounds.
+        /// Gets or sets the shippable product weight in pounds.
         /// </summary>
         public decimal Weight { get; set; }
 
         /// <summary>
-        ///     The shippable length of the product in inches.
+        /// Gets or sets the shippable product length in inches.
         /// </summary>
         public decimal Length { get; set; }
 
         /// <summary>
-        ///     The shippable width of the product in inches.
+        /// Gets or sets the shippable product width in inches.
         /// </summary>
         public decimal Width { get; set; }
 
         /// <summary>
-        ///     The shippable height of the product in inches.
+        /// Gets or sets the shippable product height in inches.
         /// </summary>
         public decimal Height { get; set; }
 
         /// <summary>
-        ///     This defines where the product will be shipped from.
+        /// Gets or sets the mode that identifies where the product will be shipped from.
         /// </summary>
         public ShippingMode ShippingSource { get; set; }
 
         /// <summary>
-        ///     This property contains a collection of address information for the location that the product will be shipped from.
+        /// Gets or sets the address of the location from which the product will be shipped.
         /// </summary>
+        /// <remarks>This property is retained in memory but is not included by <see cref="ToXmlWriter"/> or <see cref="ToDto"/>.</remarks>
         public Address ShippingSourceAddress { get; set; }
 
         /// <summary>
-        ///     This ID value should match a vendor or manufacture when that respective ShippingSource is specified.
+        /// Gets or sets the identifier of the vendor or manufacturer when the corresponding <see cref="ShippingSource"/> is used.
         /// </summary>
         public string ShippingSourceId { get; set; }
 
         /// <summary>
-        ///     If true, the associated product cannot be shipped with other products.
+        /// Gets or sets whether the associated product must be shipped separately from other products.
         /// </summary>
         public bool ShipSeparately { get; set; }
 
         #region XML
 
         /// <summary>
-        ///     Allows for this class to be populated from an XML data source.
+        /// Populates this item from its XML representation.
         /// </summary>
-        /// <param name="xml">String - the XML serialized form of the ShippingItem.</param>
+        /// <param name="xml">The XML serialized form of the shippable item.</param>
+        /// <remarks>The serialized source address is not read because <see cref="ToXmlWriter"/> does not write it.</remarks>
         public void FromXml(string xml)
         {
             var sw = new StringReader(xml);
@@ -119,10 +129,11 @@ namespace Hotcakes.Commerce.Shipping
         }
 
         /// <summary>
-        ///     Allows for this class to be populated from an XML data source.
+        /// Populates this item from the current XML reader contents.
         /// </summary>
-        /// <param name="xr">An instance of an XML reader from which to populate this class.</param>
-        /// <returns>If true, no errors occured and the class is populated.</returns>
+        /// <param name="xr">An XML reader from which to populate this item.</param>
+        /// <returns><see langword="true"/> when parsing completes without an <see cref="XmlException"/>; otherwise <see langword="false"/>.</returns>
+        /// <remarks>Only the scalar fields written by <see cref="ToXmlWriter"/> are recognized; unknown elements are ignored.</remarks>
         public bool FromXml(ref XmlReader xr)
         {
             var results = false;
@@ -191,9 +202,14 @@ namespace Hotcakes.Commerce.Shipping
         }
 
         /// <summary>
-        ///     This method allows for this class to be serialized into XML for use in other parts of the application and API.
+        /// Writes this item to an XML writer for use by application and API consumers.
         /// </summary>
-        /// <param name="xw">A reference to an existing XmlWriter</param>
+        /// <param name="xw">A reference to the XML writer receiving the <c>ShippableItem</c> element.</param>
+        /// <remarks>
+        /// The output includes <c>IsNonShipping</c>, <c>ShipSeparately</c>, fee, dimensions,
+        /// <c>ShippingSource</c>, and <c>ShippingSourceId</c>. It intentionally omits
+        /// <see cref="ShippingSourceAddress"/>.
+        /// </remarks>
         public void ToXmlWriter(ref XmlWriter xw)
         {
             xw.WriteStartElement("ShippableItem");
@@ -220,9 +236,10 @@ namespace Hotcakes.Commerce.Shipping
         #region DTO
 
         /// <summary>
-        ///     Allows you to convert the current ShippableItem object to the DTO equivalent for use with the REST API
+        /// Converts this item to its REST API DTO equivalent.
         /// </summary>
-        /// <returns>A new instance of ShippableItemDTO</returns>
+        /// <returns>A new <see cref="ShippableItemDTO"/> containing the scalar shipping fields.</returns>
+        /// <remarks><see cref="ShippingSourceAddress"/> is not copied to the DTO.</remarks>
         public ShippableItemDTO ToDto()
         {
             var dto = new ShippableItemDTO();
@@ -239,9 +256,10 @@ namespace Hotcakes.Commerce.Shipping
         }
 
         /// <summary>
-        ///     Allows you to populate the current ShippableItem object using a ShippableItemDTO instance
+        /// Populates this item from a REST API DTO.
         /// </summary>
-        /// <param name="dto">An instance of the ShippableItem from the REST API</param>
+        /// <param name="dto">The DTO containing the scalar shipping fields.</param>
+        /// <remarks>The source address is not populated from the DTO.</remarks>
         public void FromDto(ShippableItemDTO dto)
         {
             ExtraShipFee = dto.ExtraShipFee;

@@ -39,6 +39,7 @@ namespace Hotcakes.Commerce.Contacts
     [Serializable]
     public class Affiliate : IReplaceable
     {
+        /// <summary>Initializes an affiliate with empty contact data, percentage commission, and a 30-day referral window.</summary>
         public Affiliate()
         {
             Id = 0;
@@ -225,10 +226,9 @@ namespace Hotcakes.Commerce.Contacts
             return dto;
         }
 
-        /// <summary>
-        ///     Allows you to populate the current affiliate object using an AffiliateDTO instance
-        /// </summary>
-        /// <param name="dto">An instance of the affiliate from the REST API</param>
+        /// <summary>Populates this affiliate from its REST API representation.</summary>
+        /// <param name="dto">The DTO to copy; <see langword="null"/> leaves this instance unchanged.</param>
+        /// <remarks>The current implementation also copies the DTO identifier into <see cref="UserId"/>.</remarks>
         public void FromDto(AffiliateDTO dto)
         {
             if (dto == null) return;

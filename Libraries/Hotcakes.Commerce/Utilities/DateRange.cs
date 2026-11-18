@@ -29,8 +29,13 @@ using System;
 namespace Hotcakes.Commerce.Utilities
 {
     /// <summary>
-    ///     Operates on "Local Time" by default. Not TimeZone Safe
+    /// Represents an inclusive start and end date for a predefined or caller-defined period.
     /// </summary>
+    /// <remarks>
+    /// Calculations use the supplied <see cref="DateTime"/> values as local, unqualified times;
+    /// this type does not apply a time-zone conversion. Predefined ranges are recalculated when
+    /// <see cref="RangeType"/> changes.
+    /// </remarks>
     public class DateRange
     {
         private DateTime _EndDate = DateTime.Now;
@@ -38,6 +43,11 @@ namespace Hotcakes.Commerce.Utilities
         private DateRangeType _RangeType = DateRangeType.Custom;
         private DateTime _StartDate = DateTime.Now;
 
+        /// <summary>
+        /// Gets or sets the predefined range used to calculate <see cref="StartDate"/> and <see cref="EndDate"/>.
+        /// </summary>
+        /// <value>The selected <see cref="DateRangeType"/>.</value>
+        /// <remarks>Setting this property immediately recalculates the dates using the current local time.</remarks>
         public DateRangeType RangeType
         {
             get { return _RangeType; }
@@ -48,6 +58,11 @@ namespace Hotcakes.Commerce.Utilities
             }
         }
 
+        /// <summary>
+        /// Gets or sets the first date and time in the range.
+        /// </summary>
+        /// <value>The range's start date and time.</value>
+        /// <remarks>The setter changes the value only when <see cref="RangeType"/> is <see cref="DateRangeType.Custom"/>.</remarks>
         public DateTime StartDate
         {
             get { return _StartDate; }
@@ -60,6 +75,11 @@ namespace Hotcakes.Commerce.Utilities
             }
         }
 
+        /// <summary>
+        /// Gets or sets the last date and time in the range.
+        /// </summary>
+        /// <value>The range's end date and time.</value>
+        /// <remarks>The setter changes the value only when <see cref="RangeType"/> is <see cref="DateRangeType.Custom"/>.</remarks>
         public DateTime EndDate
         {
             get { return _EndDate; }
@@ -72,6 +92,11 @@ namespace Hotcakes.Commerce.Utilities
             }
         }
 
+        /// <summary>
+        /// Calculates the start and end dates represented by the current <see cref="RangeType"/>.
+        /// </summary>
+        /// <param name="currentTime">The local date and time used as the basis for the calculation.</param>
+        /// <remarks>For <see cref="DateRangeType.Custom"/> and <see cref="DateRangeType.None"/>, existing dates are preserved.</remarks>
         public void CalculateDatesFromType(DateTime currentTime)
         {
             switch (_RangeType)

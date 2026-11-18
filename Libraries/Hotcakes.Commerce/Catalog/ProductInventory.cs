@@ -40,6 +40,9 @@ namespace Hotcakes.Commerce.Catalog
     [Serializable]
     public class ProductInventory
     {
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductInventory()
         {
             Bvin = string.Empty;

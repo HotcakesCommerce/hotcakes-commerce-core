@@ -31,6 +31,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.People
 {
+    /// <summary>
+    /// Provides the administrative page for managing a customer's address book.
+    /// </summary>
     public partial class Users_AddressBook : BaseCustomerPage
     {
         #region Event Handlers

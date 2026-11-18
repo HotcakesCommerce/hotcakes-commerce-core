@@ -28,11 +28,19 @@ using System;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Provides text representations used by commerce utilities.
+    /// </summary>
     public class TextUtilities
     {
         private const string list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private const char zero = '0';
 
+        /// <summary>
+        /// Converts an integer to the utility's alphabetic base-26 representation.
+        /// </summary>
+        /// <param name="number">The number to convert. Its sign is ignored.</param>
+        /// <returns>A representation using <c>A</c> through <c>Z</c>, with <c>0</c> used for a zero remainder.</returns>
         public static string GetStringRepresentation(int number)
         {
             var tmp = 0;

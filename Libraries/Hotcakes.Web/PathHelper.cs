@@ -31,16 +31,38 @@ using System.Linq;
 
 namespace Hotcakes.Web
 {
+    /// <summary>
+    /// Provides file-system path and file-listing helpers for Hotcakes view resources.
+    /// </summary>
+    /// <seealso cref="ListFiles(string, string, string)"/>
     [Serializable]
     public static class PathHelper
     {
+        /// <summary>
+        /// Gets the virtual path containing the default Hotcakes views.
+        /// </summary>
         public const string ViewsVirtualPath = "~/Portals/_default/HotcakesViews/";
 
+        /// <summary>
+        /// Lists files in a folder matching one include pattern and not matching the exclude pattern.
+        /// </summary>
+        /// <param name="folderPath">The folder to search.</param>
+        /// <param name="includePattern">The file-name pattern to include.</param>
+        /// <param name="excludePattern">The file-name pattern to exclude.</param>
+        /// <returns>The matching file paths, or an empty list when the folder does not exist.</returns>
+        /// <seealso cref="ListFiles(string, string[], string[])"/>
         public static List<string> ListFiles(string folderPath, string includePattern, string excludePattern)
         {
             return ListFiles(folderPath, new[] {includePattern}, new[] {excludePattern});
         }
 
+        /// <summary>
+        /// Lists files in a folder matching any include pattern and none of the exclude patterns.
+        /// </summary>
+        /// <param name="folderPath">The folder to search.</param>
+        /// <param name="includePatterns">The file-name patterns to include.</param>
+        /// <param name="excludePatterns">The file-name patterns to exclude.</param>
+        /// <returns>The matching file paths, or an empty list when the folder does not exist.</returns>
         public static List<string> ListFiles(string folderPath, string[] includePatterns, string[] excludePatterns)
         {
             var result = new List<string>();

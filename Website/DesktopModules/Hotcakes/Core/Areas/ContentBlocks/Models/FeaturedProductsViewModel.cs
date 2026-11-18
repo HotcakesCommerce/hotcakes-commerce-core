@@ -30,9 +30,15 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Areas.ContentBlocks.Models
 {
+    /// <summary>
+    /// Represents the data displayed by the featured-products content block.
+    /// </summary>
     [Serializable]
     public class FeaturedProductsViewModel
     {
+        /// <summary>
+        /// Represents the data displayed by the featured-products content block.
+        /// </summary>
         public FeaturedProductsViewModel()
         {
             Title = string.Empty;
@@ -40,8 +46,19 @@ namespace Hotcakes.Modules.Core.Areas.ContentBlocks.Models
             Items = new List<SingleProductViewModel>();
         }
 
+        /// <summary>
+        /// Gets or sets the content block title.
+        /// </summary>
         public string Title { get; set; }
+        /// <summary>
+        /// Gets or sets the paging data for the content block.
+        /// See <see cref="PagerViewModel"/> for the paging contract.
+        /// </summary>
         public PagerViewModel PagerData { get; set; }
+        /// <summary>
+        /// Gets or sets the products displayed by the content block.
+        /// Each item is a <see cref="SingleProductViewModel"/>.
+        /// </summary>
         public List<SingleProductViewModel> Items { get; set; }
     }
 }

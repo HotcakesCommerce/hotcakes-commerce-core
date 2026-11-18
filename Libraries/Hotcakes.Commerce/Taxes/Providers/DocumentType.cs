@@ -26,13 +26,32 @@
 
 namespace Hotcakes.Commerce.Taxes.Providers
 {
+    /// <summary>
+    /// Identifies the business document type used for a tax-provider operation.
+    /// </summary>
+    /// <remarks>
+    /// The members intentionally retain their existing declaration order and implicit numeric values
+    /// (0 through 5). Do not rename, reorder, or insert members because providers and serialized data
+    /// may depend on these compatibility-sensitive values.
+    /// </remarks>
     public enum DocumentType
     {
+        /// <summary>Represents a sales order.</summary>
         SalesOrder,
+
+        /// <summary>Represents a sales invoice.</summary>
         SalesInvoice,
+
+        /// <summary>Represents a purchase order.</summary>
         PurchaseOrder,
+
+        /// <summary>Represents a purchase invoice.</summary>
         PurchaseInvoice,
+
+        /// <summary>Represents a return order.</summary>
         ReturnOrder,
+
+        /// <summary>Represents a return invoice.</summary>
         ReturnInvoice
     }
 }

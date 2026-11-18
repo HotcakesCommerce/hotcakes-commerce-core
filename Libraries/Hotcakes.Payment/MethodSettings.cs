@@ -29,12 +29,24 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Payment
 {
+    /// <summary>
+    /// Stores named payment-method settings as string key/value pairs.
+    /// </summary>
+    /// <remarks>
+    /// This type also provides helpers for common string, Boolean, and integer settings while
+    /// retaining the dictionary serialization contract used by payment gateways.
+    /// </remarks>
     [Serializable]
     public class MethodSettings : Dictionary<string, string>
     {
         private const string ZERO = "0";
         private const string ONE = "1";
 
+        /// <summary>
+        /// Adds a setting or replaces the value of an existing setting.
+        /// </summary>
+        /// <param name="name">The setting name.</param>
+        /// <param name="value">The setting value.</param>
         public void AddOrUpdate(string name, string value)
         {
             if (ContainsKey(name))
@@ -47,6 +59,11 @@ namespace Hotcakes.Payment
             }
         }
 
+        /// <summary>
+        /// Gets a setting value, or an empty string when the setting is not present.
+        /// </summary>
+        /// <param name="name">The setting name.</param>
+        /// <returns>The stored value, or <see cref="string.Empty" /> when no value is stored.</returns>
         public string GetSettingOrEmpty(string name)
         {
             if (ContainsKey(name))
@@ -56,6 +73,12 @@ namespace Hotcakes.Payment
             return string.Empty;
         }
 
+        /// <summary>
+        /// Gets a Boolean setting using the stored numeric representation.
+        /// </summary>
+        /// <param name="name">The setting name.</param>
+        /// <param name="defaultValue">The value to return when the setting is not present.</param>
+        /// <returns><see langword="true" /> when the stored value is the enabled representation; otherwise, the default value or <see langword="false" />.</returns>
         public bool GetBoolSetting(string name, bool defaultValue = false)
         {
             if (ContainsKey(name))
@@ -65,6 +88,12 @@ namespace Hotcakes.Payment
             return defaultValue;
         }
 
+        /// <summary>
+        /// Gets an integer setting.
+        /// </summary>
+        /// <param name="name">The setting name.</param>
+        /// <param name="defaultValue">The value to return when the setting is absent or cannot be parsed.</param>
+        /// <returns>The parsed integer setting, or <paramref name="defaultValue" />.</returns>
         public int GetIntSetting(string name, int defaultValue = 0)
         {
             var result = defaultValue;
@@ -79,17 +108,32 @@ namespace Hotcakes.Payment
             return result;
         }
 
+        /// <summary>
+        /// Stores a Boolean setting using the payment settings numeric representation.
+        /// </summary>
+        /// <param name="name">The setting name.</param>
+        /// <param name="value">The Boolean value to store.</param>
         public void SetBoolSetting(string name, bool value)
         {
             var stringValue = value ? ONE : ZERO;
             AddOrUpdate(name, stringValue);
         }
 
+        /// <summary>
+        /// Stores an integer setting as text.
+        /// </summary>
+        /// <param name="name">The setting name.</param>
+        /// <param name="value">The integer value to store.</param>
         public void SetIntSetting(string name, int value)
         {
             AddOrUpdate(name, value.ToString());
         }
 
+        /// <summary>
+        /// Adds or replaces all settings from another collection.
+        /// </summary>
+        /// <param name="otherSettings">The settings to merge into this collection.</param>
+        /// <remarks>Values from <paramref name="otherSettings" /> replace values with matching names.</remarks>
         public void Merge(MethodSettings otherSettings)
         {
             foreach (var kv in otherSettings)

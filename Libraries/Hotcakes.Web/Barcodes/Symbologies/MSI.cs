@@ -28,6 +28,8 @@ using System;
 
 namespace Hotcakes.Web.Barcodes
 {
+    /// <summary>MSI barcode encoder.</summary>
+    /// <remarks>The encoded output is exposed through <see cref="IBarcode.Encoded_Value"/>.</remarks>
     [Serializable]
     internal class MSI : BarcodeCommon, IBarcode
     {
@@ -39,6 +41,10 @@ namespace Hotcakes.Web.Barcodes
             "100110100100", "100110100110", "100110110100", "100110110110", "110100100100", "110100100110"
         };
 
+        /// <summary>Encodes data using the selected MSI variant.</summary>
+        /// <param name="input">The data to encode.</param>
+        /// <param name="EncodedType">The MSI variant that determines checksum processing.</param>
+        /// <seealso cref="TYPE"/>
         public MSI(string input, TYPE EncodedType)
         {
             Encoded_Type = EncodedType;
@@ -47,6 +53,8 @@ namespace Hotcakes.Web.Barcodes
 
         #region IBarcode Members
 
+        /// <summary>Gets the encoded bar-and-space representation.</summary>
+        /// <seealso cref="IBarcode.Encoded_Value"/>
         public string Encoded_Value
         {
             get { return Encode_MSI(); }

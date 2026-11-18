@@ -28,6 +28,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.FeaturedProducts
 {
+    /// <summary>
+    /// Hosts the storefront featured products view.
+    /// </summary>
     public partial class FeaturedProductsView : HotcakesModuleBase
     {
         protected override string RenderView()

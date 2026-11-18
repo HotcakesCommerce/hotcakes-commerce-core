@@ -32,9 +32,13 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Web.Data
 {
-    // T  = the linq to sql proxy class
-    // TT = translation of T
-    // V  = your POCO class
+    /// <summary>
+    /// Provides repository operations for models backed by a primary entity and a localized translation entity.
+    /// </summary>
+    /// <typeparam name="T">The primary persistence entity type.</typeparam>
+    /// <typeparam name="TT">The translation entity type.</typeparam>
+    /// <typeparam name="V">The POCO model type exposed by the repository.</typeparam>
+    /// <typeparam name="TKey">The key type shared by the primary and translation entities.</typeparam>
     [Serializable]
     public abstract class LocalizationRepositoryBase<T, TT, V, TKey>
         where T : class, new()
@@ -52,6 +56,9 @@ namespace Hotcakes.Web.Data
         protected abstract Expression<Func<T, TKey>> ItemKeyExp { get; }
         protected abstract Expression<Func<TT, TKey>> ItemTranslationKeyExp { get; }
 
+        /// <summary>
+        /// Gets or sets whether repository mutations are submitted immediately.
+        /// </summary>
         public virtual bool AutoSubmit
         {
             get { return _rep.AutoSubmit; }
@@ -145,11 +152,22 @@ namespace Hotcakes.Web.Data
             return result;
         }
 
+        /// <summary>
+        /// Adds a model using the repository's main culture.
+        /// </summary>
+        /// <param name="item">The model to add.</param>
+        /// <returns><see langword="true"/> when the model and translation are added successfully; otherwise, <see langword="false"/>.</returns>
         public virtual bool Create(V item)
         {
             return Create(item, false);
         }
 
+        /// <summary>
+        /// Adds a model and its translation, optionally using the culture carried by the model.
+        /// </summary>
+        /// <param name="item">The model to add.</param>
+        /// <param name="useModelCulture">Whether to use <see cref="ILocalizableModel.ContentCulture"/> when the model implements <see cref="ILocalizableModel"/>.</param>
+        /// <returns><see langword="true"/> when the model and translation are added successfully; otherwise, <see langword="false"/>.</returns>
         public virtual bool Create(V item, bool useModelCulture = false)
         {
             if (item == null)
@@ -195,6 +213,12 @@ namespace Hotcakes.Web.Data
             return result;
         }
 
+        /// <summary>
+        /// Finds a page of localized models.
+        /// </summary>
+        /// <param name="pageNumber">The one-based page number. Values less than one use the first page.</param>
+        /// <param name="pageSize">The maximum number of models in the page.</param>
+        /// <returns>The requested model page.</returns>
         public virtual List<V> FindAllPaged(int pageNumber, int pageSize)
         {
             // Note: silly OrderBy(y => true) is so that entity framework provider
@@ -301,11 +325,19 @@ namespace Hotcakes.Web.Data
             return _rep.Delete(key);
         }
 
+        /// <summary>
+        /// Gets the number of primary entities in the repository.
+        /// </summary>
+        /// <returns>The total primary entity count.</returns>
         public virtual int CountOfAll()
         {
             return _rep.CountOfAll();
         }
 
+        /// <summary>
+        /// Persists pending changes to both the primary and translation repositories.
+        /// </summary>
+        /// <returns><see langword="true"/> when both submissions succeed; otherwise, <see langword="false"/>.</returns>
         public virtual bool SubmitChanges()
         {
             return _rep.SubmitChanges() && _repTrans.SubmitChanges();

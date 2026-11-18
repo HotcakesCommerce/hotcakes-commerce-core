@@ -35,6 +35,9 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Modules.Core.Admin.Orders
 {
+    /// <summary>
+    /// Provides inventory management controls for administrative order items.
+    /// </summary>
     public partial class OrderItemInventory : HccUserControl
     {
         #region Properties
@@ -45,11 +48,13 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             "<a href=\"/DesktopModules/Hotcakes/Core/Admin/catalog/Products_Performance.aspx?id={1}\">{0}</a>";
 
         public bool AllowUpdateQuantities { get; set; }
+        /// <summary>Gets or sets whether inventory quantities may be updated.</summary>
 
         private bool isPaymentRefunded { get; set; }
 
         private List<LineItem> lineItems { get; set; }
 
+        /// <summary>Gets or sets the order identifier displayed by the control.</summary>
         public string OrderId
         {
             get
@@ -64,6 +69,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 
         private Order _currentOrder;
 
+        /// <summary>Gets or sets the current order whose inventory is managed.</summary>
         public Order CurrentOrder
         {
             get
@@ -88,6 +94,8 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 
         #region Public methods
 
+        /// <summary>Determines whether the current order contains an inventory product.</summary>
+        /// <returns><see langword="true"/> when an inventory product is present; otherwise, <see langword="false"/>.</returns>
         public bool CheckCurrentOrderhasInventoryProduct()
         {
             var result = false;
@@ -112,6 +120,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             return result;
         }
 
+        /// <summary>Refreshes the inventory grids from the current order.</summary>
         public void BindGrids()
         {
             CheckCurrentOrderhasInventoryProduct();
@@ -122,6 +131,8 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             }
         }
 
+        /// <summary>Determines whether the current order has refunded items.</summary>
+        /// <returns><see langword="true"/> when refunded items are present; otherwise, <see langword="false"/>.</returns>
         public bool CheckOrderHasRefunded()
         {
             if (CurrentOrder == null)
@@ -277,6 +288,8 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             return string.Empty;
         }
 
+        /// <summary>Updates the reserved quantity for the current order.</summary>
+        /// <returns><see langword="true"/> when the update succeeds; otherwise, <see langword="false"/>.</returns>
         public bool UpdatReservedQuantity()
         {
             var gridView = gvItems;
@@ -309,6 +322,11 @@ namespace Hotcakes.Modules.Core.Admin.Orders
         }
 
 
+        /// <summary>Saves inventory changes for a product variant.</summary>
+        /// <param name="productId">The product identifier.</param>
+        /// <param name="variantId">The variant identifier.</param>
+        /// <param name="replenishQty">The quantity to replenish.</param>
+        /// <returns><see langword="true"/> when the inventory is saved; otherwise, <see langword="false"/>.</returns>
         public bool SaveInventory(string productId, string variantId, int replenishQty)
         {
             var result = false;

@@ -35,9 +35,20 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    ///     Provides persistence and query operations for <see cref="Order"/> records and their related order entities.
+    /// </summary>
+    /// <remarks>
+    ///     Entity mapping preserves the repository's GUID/bvin conversion, serialized address and custom-property storage,
+    ///     child-collection merging, and current-store filtering conventions.
+    /// </remarks>
         [Serializable]
     public class OrderRepository : HccSimpleRepoBase<hcc_Order, Order>
     {
+        /// <summary>
+        ///     Initializes the order repository and related child repositories using the supplied request context.
+        /// </summary>
+        /// <param name="context">The supplied context value.</param>
         public OrderRepository(HccRequestContext context)
             : base(context)
         {
@@ -54,6 +65,12 @@ namespace Hotcakes.Commerce.Orders
         private OrderPackageRepository PackageRepository { get; set; }
         private RMARepository ReturnsRepository { get; set; }
 
+        /// <summary>
+        ///     Performs the copy data to model operation using the supplied arguments and current commerce context.
+        ///     Serialized addresses, custom properties, discounts, status values, and totals are mapped into the model.
+        /// </summary>
+        /// <param name="data">The supplied data value.</param>
+        /// <param name="model">The supplied model value.</param>
         protected override void CopyDataToModel(hcc_Order data, Order model)
         {
             model.AffiliateID = data.AffiliateId;
@@ -94,6 +111,12 @@ namespace Hotcakes.Commerce.Orders
             model.UsedCulture = data.UsedCulture;
         }
 
+        /// <summary>
+        ///     Performs the copy model to data operation using the supplied arguments and current commerce context.
+        ///     Addresses, custom properties, discounts, status values, and totals are mapped into the persistence record.
+        /// </summary>
+        /// <param name="data">The supplied data value.</param>
+        /// <param name="model">The supplied model value.</param>
         protected override void CopyModelToData(hcc_Order data, Order model)
         {
             data.AffiliateId = model.AffiliateID;
@@ -139,6 +162,10 @@ namespace Hotcakes.Commerce.Orders
             data.UsedCulture = model.UsedCulture;
         }
 
+        /// <summary>
+        ///     Performs the get sub items operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="models">The supplied models value.</param>
         protected override void GetSubItems(List<Order> models)
         {
             var orderIds = models.Select(o => o.bvin).ToList();
@@ -158,6 +185,10 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the merge sub items operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="model">The supplied model value.</param>
         protected override void MergeSubItems(Order model)
         {
             ItemRepository.MergeList(model.bvin, model.StoreId, model.Items);
@@ -167,30 +198,57 @@ namespace Hotcakes.Commerce.Orders
             ReturnsRepository.MergeList(model.bvin, model.StoreId, model.Returns);
         }
 
+        /// <summary>
+        ///     Performs the find for current store operation using the supplied arguments and current commerce context.
+        ///     The result is restricted to the current store.
+        /// </summary>
+        /// <param name="bvin">The supplied bvin value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public Order FindForCurrentStore(string bvin)
         {
             var result = FindForAllStores(bvin);
             return result?.StoreId == Context.CurrentStore.Id ? result : null;
         }
 
+        /// <summary>
+        ///     Performs the find for all stores operation using the supplied arguments and current commerce context.
+        ///     The query is not restricted to the current store.
+        /// </summary>
+        /// <param name="bvin">The supplied bvin value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public Order FindForAllStores(string bvin)
         {
             var guid = DataTypeHelper.BvinToGuid(bvin);
             return FindFirstPoco(o => o.bvin == guid);
         }
 
+        /// <summary>
+        ///     Performs the find by third party order id operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="thirdPartyOrderId">The supplied third party order id value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public Order FindByThirdPartyOrderId(string thirdPartyOrderId)
         {
             var storeId = Context.CurrentStore.Id;
             return FindFirstPoco(o => o.ThirdPartyOrderId == thirdPartyOrderId && o.StoreId == storeId);
         }
 
+        /// <summary>
+        ///     Performs the find by order number operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="orderNumber">The supplied order number value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public Order FindByOrderNumber(string orderNumber)
         {
             var storeId = Context.CurrentStore.Id;
             return FindFirstPoco(o => o.OrderNumber == orderNumber && o.StoreId == storeId);
         }
 
+        /// <summary>
+        ///     Performs the find many operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="bvins">The supplied bvins value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public List<Order> FindMany(List<string> bvins)
         {
             var storeId = Context.CurrentStore.Id;
@@ -204,6 +262,11 @@ namespace Hotcakes.Commerce.Orders
             });
         }
 
+        /// <summary>
+        ///     Performs the create operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="item">The supplied item value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public override bool Create(Order item)
         {
             if (item == null) return false;
@@ -218,6 +281,11 @@ namespace Hotcakes.Commerce.Orders
             return base.Create(item);
         }
 
+        /// <summary>
+        ///     Performs the upsert operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="item">The supplied item value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public bool Upsert(Order item)
         {
             if (item == null) return false;
@@ -229,6 +297,12 @@ namespace Hotcakes.Commerce.Orders
             return Update(item);
         }
 
+        /// <summary>
+        ///     Performs the update operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="item">The supplied item value.</param>
+        /// <param name="mergeSubItems">The supplied merge sub items value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public bool Update(Order item, bool mergeSubItems = true)
         {
             if (item == null) return false;
@@ -242,6 +316,11 @@ namespace Hotcakes.Commerce.Orders
             return Update(item, o => o.bvin == guid, mergeSubItems);
         }
 
+        /// <summary>
+        ///     Performs the delete operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="bvin">The supplied bvin value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public bool Delete(string bvin)
         {
             if (string.IsNullOrEmpty(bvin)) return false;
@@ -249,6 +328,12 @@ namespace Hotcakes.Commerce.Orders
             return Delete(o => o.bvin == guid);
         }
 
+        /// <summary>
+        ///     Performs the list poco snapshot operation using the supplied arguments and current commerce context.
+        ///     The projection contains stored totals and recurring-item state without loading mutable child collections.
+        /// </summary>
+        /// <param name="items">The supplied items value.</param>
+        /// <returns>The value produced by the operation.</returns>
         protected virtual List<OrderSnapshot> ListPocoSnapshot(IQueryable<hcc_Order> items)
         {
             var result = new List<OrderSnapshot>();
@@ -303,6 +388,10 @@ namespace Hotcakes.Commerce.Orders
             return result;
         }
 
+        /// <summary>
+        ///     Performs the find all operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <returns>The value produced by the operation.</returns>
         public List<OrderSnapshot> FindAll()
         {
             var storeId = Context.CurrentStore.Id;
@@ -317,11 +406,21 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the find all for all stores operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <returns>The value produced by the operation.</returns>
         public List<OrderSnapshot> FindAllForAllStores()
         {
             return FindAllPagedForAllStores(1, int.MaxValue);
         }
 
+        /// <summary>
+        ///     Performs the find all paged operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="pageNumber">The supplied page number value.</param>
+        /// <param name="pageSize">The supplied page size value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public new List<OrderSnapshot> FindAllPaged(int pageNumber, int pageSize)
         {
             var storeId = Context.CurrentStore.Id;
@@ -339,6 +438,12 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the find all paged for all stores operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="pageNumber">The supplied page number value.</param>
+        /// <param name="pageSize">The supplied page size value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public List<OrderSnapshot> FindAllPagedForAllStores(int pageNumber, int pageSize)
         {
             using (var strategy = CreateReadStrategy())
@@ -353,6 +458,11 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the find many snapshots operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="bvins">The supplied bvins value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public List<OrderSnapshot> FindManySnapshots(List<string> bvins)
         {
             var storeId = Context.CurrentStore.Id;
@@ -370,12 +480,26 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the find by criteria operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="criteria">The supplied criteria value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public List<OrderSnapshot> FindByCriteria(OrderSearchCriteria criteria)
         {
             var temp = -1;
             return FindByCriteriaPaged(criteria, 1, int.MaxValue, ref temp);
         }
 
+        /// <summary>
+        ///     Performs the get ready for payment paged operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="StartDate">The supplied start date value.</param>
+        /// <param name="endDate">The supplied end date value.</param>
+        /// <param name="pageNumber">The supplied page number value.</param>
+        /// <param name="pageSize">The maximum number of rows in the page.</param>
+        /// <param name="rowCount">Receives the total number of matching rows.</param>
+        /// <returns>The value produced by the operation.</returns>
         public List<OrderSnapshot> GetReadyForPaymentPaged(DateTime StartDate, DateTime endDate, int pageNumber,
             int pageSize, ref int rowCount)
         {
@@ -408,6 +532,15 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the get ready for shipping paged operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="StartDate">The supplied start date value.</param>
+        /// <param name="endDate">The supplied end date value.</param>
+        /// <param name="pageNumber">The supplied page number value.</param>
+        /// <param name="pageSize">The maximum number of rows in the page.</param>
+        /// <param name="rowCount">Receives the total number of matching rows.</param>
+        /// <returns>The value produced by the operation.</returns>
         public List<OrderSnapshot> GetReadyForShippingPaged(DateTime StartDate, DateTime endDate, int pageNumber,
             int pageSize, ref int rowCount)
         {
@@ -441,6 +574,14 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the find by criteria paged operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="criteria">The supplied criteria value.</param>
+        /// <param name="pageNumber">The supplied page number value.</param>
+        /// <param name="pageSize">The supplied page size value.</param>
+        /// <param name="rowCount">Receives the total number of matching rows.</param>
+        /// <returns>The value produced by the operation.</returns>
         public List<OrderSnapshot> FindByCriteriaPaged(OrderSearchCriteria criteria, int pageNumber, int pageSize,
             ref int rowCount)
         {
@@ -563,6 +704,12 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the get orders ready for payment count operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="startDate">The supplied start date value.</param>
+        /// <param name="endDate">The supplied end date value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public int GetOrdersReadyForPaymentCount(DateTime startDate, DateTime endDate)
         {
             using (var strategy = CreateReadStrategy())
@@ -588,6 +735,12 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the get orders ready for shipping count operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="startDate">The supplied start date value.</param>
+        /// <param name="endDate">The supplied end date value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public int GetOrdersReadyForShippingCount(DateTime startDate, DateTime endDate)
         {
             using (var strategy = CreateReadStrategy())
@@ -613,6 +766,11 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the count by criteria operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="criteria">The supplied criteria value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public int CountByCriteria(OrderSearchCriteria criteria)
         {
             using (var strategy = CreateReadStrategy())
@@ -675,6 +833,12 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the find total spent by user operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="userId">The supplied user id value.</param>
+        /// <param name="storeId">The supplied store id value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public decimal FindTotalSpentByUser(string userId, long storeId)
         {
             using (var strategy = CreateReadStrategy())
@@ -688,6 +852,14 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the find by user id operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="userId">The supplied user id value.</param>
+        /// <param name="pageNumber">The supplied page number value.</param>
+        /// <param name="pageSize">The supplied page size value.</param>
+        /// <param name="totalCount">The supplied total count value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public List<OrderSnapshot> FindByUserId(string userId, int pageNumber, int pageSize, ref int totalCount)
         {
             using (var strategy = CreateReadStrategy())
@@ -709,6 +881,15 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the find by id range operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="startId">The supplied start id value.</param>
+        /// <param name="endId">The supplied end id value.</param>
+        /// <param name="pageNumber">The supplied page number value.</param>
+        /// <param name="pageSize">The supplied page size value.</param>
+        /// <param name="totalCount">Receives the total number of matching rows.</param>
+        /// <returns>The value produced by the operation.</returns>
         public List<OrderSnapshot> FindByIdRange(int startId, int endId, int pageNumber, int pageSize,
             ref int totalCount)
         {
@@ -727,6 +908,10 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the find abandoned carts operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <returns>The value produced by the operation.</returns>
         public List<Order> FindAbandonedCarts()
         {
             var daysInterval = Context.CurrentStore.Settings.SendAbandonedEmailIn;
@@ -743,6 +928,15 @@ namespace Hotcakes.Commerce.Orders
             });
         }
 
+        /// <summary>
+        ///     Performs the find abandoned carts operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="startDate">The supplied start date value.</param>
+        /// <param name="endDate">The supplied end date value.</param>
+        /// <param name="pageNumber">The supplied page number value.</param>
+        /// <param name="pageSize">The supplied page size value.</param>
+        /// <param name="totalCount">Receives the total number of matching rows.</param>
+        /// <returns>The value produced by the operation.</returns>
         public List<Order> FindAbandonedCarts(DateTime startDate, DateTime endDate, int pageNumber, int pageSize,
             out int totalCount)
         {
@@ -764,6 +958,10 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the find payment failure operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <returns>The value produced by the operation.</returns>
         public List<Order> FindPaymentFailure()
         {
             var endTouchDate = DateTime.UtcNow;
@@ -779,6 +977,15 @@ namespace Hotcakes.Commerce.Orders
             });
         }
 
+        /// <summary>
+        ///     Performs the find payment failure operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="startDate">The supplied start date value.</param>
+        /// <param name="endDate">The supplied end date value.</param>
+        /// <param name="pageNumber">The supplied page number value.</param>
+        /// <param name="pageSize">The supplied page size value.</param>
+        /// <param name="totalCount">Receives the total number of matching rows.</param>
+        /// <returns>The value produced by the operation.</returns>
         public List<Order> FindPaymentFailure(DateTime startDate, DateTime endDate, int pageNumber, int pageSize,
             out int totalCount)
 		{
@@ -801,6 +1008,12 @@ namespace Hotcakes.Commerce.Orders
 			}
 		}
 
+		/// <summary>
+		///     Performs the find abandoned carts users operation using the supplied arguments and current commerce context.
+		/// </summary>
+		/// <param name="startDate">The supplied start date value.</param>
+		/// <param name="endDate">The supplied end date value.</param>
+		/// <returns>The value produced by the operation.</returns>
 		public List<string> FindAbandonedCartsUsers(DateTime startDate, DateTime endDate)
 		{
 			using (var strategy = CreateReadStrategy())
@@ -819,6 +1032,13 @@ namespace Hotcakes.Commerce.Orders
 			}
 		}
 
+		/// <summary>
+		///     Performs the find abandoned carts users operation using the supplied arguments and current commerce context.
+		/// </summary>
+		/// <param name="startDate">The supplied start date value.</param>
+		/// <param name="endDate">The supplied end date value.</param>
+		/// <param name="productId">The supplied product id value.</param>
+		/// <returns>The value produced by the operation.</returns>
 		public List<string> FindAbandonedCartsUsers(DateTime startDate, DateTime endDate, string productId)
 		{
 			var productGuid = DataTypeHelper.BvinToGuid(productId);
@@ -838,16 +1058,35 @@ namespace Hotcakes.Commerce.Orders
 			}
 		}
 
+		/// <summary>
+		///     Performs the find line items for orders operation using the supplied arguments and current commerce context.
+		/// </summary>
+		/// <param name="snaps">The supplied snaps value.</param>
+		/// <returns>The value produced by the operation.</returns>
 		public List<LineItem> FindLineItemsForOrders(List<OrderSnapshot> snaps)
 		{
 			return ItemRepository.FindForOrders(snaps.Select(y => y.bvin).ToList());
 		}
 
+		/// <summary>
+		///     Performs the find popular items operation using the supplied arguments and current commerce context.
+		/// </summary>
+		/// <param name="startDateUtc">The supplied start date utc value.</param>
+		/// <param name="endDateUtc">The supplied end date utc value.</param>
+		/// <param name="maxItems">The supplied max items value.</param>
+		/// <returns>The value produced by the operation.</returns>
 		public Dictionary<string, int> FindPopularItems(DateTime startDateUtc, DateTime endDateUtc, int maxItems)
 		{
 			return ItemRepository.FindPopularItems(startDateUtc, endDateUtc, maxItems);
 		}
 
+		/// <summary>
+		///     Performs the find by coupon code operation using the supplied arguments and current commerce context.
+		/// </summary>
+		/// <param name="couponCode">The supplied coupon code value.</param>
+		/// <param name="startDateUtc">The supplied start date utc value.</param>
+		/// <param name="endDateUtc">The supplied end date utc value.</param>
+		/// <returns>The value produced by the operation.</returns>
 		public List<OrderSnapshot> FindByCouponCode(string couponCode, DateTime startDateUtc, DateTime endDateUtc)
 		{
             var matchCode = couponCode.Trim().ToUpperInvariant();

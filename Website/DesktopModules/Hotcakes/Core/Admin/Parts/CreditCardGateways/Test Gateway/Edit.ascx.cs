@@ -31,6 +31,9 @@ namespace Hotcakes.Modules.Core.Modules.CreditCardGateways.Test_Gateway
 {
     partial class Edit : HccCreditCardGatewayPart
     {
+        /// <summary>
+        /// Performs the administrative operation represented by LoadData.
+        /// </summary>
         public override void LoadData()
         {
             var settings = new TestGatewaySettings();
@@ -43,6 +46,9 @@ namespace Hotcakes.Modules.Core.Modules.CreditCardGateways.Test_Gateway
             chkVoidFails.Checked = !settings.ResponseForVoid;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by SaveData.
+        /// </summary>
         public override void SaveData()
         {
             var settings = new TestGatewaySettings();

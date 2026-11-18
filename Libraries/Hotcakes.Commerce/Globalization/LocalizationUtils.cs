@@ -31,6 +31,14 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Commerce.Globalization
 {
+    /// <summary>
+    /// Provides convenience lookups for shared commerce resources and Web Forms grid localization.
+    /// </summary>
+    /// <remarks>
+    /// Resource helpers use the fixed resource paths declared in this type and retain their
+    /// localization helpers for reuse. Status lookups preserve their explicit fallback to the
+    /// <c>Unknown</c> resource entry. Grid methods mutate the supplied column definitions in place.
+    /// </remarks>
     public static class LocalizationUtils
     {
         #region Global
@@ -41,6 +49,11 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper GlobalLocalization => _globalLocalization ??= Factory.Instance.CreateLocalizationHelper(GlobalResourceFile);
 
+        /// <summary>
+        /// Gets a value from the fixed global resource file.
+        /// </summary>
+        /// <param name="key">The resource key to look up.</param>
+        /// <returns>The value returned by the global localization helper.</returns>
         public static string GetGlobalResource(string key)
         {
             return GlobalLocalization.GetString(key);
@@ -57,6 +70,17 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper OrderShippingStatusesLocalization => _orderShippingStatusesLocalization ??= Factory.Instance.CreateLocalizationHelper(OrderShippingStatusesResourceFile);
 
+        /// <summary>
+        /// Gets the localized display value for an order shipping status.
+        /// </summary>
+        /// <param name="shippingStatus">The shipping status whose resource key is used.</param>
+        /// <param name="culture">The culture passed to the status resource lookup and fallback lookup.</param>
+        /// <returns>The status value, or the localized <see cref="OrderShippingStatus.Unknown"/> value when the first lookup is empty.</returns>
+        /// <remarks>
+        /// The first call uses <see cref="ILocalizationHelper.GetFormattedString(string, object[])"/>,
+        /// so the optional culture value is passed as a format argument rather than selected through
+        /// the culture overload. This existing behavior is intentional documentation of the current contract.
+        /// </remarks>
         public static string GetOrderShippingStatus(OrderShippingStatus shippingStatus, string culture = null)
         {
             var value = OrderShippingStatusesLocalization.GetFormattedString(shippingStatus.ToString(), culture);
@@ -76,6 +100,17 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper OrderPaymentStatusesLocalization => _orderPaymentStatusesLocalization ??= Factory.Instance.CreateLocalizationHelper(OrderPaymentStatusesResourceFile);
 
+        /// <summary>
+        /// Gets the localized display value for an order payment status.
+        /// </summary>
+        /// <param name="paymentStatus">The payment status whose resource key is used.</param>
+        /// <param name="culture">The culture passed to the status resource lookup and fallback lookup.</param>
+        /// <returns>The status value, or the localized <see cref="OrderPaymentStatus.Unknown"/> value when the first lookup is empty.</returns>
+        /// <remarks>
+        /// The first call uses <see cref="ILocalizationHelper.GetFormattedString(string, object[])"/>,
+        /// so the optional culture value is passed as a format argument rather than selected through
+        /// the culture overload. This existing behavior is documented rather than changed.
+        /// </remarks>
         public static string GetOrderPaymentStatus(OrderPaymentStatus paymentStatus, string culture = null)
         {
             var value = OrderPaymentStatusesLocalization.GetFormattedString(paymentStatus.ToString(), culture);
@@ -95,6 +130,12 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper OrderStatusesLocalization => _orderStatusesLocalization ??= Factory.Instance.CreateLocalizationHelper(OrderStatusesResourceFile);
 
+        /// <summary>
+        /// Gets the localized value for an order status key.
+        /// </summary>
+        /// <param name="orderStatus">The order status resource key.</param>
+        /// <param name="culture">The culture name used for the lookup.</param>
+        /// <returns>The localized order status value.</returns>
         public static string GetOrderStatus(string orderStatus, string culture = null)
         {
             return OrderStatusesLocalization.GetString(orderStatus, culture);
@@ -111,11 +152,20 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper RecurringIntervalTypesLocalization => _recurringIntervalTypesLocalization ??= Factory.Instance.CreateLocalizationHelper(RecurringIntervalTypesResourceFile);
 
+        /// <summary>
+        /// Gets the localized display value for a recurring interval type.
+        /// </summary>
+        /// <param name="intervalType">The interval type whose name is used as the resource key.</param>
+        /// <returns>The formatted localized interval value.</returns>
         public static string GetRecurringInterval(RecurringIntervalType intervalType)
         {
             return RecurringIntervalTypesLocalization.GetFormattedString(intervalType.ToString());
         }
 
+        /// <summary>
+        /// Gets the localized recurring interval value converted to lower case using the current culture.</summary>
+        /// <param name="intervalType">The interval type whose name is used as the resource key.</param>
+        /// <returns>The lower-case formatted localized interval value.</returns>
         public static string GetRecurringIntervalLower(RecurringIntervalType intervalType)
         {
             return RecurringIntervalTypesLocalization.GetFormattedString(intervalType.ToString()).ToLower();
@@ -132,11 +182,21 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper SalesPeriodsLocalization => _salesPeriodsLocalization ??= Factory.Instance.CreateLocalizationHelper(SalesPeriodsResourceFile);
 
+        /// <summary>
+        /// Gets the localized display value for a sales period.
+        /// </summary>
+        /// <param name="period">The sales period whose name is used as the resource key.</param>
+        /// <returns>The formatted localized sales-period value.</returns>
         public static string GetSalesPeriod(SalesPeriod period)
         {
             return SalesPeriodsLocalization.GetFormattedString(period.ToString());
         }
 
+        /// <summary>
+        /// Gets the localized sales-period value converted to lower case using the current culture.
+        /// </summary>
+        /// <param name="period">The sales period whose name is used as the resource key.</param>
+        /// <returns>The lower-case formatted localized sales-period value.</returns>
         public static string GetSalesPeriodLower(SalesPeriod period)
         {
             return SalesPeriodsLocalization.GetFormattedString(period.ToString()).ToLower();
@@ -153,6 +213,12 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper ActionTypesLocalization => _actionTypesLocalization ??= Factory.Instance.CreateLocalizationHelper(ActionTypesResourceFile);
 
+        /// <summary>
+        /// Gets the localized display value for an action type and method name.
+        /// </summary>
+        /// <param name="actionType">The action type whose name is used as the resource key.</param>
+        /// <param name="methodName">The method name supplied as the format argument.</param>
+        /// <returns>The formatted action value, or the localized <see cref="ActionType.Unknown"/> value when it is empty.</returns>
         public static string GetActionType(ActionType actionType, string methodName)
         {
             var value = ActionTypesLocalization.GetFormattedString(actionType.ToString(), methodName);
@@ -172,6 +238,11 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper PaymentMethodsLocalization => _paymentMethodsLocalization ??= Factory.Instance.CreateLocalizationHelper(PaymentMethodsResourceFile);
 
+        /// <summary>
+        /// Gets the friendly name for a payment method from the fixed payment-method resource file.
+        /// </summary>
+        /// <param name="methodName">The payment method resource key.</param>
+        /// <returns>The localized friendly name.</returns>
         public static string GetPaymentMethodFriendlyName(string methodName)
         {
             return PaymentMethodsLocalization.GetString(methodName);
@@ -188,6 +259,11 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper TaxProvidersLocalization => _taxProvidersLocalization ??= Factory.Instance.CreateLocalizationHelper(TaxProvidersResourceFile);
 
+        /// <summary>
+        /// Gets the friendly name for a tax provider from the fixed tax-provider resource file.
+        /// </summary>
+        /// <param name="providerName">The tax provider resource key.</param>
+        /// <returns>The localized friendly name.</returns>
         public static string GetTaxProviderFriendlyName(string providerName)
         {
             return TaxProvidersLocalization.GetString(providerName);
@@ -204,11 +280,22 @@ namespace Hotcakes.Commerce.Globalization
 
         private static ILocalizationHelper QuickbooksExportLocalization => _quickbooksExportLocalization ??= Factory.Instance.CreateLocalizationHelper(QuickbooksExportResourceFile);
 
+        /// <summary>
+        /// Gets a QuickBooks export resource value.
+        /// </summary>
+        /// <param name="key">The QuickBooks export resource key.</param>
+        /// <returns>The localized resource value.</returns>
         public static string GetQuickbooksExportString(string key)
         {
             return QuickbooksExportLocalization.GetString(key);
         }
 
+        /// <summary>
+        /// Gets and formats a QuickBooks export resource value.
+        /// </summary>
+        /// <param name="key">The QuickBooks export resource key.</param>
+        /// <param name="args">The format arguments passed to the localization helper.</param>
+        /// <returns>The formatted localized resource value.</returns>
         public static string GetQuickbooksExportFormattedString(string key, params object[] args)
         {
             return QuickbooksExportLocalization.GetFormattedString(key, args);
@@ -218,6 +305,16 @@ namespace Hotcakes.Commerce.Globalization
 
         #region Web Forms
 
+        /// <summary>
+        /// Localizes the header and footer text of each column in a Web Forms data grid in place.
+        /// </summary>
+        /// <param name="dataGrid">The data grid whose columns are mutated; null is ignored.</param>
+        /// <param name="localization">The helper used to look up column text; null is ignored.</param>
+        /// <remarks>
+        /// Each lookup appends <c>.HeaderText</c> or <c>.FooterText</c> to the column's current text.
+        /// A column is changed only when the lookup returns a non-empty value; otherwise its existing
+        /// text is preserved.
+        /// </remarks>
         public static void LocalizeDataGrid(DataGrid dataGrid, ILocalizationHelper localization)
         {
             if (dataGrid == null || localization == null) return;
@@ -233,6 +330,16 @@ namespace Hotcakes.Commerce.Globalization
             }
         }
 
+        /// <summary>
+        /// Localizes the header and footer text of each column in a Web Forms grid view in place.
+        /// </summary>
+        /// <param name="gridView">The grid view whose columns are mutated; null is ignored.</param>
+        /// <param name="localization">The helper used to look up column text; null is ignored.</param>
+        /// <remarks>
+        /// Each lookup appends <c>.HeaderText</c> or <c>.FooterText</c> to the column's current text.
+        /// A column is changed only when the lookup returns a non-empty value; otherwise its existing
+        /// text is preserved.
+        /// </remarks>
         public static void LocalizeGridView(GridView gridView, ILocalizationHelper localization)
         {
             if (gridView == null || localization == null) return;

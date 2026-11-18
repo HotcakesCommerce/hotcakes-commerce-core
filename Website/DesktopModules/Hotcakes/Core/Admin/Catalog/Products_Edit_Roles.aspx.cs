@@ -35,6 +35,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
+    /// <summary>
+    /// Provides the administrative page for managing product roles.
+    /// </summary>
     public partial class Products_Edit_Roles : BaseProductPage
     {
         #region Event Handlers

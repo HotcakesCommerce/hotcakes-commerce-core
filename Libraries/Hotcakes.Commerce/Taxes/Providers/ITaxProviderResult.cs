@@ -28,16 +28,42 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Commerce.Taxes.Providers
 {
+    /// <summary>
+    /// Represents the aggregate and line-level outcome returned by a tax provider operation.
+    /// </summary>
+    /// <remarks>
+    /// A result can carry diagnostic <see cref="Messages"/> even when an operation succeeds. The
+    /// aggregate amounts describe the order as a whole, while <see cref="Items"/> contains the
+    /// per-line results represented by <see cref="ITaxProviderLineResult"/>.
+    /// </remarks>
     public interface ITaxProviderResult
     {
+        /// <summary>Gets or sets a value indicating whether the provider operation succeeded.</summary>
         bool Success { get; set; }
+
+        /// <summary>Gets or sets diagnostic or user-facing messages returned by the provider.</summary>
         List<string> Messages { get; set; }
+
+        /// <summary>Gets or sets the total taxable amount used by the provider.</summary>
         decimal TotalAmount { get; set; }
+
+        /// <summary>Gets or sets the shipping tax rate as a decimal fraction.</summary>
         decimal ShippingTaxRate { get; set; }
+
+        /// <summary>Gets or sets the tax amount assessed on shipping.</summary>
         decimal ShippingTax { get; set; }
+
+        /// <summary>Gets or sets the tax amount assessed on order items.</summary>
         decimal ItemsTax { get; set; }
+
+        /// <summary>Gets or sets the aggregate tax amount, normally the item and shipping tax combined.</summary>
         decimal TotalTax { get; set; }
+
+        /// <summary>Gets or sets the provider document code associated with the operation.</summary>
         string DocCode { get; set; }
+
+        /// <summary>Gets or sets the per-line tax results.</summary>
+        /// <seealso cref="ITaxProviderLineResult"/>
         List<ITaxProviderLineResult> Items { get; set; }
     }
 }

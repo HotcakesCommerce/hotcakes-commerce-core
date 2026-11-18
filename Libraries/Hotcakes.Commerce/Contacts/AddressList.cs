@@ -30,14 +30,26 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>
+    /// Represents a JSON-serializable collection of <see cref="Address"/> objects.
+    /// </summary>
     [DataContract]
     public class AddressList : List<Address>
     {
+        /// <summary>
+        /// Serializes this address collection using the repository JSON helper.
+        /// </summary>
+        /// <returns>The JSON representation of this collection.</returns>
         public string ToJson()
         {
             return Json.ObjectToJson(this);
         }
 
+        /// <summary>
+        /// Deserializes an address collection from JSON.
+        /// </summary>
+        /// <param name="jsonValues">The JSON representation of an address collection.</param>
+        /// <returns>A populated list, or an empty list when deserialization returns <see langword="null"/>.</returns>
         public static AddressList FromJson(string jsonValues)
         {
             var result =
@@ -52,6 +64,12 @@ namespace Hotcakes.Commerce.Contacts
             return trueResult;
         }
 
+        /// <summary>
+        /// Determines whether an address equal to the supplied address is present.
+        /// </summary>
+        /// <param name="addressToCompare">The address to compare with each item.</param>
+        /// <returns><see langword="true"/> when an equal address is found; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>This overload uses <see cref="Address.IsEqualTo(Address)"/> rather than reference equality.</remarks>
         public new bool Contains(Address addressToCompare)
         {
             foreach (var address in this)

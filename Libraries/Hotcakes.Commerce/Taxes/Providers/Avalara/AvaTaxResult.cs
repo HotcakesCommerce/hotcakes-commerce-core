@@ -29,9 +29,19 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Commerce.Taxes.Providers.Avalara
 {
+    /// <summary>
+    /// Contains the aggregate and line-level result returned by the Avalara tax provider.
+    /// </summary>
+    /// <remarks>
+    /// A newly constructed result represents failure, has empty messages and document code,
+    /// and has zero-valued totals. The gateway changes these values after each AvaTax operation.
+    /// </remarks>
     [Serializable]
     public class AvaTaxResult : ITaxProviderResult
     {
+        /// <summary>
+        /// Initializes a result with failure status, empty collections, and zero totals.
+        /// </summary>
         public AvaTaxResult()
         {
             Success = false;
@@ -45,14 +55,36 @@ namespace Hotcakes.Commerce.Taxes.Providers.Avalara
             Items = new List<ITaxProviderLineResult>();
         }
 
+        /// <summary>Gets or sets whether the Avalara operation completed successfully.</summary>
         public bool Success { get; set; }
+
+        /// <summary>Gets or sets the operation or service messages returned by Avalara.</summary>
+        /// <remarks>Gateway failures add a fixed operation message followed by formatted service messages.</remarks>
         public List<string> Messages { get; set; }
+
+        /// <summary>Gets or sets the document total returned by AvaTax.</summary>
         public decimal TotalAmount { get; set; }
+
+        /// <summary>Gets or sets the tax rate returned for the shipping line.</summary>
+        /// <remarks>The value is a decimal fraction, not a percentage display value.</remarks>
         public decimal ShippingTaxRate { get; set; }
+
+        /// <summary>Gets or sets the tax amount returned for the shipping line.</summary>
         public decimal ShippingTax { get; set; }
+
+        /// <summary>Gets or sets the tax total for non-shipping lines.</summary>
+        /// <remarks>For a successful calculation this is <see cref="TotalTax"/> minus <see cref="ShippingTax"/>.</remarks>
         public decimal ItemsTax { get; set; }
+
+        /// <summary>Gets or sets the total tax returned by AvaTax.</summary>
         public decimal TotalTax { get; set; }
+
+        /// <summary>Gets or sets the AvaTax document code.</summary>
+        /// <remarks>Commit-related operations preserve the document code supplied by the caller.</remarks>
         public string DocCode { get; set; }
+
+        /// <summary>Gets or sets the non-shipping line results returned by AvaTax.</summary>
+        /// <remarks>The list contains <see cref="AvaTaxLineResult"/> instances for calculated order lines.</remarks>
         public List<ITaxProviderLineResult> Items { get; set; }
     }
 }

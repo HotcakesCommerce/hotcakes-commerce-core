@@ -39,6 +39,9 @@ namespace Hotcakes.CommerceDTO.v1.Orders
     [Serializable]
     public class OrderPackageDTO
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderPackageDTO"/> class with default package values.
+        /// </summary>
         public OrderPackageDTO()
         {
             CustomProperties = new List<CustomPropertyDTO>();

@@ -30,8 +30,15 @@ using Hotcakes.Commerce.Search;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Searches products while applying DNN catalog-role security rules on top of <see cref="SqlSearchProvider"/>.
+    /// </summary>
     public class DnnSearchProvider : SqlSearchProvider
     {
+        /// <summary>
+        /// Initializes a DNN-aware search provider for a Hotcakes request.
+        /// </summary>
+        /// <param name="hccRequestContext">The current Hotcakes request context.</param>
         public DnnSearchProvider(HccRequestContext hccRequestContext)
             : base(hccRequestContext)
         {
@@ -89,6 +96,12 @@ namespace Hotcakes.Commerce.Dnn
 
         protected class DnnProductSearchHelper : ProductSearchHelper
         {
+            /// <summary>
+            /// Initializes a product search helper that applies the DNN security filter.
+            /// </summary>
+            /// <param name="reqContext">The current Hotcakes request context.</param>
+            /// <param name="context">The database context used for product queries.</param>
+            /// <param name="siteId">The store identifier used by the search.</param>
             public DnnProductSearchHelper(HccRequestContext reqContext, HccDbContext context, long siteId)
                 : base(reqContext, context, siteId)
             {

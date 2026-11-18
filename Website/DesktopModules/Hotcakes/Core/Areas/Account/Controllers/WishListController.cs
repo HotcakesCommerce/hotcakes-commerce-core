@@ -37,10 +37,13 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Areas.Account.Controllers
 {
+/// <summary>Manages the signed-in customer's saved products.</summary>
     [CustomerSignedInFilter]
     [Serializable]
     public class WishListController : BaseStoreController
     {
+        /// <summary>Displays the customer's saved products.</summary>
+        /// <returns>The saved-items view.</returns>
         public ActionResult Index()
         {
             var items = HccApp.CatalogServices.WishListItems.FindByCustomerIdPaged(HccApp.CurrentCustomerId, 1, 50);
@@ -52,6 +55,9 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
             return View(model);
         }
 
+        /// <summary>Deletes a saved product belonging to the current customer.</summary>
+        /// <param name="itemid">The saved-item identifier.</param>
+        /// <returns>A redirect to the saved-items view.</returns>
         [HccHttpPost]
         public ActionResult Delete(long itemid)
         {
@@ -67,6 +73,9 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
             return Redirect(Url.RouteHccUrl(HccRoute.WishList));
         }
 
+        /// <summary>Adds a valid saved product to the current cart.</summary>
+        /// <param name="itemid">The saved-item identifier.</param>
+        /// <returns>A cart redirect or the saved-items view with validation feedback.</returns>
         [HccHttpPost]
         public ActionResult AddToCart(long itemid)
         {

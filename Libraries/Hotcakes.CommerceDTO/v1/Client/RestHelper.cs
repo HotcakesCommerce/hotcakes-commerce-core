@@ -32,11 +32,26 @@ using Hotcakes.Web;
 
 namespace Hotcakes.CommerceDTO.v1.Client
 {
+    /// <summary>
+    ///     Provides the low-level HTTP operations used by <see cref="Api"/> to communicate with the Commerce REST API.
+    /// </summary>
+    /// <remarks>
+    ///     Each operation deserializes the response into the requested reference type. Transport and deserialization
+    ///     failures are represented through <see cref="IApiResponse.Errors"/> when the requested type implements
+    ///     <see cref="IApiResponse"/>.
+    /// </remarks>
     [Serializable]
     public class RestHelper
     {
         private const int DefaultTimeout = 100000;
 
+        /// <summary>
+        ///     Sends an HTTP GET request and deserializes the response into the requested type.
+        /// </summary>
+        /// <typeparam name="T">The reference type into which the response is deserialized.</typeparam>
+        /// <param name="uri">The absolute URI of the REST endpoint.</param>
+        /// <returns>A new instance of <typeparamref name="T"/> populated from the response, or containing an API error.</returns>
+        /// <remarks>This is the read-only counterpart to <see cref="PostRequest{T}"/>, <see cref="PutRequest{T}"/>, and <see cref="DeleteRequest{T}"/>.</remarks>
         public static T GetRequest<T>(string uri)
             where T : class, new()
         {
@@ -44,6 +59,13 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
+        /// <summary>
+        ///     Sends an HTTP POST request with the supplied data and deserializes the response.
+        /// </summary>
+        /// <typeparam name="T">The reference type into which the response is deserialized.</typeparam>
+        /// <param name="uri">The absolute URI of the REST endpoint.</param>
+        /// <param name="data">The request body, normally serialized by the calling API method.</param>
+        /// <returns>A new instance of <typeparamref name="T"/> populated from the response, or containing an API error.</returns>
         public static T PostRequest<T>(string uri, string data)
             where T : class, new()
         {
@@ -51,6 +73,13 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
+        /// <summary>
+        ///     Sends an HTTP PUT request with the supplied data and deserializes the response.
+        /// </summary>
+        /// <typeparam name="T">The reference type into which the response is deserialized.</typeparam>
+        /// <param name="uri">The absolute URI of the REST endpoint.</param>
+        /// <param name="data">The request body to send to the endpoint.</param>
+        /// <returns>A new instance of <typeparamref name="T"/> populated from the response, or containing an API error.</returns>
         public static T PutRequest<T>(string uri, string data)
             where T : class, new()
         {
@@ -58,6 +87,13 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
+        /// <summary>
+        ///     Sends an HTTP DELETE request and deserializes the response.
+        /// </summary>
+        /// <typeparam name="T">The reference type into which the response is deserialized.</typeparam>
+        /// <param name="uri">The absolute URI of the REST endpoint.</param>
+        /// <param name="data">The request body to send to the endpoint, when the endpoint requires one.</param>
+        /// <returns>A new instance of <typeparamref name="T"/> populated from the response, or containing an API error.</returns>
         public static T DeleteRequest<T>(string uri, string data)
             where T : class, new()
         {

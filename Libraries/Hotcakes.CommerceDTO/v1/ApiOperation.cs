@@ -29,10 +29,16 @@ using System.Runtime.Serialization;
 
 namespace Hotcakes.CommerceDTO.v1
 {
+    /// <summary>
+    /// Describes an operation that can be performed through an API resource.
+    /// </summary>
     [DataContract]
     [Serializable]
     public class ApiOperation
     {
+        /// <summary>
+        /// Initializes an API operation with empty values for its descriptive fields.
+        /// </summary>
         public ApiOperation()
         {
             Uri = string.Empty;
@@ -40,12 +46,21 @@ namespace Hotcakes.CommerceDTO.v1
             Description = string.Empty;
         }
 
+        /// <summary>
+        /// Gets or sets the URI of the API operation.
+        /// </summary>
         [DataMember]
         public string Uri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the relationship identifier for the operation.
+        /// </summary>
         [DataMember]
         public string Rel { get; set; }
 
+        /// <summary>
+        /// Gets or sets the human-readable description of the operation.
+        /// </summary>
         [DataMember]
         public string Description { get; set; }
     }

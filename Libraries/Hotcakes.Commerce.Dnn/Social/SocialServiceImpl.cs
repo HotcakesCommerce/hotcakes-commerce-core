@@ -37,9 +37,16 @@ using Hotcakes.Commerce.Social;
 namespace Hotcakes.Commerce.Dnn.Social
 {
     // TODO: Use either this class or SocialServiceBase moving forward - not both
+    /// <summary>
+    /// Implements DNN journal taxonomy operations for Hotcakes products and categories.
+    /// </summary>
     [Serializable]
     public class SocialServiceImpl : SocialServiceBase, ISocialService
     {
+        /// <summary>
+        /// Initializes the DNN social service implementation.
+        /// </summary>
+        /// <param name="context">The current Hotcakes request context.</param>
         public SocialServiceImpl(HccRequestContext context)
             : base(context)
         {
@@ -47,33 +54,61 @@ namespace Hotcakes.Commerce.Dnn.Social
 
         #region Public methods
 
+        /// <summary>
+        /// Saves a product to the DNN journal.
+        /// </summary>
+        /// <param name="product">The product to save.</param>
         public override void SaveProductToJournal(Product product)
         {
             EnsureJournalItem(product);
         }
 
+        /// <summary>
+        /// Saves a category to the DNN journal.
+        /// </summary>
+        /// <param name="cat">The category to save.</param>
         public override void SaveCategoryToJournal(Category cat)
         {
             EnsureJournalItem(cat);
         }
 
+        /// <summary>
+        /// Replaces the DNN taxonomy terms associated with a product.
+        /// </summary>
+        /// <param name="product">The product whose taxonomy should be updated.</param>
+        /// <param name="taxonomyTags">The taxonomy term names to associate with the product.</param>
         public override void UpdateProductTaxonomy(Product product, IEnumerable<string> taxonomyTags)
         {
             var journalItem = EnsureJournalItem(product);
             UpdateTaxonomy(journalItem, taxonomyTags);
         }
 
+        /// <summary>
+        /// Replaces the DNN taxonomy terms associated with a category.
+        /// </summary>
+        /// <param name="cat">The category whose taxonomy should be updated.</param>
+        /// <param name="taxonomyTags">The taxonomy term names to associate with the category.</param>
         public override void UpdateCategoryTaxonomy(Category cat, IEnumerable<string> taxonomyTags)
         {
             var journalItem = EnsureJournalItem(cat);
             UpdateTaxonomy(journalItem, taxonomyTags);
         }
 
+        /// <summary>
+        /// Gets the DNN taxonomy terms associated with a product.
+        /// </summary>
+        /// <param name="product">The product whose taxonomy terms should be returned.</param>
+        /// <returns>The associated taxonomy term names.</returns>
         public override IEnumerable<string> GetTaxonomyTerms(Product product)
         {
             return GetTaxonomyTerms(product.Bvin);
         }
 
+        /// <summary>
+        /// Gets the DNN taxonomy terms associated with a category.
+        /// </summary>
+        /// <param name="category">The category whose taxonomy terms should be returned.</param>
+        /// <returns>The associated taxonomy term names.</returns>
         public override IEnumerable<string> GetTaxonomyTerms(Category category)
         {
             return GetTaxonomyTerms(category.Bvin);

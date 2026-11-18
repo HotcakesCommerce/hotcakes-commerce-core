@@ -35,6 +35,7 @@ namespace Hotcakes.Modules.Core.Admin.Catalog
 {
     partial class Categories_ManualSelection : BaseCategoryPage
     {
+        /// <summary>Stores the identifier of the category selected for manual assignment.</summary>
         public string CategoryBvin = string.Empty;
 
         protected override void OnInit(EventArgs e)

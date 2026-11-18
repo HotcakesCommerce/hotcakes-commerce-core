@@ -31,6 +31,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
 {
+    /// <summary>
+    /// Edits a promotion action that adjusts reward points.
+    /// </summary>
     public partial class AdjustRewardPoints : BaseActionControl
     {
         private RewardPointsAjustment TypedAction
@@ -38,6 +41,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
             get { return Action as RewardPointsAjustment; }
         }
 
+        /// <summary>Loads the reward-points adjustment action into the editor.</summary>
         public override void LoadAction()
         {
             if (ddlRecipient.Items.Count == 0)
@@ -50,6 +54,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
             ddlRecipient.SelectedValue = ((int) TypedAction.Recipient).ToString();
         }
 
+        /// <summary>Saves the reward-points adjustment action.</summary>
+        /// <returns><see langword="true"/> when the action is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveAction()
         {
             TypedAction.Amount = txtRewardPoints.Text.ConvertTo<int>();

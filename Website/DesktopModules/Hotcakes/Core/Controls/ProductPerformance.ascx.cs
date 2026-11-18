@@ -32,10 +32,19 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Controls
 {
+    /// <summary>
+    /// Represents the ProductPerformance component used by the Hotcakes Core module.
+    /// </summary>
     public partial class ProductPerformance : HccUserControl
     {
+        /// <summary>
+        /// Gets or sets the product identifier used by the control.
+        /// </summary>
         public string ProductId { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the control is in edit mode.
+        /// </summary>
         public bool EditMode { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)

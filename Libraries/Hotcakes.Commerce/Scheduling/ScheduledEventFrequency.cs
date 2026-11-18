@@ -26,14 +26,33 @@
 
 namespace Hotcakes.Commerce.Scheduling
 {
+    /// <summary>
+    /// Specifies the interval, in minutes, at which a scheduled event runs.
+    /// </summary>
+    /// <remarks>
+    /// The numeric values are minute counts used by scheduling configuration and are compatibility-sensitive.
+    /// </remarks>
     public enum ScheduledEventFrequency
     {
+        /// <summary>Runs every 5 minutes.</summary>
         Every5Minutes = 5,
+
+        /// <summary>Runs every 30 minutes.</summary>
         Every30Minutes = 30,
+
+        /// <summary>Runs every hour (60 minutes).</summary>
         EveryHour = 60,
+
+        /// <summary>Runs every 6 hours (360 minutes).</summary>
         Every6Hours = 360,
+
+        /// <summary>Runs every 12 hours (720 minutes).</summary>
         Every12Hours = 720,
+
+        /// <summary>Runs once a day (1,440 minutes).</summary>
         OnceADay = 1440,
+
+        /// <summary>Runs once a week (10,080 minutes).</summary>
         OnceAWeek = 10080
     }
 }

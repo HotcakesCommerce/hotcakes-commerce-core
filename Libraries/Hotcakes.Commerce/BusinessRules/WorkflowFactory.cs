@@ -28,8 +28,13 @@ using Hotcakes.Commerce.BusinessRules.OrderTasks;
 
 namespace Hotcakes.Commerce.BusinessRules
 {
+    /// <summary>Creates the built-in workflows and their task sequences.</summary>
+    /// <remarks>Override the protected loader methods to extend a sequence while preserving the public <see cref="WorkflowNames"/> mappings.</remarks>
     public class WorkflowFactory
     {
+        /// <summary>Creates the workflow mapped to the specified compatibility name.</summary>
+        /// <param name="name">The workflow name whose task sequence should be loaded.</param>
+        /// <returns>A workflow containing the mapped tasks; <see cref="WorkflowNames.ProcessNewReturn"/> currently produces an empty workflow.</returns>
         public virtual Workflow CreateWorkflow(WorkflowNames name)
         {
             Task[] tasks = null;
@@ -87,7 +92,7 @@ namespace Hotcakes.Commerce.BusinessRules
         /// <summary>
         ///     This is the workflow that runs on an order whenever your customer checks out.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The ordered tasks for verifying order size.</returns>
         protected virtual Task[] LoadVerifyOrderSizeTasks()
         {
             return new Task[]
@@ -100,7 +105,7 @@ namespace Hotcakes.Commerce.BusinessRules
         /// <summary>
         ///     This is the workflow that runs whenever an order is marked as shipped.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The ordered tasks for drop-shipping an order.</returns>
         protected virtual Task[] LoadDropShipTasks()
         {
             return new Task[]
@@ -112,7 +117,7 @@ namespace Hotcakes.Commerce.BusinessRules
         /// <summary>
         ///     This is the workflow that runs after a package is marked shipped.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The ordered tasks run after a package is shipped.</returns>
         protected virtual Task[] LoadPackageShippedTasks()
         {
             return new Task[]
@@ -125,7 +130,7 @@ namespace Hotcakes.Commerce.BusinessRules
         ///     Whenever an order is edited, this workflow is run. Add a new array of Task[] in order to add your custom code to
         ///     the workflow that is run here.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The ordered tasks run after an order is edited.</returns>
         protected virtual Task[] LoadOrderEditedTasks()
         {
             return new Task[]
@@ -139,7 +144,7 @@ namespace Hotcakes.Commerce.BusinessRules
         /// <summary>
         ///     This workflow will run when the order status is changed. Currently, it checks to synchronize gift card values.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The ordered tasks run after an order status change.</returns>
         protected virtual Task[] LoadOrderStatusChangedTasks()
         {
             return new Task[]
@@ -151,7 +156,7 @@ namespace Hotcakes.Commerce.BusinessRules
         /// <summary>
         ///     This workflow is run whenever the payment method for an order is changed.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The ordered tasks run after an order payment change.</returns>
         protected virtual Task[] LoadPaymentChangedTasks()
         {
             return new Task[]
@@ -169,7 +174,7 @@ namespace Hotcakes.Commerce.BusinessRules
         ///     This workflow is run after payment has been applied. This is a great place to run workflow tasks that should not
         ///     run until after a valid payment has been applied to the order.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The ordered tasks run after payment is applied.</returns>
         protected virtual Task[] LoadPaymentCompleteTasks()
         {
             return new Task[]
@@ -187,7 +192,7 @@ namespace Hotcakes.Commerce.BusinessRules
         /// <summary>
         ///     This is the workflow that runs whenever an order is moved from the "New" state to the "TODO" state.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The ordered tasks that process a new order.</returns>
         protected virtual Task[] LoadProcessNewOrderTasks()
         {
             return new Task[]
@@ -212,7 +217,7 @@ namespace Hotcakes.Commerce.BusinessRules
         ///     This workflow is run after a new order has been accepted to process payments. This is where PayPal Express is
         ///     applied as well as credit cards and reward points.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The ordered tasks that process payments for a new order.</returns>
         protected virtual Task[] LoadProcessNewOrderPaymentsTasks()
         {
             // Receive Payments and throw error if needed
@@ -234,7 +239,7 @@ namespace Hotcakes.Commerce.BusinessRules
         /// <summary>
         ///     This workflow is run after the payments have been applied.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The ordered tasks run after payments have been applied.</returns>
         protected virtual Task[] LoadProcessNewOrderAfterPaymentsTasks()
         {
             return new Task[]
@@ -253,7 +258,7 @@ namespace Hotcakes.Commerce.BusinessRules
         /// <summary>
         ///     This workflow is run after the status of shipping changes.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The ordered tasks run after shipping changes.</returns>
         protected virtual Task[] LoadShippingChangedTasks()
         {
             return new Task[]
@@ -270,7 +275,7 @@ namespace Hotcakes.Commerce.BusinessRules
         ///     after an order is shipped like those related to external
         ///     ERP inventory integration.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The ordered tasks run after shipping is complete.</returns>
         protected virtual Task[] LoadShippingCompleteTasks()
         {
             return new Task[]
@@ -283,7 +288,7 @@ namespace Hotcakes.Commerce.BusinessRules
         ///     This workflow is run to execute external checkout providers, meaning those not run directly against an API.
         ///     To-date, this is only PayPal Express?
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The ordered third-party checkout tasks.</returns>
         protected virtual Task[] LoadThirdPartyCheckoutSelectedTasks()
         {
             return new Task[]

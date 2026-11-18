@@ -26,12 +26,18 @@
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>Special product classifications used by catalog workflows.</summary>
     public enum SpecialProductTypes
     {
+        /// <summary>Specifies the NotSet value.</summary>
         NotSet = -1,
+        /// <summary>Specifies the Normal value.</summary>
         Normal = 0,
+        /// <summary>Specifies the GiftCertificate value.</summary>
         GiftCertificate = 1,
+        /// <summary>Specifies the ArbitrarilyPricedGiftCertificate value.</summary>
         ArbitrarilyPricedGiftCertificate = 2,
+        /// <summary>Specifies the Kit value.</summary>
         Kit = 3
     }
 }

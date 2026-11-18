@@ -39,6 +39,9 @@ using Hotcakes.Modules.Core.Areas.ContentBlocks.Models;
 
 namespace Hotcakes.Modules.Core.Admin.Parts.ContentBlocks.ImageRotator
 {
+    /// <summary>
+    /// Defines the administrative class Editor.
+    /// </summary>
     public partial class Editor : HccContentBlockPart
     {
         #region Event Handlers

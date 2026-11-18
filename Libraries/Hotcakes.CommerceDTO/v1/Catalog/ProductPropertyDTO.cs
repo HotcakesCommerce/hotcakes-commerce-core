@@ -38,6 +38,9 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
     [Serializable]
     public class ProductPropertyDTO
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ProductPropertyDTO"/> type with its default DTO values.
+        /// </summary>
         public ProductPropertyDTO()
         {
             Id = 0;

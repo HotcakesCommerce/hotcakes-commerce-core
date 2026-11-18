@@ -28,6 +28,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.Top10Products
 {
+    /// <summary>
+    /// Hosts the storefront top ten products view.
+    /// </summary>
     public partial class Top10ProductsView : HotcakesModuleBase
     {
         protected override string RenderView()

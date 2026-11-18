@@ -34,6 +34,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Configuration
 {
+    /// <summary>
+    /// Provides the administrative page for configuring shipping handling.
+    /// </summary>
     public partial class ShippingHandling : BaseAdminPage
     {
         protected override void OnPreInit(EventArgs e)

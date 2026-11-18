@@ -32,15 +32,25 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Modules.Core
 {
+    /// <summary>
+    /// Scheduled task that clears temporary Hotcakes upload files for each portal.
+    /// </summary>
     public class ClearUploadTempFiles : SchedulerClient
     {
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ClearUploadTempFiles));
+        /// <summary>
+        /// Initializes the scheduled task with its DNN schedule history entry.
+        /// </summary>
+        /// <param name="item">The schedule history entry used to report task progress and status.</param>
 
         public ClearUploadTempFiles(ScheduleHistoryItem item)
         {
             ScheduleHistoryItem = item;
         }
 
+        /// <summary>
+        /// Removes temporary upload contents while preserving each portal's temporary directory.
+        /// </summary>
         public override void DoWork()
         {
             try

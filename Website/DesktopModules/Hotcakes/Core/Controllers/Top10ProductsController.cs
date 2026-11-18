@@ -34,9 +34,12 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Displays the store's ten highest-selling products.</summary>
     [Serializable]
     public class Top10ProductsController : BaseAppController
     {
+        /// <summary>Loads and renders the top-selling product list.</summary>
+        /// <returns>The top sellers view.</returns>
         public ActionResult Index()
         {
             var model = new SideMenuViewModel();

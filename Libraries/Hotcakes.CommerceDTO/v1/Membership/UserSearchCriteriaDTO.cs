@@ -29,10 +29,16 @@ using System.Runtime.Serialization;
 
 namespace Hotcakes.CommerceDTO.v1.Membership
 {
+    /// <summary>
+    /// Represents the name and email filters used when searching customer users through the REST API.
+    /// </summary>
     [DataContract]
     [Serializable]
     public class UserSearchCriteriaDTO
     {
+        /// <summary>
+        /// Initializes empty criteria for searching customer users.
+        /// </summary>
         public UserSearchCriteriaDTO()
         {
             FirstName = string.Empty;
@@ -40,12 +46,24 @@ namespace Hotcakes.CommerceDTO.v1.Membership
             Email = string.Empty;
         }
 
+        /// <summary>
+        /// Gets or sets the first-name value used to filter search results.
+        /// </summary>
+        /// <value>The first name to match, or an empty string when no filter is specified.</value>
         [DataMember]
         public string FirstName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the last-name value used to filter search results.
+        /// </summary>
+        /// <value>The last name to match, or an empty string when no filter is specified.</value>
         [DataMember]
         public string LastName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the email value used to filter search results.
+        /// </summary>
+        /// <value>The email address to match, or an empty string when no filter is specified.</value>
         [DataMember]
         public string Email { get; set; }
     }

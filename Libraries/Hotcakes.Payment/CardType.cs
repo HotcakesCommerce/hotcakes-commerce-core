@@ -26,17 +26,30 @@
 
 namespace Hotcakes.Payment
 {
+    /// <summary>
+    /// Identifies the card network or brand associated with a payment card.
+    /// </summary>
     public enum CardType
     {
+        /// <summary>No card network is specified or recognized.</summary>
         Unknown = 0,
+        /// <summary>American Express.</summary>
         Amex = 1,
+        /// <summary>Discover.</summary>
         Discover = 2,
+        /// <summary>Diners Club.</summary>
         DinersClub = 3,
+        /// <summary>JCB.</summary>
         JCB = 4,
+        /// <summary>Maestro.</summary>
         Maestro = 5,
+        /// <summary>Mastercard.</summary>
         MasterCard = 6,
+        /// <summary>Solo.</summary>
         Solo = 7,
+        /// <summary>Switch.</summary>
         Switch = 8,
+        /// <summary>Visa.</summary>
         Visa = 9
     }
 }

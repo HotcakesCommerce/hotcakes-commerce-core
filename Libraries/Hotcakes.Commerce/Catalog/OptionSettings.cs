@@ -44,6 +44,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="name">The unique key or name of the Setting to update/save.</param>
         /// <param name="value">The value that should be returned when the setting is asked for by the key/name.</param>
+        /// <summary>
+        /// Performs the AddOrUpdate catalog operation.
+        /// </summary>
         public void AddOrUpdate(string name, string value)
         {
             if (ContainsKey(name))
@@ -61,6 +64,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="name">The unique key or name used to retrieve the Setting.</param>
         /// <returns>Returns the setting or an empty string.</returns>
+        /// <summary>
+        /// Performs the GetSettingOrEmpty catalog operation.
+        /// </summary>
         public string GetSettingOrEmpty(string name)
         {
             if (ContainsKey(name))
@@ -75,6 +81,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="name">The unique key or name used to retrieve the Setting.</param>
         /// <returns>If the saved setting is a 1, True is returned. Otherwise, False is returned.</returns>
+        /// <summary>
+        /// Performs the GetBoolSetting catalog operation.
+        /// </summary>
         public bool GetBoolSetting(string name)
         {
             if (ContainsKey(name))
@@ -93,6 +102,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="name">The unique key or name of the Setting to update/save.</param>
         /// <param name="value">The value that should be returned when the setting is asked for by the key/name.</param>
         /// <remarks>This method converts the boolean value to the respective string representation of 0 or 1.</remarks>
+        /// <summary>
+        /// Performs the SetBoolSetting catalog operation.
+        /// </summary>
         public void SetBoolSetting(string name, bool value)
         {
             if (value)
@@ -109,6 +121,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Allows you to merge another setting of settings into the current settings.
         /// </summary>
         /// <param name="otherSettings">A populated instance of the other settings to add to the current settings.</param>
+        /// <summary>
+        /// Performs the Merge catalog operation.
+        /// </summary>
         public void Merge(OptionSettings otherSettings)
         {
             foreach (var kv in otherSettings)
@@ -121,6 +136,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Converts the settings to a JSON friendly string for use in the REST API.
         /// </summary>
         /// <returns>A JSON string representation of the settings.</returns>
+        /// <summary>
+        /// Performs the ToJson catalog operation.
+        /// </summary>
         public string ToJson()
         {
             return Json.ObjectToJson(this);
@@ -131,6 +149,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="jsonValues">The JSON string to convert to an OptionSettings object.</param>
         /// <returns>Returns a populated instance of the OptionSettings object.</returns>
+        /// <summary>
+        /// Performs the FromJson catalog operation.
+        /// </summary>
         public static OptionSettings FromJson(string jsonValues)
         {
             var result = Json.ObjectFromJson<OptionSettings>(jsonValues);

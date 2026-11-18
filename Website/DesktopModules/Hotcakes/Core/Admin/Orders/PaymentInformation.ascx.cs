@@ -30,8 +30,12 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Orders
 {
+    /// <summary>
+    /// Displays payment information for an administrative order.
+    /// </summary>
     public partial class PaymentInformation : HccUserControl
     {
+        /// <summary>Gets or sets the order whose payment information is displayed.</summary>
         public Order CurrentOrder { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)

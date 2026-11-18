@@ -35,11 +35,14 @@ using Hotcakes.Web.Logging;
 namespace Hotcakes.Commerce.Accounts
 {
     /// <summary>
-    ///     This class used to perform database operation for hcc_ApiKey table.
+    ///     This class used to perform database operation for hcc_ApiKey table. Represents ApiKeyRepository data and behavior within the Hotcakes Commerce account and store boundary.
     /// </summary>
     [Serializable]
     public class ApiKeyRepository : HccSimpleRepoBase<hcc_ApiKey, ApiKey>
     {
+        /// <summary>Performs the ApiKeyRepository operation.</summary>
+        /// <param name="context">The context value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public ApiKeyRepository(HccRequestContext context)
             : base(context)
         {

@@ -33,6 +33,9 @@ using System.Linq;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing
 {
+    /// <summary>
+    /// Provides the administrative editor for promotion actions.
+    /// </summary>
     public partial class Promotions_Edit_Actions : HccUserControl
     {
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(Promotions_Edit_Actions));
@@ -65,6 +68,9 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         #region Public Methods
 
+        /// <summary>Loads a promotion action into the editor.</summary>
+        /// <param name="prom">The promotion being edited.</param>
+        /// <param name="action">The action to load.</param>
         public void LoadAction(Promotion prom, IPromotionAction action)
         {
             PromotionId = prom.Id;
@@ -107,6 +113,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
             LoadActionEditor(true);
         }
 
+        /// <summary>Saves the promotion action represented by the editor.</summary>
+        /// <returns><see langword="true"/> when the action is saved; otherwise, <see langword="false"/>.</returns>
         public bool SaveAction()
         {
             var editor = GetCurrentActionEditor();

@@ -28,22 +28,30 @@ using System;
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Provides the address-validation settings façade owned by a <see cref="StoreSettings"/> instance.</summary>
+    /// <remarks>Values belong to the current store. Setters update the parent façade's in-memory settings collection immediately; persistence to the database occurs when the store settings are saved by the caller.</remarks>
     [Serializable]
     public class StoreSettingsAddressTools
     {
         private readonly StoreSettings parent;
 
+        /// <summary>Initializes a new address-tools façade for <paramref name="s"/>.</summary>
+        /// <param name="s">The store settings façade that owns the settings.</param>
         public StoreSettingsAddressTools(StoreSettings s)
         {
             parent = s;
         }
 
+        /// <summary>Gets or sets whether address validation is enabled for the store.</summary>
+        /// <value>The value persisted under <c>UseAddressValidation</c>; an unset value defaults to <see langword="false"/>.</value>
         public bool UseAddressValidation
         {
             get { return parent.GetPropBoolWithDefault("UseAddressValidation", false); }
             set { parent.SetProp("UseAddressValidation", value); }
         }
 
+        /// <summary>Gets or sets the address-validation provider identifier.</summary>
+        /// <value>The value persisted under <c>AddressToolsID</c>.</value>
         public string AddressToolsID
         {
             get { return parent.GetProp("AddressToolsID"); }

@@ -28,8 +28,18 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Commerce.Taxes
 {
+    /// <summary>
+    /// Provides access to the tax rates belonging to a tax schedule.
+    /// </summary>
+    /// <remarks>Implementations are expected to preserve the store and schedule scope supplied to <see cref="GetRates"/>.</remarks>
     public interface ITaxRateRepository
     {
+        /// <summary>
+        /// Gets the rates for a schedule in a particular store.
+        /// </summary>
+        /// <param name="storeId">The store whose rates are requested.</param>
+        /// <param name="scheduleId">The tax schedule whose rates are requested.</param>
+        /// <returns>A list of <see cref="Tax"/> records in the requested store and schedule.</returns>
         List<Tax> GetRates(long storeId, long scheduleId);
     }
 }

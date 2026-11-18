@@ -34,8 +34,14 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.ProductViewer
 {
+    /// <summary>
+    /// Provides module settings for the product viewer module.
+    /// </summary>
     public partial class Settings : HotcakesSettingsBase
     {
+        /// <summary>
+        /// Loads the product viewer settings into the controls.
+        /// </summary>
         public override void LoadSettings()
         {
             if (!IsPostBack)
@@ -61,6 +67,9 @@ namespace Hotcakes.Modules.ProductViewer
             }
         }
 
+        /// <summary>
+        /// Saves the product viewer settings from the controls.
+        /// </summary>
         public override void UpdateSettings()
         {
             var slugText = Convert.ToString(ModuleSettings["Slug"]);

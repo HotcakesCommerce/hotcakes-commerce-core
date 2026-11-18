@@ -35,6 +35,7 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Payment.Gateways
 {
+    /// <summary>Processes card transactions through the Ogone gateway using the <see cref="PaymentGateway"/> contract.</summary>
     [Serializable]
     public class Ogone : PaymentGateway
     {
@@ -43,23 +44,29 @@ namespace Hotcakes.Payment.Gateways
         private const string LiveMaintenanceUrl = "https://secure.ogone.com/ncol/prod/maintenancedirect.asp";
         private const string DeveloperMaintenanceUrl = "https://secure.ogone.com/ncol/test/maintenancedirect.asp";
 
+        /// <summary>Initializes an Ogone gateway with default settings.</summary>
         public Ogone()
         {
             Settings = new OgoneSettings();
         }
 
+        /// <summary>Gets the display name of this payment gateway.</summary>
         public override string Name
         {
             get { return "Ogone"; }
         }
 
+        /// <summary>Gets the stable identifier of this payment gateway.</summary>
         public override string Id
         {
             get { return "268F8127-760F-4D71-A4AA-39EA95DF35D5"; }
         }
 
+        /// <summary>Gets or sets the credentials, currency, and endpoint settings for this gateway.</summary>
+        /// <seealso cref="OgoneSettings"/>
         public OgoneSettings Settings { get; set; }
 
+        /// <summary>Gets the gateway settings through the common payment method settings contract.</summary>
         public override MethodSettings BaseSettings
         {
             get { return Settings; }
@@ -219,45 +226,59 @@ namespace Hotcakes.Payment.Gateways
         }
     }
 
+    /// <summary>Represents the XML response returned by Ogone.</summary>
     [XmlRoot("ncresponse")]
     public class OgoneResponse
     {
+        /// <summary>Gets or sets the Ogone order identifier.</summary>
         [XmlAttribute("orderID")]
         public string OrderId { get; set; }
 
+        /// <summary>Gets or sets the Ogone payment identifier.</summary>
         [XmlAttribute("PAYID")]
         public string PayId { get; set; }
 
+        /// <summary>Gets or sets the Ogone payment sub-identifier.</summary>
         [XmlAttribute("PAYIDSUB")]
         public string PaySubId { get; set; }
 
+        /// <summary>Gets or sets the Ogone NC status code.</summary>
         [XmlAttribute("NCSTATUS")]
         public int NcStatus { get; set; }
 
+        /// <summary>Gets or sets the Ogone error code.</summary>
         [XmlAttribute("NCERROR")]
         public string NcError { get; set; }
 
+        /// <summary>Gets or sets the detailed Ogone error description.</summary>
         [XmlAttribute("NCERRORPLUS")]
         public string NcErrorPlus { get; set; }
 
+        /// <summary>Gets or sets the Ogone acceptance code.</summary>
         [XmlAttribute("ACCEPTANCE")]
         public string Acceptance { get; set; }
 
+        /// <summary>Gets or sets the Ogone transaction status code.</summary>
         [XmlAttribute("STATUS")]
         public int Status { get; set; }
 
+        /// <summary>Gets or sets the electronic commerce indicator.</summary>
         [XmlAttribute("ECI")]
         public string ECI { get; set; }
 
+        /// <summary>Gets or sets the transaction amount returned by Ogone.</summary>
         [XmlAttribute("amount")]
         public string Amount { get; set; }
 
+        /// <summary>Gets or sets the transaction currency returned by Ogone.</summary>
         [XmlAttribute("currency")]
         public string Currency { get; set; }
 
+        /// <summary>Gets or sets the payment method reported by Ogone.</summary>
         [XmlAttribute("PM")]
         public string PaymentMethod { get; set; }
 
+        /// <summary>Gets or sets the card brand reported by Ogone.</summary>
         [XmlAttribute("BRAND")]
         public string Brand { get; set; }
     }

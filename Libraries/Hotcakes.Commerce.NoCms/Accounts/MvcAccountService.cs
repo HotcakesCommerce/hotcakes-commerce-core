@@ -30,17 +30,37 @@ using Hotcakes.Commerce.Accounts;
 
 namespace Hotcakes.Commerce.NoCms.Accounts
 {
+    /// <summary>
+    /// Provides account-service operations for associating NoCms administrative users with stores.
+    /// </summary>
     public class MvcAccountService : AccountService
     {
+        /// <summary>
+        /// Initializes an account service for the specified commerce request context.
+        /// </summary>
+        /// <param name="context">The request context used to resolve commerce services and store data.</param>
         public MvcAccountService(HccRequestContext context)
             : base(context)
         {
         }
 
+        /// <summary>
+        /// Gets or sets the repository used to retrieve administrative user accounts.
+        /// </summary>
         public IUserAccountRepository AdminUsers { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets the repository used to retrieve relationships between administrative users and stores.
+        /// </summary>
         public StoreUserRelationshipRepository AdminUsersXStores { get; protected set; }
 
         // Admin Users
+        /// <summary>
+        /// Finds the administrative users associated with a store.
+        /// </summary>
+        /// <param name="storeId">The identifier of the store whose administrative users should be returned.</param>
+        /// <returns>A list containing the user accounts associated with the store.</returns>
+        /// <seealso cref="IUserAccountRepository.FindById(long)"/>
         public virtual List<UserAccount> FindAdminUsersByStoreId(long storeId)
         {
             var result = new List<UserAccount>();
@@ -56,6 +76,12 @@ namespace Hotcakes.Commerce.NoCms.Accounts
         }
 
         // Stores X Users
+        /// <summary>
+        /// Determines whether a user has any access relationship with a store.
+        /// </summary>
+        /// <param name="storeId">The identifier of the store to check.</param>
+        /// <param name="userId">The identifier of the user to check.</param>
+        /// <returns><see langword="true"/> when the user has a relationship with the store; otherwise, <see langword="false"/>.</returns>
         public virtual bool DoesUserHaveAccessToStore(long storeId, long userId)
         {
             var relationships = AdminUsersXStores.FindByStoreId(storeId);
@@ -69,6 +95,13 @@ namespace Hotcakes.Commerce.NoCms.Accounts
             return false;
         }
 
+        /// <summary>
+        /// Determines whether a user is the owner of a store.
+        /// </summary>
+        /// <param name="storeId">The identifier of the store to check.</param>
+        /// <param name="userId">The identifier of the user to check.</param>
+        /// <returns><see langword="true"/> when the user has an owner relationship with the store; otherwise, <see langword="false"/>.</returns>
+        /// <seealso cref="StoreAccessMode.Owner"/>
         public virtual bool IsUserStoreOwner(long storeId, long userId)
         {
             var relationships = AdminUsersXStores.FindByStoreId(storeId);

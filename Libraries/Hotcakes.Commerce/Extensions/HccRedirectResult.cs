@@ -29,18 +29,45 @@ using System.Web.Mvc;
 
 namespace Hotcakes.Commerce.Extensions
 {
+    /// <summary>
+    /// Executes an MVC redirect through the HCC response wrapper.
+    /// </summary>
+    /// <remarks>
+    /// The destination is resolved with <c>UrlHelper.GenerateContentUrl</c>,
+    /// temporary data is retained, and the response is deliberately not ended by the redirect call.
+    /// The wrapped response then determines whether standard or custom redirect headers are emitted.
+    /// </remarks>
     public class HccRedirectResult : RedirectResult
     {
+        /// <summary>
+        /// Initializes a non-permanent HCC redirect.
+        /// </summary>
+        /// <param name="url">The destination URL.</param>
         public HccRedirectResult(string url)
             : base(url, false)
         {
         }
 
+        /// <summary>
+        /// Initializes an HCC redirect with the requested permanence.
+        /// </summary>
+        /// <param name="url">The destination URL.</param>
+        /// <param name="permanent">Whether to use the permanent redirect path.</param>
         public HccRedirectResult(string url, bool permanent)
             : base(url, permanent)
         {
         }
 
+        /// <summary>
+        /// Executes the redirect against the current controller context.
+        /// </summary>
+        /// <param name="context">The controller context receiving the redirect.</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="context"/> is <see langword="null"/>.</exception>
+        /// <remarks>
+        /// The result preserves controller temporary data and invokes either
+        /// the response's redirect or permanent-redirect operation with
+        /// <c>endResponse</c> set to <see langword="false"/>.
+        /// </remarks>
         public override void ExecuteResult(ControllerContext context)
         {
             if (context == null)

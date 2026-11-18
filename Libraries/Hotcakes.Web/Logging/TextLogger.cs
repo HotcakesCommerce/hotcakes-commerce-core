@@ -29,31 +29,47 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Web.Logging
 {
+    /// <summary>Collects log messages in an in-memory queue.</summary>
     [Serializable]
     public class TextLogger : ILogger
     {
+        /// <summary>Initializes an empty <see cref="TextLogger"/>.</summary>
         public TextLogger()
         {
             Messages = new Queue<string>();
         }
 
+        /// <summary>Gets the queued log messages in insertion order.</summary>
         public Queue<string> Messages { get; private set; }
 
+        /// <summary>Adds a message to the queue.</summary>
+        /// <param name="message">The message to queue.</param>
         public void LogMessage(string message)
         {
             Messages.Enqueue(message);
         }
 
+        /// <summary>Adds an exception message and stack trace to the queue.</summary>
+        /// <param name="ex">The exception to queue.</param>
+        /// <exception cref="NullReferenceException">Thrown when <paramref name="ex"/> is <see langword="null"/>.</exception>
         public void LogException(Exception ex)
         {
             Messages.Enqueue(ex.Message + " | " + ex.StackTrace);
         }
 
+        /// <summary>Adds a source-qualified message to the queue.</summary>
+        /// <param name="source">The component or source that produced the message.</param>
+        /// <param name="message">The message to queue.</param>
+        /// <param name="severity">The severity assigned to the message.</param>
         public void LogMessage(string source, string message, EventLogSeverity severity)
         {
             Messages.Enqueue(source + " | " + message);
         }
 
+        /// <summary>Adds an exception message and stack trace to the queue with its severity.</summary>
+        /// <param name="ex">The exception to queue.</param>
+        /// <param name="severity">The severity assigned to the exception.</param>
+        /// <exception cref="NullReferenceException">Thrown when <paramref name="ex"/> is <see langword="null"/>.</exception>
         public void LogException(Exception ex, EventLogSeverity severity)
         {
             Messages.Enqueue(ex.Message + " | " + ex.StackTrace);

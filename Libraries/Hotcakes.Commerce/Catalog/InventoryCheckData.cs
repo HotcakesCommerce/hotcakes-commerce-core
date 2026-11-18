@@ -28,12 +28,27 @@ using System;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Gets or sets the inventory check data.
+    /// </summary>
     [Serializable]
     public class InventoryCheckData
     {
+        /// <summary>
+        /// Gets or sets the inventory message.
+        /// </summary>
         public string InventoryMessage { get; set; }
+        /// <summary>
+        /// Gets or sets the qty.
+        /// </summary>
         public int Qty { get; set; }
+        /// <summary>
+        /// Gets or sets the is in stock.
+        /// </summary>
         public bool IsInStock { get; set; }
+        /// <summary>
+        /// Gets or sets the is available for sale.
+        /// </summary>
         public bool IsAvailableForSale { get; set; }
     }
 }

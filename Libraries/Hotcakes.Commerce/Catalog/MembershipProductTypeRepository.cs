@@ -40,6 +40,9 @@ namespace Hotcakes.Commerce.Catalog
     {
         private readonly ProductTypeRepository productTypesRepository;
 
+        /// <summary>
+        /// Provides the catalog type or contract represented by this declaration.
+        /// </summary>
         public MembershipProductTypeRepository(HccRequestContext c)
             : base(c)
         {
@@ -51,6 +54,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="data"><see cref="hcc_MembershipProductType" /> instance</param>
         /// <param name="model"><see cref="MembershipProductType" /> instance</param>
+        /// <summary>
+        /// Performs the CopyModelToData catalog operation.
+        /// </summary>
         protected override void CopyModelToData(hcc_MembershipProductType data, MembershipProductType model)
         {
             data.ProductTypeBvin = DataTypeHelper.BvinToGuid(model.ProductTypeId);
@@ -65,6 +71,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="data"><see cref="hcc_MembershipProductType" /> instance</param>
         /// <param name="model"><see cref="MembershipProductType" /> instance</param>
+        /// <summary>
+        /// Performs the CopyDataToModel catalog operation.
+        /// </summary>
         protected override void CopyDataToModel(hcc_MembershipProductType data, MembershipProductType model)
         {
             model.ProductTypeId = DataTypeHelper.GuidToBvin(data.ProductTypeBvin);
@@ -79,6 +88,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="storeId">Unique store identifier</param>
         /// <returns>Returns list of <see cref="MembershipProductType" /></returns>
+        /// <summary>
+        /// Performs the GetList catalog operation.
+        /// </summary>
         public List<MembershipProductType> GetList(long storeId)
         {
             var productTypes = productTypesRepository.FindAllForStore(storeId);
@@ -105,6 +117,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="productTypeId">MembershipProductType unique identifier.</param>
         /// <returns>Returns <see cref="MembershipProductType" /> instance</returns>
+        /// <summary>
+        /// Performs the Find catalog operation.
+        /// </summary>
         public MembershipProductType Find(string productTypeId)
         {
             var productType = productTypesRepository.Find(productTypeId);
@@ -127,6 +142,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="mpt"><see cref="MembershipProductType" /> instance</param>
         /// <returns>Returns true if operation completed successfully</returns>
+        /// <summary>
+        /// Performs the Create catalog operation.
+        /// </summary>
         public override bool Create(MembershipProductType mpt)
         {
             var pt = new ProductType
@@ -151,6 +169,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="mpt">Instance of  <see cref="MembershipProductType" /></param>
         /// <returns>Returns true if operation completed successfully</returns>
+        /// <summary>
+        /// Performs the Update catalog operation.
+        /// </summary>
         public bool Update(MembershipProductType mpt)
         {
             var pt = new ProductType
@@ -173,6 +194,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="productTypeId">MembershipProductType unique identifier</param>
         /// <returns>Returns true if operation completed successfully</returns>
+        /// <summary>
+        /// Performs the Delete catalog operation.
+        /// </summary>
         public bool Delete(string productTypeId)
         {
             var productTypeGuid = DataTypeHelper.BvinToGuid(productTypeId);

@@ -29,27 +29,51 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Commerce.Payment.Methods
 {
+    /// <summary>
+    /// Stores configuration for the Moneris payment method.
+    /// </summary>
+    /// <remarks>
+    /// Each property maps to the exact setting key passed to the inherited
+    /// <see cref="MethodSettings"/> accessors. Values are stored as method
+    /// settings rather than as additional serialized properties.
+    /// </remarks>
     [Serializable]
     public class MonerisSettings : MethodSettings
     {
+        /// <summary>
+        /// Gets or sets the Hosted Pay Page identifier stored under
+        /// <c>HostedPayPageId</c>.
+        /// </summary>
         public string HostedPayPageId
         {
             get { return GetSettingOrEmpty("HostedPayPageId"); }
             set { AddOrUpdate("HostedPayPageId", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the Hosted Pay Page token stored under
+        /// <c>HostedPayPageToken</c>.
+        /// </summary>
         public string HostedPayPageToken
         {
             get { return GetSettingOrEmpty("HostedPayPageToken"); }
             set { AddOrUpdate("HostedPayPageToken", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the developer-mode flag stored under
+        /// <c>DeveloperMode</c>. Reading and writing use the inherited boolean
+        /// setting helpers.
+        /// </summary>
         public bool DeveloperMode
         {
             get { return GetBoolSetting("DeveloperMode"); }
             set { SetBoolSetting("DeveloperMode", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the debug-mode flag stored under <c>DebugMode</c>.
+        /// </summary>
         public bool DebugMode
         {
             get { return GetBoolSetting("DebugMode"); }

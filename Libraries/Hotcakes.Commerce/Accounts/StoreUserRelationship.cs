@@ -28,9 +28,12 @@ using System;
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Represents StoreUserRelationship data and behavior within the Hotcakes Commerce account and store boundary.</summary>
     [Serializable]
     public class StoreUserRelationship
     {
+        /// <summary>Performs the StoreUserRelationship operation.</summary>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public StoreUserRelationship()
         {
             Id = -1;
@@ -39,9 +42,21 @@ namespace Hotcakes.Commerce.Accounts
             AccessMode = StoreAccessMode.Manager;
         }
 
+        /// <summary>Gets or sets Id.</summary>
+        /// <remarks>The database identifier for this record; a newly constructed model uses its established unsaved sentinel value unless otherwise noted.</remarks>
+        /// <value>The database identifier for this record; a newly constructed model uses its established unsaved sentinel value unless otherwise noted.</value>
         public long Id { get; set; }
+        /// <summary>Gets or sets UserId.</summary>
+        /// <remarks>The DNN user identifier associated with the token or store relationship.</remarks>
+        /// <value>The DNN user identifier associated with the token or store relationship.</value>
         public long UserId { get; set; }
+        /// <summary>Gets or sets StoreId.</summary>
+        /// <remarks>The identifier of the store that owns this record. Store data is isolated by this value.</remarks>
+        /// <value>The identifier of the store that owns this record. Store data is isolated by this value.</value>
         public long StoreId { get; set; }
+        /// <summary>Gets or sets AccessMode.</summary>
+        /// <remarks>The access level granted to the user for the store.</remarks>
+        /// <value>The access level granted to the user for the store.</value>
         public StoreAccessMode AccessMode { get; set; }
     }
 }

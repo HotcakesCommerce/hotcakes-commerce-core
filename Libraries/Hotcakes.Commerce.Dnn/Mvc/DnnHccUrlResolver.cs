@@ -40,11 +40,17 @@ using Hotcakes.Commerce.Urls;
 
 namespace Hotcakes.Commerce.Dnn.Mvc
 {
+    /// <summary>
+    /// Resolves Hotcakes routes and store URLs through DNN portal routing services for <see cref="IHccUrlResolver"/>.
+    /// </summary>
     [Serializable]
     public class DnnHccUrlResolver : IHccUrlResolver
     {
         #region Properties
 
+        /// <summary>
+        /// Gets the portal settings for the current DNN request.
+        /// </summary>
         public PortalSettings CurrentPortalSettings
         {
             get { return DnnGlobal.Instance.GetCurrentPortalSettings(); }
@@ -54,6 +60,20 @@ namespace Hotcakes.Commerce.Dnn.Mvc
 
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(DnnHccUrlResolver));
 
+        /// <summary>
+        /// Resolves a Hotcakes route to a DNN URL.
+        /// </summary>
+        /// <param name="route">The <see cref="HccRoute"/> to resolve.</param>
+        /// <param name="actionName">The MVC action name supplied by the caller.</param>
+        /// <param name="controllerName">The MVC controller name supplied by the caller.</param>
+        /// <param name="protocol">The requested URL protocol.</param>
+        /// <param name="hostName">The requested host name.</param>
+        /// <param name="fragment">The URL fragment.</param>
+        /// <param name="routeValues">Values to append to the resolved URL.</param>
+        /// <param name="routeCollection">The route collection for the request.</param>
+        /// <param name="requestContext">The current request context.</param>
+        /// <param name="includeImplicitMvcValues">Whether implicit MVC values should be included.</param>
+        /// <returns>The resolved DNN URL.</returns>
         public string RouteHccUrl(HccRoute route, string actionName, string controllerName, string protocol,
             string hostName, string fragment, RouteValueDictionary routeValues, RouteCollection routeCollection,
             RequestContext requestContext, bool includeImplicitMvcValues)
@@ -62,6 +82,11 @@ namespace Hotcakes.Commerce.Dnn.Mvc
                 false);
         }
 
+        /// <summary>
+        /// Gets the virtual path to the data directory associated with a store's portal.
+        /// </summary>
+        /// <param name="storeId">The store identifier.</param>
+        /// <returns>The portal-relative virtual data path.</returns>
         public string GetStoreDataVirtualPath(long storeId)
         {
             var httpContext = HttpContext.Current;
@@ -86,6 +111,12 @@ namespace Hotcakes.Commerce.Dnn.Mvc
             return string.Format("~/Portals/{0}/Hotcakes/Data/", portalId);
         }
 
+        /// <summary>
+        /// Builds the root URL for the portal associated with a store.
+        /// </summary>
+        /// <param name="store">The store whose portal URL should be resolved.</param>
+        /// <param name="secure">Whether to use HTTPS.</param>
+        /// <returns>The store's portal root URL.</returns>
         public string GetStoreRootUrl(Store store, bool secure)
         {
             var protocol = secure ? "https://" : "http://";

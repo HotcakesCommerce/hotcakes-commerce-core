@@ -28,29 +28,36 @@ using System;
 
 namespace Hotcakes.Commerce.Payment.Methods
 {
+    /// <summary>Built-in Moneris checkout method.</summary>
     [Serializable]
     public class Moneris : PaymentMethod
     {
+        /// <summary>Gets the stable Moneris method identifier.</summary>
         public override string MethodId
         {
             get { return Id(); }
         }
 
+        /// <summary>Gets the serialized display name, <c>Moneris</c>.</summary>
         public override string MethodName
         {
             get { return "Moneris"; }
         }
 
+        /// <summary>Gets the checkout ordering value, 201.</summary>
         public override int SortIndex
         {
             get { return 201; }
         }
 
+        /// <summary>Gets <see langword="true"/> because this method pays before order placement.</summary>
         public override bool PayBeforePlacement
         {
             get { return true; }
         }
 
+        /// <summary>Returns the stable identifier used by <see cref="PaymentMethods"/>.</summary>
+        /// <returns>The Moneris method identifier.</returns>
         public static string Id()
         {
             return PaymentMethods.MonerisId;

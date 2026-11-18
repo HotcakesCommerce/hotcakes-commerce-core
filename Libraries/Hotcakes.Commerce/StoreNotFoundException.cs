@@ -28,6 +28,9 @@ using System;
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>
+    /// Indicates that a requested commerce store could not be found.
+    /// </summary>
     public class StoreNotFoundException : Exception
     {
     }

@@ -29,8 +29,14 @@ using Hotcakes.Payment.Gateways;
 
 namespace Hotcakes.Modules.Core.Admin.Parts.CreditCardGateways.PayLeap
 {
+    /// <summary>
+    /// Defines the administrative class Edit.
+    /// </summary>
     public partial class Edit : HccCreditCardGatewayPart
     {
+        /// <summary>
+        /// Performs the administrative operation represented by LoadData.
+        /// </summary>
         public override void LoadData()
         {
             var settings = new PayLeapSettings();
@@ -48,6 +54,9 @@ namespace Hotcakes.Modules.Core.Admin.Parts.CreditCardGateways.PayLeap
             chkEnableTracing.Checked = settings.EnableDebugTracing;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by SaveData.
+        /// </summary>
         public override void SaveData()
         {
             var settings = new PayLeapSettings();

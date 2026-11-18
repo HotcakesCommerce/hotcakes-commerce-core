@@ -37,6 +37,9 @@ namespace Hotcakes.CommerceDTO.v1.Orders
     [Serializable]
     public class OrderTransactionCardDataDTO
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderTransactionCardDataDTO"/> class with default card-data values.
+        /// </summary>
         public OrderTransactionCardDataDTO()
         {
             CardHolderName = string.Empty;

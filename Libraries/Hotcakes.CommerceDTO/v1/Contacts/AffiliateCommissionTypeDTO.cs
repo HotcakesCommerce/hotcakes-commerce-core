@@ -28,11 +28,17 @@ using System.Runtime.Serialization;
 
 namespace Hotcakes.CommerceDTO.v1.Contacts
 {
+    /// <summary>
+    ///     Identifies how an <see cref="AffiliateDTO"/> commission is calculated.
+    /// </summary>
     [DataContract]
     public enum AffiliateCommissionTypeDTO
     {
+        /// <summary>No commission is applied.</summary>
         [EnumMember] None = 0,
+        /// <summary>Commission is calculated as a percentage.</summary>
         [EnumMember] PercentageCommission = 1,
+        /// <summary>Commission is calculated as a fixed amount.</summary>
         [EnumMember] FlatRateCommission = 2
     }
 }

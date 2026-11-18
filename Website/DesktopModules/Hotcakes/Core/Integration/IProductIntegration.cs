@@ -29,8 +29,17 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Integration
 {
+    /// <summary>
+    /// Defines an extension point that runs before a product is added to the cart.
+    /// </summary>
     public interface IProductIntegration
     {
+        /// <summary>
+        /// Runs before the product represented by the model is added to the cart.
+        /// </summary>
+        /// <param name="hccApp">The current Hotcakes application.</param>
+        /// <param name="model">The product page view model being submitted.</param>
+        /// <returns>An <see cref="IntegrationResult"/> that can abort the add-to-cart operation.</returns>
         IntegrationResult BeforeProductAddedToCart(HotcakesApplication hccApp, ProductPageViewModel model);
     }
 }

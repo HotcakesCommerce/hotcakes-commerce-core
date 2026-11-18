@@ -32,6 +32,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.LastProductsViewed
 {
+    /// <summary>
+    /// Provides module settings for the last products viewed module.
+    /// </summary>
     public partial class Settings : HotcakesSettingsBase
     {
         #region Implementation
@@ -51,6 +54,9 @@ namespace Hotcakes.Modules.LastProductsViewed
 
         #region ModuleSettingsBase overrides
 
+        /// <summary>
+        /// Loads the last products viewed settings into the controls.
+        /// </summary>
         public override void LoadSettings()
         {
             if (!IsPostBack)
@@ -68,6 +74,9 @@ namespace Hotcakes.Modules.LastProductsViewed
             }
         }
 
+        /// <summary>
+        /// Saves the last products viewed settings from the controls.
+        /// </summary>
         public override void UpdateSettings()
         {
             var controller = new ModuleController();

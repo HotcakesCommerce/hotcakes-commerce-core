@@ -34,13 +34,22 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Defines the catalog data or behavior represented by this member.
+    /// </summary>
     public class ProductRelationshipRepository : HccSimpleRepoBase<hcc_ProductRelationship, ProductRelationship>
     {
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductRelationshipRepository(HccRequestContext c)
             : base(c)
         {
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyDataToModel(hcc_ProductRelationship data, ProductRelationship model)
         {
             model.Id = data.Id;
@@ -52,6 +61,9 @@ namespace Hotcakes.Commerce.Catalog
             model.SortOrder = data.SortOrder;
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyModelToData(hcc_ProductRelationship data, ProductRelationship model)
         {
             data.Id = model.Id;
@@ -63,11 +75,17 @@ namespace Hotcakes.Commerce.Catalog
             data.SortOrder = model.SortOrder;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductRelationship Find(long id)
         {
             return FindFirstPoco(y => y.Id == id);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductRelationship FindByProductAndRelated(string productId, string relatedId)
         {
             var productGuid = DataTypeHelper.BvinToGuid(productId);
@@ -75,6 +93,9 @@ namespace Hotcakes.Commerce.Catalog
             return FindFirstPoco(y => y.ProductId == productGuid && y.RelatedProductId == relatedGuid);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public override bool Create(ProductRelationship item)
         {
             item.StoreId = Context.CurrentStore.Id;
@@ -98,6 +119,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool Update(ProductRelationship c)
         {
             if (c.StoreId != Context.CurrentStore.Id)
@@ -107,11 +131,17 @@ namespace Hotcakes.Commerce.Catalog
             return Update(c, y => y.Id == c.Id);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductRelationship> FindForProduct(string productId)
         {
             return FindForProduct(productId, Context.CurrentStore.Id);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductRelationship> FindForProduct(string productId, long storeId)
         {
             var productGuid = DataTypeHelper.BvinToGuid(productId);
@@ -123,6 +153,9 @@ namespace Hotcakes.Commerce.Catalog
             });
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool DeleteAllForProduct(string productId)
         {
             var storeId = Context.CurrentStore.Id;
@@ -130,6 +163,9 @@ namespace Hotcakes.Commerce.Catalog
             return Delete(y => y.ProductId == productGuid && y.StoreId == storeId);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool RelateProducts(string productId, string relatedProductId, bool isSubstitute)
         {
             var storeId = Context.CurrentStore.Id;
@@ -155,6 +191,9 @@ namespace Hotcakes.Commerce.Catalog
             return true;
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool UnrelateProducts(string productId, string relatedProductId)
         {
             var storeId = Context.CurrentStore.Id;
@@ -165,6 +204,9 @@ namespace Hotcakes.Commerce.Catalog
                     y => y.RelatedProductId == relatedProductGuid && y.ProductId == productGuid && y.StoreId == storeId);
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool Delete(long relationshipId)
         {
             return Delete(y => y.Id == relationshipId);
@@ -178,6 +220,9 @@ namespace Hotcakes.Commerce.Catalog
             return Update(item);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool ResortRelationships(string productId, List<string> sortedIds)
         {
             if (sortedIds != null)

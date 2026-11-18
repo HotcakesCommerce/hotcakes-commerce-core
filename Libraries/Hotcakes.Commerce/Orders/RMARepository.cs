@@ -34,28 +34,43 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    /// Represents the RMARepository order-domain type and preserves the established public compatibility surface.
+    /// </summary>
     public class RMARepository : HccSimpleRepoBase<hcc_RMA, RMA>
     {
         private readonly RMAItemRepository itemRepository;
 
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         public RMARepository(HccRequestContext c)
             : base(c)
         {
             itemRepository = new RMAItemRepository(c);
         }
 
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override Func<hcc_RMA, bool> MatchItems(RMA item)
         {
             var guid = DataTypeHelper.BvinToGuid(item.Bvin);
             return rma => rma.bvin == guid;
         }
 
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override Func<hcc_RMA, bool> NotMatchItems(List<RMA> items)
         {
             var itemGuids = items.Select(i => DataTypeHelper.BvinToGuid(i.Bvin)).ToList();
             return rma => !itemGuids.Contains(rma.bvin);
         }
 
+        /// <summary>
+        /// Provides the CopyModelToData operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override void CopyModelToData(hcc_RMA data, RMA model)
         {
             data.bvin = DataTypeHelper.BvinToGuid(model.Bvin);
@@ -71,6 +86,9 @@ namespace Hotcakes.Commerce.Orders
             data.StoreId = model.StoreId;
         }
 
+        /// <summary>
+        /// Provides the CopyDataToModel operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override void CopyDataToModel(hcc_RMA data, RMA model)
         {
             model.Bvin = DataTypeHelper.GuidToBvin(data.bvin);
@@ -86,6 +104,9 @@ namespace Hotcakes.Commerce.Orders
             model.StoreId = data.StoreId;
         }
 
+        /// <summary>
+        /// Provides the GetSubItems operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override void GetSubItems(List<RMA> models)
         {
             var bvinIds = models.Select(s => s.Bvin).ToList();
@@ -98,17 +119,26 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        /// Provides the MergeSubItems operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override void MergeSubItems(RMA model)
         {
             itemRepository.MergeList(model.Bvin, model.Items);
         }
 
+        /// <summary>
+        /// Provides the Find operation while preserving the established order-domain behavior.
+        /// </summary>
         public RMA Find(string bvin)
         {
             var guid = DataTypeHelper.BvinToGuid(bvin);
             return FindFirstPoco(y => y.bvin == guid);
         }
 
+        /// <summary>
+        /// Provides the Create operation while preserving the established order-domain behavior.
+        /// </summary>
         public override bool Create(RMA item)
         {
             if (item.Bvin.Trim().Length < 1)
@@ -117,6 +147,9 @@ namespace Hotcakes.Commerce.Orders
             return base.Create(item);
         }
 
+        /// <summary>
+        /// Provides the Update operation while preserving the established order-domain behavior.
+        /// </summary>
         public bool Update(RMA item)
         {
             var rmaId = DataTypeHelper.BvinToGuid(item.Bvin);
@@ -124,12 +157,18 @@ namespace Hotcakes.Commerce.Orders
             return base.Update(item, y => y.bvin == rmaId);
         }
 
+        /// <summary>
+        /// Provides the Delete operation while preserving the established order-domain behavior.
+        /// </summary>
         public bool Delete(string bvin)
         {
             var guid = DataTypeHelper.BvinToGuid(bvin);
             return Delete(y => y.bvin == guid);
         }
 
+        /// <summary>
+        /// Finds the requested records within the established repository store scope and ordering.
+        /// </summary>
         public List<RMA> FindForOrders(List<string> orderBvins)
         {
             var orderGuids = orderBvins.Select(bvin => DataTypeHelper.BvinToGuid(bvin)).ToList();
@@ -141,6 +180,9 @@ namespace Hotcakes.Commerce.Orders
             });
         }
 
+        /// <summary>
+        /// Finds the requested records within the established repository store scope and ordering.
+        /// </summary>
         public List<RMA> FindForOrder(string orderBvin)
         {
             var orderGuid = DataTypeHelper.BvinToGuid(orderBvin);
@@ -151,12 +193,18 @@ namespace Hotcakes.Commerce.Orders
             });
         }
 
+        /// <summary>
+        /// Deletes all records associated with the specified parent identifier.
+        /// </summary>
         public void DeleteForOrder(string orderBvin)
         {
             var orderGuid = DataTypeHelper.BvinToGuid(orderBvin);
             Delete(y => y.OrderBvin == orderGuid);
         }
 
+        /// <summary>
+        /// Merges the supplied records after assigning their established parent and store scope.
+        /// </summary>
         public void MergeList(string orderBvin, long storeId, List<RMA> subitems)
         {
             // Set Base Key Field
@@ -171,21 +219,33 @@ namespace Hotcakes.Commerce.Orders
             MergeList(subitems, rma => rma.OrderBvin == orderGuid && rma.StoreId == storeId);
         }
 
+        /// <summary>
+        /// Provides the DeleteItem operation while preserving the established order-domain behavior.
+        /// </summary>
         public bool DeleteItem(string rmaItemBvin)
         {
             return itemRepository.Delete(rmaItemBvin);
         }
 
+        /// <summary>
+        /// Provides the RMAItemFind operation while preserving the established order-domain behavior.
+        /// </summary>
         public RMAItem RMAItemFind(string bvin)
         {
             return itemRepository.Find(bvin);
         }
 
+        /// <summary>
+        /// Provides the RMAItemUpdate operation while preserving the established order-domain behavior.
+        /// </summary>
         public bool RMAItemUpdate(RMAItem item)
         {
             return itemRepository.Update(item);
         }
 
+        /// <summary>
+        /// Provides the FindMany operation while preserving the established order-domain behavior.
+        /// </summary>
         public List<RMA> FindMany(List<string> bvins)
         {
             var storeId = Context.CurrentStore.Id;
@@ -197,6 +257,9 @@ namespace Hotcakes.Commerce.Orders
             });
         }
 
+        /// <summary>
+        /// Returns a status-filtered page and reports the unpaged count through the reference parameter.
+        /// </summary>
         public List<RMA> FindByStatusPaged(int pageNumber, int pageSize, ref int totalItems, RMAStatus status)
         {
             using (var s = CreateReadStrategy())

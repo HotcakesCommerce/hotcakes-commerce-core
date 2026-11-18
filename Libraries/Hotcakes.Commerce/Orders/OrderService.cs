@@ -50,8 +50,20 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    ///     Provides order, cart, payment, shipping, tax, and order-related workflow operations for the current commerce context.
+    /// </summary>
+    /// <remarks>
+    ///     Operations use repositories created for the supplied <see cref="HccRequestContext"/>. Several methods intentionally
+    ///     have side effects, including persistence, payment-status recalculation, workflow execution, inventory unreservation,
+    ///     gift-card activation or deactivation, cart-session updates, and mutation of supplied orders and shipping rates.
+    /// </remarks>
     public class OrderService : HccServiceBase
     {
+        /// <summary>
+        ///     Initializes order-related repositories from the supplied request context.
+        /// </summary>
+        /// <param name="context">The supplied context value.</param>
         public OrderService(HccRequestContext context)
             : base(context)
         {
@@ -64,12 +76,33 @@ namespace Hotcakes.Commerce.Orders
             Returns = Factory.CreateRepo<RMARepository>(Context);
         }
 
+        /// <summary>
+        ///     Gets or sets the orders value used by this API.
+        /// </summary>
         public OrderRepository Orders { get; protected set; }
+        /// <summary>
+        ///     Gets or sets the taxes value used by this API.
+        /// </summary>
         public TaxRepository Taxes { get; protected set; }
+        /// <summary>
+        ///     Gets or sets the tax schedules value used by this API.
+        /// </summary>
         public TaxScheduleRepository TaxSchedules { get; protected set; }
+        /// <summary>
+        ///     Gets or sets the shipping zones value used by this API.
+        /// </summary>
         public ZoneRepository ShippingZones { get; protected set; }
+        /// <summary>
+        ///     Gets or sets the shipping methods value used by this API.
+        /// </summary>
         public ShippingMethodRepository ShippingMethods { get; protected set; }
+        /// <summary>
+        ///     Gets or sets the transactions value used by this API.
+        /// </summary>
         public OrderTransactionRepository Transactions { get; protected set; }
+        /// <summary>
+        ///     Gets or sets the returns value used by this API.
+        /// </summary>
         public RMARepository Returns { get; protected set; }
 
         private Order CachedShoppingCart
@@ -96,6 +129,11 @@ namespace Hotcakes.Commerce.Orders
 
         // Taxes
 
+        /// <summary>
+        ///     Performs the tax schedules destroy operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="scheduleId">The supplied schedule id value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public bool TaxSchedulesDestroy(long scheduleId)
         {
             try
@@ -115,11 +153,24 @@ namespace Hotcakes.Commerce.Orders
         }
 
         // Shipping
+        /// <summary>
+        ///     Performs the shipping zone find in list operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="zones">The supplied zones value.</param>
+        /// <param name="id">The supplied id value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public Zone ShippingZoneFindInList(List<Zone> zones, long id)
         {
             return zones.FirstOrDefault(z => z.Id == id);
         }
 
+        /// <summary>
+        ///     Performs the shipping zone add area operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="zoneId">The supplied zone id value.</param>
+        /// <param name="countryIso3">The supplied country iso3 value.</param>
+        /// <param name="regionAbbreviation">The supplied region abbreviation value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public bool ShippingZoneAddArea(long zoneId, string countryIso3, string regionAbbreviation)
         {
             var z = ShippingZones.Find(zoneId);
@@ -142,6 +193,13 @@ namespace Hotcakes.Commerce.Orders
             return false;
         }
 
+        /// <summary>
+        ///     Performs the shipping zone remove area operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="zoneId">The supplied zone id value.</param>
+        /// <param name="countryIso3">The supplied country iso3 value.</param>
+        /// <param name="regionAbbreviation">The supplied region abbreviation value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public bool ShippingZoneRemoveArea(long zoneId, string countryIso3, string regionAbbreviation)
         {
             var z = ShippingZones.Find(zoneId);
@@ -163,6 +221,13 @@ namespace Hotcakes.Commerce.Orders
         }
 
         //Orders and Items
+        /// <summary>
+        ///     Performs the orders update item quantity operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="itemId">The supplied item id value.</param>
+        /// <param name="quantity">The supplied quantity value.</param>
+        /// <param name="o">The supplied o value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public SystemOperationResult OrdersUpdateItemQuantity(long itemId, int quantity, Order o)
         {
             var result = new SystemOperationResult
@@ -288,16 +353,33 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the find available shipping rates operation using the supplied arguments and current commerce context.
+        ///     Rates are adjusted for extra charges and offers, filtered by visibility, and sorted by rate.
+        /// </summary>
+        /// <param name="order">The supplied order value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public SortableCollection<ShippingRateDisplay> FindAvailableShippingRates(Order order)
         {
             return FindAvailableShippingRatesInternal(order);
         }
 
+        /// <summary>
+        ///     Performs the find shipping rate by unique key operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="order">The supplied order value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public ShippingRateDisplay FindShippingRateByUniqueKey(Order order)
         {
             return FindShippingRateByUniqueKey(order.ShippingMethodUniqueKey, order);
         }
 
+        /// <summary>
+        ///     Performs the find shipping rate by unique key operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="key">The supplied key value.</param>
+        /// <param name="order">The supplied order value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public ShippingRateDisplay FindShippingRateByUniqueKey(string key, Order order)
         {
             var rates = FindAvailableShippingRatesInternal(order, order.ShippingMethodId);
@@ -311,12 +393,22 @@ namespace Hotcakes.Commerce.Orders
         }
 
         // Orders and Payments
+        /// <summary>
+        ///     Performs the orders list payment methods operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="order">The supplied order value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public string OrdersListPaymentMethods(Order order)
         {
             var allTransactions = Transactions.FindForOrder(order.bvin);
             return OrdersListPaymentMethods(allTransactions);
         }
 
+        /// <summary>
+        ///     Performs the orders list payment methods operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="transactions">The supplied transactions value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public string OrdersListPaymentMethods(List<OrderTransaction> transactions)
         {
             if (transactions == null || transactions.Count == 0)
@@ -395,12 +487,26 @@ namespace Hotcakes.Commerce.Orders
             return "No Payment Methods Selected";
         }
 
+        /// <summary>
+        ///     Performs the add payment transaction to order operation using the supplied arguments and current commerce context.
+        ///     The operation persists the transaction, recalculates payment status, runs the payment-changed workflow, and updates the order.
+        /// </summary>
+        /// <param name="o">The supplied o value.</param>
+        /// <param name="t">The supplied t value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public bool AddPaymentTransactionToOrder(Order o, Transaction t)
         {
             var ot = new OrderTransaction(t);
             return AddPaymentTransactionToOrder(o, ot);
         }
 
+        /// <summary>
+        ///     Performs the add payment transaction to order operation using the supplied arguments and current commerce context.
+        ///     The operation persists the transaction, recalculates payment status, runs the payment-changed workflow, and updates the order.
+        /// </summary>
+        /// <param name="o">The supplied o value.</param>
+        /// <param name="t">The supplied t value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public bool AddPaymentTransactionToOrder(Order o, OrderTransaction t)
         {
             // Save Order First if no bvin
@@ -421,6 +527,11 @@ namespace Hotcakes.Commerce.Orders
             return false;
         }
 
+        /// <summary>
+        ///     Performs the payment summary operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="o">The supplied o value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public OrderPaymentSummary PaymentSummary(Order o)
         {
             var result = new OrderPaymentSummary();
@@ -429,6 +540,11 @@ namespace Hotcakes.Commerce.Orders
             return result;
         }
 
+        /// <summary>
+        ///     Performs the evaluate payment status operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="o">The supplied o value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public OrderPaymentStatus EvaluatePaymentStatus(Order o)
         {
             var s = new OrderPaymentSummary();
@@ -481,6 +597,11 @@ namespace Hotcakes.Commerce.Orders
             Workflow.RunByName(context, WorkflowNames.PaymentChanged);
         }
 
+        /// <summary>
+        ///     Performs the find transactions by third party order id operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="thirdPartyId">The supplied third party id value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public List<OrderTransaction> FindTransactionsByThirdPartyOrderId(string thirdPartyId)
         {
             var result = new List<OrderTransaction>();
@@ -495,6 +616,12 @@ namespace Hotcakes.Commerce.Orders
             return result;
         }
 
+        /// <summary>
+        ///     Performs the orders request shipping method operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="r">The supplied r value.</param>
+        /// <param name="o">The supplied o value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public bool OrdersRequestShippingMethod(ShippingRateDisplay r, Order o)
         {
             var result = false;
@@ -509,6 +636,12 @@ namespace Hotcakes.Commerce.Orders
             return result;
         }
 
+        /// <summary>
+        ///     Performs the orders request shipping method by unique key operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="rateUniqueKey">The supplied rate unique key value.</param>
+        /// <param name="o">The supplied o value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public bool OrdersRequestShippingMethodByUniqueKey(string rateUniqueKey, Order o)
         {
             var rates = FindAvailableShippingRates(o);
@@ -522,6 +655,13 @@ namespace Hotcakes.Commerce.Orders
             return false;
         }
 
+        /// <summary>
+        ///     Performs the orders delete operation using the supplied arguments and current commerce context.
+        ///     Configured tax-document and gift-card cleanup is performed before deletion.
+        /// </summary>
+        /// <param name="orderBvin">The supplied order bvin value.</param>
+        /// <param name="app">The supplied app value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public bool OrdersDelete(string orderBvin, HotcakesApplication app)
         {
             var o = Orders.FindForCurrentStore(orderBvin);
@@ -539,6 +679,13 @@ namespace Hotcakes.Commerce.Orders
             return Orders.Delete(o.bvin);
         }
 
+        /// <summary>
+        ///     Performs the orders delete with inventory return operation using the supplied arguments and current commerce context.
+        ///     Line-item inventory reservations are removed before deletion.
+        /// </summary>
+        /// <param name="orderBvin">The supplied order bvin value.</param>
+        /// <param name="app">The supplied app value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public bool OrdersDeleteWithInventoryReturn(string orderBvin, HotcakesApplication app)
         {
             var o = Orders.FindForCurrentStore(orderBvin);
@@ -554,6 +701,11 @@ namespace Hotcakes.Commerce.Orders
             return OrdersDelete(o.bvin, app);
         }
 
+        /// <summary>
+        ///     Performs the generate new order number operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="storeId">The supplied store id value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public int GenerateNewOrderNumber(long storeId)
         {
             using (HccDbContext context = Factory.CreateHccDbContext())
@@ -574,6 +726,11 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the find highlight for order operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="order">The supplied order value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public string FindHighlightForOrder(OrderSnapshot order)
         {
             if (order == null || string.IsNullOrWhiteSpace(order.ShippingMethodId))
@@ -586,6 +743,11 @@ namespace Hotcakes.Commerce.Orders
             return highlight;
         }
 
+        /// <summary>
+        ///     Performs the order status changed operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="o">The supplied o value.</param>
+        /// <param name="prevStatusCode">The supplied prev status code value.</param>
         public void OrderStatusChanged(Order o, string prevStatusCode)
         {
             var context = new OrderTaskContext(Context)
@@ -598,6 +760,12 @@ namespace Hotcakes.Commerce.Orders
             Workflow.RunByName(context, WorkflowNames.OrderStatusChanged);
         }
 
+        /// <summary>
+        ///     Performs the update gift cards status operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="o">The supplied o value.</param>
+        /// <param name="enabled">The supplied enabled value.</param>
+        /// <param name="app">The supplied app value.</param>
         public void UpdateGiftCardsStatus(Order o, bool enabled, HotcakesApplication app)
         {
             var payManager = new OrderPaymentManager(o, app);
@@ -661,6 +829,9 @@ namespace Hotcakes.Commerce.Orders
             return cart;
         }
 
+        /// <summary>
+        ///     Performs the invalidate cached cart operation using the supplied arguments and current commerce context.
+        /// </summary>
         public void InvalidateCachedCart()
         {
             CachedShoppingCart = null;
@@ -930,6 +1101,10 @@ namespace Hotcakes.Commerce.Orders
             return result;
         }
 
+        /// <summary>
+        ///     Performs the ensure default zones operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="storeId">The supplied store id value.</param>
         public void EnsureDefaultZones(long storeId)
         {
             CreateAndReassign(ShippingZones.UnitedStatesAll());
@@ -952,6 +1127,11 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the remove all orders operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="storeId">The supplied store id value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public bool RemoveAllOrders(long storeId)
         {
             using (HccDbContext db = Factory.CreateHccDbContext())
@@ -962,6 +1142,10 @@ namespace Hotcakes.Commerce.Orders
             return true;
         }
 
+        /// <summary>
+        ///     Performs the create order strategy operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <returns>The value produced by the operation.</returns>
         protected IRepoStrategy<Order> CreateOrderStrategy()
         {
             return Factory.Instance.CreateStrategy<Order>();

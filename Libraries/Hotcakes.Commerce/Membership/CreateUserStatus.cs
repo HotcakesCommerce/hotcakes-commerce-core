@@ -26,15 +26,25 @@
 
 namespace Hotcakes.Commerce.Membership
 {
+    /// <summary>Describes the normalized outcome of a membership-account operation.</summary>
+    /// <remarks>The numeric values are compatibility-sensitive and are retained for serialized and provider-facing use.</remarks>
     public enum CreateUserStatus
     {
+        /// <summary>No operation outcome has been assigned.</summary>
         None = 0,
+        /// <summary>The account operation succeeded.</summary>
         Success = 1,
+        /// <summary>The requested user could not be found.</summary>
         UserNotFound = 2,
+        /// <summary>The supplied password did not satisfy the provider's requirements.</summary>
         InvalidPassword = 3,
+        /// <summary>The username is already associated with another account.</summary>
         DuplicateUsername = 4,
+        /// <summary>The provider rejected the account operation or user.</summary>
         UserRejected = 5,
+        /// <summary>The provider could not persist or complete the update.</summary>
         UpdateFailed = 6,
+        /// <summary>The email address is already associated with another account.</summary>
         DuplicateEmail = 7
     }
 }

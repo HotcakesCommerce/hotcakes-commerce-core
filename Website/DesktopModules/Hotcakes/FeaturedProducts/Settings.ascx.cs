@@ -32,6 +32,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.FeaturedProducts
 {
+    /// <summary>
+    /// Provides module settings for the featured products module.
+    /// </summary>
     public partial class Settings : HotcakesSettingsBase
     {
         #region Implementation
@@ -51,6 +54,9 @@ namespace Hotcakes.Modules.FeaturedProducts
 
         #region ModuleSettingsBase overrides
 
+        /// <summary>
+        /// Loads the featured products settings into the controls.
+        /// </summary>
         public override void LoadSettings()
         {
             if (!IsPostBack)
@@ -68,6 +74,9 @@ namespace Hotcakes.Modules.FeaturedProducts
             }
         }
 
+        /// <summary>
+        /// Saves the featured products settings from the controls.
+        /// </summary>
         public override void UpdateSettings()
         {
             var controller = new ModuleController();

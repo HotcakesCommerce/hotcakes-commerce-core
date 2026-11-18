@@ -29,6 +29,7 @@ using System.Collections.ObjectModel;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>A named group of products returned by a catalog search.</summary>
     [Serializable]
     public class ProductSearchResultGroup
     {
@@ -46,18 +47,21 @@ namespace Hotcakes.Commerce.Catalog
             _Products = productResults;
         }
 
+        /// <summary>Gets or sets the GroupName value.</summary>
         public string GroupName
         {
             get { return _GroupName; }
             set { _GroupName = value; }
         }
 
+        /// <summary>Gets or sets the Products value.</summary>
         public Collection<Product> Products
         {
             get { return _Products; }
             set { _Products = value; }
         }
 
+        /// <summary>Gets or sets the InfoMessage value.</summary>
         public string InfoMessage
         {
             get { return _InfoMessage; }

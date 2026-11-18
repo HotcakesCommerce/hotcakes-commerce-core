@@ -31,14 +31,28 @@ namespace Hotcakes.Commerce.Dnn.Mvc
     [Serializable]
     internal class DnnUrlInfo
     {
+        /// <summary>
+        /// Initializes a route target with DNN's default tab and control values.
+        /// </summary>
         public DnnUrlInfo()
         {
             TabId = -1;
             ControlKey = string.Empty;
         }
 
+        /// <summary>
+        /// Gets or sets the DNN desktop module name used to locate a module instance.
+        /// </summary>
         public string ModuleName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the DNN tab identifier for the route target.
+        /// </summary>
         public int TabId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the DNN control key for the route target.
+        /// </summary>
         public string ControlKey { get; set; }
     }
 }

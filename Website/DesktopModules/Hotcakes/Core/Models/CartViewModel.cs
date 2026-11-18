@@ -121,6 +121,9 @@ namespace Hotcakes.Modules.Core.Models
         /// </summary>
         public List<ShippingRateDisplay> Rates { get; set; }
 
+        /// <summary>
+        /// Gets or sets the UpchargeAllowed value used by this storefront model.
+        /// </summary>
         public bool UpchargeAllowed { get; set; }
     }
 }

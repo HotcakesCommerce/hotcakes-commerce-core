@@ -26,8 +26,14 @@
 
 namespace Hotcakes.Commerce.Membership
 {
+    /// <summary>
+    /// Exposes the membership persistence services used by a commerce application.
+    /// </summary>
     public interface IMembershipServices
     {
+        /// <summary>
+        /// Gets the repository used to locate and persist <see cref="CustomerAccount"/> records.
+        /// </summary>
         ICustomerAccountRepository Customers { get; }
     }
 }

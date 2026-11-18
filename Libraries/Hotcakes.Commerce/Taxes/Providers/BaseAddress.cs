@@ -28,15 +28,35 @@ using System;
 
 namespace Hotcakes.Commerce.Taxes.Providers
 {
+    /// <summary>
+    /// Represents the origin or destination address supplied to a tax provider.
+    /// </summary>
+    /// <remarks>
+    /// The properties are provider-neutral address fields. Providers may require only a subset of them,
+    /// and their interpretation is delegated to the selected <see cref="ITaxProvider"/>.
+    /// </remarks>
     [Serializable]
     public class BaseAddress
     {
+        /// <summary>Gets or sets the city or locality.</summary>
         public string City { get; set; }
+
+        /// <summary>Gets or sets the country or country code.</summary>
         public string Country { get; set; }
+
+        /// <summary>Gets or sets the first street-address line.</summary>
         public string Line1 { get; set; }
+
+        /// <summary>Gets or sets the second street-address line.</summary>
         public string Line2 { get; set; }
+
+        /// <summary>Gets or sets the third street-address line.</summary>
         public string Line3 { get; set; }
+
+        /// <summary>Gets or sets the postal or ZIP code.</summary>
         public string PostalCode { get; set; }
+
+        /// <summary>Gets or sets the region, state, or province.</summary>
         public string Region { get; set; }
     }
 }

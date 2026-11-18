@@ -28,6 +28,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.TopWeeklySellers
 {
+    /// <summary>
+    /// Hosts the storefront top weekly sellers view.
+    /// </summary>
     public partial class TopWeeklySellersView : HotcakesModuleBase
     {
         protected override string RenderView()

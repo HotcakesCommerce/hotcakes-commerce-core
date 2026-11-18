@@ -38,9 +38,12 @@ using Hotcakes.Modules.Core.Controllers.Shared;
 
 namespace Hotcakes.Modules.Core.Areas.Account.Controllers
 {
+/// <summary>Provides customer sign-in and first-password actions.</summary>
     [Serializable]
     public class AuthenticationController : BaseStoreController
     {
+        /// <summary>Authenticates a customer from the AJAX sign-in form.</summary>
+        /// <returns>A serialized sign-in response.</returns>
         [HccHttpPost]
         public ActionResult AjaxSignIn()
         {
@@ -72,6 +75,8 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
             return new PreJsonResult(Web.Json.ObjectToJson(validated));
         }
 
+        /// <summary>Sets the initial password authorized by an eligible order.</summary>
+        /// <returns>A serialized password-reset response.</returns>
         [HccHttpPost]
         public ActionResult SetFirstPassword()
         {
@@ -137,25 +142,31 @@ namespace Hotcakes.Modules.Core.Areas.Account.Controllers
 
         private class ValidateModelResponse
         {
+            /// <summary>Initializes an unsuccessful validation response.</summary>
             public ValidateModelResponse()
             {
                 Success = false;
                 ResultMessages = new List<string>();
             }
 
+            /// <summary>Gets or sets whether authentication succeeded.</summary>
             public bool Success { get; set; }
+            /// <summary>Gets or sets validation messages returned to the caller.</summary>
             public List<string> ResultMessages { get; set; }
         }
 
         private class SimpleResponse
         {
+            /// <summary>Initializes an unsuccessful operation response.</summary>
             public SimpleResponse()
             {
                 Success = false;
                 Messages = string.Empty;
             }
 
+            /// <summary>Gets or sets whether the operation succeeded.</summary>
             public bool Success { get; set; }
+            /// <summary>Gets or sets the messages returned to the caller.</summary>
             public string Messages { get; set; }
         }
 

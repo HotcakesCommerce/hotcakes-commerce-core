@@ -28,10 +28,13 @@ using System;
 
 namespace Hotcakes.Commerce.BusinessRules
 {
+    /// <summary>Describes a persisted, ordered step in a configurable workflow.</summary>
+    /// <remarks>The public type intentionally retains the historical <c>WorkFlow</c> capitalization for compatibility.</remarks>
     public class WorkFlowStep
     {
         private string _StepName = string.Empty;
 
+        /// <summary>Initializes a workflow step with empty identifiers and a default sort order of <c>1</c>.</summary>
         public WorkFlowStep()
         {
             WorkFlowBvin = string.Empty;
@@ -43,13 +46,21 @@ namespace Hotcakes.Commerce.BusinessRules
             LastUpdated = DateTime.UtcNow;
         }
 
+        /// <summary>Gets or sets the step's unique business identifier.</summary>
         public string Bvin { get; set; }
+        /// <summary>Gets or sets the UTC time when the step was last updated.</summary>
         public DateTime LastUpdated { get; set; }
+        /// <summary>Gets or sets the identifier of the workflow containing this step.</summary>
         public string WorkFlowBvin { get; set; }
+        /// <summary>Gets or sets the one-based display order of the step.</summary>
         public int SortOrder { get; set; }
+        /// <summary>Gets or sets the control name associated with the step.</summary>
         public string ControlName { get; set; }
+        /// <summary>Gets or sets the display label used when no explicit step name is set.</summary>
         public string DisplayName { get; set; }
 
+        /// <summary>Gets or sets the step name.</summary>
+        /// <value>The explicit name, or <see cref="DisplayName"/> when the explicit name is empty.</value>
         public string StepName
         {
             get

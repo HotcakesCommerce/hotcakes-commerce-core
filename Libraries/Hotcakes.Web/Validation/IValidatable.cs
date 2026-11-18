@@ -28,9 +28,14 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Web.Validation
 {
+    /// <summary>Defines validation behavior for an object that can report <see cref="RuleViolation"/> instances.</summary>
     public interface IValidatable
     {
+        /// <summary>Determines whether the object passes its validation rules.</summary>
+        /// <returns><see langword="true"/> when no validation rule is violated; otherwise, <see langword="false"/>.</returns>
         bool IsValid();
+        /// <summary>Gets the validation rule violations for the object.</summary>
+        /// <returns>A list of <see cref="RuleViolation"/> instances.</returns>
         List<RuleViolation> GetRuleViolations();
     }
 }

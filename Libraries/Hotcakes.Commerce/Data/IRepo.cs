@@ -26,6 +26,14 @@
 
 namespace Hotcakes.Commerce.Data
 {
+    /// <summary>
+    /// Marks a Hotcakes Commerce repository as eligible for repository-factory creation.
+    /// </summary>
+    /// <remarks>
+    /// This interface intentionally has no members. Repository implementations use it as a
+    /// marker so the factory APIs can constrain repository types without requiring a common
+    /// operation surface. It does not itself provide persistence, authorization, or store scope.
+    /// </remarks>
     public interface IRepo
     {
     }

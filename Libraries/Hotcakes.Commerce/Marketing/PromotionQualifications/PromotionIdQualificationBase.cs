@@ -30,10 +30,14 @@ using System.Linq;
     
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Provides normalized comma-separated identifier settings for ID-based qualifications.</summary>
+    /// <remarks>The configured setting name is supplied by <see cref="IdSettingName"/>.</remarks>
     public abstract class PromotionIdQualificationBase : PromotionQualificationBase
     {
         #region Properties
 
+        /// <summary>Gets the configured identifiers, trimmed and normalized to lowercase.</summary>
+        /// <returns>The configured identifiers, or an empty list.</returns>
         public List<string> CurrentIds()
         {
             var all = GetSetting(IdSettingName) ?? string.Empty;
@@ -60,8 +64,10 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         #region Abstract
 
+        /// <summary>Gets the settings key containing this qualification's identifiers.</summary>
         public abstract string IdSettingName { get; }
 
+        /// <summary>Initializes derived qualification defaults before identifiers are added.</summary>
         protected virtual void OnInit()
         {
         }
@@ -70,6 +76,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         #region Public Methods
 
+        /// <summary>Adds a non-empty identifier after trimming and lowercasing it.</summary>
+        /// <param name="typeId">The identifier to add.</param>
         public void AddNewId(string typeId)
         {
             if (string.IsNullOrWhiteSpace(typeId)) return;
@@ -82,6 +90,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             SaveIdsToSettings(ids);
         }
 
+        /// <summary>Removes the supplied identifier from the configured list.</summary>
+        /// <param name="typeId">The identifier to remove.</param>
         public void RemoveId(string typeId)
         {
             var _Ids = CurrentIds();
@@ -96,10 +106,13 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 
         #region Init
 
+        /// <summary>Initializes an empty ID-based qualification.</summary>
         public PromotionIdQualificationBase() : this(string.Empty)
         {
         }
 
+        /// <summary>Initializes the qualification and optionally adds an identifier.</summary>
+        /// <param name="typeId">The initial identifier; blank values are ignored.</param>
         public PromotionIdQualificationBase(string typeId)
         {
             OnInit();

@@ -28,6 +28,8 @@ using System;
 
 namespace Hotcakes.Web.Barcodes
 {
+    /// <summary>Standard 2 of 5 barcode encoder.</summary>
+    /// <remarks>The encoded output is exposed through <see cref="IBarcode.Encoded_Value"/>.</remarks>
     [Serializable]
     internal class Standard2of5 : BarcodeCommon, IBarcode
     {
@@ -37,6 +39,9 @@ namespace Hotcakes.Web.Barcodes
             "11101011101010", "10111011101010", "10101011101110", "10101110111010", "11101010111010", "10111010111010"
         };
 
+        /// <summary>Encodes data using the Standard 2 of 5 symbology.</summary>
+        /// <param name="input">The data to encode.</param>
+        /// <seealso cref="Encoded_Value"/>
         public Standard2of5(string input)
         {
             Raw_Data = input;
@@ -44,6 +49,8 @@ namespace Hotcakes.Web.Barcodes
 
         #region IBarcode Members
 
+        /// <summary>Gets the encoded bar-and-space representation.</summary>
+        /// <seealso cref="IBarcode.Encoded_Value"/>
         public string Encoded_Value
         {
             get { return Encode_Standard2of5(); }

@@ -26,9 +26,15 @@
 
 namespace Hotcakes.Commerce.Marketing
 {
+    /// <summary>
+    /// Identifies whether a promotion amount is expressed as a percentage or a monetary value.
+    /// </summary>
     public enum AmountTypes
     {
+        /// <summary>Interprets the amount as a percentage of the applicable value.</summary>
         Percent = 0,
+
+        /// <summary>Interprets the amount as a monetary amount in the store currency.</summary>
         MonetaryAmount = 1
     }
 }

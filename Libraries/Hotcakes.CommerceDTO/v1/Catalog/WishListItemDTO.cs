@@ -38,6 +38,9 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
     [Serializable]
     public class WishListItemDTO
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="WishListItemDTO"/> type with its default DTO values.
+        /// </summary>
         public WishListItemDTO()
         {
             Init();

@@ -31,6 +31,12 @@ using System.Xml.Serialization;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// A dictionary that can be serialized by <see cref="XmlSerializer"/> as a sequence of key/value items.
+    /// </summary>
+    /// <typeparam name="TKey">The type of dictionary keys.</typeparam>
+    /// <typeparam name="TValue">The type of dictionary values.</typeparam>
+    /// <remarks>The XML root is named <c>dictionary</c>; each entry is written as an <c>item</c> containing <c>key</c> and <c>value</c> elements.</remarks>
     [XmlRoot("dictionary")]
     public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IXmlSerializable
     {

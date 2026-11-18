@@ -29,18 +29,23 @@ using System.Collections.Generic;
 namespace Hotcakes.Commerce.Content
 {
     /// <summary>
-    ///     Items that implement this interface can have replacebale tags in the emails
+    /// Defines an object that supplies replacement tokens for email templates.
     /// </summary>
+    /// <remarks>
+    /// Each returned <see cref="HtmlTemplateTag"/> describes one token and its replacement text. Consumers can apply
+    /// the tags to template fields such as subjects and repeating sections. Implementations may use the request context
+    /// to produce store- or language-specific values.
+    /// </remarks>
     public interface IReplaceable
     {
         /// <summary>
-        ///     Gets the replaceable tags.
+        /// Gets the replacement tokens supplied by this object.
         /// </summary>
         /// <param name="context">
-        ///     The context in which emails are being sent. This context can be different from current context
-        ///     since we wish to send emails using language of user
+        /// The request context for the email operation. Implementations may use it to resolve the store or language;
+        /// the context can differ from the current request context when an email is sent using a user's language.
         /// </param>
-        /// <returns></returns>
+        /// <returns>A list of <see cref="HtmlTemplateTag"/> instances that can be applied to an email template.</returns>
         List<HtmlTemplateTag> GetReplaceableTags(HccRequestContext context);
     }
 }

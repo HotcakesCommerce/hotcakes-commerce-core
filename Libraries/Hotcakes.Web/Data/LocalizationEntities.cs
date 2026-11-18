@@ -28,28 +28,55 @@ using System;
 
 namespace Hotcakes.Web.Data
 {
+    /// <summary>
+    /// Describes an entity containing culture-specific translation data.
+    /// </summary>
     public interface ITranslationEntity
     {
+        /// <summary>
+        /// Gets or sets the culture associated with the translation.
+        /// </summary>
         string Culture { get; set; }
     }
 
+    /// <summary>
+    /// Describes a model whose content can be associated with a culture.
+    /// </summary>
     public interface ILocalizableModel
     {
+        /// <summary>
+        /// Gets or sets the culture associated with the model content.
+        /// </summary>
         string ContentCulture { get; set; }
     }
 
+    /// <summary>
+    /// Holds a primary entity together with its translation entity.
+    /// </summary>
+    /// <typeparam name="T">The primary entity type.</typeparam>
+    /// <typeparam name="TT">The translation entity type.</typeparam>
     [Serializable]
     public class JoinedItem<T, TT>
         where T : class, new()
         where TT : class, ITranslationEntity, new()
     {
+        /// <summary>
+        /// Initializes a new instance with a new primary entity and translation entity.
+        /// </summary>
         public JoinedItem()
         {
             Item = new T();
             ItemTranslation = new TT();
         }
 
+        /// <summary>
+        /// Gets or sets the primary entity.
+        /// </summary>
         public T Item { get; set; }
+
+        /// <summary>
+        /// Gets or sets the translation entity.
+        /// </summary>
         public TT ItemTranslation { get; set; }
     }
 }

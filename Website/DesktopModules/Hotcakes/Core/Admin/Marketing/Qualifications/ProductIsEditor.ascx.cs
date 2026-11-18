@@ -32,6 +32,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 {
+    /// <summary>
+    /// Edits a qualification based on a selected product.
+    /// </summary>
     public partial class ProductIsEditor : BaseQualificationControl
     {
         private HasProductsQualificationBase TypedQualification
@@ -39,6 +42,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             get { return Qualification as HasProductsQualificationBase; }
         }
 
+        /// <summary>Gets or sets the title displayed by the product selector.</summary>
         public string Title { get; set; }
 
         protected override void OnInit(EventArgs e)
@@ -95,6 +99,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             LoadQualification();
         }
 
+        /// <summary>Loads the product qualification into the editor.</summary>
         public override void LoadQualification()
         {
             if (ucProductPicker != null) ucProductPicker.LoadSearch();
@@ -120,6 +125,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             }
         }
 
+        /// <summary>Saves the product qualification.</summary>
+        /// <returns><see langword="true"/> when the qualification is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveQualification()
         {
             return UpdatePromotion();

@@ -42,6 +42,9 @@ namespace Hotcakes.CommerceDTO.v1.Orders
     [Serializable]
     public class LineItemDTO
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LineItemDTO"/> class with default line-item values.
+        /// </summary>
         public LineItemDTO()
         {
             Id = 0;

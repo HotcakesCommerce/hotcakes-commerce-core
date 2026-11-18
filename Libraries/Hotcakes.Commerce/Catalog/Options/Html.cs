@@ -31,49 +31,79 @@ using System.Web.UI.WebControls;
 
 namespace Hotcakes.Commerce.Catalog.Options
 {
+    /// <summary>
+    /// Implements the <see cref="IOptionProcessor" /> contract for informational HTML options.
+    /// </summary>
     public class Html : IOptionProcessor
     {
+        /// <summary>
+        /// Performs the GetOptionType catalog operation.
+        /// </summary>
         public OptionTypes GetOptionType()
         {
             return OptionTypes.Html;
         }
 
+        /// <summary>
+        /// Performs the Render catalog operation.
+        /// </summary>
         public string Render(Option baseOption)
         {
             return baseOption.TextSettings.GetSettingOrEmpty("html");
         }
 
+        /// <summary>
+        /// Performs the RenderWithSelection catalog operation.
+        /// </summary>
         public string RenderWithSelection(Option baseOption, OptionSelectionList selections, string prefix = null, string className = null)
         {
             return Render(baseOption);
         }
 
+        /// <summary>
+        /// Performs the RenderAsControl catalog operation.
+        /// </summary>
         public void RenderAsControl(Option baseOption, PlaceHolder ph, string prefix = null, string className = null)
         {
             var result = new LiteralControl(baseOption.TextSettings.GetSettingOrEmpty("html"));
             ph.Controls.Add(result);
         }
 
+        /// <summary>
+        /// Performs the ParseFromPlaceholder catalog operation.
+        /// </summary>
         public OptionSelection ParseFromPlaceholder(Option baseOption, PlaceHolder ph, string prefix = null)
         {
             return null;
         }
 
+        /// <summary>
+        /// Performs the ParseFromForm catalog operation.
+        /// </summary>
         public OptionSelection ParseFromForm(Option baseOption, NameValueCollection form, string prefix = null)
         {
             return null;
         }
 
+        /// <summary>
+        /// Performs the SetSelectionsInPlaceholder catalog operation.
+        /// </summary>
         public void SetSelectionsInPlaceholder(Option baseOption, PlaceHolder ph, OptionSelectionList selections)
         {
             // do nothing;
         }
 
+        /// <summary>
+        /// Performs the CartDescription catalog operation.
+        /// </summary>
         public string CartDescription(Option baseOption, OptionSelectionList selections)
         {
             return string.Empty;
         }
 
+        /// <summary>
+        /// Performs the GetSelectionValues catalog operation.
+        /// </summary>
         public List<string> GetSelectionValues(Option baseOption, OptionSelectionList selections)
         {
             return new List<string>();

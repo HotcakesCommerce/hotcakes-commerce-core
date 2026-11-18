@@ -30,8 +30,16 @@ using System.Xml.Serialization;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Provides convenience methods for XML serialization and deserialization.
+    /// </summary>
     public class Serialization
     {
+        /// <summary>
+        /// Serializes an object using an <see cref="System.Xml.Serialization.XmlSerializer"/> created for its runtime type.
+        /// </summary>
+        /// <param name="item">The object to serialize.</param>
+        /// <returns>The serialized XML representation of <paramref name="item"/>.</returns>
         public static string SerializeToXml(object item)
         {
             var sw = new StringWriter();
@@ -40,6 +48,12 @@ namespace Hotcakes.Commerce.Utilities
             return sw.ToString();
         }
 
+        /// <summary>
+        /// Deserializes XML into an instance of the specified type.
+        /// </summary>
+        /// <param name="item">The XML text to deserialize.</param>
+        /// <param name="type">The type of object represented by the XML.</param>
+        /// <returns>The deserialized object.</returns>
         public static object DeserializeFromXml(string item, Type type)
         {
             var tr = new StringReader(item);

@@ -28,6 +28,8 @@ using System;
 
 namespace Hotcakes.Web.Barcodes
 {
+    /// <summary>UPC supplemental five-digit barcode encoder.</summary>
+    /// <remarks>The encoded output is exposed through <see cref="IBarcode.Encoded_Value"/>.</remarks>
     [Serializable]
     internal class UPCSupplement5 : BarcodeCommon, IBarcode
     {
@@ -49,6 +51,9 @@ namespace Hotcakes.Web.Barcodes
             "abaab", "aabab"
         };
 
+        /// <summary>Encodes data using the UPC supplemental five-digit symbology.</summary>
+        /// <param name="input">The data to encode.</param>
+        /// <seealso cref="Encoded_Value"/>
         public UPCSupplement5(string input)
         {
             Raw_Data = input;
@@ -56,6 +61,8 @@ namespace Hotcakes.Web.Barcodes
 
         #region IBarcode Members
 
+        /// <summary>Gets the encoded bar-and-space representation.</summary>
+        /// <seealso cref="IBarcode.Encoded_Value"/>
         public string Encoded_Value
         {
             get { return Encode_UPCSupplemental_5(); }

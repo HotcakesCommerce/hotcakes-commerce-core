@@ -28,10 +28,16 @@ using Hotcakes.CommerceDTO.v1.Catalog;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Represents the catalog class <see cref="CategorySnapshot" /> and its associated behavior.
+    /// </summary>
     public class CategorySnapshot
     {
         private string _RewriteUrl = string.Empty;
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="CategorySnapshot" />.
+        /// </summary>
         public CategorySnapshot()
         {
             Bvin = string.Empty;
@@ -47,6 +53,10 @@ namespace Hotcakes.Commerce.Catalog
             MetaTitle = string.Empty;
         }
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="CategorySnapshot" />.
+        /// </summary>
+        /// <param name="cat">Value used to initialize the instance.</param>
         public CategorySnapshot(Category cat)
         {
             Bvin = cat.Bvin;

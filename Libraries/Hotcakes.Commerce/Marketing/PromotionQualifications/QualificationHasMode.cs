@@ -26,9 +26,12 @@
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Specifies how a quantity threshold is interpreted by a qualification.</summary>
     public enum QualificationHasMode
     {
+        /// <summary>Requires the matching quantity to be at least the configured threshold.</summary>
         HasAtLeast = 0,
+        /// <summary>Requires the matching quantity to be less than the configured threshold.</summary>
         HasLessThan = 1
     }
 }

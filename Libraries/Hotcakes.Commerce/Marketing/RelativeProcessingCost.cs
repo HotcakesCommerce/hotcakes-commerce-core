@@ -35,10 +35,15 @@ namespace Hotcakes.Commerce.Marketing
     /// </summary>
     public enum RelativeProcessingCost
     {
+        /// <summary>Lowest relative cost; evaluated first.</summary>
         Lowest = 0,
+        /// <summary>Lower-than-normal relative cost.</summary>
         Lower = 250,
+        /// <summary>Default relative cost.</summary>
         Normal = 500,
+        /// <summary>Higher-than-normal relative cost.</summary>
         Higher = 750,
+        /// <summary>Highest relative cost; evaluated last.</summary>
         Highest = 1000
     }
 }

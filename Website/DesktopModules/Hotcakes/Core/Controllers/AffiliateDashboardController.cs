@@ -44,10 +44,13 @@ using Newtonsoft.Json;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Provides storefront actions for viewing and maintaining the current customer's affiliate account.</summary>
     [Serializable]
     public class AffiliateDashboardController : BaseAppController
     {
         private const DateRangeType DefaultDateRange = DateRangeType.ThisMonth;
+        /// <summary>Displays the affiliate dashboard and its default current-month summaries.</summary>
+        /// <returns>The dashboard view, or an empty affiliate view when no affiliate account exists.</returns>
 
         public ActionResult Index()
         {
@@ -117,6 +120,9 @@ namespace Hotcakes.Modules.Core.Controllers
             return View(model);
         }
 
+        /// <summary>Updates the current affiliate's profile information.</summary>
+        /// <param name="model">The affiliate profile values submitted by the customer.</param>
+        /// <returns>A JSON status response describing the update result.</returns>
         [HccHttpPost]
         public ActionResult Update(AffiliateViewModel model)
         {
@@ -166,6 +172,11 @@ namespace Hotcakes.Modules.Core.Controllers
             return Json(new {Status = "Invalid", Message = GetValidationSummaryMessage()});
         }
 
+        /// <summary>Returns a serialized page of affiliate orders for the selected date range.</summary>
+        /// <param name="dateRange">The <see cref="DateRangeType"/> value used to calculate the range.</param>
+        /// <param name="pageNumber">The one-based page number.</param>
+        /// <param name="pageSize">The number of orders per page.</param>
+        /// <returns>A JSON string containing the order rows and totals.</returns>
         [HccHttpPost]
         public string GetOrdersReport(int dateRange, int pageNumber, int pageSize)
         {
@@ -192,6 +203,11 @@ namespace Hotcakes.Modules.Core.Controllers
                 });
         }
 
+        /// <summary>Returns a serialized page of affiliate payments for the selected date range.</summary>
+        /// <param name="dateRange">The <see cref="DateRangeType"/> value used to calculate the range.</param>
+        /// <param name="pageNumber">The one-based page number.</param>
+        /// <param name="pageSize">The number of payments per page.</param>
+        /// <returns>A JSON string containing the payment rows and totals.</returns>
         [HccHttpPost]
         public string GetPaymentsReport(int dateRange, int pageNumber, int pageSize)
         {
@@ -218,6 +234,12 @@ namespace Hotcakes.Modules.Core.Controllers
         }
 
 
+        /// <summary>Returns a serialized page of referred affiliates matching the supplied filter.</summary>
+        /// <param name="searchBy">The affiliate report field used for matching.</param>
+        /// <param name="searchText">The optional filter text.</param>
+        /// <param name="pageNumber">The one-based page number.</param>
+        /// <param name="pageSize">The number of referrals per page.</param>
+        /// <returns>A JSON string containing referral rows and totals.</returns>
         [HccHttpPost]
         public string GetReferralsReport(int searchBy, string searchText, int pageNumber, int pageSize)
         {
@@ -243,6 +265,9 @@ namespace Hotcakes.Modules.Core.Controllers
                 });
         }
 
+        /// <summary>Gets the regions belonging to a country for affiliate forms.</summary>
+        /// <param name="countryId">The country business identifier.</param>
+        /// <returns>A JSON result containing the country's regions.</returns>
         [HccHttpPost]
         public ActionResult GetRegions(string countryId)
         {
@@ -256,6 +281,9 @@ namespace Hotcakes.Modules.Core.Controllers
             return Json(new List<Region>());
         }
 
+        /// <summary>Gets products available for affiliate URL generation.</summary>
+        /// <param name="categoryId">The optional category business identifier.</param>
+        /// <returns>A JSON result containing product list items.</returns>
         [HccHttpPost]
         public ActionResult GetProducts(string categoryId)
         {
@@ -279,6 +307,10 @@ namespace Hotcakes.Modules.Core.Controllers
             return Json(items);
         }
 
+        /// <summary>Builds an affiliate tracking URL for a category, product, or supplied URL.</summary>
+        /// <param name="id">The category identifier, product identifier, or URL.</param>
+        /// <param name="mode">The URL mode, such as <c>Category</c> or <c>Product</c>.</param>
+        /// <returns>A JSON result containing the generated URL.</returns>
         [HccHttpPost]
         public ActionResult GenerateUrl(string id, string mode)
         {

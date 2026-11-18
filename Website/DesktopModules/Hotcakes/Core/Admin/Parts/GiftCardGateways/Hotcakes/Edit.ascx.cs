@@ -30,10 +30,16 @@ namespace Hotcakes.Modules.Core.Admin.Parts.GiftCardGateways.Hotcakes
 {
     partial class Edit : HccGiftCardGatewayPart
     {
+        /// <summary>
+        /// Performs the administrative operation represented by LoadData.
+        /// </summary>
         public override void LoadData()
         {
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by SaveData.
+        /// </summary>
         public override void SaveData()
         {
         }

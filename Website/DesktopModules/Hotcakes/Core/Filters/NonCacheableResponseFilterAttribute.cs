@@ -30,9 +30,16 @@ using System.Web.Mvc;
 
 namespace Hotcakes.Modules.Core.Filters
 {
+    /// <summary>
+    /// Prevents an MVC response from being cached by clients or proxies.
+    /// </summary>
     [Serializable]
     public class NonCacheableResponseFilterAttribute : ActionFilterAttribute
     {
+        /// <summary>
+        /// Applies no-cache directives after the action has executed.
+        /// </summary>
+        /// <param name="filterContext">The context for the completed action.</param>
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             base.OnActionExecuted(filterContext);

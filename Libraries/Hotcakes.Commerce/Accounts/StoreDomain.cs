@@ -28,6 +28,7 @@ using System;
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Represents StoreDomain data and behavior within the Hotcakes Commerce account and store boundary.</summary>
     [Serializable]
     public class StoreDomain
     {
@@ -35,6 +36,8 @@ namespace Hotcakes.Commerce.Accounts
         private const string HTTPS = "https://";
         private string _DomainName = string.Empty;
 
+        /// <summary>Performs the StoreDomain operation.</summary>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public StoreDomain()
         {
             Id = 0;
@@ -42,9 +45,17 @@ namespace Hotcakes.Commerce.Accounts
             DomainName = string.Empty;
         }
 
+        /// <summary>Gets or sets Id.</summary>
+        /// <remarks>The database identifier for this record; a newly constructed model uses its established unsaved sentinel value unless otherwise noted.</remarks>
+        /// <value>The database identifier for this record; a newly constructed model uses its established unsaved sentinel value unless otherwise noted.</value>
         public long Id { get; set; }
+        /// <summary>Gets or sets StoreId.</summary>
+        /// <remarks>The identifier of the store that owns this record. Store data is isolated by this value.</remarks>
+        /// <value>The identifier of the store that owns this record. Store data is isolated by this value.</value>
         public long StoreId { get; set; }
 
+        /// <summary>Gets or sets the  value for this instance.</summary>
+        /// <value>The current  value. The meaning and persistence scope are defined by the containing type.</value>
         public string DomainName
         {
             get { return _DomainName; }

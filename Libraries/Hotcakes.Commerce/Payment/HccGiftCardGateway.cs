@@ -30,25 +30,44 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Commerce.Payment
 {
+    /// <summary>
+    /// Implements gift-card operations against the Hotcakes catalog gift-card service.
+    /// Charges and refunds mutate the card balance; activation and deactivation mutate its enabled status.
+    /// </summary>
     public class HccGiftCardGateway : GiftCardGateway
     {
+        /// <summary>
+        /// Initializes the built-in Hotcakes gift-card gateway with empty method settings.
+        /// </summary>
         public HccGiftCardGateway()
         {
             Settings = new MethodSettings();
         }
 
+        /// <summary>
+        /// Gets the stable built-in gateway identifier.
+        /// </summary>
         public override string Id
         {
             get { return "07EAA1B5-833F-4A88-8899-4084587D1A85"; }
         }
 
+        /// <summary>
+        /// Gets the built-in gateway name, <c>Hotcakes</c>.
+        /// </summary>
         public override string Name
         {
             get { return "Hotcakes"; }
         }
 
+        /// <summary>
+        /// Gets or sets the gateway's configurable settings.
+        /// </summary>
         public MethodSettings Settings { get; set; }
 
+        /// <summary>
+        /// Gets the settings object used by the base gateway and settings merge behavior.
+        /// </summary>
         public override MethodSettings BaseSettings
         {
             get { return Settings; }
@@ -59,21 +78,36 @@ namespace Hotcakes.Commerce.Payment
             get { return HotcakesApplication.Current; }
         }
 
+        /// <summary>
+        /// Gets a value indicating that this gateway does not support authorization.
+        /// </summary>
         public override bool CanAuthorize
         {
             get { return false; }
         }
 
+        /// <summary>
+        /// Charges the gift card by applying the transaction amount to its balance.
+        /// </summary>
+        /// <param name="t">The transaction containing the card number and amount.</param>
         protected override void Charge(Transaction t)
         {
             t.Result.Succeeded = HccApp.CatalogServices.GiftCards.ChargeGiftCard(t.GiftCard.CardNumber, t.Amount);
         }
 
+        /// <summary>
+        /// Refunds the gift card by applying the negated transaction amount to its balance.
+        /// </summary>
+        /// <param name="t">The transaction containing the card number and amount.</param>
         protected override void Refund(Transaction t)
         {
             t.Result.Succeeded = HccApp.CatalogServices.GiftCards.ChargeGiftCard(t.GiftCard.CardNumber, -1*t.Amount);
         }
 
+        /// <summary>
+        /// Creates a catalog gift card from the transaction's gift-card data and reports creation failure on the transaction.
+        /// </summary>
+        /// <param name="t">The transaction containing gift-card data and invoice context.</param>
         protected override void CreateNew(Transaction t)
         {
             var store = HccApp.CurrentStore;
@@ -101,16 +135,28 @@ namespace Hotcakes.Commerce.Payment
             }
         }
 
+        /// <summary>
+        /// Enables the gift card identified by the transaction.
+        /// </summary>
+        /// <param name="t">The transaction containing the card number.</param>
         protected override void Activate(Transaction t)
         {
             t.Result.Succeeded = HccApp.CatalogServices.GiftCards.UpdateStatus(t.GiftCard.CardNumber, true);
         }
 
+        /// <summary>
+        /// Disables the gift card identified by the transaction.
+        /// </summary>
+        /// <param name="t">The transaction containing the card number.</param>
         protected override void Deactivate(Transaction t)
         {
             t.Result.Succeeded = HccApp.CatalogServices.GiftCards.UpdateStatus(t.GiftCard.CardNumber, false);
         }
 
+        /// <summary>
+        /// Reads the current gift-card balance and places it in the transaction result.
+        /// </summary>
+        /// <param name="t">The transaction containing the card number and receiving the balance.</param>
         protected override void BalanceInquiry(Transaction t)
         {
             t.Result.Succeeded = true;

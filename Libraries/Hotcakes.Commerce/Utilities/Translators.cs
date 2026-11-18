@@ -28,6 +28,9 @@ using System.Data;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Converts common data containers into simpler application values.
+    /// </summary>
     public class Translators
     {
         private Translators()
@@ -37,8 +40,9 @@ namespace Hotcakes.Commerce.Utilities
         /// <summary>
         ///     Converts a single column DataTable into an Array of Strings
         /// </summary>
-        /// <param name="dt"></param>
-        /// <returns></returns>
+        /// <param name="dt">The table whose first column is converted.</param>
+        /// <returns>An array containing one string for each row, or an empty array when the table has no rows.</returns>
+        /// <remarks>Only the first column is read; additional columns are ignored.</remarks>
         public static string[] DataTableToArray(DataTable dt)
         {
             var rowCnt = dt.Rows.Count;

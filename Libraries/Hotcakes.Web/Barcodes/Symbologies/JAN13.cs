@@ -28,9 +28,14 @@ using System;
 
 namespace Hotcakes.Web.Barcodes
 {
+    /// <summary>JAN-13 barcode encoder.</summary>
+    /// <remarks>The encoded output is exposed through <see cref="IBarcode.Encoded_Value"/>.</remarks>
     [Serializable]
     internal class JAN13 : BarcodeCommon, IBarcode
     {
+        /// <summary>Encodes data using the JAN-13 symbology.</summary>
+        /// <param name="input">The data to encode.</param>
+        /// <seealso cref="Encoded_Value"/>
         public JAN13(string input)
         {
             Raw_Data = input;
@@ -38,6 +43,8 @@ namespace Hotcakes.Web.Barcodes
 
         #region IBarcode Members
 
+        /// <summary>Gets the encoded bar-and-space representation.</summary>
+        /// <seealso cref="IBarcode.Encoded_Value"/>
         public string Encoded_Value
         {
             get { return Encode_JAN13(); }

@@ -32,12 +32,21 @@ using System.Threading.Tasks;
 
 namespace Hotcakes.CommerceDTO.v1.Catalog
 {
+    /// <summary>
+    ///     Specifies whether a product upcharge is expressed as a percentage or a fixed amount.
+    /// </summary>
     [DataContract]
     public enum UpchargeAmountTypesDTO
     {
     
+        /// <summary>
+        ///     The upcharge is expressed as a percentage.
+        /// </summary>
         [EnumMember] Percent = 1,
        
+        /// <summary>
+        ///     The upcharge is expressed as a fixed amount.
+        /// </summary>
         [EnumMember] Amount = 0,
     }
 }

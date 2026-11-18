@@ -26,12 +26,32 @@
 
 namespace Hotcakes.Commerce.Controls
 {
+    /// <summary>
+    /// Carries the paging values associated with a requested page change.
+    /// </summary>
+    /// <remarks>
+    /// This is a mutable data-transfer object. The properties are not range-checked;
+    /// their interpretation, including whether <see cref="CurrentRow"/> is zero- or
+    /// one-based, is determined by the control that raises or consumes the event.
+    /// </remarks>
     public class PageChangingEventArgs
     {
+        /// <summary>
+        /// Gets or sets the row at which the requested page begins or is positioned.
+        /// </summary>
+        /// <value>The current row value supplied by the paging control.</value>
         public int CurrentRow { get; set; }
 
+        /// <summary>
+        /// Gets or sets the total number of rows available to page through.
+        /// </summary>
+        /// <value>The row count supplied by the paging control.</value>
         public int RowCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the number of items displayed on each page.
+        /// </summary>
+        /// <value>The page-size value supplied by the paging control.</value>
         public int ItemsPerPage { get; set; }
     }
 }

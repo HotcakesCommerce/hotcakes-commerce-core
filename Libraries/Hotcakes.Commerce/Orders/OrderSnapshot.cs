@@ -41,6 +41,9 @@ namespace Hotcakes.Commerce.Orders
     [Serializable]
     public class OrderSnapshot
     {
+        /// <summary>
+        ///     Creates an order snapshot with the scalar defaults used by snapshot and DTO consumers.
+        /// </summary>
         public OrderSnapshot()
         {
             bvin = string.Empty;

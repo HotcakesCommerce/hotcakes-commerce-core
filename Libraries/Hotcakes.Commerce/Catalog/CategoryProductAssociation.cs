@@ -36,6 +36,9 @@ namespace Hotcakes.Commerce.Catalog
     [Serializable]
     public class CategoryProductAssociation
     {
+        /// <summary>
+        /// Initializes a new instance of <see cref="CategoryProductAssociation" />.
+        /// </summary>
         public CategoryProductAssociation()
         {
             Id = 0;

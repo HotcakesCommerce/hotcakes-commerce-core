@@ -26,8 +26,11 @@
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>Provides batch workflows for advancing, charging, shipping, and removing orders.</summary>
+    /// <remarks>Batch methods page through eligible orders and use the established order, transaction, catalog, and payment-manager services. Removal also deletes transactions and unreserves inventory.</remarks>
     public class OrderBatchProcessor
     {
+        /// <summary>Accepts the applicable order payment or order batch.</summary>
         public static void AcceptAllNewOrders(OrderService svc)
         {
             var criteria = new OrderSearchCriteria();
@@ -65,6 +68,7 @@ namespace Hotcakes.Commerce.Orders
             } while ((currentPage - 1) * pageSize < totalCount);
         }
 
+        /// <summary>Removes the applicable order data and releases related resources.</summary>
         public static bool RemoveAllOrders(HotcakesApplication app)
         {
             var orders = app.OrderServices.Orders.FindAll();
@@ -105,6 +109,7 @@ namespace Hotcakes.Commerce.Orders
             return true;
         }
 
+        /// <summary>Removes the applicable order data and releases related resources.</summary>
         public static bool RemoveAllOrdersOfCustomer(HotcakesApplication app, string CustomerID)
         {
             var totalCount = 0;
@@ -155,6 +160,7 @@ namespace Hotcakes.Commerce.Orders
             return true;
         }
 
+        /// <summary>Collects pending payments and advances eligible orders toward shipping.</summary>
         public static void CollectPaymentAndShipPendingOrders(HotcakesApplication app)
         {
             var criteria = new OrderSearchCriteria();
@@ -209,6 +215,7 @@ namespace Hotcakes.Commerce.Orders
         }
 
 
+        /// <summary>Charges the applicable order payment sources and updates its status.</summary>
         public static bool ChargeSingleOrder(HotcakesApplication app, Order o)
         {
             if (o == null) return false;
@@ -242,6 +249,7 @@ namespace Hotcakes.Commerce.Orders
         }
 
 
+        /// <summary>Marks eligible orders as complete.</summary>
         public static void MarkAllToBeShippedOrdersAsComplete(HotcakesApplication app)
         {
             var criteria = new OrderSearchCriteria();

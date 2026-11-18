@@ -30,9 +30,17 @@ using Hotcakes.Shipping.Services;
 
 namespace Hotcakes.Shipping
 {
+    /// <summary>
+    /// Provides access to the built-in <see cref="IShippingService"/> implementations.
+    /// </summary>
     [Serializable]
     public class Service
     {
+        /// <summary>
+        /// Creates a new instance of each built-in shipping service.
+        /// </summary>
+        /// <returns>A list containing the built-in shipping service implementations.</returns>
+        /// <seealso cref="FindById(string)"/>
         public static List<IShippingService> FindAll()
         {
             var result = new List<IShippingService>
@@ -49,6 +57,12 @@ namespace Hotcakes.Shipping
             return result;
         }
 
+        /// <summary>
+        /// Creates the built-in shipping service identified by its stable identifier.
+        /// </summary>
+        /// <param name="id">The identifier of the shipping service to create.</param>
+        /// <returns>The matching shipping service, or <see langword="null"/> when <paramref name="id"/> is not registered.</returns>
+        /// <seealso cref="FindAll()"/>
         public static IShippingService FindById(string id)
         {
             switch (id)

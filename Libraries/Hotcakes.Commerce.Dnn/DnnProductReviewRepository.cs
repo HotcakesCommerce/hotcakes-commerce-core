@@ -32,6 +32,9 @@ using Hotcakes.Commerce.Social;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Provides product-review persistence with DNN journal integration.
+    /// </summary>
     [Serializable]
     public class DnnProductReviewRepository : ProductReviewRepository
     {
@@ -39,6 +42,10 @@ namespace Hotcakes.Commerce.Dnn
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes the repository for the specified commerce request context.
+        /// </summary>
+        /// <param name="c">The context used to resolve the current store and social service.</param>
         public DnnProductReviewRepository(HccRequestContext c)
             : base(c)
         {
@@ -49,6 +56,11 @@ namespace Hotcakes.Commerce.Dnn
         
         #region Public methods
 
+        /// <summary>
+        /// Creates a product review and updates the related product's DNN journal record.
+        /// </summary>
+        /// <param name="item">The product review to create.</param>
+        /// <returns><c>true</c> when the review is created; otherwise, <c>false</c>.</returns>
         public override bool Create(ProductReview item)
         {
             var res = base.Create(item);

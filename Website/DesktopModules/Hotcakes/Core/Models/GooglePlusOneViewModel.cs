@@ -28,18 +28,45 @@ using System;
 
 namespace Hotcakes.Modules.Core.Models
 {
+    /// <summary>
+    /// Defines the supported values for GooglePlusOneSize.
+    /// </summary>
     public enum GooglePlusOneSize
     {
+        /// <summary>
+        /// Represents the Small option.
+        /// </summary>
         Small = 0,
+        /// <summary>
+        /// Represents the Medium option.
+        /// </summary>
         Medium = 1,
+        /// <summary>
+        /// Represents the Standard option.
+        /// </summary>
         Standard = 2,
+        /// <summary>
+        /// Represents the Large option.
+        /// </summary>
         Large = 3
     }
 
+    /// <summary>
+    /// Defines the supported values for GooglePlusOneCountPosition.
+    /// </summary>
     public enum GooglePlusOneCountPosition
     {
+        /// <summary>
+        /// Represents the None option.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Represents the Bubble option.
+        /// </summary>
         Bubble = 1,
+        /// <summary>
+        /// Represents the Inline option.
+        /// </summary>
         Inline = 2
     }
 

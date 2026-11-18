@@ -34,6 +34,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
+    /// <summary>
+    /// Provides the administrative page for managing product edit tabs.
+    /// </summary>
     public partial class ProductsEdit_Tabs : BaseProductPage
     {
         private Product localProduct = new Product();

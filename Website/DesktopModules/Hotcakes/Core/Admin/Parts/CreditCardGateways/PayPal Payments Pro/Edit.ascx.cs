@@ -33,6 +33,9 @@ namespace Hotcakes.Modules.Core.Modules.CreditCardGateways.PayPal_Payments_Pro
 {
     partial class Edit : HccCreditCardGatewayPart
     {
+        /// <summary>
+        /// Performs the administrative operation represented by LoadData.
+        /// </summary>
         public override void LoadData()
         {
             if (ddlCurrency.Items.Count == 0)
@@ -56,6 +59,9 @@ namespace Hotcakes.Modules.Core.Modules.CreditCardGateways.PayPal_Payments_Pro
             chkDebugMode.Checked = settings.DebugMode;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by SaveData.
+        /// </summary>
         public override void SaveData()
         {
             var settings = new PayPalPaymentsProSettings();

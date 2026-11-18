@@ -38,9 +38,20 @@ using Order = Hotcakes.Modules.Core.Api.Mobile.Models.Order;
 
 namespace Hotcakes.Modules.Core.Api.Mobile
 {
+    /// <summary>
+    /// Provides mobile API operations for searching and managing orders.
+    /// </summary>
     [Serializable]
     public class OrdersController : HccApiController
     {
+        /// <summary>
+        /// Gets a page of order summaries for the requested period and status.
+        /// </summary>
+        /// <param name="pageSize">The maximum number of orders to return.</param>
+        /// <param name="pageNumber">The one-based page number to return.</param>
+        /// <param name="period">The period to search, such as <c>day</c>, <c>week</c>, <c>month</c>, <c>year</c>, or <c>all</c>.</param>
+        /// <param name="status">The order status name to filter by.</param>
+        /// <returns>The order summaries for the requested page.</returns>
         [MobileAuthorize]
         public IEnumerable<OrderBrief> Get(int pageSize = 100, int pageNumber = 1, string period = "year",
             string status = "")
@@ -82,6 +93,11 @@ namespace Hotcakes.Modules.Core.Api.Mobile
             }).ToList();
         }
 
+        /// <summary>
+        /// Gets the detailed order identified by its store-scoped ID.
+        /// </summary>
+        /// <param name="id">The order ID.</param>
+        /// <returns>The detailed order, or <see langword="null"/> when it cannot be found for the current store.</returns>
         [MobileAuthorize]
         public Order Get(string id)
         {
@@ -132,6 +148,13 @@ namespace Hotcakes.Modules.Core.Api.Mobile
             return null;
         }
 
+        /// <summary>
+        /// Captures a payment against an authorized order transaction.
+        /// </summary>
+        /// <param name="orderId">The order ID.</param>
+        /// <param name="transactionId">The payment transaction ID.</param>
+        /// <param name="amount">The amount to capture as a decimal string.</param>
+        /// <returns>An HTTP response containing the payment-capture result.</returns>
         [MobileAuthorize]
         [HttpGet]
         public HttpResponseMessage CapturePayment(string orderId, string transactionId, string amount)
@@ -145,6 +168,11 @@ namespace Hotcakes.Modules.Core.Api.Mobile
             return Request.CreateResponse(HttpStatusCode.OK, status);
         }
 
+        /// <summary>
+        /// Gets the shipping providers available to the mobile client.
+        /// </summary>
+        /// <param name="orderId">The order ID associated with the shipping operation.</param>
+        /// <returns>The supported shipping providers.</returns>
         [MobileAuthorize]
         public IEnumerable<Shipper> GetShipperList(string orderId)
         {
@@ -157,6 +185,13 @@ namespace Hotcakes.Modules.Core.Api.Mobile
             };
         }
 
+        /// <summary>
+        /// Marks all items in an order as shipped with the supplied tracking information.
+        /// </summary>
+        /// <param name="orderId">The order ID.</param>
+        /// <param name="shipperCode">The shipping provider code.</param>
+        /// <param name="number">The shipment tracking number.</param>
+        /// <returns>An empty successful HTTP response when the shipment is recorded.</returns>
         [MobileAuthorize]
         [HttpGet]
         public HttpResponseMessage MarkAsShipped(string orderId, string shipperCode, string number)

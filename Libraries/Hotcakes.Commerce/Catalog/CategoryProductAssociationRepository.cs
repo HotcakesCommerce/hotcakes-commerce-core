@@ -39,6 +39,10 @@ namespace Hotcakes.Commerce.Catalog
     public class CategoryProductAssociationRepository :
         HccSimpleRepoBase<hcc_ProductXCategory, CategoryProductAssociation>
     {
+        /// <summary>
+        /// Initializes a new instance of <see cref="CategoryProductAssociationRepository" />.
+        /// </summary>
+        /// <param name="c">Value used to initialize the instance.</param>
         public CategoryProductAssociationRepository(HccRequestContext c)
             : base(c)
         {
@@ -280,6 +284,13 @@ namespace Hotcakes.Commerce.Catalog
             return Delete(y => y.ProductId == productGuid && y.StoreId == storeId);
         }
 
+        /// <summary>
+        /// Performs the <c>AddProductToCategory</c> catalog operation.
+        /// </summary>
+        /// <param name="productId">Input used by the operation.</param>
+        /// <param name="categoryId">Input used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
+        /// <remarks>Behavior, persistence, and store filtering are defined by the implementation and repository context.</remarks>
         public CategoryProductAssociation AddProductToCategory(string productId, string categoryId)
         {
             var storeId = Context.CurrentStore.Id;

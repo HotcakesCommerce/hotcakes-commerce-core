@@ -29,9 +29,16 @@ using Hotcakes.Web.Geography;
 
 namespace Hotcakes.Payment
 {
+    /// <summary>
+    /// Represents billing and shipping contact information supplied for a payment transaction.
+    /// </summary>
+    /// <remarks>Billing values use the unprefixed properties; shipping values use the <c>Ship</c>-prefixed properties.</remarks>
     [Serializable]
     public class CustomerData
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomerData"/> class with empty contact values and a default IP address.
+        /// </summary>
         public CustomerData()
         {
             UserId = string.Empty;
@@ -62,33 +69,62 @@ namespace Hotcakes.Payment
             ShipPhone = string.Empty;
         }
 
+        /// <summary>Gets or sets the customer identifier.</summary>
         public string UserId { get; set; }
+        /// <summary>Gets or sets the billing contact's first name.</summary>
         public string FirstName { get; set; }
+        /// <summary>Gets or sets the billing contact's last name.</summary>
         public string LastName { get; set; }
+        /// <summary>Gets or sets the billing company name.</summary>
         public string Company { get; set; }
+        /// <summary>Gets or sets the billing street address.</summary>
         public string Street { get; set; }
+        /// <summary>Gets or sets the billing city.</summary>
         public string City { get; set; }
+        /// <summary>Gets or sets the billing region name.</summary>
         public string RegionName { get; set; }
+        /// <summary>Gets or sets the billing region identifier.</summary>
         public string RegionBvin { get; set; }
+        /// <summary>Gets or sets the billing postal code.</summary>
         public string PostalCode { get; set; }
+        /// <summary>Gets or sets the billing country name.</summary>
         public string CountryName { get; set; }
+        /// <summary>Gets or sets the billing country identifier.</summary>
         public string CountryBvin { get; set; }
+        /// <summary>Gets or sets the billing country data.</summary>
+        /// <seealso cref="ShipCountryData"/>
         public ICountry CountryData { get; set; }
+        /// <summary>Gets or sets the billing telephone number.</summary>
         public string Phone { get; set; }
+        /// <summary>Gets or sets the billing email address.</summary>
         public string Email { get; set; }
+        /// <summary>Gets or sets the originating client IP address.</summary>
         public string IpAddress { get; set; }
 
+        /// <summary>Gets or sets the shipping contact's first name.</summary>
         public string ShipFirstName { get; set; }
+        /// <summary>Gets or sets the shipping contact's last name.</summary>
         public string ShipLastName { get; set; }
+        /// <summary>Gets or sets the shipping company name.</summary>
         public string ShipCompany { get; set; }
+        /// <summary>Gets or sets the shipping street address.</summary>
         public string ShipStreet { get; set; }
+        /// <summary>Gets or sets the shipping city.</summary>
         public string ShipCity { get; set; }
+        /// <summary>Gets or sets the shipping region name.</summary>
         public string ShipRegionName { get; set; }
+        /// <summary>Gets or sets the shipping region identifier.</summary>
         public string ShipRegionBvin { get; set; }
+        /// <summary>Gets or sets the shipping postal code.</summary>
         public string ShipPostalCode { get; set; }
+        /// <summary>Gets or sets the shipping country name.</summary>
         public string ShipCountryName { get; set; }
+        /// <summary>Gets or sets the shipping country identifier.</summary>
         public string ShipCountryBvin { get; set; }
+        /// <summary>Gets or sets the shipping country data.</summary>
+        /// <seealso cref="CountryData"/>
         public ICountry ShipCountryData { get; set; }
+        /// <summary>Gets or sets the shipping telephone number.</summary>
         public string ShipPhone { get; set; }
     }
 }

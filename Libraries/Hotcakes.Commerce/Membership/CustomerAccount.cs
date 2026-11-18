@@ -39,7 +39,14 @@ namespace Hotcakes.Commerce.Membership
     [Serializable]
     public class CustomerAccount : IReplaceable
     {
-        // Constructor			
+        /// <summary>
+        /// Initializes a customer account with empty text values, current UTC timestamps, an empty address book,
+        /// and new billing and shipping <see cref="Address"/> instances.
+        /// </summary>
+        /// <remarks>
+        /// The constructor does not assign a customer identifier or store identifier. <see cref="Password"/> is
+        /// initialized to an empty string; providers determine how a supplied password is stored.
+        /// </remarks>
         public CustomerAccount()
         {
             Bvin = string.Empty;
@@ -65,23 +72,27 @@ namespace Hotcakes.Commerce.Membership
         }
 
         /// <summary>
-        ///     The unique ID of the customer account
+        /// Gets or sets the unique identifier of the customer account.
         /// </summary>
+        /// <remarks>Providers may assign this value when the account is created.</remarks>
         public string Bvin { get; set; }
 
         /// <summary>
-        ///     This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
+        /// Gets or sets the identifier of the Hotcakes store that owns the account.
         /// </summary>
+        /// <remarks>This is typically 1, but differs in multi-tenant environments.</remarks>
         public long StoreId { get; set; }
 
         /// <summary>
-        ///     The primary email address for the customer and it is used to get their avatar from gravatar.
+        /// Gets or sets the customer's primary email address.
         /// </summary>
+        /// <remarks>The address is also used by some membership providers as the account lookup value and to obtain a Gravatar.</remarks>
         public string Email { get; set; }
 
         /// <summary>
-        ///     The username of the customer in the CMS
+        /// Gets or sets the username recognized by the configured CMS or membership provider.
         /// </summary>
+        /// <remarks>The REST DTO does not carry this property; provider mappings may derive or omit it.</remarks>
         public string Username { get; set; }
 
         /// <summary>
@@ -95,8 +106,9 @@ namespace Hotcakes.Commerce.Membership
         public string LastName { get; set; }
 
         /// <summary>
-        ///     Encrypted password of the customer
+        /// Gets or sets the provider-specific stored password value.
         /// </summary>
+        /// <remarks>This value is not necessarily clear text. Providers receive a clear password through their account and password-change workflows and determine the stored representation; the DNN mapping does not expose a stored password when reading an account.</remarks>
         public string Password { get; set; }
 
         /// <summary>
@@ -189,10 +201,11 @@ namespace Hotcakes.Commerce.Membership
         public DateTime LastLoginDateUtc { get; set; }
 
         /// <summary>
-        ///     Provides a listing of the tokens that the customer information can be replaced with in email templates
+        /// Creates the email-template replacement tokens supported by this account.
         /// </summary>
-        /// <param name="context">An instance of the Hotcakes Request context object</param>
-        /// <returns>List of name/value pairs of the tokens and replacement content</returns>
+        /// <param name="context">The request context whose current store supplies the time-zone conversion.</param>
+        /// <returns>A list of token names and replacement values, including the stored <see cref="Password"/> value.</returns>
+        /// <remarks>The date tokens are converted from UTC to the current store's local time. The method does not sanitize or redact values.</remarks>
         public List<HtmlTemplateTag> GetReplaceableTags(HccRequestContext context)
         {
             var result = new List<HtmlTemplateTag>();
@@ -219,10 +232,11 @@ namespace Hotcakes.Commerce.Membership
         }
 
         /// <summary>
-        ///     Verifies the passed address for the customer, and if new, updates the customer record with it
+        /// Adds an address to the address book when no equal address is already present.
         /// </summary>
-        /// <param name="address">New address object to compare against the customer's current address</param>
-        /// <returns>Boolean - if true, the address was created</returns>
+        /// <param name="address">The address to compare and, when new, add.</param>
+        /// <returns><see langword="true"/> when an address was added; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>The supplied address is mutated with a new GUID <see cref="Address.Bvin"/> when added. This method does not persist the account; use <see cref="MembershipServices.CheckIfNewAddressAndAddWithUpdate"/> when the account must also be updated.</remarks>
         public bool CheckIfNewAddressAndAddNoUpdate(Address address)
         {
             var addressFound = false;
@@ -248,10 +262,11 @@ namespace Hotcakes.Commerce.Membership
         }
 
         /// <summary>
-        ///     Finds the specified address and deletes it from the customer record
+        /// Removes the address with the specified identifier from the address book.
         /// </summary>
-        /// <param name="bvin"></param>
-        /// <returns></returns>
+        /// <param name="bvin">The address identifier to remove.</param>
+        /// <returns><see langword="true"/> when an address was removed; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>This changes only the in-memory address book. It does not persist the customer.</remarks>
         public bool DeleteAddress(string bvin)
         {
             var result = false;
@@ -275,10 +290,11 @@ namespace Hotcakes.Commerce.Membership
         }
 
         /// <summary>
-        ///     Updates the customer record with the given address
+        /// Replaces an address-book entry with the supplied address when their identifiers match.
         /// </summary>
-        /// <param name="a">The new address you want the customer to have</param>
-        /// <returns>Boolean - if true, the update was successful</returns>
+        /// <param name="a">The replacement address; its <see cref="Address.Bvin"/> identifies the entry.</param>
+        /// <returns><see langword="true"/> when an entry was replaced; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>This changes only the in-memory address book. It does not persist the customer.</remarks>
         public bool UpdateAddress(Address a)
         {
             var result = false;
@@ -303,9 +319,10 @@ namespace Hotcakes.Commerce.Membership
 
         //DTO
         /// <summary>
-        ///     Allows you to convert the current customer account object to the DTO equivalent for use with the REST API
+        /// Converts this account to the REST API <see cref="CustomerAccountDTO"/> representation.
         /// </summary>
-        /// <returns>A new instance of CustomerAccountDTO</returns>
+        /// <returns>A new DTO containing the account fields exposed by the REST API.</returns>
+        /// <remarks><see cref="StoreId"/>, <see cref="Username"/>, <see cref="LastUsedCulture"/>, <see cref="Phones"/>, <see cref="TaxExemptionNumber"/>, and <see cref="Locked"/> are not copied because they are not represented by <see cref="CustomerAccountDTO"/>. Address entries are converted individually.</remarks>
         public CustomerAccountDTO ToDto()
         {
             var dto = new CustomerAccountDTO();
@@ -337,9 +354,10 @@ namespace Hotcakes.Commerce.Membership
         }
 
         /// <summary>
-        ///     Allows you to populate the current customer account object using a CustomerAccount instance
+        /// Populates this account from a REST API <see cref="CustomerAccountDTO"/>.
         /// </summary>
-        /// <param name="dto">An instance of the customer account from the REST API</param>
+        /// <param name="dto">The DTO whose exposed values are copied into this account.</param>
+        /// <remarks><see cref="StoreId"/>, <see cref="Username"/>, <see cref="LastUsedCulture"/>, <see cref="Phones"/>, <see cref="TaxExemptionNumber"/>, and <see cref="Locked"/> are not changed because the DTO does not contain them. Address DTOs are appended to the existing address book; they are not used to clear it.</remarks>
         public void FromDto(CustomerAccountDTO dto)
         {
             Bvin = dto.Bvin;

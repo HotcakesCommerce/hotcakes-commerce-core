@@ -37,6 +37,9 @@ namespace Hotcakes.CommerceDTO.v1.Taxes
     [Serializable]
     public class TaxScheduleDTO
     {
+        /// <summary>
+        /// Initializes a tax schedule with an empty name and zero-valued identifiers and rates.
+        /// </summary>
         public TaxScheduleDTO()
         {
             Id = 0;
@@ -47,32 +50,40 @@ namespace Hotcakes.CommerceDTO.v1.Taxes
         }
 
         /// <summary>
-        ///     The unique identifier or primary key of the tax schedule object
+        /// Gets or sets the unique identifier of the tax schedule.
         /// </summary>
+        /// <value>The tax schedule identifier.</value>
         [DataMember]
         public long Id { get; set; }
 
         /// <summary>
-        ///     The date/time stamp that the referral was made, used for auditing purposes only.
+        /// Gets or sets the identifier of the store that owns the tax schedule.
         /// </summary>
+        /// <value>The Hotcakes store identifier.</value>
         [DataMember]
         public long StoreId { get; set; }
 
         /// <summary>
-        ///     The name of the tax schedule. This will be seen in the administration areas.
+        /// Gets or sets the name of the tax schedule.
         /// </summary>
+        /// <remarks>The name is displayed in administration areas.</remarks>
+        /// <value>The tax schedule name.</value>
         [DataMember]
         public string Name { get; set; }
 
         /// <summary>
-        ///     This is used only for VAT implementations to help calculate the correct taxes per VAT rules.
+        /// Gets or sets the default tax rate used by VAT implementations.
         /// </summary>
+        /// <remarks>This value helps calculate taxes according to applicable VAT rules.</remarks>
+        /// <value>The default decimal tax rate.</value>
         [DataMember]
         public decimal DefaultRate { get; set; }
 
         /// <summary>
-        ///     This is used only for VAT implementations to help calculate the correct taxes for shipping per VAT rules.
+        /// Gets or sets the default shipping tax rate used by VAT implementations.
         /// </summary>
+        /// <remarks>This value helps calculate shipping taxes according to applicable VAT rules.</remarks>
+        /// <value>The default decimal shipping tax rate.</value>
         [DataMember]
         public decimal DefaultShippingRate { get; set; }
     }

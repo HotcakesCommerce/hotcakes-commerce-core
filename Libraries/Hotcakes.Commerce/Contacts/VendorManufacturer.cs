@@ -38,6 +38,10 @@ namespace Hotcakes.Commerce.Contacts
     [Serializable]
     public class VendorManufacturer : IReplaceable
     {
+        /// <summary>
+        /// Initializes a vendor or manufacturer with empty text values, a new <see cref="Address"/>, an unknown contact type,
+        /// and a UTC audit timestamp.
+        /// </summary>
         public VendorManufacturer()
         {
             Bvin = string.Empty;
@@ -50,50 +54,39 @@ namespace Hotcakes.Commerce.Contacts
         }
 
         /// <summary>
-        ///     An address object matching the vendor/manufacturer.
+        /// Gets or sets the postal address associated with the vendor or manufacturer.
         /// </summary>
+        /// <remarks>The repositories persist this value as the address XML column.</remarks>
         public Address Address { get; set; }
 
-        /// <summary>
-        ///     This is the ID of the vendor/manufacturer.
-        /// </summary>
+        /// <summary>Gets or sets the stable Hotcakes identifier for the contact.</summary>
+        /// <remarks>The repository maps this value to the database GUID representation.</remarks>
         public string Bvin { get; set; }
 
-        /// <summary>
-        ///     Specifies whether this instance of the object contains contacts for a vendor or a manufacturer.
-        /// </summary>
+        /// <summary>Gets or sets whether this contact represents a vendor or manufacturer.</summary>
+        /// <remarks><see cref="VendorRepository"/> and <see cref="ManufacturerRepository"/> force this value when loading records.</remarks>
         public VendorManufacturerType ContactType { get; set; }
 
-        /// <summary>
-        ///     The value used in all administrative and customer views to identify the vendor/manufacturer.
-        /// </summary>
+        /// <summary>Gets or sets the display name used to identify the contact in administrative and customer views.</summary>
         public string DisplayName { get; set; }
 
-        /// <summary>
-        ///     The e-mail template ID used when workflow sends a notification e-mail about a drop shipment.
-        /// </summary>
+        /// <summary>Gets or sets the e-mail template identifier used for drop-shipment notifications.</summary>
         public string DropShipEmailTemplateId { get; set; }
 
-        /// <summary>
-        ///     The primary e-mail address used to contact the vendor/manufacturer. This is used for system e-mails for actions such as drop-shipping.
-        /// </summary>
+        /// <summary>Gets or sets the primary e-mail address used for system notifications such as drop-shipping.</summary>
         public string EmailAddress { get; set; }
 
-        /// <summary>
-        ///     An auditing value to track the last time the vendor/manufacturer record was updated.
-        /// </summary>
+        /// <summary>Gets or sets the UTC timestamp used to audit the last update to the contact.</summary>
         public DateTime LastUpdated { get; set; }
 
-        /// <summary>
-        ///     This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
-        /// </summary>
+        /// <summary>Gets or sets the Hotcakes store that owns this contact.</summary>
+        /// <remarks>Repository operations use the current store context to enforce store scope.</remarks>
         public long StoreId { get; set; }
 
-        /// <summary>
-        ///     Returns a listing of tokens and their replacement used by email templates.
-        /// </summary>
-        /// <param name="context">A populated instance of the Hotcakes Request context</param>
-        /// <returns>List - a key value pairing of tokens and their replacement content.</returns>
+        /// <summary>Returns the replacement tokens exposed to e-mail templates for this contact.</summary>
+        /// <param name="context">The populated Hotcakes request context for the template operation.</param>
+        /// <returns>A list containing the e-mail address and display-name token replacements.</returns>
+        /// <remarks>The current implementation does not read the context; it is accepted to satisfy <see cref="IReplaceable"/>.</remarks>
         public List<HtmlTemplateTag> GetReplaceableTags(HccRequestContext context)
         {
             var result = new List<HtmlTemplateTag>();
@@ -104,10 +97,9 @@ namespace Hotcakes.Commerce.Contacts
 
         #region DTO
 
-        /// <summary>
-        ///     Allows you to convert the current vendor/manufacturer object to the DTO equivalent for use with the REST API
-        /// </summary>
-        /// <returns>A new instance of VendorManufacturerDTO</returns>
+        /// <summary>Creates the REST API representation of this vendor or manufacturer.</summary>
+        /// <returns>A new <see cref="VendorManufacturerDTO"/> containing the current values.</returns>
+        /// <remarks>The contact type is converted by numeric value to preserve DTO compatibility.</remarks>
         public VendorManufacturerDTO ToDto()
         {
             var dto = new VendorManufacturerDTO();
@@ -123,10 +115,9 @@ namespace Hotcakes.Commerce.Contacts
             return dto;
         }
 
-        /// <summary>
-        ///     Allows you to populate the current vendor/manufacturer object using an VendorManufacturerDTO instance
-        /// </summary>
-        /// <param name="dto">An instance of the vendor/manufacturer from the REST API</param>
+        /// <summary>Populates this contact from a REST API data-transfer object.</summary>
+        /// <param name="dto">The source <see cref="VendorManufacturerDTO"/>; null leaves this instance unchanged.</param>
+        /// <remarks>The address is populated through its existing DTO conversion and the contact type is converted by numeric value.</remarks>
         public void FromDto(VendorManufacturerDTO dto)
         {
             if (dto == null) return;

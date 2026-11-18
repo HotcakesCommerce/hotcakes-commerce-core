@@ -28,9 +28,19 @@ using System;
 
 namespace Hotcakes.Web.Cryptography
 {
+    /// <summary>
+    /// Provides helpers for converting text and byte arrays to and from Base64.
+    /// </summary>
     [Serializable]
     public sealed class Base64
     {
+        /// <summary>
+        /// Converts a UTF-8 string to a Base64 string.
+        /// </summary>
+        /// <param name="input">The string to convert.</param>
+        /// <returns>The UTF-8 bytes of <paramref name="input"/> encoded as Base64.</returns>
+        /// <see cref="ConvertToBase64(byte[])"/>
+        /// <see cref="Conversion.StringToBytes(string)"/>
         public static string ConvertStringToBase64(string input)
         {
             var data = Conversion.StringToBytes(input);
@@ -38,6 +48,13 @@ namespace Hotcakes.Web.Cryptography
             return output;
         }
 
+        /// <summary>
+        /// Converts a Base64 string to a UTF-8 string.
+        /// </summary>
+        /// <param name="input">The Base64 string to convert.</param>
+        /// <returns>The decoded bytes interpreted as a UTF-8 string.</returns>
+        /// <see cref="ConvertFromBase64(string)"/>
+        /// <see cref="Conversion.BytesToString(byte[])"/>
         public static string ConvertStringFromBase64(string input)
         {
             var data = ConvertFromBase64(input);
@@ -45,6 +62,12 @@ namespace Hotcakes.Web.Cryptography
             return output;
         }
 
+        /// <summary>
+        /// Encodes a byte array as a Base64 string.
+        /// </summary>
+        /// <param name="input">The bytes to encode.</param>
+        /// <returns>The Base64 representation of <paramref name="input"/>.</returns>
+        /// <see cref="ConvertFromBase64(string)"/>
         public static string ConvertToBase64(byte[] input)
         {
             var output = string.Empty;
@@ -52,6 +75,13 @@ namespace Hotcakes.Web.Cryptography
             return output;
         }
 
+        /// <summary>
+        /// Decodes a Base64 string into a byte array.
+        /// </summary>
+        /// <param name="input">The Base64 string to decode.</param>
+        /// <returns>The decoded bytes.</returns>
+        /// <exception cref="FormatException">The input is not a valid Base64 string.</exception>
+        /// <see cref="ConvertToBase64(byte[])"/>
         public static byte[] ConvertFromBase64(string input)
         {
             var output = Convert.FromBase64String(input);

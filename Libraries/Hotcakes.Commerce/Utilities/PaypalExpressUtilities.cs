@@ -31,8 +31,18 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Creates PayPal REST API clients configured for a store.
+    /// </summary>
     public class PaypalExpressUtilities
     {
+        /// <summary>
+        /// Creates a PayPal REST API client from the store's configured credentials and mode.
+        /// </summary>
+        /// <param name="currentStore">The store whose PayPal client identifier, secret, and mode are used.</param>
+        /// <returns>A configured <see cref="RestPayPalApi"/> instance.</returns>
+        /// <remarks>The returned client contains the configured credentials and can perform network operations when
+        /// its API methods are called.</remarks>
         public static RestPayPalApi GetRestPaypalAPI(Store currentStore)
         {
             return new RestPayPalApi(currentStore.Settings.PayPal.ClienId,

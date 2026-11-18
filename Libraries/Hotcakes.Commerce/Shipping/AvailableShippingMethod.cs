@@ -26,17 +26,26 @@
 
 namespace Hotcakes.Commerce.Shipping
 {
+    /// <summary>
+    /// Describes a shipping method offered by a provider, including its display label and provider code.
+    /// </summary>
     public class AvailableShippingMethod
     {
         private string _DisplayName = string.Empty;
         private string _ServiceCode = string.Empty;
 
+        /// <summary>
+        /// Gets or sets the customer-facing name of the shipping method.
+        /// </summary>
         public string DisplayName
         {
             get { return _DisplayName; }
             set { _DisplayName = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the provider-specific code used to select the shipping method.
+        /// </summary>
         public string ServiceCode
         {
             get { return _ServiceCode; }

@@ -26,11 +26,16 @@
 
 namespace Hotcakes.Commerce.Reporting
 {
+    /// <summary>Selects the measure used to rank the top customers report.</summary>
     public enum Top5CustomerMode
     {
+        /// <summary>Ranks customers by purchase amount.</summary>
         Amount = 1,
+        /// <summary>Ranks customers by order frequency.</summary>
         Frequency = 2,
+        /// <summary>Ranks customers by activity.</summary>
         Activity = 3,
+        /// <summary>Ranks customers by abandoned activity.</summary>
         Abandoned = 4
     }
 }

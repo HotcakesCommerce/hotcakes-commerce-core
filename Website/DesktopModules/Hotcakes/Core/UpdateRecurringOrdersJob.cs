@@ -34,13 +34,23 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Modules.Core
 {
+    /// <summary>
+    /// Scheduled task that refreshes the shipping status of recurring orders.
+    /// </summary>
     public class UpdateRecurringOrdersJob : SchedulerClient
     {
+        /// <summary>
+        /// Initializes the scheduled task with its DNN schedule history entry.
+        /// </summary>
+        /// <param name="item">The schedule history entry used to report task progress and status.</param>
         public UpdateRecurringOrdersJob(ScheduleHistoryItem item)
         {
             ScheduleHistoryItem = item;
         }
 
+        /// <summary>
+        /// Processes recurring orders for every store.
+        /// </summary>
         public override void DoWork()
         {
             try

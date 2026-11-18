@@ -26,11 +26,26 @@
 
 namespace Hotcakes.Commerce.Taxes
 {
+    /// <summary>
+    /// Exposes the tax-schedule values consumed by tax providers.
+    /// </summary>
+    /// <remarks>The method names are compatibility-sensitive and intentionally use the existing <c>TaxSchedule</c> prefix.</remarks>
     public interface ITaxSchedule
     {
+        /// <summary>Gets the schedule identifier.</summary>
+        /// <returns>The unique identifier of the tax schedule.</returns>
         long TaxScheduleId();
+
+        /// <summary>Gets the schedule display name.</summary>
+        /// <returns>The name of the tax schedule.</returns>
         string TaxScheduleName();
+
+        /// <summary>Gets the default item tax rate used by applicable VAT integrations.</summary>
+        /// <returns>The rate expressed as a percentage, not as a fraction; consumers that calculate a fraction divide it by 100.</returns>
         decimal TaxScheduleDefaultRate();
+
+        /// <summary>Gets the default shipping tax rate used by applicable VAT integrations.</summary>
+        /// <returns>The rate expressed as a percentage, not as a fraction; consumers that calculate a fraction divide it by 100.</returns>
         decimal TaxScheduleDefaultShippingRate();
     }
 }

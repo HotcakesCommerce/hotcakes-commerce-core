@@ -33,14 +33,32 @@ using System.Linq;
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
 
+	/// <summary>
+	/// Processes outstanding PayPal Express payment information transactions for the order.
+	/// </summary>
+	/// <remarks>
+	/// The task identifier is <c>37e0b27e-567f-4ee3-95ec-c7e5a66bfb26</c>. Existing successful holds or charges are
+	/// skipped, and processing stops when the authorized amount due is covered. Store settings select a hold or charge.
+	/// Failures add the customer-visible PayPal payment error and set the order on hold. Rollback does not reverse the
+	/// gateway operation.
+	/// </remarks>
 	public class ReceivePaypalExpressPayments : OrderTask
 	{
 
+		/// <summary>
+		/// Creates a new PayPal Express payment task.
+		/// </summary>
+		/// <returns>A new <see cref="ReceivePaypalExpressPayments"/> instance.</returns>
 		public override Task Clone()
 		{
 			return new ReceivePaypalExpressPayments();
 		}
 
+		/// <summary>
+		/// Processes PayPal Express transactions until the order's authorized amount due is covered.
+		/// </summary>
+		/// <param name="context">The <see cref="OrderTaskContext"/> containing the order and commerce services.</param>
+		/// <returns><see langword="false"/> when payment processing fails; otherwise <see langword="true"/>.</returns>
 		public override bool Execute(OrderTaskContext context)
 		{
 			bool result = true;
@@ -108,16 +126,29 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 			return result;
 		}
 
+		/// <summary>
+		/// Does not reverse PayPal holds or charges created during execution.
+		/// </summary>
+		/// <param name="context">The workflow context.</param>
+		/// <returns>Always <see langword="true"/>.</returns>
 		public override bool Rollback(OrderTaskContext context)
 		{
 			return true;
 		}
 
+		/// <summary>
+		/// Gets the stable task identifier used to register this task in workflows.
+		/// </summary>
+		/// <returns><c>37e0b27e-567f-4ee3-95ec-c7e5a66bfb26</c>.</returns>
 		public override string TaskId()
 		{
 			return "37e0b27e-567f-4ee3-95ec-c7e5a66bfb26";
 		}
 
+		/// <summary>
+		/// Gets the display name of this task.
+		/// </summary>
+		/// <returns><c>Receive Paypal Express Payments</c>.</returns>
 		public override string TaskName()
 		{
 			return "Receive Paypal Express Payments";

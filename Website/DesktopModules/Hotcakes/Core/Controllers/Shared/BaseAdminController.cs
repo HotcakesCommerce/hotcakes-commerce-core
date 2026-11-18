@@ -32,9 +32,11 @@ using Hotcakes.Modules.Core.AppCode;
 
 namespace Hotcakes.Modules.Core.Controllers.Shared
 {
+/// <summary>Provides shared initialization and access checks for administration controllers.</summary>
     [Serializable]
     public class BaseAdminController : BaseAppController
     {
+        /// <summary>Gets or sets the administration tab selected by the controller.</summary>
         public AdminTabType SelectedTab = AdminTabType.Dashboard;
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -53,6 +55,7 @@ namespace Hotcakes.Modules.Core.Controllers.Shared
             ViewData["HideAdminControlBar"] = 0;
         }
 
+        /// <summary>Redirects unauthenticated users to the configured login page.</summary>
         public void ValidatAccess()
         {
             if (!HccApp.MembershipServices.IsUserLoggedIn())

@@ -26,8 +26,15 @@
 
 namespace Hotcakes.Commerce.Configuration
 {
+    /// <summary>
+    /// Exposes application configuration used by commerce services.
+    /// </summary>
     public interface IConfigurationManager
     {
+        /// <summary>
+        /// Gets the SMTP configuration used for outgoing email.
+        /// </summary>
+        /// <value>The configured <see cref="SmtpSettings"/> instance.</value>
         SmtpSettings SmtpSettings { get; }
     }
 }

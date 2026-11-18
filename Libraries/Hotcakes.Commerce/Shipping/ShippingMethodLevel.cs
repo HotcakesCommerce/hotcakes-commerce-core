@@ -28,30 +28,38 @@ using System;
 
 namespace Hotcakes.Commerce.Shipping
 {
+    /// <summary>Represents one level in a shipping method schedule.</summary>
     public class ShippingMethodLevel
     {
         private string _Bvin = Guid.NewGuid().ToString();
 
+        /// <summary>Initializes a level with zero threshold and amount.</summary>
         public ShippingMethodLevel()
         {
             Amount = 0m;
             Level = 0m;
         }
 
+        /// <summary>Initializes a level with the specified threshold and amount.</summary>
+        /// <param name="levelValue">The threshold for this level.</param>
+        /// <param name="amountValue">The amount associated with this level.</param>
         public ShippingMethodLevel(decimal levelValue, decimal amountValue)
         {
             Level = levelValue;
             Amount = amountValue;
         }
 
+        /// <summary>Gets or sets the identifier of this level.</summary>
         public string Bvin
         {
             get { return _Bvin; }
             set { _Bvin = value; }
         }
 
+        /// <summary>Gets or sets the threshold at which this level applies.</summary>
         public decimal Level { get; set; }
 
+        /// <summary>Gets or sets the fixed shipping amount for this level.</summary>
         public decimal Amount { get; set; }
     }
 }

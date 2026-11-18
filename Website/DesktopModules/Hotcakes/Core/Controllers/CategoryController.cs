@@ -48,6 +48,7 @@ using Newtonsoft.Json;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Displays storefront category pages and their product drill-down results.</summary>
     [Serializable]
     public class CategoryController : BaseStoreController
     {
@@ -104,6 +105,12 @@ namespace Hotcakes.Modules.Core.Controllers
 
         #region Public methods
 
+        /// <summary>Displays a category page, including products, child categories, and SEO metadata.</summary>
+        /// <param name="slug">The category URL slug.</param>
+        /// <param name="productPageSize">The number of products to display per page.</param>
+        /// <param name="preContentColumnId">The optional content column before category content.</param>
+        /// <param name="postContentColumnId">The optional content column after category content.</param>
+        /// <returns>The selected category view.</returns>
         public ActionResult Index(string slug, int productPageSize = 9, string preContentColumnId = null,
             string postContentColumnId = null)
         {
@@ -160,6 +167,9 @@ namespace Hotcakes.Modules.Core.Controllers
             return View(viewName, model);
         }
 
+        /// <summary>Returns the filtered category drill-down model for an AJAX request.</summary>
+        /// <param name="filter">The category, paging, sorting, and facet filters.</param>
+        /// <returns>A JSON result containing the filtered category data.</returns>
         [HccHttpPost]
         public ActionResult DrillDown(CategoryFilterViewModel filter)
         {

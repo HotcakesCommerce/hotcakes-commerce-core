@@ -40,6 +40,9 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class BaseAdminPage.
+    /// </summary>
     [Serializable]
     public class BaseAdminPage : Page, IHccPage
     {
@@ -57,6 +60,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the resource key name.
+        /// </summary>
         public string ResourceKeyName
         {
             get { return "resourcekey"; }
@@ -64,6 +70,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
 
         private string _localResourceFile;
 
+        /// <summary>
+        /// Gets or sets the local resource file.
+        /// </summary>
         public virtual string LocalResourceFile
         {
             get
@@ -78,23 +87,38 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             set { _localResourceFile = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the localization.
+        /// </summary>
         public ILocalizationHelper Localization { get; set; }
 
         protected IMessageBox PageMessageBox { get; set; }
 
+        /// <summary>
+        /// Gets or sets the hcc app.
+        /// </summary>
         public HotcakesApplication HccApp
         {
             get { return HotcakesApplication.Current; }
         }
 
+        /// <summary>
+        /// Gets or sets the page title.
+        /// </summary>
         public string PageTitle
         {
             get { return Title; }
             set { Title = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the current tab.
+        /// </summary>
         public AdminTabType CurrentTab { get; set; }
 
+        /// <summary>
+        /// Gets or sets the force wizard redirect.
+        /// </summary>
         public virtual bool ForceWizardRedirect
         {
             get { return true; }

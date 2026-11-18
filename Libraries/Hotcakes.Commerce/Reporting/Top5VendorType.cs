@@ -26,9 +26,12 @@
 
 namespace Hotcakes.Commerce.Reporting
 {
+    /// <summary>Selects the entity type shown by the top-vendor report.</summary>
     public enum Top5VendorType
     {
+        /// <summary>Reports vendors.</summary>
         Vendors = 1,
+        /// <summary>Reports manufacturers.</summary>
         Manufacturers = 2
     }
 }

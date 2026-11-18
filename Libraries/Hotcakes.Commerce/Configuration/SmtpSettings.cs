@@ -26,13 +26,39 @@
 
 namespace Hotcakes.Commerce.Configuration
 {
+    /// <summary>
+    /// Represents the SMTP connection and authentication settings used for outgoing email.
+    /// </summary>
     public class SmtpSettings
     {
+        /// <summary>
+        /// Gets or sets the SMTP server host name or address.
+        /// </summary>
         public string Host { get; set; }
+
+        /// <summary>
+        /// Gets or sets the SMTP server port as configured by the application.
+        /// </summary>
         public string Port { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the SMTP connection uses SSL.
+        /// </summary>
         public bool EnableSsl { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether SMTP authentication is used.
+        /// </summary>
         public bool UseAuth { get; set; }
+
+        /// <summary>
+        /// Gets or sets the SMTP authentication user name.
+        /// </summary>
         public string Username { get; set; }
+
+        /// <summary>
+        /// Gets or sets the SMTP authentication password.
+        /// </summary>
         public string Password { get; set; }
     }
 }

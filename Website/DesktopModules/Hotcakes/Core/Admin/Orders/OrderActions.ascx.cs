@@ -30,12 +30,18 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Orders
 {
+    /// <summary>
+    /// Provides the order action controls used by the administrative order view.
+    /// </summary>
     public partial class OrderActions : HccUserControl
     {
+        /// <summary>Gets or sets the page used to display the current order.</summary>
         public string CurrentOrderPage { get; set; }
 
+        /// <summary>Gets or sets whether order actions are hidden.</summary>
         public bool HideActions { get; set; }
 
+        /// <summary>Gets whether multiple order templates are available.</summary>
         public bool AreMultipleTemplates
         {
             get

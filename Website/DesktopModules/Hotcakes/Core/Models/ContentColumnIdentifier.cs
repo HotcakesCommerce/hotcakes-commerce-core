@@ -29,16 +29,28 @@ using System;
 namespace Hotcakes.Modules.Core.Models
 {
     // TODO: Depreciate this class. It doesn't appear to be used anywhere.
+    /// <summary>
+    /// Represents the ContentColumnIdentifier storefront model.
+    /// </summary>
     [Serializable]
     public class ContentColumnIdentifier
     {
+        /// <summary>
+        /// Initializes a new instance of the ContentColumnIdentifier type.
+        /// </summary>
         public ContentColumnIdentifier()
         {
             Id = string.Empty;
             Name = string.Empty;
         }
 
+        /// <summary>
+        /// Gets or sets the Id value used by this storefront model.
+        /// </summary>
         public string Id { get; set; }
+        /// <summary>
+        /// Gets or sets the Name value used by this storefront model.
+        /// </summary>
         public string Name { get; set; }
     }
 }

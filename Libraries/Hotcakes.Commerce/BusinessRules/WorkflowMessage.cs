@@ -26,16 +26,23 @@
 
 namespace Hotcakes.Commerce.BusinessRules
 {
+    /// <summary>Represents a named message emitted by a workflow task.</summary>
+    /// <remarks><see cref="TaskContext.GetCustomerVisibleErrors"/> uses <see cref="CustomerVisible"/> to select messages shown to customers.</remarks>
     public class WorkflowMessage
     {
         private string _Description = string.Empty;
         private string _Name = string.Empty;
 
+        /// <summary>Initializes a message that is hidden from customers.</summary>
         public WorkflowMessage()
         {
             CustomerVisible = false;
         }
 
+        /// <summary>Initializes a workflow message with its name, description, and customer visibility.</summary>
+        /// <param name="messageName">The stable or display name of the message.</param>
+        /// <param name="messageDescription">The descriptive message text.</param>
+        /// <param name="showToCustomer"><c>true</c> to expose the message through customer-visible error filtering; otherwise, <c>false</c>.</param>
         public WorkflowMessage(string messageName, string messageDescription, bool showToCustomer)
         {
             CustomerVisible = showToCustomer;
@@ -43,14 +50,20 @@ namespace Hotcakes.Commerce.BusinessRules
             _Description = messageDescription;
         }
 
+        /// <summary>Gets or sets whether this message may be shown to the customer.</summary>
+        /// <value><c>true</c> when customer-facing code may include this message.</value>
         public bool CustomerVisible { get; set; }
 
+        /// <summary>Gets or sets the message name.</summary>
+        /// <value>The message name, or an empty string by default.</value>
         public string Name
         {
             get { return _Name; }
             set { _Name = value; }
         }
 
+        /// <summary>Gets or sets the descriptive message text.</summary>
+        /// <value>The description, or an empty string by default.</value>
         public string Description
         {
             get { return _Description; }

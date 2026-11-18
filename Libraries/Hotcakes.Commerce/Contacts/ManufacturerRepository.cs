@@ -34,13 +34,21 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>Provides store-scoped persistence for <see cref="VendorManufacturer"/> records representing manufacturers.</summary>
+    /// <remarks>Addresses are serialized to and from the manufacturer table's XML address column.</remarks>
     public class ManufacturerRepository : HccSimpleRepoBase<hcc_Manufacturer, VendorManufacturer>
     {
+        /// <summary>Initializes the repository with the request context used to resolve the current store.</summary>
+        /// <param name="c">The Hotcakes request context.</param>
         public ManufacturerRepository(HccRequestContext c)
             : base(c)
         {
         }
 
+        /// <summary>Copies a database manufacturer row into the domain model.</summary>
+        /// <param name="data">The database row.</param>
+        /// <param name="model">The destination domain model.</param>
+        /// <remarks>This mapping deserializes the address XML and forces <see cref="VendorManufacturerType.Manufacturer"/>.</remarks>
         protected override void CopyDataToModel(hcc_Manufacturer data, VendorManufacturer model)
         {
             model.Address.FromXmlString(data.Address);
@@ -53,6 +61,10 @@ namespace Hotcakes.Commerce.Contacts
             model.ContactType = VendorManufacturerType.Manufacturer;
         }
 
+        /// <summary>Copies a manufacturer domain model into its database row.</summary>
+        /// <param name="data">The destination database row.</param>
+        /// <param name="model">The source domain model.</param>
+        /// <remarks>This mapping serializes the address to XML; the manufacturer table determines the contact type.</remarks>
         protected override void CopyModelToData(hcc_Manufacturer data, VendorManufacturer model)
         {
             data.Address = model.Address.ToXml(true);
@@ -64,6 +76,9 @@ namespace Hotcakes.Commerce.Contacts
             data.StoreId = model.StoreId;
         }
 
+        /// <summary>Finds a manufacturer by identifier only when it belongs to the current store.</summary>
+        /// <param name="bvin">The manufacturer identifier.</param>
+        /// <returns>The matching manufacturer, or <see langword="null"/> when absent or owned by another store.</returns>
         public VendorManufacturer Find(string bvin)
         {
             var result = FindForAllStores(bvin);
@@ -77,12 +92,20 @@ namespace Hotcakes.Commerce.Contacts
             return null;
         }
 
+        /// <summary>Finds a manufacturer by identifier without applying current-store filtering.</summary>
+        /// <param name="bvin">The manufacturer identifier.</param>
+        /// <returns>The matching manufacturer, or <see langword="null"/> when no row matches.</returns>
+        /// <remarks>Use <see cref="Find(string)"/> when enforcing current-store ownership is required.</remarks>
         public VendorManufacturer FindForAllStores(string bvin)
         {
             var guid = DataTypeHelper.BvinToGuid(bvin);
             return FindFirstPoco(y => y.bvin == guid);
         }
 
+        /// <summary>Creates a manufacturer in the current store.</summary>
+        /// <param name="item">The manufacturer to persist.</param>
+        /// <returns><see langword="true"/> when the base repository creates the record.</returns>
+        /// <remarks>An empty identifier is generated, the update timestamp is refreshed, and store ownership is assigned from the current context.</remarks>
         public override bool Create(VendorManufacturer item)
         {
             if (item.Bvin == string.Empty)
@@ -92,6 +115,9 @@ namespace Hotcakes.Commerce.Contacts
             return base.Create(item);
         }
 
+        /// <summary>Updates a manufacturer only when its store matches the current store.</summary>
+        /// <param name="c">The manufacturer to update.</param>
+        /// <returns><see langword="false"/> for a different store; otherwise the base update result.</returns>
         public bool Update(VendorManufacturer c)
         {
             if (c.StoreId != Context.CurrentStore.Id)
@@ -103,12 +129,18 @@ namespace Hotcakes.Commerce.Contacts
             return Update(c, y => y.bvin == guid);
         }
 
+        /// <summary>Deletes the manufacturer row identified by the supplied identifier.</summary>
+        /// <param name="bvin">The manufacturer identifier.</param>
+        /// <returns>The repository delete result.</returns>
+        /// <remarks>The implementation delegates directly to the base predicate and does not add a separate store check.</remarks>
         public bool Delete(string bvin)
         {
             var guid = DataTypeHelper.BvinToGuid(bvin);
             return Delete(y => y.bvin == guid);
         }
 
+        /// <summary>Returns all manufacturers for the current store, ordered by display name.</summary>
+        /// <returns>The current store's manufacturers.</returns>
         public List<VendorManufacturer> FindAll()
         {
             return
@@ -116,6 +148,12 @@ namespace Hotcakes.Commerce.Contacts
                     q => { return q.Where(y => y.StoreId == Context.CurrentStore.Id).OrderBy(y => y.DisplayName); });
         }
 
+        /// <summary>Returns a page of current-store manufacturers matching display name or e-mail address.</summary>
+        /// <param name="filter">The substring to search for in display name or e-mail address.</param>
+        /// <param name="pageNumber">The requested page number.</param>
+        /// <param name="pageSize">The maximum number of records in the page.</param>
+        /// <param name="rowCount">Receives the total matching row count before paging.</param>
+        /// <returns>The requested page, ordered by display name.</returns>
         public List<VendorManufacturer> FindAllWithFilter(string filter, int pageNumber, int pageSize, ref int rowCount)
         {
             using (var s = CreateReadStrategy())

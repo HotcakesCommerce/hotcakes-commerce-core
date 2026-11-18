@@ -37,6 +37,9 @@ namespace Hotcakes.CommerceDTO.v1.Orders
     [Serializable]
     public class OrderNoteDTO
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderNoteDTO"/> class with default note values.
+        /// </summary>
         public OrderNoteDTO()
         {
             Id = 0;

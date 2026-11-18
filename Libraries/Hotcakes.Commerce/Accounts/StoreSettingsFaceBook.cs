@@ -28,28 +28,38 @@ using System;
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Provides the store's Facebook settings façade.</summary>
+    /// <remarks>The class name and setting spellings retain their historical <c>FaceBook</c> compatibility form. Values are store-scoped and staged through <see cref="StoreSettings"/> until saved.</remarks>
     [Serializable]
     public class StoreSettingsFaceBook
     {
         private readonly StoreSettings parent;
 
+        /// <summary>Initializes a new Facebook settings façade.</summary>
+        /// <param name="s">The owning store settings façade.</param>
         public StoreSettingsFaceBook(StoreSettings s)
         {
             parent = s;
         }
 
+        /// <summary>Gets or sets whether Facebook integration is enabled.</summary>
+        /// <value>The <c>UseFaceBook</c> setting; the compatibility default is <see langword="true"/>.</value>
         public bool UseFaceBook
         {
             get { return parent.GetPropBoolWithDefault("UseFaceBook", true); }
             set { parent.SetProp("UseFaceBook", value); }
         }
 
+        /// <summary>Gets or sets the Facebook application identifier.</summary>
+        /// <value>The <c>FaceBookAppId</c> setting.</value>
         public string AppId
         {
             get { return parent.GetProp("FaceBookAppId"); }
             set { parent.SetProp("FaceBookAppId", value); }
         }
 
+        /// <summary>Gets or sets the Facebook administrator identifiers.</summary>
+        /// <value>The <c>FaceBookAdmins</c> setting.</value>
         public string Admins
         {
             get { return parent.GetProp("FaceBookAdmins"); }

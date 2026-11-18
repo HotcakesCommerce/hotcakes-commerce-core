@@ -37,6 +37,9 @@ namespace Hotcakes.CommerceDTO.v1.Marketing
     [Serializable]
     public class DiscountDetailDTO
     {
+        /// <summary>
+        /// Initializes a discount detail with empty descriptive data and zero-valued numeric fields.
+        /// </summary>
         public DiscountDetailDTO()
         {
             Id = new Guid();
@@ -46,26 +49,30 @@ namespace Hotcakes.CommerceDTO.v1.Marketing
         }
 
         /// <summary>
-        ///     Unique ID or primary key of the discount.
+        /// Gets or sets the unique identifier of the discount detail.
         /// </summary>
+        /// <value>The identifier used to distinguish this discount detail.</value>
         [DataMember]
         public Guid Id { get; set; }
 
         /// <summary>
-        ///     Description of what the discount is.
+        /// Gets or sets the human-readable description of the discount.
         /// </summary>
+        /// <value>The discount description, or an empty string when no description is supplied.</value>
         [DataMember]
         public string Description { get; set; }
 
         /// <summary>
-        ///     The amount of the discount to be applied to the qualifying order/line item(s).
+        /// Gets or sets the amount of the discount applied to qualifying orders or line items.
         /// </summary>
+        /// <value>The discount amount represented by this detail.</value>
         [DataMember]
         public decimal Amount { get; set; }
 
         /// <summary>
-        ///     Indicates the type of discount that this is.
+        /// Gets or sets the numeric value identifying the type of discount.
         /// </summary>
+        /// <value>The serialized discount type value.</value>
         [DataMember]
         public int DiscountType { get; set; }
     }

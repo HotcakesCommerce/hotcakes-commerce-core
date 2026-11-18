@@ -28,11 +28,17 @@ using System.Runtime.Serialization;
 
 namespace Hotcakes.CommerceDTO.v1.Contacts
 {
+    /// <summary>
+    ///     Identifies whether a <see cref="VendorManufacturerDTO"/> represents a vendor or manufacturer.
+    /// </summary>
     [DataContract]
     public enum VendorManufacturerTypeDTO
     {
+        /// <summary>Contact type is not known.</summary>
         [EnumMember] Unknown = -1,
+        /// <summary>Contact represents a vendor.</summary>
         [EnumMember] Vendor = 0,
+        /// <summary>Contact represents a manufacturer.</summary>
         [EnumMember] Manufacturer = 1
     }
 }

@@ -26,9 +26,19 @@
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>
+    /// Identifies the business purpose of an <see cref="Address"/>.
+    /// </summary>
     public enum AddressTypes
     {
+        /// <summary>
+        /// A general-purpose address.
+        /// </summary>
         General = 0,
+
+        /// <summary>
+        /// The store's contact address. The numeric value is persisted for compatibility.
+        /// </summary>
         StoreContact = 99
     }
 }

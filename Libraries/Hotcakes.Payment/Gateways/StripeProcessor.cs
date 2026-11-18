@@ -31,26 +31,44 @@ using Stripe;
 
 namespace Hotcakes.Payment.Gateways
 {
+    /// <summary>
+    /// Processes Stripe credit-card payments using the Charges and Payment Intents APIs.
+    /// </summary>
     [Serializable]
     public class StripeProcessor : PaymentGateway
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StripeProcessor"/> class.
+        /// </summary>
         public StripeProcessor()
         {
             Settings = new StripeSettings();
         }
 
+        /// <summary>
+        /// Gets the display name of this payment gateway.
+        /// </summary>
         public override string Name
         {
             get { return "Stripe"; }
         }
 
+        /// <summary>
+        /// Gets the stable identifier of this payment gateway.
+        /// </summary>
         public override string Id
         {
             get { return "15011DF5-13DA-42BE-9DFF-31C71ED64D4A"; }
         }
 
+        /// <summary>
+        /// Gets or sets the Stripe-specific gateway settings.
+        /// </summary>
         public StripeSettings Settings { get; set; }
 
+        /// <summary>
+        /// Gets the settings exposed through the base payment gateway contract.
+        /// </summary>
         public override MethodSettings BaseSettings
         {
             get { return Settings; }
@@ -318,10 +336,10 @@ namespace Hotcakes.Payment.Gateways
         }
 
         /// <summary>
-        /// Create a PaymentIntent
+        /// Creates a Stripe <see cref="PaymentIntent"/> configured for manual capture.
         /// </summary>
-        /// <param name="request">The payment intent request item</param>
-        /// <returns></returns>
+        /// <param name="request">The payment intent request item containing the total amount.</param>
+        /// <returns>The newly created <see cref="PaymentIntent"/>.</returns>
         public PaymentIntent CreatePaymentIntent(PaymentIntentRequestItem request)
         {
             StripeConfiguration.ApiKey = Settings.StripeApiKey;
@@ -338,10 +356,10 @@ namespace Hotcakes.Payment.Gateways
         }
 
         /// <summary>
-        /// Get a PaymentIntent by Id
+        /// Retrieves a Stripe <see cref="PaymentIntent"/> by identifier.
         /// </summary>
-        /// <param name="id">The PaymentIntent Id</param>
-        /// <returns>Return the PaymentIntent object</returns>
+        /// <param name="id">The PaymentIntent identifier.</param>
+        /// <returns>The retrieved <see cref="PaymentIntent"/>.</returns>
         public PaymentIntent RetrievePaymentIntent(string id)
         {
             StripeConfiguration.ApiKey = Settings.StripeApiKey;
@@ -351,13 +369,13 @@ namespace Hotcakes.Payment.Gateways
         }
 
         /// <summary>
-        /// Create a payment method using the PaymentIntent API
+        /// Creates a Stripe <see cref="PaymentMethod"/> for a card payment.
         /// </summary>
-        /// <param name="cardNumber"></param>
-        /// <param name="cvc"></param>
-        /// <param name="expMonth"></param>
-        /// <param name="expYear"></param>
-        /// <returns>The payment method object</returns>
+        /// <param name="cardNumber">The card number.</param>
+        /// <param name="cvc">The card security code.</param>
+        /// <param name="expMonth">The card expiration month.</param>
+        /// <param name="expYear">The card expiration year.</param>
+        /// <returns>The newly created <see cref="PaymentMethod"/>.</returns>
         public PaymentMethod CreatePaymentMethod(string cardNumber, string cvc, int expMonth, int expYear)
         {
             StripeConfiguration.ApiKey = Settings.StripeApiKey;
@@ -378,11 +396,11 @@ namespace Hotcakes.Payment.Gateways
         }
 
         /// <summary>
-        /// Attach a PaymentMethod to a PaymentIntent
+        /// Attaches a <see cref="PaymentMethod"/> to a <see cref="PaymentIntent"/> and confirms the intent.
         /// </summary>
-        /// <param name="paymentMethodId">The Payment Method Id</param>
-        /// <param name="paymentIntentId">The Payment Intent Id</param>
-        /// <returns>The updated PaymentIntent object</returns>
+        /// <param name="paymentMethodId">The PaymentMethod identifier.</param>
+        /// <param name="paymentIntentId">The PaymentIntent identifier.</param>
+        /// <returns>The confirmed <see cref="PaymentIntent"/>.</returns>
         public PaymentIntent AttachPaymentMethod(string paymentMethodId, string paymentIntentId)
         {
             StripeConfiguration.ApiKey = Settings.StripeApiKey;
@@ -397,11 +415,22 @@ namespace Hotcakes.Payment.Gateways
             return result;
         }
 
+        /// <summary>
+        /// Represents the amount used to create a Stripe <see cref="PaymentIntent"/>.
+        /// </summary>
         public class PaymentIntentRequestItem
         {
+            /// <summary>
+            /// Gets or sets the total amount of the payment.
+            /// </summary>
             public decimal TotalAmount { get; set; }
         }
 
+        /// <summary>
+        /// Determines whether an identifier belongs to a Stripe <see cref="PaymentIntent"/>.
+        /// </summary>
+        /// <param name="id">The identifier to inspect.</param>
+        /// <returns><see langword="true"/> when the identifier has the PaymentIntent prefix; otherwise, <see langword="false"/>.</returns>
         public bool IsPaymentIntent(string id)
         {
             return id.Substring(0, 2).Equals("pi");
@@ -409,6 +438,10 @@ namespace Hotcakes.Payment.Gateways
 
 
 
+        /// <summary>
+        /// Processes a transaction using the Stripe API operation corresponding to its action.
+        /// </summary>
+        /// <param name="t">The transaction to process.</param>
         public override void ProcessTransaction(Transaction t)
         {
             try
@@ -449,21 +482,51 @@ namespace Hotcakes.Payment.Gateways
     }
 
     #region Constants
+    /// <summary>
+    /// Provides Stripe PaymentIntent status values used by the gateway.
+    /// </summary>
     public static class PaymentIntentStatus
     {
+        /// <summary>
+        /// Gets the status indicating that a PaymentIntent succeeded.
+        /// </summary>
         public const string Succeded = "succeded";
+
+        /// <summary>
+        /// Gets the status indicating that a PaymentIntent was canceled.
+        /// </summary>
         public const string Canceled = "canceled";
+
+        /// <summary>
+        /// Gets the status indicating that a PaymentIntent requires capture.
+        /// </summary>
         public const string RequiresCapture = "requires_capture";
+
+        /// <summary>
+        /// Gets the status indicating that a PaymentIntent requires a payment method.
+        /// </summary>
         public const string RequiresPaymentMethod = "requires_payment_method";
     }
 
+    /// <summary>
+    /// Provides Stripe payment method type values used by the gateway.
+    /// </summary>
     public static class PaymentMethodType
     {
+        /// <summary>
+        /// Gets the payment method type for a card.
+        /// </summary>
         public const string Card = "card";
     }
 
+    /// <summary>
+    /// Provides Stripe capture method values used by the gateway.
+    /// </summary>
     public static class CaptureMethod
     {
+        /// <summary>
+        /// Gets the capture method that authorizes a payment for later capture.
+        /// </summary>
         public const string Manual = "manual";
     }
 

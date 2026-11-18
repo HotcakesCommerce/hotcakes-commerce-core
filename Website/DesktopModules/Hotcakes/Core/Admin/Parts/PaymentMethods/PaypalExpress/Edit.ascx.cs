@@ -32,6 +32,9 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.PaypalExpress
 {
     partial class Edit : HccPaymentMethodPart
     {
+        /// <summary>
+        /// Performs the administrative operation represented by LoadData.
+        /// </summary>
         public override void LoadData()
         {
             if (ddlCurrency.Items.Count == 0)
@@ -58,6 +61,9 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.PaypalExpress
             ddlCurrency.SelectedValue = HccApp.CurrentStore.Settings.PayPal.Currency;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by SaveData.
+        /// </summary>
         public override void SaveData()
         {
             HccApp.CurrentStore.Settings.PayPal.Mode = lstMode.SelectedValue;

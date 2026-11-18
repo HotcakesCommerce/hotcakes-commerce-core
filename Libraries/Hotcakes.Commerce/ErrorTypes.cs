@@ -26,10 +26,22 @@
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>
+    /// Resource-oriented error classification used by commerce APIs.
+    /// </summary>
     public enum ErrorTypes
     {
+        /// <summary>
+        /// Compatibility value <c>Generic</c> in this public enumeration.
+        /// </summary>
         Generic = 0,
+        /// <summary>
+        /// Compatibility value <c>Product</c> in this public enumeration.
+        /// </summary>
         Product = 1,
+        /// <summary>
+        /// Compatibility value <c>Category</c> in this public enumeration.
+        /// </summary>
         Category = 2
     }
 }

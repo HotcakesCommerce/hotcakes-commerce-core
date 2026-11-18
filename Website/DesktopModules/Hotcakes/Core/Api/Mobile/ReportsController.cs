@@ -36,9 +36,16 @@ using Hotcakes.Modules.Core.Api.Mobile.Models;
 
 namespace Hotcakes.Modules.Core.Api.Mobile
 {
+    /// <summary>
+    /// Provides summary reporting endpoints for the mobile API.
+    /// </summary>
     [Serializable]
     public class ReportsController : HccApiController
     {
+        /// <summary>
+        /// Gets summary counts and sales series for the standard day, week, month, and year periods.
+        /// </summary>
+        /// <returns>A <see cref="ReportSummary"/> containing store-wide summary information.</returns>
         [HttpGet]
         [MobileAuthorize]
         public ReportSummary Summary()
@@ -59,6 +66,11 @@ namespace Hotcakes.Modules.Core.Api.Mobile
             };
         }
 
+        /// <summary>
+        /// Gets summary counts and a sales series for one requested period.
+        /// </summary>
+        /// <param name="period">The period to summarize, such as <c>day</c>, <c>week</c>, <c>month</c>, <c>year</c>, or <c>all</c>.</param>
+        /// <returns>A <see cref="ReportSummary"/> containing the requested period summary.</returns>
         [HttpGet]
         [MobileAuthorize]
         public ReportSummary Summary(string period)
@@ -125,6 +137,11 @@ namespace Hotcakes.Modules.Core.Api.Mobile
                 GetRangeFunction(range.RangeType));
         }
 
+        /// <summary>
+        /// Gets the transaction grouping function for a date-range type.
+        /// </summary>
+        /// <param name="rangeType">The date-range type to group.</param>
+        /// <returns>A function that returns the grouping value, or <see langword="null"/> for all dates.</returns>
         protected static Func<hcc_OrderTransactions, int> GetRangeFunction(DateRangeType rangeType)
         {
             Func<hcc_OrderTransactions, int> separationFunc;

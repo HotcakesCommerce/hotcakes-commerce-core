@@ -26,8 +26,15 @@
 
 namespace Hotcakes.Commerce.Shipping
 {
+    /// <summary>
+    /// Defines the strategy used to derive package dimensions for a <see cref="ShippingGroup"/>.
+    /// </summary>
     public abstract class DimensionCalculator
     {
+        /// <summary>
+        /// Generates or updates the package dimensions represented by a shipping group.
+        /// </summary>
+        /// <param name="group">The shipping group to calculate.</param>
         public abstract void GenerateDimensions(ShippingGroup group);
     }
 }

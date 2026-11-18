@@ -31,15 +31,27 @@ using Hotcakes.Modules.Core.Admin.Controls;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class BaseCustomerPage.
+    /// </summary>
     public class BaseCustomerPage : BaseAdminPage
     {
+        /// <summary>
+        /// Gets or sets the customer.
+        /// </summary>
         public CustomerAccount Customer { get; set; }
 
+        /// <summary>
+        /// Gets or sets the customer id.
+        /// </summary>
         public virtual string CustomerId
         {
             get { return Request.QueryString["id"]; }
         }
 
+        /// <summary>
+        /// Gets or sets the return url.
+        /// </summary>
         public virtual string ReturnUrl
         {
             get { return Request.QueryString["returnUrl"]; }

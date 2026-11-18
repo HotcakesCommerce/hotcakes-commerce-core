@@ -34,6 +34,9 @@ using Newtonsoft.Json.Serialization;
 
 namespace Hotcakes.Modules.Core.Api.Mobile
 {
+    /// <summary>
+    /// Provides shared behavior for the mobile API controllers.
+    /// </summary>
     [Serializable]
     [VerifyLicenseActionFilter]
     public abstract class HccApiController : ApiController
@@ -43,11 +46,18 @@ namespace Hotcakes.Modules.Core.Api.Mobile
             IgnoreSerializableAttribute = true
         };
 
+        /// <summary>
+        /// Gets the current Hotcakes application context used by the mobile API.
+        /// </summary>
         public HotcakesApplication HccApp
         {
             get { return HotcakesApplication.Current; }
         }
 
+        /// <summary>
+        /// Initializes the controller and configures the JSON formatter used by the mobile API.
+        /// </summary>
+        /// <param name="controllerContext">The context for the controller being initialized.</param>
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
@@ -63,6 +73,11 @@ namespace Hotcakes.Modules.Core.Api.Mobile
             settings.ContractResolver = Resolver;
         }
 
+        /// <summary>
+        /// Converts a mobile period name into the corresponding commerce date range.
+        /// </summary>
+        /// <param name="rangeType">The period name, such as <c>day</c>, <c>week</c>, <c>month</c>, <c>year</c>, or <c>all</c>.</param>
+        /// <returns>The date range represented by <paramref name="rangeType"/>; unrecognized values use the current week.</returns>
         protected static DateRange GetDateRange(string rangeType)
         {
             var rangeData = new DateRange();

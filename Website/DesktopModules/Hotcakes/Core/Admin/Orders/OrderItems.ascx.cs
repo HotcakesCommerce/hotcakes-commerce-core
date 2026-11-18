@@ -38,6 +38,9 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Modules.Core.Admin.Orders
 {
+    /// <summary>
+    /// Provides the order item editing control for the administrative order view.
+    /// </summary>
     public partial class OrderItems : HccUserControl
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -564,8 +567,12 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             "<a href=\"/DesktopModules/Hotcakes/Core/Admin/catalog/Products_Performance.aspx?id={1}\">{0}</a>";
 
         public bool EditMode { get; set; }
+        /// <summary>Gets or sets whether order items are editable.</summary>
+        /// <summary>Gets or sets whether item quantities may be updated.</summary>
         public bool AllowUpdateQuantities { get; set; }
+        /// <summary>Gets or sets the order whose items are displayed.</summary>
         public Order CurrentOrder { get; set; }
+        /// <summary>Occurs after the order items are edited.</summary>
         public event EventHandler OrderEdited;
         private List<OrderTransaction> currentOrderTransactions { get; set; }
         private bool isPaymentRefunded { get; set; }
@@ -575,6 +582,7 @@ namespace Hotcakes.Modules.Core.Admin.Orders
 
         #region Public methods
 
+        /// <summary>Rebinds the order item controls to the current order.</summary>
         public void Rebind()
         {
             if (CurrentOrder != null)
@@ -604,6 +612,8 @@ namespace Hotcakes.Modules.Core.Admin.Orders
             }
         }
 
+        /// <summary>Persists updated order item quantities.</summary>
+        /// <returns><see langword="true"/> when quantities are updated; otherwise, <see langword="false"/>.</returns>
         public bool UpdateQuantities()
         {
             var gridView = CurrentOrder.IsRecurring ? gvSubscriptions : gvItems;

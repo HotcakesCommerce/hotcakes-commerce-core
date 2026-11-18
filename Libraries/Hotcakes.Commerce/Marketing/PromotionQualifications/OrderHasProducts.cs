@@ -31,8 +31,11 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Matches orders containing configured products at a quantity threshold.</summary>
+    /// <remarks><see cref="QualificationSetMode.AnyOfTheseItems"/> combines matching quantities; <see cref="QualificationSetMode.AllOfTheseItems"/> requires each product.</remarks>
     public class OrderHasProducts : PromotionIdQualificationBase
     {
+        /// <summary>Initializes a lowest-cost qualification using the has-at-least mode.</summary>
         public OrderHasProducts()
         {
             ProcessingCost = RelativeProcessingCost.Lowest;
@@ -40,12 +43,14 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             HasMode = QualificationHasMode.HasAtLeast;
         }
 
+        /// <summary>Gets the stable order-products qualification identifier.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdOrderHasProducts); }
         }
 
 
+        /// <summary>Gets or sets the quantity comparison mode.</summary>
         public QualificationHasMode HasMode
         {
             get
@@ -59,6 +64,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             set { SetSetting("HasMode", (int) value); }
         }
 
+        /// <summary>Gets or sets whether any or all configured products are required.</summary>
         public QualificationSetMode SetMode
         {
             get
@@ -72,17 +78,20 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             set { SetSetting("SetMode", (int) value); }
         }
 
+        /// <summary>Gets or sets the required quantity threshold.</summary>
         public int Quantity
         {
             get { return GetSettingAsInt("Quantity"); }
             set { SetSetting("Quantity", value); }
         }
 
+        /// <summary>Gets the product identifier setting key.</summary>
         public override string IdSettingName
         {
             get { return "ProductIds"; }
         }
 
+        /// <summary>Builds a description of the quantity and configured products.</summary>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var result = "";
@@ -117,6 +126,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             return result;
         }
 
+        /// <summary>Matches an order or line-item evaluation using configured product quantities.</summary>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             if (mode != PromotionQualificationMode.Orders &&

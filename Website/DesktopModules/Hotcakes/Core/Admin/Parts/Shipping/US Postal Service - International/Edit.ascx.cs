@@ -36,6 +36,9 @@ using Hotcakes.Shipping.USPostal;
 
 namespace Hotcakes.Modules.Core.Modules.Shipping.US_Postal_Service___International
 {
+    /// <summary>
+    /// Defines the administrative class Edit.
+    /// </summary>
     public partial class Edit : HccShippingPart
     {
         protected override void OnInit(EventArgs e)

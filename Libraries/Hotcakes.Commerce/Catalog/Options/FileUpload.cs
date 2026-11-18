@@ -35,6 +35,9 @@ using System.Web.UI.WebControls;
 
 namespace Hotcakes.Commerce.Catalog.Options
 {
+    /// <summary>
+    /// Gets or sets the file upload.
+    /// </summary>
     public class FileUpload : IOptionProcessor
     {
         private const string FILE_UPLOAD_MARKUP = "<div id=\"container_{0}\" class=\"uploadContainer\">" +
@@ -55,22 +58,34 @@ namespace Hotcakes.Commerce.Catalog.Options
                                                     "<input type=\"hidden\" name=\"uploadfiletypes\" value=\"{2}\" />" +
                                                     "<input type=\"hidden\" name=\"opt{0}\" id=\"opt{0}\" />";
 
+        /// <summary>
+        /// Performs the GetOptionType catalog operation.
+        /// </summary>
         public OptionTypes GetOptionType()
         {
             return OptionTypes.FileUpload;
         }
 
+        /// <summary>
+        /// Performs the Render catalog operation.
+        /// </summary>
         public string Render(Option baseOption)
         {
             return RenderWithSelection(baseOption, null);
         }
 
+        /// <summary>
+        /// Performs the RenderWithSelection catalog operation.
+        /// </summary>
         public string RenderWithSelection(Option baseOption, OptionSelectionList selections, string prefix = null, string className = null)
         {
             var uploadControlHtml = GetUploadControlHtml(baseOption, prefix, className);
             return uploadControlHtml;
         }
 
+        /// <summary>
+        /// Performs the RenderAsControl catalog operation.
+        /// </summary>
         public void RenderAsControl(Option baseOption, PlaceHolder ph, string prefix = null, string className = null)
         {
             var li = new LiteralControl();
@@ -79,6 +94,9 @@ namespace Hotcakes.Commerce.Catalog.Options
             ph.Controls.Add(li);
         }
 
+        /// <summary>
+        /// Performs the ParseFromPlaceholder catalog operation.
+        /// </summary>
         public OptionSelection ParseFromPlaceholder(Option baseOption, PlaceHolder ph, string prefix = null)
         {
             var result = new OptionSelection();
@@ -93,6 +111,9 @@ namespace Hotcakes.Commerce.Catalog.Options
             return result;
         }
 
+        /// <summary>
+        /// Performs the ParseFromForm catalog operation.
+        /// </summary>
         public OptionSelection ParseFromForm(Option baseOption, NameValueCollection form, string prefix = null)
         {
             var result = new OptionSelection();
@@ -111,6 +132,9 @@ namespace Hotcakes.Commerce.Catalog.Options
             return result;
         }
 
+        /// <summary>
+        /// Performs the SetSelectionsInPlaceholder catalog operation.
+        /// </summary>
         public void SetSelectionsInPlaceholder(Option baseOption, PlaceHolder ph, OptionSelectionList selections)
         {
             throw new NotImplementedException();
@@ -122,6 +146,9 @@ namespace Hotcakes.Commerce.Catalog.Options
         /// <param name="baseOption"></param>
         /// <param name="selections"></param>
         /// <returns></returns>
+        /// <summary>
+        /// Performs the CartDescription catalog operation.
+        /// </summary>
         public string CartDescription(Option baseOption, OptionSelectionList selections)
         {
             if (selections == null)
@@ -174,6 +201,9 @@ namespace Hotcakes.Commerce.Catalog.Options
             return string.Empty;
         }
 
+        /// <summary>
+        /// Performs the GetSelectionValues catalog operation.
+        /// </summary>
         public List<string> GetSelectionValues(Option baseOption, OptionSelectionList selections)
         {
             var retVal = new List<string>();
@@ -220,11 +250,17 @@ namespace Hotcakes.Commerce.Catalog.Options
             return retVal;
         }
 
+        /// <summary>
+        /// Performs the SetMultipleFiles catalog operation.
+        /// </summary>
         public void SetMultipleFiles(Option baseOption, bool value)
         {
             baseOption.Settings.AddOrUpdate("allowmultiplefiles", value.ToString().ToLower());
         }
 
+        /// <summary>
+        /// Performs the GetMultipleFiles catalog operation.
+        /// </summary>
         public bool GetMultipleFiles(Option baseOption)
         {
             var allowMultiUplaod = true;

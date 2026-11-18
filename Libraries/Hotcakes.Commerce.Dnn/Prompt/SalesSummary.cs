@@ -36,6 +36,9 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.Dnn.Prompt
 {
+    /// <summary>
+    /// Implements the prompt command that summarizes store sales for a selected period.
+    /// </summary>
     [ConsoleCommand("sales-summary", Constants.Namespace, "PromptSalesSummary")]
     public class SalesSummary : PromptBase, IConsoleCommand
     {
@@ -46,6 +49,13 @@ namespace Hotcakes.Commerce.Dnn.Prompt
 
         private string Period { get; set; }
 
+        /// <summary>
+        /// Initializes the command and validates the requested sales-summary period.
+        /// </summary>
+        /// <param name="args">The command arguments.</param>
+        /// <param name="portalSettings">The DNN portal settings for the command context.</param>
+        /// <param name="userInfo">The DNN user executing the command.</param>
+        /// <param name="activeTabId">The active DNN tab identifier.</param>
         public override void Init(string[] args, PortalSettings portalSettings, UserInfo userInfo, int activeTabId)
         {
             try
@@ -72,6 +82,10 @@ namespace Hotcakes.Commerce.Dnn.Prompt
             }
         }
 
+        /// <summary>
+        /// Builds sales summaries for the period selected during initialization.
+        /// </summary>
+        /// <returns>A prompt result containing <see cref="SalesSummaryOutput"/> data, or an error result when reporting fails.</returns>
         public override ConsoleResultModel Run()
         {
             try
@@ -292,17 +306,45 @@ namespace Hotcakes.Commerce.Dnn.Prompt
         }
     }
 
+    /// <summary>
+    /// Contains the formatted sales metrics for one reporting period.
+    /// </summary>
     public class SalesSummaryOutput
     {
+        /// <summary>
+        /// Gets or sets the localized reporting-period label.
+        /// </summary>
         public string TimePeriod { get; set; }
+
+        /// <summary>
+        /// Gets or sets the formatted total sales amount after refunds.
+        /// </summary>
         public string Total { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of transactions in the reporting period.
+        /// </summary>
         public int Transactions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the formatted average order amount.
+        /// </summary>
         public string AvgOrder { get; set; }
     }
 
+    /// <summary>
+    /// Holds the orders and returns used to calculate a sales summary.
+    /// </summary>
     public class TransactionData
     {
+        /// <summary>
+        /// Gets or sets the orders included in the summary.
+        /// </summary>
         public List<Order> Orders { get; set; }
+
+        /// <summary>
+        /// Gets or sets the returns included in the summary.
+        /// </summary>
         public List<RMA> Rmas { get; set; }
     }
 }

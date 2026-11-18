@@ -31,14 +31,27 @@ using DotNetNuke.Entities.Urls;
 
 namespace Hotcakes.Modules.ExtensionUrlProvider
 {
+    /// <summary>
+    /// Provides settings for the extension URL provider module.
+    /// </summary>
     public partial class Settings : PortalModuleBase, IExtensionUrlProviderSettingsControl
     {
+        /// <summary>
+        /// Gets or sets the extension URL provider configuration.
+        /// </summary>
         public ExtensionUrlProviderInfo Provider { get; set; }
 
+        /// <summary>
+        /// Loads the extension URL provider settings.
+        /// </summary>
         public void LoadSettings()
         {
         }
 
+        /// <summary>
+        /// Saves the extension URL provider settings.
+        /// </summary>
+        /// <returns>An empty collection because this provider has no configurable settings.</returns>
         public Dictionary<string, string> SaveSettings()
         {
             return new Dictionary<string, string>();

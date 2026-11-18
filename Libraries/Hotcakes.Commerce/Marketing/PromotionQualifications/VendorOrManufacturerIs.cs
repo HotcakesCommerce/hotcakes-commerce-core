@@ -32,10 +32,18 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Matches order products by configured vendor or manufacturer identifiers.</summary>
+    /// <remarks>
+    /// In normal mode, a product matches when either identifier is configured. In negative mode, both identifiers
+    /// must be absent from the configured set. Evaluation supports line-item and order scopes only.
+    /// </remarks>
     public class VendorOrManufacturerIs : PromotionIdQualificationBase
     {
+        /// <summary>Stable serialized type identifier for this qualification.</summary>
         public const string TypeIdString = "C1DA4482-4A3A-4F7A-AD9F-A669E5CA3BAD";
 
+        /// <summary>Gets or sets whether matching is negated.</summary>
+        /// <remarks>The value is serialized under <c>VoMIsNotMode</c> as <c>1</c> or <c>0</c>; negative mode requires neither vendor nor manufacturer to match.</remarks>
         public bool IsNotMode
         {
             get
@@ -47,16 +55,22 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             set { SetSetting("VoMIsNotMode", value); }
         }
 
+        /// <summary>Gets the stable serialized type identifier for this qualification.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdString); }
         }
 
+        /// <summary>Gets the persisted settings key containing vendor and manufacturer identifiers.</summary>
         public override string IdSettingName
         {
             get { return "VendorManufacturerIds"; }
         }
 
+        /// <summary>Builds the display description with resolved manufacturer and vendor names.</summary>
+        /// <param name="app">The application context used to resolve manufacturer and vendor identifiers.</param>
+        /// <returns>Display text listing resolved configured entities and the active positive or negative mode.</returns>
+        /// <remarks>Each identifier is attempted as a manufacturer first; it is treated as a vendor candidate only when that lookup fails.</remarks>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var sb = new StringBuilder();
@@ -99,11 +113,17 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             return sb.ToString();
         }
 
+        /// <summary>Initializes this ID-based qualification with the lowest relative processing cost.</summary>
         protected override void OnInit()
         {
             ProcessingCost = RelativeProcessingCost.Lowest;
         }
 
+        /// <summary>Evaluates configured vendor or manufacturer matching for a line item or order.</summary>
+        /// <param name="context">The promotion context containing the order, current line item, and catalog services.</param>
+        /// <param name="mode">The evaluation scope; <see cref="PromotionQualificationMode.LineItems"/> checks the current line item and <see cref="PromotionQualificationMode.Orders"/> scans order items.</param>
+        /// <returns><c>true</c> when the selected scope contains a matching product under the active positive or negative mode; otherwise <c>false</c>.</returns>
+        /// <remarks>Null context, order, items, current line item, or product data fails closed. Other modes are unsupported and return <c>false</c>.</remarks>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             var ids = CurrentIds();

@@ -32,11 +32,16 @@ namespace Hotcakes.CommerceDTO.v1.Contacts
     /// <summary>
     ///     This is the main object that is used for all vendor/manufacturer management in the REST API
     /// </summary>
-    /// <remarks>The main application equivalent to this is the VendorManufacturer object</remarks>
+    /// <remarks>The main application equivalent to this is the VendorManufacturer object.</remarks>
+    /// <seealso cref="VendorManufacturerTypeDTO"/>
+    /// <seealso cref="AddressDTO"/>
     [DataContract]
     [Serializable]
     public class VendorManufacturerDTO
     {
+        /// <summary>
+        ///     Initializes a vendor contact with empty values and the vendor contact type.
+        /// </summary>
         public VendorManufacturerDTO()
         {
             Bvin = string.Empty;
@@ -81,7 +86,7 @@ namespace Hotcakes.CommerceDTO.v1.Contacts
         public string EmailAddress { get; set; }
 
         /// <summary>
-        ///     An address object matching the vendor/manufacturer.
+        ///     An <see cref="AddressDTO"/> matching the vendor/manufacturer.
         /// </summary>
         [DataMember]
         public AddressDTO Address { get; set; }

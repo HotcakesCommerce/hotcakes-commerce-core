@@ -39,6 +39,9 @@ using Hotcakes.Modules.Core.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class MenuProvider.
+    /// </summary>
     [Serializable]
     public class MenuProvider
     {
@@ -48,6 +51,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
         private static ILocalizationHelper localization { get; set; }
         private static List<MenuItem> _menuItems;
 
+        /// <summary>
+        /// Gets or sets the menu items.
+        /// </summary>
         public static List<MenuItem> MenuItems
         {
             get
@@ -66,6 +72,11 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             }
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by GetMenuItemsByPath.
+        /// </summary>
+        /// <param name="path">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static List<MenuItem> GetMenuItemsByPath(string path)
         {
             var _menuFilePath = HostingEnvironment.MapPath(_MenuFileVirtualPath);
@@ -80,6 +91,11 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             return items;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by GetFilteredMenuItems.
+        /// </summary>
+        /// <param name="hccApp">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static List<MenuItem> GetFilteredMenuItems(HotcakesApplication hccApp)
         {
             return MenuItems
@@ -90,6 +106,12 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
                 .ToList();
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by GetFilteredMenuItems.
+        /// </summary>
+        /// <param name="path">Value used by the operation.</param>
+        /// <param name="hccApp">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static List<MenuItem> GetFilteredMenuItems(string path, HotcakesApplication hccApp)
         {
             return GetMenuItemsByPath(path)
@@ -100,6 +122,13 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
                 .ToList();
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by GetByBaseUrl.
+        /// </summary>
+        /// <param name="hccApp">Value used by the operation.</param>
+        /// <param name="url">Value used by the operation.</param>
+        /// <param name="level">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static MenuItem GetByBaseUrl(HotcakesApplication hccApp, string url, int level = 1)
         {
             MenuItem item = null;
@@ -121,6 +150,12 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             return item;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by IsCurrent.
+        /// </summary>
+        /// <param name="mi">Value used by the operation.</param>
+        /// <param name="url">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static bool IsCurrent(MenuItem mi, string url)
         {
             if (!string.IsNullOrEmpty(mi.BaseUrl))

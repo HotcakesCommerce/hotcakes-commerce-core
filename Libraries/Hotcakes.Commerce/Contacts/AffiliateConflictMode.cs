@@ -26,10 +26,14 @@
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>Specifies which affiliate wins when affiliate attribution conflicts.</summary>
     public enum AffiliateConflictMode
     {
+        /// <summary>Does not apply a conflict preference.</summary>
         None = 0,
+        /// <summary>Retains the previously associated affiliate.</summary>
         FavorOldAffiliate = 1,
+        /// <summary>Uses the newly supplied affiliate.</summary>
         FavorNewAffiliate = 2
     }
 }

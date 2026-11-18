@@ -31,8 +31,12 @@ using MenuItem = Hotcakes.Modules.Core.Admin.AppCode.MenuItem;
 
 namespace Hotcakes.Modules.Core.Admin.Configuration
 {
+    /// <summary>
+    /// Provides the shared configuration navigation control.
+    /// </summary>
     public partial class NavMenu : HccUserControl
     {
+        /// <summary>Gets or sets the navigation path used to render this menu.</summary>
         public string Path { get; set; }
 
         protected override void OnInit(EventArgs e)

@@ -30,14 +30,21 @@ using System.Data;
 
 namespace Hotcakes.Web.Barcodes
 {
+    /// <summary>Code 128 barcode encoder.</summary>
+    /// <remarks>The encoded output is exposed through <see cref="IBarcode.Encoded_Value"/>.</remarks>
     [Serializable]
     internal class Code128 : BarcodeCommon, IBarcode
     {
+        /// <summary>Specifies the Code 128 character set selection.</summary>
         public enum TYPES
         {
+            /// <summary>Uses Code 128 DYNAMIC selection.</summary>
             DYNAMIC,
+            /// <summary>Uses Code 128 A selection.</summary>
             A,
+            /// <summary>Uses Code 128 B selection.</summary>
             B,
+            /// <summary>Uses Code 128 C selection.</summary>
             C
         }
 
@@ -47,20 +54,18 @@ namespace Hotcakes.Web.Barcodes
         private DataRow StartCharacter;
         private readonly TYPES type = TYPES.DYNAMIC;
 
-        /// <summary>
-        ///     Encodes data in Code128 format.
-        /// </summary>
-        /// <param name="input">Data to encode.</param>
+        /// <summary>Encodes data using the Code 128 symbology.</summary>
+        /// <param name="input">The data to encode.</param>
+        /// <seealso cref="Encoded_Value"/>
         public Code128(string input)
         {
             Raw_Data = input;
         }
 
-        /// <summary>
-        ///     Encodes data in Code128 format.
-        /// </summary>
-        /// <param name="input">Data to encode.</param>
-        /// <param name="type">Type of encoding to lock to. (Code 128A, Code 128B, Code 128C)</param>
+        /// <summary>Encodes data using the selected Code 128 character set.</summary>
+        /// <param name="input">The data to encode.</param>
+        /// <param name="type">The character set to use.</param>
+        /// <seealso cref="TYPES"/>
         public Code128(string input, TYPES type)
         {
             this.type = type;
@@ -69,6 +74,8 @@ namespace Hotcakes.Web.Barcodes
 
         #region IBarcode Members
 
+        /// <summary>Gets the encoded bar-and-space representation.</summary>
+        /// <seealso cref="IBarcode.Encoded_Value"/>
         public string Encoded_Value
         {
             get { return Encode_Code128(); }

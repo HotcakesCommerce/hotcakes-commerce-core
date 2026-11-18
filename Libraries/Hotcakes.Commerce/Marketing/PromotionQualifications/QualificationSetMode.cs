@@ -26,9 +26,12 @@
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Specifies whether a product set is matched as a whole or by any member.</summary>
     public enum QualificationSetMode
     {
+        /// <summary>Requires every configured product to meet the quantity threshold.</summary>
         AllOfTheseItems = 0,
+        /// <summary>Requires the combined matching products to meet the quantity threshold.</summary>
         AnyOfTheseItems = 1
     }
 }

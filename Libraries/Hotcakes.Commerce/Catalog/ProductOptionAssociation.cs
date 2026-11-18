@@ -26,8 +26,14 @@
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Defines the catalog data or behavior represented by this member.
+    /// </summary>
     public class ProductOptionAssociation
     {
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductOptionAssociation()
         {
             Id = 0;
@@ -37,10 +43,25 @@ namespace Hotcakes.Commerce.Catalog
             SortOrder = 0;
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public long Id { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public long StoreId { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string ProductBvin { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public string OptionBvin { get; set; }
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public int SortOrder { get; set; }
     }
 }

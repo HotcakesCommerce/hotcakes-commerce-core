@@ -30,15 +30,30 @@ using Hotcakes.Commerce.Marketing.PromotionQualifications;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class BaseQualificationControl.
+    /// </summary>
     [Serializable]
     public abstract class BaseQualificationControl : HccUserControl
     {
+        /// <summary>
+        /// Performs the administrative operation represented by LoadQualification.
+        /// </summary>
         public Promotion Promotion { get; set; }
+        /// <summary>
+        /// Performs the administrative operation represented by LoadQualification.
+        /// </summary>
         public IPromotionQualification Qualification { get; set; }
 
+        /// <summary>
+        /// Performs the administrative operation represented by LoadQualification.
+        /// </summary>
         public abstract void LoadQualification();
         public abstract bool SaveQualification();
 
+        /// <summary>
+        /// Defines the administrative class FriendlyBvinDisplay.
+        /// </summary>
         protected bool UpdatePromotion()
         {
             return HccApp.MarketingServices.Promotions.Update(Promotion);
@@ -46,7 +61,13 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
 
         protected class FriendlyBvinDisplay
         {
+            /// <summary>
+            /// Gets or sets the bvin.
+            /// </summary>
             public string bvin { get; set; }
+            /// <summary>
+            /// Gets or sets the display name.
+            /// </summary>
             public string DisplayName { get; set; }
         }
     }

@@ -30,23 +30,30 @@ using System.Linq;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Matches products assigned to one or more catalog categories.</summary>
+    /// <remarks>Product category lookup examines only the first 100 category assignments.</remarks>
     public class ProductCategory : PromotionQualificationBase
     {
+        /// <summary>Initializes an empty category qualification.</summary>
         public ProductCategory() : this(string.Empty)
         {
         }
 
+        /// <summary>Initializes a category qualification with one category identifier.</summary>
+        /// <param name="categoryId">The category identifier.</param>
         public ProductCategory(string categoryId)
         {
             ProcessingCost = RelativeProcessingCost.Highest;
             AddCategoryId(categoryId);
         }
 
+        /// <summary>Gets the stable product-category qualification identifier.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdProductCategory); }
         }
 
+        /// <summary>Gets configured category IDs, normalized to lowercase.</summary>
         public List<string> CurrentCategoryIds()
         {
             var all = GetSetting("CategoryIds") ?? string.Empty;
@@ -66,6 +73,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             SetSetting("CategoryIds", all);
         }
 
+        /// <summary>Builds a category description, resolving names through the catalog.</summary>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var result = "When Product Category Is:<ul>";
@@ -88,6 +96,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             return result;
         }
 
+        /// <summary>Adds a normalized category ID unless it is blank or already present.</summary>
         public void AddCategoryId(string id)
         {
             if (string.IsNullOrWhiteSpace(id)) return;
@@ -100,6 +109,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             SaveCategoryIdsToSettings(ids);
         }
 
+        /// <summary>Removes a normalized category ID when present.</summary>
         public void RemoveCategoryId(string id)
         {
             if (string.IsNullOrWhiteSpace(id)) return;
@@ -112,6 +122,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             }
         }
 
+        /// <summary>Matches a product context by category in sale mode.</summary>
+        /// <remarks>Only the first 100 category assignments are examined.</remarks>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             if (mode != PromotionQualificationMode.Products) return false;

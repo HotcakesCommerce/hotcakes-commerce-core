@@ -44,6 +44,9 @@ namespace Hotcakes.Commerce.Catalog
     [Serializable]
     public class Option
     {
+        /// <summary>
+        /// Provides the catalog type or contract represented by this declaration.
+        /// </summary>
         public Option()
         {
             Bvin = string.Empty;
@@ -125,6 +128,12 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         public List<OptionItem> Items { get; set; }
 
+        /// <summary>
+        /// Gets or sets the is required.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets whether a selection is required for this option. The value is stored in <see cref="Settings" /> under the <c>required</c> key.
+        /// </summary>
         public bool IsRequired
         {
             get { return Settings.GetBoolSetting("required"); }
@@ -135,6 +144,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Use this method to define which processor the current Option should be using.
         /// </summary>
         /// <param name="type">OptionType - the type of option the current object should be defined as.</param>
+        /// <summary>
+        /// Performs the SetProcessor catalog operation.
+        /// </summary>
         public void SetProcessor(OptionTypes type)
         {
             switch (type)
@@ -166,6 +178,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="type">OptionType - the type of option the new Option object should be defined as.</param>
         /// <returns>A new instance of Option with defaults set, except for the OptionType.</returns>
+        /// <summary>
+        /// Performs the Factory catalog operation.
+        /// </summary>
         public static Option Factory(OptionTypes type)
         {
             var result = new Option();
@@ -177,6 +192,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Outputs the HTML required to display this Option in the web page. This method uses the Processor property.
         /// </summary>
         /// <returns>An HTNL-friendly string representation of the Option, based upon its respective OptionType.</returns>
+        /// <summary>
+        /// Performs the Render catalog operation.
+        /// </summary>
         public string Render()
         {
             return Processor.Render(this);
@@ -196,6 +214,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     An HTML-friendly string representation of the Option, based upon its respective OptionType, with default
         ///     selections made.
         /// </returns>
+        /// <summary>
+        /// Performs the RenderWithSelection catalog operation.
+        /// </summary>
         public string RenderWithSelection(OptionSelectionList selections, string prefix = null, string className = null)
         {
             if (prefix == null) prefix = string.Empty;
@@ -211,6 +232,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     (optional) When specified, this value will be included as a prefix to the Id and Name attributes
         ///     of the rendered items.
         /// </param>
+        /// <summary>
+        /// Performs the RenderAsControl catalog operation.
+        /// </summary>
         public void RenderAsControl(PlaceHolder ph, string prefix = null)
         {
             Processor.RenderAsControl(this, ph, prefix);
@@ -226,6 +250,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     placeholder.
         /// </param>
         /// <returns>A listing of the items selected in the Option.</returns>
+        /// <summary>
+        /// Performs the ParseFromPlaceholder catalog operation.
+        /// </summary>
         public OptionSelection ParseFromPlaceholder(PlaceHolder ph, string prefix = null)
         {
             return Processor.ParseFromPlaceholder(this, ph, prefix);
@@ -240,6 +267,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     from.
         /// </param>
         /// <returns>All of the selected values of the specified form are returned.</returns>
+        /// <summary>
+        /// Performs the ParseFromForm catalog operation.
+        /// </summary>
         public OptionSelection ParseFromForm(NameValueCollection form, string prefix = null)
         {
             return Processor.ParseFromForm(this, form, prefix);
@@ -252,6 +282,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="selections">A parsed collection of the selections made on this Option.</param>
         /// <returns>A comma delimited string of the Option items preceded by the option name.</returns>
+        /// <summary>
+        /// Performs the CartDescription catalog operation.
+        /// </summary>
         public string CartDescription(OptionSelectionList selections)
         {
             return Processor.CartDescription(this, selections);
@@ -262,6 +295,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="itemName">The name that you want the new OptionItem to have. This is a localizable value.</param>
         /// <returns>If true, the OptionItem was added successfully.</returns>
+        /// <summary>
+        /// Performs the AddItem catalog operation.
+        /// </summary>
         public bool AddItem(string itemName)
         {
             var maxSortOrder = Items.Max(i => (int?) i.SortOrder) ?? 0;
@@ -277,6 +313,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="item">A pre-populated instance of an OptionItem.</param>
         /// <returns>If true, the OptionItem was added successfully.</returns>
+        /// <summary>
+        /// Performs the AddItem catalog operation.
+        /// </summary>
         public bool AddItem(OptionItem item)
         {
             if (item == null) return false;
@@ -294,6 +333,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <returns>
         ///     If true, the OptionItem is in this Option.
         /// </returns>
+        /// <summary>
+        /// Performs the ItemsContains catalog operation.
+        /// </summary>
         public bool ItemsContains(string itemBvin, bool includeLabels = false)
         {
             // check to see if this option contains a specific item
@@ -312,6 +354,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Use this method to create a copy of the current option.
         /// </summary>
         /// <returns>A duplicate of the current Option.</returns>
+        /// <summary>
+        /// Performs the Clone catalog operation.
+        /// </summary>
         public Option Clone()
         {
             var result = Factory(OptionType);
@@ -344,6 +389,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Allows you to convert the current product option object to the DTO equivalent for use with the REST API
         /// </summary>
         /// <returns>A new instance of OptionDTO</returns>
+        /// <summary>
+        /// Performs the ToDto catalog operation.
+        /// </summary>
         public OptionDTO ToDto()
         {
             var dto = new OptionDTO();
@@ -384,6 +432,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Allows you to populate the current product option object using an instance of OptionDTO
         /// </summary>
         /// <param name="dto">An instance of the product option from the REST API</param>
+        /// <summary>
+        /// Performs the FromDto catalog operation.
+        /// </summary>
         public void FromDto(OptionDTO dto)
         {
             if (dto == null) return;

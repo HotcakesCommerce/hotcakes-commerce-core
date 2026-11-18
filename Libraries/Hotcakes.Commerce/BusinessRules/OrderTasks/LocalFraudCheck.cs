@@ -30,13 +30,30 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>
+    /// Scores local order and request data for fraud indicators and places high-scoring orders on hold.
+    /// </summary>
+    /// <remarks>
+    /// The task identifier is <c>14D38D1A-8B26-4a8b-B143-8485B4E7A584</c>. It records the score and any failed-check
+    /// messages on the order, persists the order, and returns success even when the score causes an on-hold status.
+    /// Rollback does not clear the score, notes, or status.
+    /// </remarks>
     public class LocalFraudCheck : OrderTask
     {
+        /// <summary>
+        /// Creates a new local fraud-check task.
+        /// </summary>
+        /// <returns>A new <see cref="LocalFraudCheck"/> instance.</returns>
         public override Task Clone()
         {
             return new LocalFraudCheck();
         }
 
+        /// <summary>
+        /// Collects request, contact, and payment indicators, scores them, and persists the resulting order changes.
+        /// </summary>
+        /// <param name="context">The <see cref="OrderTaskContext"/> containing the order and request context.</param>
+        /// <returns><see langword="true"/>; the fraud score is handled as order state rather than a task failure.</returns>
         public override bool Execute(OrderTaskContext context)
         {
             var result = true;
@@ -109,16 +126,29 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             }
         }
 
+        /// <summary>
+        /// Does not undo the fraud score, private note, or on-hold status produced during execution.
+        /// </summary>
+        /// <param name="context">The workflow context.</param>
+        /// <returns>Always <see langword="true"/>.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>
+        /// Gets the stable task identifier used to register this task in workflows.
+        /// </summary>
+        /// <returns><c>14D38D1A-8B26-4a8b-B143-8485B4E7A584</c>.</returns>
         public override string TaskId()
         {
             return "14D38D1A-8B26-4a8b-B143-8485B4E7A584";
         }
 
+        /// <summary>
+        /// Gets the display name of this task.
+        /// </summary>
+        /// <returns><c>Local Fraud Check</c>.</returns>
         public override string TaskName()
         {
             return "Local Fraud Check";

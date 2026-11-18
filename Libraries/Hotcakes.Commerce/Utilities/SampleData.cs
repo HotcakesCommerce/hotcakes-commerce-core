@@ -44,46 +44,89 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Creates, detects, and removes demonstration catalog, order, and analytics data for a store.
+    /// </summary>
+    /// <remarks>
+    /// Operations write to the current store through the supplied <see cref="HccRequestContext"/>. Sample-product
+    /// removal destroys matching sample products and categories, while analytics creation creates synthetic events and
+    /// orders; these operations are destructive or data-generating and should be used only for demonstration data.
+    /// </remarks>
     public class SampleData
     {
         #region Static methods
 
+        /// <summary>
+        /// Determines whether the store contains one of the known sample products or categories.
+        /// </summary>
+        /// <param name="context">The store request context, or <see langword="null"/> to use the current context.</param>
+        /// <returns><see langword="true"/> when sample catalog data is found; otherwise, <see langword="false"/>.</returns>
         public static bool SampleStoreDataExists(HccRequestContext context = null)
         {
             var sampleData = new SampleData(context ?? HccRequestContext.Current);
             return sampleData.IsSampleDataExist();
         }
 
+        /// <summary>
+        /// Adds the standard sample catalog and synthetic analytics data to a store.
+        /// </summary>
+        /// <param name="context">The store request context, or <see langword="null"/> to use the current context.</param>
         public static void AddSampleProductsToStore(HccRequestContext context = null)
         {
             var sampleData = new SampleData(context ?? HccRequestContext.Current);
             sampleData.AddSampleProducts();
         }
 
+        /// <summary>
+        /// Adds the standard sample catalog without creating analytics and order statistics.
+        /// </summary>
+        /// <param name="context">The store request context, or <see langword="null"/> to use the current context.</param>
         public static void AddSampleProductsToStoreWithoutStatistics(HccRequestContext context = null)
         {
             var sampleData = new SampleData(context ?? HccRequestContext.Current);
             sampleData.AddSampleProducts();
         }
 
+        /// <summary>
+        /// Removes the known sample catalog and its sample analytics from a store.
+        /// </summary>
+        /// <param name="context">The store request context, or <see langword="null"/> to use the current context.</param>
+        /// <remarks>This permanently destroys matching sample products and categories through the catalog services.</remarks>
         public static void RemoveSampleProductsFromStore(HccRequestContext context = null)
         {
             var sampleData = new SampleData(context ?? HccRequestContext.Current);
             sampleData.RemoveSampleProducts();
         }
 
+        /// <summary>
+        /// Determines whether the store contains the sample order used to identify sample analytics.
+        /// </summary>
+        /// <param name="context">The store request context, or <see langword="null"/> to use the current context.</param>
+        /// <returns><see langword="true"/> when a <c>Sample Order</c> record exists; otherwise, <see langword="false"/>.</returns>
         public static bool SampleAnalyticsExists(HccRequestContext context = null)
         {
             var sampleData = new SampleData(context ?? HccRequestContext.Current);
             return sampleData.IsSampleAnalyticsExist();
         }
 
+        /// <summary>
+        /// Creates synthetic analytics events and orders for the specified products.
+        /// </summary>
+        /// <param name="products">The products used to generate sample activity.</param>
+        /// <param name="context">The store request context, or <see langword="null"/> to use the current context.</param>
+        /// <remarks>This writes demonstration analytics, orders, line items, and transactions to the store.</remarks>
         public static void CreateSampleAnalyticsForStore(List<Product> products, HccRequestContext context = null)
         {
             var sampleData = new SampleData(context ?? HccRequestContext.Current);
             sampleData.CreateSampleAnalytics(products);
         }
 
+        /// <summary>
+        /// Adds sample products without statistics and queues synthetic analytics creation on the thread pool.
+        /// </summary>
+        /// <param name="context">The store request context, or <see langword="null"/> to use the current context.</param>
+        /// <remarks>The method returns before the background analytics operation completes. Progress is written to the
+        /// event log, and failures in the queued work are not returned to the caller.</remarks>
         public static void CreateSampleAnalyticsForStoreAsync(HccRequestContext context = null)
         {
             var sampleData = new SampleData(context ?? HccRequestContext.Current);
@@ -101,6 +144,10 @@ namespace Hotcakes.Commerce.Utilities
             ThreadPool.QueueUserWorkItem(_ => sampleData.CreateSamplePerMonth(objArguments));
         }
 
+        /// <summary>
+        /// Starts a background thread for the supplied delegate when it is not <see langword="null"/>.
+        /// </summary>
+        /// <param name="threadStart">The delegate executed by the background thread.</param>
         public static void StartBackgroundThread(ThreadStart threadStart)
         {
             if (threadStart != null)
@@ -111,6 +158,11 @@ namespace Hotcakes.Commerce.Utilities
             }
         }
 
+        /// <summary>
+        /// Removes sample analytics data from a store.
+        /// </summary>
+        /// <param name="context">The store request context, or <see langword="null"/> to use the current context.</param>
+        /// <remarks>This deletes sample analytics through the data context and is destructive.</remarks>
         public static void RemoveSampleAnalyticsForStore(HccRequestContext context = null)
         {
             var sampleData = new SampleData(context ?? HccRequestContext.Current);
@@ -121,9 +173,20 @@ namespace Hotcakes.Commerce.Utilities
 
         #region Instance methods
 
+        /// <summary>
+        /// Gets or sets the request context used for store-scoped operations.
+        /// </summary>
         public HccRequestContext Context { get; set; }
+
+        /// <summary>
+        /// Gets or sets the catalog service used to create, find, and remove sample catalog records.
+        /// </summary>
         public CatalogService CatalogServices { get; set; }
 
+        /// <summary>
+        /// Initializes sample-data operations for a request context.
+        /// </summary>
+        /// <param name="context">The request context that identifies the target store.</param>
         public SampleData(HccRequestContext context)
         {
             Context = context;
@@ -131,9 +194,9 @@ namespace Hotcakes.Commerce.Utilities
         }
 
         /// <summary>
-        ///     Use this method to see if any of the sample products or categories still exist in the store.
+        /// Determines whether any of the known sample products or categories still exist in the store.
         /// </summary>
-        /// <returns>If true, one or more sample products or categories are still in the store</returns>
+        /// <returns><see langword="true"/> when one or more sample products or categories remain; otherwise, <see langword="false"/>.</returns>
         public bool IsSampleDataExist()
         {
             // execute the product search
@@ -165,6 +228,10 @@ namespace Hotcakes.Commerce.Utilities
             return false;
         }
 
+        /// <summary>
+        /// Determines whether a sample order exists in the store.
+        /// </summary>
+        /// <returns><see langword="true"/> when an order numbered <c>Sample Order</c> exists; otherwise, <see langword="false"/>.</returns>
         public bool IsSampleAnalyticsExist()
         {
             var orderService = Factory.CreateService<OrderService>();
@@ -176,6 +243,9 @@ namespace Hotcakes.Commerce.Utilities
             return false;
         }
 
+        /// <summary>
+        /// Creates the standard sample categories and products, then creates synthetic analytics data.
+        /// </summary>
         public void AddSampleProducts()
         {
             var categories = CreateSampleCategories();
@@ -184,12 +254,19 @@ namespace Hotcakes.Commerce.Utilities
             CreateSampleAnalytics(products);
         }
 
+        /// <summary>
+        /// Creates the standard sample categories and products without analytics or order statistics.
+        /// </summary>
         public void AddSampleProductsWithoutStatistics()
         {
             var categories = CreateSampleCategories();
             var products = CreateSampleProducts(categories);
         }
 
+        /// <summary>
+        /// Removes the standard sample analytics, categories, and products from the store.
+        /// </summary>
+        /// <remarks>Matching records are permanently destroyed through the catalog services.</remarks>
         public void RemoveSampleProducts()
         {
             DeleteSampleAnalytics(true);
@@ -929,8 +1006,14 @@ namespace Hotcakes.Commerce.Utilities
         #endregion
     }
 
+    /// <summary>
+    /// Carries the request context used by asynchronous sample-data generation.
+    /// </summary>
     public class SampleDataConfiguration
     {
+        /// <summary>
+        /// Gets or sets the request context restored by the background analytics operation.
+        /// </summary>
         public HccRequestContext HccRequestContext { get; set; }
     }
 }

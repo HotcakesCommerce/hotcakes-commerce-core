@@ -30,10 +30,12 @@ using System.Linq;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Provides normalized product-ID settings and description behavior.</summary>
     public abstract class HasProductsQualificationBase : PromotionQualificationBase
     {
         #region Constructor
 
+        /// <summary>Initializes the base with lower processing cost.</summary>
         public HasProductsQualificationBase()
         {
             ProcessingCost = RelativeProcessingCost.Lower;
@@ -43,6 +45,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             
         #region Public methods
 
+        /// <summary>Gets configured product BVINs, trimmed and normalized to lowercase.</summary>
         public List<string> GetProductIds()
         {
             // Ensure normalization (trim + lower) to match comparisons elsewhere
@@ -52,6 +55,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
                 .ToList();
         }
 
+        /// <summary>Adds unique non-empty product BVINs to the products setting.</summary>
+        /// <param name="bvins">The product BVINs to add.</param>
         public void AddProductIds(IEnumerable<string> bvins)
         {
             if (bvins == null) return;
@@ -67,6 +72,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             AddSettingItems("products", normalized);
         }
 
+        /// <summary>Removes one product BVIN from the products setting.</summary>
+        /// <param name="bvin">The product BVIN to remove.</param>
         public void RemoveProductId(string bvin)
         {
             if (string.IsNullOrWhiteSpace(bvin)) return;
@@ -74,6 +81,8 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             RemoveSettingItem("products", normalized);
         }
 
+        /// <summary>Builds a description listing the configured product IDs.</summary>
+        /// <param name="app">The application context used to resolve products.</param>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var result = "When Line Item is:<ul>";
@@ -96,29 +105,38 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
         #endregion
     }
 
+    /// <summary>Matches a product by its BVIN in product evaluation mode.</summary>
     public class ProductBvin : HasProductsQualificationBase
     {
+        /// <summary>Initializes an empty product-BVIN qualification.</summary>
         public ProductBvin()
         {
             ProcessingCost = RelativeProcessingCost.Lowest;
         }
 
+        /// <summary>Initializes a qualification containing one product BVIN.</summary>
+        /// <param name="bvin">The product BVIN.</param>
         public ProductBvin(string bvin)
             : this(new List<string> { bvin })
         {
         }
 
+        /// <summary>Initializes a qualification containing the supplied product BVINs.</summary>
+        /// <param name="bvins">The product BVINs.</param>
         public ProductBvin(List<string> bvins)
             : this()
         {
             AddProductIds(bvins);
         }
 
+        /// <summary>Gets the stable product-BVIN qualification identifier.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdProductBvin); }
         }
 
+        /// <summary>Builds a description listing the configured product IDs.</summary>
+        /// <param name="app">The application context used to resolve products.</param>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var result = "When Product is:<ul>";
@@ -138,6 +156,9 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             return result;
         }
 
+        /// <summary>Matches a product context whose normalized BVIN is configured.</summary>
+        /// <param name="context">The promotion context.</param>
+        /// <param name="mode">The evaluation scope; only product scope matches.</param>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             if (mode != PromotionQualificationMode.Products) return false;

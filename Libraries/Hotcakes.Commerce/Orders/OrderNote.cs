@@ -36,11 +36,17 @@ namespace Hotcakes.Commerce.Orders
     [Serializable]
     public class OrderNote
     {
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         public OrderNote()
             : this(string.Empty)
         {
         }
 
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         public OrderNote(string note)
         {
             Id = 0;
@@ -55,35 +61,56 @@ namespace Hotcakes.Commerce.Orders
         /// <summary>
         ///     The unique ID of the current order note.
         /// </summary>
+        /// <summary>
+        /// The id.
+        /// </summary>
         public long Id { get; set; }
 
         /// <summary>
         ///     This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
+        /// </summary>
+        /// <summary>
+        /// The store id.
         /// </summary>
         public long StoreId { get; set; }
 
         /// <summary>
         ///     The last updated date is used for auditing purposes to know when the order note was last updated.
         /// </summary>
+        /// <summary>
+        /// The last updated utc.
+        /// </summary>
         public DateTime LastUpdatedUtc { get; set; }
 
         /// <summary>
         ///     The unique ID of the order that the current order note belongs to.
+        /// </summary>
+        /// <summary>
+        /// The order id.
         /// </summary>
         public string OrderID { get; set; }
 
         /// <summary>
         ///     Used for auditing purposes to know when the order note was created.
         /// </summary>
+        /// <summary>
+        /// The audit date.
+        /// </summary>
         public DateTime AuditDate { get; set; }
 
         /// <summary>
         ///     The text that the note should contain, such as a message to the customer about shipping.
         /// </summary>
+        /// <summary>
+        /// The note.
+        /// </summary>
         public string Note { get; set; }
 
         /// <summary>
         ///     If true, the note will be shown to the customer, otherwise only merchants will see the note.
+        /// </summary>
+        /// <summary>
+        /// The is public.
         /// </summary>
         public bool IsPublic { get; set; }
 
@@ -93,6 +120,9 @@ namespace Hotcakes.Commerce.Orders
         ///     Allows you to convert the current order note object to the DTO equivalent for use with the REST API
         /// </summary>
         /// <returns>A new instance of OrderNoteDTO</returns>
+        /// <summary>
+        /// Provides the ToDto operation while preserving the established order-domain behavior.
+        /// </summary>
         public OrderNoteDTO ToDto()
         {
             var dto = new OrderNoteDTO
@@ -113,6 +143,9 @@ namespace Hotcakes.Commerce.Orders
         ///     Allows you to populate the current order note object using a OrderNoteDTO instance
         /// </summary>
         /// <param name="dto">An instance of the order note from the REST API</param>
+        /// <summary>
+        /// Provides the FromDto operation while preserving the established order-domain behavior.
+        /// </summary>
         public void FromDto(OrderNoteDTO dto)
         {
             if (dto == null) return;

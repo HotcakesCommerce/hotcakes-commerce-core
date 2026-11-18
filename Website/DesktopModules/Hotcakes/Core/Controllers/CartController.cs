@@ -51,6 +51,7 @@ using Newtonsoft.Json;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Handles storefront shopping-cart display and cart mutations.</summary>
     [Serializable]
     public class CartController : BaseStoreController
     {
@@ -226,6 +227,9 @@ namespace Hotcakes.Modules.Core.Controllers
             return false;
         }
 
+        /// <summary>Validates the cart and redirects to checkout when it can proceed.</summary>
+        /// <param name="model">The current cart view model.</param>
+        /// <returns>A checkout redirect, or <see langword="null"/> when validation fails.</returns>
         public RedirectResult ForwardToCheckout(CartViewModel model)
         {
             if (Request["paypalexpress"] != null && Request["paypalexpress"] == "true")
@@ -266,6 +270,8 @@ namespace Hotcakes.Modules.Core.Controllers
             return null;
         }
 
+        /// <summary>Starts the PayPal Express checkout workflow for the cart.</summary>
+        /// <param name="model">The current cart view model.</param>
         public void ForwardToPayPalExpress(CartViewModel model)
         {
             // Save as Order
@@ -324,6 +330,8 @@ namespace Hotcakes.Modules.Core.Controllers
         #region Main Cart Actions
 
         // GET: /Cart/
+        /// <summary>Displays the full shopping cart.</summary>
+        /// <returns>The cart view.</returns>
         [Obsolete("This action is no longer used to load the minicart content.")]
         [NonCacheableResponseFilter]
         public ActionResult Index()
@@ -347,6 +355,8 @@ namespace Hotcakes.Modules.Core.Controllers
         }
 
         // GET: /MiniCart/
+        /// <summary>Displays the compact mini-cart summary.</summary>
+        /// <returns>The mini-cart view or its error view.</returns>
         [NonCacheableResponseFilter]
         public ActionResult MiniCart()
         {
@@ -366,6 +376,8 @@ namespace Hotcakes.Modules.Core.Controllers
         }
 
         // POST: /MiniCartItems
+        /// <summary>Returns the current mini-cart items as JSON.</summary>
+        /// <returns>A JSON cart result.</returns>
         [ActionName("MiniCartItems")]
         [HccHttpPost]
         public JsonResult GetMiniCartItems()
@@ -390,6 +402,8 @@ namespace Hotcakes.Modules.Core.Controllers
         }
 
         // POST: /Cart/
+        /// <summary>Processes the cart's proceed-to-checkout submission.</summary>
+        /// <returns>The checkout redirect or cart view.</returns>
         [ActionName("Index")]
         [HccHttpPost]
         public ActionResult IndexPost()
@@ -419,6 +433,9 @@ namespace Hotcakes.Modules.Core.Controllers
         }
 
         // POST: /Cart/BulkAdd
+        /// <summary>Adds the submitted bulk product and quantity values to the cart.</summary>
+        /// <param name="form">The posted bulk product fields.</param>
+        /// <returns>A redirect to the cart.</returns>
         [HccHttpPost]
         public ActionResult BulkAdd(FormCollection form)
         {
@@ -460,6 +477,8 @@ namespace Hotcakes.Modules.Core.Controllers
 
         #region AJAX actions
 
+        /// <summary>Removes the requested line item from the current cart.</summary>
+        /// <returns>A redirect to the cart.</returns>
         [HccHttpPost]
         public ActionResult RemoveLineItem()
         {
@@ -474,6 +493,8 @@ namespace Hotcakes.Modules.Core.Controllers
             return Redirect(Url.RouteHccUrl(HccRoute.Cart));
         }
 
+        /// <summary>Updates the requested line item's quantity.</summary>
+        /// <returns>A redirect to the cart.</returns>
         [HccHttpPost]
         public ActionResult UpdateLineItem()
         {
@@ -501,6 +522,8 @@ namespace Hotcakes.Modules.Core.Controllers
             return Redirect(Url.RouteHccUrl(HccRoute.Cart));
         }
 
+        /// <summary>Adds the submitted coupon code to the current cart.</summary>
+        /// <returns>A redirect to the cart.</returns>
         [HccHttpPost]
         public ActionResult AddCoupon()
         {
@@ -510,6 +533,8 @@ namespace Hotcakes.Modules.Core.Controllers
             return Redirect(Url.RouteHccUrl(HccRoute.Cart));
         }
 
+        /// <summary>Removes the submitted coupon from the current cart.</summary>
+        /// <returns>A redirect to the cart.</returns>
         [HccHttpPost]
         public ActionResult RemoveCoupon()
         {

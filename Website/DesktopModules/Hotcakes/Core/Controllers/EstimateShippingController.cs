@@ -37,6 +37,7 @@ using Hotcakes.Modules.Core.Models.Json;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Calculates shipping estimates for the current shopping cart.</summary>
     [Serializable]
     public class EstimateShippingController : BaseStoreController
     {
@@ -59,6 +60,8 @@ namespace Hotcakes.Modules.Core.Controllers
             return model;
         }
 
+        /// <summary>Displays the shipping estimate form.</summary>
+        /// <returns>The shipping estimate view.</returns>
         public ActionResult Index()
         {
             var model = BuildViewModel();
@@ -71,6 +74,9 @@ namespace Hotcakes.Modules.Core.Controllers
             return View(model);
         }
 
+        /// <summary>Displays the shipping estimate form populated with submitted values and rates.</summary>
+        /// <param name="posted">The submitted shipping estimate values.</param>
+        /// <returns>The shipping estimate view.</returns>
         [HccHttpPost]
         [ActionName("Index")]
         public ActionResult IndexPost(EstimateShippingViewModel posted)
@@ -87,6 +93,11 @@ namespace Hotcakes.Modules.Core.Controllers
             return View(model);
         }
 
+        /// <summary>Returns available shipping rates for the supplied destination.</summary>
+        /// <param name="countryId">The destination country business identifier.</param>
+        /// <param name="regionId">The destination region identifier.</param>
+        /// <param name="postalCode">The destination postal code.</param>
+        /// <returns>A JSON result containing available rates.</returns>
         [HccHttpPost]
         public ActionResult GetRates(string countryId, string regionId, string postalCode)
         {
@@ -99,6 +110,9 @@ namespace Hotcakes.Modules.Core.Controllers
             return new JsonResult {Data = model.Rates};
         }
 
+        /// <summary>Returns rendered region options for a country.</summary>
+        /// <param name="id">The country business identifier.</param>
+        /// <returns>A JSON result containing region option markup.</returns>
         [HccHttpPost]
         public ActionResult GetRegions(string id)
         {
@@ -155,6 +169,9 @@ namespace Hotcakes.Modules.Core.Controllers
             model.Rates = rates.ToList();
         }
 
+        /// <summary>Calculates rates for a posted order and returns radio-button markup.</summary>
+        /// <param name="form">The posted destination and order values.</param>
+        /// <returns>A serialized JSON shipping-rate response.</returns>
         [HccHttpPost]
         public ActionResult GetRatesAsRadioButtons(FormCollection form)
         {

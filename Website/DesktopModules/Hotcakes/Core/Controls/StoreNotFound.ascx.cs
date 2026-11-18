@@ -29,6 +29,9 @@ using System.Web.UI;
 
 namespace Hotcakes.Modules.Core.Controls
 {
+    /// <summary>
+    /// Represents the StoreNotFound component used by the Hotcakes Core module.
+    /// </summary>
     public partial class StoreNotFound : UserControl
     {
         protected void Page_Load(object sender, EventArgs e)

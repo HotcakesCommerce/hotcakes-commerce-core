@@ -32,9 +32,16 @@ using Hotcakes.Modules.Core.Controllers.Shared;
 
 namespace Hotcakes.Modules.Core.Areas.ContentBlocks.Controllers
 {
+    /// <summary>
+    /// Renders HTML configured in an HTML content block.
+    /// </summary>
     [Serializable]
     public class HtmlController : BaseAppController
     {
+        /// <summary>
+        /// Renders the content block or administrative file view for the current request.
+        /// </summary>
+        /// <param name="block">The value supplied for block.</param>
         public ActionResult Index(ContentBlock block)
         {
             var result = string.Empty;

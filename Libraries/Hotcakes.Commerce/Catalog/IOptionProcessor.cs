@@ -30,17 +30,76 @@ using System.Web.UI.WebControls;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Represents the catalog interface <see cref="IOptionProcessor" /> and its associated behavior.
+    /// </summary>
     public interface IOptionProcessor
     {
+        /// <summary>
+        /// Performs the catalog operation represented by <c>GetOptionType</c>.
+        /// </summary>
+        /// <returns>The result of the operation.</returns>
         OptionTypes GetOptionType();
+        /// <summary>
+        /// Performs the catalog operation represented by <c>Render</c>.
+        /// </summary>
+        /// <param name="baseOption">Input used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         string Render(Option baseOption);
+        /// <summary>
+        /// Performs the catalog operation represented by <c>RenderWithSelection</c>.
+        /// </summary>
+        /// <param name="baseOption">Input used by the operation.</param>
+        /// <param name="selections">Input used by the operation.</param>
+        /// <param name="prefix">Input used by the operation.</param>
+        /// <param name="className">Input used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         string RenderWithSelection(Option baseOption, OptionSelectionList selections, string prefix = null, string className = null);
+        /// <summary>
+        /// Performs the catalog operation represented by <c>RenderAsControl</c>.
+        /// </summary>
+        /// <param name="baseOption">Input used by the operation.</param>
+        /// <param name="ph">Input used by the operation.</param>
+        /// <param name="prefix">Input used by the operation.</param>
+        /// <param name="className">Input used by the operation.</param>
         void RenderAsControl(Option baseOption, PlaceHolder ph, string prefix = null, string className = null);
+        /// <summary>
+        /// Performs the catalog operation represented by <c>ParseFromPlaceholder</c>.
+        /// </summary>
+        /// <param name="baseOption">Input used by the operation.</param>
+        /// <param name="ph">Input used by the operation.</param>
+        /// <param name="prefix">Input used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         OptionSelection ParseFromPlaceholder(Option baseOption, PlaceHolder ph, string prefix = null);
+        /// <summary>
+        /// Performs the catalog operation represented by <c>ParseFromForm</c>.
+        /// </summary>
+        /// <param name="baseOption">Input used by the operation.</param>
+        /// <param name="form">Input used by the operation.</param>
+        /// <param name="prefix">Input used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         OptionSelection ParseFromForm(Option baseOption, NameValueCollection form, string prefix = null);
+        /// <summary>
+        /// Performs the catalog operation represented by <c>SetSelectionsInPlaceholder</c>.
+        /// </summary>
+        /// <param name="baseOption">Input used by the operation.</param>
+        /// <param name="ph">Input used by the operation.</param>
+        /// <param name="selections">Input used by the operation.</param>
         void SetSelectionsInPlaceholder(Option baseOption, PlaceHolder ph, OptionSelectionList selections);
+        /// <summary>
+        /// Performs the catalog operation represented by <c>CartDescription</c>.
+        /// </summary>
+        /// <param name="baseOption">Input used by the operation.</param>
+        /// <param name="selections">Input used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         string CartDescription(Option baseOption, OptionSelectionList selections);
 
+        /// <summary>
+        /// Performs the catalog operation represented by <c>GetSelectionValues</c>.
+        /// </summary>
+        /// <param name="baseOption">Input used by the operation.</param>
+        /// <param name="selections">Input used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         List<string> GetSelectionValues(Option baseOption, OptionSelectionList selections);
     }
 }

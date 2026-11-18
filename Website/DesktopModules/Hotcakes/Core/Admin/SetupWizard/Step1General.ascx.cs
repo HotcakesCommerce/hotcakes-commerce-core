@@ -42,6 +42,9 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Modules.Core.Admin.SetupWizard
 {
+    /// <summary>
+    /// Provides the general-settings step of the setup wizard.
+    /// </summary>
     public partial class Step1General : HccPart
     {
         #region Properties

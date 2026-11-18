@@ -28,19 +28,49 @@ using System;
 
 namespace Hotcakes.Commerce.Payment.Methods
 {
+    /// <summary>
+    /// Represents the parsed fields returned by an Ogone payment response.
+    /// </summary>
+    /// <remarks>
+    /// The properties retain the provider's response concepts and are used
+    /// together with <see cref="OgoneUtils"/> when validating the returned
+    /// SHA signature. No normalization of the provider values is implied by
+    /// this contract.
+    /// </remarks>
     [Serializable]
     public class OgoneResponse
     {
+        /// <summary>Gets or sets the provider order identifier.</summary>
         public string OrderId { get; set; }
+
+        /// <summary>Gets or sets the transaction amount.</summary>
         public decimal Amount { get; set; }
+
+        /// <summary>Gets or sets the transaction currency.</summary>
         public string Currency { get; set; }
+
+        /// <summary>Gets or sets the payment method returned by Ogone.</summary>
         public string PaymentMethod { get; set; }
+
+        /// <summary>Gets or sets the provider acceptance value.</summary>
         public string Acceptance { get; set; }
+
+        /// <summary>Gets or sets the numeric provider transaction status.</summary>
         public int Status { get; set; }
+
+        /// <summary>Gets or sets the card number value returned by the provider.</summary>
         public string CardNumber { get; set; }
+
+        /// <summary>Gets or sets the provider payment identifier.</summary>
         public string PayId { get; set; }
+
+        /// <summary>Gets or sets the provider error value.</summary>
         public string NcError { get; set; }
+
+        /// <summary>Gets or sets the payment brand returned by the provider.</summary>
         public string Brand { get; set; }
+
+        /// <summary>Gets or sets the SHA signature returned by the provider.</summary>
         public string ShaSignature { get; set; }
     }
 }

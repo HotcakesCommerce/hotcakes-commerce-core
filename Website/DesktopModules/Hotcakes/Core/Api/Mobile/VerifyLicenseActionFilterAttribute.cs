@@ -32,8 +32,15 @@ using Hotcakes.Commerce.Globalization;
 
 namespace Hotcakes.Modules.Core.Api.Mobile
 {
+    /// <summary>
+    /// Prevents execution of mobile API actions when the feature is not licensed.
+    /// </summary>
     public class VerifyLicenseActionFilterAttribute : ActionFilterAttribute
     {
+        /// <summary>
+        /// Replaces the action response with a localized service-unavailable response.
+        /// </summary>
+        /// <param name="actionContext">The context for the action about to execute.</param>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             base.OnActionExecuting(actionContext);

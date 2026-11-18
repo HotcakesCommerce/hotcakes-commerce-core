@@ -27,8 +27,12 @@
 namespace Hotcakes.Commerce.Catalog
 {
     /// <summary>
-    ///     This enumeration helps to define how a product will be displayed and managed when a product is out of stock.
+    ///     Specifies how a product is displayed and whether it may be purchased when inventory is unavailable.
     /// </summary>
+    /// <remarks>
+    ///     The numeric values are persisted and exchanged by the catalog API; do not change them or reuse them for another
+    ///     inventory behavior.
+    /// </remarks>
     public enum ProductInventoryMode
     {
         /// <summary>

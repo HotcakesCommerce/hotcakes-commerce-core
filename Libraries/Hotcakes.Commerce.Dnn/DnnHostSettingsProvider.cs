@@ -31,19 +31,37 @@ using DotNetNuke.Entities.Host;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Reads host-level configuration values from DNN through <see cref="IHostSettingsProvider"/>.
+    /// </summary>
     [Serializable]
     public class DnnHostSettingsProvider : IHostSettingsProvider
     {
+        /// <summary>
+        /// Gets the file extensions allowed by the DNN host configuration.
+        /// </summary>
+        /// <returns>The host's allowed extension whitelist.</returns>
         public IEnumerable<string> GetAllowedExtensions()
         {
             return Host.AllowedExtensionWhitelist.AllowedExtensions;
         }
 
+        /// <summary>
+        /// Gets whether DNN host debug mode is enabled.
+        /// </summary>
+        /// <returns><see langword="true"/> when host debug mode is enabled; otherwise, <see langword="false"/>.</returns>
         public bool DebugModeEnabled()
         {
             return Host.DebugMode;
         }
 
+        /// <summary>
+        /// Gets a host setting converted to the requested type.
+        /// </summary>
+        /// <typeparam name="T">The type to which the setting is converted.</typeparam>
+        /// <param name="key">The host setting key.</param>
+        /// <param name="defVal">The value returned when the setting is missing or cannot be converted.</param>
+        /// <returns>The converted setting value, or <paramref name="defVal"/> when unavailable or invalid.</returns>
         public T GetSettingValue<T>(string key, T defVal)
         {
             var val = GetSettingValue(key);

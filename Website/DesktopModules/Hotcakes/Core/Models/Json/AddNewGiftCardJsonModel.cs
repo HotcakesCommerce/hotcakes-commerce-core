@@ -28,11 +28,23 @@ using System;
 
 namespace Hotcakes.Modules.Core.Models.Json
 {
+/// <summary>
+    /// Represents the AddNewGiftCardJsonModel storefront model.
+    /// </summary>
     [Serializable]
     public class AddNewGiftCardJsonModel
     {
+        /// <summary>
+        /// Gets or sets the TotalsAsTable value used by this storefront model.
+        /// </summary>
         public string TotalsAsTable { get; set; }
+        /// <summary>
+        /// Gets or sets the PaymentViewModel value used by this storefront model.
+        /// </summary>
         public CheckoutPaymentViewModel PaymentViewModel { get; set; }
+        /// <summary>
+        /// Gets or sets the GiftCards value used by this storefront model.
+        /// </summary>
         public GiftCardViewModel GiftCards { get; set; }
     }
 }

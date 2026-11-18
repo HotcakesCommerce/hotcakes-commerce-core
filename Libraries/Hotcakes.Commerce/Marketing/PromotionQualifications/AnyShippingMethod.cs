@@ -28,28 +28,40 @@ using System;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Matches any non-sale order or line-item shipping evaluation.</summary>
+    /// <remarks>This is the lowest-cost, optionless shipping qualification.</remarks>
     public class AnyShippingMethod : PromotionQualificationBase
     {
+        /// <summary>Initializes an instance with <see cref="RelativeProcessingCost.Lowest"/>.</summary>
         public AnyShippingMethod()
         {
             ProcessingCost = RelativeProcessingCost.Lowest;
         }
 
+        /// <summary>Gets the stable identifier for the any-shipping-method qualification.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdAnyShippingMethod); }
         }
 
+        /// <summary>Gets a value indicating that this qualification has no settings.</summary>
         public override bool HasOptions
         {
             get { return false; }
         }
 
+        /// <summary>Gets the display description for the catch-all shipping rule.</summary>
+        /// <param name="app">The application context; unused by this rule.</param>
+        /// <returns>The literal description <c>When Any Shipping Method</c>.</returns>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             return "When Any Shipping Method";
         }
 
+        /// <summary>Matches order or line-item scope when an order exists and the context is not a sale.</summary>
+        /// <param name="context">The promotion context to inspect.</param>
+        /// <param name="mode">The requested evaluation scope.</param>
+        /// <returns><c>true</c> when the applicable order and non-sale checks pass.</returns>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             if (mode != PromotionQualificationMode.Orders &&

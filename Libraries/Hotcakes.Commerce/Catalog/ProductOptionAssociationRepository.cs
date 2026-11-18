@@ -33,13 +33,22 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Defines the catalog data or behavior represented by this member.
+    /// </summary>
     public class ProductOptionAssociationRepository : HccSimpleRepoBase<hcc_ProductXOption, ProductOptionAssociation>
     {
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductOptionAssociationRepository(HccRequestContext c)
             : base(c)
         {
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyDataToModel(hcc_ProductXOption data, ProductOptionAssociation model)
         {
             model.Id = data.Id;
@@ -49,6 +58,9 @@ namespace Hotcakes.Commerce.Catalog
             model.StoreId = data.StoreId;
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyModelToData(hcc_ProductXOption data, ProductOptionAssociation model)
         {
             data.Id = model.Id;
@@ -58,16 +70,25 @@ namespace Hotcakes.Commerce.Catalog
             data.StoreId = model.StoreId;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductOptionAssociation Find(long id)
         {
             return FindFirstPoco(y => y.Id == id);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductOptionAssociation FindByProductAndOption(string productId, string optionId)
         {
             return FindByProductAndOption(productId, optionId, Context.CurrentStore.Id);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductOptionAssociation FindByProductAndOption(string productId, string optionId, long storeId)
         {
             var productGuid = DataTypeHelper.BvinToGuid(productId);
@@ -83,6 +104,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public override bool Create(ProductOptionAssociation item)
         {
             item.StoreId = Context.CurrentStore.Id;
@@ -106,6 +130,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool Update(ProductOptionAssociation c)
         {
             if (c.StoreId != Context.CurrentStore.Id)
@@ -115,6 +142,9 @@ namespace Hotcakes.Commerce.Catalog
             return Update(c, y => y.Id == c.Id && y.StoreId == Context.CurrentStore.Id);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductOptionAssociation> FindAll()
         {
             var storeId = Context.CurrentStore.Id;
@@ -125,11 +155,17 @@ namespace Hotcakes.Commerce.Catalog
             });
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductOptionAssociation> FindAllForAllStores()
         {
             return FindAllPagedForAllStores(1, int.MaxValue);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public new List<ProductOptionAssociation> FindAllPaged(int pageNumber, int pageSize)
         {
             var storeId = Context.CurrentStore.Id;
@@ -140,12 +176,18 @@ namespace Hotcakes.Commerce.Catalog
             }, pageNumber, pageSize);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductOptionAssociation> FindAllPagedForAllStores(int pageNumber, int pageSize)
         {
             var storeId = Context.CurrentStore.Id;
             return FindListPoco(q => { return q.OrderBy(y => y.SortOrder); }, pageNumber, pageSize);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductOptionAssociation> FindForProducts(List<string> productIds, int pageNumber, int pageSize)
         {
             var storeId = Context.CurrentStore.Id;
@@ -158,6 +200,9 @@ namespace Hotcakes.Commerce.Catalog
             }, pageNumber, pageSize);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductOptionAssociation> FindForProduct(string productId, int pageNumber, int pageSize)
         {
             var storeId = Context.CurrentStore.Id;
@@ -170,6 +215,9 @@ namespace Hotcakes.Commerce.Catalog
             }, pageNumber, pageSize);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductOptionAssociation> FindForOption(string optionId, int pageNumber, int pageSize)
         {
             var storeId = Context.CurrentStore.Id;
@@ -182,6 +230,9 @@ namespace Hotcakes.Commerce.Catalog
             }, pageNumber, pageSize);
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool DeleteAllForProduct(string productId)
         {
             var storeId = Context.CurrentStore.Id;
@@ -189,6 +240,9 @@ namespace Hotcakes.Commerce.Catalog
             return Delete(y => y.ProductBvin == productGuid && y.StoreId == storeId);
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool DeleteAllForOption(string optionId)
         {
             var storeId = Context.CurrentStore.Id;
@@ -196,6 +250,9 @@ namespace Hotcakes.Commerce.Catalog
             return Delete(y => y.OptionBvin == optionGuid && y.StoreId == storeId);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool AddOptionToProduct(string productId, string optionId)
         {
             var storeId = Context.CurrentStore.Id;
@@ -221,6 +278,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool RemoveOptionFromProduct(string productId, string optionId)
         {
             var storeId = Context.CurrentStore.Id;
@@ -237,6 +297,9 @@ namespace Hotcakes.Commerce.Catalog
             return Update(c1);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool ResortOptionsForProduct(string productId, List<string> sortedIds)
         {
             if (sortedIds != null)

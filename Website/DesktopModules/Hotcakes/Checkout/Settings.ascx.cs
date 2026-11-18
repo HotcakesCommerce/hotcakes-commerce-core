@@ -32,6 +32,9 @@ using System.Web.UI.WebControls;
 
 namespace Hotcakes.Modules.Checkout
 {
+    /// <summary>
+    /// Provides module settings for the checkout module.
+    /// </summary>
     public partial class Settings : HotcakesSettingsBase
     {
         #region Implementation
@@ -70,6 +73,9 @@ namespace Hotcakes.Modules.Checkout
 
         #region ModuleSettingsBase overrides
 
+        /// <summary>
+        /// Loads the checkout module settings into the controls.
+        /// </summary>
         public override void LoadSettings()
         {
             if (!IsPostBack)
@@ -111,6 +117,9 @@ namespace Hotcakes.Modules.Checkout
             }
         }
 
+        /// <summary>
+        /// Saves the checkout module settings from the controls.
+        /// </summary>
         public override void UpdateSettings()
         {
             var controller = new ModuleController();

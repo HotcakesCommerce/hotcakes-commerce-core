@@ -30,6 +30,9 @@ using System.Globalization;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 {
+    /// <summary>
+    /// Edits a qualification based on an order subtotal.
+    /// </summary>
     public partial class OrderSubTotalIsEditor : BaseQualificationControl
     {
         private OrderSubTotalIs TypedQualification
@@ -37,12 +40,15 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             get { return Qualification as OrderSubTotalIs; }
         }
 
+        /// <summary>Loads the order-subtotal qualification into the editor.</summary>
         public override void LoadQualification()
         {
             if (TypedQualification == null || OrderSubTotalIsField == null) return;
             OrderSubTotalIsField.Text = TypedQualification.Amount.ToString(CultureInfo.CurrentCulture);
         }
 
+        /// <summary>Saves the order-subtotal qualification.</summary>
+        /// <returns><see langword="true"/> when the qualification is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveQualification()
         {
             if (TypedQualification == null || OrderSubTotalIsField == null) return false;

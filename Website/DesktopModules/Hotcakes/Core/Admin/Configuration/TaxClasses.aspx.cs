@@ -34,8 +34,10 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
 {
     partial class TaxClasses : BaseAdminPage
     {
+        /// <summary>Identifies the built-in Hotcakes tax provider.</summary>
         public const string DNNTaxProvider = "Hotcakes";
 
+        /// <summary>Gets or sets the selected tax provider identifier.</summary>
         public string ProviderID
         {
             get { return Request.QueryString["providerid"]; }
@@ -94,6 +96,9 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
             HccApp.UpdateCurrentStore();
         }
 
+        /// <summary>Deletes the tax class selected in the tax class grid.</summary>
+        /// <param name="sender">The event source.</param>
+        /// <param name="e">The grid command event data.</param>
         public void dgTaxClasses_Delete(object sender, DataGridCommandEventArgs e)
         {
             var editID = (long) dgTaxClasses.DataKeys[e.Item.ItemIndex];

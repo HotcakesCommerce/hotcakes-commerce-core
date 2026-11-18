@@ -30,6 +30,13 @@ using System.Web;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Defines an extension point for custom URL-rewriting rules.
+    /// </summary>
+    /// <remarks>
+    /// Implementations can be registered in <see cref="AvailableRules"/>. A rule receives the current application,
+    /// source URI, and decoded URL parts and returns whether it handled the request.
+    /// </remarks>
     public abstract class UrlRewritingRule
     {
         static UrlRewritingRule()
@@ -37,8 +44,20 @@ namespace Hotcakes.Commerce.Utilities
             AvailableRules = null;
         }
 
+        /// <summary>
+        /// Gets or sets the collection of custom rewriting rules available to the application.
+        /// </summary>
+        /// <value>The registered rules, or <see langword="null"/> when no collection has been configured.</value>
+        /// <remarks>The collection is shared process-wide; callers are responsible for initialization and ordering.</remarks>
         public static Collection<UrlRewritingRule> AvailableRules { get; set; }
 
+        /// <summary>
+        /// Executes the rule against the current request.
+        /// </summary>
+        /// <param name="app">The current application; implementations may replace the referenced application.</param>
+        /// <param name="sourceUrl">The original URI being evaluated.</param>
+        /// <param name="parts">The decoded path and query parts derived for rewriting.</param>
+        /// <returns><see langword="true"/> when the rule handles the request; otherwise, <see langword="false"/>.</returns>
         public abstract bool Execute(ref HttpApplication app, Uri sourceUrl, UrlRewriterParts parts);
     }
 }

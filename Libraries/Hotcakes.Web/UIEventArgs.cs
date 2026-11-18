@@ -29,10 +29,14 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Web
 {
+    /// <summary>Provides event data containing one item or a collection of items for a user-interface event.</summary>
+    /// <typeparam name="T">The item type carried by the event.</typeparam>
     [Serializable]
     public class UIEventArgs<T> : EventArgs
     {
+        /// <summary>Gets or sets the primary item associated with the event.</summary>
         public T Item { get; set; }
+        /// <summary>Gets or sets the items associated with the event.</summary>
         public IList<T> Items { get; set; }
     }
 }

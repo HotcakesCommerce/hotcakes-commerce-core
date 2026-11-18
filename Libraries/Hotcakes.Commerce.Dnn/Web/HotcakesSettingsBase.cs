@@ -30,14 +30,24 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Dnn.Web
 {
+    /// <summary>
+    /// Provides common initialization and commerce access for Hotcakes DNN module settings controls.
+    /// </summary>
     [Serializable]
     public class HotcakesSettingsBase : ModuleSettingsBase
     {
+        /// <summary>
+        /// Gets the current <see cref="HotcakesApplication"/> instance.
+        /// </summary>
         protected HotcakesApplication HccApp
         {
             get { return HotcakesApplication.Current; }
         }
 
+        /// <summary>
+        /// Initializes the settings control and updates the request content culture.
+        /// </summary>
+        /// <param name="e">The event data for the initialization event.</param>
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);

@@ -34,6 +34,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing
 {
+    /// <summary>
+    /// Provides the reusable administrative promotion list control.
+    /// </summary>
     public partial class Promotions_List : HccUserControl
     {
         #region Fields
@@ -44,12 +47,16 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         #region Properties
 
+        /// <summary>Gets or sets the promotion type displayed by the list.</summary>
         public PromotionType Mode { get; set; }
 
         #endregion
 
         #region Public methods
 
+        /// <summary>Loads promotions matching the supplied list criteria.</summary>
+        /// <param name="keywords">The optional search text.</param>
+        /// <param name="showDisabled">A value indicating whether disabled promotions are included.</param>
         public void LoadPromotions(string keywords, bool showDisabled)
         {
             var items = HccApp.MarketingServices.Promotions.FindAllWithFilter(Mode, keywords, showDisabled, ucPager.PageNumber,
@@ -66,6 +73,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing
 
         #endregion
 
+        /// <summary>Resets the promotion list to its first page.</summary>
         public void ResetPageNumber()
         {
             ucPager.ResetPageNumber();

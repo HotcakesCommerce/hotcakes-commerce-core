@@ -34,24 +34,39 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    /// Represents the OrderPackageRepository order-domain type and preserves the established public compatibility surface.
+    /// </summary>
     public class OrderPackageRepository : HccSimpleRepoBase<hcc_OrderPackage, OrderPackage>
     {
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         public OrderPackageRepository(HccRequestContext c)
             : base(c)
         {
         }
 
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override Func<hcc_OrderPackage, bool> MatchItems(OrderPackage item)
         {
             return op => op.Id == item.Id;
         }
 
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override Func<hcc_OrderPackage, bool> NotMatchItems(List<OrderPackage> items)
         {
             var itemIds = items.Select(i => i.Id).ToList();
             return op => !itemIds.Contains(op.Id);
         }
 
+        /// <summary>
+        /// Provides the CopyModelToData operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override void CopyModelToData(hcc_OrderPackage data, OrderPackage model)
         {
             data.CustomProperties = model.CustomProperties.ToXml();
@@ -76,6 +91,9 @@ namespace Hotcakes.Commerce.Orders
             data.ShippingMethodId = model.ShippingMethodId;
         }
 
+        /// <summary>
+        /// Provides the CopyDataToModel operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override void CopyDataToModel(hcc_OrderPackage data, OrderPackage model)
         {
             model.CustomProperties = CustomPropertyCollection.FromXml(data.CustomProperties);
@@ -100,17 +118,26 @@ namespace Hotcakes.Commerce.Orders
             model.ShippingMethodId = data.ShippingMethodId;
         }
 
+        /// <summary>
+        /// Provides the Update operation while preserving the established order-domain behavior.
+        /// </summary>
         public bool Update(OrderPackage item)
         {
             item.LastUpdatedUtc = DateTime.UtcNow;
             return base.Update(item, y => y.Id == item.Id);
         }
 
+        /// <summary>
+        /// Provides the Delete operation while preserving the established order-domain behavior.
+        /// </summary>
         public bool Delete(long id)
         {
             return Delete(y => y.Id == id);
         }
 
+        /// <summary>
+        /// Finds the requested records within the established repository store scope and ordering.
+        /// </summary>
         public List<OrderPackage> FindForOrders(List<string> orderBvins)
         {
             var orderGuids = orderBvins.Select(bvin => DataTypeHelper.BvinToGuid(bvin)).ToList();
@@ -122,6 +149,9 @@ namespace Hotcakes.Commerce.Orders
             });
         }
 
+        /// <summary>
+        /// Finds the requested records within the established repository store scope and ordering.
+        /// </summary>
         public List<OrderPackage> FindForOrder(string orderBvin)
         {
             var orderGuid = DataTypeHelper.BvinToGuid(orderBvin);
@@ -132,12 +162,18 @@ namespace Hotcakes.Commerce.Orders
             });
         }
 
+        /// <summary>
+        /// Deletes all records associated with the specified parent identifier.
+        /// </summary>
         public void DeleteForOrder(string orderBvin)
         {
             var orderGuid = DataTypeHelper.BvinToGuid(orderBvin);
             Delete(y => y.OrderId == orderGuid);
         }
 
+        /// <summary>
+        /// Merges the supplied records after assigning their established parent and store scope.
+        /// </summary>
         public void MergeList(string orderBvin, long storeId, List<OrderPackage> subitems)
         {
             // Set Base Key Field

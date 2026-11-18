@@ -28,9 +28,16 @@ using System;
 
 namespace Hotcakes.Shipping
 {
+    /// <summary>
+    /// Describes the value, quantity, weight, and dimensions of one shipment box.
+    /// </summary>
+    /// <seealso cref="IShippable" />
     [Serializable]
     public class Shippable : IShippable
     {
+        /// <summary>
+        /// Initializes a shippable box with zero measurements and the default imperial units.
+        /// </summary>
         public Shippable()
         {
             BoxValue = 0;
@@ -43,16 +50,34 @@ namespace Hotcakes.Shipping
             BoxHeight = 0;
         }
 
+        /// <summary>Gets or sets the monetary value of the contents of the box.</summary>
         public decimal BoxValue { get; set; }
+
+        /// <summary>Gets or sets the number of items in the box.</summary>
         public int QuantityOfItemsInBox { get; set; }
+
+        /// <summary>Gets or sets the unit used by <see cref="BoxWeight" />.</summary>
         public WeightType BoxWeightType { get; set; }
+
+        /// <summary>Gets or sets the weight of the box contents.</summary>
         public decimal BoxWeight { get; set; }
+
+        /// <summary>Gets or sets the unit used by the box dimensions.</summary>
         public LengthType BoxLengthType { get; set; }
+
+        /// <summary>Gets or sets the length of the box.</summary>
         public decimal BoxLength { get; set; }
+
+        /// <summary>Gets or sets the width of the box.</summary>
         public decimal BoxWidth { get; set; }
+
+        /// <summary>Gets or sets the height of the box.</summary>
         public decimal BoxHeight { get; set; }
 
-
+        /// <summary>
+        /// Creates a value copy of this shippable box.
+        /// </summary>
+        /// <returns>A new <see cref="IShippable" /> containing the same box values.</returns>
         public IShippable CloneShippable()
         {
             var clone = new Shippable

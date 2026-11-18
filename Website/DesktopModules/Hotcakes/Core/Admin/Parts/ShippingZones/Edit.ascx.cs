@@ -31,11 +31,17 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Parts.ShippingZones
 {
+    /// <summary>
+    /// Defines the administrative class Edit.
+    /// </summary>
     public partial class Edit : HccPart
     {
         private Zone _shippingZone;
         public long ShippingZoneId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the shipping zone id.
+        /// </summary>
         protected Zone GetShippingZone(bool forceReload)
         {
             if (_shippingZone == null || _shippingZone.Id != ShippingZoneId || forceReload)

@@ -30,9 +30,13 @@ using System.Web;
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Represents AccountService data and behavior within the Hotcakes Commerce account and store boundary.</summary>
     [Serializable]
     public abstract class AccountService : HccServiceBase, IAccountService
     {
+        /// <summary>Performs the AccountService operation.</summary>
+        /// <param name="context">The context value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public AccountService(HccRequestContext context)
             : base(context)
         {
@@ -40,14 +44,16 @@ namespace Hotcakes.Commerce.Accounts
             Stores = Factory.CreateRepo<StoreRepository>(Context);
         }
 
+        /// <summary>Gets or sets the ApiKeys value for this instance.</summary>
+        /// <value>The current ApiKeys value. The meaning and persistence scope are defined by the containing type.</value>
         public ApiKeyRepository ApiKeys { get; protected set; }
+        /// <summary>Gets or sets the Stores value for this instance.</summary>
+        /// <value>The current Stores value. The meaning and persistence scope are defined by the containing type.</value>
         public StoreRepository Stores { get; protected set; }
 
-        /// <summary>
-        ///     Create store. This method is generally used during the first time application
-        ///     installation and during first step of the wizard
-        /// </summary>
-        /// <returns></returns>
+        /// <summary>Creates a store for the current commerce context and applies the default store settings.</summary>
+        /// <returns>The newly persisted <see cref="Store"/>.</returns>
+        /// <remarks>The store is created through <see cref="Stores"/>, initialized with generated encryption material and other defaults, then updated so its settings are persisted. If creation fails, a <see cref="CreateStoreException"/> is thrown.</remarks>
         public virtual Store CreateAndSetupStore()
         {
             var s = CreateStore();
@@ -70,6 +76,10 @@ namespace Hotcakes.Commerce.Accounts
         }
     
         //Get Store instance by given URL
+        /// <summary>Resolves a store from a request URL or host name.</summary>
+        /// <param name="url">The URL or host name to normalize and match.</param>
+        /// <returns>The matching store, or <see langword="null"/> when the input is blank or no custom URL/domain matches.</returns>
+        /// <remarks>The lookup first checks the store custom URL and then alternate domains. Matching is case-insensitive after trimming and lower-casing.</remarks>
         public virtual Store GetStoreByUrl(string url)
         {
             if (string.IsNullOrWhiteSpace(url)) return null;
@@ -96,11 +106,9 @@ namespace Hotcakes.Commerce.Accounts
             return null;
         }
 
-        /// <summary>
-        ///     Get current store instance. Site can have multiple store and this method
-        ///     returns the current store instance the user is accessing.
-        /// </summary>
-        /// <returns>Store instance</returns>
+        /// <summary>Gets the store associated with the current HTTP request host.</summary>
+        /// <returns>The current <see cref="Store"/>, or <see langword="null"/> when no request URL or matching store exists.</returns>
+        /// <remarks>This method resolves the request's DNS-safe host through <see cref="GetStoreByUrl(string)"/> and therefore supports alternate store domains.</remarks>
         public virtual Store GetCurrentStore()
         {
             var context = HttpContext.Current;
@@ -110,10 +118,9 @@ namespace Hotcakes.Commerce.Accounts
             return GetStoreByUrl(host);
         }
 
-        /// <summary>
-        ///     Get Google Analytics settings for a current store.
-        /// </summary>
-        /// <returns>Returns <see cref="GoogleAnalyticsSettings" /> instance</returns>
+        /// <summary>Gets Google Analytics settings for the current store.</summary>
+        /// <returns>A settings object populated from the current store; when the store cannot be found, the default-initialized object is returned.</returns>
+        /// <remarks>The read uses the store repository cache and the serialized keys <c>UseGoogleTracker</c> and <c>GoogleTrackerId</c>.</remarks>
         public virtual GoogleAnalyticsSettings GetGoogleAnalyticsSettings()
         {
             var store = Stores.FindByIdWithCache(Context.CurrentStore.Id);
@@ -125,10 +132,11 @@ namespace Hotcakes.Commerce.Accounts
             return result;
         }
 
-        /// <summary>
-        ///     Set the google analytics information for the current store.
-        /// </summary>
-        /// <param name="newSettings"></param>
+        /// <summary>Persists Google Analytics settings for the current store.</summary>
+        /// <param name="newSettings">The settings to save. This value cannot be <see langword="null"/>.</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="newSettings"/> is <see langword="null"/>.</exception>
+        /// <exception cref="InvalidOperationException">Thrown when the current store cannot be found.</exception>
+        /// <remarks>The values are saved under <c>UseGoogleTracker</c> and <c>GoogleTrackerId</c>; repository update invalidates the store cache.</remarks>
         public virtual void SetGoogleAnalyticsSettings(GoogleAnalyticsSettings newSettings)
         {
             if (newSettings == null) throw new ArgumentNullException(nameof(newSettings));

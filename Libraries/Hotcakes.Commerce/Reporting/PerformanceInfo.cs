@@ -30,8 +30,10 @@ using Hotcakes.Commerce.Globalization;
 
 namespace Hotcakes.Commerce.Reporting
 {
+	/// <summary>Contains funnel chart series, labels, events, and current/comparison counts.</summary>
 	public class PerformanceInfo
 	{
+		/// <summary>Initializes empty chart series, labels, and event collections.</summary>
 		public PerformanceInfo()
 		{
 			BouncedData = new List<int>();
@@ -42,28 +44,42 @@ namespace Hotcakes.Commerce.Reporting
 			Events = new List<string[]>();
 		}
 
+		/// <summary>Gets or sets the bounced counts for each chart interval.</summary>
 		public List<int> BouncedData { get; set; }
+		/// <summary>Gets or sets the abandoned counts for each chart interval.</summary>
 		public List<int> AbandonedData { get; set; }
+		/// <summary>Gets or sets the purchased counts for each chart interval.</summary>
 		public List<int> PurchasedData { get; set; }
-
+		/// <summary>Gets or sets the labels corresponding to the chart series.</summary>
 		public List<string> ChartLabels { get; set; }
+		/// <summary>Gets or sets event rows associated with the chart.</summary>
 		public List<string[]> Events { get; set; }
-
+		/// <summary>Gets or sets current views.</summary>
 		public int Views { get; set; }
+		/// <summary>Gets or sets current add-to-cart events.</summary>
 		public int AddsToCart { get; set; }
+		/// <summary>Gets or sets current purchases.</summary>
 		public int Purchases { get; set; }
-
+		/// <summary>Gets or sets comparison-period views.</summary>
 		public int ViewsPrev { get; set; }
+		/// <summary>Gets or sets comparison-period add-to-cart events.</summary>
 		public int AddsToCartPrev { get; set; }
+		/// <summary>Gets or sets comparison-period purchases.</summary>
 		public int PurchasesPrev { get; set; }
 	}
 
+	/// <summary>Provides the localized, formatted JSON projection of <see cref="PerformanceInfo"/>.</summary>
 	public class PerformanceInfoJson
 	{
+		/// <summary>Initializes an empty projection.</summary>
 		public PerformanceInfoJson()
 		{
 		}
 
+		/// <summary>Initializes a projection using a period-aware localized comparison.</summary>
+		/// <param name="performanceInfo">The source funnel data.</param>
+		/// <param name="period">The reporting period used in comparison text.</param>
+		/// <param name="localization">The localization helper used for labels and messages.</param>
 		public PerformanceInfoJson(PerformanceInfo performanceInfo, SalesPeriod period, ILocalizationHelper localization)
 		{
 			BouncedName = localization.GetString("Bounced");
@@ -147,30 +163,45 @@ namespace Hotcakes.Commerce.Reporting
 			}
 		}
 
+		/// <summary>Gets or sets the localized bounced label.</summary>
 		public string BouncedName { get; set; }
+		/// <summary>Gets or sets the localized abandoned label.</summary>
 		public string AbandonedName { get; set; }
+		/// <summary>Gets or sets the localized purchased label.</summary>
 		public string PurchasedName { get; set; }
-
+		/// <summary>Gets or sets the bounced chart series.</summary>
 		public List<int> BouncedData { get; set; }
+		/// <summary>Gets or sets the abandoned chart series.</summary>
 		public List<int> AbandonedData { get; set; }
+		/// <summary>Gets or sets the purchased chart series.</summary>
 		public List<int> PurchasedData { get; set; }
-
+		/// <summary>Gets or sets chart labels.</summary>
 		public List<string> ChartLabels { get; set; }
+		/// <summary>Gets or sets chart event rows.</summary>
 		public List<string[]> Events { get; set; }
-
+		/// <summary>Gets or sets the formatted view count.</summary>
 		public string Views { get; set; }
+		/// <summary>Gets or sets the absolute view percentage change.</summary>
 		public string ViewsPercentageChange { get; set; }
+		/// <summary>Gets or sets the localized view comparison.</summary>
 		public string ViewsComparison { get; set; }
+		/// <summary>Gets whether views are growing; null indicates the threshold was not exceeded.</summary>
 		public bool? IsViewsGrowing { get; set; }
-
+		/// <summary>Gets or sets the formatted add-to-cart count.</summary>
 		public string AddsToCart { get; set; }
+		/// <summary>Gets or sets the absolute add-to-cart percentage change.</summary>
 		public string AddsToCartPercentageChange { get; set; }
+		/// <summary>Gets or sets the localized add-to-cart comparison.</summary>
 		public string AddsToCartComparison { get; set; }
+		/// <summary>Gets whether add-to-cart activity is growing; null indicates the threshold was not exceeded.</summary>
 		public bool? IsAddsToCartGrowing { get; set; }
-
+		/// <summary>Gets or sets the formatted purchase count.</summary>
 		public string Purchases { get; set; }
+		/// <summary>Gets or sets the absolute purchase percentage change.</summary>
 		public string PurchasesPercentageChange { get; set; }
+		/// <summary>Gets or sets the localized purchase comparison.</summary>
 		public string PurchasesComparison { get; set; }
+		/// <summary>Gets whether purchases are growing; null indicates the threshold was not exceeded.</summary>
 		public bool? IsPurchasesGrowing { get; set; }
 	}
 }

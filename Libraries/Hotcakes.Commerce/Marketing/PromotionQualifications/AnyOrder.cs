@@ -28,28 +28,40 @@ using System;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Matches any order or line-item evaluation that has an order.</summary>
+    /// <remarks>This is the lowest-cost, optionless catch-all order qualification.</remarks>
     public class AnyOrder : PromotionQualificationBase
     {
+        /// <summary>Initializes an instance with <see cref="RelativeProcessingCost.Lowest"/>.</summary>
         public AnyOrder()
         {
             ProcessingCost = RelativeProcessingCost.Lowest;
         }
 
+        /// <summary>Gets the stable identifier for the any-order qualification.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdAnyOrder); }
         }
 
+        /// <summary>Gets a value indicating that this qualification has no settings.</summary>
         public override bool HasOptions
         {
             get { return false; }
         }
 
+        /// <summary>Gets the display description for the catch-all order rule.</summary>
+        /// <param name="app">The application context; unused by this rule.</param>
+        /// <returns>The literal description <c>When Any Order</c>.</returns>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             return "When Any Order";
         }
 
+        /// <summary>Matches order and line-item scopes when an order is present.</summary>
+        /// <param name="context">The promotion context to inspect.</param>
+        /// <param name="mode">The requested evaluation scope.</param>
+        /// <returns><c>true</c> for <see cref="PromotionQualificationMode.Orders"/> or <see cref="PromotionQualificationMode.LineItems"/> with an order.</returns>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             if (mode != PromotionQualificationMode.Orders &&

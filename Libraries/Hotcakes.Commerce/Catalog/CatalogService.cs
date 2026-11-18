@@ -46,13 +46,21 @@ namespace Hotcakes.Commerce.Catalog
     ///     product, category, variant, gift card, product properties to perform
     ///     different database operations.
     /// </summary>
-    /// <remarks>All repository objects are read only to whole project.  Values cannot be set outside of this service class.</remarks>
+    /// <remarks>
+    ///     This service is the catalog-facing composition point for category, product, option, variant, inventory, property,
+    ///     review, wishlist, gift-card, and related catalog repositories. Repository instances are created for the supplied
+    ///     <see cref="HccRequestContext" /> and are exposed through the corresponding properties for catalog operations.
+    /// </remarks>
+    /// <remarks>All repository objects are read only to whole project. Values cannot be set outside of this service class.</remarks>
     public abstract class CatalogService : HccServiceBase
     {
         /// <summary>
         ///     Initialize the repository from the database factory.
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="context">
+        ///     Request context that supplies the current store, account, and content-culture information used when creating
+        ///     the catalog repositories.
+        /// </param>
         public CatalogService(HccRequestContext context)
             : base(context)
         {
@@ -1683,20 +1691,28 @@ namespace Hotcakes.Commerce.Catalog
         #region Roles
 
         /// <summary>
-        ///     Test method for the unit testing.
+        ///     Evaluates the supplied catalog roles for the current implementation's access test.
         /// </summary>
-        /// <param name="roles"></param>
-        /// <returns></returns>
+        /// <param name="roles">Catalog roles associated with a product or category.</param>
+        /// <returns>
+        ///     <c>true</c> when the roles satisfy the implementation's access rule; the base implementation returns
+        ///     <c>false</c>.
+        /// </returns>
+        /// <remarks>
+        ///     This protected hook is retained for implementations and tests that provide catalog-role access behavior.
+        /// </remarks>
         protected virtual bool TestRolesAccess(List<CatalogRole> roles)
         {
             return false;
         }
 
         /// <summary>
-        ///     Test method for unit testing.
+        ///     Evaluates access to a product using the roles resolved for that product.
         /// </summary>
-        /// <param name="p">Product instance</param>
-        /// <returns></returns>
+        /// <param name="p">Product whose effective catalog roles are evaluated.</param>
+        /// <returns>
+        ///     The result returned by <see cref="TestRolesAccess(List{CatalogRole})" /> for the product's effective roles.
+        /// </returns>
         public bool TestProductAccess(Product p)
         {
             var roles = FindActualProductRoles(p);
@@ -1704,10 +1720,12 @@ namespace Hotcakes.Commerce.Catalog
         }
 
         /// <summary>
-        ///     Test method for unit testing.
+        ///     Evaluates access to a category using the roles assigned to that category.
         /// </summary>
-        /// <param name="c">Category Instance</param>
-        /// <returns></returns>
+        /// <param name="c">Category whose catalog roles are evaluated.</param>
+        /// <returns>
+        ///     The result returned by <see cref="TestRolesAccess(List{CatalogRole})" /> for the category's roles.
+        /// </returns>
         public bool TestCategoryAccess(Category c)
         {
             var roles = CatalogRoles.FindByCategoryId(DataTypeHelper.BvinToGuid(c.Bvin));

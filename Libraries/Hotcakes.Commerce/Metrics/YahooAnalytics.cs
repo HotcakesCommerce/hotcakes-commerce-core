@@ -29,8 +29,32 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.Metrics
 {
+    /// <summary>
+    /// Renders Yahoo! conversion tracking markup from a Hotcakes order.
+    /// </summary>
+    /// <remarks>
+    /// The returned fragment uses the provider's historical document-write bootstrap and does not
+    /// load the Yahoo! script during rendering. The provider endpoint is assembled in the emitted
+    /// browser-side JavaScript, preserving the compatibility-sensitive URL fragments and casing.
+    /// </remarks>
     public class YahooAnalytics
     {
+        /// <summary>
+        /// Renders a Yahoo! conversion tracker for an order and account.
+        /// </summary>
+        /// <param name="o">The order supplying the transaction identifier and total amount. The currency is rendered as the literal <c>USD</c>.</param>
+        /// <param name="accountId">The Yahoo! account identifier assigned to <c>ysm_accountid</c> without escaping.</param>
+        /// <returns>A script fragment that sets Yahoo! custom conversion data and writes the provider script element in the browser.</returns>
+        /// <remarks>
+        /// The transaction value is built by direct concatenation as
+        /// <c>transId=&lt;order number&gt;,currency=USD,amount=&lt;total&gt;</c>. Order number and account
+        /// identifier are not JavaScript or HTML escaped, and the amount uses the order's normal
+        /// string conversion. The provider host and <c>/script/ScriptServlet</c> path are embedded
+        /// in the generated <c>document.write</c> expression, which uses a protocol-relative
+        /// <c>//srv1.wa.marketingsolutions.yahoo.com</c> URL. The returned markup also preserves the
+        /// historical HTML comment wrapper and split <c>SCR</c>/<c>IPT</c> strings used to avoid
+        /// prematurely closing the outer script element.
+        /// </remarks>
         public static string RenderYahooTracker(Order o, string accountId)
         {
             var sb = new StringBuilder();

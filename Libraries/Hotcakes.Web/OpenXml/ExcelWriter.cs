@@ -35,6 +35,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Hotcakes.Web.OpenXml
 {
+    /// <summary>Creates and writes Open XML spreadsheets.</summary>
     [Serializable]
     public class ExcelWriter
     {
@@ -42,6 +43,7 @@ namespace Hotcakes.Web.OpenXml
         private readonly MemoryStream _stream;
         private WorksheetWriter _writer;
 
+        /// <summary>Initializes a workbook with a default worksheet.</summary>
         public ExcelWriter()
         {
             _stream = SpreadsheetReader.Create();
@@ -50,6 +52,8 @@ namespace Hotcakes.Web.OpenXml
             _writer = new WorksheetWriter(_doc, worksheetPart);
         }
 
+        /// <summary>Initializes a workbook with one named worksheet.</summary>
+        /// <param name="firstSheetName">The name of the first worksheet.</param>
         public ExcelWriter(string firstSheetName) : this()
         {
             var sheet = _doc.WorkbookPart.Workbook.Descendants<Sheet>().First(s => s.Name == "Sheet1");
@@ -60,6 +64,8 @@ namespace Hotcakes.Web.OpenXml
             SpreadsheetWriter.RemoveWorksheet(_doc, "Sheet3");
         }
 
+        /// <summary>Sets the widths of columns beginning with column A.</summary>
+        /// <param name="colWidths">The column widths in order.</param>
         public void SetColumnsWidths(double[] colWidths)
         {
             var colName = "A";
@@ -70,17 +76,23 @@ namespace Hotcakes.Web.OpenXml
             }
         }
 
+        /// <summary>Adds and selects a worksheet.</summary>
+        /// <param name="sheetName">The worksheet name.</param>
         public void AddWorksheet(string sheetName)
         {
             var wPart = SpreadsheetWriter.InsertWorksheet(_doc, sheetName);
             _writer = new WorksheetWriter(_doc, wPart);
         }
 
+        /// <summary>Gets the default spreadsheet style for this workbook.</summary>
+        /// <returns>The default <see cref="SpreadsheetStyle"/>.</returns>
         public SpreadsheetStyle GetStyle()
         {
             return SpreadsheetStyle.GetDefault(_doc);
         }
 
+        /// <summary>Writes a row of string values and optionally applies a style.</summary>
+        /// <param name="column">The starting column.</param><param name="row">The row number.</param><param name="values">The values to write.</param><param name="style">The optional style.</param>
         public void WriteRow(string column, int row, List<string> values, SpreadsheetStyle style = null)
         {
             var startCell = column + row;
@@ -93,6 +105,8 @@ namespace Hotcakes.Web.OpenXml
             }
         }
 
+        /// <summary>Writes and optionally styles a cell, then merges the requested span.</summary>
+        /// <param name="column">The starting column.</param><param name="row">The row number.</param><param name="value">The value to write.</param><param name="style">The optional style.</param><param name="colSpan">The number of columns to span.</param>
         public void WriteCellFormatted(string column, int row, string value, SpreadsheetStyle style = null,
             int colSpan = 0)
         {
@@ -105,6 +119,8 @@ namespace Hotcakes.Web.OpenXml
             }
         }
 
+        /// <summary>Writes a string value to a cell and optionally applies a style.</summary>
+        /// <param name="column">The column.</param><param name="row">The row number.</param><param name="value">The value to write.</param><param name="style">The optional style.</param>
         public void WriteCell(string column, int row, string value, SpreadsheetStyle style = null)
         {
             var startCell = column + row;
@@ -117,11 +133,14 @@ namespace Hotcakes.Web.OpenXml
             }
         }
 
+        /// <summary>Saves pending workbook changes.</summary>
         public void Save()
         {
             SpreadsheetWriter.Save(_doc);
         }
 
+        /// <summary>Writes the workbook to an HTTP response as an Excel download.</summary>
+        /// <param name="response">The response receiving the workbook.</param><param name="filename">The download filename.</param>
         public void WriteToResponse(HttpResponse response, string filename)
         {
             response.Clear();
@@ -132,12 +151,16 @@ namespace Hotcakes.Web.OpenXml
             response.End();
         }
 
+        /// <summary>Writes the workbook stream to a file.</summary>
+        /// <param name="path">The destination file path.</param>
         public void StreamToFile(string path)
         {
             Directory.CreateDirectory(Path.GetDirectoryName(path));
             AbstractWriter.StreamToFile(path, _stream);
         }
 
+        /// <summary>Applies a style to a rectangular cell range.</summary>
+        /// <param name="startCol">The starting column.</param><param name="startRow">The starting row.</param><param name="endCol">The ending column.</param><param name="endRow">The ending row.</param><param name="style">The style to apply.</param>
         public void SetStyle(string startCol, int startRow, string endCol, int endRow, SpreadsheetStyle style)
         {
             _writer.SetStyle(style, startCol + startRow, endCol + endRow);

@@ -30,8 +30,10 @@ using Hotcakes.Commerce.Content;
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>Represents a member of a mailing list and its template replacement values.</summary>
     public class MailingListMember : IReplaceable
     {
+        /// <summary>Initializes a member with empty text values and default identifiers.</summary>
         public MailingListMember()
         {
             Id = 0;
@@ -43,14 +45,26 @@ namespace Hotcakes.Commerce.Contacts
             StoreId = 0;
         }
 
+        /// <summary>Gets or sets the member identifier.</summary>
         public long Id { get; set; }
+        /// <summary>Gets or sets the mailing-list identifier.</summary>
         public long ListId { get; set; }
+        /// <summary>Gets or sets the UTC timestamp of the last update.</summary>
         public DateTime LastUpdatedUtc { get; set; }
+        /// <summary>Gets or sets the member's email address.</summary>
         public string EmailAddress { get; set; }
+        /// <summary>Gets or sets the member's first name.</summary>
         public string FirstName { get; set; }
+        /// <summary>Gets or sets the member's last name.</summary>
         public string LastName { get; set; }
+        /// <summary>Gets or sets the identifier of the store that owns the member.</summary>
         public long StoreId { get; set; }
 
+        /// <summary>
+        /// Gets the template tags for the member's email address, first name, and last name.
+        /// </summary>
+        /// <param name="context">The request context; retained for the replacement contract.</param>
+        /// <returns>The member-specific template tags.</returns>
         public List<HtmlTemplateTag> GetReplaceableTags(HccRequestContext context)
         {
             var result = new List<HtmlTemplateTag>();

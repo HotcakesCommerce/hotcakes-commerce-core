@@ -39,6 +39,9 @@ namespace Hotcakes.Commerce.Catalog
     /// </summary>
     public class ProductFileAssociationRepository : HccSimpleRepoBase<hcc_ProductFileXProduct, ProductFileAssociation>
     {
+        /// <summary>
+        /// Provides the catalog type or contract represented by this declaration.
+        /// </summary>
         public ProductFileAssociationRepository(HccRequestContext c)
             : base(c)
         {
@@ -49,6 +52,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="data"><see cref="hcc_ProductFileXProduct" /> instance</param>
         /// <param name="model"><see cref="ProductFileAssociation" /> instance</param>
+        /// <summary>
+        /// Performs the CopyDataToModel catalog operation.
+        /// </summary>
         protected override void CopyDataToModel(hcc_ProductFileXProduct data, ProductFileAssociation model)
         {
             model.Id = data.Id;
@@ -65,6 +71,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="data"><see cref="hcc_ProductFileXProduct" /> instance</param>
         /// <param name="model"><see cref="ProductFileAssociation" /> instance</param>
+        /// <summary>
+        /// Performs the CopyModelToData catalog operation.
+        /// </summary>
         protected override void CopyModelToData(hcc_ProductFileXProduct data, ProductFileAssociation model)
         {
             data.Id = model.Id;
@@ -81,6 +90,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="id">ProductFileAssociation unique identifier</param>
         /// <returns><see cref="ProductFileAssociation" /> instance</returns>
+        /// <summary>
+        /// Performs the Find catalog operation.
+        /// </summary>
         public ProductFileAssociation Find(long id)
         {
             var result = FindForAllStores(id);
@@ -99,6 +111,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="id">ProductFileAssociation unique identifier</param>
         /// <returns><see cref="ProductFileAssociation" /> instance</returns>
+        /// <summary>
+        /// Performs the FindForAllStores catalog operation.
+        /// </summary>
         public ProductFileAssociation FindForAllStores(long id)
         {
             return FindFirstPoco(y => y.Id == id);
@@ -109,6 +124,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="item"><see cref="ProductFileAssociation" /> instance</param>
         /// <returns>Returns true if new record created successfully</returns>
+        /// <summary>
+        /// Performs the Create catalog operation.
+        /// </summary>
         public override bool Create(ProductFileAssociation item)
         {
             item.LastUpdatedUtc = DateTime.UtcNow;
@@ -121,6 +139,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="c"><see cref="ProductFileAssociation" /> instance</param>
         /// <returns>Returns true if the record updated successfully</returns>
+        /// <summary>
+        /// Performs the Update catalog operation.
+        /// </summary>
         public bool Update(ProductFileAssociation c)
         {
             if (c.StoreId != Context.CurrentStore.Id)
@@ -136,6 +157,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="id">ProductFileAssociation unique identifier</param>
         /// <returns>Returns true if the record deleted successfully</returns>
+        /// <summary>
+        /// Performs the Delete catalog operation.
+        /// </summary>
         public bool Delete(long id)
         {
             return Delete(y => y.Id == id);
@@ -147,6 +171,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="id">ProductFileAssociation unique identifier</param>
         /// <param name="storeId">Store unique identifier</param>
         /// <returns>Returns true if the record deleted successfully</returns>
+        /// <summary>
+        /// Performs the Delete catalog operation.
+        /// </summary>
         public bool Delete(long id, long storeId)
         {
             return Delete(y => y.Id == id && y.StoreId == storeId);
@@ -157,6 +184,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="productId">Product unique identifier</param>
         /// <returns>Returns true if the record deleted successfully</returns>
+        /// <summary>
+        /// Performs the DeleteForProductId catalog operation.
+        /// </summary>
         public bool DeleteForProductId(string productId)
         {
             var productGuid = DataTypeHelper.BvinToGuid(productId);
@@ -168,6 +198,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="fileId">File unique identifier</param>
         /// <returns>Returns true if the File has been removed successfully.</returns>
+        /// <summary>
+        /// Performs the DeleteForFileId catalog operation.
+        /// </summary>
         public bool DeleteForFileId(string fileId)
         {
             var fileGuid = DataTypeHelper.BvinToGuid(fileId);
@@ -180,6 +213,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="fileId">File unique identifier</param>
         /// <param name="storeId">Store unique identifier</param>
         /// <returns>Returns true if file removed successfully</returns>
+        /// <summary>
+        /// Performs the DeleteForFileId catalog operation.
+        /// </summary>
         public bool DeleteForFileId(string fileId, long storeId)
         {
             var fileGuid = DataTypeHelper.BvinToGuid(fileId);
@@ -191,6 +227,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="productId">Product unique identifier</param>
         /// <returns>Returns list of <see cref="ProductFileAssociation" /> instances</returns>
+        /// <summary>
+        /// Performs the FindByProductId catalog operation.
+        /// </summary>
         public List<ProductFileAssociation> FindByProductId(string productId)
         {
             var storeId = Context.CurrentStore.Id;
@@ -203,6 +242,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="productId">Product unique identifier</param>
         /// <param name="storeId">Store unique identifier</param>
         /// <returns>Returns list of <see cref="ProductFileAssociation" /> instances</returns>
+        /// <summary>
+        /// Performs the FindByProductIdForStore catalog operation.
+        /// </summary>
         public List<ProductFileAssociation> FindByProductIdForStore(string productId, long storeId)
         {
             return FindByProductIdPaged(productId, 1, int.MaxValue, storeId);
@@ -216,6 +258,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="pageSize">Page Size</param>
         /// <param name="storeId">Store unique identifier</param>
         /// <returns>Returns list of <see cref="ProductFileAssociation" /> instances</returns>
+        /// <summary>
+        /// Performs the FindByProductIdPaged catalog operation.
+        /// </summary>
         public List<ProductFileAssociation> FindByProductIdPaged(string productId, int pageNumber, int pageSize,
             long storeId)
         {
@@ -233,6 +278,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="fileId">File unique identifier</param>
         /// <returns>Returns list of <see cref="ProductFileAssociation" /> instances</returns>
+        /// <summary>
+        /// Performs the FindByFileId catalog operation.
+        /// </summary>
         public List<ProductFileAssociation> FindByFileId(string fileId)
         {
             var storeId = Context.CurrentStore.Id;
@@ -245,6 +293,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="fileId">File unique identifier</param>
         /// <param name="storeId">Store unique identifier</param>
         /// <returns>Returns list of <see cref="ProductFileAssociation" /> instances</returns>
+        /// <summary>
+        /// Performs the FindByFileId catalog operation.
+        /// </summary>
         public List<ProductFileAssociation> FindByFileId(string fileId, long storeId)
         {
             return FindByFileIdPaged(fileId, 1, int.MaxValue, storeId);
@@ -258,6 +309,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="pageSize">Page size</param>
         /// <param name="storeId">Store unique identifier</param>
         /// <returns>Returns list of <see cref="ProductFileAssociation" /> instances</returns>
+        /// <summary>
+        /// Performs the FindByFileIdPaged catalog operation.
+        /// </summary>
         public List<ProductFileAssociation> FindByFileIdPaged(string fileId, int pageNumber, int pageSize, long storeId)
         {
             var fileGuid = DataTypeHelper.BvinToGuid(fileId);
@@ -274,6 +328,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="fileId">File unique identifier</param>
         /// <returns>Returns number of association for this file</returns>
+        /// <summary>
+        /// Performs the CountByFileId catalog operation.
+        /// </summary>
         public int CountByFileId(string fileId)
         {
             var result = 0;
@@ -298,6 +355,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="fileId">File unique identifier</param>
         /// <param name="productId">Product unique identifier</param>
         /// <returns>Returns instance of the <see cref="ProductFileAssociation" /></returns>
+        /// <summary>
+        /// Performs the FindByFileIdAndProductId catalog operation.
+        /// </summary>
         public ProductFileAssociation FindByFileIdAndProductId(string fileId, string productId)
         {
             var fileGuid = DataTypeHelper.BvinToGuid(fileId);

@@ -26,28 +26,42 @@
 
 namespace Hotcakes.Commerce.BusinessRules
 {
+    /// <summary>Represents the empty task used when no executable task is available.</summary>
+    /// <remarks>This compatibility task deliberately fails execution, has no identifier, and reports successful rollback.</remarks>
     public class NullTask : Task
     {
+        /// <summary>Gets the literal compatibility name <c>Null Task</c>.</summary>
+        /// <returns><c>Null Task</c>.</returns>
         public override string TaskName()
         {
             return "Null Task";
         }
 
+        /// <summary>Attempts to execute the null task.</summary>
+        /// <param name="context">The workflow context; it is not modified.</param>
+        /// <returns>Always <see langword="false"/>, so a workflow stops if this task is executed.</returns>
         public override bool Execute(TaskContext context)
         {
             return false;
         }
 
+        /// <summary>Rolls back the null task.</summary>
+        /// <param name="context">The workflow context; it is not modified.</param>
+        /// <returns>Always <c>true</c>.</returns>
         public override bool Rollback(TaskContext context)
         {
             return true;
         }
 
+        /// <summary>Gets the null task identifier.</summary>
+        /// <returns>An empty string.</returns>
         public override string TaskId()
         {
             return string.Empty;
         }
 
+        /// <summary>Creates another null task.</summary>
+        /// <returns>A new <see cref="NullTask"/> instance.</returns>
         public override Task Clone()
         {
             var result = new NullTask();

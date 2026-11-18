@@ -29,6 +29,9 @@ using Hotcakes.Modules.Core.Settings;
 
 namespace Hotcakes.Modules.ContentBlocks
 {
+    /// <summary>
+    /// Hosts the storefront content blocks view.
+    /// </summary>
     public partial class ContentBlocksView : HotcakesModuleBase
     {
         protected override string RenderView()

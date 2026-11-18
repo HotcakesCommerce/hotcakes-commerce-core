@@ -28,39 +28,46 @@ using System;
 
 namespace Hotcakes.Payment.Gateways
 {
+    /// <summary>Stores the credentials, currency, and endpoint options used by <see cref="Ogone"/>.</summary>
     [Serializable]
     public class OgoneSettings : MethodSettings
     {
+        /// <summary>Gets or sets the Ogone payment service provider identifier.</summary>
         public string PaymentServiceProviderId
         {
             get { return GetSettingOrEmpty("PaymentServiceProviderId"); }
             set { AddOrUpdate("PaymentServiceProviderId", value); }
         }
 
+        /// <summary>Gets or sets the Ogone user identifier.</summary>
         public string UserId
         {
             get { return GetSettingOrEmpty("UserId"); }
             set { AddOrUpdate("UserId", value); }
         }
 
+        /// <summary>Gets or sets the Ogone password.</summary>
         public string Password
         {
             get { return GetSettingOrEmpty("Password"); }
             set { AddOrUpdate("Password", value); }
         }
 
+        /// <summary>Gets or sets the currency code sent to Ogone.</summary>
         public string Currency
         {
             get { return GetSettingOrEmpty("Currency"); }
             set { AddOrUpdate("Currency", value); }
         }
 
+        /// <summary>Gets or sets a value indicating whether request and response details are added to <see cref="Transaction.Result"/>.</summary>
         public bool DebugMode
         {
             get { return GetBoolSetting("DebugMode"); }
             set { SetBoolSetting("DebugMode", value); }
         }
 
+        /// <summary>Gets or sets a value indicating whether the Ogone test endpoints are used.</summary>
         public bool DeveloperMode
         {
             get { return GetBoolSetting("DeveloperMode"); }

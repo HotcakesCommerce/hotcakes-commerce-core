@@ -31,6 +31,9 @@ using StackExchange.Profiling.EntityFramework6;
 
 namespace Hotcakes.Modules
 {
+    /// <summary>
+    /// Initializes application-level profiling and hooks the HTTP request lifecycle for the module.
+    /// </summary>
     public class AppStartHttpModule : IHttpModule
     {
         /// <summary>Initializes any data/resources on application start.</summary>

@@ -28,9 +28,15 @@ using System;
 
 namespace Hotcakes.Modules.Core.Models.Json
 {
+/// <summary>
+    /// Represents the ShippingRatesJsonModel storefront model.
+    /// </summary>
     [Serializable]
     public class ShippingRatesJsonModel
     {
+        /// <summary>
+        /// Gets or sets the rates value used by this storefront model.
+        /// </summary>
         public string rates = string.Empty;
     }
 }

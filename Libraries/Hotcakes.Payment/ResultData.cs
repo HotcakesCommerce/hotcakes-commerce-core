@@ -30,9 +30,15 @@ using System.Collections.ObjectModel;
 
 namespace Hotcakes.Payment
 {
+    /// <summary>
+    /// Contains the outcome, provider response details, and messages from a payment operation.
+    /// </summary>
     [Serializable]
     public class ResultData
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ResultData"/> class with unsuccessful status and empty response collections.
+        /// </summary>
         public ResultData()
         {
             Succeeded = false;
@@ -49,22 +55,37 @@ namespace Hotcakes.Payment
             PointsAvailable = 0;
         }
 
+        /// <summary>Gets or sets whether the payment operation succeeded.</summary>
         public bool Succeeded { get; set; }
 
+        /// <summary>Gets or sets the address verification response.</summary>
         public AvsResponseType AvsCode { get; set; }
+        /// <summary>Gets or sets the human-readable address verification response.</summary>
         public string AvsCodeDescription { get; set; }
+        /// <summary>Gets or sets the card security-code verification response.</summary>
         public CvnResponseType CvvCode { get; set; }
+        /// <summary>Gets or sets the human-readable card security-code verification response.</summary>
         public string CvvCodeDescription { get; set; }
+        /// <summary>Gets or sets the provider response code.</summary>
         public string ResponseCode { get; set; }
+        /// <summary>Gets or sets the human-readable provider response description.</summary>
         public string ResponseCodeDescription { get; set; }
+        /// <summary>Gets or sets the messages returned by the payment operation.</summary>
+        /// <seealso cref="Warnings"/>
+        /// <seealso cref="Errors"/>
         public List<Message> Messages { get; set; }
+        /// <summary>Gets or sets the primary provider reference number.</summary>
         public string ReferenceNumber { get; set; }
+        /// <summary>Gets or sets the secondary provider reference number.</summary>
         public string ReferenceNumber2 { get; set; }
+        /// <summary>Gets or sets the available monetary balance returned by the provider.</summary>
         public decimal BalanceAvailable { get; set; }
+        /// <summary>Gets or sets the available reward-point balance returned by the provider.</summary>
         public int PointsAvailable { get; set; }
 
         #region Helper Properties
 
+        /// <summary>Gets the warning messages from <see cref="Messages"/>.</summary>
         public ReadOnlyCollection<Message> Warnings
         {
             get
@@ -81,11 +102,13 @@ namespace Hotcakes.Payment
             }
         }
 
+        /// <summary>Gets a value indicating whether <see cref="Warnings"/> contains any messages.</summary>
         public bool HasWarnings
         {
             get { return Warnings.Count > 0; }
         }
 
+        /// <summary>Gets the error messages from <see cref="Messages"/>.</summary>
         public ReadOnlyCollection<Message> Errors
         {
             get
@@ -102,6 +125,7 @@ namespace Hotcakes.Payment
             }
         }
 
+        /// <summary>Gets a value indicating whether <see cref="Errors"/> contains any messages.</summary>
         public bool HasErrors
         {
             get { return Errors.Count > 0; }

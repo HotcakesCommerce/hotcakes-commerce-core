@@ -28,8 +28,14 @@ using System;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    /// Represents the RMAItem order-domain type and preserves the established public compatibility surface.
+    /// </summary>
     public class RMAItem
     {
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         public RMAItem()
         {
             StoreId = 0;
@@ -52,14 +58,41 @@ namespace Hotcakes.Commerce.Orders
             ProductClass = "-1";
         }
 
+        /// <summary>
+        /// The store id.
+        /// </summary>
         public long StoreId { get; set; }
+        /// <summary>
+        /// The bvin.
+        /// </summary>
         public string Bvin { get; set; }
+        /// <summary>
+        /// The last updated.
+        /// </summary>
         public DateTime LastUpdated { get; set; }
+        /// <summary>
+        /// The rmabvin.
+        /// </summary>
         public string RMABvin { get; set; }
+        /// <summary>
+        /// The line item id.
+        /// </summary>
         public long LineItemId { get; set; }
+        /// <summary>
+        /// The item description.
+        /// </summary>
         public string ItemDescription { get; set; }
+        /// <summary>
+        /// The item name.
+        /// </summary>
         public string ItemName { get; set; }
+        /// <summary>
+        /// The note.
+        /// </summary>
         public string Note { get; set; }
+        /// <summary>
+        /// The reason.
+        /// </summary>
         public string Reason { get; set; }
 
         public string ReasonDescription
@@ -87,14 +120,41 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        /// The replace.
+        /// </summary>
         public bool Replace { get; set; }
+        /// <summary>
+        /// The quantity.
+        /// </summary>
         public int Quantity { get; set; }
+        /// <summary>
+        /// The quantity received.
+        /// </summary>
         public int QuantityReceived { get; set; }
+        /// <summary>
+        /// The quantity returned to inventory.
+        /// </summary>
         public int QuantityReturnedToInventory { get; set; }
+        /// <summary>
+        /// The refund amount.
+        /// </summary>
         public decimal RefundAmount { get; set; }
+        /// <summary>
+        /// The refund shipping amount.
+        /// </summary>
         public decimal RefundShippingAmount { get; set; }
+        /// <summary>
+        /// The refund tax amount.
+        /// </summary>
         public decimal RefundTaxAmount { get; set; }
+        /// <summary>
+        /// The refund gift wrap amount.
+        /// </summary>
         public decimal RefundGiftWrapAmount { get; set; }
+        /// <summary>
+        /// The persisted product-class value used by return processing.
+        /// </summary>
         public string ProductClass { get; set; }
     }
 }

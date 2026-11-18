@@ -39,12 +39,18 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Defines the catalog data or behavior represented by this member.
+    /// </summary>
     [Serializable]
     public class ProductRepository : HccLocalizationRepoBase<hcc_Product, hcc_ProductTranslation, Product, Guid>,
         IProductRepository
     {
         #region Constructor
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductRepository(HccRequestContext c)
             : base(c)
         {
@@ -59,16 +65,34 @@ namespace Hotcakes.Commerce.Catalog
 
         #region Fields
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected OptionRepository optionRespository;
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected VariantRepository variantRepository;
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected ProductImageRepository imageRepository;
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected ProductReviewRepository reviewRepository;
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected BundledProductsRepository bundleRepository;
 
         #endregion
 
         #region Public methods
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public override bool Create(Product item)
         {
             item.LastUpdated = DateTime.UtcNow;
@@ -81,12 +105,18 @@ namespace Hotcakes.Commerce.Catalog
             return base.Create(item);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public virtual bool Update(Product c, bool mergeSubItems = true)
         {
             var result = UpdateAdv(c, mergeSubItems);
             return result.Success;
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public virtual DalSingleOperationResult<Product> UpdateAdv(Product c, bool mergeSubItems = true)
         {
             if (c.StoreId != Context.CurrentStore.Id)
@@ -99,6 +129,9 @@ namespace Hotcakes.Commerce.Catalog
             return UpdateAdv(c, y => y.bvin == bvinId, false, mergeSubItems);
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public virtual bool Delete(string bvin)
         {
             CacheManager.ClearProduct(bvin, Context.CurrentStore.Id);
@@ -106,6 +139,9 @@ namespace Hotcakes.Commerce.Catalog
             return Delete(y => y.bvin == bvinId);
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public virtual bool DeleteForStore(string bvin, long storeId)
         {
             CacheManager.ClearProduct(bvin, storeId);
@@ -113,6 +149,9 @@ namespace Hotcakes.Commerce.Catalog
             return Delete(y => y.bvin == bvinId && y.StoreId == Context.CurrentStore.Id);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public Product FindWithCache(string bvin)
         {
             var result = CacheManager.GetProduct(bvin, Context.CurrentStore.Id, Context.MainContentCulture);
@@ -140,17 +179,26 @@ namespace Hotcakes.Commerce.Catalog
             return null;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public Product FindForAllStores(string bvin)
         {
             var bvinId = DataTypeHelper.BvinToGuid(bvin);
             return FindFirstPoco(y => y.Item.bvin == bvinId);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public Product FindBySlug(string urlSlug)
         {
             return FindBySlugForStore(urlSlug, Context.CurrentStore.Id);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public Product FindBySlugForStore(string urlSlug, long storeId)
         {
             var data = FindFirstPoco(y => y.Item.RewriteUrl == urlSlug && y.Item.StoreId == storeId);
@@ -162,11 +210,17 @@ namespace Hotcakes.Commerce.Catalog
             return null;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public Product FindBySku(string sku)
         {
             return FindBySkuForStore(sku, Context.CurrentStore.Id);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public Product FindBySkuForStore(string sku, long storeId)
         {
             var data = FindFirstPoco(y => y.Item.SKU == sku && y.Item.StoreId == storeId);
@@ -178,6 +232,9 @@ namespace Hotcakes.Commerce.Catalog
             return null;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public bool IsSkuExist(string sku, Guid? excludeProductId = null)
         {
             sku = sku.ToLower();
@@ -201,12 +258,18 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public int FindAllCount()
         {
             var storeId = Context.CurrentStore.Id;
             return FindAllCount(storeId);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public int FindAllCount(long storeId)
         {
             using (var s = CreateReadStrategy())
@@ -215,11 +278,17 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public int FindAllForAllStoresCount()
         {
             return CountOfAll();
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public int FindCountByProductType(string productTypeId)
         {
             var productTypeGuid = DataTypeHelper.BvinToNullableGuid(productTypeId);
@@ -233,6 +302,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public override List<Product> FindAllPaged(int pageNumber, int pageSize)
         {
             using (var s = CreateReadStrategy())
@@ -246,6 +318,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<Product> FindAllPagedWithCache(int pageNumber, int pageSize)
         {
             using (var s = CreateReadStrategy())
@@ -261,6 +336,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<Product> FindAllPagedForAllStores(int pageNumber, int pageSize)
         {
             using (var s = CreateReadStrategy())
@@ -275,6 +353,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<Product> FindAllPagedForAllStoresWithCache(int pageNumber, int pageSize)
         {
             using (var s = CreateReadStrategy())
@@ -288,6 +369,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public int FindCountByCriteria(ProductSearchCriteria criteria)
         {
             using (var s = CreateReadStrategy())
@@ -297,12 +381,18 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<Product> FindByCriteria(ProductSearchCriteria criteria, bool useCache = true)
         {
             var temp = -1;
             return FindByCriteria(criteria, 1, int.MaxValue, ref temp);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<Product> FindByCriteria(ProductSearchCriteria criteria, int pageNumber, int pageSize,
             ref int totalCount, bool useCache = true)
         {
@@ -326,6 +416,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public int FindProductsCountByCriteria(ProductSearchCriteria criteria, bool useCache = true)
         {
             var totalCount = 0;
@@ -494,12 +587,18 @@ namespace Hotcakes.Commerce.Catalog
             return items;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<Product> FindFeatured(int pageNumber, int pageSize)
         {
             var bvins = FindFeaturedProductBvins(pageNumber, pageSize);
             return FindManyWithCache(bvins);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<Product> FindMany(IEnumerable<string> productBvins)
         {
             if (productBvins.Count() == 0)
@@ -519,6 +618,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<Product> FindManyWithCache(IEnumerable<string> productBvins)
         {
             var result = new List<Product>();
@@ -550,6 +652,9 @@ namespace Hotcakes.Commerce.Catalog
             return result;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<Product> FindManySkus(List<string> skus)
         {
             using (var s = CreateReadStrategy())
@@ -565,6 +670,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<string> FindFeaturedProductBvins(int pageNumber, int pageSize)
         {
             IQueryable<JoinedItem<hcc_Product, hcc_ProductTranslation>> items;
@@ -584,6 +692,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<string> FindAllBvinsForStore(long storeId)
         {
             using (var s = CreateReadStrategy())
@@ -595,6 +706,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool Clone(string productId, string newSku, string newUrlSlug, ProductStatus newStatus, bool cloneImages,
             out string newProductId)
         {
@@ -647,6 +761,9 @@ namespace Hotcakes.Commerce.Catalog
             return true;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<Product> GetMostPurchasedWith(string productBvin, SalesPeriod period, int maxItemsToReturn)
         {
             using (var context = Factory.CreateHccDbContext())
@@ -683,16 +800,25 @@ namespace Hotcakes.Commerce.Catalog
 
         #region Implementation
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override Expression<Func<hcc_Product, Guid>> ItemKeyExp
         {
             get { return p => p.bvin; }
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override Expression<Func<hcc_ProductTranslation, Guid>> ItemTranslationKeyExp
         {
             get { return pt => pt.ProductId; }
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyItemToModel(hcc_Product data, Product model)
         {
             model.Id = data.Id;
@@ -748,6 +874,9 @@ namespace Hotcakes.Commerce.Catalog
             model.RecurringIntervalType = (RecurringIntervalType) (data.RecurringIntervalType ?? 0);
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyTransToModel(hcc_ProductTranslation data, Product model)
         {
             model.ContentCulture = data.Culture;
@@ -765,6 +894,9 @@ namespace Hotcakes.Commerce.Catalog
             model.TabsFromXml(data.DescriptionTabs);
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyModelToItem(JoinedItem<hcc_Product, hcc_ProductTranslation> data, Product model)
         {
             data.Item.AllowReviews = model.AllowReviews;
@@ -817,6 +949,9 @@ namespace Hotcakes.Commerce.Catalog
             data.Item.ShippingCharge = (int) model.ShippingCharge;
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyModelToTrans(JoinedItem<hcc_Product, hcc_ProductTranslation> data, Product model)
         {
             data.ItemTranslation.ProductId = data.Item.bvin;
@@ -840,6 +975,9 @@ namespace Hotcakes.Commerce.Catalog
             data.ItemTranslation.HiddenSearchKeywords = skuslist;
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         protected override void DeleteAllSubItems(hcc_Product data)
         {
             var productBvin = DataTypeHelper.GuidToBvin(data.bvin);
@@ -847,6 +985,9 @@ namespace Hotcakes.Commerce.Catalog
             optionRespository.DeleteForProductId(productBvin);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         protected override void GetSubItems(List<Product> models)
         {
             var productIds = models.Select(p => p.Bvin).ToList();
@@ -894,6 +1035,9 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         protected override void MergeSubItems(Product model)
         {
             variantRepository.MergeList(model.Bvin, model.Variants);
@@ -902,18 +1046,27 @@ namespace Hotcakes.Commerce.Catalog
             reviewRepository.MergeList(model.Bvin, model.Reviews);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         protected virtual IQueryable<JoinedItem<hcc_Product, hcc_ProductTranslation>> GetSecureQuery(
             IRepoStrategy<hcc_Product> strategy)
         {
             return GetJoinedQuery(strategy);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         protected IQueryable<JoinedItem<hcc_Product, hcc_ProductTranslation>> GetSecureQueryForStore(
             IRepoStrategy<hcc_Product> strategy, long storeId)
         {
             return GetSecureQuery(strategy).Where(i => i.Item.StoreId == storeId);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         protected IQueryable<JoinedItem<hcc_Product, hcc_ProductTranslation>> GetSecureQueryForCurrentStore(
             IRepoStrategy<hcc_Product> strategy)
         {

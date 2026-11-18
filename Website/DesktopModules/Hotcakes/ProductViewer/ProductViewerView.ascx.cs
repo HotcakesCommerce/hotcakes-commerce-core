@@ -32,6 +32,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.ProductViewer
 {
+    /// <summary>
+    /// Hosts the storefront product viewer.
+    /// </summary>
     public partial class ProductViewerView : HotcakesModuleBase
     {
         protected override string RenderView()

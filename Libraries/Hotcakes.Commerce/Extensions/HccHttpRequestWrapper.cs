@@ -28,10 +28,22 @@ using System.Web;
 
 namespace Hotcakes.Commerce.Extensions
 {
+    /// <summary>
+    /// Wraps an ASP.NET <see cref="HttpRequest"/> for HCC MVC request contexts.
+    /// </summary>
+    /// <remarks>
+    /// The wrapper currently retains the underlying request for HCC extension points
+    /// while inheriting the standard <see cref="HttpRequestBase"/> behavior.
+    /// </remarks>
     public class HccHttpRequestWrapper : HttpRequestWrapper
     {
+        /// <summary>Stores the underlying ASP.NET request.</summary>
         protected HttpRequest _httpRequest;
 
+        /// <summary>
+        /// Initializes a wrapper for the specified request.
+        /// </summary>
+        /// <param name="httpRequest">The request to wrap.</param>
         public HccHttpRequestWrapper(HttpRequest httpRequest)
             : base(httpRequest)
         {

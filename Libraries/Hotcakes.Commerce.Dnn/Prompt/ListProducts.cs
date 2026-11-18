@@ -32,6 +32,9 @@ using DotNetNuke.Instrumentation;
 
 namespace Hotcakes.Commerce.Dnn.Prompt
 {
+    /// <summary>
+    /// Implements the prompt command that lists the products in the current Hotcakes Commerce store.
+    /// </summary>
     [ConsoleCommand("list-products", Constants.Namespace, "PromptListProducts")]
     public class ListProducts: PromptBase, IConsoleCommand
     {
@@ -54,6 +57,10 @@ namespace Hotcakes.Commerce.Dnn.Prompt
         public bool? Disabled { get; set; }
         */
 
+        /// <summary>
+        /// Retrieves products from the current store and returns them ordered by product name.
+        /// </summary>
+        /// <returns>A prompt result containing <see cref="ProductOutput"/> data and the number of products found, or an error result.</returns>
         public override ConsoleResultModel Run()
         {
             try
@@ -117,14 +124,44 @@ namespace Hotcakes.Commerce.Dnn.Prompt
         }
     }
 
+    /// <summary>
+    /// Contains the product fields returned by the list-products prompt command.
+    /// </summary>
     public class ProductOutput
     {
+        /// <summary>
+        /// Gets or sets the product display name.
+        /// </summary>
         public string ProductName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the product SKU.
+        /// </summary>
         public string Sku { get; set; }
+
+        /// <summary>
+        /// Gets or sets the product site price.
+        /// </summary>
         public decimal Price { get; set; }
+
+        /// <summary>
+        /// Gets or sets the product URL slug.
+        /// </summary>
         public string Slug { get; set; }
+
+        /// <summary>
+        /// Gets or sets the product type name.
+        /// </summary>
         public string ProductType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the product template.
+        /// </summary>
         public string TemplateName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the product business identifier.
+        /// </summary>
         public string ProductID { get; set; }
     }
 }

@@ -38,28 +38,55 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    ///     Provides persistence and query operations for <see cref="LineItem"/> records within an order and store.
+    /// </summary>
+    /// <remarks>
+    ///     Mapping preserves serialized selection and custom-property values, promotion data, tax and shipping portions,
+    ///     recurring-billing state, and the parent order/store scope used by merge operations.
+    /// </remarks>
     public class LineItemRepository : HccSimpleRepoBase<hcc_LineItem, LineItem>
     {
         private const string MARKEDFREESHIPPING = "ismarkedforfreeshipping";
         private const string ISTAXEXEMPT = "istaxexempt";
         private const string FREESHIPPINGIDS = "freeshippingmethodsids";
 
+        /// <summary>
+        ///     Initializes the line-item repository using the supplied request context.
+        /// </summary>
+        /// <param name="c">The supplied c value.</param>
         public LineItemRepository(HccRequestContext c)
             : base(c)
         {
         }
 
+        /// <summary>
+        ///     Performs the match items operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="item">The supplied item value.</param>
+        /// <returns>The value produced by the operation.</returns>
         protected override Func<hcc_LineItem, bool> MatchItems(LineItem item)
         {
             return li => li.Id == item.Id;
         }
 
+        /// <summary>
+        ///     Performs the not match items operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="items">The supplied items value.</param>
+        /// <returns>The value produced by the operation.</returns>
         protected override Func<hcc_LineItem, bool> NotMatchItems(List<LineItem> items)
         {
             var itemIds = new HashSet<long>(items.Select(i => i.Id));
             return li => !itemIds.Contains(li.Id);
         }
 
+        /// <summary>
+        ///     Performs the copy model to data operation using the supplied arguments and current commerce context.
+        ///     Addresses, custom properties, discounts, status values, and totals are mapped into the persistence record.
+        /// </summary>
+        /// <param name="data">The supplied data value.</param>
+        /// <param name="model">The supplied model value.</param>
         protected override void CopyModelToData(hcc_LineItem data, LineItem model)
         {
             data.Id = model.Id;
@@ -115,6 +142,12 @@ namespace Hotcakes.Commerce.Orders
             data.IsUpchargeAllowed = model.IsUpchargeAllowed;
         }
 
+        /// <summary>
+        ///     Performs the copy data to model operation using the supplied arguments and current commerce context.
+        ///     Serialized addresses, custom properties, discounts, status values, and totals are mapped into the model.
+        /// </summary>
+        /// <param name="data">The supplied data value.</param>
+        /// <param name="model">The supplied model value.</param>
         protected override void CopyDataToModel(hcc_LineItem data, LineItem model)
         {
             model.Id = data.Id;
@@ -188,17 +221,32 @@ namespace Hotcakes.Commerce.Orders
             }
         }
 
+        /// <summary>
+        ///     Performs the update operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="item">The supplied item value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public bool Update(LineItem item)
         {
             item.LastUpdatedUtc = DateTime.UtcNow;
             return base.Update(item, y => y.Id == item.Id);
         }
 
+        /// <summary>
+        ///     Performs the delete operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="id">The supplied id value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public bool Delete(long id)
         {
             return Delete(y => y.Id == id);
         }
 
+        /// <summary>
+        ///     Performs the find for order operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="orderBvin">The supplied order bvin value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public List<LineItem> FindForOrder(string orderBvin)
         {
             var guid = DataTypeHelper.BvinToGuid(orderBvin);
@@ -209,6 +257,11 @@ namespace Hotcakes.Commerce.Orders
             });
         }
 
+        /// <summary>
+        ///     Performs the find for orders operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="bvins">The supplied bvins value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public List<LineItem> FindForOrders(List<string> bvins)
         {
             var guids = new HashSet<Guid>(bvins.Select(b => DataTypeHelper.BvinToGuid(b)));
@@ -220,12 +273,23 @@ namespace Hotcakes.Commerce.Orders
             });
         }
 
+        /// <summary>
+        ///     Performs the delete for order operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="orderBvin">The supplied order bvin value.</param>
         public void DeleteForOrder(string orderBvin)
         {
             var guid = DataTypeHelper.BvinToGuid(orderBvin);
             Delete(y => y.OrderBvin == guid);
         }
 
+        /// <summary>
+        ///     Performs the merge list operation using the supplied arguments and current commerce context.
+        ///     Parent order and store keys are assigned before child records are merged.
+        /// </summary>
+        /// <param name="orderBvin">The supplied order bvin value.</param>
+        /// <param name="storeId">The supplied store id value.</param>
+        /// <param name="subitems">The supplied subitems value.</param>
         public void MergeList(string orderBvin, long storeId, List<LineItem> subitems)
         {
             // Set Base Key Field
@@ -240,6 +304,13 @@ namespace Hotcakes.Commerce.Orders
             MergeList(subitems, o => o.OrderBvin == orderGuid && o.StoreId == storeId);
         }
 
+        /// <summary>
+        ///     Performs the find popular items operation using the supplied arguments and current commerce context.
+        /// </summary>
+        /// <param name="startDateUtc">The supplied start date utc value.</param>
+        /// <param name="endDateUtc">The supplied end date utc value.</param>
+        /// <param name="maxItems">The supplied max items value.</param>
+        /// <returns>The value produced by the operation.</returns>
         public Dictionary<string, int> FindPopularItems(DateTime startDateUtc, DateTime endDateUtc, int maxItems)
         {
             var result = new Dictionary<string, int>();

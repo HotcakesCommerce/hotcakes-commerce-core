@@ -29,25 +29,50 @@ using System.Linq;
 
 namespace Hotcakes.Commerce.Content
 {
+    /// <summary>
+    /// Stores the ordered, named list items used by a <see cref="ContentBlock"/>.
+    /// </summary>
     public class ContentBlockSettingList
     {
+        /// <summary>
+        /// Initializes an empty list collection.
+        /// </summary>
         public ContentBlockSettingList()
         {
             Items = new List<ContentBlockSettingListItem>();
         }
 
+        /// <summary>
+        /// Gets or sets all list items, including items from every list name.
+        /// </summary>
         public List<ContentBlockSettingListItem> Items { get; set; }
 
+        /// <summary>
+        /// Finds items in a named list ordered by <see cref="ContentBlockSettingListItem.SortOrder"/>.
+        /// </summary>
+        /// <param name="listName">The list name to match.</param>
+        /// <returns>A new list containing matching items in sort order.</returns>
         public List<ContentBlockSettingListItem> FindList(string listName)
         {
             return Items.Where(y => y.ListName == listName).OrderBy(y => y.SortOrder).ToList();
         }
 
+        /// <summary>
+        /// Finds the single item with the specified identifier.
+        /// </summary>
+        /// <param name="bvin">The item identifier.</param>
+        /// <returns>The matching item, or <see langword="null"/> when none exists.</returns>
+        /// <remarks>The underlying query expects at most one matching item.</remarks>
         public ContentBlockSettingListItem FindSingleItem(string bvin)
         {
             return Items.Where(y => y.Id == bvin).SingleOrDefault();
         }
 
+        /// <summary>
+        /// Adds an item after assigning it the next sort position in its named list.
+        /// </summary>
+        /// <param name="item">The item to add.</param>
+        /// <returns><see langword="true"/> after the item is added.</returns>
         public bool AddItem(ContentBlockSettingListItem item)
         {
             var maxSort = FindMaxSort(item.ListName);
@@ -56,6 +81,11 @@ namespace Hotcakes.Commerce.Content
             return true;
         }
 
+        /// <summary>
+        /// Removes the item with the specified identifier.
+        /// </summary>
+        /// <param name="bvin">The item identifier.</param>
+        /// <returns><see langword="true"/> when an item was found and removed.</returns>
         public bool RemoveItem(string bvin)
         {
             var item = FindSingleItem(bvin);
@@ -67,12 +97,22 @@ namespace Hotcakes.Commerce.Content
             return false;
         }
 
+        /// <summary>
+        /// Removes every item belonging to a named list.
+        /// </summary>
+        /// <param name="listName">The list name to remove.</param>
+        /// <returns><see langword="true"/> after removal is attempted.</returns>
         public bool DeleteList(string listName)
         {
             Items.RemoveAll(y => y.ListName == listName);
             return true;
         }
 
+        /// <summary>
+        /// Gets the highest sort position currently used by a named list.
+        /// </summary>
+        /// <param name="listName">The list name to inspect.</param>
+        /// <returns>The maximum sort position, or zero when the list is empty.</returns>
         public int FindMaxSort(string listName)
         {
             var result = 0;
@@ -90,6 +130,12 @@ namespace Hotcakes.Commerce.Content
             return result;
         }
 
+        /// <summary>
+        /// Updates named-list sort positions from the supplied identifier order.
+        /// </summary>
+        /// <param name="ids">Identifiers in the desired order.</param>
+        /// <param name="listName">The list name to update.</param>
+        /// <remarks>Positions are assigned from <see cref="IList{T}.IndexOf(T)"/>, so the first item receives zero.</remarks>
         public void UpdateSortOrder(IList<string> ids, string listName)
         {
             var list = FindList(listName);
@@ -99,6 +145,12 @@ namespace Hotcakes.Commerce.Content
             }
         }
 
+        /// <summary>
+        /// Moves an item toward the beginning of its named list by exchanging sort positions.
+        /// </summary>
+        /// <param name="bvin">The item identifier.</param>
+        /// <param name="listName">The list name containing the item.</param>
+        /// <returns><see langword="true"/> after the operation is attempted.</returns>
         public bool MoveItemUp(string bvin, string listName)
         {
             var current = FindList(listName);
@@ -127,6 +179,12 @@ namespace Hotcakes.Commerce.Content
             return true;
         }
 
+        /// <summary>
+        /// Moves an item toward the end of its named list by exchanging sort positions.
+        /// </summary>
+        /// <param name="bvin">The item identifier.</param>
+        /// <param name="listName">The list name containing the item.</param>
+        /// <returns><see langword="true"/> after the operation is attempted.</returns>
         public bool MoveItemDown(string bvin, string listName)
         {
             var current = FindList(listName);

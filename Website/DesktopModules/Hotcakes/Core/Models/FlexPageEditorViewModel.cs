@@ -28,12 +28,27 @@ using System;
 
 namespace Hotcakes.Modules.Core.Models
 {
+/// <summary>
+    /// Represents the FlexPageEditorViewModel storefront model.
+    /// </summary>
     [Serializable]
     public class FlexPageEditorViewModel
     {
+        /// <summary>
+        /// Gets or sets the IsEditMode value used by this storefront model.
+        /// </summary>
         public bool IsEditMode { get; set; }
+        /// <summary>
+        /// Gets or sets the CurrentPageUrl value used by this storefront model.
+        /// </summary>
         public string CurrentPageUrl { get; set; }
+        /// <summary>
+        /// Gets or sets the CategoryId value used by this storefront model.
+        /// </summary>
         public string CategoryId { get; set; }
+        /// <summary>
+        /// Gets or sets the IsPreview value used by this storefront model.
+        /// </summary>
         public bool IsPreview { get; set; }
     }
 }

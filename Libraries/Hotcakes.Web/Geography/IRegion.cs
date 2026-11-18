@@ -26,10 +26,14 @@
 
 namespace Hotcakes.Web.Geography
 {
+    /// <summary>Defines the descriptive data for a region within a country.</summary>
     public interface IRegion
     {
+        /// <summary>Gets the abbreviated region name.</summary>
         string Abbreviation { get; }
+        /// <summary>Gets the system name of the region.</summary>
         string SystemName { get; }
+        /// <summary>Gets the display name of the region.</summary>
         string DisplayName { get; }
     }
 }

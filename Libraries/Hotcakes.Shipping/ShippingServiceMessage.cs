@@ -28,9 +28,16 @@ using System;
 
 namespace Hotcakes.Shipping
 {
+    /// <summary>
+    /// Carries informational, diagnostic, or error details reported by a shipping service.
+    /// </summary>
+    /// <seealso cref="ShippingServiceMessageType" />
     [Serializable]
     public class ShippingServiceMessage
     {
+        /// <summary>
+        /// Initializes an informational message with empty code and description values.
+        /// </summary>
         public ShippingServiceMessage()
         {
             MessageType = ShippingServiceMessageType.Information;
@@ -38,10 +45,26 @@ namespace Hotcakes.Shipping
             Description = string.Empty;
         }
 
+        /// <summary>
+        /// Gets or sets the category of this message.
+        /// </summary>
         public ShippingServiceMessageType MessageType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the service-defined code for this message.
+        /// </summary>
         public string Code { get; set; }
+
+        /// <summary>
+        /// Gets or sets the human-readable message description.
+        /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
+        /// Sets this message's type to <see cref="ShippingServiceMessageType.Error" /> and assigns its details.
+        /// </summary>
+        /// <param name="code">The service-defined error code.</param>
+        /// <param name="description">The error description.</param>
         public void SetError(string code, string description)
         {
             MessageType = ShippingServiceMessageType.Error;
@@ -49,6 +72,11 @@ namespace Hotcakes.Shipping
             Description = description;
         }
 
+        /// <summary>
+        /// Sets this message's type to <see cref="ShippingServiceMessageType.Diagnostics" /> and assigns its details.
+        /// </summary>
+        /// <param name="code">The service-defined diagnostic code.</param>
+        /// <param name="description">The diagnostic description.</param>
         public void SetDiagnostics(string code, string description)
         {
             MessageType = ShippingServiceMessageType.Diagnostics;
@@ -56,6 +84,11 @@ namespace Hotcakes.Shipping
             Description = description;
         }
 
+        /// <summary>
+        /// Sets this message's type to <see cref="ShippingServiceMessageType.Information" /> and assigns its details.
+        /// </summary>
+        /// <param name="code">The service-defined information code.</param>
+        /// <param name="description">The information description.</param>
         public void SetInfo(string code, string description)
         {
             MessageType = ShippingServiceMessageType.Information;

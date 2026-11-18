@@ -28,26 +28,49 @@ using System.Web;
 
 namespace Hotcakes.Commerce.Extensions
 {
+    /// <summary>
+    /// Wraps an ASP.NET <see cref="HttpContext"/> and exposes HCC request and response wrappers.
+    /// </summary>
+    /// <remarks>
+    /// Each access to <see cref="HttpContextBase.Request"/> or
+    /// <see cref="HttpContextBase.Response"/> creates the corresponding HCC wrapper.
+    /// The response wrapper receives the request's <c>CustomRedirect</c> selection.
+    /// </remarks>
     public class HccHttpContextWrapper : HttpContextWrapper
     {
+        /// <summary>Stores the underlying ASP.NET context used by this wrapper.</summary>
         protected HttpContext _httpContext;
 
+        /// <summary>
+        /// Initializes a wrapper for the specified ASP.NET context.
+        /// </summary>
+        /// <param name="httpContext">The context to wrap.</param>
         public HccHttpContextWrapper(HttpContext httpContext)
             : base(httpContext)
         {
             _httpContext = httpContext;
         }
 
+        /// <summary>
+        /// Gets a new <see cref="HccHttpRequestWrapper"/> over the underlying request.
+        /// </summary>
         public override HttpRequestBase Request
         {
             get { return new HccHttpRequestWrapper(_httpContext.Request); }
         }
 
+        /// <summary>
+        /// Gets a new <see cref="HccHttpResponseWrapper"/> configured from the request's custom redirect header.
+        /// </summary>
         public override HttpResponseBase Response
         {
             get { return new HccHttpResponseWrapper(_httpContext.Response, UseCustomRedirect()); }
         }
 
+        /// <summary>
+        /// Determines whether the response should use HCC's custom redirect protocol.
+        /// </summary>
+        /// <returns><see langword="true"/> only when the <c>CustomRedirect</c> request header equals <c>1</c>.</returns>
         protected bool UseCustomRedirect()
         {
             return _httpContext.Request.Headers["CustomRedirect"] == "1";

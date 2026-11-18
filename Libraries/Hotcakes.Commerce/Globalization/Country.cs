@@ -35,27 +35,41 @@ using Hotcakes.Web.Geography;
 namespace Hotcakes.Commerce.Globalization
 {
     /// <summary>
-    ///     This is the main object used to work with countries throughout the main application.
+    ///     Represents a country and its localized display data used throughout the commerce application.
     /// </summary>
+    /// <remarks>
+    ///     <see cref="SystemName"/> and the ISO values are the stable, non-localized country data. <see cref="DisplayName"/>
+    ///     uses the localized value when one is available and otherwise falls back to <see cref="SystemName"/>.
+    ///     The object is serializable for compatibility with existing commerce and API payloads.
+    /// </remarks>
     [Serializable]
     public class Country : ICountry
     {
         /// <summary>
-        ///     This is a global ID used for the United States since it is built in.
+        ///     Gets the compatibility identifier used for the built-in United States country.
         /// </summary>
+        /// <remarks>This value is part of the persisted country identity and must not be changed.</remarks>
         public const string UnitedStatesCountryBvin = "bf7389a2-9b21-4d33-b276-23c9c18ea0c0";
 
         private string _displayName { get; set; }
 
         /// <summary>
-        ///     Contains a listing of all of the regions that are part of this country.
+        ///     Gets or sets the regions associated with this country.
         /// </summary>
+        /// <remarks>
+        ///     The property is ignored by <c>ScriptIgnore</c> serialization. Repositories populate it when loading
+        ///     country sub-items; it may be null or empty when a country was constructed without repository sub-items.
+        /// </remarks>
         [ScriptIgnore]
         public List<Region> Regions { get; set; }
 
         /// <summary>
-        ///     Returns the culture-specific version of 1.23 in currency.
+        ///     Gets a sample currency value formatted with the culture identified by <see cref="CultureCode"/>.
         /// </summary>
+        /// <remarks>
+        ///     The sample amount is always 1.23. If the culture cannot be created or formatting fails, an empty string is returned.
+        /// </remarks>
+        /// <value>A culture-specific currency representation of 1.23, or an empty string when formatting is unavailable.</value>
         public string SampleCurrency
         {
             get
@@ -79,8 +93,9 @@ namespace Hotcakes.Commerce.Globalization
         }
 
         /// <summary>
-        ///     Returns the culture-specific name of the Country followed by the respective version of 1.23 in currency.
+        ///     Gets <see cref="DisplayName"/> followed by <see cref="SampleCurrency"/>.
         /// </summary>
+        /// <value>The localized country name and sample currency text separated by a space.</value>
         public string SampleNameAndCurrency
         {
             get
@@ -92,46 +107,54 @@ namespace Hotcakes.Commerce.Globalization
         }
 
         /// <summary>
-        ///     The unique ID of the country.
+        ///     Gets or sets the string representation of the country's unique identifier.
         /// </summary>
+        /// <value>The country identifier in the repository's bvin format.</value>
         public string Bvin { get; set; }
 
         /// <summary>
-        ///     Specifies the language that this specific language object applies to.
+        ///     Gets or sets the culture code used when selecting localized country data and formatting samples.
         /// </summary>
+        /// <value>The culture code associated with this country model.</value>
         public string CultureCode { get; set; }
 
         /// <summary>
-        ///     This is the global name of the country, which is immune to localization.
+        ///     Gets or sets the stable, non-localized country name.
         /// </summary>
+        /// <value>The system name used as the localization fallback and global identity label.</value>
         public string SystemName { get; set; }
 
         /// <summary>
-        ///     This is the two-letter abbreviation of the country.
+        ///     Gets or sets the country's two-letter ISO code.
         /// </summary>
-        /// <remarks>This value should follow ISO-3166-1 standards.</remarks>
+        /// <remarks>This value is expected to follow ISO 3166-1 alpha-2 conventions.</remarks>
         public string IsoCode { get; set; }
 
         /// <summary>
-        ///     This is the three-letter abbreviation of the country.
+        ///     Gets or sets the country's three-letter ISO code.
         /// </summary>
-        /// <remarks>This value should follow ISO-3166-1 standards.</remarks>
+        /// <remarks>This value is expected to follow ISO 3166-1 alpha-3 conventions.</remarks>
         public string IsoAlpha3 { get; set; }
 
         /// <summary>
-        ///     This is the three-digit identifier of the country.
+        ///     Gets or sets the country's three-digit ISO code.
         /// </summary>
-        /// <remarks>This value should follow ISO-3166-1 standards.</remarks>
+        /// <remarks>This value is expected to follow ISO 3166-1 numeric conventions.</remarks>
         public string IsoNumeric { get; set; }
 
         /// <summary>
-        ///     A regular expression that can be used to specify the format of the postal code that this country should follow.
+        ///     Gets or sets the regular expression used to validate postal codes for this country.
         /// </summary>
+        /// <remarks><see cref="ValidatePostalCode(string)"/> uses this expression when it is not null or empty.</remarks>
         public string PostalCodeValidationRegex { get; set; }
 
         /// <summary>
-        ///     The display name is the value that the customer will see in a localized website, per the CultureCode.
+        ///     Gets or sets the localized country name displayed to customers.
         /// </summary>
+        /// <remarks>
+        ///     When the localized value is null or empty, the getter returns <see cref="SystemName"/>. The setter stores
+        ///     the localized value without changing the system name.
+        /// </remarks>
         public string DisplayName
         {
             get
@@ -144,30 +167,36 @@ namespace Hotcakes.Commerce.Globalization
         }
 
         /// <summary>
-        ///     Returns a specific region from the Regions property using the respective abbreviation.
+        ///     Finds a region in <see cref="Regions"/> by its abbreviation.
         /// </summary>
-        /// <param name="abbreviation">The two-letter abbreviation of the region to look for.</param>
-        /// <returns>If found, a single instance of Region is returned. Otherwise, a null object will be returned.</returns>
+        /// <param name="abbreviation">The region abbreviation to compare using ordinal string equality.</param>
+        /// <returns>The matching <see cref="Region"/>, or <see langword="null"/> when no region matches.</returns>
+        /// <remarks>The current implementation expects <see cref="Regions"/> to be initialized.</remarks>
         public Region FindRegion(string abbreviation)
         {
             return Regions.Where(y => y.Abbreviation == abbreviation).SingleOrDefault();
         }
 
         /// <summary>
-        ///     Returns a specific region from the Regions property using the respective BVIN or ID.
+        ///     Finds a region in <see cref="Regions"/> by its identifier.
         /// </summary>
-        /// <param name="regionId">The unique ID or BVIN of the region to look for.</param>
-        /// <returns>If found, a single instance of Region is returned. Otherwise, a null object will be returned.</returns>
+        /// <param name="regionId">The region <see cref="Region.RegionId"/> to find.</param>
+        /// <returns>The matching <see cref="Region"/>, or <see langword="null"/> when no region matches.</returns>
+        /// <remarks>The current implementation expects <see cref="Regions"/> to be initialized.</remarks>
         public Region FindRegion(Guid regionId)
         {
             return Regions.SingleOrDefault(r => r.RegionId == regionId);
         }
 
         /// <summary>
-        ///     This method will validate the postal or zip code of the country using the PostalCodeValidationRegex property.
+        ///     Validates a postal or ZIP code using <see cref="PostalCodeValidationRegex"/>.
         /// </summary>
-        /// <param name="postalCode">A string representation of the postal or zip code to validate.</param>
-        /// <returns>If true, the postal code is valid. Otherwise, this method will return false.</returns>
+        /// <param name="postalCode">The postal or ZIP code to validate.</param>
+        /// <returns><see langword="true"/> when no validation expression is configured or the expression matches; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>
+        ///     Validation delegates to <see cref="Regex.IsMatch(string, string)"/>. Consequently, malformed expressions and
+        ///     other argument errors retain the behavior of that API; this method does not normalize or trim the input.
+        /// </remarks>
         public bool ValidatePostalCode(string postalCode)
         {
             if (!string.IsNullOrEmpty(PostalCodeValidationRegex))

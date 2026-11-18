@@ -34,6 +34,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.CategoryMenu
 {
+    /// <summary>
+    /// Provides module settings for the category menu module.
+    /// </summary>
     public partial class Settings : HotcakesSettingsBase
     {
         protected override void OnInit(EventArgs e)
@@ -44,11 +47,17 @@ namespace Hotcakes.Modules.CategoryMenu
             btnRemoveCategory.Click += btnRemoveCategory_OnClick;
         }
 
+        /// <summary>
+        /// Saves the category menu settings from the controls.
+        /// </summary>
         public override void UpdateSettings()
         {
             SaveData();
         }
 
+        /// <summary>
+        /// Loads the category menu settings into the controls.
+        /// </summary>
         public override void LoadSettings()
         {
             if (!Page.IsPostBack)

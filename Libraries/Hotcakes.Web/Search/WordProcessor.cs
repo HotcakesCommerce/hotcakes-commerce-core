@@ -30,6 +30,9 @@ using System.Globalization;
 
 namespace Hotcakes.Web.Search
 {
+    /// <summary>
+    /// Provides culture-aware word normalization and English stop-word handling for search text.
+    /// </summary>
     [Serializable]
     public static class WordProcessor
     {
@@ -78,12 +81,24 @@ namespace Hotcakes.Web.Search
 
         private static List<string> EnglishStopWords { get; set; }
 
+        /// <summary>
+        /// Determines whether a culture uses English as its two-letter ISO language.
+        /// </summary>
+        /// <param name="culture">The culture name to inspect.</param>
+        /// <returns><see langword="true" /> when the culture is English; otherwise, <see langword="false" />.</returns>
         public static bool IsEnglish(string culture)
         {
             var cultureInfo = new CultureInfo(culture);
             return cultureInfo.TwoLetterISOLanguageName == "en";
         }
 
+        /// <summary>
+        /// Reduces one word to its stem when the supplied culture is English.
+        /// </summary>
+        /// <param name="word">The word to stem.</param>
+        /// <param name="culture">The culture used to select the stemming behavior.</param>
+        /// <returns>The Porter stem for English text, or the original word for other cultures.</returns>
+        /// <see cref="PorterStemmer" />
         public static string StemSingleWord(string word, string culture)
         {
             if (IsEnglish(culture))
@@ -97,6 +112,12 @@ namespace Hotcakes.Web.Search
             return word;
         }
 
+        /// <summary>
+        /// Determines whether a stemmed word is in the built-in English stop-word list.
+        /// </summary>
+        /// <param name="stemmedWord">The word or stem to check.</param>
+        /// <param name="culture">The culture used to select the stop-word list.</param>
+        /// <returns><see langword="true" /> for an English stop word; otherwise, <see langword="false" />.</returns>
         public static bool IsStopWord(string stemmedWord, string culture)
         {
             if (IsEnglish(culture))

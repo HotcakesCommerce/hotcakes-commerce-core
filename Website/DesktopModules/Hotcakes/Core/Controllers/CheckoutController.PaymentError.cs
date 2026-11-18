@@ -41,6 +41,8 @@ namespace Hotcakes.Modules.Core.Controllers
 	{
 		#region Public methods
 
+		/// <summary>Displays the payment-error recovery form for the pending order.</summary>
+		/// <returns>The payment-error view or a checkout redirect.</returns>
 		[HccHttpGet]
 		[NonCacheableResponseFilter]
 		public ActionResult PaymentError()
@@ -67,6 +69,8 @@ namespace Hotcakes.Modules.Core.Controllers
 			return View(model);
 		}
 
+		/// <summary>Processes the payment-error recovery submission.</summary>
+		/// <returns>The payment-error view or a checkout redirect.</returns>
 		[HccHttpPost]
 		[NonCacheableResponseFilter]
 		[ActionName("PaymentError")]
@@ -100,6 +104,8 @@ namespace Hotcakes.Modules.Core.Controllers
 			return View(model);
 		}
 
+		/// <summary>Cancels the pending payment order and returns to the cart.</summary>
+		/// <returns>A redirect to the cart.</returns>
 		[HccHttpGet]
 		public ActionResult Cancel()
 		{

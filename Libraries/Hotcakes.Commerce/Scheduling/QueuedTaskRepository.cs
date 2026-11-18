@@ -33,13 +33,25 @@ using Hotcakes.Commerce.Data.EF;
 
 namespace Hotcakes.Commerce.Scheduling
 {
+    /// <summary>
+    /// Provides persistence operations for store-scoped <see cref="QueuedTask"/> records.
+    /// </summary>
+    /// <remarks>
+    /// Most queries use <see cref="HccRequestContext.CurrentStore"/> as their store boundary. The explicit all-store lookup and
+    /// store-listing operation are exceptions documented on their respective members.
+    /// </remarks>
     public class QueuedTaskRepository : HccSimpleRepoBase<hcc_QueuedTask, QueuedTask>
     {
+        /// <summary>Initializes a repository using the supplied commerce request context.</summary>
+        /// <param name="c">The request context used for store-scoped persistence.</param>
         public QueuedTaskRepository(HccRequestContext c)
             : base(c)
         {
         }
 
+        /// <summary>Copies persisted queue data into its model representation.</summary>
+        /// <param name="data">The persisted queue record.</param>
+        /// <param name="model">The model receiving the persisted values.</param>
         protected override void CopyDataToModel(hcc_QueuedTask data, QueuedTask model)
         {
             model.Id = data.Id;
@@ -53,6 +65,9 @@ namespace Hotcakes.Commerce.Scheduling
             model.TaskProcessorName = data.TaskProcessorName;
         }
 
+        /// <summary>Copies a queue model into its persisted data representation.</summary>
+        /// <param name="data">The persisted queue record receiving the values.</param>
+        /// <param name="model">The model supplying the values.</param>
         protected override void CopyModelToData(hcc_QueuedTask data, QueuedTask model)
         {
             data.Id = model.Id;
@@ -66,11 +81,18 @@ namespace Hotcakes.Commerce.Scheduling
             data.TaskProcessorName = model.TaskProcessorName;
         }
 
+        /// <summary>Finds a task by identifier in the current store.</summary>
+        /// <param name="id">The task identifier.</param>
+        /// <returns>The matching task, or <see langword="null"/> when it is not in the current store.</returns>
         public QueuedTask Find(long id)
         {
             return FindFirstPoco(y => y.Id == id && y.StoreId == Context.CurrentStore.Id);
         }
 
+        /// <summary>Finds the earliest pending task for a processor in the current store.</summary>
+        /// <param name="processorId">The processor identifier to match.</param>
+        /// <returns>The pending task with the earliest <see cref="QueuedTask.StartAtUtc"/>, or <see langword="null"/> when none matches.</returns>
+        /// <remarks>This method does not additionally require the task's start time to have arrived.</remarks>
         public QueuedTask FindNextQueuedByProcessorId(Guid processorId)
         {
             var storeId = Context.CurrentStore.Id;
@@ -87,11 +109,18 @@ namespace Hotcakes.Commerce.Scheduling
             }
         }
 
+        /// <summary>Finds a task by identifier without restricting the query to the current store.</summary>
+        /// <param name="id">The task identifier.</param>
+        /// <returns>The matching task, or <see langword="null"/> when no task has that identifier.</returns>
         public QueuedTask FindForAllStores(long id)
         {
             return FindFirstPoco(y => y.Id == id);
         }
 
+        /// <summary>Creates a queued task, assigning the current store when the model has no store identifier.</summary>
+        /// <param name="item">The task to persist.</param>
+        /// <returns><see langword="true"/> when the base repository creates the record.</returns>
+        /// <remarks>A positive <see cref="QueuedTask.StoreId"/> is preserved rather than replaced with the current store.</remarks>
         public override bool Create(QueuedTask item)
         {
             if (item.StoreId < 1)
@@ -101,6 +130,9 @@ namespace Hotcakes.Commerce.Scheduling
             return base.Create(item);
         }
 
+        /// <summary>Updates a task only when its store is the current store.</summary>
+        /// <param name="c">The task values to persist.</param>
+        /// <returns><see langword="false"/> when the task store differs from the current store; otherwise the base update result.</returns>
         public bool Update(QueuedTask c)
         {
             if (c.StoreId != Context.CurrentStore.Id)
@@ -110,16 +142,26 @@ namespace Hotcakes.Commerce.Scheduling
             return Update(c, y => y.Id == c.Id);
         }
 
+        /// <summary>Deletes a task by identifier.</summary>
+        /// <param name="id">The task identifier.</param>
+        /// <returns>The result returned by the base repository delete operation.</returns>
+        /// <remarks>This method does not add a current-store predicate; callers should use an identifier within the intended store scope.</remarks>
         public bool Delete(long id)
         {
             return Delete(y => y.Id == id);
         }
 
+        /// <summary>Returns the first page of tasks for the current store.</summary>
+        /// <returns>Up to 100 tasks, ordered by descending identifier.</returns>
         public List<QueuedTask> FindAll()
         {
             return FindAllPaged(1, 100);
         }
 
+        /// <summary>Returns a page of tasks for the current store.</summary>
+        /// <param name="pageNumber">The one-based page number.</param>
+        /// <param name="pageSize">The maximum number of tasks in the page.</param>
+        /// <returns>Tasks ordered by descending identifier and restricted to the current store.</returns>
         public new List<QueuedTask> FindAllPaged(int pageNumber, int pageSize)
         {
             var storeId = Context.CurrentStore.Id;
@@ -127,7 +169,9 @@ namespace Hotcakes.Commerce.Scheduling
                 pageNumber, pageSize);
         }
 
-        // Finds all stores that have a pending task ready to run at this time.
+        /// <summary>Lists stores that have a pending task ready to run at the current UTC time.</summary>
+        /// <returns>Distinct store identifiers for pending tasks whose start time is not later than now.</returns>
+        /// <remarks>This query intentionally spans all stores rather than using the current store context.</remarks>
         public List<long> ListStoresWithTasksToRun()
         {
             using (var s = CreateReadStrategy())
@@ -141,6 +185,11 @@ namespace Hotcakes.Commerce.Scheduling
             }
         }
 
+        /// <summary>Claims the oldest pending task for a store for processing.</summary>
+        /// <param name="storeId">The store whose queue should be searched.</param>
+        /// <returns>The claimed task, or <see langword="null"/> when that store has no pending task.</returns>
+        /// <remarks>The task is selected by ascending identifier, not by start time. A successful claim changes its status to
+        /// <see cref="QueuedTaskStatus.Running"/> and records a UTC start message in <see cref="QueuedTask.StatusNotes"/>.</remarks>
         public QueuedTask PopATaskForRun(long storeId)
         {
             using (var s = CreateStrategy())

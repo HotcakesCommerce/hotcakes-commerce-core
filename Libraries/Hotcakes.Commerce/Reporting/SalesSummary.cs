@@ -30,16 +30,25 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Reporting
 {
+    /// <summary>Contains current and previous daily sales totals and their relative changes.</summary>
     public class WeeklySummary
     {
+        /// <summary>Gets or sets Monday's current-period sales.</summary>
         public decimal Monday { get; set; }
+        /// <summary>Gets or sets Tuesday's current-period sales.</summary>
         public decimal Tuesday { get; set; }
+        /// <summary>Gets or sets Wednesday's current-period sales.</summary>
         public decimal Wednesday { get; set; }
+        /// <summary>Gets or sets Thursday's current-period sales.</summary>
         public decimal Thursday { get; set; }
+        /// <summary>Gets or sets Friday's current-period sales.</summary>
         public decimal Friday { get; set; }
+        /// <summary>Gets or sets Saturday's current-period sales.</summary>
         public decimal Saturday { get; set; }
+        /// <summary>Gets or sets Sunday's current-period sales.</summary>
         public decimal Sunday { get; set; }
 
+        /// <summary>Gets the sum of the current-period daily sales.</summary>
         public decimal Week
         {
             get
@@ -54,14 +63,22 @@ namespace Hotcakes.Commerce.Reporting
             }
         }
 
+        /// <summary>Gets or sets Monday's comparison-period sales.</summary>
         public decimal MondayLast { get; set; }
+        /// <summary>Gets or sets Tuesday's comparison-period sales.</summary>
         public decimal TuesdayLast { get; set; }
+        /// <summary>Gets or sets Wednesday's comparison-period sales.</summary>
         public decimal WednesdayLast { get; set; }
+        /// <summary>Gets or sets Thursday's comparison-period sales.</summary>
         public decimal ThursdayLast { get; set; }
+        /// <summary>Gets or sets Friday's comparison-period sales.</summary>
         public decimal FridayLast { get; set; }
+        /// <summary>Gets or sets Saturday's comparison-period sales.</summary>
         public decimal SaturdayLast { get; set; }
+        /// <summary>Gets or sets Sunday's comparison-period sales.</summary>
         public decimal SundayLast { get; set; }
 
+        /// <summary>Gets the sum of the comparison-period daily sales.</summary>
         public decimal WeekLast
         {
             get
@@ -76,41 +93,49 @@ namespace Hotcakes.Commerce.Reporting
             }
         }
 
+        /// <summary>Gets Monday's relative change from the comparison period.</summary>
         public decimal MondayChange
         {
             get { return Change(Monday, MondayLast); }
         }
 
+        /// <summary>Gets Tuesday's relative change from the comparison period.</summary>
         public decimal TuesdayChange
         {
             get { return Change(Tuesday, TuesdayLast); }
         }
 
+        /// <summary>Gets Wednesday's relative change from the comparison period.</summary>
         public decimal WednesdayChange
         {
             get { return Change(Wednesday, WednesdayLast); }
         }
 
+        /// <summary>Gets Thursday's relative change from the comparison period.</summary>
         public decimal ThursdayChange
         {
             get { return Change(Thursday, ThursdayLast); }
         }
 
+        /// <summary>Gets Friday's relative change from the comparison period.</summary>
         public decimal FridayChange
         {
             get { return Change(Friday, FridayLast); }
         }
 
+        /// <summary>Gets Saturday's relative change from the comparison period.</summary>
         public decimal SaturdayChange
         {
             get { return Change(Saturday, SaturdayLast); }
         }
 
+        /// <summary>Gets Sunday's relative change from the comparison period.</summary>
         public decimal SundayChange
         {
             get { return Change(Sunday, SundayLast); }
         }
 
+        /// <summary>Gets the relative change for the whole week.</summary>
         public decimal WeekChange
         {
             get { return Change(Week, WeekLast); }
@@ -130,6 +155,8 @@ namespace Hotcakes.Commerce.Reporting
             return result;
         }
 
+        /// <summary>Creates lines for the daily values, ordered Sunday through Saturday.</summary>
+        /// <returns>The daily summary lines.</returns>
         public List<SummaryLine> GetLines()
         {
             var lines = new List<SummaryLine>();
@@ -156,25 +183,35 @@ namespace Hotcakes.Commerce.Reporting
             });
         }
 
+        /// <summary>Represents one daily line in a weekly summary.</summary>
         public class SummaryLine
         {
+            /// <summary>Gets or sets the day label.</summary>
             public string WeekDay { get; set; }
+            /// <summary>Gets or sets the current-period value.</summary>
             public decimal ThisWeek { get; set; }
+            /// <summary>Gets or sets the comparison-period value.</summary>
             public decimal LastWeek { get; set; }
+            /// <summary>Gets or sets the relative change.</summary>
             public decimal Change { get; set; }
         }
     }
 
 
+    /// <summary>Calculates weekly sales summaries for a commerce application.</summary>
     public class SalesSummary
     {
         private readonly HotcakesApplication _hccApp;
 
+        /// <summary>Initializes a summary calculator.</summary>
+        /// <param name="hccApp">The commerce application used to query transactions.</param>
         public SalesSummary(HotcakesApplication hccApp)
         {
             _hccApp = hccApp;
         }
 
+        /// <summary>Populates a summary with sample values for demonstration purposes.</summary>
+        /// <param name="result">The summary to populate.</param>
         public void AddSampleData(WeeklySummary result)
         {
             result.Monday = 500.23m;
@@ -194,6 +231,8 @@ namespace Hotcakes.Commerce.Reporting
             result.Sunday = 288.95m; // less
         }
 
+        /// <summary>Gets current-week sales and compares them with the previous week.</summary>
+        /// <returns>A weekly summary containing daily totals and relative changes.</returns>
         public WeeklySummary GetWeeklySummary()
         {
             var result = new WeeklySummary();

@@ -30,18 +30,22 @@ using System.Linq;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Matches an order containing at least one configured coupon code.</summary>
     public class OrderHasCoupon : PromotionQualificationBase
     {
+        /// <summary>Initializes the qualification with normal processing cost.</summary>
         public OrderHasCoupon()
         {
             ProcessingCost = RelativeProcessingCost.Normal;
         }
 
+        /// <summary>Gets the stable order-coupon qualification identifier.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdOrderHasCoupon); }
         }
 
+        /// <summary>Gets configured coupon codes, normalized to uppercase.</summary>
         public List<string> CurrentCoupons()
         {
             var all = GetSetting("coupons") ?? string.Empty;
@@ -64,6 +68,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             SetSetting("coupons", all);
         }
 
+        /// <summary>Builds a description listing the configured coupon codes.</summary>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var result = "Order Has Coupon Codes:<ul>";
@@ -75,6 +80,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             return result;
         }
 
+        /// <summary>Adds a coupon code after trimming and uppercasing it.</summary>
         public void AddCoupon(string coupon)
         {
             if (string.IsNullOrWhiteSpace(coupon)) return;
@@ -87,6 +93,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             SaveCouponsToSettings(coupons);
         }
 
+        /// <summary>Removes a coupon code after case-insensitive normalization.</summary>
         public void RemoveCoupon(string coupon)
         {
             if (string.IsNullOrWhiteSpace(coupon)) return;
@@ -99,6 +106,7 @@ namespace Hotcakes.Commerce.Marketing.PromotionQualifications
             }
         }
 
+        /// <summary>Matches order and line-item scopes when a configured coupon exists on the order.</summary>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             if (mode != PromotionQualificationMode.Orders && mode != PromotionQualificationMode.LineItems) return false;

@@ -28,15 +28,40 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Web.Data
 {
+    /// <summary>
+    /// Defines the basic persistence operations exposed by a repository for a model type.
+    /// </summary>
+    /// <typeparam name="T">The model type managed by the repository.</typeparam>
     public interface IRepository<T>
         where T : class, new()
     {
+        /// <summary>
+        /// Gets or sets a value indicating whether successful mutations are submitted immediately.
+        /// </summary>
         bool AutoSubmit { get; set; }
 
+        /// <summary>
+        /// Gets or sets the logger used to record persistence diagnostics.
+        /// </summary>
         ILogger Logger { get; set; }
+
+        /// <summary>
+        /// Persists pending changes.
+        /// </summary>
+        /// <returns><see langword="true"/> when the changes are submitted successfully; otherwise, <see langword="false"/>.</returns>
         bool SubmitChanges();
 
+        /// <summary>
+        /// Adds a model to the repository.
+        /// </summary>
+        /// <param name="item">The model to add.</param>
+        /// <returns><see langword="true"/> when the model is added successfully; otherwise, <see langword="false"/>.</returns>
         bool Create(T item);
+
+        /// <summary>
+        /// Gets the number of models currently available in the repository.
+        /// </summary>
+        /// <returns>The total model count.</returns>
         int CountOfAll();
     }
 }

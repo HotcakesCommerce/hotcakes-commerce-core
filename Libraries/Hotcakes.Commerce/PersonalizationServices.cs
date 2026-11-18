@@ -29,12 +29,26 @@ using Hotcakes.Commerce.Catalog;
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>
+    /// Provides cookie-backed personalization helpers for recently viewed products.
+    /// </summary>
+    /// <remarks>The recent-product cookie stores product identifiers in most-recent-first order and is limited to ten entries.</remarks>
     public class PersonalizationServices
     {
         private PersonalizationServices()
         {
         }
 
+        /// <summary>
+        /// Records a product identifier in the recent-products cookie.
+        /// </summary>
+        /// <param name="bvin">The product identifier to place first in the recent-products list.</param>
+        /// <param name="app">The current application context; retained for API compatibility and not used by this operation.</param>
+        /// <remarks>
+        /// The cookie name comes from <see cref="WebAppSettings.CookieNameLastProductsViewed"/>. Existing identifiers are
+        /// de-duplicated, the new identifier is placed first, and at most ten identifiers are retained. When the configured
+        /// cookie name is empty, no cookie is written.
+        /// </remarks>
         public static void RecordProductViews(string bvin, HotcakesApplication app)
         {
             if (WebAppSettings.CookieNameLastProductsViewed != string.Empty)
@@ -65,6 +79,12 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>
+        /// Gets products whose identifiers are stored in the recent-products cookie.
+        /// </summary>
+        /// <param name="app">The application whose catalog service resolves the stored product identifiers.</param>
+        /// <returns>A list resolved through the catalog cache, or an empty list when the cookie has no value.</returns>
+        /// <remarks>The cookie order is passed to the catalog lookup, and the recent-products list is limited to ten identifiers by <see cref="RecordProductViews"/>.</remarks>
         public static List<Product> GetProductsViewed(HotcakesApplication app)
         {
             var SavedProductIDs = SessionManager.GetCookieString(WebAppSettings.CookieNameLastProductsViewed);

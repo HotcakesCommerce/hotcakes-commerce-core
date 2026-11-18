@@ -29,9 +29,16 @@ using Hotcakes.Commerce;
 
 namespace Hotcakes.Modules.Core.Api.Rest
 {
+    /// <summary>Handles REST API requests for RestHandlerFactory.</summary>
+    /// <remarks>Responses are serialized using the established REST API response contract.</remarks>
     [Serializable]
     public class RestHandlerFactory
     {
+        /// <summary>Executes the REST API Instantiate operation.</summary>
+        /// <param name="version">The value supplied for this operation.</param>
+        /// <param name="modelname">The value supplied for this operation.</param>
+        /// <param name="app">The value supplied for this operation.</param>
+        /// <returns>The serialized REST API response or the requested parameter value.</returns>
         public static IRestHandler Instantiate(string version, string modelname, HotcakesApplication app)
         {
             switch (modelname.Trim().ToLowerInvariant())

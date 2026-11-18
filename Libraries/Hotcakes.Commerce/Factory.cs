@@ -41,6 +41,8 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>Provides the process-wide entry point to the configured commerce factory.</summary>
+    /// <remarks>Initialization honors the <c>HccFactory</c> app setting, then discovers a concrete <see cref="IFactory"/> in loaded assemblies. The selected provider is instantiated once.</remarks>
     public class Factory
     {
         [ThreadStatic] private static HttpContext _httpContext;
@@ -83,8 +85,11 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>Gets the factory provider selected during static initialization.</summary>
         public static IFactory Instance { get; private set; }
 
+        /// <summary>Gets or sets the HTTP context used by commerce code.</summary>
+        /// <remarks>The getter prefers <see cref="HttpContext.Current"/> and falls back to the thread-local value.</remarks>
         public static HttpContext HttpContext
         {
             get { return HttpContext.Current ?? _httpContext; }
@@ -122,71 +127,94 @@ namespace Hotcakes.Commerce
             }
         }
 
+        /// <summary>Creates the configured URL resolver.</summary>
         public static IHccUrlResolver CreateHccUrlResolver()
         {
             return Instance.CreateHccUrlResolver();
         }
 
+        /// <summary>Creates the configured form renderer.</summary>
         public static IHccFormRenderer CreateHccFormRenderer()
         {
             return Instance.CreateHccFormRenderer();
         }
 
+        /// <summary>Creates the configured event logger.</summary>
         public static ILogger CreateEventLogger()
         {
             return Instance.CreateEventLogger();
         }
 
+        /// <summary>Creates a social service for a request context.</summary>
+        /// <param name="context">The commerce request context.</param>
         public static ISocialService CreateSocialService(HccRequestContext context)
         {
             return Instance.CreateSocialService(context);
         }
 
+        /// <summary>Creates a workflow factory for a request context.</summary>
+        /// <param name="context">The commerce request context.</param>
+        /// <remarks>The misspelled <c>CreateWorklflowFactory</c> name is preserved for compatibility.</remarks>
         public static WorkflowFactory CreateWorklflowFactory(HccRequestContext context)
         {
             return Instance.CreateWorkflowFactory(context);
         }
 
+        /// <summary>Creates the configured configuration manager.</summary>
         public static IConfigurationManager CreateConfigurationManager()
         {
             return Instance.CreateConfigurationManager();
         }
 
+        /// <summary>Creates the host-settings provider.</summary>
         public static IHostSettingsProvider CreateHostSettingsProvider()
         {
             return Instance.CreateHostSettingsProvider();
         }
 
+        /// <summary>Creates the store-settings provider.</summary>
         public static IStoreSettingsProvider CreateStoreSettingsProvider()
         {
             return Instance.CreateStoreSettingsProvider();
         }
 
+        /// <summary>Creates a read/write commerce database context.</summary>
         public static HccDbContext CreateHccDbContext()
         {
             return Instance.CreateHccDbContext();
         }
 
+        /// <summary>Creates a read-only commerce database context.</summary>
         public static HccDbContext CreateReadOnlyHccDbContext()
         {
             return Instance.CreateReadOnlyHccDbContext();
         }
 
+        /// <summary>Creates a repository for the current request context.</summary>
+        /// <typeparam name="T">The repository type.</typeparam>
         public static T CreateRepo<T>() where T : class, IRepo
         {
             return Instance.CreateRepo<T>();
         }
 
+        /// <summary>Creates a repository for an explicit request context.</summary>
+        /// <typeparam name="T">The repository type.</typeparam>
+        /// <param name="context">The commerce request context.</param>
         public static T CreateRepo<T>(HccRequestContext context) where T : class, IRepo
         {
             return Instance.CreateRepo<T>(context);
         }
 
+        /// <summary>Creates a service for the current request context.</summary>
+        /// <typeparam name="T">The service type.</typeparam>
         public static T CreateService<T>() where T : HccServiceBase
         {
             return Instance.CreateService<T>();
         }
 
+        /// <summary>Creates a service for an explicit request context.</summary>
+        /// <typeparam name="T">The service type.</typeparam>
+        /// <param name="context">The commerce request context.</param>
         public static T CreateService<T>(HccRequestContext context) where T : HccServiceBase
         {
             return Instance.CreateService<T>(context);

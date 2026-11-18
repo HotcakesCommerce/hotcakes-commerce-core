@@ -33,6 +33,9 @@ namespace Hotcakes.Modules.Core
     {
         private string _Src = string.Empty;
 
+        /// <summary>
+        /// Gets or sets the src.
+        /// </summary>
         public string Src
         {
             get { return _Src; }

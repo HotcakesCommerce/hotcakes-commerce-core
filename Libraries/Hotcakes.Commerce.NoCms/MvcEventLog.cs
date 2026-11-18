@@ -30,13 +30,33 @@ using log4net;
 
 namespace Hotcakes.Commerce.NoCms
 {
+    /// <summary>
+    /// Adapts the HCC event-logging contract to the log4net logger used by the MVC host.
+    /// </summary>
+    /// <remarks>
+    /// Message logging uses the supplied source when one is provided, while exception logging
+    /// uses the established <c>Hotcakes.System</c> logger. The severity mapping is intentionally
+    /// retained by this adapter, including the existing treatment of fatal and none values.
+    /// </remarks>
     public class MvcEventLog : ILogger
     {
+        /// <summary>
+        /// Logs an informational message using the adapter's default source.
+        /// </summary>
+        /// <param name="message">The message to write to the event log.</param>
+        /// <remarks>This overload delegates to <see cref="LogMessage(string, string, EventLogSeverity)"/> with informational severity.</remarks>
         public void LogMessage(string message)
         {
             LogMessage("Logger STORE 0", message, EventLogSeverity.Information);
         }
 
+        /// <summary>
+        /// Logs a message with the specified source and severity.
+        /// </summary>
+        /// <param name="source">The log4net logger name to use.</param>
+        /// <param name="message">The message to write to the event log.</param>
+        /// <param name="severity">The event severity that determines the log4net method used.</param>
+        /// <remarks>Fatal and none severities retain the adapter's established mappings.</remarks>
         public void LogMessage(string source, string message, EventLogSeverity severity)
         {
             var Log = LogManager.GetLogger(source);
@@ -64,11 +84,22 @@ namespace Hotcakes.Commerce.NoCms
             }
         }
 
+        /// <summary>
+        /// Logs an exception with error severity.
+        /// </summary>
+        /// <param name="ex">The exception to write to the event log.</param>
+        /// <remarks>This overload delegates to <see cref="LogException(Exception, EventLogSeverity)"/> with error severity.</remarks>
         public void LogException(Exception ex)
         {
             LogException(ex, EventLogSeverity.Error);
         }
 
+        /// <summary>
+        /// Logs an exception with the specified severity.
+        /// </summary>
+        /// <param name="ex">The exception to write to the event log.</param>
+        /// <param name="severity">The event severity that determines the log4net method used.</param>
+        /// <remarks>Exceptions are written through the established <c>Hotcakes.System</c> logger; fatal and none severities retain their existing mappings.</remarks>
         public void LogException(Exception ex, EventLogSeverity severity)
         {
             var Log = LogManager.GetLogger("Hotcakes.System");

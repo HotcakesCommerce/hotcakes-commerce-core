@@ -28,6 +28,8 @@ using System;
 
 namespace Hotcakes.Web.Barcodes
 {
+    /// <summary>UPC-E barcode encoder.</summary>
+    /// <remarks>The encoded output is exposed through <see cref="IBarcode.Encoded_Value"/>.</remarks>
     [Serializable]
     internal class UPCE : BarcodeCommon, IBarcode
     {
@@ -67,6 +69,9 @@ namespace Hotcakes.Web.Barcodes
             "ababab", "ababba", "abbaba"
         };
 
+        /// <summary>Encodes data using the UPC-E symbology.</summary>
+        /// <param name="input">The data to encode.</param>
+        /// <seealso cref="Encoded_Value"/>
         public UPCE(string input)
         {
             Raw_Data = input;
@@ -74,6 +79,8 @@ namespace Hotcakes.Web.Barcodes
 
         #region IBarcode Members
 
+        /// <summary>Gets the encoded bar-and-space representation.</summary>
+        /// <seealso cref="IBarcode.Encoded_Value"/>
         public string Encoded_Value
         {
             get { return Encode_UPCE(); }

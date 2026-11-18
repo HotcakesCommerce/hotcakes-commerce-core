@@ -27,8 +27,12 @@
 namespace Hotcakes.Commerce.Catalog
 {
     /// <summary>
-    ///     This enumeration is used to give a meaningful value to product reviews.
+    ///     Specifies the star rating assigned to a product review.
     /// </summary>
+    /// <remarks>
+    ///     The values range from <see cref="ZeroStars" /> through <see cref="FiveStars" /> and are used as the review's
+    ///     persisted rating scale.
+    /// </remarks>
     public enum ProductReviewRating
     {
         /// <summary>

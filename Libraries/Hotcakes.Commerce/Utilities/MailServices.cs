@@ -32,15 +32,32 @@ using Hotcakes.Commerce.Accounts;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Sends email using the configured global or store-specific SMTP settings and builds mail links.
+    /// </summary>
     public class MailServices
     {
         private readonly Store _store = new Store();
 
+        /// <summary>
+        /// Initializes a mail sender for a store.
+        /// </summary>
+        /// <param name="currentStore">The store whose custom mail-server settings may override global SMTP settings.</param>
         public MailServices(Store currentStore)
         {
             _store = currentStore;
         }
 
+        /// <summary>
+        /// Sends a message through the configured SMTP server.
+        /// </summary>
+        /// <param name="m">The message to send.</param>
+        /// <returns><see langword="true"/> when the SMTP client sends the message; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// Store-specific SMTP settings are used when enabled; otherwise global configuration is used. Exceptions are
+        /// logged and written to the trace output, then converted to a <see langword="false"/> result. The message is
+        /// not disposed by this method.
+        /// </remarks>
         public bool SendMail(MailMessage m)
         {
             var result = false;
@@ -106,6 +123,12 @@ namespace Hotcakes.Commerce.Utilities
             return result;
         }
 
+        /// <summary>
+        /// Sends a message using the mail settings associated with a store.
+        /// </summary>
+        /// <param name="m">The message to send; <see langword="null"/> is rejected.</param>
+        /// <param name="fromStore">The store whose mail settings are used.</param>
+        /// <returns><see langword="true"/> when sending succeeds; otherwise, <see langword="false"/>.</returns>
         public static bool SendMail(MailMessage m, Store fromStore)
         {
             if (m == null)
@@ -115,11 +138,28 @@ namespace Hotcakes.Commerce.Utilities
             return sender.SendMail(m);
         }
 
+        /// <summary>
+        /// Creates an HTML <c>mailto:</c> link whose display text is the email address.
+        /// </summary>
+        /// <param name="email">The recipient email address.</param>
+        /// <param name="subject">The message subject.</param>
+        /// <param name="body">The message body.</param>
+        /// <returns>An HTML anchor containing the mailto URI.</returns>
+        /// <remarks>Spaces are replaced with <c>%20</c>; other URI and HTML characters are not encoded.</remarks>
         public static string MailToLink(string email, string subject, string body)
         {
             return MailToLink(email, subject, body, email);
         }
 
+        /// <summary>
+        /// Creates an HTML <c>mailto:</c> link with custom display text.
+        /// </summary>
+        /// <param name="email">The recipient email address.</param>
+        /// <param name="subject">The message subject.</param>
+        /// <param name="body">The message body.</param>
+        /// <param name="displayText">The text rendered inside the anchor.</param>
+        /// <returns>An HTML anchor containing the mailto URI and supplied display text.</returns>
+        /// <remarks>Spaces in the subject and body are replaced with <c>%20</c>; values are not otherwise encoded.</remarks>
         public static string MailToLink(string email, string subject, string body, string displayText)
         {
             var result = "<a href=\"mailto:";

@@ -33,13 +33,16 @@ using Hotcakes.Commerce.Data.EF;
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>Provides persistence and store-scoped searches for <see cref="AffiliateReferral"/> records.</summary>
     public class AffiliateReferralRepository : HccSimpleRepoBase<hcc_AffiliateReferral, AffiliateReferral>
     {
+        /// <summary>Initializes the referral repository for the supplied commerce context.</summary>
         public AffiliateReferralRepository(HccRequestContext context)
             : base(context)
         {
         }
 
+        /// <summary>Copies persistence values into a referral model.</summary>
         protected override void CopyDataToModel(hcc_AffiliateReferral data, AffiliateReferral model)
         {
             model.AffiliateId = data.AffiliateId;
@@ -49,6 +52,7 @@ namespace Hotcakes.Commerce.Contacts
             model.StoreId = data.StoreId;
         }
 
+        /// <summary>Copies a referral model into its persistence representation.</summary>
         protected override void CopyModelToData(hcc_AffiliateReferral data, AffiliateReferral model)
         {
             data.AffiliateId = model.AffiliateId;
@@ -58,6 +62,7 @@ namespace Hotcakes.Commerce.Contacts
             data.StoreId = model.StoreId;
         }
 
+        /// <summary>Finds a referral only when it belongs to the current store.</summary>
         public AffiliateReferral Find(long id)
         {
             var result = FindForAllStores(id);
@@ -71,16 +76,21 @@ namespace Hotcakes.Commerce.Contacts
             return null;
         }
 
+        /// <summary>Finds a referral without current-store filtering.</summary>
         public AffiliateReferral FindForAllStores(long id)
         {
             return FindFirstPoco(y => y.Id == id);
         }
 
+        /// <summary>Creates a referral and assigns the current store and current UTC timestamp.</summary>
         public override bool Create(AffiliateReferral item)
         {
             return Create2(item, false);
         }
 
+        /// <summary>Creates a referral, optionally preserving a caller-supplied timestamp.</summary>
+        /// <param name="item">The referral to create.</param>
+        /// <param name="timeStampIsSet">Whether <see cref="AffiliateReferral.TimeOfReferralUtc"/> is already set.</param>
         public bool Create2(AffiliateReferral item, bool timeStampIsSet)
         {
             if (!timeStampIsSet)
@@ -91,6 +101,7 @@ namespace Hotcakes.Commerce.Contacts
             return base.Create(item);
         }
 
+        /// <summary>Updates a referral only when it belongs to the current store.</summary>
         public bool Update(AffiliateReferral c)
         {
             if (c.StoreId != Context.CurrentStore.Id)
@@ -100,11 +111,19 @@ namespace Hotcakes.Commerce.Contacts
             return Update(c, y => y.Id == c.Id);
         }
 
+        /// <summary>Deletes a referral belonging to the current store.</summary>
         public bool Delete(long id)
         {
             return Delete(y => y.Id == id && y.StoreId == Context.CurrentStore.Id);
         }
 
+        /// <summary>Finds paged referrals using affiliate and inclusive UTC date criteria.</summary>
+        /// <param name="criteria">The optional referral filters.</param>
+        /// <param name="pageNumber">The one-based page number used by the repository paging helper.</param>
+        /// <param name="pageSize">The maximum number of rows in the page.</param>
+        /// <param name="rowCount">Receives the total matching row count before paging.</param>
+        /// <returns>Referrals ordered by ascending database identifier.</returns>
+        /// <remarks>Date filtering is applied only when both criteria date bounds are set.</remarks>
         public List<AffiliateReferral> FindByCriteria(AffiliateReferralSearchCriteria criteria, int pageNumber,
             int pageSize, ref int rowCount)
         {
@@ -130,6 +149,8 @@ namespace Hotcakes.Commerce.Contacts
             }
         }
 
+        /// <summary>Deletes referrals for an affiliate without adding an explicit store predicate.</summary>
+        /// <param name="affiliateId">The numeric affiliate identifier.</param>
         public bool DeleteAllForAffiliate(long affiliateId)
         {
             return Delete(y => y.AffiliateId == affiliateId);

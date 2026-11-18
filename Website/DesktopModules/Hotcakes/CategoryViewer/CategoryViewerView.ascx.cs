@@ -29,6 +29,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.CategoryViewer
 {
+    /// <summary>
+    /// Hosts the storefront category viewer.
+    /// </summary>
     public partial class CategoryViewerView : HotcakesModuleBase
     {
         private readonly int DefaultProductPageSize = 9;

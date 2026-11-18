@@ -29,16 +29,43 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Gets or sets the membership product type.
+    /// </summary>
     public class MembershipProductType
     {
+        /// <summary>
+        /// Gets or sets the product type id.
+        /// </summary>
         public string ProductTypeId { get; set; }
+        /// <summary>
+        /// Gets or sets the store id.
+        /// </summary>
         public long StoreId { get; set; }
+        /// <summary>
+        /// Gets or sets the product type name.
+        /// </summary>
         public string ProductTypeName { get; set; }
+        /// <summary>
+        /// Gets or sets the role name.
+        /// </summary>
         public string RoleName { get; set; }
+        /// <summary>
+        /// Gets or sets the expiration period.
+        /// </summary>
         public int ExpirationPeriod { get; set; }
+        /// <summary>
+        /// Gets or sets the expiration period type.
+        /// </summary>
         public ExpirationPeriodType ExpirationPeriodType { get; set; }
+        /// <summary>
+        /// Gets or sets the notify.
+        /// </summary>
         public bool Notify { get; set; }
 
+        /// <summary>
+        /// Performs the GetTimeSpan catalog operation.
+        /// </summary>
         public TimeSpan GetTimeSpan(DateTime startDate, int quantity)
         {
             switch (ExpirationPeriodType)
@@ -57,14 +84,38 @@ namespace Hotcakes.Commerce.Catalog
 
     internal class InternalMembershipProductType
     {
+        /// <summary>
+        /// Gets or sets the product type id.
+        /// </summary>
         public Guid ProductTypeId { get; set; }
+        /// <summary>
+        /// Gets or sets the store id.
+        /// </summary>
         public long StoreId { get; set; }
+        /// <summary>
+        /// Gets or sets the product type name.
+        /// </summary>
         public string ProductTypeName { get; set; }
+        /// <summary>
+        /// Gets or sets the role name.
+        /// </summary>
         public string RoleName { get; set; }
+        /// <summary>
+        /// Gets or sets the expiration period.
+        /// </summary>
         public int ExpirationPeriod { get; set; }
+        /// <summary>
+        /// Gets or sets the expiration period type.
+        /// </summary>
         public ExpirationPeriodType ExpirationPeriodType { get; set; }
+        /// <summary>
+        /// Gets or sets the notify.
+        /// </summary>
         public bool Notify { get; set; }
 
+        /// <summary>
+        /// Performs the Convert catalog operation.
+        /// </summary>
         public MembershipProductType Convert()
         {
             return new MembershipProductType
@@ -80,10 +131,19 @@ namespace Hotcakes.Commerce.Catalog
         }
     }
 
+    /// <summary>
+    /// Gets or sets the expiration period type.
+    /// </summary>
+    /// <summary>
+    /// Identifies the unit used for a membership expiration period. Numeric values are persisted and must remain compatible.
+    /// </summary>
     public enum ExpirationPeriodType
     {
+        /// <summary>Measures expiration in days.</summary>
         Days = 0,
+        /// <summary>Measures expiration in calendar months.</summary>
         Months = 1,
+        /// <summary>Measures expiration in calendar years.</summary>
         Years = 2
     }
 }

@@ -37,9 +37,11 @@ using Hotcakes.Modules.Core.Api.Rest;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Handles authenticated storefront REST API requests.</summary>
     [Serializable]
     public class ApiRestController : Controller
     {
+        /// <summary>Gets the current Hotcakes application instance.</summary>
         public HotcakesApplication HccApp
         {
             get { return HotcakesApplication.Current; }
@@ -52,6 +54,10 @@ namespace Hotcakes.Modules.Core.Controllers
             HccRequestContextUtils.UpdateUserContentCulture(HccRequestContext.Current);
         }
 
+        /// <summary>Authenticates an API key and selects its associated store.</summary>
+        /// <param name="apikey">The API key supplied by the caller.</param>
+        /// <param name="response">The response object to receive authentication errors.</param>
+        /// <returns><see langword="true"/> when the key, store, and transport requirements are valid.</returns>
         // Authenticate API Key Methods
         public bool AuthenticateKey(string apikey, IApiResponse response)
         {
@@ -84,6 +90,11 @@ namespace Hotcakes.Modules.Core.Controllers
 
             return true;
         }
+        /// <summary>Dispatches an authenticated request to the versioned REST handler.</summary>
+        /// <param name="version">The API version requested by the caller.</param>
+        /// <param name="modelname">The REST model or resource name.</param>
+        /// <param name="parameters">The handler-specific parameter string.</param>
+        /// <returns>The serialized handler response.</returns>
 
         // Actual Responder
         public ActionResult Index(string version, string modelname, string parameters)

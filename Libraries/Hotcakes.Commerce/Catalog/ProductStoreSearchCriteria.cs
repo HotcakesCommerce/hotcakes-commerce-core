@@ -29,6 +29,7 @@ using System.Collections.ObjectModel;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>Filters and ordering options for a store-scoped product search.</summary>
     [Serializable]
     public class ProductStoreSearchCriteria
     {
@@ -43,60 +44,71 @@ namespace Hotcakes.Commerce.Catalog
         private ProductSearchCriteriaSortOrder _sortOrder = ProductSearchCriteriaSortOrder.NotSet;
         private string _VendorId = string.Empty;
 
+        /// <summary>Gets or sets the Keyword value.</summary>
         public string Keyword
         {
             get { return _Keyword; }
             set { _Keyword = value; }
         }
 
+        /// <summary>Gets or sets the ManufacturerId value.</summary>
         public string ManufacturerId
         {
             get { return _ManufacturerId; }
             set { _ManufacturerId = value; }
         }
 
+        /// <summary>Gets or sets the VendorId value.</summary>
         public string VendorId
         {
             get { return _VendorId; }
             set { _VendorId = value; }
         }
 
+        /// <summary>Gets or sets the CategoryId value.</summary>
         public string CategoryId
         {
             get { return _CategoryId; }
             set { _CategoryId = value; }
         }
 
+        /// <summary>Gets or sets the MinPrice value.</summary>
         public decimal MinPrice
         {
             get { return _MinPrice; }
             set { _MinPrice = value; }
         }
 
+        /// <summary>Gets or sets the MaxPrice value.</summary>
         public decimal MaxPrice
         {
             get { return _MaxPrice; }
             set { _MaxPrice = value; }
         }
 
+        /// <summary>Gets or sets the SortOrder value.</summary>
         public ProductSearchCriteriaSortOrder SortOrder
         {
             get { return _sortOrder; }
             set { _sortOrder = value; }
         }
 
+        /// <summary>Gets or sets the SortBy value.</summary>
         public ProductStoreSearchSortBy SortBy
         {
             get { return _sortBy; }
             set { _sortBy = value; }
         }
 
+        /// <summary>Gets or sets the CustomProperties value.</summary>
         public Collection<CustomPropertyValue> CustomProperties
         {
             get { return _CustomProperties; }
             set { _CustomProperties = value; }
         }
 
+        /// <summary>Creates a copy of the current search criteria, including custom property values.</summary>
+        /// <returns>The result of this operation.</returns>
         public ProductStoreSearchCriteria Clone()
         {
             var result = new ProductStoreSearchCriteria();
@@ -118,6 +130,7 @@ namespace Hotcakes.Commerce.Catalog
             return result;
         }
 
+        /// <summary>Provides the catalog CustomPropertyValue API.</summary>
         public class CustomPropertyValue
         {
             private string _PropertyBvin = string.Empty;
@@ -133,18 +146,22 @@ namespace Hotcakes.Commerce.Catalog
                 _PropertyValue = value;
             }
 
+            /// <summary>Gets or sets the PropertyBvin value.</summary>
             public string PropertyBvin
             {
                 get { return _PropertyBvin; }
                 set { _PropertyBvin = value; }
             }
 
+            /// <summary>Gets or sets the PropertyValue value.</summary>
             public string PropertyValue
             {
                 get { return _PropertyValue; }
                 set { _PropertyValue = value; }
             }
 
+            /// <summary>Creates a copy of the current search criteria, including custom property values.</summary>
+            /// <returns>The result of this operation.</returns>
             public CustomPropertyValue Clone()
             {
                 var result = new CustomPropertyValue(PropertyBvin, PropertyValue);

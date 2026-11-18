@@ -34,9 +34,18 @@ using Hotcakes.Payment;
 namespace Hotcakes.Commerce.Orders
 {
     /// <summary>
-    ///     This is the primary object that is used to manage all aspects of transactions in the main application.
+    ///     Represents a persisted payment transaction associated with an order.
     /// </summary>
-    /// <remarks>The REST API equivalent is OrderTransactionDTO.</remarks>
+    /// <remarks>
+    ///     <para>The <see cref="Action"/> classifies the transaction as information, an authorization or hold,
+    ///     a charge or capture, a refund or return, or another supported payment action. The calculated
+    ///     <see cref="AmountAppliedToOrder"/> and <see cref="AmountHeldForOrder"/> values use that classification
+    ///     together with <see cref="Success"/> and <see cref="Voided"/>.</para>
+    ///     <para>Card data is persisted by <see cref="OrderTransactionRepository"/> in encrypted form.
+    ///     <see cref="AdditionalSettings"/> stores extensible transaction metadata and is serialized with the
+    ///     transaction; compatibility-sensitive keys such as <see cref="RMABvin"/> must be preserved.</para>
+    ///     <para>The REST API equivalent is <see cref="Hotcakes.CommerceDTO.v1.Orders.OrderTransactionDTO"/>.</para>
+    /// </remarks>
     [Serializable]
     public class OrderTransaction
     {
@@ -48,6 +57,9 @@ namespace Hotcakes.Commerce.Orders
 		private Guid _id;
 		private string _idAsStringCache;
 
+		/// <summary>
+		/// Gets or sets the unique identifier of this transaction.
+		/// </summary>
 		public Guid Id
 		{
 			get { return _id; }
@@ -99,8 +111,12 @@ namespace Hotcakes.Commerce.Orders
 		public DateTime TimeStampUtc { get; set; }
 
 		/// <summary>
-        ///     Defines what kind of transaction this is.
+        ///     Defines the payment action represented by this transaction.
 		/// </summary>
+        /// <remarks>
+        ///     This value controls whether the amount contributes to the order balance, remains held,
+        ///     or is returned. It must remain aligned with the gateway action that produced the transaction.
+        /// </remarks>
 		public ActionType Action { get; set; }
 
 		/// <summary>
@@ -165,8 +181,12 @@ namespace Hotcakes.Commerce.Orders
 		public string CompanyAccountNumber { get; set; }
 
 		/// <summary>
-        ///     Contains a collection of optional settings or meta data for the transaction that do not have a property.
+        ///     Contains optional transaction metadata that does not have a dedicated property.
 		/// </summary>
+        /// <remarks>
+        ///     The repository serializes this dictionary with the transaction. Use
+        ///     <see cref="SetAdditionalSetting"/> and the typed getters rather than replacing established keys.
+        /// </remarks>
 		public Dictionary<string, string> AdditionalSettings { get; set; }
 
 		/// <summary>
@@ -235,6 +255,7 @@ namespace Hotcakes.Commerce.Orders
 
 		#region Constructors
 
+		/// <summary>Initializes a new instance of this type.</summary>
 		public OrderTransaction()
 		{
 			Id = Guid.NewGuid();
@@ -258,6 +279,7 @@ namespace Hotcakes.Commerce.Orders
 			AdditionalSettings = new Dictionary<string, string>();
 		}
 
+		/// <summary>Initializes a new instance of this type.</summary>
 		public OrderTransaction(Transaction t)
 		{
 			Id = Guid.NewGuid();

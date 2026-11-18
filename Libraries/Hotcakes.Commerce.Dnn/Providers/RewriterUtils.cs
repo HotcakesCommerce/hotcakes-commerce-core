@@ -37,6 +37,9 @@ using DotNetNuke.Entities.Controllers;
 
 namespace Hotcakes.Commerce.Dnn.Providers
 {
+    /// <summary>
+    /// Provides URL rewriting helpers used by the DNN request pipeline.
+    /// </summary>
     [Serializable]
     public class RewriterUtils
     {

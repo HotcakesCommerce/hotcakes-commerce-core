@@ -26,12 +26,18 @@
 
 namespace Hotcakes.Commerce.Reporting
 {
+    /// <summary>Represents a point in the bounce-report time series.</summary>
     public class BounceItem
     {
+        /// <summary>Gets or sets the calendar year of the data point.</summary>
         public int Year { get; set; }
+        /// <summary>Gets or sets the calendar month of the data point.</summary>
         public int Month { get; set; }
+        /// <summary>Gets or sets the calendar day of the data point.</summary>
         public int Day { get; set; }
+        /// <summary>Gets or sets the hour of the data point.</summary>
         public int Hour { get; set; }
+        /// <summary>Gets or sets the number of bounce events represented by the data point.</summary>
         public int Amount { get; set; }
     }
 }

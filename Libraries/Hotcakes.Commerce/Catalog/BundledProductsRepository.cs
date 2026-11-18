@@ -39,6 +39,10 @@ namespace Hotcakes.Commerce.Catalog
     /// </summary>
     public class BundledProductsRepository : HccSimpleRepoBase<hcc_BundledProducts, BundledProduct>
     {
+        /// <summary>
+        /// Initializes a new instance of <see cref="BundledProductsRepository" />.
+        /// </summary>
+        /// <param name="context">Value used to initialize the instance.</param>
         public BundledProductsRepository(HccRequestContext context)
             : base(context)
         {

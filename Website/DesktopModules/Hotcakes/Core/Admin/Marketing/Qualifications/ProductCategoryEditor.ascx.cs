@@ -35,6 +35,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 {
+    /// <summary>
+    /// Edits a qualification based on product categories.
+    /// </summary>
     public partial class ProductCategoryEditor : BaseQualificationControl
     {
         private ProductCategory TypedQualification
@@ -71,6 +74,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             LoadQualification();
         }
 
+        /// <summary>Loads the product-category qualification into the editor.</summary>
         public override void LoadQualification()
         {
             var q = TypedQualification;
@@ -126,6 +130,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             }
         }
 
+        /// <summary>Saves the product-category qualification.</summary>
+        /// <returns><see langword="true"/> when the qualification is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveQualification()
         {
             var q = TypedQualification;

@@ -32,6 +32,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 {
+    /// <summary>
+    /// Edits a qualification based on products in an order.
+    /// </summary>
     public partial class OrderHasProductEditor : BaseQualificationControl
     {
         private PromotionIdQualificationBase TypedQualification
@@ -44,6 +47,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             get { return TypedQualification as OrderHasProducts; }
         }
 
+        /// <summary>Gets or sets whether the qualification uses the negative matching mode.</summary>
         public bool IsNotMode { get; set; }
 
         protected void gvOrderProducts_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -76,6 +80,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             LoadQualification();
         }
 
+        /// <summary>Loads the order-product qualification into the editor.</summary>
         public override void LoadQualification()
         {
             if (IsNotMode)
@@ -128,6 +133,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             gvOrderProducts.DataBind();
         }
 
+        /// <summary>Saves the order-product qualification.</summary>
+        /// <returns><see langword="true"/> when the qualification is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveQualification()
         {
             if (!IsNotMode && TypedOrderHasProducts != null)

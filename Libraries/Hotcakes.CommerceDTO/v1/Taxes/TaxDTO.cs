@@ -37,6 +37,9 @@ namespace Hotcakes.CommerceDTO.v1.Taxes
     [Serializable]
     public class TaxDTO
     {
+        /// <summary>
+        /// Initializes a tax record with empty zone values and zero-valued rates and identifiers.
+        /// </summary>
         public TaxDTO()
         {
             Id = 0;
@@ -51,56 +54,65 @@ namespace Hotcakes.CommerceDTO.v1.Taxes
         }
 
         /// <summary>
-        ///     The unique identifier or primary key of the tax object
+        /// Gets or sets the unique identifier of the tax record.
         /// </summary>
+        /// <value>The tax record identifier.</value>
         [DataMember]
         public long Id { get; set; }
 
         /// <summary>
-        ///     This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
+        /// Gets or sets the identifier of the store that owns the tax record.
         /// </summary>
+        /// <value>The Hotcakes store identifier.</value>
         [DataMember]
         public long StoreId { get; set; }
 
         /// <summary>
-        ///     A unique three letter code that identifies a country following the alpha 3 standard for this tax zone.
+        /// Gets or sets the ISO 3166-1 alpha-3 country code for the tax zone.
         /// </summary>
+        /// <value>The three-letter country code.</value>
         [DataMember]
         public string CountryIsoAlpha3 { get; set; }
 
         /// <summary>
-        ///     The two letter abbreviation for the region matching this tax zone.
+        /// Gets or sets the abbreviation of the region matching this tax zone.
         /// </summary>
+        /// <value>The region abbreviation.</value>
         [DataMember]
         public string RegionAbbreviation { get; set; }
 
         /// <summary>
-        ///     The postal or zip code for the matching tax zone.
+        /// Gets or sets the postal or ZIP code for the matching tax zone.
         /// </summary>
+        /// <value>The postal code.</value>
         [DataMember]
         public string PostalCode { get; set; }
 
         /// <summary>
-        ///     This is the ID of the tax schedule that this tax zone belongs to.
+        /// Gets or sets the identifier of the <see cref="TaxScheduleDTO"/> containing this tax zone.
         /// </summary>
+        /// <value>The tax schedule identifier.</value>
         [DataMember]
         public long TaxScheduleId { get; set; }
 
         /// <summary>
-        ///     This is the decimal representation of the tax rate for this zone.
+        /// Gets or sets the tax rate for this zone.
         /// </summary>
+        /// <value>The decimal tax rate applied to taxable amounts in the zone.</value>
         [DataMember]
         public decimal Rate { get; set; }
 
         /// <summary>
-        ///     This is the decimal representation of the tax rate to apply to this zone.
+        /// Gets or sets the tax rate to apply to shipping in this zone.
         /// </summary>
+        /// <value>The decimal shipping tax rate.</value>
         [DataMember]
         public decimal ShippingRate { get; set; }
 
         /// <summary>
-        ///     If true, the tax rate specified for ShippingRate will be applied to orders when they match this zone.
+        /// Gets or sets a value indicating whether <see cref="ShippingRate"/> is applied to matching orders.
         /// </summary>
+        /// <value><see langword="true"/> to apply the shipping rate; otherwise, <see langword="false"/>.</value>
         [DataMember]
         public bool ApplyToShipping { get; set; }
     }

@@ -28,6 +28,9 @@ using System;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class HccPartEventArgs.
+    /// </summary>
     [Serializable]
     public class HccPartEventArgs : EventArgs
     {
@@ -36,7 +39,13 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
         public HccPartEventArgs()
         {
         }
+        /// <summary>
+        /// Provides an administrative API member.
+        /// </summary>
 
+        /// <summary>
+        /// Provides an administrative API member.
+        /// </summary>
         public HccPartEventArgs(string data)
         {
             if (data != null)
@@ -45,6 +54,9 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             }
         }
 
+        /// <summary>
+        /// Gets or sets the info.
+        /// </summary>
         public string Info
         {
             get { return _info; }
@@ -52,14 +64,23 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
         }
     }
 
+    /// <summary>
+    /// Defines the administrative class HccPart.
+    /// </summary>
     [Serializable]
     public abstract class HccPart : HccUserControl
     {
+        /// <summary>
+        /// Occurs when the has own buttons event is raised.
+        /// </summary>
         public virtual bool HasOwnButtons
         {
             get { return false; }
         }
 
+        /// <summary>
+        /// Occurs when the editing complete event is raised.
+        /// </summary>
         public event EventHandler<HccPartEventArgs> EditingComplete;
 
         protected void NotifyFinishedEditing()

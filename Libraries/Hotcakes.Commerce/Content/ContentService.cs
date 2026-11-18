@@ -32,8 +32,10 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Content
 {
+    /// <summary>Provides store-scoped content operations and initializes the content repositories used by commerce services.</summary>
     public class ContentService : HccServiceBase
     {
+        /// <summary>Initializes the service and creates the HTML-template, custom-URL, and content-column repositories for the context.</summary>
         public ContentService(HccRequestContext context)
             : base(context)
         {
@@ -42,10 +44,15 @@ namespace Hotcakes.Commerce.Content
             Columns = Factory.CreateRepo<ContentColumnRepository>(Context);
         }
 
+        /// <summary>Gets the repository for store-scoped HTML templates and default templates.</summary>
         public HtmlTemplateRepository HtmlTemplates { get; protected set; }
+        /// <summary>Gets the repository for store-scoped custom URLs.</summary>
         public CustomUrlRepository CustomUrls { get; protected set; }
+        /// <summary>Gets the repository for store-scoped content columns.</summary>
         public ContentColumnRepository Columns { get; protected set; }
 
+        /// <summary>Gets all supported templates for the current store, creating missing standard templates from store zero.</summary>
+        /// <remarks>Order-update, email-friend, contact-form-to-admin, and return-form templates are excluded from the returned list.</remarks>
         public List<HtmlTemplate> GetAllTemplatesForStoreOrDefaults()
         {
             var templates = HtmlTemplates.FindAll();
@@ -75,6 +82,7 @@ namespace Hotcakes.Commerce.Content
                 ).OrderBy(t => t.TemplateType == HtmlTemplateType.Custom).ThenBy(t => t.DisplayName).ToList();
         }
 
+        /// <summary>Gets templates usable for order notifications, including custom templates.</summary>
         public List<HtmlTemplate> GetAllOrderTemplates()
         {
             return GetAllTemplatesForStoreOrDefaults().Where(t =>
@@ -85,6 +93,9 @@ namespace Hotcakes.Commerce.Content
                 .ToList();
         }
 
+        /// <summary>Gets the current-store template of the specified type, creating a store copy of the default when none exists.</summary>
+        /// <param name="templateType">The template type to find or provision.</param>
+        /// <returns>The existing or newly created template, or <see langword="null"/> when no default exists.</returns>
         public HtmlTemplate GetHtmlTemplateOrDefault(HtmlTemplateType templateType)
         {
             var existing = HtmlTemplates.FindByStoreAndType(Context.CurrentStore.Id, templateType);
@@ -106,6 +117,9 @@ namespace Hotcakes.Commerce.Content
             return existing;
         }
 
+        /// <summary>Replaces a template's editable content with the default content for its type.</summary>
+        /// <param name="Template">The store template to update.</param>
+        /// <returns>The default template used for the replacement, or <see langword="null"/> when no default exists.</returns>
         public HtmlTemplate UpdateTemplateToDefault(HtmlTemplate Template)
         {
             var standard = GetDefaultTemplate(Template.TemplateType);
@@ -123,6 +137,10 @@ namespace Hotcakes.Commerce.Content
             return standard;
         }
 
+        /// <summary>Builds and sends a gift-card notification using the order culture and gift-card template.</summary>
+        /// <param name="giftCard">The gift card supplied to replacement processing and recipient selection.</param>
+        /// <param name="order">The order whose culture is used, when available.</param>
+        /// <param name="item">The line item supplied to replacement processing.</param>
         public void SendGiftCardNotification(GiftCard giftCard, Order order, LineItem item)
         {
             var usedCulture = order != null ? order.UsedCulture : "en-US";

@@ -31,9 +31,15 @@ using System.Xml;
 
 namespace Hotcakes.Web
 {
+    /// <summary>
+    /// Represents a sitemap URL and its child sitemap entries.
+    /// </summary>
     [Serializable]
     public class SiteMapNode
     {
+        /// <summary>
+        /// Initializes a sitemap node with empty values and an empty child collection.
+        /// </summary>
         public SiteMapNode()
         {
             DisplayName = string.Empty;
@@ -44,18 +50,36 @@ namespace Hotcakes.Web
             Children = new List<SiteMapNode>();
         }
 
+        /// <summary>Gets or sets the display name associated with this node.</summary>
         public string DisplayName { get; set; }
+        /// <summary>Gets or sets the URL represented by this node.</summary>
         public string Url { get; set; }
+        /// <summary>Gets or sets the optional last-modified timestamp for this node.</summary>
         public DateTime? LastModified { get; set; }
+        /// <summary>Gets or sets the sitemap priority for this node.</summary>
+        /// <see cref="SiteMapPriority" />
         public SiteMapPriority Priority { get; set; }
+        /// <summary>Gets or sets the expected change frequency for this node.</summary>
+        /// <see cref="SiteMapChangeFrequency" />
         public SiteMapChangeFrequency ChangeFrequency { get; set; }
+        /// <summary>Gets or sets the child sitemap nodes.</summary>
         public List<SiteMapNode> Children { get; set; }
 
+        /// <summary>
+        /// Adds a child URL using <see cref="SiteMapPriority.p5" /> as its priority.
+        /// </summary>
+        /// <param name="url">The URL to add.</param>
+        /// <see cref="AddUrl(string, SiteMapPriority)" />
         public void AddUrl(string url)
         {
             AddUrl(url, SiteMapPriority.p5);
         }
 
+        /// <summary>
+        /// Adds a child URL with the specified sitemap priority when the sitemap limit allows it.
+        /// </summary>
+        /// <param name="url">The URL to add.</param>
+        /// <param name="priority">The priority to assign to the child node.</param>
         public void AddUrl(string url, SiteMapPriority priority)
         {
             var n = new SiteMapNode {Url = url, Priority = priority};
@@ -67,6 +91,11 @@ namespace Hotcakes.Web
             }
         }
 
+        /// <summary>
+        /// Renders this node and its descendants as an XML sitemap document.
+        /// </summary>
+        /// <returns>The XML sitemap document.</returns>
+        /// <see cref="RenderAsXmlSiteMapToStringBuilder(XmlWriter)" />
         public string RenderAsXmlSiteMap()
         {
             var sb = new StringBuilder();
@@ -100,6 +129,11 @@ namespace Hotcakes.Web
             return result;
         }
 
+        /// <summary>
+        /// Writes this node and its descendants to an XML writer.
+        /// </summary>
+        /// <param name="xw">The writer receiving the sitemap elements.</param>
+        /// <see cref="RenderAsXmlSiteMap()" />
         public void RenderAsXmlSiteMapToStringBuilder(XmlWriter xw)
         {
             RenderThis(xw);

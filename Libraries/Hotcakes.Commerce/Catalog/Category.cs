@@ -38,6 +38,9 @@ namespace Hotcakes.Commerce.Catalog
     [Serializable]
     public class Category
     {
+        /// <summary>
+        /// Initializes a new instance of <see cref="Category" />.
+        /// </summary>
         public Category()
         {
             Bvin = string.Empty;

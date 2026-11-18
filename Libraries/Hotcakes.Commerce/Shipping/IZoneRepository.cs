@@ -28,8 +28,17 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Commerce.Shipping
 {
+    /// <summary>
+    /// Defines the extension point for retrieving shipping zones for a store.
+    /// Implementations provide the store-scoped <see cref="Zone"/> collection used by shipping method selection.
+    /// </summary>
     public interface IZoneRepository
     {
+        /// <summary>
+        /// Gets the zones belonging to the specified store.
+        /// </summary>
+        /// <param name="storeId">The store identifier whose zones are requested.</param>
+        /// <returns>A list of zones for <paramref name="storeId"/>, ordered according to the implementation's repository rules.</returns>
         List<Zone> GetZones(long storeId);
     }
 }

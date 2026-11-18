@@ -26,29 +26,20 @@
 
 namespace Hotcakes.Commerce.Shipping
 {
-    /// <summary>
-    ///     This enumeration is used to determine where a product will be shipped from.
-    /// </summary>
+    /// <summary>Specifies the source address used when shipping a product.</summary>
+    /// <remarks>The selected mode determines whether shipment origin is the store, vendor, or manufacturer.</remarks>
     public enum ShippingMode
     {
-        /// <summary>
-        ///     This member should not be used.
-        /// </summary>
+        /// <summary>Reserved value; this member should not be used.</summary>
         None = 0,
 
-        /// <summary>
-        ///     If specified, this will have the product ship from the store address.
-        /// </summary>
+        /// <summary>Ships the product from the store address.</summary>
         ShipFromSite = 1,
 
-        /// <summary>
-        ///     This member dictates that the product will ship from the vendors address.
-        /// </summary>
+        /// <summary>Ships the product from the vendor address.</summary>
         ShipFromVendor = 2,
 
-        /// <summary>
-        ///     When specified, the product will ship from the manufacturers address.
-        /// </summary>
+        /// <summary>Ships the product from the manufacturer address.</summary>
         ShipFromManufacturer = 3
     }
 }

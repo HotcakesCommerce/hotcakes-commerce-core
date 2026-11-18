@@ -32,6 +32,9 @@ using DotNetNuke.Instrumentation;
 
 namespace Hotcakes.Commerce.Dnn.Prompt
 {
+    /// <summary>
+    /// Implements the prompt command that lists the categories in the current Hotcakes Commerce store.
+    /// </summary>
     [ConsoleCommand("list-categories", Constants.Namespace, "PromptListCategories")]
     public class ListCategories: PromptBase, IConsoleCommand
     {
@@ -54,6 +57,10 @@ namespace Hotcakes.Commerce.Dnn.Prompt
         public bool? Disabled { get; set; }
         */
 
+        /// <summary>
+        /// Retrieves categories from the current store and returns them ordered by name.
+        /// </summary>
+        /// <returns>A prompt result containing <see cref="CategoryOutput"/> data and the number of categories found, or an error result.</returns>
         public override ConsoleResultModel Run()
         {
             try
@@ -115,12 +122,34 @@ namespace Hotcakes.Commerce.Dnn.Prompt
         }
     }
 
+    /// <summary>
+    /// Contains the category fields returned by the list-categories prompt command.
+    /// </summary>
     public class CategoryOutput
     {
+        /// <summary>
+        /// Gets or sets the category display name.
+        /// </summary>
         public string CategoryName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of products associated with the category.
+        /// </summary>
         public int ProductCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the category URL slug.
+        /// </summary>
         public string Slug { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the category template.
+        /// </summary>
         public string TemplateName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the category business identifier.
+        /// </summary>
         public string CategoryID { get; set; }
     }
 }

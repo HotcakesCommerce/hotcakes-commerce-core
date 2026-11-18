@@ -29,6 +29,9 @@ using System.Web;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Holds the decoded path and query portions of a URL for URL-rewriting rules.
+    /// </summary>
     public class UrlRewriterParts
     {
         private const int UrlConst = 0;
@@ -36,6 +39,14 @@ namespace Hotcakes.Commerce.Utilities
         private string _query = string.Empty;
         private string _url = string.Empty;
 
+        /// <summary>
+        /// Initializes a new instance from a URI, decoding its path and query and lower-casing the path.
+        /// </summary>
+        /// <param name="url">The URI whose path and query should be split.</param>
+        /// <remarks>
+        /// The first <c>?</c> separates <see cref="Url"/> from <see cref="Query"/>. The query text is retained
+        /// without the separator, and <see cref="HasQuery"/> indicates whether a separator was present.
+        /// </remarks>
         public UrlRewriterParts(Uri url)
         {
             HasQuery = false;
@@ -59,18 +70,24 @@ namespace Hotcakes.Commerce.Utilities
             }
         }
 
+        /// <summary>Gets or sets the decoded, lower-case URL path portion.</summary>
+        /// <value>The path portion without the query separator.</value>
         public string Url
         {
             get { return _url; }
             set { _url = value; }
         }
 
+        /// <summary>Gets or sets the decoded query portion of the URL.</summary>
+        /// <value>The query text without the leading <c>?</c>, or an empty string when none was supplied.</value>
         public string Query
         {
             get { return _query; }
             set { _query = value; }
         }
 
+        /// <summary>Gets or sets whether the source URL contained a query separator.</summary>
+        /// <value><see langword="true"/> when a query separator was present; otherwise, <see langword="false"/>.</value>
         public bool HasQuery { get; set; }
     }
 }

@@ -28,11 +28,23 @@ using System;
 
 namespace Hotcakes.Commerce.Search
 {
+    /// <summary>
+    /// Represents a word in the search lexicon for a specific culture.
+    /// </summary>
     [Serializable]
     public class LexiconWord
     {
+        /// <summary>
+        /// Gets or sets the persistent lexicon identifier.
+        /// </summary>
         public long Id { get; set; }
+        /// <summary>
+        /// Gets or sets the indexed word.
+        /// </summary>
         public string Word { get; set; }
+        /// <summary>
+        /// Gets or sets the culture associated with the word.
+        /// </summary>
         public string Culture { get; set; }
     }
 }

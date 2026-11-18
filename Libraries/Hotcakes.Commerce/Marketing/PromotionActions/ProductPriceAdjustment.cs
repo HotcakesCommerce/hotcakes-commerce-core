@@ -30,16 +30,23 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Marketing.PromotionActions
 {
+    /// <summary>Adjusts a product's user price while a sale promotion is evaluated.</summary>
+    /// <remarks>The signed adjustment is recorded on the context's <see cref="PromotionContext.UserPrice"/>.</remarks>
     public class ProductPriceAdjustment : PromotionActionBase
     {
+        /// <summary>Stable serialized identifier for the product-price adjustment action.</summary>
         public const string TypeIdString = "a07aff02-ba28-42e0-b334-324de467b2d7";
         private static readonly Guid TypeIdValue = Guid.Parse(TypeIdString);
 
+        /// <summary>Initializes a monetary product-price adjustment with amount zero.</summary>
         public ProductPriceAdjustment()
             : this(AmountTypes.MonetaryAmount, 0m)
         {
         }
 
+        /// <summary>Initializes a product-price adjustment with the specified amount mode and signed amount.</summary>
+        /// <param name="type">Whether the amount is monetary or percentage-based.</param>
+        /// <param name="amount">The signed adjustment amount.</param>
         public ProductPriceAdjustment(AmountTypes type, decimal amount)
         {
             Id = 0;
@@ -48,8 +55,10 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             Amount = amount;
         }
 
+        /// <summary>Gets the stable serialized action identifier.</summary>
         public override Guid TypeId => TypeIdValue;
 
+        /// <summary>Gets or sets whether <see cref="Amount"/> is monetary or percentage-based.</summary>
         public AmountTypes AdjustmentType
         {
             get
@@ -67,12 +76,16 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             set { SetSetting("AdjustmentType", (int)value); }
         }
 
+        /// <summary>Gets or sets the signed product-price adjustment amount.</summary>
         public decimal Amount
         {
             get { return GetSettingAsDecimal("Amount"); }
             set { SetSetting("Amount", value); }
         }
 
+        /// <summary>Describes the product-price adjustment.</summary>
+        /// <param name="app">The application context; it is not used by this implementation.</param>
+        /// <returns>The action description.</returns>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var isDiscount = Amount < 0;
@@ -94,6 +107,10 @@ namespace Hotcakes.Commerce.Marketing.PromotionActions
             return result;
         }
 
+        /// <summary>Calculates and records an adjustment against the current user price.</summary>
+        /// <param name="context">The sale promotion context.</param>
+        /// <returns><see langword="false"/> for missing target data or a non-sale context; otherwise <see langword="true"/>.</returns>
+        /// <remarks>Each invocation adds an adjustment; this implementation does not suppress duplicates.</remarks>
         public override bool ApplyAction(PromotionContext context)
         {
             if (context == null || context.Product == null || context.UserPrice == null) return false;

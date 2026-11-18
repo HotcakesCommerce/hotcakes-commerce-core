@@ -28,14 +28,35 @@ using System.Runtime.Serialization;
 
 namespace Hotcakes.CommerceDTO.v1.Catalog
 {
+    /// <summary>
+    ///     Specifies the ordering applied to products displayed within a category.
+    /// </summary>
     [DataContract]
     public enum CategorySortOrderDTO
     {
+        /// <summary>
+        ///     Uses the default category product ordering.
+        /// </summary>
         [EnumMember] None = 0,
+        /// <summary>
+        ///     Uses the manually assigned product order.
+        /// </summary>
         [EnumMember] ManualOrder = 1,
+        /// <summary>
+        ///     Orders products by product name.
+        /// </summary>
         [EnumMember] ProductName = 2,
+        /// <summary>
+        ///     Orders products by price from lowest to highest.
+        /// </summary>
         [EnumMember] ProductPriceAscending = 3,
+        /// <summary>
+        ///     Orders products by price from highest to lowest.
+        /// </summary>
         [EnumMember] ProductPriceDescending = 4,
+        /// <summary>
+        ///     Orders products by manufacturer name.
+        /// </summary>
         [EnumMember] ManufacturerName = 5
     }
 }

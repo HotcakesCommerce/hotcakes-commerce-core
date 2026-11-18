@@ -31,6 +31,9 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.Dnn.Workflow
 {
+    /// <summary>
+    /// Places an order while selecting the device type using DNN request information.
+    /// </summary>
     public class DnnMakePlacedOrder : MakePlacedOrder
     {
         protected override DeviceType DetermineDeviceType(HttpRequestBase request)
@@ -47,6 +50,10 @@ namespace Hotcakes.Commerce.Dnn.Workflow
             return DeviceType.Desktop;
         }
 
+        /// <summary>
+        /// Creates a new instance of this order task.
+        /// </summary>
+        /// <returns>A new <see cref="DnnMakePlacedOrder"/> instance.</returns>
         public override Task Clone()
         {
             return new DnnMakePlacedOrder();

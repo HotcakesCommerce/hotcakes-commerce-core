@@ -30,9 +30,18 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Integration
 {
+    /// <summary>
+    /// Provides the default product integration behavior when no custom integration is configured.
+    /// </summary>
     [Serializable]
     internal class ProductIntegration : IProductIntegration
     {
+        /// <summary>
+        /// Runs the default product pre-add-to-cart hook without changing the cart flow.
+        /// </summary>
+        /// <param name="hccApp">The current Hotcakes application.</param>
+        /// <param name="model">The product page view model being submitted.</param>
+        /// <returns>A default <see cref="IntegrationResult"/>.</returns>
         public IntegrationResult BeforeProductAddedToCart(HotcakesApplication hccApp, ProductPageViewModel model)
         {
             return new IntegrationResult();

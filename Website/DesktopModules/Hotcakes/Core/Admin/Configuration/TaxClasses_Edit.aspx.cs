@@ -32,6 +32,7 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
 {
     partial class TaxClasses_Edit : BaseAdminPage
     {
+        /// <summary>Gets or sets the requested tax schedule identifier.</summary>
         public string ReqTaxScheduleId
         {
             get { return Request.QueryString["id"]; }

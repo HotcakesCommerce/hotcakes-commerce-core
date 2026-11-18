@@ -29,8 +29,22 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>
+    /// Generates XML sitemap content for a Hotcakes store.
+    /// </summary>
     public class SiteMapGenerator
     {
+        /// <summary>
+        /// Builds a sitemap containing the store home page, sitemap route, eligible category routes, and product routes.
+        /// </summary>
+        /// <param name="app">The application whose current store and catalog are used.</param>
+        /// <returns>
+        /// Rendered XML sitemap content, or an empty string when <paramref name="app"/> is <see langword="null"/>.
+        /// </returns>
+        /// <remarks>
+        /// Category URLs that are outbound HTTP or HTTPS links are omitted. Product enumeration is limited to the first
+        /// 3,000 products. The home and sitemap routes are emitted before category and product routes.
+        /// </remarks>
         public static string BuildForStore(HotcakesApplication app)
         {
             if (app == null) return string.Empty;

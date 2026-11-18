@@ -38,6 +38,13 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>
+    /// Starts the Ogone hosted checkout for the current order.
+    /// </summary>
+    /// <remarks>
+    /// The task creates a signed UTF-8 Ogone request, using a unique order reference so a failed
+    /// payment can be attempted again, and redirects the current response to the provider.
+    /// </remarks>
     public class StartOgoneCheckout : ThirdPartyCheckoutOrderTask
     {
         // Since user can always enter come unicode characters
@@ -48,11 +55,18 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
         private const string ProductionUTF8Url = "https://secure.ogone.com/ncol/prod/orderstandard_utf8.asp";
         private const string DevelopmentUTF8Url = "https://secure.ogone.com/ncol/test/orderstandard_utf8.asp";
 
+        /// <summary>Gets the payment-method identifier for Ogone.</summary>
         public override string PaymentMethodId
         {
             get { return PaymentMethods.OgoneId; }
         }
 
+        /// <summary>
+        /// Builds the signed Ogone checkout request and redirects the current response to the provider.
+        /// </summary>
+        /// <param name="context">The order workflow context containing the order, store settings, and request context.</param>
+        /// <returns><see langword="false"/> after the redirect, when no HTTP context exists, or when a localized checkout error is recorded.</returns>
+        /// <remarks>The UTF-8 endpoint is selected for both developer and production modes so payment-method names and other user input can contain Unicode characters.</remarks>
         public override bool ProcessCheckout(OrderTaskContext context)
         {
             if (context.HccApp.CurrentRequestContext.RoutingContext.HttpContext != null)
@@ -130,21 +144,30 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return false;
         }
 
+        /// <summary>Creates an independent Ogone checkout task instance.</summary>
+        /// <returns>A new <see cref="StartOgoneCheckout"/> instance.</returns>
         public override Task Clone()
         {
             return new StartOgoneCheckout();
         }
 
+        /// <summary>Reports that this task has no local rollback operation.</summary>
+        /// <param name="context">The order workflow context.</param>
+        /// <returns>Always <see langword="true"/>; the external Ogone redirect cannot be undone here.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>Gets the stable workflow identifier for this task.</summary>
+        /// <returns>The Ogone checkout task ID <c>D2690A55-8AAE-4935-9696-75BFA9D8014D</c>.</returns>
         public override string TaskId()
         {
             return "D2690A55-8AAE-4935-9696-75BFA9D8014D";
         }
 
+        /// <summary>Gets the display name of this workflow task.</summary>
+        /// <returns><c>Start Ogone Checkout</c>.</returns>
         public override string TaskName()
         {
             return "Start Ogone Checkout";

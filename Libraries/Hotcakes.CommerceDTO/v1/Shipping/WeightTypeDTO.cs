@@ -28,16 +28,19 @@ using System.Runtime.Serialization;
 
 namespace Hotcakes.CommerceDTO.v1.Shipping
 {
+    /// <summary>
+    ///     Identifies the unit used for weight measurements on a <see cref="ShippableItemDTO"/>.
+    /// </summary>
     [DataContract]
     public enum WeightTypeDTO
     {
         /// <summary>
-        ///     Measured in pounds
+        ///     Weight is measured in pounds.
         /// </summary>
         [EnumMember] Pounds = 1,
 
         /// <summary>
-        ///     Measured in kilograms
+        ///     Weight is measured in kilograms.
         /// </summary>
         [EnumMember] Kilograms = 2
     }

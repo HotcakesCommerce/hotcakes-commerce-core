@@ -28,28 +28,58 @@ using System;
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>
+    /// Public API member: <c>public enum ViewMessageType</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+    /// </summary>
     public enum ViewMessageType
     {
+        /// <summary>
+        /// Compatibility value <c>Success</c> in this public enumeration.
+        /// </summary>
         Success = 0,
+        /// <summary>
+        /// Compatibility value <c>Warning</c> in this public enumeration.
+        /// </summary>
         Warning = 1,
+        /// <summary>
+        /// Compatibility value <c>Error</c> in this public enumeration.
+        /// </summary>
         Error = 2,
+        /// <summary>
+        /// Compatibility value <c>Info</c> in this public enumeration.
+        /// </summary>
         Info = 3
     }
 
+    /// <summary>
+    /// Exception carrying presentation header, content, and <see cref="ViewMessageType"/> metadata.
+    /// </summary>
     public class StoreException : Exception
     {
+        /// <summary>
+        /// Public API member: <c>public StoreException() : this(null)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public StoreException() : this(null)
         {
         }
 
+        /// <summary>
+        /// Public API member: <c>public StoreException(string content) : this(null, content)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public StoreException(string content) : this(null, content)
         {
         }
 
+        /// <summary>
+        /// Public API member: <c>public StoreException(string header, string content) : this(header, content, ViewMessageType.Info)</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public StoreException(string header, string content) : this(header, content, ViewMessageType.Info)
         {
         }
 
+        /// <summary>
+        /// Initializes presentation metadata without changing the base exception message contract.
+        /// </summary>
         public StoreException(string header, string content, ViewMessageType type)
         {
             Header = header;
@@ -57,8 +87,17 @@ namespace Hotcakes.Commerce
             Type = type;
         }
 
+        /// <summary>
+        /// Public API member: <c>public string Header { get; set; }</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public string Header { get; set; }
+        /// <summary>
+        /// Public API member: <c>public string Content { get; set; }</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public string Content { get; set; }
+        /// <summary>
+        /// Public API member: <c>public ViewMessageType Type { get; set; }</c>. This member preserves the established Hotcakes Commerce contract and behavior.
+        /// </summary>
         public ViewMessageType Type { get; set; }
     }
 }

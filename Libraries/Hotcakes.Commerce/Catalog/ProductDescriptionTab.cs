@@ -43,6 +43,9 @@ namespace Hotcakes.Commerce.Catalog
 
         private readonly XmlWriterSettings _hccXmlWriterSettings = new XmlWriterSettings();
 
+        /// <summary>
+        /// Provides the catalog type or contract represented by this declaration.
+        /// </summary>
         public ProductDescriptionTab()
         {
             Bvin = Guid.NewGuid().ToString().Replace("{", string.Empty).Replace("}", string.Empty);
@@ -75,16 +78,25 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         public int SortOrder { get; set; }
 
+        /// <summary>
+        /// Gets or sets the hcc xml writer settings.
+        /// </summary>
         protected XmlWriterSettings HccXmlWriterSettings
         {
             get { return _hccXmlWriterSettings; }
         }
 
+        /// <summary>
+        /// Gets or sets the hcc xml reader settings.
+        /// </summary>
         protected XmlReaderSettings HccXmlReaderSettings
         {
             get { return _hccXmlReaderSettings; }
         }
 
+        /// <summary>
+        /// Performs the Equals catalog operation.
+        /// </summary>
         public bool Equals(ProductDescriptionTab other)
         {
             return Bvin == other.Bvin
@@ -99,6 +111,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="omitDeclaration">Paramter not used.</param>
         /// <returns>String - an XML representation of the info tab.</returns>
         /// <remarks>The application does not use this method anywhere. </remarks>
+        /// <summary>
+        /// Performs the ToXml catalog operation.
+        /// </summary>
         public virtual string ToXml(bool omitDeclaration)
         {
             var response = string.Empty;
@@ -123,6 +138,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="x">String - the XML serialized version of an info tab.</param>
         /// <returns>Boolean - if true, the conversion from XML to an object happened successfully.</returns>
         /// <remarks>This method is only used in the Product.cs class.</remarks>
+        /// <summary>
+        /// Performs the FromXmlString catalog operation.
+        /// </summary>
         public virtual bool FromXmlString(string x)
         {
             var sw = new StringReader(x);
@@ -138,6 +156,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="xr">XmlReader - a streamed representation of the XML version of this object</param>
         /// <returns>Boolean - if true, the XmlReader was properly parsed and its contents converted to properties in this object.</returns>
+        /// <summary>
+        /// Performs the FromXml catalog operation.
+        /// </summary>
         public bool FromXml(ref XmlReader xr)
         {
             /*
@@ -193,6 +214,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     This method is called when a Product is serialized to XML to help build the XML serialized version of a product.
         /// </summary>
         /// <param name="xw">XmlWriter - a byreference instance of an XmlWriter to transfer the serialized info tab to.</param>
+        /// <summary>
+        /// Performs the ToXmlWriter catalog operation.
+        /// </summary>
         public void ToXmlWriter(ref XmlWriter xw)
         {
             if (xw != null)
@@ -212,6 +236,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Allows you to populate the current info tab object using a ProductDescriptionTabDTO instance
         /// </summary>
         /// <param name="dto">An instance of the info tab from the REST API</param>
+        /// <summary>
+        /// Performs the FromDto catalog operation.
+        /// </summary>
         public void FromDto(ProductDescriptionTabDTO dto)
         {
             Bvin = dto.Bvin;
@@ -224,6 +251,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Allows you to convert the current info tab object to the DTO equivalent for use with the REST API
         /// </summary>
         /// <returns>A new instance of ProductDescriptionTabDTO</returns>
+        /// <summary>
+        /// Performs the ToDto catalog operation.
+        /// </summary>
         public ProductDescriptionTabDTO ToDto()
         {
             var dto = new ProductDescriptionTabDTO();

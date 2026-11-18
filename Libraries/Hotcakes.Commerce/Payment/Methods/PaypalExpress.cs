@@ -37,34 +37,51 @@ using PayPalHttp;
 
 namespace Hotcakes.Commerce.Payment.Methods
 {
+    /// <summary>
+    /// Built-in PayPal Express payment method that invokes the PayPal REST order and capture APIs.
+    /// API failures are recorded on the transaction result, including the implementation's exception details.
+    /// </summary>
     [Serializable]
     public class PaypalExpress : PaymentMethod
     {
+        /// <summary>Gets the stable PayPal Express method identifier.</summary>
         public override string MethodId
         {
             get { return Id(); }
         }
 
+        /// <summary>Gets the serialized display name, <c>PayPalExpress</c>.</summary>
         public override string MethodName
         {
             get { return "PayPalExpress"; }
         }
 
+        /// <summary>Gets the checkout ordering value, 200.</summary>
         public override int SortIndex
         {
             get { return 200; }
         }
 
+        /// <summary>Gets <see langword="true"/> because this method pays before order placement.</summary>
         public override bool PayBeforePlacement
         {
             get { return true; }
         }
 
+        /// <summary>Returns the stable identifier used by <see cref="PaymentMethods"/>.</summary>
+        /// <returns>The PayPal Express method identifier.</returns>
         public static string Id()
         {
             return PaymentMethods.PaypalExpressId;
         }
 
+        /// <summary>
+        /// Authorizes the transaction's previous PayPal order and copies the authorization reference to the result.
+        /// A transaction without a previous order is not authorized.
+        /// </summary>
+        /// <param name="t">The transaction to update.</param>
+        /// <param name="app">The application providing the current store and PayPal configuration.</param>
+        /// <returns><see langword="true"/> only when PayPal returns HTTP Created for the authorization.</returns>
         public bool Authorize(Transaction t, HotcakesApplication app)
         {
             try
@@ -102,6 +119,13 @@ namespace Hotcakes.Commerce.Payment.Methods
             return false;
         }
 
+        /// <summary>
+        /// Captures the transaction's previous authorization and records PayPal pending, denied, or completed status messages.
+        /// Pending and denied statuses are retained as successful results to match the existing integration behavior.
+        /// </summary>
+        /// <param name="t">The transaction to update.</param>
+        /// <param name="app">The application providing the current store and PayPal configuration.</param>
+        /// <returns><see langword="true"/> for an accepted HTTP response with a recognized capture status.</returns>
         public bool Capture(Transaction t, HotcakesApplication app)
         {
             try
@@ -162,6 +186,13 @@ namespace Hotcakes.Commerce.Payment.Methods
             return false;
         }
 
+        /// <summary>
+        /// Captures the transaction's existing PayPal order without a separate authorization.
+        /// Completed and pending captures are successful according to the current integration semantics.
+        /// </summary>
+        /// <param name="t">The transaction to update.</param>
+        /// <param name="app">The application providing the current store and PayPal configuration.</param>
+        /// <returns><see langword="true"/> when PayPal returns HTTP OK or Created with a completed or pending capture.</returns>
         public bool Charge(Transaction t, HotcakesApplication app)
         {
             try
@@ -214,6 +245,12 @@ namespace Hotcakes.Commerce.Payment.Methods
             return false;
         }
 
+        /// <summary>
+        /// Requests a partial refund for the transaction's previous PayPal capture.
+        /// </summary>
+        /// <param name="t">The transaction containing the refund amount and previous reference.</param>
+        /// <param name="app">The application providing the current store and PayPal configuration.</param>
+        /// <returns><see langword="true"/> only when PayPal returns HTTP Created.</returns>
         public bool Refund(Transaction t, HotcakesApplication app)
         {
             try
@@ -249,6 +286,12 @@ namespace Hotcakes.Commerce.Payment.Methods
             return false;
         }
 
+        /// <summary>
+        /// Voids the transaction's previous PayPal authorization.
+        /// </summary>
+        /// <param name="t">The transaction to update.</param>
+        /// <param name="app">The application providing the current store and PayPal configuration.</param>
+        /// <returns><see langword="true"/> only when PayPal returns HTTP NoContent.</returns>
         public bool Void(Transaction t, HotcakesApplication app)
         {
             try

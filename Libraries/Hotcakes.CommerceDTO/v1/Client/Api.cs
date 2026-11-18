@@ -1212,6 +1212,12 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
+        /// <summary>
+        ///     Retrieves all variants associated with the specified product.
+        /// </summary>
+        /// <param name="productId">The product identifier used to filter the variants.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> containing the matching <see cref="VariantDTO"/> records.</returns>
+        /// <remarks>This operation uses the same REST response envelope as the other methods on <see cref="Api"/>.</remarks>
         public ApiResponse<List<VariantDTO>> ProductVariantsFindByProduct(string productId)
         {
             return Get<List<VariantDTO>>("productvariant", null, "productid=" + productId);
@@ -1410,11 +1416,11 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
-		/// <summary>
-        ///     Products the relationships find.
-		/// </summary>
-		/// <param name="productBvin">The product identifier.</param>
-		/// <returns></returns>
+        /// <summary>
+        ///     Retrieves all product relationships for the specified product.
+        /// </summary>
+        /// <param name="productBvin">The unique identifier of the product whose relationships should be returned.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> containing the matching <see cref="ProductRelationshipDTO"/> records.</returns>
         public ApiResponse<List<ProductRelationshipDTO>> ProductRelationshipsForProduct(string productBvin)
         {
             var result = new ApiResponse<List<ProductRelationshipDTO>>();
@@ -1509,6 +1515,13 @@ namespace Hotcakes.CommerceDTO.v1.Client
 
         #region Image Upload Helpers
 
+        /// <summary>
+        ///     Uploads the primary image data for a product.
+        /// </summary>
+        /// <param name="productBvin">The unique identifier of the product receiving the image.</param>
+        /// <param name="fileName">The file name to associate with the uploaded image.</param>
+        /// <param name="imageData">The binary image content to upload.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> whose content indicates whether the upload succeeded.</returns>
         public ApiResponse<bool> ProductsMainImageUpload(string productBvin, string fileName, byte[] imageData)
         {
             var response = new ApiResponse<bool>();
@@ -1520,6 +1533,13 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return response;
         }
 
+        /// <summary>
+        ///     Uploads icon image data for a category.
+        /// </summary>
+        /// <param name="categoryBvin">The unique identifier of the category receiving the icon.</param>
+        /// <param name="fileName">The file name to associate with the uploaded icon.</param>
+        /// <param name="imageData">The binary image content to upload.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> whose content indicates whether the upload succeeded.</returns>
         public ApiResponse<bool> CategoriesImagesIconUpload(string categoryBvin, string fileName, byte[] imageData)
         {
             var response = new ApiResponse<bool>();
@@ -1531,6 +1551,13 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return response;
         }
 
+        /// <summary>
+        ///     Uploads banner image data for a category.
+        /// </summary>
+        /// <param name="categoryBvin">The unique identifier of the category receiving the banner.</param>
+        /// <param name="fileName">The file name to associate with the uploaded banner.</param>
+        /// <param name="imageData">The binary image content to upload.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> whose content indicates whether the upload succeeded.</returns>
         public ApiResponse<bool> CategoriesImagesBannerUpload(string categoryBvin, string fileName, byte[] imageData)
         {
             var response = new ApiResponse<bool>();
@@ -1546,6 +1573,11 @@ namespace Hotcakes.CommerceDTO.v1.Client
 
         #region Product Files
 
+        /// <summary>
+        ///     Retrieves the product files associated with the specified product.
+        /// </summary>
+        /// <param name="bvin">The unique identifier of the product.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> containing the matching <see cref="ProductFileDTO"/> records.</returns>
         public ApiResponse<List<ProductFileDTO>> ProductFilesFindForProduct(string bvin)
         {
             var result = new ApiResponse<List<ProductFileDTO>>();
@@ -1555,6 +1587,11 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
+        /// <summary>
+        ///     Retrieves a product file by its unique identifier.
+        /// </summary>
+        /// <param name="bvin">The unique identifier of the product file.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> containing the requested <see cref="ProductFileDTO"/>.</returns>
         public ApiResponse<ProductFileDTO> ProductFilesFind(string bvin)
         {
             var result = new ApiResponse<ProductFileDTO>();
@@ -1564,6 +1601,11 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
+        /// <summary>
+        ///     Creates a product file from the supplied DTO.
+        /// </summary>
+        /// <param name="item">The <see cref="ProductFileDTO"/> containing the product file to create.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> containing the saved <see cref="ProductFileDTO"/>.</returns>
         public ApiResponse<ProductFileDTO> ProductFilesCreate(ProductFileDTO item)
         {
             var result = new ApiResponse<ProductFileDTO>();
@@ -1572,6 +1614,11 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
+        /// <summary>
+        ///     Updates an existing product file using the supplied DTO.
+        /// </summary>
+        /// <param name="item">The <see cref="ProductFileDTO"/> containing the updated values.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> containing the saved <see cref="ProductFileDTO"/>.</returns>
         public ApiResponse<ProductFileDTO> ProductFilesUpdate(ProductFileDTO item)
         {
             var result = new ApiResponse<ProductFileDTO>();
@@ -1581,6 +1628,11 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
+        /// <summary>
+        ///     Permanently deletes a product file by its unique identifier.
+        /// </summary>
+        /// <param name="bvin">The unique identifier of the product file to delete.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> whose content indicates whether deletion succeeded.</returns>
         public ApiResponse<bool> ProductFilesDelete(string bvin)
         {
             var result = new ApiResponse<bool>();
@@ -1590,6 +1642,14 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
+        /// <summary>
+        ///     Associates a product file with a product and sets its download limits.
+        /// </summary>
+        /// <param name="productBvin">The unique identifier of the product.</param>
+        /// <param name="fileBvin">The unique identifier of the product file.</param>
+        /// <param name="availableMinutes">The number of minutes the file remains available after download access is granted.</param>
+        /// <param name="maxDownloads">The maximum number of downloads permitted.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> whose content indicates whether the association succeeded.</returns>
         public ApiResponse<bool> ProductFilesAddToProduct(string productBvin, string fileBvin, int availableMinutes,
             int maxDownloads)
         {
@@ -1601,6 +1661,12 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
+        /// <summary>
+        ///     Removes a product file association from a product.
+        /// </summary>
+        /// <param name="productBvin">The unique identifier of the product.</param>
+        /// <param name="fileBvin">The unique identifier of the product file.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> whose content indicates whether the association was removed.</returns>
         public ApiResponse<bool> ProductFilesRemoveFromProduct(string productBvin, string fileBvin)
         {
             var result = new ApiResponse<bool>();
@@ -1611,6 +1677,14 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
+        /// <summary>
+        ///     Starts a product-file upload by sending its first data part.
+        /// </summary>
+        /// <param name="fileBvin">The unique identifier of the product file receiving the data.</param>
+        /// <param name="fileName">The file name to associate with the uploaded data.</param>
+        /// <param name="description">The description to associate with the product file.</param>
+        /// <param name="data">The first binary data part.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> whose content indicates whether the upload succeeded.</returns>
         public ApiResponse<bool> ProductFilesDataUploadFirstPart(string fileBvin, string fileName, string description,
             byte[] data)
         {
@@ -1623,6 +1697,13 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return response;
         }
 
+        /// <summary>
+        ///     Appends another data part to an in-progress product-file upload.
+        /// </summary>
+        /// <param name="fileBvin">The unique identifier of the product file receiving the data.</param>
+        /// <param name="fileName">The file name associated with the uploaded data.</param>
+        /// <param name="moreData">The next binary data part.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> whose content indicates whether the upload succeeded.</returns>
         public ApiResponse<bool> ProductFilesDataUploadAdditionalPart(string fileBvin, string fileName, byte[] moreData)
         {
             var response = new ApiResponse<bool>();
@@ -1725,6 +1806,10 @@ namespace Hotcakes.CommerceDTO.v1.Client
 
         #region Product Images
 
+        /// <summary>
+        ///     Retrieves all product images available in the store.
+        /// </summary>
+        /// <returns>An <see cref="ApiResponse{T}"/> containing the available <see cref="ProductImageDTO"/> records.</returns>
         public ApiResponse<List<ProductImageDTO>> ProductImagesFindAll()
         {
             var result = new ApiResponse<List<ProductImageDTO>>();
@@ -1733,6 +1818,11 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
+        /// <summary>
+        ///     Retrieves all images associated with the specified product.
+        /// </summary>
+        /// <param name="productBvin">The unique identifier of the product.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> containing the product's <see cref="ProductImageDTO"/> records.</returns>
         public ApiResponse<List<ProductImageDTO>> ProductImagesFindAllByProduct(string productBvin)
         {
             var result = new ApiResponse<List<ProductImageDTO>>();
@@ -1742,6 +1832,11 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
+        /// <summary>
+        ///     Retrieves a product image by its unique identifier.
+        /// </summary>
+        /// <param name="bvin">The unique identifier of the product image.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> containing the requested <see cref="ProductImageDTO"/>.</returns>
         public ApiResponse<ProductImageDTO> ProductImagesFind(string bvin)
         {
             var result = new ApiResponse<ProductImageDTO>();
@@ -1751,6 +1846,12 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
+        /// <summary>
+        ///     Creates a product image and optionally uploads its binary image data.
+        /// </summary>
+        /// <param name="item">The <see cref="ProductImageDTO"/> containing the image metadata to create.</param>
+        /// <param name="data">Optional binary image data to upload for the new image.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> containing the saved <see cref="ProductImageDTO"/>.</returns>
         public ApiResponse<ProductImageDTO> ProductImagesCreate(ProductImageDTO item, byte[] data)
         {
             var result = new ApiResponse<ProductImageDTO>();
@@ -1766,6 +1867,11 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
+        /// <summary>
+        ///     Updates an existing product image using the supplied DTO.
+        /// </summary>
+        /// <param name="item">The <see cref="ProductImageDTO"/> containing the updated image metadata.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> containing the saved <see cref="ProductImageDTO"/>.</returns>
         public ApiResponse<ProductImageDTO> ProductImagesUpdate(ProductImageDTO item)
         {
             var result = new ApiResponse<ProductImageDTO>();
@@ -1775,6 +1881,11 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
+        /// <summary>
+        ///     Permanently deletes a product image by its unique identifier.
+        /// </summary>
+        /// <param name="bvin">The unique identifier of the product image to delete.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> whose content indicates whether deletion succeeded.</returns>
         public ApiResponse<bool> ProductImagesDelete(string bvin)
         {
             var result = new ApiResponse<bool>();
@@ -1784,6 +1895,14 @@ namespace Hotcakes.CommerceDTO.v1.Client
             return result;
         }
 
+        /// <summary>
+        ///     Uploads binary data for an existing product image.
+        /// </summary>
+        /// <param name="productBvin">The unique identifier of the product owning the image.</param>
+        /// <param name="imageBvin">The unique identifier of the product image.</param>
+        /// <param name="fileName">The file name to associate with the uploaded image.</param>
+        /// <param name="imageData">The binary image content to upload.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> whose content indicates whether the upload succeeded.</returns>
         public ApiResponse<bool> ProductImagesUpload(string productBvin, string imageBvin, string fileName,
             byte[] imageData)
         {
@@ -1832,10 +1951,9 @@ namespace Hotcakes.CommerceDTO.v1.Client
         ///     Allows you to update an existing product volume discount and returns a copy of the updated object back to you.
         /// </summary>
         /// <param name="item">
-        ///     ProductVolumeDiscountDTO - a populated instance of the product volume discount with the desired
-        ///     updates.
+        ///     <see cref="ProductVolumeDiscountDTO"/> containing the desired updates.
         /// </param>
-        /// <returns></returns>
+        /// <returns>An <see cref="ApiResponse{T}"/> containing the saved <see cref="ProductVolumeDiscountDTO"/>.</returns>
         public ApiResponse<ProductVolumeDiscountDTO> ProductVolumeDiscountsUpdate(ProductVolumeDiscountDTO item)
         {
             var result = new ApiResponse<ProductVolumeDiscountDTO>();
@@ -2061,8 +2179,8 @@ namespace Hotcakes.CommerceDTO.v1.Client
         /// <summary>
         ///     Enables you to find a specific order in your store.
         /// </summary>
-        /// <param name="bvin">String - the unique ID or bvin of the order to delete.</param>
-        /// <returns></returns>
+        /// <param name="bvin">The unique identifier of the order to retrieve.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> containing the requested <see cref="OrderDTO"/>.</returns>
         public ApiResponse<OrderDTO> OrdersFind(string bvin)
         {
             var result = new ApiResponse<OrderDTO>();
@@ -2174,8 +2292,8 @@ namespace Hotcakes.CommerceDTO.v1.Client
         /// <summary>
         ///     Permanently deletes the specified transaction from the store.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The unique identifier of the order transaction to delete.</param>
+        /// <returns>An <see cref="ApiResponse{T}"/> whose content indicates whether deletion succeeded.</returns>
         public ApiResponse<bool> OrderTransactionsDelete(Guid id)
         {
             var result = new ApiResponse<bool>();

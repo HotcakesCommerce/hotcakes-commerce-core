@@ -28,6 +28,7 @@ using System;
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Represents StoreDomainSnapshot data and behavior within the Hotcakes Commerce account and store boundary.</summary>
     [Serializable]
     public class StoreDomainSnapshot
     {
@@ -35,6 +36,8 @@ namespace Hotcakes.Commerce.Accounts
         private const string HTTPS = "https://";
         private const string SLASH = "/";
 
+        /// <summary>Performs the StoreDomainSnapshot operation.</summary>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public StoreDomainSnapshot()
         {
             Id = 0;
@@ -42,15 +45,28 @@ namespace Hotcakes.Commerce.Accounts
             CustomUrl = string.Empty;
         }
 
+        /// <summary>Gets or sets Id.</summary>
+        /// <remarks>The database identifier for this record; a newly constructed model uses its established unsaved sentinel value unless otherwise noted.</remarks>
+        /// <value>The database identifier for this record; a newly constructed model uses its established unsaved sentinel value unless otherwise noted.</value>
         public long Id { get; set; }
+        /// <summary>Gets or sets StoreName.</summary>
+        /// <remarks>The display name of the store.</remarks>
+        /// <value>The display name of the store.</value>
         public string StoreName { get; set; }
+        /// <summary>Gets or sets CustomUrl.</summary>
+        /// <remarks>The normalized host name used to identify the store. Values are trimmed and lower-cased before storage.</remarks>
+        /// <value>The normalized host name used to identify the store. Values are trimmed and lower-cased before storage.</value>
         public string CustomUrl { get; set; }
 
+        /// <summary>Performs the RootUrl operation.</summary>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public string RootUrl()
         {
             return string.Concat(HTTP, CustomUrl, SLASH);
         }
 
+        /// <summary>Performs the RootUrlSecure operation.</summary>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public string RootUrlSecure()
         {
             var result = RootUrl();

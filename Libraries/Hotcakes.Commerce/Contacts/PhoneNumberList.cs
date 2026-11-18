@@ -28,13 +28,25 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>
+    /// Represents a JSON-serializable collection of phone numbers.
+    /// </summary>
     public class PhoneNumberList
     {
+        /// <summary>
+        /// Serializes this phone-number collection using the repository JSON helper.
+        /// </summary>
+        /// <returns>The JSON representation of this collection.</returns>
         public string ToJson()
         {
             return Json.ObjectToJson(this);
         }
 
+        /// <summary>
+        /// Deserializes a phone-number collection from JSON.
+        /// </summary>
+        /// <param name="jsonValues">The JSON representation of a <see cref="PhoneNumberList"/>.</param>
+        /// <returns>A populated collection, or an empty collection when deserialization returns <see langword="null"/>.</returns>
         public static PhoneNumberList FromJson(string jsonValues)
         {
             var result =

@@ -28,9 +28,15 @@ using System;
 
 namespace Hotcakes.Modules.Core.Models.Json
 {
+/// <summary>
+    /// Represents the CleanCreditCardJsonModel storefront model.
+    /// </summary>
     [Serializable]
     public class CleanCreditCardJsonModel
     {
+        /// <summary>
+        /// Gets or sets the CardNumber value used by this storefront model.
+        /// </summary>
         public string CardNumber = string.Empty;
     }
 }

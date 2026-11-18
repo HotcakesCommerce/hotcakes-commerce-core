@@ -34,12 +34,16 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Represents StoreSettingsRepository data and behavior within the Hotcakes Commerce account and store boundary.</summary>
     [Serializable]
     public class StoreSettingsRepository :
         HccLocalizationRepoBase<hcc_StoreSettings, hcc_StoreSettingsTranslations, StoreSetting, long>
     {
         #region constructor
 
+        /// <summary>Performs the StoreSettingsRepository operation.</summary>
+        /// <param name="c">The c value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public StoreSettingsRepository(HccRequestContext c)
             : base(c)
         {
@@ -49,11 +53,18 @@ namespace Hotcakes.Commerce.Accounts
 
         #region public methods
 
+        /// <summary>Performs the FindSingleSetting operation.</summary>
+        /// <param name="storeId">The storeId value used by the operation.</param>
+        /// <param name="settingName">The settingName value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public StoreSetting FindSingleSetting(long storeId, string settingName)
         {
             return FindFirstPoco(y => y.Item.StoreId == storeId && y.Item.SettingName == settingName);
         }
 
+        /// <summary>Performs the Update operation.</summary>
+        /// <param name="item">The item value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public bool Update(StoreSetting item)
         {
             if (item.Id < 1)
@@ -63,26 +74,40 @@ namespace Hotcakes.Commerce.Accounts
             return base.Update(item, y => y.Id == item.Id);
         }
 
+        /// <summary>Performs the Delete operation.</summary>
+        /// <param name="id">The id value used by the operation.</param>
+        /// <param name="isLocalized">The isLocalized value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public bool Delete(long id, bool isLocalized = false)
         {
             return Delete(y => y.Id == id);
         }
 
+        /// <summary>Performs the FindManySetting operation.</summary>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public List<StoreSetting> FindManySetting(List<long> storeIds)
         {
             return FindListPoco(q => q.Where(cb => storeIds.Contains(cb.Item.StoreId)));
         }
 
+        /// <summary>Performs the FindForStore operation.</summary>
+        /// <param name="storeId">The storeId value used by the operation.</param>
+        /// <returns>The operation result, or the documented empty/default result when no matching data is available.</returns>
         public List<StoreSetting> FindForStore(long storeId)
         {
             return FindListPoco(q => { return q.Where(y => y.Item.StoreId == storeId); });
         }
 
+        /// <summary>Performs the DeleteForStore operation.</summary>
+        /// <param name="storeId">The storeId value used by the operation.</param>
         public void DeleteForStore(long storeId)
         {
             Delete(y => y.StoreId == storeId);
         }
 
+        /// <summary>Performs the MergeList operation.</summary>
+        /// <param name="storeId">The storeId value used by the operation.</param>
+        /// <param name="subitems">The store settings to merge.</param>
         public void MergeList(long storeId, List<StoreSetting> subitems)
         {
             // Set Base Key Field

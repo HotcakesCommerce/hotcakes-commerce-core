@@ -28,11 +28,20 @@ using System;
 
 namespace Hotcakes.Web.Logging
 {
+    /// <summary>Defines the logging operations used by Hotcakes Web components.</summary>
     public interface ILogger
     {
+        /// <summary>Writes a message to the log.</summary>
+        /// <param name="message">The message to write.</param>
         void LogMessage(string message);
+        /// <summary>Writes a source-qualified message at the specified <see cref="EventLogSeverity"/>.</summary>
+        /// <param name="source">The component or source that produced the message.</param><param name="message">The message to write.</param><param name="severity">The severity assigned to the message.</param>
         void LogMessage(string source, string message, EventLogSeverity severity);
+        /// <summary>Writes an exception to the log.</summary>
+        /// <param name="ex">The exception to write.</param>
         void LogException(Exception ex);
+        /// <summary>Writes an exception at the specified <see cref="EventLogSeverity"/>.</summary>
+        /// <param name="ex">The exception to write.</param><param name="severity">The severity assigned to the exception.</param>
         void LogException(Exception ex, EventLogSeverity severity);
     }
 }

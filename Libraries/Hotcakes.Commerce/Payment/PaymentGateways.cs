@@ -35,6 +35,10 @@ using Hotcakes.Payment.RecurringGateways;
 
 namespace Hotcakes.Commerce.Payment
 {
+    /// <summary>
+    /// Discovers payment and recurring-payment gateways from loaded assemblies and resolves store selections.
+    /// Gateway instances are created by reflection, cached, and ordered by name.
+    /// </summary>
     public class PaymentGateways
     {
         #region Constructor
@@ -62,16 +66,29 @@ namespace Hotcakes.Commerce.Payment
 
         #region Public methods
 
+        /// <summary>
+        /// Gets all discovered payment gateways.
+        /// </summary>
+        /// <returns>The cached payment gateways ordered by name.</returns>
         public static List<PaymentGateway> FindAll()
         {
             return Gateways;
         }
 
+        /// <summary>
+        /// Gets all discovered recurring-payment gateways.
+        /// </summary>
+        /// <returns>The cached recurring gateways ordered by name.</returns>
         public static List<RecurringPaymentGateway> FindAllRecurringBilling()
         {
             return RecurringGateways;
         }
 
+        /// <summary>
+        /// Finds a payment gateway, falling back to the recurring-gateway registry when needed.
+        /// </summary>
+        /// <param name="id">The gateway identifier.</param>
+        /// <returns>The matching gateway from either registry, or <see langword="null"/>.</returns>
         public static GatewayBase Find(string id)
         {
             GatewayBase gw = Gateways.FirstOrDefault(m => m.Id == id);
@@ -84,6 +101,11 @@ namespace Hotcakes.Commerce.Payment
             return gw;
         }
 
+        /// <summary>
+        /// Resolves the store's configured credit-card gateway, falling back to <see cref="TestGateway"/>, then merges its stored settings.
+        /// </summary>
+        /// <param name="store">The store whose payment settings select and configure the gateway.</param>
+        /// <returns>The selected or fallback payment gateway with merged settings.</returns>
         public static PaymentGateway CurrentPaymentProcessor(Store store)
         {
             PaymentGateway gateway = null;
@@ -102,6 +124,11 @@ namespace Hotcakes.Commerce.Payment
             return gateway;
         }
 
+        /// <summary>
+        /// Resolves the store's configured recurring gateway, falling back to <see cref="TestRecurringGateway"/>, then merges its stored settings.
+        /// </summary>
+        /// <param name="store">The store whose recurring-payment settings select and configure the gateway.</param>
+        /// <returns>The selected or fallback recurring gateway with merged settings.</returns>
         public static RecurringPaymentGateway CurrentRecurringBillingProcessor(Store store)
         {
             RecurringPaymentGateway gateway = null;

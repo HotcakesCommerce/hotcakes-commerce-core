@@ -32,6 +32,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
 {
+    /// <summary>
+    /// Edits a promotion action that grants free shipping for a line item.
+    /// </summary>
     public partial class LineItemFreeShippingEditor : BaseActionControl
     {
         private LineItemFreeShipping TypedAction
@@ -39,6 +42,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
             get { return Action as LineItemFreeShipping; }
         }
 
+        /// <summary>Loads the line-item free-shipping action into the editor.</summary>
         public override void LoadAction()
         {
             var action = TypedAction;
@@ -70,6 +74,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
             gvFreeShippingMethods.DataBind();
         }
 
+        /// <summary>Saves the line-item free-shipping action.</summary>
+        /// <returns><see langword="true"/> when the action is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveAction()
         {
             return true;

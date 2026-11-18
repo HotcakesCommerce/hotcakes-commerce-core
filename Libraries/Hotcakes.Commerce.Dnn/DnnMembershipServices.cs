@@ -40,17 +40,32 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Implements commerce membership operations using DNN authentication, users, and roles.
+    /// </summary>
     [Serializable]
     public class DnnMembershipServices : MembershipServices, IMembershipServices
     {
         private readonly ILogger _Logger = new SupressLogger();
 
+        /// <summary>
+        /// Initializes membership services for the specified commerce request context.
+        /// </summary>
+        /// <param name="context">The context used to resolve the current store and request.</param>
         public DnnMembershipServices(HccRequestContext context)
             : base(context)
         {
             Customers = new DnnCustomerAccountRepository(Context);
         }
 
+        /// <summary>
+        /// Authenticates a DNN user and returns the resulting user identifier.
+        /// </summary>
+        /// <param name="username">The username to authenticate.</param>
+        /// <param name="password">The clear-text password supplied by the user.</param>
+        /// <param name="errorMessage">Receives a user-facing failure message.</param>
+        /// <param name="userId">Receives the authenticated DNN user identifier.</param>
+        /// <returns><c>true</c> when authentication succeeds; otherwise, <c>false</c>.</returns>
         public override bool LoginUser(string username, string password, out string errorMessage, out string userId)
         {
             var psett = PortalSettings.Current;
@@ -86,18 +101,30 @@ namespace Hotcakes.Commerce.Dnn
             return false;
         }
 
+        /// <summary>
+        /// Determines whether a DNN user is currently authenticated.
+        /// </summary>
+        /// <returns><c>true</c> when a current user exists; otherwise, <c>false</c>.</returns>
         public override bool IsUserLoggedIn()
         {
             var user = DnnUserController.Instance.GetCurrentUserInfo();
             return user != null;
         }
 
+        /// <summary>
+        /// Determines whether the current authenticated DNN user is a superuser.
+        /// </summary>
+        /// <returns><c>true</c> when the current user is a superuser; otherwise, <c>false</c>.</returns>
         public override bool IsSuperUserLoggedIn()
         {
             var usr = DnnUserController.Instance.GetCurrentUserInfo();
             return usr != null && usr.IsSuperUser;
         }
 
+        /// <summary>
+        /// Gets the identifier of the current DNN user.
+        /// </summary>
+        /// <returns>The current user identifier, or an empty string when no user is logged in.</returns>
         public override string GetCurrentUserId()
         {
             var ui = DnnUserController.Instance.GetCurrentUserInfo();
@@ -105,6 +132,12 @@ namespace Hotcakes.Commerce.Dnn
             return ui == null ? string.Empty : ui.UserID.ToString();
         }
 
+        /// <summary>
+        /// Determines whether the current DNN user has a mapped commerce permission.
+        /// </summary>
+        /// <param name="perm">The commerce permission name.</param>
+        /// <param name="app">The commerce application whose permission matrix is used.</param>
+        /// <returns><c>true</c> when the current user has permission; otherwise, <c>false</c>.</returns>
         public override bool HasCurrentUserPermission(string perm, HotcakesApplication app)
         {
             var usr = DnnUserController.Instance.GetCurrentUserInfo();
@@ -119,12 +152,23 @@ namespace Hotcakes.Commerce.Dnn
             return false;
         }
 
+        /// <summary>
+        /// Gets the DNN login URL, preserving the current request as the return URL.
+        /// </summary>
+        /// <returns>The generated login page URL.</returns>
         public override string GetLoginPagePath()
         {
             return Globals.NavigateURL(PortalSettings.Current.LoginTabId, "Login",
                 "returnurl=" + HttpUtility.UrlEncode(HttpContext.Current.Request.RawUrl));
         }
 
+        /// <summary>
+        /// Creates a customer as a DNN user and maps the DNN result to a commerce status.
+        /// </summary>
+        /// <param name="u">The customer account to create.</param>
+        /// <param name="status">Receives the commerce creation status.</param>
+        /// <param name="clearPassword">An optional clear-text password that overrides the account password.</param>
+        /// <returns><c>true</c> when the customer is created successfully; otherwise, <c>false</c>.</returns>
         public override bool CreateCustomer(CustomerAccount u, out CreateUserStatus status, string clearPassword)
         {
             status = CreateUserStatus.None;
@@ -165,22 +209,44 @@ namespace Hotcakes.Commerce.Dnn
             return status == CreateUserStatus.Success;
         }
 
+        /// <summary>
+        /// Gets the names of all roles available in the current DNN portal.
+        /// </summary>
+        /// <returns>A list of DNN role names.</returns>
         public override List<string> GetAllRoles()
         {
             return DnnUserController.Instance.GetRoles().Select(r => r.RoleName).ToList();
         }
 
+        /// <summary>
+        /// Gets Hotcakes profile settings for a DNN user.
+        /// </summary>
+        /// <param name="userId">The DNN user identifier.</param>
+        /// <param name="getCached">Whether the DNN user cache may be used.</param>
+        /// <returns>The user's Hotcakes settings keyed by profile property name.</returns>
         public override Dictionary<string, string> GetUserSettings(string userId, bool getCached = true)
         {
             return DnnCustomerAccountRepository.GetUserSettings(userId, getCached);
         }
 
+        /// <summary>
+        /// Updates Hotcakes profile settings for a DNN user.
+        /// </summary>
+        /// <param name="userId">The DNN user identifier.</param>
+        /// <param name="settings">The profile settings to create or update.</param>
+        /// <param name="getCached">Whether the DNN user cache may be used.</param>
         public override void UpdateUserSettings(string userId, Dictionary<string, string> settings,
             bool getCached = true)
         {
             DnnCustomerAccountRepository.UpdateUserSettings(userId, settings, getCached);
         }
 
+        /// <summary>
+        /// Assigns the membership product's role to a DNN user for the requested duration.
+        /// </summary>
+        /// <param name="userId">The DNN user identifier.</param>
+        /// <param name="membershipType">The membership product and role configuration.</param>
+        /// <param name="timeSpan">The membership duration.</param>
         public override void AssignMembershipRole(string userId, MembershipProductType membershipType, TimeSpan timeSpan)
         {
             var portalId = PortalSettings.Current.PortalId;

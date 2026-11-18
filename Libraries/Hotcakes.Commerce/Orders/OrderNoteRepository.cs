@@ -33,24 +33,39 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    /// Represents the OrderNoteRepository order-domain type and preserves the established public compatibility surface.
+    /// </summary>
     public class OrderNoteRepository : HccSimpleRepoBase<hcc_OrderNote, OrderNote>
     {
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         public OrderNoteRepository(HccRequestContext c)
             : base(c)
         {
         }
 
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override Func<hcc_OrderNote, bool> MatchItems(OrderNote item)
         {
             return on => on.Id == item.Id;
         }
 
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override Func<hcc_OrderNote, bool> NotMatchItems(List<OrderNote> items)
         {
             var itemIds = items.Select(i => i.Id).ToList();
             return on => !itemIds.Contains(on.Id);
         }
 
+        /// <summary>
+        /// Provides the CopyModelToData operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override void CopyModelToData(hcc_OrderNote data, OrderNote model)
         {
             data.AuditDate = model.AuditDate;
@@ -62,6 +77,9 @@ namespace Hotcakes.Commerce.Orders
             data.StoreId = model.StoreId;
         }
 
+        /// <summary>
+        /// Provides the CopyDataToModel operation while preserving the established order-domain behavior.
+        /// </summary>
         protected override void CopyDataToModel(hcc_OrderNote data, OrderNote model)
         {
             model.AuditDate = data.AuditDate;
@@ -73,17 +91,26 @@ namespace Hotcakes.Commerce.Orders
             model.StoreId = data.StoreId;
         }
 
+        /// <summary>
+        /// Provides the Update operation while preserving the established order-domain behavior.
+        /// </summary>
         public bool Update(OrderNote item)
         {
             item.LastUpdatedUtc = DateTime.UtcNow;
             return base.Update(item, y => y.Id == item.Id);
         }
 
+        /// <summary>
+        /// Provides the Delete operation while preserving the established order-domain behavior.
+        /// </summary>
         public bool Delete(long id)
         {
             return Delete(y => y.Id == id);
         }
 
+        /// <summary>
+        /// Finds the requested records within the established repository store scope and ordering.
+        /// </summary>
         public List<OrderNote> FindForOrders(List<string> orderBvins)
         {
             var orderGuids = orderBvins.Select(bvin => DataTypeHelper.BvinToGuid(bvin)).ToList();
@@ -95,6 +122,9 @@ namespace Hotcakes.Commerce.Orders
             });
         }
 
+        /// <summary>
+        /// Finds the requested records within the established repository store scope and ordering.
+        /// </summary>
         public List<OrderNote> FindForOrder(string orderBvin)
         {
             var guid = DataTypeHelper.BvinToGuid(orderBvin);
@@ -105,12 +135,18 @@ namespace Hotcakes.Commerce.Orders
             });
         }
 
+        /// <summary>
+        /// Deletes all records associated with the specified parent identifier.
+        /// </summary>
         public void DeleteForOrder(string orderBvin)
         {
             var orderGuid = DataTypeHelper.BvinToGuid(orderBvin);
             Delete(on => on.OrderId == orderGuid);
         }
 
+        /// <summary>
+        /// Merges the supplied records after assigning their established parent and store scope.
+        /// </summary>
         public void MergeList(string orderBvin, long storeId, List<OrderNote> subitems)
         {
             // Set Base Key Field

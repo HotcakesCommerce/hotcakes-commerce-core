@@ -28,9 +28,15 @@ using System;
 
 namespace Hotcakes.Payment
 {
+    /// <summary>
+    /// Represents a description, code, and severity returned by a payment operation.
+    /// </summary>
     [Serializable]
     public class Message
     {
+        /// <summary>
+        /// Initializes a new <see cref="Message"/> with empty text and <see cref="MessageType.Unknown"/> severity.
+        /// </summary>
         public Message()
         {
             Description = string.Empty;
@@ -38,6 +44,12 @@ namespace Hotcakes.Payment
             Severity = MessageType.Unknown;
         }
 
+        /// <summary>
+        /// Initializes a new <see cref="Message"/> with the specified details.
+        /// </summary>
+        /// <param name="description">The human-readable message description.</param>
+        /// <param name="code">The provider or gateway message code.</param>
+        /// <param name="severity">The classification of the message.</param>
         public Message(string description, string code, MessageType severity)
         {
             Description = description;
@@ -45,8 +57,12 @@ namespace Hotcakes.Payment
             Severity = severity;
         }
 
+        /// <summary>Gets or sets the human-readable message description.</summary>
         public string Description { get; set; }
+        /// <summary>Gets or sets the provider or gateway message code.</summary>
         public string Code { get; set; }
+        /// <summary>Gets or sets the message classification.</summary>
+        /// <seealso cref="MessageType"/>
         public MessageType Severity { get; set; }
     }
 }

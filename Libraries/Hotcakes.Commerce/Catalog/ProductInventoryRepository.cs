@@ -35,13 +35,22 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Defines the catalog data or behavior represented by this member.
+    /// </summary>
     public class ProductInventoryRepository : HccSimpleRepoBase<hcc_ProductInventory, ProductInventory>
     {
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public ProductInventoryRepository(HccRequestContext c)
             : base(c)
         {
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyDataToModel(hcc_ProductInventory data, ProductInventory model)
         {
             model.Bvin = data.bvin;
@@ -57,6 +66,9 @@ namespace Hotcakes.Commerce.Catalog
             model.OutOfStockPoint = data.OutOfStockPoint;
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         protected override void CopyModelToData(hcc_ProductInventory data, ProductInventory model)
         {
             data.bvin = model.Bvin;
@@ -71,16 +83,25 @@ namespace Hotcakes.Commerce.Catalog
             data.OutOfStockPoint = model.OutOfStockPoint;
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductInventory Find(string bvin)
         {
             return FindFirstPoco(y => y.bvin == bvin && y.StoreId == Context.CurrentStore.Id);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductInventory FindForAllStores(string bvin)
         {
             return FindFirstPoco(y => y.bvin == bvin);
         }
 
+        /// <summary>
+        /// Defines the catalog data or behavior represented by this member.
+        /// </summary>
         public bool InventoryExists(ProductInventory item)
         {
             var inventory = FindByProductIdAndVariantId(item.ProductBvin, item.VariantId);
@@ -88,6 +109,9 @@ namespace Hotcakes.Commerce.Catalog
             return false;
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public override bool Create(ProductInventory item)
         {
             if (item.Bvin == string.Empty)
@@ -100,6 +124,9 @@ namespace Hotcakes.Commerce.Catalog
             return base.Create(item);
         }
 
+        /// <summary>
+        /// Changes catalog data according to the repository and persistence behavior implemented by this member.
+        /// </summary>
         public bool Update(ProductInventory c)
         {
             if (c.StoreId != Context.CurrentStore.Id)
@@ -110,6 +137,9 @@ namespace Hotcakes.Commerce.Catalog
             return Update(c, y => y.bvin == c.Bvin);
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool Delete(string bvin)
         {
             var storeId = Context.CurrentStore.Id;
@@ -121,12 +151,18 @@ namespace Hotcakes.Commerce.Catalog
             return Delete(y => y.bvin == bvin && y.StoreId == storeId);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductInventory> FindByProductId(string productId)
         {
             var storeId = Context.CurrentStore.Id;
             return FindByProductId(productId, storeId);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductInventory> FindByProductId(string productId, long storeId)
         {
             var productBvin = DataTypeHelper.BvinToGuid(productId);
@@ -137,6 +173,9 @@ namespace Hotcakes.Commerce.Catalog
             });
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public ProductInventory FindByProductIdAndVariantId(string productId, string variantId)
         {
             var storeId = Context.CurrentStore.Id;
@@ -150,18 +189,27 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool DeleteByProductId(string productId)
         {
             var productBvin = DataTypeHelper.BvinToGuid(productId);
             return Delete(y => y.ProductBvin == productBvin);
         }
 
+        /// <summary>
+        /// Deletes the matching catalog records and applies the repository scope shown by the implementation.
+        /// </summary>
         public bool DeleteByProductId(string productId, long storeId)
         {
             var productBvin = DataTypeHelper.BvinToGuid(productId);
             return Delete(y => y.ProductBvin == productBvin && y.StoreId == storeId);
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductInventory> FindAllLowStock()
         {
             var storeId = Context.CurrentStore.Id;
@@ -172,6 +220,9 @@ namespace Hotcakes.Commerce.Catalog
             });
         }
 
+        /// <summary>
+        /// Retrieves catalog data using the criteria represented by this member.
+        /// </summary>
         public List<ProductInventory> FindAllForCurrentStore()
         {
             var storeId = Context.CurrentStore.Id;

@@ -31,18 +31,36 @@ using Hotcakes.Commerce.Payment.Methods;
 
 namespace Hotcakes.Modules.Core.Models.Json
 {
+/// <summary>
+    /// Represents the CustomerDataJsonModel storefront model.
+    /// </summary>
     [Serializable]
     public class CustomerDataJsonModel
     {
+        /// <summary>
+        /// Initializes a new instance of the CustomerDataJsonModel type.
+        /// </summary>
         public CustomerDataJsonModel()
         {
             RewardPoints = new RewardPoints();
             Addresses = new List<Address>();
         }
 
+        /// <summary>
+        /// Gets or sets the RewardPoints value used by this storefront model.
+        /// </summary>
         public RewardPoints RewardPoints { get; set; }
+        /// <summary>
+        /// Gets or sets the Addresses value used by this storefront model.
+        /// </summary>
         public List<Address> Addresses { get; set; }
+        /// <summary>
+        /// Gets or sets the BillingAddress value used by this storefront model.
+        /// </summary>
         public Address BillingAddress { get; set; }
+        /// <summary>
+        /// Gets or sets the ShippingAddress value used by this storefront model.
+        /// </summary>
         public Address ShippingAddress { get; set; }
     }
 }

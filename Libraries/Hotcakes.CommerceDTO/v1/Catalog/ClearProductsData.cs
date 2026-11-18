@@ -34,6 +34,9 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
     [Serializable]
     public class ClearProductsData
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ClearProductsData"/> type with its default DTO values.
+        /// </summary>
         public ClearProductsData()
         {
             ProductsCleared = 0;

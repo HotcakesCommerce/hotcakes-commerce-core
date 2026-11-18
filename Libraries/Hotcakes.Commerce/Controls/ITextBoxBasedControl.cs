@@ -26,8 +26,25 @@
 
 namespace Hotcakes.Commerce.Controls
 {
+    /// <summary>
+    /// Defines the contract for a control that exposes attributes on its rendered text box.
+    /// </summary>
+    /// <remarks>
+    /// Implementations decide how and when the supplied attributes are applied to the
+    /// underlying text box. This interface does not require the control to expose the
+    /// text box itself.
+    /// </remarks>
     public interface ITextBoxBasedControl
     {
+        /// <summary>
+        /// Adds or updates an attribute on the text box represented by the control.
+        /// </summary>
+        /// <param name="key">The attribute name to apply.</param>
+        /// <param name="value">The attribute value to apply.</param>
+        /// <remarks>
+        /// Validation, duplicate-key behavior, and the point in the page/control lifecycle
+        /// at which the attribute becomes visible are defined by the implementation.
+        /// </remarks>
         void AddTextBoxAttribute(string key, string value);
     }
 }

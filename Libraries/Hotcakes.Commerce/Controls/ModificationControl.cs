@@ -26,8 +26,23 @@
 
 namespace Hotcakes.Commerce.Controls
 {
+    /// <summary>
+    /// Provides a user control contract for applying control-entered changes to an item.
+    /// </summary>
+    /// <typeparam name="T">The type of item that the control reads or modifies.</typeparam>
+    /// <remarks>
+    /// The control inherits the Web Forms lifecycle from <see cref="ModificationControlBase"/>
+    /// and does not define when <see cref="ApplyChanges(T)"/> is called. Derived controls
+    /// implement the method using the values available at the time of the call.
+    /// </remarks>
     public abstract class ModificationControl<T> : ModificationControlBase
     {
+        /// <summary>
+        /// Applies the current values held by the control to an item.
+        /// </summary>
+        /// <param name="item">The item to which the control's changes are applied.</param>
+        /// <returns>The item resulting from applying the control's changes.</returns>
+        /// <exception cref="System.Exception">A derived implementation may throw when the current control values cannot be applied.</exception>
         public abstract T ApplyChanges(T item);
     }
 }

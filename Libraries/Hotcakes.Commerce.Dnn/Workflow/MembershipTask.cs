@@ -31,6 +31,9 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.Dnn.Workflow
 {
+    /// <summary>
+    /// Assigns membership roles for membership products purchased in an order.
+    /// </summary>
     [Serializable]
     public class MembershipTask : OrderTask
     {
@@ -49,6 +52,11 @@ namespace Hotcakes.Commerce.Dnn.Workflow
             }
         }
 
+        /// <summary>
+        /// Processes the order's products and assigns their membership roles to the customer.
+        /// </summary>
+        /// <param name="context">The order task context containing the order and commerce services.</param>
+        /// <returns><see langword="true"/> when all products are processed; otherwise, <see langword="false"/> when a product cannot be found.</returns>
         public override bool Execute(OrderTaskContext context)
         {
             var result = true;
@@ -125,21 +133,38 @@ namespace Hotcakes.Commerce.Dnn.Workflow
             }
         }
 
+        /// <summary>
+        /// Rolls back this task.
+        /// </summary>
+        /// <param name="context">The order task context for the operation.</param>
+        /// <returns><see langword="true"/> because membership assignments are not reversed by this task.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>
+        /// Gets the display name for this workflow task.
+        /// </summary>
+        /// <returns>The task name.</returns>
         public override string TaskName()
         {
             return "Associate user with membership role";
         }
 
+        /// <summary>
+        /// Gets the stable identifier for this workflow task.
+        /// </summary>
+        /// <returns>The task identifier.</returns>
         public override string TaskId()
         {
             return "293524A7-F084-48DB-9BCD-D34306FC4265";
         }
 
+        /// <summary>
+        /// Creates a new instance of this workflow task.
+        /// </summary>
+        /// <returns>A new <see cref="MembershipTask"/> instance.</returns>
         public override Task Clone()
         {
             return new MembershipTask();

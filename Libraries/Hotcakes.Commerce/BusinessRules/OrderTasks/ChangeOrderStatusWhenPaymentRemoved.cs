@@ -29,8 +29,21 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>
+    /// <summary>
+    /// Represents the <see cref="OrderTask"/> that performs the ChangeOrderStatusWhenPaymentRemoved workflow operation. The stable task identifier is <c>4aa03a0d-1d38-4f66-ad85-82edf715103b</c>. Execution and rollback preserve existing order workflow behavior, including persistence, <see cref="WorkflowMessage"/> errors, payment activity, email delivery, and rollback limitations.
+    /// </summary>
+    /// </summary>
     public class ChangeOrderStatusWhenPaymentRemoved : OrderTask
     {
+        /// <summary>
+        /// Executes this order workflow task using the supplied <see cref="OrderTaskContext"/>. The return value controls whether the workflow continues; order changes, persistence, messages, payments, or email follow the existing implementation.
+        /// </summary>
+        /// <param name="context">The value used by this member.</param>
+        /// <returns>The value produced by this member.</returns>
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override bool Execute(OrderTaskContext context)
         {
             if (context.Order.IsRecurring)
@@ -58,22 +71,46 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return true;
         }
 
+        /// <summary>
+        /// Attempts to roll back this task using the supplied <see cref="OrderTaskContext"/>. A successful return does not imply that external persistence, payment processing, account creation, or email delivery was reversed.
+        /// </summary>
+
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override bool Rollback(OrderTaskContext context)
         {
             context.Order.StatusCode = OrderStatusCode.Received;
             return true;
         }
 
+        /// <summary>
+        /// Gets this task's stable workflow identifier.
+        /// </summary>
+
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override string TaskId()
         {
             return "4aa03a0d-1d38-4f66-ad85-82edf715103b";
         }
 
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override string TaskName()
         {
             return "Change Order Status When Payment Removed";
         }
 
+        /// <summary>
+        /// Gets the display name used for this workflow step.
+        /// </summary>
+
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override string StepName()
         {
             var result = string.Empty;
@@ -84,6 +121,13 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return result;
         }
 
+        /// <summary>
+        /// Creates a new task instance with the same task type and documented constructor defaults.
+        /// </summary>
+
+        /// <summary>
+        /// Documents this public workflow member and preserves its existing behavior.
+        /// </summary>
         public override Task Clone()
         {
             return new ChangeOrderStatusWhenPaymentRemoved();

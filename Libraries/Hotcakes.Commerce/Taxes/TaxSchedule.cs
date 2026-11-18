@@ -29,13 +29,12 @@ using Hotcakes.CommerceDTO.v1.Taxes;
 
 namespace Hotcakes.Commerce.Taxes
 {
-    /// <summary>
-    ///     This is the main object used for tax schedules in the applied
-    /// </summary>
-    /// <remarks>The REST API equivalent of this class is TaxScheduleDTO</remarks>
+    /// <summary>Represents a store-scoped tax schedule and its default rates.</summary>
+    /// <remarks>The REST API equivalent is <see cref="TaxScheduleDTO"/>. Default rates are percentage values and are used only by applicable VAT implementations.</remarks>
     [Serializable]
     public class TaxSchedule : ITaxSchedule
     {
+        /// <summary>Initializes a tax schedule with zero identifiers and rates and an empty name.</summary>
         public TaxSchedule()
         {
             Id = 0;
@@ -45,69 +44,51 @@ namespace Hotcakes.Commerce.Taxes
             DefaultShippingRate = 0;
         }
 
-        /// <summary>
-        ///     The unique identifier or primary key of the tax schedule object
-        /// </summary>
-        /// <remarks>This is mapped to the TaxScheduleId property in this same class.</remarks>
+        /// <summary>Gets or sets the unique identifier or primary key of the tax schedule.</summary>
+        /// <remarks>This is the value returned by the compatibility-sensitive <see cref="TaxScheduleId"/> method.</remarks>
         public long Id { get; set; }
 
-        /// <summary>
-        ///     This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
-        /// </summary>
+        /// <summary>Gets or sets the Hotcakes store identifier that owns the schedule.</summary>
+        /// <remarks>The repository assigns the current store when creating a schedule.</remarks>
         public long StoreId { get; set; }
 
-        /// <summary>
-        ///     The name of the tax schedule. This will be seen in the administration areas.
-        /// </summary>
-        /// <remarks>This is mapped to the TaxScheduleName property in this same class.</remarks>
+        /// <summary>Gets or sets the tax schedule name displayed in administration areas.</summary>
+        /// <remarks>This is the value returned by <see cref="TaxScheduleName"/>.</remarks>
         public string Name { get; set; }
 
-        /// <summary>
-        ///     This is used only for VAT implementations to help calculate the correct taxes per VAT rules.
-        /// </summary>
-        /// <remarks>This is mapped to the TaxScheduleDefaultRate property in this same class.</remarks>
+        /// <summary>Gets or sets the default item tax rate for applicable VAT implementations.</summary>
+        /// <remarks>The value is a percentage, not a decimal factor; consumers that calculate a factor divide it by 100. This is the value returned by <see cref="TaxScheduleDefaultRate"/>.</remarks>
         public decimal DefaultRate { get; set; }
 
-        /// <summary>
-        ///     This is used only for VAT implementations to help calculate the correct taxes for shipping per VAT rules.
-        /// </summary>
-        /// <remarks>This is mapped to the TaxScheduleDefaultShippingRate property in this same class.</remarks>
+        /// <summary>Gets or sets the default shipping tax rate for applicable VAT implementations.</summary>
+        /// <remarks>The value is a percentage, not a decimal factor; consumers that calculate a factor divide it by 100. This is the value returned by <see cref="TaxScheduleDefaultShippingRate"/>.</remarks>
         public decimal DefaultShippingRate { get; set; }
 
         #region ITaxSchedule Members
 
-        /// <summary>
-        ///     0
-        ///     The unique identifier or primary key of the tax schedule object
-        /// </summary>
-        /// <returns>This simply returns the Id property and is necessary for the interface.</returns>
+        /// <summary>Gets the schedule identifier required by <see cref="ITaxSchedule"/>.</summary>
+        /// <returns>The current <see cref="Id"/> value.</returns>
         public long TaxScheduleId()
         {
             return Id;
         }
 
-        /// <summary>
-        ///     The name of the tax schedule. This will be seen in the administration areas.
-        /// </summary>
-        /// <returns>This simply returns the Name property and is necessary for the interface.</returns>
+        /// <summary>Gets the schedule name required by <see cref="ITaxSchedule"/>.</summary>
+        /// <returns>The current <see cref="Name"/> value.</returns>
         public string TaxScheduleName()
         {
             return Name;
         }
 
-        /// <summary>
-        ///     This is used only for VAT implementations to help calculate the correct taxes per VAT rules.
-        /// </summary>
-        /// <returns>This simply returns the DefaultRate property and is necessary for the interface.</returns>
+        /// <summary>Gets the default item percentage required by <see cref="ITaxSchedule"/>.</summary>
+        /// <returns>The current <see cref="DefaultRate"/> value.</returns>
         public decimal TaxScheduleDefaultRate()
         {
             return DefaultRate;
         }
 
-        /// <summary>
-        ///     This is used only for VAT implementations to help calculate the correct taxes for shipping per VAT rules.
-        /// </summary>
-        /// <returns>This simply returns the DefaultShippingRate property and is necessary for the interface.</returns>
+        /// <summary>Gets the default shipping percentage required by <see cref="ITaxSchedule"/>.</summary>
+        /// <returns>The current <see cref="DefaultShippingRate"/> value.</returns>
         public decimal TaxScheduleDefaultShippingRate()
         {
             return DefaultShippingRate;
@@ -117,10 +98,8 @@ namespace Hotcakes.Commerce.Taxes
 
         #region DTO
 
-        /// <summary>
-        ///     Allows you to convert the current tax schedule object to the DTO equivalent for use with the REST API
-        /// </summary>
-        /// <returns>A new instance of TaxScheduleDTO</returns>
+        /// <summary>Converts this tax schedule model to its REST API DTO representation.</summary>
+        /// <returns>A new <see cref="TaxScheduleDTO"/> containing the current property values.</returns>
         public TaxScheduleDTO ToDto()
         {
             var dto = new TaxScheduleDTO
@@ -135,10 +114,9 @@ namespace Hotcakes.Commerce.Taxes
             return dto;
         }
 
-        /// <summary>
-        ///     Allows you to populate the current tax schedule object using a TaxScheduleDTO instance
-        /// </summary>
-        /// <param name="dto">An instance of the tax schedule from the REST API</param>
+        /// <summary>Copies values from a REST API DTO into this tax schedule model.</summary>
+        /// <param name="dto">The DTO to copy, or <see langword="null"/>.</param>
+        /// <remarks>If <paramref name="dto"/> is <see langword="null"/>, this method does nothing and preserves every current value.</remarks>
         public void FromDto(TaxScheduleDTO dto)
         {
             if (dto == null) return;

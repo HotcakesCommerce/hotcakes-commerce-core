@@ -34,6 +34,7 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>Provides the catalog ProductTypeRepository API.</summary>
     public class ProductTypeRepository :
         HccLocalizationRepoBase<hcc_ProductType, hcc_ProductTypeTranslation, ProductType, Guid>
     {
@@ -42,16 +43,21 @@ namespace Hotcakes.Commerce.Catalog
         {
         }
 
+        /// <summary>Gets or sets the Guid value.</summary>
         protected override Expression<Func<hcc_ProductType, Guid>> ItemKeyExp
         {
             get { return pt => pt.bvin; }
         }
 
+        /// <summary>Gets or sets the Guid value.</summary>
         protected override Expression<Func<hcc_ProductTypeTranslation, Guid>> ItemTranslationKeyExp
         {
             get { return ptt => ptt.ProductTypeId; }
         }
 
+        /// <summary>Gets or sets the CopyItemToModel value.</summary>
+        /// <param name="data">Input used by this operation.</param>
+        /// <param name="model">Input used by this operation.</param>
         protected override void CopyItemToModel(hcc_ProductType data, ProductType model)
         {
             model.Bvin = DataTypeHelper.GuidToBvin(data.bvin);
@@ -61,11 +67,15 @@ namespace Hotcakes.Commerce.Catalog
             model.TemplateName = data.TemplateName;
         }
 
+        /// <summary>Gets or sets the CopyTransToModel value.</summary>
+        /// <param name="data">Input used by this operation.</param>
+        /// <param name="model">Input used by this operation.</param>
         protected override void CopyTransToModel(hcc_ProductTypeTranslation data, ProductType model)
         {
             model.ProductTypeName = data.ProductTypeName;
         }
 
+        /// <summary>Gets or sets the CopyModelToItem value.</summary>
         protected override void CopyModelToItem(JoinedItem<hcc_ProductType, hcc_ProductTypeTranslation> data,
             ProductType model)
         {
@@ -76,6 +86,7 @@ namespace Hotcakes.Commerce.Catalog
             data.Item.TemplateName = model.TemplateName;
         }
 
+        /// <summary>Gets or sets the CopyModelToTrans value.</summary>
         protected override void CopyModelToTrans(JoinedItem<hcc_ProductType, hcc_ProductTypeTranslation> data,
             ProductType model)
         {
@@ -84,6 +95,9 @@ namespace Hotcakes.Commerce.Catalog
             data.ItemTranslation.ProductTypeName = model.ProductTypeName;
         }
 
+        /// <summary>Gets or sets the Find value.</summary>
+        /// <param name="bvin">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public ProductType Find(string bvin)
         {
             var result = FindForAllStores(bvin);
@@ -97,12 +111,18 @@ namespace Hotcakes.Commerce.Catalog
             return null;
         }
 
+        /// <summary>Gets or sets the FindForAllStores value.</summary>
+        /// <param name="bvin">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public ProductType FindForAllStores(string bvin)
         {
             var guid = DataTypeHelper.BvinToGuid(bvin);
             return FindFirstPoco(y => y.Item.bvin == guid);
         }
 
+        /// <summary>Gets or sets the FindNameForType value.</summary>
+        /// <param name="bvin">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public string FindNameForType(string bvin)
         {
             var item = Find(bvin);
@@ -113,6 +133,9 @@ namespace Hotcakes.Commerce.Catalog
             return string.Empty;
         }
 
+        /// <summary>Gets or sets the CreateAsNew value.</summary>
+        /// <param name="item">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public bool CreateAsNew(ProductType item)
         {
             if (item != null)
@@ -122,6 +145,9 @@ namespace Hotcakes.Commerce.Catalog
             return Create(item);
         }
 
+        /// <summary>Gets or sets the Create value.</summary>
+        /// <param name="item">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public override bool Create(ProductType item)
         {
             item.LastUpdated = DateTime.UtcNow;
@@ -134,6 +160,9 @@ namespace Hotcakes.Commerce.Catalog
             return base.Create(item);
         }
 
+        /// <summary>Gets or sets the Update value.</summary>
+        /// <param name="c">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public bool Update(ProductType c)
         {
             if (c.StoreId != Context.CurrentStore.Id)
@@ -145,6 +174,9 @@ namespace Hotcakes.Commerce.Catalog
             return Update(c, y => y.bvin == guid);
         }
 
+        /// <summary>Gets or sets the Delete value.</summary>
+        /// <param name="bvin">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public bool Delete(string bvin)
         {
             var storeId = Context.CurrentStore.Id;
@@ -157,11 +189,16 @@ namespace Hotcakes.Commerce.Catalog
             return Delete(y => y.bvin == guid && y.StoreId == storeId);
         }
 
+        /// <summary>Gets or sets the FindAll value.</summary>
+        /// <returns>The result of this operation.</returns>
         public List<ProductType> FindAll()
         {
             return FindAllForStore(Context.CurrentStore.Id);
         }
 
+        /// <summary>Gets or sets the FindAllForStore value.</summary>
+        /// <param name="storeId">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public List<ProductType> FindAllForStore(long storeId)
         {
             return
@@ -172,6 +209,9 @@ namespace Hotcakes.Commerce.Catalog
                     });
         }
 
+        /// <summary>Gets or sets the FindByName value.</summary>
+        /// <param name="name">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public List<ProductType> FindByName(string name)
         {
             var storeId = Context.CurrentStore.Id;

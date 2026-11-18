@@ -29,6 +29,15 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Security
 {
+    /// <summary>
+    /// Holds the normalized values examined by the fraud-rule scorer and the messages
+    /// produced when rules match those values.
+    /// </summary>
+    /// <remarks>
+    /// This type is a data contract between fraud-data population and
+    /// <see cref="FraudScorer"/>. Assignments are normalized by the property setters;
+    /// the type does not perform validation or determine whether a value is fraudulent.
+    /// </remarks>
     public class FraudCheckData
     {
         private string _CreditCard = string.Empty;
@@ -38,41 +47,82 @@ namespace Hotcakes.Commerce.Security
         private string _IpAddress = string.Empty;
         private string _PhoneNumber = string.Empty;
 
+        /// <summary>
+        /// Initializes empty fraud-check values and a message collection.
+        /// </summary>
         public FraudCheckData()
         {
             Messages = new List<string>();
         }
 
+        /// <summary>
+        /// Gets or sets the IP address used for exact fraud-rule comparison.
+        /// </summary>
+        /// <remarks>
+        /// The assigned value is trimmed. Unlike the other normalized fields, it is
+        /// not lower-cased by this setter.
+        /// </remarks>
         public string IpAddress
         {
             get { return _IpAddress; }
             set { _IpAddress = value.Trim(); }
         }
 
+        /// <summary>
+        /// Gets or sets the domain name used for fraud-rule comparison.
+        /// </summary>
+        /// <remarks>The assigned value is trimmed and lower-cased.</remarks>
         public string DomainName
         {
             get { return _DomainName; }
             set { _DomainName = value.Trim().ToLower(); }
         }
 
+        /// <summary>
+        /// Gets or sets the email address used for fraud-rule comparison.
+        /// </summary>
+        /// <remarks>The assigned value is trimmed and lower-cased.</remarks>
         public string EmailAddress
         {
             get { return _EmailAddress; }
             set { _EmailAddress = value.Trim().ToLower(); }
         }
 
+        /// <summary>
+        /// Gets or sets the phone number used for fraud-rule comparison.
+        /// </summary>
+        /// <remarks>
+        /// The assigned value is trimmed, lower-cased, and passed through
+        /// <see cref="CreditCardValidator.CleanCardNumber(string)"/>. The shared
+        /// card-number cleaning routine is an observed compatibility behavior and is
+        /// intentionally not changed here.
+        /// </remarks>
         public string PhoneNumber
         {
             get { return _PhoneNumber; }
             set { _PhoneNumber = CreditCardValidator.CleanCardNumber(value.Trim().ToLower()); }
         }
 
+        /// <summary>
+        /// Gets or sets the credit-card number used for fraud-rule comparison.
+        /// </summary>
+        /// <remarks>
+        /// The assigned value is trimmed, lower-cased, and passed through
+        /// <see cref="CreditCardValidator.CleanCardNumber(string)"/>.
+        /// </remarks>
         public string CreditCard
         {
             get { return _CreditCard; }
             set { _CreditCard = CreditCardValidator.CleanCardNumber(value.Trim().ToLower()); }
         }
 
+        /// <summary>
+        /// Gets or sets the messages appended by matching fraud rules.
+        /// </summary>
+        /// <remarks>
+        /// The constructor creates an empty list. <see cref="FraudScorer"/> appends
+        /// compatibility-sensitive default messages and does not clear existing entries.
+        /// </remarks>
         public List<string> Messages { get; set; }
     }
 }

@@ -35,24 +35,30 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Commerce.Marketing
 {
+    /// <summary>Persists promotions and their localized descriptions within the current store.</summary>
     public class PromotionRepository :
         HccLocalizationRepoBase<hcc_Promotions, hcc_PromotionTranslation, Promotion, long>
     {
+        /// <summary>Initializes the repository for the supplied commerce request context.</summary>
+        /// <param name="c">The context whose current store scopes all promotion queries.</param>
         public PromotionRepository(HccRequestContext c)
             : base(c)
         {
         }
 
+        /// <summary>Gets the database expression identifying a promotion.</summary>
         protected override Expression<Func<hcc_Promotions, long>> ItemKeyExp
         {
             get { return p => p.Id; }
         }
 
+        /// <summary>Gets the database expression identifying a promotion translation.</summary>
         protected override Expression<Func<hcc_PromotionTranslation, long>> ItemTranslationKeyExp
         {
             get { return pt => pt.PromotionId; }
         }
 
+        /// <summary>Copies persisted promotion fields and rule XML into a domain model.</summary>
         protected override void CopyItemToModel(hcc_Promotions data, Promotion model)
         {
             model.Id = data.Id;
@@ -69,11 +75,13 @@ namespace Hotcakes.Commerce.Marketing
             model.SortOrder = data.SortOrder;
         }
 
+        /// <summary>Copies the localized customer description into a domain model.</summary>
         protected override void CopyTransToModel(hcc_PromotionTranslation data, Promotion model)
         {
             model.CustomerDescription = data.CustomerDescription;
         }
 
+        /// <summary>Copies a domain model, including serialized actions and qualifications, to persistence.</summary>
         protected override void CopyModelToItem(JoinedItem<hcc_Promotions, hcc_PromotionTranslation> data,
             Promotion model)
         {
@@ -91,6 +99,7 @@ namespace Hotcakes.Commerce.Marketing
             data.Item.SortOrder = model.SortOrder;
         }
 
+        /// <summary>Copies the customer description to the localized persistence record.</summary>
         protected override void CopyModelToTrans(JoinedItem<hcc_Promotions, hcc_PromotionTranslation> data,
             Promotion model)
         {
@@ -99,11 +108,17 @@ namespace Hotcakes.Commerce.Marketing
             data.ItemTranslation.CustomerDescription = model.CustomerDescription;
         }
 
+        /// <summary>Finds a promotion by identifier in the current store scope.</summary>
+        /// <param name="id">The promotion identifier.</param>
+        /// <returns>The promotion, or <see langword="null"/> when not found.</returns>
         public Promotion Find(long id)
         {
             return FindFirstPoco(y => y.Item.Id == id);
         }
 
+        /// <summary>Creates a promotion in the current store and assigns its initial sort position.</summary>
+        /// <param name="item">The promotion to persist.</param>
+        /// <returns>Whether persistence succeeded.</returns>
         public override bool Create(Promotion item)
         {
             item.StoreId = Context.CurrentStore.Id;
@@ -126,6 +141,9 @@ namespace Hotcakes.Commerce.Marketing
             return base.Create(item);
         }
 
+        /// <summary>Updates a promotion only when its store matches the current store.</summary>
+        /// <param name="item">The promotion to update.</param>
+        /// <returns><see langword="false"/> for a different store or a failed update.</returns>
         public bool Update(Promotion item)
         {
             if (item.StoreId != Context.CurrentStore.Id)
@@ -136,22 +154,28 @@ namespace Hotcakes.Commerce.Marketing
             return Update(item, y => y.Id == item.Id);
         }
 
+        /// <summary>Deletes a promotion by identifier.</summary>
+        /// <param name="id">The promotion identifier.</param>
+        /// <returns>Whether the delete operation succeeded.</returns>
         public bool Delete(long id)
         {
             return Delete(y => y.Id == id);
         }
 
+        /// <summary>Returns all promotions for the current store.</summary>
         public List<Promotion> FindAll()
         {
             var rows = 0;
             return FindAllPaged(1, int.MaxValue, ref rows);
         }
 
+        /// <summary>Returns a page of promotions for the current store, including disabled promotions.</summary>
         public List<Promotion> FindAllPaged(int pageNumber, int pageSize, ref int totalRowCount)
         {
             return FindAllWithFilter(PromotionType.Unknown, null, true, pageNumber, pageSize, ref totalRowCount);
         }
 
+        /// <summary>Returns store-scoped promotions filtered by type, keyword, and enabled state, ordered by sort order.</summary>
         public List<Promotion> FindAllWithFilter(PromotionType type, string keyword, bool showDisabled, int pageNumber,
             int pageSize, ref int totalRowCount)
         {
@@ -202,6 +226,9 @@ namespace Hotcakes.Commerce.Marketing
             }
         }
 
+        /// <summary>Returns enabled, date-window-matching promotions of a mode for the current store.</summary>
+        /// <param name="currentDateTimeUtc">The UTC instant used for the inclusive date comparison.</param>
+        /// <param name="type">The promotion mode.</param>
         public List<Promotion> FindAllPotentiallyActive(DateTime currentDateTimeUtc, PromotionType type)
         {
             var storeId = Context.CurrentStore.Id;
@@ -219,16 +246,20 @@ namespace Hotcakes.Commerce.Marketing
             });
         }
 
+        /// <summary>Returns potentially active sale promotions for the current store.</summary>
         public List<Promotion> FindAllPotentiallyActiveSales(DateTime currentDateTimeUtc)
         {
             return FindAllPotentiallyActive(currentDateTimeUtc, PromotionType.Sale);
         }
 
+        /// <summary>Returns potentially active affiliate promotions for the current store.</summary>
         public List<Promotion> FindAllAffiliatePromotions(DateTime currentDateTimeUtc)
         {
             return FindAllPotentiallyActive(currentDateTimeUtc, PromotionType.Affiliate);
         }
 
+        /// <summary>Returns promotions whose identifiers are supplied; an empty input returns an empty list.</summary>
+        /// <param name="ids">Promotion identifiers to find.</param>
         public List<Promotion> FindByIds(List<long> ids)
         {
             if (ids == null || ids.Count == 0)
@@ -258,6 +289,10 @@ namespace Hotcakes.Commerce.Marketing
             Delete(y => y.StoreId == storeId);
         }
 
+        /// <summary>Updates sort order according to the supplied identifier sequence.</summary>
+        /// <param name="sortedIds">Identifiers in desired order.</param>
+        /// <param name="orderOffset">Value added before the one-based sequence position.</param>
+        /// <returns>Whether the update succeeded.</returns>
         public bool Resort(List<long> sortedIds, int orderOffset = 0)
         {
             if (sortedIds == null || sortedIds.Count == 0)

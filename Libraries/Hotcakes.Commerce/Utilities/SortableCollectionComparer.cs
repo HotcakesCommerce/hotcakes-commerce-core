@@ -29,18 +29,31 @@ using System.Collections;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Compares objects by reading a named public property and applying a <see cref="SortDirection"/>.
+    /// </summary>
+    /// <remarks>The selected property must exist on both objects and return an <see cref="IComparable"/> value.</remarks>
     public class SortableCollectionComparer : IComparer
     {
         private readonly SortDirection _SortDirection = SortDirection.Ascending;
 
         private readonly string _SortPropertyName = string.Empty;
 
+        /// <summary>
+        /// Initializes a comparer for ascending property sorting.
+        /// </summary>
+        /// <param name="propertyName">The public property name used for comparison.</param>
         public SortableCollectionComparer(string propertyName)
         {
             _SortPropertyName = propertyName;
             _SortDirection = SortDirection.Ascending;
         }
 
+        /// <summary>
+        /// Initializes a comparer for property sorting in the specified direction.
+        /// </summary>
+        /// <param name="propertyName">The public property name used for comparison.</param>
+        /// <param name="direction">The order in which values are returned.</param>
         public SortableCollectionComparer(string propertyName, SortDirection direction)
         {
             _SortPropertyName = propertyName;

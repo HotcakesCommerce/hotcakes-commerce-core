@@ -30,10 +30,13 @@ using Hotcakes.CommerceDTO.v1.Taxes;
 namespace Hotcakes.Commerce.Taxes
 {
     /// <summary>
+    /// Represents a store-scoped tax rate for a geographic location and tax schedule.
     /// </summary>
+    /// <remarks>Rates are retained as percentage values. Tax calculation code converts them to decimal factors before applying them to taxable amounts.</remarks>
     [Serializable]
     public class Tax
     {
+        /// <summary>Initializes a tax with zero identifiers, empty location values, zero rates, and shipping tax disabled.</summary>
         public Tax()
         {
             Id = 0;
@@ -47,57 +50,42 @@ namespace Hotcakes.Commerce.Taxes
             ApplyToShipping = false;
         }
 
-        /// <summary>
-        ///     The unique identifier or primary key of the tax object
-        /// </summary>
+        /// <summary>Gets or sets the unique identifier or primary key of the tax record.</summary>
         public long Id { get; set; }
 
-        /// <summary>
-        ///     This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
-        /// </summary>
+        /// <summary>Gets or sets the Hotcakes store identifier that owns this tax record.</summary>
+        /// <remarks>The repository assigns the current store when creating a record; this value is meaningful for multi-store installations.</remarks>
         public long StoreId { get; set; }
 
-        /// <summary>
-        ///     A unique three letter code that identifies a country following the alpha 3 standard for this tax zone.
-        /// </summary>
+        /// <summary>Gets or sets the three-letter ISO alpha-3 country code for the tax zone.</summary>
         public string CountryIsoAlpha3 { get; set; }
 
-        /// <summary>
-        ///     The two letter abbreviation for the region matching this rax zone.
-        /// </summary>
+        /// <summary>Gets or sets the region abbreviation for the tax zone.</summary>
+        /// <remarks>The existing model uses this value when matching an address; an empty stored value acts as a wildcard for the region.</remarks>
         public string RegionAbbreviation { get; set; }
 
-        /// <summary>
-        ///     The postal or zip code for the matching tax zone.
-        /// </summary>
+        /// <summary>Gets or sets the postal or ZIP code for the tax zone.</summary>
+        /// <remarks>An empty stored value acts as a wildcard for postal-code matching.</remarks>
         public string PostalCode { get; set; }
 
-        /// <summary>
-        ///     This is the ID of the tax schedule that this tax zone belongs to.
-        /// </summary>
+        /// <summary>Gets or sets the identifier of the tax schedule to which this zone belongs.</summary>
         public long TaxScheduleId { get; set; }
 
-        /// <summary>
-        ///     This is the devimal representation of the tax rate for this zone.
-        /// </summary>
+        /// <summary>Gets or sets the item tax rate for this zone.</summary>
+        /// <remarks>The value is a percentage, such as <c>7.5</c> for seven and one-half percent; calculation code divides it by 100 before applying it.</remarks>
         public decimal Rate { get; set; }
 
-        /// <summary>
-        ///     This is the decimal representation of the tax rate to apply to this zone.
-        /// </summary>
+        /// <summary>Gets or sets the shipping tax rate for this zone.</summary>
+        /// <remarks>The value is a percentage, such as <c>7.5</c> for seven and one-half percent; calculation code divides it by 100 before applying it.</remarks>
         public decimal ShippingRate { get; set; }
 
-        /// <summary>
-        ///     If true, the tax rate specified for ShippingRate will be applied to orders when they match this zone.
-        /// </summary>
+        /// <summary>Gets or sets a value indicating whether <see cref="ShippingRate"/> applies when an order matches this zone.</summary>
         public bool ApplyToShipping { get; set; }
 
         #region DTO
 
-        /// <summary>
-        ///     Allows you to convert the current tax object to the DTO equivalent for use with the REST API
-        /// </summary>
-        /// <returns>A new instance of TaxDTO</returns>
+        /// <summary>Converts this tax model to its REST API DTO representation.</summary>
+        /// <returns>A new <see cref="TaxDTO"/> containing the current property values.</returns>
         public TaxDTO ToDto()
         {
             var dto = new TaxDTO
@@ -116,10 +104,9 @@ namespace Hotcakes.Commerce.Taxes
             return dto;
         }
 
-        /// <summary>
-        ///     Allows you to populate the current tax object using an TaxDTO instance
-        /// </summary>
-        /// <param name="dto">An instance of the tax from the REST API</param>
+        /// <summary>Copies values from a REST API DTO into this tax model.</summary>
+        /// <param name="dto">The DTO to copy, or <see langword="null"/>.</param>
+        /// <remarks>If <paramref name="dto"/> is <see langword="null"/>, this method does nothing and preserves every current value.</remarks>
         public void FromDto(TaxDTO dto)
         {
             if (dto == null) return;

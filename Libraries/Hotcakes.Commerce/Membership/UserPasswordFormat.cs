@@ -26,10 +26,15 @@
 
 namespace Hotcakes.Commerce.Membership
 {
+    /// <summary>Identifies the representation used when a membership provider stores a password.</summary>
+    /// <remarks>The values describe storage format, not the format of the clear password accepted by authentication APIs. Numeric values are compatibility-sensitive.</remarks>
     public enum UserPasswordFormat
     {
+        /// <summary>The password is stored without one-way hashing.</summary>
         ClearText = 0,
+        /// <summary>The password is stored as a one-way hash.</summary>
         Hashed = 1,
+        /// <summary>The password is stored in a reversible encrypted representation.</summary>
         Encrypted = 2
     }
 }

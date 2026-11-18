@@ -32,17 +32,30 @@ using Hotcakes.Commerce.Accounts;
 
 namespace Hotcakes.Commerce.Payment
 {
+    /// <summary>
+    /// Discovers built-in and extension <see cref="PaymentMethod"/> types and filters them for store checkout.
+    /// The registry is reflection-based and initialized once; method identifiers are stable serialized values.
+    /// </summary>
     public class PaymentMethods
     {
+        /// <summary>Stable identifier for the built-in credit-card method.</summary>
         public const string CreditCardId = "4A807645-4B9D-43f1-BC07-9F233B4E713C";
+        /// <summary>Stable identifier for the built-in telephone method.</summary>
         public const string TelephoneId = "9FD35C50-CDCB-42ac-9549-14119BECBD0C";
+        /// <summary>Stable identifier for the built-in check method.</summary>
         public const string CheckId = "494A61C8-D7E7-457f-B293-4838EF010C32";
+        /// <summary>Stable identifier for the built-in purchase-order method.</summary>
         public const string PurchaseOrderId = "26C948F3-22EF-4bcb-9AE9-DEB9839BF4A7";
+        /// <summary>Stable identifier for the built-in company-account method.</summary>
         public const string CompanyAccountId = "43AE5D2D-A62B-4EB3-BAAF-176EB509C9B5";
+        /// <summary>Stable identifier for the built-in cash-on-delivery method.</summary>
         public const string CashOnDeliveryId = "EE171EFD-9E4A-4eda-AD70-4CB99F28E06C";
 
+        /// <summary>Stable identifier for the built-in PayPal Express method.</summary>
         public const string PaypalExpressId = "33eeba60-e5b7-4864-9b57-3f8d614f8301";
+        /// <summary>Stable identifier for the built-in Moneris method.</summary>
         public const string MonerisId = "900823BF-136A-4DF7-BBCC-ADE04E43F797";
+        /// <summary>Stable identifier for the built-in Ogone method.</summary>
         public const string OgoneId = "F2E3D35A-B6F1-4CFE-AA40-67CDC4DBE46E";
 
         static PaymentMethods()
@@ -83,11 +96,21 @@ namespace Hotcakes.Commerce.Payment
             }
         }
 
+        /// <summary>
+        /// Gets every discovered payment method, including methods not enabled for the current store.
+        /// </summary>
+        /// <returns>The cached methods ordered by <see cref="PaymentMethod.SortIndex"/>.</returns>
         public static List<PaymentMethod> AvailableMethods()
         {
             return Methods;
         }
 
+        /// <summary>
+        /// Returns methods whose identifiers are enabled in the store settings, optionally retaining only recurring-capable methods.
+        /// </summary>
+        /// <param name="currentStore">The store whose enabled-method list is applied.</param>
+        /// <param name="showRecurringPaymentMethods">When <see langword="true"/>, excludes methods without recurring-billing support.</param>
+        /// <returns>A new filtered list; a missing enabled list produces an empty list.</returns>
         public static List<PaymentMethod> EnabledMethods(Store currentStore, bool showRecurringPaymentMethods = false)
         {
             var result = new List<PaymentMethod>();
@@ -107,6 +130,11 @@ namespace Hotcakes.Commerce.Payment
             return result;
         }
 
+        /// <summary>
+        /// Finds a discovered payment method by identifier using case-insensitive comparison.
+        /// </summary>
+        /// <param name="methodId">The stable method identifier.</param>
+        /// <returns>The matching method, or <see langword="null"/> when no method matches.</returns>
         public static PaymentMethod Find(string methodId)
         {
             return

@@ -30,18 +30,33 @@ using System.Web;
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>Builds Gravatar image URLs from email addresses.</summary>
     public class GravatarHelper
     {
+        /// <summary>
+        /// Builds the default Gravatar URL by trimming and lower-casing the email before hashing it with MD5.
+        /// </summary>
+        /// <param name="email">The email address to hash.</param>
+        /// <returns>An HTTP Gravatar URL ending in the hexadecimal email hash and <c>.jpg</c>.</returns>
         public static string GetGravatarUrlForEmail(string email)
         {
             return "http://www.gravatar.com/avatar/" + HashUserEmail(email) + ".jpg";
         }
 
+        /// <summary>Adds a size query parameter to the Gravatar URL for an email address.</summary>
+        /// <param name="email">The email address to hash.</param>
+        /// <param name="size">The requested image size.</param>
+        /// <returns>The Gravatar URL with an <c>s</c> query parameter.</returns>
         public static string GetGravatarUrlForEmailWithSize(string email, int size)
         {
             return GetGravatarUrlForEmail(email) + "?s=" + size;
         }
 
+        /// <summary>Adds size and URL-encoded default-image parameters to a Gravatar URL.</summary>
+        /// <param name="email">The email address to hash.</param>
+        /// <param name="size">The requested image size.</param>
+        /// <param name="defaultImageUrl">The fallback image URL, URL-encoded in the query string.</param>
+        /// <returns>The Gravatar URL with <c>s</c> and <c>d</c> query parameters.</returns>
         public static string GetGravatarUrlForEmailWithSizeAndDefault(string email, int size, string defaultImageUrl)
         {
             return GetGravatarUrlForEmailWithSize(email, size) + "&d=" + HttpUtility.UrlEncode(defaultImageUrl);

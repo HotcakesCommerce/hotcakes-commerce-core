@@ -28,21 +28,48 @@ using System;
 
 namespace Hotcakes.Modules.Core.Models.Json
 {
+/// <summary>
+    /// Represents the OrderSummaryJsonModel storefront model.
+    /// </summary>
     [Serializable]
     public class OrderSummaryJsonModel
     {
+        /// <summary>
+        /// Gets or sets the dynamic orderitems value used by this storefront model.
+        /// </summary>
         public dynamic orderitems;
+        /// <summary>
+        /// Gets or sets the totalsastable value used by this storefront model.
+        /// </summary>
         public string totalsastable = string.Empty;
+        /// <summary>
+        /// Initializes a new instance of the OrderSummaryJsonModel type.
+        /// </summary>
 
         public OrderSummaryJsonModel()
         {
             GiftCards = new GiftCardViewModel();
         }
 
+        /// <summary>
+        /// Gets or sets the LabelRewardsUse value used by this storefront model.
+        /// </summary>
         public string LabelRewardsUse { get; set; }
+        /// <summary>
+        /// Gets or sets the PaymentViewModel value used by this storefront model.
+        /// </summary>
         public CheckoutPaymentViewModel PaymentViewModel { get; set; }
+        /// <summary>
+        /// Gets or sets the ShippingValidationResult value used by this storefront model.
+        /// </summary>
         public AddressValidationJsonModel ShippingValidationResult { get; set; }
+        /// <summary>
+        /// Gets or sets the BillingValidationResult value used by this storefront model.
+        /// </summary>
         public AddressValidationJsonModel BillingValidationResult { get; set; }
+        /// <summary>
+        /// Gets or sets the GiftCards value used by this storefront model.
+        /// </summary>
         public GiftCardViewModel GiftCards { get; set; }
     }
 }

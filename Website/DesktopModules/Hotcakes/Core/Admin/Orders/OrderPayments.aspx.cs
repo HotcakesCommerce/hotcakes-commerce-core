@@ -36,6 +36,7 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Modules.Core.Admin.Orders
 {
+	/// <summary>Represents a callback raised when an order transaction is processed.</summary>
 	public delegate void TransactionEventDelegate();
 
     partial class OrderPayments : BaseOrderPage

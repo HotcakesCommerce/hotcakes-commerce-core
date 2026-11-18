@@ -32,6 +32,7 @@ using Hotcakes.Commerce.Marketing;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>Calculated price information for a product and a customer selection.</summary>
     public class UserSpecificPrice
     {
         public UserSpecificPrice(Product initialProduct, OptionSelections selections, StoreSettings storeSettings)
@@ -61,24 +62,29 @@ namespace Hotcakes.Commerce.Catalog
         private decimal InitialBasePrice { get; set; }
         private decimal ModifierAdjustments { get; set; }
 
+        /// <summary>Gets or sets the IsValid value.</summary>
         public bool IsValid { get; private set; }
         public string OverrideText { get; set; }
 
         public string Sku { get; private set; }
+        /// <summary>Gets or sets the VariantId value.</summary>
         public string VariantId { get; private set; }
         public List<DiscountDetail> DiscountDetails { get; set; }
 
         // Calculated Properties
+        /// <summary>Gets or sets the ListPrice value.</summary>
         public decimal ListPrice
         {
             get { return InitialListPrice + ModifierAdjustments; }
         }
 
+        /// <summary>Gets or sets the BasePrice value.</summary>
         public decimal BasePrice
         {
             get { return InitialBasePrice + ModifierAdjustments; }
         }
 
+        /// <summary>Gets or sets the Savings value.</summary>
         public decimal Savings
         {
             get
@@ -88,11 +94,13 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>Gets or sets the SavingsPercent value.</summary>
         public decimal SavingsPercent
         {
             get { return Math.Round(Savings/ListPrice*100, 0); }
         }
 
+        /// <summary>Gets or sets the ListPriceGreaterThanCurrentPrice value.</summary>
         public bool ListPriceGreaterThanCurrentPrice
         {
             get { return ListPrice > BasePrice; }
@@ -157,16 +165,25 @@ namespace Hotcakes.Commerce.Catalog
             }
         }
 
+        /// <summary>Formats the calculated price, optionally including adjustments and currency formatting.</summary>
+        /// <returns>The result of this operation.</returns>
         public string DisplayPrice()
         {
             return DisplayPrice(true);
         }
 
+        /// <summary>Formats the calculated price, optionally including adjustments and currency formatting.</summary>
+        /// <param name="includeAdjustments">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public string DisplayPrice(bool includeAdjustments)
         {
             return DisplayPrice(includeAdjustments, true);
         }
 
+        /// <summary>Formats the calculated price, optionally including adjustments and currency formatting.</summary>
+        /// <param name="includeAdjustments">Input used by this operation.</param>
+        /// <param name="noFormatting">Input used by this operation.</param>
+        /// <returns>The result of this operation.</returns>
         public string DisplayPrice(bool includeAdjustments, bool noFormatting)
         {
             if (OverrideText.Length > 0)
@@ -187,21 +204,31 @@ namespace Hotcakes.Commerce.Catalog
             return noFormatting ? BasePrice.ToString("F") : BasePrice.ToString("C");
         }
 
+        /// <summary>Adds a discount detail to the calculated price.</summary>
+        /// <param name="amount">Input used by this operation.</param>
+        /// <param name="description">Input used by this operation.</param>
+        /// <param name="promotionId">Input used by this operation.</param>
+        /// <param name="actionId">Input used by this operation.</param>
         public void AddAdjustment(decimal amount, string description, long promotionId = -1, long actionId = -1)
         {
             AddAdjustment(new DiscountDetail {Amount = amount, Description = description});
         }
 
+        /// <summary>Adds a discount detail to the calculated price.</summary>
+        /// <param name="discount">Input used by this operation.</param>
         public void AddAdjustment(DiscountDetail discount)
         {
             DiscountDetails.Add(discount);
         }
 
+        /// <summary>Removes all discount details from the calculated price.</summary>
         public void ClearAllDiscounts()
         {
             DiscountDetails.Clear();
         }
 
+        /// <summary>Returns the base price plus all discount-detail amounts.</summary>
+        /// <returns>The result of this operation.</returns>
         public decimal PriceWithAdjustments()
         {
             var result = BasePrice;

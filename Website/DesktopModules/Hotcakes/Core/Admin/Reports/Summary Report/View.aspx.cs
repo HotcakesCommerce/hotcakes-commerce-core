@@ -33,6 +33,9 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Modules.Core.Admin.Reports.Summary_Report
 {
+    /// <summary>
+    /// Displays the administrative summary report.
+    /// </summary>
     public partial class View : BaseReportPage
     {
         #region Event Handlers
@@ -59,8 +62,11 @@ namespace Hotcakes.Modules.Core.Admin.Reports.Summary_Report
                 Total = total;
             }
 
+            /// <summary>Gets or sets the report line description.</summary>
             public string Description { get; set; }
+            /// <summary>Gets or sets the optional detail value.</summary>
             public decimal? Details { get; set; }
+            /// <summary>Gets or sets the optional total value.</summary>
             public decimal? Total { get; set; }
         }
 
@@ -73,8 +79,11 @@ namespace Hotcakes.Modules.Core.Admin.Reports.Summary_Report
                 Amount = amount;
             }
 
+            /// <summary>Gets or sets the cart type.</summary>
             public string CartType { get; set; }
+            /// <summary>Gets or sets the cart count.</summary>
             public int Count { get; set; }
+            /// <summary>Gets or sets the cart amount.</summary>
             public decimal Amount { get; set; }
         }
 

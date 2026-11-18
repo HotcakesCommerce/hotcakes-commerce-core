@@ -29,6 +29,9 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>
+    /// Delegation facade for the configured event logger; the public methods preserve their historical return behavior.
+    /// </summary>
     public class EventLog
     {
         /// <summary>
@@ -57,6 +60,9 @@ namespace Hotcakes.Commerce
             return true;
         }
 
+        /// <summary>
+        /// Delegates to the configured logger and returns true after delegation; logger failures are not converted to false.
+        /// </summary>
         public static bool LogEvent(Exception ex, EventLogSeverity severity)
         {
             Factory.CreateEventLogger().LogException(ex, severity);

@@ -36,12 +36,22 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Commerce.Storage
 {
+    /// <summary>
+    /// Provides static helpers for store-scoped URLs, paths, images, uploads, file vaults, and file-manager operations.
+    /// </summary>
+    /// <remarks>
+    /// The helpers preserve the established separation between store virtual URLs and hosting-mapped physical paths. URL construction uses <see cref="GetStoreDataVirtualPath(long, string)"/>, while disk access uses <see cref="GetStoreDataPhysicalPath(long, string)"/>. They do not replace the underlying file, stream, image-processing, or path-cleaning behavior.
+    /// </remarks>
     [Serializable]
     public class DiskStorage
     {
         private const string MISSING_IMAGE_URL = "DesktopModules/Hotcakes/Core/Admin/Images/MissingImage.png";
         private const string DEFAULT_STORE_LOGO_URL = "DesktopModules/Hotcakes/Core/Admin/Images/DefaultStoreLogo.png";
 
+        /// <summary>
+        /// Gets the physical path to the built-in demo image directory, including a trailing separator.
+        /// </summary>
+        /// <value>The hosting-mapped physical demo-image path.</value>
         public static string ApplicationBuiltinDemoImagesPath
         {
             get
@@ -55,6 +65,14 @@ namespace Hotcakes.Commerce.Storage
             }
         }
 
+        /// <summary>
+        /// Validates an extension against the storage format allow-list.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="extension">The extension used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool ValidateImageType(string extension)
         {
             var result = false;
@@ -75,6 +93,14 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Validates an extension against the storage format allow-list.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="extension">The extension used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool ValidateStoreAssetType(string extension)
         {
             var result = false;
@@ -107,6 +133,16 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Copies content into store storage and applies the existing image processing lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="imageName">The imageName used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool CopyDemoProductImage(long storeId, string productId, string imageName)
         {
             try
@@ -129,6 +165,17 @@ namespace Hotcakes.Commerce.Storage
             return true;
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="productImage">The productImage used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string ProductImageUrlOriginal(HotcakesApplication app, string productId, string productImage,
             bool isSecure)
         {
@@ -144,6 +191,17 @@ namespace Hotcakes.Commerce.Storage
             return url;
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="productImage">The productImage used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string ProductImageUrlMedium(HotcakesApplication app, string productId, string productImage,
             bool isSecure)
         {
@@ -169,6 +227,17 @@ namespace Hotcakes.Commerce.Storage
             return url;
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="productImage">The productImage used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string ProductImageUrlSmall(HotcakesApplication app, string productId, string productImage,
             bool isSecure)
         {
@@ -195,6 +264,17 @@ namespace Hotcakes.Commerce.Storage
         }
 
         // Additional Image Urls
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="imageId">The imageId used by this operation.</param>
+        /// <param name="file">The file used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool UploadAdditionalProductImage(long storeId, string productId, string imageId,
             HttpPostedFile file)
         {
@@ -232,6 +312,18 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="imageId">The imageId used by this operation.</param>
+        /// <param name="fileName">The fileName used by this operation.</param>
+        /// <param name="data">The data used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool UploadProductAdditionalImage(long storeId, string productId, string imageId, string fileName,
             byte[] data)
         {
@@ -269,6 +361,15 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Deletes the targeted store content and returns the implementation-defined success result.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool DeleteAdditionalProductImage(long storeId, string productId)
         {
             var result = true;
@@ -293,6 +394,16 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Deletes the targeted store content and returns the implementation-defined success result.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="imageId">The imageId used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool DeleteAdditionalProductImage(long storeId, string productId, string imageId)
         {
             var result = true;
@@ -317,6 +428,18 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="imageId">The imageId used by this operation.</param>
+        /// <param name="productImage">The productImage used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string ProductAdditionalImageUrlOriginal(HotcakesApplication app, string productId, string imageId,
             string productImage, bool isSecure)
         {
@@ -328,6 +451,18 @@ namespace Hotcakes.Commerce.Storage
             return url;
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="imageId">The imageId used by this operation.</param>
+        /// <param name="productImage">The productImage used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string ProductAdditionalImageUrlMedium(HotcakesApplication app, string productId, string imageId,
             string productImage, bool isSecure)
         {
@@ -339,6 +474,18 @@ namespace Hotcakes.Commerce.Storage
             return url;
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="imageId">The imageId used by this operation.</param>
+        /// <param name="productImage">The productImage used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string ProductAdditionalImageUrlSmall(HotcakesApplication app, string productId, string imageId,
             string productImage, bool isSecure)
         {
@@ -350,6 +497,18 @@ namespace Hotcakes.Commerce.Storage
             return url;
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="imageId">The imageId used by this operation.</param>
+        /// <param name="productImage">The productImage used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string ProductAdditionalImageUrlTiny(HotcakesApplication app, string productId, string imageId,
             string productImage, bool isSecure)
         {
@@ -364,6 +523,18 @@ namespace Hotcakes.Commerce.Storage
             return url;
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="productImage">The productImage used by this operation.</param>
+        /// <param name="variantId">The variantId used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string ProductVariantImageUrlOriginal(HotcakesApplication app, string productId,
             string productImage, string variantId, bool isSecure)
         {
@@ -376,6 +547,18 @@ namespace Hotcakes.Commerce.Storage
             return ProductImageUrlOriginal(app, productId, productImage, isSecure);
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="productImage">The productImage used by this operation.</param>
+        /// <param name="variantId">The variantId used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string ProductVariantImageUrlMedium(HotcakesApplication app, string productId, string productImage,
             string variantId, bool isSecure)
         {
@@ -388,6 +571,18 @@ namespace Hotcakes.Commerce.Storage
             return ProductImageUrlMedium(app, productId, productImage, isSecure);
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="productImage">The productImage used by this operation.</param>
+        /// <param name="variantId">The variantId used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string ProductVariantImageUrlSmall(HotcakesApplication app, string productId, string productImage,
             string variantId, bool isSecure)
         {
@@ -453,6 +648,17 @@ namespace Hotcakes.Commerce.Storage
             return false;
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="categoryId">The categoryId used by this operation.</param>
+        /// <param name="imageName">The imageName used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string CategoryBannerUrl(HotcakesApplication app, string categoryId, string imageName,
             bool isSecure)
         {
@@ -466,6 +672,17 @@ namespace Hotcakes.Commerce.Storage
             return MissingImageUrl(app, isSecure);
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="categoryId">The categoryId used by this operation.</param>
+        /// <param name="imageName">The imageName used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string CategoryBannerOriginalUrl(HotcakesApplication app, string categoryId, string imageName,
             bool isSecure)
         {
@@ -474,6 +691,17 @@ namespace Hotcakes.Commerce.Storage
             return url;
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="categoryId">The categoryId used by this operation.</param>
+        /// <param name="imageName">The imageName used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string CategoryIconUrl(HotcakesApplication app, string categoryId, string imageName, bool isSecure)
         {
             if (string.IsNullOrWhiteSpace(imageName))
@@ -484,6 +712,17 @@ namespace Hotcakes.Commerce.Storage
             return url;
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="categoryId">The categoryId used by this operation.</param>
+        /// <param name="imageName">The imageName used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string CategoryIconOriginalUrl(HotcakesApplication app, string categoryId, string imageName,
             bool isSecure)
         {
@@ -497,11 +736,32 @@ namespace Hotcakes.Commerce.Storage
             return MissingImageUrl(app, isSecure);
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="logorevision">The logorevision used by this operation.</param>
+        /// <param name="logoimage">The logoimage used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string StoreLogoOriginalUrl(HotcakesApplication app, long logorevision, string logoimage)
         {
             return StoreLogoOriginalUrl(app, logorevision, logoimage, false);
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="logorevision">The logorevision used by this operation.</param>
+        /// <param name="logoimage">The logoimage used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string StoreLogoOriginalUrl(HotcakesApplication app, long logorevision, string logoimage,
             bool isSecure)
         {
@@ -511,11 +771,32 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="logorevision">The logorevision used by this operation.</param>
+        /// <param name="imageName">The imageName used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string StoreLogoUrl(HotcakesApplication app, long logorevision, string imageName)
         {
             return StoreLogoUrl(app, logorevision, imageName, false);
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="logorevision">The logorevision used by this operation.</param>
+        /// <param name="imageName">The imageName used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string StoreLogoUrl(HotcakesApplication app, long logorevision, string imageName, bool isSecure)
         {
             if (string.IsNullOrWhiteSpace(imageName))
@@ -527,6 +808,15 @@ namespace Hotcakes.Commerce.Storage
         }
 
 
+        /// <summary>
+        /// Deletes the targeted store content and returns the implementation-defined success result.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool DeleteProductImages(long storeId, string productId)
         {
             var result = true;
@@ -550,6 +840,16 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Deletes the targeted store content and returns the implementation-defined success result.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="variantId">The variantId used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool DeleteProductVariantImage(long storeId, string productId, string variantId)
         {
             var sourceFolder = GetStoreDataPhysicalPath(storeId);
@@ -571,6 +871,16 @@ namespace Hotcakes.Commerce.Storage
             return false;
         }
 
+        /// <summary>
+        /// Copies the targeted store content to the destination store path.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="originalId">The originalId used by this operation.</param>
+        /// <param name="newId">The newId used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool CloneAllProductFiles(long storeId, string originalId, string newId)
         {
             var result = true;
@@ -601,6 +911,18 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Copies the targeted store content to the destination store path.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="imageId">The imageId used by this operation.</param>
+        /// <param name="newProductId">The newProductId used by this operation.</param>
+        /// <param name="newImageId">The newImageId used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool CloneAdditionalImage(long storeId, string productId, string imageId, string newProductId,
             string newImageId)
         {
@@ -632,6 +954,15 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Deletes the targeted store content and returns the implementation-defined success result.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="categoryId">The categoryId used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool DeleteCategoryImages(long storeId, long categoryId)
         {
             var result = true;
@@ -660,6 +991,14 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Removes all targeted store content.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool DestroyAllFilesForStore(long storeId)
         {
             var result = true;
@@ -682,6 +1021,16 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="fileName">The fileName used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string StoreUrl(HotcakesApplication app, string fileName, bool isSecure)
         {
             return GetStoreDataUrl(app, isSecure) + fileName;
@@ -708,6 +1057,15 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Reads the requested store-scoped content.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="fileName">The fileName used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string ReadUserFile(long storeId, string fileName)
         {
             var result = string.Empty;
@@ -720,6 +1078,16 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Writes the requested store-scoped content.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="fileName">The fileName used by this operation.</param>
+        /// <param name="data">The data used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool WriteUserFile(long storeId, string fileName, string data)
         {
             var root = GetStoreDataPhysicalPath(storeId);
@@ -729,32 +1097,86 @@ namespace Hotcakes.Commerce.Storage
 
         #region Get Urls
 
+        /// <summary>
+        /// Resolves the requested Hotcakes, store, virtual, or physical path.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string GetHccVirtualPath(string subpath = "")
         {
             return "~/DesktopModules/Hotcakes/" + subpath;
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="context">The context used by this operation.</param>
+        /// <param name="subpath">The optional path appended to the administration URL.</param>
+        /// <param name="isSecure">Whether the store-root URL should use its secure form.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string GetHccAdminUrl(HccRequestContext context, string subpath = "", bool isSecure = false)
         {
             return GetStoreRootUrl(context, isSecure) + "DesktopModules/Hotcakes/Core/Admin/" + subpath;
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="context">The context used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string GetStoreRootUrl(HccRequestContext context, bool isSecure)
         {
             var urlResolver = Factory.CreateHccUrlResolver();
             return urlResolver.GetStoreRootUrl(context.CurrentStore, isSecure);
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The application whose current request context and store are used.</param>
+        /// <param name="subpath">The optional path appended to the administration URL.</param>
+        /// <param name="isSecure">Whether the store-root URL should use its secure form.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string GetHccAdminUrl(HotcakesApplication app, string subpath = "", bool isSecure = false)
         {
             return GetHccAdminUrl(app.CurrentRequestContext, subpath, isSecure);
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string GetStoreRootUrl(HotcakesApplication app, bool isSecure)
         {
             return GetStoreRootUrl(app.CurrentRequestContext, isSecure);
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="app">The app used by this operation.</param>
+        /// <param name="isSecure">The isSecure used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string GetStoreDataUrl(HotcakesApplication app, bool isSecure)
         {
             var rootUrl = GetStoreRootUrl(app, isSecure);
@@ -762,6 +1184,15 @@ namespace Hotcakes.Commerce.Storage
             return rootUrl + virtualPath.TrimStart('~', '/');
         }
 
+        /// <summary>
+        /// Resolves the requested Hotcakes, store, virtual, or physical path.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The store identifier whose data path is resolved.</param>
+        /// <param name="subpath">The optional path appended to the store data path.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string GetStoreDataVirtualPath(long storeId, string subpath = "")
         {
             var urlResolver = Factory.CreateHccUrlResolver();
@@ -769,6 +1200,15 @@ namespace Hotcakes.Commerce.Storage
             return virtualPath + subpath;
         }
 
+        /// <summary>
+        /// Resolves the requested Hotcakes, store, virtual, or physical path.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The store identifier whose physical data path is resolved.</param>
+        /// <param name="subpath">The optional path appended before mapping the virtual path.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string GetStoreDataPhysicalPath(long storeId, string subpath = "")
         {
             var virtualPath = GetStoreDataVirtualPath(storeId);
@@ -779,6 +1219,15 @@ namespace Hotcakes.Commerce.Storage
 
         #region Upload Files
 
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="pFile">The pFile used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string UploadPaymanentsAttachment(long storeId, HttpPostedFile pFile)
         {
             if (pFile != null)
@@ -796,11 +1245,29 @@ namespace Hotcakes.Commerce.Storage
             return null;
         }
 
+        /// <summary>
+        /// Builds a store-scoped URL, applying the documented image fallback and variant rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="filename">The filename used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string PaymentsAttachmentUrl(long storeId, string filename)
         {
             return GetStoreDataVirtualPath(storeId) + "affiliates/" + filename;
         }
 
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="pFile">The pFile used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string UploadTempImage(long storeId, HttpPostedFile pFile)
         {
             if (ValidateImageType(Path.GetExtension(pFile.FileName)))
@@ -811,6 +1278,16 @@ namespace Hotcakes.Commerce.Storage
             return null;
         }
 
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="pFile">The pFile used by this operation.</param>
+        /// <param name="extention">The extention used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static string UploadTempFile(long storeId, HttpPostedFile pFile, string extention)
         {
             if (Path.GetExtension(pFile.FileName).ToUpper() == extention)
@@ -821,6 +1298,17 @@ namespace Hotcakes.Commerce.Storage
             return null;
         }
 
+        /// <summary>
+        /// Copies content into store storage and applies the existing image processing lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="tempFilePath">The tempFilePath used by this operation.</param>
+        /// <param name="fileName">The fileName used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool CopyProductImage(long storeId, string productId, string tempFilePath, string fileName)
         {
             var result = false;
@@ -846,6 +1334,16 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="file">The file used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool UploadProductImage(long storeId, string productId, HttpPostedFile file)
         {
             var result = true;
@@ -878,6 +1376,17 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="fileName">The fileName used by this operation.</param>
+        /// <param name="data">The data used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool UploadProductImage(long storeId, string productId, string fileName, byte[] data)
         {
             var result = true;
@@ -910,6 +1419,18 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Copies content into store storage and applies the existing image processing lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="variantId">The variantId used by this operation.</param>
+        /// <param name="tempFilePath">The tempFilePath used by this operation.</param>
+        /// <param name="fileName">The fileName used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool CopyProductVariantImage(long storeId, string productId, string variantId, string tempFilePath,
             string fileName)
         {
@@ -941,6 +1462,17 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="productId">The productId used by this operation.</param>
+        /// <param name="variantId">The variantId used by this operation.</param>
+        /// <param name="file">The file used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool UploadProductVariantImage(long storeId, string productId, string variantId,
             HttpPostedFile file)
         {
@@ -976,6 +1508,17 @@ namespace Hotcakes.Commerce.Storage
         }
 
         // Category Banners and Icons
+        /// <summary>
+        /// Copies content into store storage and applies the existing image processing lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="categoryId">The categoryId used by this operation.</param>
+        /// <param name="tempFilePath">The tempFilePath used by this operation.</param>
+        /// <param name="fileName">The fileName used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool CopyCategoryBanner(long storeId, string categoryId, string tempFilePath, string fileName)
         {
             var result = false;
@@ -998,6 +1541,16 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="categoryId">The categoryId used by this operation.</param>
+        /// <param name="file">The file used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool UploadCategoryBanner(long storeId, string categoryId, HttpPostedFile file)
         {
             var result = true;
@@ -1026,6 +1579,17 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="categoryId">The categoryId used by this operation.</param>
+        /// <param name="fileName">The fileName used by this operation.</param>
+        /// <param name="data">The data used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool UploadCategoryBanner(long storeId, string categoryId, string fileName, byte[] data)
         {
             var result = true;
@@ -1054,6 +1618,17 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Copies content into store storage and applies the existing image processing lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="categoryId">The categoryId used by this operation.</param>
+        /// <param name="tempFilePath">The tempFilePath used by this operation.</param>
+        /// <param name="fileName">The fileName used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool CopyCategoryIcon(long storeId, string categoryId, string tempFilePath, string fileName)
         {
             var result = false;
@@ -1076,6 +1651,16 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="categoryId">The categoryId used by this operation.</param>
+        /// <param name="file">The file used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool UploadCategoryIcon(long storeId, string categoryId, HttpPostedFile file)
         {
             var result = true;
@@ -1105,6 +1690,17 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="categoryId">The categoryId used by this operation.</param>
+        /// <param name="fileName">The fileName used by this operation.</param>
+        /// <param name="data">The data used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool UploadCategoryIcon(long storeId, string categoryId, string fileName, byte[] data)
         {
             var result = true;
@@ -1134,6 +1730,15 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="store">The store used by this operation.</param>
+        /// <param name="file">The file used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool UploadStoreImage(Store store, HttpPostedFile file)
         {
             var result = true;
@@ -1162,6 +1767,16 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="store">The store used by this operation.</param>
+        /// <param name="tempFilePath">The tempFilePath used by this operation.</param>
+        /// <param name="fileName">The fileName used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool UploadStoreImage(Store store, string tempFilePath, string fileName)
         {
             var result = true;
@@ -1370,11 +1985,29 @@ namespace Hotcakes.Commerce.Storage
 
         #region Public methods / File Vault
 
+        /// <summary>
+        /// Performs the requested file-vault operation using a cleaned base file name.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         protected static string FileVaultPhysicalPath(long storeId)
         {
             return GetStoreDataPhysicalPath(storeId) + "filevault\\";
         }
 
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="diskFileName">The diskFileName used by this operation.</param>
+        /// <param name="file">The file used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool FileVaultUpload(long storeId, string diskFileName, HttpPostedFile file)
         {
             var result = true;
@@ -1392,6 +2025,16 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="diskFileName">The diskFileName used by this operation.</param>
+        /// <param name="stream">The stream used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool FileVaultUpload(long storeId, string diskFileName, FileStream stream)
         {
             var result = true;
@@ -1409,6 +2052,16 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="diskFileName">The diskFileName used by this operation.</param>
+        /// <param name="data">The data used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool FileVaultUpload(long storeId, string diskFileName, byte[] data)
         {
             var result = true;
@@ -1426,6 +2079,17 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Validates and writes uploaded content, preserving the existing replacement and image-variant lifecycle.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="diskFileName">The diskFileName used by this operation.</param>
+        /// <param name="data">The data used by this operation.</param>
+        /// <param name="isFirstPart">The isFirstPart used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool FileVaultUploadPartial(long storeId, string diskFileName, byte[] data, bool isFirstPart)
         {
             var result = false;
@@ -1467,6 +2131,15 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Performs the requested file-vault operation using a cleaned base file name.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="fileName">The fileName used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool FileVaultRemove(long storeId, string fileName)
         {
             var f = FileVaultPhysicalPath(storeId) + Text.CleanFileName(fileName);
@@ -1479,6 +2152,15 @@ namespace Hotcakes.Commerce.Storage
             return false;
         }
 
+        /// <summary>
+        /// Performs the requested file-vault operation using a cleaned base file name.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="fileName">The fileName used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool FileVaultFileExists(long storeId, string fileName)
         {
             if (File.Exists(FileVaultPhysicalPath(storeId) + Text.CleanFileName(fileName)))
@@ -1488,6 +2170,15 @@ namespace Hotcakes.Commerce.Storage
             return false;
         }
 
+        /// <summary>
+        /// Performs the requested file-vault operation using a cleaned base file name.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="fileName">The fileName used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static byte[] FileVaultGetBytes(long storeId, string fileName)
         {
             byte[] bytes = null;
@@ -1500,6 +2191,15 @@ namespace Hotcakes.Commerce.Storage
             return bytes;
         }
 
+        /// <summary>
+        /// Performs the requested file-vault operation using a cleaned base file name.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="fileName">The fileName used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static FileStream FileVaultGetStream(long storeId, string fileName)
         {
             FileStream stream = null;
@@ -1517,6 +2217,14 @@ namespace Hotcakes.Commerce.Storage
 
         #region Public methods / File Manager
 
+        /// <summary>
+        /// Cleans a file-manager path using the implementation's separator, character, parent-marker, and duplicate-separator rules.
+        /// </summary>
+        /// <remarks>
+        /// This is string cleaning rather than full canonical-path validation: it removes selected characters and occurrences of <c>..</c>, trims leading separators, and stops after the built-in duplicate-separator fail-safe. It does not establish filesystem authorization by itself.
+        /// </remarks>
+        /// <param name="rawPath">The raw file-manager path to clean.</param>
+        /// <returns>The cleaned path, or an empty string when the duplicate-separator fail-safe is exceeded.</returns>
         public static string FileManagerCleanPath(string rawPath)
         {
             var correctPath = rawPath.Replace('/', '\\');
@@ -1557,6 +2265,14 @@ namespace Hotcakes.Commerce.Storage
             return fullPath;
         }
 
+        /// <summary>
+        /// Performs the requested file-manager operation after the implementation's path cleaning rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="path">The path used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool FileManagerIsSystemPath(string path)
         {
             var p = FileManagerCleanPath(path);
@@ -1570,6 +2286,15 @@ namespace Hotcakes.Commerce.Storage
             return false;
         }
 
+        /// <summary>
+        /// Performs the requested file-manager operation after the implementation's path cleaning rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="path">The path used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static List<string> FileManagerListDirectories(long storeId, string path)
         {
             var result = new List<string>();
@@ -1591,6 +2316,15 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Performs the requested file-manager operation after the implementation's path cleaning rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="path">The path used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static List<string> FileManagerListFiles(long storeId, string path)
         {
             var result = new List<string>();
@@ -1612,6 +2346,15 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Performs the requested file-manager operation after the implementation's path cleaning rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="path">The path used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool FileManagerCreateDirectory(long storeId, string path)
         {
             var result = false;
@@ -1636,6 +2379,15 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Deletes the targeted store content and returns the implementation-defined success result.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="path">The path used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool FileManagerDeleteDirectory(long storeId, string path)
         {
             var result = true;
@@ -1658,12 +2410,31 @@ namespace Hotcakes.Commerce.Storage
             return result;
         }
 
+        /// <summary>
+        /// Performs the requested file-manager operation after the implementation's path cleaning rules.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="pathAndFileName">The pathAndFileName used by this operation.</param>
+        /// <param name="file">The file used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool FileManagerCreateFile(long storeId, string pathAndFileName, HttpPostedFileBase file)
         {
             var fullPath = FullPhysicalPath(storeId, pathAndFileName);
             return WriteFileToPath(fullPath, file);
         }
 
+        /// <summary>
+        /// Deletes the targeted store content and returns the implementation-defined success result.
+        /// </summary>
+        /// <remarks>
+        /// Store URLs, virtual paths, and physical paths use the existing resolver and hosting conventions. Extension checks, cleaned names, raw HTML values, omitted fields, exception behavior, stream ownership, and return values are unchanged by this documentation.
+        /// </remarks>
+        /// <param name="storeId">The storeId used by this operation.</param>
+        /// <param name="pathAndFileName">The pathAndFileName used by this operation.</param>
+        /// <returns>The resolved value or operation result; missing files and failures retain the implementation-defined behavior.</returns>
         public static bool FileManagerDeleteFile(long storeId, string pathAndFileName)
         {
             var fullPath = FullPhysicalPath(storeId, pathAndFileName);

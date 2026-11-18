@@ -38,6 +38,9 @@ namespace Hotcakes.Commerce.Orders
     {
         private RMAStatus _status = RMAStatus.Unsubmitted;
 
+        /// <summary>
+        /// Provides the member operation while preserving the established order-domain behavior.
+        /// </summary>
         public RMA()
         {
             StoreId = 0;
@@ -57,20 +60,32 @@ namespace Hotcakes.Commerce.Orders
         /// <summary>
         ///     This is the ID of the Hotcakes store. Typically, this is 1, except in multi-tenant environments.
         /// </summary>
+        /// <summary>
+        /// The store id.
+        /// </summary>
         public long StoreId { get; set; }
 
         /// <summary>
         ///     The unique ID or bvin of the RMA
+        /// </summary>
+        /// <summary>
+        /// The bvin.
         /// </summary>
         public string Bvin { get; set; }
 
         /// <summary>
         ///     The last updated date is used for auditing purposes to know when the RMA was last updated.
         /// </summary>
+        /// <summary>
+        /// The last updated utc.
+        /// </summary>
         public DateTime LastUpdatedUtc { get; set; }
 
         /// <summary>
         ///     The unique ID or bvin of the order that this RMA is related to.
+        /// </summary>
+        /// <summary>
+        /// The order bvin.
         /// </summary>
         public string OrderBvin { get; set; }
 
@@ -80,6 +95,9 @@ namespace Hotcakes.Commerce.Orders
         /// <remarks>
         ///     Order number is not automatically loaded, set it manually
         /// </remarks>
+        /// <summary>
+        /// The order number.
+        /// </summary>
         public string OrderNumber { get; set; }
 
         /// <summary>
@@ -88,6 +106,9 @@ namespace Hotcakes.Commerce.Orders
         /// <remarks>
         ///     This value is not really used in the application at this time.
         /// </remarks>
+        /// <summary>
+        /// The name.
+        /// </summary>
         public string Name { get; set; }
 
         /// <summary>
@@ -96,6 +117,9 @@ namespace Hotcakes.Commerce.Orders
         /// <remarks>
         ///     This value is not really used in the application at this time.
         /// </remarks>
+        /// <summary>
+        /// The email address.
+        /// </summary>
         public string EmailAddress { get; set; }
 
         /// <summary>
@@ -104,6 +128,9 @@ namespace Hotcakes.Commerce.Orders
         /// <remarks>
         ///     This value is not really used in the application at this time.
         /// </remarks>
+        /// <summary>
+        /// The phone number.
+        /// </summary>
         public string PhoneNumber { get; set; }
 
         /// <summary>
@@ -112,20 +139,32 @@ namespace Hotcakes.Commerce.Orders
         /// <remarks>
         ///     This value is not really used in the application at this time.
         /// </remarks>
+        /// <summary>
+        /// The comments.
+        /// </summary>
         public string Comments { get; set; }
 
         /// <summary>
         ///     Unique identifier of the RMA for merchants and customers to use.
+        /// </summary>
+        /// <summary>
+        /// The number.
         /// </summary>
         public int Number { get; set; }
 
         /// <summary>
         ///     The date/time stamp of the return of the line item(s).
         /// </summary>
+        /// <summary>
+        /// The date of return utc.
+        /// </summary>
         public DateTime DateOfReturnUtc { get; set; }
 
         /// <summary>
         ///     A collection of the line items that are part of this RMA.
+        /// </summary>
+        /// <summary>
+        /// The items.
         /// </summary>
         public List<RMAItem> Items { get; set; }
 

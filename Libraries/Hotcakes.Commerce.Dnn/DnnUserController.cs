@@ -39,27 +39,124 @@ using Hotcakes.Commerce.Membership;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Provides access to DNN users, roles, and account operations.
+    /// </summary>
     public interface IUserController
     {
+        /// <summary>
+        /// Gets the authenticated user for the current portal.
+        /// </summary>
+        /// <returns>The current <see cref="UserInfo"/>, or <see langword="null"/> when the request is anonymous or has no portal.</returns>
         UserInfo GetCurrentUserInfo();
 
+        /// <summary>
+        /// Builds a DNN user record without persisting it.
+        /// </summary>
+        /// <param name="username">The user's login name.</param>
+        /// <param name="firstname">The user's first name.</param>
+        /// <param name="lastname">The user's last name.</param>
+        /// <param name="email">The user's email address.</param>
+        /// <param name="password">The user's initial password.</param>
+        /// <param name="portalId">The portal that owns the user.</param>
+        /// <returns>A populated <see cref="UserInfo"/> ready for creation.</returns>
         UserInfo BuildUserInfo(string username, string firstname, string lastname, string email, string password,
             int portalId);
 
+        /// <summary>
+        /// Creates a DNN user and maps the DNN result to a Hotcakes status.
+        /// </summary>
+        /// <param name="user">The user to create.</param>
+        /// <returns>The result of the create operation.</returns>
         CreateUserStatus CreateUser(ref UserInfo user);
+
+        /// <summary>
+        /// Updates a user in the specified portal.
+        /// </summary>
+        /// <param name="portalId">The portal that owns the user.</param>
+        /// <param name="user">The user to update.</param>
         void UpdateUser(int portalId, UserInfo user);
+
+        /// <summary>
+        /// Gets a user by portal and user identifier.
+        /// </summary>
+        /// <param name="portalId">The portal identifier.</param>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="useCache">Whether to use DNN's cached user information.</param>
+        /// <returns>The matching <see cref="UserInfo"/>, or <see langword="null"/> when no user exists.</returns>
         UserInfo GetUser(int portalId, int userId, bool useCache = true);
+
+        /// <summary>
+        /// Gets users belonging to a portal.
+        /// </summary>
+        /// <param name="portalId">The portal identifier.</param>
+        /// <param name="includeSuperUsers">Whether to include superusers in addition to portal users.</param>
+        /// <returns>The users found for the requested scope.</returns>
         List<UserInfo> GetUsers(int portalId, bool includeSuperUsers = false);
+
+        /// <summary>
+        /// Gets user and profile records directly from the DNN database views.
+        /// </summary>
+        /// <param name="portalId">The portal identifier used to establish the database context.</param>
+        /// <param name="userIds">The user identifiers to retrieve.</param>
+        /// <returns>The matching database user records with profiles.</returns>
         List<DnnUser> GetUsersFromDb(int portalId, List<int> userIds);
+
+        /// <summary>
+        /// Finds user identifiers whose display name, first name, last name, or email contains the filter.
+        /// </summary>
+        /// <param name="filter">The text to search for.</param>
+        /// <returns>The identifiers of matching users.</returns>
         List<int> FindUserIds(string filter);
+
+        /// <summary>
+        /// Adds a user to a role, creating the role when necessary.
+        /// </summary>
+        /// <param name="portalId">The portal identifier.</param>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="roleName">The role name.</param>
         void AddUserRole(int portalId, int userId, string roleName);
+
+        /// <summary>
+        /// Removes a user from a role when both the role and user exist.
+        /// </summary>
+        /// <param name="portalSettings">The settings for the portal containing the role.</param>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="roleName">The role name.</param>
         void RemoveUserRole(PortalSettings portalSettings, int userId, string roleName);
+
+        /// <summary>
+        /// Gets the roles for the current portal.
+        /// </summary>
+        /// <returns>The roles configured for the current portal.</returns>
         List<RoleInfo> GetRoles();
+
+        /// <summary>
+        /// Determines whether a user is a portal administrator or superuser.
+        /// </summary>
+        /// <param name="u">The user to evaluate.</param>
+        /// <returns><see langword="true"/> when the user has portal administrator privileges; otherwise, <see langword="false"/>.</returns>
         bool IsPortalAdmin(UserInfo u);
+
+        /// <summary>
+        /// Changes a user's password after validating the current password answer.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="password">The new password.</param>
+        /// <param name="paswordAnswer">The answer to the user's password question.</param>
         void ResetPassword(int userId, string password, string paswordAnswer);
+
+        /// <summary>
+        /// Determines whether a username is already registered in DNN.
+        /// </summary>
+        /// <param name="username">The username to find.</param>
+        /// <returns><see langword="true"/> when the username exists; otherwise, <see langword="false"/>.</returns>
         bool IsDnnUsernameExists(string username);
     }
 
+    /// <summary>
+    /// Provides the DNN user and role operations used by Hotcakes Commerce.
+    /// </summary>
     [Serializable]
     public class DnnUserController : ServiceLocator<IUserController, DnnUserController>
     {
@@ -70,6 +167,10 @@ namespace Hotcakes.Commerce.Dnn
 
         internal class UserControllerImpl : IUserController
         {
+            /// <summary>
+            /// Gets the authenticated user for the current portal.
+            /// </summary>
+            /// <returns>The current <see cref="UserInfo"/>, or <see langword="null"/> when the request is anonymous or has no portal.</returns>
             public UserInfo GetCurrentUserInfo()
             {
                 var portalId = DnnGlobal.Instance.GetPortalId();
@@ -83,6 +184,13 @@ namespace Hotcakes.Commerce.Dnn
                 return null;
             }
 
+            /// <summary>
+            /// Gets a user by portal and user identifier.
+            /// </summary>
+            /// <param name="portalId">The portal identifier.</param>
+            /// <param name="userId">The user identifier.</param>
+            /// <param name="useCache">Whether to use DNN's cached user information.</param>
+            /// <returns>The matching <see cref="UserInfo"/>, or <see langword="null"/> when no user exists.</returns>
             public UserInfo GetUser(int portalId, int userId, bool useCache = true)
             {
                 if (useCache)
@@ -97,6 +205,12 @@ namespace Hotcakes.Commerce.Dnn
                 return user;
             }
 
+            /// <summary>
+            /// Gets users belonging to a portal.
+            /// </summary>
+            /// <param name="portalId">The portal identifier.</param>
+            /// <param name="includeSuperUsers">Whether to include superusers in addition to portal users.</param>
+            /// <returns>The users found for the requested scope.</returns>
             public List<UserInfo> GetUsers(int portalId, bool includeSuperUsers = false)
             {
                 var users = UserController.GetUsers(portalId).OfType<UserInfo>().ToList();
@@ -109,6 +223,12 @@ namespace Hotcakes.Commerce.Dnn
                 return users;
             }
 
+            /// <summary>
+            /// Gets user and profile records directly from the DNN database views.
+            /// </summary>
+            /// <param name="portalId">The portal identifier used to establish the database context.</param>
+            /// <param name="userIds">The user identifiers to retrieve.</param>
+            /// <returns>The matching database user records with profiles.</returns>
             public List<DnnUser> GetUsersFromDb(int portalId, List<int> userIds)
             {
                 using (var dnnDb = DnnDbContext.Instantiate())
@@ -128,6 +248,11 @@ namespace Hotcakes.Commerce.Dnn
                 }
             }
 
+            /// <summary>
+            /// Finds user identifiers whose display name, first name, last name, or email contains the filter.
+            /// </summary>
+            /// <param name="filter">The text to search for.</param>
+            /// <returns>The identifiers of matching users.</returns>
             public List<int> FindUserIds(string filter)
             {
                 using (var dnnDb = DnnDbContext.Instantiate())
@@ -142,6 +267,16 @@ namespace Hotcakes.Commerce.Dnn
                 }
             }
 
+            /// <summary>
+            /// Builds a DNN user record without persisting it.
+            /// </summary>
+            /// <param name="username">The user's login name.</param>
+            /// <param name="firstname">The user's first name.</param>
+            /// <param name="lastname">The user's last name.</param>
+            /// <param name="email">The user's email address.</param>
+            /// <param name="password">The user's initial password.</param>
+            /// <param name="portalId">The portal that owns the user.</param>
+            /// <returns>A populated <see cref="UserInfo"/> ready for creation.</returns>
             public UserInfo BuildUserInfo(string username, string firstname, string lastname, string email,
                 string password, int portalId)
             {
@@ -164,6 +299,11 @@ namespace Hotcakes.Commerce.Dnn
                 return ui;
             }
 
+            /// <summary>
+            /// Creates a DNN user and maps the DNN result to a Hotcakes status.
+            /// </summary>
+            /// <param name="user">The user to create.</param>
+            /// <returns>The result of the create operation.</returns>
             public CreateUserStatus CreateUser(ref UserInfo user)
             {
                 var cuStatus = CreateUserStatus.None;
@@ -195,11 +335,22 @@ namespace Hotcakes.Commerce.Dnn
                 return cuStatus;
             }
 
+            /// <summary>
+            /// Updates a user in the specified portal.
+            /// </summary>
+            /// <param name="portalId">The portal that owns the user.</param>
+            /// <param name="user">The user to update.</param>
             public void UpdateUser(int portalId, UserInfo user)
             {
                 UserController.UpdateUser(portalId, user);
             }
 
+            /// <summary>
+            /// Adds a user to a role, creating the role when necessary.
+            /// </summary>
+            /// <param name="portalId">The portal identifier.</param>
+            /// <param name="userId">The user identifier.</param>
+            /// <param name="roleName">The role name.</param>
             public void AddUserRole(int portalId, int userId, string roleName)
             {
                 var ctl = new RoleController();
@@ -222,6 +373,12 @@ namespace Hotcakes.Commerce.Dnn
                 }
             }
 
+            /// <summary>
+            /// Removes a user from a role when both the role and user exist.
+            /// </summary>
+            /// <param name="portalSettings">The settings for the portal containing the role.</param>
+            /// <param name="userId">The user identifier.</param>
+            /// <param name="roleName">The role name.</param>
             public void RemoveUserRole(PortalSettings portalSettings, int userId, string roleName)
             {
                 var role = RoleController.Instance.GetRoleByName(portalSettings.PortalId, roleName);
@@ -233,12 +390,21 @@ namespace Hotcakes.Commerce.Dnn
                 }
             }
 
+            /// <summary>
+            /// Gets the roles for the current portal.
+            /// </summary>
+            /// <returns>The roles configured for the current portal.</returns>
             public List<RoleInfo> GetRoles()
             {
                 var portalId = DnnGlobal.Instance.GetPortalId();
                 return RoleController.Instance.GetRoles(portalId).ToList();
             }
 
+            /// <summary>
+            /// Determines whether a user is a portal administrator or superuser.
+            /// </summary>
+            /// <param name="u">The user to evaluate.</param>
+            /// <returns><see langword="true"/> when the user has portal administrator privileges; otherwise, <see langword="false"/>.</returns>
             public bool IsPortalAdmin(UserInfo u)
             {
                 var pSett = DnnGlobal.Instance.GetCurrentPortalSettings();
@@ -247,12 +413,23 @@ namespace Hotcakes.Commerce.Dnn
                 return false;
             }
 
+            /// <summary>
+            /// Changes a user's password after validating the current password answer.
+            /// </summary>
+            /// <param name="userId">The user identifier.</param>
+            /// <param name="password">The new password.</param>
+            /// <param name="paswordAnswer">The answer to the user's password question.</param>
             public void ResetPassword(int userId, string password, string paswordAnswer)
             {
                 var ui = GetUser(DnnGlobal.Instance.GetPortalId(), userId);
                 UserController.ChangePassword(ui, UserController.GetPassword(ref ui, paswordAnswer), password);
             }
 
+            /// <summary>
+            /// Determines whether a username is already registered in DNN.
+            /// </summary>
+            /// <param name="username">The username to find.</param>
+            /// <returns><see langword="true"/> when the username exists; otherwise, <see langword="false"/>.</returns>
             public bool IsDnnUsernameExists(string username)
             {
                 var totalCount = 0;

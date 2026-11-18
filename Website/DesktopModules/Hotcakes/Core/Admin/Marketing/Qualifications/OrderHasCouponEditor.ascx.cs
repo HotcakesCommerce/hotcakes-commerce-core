@@ -32,6 +32,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 {
+    /// <summary>
+    /// Edits a qualification based on an order coupon.
+    /// </summary>
     public partial class OrderHasCouponEditor : BaseQualificationControl
     {
         private OrderHasCoupon TypedQualification
@@ -67,6 +70,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             LoadQualification();
         }
 
+        /// <summary>Loads the order-coupon qualification into the editor.</summary>
         public override void LoadQualification()
         {
             var displayData = new List<FriendlyBvinDisplay>();
@@ -88,6 +92,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             gvOrderCoupons.DataBind();
         }
 
+        /// <summary>Saves the order-coupon qualification.</summary>
+        /// <returns><see langword="true"/> when the qualification is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveQualification()
         {
             return UpdatePromotion();

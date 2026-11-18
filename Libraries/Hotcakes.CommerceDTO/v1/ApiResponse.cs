@@ -30,18 +30,32 @@ using System.Runtime.Serialization;
 
 namespace Hotcakes.CommerceDTO.v1
 {
+    /// <summary>
+    /// Represents the standard API response envelope for content and any returned <see cref="ApiError"/> instances.
+    /// </summary>
+    /// <typeparam name="T">The type of the response content.</typeparam>
     [DataContract]
     [Serializable]
     public class ApiResponse<T> : IApiResponse
     {
+        /// <summary>
+        /// Initializes an API response with an empty <see cref="Errors"/> collection.
+        /// </summary>
         public ApiResponse()
         {
             Errors = new List<ApiError>();
         }
 
+        /// <summary>
+        /// Gets or sets the content returned by the API operation.
+        /// </summary>
         [DataMember]
         public T Content { get; set; }
 
+        /// <summary>
+        /// Gets or sets the <see cref="ApiError"/> instances returned by the API operation.
+        /// </summary>
+        /// <remarks>The collection is initialized by the default constructor and may be empty when the operation succeeds.</remarks>
         [DataMember]
         public List<ApiError> Errors { get; set; }
     }

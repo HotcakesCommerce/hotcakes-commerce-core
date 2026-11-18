@@ -34,10 +34,17 @@ namespace Hotcakes.Commerce.Catalog
     [Serializable]
     public class BundledProductAdv : BundledProduct
     {
+        /// <summary>
+        /// Initializes a new instance of <see cref="BundledProductAdv" />.
+        /// </summary>
         public BundledProductAdv()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="BundledProductAdv" />.
+        /// </summary>
+        /// <param name="bundledProduct">Value used to initialize the instance.</param>
         public BundledProductAdv(BundledProduct bundledProduct)
             : base(bundledProduct)
         {

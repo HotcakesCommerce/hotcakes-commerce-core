@@ -26,20 +26,34 @@
 
 namespace Hotcakes.Commerce.BusinessRules
 {
+    /// <summary>Base class for tasks that calculate or process shipping rates.</summary>
+    /// <remarks>The generic context overloads cast to <see cref="ShippingTaskContext"/> and therefore require the matching context type.</remarks>
     public abstract class ShippingTask : Task
     {
+        /// <summary>Executes this shipping task using a shipping context.</summary>
+        /// <param name="context">The context to cast to <see cref="ShippingTaskContext"/>.</param>
+        /// <returns>The result returned by <see cref="Execute(ShippingTaskContext)"/>.</returns>
         public override bool Execute(TaskContext context)
         {
             return Execute((ShippingTaskContext) context);
         }
 
+        /// <summary>Rolls back this shipping task using a shipping context.</summary>
+        /// <param name="context">The context to cast to <see cref="ShippingTaskContext"/>.</param>
+        /// <returns>The result returned by <see cref="Rollback(ShippingTaskContext)"/>.</returns>
         public override bool Rollback(TaskContext context)
         {
             return Rollback((ShippingTaskContext) context);
         }
 
+        /// <summary>Executes this task against the order and shipping-rate collection.</summary>
+        /// <param name="context">The shipping workflow context.</param>
+        /// <returns><c>true</c> to continue; otherwise, <c>false</c> to trigger workflow rollback.</returns>
         public abstract bool Execute(ShippingTaskContext context);
 
+        /// <summary>Rolls back this task's shipping changes.</summary>
+        /// <param name="context">The shipping workflow context.</param>
+        /// <returns><c>true</c> when rollback succeeds; otherwise, <c>false</c>.</returns>
         public abstract bool Rollback(ShippingTaskContext context);
     }
 }

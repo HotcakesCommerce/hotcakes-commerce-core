@@ -28,9 +28,20 @@ using System;
 
 namespace Hotcakes.Shipping.Services
 {
+    /// <summary>
+    /// Defines the flat shipping amount charged for each item in a shipment.
+    /// </summary>
+    /// <seealso cref="ServiceSettings"/>
+    /// <seealso cref="FlatRatePerItem"/>
     [Serializable]
     public class FlatRatePerItemSettings : ServiceSettings
     {
+        /// <summary>
+        /// Gets or sets the shipping amount applied to each item.
+        /// </summary>
+        /// <value>The per-item amount stored under the <c>Amount</c> setting key.</value>
+        /// <seealso cref="ServiceSettings.GetDecimalSetting(string)"/>
+        /// <seealso cref="ServiceSettings.SetDecimalSetting(string, decimal)"/>
         public decimal Amount
         {
             get { return GetDecimalSetting("Amount"); }

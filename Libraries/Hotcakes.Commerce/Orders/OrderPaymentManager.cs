@@ -34,10 +34,13 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>Coordinates payment-method workflows for an order, including gateway calls and transaction recording.</summary>
+    /// <remarks>Each workflow validates the source transaction, invokes the selected payment processor when applicable, records the resulting <see cref="OrderTransaction"/>, and invalidates the in-memory transaction cache after a successful write. Gateway side effects are intentionally owned by the existing processor calls.</remarks>
     public class OrderPaymentManager
     {
         #region Constructor
 
+        /// <summary>Initializes a new instance of this type.</summary>
         public OrderPaymentManager(Order ord, HotcakesApplication app)
         {
             o = ord;
@@ -51,6 +54,7 @@ namespace Hotcakes.Commerce.Orders
 
         #region Public methods / Offline Payment
 
+        /// <summary>Records an offline payment request for the order.</summary>
         public bool OfflinePaymentAddInfo(decimal amount, string description)
         {
             var t = CreateEmptyTransaction();
@@ -79,6 +83,7 @@ namespace Hotcakes.Commerce.Orders
 
         #region Public methods
 
+        /// <summary>Finds matching order transaction data.</summary>
         public OrderTransaction FindTransactionById(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -90,6 +95,7 @@ namespace Hotcakes.Commerce.Orders
                 string.Equals(t.IdAsString, id, StringComparison.OrdinalIgnoreCase));
         }
 
+        /// <summary>Clears the applicable order transaction data.</summary>
         public bool ClearAllTransactions()
         {
             var transactions = GetCachedTransactions();
@@ -101,6 +107,7 @@ namespace Hotcakes.Commerce.Orders
             return true;
         }
 
+        /// <summary>Clears the applicable order transaction data.</summary>
         public bool ClearAllNonStoreCreditTransactions()
         {
             var transactions = GetCachedTransactions();
@@ -186,6 +193,7 @@ namespace Hotcakes.Commerce.Orders
 
         #region Public methods / Cash
 
+        /// <summary>Records the applicable cash payment action for the order.</summary>
         public bool CashReceive(decimal amount)
         {
             var t = CreateEmptyTransaction();
@@ -198,6 +206,7 @@ namespace Hotcakes.Commerce.Orders
             return result;
         }
 
+        /// <summary>Records the applicable cash payment action for the order.</summary>
         public bool CashRefund(decimal amount, string rmaBvin = "")
         {
             var t = CreateEmptyTransaction();
@@ -215,6 +224,7 @@ namespace Hotcakes.Commerce.Orders
 
         #region Public methods / Checks
 
+        /// <summary>Records the applicable check payment action for the order.</summary>
         public bool CheckReceive(decimal amount, string checkNumber)
         {
             var t = CreateEmptyTransaction();
@@ -228,6 +238,7 @@ namespace Hotcakes.Commerce.Orders
             return result;
         }
 
+        /// <summary>Records the applicable check payment action for the order.</summary>
         public bool CheckReturn(decimal amount, string checkNumber, string rmaBvin = "")
         {
             var t = CreateEmptyTransaction();
@@ -246,6 +257,7 @@ namespace Hotcakes.Commerce.Orders
 
         #region Public methods / Purchase Order
 
+        /// <summary>Records or accepts the applicable purchase-order payment action.</summary>
         public bool PurchaseOrderAccept(string poNumber)
         {
             var t = CreateEmptyTransaction();
@@ -293,11 +305,13 @@ namespace Hotcakes.Commerce.Orders
                 string.Equals(t.PurchaseOrderNumber, poNumberTrimmed, StringComparison.OrdinalIgnoreCase));
         }
 
+        /// <summary>Records or accepts the applicable purchase-order payment action.</summary>
         public List<OrderTransaction> PurchaseOrderInfoListAll()
         {
             return FindAllTransactionsOfType(ActionType.PurchaseOrderInfo);
         }
 
+        /// <summary>Records or accepts the applicable purchase-order payment action.</summary>
         public List<OrderTransaction> PurchaseOrderInfoListAllNonAccepted()
         {
             var transactions = GetCachedTransactions();
@@ -308,6 +322,7 @@ namespace Hotcakes.Commerce.Orders
                 .ToList();
         }
 
+        /// <summary>Records or accepts the applicable purchase-order payment action.</summary>
         public bool PurchaseOrderAddInfo(string poNumber, decimal amount)
         {
             var t = CreateEmptyTransaction();
@@ -324,6 +339,7 @@ namespace Hotcakes.Commerce.Orders
 
         #region Public methods / Company Account
 
+        /// <summary>Records or accepts the applicable company-account payment action.</summary>
         public bool CompanyAccountAccept(string accountNumber)
         {
             var t = CreateEmptyTransaction();
@@ -371,11 +387,13 @@ namespace Hotcakes.Commerce.Orders
                 string.Equals(t.CompanyAccountNumber, accountNumberTrimmed, StringComparison.OrdinalIgnoreCase));
         }
             
+        /// <summary>Records or accepts the applicable company-account payment action.</summary>
         public List<OrderTransaction> CompanyAccountInfoListAll()
         {
             return FindAllTransactionsOfType(ActionType.CompanyAccountInfo);
         }
 
+        /// <summary>Records or accepts the applicable company-account payment action.</summary>
         public List<OrderTransaction> CompanyAccountInfoListAllNonAccepted()
         {
             var transactions = GetCachedTransactions();
@@ -386,6 +404,7 @@ namespace Hotcakes.Commerce.Orders
                 .ToList();
         }
 
+        /// <summary>Records or accepts the applicable company-account payment action.</summary>
         public bool CompanyAccountAddInfo(string accountNumber, decimal amount)
         {
             var t = CreateEmptyTransaction();
@@ -402,6 +421,7 @@ namespace Hotcakes.Commerce.Orders
 
         #region Public methods / Credit Cards
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public bool CreditCardAddInfo(CardData card, decimal amount)
         {
             var t = CreateEmptyTransaction();
@@ -414,12 +434,14 @@ namespace Hotcakes.Commerce.Orders
             return result;
         }
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public bool CreditCardHold(string infoTransactionId, decimal amount, string securityCode = null)
         {
             var t = CreditCardInfoFind(infoTransactionId);
             return CreditCardHold(t, amount, securityCode);
         }
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public bool CreditCardHold(OrderTransaction infoTransaction, decimal amount, string securityCode = null)
         {
             if (infoTransaction == null) return false;
@@ -453,16 +475,19 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public List<OrderTransaction> CreditCardInfoListAll()
         {
             return FindAllTransactionsOfType(ActionType.CreditCardInfo);
         }
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public OrderTransaction CreditCardInfoFind(string id)
         {
             return FindSingleTransactionByTypeAndId(ActionType.CreditCardInfo, id);
         }
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public List<OrderTransaction> CreditCardHoldListAll()
         {
             var transactions = GetCachedTransactions();
@@ -473,6 +498,7 @@ namespace Hotcakes.Commerce.Orders
                 .ToList();
         }
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public List<OrderTransaction> CreditCardChargeOrCaptureListAll()
         {
             var transactions = GetCachedTransactions();
@@ -483,6 +509,7 @@ namespace Hotcakes.Commerce.Orders
                 .ToList();
         }
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public OrderTransaction CreditCardHoldFind(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -492,6 +519,7 @@ namespace Hotcakes.Commerce.Orders
             return holdList.FirstOrDefault(t => t.IdAsString == id);
         }
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public List<OrderTransaction> CreditCardChargeListAllRefundable()
         {
             var transactions = GetCachedTransactions();
@@ -502,12 +530,14 @@ namespace Hotcakes.Commerce.Orders
                 .ToList();
         }
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public bool CreditCardCapture(string holdTransactionId, decimal amount, string securityCode = null)
         {
             var t = CreditCardHoldFind(holdTransactionId);
             return CreditCardCapture(t, amount, securityCode);
         }
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public bool CreditCardCapture(OrderTransaction holdTransaction, decimal amount, string securityCode = null)
         {
             if (holdTransaction == null) return false;
@@ -544,12 +574,14 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public bool CreditCardCharge(string infoTransactionId, decimal amount, string securityCode = null)
         {
             var t = CreditCardInfoFind(infoTransactionId);
             return CreditCardCharge(t, amount, securityCode);
         }
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public bool CreditCardCharge(OrderTransaction infoTransaction, decimal amount, string securityCode = null)
         {
             if (infoTransaction == null) return false;
@@ -584,6 +616,7 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public bool CreditCardRefund(string previousTransaction, decimal amount, string securityCode = null,
             string rmaBvin = "")
         {
@@ -591,6 +624,7 @@ namespace Hotcakes.Commerce.Orders
             return CreditCardRefund(t, amount, securityCode, rmaBvin);
         }
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public bool CreditCardRefund(OrderTransaction previousTransaction, decimal amount, string securityCode = null,
             string rmaBvin = "")
         {
@@ -633,12 +667,14 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public bool CreditCardVoid(string previousTransaction, decimal amount, string securityCode = null)
         {
             var t = FindTransactionById(previousTransaction);
             return CreditCardVoid(t, amount, securityCode);
         }
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public bool CreditCardVoid(OrderTransaction previousTransaction, decimal amount, string securityCode = null)
         {
             if (previousTransaction == null) return false;
@@ -681,6 +717,7 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable credit-card transaction workflow and records its result.</summary>
         public bool CreditCardCompleteAllCreditCards()
         {
             var result = true;
@@ -741,11 +778,13 @@ namespace Hotcakes.Commerce.Orders
 
         #region Public methods / Recurring Billing
 
+        /// <summary>Performs the applicable recurring billing workflow and records its result.</summary>
         public List<OrderTransaction> RecurringSubscriptionInfoListAll()
         {
             return FindAllTransactionsOfType(ActionType.RecurringSubscriptionInfo);
         }
 
+        /// <summary>Performs the applicable recurring billing workflow and records its result.</summary>
         public bool RecurringSubscriptionAddCardInfo(CardData card)
         {
             var t = CreateEmptyTransaction();
@@ -757,6 +796,7 @@ namespace Hotcakes.Commerce.Orders
             return result;
         }
 
+        /// <summary>Performs the applicable recurring billing workflow and records its result.</summary>
         public ResultData RecurringSubscriptionCreate(OrderTransaction infoTransaction, LineItem li)
         {
             if (infoTransaction == null)
@@ -798,6 +838,7 @@ namespace Hotcakes.Commerce.Orders
             return t.Result;
         }
 
+        /// <summary>Performs the applicable recurring billing workflow and records its result.</summary>
         public ResultData RecurringSubscriptionCancel(long lineItemId)
         {
             var li = o.GetLineItem(lineItemId);
@@ -847,6 +888,7 @@ namespace Hotcakes.Commerce.Orders
             return t.Result;
         }
 
+        /// <summary>Performs the applicable recurring billing workflow and records its result.</summary>
         public ResultData RecurringSubscriptionUpdate(long lineItemId, CardData cardData)
         {
             var li = o.GetLineItem(lineItemId);
@@ -898,6 +940,7 @@ namespace Hotcakes.Commerce.Orders
             return t.Result;
         }
 
+        /// <summary>Performs the applicable recurring billing workflow and records its result.</summary>
         public bool RecurringPaymentReceive(Transaction paymentTransaction)
         {
             if (paymentTransaction == null)
@@ -921,6 +964,7 @@ namespace Hotcakes.Commerce.Orders
             return result;
         }
 
+        /// <summary>Performs the applicable recurring billing workflow and records its result.</summary>
         public List<OrderTransaction> RecurringPaymentsGetByLineItem(long lineItemId)
         {
             return FindAllTransactionsOfType(ActionType.RecurringPayment)
@@ -928,6 +972,7 @@ namespace Hotcakes.Commerce.Orders
                 .ToList();
         }
 
+        /// <summary>Gets last credit card transaction.</summary>
         public OrderTransaction GetLastCreditCardTransaction()
         {
             var allTransactions = svc.Transactions.FindAllTransactionsForOrder(o.bvin);
@@ -937,6 +982,7 @@ namespace Hotcakes.Commerce.Orders
             return allTransactions.LastOrDefault(t => t.Action == ActionType.RecurringSubscriptionCreate);
         }
 
+        /// <summary>Gets line item by subsription.</summary>
         public long? GetLineItemBySubsription(string subscriptionId)
         {
             if (string.IsNullOrEmpty(subscriptionId))
@@ -947,6 +993,7 @@ namespace Hotcakes.Commerce.Orders
             return tCreateSub?.LineItemId;
         }
 
+        /// <summary>Gets subscription by line item.</summary>
         public string GetSubscriptionByLineItem(long lineItemId)
         {
             var tCreateSub = FindAllTransactionsOfType(ActionType.RecurringSubscriptionCreate)
@@ -958,6 +1005,7 @@ namespace Hotcakes.Commerce.Orders
 
         #region Public methods / PayPal
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public bool PayPalExpressAddInfo(decimal amount, string token, string payerId)
         {
             var t = CreateEmptyTransaction();
@@ -975,17 +1023,20 @@ namespace Hotcakes.Commerce.Orders
             return result;
         }
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public bool PayPalExpressHasInfo()
         {
             var result = PayPalExpressInfoListAll();
             return result.Count > 0;
         }
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public List<OrderTransaction> PayPalExpressInfoListAll()
         {
             return FindAllTransactionsOfType(ActionType.PayPalExpressCheckoutInfo);
         }
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public OrderTransaction PayPalExpressInfoFind(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -995,6 +1046,7 @@ namespace Hotcakes.Commerce.Orders
             return infoList.FirstOrDefault(t => t.IdAsString == id);
         }
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public List<OrderTransaction> PayPalExpressHoldListAll()
         {
             var transactions = GetCachedTransactions();
@@ -1005,6 +1057,7 @@ namespace Hotcakes.Commerce.Orders
                 .ToList();
         }
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public OrderTransaction PayPalExpressHoldFind(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -1014,6 +1067,7 @@ namespace Hotcakes.Commerce.Orders
             return holdList.FirstOrDefault(t => t.IdAsString == id);
         }
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public List<OrderTransaction> PayPalExpressListAllRefundable()
         {
             var transactions = GetCachedTransactions();
@@ -1024,12 +1078,14 @@ namespace Hotcakes.Commerce.Orders
                 .ToList();
         }
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public bool PayPalExpressHold(string infoTransactionId, decimal amount)
         {
             var t = PayPalExpressInfoFind(infoTransactionId);
             return PayPalExpressHold(t, amount);
         }
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public bool PayPalExpressHold(OrderTransaction infoTransaction, decimal amount)
         {
             var txnSuccess = false;
@@ -1065,12 +1121,14 @@ namespace Hotcakes.Commerce.Orders
             return txnSuccess;
         }
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public bool PayPalExpressCapture(string holdTransactionId, decimal amount)
         {
             var t = PayPalExpressHoldFind(holdTransactionId);
             return PayPalExpressCapture(t, amount);
         }
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public bool PayPalExpressCapture(OrderTransaction holdTransaction, decimal amount)
         {
             if (holdTransaction == null) return false;
@@ -1101,12 +1159,14 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public bool PayPalExpressCharge(string infoTransactionId, decimal amount)
         {
             var t = PayPalExpressInfoFind(infoTransactionId);
             return PayPalExpressCharge(t, amount);
         }
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public bool PayPalExpressCharge(OrderTransaction infoTransaction, decimal amount)
         {
             if (infoTransaction == null) return false;
@@ -1138,12 +1198,14 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public bool PayPalExpressRefund(string previousTransaction, decimal amount, string rmaBvin = "")
         {
             var t = FindTransactionById(previousTransaction);
             return PayPalExpressRefund(t, amount, rmaBvin);
         }
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public bool PayPalExpressRefund(OrderTransaction previousTransaction, decimal amount, string rmaBvin = "")
         {
             if (previousTransaction == null) return false;
@@ -1184,12 +1246,14 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public bool PayPalExpressVoid(string previousTransaction, decimal amount)
         {
             var t = FindTransactionById(previousTransaction);
             return PayPalExpressVoid(t, amount);
         }
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public bool PayPalExpressVoid(OrderTransaction previousTransaction, decimal amount)
         {
             if (previousTransaction == null) return false;
@@ -1227,6 +1291,7 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable PayPal Express transaction workflow and records its result.</summary>
         public bool PayPalExpressCompleteAllPayments()
         {
             var result = true;
@@ -1286,6 +1351,7 @@ namespace Hotcakes.Commerce.Orders
 
         #region Public methods / Rewards Points
 
+        /// <summary>Performs the applicable rewards-points payment workflow and records its result.</summary>
         public string RewardsPointsAvailableDescription()
         {
             var result = "0 - " + 0.ToString("c");
@@ -1299,6 +1365,7 @@ namespace Hotcakes.Commerce.Orders
             return result;
         }
 
+        /// <summary>Performs the applicable rewards-points payment workflow and records its result.</summary>
         public bool RewardsPointsAddInfo(int points)
         {
             var t = CreateEmptyTransaction();
@@ -1333,12 +1400,14 @@ namespace Hotcakes.Commerce.Orders
             return t;
         }
 
+        /// <summary>Performs the applicable rewards-points payment workflow and records its result.</summary>
         public bool RewardsPointsHold(string infoTransactionId, int points)
         {
             var t = FindOrCreateRewardsInfo(infoTransactionId);
             return RewardsPointsHold(t, points);
         }
 
+        /// <summary>Performs the applicable rewards-points payment workflow and records its result.</summary>
         public bool RewardsPointsHold(OrderTransaction infoTransaction, int points)
         {
             if (infoTransaction == null) return false;
@@ -1397,12 +1466,14 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable rewards-points payment workflow and records its result.</summary>
         public bool RewardsPointsUnHold(string holdTransactionId, int points)
         {
             var t = RewardsPointsHoldFind(holdTransactionId);
             return RewardsPointsUnHold(t, points);
         }
 
+        /// <summary>Performs the applicable rewards-points payment workflow and records its result.</summary>
         public bool RewardsPointsUnHold(OrderTransaction holdTransaction, int points)
         {
             if (holdTransaction == null) return false;
@@ -1442,16 +1513,19 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable rewards-points payment workflow and records its result.</summary>
         public List<OrderTransaction> RewardsPointsInfoListAll()
         {
             return FindAllTransactionsOfType(ActionType.RewardPointsInfo);
         }
 
+        /// <summary>Performs the applicable rewards-points payment workflow and records its result.</summary>
         public OrderTransaction RewardsPointsInfoFind(string id)
         {
             return FindSingleTransactionByTypeAndId(ActionType.RewardPointsInfo, id);
         }
 
+        /// <summary>Performs the applicable rewards-points payment workflow and records its result.</summary>
         public List<OrderTransaction> RewardsPointsHoldListAll()
         {
             var transactions = GetCachedTransactions();
@@ -1462,6 +1536,7 @@ namespace Hotcakes.Commerce.Orders
                 .ToList();
         }
 
+        /// <summary>Performs the applicable rewards-points payment workflow and records its result.</summary>
         public OrderTransaction RewardsPointsHoldFind(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -1471,6 +1546,7 @@ namespace Hotcakes.Commerce.Orders
             return holdList.FirstOrDefault(t => t.IdAsString == id);
         }
 
+        /// <summary>Performs the applicable rewards-points payment workflow and records its result.</summary>
         public List<OrderTransaction> RewardsPointsListAllRefundable()
         {
             var transactions = GetCachedTransactions();
@@ -1481,12 +1557,14 @@ namespace Hotcakes.Commerce.Orders
                 .ToList();
         }
 
+        /// <summary>Performs the applicable rewards-points payment workflow and records its result.</summary>
         public bool RewardsPointsCapture(string holdTransactionId, int points)
         {
             var t = RewardsPointsHoldFind(holdTransactionId);
             return RewardsPointsCapture(t, points);
         }
 
+        /// <summary>Performs the applicable rewards-points payment workflow and records its result.</summary>
         public bool RewardsPointsCapture(OrderTransaction holdTransaction, int points)
         {
             if (holdTransaction == null) return false;
@@ -1524,12 +1602,14 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable rewards-points payment workflow and records its result.</summary>
         public bool RewardsPointsCharge(string infoTransactionId, int points)
         {
             var t = FindOrCreateRewardsInfo(infoTransactionId);
             return RewardsPointsCharge(t, points);
         }
 
+        /// <summary>Performs the applicable rewards-points payment workflow and records its result.</summary>
         public bool RewardsPointsCharge(OrderTransaction infoTransaction, int points)
         {
             if (infoTransaction == null) return false;
@@ -1587,12 +1667,14 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable rewards-points payment workflow and records its result.</summary>
         public bool RewardsPointsRefund(string previousTransaction, int points, string rmaBvin = "")
         {
             var t = FindTransactionById(previousTransaction);
             return RewardsPointsRefund(t, points, rmaBvin);
         }
 
+        /// <summary>Performs the applicable rewards-points payment workflow and records its result.</summary>
         public bool RewardsPointsRefund(OrderTransaction previousTransaction, int points, string rmaBvin = "")
         {
             if (previousTransaction == null) return false;
@@ -1698,6 +1780,7 @@ namespace Hotcakes.Commerce.Orders
             return GiftCardHold(t, amount);
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public bool GiftCardHold(OrderTransaction infoTransaction, decimal amount)
         {
             if (infoTransaction == null) return false;
@@ -1730,16 +1813,19 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public List<OrderTransaction> GiftCardInfoListAll()
         {
             return FindAllTransactionsOfType(ActionType.GiftCardInfo);
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public OrderTransaction GiftCardInfoFind(string id)
         {
             return FindSingleTransactionByTypeAndId(ActionType.GiftCardInfo, id);
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public OrderTransaction GiftCardInfoFindByNumber(string giftCardNumber)
         {
             if (string.IsNullOrEmpty(giftCardNumber))
@@ -1752,6 +1838,7 @@ namespace Hotcakes.Commerce.Orders
                 string.Equals(ot.GiftCard.CardNumber, giftCardNumberTrimmed, StringComparison.OrdinalIgnoreCase));
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public List<OrderTransaction> GiftCardHoldListAll()
         {
             var transactions = GetCachedTransactions();
@@ -1762,6 +1849,7 @@ namespace Hotcakes.Commerce.Orders
                 .ToList();
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public List<OrderTransaction> GiftCardChargeOrCaptureListAll()
         {
             var transactions = GetCachedTransactions();
@@ -1772,6 +1860,7 @@ namespace Hotcakes.Commerce.Orders
                 .ToList();
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public OrderTransaction GiftCardHoldFind(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -1781,6 +1870,7 @@ namespace Hotcakes.Commerce.Orders
             return holdList.FirstOrDefault(t => t.IdAsString == id);
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public List<OrderTransaction> GiftCardChargeListAllRefundable()
         {
             var transactions = GetCachedTransactions();
@@ -1791,12 +1881,14 @@ namespace Hotcakes.Commerce.Orders
                 .ToList();
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public bool GiftCardCapture(string holdTransactionId, decimal amount)
         {
             var t = GiftCardHoldFind(holdTransactionId);
             return GiftCardCapture(t, amount);
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public bool GiftCardCapture(OrderTransaction holdTransaction, decimal amount)
         {
             if (holdTransaction == null) return false;
@@ -1830,6 +1922,7 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public bool GiftCardUnHold(string previousTransaction, decimal amount)
         {
             var t = FindTransactionById(previousTransaction);
@@ -1875,6 +1968,7 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public bool GiftCardDecreaseWithCard(string newCardNumber, decimal amount)
         {
             var t = CreateEmptyTransaction();
@@ -1890,12 +1984,14 @@ namespace Hotcakes.Commerce.Orders
             return false;
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public bool GiftCardDecrease(string infoTransactionId, decimal amount)
         {
             var t = GiftCardInfoFind(infoTransactionId);
             return GiftCardDecrease(t, amount);
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public bool GiftCardDecrease(OrderTransaction infoTransaction, decimal amount)
         {
             if (infoTransaction == null) return false;
@@ -1928,12 +2024,14 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public bool GiftCardIncrease(string previousTransaction, decimal amount, string rmaBvin = "")
         {
             var t = FindTransactionById(previousTransaction);
             return GiftCardIncrease(t, amount, rmaBvin);
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public bool GiftCardIncrease(OrderTransaction previousTransaction, decimal amount, string rmaBvin = "")
         {
             if (previousTransaction == null) return false;
@@ -1973,6 +2071,7 @@ namespace Hotcakes.Commerce.Orders
             return addResult;
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public bool GiftCardCompleteAllGiftCards()
         {
             var result = true;
@@ -2020,6 +2119,7 @@ namespace Hotcakes.Commerce.Orders
             return result;
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public string GiftCardCreate(GiftCardData giftCard)
         {
             var t = CreateEmptyTransaction();
@@ -2043,11 +2143,13 @@ namespace Hotcakes.Commerce.Orders
             return number;
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public bool GiftCardActivate(string giftCardNumber)
         {
             return GiftCardCallGatewayAction(giftCardNumber, ActionType.GiftCardActivate);
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public bool GiftCardDeactivate(string giftCardNumber)
         {
             return GiftCardCallGatewayAction(giftCardNumber, ActionType.GiftCardDeactivate);
@@ -2069,6 +2171,7 @@ namespace Hotcakes.Commerce.Orders
             return t.Result.Succeeded;
         }
 
+        /// <summary>Performs the applicable gift-card workflow and records its result.</summary>
         public GiftCardBalanceResponse GiftCardBalanceInquiry(string giftCardNumber)
         {
             var response = new GiftCardBalanceResponse();

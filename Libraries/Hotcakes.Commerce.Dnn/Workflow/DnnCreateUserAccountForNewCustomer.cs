@@ -37,6 +37,9 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.Dnn.Workflow
 {
+    /// <summary>
+    /// Creates a DNN user account for a new Hotcakes customer during order processing.
+    /// </summary>
     [Serializable]
     public class DnnCreateUserAccountForNewCustomer : CreateUserAccountForNewCustomer
     {
@@ -48,6 +51,11 @@ namespace Hotcakes.Commerce.Dnn.Workflow
             get { return MembershipProviderConfig.RequiresUniqueEmail; }
         }
 
+        /// <summary>
+        /// Executes the customer-account creation task.
+        /// </summary>
+        /// <param name="context">The order task context containing the customer and order.</param>
+        /// <returns><see langword="true"/> when execution succeeds; otherwise, <see langword="false"/>.</returns>
         public override bool Execute(OrderTaskContext context)
         {
             return base.Execute(context);
@@ -158,21 +166,38 @@ namespace Hotcakes.Commerce.Dnn.Workflow
             }
         }
 
+        /// <summary>
+        /// Rolls back this task.
+        /// </summary>
+        /// <param name="context">The order task context for the operation.</param>
+        /// <returns><see langword="true"/> because this task has no rollback work.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>
+        /// Gets the stable identifier for this workflow task.
+        /// </summary>
+        /// <returns>The task identifier.</returns>
         public override string TaskId()
         {
             return "39950016-1AF4-4BF3-9BAC-9D40A27C87E5";
         }
 
+        /// <summary>
+        /// Gets the display name for this workflow task.
+        /// </summary>
+        /// <returns>The task name.</returns>
         public override string TaskName()
         {
             return "Create DNN User Account for New Customer";
         }
 
+        /// <summary>
+        /// Gets the display name for this workflow step.
+        /// </summary>
+        /// <returns>The step name.</returns>
         public override string StepName()
         {
             var result = string.Empty;
@@ -184,6 +209,10 @@ namespace Hotcakes.Commerce.Dnn.Workflow
             return result;
         }
 
+        /// <summary>
+        /// Creates a new instance of this workflow task.
+        /// </summary>
+        /// <returns>A new <see cref="DnnCreateUserAccountForNewCustomer"/> instance.</returns>
         public override Task Clone()
         {
             return new DnnCreateUserAccountForNewCustomer();

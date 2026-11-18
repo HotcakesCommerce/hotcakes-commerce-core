@@ -41,6 +41,9 @@ namespace Hotcakes.Modules.Core.Models
     [Serializable]
     public class AffiliateViewModel
     {
+        /// <summary>
+        /// Initializes a new instance of the AffiliateViewModel type.
+        /// </summary>
         public AffiliateViewModel()
         {
         }
@@ -100,6 +103,10 @@ namespace Hotcakes.Modules.Core.Models
             return string.IsNullOrEmpty(FirstName) || string.IsNullOrEmpty(LastName);
         }
 
+        /// <summary>
+        /// Performs the ToJson operation for this model.
+        /// </summary>
+        /// <returns>The result of the operation.</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this);
@@ -120,11 +127,17 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     Current logged in customer username
         /// </summary>
+        /// <summary>
+        /// Gets or sets the Username value used by this storefront model.
+        /// </summary>
         [Required]
         public string Username { get; set; }
 
         /// <summary>
         ///     Value used as the password to login using the affiliate account
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the Password value used by this storefront model.
         /// </summary>
         [Required]
         public string Password { get; set; }
@@ -132,11 +145,17 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     Confirmation value of the desired password
         /// </summary>
+        /// <summary>
+        /// Gets or sets the ConfirmPassword value used by this storefront model.
+        /// </summary>
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
 
         /// <summary>
         ///     The first name of the Affiliate
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the FirstName value used by this storefront model.
         /// </summary>
         [Required]
         public string FirstName { get; set; }
@@ -144,11 +163,17 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     The last name or surname of the affiliate.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the LastName value used by this storefront model.
+        /// </summary>
         [Required]
         public string LastName { get; set; }
 
         /// <summary>
         ///     Email address of the affiliate.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the Email value used by this storefront model.
         /// </summary>
         [Required]
         [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*")]
@@ -157,6 +182,9 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     User friendly/readable ID for the affiliate
         /// </summary>
+        /// <summary>
+        /// Gets or sets the MyAffiliateId value used by this storefront model.
+        /// </summary>
         [Required]
         [RegularExpression(@"[-\w]*", ErrorMessage = "Only alpha-numeric and '-', '_' characters are allowed")]
         public string MyAffiliateId { get; set; }
@@ -164,13 +192,22 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     If another affiliate referred the current affiliate applicant, the referring affiliate ID should be here.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the ReferralAffiliateId value used by this storefront model.
+        /// </summary>
         [RegularExpression(@"[-\w]*", ErrorMessage = "Only alpha-numeric and '-', '_' characters are allowed")]
         public string ReferralAffiliateId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the IsTrue value used by this storefront model.
+        /// </summary>
         public bool IsTrue { get { return true; } }
 
         /// <summary>
         ///     Checkbox to confirm the terms
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the ConfirmTerms value used by this storefront model.
         /// </summary>
         [Compare(nameof(IsTrue), ErrorMessage = "Please agree to Terms and Conditions")]
         public bool ConfirmTerms { get; set; }

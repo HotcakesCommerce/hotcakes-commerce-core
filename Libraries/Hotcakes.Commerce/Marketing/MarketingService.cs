@@ -34,11 +34,14 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.Marketing
 {
+    /// <summary>Coordinates store-scoped promotion lookup and application through a commerce request context.</summary>
     [Serializable]
     public class MarketingService : HccServiceBase
     {
         #region Constructor
 
+        /// <summary>Initializes marketing operations and a promotion repository for the request context's store.</summary>
+        /// <param name="context">The commerce request context.</param>
         public MarketingService(HccRequestContext context)
             : base(context)
         {
@@ -49,12 +52,16 @@ namespace Hotcakes.Commerce.Marketing
 
         #region Properties
 
+        /// <summary>Gets the repository used for store-scoped promotion persistence and queries.</summary>
         public PromotionRepository Promotions { get; private set; }
 
         #endregion
 
         #region Publuic methods
 
+        /// <summary>Creates an unsaved promotion template with the qualifications and actions appropriate to <paramref name="type"/>.</summary>
+        /// <param name="type">The predefined template to create.</param>
+        /// <returns>A new promotion; callers must persist and configure it.</returns>
         public Promotion GetPredefinedPromotion(PreDefinedPromotion type)
         {
             var p = new Promotion();
@@ -168,6 +175,9 @@ namespace Hotcakes.Commerce.Marketing
             return p;
         }
 
+        /// <summary>Finds store promotions containing a coupon qualification matching the code case-insensitively.</summary>
+        /// <param name="code">The coupon code; blank input returns an empty list.</param>
+        /// <returns>Matching promotions, including those whose other rules may still prevent application.</returns>
         public List<Promotion> FindPromotionsWithCouponCode(string code)
         {
             var result = new List<Promotion>();
@@ -195,6 +205,8 @@ namespace Hotcakes.Commerce.Marketing
             return result;
         }
 
+        /// <summary>Collects coupon qualification values from store promotions and returns unique uppercase codes.</summary>
+        /// <returns>Coupon codes normalized to uppercase for compatibility.</returns>
         public List<string> FindAllCouponCodes()
         {
             var promos = Promotions.FindAll();
@@ -231,6 +243,9 @@ namespace Hotcakes.Commerce.Marketing
         // This is useful to limit the number of orders we need to scan for the 
         // Sales by Coupon Report, otherwise we would need to scan every order from 
         // all time
+        /// <summary>Finds the earliest start and latest end dates among promotions containing a coupon code.</summary>
+        /// <param name="code">The coupon code; blank or unmatched input returns the default range.</param>
+        /// <returns>The combined UTC date range used to limit coupon-order searches.</returns>
         public PromotionRangeResult FindDateRangeForCouponCode(string code)
         {
             var result = new PromotionRangeResult();
@@ -270,6 +285,8 @@ namespace Hotcakes.Commerce.Marketing
             return result;
         }
 
+        /// <summary>Applies potentially active affiliate promotions to the supplied customer account.</summary>
+        /// <param name="acc">The affiliate customer account; null input is ignored.</param>
         public void ApplyAffiliatePromotions(CustomerAccount acc)
         {
             if (acc == null) return;
@@ -283,6 +300,10 @@ namespace Hotcakes.Commerce.Marketing
             }
         }
 
+        /// <summary>Applies potentially active offers of the requested mode in repository sort order.</summary>
+        /// <param name="order">The order to mutate; null input is ignored.</param>
+        /// <param name="mode">The offer mode to retrieve.</param>
+        /// <remarks>A <see cref="Promotion.DoNotCombine"/> offer is skipped when non-sale discounts already exist.</remarks>
         public void ApplyOffers(Order order, PromotionType mode)
         {
             if (order == null) return;
@@ -303,16 +324,20 @@ namespace Hotcakes.Commerce.Marketing
         #endregion
     }
 
+    /// <summary>Represents the UTC date range spanning promotions associated with a coupon code.</summary>
     public class PromotionRangeResult
     {
+        /// <summary>Initializes the broad default range used when no matching promotion is found.</summary>
         public PromotionRangeResult()
         {
             StartDateUtc = new DateTime(2010, 1, 1);
             EndDateUtc = new DateTime(3010, 1, 1);
         }
 
+        /// <summary>Gets or sets the earliest promotion start date in UTC.</summary>
         public DateTime StartDateUtc { get; set; }
 
+        /// <summary>Gets or sets the latest promotion end date in UTC.</summary>
         public DateTime EndDateUtc { get; set; }
     }
 }

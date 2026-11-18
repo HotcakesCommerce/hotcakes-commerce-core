@@ -30,10 +30,12 @@ using Hotcakes.CommerceDTO.v1.Catalog;
 namespace Hotcakes.Commerce.Catalog
 {
     /// <summary>
-    ///     Category peers information model.
-    ///     This is used in the category viewer to
-    ///     show the details related to category.
+    ///     Groups the category snapshots that surround a category in the catalog hierarchy.
     /// </summary>
+    /// <remarks>
+    ///     The three collections represent the category's ancestors, sibling categories, and direct child categories as
+    ///     presented by a category viewer. The collections are mutable and are initialized empty.
+    /// </remarks>
     public class CategoryPeerSet
     {
         private List<CategorySnapshot> _Children = new List<CategorySnapshot>();
@@ -71,9 +73,14 @@ namespace Hotcakes.Commerce.Catalog
         }
 
         /// <summary>
-        ///     Convert model class to database objcets.
+        ///     Converts this category peer set to its data-transfer representation.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     A <see cref="CategoryPeerSetDTO" /> containing DTO conversions of the current children, parents, and peers.
+        /// </returns>
+        /// <remarks>
+        ///     The conversion iterates the backing collections in their current order and does not alter this instance.
+        /// </remarks>
         public CategoryPeerSetDTO ToDto()
         {
             var result = new CategoryPeerSetDTO();

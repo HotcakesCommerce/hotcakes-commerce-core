@@ -26,11 +26,17 @@
 
 namespace Hotcakes.Commerce.BusinessRules
 {
+    /// <summary>Identifies the business area governed by a configurable workflow.</summary>
+    /// <remarks>The historical <c>WorkFlow</c> spelling is part of the public compatibility API.</remarks>
     public enum WorkFlowType
     {
+        /// <summary>An unknown or unspecified workflow type.</summary>
         Unknown = -1,
+        /// <summary>A workflow that applies to products.</summary>
         ProductWorkFlow = 1,
+        /// <summary>A workflow that applies to orders.</summary>
         OrderWorkFlow = 2,
+        /// <summary>A workflow that applies to shipping.</summary>
         ShippingWorkFlow = 3
     }
 }

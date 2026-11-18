@@ -35,6 +35,9 @@ namespace Hotcakes.Modules.Core.Models
     /// <summary>
     ///     Payment information shown on the checkout page
     /// </summary>
+    /// <summary>
+    /// Represents the PaymentViewModel storefront model.
+    /// </summary>
     [Serializable]
     [Bind(Exclude = "PaymentMethods")]
     public class PaymentViewModel
@@ -50,6 +53,9 @@ namespace Hotcakes.Modules.Core.Models
 
         /// <summary>
         ///     Selected payment method id
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the SelectedMethodId value used by this storefront model.
         /// </summary>
         [Required]
         public string SelectedMethodId { get; set; }

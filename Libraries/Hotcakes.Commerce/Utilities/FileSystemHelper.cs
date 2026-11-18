@@ -28,8 +28,19 @@ using System.IO;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Provides file-system helper extensions used by Hotcakes Commerce.
+    /// </summary>
     public static class FileSystemHelper
     {
+        /// <summary>
+        /// Deletes every file and subdirectory in the specified directory.
+        /// </summary>
+        /// <param name="directory">The directory whose immediate contents are deleted.</param>
+        /// <remarks>
+        /// The directory itself is retained. Files are deleted individually and subdirectories are deleted
+        /// recursively; failures from the underlying file-system operations are not suppressed.
+        /// </remarks>
         public static void Empty(this DirectoryInfo directory)
         {
             foreach (FileInfo file in directory.GetFiles()) file.Delete();

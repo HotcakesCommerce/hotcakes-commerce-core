@@ -26,11 +26,29 @@
 
 namespace Hotcakes.Shipping
 {
+    /// <summary>
+    /// Represents a shipping option and its estimated cost returned by an <see cref="IShippingService" />.
+    /// </summary>
     public interface IShippingRate
     {
+        /// <summary>
+        /// Gets or sets the estimated cost of using this shipping option.
+        /// </summary>
         decimal EstimatedCost { get; set; }
+
+        /// <summary>
+        /// Gets or sets the human-readable name of the shipping option.
+        /// </summary>
         string DisplayName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the identifier of the shipping service that supplied the rate.
+        /// </summary>
         string ServiceId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the service codes associated with the rate.
+        /// </summary>
         string ServiceCodes { get; set; }
     }
 }

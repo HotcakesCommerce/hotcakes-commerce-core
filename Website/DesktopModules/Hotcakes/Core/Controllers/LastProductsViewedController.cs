@@ -36,9 +36,12 @@ using Hotcakes.Modules.Core.Models;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Displays products recently viewed by the current customer.</summary>
     [Serializable]
     public class LastProductsViewedController : BaseAppController
     {
+        /// <summary>Loads and displays up to five recently viewed products.</summary>
+        /// <returns>The recently viewed products view.</returns>
         public ActionResult Index()
         {
             var model = new ProductListViewModel

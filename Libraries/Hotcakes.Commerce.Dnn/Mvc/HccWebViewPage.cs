@@ -32,21 +32,39 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Dnn.Mvc
 {
+    /// <summary>
+    /// Exposes Hotcakes and DNN context to a Razor view page through <see cref="IHccWebViewPage"/>.
+    /// </summary>
     public interface IHccWebViewPage
     {
+        /// <summary>
+        /// Gets the DNN module instance context associated with the view.
+        /// </summary>
         ModuleInstanceContext ModuleContext { get; }
     }
 
+    /// <summary>
+    /// Provides Hotcakes services and DNN module context to an untyped Razor view.
+    /// </summary>
     [Serializable]
     public abstract class HccWebViewPage : WebViewPage, IHccWebViewPage
     {
+        /// <summary>
+        /// Gets or sets the localization helper for the current view resource file.
+        /// </summary>
         public ILocalizationHelper Localization { get; set; }
 
+        /// <summary>
+        /// Gets the current Hotcakes application instance.
+        /// </summary>
         public HotcakesApplication HccApp
         {
             get { return HotcakesApplication.Current; }
         }
 
+        /// <summary>
+        /// Gets the DNN module instance context associated with the view.
+        /// </summary>
         public ModuleInstanceContext ModuleContext
         {
             get
@@ -56,6 +74,9 @@ namespace Hotcakes.Commerce.Dnn.Mvc
             }
         }
 
+        /// <summary>
+        /// Initializes MVC helpers, view localization, and the current content culture.
+        /// </summary>
         public override void InitHelpers()
         {
             base.InitHelpers();
@@ -68,16 +89,28 @@ namespace Hotcakes.Commerce.Dnn.Mvc
         }
     }
 
+    /// <summary>
+    /// Provides Hotcakes services and DNN module context to a strongly typed Razor view through <see cref="IHccWebViewPage"/>.
+    /// </summary>
     [Serializable]
     public abstract class HccWebViewPage<TModel> : WebViewPage<TModel>, IHccWebViewPage
     {
+        /// <summary>
+        /// Gets or sets the localization helper for the current view resource file.
+        /// </summary>
         public ILocalizationHelper Localization { get; set; }
 
+        /// <summary>
+        /// Gets the current Hotcakes application instance.
+        /// </summary>
         public HotcakesApplication HccApp
         {
             get { return HotcakesApplication.Current; }
         }
 
+        /// <summary>
+        /// Gets the DNN module instance context associated with the view.
+        /// </summary>
         public ModuleInstanceContext ModuleContext
         {
             get
@@ -87,6 +120,9 @@ namespace Hotcakes.Commerce.Dnn.Mvc
             }
         }
 
+        /// <summary>
+        /// Initializes MVC helpers, view localization, and the current content culture.
+        /// </summary>
         public override void InitHelpers()
         {
             base.InitHelpers();

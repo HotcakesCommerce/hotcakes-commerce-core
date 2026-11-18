@@ -28,28 +28,86 @@ using System;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Represents the catalog class <see cref="GiftCardSearchCriteria" /> and its associated behavior.
+    /// </summary>
     public class GiftCardSearchCriteria
     {
+        /// <summary>
+        /// Text used to search gift card records.
+        /// </summary>
+        /// <value>The search text passed to the gift-card search procedure.</value>
         public string SearchText { get; set; }
+        /// <summary>
+        /// Inclusive lower date boundary, in UTC, used by gift card searches.
+        /// </summary>
+        /// <value>The beginning of the issue-date range.</value>
         public DateTime StartDateUtc { get; set; }
+        /// <summary>
+        /// Inclusive upper date boundary, in UTC, used by gift card searches.
+        /// </summary>
+        /// <value>The end of the issue-date range.</value>
         public DateTime EndDateUtc { get; set; }
+        /// <summary>
+        /// Gets or sets the <see cref="ShowDisabled" /> catalog value.
+        /// </summary>
+        /// <value>The current value of <see cref="ShowDisabled" />.</value>
         public bool ShowDisabled { get; set; }
+        /// <summary>
+        /// Gets or sets the <see cref="ShowExpired" /> catalog value.
+        /// </summary>
+        /// <value>The current value of <see cref="ShowExpired" />.</value>
         public bool ShowExpired { get; set; }
+        /// <summary>
+        /// Amount comparison applied by the repository search procedure.
+        /// </summary>
+        /// <value>The operator and amount used to filter the original card amount.</value>
         public CompareCriteria<decimal> CompareAmount { get; set; }
+        /// <summary>
+        /// Remaining-balance comparison applied by the repository search procedure.
+        /// </summary>
+        /// <value>The operator and balance used to filter the remaining amount.</value>
         public CompareCriteria<decimal> CompareBalance { get; set; }
     }
 
+    /// <summary>
+    /// Describes a comparison value and operator used by a catalog search.
+    /// </summary>
+    /// <typeparam name="T">Comparable value type used by the comparison.</typeparam>
     public class CompareCriteria<T> where T : IComparable
     {
+        /// <summary>
+        /// Represents the catalog enum <see cref="CompareOperator" /> and its associated behavior.
+        /// </summary>
         public enum CompareOperator
         {
+    /// <summary>
+    /// Serialized catalog value <c>Any = 0</c>.
+    /// </summary>
             Any = 0,
+    /// <summary>
+    /// Serialized catalog value <c>GreaterThan = 1</c>.
+    /// </summary>
             GreaterThan = 1,
+    /// <summary>
+    /// Serialized catalog value <c>LessThan = 2</c>.
+    /// </summary>
             LessThan = 2,
+    /// <summary>
+    /// Serialized catalog value <c>Equal = 3</c>.
+    /// </summary>
             Equal = 3
         }
 
+        /// <summary>
+        /// Gets or sets the <see cref="Operator" /> catalog value.
+        /// </summary>
+        /// <value>The current value of <see cref="Operator" />.</value>
         public CompareOperator Operator { get; set; }
+        /// <summary>
+        /// Gets or sets the <see cref="Value" /> catalog value.
+        /// </summary>
+        /// <value>The current value of <see cref="Value" />.</value>
         public T Value { get; set; }
     }
 }

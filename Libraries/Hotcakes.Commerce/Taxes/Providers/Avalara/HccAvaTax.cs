@@ -32,9 +32,22 @@ using avt = Avalara.AvaTax.Adapter;
 
 namespace Hotcakes.Commerce.Taxes.Providers.Avalara
 {
+    /// <summary>
+    /// Provides the Avalara SOAP gateway used by the Hotcakes tax provider.
+    /// </summary>
+    /// <remarks>
+    /// This class maps Hotcakes provider contracts to AvaTax request and response contracts,
+    /// including document types, addresses, order lines, discounts, exemption values, and
+    /// aggregate results. The configured account and license are passed to the SOAP client;
+    /// this class does not redact or log them.
+    /// </remarks>
     [Serializable]
     public class HccAvaTax
     {
+        /// <summary>Initializes a gateway with the endpoint and AvaTax credentials.</summary>
+        /// <param name="url">The optional AvaTax service endpoint.</param>
+        /// <param name="account">The optional AvaTax account identifier.</param>
+        /// <param name="license">The optional AvaTax license credential.</param>
         public HccAvaTax(string url, string account, string license)
         {
             Url = url;
@@ -42,10 +55,19 @@ namespace Hotcakes.Commerce.Taxes.Providers.Avalara
             License = license;
         }
 
+        /// <summary>Gets or sets the AvaTax SOAP service endpoint.</summary>
         public string Url { get; set; }
+
+        /// <summary>Gets or sets the AvaTax account identifier.</summary>
         public string Account { get; set; }
+
+        /// <summary>Gets or sets the AvaTax license credential.</summary>
         public string License { get; set; }
 
+        /// <summary>
+        /// Pings AvaTax to test the configured connection.
+        /// </summary>
+        /// <returns>A successful <see cref="AvaTaxResult"/> when the ping returns a success severity; otherwise a failed result with service messages.</returns>
         public ITaxProviderResult TestConnection()
         {
             var result = new AvaTaxResult();
@@ -67,6 +89,28 @@ namespace Hotcakes.Commerce.Taxes.Providers.Avalara
             return result;
         }
 
+        /// <summary>
+        /// Calculates tax for a document and maps AvaTax line results into a provider result.
+        /// </summary>
+        /// <param name="docType">The local document type to map to AvaTax.</param>
+        /// <param name="companyCode">The Avalara company code.</param>
+        /// <param name="docCode">The document code sent to AvaTax.</param>
+        /// <param name="originationAddress">The document origin address.</param>
+        /// <param name="destinationAddress">The document destination address.</param>
+        /// <param name="items">The order and shipping lines to send.</param>
+        /// <param name="orderDiscount">The document discount; it is sent as its negative value.</param>
+        /// <param name="customerCode">The customer code sent to AvaTax.</param>
+        /// <param name="currencyCode">The ISO currency code sent to AvaTax.</param>
+        /// <param name="taxExempt">Whether exemption information should be included.</param>
+        /// <param name="taxExemptionNumber">The exemption number or business identification number.</param>
+        /// <param name="applyVATRules">Whether exemption and tax-included mapping follows VAT rules.</param>
+        /// <returns>A result containing totals, non-shipping line results, and shipping tax.</returns>
+        /// <remarks>
+        /// AvaTax is expected to return a shipping line as its final tax line, even when its
+        /// amount is zero. All preceding lines become <see cref="AvaTaxLineResult"/> entries;
+        /// <see cref="AvaTaxResult.ItemsTax"/> is calculated as total tax less shipping tax.
+        /// A failed call adds the fixed message <c>GetTax Failed</c> before service messages.
+        /// </remarks>
         public ITaxProviderResult GetTax(DocumentType docType, string companyCode, string docCode,
             BaseAddress originationAddress, BaseAddress destinationAddress, List<Line> items, decimal orderDiscount,
             string customerCode, string currencyCode,
@@ -145,6 +189,14 @@ namespace Hotcakes.Commerce.Taxes.Providers.Avalara
             return result;
         }
 
+        /// <summary>Posts calculated tax totals for an Avalara document.</summary>
+        /// <param name="companyCode">The Avalara company code.</param>
+        /// <param name="docCode">The document code to post.</param>
+        /// <param name="docType">The local document type to map to AvaTax.</param>
+        /// <param name="totalAmount">The document total.</param>
+        /// <param name="totalTax">The document tax total.</param>
+        /// <returns>A result carrying the supplied document code and totals, with service messages on failure.</returns>
+        /// <remarks>A failed call adds the fixed message <c>PostTax Failed</c>.</remarks>
         public ITaxProviderResult PostTax(string companyCode,
             string docCode,
             DocumentType docType,
@@ -184,6 +236,12 @@ namespace Hotcakes.Commerce.Taxes.Providers.Avalara
             return result;
         }
 
+        /// <summary>Commits an Avalara tax document.</summary>
+        /// <param name="companyCode">The Avalara company code.</param>
+        /// <param name="docCode">The document code to commit.</param>
+        /// <param name="docType">The local document type to map to AvaTax.</param>
+        /// <returns>A successful or failed result containing any formatted service messages.</returns>
+        /// <remarks>A failed call adds the fixed message <c>CommitTax Failed</c>.</remarks>
         public ITaxProviderResult CommitTax(string companyCode, string docCode, DocumentType docType)
         {
             var result = new AvaTaxResult();
@@ -214,6 +272,12 @@ namespace Hotcakes.Commerce.Taxes.Providers.Avalara
             return result;
         }
 
+        /// <summary>Cancels an Avalara tax document as deleted.</summary>
+        /// <param name="companyCode">The Avalara company code.</param>
+        /// <param name="docCode">The document code to cancel.</param>
+        /// <param name="docType">The local document type to map to AvaTax.</param>
+        /// <returns>A successful or failed result containing any formatted service messages.</returns>
+        /// <remarks>The request uses AvaTax's <c>DocDeleted</c> cancellation code. A failed call adds the fixed message <c>CancelTax Failed</c>.</remarks>
         public ITaxProviderResult CancelTax(string companyCode, string docCode, DocumentType docType)
         {
             var result = new AvaTaxResult();

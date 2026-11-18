@@ -36,16 +36,35 @@ using Hotcakes.Commerce.Accounts;
 
 namespace Hotcakes.Modules.ExtensionUrlProvider
 {
+    /// <summary>
+    /// Integrates Hotcakes product, category, and review URLs with the DNN friendly URL provider pipeline.
+    /// </summary>
     [Serializable]
     public class HccExtensionUrlProvider : DotNetNuke.Entities.Urls.ExtensionUrlProvider
     {
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(HccExtensionUrlProvider));
 
+        /// <summary>
+        /// Indicates whether DNN should always use its page path for URLs handled by this provider.
+        /// </summary>
+        /// <param name="portalId">The portal for which DNN is resolving the URL.</param>
+        /// <returns><see langword="false"/> so Hotcakes URLs can use their configured friendly path.</returns>
         public override bool AlwaysUsesDnnPagePath(int portalId)
         {
             return false;
         }
 
+        /// <summary>
+        /// Converts a Hotcakes slug URL on an eligible tab into the corresponding friendly URL path.
+        /// </summary>
+        /// <param name="tab">The DNN tab being resolved.</param>
+        /// <param name="friendlyUrlPath">The friendly URL path supplied by DNN.</param>
+        /// <param name="options">The DNN friendly URL options for the current request.</param>
+        /// <param name="cultureCode">The culture code associated with the URL request.</param>
+        /// <param name="endingPageName">The ending page name supplied by DNN.</param>
+        /// <param name="useDnnPagePath">When this method returns, indicates whether DNN should use its page path.</param>
+        /// <param name="messages">Messages collected during URL transformation.</param>
+        /// <returns>The transformed path when the request targets a configured Hotcakes tab and contains a slug; otherwise, <see langword="null"/>.</returns>
         public override string ChangeFriendlyUrl(TabInfo tab, string friendlyUrlPath, FriendlyUrlOptions options,
             string cultureCode, ref string endingPageName, out bool useDnnPagePath, ref List<string> messages)
         {
@@ -111,6 +130,18 @@ namespace Hotcakes.Modules.ExtensionUrlProvider
             return null;
         }
 
+        /// <summary>
+        /// Determines whether the request requires a redirect before DNN resolves the friendly URL.
+        /// </summary>
+        /// <param name="tabId">The DNN tab identifier for the request.</param>
+        /// <param name="portalid">The portal identifier for the request.</param>
+        /// <param name="httpAlias">The HTTP alias associated with the request.</param>
+        /// <param name="requestUri">The requested URI.</param>
+        /// <param name="queryStringCol">The query string parameters from the request.</param>
+        /// <param name="options">The DNN friendly URL options for the current request.</param>
+        /// <param name="redirectLocation">When this method returns, contains the redirect destination when a redirect is required.</param>
+        /// <param name="messages">Messages collected while checking the request.</param>
+        /// <returns><see langword="false"/> because this provider does not request redirects.</returns>
         public override bool CheckForRedirect(int tabId, int portalid, string httpAlias, Uri requestUri,
             NameValueCollection queryStringCol, FriendlyUrlOptions options, out string redirectLocation,
             ref List<string> messages)
@@ -119,11 +150,28 @@ namespace Hotcakes.Modules.ExtensionUrlProvider
             return false;
         }
 
+        /// <summary>
+        /// Gets the portal settings exposed by this URL provider.
+        /// </summary>
+        /// <returns><see langword="null"/> because this provider does not define portal settings.</returns>
         public override Dictionary<string, string> GetProviderPortalSettings()
         {
             return null;
         }
 
+        /// <summary>
+        /// Converts the path segments of an eligible Hotcakes friendly URL into query-string parameters.
+        /// </summary>
+        /// <param name="urlParms">The path segments parsed from the friendly URL.</param>
+        /// <param name="tabId">The DNN tab identifier associated with the request.</param>
+        /// <param name="portalId">The portal identifier associated with the request.</param>
+        /// <param name="options">The DNN friendly URL options for the current request.</param>
+        /// <param name="cultureCode">The culture code associated with the URL request; when empty, the portal culture is used.</param>
+        /// <param name="portalAlias">The portal alias used to locate the Hotcakes store.</param>
+        /// <param name="messages">Messages collected during URL transformation.</param>
+        /// <param name="status">When this method returns, contains the HTTP status for the transformation.</param>
+        /// <param name="location">When this method returns, contains a redirect location when one is produced.</param>
+        /// <returns>The query-string representation of the path for an eligible Hotcakes tab, or an empty string when the store or tab is not eligible.</returns>
         public override string TransformFriendlyUrlToQueryString(string[] urlParms, int tabId, int portalId,
             FriendlyUrlOptions options, string cultureCode, PortalAliasInfo portalAlias, ref List<string> messages,
             out int status, out string location)

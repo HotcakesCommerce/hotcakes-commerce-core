@@ -38,6 +38,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
 {
+    /// <summary>
+    /// Edits a promotion action that applies a category discount.
+    /// </summary>
     public partial class CategoryDiscountEditor : BaseActionControl
     {
         #region Properties
@@ -93,6 +96,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
 
         #region Overrides
 
+        /// <summary>Loads the category discount action into the editor.</summary>
         public override void LoadAction()
         {
             if (lstLineItemAdjustType.Items.Count == 0)
@@ -118,6 +122,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Actions
             LoadCategories();
         }
 
+        /// <summary>Saves the category discount action.</summary>
+        /// <returns><see langword="true"/> when the action is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveAction()
         {
             var action = TypedAction;

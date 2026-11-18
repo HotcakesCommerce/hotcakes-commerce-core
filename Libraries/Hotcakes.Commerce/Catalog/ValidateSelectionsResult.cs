@@ -26,10 +26,14 @@
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>Outcome returned when product option selections are validated.</summary>
     public enum ValidateSelectionsResult
     {
+        /// <summary>Specifies the Success value.</summary>
         Success,
+        /// <summary>Specifies the LabelsSelected value.</summary>
         LabelsSelected,
+        /// <summary>Specifies the RequiredOptionNotSelected value.</summary>
         RequiredOptionNotSelected,
         OptionsNotAvailable
     }

@@ -29,34 +29,49 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.BusinessRules
 {
+    /// <summary>Provides order workflow state together with the active commerce request context.</summary>
+    /// <remarks>Previous status values are stored in the inherited <see cref="TaskContext.Inputs"/> collection under the <c>hcc</c> namespace.</remarks>
     public class OrderTaskContext : TaskContext
     {
+        /// <summary>Initializes the context from <see cref="HccRequestContext.Current"/>.</summary>
         public OrderTaskContext()
             : this(HccRequestContext.Current)
         {
         }
 
+        /// <summary>Initializes the context with a specific commerce request context.</summary>
+        /// <param name="requestContext">The request context that defines store and request scope.</param>
         public OrderTaskContext(HccRequestContext requestContext)
         {
             RequestContext = requestContext;
         }
 
+        /// <summary>Gets or sets the order payment status from before the current workflow operation.</summary>
+        /// <value>The previous payment status stored in <see cref="TaskContext.Inputs"/>.</value>
         public OrderPaymentStatus PreviousPaymentStatus
         {
             get { return (OrderPaymentStatus) Inputs.GetPropertyAsInt("hcc", "PreviousPaymentStatus"); }
             set { Inputs.SetProperty("hcc", "PreviousPaymentStatus", (int) value); }
         }
 
+        /// <summary>Gets or sets the order status code from before the current workflow operation.</summary>
+        /// <value>The previous status code stored in <see cref="TaskContext.Inputs"/>.</value>
         public string PreviousOrderStatusCode
         {
             get { return Inputs.GetProperty("hcc", "PreviousOrderStatusCode"); }
             set { Inputs.SetProperty("hcc", "PreviousOrderStatusCode", value); }
         }
 
+        /// <summary>Gets or sets the order being processed.</summary>
+        /// <value>The order in the current store and request scope.</value>
         public Order Order { get; set; }
 
+        /// <summary>Gets or sets the commerce request context used by this workflow.</summary>
+        /// <value>The request context used to resolve the current store and application services.</value>
         public HccRequestContext RequestContext { get; set; }
 
+        /// <summary>Gets a commerce application facade bound to <see cref="RequestContext"/>.</summary>
+        /// <value>A newly constructed <see cref="HotcakesApplication"/> for the current request context.</value>
         public HotcakesApplication HccApp
         {
             get { return new HotcakesApplication(RequestContext); }

@@ -32,6 +32,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.SearchInput
 {
+    /// <summary>
+    /// Provides module settings for the search input module.
+    /// </summary>
     public partial class Settings : HotcakesSettingsBase
     {
         #region Implementation
@@ -51,6 +54,9 @@ namespace Hotcakes.Modules.SearchInput
 
         #region ModuleSettingsBase overrides
 
+        /// <summary>
+        /// Loads the search input settings into the controls.
+        /// </summary>
         public override void LoadSettings()
         {
             if (!IsPostBack)
@@ -68,6 +74,9 @@ namespace Hotcakes.Modules.SearchInput
             }
         }
 
+        /// <summary>
+        /// Saves the search input settings from the controls.
+        /// </summary>
         public override void UpdateSettings()
         {
             var controller = new ModuleController();

@@ -26,15 +26,26 @@
 
 namespace Hotcakes.Web
 {
+    /// <summary>
+    /// Specifies how frequently a sitemap URL is expected to change.
+    /// </summary>
     public enum SiteMapChangeFrequency
     {
+        /// <summary>No change frequency is written.</summary>
         NotSet,
+        /// <summary>The URL may change at any time.</summary>
         always,
+        /// <summary>The URL may change hourly.</summary>
         hourly,
+        /// <summary>The URL may change daily.</summary>
         daily,
+        /// <summary>The URL may change weekly.</summary>
         weekly,
+        /// <summary>The URL may change monthly.</summary>
         monthly,
+        /// <summary>The URL may change yearly.</summary>
         yearly,
+        /// <summary>The URL is not expected to change.</summary>
         never
     }
 }

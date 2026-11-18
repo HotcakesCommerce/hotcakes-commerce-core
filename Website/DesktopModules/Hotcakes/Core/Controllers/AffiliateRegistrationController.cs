@@ -44,10 +44,13 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Provides storefront actions for registering a customer as an affiliate.</summary>
     [Serializable]
     public class AffiliateRegistrationController : BaseAppController
     {
         private const string AffiliateRoleName = "Hotcakes Affiliate";
+        /// <summary>Displays the affiliate registration form or redirects an existing affiliate.</summary>
+        /// <returns>The registration view or affiliate dashboard redirect.</returns>
 
         public ActionResult Index()
         {
@@ -74,6 +77,9 @@ namespace Hotcakes.Modules.Core.Controllers
             return View(model);
         }
 
+        /// <summary>Registers the submitted affiliate profile and signs in the resulting customer.</summary>
+        /// <param name="model">The affiliate registration values.</param>
+        /// <returns>A JSON status response describing registration success or failure.</returns>
         [HccHttpPost]
         public ActionResult Register(AffiliateViewModel model)
         {
@@ -138,6 +144,9 @@ namespace Hotcakes.Modules.Core.Controllers
             }
         }
 
+        /// <summary>Gets the regions belonging to a country for the registration form.</summary>
+        /// <param name="countryId">The country business identifier.</param>
+        /// <returns>A JSON result containing the country's regions.</returns>
         [HccHttpPost]
         public ActionResult GetRegions(string countryId)
         {
@@ -151,6 +160,9 @@ namespace Hotcakes.Modules.Core.Controllers
             return Json(new List<Region>());
         }
 
+        /// <summary>Checks whether an affiliate identifier belongs to an enabled, approved affiliate.</summary>
+        /// <param name="affiliateId">The affiliate identifier to validate.</param>
+        /// <returns>A JSON Boolean result indicating whether the identifier is valid.</returns>
         [HccHttpPost]
         public ActionResult IsAffiliateValid(string affiliateId)
         {

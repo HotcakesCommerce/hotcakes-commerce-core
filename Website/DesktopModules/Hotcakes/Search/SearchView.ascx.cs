@@ -29,6 +29,9 @@ using Hotcakes.Modules.Core.Settings;
 
 namespace Hotcakes.Modules.Search
 {
+    /// <summary>
+    /// Hosts the storefront search results view.
+    /// </summary>
     public partial class SearchView : HotcakesModuleBase
     {
         protected override string RenderView()

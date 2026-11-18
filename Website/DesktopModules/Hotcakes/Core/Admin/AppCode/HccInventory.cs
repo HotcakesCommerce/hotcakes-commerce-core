@@ -28,6 +28,9 @@ using System;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class HccInventory.
+    /// </summary>
     [Serializable]
     public class HccInventory : HccPart
     {

@@ -29,6 +29,8 @@ using System.Collections;
 
 namespace Hotcakes.Web.Barcodes
 {
+    /// <summary>UPC-A barcode encoder.</summary>
+    /// <remarks>The encoded output is exposed through <see cref="IBarcode.Encoded_Value"/>.</remarks>
     [Serializable]
     internal class UPCA : BarcodeCommon, IBarcode
     {
@@ -59,6 +61,9 @@ namespace Hotcakes.Web.Barcodes
             "ababab", "ababba", "abbaba"
         };
 
+        /// <summary>Encodes data using the UPC-A symbology.</summary>
+        /// <param name="input">The data to encode.</param>
+        /// <seealso cref="Encoded_Value"/>
         public UPCA(string input)
         {
             Raw_Data = input;
@@ -66,6 +71,8 @@ namespace Hotcakes.Web.Barcodes
 
         #region IBarcode Members
 
+        /// <summary>Gets the encoded bar-and-space representation.</summary>
+        /// <seealso cref="IBarcode.Encoded_Value"/>
         public string Encoded_Value
         {
             get { return Encode_UPCA(); }

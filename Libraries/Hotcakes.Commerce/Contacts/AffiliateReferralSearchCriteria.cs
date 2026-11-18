@@ -28,8 +28,13 @@ using System;
 
 namespace Hotcakes.Commerce.Contacts
 {
+    /// <summary>
+    /// Defines the optional filters used when listing referrals for the current store.
+    /// </summary>
+    /// <remarks>Both date bounds must be supplied for the repository to apply the date range.</remarks>
     public class AffiliateReferralSearchCriteria
     {
+        /// <summary>Initializes criteria with no affiliate or date restriction.</summary>
         public AffiliateReferralSearchCriteria()
         {
             AffiliateId = 0;
@@ -37,8 +42,15 @@ namespace Hotcakes.Commerce.Contacts
             EndDateUtc = null;
         }
 
+        /// <summary>Gets or sets the numeric affiliate identifier to match; zero leaves this filter unused.</summary>
         public long AffiliateId { get; set; }
+
+        /// <summary>Gets or sets the inclusive UTC start of the referral date range.</summary>
+        /// <remarks>This value is considered only when <see cref="EndDateUtc"/> is also set.</remarks>
         public DateTime? StartDateUtc { get; set; }
+
+        /// <summary>Gets or sets the inclusive UTC end of the referral date range.</summary>
+        /// <remarks>This value is considered only when <see cref="StartDateUtc"/> is also set.</remarks>
         public DateTime? EndDateUtc { get; set; }
     }
 }

@@ -30,6 +30,9 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class BaseReportPage.
+    /// </summary>
     [Serializable]
     public abstract class BaseReportPage : BaseAdminPage
     {

@@ -26,15 +26,18 @@
 
 namespace Hotcakes.Shipping
 {
+    /// <summary>
+    /// Specifies the unit used for a package's weight.
+    /// </summary>
     public enum WeightType
     {
         /// <summary>
-        ///     Measured in pounds
+        /// Specifies pounds as the package weight unit.
         /// </summary>
         Pounds = 1,
 
         /// <summary>
-        ///     Measured in kilograms
+        /// Specifies kilograms as the package weight unit.
         /// </summary>
         Kilograms = 2
     }

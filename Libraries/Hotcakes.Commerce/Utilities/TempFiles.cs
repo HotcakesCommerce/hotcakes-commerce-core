@@ -30,8 +30,16 @@ using Hotcakes.Web.Logging;
 
 namespace Hotcakes.Commerce.Utilities
 {
+    /// <summary>
+    /// Creates temporary files for short-lived application work.
+    /// </summary>
     public class TempFiles
     {
+        /// <summary>
+        /// Creates a uniquely named temporary file and marks it with the temporary file attribute.
+        /// </summary>
+        /// <returns>A <see cref="FileInfo"/> for the created file, or <see langword="null"/> when creation fails.</returns>
+        /// <remarks>Failures are logged through the application's event logger.</remarks>
         public static FileInfo GetTemporaryFileInfo()
         {
             string tempFileName;

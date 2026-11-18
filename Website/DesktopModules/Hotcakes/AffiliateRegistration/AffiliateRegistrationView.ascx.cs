@@ -29,6 +29,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.AffiliateRegistration
 {
+    /// <summary>
+    /// Hosts the storefront affiliate registration view.
+    /// </summary>
     public partial class AffiliateRegistrationView : HotcakesModuleBase
     {
         protected override void OnLoad(EventArgs e)

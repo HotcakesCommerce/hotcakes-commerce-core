@@ -35,11 +35,14 @@ namespace Hotcakes.CommerceDTO.v1.Orders
     /// <summary>
     ///     This is the primary object that is used to manage all aspects of Order in the REST API.
     /// </summary>
-    /// <remarks>The main application equivalent is Order. There is also a OrderSnapshot that is used for better performance.</remarks>
+    /// <remarks>The main application equivalent is Order. The related <see cref="OrderSnapshotDTO"/> is used for better performance.</remarks>
     [DataContract]
     [Serializable]
     public class OrderDTO
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderDTO"/> class with default order values.
+        /// </summary>
         public OrderDTO()
         {
             BillingAddress = new AddressDTO();

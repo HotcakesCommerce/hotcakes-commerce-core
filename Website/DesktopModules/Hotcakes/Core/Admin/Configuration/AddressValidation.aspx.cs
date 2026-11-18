@@ -31,6 +31,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Configuration
 {
+    /// <summary>
+    /// Provides the administrative page for configuring address validation.
+    /// </summary>
     public partial class AddressValidation : BaseAdminPage
     {
         #region Implementation

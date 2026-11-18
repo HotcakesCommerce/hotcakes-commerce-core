@@ -38,6 +38,9 @@ namespace Hotcakes.Modules.Core.Models
     ///     The CreditCardViewModel is used primarily by the PaymentViewModel class to
     ///     update billing information when payment issues occur during checkout.
     /// </summary>
+    /// <summary>
+    /// Represents the CreditCardViewModel storefront model.
+    /// </summary>
     [Serializable]
     [Bind(Exclude = "AcceptedCardTypes")]
     public class CreditCardViewModel
@@ -51,6 +54,9 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     The number on the front of the card.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the CardNumber value used by this storefront model.
+        /// </summary>
         [Required(ErrorMessageResourceName = "CardNumber_Required",
             ErrorMessageResourceType = typeof (CreditCardViewModelLocalization))]
         [CreditCardNumber(ErrorMessageResourceName = "CardNumber_Invalid",
@@ -60,12 +66,18 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     Month when the card expires.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the ExpirationMonth value used by this storefront model.
+        /// </summary>
         [Required(ErrorMessageResourceName = "ExpirationMonth_Required",
             ErrorMessageResourceType = typeof (CreditCardViewModelLocalization))]
         public int ExpirationMonth { get; set; }
 
         /// <summary>
         ///     Year when the card expires.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the ExpirationYear value used by this storefront model.
         /// </summary>
         [Required(ErrorMessageResourceName = "ExpirationYear_Required",
             ErrorMessageResourceType = typeof (CreditCardViewModelLocalization))]
@@ -74,12 +86,18 @@ namespace Hotcakes.Modules.Core.Models
         /// <summary>
         ///     Security code, normally found on the back of the card.
         /// </summary>
+        /// <summary>
+        /// Gets or sets the SecurityCode value used by this storefront model.
+        /// </summary>
         [Required(ErrorMessageResourceName = "SecurityCode_Required",
             ErrorMessageResourceType = typeof (CreditCardViewModelLocalization))]
         public string SecurityCode { get; set; }
 
         /// <summary>
         ///     Name of the person authorized to use the card, as it appears on the card.
+        /// </summary>
+        /// <summary>
+        /// Gets or sets the CardHolderName value used by this storefront model.
         /// </summary>
         [Required(ErrorMessageResourceName = "CardHolderName_Required",
             ErrorMessageResourceType = typeof (CreditCardViewModelLocalization))]

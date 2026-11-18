@@ -39,9 +39,16 @@ using Hotcakes.Common.Dnn;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Provides affiliate persistence and reporting through DNN users and the commerce data store.
+    /// </summary>
     [Serializable]
     public class DnnAffiliateRepository : AffiliateRepository
     {
+        /// <summary>
+        /// Initializes the repository for the specified commerce request context.
+        /// </summary>
+        /// <param name="context">The context that identifies the current commerce store.</param>
         public DnnAffiliateRepository(HccRequestContext context)
             : base(context)
         {
@@ -358,6 +365,12 @@ namespace Hotcakes.Commerce.Dnn
 
         #region Public methods
 
+        /// <summary>
+        /// Creates an affiliate and creates or updates its associated DNN user account.
+        /// </summary>
+        /// <param name="aff">The affiliate to create.</param>
+        /// <param name="userStatus">Receives the DNN user creation status.</param>
+        /// <returns>The operation status, including duplicate affiliate identifiers or user creation failure.</returns>
         public override UpdateStatus Create(Affiliate aff, ref CreateUserStatus userStatus)
         {
             if (string.IsNullOrEmpty(aff.AffiliateId))
@@ -410,6 +423,11 @@ namespace Hotcakes.Commerce.Dnn
             return UpdateStatus.UserCreateFailed;
         }
 
+        /// <summary>
+        /// Updates an affiliate and synchronizes its associated DNN user profile.
+        /// </summary>
+        /// <param name="aff">The affiliate to update.</param>
+        /// <returns>The operation status.</returns>
         public override UpdateStatus Update(Affiliate aff)
         {
             if (string.IsNullOrEmpty(aff.AffiliateId))
@@ -431,6 +449,11 @@ namespace Hotcakes.Commerce.Dnn
             return base.Update(aff);
         }
 
+        /// <summary>
+        /// Deletes the affiliate identified by its repository identifier.
+        /// </summary>
+        /// <param name="id">The affiliate identifier.</param>
+        /// <returns><c>true</c> when the affiliate is deleted; otherwise, <c>false</c>.</returns>
         public override bool Delete(long id)
         {
             if (base.Delete(id))
@@ -440,6 +463,14 @@ namespace Hotcakes.Commerce.Dnn
             return false;
         }
 
+        /// <summary>
+        /// Returns a filtered, sorted, and paged affiliate report.
+        /// </summary>
+        /// <param name="criteria">The date, search, status, and sorting criteria.</param>
+        /// <param name="pageNumber">The one-based page number to return.</param>
+        /// <param name="pageSize">The maximum number of rows in the page.</param>
+        /// <param name="rowCount">Receives the total number of rows matching the criteria.</param>
+        /// <returns>The report rows for the requested page.</returns>
         public override List<AffiliateReportData> FindAllWithFilter(AffiliateReportCriteria criteria, int pageNumber,
             int pageSize, ref int rowCount)
         {
@@ -452,6 +483,11 @@ namespace Hotcakes.Commerce.Dnn
             }
         }
 
+        /// <summary>
+        /// Calculates aggregate affiliate totals for the supplied criteria.
+        /// </summary>
+        /// <param name="criteria">The criteria defining the report population.</param>
+        /// <returns>The aggregate affiliate totals.</returns>
         public override AffiliateReportTotals GetTotalsByFilter(AffiliateReportCriteria criteria)
         {
             using (var strategy = CreateReadStrategy())
@@ -461,6 +497,12 @@ namespace Hotcakes.Commerce.Dnn
             }
         }
 
+        /// <summary>
+        /// Calculates selected aggregate affiliate totals for the supplied criteria.
+        /// </summary>
+        /// <param name="criteria">The criteria defining the report population.</param>
+        /// <param name="returnType">Specifies which groups of totals to calculate.</param>
+        /// <returns>The requested aggregate affiliate totals.</returns>
         public override AffiliateReportTotals GetTotalsByFilter(AffiliateReportCriteria criteria,
             TotalsReturnType returnType)
         {
@@ -471,6 +513,12 @@ namespace Hotcakes.Commerce.Dnn
             }
         }
 
+        /// <summary>
+        /// Calculates all aggregate totals for one affiliate and the supplied criteria.
+        /// </summary>
+        /// <param name="affId">The affiliate identifier.</param>
+        /// <param name="criteria">The criteria defining the reporting period and filters.</param>
+        /// <returns>The affiliate's aggregate totals.</returns>
         public override AffiliateReportTotals GetAffiliateTotals(long affId, AffiliateReportCriteria criteria)
         {
             using (var strategy = CreateReadStrategy())
@@ -480,6 +528,13 @@ namespace Hotcakes.Commerce.Dnn
             }
         }
 
+        /// <summary>
+        /// Calculates selected aggregate totals for one affiliate and the supplied criteria.
+        /// </summary>
+        /// <param name="affId">The affiliate identifier.</param>
+        /// <param name="criteria">The criteria defining the reporting period and filters.</param>
+        /// <param name="returnType">Specifies which groups of totals to calculate.</param>
+        /// <returns>The requested affiliate totals.</returns>
         public override AffiliateReportTotals GetAffiliateTotals(long affId, AffiliateReportCriteria criteria,
             TotalsReturnType returnType)
         {

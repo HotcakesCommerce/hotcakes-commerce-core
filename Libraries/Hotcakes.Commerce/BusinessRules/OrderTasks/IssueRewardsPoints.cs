@@ -31,13 +31,30 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>
+    /// Issues rewards points for the eligible portion of a paid order.
+    /// </summary>
+    /// <remarks>
+    /// The task identifier is <c>21850F22-2A10-4CFA-BFF9-813CF448E07D</c>. The task skips orders already marked
+    /// with <c>HccRewardsPointsIssued</c>, stores with rewards disabled, and orders without a user identifier.
+    /// Successful issuance sets that marker and persists the order. Rollback does not revoke points.
+    /// </remarks>
     public class IssueRewardsPoints : OrderTask
     {
+        /// <summary>
+        /// Creates a new rewards-points issuance task.
+        /// </summary>
+        /// <returns>A new <see cref="IssueRewardsPoints"/> instance.</returns>
         public override Task Clone()
         {
             return new IssueRewardsPoints();
         }
 
+        /// <summary>
+        /// Calculates and issues eligible rewards points, then records that issuance on the order.
+        /// </summary>
+        /// <param name="context">The <see cref="OrderTaskContext"/> containing the order, store, and customer context.</param>
+        /// <returns>Always <see langword="true"/> when processing reaches this task.</returns>
         public override bool Execute(OrderTaskContext context)
         {
             var order = context.Order;
@@ -71,16 +88,29 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return true;
         }
 
+        /// <summary>
+        /// Does not reverse points issued by <see cref="Execute(OrderTaskContext)"/>.
+        /// </summary>
+        /// <param name="context">The workflow context.</param>
+        /// <returns>Always <see langword="true"/>.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             return true;
         }
 
+        /// <summary>
+        /// Gets the stable task identifier used to register this task in workflows.
+        /// </summary>
+        /// <returns><c>21850F22-2A10-4CFA-BFF9-813CF448E07D</c>.</returns>
         public override string TaskId()
         {
             return "21850F22-2A10-4CFA-BFF9-813CF448E07D";
         }
 
+        /// <summary>
+        /// Gets the display name of this task.
+        /// </summary>
+        /// <returns><c>Issue Rewards Points</c>.</returns>
         public override string TaskName()
         {
             return "Issue Rewards Points";

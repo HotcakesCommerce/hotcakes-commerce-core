@@ -30,6 +30,9 @@ using Hotcakes.Commerce.BusinessRules.OrderTasks;
 
 namespace Hotcakes.Commerce.Dnn.Workflow
 {
+    /// <summary>
+    /// Builds the DNN-specific task sequences used by Hotcakes order workflows.
+    /// </summary>
     [Serializable]
     public class DnnWorkflowFactory : WorkflowFactory
     {

@@ -29,30 +29,37 @@ using System.Linq;
 
 namespace Hotcakes.Commerce.Marketing.PromotionQualifications
 {
+    /// <summary>Matches orders whose adjusted pre-discount total reaches a threshold.</summary>
+    /// <remarks>The implementation removes free-item value and positive discount details before comparison.</remarks>
     public class OrderSubTotalIs : PromotionQualificationBase
     {
+        /// <summary>Initializes the qualification with lower processing cost.</summary>
         public OrderSubTotalIs()
         {
             ProcessingCost = RelativeProcessingCost.Lower;
         }
 
+        /// <summary>Gets the stable order-subtotal qualification identifier.</summary>
         public override Guid TypeId
         {
             get { return new Guid(TypeIdOrderSubTotalIs); }
         }
 
+        /// <summary>Gets or sets the adjusted subtotal threshold.</summary>
         public decimal Amount
         {
             get { return GetSettingAsDecimal("Amount"); }
             set { SetSetting("Amount", value); }
         }
 
+        /// <summary>Builds a currency-formatted threshold description.</summary>
         public override string FriendlyDescription(HotcakesApplication app)
         {
             var result = "When Order Total >= " + Amount.ToString("C");
             return result;
         }
 
+        /// <summary>Matches order and line-item scopes when the adjusted subtotal is at least <see cref="Amount"/>.</summary>
         public override bool MeetsQualification(PromotionContext context, PromotionQualificationMode mode)
         {
             if (mode != PromotionQualificationMode.LineItems &&

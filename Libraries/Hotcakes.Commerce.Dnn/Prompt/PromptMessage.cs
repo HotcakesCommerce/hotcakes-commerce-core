@@ -27,19 +27,32 @@ using System;
 
 namespace Hotcakes.Commerce.Dnn.Prompt
 {
+    /// <summary>
+    /// Represents a message returned as part of a Persona Bar prompt command result.
+    /// </summary>
     [Serializable]
     public class PromptMessage
     {
+        /// <summary>
+        /// Initializes an empty prompt message.
+        /// </summary>
         public PromptMessage()
         {
             // do nothing
         }
 
+        /// <summary>
+        /// Initializes a prompt message with the specified text.
+        /// </summary>
+        /// <param name="message">The message text.</param>
         public PromptMessage(string message)
         {
             Message = message;
         }
 
+        /// <summary>
+        /// Gets or sets the message text.
+        /// </summary>
         public string Message { get; set; }
     }
 }

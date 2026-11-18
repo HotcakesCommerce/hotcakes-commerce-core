@@ -35,6 +35,15 @@ using Hotcakes.Web.OpenXml;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    /// Exports abandoned-cart summaries and abandoned-cart line items to an Excel workbook.
+    /// </summary>
+    /// <remarks>
+    /// The export uses the existing <see cref="ExcelWriter"/> response pipeline and preserves
+    /// the established worksheet name, column headings, row layout, and culture-sensitive
+    /// formatting. The cart export writes one cart row followed by one row per item, with item
+    /// values beginning in column C.
+    /// </remarks>
     public class AbandonedCartsExport
     {
         #region Fields
@@ -45,6 +54,11 @@ namespace Hotcakes.Commerce.Orders
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes an exporter using the application context needed to resolve customers and
+        /// convert UTC order times to store time.
+        /// </summary>
+        /// <param name="hccApp">The current Hotcakes application context.</param>
         public AbandonedCartsExport(HotcakesApplication hccApp)
         {
             _hccApp = hccApp;
@@ -52,6 +66,18 @@ namespace Hotcakes.Commerce.Orders
 
         #endregion
 
+        /// <summary>
+        /// Writes an abandoned-product summary workbook to an HTTP response.
+        /// </summary>
+        /// <param name="response">The response that receives the generated workbook.</param>
+        /// <param name="fileName">The attachment file name supplied to the response.</param>
+        /// <param name="abandonedProducts">Product-level abandoned-cart results.</param>
+        /// <remarks>
+        /// The worksheet is named <c>Main</c> and contains the columns <c>Product</c>,
+        /// <c>Quantity</c>, <c>Carts</c>, and <c>Contacts</c>. Numeric values are converted with
+        /// their parameterless <see cref="object.ToString"/> behavior; no explicit culture is
+        /// selected. The method saves the workbook before writing it to the response.
+        /// </remarks>
         public void ExportToExcel(HttpResponse response, string fileName, List<AbandonedProduct> abandonedProducts)
         {
             var writer = new ExcelWriter("Main");
@@ -63,6 +89,19 @@ namespace Hotcakes.Commerce.Orders
             writer.WriteToResponse(response, fileName);
         }
 
+        /// <summary>
+        /// Writes abandoned carts and their line items to an HTTP response as an Excel workbook.
+        /// </summary>
+        /// <param name="response">The response that receives the generated workbook.</param>
+        /// <param name="fileName">The attachment file name supplied to the response.</param>
+        /// <param name="abandonedCarts">Abandoned orders to write, in the supplied order.</param>
+        /// <remarks>
+        /// The worksheet is named <c>Main</c> and has the columns <c>Date</c>, <c>User</c>,
+        /// <c>Product</c>, <c>Quantity</c>, and <c>Line Total</c>. Each cart occupies a row for
+        /// its date and user, followed by one item row whose values start in column C. Dates are
+        /// converted from UTC to store time and formatted with <see cref="DateTime.ToShortDateString"/>;
+        /// quantities and line totals use parameterless <see cref="object.ToString"/> behavior.
+        /// </remarks>
         public void ExportToExcel(HttpResponse response, string fileName, List<Order> abandonedCarts)
         {
             var writer = new ExcelWriter("Main");
@@ -76,10 +115,14 @@ namespace Hotcakes.Commerce.Orders
 
         internal class ProductsSheetWriter
         {
+            /// <summary>Gets or sets the first data row written by this sheet writer.</summary>
             protected int _firstRow;
             private HotcakesApplication _hccApp;
+            /// <summary>Style applied to the product summary header.</summary>
             protected SpreadsheetStyle _headerStyle;
+            /// <summary>Style applied to product summary rows.</summary>
             protected SpreadsheetStyle _rowStyle;
+            /// <summary>The workbook writer used to emit the product sheet.</summary>
             protected ExcelWriter _writer;
 
             internal ProductsSheetWriter(ExcelWriter writer, HotcakesApplication hccApp)
@@ -94,6 +137,8 @@ namespace Hotcakes.Commerce.Orders
                 _hccApp = hccApp;
             }
 
+            /// <summary>Writes the header and one row for each abandoned product.</summary>
+            /// <param name="abandonedProducts">Product summary values to write.</param>
             public void Write(List<AbandonedProduct> abandonedProducts)
             {
                 WriteHeader();
@@ -137,10 +182,14 @@ namespace Hotcakes.Commerce.Orders
 
         internal class CartsSheetWriter
         {
+            /// <summary>Gets or sets the next row used by the cart and item output.</summary>
             protected int _firstRow;
             private readonly HotcakesApplication _hccApp;
+            /// <summary>Style applied to the cart header.</summary>
             protected SpreadsheetStyle _headerStyle;
+            /// <summary>Style applied to cart and line-item rows.</summary>
             protected SpreadsheetStyle _rowStyle;
+            /// <summary>The workbook writer used to emit the cart sheet.</summary>
             protected ExcelWriter _writer;
 
             internal CartsSheetWriter(ExcelWriter writer, HotcakesApplication hccApp)
@@ -155,6 +204,10 @@ namespace Hotcakes.Commerce.Orders
                 _hccApp = hccApp;
             }
 
+            /// <summary>
+            /// Writes the cart header and each cart followed by its line-item rows.
+            /// </summary>
+            /// <param name="abandonedCarts">Abandoned carts to write.</param>
             public void Write(List<Order> abandonedCarts)
             {
                 WriteHeader();
@@ -211,6 +264,12 @@ namespace Hotcakes.Commerce.Orders
                 return rowIndex;
             }
 
+            /// <summary>
+            /// Converts a UTC timestamp to store time and formats it using the current culture's
+            /// short-date pattern.
+            /// </summary>
+            /// <param name="utcTime">The timestamp recorded in UTC.</param>
+            /// <returns>The store-local short date string used in the Excel cart export.</returns>
             protected string GetDateTimeString(DateTime utcTime)
             {
                 return DateHelper.ConvertUtcToStoreTime(_hccApp, utcTime).ToShortDateString();

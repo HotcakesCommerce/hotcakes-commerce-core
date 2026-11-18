@@ -28,6 +28,17 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Commerce.Data
 {
+    /// <summary>
+    /// Represents the outcome of a repository merge operation.
+    /// </summary>
+    /// <typeparam name="V">The POCO type represented by the merge operation.</typeparam>
+    /// <remarks>
+    /// A merge may create, update, or delete records, but this result currently exposes only
+    /// the prior values captured by the repository. The commented members below are retained
+    /// as compatibility-sensitive TODOs and are not part of the current public API.
+    /// A new instance starts with <see cref="Success" /> set to <c>false</c> and an empty
+    /// <see cref="OldValues" /> collection.
+    /// </remarks>
     public class DalMergeOperationResult<V>
         where V : class, new()
     {
@@ -36,6 +47,9 @@ namespace Hotcakes.Commerce.Data
         //public List<V> Updated { get; set; }
         //public List<V> Deleted { get; set; }
 
+        /// <summary>
+        /// Initializes a new merge-operation result with an empty collection of prior values.
+        /// </summary>
         public DalMergeOperationResult()
         {
             OldValues = new List<V>();
@@ -44,8 +58,25 @@ namespace Hotcakes.Commerce.Data
             //Deleted = new List<V>();
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the repository merge reported success.
+        /// </summary>
+        /// <value><c>true</c> when the merge reports success; otherwise, <c>false</c>.</value>
+        /// <remarks>
+        /// The default value is <c>false</c>. The repository sets this property after attempting
+        /// to persist the merge, including any records created, updated, or deleted by that merge.
+        /// </remarks>
         public bool Success { get; set; }
 
+        /// <summary>
+        /// Gets or sets the values that matched the repository query before the merge was applied.
+        /// </summary>
+        /// <value>A mutable list of prior values, initially empty.</value>
+        /// <remarks>
+        /// The current merge implementation captures existing values before applying changes.
+        /// Newly created values are not added to this collection, and the collection does not
+        /// identify which prior values were updated or deleted.
+        /// </remarks>
         public List<V> OldValues { get; set; }
     }
 }

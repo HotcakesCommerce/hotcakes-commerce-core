@@ -29,8 +29,14 @@ using Hotcakes.Commerce.Dnn.Mvc;
 
 namespace Hotcakes.Commerce.Dnn.Utils
 {
+    /// <summary>
+    /// Provides MVC setup helpers for Hotcakes rendering.
+    /// </summary>
     public static class MvcUtils
     {
+        /// <summary>
+        /// Registers the Hotcakes Razor view engine at the front of the MVC view-engine collection when it is not already registered.
+        /// </summary>
         public static void RegisterViewEngines()
         {
             // check if HccRazorViewEngine has already been registered

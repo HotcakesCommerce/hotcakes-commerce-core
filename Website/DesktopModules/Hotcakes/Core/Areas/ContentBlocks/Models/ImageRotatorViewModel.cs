@@ -29,9 +29,15 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Modules.Core.Areas.ContentBlocks.Models
 {
+    /// <summary>
+    /// Represents one image and its link in an image-rotator content block.
+    /// </summary>
     [Serializable]
     public class ImageRotatorImageViewModel
     {
+        /// <summary>
+        /// Represents one image and its link in an image-rotator content block.
+        /// </summary>
         public ImageRotatorImageViewModel()
         {
             ImageUrl = string.Empty; // 1            
@@ -40,15 +46,33 @@ namespace Hotcakes.Modules.Core.Areas.ContentBlocks.Models
             Caption = string.Empty; // 4
         }
 
+        /// <summary>
+        /// Gets or sets the image URL.
+        /// </summary>
         public string ImageUrl { get; set; }
+        /// <summary>
+        /// Gets or sets the image caption.
+        /// </summary>
         public string Caption { get; set; }
+        /// <summary>
+        /// Gets or sets the destination URL for the image.
+        /// </summary>
         public string Url { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether the destination opens in a new window.
+        /// </summary>
         public bool NewWindow { get; set; }
     }
+    /// <summary>
+    /// Represents the data displayed by an image-rotator content block.
+    /// </summary>
 
     [Serializable]
     public class ImageRotatorViewModel
     {
+        /// <summary>
+        /// Represents the data displayed by an image-rotator content block.
+        /// </summary>
         public ImageRotatorViewModel()
         {
             Pause = 3;
@@ -59,11 +83,29 @@ namespace Hotcakes.Modules.Core.Areas.ContentBlocks.Models
             Width = 0;
         }
 
+        /// <summary>
+        /// Gets or sets the images displayed by the content block.
+        /// </summary>
         public List<ImageRotatorImageViewModel> Images { get; set; }
+        /// <summary>
+        /// Gets or sets the HTML element identifier for the rotator.
+        /// </summary>
         public string CssId { get; set; }
+        /// <summary>
+        /// Gets or sets the CSS class applied to the rotator.
+        /// </summary>
         public string CssClass { get; set; }
+        /// <summary>
+        /// Gets or sets the rotator height.
+        /// </summary>
         public int Height { get; set; }
+        /// <summary>
+        /// Gets or sets the rotator width.
+        /// </summary>
         public int Width { get; set; }
+        /// <summary>
+        /// Gets or sets the rotator pause interval.
+        /// </summary>
         public int Pause { get; set; }
     }
 }

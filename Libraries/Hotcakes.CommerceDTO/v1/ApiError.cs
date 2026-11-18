@@ -36,10 +36,18 @@ namespace Hotcakes.CommerceDTO.v1
     [Serializable]
     public class ApiError
     {
+        /// <summary>
+        /// Initializes an empty API error.
+        /// </summary>
         public ApiError()
         {
         }
 
+        /// <summary>
+        /// Initializes an API error with its identifying code and descriptive text.
+        /// </summary>
+        /// <param name="code">The code that identifies the category or type of error.</param>
+        /// <param name="description">The detailed description of the error.</param>
         public ApiError(string code, string description)
         {
             Code = code;

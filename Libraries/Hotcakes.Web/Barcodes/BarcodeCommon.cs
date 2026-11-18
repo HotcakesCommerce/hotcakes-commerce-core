@@ -28,17 +28,23 @@ using System;
 
 namespace Hotcakes.Web.Barcodes
 {
+    /// <summary>Provides the common raw and formatted data state used by barcode encoders.</summary>
+    /// <remarks>Concrete symbology implementations expose their encoded value through <see cref="IBarcode"/>.</remarks>
     [Serializable]
     internal abstract class BarcodeCommon
     {
         protected string Formatted_Data = string.Empty;
         protected string Raw_Data = string.Empty;
 
+        /// <summary>Gets the unmodified data supplied to the encoder.</summary>
+        /// <seealso cref="FormattedData"/>
         public string RawData
         {
             get { return Raw_Data; }
         }
 
+        /// <summary>Gets or sets the data after the symbology has applied its formatting rules.</summary>
+        /// <seealso cref="RawData"/>
         public string FormattedData
         {
             get { return Formatted_Data; }

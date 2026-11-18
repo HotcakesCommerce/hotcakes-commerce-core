@@ -34,16 +34,29 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.Dnn.Web
 {
+    /// <summary>
+    /// Provides common DNN skin-object lifecycle behavior for rendering Hotcakes MVC views.
+    /// </summary>
     [Serializable]
     public class HotcakesSkinObjectBase : SkinObjectBase
     {
+        /// <summary>
+        /// Gets or sets the MVC rendering engine used to render this skin object.
+        /// </summary>
         public MvcRenderingEngine MvcRenderingEngine { get; set; }
 
+        /// <summary>
+        /// Gets the current <see cref="HotcakesApplication"/> instance.
+        /// </summary>
         protected HotcakesApplication HccApp
         {
             get { return HotcakesApplication.Current; }
         }
 
+        /// <summary>
+        /// Initializes the skin object and updates the request content culture.
+        /// </summary>
+        /// <param name="e">The event data for the initialization event.</param>
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
@@ -51,6 +64,10 @@ namespace Hotcakes.Commerce.Dnn.Web
             HccRequestContextUtils.UpdateUserContentCulture(HccRequestContext.Current);
         }
 
+        /// <summary>
+        /// Loads the skin object and renders its MVC view.
+        /// </summary>
+        /// <param name="e">The event data for the load event.</param>
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -86,6 +103,10 @@ namespace Hotcakes.Commerce.Dnn.Web
             }
         }
 
+        /// <summary>
+        /// Renders the MVC view for the skin object.
+        /// </summary>
+        /// <returns>The rendered view markup, or <see langword="null"/> when no view is supplied.</returns>
         protected virtual string RenderView()
         {
             return null;

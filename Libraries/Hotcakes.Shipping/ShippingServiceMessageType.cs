@@ -26,10 +26,24 @@
 
 namespace Hotcakes.Shipping
 {
+    /// <summary>
+    /// Specifies the severity or purpose of a message reported by a shipping service.
+    /// </summary>
     public enum ShippingServiceMessageType
     {
+        /// <summary>
+        /// Indicates general informational output from the service.
+        /// </summary>
         Information = 0,
+
+        /// <summary>
+        /// Indicates that the service encountered an error.
+        /// </summary>
         Error = 1,
+
+        /// <summary>
+        /// Indicates diagnostic information intended to assist troubleshooting.
+        /// </summary>
         Diagnostics = 2
     }
 }

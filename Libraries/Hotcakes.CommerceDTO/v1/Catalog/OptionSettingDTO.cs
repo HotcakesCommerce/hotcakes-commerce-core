@@ -36,6 +36,9 @@ namespace Hotcakes.CommerceDTO.v1.Catalog
     [Serializable]
     public class OptionSettingDTO
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="OptionSettingDTO"/> type with its default DTO values.
+        /// </summary>
         public OptionSettingDTO()
         {
             Key = string.Empty;

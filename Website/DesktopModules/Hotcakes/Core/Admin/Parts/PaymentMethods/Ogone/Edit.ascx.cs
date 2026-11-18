@@ -33,6 +33,9 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.Ogone
 {
     partial class Edit : HccPaymentMethodPart
     {
+        /// <summary>
+        /// Performs the administrative operation represented by LoadData.
+        /// </summary>
         public override void LoadData()
         {
             if (ddlHashAlgorithm.Items.Count == 0)
@@ -58,6 +61,9 @@ namespace Hotcakes.Modules.Core.Modules.PaymentMethods.Ogone
             chkDeveloperMode.Checked = settings.DeveloperMode;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by SaveData.
+        /// </summary>
         public override void SaveData()
         {
             var settings = new OgoneSettings();

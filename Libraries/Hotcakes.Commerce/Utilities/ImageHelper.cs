@@ -40,11 +40,22 @@ using Encoder = System.Drawing.Imaging.Encoder;
 namespace Hotcakes.Commerce.Utilities
 {
     /// <summary>
-    ///     This class helps generate HTML, paths, and other information for images used in the application
+    /// Provides helpers for validating image paths, inspecting image files, resizing and compressing images, and
+    /// generating image-related HTML.
     /// </summary>
+    /// <remarks>
+    /// File-based operations resolve paths through the current ASP.NET application's physical path and may read,
+    /// replace, or create files on disk. HTML returned by this class is intended for markup output.
+    /// </remarks>
     [Serializable]
     public static class ImageHelper
     {
+        /// <summary>
+        /// Returns an image path only when it is an HTTP URL or maps to an existing local file.
+        /// </summary>
+        /// <param name="imagePath">The absolute HTTP image URL or application-relative local image path to inspect.</param>
+        /// <returns>The original path for an HTTP URL or existing local file; otherwise, an empty string.</returns>
+        /// <remarks>Only <c>http:</c> URLs are accepted as remote URLs by this method.</remarks>
         public static string SafeImage(string imagePath)
         {
             var result = string.Empty;
@@ -67,6 +78,13 @@ namespace Hotcakes.Commerce.Utilities
             return result;
         }
 
+        /// <summary>
+        /// Resolves an image file name to an existing local path or the standard no-image placeholder.
+        /// </summary>
+        /// <param name="fileName">A local image path or direct HTTP/HTTPS URL.</param>
+        /// <param name="useAppRoot">Whether local results should be prefixed with the ASP.NET application-root marker.</param>
+        /// <returns>An existing normalized image path, the supplied remote URL, or the no-image placeholder.</returns>
+        /// <remarks>Local path existence is checked against the current application's physical root.</remarks>
         public static string GetValidImage(string fileName, bool useAppRoot)
         {
             var result = "DesktopModules/Hotcakes/Core/Admin/Images/NoImageAvailable.gif";
@@ -113,6 +131,14 @@ namespace Hotcakes.Commerce.Utilities
             return result;
         }
 
+        /// <summary>
+        /// Reads file size and pixel dimensions for an image in the current application.
+        /// </summary>
+        /// <param name="fileName">The application-relative image file name, or <see langword="null"/>.</param>
+        /// <returns>An <see cref="ImageInfo"/> object containing the discovered values, or default/unknown values when
+        /// the file does not exist.</returns>
+        /// <remarks>The image file is opened and disposed during inspection; invalid image files may cause the underlying
+        /// imaging exception to propagate.</remarks>
         public static ImageInfo GetImageInformation(string fileName)
         {
             var result = new ImageInfo();
@@ -172,6 +198,13 @@ namespace Hotcakes.Commerce.Utilities
             return result;
         }
 
+        /// <summary>
+        /// Calculates dimensions that preserve an image's proportions within the supplied maximum dimensions.
+        /// </summary>
+        /// <param name="oldInfo">The source dimensions, or <see langword="null"/> for zero-valued output.</param>
+        /// <param name="maxWidth">The maximum width.</param>
+        /// <param name="maxHeight">The maximum height.</param>
+        /// <returns>A new <see cref="ImageInfo"/> containing the calculated width and height.</returns>
         public static ImageInfo GetProportionalImageDimensionsForImage(ImageInfo oldInfo, int maxWidth, int maxHeight)
         {
             var result = new ImageInfo();
@@ -186,6 +219,14 @@ namespace Hotcakes.Commerce.Utilities
             return result;
         }
 
+        /// <summary>
+        /// Re-encodes an existing image as a JPEG at the requested quality.
+        /// </summary>
+        /// <param name="filePath">The image path relative to the current application's physical root.</param>
+        /// <param name="quality">JPEG quality from 1 through 100; values outside that range are clamped.</param>
+        /// <returns><see langword="true"/> when the source file exists and is replaced; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>The original file is deleted before the compressed image is saved at the same path. Imaging and
+        /// file-system failures propagate to the caller.</remarks>
         public static bool CompressJpeg(string filePath, long quality)
         {
             var result = true;
@@ -258,6 +299,16 @@ namespace Hotcakes.Commerce.Utilities
             return null;
         }
 
+        /// <summary>
+        /// Resizes an image on disk and writes the result to a new path.
+        /// </summary>
+        /// <param name="currentImagePath">The source image path.</param>
+        /// <param name="newImagePath">The destination image path.</param>
+        /// <param name="newHeight">The requested output height.</param>
+        /// <param name="newWidth">The requested output width.</param>
+        /// <returns><see langword="true"/> when the resize completes.</returns>
+        /// <exception cref="ArgumentException">The underlying resize operation fails; the original exception message is
+        /// included in the new exception.</exception>
         public static bool ResizeImage(string currentImagePath, string newImagePath, int newHeight, int newWidth)
         {
             try
@@ -272,14 +323,14 @@ namespace Hotcakes.Commerce.Utilities
         }
 
         /// <summary>
-        ///     This method will iterate through the specified swatches and emit the requisite HTML for each
+        /// Iterates through a product's color swatches and emits the corresponding image HTML.
         /// </summary>
-        /// <param name="p">Product - an instance of the product to find swatches for</param>
-        /// <param name="app">HotcakesApplicateion - an instance of the current store application object</param>
-        /// <returns>String - the HTML to be used for rendering the swatches</returns>
+        /// <param name="p">The product whose color options and swatch items are inspected.</param>
+        /// <param name="app">The current store application context.</param>
+        /// <returns>HTML containing swatch images, or an empty string when swatches are disabled or no color option exists.</returns>
         /// <remarks>
-        ///     If the swatch doesn't match an available swatch file, it will not be included in the HTML. Also, all swatch
-        ///     images must be PNG or GIF.
+        /// A PNG file is preferred when present; otherwise a GIF path is emitted. The method checks the physical store
+        /// swatch directory, omits label-only items, and does not HTML-encode generated attribute values.
         /// </remarks>
         public static string GenerateSwatchHtmlForProduct(Product p, HotcakesApplication app)
         {

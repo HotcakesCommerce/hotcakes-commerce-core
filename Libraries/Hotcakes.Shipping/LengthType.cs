@@ -26,15 +26,18 @@
 
 namespace Hotcakes.Shipping
 {
+    /// <summary>
+    /// Specifies the unit used for package dimensions such as length, width, and height.
+    /// </summary>
     public enum LengthType
     {
         /// <summary>
-        ///     Measured in inches
+        /// Specifies inches as the package dimension unit.
         /// </summary>
         Inches = 1,
 
         /// <summary>
-        ///     Measured in centimeters
+        /// Specifies centimeters as the package dimension unit.
         /// </summary>
         Centimeters = 2
     }

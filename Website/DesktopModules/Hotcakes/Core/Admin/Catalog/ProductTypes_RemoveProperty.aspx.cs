@@ -29,6 +29,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
+    /// <summary>
+    /// Provides the administrative endpoint for removing a product type property.
+    /// </summary>
     public partial class ProductTypes_RemoveProperty : BaseAdminJsonPage
     {
         protected override void OnLoad(EventArgs e)

@@ -33,6 +33,8 @@ using Hotcakes.Commerce.Membership;
 
 namespace Hotcakes.Commerce
 {
+    /// <summary>Carries commerce state for the current request or non-HTTP operation.</summary>
+    /// <remarks><see cref="Current"/> uses the ASP.NET items key <c>HccRequestContext</c> in HTTP and a thread-static fallback otherwise.</remarks>
     public class HccRequestContext
     {
         private const string DEFAULT_CULTURE_CODE = "en-US";
@@ -43,6 +45,9 @@ namespace Hotcakes.Commerce
         /// </summary>
         [ThreadStatic] private static HccRequestContext _current;
 
+        /// <summary>Initializes context state and content-culture defaults.</summary>
+        /// <param name="cultureCode">Explicit content culture; an empty value permits the thread culture.</param>
+        /// <remarks>The default is <c>en-US</c>; non-default main cultures receive that fallback.</remarks>
         public HccRequestContext(string cultureCode = "")
         {
             var httpContext = Factory.HttpContext;
@@ -80,6 +85,8 @@ namespace Hotcakes.Commerce
         /// <value>
         ///     The current HccRequestContext object.
         /// </value>
+        /// <summary>Gets or sets the HTTP-request or thread-fallback context.</summary>
+        /// <remarks>Reading without HTTP context creates a default context when needed.</remarks>
         public static HccRequestContext Current
         {
             get
@@ -108,6 +115,7 @@ namespace Hotcakes.Commerce
         ///     A Store object. By default, this will be a "new" empty store object, to be populated later in other
         ///     methods/classes.
         /// </value>
+        /// <summary>Gets or sets the current store, initialized as an empty store.</summary>
         public Store CurrentStore { get; set; }
 
         /// <summary>
@@ -116,6 +124,7 @@ namespace Hotcakes.Commerce
         /// <value>
         ///     A CustomerAccount object. By default, this will be a NULL object, to be populated later in other methods/classes.
         /// </value>
+        /// <summary>Gets or sets the visiting customer account.</summary>
         public CustomerAccount CurrentAccount { get; set; }
 
         /// <summary>
@@ -130,6 +139,7 @@ namespace Hotcakes.Commerce
         /// <value>
         ///     The main content culture.
         /// </value>
+        /// <summary>Gets or sets the database content culture, separate from resource UI culture.</summary>
         public string MainContentCulture { get; set; }
 
         /// <summary>
@@ -145,14 +155,17 @@ namespace Hotcakes.Commerce
         /// <value>
         ///     The fallback content culture.
         /// </value>
+        /// <summary>Gets or sets the database fallback content culture.</summary>
         public string FallbackContentCulture { get; set; }
 
         //TODO: Maybe make sense to revert later and write initialization somewhere....
         //public Orders.Order CurrentCart { get; set; }
 
+        /// <summary>Gets or sets integration-event state.</summary>
         public Integration IntegrationEvents { get; set; }
 
-        // We need avoid using of this property
+        /// <summary>Gets or sets captured ASP.NET routing state.</summary>
+        /// <remarks>Retained for compatibility; callers should avoid using this property.</remarks>
         public RequestContext RoutingContext { get; set; }
     }
 }

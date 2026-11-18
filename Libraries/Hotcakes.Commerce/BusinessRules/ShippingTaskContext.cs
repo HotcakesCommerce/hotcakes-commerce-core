@@ -30,10 +30,15 @@ using Hotcakes.Commerce.Utilities;
 
 namespace Hotcakes.Commerce.BusinessRules
 {
+    /// <summary>Provides the order and candidate rates shared by shipping workflow tasks.</summary>
     public class ShippingTaskContext : TaskContext
     {
+        /// <summary>Gets or sets the order for which rates are being processed.</summary>
+        /// <value>The order in the current shipping workflow scope.</value>
         public Order Order { get; set; }
 
+        /// <summary>Gets or sets the sortable collection of shipping rates being built or filtered.</summary>
+        /// <value>The current shipping-rate display collection.</value>
         public SortableCollection<ShippingRateDisplay> Rates { get; set; }
     }
 }

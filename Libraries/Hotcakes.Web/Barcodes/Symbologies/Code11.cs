@@ -28,6 +28,8 @@ using System;
 
 namespace Hotcakes.Web.Barcodes
 {
+    /// <summary>Code 11 barcode encoder.</summary>
+    /// <remarks>The encoded output is exposed through <see cref="IBarcode.Encoded_Value"/>.</remarks>
     [Serializable]
     internal class Code11 : BarcodeCommon, IBarcode
     {
@@ -37,6 +39,9 @@ namespace Hotcakes.Web.Barcodes
             "1010011", "1101001", "110101", "101101", "1011001"
         };
 
+        /// <summary>Encodes data using the Code 11 symbology.</summary>
+        /// <param name="input">The data to encode.</param>
+        /// <seealso cref="Encoded_Value"/>
         public Code11(string input)
         {
             Raw_Data = input;
@@ -44,6 +49,8 @@ namespace Hotcakes.Web.Barcodes
 
         #region IBarcode Members
 
+        /// <summary>Gets the encoded bar-and-space representation.</summary>
+        /// <seealso cref="IBarcode.Encoded_Value"/>
         public string Encoded_Value
         {
             get { return Encode_Code11(); }

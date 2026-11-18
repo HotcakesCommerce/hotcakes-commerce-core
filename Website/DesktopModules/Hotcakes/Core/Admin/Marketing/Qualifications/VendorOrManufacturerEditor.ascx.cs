@@ -34,6 +34,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 {
+    /// <summary>
+    /// Edits a qualification based on vendor or manufacturer.
+    /// </summary>
     public partial class VendorOrManufacturerEditor : BaseQualificationControl
     {
         #region Properties
@@ -43,6 +46,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             get { return Qualification as VendorOrManufacturerIs; }
         }
 
+        /// <summary>Gets or sets whether the qualification uses the negative matching mode.</summary>
         public bool IsNotMode { get; set; }
 
         #endregion
@@ -114,6 +118,7 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
 
         #region Helper Methods
 
+        /// <summary>Loads the vendor-or-manufacturer qualification into the editor.</summary>
         public override void LoadQualification()
         {
             var q = TypedQualification;
@@ -184,6 +189,8 @@ namespace Hotcakes.Modules.Core.Admin.Marketing.Qualifications
             }
         }
 
+        /// <summary>Saves the vendor-or-manufacturer qualification.</summary>
+        /// <returns><see langword="true"/> when the qualification is saved; otherwise, <see langword="false"/>.</returns>
         public override bool SaveQualification()
         {
             var q = TypedQualification;

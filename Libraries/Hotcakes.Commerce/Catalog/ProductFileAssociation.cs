@@ -29,13 +29,21 @@ using System;
 namespace Hotcakes.Commerce.Catalog
 {
     /// <summary>
-    ///     Product file information
+    ///     Associates a product with a downloadable file and its download restrictions.
     /// </summary>
+    /// <remarks>
+    ///     The association is store-scoped. Its minute and download limits are persisted with the product-file mapping and
+    ///     are interpreted by the product-file download workflow.
+    /// </remarks>
     public class ProductFileAssociation
     {
         /// <summary>
-        ///     Set default values
+        ///     Initializes a product-file association with empty identifiers, unlimited-style zero limits, and the current UTC time.
         /// </summary>
+        /// <remarks>
+        ///     The constructor establishes the same defaults used when a new association is created before it is populated for
+        ///     persistence.
+        /// </remarks>
         public ProductFileAssociation()
         {
             Id = 0;

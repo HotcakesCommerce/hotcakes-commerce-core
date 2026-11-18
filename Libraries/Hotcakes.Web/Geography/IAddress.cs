@@ -26,15 +26,24 @@
 
 namespace Hotcakes.Web.Geography
 {
+    /// <summary>Defines the address fields and related geography data used by commerce objects.</summary>
     public interface IAddress
     {
+        /// <summary>Gets or sets the primary street address.</summary>
         string Street { get; set; }
+        /// <summary>Gets or sets the secondary street address.</summary>
         string Street2 { get; set; }
+        /// <summary>Gets or sets the city.</summary>
         string City { get; set; }
+        /// <summary>Gets or sets the identifier of the selected <see cref="IRegion"/>.</summary>
         string RegionBvin { get; set; }
+        /// <summary>Gets the resolved region data.</summary>
         IRegion RegionData { get; }
+        /// <summary>Gets or sets the postal code.</summary>
         string PostalCode { get; set; }
+        /// <summary>Gets or sets the identifier of the selected <see cref="ICountry"/>.</summary>
         string CountryBvin { get; set; }
+        /// <summary>Gets the resolved country data.</summary>
         ICountry CountryData { get; }
     }
 }

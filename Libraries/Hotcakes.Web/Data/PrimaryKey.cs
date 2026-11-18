@@ -28,9 +28,16 @@ using System;
 
 namespace Hotcakes.Web.Data
 {
+    /// <summary>
+    /// Represents a repository key and its strongly typed value.
+    /// </summary>
     [Serializable]
     public class PrimaryKey
     {
+        /// <summary>
+        /// Initializes a key containing a string bvin value.
+        /// </summary>
+        /// <param name="bvin">The bvin value.</param>
         public PrimaryKey(string bvin)
         {
             BvinValue = bvin;
@@ -38,6 +45,10 @@ namespace Hotcakes.Web.Data
             KeyName = "bvin";
         }
 
+        /// <summary>
+        /// Initializes a key containing an integer value.
+        /// </summary>
+        /// <param name="id">The integer key value.</param>
         public PrimaryKey(int id)
         {
             IntValue = id;
@@ -45,11 +56,20 @@ namespace Hotcakes.Web.Data
             KeyName = "Id";
         }
 
+        /// <summary>
+        /// Initializes a long key using <c>Id</c> as the member name.
+        /// </summary>
+        /// <param name="id">The long key value.</param>
         public PrimaryKey(long id)
             : this(id, "Id")
         {
         }
 
+        /// <summary>
+        /// Initializes a long key with the specified member name.
+        /// </summary>
+        /// <param name="id">The long key value.</param>
+        /// <param name="keyName">The name of the key member.</param>
         public PrimaryKey(long id, string keyName)
         {
             LongValue = id;
@@ -57,11 +77,20 @@ namespace Hotcakes.Web.Data
             KeyName = keyName;
         }
 
+        /// <summary>
+        /// Initializes a GUID key using <c>Id</c> as the member name.
+        /// </summary>
+        /// <param name="id">The GUID key value.</param>
         public PrimaryKey(Guid id)
             : this(id, "Id")
         {
         }
 
+        /// <summary>
+        /// Initializes a GUID key with the specified member name.
+        /// </summary>
+        /// <param name="id">The GUID key value.</param>
+        /// <param name="keyName">The name of the key member.</param>
         public PrimaryKey(Guid id, string keyName)
         {
             GuidValue = id;
@@ -69,14 +98,40 @@ namespace Hotcakes.Web.Data
             KeyName = keyName;
         }
 
+        /// <summary>
+        /// Gets the kind of value represented by this key.
+        /// </summary>
         public PrimaryKeyType KeyType { get; private set; }
+
+        /// <summary>
+        /// Gets the string bvin value.
+        /// </summary>
         public string BvinValue { get; private set; }
+
+        /// <summary>
+        /// Gets the integer value.
+        /// </summary>
         public int IntValue { get; private set; }
+
+        /// <summary>
+        /// Gets the long value.
+        /// </summary>
         public long LongValue { get; private set; }
+
+        /// <summary>
+        /// Gets the GUID value.
+        /// </summary>
         public Guid GuidValue { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the name of the key member.
+        /// </summary>
         public string KeyName { get; set; }
 
+        /// <summary>
+        /// Gets the key value in its underlying CLR type.
+        /// </summary>
+        /// <returns>The typed key value, or <see langword="null"/> for an unsupported key type.</returns>
         public object KeyAsObject()
         {
             switch (KeyType)

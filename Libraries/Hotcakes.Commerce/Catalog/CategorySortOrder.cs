@@ -26,17 +26,47 @@
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Represents the catalog enum <see cref="CategorySortOrder" /> and its associated behavior.
+    /// </summary>
     public enum CategorySortOrder
     {
+    /// <summary>
+    /// Serialized catalog value <c>None = 0</c>.
+    /// </summary>
         None = 0,
+    /// <summary>
+    /// Serialized catalog value <c>ManualOrder = 1</c>.
+    /// </summary>
         ManualOrder = 1,
+    /// <summary>
+    /// Serialized catalog value <c>ProductName = 2</c>.
+    /// </summary>
         ProductName = 2,
+    /// <summary>
+    /// Serialized catalog value <c>ProductPriceAscending = 3</c>.
+    /// </summary>
         ProductPriceAscending = 3,
+    /// <summary>
+    /// Serialized catalog value <c>ProductPriceDescending = 4</c>.
+    /// </summary>
         ProductPriceDescending = 4,
+    /// <summary>
+    /// Serialized catalog value <c>ManufacturerName = 5</c>.
+    /// </summary>
         ManufacturerName = 5,
 
+    /// <summary>
+    /// Serialized catalog value <c>ProductNameDescending = 6</c>.
+    /// </summary>
         ProductNameDescending = 6,
+    /// <summary>
+    /// Serialized catalog value <c>ProductSKUAscending = 7</c>.
+    /// </summary>
         ProductSKUAscending = 7,
+    /// <summary>
+    /// Serialized catalog value <c>ProductSKUDescending = 8</c>.
+    /// </summary>
         ProductSKUDescending = 8
     }
 }

@@ -38,10 +38,21 @@ using Hotcakes.Commerce.Catalog;
 
 namespace Hotcakes.Commerce.Orders
 {
+    /// <summary>
+    ///     Calculates order prices and totals using the configured catalog, marketing, shipping, tax, and store services.
+    /// </summary>
+    /// <remarks>
+    ///     Calculation mutates the supplied <see cref="Order"/> and its <see cref="LineItem"/> objects. The public switches
+    ///     control repricing and discount application without changing the order-calculation pipeline's stored fields.
+    /// </remarks>
     public class OrderCalculator : IOrderCalculator
     {
         #region Constructor
 
+        /// <summary>
+        ///     Initializes a calculator for the supplied application context; repricing and discounting are enabled by default.
+        /// </summary>
+        /// <param name="app">The supplied app value.</param>
         public OrderCalculator(HotcakesApplication app)
         {
             SkipRepricing = false;
@@ -53,6 +64,17 @@ namespace Hotcakes.Commerce.Orders
 
         #region Public methods
 
+        /// <summary>
+        ///     Calculates the supplied order in place.
+        /// </summary>
+        /// <param name="order">The order to calculate.</param>
+        /// <returns><c>true</c> when the calculation completes.</returns>
+        /// <remarks>
+        ///     The pipeline resets calculated values and discounts, optionally reprices catalog items, applies volume and
+        ///     configured offers, calculates handling and shipping, distributes shipping portions, calculates taxes, and for
+        ///     recurring orders distributes shipping and order discounts. Upcharges are applied last. These steps mutate line
+        ///     item prices, discount collections, shipping portions, tax portions, and order totals.
+        /// </remarks>
         public bool Calculate(Order order)
         {
             ResetValues(order);
@@ -126,7 +148,13 @@ namespace Hotcakes.Commerce.Orders
         #region Fields
 
         private readonly HotcakesApplication _app;
+        /// <summary>
+        ///     Gets or sets the skip repricing value used by this API.
+        /// </summary>
         public bool SkipRepricing { get; set; }
+        /// <summary>
+        ///     Gets or sets the skip discounts value used by this API.
+        /// </summary>
         public bool SkipDiscounts { get; set; }
 
         #endregion

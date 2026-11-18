@@ -31,6 +31,9 @@ using Hotcakes.Modules.Core.Settings;
 
 namespace Hotcakes.Modules.ContentBlocks
 {
+    /// <summary>
+    /// Provides module settings for the content blocks module.
+    /// </summary>
     public partial class Settings : HotcakesSettingsBase
     {
         #region Implementation
@@ -57,6 +60,9 @@ namespace Hotcakes.Modules.ContentBlocks
 
         #region ModuleSettingsBase overrides
 
+        /// <summary>
+        /// Loads the content blocks settings into the controls.
+        /// </summary>
         public override void LoadSettings()
         {
             if (!IsPostBack)
@@ -83,6 +89,9 @@ namespace Hotcakes.Modules.ContentBlocks
             }
         }
 
+        /// <summary>
+        /// Saves the content blocks settings from the controls.
+        /// </summary>
         public override void UpdateSettings()
         {
             var moduleSettings = new ContentBlocksModuleSettings(ModuleId)

@@ -29,28 +29,44 @@ using Hotcakes.Commerce;
 
 namespace Hotcakes.Modules.Core.Settings
 {
+    /// <summary>
+    /// Provides persisted settings for a search module instance.
+    /// </summary>
     [Serializable]
     public class SearchModuleSettings
     {
         private readonly IModuleSettingsProvider _provider;
+        /// <summary>
+        /// Initializes settings for the specified module instance.
+        /// </summary>
+        /// <param name="moduleId">The DNN module instance identifier.</param>
 
         public SearchModuleSettings(int moduleId)
         {
             _provider = Factory.Instance.CreateModuleSettingsProvider(moduleId);
         }
 
+        /// <summary>
+        /// Gets or sets the selected search view.
+        /// </summary>
         public string View
         {
             get { return _provider.GetSettingValue("View", string.Empty); }
             set { _provider.SetSettingValue("View", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the number of search results displayed on each page.
+        /// </summary>
         public int PageSize
         {
             get { return _provider.GetSettingValue("PageSize", 9); }
             set { _provider.SetSettingValue("PageSize", value); }
         }
 
+        /// <summary>
+        /// Gets or sets whether manufacturers are displayed; use <see cref="ShowManufacturers"/> instead.
+        /// </summary>
         [Obsolete("Deprecated in Hotcakes Commerce 03.03.00. Please use the Manufacturers property instead. Removing in version 03.04.00 or later.")]
         public bool ShowManufactures
         {
@@ -58,12 +74,18 @@ namespace Hotcakes.Modules.Core.Settings
             set { ShowManufacturers = value; }
         }
 
+        /// <summary>
+        /// Gets or sets whether manufacturers are displayed.
+        /// </summary>
         public bool ShowManufacturers
         {
             get { return _provider.GetSettingValue("ShowManufactures", true); }
             set { _provider.SetSettingValue("ShowManufactures", value); }
         }
 
+        /// <summary>
+        /// Gets or sets whether vendors are displayed.
+        /// </summary>
         public bool ShowVendors
         {
             get { return _provider.GetSettingValue("ShowVendors", true); }

@@ -31,9 +31,17 @@ using Hotcakes.Web.OpenXml;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class ExcelReportHelper.
+    /// </summary>
     [Serializable]
     public static class ExcelReportHelper
     {
+        /// <summary>
+        /// Performs the administrative operation represented by GetHeadingStyle.
+        /// </summary>
+        /// <param name="w">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static SpreadsheetStyle GetHeadingStyle(this ExcelWriter w)
         {
             var style = w.GetStyle();
@@ -44,6 +52,11 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             return style;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by GetHeaderStyle.
+        /// </summary>
+        /// <param name="w">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static SpreadsheetStyle GetHeaderStyle(this ExcelWriter w)
         {
             var style = w.GetStyle();
@@ -54,6 +67,11 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             return style;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by GetRowStyle.
+        /// </summary>
+        /// <param name="w">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static SpreadsheetStyle GetRowStyle(this ExcelWriter w)
         {
             var style = w.GetStyle();
@@ -61,6 +79,11 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             return style;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by GetTotalStyle.
+        /// </summary>
+        /// <param name="w">Value used by the operation.</param>
+        /// <returns>The result of the operation.</returns>
         public static SpreadsheetStyle GetTotalStyle(this ExcelWriter w)
         {
             var style = w.GetStyle();
@@ -69,6 +92,11 @@ namespace Hotcakes.Modules.Core.Admin.AppCode
             return style;
         }
 
+        /// <summary>
+        /// Performs the administrative operation represented by SetFontSize.
+        /// </summary>
+        /// <param name="font">Value used by the operation.</param>
+        /// <param name="size">Value used by the operation.</param>
         public static void SetFontSize(this Font font, double size)
         {
             font.FontSize = new FontSize {Val = size};

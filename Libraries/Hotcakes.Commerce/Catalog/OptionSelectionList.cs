@@ -29,20 +29,32 @@ using System.Linq;
 
 namespace Hotcakes.Commerce.Catalog
 {
+    /// <summary>
+    /// Gets or sets the option selection list.
+    /// </summary>
     public class OptionSelectionList : List<OptionSelection>
     {
+        /// <summary>
+        /// Performs the ContainsSelectionForOption catalog operation.
+        /// </summary>
         public bool ContainsSelectionForOption(string optionBvin)
         {
             var cleaned = OptionSelection.CleanBvin(optionBvin);
             return this.Any(os => os.OptionBvin == cleaned);
         }
 
+        /// <summary>
+        /// Performs the FindByOptionId catalog operation.
+        /// </summary>
         public OptionSelection FindByOptionId(string optionId)
         {
             var cleaned = OptionSelection.CleanBvin(optionId);
             return this.FirstOrDefault(os => os.OptionBvin == cleaned);
         }
 
+        /// <summary>
+        /// Performs the GetPriceAdjustmentForSelections catalog operation.
+        /// </summary>
         public decimal GetPriceAdjustmentForSelections(OptionList allOptions)
         {
             decimal result = 0;
@@ -62,6 +74,9 @@ namespace Hotcakes.Commerce.Catalog
             return result;
         }
 
+        /// <summary>
+        /// Performs the GetWeightAdjustmentForSelections catalog operation.
+        /// </summary>
         public decimal GetWeightAdjustmentForSelections(OptionList allOptions)
         {
             decimal result = 0;
@@ -86,6 +101,9 @@ namespace Hotcakes.Commerce.Catalog
         /// </summary>
         /// <param name="other">The other option selections</param>
         /// <returns></returns>
+        /// <summary>
+        /// Performs the Equals catalog operation.
+        /// </summary>
         public bool Equals(OptionSelectionList other)
         {
             foreach (var item in this)

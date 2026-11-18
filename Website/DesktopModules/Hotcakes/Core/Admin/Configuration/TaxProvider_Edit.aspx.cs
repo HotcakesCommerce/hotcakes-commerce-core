@@ -32,6 +32,7 @@ namespace Hotcakes.Modules.Core.Admin.Configuration
 {
     partial class TaxProvider_Edit : BaseAdminPage
     {
+        /// <summary>Gets or sets the tax provider identifier being edited.</summary>
         public string ProviderID
         {
             get { return Request.QueryString["id"]; }

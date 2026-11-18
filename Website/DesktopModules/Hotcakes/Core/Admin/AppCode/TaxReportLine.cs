@@ -28,13 +28,31 @@ using System;
 
 namespace Hotcakes.Modules.Core.Admin.AppCode
 {
+    /// <summary>
+    /// Defines the administrative class TaxReportLine.
+    /// </summary>
     [Serializable]
     public class TaxReportLine
     {
+        /// <summary>
+        /// Gets or sets the country bvin.
+        /// </summary>
         public string CountryBvin { get; set; }
+        /// <summary>
+        /// Gets or sets the region bvin.
+        /// </summary>
         public string RegionBvin { get; set; }
+        /// <summary>
+        /// Gets or sets the country name.
+        /// </summary>
         public string CountryName { get; set; }
+        /// <summary>
+        /// Gets or sets the region name.
+        /// </summary>
         public string RegionName { get; set; }
+        /// <summary>
+        /// Gets or sets the total tax.
+        /// </summary>
         public decimal TotalTax { get; set; }
     }
 }

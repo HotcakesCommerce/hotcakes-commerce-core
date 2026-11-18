@@ -31,13 +31,19 @@ using Hotcakes.Commerce.Data.EF;
 
 namespace Hotcakes.Commerce.Reporting
 {
+    /// <summary>Provides persistence and reporting queries for <see cref="HccNewsMessage"/> records.</summary>
     public class HccNewsMessageManager : HccSimpleRepoBase<hcc_News, HccNewsMessage>
     {
+        /// <summary>Initializes a manager for the supplied commerce request context.</summary>
+        /// <param name="context">The request context that scopes repository operations.</param>
         public HccNewsMessageManager(HccRequestContext context)
             : base(context)
         {
         }
 
+        /// <summary>Copies a data record into its reporting model.</summary>
+        /// <param name="data">The persistence record.</param>
+        /// <param name="model">The destination model.</param>
         protected override void CopyDataToModel(hcc_News data, HccNewsMessage model)
         {
             model.Id = data.Id;
@@ -45,6 +51,9 @@ namespace Hotcakes.Commerce.Reporting
             model.Message = data.Message;
         }
 
+        /// <summary>Copies a reporting model into its persistence record.</summary>
+        /// <param name="data">The persistence record.</param>
+        /// <param name="model">The source model.</param>
         protected override void CopyModelToData(hcc_News data, HccNewsMessage model)
         {
             data.Id = model.Id;
@@ -52,6 +61,9 @@ namespace Hotcakes.Commerce.Reporting
             data.Message = model.Message;
         }
 
+        /// <summary>Returns the newest news messages, ordered by descending UTC timestamp.</summary>
+        /// <param name="maxItems">The maximum number of messages to return.</param>
+        /// <returns>A list containing at most <paramref name="maxItems"/> messages.</returns>
         public List<HccNewsMessage> GetLatestNews(int maxItems)
         {
             return FindListPoco(q => q.OrderByDescending(y => y.TimeStampUtc).Take(maxItems));

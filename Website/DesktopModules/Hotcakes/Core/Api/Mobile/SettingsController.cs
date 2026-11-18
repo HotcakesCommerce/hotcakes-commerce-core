@@ -30,9 +30,16 @@ using Hotcakes.Modules.Core.Api.Mobile.Models;
 
 namespace Hotcakes.Modules.Core.Api.Mobile
 {
+    /// <summary>
+    /// Provides mobile API access to store settings needed by the client.
+    /// </summary>
     [Serializable]
     public class SettingsController : HccApiController
     {
+        /// <summary>
+        /// Gets the store currency culture code.
+        /// </summary>
+        /// <returns>A <see cref="StoreSettings"/> instance containing the store currency culture code.</returns>
         [MobileAuthorize]
         [HttpGet]
         public StoreSettings Get()

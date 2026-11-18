@@ -26,11 +26,25 @@
 
 namespace Hotcakes.Commerce.Taxes.Providers
 {
+    /// <summary>
+    /// Represents the tax calculated for one submitted <see cref="Line"/>.
+    /// </summary>
+    /// <remarks>
+    /// The line number and item code correlate the provider response with the request line. Rates are
+    /// decimal fractions (for example, 0.07 represents seven percent), matching the commerce tax model.
+    /// </remarks>
     public interface ITaxProviderLineResult
     {
+        /// <summary>Gets or sets the submitted line number or provider line identifier.</summary>
         string No { get; set; }
+
+        /// <summary>Gets or sets the submitted item code.</summary>
         string ItemCode { get; set; }
+
+        /// <summary>Gets or sets the calculated tax rate as a decimal fraction.</summary>
         decimal TaxRate { get; set; }
+
+        /// <summary>Gets or sets the calculated tax amount for this line.</summary>
         decimal TaxValue { get; set; }
     }
 }

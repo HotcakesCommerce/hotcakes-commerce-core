@@ -38,6 +38,9 @@ using Hotcakes.Web.Data;
 
 namespace Hotcakes.Modules.Core.Admin.Reports.AbandonedCarts
 {
+    /// <summary>
+    /// Displays the administrative abandoned-carts report.
+    /// </summary>
     public partial class View : BaseReportPage
     {
         private const string USER_NAME_FORMAT = "{0} {1}";

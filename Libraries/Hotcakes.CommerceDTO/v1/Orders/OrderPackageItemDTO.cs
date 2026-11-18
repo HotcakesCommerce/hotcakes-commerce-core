@@ -37,6 +37,9 @@ namespace Hotcakes.CommerceDTO.v1.Orders
     [Serializable]
     public class OrderPackageItemDTO
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderPackageItemDTO"/> class with default package-item values.
+        /// </summary>
         public OrderPackageItemDTO()
         {
             ProductBvin = string.Empty;

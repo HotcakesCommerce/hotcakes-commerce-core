@@ -34,11 +34,8 @@ using Newtonsoft.Json;
 
 namespace Hotcakes.Commerce
 {
-    /// <summary>
-    ///     This class takes an object, and generates a key to it. There are several possibilities:
-    ///     This generator can generate keys of type integer,float,double. The generated key is not necessarly
-    ///     unique!
-    /// </summary>
+    /// <summary>Generates deterministic cache-key material from an object's JSON serialization.</summary>
+    /// <remarks>The result is an uppercase hexadecimal MD5 digest. It is intended for cache keys and change identification only, not authentication, authorization, password storage, or security-sensitive integrity decisions. Uniqueness is not guaranteed.</remarks>
     public class MD5HashGenerator
     {
         private static readonly object locker = new object();
@@ -53,8 +50,9 @@ namespace Hotcakes.Commerce
         ///     needed to save the state or so, is up to the implementer of the interface.
         ///     <b>The method is thread-safe!</b>
         /// </summary>
-        /// <param name="sourceObject">The object you'd like to have a key out of it.</param>
-        /// <returns>An string representing a MD5 Hashkey corresponding to the object or null if the object couldn't be serialized.</returns>
+        /// <param name="sourceObject">The object to serialize and hash.</param>
+        /// <returns>An uppercase hexadecimal MD5 string corresponding to the object's serialized state.</returns>
+        /// <remarks>The digest is cache-key material and is not a security token. Serialization is protected by a process-wide lock.</remarks>
         /// <exception cref="ApplicationException">Will be thrown if the key cannot be generated.</exception>
         public static string GenerateKey(object sourceObject)
         {
@@ -83,7 +81,8 @@ namespace Hotcakes.Commerce
         ///     Converts an object to an array of bytes. This array is used to hash the object.
         /// </summary>
         /// <param name="objectToSerialize">Just an object</param>
-        /// <returns>A byte - array representation of the object.</returns>
+        /// <returns>A byte-array representation of the object's JSON serialization.</returns>
+        /// <remarks>The serializer runs under the class-wide lock used to make this operation thread-safe.</remarks>
         /// <exception cref="SerializationException">Is thrown if something went wrong during serialization.</exception>
         private static byte[] ObjectToByteArray(object objectToSerialize)
         {
@@ -118,7 +117,8 @@ namespace Hotcakes.Commerce
         ///     method "hashes" this object. The hash can then be used e.g. to identify the object.
         /// </summary>
         /// <param name="objectAsBytes">bytearray representation of an object.</param>
-        /// <returns>The MD5 hash of the object as a string or null if it couldn't be generated.</returns>
+        /// <returns>The uppercase hexadecimal MD5 hash of the supplied bytes.</returns>
+        /// <remarks>This helper produces cache-key material only; the digest must not be used for authentication.</remarks>
         private static string ComputeHash(byte[] objectAsBytes)
         {
             MD5 md5 = new MD5CryptoServiceProvider();

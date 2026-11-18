@@ -28,12 +28,21 @@ using System.Xml.Serialization;
 
 namespace Hotcakes.Modules.Core
 {
+    /// <summary>
+    /// Represents one named store setting in the installation configuration.
+    /// </summary>
     [XmlType("setting")]
     public class StoreSettingConfig
     {
+        /// <summary>
+        /// Gets or sets the setting name.
+        /// </summary>
         [XmlAttribute("name")]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Gets or sets the serialized setting value.
+        /// </summary>
         [XmlAttribute("value")]
         public string Value { get; set; }
     }

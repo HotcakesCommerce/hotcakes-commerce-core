@@ -29,16 +29,21 @@ using System.Web.Mvc;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Writes a pre-serialized JSON payload as an MVC action result.</summary>
     [Serializable]
     public class PreJsonResult : ActionResult
     {
         private readonly string data = string.Empty;
+        /// <summary>Initializes a result with an already serialized JSON string.</summary>
+        /// <param name="json">The JSON payload to write.</param>
 
         public PreJsonResult(string json)
         {
             data = json;
         }
 
+        /// <summary>Writes the payload to the response with an application/json content type.</summary>
+        /// <param name="context">The current MVC controller context.</param>
         public override void ExecuteResult(ControllerContext context)
         {
             context.HttpContext.Response.Clear();

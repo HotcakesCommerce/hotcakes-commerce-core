@@ -29,9 +29,17 @@ using System.Security.Cryptography;
 
 namespace Hotcakes.Web.Cryptography
 {
+    /// <summary>
+    /// Generates cryptographically random keys for the cryptography helpers.
+    /// </summary>
     [Serializable]
     public sealed class KeyGenerator
     {
+        /// <summary>
+        /// Generates a 256-bit key represented as a hyphen-separated hexadecimal string.
+        /// </summary>
+        /// <returns>A randomly generated 32-byte key in hexadecimal form.</returns>
+        /// <see cref="KeyManager.GenerateKey()"/>
         public static string Generate256bitKey()
         {
             var k = new byte[32];

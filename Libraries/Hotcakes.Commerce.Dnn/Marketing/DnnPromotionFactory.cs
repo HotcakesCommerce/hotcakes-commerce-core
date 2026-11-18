@@ -31,9 +31,17 @@ using Hotcakes.Commerce.Marketing.PromotionQualifications;
 
 namespace Hotcakes.Commerce.Dnn.Marketing
 {
+    /// <summary>
+    /// Creates promotion qualifications that include DNN-specific qualification types.
+    /// </summary>
     [Serializable]
     public class DnnPromotionFactory : PromotionFactory
     {
+        /// <summary>
+        /// Creates a promotion qualification for the specified type identifier.
+        /// </summary>
+        /// <param name="typeId">The qualification type identifier.</param>
+        /// <returns>The matching <see cref="IPromotionQualification"/>, or the base factory result when the type is not DNN-specific.</returns>
         public override IPromotionQualification CreateQualification(Guid typeId)
         {
             switch (typeId.ToString().ToUpper())

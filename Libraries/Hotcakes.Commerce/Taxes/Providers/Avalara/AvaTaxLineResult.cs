@@ -28,12 +28,28 @@ using System;
 
 namespace Hotcakes.Commerce.Taxes.Providers.Avalara
 {
+    /// <summary>
+    /// Represents the tax returned for one non-shipping line by AvaTax.
+    /// </summary>
+    /// <remarks>
+    /// Instances are placed in <see cref="AvaTaxResult.Items"/> in the same order as the
+    /// corresponding order lines. The final AvaTax line is interpreted as shipping and is
+    /// therefore not represented by this type.
+    /// </remarks>
     [Serializable]
     public class AvaTaxLineResult : ITaxProviderLineResult
     {
+        /// <summary>Gets or sets the provider line number returned by AvaTax.</summary>
         public string No { get; set; }
+
+        /// <summary>Gets or sets the item code associated with the AvaTax line.</summary>
         public string ItemCode { get; set; }
+
+        /// <summary>Gets or sets the effective tax rate returned for the line.</summary>
+        /// <remarks>The value is a decimal fraction, not a percentage display value.</remarks>
         public decimal TaxRate { get; set; }
+
+        /// <summary>Gets or sets the tax amount returned for the line.</summary>
         public decimal TaxValue { get; set; }
     }
 }

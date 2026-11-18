@@ -29,8 +29,20 @@ using Hotcakes.Commerce.Membership;
 
 namespace Hotcakes.Commerce.Controls
 {
+    /// <summary>
+    /// Provides the customer account selected by a user-selection control.
+    /// </summary>
+    /// <remarks>
+    /// This event-argument object follows the <see cref="EventArgs"/> convention and
+    /// exposes the selected account directly. The property is mutable and is not
+    /// validated by this type; it is <see langword="null"/> until assigned.
+    /// </remarks>
     public class UserSelectedEventArgs : EventArgs
     {
+        /// <summary>
+        /// Gets or sets the customer account selected by the control.
+        /// </summary>
+        /// <value>The selected <see cref="CustomerAccount"/>, or <see langword="null"/> when no account is selected.</value>
         public CustomerAccount UserAccount { get; set; }
     }
 }

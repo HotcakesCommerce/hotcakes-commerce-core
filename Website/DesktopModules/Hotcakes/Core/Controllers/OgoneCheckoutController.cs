@@ -44,9 +44,12 @@ using Hotcakes.Web.Validation;
 
 namespace Hotcakes.Modules.Core.Controllers
 {
+/// <summary>Processes signed Ogone hosted checkout responses.</summary>
     [Serializable]
     public class OgoneCheckoutController : BaseStoreController
     {
+        /// <summary>Validates the Ogone signature and processes the payment response.</summary>
+        /// <returns>The checkout response view.</returns>
         [NonCacheableResponseFilter]
         public ActionResult Index()
         {

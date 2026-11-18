@@ -29,9 +29,15 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Payment
 {
+    /// <summary>
+    /// Represents a payment operation and its inputs, related data, and result.
+    /// </summary>
     [Serializable]
     public class Transaction
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Transaction"/> class with default payment data objects and collections.
+        /// </summary>
         public Transaction()
         {
             Id = new Guid();
@@ -70,6 +76,7 @@ namespace Hotcakes.Payment
         /// </value>
         public decimal Amount { get; set; }
 
+        /// <summary>Gets or sets the reward points associated with this transaction.</summary>
         public int RewardPoints { get; set; }
 
         /// <summary>
@@ -96,11 +103,17 @@ namespace Hotcakes.Payment
         /// </value>
         public Dictionary<string, string> AdditionalSettings { get; set; }
 
+        /// <summary>Gets or sets the number of the transaction being referenced by this operation.</summary>
         public string PreviousTransactionNumber { get; set; }
+        /// <summary>Gets or sets the authorization code of the transaction being referenced.</summary>
         public string PreviousTransactionAuthCode { get; set; }
+        /// <summary>Gets or sets the description supplied to the merchant or payment provider.</summary>
         public string MerchantDescription { get; set; }
+        /// <summary>Gets or sets the merchant invoice number associated with this transaction.</summary>
         public string MerchantInvoiceNumber { get; set; }
 
+        /// <summary>Gets or sets the recurring billing details for this transaction.</summary>
+        /// <seealso cref="RecurringData"/>
         public RecurringData RecurringBilling { get; set; }
 
         /// <summary>
@@ -186,6 +199,10 @@ namespace Hotcakes.Payment
 
         #region Public methods
 
+        /// <summary>Sets an additional transaction setting, replacing any existing value for the key.</summary>
+        /// <param name="key">The setting key.</param>
+        /// <param name="value">The setting value.</param>
+        /// <seealso cref="GetAdditionalSettingAsString(string)"/>
         public void SetAdditionalSetting(string key, string value)
         {
             if (AdditionalSettings.ContainsKey(key))
@@ -198,6 +215,10 @@ namespace Hotcakes.Payment
             }
         }
 
+        /// <summary>Gets an additional transaction setting as a string.</summary>
+        /// <param name="key">The setting key.</param>
+        /// <returns>The setting value, or an empty string when the key is not present.</returns>
+        /// <seealso cref="SetAdditionalSetting(string, string)"/>
         public string GetAdditionalSettingAsString(string key)
         {
             var result = string.Empty;
@@ -208,6 +229,9 @@ namespace Hotcakes.Payment
             return result;
         }
 
+        /// <summary>Gets an additional transaction setting parsed as a decimal.</summary>
+        /// <param name="key">The setting key.</param>
+        /// <returns>The parsed decimal value, or <c>-1</c> when the value is missing or cannot be parsed.</returns>
         public decimal GetAdditionalSettingAsDecimal(string key)
         {
             decimal result = -1;
@@ -218,6 +242,9 @@ namespace Hotcakes.Payment
             return result;
         }
 
+        /// <summary>Gets an additional transaction setting parsed as an integer.</summary>
+        /// <param name="key">The setting key.</param>
+        /// <returns>The parsed integer value, or <c>-1</c> when the value is missing or cannot be parsed.</returns>
         public int GetAdditionalSettingAsInteger(string key)
         {
             var result = -1;

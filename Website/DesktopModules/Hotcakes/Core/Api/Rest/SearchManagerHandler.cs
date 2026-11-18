@@ -39,6 +39,8 @@ namespace Hotcakes.Modules.Core.Api.Rest
     [Serializable]
     public class SearchManagerHandler : BaseRestHandler
     {
+        /// <summary>Initializes a new instance of the <see cref="SearchManagerHandler"/> handler.</summary>
+        /// <param name="app">The commerce application context used by the handler.</param>
         public SearchManagerHandler(HotcakesApplication app)
             : base(app)
         {

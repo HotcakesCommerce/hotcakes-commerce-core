@@ -53,13 +53,37 @@ namespace Hotcakes.Commerce.Catalog
             LastUpdated = DateTime.UtcNow;
         }
 
+        /// <summary>
+        /// Gets or sets the bvin.
+        /// </summary>
         public string Bvin { get; set; }
+        /// <summary>
+        /// Gets or sets the last updated.
+        /// </summary>
         public DateTime LastUpdated { get; set; }
+        /// <summary>
+        /// Gets or sets the store id.
+        /// </summary>
         public long StoreId { get; set; }
+        /// <summary>
+        /// Gets or sets the product id.
+        /// </summary>
         public string ProductId { get; set; }
+        /// <summary>
+        /// Gets or sets the available minutes.
+        /// </summary>
         public int AvailableMinutes { get; set; }
+        /// <summary>
+        /// Gets or sets the max downloads.
+        /// </summary>
         public int MaxDownloads { get; set; }
+        /// <summary>
+        /// Gets or sets the file name.
+        /// </summary>
         public string FileName { get; set; }
+        /// <summary>
+        /// Gets or sets the short description.
+        /// </summary>
         public string ShortDescription { get; set; }
 
         /// <summary>
@@ -74,6 +98,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Create DTO object for API
         /// </summary>
         /// <returns></returns>
+        /// <summary>
+        /// Performs the ToDto catalog operation.
+        /// </summary>
         public ProductFileDTO ToDto()
         {
             var dto = new ProductFileDTO();
@@ -94,6 +121,9 @@ namespace Hotcakes.Commerce.Catalog
         ///     Set values of the product file based on the DTO instance
         /// </summary>
         /// <param name="dto"><see cref="ProductFileDTO" /> instance</param>
+        /// <summary>
+        /// Performs the FromDto catalog operation.
+        /// </summary>
         public void FromDto(ProductFileDTO dto)
         {
             if (dto == null) return;
@@ -116,6 +146,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="fileName">File name</param>
         /// <param name="file"><see cref="HttpPostedFile" /> instance</param>
         /// <returns>Returns true if file saved successfully</returns>
+        /// <summary>
+        /// Performs the SaveFile catalog operation.
+        /// </summary>
         public static bool SaveFile(long storeId, string fileid, string fileName, HttpPostedFile file)
         {
             var diskFileName = fileid + "_" + fileName + ".config";
@@ -131,6 +164,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="fileName">File Name</param>
         /// <param name="stream">File stream instance</param>
         /// <returns>Returs true if file saved successfully</returns>
+        /// <summary>
+        /// Performs the SaveFile catalog operation.
+        /// </summary>
         public static bool SaveFile(long storeId, string fileid, string fileName, FileStream stream)
         {
             var diskFileName = fileid + "_" + fileName + ".config";
@@ -146,6 +182,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="fileName">File name</param>
         /// <param name="fileData">File byte array</param>
         /// <returns>Returns true if the file saved successfully</returns>
+        /// <summary>
+        /// Performs the SaveFile catalog operation.
+        /// </summary>
         public static bool SaveFile(long storeId, string fileId, string fileName, byte[] fileData)
         {
             var diskFileName = fileId + "_" + fileName + ".config";
@@ -178,6 +217,9 @@ namespace Hotcakes.Commerce.Catalog
         /// <param name="f"><see cref="ProductFile" /> instance</param>
         /// <param name="path">Path of the file</param>
         /// <returns>Returns Filesteam of the given product</returns>
+        /// <summary>
+        /// Performs the GetPhysicalFile catalog operation.
+        /// </summary>
         public static FileStream GetPhysicalFile(ProductFile f, string path)
         {
             var diskFileName = f.Bvin + "_" + f.FileName + ".config";
@@ -185,6 +227,9 @@ namespace Hotcakes.Commerce.Catalog
         }
 
         // Time Helper
+        /// <summary>
+        /// Performs the SetMinutes catalog operation.
+        /// </summary>
         public void SetMinutes(int Months, int Days, int Hours, int Minutes)
         {
             var TotalMinutes = 0;

@@ -28,16 +28,22 @@ using System;
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Provides Pinterest settings owned by a <see cref="StoreSettings"/> instance.</summary>
+    /// <remarks>Values are store-scoped and staged through the parent façade until the caller persists store settings.</remarks>
     [Serializable]
     public class StoreSettingsPinterest
     {
         private readonly StoreSettings parent;
 
+        /// <summary>Initializes a new Pinterest settings façade.</summary>
+        /// <param name="s">The owning store settings façade.</param>
         public StoreSettingsPinterest(StoreSettings s)
         {
             parent = s;
         }
 
+        /// <summary>Gets or sets whether Pinterest integration is enabled.</summary>
+        /// <value>The <c>UsePinterest</c> setting; the compatibility default is <see langword="true"/>.</value>
         public bool UsePinterest
         {
             get { return parent.GetPropBoolWithDefault("UsePinterest", true); }

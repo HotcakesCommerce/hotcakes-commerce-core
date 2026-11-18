@@ -37,11 +37,15 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Reports.CustomersByProduct
 {
+    /// <summary>
+    /// Displays the administrative customers-by-product report.
+    /// </summary>
     public partial class View : BaseReportPage
     {
         [Serializable]
         private class CustomerProductReportData
         {
+            /// <summary>Initializes an empty customer-by-product report row.</summary>
             public CustomerProductReportData()
             {
                 CustomerId = -1;
@@ -51,17 +55,29 @@ namespace Hotcakes.Modules.Core.Admin.Reports.CustomersByProduct
                 EmailAddress = string.Empty;
             }
 
+            /// <summary>Gets or sets the customer identifier.</summary>
             public int CustomerId { get; set; }
+            /// <summary>Gets or sets the product name.</summary>
             public string ProductName { get; set; }
+            /// <summary>Gets or sets the customer's first name.</summary>
             public string FirstName { get; set; }
+            /// <summary>Gets or sets the customer's last name.</summary>
             public string LastName { get; set; }
+            /// <summary>Gets or sets the customer's email address.</summary>
             public string EmailAddress { get; set; }
+            /// <summary>Gets or sets the customer's phone number.</summary>
             public string PhoneNumber { get; set; }
+            /// <summary>Gets or sets the first address line.</summary>
             public string Line1 { get; set; }
+            /// <summary>Gets or sets the second address line.</summary>
             public string Line2 { get; set; }
+            /// <summary>Gets or sets the city.</summary>
             public string City { get; set; }
+            /// <summary>Gets or sets the region.</summary>
             public string Region { get; set; }
+            /// <summary>Gets or sets the country.</summary>
             public string Country { get; set; }
+            /// <summary>Gets or sets the postal code.</summary>
             public string PostalCode { get; set; }
         }
 

@@ -31,6 +31,9 @@ using Hotcakes.Commerce.Dnn.Web;
 
 namespace Hotcakes.Modules.ProductReviews
 {
+    /// <summary>
+    /// Hosts the storefront product reviews view.
+    /// </summary>
     public partial class ProductReviewsView : HotcakesModuleBase
     {
         protected override string RenderView()

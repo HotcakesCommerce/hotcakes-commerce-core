@@ -26,11 +26,16 @@
 
 namespace Hotcakes.Commerce.Marketing
 {
+    /// <summary>Identifies the kind of subject against which a qualification is evaluated.</summary>
     public enum PromotionQualificationMode
     {
+        /// <summary>Evaluate a product, as used by sales.</summary>
         Products = 0, // For sales
+        /// <summary>Evaluate an individual order line, as used by line-item offers.</summary>
         LineItems = 1, // For Offers
+        /// <summary>Evaluate the order, as used by order and shipping offers.</summary>
         Orders = 2, // For Offers
+        /// <summary>Evaluate an affiliate context.</summary>
         Affiliates = 3
     }
 }

@@ -26,8 +26,22 @@
 
 namespace Hotcakes.Commerce.Membership
 {
+    /// <summary>
+    /// Maps system permissions to the configured administrative role for the current store.
+    /// </summary>
     public class RolePermissionsMatrix
     {
+        /// <summary>
+        /// Gets the configured role name associated with a system permission.
+        /// </summary>
+        /// <param name="hccApp">The commerce application whose current store supplies the role configuration.</param>
+        /// <param name="permission">The permission literal to map, such as <see cref="SystemPermissions.CatalogView"/>.</param>
+        /// <returns>The configured role name for the recognized permission; otherwise, <see cref="string.Empty"/>. If no current store is available, returns <see cref="string.Empty"/>.</returns>
+        /// <remarks>
+        /// <see cref="SystemPermissions.CatalogView"/>, <see cref="SystemPermissions.ContentView"/>, and <see cref="SystemPermissions.MarketingView"/> map to the catalog-management role.
+        /// <see cref="SystemPermissions.PeopleView"/>, <see cref="SystemPermissions.OrdersView"/>, <see cref="SystemPermissions.OrdersEdit"/>, and <see cref="SystemPermissions.ReportsView"/> map to the orders-and-customers role.
+        /// <see cref="SystemPermissions.SettingsView"/> maps to the store-administration role. Other permission literals, including <see cref="SystemPermissions.PluginView"/>, are not mapped.
+        /// </remarks>
         public static string GetRoleNameByPermission(HotcakesApplication hccApp, string permission)
         {
             if (hccApp.CurrentStore != null)

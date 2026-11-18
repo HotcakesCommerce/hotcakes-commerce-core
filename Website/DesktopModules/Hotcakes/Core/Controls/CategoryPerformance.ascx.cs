@@ -32,10 +32,19 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Controls
 {
+    /// <summary>
+    /// Represents the CategoryPerformance component used by the Hotcakes Core module.
+    /// </summary>
     public partial class CategoryPerformance : HccUserControl
     {
+        /// <summary>
+        /// Gets or sets the category identifier used by the control.
+        /// </summary>
         public string CategoryId { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the control is in edit mode.
+        /// </summary>
         public bool EditMode { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)

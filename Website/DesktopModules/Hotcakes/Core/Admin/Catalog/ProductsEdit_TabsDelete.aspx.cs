@@ -31,6 +31,9 @@ using Hotcakes.Modules.Core.Admin.AppCode;
 
 namespace Hotcakes.Modules.Core.Admin.Catalog
 {
+    /// <summary>
+    /// Provides the administrative endpoint for deleting a product edit tab.
+    /// </summary>
     public partial class ProductsEdit_TabsDelete : BaseAdminJsonPage
     {
         protected override void OnLoad(EventArgs e)

@@ -32,17 +32,28 @@ using Hotcakes.Common.Dnn;
 
 namespace Hotcakes.Commerce.Dnn
 {
+    /// <summary>
+    /// Provides contact affiliate tracking through DNN user profiles and session state.
+    /// </summary>
     [Serializable]
     public class DnnContactService : ContactService
     {
         private readonly int _portalId;
 
+        /// <summary>
+        /// Initializes the contact service for the specified commerce request context.
+        /// </summary>
+        /// <param name="context">The context used to resolve the current store and portal.</param>
         public DnnContactService(HccRequestContext context)
             : base(context)
         {
             _portalId = DnnGlobal.Instance.GetPortalId();
         }
 
+        /// <summary>
+        /// Associates an approved, enabled affiliate with the current user's profile.
+        /// </summary>
+        /// <param name="affiliateId">The affiliate identifier to store.</param>
         public override void UpdateProfileAffiliateId(long affiliateId)
         {
             var aff = Affiliates.Find(affiliateId);
@@ -67,6 +78,11 @@ namespace Hotcakes.Commerce.Dnn
             }
         }
 
+        /// <summary>
+        /// Records an affiliate referral and updates the current user's profile and session when appropriate.
+        /// </summary>
+        /// <param name="affiliateId">The affiliate's public referral identifier.</param>
+        /// <param name="referralUrl">The URL where the referral was received.</param>
         public override void SetAffiliateReferral(string affiliateId, string referralUrl)
         {
             var store = Context.CurrentStore;
@@ -112,6 +128,10 @@ namespace Hotcakes.Commerce.Dnn
             }
         }
 
+        /// <summary>
+        /// Gets the current valid affiliate identifier from the DNN profile or commerce session.
+        /// </summary>
+        /// <returns>The current approved and enabled affiliate identifier, or <c>null</c>.</returns>
         public override long? GetCurrentAffiliateId()
         {
             long? affiliateId = null;

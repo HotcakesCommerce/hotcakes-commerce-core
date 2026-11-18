@@ -32,8 +32,21 @@ using Hotcakes.Commerce.Orders;
 
 namespace Hotcakes.Commerce.BusinessRules.OrderTasks
 {
+    /// <summary>
+    /// Marks an order as placed, reserves inventory, records request metadata, and assigns the received status.
+    /// </summary>
+    /// <remarks>
+    /// The task identifier is <c>8F2BB6B4-2FEF-406d-A62D-075CD74D2551</c>. An already placed order is unchanged;
+    /// an order with no items reports the customer-visible <c>OrderAlreadyPlaced</c> error, while inventory failures
+    /// report <c>Stock Too Low</c>. Rollback intentionally never unplaces an order.
+    /// </remarks>
     public class MakePlacedOrder : OrderTask
     {
+        /// <summary>
+        /// Places the order, reserves inventory, records request information, and sets its status to received.
+        /// </summary>
+        /// <param name="context">The <see cref="OrderTaskContext"/> containing the order and request context.</param>
+        /// <returns><see langword="false"/> when the order has no items or inventory cannot be reserved; otherwise <see langword="true"/>.</returns>
         public override bool Execute(OrderTaskContext context)
         {
             if (context.Order.IsPlaced)
@@ -88,27 +101,49 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return true;
         }
 
+        /// <summary>
+        /// Determines the device classification recorded on the order for the current request.
+        /// </summary>
+        /// <param name="request">The current HTTP request.</param>
+        /// <returns>The device classification; the base implementation returns <see cref="DeviceType.Desktop"/>.</returns>
         protected virtual DeviceType DetermineDeviceType(HttpRequestBase request)
         {
             return DeviceType.Desktop;
         }
 
+        /// <summary>
+        /// Intentionally does not unplace the order or undo inventory reservation.
+        /// </summary>
+        /// <param name="context">The workflow context.</param>
+        /// <returns>Always <see langword="true"/>.</returns>
         public override bool Rollback(OrderTaskContext context)
         {
             // No Rollback for this. Never unplace an order
             return true;
         }
 
+        /// <summary>
+        /// Gets the stable task identifier used to register this task in workflows.
+        /// </summary>
+        /// <returns><c>8F2BB6B4-2FEF-406d-A62D-075CD74D2551</c>.</returns>
         public override string TaskId()
         {
             return "8F2BB6B4-2FEF-406d-A62D-075CD74D2551";
         }
 
+        /// <summary>
+        /// Gets the display name of this task.
+        /// </summary>
+        /// <returns><c>Make Placed Order</c>.</returns>
         public override string TaskName()
         {
             return "Make Placed Order";
         }
 
+        /// <summary>
+        /// Gets the workflow step name, which is the task name.
+        /// </summary>
+        /// <returns><c>Make Placed Order</c>.</returns>
         public override string StepName()
         {
             var result = string.Empty;
@@ -119,6 +154,10 @@ namespace Hotcakes.Commerce.BusinessRules.OrderTasks
             return result;
         }
 
+        /// <summary>
+        /// Creates a new order-placement task.
+        /// </summary>
+        /// <returns>A new <see cref="MakePlacedOrder"/> instance.</returns>
         public override Task Clone()
         {
             return new MakePlacedOrder();

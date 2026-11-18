@@ -28,14 +28,18 @@ using System;
 
 namespace Hotcakes.Web.Validation
 {
+    /// <summary>Describes a single validation failure.</summary>
     [CLSCompliant(true)]
     [Serializable]
     public class RuleViolation
     {
+        /// <summary>Initializes an empty validation failure.</summary>
         public RuleViolation()
         {
         }
 
+        /// <summary>Initializes a validation failure without a control name.</summary>
+        /// <param name="name">The name of the invalid property.</param><param name="value">The invalid property value.</param><param name="message">The message describing the failure.</param>
         public RuleViolation(string name, string value, string message)
         {
             PropertyName = name;
@@ -44,6 +48,8 @@ namespace Hotcakes.Web.Validation
             ControlName = string.Empty;
         }
 
+        /// <summary>Initializes a validation failure and associates it with a control.</summary>
+        /// <param name="name">The name of the invalid property.</param><param name="value">The invalid property value.</param><param name="message">The message describing the failure.</param><param name="controlName">The name of the associated control.</param>
         public RuleViolation(string name, string value, string message, string controlName)
         {
             PropertyName = name;
@@ -52,9 +58,13 @@ namespace Hotcakes.Web.Validation
             ControlName = controlName;
         }
 
+        /// <summary>Gets or sets the name of the invalid property.</summary>
         public string PropertyName { get; set; }
+        /// <summary>Gets or sets the value that failed validation.</summary>
         public string PropertyValue { get; set; }
+        /// <summary>Gets or sets the name of the associated control.</summary>
         public string ControlName { get; set; }
+        /// <summary>Gets or sets the message describing the validation failure.</summary>
         public string ErrorMessage { get; set; }
     }
 }

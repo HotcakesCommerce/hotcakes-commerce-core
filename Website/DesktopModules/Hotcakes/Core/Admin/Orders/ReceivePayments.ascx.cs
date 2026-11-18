@@ -37,12 +37,18 @@ using Hotcakes.Payment;
 
 namespace Hotcakes.Modules.Core.Admin.Orders
 {
+    /// <summary>
+    /// Provides controls for receiving payments against an administrative order.
+    /// </summary>
     public partial class ReceivePayments : HccUserControl
     {
+        /// <summary>Occurs when a payment transaction is processed.</summary>
         public TransactionEventDelegate TransactionEvent;
 
         public Order CurrentOrder { get; set; }
+        /// <summary>Gets or sets the order receiving payment.</summary>
 
+        /// <summary>Gets or sets the return merchandise authorization identifier.</summary>
         public string RmaId
         {
             get { return Request.QueryString["rmaid"]; }

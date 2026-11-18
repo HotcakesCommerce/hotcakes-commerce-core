@@ -26,9 +26,13 @@
 
 namespace Hotcakes.Commerce.Accounts
 {
+    /// <summary>Represents StoreAccessMode data and behavior within the Hotcakes Commerce account and store boundary.</summary>
+    /// <summary>Defines the access levels available in a <see cref="StoreUserRelationship"/>.</summary>
     public enum StoreAccessMode
     {
+        /// <summary>The user owns the store and has owner-level access.</summary>
         Owner = 1,
+        /// <summary>The user manages the store without being its owner.</summary>
         Manager = 2
     }
 }

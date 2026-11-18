@@ -38,10 +38,15 @@ using Hotcakes.Web;
 
 namespace Hotcakes.Commerce.Marketing
 {
+    /// <summary>
+    /// Defines a promotion's schedule, qualifications, actions, and application behavior.
+    /// A promotion is active only when enabled and its UTC date range contains the current time.
+    /// </summary>
     public class Promotion
     {
         #region Constructor
 
+        /// <summary>Initializes a promotion with a sale mode, a one-year default window, and empty rule collections.</summary>
         public Promotion()
         {
             Mode = PromotionType.Sale;
@@ -67,23 +72,36 @@ namespace Hotcakes.Commerce.Marketing
 
         #region Properties
 
+        /// <summary>Gets or sets the promotion identifier.</summary>
         public long Id { get; set; }
+        /// <summary>Gets or sets the store identifier owning the promotion.</summary>
         public long StoreId { get; set; }
+        /// <summary>Gets or sets the promotion mode, which controls application scope.</summary>
         public PromotionType Mode { get; set; }
+        /// <summary>Gets or sets the last modification time in UTC.</summary>
         public DateTime LastUpdatedUtc { get; set; }
+        /// <summary>Gets or sets the administrative promotion name.</summary>
         public string Name { get; set; }
+        /// <summary>Gets or sets the customer-facing description.</summary>
         public string CustomerDescription { get; set; }
+        /// <summary>Gets or sets the inclusive UTC start boundary used by <see cref="GetStatus"/>.</summary>
         public DateTime StartDateUtc { get; set; }
+        /// <summary>Gets or sets the inclusive UTC end boundary used by <see cref="GetStatus"/>.</summary>
         public DateTime EndDateUtc { get; set; }
+        /// <summary>Gets or sets whether the promotion may be applied.</summary>
         public bool IsEnabled { get; set; }
+        /// <summary>Gets or sets whether this promotion prevents later non-sale offers from combining with it.</summary>
         public bool DoNotCombine { get; set; }
+        /// <summary>Gets or sets the ordering value used by repository queries and application.</summary>
         public int SortOrder { get; set; }
 
+        /// <summary>Gets the read-only qualification collection, in promotion order.</summary>
         public ReadOnlyCollection<IPromotionQualification> Qualifications
         {
             get { return _qualificationsReadOnly ?? (_qualificationsReadOnly = _qualifications.AsReadOnly()); }
         }
 
+        /// <summary>Gets the read-only action collection, in promotion order.</summary>
         public ReadOnlyCollection<IPromotionAction> Actions
         {
             get { return _actionsReadOnly ?? (_actionsReadOnly = _actions.AsReadOnly()); }
@@ -93,6 +111,8 @@ namespace Hotcakes.Commerce.Marketing
 
         #region Public Methods
 
+        /// <summary>Calculates the current status using <see cref="DateTime.UtcNow"/>, enablement, and UTC boundaries.</summary>
+        /// <returns>The calculated promotion status.</returns>
         public PromotionStatus GetStatus()
         {
             var now = DateTime.UtcNow;
@@ -104,6 +124,8 @@ namespace Hotcakes.Commerce.Marketing
             return PromotionStatus.Active;
         }
 
+        /// <summary>Serializes actions to the persisted <c>Actions</c>/<c>Action</c> XML format, including type IDs and settings.</summary>
+        /// <returns>The action XML, or an empty <c>Actions</c> element when no actions exist.</returns>
         public string ActionsToXml()
         {
             var x = new XElement("Actions",
@@ -123,6 +145,9 @@ namespace Hotcakes.Commerce.Marketing
             return x.ToString(SaveOptions.None);
         }
 
+        /// <summary>Replaces the action collection by deserializing the persisted action XML.</summary>
+        /// <param name="xml">The <c>Actions</c> XML; blank input clears the collection.</param>
+        /// <exception cref="FormatException">The XML or a contained type identifier is invalid.</exception>
         public void ActionsFromXml(string xml)
         {
             _actions.Clear();
@@ -134,6 +159,8 @@ namespace Hotcakes.Commerce.Marketing
             _actions.AddRange(actions);
         }
 
+        /// <summary>Serializes qualifications to the persisted <c>Qualifications</c>/<c>Qualification</c> XML format.</summary>
+        /// <returns>The qualification XML, or an empty <c>Qualifications</c> element when none exist.</returns>
         public string QualificationsToXml()
         {
             var x = new XElement("Qualifications",
@@ -154,6 +181,9 @@ namespace Hotcakes.Commerce.Marketing
             return x.ToString(SaveOptions.None);
         }
 
+        /// <summary>Replaces the qualification collection by deserializing the persisted qualification XML.</summary>
+        /// <param name="xml">The <c>Qualifications</c> XML; blank input clears the collection.</param>
+        /// <exception cref="FormatException">The XML or a contained type identifier is invalid.</exception>
         public void QualificationsFromXml(string xml)
         {
             _qualifications.Clear();
@@ -165,6 +195,9 @@ namespace Hotcakes.Commerce.Marketing
             _qualifications.AddRange(qualifications);
         }
 
+        /// <summary>Adds a qualification, assigning it the next identifier after the current maximum.</summary>
+        /// <param name="q">The qualification to add.</param>
+        /// <returns>Always <see langword="true"/> for the current implementation.</returns>
         public bool AddQualification(IPromotionQualification q)
         {
             long maxid = 0;
@@ -181,6 +214,9 @@ namespace Hotcakes.Commerce.Marketing
             return true;
         }
 
+        /// <summary>Removes the qualification with the specified identifier.</summary>
+        /// <param name="id">The qualification identifier.</param>
+        /// <returns><see langword="true"/> when a qualification was removed.</returns>
         public bool RemoveQualification(long id)
         {
             var index = FindQualificationIndex(id);
@@ -193,11 +229,17 @@ namespace Hotcakes.Commerce.Marketing
             return false;
         }
 
+        /// <summary>Finds a qualification by identifier.</summary>
+        /// <param name="id">The qualification identifier.</param>
+        /// <returns>The qualification, or <see langword="null"/> when not found.</returns>
         public IPromotionQualification GetQualification(long id)
         {
             return _qualifications.FirstOrDefault(y => y.Id == id);
         }
 
+        /// <summary>Adds an action, assigning it the next identifier after the current maximum.</summary>
+        /// <param name="a">The action to add.</param>
+        /// <returns>Always <see langword="true"/> for the current implementation.</returns>
         public bool AddAction(IPromotionAction a)
         {
             long maxid = 0;
@@ -214,6 +256,9 @@ namespace Hotcakes.Commerce.Marketing
             return true;
         }
 
+        /// <summary>Removes the action with the specified identifier.</summary>
+        /// <param name="id">The action identifier.</param>
+        /// <returns><see langword="true"/> when an action was removed.</returns>
         public bool RemoveAction(long id)
         {
             var index = FindActionIndex(id);
@@ -226,19 +271,22 @@ namespace Hotcakes.Commerce.Marketing
             return false;
         }
 
+        /// <summary>Finds an action by identifier.</summary>
+        /// <param name="id">The action identifier.</param>
+        /// <returns>The action, or <see langword="null"/> when not found.</returns>
         public IPromotionAction GetAction(long id)
         {
             return _actions.FirstOrDefault(y => y.Id == id);
         }
 
         /// <summary>
-        ///     Applies to product.
+        /// Applies the promotion to a product's user-specific price after checking product qualifications and actions.
         /// </summary>
         /// <param name="requestContext">The request context.</param>
         /// <param name="p">The p.</param>
         /// <param name="price">The price.</param>
         /// <param name="account">The account.</param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> when the active promotion qualifies and its actions run.</returns>
         public bool ApplyToProduct(HccRequestContext requestContext, Product p, UserSpecificPrice price,
             CustomerAccount account)
         {
@@ -258,10 +306,12 @@ namespace Hotcakes.Commerce.Marketing
         }
 
         /// <summary>
+        /// Applies the promotion to an order. Line-item and free-item offers evaluate eligible lines individually;
+        /// other modes evaluate the order once. Actions mutate the supplied order and promotion context.
         /// </summary>
-        /// <param name="requestContext"></param>
-        /// <param name="o"></param>
-        /// <returns></returns>
+        /// <param name="requestContext">The commerce request context.</param>
+        /// <param name="o">The order to evaluate and potentially mutate.</param>
+        /// <returns><see langword="true"/> when the promotion qualifies.</returns>
         public bool ApplyToOrder(HccRequestContext requestContext, Order o)
         {
             if (requestContext == null) return false;
@@ -305,14 +355,14 @@ namespace Hotcakes.Commerce.Marketing
         }
 
         /// <summary>
-        ///     Applies to shipping rate.
+        /// Applies the promotion to a shipping rate and returns the context's adjusted rate when it qualifies.
         /// </summary>
-        /// <param name="requestContext">The request context.</param>
-        /// <param name="o">The o.</param>
-        /// <param name="account">The account.</param>
-        /// <param name="shipMethodId">The ship method identifier.</param>
-        /// <param name="originalShippingMethodRate">The original shipping method rate.</param>
-        /// <returns></returns>
+        /// <param name="requestContext">The commerce request context.</param>
+        /// <param name="o">The order whose shipping rate is being evaluated.</param>
+        /// <param name="account">The customer account associated with the order.</param>
+        /// <param name="shipMethodId">The shipping method identifier placed in the promotion context.</param>
+        /// <param name="originalShippingMethodRate">The starting shipping rate.</param>
+        /// <returns>The original rate when the context is invalid or the promotion does not qualify; otherwise the adjusted rate.</returns>
         public decimal ApplyToShippingRate(HccRequestContext requestContext, Order o, CustomerAccount account,
             string shipMethodId, decimal originalShippingMethodRate)
         {
@@ -339,13 +389,11 @@ namespace Hotcakes.Commerce.Marketing
             return result;
         }
 
-        /// <summary>
-        ///     Applies to affiliate.
-        /// </summary>
-        /// <param name="requestContext">The request context.</param>
-        /// <param name="account">The account.</param>
-        /// <param name="date">The date.</param>
-        /// <returns></returns>
+        /// <summary>Applies this promotion to an affiliate customer context.</summary>
+        /// <param name="requestContext">The commerce request context.</param>
+        /// <param name="account">The affiliate customer account.</param>
+        /// <param name="date">The evaluation date supplied by the caller; the current implementation does not use it.</param>
+        /// <returns><see langword="true"/> when the active promotion qualifies and its actions run.</returns>
         public bool ApplyToAffiliate(HccRequestContext requestContext, CustomerAccount account, DateTime date)
         {
             if (requestContext == null) return false;
@@ -358,6 +406,9 @@ namespace Hotcakes.Commerce.Marketing
             return ApplyPromotion(context, PromotionQualificationMode.Affiliates);
         }
 
+        /// <summary>Applies this promotion to each order line for free-shipping evaluation.</summary>
+        /// <param name="promoContext">The existing mutable promotion context.</param>
+        /// <returns><see langword="true"/> when the qualification evaluation succeeds.</returns>
         public bool ApplyForFreeShipping(PromotionContext promoContext)
         {
             var result = false;
@@ -479,9 +530,10 @@ namespace Hotcakes.Commerce.Marketing
         ///     than checking user group because ID is in the context and group
         ///     requires a database call.
         /// </remarks>
-        /// <param name="context"></param>
-        /// <param name="mode"></param>
-        /// <returns></returns>
+        /// <summary>Checks all qualifications in ascending <see cref="RelativeProcessingCost"/> order.</summary>
+        /// <param name="context">The context to evaluate.</param>
+        /// <param name="mode">The subject mode being evaluated.</param>
+        /// <returns><see langword="true"/> only when every qualification succeeds.</returns>
         public bool CheckQualifications(PromotionContext context, PromotionQualificationMode mode)
         {
             var qualificationsSorted = _qualifications.OrderBy(y => y.ProcessingCost);
