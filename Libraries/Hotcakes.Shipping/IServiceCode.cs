@@ -26,9 +26,19 @@
 
 namespace Hotcakes.Shipping
 {
+    /// <summary>
+    /// Describes a service-level code exposed by an <see cref="IShippingService" />.
+    /// </summary>
     public interface IServiceCode
     {
+        /// <summary>
+        /// Gets or sets the provider's stable identifier for the service option.
+        /// </summary>
         string Code { get; set; }
+
+        /// <summary>
+        /// Gets or sets the human-readable name shown for the service option.
+        /// </summary>
         string DisplayName { get; set; }
     }
 }

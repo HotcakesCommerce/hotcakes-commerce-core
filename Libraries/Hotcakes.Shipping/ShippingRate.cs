@@ -28,9 +28,16 @@ using System;
 
 namespace Hotcakes.Shipping
 {
+    /// <summary>
+    /// Represents a shipping option and its estimated cost.
+    /// </summary>
+    /// <seealso cref="IShippingRate" />
     [Serializable]
     public class ShippingRate : IShippingRate
     {
+        /// <summary>
+        /// Initializes an empty shipping rate.
+        /// </summary>
         public ShippingRate()
         {
             EstimatedCost = 0;
@@ -39,9 +46,24 @@ namespace Hotcakes.Shipping
             ServiceCodes = string.Empty;
         }
 
+        /// <summary>
+        /// Gets or sets the estimated cost of the shipping option.
+        /// </summary>
         public decimal EstimatedCost { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name shown to users for the shipping option.
+        /// </summary>
         public string DisplayName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the identifier of the service that supplied the rate.
+        /// </summary>
         public string ServiceId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the service codes associated with the rate.
+        /// </summary>
         public string ServiceCodes { get; set; }
     }
 }

@@ -28,22 +28,41 @@ using System;
 
 namespace Hotcakes.Shipping
 {
+    /// <summary>
+    /// Represents a shipping service code and its display name.
+    /// </summary>
+    /// <seealso cref="IServiceCode" />
     [Serializable]
     public class ServiceCode : IServiceCode
     {
+        /// <summary>
+        /// Initializes an empty service code.
+        /// </summary>
         public ServiceCode()
         {
             Code = string.Empty;
             DisplayName = string.Empty;
         }
 
+        /// <summary>
+        /// Initializes a service code with its display name and code.
+        /// </summary>
+        /// <param name="name">The name shown to users.</param>
+        /// <param name="code">The provider's service code.</param>
         public ServiceCode(string name, string code)
         {
             Code = code;
             DisplayName = name;
         }
 
+        /// <summary>
+        /// Gets or sets the provider's service code.
+        /// </summary>
         public string Code { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name shown to users for this service.
+        /// </summary>
         public string DisplayName { get; set; }
     }
 }

@@ -29,43 +29,77 @@ using System.Collections.Generic;
 
 namespace Hotcakes.Shipping.Services
 {
+    /// <summary>
+    /// Calculates one shipping charge by selecting a rate-table level from the shipment total value.
+    /// </summary>
+    /// <seealso cref="RateTableSettings"/>
+    /// <seealso cref="IShippingService"/>
     [Serializable]
     public class RateTableByTotalPrice : IShippingService
     {
         private List<ShippingServiceMessage> _Messages = new List<ShippingServiceMessage>();
 
+        /// <summary>
+        /// Initializes a new instance with default <see cref="RateTableSettings"/>.
+        /// </summary>
         public RateTableByTotalPrice()
         {
             Settings = new RateTableSettings();
         }
 
+        /// <summary>
+        /// Gets or sets the total-price rate table used by this service.
+        /// </summary>
+        /// <seealso cref="BaseSettings"/>
         public RateTableSettings Settings { get; set; }
 
+        /// <summary>
+        /// Gets the display name of this shipping service.
+        /// </summary>
         public string Name
         {
             get { return "Rate Table By Total Price"; }
         }
 
+        /// <summary>
+        /// Gets the stable identifier for this shipping service.
+        /// </summary>
         public string Id
         {
             get { return "9F896073-EE1F-400c-8B54-D9858B06AA01"; }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this service supports shipment tracking.
+        /// </summary>
         public bool IsSupportsTracking
         {
             get { return false; }
         }
 
+        /// <summary>
+        /// Gets the configured settings through the common <see cref="ServiceSettings"/> base type.
+        /// </summary>
+        /// <seealso cref="Settings"/>
         public ServiceSettings BaseSettings
         {
             get { return Settings; }
         }
 
+        /// <summary>
+        /// Gets the service codes supported by this shipping service.
+        /// </summary>
+        /// <returns>An empty list because this built-in service does not expose service codes.</returns>
         public List<IServiceCode> ListAllServiceCodes()
         {
             return new List<IServiceCode>();
         }
 
+        /// <summary>
+        /// Calculates a shipping rate by selecting the configured level for the shipment total value.
+        /// </summary>
+        /// <param name="shipment">The shipment to rate.</param>
+        /// <returns>A list containing one <see cref="ShippingRate"/> with the selected base charge and percentage charge.</returns>
         public List<IShippingRate> RateShipment(IShipment shipment)
         {
             decimal totalValue = 0;
@@ -101,12 +135,20 @@ namespace Hotcakes.Shipping.Services
             return rates;
         }
 
+        /// <summary>
+        /// Gets or sets the latest messages produced by this service.
+        /// </summary>
         public List<ShippingServiceMessage> LatestMessages
         {
             get { return _Messages; }
             set { _Messages = value; }
         }
 
+        /// <summary>
+        /// Gets a tracking URL for a tracking code.
+        /// </summary>
+        /// <param name="trackingCode">The carrier tracking code.</param>
+        /// <returns>Always returns <see langword="null"/> because this service does not support tracking.</returns>
         public string GetTrackingUrl(string trackingCode)
         {
             return null;

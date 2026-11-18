@@ -30,9 +30,17 @@ using Hotcakes.Web.Geography;
 
 namespace Hotcakes.Shipping
 {
+    /// <summary>
+    /// Describes the items and addresses involved in a shipment.
+    /// </summary>
+    /// <seealso cref="IShipment" />
+    /// <seealso cref="SimpleAddress" />
     [Serializable]
     public class Shipment : IShipment
     {
+        /// <summary>
+        /// Initializes a shipment with empty item and address values.
+        /// </summary>
         public Shipment()
         {
             SourceAddress = new SimpleAddress();
@@ -40,10 +48,26 @@ namespace Hotcakes.Shipping
             Items = new List<IShippable>();
         }
 
+        /// <summary>
+        /// Gets or sets the shippable items included in the shipment.
+        /// </summary>
         public List<IShippable> Items { get; set; }
+
+        /// <summary>
+        /// Gets or sets the address from which the shipment originates.
+        /// </summary>
         public IAddress SourceAddress { get; set; }
+
+        /// <summary>
+        /// Gets or sets the address to which the shipment is sent.
+        /// </summary>
         public IAddress DestinationAddress { get; set; }
 
+        /// <summary>
+        /// Creates a shipment containing cloned source and destination addresses from an interface instance.
+        /// </summary>
+        /// <param name="source">The shipment whose addresses are copied.</param>
+        /// <returns>A new shipment with cloned addresses and an empty <see cref="Items" /> collection.</returns>
         public static Shipment CloneAddressesFromInterface(IShipment source)
         {
             var result = new Shipment

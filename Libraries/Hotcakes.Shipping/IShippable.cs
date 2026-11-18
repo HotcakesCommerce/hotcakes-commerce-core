@@ -26,19 +26,58 @@
 
 namespace Hotcakes.Shipping
 {
+    /// <summary>
+    /// Represents a shippable package, including its value, quantity, weight, and dimensions.
+    /// </summary>
+    /// <remarks>
+    /// Weight and dimensions are interpreted using <see cref="BoxWeightType" /> and <see cref="BoxLengthType" />.
+    /// </remarks>
     public interface IShippable
     {
+        /// <summary>
+        /// Gets or sets the declared monetary value of the package contents.
+        /// </summary>
         decimal BoxValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of items contained in the package.
+        /// </summary>
         int QuantityOfItemsInBox { get; set; }
 
+        /// <summary>
+        /// Gets or sets the unit used to interpret <see cref="BoxWeight" />.
+        /// </summary>
         WeightType BoxWeightType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the weight of the package in the selected <see cref="BoxWeightType" />.
+        /// </summary>
         decimal BoxWeight { get; set; }
 
+        /// <summary>
+        /// Gets or sets the unit used to interpret the package dimensions.
+        /// </summary>
         LengthType BoxLengthType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the length of the package in the selected <see cref="BoxLengthType" />.
+        /// </summary>
         decimal BoxLength { get; set; }
+
+        /// <summary>
+        /// Gets or sets the width of the package in the selected <see cref="BoxLengthType" />.
+        /// </summary>
         decimal BoxWidth { get; set; }
+
+        /// <summary>
+        /// Gets or sets the height of the package in the selected <see cref="BoxLengthType" />.
+        /// </summary>
         decimal BoxHeight { get; set; }
 
+        /// <summary>
+        /// Creates a copy of this shippable package.
+        /// </summary>
+        /// <returns>A new <see cref="IShippable" /> containing the copied package data.</returns>
         IShippable CloneShippable();
     }
 }

@@ -28,33 +28,68 @@ using System;
 
 namespace Hotcakes.Shipping.Services
 {
+    /// <summary>
+    /// Defines the values used to calculate shipping from a shipment's weight.
+    /// </summary>
+    /// <seealso cref="ServiceSettings"/>
+    /// <seealso cref="RatePerWeightFormula"/>
     [Serializable]
     public class RatePerWeightFormulaSettings : ServiceSettings
     {
+        /// <summary>
+        /// Gets or sets the base shipping amount charged at the base weight.
+        /// </summary>
+        /// <value>The base amount stored under the <c>BaseAmount</c> setting key.</value>
+        /// <seealso cref="ServiceSettings.GetDecimalSetting(string)"/>
+        /// <seealso cref="ServiceSettings.SetDecimalSetting(string, decimal)"/>
         public decimal BaseAmount
         {
             get { return GetDecimalSetting("BaseAmount"); }
             set { SetDecimalSetting("BaseAmount", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the weight at which the base amount applies.
+        /// </summary>
+        /// <value>The base weight stored under the <c>BaseWeight</c> setting key.</value>
+        /// <seealso cref="ServiceSettings.GetDecimalSetting(string)"/>
+        /// <seealso cref="ServiceSettings.SetDecimalSetting(string, decimal)"/>
         public decimal BaseWeight
         {
             get { return GetDecimalSetting("BaseWeight"); }
             set { SetDecimalSetting("BaseWeight", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the charge applied for weight beyond the base weight.
+        /// </summary>
+        /// <value>The additional weight charge stored under the <c>AdditionalWeightCharge</c> setting key.</value>
+        /// <seealso cref="ServiceSettings.GetDecimalSetting(string)"/>
+        /// <seealso cref="ServiceSettings.SetDecimalSetting(string, decimal)"/>
         public decimal AdditionalWeightCharge
         {
             get { return GetDecimalSetting("AdditionalWeightCharge"); }
             set { SetDecimalSetting("AdditionalWeightCharge", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the minimum shipment weight to which the formula applies.
+        /// </summary>
+        /// <value>The minimum weight stored under the <c>MinWeight</c> setting key.</value>
+        /// <seealso cref="ServiceSettings.GetDecimalSetting(string)"/>
+        /// <seealso cref="ServiceSettings.SetDecimalSetting(string, decimal)"/>
         public decimal MinWeight
         {
             get { return GetDecimalSetting("MinWeight"); }
             set { SetDecimalSetting("MinWeight", value); }
         }
 
+        /// <summary>
+        /// Gets or sets the maximum shipment weight to which the formula applies.
+        /// </summary>
+        /// <value>The maximum weight stored under the <c>MaxWeight</c> setting key.</value>
+        /// <seealso cref="ServiceSettings.GetDecimalSetting(string)"/>
+        /// <seealso cref="ServiceSettings.SetDecimalSetting(string, decimal)"/>
         public decimal MaxWeight
         {
             get { return GetDecimalSetting("MaxWeight"); }

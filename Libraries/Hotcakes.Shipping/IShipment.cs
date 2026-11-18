@@ -29,10 +29,27 @@ using Hotcakes.Web.Geography;
 
 namespace Hotcakes.Shipping
 {
+    /// <summary>
+    /// Represents the items and endpoints used when requesting shipping rates.
+    /// </summary>
+    /// <remarks>
+    /// A shipment is passed to <see cref="IShippingService.RateShipment(IShipment)" /> for rate calculation.
+    /// </remarks>
     public interface IShipment
     {
+        /// <summary>
+        /// Gets or sets the packages or groups of items included in the shipment.
+        /// </summary>
         List<IShippable> Items { get; set; }
+
+        /// <summary>
+        /// Gets or sets the address from which the shipment originates.
+        /// </summary>
         IAddress SourceAddress { get; set; }
+
+        /// <summary>
+        /// Gets or sets the address to which the shipment is being delivered.
+        /// </summary>
         IAddress DestinationAddress { get; set; }
     }
 }

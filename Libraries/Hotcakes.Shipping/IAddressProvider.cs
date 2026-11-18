@@ -28,9 +28,29 @@ using Hotcakes.Web.Geography;
 
 namespace Hotcakes.Shipping
 {
+    /// <summary>
+    /// Defines address validation and normalization operations supplied by a shipping integration.
+    /// </summary>
+    /// <remarks>
+    /// Implementations operate on the shared geography model represented by <see cref="IAddress" />.
+    /// The <c>message</c> output should provide an actionable explanation when an operation cannot be completed.
+    /// </remarks>
     public interface IAddressProvider
     {
+        /// <summary>
+        /// Determines whether an address is acceptable for the provider's shipping operations.
+        /// </summary>
+        /// <param name="address">The <see cref="IAddress" /> to validate.</param>
+        /// <param name="message">Receives a provider-specific explanation of the validation result.</param>
+        /// <returns><c>true</c> when the address is valid; otherwise, <c>false</c>.</returns>
         bool ValidateAddress(IAddress address, out string message);
+
+        /// <summary>
+        /// Normalizes the supplied address into the provider's preferred representation.
+        /// </summary>
+        /// <param name="address">The <see cref="IAddress" /> to normalize.</param>
+        /// <param name="message">Receives a provider-specific explanation of the normalization result.</param>
+        /// <returns><c>true</c> when normalization succeeds; otherwise, <c>false</c>.</returns>
         bool NormalizeAddress(IAddress address, out string message);
     }
 }

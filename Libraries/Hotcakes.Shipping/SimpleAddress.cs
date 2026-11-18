@@ -29,18 +29,41 @@ using Hotcakes.Web.Geography;
 
 namespace Hotcakes.Shipping
 {
+    /// <summary>
+    /// Provides a serializable address implementation for shipping operations.
+    /// </summary>
+    /// <seealso cref="IAddress" />
     [Serializable]
     public class SimpleAddress : IAddress
     {
+        /// <summary>Gets or sets the street address.</summary>
         public string Street { get; set; }
+        /// <summary>Gets or sets the second street-address line.</summary>
         public string Street2 { get; set; }
+
+        /// <summary>Gets or sets the city.</summary>
         public string City { get; set; }
+
+        /// <summary>Gets or sets the identifier of the region.</summary>
         public string RegionBvin { get; set; }
+
+        /// <summary>Gets or sets the resolved region data.</summary>
         public IRegion RegionData { get; set; }
+
+        /// <summary>Gets or sets the postal code.</summary>
         public string PostalCode { get; set; }
+
+        /// <summary>Gets or sets the identifier of the country.</summary>
         public string CountryBvin { get; set; }
+
+        /// <summary>Gets or sets the resolved country data.</summary>
         public ICountry CountryData { get; set; }
 
+        /// <summary>
+        /// Creates a copy of an address using the values exposed by <see cref="IAddress" />.
+        /// </summary>
+        /// <param name="source">The address to copy.</param>
+        /// <returns>A new <see cref="SimpleAddress" /> containing the source values.</returns>
         public static SimpleAddress CloneAddress(IAddress source)
         {
             var result = new SimpleAddress
